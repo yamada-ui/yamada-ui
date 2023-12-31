@@ -1064,69 +1064,43 @@
   {
     "title": "Stat",
     "type": "page",
-    "description": "We are currently considering the development of `Stat`.",
+    "description": "`Stat` is used to display numbers or data within a box.",
     "slug": "/components/data-display/stat",
     "hierarchy": { "lv1": "Stat" }
   },
   {
-    "title": "Stat",
-    "type": "page",
-    "description": "We are currently considering the development of `Stat`.",
-    "slug": "/components/data-display/stat/props",
-    "hierarchy": { "lv1": "Stat" }
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/stat#import",
+    "hierarchy": { "lv1": "Stat", "lv2": "Import" }
   },
   {
-    "title": "Props",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/components/data-display/stat/props#props",
-    "hierarchy": { "lv1": "Stat", "lv2": "Props" }
+    "slug": "/components/data-display/stat#usage",
+    "hierarchy": { "lv1": "Stat", "lv2": "Usage" }
   },
   {
-    "title": "StatProps",
+    "title": "Change Color Scheme",
     "type": "fragment",
-    "slug": "/components/data-display/stat/props#statprops",
-    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatProps" }
+    "slug": "/components/data-display/stat#change-color-scheme",
+    "hierarchy": { "lv1": "Stat", "lv2": "Usage", "lv3": "Change Color Scheme" }
   },
   {
-    "title": "StatLabelProps",
+    "title": "Center Content",
     "type": "fragment",
-    "slug": "/components/data-display/stat/props#statlabelprops",
-    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatLabelProps" }
+    "slug": "/components/data-display/stat#center-content",
+    "hierarchy": { "lv1": "Stat", "lv2": "Usage", "lv3": "Center Content" }
   },
   {
-    "title": "StatNumberProps",
+    "title": "Display Decrease Icon",
     "type": "fragment",
-    "slug": "/components/data-display/stat/props#statnumberprops",
-    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatNumberProps" }
-  },
-  {
-    "title": "StatHelperMessageProps",
-    "type": "fragment",
-    "slug": "/components/data-display/stat/props#stathelpermessageprops",
+    "slug": "/components/data-display/stat#display-decrease-icon",
     "hierarchy": {
       "lv1": "Stat",
-      "lv2": "Props",
-      "lv3": "StatHelperMessageProps"
+      "lv2": "Usage",
+      "lv3": "Display Decrease Icon"
     }
-  },
-  {
-    "title": "StatIconProps",
-    "type": "fragment",
-    "slug": "/components/data-display/stat/props#staticonprops",
-    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatIconProps" }
-  },
-  {
-    "title": "Stat",
-    "type": "page",
-    "description": "We are currently considering the development of `Stat`.",
-    "slug": "/components/data-display/stat/theming",
-    "hierarchy": { "lv1": "Stat" }
-  },
-  {
-    "title": "Theming",
-    "type": "fragment",
-    "slug": "/components/data-display/stat/theming#theming",
-    "hierarchy": { "lv1": "Stat", "lv2": "Theming" }
   },
   {
     "title": "Table",
@@ -4851,41 +4825,99 @@
   {
     "title": "Rating",
     "type": "page",
-    "description": "We are currently considering the development of `Rating`.",
+    "description": "`Rating` is a component used to allow users to provide ratings.",
     "slug": "/components/forms/rating",
     "hierarchy": { "lv1": "Rating" }
   },
   {
-    "title": "Rating",
-    "type": "page",
-    "description": "We are currently considering the development of `Rating`.",
-    "slug": "/components/forms/rating/props",
-    "hierarchy": { "lv1": "Rating" }
-  },
-  {
-    "title": "Props",
+    "title": "Import",
     "type": "fragment",
-    "slug": "/components/forms/rating/props#props",
-    "hierarchy": { "lv1": "Rating", "lv2": "Props" }
+    "slug": "/components/forms/rating#import",
+    "hierarchy": { "lv1": "Rating", "lv2": "Import" }
   },
   {
-    "title": "RatingProps",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/components/forms/rating/props#ratingprops",
-    "hierarchy": { "lv1": "Rating", "lv2": "Props", "lv3": "RatingProps" }
+    "slug": "/components/forms/rating#usage",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage" }
   },
   {
-    "title": "Rating",
-    "type": "page",
-    "description": "We are currently considering the development of `Rating`.",
-    "slug": "/components/forms/rating/theming",
-    "hierarchy": { "lv1": "Rating" }
-  },
-  {
-    "title": "Theming",
+    "title": "Change Size",
     "type": "fragment",
-    "slug": "/components/forms/rating/theming#theming",
-    "hierarchy": { "lv1": "Rating", "lv2": "Theming" }
+    "slug": "/components/forms/rating#change-size",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/rating#change-color-scheme",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Set Default Value",
+    "type": "fragment",
+    "slug": "/components/forms/rating#set-default-value",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Set Default Value" }
+  },
+  {
+    "title": "Change Number of Items",
+    "type": "fragment",
+    "slug": "/components/forms/rating#change-number-of-items",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "Usage",
+      "lv3": "Change Number of Items"
+    }
+  },
+  {
+    "title": "Allow Decimals",
+    "type": "fragment",
+    "slug": "/components/forms/rating#allow-decimals",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Allow Decimals" }
+  },
+  {
+    "title": "Change Color",
+    "type": "fragment",
+    "slug": "/components/forms/rating#change-color",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Change Color" }
+  },
+  {
+    "title": "Customize Icons",
+    "type": "fragment",
+    "slug": "/components/forms/rating#customize-icons",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Customize Icons" }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/rating#disable",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/rating#make-read-only",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Make Read-Only" }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/forms/rating#control",
+    "hierarchy": { "lv1": "Rating", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/rating#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "Rating",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
   },
   {
     "title": "SegmentedControl",
@@ -5650,9 +5682,31 @@
   {
     "title": "SimpleGrid",
     "type": "page",
-    "description": "We are currently considering the development of `SimpleGrid`.",
+    "description": "`SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.",
     "slug": "/components/layouts/simple-grid",
     "hierarchy": { "lv1": "SimpleGrid" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/layouts/simple-grid#import",
+    "hierarchy": { "lv1": "SimpleGrid", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/layouts/simple-grid#usage",
+    "hierarchy": { "lv1": "SimpleGrid", "lv2": "Usage" }
+  },
+  {
+    "title": "Setting the Minimum Width for Children",
+    "type": "fragment",
+    "slug": "/components/layouts/simple-grid#setting-the-minimum-width-for-children",
+    "hierarchy": {
+      "lv1": "SimpleGrid",
+      "lv2": "Usage",
+      "lv3": "Setting the Minimum Width for Children"
+    }
   },
   {
     "title": "Spacer",
@@ -5676,7 +5730,7 @@
   {
     "title": "Stack",
     "type": "page",
-    "description": "`Stack` is a component that groups elements and provides space between child elements.",
+    "description": "`Stack` is a component that groups elements and provides spacing between child elements.",
     "slug": "/components/layouts/stack",
     "hierarchy": { "lv1": "Stack" }
   },
@@ -5693,32 +5747,64 @@
     "hierarchy": { "lv1": "Stack", "lv2": "Usage" }
   },
   {
-    "title": "Stack Vertically",
+    "title": "Stacking Vertically & Horizontally",
     "type": "fragment",
-    "slug": "/components/layouts/stack#stack-vertically",
-    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Stack Vertically" }
-  },
-  {
-    "title": "Stack Horizontally",
-    "type": "fragment",
-    "slug": "/components/layouts/stack#stack-horizontally",
-    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Stack Horizontally" }
-  },
-  {
-    "title": "Add a dividing line between child elements",
-    "type": "fragment",
-    "slug": "/components/layouts/stack#add-a-dividing-line-between-child-elements",
+    "slug": "/components/layouts/stack#stacking-vertically--horizontally",
     "hierarchy": {
       "lv1": "Stack",
       "lv2": "Usage",
-      "lv3": "Add a dividing line between child elements"
+      "lv3": "Stacking Vertically & Horizontally"
+    }
+  },
+  {
+    "title": "Adding Dividers Between Child Elements",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#adding-dividers-between-child-elements",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "Usage",
+      "lv3": "Stacking Vertically & Horizontally",
+      "lv4": "Adding Dividers Between Child Elements"
     }
   },
   {
     "title": "Using Spacer",
     "type": "fragment",
     "slug": "/components/layouts/stack#using-spacer",
-    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Using Spacer" }
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "Usage",
+      "lv3": "Stacking Vertically & Horizontally",
+      "lv4": "Using Spacer"
+    }
+  },
+  {
+    "title": "Stacking in Depth",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#stacking-in-depth",
+    "hierarchy": { "lv1": "Stack", "lv2": "Usage", "lv3": "Stacking in Depth" }
+  },
+  {
+    "title": "Changing Direction",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#changing-direction",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "Usage",
+      "lv3": "Stacking in Depth",
+      "lv4": "Changing Direction"
+    }
+  },
+  {
+    "title": "Reversing Direction",
+    "type": "fragment",
+    "slug": "/components/layouts/stack#reversing-direction",
+    "hierarchy": {
+      "lv1": "Stack",
+      "lv2": "Usage",
+      "lv3": "Stacking in Depth",
+      "lv4": "Reversing Direction"
+    }
   },
   {
     "title": "Wrap",

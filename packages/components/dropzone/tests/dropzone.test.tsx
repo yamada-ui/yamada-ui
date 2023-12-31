@@ -21,4 +21,13 @@ describe("<Dropzone />", () => {
     )
     expect(container.textContent).toBe(text)
   })
+
+  test("Is the multiple property being reflected correctly", async () => {
+    const { container } = render(
+      <Dropzone multiple>
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>,
+    )
+    expect(container.querySelector("input")).toHaveAttribute("multiple")
+  })
 })

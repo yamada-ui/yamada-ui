@@ -30,4 +30,20 @@ describe("<Dropzone />", () => {
     )
     expect(container.querySelector("input")).toHaveAttribute("multiple")
   })
+
+  test("Is the accept property being reflected correctly", async () => {
+    const { container } = render(
+      <Dropzone
+        accept={{
+          "image/*": [],
+        }}
+      >
+        <Text>Drag image here or click to select image</Text>
+      </Dropzone>,
+    )
+    expect(container.querySelector("input")).toHaveAttribute(
+      "accept",
+      "image/*",
+    )
+  })
 })

@@ -72,4 +72,15 @@ describe("<Dropzone />", () => {
       "true",
     )
   })
+
+  test("Is the isLoading property being reflected correctly", async () => {
+    const { container } = render(
+      <Dropzone isLoading variant="dashed">
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>,
+    )
+    expect(
+      container.querySelector(".ui-dropzone__overlay__loading"),
+    ).toBeTruthy()
+  })
 })

@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, render } from "@yamada-ui/test"
 import { Dropzone } from "@yamada-ui/dropzone"
 import { Text } from "@yamada-ui/react"
 
@@ -56,6 +56,19 @@ describe("<Dropzone />", () => {
     expect(container.querySelector("input")).toHaveAttribute("disabled")
     expect(container.querySelector("input")).toHaveAttribute(
       "aria-disabled",
+      "true",
+    )
+  })
+
+  test("Is the isReadOnly property being reflected correctly", async () => {
+    const { container } = render(
+      <Dropzone isReadOnly variant="dashed">
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>,
+    )
+    expect(container.querySelector("input")).toHaveAttribute("readonly")
+    expect(container.querySelector("input")).toHaveAttribute(
+      "aria-readonly",
       "true",
     )
   })

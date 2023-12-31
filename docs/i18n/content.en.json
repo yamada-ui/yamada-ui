@@ -1069,6 +1069,66 @@
     "hierarchy": { "lv1": "Stat" }
   },
   {
+    "title": "Stat",
+    "type": "page",
+    "description": "We are currently considering the development of `Stat`.",
+    "slug": "/components/data-display/stat/props",
+    "hierarchy": { "lv1": "Stat" }
+  },
+  {
+    "title": "Props",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/props#props",
+    "hierarchy": { "lv1": "Stat", "lv2": "Props" }
+  },
+  {
+    "title": "StatProps",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/props#statprops",
+    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatProps" }
+  },
+  {
+    "title": "StatLabelProps",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/props#statlabelprops",
+    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatLabelProps" }
+  },
+  {
+    "title": "StatNumberProps",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/props#statnumberprops",
+    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatNumberProps" }
+  },
+  {
+    "title": "StatHelperMessageProps",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/props#stathelpermessageprops",
+    "hierarchy": {
+      "lv1": "Stat",
+      "lv2": "Props",
+      "lv3": "StatHelperMessageProps"
+    }
+  },
+  {
+    "title": "StatIconProps",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/props#staticonprops",
+    "hierarchy": { "lv1": "Stat", "lv2": "Props", "lv3": "StatIconProps" }
+  },
+  {
+    "title": "Stat",
+    "type": "page",
+    "description": "We are currently considering the development of `Stat`.",
+    "slug": "/components/data-display/stat/theming",
+    "hierarchy": { "lv1": "Stat" }
+  },
+  {
+    "title": "Theming",
+    "type": "fragment",
+    "slug": "/components/data-display/stat/theming#theming",
+    "hierarchy": { "lv1": "Stat", "lv2": "Theming" }
+  },
+  {
     "title": "Table",
     "type": "page",
     "description": "`Table` is a table component equipped with column sorting, row selection, and click event features.",
@@ -4794,6 +4854,38 @@
     "description": "We are currently considering the development of `Rating`.",
     "slug": "/components/forms/rating",
     "hierarchy": { "lv1": "Rating" }
+  },
+  {
+    "title": "Rating",
+    "type": "page",
+    "description": "We are currently considering the development of `Rating`.",
+    "slug": "/components/forms/rating/props",
+    "hierarchy": { "lv1": "Rating" }
+  },
+  {
+    "title": "Props",
+    "type": "fragment",
+    "slug": "/components/forms/rating/props#props",
+    "hierarchy": { "lv1": "Rating", "lv2": "Props" }
+  },
+  {
+    "title": "RatingProps",
+    "type": "fragment",
+    "slug": "/components/forms/rating/props#ratingprops",
+    "hierarchy": { "lv1": "Rating", "lv2": "Props", "lv3": "RatingProps" }
+  },
+  {
+    "title": "Rating",
+    "type": "page",
+    "description": "We are currently considering the development of `Rating`.",
+    "slug": "/components/forms/rating/theming",
+    "hierarchy": { "lv1": "Rating" }
+  },
+  {
+    "title": "Theming",
+    "type": "fragment",
+    "slug": "/components/forms/rating/theming#theming",
+    "hierarchy": { "lv1": "Rating", "lv2": "Theming" }
   },
   {
     "title": "SegmentedControl",

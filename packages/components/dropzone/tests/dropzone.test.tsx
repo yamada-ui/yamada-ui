@@ -46,4 +46,17 @@ describe("<Dropzone />", () => {
       "image/*",
     )
   })
+
+  test("Is the isDisabled property being reflected correctly", async () => {
+    const { container } = render(
+      <Dropzone isDisabled variant="dashed">
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>,
+    )
+    expect(container.querySelector("input")).toHaveAttribute("disabled")
+    expect(container.querySelector("input")).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    )
+  })
 })

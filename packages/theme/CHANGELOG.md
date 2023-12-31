@@ -1,5 +1,21 @@
 # @yamada-ui/theme
 
+## 1.2.0
+
+### Minor Changes
+
+- [#527](https://github.com/hirotomoyamada/yamada-ui/pull/527) [`e7d8cee`](https://github.com/hirotomoyamada/yamada-ui/commit/e7d8cee41f6c9b47f577e35494df09e1a2304c3f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Stat` component.
+
+- [#549](https://github.com/hirotomoyamada/yamada-ui/pull/549) [`fb49fe6`](https://github.com/hirotomoyamada/yamada-ui/commit/fb49fe682862bcdfec3420364f64eaa9efccc1b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Rating` component.
+
+### Patch Changes
+
+- [#565](https://github.com/hirotomoyamada/yamada-ui/pull/565) [`3edb463`](https://github.com/hirotomoyamada/yamada-ui/commit/3edb4635c9b9df7bf0bd68437c2c5e94e6cdfcb0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug with the roundness of the `Drawer` component.
+
+- Updated dependencies [[`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1), [`a723526`](https://github.com/hirotomoyamada/yamada-ui/commit/a7235269d4c5144eefe82c523041f22d5c3eb092), [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599), [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7), [`be74eb9`](https://github.com/hirotomoyamada/yamada-ui/commit/be74eb9b8f1285b0b66003748ffc1d0b7319aa1d), [`35b7763`](https://github.com/hirotomoyamada/yamada-ui/commit/35b7763aadeae7ef899e62e50656da4fa73e5d91), [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0), [`fb24a18`](https://github.com/hirotomoyamada/yamada-ui/commit/fb24a18863a3cdbf96afd4c30d4a76c2620ae55a)]:
+  - @yamada-ui/utils@1.0.1
+  - @yamada-ui/core@1.1.2
+
 ## 1.1.4
 
 ### Patch Changes

@@ -207,7 +207,7 @@ const fields: DocumentTypeDef["fields"] = {
   table_of_contents_max_lv: { type: "number", default: Infinity },
   label: {
     type: "enum",
-    options: ["New", "Considering", "Planned", "Experimental"],
+    options: ["New", "Considering", "Updated", "Planned", "Experimental"],
   },
   tags: { type: "list", of: { type: "string" } },
   is_expanded: { type: "boolean", default: false },

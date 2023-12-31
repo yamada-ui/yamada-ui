@@ -1,7 +1,45 @@
 ---
 title: SimpleGrid
-description: "We are currently considering the development of `SimpleGrid`."
-label: "Considering"
+description: "`SimpleGrid` is a component that makes `Grid` simpler and more user-friendly."
+label: "New"
+package_name: "@yamada-ui/layouts"
+is_tabs: true
+with_description: true
+tab: Usage
 ---
 
-We are currently considering the creation of `SimpleGrid`. Please post your thoughts on this [GitHub issue](https://github.com/hirotomoyamada/yamada-ui/issues/503) to help us prioritize its development.
+## Import
+
+```ts
+import { SimpleGrid, GridItem } from "@yamada-ui/react"
+```
+
+## Usage
+
+:::note
+`SimpleGrid` internally uses [Grid](/components/layouts/grid) and is a simplified component of `Grid`.
+:::
+
+```tsx
+<SimpleGrid w="full" columns={{ base: 2, md: 1 }} gap="md">
+  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
+  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+</SimpleGrid>
+```
+
+### Setting the Minimum Width for Children
+
+To set the minimum width for child elements, specify the width in `minChildWidth`.
+
+For example, if you specify `120px`, the CSS property `gridTemplateColumns` will be `repeat(auto-fit, minmax(120px, 1fr))`.
+
+```tsx
+<SimpleGrid w="full" minChildWidth={{ base: "3xs", lg: 100 }} gap="md">
+  <GridItem w="full" h="4xs" rounded="md" bg="primary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="secondary" />
+  <GridItem w="full" h="4xs" rounded="md" bg="warning" />
+  <GridItem w="full" h="4xs" rounded="md" bg="danger" />
+</SimpleGrid>
+```

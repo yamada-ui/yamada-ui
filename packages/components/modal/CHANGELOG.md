@@ -1,5 +1,11 @@
 # @yamada-ui/modal
 
+## 1.0.5
+
+### Patch Changes
+
+- [`a9376bb`](https://github.com/hirotomoyamada/yamada-ui/commit/a9376bb80aec66898cdc431a63ce2a2a3d406e80) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added default placement.
+
 ## 1.0.4
 
 ### Patch Changes

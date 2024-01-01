@@ -6,7 +6,7 @@ import type {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  formControlProperties,
+  getFormControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import type { RequiredMotionUIPropGetter } from "@yamada-ui/motion"
@@ -20,6 +20,7 @@ import {
   handlerAll,
   mergeRefs,
   pickObject,
+  omitObject,
   runIfFunc,
 } from "@yamada-ui/utils"
 import type {
@@ -195,7 +196,10 @@ export const useRating = ({
   id ??= useId()
   name ??= `rating-${id}`
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)
   const decimal = 1 / resolvedFractions
@@ -268,7 +272,7 @@ export const useRating = ({
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
-      ...rest,
+      ...omitObject(rest, ["aria-readonly"]),
       ...props,
       id,
       onMouseEnter: handlerAll(

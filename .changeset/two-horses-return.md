@@ -3,4 +3,4 @@
 "@yamada-ui/theme": minor
 ---
 
-Added `Rating` component.
+Added `Resizable` component.

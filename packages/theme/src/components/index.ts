@@ -46,6 +46,7 @@ import { Radio } from "./radio"
 import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
 import { Reorder } from "./reorder"
+import { Resizable } from "./resizable"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
@@ -108,6 +109,7 @@ export default {
   RangeSlider,
   Rating,
   Reorder,
+  Resizable,
   ScrollArea,
   SegmentedControl,
   Select,

@@ -1,5 +1,120 @@
 # @yamada-ui/react
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`d9d200e`](https://github.com/hirotomoyamada/yamada-ui/commit/d9d200e3b40241da7f803f4d75b2a45858a71dd0), [`e2045a6`](https://github.com/hirotomoyamada/yamada-ui/commit/e2045a6c1b684625495c415668406a6fa96fd005)]:
+  - @yamada-ui/rating@1.0.2
+  - @yamada-ui/card@1.0.4
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`a9376bb`](https://github.com/hirotomoyamada/yamada-ui/commit/a9376bb80aec66898cdc431a63ce2a2a3d406e80), [`8982016`](https://github.com/hirotomoyamada/yamada-ui/commit/898201635e7ed689c742685a2638c223e9fcb3ca)]:
+  - @yamada-ui/modal@1.0.5
+  - @yamada-ui/autocomplete@1.0.6
+
+## 1.1.0
+
+### Minor Changes
+
+- [#527](https://github.com/hirotomoyamada/yamada-ui/pull/527) [`e7d8cee`](https://github.com/hirotomoyamada/yamada-ui/commit/e7d8cee41f6c9b47f577e35494df09e1a2304c3f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Stat` component.
+
+- [#549](https://github.com/hirotomoyamada/yamada-ui/pull/549) [`fb49fe6`](https://github.com/hirotomoyamada/yamada-ui/commit/fb49fe682862bcdfec3420364f64eaa9efccc1b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Rating` component.
+
+### Patch Changes
+
+- Updated dependencies [[`989090c`](https://github.com/hirotomoyamada/yamada-ui/commit/989090c840a3264cfc613d9389f342f85e1ee93f), [`6472f46`](https://github.com/hirotomoyamada/yamada-ui/commit/6472f46795b321594ac26a348d81334d974d0629), [`3edb463`](https://github.com/hirotomoyamada/yamada-ui/commit/3edb4635c9b9df7bf0bd68437c2c5e94e6cdfcb0), [`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1), [`b20ab82`](https://github.com/hirotomoyamada/yamada-ui/commit/b20ab82ea76801a73ca82829885b0e498432e7a4), [`a723526`](https://github.com/hirotomoyamada/yamada-ui/commit/a7235269d4c5144eefe82c523041f22d5c3eb092), [`5271812`](https://github.com/hirotomoyamada/yamada-ui/commit/52718127b9bfd876b98080fc90f69bbe60790d08), [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599), [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7), [`e7d8cee`](https://github.com/hirotomoyamada/yamada-ui/commit/e7d8cee41f6c9b47f577e35494df09e1a2304c3f), [`bb8701b`](https://github.com/hirotomoyamada/yamada-ui/commit/bb8701b495ec6e43add00f1af62cb513a8b86418), [`a0459b1`](https://github.com/hirotomoyamada/yamada-ui/commit/a0459b15ad7f630f0d92f906b59f0ce4a1eb6703), [`fb49fe6`](https://github.com/hirotomoyamada/yamada-ui/commit/fb49fe682862bcdfec3420364f64eaa9efccc1b9), [`be74eb9`](https://github.com/hirotomoyamada/yamada-ui/commit/be74eb9b8f1285b0b66003748ffc1d0b7319aa1d), [`35b7763`](https://github.com/hirotomoyamada/yamada-ui/commit/35b7763aadeae7ef899e62e50656da4fa73e5d91), [`c916e07`](https://github.com/hirotomoyamada/yamada-ui/commit/c916e073faae9136847ccb4430b291c03cac5378), [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0), [`fb24a18`](https://github.com/hirotomoyamada/yamada-ui/commit/fb24a18863a3cdbf96afd4c30d4a76c2620ae55a), [`5befad0`](https://github.com/hirotomoyamada/yamada-ui/commit/5befad0e36e5366d34a2fa93904cf151a1c163b0)]:
+  - @yamada-ui/use-focus-visible@1.0.1
+  - @yamada-ui/rating@1.0.1
+  - @yamada-ui/theme@1.2.0
+  - @yamada-ui/utils@1.0.1
+  - @yamada-ui/motion@1.0.3
+  - @yamada-ui/core@1.1.2
+  - @yamada-ui/layouts@1.1.0
+  - @yamada-ui/use-animation@1.0.3
+  - @yamada-ui/segmented-control@1.0.4
+  - @yamada-ui/autocomplete@1.0.5
+  - @yamada-ui/number-input@1.0.4
+  - @yamada-ui/accordion@1.0.3
+  - @yamada-ui/checkbox@1.0.4
+  - @yamada-ui/editable@1.0.4
+  - @yamada-ui/popover@1.0.3
+  - @yamada-ui/stepper@1.0.3
+  - @yamada-ui/tooltip@1.0.3
+  - @yamada-ui/select@1.0.5
+  - @yamada-ui/slider@1.0.5
+  - @yamada-ui/radio@1.0.4
+  - @yamada-ui/menu@1.0.3
+  - @yamada-ui/providers@1.0.6
+  - @yamada-ui/theme-tools@1.0.6
+  - @yamada-ui/alert@1.0.3
+  - @yamada-ui/avatar@1.1.2
+  - @yamada-ui/badge@1.0.3
+  - @yamada-ui/breadcrumb@1.0.3
+  - @yamada-ui/button@1.0.4
+  - @yamada-ui/card@1.0.3
+  - @yamada-ui/close-button@1.0.3
+  - @yamada-ui/file-button@1.0.5
+  - @yamada-ui/file-input@1.0.4
+  - @yamada-ui/focus-lock@1.0.1
+  - @yamada-ui/form-control@1.0.4
+  - @yamada-ui/highlight@1.0.3
+  - @yamada-ui/icon@1.0.3
+  - @yamada-ui/image@1.0.3
+  - @yamada-ui/indicator@1.1.2
+  - @yamada-ui/input@1.0.4
+  - @yamada-ui/kbd@1.0.3
+  - @yamada-ui/link@1.0.3
+  - @yamada-ui/list@1.0.3
+  - @yamada-ui/loading@1.0.3
+  - @yamada-ui/modal@1.0.4
+  - @yamada-ui/native-select@1.0.5
+  - @yamada-ui/native-table@1.0.4
+  - @yamada-ui/notice@1.0.3
+  - @yamada-ui/pagination@1.0.3
+  - @yamada-ui/pin-input@1.0.4
+  - @yamada-ui/portal@1.0.1
+  - @yamada-ui/progress@1.0.3
+  - @yamada-ui/reorder@1.0.3
+  - @yamada-ui/ripple@1.0.3
+  - @yamada-ui/scroll-area@1.0.3
+  - @yamada-ui/skeleton@1.0.3
+  - @yamada-ui/stat@1.0.1
+  - @yamada-ui/switch@1.0.4
+  - @yamada-ui/tabs@1.0.3
+  - @yamada-ui/tag@1.0.3
+  - @yamada-ui/textarea@1.0.4
+  - @yamada-ui/transitions@1.0.3
+  - @yamada-ui/typography@1.0.3
+  - @yamada-ui/use-breakpoint@1.1.2
+  - @yamada-ui/use-clickable@1.0.1
+  - @yamada-ui/use-clipboard@1.0.1
+  - @yamada-ui/use-controllable-state@1.0.1
+  - @yamada-ui/use-counter@1.0.1
+  - @yamada-ui/use-descendant@1.0.1
+  - @yamada-ui/use-disclosure@1.0.1
+  - @yamada-ui/use-event-listener@1.0.1
+  - @yamada-ui/use-focus@1.0.1
+  - @yamada-ui/use-hover@1.0.1
+  - @yamada-ui/use-idle@1.0.1
+  - @yamada-ui/use-interval@1.0.1
+  - @yamada-ui/use-local-storage@1.0.1
+  - @yamada-ui/use-media-query@1.0.6
+  - @yamada-ui/use-os@1.0.1
+  - @yamada-ui/use-outside-click@1.0.1
+  - @yamada-ui/use-pan-event@1.0.1
+  - @yamada-ui/use-popper@1.0.3
+  - @yamada-ui/use-previous@1.0.1
+  - @yamada-ui/use-resize-observer@1.0.1
+  - @yamada-ui/use-size@1.0.1
+  - @yamada-ui/use-timeout@1.0.1
+  - @yamada-ui/use-token@1.0.3
+  - @yamada-ui/use-value@1.0.3
+  - @yamada-ui/use-window-event@1.0.1
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/use-focus-visible
 
+## 1.0.1
+
+### Patch Changes
+
+- [#549](https://github.com/hirotomoyamada/yamada-ui/pull/549) [`989090c`](https://github.com/hirotomoyamada/yamada-ui/commit/989090c840a3264cfc613d9389f342f85e1ee93f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `focus-visible` was not reflected correctly.
+
+- Updated dependencies [[`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1), [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599), [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7), [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0)]:
+  - @yamada-ui/utils@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

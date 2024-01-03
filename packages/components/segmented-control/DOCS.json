@@ -58,7 +58,7 @@
   },
   "SegmentedControlButton": {
     "value": {
-      "type": "string | number",
+      "type": "string",
       "required": true,
       "description": "The value of the segmented control button."
     },

@@ -1,5 +1,11 @@
 # @yamada-ui/rating
 
+## 1.0.2
+
+### Patch Changes
+
+- [#574](https://github.com/hirotomoyamada/yamada-ui/pull/574) [`d9d200e`](https://github.com/hirotomoyamada/yamada-ui/commit/d9d200e3b40241da7f803f4d75b2a45858a71dd0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary `aria-readonly`.
+
 ## 1.0.1
 
 ### Patch Changes

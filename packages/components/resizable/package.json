@@ -1,7 +1,7 @@
 {
-  "name": "@yamada-ui/rating",
-  "version": "1.0.2",
-  "description": "Yamada UI rating component",
+  "name": "@yamada-ui/resizable",
+  "version": "1.0.0",
+  "description": "Yamada UI resizable component",
   "keywords": [
     "yamada",
     "yamada ui",
@@ -30,7 +30,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
-    "directory": "packages/components/rating"
+    "directory": "packages/components/resizable"
   },
   "bugs": {
     "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
@@ -49,14 +49,11 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
-    "@yamada-ui/motion": "workspace:*",
-    "@yamada-ui/form-control": "workspace:*",
-    "@yamada-ui/use-focus-visible": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*"
+    "react-resizable-panels": "^1.0.7"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.0.0"
   },
   "peerDependencies": {
     "react": ">=18"

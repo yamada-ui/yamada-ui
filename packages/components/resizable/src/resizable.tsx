@@ -12,9 +12,17 @@ import type { UseResizableProps } from "./use-resizable"
 import { ResizableProvider, useResizable } from "./use-resizable"
 
 type ResizableOptions = {
+  /**
+   * Ref for resizable container element.
+   */
   containerRef?: ForwardedRef<HTMLDivElement>
 }
 
+/**
+ * `Resizable` is accessible resizable panel groups and layouts with keyboard support.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/resizable
+ */
 export type ResizableProps = Omit<HTMLUIProps<"div">, "direction"> &
   ThemeProps<"Resizable"> &
   Omit<UseResizableProps, "ref"> &
@@ -26,14 +34,17 @@ export const Resizable = forwardRef<ResizableProps, "div">(
       direction,
       ...props,
     })
-    const { className, children, containerRef, ...rest } =
+    const { className, children, containerRef, ...computedProps } =
       omitThemeProps(mergedProps)
-    const { getContainerProps, getGroupProps } = useResizable({ ref, ...rest })
+    const { getContainerProps, getGroupProps, ...rest } = useResizable({
+      ref,
+      ...computedProps,
+    })
 
     const css: CSSUIObject = { w: "full", h: "full", ...styles.container }
 
     return (
-      <ResizableProvider value={{ styles }}>
+      <ResizableProvider value={{ styles, ...rest }}>
         <ui.div
           className={cx("ui-resizable", className)}
           __css={css}

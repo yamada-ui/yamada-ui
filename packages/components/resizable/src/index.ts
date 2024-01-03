@@ -7,3 +7,4 @@ export type {
   ResizableTriggerProps,
   ResizableTriggerIconProps,
 } from "./resizable-trigger"
+export type { ResizableStorage, ResizableItemControl } from "./use-resizable"

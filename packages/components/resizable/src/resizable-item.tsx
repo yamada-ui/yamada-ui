@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { ForwardedRef } from "react"
@@ -7,17 +7,19 @@ import type { UseResizableItemProps } from "./use-resizable"
 import { useResizableContext, useResizableItem } from "./use-resizable"
 
 type ResizableItemOptions = {
+  /**
+   * Ref for resizable item inner element.
+   */
   innerRef?: ForwardedRef<HTMLDivElement>
 }
 
-export type ResizableItemProps = HTMLUIProps<"div"> &
-  Omit<UseResizableItemProps, "ref"> &
+export type ResizableItemProps = Omit<UseResizableItemProps, "ref"> &
   ResizableItemOptions
 
 export const ResizableItem = forwardRef<ResizableItemProps, "div">(
   ({ className, children, innerRef, ...rest }, ref) => {
     const { styles } = useResizableContext()
-    const { getContainerProps, getItemProps } = useResizableItem({
+    const { getPanelProps, getItemProps } = useResizableItem({
       ref,
       ...rest,
     })
@@ -25,15 +27,15 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
     const css: CSSUIObject = { boxSize: "full", ...styles.item }
 
     return (
-      <ui.div
-        as={Panel}
-        className={cx("ui-resizable__item", className)}
-        {...getContainerProps()}
-      >
-        <ui.div __css={css} {...getItemProps({}, innerRef)}>
+      <Panel {...getPanelProps()}>
+        <ui.div
+          className={cx("ui-resizable__item", className)}
+          __css={css}
+          {...getItemProps({}, innerRef)}
+        >
           {children}
         </ui.div>
-      </ui.div>
+      </Panel>
     )
   },
 )

@@ -10,11 +10,11 @@ import { useResizableContext, useResizableTrigger } from "./use-resizable"
 
 type ResizableTriggerOptions = {
   /**
-   *
+   * The resizable trigger icon to use.
    */
   icon?: ReactElement
   /**
-   *
+   * Props for resizable trigger icon component.
    */
   iconProps?: HTMLUIProps<"div">
 }
@@ -26,7 +26,10 @@ export type ResizableTriggerProps = Omit<HTMLUIProps<"div">, "as"> &
 export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
   ({ className, icon, children, iconProps, ...rest }, ref) => {
     const { styles } = useResizableContext()
-    const { getTriggerProps } = useResizableTrigger({ ref, ...rest })
+    const { getTriggerProps, getIconProps } = useResizableTrigger({
+      ref,
+      ...rest,
+    })
 
     const css: CSSUIObject = { position: "relative", ...styles.trigger }
 
@@ -52,7 +55,7 @@ export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
               alignItems: "center",
               ...styles.icon,
             }}
-            {...iconProps}
+            {...getIconProps(iconProps)}
           >
             {icon}
           </ui.div>
@@ -68,7 +71,7 @@ export type ResizableTriggerIconProps = IconProps
 
 export const ResizableTriggerIcon: FC<ResizableTriggerIconProps> = (rest) => {
   return (
-    <Icon viewBox="0 0 23 39" w="2" h="3" {...rest}>
+    <Icon viewBox="0 0 23 39" w="2" h="4" {...rest}>
       <path
         d="M 5 0 C 7.761 0 10 2.239 10 5 C 10 7.761 7.761 10 5 10 C 2.239 10 0 7.761 0 5 C 0 2.239 2.239 0 5 0 Z"
         fill="currentColor"

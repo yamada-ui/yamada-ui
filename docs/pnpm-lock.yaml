@@ -34,10 +34,10 @@ dependencies:
     version: 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/nextjs':
     specifier: 5.0.3
-    version: 5.0.3(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.1)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
+    version: 5.0.3(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.2)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
-    specifier: 1.1.1
-    version: 1.1.1(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.16.16)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.1.2
+    version: 1.1.2(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.17.0)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
     specifier: 1.0.5
     version: 1.0.5(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -108,7 +108,7 @@ devDependencies:
     version: 18.2.18
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.10.0
-    version: 6.16.0(@typescript-eslint/parser@6.16.0)(eslint@8.56.0)(typescript@5.3.2)
+    version: 6.16.0(@typescript-eslint/parser@6.17.0)(eslint@8.56.0)(typescript@5.3.2)
   '@yamada-ui/cli':
     specifier: 1.0.0
     version: 1.0.0
@@ -132,7 +132,7 @@ devDependencies:
     version: 9.1.0(eslint@8.56.0)
   eslint-plugin-import:
     specifier: ^2.29.0
-    version: 2.29.1(@typescript-eslint/parser@6.16.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+    version: 2.29.1(@typescript-eslint/parser@6.17.0)(eslint@8.56.0)
   eslint-plugin-prettier:
     specifier: ^5.0.1
     version: 5.1.2(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.1)
@@ -1955,7 +1955,7 @@ packages:
   /@types/unist@3.0.2:
     resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==, tarball: https://registry.npmjs.org/@types/unist/-/unist-3.0.2.tgz}
 
-  /@typescript-eslint/eslint-plugin@6.16.0(@typescript-eslint/parser@6.16.0)(eslint@8.56.0)(typescript@5.3.2):
+  /@typescript-eslint/eslint-plugin@6.16.0(@typescript-eslint/parser@6.17.0)(eslint@8.56.0)(typescript@5.3.2):
     resolution: {integrity: sha512-O5f7Kv5o4dLWQtPX4ywPPa+v9G+1q1x8mz0Kr0pXUtKsevo+gIJHLkGc8RxaZWtP8RrhwhSNIWThnW42K9/0rQ==, tarball: https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-6.16.0.tgz}
     engines: {node: ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -1967,7 +1967,7 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.10.0
-      '@typescript-eslint/parser': 6.16.0(eslint@8.56.0)(typescript@5.3.2)
+      '@typescript-eslint/parser': 6.17.0(eslint@8.56.0)(typescript@5.3.2)
       '@typescript-eslint/scope-manager': 6.16.0
       '@typescript-eslint/type-utils': 6.16.0(eslint@8.56.0)(typescript@5.3.2)
       '@typescript-eslint/utils': 6.16.0(eslint@8.56.0)(typescript@5.3.2)
@@ -2005,12 +2005,41 @@ packages:
       - supports-color
     dev: true
 
+  /@typescript-eslint/parser@6.17.0(eslint@8.56.0)(typescript@5.3.2):
+    resolution: {integrity: sha512-C4bBaX2orvhK+LlwrY8oWGmSl4WolCfYm513gEccdWZj0CwGadbIADb0FtVEcI+WzUyjyoBj2JRP8g25E6IB8A==, tarball: https://registry.npmjs.org/@typescript-eslint/parser/-/parser-6.17.0.tgz}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/scope-manager': 6.17.0
+      '@typescript-eslint/types': 6.17.0
+      '@typescript-eslint/typescript-estree': 6.17.0(typescript@5.3.2)
+      '@typescript-eslint/visitor-keys': 6.17.0
+      debug: 4.3.4
+      eslint: 8.56.0
+      typescript: 5.3.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /@typescript-eslint/scope-manager@6.16.0:
     resolution: {integrity: sha512-0N7Y9DSPdaBQ3sqSCwlrm9zJwkpOuc6HYm7LpzLAPqBL7dmzAUimr4M29dMkOP/tEwvOCC/Cxo//yOfJD3HUiw==, tarball: https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-6.16.0.tgz}
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': 6.16.0
       '@typescript-eslint/visitor-keys': 6.16.0
+    dev: true
+
+  /@typescript-eslint/scope-manager@6.17.0:
+    resolution: {integrity: sha512-RX7a8lwgOi7am0k17NUO0+ZmMOX4PpjLtLRgLmT1d3lBYdWH4ssBUbwdmc5pdRX8rXon8v9x8vaoOSpkHfcXGA==, tarball: https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-6.17.0.tgz}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    dependencies:
+      '@typescript-eslint/types': 6.17.0
+      '@typescript-eslint/visitor-keys': 6.17.0
     dev: true
 
   /@typescript-eslint/type-utils@6.16.0(eslint@8.56.0)(typescript@5.3.2):
@@ -2038,6 +2067,11 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dev: true
 
+  /@typescript-eslint/types@6.17.0:
+    resolution: {integrity: sha512-qRKs9tvc3a4RBcL/9PXtKSehI/q8wuU9xYJxe97WFxnzH8NWWtcW3ffNS+EWg8uPvIerhjsEZ+rHtDqOCiH57A==, tarball: https://registry.npmjs.org/@typescript-eslint/types/-/types-6.17.0.tgz}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    dev: true
+
   /@typescript-eslint/typescript-estree@6.16.0(typescript@5.3.2):
     resolution: {integrity: sha512-VTWZuixh/vr7nih6CfrdpmFNLEnoVBF1skfjdyGnNwXOH1SLeHItGdZDHhhAIzd3ACazyY2Fg76zuzOVTaknGA==, tarball: https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-6.16.0.tgz}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -2049,6 +2083,28 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.16.0
       '@typescript-eslint/visitor-keys': 6.16.0
+      debug: 4.3.4
+      globby: 11.1.0
+      is-glob: 4.0.3
+      minimatch: 9.0.3
+      semver: 7.5.4
+      ts-api-utils: 1.0.3(typescript@5.3.2)
+      typescript: 5.3.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@typescript-eslint/typescript-estree@6.17.0(typescript@5.3.2):
+    resolution: {integrity: sha512-gVQe+SLdNPfjlJn5VNGhlOhrXz4cajwFd5kAgWtZ9dCZf4XJf8xmgCTLIqec7aha3JwgLI2CK6GY1043FRxZwg==, tarball: https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-6.17.0.tgz}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/types': 6.17.0
+      '@typescript-eslint/visitor-keys': 6.17.0
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
@@ -2084,6 +2140,14 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': 6.16.0
+      eslint-visitor-keys: 3.4.3
+    dev: true
+
+  /@typescript-eslint/visitor-keys@6.17.0:
+    resolution: {integrity: sha512-H6VwB/k3IuIeQOyYczyyKN8wH6ed8EwliaYHLxOIhyF0dYEIsN8+Bk3GE19qafeMKyZJJHP8+O1HiFhFLUNKSg==, tarball: https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-6.17.0.tgz}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    dependencies:
+      '@typescript-eslint/types': 6.17.0
       eslint-visitor-keys: 3.4.3
     dev: true
 
@@ -2229,8 +2293,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/card@1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-rrAl7msdB5b8c7tszK85EuZOh6ChbiAj5L68idfIBPdYsOS2n3AtvNWWp8MS27SvvsZ/V6lf1CebgcS85iJv0A==, tarball: https://registry.npmjs.org/@yamada-ui/card/-/card-1.0.3.tgz}
+  /@yamada-ui/card@1.0.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-zSLRLjWcPU8oRuI1XoQiyg5GQnZj6IxZad+ppknXfZtlHjKr84asDm8GN52tGnAeZPo8/bwlV/niHqgosPIm8A==, tarball: https://registry.npmjs.org/@yamada-ui/card/-/card-1.0.4.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2680,7 +2744,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/nextjs@5.0.3(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.1)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/nextjs@5.0.3(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.2)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-BGxVemuhIIypRAeJ2z6zZ8yJ/Ukwj5le35QwSSOcQuY6QY8azfgZmHPMmZpHF4nJzbEPA5zUD45h+dFsP4ptfQ==, tarball: https://registry.npmjs.org/@yamada-ui/nextjs/-/nextjs-5.0.3.tgz}
     peerDependencies:
       '@emotion/react': '>=11'
@@ -2691,7 +2755,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.3(@types/react@18.2.46)(react@18.2.0)
       '@yamada-ui/core': 1.1.2(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 1.1.1(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.16.16)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 1.1.2(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.17.0)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.1(react@18.2.0)
       next: 14.0.3(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -2855,8 +2919,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/rating@1.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-gv6xZIBAX8vv3Dvjt4F2bAvok/cejf0VrMNw3QLEO9/rS7CE0NDMZti5FSXiR3Q2ZoiAswUCQMaGakVuxB5FnQ==, tarball: https://registry.npmjs.org/@yamada-ui/rating/-/rating-1.0.1.tgz}
+  /@yamada-ui/rating@1.0.2(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Jm+MbYACCR2bEsx5065o6MBa4TqHYK0jHoygVTZtBrexSpg7FTAD5uCVd7Jd9NaTzyhRRTlkkDTRksFm8ityqg==, tarball: https://registry.npmjs.org/@yamada-ui/rating/-/rating-1.0.2.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2873,8 +2937,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@1.1.1(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.16.16)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-0hOU0fs18sPytKbRs+Oq9SGEJB2yuhUSpWpemtOZhwHcB1P/PpDpZJ6Z5YSDPkwc+04zfkWuggPbLwNUa6WKsQ==, tarball: https://registry.npmjs.org/@yamada-ui/react/-/react-1.1.1.tgz}
+  /@yamada-ui/react@1.1.2(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.17.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-26fv94ZU9T2ZN3iKclL7fyujoxRGlctLhTnfoq0cEnY4Jpr3655tJpOJ5aJB0YJ6pO0TVsajZawZrYZCUvXRGw==, tarball: https://registry.npmjs.org/@yamada-ui/react/-/react-1.1.2.tgz}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -2891,7 +2955,7 @@ packages:
       '@yamada-ui/badge': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/breadcrumb': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/button': 1.0.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/card': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/card': 1.0.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/checkbox': 1.0.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/close-button': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/core': 1.1.2(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -2924,7 +2988,7 @@ packages:
       '@yamada-ui/progress': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/providers': 1.0.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/radio': 1.0.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/rating': 1.0.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/rating': 1.0.2(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/reorder': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/ripple': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/scroll-area': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -2973,7 +3037,7 @@ packages:
       '@yamada-ui/use-value': 1.0.3(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-window-event': 1.0.1(react@18.2.0)
       '@yamada-ui/utils': 1.0.1(react@18.2.0)
-      framer-motion: 10.16.16(react-dom@18.2.0)(react@18.2.0)
+      framer-motion: 10.17.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -4889,6 +4953,35 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-module-utils@2.8.0(@typescript-eslint/parser@6.17.0)(eslint-import-resolver-node@0.3.9)(eslint@8.56.0):
+    resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==, tarball: https://registry.npmjs.org/eslint-module-utils/-/eslint-module-utils-2.8.0.tgz}
+    engines: {node: '>=4'}
+    peerDependencies:
+      '@typescript-eslint/parser': '*'
+      eslint: '*'
+      eslint-import-resolver-node: '*'
+      eslint-import-resolver-typescript: '*'
+      eslint-import-resolver-webpack: '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+      eslint:
+        optional: true
+      eslint-import-resolver-node:
+        optional: true
+      eslint-import-resolver-typescript:
+        optional: true
+      eslint-import-resolver-webpack:
+        optional: true
+    dependencies:
+      '@typescript-eslint/parser': 6.17.0(eslint@8.56.0)(typescript@5.3.2)
+      debug: 3.2.7
+      eslint: 8.56.0
+      eslint-import-resolver-node: 0.3.9
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.16.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0):
     resolution: {integrity: sha512-BbPC0cuExzhiMo4Ff1BTVwHpjjv28C5R+btTOGaCRC7UEz801up0JadwkeSk5Ued6TG34uaczuVuH6qyy5YUxw==, tarball: https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.29.1.tgz}
     engines: {node: '>=4'}
@@ -4909,6 +5002,41 @@ packages:
       eslint: 8.56.0
       eslint-import-resolver-node: 0.3.9
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.16.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      hasown: 2.0.0
+      is-core-module: 2.13.1
+      is-glob: 4.0.3
+      minimatch: 3.1.2
+      object.fromentries: 2.0.7
+      object.groupby: 1.0.1
+      object.values: 1.1.7
+      semver: 6.3.1
+      tsconfig-paths: 3.15.0
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+    dev: true
+
+  /eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.17.0)(eslint@8.56.0):
+    resolution: {integrity: sha512-BbPC0cuExzhiMo4Ff1BTVwHpjjv28C5R+btTOGaCRC7UEz801up0JadwkeSk5Ued6TG34uaczuVuH6qyy5YUxw==, tarball: https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.29.1.tgz}
+    engines: {node: '>=4'}
+    peerDependencies:
+      '@typescript-eslint/parser': '*'
+      eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+    dependencies:
+      '@typescript-eslint/parser': 6.17.0(eslint@8.56.0)(typescript@5.3.2)
+      array-includes: 3.1.7
+      array.prototype.findlastindex: 1.2.3
+      array.prototype.flat: 1.3.2
+      array.prototype.flatmap: 1.3.2
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 8.56.0
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.17.0)(eslint-import-resolver-node@0.3.9)(eslint@8.56.0)
       hasown: 2.0.0
       is-core-module: 2.13.1
       is-glob: 4.0.3
@@ -5014,7 +5142,7 @@ packages:
       '@typescript-eslint/eslint-plugin':
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': 6.16.0(@typescript-eslint/parser@6.16.0)(eslint@8.56.0)(typescript@5.3.2)
+      '@typescript-eslint/eslint-plugin': 6.16.0(@typescript-eslint/parser@6.17.0)(eslint@8.56.0)(typescript@5.3.2)
       eslint: 8.56.0
       eslint-rule-composer: 0.3.0
     dev: true
@@ -5442,8 +5570,8 @@ packages:
     dependencies:
       fetch-blob: 3.2.0
 
-  /framer-motion@10.16.16(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-je6j91rd7NmUX7L1XHouwJ4v3R+SO4umso2LUcgOct3rHZ0PajZ80ETYZTajzEXEl9DlKyzjyt4AvGQ+lrebOw==, tarball: https://registry.npmjs.org/framer-motion/-/framer-motion-10.16.16.tgz}
+  /framer-motion@10.17.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-92brXaYasyEwaPV7tnHnc6MKxdN84CxWE1aZ80q/mlS+wQo0rxp/pmjGt5hdAEK5RCKJsWToI+MyIcGoA91Msg==, tarball: https://registry.npmjs.org/framer-motion/-/framer-motion-10.17.0.tgz}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0

@@ -606,9 +606,6 @@ importers:
       '@yamada-ui/portal':
         specifier: workspace:*
         version: link:../portal
-      '@yamada-ui/select':
-        specifier: workspace:*
-        version: link:../select
       '@yamada-ui/use-clickable':
         specifier: workspace:*
         version: link:../../hooks/use-clickable

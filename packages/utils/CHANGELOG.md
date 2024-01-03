@@ -1,5 +1,17 @@
 # @yamada-ui/utils
 
+## 1.0.1
+
+### Patch Changes
+
+- [#563](https://github.com/hirotomoyamada/yamada-ui/pull/563) [`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `DOMAttributes` type.
+
+- [#565](https://github.com/hirotomoyamada/yamada-ui/pull/565) [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `toKebabCase` and `toCamelCase` functions.
+
+- [#549](https://github.com/hirotomoyamada/yamada-ui/pull/549) [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `getPx` function
+
+- [#563](https://github.com/hirotomoyamada/yamada-ui/pull/563) [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the types of `PropGetter` and `RequiredPropGetter` was incorrect.
+
 ## 1.0.0
 
 ### Major Changes

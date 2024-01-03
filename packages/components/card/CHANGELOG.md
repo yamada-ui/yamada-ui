@@ -1,5 +1,11 @@
 # @yamada-ui/card
 
+## 1.0.4
+
+### Patch Changes
+
+- [#578](https://github.com/hirotomoyamada/yamada-ui/pull/578) [`e2045a6`](https://github.com/hirotomoyamada/yamada-ui/commit/e2045a6c1b684625495c415668406a6fa96fd005) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `Card` component was rendering a `div` element instead of a `section` element.
+
 ## 1.0.3
 
 ### Patch Changes

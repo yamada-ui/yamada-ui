@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`d9d200e`](https://github.com/hirotomoyamada/yamada-ui/commit/d9d200e3b40241da7f803f4d75b2a45858a71dd0), [`e2045a6`](https://github.com/hirotomoyamada/yamada-ui/commit/e2045a6c1b684625495c415668406a6fa96fd005)]:
+  - @yamada-ui/rating@1.0.2
+  - @yamada-ui/card@1.0.4
+
 ## 1.1.1
 
 ### Patch Changes

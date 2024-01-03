@@ -57,7 +57,7 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
 
   return (
     <CardProvider value={styles}>
-      <ui.div
+      <ui.section
         ref={ref}
         className={cx("ui-card", className)}
         __css={css}

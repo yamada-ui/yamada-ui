@@ -115,7 +115,7 @@ export const useSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseSliderProps) => {
-  props.isReadOnly ??= !focusThumbOnChange
+  if (!focusThumbOnChange) props.isReadOnly = true
 
   let {
     id,

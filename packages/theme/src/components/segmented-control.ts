@@ -6,7 +6,7 @@ export const SegmentedControl: ComponentMultiStyle = {
     container: {
       p: "1",
       bg: ["blackAlpha.100", "whiteAlpha.50"],
-      _readOnly: { cursor: "auto" },
+      _readOnly: { cursor: "default" },
       _disabled: { cursor: "not-allowed" },
     },
     cursor: {
@@ -27,7 +27,7 @@ export const SegmentedControl: ComponentMultiStyle = {
       _focusVisible: {
         boxShadow: "outline",
       },
-      _readOnly: { cursor: "auto" },
+      _readOnly: { cursor: "default" },
       _disabled: { opacity: 0.4, cursor: "not-allowed" },
     },
   },

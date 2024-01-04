@@ -123,7 +123,7 @@ export const useRangeSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseRangeSliderProps) => {
-  props.isReadOnly ??= !focusThumbOnChange
+  if (!focusThumbOnChange) props.isReadOnly = true
 
   let {
     id,

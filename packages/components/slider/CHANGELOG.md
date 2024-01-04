@@ -1,5 +1,14 @@
 # @yamada-ui/slider
 
+## 1.0.7
+
+### Patch Changes
+
+- [#590](https://github.com/hirotomoyamada/yamada-ui/pull/590) [`f607534`](https://github.com/hirotomoyamada/yamada-ui/commit/f607534518d652c07c155ea534235d8f206382a6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `isReadOnly` passed from `FormControl` was always `false`.
+
+- Updated dependencies [[`7b7c5fe`](https://github.com/hirotomoyamada/yamada-ui/commit/7b7c5fe63a9eb07ebfb8ffcc1b7cbe28cf1d122d)]:
+  - @yamada-ui/form-control@1.0.6
+
 ## 1.0.6
 
 ### Patch Changes

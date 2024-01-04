@@ -248,6 +248,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
     "aria-readonly": ariaAttr(readOnly),
     "aria-required": ariaAttr(required),
     "aria-invalid": ariaAttr(isInvalid),
+    "data-readonly": dataAttr(readOnly),
     onFocus: handlerAll(control?.onFocus, onFocus),
     onBlur: handlerAll(control?.onBlur, onBlur),
     ...(disabled || readOnly
@@ -271,6 +272,7 @@ export const formControlBaseProperties = [
   "aria-readonly",
   "aria-required",
   "aria-invalid",
+  "data-readonly",
   "onFocus",
   "onBlur",
   "_hover",

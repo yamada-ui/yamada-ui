@@ -1,5 +1,12 @@
 # @yamada-ui/file-input
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`7b7c5fe`](https://github.com/hirotomoyamada/yamada-ui/commit/7b7c5fe63a9eb07ebfb8ffcc1b7cbe28cf1d122d)]:
+  - @yamada-ui/form-control@1.0.6
+
 ## 1.0.5
 
 ### Patch Changes

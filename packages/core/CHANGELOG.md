@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 1.1.3
+
+### Patch Changes
+
+- [#586](https://github.com/hirotomoyamada/yamada-ui/pull/586) [`a31abbc`](https://github.com/hirotomoyamada/yamada-ui/commit/a31abbc17f1784514975d863d57f22c7f488ae2e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where CSS variables were not generated correctly.
+
+- [#580](https://github.com/hirotomoyamada/yamada-ui/pull/580) [`536720b`](https://github.com/hirotomoyamada/yamada-ui/commit/536720b79837a14be9e2c7b74e3e7e1a6f57a9c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted `generated-theme.types.ts` file.
+
 ## 1.1.2
 
 ### Patch Changes

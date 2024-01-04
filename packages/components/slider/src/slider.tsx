@@ -16,6 +16,7 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControlProps,
   formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
@@ -41,7 +42,7 @@ import {
   omitChildren,
   includesChildren,
 } from "@yamada-ui/utils"
-import type { CSSProperties, KeyboardEvent } from "react"
+import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
 
 export type UseSliderProps = FormControlOptions & {
@@ -281,7 +282,7 @@ export const useSlider = ({
     (ev: KeyboardEvent<HTMLElement>) => {
       const { min, max } = latestRef.current
 
-      const actions: Record<string, React.KeyboardEventHandler> = {
+      const actions: Record<string, KeyboardEventHandler> = {
         ArrowRight: () => stepUp(),
         ArrowUp: () => stepUp(),
         ArrowLeft: () => stepDown(),
@@ -331,7 +332,12 @@ export const useSlider = ({
       }
 
       return {
-        ...omitObject(rest, ["value", "onChangeStart", "onChangeEnd"]),
+        ...omitObject(rest, [
+          "aria-readonly",
+          "value",
+          "onChangeStart",
+          "onChangeEnd",
+        ]),
         ...props,
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
@@ -376,7 +382,10 @@ export const useSlider = ({
       }
 
       return {
-        ...pickObject(rest, formControlProperties),
+        ...pickObject(
+          rest,
+          getFormControlProperties({ omit: ["aria-readonly"] }),
+        ),
         ...props,
         ref: mergeRefs(ref, trackRef),
         style,
@@ -408,7 +417,10 @@ export const useSlider = ({
       }
 
       return {
-        ...pickObject(rest, formControlProperties),
+        ...pickObject(
+          rest,
+          getFormControlProperties({ omit: ["aria-readonly"] }),
+        ),
         ...props,
         ref,
         style,
@@ -431,7 +443,10 @@ export const useSlider = ({
         }
 
         return {
-          ...pickObject(rest, formControlProperties),
+          ...pickObject(
+            rest,
+            getFormControlProperties({ omit: ["aria-readonly"] }),
+          ),
           ...props,
           ref,
           "aria-hidden": true,

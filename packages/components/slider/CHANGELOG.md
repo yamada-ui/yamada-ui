@@ -1,5 +1,15 @@
 # @yamada-ui/slider
 
+## 1.0.6
+
+### Patch Changes
+
+- [#584](https://github.com/hirotomoyamada/yamada-ui/pull/584) [`df90d14`](https://github.com/hirotomoyamada/yamada-ui/commit/df90d14e1c6a8a64b19310d51621e0722dc523a0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary `aria-readonly`.
+
+- Updated dependencies [[`a31abbc`](https://github.com/hirotomoyamada/yamada-ui/commit/a31abbc17f1784514975d863d57f22c7f488ae2e), [`536720b`](https://github.com/hirotomoyamada/yamada-ui/commit/536720b79837a14be9e2c7b74e3e7e1a6f57a9c3)]:
+  - @yamada-ui/core@1.1.3
+  - @yamada-ui/form-control@1.0.5
+
 ## 1.0.5
 
 ### Patch Changes

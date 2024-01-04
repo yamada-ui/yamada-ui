@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.0.1
+
+### Patch Changes
+
+- [#580](https://github.com/hirotomoyamada/yamada-ui/pull/580) [`9f9b3ae`](https://github.com/hirotomoyamada/yamada-ui/commit/9f9b3aea1824103c9b847e610edd97944b33f3c8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Prettier` config was not being referenced.
+
 ## 1.0.0
 
 ### Major Changes

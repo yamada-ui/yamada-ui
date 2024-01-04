@@ -265,31 +265,28 @@ export const keyframes = (...arg: CSSObject[]): Keyframes =>
 export type Transforms = keyof typeof transforms
 
 export const transforms = {
-  var: ({ name, token, value }: any, theme: StyledTheme) => {
-    if (isObject(value)) {
-      const resolvedValue = Object.entries(value).reduce<Dict>(
-        (prev, [key, value]) => {
-          prev[key] = { name, token, value }
-
-          return prev
-        },
-        {},
-      )
-
-      return { var: resolvedValue }
-    } else if (isArray(value)) {
-      const resolvedValue = value.map((value) => ({ name, token, value }))
-
-      return { var: resolvedValue }
-    } else {
+  var: (values: any[], theme: StyledTheme) =>
+    values.reduce<Dict>((prev, { name, token, value }) => {
       const prefix = theme.__config.var?.prefix ?? "ui"
 
-      value = tokenToCSSVar(token, value)(theme)
       name = `--${prefix}-${name}`
 
-      return { [name]: value }
-    }
-  },
+      if (isObject(value)) {
+        value = Object.entries(value).reduce<Dict>((prev, [key, value]) => {
+          prev[key] = tokenToCSSVar(token, value)(theme)
+
+          return prev
+        }, {})
+      } else if (isArray(value)) {
+        value = value.map((value) => tokenToCSSVar(token, value)(theme))
+      } else {
+        value = tokenToCSSVar(token, value)(theme)
+      }
+
+      prev[name] = value
+
+      return prev
+    }, {}),
   token:
     (
       token: ThemeToken,

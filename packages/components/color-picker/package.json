@@ -47,16 +47,19 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/portal": "workspace:*",
-    "@yamada-ui/form-control": "workspace:*",
+    "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/use-latest-ref": "workspace:^",
     "@yamada-ui/use-outside-click": "workspace:*",
-    "@yamada-ui/use-controllable-state": "workspace:*"
+    "@yamada-ui/use-pan-event": "workspace:^",
+    "@yamada-ui/use-size": "workspace:^",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.0.0"
   },
   "peerDependencies": {
     "react": ">=18"

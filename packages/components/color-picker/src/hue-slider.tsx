@@ -89,6 +89,7 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
       {overlays.map((props, index) => (
         <ui.div
           key={index}
+          className="ui-hue-slider__overlay"
           __css={{
             position: "absolute",
             top: 0,
@@ -102,7 +103,7 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
       ))}
 
       <ui.div
-        className="ui-alpha-slider__track"
+        className="ui-hue-slider__track"
         __css={{ position: "relative", w: "full", h: "full", ...styles.track }}
         {...getTrackProps(trackProps)}
       >

@@ -122,6 +122,7 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
         {overlays.map((props, index) => (
           <ui.div
             key={index}
+            className="ui-alpha-slider__overlay"
             __css={{
               position: "absolute",
               top: 0,

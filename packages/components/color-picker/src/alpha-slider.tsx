@@ -86,64 +86,71 @@ export type AlphaSliderProps = ThemeProps<"AlphaSlider"> &
   Partial<Omit<UseColorSliderProps, "color">> &
   AlphaSliderOptions
 
-export const AlphaSlider = forwardRef<AlphaSliderProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("AlphaSlider", props)
-  const {
-    className,
-    inputProps,
-    trackProps,
-    thumbProps,
-    color = "#000000",
-    min = 0,
-    max = 1,
-    overlays = defaultOverlays(color, min, max),
-    ...computedProps
-  } = omitThemeProps(mergedProps)
-  const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =
-    useColorSlider({
-      min,
-      max,
-      step: 0.01,
-      thumbColor: "transparent",
-      ...computedProps,
-    })
+export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
+  (props, ref) => {
+    const [styles, mergedProps] = useMultiComponentStyle("AlphaSlider", props)
+    const {
+      className,
+      inputProps,
+      trackProps,
+      thumbProps,
+      color = "#000000",
+      min = 0,
+      max = 1,
+      overlays = defaultOverlays(color, min, max),
+      ...computedProps
+    } = omitThemeProps(mergedProps)
+    const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =
+      useColorSlider({
+        min,
+        max,
+        step: 0.01,
+        thumbColor: "transparent",
+        ...computedProps,
+      })
 
-  const css: CSSUIObject = { position: "relative", ...styles.container }
+    const css: CSSUIObject = { position: "relative", ...styles.container }
 
-  return (
-    <ui.div
-      className={cx("ui-alpha-slider", className)}
-      __css={css}
-      {...getContainerProps()}
-    >
-      <ui.input {...getInputProps(inputProps, ref)} />
-
-      {overlays.map((props, index) => (
-        <ui.div
-          key={index}
-          __css={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            ...styles.overlay,
-          }}
-          {...props}
-        />
-      ))}
-
+    return (
       <ui.div
-        className="ui-alpha-slider__track"
-        __css={{ position: "relative", w: "full", h: "full", ...styles.track }}
-        {...getTrackProps(trackProps)}
+        className={cx("ui-alpha-slider", className)}
+        __css={css}
+        {...getContainerProps()}
       >
+        <ui.input {...getInputProps(inputProps, ref)} />
+
+        {overlays.map((props, index) => (
+          <ui.div
+            key={index}
+            __css={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              ...styles.overlay,
+            }}
+            {...props}
+          />
+        ))}
+
         <ui.div
-          className="ui-alpha-slider__thumb"
-          __css={{ ...styles.thumb }}
-          {...getThumbProps(thumbProps)}
-        />
+          className="ui-alpha-slider__track"
+          __css={{
+            position: "relative",
+            w: "full",
+            h: "full",
+            ...styles.track,
+          }}
+          {...getTrackProps(trackProps)}
+        >
+          <ui.div
+            className="ui-alpha-slider__thumb"
+            __css={{ ...styles.thumb }}
+            {...getThumbProps(thumbProps)}
+          />
+        </ui.div>
       </ui.div>
-    </ui.div>
-  )
-})
+    )
+  },
+)

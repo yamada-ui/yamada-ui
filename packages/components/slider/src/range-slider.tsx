@@ -16,6 +16,7 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControlProps,
   formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
@@ -42,7 +43,7 @@ import {
   valueToPercent,
   includesChildren,
 } from "@yamada-ui/utils"
-import type { CSSProperties, KeyboardEvent } from "react"
+import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useId, useRef, useState } from "react"
 
 export type UseRangeSliderProps = FormControlOptions & {
@@ -368,7 +369,7 @@ export const useRangeSlider = ({
       const { valueBounds } = latestRef.current
       const { min, max } = valueBounds[activeIndex]
 
-      const actions: Record<string, React.KeyboardEventHandler> = {
+      const actions: Record<string, KeyboardEventHandler> = {
         ArrowRight: () => stepUp(activeIndex),
         ArrowUp: () => stepUp(activeIndex),
         ArrowLeft: () => stepDown(activeIndex),
@@ -423,7 +424,12 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...omitObject(rest, ["value", "onChangeStart", "onChangeEnd"]),
+        ...omitObject(rest, [
+          "aria-readonly",
+          "value",
+          "onChangeStart",
+          "onChangeEnd",
+        ]),
         ...props,
         id: `slider-container-${id}`,
         ref: mergeRefs(ref, containerRef),
@@ -470,7 +476,10 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...pickObject(rest, formControlProperties),
+        ...pickObject(
+          rest,
+          getFormControlProperties({ omit: ["aria-readonly"] }),
+        ),
         ...props,
         id: `slider-track-${id}`,
         ref: mergeRefs(ref, trackRef),
@@ -504,7 +513,10 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...pickObject(rest, formControlProperties),
+        ...pickObject(
+          rest,
+          getFormControlProperties({ omit: ["aria-readonly"] }),
+        ),
         ...props,
         id: `slider-filled-track-${id}`,
         ref,
@@ -528,7 +540,10 @@ export const useRangeSlider = ({
         }
 
         return {
-          ...pickObject(rest, formControlProperties),
+          ...pickObject(
+            rest,
+            getFormControlProperties({ omit: ["aria-readonly"] }),
+          ),
           ...props,
           ref,
           id: getMarkerId(props.value),

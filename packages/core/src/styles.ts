@@ -1294,6 +1294,8 @@ export const shorthandStyles: Configs = {
 
 export const styles: Configs = { ...standardStyles, ...shorthandStyles }
 
+export const processSkipProperties: string[] = ["var"]
+
 export const styleProperties: any[] = Object.keys(styles)
 
 export const layoutStyleProperties: any[] = [

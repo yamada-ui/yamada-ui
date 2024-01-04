@@ -121,6 +121,7 @@ export const generateStyles = async (
   let standardStyles: string[] = []
   let shorthandStyles: string[] = []
   let styleProps: string[] = []
+  let processSkipProperties: string[] = []
   let pickedStyles: (CSSProperty & { type: string })[] = []
 
   checkProps(styles)
@@ -138,9 +139,9 @@ export const generateStyles = async (
     const shorthands = shorthandProps[prop]
     const transform = transformMap[prop]
     const config = getConfig({ properties: prop, token, transform })()
-    type = computedType({ type, token, transform, prop })
     const docs = generateDocs({ properties: name, urls: [url], deprecated })
 
+    type = computedType({ type, token, transform, prop })
     standardStyles = [...standardStyles, `${prop}: ${config}`]
     styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
 
@@ -173,18 +174,23 @@ export const generateStyles = async (
         description,
       },
     ]) => {
+      if (isProcessSkip)
+        processSkipProperties = [...processSkipProperties, prop]
+
       const relatedStyles = styles.filter(({ prop }) =>
         typeof properties === "string"
           ? prop === properties
           : properties?.includes(prop),
       )
-
       const deprecated = relatedStyles.some(({ deprecated }) => deprecated)
       const urls = relatedStyles.map(({ url }) => url)
       const types = relatedStyles.map(({ type }) => type)
       const token = tokenMap[prop as UIProperties]
       const shorthands = shorthandProps[prop as UIProperties]
+
       transform ??= transformMap[prop as UIProperties]
+      type = computedType({ type: type ?? types, hasToken, token, transform })
+
       const config = getConfig({
         properties,
         token,
@@ -194,7 +200,7 @@ export const generateStyles = async (
         isSkip,
         css,
       })(true)
-      type = computedType({ type: type ?? types, hasToken, token, transform })
+
       const docs = generateDocs({ properties, description, urls, deprecated })
 
       standardStyles = [...standardStyles, `${prop}: ${config}`]
@@ -234,6 +240,10 @@ export const generateStyles = async (
     }
 
     export const styles: Configs = { ...standardStyles, ...shorthandStyles }
+
+    export const processSkipProperties: string[] = [${processSkipProperties.map(
+      (property) => `"${property}"`,
+    )}]
 
     export const styleProperties: any[] = Object.keys(styles)
 

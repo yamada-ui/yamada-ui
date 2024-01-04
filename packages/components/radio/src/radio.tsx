@@ -9,7 +9,7 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
   useFormControlProps,
-  formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
 import {
@@ -70,6 +70,10 @@ export const useRadio = <Y extends string | number = string>(
 ) => {
   const { id, name, value, required, disabled, readOnly, ...rest } =
     useFormControlProps(props)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -118,17 +122,17 @@ export const useRadio = <Y extends string | number = string>(
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref,
       "data-checked": dataAttr(checked),
     }),
-    [checked, rest],
+    [checked, formControlProps],
   )
 
   const getIconProps: UIPropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref,
       "data-active": dataAttr(isActive),
@@ -142,12 +146,12 @@ export const useRadio = <Y extends string | number = string>(
       onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
     }),
-    [checked, isActive, isFocused, isFocusVisible, isHovered, rest],
+    [checked, isActive, isFocused, isFocusVisible, isHovered, formControlProps],
   )
 
   const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref,
       id,
@@ -176,7 +180,7 @@ export const useRadio = <Y extends string | number = string>(
       onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
-      rest,
+      formControlProps,
       id,
       name,
       value,
@@ -194,7 +198,7 @@ export const useRadio = <Y extends string | number = string>(
 
   const getLabelProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       props,
       ref,
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
@@ -207,7 +211,7 @@ export const useRadio = <Y extends string | number = string>(
       }),
       "data-checked": dataAttr(checked),
     }),
-    [checked, rest],
+    [checked, formControlProps],
   )
 
   return {

@@ -1,5 +1,11 @@
 # @yamada-ui/form-control
 
+## 1.0.6
+
+### Patch Changes
+
+- [#590](https://github.com/hirotomoyamada/yamada-ui/pull/590) [`7b7c5fe`](https://github.com/hirotomoyamada/yamada-ui/commit/7b7c5fe63a9eb07ebfb8ffcc1b7cbe28cf1d122d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `data-readonly` to `formControlBaseProperties`.
+
 ## 1.0.5
 
 ### Patch Changes

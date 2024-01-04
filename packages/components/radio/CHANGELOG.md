@@ -1,5 +1,14 @@
 # @yamada-ui/radio
 
+## 1.0.6
+
+### Patch Changes
+
+- [#590](https://github.com/hirotomoyamada/yamada-ui/pull/590) [`1aeb63c`](https://github.com/hirotomoyamada/yamada-ui/commit/1aeb63c35f450c909e3bf0c4024434a2686eb894) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed to `aria-readonly` which is unnecessary for the element.
+
+- Updated dependencies [[`7b7c5fe`](https://github.com/hirotomoyamada/yamada-ui/commit/7b7c5fe63a9eb07ebfb8ffcc1b7cbe28cf1d122d)]:
+  - @yamada-ui/form-control@1.0.6
+
 ## 1.0.5
 
 ### Patch Changes

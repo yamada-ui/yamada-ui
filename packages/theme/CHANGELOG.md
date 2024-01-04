@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.2.2
+
+### Patch Changes
+
+- [`88ef91b`](https://github.com/hirotomoyamada/yamada-ui/commit/88ef91b854cee510389095267db8e052094c8bd5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `SegmentedControl` component `readonly` styles.
+
 ## 1.2.1
 
 ### Patch Changes

@@ -1,5 +1,6 @@
 import { Accordion } from "./accordion"
 import { Alert } from "./alert"
+import { AlphaSlider } from "./alpha-slider"
 import { Autocomplete } from "./autocomplete"
 import { Avatar } from "./avatar"
 import { Badge } from "./badge"
@@ -22,6 +23,7 @@ import { Editable } from "./editable"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
+import { HueSlider } from "./hue-slider"
 import { Indicator } from "./indicator"
 import { Input } from "./input"
 import { Kbd } from "./kbd"
@@ -64,6 +66,7 @@ import { Tooltip } from "./tooltip"
 export default {
   Accordion,
   Alert,
+  AlphaSlider,
   Autocomplete,
   Avatar,
   Badge,
@@ -86,6 +89,7 @@ export default {
   FileInput,
   FormControl,
   Heading,
+  HueSlider,
   Indicator,
   Input,
   Kbd,

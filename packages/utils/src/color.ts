@@ -5,11 +5,15 @@ import {
   mix,
   darken,
   lighten,
+  toRgba,
+  toHsla,
 } from "color2k"
 import type { Dict } from "."
 import { getMemoizedObject as get, isArray } from "."
 
 type ColorMode = "light" | "dark"
+
+export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
 
 export const hues = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
@@ -205,3 +209,37 @@ export const isLight =
 export const isDark =
   (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
     isTone(color)(theme, colorMode) === "light"
+
+export const convertColor = (color: string, format: ColorFormat) => {
+  const isAlpha = format.endsWith("a")
+
+  if (format.startsWith("hex")) {
+    let hexa = toHex(color)
+
+    if (!isAlpha)
+      hexa = hexa.replace(/(?<=^#([0-9a-fA-F]{6}))[0-9a-fA-F]{2}$/, "")
+
+    return hexa
+  } else if (format.startsWith("hsl")) {
+    let hsla = toHsla(color)
+
+    if (!isAlpha) hsla = hsla.replace(/,\s*\d+(\.\d+)?\)$/, ")")
+
+    return hsla
+  } else {
+    let rgba = toRgba(color)
+
+    if (!isAlpha) rgba = rgba.replace(/,\s*\d+(\.\d+)?\)$/, ")")
+
+    return rgba
+  }
+}
+
+export const alphaToHex = (a: number) => {
+  if (0 > a) a = 0
+  if (1 < a) a = 1
+
+  return Math.round(a * 255)
+    .toString(16)
+    .padStart(2, "0")
+}

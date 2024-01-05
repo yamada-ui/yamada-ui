@@ -88,6 +88,10 @@ export const withFocusThumbOnChange: Story = () => {
   )
 }
 
+export const disabledShadow: Story = () => {
+  return <HueSlider withShadow={false} />
+}
+
 export const isDisabled: Story = () => {
   return (
     <>

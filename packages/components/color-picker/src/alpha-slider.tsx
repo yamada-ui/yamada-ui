@@ -13,32 +13,44 @@ const defaultOverlays = (
   color: string,
   min: number,
   max: number,
-): HTMLUIProps<"div">[] => [
-  {
-    bgImage:
-      "linear-gradient(45deg, var(--ui-checkers) 25%, transparent 25%), linear-gradient(-45deg, var(--ui-checkers) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--ui-checkers) 75%), linear-gradient(-45deg, var(--ui-body) 75%, var(--ui-checkers) 75%)",
-    bgSize: `8px 8px`,
-    bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
-    var: [
-      {
-        name: "checkers",
-        token: "colors",
-        value: ["blackAlpha.300", "whiteAlpha.300"],
-      },
-      {
-        name: "body",
-        token: "colors",
-        value: ["whiteAlpha.500", "blackAlpha.500"],
-      },
-    ],
-  },
-  {
-    bgGradient: `linear(to-r, ${
-      convertColor(color, "hex") + alphaToHex(min)
-    }, ${convertColor(color, "hex") + alphaToHex(max)})`,
-  },
-]
+  withShadow: boolean,
+): HTMLUIProps<"div">[] => {
+  let overlays: HTMLUIProps<"div">[] = [
+    {
+      bgImage:
+        "linear-gradient(45deg, var(--ui-checkers) 25%, transparent 25%), linear-gradient(-45deg, var(--ui-checkers) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--ui-checkers) 75%), linear-gradient(-45deg, var(--ui-body) 75%, var(--ui-checkers) 75%)",
+      bgSize: `8px 8px`,
+      bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
+      var: [
+        {
+          name: "checkers",
+          token: "colors",
+          value: ["blackAlpha.300", "whiteAlpha.300"],
+        },
+        {
+          name: "body",
+          token: "colors",
+          value: ["whiteAlpha.500", "blackAlpha.500"],
+        },
+      ],
+    },
+    {
+      bgGradient: `linear(to-r, ${
+        convertColor(color, "hex") + alphaToHex(min)
+      }, ${convertColor(color, "hex") + alphaToHex(max)})`,
+    },
+  ]
 
+  if (withShadow)
+    overlays = [
+      ...overlays,
+      {
+        boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+      },
+    ]
+
+  return overlays
+}
 type AlphaSliderOptions = {
   /**
    * The color used for the slider.
@@ -64,6 +76,12 @@ type AlphaSliderOptions = {
    * @default 0.01
    */
   step?: number
+  /**
+   * If `true`, the slider has an inner `box-shadow`.
+   *
+   * @default true
+   */
+  withShadow?: boolean
   /**
    * Props for slider input element.
    */
@@ -97,7 +115,8 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
       color = "#000000",
       min = 0,
       max = 1,
-      overlays = defaultOverlays(color, min, max),
+      withShadow = true,
+      overlays = defaultOverlays(color, min, max, withShadow),
       ...computedProps
     } = omitThemeProps(mergedProps)
     const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =

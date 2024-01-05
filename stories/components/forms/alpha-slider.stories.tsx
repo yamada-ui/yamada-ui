@@ -112,6 +112,10 @@ export const withFocusThumbOnChange: Story = () => {
   )
 }
 
+export const disabledShadow: Story = () => {
+  return <AlphaSlider withShadow={false} />
+}
+
 export const isDisabled: Story = () => {
   return (
     <>

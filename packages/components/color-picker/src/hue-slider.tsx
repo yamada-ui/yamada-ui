@@ -9,16 +9,32 @@ import { cx } from "@yamada-ui/utils"
 import type { UseColorSliderProps } from "./use-color-slider"
 import { useColorSlider } from "./use-color-slider"
 
-const defaultOverlays = (min: number, max: number): HTMLUIProps<"div">[] => [
-  {
-    bgGradient: `linear(to-r, ${[...Array(7)]
-      .map(
-        (_, index) =>
-          `hsl(${Math.round(min + ((max - min) / 6) * index)}, 100%, 50%)`,
-      )
-      .join(", ")})`,
-  },
-]
+const defaultOverlays = (
+  min: number,
+  max: number,
+  withShadow: boolean,
+): HTMLUIProps<"div">[] => {
+  let overlays: HTMLUIProps<"div">[] = [
+    {
+      bgGradient: `linear(to-r, ${[...Array(7)]
+        .map(
+          (_, index) =>
+            `hsl(${Math.round(min + ((max - min) / 6) * index)}, 100%, 50%)`,
+        )
+        .join(", ")})`,
+    },
+  ]
+
+  if (withShadow)
+    overlays = [
+      ...overlays,
+      {
+        boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+      },
+    ]
+
+  return overlays
+}
 
 type HueSliderOptions = {
   /**
@@ -39,6 +55,12 @@ type HueSliderOptions = {
    * @default 1
    */
   step?: number
+  /**
+   * If `true`, the slider has an inner `box-shadow`.
+   *
+   * @default true
+   */
+  withShadow?: boolean
   /**
    * Props for slider input element.
    */
@@ -70,7 +92,8 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
     thumbProps,
     min = 0,
     max = 360,
-    overlays = defaultOverlays(min, max),
+    withShadow = true,
+    overlays = defaultOverlays(min, max, withShadow),
     ...computedProps
   } = omitThemeProps(mergedProps)
   const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =

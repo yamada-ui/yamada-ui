@@ -13,6 +13,7 @@ import { Checkbox } from "./checkbox"
 import { CloseButton } from "./close-button"
 import { ColorInput } from "./color-input"
 import { ColorPicker } from "./color-picker"
+import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
@@ -79,6 +80,7 @@ export default {
   CloseButton,
   ColorInput,
   ColorPicker,
+  ColorSwatch,
   Container,
   DatePicker,
   Dialog,

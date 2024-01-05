@@ -51,6 +51,7 @@ const defaultOverlays = (
 
   return overlays
 }
+
 type AlphaSliderOptions = {
   /**
    * The color used for the slider.

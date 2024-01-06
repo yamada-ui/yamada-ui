@@ -9,7 +9,7 @@ import {
   toHsla,
 } from "color2k"
 import type { Dict } from "."
-import { getMemoizedObject as get, isArray } from "."
+import { getMemoizedObject as get, isArray, isNumber } from "."
 
 type ColorMode = "light" | "dark"
 
@@ -216,8 +216,11 @@ export const convertColor = (color: string, format: ColorFormat) => {
   if (format.startsWith("hex")) {
     let hexa = toHex(color)
 
-    if (!isAlpha)
+    if (isAlpha) {
+      if (hexa.length === 7) hexa += "ff"
+    } else {
       hexa = hexa.replace(/(?<=^#([0-9a-fA-F]{6}))[0-9a-fA-F]{2}$/, "")
+    }
 
     return hexa
   } else if (format.startsWith("hsl")) {
@@ -245,6 +248,8 @@ export const calcFormat = (color: string): ColorFormat => {
   }
 }
 
+export const getAlpha = (color: string) => parseToRgba(color)[3]
+
 export const alphaToHex = (a: number) => {
   if (0 > a) a = 0
   if (1 < a) a = 1
@@ -254,8 +259,8 @@ export const alphaToHex = (a: number) => {
     .padStart(2, "0")
 }
 
-export const toHsv = (color: string): [number, number, number] => {
-  let [r, g, b] = parseToRgba(color)
+export const toHsv = (color: string): [number, number, number, number] => {
+  let [r, g, b, a] = parseToRgba(color)
 
   r = r / 255
   g = g / 255
@@ -284,20 +289,16 @@ export const toHsv = (color: string): [number, number, number] => {
       break
   }
 
-  return [h, s, v]
+  return [h, s, v, a]
 }
 
-export const hsvTo = (
-  h: number,
-  s: number,
-  v: number,
-  format: ColorFormat = "hex",
-): string => {
-  h = h / 60
+export const hsvTo =
+  (h: number, s: number, v: number, a?: number) =>
+  (format: ColorFormat = "hex"): string => {
+    h = h / 60
 
-  let rgb: [number, number, number] = [v, v, v]
+    let rgb: [number, number, number] = [v, v, v]
 
-  if (s !== 0) {
     let i = Math.floor(h)
     let f = h - i
     let p = v * (1 - s)
@@ -330,10 +331,10 @@ export const hsvTo = (
         rgb = [v, p, q]
         break
     }
-  }
 
-  return convertColor(
-    `rgb(${rgb.map((v) => Math.round(v * 255)).join(", ")})`,
-    format,
-  )
-}
+    let color = `rgb(${rgb.map((v) => Math.round(v * 255)).join(", ")})`
+
+    if (isNumber(a)) color = color.replace(/\)$/, `, ${a})`)
+
+    return convertColor(color, format)
+  }

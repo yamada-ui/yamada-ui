@@ -21,7 +21,7 @@ const meta: Meta<typeof AlphaSlider> = {
 export default meta
 
 export const basic: Story = () => {
-  return <AlphaSlider color="#4387f4" />
+  return <AlphaSlider />
 }
 
 export const withDefaultValue: Story = () => {

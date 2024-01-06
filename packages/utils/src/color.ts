@@ -235,6 +235,16 @@ export const convertColor = (color: string, format: ColorFormat) => {
   }
 }
 
+export const calcFormat = (color: string): ColorFormat => {
+  if (color.startsWith("#")) {
+    return color.length === 9 ? "hexa" : "hex"
+  } else if (color.startsWith("hsl")) {
+    return color.includes("a") ? "hsla" : "hsl"
+  } else {
+    return color.includes("a") ? "rgba" : "rgb"
+  }
+}
+
 export const alphaToHex = (a: number) => {
   if (0 > a) a = 0
   if (1 < a) a = 1
@@ -242,4 +252,88 @@ export const alphaToHex = (a: number) => {
   return Math.round(a * 255)
     .toString(16)
     .padStart(2, "0")
+}
+
+export const toHsv = (color: string): [number, number, number] => {
+  let [r, g, b] = parseToRgba(color)
+
+  r = r / 255
+  g = g / 255
+  b = b / 255
+
+  const [min, max] = [Math.min(r, g, b), Math.max(r, g, b)]
+  const delta = max - min
+
+  let [h, v, s] = [0, max, max == 0 ? 0 : delta / max]
+
+  switch (min) {
+    case max:
+      h = 0
+      break
+
+    case r:
+      h = 60 * ((b - g) / delta) + 180
+      break
+
+    case g:
+      h = 60 * ((r - b) / delta) + 300
+      break
+
+    case b:
+      h = 60 * ((g - r) / delta) + 60
+      break
+  }
+
+  return [h, s, v]
+}
+
+export const hsvTo = (
+  h: number,
+  s: number,
+  v: number,
+  format: ColorFormat = "hex",
+): string => {
+  h = h / 60
+
+  let rgb: [number, number, number] = [v, v, v]
+
+  if (s !== 0) {
+    let i = Math.floor(h)
+    let f = h - i
+    let p = v * (1 - s)
+    let q = v * (1 - s * f)
+    let t = v * (1 - s * (1 - f))
+
+    switch (i) {
+      case 0:
+      case 6:
+        rgb = [v, t, p]
+        break
+
+      case 1:
+        rgb = [q, v, p]
+        break
+
+      case 2:
+        rgb = [p, v, t]
+        break
+
+      case 3:
+        rgb = [p, q, v]
+        break
+
+      case 4:
+        rgb = [t, p, v]
+        break
+
+      case 5:
+        rgb = [v, p, q]
+        break
+    }
+  }
+
+  return convertColor(
+    `rgb(${rgb.map((v) => Math.round(v * 255)).join(", ")})`,
+    format,
+  )
 }

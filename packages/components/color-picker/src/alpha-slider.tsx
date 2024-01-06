@@ -56,7 +56,7 @@ type AlphaSliderOptions = {
   /**
    * The color used for the slider.
    *
-   * @default "#FFFFFF"
+   * @default "#ffffff"
    */
   color?: string
   /**
@@ -113,7 +113,7 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
       inputProps,
       trackProps,
       thumbProps,
-      color = "#FFFFFF",
+      color = "#ffffff",
       min = 0,
       max = 1,
       withShadow = true,

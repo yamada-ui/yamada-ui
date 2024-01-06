@@ -56,7 +56,7 @@ type AlphaSliderOptions = {
   /**
    * The color used for the slider.
    *
-   * @default "#000000"
+   * @default "#FFFFFF"
    */
   color?: string
   /**
@@ -113,11 +113,12 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
       inputProps,
       trackProps,
       thumbProps,
-      color = "#000000",
+      color = "#FFFFFF",
       min = 0,
       max = 1,
       withShadow = true,
       overlays = defaultOverlays(color, min, max, withShadow),
+      __css,
       ...computedProps
     } = omitThemeProps(mergedProps)
     const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =
@@ -129,7 +130,11 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
         ...computedProps,
       })
 
-    const css: CSSUIObject = { position: "relative", ...styles.container }
+    const css: CSSUIObject = {
+      position: "relative",
+      ...styles.container,
+      ...__css,
+    }
 
     return (
       <ui.div

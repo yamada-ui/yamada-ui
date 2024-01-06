@@ -56,6 +56,7 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
       inputProps,
       trackProps,
       thumbProps,
+      __css,
       ...computedProps
     } = omitThemeProps(mergedProps)
     const {
@@ -88,6 +89,7 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
         h: "100%",
       },
       ...styles.container,
+      ...__css,
     }
 
     return (

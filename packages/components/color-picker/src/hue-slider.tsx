@@ -94,12 +94,17 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
     max = 360,
     withShadow = true,
     overlays = defaultOverlays(min, max, withShadow),
+    __css,
     ...computedProps
   } = omitThemeProps(mergedProps)
   const { getContainerProps, getTrackProps, getInputProps, getThumbProps } =
     useColorSlider({ min, max, step: 1, ...computedProps })
 
-  const css: CSSUIObject = { position: "relative", ...styles.container }
+  const css: CSSUIObject = {
+    position: "relative",
+    ...styles.container,
+    ...__css,
+  }
 
   return (
     <ui.div

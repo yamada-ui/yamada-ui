@@ -50,6 +50,7 @@ import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
 import { Reorder } from "./reorder"
 import { Resizable } from "./resizable"
+import { SaturationSlider } from "./saturation-slider"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
@@ -116,6 +117,7 @@ export default {
   Rating,
   Reorder,
   Resizable,
+  SaturationSlider,
   ScrollArea,
   SegmentedControl,
   Select,

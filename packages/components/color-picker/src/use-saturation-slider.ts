@@ -352,7 +352,7 @@ export const useSaturationSlider = ({
 
       return {
         "aria-label": "Saturation and brightness thumb",
-        bg: thumbColor ?? hsvTo(h, s, v),
+        bg: thumbColor ?? hsvTo(h, s, v)(),
         ...pickObject(rest, formControlProperties),
         ...props,
         ref: mergeRefs(ref, thumbRef),

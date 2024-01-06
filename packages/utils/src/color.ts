@@ -239,9 +239,9 @@ export const calcFormat = (color: string): ColorFormat => {
   if (color.startsWith("#")) {
     return color.length === 9 ? "hexa" : "hex"
   } else if (color.startsWith("hsl")) {
-    return color.includes("a") ? "hsla" : "hsl"
+    return color.endsWith("a") ? "hsla" : "hsl"
   } else {
-    return color.includes("a") ? "rgba" : "rgb"
+    return color.endsWith("a") ? "rgba" : "rgb"
   }
 }
 

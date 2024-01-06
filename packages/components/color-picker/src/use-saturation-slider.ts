@@ -64,7 +64,7 @@ type UseSaturationSliderOptions = {
   /**
    * The initial value of the saturation slider.
    *
-   * @default "[360, 1, 1]"
+   * @default "[0, 0, 1]"
    */
   defaultValue?: Hsv
   /**
@@ -124,7 +124,7 @@ export const useSaturationSlider = ({
     id,
     name,
     value: valueProp,
-    defaultValue = [360, 1, 1],
+    defaultValue = [0, 0, 1],
     onChange: onChangeProp,
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,

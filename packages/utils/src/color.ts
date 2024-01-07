@@ -1,4 +1,5 @@
 import {
+  rgba,
   toHex,
   parseToRgba,
   parseToHsla,
@@ -8,6 +9,7 @@ import {
   lighten,
   toRgba,
   toHsla,
+  hsla,
 } from "color2k"
 import type { Dict } from "."
 import { getMemoizedObject as get, isArray, isNumber } from "."
@@ -225,19 +227,23 @@ export const convertColor = (color: string, format: ColorFormat) => {
       hexa = hexa.replace(/(?<=^#([0-9a-fA-F]{6}))[0-9a-fA-F]{2}$/, "")
     }
 
-    // console.log("convert", hexa)
-
     return hexa
   } else if (format.startsWith("hsl")) {
     let hsla = toHsla(color)
 
-    if (!isAlpha) hsla = hsla.replace(/,\s*\d+(\.\d+)?\)$/, ")")
+    if (!isAlpha) {
+      hsla = hsla.replace(/hsla/, "hsl")
+      hsla = hsla.replace(/,\s*\d+(\.\d+)?\)$/, ")")
+    }
 
     return hsla
   } else {
     let rgba = toRgba(color)
 
-    if (!isAlpha) rgba = rgba.replace(/,\s*\d+(\.\d+)?\)$/, ")")
+    if (!isAlpha) {
+      rgba = rgba.replace(/rgba/, "rgb")
+      rgba = rgba.replace(/,\s*\d+(\.\d+)?\)$/, ")")
+    }
 
     return rgba
   }
@@ -247,9 +253,9 @@ export const calcFormat = (color: string): ColorFormat => {
   if (color.startsWith("#")) {
     return color.length === 9 ? "hexa" : "hex"
   } else if (color.startsWith("hsl")) {
-    return color.endsWith("a") ? "hsla" : "hsl"
+    return color.startsWith("hsla") ? "hsla" : "hsl"
   } else {
-    return color.endsWith("a") ? "rgba" : "rgb"
+    return color.startsWith("rgba") ? "rgba" : "rgb"
   }
 }
 
@@ -264,7 +270,7 @@ export const alphaToHex = (a: number) => {
     .padStart(2, "0")
 }
 
-export const toHsv = (color: string): [number, number, number, number] => {
+export const parseToHsv = (color: string): [number, number, number, number] => {
   let [r, g, b, a] = parseToRgba(color)
 
   r = r / 255
@@ -296,6 +302,14 @@ export const toHsv = (color: string): [number, number, number, number] => {
 
   return [h, s, v, a]
 }
+
+export const rgbaTo =
+  (r: number, g: number, b: number, a: number) => (format: ColorFormat) =>
+    convertColor(rgba(r, g, b, a), format)
+
+export const hslaTo =
+  (h: number, s: number, l: number, a: number) => (format: ColorFormat) =>
+    convertColor(hsla(h, s, l, a), format)
 
 export const hsvTo =
   (h: number, s: number, v: number, a?: number) =>
@@ -340,8 +354,6 @@ export const hsvTo =
     let color = `rgb(${rgb.map((v) => Math.round(v * 255)).join(", ")})`
 
     if (isNumber(a)) color = color.replace(/\)$/, `, ${a})`)
-
-    // console.log("to", color)
 
     return convertColor(color, format)
   }

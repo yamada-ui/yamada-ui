@@ -10,7 +10,6 @@ export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
     baseStyle: {
       container: {},
       field: {
-        cursor: "pointer",
         pb: "px",
         _focus: {
           zIndex: "unset",
@@ -40,4 +39,4 @@ export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
       },
     },
   },
-)({ omit: ["addon", "group", "groupLabel", "item", "itemIcon"] })
+)({ omit: ["addon", "element", "group", "groupLabel", "item", "itemIcon"] })

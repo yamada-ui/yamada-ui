@@ -56,4 +56,4 @@ export const NativeSelect: ComponentMultiStyle = mergeMultiStyle(Input, {
       },
     },
   },
-})({ omit: ["addon"] })
+})({ omit: ["addon", "element"] })

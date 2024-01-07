@@ -1,6 +1,7 @@
 import {
   toHex,
   parseToRgba,
+  parseToHsla,
   transparentize,
   mix,
   darken,
@@ -12,6 +13,8 @@ import type { Dict } from "."
 import { getMemoizedObject as get, isArray, isNumber } from "."
 
 type ColorMode = "light" | "dark"
+
+export { parseToRgba, parseToHsla }
 
 export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
 
@@ -222,6 +225,8 @@ export const convertColor = (color: string, format: ColorFormat) => {
       hexa = hexa.replace(/(?<=^#([0-9a-fA-F]{6}))[0-9a-fA-F]{2}$/, "")
     }
 
+    // console.log("convert", hexa)
+
     return hexa
   } else if (format.startsWith("hsl")) {
     let hsla = toHsla(color)
@@ -335,6 +340,8 @@ export const hsvTo =
     let color = `rgb(${rgb.map((v) => Math.round(v * 255)).join(", ")})`
 
     if (isNumber(a)) color = color.replace(/\)$/, `, ${a})`)
+
+    // console.log("to", color)
 
     return convertColor(color, format)
   }

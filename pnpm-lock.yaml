@@ -856,6 +856,9 @@ importers:
 
   packages/components/color-picker:
     dependencies:
+      '@yamada-ui/button':
+        specifier: workspace:*
+        version: link:../button
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
@@ -865,12 +868,18 @@ importers:
       '@yamada-ui/icon':
         specifier: workspace:*
         version: link:../icon
+      '@yamada-ui/input':
+        specifier: workspace:*
+        version: link:../input
       '@yamada-ui/portal':
         specifier: workspace:*
         version: link:../portal
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
+      '@yamada-ui/use-eye-dropper':
+        specifier: workspace:^
+        version: link:../../hooks/use-eye-dropper
       '@yamada-ui/use-latest-ref':
         specifier: workspace:^
         version: link:../../hooks/use-latest-ref
@@ -2316,6 +2325,19 @@ importers:
         specifier: ^18.2.0
         version: registry.npmjs.org/react@18.2.0
 
+  packages/hooks/use-eye-dropper:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-focus:
     dependencies:
       '@yamada-ui/use-event-listener':
@@ -2878,6 +2900,9 @@ importers:
       '@yamada-ui/use-event-listener':
         specifier: workspace:*
         version: link:../hooks/use-event-listener
+      '@yamada-ui/use-eye-dropper':
+        specifier: workspace:*
+        version: link:../hooks/use-eye-dropper
       '@yamada-ui/use-focus':
         specifier: workspace:*
         version: link:../hooks/use-focus
@@ -3187,7 +3212,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.23.6
+      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
       '@babel/helper-plugin-utils': 7.22.5
 
   /@babel/plugin-syntax-jsx@7.23.3(@babel/core@7.23.6):
@@ -3196,7 +3221,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.23.6
+      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
       '@babel/helper-plugin-utils': 7.22.5
 
   /@babel/plugin-transform-react-jsx@7.23.4(@babel/core@7.23.6):
@@ -3205,7 +3230,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.23.6
+      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-module-imports': 7.22.15
       '@babel/helper-plugin-utils': 7.22.5
@@ -26432,7 +26457,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
+      '@babel/core': 7.23.6
       client-only: registry.npmjs.org/client-only@0.0.1
       react: registry.npmjs.org/react@18.2.0
 

@@ -20,6 +20,7 @@ import {
   hsvTo,
   roundNumberToStep,
   pickObject,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
@@ -277,6 +278,12 @@ export const useSaturationSlider = ({
       setValueFromPointer(ev)
     },
   })
+
+  useUpdateEffect(() => {
+    const { eventSource, value } = latestRef.current
+
+    if (eventSource === "keyboard") onChangeEnd(value)
+  }, [value, onChangeEnd])
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({

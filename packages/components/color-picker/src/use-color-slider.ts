@@ -264,8 +264,6 @@ export const useColorSlider = ({
   useUpdateEffect(() => {
     const { eventSource, value } = latestRef.current
 
-    focusThumb()
-
     if (eventSource === "keyboard") onChangeEnd(value)
   }, [value, onChangeEnd])
 

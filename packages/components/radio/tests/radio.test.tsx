@@ -1,7 +1,6 @@
 import { FormControl } from "@yamada-ui/form-control"
 import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
-import { Radio } from "./radio"
-import { RadioGroup } from "./radio-group"
+import { Radio, RadioGroup } from "../src"
 
 describe("<Radio/>", () => {
   it("should pass a11y test", async () => {

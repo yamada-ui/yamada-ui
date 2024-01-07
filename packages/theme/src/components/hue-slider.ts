@@ -35,16 +35,16 @@ export const HueSlider: ComponentMultiStyle = {
 
   sizes: {
     sm: {
+      container: { h: "3" },
+      thumb: { boxSize: "3" },
+    },
+    md: {
       container: { h: "4" },
       thumb: { boxSize: "4" },
     },
-    md: {
+    lg: {
       container: { h: "5" },
       thumb: { boxSize: "5" },
-    },
-    lg: {
-      container: { h: "6" },
-      thumb: { boxSize: "6" },
     },
   },
 

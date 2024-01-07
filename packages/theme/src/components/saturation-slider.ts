@@ -3,7 +3,7 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const SaturationSlider: ComponentMultiStyle = {
   baseStyle: {
     container: {
-      w: "100%",
+      w: "full",
       rounded: "md",
       cursor: "pointer",
       _readOnly: { cursor: "auto" },
@@ -38,16 +38,20 @@ export const SaturationSlider: ComponentMultiStyle = {
 
   sizes: {
     sm: {
+      container: { maxW: "xs" },
+      thumb: { boxSize: "3" },
+    },
+    md: {
       container: { maxW: "sm" },
       thumb: { boxSize: "4" },
     },
-    md: {
+    lg: {
       container: { maxW: "md" },
       thumb: { boxSize: "5" },
     },
-    lg: {
-      container: { maxW: "lg" },
-      thumb: { boxSize: "6" },
+    full: {
+      container: { maxW: "full" },
+      thumb: { boxSize: "5" },
     },
   },
 

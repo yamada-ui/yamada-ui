@@ -1,11 +1,92 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const ColorPicker: ComponentMultiStyle = {
-  baseStyle: {},
+  baseStyle: {
+    container: { w: "full" },
+    saturationSlider: { maxW: "full" },
+    body: {},
+    sliders: { flex: "1" },
+    hueSlider: {},
+    alphaSlider: {},
+    eyeDropper: {
+      borderColor: "border",
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      _hover: {
+        borderColor: ["blackAlpha.500", "whiteAlpha.400"],
+        _disabled: {
+          borderColor: "inherit",
+        },
+      },
+    },
+    result: {},
+    channels: {},
+    channelLabel: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontWeight: "medium",
+    },
+    channel: {},
+    swatchesLabel: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontWeight: "medium",
+    },
+    swatches: {},
+    swatch: {
+      _readOnly: { cursor: "auto" },
+      _disabled: {
+        opacity: 0.6,
+        cursor: "not-allowed",
+      },
+    },
+  },
 
-  variants: {},
+  sizes: {
+    sm: {
+      container: { maxW: "xs", gap: "sm" },
+      body: { gap: "xs" },
+      sliders: { gap: "xs" },
+      channels: { gap: "xs" },
+      eyeDropper: { boxSize: "7", fontSize: "xs" },
+      result: { boxSize: "7" },
+      channelLabel: { fontSize: "xs" },
+      swatchesLabel: { fontSize: "xs" },
+      swatches: { gap: "xs" },
+    },
+    md: {
+      container: { maxW: "sm", gap: "sm" },
+      body: { gap: "sm" },
+      sliders: { gap: "sm" },
+      channels: { gap: "sm" },
+      eyeDropper: { boxSize: "10" },
+      result: { boxSize: "10" },
+      channelLabel: { fontSize: "sm", mb: "xs" },
+      swatchesLabel: { fontSize: "sm", mb: "xs" },
+      swatches: { gap: "sm" },
+    },
+    lg: {
+      container: { maxW: "md", gap: "md" },
+      body: { gap: "sm" },
+      sliders: { gap: "sm" },
+      channels: { gap: "sm" },
+      eyeDropper: { boxSize: "12", fontSize: "xl" },
+      result: { boxSize: "12" },
+      channelLabel: { fontSize: "md", mb: "xs" },
+      swatchesLabel: { fontSize: "md", mb: "xs" },
+      swatches: { gap: "sm" },
+    },
+    full: {
+      container: { maxW: "full", gap: "md" },
+      body: { gap: "sm" },
+      sliders: { gap: "sm" },
+      channels: { gap: "sm" },
+      eyeDropper: { boxSize: "12", fontSize: "xl" },
+      result: { boxSize: "12" },
+      channelLabel: { fontSize: "md", mb: "xs" },
+      swatchesLabel: { fontSize: "md", mb: "xs" },
+      swatches: { gap: "sm" },
+    },
+  },
 
-  sizes: {},
-
-  defaultProps: {},
+  defaultProps: {
+    size: "md",
+  },
 }

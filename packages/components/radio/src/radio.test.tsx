@@ -1,5 +1,7 @@
+import { FormControl } from "@yamada-ui/form-control"
 import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Radio } from "./radio"
+import { RadioGroup } from "./radio-group"
 
 describe("<Radio/>", () => {
   it("should pass a11y test", async () => {
@@ -36,5 +38,38 @@ describe("<Radio/>", () => {
 
     fireEvent.click(screen.getByText("Radio button"))
     expect(screen.getByRole("radio")).toBeChecked()
+  })
+
+  it("should use the specified id when provided", () => {
+    const customId = "custom-radio-id"
+    render(<Radio id={customId}>Radio Button</Radio>)
+
+    expect(screen.getByRole("radio")).toHaveAttribute("id", customId)
+  })
+
+  it("should have a unique id for each input element", () => {
+    render(
+      <>
+        <Radio>First Radio Button</Radio>
+        <Radio>Second Radio Button</Radio>
+      </>,
+    )
+
+    const [id1, id2] = screen.getAllByRole("radio").map((radio) => radio.id)
+    expect(id1).not.toBe(id2)
+  })
+
+  it("should have a unique id for each input element when using FormControl and RadioGroup", () => {
+    render(
+      <FormControl>
+        <RadioGroup>
+          <Radio>First Radio Button</Radio>
+          <Radio>Second Radio Button</Radio>
+        </RadioGroup>
+      </FormControl>,
+    )
+
+    const [id1, id2] = screen.getAllByRole("radio").map((radio) => radio.id)
+    expect(id1).not.toBe(id2)
   })
 })

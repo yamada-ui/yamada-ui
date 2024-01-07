@@ -48,7 +48,7 @@ type ColorSwatchOptions = {
   /**
    * The color used for the swatch element.
    *
-   * @default "#00000000"
+   * @default "#ffffff00"
    */
   color?: string
   /**
@@ -71,13 +71,37 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("ColorSwatch", props)
   const {
     className,
-    color = "#00000000",
+    color = "#ffffff00",
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
+    __css,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = { position: "relative", ...styles.container }
+  const css: CSSUIObject = {
+    position: "relative",
+    _before: {
+      content: `""`,
+      display: "block",
+      h: 0,
+      pb: "100%",
+    },
+    "& > *": {
+      overflow: "hidden",
+      position: "absolute",
+      top: "0",
+      right: "0",
+      bottom: "0",
+      left: "0",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      w: "100%",
+      h: "100%",
+    },
+    ...styles.container,
+    ...__css,
+  }
 
   return (
     <ui.div
@@ -86,20 +110,22 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {overlays.map((props, index) => (
-        <ui.div
-          key={index}
-          __css={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            ...styles.overlay,
-          }}
-          {...props}
-        />
-      ))}
+      <ui.div>
+        {overlays.map((props, index) => (
+          <ui.div
+            key={index}
+            __css={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              ...styles.overlay,
+            }}
+            {...props}
+          />
+        ))}
+      </ui.div>
     </ui.div>
   )
 })

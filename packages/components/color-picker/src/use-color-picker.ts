@@ -51,21 +51,40 @@ type Channel = {
 }
 
 const convertHsla = (value: string): Hsla => {
-  const [h, s, l, a] = parseToHsla(value)
+  try {
+    let [h, s, l, a] = parseToHsla(value)
 
-  return { h, s, l, a }
+    if (a > 1) a = 1
+
+    return { h, s, l, a }
+  } catch {
+    return { h: 0, s: 0, l: 1, a: 1 }
+  }
 }
 
 const convertRgba = (value: string): Rgba => {
-  const [r, g, b, a] = parseToRgba(value)
+  try {
+    let [r, g, b, a] = parseToRgba(value)
 
-  return { r, g, b, a }
+    if (r > 255) r = 255
+    if (g > 255) g = 255
+    if (b > 255) b = 255
+    if (a > 1) a = 1
+
+    return { r, g, b, a }
+  } catch {
+    return { r: 255, g: 255, b: 255, a: 1 }
+  }
 }
 
 const convertHsva = (value: string): Hsva => {
-  const [h, s, v, a] = parseToHsv(value)
+  try {
+    const [h, s, v, a] = parseToHsv(value)
 
-  return { h, s, v, a }
+    return { h, s, v, a }
+  } catch {
+    return { h: 0, s: 0, v: 1, a: 1 }
+  }
 }
 
 type ColorPickerContext = {

@@ -304,12 +304,24 @@ export const parseToHsv = (color: string): [number, number, number, number] => {
 }
 
 export const rgbaTo =
-  (r: number, g: number, b: number, a: number) => (format: ColorFormat) =>
-    convertColor(rgba(r, g, b, a), format)
+  (r: number, g: number, b: number, a: number) =>
+  (format: ColorFormat = "hex") => {
+    try {
+      return convertColor(rgba(r, g, b, a), format)
+    } catch {
+      return convertColor("rgba(255, 255, 255, 1)", format)
+    }
+  }
 
 export const hslaTo =
-  (h: number, s: number, l: number, a: number) => (format: ColorFormat) =>
-    convertColor(hsla(h, s, l, a), format)
+  (h: number, s: number, l: number, a: number) =>
+  (format: ColorFormat = "hex") => {
+    try {
+      return convertColor(hsla(h, s, l, a), format)
+    } catch {
+      return convertColor("rgba(255, 255, 255, 1)", format)
+    }
+  }
 
 export const hsvTo =
   (h: number, s: number, v: number, a?: number) =>

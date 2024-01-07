@@ -116,6 +116,7 @@
     "@yamada-ui/use-descendant": "workspace:*",
     "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-event-listener": "workspace:*",
+    "@yamada-ui/use-eye-dropper": "workspace:*",
     "@yamada-ui/use-focus": "workspace:*",
     "@yamada-ui/use-focus-visible": "workspace:*",
     "@yamada-ui/use-hover": "workspace:*",

@@ -871,6 +871,9 @@ importers:
       '@yamada-ui/input':
         specifier: workspace:*
         version: link:../input
+      '@yamada-ui/popover':
+        specifier: workspace:*
+        version: link:../popover
       '@yamada-ui/portal':
         specifier: workspace:*
         version: link:../portal

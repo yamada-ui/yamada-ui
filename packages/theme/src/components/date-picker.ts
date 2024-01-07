@@ -24,7 +24,7 @@ export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
       list: {
         w: "auto",
         minW: "auto",
-        maxH: "auto",
+        maxH: "inherit",
         overflowY: "inherit",
         p: "2",
       },

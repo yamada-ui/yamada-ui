@@ -1,3 +1,4 @@
+import { act, fireEvent } from "@testing-library/react"
 import { Dropzone } from "@yamada-ui/dropzone"
 import { Text } from "@yamada-ui/react"
 import { a11y, render } from "@yamada-ui/test"
@@ -82,5 +83,24 @@ describe("<Dropzone />", () => {
     expect(
       container.querySelector(".ui-dropzone__overlay__loading"),
     ).toBeTruthy()
+  })
+
+  test("Is the onDrop return files correctly", async () => {
+    const file = new File(["test"], "test.png", { type: "image/png" })
+    const onDrop = jest.fn()
+    const { container } = render(<Dropzone onDrop={onDrop} />)
+
+    const dropzone = container.querySelector(".ui-dropzone")
+
+    await act(async () => {
+      fireEvent.drop(dropzone!, {
+        dataTransfer: {
+          files: [file],
+          types: ["Files"],
+        },
+      })
+    })
+
+    expect(onDrop).toHaveBeenCalledWith([file], [], expect.anything())
   })
 })

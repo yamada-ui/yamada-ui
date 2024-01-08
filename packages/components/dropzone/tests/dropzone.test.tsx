@@ -1,6 +1,6 @@
-import { a11y, render } from "@yamada-ui/test"
 import { Dropzone } from "@yamada-ui/dropzone"
 import { Text } from "@yamada-ui/react"
+import { a11y, render } from "@yamada-ui/test"
 
 describe("<Dropzone />", () => {
   test("Dropzone renders correctly", async () => {

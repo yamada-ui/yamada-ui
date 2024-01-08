@@ -214,7 +214,7 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
     const { label, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",

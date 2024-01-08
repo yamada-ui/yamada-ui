@@ -15,14 +15,14 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
     const styles = useDatePickerContext()
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",
       alignItems: "center",
       ...styles.field,
       cursor: "text",
-      ...styles.feild,
+      ...styles.field,
     }
 
     return (

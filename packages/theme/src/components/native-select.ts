@@ -27,7 +27,7 @@ export const NativeSelect: ComponentMultiStyle = mergeMultiStyle(Input, {
       outline: 0,
       rounded: "md",
       _disabled: {
-        opacity: 0.5,
+        opacity: 0.4,
       },
     },
   },

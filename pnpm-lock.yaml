@@ -105,6 +105,9 @@ importers:
       '@testing-library/jest-dom':
         specifier: ^6.1.5
         version: registry.npmjs.org/@testing-library/jest-dom@6.1.6(@types/jest@29.5.11)(jest@29.7.0)
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
       '@types/jest':
         specifier: ^29.5.10
         version: registry.npmjs.org/@types/jest@29.5.11
@@ -3119,7 +3122,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
+      '@babel/core': 7.23.6
       '@babel/helper-plugin-utils': 7.22.5
 
   /@babel/plugin-syntax-jsx@7.23.3(@babel/core@7.23.6):
@@ -3128,7 +3131,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
+      '@babel/core': 7.23.6
       '@babel/helper-plugin-utils': 7.22.5
 
   /@babel/plugin-transform-react-jsx@7.23.4(@babel/core@7.23.6):
@@ -3137,7 +3140,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
+      '@babel/core': 7.23.6
       '@babel/helper-annotate-as-pure': 7.22.5
       '@babel/helper-module-imports': 7.22.15
       '@babel/helper-plugin-utils': 7.22.5
@@ -4311,6 +4314,20 @@ packages:
       pretty-format: 27.5.1
     dev: false
 
+  /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-z4p7DVBTPjKM5qDZ0t5ZjzkpSNb+fZy1u6bzO7kk8oeGagpPCAtgh4cx1syrfp7a+QWkM021jGqjJaxJJnXAZg==, tarball: https://registry.npmjs.org/@testing-library/react/-/react-14.1.2.tgz}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@babel/runtime': 7.23.6
+      '@testing-library/dom': 9.3.3
+      '@types/react-dom': 18.2.17
+      react: registry.npmjs.org/react@18.2.0
+      react-dom: registry.npmjs.org/react-dom@18.2.0(react@18.2.0)
+    dev: false
+
   /@types/aria-query@5.0.4:
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==, tarball: https://registry.npmjs.org/@types/aria-query/-/aria-query-5.0.4.tgz}
     dev: false
@@ -4321,6 +4338,12 @@ packages:
 
   /@types/prop-types@15.7.11:
     resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==, tarball: https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.11.tgz}
+    dev: false
+
+  /@types/react-dom@18.2.17:
+    resolution: {integrity: sha512-rvrT/M7Df5eykWFxn6MYt5Pem/Dbyc1N8Y0S9Mrkw2WFCRiqUgw9P7ul2NpwsXCSM1DVdENzdG9J5SreqfAIWg==, tarball: https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.17.tgz}
+    dependencies:
+      '@types/react': 18.2.43
     dev: false
 
   /@types/react@18.2.43:
@@ -4348,7 +4371,7 @@ packages:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-3.2.1.tgz}
     engines: {node: '>=4'}
     dependencies:
-      color-convert: registry.npmjs.org/color-convert@1.9.3
+      color-convert: 1.9.3
 
   /ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz}
@@ -4434,11 +4457,19 @@ packages:
       supports-color: 7.2.0
     dev: false
 
+  /color-convert@1.9.3:
+    resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==, tarball: https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz}
+    dependencies:
+      color-name: 1.1.3
+
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==, tarball: https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz}
     engines: {node: '>=7.0.0'}
     dependencies:
       color-name: 1.1.4
+
+  /color-name@1.1.3:
+    resolution: {integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==, tarball: https://registry.npmjs.org/color-name/-/color-name-1.1.3.tgz}
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==, tarball: https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz}
@@ -26339,7 +26370,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      '@babel/core': 7.23.6
+      '@babel/core': registry.npmjs.org/@babel/core@7.23.6
       client-only: registry.npmjs.org/client-only@0.0.1
       react: registry.npmjs.org/react@18.2.0
 
@@ -28267,7 +28298,7 @@ packages:
       '@apideck/better-ajv-errors': registry.npmjs.org/@apideck/better-ajv-errors@0.3.6(ajv@8.12.0)
       '@babel/core': registry.npmjs.org/@babel/core@7.23.6
       '@babel/preset-env': registry.npmjs.org/@babel/preset-env@7.23.6(@babel/core@7.23.6)
-      '@babel/runtime': registry.npmjs.org/@babel/runtime@7.23.6
+      '@babel/runtime': 7.23.6
       '@rollup/plugin-babel': registry.npmjs.org/@rollup/plugin-babel@5.3.1(@babel/core@7.23.6)(rollup@2.79.1)
       '@rollup/plugin-node-resolve': registry.npmjs.org/@rollup/plugin-node-resolve@11.2.1(rollup@2.79.1)
       '@rollup/plugin-replace': registry.npmjs.org/@rollup/plugin-replace@2.4.2(rollup@2.79.1)

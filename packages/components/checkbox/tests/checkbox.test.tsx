@@ -1,3 +1,4 @@
+import { FormControl } from "@yamada-ui/form-control"
 import { a11y, render, screen } from "@yamada-ui/test"
 import { Checkbox, CheckboxGroup } from "../src"
 import type { CheckboxItem } from "../src"
@@ -127,5 +128,42 @@ describe("<Checkbox />", () => {
     expect(
       screen.getByTestId("Checkbox1").getElementsByTagName("span")[0],
     ).toHaveAttribute("data-indeterminate")
+  })
+
+  it("should use the specified id when provided", () => {
+    const customId = "custom-checkbox-id"
+    render(<Checkbox id={customId}>Checkbox</Checkbox>)
+
+    expect(screen.getByRole("checkbox")).toHaveAttribute("id", customId)
+  })
+
+  it("should have a unique id for each input element", () => {
+    render(
+      <>
+        <Checkbox>First Checkbox</Checkbox>
+        <Checkbox>Second Checkbox</Checkbox>
+      </>,
+    )
+
+    const [id1, id2] = screen
+      .getAllByRole("checkbox")
+      .map((checkbox) => checkbox.id)
+    expect(id1).not.toBe(id2)
+  })
+
+  it("should have a unique id for each input element when using FormControl and CheckboxGroup", () => {
+    render(
+      <FormControl>
+        <CheckboxGroup>
+          <Checkbox>First Checkbox</Checkbox>
+          <Checkbox>Second Checkbox</Checkbox>
+        </CheckboxGroup>
+      </FormControl>,
+    )
+
+    const [id1, id2] = screen
+      .getAllByRole("checkbox")
+      .map((checkbox) => checkbox.id)
+    expect(id1).not.toBe(id2)
   })
 })

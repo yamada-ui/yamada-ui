@@ -10,7 +10,7 @@ export const ColorPicker: ComponentMultiStyle = {
     alphaSlider: {},
     eyeDropper: {
       borderColor: "border",
-      color: ["blackAlpha.700", "whiteAlpha.600"],
+      color: ["blackAlpha.600", "whiteAlpha.700"],
       _hover: {
         borderColor: ["blackAlpha.500", "whiteAlpha.400"],
         _disabled: {

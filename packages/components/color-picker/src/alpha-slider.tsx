@@ -36,8 +36,8 @@ const defaultOverlays = (
     },
     {
       bgGradient: `linear(to-r, ${
-        convertColor(color, "hex") + alphaToHex(min)
-      }, ${convertColor(color, "hex") + alphaToHex(max)})`,
+        convertColor(color)("hex") + alphaToHex(min)
+      }, ${convertColor(color)("hex") + alphaToHex(max)})`,
     },
   ]
 

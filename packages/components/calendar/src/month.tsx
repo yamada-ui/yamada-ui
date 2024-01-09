@@ -2,7 +2,7 @@ import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
-import { cx, filterUndefined } from "@yamada-ui/utils"
+import { cx, dataAttr, filterUndefined } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { FC } from "react"
 import { useMemo } from "react"
@@ -144,12 +144,13 @@ export const Month: FC<MonthProps> = ({
               >
                 {withWeekdays ? (
                   <ui.thead {...theadProps}>
-                    <ui.tr {...trProps}>
+                    <ui.tr __css={{ ...styles.row }} {...trProps}>
                       {weekdays.map((weekday, index) => (
                         <ui.th
                           key={index}
                           __css={{
                             fontWeight: "normal",
+                            ...styles.cell,
                           }}
                           {...thProps}
                         >
@@ -173,18 +174,32 @@ export const Month: FC<MonthProps> = ({
                 <ui.tbody {...tbodyProps}>
                   {days.map((cells, row) => {
                     return (
-                      <ui.tr key={row} {...trProps}>
+                      <ui.tr key={row} __css={{ ...styles.row }} {...trProps}>
                         {cells.map((date, col) => {
-                          const { isSelected, isWeekend, isOutside, ...props } =
-                            getButtonProps({
-                              ...computedDayProps,
-                              month,
-                              value: date,
-                              index,
-                            })
+                          const {
+                            isSelected,
+                            isWeekend,
+                            isOutside,
+                            isStart,
+                            isEnd,
+                            isBetween,
+                            ...props
+                          } = getButtonProps({
+                            ...computedDayProps,
+                            month,
+                            value: date,
+                            index,
+                          })
 
                           return (
-                            <ui.td key={col} {...tdProps}>
+                            <ui.td
+                              key={col}
+                              __css={{ ...styles.cell }}
+                              data-start={dataAttr(isStart)}
+                              data-end={dataAttr(isEnd)}
+                              data-between={dataAttr(isBetween)}
+                              {...tdProps}
+                            >
                               <Button
                                 className="ui-calendar__month__day"
                                 variant="ghost"

@@ -37,7 +37,7 @@ import type {
 import { useCallback, useRef, useState } from "react"
 import type { CalendarBaseProps } from "./calendar"
 import type { UseCalendarProps } from "./use-calendar"
-import { isAfterMaxDate, isBeforeMinDate } from "./use-calendar"
+import { isAfterDate, isBeforeDate } from "./use-calendar"
 
 type CalendarProps = Pick<
   UseCalendarProps<Date | undefined>,
@@ -202,8 +202,8 @@ export const useMonthPicker = ({
 
       if (date == null) return undefined
 
-      if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
-      if (minDate && isBeforeMinDate(date, minDate)) date = minDate
+      if (maxDate && isAfterDate(date, maxDate)) date = maxDate
+      if (minDate && isBeforeDate(date, minDate)) date = minDate
 
       return date
     },
@@ -214,8 +214,8 @@ export const useMonthPicker = ({
     (value: Date | undefined): string | undefined => {
       if (value == null) return undefined
 
-      if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
-      if (minDate && isBeforeMinDate(value, minDate)) value = minDate
+      if (maxDate && isAfterDate(value, maxDate)) value = maxDate
+      if (minDate && isBeforeDate(value, minDate)) value = minDate
 
       return dayjs(value)
         .locale(locale ?? "en")

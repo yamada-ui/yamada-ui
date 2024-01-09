@@ -4,10 +4,10 @@ export {
   isMonthInRange,
   isSameMonth,
   isSameDate,
-  isAfterMaxDate,
-  isBeforeMinDate,
-  isAfterMaxMonth,
-  isBeforeMinMonth,
+  isAfterDate,
+  isBeforeDate,
+  isAfterMonth,
+  isBeforeMonth,
 } from "./use-calendar"
 export { DatePicker } from "./date-picker"
 export type { DatePickerProps } from "./date-picker"

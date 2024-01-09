@@ -39,7 +39,7 @@ import type {
 import { useCallback, useRef, useState } from "react"
 import type { CalendarBaseProps } from "./calendar"
 import type { UseCalendarProps } from "./use-calendar"
-import { isAfterMaxDate, isBeforeMinDate, isSameDate } from "./use-calendar"
+import { isAfterDate, isBeforeDate, isSameDate } from "./use-calendar"
 
 type DatePickerContext = Record<string, CSSUIObject>
 
@@ -51,7 +51,7 @@ export const [DatePickerProvider, useDatePickerContext] =
 
 type CalendarProps = Omit<
   UseCalendarProps<Date | undefined>,
-  "prevRef" | "typeRef" | "nextRef"
+  "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
 >
 
 type CalendarThemeProps = ThemeProps<"Calendar">
@@ -195,8 +195,8 @@ export const useDatePicker = ({
       if (date == null) return undefined
 
       if (!allowInputBeyond) {
-        if (maxDate && isAfterMaxDate(date, maxDate)) date = maxDate
-        if (minDate && isBeforeMinDate(date, minDate)) date = minDate
+        if (maxDate && isAfterDate(date, maxDate)) date = maxDate
+        if (minDate && isBeforeDate(date, minDate)) date = minDate
       }
 
       return date
@@ -209,8 +209,8 @@ export const useDatePicker = ({
       if (value == null) return undefined
 
       if (!allowInputBeyond) {
-        if (maxDate && isAfterMaxDate(value, maxDate)) value = maxDate
-        if (minDate && isBeforeMinDate(value, minDate)) value = minDate
+        if (maxDate && isAfterDate(value, maxDate)) value = maxDate
+        if (minDate && isBeforeDate(value, minDate)) value = minDate
       }
 
       return dayjs(value)

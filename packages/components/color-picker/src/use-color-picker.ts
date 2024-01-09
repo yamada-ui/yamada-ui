@@ -50,41 +50,29 @@ type Channel = {
   max: number
 }
 
-const convertHsla = (value: string): Hsla => {
-  try {
-    let [h, s, l, a] = parseToHsla(value)
+const convertHsla = (value: string, fallback?: string): Hsla => {
+  let [h, s, l, a] = parseToHsla(value, fallback) ?? [0, 0, 1, 1]
 
-    if (a > 1) a = 1
+  if (a > 1) a = 1
 
-    return { h, s, l, a }
-  } catch {
-    return { h: 0, s: 0, l: 1, a: 1 }
-  }
+  return { h, s, l, a }
 }
 
-const convertRgba = (value: string): Rgba => {
-  try {
-    let [r, g, b, a] = parseToRgba(value)
+const convertRgba = (value: string, fallback?: string): Rgba => {
+  let [r, g, b, a] = parseToRgba(value, fallback) ?? [255, 255, 255, 1]
 
-    if (r > 255) r = 255
-    if (g > 255) g = 255
-    if (b > 255) b = 255
-    if (a > 1) a = 1
+  if (r > 255) r = 255
+  if (g > 255) g = 255
+  if (b > 255) b = 255
+  if (a > 1) a = 1
 
-    return { r, g, b, a }
-  } catch {
-    return { r: 255, g: 255, b: 255, a: 1 }
-  }
+  return { r, g, b, a }
 }
 
-const convertHsva = (value: string): Hsva => {
-  try {
-    const [h, s, v, a] = parseToHsv(value)
+const convertHsva = (value: string, fallback?: string): Hsva => {
+  const [h, s, v, a] = parseToHsv(value, fallback)
 
-    return { h, s, v, a }
-  } catch {
-    return { h: 0, s: 0, v: 1, a: 1 }
-  }
+  return { h, s, v, a }
 }
 
 type ColorPickerContext = {
@@ -136,6 +124,10 @@ type UseColorPickerOptions = {
    */
   defaultValue?: string
   /**
+   * The fallback value returned when color determination fails.
+   */
+  fallbackValue?: string
+  /**
    * Function called whenever the color picker value changes.
    */
   onChange?: (value: string) => void
@@ -153,14 +145,19 @@ type UseColorPickerOptions = {
    * @default "hexa"
    */
   format?: ColorFormat
+  /**
+   * Function called whenever the color swatch click.
+   */
+  onSwatchClick?: (value: string) => void
 }
+
+export type UseColorPickerBaseProps = UseColorPickerOptions & FormControlOptions
 
 export type UseColorPickerProps = Omit<
   HTMLUIProps<"div">,
   "defaultValue" | "onChange" | "children"
 > &
-  UseColorPickerOptions &
-  FormControlOptions
+  UseColorPickerBaseProps
 
 export const useColorPicker = ({
   isInvalid,
@@ -170,14 +167,16 @@ export const useColorPicker = ({
     id,
     name,
     value: valueProp,
-    defaultValue = "#ffffffff",
+    defaultValue,
+    fallbackValue,
     onChange: onChangeProp,
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
-    format = calcFormat(valueProp ?? defaultValue),
+    format,
     required,
     disabled,
     readOnly,
+    onSwatchClick,
     ...rest
   } = useFormControlProps({ isInvalid, ...props })
 
@@ -186,19 +185,22 @@ export const useColorPicker = ({
   const { supported: eyeDropperSupported, onOpen } = useEyeDropper()
   const [value, setValue] = useControllableState({
     value: valueProp,
-    defaultValue,
+    defaultValue: defaultValue ?? fallbackValue ?? "#ffffffff",
     onChange: onChangeProp,
   })
   const timeoutId = useRef<any>(undefined)
+  const formatRef = useRef<ColorFormat>(format ?? calcFormat(value))
   const isDraggingRef = useRef<boolean>(false)
-  const [parsedValue, setParsedValue] = useState<Hsva>(convertHsva(value))
+  const [parsedValue, setParsedValue] = useState<Hsva>(
+    convertHsva(value, fallbackValue),
+  )
   const { h, s, v, a } = parsedValue
-  const withAlpha = format.endsWith("a")
+  const withAlpha = formatRef.current.endsWith("a")
   const isInteractive = !(disabled || readOnly)
 
   const channels: Channel[] = useMemo(() => {
     if (value.startsWith("hsl")) {
-      const { h, s, l, a } = convertHsla(value)
+      const { h, s, l, a } = convertHsla(value, fallbackValue)
 
       let channels: Channel[] = [
         { label: "H", space: "h", value: Math.round(h), min: 0, max: 360 },
@@ -233,7 +235,7 @@ export const useColorPicker = ({
 
       return channels
     } else {
-      const { r, g, b, a } = convertRgba(value)
+      const { r, g, b, a } = convertRgba(value, fallbackValue)
 
       let channels: Channel[] = [
         { label: "R", space: "r", value: Math.round(r), min: 0, max: 255 },
@@ -256,15 +258,18 @@ export const useColorPicker = ({
 
       return channels
     }
-  }, [value, withAlpha])
+  }, [value, withAlpha, fallbackValue])
 
-  const onChange = useCallback((value: string | Partial<Hsva>) => {
-    if (isString(value)) {
-      setParsedValue(convertHsva(value))
-    } else {
-      setParsedValue((prev) => ({ ...prev, ...value }))
-    }
-  }, [])
+  const onChange = useCallback(
+    (value: string | Partial<Hsva>) => {
+      if (isString(value)) {
+        setParsedValue(convertHsva(value, fallbackValue))
+      } else {
+        setParsedValue((prev) => ({ ...prev, ...value }))
+      }
+    },
+    [fallbackValue],
+  )
 
   const onChangeStart = useCallback(
     (value: Partial<Hsva>) => {
@@ -274,9 +279,11 @@ export const useColorPicker = ({
 
       const { h, s, v, a } = { ...parsedValue, ...value }
 
-      onChangeStartRef(hsvTo(h, s, v, a)(format))
+      const nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+
+      if (nextValue) onChangeStartRef(nextValue)
     },
-    [format, onChangeStartRef, parsedValue],
+    [formatRef, onChangeStartRef, fallbackValue, parsedValue],
   )
 
   const onChangeEnd = useCallback(
@@ -287,40 +294,53 @@ export const useColorPicker = ({
         isDraggingRef.current = false
       }, 200)
 
+      let nextValue: string | undefined
+
       if (isString(value)) {
-        onChangeEndRef(convertColor(value, format))
+        nextValue = convertColor(value, fallbackValue)(formatRef.current)
       } else {
         const { h, s, v, a } = { ...parsedValue, ...value }
 
-        onChangeEndRef(hsvTo(h, s, v, a)(format))
+        nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
       }
+
+      if (nextValue) onChangeEndRef(nextValue)
     },
-    [format, onChangeEndRef, parsedValue],
+    [formatRef, onChangeEndRef, fallbackValue, parsedValue],
   )
 
   const onChannelChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>, space: Space) => {
-      let nextValue: string
       let n = Math.floor(parseFloat(ev.target.value))
 
       if (isNaN(n)) n = 0
 
       if (["s", "l", "a"].includes(space)) n = n / 100
 
+      let nextValue: string | undefined
+
       if (value.startsWith("hsl")) {
-        const { h, s, l, a } = Object.assign(convertHsla(value), { [space]: n })
+        const { h, s, l, a } = Object.assign(
+          convertHsla(value, fallbackValue),
+          { [space]: n },
+        )
 
-        nextValue = hslaTo(h, s, l, a)(format)
+        nextValue = hslaTo([h, s, l, a], fallbackValue)(formatRef.current)
       } else {
-        const { r, g, b, a } = Object.assign(convertRgba(value), { [space]: n })
+        const { r, g, b, a } = Object.assign(
+          convertRgba(value, fallbackValue),
+          { [space]: n },
+        )
 
-        nextValue = rgbaTo(r, g, b, a)(format)
+        nextValue = rgbaTo([r, g, b, a], fallbackValue)(formatRef.current)
       }
+
+      if (!nextValue) return
 
       onChange(nextValue)
       onChangeEnd(nextValue)
     },
-    [value, onChange, onChangeEnd, format],
+    [value, onChange, onChangeEnd, formatRef, fallbackValue],
   )
 
   const onEyeDropperClick = useCallback(async () => {
@@ -335,18 +355,30 @@ export const useColorPicker = ({
   }, [onOpen, onChange, onChangeEnd])
 
   useUpdateEffect(() => {
-    setValue(hsvTo(h, s, v, a)(format))
-  }, [h, s, v, a])
+    const value = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+
+    if (value) setValue(value)
+  }, [h, s, v, a, fallbackValue])
 
   useUpdateEffect(() => {
     if (isDraggingRef.current) return
 
-    if (valueProp) setParsedValue(convertHsva(valueProp))
+    if (valueProp) setParsedValue(convertHsva(valueProp, fallbackValue))
   }, [valueProp])
 
   useUpdateEffect(() => {
-    setValue((prev) => convertColor(prev, format))
-  }, [format])
+    if (!format) return
+
+    formatRef.current = format
+
+    setValue((prev) => {
+      if (!format) return prev
+
+      const next = convertColor(prev, fallbackValue)(format)
+
+      return next ?? prev
+    })
+  }, [format, fallbackValue])
 
   const getContainerProps: UIPropGetter = (props = {}, ref = null) => ({
     ...props,
@@ -516,11 +548,12 @@ export const useColorPicker = ({
       onClick: handlerAll(props.onClick, () => {
         if (!color) return
 
+        onSwatchClick?.(color)
         onChange(color)
         onChangeEnd(color)
       }),
     }),
-    [disabled, readOnly, onChange, onChangeEnd],
+    [disabled, readOnly, onSwatchClick, onChange, onChangeEnd],
   )
 
   return {

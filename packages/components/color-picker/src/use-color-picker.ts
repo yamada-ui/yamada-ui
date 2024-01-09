@@ -371,13 +371,9 @@ export const useColorPicker = ({
 
     formatRef.current = format
 
-    setValue((prev) => {
-      if (!format) return prev
+    const nextValue = convertColor(value, fallbackValue)(format)
 
-      const next = convertColor(prev, fallbackValue)(format)
-
-      return next ?? prev
-    })
+    if (nextValue) setValue(nextValue)
   }, [format, fallbackValue])
 
   const getContainerProps: UIPropGetter = (props = {}, ref = null) => ({
@@ -481,6 +477,7 @@ export const useColorPicker = ({
       ...props,
       ref,
       value: a,
+      color: hsvTo([h, s, v, a], fallbackValue)(formatRef.current),
       onChange: handlerAll(props.onChange, (a) => onChange({ a })),
       onChangeStart: handlerAll(props.onChangeStart, (a) =>
         onChangeStart({ a }),
@@ -488,10 +485,15 @@ export const useColorPicker = ({
       onChangeEnd: handlerAll(props.onChangeEnd, (a) => onChangeEnd({ a })),
     }),
     [
+      fallbackValue,
       required,
       disabled,
       readOnly,
       isInvalid,
+      formatRef,
+      h,
+      s,
+      v,
       a,
       onChange,
       onChangeStart,

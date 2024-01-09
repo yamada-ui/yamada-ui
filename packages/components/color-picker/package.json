@@ -46,17 +46,17 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
+    "@yamada-ui/button": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
-    "@yamada-ui/button": "workspace:*",
-    "@yamada-ui/portal": "workspace:*",
-    "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/input": "workspace:*",
+    "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/use-eye-dropper": "workspace:^",
     "@yamada-ui/use-latest-ref": "workspace:^",
     "@yamada-ui/use-outside-click": "workspace:*",
-    "@yamada-ui/use-eye-dropper": "workspace:^",
     "@yamada-ui/use-pan-event": "workspace:^",
     "@yamada-ui/use-size": "workspace:^",
     "@yamada-ui/utils": "workspace:*"

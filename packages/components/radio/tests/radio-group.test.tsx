@@ -1,6 +1,5 @@
 import { a11y, render, screen, fireEvent } from "@yamada-ui/test"
-import { Radio } from "./radio"
-import { RadioGroup } from "./radio-group"
+import { Radio, RadioGroup } from "../src"
 
 describe("<RadioGroup/>", () => {
   it("should pass a11y test", async () => {

@@ -30,7 +30,7 @@ import type {
   KeyboardEvent,
   SyntheticEvent,
 } from "react"
-import { forwardRef, useCallback, useEffect, useState } from "react"
+import { forwardRef, useCallback, useEffect, useId, useState } from "react"
 import { useRadioGroupContext } from "./radio-group"
 
 export type UseRadioProps<Y extends string | number = string> =
@@ -68,8 +68,9 @@ export type UseRadioProps<Y extends string | number = string> =
 export const useRadio = <Y extends string | number = string>(
   props: UseRadioProps<Y>,
 ) => {
-  const { id, name, value, required, disabled, readOnly, ...rest } =
+  const { name, value, required, disabled, readOnly, ...rest } =
     useFormControlProps(props)
+  const id = props.id || useId()
   const formControlProps = pickObject(
     rest,
     getFormControlProperties({ omit: ["aria-readonly"] }),

@@ -242,12 +242,12 @@ export const convertColor =
   }
 
 export const calcFormat = (color: string): ColorFormat => {
-  if (color.startsWith("#")) {
-    return color.length === 9 ? "hexa" : "hex"
-  } else if (color.startsWith("hsl")) {
+  if (color.startsWith("hsl")) {
     return color.startsWith("hsla") ? "hsla" : "hsl"
-  } else {
+  } else if (color.startsWith("rgb")) {
     return color.startsWith("rgba") ? "rgba" : "rgb"
+  } else {
+    return color.length === 9 ? "hexa" : "hex"
   }
 }
 

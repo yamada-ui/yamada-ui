@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { isAccessible, isGray, shadeColor, tintColor } from "@yamada-ui/utils"
+import { isAccessible, isGray, shadeColor } from "@yamada-ui/utils"
 
 export const Calendar: ComponentMultiStyle = {
   baseStyle: {
@@ -69,7 +69,7 @@ export const Calendar: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    solid: ({ colorScheme: c = "primary" }) => ({
       button: {
         _hover: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
@@ -92,10 +92,7 @@ export const Calendar: ComponentMultiStyle = {
           },
         },
         _today: {
-          bg: [
-            isGray(c) ? `${c}.50` : `${c}.100`,
-            shadeColor(`${c}.300`, 58)(t, m),
-          ],
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: isGray(c)
@@ -130,10 +127,7 @@ export const Calendar: ComponentMultiStyle = {
           },
         },
         _today: {
-          bg: [
-            tintColor(`${c}.50`, 24)(t, m),
-            shadeColor(`${c}.300`, 76)(t, m),
-          ],
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
         _selected: {
           bg: [

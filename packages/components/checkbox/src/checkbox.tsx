@@ -47,6 +47,7 @@ import {
   useRef,
   useState,
   forwardRef,
+  useId,
 } from "react"
 import { useCheckboxGroupContext } from "./checkbox-group"
 
@@ -104,7 +105,6 @@ export const useCheckbox = <Y extends string | number = string>(
   props: UseCheckboxProps<Y>,
 ) => {
   const {
-    id,
     name,
     value,
     defaultIsChecked,
@@ -115,6 +115,7 @@ export const useCheckbox = <Y extends string | number = string>(
     isIndeterminate,
     ...rest
   } = useFormControlProps(props)
+  const id = props.id || useId()
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)

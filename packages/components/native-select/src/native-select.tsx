@@ -173,7 +173,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
             ref={ref}
             className={cx("ui-select__field", className)}
             __css={{
-              paddingEnd: "2rem",
+              pe: "2rem",
               h: h ?? height,
               minH: minH ?? minHeight,
               ...styles.field,

@@ -857,6 +857,58 @@ importers:
         specifier: ^18.2.0
         version: registry.npmjs.org/react@18.2.0
 
+  packages/components/color-picker:
+    dependencies:
+      '@yamada-ui/button':
+        specifier: workspace:*
+        version: link:../button
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/form-control':
+        specifier: workspace:*
+        version: link:../form-control
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/input':
+        specifier: workspace:*
+        version: link:../input
+      '@yamada-ui/popover':
+        specifier: workspace:*
+        version: link:../popover
+      '@yamada-ui/portal':
+        specifier: workspace:*
+        version: link:../portal
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/use-eye-dropper':
+        specifier: workspace:^
+        version: link:../../hooks/use-eye-dropper
+      '@yamada-ui/use-latest-ref':
+        specifier: workspace:^
+        version: link:../../hooks/use-latest-ref
+      '@yamada-ui/use-outside-click':
+        specifier: workspace:*
+        version: link:../../hooks/use-outside-click
+      '@yamada-ui/use-pan-event':
+        specifier: workspace:^
+        version: link:../../hooks/use-pan-event
+      '@yamada-ui/use-size':
+        specifier: workspace:^
+        version: link:../../hooks/use-size
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/dropzone:
     dependencies:
       '@yamada-ui/core':
@@ -2279,6 +2331,19 @@ importers:
         specifier: ^18.2.0
         version: registry.npmjs.org/react@18.2.0
 
+  packages/hooks/use-eye-dropper:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-focus:
     dependencies:
       '@yamada-ui/use-event-listener':
@@ -2658,6 +2723,9 @@ importers:
       '@yamada-ui/close-button':
         specifier: workspace:*
         version: link:../components/close-button
+      '@yamada-ui/color-picker':
+        specifier: workspace:*
+        version: link:../components/color-picker
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../core
@@ -2838,6 +2906,9 @@ importers:
       '@yamada-ui/use-event-listener':
         specifier: workspace:*
         version: link:../hooks/use-event-listener
+      '@yamada-ui/use-eye-dropper':
+        specifier: workspace:*
+        version: link:../hooks/use-eye-dropper
       '@yamada-ui/use-focus':
         specifier: workspace:*
         version: link:../hooks/use-focus
@@ -20101,12 +20172,6 @@ packages:
     version: 0.8.1
     engines: {node: '>=10'}
 
-  registry.npmjs.org/emoji-regex@10.3.0:
-    resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.3.0.tgz}
-    name: emoji-regex
-    version: 10.3.0
-    dev: false
-
   registry.npmjs.org/emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz}
     name: emoji-regex
@@ -30054,7 +30119,7 @@ packages:
     version: 7.0.0
     engines: {node: '>=18'}
     dependencies:
-      emoji-regex: registry.npmjs.org/emoji-regex@10.3.0
+      emoji-regex: 10.3.0
       get-east-asian-width: registry.npmjs.org/get-east-asian-width@1.2.0
       strip-ansi: 7.1.0
     dev: false

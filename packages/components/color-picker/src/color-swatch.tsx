@@ -61,6 +61,12 @@ type ColorSwatchOptions = {
    * @default true
    */
   withShadow?: boolean
+  /**
+   * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  isRounded?: boolean
 }
 
 export type ColorSwatchProps = Omit<HTMLUIProps<"div">, "color"> &
@@ -74,6 +80,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     color = "#ffffff00",
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
+    isRounded,
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -107,10 +114,11 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-color-swatch", className)}
+      {...(isRounded ? { rounded: "full" } : {})}
       __css={css}
       {...rest}
     >
-      <ui.div>
+      <ui.div {...(isRounded ? { rounded: "full" } : {})}>
         {overlays.map((props, index) => (
           <ui.div
             key={index}
@@ -122,6 +130,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
               bottom: 0,
               ...styles.overlay,
             }}
+            {...(isRounded ? { rounded: "full" } : {})}
             {...props}
           />
         ))}

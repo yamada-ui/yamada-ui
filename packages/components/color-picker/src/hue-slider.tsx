@@ -79,6 +79,11 @@ type HueSliderOptions = {
   overlays?: HTMLUIProps<"div">[]
 }
 
+/**
+ * `HueSlider` is a component used to allow the user to select a color hue.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/hue-slider
+ */
 export type HueSliderProps = ThemeProps<"HueSlider"> &
   Partial<UseColorSliderProps> &
   HueSliderOptions

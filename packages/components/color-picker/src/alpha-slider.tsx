@@ -105,6 +105,11 @@ export type AlphaSliderProps = ThemeProps<"AlphaSlider"> &
   Partial<Omit<UseColorSliderProps, "color">> &
   AlphaSliderOptions
 
+/**
+ * `AlphaSlider` is a component used to allow the user to select color transparency.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/alpha-slider
+ */
 export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("AlphaSlider", props)

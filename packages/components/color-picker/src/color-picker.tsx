@@ -67,6 +67,11 @@ export type ColorPickerProps = ThemeProps<"ColorPicker"> &
     "swatchesLabel" | "swatches" | "swatchesColumns" | "swatchProps"
   >
 
+/**
+ * `ColorPicker` is a component used by the user to select a color.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/color-picker
+ */
 export const ColorPicker = forwardRef<ColorPickerProps, "input">(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("ColorPicker", {

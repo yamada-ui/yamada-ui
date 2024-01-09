@@ -73,6 +73,11 @@ export type ColorSwatchProps = Omit<HTMLUIProps<"div">, "color"> &
   ThemeProps<"ColorSwatch"> &
   ColorSwatchOptions
 
+/**
+ * `ColorSwatch` is a component that displays color samples.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/color-swatch
+ */
 export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("ColorSwatch", props)
   const {

@@ -74,6 +74,11 @@ export type ColorInputProps = ThemeProps<"ColorInput"> &
   UseColorInputProps &
   ColorInputOptions
 
+/**
+ * `ColorInput` is a component used by the user to select a color or enter an arbitrary color value.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/color-input
+ */
 export const ColorInput = forwardRef<ColorInputProps, "input">(
   ({ withSwatch = true, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("ColorInput", {

@@ -20,6 +20,7 @@ import { ColorPickerProvider, useColorPicker } from "./use-color-picker"
 type ColorPickerOptions = {
   /**
    * If `true`, display the saturation, hue, alpha, channels and eye dropper component.
+   *
    * @default true
    */
   withPicker?: boolean

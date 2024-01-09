@@ -41,7 +41,7 @@ export const ColorPicker: ComponentMultiStyle = {
 
   sizes: {
     sm: {
-      container: { maxW: "xs", gap: "sm" },
+      container: { w: "xs", gap: "sm" },
       body: { gap: "xs" },
       sliders: { gap: "xs" },
       channels: { gap: "xs" },
@@ -52,7 +52,7 @@ export const ColorPicker: ComponentMultiStyle = {
       swatches: { gap: "xs" },
     },
     md: {
-      container: { maxW: "sm", gap: "sm" },
+      container: { w: "sm", gap: "sm" },
       body: { gap: "sm" },
       sliders: { gap: "sm" },
       channels: { gap: "sm" },
@@ -63,7 +63,7 @@ export const ColorPicker: ComponentMultiStyle = {
       swatches: { gap: "sm" },
     },
     lg: {
-      container: { maxW: "md", gap: "md" },
+      container: { w: "md", gap: "md" },
       body: { gap: "sm" },
       sliders: { gap: "sm" },
       channels: { gap: "sm" },
@@ -74,7 +74,7 @@ export const ColorPicker: ComponentMultiStyle = {
       swatches: { gap: "sm" },
     },
     full: {
-      container: { maxW: "full", gap: "md" },
+      container: { w: "full", gap: "md" },
       body: { gap: "sm" },
       sliders: { gap: "sm" },
       channels: { gap: "sm" },

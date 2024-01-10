@@ -1,5 +1,10 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { isAccessible, isGray, shadeColor } from "@yamada-ui/utils"
+import {
+  isAccessible,
+  isGray,
+  shadeColor,
+  transparentizeColor,
+} from "@yamada-ui/utils"
 
 export const Calendar: ComponentMultiStyle = {
   baseStyle: {
@@ -41,6 +46,11 @@ export const Calendar: ComponentMultiStyle = {
       },
     },
     date: {},
+    row: {},
+    cell: {
+      transitionProperty: "common",
+      transitionDuration: "slower",
+    },
     weekday: {
       userSelect: "none",
       color: ["blackAlpha.700", "whiteAlpha.600"],
@@ -69,7 +79,7 @@ export const Calendar: ComponentMultiStyle = {
   },
 
   variants: {
-    solid: ({ colorScheme: c = "primary" }) => ({
+    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       button: {
         _hover: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
@@ -84,19 +94,45 @@ export const Calendar: ComponentMultiStyle = {
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
         },
       },
+      cell: {
+        _between: {
+          bg: [
+            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
+            shadeColor(`${c}.300`, 72)(t, m),
+          ],
+          _start: {
+            roundedLeft: "md",
+          },
+          _end: {
+            roundedRight: "md",
+          },
+        },
+      },
       day: {
         _hover: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
           _disabled: {
             bg: ["initial", "initial"],
           },
         },
         _today: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
+        },
+        _start: {
+          roundedRight: "0",
+        },
+        _end: {
+          roundedLeft: "0",
         },
         _selected: {
           bg: isGray(c)
-            ? [`${c}.50`, `${c}.700`]
+            ? [`${c}.100`, `${c}.700`]
             : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
           color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
           borderColor: ["transparent", "transparent"],
@@ -119,15 +155,41 @@ export const Calendar: ComponentMultiStyle = {
           color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
         },
       },
+      cell: {
+        _between: {
+          bg: [
+            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
+            shadeColor(`${c}.300`, 72)(t, m),
+          ],
+          _start: {
+            roundedLeft: "md",
+          },
+          _end: {
+            roundedRight: "md",
+          },
+        },
+      },
       day: {
         _hover: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
           _disabled: {
             bg: ["initial", "initial"],
           },
         },
         _today: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
+        },
+        _start: {
+          roundedRight: "0",
+        },
+        _end: {
+          roundedLeft: "0",
         },
         _selected: {
           bg: [

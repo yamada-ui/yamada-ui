@@ -296,47 +296,53 @@ const getRangeLastDay = (
   return days[days.length - 1]
 }
 
-export const getRangeDates = ({
+const getRangeDates = ({
   startDate,
   endDate,
   minDate,
   maxDate,
   excludeDate,
   isReversed,
+  maxSelectedValues,
 }: {
   startDate: Date | undefined
   endDate: Date | undefined
   minDate?: Date
   maxDate?: Date
+  maxSelectedValues?: number
   excludeDate?: (date: Date) => boolean
-  isReversed: boolean
+  isReversed?: boolean
 }): Date[] => {
-  if (!startDate || !endDate) return []
+  if (!startDate || !endDate) {
+    if (!isReversed) {
+      return startDate ? [startDate] : []
+    } else {
+      return endDate ? [endDate] : []
+    }
+  }
 
   startDate = dayjs(startDate).startOf("day").toDate()
   endDate = dayjs(endDate).startOf("day").toDate()
 
   const dates: Date[] = []
 
+  const n = Math.abs(
+    dayjs(startDate).startOf("day").diff(dayjs(endDate).startOf("day"), "day"),
+  )
+
   let date = dayjs(!isReversed ? startDate : endDate)
 
-  while (
-    !isReversed
-      ? isSomeBeforeDate(date, endDate)
-      : isSomeAfterDate(date, startDate)
-  ) {
-    const d = date.toDate()
+  for (let i = 0; i <= n; i++) {
+    if (!!maxSelectedValues && i >= maxSelectedValues) break
+
+    const d = (
+      !isReversed ? date.add(i, "day") : date.subtract(i, "day")
+    ).toDate()
 
     if (isAfterDate(d, maxDate) || isBeforeDate(d, minDate)) break
     if (excludeDate?.(d)) break
 
     dates.push(d)
-
-    if (!isReversed) {
-      date = date.add(1, "day")
-    } else {
-      date = date.subtract(1, "day")
-    }
   }
 
   return sortDates(dates)
@@ -1541,6 +1547,7 @@ export const useMonth = () => {
     startDate: maybeStartDate,
     endDate: maybeEndDate,
     isReversed,
+    maxSelectedValues,
     minDate,
     maxDate,
     excludeDate: strictRangeSelection ? excludeDate : undefined,

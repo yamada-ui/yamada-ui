@@ -70,9 +70,8 @@ export const Calendar: ComponentMultiStyle = {
       _disabled: {
         opacity: 0.4,
         cursor: "not-allowed",
-        boxShadow: "none",
-        _focusVisible: {
-          boxShadow: "0 0 0 3px rgba(125, 125, 125, 0.6)",
+        _ripple: {
+          display: "none",
         },
       },
     },

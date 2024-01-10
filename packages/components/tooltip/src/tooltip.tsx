@@ -191,7 +191,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       openDelay = 0,
       closeDelay = 0,
       isDisabled,
-      closeOnClick = true,
+      closeOnClick,
       closeOnScroll,
       closeOnMouseDown,
       closeOnEsc = true,

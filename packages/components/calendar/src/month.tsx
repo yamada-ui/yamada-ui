@@ -183,6 +183,7 @@ export const Month: FC<MonthProps> = ({
                             isStart,
                             isEnd,
                             isBetween,
+                            isHidden,
                             ...props
                           } = getButtonProps({
                             ...computedDayProps,
@@ -209,6 +210,7 @@ export const Month: FC<MonthProps> = ({
                                   p: 0,
                                   fontSize: undefined,
                                   fontWeight: "normal",
+                                  ...(isHidden ? { display: "none" } : {}),
                                   ...styles.day,
                                 }}
                                 {...props}

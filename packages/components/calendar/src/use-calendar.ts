@@ -20,6 +20,7 @@ import {
   getEventRelatedTarget,
   useCallbackRef,
 } from "@yamada-ui/utils"
+import type { Dayjs } from "dayjs"
 import dayjs from "dayjs"
 import type {
   CSSProperties,
@@ -34,6 +35,8 @@ import type {
 import { createRef, useCallback, useRef, useState } from "react"
 
 export type MaybeValue = Date | Date[] | [Date?, Date?] | undefined
+
+export type MaybeDate = Date | Dayjs
 
 export type CalendarContext = Pick<
   Required<UseCalendarProps>,
@@ -292,6 +295,52 @@ const getRangeLastDay = (
   return days[days.length - 1]
 }
 
+export const getRangeDates = ({
+  startDate,
+  endDate,
+  minDate,
+  maxDate,
+  excludeDate,
+  isReversed,
+}: {
+  startDate: Date | undefined
+  endDate: Date | undefined
+  minDate?: Date
+  maxDate?: Date
+  excludeDate?: (date: Date) => boolean
+  isReversed: boolean
+}): Date[] => {
+  if (!startDate || !endDate) return []
+
+  startDate = dayjs(startDate).startOf("day").toDate()
+  endDate = dayjs(endDate).startOf("day").toDate()
+
+  const dates: Date[] = []
+
+  let date = dayjs(!isReversed ? startDate : endDate)
+
+  while (
+    !isReversed
+      ? isSomeBeforeDate(date, endDate)
+      : isSomeAfterDate(date, startDate)
+  ) {
+    const d = date.toDate()
+
+    if (isAfterDate(d, maxDate) || isBeforeDate(d, minDate)) break
+    if (excludeDate?.(d)) break
+
+    dates.push(d)
+
+    if (!isReversed) {
+      date = date.add(1, "day")
+    } else {
+      date = date.subtract(1, "day")
+    }
+  }
+
+  return sortDates(dates)
+}
+
 const disableAllTabIndex = <T = any>(
   refs: MutableRefObject<Map<T, RefObject<HTMLButtonElement>>>,
 ): void => {
@@ -349,7 +398,10 @@ export const isMonthInRange = ({
   return maxInRange && minInRange
 }
 
-const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
+export const isIncludeDates = (date: Date, dates: Date[]) =>
+  dates.some((d) => dayjs(d).isSame(date, "day"))
+
+export const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
   if (type === "asc") {
     return dates.sort((a, b) => (dayjs(a).isAfter(b, "day") ? 1 : -1))
   } else {
@@ -357,11 +409,27 @@ const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
   }
 }
 
-export const isAfterDate = (value: Date, date: Date | undefined) =>
-  date instanceof Date && dayjs(date).isBefore(value, "day")
+export const isSomeAfterDate = (
+  value: MaybeDate,
+  date: MaybeDate | undefined,
+) =>
+  (date instanceof Date || date instanceof dayjs) &&
+  (dayjs(value).isSame(date) || isAfterDate(value, date))
 
-export const isBeforeDate = (value: Date, date: Date | undefined) =>
-  date instanceof Date && dayjs(date).isAfter(value, "day")
+export const isSomeBeforeDate = (
+  value: MaybeDate,
+  date: MaybeDate | undefined,
+) =>
+  (date instanceof Date || date instanceof dayjs) &&
+  (dayjs(value).isSame(date) || isBeforeDate(value, date))
+
+export const isAfterDate = (value: MaybeDate, date: MaybeDate | undefined) =>
+  (date instanceof Date || date instanceof dayjs) &&
+  dayjs(date).isBefore(value, "day")
+
+export const isBeforeDate = (value: MaybeDate, date: MaybeDate | undefined) =>
+  (date instanceof Date || date instanceof dayjs) &&
+  dayjs(date).isAfter(value, "day")
 
 export const isDisabledDate = ({
   minDate,
@@ -636,6 +704,8 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   const isMulti = isArray(value)
   const isRange = enableRange && isMulti
+
+  if (isRange) disableOutsideDays = false
 
   if (!isMulti && value) {
     defaultMonth ??= new Date(new Date(value).setDate(1))
@@ -1431,18 +1501,32 @@ export const useMonth = () => {
   const year = month.getFullYear()
   const isMulti = isArray(selectedValue)
   const isRange = enableRange && isMulti
-  const rangeSelectedValue = isRange ? selectedValue.filter(Boolean) : []
+  const rangeSelectedValue = isRange
+    ? (selectedValue.filter(Boolean) as Date[])
+    : []
   const isMax = isMulti && maxSelectedValues === selectedValue.length
   const isReversed =
-    rangeSelectedValue[0] && isAfterDate(rangeSelectedValue[0], hoveredValue)
+    !!rangeSelectedValue[0] && isAfterDate(rangeSelectedValue[0], hoveredValue)
   const startDate = isRange
     ? rangeSelectedValue[!isReversed ? 0 : 1]
     : undefined
   const endDate = isRange ? rangeSelectedValue[!isReversed ? 1 : 0] : undefined
   const maybeStartDate = startDate ?? hoveredValue
   const maybeEndDate = endDate ?? hoveredValue
-  const isShouldBetween = rangeSelectedValue.length >= 1 && maybeEndDate
+  const isShouldBetween = rangeSelectedValue.length >= 1 && !!maybeEndDate
   const isShouldHovered = rangeSelectedValue.length === 1
+  const rangeDates = getRangeDates({
+    startDate: maybeStartDate,
+    endDate: maybeEndDate,
+    isReversed,
+    minDate,
+    maxDate,
+    excludeDate,
+  })
+  const trulyStartDate =
+    !isReversed || rangeDates.length >= 2 ? rangeDates.at(0) : undefined
+  const trulyEndDate =
+    isReversed || rangeDates.length >= 2 ? rangeDates.at(-1) : undefined
 
   const onFocusPrev = useCallback(
     (targetIndex: number, targetMonth: number, targetDay: number) => {
@@ -1729,17 +1813,11 @@ export const useMonth = () => {
       const isFirstDate = value.getDate() === 1
       const isShouldFocus =
         (!isSelectedMonth && !isOutside && isFirstDate) || isSelected
-      const isBetween =
-        isShouldBetween &&
-        isInRange({
-          date: value,
-          minDate: maybeStartDate,
-          maxDate: maybeEndDate,
-        })
-      const isHovered = isRange && isSameDate(hoveredValue, value)
-      const isStart = isRange && isSameDate(maybeStartDate, value)
-      const isEnd = isRange && isSameDate(maybeEndDate, value)
-      const isTrulyBetween = isBetween || isHovered
+      const isBetween = isShouldBetween && isIncludeDates(value, rangeDates)
+      const isEnd = isRange && isSameDate(trulyEndDate, value)
+      const isStart = isRange && isSameDate(trulyStartDate, value)
+      const enableClick =
+        !isRange || !rangeDates.length || selectedValue.length >= 2 || isBetween
 
       const style: CSSProperties = {
         pointerEvents:
@@ -1759,7 +1837,7 @@ export const useMonth = () => {
         isOutside,
         isStart,
         isEnd,
-        isBetween: isTrulyBetween,
+        isBetween,
         isDisabled: isTrulyDisabled,
         style,
         ref: mergeRefs(ref, !isOutside ? dayRefs.current.get(key) : undefined),
@@ -1767,7 +1845,7 @@ export const useMonth = () => {
         tabIndex: !!index || isControlled ? -1 : isShouldFocus ? 0 : -1,
         "data-selected": dataAttr(isSelected),
         "data-outside": dataAttr(isOutside),
-        "data-between": dataAttr(isTrulyBetween),
+        "data-between": dataAttr(isBetween),
         "data-start": dataAttr(isStart),
         "data-end": dataAttr(isEnd),
         "data-holiday": dataAttr(isHoliday),
@@ -1776,7 +1854,10 @@ export const useMonth = () => {
         "data-value": value ?? "",
         "data-disabled": dataAttr(isTrulyDisabled),
         "aria-disabled": ariaAttr(isTrulyDisabled),
-        onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
+        onClick: handlerAll(
+          (ev) => (enableClick ? onClick(ev, value) : undefined),
+          props.onClick,
+        ),
         onPointerEnter: handlerAll(
           () => onPointerEnter(value),
           props.onPointerEnter,
@@ -1795,10 +1876,10 @@ export const useMonth = () => {
       disableOutsideDays,
       isMax,
       isShouldBetween,
-      maybeStartDate,
-      maybeEndDate,
+      rangeDates,
       isRange,
-      hoveredValue,
+      trulyStartDate,
+      trulyEndDate,
       dayRefs,
       onClick,
       onPointerEnter,

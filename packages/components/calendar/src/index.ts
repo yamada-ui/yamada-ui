@@ -1,9 +1,13 @@
 export { Calendar } from "./calendar"
 export type { CalendarProps } from "./calendar"
 export {
+  sortDates,
+  isIncludeDates,
   isMonthInRange,
   isSameMonth,
   isSameDate,
+  isSomeAfterDate,
+  isSomeBeforeDate,
   isAfterDate,
   isBeforeDate,
   isAfterMonth,

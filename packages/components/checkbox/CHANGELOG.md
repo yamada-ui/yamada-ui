@@ -1,5 +1,11 @@
 # @yamada-ui/checkbox
 
+## 1.0.7
+
+### Patch Changes
+
+- [#596](https://github.com/hirotomoyamada/yamada-ui/pull/596) [`974ddda`](https://github.com/hirotomoyamada/yamada-ui/commit/974ddda1742d9e0708ac87526634965ee3711a93) Thanks [@matsu3m](https://github.com/matsu3m)! - Implement unique id generation for each checkbox element, independent of CheckboxGroup or FormControl.
+
 ## 1.0.6
 
 ### Patch Changes

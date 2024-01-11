@@ -38,8 +38,8 @@ import type {
 } from "react"
 import { useCallback, useRef, useState } from "react"
 import type { CalendarBaseProps } from "./calendar"
+import { isAfterDate, isBeforeDate, isSameDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
-import { isAfterDate, isBeforeDate, isSameDate } from "./use-calendar"
 
 type DatePickerContext = Record<string, CSSUIObject>
 

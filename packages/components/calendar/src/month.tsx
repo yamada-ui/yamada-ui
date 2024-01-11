@@ -8,13 +8,9 @@ import type { FC } from "react"
 import { useMemo } from "react"
 import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
-import {
-  getFormattedLabel,
-  getMonthDays,
-  getWeekdays,
-  useCalendarContext,
-  useMonth,
-} from "./use-calendar"
+import { getFormattedLabel, getMonthDays, getWeekdays } from "./calendar-utils"
+import { useCalendarContext } from "./use-calendar"
+import { useMonth } from "./use-month"
 
 type MonthOptions = {
   /**

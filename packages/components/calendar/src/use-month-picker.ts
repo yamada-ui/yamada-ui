@@ -36,8 +36,8 @@ import type {
 } from "react"
 import { useCallback, useRef, useState } from "react"
 import type { CalendarBaseProps } from "./calendar"
+import { isAfterDate, isBeforeDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
-import { isAfterDate, isBeforeDate } from "./use-calendar"
 
 type CalendarProps = Pick<
   UseCalendarProps<Date | undefined>,

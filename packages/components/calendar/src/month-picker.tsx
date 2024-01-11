@@ -20,6 +20,12 @@ import { useMonthPicker } from "./use-month-picker"
 
 type MonthPickerOptions = {
   /**
+   * If `true`, display the month picker clear icon.
+   *
+   * @default true
+   */
+  isClearable?: boolean
+  /**
    * The border color when the input is focused.
    */
   focusBorderColor?: string

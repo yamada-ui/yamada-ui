@@ -47,8 +47,21 @@
     },
     "disableOutsideDays": {
       "type": "boolean",
+      "defaultValue": false,
       "required": false,
       "description": "If `true`, outside days will be disabled."
+    },
+    "enableMultiple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, enables date multiple selection."
+    },
+    "enableRange": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, enables date range selection."
     },
     "excludeDate": {
       "type": "(date: Date) => boolean",
@@ -65,6 +78,11 @@
       "type": "HTMLUIProps<\"div\">",
       "required": false,
       "description": "Props for calendar header element."
+    },
+    "hiddenOutsideDays": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, outside days will be hidden."
     },
     "holidays": {
       "type": "Date[]",
@@ -162,6 +180,12 @@
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the Calendar."
+    },
+    "strictRangeSelection": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, it prevents range selection across invalid dates."
     },
     "tableProps": {
       "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }",
@@ -283,7 +307,8 @@
     },
     "calendarColorScheme": {
       "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
-      "required": false
+      "required": false,
+      "description": "ColorScheme for the calendar component."
     },
     "calendarProps": {
       "type": "CalendarBaseProps",
@@ -292,11 +317,13 @@
     },
     "calendarSize": {
       "type": "UIValue<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
-      "required": false
+      "required": false,
+      "description": "Size for the calendar component."
     },
     "calendarVariant": {
       "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
-      "required": false
+      "required": false,
+      "description": "Variant for the calendar component."
     },
     "clearIconProps": {
       "type": "DatePickerIconProps",
@@ -361,6 +388,7 @@
     },
     "disableOutsideDays": {
       "type": "boolean",
+      "defaultValue": false,
       "required": false,
       "description": "If `true`, outside days will be disabled."
     },
@@ -407,6 +435,11 @@
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+    },
+    "hiddenOutsideDays": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, outside days will be hidden."
     },
     "holidays": {
       "type": "Date[]",
@@ -563,7 +596,7 @@
       "type": "RegExp",
       "defaultValue": "'/[^0-9\\-\\/]/g'",
       "required": false,
-      "description": "The pattern used to check the <input> element's."
+      "description": "The pattern used to check the input element."
     },
     "placement": {
       "type": "UIValue<Placement>",
@@ -595,6 +628,12 @@
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
+    },
+    "strictRangeSelection": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, it prevents range selection across invalid dates."
     },
     "today": {
       "type": "boolean",
@@ -670,6 +709,12 @@
       "required": false,
       "description": "If `true`, allows input."
     },
+    "allowInputBeyond": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
+    },
     "animation": {
       "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
@@ -684,7 +729,8 @@
     },
     "calendarColorScheme": {
       "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
-      "required": false
+      "required": false,
+      "description": "ColorScheme for the calendar component."
     },
     "calendarProps": {
       "type": "CalendarBaseProps",
@@ -693,11 +739,13 @@
     },
     "calendarSize": {
       "type": "UIValue<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
-      "required": false
+      "required": false,
+      "description": "Size for the calendar component."
     },
     "calendarVariant": {
       "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
-      "required": false
+      "required": false,
+      "description": "Variant for the calendar component."
     },
     "clearIconProps": {
       "type": "DatePickerIconProps",
@@ -794,7 +842,7 @@
     },
     "inputFormat": {
       "type": "string",
-      "defaultValue": "'YYYY/MM'",
+      "defaultValue": "'YYYY/MM/DD'",
       "required": false,
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
@@ -918,7 +966,7 @@
       "description": "Callback fired when the popover opens."
     },
     "parseDate": {
-      "type": "(value: string) => Date | null",
+      "type": "(value: string) => Date | undefined",
       "required": false,
       "description": "Function that converts the input value to Date type."
     },
@@ -926,7 +974,7 @@
       "type": "RegExp",
       "defaultValue": "'/[^0-9\\-\\/]/g'",
       "required": false,
-      "description": "The pattern used to check the <input> element's."
+      "description": "The pattern used to check the input element."
     },
     "placement": {
       "type": "UIValue<Placement>",

@@ -19,6 +19,12 @@ import { DatePickerProvider, useDatePicker } from "./use-date-picker"
 
 type DatePickerOptions = {
   /**
+   * If `true`, display the date picker clear icon.
+   *
+   * @default true
+   */
+  isClearable?: boolean
+  /**
    * The border color when the input is focused.
    */
   focusBorderColor?: string

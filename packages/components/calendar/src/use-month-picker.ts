@@ -95,7 +95,7 @@ type UseMonthPickerBaseProps = Omit<
     /**
      * Function that converts the input value to Date type.
      */
-    parseDate?: (value: string) => Date | null
+    parseDate?: (value: string) => Date | undefined
     /**
      * The format used for conversion.
      * Check the docs to see the format of possible modifiers you can pass.

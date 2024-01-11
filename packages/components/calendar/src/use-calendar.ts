@@ -741,7 +741,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   } else if (isMulti && value.length) {
     defaultMonth ??= new Date(new Date(value.at(-1)!).setDate(1))
   } else {
-    defaultMonth ??= new Date()
+    defaultMonth ??= new Date(new Date().setDate(1))
   }
 
   const [month, setMonth] = useControllableState({

@@ -76,7 +76,7 @@ type TooltipOptions = {
   /**
    * If `true`, the tooltip will hide on click.
    *
-   * @default true
+   * @default false
    */
   closeOnClick?: boolean
   /**
@@ -191,7 +191,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       openDelay = 0,
       closeDelay = 0,
       isDisabled,
-      closeOnClick = true,
+      closeOnClick,
       closeOnScroll,
       closeOnMouseDown,
       closeOnEsc = true,

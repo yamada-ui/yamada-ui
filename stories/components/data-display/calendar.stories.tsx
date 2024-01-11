@@ -16,9 +16,8 @@ import {
   PopoverBody,
   Portal,
   VStack,
-  Card,
-  CardBody,
   Button,
+  Flex,
 } from "@yamada-ui/react"
 import { useRef, useState } from "react"
 import "dayjs/locale/ja"
@@ -259,8 +258,8 @@ export const withPaginateBy: Story = () => {
   return <Calendar amountOfMonths={3} disableOutsideDays paginateBy={1} />
 }
 
-export const withMaxSelectedValues: Story = () => {
-  return <Calendar defaultValue={[]} maxSelectedValues={3} />
+export const hiddenOutsideDays: Story = () => {
+  return <Calendar hiddenOutsideDays />
 }
 
 export const disabledOutsideDays: Story = () => {
@@ -284,7 +283,39 @@ export const disabledWeekdays: Story = () => {
 }
 
 export const useMultiValue: Story = () => {
-  return <Calendar defaultValue={[]} />
+  return (
+    <>
+      <Calendar enableMultiple />
+      <Calendar defaultValue={[]} />
+      <Calendar enableMultiple maxSelectedValues={3} />
+    </>
+  )
+}
+
+export const useRangeValue: Story = () => {
+  return (
+    <>
+      <Calendar enableRange />
+      <Calendar enableRange maxSelectedValues={3} />
+      <Calendar
+        enableRange
+        minDate={new Date(new Date().setDate(5))}
+        maxDate={new Date(new Date().setDate(25))}
+      />
+      <Calendar enableRange amountOfMonths={3} />
+    </>
+  )
+}
+
+export const useStrictRangeSelection: Story = () => {
+  return (
+    <Calendar
+      enableRange
+      minDate={new Date(new Date().setDate(8))}
+      strictRangeSelection
+      excludeDate={(date) => date.getDay() === 3}
+    />
+  )
 }
 
 export const useControl: Story = () => {
@@ -328,8 +359,16 @@ export const customControlMonth: Story = () => {
 
 export const customControlValue: Story = () => {
   const [value, onChange] = useState<Date>(new Date())
+  const [multiValue, onMultiChange] = useState<Date[]>([new Date()])
+  const [rangeValue, onRangeChange] = useState<[Date?, Date?]>([])
 
-  return <Calendar value={value} onChange={onChange} />
+  return (
+    <>
+      <Calendar value={value} onChange={onChange} />
+      <Calendar value={multiValue} onChange={onMultiChange} />
+      <Calendar enableRange value={rangeValue} onChange={onRangeChange} />
+    </>
+  )
 }
 
 export const customLabelButton: Story = () => {
@@ -443,10 +482,14 @@ export const customDayButton: Story = () => {
 
         <Calendar
           dayProps={{
-            component: ({ col, row, date }) => (
+            component: ({ isSelected, col, row, date }) => (
               <Text
                 as="span"
-                color={col === 3 || row === 3 ? "blue.500" : undefined}
+                color={
+                  !isSelected && (col === 3 || row === 3)
+                    ? "blue.500"
+                    : undefined
+                }
               >
                 {date.getDate()}
               </Text>
@@ -488,14 +531,16 @@ export const customDayButton: Story = () => {
                     </PopoverHeader>
                     <PopoverBody>
                       <VStack minW="sm" gap="sm">
-                        <Card
-                          variant="solid"
-                          colorScheme="secondary"
-                          size="sm"
+                        <Flex
+                          px="sm"
+                          bg="secondary"
+                          color="white"
+                          rounded="md"
+                          lineHeight="taller"
                           fontSize="sm"
                         >
-                          <CardBody>山田の誕生日</CardBody>
-                        </Card>
+                          <Text>山田の誕生日</Text>
+                        </Flex>
                       </VStack>
                     </PopoverBody>
                   </PopoverContent>
@@ -520,11 +565,15 @@ export const customDayButton: Story = () => {
           td: { border: "1px solid", borderColor: "border" },
         }}
         dayProps={{
+          variant: "ghost",
           h: "auto",
           p: 2,
-          _selected: undefined,
-          _hover: undefined,
-          _active: undefined,
+          _selected: {},
+          _hover: {},
+          _active: {},
+          _ripple: {
+            display: "none",
+          },
           transitionProperty: "none",
           component: ({ date, isSelected }) => (
             <VStack alignItems="center">
@@ -541,16 +590,16 @@ export const customDayButton: Story = () => {
               </Center>
 
               <VStack gap="sm">
-                <Card
-                  variant="solid"
-                  colorScheme="secondary"
-                  size="sm"
+                <Flex
+                  px="sm"
+                  bg="secondary"
+                  color="white"
+                  rounded="md"
+                  lineHeight="taller"
                   fontSize="sm"
                 >
-                  <CardBody>
-                    <Text>山田の誕生日</Text>
-                  </CardBody>
-                </Card>
+                  <Text>山田の誕生日</Text>
+                </Flex>
               </VStack>
             </VStack>
           ),

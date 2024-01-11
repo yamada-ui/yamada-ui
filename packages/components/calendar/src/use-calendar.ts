@@ -732,14 +732,10 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   if (!isMulti && value) {
     defaultMonth ??= new Date(new Date(value).setDate(1))
-  } else if (isRange && (value[0] || value[1])) {
-    if (value[1]) {
-      defaultMonth ??= new Date(new Date(value[1]).setDate(1))
-    } else {
-      defaultMonth ??= new Date(new Date(value[0]!).setDate(1))
-    }
-  } else if (isMulti && value.length) {
-    defaultMonth ??= new Date(new Date(value.at(-1)!).setDate(1))
+  } else if ((isMulti || isRange) && value.length) {
+    defaultMonth ??= new Date(
+      new Date(value.filter(Boolean).at(-1)!).setDate(1),
+    )
   } else {
     defaultMonth ??= new Date(new Date().setDate(1))
   }

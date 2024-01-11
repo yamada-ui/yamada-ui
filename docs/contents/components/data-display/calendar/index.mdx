@@ -477,9 +477,12 @@ To customize the control buttons, set `controlProps`, `prevProps`, or `nextProps
   dayProps={{
     h: "auto",
     p: 2,
-    _selected: undefined,
-    _hover: undefined,
-    _active: undefined,
+    _selected: {},
+    _hover: {},
+    _active: {},
+    _ripple: {
+      display: "none",
+    },
     transitionProperty: "none",
     component: ({ date, isSelected }) => (
       <VStack alignItems="center">

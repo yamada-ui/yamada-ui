@@ -450,8 +450,13 @@ return <Calendar value={value} onChange={onChange} />
 
   <Calendar
     dayProps={{
-      component: ({ col, row, date }) => (
-        <Text as="span" color={col === 3 || row === 3 ? "blue.500" : undefined}>
+      component: ({ isSelected, col, row, date }) => (
+        <Text
+          as="span"
+          color={
+            !isSelected && (col === 3 || row === 3) ? "blue.500" : undefined
+          }
+        >
           {date.getDate()}
         </Text>
       ),
@@ -501,11 +506,12 @@ return <Calendar value={value} onChange={onChange} />
         <List w="full" gap="sm">
           <ListItem
             w="full"
+            py="1"
+            px="2"
             bg="secondary"
             color="white"
             fontSize="sm"
-            textAlign="center"
-            px="2"
+            lineHeight="taller"
             rounded="md"
           >
             誕生日

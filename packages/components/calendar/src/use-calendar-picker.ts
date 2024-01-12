@@ -30,6 +30,7 @@ import type {
   FocusEventHandler,
   KeyboardEvent,
   KeyboardEventHandler,
+  MouseEvent,
 } from "react"
 import { useCallback, useRef, useState } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
@@ -85,6 +86,18 @@ type UseCalendarPickerOptions = {
    * Props for calendar component.
    */
   calendarProps?: CalendarBaseProps
+  /**
+   * The callback invoked when date picker clear icon clicked.
+   *
+   * @private
+   */
+  onClear?: () => void
+  /**
+   * The callback invoked when you hit the `Enter` key.
+   *
+   * @private
+   */
+  onEnter?: () => void
 }
 
 type UseCalendarPickerBaseProps<
@@ -120,7 +133,7 @@ export type UseCalendarPickerProps<
   UseCalendarPickerBaseProps<T>
 
 export const useCalendarPicker = <T extends UseCalendarProps<any>>(
-  props: UseCalendarPickerProps<T> & { onClear?: () => void },
+  props: UseCalendarPickerProps<T>,
 ) => {
   const { theme } = useTheme()
 
@@ -173,7 +186,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     inputFormat = "YYYY/MM/DD",
     onOpen: onOpenProp,
     onClose: onCloseProp,
-    onClear,
+    onClear: onClearProp,
+    onEnter,
     ...rest
   } = useFormControlProps(props)
 
@@ -272,8 +286,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       if (disabled || readOnly) return
 
       const actions: Record<string, Function | undefined> = {
-        Space: isOpen ? onClose : onOpen,
-        Enter: isOpen ? onClose : onOpen,
+        Space: !isOpen ? onOpen : undefined,
+        Enter: !isOpen ? onOpen : onEnter,
         Escape: closeOnEsc ? onClose : undefined,
       }
 
@@ -286,7 +300,18 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       action(ev)
     },
-    [closeOnEsc, disabled, readOnly, isOpen, onClose, onOpen],
+    [closeOnEsc, disabled, readOnly, isOpen, onClose, onEnter, onOpen],
+  )
+
+  const onClear = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.stopPropagation()
+
+      onClearProp?.()
+
+      if (isOpen && inputRef.current) inputRef.current.focus()
+    },
+    [isOpen, onClearProp],
   )
 
   useOutsideClick({
@@ -435,16 +460,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       ({ clear, ...props }) => ({
         ...props,
         ...formControlProps,
-        onClick: handlerAll(
-          props.onClick,
-          clear
-            ? (ev) => {
-                ev.stopPropagation()
-
-                onClear?.()
-              }
-            : undefined,
-        ),
+        onClick: handlerAll(props.onClick, clear ? onClear : undefined),
       }),
       [formControlProps, onClear],
     )

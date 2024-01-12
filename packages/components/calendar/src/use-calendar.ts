@@ -286,6 +286,12 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
    * @default false
    */
   strictRangeSelection?: boolean
+  /**
+   * Changes the judgment of the currently selected year and month.
+   * This is an internal utility primarily used by `MonthPicker`.
+   *
+   * @private
+   */
   selectMonthWith?: "month" | "value"
 }
 

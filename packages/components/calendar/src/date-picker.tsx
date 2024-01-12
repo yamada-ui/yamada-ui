@@ -57,11 +57,7 @@ type DatePickerOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type DatePickerProps = Omit<
-  HTMLUIProps<"input">,
-  keyof UseDatePickerProps
-> &
-  ThemeProps<"DatePicker"> &
+export type DatePickerProps = ThemeProps<"DatePicker"> &
   DatePickerOptions &
   UseDatePickerProps
 

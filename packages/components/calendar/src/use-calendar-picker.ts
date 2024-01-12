@@ -211,6 +211,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         parseDate?.(value) ?? dayjs(value, inputFormat, locale).toDate()
 
       if (date == null) return undefined
+      if (excludeDate?.(date)) return undefined
 
       if (!allowInputBeyond) {
         if (maxDate && isAfterDate(date, maxDate)) date = maxDate
@@ -219,12 +220,21 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       return date
     },
-    [allowInputBeyond, inputFormat, locale, maxDate, minDate, parseDate],
+    [
+      allowInputBeyond,
+      excludeDate,
+      inputFormat,
+      locale,
+      maxDate,
+      minDate,
+      parseDate,
+    ],
   )
 
   const dateToString = useCallback(
     (value: Date | undefined): string | undefined => {
       if (value == null) return undefined
+      if (excludeDate?.(value)) return undefined
 
       if (!allowInputBeyond) {
         if (maxDate && isAfterDate(value, maxDate)) value = maxDate
@@ -235,7 +245,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         .locale(locale ?? "en")
         .format(inputFormat)
     },
-    [allowInputBeyond, inputFormat, locale, maxDate, minDate],
+    [allowInputBeyond, excludeDate, inputFormat, locale, maxDate, minDate],
   )
 
   const onOpen = useCallback(() => {

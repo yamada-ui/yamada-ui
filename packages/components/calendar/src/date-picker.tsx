@@ -171,8 +171,6 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
       display: "flex",
       alignItems: "center",
       ...styles.field,
-      cursor: "text",
-      ...styles.field,
     }
 
     return (

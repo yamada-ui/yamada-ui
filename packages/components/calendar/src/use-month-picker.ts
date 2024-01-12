@@ -156,7 +156,7 @@ export const useMonthPicker = ({
 
       setInputValue(inputValue)
 
-      if (dayjs(value).isValid()) {
+      if (!!value && dayjs(value).isValid()) {
         setValue(value)
       } else {
         setValue(undefined)

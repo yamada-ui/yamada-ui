@@ -87,24 +87,25 @@ type UseCalendarPickerOptions = {
   calendarProps?: CalendarBaseProps
 }
 
-type UseCalendarPickerBaseProps<T extends UseCalendarProps = UseCalendarProps> =
-  Omit<
-    PopoverProps,
-    | "initialFocusRef"
-    | "closeOnButton"
-    | "isOpen"
-    | "trigger"
-    | "autoFocus"
-    | "restoreFocus"
-    | "openDelay"
-    | "closeDelay"
-  > &
-    FormControlOptions &
-    T &
-    UseCalendarPickerOptions
+type UseCalendarPickerBaseProps<
+  T extends UseCalendarProps<any> = UseCalendarProps<any>,
+> = Omit<
+  PopoverProps,
+  | "initialFocusRef"
+  | "closeOnButton"
+  | "isOpen"
+  | "trigger"
+  | "autoFocus"
+  | "restoreFocus"
+  | "openDelay"
+  | "closeDelay"
+> &
+  FormControlOptions &
+  T &
+  UseCalendarPickerOptions
 
 export type UseCalendarPickerProps<
-  T extends UseCalendarProps = UseCalendarProps,
+  T extends UseCalendarProps<any> = UseCalendarProps<any>,
 > = Omit<
   HTMLUIProps<"input">,
   | keyof UseCalendarPickerBaseProps
@@ -118,7 +119,7 @@ export type UseCalendarPickerProps<
 > &
   UseCalendarPickerBaseProps<T>
 
-export const useCalendarPicker = <T extends UseCalendarProps>(
+export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   props: UseCalendarPickerProps<T> & { onClear?: () => void },
 ) => {
   const { theme } = useTheme()

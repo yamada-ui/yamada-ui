@@ -240,13 +240,16 @@ const extractPropertiesOfTypeName = async (
 
       const docTags = property.getJsDocTags()
 
+      const isPrivate = !!docTags.find(({ name }) => name === "private")
+
+      if (isPrivate) continue
+
+      const see = docTags.find(({ name }) => name === "see")?.text?.at(-1)?.text
       const defaultValue =
         docTags
           .find(({ name }) => name === "default")
           ?.text?.map(({ text }) => text)
           ?.join("\n") || undefined
-
-      const see = docTags.find(({ name }) => name === "see")?.text?.at(-1)?.text
 
       const nonNullableType = type.getNonNullableType()
 

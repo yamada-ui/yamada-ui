@@ -304,7 +304,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
     }, [label, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      paddingEnd: "2rem",
       h,
       minH,
       display: "flex",

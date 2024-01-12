@@ -309,7 +309,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     ])
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      paddingEnd: "2rem",
       h,
       minH,
       display: "flex",

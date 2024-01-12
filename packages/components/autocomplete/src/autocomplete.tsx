@@ -185,7 +185,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
     const { getInputProps } = useAutocompleteInput()
 
     const css: CSSUIObject = {
-      pe: "2rem",
+      paddingEnd: "2rem",
       h,
       minH,
       display: "flex",

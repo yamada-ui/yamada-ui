@@ -8,7 +8,7 @@
     },
     "closeOnClick": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": true,
       "required": false,
       "description": "If `true`, the tooltip will hide on click."
     },

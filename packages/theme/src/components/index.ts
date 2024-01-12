@@ -1,6 +1,5 @@
 import { Accordion } from "./accordion"
 import { Alert } from "./alert"
-import { AlphaSlider } from "./alpha-slider"
 import { Autocomplete } from "./autocomplete"
 import { Avatar } from "./avatar"
 import { Badge } from "./badge"
@@ -11,9 +10,6 @@ import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
 import { CloseButton } from "./close-button"
-import { ColorInput } from "./color-input"
-import { ColorPicker } from "./color-picker"
-import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
@@ -24,7 +20,6 @@ import { Editable } from "./editable"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
-import { HueSlider } from "./hue-slider"
 import { Indicator } from "./indicator"
 import { Input } from "./input"
 import { Kbd } from "./kbd"
@@ -51,8 +46,6 @@ import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
 import { Reorder } from "./reorder"
-import { Resizable } from "./resizable"
-import { SaturationSlider } from "./saturation-slider"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
@@ -68,9 +61,9 @@ import { Textarea } from "./textarea"
 import { Tooltip } from "./tooltip"
 
 export default {
+  Indicator,
   Accordion,
   Alert,
-  AlphaSlider,
   Autocomplete,
   Avatar,
   Badge,
@@ -81,9 +74,6 @@ export default {
   Carousel,
   Checkbox,
   CloseButton,
-  ColorInput,
-  ColorPicker,
-  ColorSwatch,
   Container,
   DatePicker,
   Dialog,
@@ -94,8 +84,6 @@ export default {
   FileInput,
   FormControl,
   Heading,
-  HueSlider,
-  Indicator,
   Input,
   Kbd,
   Link,
@@ -120,8 +108,6 @@ export default {
   RangeSlider,
   Rating,
   Reorder,
-  Resizable,
-  SaturationSlider,
   ScrollArea,
   SegmentedControl,
   Select,

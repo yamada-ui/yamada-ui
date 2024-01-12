@@ -1,11 +1,5 @@
 # @yamada-ui/radio
 
-## 1.0.7
-
-### Patch Changes
-
-- [#596](https://github.com/hirotomoyamada/yamada-ui/pull/596) [`f9ad7e4`](https://github.com/hirotomoyamada/yamada-ui/commit/f9ad7e4eea44a4c57ec6cae4fe83cf81689d4d80) Thanks [@matsu3m](https://github.com/matsu3m)! - Implement unique id generation for each radio element, independent of RadioGroup or FormControl.
-
 ## 1.0.6
 
 ### Patch Changes

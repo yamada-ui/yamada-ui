@@ -1,11 +1,5 @@
 # @yamada-ui/tooltip
 
-## 1.0.5
-
-### Patch Changes
-
-- [`d809ddb`](https://github.com/hirotomoyamada/yamada-ui/commit/d809ddbd088ec9f58678135938da83f9fa6a6a74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `Tooltip` component was hidden when clicked.
-
 ## 1.0.4
 
 ### Patch Changes

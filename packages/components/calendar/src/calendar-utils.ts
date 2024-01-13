@@ -173,22 +173,14 @@ export const isAfterMonth = (value: Date, date: Date | undefined) =>
 export const isBeforeMonth = (value: Date, date: Date | undefined) =>
   date instanceof Date && dayjs(value).startOf("month").isBefore(date)
 
-export const isInRange = ({
-  date,
-  minDate,
-  maxDate,
-}: {
-  date: Date
-  minDate?: Date
-  maxDate?: Date
-}) => {
+export const isInRange = (date: Date, minDate?: Date, maxDate?: Date) => {
   const hasMinDate = minDate instanceof Date
   const hasMaxDate = maxDate instanceof Date
 
   if (!hasMaxDate && !hasMinDate) return true
 
-  const minInRange = hasMinDate ? dayjs(date).isAfter(minDate) : true
-  const maxInRange = hasMaxDate ? dayjs(date).isBefore(maxDate) : true
+  const minInRange = hasMinDate ? isSomeAfterDate(date, minDate) : true
+  const maxInRange = hasMaxDate ? isSomeBeforeDate(date, maxDate) : true
 
   return maxInRange && minInRange
 }
@@ -305,56 +297,6 @@ export const getRangeLastDay = (
   const days = [...refs.current.keys()]
 
   return days[days.length - 1]
-}
-
-export const getRangeEnableDates = ({
-  startDate,
-  endDate,
-  minDate,
-  maxDate,
-  excludeDate,
-  isReversed,
-  maxSelectedValues,
-}: {
-  startDate: Date | undefined
-  endDate: Date | undefined
-  minDate?: Date
-  maxDate?: Date
-  maxSelectedValues?: number
-  excludeDate?: (date: Date) => boolean
-  isReversed?: boolean
-}): Date[] => {
-  if (!startDate || !endDate) {
-    if (!isReversed) {
-      return startDate ? [startDate] : []
-    } else {
-      return endDate ? [endDate] : []
-    }
-  }
-
-  const resolvedStartDate = dayjs(startDate).startOf("day")
-  const resolvedEndDate = dayjs(endDate).startOf("day")
-
-  const dates: Date[] = []
-
-  const n = Math.abs(resolvedStartDate.diff(resolvedEndDate, "day"))
-
-  let date = !isReversed ? resolvedStartDate : resolvedEndDate
-
-  for (let i = 0; i <= n; i++) {
-    if (!!maxSelectedValues && i >= maxSelectedValues) break
-
-    const d = (
-      !isReversed ? date.add(i, "day") : date.subtract(i, "day")
-    ).toDate()
-
-    if (isAfterDate(d, maxDate) || isBeforeDate(d, minDate)) break
-    if (excludeDate?.(d)) break
-
-    dates.push(d)
-  }
-
-  return sortDates(dates)
 }
 
 export const disableAllTabIndex = <T = any>(

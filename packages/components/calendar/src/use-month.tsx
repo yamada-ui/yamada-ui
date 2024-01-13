@@ -9,6 +9,7 @@ import {
   useUnmountEffect,
   isDisabled,
   getEventRelatedTarget,
+  isNumber,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { KeyboardEvent, MouseEvent } from "react"
@@ -16,12 +17,11 @@ import { createRef, useCallback, useRef } from "react"
 import {
   disableAllTabIndex,
   getFocused,
-  getRangeEnableDates,
   getRangeFirstDay,
   getRangeLastDay,
   isAfterDate,
   isDisabledDate,
-  isIncludeDates,
+  isInRange,
   isMonthInRange,
   isSameDate,
   isSameMonth,
@@ -52,7 +52,6 @@ export const useMonth = () => {
     maxSelectedValues,
     enableRange,
     hoveredValue,
-    strictRangeSelection,
     setHoveredValue,
   } = useCalendarContext()
 
@@ -75,20 +74,19 @@ export const useMonth = () => {
   const maybeEndDate = endDate ?? hoveredValue
   const isShouldBetween = rangeSelectedValue.length >= 1 && !!maybeEndDate
   const isShouldHovered = rangeSelectedValue.length === 1
-  const rangeDates = getRangeEnableDates({
-    startDate: maybeStartDate,
-    endDate: maybeEndDate,
-    isReversed,
-    maxSelectedValues,
-    minDate,
-    maxDate,
-    excludeDate: strictRangeSelection ? excludeDate : undefined,
-  })
-  const trulyStartDate =
-    !isReversed || rangeDates.length >= 2 ? rangeDates.at(0) : undefined
-  const trulyEndDate =
-    isReversed || rangeDates.length >= 2 ? rangeDates.at(-1) : undefined
   const hasAmountOfMonths = amountOfMonths >= 2
+  const minBetweenDate =
+    isNumber(maxSelectedValues) && isShouldHovered
+      ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+          .subtract(maxSelectedValues - 1, "day")
+          .toDate()
+      : undefined
+  const maxBetweenDate =
+    isNumber(maxSelectedValues) && isShouldHovered
+      ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+          .add(maxSelectedValues - 1, "day")
+          .toDate()
+      : undefined
 
   const onFocusPrev = useCallback(
     (targetIndex: number, targetMonth: number, targetDay: number) => {
@@ -364,8 +362,8 @@ export const useMonth = () => {
       const isToday = today && isSameDate(new Date(), value)
       const isDisabled = isDisabledDate({
         value,
-        minDate,
-        maxDate,
+        minDate: minBetweenDate ?? minDate,
+        maxDate: maxBetweenDate ?? maxDate,
         isOutside,
         excludeDate,
         disableOutsideDays,
@@ -374,19 +372,14 @@ export const useMonth = () => {
       const isFirstDate = value.getDate() === 1
       const isShouldFocus =
         (!isSelectedMonth && !isOutside && isFirstDate) || isSelected
+      const isStart = isRange && isSameDate(maybeStartDate, value)
+      const isEnd = isRange && isSameDate(maybeEndDate, value)
       const isBetween =
-        isShouldBetween && !isHidden && isIncludeDates(value, rangeDates)
-      const isEnd = isRange && isSameDate(trulyEndDate, value)
-      const isStart = isRange && isSameDate(trulyStartDate, value)
+        isShouldBetween &&
+        !isHidden &&
+        isInRange(value, maybeStartDate, maybeEndDate)
       const isTrulyEnd = isEnd && (!hasAmountOfMonths || !isOutside)
       const isTrulyStart = isStart && (!hasAmountOfMonths || !isOutside)
-      const enableClick =
-        !isRange ||
-        !rangeDates.length ||
-        selectedValue.length >= 2 ||
-        isEnd ||
-        isStart ||
-        isBetween
 
       const key = `${index}-${value.getMonth()}-${value.getDate()}`
 
@@ -414,10 +407,7 @@ export const useMonth = () => {
         "data-value": value ?? "",
         "data-disabled": dataAttr(isTrulyDisabled),
         "aria-disabled": ariaAttr(isTrulyDisabled),
-        onClick: handlerAll(
-          (ev) => (enableClick ? onClick(ev, value) : undefined),
-          props.onClick,
-        ),
+        onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
         onPointerEnter: handlerAll(
           () => onPointerEnter(value),
           props.onPointerEnter,
@@ -430,18 +420,19 @@ export const useMonth = () => {
       hiddenOutsideDays,
       isMulti,
       selectedValue,
+      hasAmountOfMonths,
       today,
+      minBetweenDate,
       minDate,
+      maxBetweenDate,
       maxDate,
       excludeDate,
       disableOutsideDays,
       isMax,
-      isShouldBetween,
-      rangeDates,
       isRange,
-      trulyEndDate,
-      trulyStartDate,
-      hasAmountOfMonths,
+      maybeStartDate,
+      maybeEndDate,
+      isShouldBetween,
       dayRefs,
       onClick,
       onPointerEnter,

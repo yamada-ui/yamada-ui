@@ -46,7 +46,6 @@ export type CalendarContext = Pick<
   | "today"
   | "selectMonthWith"
   | "enableRange"
-  | "strictRangeSelection"
 > &
   Pick<
     UseCalendarProps,
@@ -281,12 +280,6 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
    */
   enableRange?: boolean
   /**
-   * If `true`, it prevents range selection across invalid dates.
-   *
-   * @default false
-   */
-  strictRangeSelection?: boolean
-  /**
    * Changes the judgment of the currently selected year and month.
    * This is an internal utility primarily used by `MonthPicker`.
    *
@@ -331,7 +324,6 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   maxSelectedValues,
   enableMultiple = false,
   enableRange = false,
-  strictRangeSelection = false,
   selectMonthWith = "month",
   ...rest
 }: UseCalendarProps<Y>) => {
@@ -525,7 +517,6 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     maxSelectedValues,
     selectMonthWith,
     enableRange,
-    strictRangeSelection,
   }
 }
 

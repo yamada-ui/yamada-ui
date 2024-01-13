@@ -307,17 +307,6 @@ export const useRangeValue: Story = () => {
   )
 }
 
-export const useStrictRangeSelection: Story = () => {
-  return (
-    <Calendar
-      enableRange
-      minDate={new Date(new Date().setDate(8))}
-      strictRangeSelection
-      excludeDate={(date) => date.getDay() === 3}
-    />
-  )
-}
-
 export const useControl: Story = () => {
   const typeRef = useRef<() => void>(null)
   const prevRef = useRef<() => void>(null)

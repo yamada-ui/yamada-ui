@@ -373,7 +373,7 @@ export const useMonth = () => {
       const isShouldFocus =
         (!isSelectedMonth && !isOutside && isFirstDate) || isSelected
       const isStart = isRange && isSameDate(maybeStartDate, value)
-      const isEnd = isRange && isSameDate(maybeEndDate, value)
+      const isEnd = isRange && isSameDate(maybeEndDate, value) && !isStart
       const isBetween =
         isShouldBetween &&
         !isHidden &&

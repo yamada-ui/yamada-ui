@@ -1080,8 +1080,9 @@ export const useAutocomplete = <T extends string | string[] = string>({
       duration,
       trigger: "never",
       closeOnButton: false,
+      closeOnBlur,
     }),
-    [duration, isOpen, onClose, onOpen, placement, rest],
+    [duration, closeOnBlur, isOpen, onClose, onOpen, placement, rest],
   )
 
   const getContainerProps: UIPropGetter = useCallback(

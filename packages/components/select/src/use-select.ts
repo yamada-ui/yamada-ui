@@ -580,8 +580,9 @@ export const useSelect = <T extends MaybeValue = string>({
       duration,
       trigger: "never",
       closeOnButton: false,
+      closeOnBlur,
     }),
-    [duration, onClose, onOpen, placement, rest, isOpen],
+    [duration, closeOnBlur, onClose, onOpen, placement, rest, isOpen],
   )
 
   const getContainerProps: UIPropGetter = useCallback(

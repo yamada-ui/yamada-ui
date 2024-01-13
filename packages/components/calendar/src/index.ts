@@ -24,5 +24,7 @@ export {
 } from "./calendar-utils"
 export { DatePicker } from "./date-picker"
 export type { DatePickerProps } from "./date-picker"
+export { MultiDatePicker } from "./multi-date-picker"
+export type { MultiDatePickerProps } from "./multi-date-picker"
 export { MonthPicker } from "./month-picker"
 export type { MonthPickerProps } from "./month-picker"

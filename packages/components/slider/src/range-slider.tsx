@@ -193,12 +193,12 @@ export const useRangeSlider = ({
     isInteractive,
     isReversed,
     isVertical,
-    eventSource: null as "pointer" | "keyboard" | null,
     focusThumbOnChange,
     betweenThumbs,
     orientation,
   })
 
+  const eventSourceRef = useRef<"pointer" | "keyboard" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
 
@@ -281,7 +281,7 @@ export const useRangeSlider = ({
 
       const { min, max } = latestRef.current
 
-      latestRef.current.eventSource = "pointer"
+      eventSourceRef.current = "pointer"
 
       const { bottom, left, height, width } =
         trackRef.current.getBoundingClientRect()
@@ -389,16 +389,16 @@ export const useRangeSlider = ({
 
       action(ev)
 
-      latestRef.current.eventSource = "keyboard"
+      eventSourceRef.current = "keyboard"
     },
     [activeIndex, constrain, latestRef, stepDown, stepUp, tenStep],
   )
 
   useUpdateEffect(() => {
-    const { eventSource, values } = latestRef.current
+    const { values } = latestRef.current
 
-    if (eventSource === "keyboard") onChangeEnd(values)
-  }, [values, onChangeEnd])
+    if (eventSourceRef.current === "keyboard") onChangeEnd(values)
+  }, [values[0], values[1], onChangeEnd]) // Update values in to values[0],values[1]. Because if we uses values as dependency it will cause Maximum update depth
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {

@@ -55,7 +55,7 @@ export const useDatePicker = ({
   })
 
   const {
-    inputRef,
+    fieldRef,
     id,
     allowInput,
     pattern,
@@ -118,7 +118,7 @@ export const useDatePicker = ({
   )
 
   useUpdateEffect(() => {
-    if (inputRef.current && isActiveElement(inputRef.current)) return
+    if (fieldRef.current && isActiveElement(fieldRef.current)) return
 
     const inputValue = dateToString(value)
 

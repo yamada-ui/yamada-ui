@@ -85,7 +85,7 @@ export const useMonthPicker = ({
   })
 
   const {
-    inputRef,
+    fieldRef,
     id,
     allowInput,
     pattern,
@@ -166,7 +166,7 @@ export const useMonthPicker = ({
   )
 
   useUpdateEffect(() => {
-    if (inputRef.current && isActiveElement(inputRef.current)) return
+    if (fieldRef.current && isActiveElement(fieldRef.current)) return
 
     const inputValue = dateToString(value)
 

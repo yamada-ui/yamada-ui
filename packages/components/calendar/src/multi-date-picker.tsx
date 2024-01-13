@@ -199,8 +199,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
 
 type MultiDatePickerFieldOptions = {
   isOpen: boolean
-  value: Date[] | undefined
-  setValue: Dispatch<SetStateAction<Date[] | undefined>>
+  value: Date[]
+  setValue: Dispatch<SetStateAction<Date[]>>
   dateToString: (value: Date | undefined) => string | undefined
 }
 

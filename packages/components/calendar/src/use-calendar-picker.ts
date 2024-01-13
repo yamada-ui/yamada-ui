@@ -210,7 +210,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const fieldRef = useRef<HTMLInputElement>(null)
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -260,7 +260,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
     setIsOpen(true)
 
-    if (allowInput && inputRef.current) inputRef.current.focus()
+    if (allowInput && fieldRef.current) fieldRef.current.focus()
 
     onOpenProp?.()
   }, [allowInput, disabled, readOnly, onOpenProp])
@@ -273,7 +273,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const onClick = useCallback(() => {
     if (isOpen) {
-      if (allowInput && inputRef.current) inputRef.current.focus()
+      if (allowInput && fieldRef.current) fieldRef.current.focus()
     } else {
       onOpen()
     }
@@ -336,7 +336,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       onClearProp?.()
 
-      if (isOpen && inputRef.current) inputRef.current.focus()
+      if (isOpen && fieldRef.current) fieldRef.current.focus()
     },
     [isOpen, onClearProp],
   )
@@ -387,7 +387,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       }
 
       return {
-        ref: mergeRefs(ref, inputRef),
+        ref: mergeRefs(ref, fieldRef),
         tabIndex: !allowInput ? 0 : -1,
         ...props,
         ...formControlProps,
@@ -499,7 +499,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     pattern,
     inputProps,
     formControlProps,
-    inputRef,
+    fieldRef,
     isOpen,
     onOpen,
     onClose,

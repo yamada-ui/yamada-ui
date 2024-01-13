@@ -225,7 +225,7 @@ export const isDisabled: Story = () => {
       <MultiDatePicker isDisabled variant="flushed" placeholder="flushed" />
       <MultiDatePicker isDisabled variant="unstyled" placeholder="unstyled" />
 
-      <FormControl isDisabled label="What is your birthday?">
+      <FormControl isDisabled label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
     </>
@@ -240,7 +240,7 @@ export const isReadonly: Story = () => {
       <MultiDatePicker isReadOnly variant="flushed" placeholder="flushed" />
       <MultiDatePicker isReadOnly variant="unstyled" placeholder="unstyled" />
 
-      <FormControl isReadOnly label="What is your birthday?">
+      <FormControl isReadOnly label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
     </>
@@ -257,7 +257,7 @@ export const isInvalid: Story = () => {
 
       <FormControl
         isInvalid
-        label="What is your birthday?"
+        label="What date would you like to reserve?"
         errorMessage="This is required."
       >
         <MultiDatePicker placeholder="YYYY/MM/DD" />
@@ -275,6 +275,7 @@ export const withMinMaxDate: Story = () => {
     />
   )
 }
+
 export const withAllowInputBeyond: Story = () => {
   return (
     <MultiDatePicker
@@ -538,7 +539,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.multiDatePicker}
-        label="Birthday"
+        label="Date to reserve"
         errorMessage={errors.multiDatePicker?.message}
       >
         <Controller
@@ -580,7 +581,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         isInvalid={!!errors.multiDatePicker}
-        label="Birthday"
+        label="Date to reserve"
         errorMessage={errors.multiDatePicker?.message}
       >
         <Controller

@@ -98,6 +98,12 @@ type UseCalendarPickerOptions = {
    * @private
    */
   onEnter?: () => void
+  /**
+   * The callback invoked when you hit the `Backspace` key.
+   *
+   * @private
+   */
+  onDelete?: () => void
 }
 
 type UseCalendarPickerBaseProps<
@@ -188,6 +194,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     onClose: onCloseProp,
     onClear: onClearProp,
     onEnter,
+    onDelete,
     ...rest
   } = useFormControlProps(props)
 
@@ -299,6 +306,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         Space: !isOpen ? onOpen : undefined,
         Enter: !isOpen ? onOpen : onEnter,
         Escape: closeOnEsc ? onClose : undefined,
+        Backspace: onDelete,
       }
 
       const action = actions[ev.key]
@@ -310,7 +318,16 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       action(ev)
     },
-    [closeOnEsc, disabled, readOnly, isOpen, onClose, onEnter, onOpen],
+    [
+      closeOnEsc,
+      disabled,
+      readOnly,
+      isOpen,
+      onClose,
+      onEnter,
+      onDelete,
+      onOpen,
+    ],
   )
 
   const onClear = useCallback(

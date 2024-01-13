@@ -20,7 +20,7 @@ const getResolvedValue = (value: (Date | undefined)[]) => {
 }
 
 type CalendarProps = Omit<
-  UseCalendarProps<Date[] | undefined>,
+  UseCalendarProps<Date[]>,
   "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
 >
 
@@ -47,11 +47,13 @@ export const useMultiDatePicker = ({
 }: UseMultiDatePickerProps) => {
   const isComposition = useRef<boolean>(false)
   const draftValue = useRef<Date | undefined>(undefined)
-  const [value, setValue] = useControllableState<Date[] | undefined>({
+  const [value, setValue] = useControllableState<Date[]>({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,
   })
+  const [inputValue, setInputValue] = useState<string>("")
+  const isEmptyValue = !inputValue.length
 
   const resolvedValue = getResolvedValue([...(value ?? []), draftValue.current])
 
@@ -76,7 +78,7 @@ export const useMultiDatePicker = ({
     enableMultiple: true,
     value: resolvedValue,
     defaultValue,
-    onChange: (value: Date[] | undefined) => {
+    onChange: (value: Date[]) => {
       value = value?.filter((value) => !isSameDate(value, draftValue.current))
 
       setValue(value)
@@ -87,7 +89,7 @@ export const useMultiDatePicker = ({
       if (closeOnSelect && !!value?.length) onClose()
     },
     onClear: () => {
-      setValue(undefined)
+      setValue([])
       setInputValue("")
     },
     onClose: () => {
@@ -113,9 +115,12 @@ export const useMultiDatePicker = ({
       setInputValue("")
       draftValue.current = undefined
     },
+    onDelete: isEmptyValue
+      ? () => {
+          setValue((prev) => prev.slice(0, -1))
+        }
+      : undefined,
   })
-
-  const [inputValue, setInputValue] = useState<string>("")
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {

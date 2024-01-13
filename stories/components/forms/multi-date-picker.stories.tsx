@@ -509,7 +509,7 @@ export const customControlMonth: Story = () => {
 }
 
 export const customControlValue: Story = () => {
-  const [value, onChange] = useState<Date[] | undefined>([new Date()])
+  const [value, onChange] = useState<Date[]>([new Date()])
 
   return (
     <MultiDatePicker
@@ -521,7 +521,7 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { multiDatePicker: Date[] | undefined }
+  type Data = { multiDatePicker: Date[] }
 
   const {
     control,
@@ -559,7 +559,7 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { multiDatePicker: Date[] | undefined }
+  type Data = { multiDatePicker: Date[] }
 
   const defaultValues: Data = {
     multiDatePicker: [new Date()],

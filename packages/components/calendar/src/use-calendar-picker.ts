@@ -357,9 +357,9 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       duration,
       trigger: "never",
       closeOnButton: false,
-      closeOnBlur,
+      closeOnBlur: false,
     }),
-    [duration, closeOnBlur, isOpen, onClose, onOpen, placement, rest],
+    [duration, isOpen, onClose, onOpen, placement, rest],
   )
 
   const getFieldProps: UIPropGetter = useCallback(

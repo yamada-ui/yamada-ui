@@ -76,7 +76,7 @@ type TooltipOptions = {
   /**
    * If `true`, the tooltip will hide on click.
    *
-   * @default true
+   * @default false
    */
   closeOnClick?: boolean
   /**

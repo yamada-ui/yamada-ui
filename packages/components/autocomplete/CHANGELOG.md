@@ -1,5 +1,11 @@
 # @yamada-ui/autocomplete
 
+## 1.0.10
+
+### Patch Changes
+
+- [#617](https://github.com/hirotomoyamada/yamada-ui/pull/617) [`7054200`](https://github.com/hirotomoyamada/yamada-ui/commit/70542008dbff027e80f13abb6ae5956116e42e0c) Thanks [@KenyaMasuko](https://github.com/KenyaMasuko)! - Update jsDoc for MultiAutocomplete: Set 'closeOnSelect' default to 'false'
+
 ## 1.0.9
 
 ### Patch Changes

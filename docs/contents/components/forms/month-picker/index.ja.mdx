@@ -88,7 +88,7 @@ import { MonthPicker } from "@yamada-ui/calendar"
 デフォルトの値を設定する場合は、`defaultValue`に`Date`を設定します。
 
 ```tsx
-<MonthPicker defaultValue={new Date()} />
+<MonthPicker defaultValue={new Date()} placeholder="YYYY/MM" />
 ```
 
 ### デフォルトのタイプを変更する
@@ -107,7 +107,7 @@ import { MonthPicker } from "@yamada-ui/calendar"
 デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM/DD" defaultMonth={new Date("1993-08-18")} />
+<MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08-18")} />
 ```
 
 ### パターンを設定する
@@ -156,7 +156,7 @@ import "dayjs/locale/ja"
 ```
 
 ```tsx
-<MonthPicker locale="ja" />
+<MonthPicker locale="ja" placeholder="YYYY/MM" />
 ```
 
 :::note
@@ -220,7 +220,7 @@ import "dayjs/locale/ja"
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM/DD" placement="bottom-end" />
+<MonthPicker placeholder="YYYY/MM" placement="bottom-end" />
 ```
 
 ### オフセットを変更する
@@ -231,8 +231,8 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <MonthPicker placeholder="YYYY/MM/DD" gutter={32} />
-  <MonthPicker placeholder="YYYY/MM/DD" offset={[16, 16]} />
+  <MonthPicker placeholder="YYYY/MM" gutter={32} />
+  <MonthPicker placeholder="YYYY/MM" offset={[16, 16]} />
 </VStack>
 ```
 
@@ -293,9 +293,9 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <MonthPicker placeholder="YYYY/MM/DD" iconProps={{ color: "primary" }} />
+  <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
   <MonthPicker
-    placeholder="YYYY/MM/DD"
+    placeholder="YYYY/MM"
     iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
   />
 </VStack>

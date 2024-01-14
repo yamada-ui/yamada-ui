@@ -88,7 +88,7 @@ To change the size of the calendar, set the `calendarSize`.
 To set a default value, set a `Date` to `defaultValue`.
 
 ```tsx
-<MonthPicker defaultValue={new Date()} />
+<MonthPicker defaultValue={new Date()} placeholder="YYYY/MM" />
 ```
 
 ### Change Default Type
@@ -107,7 +107,7 @@ To change the default type, set `defaultType` to `month` or `year`. By default, 
 To set a default month, set a `Date` to `defaultMonth`.
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM/DD" defaultMonth={new Date("1993-08-18")} />
+<MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08-18")} />
 ```
 
 ### Set Pattern
@@ -156,7 +156,7 @@ import "dayjs/locale/ja"
 ```
 
 ```tsx
-<MonthPicker locale="ja" />
+<MonthPicker locale="ja" placeholder="YYYY/MM" />
 ```
 
 :::note
@@ -220,7 +220,7 @@ To disallow input, set `allowInput` to `false`.
 To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM/DD" placement="bottom-end" />
+<MonthPicker placeholder="YYYY/MM" placement="bottom-end" />
 ```
 
 ### Change Offset
@@ -231,8 +231,8 @@ Depending on the size of the element or the situation, you may want to change th
 
 ```tsx
 <VStack>
-  <MonthPicker placeholder="YYYY/MM/DD" gutter={32} />
-  <MonthPicker placeholder="YYYY/MM/DD" offset={[16, 16]} />
+  <MonthPicker placeholder="YYYY/MM" gutter={32} />
+  <MonthPicker placeholder="YYYY/MM" offset={[16, 16]} />
 </VStack>
 ```
 
@@ -293,9 +293,9 @@ To customize the icon, set `props` to `iconProps`.
 
 ```tsx
 <VStack>
-  <MonthPicker placeholder="YYYY/MM/DD" iconProps={{ color: "primary" }} />
+  <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
   <MonthPicker
-    placeholder="YYYY/MM/DD"
+    placeholder="YYYY/MM"
     iconProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
   />
 </VStack>

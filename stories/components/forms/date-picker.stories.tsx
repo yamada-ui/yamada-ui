@@ -435,6 +435,10 @@ export const disabledWeekdays: Story = () => {
   return <DatePicker placeholder="YYYY/MM/DD" withWeekdays={false} />
 }
 
+export const hiddenOutsideDays: Story = () => {
+  return <DatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+}
+
 export const customIcon: Story = () => {
   return (
     <>

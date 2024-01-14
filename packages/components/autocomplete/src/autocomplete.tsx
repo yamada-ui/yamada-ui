@@ -58,10 +58,7 @@ type AutocompleteOptions = {
 }
 
 export type AutocompleteProps = ThemeProps<"Autocomplete"> &
-  Omit<
-    UseAutocompleteProps<string>,
-    "maxSelectedValues" | "omitSelectedValues"
-  > &
+  Omit<UseAutocompleteProps<string>, "maxSelectValues" | "omitSelectedValues"> &
   AutocompleteOptions
 
 /**

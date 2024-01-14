@@ -141,7 +141,7 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
     /**
      * The maximum selectable value.
      */
-    maxSelectedValues?: number
+    maxSelectValues?: number
     /**
      * Props for select option element.
      */
@@ -156,7 +156,7 @@ export const useSelect = <T extends MaybeValue = string>({
   closeOnSelect = true,
   placeholderInOptions = true,
   omitSelectedValues = false,
-  maxSelectedValues,
+  maxSelectValues,
   isEmpty,
   placement = "bottom-start",
   duration = 0.2,
@@ -539,10 +539,10 @@ export const useSelect = <T extends MaybeValue = string>({
   useEffect(() => {
     if (!isMulti) return
 
-    if (!omitSelectedValues && isUndefined(maxSelectedValues)) return
+    if (!omitSelectedValues && isUndefined(maxSelectValues)) return
 
     const isAll = value.length > 0 && value.length === descendants.count()
-    const isMax = value.length === maxSelectedValues
+    const isMax = value.length === maxSelectValues
 
     if (isAll || isMax) {
       onClose()
@@ -556,7 +556,7 @@ export const useSelect = <T extends MaybeValue = string>({
     descendants,
     isMulti,
     onClose,
-    maxSelectedValues,
+    maxSelectValues,
   ])
 
   useUpdateEffect(() => {
@@ -580,8 +580,9 @@ export const useSelect = <T extends MaybeValue = string>({
       duration,
       trigger: "never",
       closeOnButton: false,
+      closeOnBlur,
     }),
-    [duration, onClose, onOpen, placement, rest, isOpen],
+    [duration, closeOnBlur, onClose, onOpen, placement, rest, isOpen],
   )
 
   const getContainerProps: UIPropGetter = useCallback(

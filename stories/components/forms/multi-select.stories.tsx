@@ -188,9 +188,9 @@ export const withOmitSelectedValues: Story = () => {
   )
 }
 
-export const withMaxSelectedValues: Story = () => {
+export const withMaxSelectValues: Story = () => {
   return (
-    <MultiSelect placeholder="キャラクターを選択" maxSelectedValues={3}>
+    <MultiSelect placeholder="キャラクターを選択" maxSelectValues={3}>
       <OptionGroup label="地球人">
         <Option value="孫悟空">孫悟空</Option>
         <Option value="孫悟飯">孫悟飯</Option>

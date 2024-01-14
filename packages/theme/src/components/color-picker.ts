@@ -1,92 +1,115 @@
-import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
+import { Input } from "./input"
+import { Menu } from "./menu"
 
-export const ColorPicker: ComponentMultiStyle = {
+export const ColorPicker: ComponentMultiStyle = mergeMultiStyle(Input, Menu, {
   baseStyle: {
-    container: { w: "full" },
-    saturationSlider: { maxW: "full" },
-    body: {},
-    sliders: { flex: "1" },
-    hueSlider: {},
-    alphaSlider: {},
-    eyeDropper: {
-      borderColor: "border",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
-      _hover: {
-        borderColor: ["blackAlpha.500", "whiteAlpha.400"],
-        _disabled: {
-          borderColor: "inherit",
+    container: {},
+    inner: {},
+    field: {
+      pr: "8",
+      pb: "px",
+      _focus: {
+        zIndex: "unset",
+      },
+      _readOnly: {
+        pointerEvents: "none",
+        _placeholder: {
+          color: "inherit !important",
         },
       },
     },
-    result: {},
-    channels: {},
-    channelLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      fontWeight: "medium",
-    },
-    channel: {},
-    swatchesLabel: {
-      color: ["blackAlpha.700", "whiteAlpha.600"],
-      fontWeight: "medium",
-    },
-    swatches: {},
-    swatch: {
-      _readOnly: { cursor: "auto" },
-      _disabled: {
-        opacity: 0.6,
-        cursor: "not-allowed",
+    swatch: {},
+    eyeDropper: {
+      w: "6",
+      py: "1",
+      fontSize: "lg",
+      outline: 0,
+      rounded: "md",
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      pointerEvents: "auto",
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+      _hover: {
+        color: ["blackAlpha.500", "whiteAlpha.600"],
       },
+      _disabled: {
+        pointerEvents: "none",
+        opacity: 0.4,
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+    },
+    list: {
+      w: "auto",
+      minW: "auto",
+      maxH: "inherit",
+      overflowY: "inherit",
+      p: "2",
     },
   },
 
   sizes: {
-    sm: {
-      container: { w: "xs", gap: "sm" },
-      body: { gap: "xs" },
-      sliders: { gap: "xs" },
-      channels: { gap: "xs" },
-      eyeDropper: { boxSize: "7", fontSize: "xs" },
-      result: { boxSize: "7" },
-      channelLabel: { fontSize: "xs" },
-      swatchesLabel: { fontSize: "xs" },
-      swatches: { gap: "xs" },
-    },
-    md: {
-      container: { w: "sm", gap: "sm" },
-      body: { gap: "sm" },
-      sliders: { gap: "sm" },
-      channels: { gap: "sm" },
-      eyeDropper: { boxSize: "10" },
-      result: { boxSize: "10" },
-      channelLabel: { fontSize: "sm", mb: "xs" },
-      swatchesLabel: { fontSize: "sm", mb: "xs" },
-      swatches: { gap: "sm" },
-    },
-    lg: {
-      container: { w: "md", gap: "md" },
-      body: { gap: "sm" },
-      sliders: { gap: "sm" },
-      channels: { gap: "sm" },
-      eyeDropper: { boxSize: "12", fontSize: "xl" },
-      result: { boxSize: "12" },
-      channelLabel: { fontSize: "md", mb: "xs" },
-      swatchesLabel: { fontSize: "md", mb: "xs" },
-      swatches: { gap: "sm" },
-    },
-    full: {
-      container: { w: "full", gap: "md" },
-      body: { gap: "sm" },
-      sliders: { gap: "sm" },
-      channels: { gap: "sm" },
-      eyeDropper: { boxSize: "12", fontSize: "xl" },
-      result: { boxSize: "12" },
-      channelLabel: { fontSize: "md", mb: "xs" },
-      swatchesLabel: { fontSize: "md", mb: "xs" },
-      swatches: { gap: "sm" },
-    },
+    xs: ({ withSwatch }) => ({
+      field: {
+        pl: withSwatch ? "6" : "2",
+      },
+      swatch: {
+        insetStart: "1",
+        boxSize: "4",
+      },
+      eyeDropper: {
+        insetEnd: "1",
+        fontSize: "sm",
+      },
+    }),
+    sm: ({ withSwatch }) => ({
+      field: {
+        pl: withSwatch ? "9" : "2",
+      },
+      swatch: {
+        insetStart: "2",
+        boxSize: "5",
+      },
+      eyeDropper: {
+        insetEnd: "2",
+      },
+    }),
+    md: ({ withSwatch }) => ({
+      field: {
+        pl: withSwatch ? "10" : "3",
+      },
+      swatch: {
+        insetStart: "2",
+        boxSize: "6",
+      },
+      eyeDropper: {
+        insetEnd: "2",
+      },
+    }),
+    lg: ({ withSwatch }) => ({
+      field: {
+        pl: withSwatch ? "12" : "4",
+      },
+      swatch: {
+        insetStart: "2",
+      },
+      eyeDropper: {
+        insetEnd: "2",
+      },
+    }),
   },
-
-  defaultProps: {
-    size: "md",
-  },
-}
+})({
+  omit: [
+    "addon",
+    "element",
+    "button",
+    "item",
+    "command",
+    "icon",
+    "divider",
+    "group",
+    "groupLabel",
+  ],
+})

@@ -5,164 +5,269 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
-import type { ForwardedRef } from "react"
-import type { ColorPickerBodyProps } from "./color-picker-body"
-import { ColorPickerBody } from "./color-picker-body"
-import { ColorPickerChannels } from "./color-picker-channels"
-import type { ColorPickerSwatchesProps } from "./color-picker-swatches"
-import { ColorPickerSwatches } from "./color-picker-swatches"
-import type { SaturationSliderProps } from "./saturation-slider"
-import { SaturationSlider } from "./saturation-slider"
+import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
+import { Portal, type PortalProps } from "@yamada-ui/portal"
+import {
+  cx,
+  getValidChildren,
+  isValidElement,
+  omitObject,
+} from "@yamada-ui/utils"
+import { cloneElement } from "react"
+import { ColorSelector } from "./color-selector"
+import { EyeDropperIcon } from "./color-selector-eye-dropper"
+import type { ColorSwatchProps } from "./color-swatch"
+import { ColorSwatch } from "./color-swatch"
 import type { UseColorPickerProps } from "./use-color-picker"
-import { ColorPickerProvider, useColorPicker } from "./use-color-picker"
+import {
+  ColorPickerProvider,
+  useColorPicker,
+  useColorPickerContext,
+} from "./use-color-picker"
 
 type ColorPickerOptions = {
   /**
-   * If `true`, display the saturation, hue, alpha, channels and eye dropper component.
+   * If `true`, display the color swatch component.
    *
    * @default true
    */
-  withPicker?: boolean
+  withSwatch?: boolean
   /**
-   * If `true`, display the channels component.
+   * If `true`, display the eye dropper component.
    *
    * @default true
    */
-  withChannel?: boolean
+  withEyeDropper?: boolean
   /**
-   * Props for the color picker input element.
+   * The border color when the input is focused.
+   */
+  focusBorderColor?: string
+  /**
+   * The border color when the input is invalid.
+   */
+  errorBorderColor?: string
+  /**
+   * Props for color picker container element.
+   */
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
+   * Props for color picker element.
    */
   inputProps?: HTMLUIProps<"input">
   /**
-   * Ref for the saturation slider component.
+   * Props for color swatch component.
    */
-  saturationSliderRef?: ForwardedRef<HTMLInputElement>
+  swatchProps?: ColorPickerSwatchProps
   /**
-   * Props for the saturation slider component.
+   * Props for color eye dropper component.
    */
-  saturationSliderProps?: Omit<SaturationSliderProps, "value" | "defaultValue">
+  eyeDropperProps?: ColorPickerEyeDropperProps
   /**
-   * Props for the swatches component.
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
    */
-  swatchesProps?: ColorPickerSwatchesProps
+  portalProps?: Omit<PortalProps, "children">
 }
 
 export type ColorPickerProps = ThemeProps<"ColorPicker"> &
   UseColorPickerProps &
-  ColorPickerOptions &
-  Pick<
-    ColorPickerBodyProps,
-    | "withResult"
-    | "withEyeDropper"
-    | "eyeDropperRef"
-    | "eyeDropperProps"
-    | "hueSliderRef"
-    | "hueSliderProps"
-    | "alphaSliderRef"
-    | "alphaSliderProps"
-  > &
-  Pick<
-    ColorPickerSwatchesProps,
-    "swatchesLabel" | "swatches" | "swatchesColumns" | "swatchProps"
-  >
+  ColorPickerOptions
 
 /**
- * `ColorPicker` is a component used by the user to select a color.
+ * `ColorPicker` is a component used by the user to select a color or enter an arbitrary color value.
  *
  * @see Docs https://yamada-ui.com/components/forms/color-picker
  */
 export const ColorPicker = forwardRef<ColorPickerProps, "input">(
-  ({ size, ...props }, ref) => {
+  ({ withSwatch = true, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("ColorPicker", {
-      size,
+      withSwatch,
       ...props,
     })
-    const {
+    let {
       className,
-      withResult = true,
-      withPicker = true,
-      withChannel = true,
-      swatches,
-      swatchesColumns = 7,
+      withEyeDropper = true,
+      color,
+      h,
+      height,
+      minH,
+      minHeight,
+      containerProps,
       inputProps,
-      withEyeDropper,
-      eyeDropperRef,
-      eyeDropperProps,
-      saturationSliderRef,
-      saturationSliderProps,
-      hueSliderRef,
-      hueSliderProps,
-      alphaSliderRef,
-      alphaSliderProps,
-      swatchesLabel,
       swatchProps,
-      swatchesProps,
+      eyeDropperProps,
+      portalProps = { isDisabled: true },
       ...computedProps
-    } = omitThemeProps(mergedProps)
+    } = omitThemeProps(omitObject(mergedProps, ["withSwatch"]))
     const {
+      allowInput,
+      getPopoverProps,
       getContainerProps,
-      getInputProps,
-      getSaturationSliderProps,
+      getFieldProps,
+      getSelectorProps,
+      getEyeDropperProps,
       ...rest
     } = useColorPicker(computedProps)
 
+    h ??= height
+    minH ??= minHeight
+
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
+      w: "100%",
+      h: "fit-content",
+      color,
       ...styles.container,
     }
 
     return (
-      <ColorPickerProvider value={{ styles, size, ...rest }}>
-        <ui.div
-          ref={ref}
-          className={cx("ui-color-picker", className)}
-          __css={css}
-          {...getContainerProps()}
-        >
-          <ui.input {...getInputProps(inputProps, ref)} />
-
-          {withPicker ? (
-            <SaturationSlider
-              size={size}
-              className="ui-color-picker__saturation-slider"
-              __css={{ ...styles.saturationSlider }}
-              {...getSaturationSliderProps(
-                saturationSliderProps,
-                saturationSliderRef,
-              )}
-            />
-          ) : null}
-
-          {withPicker ? (
-            <ColorPickerBody
-              {...{
-                withResult,
-                withEyeDropper,
-                eyeDropperRef,
-                eyeDropperProps,
-                hueSliderRef,
-                hueSliderProps,
-                alphaSliderRef,
-                alphaSliderProps,
+      <ColorPickerProvider value={{ styles, ...rest }}>
+        <Popover {...getPopoverProps()}>
+          <ui.div
+            className={cx("ui-color-picker", className)}
+            __css={css}
+            {...getContainerProps(containerProps)}
+          >
+            <ui.div
+              className="ui-color-picker__inner"
+              __css={{
+                position: "relative",
+                cursor: !allowInput ? "pointer" : undefined,
+                ...styles.inner,
               }}
-            />
-          ) : null}
+            >
+              {withSwatch ? <ColorPickerSwatch {...swatchProps} /> : null}
 
-          {withPicker && withChannel ? <ColorPickerChannels /> : null}
+              <PopoverTrigger>
+                <ColorPickerField
+                  h={h}
+                  minH={minH}
+                  {...getFieldProps(inputProps, ref)}
+                />
+              </PopoverTrigger>
 
-          <ColorPickerSwatches
-            {...{
-              swatchesLabel,
-              swatches,
-              swatchesColumns,
-              swatchProps,
-              ...swatchesProps,
-            }}
-          />
-        </ui.div>
+              {withEyeDropper ? (
+                <ColorPickerEyeDropper
+                  {...getEyeDropperProps(eyeDropperProps)}
+                />
+              ) : null}
+            </ui.div>
+
+            <Portal {...portalProps}>
+              <PopoverContent
+                className="ui-color-picker__popover"
+                __css={{ ...styles.list }}
+              >
+                <ColorSelector
+                  className="ui-color-picker__picker"
+                  {...getSelectorProps()}
+                />
+              </PopoverContent>
+            </Portal>
+          </ui.div>
+        </Popover>
       </ColorPickerProvider>
+    )
+  },
+)
+
+type ColorPickerFieldProps = HTMLUIProps<"input">
+
+const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
+  ({ className, h, minH, ...rest }, ref) => {
+    const { styles } = useColorPickerContext()
+
+    const css: CSSUIObject = {
+      ps: "2rem",
+      pe: "2rem",
+      h,
+      minH,
+      display: "flex",
+      alignItems: "center",
+      ...styles.field,
+    }
+
+    return (
+      <ui.input
+        ref={ref}
+        className={cx("ui-color-picker__field", className)}
+        __css={css}
+        {...rest}
+      />
+    )
+  },
+)
+
+type ColorPickerSwatchProps = ColorSwatchProps
+
+const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
+  ({ className, ...rest }, ref) => {
+    const { value, styles } = useColorPickerContext()
+
+    const css: CSSUIObject = {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      ...styles.swatch,
+    }
+
+    return (
+      <ColorSwatch
+        ref={ref}
+        className={cx("ui-color-picker__swatch", className)}
+        __css={css}
+        color={value}
+        isRounded
+        {...rest}
+      />
+    )
+  },
+)
+
+type ColorPickerEyeDropperProps = HTMLUIProps<"button">
+
+const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
+  ({ className, children, ...rest }, ref) => {
+    const { styles } = useColorPickerContext()
+
+    const css: CSSUIObject = {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 1,
+      ...styles.eyeDropper,
+    }
+
+    const validChildren = getValidChildren(children)
+
+    const cloneChildren = validChildren.map((child) =>
+      cloneElement(child, {
+        focusable: false,
+        "aria-hidden": true,
+        style: {
+          maxWidth: "1em",
+          maxHeight: "1em",
+          color: "currentColor",
+        },
+      }),
+    )
+
+    return (
+      <ui.button
+        ref={ref}
+        className={cx("ui-color-picker__eye-dropper", className)}
+        __css={css}
+        {...rest}
+      >
+        {isValidElement(children) ? (
+          cloneChildren
+        ) : (
+          <EyeDropperIcon className="ui-color-picker__eye-dropper__icon" />
+        )}
+      </ui.button>
     )
   },
 )

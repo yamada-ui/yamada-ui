@@ -11,8 +11,8 @@ import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
 import { CloseButton } from "./close-button"
-import { ColorInput } from "./color-input"
 import { ColorPicker } from "./color-picker"
+import { ColorSelector } from "./color-selector"
 import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
 import { DatePicker } from "./date-picker"
@@ -81,8 +81,8 @@ export default {
   Carousel,
   Checkbox,
   CloseButton,
-  ColorInput,
   ColorPicker,
+  ColorSelector,
   ColorSwatch,
   Container,
   DatePicker,

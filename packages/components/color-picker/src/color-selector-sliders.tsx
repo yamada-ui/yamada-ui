@@ -6,9 +6,9 @@ import type { AlphaSliderProps } from "./alpha-slider"
 import { AlphaSlider } from "./alpha-slider"
 import type { HueSliderProps } from "./hue-slider"
 import { HueSlider } from "./hue-slider"
-import { useColorPickerContext } from "./use-color-picker"
+import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorPickerSlidersOptions = {
+type ColorSelectorSlidersOptions = {
   /**
    * Ref for the hue slider component.
    */
@@ -27,10 +27,13 @@ type ColorPickerSlidersOptions = {
   alphaSliderProps?: Omit<AlphaSliderProps, "value" | "defaultValue">
 }
 
-export type ColorPickerSlidersProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorPickerSlidersOptions
+export type ColorSelectorSlidersProps = Omit<HTMLUIProps<"div">, "children"> &
+  ColorSelectorSlidersOptions
 
-export const ColorPickerSliders = forwardRef<ColorPickerSlidersProps, "div">(
+export const ColorSelectorSliders = forwardRef<
+  ColorSelectorSlidersProps,
+  "div"
+>(
   (
     {
       className,
@@ -43,7 +46,7 @@ export const ColorPickerSliders = forwardRef<ColorPickerSlidersProps, "div">(
     ref,
   ) => {
     let { size, withAlpha, getHueSliderProps, getAlphaSliderProps, styles } =
-      useColorPickerContext()
+      useColorSelectorContext()
 
     if (size === "full") size = "lg"
 
@@ -56,13 +59,13 @@ export const ColorPickerSliders = forwardRef<ColorPickerSlidersProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-color-picker__sliders", className)}
+        className={cx("ui-color-selector__sliders", className)}
         __css={css}
         {...rest}
       >
         <HueSlider
           size={size}
-          className="ui-color-picker__hue-slider"
+          className="ui-color-selector__hue-slider"
           __css={{ ...styles.hueSlider }}
           {...getHueSliderProps(hueSliderProps, hueSliderRef)}
         />
@@ -70,7 +73,7 @@ export const ColorPickerSliders = forwardRef<ColorPickerSlidersProps, "div">(
         {withAlpha ? (
           <AlphaSlider
             size={size}
-            className="ui-color-picker__alpha-slider"
+            className="ui-color-selector__alpha-slider"
             __css={{ ...styles.alphaSlider }}
             {...getAlphaSliderProps(alphaSliderProps, alphaSliderRef)}
           />

@@ -42,7 +42,7 @@ export type UseRangeDatePickerProps = UseCalendarPickerProps<CalendarProps> &
 
 export const useRangeDatePicker = ({
   value: valueProp,
-  defaultValue,
+  defaultValue = [],
   onChange: onChangeProp,
   placeholder,
   startPlaceholder,
@@ -127,7 +127,7 @@ export const useRangeDatePicker = ({
       rest.onClick?.(ev)
     },
     onClose: () => {
-      const [startValue, endValue] = draftValue.current ?? value
+      const [startValue, endValue] = draftValue.current ?? value ?? []
 
       setStartInputValue(dateToString(startValue) ?? "")
       setEndInputValue(dateToString(endValue) ?? "")

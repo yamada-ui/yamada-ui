@@ -1,5 +1,13 @@
 # @yamada-ui/calendar
 
+## 1.1.1
+
+### Patch Changes
+
+- [#620](https://github.com/hirotomoyamada/yamada-ui/pull/620) [`ab0a97c`](https://github.com/hirotomoyamada/yamada-ui/commit/ab0a97c5b415ef3af3150ec6f54cc50dffdbd890) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `hiddenOutsideDays` was not working.
+
+- [#620](https://github.com/hirotomoyamada/yamada-ui/pull/620) [`02281c1`](https://github.com/hirotomoyamada/yamada-ui/commit/02281c131992c2df06fa533c89eee266714217b2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `defaultValue` to `RangeDatePicker`.
+
 ## 1.1.0
 
 ### Minor Changes

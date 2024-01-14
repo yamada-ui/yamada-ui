@@ -288,6 +288,7 @@ export const useMultiValue: Story = () => {
       <Calendar enableMultiple />
       <Calendar defaultValue={[]} />
       <Calendar enableMultiple maxSelectedValues={3} />
+      <Calendar enableMultiple amountOfMonths={3} />
     </>
   )
 }

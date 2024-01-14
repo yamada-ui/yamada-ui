@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.0.1
     version: 1.0.2
   '@yamada-ui/calendar':
-    specifier: 1.1.0
-    version: 1.1.0(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.1.1
+    version: 1.1.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/carousel':
     specifier: 1.0.6
     version: 1.0.6(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -34,10 +34,10 @@ dependencies:
     version: 1.0.5(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/nextjs':
     specifier: 5.0.5
-    version: 5.0.5(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.6)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
+    version: 5.0.5(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.7)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
-    specifier: 1.1.6
-    version: 1.1.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.18.0)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.1.7
+    version: 1.1.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.18.0)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
     specifier: 1.0.9
     version: 1.0.9(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
@@ -2199,8 +2199,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/autocomplete@1.0.9(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-iqdoR2RJ0kvZgtEE7IQHtDSAQTJjIInuiyf6Uvvi3pBWaRxNfdSqCTd9Fo8gu4Cny5kqV8uQskEA1jw2ojdWDw==}
+  /@yamada-ui/autocomplete@1.0.10(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hQjBHZ9TtePsJ8fy646r4tKUiw7/jdFxfd0d8SiNz9OOr1xOhMuV3EDRg4WBJwRi6CRBZV8abYKF+/hs27F3RA==}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2278,8 +2278,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/calendar@1.1.0(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-4/AEfXP0LtNUNFjq2qLwbcaEGUF6qw+gH9onLrlJwP+ue3BBkACyyBKaGIyyKaemUTiKxbbD+7i99E/XBnppTA==}
+  /@yamada-ui/calendar@1.1.1(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-wJpPG3ZanezT1Kyv+zrhEVp9pTA8Ps2BAXywHM/8C4dcsRWuq7Ng1gzfd9rhu6NU7kteGzFqKW2amL1ipykWSQ==}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2751,7 +2751,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/nextjs@5.0.5(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.6)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/nextjs@5.0.5(@emotion/react@11.11.3)(@types/react@18.2.46)(@yamada-ui/react@1.1.7)(next@14.0.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-n48xwmifLQEIVkkNZ9VyI+Qy3g4nRD/tzAhmHLroEkKNeqh4O531APy0yrpX0g/MB8SXfjPNIbtWRp5opLXhcQ==}
     peerDependencies:
       '@emotion/react': '>=11'
@@ -2762,7 +2762,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.3(@types/react@18.2.46)(react@18.2.0)
       '@yamada-ui/core': 1.1.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 1.1.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.18.0)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 1.1.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.18.0)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.2(react@18.2.0)
       next: 14.0.3(@opentelemetry/api@1.7.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -2944,8 +2944,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@1.1.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.18.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-HBmsEqy94wXe65A5R4qmeo3QK4Q19iHF+/RphUoMV3o+ZswrDu3BZpfQEjSd9bmvjvMfm8fam0RDJCMsUif/Xw==}
+  /@yamada-ui/react@1.1.7(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(framer-motion@10.18.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-60YE4Lwpx/hvfcXW43jB9HbcR0J/lCJjBnL9NbSHAccCZWA3L2lNu0X8o7KlkcgQLkWjwu9nwufLHR17CKlplA==}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -2957,7 +2957,7 @@ packages:
       '@emotion/styled': 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.46)(react@18.2.0)
       '@yamada-ui/accordion': 1.0.5(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/alert': 1.0.5(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/autocomplete': 1.0.9(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/autocomplete': 1.0.10(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/avatar': 1.1.4(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/badge': 1.0.5(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/breadcrumb': 1.0.5(@types/react@18.2.46)(react-dom@18.2.0)(react@18.2.0)

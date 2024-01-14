@@ -297,6 +297,16 @@
     }
   },
   {
+    "title": "Hide Dates Outside the Current Month",
+    "type": "fragment",
+    "slug": "/components/data-display/calendar#hide-dates-outside-the-current-month",
+    "hierarchy": {
+      "lv1": "Calendar",
+      "lv2": "Usage",
+      "lv3": "Hide Dates Outside the Current Month"
+    }
+  },
+  {
     "title": "Change the Number of Months Displayed",
     "type": "fragment",
     "slug": "/components/data-display/calendar#change-the-number-of-months-displayed",
@@ -317,13 +327,23 @@
     }
   },
   {
-    "title": "Allow Multiple Selection",
+    "title": "Enable Multiple Selection",
     "type": "fragment",
-    "slug": "/components/data-display/calendar#allow-multiple-selection",
+    "slug": "/components/data-display/calendar#enable-multiple-selection",
     "hierarchy": {
       "lv1": "Calendar",
       "lv2": "Usage",
-      "lv3": "Allow Multiple Selection"
+      "lv3": "Enable Multiple Selection"
+    }
+  },
+  {
+    "title": "Enable Range Selection",
+    "type": "fragment",
+    "slug": "/components/data-display/calendar#enable-range-selection",
+    "hierarchy": {
+      "lv1": "Calendar",
+      "lv2": "Usage",
+      "lv3": "Enable Range Selection"
     }
   },
   {
@@ -2409,13 +2429,13 @@
     "hierarchy": { "lv1": "DatePicker", "lv2": "Usage", "lv3": "Set Pattern" }
   },
   {
-    "title": "Handle Parsing of Entered Value",
+    "title": "Handle Parsing of Entered Values",
     "type": "fragment",
-    "slug": "/components/forms/date-picker#handle-parsing-of-entered-value",
+    "slug": "/components/forms/date-picker#handle-parsing-of-entered-values",
     "hierarchy": {
       "lv1": "DatePicker",
       "lv2": "Usage",
-      "lv3": "Handle Parsing of Entered Value"
+      "lv3": "Handle Parsing of Entered Values"
     }
   },
   {
@@ -2429,13 +2449,13 @@
     }
   },
   {
-    "title": "Allow Input Beyond Min and Max Range",
+    "title": "Allow Values Outside Minimum and Maximum Range",
     "type": "fragment",
-    "slug": "/components/forms/date-picker#allow-input-beyond-min-and-max-range",
+    "slug": "/components/forms/date-picker#allow-values-outside-minimum-and-maximum-range",
     "hierarchy": {
       "lv1": "DatePicker",
       "lv2": "Usage",
-      "lv3": "Allow Input Beyond Min and Max Range"
+      "lv3": "Allow Values Outside Minimum and Maximum Range"
     }
   },
   {
@@ -2491,13 +2511,13 @@
     }
   },
   {
-    "title": "Change Number of Months Displayed",
+    "title": "Change the Number of Months Displayed",
     "type": "fragment",
-    "slug": "/components/forms/date-picker#change-number-of-months-displayed",
+    "slug": "/components/forms/date-picker#change-the-number-of-months-displayed",
     "hierarchy": {
       "lv1": "DatePicker",
       "lv2": "Usage",
-      "lv3": "Change Number of Months Displayed"
+      "lv3": "Change the Number of Months Displayed"
     }
   },
   {
@@ -2558,6 +2578,16 @@
       "lv1": "DatePicker",
       "lv2": "Usage",
       "lv3": "Disable Dates Outside the Current Month"
+    }
+  },
+  {
+    "title": "Hide Dates Outside the Current Month",
+    "type": "fragment",
+    "slug": "/components/forms/date-picker#hide-dates-outside-the-current-month",
+    "hierarchy": {
+      "lv1": "DatePicker",
+      "lv2": "Usage",
+      "lv3": "Hide Dates Outside the Current Month"
     }
   },
   {
@@ -3875,6 +3905,387 @@
     }
   },
   {
+    "title": "MultiDatePicker",
+    "type": "page",
+    "description": "`MultiDatePicker` is a component used for users to select multiple dates.",
+    "slug": "/components/forms/multi-date-picker",
+    "hierarchy": { "lv1": "MultiDatePicker" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#import",
+    "hierarchy": { "lv1": "MultiDatePicker", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#usage",
+    "hierarchy": { "lv1": "MultiDatePicker", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-variant",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Variant"
+    }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-size",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Size"
+    }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-color-scheme",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Set Default Values",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-default-values",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Values"
+    }
+  },
+  {
+    "title": "Change Default Type",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-default-type",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Default Type"
+    }
+  },
+  {
+    "title": "Set Default Month",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-default-month",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Month"
+    }
+  },
+  {
+    "title": "Change First Day of the Week",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-first-day-of-the-week",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change First Day of the Week"
+    }
+  },
+  {
+    "title": "Set Pattern",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-pattern",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Pattern"
+    }
+  },
+  {
+    "title": "Handle Parsing of Entered Values",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#handle-parsing-of-entered-values",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Handle Parsing of Entered Values"
+    }
+  },
+  {
+    "title": "Set Minimum and Maximum Dates",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-minimum-and-maximum-dates",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Dates"
+    }
+  },
+  {
+    "title": "Allow Beyond Minimum and Maximum Range",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#allow-beyond-minimum-and-maximum-range",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Allow Beyond Minimum and Maximum Range"
+    }
+  },
+  {
+    "title": "Highlight Today's Date",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#highlight-todays-date",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Highlight Today's Date"
+    }
+  },
+  {
+    "title": "Set Weekend Days",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-weekend-days",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Weekend Days"
+    }
+  },
+  {
+    "title": "Set Holidays",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-holidays",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Holidays"
+    }
+  },
+  {
+    "title": "Exclude Specific Dates",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#exclude-specific-dates",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Exclude Specific Dates"
+    }
+  },
+  {
+    "title": "Set Locale",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-locale",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Locale"
+    }
+  },
+  {
+    "title": "Change Date Format",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-date-format",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Date Format"
+    }
+  },
+  {
+    "title": "Change the Number of Months Displayed",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-the-number-of-months-displayed",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change the Number of Months Displayed"
+    }
+  },
+  {
+    "title": "Change Pagination Unit",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-pagination-unit",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Pagination Unit"
+    }
+  },
+  {
+    "title": "Do Not Close Calendar on Blur",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#do-not-close-calendar-on-blur",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Do Not Close Calendar on Blur"
+    }
+  },
+  {
+    "title": "Disable Clearing",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#disable-clearing",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Disable Clearing"
+    }
+  },
+  {
+    "title": "Disallow Input",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#disallow-input",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Disallow Input"
+    }
+  },
+  {
+    "title": "Disable Dates Outside the Current Month",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#disable-dates-outside-the-current-month",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Disable Dates Outside the Current Month"
+    }
+  },
+  {
+    "title": "Hide Dates Outside the Current Month",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#hide-dates-outside-the-current-month",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Hide Dates Outside the Current Month"
+    }
+  },
+  {
+    "title": "Change Display Position",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-display-position",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Display Position"
+    }
+  },
+  {
+    "title": "Change Offset",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-offset",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Offset"
+    }
+  },
+  {
+    "title": "Change Border Color",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#change-border-color",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Border Color"
+    }
+  },
+  {
+    "title": "Customize Separator",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#customize-separator",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Customize Separator"
+    }
+  },
+  {
+    "title": "Always Show Placeholder",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#always-show-placeholder",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Always Show Placeholder"
+    }
+  },
+  {
+    "title": "Use Custom Component",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#use-custom-component",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Use Custom Component"
+    }
+  },
+  {
+    "title": "Set Maximum Number of Selectable Values",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#set-maximum-number-of-selectable-values",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Maximum Number of Selectable Values"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#disable",
+    "hierarchy": { "lv1": "MultiDatePicker", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#make-read-only",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Make Input Invalid",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#make-input-invalid",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Make Input Invalid"
+    }
+  },
+  {
+    "title": "Customize Icon",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#customize-icon",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Customize Icon"
+    }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#control",
+    "hierarchy": { "lv1": "MultiDatePicker", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
+  },
+  {
     "title": "MultiSelect",
     "type": "page",
     "description": "`MultiSelect` is a component used for allowing users to select multiple values from a list of options.",
@@ -4637,6 +5048,377 @@
     "slug": "/components/forms/radio#use-react-hook-form",
     "hierarchy": {
       "lv1": "Radio",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
+  },
+  {
+    "title": "RangeDatePicker",
+    "type": "page",
+    "description": "`RangeDatePicker` is a component used for users to select a range of dates.",
+    "slug": "/components/forms/range-date-picker",
+    "hierarchy": { "lv1": "RangeDatePicker" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#import",
+    "hierarchy": { "lv1": "RangeDatePicker", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#usage",
+    "hierarchy": { "lv1": "RangeDatePicker", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-variant",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Variant"
+    }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-size",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Size"
+    }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-color-scheme",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Set Default Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-default-values",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Values"
+    }
+  },
+  {
+    "title": "Change Default Type",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-default-type",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Default Type"
+    }
+  },
+  {
+    "title": "Set Default Month",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-default-month",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Month"
+    }
+  },
+  {
+    "title": "Change First Day of the Week",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-first-day-of-the-week",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change First Day of the Week"
+    }
+  },
+  {
+    "title": "Set Pattern",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-pattern",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Pattern"
+    }
+  },
+  {
+    "title": "Handle Parsing of Entered Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#handle-parsing-of-entered-values",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Handle Parsing of Entered Values"
+    }
+  },
+  {
+    "title": "Set Minimum and Maximum Dates",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-minimum-and-maximum-dates",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Dates"
+    }
+  },
+  {
+    "title": "Allow Input Beyond Minimum and Maximum Range",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#allow-input-beyond-minimum-and-maximum-range",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Allow Input Beyond Minimum and Maximum Range"
+    }
+  },
+  {
+    "title": "Highlight Today's Date",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#highlight-todays-date",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Highlight Today's Date"
+    }
+  },
+  {
+    "title": "Set Weekend Days",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-weekend-days",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Weekend Days"
+    }
+  },
+  {
+    "title": "Set Holidays",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-holidays",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Holidays"
+    }
+  },
+  {
+    "title": "Exclude Specific Dates",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#exclude-specific-dates",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Exclude Specific Dates"
+    }
+  },
+  {
+    "title": "Set Locale",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-locale",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Locale"
+    }
+  },
+  {
+    "title": "Change Date Format",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-date-format",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Date Format"
+    }
+  },
+  {
+    "title": "Change the Number of Months Displayed",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-the-number-of-months-displayed",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change the Number of Months Displayed"
+    }
+  },
+  {
+    "title": "Change Pagination Unit",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-pagination-unit",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Pagination Unit"
+    }
+  },
+  {
+    "title": "Do Not Close Calendar on Selection",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#do-not-close-calendar-on-selection",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Do Not Close Calendar on Selection"
+    }
+  },
+  {
+    "title": "Do Not Close Calendar on Blur",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#do-not-close-calendar-on-blur",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Do Not Close Calendar on Blur"
+    }
+  },
+  {
+    "title": "Disable Clearing",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#disable-clearing",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Disable Clearing"
+    }
+  },
+  {
+    "title": "Disallow Input",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#disallow-input",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Disallow Input"
+    }
+  },
+  {
+    "title": "Disable Dates Outside the Current Month",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#disable-dates-outside-the-current-month",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Disable Dates Outside the Current Month"
+    }
+  },
+  {
+    "title": "Hide Dates Outside the Current Month",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#hide-dates-outside-the-current-month",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Hide Dates Outside the Current Month"
+    }
+  },
+  {
+    "title": "Change Display Position",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-display-position",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Display Position"
+    }
+  },
+  {
+    "title": "Change Offset",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-offset",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Offset"
+    }
+  },
+  {
+    "title": "Change Border Color",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#change-border-color",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Change Border Color"
+    }
+  },
+  {
+    "title": "Customize Separator",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#customize-separator",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Customize Separator"
+    }
+  },
+  {
+    "title": "Set Maximum Range Values",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#set-maximum-range-values",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Set Maximum Range Values"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#disable",
+    "hierarchy": { "lv1": "RangeDatePicker", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#make-read-only",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Make Input Invalid",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#make-input-invalid",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Make Input Invalid"
+    }
+  },
+  {
+    "title": "Customize Icons",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#customize-icons",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Customize Icons"
+    }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#control",
+    "hierarchy": { "lv1": "RangeDatePicker", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
       "lv2": "Usage",
       "lv3": "Use React Hook Form"
     }

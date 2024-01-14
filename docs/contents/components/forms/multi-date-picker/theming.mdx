@@ -1,0 +1,25 @@
+---
+title: MultiDatePicker
+description: "`MultiDatePicker` is a component used for users to select multiple dates."
+package_name: "@yamada-ui/calendar"
+label: New
+with_description: true
+tab: Theming
+---
+
+## Theming
+
+The `MultiDatePicker` is a [multi part component](/styled-system/theming/component-style#multi-part-components).
+
+:::note
+`MultiDatePicker` inherits the style from [DatePicker](/components/forms/date-picker).
+:::
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const MultiDatePicker: ComponentMultiStyle =
+  mergeMultiStyle(DatePicker)()
+```

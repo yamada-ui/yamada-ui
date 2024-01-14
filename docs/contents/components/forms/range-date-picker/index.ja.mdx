@@ -1,6 +1,6 @@
 ---
-title: RangeRangeDatePicker
-description: "`RangeRangeDatePicker`は、ユーザーが日付を選択するために使用されるコンポーネントです。"
+title: RangeDatePicker
+description: "`RangeDatePicker`は、ユーザーが日付を範囲選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/calendar"
 label: "New"
 is_tabs: true
@@ -21,17 +21,17 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 ## 使い方
 
 ```tsx
-<RangeDatePicker placeholder="basic" />
+<RangeDatePicker placeholder="YYYY/MM/DD" />
 ```
 
 ### バリアントを変更する
 
 ```tsx
 <VStack>
-  <RangeDatePicker variant="outline" placeholder="outline" />
-  <RangeDatePicker variant="filled" placeholder="filled" />
-  <RangeDatePicker variant="flushed" placeholder="flushed" />
-  <RangeDatePicker variant="unstyled" placeholder="unstyled" />
+  <RangeDatePicker variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker variant="flushed" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker variant="unstyled" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
@@ -39,8 +39,8 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <RangeDatePicker placeholder="solid" calendarVariant="solid" />
-  <RangeDatePicker placeholder="subtle" calendarVariant="subtle" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" calendarVariant="solid" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" calendarVariant="subtle" />
 </VStack>
 ```
 
@@ -48,10 +48,10 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <RangeDatePicker placeholder="extra small size" size="xs" />
-  <RangeDatePicker placeholder="small size" size="sm" />
-  <RangeDatePicker placeholder="medium size" size="md" />
-  <RangeDatePicker placeholder="large size" size="lg" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" size="xs" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" size="sm" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" size="md" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" size="lg" />
 </VStack>
 ```
 
@@ -59,9 +59,9 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <RangeDatePicker placeholder="small size" calendarSize="sm" />
-  <RangeDatePicker placeholder="medium size" calendarSize="md" />
-  <RangeDatePicker placeholder="large size" calendarSize="lg" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" calendarSize="sm" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" calendarSize="md" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" calendarSize="lg" />
 </VStack>
 ```
 
@@ -109,9 +109,9 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <RangeDatePicker placeholder="date" defaultType="date" />
-  <RangeDatePicker placeholder="month" defaultType="month" />
-  <RangeDatePicker placeholder="year" defaultType="year" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" defaultType="date" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" defaultType="month" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" defaultType="year" />
 </VStack>
 ```
 
@@ -132,8 +132,8 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
 
 ```tsx
 <VStack>
-  <RangeDatePicker placeholder="monday" firstDayOfWeek="monday" />
-  <RangeDatePicker placeholder="sunday" firstDayOfWeek="sunday" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" firstDayOfWeek="monday" />
+  <RangeDatePicker placeholder="YYYY/MM/DD" firstDayOfWeek="sunday" />
 </VStack>
 ```
 
@@ -146,7 +146,7 @@ import { RangeDatePicker } from "@yamada-ui/calendar"
   placeholder="MMMM D, YYYY"
   inputFormat="MMMM D, YYYY"
   pattern={/[^\w, ]/g}
-  defaultValue={new Date()}
+  defaultValue={[new Date()]}
 />
 ```
 
@@ -272,7 +272,7 @@ import "dayjs/locale/ja"
 ```
 
 ```tsx
-<RangeDatePicker locale="ja" />
+<RangeDatePicker locale="ja" placeholder="YYYY/MM/DD" />
 ```
 
 :::note
@@ -394,6 +394,14 @@ import "dayjs/locale/ja"
 <RangeDatePicker placeholder="YYYY/MM/DD" disableOutsideDays />
 ```
 
+### 当月外の日付を非表示にする
+
+当月外の日付を非表示にする場合は、`hiddenOutsideDays`を`true`に設定します。
+
+```tsx
+<RangeDatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+```
+
 ### 表示位置を変更する
 
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
@@ -421,16 +429,29 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <RangeDatePicker
-    focusBorderColor="green.500"
-    placeholder="custom border color"
-  />
+  <RangeDatePicker focusBorderColor="green.500" placeholder="YYYY/MM/DD" />
   <RangeDatePicker
     isInvalid
     errorBorderColor="orange.500"
-    placeholder="custom border color"
+    placeholder="YYYY/MM/DD"
   />
 </VStack>
+```
+
+### 区切りをカスタマイズする
+
+区切りをカスタマイズする場合は、`separator`に文字列を設定します。
+
+```tsx
+<RangeDatePicker placeholder="YYYY/MM/DD" separator="~" />
+```
+
+### 範囲可能な最大数を設定する
+
+範囲可能な最大数を設定する場合は、`maxSelectValues`に数値を設定します。
+
+```tsx
+<RangeDatePicker maxSelectValues={3} placeholder="YYYY/MM/DD" />
 ```
 
 ### 無効化する
@@ -439,9 +460,9 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <RangeDatePicker isDisabled variant="outline" placeholder="outline" />
-  <RangeDatePicker isDisabled variant="filled" placeholder="filled" />
-  <RangeDatePicker isDisabled variant="flushed" placeholder="flushed" />
+  <RangeDatePicker isDisabled variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker isDisabled variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker isDisabled variant="flushed" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
@@ -451,9 +472,9 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <RangeDatePicker isReadOnly variant="outline" placeholder="outline" />
-  <RangeDatePicker isReadOnly variant="filled" placeholder="filled" />
-  <RangeDatePicker isReadOnly variant="flushed" placeholder="flushed" />
+  <RangeDatePicker isReadOnly variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker isReadOnly variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker isReadOnly variant="flushed" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
@@ -463,9 +484,9 @@ import "dayjs/locale/ja"
 
 ```tsx
 <VStack>
-  <RangeDatePicker isInvalid variant="outline" placeholder="outline" />
-  <RangeDatePicker isInvalid variant="filled" placeholder="filled" />
-  <RangeDatePicker isInvalid variant="flushed" placeholder="flushed" />
+  <RangeDatePicker isInvalid variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker isInvalid variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker isInvalid variant="flushed" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
@@ -537,7 +558,7 @@ return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
       isInvalid={!!errors.rangeDatePicker}
-      label="Birthday"
+      label="Date to reserve"
       errorMessage={
         errors.rangeDatePicker ? errors.rangeDatePicker.message : undefined
       }

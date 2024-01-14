@@ -2,14 +2,14 @@ import { forwardRef, ui } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { ForwardedRef } from "react"
-import type { ColorPickerEyeDropperProps } from "./color-picker-eye-dropper"
-import { ColorPickerEyeDropper } from "./color-picker-eye-dropper"
-import type { ColorPickerSlidersProps } from "./color-picker-sliders"
-import { ColorPickerSliders } from "./color-picker-sliders"
+import type { ColorSelectorEyeDropperProps } from "./color-selector-eye-dropper"
+import { ColorSelectorEyeDropper } from "./color-selector-eye-dropper"
+import type { ColorSelectorSlidersProps } from "./color-selector-sliders"
+import { ColorSelectorSliders } from "./color-selector-sliders"
 import { ColorSwatch } from "./color-swatch"
-import { useColorPickerContext } from "./use-color-picker"
+import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorPickerBodyOptions = {
+type ColorSelectorBodyOptions = {
   /**
    * If `true`, display the result component.
    *
@@ -29,17 +29,17 @@ type ColorPickerBodyOptions = {
   /**
    * Props for the eye dropper component.
    */
-  eyeDropperProps?: ColorPickerEyeDropperProps
+  eyeDropperProps?: ColorSelectorEyeDropperProps
 }
 
-export type ColorPickerBodyProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorPickerBodyOptions &
+export type ColorSelectorBodyProps = Omit<HTMLUIProps<"div">, "children"> &
+  ColorSelectorBodyOptions &
   Pick<
-    ColorPickerSlidersProps,
+    ColorSelectorSlidersProps,
     "hueSliderRef" | "hueSliderProps" | "alphaSliderRef" | "alphaSliderProps"
   >
 
-export const ColorPickerBody = forwardRef<ColorPickerBodyProps, "div">(
+export const ColorSelectorBody = forwardRef<ColorSelectorBodyProps, "div">(
   (
     {
       className,
@@ -55,7 +55,7 @@ export const ColorPickerBody = forwardRef<ColorPickerBodyProps, "div">(
     },
     ref,
   ) => {
-    const { value, eyeDropperSupported, styles } = useColorPickerContext()
+    const { value, eyeDropperSupported, styles } = useColorSelectorContext()
 
     const css: CSSUIObject = {
       display: "flex",
@@ -66,11 +66,11 @@ export const ColorPickerBody = forwardRef<ColorPickerBodyProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-color-picker__body", className)}
+        className={cx("ui-color-selector__body", className)}
         __css={css}
         {...rest}
       >
-        <ColorPickerSliders
+        <ColorSelectorSliders
           {...{
             hueSliderRef,
             hueSliderProps,
@@ -80,12 +80,12 @@ export const ColorPickerBody = forwardRef<ColorPickerBodyProps, "div">(
         />
 
         {withEyeDropper && eyeDropperSupported ? (
-          <ColorPickerEyeDropper ref={eyeDropperRef} {...eyeDropperProps} />
+          <ColorSelectorEyeDropper ref={eyeDropperRef} {...eyeDropperProps} />
         ) : null}
 
         {withResult ? (
           <ColorSwatch
-            className="ui-color-picker__result"
+            className="ui-color-selector__result"
             color={value}
             __css={{ ...styles.result }}
           />

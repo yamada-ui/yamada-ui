@@ -4,16 +4,16 @@ import { cx, replaceObject } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import type { ColorSwatchProps } from "./color-swatch"
 import { ColorSwatch } from "./color-swatch"
-import { useColorPickerContext } from "./use-color-picker"
+import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorPickerSwatchesOptions = {
+type ColorSelectorSwatchesOptions = {
   /**
    * The swatches label to use.
    */
   swatchesLabel?: ReactNode
   /**
    * An array of colors in one of the supported formats.
-   * Used to render swatches list below the color picker.
+   * Used to render swatches list below the color selector.
    */
   swatches?: string[]
   /**
@@ -32,10 +32,13 @@ type ColorPickerSwatchesOptions = {
   swatchesContainerProps?: Omit<HTMLUIProps<"div">, "children">
 }
 
-export type ColorPickerSwatchesProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorPickerSwatchesOptions
+export type ColorSelectorSwatchesProps = Omit<HTMLUIProps<"div">, "children"> &
+  ColorSelectorSwatchesOptions
 
-export const ColorPickerSwatches = forwardRef<ColorPickerSwatchesProps, "div">(
+export const ColorSelectorSwatches = forwardRef<
+  ColorSelectorSwatchesProps,
+  "div"
+>(
   (
     {
       className,
@@ -48,7 +51,7 @@ export const ColorPickerSwatches = forwardRef<ColorPickerSwatchesProps, "div">(
     },
     ref,
   ) => {
-    const { getSwatchProps, readOnly, styles } = useColorPickerContext()
+    const { getSwatchProps, readOnly, styles } = useColorSelectorContext()
 
     const css: CSSUIObject = {
       display: "grid",
@@ -62,7 +65,7 @@ export const ColorPickerSwatches = forwardRef<ColorPickerSwatchesProps, "div">(
       <ui.div {...swatchesContainerProps}>
         {swatchesLabel ? (
           <ui.p
-            className="ui-color-picker__swatches__label"
+            className="ui-color-selector__swatches__label"
             __css={{ ...styles.swatchesLabel }}
           >
             {swatchesLabel}
@@ -71,7 +74,7 @@ export const ColorPickerSwatches = forwardRef<ColorPickerSwatchesProps, "div">(
 
         <ui.div
           ref={ref}
-          className={cx("ui-color-picker__swatches", className)}
+          className={cx("ui-color-selector__swatches", className)}
           __css={css}
           {...rest}
         >

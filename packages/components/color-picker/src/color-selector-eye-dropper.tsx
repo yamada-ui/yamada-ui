@@ -6,15 +6,16 @@ import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import type { FC } from "react"
-import { useColorPickerContext } from "./use-color-picker"
+import { useColorSelectorContext } from "./use-color-selector"
 
-export type ColorPickerEyeDropperProps = IconButtonProps
+export type ColorSelectorEyeDropperProps = IconButtonProps
 
-export const ColorPickerEyeDropper = forwardRef<
-  ColorPickerEyeDropperProps,
+export const ColorSelectorEyeDropper = forwardRef<
+  ColorSelectorEyeDropperProps,
   "button"
 >(({ className, ...rest }, ref) => {
-  const { getEyeDropperProps, readOnly, size, styles } = useColorPickerContext()
+  const { getEyeDropperProps, readOnly, size, styles } =
+    useColorSelectorContext()
 
   const css: CSSUIObject = {
     h: "auto",
@@ -25,13 +26,13 @@ export const ColorPickerEyeDropper = forwardRef<
 
   return (
     <IconButton
-      className={cx("ui-color-picker__eye-dropper", className)}
+      className={cx("ui-color-selector__eye-dropper", className)}
       variant="outline"
       size={size}
       __css={css}
       {...getEyeDropperProps(rest, ref)}
     >
-      <EyeDropperIcon className="ui-color-picker__eye-dropper__icon" />
+      <EyeDropperIcon className="ui-color-selector__eye-dropper__icon" />
     </IconButton>
   )
 })

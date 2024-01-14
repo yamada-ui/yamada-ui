@@ -1,101 +1,41 @@
+import { layoutStyleProperties } from "@yamada-ui/core"
 import type {
-  CSSUIObject,
-  HTMLUIProps,
   UIPropGetter,
+  CSSUIObject,
   ThemeProps,
-  RequiredUIPropGetter,
+  HTMLUIProps,
 } from "@yamada-ui/core"
 import {
   useFormControlProps,
-  type FormControlOptions,
-  formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
-import type { InputProps } from "@yamada-ui/input"
+import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useEyeDropper } from "@yamada-ui/use-eye-dropper"
-import type { ColorFormat, Dict, Merge } from "@yamada-ui/utils"
+import { useOutsideClick } from "@yamada-ui/use-outside-click"
+import type { ColorFormat, Dict } from "@yamada-ui/utils"
 import {
-  calcFormat,
-  convertColor,
   createContext,
+  dataAttr,
   handlerAll,
-  hsvTo,
-  isString,
-  parseToHsv,
-  useCallbackRef,
-  useUpdateEffect,
+  mergeRefs,
+  pickObject,
+  splitObject,
   omitObject,
-  parseToRgba,
-  parseToHsla,
-  rgbaTo,
-  hslaTo,
+  getEventRelatedTarget,
+  isContains,
+  convertColor,
+  calcFormat,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ChangeEvent } from "react"
-import { useCallback, useMemo, useRef, useState } from "react"
-import { pickObject } from "./../../../utils/src/object"
-import type { AlphaSliderProps } from "./alpha-slider"
-import type { ColorSwatchProps } from "./color-swatch"
-import type { HueSliderProps } from "./hue-slider"
-import type { SaturationSliderProps } from "./saturation-slider"
+import type { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from "react"
+import { useCallback, useRef, useState } from "react"
+import type { ColorSelectorProps } from "./color-selector"
+import type { UseColorSelectorBaseProps } from "./use-color-selector"
 
-type Space = keyof Hsla | keyof Rgba
-type Hsla = { h: number; s: number; l: number; a: number }
-type Rgba = { r: number; g: number; b: number; a: number }
-type Hsva = { h: number; s: number; v: number; a: number }
-type Channel = {
-  label: string
-  space: Space
-  value: number
-  min: number
-  max: number
-}
+type ColorSelectorThemeProps = ThemeProps<"ColorSelector">
 
-const convertHsla = (value: string, fallback?: string): Hsla => {
-  let [h, s, l, a] = parseToHsla(value, fallback) ?? [0, 0, 1, 1]
-
-  if (a > 1) a = 1
-
-  return { h, s, l, a }
-}
-
-const convertRgba = (value: string, fallback?: string): Rgba => {
-  let [r, g, b, a] = parseToRgba(value, fallback) ?? [255, 255, 255, 1]
-
-  if (r > 255) r = 255
-  if (g > 255) g = 255
-  if (b > 255) b = 255
-  if (a > 1) a = 1
-
-  return { r, g, b, a }
-}
-
-const convertHsva = (value: string, fallback?: string): Hsva => {
-  const [h, s, v, a] = parseToHsv(value, fallback)
-
-  return { h, s, v, a }
-}
-
-type ColorPickerContext = {
-  value: string
-  onChange: (value: string | Partial<Hsva>) => void
-  eyeDropperSupported: boolean
-  withAlpha: boolean
-  isInteractive: boolean
-  disabled?: boolean
-  readOnly?: boolean
-  channels: Channel[]
-  size?: ThemeProps<"ColorPicker">["size"]
-  getHueSliderProps: UIPropGetter<"input", HueSliderProps, HueSliderProps>
-  getAlphaSliderProps: UIPropGetter<"input", AlphaSliderProps, AlphaSliderProps>
-  getEyeDropperProps: UIPropGetter<"button">
-  getChannelProps: RequiredUIPropGetter<
-    "input",
-    Merge<InputProps, { space: Space }>,
-    InputProps
-  >
-  getSwatchProps: UIPropGetter<"div", ColorSwatchProps, ColorSwatchProps>
-  styles: Record<string, CSSUIObject>
-}
+type ColorPickerContext = { value: string; styles: Record<string, CSSUIObject> }
 
 export const [ColorPickerProvider, useColorPickerContext] =
   createContext<ColorPickerContext>({
@@ -105,266 +45,260 @@ export const [ColorPickerProvider, useColorPickerContext] =
 
 type UseColorPickerOptions = {
   /**
-   * The base `id` to use for the color picker.
+   * The initial value of the color selector.
    */
-  id?: string
+  defaultColor?: string
   /**
-   * The name attribute of the hidden `input` field.
-   * This is particularly useful in forms.
-   */
-  name?: string
-  /**
-   * The value of the color picker.
-   */
-  value?: string
-  /**
-   * The initial value of the color picker.
+   * If `true`, allows input.
    *
-   * @default "#ffffffff"
+   * @default true
    */
-  defaultValue?: string
+  allowInput?: boolean
   /**
-   * The fallback value returned when color determination fails.
+   * A callback function to format the input entered.
    */
-  fallbackValue?: string
+  formatInput?: (value: string) => string
   /**
-   * Function called whenever the color picker value changes.
-   */
-  onChange?: (value: string) => void
-  /**
-   * Function called when the user starts selecting a new value.
-   */
-  onChangeStart?: (value: string) => void
-  /**
-   * Function called when the user is done selecting a new value.
-   */
-  onChangeEnd?: (value: string) => void
-  /**
-   * Color format. For example, `hex`, `rgba`, etc.
+   * If `true`, display the result component.
    *
-   * @default "hexa"
+   * @default false
    */
-  format?: ColorFormat
+  withResult?: boolean
   /**
-   * Function called whenever the color swatch click.
+   * If `true` display the eye dropper component.
+   *
+   * @default false
    */
-  onSwatchClick?: (value: string) => void
+  withColorSelectorEyeDropper?: boolean
+  /**
+   * If `true`, the color swatch will be closed when value is selected.
+   */
+  closeOnSelectSwatch?: boolean
+  /**
+   * Variant for the color selector component.
+   */
+  colorSelectorVariant?: ColorSelectorThemeProps["variant"]
+  /**
+   * Size for the color selector component.
+   */
+  colorSelectorSize?: ColorSelectorThemeProps["size"]
+  /**
+   * ColorScheme for the color selector component.
+   */
+  colorSelectorColorScheme?: ColorSelectorThemeProps["colorScheme"]
+  /**
+   * Props for color selector component.
+   */
+  colorSelectorProps?: ColorSelectorProps
 }
 
-export type UseColorPickerBaseProps = UseColorPickerOptions & FormControlOptions
-
 export type UseColorPickerProps = Omit<
-  HTMLUIProps<"div">,
-  "defaultValue" | "onChange" | "children"
+  HTMLUIProps<"input">,
+  "size" | "offset" | "value" | "defaultValue" | "onChange"
 > &
-  UseColorPickerBaseProps
+  Omit<UseColorSelectorBaseProps, "id" | "name"> &
+  Omit<
+    PopoverProps,
+    | "initialFocusRef"
+    | "closeOnButton"
+    | "isOpen"
+    | "trigger"
+    | "autoFocus"
+    | "restoreFocus"
+    | "openDelay"
+    | "closeDelay"
+  > &
+  Pick<
+    ColorSelectorProps,
+    | "withPicker"
+    | "withChannel"
+    | "swatchesLabel"
+    | "swatches"
+    | "swatchesColumns"
+  > &
+  UseColorPickerOptions
 
 export const useColorPicker = ({
-  isInvalid,
-  ...props
+  value: valueProp,
+  defaultValue,
+  fallbackValue,
+  defaultColor,
+  onChange: onChangeProp,
+  onChangeStart,
+  onChangeEnd,
+  onSwatchClick,
+  formatInput = (value) => value,
+  closeOnBlur = true,
+  closeOnEsc = true,
+  placement = "bottom-start",
+  duration = 0.2,
+  defaultIsOpen,
+  onOpen: onOpenProp,
+  onClose: onCloseProp,
+  allowInput = true,
+  closeOnSelectSwatch,
+  format,
+  swatchesLabel,
+  swatches,
+  swatchesColumns,
+  withPicker,
+  withChannel,
+  withResult = false,
+  withColorSelectorEyeDropper = false,
+  colorSelectorVariant,
+  colorSelectorSize,
+  colorSelectorColorScheme,
+  ...rest
 }: UseColorPickerProps) => {
-  let {
-    id,
-    name,
-    value: valueProp,
-    defaultValue,
-    fallbackValue,
-    onChange: onChangeProp,
-    onChangeStart: onChangeStartProp,
-    onChangeEnd: onChangeEndProp,
-    format,
-    required,
-    disabled,
-    readOnly,
-    onSwatchClick,
-    ...rest
-  } = useFormControlProps({ isInvalid, ...props })
+  rest = useFormControlProps(rest)
 
-  const onChangeStartRef = useCallbackRef(onChangeStartProp)
-  const onChangeEndRef = useCallbackRef(onChangeEndProp)
-  const { supported: eyeDropperSupported, onOpen } = useEyeDropper()
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
+  const { disabled, readOnly } = formControlProps
+  const computedProps = splitObject(rest, layoutStyleProperties)
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const fieldRef = useRef<HTMLInputElement>(null)
+
+  const { supported: eyeDropperSupported, onOpen: onEyeDropperOpen } =
+    useEyeDropper()
   const [value, setValue] = useControllableState({
     value: valueProp,
-    defaultValue: defaultValue ?? fallbackValue ?? "#ffffffff",
+    defaultValue,
     onChange: onChangeProp,
   })
-  const timeoutId = useRef<any>(undefined)
-  const formatRef = useRef<ColorFormat>(format ?? calcFormat(value))
-  const isDraggingRef = useRef<boolean>(false)
-  const [parsedValue, setParsedValue] = useState<Hsva>(
-    convertHsva(value, fallbackValue),
-  )
-  const { h, s, v, a } = parsedValue
-  const withAlpha = formatRef.current.endsWith("a")
-  const isInteractive = !(disabled || readOnly)
+  const formatRef = useRef<ColorFormat>(format ?? calcFormat(value ?? ""))
+  const isInputFocused = useRef<boolean>(false)
+  const [inputValue, setInputValue] = useState<string>(value ?? "")
+  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
+  const isColorSelectorFull = colorSelectorSize === "full"
 
-  const channels: Channel[] = useMemo(() => {
-    if (value.startsWith("hsl")) {
-      const { h, s, l, a } = convertHsla(value, fallbackValue)
+  const onOpen = useCallback(() => {
+    if (disabled || readOnly) return
 
-      let channels: Channel[] = [
-        { label: "H", space: "h", value: Math.round(h), min: 0, max: 360 },
-        {
-          label: "S(%)",
-          space: "s",
-          value: Math.round(s * 100),
-          min: 0,
-          max: 100,
-        },
-        {
-          label: "L(%)",
-          space: "l",
-          value: Math.round(l * 100),
-          min: 0,
-          max: 100,
-        },
-      ]
+    setIsOpen(true)
 
-      if (withAlpha) {
-        channels = [
-          ...channels,
-          {
-            label: "A(%)",
-            space: "a",
-            value: Math.round(a * 100),
-            min: 0,
-            max: 100,
-          },
-        ]
-      }
+    onOpenProp?.()
+  }, [onOpenProp, disabled, readOnly])
 
-      return channels
-    } else {
-      const { r, g, b, a } = convertRgba(value, fallbackValue)
+  const onClose = useCallback(() => {
+    if (!isOpen) return
 
-      let channels: Channel[] = [
-        { label: "R", space: "r", value: Math.round(r), min: 0, max: 255 },
-        { label: "G", space: "g", value: Math.round(g), min: 0, max: 255 },
-        { label: "B", space: "b", value: Math.round(b), min: 0, max: 255 },
-      ]
+    const next = convertColor(value, fallbackValue)(formatRef.current)
 
-      if (withAlpha) {
-        channels = [
-          ...channels,
-          {
-            label: "A(%)",
-            space: "a",
-            value: Math.round(a * 100),
-            min: 0,
-            max: 100,
-          },
-        ]
-      }
+    setValue((prev) => (!next || prev === next ? prev : next))
+    setInputValue(formatInput(next ?? ""))
 
-      return channels
-    }
-  }, [value, withAlpha, fallbackValue])
+    setIsOpen(false)
 
-  const onChange = useCallback(
-    (value: string | Partial<Hsva>) => {
-      if (isString(value)) {
-        setParsedValue(convertHsva(value, fallbackValue))
-      } else {
-        setParsedValue((prev) => ({ ...prev, ...value }))
-      }
+    onCloseProp?.()
+  }, [
+    formatRef,
+    isOpen,
+    setValue,
+    onCloseProp,
+    value,
+    formatInput,
+    setInputValue,
+    fallbackValue,
+  ])
+
+  const onContainerClick = useCallback(() => {
+    if (isOpen) return
+
+    onOpen()
+  }, [isOpen, onOpen])
+
+  const onInputFocus = useCallback(() => {
+    isInputFocused.current = true
+
+    if (isOpen) return
+
+    onOpen()
+  }, [isOpen, onOpen])
+
+  const onInputBlur = useCallback(() => {
+    isInputFocused.current = false
+  }, [])
+
+  const onContainerBlur = useCallback(
+    (ev: FocusEvent<HTMLDivElement>) => {
+      const relatedTarget = getEventRelatedTarget(ev)
+
+      if (isContains(containerRef.current, relatedTarget)) return
+
+      if (!closeOnBlur) return
+
+      if (isOpen) onClose()
     },
-    [fallbackValue],
+    [closeOnBlur, isOpen, onClose],
   )
 
-  const onChangeStart = useCallback(
-    (value: Partial<Hsva>) => {
-      window.clearTimeout(timeoutId.current)
+  const onInputKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLInputElement>) => {
+      if (ev.key === " ") ev.key = ev.code
 
-      isDraggingRef.current = true
+      if (disabled || readOnly) return
 
-      const { h, s, v, a } = { ...parsedValue, ...value }
-
-      const nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
-
-      if (nextValue) onChangeStartRef(nextValue)
-    },
-    [formatRef, onChangeStartRef, fallbackValue, parsedValue],
-  )
-
-  const onChangeEnd = useCallback(
-    (value: string | Partial<Hsva>) => {
-      window.clearTimeout(timeoutId.current)
-
-      timeoutId.current = window.setTimeout(() => {
-        isDraggingRef.current = false
-      }, 200)
-
-      let nextValue: string | undefined
-
-      if (isString(value)) {
-        nextValue = convertColor(value, fallbackValue)(formatRef.current)
-      } else {
-        const { h, s, v, a } = { ...parsedValue, ...value }
-
-        nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+      const actions: Record<string, Function | undefined> = {
+        Space: !isOpen ? onOpen : undefined,
+        Enter: !isOpen ? onOpen : undefined,
+        Escape: closeOnEsc ? onClose : undefined,
       }
 
-      if (nextValue) onChangeEndRef(nextValue)
+      const action = actions[ev.key]
+
+      if (!action) return
+
+      ev.preventDefault()
+      ev.stopPropagation()
+      action()
     },
-    [formatRef, onChangeEndRef, fallbackValue, parsedValue],
+    [disabled, readOnly, isOpen, onOpen, closeOnEsc, onClose],
   )
 
-  const onChannelChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>, space: Space) => {
-      let n = Math.floor(parseFloat(ev.target.value))
+  const onInputChange = useCallback(
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      const value = ev.target.value
 
-      if (isNaN(n)) n = 0
-
-      if (["s", "l", "a"].includes(space)) n = n / 100
-
-      let nextValue: string | undefined
-
-      if (value.startsWith("hsl")) {
-        const { h, s, l, a } = Object.assign(
-          convertHsla(value, fallbackValue),
-          { [space]: n },
-        )
-
-        nextValue = hslaTo([h, s, l, a], fallbackValue)(formatRef.current)
-      } else {
-        const { r, g, b, a } = Object.assign(
-          convertRgba(value, fallbackValue),
-          { [space]: n },
-        )
-
-        nextValue = rgbaTo([r, g, b, a], fallbackValue)(formatRef.current)
-      }
-
-      if (!nextValue) return
-
-      onChange(nextValue)
-      onChangeEnd(nextValue)
+      setInputValue(formatInput(value))
+      setValue(value)
     },
-    [value, onChange, onChangeEnd, formatRef, fallbackValue],
+    [setInputValue, formatInput, setValue],
   )
 
-  const onEyeDropperClick = useCallback(async () => {
-    try {
-      const { sRGBHex } = (await onOpen()) ?? {}
+  const onColorSelectorChange = useCallback(
+    (value: string) => {
+      setValue(value)
 
-      if (!sRGBHex) return
+      if (!isInputFocused.current) setInputValue(formatInput(value))
+    },
+    [setValue, formatInput],
+  )
 
-      onChange(sRGBHex)
-      onChangeEnd(sRGBHex)
-    } catch {}
-  }, [onOpen, onChange, onChangeEnd])
+  const onEyeDropperClick = useCallback(
+    async (ev: MouseEvent<HTMLButtonElement>) => {
+      ev.preventDefault()
+      ev.stopPropagation()
 
-  useUpdateEffect(() => {
-    const value = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+      try {
+        const { sRGBHex } = (await onEyeDropperOpen()) ?? {}
 
-    if (value) setValue(value)
-  }, [h, s, v, a, fallbackValue])
+        if (!sRGBHex) return
 
-  useUpdateEffect(() => {
-    if (isDraggingRef.current) return
+        onColorSelectorChange(sRGBHex)
+      } catch {}
+    },
+    [onEyeDropperOpen, onColorSelectorChange],
+  )
 
-    if (valueProp) setParsedValue(convertHsva(valueProp, fallbackValue))
-  }, [valueProp])
+  useOutsideClick({
+    ref: containerRef,
+    handler: onClose,
+    enabled: closeOnBlur,
+  })
 
   useUpdateEffect(() => {
     if (!format) return
@@ -373,155 +307,69 @@ export const useColorPicker = ({
 
     const nextValue = convertColor(value, fallbackValue)(format)
 
-    if (nextValue) setValue(nextValue)
+    if (!nextValue) return
+
+    setInputValue(formatInput(nextValue))
+    setValue(nextValue)
   }, [format, fallbackValue])
 
-  const getContainerProps: UIPropGetter = (props = {}, ref = null) => ({
-    ...props,
-    ref,
-    ...omitObject(rest, ["aria-readonly"]),
-  })
-
-  const getInputProps: UIPropGetter<"input"> = useCallback(
-    (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+  const getPopoverProps = useCallback(
+    (props?: PopoverProps): PopoverProps => ({
+      matchWidth: isColorSelectorFull,
+      ...rest,
       ...props,
-      id,
-      ref,
-      type: "hidden",
-      name,
-      value,
-      required,
-      disabled,
-      readOnly,
+      isOpen,
+      onOpen,
+      onClose,
+      placement,
+      duration,
+      trigger: "never",
+      closeOnButton: false,
     }),
-    [disabled, id, name, readOnly, required, rest, value],
+    [isColorSelectorFull, duration, onClose, onOpen, placement, rest, isOpen],
   )
 
-  const getSaturationSliderProps: UIPropGetter<
-    "input",
-    SaturationSliderProps,
-    SaturationSliderProps
-  > = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
+      ref: mergeRefs(containerRef, ref),
+      ...computedProps[0],
       ...props,
-      ref,
-      value: [h, s, v],
-      onChange: handlerAll(props.onChange, ([, s, v]) => onChange({ s, v })),
-      onChangeStart: handlerAll(props.onChangeStart, ([, s, v]) =>
-        onChangeStart({ s, v }),
-      ),
-      onChangeEnd: handlerAll(props.onChangeEnd, ([, s, v]) =>
-        onChangeEnd({ s, v }),
-      ),
+      ...formControlProps,
+      onClick: handlerAll(props.onClick, rest.onClick, onContainerClick),
+      onBlur: handlerAll(props.onBlur, rest.onBlur, onContainerBlur),
     }),
-    [
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
-      h,
-      s,
-      v,
-      onChange,
-      onChangeStart,
-      onChangeEnd,
-    ],
+    [computedProps, formControlProps, onContainerBlur, onContainerClick, rest],
   )
 
-  const getHueSliderProps: UIPropGetter<
-    "input",
-    HueSliderProps,
-    HueSliderProps
-  > = useCallback(
+  const getFieldProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
+      ref: mergeRefs(fieldRef, ref),
+      tabIndex: !allowInput ? -1 : 0,
+      ...omitObject(computedProps[1] as Dict, ["aria-readonly"]),
       ...props,
-      ref,
-      value: h,
-      onChange: handlerAll(props.onChange, (h) => onChange({ h })),
-      onChangeStart: handlerAll(props.onChangeStart, (h) =>
-        onChangeStart({ h }),
-      ),
-      onChangeEnd: handlerAll(props.onChangeEnd, (h) => onChangeEnd({ h })),
+      style: {
+        ...props.style,
+        ...(!allowInput ? { pointerEvents: "none" } : {}),
+      },
+      value: inputValue,
+      "data-active": dataAttr(isOpen),
+      "aria-expanded": dataAttr(isOpen),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onInputFocus),
+      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onInputKeyDown),
+      onChange: handlerAll(props.onChange, onInputChange),
+      onBlur: handlerAll(props.onFocus, onInputBlur),
     }),
     [
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
-      h,
-      onChange,
-      onChangeStart,
-      onChangeEnd,
+      allowInput,
+      computedProps,
+      inputValue,
+      isOpen,
+      rest,
+      onInputFocus,
+      onInputKeyDown,
+      onInputChange,
+      onInputBlur,
     ],
-  )
-
-  const getAlphaSliderProps: UIPropGetter<
-    "input",
-    AlphaSliderProps,
-    AlphaSliderProps
-  > = useCallback(
-    (props = {}, ref = null) => ({
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
-      ...props,
-      ref,
-      value: a,
-      color: hsvTo([h, s, v, a], fallbackValue)(formatRef.current),
-      onChange: handlerAll(props.onChange, (a) => onChange({ a })),
-      onChangeStart: handlerAll(props.onChangeStart, (a) =>
-        onChangeStart({ a }),
-      ),
-      onChangeEnd: handlerAll(props.onChangeEnd, (a) => onChangeEnd({ a })),
-    }),
-    [
-      fallbackValue,
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
-      formatRef,
-      h,
-      s,
-      v,
-      a,
-      onChange,
-      onChangeStart,
-      onChangeEnd,
-    ],
-  )
-
-  const getChannelProps: RequiredUIPropGetter<
-    "input",
-    Merge<InputProps, { space: Space }>,
-    InputProps
-  > = useCallback(
-    ({ space, ...props }, ref = null) => {
-      return {
-        required,
-        disabled,
-        readOnly,
-        isInvalid,
-        ...props,
-        ref,
-        type: "number",
-        step: 1,
-        onChange: handlerAll(props.onChange, (ev) =>
-          onChannelChange(ev, space),
-        ),
-      } as Dict
-    },
-    [required, disabled, readOnly, isInvalid, onChannelChange],
   )
 
   const getEyeDropperProps: UIPropGetter<"button"> = useCallback(
@@ -530,51 +378,72 @@ export const useColorPicker = ({
       "aria-label": "Pick a color",
       ...props,
       ref,
+      style: { ...props.style, pointerEvents: readOnly ? "none" : undefined },
       onClick: handlerAll(props.onClick, onEyeDropperClick),
     }),
-    [disabled, onEyeDropperClick],
+    [disabled, onEyeDropperClick, readOnly],
   )
 
-  const getSwatchProps: UIPropGetter<
-    "div",
-    ColorSwatchProps,
-    ColorSwatchProps
-  > = useCallback(
-    ({ color, ...props } = {}, ref = null) => ({
-      "aria-label": `select ${color} as the color`,
-      disabled,
-      readOnly,
+  const getSelectorProps = useCallback(
+    (props?: ColorSelectorProps): ColorSelectorProps => ({
+      ...formControlProps,
       ...props,
-      ref,
-      color,
-      onClick: handlerAll(props.onClick, () => {
-        if (!color) return
-
-        onSwatchClick?.(color)
-        onChange(color)
-        onChangeEnd(color)
-      }),
+      value,
+      defaultValue: defaultColor,
+      fallbackValue,
+      onChange: onColorSelectorChange,
+      onChangeStart,
+      onChangeEnd,
+      onSwatchClick: handlerAll(
+        onSwatchClick,
+        closeOnSelectSwatch ? onClose : undefined,
+      ),
+      format: formatRef.current,
+      withPicker,
+      withChannel,
+      withResult,
+      withEyeDropper: withColorSelectorEyeDropper,
+      swatchesLabel,
+      swatches,
+      swatchesColumns,
+      variant: colorSelectorVariant,
+      size: colorSelectorSize,
+      colorScheme: colorSelectorColorScheme,
     }),
-    [disabled, readOnly, onSwatchClick, onChange, onChangeEnd],
+    [
+      formControlProps,
+      value,
+      fallbackValue,
+      defaultColor,
+      onColorSelectorChange,
+      onChangeStart,
+      onChangeEnd,
+      onSwatchClick,
+      onClose,
+      closeOnSelectSwatch,
+      formatRef,
+      withPicker,
+      withChannel,
+      withResult,
+      withColorSelectorEyeDropper,
+      swatchesLabel,
+      swatches,
+      swatchesColumns,
+      colorSelectorColorScheme,
+      colorSelectorSize,
+      colorSelectorVariant,
+    ],
   )
 
   return {
     value,
-    onChange,
     eyeDropperSupported,
-    withAlpha,
-    isInteractive,
-    disabled,
-    readOnly,
-    channels,
+    allowInput,
+    getPopoverProps,
     getContainerProps,
-    getInputProps,
-    getSaturationSliderProps,
-    getHueSliderProps,
-    getAlphaSliderProps,
+    getFieldProps,
+    getSelectorProps,
     getEyeDropperProps,
-    getChannelProps,
-    getSwatchProps,
   }
 }
 

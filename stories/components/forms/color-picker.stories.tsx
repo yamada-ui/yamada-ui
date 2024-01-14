@@ -1,12 +1,7 @@
+import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import {
-  Button,
-  ColorPicker,
-  FormControl,
-  Text,
-  VStack,
-  Wrap,
-} from "@yamada-ui/react"
+import { Icon } from "@yamada-ui/fontawesome"
+import { Button, ColorPicker, FormControl, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
@@ -21,34 +16,63 @@ const meta: Meta<typeof ColorPicker> = {
 export default meta
 
 export const basic: Story = () => {
-  return <ColorPicker />
+  return <ColorPicker placeholder="#4387f4ff" />
+}
+
+export const withDefaultValue: Story = () => {
+  return <ColorPicker defaultValue="#4387f4ff" />
+}
+
+export const withFallbackValue: Story = () => {
+  return <ColorPicker fallbackValue="#00000000" />
+}
+
+export const withDefaultColor: Story = () => {
+  return <ColorPicker defaultColor="#4387f4ff" />
 }
 
 export const withSize: Story = () => {
   return (
     <>
-      <ColorPicker size="sm" />
-      <ColorPicker size="md" />
-      <ColorPicker size="lg" />
-      <ColorPicker size="full" />
+      <ColorPicker placeholder="extra small size" size="xs" />
+      <ColorPicker placeholder="small size" size="sm" />
+      <ColorPicker placeholder="medium size" size="md" />
+      <ColorPicker placeholder="large size" size="lg" />
     </>
   )
 }
 
-export const withDefaultValue: Story = () => {
-  return <ColorPicker defaultValue="#ff0000ff" />
+export const withColorSelectorSize: Story = () => {
+  return (
+    <>
+      <ColorPicker placeholder="small size" colorSelectorSize="sm" />
+      <ColorPicker placeholder="medium size" colorSelectorSize="md" />
+      <ColorPicker placeholder="large size" colorSelectorSize="lg" />
+      <ColorPicker placeholder="full size" colorSelectorSize="full" />
+    </>
+  )
+}
+
+export const withVariant: Story = () => {
+  return (
+    <>
+      <ColorPicker variant="outline" placeholder="outline" />
+      <ColorPicker variant="filled" placeholder="filled" />
+      <ColorPicker variant="flushed" placeholder="flushed" />
+      <ColorPicker variant="unstyled" placeholder="unstyled" />
+    </>
+  )
 }
 
 export const withFormat: Story = () => {
   return <ColorPicker defaultValue="hsla(240, 100%, 50%, 1)" format="hsla" />
 }
 
-export const withStep: Story = () => {
+export const withFormatInput: Story = () => {
   return (
     <ColorPicker
-      saturationSliderProps={{ step: 0.1 }}
-      hueSliderProps={{ step: 10 }}
-      alphaSliderProps={{ step: 0.1 }}
+      placeholder="#4387F4FF"
+      formatInput={(value) => value.toUpperCase()}
     />
   )
 }
@@ -102,48 +126,127 @@ export const withSwatchesColumns: Story = () => {
   )
 }
 
+export const withCloseOnSelectSwatch: Story = () => {
+  return (
+    <ColorPicker
+      swatchesLabel="Saved Colors"
+      swatches={[
+        "#2e2e2e",
+        "#868e96",
+        "#fa5252",
+        "#e64980",
+        "#be4bdb",
+        "#7950f2",
+        "#4c6ef5",
+        "#228be6",
+        "#15aabf",
+        "#12b886",
+        "#40c057",
+        "#82c91e",
+        "#fab005",
+        "#fd7e14",
+      ]}
+      closeOnSelectSwatch
+    />
+  )
+}
+
+export const disabledAllowInput: Story = () => {
+  return <ColorPicker placeholder="#4387f4ff" allowInput={false} />
+}
+
+export const disabledPicker: Story = () => {
+  return (
+    <ColorPicker
+      withPicker={false}
+      swatchesLabel="Saved Colors"
+      swatches={[
+        "#2e2e2e",
+        "#868e96",
+        "#fa5252",
+        "#e64980",
+        "#be4bdb",
+        "#7950f2",
+        "#4c6ef5",
+        "#228be6",
+        "#15aabf",
+        "#12b886",
+        "#40c057",
+        "#82c91e",
+        "#fab005",
+        "#fd7e14",
+      ]}
+      closeOnSelectSwatch
+    />
+  )
+}
+
 export const disabledChannel: Story = () => {
   return <ColorPicker withChannel={false} />
+}
+
+export const disabledSwatch: Story = () => {
+  return <ColorPicker withSwatch={false} />
 }
 
 export const disabledEyeDropper: Story = () => {
   return <ColorPicker withEyeDropper={false} />
 }
 
-export const disabledResult: Story = () => {
-  return <ColorPicker withResult={false} />
+export const enabledColorPickerEyeDropper: Story = () => {
+  return <ColorPicker withColorSelectorEyeDropper />
+}
+
+export const enabledResult: Story = () => {
+  return <ColorPicker withResult />
+}
+
+export const withBorderColor: Story = () => {
+  return (
+    <>
+      <ColorPicker placeholder="default border color" />
+
+      <ColorPicker
+        focusBorderColor="green.500"
+        placeholder="custom border color"
+      />
+
+      <ColorPicker
+        isInvalid
+        errorBorderColor="orange.500"
+        placeholder="custom border color"
+      />
+    </>
+  )
+}
+
+export const withPlacement: Story = () => {
+  return <ColorPicker placeholder="#4387f4" placement="bottom-end" />
+}
+
+export const withOffset: Story = () => {
+  return <ColorPicker placeholder="#4387f4" offset={[16, 16]} />
+}
+
+export const withGutter: Story = () => {
+  return <ColorPicker placeholder="#4387f4" gutter={32} />
+}
+
+export const withDuration: Story = () => {
+  return <ColorPicker placeholder="#4387f4" duration={0.4} />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <ColorPicker
-        isDisabled
-        swatchesLabel="Saved Colors"
-        swatches={[
-          "#2e2e2e",
-          "#868e96",
-          "#fa5252",
-          "#e64980",
-          "#be4bdb",
-          "#7950f2",
-          "#4c6ef5",
-          "#228be6",
-          "#15aabf",
-          "#12b886",
-          "#40c057",
-          "#82c91e",
-          "#fab005",
-          "#fd7e14",
-        ]}
-      />
+      <ColorPicker placeholder="#4387f4" isDisabled />
 
       <FormControl
         isDisabled
         label="Pick color"
         helperMessage="Please select your favorite color"
       >
-        <ColorPicker />
+        <ColorPicker placeholder="#4387f4" />
       </FormControl>
     </>
   )
@@ -152,34 +255,32 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <ColorPicker
-        isReadOnly
-        swatchesLabel="Saved Colors"
-        swatches={[
-          "#2e2e2e",
-          "#868e96",
-          "#fa5252",
-          "#e64980",
-          "#be4bdb",
-          "#7950f2",
-          "#4c6ef5",
-          "#228be6",
-          "#15aabf",
-          "#12b886",
-          "#40c057",
-          "#82c91e",
-          "#fab005",
-          "#fd7e14",
-        ]}
-      />
+      <ColorPicker placeholder="#4387f4" isReadOnly />
 
       <FormControl
         isReadOnly
         label="Pick color"
         helperMessage="Please select your favorite color"
       >
-        <ColorPicker />
+        <ColorPicker placeholder="#4387f4" />
       </FormControl>
+    </>
+  )
+}
+
+export const customEyeDropperIcon: Story = () => {
+  return (
+    <>
+      <ColorPicker
+        eyeDropperProps={{
+          color: "primary",
+        }}
+      />
+      <ColorPicker
+        eyeDropperProps={{
+          children: <Icon icon={faPoo} />,
+        }}
+      />
     </>
   )
 }
@@ -187,69 +288,14 @@ export const isReadonly: Story = () => {
 export const customControl: Story = () => {
   const [value, onChange] = useState<string>("#4387f4ff")
 
-  return (
-    <>
-      <Wrap gap="md">
-        <Button colorScheme="primary" onClick={() => onChange("#4387f4ff")}>
-          Change "#4387f4ff"
-        </Button>
-
-        <Button colorScheme="secondary" onClick={() => onChange("#895af6ff")}>
-          Change "#895af6ff"
-        </Button>
-
-        <Button colorScheme="success" onClick={() => onChange("#3cc360ff")}>
-          Change "#3cc360ff"
-        </Button>
-      </Wrap>
-
-      <Text>Value: {value}</Text>
-      <ColorPicker value={value} onChange={onChange} />
-    </>
-  )
-}
-
-export const onChangeStart: Story = () => {
-  const [value, onChange] = useState<string>("#ff0000ff")
-  const [startValue, onChangeStart] = useState<string>("#ff0000ff")
-
-  return (
-    <>
-      <Text>
-        Value: {value}, Start Value: {startValue}
-      </Text>
-      <ColorPicker
-        value={value}
-        onChange={onChange}
-        onChangeStart={onChangeStart}
-      />
-    </>
-  )
-}
-
-export const onChangeEnd: Story = () => {
-  const [value, onChange] = useState<string>("#ff0000ff")
-  const [endValue, onChangeEnd] = useState<string>("#ff0000ff")
-
-  return (
-    <>
-      <Text>
-        Value: {value}, End Value: {endValue}
-      </Text>
-      <ColorPicker
-        value={value}
-        onChange={onChange}
-        onChangeEnd={onChangeEnd}
-      />
-    </>
-  )
+  return <ColorPicker value={value} onChange={onChange} />
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { colorPicker: string }
+  type Data = { colorInput: string }
 
   const defaultValues: Data = {
-    colorPicker: "#4387f4ff",
+    colorInput: "#4387f4ff",
   }
 
   const {
@@ -266,12 +312,12 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
-        isInvalid={!!errors.colorPicker}
+        isInvalid={!!errors.colorInput}
         label="Pick color"
-        errorMessage={errors.colorPicker?.message}
+        errorMessage={errors.colorInput?.message}
       >
         <Controller
-          name="colorPicker"
+          name="colorInput"
           control={control}
           render={({ field }) => <ColorPicker {...field} />}
         />

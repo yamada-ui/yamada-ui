@@ -58,6 +58,7 @@ tab: Props
   id="datepicker-calendarcolorscheme"
   name="calendarColorScheme"
   type='"link" | (string & {}) | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 11 more ... | "sky"'
+  description={"ColorScheme for the calendar component."}
 />
 
 <PropsCard
@@ -71,12 +72,14 @@ tab: Props
   id="datepicker-calendarsize"
   name="calendarSize"
   type='UIValue<(string & {}) | "sm" | "md" | "lg" | "full">'
+  description={"Size for the calendar component."}
 />
 
 <PropsCard
   id="datepicker-calendarvariant"
   name="calendarVariant"
   type='UIValue<(string & {}) | "solid" | "unstyled" | "subtle">'
+  description={"Variant for the calendar component."}
 />
 
 <PropsCard
@@ -109,7 +112,7 @@ tab: Props
   name="closeOnSelect"
   type="boolean"
   description={
-    "If `true`, the list element will be closed when value is selected."
+    "If `true`, the calendar component will be closed when value is selected."
   }
   defaultValue={"true"}
 />
@@ -173,6 +176,7 @@ tab: Props
   name="disableOutsideDays"
   type="boolean"
   description={"If `true`, outside days will be disabled."}
+  defaultValue={"false"}
 />
 
 <PropsCard
@@ -243,6 +247,13 @@ tab: Props
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
   defaultValue={"8"}
+/>
+
+<PropsCard
+  id="datepicker-hiddenoutsidedays"
+  name="hiddenOutsideDays"
+  type="boolean"
+  description={"If `true`, outside days will be hidden."}
 />
 
 <PropsCard
@@ -366,8 +377,8 @@ tab: Props
 />
 
 <PropsCard
-  id="datepicker-maxselectedvalues"
-  name="maxSelectedValues"
+  id="datepicker-maxselectvalues"
+  name="maxSelectValues"
   type="number"
   description={"The maximum selectable value."}
 />
@@ -474,7 +485,7 @@ tab: Props
   id="datepicker-pattern"
   name="pattern"
   type="RegExp"
-  description={"The pattern used to check the <input> element's."}
+  description={"The pattern used to check the input element."}
   defaultValue={"'/[^0-9-/]/g'"}
 />
 
@@ -502,12 +513,6 @@ tab: Props
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
-/>
-
-<PropsCard
-  id="datepicker-selectmonthwith"
-  name="selectMonthWith"
-  type='"value" | "month"'
 />
 
 <PropsCard

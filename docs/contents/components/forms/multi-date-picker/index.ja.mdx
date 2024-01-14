@@ -165,7 +165,7 @@ import { MultiDatePicker } from "@yamada-ui/calendar"
 
 ### 最小と最大の範囲外を許可する
 
-デフォルトでは、最小と最大の日付の範囲外が入力された場合、自動的に最小または最大の日付に置換されます。この制御を無効にし、最小と最大の範囲外を許可する場合は、`allowInputBeyond`を`true`に設定します。
+デフォルトでは、最小と最大の日付の範囲外が入力された場合、自動的に削除されます。この制御を無効にし、最小と最大の範囲外を許可する場合は、`allowInputBeyond`を`true`に設定します。
 
 ```tsx
 <MultiDatePicker
@@ -261,7 +261,7 @@ import "dayjs/locale/ja"
 ```
 
 ```tsx
-<MultiDatePicker locale="ja" />
+<MultiDatePicker locale="ja" placeholder="YYYY/MM/DD" />
 ```
 
 :::note
@@ -375,6 +375,14 @@ import "dayjs/locale/ja"
 <MultiDatePicker placeholder="YYYY/MM/DD" disableOutsideDays />
 ```
 
+### 当月外の日付を非表示にする
+
+当月外の日付を非表示にする場合は、`hiddenOutsideDays`を`true`に設定します。
+
+```tsx
+<MultiDatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+```
+
 ### 表示位置を変更する
 
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
@@ -419,7 +427,7 @@ import "dayjs/locale/ja"
 区切りをカスタマイズする場合は、`separator`に文字列を設定します。
 
 ```tsx
-<MultiDatePicker separator=";" />
+<MultiDatePicker placeholder="YYYY/MM/DD" separator=";" />
 ```
 
 ### プレースホルダーを常に表示する
@@ -453,7 +461,7 @@ import "dayjs/locale/ja"
 選択可能な最大数を設定する場合は、`maxSelectValues`に数値を設定します。
 
 ```tsx
-<MultiDatePicker maxSelectValues={3} />
+<MultiDatePicker maxSelectValues={3} placeholder="YYYY/MM/DD" />
 ```
 
 ### 無効化する

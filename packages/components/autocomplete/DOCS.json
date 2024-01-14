@@ -350,7 +350,7 @@
     },
     "closeOnSelect": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": false,
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
     },

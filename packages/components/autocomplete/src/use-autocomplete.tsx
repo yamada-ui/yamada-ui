@@ -320,7 +320,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
     /**
      * The maximum selectable value.
      */
-    maxSelectedValues?: number
+    maxSelectValues?: number
     /**
      * Props for select option element.
      */
@@ -346,7 +346,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   defaultIsOpen,
   closeOnSelect = true,
   omitSelectedValues = false,
-  maxSelectedValues,
+  maxSelectValues,
   closeOnBlur = true,
   closeOnEsc = true,
   allowCreate = false,
@@ -1026,10 +1026,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   useEffect(() => {
     if (!isMulti) return
 
-    if (!omitSelectedValues && isUndefined(maxSelectedValues)) return
+    if (!omitSelectedValues && isUndefined(maxSelectValues)) return
 
     const isAll = value.length > 0 && value.length === descendants.count()
-    const isMax = value.length === maxSelectedValues
+    const isMax = value.length === maxSelectValues
 
     if (isAll || isMax) {
       onClose()
@@ -1043,7 +1043,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     descendants,
     isMulti,
     onClose,
-    maxSelectedValues,
+    maxSelectValues,
   ])
 
   useUpdateEffect(() => {

@@ -48,7 +48,7 @@ export const useMultiDatePicker = ({
   onChange: onChangeProp,
   placeholder,
   closeOnSelect = false,
-  maxSelectedValues,
+  maxSelectValues,
   closeOnMaxSelect = true,
   excludeDate,
   ...rest
@@ -82,7 +82,7 @@ export const useMultiDatePicker = ({
   } = useCalendarPicker({
     excludeDate,
     ...rest,
-    maxSelectedValues,
+    maxSelectValues,
     enableMultiple: true,
     value: resolvedValue,
     defaultValue,
@@ -112,7 +112,7 @@ export const useMultiDatePicker = ({
 
       if (!!value && dayjs(value).isValid()) {
         setValue((prev) => {
-          if (prev.length === maxSelectedValues) return prev
+          if (prev.length === maxSelectValues) return prev
 
           const isSelected = prev?.some((prevValue) =>
             isSameDate(prevValue, value),
@@ -136,9 +136,9 @@ export const useMultiDatePicker = ({
   })
 
   useUpdateEffect(() => {
-    if (!closeOnMaxSelect || !isNumber(maxSelectedValues)) return
+    if (!closeOnMaxSelect || !isNumber(maxSelectValues)) return
 
-    if (maxSelectedValues <= value.length) onClose()
+    if (maxSelectValues <= value.length) onClose()
   }, [value])
 
   const onChange = useCallback(

@@ -355,9 +355,9 @@ export const withOmitSelectedValues: Story = () => {
   )
 }
 
-export const withMaxSelectedValues: Story = () => {
+export const withMaxSelectValues: Story = () => {
   return (
-    <MultiAutocomplete placeholder="キャラクターを選択" maxSelectedValues={3}>
+    <MultiAutocomplete placeholder="キャラクターを選択" maxSelectValues={3}>
       <AutocompleteOptionGroup label="地球人">
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="孫悟飯">孫悟飯</AutocompleteOption>

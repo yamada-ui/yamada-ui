@@ -49,7 +49,7 @@ export const useRangeDatePicker = ({
   endPlaceholder,
   closeOnSelect = true,
   allowInputBeyond = false,
-  maxSelectedValues,
+  maxSelectValues,
   ...rest
 }: UseRangeDatePickerProps) => {
   const isComposition = useRef<boolean>(false)
@@ -63,15 +63,15 @@ export const useRangeDatePicker = ({
   })
   const [startValue, endValue] = value ?? []
   const minDate =
-    endValue && isNumber(maxSelectedValues)
+    endValue && isNumber(maxSelectValues)
       ? dayjs(endValue)
-          .subtract(maxSelectedValues - 1, "day")
+          .subtract(maxSelectValues - 1, "day")
           .toDate()
       : undefined
   const maxDate =
-    startValue && isNumber(maxSelectedValues)
+    startValue && isNumber(maxSelectValues)
       ? dayjs(startValue)
-          .add(maxSelectedValues - 1, "day")
+          .add(maxSelectValues - 1, "day")
           .toDate()
       : undefined
 
@@ -93,7 +93,7 @@ export const useRangeDatePicker = ({
     getIconProps,
   } = useCalendarPicker({
     ...rest,
-    maxSelectedValues,
+    maxSelectValues,
     allowInputBeyond,
     enableRange: true,
     value,

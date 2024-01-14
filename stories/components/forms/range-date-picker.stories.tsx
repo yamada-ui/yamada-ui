@@ -158,7 +158,7 @@ export const withSeparator: Story = () => {
 }
 
 export const withMaxSelectedValue: Story = () => {
-  return <RangeDatePicker maxSelectedValues={3} />
+  return <RangeDatePicker maxSelectValues={3} />
 }
 
 export const withPattern: Story = () => {

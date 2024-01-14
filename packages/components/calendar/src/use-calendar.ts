@@ -55,7 +55,7 @@ export type CalendarContext = Pick<
     | "typeRef"
     | "prevRef"
     | "nextRef"
-    | "maxSelectedValues"
+    | "maxSelectValues"
   > & {
     value: MaybeValue
     setType: (
@@ -266,7 +266,7 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
   /**
    * The maximum selectable value.
    */
-  maxSelectedValues?: number
+  maxSelectValues?: number
   /**
    * If `true`, enables date multiple selection.
    *
@@ -321,7 +321,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   withHeader = true,
   withControls = true,
   withLabel = true,
-  maxSelectedValues,
+  maxSelectValues,
   enableMultiple = false,
   enableRange = false,
   selectMonthWith = "month",
@@ -516,7 +516,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     yearRefs,
     monthRefs,
     dayRefs,
-    maxSelectedValues,
+    maxSelectValues,
     selectMonthWith,
     enableRange,
   }

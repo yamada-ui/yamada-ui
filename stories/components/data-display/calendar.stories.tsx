@@ -287,7 +287,7 @@ export const useMultiValue: Story = () => {
     <>
       <Calendar enableMultiple />
       <Calendar defaultValue={[]} />
-      <Calendar enableMultiple maxSelectedValues={3} />
+      <Calendar enableMultiple maxSelectValues={3} />
       <Calendar enableMultiple amountOfMonths={3} />
     </>
   )
@@ -297,7 +297,7 @@ export const useRangeValue: Story = () => {
   return (
     <>
       <Calendar enableRange />
-      <Calendar enableRange maxSelectedValues={3} />
+      <Calendar enableRange maxSelectValues={3} />
       <Calendar
         enableRange
         minDate={new Date(new Date().setDate(5))}

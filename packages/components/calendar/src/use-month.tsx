@@ -49,7 +49,7 @@ export const useMonth = () => {
     paginateBy,
     prevMonth,
     nextMonth,
-    maxSelectedValues,
+    maxSelectValues,
     enableRange,
     hoveredValue,
     setHoveredValue,
@@ -63,7 +63,7 @@ export const useMonth = () => {
   const rangeSelectedValue = isRange
     ? sortDates(selectedValue.filter(Boolean) as Date[])
     : []
-  const isMax = isMulti && maxSelectedValues === selectedValue.length
+  const isMax = isMulti && maxSelectValues === selectedValue.length
   const isReversed =
     !!rangeSelectedValue[0] && isAfterDate(rangeSelectedValue[0], hoveredValue)
   const startDate = isRange
@@ -75,19 +75,19 @@ export const useMonth = () => {
   const isShouldBetween = rangeSelectedValue.length >= 1 && !!maybeEndDate
   const isShouldHovered = rangeSelectedValue.length === 1
   const hasAmountOfMonths = amountOfMonths >= 2
-  const minBetweenDate = isNumber(maxSelectedValues)
+  const minBetweenDate = isNumber(maxSelectValues)
     ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
-        .subtract(maxSelectedValues - 1, "day")
+        .subtract(maxSelectValues - 1, "day")
         .toDate()
     : undefined
-  const maxBetweenDate = isNumber(maxSelectedValues)
+  const maxBetweenDate = isNumber(maxSelectValues)
     ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
-        .add(maxSelectedValues - 1, "day")
+        .add(maxSelectValues - 1, "day")
         .toDate()
     : undefined
   const isInValidRangeDates =
-    isNumber(maxSelectedValues) &&
-    Math.abs(dayjs(startDate).diff(endDate, "day")) >= maxSelectedValues
+    isNumber(maxSelectValues) &&
+    Math.abs(dayjs(startDate).diff(endDate, "day")) >= maxSelectValues
   const minTrulyBetweenDate =
     isShouldHovered || isInValidRangeDates ? minBetweenDate : undefined
   const maxTrulyBetweenDate =

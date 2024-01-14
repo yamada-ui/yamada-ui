@@ -31,6 +31,7 @@ import { Menu } from "./menu"
 import { Modal } from "./modal"
 import { MonthPicker } from "./month-picker"
 import { MultiAutocomplete } from "./multi-autocomplete"
+import { MultiDatePicker } from "./multi-date-picker"
 import { MultiSelect } from "./multi-select"
 import { NativeSelect } from "./native-select"
 import { NativeTable } from "./native-table"
@@ -41,6 +42,7 @@ import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
 import { Progress } from "./progress"
 import { Radio } from "./radio"
+import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
 import { Reorder } from "./reorder"
@@ -92,6 +94,7 @@ export default {
   Modal,
   MonthPicker,
   MultiAutocomplete,
+  MultiDatePicker,
   MultiSelect,
   NativeSelect,
   NumberInput,
@@ -101,6 +104,7 @@ export default {
   Popover,
   Progress,
   Radio,
+  RangeDatePicker,
   RangeSlider,
   Rating,
   Reorder,

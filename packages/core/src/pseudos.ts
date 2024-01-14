@@ -133,7 +133,10 @@ export const pseudos = {
    */
   _autofill: "&:-webkit-autofill",
   _filled: "&[data-filled]",
+  _start: "&[data-start]",
+  _end: "&[data-end]",
   _outside: "&[data-outside]",
+  _between: "&[data-between]",
   _weekend: "&[data-weekend]",
   _holiday: "&[data-holiday]",
   _today: "&[data-today]",

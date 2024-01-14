@@ -72,7 +72,7 @@ type SelectOptions = {
 export type SelectProps = ThemeProps<"Select"> &
   Omit<
     UseSelectProps<string>,
-    "isEmpty" | "maxSelectedValues" | "omitSelectedValues"
+    "isEmpty" | "maxSelectValues" | "omitSelectedValues"
   > &
   SelectOptions
 

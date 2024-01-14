@@ -42,6 +42,7 @@ export const isHidden = (el: HTMLElement): boolean => {
 
 export const isDisabled = (el: HTMLElement): boolean =>
   Boolean(el.getAttribute("disabled")) === true ||
+  Boolean(el.getAttribute("data-disabled")) === true ||
   Boolean(el.getAttribute("aria-disabled")) === true
 
 const isVisible = (el: HTMLElement) => el.offsetWidth > 0 && el.offsetHeight > 0

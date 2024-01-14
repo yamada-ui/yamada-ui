@@ -173,6 +173,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     paginateBy,
     withWeekdays,
     disableOutsideDays,
+    hiddenOutsideDays,
     minDate,
     maxDate,
     locale,
@@ -449,6 +450,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       paginateBy,
       withWeekdays,
       disableOutsideDays,
+      hiddenOutsideDays,
       yearFormat,
       monthFormat,
       weekdayFormat,
@@ -476,6 +478,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       enableRange,
     }),
     [
+      hiddenOutsideDays,
       maxSelectValues,
       enableMultiple,
       enableRange,

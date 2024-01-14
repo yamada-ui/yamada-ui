@@ -458,6 +458,10 @@ export const disabledWeekdays: Story = () => {
   return <RangeDatePicker placeholder="YYYY/MM/DD" withWeekdays={false} />
 }
 
+export const hiddenOutsideDays: Story = () => {
+  return <RangeDatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+}
+
 export const customIcon: Story = () => {
   return (
     <>

@@ -1,0 +1,158 @@
+{
+  "Resizable": {
+    "colorScheme": {
+      "defaultValue": "gray",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "containerRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLDivElement | null) => void)\n  | MutableRefObject<HTMLDivElement | null>",
+      "required": false,
+      "description": "Ref for resizable container element."
+    },
+    "direction": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "horizontal",
+      "required": false,
+      "description": "The direction of the resizable."
+    },
+    "groupProps": {
+      "type": "ResizableGroupProps",
+      "required": false,
+      "description": "Props for resizable component."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the resizable trigger will be disabled."
+    },
+    "keyboardStep": {
+      "type": "number",
+      "defaultValue": "10",
+      "required": false,
+      "description": "Unit to resize by keyboard operation."
+    },
+    "onLayout": {
+      "type": "PanelGroupOnLayout",
+      "required": false,
+      "description": "The callback invoked when resizable items are resized."
+    },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Resizable."
+    },
+    "storage": {
+      "type": "PanelGroupStorage",
+      "required": false,
+      "description": "A callback that gets and sets a value in custom storage."
+    },
+    "storageKey": {
+      "type": "string",
+      "required": false,
+      "description": "Key of value saved in storage.\nBy default, it is saved to `local storage`."
+    },
+    "variant": {
+      "defaultValue": "border",
+      "type": "\"border\" | \"spacer\"",
+      "required": false,
+      "description": "The variant of the Resizable."
+    }
+  },
+  "ResizableItem": {
+    "as": { "type": "keyof HTMLElementTagNameMap", "required": false },
+    "collapsedSize": {
+      "type": "number",
+      "required": false,
+      "description": "The collapsed size of the resizable item."
+    },
+    "collapsible": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the resizable item can be collapsed."
+    },
+    "controlRef": {
+      "type": "RefObject<ImperativePanelHandle>",
+      "required": false,
+      "description": "Ref of the resizable item callback."
+    },
+    "defaultSize": {
+      "type": "number",
+      "required": false,
+      "description": "The initial size of the resizable item."
+    },
+    "id": {
+      "type": "string",
+      "required": false,
+      "description": "id assigned to resizable item element."
+    },
+    "innerRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLDivElement | null) => void)\n  | MutableRefObject<HTMLDivElement | null>",
+      "required": false,
+      "description": "Ref for resizable item inner element."
+    },
+    "itemProps": {
+      "type": "ResizableItemProps",
+      "required": false,
+      "description": "Props for resizable item component."
+    },
+    "maxSize": {
+      "type": "number",
+      "required": false,
+      "description": "The maximum allowed value of the resizable item."
+    },
+    "minSize": {
+      "type": "number",
+      "required": false,
+      "description": "The minimum allowed value of the resizable item."
+    },
+    "onCollapse": {
+      "type": "() => void",
+      "required": false,
+      "description": "The callback invoked when resizable item are collapsed."
+    },
+    "onExpand": {
+      "type": "() => void",
+      "required": false,
+      "description": "The callback invoked when resizable item are expanded."
+    },
+    "onResize": {
+      "type": "(size: number, prevSize: number | undefined) => void",
+      "required": false,
+      "description": "The callback invoked when resizable item are resized."
+    },
+    "order": {
+      "type": "number",
+      "required": false,
+      "description": "Order for the resizable item."
+    }
+  },
+  "ResizableTrigger": {
+    "as": { "type": "keyof HTMLElementTagNameMap", "required": false },
+    "icon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "required": false,
+      "description": "The resizable trigger icon to use."
+    },
+    "iconProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for resizable trigger icon component."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the resizable trigger will be disabled."
+    }
+  },
+  "ResizableTriggerIcon": {
+    "size": {
+      "type": "UIValue<number | \"small\" | (string & {}) | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 13 more ... | \"9xl\">",
+      "required": false,
+      "description": "The CSS `font-size` property."
+    }
+  }
+}

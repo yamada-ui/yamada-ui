@@ -362,17 +362,19 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 
   if (isRange) disableOutsideDays = false
 
-  if (!isMulti && value) {
-    defaultMonth ??= new Date(new Date(value).setDate(1))
-  } else if ((isMulti || isRange) && resolvedValue.length) {
-    defaultMonth ??= new Date(new Date(resolvedValue.at(-1)!).setDate(1))
-  } else {
-    defaultMonth ??= new Date(new Date().setDate(1))
-  }
-
   const [month, setMonth] = useControllableState({
     value: monthProp,
-    defaultValue: defaultMonth,
+    defaultValue: () => {
+      if (!isMulti && value) {
+        defaultMonth ??= new Date(new Date(value).setDate(1))
+      } else if ((isMulti || isRange) && resolvedValue.length) {
+        defaultMonth ??= new Date(new Date(resolvedValue.at(-1)!).setDate(1))
+      } else {
+        defaultMonth ??= new Date(new Date().setDate(1))
+      }
+
+      return defaultMonth
+    },
     onChange: onChangeMonthProp,
     onUpdate: (prev, next) => !isSameDate(prev, next),
   })

@@ -176,6 +176,10 @@ export const withComponent: Story = () => {
   )
 }
 
+export const withMaxSelectedValues: Story = () => {
+  return <MultiDatePicker maxSelectedValues={3} />
+}
+
 export const withPattern: Story = () => {
   return (
     <MultiDatePicker

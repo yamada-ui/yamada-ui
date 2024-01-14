@@ -1,6 +1,6 @@
 import type { UIPropGetter } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { handlerAll } from "@yamada-ui/utils"
+import { handlerAll, isNumber, useUpdateEffect } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
 import { useCallback, useRef, useState } from "react"
@@ -26,11 +26,17 @@ type CalendarProps = Omit<
 
 type UseMultiDatePickerOptions = {
   /**
-   * If `true`, the list element will be closed when value is selected.
+   * If `true`, the calendar component will be closed when value is selected.
    *
    * @default false
    */
   closeOnSelect?: boolean
+  /**
+   * If `true`, the calendar component will be closed when value is max selected.
+   *
+   * @default true
+   */
+  closeOnMaxSelect?: boolean
 }
 
 export type UseMultiDatePickerProps = UseCalendarPickerProps<CalendarProps> &
@@ -42,6 +48,8 @@ export const useMultiDatePicker = ({
   onChange: onChangeProp,
   placeholder,
   closeOnSelect = false,
+  maxSelectedValues,
+  closeOnMaxSelect = true,
   excludeDate,
   ...rest
 }: UseMultiDatePickerProps) => {
@@ -74,6 +82,7 @@ export const useMultiDatePicker = ({
   } = useCalendarPicker({
     excludeDate,
     ...rest,
+    maxSelectedValues,
     enableMultiple: true,
     value: resolvedValue,
     defaultValue,
@@ -103,6 +112,8 @@ export const useMultiDatePicker = ({
 
       if (!!value && dayjs(value).isValid()) {
         setValue((prev) => {
+          if (prev.length === maxSelectedValues) return prev
+
           const isSelected = prev?.some((prevValue) =>
             isSameDate(prevValue, value),
           )
@@ -123,6 +134,12 @@ export const useMultiDatePicker = ({
       setValue((prev) => prev.slice(0, -1))
     },
   })
+
+  useUpdateEffect(() => {
+    if (!closeOnMaxSelect || !isNumber(maxSelectedValues)) return
+
+    if (maxSelectedValues <= value.length) onClose()
+  }, [value])
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {

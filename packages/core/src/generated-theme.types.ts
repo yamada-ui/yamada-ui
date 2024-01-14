@@ -789,6 +789,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
     }
+    MultiDatePicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
     MultiSelect: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -818,6 +822,10 @@ export interface GeneratedTheme extends UITheme {
       variants: string & {}
     }
     Radio: { sizes: "sm" | "md" | "lg" | (string & {}); variants: string & {} }
+    RangeDatePicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
     RangeSlider: {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}

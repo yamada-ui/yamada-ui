@@ -106,7 +106,7 @@
       "required": false,
       "description": "The maximum possible date."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
@@ -179,12 +179,6 @@
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the Calendar."
-    },
-    "strictRangeSelection": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it prevents range selection across invalid dates."
     },
     "tableProps": {
       "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }",
@@ -345,7 +339,7 @@
       "type": "boolean",
       "defaultValue": true,
       "required": false,
-      "description": "If `true`, the list element will be closed when value is selected."
+      "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
@@ -522,7 +516,7 @@
       "required": false,
       "description": "The maximum possible date."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
@@ -626,12 +620,6 @@
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
-    },
-    "strictRangeSelection": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it prevents range selection across invalid dates."
     },
     "today": {
       "type": "boolean",
@@ -768,16 +756,27 @@
       "required": false,
       "description": "If `true`, the popover will close when you hit the `Esc` key."
     },
-    "closeOnSelect": {
+    "closeOnMaxSelect": {
       "type": "boolean",
       "defaultValue": true,
       "required": false,
-      "description": "If `true`, the list element will be closed when value is selected."
+      "description": "If `true`, the calendar component will be closed when value is max selected."
+    },
+    "closeOnSelect": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "component": {
+      "type": "FC<{\n  value: Date\n  label: string\n  index: number\n  onRemove: MouseEventHandler<HTMLElement>\n}>",
+      "required": false,
+      "description": "The custom display value to use."
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
@@ -925,6 +924,12 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
+    "keepPlaceholder": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, keep the placeholder."
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
@@ -949,7 +954,7 @@
       "required": false,
       "description": "The maximum possible date."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
@@ -983,7 +988,7 @@
       "description": "The main and cross-axis offset to displace popper element from its reference element."
     },
     "onChange": {
-      "type": "(value: Date[] | undefined) => void",
+      "type": "(value: Date[]) => void",
       "required": false,
       "description": "The callback invoked when value state changes."
     },
@@ -1042,6 +1047,12 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
+    "separator": {
+      "type": "string",
+      "defaultValue": "','",
+      "required": false,
+      "description": "The visual separator between each value."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
@@ -1053,12 +1064,6 @@
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
-    },
-    "strictRangeSelection": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it prevents range selection across invalid dates."
     },
     "today": {
       "type": "boolean",
@@ -1250,6 +1255,16 @@
       "required": false,
       "description": "The animation duration."
     },
+    "endInputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for date picker end input element."
+    },
+    "endPlaceholder": {
+      "type": "boolean",
+      "required": false,
+      "description": "The end date placeholder"
+    },
     "errorBorderColor": {
       "type": "string",
       "required": false,
@@ -1311,11 +1326,6 @@
       "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
-    "inputProps": {
-      "type": "HTMLUIProps<\"input\">",
-      "required": false,
-      "description": "Props for date picker input element."
-    },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
@@ -1376,7 +1386,7 @@
       "required": false,
       "description": "The maximum possible date."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
@@ -1410,7 +1420,7 @@
       "description": "The main and cross-axis offset to displace popper element from its reference element."
     },
     "onChange": {
-      "type": "(\n  value: [(Date | undefined)?, (Date | undefined)?] | undefined,\n) => void",
+      "type": "(\n  value: [(Date | undefined)?, (Date | undefined)?],\n) => void",
       "required": false,
       "description": "The callback invoked when value state changes."
     },
@@ -1469,23 +1479,33 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
+    "separator": {
+      "type": "string",
+      "defaultValue": "'-'",
+      "required": false,
+      "description": "The visual separator between each value."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the RangeDatePicker."
     },
+    "startInputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for date picker start input element."
+    },
+    "startPlaceholder": {
+      "type": "boolean",
+      "required": false,
+      "description": "The start date placeholder"
+    },
     "strategy": {
       "type": "\"fixed\" | \"absolute\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
-    },
-    "strictRangeSelection": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, it prevents range selection across invalid dates."
     },
     "today": {
       "type": "boolean",
@@ -1620,7 +1640,7 @@
       "type": "boolean",
       "defaultValue": true,
       "required": false,
-      "description": "If `true`, the list element will be closed when value is selected."
+      "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",

@@ -465,14 +465,6 @@ To customize control buttons, set `controlProps`, `prevProps`, or `nextProps` to
 
   <Calendar
     dayProps={{
-      sx: { _outside: { pointerEvents: "none" } },
-      component: ({ isOutside, date }) =>
-        !isOutside ? <Text as="span">{date.getDate()}</Text> : null,
-    }}
-  />
-
-  <Calendar
-    dayProps={{
       component: ({ isSelected, col, row, date }) => (
         <Text
           as="span"

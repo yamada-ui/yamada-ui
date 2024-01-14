@@ -93,7 +93,7 @@ export type MultiDatePickerProps = ThemeProps<"DatePicker"> &
   UseMultiDatePickerProps
 
 /**
- * `MultiDatePicker` is a component used for users to select multiple date.
+ * `MultiDatePicker` is a component used for users to select multiple dates.
  *
  * @see Docs https://yamada-ui.com/components/forms/multi-date-picker
  */

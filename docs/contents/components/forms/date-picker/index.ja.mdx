@@ -363,6 +363,14 @@ import "dayjs/locale/ja"
 <DatePicker placeholder="YYYY/MM/DD" disableOutsideDays />
 ```
 
+### 当月外の日付を非表示にする
+
+当月外の日付を非表示にする場合は、`hiddenOutsideDays`を`true`に設定します。
+
+```tsx
+<DatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+```
+
 ### 表示位置を変更する
 
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。

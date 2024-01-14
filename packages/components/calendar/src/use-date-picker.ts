@@ -29,7 +29,7 @@ type CalendarProps = Omit<
 
 type UseDatePickerOptions = {
   /**
-   * If `true`, the list element will be closed when value is selected.
+   * If `true`, the calendar component will be closed when value is selected.
    *
    * @default true
    */

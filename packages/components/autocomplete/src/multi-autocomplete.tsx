@@ -88,10 +88,16 @@ type MultiAutocompleteOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
 }
 
 export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
-  UseAutocompleteProps<string[]> &
+  Omit<UseAutocompleteProps<string[]>, "closeOnSelect"> &
   MultiAutocompleteOptions
 
 /**

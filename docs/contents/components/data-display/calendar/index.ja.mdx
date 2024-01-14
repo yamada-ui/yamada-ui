@@ -242,6 +242,14 @@ import "dayjs/locale/ja"
 <Calendar disableOutsideDays />
 ```
 
+### 当月外の日付を非表示にする
+
+当月外の日付を非表示にする場合は、`hiddenOutsideDays`を`true`に設定します。
+
+```tsx
+<Calendar hiddenOutsideDays />
+```
+
 ### 表示する月の数を変更する
 
 表示する月の数を変更する場合は、`amountOfMonths`に数値を設定します。
@@ -262,12 +270,23 @@ import "dayjs/locale/ja"
 <Calendar amountOfMonths={2} disableOutsideDays paginateBy={1} />
 ```
 
-### 複数選択を許可する
+### 複数選択を有効にする
 
-複数選択を許可する場合は、`defaultValue`に空の配列を設定します。
+複数選択を有効にする場合は、`enableMultiple`を`true`に設定するか、`defaultValue`に空の配列を設定します。
 
 ```tsx
-<Calendar defaultValue={[]} />
+<VStack>
+  <Calendar enableMultiple />
+  <Calendar defaultValue={[]} />
+</VStack>
+```
+
+### 範囲選択を有効にする
+
+範囲選択を有効にする場合は、`enableRange`を`true`に設定します。
+
+```tsx
+<Calendar enableRange />
 ```
 
 ### 選択可能な最大値の数を設定する
@@ -275,7 +294,10 @@ import "dayjs/locale/ja"
 選択可能な最大値の数を設定する場合は、`maxSelectValues`に数値を設定します。
 
 ```tsx
-<Calendar defaultValue={[]} maxSelectValues={3} />
+<VStack>
+  <Calendar enableMultiple maxSelectValues={3} />
+  <Calendar enableRange maxSelectValues={3} />
+</VStack>
 ```
 
 ### 要素を無効(非表示)にする

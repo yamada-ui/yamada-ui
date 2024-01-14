@@ -213,7 +213,7 @@ import "dayjs/locale/ja"
 ```
 
 :::note
-For information about locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
+For locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
 :::
 
 ### Change Date Format
@@ -231,7 +231,7 @@ To change the date format, set `dateFormat` or `yearFormat` to a string.
 ```
 
 :::note
-For information about formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
+For formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
 :::
 
 ### Disable Dates Outside the Current Month
@@ -240,6 +240,14 @@ To disable dates outside the current month, set `disableOutsideDays` to `true`.
 
 ```tsx
 <Calendar disableOutsideDays />
+```
+
+### Hide Dates Outside the Current Month
+
+To hide dates outside the current month, set `hiddenOutsideDays` to `true`.
+
+```tsx
+<Calendar hiddenOutsideDays />
 ```
 
 ### Change the Number of Months Displayed
@@ -262,12 +270,23 @@ To change the pagination unit, set `paginateBy` to a number. By default, the sam
 <Calendar amountOfMonths={2} disableOutsideDays paginateBy={1} />
 ```
 
-### Allow Multiple Selection
+### Enable Multiple Selection
 
-To allow multiple selection, set `defaultValue` to an empty array.
+To enable multiple selection, set `enableMultiple` to `true` or set `defaultValue` to an empty array.
 
 ```tsx
-<Calendar defaultValue={[]} />
+<VStack>
+  <Calendar enableMultiple />
+  <Calendar defaultValue={[]} />
+</VStack>
+```
+
+### Enable Range Selection
+
+To enable range selection, set `enableRange` to `true`.
+
+```tsx
+<Calendar enableRange />
 ```
 
 ### Set Maximum Number of Selectable Values
@@ -275,7 +294,10 @@ To allow multiple selection, set `defaultValue` to an empty array.
 To set the maximum number of selectable values, set `maxSelectValues` to a number.
 
 ```tsx
-<Calendar defaultValue={[]} maxSelectValues={3} />
+<VStack>
+  <Calendar enableMultiple maxSelectValues={3} />
+  <Calendar enableRange maxSelectValues={3} />
+</VStack>
 ```
 
 ### Disable (Hide) Elements
@@ -359,7 +381,7 @@ To customize the label button, set `labelProps` to `props`.
 
 ### Customize Control Buttons
 
-To customize the control buttons, set `controlProps`, `prevProps`, or `nextProps` to `props`.
+To customize control buttons, set `controlProps`, `prevProps`, or `nextProps` to `props`.
 
 ```tsx
 <VStack>

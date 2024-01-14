@@ -1,5 +1,15 @@
 # @yamada-ui/core
 
+## 1.1.4
+
+### Patch Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`0c9e7c2`](https://github.com/hirotomoyamada/yamada-ui/commit/0c9e7c26a0346a1ee5eb644af125072b1906d295) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_start`, `_end` and `_between` pseudo props.
+
+- Updated dependencies [[`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/utils@1.0.2
+  - @yamada-ui/portal@1.0.2
+
 ## 1.1.3
 
 ### Patch Changes

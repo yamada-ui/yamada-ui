@@ -1,5 +1,17 @@
 # @yamada-ui/slider
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`0c9e7c2`](https://github.com/hirotomoyamada/yamada-ui/commit/0c9e7c26a0346a1ee5eb644af125072b1906d295), [`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/core@1.1.4
+  - @yamada-ui/utils@1.0.2
+  - @yamada-ui/form-control@1.0.7
+  - @yamada-ui/use-controllable-state@1.0.2
+  - @yamada-ui/use-pan-event@1.0.2
+  - @yamada-ui/use-size@1.0.2
+
 ## 1.0.7
 
 ### Patch Changes

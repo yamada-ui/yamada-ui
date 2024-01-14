@@ -87,6 +87,13 @@ type UseCalendarPickerOptions = {
    */
   calendarProps?: CalendarBaseProps
   /**
+   * If `true`, focus will be transferred to the input element when the popover opens and container or clear icon clicked.
+   *
+   * @private
+   * @default true
+   */
+  autoFocus?: boolean
+  /**
    * The callback invoked when date picker clear icon clicked.
    *
    * @private
@@ -97,13 +104,13 @@ type UseCalendarPickerOptions = {
    *
    * @private
    */
-  onEnter?: () => void
+  onEnter?: (ev: KeyboardEvent<HTMLDivElement>) => void
   /**
    * The callback invoked when you hit the `Backspace` key.
    *
    * @private
    */
-  onDelete?: () => void
+  onDelete?: (ev: KeyboardEvent<HTMLDivElement>) => void
 }
 
 type UseCalendarPickerBaseProps<
@@ -190,6 +197,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     parseDate,
     pattern = /[^0-9\-\/]/g,
     inputFormat = "YYYY/MM/DD",
+    autoFocus = true,
     onOpen: onOpenProp,
     onClose: onCloseProp,
     onClear: onClearProp,
@@ -210,7 +218,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
 
   const containerRef = useRef<HTMLDivElement>(null)
-  const fieldRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -260,10 +268,10 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
     setIsOpen(true)
 
-    if (allowInput && fieldRef.current) fieldRef.current.focus()
+    if (autoFocus && allowInput) inputRef.current?.focus()
 
     onOpenProp?.()
-  }, [allowInput, disabled, readOnly, onOpenProp])
+  }, [autoFocus, allowInput, disabled, readOnly, onOpenProp])
 
   const onClose = useCallback(() => {
     setIsOpen(false)
@@ -273,11 +281,11 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const onClick = useCallback(() => {
     if (isOpen) {
-      if (allowInput && fieldRef.current) fieldRef.current.focus()
+      if (autoFocus && allowInput) inputRef.current?.focus()
     } else {
       onOpen()
     }
-  }, [allowInput, isOpen, onOpen])
+  }, [autoFocus, allowInput, isOpen, onOpen])
 
   const onFocus = useCallback(() => {
     if (!isOpen) onOpen()
@@ -302,19 +310,40 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       if (disabled || readOnly) return
 
-      const actions: Record<string, Function | undefined> = {
-        Space: !isOpen ? onOpen : undefined,
-        Enter: !isOpen ? onOpen : onEnter,
-        Escape: closeOnEsc ? onClose : undefined,
+      const actions: Record<
+        string,
+        KeyboardEventHandler<HTMLDivElement> | undefined
+      > = {
+        Space: !isOpen
+          ? (ev) => {
+              ev.preventDefault()
+              ev.stopPropagation()
+
+              onOpen()
+            }
+          : undefined,
+        Enter: !isOpen
+          ? (ev) => {
+              ev.preventDefault()
+              ev.stopPropagation()
+
+              onOpen()
+            }
+          : onEnter,
+        Escape: closeOnEsc
+          ? (ev) => {
+              ev.preventDefault()
+              ev.stopPropagation()
+
+              onClose()
+            }
+          : undefined,
         Backspace: onDelete,
       }
 
       const action = actions[ev.key]
 
       if (!action) return
-
-      ev.preventDefault()
-      ev.stopPropagation()
 
       action(ev)
     },
@@ -336,9 +365,9 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       onClearProp?.()
 
-      if (isOpen && fieldRef.current) fieldRef.current.focus()
+      if (autoFocus && allowInput && isOpen) inputRef.current?.focus()
     },
-    [isOpen, onClearProp],
+    [autoFocus, allowInput, isOpen, onClearProp],
   )
 
   useOutsideClick({
@@ -387,7 +416,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       }
 
       return {
-        ref: mergeRefs(ref, fieldRef),
+        ref: mergeRefs(inputRef, ref),
         tabIndex: !allowInput ? 0 : -1,
         ...props,
         ...formControlProps,
@@ -499,7 +528,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     pattern,
     inputProps,
     formControlProps,
-    fieldRef,
+    containerRef,
+    inputRef,
     isOpen,
     onOpen,
     onClose,

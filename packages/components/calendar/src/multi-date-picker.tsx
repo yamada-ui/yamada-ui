@@ -17,6 +17,7 @@ import type {
   MouseEventHandler,
   Dispatch,
   SetStateAction,
+  RefAttributes,
 } from "react"
 import { Calendar } from "./calendar"
 import { isSameDate } from "./calendar-utils"
@@ -234,7 +235,12 @@ export const MultiDatePickerField = forwardRef<
   ) => {
     const styles = useDatePickerContext()
     const inputRef = useRef<HTMLInputElement>(null)
-    const { placeholder, ...computedInputProps } = inputProps ?? {}
+    const {
+      ref: inputPropRef,
+      placeholder,
+      ...computedInputProps
+    } = (inputProps ?? {}) as RefAttributes<HTMLInputElement> &
+      HTMLUIProps<"input">
 
     const cloneChildren = useMemo(() => {
       if (component) {
@@ -246,7 +252,7 @@ export const MultiDatePickerField = forwardRef<
               (prev) => prev?.filter((value) => !isSameDate(value, date)),
             )
 
-            if (inputRef.current) inputRef.current.focus()
+            inputRef.current?.focus()
           }
 
           const el = component({
@@ -300,7 +306,7 @@ export const MultiDatePickerField = forwardRef<
           {cloneChildren}
 
           <ui.input
-            ref={mergeRefs(ref, inputRef)}
+            ref={mergeRefs(ref, inputPropRef, inputRef)}
             className="ui-multi-date-picker__field__input"
             display="inline-block"
             flex="1"

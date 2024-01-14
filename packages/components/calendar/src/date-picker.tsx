@@ -11,8 +11,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { useClickable } from "@yamada-ui/use-clickable"
-import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
-import type { FC, HTMLAttributes } from "react"
+import {
+  cx,
+  getValidChildren,
+  isValidElement,
+  mergeRefs,
+} from "@yamada-ui/utils"
+import type { FC, HTMLAttributes, RefAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { Calendar } from "./calendar"
 import type { UseDatePickerProps } from "./use-date-picker"
@@ -163,6 +168,8 @@ export type DatePickerFieldProps = HTMLUIProps<"div"> & DatePickerFieldOptions
 export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
   ({ className, h, minH, inputProps, ...rest }, ref) => {
     const styles = useDatePickerContext()
+    const { ref: inputRef, ...computedInputProps } =
+      inputProps as RefAttributes<HTMLInputElement> & HTMLUIProps<"input">
 
     const css: CSSUIObject = {
       pe: "2rem",
@@ -181,11 +188,11 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
           {...rest}
         >
           <ui.input
-            ref={ref}
+            ref={mergeRefs(ref, inputRef)}
             className="ui-date-picker__field__input"
             display="inline-block"
             w="full"
-            {...inputProps}
+            {...computedInputProps}
           />
         </ui.div>
       </PopoverTrigger>

@@ -55,7 +55,7 @@ export const useDatePicker = ({
   })
 
   const {
-    fieldRef,
+    inputRef,
     id,
     allowInput,
     pattern,
@@ -118,7 +118,7 @@ export const useDatePicker = ({
   )
 
   useUpdateEffect(() => {
-    if (fieldRef.current && isActiveElement(fieldRef.current)) return
+    if (inputRef.current && isActiveElement(inputRef.current)) return
 
     const inputValue = dateToString(value)
 
@@ -126,7 +126,7 @@ export const useDatePicker = ({
   }, [value])
 
   const getInputProps: UIPropGetter = useCallback(
-    (props = {}) => {
+    (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
         ...(inputProps as { style?: CSSProperties }).style,
@@ -138,6 +138,7 @@ export const useDatePicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        ref,
         style,
         id,
         tabIndex: !allowInput ? -1 : 0,

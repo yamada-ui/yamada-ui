@@ -53,7 +53,6 @@ export const useMultiDatePicker = ({
     onChange: onChangeProp,
   })
   const [inputValue, setInputValue] = useState<string>("")
-  const isEmptyValue = !inputValue.length
 
   const resolvedValue = getResolvedValue([...(value ?? []), draftValue.current])
 
@@ -115,11 +114,14 @@ export const useMultiDatePicker = ({
       setInputValue("")
       draftValue.current = undefined
     },
-    onDelete: isEmptyValue
-      ? () => {
-          setValue((prev) => prev.slice(0, -1))
-        }
-      : undefined,
+    onDelete: (ev) => {
+      if (inputValue.length) return
+
+      ev.preventDefault()
+      ev.stopPropagation()
+
+      setValue((prev) => prev.slice(0, -1))
+    },
   })
 
   const onChange = useCallback(
@@ -148,7 +150,7 @@ export const useMultiDatePicker = ({
   }, [pattern])
 
   const getInputProps: UIPropGetter = useCallback(
-    (props = {}) => {
+    (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
         ...(inputProps as { style?: CSSProperties }).style,
@@ -160,6 +162,7 @@ export const useMultiDatePicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        ref,
         style,
         id,
         tabIndex: !allowInput ? -1 : 0,

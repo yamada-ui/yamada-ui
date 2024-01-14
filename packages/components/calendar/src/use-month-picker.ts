@@ -85,7 +85,7 @@ export const useMonthPicker = ({
   })
 
   const {
-    fieldRef,
+    inputRef,
     id,
     allowInput,
     pattern,
@@ -166,7 +166,7 @@ export const useMonthPicker = ({
   )
 
   useUpdateEffect(() => {
-    if (fieldRef.current && isActiveElement(fieldRef.current)) return
+    if (inputRef.current && isActiveElement(inputRef.current)) return
 
     const inputValue = dateToString(value)
 
@@ -174,7 +174,7 @@ export const useMonthPicker = ({
   }, [value])
 
   const getInputProps: UIPropGetter = useCallback(
-    (props = {}) => {
+    (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
         ...(inputProps as { style?: CSSProperties }).style,
@@ -186,6 +186,7 @@ export const useMonthPicker = ({
         ...formControlProps,
         ...inputProps,
         ...props,
+        ref,
         style,
         id,
         tabIndex: !allowInput ? -1 : 0,

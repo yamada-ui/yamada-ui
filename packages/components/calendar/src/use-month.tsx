@@ -75,18 +75,23 @@ export const useMonth = () => {
   const isShouldBetween = rangeSelectedValue.length >= 1 && !!maybeEndDate
   const isShouldHovered = rangeSelectedValue.length === 1
   const hasAmountOfMonths = amountOfMonths >= 2
-  const minBetweenDate =
-    isNumber(maxSelectedValues) && isShouldHovered
-      ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
-          .subtract(maxSelectedValues - 1, "day")
-          .toDate()
-      : undefined
-  const maxBetweenDate =
-    isNumber(maxSelectedValues) && isShouldHovered
-      ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
-          .add(maxSelectedValues - 1, "day")
-          .toDate()
-      : undefined
+  const minBetweenDate = isNumber(maxSelectedValues)
+    ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+        .subtract(maxSelectedValues - 1, "day")
+        .toDate()
+    : undefined
+  const maxBetweenDate = isNumber(maxSelectedValues)
+    ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+        .add(maxSelectedValues - 1, "day")
+        .toDate()
+    : undefined
+  const isInValidRangeDates =
+    isNumber(maxSelectedValues) &&
+    Math.abs(dayjs(startDate).diff(endDate, "day")) >= maxSelectedValues
+  const minTrulyBetweenDate =
+    isShouldHovered || isInValidRangeDates ? minBetweenDate : undefined
+  const maxTrulyBetweenDate =
+    isShouldHovered || isInValidRangeDates ? maxBetweenDate : undefined
 
   const onFocusPrev = useCallback(
     (targetIndex: number, targetMonth: number, targetDay: number) => {
@@ -362,8 +367,8 @@ export const useMonth = () => {
       const isToday = today && isSameDate(new Date(), value)
       const isDisabled = isDisabledDate({
         value,
-        minDate: minBetweenDate ?? minDate,
-        maxDate: maxBetweenDate ?? maxDate,
+        minDate: minTrulyBetweenDate ?? minDate,
+        maxDate: maxTrulyBetweenDate ?? maxDate,
         isOutside,
         excludeDate,
         disableOutsideDays,
@@ -372,14 +377,21 @@ export const useMonth = () => {
       const isFirstDate = value.getDate() === 1
       const isShouldFocus =
         (!isSelectedMonth && !isOutside && isFirstDate) || isSelected
-      const isStart = isRange && isSameDate(maybeStartDate, value)
-      const isEnd = isRange && isSameDate(maybeEndDate, value) && !isStart
+      const isStart =
+        isRange &&
+        isSameDate(maybeStartDate, value) &&
+        !isSameDate(maybeEndDate, value)
+      const isEnd =
+        isRange &&
+        isSameDate(maybeEndDate, value) &&
+        !isSameDate(maybeStartDate, value)
+      const isTrulyStart = isStart && (!hasAmountOfMonths || !isOutside)
+      const isTrulyEnd = isEnd && (!hasAmountOfMonths || !isOutside)
       const isBetween =
         isShouldBetween &&
+        !isSameDate(maybeStartDate, maybeEndDate) &&
         !isHidden &&
         isInRange(value, maybeStartDate, maybeEndDate)
-      const isTrulyEnd = isEnd && (!hasAmountOfMonths || !isOutside)
-      const isTrulyStart = isStart && (!hasAmountOfMonths || !isOutside)
 
       const key = `${index}-${value.getMonth()}-${value.getDate()}`
 
@@ -422,9 +434,9 @@ export const useMonth = () => {
       selectedValue,
       hasAmountOfMonths,
       today,
-      minBetweenDate,
+      minTrulyBetweenDate,
       minDate,
-      maxBetweenDate,
+      maxTrulyBetweenDate,
       maxDate,
       excludeDate,
       disableOutsideDays,

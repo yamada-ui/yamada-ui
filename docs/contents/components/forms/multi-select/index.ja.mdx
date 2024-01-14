@@ -203,10 +203,10 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ### 選択可能な最大数を設定する
 
-選択可能な最大数を設定する場合は、`maxSelectedValues`を`true`に設定します。
+選択可能な最大数を設定する場合は、`maxSelectValues`に数値を設定します。
 
 ```tsx
-<MultiSelect placeholder="キャラクターを選択" maxSelectedValues={3}>
+<MultiSelect placeholder="キャラクターを選択" maxSelectValues={3}>
   <OptionGroup label="地球人">
     <Option value="孫悟空">孫悟空</Option>
     <Option value="孫悟飯">孫悟飯</Option>

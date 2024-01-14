@@ -19,6 +19,16 @@ tab: Props
 />
 
 <PropsCard
+  id="monthpicker-allowinputbeyond"
+  name="allowInputBeyond"
+  type="boolean"
+  description={
+    "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="monthpicker-animation"
   name="animation"
   type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
@@ -40,6 +50,7 @@ tab: Props
   id="monthpicker-calendarcolorscheme"
   name="calendarColorScheme"
   type='"link" | (string & {}) | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 11 more ... | "sky"'
+  description={"ColorScheme for the calendar component."}
 />
 
 <PropsCard
@@ -53,12 +64,14 @@ tab: Props
   id="monthpicker-calendarsize"
   name="calendarSize"
   type='UIValue<(string & {}) | "sm" | "md" | "lg" | "full">'
+  description={"Size for the calendar component."}
 />
 
 <PropsCard
   id="monthpicker-calendarvariant"
   name="calendarVariant"
   type='UIValue<(string & {}) | "solid" | "unstyled" | "subtle">'
+  description={"Variant for the calendar component."}
 />
 
 <PropsCard
@@ -91,7 +104,7 @@ tab: Props
   name="closeOnSelect"
   type="boolean"
   description={
-    "If `true`, the list element will be closed when value is selected."
+    "If `true`, the calendar component will be closed when value is selected."
   }
   defaultValue={"true"}
 />
@@ -207,7 +220,7 @@ tab: Props
   description={
     "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass."
   }
-  defaultValue={"'YYYY/MM'"}
+  defaultValue={"'YYYY/MM/DD'"}
   docs="https://day.js.org/docs/en/display/format#list-of-localized-formats"
 />
 
@@ -388,7 +401,7 @@ tab: Props
 <PropsCard
   id="monthpicker-parsedate"
   name="parseDate"
-  type="(value: string) => Date | null"
+  type="(value: string) => Date | undefined"
   description={"Function that converts the input value to Date type."}
 />
 
@@ -396,7 +409,7 @@ tab: Props
   id="monthpicker-pattern"
   name="pattern"
   type="RegExp"
-  description={"The pattern used to check the <input> element's."}
+  description={"The pattern used to check the input element."}
   defaultValue={"'/[^0-9-/]/g'"}
 />
 

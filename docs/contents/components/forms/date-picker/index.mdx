@@ -113,7 +113,7 @@ To set the default month, set a `Date` to `defaultMonth`.
 
 ### Change First Day of the Week
 
-To change the first day of the week, set `firstDayOfWeek` to `monday` or `sunday`. By default, `monday` is set.
+To change the first day of the week, set `firstDayOfWeek` to either `monday` or `sunday`. By default, `monday` is set.
 
 ```tsx
 <VStack>
@@ -135,9 +135,9 @@ To set a pattern, set a regular expression to `pattern`. By default, `'/[^0-9\-\
 />
 ```
 
-### Handle Parsing of Entered Value
+### Handle Parsing of Entered Values
 
-To handle the parsing of the entered value, use `parseDate`.
+To handle the parsing of entered values, use `parseDate`.
 
 ```tsx
 <DatePicker
@@ -159,9 +159,9 @@ To set the selectable minimum and maximum dates, set `Date` to `minDate` and `ma
 />
 ```
 
-### Allow Input Beyond Min and Max Range
+### Allow Values Outside Minimum and Maximum Range
 
-By default, if a date outside the minimum and maximum range is entered, it is automatically replaced with the minimum or maximum date. To disable this control and allow input beyond the range, set `allowInputBeyond` to `true`.
+By default, if a date outside the minimum and maximum range is entered, it is automatically replaced with the minimum or maximum date. To disable this control and allow values outside the range, set `allowInputBeyond` to `true`.
 
 ```tsx
 <DatePicker
@@ -257,11 +257,11 @@ import "dayjs/locale/ja"
 ```
 
 ```tsx
-<DatePicker locale="ja" />
+<DatePicker locale="ja" placeholder="YYYY/MM/DD" />
 ```
 
 :::note
-For locale, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
+For information about locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
 :::
 
 ### Change Date Format
@@ -295,10 +295,10 @@ To change the date format, set a string to `inputFormat` or `yearFormat`.
 ```
 
 :::note
-For format, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
+For information about formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
 :::
 
-### Change Number of Months Displayed
+### Change the Number of Months Displayed
 
 To change the number of months displayed, set a number to `amountOfMonths`.
 
@@ -325,7 +325,7 @@ To change the pagination unit, set a number to `paginateBy`. By default, the sam
 
 ### Do Not Close Calendar on Selection
 
-By default, the calendar automatically closes on selection. To prevent the calendar from closing on selection, set `closeOnSelect` to `false`.
+By default, the calendar automatically closes upon selection. To prevent the calendar from closing on select, set `closeOnSelect` to `false`.
 
 ```tsx
 <DatePicker placeholder="YYYY/MM/DD" closeOnSelect={false} />
@@ -363,6 +363,14 @@ To disable dates outside the current month, set `disableOutsideDays` to `true`.
 <DatePicker placeholder="YYYY/MM/DD" disableOutsideDays />
 ```
 
+### Hide Dates Outside the Current Month
+
+To hide dates outside the current month, set `hiddenOutsideDays` to `true`.
+
+```tsx
+<DatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+```
+
 ### Change Display Position
 
 To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
@@ -373,9 +381,9 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 
 ### Change Offset
 
-If you want to change the position of the tooltip depending on the size of the element or the situation, adjust the position with `gutter` or `offset`.
+Depending on the size of the element or the situation, you may want to change the position of the tooltip. In that case, adjust the position with `gutter` or `offset`.
 
-`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal, vertical]`.
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal axis, vertical axis]`.
 
 ```tsx
 <VStack>
@@ -425,7 +433,7 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make input invalid, set `isInvalid` to `true`.
 
 ```tsx
 <VStack>

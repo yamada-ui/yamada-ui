@@ -1,5 +1,5 @@
 import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
-import { Tooltip } from "../tooltip"
+import { Tooltip } from "../src/tooltip"
 
 describe("<Tooltip/>", () => {
   it("should pass a11y test", async () => {

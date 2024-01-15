@@ -88,10 +88,16 @@ type MultiAutocompleteOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
 }
 
 export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
-  UseAutocompleteProps<string[]> &
+  Omit<UseAutocompleteProps<string[]>, "closeOnSelect"> &
   MultiAutocompleteOptions
 
 /**
@@ -264,8 +270,8 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
 
       if (component) {
         return (label as string[]).map((label, index) => {
-          const onRemove: MouseEventHandler<HTMLElement> = (e) => {
-            e.stopPropagation()
+          const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
+            ev.stopPropagation()
 
             onChange(value[index])
 
@@ -280,13 +286,14 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
           })
 
           const style: CSSProperties = {
-            cursor: "default",
             marginBlockStart: "0.125rem",
             marginBlockEnd: "0.125rem",
             marginInlineEnd: "0.25rem",
           }
 
-          return el ? cloneElement(el as ReactElement, { style }) : null
+          return el
+            ? cloneElement(el as ReactElement, { key: index, style })
+            : null
         })
       } else {
         return (label as string[]).map((value, index) => {

@@ -350,7 +350,7 @@
     },
     "closeOnSelect": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": false,
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
     },
@@ -503,7 +503,7 @@
       "required": false,
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."

@@ -1,5 +1,41 @@
 # @yamada-ui/calendar
 
+## 1.1.1
+
+### Patch Changes
+
+- [#620](https://github.com/hirotomoyamada/yamada-ui/pull/620) [`ab0a97c`](https://github.com/hirotomoyamada/yamada-ui/commit/ab0a97c5b415ef3af3150ec6f54cc50dffdbd890) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `hiddenOutsideDays` was not working.
+
+- [#620](https://github.com/hirotomoyamada/yamada-ui/pull/620) [`02281c1`](https://github.com/hirotomoyamada/yamada-ui/commit/02281c131992c2df06fa533c89eee266714217b2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `defaultValue` to `RangeDatePicker`.
+
+## 1.1.0
+
+### Minor Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`db425a6`](https://github.com/hirotomoyamada/yamada-ui/commit/db425a6a5ef811e4864dfbe099b0c02b76513810) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `MultiDatePicker` component.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`dfa871d`](https://github.com/hirotomoyamada/yamada-ui/commit/dfa871d325e98928c8cd132626f48a6c60f4f68b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added range selection to `Calendar` component.
+
+### Patch Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`58ca7fe`](https://github.com/hirotomoyamada/yamada-ui/commit/58ca7fe657f23702785725d0d354705bfed71d9f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where dates invalidated by `excludeDate` could be entered in `DatePicker`.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`6b98300`](https://github.com/hirotomoyamada/yamada-ui/commit/6b98300906f4495cbe1beddce1cf688bfdac8413) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed props `maxSelectedValues` to `maxSelectValues`.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`2674f37`](https://github.com/hirotomoyamada/yamada-ui/commit/2674f37c149e4922cfdc5c596616dc67f063fd8f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `closeOnBlur` was not set correctly on the `Popover` component.
+
+- Updated dependencies [[`0c9e7c2`](https://github.com/hirotomoyamada/yamada-ui/commit/0c9e7c26a0346a1ee5eb644af125072b1906d295), [`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/core@1.1.4
+  - @yamada-ui/utils@1.0.2
+  - @yamada-ui/button@1.0.6
+  - @yamada-ui/form-control@1.0.7
+  - @yamada-ui/icon@1.0.5
+  - @yamada-ui/popover@1.0.5
+  - @yamada-ui/portal@1.0.2
+  - @yamada-ui/use-clickable@1.0.2
+  - @yamada-ui/use-controllable-state@1.0.2
+  - @yamada-ui/use-outside-click@1.0.2
+
 ## 1.0.7
 
 ### Patch Changes

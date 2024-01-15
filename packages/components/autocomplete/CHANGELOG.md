@@ -1,5 +1,34 @@
 # @yamada-ui/autocomplete
 
+## 1.0.10
+
+### Patch Changes
+
+- [#617](https://github.com/hirotomoyamada/yamada-ui/pull/617) [`7054200`](https://github.com/hirotomoyamada/yamada-ui/commit/70542008dbff027e80f13abb6ae5956116e42e0c) Thanks [@KenyaMasuko](https://github.com/KenyaMasuko)! - Update jsDoc for MultiAutocomplete: Set 'closeOnSelect' default to 'false'
+
+## 1.0.9
+
+### Patch Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`6f77267`](https://github.com/hirotomoyamada/yamada-ui/commit/6f77267f8bc47c3319e80c393c077ea2ae6708af) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where keys were not assigned to child elements of `MultiAutocomplete`.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`6b98300`](https://github.com/hirotomoyamada/yamada-ui/commit/6b98300906f4495cbe1beddce1cf688bfdac8413) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed props `maxSelectedValues` to `maxSelectValues`.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`60b80b2`](https://github.com/hirotomoyamada/yamada-ui/commit/60b80b27ea877aafc3b73de77104d1cef01e178e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `closeOnBlur` was not set correctly on the `Popover` component.
+
+- Updated dependencies [[`0c9e7c2`](https://github.com/hirotomoyamada/yamada-ui/commit/0c9e7c26a0346a1ee5eb644af125072b1906d295), [`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/core@1.1.4
+  - @yamada-ui/utils@1.0.2
+  - @yamada-ui/form-control@1.0.7
+  - @yamada-ui/icon@1.0.5
+  - @yamada-ui/motion@1.0.5
+  - @yamada-ui/popover@1.0.5
+  - @yamada-ui/portal@1.0.2
+  - @yamada-ui/use-clickable@1.0.2
+  - @yamada-ui/use-controllable-state@1.0.2
+  - @yamada-ui/use-descendant@1.0.2
+  - @yamada-ui/use-outside-click@1.0.2
+
 ## 1.0.8
 
 ### Patch Changes

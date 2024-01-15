@@ -57,6 +57,10 @@ export const pseudos = {
    */
   _after: "&::after",
   /**
+   * The CSS `::marker` pseudo-element.
+   */
+  _marker: "&::marker",
+  /**
    * The CSS `:empty` pseudo-class.
    */
   _empty: "&:empty",

@@ -168,6 +168,7 @@ export const useRangeSlider = ({
   const values = computedValues.map((value) =>
     clampNumber(value, min, max),
   ) as [number, number]
+  const [startValue, endValue] = values
   const reversedValues = values.map((value) => max - value + min) as [
     number,
     number,
@@ -177,8 +178,8 @@ export const useRangeSlider = ({
     valueToPercent(value, min, max),
   ) as [number, number]
   const valueBounds = [
-    { min, max: values[1] - spacing },
-    { min: values[0] + spacing, max },
+    { min, max: endValue - spacing },
+    { min: startValue + spacing, max },
   ]
 
   const isVertical = orientation === "vertical"
@@ -398,7 +399,7 @@ export const useRangeSlider = ({
     const { values } = latestRef.current
 
     if (eventSourceRef.current === "keyboard") onChangeEnd(values)
-  }, [values[0], values[1], onChangeEnd]) // Update values in to values[0],values[1]. Because if we uses values as dependency it will cause Maximum update depth
+  }, [startValue, endValue, onChangeEnd])
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {

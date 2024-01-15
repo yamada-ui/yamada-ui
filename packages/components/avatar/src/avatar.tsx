@@ -89,6 +89,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     rounded = "full",
     onError,
     onLoad,
+    crossOrigin,
     format,
     children,
     ...rest
@@ -128,6 +129,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
           rounded={rounded}
           onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
           onError={onError}
+          crossOrigin={crossOrigin}
           format={format}
           name={name}
           icon={icon}

@@ -67,7 +67,7 @@ type AvatarOptions = {
 export type AvatarProps = HTMLUIProps<"span"> &
   ThemeProps<"Avatar"> &
   AvatarOptions &
-  Pick<UseImageProps, "onLoad" | "onError">
+  Pick<UseImageProps, "onLoad" | "onError" | "crossOrigin">
 
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.

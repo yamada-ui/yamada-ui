@@ -77,7 +77,7 @@ export const pseudos = {
    */
   _invalid: "&[data-invalid], &[aria-invalid=true]",
   /**
-   * The CSS `:invalid` pseudo-class.
+   * The CSS `:valid` pseudo-class.
    */
   _valid: "&:valid, &[data-valid], &[data-state=valid]",
   /**

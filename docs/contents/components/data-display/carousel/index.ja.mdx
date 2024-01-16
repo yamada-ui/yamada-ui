@@ -9,6 +9,12 @@ tab: 使い方
 
 ## インポート
 
+<PackageManagers packageNameOrCommand="@yamada-ui/carousel" />
+
+:::note status=warning
+`@yamada-ui/carousel`は、`@yamada-ui/react`に含まれていないため、別途インストールする必要があります。
+:::
+
 ```ts
 import {
   Carousel,
@@ -16,7 +22,7 @@ import {
   CarouselControlNext,
   CarouselControlPrev,
   CarouselIndicators,
-} from "@yamada-ui/react"
+} from "@yamada-ui/carousel"
 ```
 
 - `Carousel`: 子要素(`CarouselSlide`)を制御するラッパーコンポーネントです。

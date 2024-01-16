@@ -165,10 +165,10 @@ export const useSlider = ({
     step,
     value,
     isInteractive,
-    eventSource: null as "pointer" | "keyboard" | null,
     focusThumbOnChange,
   })
 
+  const eventSourceRef = useRef<"pointer" | "keyboard" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
   const thumbRef = useRef<HTMLElement>(null)
@@ -209,7 +209,7 @@ export const useSlider = ({
 
       const { min, max, step } = latestRef.current
 
-      latestRef.current.eventSource = "pointer"
+      eventSourceRef.current = "pointer"
 
       const { bottom, left, height, width } =
         trackRef.current.getBoundingClientRect()
@@ -302,17 +302,17 @@ export const useSlider = ({
 
       action(ev)
 
-      latestRef.current.eventSource = "keyboard"
+      eventSourceRef.current = "keyboard"
     },
     [constrain, latestRef, stepDown, stepUp, tenStep],
   )
 
   useUpdateEffect(() => {
-    const { eventSource, value } = latestRef.current
+    const { value } = latestRef.current
 
     focusThumb()
 
-    if (eventSource === "keyboard") onChangeEnd(value)
+    if (eventSourceRef.current === "keyboard") onChangeEnd(value)
   }, [value, onChangeEnd])
 
   const getContainerProps: UIPropGetter = useCallback(

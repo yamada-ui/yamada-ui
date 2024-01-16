@@ -49,17 +49,25 @@ export const pseudos = {
   _indeterminate:
     "&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]",
   /**
-   * The CSS `:before` pseudo-element.
+   * The CSS `::before` pseudo-element.
    */
   _before: "&::before",
   /**
-   * The CSS `:after` pseudo-element.
+   * The CSS `::after` pseudo-element.
    */
   _after: "&::after",
   /**
    * The CSS `::marker` pseudo-element.
    */
   _marker: "&::marker",
+  /**
+   * The CSS `::first-letter` pseudo-element.
+   */
+  _firstLetter: "&::first-letter",
+  /**
+   * The CSS `::first-line` pseudo-element.
+   */
+  _firstLine: "&::first-line",
   /**
    * The CSS `:empty` pseudo-class.
    */

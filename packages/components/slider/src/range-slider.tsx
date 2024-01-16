@@ -168,6 +168,7 @@ export const useRangeSlider = ({
   const values = computedValues.map((value) =>
     clampNumber(value, min, max),
   ) as [number, number]
+  const [startValue, endValue] = values
   const reversedValues = values.map((value) => max - value + min) as [
     number,
     number,
@@ -177,8 +178,8 @@ export const useRangeSlider = ({
     valueToPercent(value, min, max),
   ) as [number, number]
   const valueBounds = [
-    { min, max: values[1] - spacing },
-    { min: values[0] + spacing, max },
+    { min, max: endValue - spacing },
+    { min: startValue + spacing, max },
   ]
 
   const isVertical = orientation === "vertical"
@@ -193,12 +194,12 @@ export const useRangeSlider = ({
     isInteractive,
     isReversed,
     isVertical,
-    eventSource: null as "pointer" | "keyboard" | null,
     focusThumbOnChange,
     betweenThumbs,
     orientation,
   })
 
+  const eventSourceRef = useRef<"pointer" | "keyboard" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
 
@@ -281,7 +282,7 @@ export const useRangeSlider = ({
 
       const { min, max } = latestRef.current
 
-      latestRef.current.eventSource = "pointer"
+      eventSourceRef.current = "pointer"
 
       const { bottom, left, height, width } =
         trackRef.current.getBoundingClientRect()
@@ -389,16 +390,16 @@ export const useRangeSlider = ({
 
       action(ev)
 
-      latestRef.current.eventSource = "keyboard"
+      eventSourceRef.current = "keyboard"
     },
     [activeIndex, constrain, latestRef, stepDown, stepUp, tenStep],
   )
 
   useUpdateEffect(() => {
-    const { eventSource, values } = latestRef.current
+    const { values } = latestRef.current
 
-    if (eventSource === "keyboard") onChangeEnd(values)
-  }, [values, onChangeEnd])
+    if (eventSourceRef.current === "keyboard") onChangeEnd(values)
+  }, [startValue, endValue, onChangeEnd])
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {

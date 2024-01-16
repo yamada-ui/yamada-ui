@@ -49,11 +49,11 @@ export const pseudos = {
   _indeterminate:
     "&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]",
   /**
-   * The CSS `:before` pseudo-element.
+   * The CSS `::before` pseudo-element.
    */
   _before: "&::before",
   /**
-   * The CSS `:after` pseudo-element.
+   * The CSS `::after` pseudo-element.
    */
   _after: "&::after",
   /**

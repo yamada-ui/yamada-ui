@@ -94,6 +94,48 @@ export const withIcon: Story = () => {
   )
 }
 
+export const withMarker: Story = () => {
+  return (
+    <List>
+      <ListItem
+        _marker={{
+          content: "'+ '",
+        }}
+      >
+        よろしければわたしが喜びのダンスを踊りましょうか！
+      </ListItem>
+      <ListItem
+        _marker={{
+          content: "'- '",
+        }}
+      >
+        お命頂だい!!!　とうっ!!!
+      </ListItem>
+      <ListItem
+        _marker={{
+          content: "'* '",
+        }}
+      >
+        う…宇宙一のスピードを誇るオ…オレさまのうしろに……
+      </ListItem>
+      <ListItem
+        _marker={{
+          content: "'/ '",
+        }}
+      >
+        オ…オレたちが勝てるわけはなかったはずだ………
+      </ListItem>
+      <ListItem
+        _marker={{
+          content: "'^ '",
+        }}
+      >
+        オレは試合場のゴミ拾いみたいなもんかよ…
+      </ListItem>
+    </List>
+  )
+}
+
 export const others: Story = () => {
   return (
     <>

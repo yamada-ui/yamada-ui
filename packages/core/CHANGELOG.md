@@ -1,5 +1,19 @@
 # @yamada-ui/core
 
+## 1.2.0
+
+### Minor Changes
+
+- [`2c95896`](https://github.com/hirotomoyamada/yamada-ui/commit/2c95896137948e34c6b6459cb601eba0c6d4a1b4) Thanks [@illionillion](https://github.com/illionillion)! - Add `_marker` property.
+
+- [#650](https://github.com/hirotomoyamada/yamada-ui/pull/650) [`6333168`](https://github.com/hirotomoyamada/yamada-ui/commit/633316826c00a278aeefbffe53174296b2fddf01) Thanks [@illionillion](https://github.com/illionillion)! - Supported `::first-letter` and `::first-line`.
+
+### Patch Changes
+
+- Updated dependencies [[`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/utils@1.0.3
+  - @yamada-ui/portal@1.0.3
+
 ## 1.1.4
 
 ### Patch Changes

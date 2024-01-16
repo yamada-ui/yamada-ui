@@ -5,7 +5,7 @@ import type { AvatarProps } from "./avatar"
 import { useAvatarContext } from "./avatar"
 
 const defaultFormat = (name: string) => {
-  const names = name.split(" ")
+  const names = name.trim().split(" ")
   const firstName = names[0] ?? ""
   const lastName = names.length > 1 ? names[names.length - 1] : ""
 

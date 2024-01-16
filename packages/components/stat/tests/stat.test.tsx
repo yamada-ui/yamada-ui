@@ -57,7 +57,7 @@ describe("<Stat />", () => {
       <Stat
         data-testid="stat-icon"
         label="Total Page Views"
-        number="1,993,818"
+        number="1,993,81"
         icon="decrease"
         helperMessage="21% more than last month"
       />,

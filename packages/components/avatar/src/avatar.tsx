@@ -67,7 +67,7 @@ type AvatarOptions = {
 export type AvatarProps = HTMLUIProps<"span"> &
   ThemeProps<"Avatar"> &
   AvatarOptions &
-  Pick<UseImageProps, "onLoad" | "onError">
+  Pick<UseImageProps, "onLoad" | "onError" | "crossOrigin">
 
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
@@ -85,10 +85,12 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     alt,
     icon,
     ignoreFallback,
+    referrerPolicy,
     borderRadius = "full",
     rounded = "full",
     onError,
     onLoad,
+    crossOrigin,
     format,
     children,
     ...rest
@@ -128,10 +130,12 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
           rounded={rounded}
           onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
           onError={onError}
+          crossOrigin={crossOrigin}
           format={format}
           name={name}
           icon={icon}
           ignoreFallback={ignoreFallback}
+          referrerPolicy={referrerPolicy}
         />
         {children}
       </ui.span>

@@ -42,7 +42,7 @@ export type UseRangeDatePickerProps = UseCalendarPickerProps<CalendarProps> &
 
 export const useRangeDatePicker = ({
   value: valueProp,
-  defaultValue,
+  defaultValue = [],
   onChange: onChangeProp,
   placeholder,
   startPlaceholder,
@@ -113,6 +113,8 @@ export const useRangeDatePicker = ({
       setEndInputValue("")
       setValue([])
 
+      draftValue.current = undefined
+
       if (allowInput && isOpen) startInputRef.current?.focus()
     },
     onClick: (ev) => {
@@ -127,7 +129,7 @@ export const useRangeDatePicker = ({
       rest.onClick?.(ev)
     },
     onClose: () => {
-      const [startValue, endValue] = draftValue.current ?? value
+      const [startValue, endValue] = draftValue.current ?? value ?? []
 
       setStartInputValue(dateToString(startValue) ?? "")
       setEndInputValue(dateToString(endValue) ?? "")
@@ -207,12 +209,12 @@ export const useRangeDatePicker = ({
         }
 
         if (endValue && isAfterDate(startValue, endValue)) startValue = endValue
-
-        setValue([startValue, endValue])
       } else {
-        setValue([undefined, endValue])
+        startValue = undefined
       }
 
+      draftValue.current = [startValue, endValue]
+      setValue([startValue, endValue])
       setStartInputValue(inputValue)
     },
     [pattern, stringToDate, allowInputBeyond, minDate, setValue, endValue],
@@ -233,12 +235,12 @@ export const useRangeDatePicker = ({
 
         if (startValue && isBeforeDate(endValue, startValue))
           endValue = startValue
-
-        setValue([startValue, endValue])
       } else {
-        setValue([startValue, undefined])
+        endValue = undefined
       }
 
+      draftValue.current = [startValue, endValue]
+      setValue([startValue, endValue])
       setEndInputValue(inputValue)
     },
     [startValue, allowInputBeyond, maxDate, pattern, stringToDate, setValue],

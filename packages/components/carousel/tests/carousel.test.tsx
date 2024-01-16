@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { Carousel, CarouselSlide } from "../src"
 
 const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
@@ -90,14 +90,18 @@ describe("<Carousel/>", () => {
     const { rerender } = render(carouselElement)
 
     // First after delay timer should be slide 2
-    jest.advanceTimersByTime(delayTimer)
+    act(() => {
+      jest.advanceTimersByTime(delayTimer)
+    })
     rerender(carouselElement)
     expect(screen.getByText("Slide 2").parentNode).toHaveAttribute(
       "data-selected",
     )
 
     // Finally slide 3 must be have data-selected
-    jest.advanceTimersByTime(delayTimer)
+    act(() => {
+      jest.advanceTimersByTime(delayTimer)
+    })
     rerender(carouselElement)
     expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
       "data-selected",

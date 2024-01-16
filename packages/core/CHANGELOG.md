@@ -1,5 +1,35 @@
 # @yamada-ui/core
 
+## 1.2.1
+
+### Patch Changes
+
+- [#648](https://github.com/hirotomoyamada/yamada-ui/pull/648) [`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed the JSDoc for ::before and ::after pseudo-elements in @yamada-ui/core which were incorrectly documented.
+
+## 1.2.0
+
+### Minor Changes
+
+- [`2c95896`](https://github.com/hirotomoyamada/yamada-ui/commit/2c95896137948e34c6b6459cb601eba0c6d4a1b4) Thanks [@illionillion](https://github.com/illionillion)! - Add `_marker` property.
+
+- [#650](https://github.com/hirotomoyamada/yamada-ui/pull/650) [`6333168`](https://github.com/hirotomoyamada/yamada-ui/commit/633316826c00a278aeefbffe53174296b2fddf01) Thanks [@illionillion](https://github.com/illionillion)! - Supported `::first-letter` and `::first-line`.
+
+### Patch Changes
+
+- Updated dependencies [[`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/utils@1.0.3
+  - @yamada-ui/portal@1.0.3
+
+## 1.1.4
+
+### Patch Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`0c9e7c2`](https://github.com/hirotomoyamada/yamada-ui/commit/0c9e7c26a0346a1ee5eb644af125072b1906d295) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `_start`, `_end` and `_between` pseudo props.
+
+- Updated dependencies [[`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/utils@1.0.2
+  - @yamada-ui/portal@1.0.2
+
 ## 1.1.3
 
 ### Patch Changes

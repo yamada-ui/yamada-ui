@@ -27,10 +27,11 @@ export type MaybeRenderProp<Y> =
   | React.ReactNode
   | ((props: Y) => React.ReactNode)
 
-type Options = {
+type Options<ContextType extends any = any> = {
   strict?: boolean
   errorMessage?: string
   name?: string
+  defaultValue?: ContextType
 }
 
 type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
@@ -39,8 +40,9 @@ export const createContext = <ContextType extends any = any>({
   strict = true,
   errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
   name,
-}: Options = {}) => {
-  const Context = React.createContext<ContextType | undefined>(undefined)
+  defaultValue,
+}: Options<ContextType> = {}) => {
+  const Context = React.createContext<ContextType | undefined>(defaultValue)
 
   Context.displayName = name
 

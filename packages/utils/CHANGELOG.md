@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.0.3
+
+### Patch Changes
+
+- [#645](https://github.com/hirotomoyamada/yamada-ui/pull/645) [`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3) Thanks [@Tsukuni](https://github.com/Tsukuni)! - add defaultValue to createContext
+
 ## 1.0.2
 
 ### Patch Changes

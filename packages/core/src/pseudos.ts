@@ -61,6 +61,14 @@ export const pseudos = {
    */
   _marker: "&::marker",
   /**
+   * The CSS `::first-letter` pseudo-element.
+   */
+  _firstLetter: "&::first-letter",
+  /**
+   * The CSS `::first-line` pseudo-element.
+   */
+  _firstLine: "&::first-line",
+  /**
    * The CSS `:empty` pseudo-class.
    */
   _empty: "&:empty",

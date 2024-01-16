@@ -1,5 +1,17 @@
 # @yamada-ui/rating
 
+## 1.0.7
+
+### Patch Changes
+
+- [#647](https://github.com/hirotomoyamada/yamada-ui/pull/647) [`6a51f37`](https://github.com/hirotomoyamada/yamada-ui/commit/6a51f37f4e9cd1b1ac18feaea71d2913ddbd6fad) Thanks [@madangopal16072000](https://github.com/madangopal16072000)! - fixed clicking while hovering over the edge of Rating component doesn't update clicked state
+
+- Updated dependencies [[`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca)]:
+  - @yamada-ui/core@1.2.1
+  - @yamada-ui/form-control@1.0.9
+  - @yamada-ui/icon@1.0.7
+  - @yamada-ui/motion@1.0.7
+
 ## 1.0.6
 
 ### Patch Changes

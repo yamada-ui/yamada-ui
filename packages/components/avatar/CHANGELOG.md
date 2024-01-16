@@ -1,5 +1,17 @@
 # @yamada-ui/avatar
 
+## 1.1.6
+
+### Patch Changes
+
+- [#646](https://github.com/hirotomoyamada/yamada-ui/pull/646) [`4ccfca1`](https://github.com/hirotomoyamada/yamada-ui/commit/4ccfca16537d3f29f93d5b4b7b4e75ae38bad324) Thanks [@neerajkumarc](https://github.com/neerajkumarc)! - Corrected Avatar component behavior to handle leading and trailing spaces in input strings, ensuring proper rendering of initials.
+
+- Updated dependencies [[`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca)]:
+  - @yamada-ui/core@1.2.1
+  - @yamada-ui/icon@1.0.7
+  - @yamada-ui/image@1.0.7
+  - @yamada-ui/use-animation@1.0.7
+
 ## 1.1.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.2.1
+
+### Patch Changes
+
+- [#648](https://github.com/hirotomoyamada/yamada-ui/pull/648) [`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed the JSDoc for ::before and ::after pseudo-elements in @yamada-ui/core which were incorrectly documented.
+
 ## 1.2.0
 
 ### Minor Changes

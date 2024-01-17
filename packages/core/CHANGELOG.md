@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.2.2
+
+### Patch Changes
+
+- [#651](https://github.com/hirotomoyamada/yamada-ui/pull/651) [`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0) Thanks [@hoshico](https://github.com/hoshico)! - Fied the JSDoc for valid:
+
 ## 1.2.1
 
 ### Patch Changes

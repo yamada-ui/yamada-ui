@@ -1,5 +1,17 @@
 # @yamada-ui/avatar
 
+## 1.1.7
+
+### Patch Changes
+
+- [#658](https://github.com/hirotomoyamada/yamada-ui/pull/658) [`081af00`](https://github.com/hirotomoyamada/yamada-ui/commit/081af001c50f13c0001b5a6cbd42cb6362887dae) Thanks [@koralle](https://github.com/koralle)! - Corrected the assignment of `referrerPolicy` to `<img />` instead of `<span />` in the `Avatar` component.
+
+- Updated dependencies [[`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0)]:
+  - @yamada-ui/core@1.2.2
+  - @yamada-ui/icon@1.0.8
+  - @yamada-ui/image@1.0.8
+  - @yamada-ui/use-animation@1.0.8
+
 ## 1.1.6
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # @yamada-ui/calendar
 
+## 1.1.4
+
+### Patch Changes
+
+- [#656](https://github.com/hirotomoyamada/yamada-ui/pull/656) [`682d952`](https://github.com/hirotomoyamada/yamada-ui/commit/682d952e36e590f9c5cd232e93ae3b31079ed856) Thanks [@Kritskii-A](https://github.com/Kritskii-A)! - The value are flushed when RangeDatePicker component Popover is closed
+
+- Updated dependencies [[`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0)]:
+  - @yamada-ui/core@1.2.2
+  - @yamada-ui/button@1.0.9
+  - @yamada-ui/form-control@1.0.10
+  - @yamada-ui/icon@1.0.8
+  - @yamada-ui/popover@1.0.8
+
 ## 1.1.3
 
 ### Patch Changes

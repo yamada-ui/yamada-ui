@@ -30,7 +30,10 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        run: pnpm test
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          package-manager: pnpm
+          test-script: pnpm test:ci
 
   eslint:
     name: ESLint

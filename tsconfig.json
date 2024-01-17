@@ -17,7 +17,14 @@
     "downlevelIteration": true
   },
   "include": ["@types", "**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "examples", "dist"],
+  "exclude": [
+    "node_modules",
+    "examples",
+    "dist",
+    ".changelog",
+    ".changeset",
+    ".turbo"
+  ],
   "ts-node": {
     "transpileOnly": true,
     "compilerOptions": {

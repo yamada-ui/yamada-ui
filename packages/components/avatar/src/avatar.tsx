@@ -85,6 +85,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     alt,
     icon,
     ignoreFallback,
+    referrerPolicy,
     borderRadius = "full",
     rounded = "full",
     onError,
@@ -134,6 +135,7 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
           name={name}
           icon={icon}
           ignoreFallback={ignoreFallback}
+          referrerPolicy={referrerPolicy}
         />
         {children}
       </ui.span>

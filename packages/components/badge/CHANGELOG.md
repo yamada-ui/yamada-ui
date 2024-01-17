@@ -1,5 +1,12 @@
 # @yamada-ui/badge
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca)]:
+  - @yamada-ui/core@1.2.1
+
 ## 1.0.6
 
 ### Patch Changes

@@ -422,7 +422,13 @@ export const useRatingItem = ({
     [disabled, readOnly, setValue],
   )
 
-  const onClick = useCallback(() => {
+  const onMouseDown = useCallback(() => {
+    if (readOnly || disabled) return
+
+    onChange(value)
+  }, [disabled, onChange, readOnly, value])
+
+  const onTouchStart = useCallback(() => {
     if (readOnly || disabled) return
 
     onChange(value)
@@ -438,7 +444,8 @@ export const useRatingItem = ({
         ...formControlProps,
         ...props,
         zIndex: fractionValue !== 1 ? zIndex : undefined,
-        onClick: handlerAll(onClick, props.onClick),
+        onMouseDown: handlerAll(onMouseDown, props.onMouseDown),
+        onTouchStart: handlerAll(onTouchStart, props.onTouchStart),
         "data-active": dataAttr(isActive),
         "data-filled": dataAttr(isFilled),
         "data-focus": dataAttr(isFocused),
@@ -454,7 +461,8 @@ export const useRatingItem = ({
       isFilled,
       isFocusVisible,
       isFocused,
-      onClick,
+      onMouseDown,
+      onTouchStart,
       value,
     ],
   )

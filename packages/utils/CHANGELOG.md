@@ -1,5 +1,17 @@
 # @yamada-ui/utils
 
+## 1.0.4
+
+### Patch Changes
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `convertColor` and `alphaToHex` color functions.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `hslaTo` and `rgbaTo` color functions.
+
+- [#663](https://github.com/hirotomoyamada/yamada-ui/pull/663) [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where calc function not method `toString`.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `toHsv` and `hsvTo` color functions.
+
 ## 1.0.3
 
 ### Patch Changes

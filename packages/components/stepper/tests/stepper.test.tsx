@@ -37,7 +37,7 @@ describe("<Stepper/>", () => {
     { stepIndex: 1, stepStatus: ["complete", "active", "incomplete"] },
     { stepIndex: 2, stepStatus: ["complete", "complete", "active"] },
     { stepIndex: 3, stepStatus: ["complete", "complete", "complete"] },
-  ])("step status changes correctly", ({ stepIndex, stepStatus }) => {
+  ])("stepper's statuses changes correctly", ({ stepIndex, stepStatus }) => {
     render(<Stepper index={stepIndex} steps={mockStepsWithExtraProps} />)
 
     stepStatus.forEach((status, index) => {

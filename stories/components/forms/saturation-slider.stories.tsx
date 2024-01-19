@@ -107,7 +107,7 @@ export const withFocusThumbOnChange: Story = () => {
             </Button>
 
             <Button
-              isDisabled={s === 1}
+              isDisabled={v === 1}
               colorScheme="blue"
               onClick={() => onChange("v", "increment")}
             >

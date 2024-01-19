@@ -39,6 +39,11 @@ type SaturationSliderOptions = {
   thumbProps?: HTMLUIProps<"div">
 }
 
+/**
+ * `SaturationSlider` is a component used to allow the user to select a color saturation.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/saturation-slider
+ */
 export type SaturationSliderProps = ThemeProps<"SaturationSlider"> &
   UseSaturationSliderProps &
   SaturationSliderOptions

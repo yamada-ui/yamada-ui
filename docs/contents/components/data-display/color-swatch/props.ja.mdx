@@ -1,0 +1,68 @@
+---
+title: ColorSwatch
+description: "`ColorPicker`は、色の見本を表示するコンポーネントです。"
+label: New
+package_name: "@yamada-ui/color-picker"
+with_description: true
+tab: Props
+---
+
+## Props
+
+### ColorSwatchProps
+
+<PropsCard
+  id="colorswatch-color"
+  name="color"
+  type="string"
+  description={"The color used for the swatch element."}
+  defaultValue={"#ffffff00"}
+/>
+
+<PropsCard
+  id="colorswatch-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="colorswatch-isrounded"
+  name="isRounded"
+  type="boolean"
+  description={
+    "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="colorswatch-overlays"
+  name="overlays"
+  type='HTMLUIProps<"div">[]'
+  description={"The overlay used for the swatch element."}
+/>
+
+<PropsCard
+  id="colorswatch-size"
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description={"The size of the ColorSwatch."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="colorswatch-variant"
+  name="variant"
+  type='"basic" | "rounded"'
+  description={"The variant of the ColorSwatch."}
+  defaultValue={"basic"}
+/>
+
+<PropsCard
+  id="colorswatch-withshadow"
+  name="withShadow"
+  type="boolean"
+  description={"If `true`, the swatch element has an inner `box-shadow`."}
+  defaultValue={"true"}
+/>

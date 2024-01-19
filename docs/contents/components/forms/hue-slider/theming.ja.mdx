@@ -1,0 +1,71 @@
+---
+title: HueSlider
+description: "`HueSlider`は、ユーザーが色相を選択するために使用されるコンポーネントです。"
+label: New
+package_name: "@yamada-ui/color-picker"
+with_description: true
+tab: テーマ
+---
+
+## テーマ
+
+`HueSlider`は、[複数パーツのコンポーネント](/styled-system/theming/component-style#複数パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const HueSlider: ComponentMultiStyle = {
+  baseStyle: {
+    container: {
+      w: "100%",
+      rounded: "full",
+      cursor: "pointer",
+      _readOnly: { cursor: "auto" },
+      _disabled: {
+        opacity: 0.6,
+        cursor: "not-allowed",
+      },
+    },
+    overlay: {
+      rounded: "full",
+    },
+    track: {},
+    thumb: {
+      rounded: "full",
+      outline: 0,
+      borderWidth: "3px",
+      borderColor: "whiteAlpha.950",
+      boxShadow: ["md", "dark-md"],
+      transitionProperty: "transform",
+      transitionDuration: "normal",
+      _active: {
+        transform: `scale(1.15)`,
+      },
+      _focusVisible: {
+        boxShadow: ["outline", "outline"],
+      },
+    },
+  },
+
+  sizes: {
+    sm: {
+      container: { h: "3" },
+      thumb: { boxSize: "3" },
+    },
+    md: {
+      container: { h: "4" },
+      thumb: { boxSize: "4" },
+    },
+    lg: {
+      container: { h: "5" },
+      thumb: { boxSize: "5" },
+    },
+  },
+
+  defaultProps: {
+    size: "md",
+  },
+}
+```

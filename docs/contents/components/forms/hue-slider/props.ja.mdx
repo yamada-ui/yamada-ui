@@ -1,0 +1,193 @@
+---
+title: HueSlider
+description: "`HueSlider`は、ユーザーが色相を選択するために使用されるコンポーネントです。"
+label: New
+package_name: "@yamada-ui/color-picker"
+with_description: true
+tab: Props
+---
+
+## Props
+
+### HueSliderProps
+
+<PropsCard
+  id="hueslider-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="hueslider-defaultvalue"
+  name="defaultValue"
+  type="number"
+  description={"The initial value of the slider."}
+/>
+
+<PropsCard
+  id="hueslider-focusthumbonchange"
+  name="focusThumbOnChange"
+  type="boolean"
+  description={
+    "If `false`, the slider handle will not capture focus when value changes."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="hueslider-inputprops"
+  name="inputProps"
+  type='HTMLUIProps<"input">'
+  description={"Props for slider input element."}
+/>
+
+<PropsCard
+  id="hueslider-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="hueslider-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="hueslider-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="hueslider-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="hueslider-max"
+  name="max"
+  type="number"
+  description={
+    "The maximum allowed value of the slider. Cannot be less than min."
+  }
+  defaultValue={"360"}
+/>
+
+<PropsCard
+  id="hueslider-min"
+  name="min"
+  type="number"
+  description={
+    "The minimum allowed value of the slider. Cannot be greater than max."
+  }
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="hueslider-name"
+  name="name"
+  type="string"
+  description={
+    "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+  }
+/>
+
+<PropsCard
+  id="hueslider-onchange"
+  name="onChange"
+  type="(value: number) => void"
+  description={"Function called whenever the slider value changes."}
+/>
+
+<PropsCard
+  id="hueslider-onchangeend"
+  name="onChangeEnd"
+  type="(value: number) => void"
+  description={"Function called when the user is done selecting a new value."}
+/>
+
+<PropsCard
+  id="hueslider-onchangestart"
+  name="onChangeStart"
+  type="(value: number) => void"
+  description={"Function called when the user starts selecting a new value."}
+/>
+
+<PropsCard
+  id="hueslider-overlays"
+  name="overlays"
+  type='HTMLUIProps<"div">[]'
+  description={"The overlay used for the slider."}
+/>
+
+<PropsCard
+  id="hueslider-size"
+  name="size"
+  type='"sm" | "md" | "lg"'
+  description={"The size of the HueSlider."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="hueslider-step"
+  name="step"
+  type="number"
+  description={"The step in which increments or decrements have to be made."}
+  defaultValue={"1"}
+/>
+
+<PropsCard
+  id="hueslider-thumbcolor"
+  name="thumbColor"
+  type='UIValue<"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | Background<0 | (string & {})> | "current" | "focus" | "whiteAlpha.50" | ... 317 more ... | "secondary.950">'
+  description={
+    "The CSS `background` property. Used in `background` of thumb element."
+  }
+/>
+
+<PropsCard
+  id="hueslider-thumbprops"
+  name="thumbProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for slider thumb element."}
+/>
+
+<PropsCard
+  id="hueslider-trackprops"
+  name="trackProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for slider track element."}
+/>
+
+<PropsCard
+  id="hueslider-value"
+  name="value"
+  type="number"
+  description={"The value of the slider."}
+/>
+
+<PropsCard
+  id="hueslider-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the HueSlider."}
+/>
+
+<PropsCard
+  id="hueslider-withshadow"
+  name="withShadow"
+  type="boolean"
+  description={"If `true`, the slider has an inner `box-shadow`."}
+  defaultValue={"true"}
+/>

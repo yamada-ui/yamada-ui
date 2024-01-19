@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
   UIProvider,
@@ -44,6 +45,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       </UIProvider>
 
       <SpeedInsights />
+      <Analytics />
     </>
   )
 }

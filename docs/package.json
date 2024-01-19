@@ -30,6 +30,7 @@
     "@faker-js/faker": "^8.3.1",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.1",
     "@yamada-ui/calendar": "1.1.5",
     "@yamada-ui/carousel": "1.0.10",

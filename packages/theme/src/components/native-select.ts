@@ -14,9 +14,6 @@ export const NativeSelect: ComponentMultiStyle = mergeMultiStyle(Input, {
       },
       _readOnly: {
         pointerEvents: "none",
-        _placeholder: {
-          color: "inherit !important",
-        },
       },
     },
     icon: {

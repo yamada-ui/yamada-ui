@@ -147,6 +147,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           zIndex="yamcha"
           display="inline-flex"
           pl="3"
+          pr={!withToggleButton ? "3" : undefined}
           py="sm"
           flex="1"
           rounded="md"

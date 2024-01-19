@@ -641,6 +641,51 @@
     "hierarchy": { "lv1": "Carousel", "lv2": "Usage", "lv3": "Control" }
   },
   {
+    "title": "ColorSwatch",
+    "type": "page",
+    "description": "`ColorSwatch` is a component that displays color samples.",
+    "slug": "/components/data-display/color-swatch",
+    "hierarchy": { "lv1": "ColorSwatch" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/color-swatch#import",
+    "hierarchy": { "lv1": "ColorSwatch", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/color-swatch#usage",
+    "hierarchy": { "lv1": "ColorSwatch", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/components/data-display/color-swatch#change-variant",
+    "hierarchy": {
+      "lv1": "ColorSwatch",
+      "lv2": "Usage",
+      "lv3": "Change Variant"
+    }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/color-swatch#change-size",
+    "hierarchy": { "lv1": "ColorSwatch", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Disable Shadow",
+    "type": "fragment",
+    "slug": "/components/data-display/color-swatch#disable-shadow",
+    "hierarchy": {
+      "lv1": "ColorSwatch",
+      "lv2": "Usage",
+      "lv3": "Disable Shadow"
+    }
+  },
+  {
     "title": "Data Display",
     "type": "page",
     "description": "Components for constructing the display of project data, such as `Table` and `Calendar`, are available.",
@@ -1028,9 +1073,155 @@
   {
     "title": "Resizable",
     "type": "page",
-    "description": "We are currently considering the development of `Resizable`.",
+    "description": "`Resizable` is accessible resizable panel groups and layouts with keyboard support.",
     "slug": "/components/data-display/resizable",
     "hierarchy": { "lv1": "Resizable" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#import",
+    "hierarchy": { "lv1": "Resizable", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#usage",
+    "hierarchy": { "lv1": "Resizable", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variants",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#change-variants",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Change Variants"
+    }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#change-color-scheme",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#change-direction",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Set Default Values",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#set-default-values",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Set Default Values"
+    }
+  },
+  {
+    "title": "Set Minimum and Maximum Values",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#set-minimum-and-maximum-values",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Values"
+    }
+  },
+  {
+    "title": "Set Keyboard Step Values",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#set-keyboard-step-values",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Set Keyboard Step Values"
+    }
+  },
+  {
+    "title": "Save Values",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#save-values",
+    "hierarchy": { "lv1": "Resizable", "lv2": "Usage", "lv3": "Save Values" }
+  },
+  {
+    "title": "Save Values to cookies",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#save-values-to-cookies",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Save Values to cookies"
+    }
+  },
+  {
+    "title": "Enable Collapsing",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#enable-collapsing",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Enable Collapsing"
+    }
+  },
+  {
+    "title": "Add Icons",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#add-icons",
+    "hierarchy": { "lv1": "Resizable", "lv2": "Usage", "lv3": "Add Icons" }
+  },
+  {
+    "title": "Customize Icons",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#customize-icons",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Customize Icons"
+    }
+  },
+  {
+    "title": "Nested Structure",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#nested-structure",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Nested Structure"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#disable",
+    "hierarchy": { "lv1": "Resizable", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Handle Resize Events",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#handle-resize-events",
+    "hierarchy": {
+      "lv1": "Resizable",
+      "lv2": "Usage",
+      "lv3": "Handle Resize Events"
+    }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/data-display/resizable#control",
+    "hierarchy": { "lv1": "Resizable", "lv2": "Usage", "lv3": "Control" }
   },
   {
     "title": "ScrollArea",
@@ -1946,6 +2137,97 @@
     }
   },
   {
+    "title": "AlphaSlider",
+    "type": "page",
+    "description": "`AlphaSlider` is a component used to allow the user to select color transparency.",
+    "slug": "/components/forms/alpha-slider",
+    "hierarchy": { "lv1": "AlphaSlider" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#import",
+    "hierarchy": { "lv1": "AlphaSlider", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#usage",
+    "hierarchy": { "lv1": "AlphaSlider", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#change-size",
+    "hierarchy": { "lv1": "AlphaSlider", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Set Minimum and Maximum Values",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#set-minimum-and-maximum-values",
+    "hierarchy": {
+      "lv1": "AlphaSlider",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Values"
+    }
+  },
+  {
+    "title": "Set Step Value",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#set-step-value",
+    "hierarchy": {
+      "lv1": "AlphaSlider",
+      "lv2": "Usage",
+      "lv3": "Set Step Value"
+    }
+  },
+  {
+    "title": "Control Externally Only",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#control-externally-only",
+    "hierarchy": {
+      "lv1": "AlphaSlider",
+      "lv2": "Usage",
+      "lv3": "Control Externally Only"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#disable",
+    "hierarchy": { "lv1": "AlphaSlider", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#make-read-only",
+    "hierarchy": {
+      "lv1": "AlphaSlider",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Handle Start and End Change Events",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#handle-start-and-end-change-events",
+    "hierarchy": {
+      "lv1": "AlphaSlider",
+      "lv2": "Usage",
+      "lv3": "Handle Start and End Change Events"
+    }
+  },
+  {
+    "title": "Use with React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/alpha-slider#use-with-react-hook-form",
+    "hierarchy": {
+      "lv1": "AlphaSlider",
+      "lv2": "Usage",
+      "lv3": "Use with React Hook Form"
+    }
+  },
+  {
     "title": "Autocomplete",
     "type": "page",
     "description": "`Autocomplete` is a component used to display suggestions in response to user text input.",
@@ -2333,9 +2615,185 @@
   {
     "title": "ColorPicker",
     "type": "page",
-    "description": "We are currently considering the development of `ColorPicker`.",
+    "description": "`ColorPicker` is a component used by the user to select a color or enter an arbitrary color value.",
     "slug": "/components/forms/color-picker",
     "hierarchy": { "lv1": "ColorPicker" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#import",
+    "hierarchy": { "lv1": "ColorPicker", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#usage",
+    "hierarchy": { "lv1": "ColorPicker", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#change-variant",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Change Variant"
+    }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#change-size",
+    "hierarchy": { "lv1": "ColorPicker", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Set Default Value",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#set-default-value",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Value"
+    }
+  },
+  {
+    "title": "Set Default Color",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#set-default-color",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Color"
+    }
+  },
+  {
+    "title": "Set Fallback Value",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#set-fallback-value",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Set Fallback Value"
+    }
+  },
+  {
+    "title": "Set Format",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#set-format",
+    "hierarchy": { "lv1": "ColorPicker", "lv2": "Usage", "lv3": "Set Format" }
+  },
+  {
+    "title": "Format Input Value",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#format-input-value",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Format Input Value"
+    }
+  },
+  {
+    "title": "Display Swatches",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#display-swatches",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Display Swatches"
+    }
+  },
+  {
+    "title": "Close on Selecting Swatch",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#close-on-selecting-swatch",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Close on Selecting Swatch"
+    }
+  },
+  {
+    "title": "Disallow Input",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#disallow-input",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Disallow Input"
+    }
+  },
+  {
+    "title": "Change Display Position",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#change-display-position",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Change Display Position"
+    }
+  },
+  {
+    "title": "Change Offset",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#change-offset",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Change Offset"
+    }
+  },
+  {
+    "title": "Change Border Color",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#change-border-color",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Change Border Color"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#disable",
+    "hierarchy": { "lv1": "ColorPicker", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#make-read-only",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Customize Layout",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#customize-layout",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Customize Layout"
+    }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#control",
+    "hierarchy": { "lv1": "ColorPicker", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
   },
   {
     "title": "DatePicker",
@@ -3251,6 +3709,89 @@
       "lv1": "FormControl",
       "lv2": "Usage",
       "lv3": "Using an Optional Indicator"
+    }
+  },
+  {
+    "title": "HueSlider",
+    "type": "page",
+    "description": "`HueSlider` is a component used to allow the user to select a color hue.",
+    "slug": "/components/forms/hue-slider",
+    "hierarchy": { "lv1": "HueSlider" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#import",
+    "hierarchy": { "lv1": "HueSlider", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#usage",
+    "hierarchy": { "lv1": "HueSlider", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#change-size",
+    "hierarchy": { "lv1": "HueSlider", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Set Minimum and Maximum Values",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#set-minimum-and-maximum-values",
+    "hierarchy": {
+      "lv1": "HueSlider",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Values"
+    }
+  },
+  {
+    "title": "Set Step Value",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#set-step-value",
+    "hierarchy": { "lv1": "HueSlider", "lv2": "Usage", "lv3": "Set Step Value" }
+  },
+  {
+    "title": "Control Externally Only",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#control-externally-only",
+    "hierarchy": {
+      "lv1": "HueSlider",
+      "lv2": "Usage",
+      "lv3": "Control Externally Only"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#disable",
+    "hierarchy": { "lv1": "HueSlider", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#make-read-only",
+    "hierarchy": { "lv1": "HueSlider", "lv2": "Usage", "lv3": "Make Read-Only" }
+  },
+  {
+    "title": "Handle Start and End Change Events",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#handle-start-and-end-change-events",
+    "hierarchy": {
+      "lv1": "HueSlider",
+      "lv2": "Usage",
+      "lv3": "Handle Start and End Change Events"
+    }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/hue-slider#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "HueSlider",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
     }
   },
   {
@@ -5697,6 +6238,91 @@
     "slug": "/components/forms/rating#use-react-hook-form",
     "hierarchy": {
       "lv1": "Rating",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
+  },
+  {
+    "title": "SaturationSlider",
+    "type": "page",
+    "description": "`SaturationSlider` is a component used to allow the user to select a color saturation.",
+    "slug": "/components/forms/saturation-slider",
+    "hierarchy": { "lv1": "SaturationSlider" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#import",
+    "hierarchy": { "lv1": "SaturationSlider", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#usage",
+    "hierarchy": { "lv1": "SaturationSlider", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#change-size",
+    "hierarchy": {
+      "lv1": "SaturationSlider",
+      "lv2": "Usage",
+      "lv3": "Change Size"
+    }
+  },
+  {
+    "title": "Set Step Value",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#set-step-value",
+    "hierarchy": {
+      "lv1": "SaturationSlider",
+      "lv2": "Usage",
+      "lv3": "Set Step Value"
+    }
+  },
+  {
+    "title": "Control Externally Only",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#control-externally-only",
+    "hierarchy": {
+      "lv1": "SaturationSlider",
+      "lv2": "Usage",
+      "lv3": "Control Externally Only"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#disable",
+    "hierarchy": { "lv1": "SaturationSlider", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#make-read-only",
+    "hierarchy": {
+      "lv1": "SaturationSlider",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Handle Start and End Change Events",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#handle-start-and-end-change-events",
+    "hierarchy": {
+      "lv1": "SaturationSlider",
+      "lv2": "Usage",
+      "lv3": "Handle Start and End Change Events"
+    }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/saturation-slider#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "SaturationSlider",
       "lv2": "Usage",
       "lv3": "Use React Hook Form"
     }
@@ -9566,9 +10192,157 @@
   {
     "title": "useSnacks",
     "type": "page",
-    "description": "We are currently considering the development of `useSnacks`.",
+    "description": "`useSnacks` is a custom hook for controlling notifications used in forms and the like.",
     "slug": "/hooks/use-snacks",
     "hierarchy": { "lv1": "useSnacks" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#import",
+    "hierarchy": { "lv1": "useSnacks", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#usage",
+    "hierarchy": { "lv1": "useSnacks", "lv2": "Usage" }
+  },
+  {
+    "title": "Customize Notifications",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#customize-notifications",
+    "hierarchy": { "lv1": "useSnacks", "lv2": "Customize Notifications" }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#change-direction",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Adjust Margins",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#adjust-margins",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Adjust Margins"
+    }
+  },
+  {
+    "title": "Change Display Duration",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#change-display-duration",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Display Duration"
+    }
+  },
+  {
+    "title": "Limit the Number of Displays",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#limit-the-number-of-displays",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Limit the Number of Displays"
+    }
+  },
+  {
+    "title": "Disable the Close Button",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#disable-the-close-button",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Disable the Close Button"
+    }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#change-variant",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Variant"
+    }
+  },
+  {
+    "title": "Change Status",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#change-status",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Status"
+    }
+  },
+  {
+    "title": "Use Color Scheme",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#use-color-scheme",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Use Color Scheme"
+    }
+  },
+  {
+    "title": "Change Loading Variant",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#change-loading-variant",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Change Loading Variant"
+    }
+  },
+  {
+    "title": "Update Notifications",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#update-notifications",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Update Notifications"
+    }
+  },
+  {
+    "title": "Close Notifications",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#close-notifications",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Close Notifications"
+    }
+  },
+  {
+    "title": "Customize Components",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#customize-components",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize Components"
+    }
+  },
+  {
+    "title": "Customize Styles",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#customize-styles",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize Styles"
+    }
   },
   {
     "title": "useTheme",

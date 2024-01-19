@@ -70,6 +70,13 @@ const OVERRIDE_PATHS: Record<
   typography: ["heading", "text"],
   transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
   progress: ["circle-progress"],
+  "color-picker": [
+    "color-selector",
+    "hue-slider",
+    "alpha-slider",
+    "saturation-slider",
+    "color-swatch",
+  ],
   button: ["icon-button"],
   link: [{ parent: "link-box", children: ["link-overlay"] }],
 }

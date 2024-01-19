@@ -52,6 +52,11 @@ type SnackMethodsOptions = Omit<
 
 export type UseSnacksOptions = SnackConfigOptions
 
+/**
+ * `useSnacks` is a custom hook for controlling notifications used in forms and the like."
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-snacks
+ */
 export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
   const [items, setItems] = useState<Snack[]>([])
   const { theme } = useTheme()

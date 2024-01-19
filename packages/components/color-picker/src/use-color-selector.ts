@@ -29,8 +29,8 @@ import {
   parseToHsla,
   rgbaTo,
   hslaTo,
+  pickObject,
 } from "@yamada-ui/utils"
-import { pickObject } from "@yamada-ui/utils/src/object"
 import type { ChangeEvent } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
 import type { AlphaSliderProps } from "./alpha-slider"

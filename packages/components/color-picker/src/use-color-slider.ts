@@ -20,10 +20,10 @@ import {
   roundNumberToStep,
   useUpdateEffect,
   percentToValue,
+  pickObject,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
-import { pickObject } from "./../../../utils/src/object"
 
 type UseColorSliderOptions = {
   /**

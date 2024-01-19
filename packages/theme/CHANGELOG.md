@@ -1,5 +1,11 @@
 # @yamada-ui/theme
 
+## 1.4.1
+
+### Patch Changes
+
+- [#666](https://github.com/hirotomoyamada/yamada-ui/pull/666) [`6255da0`](https://github.com/hirotomoyamada/yamada-ui/commit/6255da0d4f04ac6c1145a1fe3c9f627fcf905c0f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where placeholder of `isReadOnly` style is reset.
+
 ## 1.4.0
 
 ### Minor Changes

@@ -26,6 +26,7 @@ type Calc = {
   multiply: (...args: Operand[]) => Calc
   divide: (...args: Operand[]) => Calc
   negate: () => Calc
+  toString: () => string
 }
 
 export const calc = Object.assign(
@@ -35,6 +36,7 @@ export const calc = Object.assign(
     multiply: (...args) => calc(multiply(x, ...args)),
     divide: (...args) => calc(divide(x, ...args)),
     negate: () => calc(negate(x)),
+    toString: () => x.toString(),
   }),
   {
     add,

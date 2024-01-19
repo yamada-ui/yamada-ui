@@ -35,6 +35,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
+      - name: Update Contributors
+        run: pnpm gen:contributors
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
       - name: Update Search content
         run: pnpm gen:search
 

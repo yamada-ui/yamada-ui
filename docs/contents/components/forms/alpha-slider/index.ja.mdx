@@ -60,10 +60,11 @@ return (
 const [value, onChange] = useState<number>(0.5)
 
 return (
-  <>
+  <VStack>
     <Text>Value: {value}</Text>
+
     <AlphaSlider color="#4387f4" value={value} step={0.1} onChange={onChange} />
-  </>
+  </VStack>
 )
 ```
 

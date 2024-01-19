@@ -54,10 +54,11 @@ To set a step value, assign a number to `step`.
 const [value, onChange] = useState<number>(180)
 
 return (
-  <>
+  <VStack>
     <Text>Value: {value}</Text>
+
     <HueSlider color="#4387f4" value={value} step={10} onChange={onChange} />
-  </>
+  </VStack>
 )
 ```
 

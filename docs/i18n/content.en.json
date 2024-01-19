@@ -9498,6 +9498,34 @@
     }
   },
   {
+    "title": "Getting Started with Vite",
+    "type": "page",
+    "description": "A guide to installing and using Yamada UI in your Vite project.",
+    "slug": "/getting-started/frameworks/vite",
+    "hierarchy": { "lv1": "Getting Started with Vite" }
+  },
+  {
+    "title": "Install Packages",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#install-packages",
+    "hierarchy": {
+      "lv1": "Getting Started with Vite",
+      "lv2": "Install Packages"
+    }
+  },
+  {
+    "title": "Add UIProvider",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#add-uiprovider",
+    "hierarchy": { "lv1": "Getting Started with Vite", "lv2": "Add UIProvider" }
+  },
+  {
+    "title": "Use Components",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#use-components",
+    "hierarchy": { "lv1": "Getting Started with Vite", "lv2": "Use Components" }
+  },
+  {
     "title": "Getting Started",
     "type": "page",
     "description": "How to get started with Yamada UI.",

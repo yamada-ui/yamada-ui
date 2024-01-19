@@ -111,7 +111,7 @@ import { ColorPicker } from "@yamada-ui/react"
 
 ```tsx
 <ColorPicker
-  defaultValue="2e2e2e"
+  defaultValue="#2e2e2e"
   swatchesLabel="Saved Colors"
   swatches={[
     "#2e2e2e",
@@ -138,7 +138,7 @@ import { ColorPicker } from "@yamada-ui/react"
 
 ```tsx
 <ColorPicker
-  defaultValue="2e2e2e"
+  defaultValue="#2e2e2e"
   swatchesLabel="Saved Colors"
   swatches={[
     "#2e2e2e",
@@ -165,7 +165,7 @@ import { ColorPicker } from "@yamada-ui/react"
 入力を許可しない場合は、`allowInput`を`false`に設定します。
 
 ```tsx
-<ColorPicker placeholder="#00000000" allowInput={false} />
+<ColorPicker placeholder="#000000" allowInput={false} />
 ```
 
 ### 表示位置を変更する
@@ -173,7 +173,7 @@ import { ColorPicker } from "@yamada-ui/react"
 表示位置を変更するには、`placement`に`top`や`left-start`などを設定します。デフォルトでは、`bottom`が設定されています。
 
 ```tsx
-<ColorPicker placeholder="#00000000" placement="bottom-end" />
+<ColorPicker placeholder="#000000" placement="bottom-end" />
 ```
 
 ### オフセットを変更する
@@ -184,8 +184,8 @@ import { ColorPicker } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <ColorPicker placeholder="#00000000" gutter={32} />
-  <ColorPicker placeholder="#00000000" offset={[16, 16]} />
+  <ColorPicker placeholder="#000000" gutter={32} />
+  <ColorPicker placeholder="#000000" offset={[16, 16]} />
 </VStack>
 ```
 
@@ -231,15 +231,16 @@ import { ColorPicker } from "@yamada-ui/react"
 ### レイアウトをカスタマイズする
 
 ```tsx
-<ColorPicker withSwatch={false} />
+<ColorPicker placeholder="#000000" withSwatch={false} />
 ```
 
 ```tsx
-<ColorPicker withEyeDropper={false} />
+<ColorPicker placeholder="#000000" withEyeDropper={false} />
 ```
 
 ```tsx
 <ColorPicker
+  placeholder="#000000"
   withPicker={false}
   swatchesLabel="Saved Colors"
   swatches={[
@@ -263,19 +264,19 @@ import { ColorPicker } from "@yamada-ui/react"
 ```
 
 ```tsx
-<ColorPicker withChannel={false} />
+<ColorPicker placeholder="#000000" withChannel={false} />
 ```
 
 ```tsx
-<ColorPicker withSwatch={false} />
+<ColorPicker placeholder="#000000" withSwatch={false} />
 ```
 
 ```tsx
-<ColorPicker withColorSelectorEyeDropper />
+<ColorPicker placeholder="#000000" withColorSelectorEyeDropper />
 ```
 
 ```tsx
-<ColorPicker withResult />
+<ColorPicker placeholder="#000000" withResult />
 ```
 
 ### 制御する

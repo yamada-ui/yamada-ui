@@ -111,7 +111,7 @@ To display swatches, set an array of strings in `swatches`.
 
 ```tsx
 <ColorPicker
-  defaultValue="2e2e2e"
+  defaultValue="#2e2e2e"
   swatchesLabel="Saved Colors"
   swatches={[
     "#2e2e2e",
@@ -138,7 +138,7 @@ To close upon selecting a swatch, set `closeOnSelectSwatch` to `true`.
 
 ```tsx
 <ColorPicker
-  defaultValue="2e2e2e"
+  defaultValue="#2e2e2e"
   swatchesLabel="Saved Colors"
   swatches={[
     "#2e2e2e",
@@ -165,7 +165,7 @@ To close upon selecting a swatch, set `closeOnSelectSwatch` to `true`.
 To disallow input, set `allowInput` to `false`.
 
 ```tsx
-<ColorPicker placeholder="#00000000" allowInput={false} />
+<ColorPicker placeholder="#000000" allowInput={false} />
 ```
 
 ### Change Display Position
@@ -173,7 +173,7 @@ To disallow input, set `allowInput` to `false`.
 To change the display position, set `placement` to positions like `top` or `left-start`. By default, `bottom` is set.
 
 ```tsx
-<ColorPicker placeholder="#00000000" placement="bottom-end" />
+<ColorPicker placeholder="#000000" placement="bottom-end" />
 ```
 
 ### Change Offset
@@ -184,8 +184,8 @@ Depending on the size of the element or the situation, you may want to change th
 
 ```tsx
 <VStack>
-  <ColorPicker placeholder="#00000000" gutter={32} />
-  <ColorPicker placeholder="#00000000" offset={[16, 16]} />
+  <ColorPicker placeholder="#000000" gutter={32} />
+  <ColorPicker placeholder="#000000" offset={[16, 16]} />
 </VStack>
 ```
 
@@ -231,15 +231,16 @@ To make read-only, set `isReadOnly` to `true`.
 ### Customize Layout
 
 ```tsx
-<ColorPicker withSwatch={false} />
+<ColorPicker placeholder="#000000" withSwatch={false} />
 ```
 
 ```tsx
-<ColorPicker withEyeDropper={false} />
+<ColorPicker placeholder="#000000" withEyeDropper={false} />
 ```
 
 ```tsx
 <ColorPicker
+  placeholder="#000000"
   withPicker={false}
   swatchesLabel="Saved Colors"
   swatches={[
@@ -263,17 +264,17 @@ To make read-only, set `isReadOnly` to `true`.
 ```
 
 ```tsx
-<ColorPicker withChannel={false} />
+<ColorPicker placeholder="#000000" withChannel={false} />
 ```
 
 CODEBLOCK_PLACEHOLDER_18
 
 ```tsx
-<ColorPicker withColorSelectorEyeDropper />
+<ColorPicker placeholder="#000000" withColorSelectorEyeDropper />
 ```
 
 ```tsx
-<ColorPicker withResult />
+<ColorPicker placeholder="#000000" withResult />
 ```
 
 ### Control

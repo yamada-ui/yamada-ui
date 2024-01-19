@@ -10039,6 +10039,34 @@
     }
   },
   {
+    "title": "Viteではじめる",
+    "type": "page",
+    "description": "ViteのプロジェクトにYamada UIをインストールして使用するためのガイド。",
+    "slug": "/getting-started/frameworks/vite",
+    "hierarchy": { "lv1": "Viteではじめる" }
+  },
+  {
+    "title": "パッケージをインストールする",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#パッケージをインストールする",
+    "hierarchy": {
+      "lv1": "Viteではじめる",
+      "lv2": "パッケージをインストールする"
+    }
+  },
+  {
+    "title": "UIProviderを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#uiproviderを追加する",
+    "hierarchy": { "lv1": "Viteではじめる", "lv2": "UIProviderを追加する" }
+  },
+  {
+    "title": "コンポーネントを使用する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#コンポーネントを使用する",
+    "hierarchy": { "lv1": "Viteではじめる", "lv2": "コンポーネントを使用する" }
+  },
+  {
     "title": "はじめる",
     "type": "page",
     "description": "Yamada UIのはじめ方。",

@@ -17,9 +17,6 @@ export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
         },
         _readOnly: {
           pointerEvents: "none",
-          _placeholder: {
-            color: "inherit !important",
-          },
         },
       },
       list: {

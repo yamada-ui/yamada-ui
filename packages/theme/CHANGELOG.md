@@ -1,5 +1,53 @@
 # @yamada-ui/theme
 
+## 1.4.1
+
+### Patch Changes
+
+- [#666](https://github.com/hirotomoyamada/yamada-ui/pull/666) [`6255da0`](https://github.com/hirotomoyamada/yamada-ui/commit/6255da0d4f04ac6c1145a1fe3c9f627fcf905c0f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where placeholder of `isReadOnly` style is reset.
+
+## 1.4.0
+
+### Minor Changes
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ColorPicker`, `SaturationSlider`, `HueSlider`, `AlphaSlider` and `ColorSwatch` component.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Resizable` component.
+
+### Patch Changes
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `NativeSelect` icon disabled `opacity`.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted `DatePicker` and `NativeSelect` component styles.
+
+- [#663](https://github.com/hirotomoyamada/yamada-ui/pull/663) [`75f90ea`](https://github.com/hirotomoyamada/yamada-ui/commit/75f90ea007a9abc32ac9a863f637644f8a36085b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted shadow styles.
+
+- Updated dependencies [[`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`b678019`](https://github.com/hirotomoyamada/yamada-ui/commit/b6780198dc3441eac04bf1f7fd9210c726f32edb), [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf)]:
+  - @yamada-ui/utils@1.0.4
+  - @yamada-ui/core@1.3.0
+
+## 1.3.3
+
+### Patch Changes
+
+- Updated dependencies [[`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0)]:
+  - @yamada-ui/core@1.2.2
+
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca)]:
+  - @yamada-ui/core@1.2.1
+
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`2c95896`](https://github.com/hirotomoyamada/yamada-ui/commit/2c95896137948e34c6b6459cb601eba0c6d4a1b4), [`6333168`](https://github.com/hirotomoyamada/yamada-ui/commit/633316826c00a278aeefbffe53174296b2fddf01), [`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/core@1.2.0
+  - @yamada-ui/utils@1.0.3
+
 ## 1.3.0
 
 ### Minor Changes

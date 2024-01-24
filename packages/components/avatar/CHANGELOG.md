@@ -1,5 +1,53 @@
 # @yamada-ui/avatar
 
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`b678019`](https://github.com/hirotomoyamada/yamada-ui/commit/b6780198dc3441eac04bf1f7fd9210c726f32edb), [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf)]:
+  - @yamada-ui/utils@1.0.4
+  - @yamada-ui/core@1.3.0
+  - @yamada-ui/icon@1.0.9
+  - @yamada-ui/image@1.0.9
+  - @yamada-ui/use-animation@1.0.9
+
+## 1.1.7
+
+### Patch Changes
+
+- [#658](https://github.com/hirotomoyamada/yamada-ui/pull/658) [`081af00`](https://github.com/hirotomoyamada/yamada-ui/commit/081af001c50f13c0001b5a6cbd42cb6362887dae) Thanks [@koralle](https://github.com/koralle)! - Corrected the assignment of `referrerPolicy` to `<img />` instead of `<span />` in the `Avatar` component.
+
+- Updated dependencies [[`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0)]:
+  - @yamada-ui/core@1.2.2
+  - @yamada-ui/icon@1.0.8
+  - @yamada-ui/image@1.0.8
+  - @yamada-ui/use-animation@1.0.8
+
+## 1.1.6
+
+### Patch Changes
+
+- [#646](https://github.com/hirotomoyamada/yamada-ui/pull/646) [`4ccfca1`](https://github.com/hirotomoyamada/yamada-ui/commit/4ccfca16537d3f29f93d5b4b7b4e75ae38bad324) Thanks [@neerajkumarc](https://github.com/neerajkumarc)! - Corrected Avatar component behavior to handle leading and trailing spaces in input strings, ensuring proper rendering of initials.
+
+- Updated dependencies [[`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca)]:
+  - @yamada-ui/core@1.2.1
+  - @yamada-ui/icon@1.0.7
+  - @yamada-ui/image@1.0.7
+  - @yamada-ui/use-animation@1.0.7
+
+## 1.1.5
+
+### Patch Changes
+
+- [`25d2a19`](https://github.com/hirotomoyamada/yamada-ui/commit/25d2a19f6cd2ec9929e75c98de1852b8b367da82) - fix crossOrigin does not exist in Avatar component
+
+- Updated dependencies [[`2c95896`](https://github.com/hirotomoyamada/yamada-ui/commit/2c95896137948e34c6b6459cb601eba0c6d4a1b4), [`6333168`](https://github.com/hirotomoyamada/yamada-ui/commit/633316826c00a278aeefbffe53174296b2fddf01), [`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/core@1.2.0
+  - @yamada-ui/utils@1.0.3
+  - @yamada-ui/icon@1.0.6
+  - @yamada-ui/image@1.0.6
+  - @yamada-ui/use-animation@1.0.6
+
 ## 1.1.4
 
 ### Patch Changes

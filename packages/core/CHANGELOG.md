@@ -1,5 +1,43 @@
 # @yamada-ui/core
 
+## 1.3.0
+
+### Minor Changes
+
+- [#663](https://github.com/hirotomoyamada/yamada-ui/pull/663) [`b678019`](https://github.com/hirotomoyamada/yamada-ui/commit/b6780198dc3441eac04bf1f7fd9210c726f32edb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added configure of `Snacks`.
+
+### Patch Changes
+
+- Updated dependencies [[`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf)]:
+  - @yamada-ui/utils@1.0.4
+  - @yamada-ui/portal@1.0.4
+
+## 1.2.2
+
+### Patch Changes
+
+- [#651](https://github.com/hirotomoyamada/yamada-ui/pull/651) [`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0) Thanks [@hoshico](https://github.com/hoshico)! - Fied the JSDoc for valid:
+
+## 1.2.1
+
+### Patch Changes
+
+- [#648](https://github.com/hirotomoyamada/yamada-ui/pull/648) [`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed the JSDoc for ::before and ::after pseudo-elements in @yamada-ui/core which were incorrectly documented.
+
+## 1.2.0
+
+### Minor Changes
+
+- [`2c95896`](https://github.com/hirotomoyamada/yamada-ui/commit/2c95896137948e34c6b6459cb601eba0c6d4a1b4) Thanks [@illionillion](https://github.com/illionillion)! - Add `_marker` property.
+
+- [#650](https://github.com/hirotomoyamada/yamada-ui/pull/650) [`6333168`](https://github.com/hirotomoyamada/yamada-ui/commit/633316826c00a278aeefbffe53174296b2fddf01) Thanks [@illionillion](https://github.com/illionillion)! - Supported `::first-letter` and `::first-line`.
+
+### Patch Changes
+
+- Updated dependencies [[`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/utils@1.0.3
+  - @yamada-ui/portal@1.0.3
+
 ## 1.1.4
 
 ### Patch Changes

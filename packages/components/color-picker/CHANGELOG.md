@@ -1,5 +1,11 @@
 # @yamada-ui/color-picker
 
+## 1.0.2
+
+### Patch Changes
+
+- [#675](https://github.com/hirotomoyamada/yamada-ui/pull/675) [`8de987a`](https://github.com/hirotomoyamada/yamada-ui/commit/8de987a1b08ef183242779f92f3b91bdc84205e5) Thanks [@komura-c](https://github.com/komura-c)! - Alpha value is displayed when default-color is set
+
 ## 1.0.1
 
 ### Patch Changes

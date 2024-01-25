@@ -6,12 +6,13 @@ import { useState } from "react"
 import { Highlight } from "./code-block"
 import { CopyButton } from "components/forms"
 
-type PackageMangerNames = "pnpm" | "npm" | "yarn"
+type PackageMangerNames = "pnpm" | "npm" | "yarn" | "bun"
 
 const PACKAGE_MANAGER_COMMANDS: Record<PackageMangerNames, string> = {
   pnpm: "pnpm add",
   npm: "npm install",
   yarn: "yarn add",
+  bun: "bun install",
 }
 
 const getCode = (

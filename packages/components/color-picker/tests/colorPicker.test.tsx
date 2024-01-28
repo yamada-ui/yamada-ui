@@ -23,7 +23,7 @@ describe("<ColorPicker />", () => {
 
   test("ColorPicker displays a color preview", () => {
     render(<ColorPicker data-testid="color" />)
-    const colorPreview = screen.getByTestId("color-preview")
+    const colorPreview = screen.getByTestId("color")
     expect(colorPreview).toBeInTheDocument()
   })
 

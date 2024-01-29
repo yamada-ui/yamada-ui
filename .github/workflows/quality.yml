@@ -6,20 +6,6 @@ on:
       - main
 
 jobs:
-  generate_matrix:
-    name: Get changed packages
-    runs-on: ubuntu-latest
-    outputs:
-      packages: ${{ steps.changed-packages.outputs.packages }}
-      empty: ${{ steps.changed-packages.outputs.empty }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Find changed packages
-        id: changed-packages
-        uses: alexshukel/get-changed-workspaces-action@v2.0.0
-
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -35,12 +21,7 @@ jobs:
 
   test:
     name: Test
-    needs: [generate_matrix]
     runs-on: ubuntu-latest
-    if: ${{ !fromJson(needs.generate_matrix.outputs.empty) }}
-    strategy:
-      matrix:
-        paths: ${{ fromJson(needs.generate_matrix.outputs.packages.paths) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,12 +30,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          package-manager: pnpm
-          test-script: pnpm test:ci
-          skip-step: install
-          working-directory: ${{ matrix.paths }}
+        run: pnpm test
 
   eslint:
     name: ESLint
@@ -94,3 +70,40 @@ jobs:
 
       - name: Run prettier
         run: pnpm format:check
+
+  check-changed-workspaces:
+    name: Check changed packages
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.changed-packages.outputs.packages }}
+      empty: ${{ steps.changed-packages.outputs.empty }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Find changed packages
+        id: changed-packages
+        uses: AlexShukel/get-changed-workspaces-action@v2.0.0
+
+  coverage:
+    name: Coverage
+    needs: [check-changed-workspaces]
+    runs-on: ubuntu-latest
+    if: ${{ !fromJson(needs.check-changed-workspaces.outputs.empty) }}
+    strategy:
+      matrix:
+        paths: ${{ fromJson(needs.check-changed-workspaces.outputs.packages.paths) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Create coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          package-manager: pnpm
+          test-script: pnpm test:ci
+          skip-step: install
+          working-directory: ${{ matrix.paths }}

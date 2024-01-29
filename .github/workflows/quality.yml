@@ -92,7 +92,7 @@ jobs:
     if: ${{ !fromJson(needs.check-changed-workspaces.outputs.empty) }}
     strategy:
       matrix:
-        packages: ${{ fromJson(needs.check-changed-workspaces.outputs.packages) }}
+        package: ${{ fromJson(needs.check-changed-workspaces.outputs.packages) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -106,4 +106,4 @@ jobs:
           package-manager: pnpm
           test-script: pnpm test:ci
           skip-step: install
-          working-directory: ${{ matrix.packages }}
+          working-directory: ${{ matrix.package.path }}

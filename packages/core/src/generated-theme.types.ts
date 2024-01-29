@@ -635,10 +635,6 @@ export interface GeneratedTheme extends UITheme {
     | "beerus"
     | (string & {})
   components: {
-    Indicator: {
-      sizes: "sm" | "md" | "lg" | (string & {})
-      variants: "solid" | "subtle" | (string & {})
-    }
     Accordion: {
       sizes: string & {}
       variants: "basic" | "card" | "unstyled" | (string & {})
@@ -653,6 +649,10 @@ export interface GeneratedTheme extends UITheme {
         | "left-accent"
         | "top-accent"
         | (string & {})
+    }
+    AlphaSlider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
     }
     Autocomplete: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -702,6 +702,18 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
     }
+    ColorPicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
+    ColorSelector: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
+    ColorSwatch: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: "basic" | "rounded" | (string & {})
+    }
     DatePicker: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -750,6 +762,14 @@ export interface GeneratedTheme extends UITheme {
         | "xs"
         | (string & {})
       variants: string & {}
+    }
+    HueSlider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    Indicator: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: "solid" | "subtle" | (string & {})
     }
     Input: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -837,6 +857,14 @@ export interface GeneratedTheme extends UITheme {
     Reorder: {
       sizes: "sm" | "md" | "normal" | "lg" | (string & {})
       variants: "elevated" | "outline" | "unstyled" | (string & {})
+    }
+    Resizable: {
+      sizes: string & {}
+      variants: "border" | "spacer" | (string & {})
+    }
+    SaturationSlider: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
     }
     SegmentedControl: {
       sizes: "sm" | "md" | "lg" | (string & {})

@@ -1,0 +1,932 @@
+{
+  "ColorSelector": {
+    "alphaSliderProps": {
+      "type": "Omit<AlphaSliderProps, \"defaultValue\" | \"value\">",
+      "required": false,
+      "description": "Props for the alpha slider component."
+    },
+    "alphaSliderRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLInputElement | null) => void)\n  | MutableRefObject<HTMLInputElement | null>",
+      "required": false,
+      "description": "Ref for the alpha slider component."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultValue": {
+      "type": "string",
+      "defaultValue": "#ffffffff",
+      "required": false,
+      "description": "The initial value of the color selector."
+    },
+    "eyeDropperProps": {
+      "type": "IconButtonProps",
+      "required": false,
+      "description": "Props for the eye dropper component."
+    },
+    "eyeDropperRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLButtonElement | null) => void)\n  | MutableRefObject<HTMLButtonElement | null>",
+      "required": false,
+      "description": "Ref for the eye dropper component."
+    },
+    "fallbackValue": {
+      "type": "string",
+      "required": false,
+      "description": "The fallback value returned when color determination fails."
+    },
+    "format": {
+      "type": "ColorFormat",
+      "defaultValue": "hexa",
+      "required": false,
+      "description": "Color format. For example, `hex`, `rgba`, etc."
+    },
+    "hueSliderProps": {
+      "type": "Omit<HueSliderProps, \"defaultValue\" | \"value\">",
+      "required": false,
+      "description": "Props for the hue slider component."
+    },
+    "hueSliderRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLInputElement | null) => void)\n  | MutableRefObject<HTMLInputElement | null>",
+      "required": false,
+      "description": "Ref for the hue slider component."
+    },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for the color selector input element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called whenever the color selector value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "onSwatchClick": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called whenever the color swatch click."
+    },
+    "saturationSliderProps": {
+      "type": "Omit<SaturationSliderProps, \"defaultValue\" | \"value\">",
+      "required": false,
+      "description": "Props for the saturation slider component."
+    },
+    "saturationSliderRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLInputElement | null) => void)\n  | MutableRefObject<HTMLInputElement | null>",
+      "required": false,
+      "description": "Ref for the saturation slider component."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "description": "The size of the ColorSelector."
+    },
+    "swatches": {
+      "type": "string[]",
+      "required": false,
+      "description": "An array of colors in one of the supported formats.\nUsed to render swatches list below the color selector."
+    },
+    "swatchesColumns": {
+      "type": "UIValue<number>",
+      "defaultValue": "7",
+      "required": false,
+      "description": "Number of swatches grid columns."
+    },
+    "swatchesLabel": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The swatches label to use."
+    },
+    "swatchesProps": {
+      "type": "ColorSelectorSwatchesProps",
+      "required": false,
+      "description": "Props for the swatches component."
+    },
+    "swatchProps": {
+      "type": "ColorSwatchProps",
+      "required": false,
+      "description": "Props for the color swatch component."
+    },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the color selector."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the ColorSelector."
+    },
+    "withChannel": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the channels component."
+    },
+    "withEyeDropper": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true` display the eye dropper component."
+    },
+    "withPicker": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the saturation, hue, alpha, channels and eye dropper component."
+    },
+    "withResult": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the result component."
+    }
+  },
+  "ColorPicker": {
+    "allowInput": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, allows input."
+    },
+    "boundary": {
+      "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
+      "defaultValue": "'clippingParents'",
+      "required": false,
+      "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
+    },
+    "closeOnBlur": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popover will close when you hit the `Esc` key."
+    },
+    "closeOnSelectSwatch": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the color swatch will be closed when value is selected."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "colorSelectorColorScheme": {
+      "type": "\"link\" | (string & {}) | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | ... 12 more ... | \"fuchsia\"",
+      "required": false,
+      "description": "ColorScheme for the color selector component."
+    },
+    "colorSelectorProps": {
+      "type": "ColorSelectorProps",
+      "required": false,
+      "description": "Props for color selector component."
+    },
+    "colorSelectorSize": {
+      "type": "UIValue<(string & {}) | \"sm\" | \"md\" | \"lg\" | \"full\">",
+      "required": false,
+      "description": "Size for the color selector component."
+    },
+    "colorSelectorVariant": {
+      "type": "UIValue<string & {}>",
+      "required": false,
+      "description": "Variant for the color selector component."
+    },
+    "containerProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for color picker container element."
+    },
+    "defaultColor": {
+      "type": "string",
+      "required": false,
+      "description": "The initial value of the color selector."
+    },
+    "defaultIsOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be initially opened."
+    },
+    "defaultValue": {
+      "type": "string",
+      "defaultValue": "#ffffffff",
+      "required": false,
+      "description": "The initial value of the color selector."
+    },
+    "duration": {
+      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "required": false,
+      "description": "The animation duration."
+    },
+    "errorBorderColor": {
+      "type": "string",
+      "required": false,
+      "description": "The border color when the input is invalid."
+    },
+    "eventListeners": {
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | { scroll?: boolean | undefined; resize?: boolean | undefined }",
+      "defaultValue": true,
+      "required": false,
+      "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+    },
+    "eyeDropperProps": {
+      "type": "ColorPickerEyeDropperProps",
+      "required": false,
+      "description": "Props for color eye dropper component."
+    },
+    "fallbackValue": {
+      "type": "string",
+      "required": false,
+      "description": "The fallback value returned when color determination fails."
+    },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+    },
+    "focusBorderColor": {
+      "type": "string",
+      "required": false,
+      "description": "The border color when the input is focused."
+    },
+    "format": {
+      "type": "ColorFormat",
+      "defaultValue": "hexa",
+      "required": false,
+      "description": "Color format. For example, `hex`, `rgba`, etc."
+    },
+    "formatInput": {
+      "type": "(value: string) => string",
+      "required": false,
+      "description": "A callback function to format the input entered."
+    },
+    "gutter": {
+      "type": "UIValue<number>",
+      "defaultValue": "8",
+      "required": false,
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+    },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for color picker element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isLazy": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "lazyBehavior": {
+      "type": "LazyMode",
+      "defaultValue": "'unmount'",
+      "required": false,
+      "description": "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+    },
+    "modifiers": {
+      "type": "Partial<Modifier<string, any>>[]",
+      "required": false,
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
+    },
+    "offset": {
+      "type": "[number, number]",
+      "required": false,
+      "description": "The main and cross-axis offset to displace popper element from its reference element."
+    },
+    "onChange": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called whenever the color selector value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "onClose": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the popover closes."
+    },
+    "onOpen": {
+      "type": "() => void",
+      "required": false,
+      "description": "Callback fired when the popover opens."
+    },
+    "onSwatchClick": {
+      "type": "(value: string) => void",
+      "required": false,
+      "description": "Function called whenever the color swatch click."
+    },
+    "placement": {
+      "type": "UIValue<Placement>",
+      "defaultValue": "'bottom'",
+      "required": false,
+      "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
+    },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the ColorPicker."
+    },
+    "strategy": {
+      "type": "\"fixed\" | \"absolute\"",
+      "defaultValue": "'absolute'",
+      "required": false,
+      "description": "The CSS positioning strategy to use."
+    },
+    "swatches": {
+      "type": "string[]",
+      "required": false,
+      "description": "An array of colors in one of the supported formats.\nUsed to render swatches list below the color selector."
+    },
+    "swatchesColumns": {
+      "type": "UIValue<number>",
+      "defaultValue": "7",
+      "required": false,
+      "description": "Number of swatches grid columns."
+    },
+    "swatchesLabel": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The swatches label to use."
+    },
+    "swatchProps": {
+      "type": "ColorSwatchProps",
+      "required": false,
+      "description": "Props for color swatch component."
+    },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the color selector."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the ColorPicker."
+    },
+    "withChannel": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the channels component."
+    },
+    "withColorSelectorEyeDropper": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true` display the eye dropper component."
+    },
+    "withEyeDropper": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the eye dropper component."
+    },
+    "withPicker": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the saturation, hue, alpha, channels and eye dropper component."
+    },
+    "withResult": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, display the result component."
+    },
+    "withSwatch": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the color swatch component."
+    }
+  },
+  "HueSlider": {
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultValue": {
+      "type": "number",
+      "required": false,
+      "description": "The initial value of the slider."
+    },
+    "focusThumbOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `false`, the slider handle will not capture focus when value changes."
+    },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for slider input element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "360",
+      "required": false,
+      "description": "The maximum allowed value of the slider. Cannot be less than min."
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum allowed value of the slider. Cannot be greater than max."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called whenever the slider value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "overlays": {
+      "type": "HTMLUIProps<\"div\">[]",
+      "required": false,
+      "description": "The overlay used for the slider."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the HueSlider."
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The step in which increments or decrements have to be made."
+    },
+    "thumbColor": {
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Background<0 | (string & {})> | \"current\" | \"focus\" | \"whiteAlpha.50\" | ... 317 more ... | \"secondary.950\">",
+      "required": false,
+      "description": "The CSS `background` property. Used in `background` of thumb element."
+    },
+    "thumbProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for slider thumb element."
+    },
+    "trackProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for slider track element."
+    },
+    "value": {
+      "type": "number",
+      "required": false,
+      "description": "The value of the slider."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the HueSlider."
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the slider has an inner `box-shadow`."
+    }
+  },
+  "AlphaSlider": {
+    "color": {
+      "type": "string",
+      "defaultValue": "#ffffff",
+      "required": false,
+      "description": "The color used for the slider."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultValue": {
+      "type": "number",
+      "required": false,
+      "description": "The initial value of the slider."
+    },
+    "focusThumbOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `false`, the slider handle will not capture focus when value changes."
+    },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for slider input element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The maximum allowed value of the slider. Cannot be less than min."
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "The minimum allowed value of the slider. Cannot be greater than max."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+    },
+    "onChange": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called whenever the slider value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: number) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "overlays": {
+      "type": "HTMLUIProps<\"div\">[]",
+      "required": false,
+      "description": "The overlay used for the slider."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the AlphaSlider."
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The step in which increments or decrements have to be made."
+    },
+    "thumbColor": {
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Background<0 | (string & {})> | \"current\" | \"focus\" | \"whiteAlpha.50\" | ... 317 more ... | \"secondary.950\">",
+      "required": false,
+      "description": "The CSS `background` property. Used in `background` of thumb element."
+    },
+    "thumbProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for slider thumb element."
+    },
+    "trackProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for slider track element."
+    },
+    "value": {
+      "type": "number",
+      "required": false,
+      "description": "The value of the slider."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the AlphaSlider."
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the slider has an inner `box-shadow`."
+    }
+  },
+  "ColorSwatch": {
+    "color": {
+      "type": "string",
+      "defaultValue": "#ffffff00",
+      "required": false,
+      "description": "The color used for the swatch element."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the color swatch will be perfectly round. Else, it'll be slightly round."
+    },
+    "overlays": {
+      "type": "HTMLUIProps<\"div\">[]",
+      "required": false,
+      "description": "The overlay used for the swatch element."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the ColorSwatch."
+    },
+    "variant": {
+      "defaultValue": "basic",
+      "type": "\"basic\" | \"rounded\"",
+      "required": false,
+      "description": "The variant of the ColorSwatch."
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the swatch element has an inner `box-shadow`."
+    }
+  },
+  "SaturationSlider": {
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "defaultValue": {
+      "type": "Hsv",
+      "defaultValue": "[0, 0, 1]",
+      "required": false,
+      "description": "The initial value of the saturation slider."
+    },
+    "focusThumbOnChange": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `false`, the saturation slider handle will not capture focus when value changes."
+    },
+    "innerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for saturation slider inner element."
+    },
+    "inputProps": {
+      "type": "HTMLUIProps<\"input\">",
+      "required": false,
+      "description": "Props for saturation slider input element."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms."
+    },
+    "onChange": {
+      "type": "(value: Hsv) => void",
+      "required": false,
+      "description": "Function called whenever the saturation slider value changes."
+    },
+    "onChangeEnd": {
+      "type": "(value: Hsv) => void",
+      "required": false,
+      "description": "Function called when the user is done selecting a new value."
+    },
+    "onChangeStart": {
+      "type": "(value: Hsv) => void",
+      "required": false,
+      "description": "Function called when the user starts selecting a new value."
+    },
+    "overlays": {
+      "type": "Overlay[]",
+      "required": false,
+      "description": "The overlay used for the saturation slider."
+    },
+    "ratio": {
+      "type": "UIValue<number>",
+      "defaultValue": "'16 / 9'",
+      "required": false,
+      "description": "The aspect ratio of the saturation slider."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "description": "The size of the SaturationSlider."
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "0.01",
+      "required": false,
+      "description": "The step in which increments or decrements have to be made."
+    },
+    "thumbColor": {
+      "type": "UIValue<\"link\" | \"border\" | \"danger\" | \"warning\" | \"success\" | \"primary\" | \"info\" | \"secondary\" | Background<0 | (string & {})> | \"current\" | \"focus\" | \"whiteAlpha.50\" | ... 317 more ... | \"secondary.950\">",
+      "required": false,
+      "description": "The CSS `background` property. Used in `background` of thumb element."
+    },
+    "thumbProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for saturation slider thumb element."
+    },
+    "trackProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for saturation slider track element."
+    },
+    "value": {
+      "type": "Hsv",
+      "required": false,
+      "description": "The value of the saturation slider."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the SaturationSlider."
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, the slider has an inner `box-shadow`."
+    }
+  }
+}

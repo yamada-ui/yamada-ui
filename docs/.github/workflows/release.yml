@@ -15,7 +15,7 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Update Changelog
+      - name: Update changelog
         run: pnpm gen:changelog
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -25,22 +25,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
-      - name: Update Theme
+      - name: Update theme
         run: pnpm gen:theme
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
-      - name: Update Props
+      - name: Update props
         run: pnpm gen:props
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
-      - name: Update Contributors
+      - name: Update contributors
         run: pnpm gen:contributors
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
-      - name: Update Search content
+      - name: Update search content
         run: pnpm gen:search
 
       - name: Update Yamada UI

@@ -100,12 +100,24 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
+      - name: Check exist tests
+        id: tests
+        run: |
+          if [ -d ${{ matrix.package.path }}/tests ]; then
+            echo "name=exist::true" >> $GITHUB_OUTPUT
+          else
+            echo "name=exist::false" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
       - name: Get test name
+        if: steps.tests.outputs.exist == 'true'
         id: test-name
         run: echo "name=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1 | rev)" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Create coverage report
+        if: steps.tests.outputs.exist == 'true'
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: pnpm

@@ -97,13 +97,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install
-        uses: ./.github/composite-actions/install
-
       - name: Create coverage report
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: pnpm
           test-script: pnpm test:ci
-          skip-step: install
           working-directory: ${{ matrix.package.path }}

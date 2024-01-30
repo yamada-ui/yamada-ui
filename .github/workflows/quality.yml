@@ -104,5 +104,5 @@ jobs:
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: pnpm
-          test-script: pnpm test:ci
-          working-directory: ${{ matrix.package.path }}
+          test-script: npx jest --coverage --silent --testLocationInResults --ci --json --outputFile=report.json
+          skip-step: install

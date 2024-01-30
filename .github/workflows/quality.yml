@@ -71,8 +71,8 @@ jobs:
       - name: Run prettier
         run: pnpm format:check
 
-  check-changed-workspaces:
-    name: Check changed packages
+  coverage:
+    name: Coverage
     runs-on: ubuntu-latest
     outputs:
       packages: ${{ steps.changed-packages.outputs.packages }}
@@ -85,14 +85,14 @@ jobs:
         id: changed-packages
         uses: AlexShukel/get-changed-workspaces-action@v2.0.0
 
-  coverage:
-    name: Coverage
-    needs: [check-changed-workspaces]
+  "coverage-report":
+    name: Coverage report
+    needs: [coverage]
     runs-on: ubuntu-latest
-    if: ${{ !fromJson(needs.check-changed-workspaces.outputs.empty) }}
+    if: ${{ !fromJson(needs.coverage.outputs.empty) }}
     strategy:
       matrix:
-        package: ${{ fromJson(needs.check-changed-workspaces.outputs.packages) }}
+        package: ${{ fromJson(needs.coverage.outputs.packages) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -103,11 +103,7 @@ jobs:
       - name: Check exist tests
         id: tests
         run: |
-          if [ -d ${{ matrix.package.path }}/tests ]; then
-            echo "name=exist::true" >> $GITHUB_OUTPUT
-          else
-            echo "name=exist::false" >> $GITHUB_OUTPUT
-          fi
+          echo "exist=$([ -d ${{ matrix.package.path }}/tests ] && echo true || echo false)" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Add PR comment
@@ -116,7 +112,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### Coverage report for ${{ matrix.package.name }}
+            ## Coverage report for ${{ matrix.package.name }}
             Test does not exist.
 
       - name: Get test name

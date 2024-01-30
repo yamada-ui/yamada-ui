@@ -101,7 +101,7 @@ jobs:
         id: tests
         run: |
           echo "exist=$([ -d ${{ matrix.package.path }}/tests ] && echo true || echo false)" >> $GITHUB_OUTPUT
-          echo "path=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1,2 | rev)" >> $GITHUB_OUTPUT
+          echo "path=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1,2,3 | rev)" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Add PR comment

@@ -100,9 +100,14 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
+      - name: Get test name
+        id: test-name
+        run: echo "name=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1 | rev)" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Create coverage report
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: pnpm
-          test-script: npx jest --coverage --silent --testLocationInResults --ci --json --outputFile=report.json
+          test-script: pnpm test:ci ${{ steps.test-name.outputs.name }}
           skip-step: install

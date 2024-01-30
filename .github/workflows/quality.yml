@@ -97,13 +97,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install
-        uses: ./.github/composite-actions/install
-
       - name: Check exist tests
         id: tests
         run: |
           echo "exist=$([ -d ${{ matrix.package.path }}/tests ] && echo true || echo false)" >> $GITHUB_OUTPUT
+          echo "path=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1,2 | rev)" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Add PR comment
@@ -115,11 +113,9 @@ jobs:
             ## Coverage report for ${{ matrix.package.name }}
             Test does not exist.
 
-      - name: Get test name
+      - name: Install
         if: steps.tests.outputs.exist == 'true'
-        id: test-name
-        run: echo "name=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1 | rev)" >> $GITHUB_OUTPUT
-        shell: bash
+        uses: ./.github/composite-actions/install
 
       - name: Create coverage report
         if: steps.tests.outputs.exist == 'true'
@@ -127,5 +123,5 @@ jobs:
         with:
           package-manager: pnpm
           custom-title: Coverage report for ${{ matrix.package.name }}
-          test-script: pnpm test:ci ${{ steps.test-name.outputs.name }}
+          test-script: pnpm test:ci "${{ steps.tests.outputs.path }}" --collectCoverageFrom="${{ steps.tests.outputs.path }}/**/*.{ts,tsx}"
           skip-step: install

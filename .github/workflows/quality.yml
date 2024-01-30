@@ -110,6 +110,15 @@ jobs:
           fi
         shell: bash
 
+      - name: Add PR comment
+        if: steps.tests.outputs.exist == 'false'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### Coverage report for ${{ matrix.package.name }}
+            Test does not exist.
+
       - name: Get test name
         if: steps.tests.outputs.exist == 'true'
         id: test-name
@@ -121,5 +130,6 @@ jobs:
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: pnpm
+          custom-title: Coverage report for ${{ matrix.package.name }}
           test-script: pnpm test:ci ${{ steps.test-name.outputs.name }}
           skip-step: install

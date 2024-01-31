@@ -18,7 +18,7 @@ import type {
 } from "react-resizable-panels"
 
 type GroupPropGetter = (props?: Partial<PanelGroupProps>) => PanelGroupProps
-type ItemPropGetter = (props?: PanelProps) => PanelProps
+type ItemPropGetter = (props?: HTMLUIProps<"div"> & PanelProps) => PanelProps
 type TriggerPropGetter = (
   props?: PanelResizeHandleProps,
 ) => PanelResizeHandleProps
@@ -203,9 +203,9 @@ type UseResizableItemOptions = {
    */
   controlRef?: RefObject<ResizableItemControl>
   /**
-   * Props for resizable item component.
+   * Props for resizable item container element.
    */
-  itemProps?: ResizableItemProps
+  containerProps?: Omit<HTMLUIProps<"div">, "as"> & ResizableItemProps
 }
 
 export type UseResizableItemProps = Omit<
@@ -227,14 +227,14 @@ export const useResizableItem = ({
   onResize,
   order,
   controlRef,
-  itemProps,
+  containerProps,
   ...innerProps
 }: UseResizableItemProps) => {
   id ??= useId()
 
   const getPanelProps: ItemPropGetter = useCallback(
     (props = {}) => {
-      const { as, ...rest } = itemProps ?? {}
+      const { as, ...rest } = containerProps ?? {}
 
       return {
         ...props,
@@ -256,7 +256,7 @@ export const useResizableItem = ({
     [
       id,
       controlRef,
-      itemProps,
+      containerProps,
       collapsedSize,
       collapsible,
       defaultSize,

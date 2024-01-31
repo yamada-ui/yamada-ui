@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 1.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`8de987a`](https://github.com/hirotomoyamada/yamada-ui/commit/8de987a1b08ef183242779f92f3b91bdc84205e5)]:
+  - @yamada-ui/color-picker@1.0.2
+
 ## 1.2.1
 
 ### Patch Changes

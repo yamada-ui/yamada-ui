@@ -17,7 +17,28 @@ export type ResizableItemProps = Omit<UseResizableItemProps, "ref"> &
   ResizableItemOptions
 
 export const ResizableItem = forwardRef<ResizableItemProps, "div">(
-  ({ className, children, innerRef, ...rest }, ref) => {
+  (
+    {
+      className,
+      children,
+      innerRef,
+      w,
+      width,
+      minW,
+      minWidth,
+      maxW,
+      maxWidth,
+      h,
+      height,
+      minH,
+      minHeight,
+      maxH,
+      maxHeight,
+      boxSize,
+      ...rest
+    },
+    ref,
+  ) => {
     const { styles } = useResizableContext()
     const { getPanelProps, getItemProps } = useResizableItem({
       ref,
@@ -27,7 +48,24 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
     const css: CSSUIObject = { boxSize: "full", ...styles.item }
 
     return (
-      <Panel {...getPanelProps()}>
+      <ui.div
+        as={Panel}
+        {...getPanelProps({
+          w,
+          width,
+          minW,
+          minWidth,
+          maxW,
+          maxWidth,
+          h,
+          height,
+          minH,
+          minHeight,
+          maxH,
+          maxHeight,
+          boxSize,
+        })}
+      >
         <ui.div
           className={cx("ui-resizable__item", className)}
           __css={css}
@@ -35,7 +73,7 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
         >
           {children}
         </ui.div>
-      </Panel>
+      </ui.div>
     )
   },
 )

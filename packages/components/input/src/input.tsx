@@ -25,7 +25,7 @@ type InputOptions = {
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * The native HTML `size` attribute to be passed to the `input`
+   * The native HTML `size` attribute to be passed to the `input`.
    */
   htmlSize?: number
 }

@@ -169,7 +169,9 @@ export const useColorPicker = ({
     defaultValue,
     onChange: onChangeProp,
   })
-  const formatRef = useRef<ColorFormat>(format ?? calcFormat(value ?? ""))
+  const formatRef = useRef<ColorFormat>(
+    format ?? calcFormat(value ?? defaultColor ?? ""),
+  )
   const isInputFocused = useRef<boolean>(false)
   const [inputValue, setInputValue] = useState<string>(value ?? "")
   const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)

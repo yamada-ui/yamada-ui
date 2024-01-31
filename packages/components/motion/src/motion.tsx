@@ -22,7 +22,7 @@ export type MotionProps<Y extends keyof ReactHTML = "div"> = OmitProps<
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see Docs https://yamada-ui.com/others/#motion
+ * @see Docs https://yamada-ui.com/components/other/motion
  */
 export const Motion = forwardRef<MotionProps, "div", false>(
   ({ as = "div", className, ...rest }, ref) => {

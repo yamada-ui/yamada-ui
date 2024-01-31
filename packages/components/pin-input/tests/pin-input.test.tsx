@@ -1,5 +1,4 @@
-import { waitFor } from "@testing-library/react"
-import { a11y, render, screen, act } from "@yamada-ui/test"
+import { a11y, render, screen, act, waitFor } from "@yamada-ui/test"
 import { PinInput } from "../src"
 
 describe("<PinInput />", () => {

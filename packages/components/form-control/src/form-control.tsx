@@ -160,6 +160,10 @@ export const FormControl = forwardRef<FormControlProps, "div">(
             ref={ref}
             className={cx("ui-form__control", className)}
             role="group"
+            data-focus={dataAttr(isFocused)}
+            data-disabled={dataAttr(isDisabled)}
+            data-invalid={dataAttr(isInvalid)}
+            data-readonly={dataAttr(isReadOnly)}
             __css={css}
             {...rest}
           >

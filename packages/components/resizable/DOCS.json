@@ -73,6 +73,11 @@
       "required": false,
       "description": "If `true`, the resizable item can be collapsed."
     },
+    "containerProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"as\"> &\n  Omit<PanelProps, \"id\" | \"children\" | \"tagName\"> &\n  As",
+      "required": false,
+      "description": "Props for resizable item container element."
+    },
     "controlRef": {
       "type": "RefObject<ImperativePanelHandle>",
       "required": false,
@@ -92,11 +97,6 @@
       "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLDivElement | null) => void)\n  | MutableRefObject<HTMLDivElement | null>",
       "required": false,
       "description": "Ref for resizable item inner element."
-    },
-    "itemProps": {
-      "type": "ResizableItemProps",
-      "required": false,
-      "description": "Props for resizable item component."
     },
     "maxSize": {
       "type": "number",

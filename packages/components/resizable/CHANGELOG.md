@@ -1,5 +1,11 @@
 # @yamada-ui/resizable
 
+## 1.0.2
+
+### Patch Changes
+
+- [#685](https://github.com/hirotomoyamada/yamada-ui/pull/685) [`6847333`](https://github.com/hirotomoyamada/yamada-ui/commit/6847333ef7c3137e2ce8a5c78f91746557ed832e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended props for `ResizableItem` component and changed props name `itemProps` to `containerProps`.
+
 ## 1.0.1
 
 ### Patch Changes

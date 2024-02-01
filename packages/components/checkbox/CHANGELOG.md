@@ -1,5 +1,13 @@
 # @yamada-ui/checkbox
 
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`f65e995`](https://github.com/hirotomoyamada/yamada-ui/commit/f65e995e05d6e976fa4ec267e172ab062cb4fd3a), [`9ae4ebc`](https://github.com/hirotomoyamada/yamada-ui/commit/9ae4ebc7e870049a1f58f9215118475610394b49)]:
+  - @yamada-ui/form-control@1.0.12
+  - @yamada-ui/motion@1.0.10
+
 ## 1.0.12
 
 ### Patch Changes

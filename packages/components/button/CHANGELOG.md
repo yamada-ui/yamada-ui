@@ -1,5 +1,13 @@
 # @yamada-ui/button
 
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.0.10
+  - @yamada-ui/ripple@1.0.10
+
 ## 1.0.10
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @yamada-ui/input
 
+## 1.0.12
+
+### Patch Changes
+
+- [#685](https://github.com/hirotomoyamada/yamada-ui/pull/685) [`9387ded`](https://github.com/hirotomoyamada/yamada-ui/commit/9387dedd625cd11d8be64204f1f8ab0968072dd3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added missing period to comment of JSDoc.
+
+- Updated dependencies [[`f65e995`](https://github.com/hirotomoyamada/yamada-ui/commit/f65e995e05d6e976fa4ec267e172ab062cb4fd3a)]:
+  - @yamada-ui/form-control@1.0.12
+  - @yamada-ui/file-input@1.0.12
+
 ## 1.0.11
 
 ### Patch Changes

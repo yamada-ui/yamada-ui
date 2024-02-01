@@ -1,5 +1,12 @@
 # @yamada-ui/alert
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.0.10
+
 ## 1.0.9
 
 ### Patch Changes

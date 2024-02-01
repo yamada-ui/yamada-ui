@@ -1,5 +1,11 @@
 # @yamada-ui/motion
 
+## 1.0.10
+
+### Patch Changes
+
+- [#685](https://github.com/hirotomoyamada/yamada-ui/pull/685) [`9ae4ebc`](https://github.com/hirotomoyamada/yamada-ui/commit/9ae4ebc7e870049a1f58f9215118475610394b49) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated motion component doc link.
+
 ## 1.0.9
 
 ### Patch Changes

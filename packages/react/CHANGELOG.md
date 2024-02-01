@@ -1,5 +1,49 @@
 # @yamada-ui/react
 
+## 1.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`f65e995`](https://github.com/hirotomoyamada/yamada-ui/commit/f65e995e05d6e976fa4ec267e172ab062cb4fd3a), [`9387ded`](https://github.com/hirotomoyamada/yamada-ui/commit/9387dedd625cd11d8be64204f1f8ab0968072dd3), [`9ae4ebc`](https://github.com/hirotomoyamada/yamada-ui/commit/9ae4ebc7e870049a1f58f9215118475610394b49), [`6847333`](https://github.com/hirotomoyamada/yamada-ui/commit/6847333ef7c3137e2ce8a5c78f91746557ed832e)]:
+  - @yamada-ui/form-control@1.0.12
+  - @yamada-ui/input@1.0.12
+  - @yamada-ui/motion@1.0.10
+  - @yamada-ui/resizable@1.0.2
+  - @yamada-ui/autocomplete@1.0.15
+  - @yamada-ui/checkbox@1.0.13
+  - @yamada-ui/color-picker@1.0.3
+  - @yamada-ui/editable@1.0.12
+  - @yamada-ui/file-button@1.0.13
+  - @yamada-ui/file-input@1.0.12
+  - @yamada-ui/native-select@1.0.13
+  - @yamada-ui/number-input@1.0.12
+  - @yamada-ui/pin-input@1.0.12
+  - @yamada-ui/radio@1.0.13
+  - @yamada-ui/rating@1.0.10
+  - @yamada-ui/select@1.0.13
+  - @yamada-ui/slider@1.0.13
+  - @yamada-ui/textarea@1.0.12
+  - @yamada-ui/accordion@1.0.10
+  - @yamada-ui/loading@1.0.10
+  - @yamada-ui/menu@1.0.10
+  - @yamada-ui/modal@1.0.12
+  - @yamada-ui/notice@1.0.10
+  - @yamada-ui/popover@1.0.10
+  - @yamada-ui/reorder@1.0.10
+  - @yamada-ui/ripple@1.0.10
+  - @yamada-ui/segmented-control@1.0.11
+  - @yamada-ui/snacks@1.0.2
+  - @yamada-ui/switch@1.0.13
+  - @yamada-ui/tooltip@1.0.11
+  - @yamada-ui/transitions@1.0.10
+  - @yamada-ui/providers@1.0.15
+  - @yamada-ui/alert@1.0.10
+  - @yamada-ui/button@1.0.11
+  - @yamada-ui/close-button@1.0.10
+  - @yamada-ui/pagination@1.0.10
+  - @yamada-ui/tabs@1.0.10
+  - @yamada-ui/use-media-query@1.0.15
+
 ## 1.2.2
 
 ### Patch Changes

@@ -118,6 +118,15 @@ tab: Props
 />
 
 <PropsCard
+  id="resizableitem-containerprops"
+  name="containerProps"
+  type='Omit<HTMLUIProps<"div">, "as"> &
+  Omit<PanelProps, "id" | "children" | "tagName"> &
+  As'
+  description={"Props for resizable item container element."}
+/>
+
+<PropsCard
   id="resizableitem-controlref"
   name="controlRef"
   type="RefObject<ImperativePanelHandle>"
@@ -145,13 +154,6 @@ tab: Props
   | ((instance: HTMLDivElement | null) => void)
   | MutableRefObject<HTMLDivElement | null>"
   description={"Ref for resizable item inner element."}
-/>
-
-<PropsCard
-  id="resizableitem-itemprops"
-  name="itemProps"
-  type="ResizableItemProps"
-  description={"Props for resizable item component."}
 />
 
 <PropsCard

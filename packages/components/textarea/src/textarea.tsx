@@ -59,6 +59,7 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
       ref={ref}
       className={cx("ui-textarea", className)}
       resize={resize}
+      rows={rows}
       __css={css}
       {...rest}
     />

@@ -97,9 +97,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install
-        uses: ./.github/composite-actions/install
-
       - name: Check exist tests
         id: tests
         run: |
@@ -111,16 +108,21 @@ jobs:
         if: steps.tests.outputs.exist == 'false'
         uses: peter-evans/create-or-update-comment@v4
         with:
-          token: ${{ github.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ## Coverage report for ${{ matrix.package.name }}
             Test does not exist.
 
+      - name: Install
+        if: steps.tests.outputs.exist == 'true'
+        uses: ./.github/composite-actions/install
+
       - name: Create coverage report
         if: steps.tests.outputs.exist == 'true'
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
+          github-token: ${{ secrets.PAT_TOKEN }}
           package-manager: pnpm
           custom-title: Coverage report for ${{ matrix.package.name }}
           test-script: pnpm test:ci "${{ steps.tests.outputs.path }}" --collectCoverageFrom="${{ steps.tests.outputs.path }}/**/*.{ts,tsx}"

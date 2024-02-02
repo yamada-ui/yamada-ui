@@ -24,6 +24,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/madangopal16072000",
   },
   {
+    id: 25207729,
+    name: "000000armor",
+    icon: "https://avatars.githubusercontent.com/u/25207729?v=4",
+    url: "https://github.com/000000armor",
+  },
+  {
     id: 78476413,
     name: "quangnmwork",
     icon: "https://avatars.githubusercontent.com/u/78476413?v=4",
@@ -36,10 +42,10 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Evande1",
   },
   {
-    id: 25207729,
-    name: "000000armor",
-    icon: "https://avatars.githubusercontent.com/u/25207729?v=4",
-    url: "https://github.com/000000armor",
+    id: 105341123,
+    name: "matsu3m",
+    icon: "https://avatars.githubusercontent.com/u/105341123?v=4",
+    url: "https://github.com/matsu3m",
   },
   {
     id: 61367823,
@@ -58,12 +64,6 @@ export const CONTRIBUTORS = [
     name: "neerajkumarc",
     icon: "https://avatars.githubusercontent.com/u/78979288?v=4",
     url: "https://github.com/neerajkumarc",
-  },
-  {
-    id: 105341123,
-    name: "matsu3m",
-    icon: "https://avatars.githubusercontent.com/u/105341123?v=4",
-    url: "https://github.com/matsu3m",
   },
   {
     id: 67625825,

@@ -21,7 +21,7 @@ import {
   useMergeRefs,
 } from "@yamada-ui/utils"
 import { useLayoutEffect, useRef } from "react"
-import useAutosize from "./useAutosize"
+import useAutosize from "./use-autosize"
 
 type TextareaOptions = {
   /**

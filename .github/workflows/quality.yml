@@ -122,7 +122,6 @@ jobs:
         if: steps.tests.outputs.exist == 'true'
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           package-manager: pnpm
           custom-title: Coverage report for ${{ matrix.package.name }}
           test-script: pnpm test:ci "${{ steps.tests.outputs.path }}" --collectCoverageFrom="${{ steps.tests.outputs.path }}/**/*.{ts,tsx}"

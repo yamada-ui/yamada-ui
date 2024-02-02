@@ -111,6 +111,7 @@ jobs:
         if: steps.tests.outputs.exist == 'false'
         uses: peter-evans/create-or-update-comment@v4
         with:
+          token: ${{ github.token }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ## Coverage report for ${{ matrix.package.name }}

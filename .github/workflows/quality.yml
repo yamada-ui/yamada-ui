@@ -108,6 +108,7 @@ jobs:
         if: steps.tests.outputs.exist == 'false'
         uses: peter-evans/create-or-update-comment@v4
         with:
+          token: ${{ secrets.PAT_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ## Coverage report for ${{ matrix.package.name }}
@@ -121,7 +122,7 @@ jobs:
         if: steps.tests.outputs.exist == 'true'
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PAT_TOKEN }}
           package-manager: pnpm
           custom-title: Coverage report for ${{ matrix.package.name }}
           test-script: pnpm test:ci "${{ steps.tests.outputs.path }}" --collectCoverageFrom="${{ steps.tests.outputs.path }}/**/*.{ts,tsx}"

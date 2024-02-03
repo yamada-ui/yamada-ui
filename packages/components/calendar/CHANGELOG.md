@@ -1,5 +1,14 @@
 # @yamada-ui/calendar
 
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies [[`f65e995`](https://github.com/hirotomoyamada/yamada-ui/commit/f65e995e05d6e976fa4ec267e172ab062cb4fd3a)]:
+  - @yamada-ui/form-control@1.0.12
+  - @yamada-ui/popover@1.0.10
+  - @yamada-ui/button@1.0.11
+
 ## 1.1.5
 
 ### Patch Changes

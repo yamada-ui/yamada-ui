@@ -1,5 +1,12 @@
 # @yamada-ui/pin-input
 
+## 1.0.12
+
+### Patch Changes
+
+- Updated dependencies [[`f65e995`](https://github.com/hirotomoyamada/yamada-ui/commit/f65e995e05d6e976fa4ec267e172ab062cb4fd3a)]:
+  - @yamada-ui/form-control@1.0.12
+
 ## 1.0.11
 
 ### Patch Changes

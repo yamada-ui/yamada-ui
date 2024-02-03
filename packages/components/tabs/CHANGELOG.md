@@ -1,5 +1,12 @@
 # @yamada-ui/tabs
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/ripple@1.0.10
+
 ## 1.0.9
 
 ### Patch Changes

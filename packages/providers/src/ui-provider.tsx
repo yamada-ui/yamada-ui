@@ -78,6 +78,16 @@ export type UIProviderProps = {
    * Application content.
    */
   children: ReactNode
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  colorModeStorageKey?: string
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  themeSchemeStorageKey?: string
 }
 
 /**
@@ -89,7 +99,9 @@ export const UIProvider: FC<UIProviderProps> = ({
   disableResetStyle,
   disableGlobalStyle,
   colorModeManager,
+  colorModeStorageKey,
   themeSchemeManager,
+  themeSchemeStorageKey,
   environment,
   disableEnvironment,
   children,
@@ -99,8 +111,13 @@ export const UIProvider: FC<UIProviderProps> = ({
       theme={theme}
       config={config}
       themeSchemeManager={themeSchemeManager}
+      storageKey={themeSchemeStorageKey}
     >
-      <ColorModeProvider colorModeManager={colorModeManager} config={config}>
+      <ColorModeProvider
+        colorModeManager={colorModeManager}
+        storageKey={colorModeStorageKey}
+        config={config}
+      >
         <EnvironmentProvider
           environment={environment}
           disabled={disableEnvironment}

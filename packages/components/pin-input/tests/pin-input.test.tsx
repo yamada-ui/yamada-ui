@@ -50,7 +50,7 @@ describe("<PinInput />", () => {
 
     expect(handleChange).toHaveBeenCalledWith("1")
 
-    await user.type(inputs[0], "2")
+    await user.type(inputs[1], "2")
 
     expect(handleChange).toHaveBeenCalledWith("12")
     expect(handleComplete).toHaveBeenCalledWith("12")

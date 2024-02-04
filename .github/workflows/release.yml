@@ -75,11 +75,11 @@ jobs:
       - name: Notification Mattermost and Discord
         if: steps.changesets.outputs.published == 'true'
         run: |
-          pnpm release:mattermost
-          pnpm release:discord
+          pnpm notification:mattermost
+          pnpm notification:discord
         env:
-          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK_URL }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_RELEASE_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
 
       - name: Build Storybook
         if: steps.stories.outputs.changed == 'true' || steps.changesets.outputs.published == 'true'

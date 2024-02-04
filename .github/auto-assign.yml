@@ -1,0 +1,29 @@
+addAssignees: true
+numberOfAssignees: 1
+assignees:
+  - hirotomoyamada
+  - illionillion
+  - koralle
+  - 108yen
+  - umaidashi
+  - taroj1205
+  - KenyaMasuko
+  - nakayan5
+  - setodeve
+  - hoshico
+  - komura-c
+
+addReviewers: true
+numberOfReviewers: 2
+reviewers:
+  - hirotomoyamada
+  - illionillion
+  - koralle
+  - 108yen
+  - umaidashi
+  - taroj1205
+  - KenyaMasuko
+  - nakayan5
+  - setodeve
+  - hoshico
+  - komura-c

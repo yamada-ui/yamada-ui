@@ -1,0 +1,21 @@
+name: Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto assign
+        uses: kentaro-m/auto-assign-action@v2.0.0
+        with:
+          configuration-path: ".github/auto-assign.yml"
+
+      - name: Notification Discord
+        run: |
+          pnpm notification:discord --review
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEWS_WEBHOOK_URL }}
+          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}

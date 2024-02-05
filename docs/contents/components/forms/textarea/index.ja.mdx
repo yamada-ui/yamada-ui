@@ -54,6 +54,20 @@ import { Textarea } from "@yamada-ui/react"
 </VStack>
 ```
 
+### 高さを自動調整する
+
+高さを自動調整する場合は、`autosize`を`true`に設定します。
+最小の行数を指定する場合は、`minRows`に数値を設定します。
+最大の行数を指定する場合は、`maxRows`に数値を設定します。
+
+```tsx
+<VStack>
+  <Textarea autosize placeholder="autosize" />
+  <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
+  <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
+</VStack>
+```
+
 ### ボーダーのカラーを変更する
 
 ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。

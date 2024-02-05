@@ -54,6 +54,20 @@ Use the `resize` property to control the resize behavior of the `Textarea`.
 </VStack>
 ```
 
+### Auto-sizing Height
+
+To auto-size the height, set `autosize` to `true`.
+To specify a minimum number of rows, set a number to `minRows`.
+To specify a maximum number of rows, set a number to `maxRows`.
+
+```tsx
+<VStack>
+  <Textarea autosize placeholder="autosize" />
+  <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
+  <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
+</VStack>
+```
+
 ### Change Border Color
 
 To change the border color, set the color to `focusBorderColor` or `errorBorderColor`.

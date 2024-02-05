@@ -2,7 +2,7 @@ name: Observe
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 9 * * *"
 
 jobs:
   issue:
@@ -29,4 +29,5 @@ jobs:
       - name: Build packages
         run: pnpm observe:pr
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}
+          DISCORD_REVIEWS_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEWS_WEBHOOK_URL }}
+          DISCORD_HELP_WANTED_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}

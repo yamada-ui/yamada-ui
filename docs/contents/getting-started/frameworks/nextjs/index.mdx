@@ -72,7 +72,7 @@ If you only want to use the Yamada UI style system, please check [here](/getting
 
 After installing Yamada UI, add `UIProvider`.
 
-```tsx live=false title=_app.tsx highlight={6,8}
+```tsx live=false title=_app.tsx highlight={2,6,8}
 import type { AppProps } from "next/app"
 import { UIProvider } from "@yamada-ui/react"
 
@@ -99,7 +99,7 @@ To make the color mode work properly, you need to add `ColorModeScript` inside t
 
 This is because the color mode is implemented using `localStorage` or `cookies`, and it needs to synchronize correctly at page load.
 
-```tsx live=false title=_document.tsx highlight={10}
+```tsx live=false title=_document.tsx highlight={2,10}
 import { Html, Head, Main, NextScript } from "next/document"
 import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 

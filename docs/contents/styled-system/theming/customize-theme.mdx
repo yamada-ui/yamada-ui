@@ -109,6 +109,15 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
+To apply a theme, pass it to `theme` of `UIProvider`.
+
+```tsx
+import { customTheme } from "./theme/index.ts"
+
+// ...render
+;<UIProvider theme={customTheme}>{children}</UIProvider>
+```
+
 ## Changing Semantic Tokens
 
 Within the semantic tokens, a color scheme used in each component is set.

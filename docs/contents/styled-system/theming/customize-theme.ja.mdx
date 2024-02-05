@@ -109,6 +109,15 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
+テーマを適用する場合は`UIProvider`の`theme`に渡します。
+
+```tsx
+import { customTheme } from "./theme/index.ts"
+
+// ...render
+;<UIProvider theme={customTheme}>{children}</UIProvider>
+```
+
 ## セマンティックトークンを変更する
 
 セマンティックトークンの中に、各コンポーネントで使用されるカラースキーマが設定されています。

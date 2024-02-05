@@ -113,6 +113,18 @@ export const Resizable: ComponentMultiStyle = {
         },
       },
     }),
+    unstyled: ({ direction: d }) => ({
+      trigger: {
+        _after: {
+          content: "''",
+          position: "absolute",
+          ...(d === "vertical"
+            ? { left: "0", right: "0", transform: "translateY(-50%)" }
+            : { top: "0", bottom: "0", transform: "translateX(-50%)" }),
+          ...(d === "vertical" ? { h: "2" } : { w: "2" }),
+        },
+      },
+    }),
   },
 
   defaultProps: {

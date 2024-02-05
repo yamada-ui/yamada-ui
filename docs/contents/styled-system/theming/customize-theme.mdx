@@ -111,10 +111,20 @@ export default extendTheme(customTheme)({ omit: ["colors"] })
 
 To apply a theme, pass it to `theme` of `UIProvider`.
 
-```tsx
-import { customTheme } from "./theme/index.ts"
+```tsx title=.main.tsx
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App.tsx"
+import { UIProvider } from "@yamada-ui/react"
+import theme from "./theme/index.ts"
 
-;<UIProvider theme={customTheme}>{children}</UIProvider>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <UIProvider theme={theme}>
+      <App />
+    </UIProvider>
+  </React.StrictMode>,
+)
 ```
 
 ## Changing Semantic Tokens

@@ -1,5 +1,10 @@
 {
   "Textarea": {
+    "autosize": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the Textarea height auto-adjusts to text height."
+    },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
@@ -38,6 +43,18 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the form control will be required."
+    },
+    "maxRows": {
+      "type": "number",
+      "defaultValue": "Infinity",
+      "required": false,
+      "description": "Autosize up to maxRows rows."
+    },
+    "minRows": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Autosize up to minRows rows."
     },
     "size": {
       "defaultValue": "md",

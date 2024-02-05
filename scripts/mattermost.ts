@@ -14,7 +14,7 @@ const main = async () => {
   try {
     const start = process.hrtime.bigint()
 
-    const url = process.env.MATTERMOST_WEBHOOK_URL
+    const url = process.env.MATTERMOST_RELEASE_WEBHOOK_URL
 
     if (!url) throw new Error("Missing Mattermost Webhook URL\n")
 

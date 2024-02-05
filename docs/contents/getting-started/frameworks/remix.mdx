@@ -1,0 +1,182 @@
+---
+title: Getting Started with Remix
+description: A guide to installing and using Yamada UI in your Remix project.
+menu: Remix
+is_tabs: false
+---
+
+## Install the package
+
+First, create your application.
+
+Execute one of the following commands in your terminal.
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: "pnpm create remix my-app --typescript",
+    npm: "npx create-remix my-app --typescript",
+    yarn: "yarn create remix my-app --typescript",
+    bun: "bun create remix my-app --typescript",
+  }}
+/>
+
+Yamada UI allows you to use most components and hooks by simply installing `@yamada-ui/react`.
+
+<PackageManagers packageNameOrCommand="@yamada-ui/react" />
+
+If you want to use tables, calendars, carousels, etc., you need to install them separately.
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: "@yamada-ui/table",
+      description:
+        "Provides convenient table components using [@tanstack/react-table](https://tanstack.com/table/v8).",
+      isDefaultCheck: true,
+    },
+    {
+      name: "@yamada-ui/calendar",
+      description:
+        "Provides convenient calendar and date picker components using [dayjs](https://day.js.org/).",
+    },
+    {
+      name: "@yamada-ui/carousel",
+      description:
+        "Provides convenient carousel components using [embla-carousel-react](https://www.embla-carousel.com/).",
+    },
+    {
+      name: "@yamada-ui/dropzone",
+      description:
+        "Provides convenient dropzone components using [react-dropzone](https://react-dropzone.js.org/).",
+    },
+    {
+      name: "@yamada-ui/markdown",
+      description:
+        "Provides convenient markdown components using [react-markdown](https://remarkjs.github.io/react-markdown/) and [react-syntax-highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/).",
+    },
+    {
+      name: "@yamada-ui/fontawesome",
+      description:
+        "Provides components for conveniently using [Font Awesome](https://fontawesome.com/).",
+    },
+  ]}
+/>
+
+:::note
+For individual component and hook installation to improve performance, please check [here](/getting-started/installation/individual).
+If you only want to use the Yamada UI style system, please check [here](/getting-started/installation/minimal).
+:::
+
+## Add `UIProvider`
+
+After installing Yamada UI, add `UIProvider`.
+
+```tsx live=false title=root.tsx highlight={27,29}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react"
+import { UIProvider } from "@yamada-ui/react"
+
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
+:::note
+The [Default Theme](/styled-system/theming/default-theme) is included within `UIProvider`.
+:::
+
+:::note
+If you want to customize the theme or config, please check [Customize Theme](/styled-system/theming/customize-theme) and [Customize Config](/styled-system/configure/customize-config).
+:::
+
+## Add `ColorModeScript`
+
+To make the color mode work properly, you need to add `ColorModeScript` inside the `body`.
+
+This is because the color mode is implemented using `localStorage` or `cookies`, and it needs to synchronize correctly at page load.
+
+```tsx live=false title=root.tsx highlight={12,28}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react"
+import { UIProvider } from "@yamada-ui/react"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
+
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
+:::note status=warning
+For `props`' `initialColorMode`, please pass the same `initialColorMode` as your config. If you have your own config, pass its `initialColorMode`.
+:::
+
+## Use Components
+
+After adding `UIProvider`, you can call components within your application.
+
+```tsx live=false title=route.tsx
+import { Button } from "@yamada-ui/react"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```

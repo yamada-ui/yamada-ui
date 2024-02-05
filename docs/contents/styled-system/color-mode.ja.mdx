@@ -53,29 +53,39 @@ const App = () => {
 
 ### `ColorModeScript`を追加する
 
-カラーモードを正常に動作させるために、`body`内に`ColorModeScript`を追加する必要があります。
+カラーモードを正常に動作させるために、`head`や`body`内に`ColorModeScript`を追加する必要があります。
 
 理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 #### Create React Appの場合
 
-```tsx live=false title=index.tsx highlight={3,11}
+```tsx live=false title=index.tsx highlight={3,5,6,7,8,9,10,11,12,13,14,15,17}
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
-import { UIProvider, ColorModeScript, defaultConfig } from "@yamada-ui/react"
+import { UIProvider, getColorModeScript, defaultConfig } from "@yamada-ui/react"
+
+const injectColorModeScript = () => {
+  const scriptContent = getColorModeScript({
+    initialColorMode: defaultConfig.initialColorMode,
+  })
+
+  const script = document.createElement("script")
+
+  script.textContent = scriptContent
+
+  document.head.appendChild(script)
+}
+
+injectColorModeScript()
 
 const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
 root.render(
-  <>
-    <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
-
-    <UIProvider>
-      <App />
-    </UIProvider>
-  </>,
+  <UIProvider>
+    <App />
+  </UIProvider>,
 )
 ```
 

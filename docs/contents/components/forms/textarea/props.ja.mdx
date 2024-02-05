@@ -11,6 +11,13 @@ tab: Props
 ### TextareaProps
 
 <PropsCard
+  id="textarea-autosize"
+  name="autosize"
+  type="boolean"
+  description={"If `true`, the Textarea height auto-adjusts to text height."}
+/>
+
+<PropsCard
   id="textarea-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
@@ -61,6 +68,22 @@ tab: Props
   type="boolean"
   description={"If `true`, the form control will be required."}
   defaultValue={"false"}
+/>
+
+<PropsCard
+  id="textarea-maxrows"
+  name="maxRows"
+  type="number"
+  description={"Autosize up to maxRows rows."}
+  defaultValue={"Infinity"}
+/>
+
+<PropsCard
+  id="textarea-minrows"
+  name="minRows"
+  type="number"
+  description={"Autosize up to minRows rows."}
+  defaultValue={"1"}
 />
 
 <PropsCard

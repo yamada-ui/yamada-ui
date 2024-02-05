@@ -93,30 +93,40 @@ export const config = extendConfig({
 
 ### `ThemeSchemeScript`を追加する
 
-テーマを正常に切り替えるには、`body`内に`ThemeSchemeScript`を追加する必要があります。
+テーマを正常に切り替えるには、`head`や`body`内に`ThemeSchemeScript`を追加する必要があります。
 
 理由は、テーマの切り替えが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 #### Create React Appの場合
 
-```tsx live=false title=index.tsx highlight={3,4,12,14}
+```tsx live=false title=index.tsx highlight={3,4,6,7,8,9,10,11,12,13,14,15,16,18}
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
-import { UIProvider, ThemeSchemeScript } from "@yamada-ui/react"
+import { UIProvider, getThemeSchemeScript } from "@yamada-ui/react"
 import { theme, config } from "./theme"
+
+const injectThemeSchemeScript = () => {
+  const scriptContent = getThemeSchemeScript({
+    initialThemeScheme: config.initialThemeScheme,
+  })
+
+  const script = document.createElement("script")
+
+  script.textContent = scriptContent
+
+  document.head.appendChild(script)
+}
+
+injectThemeSchemeScript()
 
 const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
 root.render(
-  <>
-    <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
-
-    <UIProvider theme={theme} config={config}>
-      <App />
-    </UIProvider>
-  </>,
+  <UIProvider theme={theme} config={config}>
+    <App />
+  </UIProvider>,
 )
 ```
 

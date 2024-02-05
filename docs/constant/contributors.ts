@@ -1,11 +1,5 @@
 export const CONTRIBUTORS = [
   {
-    id: 60034520,
-    name: "illionillion",
-    icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
-    url: "https://github.com/illionillion",
-  },
-  {
     id: 53973174,
     name: "Dhoni77",
     icon: "https://avatars.githubusercontent.com/u/53973174?v=4",
@@ -16,12 +10,6 @@ export const CONTRIBUTORS = [
     name: "teru12012000",
     icon: "https://avatars.githubusercontent.com/u/69517378?v=4",
     url: "https://github.com/teru12012000",
-  },
-  {
-    id: 9676316,
-    name: "108yen",
-    icon: "https://avatars.githubusercontent.com/u/9676316?v=4",
-    url: "https://github.com/108yen",
   },
   {
     id: 109917122,
@@ -60,12 +48,6 @@ export const CONTRIBUTORS = [
     url: "https://github.com/GensIto",
   },
   {
-    id: 61367823,
-    name: "taroj1205",
-    icon: "https://avatars.githubusercontent.com/u/61367823?v=4",
-    url: "https://github.com/taroj1205",
-  },
-  {
     id: 44593742,
     name: "nthhm",
     icon: "https://avatars.githubusercontent.com/u/44593742?v=4",
@@ -90,40 +72,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/flyingbarbarian",
   },
   {
-    id: 77495217,
-    name: "hoshico",
-    icon: "https://avatars.githubusercontent.com/u/77495217?v=4",
-    url: "https://github.com/hoshico",
-  },
-  {
-    id: 83833293,
-    name: "setodeve",
-    icon: "https://avatars.githubusercontent.com/u/83833293?v=4",
-    url: "https://github.com/setodeve",
-  },
-  {
     id: 66323139,
     name: "saki10",
     icon: "https://avatars.githubusercontent.com/u/66323139?v=4",
     url: "https://github.com/saki10",
   },
   {
-    id: 33865215,
-    name: "koralle",
-    icon: "https://avatars.githubusercontent.com/u/33865215?v=4",
-    url: "https://github.com/koralle",
-  },
-  {
     id: 37304826,
     name: "komura-c",
     icon: "https://avatars.githubusercontent.com/u/37304826?v=4",
     url: "https://github.com/komura-c",
-  },
-  {
-    id: 85816730,
-    name: "KenyaMasuko",
-    icon: "https://avatars.githubusercontent.com/u/85816730?v=4",
-    url: "https://github.com/KenyaMasuko",
   },
   {
     id: 49627888,

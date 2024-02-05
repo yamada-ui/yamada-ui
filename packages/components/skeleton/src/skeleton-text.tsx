@@ -22,7 +22,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
   (
     {
       className,
-      noOfLines = 3,
+      lineClamp = 3,
       startColor,
       endColor,
       fadeDuration,
@@ -35,7 +35,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
     },
     ref,
   ) => {
-    const computedNoOfLines = useValue(noOfLines)
+    const computedLineClamp = useValue(lineClamp)
 
     const css: CSSUIObject = {
       w: "full",
@@ -48,18 +48,18 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
         __css={css}
         {...rest}
       >
-        {Array(computedNoOfLines)
+        {Array(computedLineClamp)
           .fill(0)
           .map((_, index) => {
             if (isLoaded && index > 0) return null
 
-            const isLast = index + 1 === computedNoOfLines
+            const isLast = index + 1 === computedLineClamp
 
             const props: SkeletonProps = !isLoaded
               ? {
                   mb: !isLast ? gap : undefined,
                   w:
-                    computedNoOfLines > 1 ? (!isLast ? "100%" : "80%") : "100%",
+                    computedLineClamp > 1 ? (!isLast ? "100%" : "80%") : "100%",
                   h: textHeight,
                 }
               : {}

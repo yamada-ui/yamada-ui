@@ -23,7 +23,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
   const resolvedHeaderGroups = useMemo(
     () =>
       headerGroups.map((header) => {
-        const uppperHeaderGroups = headerGroups.filter(
+        const upperHeaderGroups = headerGroups.filter(
           ({ depth }) => depth < header.depth,
         )
         const lowerHeaderGroups = headerGroups.filter(
@@ -31,7 +31,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
         )
 
         header.headers = header.headers.filter((header) => {
-          return uppperHeaderGroups.every(({ headers }) =>
+          return upperHeaderGroups.every(({ headers }) =>
             headers.every(({ column }) => column.id !== header.column.id),
           )
         })
@@ -74,8 +74,10 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                 sx,
                 style,
                 css,
+                className,
                 colSpan: customColSpan,
                 rowSpan: customRowSpan,
+                "aria-label": ariaLabel,
               } = columnDef as Column<unknown>
               const computedHeaderProps = runIfFunc(headerProps, header) ?? {}
 
@@ -83,6 +85,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
               const resolvedRowSpan = (customRowSpan ?? rowSpan) || 1
 
               const props = {
+                "aria-label": ariaLabel,
                 ...computedHeaderProps,
                 colSpan: resolvedColSpan,
                 rowSpan: resolvedRowSpan,
@@ -96,6 +99,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                 <Th
                   key={id}
                   {...props}
+                  className={className}
                   sx={sx}
                   style={{ ...props.style, ...style }}
                   __css={{

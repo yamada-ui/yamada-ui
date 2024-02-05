@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { mergeStyle } from "@yamada-ui/core"
+import { mergeMultiStyle } from "@yamada-ui/core"
 import { Input } from "./input"
 
-export const FileInput: ComponentMultiStyle = mergeStyle(Input, {})
+export const FileInput: ComponentMultiStyle = mergeMultiStyle(Input)()

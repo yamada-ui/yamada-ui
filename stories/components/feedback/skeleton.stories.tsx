@@ -75,8 +75,8 @@ export const withGap: Story = () => {
   return <SkeletonText gap={8} />
 }
 
-export const withNoOfLines: Story = () => {
-  return <SkeletonText noOfLines={5} />
+export const withLineClamp: Story = () => {
+  return <SkeletonText lineClamp={5} />
 }
 
 export const withIsLoaded: Story = () => {

@@ -35,7 +35,7 @@ type FileButtonOptions = {
   /**
    * Function to be called when a file change event occurs.
    */
-  onChange?: (files: File[] | null) => void
+  onChange?: (files: File[] | undefined) => void
   children?: ReactNode | ((props: Props) => ReactNode)
   /**
    * Ref to a reset function.
@@ -50,6 +50,11 @@ export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
   FileButtonOptions &
   FormControlOptions
 
+/**
+ * `FileButton` is a button component used for users to select files.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/file-button
+ */
 export const FileButton = forwardRef<FileButtonProps, "input">(
   ({ className, resetRef, as: As, children, ...props }, ref) => {
     const { id, name, accept, multiple, form, ...rest } =
@@ -69,7 +74,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
       (ev: ChangeEvent<HTMLInputElement>) => {
         const files = !isNull(ev.currentTarget.files)
           ? Array.from(ev.currentTarget.files)
-          : null
+          : undefined
 
         rest.onChange?.(files)
       },
@@ -86,7 +91,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
       children = (
         <Component
           className={cx("ui-file-button", className)}
-          {...omitObject(rest, ["onChange"])}
+          {...omitObject(rest, ["onChange", "aria-readonly"])}
           onClick={handlerAll(rest.onClick, onClick)}
         >
           {children}
@@ -101,6 +106,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
         <ui.input
           ref={mergeRefs(inputRef, ref)}
           type="file"
+          aria-hidden
           tabIndex={-1}
           id={id}
           name={name}

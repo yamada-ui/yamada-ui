@@ -1,6 +1,5 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -21,8 +20,8 @@ import { AccordionPanel } from "./accordion-panel"
 
 type AccordionItemContext = Omit<AccordionItemOptions, "children"> & {
   isOpen: boolean
-  getLabelProps: PropGetter
-  getPanelProps: PropGetter
+  getLabelProps: UIPropGetter<"button">
+  getPanelProps: UIPropGetter
 }
 
 const [AccordionItemProvider, useAccordionItemContext] =
@@ -57,10 +56,10 @@ type AccordionItemOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionItemProps = Omit<HTMLUIProps<"div">, "children"> &
+export type AccordionItemProps = Omit<HTMLUIProps<"li">, "children"> &
   AccordionItemOptions
 
-export const AccordionItem = forwardRef<AccordionItemProps, "div">(
+export const AccordionItem = forwardRef<AccordionItemProps, "li">(
   ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
     const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
       useAccordionContext()
@@ -115,12 +114,12 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
             prev?.node.focus()
           },
           Home: () => {
-            const first = descendants.enabledfirstValue()
+            const first = descendants.enabledFirstValue()
 
             first?.node.focus()
           },
           End: () => {
-            const last = descendants.enabledlastValue()
+            const last = descendants.enabledLastValue()
 
             last?.node.focus()
           },
@@ -136,7 +135,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       [descendants, i],
     )
 
-    const getLabelProps: PropGetter = useCallback(
+    const getLabelProps: UIPropGetter<"button"> = useCallback(
       (props = {}, ref = null) => ({
         ...props,
         ref: mergeRefs(register, ref),
@@ -150,7 +149,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       [isDisabled, isOpen, onClick, onFocus, onKeyDown, register],
     )
 
-    const getPanelProps: PropGetter = useCallback(
+    const getPanelProps: UIPropGetter = useCallback(
       (props = {}, ref = null) => ({ ...props, ref }),
       [],
     )
@@ -181,7 +180,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
       <AccordionItemProvider
         value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}
       >
-        <ui.div
+        <ui.li
           ref={ref}
           className={cx("ui-accordion__item", className)}
           aria-expanded={ariaAttr(isOpen)}
@@ -194,7 +193,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
           {customAccordionPanel ?? (
             <AccordionPanel>{cloneChildren}</AccordionPanel>
           )}
-        </ui.div>
+        </ui.li>
       </AccordionItemProvider>
     )
   },

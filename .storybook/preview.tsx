@@ -14,6 +14,14 @@ export const parameters: Parameters = {
       order: ["Documents", ["Welcome", "*"], "Components", "Hooks", "System"],
     },
   },
+  a11y: {
+    config: {
+      rules: [
+        { id: "color-contrast", enabled: false },
+        { id: "landmark-unique", enabled: false },
+      ],
+    },
+  },
   backgrounds: { disable: true },
   controls: { expanded: true },
   docs: { container: DocsContainer },

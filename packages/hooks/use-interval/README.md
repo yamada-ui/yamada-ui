@@ -24,7 +24,7 @@ $ npm install @yamada-ui/use-interval
 
 Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](https://github.com/hirotomoyamada/yamada-ui/blob/main/CONTRIBUTING.md) to assist you.
 
-## Licence
+## License
 
 This package is licensed under the terms of the
 

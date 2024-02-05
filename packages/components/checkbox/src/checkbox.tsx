@@ -1,15 +1,20 @@
-import type { HTMLUIProps, ThemeProps, ComponentArgs } from "@yamada-ui/core"
+import type {
+  HTMLUIProps,
+  ThemeProps,
+  ComponentArgs,
+  UIPropGetter,
+} from "@yamada-ui/core"
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
   useFormControlProps,
   formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import type { SVGMotionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   omitObject,
@@ -42,6 +47,7 @@ import {
   useRef,
   useState,
   forwardRef,
+  useId,
 } from "react"
 import { useCheckboxGroupContext } from "./checkbox-group"
 
@@ -99,7 +105,6 @@ export const useCheckbox = <Y extends string | number = string>(
   props: UseCheckboxProps<Y>,
 ) => {
   const {
-    id,
     name,
     value,
     defaultIsChecked,
@@ -110,6 +115,7 @@ export const useCheckbox = <Y extends string | number = string>(
     isIndeterminate,
     ...rest
   } = useFormControlProps(props)
+  const id = props.id || useId()
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -182,9 +188,12 @@ export const useCheckbox = <Y extends string | number = string>(
       setIsChecked(inputRef.current.checked)
   }, [inputRef.current])
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...pickObject(
+        rest,
+        getFormControlProperties({ omit: ["aria-readonly"] }),
+      ),
       ...props,
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === "LABEL")
@@ -201,7 +210,7 @@ export const useCheckbox = <Y extends string | number = string>(
     [checked, isLabel, rest],
   )
 
-  const getIconProps: PropGetter = useCallback(
+  const getIconProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -233,7 +242,7 @@ export const useCheckbox = <Y extends string | number = string>(
     ],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -282,9 +291,12 @@ export const useCheckbox = <Y extends string | number = string>(
     ],
   )
 
-  const getLabelProps: PropGetter = useCallback(
+  const getLabelProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...pickObject(
+        rest,
+        getFormControlProperties({ omit: ["aria-readonly"] }),
+      ),
       ...props,
       ref,
       "data-checked": dataAttr(checked),
@@ -339,6 +351,11 @@ export type CheckboxProps<Y extends string | number = string> = Omit<
   UseCheckboxProps<Y> &
   CheckboxOptions
 
+/**
+ * `Checkbox` is a component used for allowing users to select multiple values from multiple options.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/checkbox
+ */
 export const Checkbox = forwardRef(
   <Y extends string | number = string>(
     props: CheckboxProps<Y>,

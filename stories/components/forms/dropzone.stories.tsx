@@ -125,7 +125,7 @@ export const withStatus: Story = () => {
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="primary" />
+          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>
@@ -163,7 +163,7 @@ export const useOnDrop: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="primary" />
+          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>
@@ -194,7 +194,7 @@ export const useOnDropAccepted: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="primary" />
+          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>
@@ -225,7 +225,7 @@ export const useOnDropRejected: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="primary" />
+          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>

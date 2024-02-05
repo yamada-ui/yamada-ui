@@ -24,13 +24,22 @@ import {
 } from "@tanstack/react-table"
 import type { CheckboxProps } from "@yamada-ui/checkbox"
 import { Checkbox } from "@yamada-ui/checkbox"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  UIPropGetter,
+} from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import type { ThProps, TrProps, TdProps } from "@yamada-ui/native-table"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { PropGetter } from "@yamada-ui/utils"
-import { createContext, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import {
+  ariaAttr,
+  createContext,
+  handlerAll,
+  runIfFunc,
+} from "@yamada-ui/utils"
 import type { CSSProperties } from "react"
 import { useCallback, useMemo } from "react"
 
@@ -57,6 +66,7 @@ export type PropsColumnDef = {
   css?: CSSUIObject
   colSpan?: number
   rowSpan?: number
+  "aria-label"?: string
 }
 
 export type GroupColumnDef<Y extends RowData, M = any> = {
@@ -69,6 +79,10 @@ export type Column<Y extends RowData, M = any> = (
 ) &
   GroupColumnDef<Y, M> &
   PropsColumnDef
+
+export type InternalColumn<Y extends RowData, M = any> = Column<Y, M> & {
+  "aria-hidden"?: boolean
+}
 
 type SelectColumn<Y extends RowData, M = any> = Omit<
   Column<Y, M>,
@@ -103,7 +117,7 @@ export type UseTableOptions<Y extends RowData> = PartialKeys<
   > &
   Omit<PaginationOptions, "getPaginationRowModel" | "onPaginationChange">
 
-type TableProps = HTMLUIProps<"table"> & ThemeProps<"Table">
+type TableProps = Omit<HTMLUIProps<"table">, "columns"> & ThemeProps<"Table">
 
 type HeaderGroupProps<Y extends RowData> =
   | Omit<TrProps, "key">
@@ -251,7 +265,7 @@ export type UseTableProps<Y extends RowData> = TableProps &
      *
      * @default false
      */
-    enablePagenation?: boolean
+    enablePagination?: boolean
   }
 
 const generateRowSelection = <Y extends RowData>(
@@ -331,7 +345,7 @@ export const useTable = <Y extends RowData>({
   pageCount,
   manualPagination,
   autoResetPageIndex,
-  enablePagenation = false,
+  enablePagination = false,
   ...rest
 }: UseTableProps<Y>) => {
   const [sorting, onSortingChange] = useControllableState({
@@ -359,7 +373,7 @@ export const useTable = <Y extends RowData>({
   })
 
   const computedPageSizeList = useMemo(() => {
-    if (!enablePagenation) return []
+    if (!enablePagination) return []
 
     let mergedPageSizeList = pageSizeList
 
@@ -369,7 +383,7 @@ export const useTable = <Y extends RowData>({
     mergedPageSizeList = mergedPageSizeList.sort((a, b) => a - b)
 
     return mergedPageSizeList
-  }, [enablePagenation, internalPageSize, pageSizeList])
+  }, [enablePagination, internalPageSize, pageSizeList])
 
   const computedRowSelection = useMemo(
     () => generateRowSelection(rowSelection, enableRowSelection),
@@ -380,7 +394,7 @@ export const useTable = <Y extends RowData>({
     () =>
       enableRowSelection && selectColumnProps !== false
         ? mergeColumns<Y>({
-            enablePagenation,
+            enablePagination,
             columns,
             checkboxProps,
             withFooterSelect,
@@ -392,7 +406,7 @@ export const useTable = <Y extends RowData>({
       checkboxProps,
       columns,
       disabledRowIds,
-      enablePagenation,
+      enablePagination,
       enableRowSelection,
       selectColumnProps,
       withFooterSelect,
@@ -422,7 +436,7 @@ export const useTable = <Y extends RowData>({
     state: {
       sorting,
       rowSelection: computedRowSelection,
-      ...(enablePagenation ? { pagination } : {}),
+      ...(enablePagination ? { pagination } : {}),
     },
     defaultColumn,
     debugAll,
@@ -451,7 +465,7 @@ export const useTable = <Y extends RowData>({
       ),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    ...(enablePagenation
+    ...(enablePagination
       ? {
           pageCount,
           manualPagination,
@@ -470,7 +484,7 @@ export const useTable = <Y extends RowData>({
       : {}),
   })
 
-  const getTableProps: PropGetter = useCallback(
+  const getTableProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
       ...props,
@@ -529,12 +543,12 @@ const Center = ui("div", {
 const TotalCheckbox = <Y extends RowData>({
   table,
   checkboxProps,
-  enablePagenation,
+  enablePagination,
   disabledRowIds = [],
 }: {
   table: HeaderContext<Y, unknown>["table"]
   checkboxProps: CheckboxProps
-  enablePagenation: boolean
+  enablePagination: boolean
   disabledRowIds?: string[]
 }) => {
   const {
@@ -557,19 +571,20 @@ const TotalCheckbox = <Y extends RowData>({
   const isAllChecked = unselectedRowIds.every((id) =>
     disabledRowIds.includes(id),
   )
-  const isChecked = !enablePagenation
+  const isChecked = !enablePagination
     ? getIsAllRowsSelected()
     : getIsAllPageRowsSelected()
-  const isIndeterminate = !enablePagenation
+  const isIndeterminate = !enablePagination
     ? getIsSomeRowsSelected()
     : getIsSomePageRowsSelected()
-  const onChange = !enablePagenation
+  const onChange = !enablePagination
     ? getToggleAllRowsSelectedHandler()
     : getToggleAllPageRowsSelectedHandler()
 
   return (
     <Center>
       <Checkbox
+        inputProps={{ "aria-label": "Select all row" }}
         {...{ gap: 0, ...checkboxProps }}
         isChecked={isAllChecked || isChecked}
         {...(!isAllChecked ? { isIndeterminate } : {})}
@@ -580,32 +595,32 @@ const TotalCheckbox = <Y extends RowData>({
 }
 
 export const mergeColumns = <Y extends RowData>({
-  enablePagenation,
+  enablePagination,
   columns,
   checkboxProps = {},
   withFooterSelect,
   selectColumnProps,
   disabledRowIds,
 }: {
-  enablePagenation: boolean
+  enablePagination: boolean
   columns: Column<Y>[]
   checkboxProps?: CheckboxProps
   withFooterSelect?: boolean
   selectColumnProps?: SelectColumn<Y>
   disabledRowIds?: string[]
-}): Column<Y>[] => [
+}): InternalColumn<Y>[] => [
   {
     id: "select",
     header: ({ table }) => (
       <TotalCheckbox
-        {...{ table, checkboxProps, enablePagenation, disabledRowIds }}
+        {...{ table, checkboxProps, enablePagination, disabledRowIds }}
       />
     ),
     ...(withFooterSelect
       ? {
           footer: ({ table }) => (
             <TotalCheckbox
-              {...{ table, checkboxProps, enablePagenation, disabledRowIds }}
+              {...{ table, checkboxProps, enablePagination, disabledRowIds }}
             />
           ),
         }
@@ -616,6 +631,7 @@ export const mergeColumns = <Y extends RowData>({
       return (
         <Center>
           <Checkbox
+            inputProps={{ "aria-label": "Select row" }}
             {...{ gap: 0, ...checkboxProps }}
             isChecked={getIsSelected()}
             isDisabled={!getCanSelect()}
@@ -627,6 +643,7 @@ export const mergeColumns = <Y extends RowData>({
         </Center>
       )
     },
+    "aria-hidden": ariaAttr(!withFooterSelect),
     ...selectColumnProps,
     css: { w: "0", ...selectColumnProps?.css },
   },

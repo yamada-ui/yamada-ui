@@ -1,9 +1,48 @@
 {
   "Input": {
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
+      "required": false,
+      "description": "The border color when the input is invalid."
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
+      "required": false,
+      "description": "The border color when the input is focused."
+    },
+    "htmlSize": {
+      "type": "number",
+      "required": false,
+      "description": "The native HTML `size` attribute to be passed to the `input`."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be readonly."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the form control will be required."
     },
     "size": {
       "defaultValue": "md",
@@ -21,7 +60,7 @@
   "InputGroup": {},
   "InputAddon": {
     "placement": {
-      "type": "\"right\" | \"left\"",
+      "type": "\"left\" | \"right\"",
       "defaultValue": "'left'",
       "required": false,
       "description": "The placement of the element."
@@ -35,7 +74,7 @@
       "description": "If `true`, the element clickable."
     },
     "placement": {
-      "type": "\"right\" | \"left\"",
+      "type": "\"left\" | \"right\"",
       "defaultValue": "'left'",
       "required": false,
       "description": "The placement of the element."

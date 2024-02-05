@@ -1,5 +1,10 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor } from "@yamada-ui/utils"
+import {
+  isAccessible,
+  isGray,
+  shadeColor,
+  transparentizeColor,
+} from "@yamada-ui/utils"
 
 export const Calendar: ComponentMultiStyle = {
   baseStyle: {
@@ -7,11 +12,14 @@ export const Calendar: ComponentMultiStyle = {
       gap: "md",
     },
     header: {},
-    label: {},
+    label: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+    },
     labelIcon: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
     },
     control: {
+      color: ["blackAlpha.500", "whiteAlpha.500"],
       fontSize: "1.25em",
       _hidden: {
         opacity: 0,
@@ -38,28 +46,32 @@ export const Calendar: ComponentMultiStyle = {
       },
     },
     date: {},
+    row: {},
+    cell: {
+      transitionProperty: "common",
+      transitionDuration: "slower",
+    },
     weekday: {
       userSelect: "none",
-      color: ["blackAlpha.700", "whiteAlpha.700"],
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       justifyContent: "center",
       alignItems: "center",
     },
     day: {
       _weekend: {
-        color: ["red.400", "red.300"],
+        color: ["red.600", "red.400"],
       },
       _outside: {
-        color: ["blackAlpha.400", "whiteAlpha.400"],
+        color: ["blackAlpha.500", "whiteAlpha.500"],
       },
       _holiday: {
-        color: ["red.400", "red.300"],
+        color: ["red.600", "red.400"],
       },
       _disabled: {
         opacity: 0.4,
         cursor: "not-allowed",
-        boxShadow: "none",
-        _focusVisible: {
-          boxShadow: "0 0 0 3px rgba(125, 125, 125, 0.6)",
+        _ripple: {
+          display: "none",
         },
       },
     },
@@ -68,44 +80,133 @@ export const Calendar: ComponentMultiStyle = {
   variants: {
     solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       button: {
+        _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
+        },
         _selected: {
-          bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-          color: [`white`, `whiteAlpha.800`],
-          _hover: {
-            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
+          bg: isGray(c)
+            ? [`${c}.50`, `${c}.700`]
+            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+        },
+      },
+      cell: {
+        _between: {
+          bg: [
+            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
+            shadeColor(`${c}.300`, 72)(t, m),
+          ],
+          _start: {
+            roundedLeft: "md",
+          },
+          _end: {
+            roundedRight: "md",
           },
         },
       },
       day: {
+        _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
+          _selected: {
+            bg: isGray(c)
+              ? [`${c}.100`, `${c}.700`]
+              : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          },
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
+        },
         _today: {
-          border: "1px solid",
-          borderColor: [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
+        },
+        _start: {
+          roundedRight: "0",
+        },
+        _end: {
+          roundedLeft: "0",
         },
         _selected: {
-          bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-          color: [`white`, `whiteAlpha.800`],
+          bg: isGray(c)
+            ? [`${c}.100`, `${c}.700`]
+            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
+          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
           borderColor: ["transparent", "transparent"],
-          _hover: {
-            bg: [`${c}.500`, transparentizeColor(`${c}.500`, 0.6)(t, m)],
-          },
         },
       },
     }),
     subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       button: {
+        _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
+        },
         _selected: {
-          bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-          color: [`${c}.800`, `${c}.200`],
+          bg: [
+            isGray(c) ? `${c}.50` : `${c}.100`,
+            shadeColor(`${c}.300`, 58)(t, m),
+          ],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+        },
+      },
+      cell: {
+        _between: {
+          bg: [
+            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
+            shadeColor(`${c}.300`, 72)(t, m),
+          ],
+          _start: {
+            roundedLeft: "md",
+          },
+          _end: {
+            roundedRight: "md",
+          },
         },
       },
       day: {
+        _hover: {
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
+          _selected: {
+            bg: [
+              isGray(c) ? `${c}.50` : `${c}.100`,
+              shadeColor(`${c}.300`, 58)(t, m),
+            ],
+          },
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
+        },
         _today: {
-          border: "1px solid",
-          borderColor: [`${c}.200`, transparentizeColor(`${c}.200`, 0.6)(t, m)],
+          bg: ["blackAlpha.50", "whiteAlpha.50"],
+          _between: {
+            bg: ["initial", "initial"],
+          },
+        },
+        _start: {
+          roundedRight: "0",
+        },
+        _end: {
+          roundedLeft: "0",
         },
         _selected: {
-          bg: [`${c}.100`, transparentizeColor(`${c}.200`, 0.16)(t, m)],
-          color: [`${c}.800`, `${c}.200`],
+          bg: [
+            isGray(c) ? `${c}.50` : `${c}.100`,
+            shadeColor(`${c}.300`, 58)(t, m),
+          ],
+          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
           borderColor: ["transparent", "transparent"],
         },
       },

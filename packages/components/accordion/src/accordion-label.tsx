@@ -44,7 +44,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
           })
         : customIcon
 
-    const cloneSupplementlIcon =
+    const cloneSupplementIcon =
       typeof supplementIcon === "function"
         ? supplementIcon({
             isExpanded: isOpen,
@@ -52,7 +52,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
           })
         : supplementIcon
 
-    const cloneGenerallIcon =
+    const cloneGeneralIcon =
       typeof generalIcon === "function"
         ? generalIcon({
             isExpanded: isOpen,
@@ -69,7 +69,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         {children}
         {!iconHidden ? (
           <AccordionIcon>
-            {cloneCustomIcon ?? cloneSupplementlIcon ?? cloneGenerallIcon}
+            {cloneCustomIcon ?? cloneSupplementIcon ?? cloneGeneralIcon}
           </AccordionIcon>
         ) : null}
       </ui.button>

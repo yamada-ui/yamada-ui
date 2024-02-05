@@ -1,5 +1,74 @@
 # @yamada-ui/use-disclosure
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf)]:
+  - @yamada-ui/utils@1.0.4
+
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/utils@1.0.3
+
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/utils@1.0.2
+
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1), [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599), [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7), [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0)]:
+  - @yamada-ui/utils@1.0.1
+
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+### Patch Changes
+
+- Updated dependencies [[`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8)]:
+  - @yamada-ui/utils@1.0.0
+
+## 0.4.7
+
+### Patch Changes
+
+- Updated dependencies [[`d0aedb9`](https://github.com/hirotomoyamada/yamada-ui/commit/d0aedb9ab9ba4b064668655fc9d77d569c63c9bf)]:
+  - @yamada-ui/utils@0.5.1
+
+## 0.4.6
+
+### Patch Changes
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Include source map in package.
+
+- Updated dependencies [[`0a5b293`](https://github.com/hirotomoyamada/yamada-ui/commit/0a5b2937da6547be13c117f5efbadbb2a79eeb16), [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686)]:
+  - @yamada-ui/utils@0.5.0
+
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies [[`15bb13a`](https://github.com/hirotomoyamada/yamada-ui/commit/15bb13a4c921dd80a617205c4875f0b9ee36ad4f)]:
+  - @yamada-ui/utils@0.4.1
+
+## 0.4.4
+
+### Patch Changes
+
+- Updated dependencies [[`1d152af`](https://github.com/hirotomoyamada/yamada-ui/commit/1d152af140eb90965aab962fce285e5e0053d2a0), [`58aca09`](https://github.com/hirotomoyamada/yamada-ui/commit/58aca09239d453b5d5d5ba0958ebd6dfdab31485)]:
+  - @yamada-ui/utils@0.4.0
+
 ## 0.4.3
 
 ### Patch Changes

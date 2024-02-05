@@ -56,6 +56,11 @@ type AlertOptions = {
 
 export type AlertProps = HTMLUIProps<"div"> & ThemeProps<"Alert"> & AlertOptions
 
+/**
+ * `Alert` is a component that conveys information to the user.
+ *
+ * @see Docs https://yamada-ui.com/components/feedback/alert
+ */
 export const Alert = forwardRef<AlertProps, "div">(
   ({ status = "info", colorScheme, ...props }, ref) => {
     const { theme } = useTheme()
@@ -110,7 +115,8 @@ export const AlertIcon: FC<AlertIconProps> = ({
 
   const Icon = getStatusIcon(status, statuses)
   const css: CSSUIObject = {
-    ...(status === "loading" ? styles.loading : styles.icon),
+    ...styles.icon,
+    ...(status === "loading" ? styles.loading : {}),
   }
 
   return (

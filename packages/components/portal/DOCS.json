@@ -10,6 +10,11 @@
       "type": "RefObject<HTMLElement | null>",
       "required": false,
       "description": "The `ref` to the component where the portal will be attached to."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the forwarding will be disabled."
     }
   }
 }

@@ -4,6 +4,7 @@ import type {
   ThemeProps,
   ColorModeToken,
   CSS,
+  UIPropGetter,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -237,9 +238,8 @@ export const useEditable = (props: UseEditableProps) => {
     [isEditing, submitOnBlur, onSubmit, onCancel],
   )
 
-  const getPreviewProps: PropGetter = useCallback(
+  const getPreviewProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
       ...props,
       ref: mergeRefs(ref, previewRef),
       hidden: isEditing,
@@ -255,12 +255,11 @@ export const useEditable = (props: UseEditableProps) => {
       onEdit,
       onUpdatePrevValue,
       placeholder,
-      rest,
       value,
     ],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -293,7 +292,7 @@ export const useEditable = (props: UseEditableProps) => {
     ],
   )
 
-  const getTextareaProps: PropGetter = useCallback(
+  const getTextareaProps: UIPropGetter<"textarea"> = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -409,9 +408,9 @@ export const useEditableControl = () => {
 
 type EditableContext = {
   isEditing: boolean
-  getPreviewProps: PropGetter
-  getInputProps: PropGetter
-  getTextareaProps: PropGetter
+  getPreviewProps: UIPropGetter
+  getInputProps: UIPropGetter<"input">
+  getTextareaProps: UIPropGetter<"textarea">
   getEditProps: PropGetter
   getCancelProps: PropGetter
   getSubmitProps: PropGetter
@@ -451,6 +450,11 @@ export type EditableProps = Omit<
   UseEditableProps &
   EditableOptions
 
+/**
+ * `Editable` is a component used to obtain inline editable text input.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/editable
+ */
 export const Editable = forwardRef<EditableProps, "div">(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Editable", {

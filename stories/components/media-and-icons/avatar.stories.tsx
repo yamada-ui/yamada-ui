@@ -1,4 +1,6 @@
+import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
+import { Icon } from "@yamada-ui/fontawesome"
 import { Avatar, AvatarBadge, AvatarGroup, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Avatar>
@@ -38,7 +40,22 @@ export const withName: Story = () => {
 }
 
 export const withImage: Story = () => {
-  return <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+  return (
+    <Avatar
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      alt="Hirotomo Yamada"
+    />
+  )
+}
+
+export const withFallback: Story = () => {
+  return (
+    <Wrap gap="md">
+      <Avatar bg="secondary" src="https://not-found.com" />
+      <Avatar src="https://not-found.com" />
+      <Avatar icon={<Icon icon={faPoo} />} src="https://not-found.com" />
+    </Wrap>
+  )
 }
 
 export const withBarge: Story = () => {
@@ -48,6 +65,17 @@ export const withBarge: Story = () => {
       src="https://avatars.githubusercontent.com/u/84060430?v=4"
     >
       <AvatarBadge bg="primary" />
+    </Avatar>
+  )
+}
+
+export const withPing: Story = () => {
+  return (
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    >
+      <AvatarBadge bg="primary" ping pingColor="primary.400" />
     </Avatar>
   )
 }

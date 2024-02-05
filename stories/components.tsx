@@ -13,6 +13,34 @@ import type { FC, ReactNode } from "react"
 import { useEffect } from "react"
 import { useDarkMode } from "storybook-dark-mode"
 
+export const colorSchemes = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "danger",
+  "gray",
+  "neutral",
+  "red",
+  "rose",
+  "pink",
+  "flashy",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+]
+
 export const JSX: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <UIProvider>
@@ -63,15 +91,15 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
         boxShadow="inner"
       />
       <VStack gap="1">
-        <Text m="0" fontWeight="semibold" noOfLines={1}>
+        <Text m="0" fontWeight="semibold" lineClamp={1}>
           {name.charAt(0).toUpperCase() + name.slice(1)} {hue}
         </Text>
-        <Text m="0" noOfLines={1}>
+        <Text m="0" lineClamp={1}>
           {!isArray(value)
             ? value
             : colorMode === "light"
-            ? value[0]
-            : value[1]}
+              ? value[0]
+              : value[1]}
         </Text>
       </VStack>
     </HStack>

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/button",
-  "version": "0.3.19",
+  "version": "1.0.12",
   "description": "Yamada UI button components",
   "keywords": [
     "yamada",
@@ -28,6 +28,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -49,7 +50,8 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/loading": "workspace:*"
+    "@yamada-ui/loading": "workspace:*",
+    "@yamada-ui/ripple": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",
@@ -68,6 +70,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

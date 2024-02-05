@@ -1,5 +1,12 @@
-import type { Dict } from "@yamada-ui/utils"
-import type { Target, TargetAndTransition, Transition } from "framer-motion"
+import type { Dict, Merge } from "@yamada-ui/utils"
+import type {
+  Target,
+  TargetAndTransition,
+  Transition,
+  motion,
+} from "framer-motion"
+import type { Ref, RefAttributes, ReactHTML } from "react"
+import type { MotionProps } from "./motion"
 
 export type {
   HTMLMotionProps,
@@ -20,6 +27,8 @@ export type {
   AnimationPlaybackControls as MotionAnimationPlaybackControls,
   MotionValue,
 } from "framer-motion"
+
+export type MotionAs = keyof typeof motion
 
 type TargetResolver<Y = Dict> = (
   props: Y & MotionTransitionProperties,
@@ -85,3 +94,19 @@ export type WithTransitionProps<Y extends object> = Omit<Y, "transition"> &
      */
     isOpen?: boolean
   }
+
+export type MotionUIPropGetter<
+  Y extends keyof ReactHTML = "div",
+  M = undefined,
+> = (
+  props?: Merge<MotionProps<Y>, M>,
+  ref?: Ref<any>,
+) => MotionProps<Y> & RefAttributes<any>
+
+export type RequiredMotionUIPropGetter<
+  Y extends keyof ReactHTML = "div",
+  M = undefined,
+> = (
+  props: Merge<MotionProps<Y>, M>,
+  ref?: Ref<any>,
+) => MotionProps<Y> & RefAttributes<any>

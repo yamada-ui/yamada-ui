@@ -1,5 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { transparentizeColor } from "@yamada-ui/utils"
+import { isGray, shadeColor } from "@yamada-ui/utils"
 
 export const Switch: ComponentMultiStyle = {
   baseStyle: {
@@ -12,7 +12,7 @@ export const Switch: ComponentMultiStyle = {
     },
     track: {
       rounded: "full",
-      bg: ["gray.300", "whiteAlpha.200"],
+      bg: ["blackAlpha.400", "whiteAlpha.300"],
       transitionProperty: "common",
       transitionDuration: "fast",
       _checked: {
@@ -36,7 +36,7 @@ export const Switch: ComponentMultiStyle = {
       track: {
         p: "1",
         _checked: {
-          bg: [`${c}.500`, `${c}.400`],
+          bg: [`${c}.500`, `${c}.600`],
         },
       },
     }),
@@ -44,15 +44,15 @@ export const Switch: ComponentMultiStyle = {
       track: {
         _checked: {
           bg: [
-            transparentizeColor(`${c}.400`, 0.7)(t, m),
-            transparentizeColor(`${c}.200`, 0.6)(t, m),
+            isGray(c) ? `${c}.50` : `${c}.100`,
+            shadeColor(`${c}.300`, 58)(t, m),
           ],
         },
       },
       thumb: {
         boxShadow: "dark-md",
         _checked: {
-          bg: [`${c}.500`, `${c}.400`],
+          bg: [`${c}.500`, `${c}.600`],
         },
       },
     }),

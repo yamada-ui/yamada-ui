@@ -1,10 +1,13 @@
 import type { Dict } from "@yamada-ui/utils"
 import { isArray, isObject, merge, runIfFunc } from "@yamada-ui/utils"
-import type { ConfigProps } from "../styles"
-import { styles, pseudos } from "../styles"
+import type { ConfigProps } from "../config"
+import { pseudos } from "../pseudos"
+import { processSkipProperties, styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
-import type { CSSObjectOrFunc, CSSUIObject, CSSUIProps } from "./css.types"
+import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
+
+const isProcessSkip = (key: string) => processSkipProperties.includes(key)
 
 const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],
@@ -18,22 +21,20 @@ const expandResponsive = (
   value: Dict,
   queries: BreakpointQueries,
 ): Dict =>
-  Object.entries(value).reduce((css, [breakpointKey, breakpointValue]) => {
-    if (breakpointKey === "base") {
-      css[key] = breakpointValue
-    } else {
-      const query = queries.find(
-        ({ breakpoint }) => breakpoint === breakpointKey,
-      )?.maxWQuery
+  queries.reduce((prev, { breakpoint, query }) => {
+    const breakpointValue = value[breakpoint]
 
-      if (query) css[query] = { [key]: breakpointValue }
+    if (query) {
+      prev[query] = { [key]: breakpointValue }
+    } else {
+      prev[key] = value[breakpoint]
     }
 
-    return css
+    return prev
   }, {} as Dict)
 
 const expandCSS =
-  (css: CSSUIProps | CSSUIObject) =>
+  (css: Dict, isNested: boolean) =>
   (theme: StyledTheme): Dict => {
     if (!theme.__breakpoints) return css
 
@@ -46,13 +47,17 @@ const expandCSS =
 
       if (value == null) continue
 
-      if (isArray(value)) {
+      if (isArray(value) && !(isProcessSkip(key) && !isNested)) {
         computedCSS = merge(computedCSS, expandColorMode(key, value))
 
         continue
       }
 
-      if (isObject(value) && isResponsive(value)) {
+      if (
+        isObject(value) &&
+        isResponsive(value) &&
+        !(isProcessSkip(key) && !isNested)
+      ) {
         computedCSS = merge(computedCSS, expandResponsive(key, value, queries))
 
         continue
@@ -78,7 +83,7 @@ export const getCSS = ({
     isNested: boolean = false,
   ): Dict => {
     const css = runIfFunc(cssOrFunc, theme)
-    const computedCSS = expandCSS(css)(theme)
+    const computedCSS = expandCSS(css, isNested)(theme)
 
     let resolvedCSS: Dict = {}
 
@@ -93,7 +98,7 @@ export const getCSS = ({
 
       if (style === true) style = { properties: key }
 
-      if (isObject(value)) {
+      if (isObject(value) && !style?.isProcessSkip) {
         resolvedCSS[key] = resolvedCSS[key] ?? {}
         resolvedCSS[key] = merge(resolvedCSS[key], createCSS(value, true))
 
@@ -102,9 +107,8 @@ export const getCSS = ({
 
       value = style?.transform?.(value, theme) ?? value
 
-      if (style?.isProcessResult) {
+      if (style?.isProcessResult || style?.isProcessSkip)
         value = createCSS(value, true)
-      }
 
       if (!isNested && style?.static) {
         const staticStyles = runIfFunc(style.static, theme)

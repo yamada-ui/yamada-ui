@@ -20,6 +20,7 @@ import {
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof RangeSlider>
 
@@ -51,57 +52,9 @@ export const withSize: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <>
-      <RangeSlider colorScheme="primary" />
-
-      <RangeSlider colorScheme="secondary" />
-
-      <RangeSlider colorScheme="warning" />
-
-      <RangeSlider colorScheme="danger" />
-
-      <RangeSlider colorScheme="link" />
-
-      <RangeSlider colorScheme="gray" />
-
-      <RangeSlider colorScheme="zinc" />
-
-      <RangeSlider colorScheme="neutral" />
-
-      <RangeSlider colorScheme="stone" />
-
-      <RangeSlider colorScheme="red" />
-
-      <RangeSlider colorScheme="rose" />
-
-      <RangeSlider colorScheme="pink" />
-
-      <RangeSlider colorScheme="orange" />
-
-      <RangeSlider colorScheme="amber" />
-
-      <RangeSlider colorScheme="yellow" />
-
-      <RangeSlider colorScheme="lime" />
-
-      <RangeSlider colorScheme="green" />
-
-      <RangeSlider colorScheme="emerald" />
-
-      <RangeSlider colorScheme="teal" />
-
-      <RangeSlider colorScheme="cyan" />
-
-      <RangeSlider colorScheme="sky" />
-
-      <RangeSlider colorScheme="blue" />
-
-      <RangeSlider colorScheme="indigo" />
-
-      <RangeSlider colorScheme="violet" />
-
-      <RangeSlider colorScheme="purple" />
-
-      <RangeSlider colorScheme="fuchsia" />
+      {colorSchemes.map((colorScheme) => (
+        <RangeSlider key={colorScheme} colorScheme={colorScheme} />
+      ))}
     </>
   )
 }

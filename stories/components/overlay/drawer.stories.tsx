@@ -45,7 +45,7 @@ export const basic: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -71,7 +71,7 @@ export const withDuration: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -143,7 +143,7 @@ export const withSize: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -206,7 +206,7 @@ export const withPosition: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -232,7 +232,7 @@ export const withFullHeight: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -258,7 +258,7 @@ export const disabledCloseButton: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -286,7 +286,7 @@ export const customCloseButton: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -312,7 +312,7 @@ export const disabledOverlay: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -340,7 +340,7 @@ export const customOverlay: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>
@@ -367,6 +367,7 @@ export const scrollOnMount: Story = () => {
         <Image
           src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
           maxW="sm"
+          alt="ドラゴンボール"
         />
 
         <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
@@ -411,7 +412,7 @@ export const scrollOnMount: Story = () => {
           <Button variant="ghost" onClick={onClose}>
             とじる
           </Button>
-          <Button colorScheme="primary">Wikipadia</Button>
+          <Button colorScheme="primary">Wikipedia</Button>
         </DrawerFooter>
       </Drawer>
     </>

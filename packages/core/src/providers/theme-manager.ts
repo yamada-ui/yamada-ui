@@ -6,32 +6,38 @@ const hasSupport = !!globalThis?.document
 export type ThemeSchemeManager = {
   type: "cookie" | "localStorage"
   ssr?: boolean
-  get: (initialThemeScheme?: Theme["themeSchemes"]) => Theme["themeSchemes"]
-  set: (themeScheme: Theme["themeSchemes"]) => void
+  get: (
+    initialThemeScheme?: Theme["themeSchemes"],
+  ) => (storageKey?: string) => Theme["themeSchemes"]
+  set: (themeScheme: Theme["themeSchemes"]) => (storageKey?: string) => void
 }
 
-const createLocalStorage = (storageKey: string): ThemeSchemeManager => ({
+const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
   ssr: false,
   type: "localStorage",
-  get: (initThemeScheme = "base") => {
-    if (!hasSupport) return initThemeScheme
+  get:
+    (initThemeScheme = "base") =>
+    (storageKey = defaultStorageKey) => {
+      if (!hasSupport) return initThemeScheme
 
-    try {
-      const themeScheme = localStorage.getItem(storageKey) as
-        | Theme["themeSchemes"]
-        | null
+      try {
+        const themeScheme = localStorage.getItem(storageKey) as
+          | Theme["themeSchemes"]
+          | null
 
-      return themeScheme || initThemeScheme
-    } catch (e) {
-      return initThemeScheme
-    }
-  },
+        return themeScheme || initThemeScheme
+      } catch (e) {
+        return initThemeScheme
+      }
+    },
 
-  set: (themeScheme) => {
-    try {
-      localStorage.setItem(storageKey, String(themeScheme))
-    } catch (e) {}
-  },
+  set:
+    (themeScheme) =>
+    (storageKey = defaultStorageKey) => {
+      try {
+        localStorage.setItem(storageKey, String(themeScheme))
+      } catch (e) {}
+    },
 })
 
 const parseCookie = (
@@ -44,31 +50,50 @@ const parseCookie = (
 }
 
 const createCookieStorage = (
-  key: string,
+  defaultStorageKey: string,
   cookie?: string,
 ): ThemeSchemeManager => ({
   ssr: !!cookie,
   type: "cookie",
-  get: (initThemeScheme = "base") => {
-    if (cookie) return parseCookie(cookie, key) || initThemeScheme
+  get:
+    (initThemeScheme = "base") =>
+    (storageKey = defaultStorageKey) => {
+      if (cookie) return parseCookie(cookie, storageKey) || initThemeScheme
 
-    if (!hasSupport) return initThemeScheme
+      if (!hasSupport) return initThemeScheme
 
-    return parseCookie(document.cookie, key) || initThemeScheme
-  },
+      return parseCookie(document.cookie, storageKey) || initThemeScheme
+    },
 
-  set: (themeScheme) => {
-    document.cookie = `${key}=${themeScheme}; max-age=31536000; path=/`
-  },
+  set:
+    (themeScheme) =>
+    (storageKey = defaultStorageKey) => {
+      document.cookie = `${storageKey}=${themeScheme}; max-age=31536000; path=/`
+    },
 })
 
-const cookieStorageSSR = (cookie: string) =>
-  createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie)
+export const createThemeSchemeManager = (
+  type: "local" | "cookie" | "ssr" = "local",
+  cookie?: string,
+) => {
+  switch (type) {
+    case "cookie":
+    case "ssr":
+      return createCookieStorage(
+        THEME_SCHEME_STORAGE_KEY,
+        typeof cookie === "string" ? cookie : undefined,
+      )
+
+    default:
+      return createLocalStorage(THEME_SCHEME_STORAGE_KEY)
+  }
+}
 
 export const themeSchemeManager = {
   localStorage: createLocalStorage(THEME_SCHEME_STORAGE_KEY),
   cookieStorage: createCookieStorage(THEME_SCHEME_STORAGE_KEY),
+  ssr: (cookie: string) =>
+    createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie),
   createLocalStorage,
-  cookieStorageSSR,
   createCookieStorage,
 }

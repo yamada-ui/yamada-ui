@@ -15,6 +15,7 @@ import {
 import { useRef, useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof FileButton>
 
@@ -30,7 +31,11 @@ export const basic: Story = () => {
     <>
       <FileButton>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        aria-label="Upload file"
+      />
 
       <FileButton>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
@@ -44,7 +49,12 @@ export const withMultiple: Story = () => {
     <>
       <FileButton multiple>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} multiple />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        multiple
+        aria-label="Upload file"
+      />
 
       <FileButton multiple>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
@@ -62,6 +72,7 @@ export const withAccept: Story = () => {
         as={IconButton}
         icon={<Icon icon={faPlus} />}
         accept="image/png,image/jpeg"
+        aria-label="Upload file"
       />
 
       <FileButton accept="image/png,image/jpeg">
@@ -96,57 +107,11 @@ export const withSize: Story = () => {
 export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
-      <FileButton colorScheme="primary">Primary</FileButton>
-
-      <FileButton colorScheme="secondary">Secondary</FileButton>
-
-      <FileButton colorScheme="warning">Warning</FileButton>
-
-      <FileButton colorScheme="danger">Danger</FileButton>
-
-      <FileButton colorScheme="link">Link</FileButton>
-
-      <FileButton colorScheme="gray">Gray</FileButton>
-
-      <FileButton colorScheme="zinc">Zinc</FileButton>
-
-      <FileButton colorScheme="neutral">Neutral</FileButton>
-
-      <FileButton colorScheme="stone">Stone</FileButton>
-
-      <FileButton colorScheme="red">Red</FileButton>
-
-      <FileButton colorScheme="rose">Rose</FileButton>
-
-      <FileButton colorScheme="pink">Pink</FileButton>
-
-      <FileButton colorScheme="orange">Orange</FileButton>
-
-      <FileButton colorScheme="amber">Amber</FileButton>
-
-      <FileButton colorScheme="yellow">Yellow</FileButton>
-
-      <FileButton colorScheme="lime">Lime</FileButton>
-
-      <FileButton colorScheme="green">Green</FileButton>
-
-      <FileButton colorScheme="emerald">Emerald</FileButton>
-
-      <FileButton colorScheme="teal">Teal</FileButton>
-
-      <FileButton colorScheme="cyan">Cyan</FileButton>
-
-      <FileButton colorScheme="sky">Sky</FileButton>
-
-      <FileButton colorScheme="blue">Blue</FileButton>
-
-      <FileButton colorScheme="indigo">Indigo</FileButton>
-
-      <FileButton colorScheme="violet">Violet</FileButton>
-
-      <FileButton colorScheme="purple">Purple</FileButton>
-
-      <FileButton colorScheme="fuchsia">Fuchsia</FileButton>
+      {colorSchemes.map((colorScheme) => (
+        <FileButton key={colorScheme} colorScheme={colorScheme}>
+          {colorScheme}
+        </FileButton>
+      ))}
     </Wrap>
   )
 }
@@ -188,7 +153,12 @@ export const isDisabled: Story = () => {
     <>
       <FileButton isDisabled>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isDisabled />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        isDisabled
+        aria-label="Upload file"
+      />
 
       <FileButton isDisabled>
         {({ onClick, isDisabled }) => (
@@ -196,7 +166,11 @@ export const isDisabled: Story = () => {
             onClick={onClick}
             opacity={isDisabled ? 0.4 : 1}
             cursor={isDisabled ? "not-allowed" : "pointer"}
-            _hover={isDisabled ? undefined : { textDecoration: "underline" }}
+            _hover={
+              isDisabled
+                ? { textDecoration: "inherit" }
+                : { textDecoration: "underline" }
+            }
           >
             Upload
           </Link>
@@ -219,14 +193,23 @@ export const isReadonly: Story = () => {
     <>
       <FileButton isReadOnly>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isReadOnly />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        isReadOnly
+        aria-label="Upload file"
+      />
 
       <FileButton isReadOnly>
         {({ onClick, isReadOnly }) => (
           <Link
             onClick={onClick}
             cursor={isReadOnly ? "default" : "pointer"}
-            _hover={isReadOnly ? undefined : { textDecoration: "underline" }}
+            _hover={
+              isReadOnly
+                ? { textDecoration: "inherit" }
+                : { textDecoration: "underline" }
+            }
           >
             Upload
           </Link>
@@ -249,7 +232,12 @@ export const isInvalid: Story = () => {
     <>
       <FileButton isInvalid>Upload</FileButton>
 
-      <FileButton as={IconButton} icon={<Icon icon={faPlus} />} isInvalid />
+      <FileButton
+        as={IconButton}
+        icon={<Icon icon={faPlus} />}
+        isInvalid
+        aria-label="Upload file"
+      />
 
       <FormControl
         isInvalid
@@ -263,11 +251,11 @@ export const isInvalid: Story = () => {
 }
 
 export const useReset: Story = () => {
-  const [files, onChange] = useState<File[] | null>(null)
+  const [files, onChange] = useState<File[] | undefined>(undefined)
   const resetRef = useRef<() => void>(null)
 
   const onReset = () => {
-    onChange(null)
+    onChange(undefined)
     resetRef.current?.()
   }
 

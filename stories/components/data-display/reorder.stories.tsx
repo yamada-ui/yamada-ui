@@ -194,6 +194,9 @@ export const useContainerScroll: Story = () => {
       rounded="md"
       overflowY="scroll"
       layoutScroll
+      tabIndex={0}
+      outline="0"
+      _focusVisible={{ boxShadow: "outline" }}
     >
       <ReorderItem label="ギニュー">ギニュー</ReorderItem>
       <ReorderItem label="リクーム">リクーム</ReorderItem>

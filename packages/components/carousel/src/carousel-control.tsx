@@ -18,6 +18,7 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
       <CarouselControl
         operation="prev"
         className={cx("ui-carousel__control--prev", className)}
+        aria-label="Go to previous slide"
         icon={
           <ChevronIcon
             __css={{
@@ -43,6 +44,7 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
       <CarouselControl
         operation="next"
         className={cx("ui-carousel__control--next", className)}
+        aria-label="Go to next slide"
         icon={
           <ChevronIcon
             __css={{

@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
 import { cloneElement, useMemo } from "react"
@@ -79,13 +81,31 @@ type MultiAutocompleteOptions = {
    * Props for multi autocomplete clear icon element.
    */
   clearIconProps?: AutocompleteIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   *
+   */
+  portalProps?: Omit<PortalProps, "children">
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
 }
 
-export type MultiAutocompleteProps = ThemeProps<"Select"> &
-  UseAutocompleteProps<string[]> &
+export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
+  Omit<UseAutocompleteProps<string[]>, "closeOnSelect"> &
   MultiAutocompleteOptions
 
-export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
+/**
+ * `MultiAutocomplete` is a component used to display suggestions based on user text input and to obtain multiple values.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/multi-autocomplete
+ */
+export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(
       "MultiAutocomplete",
@@ -109,6 +129,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
       inputProps,
       iconProps,
       clearIconProps,
+      portalProps = { isDisabled: true },
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
@@ -188,19 +209,27 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
               </ui.div>
 
               {!isEmpty ? (
-                <AutocompleteList {...listProps}>
-                  {allowCreate ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+                <Portal {...portalProps}>
+                  <AutocompleteList {...listProps}>
+                    {allowCreate ? (
+                      <AutocompleteCreate />
+                    ) : (
+                      <AutocompleteEmpty />
+                    )}
 
-                  {children ?? computedChildren}
-                </AutocompleteList>
+                    {children ?? computedChildren}
+                  </AutocompleteList>
+                </Portal>
               ) : (
-                <AutocompleteList {...listProps}>
-                  {allowCreate && inputValue ? (
-                    <AutocompleteCreate />
-                  ) : (
-                    <AutocompleteEmpty />
-                  )}
-                </AutocompleteList>
+                <Portal {...portalProps}>
+                  <AutocompleteList {...listProps}>
+                    {allowCreate && inputValue ? (
+                      <AutocompleteCreate />
+                    ) : (
+                      <AutocompleteEmpty />
+                    )}
+                  </AutocompleteList>
+                </Portal>
               )}
             </ui.div>
           </Popover>
@@ -216,7 +245,7 @@ type MultiAutocompleteFieldProps = HTMLUIProps<"div"> &
     "component" | "separator" | "keepPlaceholder" | "inputProps"
   >
 
-const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
+const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
   (
     {
       className,
@@ -241,8 +270,8 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
 
       if (component) {
         return (label as string[]).map((label, index) => {
-          const onRemove: MouseEventHandler<HTMLElement> = (e) => {
-            e.stopPropagation()
+          const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
+            ev.stopPropagation()
 
             onChange(value[index])
 
@@ -257,13 +286,14 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
           })
 
           const style: CSSProperties = {
-            cursor: "default",
             marginBlockStart: "0.125rem",
             marginBlockEnd: "0.125rem",
             marginInlineEnd: "0.25rem",
           }
 
-          return el ? cloneElement(el as ReactElement, { style }) : null
+          return el
+            ? cloneElement(el as ReactElement, { key: index, style })
+            : null
         })
       } else {
         return (label as string[]).map((value, index) => {
@@ -280,7 +310,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
     }, [label, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",
@@ -308,7 +338,9 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
             marginBlockStart="0.125rem"
             marginBlockEnd="0.125rem"
             placeholder={
-              !label || (keepPlaceholder && isOpen) ? placeholder : undefined
+              !label || !label?.length || (keepPlaceholder && isOpen)
+                ? placeholder
+                : undefined
             }
             {...getInputProps({ ...inputProps, value: inputValue ?? "" }, ref)}
           />

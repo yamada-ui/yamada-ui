@@ -10,11 +10,11 @@ export const globalStyle: UIStyle = {
     lineHeight: "base",
     overflowX: "hidden",
   },
-  "*::placeholder": {
-    color: "gray.500",
+  "*::placeholder, *[data-placeholder]": {
+    color: "blackAlpha.600",
   },
   _dark: {
-    "*::placeholder": {
+    "*::placeholder, *[data-placeholder]": {
       color: "whiteAlpha.400",
     },
   },

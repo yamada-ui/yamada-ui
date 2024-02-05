@@ -53,7 +53,7 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
           </AutocompleteItemIcon>
         ) : null}
         {icon ? (
-          <ui.span style={{ pointerEvents: "none", flex: 1 }} noOfLines={1}>
+          <ui.span style={{ pointerEvents: "none", flex: 1 }} lineClamp={1}>
             {children}
           </ui.span>
         ) : (

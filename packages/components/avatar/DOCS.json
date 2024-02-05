@@ -1,9 +1,19 @@
 {
   "Avatar": {
+    "alt": {
+      "type": "string",
+      "required": false,
+      "description": "The `HTMLImageElement` property `alt`."
+    },
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "crossOrigin": {
+      "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+      "required": false,
+      "description": "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
     },
     "format": {
       "type": "(name: string) => string",
@@ -66,6 +76,36 @@
     }
   },
   "AvatarBadge": {
+    "ping": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, make an element scale and fade like a radar ping or ripple of water."
+    },
+    "pingColor": {
+      "type": "UIValue<\"link\" | \"border\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 319 more ... | \"secondary.950\">",
+      "defaultValue": "'[\"blackAlpha.400\", \"whiteAlpha.500\"]'",
+      "required": false,
+      "description": "It is used for the color of the ping animation."
+    },
+    "pingCount": {
+      "type": "AnimationIterationCount",
+      "defaultValue": "infinite",
+      "required": false,
+      "description": "It is used for the count of the ping animation."
+    },
+    "pingDuration": {
+      "type": "AnimationDirection",
+      "defaultValue": "1.4s",
+      "required": false,
+      "description": "It is used for the duration of the ping animation."
+    },
+    "pingScale": {
+      "type": "number",
+      "defaultValue": "1.8",
+      "required": false,
+      "description": "It is used for the scale of the ping animation."
+    },
     "placement": {
       "type": "\"top-start\" | \"top-end\" | \"bottom-start\" | \"bottom-end\"",
       "defaultValue": "'bottom-end'",

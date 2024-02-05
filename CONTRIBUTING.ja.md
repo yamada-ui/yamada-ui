@@ -50,7 +50,7 @@ cd yamada-ui
 
 ## バグを見つけたと思いますか？
 
-[issue template](https://github.com/hirotomoyamada/yamada-ui/issues/new/choose)に従って、提供してください。
+[テンプレート](https://github.com/hirotomoyamada/yamada-ui/issues/new/choose)に従って、提供してください。
 
 ## 新規または変更のAPIを提案しますか？
 
@@ -73,7 +73,9 @@ cd yamada-ui
 - `ci`: 継続的インテグレーションの設定に関する変更をした場合（例：github actions、CIシステムなど）
 - `chore`: 上記のいずれにも当てはまらないリポジトリへの変更をした場合
 
-詳しい仕様については、[Conventional Commits](https://www.conventionalcommits.org)を確認するか、[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)を確認してください。
+> [!TIP]
+>
+> 詳しい仕様については、[Conventional Commits](https://www.conventionalcommits.org)を確認するか、[Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)を確認してください。
 
 ### プルリクエストの手順
 
@@ -87,6 +89,8 @@ cd yamada-ui
 4. また、jsxのスニペットをchangesetに提供する場合、スニペットの始まりで以下のようにしてライブプレビューをオフにしてください。
    ` ```jsx live=false`
 
+> [!NOTE]
+>
 > CIの設定やPrettierなどの小さな変更を行った場合は、`pnpm changeset add --empty`を実行して、空のchangesetファイルを生成し、変更を文書化することができます。
 
 5. 次に、[コミット規約](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention)に従ってコミットします。

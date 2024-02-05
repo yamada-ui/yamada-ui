@@ -24,29 +24,47 @@ type ColorModeContext = {
   toggleColorMode: () => void
 }
 
-const getColorMode = (
-  manager: ColorModeManager,
-  fallback: ColorMode | "system",
-) =>
-  manager.type === "cookie" && manager.ssr ? manager.get(fallback) : fallback
+const getColorMode =
+  (manager: ColorModeManager, fallback: ColorMode | "system") =>
+  (storageKey?: string) =>
+    manager.type === "cookie" && manager.ssr
+      ? manager.get(fallback)(storageKey)
+      : fallback
 
 export const ColorModeContext = createContext({} as ColorModeContext)
 
 export type ColorModeProviderProps = {
   colorMode?: ColorMode
+  /**
+   * The config of the yamada ui.
+   */
   config?: ThemeConfig
   children?: ReactNode
+  /**
+   * Manager to persist a user's color mode preference.
+   *
+   * Omit if you don't render server-side.
+   * For SSR, choose `colorModeManager.ssr`.
+   *
+   * @default 'colorModeManager.localStorage'
+   */
   colorModeManager?: ColorModeManager
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  storageKey?: string
 }
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   colorMode: defaultColorMode,
   colorModeManager = localStorage,
+  storageKey,
   config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
   children,
 }) => {
   const [colorMode, setColorMode] = useState<ColorMode | "system">(() =>
-    getColorMode(colorModeManager, initialColorMode),
+    getColorMode(colorModeManager, initialColorMode)(storageKey),
   )
   const [systemColorMode, setSystemColorMode] = useState<ColorMode | undefined>(
     undefined,
@@ -74,9 +92,15 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
       setClassName(resolved === "dark")
       setDataset(resolved)
 
-      colorModeManager.set(colorMode)
+      colorModeManager.set(colorMode)(storageKey)
     },
-    [colorModeManager, getSystemColorMode, setClassName, setDataset],
+    [
+      colorModeManager,
+      getSystemColorMode,
+      setClassName,
+      setDataset,
+      storageKey,
+    ],
   )
 
   const changeSystemColorMode = useCallback(
@@ -100,10 +124,10 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   }, [initialColorMode, addListener, changeColorMode])
 
   useEffect(() => {
-    const managerValue = colorModeManager.get()
+    const managerValue = colorModeManager.get()(storageKey)
 
     if (managerValue) changeColorMode(managerValue)
-  }, [changeColorMode, colorModeManager])
+  }, [changeColorMode, colorModeManager, storageKey])
 
   useEffect(() => {
     return addListener(changeSystemColorMode)
@@ -133,6 +157,11 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 }
 
+/**
+ * `useColorMode` is a custom hook that returns the current color mode.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-color-mode
+ */
 export const useColorMode = () => {
   const context = useContext(ColorModeContext)
 
@@ -142,6 +171,11 @@ export const useColorMode = () => {
   return context
 }
 
+/**
+ * `useColorModeValue` is a custom hook that returns the value of the current color mode from the provided values.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-color-mode-value
+ */
 export const useColorModeValue = <L extends any, D extends any>(
   light: L,
   dark: D,

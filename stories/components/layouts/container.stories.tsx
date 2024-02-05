@@ -25,6 +25,7 @@ export const basic: Story = () => {
       <Image
         src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
         maxW="sm"
+        alt="ドラゴンボール"
       />
 
       <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>

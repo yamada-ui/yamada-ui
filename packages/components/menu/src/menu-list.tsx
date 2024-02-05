@@ -1,14 +1,15 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject } from "@yamada-ui/core"
 import { forwardRef } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu"
 
-export type MenuListProps = HTMLUIProps<"section">
+export type MenuListProps = MotionProps<"ul">
 
-export const MenuList = forwardRef<MenuListProps, "section">(
+export const MenuList = forwardRef<MenuListProps, "ul">(
   ({ className, ...rest }, ref) => {
     const { menuRef, focusedIndex, setFocusedIndex, onClose, styles } =
       useMenu()
@@ -28,13 +29,13 @@ export const MenuList = forwardRef<MenuListProps, "section">(
     }, [descendants, focusedIndex, setFocusedIndex])
 
     const onFirst = useCallback(() => {
-      const first = descendants.enabledfirstValue()
+      const first = descendants.enabledFirstValue()
 
       if (first) setFocusedIndex(first.index)
     }, [descendants, setFocusedIndex])
 
     const onLast = useCallback(() => {
-      const last = descendants.enabledlastValue()
+      const last = descendants.enabledLastValue()
 
       if (last) setFocusedIndex(last.index)
     }, [descendants, setFocusedIndex])
@@ -64,6 +65,7 @@ export const MenuList = forwardRef<MenuListProps, "section">(
 
     return (
       <PopoverContent
+        as="ul"
         ref={mergeRefs(menuRef, ref)}
         className={cx("ui-menu__list", className)}
         role="menu"

@@ -6,6 +6,7 @@ export {
   useFormControl,
   useFormControlProps,
   formControlProperties,
+  getFormControlProperties,
 } from "./form-control"
 export type {
   FormControlProps,

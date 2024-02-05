@@ -1,7 +1,18 @@
 {
   "Autocomplete": {
+    "allowCreate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, enables the creation of autocomplete option."
+    },
+    "allowFree": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, enables the free input."
+    },
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -30,16 +41,15 @@
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
     },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for autocomplete container element."
-    },
-    "createOption": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, enables the creation of autocomplete options."
     },
     "defaultIsOpen": {
       "type": "boolean",
@@ -90,7 +100,7 @@
       "description": "Function to format text when search input."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -105,7 +115,7 @@
       "required": false,
       "description": "Props for autocomplete input element."
     },
-    "insertPositionOnCreate": {
+    "insertPositionItem": {
       "type": "Union<\"first\" | \"last\"> | [string, \"first\" | \"last\"]",
       "defaultValue": "'first'",
       "required": false,
@@ -141,6 +151,11 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
+    "items": {
+      "type": "AutocompleteItem[]",
+      "required": false,
+      "description": "If provided, generate options based on items."
+    },
     "lazyBehavior": {
       "type": "LazyMode",
       "defaultValue": "'unmount'",
@@ -161,7 +176,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "offset": {
       "type": "[number, number]",
@@ -179,9 +195,9 @@
       "description": "Callback fired when the popover closes."
     },
     "onCreate": {
-      "type": "(newOption: UIOption, newOptions: UIOption[]) => void",
+      "type": "(\n  newItem: AutocompleteItem,\n  newItems: AutocompleteItem[],\n) => void",
       "required": false,
-      "description": "The callback invoked when autocomlete option created."
+      "description": "The callback invoked when autocomplete option created."
     },
     "onOpen": {
       "type": "() => void",
@@ -198,22 +214,29 @@
       "required": false,
       "description": "Props for select option element."
     },
-    "options": {
-      "type": "UIOption[]",
-      "required": false,
-      "description": "If provided, generate options based on data."
-    },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "preventOverflow": {
       "type": "boolean",
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the Autocomplete."
     },
     "strategy": {
       "type": "\"fixed\" | \"absolute\"",
@@ -225,6 +248,12 @@
       "type": "string",
       "required": false,
       "description": "The value of the autocomplete."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the Autocomplete."
     }
   },
   "AutocompleteOptionGroup": {
@@ -279,8 +308,19 @@
     }
   },
   "MultiAutocomplete": {
+    "allowCreate": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, enables the creation of autocomplete option."
+    },
+    "allowFree": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, enables the free input."
+    },
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -310,12 +350,17 @@
     },
     "closeOnSelect": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": false,
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
     },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "component": {
-      "type": "FC<{\n  value: string | number\n  displayValue: string\n  index: number\n  onRemove: MouseEventHandler<HTMLElement>\n}>",
+      "type": "FC<{\n  value: string | number\n  label: string\n  index: number\n  onRemove: MouseEventHandler<HTMLElement>\n}>",
       "required": false,
       "description": "The custom display value to use."
     },
@@ -323,12 +368,6 @@
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for multi autocomplete container element."
-    },
-    "createOption": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, enables the creation of autocomplete options."
     },
     "defaultIsOpen": {
       "type": "boolean",
@@ -379,7 +418,7 @@
       "description": "Function to format text when search input."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -394,7 +433,7 @@
       "required": false,
       "description": "Props for multi autocomplete input element."
     },
-    "insertPositionOnCreate": {
+    "insertPositionItem": {
       "type": "Union<\"first\" | \"last\"> | [string, \"first\" | \"last\"]",
       "defaultValue": "'first'",
       "required": false,
@@ -436,6 +475,11 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
+    "items": {
+      "type": "AutocompleteItem[]",
+      "required": false,
+      "description": "If provided, generate options based on items."
+    },
     "keepPlaceholder": {
       "type": "boolean",
       "defaultValue": false,
@@ -459,7 +503,7 @@
       "required": false,
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
@@ -467,7 +511,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "offset": {
       "type": "[number, number]",
@@ -491,9 +536,9 @@
       "description": "Callback fired when the popover closes."
     },
     "onCreate": {
-      "type": "(newOption: UIOption, newOptions: UIOption[]) => void",
+      "type": "(\n  newItem: AutocompleteItem,\n  newItems: AutocompleteItem[],\n) => void",
       "required": false,
-      "description": "The callback invoked when autocomlete option created."
+      "description": "The callback invoked when autocomplete option created."
     },
     "onOpen": {
       "type": "() => void",
@@ -510,16 +555,17 @@
       "required": false,
       "description": "Props for select option element."
     },
-    "options": {
-      "type": "UIOption[]",
-      "required": false,
-      "description": "If provided, generate options based on data."
-    },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "defaultValue": "'{ isDisabled: true }'",
+      "required": false,
+      "description": "Props to be forwarded to the portal component."
     },
     "preventOverflow": {
       "type": "boolean",
@@ -533,6 +579,12 @@
       "required": false,
       "description": "The visual separator between each value."
     },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
+      "required": false,
+      "description": "The size of the MultiAutocomplete."
+    },
     "strategy": {
       "type": "\"fixed\" | \"absolute\"",
       "defaultValue": "'absolute'",
@@ -543,6 +595,12 @@
       "type": "string[]",
       "required": false,
       "description": "The value of the autocomplete."
+    },
+    "variant": {
+      "defaultValue": "outline",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"unstyled\"",
+      "required": false,
+      "description": "The variant of the MultiAutocomplete."
     }
   }
 }

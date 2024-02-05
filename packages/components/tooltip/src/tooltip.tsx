@@ -76,7 +76,7 @@ type TooltipOptions = {
   /**
    * If `true`, the tooltip will hide on click.
    *
-   * @default true
+   * @default false
    */
   closeOnClick?: boolean
   /**
@@ -123,7 +123,7 @@ type TooltipOptions = {
   withPortal?: boolean
 }
 
-export type TooltipProps = HTMLUIProps<"div"> &
+export type TooltipProps = Omit<HTMLUIProps<"div">, "offset"> &
   ThemeProps<"Tooltip"> &
   Omit<HTMLMotionProps<"div">, "color" | "style" | "variants" | "transition"> &
   Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &
@@ -169,6 +169,11 @@ const getTooltipProps = (
   }
 }
 
+/**
+ * `Tooltip` is a component that displays short information, such as supplementary details for an element.
+ *
+ * @see Docs https://yamada-ui.com/components/overlay/tooltip
+ */
 export const Tooltip = forwardRef<TooltipProps, "div">(
   (
     { closeOnPointerDown, zIndex, portalProps, withPortal = true, ...props },
@@ -186,7 +191,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       openDelay = 0,
       closeDelay = 0,
       isDisabled,
-      closeOnClick = true,
+      closeOnClick,
       closeOnScroll,
       closeOnMouseDown,
       closeOnEsc = true,
@@ -224,13 +229,13 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
 
     const openWithDelay = useCallback(() => {
       if (!isDisabled && !openTimeout.current) {
-        closeNow()
+        if (isOpen) closeNow()
 
         const win = getOwnerWindow(triggerRef.current)
 
         openTimeout.current = win.setTimeout(onOpen, openDelay)
       }
-    }, [isDisabled, openDelay, closeNow, onOpen])
+    }, [isDisabled, isOpen, openDelay, closeNow, onOpen])
 
     const closeWithDelay = useCallback(() => {
       if (openTimeout.current) {

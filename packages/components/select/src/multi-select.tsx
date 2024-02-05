@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx, getValidChildren, handlerAll } from "@yamada-ui/utils"
 import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
 import { cloneElement, useMemo } from "react"
@@ -73,12 +75,23 @@ type MultiSelectOptions = {
    * Props for select clear icon element.
    */
   clearIconProps?: SelectIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
-export type MultiSelectProps = ThemeProps<"Select"> &
+export type MultiSelectProps = ThemeProps<"MultiSelect"> &
   Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty"> &
   MultiSelectOptions
 
+/**
+ * `MultiSelect` is a component used for allowing users to select multiple values from a list of options.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/multi-select
+ */
 export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("MultiSelect", props)
   let {
@@ -98,6 +111,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     listProps,
     iconProps,
     clearIconProps,
+    portalProps = { isDisabled: true },
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -202,9 +216,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
             </ui.div>
 
             {!isEmpty ? (
-              <SelectList {...listProps}>
-                {children ?? computedChildren}
-              </SelectList>
+              <Portal {...portalProps}>
+                <SelectList {...listProps}>
+                  {children ?? computedChildren}
+                </SelectList>
+              </Portal>
             ) : null}
           </ui.div>
         </Popover>
@@ -223,7 +239,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
       component,
       separator = ",",
       isTruncated,
-      noOfLines = 1,
+      lineClamp = 1,
       h,
       minH,
       ...rest
@@ -234,11 +250,11 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
 
     const cloneChildren = useMemo(() => {
       if (!label?.length)
-        return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
+        return <ui.span lineClamp={lineClamp}>{placeholder}</ui.span>
 
       if (component) {
         return (
-          <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
+          <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
             {(label as string[]).map((label, index) => {
               const onRemove: MouseEventHandler<HTMLElement> = (e) => {
                 e.stopPropagation()
@@ -259,13 +275,15 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
                 marginInlineEnd: "0.25rem",
               }
 
-              return el ? cloneElement(el as ReactElement, { style }) : null
+              return el
+                ? cloneElement(el as ReactElement, { key: index, style })
+                : null
             })}
           </ui.span>
         )
       } else {
         return (
-          <ui.span isTruncated={isTruncated} noOfLines={noOfLines}>
+          <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
             {(label as string[]).map((value, index) => {
               const isLast = label.length === index + 1
 
@@ -282,7 +300,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     }, [
       label,
       isTruncated,
-      noOfLines,
+      lineClamp,
       onChange,
       placeholder,
       separator,
@@ -291,7 +309,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     ])
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",

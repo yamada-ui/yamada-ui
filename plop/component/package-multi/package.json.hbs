@@ -1,8 +1,21 @@
 {
   "name": "@yamada-ui/{{dashCase packageName}}",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Yamada UI {{descCase packageName}} component",
-  "keywords": [],
+  "keywords": [
+    "yamada",
+    "yamada ui",
+    "react",
+    "emotion",
+    "component",
+    "accordion",
+    "ui",
+    "uikit",
+    "styled",
+    "style-props",
+    "styled-component",
+    "css-in-js"
+  ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
   "main": "src/index.ts",
@@ -13,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -28,7 +42,8 @@
     "clean": "rimraf dist .turbo",
     "typecheck": "tsc --noEmit",
     "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "postpack": "clean-package restore",
+    "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",

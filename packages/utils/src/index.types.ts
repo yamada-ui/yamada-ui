@@ -25,4 +25,4 @@ export type Union<T> = T | StringLiteral
 
 export type Length = string | 0 | number
 
-export type Merge<T extends object> = { [K in keyof T]: T[K] }
+export type Merge<Y, M> = M extends undefined ? Y : Omit<Y, keyof M> & M

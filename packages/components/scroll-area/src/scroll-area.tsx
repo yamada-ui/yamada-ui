@@ -61,6 +61,11 @@ const hiddenStyles: CSSUIObject = {
   },
 }
 
+/**
+ * `ScrollArea` is a component that displays a customized scrollbar.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/scroll-area
+ */
 export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("ScrollArea", props)
   const {
@@ -74,7 +79,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const [isHovered, setIsHovered] = useState<boolean>(false)
-  const [isScrolling, setisScrolling] = useState<boolean>(false)
+  const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"
   const isNever = type === "never"
 
@@ -107,12 +112,12 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
 
       if (type !== "scroll") return
 
-      if (!isScrolling) setisScrolling(true)
+      if (!isScrolling) setIsScrolling(true)
 
       clearTimeout(scrollTimeout.current)
 
       scrollTimeout.current = setTimeout(
-        () => setisScrolling(false),
+        () => setIsScrolling(false),
         scrollHideDelay,
       )
     },
@@ -143,6 +148,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-scroll-area", className)}
+      tabIndex={0}
       __css={css}
       {...rest}
       onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}

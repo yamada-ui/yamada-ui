@@ -1,7 +1,6 @@
-import { writeFileSync } from "fs"
-import { readFile } from "fs/promises"
+import { mkdir, readFile, writeFile } from "fs/promises"
 import path from "path"
-import type { ThemeComponents } from "@yamada-ui/react"
+import { type ThemeComponents } from "@yamada-ui/react"
 import { defaultTheme } from "@yamada-ui/theme"
 import { format, resolveConfig } from "prettier"
 import type { SourceFile, Symbol, TypeChecker } from "typescript"
@@ -24,6 +23,7 @@ type ComponentTypeInfo = {
   defaultValue?: string | boolean | null
   required: boolean
   description?: string
+  see?: string
 }
 
 type ComponentTypeProperties = {
@@ -55,10 +55,48 @@ const toLiteralStringType = (value: string[]) =>
     .join(" | ")
     .trim() || "string"
 
+const isString = (value: unknown): value is string => typeof value === "string"
+
+const isArray = <T extends any[]>(value: any): value is T =>
+  Array.isArray(value)
+
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null
 
-const isString = (value: unknown): value is string => typeof value === "string"
+const isFunction = <T extends Function = Function>(value: any): value is T =>
+  typeof value === "function"
+
+const merge = <T extends Record<string, any>>(
+  target: any,
+  source: any,
+  mergeArray: boolean = false,
+): T => {
+  let result = Object.assign({}, target)
+
+  if (isObject(source)) {
+    if (isObject(target)) {
+      for (const [sourceKey, sourceValue] of Object.entries(source)) {
+        const targetValue = target[sourceKey]
+
+        if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
+          result[sourceKey] = targetValue.concat(...sourceValue)
+        } else if (
+          !isFunction(sourceValue) &&
+          isObject(sourceValue) &&
+          target.hasOwnProperty(sourceKey)
+        ) {
+          result[sourceKey] = merge(targetValue, sourceValue, mergeArray)
+        } else {
+          Object.assign(result, { [sourceKey]: sourceValue })
+        }
+      }
+    } else {
+      result = source
+    }
+  }
+
+  return result as T
+}
 
 const defaultColors = [
   "brand",
@@ -197,14 +235,20 @@ const extractPropertiesOfTypeName = async (
       if (shouldIgnoreProperty(property)) continue
 
       const propertyName = property.getName()
+
       const type = typeChecker.getTypeOfSymbolAtLocation(property, sourceFile)
 
       const docTags = property.getJsDocTags()
 
+      const isPrivate = !!docTags.find(({ name }) => name === "private")
+
+      if (isPrivate) continue
+
+      const see = docTags.find(({ name }) => name === "see")?.text?.at(-1)?.text
       const defaultValue =
         docTags
-          .find((tag) => tag.name === "default")
-          ?.text?.map((doc) => doc.text)
+          .find(({ name }) => name === "default")
+          ?.text?.map(({ text }) => text)
           ?.join("\n") || undefined
 
       const nonNullableType = type.getNonNullableType()
@@ -223,6 +267,7 @@ const extractPropertiesOfTypeName = async (
             .getDocumentationComment(typeChecker)
             .map((comment) => comment.text)
             .join("\n") || undefined,
+        see,
       }
     }
 
@@ -264,7 +309,7 @@ const extractTypeExports = (code: string) => {
 
   const exportedTypes = Object.keys(exported).filter(Boolean)
 
-  console.log("[docs]:", exportedTypes.join(", "))
+  console.log("[docs]:", `Import type ${exportedTypes.join(", ")}`)
 
   return exportedTypes
 }
@@ -280,26 +325,31 @@ const createTypeSearch = (
     path.dirname(configPath),
   )
 
-  const { getSourceFiles, getTypeChecker } = createProgram(fileNames, options)
-  const sourceFiles = getSourceFiles()
+  const { getSourceFile, getTypeChecker } = createProgram(fileNames, options)
 
   return async (
     searchTerm: Parameters<typeof extractPropertiesOfTypeName>[0],
   ) => {
-    const results: Record<string, ComponentTypeProperties> = {}
+    let results: Record<string, ComponentTypeProperties> = {}
 
-    for await (const sourceFile of sourceFiles) {
-      const typeInfo = await extractPropertiesOfTypeName(
-        searchTerm,
-        sourceFile,
-        getTypeChecker(),
-        {
-          shouldIgnoreProperty,
-        },
-      )
+    await Promise.all(
+      fileNames.map(async (fileName) => {
+        const sourceFile = getSourceFile(fileName)
 
-      Object.assign(results, typeInfo)
-    }
+        if (!sourceFile) return
+
+        const typeInfo = await extractPropertiesOfTypeName(
+          searchTerm,
+          sourceFile,
+          getTypeChecker(),
+          {
+            shouldIgnoreProperty,
+          },
+        )
+
+        results = merge(results, typeInfo)
+      }),
+    )
 
     return results
   }
@@ -357,7 +407,14 @@ const main = async () => {
     parser: "json",
   })
 
-  writeFileSync("DOCS.json", data)
+  const rootPath = path.join(__dirname, "..")
+  const componentName = process.cwd().split("/").at(-1)
+
+  await mkdir(path.join(rootPath, ".docs"), { recursive: true })
+  await writeFile(path.join(rootPath, ".docs", `${componentName}.json`), data)
+  await writeFile("DOCS.json", data)
+
+  console.log("[docs]:", `Generated DOCS.json`)
 }
 
 try {

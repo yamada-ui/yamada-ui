@@ -121,12 +121,17 @@ type TableOptions<Y extends RowData> = {
 
 export type PagingTableProps<Y extends RowData = unknown> = Omit<
   UseTableProps<Y>,
-  "enablePagenation" | "children"
+  "enablePagination" | "children"
 > &
   TableOptions<Y>
 
 const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
 
+/**
+ * `PagingTable` is a table component with pagination functionality.
+ *
+ * @see Docs https://yamada-ui.com/components/data-display/paging-table
+ */
 export const PagingTable = forwardRef(
   <Y extends RowData>(
     { colorScheme, highlightOnSelected = true, ...props }: PagingTableProps<Y>,
@@ -178,7 +183,7 @@ export const PagingTable = forwardRef(
         "withColumnBorders",
       ]),
       checkboxProps: { colorScheme, ...checkboxProps },
-      enablePagenation: true,
+      enablePagination: true,
     })
 
     const css: CSSUIObject = {
@@ -252,10 +257,10 @@ export const PagingTable = forwardRef(
                     size === "xl"
                       ? "lg"
                       : size === "lg"
-                      ? "md"
-                      : size === "md"
-                      ? "sm"
-                      : "xs"
+                        ? "md"
+                        : size === "md"
+                          ? "sm"
+                          : "xs"
                   }
                   maxW="3xs"
                   value={String(state.pagination.pageSize)}

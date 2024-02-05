@@ -13,7 +13,15 @@ import {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControlProps } from "@yamada-ui/form-control"
-import { cx, omitObject } from "@yamada-ui/utils"
+import {
+  addDomEvent,
+  createdDom,
+  cx,
+  omitObject,
+  useMergeRefs,
+} from "@yamada-ui/utils"
+import { useLayoutEffect, useRef } from "react"
+import useAutosize from "./use-autosize"
 
 type TextareaOptions = {
   /**
@@ -24,6 +32,22 @@ type TextareaOptions = {
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  /**
+   * If `true`, the Textarea height auto-adjusts to text height.
+   */
+  autosize?: boolean
+  /**
+   * Autosize up to maxRows rows.
+   *
+   * @default Infinity
+   */
+  maxRows?: number
+  /**
+   * Autosize up to minRows rows.
+   *
+   * @default 1
+   */
+  minRows?: number
 }
 
 export type TextareaProps = Omit<
@@ -34,28 +58,66 @@ export type TextareaProps = Omit<
   TextareaOptions &
   FormControlOptions
 
-export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle("Textarea", props)
-  let {
-    className,
-    rows,
-    resize = "none",
-    ...rest
-  } = omitThemeProps(mergedProps)
+/**
+ * `Textarea` is a component used to obtain multi-line text input.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/textarea
+ */
+export const Textarea = forwardRef<TextareaProps, "textarea">(
+  (props, customRef) => {
+    const [styles, mergedProps] = useComponentStyle("Textarea", props)
+    let {
+      className,
+      rows,
+      resize = "none",
+      autosize,
+      maxRows = Infinity,
+      minRows = 1,
+      onChange,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  rest = useFormControlProps(rest)
+    rest = useFormControlProps(rest)
 
-  const css: CSSUIObject = rows
-    ? omitObject(styles, ["h", "minH", "height", "minHeight"])
-    : styles
+    const css: CSSUIObject =
+      rows || autosize
+        ? omitObject(styles, [
+            "h",
+            "height",
+            "minH",
+            "minHeight",
+            "maxH",
+            "maxHeight",
+          ])
+        : styles
 
-  return (
-    <ui.textarea
-      ref={ref}
-      className={cx("ui-textarea", className)}
-      resize={resize}
-      __css={css}
-      {...rest}
-    />
-  )
-})
+    const libRef = useRef<HTMLTextAreaElement | null>(null)
+    const ref = useMergeRefs(libRef, customRef)
+
+    const resizeTextarea = useAutosize(libRef, maxRows, minRows)
+
+    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      if (autosize) resizeTextarea()
+      if (onChange) onChange(event)
+    }
+
+    const isBrowser = createdDom()
+    if (isBrowser && autosize) {
+      useLayoutEffect(resizeTextarea)
+      addDomEvent(window, "resize", resizeTextarea)
+      addDomEvent(document.fonts, "loadingdone", resizeTextarea)
+    }
+
+    return (
+      <ui.textarea
+        ref={ref}
+        className={cx("ui-textarea", className)}
+        resize={resize}
+        rows={rows}
+        __css={css}
+        {...rest}
+        onChange={handleChange}
+      />
+    )
+  },
+)

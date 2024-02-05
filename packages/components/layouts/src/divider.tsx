@@ -21,6 +21,11 @@ export type DividerProps = HTMLUIProps<"hr"> &
   ThemeProps<"Divider"> &
   DividerOptions
 
+/**
+ * `Divider` is a component that represents a division between elements.
+ *
+ * @see Docs https://yamada-ui.com/components/layouts/divider
+ */
 export const Divider = forwardRef<DividerProps, "hr">((props, ref) => {
   const [
     {

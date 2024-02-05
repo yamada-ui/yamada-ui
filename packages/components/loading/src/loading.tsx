@@ -34,6 +34,11 @@ type LoadingOptions = {
 
 export type LoadingProps = Omit<IconProps, "dur"> & LoadingOptions
 
+/**
+ * `Loading` is a component displayed during waiting times, such as when data is being loaded.
+ *
+ * @see Docs https://yamada-ui.com/components/feedback/loading
+ */
 export const Loading = forwardRef<LoadingProps, "svg">(
   (
     {

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/calendar",
-  "version": "0.6.6",
+  "version": "1.1.7",
   "description": "Yamada UI calendar component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -54,7 +55,8 @@
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "dayjs": "^1.11.7"
+    "@yamada-ui/portal": "workspace:*",
+    "dayjs": "^1.11.10"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
@@ -73,6 +75,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

@@ -1,5 +1,55 @@
 # @yamada-ui/cli
 
+## 1.0.1
+
+### Patch Changes
+
+- [#580](https://github.com/hirotomoyamada/yamada-ui/pull/580) [`9f9b3ae`](https://github.com/hirotomoyamada/yamada-ui/commit/9f9b3aea1824103c9b847e610edd97944b33f3c8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Prettier` config was not being referenced.
+
+## 1.0.0
+
+### Major Changes
+
+- [#480](https://github.com/hirotomoyamada/yamada-ui/pull/480) [`5037bbc`](https://github.com/hirotomoyamada/yamada-ui/commit/5037bbc5e6dc804b6156fad716eb09e053183bf8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added document link and description.
+
+## 0.9.1
+
+### Patch Changes
+
+- [#526](https://github.com/hirotomoyamada/yamada-ui/pull/526) [`60c7542`](https://github.com/hirotomoyamada/yamada-ui/commit/60c75429b6e8c38964f51394a6186b9c6b646156) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where some types of `colors` and `colorSchemes` were not generated.
+
+## 0.9.0
+
+### Minor Changes
+
+- [`559a03c`](https://github.com/hirotomoyamada/yamada-ui/commit/559a03cf2f4e5edfc0d2d312d064e859166762c5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed the UI on the command line.
+
+## 0.8.2
+
+### Patch Changes
+
+- [#463](https://github.com/hirotomoyamada/yamada-ui/pull/463) [`f598113`](https://github.com/hirotomoyamada/yamada-ui/commit/f5981132b9e3c38cfa5f6592fbc15f9a49e89686) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Include source map in package.
+
+## 0.8.1
+
+### Patch Changes
+
+- [`425f1b0`](https://github.com/hirotomoyamada/yamada-ui/commit/425f1b02d4dfa2d63b5baad56e26e07ab1fdfb35) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Compatible with `pnpm`.
+
+- [`161a66b`](https://github.com/hirotomoyamada/yamada-ui/commit/161a66bd5b48bbd0739fe5e28e1ecd92be0800b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added tone coefficient options to colors cmd.
+
+## 0.8.0
+
+### Minor Changes
+
+- [`41565d4`](https://github.com/hirotomoyamada/yamada-ui/commit/41565d416495ea7a9f3ef7268b34d58fb0e74a99) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added color token generation command.
+
+## 0.7.2
+
+### Patch Changes
+
+- [`4cb358c`](https://github.com/hirotomoyamada/yamada-ui/commit/4cb358c6bb5a74e33dd70e7be39cd31664594c0e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Used import type for `UITheme` import.
+
 ## 0.7.1
 
 ### Patch Changes

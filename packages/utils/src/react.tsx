@@ -1,32 +1,24 @@
 import * as React from "react"
+import type { Merge } from "."
 import { isNumber, isString } from "."
 
 type DOMElement = Element & HTMLOrSVGElement
 
-type DataAttributes = {
-  [dataAttr: string]: any
-}
-
-export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
-  React.DOMAttributes<Y> &
-  DataAttributes & {
+export type DOMAttributes<Y = DOMElement> = React.HTMLAttributes<Y> &
+  React.AriaAttributes &
+  React.DOMAttributes<Y> & {
     id?: string
     role?: React.AriaRole
     tabIndex?: number
     style?: React.CSSProperties
   }
 
-type Merge<Y, M> = M extends Record<string, unknown> ? Y : Omit<Y, keyof M> & M
-
-export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+export type PropGetter<Y = undefined, M = DOMAttributes> = (
   props?: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
-export type RequiredPropGetter<
-  Y = Record<string, unknown>,
-  M = DOMAttributes,
-> = (
+export type RequiredPropGetter<Y = undefined, M = DOMAttributes> = (
   props: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
@@ -35,10 +27,11 @@ export type MaybeRenderProp<Y> =
   | React.ReactNode
   | ((props: Y) => React.ReactNode)
 
-type Options = {
+type Options<ContextType extends any = any> = {
   strict?: boolean
   errorMessage?: string
   name?: string
+  defaultValue?: ContextType
 }
 
 type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
@@ -47,8 +40,9 @@ export const createContext = <ContextType extends any = any>({
   strict = true,
   errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
   name,
-}: Options = {}) => {
-  const Context = React.createContext<ContextType | undefined>(undefined)
+  defaultValue,
+}: Options<ContextType> = {}) => {
+  const Context = React.createContext<ContextType | undefined>(defaultValue)
 
   Context.displayName = name
 
@@ -80,19 +74,44 @@ export const useUnmountEffect = (callback: () => void) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => () => callback(), [])
 
-export const useIsMounted = () => {
-  const isMounted = React.useRef(false)
+export type UseIsMountedProps = {
+  rerender?: boolean
+  delay?: number
+}
+
+export const useIsMounted = ({
+  rerender = false,
+  delay = 0,
+}: UseIsMountedProps = {}): [() => boolean, boolean] => {
+  const isMountedRef = React.useRef(false)
+  const [isMounted, setIsMounted] = React.useState(false)
 
   useSafeLayoutEffect(() => {
-    isMounted.current = true
+    isMountedRef.current = true
+
+    let timeoutId: any = null
+
+    if (rerender) {
+      if (delay > 0) {
+        timeoutId = setTimeout(() => setIsMounted(true), delay)
+      } else {
+        setIsMounted(true)
+      }
+    }
 
     return () => {
-      isMounted.current = false
-    }
-  }, [])
+      isMountedRef.current = false
 
-  return isMounted
+      if (rerender) setIsMounted(false)
+
+      if (timeoutId) clearTimeout(timeoutId)
+    }
+  }, [delay, rerender])
+
+  return [React.useCallback(() => isMountedRef.current, []), isMounted]
 }
+
+export type UseIsMountedReturn = ReturnType<typeof useIsMounted>
 
 export const getValidChildren = (
   children: React.ReactNode,
@@ -116,8 +135,8 @@ export const findChildren = (
         types.some((type) => a.type === type)
           ? -1
           : types.some((type) => b.type === type)
-          ? 1
-          : 0,
+            ? 1
+            : 0,
       )
     : [undefined, ...children]) as [
     React.ReactElement | undefined,
@@ -214,6 +233,11 @@ export const useCallbackRef = <T extends (...args: any[]) => any>(
   )
 }
 
+/**
+ * `useUpdateEffect` is a custom hook that skips side effects on the initial render, and only runs them when the dependency array changes.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-update-effect
+ */
 export const useUpdateEffect = (
   callback: React.EffectCallback,
   deps: React.DependencyList,
@@ -242,6 +266,11 @@ export const useUpdateEffect = (
 
 export type FunctionReturningPromise = (...args: any[]) => Promise<any>
 
+/**
+ * `useAsync` is a custom hook that executes an asynchronous function and tracks its state.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-async
+ */
 export const useAsync = <T extends FunctionReturningPromise>(
   func: T,
   deps: React.DependencyList = [],
@@ -294,7 +323,7 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
   initialState: StateFromFunctionReturningPromise<T> = { loading: false },
 ): AsyncFnReturn<T> => {
   const lastCallId = React.useRef(0)
-  const isMounted = useIsMounted()
+  const [isMounted] = useIsMounted()
   const [state, setState] =
     React.useState<StateFromFunctionReturningPromise<T>>(initialState)
 
@@ -307,13 +336,13 @@ export const useAsyncFunc = <T extends FunctionReturningPromise>(
 
       return func(...args).then(
         (value) => {
-          if (isMounted.current && callId === lastCallId.current)
+          if (isMounted() && callId === lastCallId.current)
             setState({ value, loading: false })
 
           return value
         },
         (error) => {
-          if (isMounted.current && callId === lastCallId.current)
+          if (isMounted() && callId === lastCallId.current)
             setState({ error, loading: false })
 
           return error
@@ -349,3 +378,5 @@ export const useAsyncRetry = <T,>(
 
   return { ...state, retry }
 }
+
+export const createId = (prefix: string) => `${prefix}-${new Date().getTime()}`

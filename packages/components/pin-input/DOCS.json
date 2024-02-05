@@ -1,23 +1,17 @@
 {
   "PinInput": {
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is invalid."
     },
-    "items": {
-      "type": "number",
-      "defaultValue": "4",
-      "required": false,
-      "description": "The number of inputs to display."
-    },
     "focusBorderColor": {
-      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the input is focused."
     },
@@ -45,6 +39,12 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
+    "items": {
+      "type": "number",
+      "defaultValue": "4",
+      "required": false,
+      "description": "The number of inputs to display."
+    },
     "manageFocus": {
       "type": "boolean",
       "defaultValue": true,
@@ -70,6 +70,12 @@
       "type": "boolean",
       "required": false,
       "description": "If `true`, the pin input component signals to its fields that they should."
+    },
+    "placeholder": {
+      "type": "string",
+      "defaultValue": "'○'",
+      "required": false,
+      "description": "The placeholder for the pin input."
     },
     "size": {
       "defaultValue": "md",

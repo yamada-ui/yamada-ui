@@ -1,7 +1,13 @@
 {
   "FileButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "errorBorderColor": {
-      "type": "\"link\" | \"border\" | BorderTopColor | \"current\" | \"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 116 more ... | ColorModeArray<...>",
+      "type": "\"link\" | \"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
       "required": false,
       "description": "The border color when the button is invalid."
     },
@@ -63,7 +69,7 @@
       "description": "The text to display when the button is loading."
     },
     "onChange": {
-      "type": "(files: File[] | null) => void",
+      "type": "(files: File[] | undefined) => void",
       "required": false,
       "description": "Function to be called when a file change event occurs."
     },

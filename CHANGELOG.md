@@ -2,9 +2,83 @@
 
 ## Latest Release
 
-### November 26, 2023: [v0.8.32](/.changelog/v0.8.32.mdx)
+### February 5, 2024: [v1.2.4](/.changelog/v1.2.4.mdx)
 
 ## Previous Releases
+
+### February 1, 2024: [v1.2.3](/.changelog/v1.2.3.mdx)
+
+### January 25, 2024: [v1.2.2](/.changelog/v1.2.2.mdx)
+
+### January 19, 2024: [v1.2.1](/.changelog/v1.2.1.mdx)
+
+### January 19, 2024: [v1.2.0](/.changelog/v1.2.0.mdx)
+
+### January 17, 2024: [v1.1.10](/.changelog/v1.1.10.mdx)
+
+### January 16, 2024: [v1.1.9](/.changelog/v1.1.9.mdx)
+
+### January 16, 2024: [v1.1.8](/.changelog/v1.1.8.mdx)
+
+### January 14, 2024: [v1.1.7](/.changelog/v1.1.7.mdx)
+
+### January 14, 2024: [v1.1.6](/.changelog/v1.1.6.mdx)
+
+### January 11, 2024: [v1.1.5](/.changelog/v1.1.5.mdx)
+
+### January 4, 2024: [v1.1.4](/.changelog/v1.1.4.mdx)
+
+### January 4, 2024: [v1.1.3](/.changelog/v1.1.3.mdx)
+
+### January 3, 2024: [v1.1.2](/.changelog/v1.1.2.mdx)
+
+### December 31, 2023: [v1.1.1](/.changelog/v1.1.1.mdx)
+
+### December 31, 2023: [v1.1.0](/.changelog/v1.1.0.mdx)
+
+### December 29, 2023: [v1.0.5](/.changelog/v1.0.5.mdx)
+
+### December 28, 2023: [v1.0.4](/.changelog/v1.0.4.mdx)
+
+### December 27, 2023: [v1.0.3](/.changelog/v1.0.3.mdx)
+
+### December 26, 2023: [v1.0.2](/.changelog/v1.0.2.mdx)
+
+### December 25, 2023: [v1.0.1](/.changelog/v1.0.1.mdx)
+
+### December 24, 2023: [v1.0.0](/.changelog/v1.0.0.mdx)
+
+### December 24, 2023: [v0.9.10](/.changelog/v0.9.10.mdx)
+
+### December 24, 2023: [v0.9.9](/.changelog/v0.9.9.mdx)
+
+### December 20, 2023: [v0.9.8](/.changelog/v0.9.8.mdx)
+
+### December 19, 2023: [v0.9.7](/.changelog/v0.9.7.mdx)
+
+### December 18, 2023: [v0.9.6](/.changelog/v0.9.6.mdx)
+
+### December 18, 2023: [v0.9.5](/.changelog/v0.9.5.mdx)
+
+### December 15, 2023: [v0.9.4](/.changelog/v0.9.4.mdx)
+
+### December 14, 2023: [v0.9.3](/.changelog/v0.9.3.mdx)
+
+### December 11, 2023: [v0.9.2](/.changelog/v0.9.2.mdx)
+
+### December 9, 2023: [v0.9.1](/.changelog/v0.9.1.mdx)
+
+### December 8, 2023: [v0.9.0](/.changelog/v0.9.0.mdx)
+
+### December 7, 2023: [v0.8.36](/.changelog/v0.8.36.mdx)
+
+### December 5, 2023: [v0.8.35](/.changelog/v0.8.35.mdx)
+
+### November 30, 2023: [v0.8.34](/.changelog/v0.8.34.mdx)
+
+### November 28, 2023: [v0.8.33](/.changelog/v0.8.33.mdx)
+
+### November 26, 2023: [v0.8.32](/.changelog/v0.8.32.mdx)
 
 ### November 26, 2023: [v0.8.31](/.changelog/v0.8.31.mdx)
 

@@ -7,9 +7,10 @@ import {
 } from "@yamada-ui/core"
 import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
+import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx, useMergeRefs, merge, dataAttr } from "@yamada-ui/utils"
 import type { ElementType, FC, ReactElement } from "react"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
 type ButtonOptions = {
@@ -59,12 +60,23 @@ type ButtonOptions = {
    * @default 'start'
    */
   loadingPlacement?: "start" | "end"
+  /**
+   * If `true`, disable ripple effects when pressing a element.
+   *
+   * @default false
+   */
+  disableRipple?: boolean
 }
 
 export type ButtonProps = HTMLUIProps<"button"> &
   ThemeProps<"Button"> &
   ButtonOptions
 
+/**
+ * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/button
+ */
 export const Button = forwardRef<ButtonProps, "button">(
   ({ children, ...props }, customRef) => {
     const group = useButtonGroup()
@@ -84,12 +96,19 @@ export const Button = forwardRef<ButtonProps, "button">(
       loadingIcon,
       loadingText,
       loadingPlacement = "start",
+      disableRipple,
       __css,
       ...rest
     } = omitThemeProps(mergedProps)
 
+    const trulyDisabled = isDisabled || isLoading
+
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
     const ref = useMergeRefs(customRef, buttonRef)
+    const { onPointerDown, ...rippleProps } = useRipple({
+      ...rest,
+      isDisabled: disableRipple || trulyDisabled,
+    })
 
     const css: CSSUIObject = useMemo(() => {
       const _focus =
@@ -107,6 +126,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         position: "relative",
         whiteSpace: "nowrap",
         verticalAlign: "middle",
+        overflow: "hidden",
         outline: "none",
         ...styles,
         ...__css,
@@ -131,11 +151,12 @@ export const Button = forwardRef<ButtonProps, "button">(
         as={as}
         className={cx("ui-button", className)}
         type={type ?? defaultType}
-        disabled={isDisabled || isLoading}
+        disabled={trulyDisabled}
         data-active={dataAttr(isActive)}
         data__loading={dataAttr(isLoading)}
         __css={css}
         {...rest}
+        onPointerDown={onPointerDown}
       >
         {isLoading && loadingPlacement === "start" ? (
           <Loading className="ui-button__loading--start" {...loadingProps} />
@@ -154,6 +175,8 @@ export const Button = forwardRef<ButtonProps, "button">(
         {isLoading && loadingPlacement === "end" ? (
           <Loading className="ui-button__loading--end" {...loadingProps} />
         ) : null}
+
+        <Ripple isDisabled={disableRipple || trulyDisabled} {...rippleProps} />
       </ui.button>
     )
   },
@@ -218,13 +241,13 @@ const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
 }
 
 export const useButtonType = (value?: ElementType) => {
-  const [isButton, setIsButton] = useState(!value)
+  const isButton = useRef(!value)
 
   const ref = useCallback((node: HTMLElement | null) => {
-    if (node) setIsButton(node.tagName === "BUTTON")
+    if (node) isButton.current = node.tagName === "BUTTON"
   }, [])
 
-  const type = isButton ? "button" : undefined
+  const type = isButton.current ? "button" : undefined
 
   return { ref, type } as const
 }

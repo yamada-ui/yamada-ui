@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/list",
-  "version": "0.3.17",
+  "version": "1.0.10",
   "description": "Yamada UI list component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -66,6 +67,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

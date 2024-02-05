@@ -11,6 +11,7 @@ export const Image: UIComponent<"img", ImageProps> = ui(NextImage, {
     [
       "src",
       "alt",
+      "sizes",
       "width",
       "height",
       "fill",
@@ -22,5 +23,13 @@ export const Image: UIComponent<"img", ImageProps> = ui(NextImage, {
       "blurDataURL",
       "unoptimized",
       "onLoadingComplete",
+      "alt",
+      "crossOrigin",
+      "decoding",
+      "loading",
+      "referrerPolicy",
+      "sizes",
+      "src",
+      "useMap",
     ].includes(prop),
 })

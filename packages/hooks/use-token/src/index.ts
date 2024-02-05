@@ -6,12 +6,17 @@ import {
   isUndefined,
 } from "@yamada-ui/utils"
 
+/**
+ * `useToken` is a custom hook for retrieving tokens from the theme.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-token
+ */
 export const useToken = <
   Y extends string | number = string,
-  M extends keyof Omit<Theme, "components" | "colorSchemes"> = keyof Omit<
+  M extends keyof Omit<
     Theme,
-    "components" | "colorSchemes"
-  >,
+    "components" | "colorSchemes" | "themeSchemes"
+  > = keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">,
 >(
   name: M,
   path: Theme[M] | number | undefined,

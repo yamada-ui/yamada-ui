@@ -49,15 +49,15 @@ type FileInputOptions = {
   /**
    * The value of the file input.
    */
-  value?: File[] | null
+  value?: File[]
   /**
    * The initial value of the file input.
    */
-  defaultValue?: File[] | null
+  defaultValue?: File[]
   /**
    * Function to be called when a file change event occurs.
    */
-  onChange?: (files: File[] | null) => void
+  onChange?: (files: File[] | undefined) => void
   /**
    * The component that displays uploaded files.
    */
@@ -72,7 +72,7 @@ type FileInputOptions = {
    * @default ','
    */
   separator?: string
-  children?: (files: File[] | null) => ReactNode
+  children?: (files: File[] | undefined) => ReactNode
   /**
    * Ref to a reset function.
    */
@@ -89,6 +89,11 @@ export type FileInputProps = Omit<HTMLUIProps<"div">, "onChange" | "children"> &
 
 const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
+/**
+ * `FileInput` is a component used for users to select files.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/file-input
+ */
 export const FileInput = forwardRef<FileInputProps, "input">(
   ({ children, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("FileInput", props)
@@ -104,7 +109,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       defaultValue,
       component,
       format = defaultFormat,
-      noOfLines = 1,
+      lineClamp = 1,
       separator = ",",
       resetRef,
       ...rest
@@ -114,7 +119,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
 
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const [values, setValues] = useControllableState({
+    const [values, setValues] = useControllableState<File[] | undefined>({
       value,
       defaultValue,
       onChange: rest.onChange,
@@ -130,9 +135,9 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       (ev: ChangeEvent<HTMLInputElement>) => {
         let files = !isNull(ev.currentTarget.files)
           ? Array.from(ev.currentTarget.files)
-          : null
+          : undefined
 
-        if (!files?.length) files = null
+        if (!files?.length) files = undefined
 
         setValues(files)
       },
@@ -142,20 +147,20 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     const onReset = useCallback(() => {
       if (inputRef.current) inputRef.current.value = ""
 
-      setValues(null)
+      setValues(undefined)
     }, [setValues])
 
     assignRef(resetRef, onReset)
 
     const cloneChildren = useMemo(() => {
       if (!values?.length)
-        return <ui.span noOfLines={noOfLines}>{placeholder}</ui.span>
+        return <ui.span lineClamp={lineClamp}>{placeholder}</ui.span>
 
       if (children) return children(values)
 
       if (component) {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
               const el = component({ value, index })
 
@@ -171,7 +176,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
         )
       } else {
         return (
-          <ui.span noOfLines={noOfLines}>
+          <ui.span lineClamp={lineClamp}>
             {values.map((value, index) => {
               const isLast = values.length === index + 1
 
@@ -185,7 +190,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           </ui.span>
         )
       }
-    }, [children, format, noOfLines, placeholder, separator, component, values])
+    }, [children, format, lineClamp, placeholder, separator, component, values])
 
     const css: CSSUIObject = {
       display: "flex",
@@ -199,6 +204,8 @@ export const FileInput = forwardRef<FileInputProps, "input">(
         <ui.input
           ref={mergeRefs(inputRef, ref)}
           type="file"
+          aria-hidden
+          aria-readonly
           tabIndex={-1}
           id={id}
           name={name}
@@ -224,7 +231,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           ref={ref}
           className={cx("ui-file-input", className)}
           py={values?.length && component ? "0.125rem" : undefined}
-          {...omitObject(rest, ["onChange"])}
+          {...omitObject(rest, ["onChange", "aria-readonly"])}
           __css={css}
           tabIndex={0}
           data-placeholder={dataAttr(!values?.length)}

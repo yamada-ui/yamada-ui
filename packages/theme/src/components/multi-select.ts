@@ -1,8 +1,8 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
-import { mergeStyle } from "@yamada-ui/core"
+import { mergeMultiStyle } from "@yamada-ui/core"
 import { Select } from "./select"
 
-export const MultiSelect: ComponentMultiStyle = mergeStyle(Select, {
+export const MultiSelect: ComponentMultiStyle = mergeMultiStyle(Select, {
   baseStyle: {
     clearIcon: {
       transitionProperty: "common",
@@ -20,4 +20,4 @@ export const MultiSelect: ComponentMultiStyle = mergeStyle(Select, {
       },
     },
   },
-})
+})()

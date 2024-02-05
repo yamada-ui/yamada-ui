@@ -77,11 +77,16 @@ type AccordionOptions = {
   onChange?: (index: number | number[]) => void
 }
 
-export type AccordionProps = Omit<HTMLUIProps<"div">, "onChange"> &
+export type AccordionProps = Omit<HTMLUIProps<"ul">, "onChange"> &
   ThemeProps<"Accordion"> &
   AccordionOptions
 
-export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
+/**
+ * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
+ *
+ * @see Docs https://yamada-ui.com/components/disclosure/accordion
+ */
+export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Accordion", props)
   const {
     className,
@@ -142,7 +147,7 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
           styles,
         }}
       >
-        <ui.div
+        <ui.ul
           ref={ref}
           className={cx("ui-accordion", className)}
           __css={css}

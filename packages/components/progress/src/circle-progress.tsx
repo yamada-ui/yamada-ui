@@ -4,6 +4,7 @@ import { useAnimation } from "@yamada-ui/use-animation"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, valueToPercent } from "@yamada-ui/utils"
+import type { FC } from "react"
 
 type CircleProgressOptions = {
   /**
@@ -71,6 +72,11 @@ type CircleProgressOptions = {
 export type CircleProgressProps = Omit<HTMLUIProps<"div">, "color"> &
   CircleProgressOptions
 
+/**
+ * `CircleProgress` is a component that displays progress in a circular progress bar.
+ *
+ * @see Docs https://yamada-ui.com/components/feedback/circle-progress
+ */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   (
     {
@@ -165,7 +171,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
 
 type CircleProps = HTMLUIProps<"circle">
 
-const Circle = (rest: CircleProps) => (
+const Circle: FC<CircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />
 )
 
@@ -175,7 +181,7 @@ type ShapeProps = Omit<HTMLUIProps<"svg">, "speed"> &
     "children" | "size" | "isAnimation" | "speed"
   >
 
-const Shape = ({ size, isAnimation, speed, ...rest }: ShapeProps) => {
+const Shape: FC<ShapeProps> = ({ size, isAnimation, speed, ...rest }) => {
   const animation = useAnimation({
     keyframes: {
       "0%": {

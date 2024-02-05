@@ -54,6 +54,11 @@ export type SkeletonProps = HTMLUIProps<"div"> &
   ThemeProps<"Skeleton"> &
   SkeletonOptions
 
+/**
+ * `Skeleton` is a component that acts as a placeholder until content is loaded.
+ *
+ * @see Docs https://yamada-ui.com/components/feedback/skeleton
+ */
 export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Skeleton", props)
   let {
@@ -67,7 +72,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     children,
     ...rest
   } = omitThemeProps(mergedProps)
-  const isMounted = useIsMounted()
+  const [isMounted] = useIsMounted()
   const validChildren = getValidChildren(children)
   const prevIsLoaded = usePrevious(isLoaded)
   const computedStartColor = useValue(startColor)
@@ -123,7 +128,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   }
 
   if (isLoaded) {
-    const animation = !isMounted.current || prevIsLoaded ? "none" : fadeIn
+    const animation = !isMounted() || prevIsLoaded ? "none" : fadeIn
 
     return (
       <ui.div

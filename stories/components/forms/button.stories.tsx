@@ -33,6 +33,8 @@ export const solid: Story = () => {
 
       <Button colorScheme="secondary">Secondary</Button>
 
+      <Button colorScheme="success">Success</Button>
+
       <Button colorScheme="warning">Warning</Button>
 
       <Button colorScheme="danger">Danger</Button>
@@ -41,11 +43,7 @@ export const solid: Story = () => {
 
       <Button colorScheme="gray">Gray</Button>
 
-      <Button colorScheme="zinc">Zinc</Button>
-
       <Button colorScheme="neutral">Neutral</Button>
-
-      <Button colorScheme="stone">Stone</Button>
 
       <Button colorScheme="red">Red</Button>
 
@@ -95,6 +93,10 @@ export const outline: Story = () => {
         Secondary
       </Button>
 
+      <Button variant="outline" colorScheme="success">
+        Success
+      </Button>
+
       <Button variant="outline" colorScheme="warning">
         Warning
       </Button>
@@ -111,16 +113,8 @@ export const outline: Story = () => {
         Gray
       </Button>
 
-      <Button variant="outline" colorScheme="zinc">
-        Zinc
-      </Button>
-
       <Button variant="outline" colorScheme="neutral">
         Neutral
-      </Button>
-
-      <Button variant="outline" colorScheme="stone">
-        Stone
       </Button>
 
       <Button variant="outline" colorScheme="red">
@@ -205,6 +199,10 @@ export const ghost: Story = () => {
         Secondary
       </Button>
 
+      <Button variant="ghost" colorScheme="success">
+        Success
+      </Button>
+
       <Button variant="ghost" colorScheme="warning">
         Warning
       </Button>
@@ -221,16 +219,8 @@ export const ghost: Story = () => {
         Gray
       </Button>
 
-      <Button variant="ghost" colorScheme="zinc">
-        Zinc
-      </Button>
-
       <Button variant="ghost" colorScheme="neutral">
         Neutral
-      </Button>
-
-      <Button variant="ghost" colorScheme="stone">
-        Stone
       </Button>
 
       <Button variant="ghost" colorScheme="red">
@@ -417,20 +407,30 @@ export const withIcon: Story = () => {
 export const iconButton: Story = () => {
   return (
     <Wrap gap="md">
-      <IconButton colorScheme="primary" icon={<Icon icon={faPlus} />} />
+      <IconButton
+        colorScheme="primary"
+        icon={<Icon icon={faPlus} />}
+        aria-label="Plus"
+      />
 
-      <IconButton colorScheme="secondary" icon={<Icon icon={faMinus} />} />
+      <IconButton
+        colorScheme="secondary"
+        icon={<Icon icon={faMinus} />}
+        aria-label="Minus"
+      />
 
       <IconButton
         colorScheme="warning"
         size="lg"
         icon={<Icon icon={faSun} />}
+        aria-label="Light"
       />
 
       <IconButton
         colorScheme="danger"
         size="lg"
         icon={<Icon icon={faMoon} />}
+        aria-label="Dark"
       />
     </Wrap>
   )
@@ -490,7 +490,7 @@ export const buttonGroup: Story = () => {
     <>
       <ButtonGroup isAttached variant="outline">
         <Button>Button</Button>
-        <IconButton icon={<Icon icon={faPlus} />} />
+        <IconButton icon={<Icon icon={faPlus} />} aria-label="Add" />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">

@@ -1,3 +1,8 @@
+/**
+ * `Menu` is a component that displays a common dropdown menu.
+ *
+ * @see Docs https://yamada-ui.com/components/overlay/menu
+ */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { PopoverProps } from "@yamada-ui/popover"
@@ -80,7 +85,7 @@ export const Menu: FC<MenuProps> = (props) => {
     const id = setTimeout(() => {
       if (initialFocusRef) return
 
-      const first = descendants.enabledfirstValue()
+      const first = descendants.enabledFirstValue()
 
       if (first) setFocusedIndex(first.index)
     })
@@ -92,7 +97,7 @@ export const Menu: FC<MenuProps> = (props) => {
     const id = setTimeout(() => {
       if (initialFocusRef) return
 
-      const last = descendants.enabledlastValue()
+      const last = descendants.enabledLastValue()
 
       if (last) setFocusedIndex(last.index)
     })

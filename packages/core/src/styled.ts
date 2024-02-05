@@ -6,6 +6,7 @@ import {
   runIfFunc,
   assignAfter,
   filterUndefined,
+  interopDefault,
 } from "@yamada-ui/utils"
 import type { ComponentType } from "react"
 import { createElement, forwardRef } from "react"
@@ -19,10 +20,10 @@ import { shouldForwardProp } from "./components"
 import type { CSSUIProps, CSSUIObject } from "./css"
 import { css } from "./css"
 import { useColorMode } from "./providers"
-import { styles, pseudos } from "./styles"
+import { pseudos } from "./pseudos"
+import { styles } from "./styles"
 
-const emotionStyled = ((createStyled as any).default ??
-  createStyled) as typeof createStyled
+const emotionStyled = interopDefault(createStyled)
 
 const styleProps = { ...styles, ...pseudos }
 

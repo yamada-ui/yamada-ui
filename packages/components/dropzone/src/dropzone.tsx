@@ -26,7 +26,7 @@ import {
   cx,
   dataAttr,
   isArray,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import type { FC, ForwardedRef, PropsWithChildren } from "react"
 import { Fragment } from "react"
@@ -88,6 +88,11 @@ export type DropzoneProps = Omit<HTMLUIProps<"div">, "onDrop"> &
   FormControlOptions &
   Omit<ReactDropzoneOptions, "accept">
 
+/**
+ * `Dropzone` is a component used for uploading files via drag and drop.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/dropzone
+ */
 export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Dropzone", props)
   const {
@@ -123,7 +128,10 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
 
   const disabled = isLoading || rest.disabled || rest.readOnly
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const [formControlProps, containerProps] = splitObject(
+    rest,
+    formControlProperties,
+  )
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject, open } =
     useDropzone({
@@ -170,7 +178,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
       <ui.div
         className={cx("ui-dropzone", className)}
         __css={css}
-        {...rest}
+        {...containerProps}
         {...getRootProps()}
         data-accept={dataAttr(isDragAccept)}
         data-reject={dataAttr(isDragReject)}

@@ -1,6 +1,5 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
 import { createDescendant } from "@yamada-ui/use-descendant"
-import type { PropGetter } from "@yamada-ui/utils"
 import { createContext, mergeRefs } from "@yamada-ui/utils"
 import { useCallback } from "react"
 
@@ -60,7 +59,7 @@ export const useStepper = ({
     [index],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
       ...props,
@@ -92,7 +91,7 @@ export const useStep = () => {
 
   const status = getStepStatus(index)
 
-  const getStepProps: PropGetter = useCallback(
+  const getStepProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, register),

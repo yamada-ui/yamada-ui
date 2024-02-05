@@ -49,13 +49,13 @@ export const basic: Story = () => {
 
   return (
     <>
-      <NativeSelect placeholder="キャラクターを選択">
+      <NativeSelect placeholder="キャラクターを選択" aria-label="Native Select">
         <NativeOption value="孫悟空">孫悟空</NativeOption>
         <NativeOption value="ベジータ">ベジータ</NativeOption>
         <NativeOption value="フリーザ">フリーザ</NativeOption>
       </NativeSelect>
 
-      <NativeSelect placeholder="キャラクターを選択">
+      <NativeSelect placeholder="キャラクターを選択" aria-label="Native Select">
         <NativeOptionGroup label="地球人">
           <NativeOption value="孫悟空">孫悟空</NativeOption>
           <NativeOption value="孫悟飯">孫悟飯</NativeOption>
@@ -72,7 +72,11 @@ export const basic: Story = () => {
         </NativeOptionGroup>
       </NativeSelect>
 
-      <NativeSelect placeholder="キャラクターを選択" items={items} />
+      <NativeSelect
+        placeholder="キャラクターを選択"
+        items={items}
+        aria-label="Native Select"
+      />
     </>
   )
 }
@@ -80,10 +84,26 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <NativeSelect placeholder="extra small size" size="xs" />
-      <NativeSelect placeholder="small size" size="sm" />
-      <NativeSelect placeholder="medium size" size="md" />
-      <NativeSelect placeholder="large size" size="lg" />
+      <NativeSelect
+        placeholder="extra small size"
+        size="xs"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        placeholder="small size"
+        size="sm"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        placeholder="medium size"
+        size="md"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        placeholder="large size"
+        size="lg"
+        aria-label="Native Select"
+      />
     </>
   )
 }
@@ -91,10 +111,26 @@ export const withSize: Story = () => {
 export const withVariant: Story = () => {
   return (
     <>
-      <NativeSelect variant="outline" placeholder="outline" />
-      <NativeSelect variant="filled" placeholder="filled" />
-      <NativeSelect variant="flushed" placeholder="flushed" />
-      <NativeSelect variant="unstyled" placeholder="unstyled" />
+      <NativeSelect
+        variant="outline"
+        placeholder="outline"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        variant="filled"
+        placeholder="filled"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        variant="flushed"
+        placeholder="flushed"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        variant="unstyled"
+        placeholder="unstyled"
+        aria-label="Native Select"
+      />
     </>
   )
 }
@@ -102,15 +138,20 @@ export const withVariant: Story = () => {
 export const withBorderColor: Story = () => {
   return (
     <>
-      <NativeSelect placeholder="default border color" />
+      <NativeSelect
+        placeholder="default border color"
+        aria-label="Native Select"
+      />
       <NativeSelect
         focusBorderColor="green.500"
         placeholder="custom border color"
+        aria-label="Native Select"
       />
       <NativeSelect
         isInvalid
         errorBorderColor="orange.500"
         placeholder="custom border color"
+        aria-label="Native Select"
       />
     </>
   )
@@ -118,7 +159,11 @@ export const withBorderColor: Story = () => {
 
 export const disabledPlaceholderInOptions: Story = () => {
   return (
-    <NativeSelect placeholder="キャラクターを選択" placeholderInOptions={false}>
+    <NativeSelect
+      placeholder="キャラクターを選択"
+      placeholderInOptions={false}
+      aria-label="Native Select"
+    >
       <NativeOption value="孫悟空">孫悟空</NativeOption>
       <NativeOption value="ベジータ">ベジータ</NativeOption>
       <NativeOption value="フリーザ">フリーザ</NativeOption>
@@ -129,10 +174,30 @@ export const disabledPlaceholderInOptions: Story = () => {
 export const isDisabled: Story = () => {
   return (
     <>
-      <NativeSelect isDisabled variant="outline" placeholder="outline" />
-      <NativeSelect isDisabled variant="filled" placeholder="filled" />
-      <NativeSelect isDisabled variant="flushed" placeholder="flushed" />
-      <NativeSelect isDisabled variant="unstyled" placeholder="unstyled" />
+      <NativeSelect
+        isDisabled
+        variant="outline"
+        placeholder="outline"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isDisabled
+        variant="filled"
+        placeholder="filled"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isDisabled
+        variant="flushed"
+        placeholder="flushed"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isDisabled
+        variant="unstyled"
+        placeholder="unstyled"
+        aria-label="Native Select"
+      />
 
       <FormControl
         isDisabled
@@ -147,10 +212,30 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <NativeSelect isReadOnly variant="outline" placeholder="outline" />
-      <NativeSelect isReadOnly variant="filled" placeholder="filled" />
-      <NativeSelect isReadOnly variant="flushed" placeholder="flushed" />
-      <NativeSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+      <NativeSelect
+        isReadOnly
+        variant="outline"
+        placeholder="outline"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isReadOnly
+        variant="filled"
+        placeholder="filled"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isReadOnly
+        variant="flushed"
+        placeholder="flushed"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isReadOnly
+        variant="unstyled"
+        placeholder="unstyled"
+        aria-label="Native Select"
+      />
 
       <FormControl
         isReadOnly
@@ -165,10 +250,30 @@ export const isReadonly: Story = () => {
 export const isInvalid: Story = () => {
   return (
     <>
-      <NativeSelect isInvalid variant="outline" placeholder="outline" />
-      <NativeSelect isInvalid variant="filled" placeholder="filled" />
-      <NativeSelect isInvalid variant="flushed" placeholder="flushed" />
-      <NativeSelect isInvalid variant="unstyled" placeholder="unstyled" />
+      <NativeSelect
+        isInvalid
+        variant="outline"
+        placeholder="outline"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isInvalid
+        variant="filled"
+        placeholder="filled"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isInvalid
+        variant="flushed"
+        placeholder="flushed"
+        aria-label="Native Select"
+      />
+      <NativeSelect
+        isInvalid
+        variant="unstyled"
+        placeholder="unstyled"
+        aria-label="Native Select"
+      />
 
       <FormControl
         isInvalid
@@ -186,6 +291,7 @@ export const customIcon: Story = () => {
     <>
       <NativeSelect
         placeholder="キャラクターを選択"
+        aria-label="Native Select"
         iconProps={{ color: "primary" }}
       >
         <NativeOption value="孫悟空">孫悟空</NativeOption>
@@ -195,6 +301,7 @@ export const customIcon: Story = () => {
 
       <NativeSelect
         placeholder="キャラクターを選択"
+        aria-label="Native Select"
         iconProps={{ children: <Icon icon={faCaretDown} /> }}
       >
         <NativeOption value="孫悟空">孫悟空</NativeOption>
@@ -211,6 +318,7 @@ export const customControl: Story = () => {
   return (
     <NativeSelect
       placeholder="キャラクターを選択"
+      aria-label="Native Select"
       value={value}
       onChange={(e) => setValue(e.target.value)}
     >

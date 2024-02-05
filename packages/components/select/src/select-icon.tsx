@@ -73,6 +73,7 @@ export const SelectClearIcon: FC<SelectClearIconProps> = ({
 
   return (
     <SelectIcon
+      aria-label="Clear value"
       className={cx("ui-select__clear-icon", className)}
       __css={styles.clearIcon}
       {...rest}

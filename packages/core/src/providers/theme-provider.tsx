@@ -48,11 +48,16 @@ type ThemeProviderOptions = {
    * Manager to persist a user's theme scheme preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `cookieStorageManager`.
+   * For SSR, choose `themeSchemeManager.ssr`.
    *
-   * @default 'localStorageManager'
+   * @default 'themeSchemeManager.localStorage'
    */
   themeSchemeManager?: ThemeSchemeManager
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  storageKey?: string
 }
 
 export type ThemeProviderProps = Omit<EmotionThemeProviderProps, "theme"> &
@@ -62,10 +67,11 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme: initialTheme = {},
   config,
   themeSchemeManager = localStorage,
+  storageKey,
   children,
 }) => {
   const [themeScheme, setThemeScheme] = useState<UITheme["themeSchemes"]>(
-    themeSchemeManager.get(config?.initialThemeScheme),
+    themeSchemeManager.get(config?.initialThemeScheme)(storageKey),
   )
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
@@ -80,9 +86,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
       setThemeScheme(themeScheme)
 
-      themeSchemeManager.set(themeScheme)
+      themeSchemeManager.set(themeScheme)(storageKey)
     },
-    [config, themeSchemeManager],
+    [config, themeSchemeManager, storageKey],
   )
 
   const theme = useMemo(
@@ -91,10 +97,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   )
 
   useEffect(() => {
-    const managerValue = themeSchemeManager.get()
+    const managerValue = themeSchemeManager.get()(storageKey)
 
     if (managerValue) changeThemeScheme(managerValue)
-  }, [changeThemeScheme, themeSchemeManager])
+  }, [changeThemeScheme, themeSchemeManager, storageKey])
 
   return (
     <EmotionThemeProvider theme={{ themeScheme, changeThemeScheme, ...theme }}>
@@ -166,6 +172,11 @@ export const GlobalStyle: FC = () => {
   )
 }
 
+/**
+ * `useTheme` is a custom hook that returns a function for retrieving and switching themes.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-theme
+ */
 export const useTheme = <T extends object = Dict>() => {
   const { themeScheme, changeThemeScheme, ...internalTheme } = useContext(
     ThemeContext,

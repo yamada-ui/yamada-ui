@@ -16,12 +16,12 @@ import {
   PopoverBody,
   Portal,
   VStack,
-  Card,
-  CardBody,
   Button,
+  Flex,
 } from "@yamada-ui/react"
 import { useRef, useState } from "react"
 import "dayjs/locale/ja"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Calendar>
 
@@ -50,7 +50,7 @@ export const withSize: Story = () => {
   )
 }
 
-export const withVarint: Story = () => {
+export const withVariant: Story = () => {
   return (
     <>
       <Calendar
@@ -80,373 +80,25 @@ export const withColorScheme: Story = () => {
       <Heading size="xl">Solid</Heading>
 
       <Wrap gap="md">
-        <Calendar
-          variant="solid"
-          colorScheme="primary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
+        {colorSchemes.map((colorScheme) => (
+          <Calendar
+            key={colorScheme}
+            variant="solid"
+            colorScheme={colorScheme}
+            today
+            defaultValue={new Date(new Date().setDate(1))}
+          />
+        ))}
 
-        <Calendar
-          variant="solid"
-          colorScheme="secondary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="warning"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="danger"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="link"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="gray"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="zinc"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="neutral"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="stone"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="red"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="rose"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="pink"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="orange"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="amber"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="yellow"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="lime"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="green"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="emerald"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="teal"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="cyan"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="sky"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="blue"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="indigo"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="violet"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="purple"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="fuchsia"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-      </Wrap>
-
-      <Heading size="xl">Subtle</Heading>
-
-      <Wrap gap="md">
-        <Calendar
-          variant="solid"
-          colorScheme="primary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="secondary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="warning"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="danger"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="link"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="gray"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="zinc"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="neutral"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="stone"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="red"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="rose"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="pink"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="orange"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="amber"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="solid"
-          colorScheme="yellow"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="lime"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="green"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="emerald"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="teal"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="cyan"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="sky"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="blue"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="indigo"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="violet"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="purple"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <Calendar
-          variant="subtle"
-          colorScheme="fuchsia"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
+        {colorSchemes.map((colorScheme) => (
+          <Calendar
+            key={colorScheme}
+            variant="subtle"
+            colorScheme={colorScheme}
+            today
+            defaultValue={new Date(new Date().setDate(1))}
+          />
+        ))}
       </Wrap>
     </>
   )
@@ -606,8 +258,8 @@ export const withPaginateBy: Story = () => {
   return <Calendar amountOfMonths={3} disableOutsideDays paginateBy={1} />
 }
 
-export const withMaxSelectedValues: Story = () => {
-  return <Calendar defaultValue={[]} maxSelectedValues={3} />
+export const hiddenOutsideDays: Story = () => {
+  return <Calendar hiddenOutsideDays />
 }
 
 export const disabledOutsideDays: Story = () => {
@@ -631,7 +283,29 @@ export const disabledWeekdays: Story = () => {
 }
 
 export const useMultiValue: Story = () => {
-  return <Calendar defaultValue={[]} />
+  return (
+    <>
+      <Calendar enableMultiple />
+      <Calendar defaultValue={[]} />
+      <Calendar enableMultiple maxSelectValues={3} />
+      <Calendar enableMultiple amountOfMonths={3} />
+    </>
+  )
+}
+
+export const useRangeValue: Story = () => {
+  return (
+    <>
+      <Calendar enableRange />
+      <Calendar enableRange maxSelectValues={3} />
+      <Calendar
+        enableRange
+        minDate={new Date(new Date().setDate(5))}
+        maxDate={new Date(new Date().setDate(25))}
+      />
+      <Calendar enableRange amountOfMonths={3} />
+    </>
+  )
 }
 
 export const useControl: Story = () => {
@@ -675,11 +349,19 @@ export const customControlMonth: Story = () => {
 
 export const customControlValue: Story = () => {
   const [value, onChange] = useState<Date>(new Date())
+  const [multiValue, onMultiChange] = useState<Date[]>([new Date()])
+  const [rangeValue, onRangeChange] = useState<[Date?, Date?]>([])
 
-  return <Calendar value={value} onChange={onChange} />
+  return (
+    <>
+      <Calendar value={value} onChange={onChange} />
+      <Calendar value={multiValue} onChange={onMultiChange} />
+      <Calendar enableRange value={rangeValue} onChange={onRangeChange} />
+    </>
+  )
 }
 
-export const constomLabelButton: Story = () => {
+export const customLabelButton: Story = () => {
   return (
     <>
       <Calendar labelProps={{ color: "gray.500" }} />
@@ -691,7 +373,7 @@ export const constomLabelButton: Story = () => {
   )
 }
 
-export const constomControlButton: Story = () => {
+export const customControlButton: Story = () => {
   return (
     <>
       <Calendar
@@ -705,7 +387,7 @@ export const constomControlButton: Story = () => {
   )
 }
 
-export const constomYearButton: Story = () => {
+export const customYearButton: Story = () => {
   return (
     <>
       <Calendar defaultType="year" yearProps={{ color: "gray.500" }} />
@@ -726,7 +408,7 @@ export const constomYearButton: Story = () => {
   )
 }
 
-export const constomMonthButton: Story = () => {
+export const customMonthButton: Story = () => {
   return (
     <>
       <Calendar defaultType="month" monthProps={{ color: "gray.500" }} />
@@ -747,7 +429,7 @@ export const constomMonthButton: Story = () => {
   )
 }
 
-export const constomWeekday: Story = () => {
+export const customWeekday: Story = () => {
   return (
     <>
       <Calendar locale="ja" weekdayProps={{ color: "orange.500" }} />
@@ -768,7 +450,7 @@ export const constomWeekday: Story = () => {
   )
 }
 
-export const constomDayButton: Story = () => {
+export const customDayButton: Story = () => {
   return (
     <>
       <Wrap gap="md">
@@ -790,10 +472,14 @@ export const constomDayButton: Story = () => {
 
         <Calendar
           dayProps={{
-            component: ({ col, row, date }) => (
+            component: ({ isSelected, col, row, date }) => (
               <Text
                 as="span"
-                color={col === 3 || row === 3 ? "blue.500" : undefined}
+                color={
+                  !isSelected && (col === 3 || row === 3)
+                    ? "blue.500"
+                    : undefined
+                }
               >
                 {date.getDate()}
               </Text>
@@ -835,14 +521,16 @@ export const constomDayButton: Story = () => {
                     </PopoverHeader>
                     <PopoverBody>
                       <VStack minW="sm" gap="sm">
-                        <Card
-                          variant="solid"
-                          colorScheme="secondary"
-                          size="sm"
+                        <Flex
+                          px="sm"
+                          bg="secondary"
+                          color="white"
+                          rounded="md"
+                          lineHeight="taller"
                           fontSize="sm"
                         >
-                          <CardBody>山田の誕生日</CardBody>
-                        </Card>
+                          <Text>山田の誕生日</Text>
+                        </Flex>
                       </VStack>
                     </PopoverBody>
                   </PopoverContent>
@@ -867,11 +555,15 @@ export const constomDayButton: Story = () => {
           td: { border: "1px solid", borderColor: "border" },
         }}
         dayProps={{
+          variant: "ghost",
           h: "auto",
           p: 2,
-          _selected: undefined,
-          _hover: undefined,
-          _active: undefined,
+          _selected: {},
+          _hover: {},
+          _active: {},
+          _ripple: {
+            display: "none",
+          },
           transitionProperty: "none",
           component: ({ date, isSelected }) => (
             <VStack alignItems="center">
@@ -888,16 +580,16 @@ export const constomDayButton: Story = () => {
               </Center>
 
               <VStack gap="sm">
-                <Card
-                  variant="solid"
-                  colorScheme="secondary"
-                  size="sm"
+                <Flex
+                  px="sm"
+                  bg="secondary"
+                  color="white"
+                  rounded="md"
+                  lineHeight="taller"
                   fontSize="sm"
                 >
-                  <CardBody>
-                    <Text>山田の誕生日</Text>
-                  </CardBody>
-                </Card>
+                  <Text>山田の誕生日</Text>
+                </Flex>
               </VStack>
             </VStack>
           ),

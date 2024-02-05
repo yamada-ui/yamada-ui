@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
 </p>
 
 <p align="center">
@@ -12,7 +12,7 @@
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
   <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
-  <a href="https://discord.gg/ubYvRAxFEB">
+  <a href="https://discord.gg/H7V5RfEDTR">
     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
   </a>
 </p>
@@ -23,14 +23,16 @@
 
 Yamada UIは、最先端のWebアプリケーションやウェブサイトの開発を効率化するReactのUIコンポーネントライブラリです。このライブラリは、他のReact UIコンポーネントライブラリでは提供されていない、カラーモードやアニメーションなどの様々な機能を提供しています。現代の複雑なユーザーインターフェースを構築するために、簡単に組み合わせることができるさまざまなコンポーネントを提供します。
 
-## Contents
+## コンテンツ
 
 - [リスペクト](#リスペクト)
-- [ドキュメント](#ドキュメント)
+- [ドキュメント](https://yamada-ui.com/ja)
 - [特徴](#特徴)
 - [インストール](#インストール)
 - [使い方](#使い方)
 - [CodeSandbox](#codesandbox)
+- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [サポートする](#サポートする)
 - [貢献する](#貢献する)
 - [ライセンス](#ライセンス)
 
@@ -40,7 +42,7 @@ Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[MUI](https
 
 ## ドキュメント
 
-現在、ドキュメントは[Storybook](https://hirotomoyamada.github.io/yamada-ui/)のみです。しかし、Storybookには全てのコンポーネントの各使い方を詳しく記載しています。
+最新のバージョンのWebサイトは、https://yamada-ui.com です。
 
 ## 特徴
 
@@ -123,10 +125,20 @@ const Example = () => {
 
 ## CodeSandbox
 
-- [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
-- [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
-- [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
-- [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
+- [JavaScript](https://codesandbox.io/p/devbox/yamada-ui-javascript-1m1on8)
+- [TypeScript](https://codesandbox.io/p/devbox/yamada-ui-typescript-7xqli9)
+- [Next.js - Pages](https://codesandbox.io/p/devbox/yamada-ui-next-js-pages-6d13de)
+- [Next.js - App](https://codesandbox.io/p/devbox/yamada-ui-next-js-app-3911zu)
+
+## サポートする
+
+ぜひ、このプロジェクトをサポートしてください！ あなたのアイコンや組織のロゴがWebサイトのリンクとともに、こちらに表示されます。ご支援のほど、宜しくお願いいたします。 [[貢献する](https://opencollective.com/yamada-ui/contribute)]
+
+### 組織
+
+### 個人
+
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
 
 ## 貢献する
 

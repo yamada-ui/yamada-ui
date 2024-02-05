@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/slider",
-  "version": "0.4.14",
+  "version": "1.0.14",
   "description": "Yamada UI slider components",
   "keywords": [
     "yamada",
@@ -27,6 +27,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -71,6 +72,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

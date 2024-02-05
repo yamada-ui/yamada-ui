@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
 </p>
 
 <p align="center">
@@ -12,7 +12,7 @@
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
   <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
-  <a href="https://discord.gg/ubYvRAxFEB">
+  <a href="https://discord.gg/H7V5RfEDTR">
     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
   </a>
 </p>
@@ -26,11 +26,13 @@ Yamada UI is a React UI component library that streamlines the development of cu
 ## Contents
 
 - [Respect](#respect)
-- [Documentation](#documentation)
+- [Documentation](https://yamada-ui.com)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [CodeSandbox](#codesandbox)
+- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [Support](#support)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -40,7 +42,7 @@ Yamada UI has drawn a lot of inspiration from [Chakra UI](https://github.com/cha
 
 ## Documentation
 
-Currently, the documentation is only available in [Storybook](https://hirotomoyamada.github.io/yamada-ui/). However, Storybook contains usage instructions for each prop of all the components.
+It's the https://yamada-ui.com website for the latest version of Yamada UI.
 
 ## Features
 
@@ -134,10 +136,20 @@ const Example = () => {
 
 ## CodeSandbox
 
-- [JavaScript](https://codesandbox.io/s/yamada-ui-javascript-1m1on8)
-- [TypeScript](https://codesandbox.io/s/yamada-ui-typescript-7xqli9)
-- [Next.js - Pages](https://codesandbox.io/p/sandbox/yamada-ui-next-js-pages-6d13de)
-- [Next.js - App](https://codesandbox.io/p/sandbox/yamada-ui-next-js-app-3911zu)
+- [JavaScript](https://codesandbox.io/p/devbox/yamada-ui-javascript-1m1on8)
+- [TypeScript](https://codesandbox.io/p/devbox/yamada-ui-typescript-7xqli9)
+- [Next.js - Pages](https://codesandbox.io/p/devbox/yamada-ui-next-js-pages-6d13de)
+- [Next.js - App](https://codesandbox.io/p/devbox/yamada-ui-next-js-app-3911zu)
+
+## Support
+
+Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
+
+### Organizations
+
+### Individuals
+
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
 
 ## Contributing
 

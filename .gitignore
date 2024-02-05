@@ -7,12 +7,15 @@ node_modules
 
 # compiled
 storybook-static
+coverage
 dist
+.docs
 
 # misc
 .DS_Store
 *.pem
 .vscode
+.idea
 
 # debug
 logs

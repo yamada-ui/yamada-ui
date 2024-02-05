@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/cli",
-  "version": "0.7.1",
+  "version": "1.0.1",
   "description": "Generate theme tokens for autocomplete",
   "keywords": [
     "theme",
@@ -23,6 +23,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -41,19 +42,21 @@
     "typecheck": " tsc --noEmit"
   },
   "dependencies": {
+    "@clack/prompts": "^0.7.0",
     "bundle-n-require": "^1.0.1",
     "chokidar": "^3.5.3",
     "cli-check-node": "^1.3.4",
     "cli-handle-unhandled": "^1.1.1",
     "cli-welcome": "^2.2.2",
-    "commander": "^11.0.0",
-    "prettier": "^3.0.1"
+    "color2k": "^2.0.3",
+    "commander": "^11.1.0",
+    "glob": "^10.3.10",
+    "prettier": "^3.1.1"
   },
   "devDependencies": {
-    "ora": "^7.0.1",
-    "update-notifier": "^6.0.2",
+    "@types/cli-welcome": "^2.2.2",
     "@types/update-notifier": "6.0.8",
-    "@types/cli-welcome": "^2.2.0",
-    "@types/prettier": "^3.0.0"
+    "chalk": "^5.3.0",
+    "update-notifier": "^7.0.0"
   }
 }

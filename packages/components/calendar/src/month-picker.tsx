@@ -6,17 +6,27 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverContent } from "@yamada-ui/popover"
+import type { PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
 import { cx } from "@yamada-ui/utils"
 import { Calendar } from "./calendar"
-import type { DatePickerFieldProps } from "./date-picker-field"
-import { DatePickerField } from "./date-picker-field"
-import type { DatePickerIconProps } from "./date-picker-icon"
-import { DatePickerClearIcon, DatePickerIcon } from "./date-picker-icon"
+import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
+import {
+  DatePickerField,
+  DatePickerClearIcon,
+  DatePickerIcon,
+} from "./date-picker"
 import { DatePickerProvider } from "./use-date-picker"
 import type { UseMonthPickerProps } from "./use-month-picker"
 import { useMonthPicker } from "./use-month-picker"
 
 type MonthPickerOptions = {
+  /**
+   * If `true`, display the month picker clear icon.
+   *
+   * @default true
+   */
+  isClearable?: boolean
   /**
    * The border color when the input is focused.
    */
@@ -41,16 +51,24 @@ type MonthPickerOptions = {
    * Props for month picker clear icon element.
    */
   clearIconProps?: DatePickerIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   *
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
-export type MonthPickerProps = Omit<
-  HTMLUIProps<"input">,
-  keyof UseMonthPickerProps
-> &
-  ThemeProps<"DatePicker"> &
+export type MonthPickerProps = ThemeProps<"DatePicker"> &
   MonthPickerOptions &
   UseMonthPickerProps
 
+/**
+ * `MonthPicker` is a component used for users to select a month.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/month-picker
+ */
 export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("MonthPicker", props)
   let {
@@ -65,6 +83,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     inputProps,
     iconProps,
     clearIconProps,
+    portalProps = { isDisabled: true },
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -119,15 +138,17 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
             )}
           </ui.div>
 
-          <PopoverContent
-            className="ui-month-picker__popover"
-            __css={{ ...styles.popover }}
-          >
-            <Calendar
-              className="ui-month-picker__calendar"
-              {...getCalendarProps()}
-            />
-          </PopoverContent>
+          <Portal {...portalProps}>
+            <PopoverContent
+              className="ui-month-picker__popover"
+              __css={{ ...styles.list }}
+            >
+              <Calendar
+                className="ui-month-picker__calendar"
+                {...getCalendarProps()}
+              />
+            </PopoverContent>
+          </Portal>
         </ui.div>
       </Popover>
     </DatePickerProvider>

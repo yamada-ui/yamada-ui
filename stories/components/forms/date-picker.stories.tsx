@@ -8,6 +8,7 @@ import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import "dayjs/locale/ja"
+import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof DatePicker>
 
@@ -60,373 +61,29 @@ export const withColorScheme: Story = () => {
       <Heading size="xl">Solid</Heading>
 
       <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="primary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="secondary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="warning"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="danger"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="link"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="gray"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="zinc"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="neutral"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="stone"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="red"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="rose"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="pink"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="orange"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="amber"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="yellow"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="lime"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="green"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="emerald"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="teal"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="cyan"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="sky"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="blue"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="indigo"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="violet"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="purple"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="solid"
-          calendarColorScheme="fuchsia"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
+        {colorSchemes.map((colorScheme) => (
+          <DatePicker
+            key={colorScheme}
+            calendarVariant="solid"
+            calendarColorScheme={colorScheme}
+            today
+            defaultValue={new Date(new Date().setDate(1))}
+          />
+        ))}
       </Grid>
 
       <Heading size="xl">Subtle</Heading>
 
       <Grid w="full" templateColumns="repeat(3, 1fr)" gap="md">
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="primary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="secondary"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="warning"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="danger"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="link"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="gray"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="zinc"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="neutral"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="stone"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="red"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="rose"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="pink"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="orange"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="amber"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="yellow"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="lime"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="green"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="emerald"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="teal"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="cyan"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="sky"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="blue"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="indigo"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="violet"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="purple"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
-
-        <DatePicker
-          calendarVariant="subtle"
-          calendarColorScheme="fuchsia"
-          today
-          defaultValue={new Date(new Date().setDate(1))}
-        />
+        {colorSchemes.map((colorScheme) => (
+          <DatePicker
+            key={colorScheme}
+            calendarVariant="subtle"
+            calendarColorScheme={colorScheme}
+            today
+            defaultValue={new Date(new Date().setDate(1))}
+          />
+        ))}
       </Grid>
     </>
   )
@@ -778,6 +435,10 @@ export const disabledWeekdays: Story = () => {
   return <DatePicker placeholder="YYYY/MM/DD" withWeekdays={false} />
 }
 
+export const hiddenOutsideDays: Story = () => {
+  return <DatePicker placeholder="YYYY/MM/DD" hiddenOutsideDays />
+}
+
 export const customIcon: Story = () => {
   return (
     <>
@@ -816,7 +477,7 @@ export const customControlMonth: Story = () => {
 }
 
 export const customControlValue: Story = () => {
-  const [value, onChange] = useState<Date | null>(new Date())
+  const [value, onChange] = useState<Date | undefined>(new Date())
 
   return (
     <DatePicker placeholder="YYYY/MM/DD" value={value} onChange={onChange} />
@@ -824,7 +485,7 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { datePicker: Date | null }
+  type Data = { datePicker: Date | undefined }
 
   const {
     control,
@@ -862,7 +523,7 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { datePicker: Date | null }
+  type Data = { datePicker: Date | undefined }
 
   const defaultValues: Data = {
     datePicker: new Date(),

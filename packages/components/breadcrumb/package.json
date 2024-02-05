@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/breadcrumb",
-  "version": "0.3.19",
+  "version": "1.0.10",
   "description": "Yamada UI breadcrumb component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -65,6 +66,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

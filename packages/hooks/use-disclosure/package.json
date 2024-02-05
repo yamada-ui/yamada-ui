@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-disclosure",
-  "version": "0.4.3",
+  "version": "1.0.4",
   "description": "Yamada UI useDisclosure custom hook",
   "keywords": [
     "use-disclosure"
@@ -15,6 +15,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -52,6 +53,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

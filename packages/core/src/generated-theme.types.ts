@@ -11,6 +11,7 @@ export interface GeneratedTheme extends UITheme {
     | "black"
     | "white"
     | "border"
+    | "focus"
     | "whiteAlpha.50"
     | "whiteAlpha.100"
     | "whiteAlpha.200"
@@ -44,17 +45,6 @@ export interface GeneratedTheme extends UITheme {
     | "gray.800"
     | "gray.900"
     | "gray.950"
-    | "zinc.50"
-    | "zinc.100"
-    | "zinc.200"
-    | "zinc.300"
-    | "zinc.400"
-    | "zinc.500"
-    | "zinc.600"
-    | "zinc.700"
-    | "zinc.800"
-    | "zinc.900"
-    | "zinc.950"
     | "neutral.50"
     | "neutral.100"
     | "neutral.200"
@@ -66,17 +56,6 @@ export interface GeneratedTheme extends UITheme {
     | "neutral.800"
     | "neutral.900"
     | "neutral.950"
-    | "stone.50"
-    | "stone.100"
-    | "stone.200"
-    | "stone.300"
-    | "stone.400"
-    | "stone.500"
-    | "stone.600"
-    | "stone.700"
-    | "stone.800"
-    | "stone.900"
-    | "stone.950"
     | "red.50"
     | "red.100"
     | "red.200"
@@ -110,6 +89,17 @@ export interface GeneratedTheme extends UITheme {
     | "pink.800"
     | "pink.900"
     | "pink.950"
+    | "flashy.50"
+    | "flashy.100"
+    | "flashy.200"
+    | "flashy.300"
+    | "flashy.400"
+    | "flashy.500"
+    | "flashy.600"
+    | "flashy.700"
+    | "flashy.800"
+    | "flashy.900"
+    | "flashy.950"
     | "orange.50"
     | "orange.100"
     | "orange.200"
@@ -271,36 +261,113 @@ export interface GeneratedTheme extends UITheme {
     | "warning"
     | "danger"
     | "link"
+    | "danger.50"
+    | "danger.100"
+    | "danger.200"
+    | "danger.300"
+    | "danger.400"
+    | "danger.500"
+    | "danger.600"
+    | "danger.700"
+    | "danger.800"
+    | "danger.900"
+    | "danger.950"
+    | "warning.50"
+    | "warning.100"
+    | "warning.200"
+    | "warning.300"
+    | "warning.400"
+    | "warning.500"
+    | "warning.600"
+    | "warning.700"
+    | "warning.800"
+    | "warning.900"
+    | "warning.950"
+    | "success.50"
+    | "success.100"
+    | "success.200"
+    | "success.300"
+    | "success.400"
+    | "success.500"
+    | "success.600"
+    | "success.700"
+    | "success.800"
+    | "success.900"
+    | "success.950"
+    | "primary.50"
+    | "primary.100"
+    | "primary.200"
+    | "primary.300"
+    | "primary.400"
+    | "primary.500"
+    | "primary.600"
+    | "primary.700"
+    | "primary.800"
+    | "primary.900"
+    | "primary.950"
+    | "info.50"
+    | "info.100"
+    | "info.200"
+    | "info.300"
+    | "info.400"
+    | "info.500"
+    | "info.600"
+    | "info.700"
+    | "info.800"
+    | "info.900"
+    | "info.950"
+    | "link.50"
+    | "link.100"
+    | "link.200"
+    | "link.300"
+    | "link.400"
+    | "link.500"
+    | "link.600"
+    | "link.700"
+    | "link.800"
+    | "link.900"
+    | "link.950"
+    | "secondary.50"
+    | "secondary.100"
+    | "secondary.200"
+    | "secondary.300"
+    | "secondary.400"
+    | "secondary.500"
+    | "secondary.600"
+    | "secondary.700"
+    | "secondary.800"
+    | "secondary.900"
+    | "secondary.950"
     | (string & {})
   colorSchemes:
     | "whiteAlpha"
     | "blackAlpha"
     | "gray"
-    | "zinc"
     | "neutral"
-    | "stone"
     | "red"
     | "danger"
     | "rose"
     | "pink"
+    | "flashy"
     | "orange"
     | "warning"
     | "amber"
     | "yellow"
     | "lime"
     | "green"
-    | "emerald"
     | "success"
+    | "emerald"
     | "teal"
     | "cyan"
     | "sky"
-    | "link"
     | "blue"
     | "primary"
+    | "info"
+    | "link"
     | "indigo"
     | "violet"
-    | "purple"
     | "secondary"
+    | "purple"
     | "fuchsia"
     | (string & {})
   fonts: "heading" | "body" | "mono" | (string & {})
@@ -379,6 +446,7 @@ export interface GeneratedTheme extends UITheme {
     | "2xl"
     | "3xl"
     | "outline"
+    | "inline"
     | "inner"
     | "none"
     | "dark-sm"
@@ -567,10 +635,6 @@ export interface GeneratedTheme extends UITheme {
     | "beerus"
     | (string & {})
   components: {
-    Indicator: {
-      sizes: "sm" | "md" | "lg" | (string & {})
-      variants: "solid" | "subtle" | (string & {})
-    }
     Accordion: {
       sizes: string & {}
       variants: "basic" | "card" | "unstyled" | (string & {})
@@ -585,6 +649,10 @@ export interface GeneratedTheme extends UITheme {
         | "left-accent"
         | "top-accent"
         | (string & {})
+    }
+    AlphaSlider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
     }
     Autocomplete: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -633,6 +701,18 @@ export interface GeneratedTheme extends UITheme {
     CloseButton: {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
+    }
+    ColorPicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
+    ColorSelector: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
+    ColorSwatch: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: "basic" | "rounded" | (string & {})
     }
     DatePicker: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -683,6 +763,14 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
+    HueSlider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    Indicator: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: "solid" | "subtle" | (string & {})
+    }
     Input: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -721,6 +809,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
     }
+    MultiDatePicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
     MultiSelect: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -750,13 +842,29 @@ export interface GeneratedTheme extends UITheme {
       variants: string & {}
     }
     Radio: { sizes: "sm" | "md" | "lg" | (string & {}); variants: string & {} }
+    RangeDatePicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
     RangeSlider: {
       sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    Rating: {
+      sizes: "xs" | "sm" | "md" | "lg" | "xl" | (string & {})
       variants: string & {}
     }
     Reorder: {
       sizes: "sm" | "md" | "normal" | "lg" | (string & {})
       variants: "elevated" | "outline" | "unstyled" | (string & {})
+    }
+    Resizable: {
+      sizes: string & {}
+      variants: "border" | "spacer" | "unstyled" | (string & {})
+    }
+    SaturationSlider: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
     }
     SegmentedControl: {
       sizes: "sm" | "md" | "lg" | (string & {})

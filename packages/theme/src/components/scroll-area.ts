@@ -2,6 +2,10 @@ import type { ComponentStyle } from "@yamada-ui/core"
 
 export const ScrollArea: ComponentStyle = {
   baseStyle: {
+    outline: 0,
+    _focusVisible: {
+      boxShadow: "inline",
+    },
     _scrollbar: {
       w: "3",
       h: "3",

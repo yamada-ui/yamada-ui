@@ -1,12 +1,12 @@
 import type { Options } from "@emotion/cache"
 import createEmotionCache from "@emotion/cache"
+import { interopDefault } from "@yamada-ui/utils"
 import { useServerInsertedHTML } from "next/navigation"
 import { createElement, useMemo } from "react"
 
 export type UseEmotionCacheProps = Partial<Options>
 
-const createCache = ((createEmotionCache as any).default ??
-  createEmotionCache) as typeof createEmotionCache
+const createCache = interopDefault(createEmotionCache)
 
 export const useEmotionCache = (options?: UseEmotionCacheProps) => {
   const cache = useMemo(() => {
@@ -18,12 +18,14 @@ export const useEmotionCache = (options?: UseEmotionCacheProps) => {
   }, [options])
 
   useServerInsertedHTML(() => {
-    const { key, inserted } = cache
+    const { key, inserted, nonce } = cache
+    const __html = Object.values(inserted).join(" ")
 
     const props = {
       key,
       "data-emotion": `${key} ${Object.keys(inserted).join(" ")}`,
-      dangerouslySetInnerHTML: { __html: Object.values(inserted).join(" ") },
+      nonce,
+      dangerouslySetInnerHTML: { __html },
     }
 
     return createElement("style", props)

@@ -1,13 +1,17 @@
-import type { HTMLUIProps, ThemeProps, ComponentArgs } from "@yamada-ui/core"
+import type {
+  HTMLUIProps,
+  ThemeProps,
+  ComponentArgs,
+  UIPropGetter,
+} from "@yamada-ui/core"
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
   useFormControlProps,
-  formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   useCallbackRef,
@@ -26,8 +30,8 @@ import type {
   KeyboardEvent,
   SyntheticEvent,
 } from "react"
-import { forwardRef, useCallback, useEffect, useState } from "react"
-import { useRadioGroupContenxt } from "./radio-group"
+import { forwardRef, useCallback, useEffect, useId, useState } from "react"
+import { useRadioGroupContext } from "./radio-group"
 
 export type UseRadioProps<Y extends string | number = string> =
   FormControlOptions & {
@@ -64,8 +68,13 @@ export type UseRadioProps<Y extends string | number = string> =
 export const useRadio = <Y extends string | number = string>(
   props: UseRadioProps<Y>,
 ) => {
-  const { id, name, value, required, disabled, readOnly, ...rest } =
+  const { name, value, required, disabled, readOnly, ...rest } =
     useFormControlProps(props)
+  const id = props.id || useId()
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -112,19 +121,19 @@ export const useRadio = <Y extends string | number = string>(
     [setActive],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref,
       "data-checked": dataAttr(checked),
     }),
-    [checked, rest],
+    [checked, formControlProps],
   )
 
-  const getIconProps: PropGetter = useCallback(
+  const getIconProps: UIPropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref,
       "data-active": dataAttr(isActive),
@@ -138,12 +147,12 @@ export const useRadio = <Y extends string | number = string>(
       onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
       onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
     }),
-    [checked, isActive, isFocused, isFocusVisible, isHovered, rest],
+    [checked, isActive, isFocused, isFocusVisible, isHovered, formControlProps],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref,
       id,
@@ -172,7 +181,7 @@ export const useRadio = <Y extends string | number = string>(
       onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
-      rest,
+      formControlProps,
       id,
       name,
       value,
@@ -188,9 +197,9 @@ export const useRadio = <Y extends string | number = string>(
     ],
   )
 
-  const getLabelProps: PropGetter = useCallback(
+  const getLabelProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       props,
       ref,
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
@@ -203,7 +212,7 @@ export const useRadio = <Y extends string | number = string>(
       }),
       "data-checked": dataAttr(checked),
     }),
-    [checked, rest],
+    [checked, formControlProps],
   )
 
   return {
@@ -235,12 +244,17 @@ export type RadioProps<Y extends string | number = string> = Omit<
   UseRadioProps<Y> &
   RadioOptions
 
+/**
+ * `Radio` is a component used for allowing users to select one option from multiple choices.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/radio
+ */
 export const Radio = forwardRef(
   <Y extends string | number = string>(
     props: RadioProps<Y>,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
-    const group = useRadioGroupContenxt()
+    const group = useRadioGroupContext()
     const control = useFormControl(props)
     const [styles, mergedProps] = useMultiComponentStyle("Radio", {
       ...group,

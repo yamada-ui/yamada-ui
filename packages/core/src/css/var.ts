@@ -1,6 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
-import { generateAnimation, generateGradient, pseudos } from "../styles"
+import { generateAnimation, generateGradient } from "../config"
+import { pseudos } from "../pseudos"
 import type { VarTokens } from "../theme"
 import type { CSSMap, StyledTheme } from "../theme.types"
 
@@ -53,7 +54,7 @@ export const createVars =
       const { variable, reference } = tokenToVar(token, prefix)
 
       let resolvedLightValue: string | number | undefined
-      let resplvedDarkValue: string | number | undefined
+      let resolvedDarkValue: string | number | undefined
 
       if (token.startsWith("animations.")) {
         if (isArray(value)) {
@@ -85,15 +86,15 @@ export const createVars =
           }
 
           if (darkParentVar) {
-            resplvedDarkValue = darkParentRef
+            resolvedDarkValue = darkParentRef
           } else {
-            resplvedDarkValue = generateGradient(darkValue, {
+            resolvedDarkValue = generateGradient(darkValue, {
               __cssMap: cssMap,
             } as StyledTheme)
           }
         } else {
           resolvedLightValue = lightValue
-          resplvedDarkValue = darkValue
+          resolvedDarkValue = darkValue
         }
       }
 
@@ -116,9 +117,9 @@ export const createVars =
 
         cssVars[variable] = resolvedLightValue
 
-        if (resplvedDarkValue)
+        if (resolvedDarkValue)
           cssVars = merge(cssVars, {
-            [pseudos._dark]: { [variable]: resplvedDarkValue },
+            [pseudos._dark]: { [variable]: resolvedDarkValue },
           })
 
         cssMap[token] = {
@@ -134,8 +135,8 @@ export const createVars =
 
       cssVars = merge(cssVars, { [variable]: parentRef })
 
-      if (resplvedDarkValue) {
-        const [, parentRef] = fetchParent(resplvedDarkValue)
+      if (resolvedDarkValue) {
+        const [, parentRef] = fetchParent(resolvedDarkValue)
 
         cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: parentRef } })
       }

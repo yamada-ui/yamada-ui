@@ -84,6 +84,11 @@ export const collapseProps = {
   variants,
 }
 
+/**
+ * `Collapse` is a component that allows you to expand or collapse an element for display.
+ *
+ * @see Docs https://yamada-ui.com/components/transitions/collapse
+ */
 export const Collapse = forwardRef<CollapseProps, "div">(
   (
     {

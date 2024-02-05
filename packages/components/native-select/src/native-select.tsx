@@ -4,7 +4,7 @@ import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
-  layoutStylesProperties,
+  layoutStyleProperties,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -91,10 +91,15 @@ type NativeSelectOptions = {
 }
 
 export type NativeSelectProps = Omit<HTMLUIProps<"select">, "size"> &
-  ThemeProps<"Select"> &
+  ThemeProps<"NativeSelect"> &
   NativeSelectOptions &
   FormControlOptions
 
+/**
+ * `NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent).
+ *
+ * @see Docs https://yamada-ui.com/components/forms/native-select
+ */
 export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("NativeSelect", props)
@@ -117,7 +122,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
     rest = useFormControlProps(rest)
 
     const formControlProps = pickObject(rest, formControlProperties)
-    const [layoutProps, selectProps] = splitObject(rest, layoutStylesProperties)
+    const [layoutProps, selectProps] = splitObject(rest, layoutStyleProperties)
 
     let computedChildren: ReactElement[] = []
 
@@ -168,7 +173,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
             ref={ref}
             className={cx("ui-select__field", className)}
             __css={{
-              paddingEnd: "2rem",
+              pe: "2rem",
               h: h ?? height,
               minH: minH ?? minHeight,
               ...styles.field,

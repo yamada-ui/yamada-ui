@@ -6,6 +6,8 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
+import { Portal } from "@yamada-ui/portal"
+import type { PortalProps } from "@yamada-ui/portal"
 import { cx } from "@yamada-ui/utils"
 import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteIcon } from "./autocomplete-icon"
@@ -46,15 +48,24 @@ type AutocompleteOptions = {
    * Props for autocomplete icon element.
    */
   iconProps?: AutocompleteIconProps
+  /**
+   * Props to be forwarded to the portal component.
+   *
+   * @default '{ isDisabled: true }'
+   *
+   */
+  portalProps?: Omit<PortalProps, "children">
 }
 
-export type AutocompleteProps = ThemeProps<"Select"> &
-  Omit<
-    UseAutocompleteProps<string>,
-    "maxSelectedValues" | "omitSelectedValues"
-  > &
+export type AutocompleteProps = ThemeProps<"Autocomplete"> &
+  Omit<UseAutocompleteProps<string>, "maxSelectValues" | "omitSelectedValues"> &
   AutocompleteOptions
 
+/**
+ * `Autocomplete` is a component used to display suggestions in response to user text input.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/autocomplete
+ */
 export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Autocomplete", props)
@@ -70,6 +81,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       listProps,
       inputProps,
       iconProps,
+      portalProps = { isDisabled: true },
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
@@ -130,19 +142,27 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
               </ui.div>
 
               {!isEmpty ? (
-                <AutocompleteList {...listProps}>
-                  {allowCreate ? <AutocompleteCreate /> : <AutocompleteEmpty />}
+                <Portal {...portalProps}>
+                  <AutocompleteList {...listProps}>
+                    {allowCreate ? (
+                      <AutocompleteCreate />
+                    ) : (
+                      <AutocompleteEmpty />
+                    )}
 
-                  {children ?? computedChildren}
-                </AutocompleteList>
+                    {children ?? computedChildren}
+                  </AutocompleteList>
+                </Portal>
               ) : (
-                <AutocompleteList {...listProps}>
-                  {allowCreate && inputValue ? (
-                    <AutocompleteCreate />
-                  ) : (
-                    <AutocompleteEmpty />
-                  )}
-                </AutocompleteList>
+                <Portal {...portalProps}>
+                  <AutocompleteList {...listProps}>
+                    {allowCreate && inputValue ? (
+                      <AutocompleteCreate />
+                    ) : (
+                      <AutocompleteEmpty />
+                    )}
+                  </AutocompleteList>
+                </Portal>
               )}
             </ui.div>
           </Popover>
@@ -162,7 +182,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
     const { getInputProps } = useAutocompleteInput()
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",

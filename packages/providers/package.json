@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/providers",
-  "version": "0.9.13",
+  "version": "1.0.16",
   "description": "Yamada UI providers",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -47,6 +48,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/loading": "workspace:*",
     "@yamada-ui/notice": "workspace:*"
   },
@@ -70,6 +72,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

@@ -1,8 +1,7 @@
-import type { ComponentStyle } from "@yamada-ui/core"
-import { transparentizeColor } from "@yamada-ui/utils"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Menu: ComponentStyle = {
-  baseStyle: ({ theme: t, colorMode: m }) => ({
+export const Menu: ComponentMultiStyle = {
+  baseStyle: {
     button: {
       transitionProperty: "common",
       transitionDuration: "normal",
@@ -13,32 +12,35 @@ export const Menu: ComponentStyle = {
       py: "2",
       bg: ["white", "black"],
       border: "1px solid",
-      borderColor: "inherit",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       color: "inherit",
-      boxShadow: ["sm", "dark-lg"],
+      boxShadow: ["lg", "dark-lg"],
       zIndex: "yamcha",
     },
     item: {
+      cursor: "pointer",
       py: "1.5",
       px: "3",
       transitionProperty: "background",
       transitionDuration: "ultra-fast",
       transitionTimingFunction: "ease-in",
       _focus: {
-        bg: [transparentizeColor(`gray.200`, 0.56)(t, m), "whiteAlpha.100"],
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
       },
       _hover: {
-        bg: ["gray.200", "whiteAlpha.50"],
+        bg: ["blackAlpha.100", "whiteAlpha.100"],
       },
       _active: {
-        bg: [transparentizeColor(`gray.300`, 0.64)(t, m), "whiteAlpha.200"],
+        bg: ["blackAlpha.200", "whiteAlpha.200"],
       },
       _disabled: {
         opacity: 0.4,
         cursor: "not-allowed",
       },
     },
-    icon: {},
+    icon: {
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+    },
     command: {
       opacity: 0.6,
     },
@@ -48,12 +50,12 @@ export const Menu: ComponentStyle = {
       borderColor: "inherit",
     },
     group: {},
-    groupTitle: {
+    groupLabel: {
       py: "1.5",
       px: "3",
       fontSize: "sm",
       fontWeight: "semibold",
-      color: ["blackAlpha.600", "whiteAlpha.600"],
+      color: ["blackAlpha.700", "whiteAlpha.600"],
     },
-  }),
+  },
 }

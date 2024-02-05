@@ -58,13 +58,22 @@ type AvatarOptions = {
    * Defining which referrer is sent when fetching the resource.
    */
   referrerPolicy?: HTMLAttributeReferrerPolicy
+  /**
+   * The `HTMLImageElement` property `alt`.
+   */
+  alt?: HTMLUIProps<"img">["alt"]
 }
 
 export type AvatarProps = HTMLUIProps<"span"> &
   ThemeProps<"Avatar"> &
   AvatarOptions &
-  Pick<UseImageProps, "onLoad" | "onError">
+  Pick<UseImageProps, "onLoad" | "onError" | "crossOrigin">
 
+/**
+ * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/avatar
+ */
 export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Avatar", props)
   const {
@@ -73,12 +82,15 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
     srcSet,
     name,
     loading,
+    alt,
     icon,
     ignoreFallback,
+    referrerPolicy,
     borderRadius = "full",
     rounded = "full",
     onError,
     onLoad,
+    crossOrigin,
     format,
     children,
     ...rest
@@ -111,16 +123,19 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
       >
         <AvatarImage
           src={src}
+          alt={alt}
           srcSet={srcSet}
           loading={loading}
           borderRadius={borderRadius}
           rounded={rounded}
           onLoad={handlerAll(onLoad, () => setIsLoaded(true))}
           onError={onError}
+          crossOrigin={crossOrigin}
           format={format}
           name={name}
           icon={icon}
           ignoreFallback={ignoreFallback}
+          referrerPolicy={referrerPolicy}
         />
         {children}
       </ui.span>
@@ -133,6 +148,7 @@ type AvatarImageProps = ImageProps &
 
 const AvatarImage: FC<AvatarImageProps> = ({
   src,
+  alt,
   srcSet,
   onError,
   onLoad,
@@ -170,7 +186,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
       className="ui-avatar__image"
       src={src}
       srcSet={srcSet}
-      alt={name}
+      alt={alt ?? name}
       loading={loading}
       referrerPolicy={referrerPolicy}
       borderRadius={borderRadius}

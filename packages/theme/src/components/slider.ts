@@ -1,4 +1,5 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { shadeColor, tintColor } from "@yamada-ui/utils"
 
 export const Slider: ComponentMultiStyle = {
   baseStyle: {
@@ -16,20 +17,20 @@ export const Slider: ComponentMultiStyle = {
     track: {
       overflow: "hidden",
       rounded: "sm",
-      bg: ["gray.200", "whiteAlpha.200"],
+      bg: "border",
       _disabled: {
-        bg: ["gray.300", "whiteAlpha.300"],
+        bg: ["blackAlpha.200", "whiteAlpha.400"],
       },
     },
     filledTrack: ({ colorScheme: c = "primary" }) => ({
       w: "inherit",
       h: "inherit",
-      bg: [`${c}.500`, `${c}.200`],
+      bg: [`${c}.500`, `${c}.400`],
     }),
     mark: {
       fontSize: "sm",
     },
-    thumb: ({ orientation: o }) => ({
+    thumb: ({ theme: t, colorMode: m, orientation: o }) => ({
       position: "absolute",
       zIndex: "yamcha",
       display: "flex",
@@ -47,7 +48,7 @@ export const Slider: ComponentMultiStyle = {
         boxShadow: "outline",
       },
       _disabled: {
-        bg: "gray.300",
+        bg: [tintColor("black", 72)(t, m), shadeColor("white", 64)],
       },
       ...(o === "vertical"
         ? {

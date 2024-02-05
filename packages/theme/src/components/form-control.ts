@@ -1,6 +1,6 @@
-import type { ComponentStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const FormControl: ComponentStyle = {
+export const FormControl: ComponentMultiStyle = {
   baseStyle: {
     container: {
       w: "100%",
@@ -20,16 +20,16 @@ export const FormControl: ComponentStyle = {
     },
     requiredIndicator: {
       ms: "1",
-      color: ["red.500", "red.300"],
+      color: ["danger.500", "danger.400"],
     },
     helperMessage: {
       mt: "2",
-      color: ["gray.600", "whiteAlpha.600"],
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "sm",
     },
     errorMessage: {
       mt: "2",
-      color: ["red.500", "red.300"],
+      color: ["danger.500", "danger.400"],
       fontSize: "sm",
     },
   },

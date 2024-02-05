@@ -1,7 +1,7 @@
 {
   "Popover": {
     "animation": {
-      "type": "\"top\" | \"right\" | \"bottom\" | \"left\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -65,7 +65,7 @@
       "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
     },
     "gutter": {
-      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | ResponsiveObject<number>\n  | ColorModeArray<number>",
+      "type": "UIValue<number>",
       "defaultValue": "8",
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
@@ -101,7 +101,8 @@
     "modifiers": {
       "type": "Partial<Modifier<string, any>>[]",
       "required": false,
-      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+      "description": "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass.",
+      "see": "https://popper.js.org/docs/v2/modifiers/"
     },
     "offset": {
       "type": "[number, number]",
@@ -125,7 +126,7 @@
       "description": "The number of delay time to open."
     },
     "placement": {
-      "type": "type ONLY_FOR_FORMAT =\n  | Placement\n  | ResponsiveObject<Placement>\n  | ColorModeArray<Placement>",
+      "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
       "required": false,
       "description": "The placement of the popper relative to its reference."
@@ -156,6 +157,12 @@
     }
   },
   "PopoverCloseButton": {
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, disable ripple effects when pressing a element."
+    },
     "isDisabled": {
       "type": "boolean",
       "defaultValue": false,
@@ -185,7 +192,7 @@
     "aria-colspan": { "type": "number", "required": false },
     "aria-controls": { "type": "string", "required": false },
     "aria-current": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"time\"\n  | \"true\"\n  | \"false\"\n  | \"page\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"time\"\n  | \"page\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
       "required": false
     },
     "aria-describedby": { "type": "string", "required": false },
@@ -252,6 +259,10 @@
     "aria-valuemin": { "type": "number", "required": false },
     "aria-valuenow": { "type": "number", "required": false },
     "aria-valuetext": { "type": "string", "required": false },
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | \"b\" | \"base\" | \"bdi\" | \"bdo\" | \"big\" | \"blockquote\" | \"body\" | \"br\" | \"button\" | \"canvas\" | ... 149 more ... | \"view\"",
+      "required": false
+    },
     "autoCapitalize": { "type": "string", "required": false },
     "autoCorrect": { "type": "string", "required": false },
     "autoFocus": { "type": "boolean", "required": false },
@@ -259,7 +270,7 @@
     "className": { "type": "string", "required": false },
     "content": { "type": "string", "required": false },
     "contentEditable": {
-      "type": "\"inherit\" | Booleanish",
+      "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
       "required": false
     },
     "contextMenu": { "type": "string", "required": false },
@@ -862,7 +873,6 @@
       "type": "WheelEventHandler<HTMLElement>",
       "required": false
     },
-    "placeholder": { "type": "string", "required": false },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },

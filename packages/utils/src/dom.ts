@@ -1,4 +1,5 @@
 import type React from "react"
+import { isNumber, isUndefined } from "."
 
 export const createdDom = (): boolean =>
   !!(
@@ -41,6 +42,7 @@ export const isHidden = (el: HTMLElement): boolean => {
 
 export const isDisabled = (el: HTMLElement): boolean =>
   Boolean(el.getAttribute("disabled")) === true ||
+  Boolean(el.getAttribute("data-disabled")) === true ||
   Boolean(el.getAttribute("aria-disabled")) === true
 
 const isVisible = (el: HTMLElement) => el.offsetWidth > 0 && el.offsetHeight > 0
@@ -59,6 +61,25 @@ export const isContains = (
   child: HTMLElement | null,
 ): boolean | undefined => {
   return parent === child || parent?.contains(child)
+}
+
+export const getPx = (value: string | number | undefined): number => {
+  if (isNumber(value)) return value
+
+  if (isUndefined(value)) return 0
+
+  if (value.includes("px")) return parseFloat(value)
+
+  const isBrowser = createdDom()
+  let fontSize = 16
+
+  if (isBrowser) {
+    const style = window.getComputedStyle(document.documentElement)
+
+    fontSize = parseFloat(style.fontSize)
+  }
+
+  return parseFloat(value) * fontSize
 }
 
 export const getEventRelatedTarget = (

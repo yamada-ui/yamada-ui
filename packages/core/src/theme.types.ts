@@ -1,6 +1,6 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
-import type { Variants } from "framer-motion"
+import type { MotionConfigProps, Variants } from "framer-motion"
 import type { FC, ReactNode } from "react"
 import type {
   UIStyle,
@@ -13,6 +13,8 @@ import type {
 } from "./css"
 import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
+
+export type BreakpointDirection = "up" | "down"
 
 export type LoadingVariant =
   | "oval"
@@ -94,6 +96,88 @@ export type NoticeConfigOptions = ThemeProps<"Alert"> & {
    * @default false
    */
   isClosable?: boolean
+  /**
+   * The custom style to use.
+   */
+  style?: CSSUIObject
+}
+
+export type SnackDirection = "top" | "bottom"
+
+export type SnackComponentProps = SnackConfigOptions & {
+  index: number
+  onClose: () => void
+}
+
+export type SnackConfigOptions = ThemeProps<"Alert"> & {
+  /**
+   * The direction of the snacks.
+   *
+   * @default 'top'
+   */
+  direction?: SnackDirection
+  /**
+   * If set the stack will start from the given index.
+   *
+   * @default 0
+   */
+  startIndex?: number
+  /**
+   * The number of `ms` the snack will continue to be displayed.
+   *
+   * If `null`, the snack will continue to display.
+   * Please use in conjunction with `isClosable`.
+   *
+   * @default null
+   */
+  duration?: number | null
+  /**
+   * The maximum value at which snack will be displayed.
+   *
+   * @default 3
+   */
+  limit?: number | null
+  /**
+   * The status of the snack.
+   *
+   * @default 'info'
+   */
+  status?: AlertStatus
+  /**
+   * The loading icon to use.
+   */
+  icon?: {
+    variant?: LoadingVariant
+    /**
+     * The CSS `color` property.
+     */
+    color?: CSSUIProps["color"]
+    children?: ReactNode
+  }
+  /**
+   * The title of the snack.
+   */
+  title?: ReactNode
+  /**
+   * The description of the snack.
+   */
+  description?: ReactNode
+  /**
+   * The custom snack component to use.
+   */
+  component?: (props: SnackComponentProps) => ReactNode
+  /**
+   * If `true`, allows the snack to be removed.
+   *
+   * @default true
+   */
+  isClosable?: boolean
+  /**
+   * The CSS `box-shadow` property.
+   *
+   * @default '["base", "dark-sm"]'
+   */
+  boxShadow?: CSSUIProps["boxShadow"]
   /**
    * The custom style to use.
    */
@@ -227,6 +311,15 @@ export type ThemeConfig = {
    */
   disableTransitionOnChange?: boolean
   /**
+   * The `breakpoint` direction controls the responsive design approach.
+   *
+   * - `up`: mobile-first using `min-width`.
+   * - `down`: desktop-first using `max-width`.
+   *
+   * @default "down"
+   */
+  breakpoint?: BreakpointDirection
+  /**
    * The config of the calendar or date picker etc.
    */
   date?: {
@@ -234,7 +327,7 @@ export type ThemeConfig = {
      * The locale of the calendar or date picker etc.
      * Check the docs to see the locale of possible modifiers you can pass.
      *
-     * @see Doc https://day.js.org/docs/en/i18n/instance-locale
+     * @see Docs https://day.js.org/docs/en/i18n/instance-locale
      * @default 'en'
      */
     locale?: string
@@ -271,7 +364,7 @@ export type ThemeConfig = {
      * The variants of the notice.
      * Check the docs to see the variants of possible modifiers you can pass.
      *
-     * @see Doc https://www.framer.com/motion/animation/#variants
+     * @see Docs https://www.framer.com/motion/animation/#variants
      */
     variants?: Variants
     /**
@@ -297,6 +390,40 @@ export type ThemeConfig = {
     containerRef?: PortalProps["containerRef"]
   }
   /**
+   * The config of the snacks.
+   */
+  snacks?: {
+    /**
+     * The options of the snack.
+     */
+    options?: SnackConfigOptions
+    /**
+     * The variants of the snack.
+     * Check the docs to see the variants of possible modifiers you can pass.
+     *
+     * @see Docs https://www.framer.com/motion/animation/#variants
+     */
+    variants?: Variants
+    /**
+     * The CSS `gap` property.
+     *
+     * @default 'md'
+     */
+    gap?: CSSUIProps["gap"]
+    /**
+     * A property that provides spacing between the top and bottom.
+     *
+     * @default "[0, 0]"
+     */
+    gutter?: [CSSUIProps["paddingTop"], CSSUIProps["paddingBottom"]]
+    /**
+     * If `true`, apply gutter value to negative margin
+     *
+     * @default true
+     */
+    negateMargin?: boolean
+  }
+  /**
    * The config of the loading.
    */
   loading?: {
@@ -316,6 +443,17 @@ export type ThemeConfig = {
      * The options of the custom loading.
      */
     custom?: LoadingConfigOptions
+  }
+  /**
+   * The config of the `framer-motion`.
+   */
+  motion?: {
+    /**
+     * Set configuration options for `framer-motion`.
+     *
+     * @see Docs https://www.framer.com/motion/motion-config/
+     */
+    config?: Omit<MotionConfigProps, "children">
   }
 }
 
@@ -396,7 +534,7 @@ export type UsageTheme = BaseTheme & {
   [key: string]: any
 }
 
-export type ComponentBaseStyle = UIStyle | Record<string, UIStyle>
+export type ComponentBaseStyle = UIStyle
 export type ComponentVariants = Record<string, UIStyle>
 export type ComponentSizes = Record<string, UIStyle>
 export type ComponentDefaultProps<

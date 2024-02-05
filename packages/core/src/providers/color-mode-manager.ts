@@ -6,30 +6,36 @@ const hasSupport = !!globalThis?.document
 export type ColorModeManager = {
   type: "cookie" | "localStorage"
   ssr?: boolean
-  get: (initColorMode?: ColorMode | "system") => ColorMode | "system"
-  set: (colorMode: ColorMode | "system") => void
+  get: (
+    initColorMode?: ColorMode | "system",
+  ) => (storageKey?: string) => ColorMode | "system"
+  set: (colorMode: ColorMode | "system") => (storageKey?: string) => void
 }
 
-const createLocalStorage = (storageKey: string): ColorModeManager => ({
+const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({
   ssr: false,
   type: "localStorage",
-  get: (initColorMode = "light") => {
-    if (!hasSupport) return initColorMode
+  get:
+    (initColorMode = "light") =>
+    (storageKey = defaultStorageKey) => {
+      if (!hasSupport) return initColorMode
 
-    try {
-      const colorMode = localStorage.getItem(storageKey) as ColorMode | null
+      try {
+        const colorMode = localStorage.getItem(storageKey) as ColorMode | null
 
-      return colorMode || initColorMode
-    } catch (e) {
-      return initColorMode
-    }
-  },
+        return colorMode || initColorMode
+      } catch (e) {
+        return initColorMode
+      }
+    },
 
-  set: (colorMode) => {
-    try {
-      localStorage.setItem(storageKey, colorMode)
-    } catch (e) {}
-  },
+  set:
+    (colorMode) =>
+    (storageKey = defaultStorageKey) => {
+      try {
+        localStorage.setItem(storageKey, colorMode)
+      } catch (e) {}
+    },
 })
 
 const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
@@ -39,31 +45,49 @@ const parseCookie = (cookie: string, key: string): ColorMode | undefined => {
 }
 
 const createCookieStorage = (
-  key: string,
+  defaultStorageKey: string,
   cookie?: string,
 ): ColorModeManager => ({
   ssr: !!cookie,
   type: "cookie",
-  get: (initColorMode = "light") => {
-    if (cookie) return parseCookie(cookie, key) || initColorMode
+  get:
+    (initColorMode = "light") =>
+    (storageKey = defaultStorageKey) => {
+      if (cookie) return parseCookie(cookie, storageKey) || initColorMode
 
-    if (!hasSupport) return initColorMode
+      if (!hasSupport) return initColorMode
 
-    return parseCookie(document.cookie, key) || initColorMode
-  },
+      return parseCookie(document.cookie, storageKey) || initColorMode
+    },
 
-  set: (colorMode) => {
-    document.cookie = `${key}=${colorMode}; max-age=31536000; path=/`
-  },
+  set:
+    (colorMode) =>
+    (storageKey = defaultStorageKey) => {
+      document.cookie = `${storageKey}=${colorMode}; max-age=31536000; path=/`
+    },
 })
 
-const cookieStorageSSR = (cookie: string) =>
-  createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie)
+export const createColorModeManager = (
+  type: "local" | "cookie" | "ssr" = "local",
+  cookie?: string,
+) => {
+  switch (type) {
+    case "cookie":
+    case "ssr":
+      return createCookieStorage(
+        COLOR_MODE_STORAGE_KEY,
+        typeof cookie === "string" ? cookie : undefined,
+      )
+
+    default:
+      return createLocalStorage(COLOR_MODE_STORAGE_KEY)
+  }
+}
 
 export const colorModeManager = {
   localStorage: createLocalStorage(COLOR_MODE_STORAGE_KEY),
   cookieStorage: createCookieStorage(COLOR_MODE_STORAGE_KEY),
+  ssr: (cookie: string) => createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie),
   createLocalStorage,
-  cookieStorageSSR,
   createCookieStorage,
 }

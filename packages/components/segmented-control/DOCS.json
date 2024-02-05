@@ -1,9 +1,14 @@
 {
   "SegmentedControl": {
     "colorScheme": {
-      "type": "\"primary\" | \"secondary\" | \"warning\" | \"danger\" | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"red\" | \"orange\" | \"yellow\" | \"green\" | \"teal\" | \"blue\" | \"cyan\" | \"purple\" | \"pink\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "defaultValue": {
+      "type": "string",
+      "required": false,
+      "description": "The initial value of the segmented control."
     },
     "isDisabled": {
       "type": "boolean",
@@ -16,6 +21,12 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the segmented control will be readonly."
+    },
+    "items": {
+      "type": "SegmentedControlItem[]",
+      "defaultValue": "'[]'",
+      "required": false,
+      "description": "If provided, generate segmented control buttons but based on items."
     },
     "name": {
       "type": "string",
@@ -47,7 +58,7 @@
   },
   "SegmentedControlButton": {
     "value": {
-      "type": "string | number",
+      "type": "string",
       "required": true,
       "description": "The value of the segmented control button."
     },
@@ -62,6 +73,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the segmented control will be readonly."
+    },
+    "motionProps": {
+      "type": "MotionProps",
+      "required": false,
+      "description": "Props for motion component."
     },
     "onChange": {
       "type": "ChangeEventHandler<HTMLInputElement>",

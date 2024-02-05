@@ -25,7 +25,7 @@ type InputOptions = {
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * The native HTML `size` attribute to be passed to the `input`
+   * The native HTML `size` attribute to be passed to the `input`.
    */
   htmlSize?: number
 }
@@ -38,13 +38,18 @@ export type InputProps = Omit<
   InputOptions &
   FormControlOptions
 
+/**
+ * `Input` is a component used to obtain text input from the user.
+ *
+ * @see Docs https://yamada-ui.com/components/forms/input
+ */
 export const Input = forwardRef<InputProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Input", props)
-  let { className, htmlSize, ...rest } = omitThemeProps(mergedProps)
+  let { className, htmlSize, __css, ...rest } = omitThemeProps(mergedProps)
 
   rest = useFormControlProps(rest)
 
-  const css: CSSUIObject = { ...styles.field }
+  const css: CSSUIObject = { ...styles.field, ...__css }
 
   return (
     <ui.input

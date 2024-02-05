@@ -10,6 +10,7 @@ import {
   GlobalStyle,
 } from "@yamada-ui/core"
 import { LoadingProvider } from "@yamada-ui/loading"
+import { MotionConfig } from "@yamada-ui/motion"
 import { NoticeProvider } from "@yamada-ui/notice"
 import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 import type { Dict } from "@yamada-ui/utils"
@@ -46,18 +47,18 @@ export type UIProviderProps = {
    * Manager to persist a user's color mode preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `cookieStorageManager`.
+   * For SSR, choose `colorModeManager.ssr`.
    *
-   * @default 'localStorageManager'
+   * @default 'colorModeManager.localStorage'
    */
   colorModeManager?: ColorModeManager
   /**
    * Manager to persist a user's theme scheme preference.
    *
    * Omit if you don't render server-side.
-   * For SSR, choose `cookieStorageManager`.
+   * For SSR, choose `themeSchemeManager.ssr`.
    *
-   * @default 'localStorageManager'
+   * @default 'themeSchemeManager.localStorage'
    */
   themeSchemeManager?: ThemeSchemeManager
   /**
@@ -77,15 +78,30 @@ export type UIProviderProps = {
    * Application content.
    */
   children: ReactNode
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  colorModeStorageKey?: string
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  themeSchemeStorageKey?: string
 }
 
+/**
+ * The global provider that must be added to make all Yamada UI components work correctly.
+ */
 export const UIProvider: FC<UIProviderProps> = ({
   theme = defaultTheme,
   config = defaultConfig,
   disableResetStyle,
   disableGlobalStyle,
   colorModeManager,
+  colorModeStorageKey,
   themeSchemeManager,
+  themeSchemeStorageKey,
   environment,
   disableEnvironment,
   children,
@@ -95,20 +111,27 @@ export const UIProvider: FC<UIProviderProps> = ({
       theme={theme}
       config={config}
       themeSchemeManager={themeSchemeManager}
+      storageKey={themeSchemeStorageKey}
     >
-      <ColorModeProvider colorModeManager={colorModeManager} config={config}>
+      <ColorModeProvider
+        colorModeManager={colorModeManager}
+        storageKey={colorModeStorageKey}
+        config={config}
+      >
         <EnvironmentProvider
           environment={environment}
           disabled={disableEnvironment}
         >
-          <LoadingProvider {...config.loading}>
-            {!disableResetStyle ? <ResetStyle /> : null}
-            {!disableGlobalStyle ? <GlobalStyle /> : null}
+          <MotionConfig {...config.motion?.config}>
+            <LoadingProvider {...config.loading}>
+              {!disableResetStyle ? <ResetStyle /> : null}
+              {!disableGlobalStyle ? <GlobalStyle /> : null}
 
-            {children}
+              {children}
 
-            <NoticeProvider {...config.notice} />
-          </LoadingProvider>
+              <NoticeProvider {...config.notice} />
+            </LoadingProvider>
+          </MotionConfig>
         </EnvironmentProvider>
       </ColorModeProvider>
     </ThemeProvider>

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/checkbox",
-  "version": "0.5.0",
+  "version": "1.0.14",
   "description": "Yamada UI checkbox component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -70,6 +71,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

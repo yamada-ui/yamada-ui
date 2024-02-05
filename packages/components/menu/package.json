@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/menu",
-  "version": "0.3.25",
+  "version": "1.0.11",
   "description": "Yamada UI menu component",
   "keywords": [
     "yamada",
@@ -26,6 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hirotomoyamada/yamada-ui",
@@ -48,6 +49,7 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",
@@ -71,6 +73,7 @@
     ],
     "banner": {
       "js": "\"use client\""
-    }
+    },
+    "sourcemap": true
   }
 }

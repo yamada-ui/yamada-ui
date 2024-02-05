@@ -28,13 +28,13 @@ export const TabList = forwardRef<TabListProps, "div">(
     }, [descendants, focusedIndex])
 
     const onFirst = useCallback(() => {
-      const first = descendants.enabledfirstValue()
+      const first = descendants.enabledFirstValue()
 
       if (first) first.node?.focus()
     }, [descendants])
 
     const onLast = useCallback(() => {
-      const last = descendants.enabledlastValue()
+      const last = descendants.enabledLastValue()
 
       if (last) last.node?.focus()
     }, [descendants])

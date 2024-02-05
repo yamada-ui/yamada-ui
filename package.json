@@ -94,6 +94,7 @@
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
+    "@yamada-ui/charts": "workspace:*",
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/cli": "workspace:*",

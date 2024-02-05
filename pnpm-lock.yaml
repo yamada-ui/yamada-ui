@@ -135,6 +135,9 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:packages/components/charts
       '@yamada-ui/cli':
         specifier: workspace:*
         version: link:packages/cli
@@ -2770,9 +2773,6 @@ importers:
       '@yamada-ui/card':
         specifier: workspace:*
         version: link:../components/card
-      '@yamada-ui/charts':
-        specifier: workspace:*
-        version: link:../components/charts
       '@yamada-ui/checkbox':
         specifier: workspace:*
         version: link:../components/checkbox

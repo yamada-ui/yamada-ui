@@ -53,7 +53,6 @@
     "@yamada-ui/breadcrumb": "workspace:*",
     "@yamada-ui/button": "workspace:*",
     "@yamada-ui/card": "workspace:*",
-    "@yamada-ui/charts": "workspace:*",
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/color-picker": "workspace:*",

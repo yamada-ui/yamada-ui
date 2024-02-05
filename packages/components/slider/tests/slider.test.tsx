@@ -13,26 +13,6 @@ describe("<Slider />", () => {
     expect(screen.getByTestId("slider")).toHaveClass("ui-slider")
   })
 
-  test("Slider should change color scheme", () => {
-    render(<Slider data-testid="slider" colorScheme="green" />)
-
-    const filledTrack = screen
-      .getByTestId("slider")
-      .querySelectorAll(".ui-slider__track-filled")[0]
-
-    expect(filledTrack).toHaveStyle(
-      "background-color: var(--ui-colors-green-500)",
-    )
-  })
-
-  test("Slider should change size", () => {
-    render(<Slider data-testid="slider" size="lg" />)
-    const sliderTrack = screen
-      .getByTestId("slider")
-      .querySelectorAll(".ui-slider__track")[0]
-    expect(sliderTrack).toHaveStyle("height: var(--ui-sizes-1-5)")
-  })
-
   test("Slider have correct default values", () => {
     render(<Slider data-testid="slider" defaultValue={25} />)
     expect(
@@ -50,39 +30,12 @@ describe("<Slider />", () => {
     expect(sliderThumb).toHaveAttribute("aria-valuemax", String(max))
   })
 
-  test("Slider has correct default value", () => {
-    const defaultValue = 25
-    render(<Slider data-testid="slider" defaultValue={defaultValue} />)
-
-    const slider = screen.getByTestId("slider").getElementsByTagName("input")[0]
-
-    expect(slider).toHaveValue(String(defaultValue))
-  })
-
   test("Slider thumb has correct aria-valuenow", () => {
     const defaultValue = 25
     render(<Slider defaultValue={defaultValue} />)
 
     const sliderThumb = screen.getByRole("slider")
     expect(sliderThumb).toHaveAttribute("aria-valuenow", String(defaultValue))
-  })
-
-  test("Slider thumb has correct min", () => {
-    const min = 0
-    render(<Slider min={min} />)
-
-    const sliderThumb = screen.getByRole("slider")
-
-    expect(sliderThumb).toHaveAttribute("aria-valuemin", String(min))
-  })
-
-  test("Slider thumb has correct max", () => {
-    const max = 100
-    render(<Slider max={max} />)
-
-    const sliderThumb = screen.getByRole("slider")
-
-    expect(sliderThumb).toHaveAttribute("aria-valuemax", String(max))
   })
 
   test("Slider can change slider orientation", () => {

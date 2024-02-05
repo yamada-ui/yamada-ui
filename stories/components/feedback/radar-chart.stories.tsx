@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { RadarChart } from "@yamada-ui/react"
+import { RadarChart } from "@yamada-ui/charts"
 
 type Story = StoryFn<typeof RadarChart>
 

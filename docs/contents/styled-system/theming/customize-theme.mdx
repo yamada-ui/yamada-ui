@@ -48,31 +48,13 @@ export default extendTheme(customTheme)()
 The theme is being exported by default using `extendTheme`.
 :::
 
-## テーマの適用
+### Applying Themes
 
 To apply a theme, pass it to `theme` of `UIProvider`.
 
-For Vite.
+In the case of Create React App.
 
-```tsx title=.main.tsx
-import React from "react"
-import ReactDOM from "react-dom/client"
-import App from "./App.tsx"
-import { UIProvider } from "@yamada-ui/react"
-import theme from "./theme/index.ts"
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <UIProvider theme={theme}>
-      <App />
-    </UIProvider>
-  </React.StrictMode>,
-)
-```
-
-For Create React App.
-
-```tsx title=index.tsx
+```tsx title=index.tsx live=false highlight={4,11}
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
 import { UIProvider } from "@yamada-ui/react"
@@ -89,28 +71,16 @@ root.render(
 )
 ```
 
-For PageRouter in Next.js.
+In the case of PageRouter in Next.js.
 
-```tsx title=_app.tsx
+```tsx title=_app.tsx live=false highlight={3,7}
 import type { AppProps } from "next/app"
-import {
-  UIProvider,
-  createColorModeManager,
-  createThemeSchemeManager,
-} from "@yamada-ui/react"
+import { UIProvider } from "@yamada-ui/react"
 import { theme } from "theme"
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const { cookies } = pageProps
-  const colorModeManager = createColorModeManager("ssr", cookies)
-  const themeSchemeManager = createThemeSchemeManager("ssr", cookies)
-
   return (
-    <UIProvider
-      theme={theme}
-      colorModeManager={colorModeManager}
-      themeSchemeManager={themeSchemeManager}
-    >
+    <UIProvider theme={theme}>
       <Component {...pageProps} />
     </UIProvider>
   )
@@ -119,19 +89,10 @@ const App = ({ Component, pageProps }: AppProps) => {
 export default App
 ```
 
-For AppRouter in Next.js.
+In the case of AppRouter in Next.js.
 
-```tsx title=layout.tsx
-"use client"
-
-import {
-  colorModeManager,
-  themeSchemeManager,
-  UIProvider,
-  ColorModeScript,
-  ThemeSchemeScript,
-  defaultConfig,
-} from "@yamada-ui/react"
+```tsx title=layout.tsx live=false highlight={3,14}
+import { UIProvider } from "@yamada-ui/react"
 import { ReactNode } from "react"
 import { theme } from "theme"
 
@@ -143,33 +104,32 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.svg" />
       </head>
-
       <body>
-        <ColorModeScript
-          type="cookie"
-          nonce="testing"
-          initialColorMode={defaultConfig.initialColorMode}
-        />
-        <ThemeSchemeScript
-          type="cookie"
-          nonce="testing"
-          initialThemeScheme={defaultConfig.initialThemeScheme}
-        />
-
-        <UIProvider
-          config={defaultConfig}
-          theme={theme}
-          colorModeManager={colorModeManager.cookieStorage}
-          themeSchemeManager={themeSchemeManager.cookieStorage}
-        >
-          {children}
-        </UIProvider>
+        <UIProvider theme={theme}>{children}</UIProvider>
       </body>
     </html>
   )
 }
 
 export default RootLayout
+```
+
+In the case of Vite.
+
+```tsx title=.main.tsx live=false highlight={5,9}
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App.tsx"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <UIProvider theme={theme}>
+      <App />
+    </UIProvider>
+  </React.StrictMode>,
+)
 ```
 
 ## Changing Tokens

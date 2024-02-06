@@ -16,6 +16,8 @@ jobs:
 
       - name: Build packages
         run: pnpm observe:issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pull-request:
     runs-on: ubuntu-latest
@@ -29,5 +31,6 @@ jobs:
       - name: Build packages
         run: pnpm observe:pr
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_REVIEWS_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEWS_WEBHOOK_URL }}
           DISCORD_HELP_WANTED_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}

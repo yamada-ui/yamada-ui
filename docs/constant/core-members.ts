@@ -112,4 +112,15 @@ export const CORE_MEMBERS = [
       ja: "福岡在住のエンジニア。",
     },
   },
+  {
+    id: "komura-c",
+    name: { en: "komura-c", ja: "komura-c" },
+    icon: "https://avatars.githubusercontent.com/u/37304826?v=4",
+    github: "https://github.com/komura-c",
+    twitter: "https://twitter.com/komura_c",
+    description: {
+      en: "Web developer, interested in front-end and audio.",
+      ja: "フロントエンドと音に興味があるWebエンジニア。",
+    },
+  },
 ]

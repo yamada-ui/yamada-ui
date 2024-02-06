@@ -78,12 +78,6 @@ export const CONTRIBUTORS = [
     url: "https://github.com/saki10",
   },
   {
-    id: 37304826,
-    name: "komura-c",
-    icon: "https://avatars.githubusercontent.com/u/37304826?v=4",
-    url: "https://github.com/komura-c",
-  },
-  {
     id: 49627888,
     name: "sora33",
     icon: "https://avatars.githubusercontent.com/u/49627888?v=4",

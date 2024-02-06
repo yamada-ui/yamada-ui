@@ -2,22 +2,22 @@ name: "Documentation Request (日本語)"
 description: "新しいドキュメントのリクエストや改善を提案します"
 labels: ["enhancement"]
 body:
-  - type: "markdown"
+  - type: markdown
     attributes:
       value: |
         ドキュメントリクエストを作成していただきありがとうございます！ 😎
 
         新しいドキュメントのトピックについてのアイデアがある、何かが適切にドキュメントされていないと気づいた、または現在のドキュメントに何か誤りがあると感じた場合は、ここが正解です！
-  - type: "input"
-    id: "subject"
+  - type: input
+    id: subject
     attributes:
       label: "主題"
       description: "このリクエストの主題（コンポーネント、関数、トピック）は何ですか？"
       placeholder: "DatePicker"
     validations:
       required: true
-  - type: "textarea"
-    id: "description"
+  - type: textarea
+    id: description
     attributes:
       label: "説明"
       description: "主題のドキュメントに何を追加、または変更するべきですか？"
@@ -27,7 +27,12 @@ body:
   - type: dropdown
     id: participate
     attributes:
-      label: このドキュメントページの作成に参加し、プルリクエストを作成する志はありますか？
+      label: このドキュメントページの作成に参加し、プルリクエストを作成しますか？
       options:
         - "はい"
         - "いいえ"
+  - type: markdown
+    attributes:
+      value: |
+        このイシューは、アサインされてから2週間経過すると自動的にアサインがクリアされます。
+        アサインがクリアされると、他の方が作業する可能性があります。

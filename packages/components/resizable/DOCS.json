@@ -55,7 +55,7 @@
     },
     "variant": {
       "defaultValue": "border",
-      "type": "\"border\" | \"spacer\"",
+      "type": "\"border\" | \"spacer\" | \"unstyled\"",
       "required": false,
       "description": "The variant of the Resizable."
     }

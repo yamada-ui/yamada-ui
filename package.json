@@ -54,7 +54,10 @@
     "next-pages:start": "pnpm --prefix examples/nextjs-pages start",
     "next-app:dev": "pnpm --prefix examples/nextjs-app dev",
     "next-app:build": "pnpm --prefix examples/nextjs-app build",
-    "next-app:start": "pnpm --prefix examples/nextjs-app start"
+    "next-app:start": "pnpm --prefix examples/nextjs-app start",
+    "vite:dev": "pnpm --prefix examples/vite dev",
+    "vite:build": "pnpm --prefix examples/vite build",
+    "vite:preview": "pnpm --prefix examples/vite preview"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.5.0",

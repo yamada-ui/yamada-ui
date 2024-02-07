@@ -48,11 +48,11 @@ export default extendTheme(customTheme)()
 The theme is being exported by default using `extendTheme`.
 :::
 
-### Applying Themes
+## Applying Theme
 
 To apply a theme, pass it to `theme` of `UIProvider`.
 
-In the case of Create React App.
+### In the case of Create React App.
 
 ```tsx title=index.tsx live=false highlight={4,11}
 import { createRoot } from "react-dom/client"
@@ -71,7 +71,7 @@ root.render(
 )
 ```
 
-In the case of PageRouter in Next.js.
+### In the case of Next.js.
 
 ```tsx title=_app.tsx live=false highlight={3,7}
 import type { AppProps } from "next/app"
@@ -89,32 +89,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 export default App
 ```
 
-In the case of AppRouter in Next.js.
-
-```tsx title=layout.tsx live=false highlight={3,14}
-import { UIProvider } from "@yamada-ui/react"
-import { ReactNode } from "react"
-import { theme } from "theme"
-
-const RootLayout = ({ children }: { children: ReactNode }) => {
-  return (
-    <html lang="ja" data-mode="light">
-      <head>
-        <title>Next.js App - Yamada UI</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.svg" />
-      </head>
-      <body>
-        <UIProvider theme={theme}>{children}</UIProvider>
-      </body>
-    </html>
-  )
-}
-
-export default RootLayout
-```
-
-In the case of Vite.
+### In the case of Vite.
 
 ```tsx title=.main.tsx live=false highlight={5,9}
 import React from "react"

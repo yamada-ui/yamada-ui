@@ -48,11 +48,11 @@ export default extendTheme(customTheme)()
 `extendTheme`を使用して、テーマをデフォルトでエクスポートしています。
 :::
 
-### テーマの適用
+## テーマの適用
 
-テーマを適用する場合は`UIProvider`の`theme`に渡します。
+テーマを適用する場合は、`UIProvider`の`theme`に渡します。
 
-Create React Appの場合。
+### Create React Appの場合
 
 ```tsx title=index.tsx live=false highlight={4,11}
 import { createRoot } from "react-dom/client"
@@ -71,7 +71,7 @@ root.render(
 )
 ```
 
-Next.jsのPageRouterの場合。
+### Next.jsの場合
 
 ```tsx title=_app.tsx live=false highlight={3,7}
 import type { AppProps } from "next/app"
@@ -89,32 +89,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 export default App
 ```
 
-Next.jsのAppRouterの場合。
-
-```tsx title=layout.tsx live=false highlight={3,14}
-import { UIProvider } from "@yamada-ui/react"
-import { ReactNode } from "react"
-import { theme } from "theme"
-
-const RootLayout = ({ children }: { children: ReactNode }) => {
-  return (
-    <html lang="ja" data-mode="light">
-      <head>
-        <title>Next.js App - Yamada UI</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.svg" />
-      </head>
-      <body>
-        <UIProvider theme={theme}>{children}</UIProvider>
-      </body>
-    </html>
-  )
-}
-
-export default RootLayout
-```
-
-Viteの場合。
+### Viteの場合
 
 ```tsx title=.main.tsx live=false highlight={5,9}
 import React from "react"

@@ -48,6 +48,65 @@ export default extendTheme(customTheme)()
 `extendTheme`を使用して、テーマをデフォルトでエクスポートしています。
 :::
 
+## テーマの適用
+
+テーマを適用する場合は、`UIProvider`の`theme`に渡します。
+
+### Create React Appの場合
+
+```tsx title=index.tsx live=false highlight={4,11}
+import { createRoot } from "react-dom/client"
+import { App } from "./app"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+const container = document.getElementById("app")
+
+const root = createRoot(container!)
+
+root.render(
+  <UIProvider theme={theme}>
+    <App />
+  </UIProvider>,
+)
+```
+
+### Next.jsの場合
+
+```tsx title=_app.tsx live=false highlight={3,7}
+import type { AppProps } from "next/app"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <UIProvider theme={theme}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+
+export default App
+```
+
+### Viteの場合
+
+```tsx title=.main.tsx live=false highlight={5,9}
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App.tsx"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <UIProvider theme={theme}>
+      <App />
+    </UIProvider>
+  </React.StrictMode>,
+)
+```
+
 ## トークンを変更する
 
 今回は、`colors`に新しいトークンと既存のトークンを変更してみましょう。

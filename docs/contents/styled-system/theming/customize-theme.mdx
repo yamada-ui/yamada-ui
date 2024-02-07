@@ -48,6 +48,65 @@ export default extendTheme(customTheme)()
 The theme is being exported by default using `extendTheme`.
 :::
 
+## Applying Theme
+
+To apply a theme, pass it to `theme` of `UIProvider`.
+
+### In the case of Create React App.
+
+```tsx title=index.tsx live=false highlight={4,11}
+import { createRoot } from "react-dom/client"
+import { App } from "./app"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+const container = document.getElementById("app")
+
+const root = createRoot(container!)
+
+root.render(
+  <UIProvider theme={theme}>
+    <App />
+  </UIProvider>,
+)
+```
+
+### In the case of Next.js.
+
+```tsx title=_app.tsx live=false highlight={3,7}
+import type { AppProps } from "next/app"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <UIProvider theme={theme}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+
+export default App
+```
+
+### In the case of Vite.
+
+```tsx title=.main.tsx live=false highlight={5,9}
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App.tsx"
+import { UIProvider } from "@yamada-ui/react"
+import { theme } from "theme"
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <UIProvider theme={theme}>
+      <App />
+    </UIProvider>
+  </React.StrictMode>,
+)
+```
+
 ## Changing Tokens
 
 This time, let's try changing new and existing tokens in `colors`.

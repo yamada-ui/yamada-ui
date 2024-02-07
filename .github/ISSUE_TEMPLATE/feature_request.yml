@@ -2,7 +2,7 @@ name: "Feature Request"
 description: "Request a feature or enhancement"
 labels: ["enhancement"]
 body:
-  - type: "markdown"
+  - type: markdown
     attributes:
       value: |
         Thank you for creating an feature request 😎!
@@ -12,14 +12,14 @@ body:
           - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
           - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
           - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
-  - type: "textarea"
+  - type: textarea
     id: "description"
     attributes:
       label: "Description"
       description: "Please describe your feature request in one or two sentences."
     validations:
       required: true
-  - type: "textarea"
+  - type: textarea
     id: "justification"
     attributes:
       label: "Problem Statement/Justification"
@@ -29,7 +29,7 @@ body:
         If this feature is related to a problem you've encountered, please describe it as well.
     validations:
       required: true
-  - type: "textarea"
+  - type: textarea
     id: "proposed-solution"
     attributes:
       label: "Proposed Solution or API"
@@ -42,15 +42,27 @@ body:
         1. Go to '...'
         2. Click on '....'
         3. ....
-  - type: "textarea"
+  - type: textarea
     id: "alternatives"
     attributes:
       label: "Alternatives"
       description: |
         Have you considered any alternative solutions or features before making this request?
-  - type: "textarea"
+  - type: dropdown
+    id: participate
+    attributes:
+      label: Are you willing to participate in implementing this feature and create a pull request include the implementation?
+      options:
+        - "Yes"
+        - "No"
+  - type: textarea
     id: "additional-information"
     attributes:
       label: "Additional Information"
       description: |
         Do you have any resources (links, screenshots, etc.) that could assist in understanding or implementing this feature?
+  - type: markdown
+    attributes:
+      value: |
+        This issue will be automatically unassigned after two weeks have passed since it was assigned.
+        Once unassigned, it may be picked up by someone else for work.

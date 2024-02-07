@@ -1,5 +1,18 @@
 # @yamada-ui/form-control
 
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`398124a`](https://github.com/hirotomoyamada/yamada-ui/commit/398124ac60b0481c92c9ab983d932dd405c9d7ab), [`242afe6`](https://github.com/hirotomoyamada/yamada-ui/commit/242afe6508f50d67780f36b1b411810cb08a7238)]:
+  - @yamada-ui/core@1.3.1
+
+## 1.0.12
+
+### Patch Changes
+
+- [#672](https://github.com/hirotomoyamada/yamada-ui/pull/672) [`f65e995`](https://github.com/hirotomoyamada/yamada-ui/commit/f65e995e05d6e976fa4ec267e172ab062cb4fd3a) Thanks [@madangopal16072000](https://github.com/madangopal16072000)! - "adding data attributes in form-control"
+
 ## 1.0.11
 
 ### Patch Changes

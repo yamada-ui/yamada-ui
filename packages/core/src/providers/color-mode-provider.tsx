@@ -24,11 +24,12 @@ type ColorModeContext = {
   toggleColorMode: () => void
 }
 
-const getColorMode = (
-  manager: ColorModeManager,
-  fallback: ColorMode | "system",
-) =>
-  manager.type === "cookie" && manager.ssr ? manager.get(fallback) : fallback
+const getColorMode =
+  (manager: ColorModeManager, fallback: ColorMode | "system") =>
+  (storageKey?: string) =>
+    manager.type === "cookie" && manager.ssr
+      ? manager.get(fallback)(storageKey)
+      : fallback
 
 export const ColorModeContext = createContext({} as ColorModeContext)
 
@@ -48,16 +49,22 @@ export type ColorModeProviderProps = {
    * @default 'colorModeManager.localStorage'
    */
   colorModeManager?: ColorModeManager
+  /**
+   * Key of value saved in storage.
+   * By default, it is saved to `local storage`.
+   */
+  storageKey?: string
 }
 
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   colorMode: defaultColorMode,
   colorModeManager = localStorage,
+  storageKey,
   config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
   children,
 }) => {
   const [colorMode, setColorMode] = useState<ColorMode | "system">(() =>
-    getColorMode(colorModeManager, initialColorMode),
+    getColorMode(colorModeManager, initialColorMode)(storageKey),
   )
   const [systemColorMode, setSystemColorMode] = useState<ColorMode | undefined>(
     undefined,
@@ -85,9 +92,15 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
       setClassName(resolved === "dark")
       setDataset(resolved)
 
-      colorModeManager.set(colorMode)
+      colorModeManager.set(colorMode)(storageKey)
     },
-    [colorModeManager, getSystemColorMode, setClassName, setDataset],
+    [
+      colorModeManager,
+      getSystemColorMode,
+      setClassName,
+      setDataset,
+      storageKey,
+    ],
   )
 
   const changeSystemColorMode = useCallback(
@@ -111,10 +124,10 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   }, [initialColorMode, addListener, changeColorMode])
 
   useEffect(() => {
-    const managerValue = colorModeManager.get()
+    const managerValue = colorModeManager.get()(storageKey)
 
     if (managerValue) changeColorMode(managerValue)
-  }, [changeColorMode, colorModeManager])
+  }, [changeColorMode, colorModeManager, storageKey])
 
   useEffect(() => {
     return addListener(changeSystemColorMode)

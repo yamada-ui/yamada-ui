@@ -1,9 +1,8 @@
 ---
-title: Getting Started with Next.js
-description: A guide to installing and using Yamada UI in your Next.js project.
-menu: Next.js
-is_tabs: true
-tab: Pages Router
+title: Getting Started with Remix
+description: A guide to installing and using Yamada UI in your Remix project.
+menu: Remix
+is_tabs: false
 ---
 
 ## Install the package
@@ -14,10 +13,10 @@ Execute one of the following commands in your terminal.
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: "pnpm create next-app my-app --typescript",
-    npm: "npx create-next-app my-app --typescript",
-    yarn: "yarn create next-app my-app --typescript",
-    bun: "bun create next-app my-app --typescript",
+    pnpm: "pnpm create remix my-app --typescript",
+    npm: "npx create-remix my-app --typescript",
+    yarn: "yarn create remix my-app --typescript",
+    bun: "bun create remix my-app --typescript",
   }}
 />
 
@@ -72,15 +71,41 @@ If you only want to use the Yamada UI style system, please check [here](/getting
 
 After installing Yamada UI, add `UIProvider`.
 
-```tsx live=false title=_app.tsx highlight={2,6,8}
-import type { AppProps } from "next/app"
+```tsx live=false title=root.tsx highlight={11,27,29}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react"
 import { UIProvider } from "@yamada-ui/react"
 
-export default function App({ Component, pageProps }: AppProps) {
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
   return (
-    <UIProvider>
-      <Component {...pageProps} />
-    </UIProvider>
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
   )
 }
 ```
@@ -99,21 +124,43 @@ To make the color mode work properly, you need to add `ColorModeScript` inside t
 
 This is because the color mode is implemented using `localStorage` or `cookies`, and it needs to synchronize correctly at page load.
 
-```tsx live=false title=_document.tsx highlight={2,10}
-import { Html, Head, Main, NextScript } from "next/document"
+```tsx live=false title=root.tsx highlight={12,28}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react"
+import { UIProvider } from "@yamada-ui/react"
 import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
 
+export default function App() {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
       <body>
         <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
-        <Main />
-        <NextScript />
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
-    </Html>
+    </html>
   )
 }
 ```
@@ -126,7 +173,7 @@ For `props`' `initialColorMode`, please pass the same `initialColorMode` as your
 
 After adding `UIProvider`, you can call components within your application.
 
-```tsx live=false title=index.tsx
+```tsx live=false title=route.tsx
 import { Button } from "@yamada-ui/react"
 
 export default function Home() {

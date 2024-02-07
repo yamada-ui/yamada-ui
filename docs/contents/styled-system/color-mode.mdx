@@ -1,25 +1,25 @@
 ---
 title: Color Mode
-description: All components of Yamada UI support dark mode.
+description: All components in Yamada UI support dark mode.
 order: 5
 ---
 
-Yamada UI incorporates support for managing the color mode of the application.
+Yamada UI includes built-in support for managing the color mode of your application.
 
-All components of Yamada UI support dark mode. Depending on the scenario, it may be necessary to make the component compatible with the color mode.
+All components in Yamada UI support dark mode. Depending on the scenario, you may need to adapt components to the color mode.
 
 ## Setup
 
-To make the dark mode work correctly, you need to do the following two things:
+To make dark mode work correctly, you need to do two things:
 
 1. Set `initialColorMode` in the config.
-2. Add `ColorModeScript` to the application.
+2. Add `ColorModeScript` to your application.
 
 ### Customize the Config
 
-The color mode is set in the [Default Config](/styled-system/configure/default-config).
+Color mode is set in the [default config](/styled-system/configure/default-config).
 
-Here are the actual defined values.
+Here are the actual values defined.
 
 ```ts title=config.ts
 export const config: ThemeConfig = {
@@ -27,11 +27,11 @@ export const config: ThemeConfig = {
 }
 ```
 
-- `initialColorMode`: The initial value of the color mode when the user first accesses the application (or after the storage is reset). It accepts three values.
+- `initialColorMode`: The initial value of the color mode when the user first accesses the application (or after storage is reset). It accepts three values.
 
   - `light`: Light mode.
   - `dark`: Dark mode.
-  - `system`: Retrieves the color mode from the Operating System (OS).
+  - `system`: Retrieves the color mode from the operating system (OS).
 
 ```tsx live=false
 import { UIProvider, extendConfig } from "@yamada-ui/react"
@@ -53,37 +53,47 @@ const App = () => {
 
 ### Add `ColorModeScript`
 
-In order for the color mode to function properly, you need to add `ColorModeScript` within the `body`.
+To make the color mode work properly, you need to add `ColorModeScript` within the `head` or `body`.
 
-The reason is that the color mode is implemented using `localStorage` or `cookies`, and it is necessary to synchronize correctly at the time of page loading.
+This is because the color mode is implemented using `localStorage` or `cookies`, and it is necessary to synchronize correctly at the time of page loading.
 
-#### In the case of Create React App
+#### For Create React App
 
-```tsx live=false title=index.tsx highlight={3,11}
+```tsx live=false title=index.tsx highlight={3,5,6,7,8,9,10,11,12,13,14,15,17}
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
-import { UIProvider, ColorModeScript, defaultConfig } from "@yamada-ui/react"
+import { UIProvider, getColorModeScript, defaultConfig } from "@yamada-ui/react"
+
+const injectColorModeScript = () => {
+  const scriptContent = getColorModeScript({
+    initialColorMode: defaultConfig.initialColorMode,
+  })
+
+  const script = document.createElement("script")
+
+  script.textContent = scriptContent
+
+  document.head.appendChild(script)
+}
+
+injectColorModeScript()
 
 const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
 root.render(
-  <>
-    <ColorModeScript initialColorMode={defaultConfig.initialColorMode} />
-
-    <UIProvider>
-      <App />
-    </UIProvider>
-  </>,
+  <UIProvider>
+    <App />
+  </UIProvider>,
 )
 ```
 
 :::note status=warning
-Please pass the same `initialColorMode` as the config to the `initialColorMode` of `props`. If you have your own config, please pass its `initialColorMode`.
+Please pass the same `initialColorMode` to `props` as in your config. If you have your own config, please pass its `initialColorMode`.
 :::
 
-#### In the case of Next.js
+#### For Next.js
 
 ```tsx live=false title=_document.tsx highlight={2,10}
 import { Html, Head, Main, NextScript } from "next/document"
@@ -145,16 +155,16 @@ export default function App({ Component, pageProps }: AppProps) {
 ```
 
 :::note status=warning
-Please pass the same `initialColorMode` as the config to the `initialColorMode` of `props`. If you have your own config, please pass its `initialColorMode`.
+Please pass the same `initialColorMode` to `props` as in your config. If you have your own config, please pass its `initialColorMode`.
 :::
 
 :::note
 For the case of App Router, please check [here](/getting-started/frameworks/nextjs/app-router#add-colormodescript).
 :::
 
-## Adding `colorModeManager`
+## Add `colorModeManager`
 
-In the case of sites rendered on the server side, such as Next.js, you may want to include the color mode in the request to avoid changing the color mode during hydration.
+For sites rendered on the server side, such as Next.js, you may want to include the color mode in the request to avoid changes during hydration.
 
 :::note
 If you are not using server-side rendering, you do not need to follow these steps. Yamada UI uses `localStorage` by default.
@@ -162,7 +172,7 @@ If you are not using server-side rendering, you do not need to follow these step
 
 ### Prepare `getServerSideProps`
 
-To commonize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
+To standardize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
 
 ```ts live=false
 import { GetServerSidePropsContext } from "next"
@@ -178,9 +188,9 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-### Set `cookies` for `colorModeManager`
+### Set `cookies` in `colorModeManager`
 
-Please set `ssr` and `cookies` for `createColorModeManager`.
+Set `ssr` and `cookies` in `createColorModeManager`.
 
 ```tsx live=false title=_app.tsx highlight={2,5,6,9}
 import type { AppProps } from "next/app"
@@ -200,7 +210,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 ### Add `getServerSideProps`
 
-We will add the `getServerSideCommonProps` we created earlier to each page.
+Add the previously created `getServerSideCommonProps` to each page.
 
 ```tsx live=false title=index.tsx highlight={1,8}
 import { getServerSideCommonProps } from "../get-server-side-props.ts"
@@ -213,12 +223,12 @@ export default function Index() {
 export const getServerSideProps = getServerSideCommonProps
 ```
 
-## Syntax for Color Mode
+## Color Mode Syntax
 
-To set the style for the color mode, simply pass an array to the `props` of the style to support the color mode.
+To set the style for color mode, simply pass an array to the style's `props`.
 
-- Define the value of the style you want to set for the light mode in the first argument.
-- Define the value of the style you want to set for the dark mode in the second argument.
+- Define the style value you want to set for light mode as the first argument.
+- Define the style value you want to set for dark mode as the second argument.
 
 ```tsx
 <Box w="full" p="md" bg={["primary", "secondary"]} color="white">
@@ -226,7 +236,7 @@ To set the style for the color mode, simply pass an array to the `props` of the 
 </Box>
 ```
 
-## Switching Color Mode
+## Switching Color Modes
 
 If you want to change the color mode within the application, use `changeColorMode` or `toggleColorMode`.
 
@@ -238,21 +248,21 @@ const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
 return (
   <Wrap gap="md">
-    <Button onClick={() => changeColorMode("light")}>Light Mode</Button>
-    <Button onClick={() => changeColorMode("dark")}>Dark Mode</Button>
-    <Button onClick={() => changeColorMode("system")}>System</Button>
+    <Button onClick={() => changeColorMode("light")}>ライトモード</Button>
+    <Button onClick={() => changeColorMode("dark")}>ダークモード</Button>
+    <Button onClick={() => changeColorMode("system")}>システム</Button>
     <Button onClick={toggleColorMode}>
-      Switch to {colorMode === "light" ? "Dark" : "Light"} Mode
+      {colorMode === "light" ? "ダーク" : "ライト"}モードに切り替える
     </Button>
   </Wrap>
 )
 ```
 
-## Color Mode Utility
+## Color Mode Utilities
 
-Yamada UI provides a handy custom hook for color modes.
+Yamada UI provides convenient custom hooks for color mode.
 
-### Using `useColorMode`
+### Use `useColorMode`
 
 To get the current color mode within a component, use `useColorMode`.
 
@@ -272,9 +282,9 @@ return (
 `internalColorMode` returns the current `light`, `dark`, or `system`.
 :::
 
-### Using `useColorModeValue`
+### Use `useColorModeValue`
 
-`useColorModeValue` is a custom hook that takes the light mode value as the first argument and the dark mode value as the second argument, and returns the value of the current color mode.
+`useColorModeValue` is a custom hook that takes the light mode value as the first argument and the dark mode value as the second argument, returning the value for the current color mode.
 
 ```tsx functional=true
 const { colorMode } = useColorMode()

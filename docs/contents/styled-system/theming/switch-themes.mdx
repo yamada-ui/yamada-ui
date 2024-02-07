@@ -1,10 +1,10 @@
 ---
-title: Switch Themes
+title: Switching Themes
 description: How users can switch themes.
 order: 5
 ---
 
-Yamada UI provides a feature for users to switch themes.
+Yamada UI provides the functionality for users to switch themes.
 
 :::note
 To enable this feature, you need to prepare multiple themes.
@@ -12,23 +12,23 @@ To enable this feature, you need to prepare multiple themes.
 
 ## Setup
 
-To switch themes, users need to do the following two things:
+To switch themes, users must do the following two things:
 
 1. Prepare multiple themes
 2. Add `ThemeSchemeScript` to the application.
 
-### Preparing Multiple Themes
+### Prepare multiple themes
 
-This time, we will prepare multiple themes that have changed colors from the default theme.
+This time, we will prepare several themes with colors changed from the default theme.
 
 :::note
-If you don't know how to customize a theme, please check [here](/styled-system/theming/customize-theme).
+If you don't know how to customize themes, please check [here](/styled-system/theming/customize-theme).
 :::
 
-Pass an object to `themeSchemes`. The key of this object will be the `themeScheme` needed to switch themes.
+Pass an object to `themeSchemes`. The keys of this object will be the `themeScheme` required to switch themes.
 
 :::note status=warning
-`themeSchemes` overrides `custom properties` using CSS `attribute selectors`. The corresponding `custom property` within the `attribute selector` is referenced each time the `themeScheme` changes.
+`themeSchemes` overrides `custom properties` using CSS's `attribute selectors`. The `custom properties` within the corresponding `attribute selector` are referenced each time the `themeScheme` switches.
 :::
 
 ```tsx live=false
@@ -58,7 +58,7 @@ export const theme = extendTheme({
 })()
 ```
 
-If you want to use any of the themes passed in `themeSchemes` by default, set the initial value in `initialThemeScheme` of the config.
+If you want to use any of the themes passed in `themeSchemes` by default, set the initial value in the config's `initialThemeScheme`.
 
 ```tsx live=false highlight={1,26,27,28}
 import { extendTheme, extendConfig } from "@yamada-ui/react"
@@ -91,40 +91,50 @@ export const config = extendConfig({
 })
 ```
 
-### Adding `ThemeSchemeScript`
+### Add `ThemeSchemeScript`
 
-To properly switch themes, you need to add `ThemeSchemeScript` within the `body`.
+To switch themes correctly, you need to add `ThemeSchemeScript` within the `head` or `body`.
 
-The reason is that the theme switching is implemented using `localStorage` or `cookies`, and it is necessary to correctly synchronize at the time of page loading.
+The reason is that theme switching is implemented using `localStorage` or `cookies`, and it is necessary to synchronize correctly at the time of page loading.
 
-#### In the case of Create React App
+#### For Create React App
 
-```tsx live=false title=index.tsx highlight={3,4,12,14}
+```tsx live=false title=index.tsx highlight={3,4,6,7,8,9,10,11,12,13,14,15,16,18}
 import { createRoot } from "react-dom/client"
 import { App } from "./app"
-import { UIProvider, ThemeSchemeScript } from "@yamada-ui/react"
+import { UIProvider, getThemeSchemeScript } from "@yamada-ui/react"
 import { theme, config } from "./theme"
+
+const injectThemeSchemeScript = () => {
+  const scriptContent = getThemeSchemeScript({
+    initialThemeScheme: config.initialThemeScheme,
+  })
+
+  const script = document.createElement("script")
+
+  script.textContent = scriptContent
+
+  document.head.appendChild(script)
+}
+
+injectThemeSchemeScript()
 
 const container = document.getElementById("app")
 
 const root = createRoot(container!)
 
 root.render(
-  <>
-    <ThemeSchemeScript initialThemeScheme={config.initialThemeScheme} />
-
-    <UIProvider theme={theme} config={config}>
-      <App />
-    </UIProvider>
-  </>,
+  <UIProvider theme={theme} config={config}>
+    <App />
+  </UIProvider>,
 )
 ```
 
 :::note status=warning
-Please pass the same `initialThemeScheme` as the config to the `initialThemeScheme` of `props`.
+Please pass the same `initialThemeScheme` to `props` as in the config.
 :::
 
-#### In the case of Next.js
+#### For Next.js
 
 ```tsx live=false title=_document.tsx highlight={2,3,11}
 import { Html, Head, Main, NextScript } from "next/document"
@@ -193,20 +203,20 @@ export default function App({ Component, pageProps }: AppProps) {
 ```
 
 :::note status=warning
-Please pass the same `initialThemeScheme` as the config to the `initialThemeScheme` of `props`.
+Please pass the same `initialThemeScheme` to `props` as in the config.
 :::
 
-## Adding `themeSchemeManager`
+## Add `themeSchemeManager`
 
-In the case of sites rendered on the server side, such as Next.js, you may want to include the theme schema in the request to avoid changing the theme during hydration.
+For sites rendered on the server side, such as Next.js, you may want to include the theme schema in the request to avoid changing the theme during hydration.
 
 :::note
-If you are not using server-side rendering, you do not need to follow these steps. Yamada UI uses `localStorage` by default.
+If you are not using server-side rendering, you do not need to follow this step. Yamada UI uses `localStorage` by default.
 :::
 
 ### Prepare `getServerSideProps`
 
-To commonize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
+To standardize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
 
 ```ts live=false
 import { GetServerSidePropsContext } from "next"
@@ -222,9 +232,9 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-### Set `cookies` for `themeSchemeManager`
+### Set `cookies` in `themeSchemeManager`
 
-Please set `ssr` and `cookies` for `createThemeSchemeManager`.
+Set `ssr` and `cookies` in `createThemeSchemeManager`.
 
 ```tsx live=false title=_app.tsx highlight={2,5,6,9}
 import type { AppProps } from "next/app"
@@ -244,7 +254,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 ### Add `getServerSideProps`
 
-We will add the `getServerSideCommonProps` we created earlier to each page.
+Add the previously created `getServerSideCommonProps` to each page.
 
 ```tsx live=false title=index.tsx highlight={1,8}
 import { getServerSideCommonProps } from "../get-server-side-props.ts"
@@ -259,7 +269,7 @@ export const getServerSideProps = getServerSideCommonProps
 
 ## Switching Themes
 
-To switch themes, use `changeThemeScheme`. If you want to revert to the `themeScheme`, pass `base`.
+To switch themes, use `changeThemeScheme`. If you want to revert to the original `themeScheme`, pass `base`.
 
 ```tsx functional=true
 const { themeScheme, changeThemeScheme } = useTheme()

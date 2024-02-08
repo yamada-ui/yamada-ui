@@ -370,3 +370,16 @@ export const hsvTo =
 
     return convertColor(color, fallback)(format)
   }
+
+export const sameColor = (
+  color: string | undefined,
+  comparison: string | undefined,
+) => {
+  if (!color) return false
+  if (!comparison) return false
+
+  const a = parseToRgba(color) ?? []
+  const b = parseToRgba(comparison) ?? []
+
+  return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3]
+}

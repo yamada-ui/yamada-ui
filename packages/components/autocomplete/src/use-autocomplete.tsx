@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  formControlProperties,
+  getFormControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import type { MotionUIPropGetter } from "@yamada-ui/motion"
@@ -366,7 +366,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const { id } = rest
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
   const [containerProps, inputProps] = splitObject<Dict, string>(
     omitObject(rest, [
       ...popoverProperties,
@@ -376,6 +379,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
       "onChange",
       "onCreate",
       "onSearch",
+      "aria-readonly",
     ]),
     layoutStyleProperties,
   )

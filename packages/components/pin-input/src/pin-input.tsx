@@ -13,8 +13,8 @@ import {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
+  getFormControlProperties,
   useFormControlProps,
-  formControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
@@ -307,7 +307,10 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         return {
           inputMode: type === "number" ? "numeric" : "text",
           type: mask ? "password" : type === "number" ? "tel" : "text",
-          ...pickObject(rest, formControlProperties),
+          ...pickObject(
+            rest,
+            getFormControlProperties({ omit: ["aria-readonly"] }),
+          ),
           ...filterUndefined(props),
           id: `${id}-${index}`,
           value: values[index] || "",

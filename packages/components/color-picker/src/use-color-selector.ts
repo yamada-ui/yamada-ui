@@ -195,7 +195,6 @@ export const useColorSelector = ({
   const [parsedValue, setParsedValue] = useState<Hsva>(
     convertHsva(value, fallbackValue),
   )
-
   const { h, s, v, a } = parsedValue
   const withAlpha = formatRef.current.endsWith("a")
   const isInteractive = !(disabled || readOnly)

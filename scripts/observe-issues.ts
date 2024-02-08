@@ -82,7 +82,7 @@ const filterIssues = async (issues: Issue[], collaborators: Collaborator[]) => {
 }
 
 const getAssignedEvent = async (issue_number: number) => {
-  const { data } = await octokit.issues.listEventsForTimeline({
+  const { data } = await octokit.issues.listEvents({
     ...COMMON_PARAMS,
     issue_number,
   })

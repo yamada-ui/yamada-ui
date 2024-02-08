@@ -120,7 +120,7 @@ type UseColorSelectorOptions = {
   /**
    * The initial value of the color selector.
    *
-   * @default "#ffffffff"
+   * @default "#ffffff"
    */
   defaultValue?: string
   /**
@@ -186,7 +186,7 @@ export const useColorSelector = ({
   const { supported: eyeDropperSupported, onOpen } = useEyeDropper()
   const [value, setValue] = useControllableState({
     value: valueProp,
-    defaultValue: defaultValue ?? fallbackValue ?? "#ffffffff",
+    defaultValue: defaultValue ?? fallbackValue ?? "#ffffff",
     onChange: onChangeProp,
   })
   const timeoutId = useRef<any>(undefined)
@@ -195,6 +195,7 @@ export const useColorSelector = ({
   const [parsedValue, setParsedValue] = useState<Hsva>(
     convertHsva(value, fallbackValue),
   )
+
   const { h, s, v, a } = parsedValue
   const withAlpha = formatRef.current.endsWith("a")
   const isInteractive = !(disabled || readOnly)

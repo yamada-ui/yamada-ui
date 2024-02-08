@@ -288,8 +288,6 @@ export const customEyeDropperIcon: Story = () => {
 export const customControl: Story = () => {
   const [value, onChange] = useState<string>("#4387f4ff")
 
-  console.log(value)
-
   return <ColorPicker value={value} onChange={onChange} />
 }
 

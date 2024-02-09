@@ -131,7 +131,7 @@ const addReviewers = async (
 
       const count = (requested_reviewers?.length ?? 0) + reviewers.length
 
-      if (count >= 1) return
+      if (count >= 2) return
 
       const omitCollaboratorIds = collaboratorIds.filter(
         (id) =>
@@ -143,7 +143,7 @@ const addReviewers = async (
 
       const selectedReviewers = omitCollaboratorIds
         .sort(() => 0.5 - Math.random())
-        .slice(0, 1 - count)
+        .slice(0, 2 - count)
 
       await octokit.issues.addAssignees({
         ...COMMON_PARAMS,

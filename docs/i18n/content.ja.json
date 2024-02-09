@@ -7264,6 +7264,16 @@
     "hierarchy": { "lv1": "Textarea", "lv2": "使い方", "lv3": "リサイズの設定" }
   },
   {
+    "title": "高さを自動調整する",
+    "type": "fragment",
+    "slug": "/components/forms/textarea#高さを自動調整する",
+    "hierarchy": {
+      "lv1": "Textarea",
+      "lv2": "使い方",
+      "lv3": "高さを自動調整する"
+    }
+  },
+  {
     "title": "ボーダーのカラーを変更する",
     "type": "fragment",
     "slug": "/components/forms/textarea#ボーダーのカラーを変更する",
@@ -9992,6 +10002,37 @@
     }
   },
   {
+    "title": "Gatsbyではじめる",
+    "type": "page",
+    "description": "GatsbyのプロジェクトにYamada UIをインストールして使用するためのガイド。",
+    "slug": "/getting-started/frameworks/gatsby",
+    "hierarchy": { "lv1": "Gatsbyではじめる" }
+  },
+  {
+    "title": "パッケージをインストールする",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/gatsby#パッケージをインストールする",
+    "hierarchy": {
+      "lv1": "Gatsbyではじめる",
+      "lv2": "パッケージをインストールする"
+    }
+  },
+  {
+    "title": "UIProviderを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/gatsby#uiproviderを追加する",
+    "hierarchy": { "lv1": "Gatsbyではじめる", "lv2": "UIProviderを追加する" }
+  },
+  {
+    "title": "コンポーネントを使用する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/gatsby#コンポーネントを使用する",
+    "hierarchy": {
+      "lv1": "Gatsbyではじめる",
+      "lv2": "コンポーネントを使用する"
+    }
+  },
+  {
     "title": "フレームワーク",
     "type": "page",
     "description": "フレームワークごとにYamada UIをインストールして使用する方法。",
@@ -10037,6 +10078,43 @@
       "lv1": "Next.jsではじめる",
       "lv2": "コンポーネントを使用する"
     }
+  },
+  {
+    "title": "Remixではじめる",
+    "type": "page",
+    "description": "RemixのプロジェクトにYamada UIをインストールして使用するためのガイド。",
+    "slug": "/getting-started/frameworks/remix",
+    "hierarchy": { "lv1": "Remixではじめる" }
+  },
+  {
+    "title": "パッケージをインストールする",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#パッケージをインストールする",
+    "hierarchy": {
+      "lv1": "Remixではじめる",
+      "lv2": "パッケージをインストールする"
+    }
+  },
+  {
+    "title": "UIProviderを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#uiproviderを追加する",
+    "hierarchy": { "lv1": "Remixではじめる", "lv2": "UIProviderを追加する" }
+  },
+  {
+    "title": "ColorModeScriptを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#colormodescriptを追加する",
+    "hierarchy": {
+      "lv1": "Remixではじめる",
+      "lv2": "ColorModeScriptを追加する"
+    }
+  },
+  {
+    "title": "コンポーネントを使用する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#コンポーネントを使用する",
+    "hierarchy": { "lv1": "Remixではじめる", "lv2": "コンポーネントを使用する" }
   },
   {
     "title": "Viteではじめる",
@@ -12020,6 +12098,42 @@
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#テーマの運用",
     "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "テーマの運用" }
+  },
+  {
+    "title": "テーマの適用",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#テーマの適用",
+    "hierarchy": { "lv1": "テーマをカスタマイズする", "lv2": "テーマの適用" }
+  },
+  {
+    "title": "Create React Appの場合",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#create-react-appの場合",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "テーマの適用",
+      "lv3": "Create React Appの場合"
+    }
+  },
+  {
+    "title": "Next.jsの場合",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#nextjsの場合",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "テーマの適用",
+      "lv3": "Next.jsの場合"
+    }
+  },
+  {
+    "title": "Viteの場合",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#viteの場合",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "テーマの適用",
+      "lv3": "Viteの場合"
+    }
   },
   {
     "title": "トークンを変更する",

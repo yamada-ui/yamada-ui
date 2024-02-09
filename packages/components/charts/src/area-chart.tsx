@@ -6,23 +6,22 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import { Fragment, useId, useState } from "react"
 import {
   Area,
   CartesianGrid,
-  DotProps,
   Legend,
   AreaChart as ReChartsAreaChart,
   ReferenceLine,
-  ReferenceLineProps,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts"
+import type { ReferenceLineProps, DotProps } from "recharts"
+import type { LayoutType } from "recharts/types/util/types"
 import { AreaChartProvider, useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import { LayoutType } from "recharts/types/util/types"
-import { Fragment, useId, useState } from "react"
 
 export interface ChartSeries {
   name: string

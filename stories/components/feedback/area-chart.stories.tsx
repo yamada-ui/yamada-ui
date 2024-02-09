@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { AreaChart, AreaChartProps } from "@yamada-ui/charts"
-import {
+import type { AreaChartProps } from "@yamada-ui/charts"
+import { AreaChart } from "@yamada-ui/charts"
+import type {
   AreaChartCurveType,
   AreaChartType,
 } from "@yamada-ui/charts/src/area-chart"

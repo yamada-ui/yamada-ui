@@ -9,14 +9,14 @@ order: 5
 
 First, create your application.
 
-Execute one of the following commands in your terminal.
+Execute one of the following commands in the terminal.
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: "pnpm create gatsby",
-    npm: "npm init gatsby",
-    yarn: "yarn create gatsby",
-    bun: "bun create gatsby",
+    pnpm: "pnpm create gatsby -ts",
+    npm: "npm init gatsby -ts",
+    yarn: "yarn create gatsby -ts",
+    bun: "bun create gatsby -ts",
   }}
 />
 
@@ -31,7 +31,7 @@ If you want to use tables, calendars, carousels, etc., you need to install them 
     {
       name: "@yamada-ui/table",
       description:
-        "Provides a convenient table component using [@tanstack/react-table](https://tanstack.com/table/v8).",
+        "Provides convenient table components using [@tanstack/react-table](https://tanstack.com/table/v8).",
       isDefaultCheck: true,
     },
     {
@@ -42,17 +42,17 @@ If you want to use tables, calendars, carousels, etc., you need to install them 
     {
       name: "@yamada-ui/carousel",
       description:
-        "Provides a convenient carousel component using [embla-carousel-react](https://www.embla-carousel.com/).",
+        "Provides convenient carousel components using [embla-carousel-react](https://www.embla-carousel.com/).",
     },
     {
       name: "@yamada-ui/dropzone",
       description:
-        "Provides a convenient dropzone component using [react-dropzone](https://react-dropzone.js.org/).",
+        "Provides convenient dropzone components using [react-dropzone](https://react-dropzone.js.org/).",
     },
     {
       name: "@yamada-ui/markdown",
       description:
-        "Provides a convenient markdown component using [react-markdown](https://remarkjs.github.io/react-markdown/) and [react-syntax-highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/).",
+        "Provides convenient markdown components using [react-markdown](https://remarkjs.github.io/react-markdown/) and [react-syntax-highlighter](https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/).",
     },
     {
       name: "@yamada-ui/fontawesome",
@@ -64,18 +64,20 @@ If you want to use tables, calendars, carousels, etc., you need to install them 
 
 :::note
 To install individual components or hooks for improved performance, please check [here](/getting-started/installation/individual).
-If you want to use only the Yamada UI style system, please check [here](/getting-started/installation/minimal).
+If you only want to use the Yamada UI style system, please check [here](/getting-started/installation/minimal).
 :::
 
 ## Add `UIProvider`
 
-After installing Yamada UI, create a gatsby-browser.js file in the root directory and add the UIProvider.
+After installing Yamada UI, create `gatsby-browser.tsx` and add `UIProvider`.
 
-```tsx live=false title=gatsby-browser.js highlight={2,5}
-import React from "react"
+```tsx live=false title=gatsby-browser.tsx
+import * as React from "react"
 import { UIProvider } from "@yamada-ui/react"
 
-export const wrapRootElement = ({ element }) => {
+export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
+  element,
+}) => {
   return <UIProvider>{element}</UIProvider>
 }
 ```
@@ -88,15 +90,20 @@ The [Default Theme](/styled-system/theming/default-theme) is included within `UI
 If you want to customize the theme or configuration, please check [Customize Theme](/styled-system/theming/customize-theme) and [Customize Config](/styled-system/configure/customize-config).
 :::
 
-## Use Components
+## Use components
 
 Once you've added `UIProvider`, you can start using components within your application.
 
-```tsx live=false title=home.tsx
-import React from "react"
+```tsx live=false title=index.tsx
+import * as React from "react"
 import { Button } from "@yamada-ui/react"
+import type { HeadFC, PageProps } from "gatsby"
 
-export default function Home() {
+const IndexPage: React.FC<PageProps> = () => {
   return <Button>Click me!</Button>
 }
+
+export default IndexPage
+
+export const Head: HeadFC = () => <title>Home Page</title>
 ```

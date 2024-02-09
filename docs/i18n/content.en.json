@@ -6835,6 +6835,16 @@
     "hierarchy": { "lv1": "Textarea", "lv2": "Usage", "lv3": "Resize Settings" }
   },
   {
+    "title": "Auto-sizing Height",
+    "type": "fragment",
+    "slug": "/components/forms/textarea#auto-sizing-height",
+    "hierarchy": {
+      "lv1": "Textarea",
+      "lv2": "Usage",
+      "lv3": "Auto-sizing Height"
+    }
+  },
+  {
     "title": "Change Border Color",
     "type": "fragment",
     "slug": "/components/forms/textarea#change-border-color",
@@ -9448,6 +9458,40 @@
     }
   },
   {
+    "title": "Getting Started with Gatsby",
+    "type": "page",
+    "description": "A guide to installing and using Yamada UI in your Gatsby project.",
+    "slug": "/getting-started/frameworks/gatsby",
+    "hierarchy": { "lv1": "Getting Started with Gatsby" }
+  },
+  {
+    "title": "Install the package",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/gatsby#install-the-package",
+    "hierarchy": {
+      "lv1": "Getting Started with Gatsby",
+      "lv2": "Install the package"
+    }
+  },
+  {
+    "title": "Add UIProvider",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/gatsby#add-uiprovider",
+    "hierarchy": {
+      "lv1": "Getting Started with Gatsby",
+      "lv2": "Add UIProvider"
+    }
+  },
+  {
+    "title": "Use components",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/gatsby#use-components",
+    "hierarchy": {
+      "lv1": "Getting Started with Gatsby",
+      "lv2": "Use components"
+    }
+  },
+  {
     "title": "Framework",
     "type": "page",
     "description": "How to install and use Yamada UI for each framework.",
@@ -9494,6 +9538,49 @@
     "slug": "/getting-started/frameworks/nextjs#use-components",
     "hierarchy": {
       "lv1": "Getting Started with Next.js",
+      "lv2": "Use Components"
+    }
+  },
+  {
+    "title": "Getting Started with Remix",
+    "type": "page",
+    "description": "A guide to installing and using Yamada UI in your Remix project.",
+    "slug": "/getting-started/frameworks/remix",
+    "hierarchy": { "lv1": "Getting Started with Remix" }
+  },
+  {
+    "title": "Install the package",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#install-the-package",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
+      "lv2": "Install the package"
+    }
+  },
+  {
+    "title": "Add UIProvider",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#add-uiprovider",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
+      "lv2": "Add UIProvider"
+    }
+  },
+  {
+    "title": "Add ColorModeScript",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#add-colormodescript",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
+      "lv2": "Add ColorModeScript"
+    }
+  },
+  {
+    "title": "Use Components",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#use-components",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
       "lv2": "Use Components"
     }
   },
@@ -10744,7 +10831,7 @@
   {
     "title": "Color Mode",
     "type": "page",
-    "description": "All components of Yamada UI support dark mode.",
+    "description": "All components in Yamada UI support dark mode.",
     "slug": "/styled-system/color-mode",
     "hierarchy": { "lv1": "Color Mode" }
   },
@@ -10775,32 +10862,32 @@
     }
   },
   {
-    "title": "In the case of Create React App",
+    "title": "For Create React App",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#in-the-case-of-create-react-app",
+    "slug": "/styled-system/color-mode#for-create-react-app",
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Setup",
       "lv3": "Add ColorModeScript",
-      "lv4": "In the case of Create React App"
+      "lv4": "For Create React App"
     }
   },
   {
-    "title": "In the case of Next.js",
+    "title": "For Next.js",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#in-the-case-of-nextjs",
+    "slug": "/styled-system/color-mode#for-nextjs",
     "hierarchy": {
       "lv1": "Color Mode",
       "lv2": "Setup",
       "lv3": "Add ColorModeScript",
-      "lv4": "In the case of Next.js"
+      "lv4": "For Next.js"
     }
   },
   {
-    "title": "Adding colorModeManager",
+    "title": "Add colorModeManager",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#adding-colormodemanager",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Adding colorModeManager" }
+    "slug": "/styled-system/color-mode#add-colormodemanager",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Add colorModeManager" }
   },
   {
     "title": "Prepare getServerSideProps",
@@ -10808,18 +10895,18 @@
     "slug": "/styled-system/color-mode#prepare-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Adding colorModeManager",
+      "lv2": "Add colorModeManager",
       "lv3": "Prepare getServerSideProps"
     }
   },
   {
-    "title": "Set cookies for colorModeManager",
+    "title": "Set cookies in colorModeManager",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#set-cookies-for-colormodemanager",
+    "slug": "/styled-system/color-mode#set-cookies-in-colormodemanager",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Adding colorModeManager",
-      "lv3": "Set cookies for colorModeManager"
+      "lv2": "Add colorModeManager",
+      "lv3": "Set cookies in colorModeManager"
     }
   },
   {
@@ -10828,46 +10915,46 @@
     "slug": "/styled-system/color-mode#add-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Adding colorModeManager",
+      "lv2": "Add colorModeManager",
       "lv3": "Add getServerSideProps"
     }
   },
   {
-    "title": "Syntax for Color Mode",
+    "title": "Color Mode Syntax",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#syntax-for-color-mode",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Syntax for Color Mode" }
+    "slug": "/styled-system/color-mode#color-mode-syntax",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Syntax" }
   },
   {
-    "title": "Switching Color Mode",
+    "title": "Switching Color Modes",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#switching-color-mode",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Switching Color Mode" }
+    "slug": "/styled-system/color-mode#switching-color-modes",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Switching Color Modes" }
   },
   {
-    "title": "Color Mode Utility",
+    "title": "Color Mode Utilities",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#color-mode-utility",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utility" }
+    "slug": "/styled-system/color-mode#color-mode-utilities",
+    "hierarchy": { "lv1": "Color Mode", "lv2": "Color Mode Utilities" }
   },
   {
-    "title": "Using useColorMode",
+    "title": "Use useColorMode",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#using-usecolormode",
+    "slug": "/styled-system/color-mode#use-usecolormode",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Color Mode Utility",
-      "lv3": "Using useColorMode"
+      "lv2": "Color Mode Utilities",
+      "lv3": "Use useColorMode"
     }
   },
   {
-    "title": "Using useColorModeValue",
+    "title": "Use useColorModeValue",
     "type": "fragment",
-    "slug": "/styled-system/color-mode#using-usecolormodevalue",
+    "slug": "/styled-system/color-mode#use-usecolormodevalue",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Color Mode Utility",
-      "lv3": "Using useColorModeValue"
+      "lv2": "Color Mode Utilities",
+      "lv3": "Use useColorModeValue"
     }
   },
   {
@@ -11423,6 +11510,42 @@
     "hierarchy": { "lv1": "Customize Theme", "lv2": "Theme Usage" }
   },
   {
+    "title": "Applying Theme",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#applying-theme",
+    "hierarchy": { "lv1": "Customize Theme", "lv2": "Applying Theme" }
+  },
+  {
+    "title": "In the case of Create React App.",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#in-the-case-of-create-react-app",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Applying Theme",
+      "lv3": "In the case of Create React App."
+    }
+  },
+  {
+    "title": "In the case of Next.js.",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#in-the-case-of-nextjs",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Applying Theme",
+      "lv3": "In the case of Next.js."
+    }
+  },
+  {
+    "title": "In the case of Vite.",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#in-the-case-of-vite",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Applying Theme",
+      "lv3": "In the case of Vite."
+    }
+  },
+  {
     "title": "Changing Tokens",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-tokens",
@@ -11902,84 +12025,84 @@
     "hierarchy": { "lv1": "Theming" }
   },
   {
-    "title": "Switch Themes",
+    "title": "Switching Themes",
     "type": "page",
     "description": "How users can switch themes.",
     "slug": "/styled-system/theming/switch-themes",
-    "hierarchy": { "lv1": "Switch Themes" }
+    "hierarchy": { "lv1": "Switching Themes" }
   },
   {
     "title": "Setup",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-themes#setup",
-    "hierarchy": { "lv1": "Switch Themes", "lv2": "Setup" }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Setup" }
   },
   {
-    "title": "Preparing Multiple Themes",
+    "title": "Prepare multiple themes",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#preparing-multiple-themes",
+    "slug": "/styled-system/theming/switch-themes#prepare-multiple-themes",
     "hierarchy": {
-      "lv1": "Switch Themes",
+      "lv1": "Switching Themes",
       "lv2": "Setup",
-      "lv3": "Preparing Multiple Themes"
+      "lv3": "Prepare multiple themes"
     }
   },
   {
-    "title": "Adding ThemeSchemeScript",
+    "title": "Add ThemeSchemeScript",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#adding-themeschemescript",
+    "slug": "/styled-system/theming/switch-themes#add-themeschemescript",
     "hierarchy": {
-      "lv1": "Switch Themes",
+      "lv1": "Switching Themes",
       "lv2": "Setup",
-      "lv3": "Adding ThemeSchemeScript"
+      "lv3": "Add ThemeSchemeScript"
     }
   },
   {
-    "title": "In the case of Create React App",
+    "title": "For Create React App",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#in-the-case-of-create-react-app",
+    "slug": "/styled-system/theming/switch-themes#for-create-react-app",
     "hierarchy": {
-      "lv1": "Switch Themes",
+      "lv1": "Switching Themes",
       "lv2": "Setup",
-      "lv3": "Adding ThemeSchemeScript",
-      "lv4": "In the case of Create React App"
+      "lv3": "Add ThemeSchemeScript",
+      "lv4": "For Create React App"
     }
   },
   {
-    "title": "In the case of Next.js",
+    "title": "For Next.js",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#in-the-case-of-nextjs",
+    "slug": "/styled-system/theming/switch-themes#for-nextjs",
     "hierarchy": {
-      "lv1": "Switch Themes",
+      "lv1": "Switching Themes",
       "lv2": "Setup",
-      "lv3": "Adding ThemeSchemeScript",
-      "lv4": "In the case of Next.js"
+      "lv3": "Add ThemeSchemeScript",
+      "lv4": "For Next.js"
     }
   },
   {
-    "title": "Adding themeSchemeManager",
+    "title": "Add themeSchemeManager",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#adding-themeschememanager",
-    "hierarchy": { "lv1": "Switch Themes", "lv2": "Adding themeSchemeManager" }
+    "slug": "/styled-system/theming/switch-themes#add-themeschememanager",
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Add themeSchemeManager" }
   },
   {
     "title": "Prepare getServerSideProps",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-themes#prepare-getserversideprops",
     "hierarchy": {
-      "lv1": "Switch Themes",
-      "lv2": "Adding themeSchemeManager",
+      "lv1": "Switching Themes",
+      "lv2": "Add themeSchemeManager",
       "lv3": "Prepare getServerSideProps"
     }
   },
   {
-    "title": "Set cookies for themeSchemeManager",
+    "title": "Set cookies in themeSchemeManager",
     "type": "fragment",
-    "slug": "/styled-system/theming/switch-themes#set-cookies-for-themeschememanager",
+    "slug": "/styled-system/theming/switch-themes#set-cookies-in-themeschememanager",
     "hierarchy": {
-      "lv1": "Switch Themes",
-      "lv2": "Adding themeSchemeManager",
-      "lv3": "Set cookies for themeSchemeManager"
+      "lv1": "Switching Themes",
+      "lv2": "Add themeSchemeManager",
+      "lv3": "Set cookies in themeSchemeManager"
     }
   },
   {
@@ -11987,8 +12110,8 @@
     "type": "fragment",
     "slug": "/styled-system/theming/switch-themes#add-getserversideprops",
     "hierarchy": {
-      "lv1": "Switch Themes",
-      "lv2": "Adding themeSchemeManager",
+      "lv1": "Switching Themes",
+      "lv2": "Add themeSchemeManager",
       "lv3": "Add getServerSideProps"
     }
   },
@@ -11996,7 +12119,7 @@
     "title": "Switching Themes",
     "type": "fragment",
     "slug": "/styled-system/theming/switch-themes#switching-themes",
-    "hierarchy": { "lv1": "Switch Themes", "lv2": "Switching Themes" }
+    "hierarchy": { "lv1": "Switching Themes", "lv2": "Switching Themes" }
   },
   {
     "title": "ui",

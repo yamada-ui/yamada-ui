@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.0.5
+
+### Patch Changes
+
+- [#714](https://github.com/hirotomoyamada/yamada-ui/pull/714) [`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `sameColor` function.
+
 ## 1.0.4
 
 ### Patch Changes

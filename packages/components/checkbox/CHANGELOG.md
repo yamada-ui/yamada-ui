@@ -1,5 +1,20 @@
 # @yamada-ui/checkbox
 
+## 1.0.15
+
+### Patch Changes
+
+- [#706](https://github.com/hirotomoyamada/yamada-ui/pull/706) [`111058c`](https://github.com/hirotomoyamada/yamada-ui/commit/111058c1152100627ed9b9e17cd9273e4da2137c) Thanks [@apple-yagi](https://github.com/apple-yagi)! - Removed unnecessary `aria-readonly`
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/form-control@1.0.14
+  - @yamada-ui/layouts@1.1.8
+  - @yamada-ui/motion@1.0.12
+  - @yamada-ui/core@1.3.2
+  - @yamada-ui/use-controllable-state@1.0.5
+  - @yamada-ui/use-focus-visible@1.0.5
+
 ## 1.0.14
 
 ### Patch Changes

@@ -1,5 +1,23 @@
 # @yamada-ui/calendar
 
+## 1.1.8
+
+### Patch Changes
+
+- [#706](https://github.com/hirotomoyamada/yamada-ui/pull/706) [`111058c`](https://github.com/hirotomoyamada/yamada-ui/commit/111058c1152100627ed9b9e17cd9273e4da2137c) Thanks [@apple-yagi](https://github.com/apple-yagi)! - Removed unnecessary `aria-readonly`
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/button@1.0.13
+  - @yamada-ui/form-control@1.0.14
+  - @yamada-ui/icon@1.0.11
+  - @yamada-ui/popover@1.0.12
+  - @yamada-ui/portal@1.0.5
+  - @yamada-ui/core@1.3.2
+  - @yamada-ui/use-clickable@1.0.5
+  - @yamada-ui/use-controllable-state@1.0.5
+  - @yamada-ui/use-outside-click@1.0.5
+
 ## 1.1.7
 
 ### Patch Changes

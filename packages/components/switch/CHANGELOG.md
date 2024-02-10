@@ -1,5 +1,15 @@
 # @yamada-ui/switch
 
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529), [`111058c`](https://github.com/hirotomoyamada/yamada-ui/commit/111058c1152100627ed9b9e17cd9273e4da2137c)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/checkbox@1.0.15
+  - @yamada-ui/motion@1.0.12
+  - @yamada-ui/core@1.3.2
+
 ## 1.0.14
 
 ### Patch Changes

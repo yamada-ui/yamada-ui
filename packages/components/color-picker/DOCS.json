@@ -17,7 +17,7 @@
     },
     "defaultValue": {
       "type": "string",
-      "defaultValue": "#ffffffff",
+      "defaultValue": "#ffffff",
       "required": false,
       "description": "The initial value of the color selector."
     },
@@ -255,7 +255,7 @@
     },
     "defaultValue": {
       "type": "string",
-      "defaultValue": "#ffffffff",
+      "defaultValue": "#ffffff",
       "required": false,
       "description": "The initial value of the color selector."
     },

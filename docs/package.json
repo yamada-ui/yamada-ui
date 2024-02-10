@@ -18,6 +18,8 @@
     "gen:content": "contentlayer build --clearCache",
     "gen:translate": "tsx scripts/translate-content",
     "gen:tokens": "yamada-cli tokens theme/index.ts",
+    "observe:issue": "tsx scripts/observe-issues",
+    "observe:pr": "tsx scripts/observe-pull-requests",
     "format": "prettier --write .",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",

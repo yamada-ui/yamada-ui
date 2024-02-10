@@ -220,7 +220,7 @@ const createNoticeStore = (initialState: State): Store => {
     },
 
     create: (message, options) => {
-      const limit = (options.limit ?? 0) - 1
+      const limit = options.limit
 
       const notice = createNotice(message, options)
       const { placement, id } = notice
@@ -228,8 +228,12 @@ const createNoticeStore = (initialState: State): Store => {
       setState((prev) => {
         let prevNotices = prev[placement] ?? []
 
-        if (limit > 0 && prevNotices.length > limit) {
-          const n = prevNotices.length - limit
+        if (
+          limit !== undefined &&
+          limit > 0 &&
+          prevNotices.length > limit - 1
+        ) {
+          const n = prevNotices.length - (limit - 1)
           const notices = placement.includes("top")
             ? prevNotices.slice(n * -1)
             : prevNotices.slice(0, n)

@@ -2,7 +2,7 @@ name: "Feature Request (日本語)"
 description: "機能や強化をリクエストします"
 labels: ["enhancement"]
 body:
-  - type: "markdown"
+  - type: markdown
     attributes:
       value: |
         機能のリクエストを作成していただきありがとうございます！ 😎
@@ -12,15 +12,15 @@ body:
           - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
           - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
           - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
-  - type: "textarea"
-    id: "description"
+  - type: textarea
+    id: description
     attributes:
       label: "概要"
       description: "このリクエストを1,2行で説明してください。"
     validations:
       required: true
-  - type: "textarea"
-    id: "justification"
+  - type: textarea
+    id: justification
     attributes:
       label: "問題の主張/正当化"
       description: |
@@ -29,8 +29,8 @@ body:
         この機能が遭遇した問題に関連している場合は、それも説明してください。
     validations:
       required: true
-  - type: "textarea"
-    id: "proposed-solution"
+  - type: textarea
+    id: proposed-solution
     attributes:
       label: "提案する解決策やAPI"
       description: 理想的な設計やAPIへのコードスニペット、またはリンクを提供してください。
@@ -41,13 +41,25 @@ body:
         1. '...'に行く
         2. '....'をクリックする
         3. ....
-  - type: "textarea"
-    id: "alternatives"
+  - type: textarea
+    id: alternatives
     attributes:
       label: "代替案"
       description: このリクエストをする前に、他の代替解決策や機能を検討しましたか？
-  - type: "textarea"
-    id: "additional-information"
+  - type: dropdown
+    id: participate
+    attributes:
+      label: この機能の実装に参加し、実装を含むプルリクエストを作成しますか？
+      options:
+        - "はい"
+        - "いいえ"
+  - type: textarea
+    id: additional-information
     attributes:
       label: "追加情報"
       description: この機能を理解または実装するのに役立つリソース（リンク、スクリーンショットなど）がありますか？
+  - type: markdown
+    attributes:
+      value: |
+        このイシューは、アサインされてから2週間経過すると自動的にアサインがクリアされます。
+        アサインがクリアされると、他の方が作業する可能性があります。

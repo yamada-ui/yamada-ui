@@ -9,7 +9,7 @@ import {
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControlProps,
-  formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { ChevronIcon } from "@yamada-ui/icon"
 import {
@@ -19,6 +19,7 @@ import {
   getValidChildren,
   isValidElement,
   pickObject,
+  omitObject,
 } from "@yamada-ui/utils"
 import type {
   DetailedHTMLProps,
@@ -121,8 +122,14 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
 
     rest = useFormControlProps(rest)
 
-    const formControlProps = pickObject(rest, formControlProperties)
-    const [layoutProps, selectProps] = splitObject(rest, layoutStyleProperties)
+    const formControlProps = pickObject(
+      rest,
+      getFormControlProperties({ omit: ["aria-readonly"] }),
+    )
+    const [layoutProps, selectProps] = splitObject(
+      omitObject(rest, ["aria-readonly"]),
+      layoutStyleProperties,
+    )
 
     let computedChildren: ReactElement[] = []
 

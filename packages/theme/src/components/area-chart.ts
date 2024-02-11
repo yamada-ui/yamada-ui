@@ -1,7 +1,11 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const AreaChart: ComponentMultiStyle = {
-  baseStyle: {},
+  baseStyle: {
+    grid: {},
+    xAxis: {},
+    yAxis: {},
+  },
 
   variants: {},
 

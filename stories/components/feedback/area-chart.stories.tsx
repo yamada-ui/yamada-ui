@@ -76,9 +76,9 @@ const data = [
   },
 ]
 const series = [
-  { name: "uv", color: "#008b8b" },
-  { name: "pv", color: "#ff6347" },
-  { name: "amt", color: "#4682b4" },
+  { name: "uv", color: "indigo.400" },
+  { name: "pv", color: "rose.400" },
+  { name: "amt", color: "emerald.400" },
 ]
 
 export const basic: Story = () => {
@@ -364,9 +364,9 @@ export const custom: Story = () => {
 }
 
 const dashSeries = [
-  { name: "uv", color: "#008b8b" },
-  { name: "pv", color: "#ff6347" },
-  { name: "amt", color: "#4682b4", strokeDasharray: "5 5" },
+  { name: "uv", color: "indigo.400" },
+  { name: "pv", color: "rose.400" },
+  { name: "amt", color: "emerald.400", strokeDasharray: "5 5" },
 ]
 
 export const dash: Story = () => {
@@ -403,7 +403,7 @@ const splitData = [
     uv: 3490,
   },
 ]
-const splitSeries = [{ name: "uv", color: "#008b8b" }]
+const splitSeries = [{ name: "uv", color: "indigo.400" }]
 
 export const split: Story = () => {
   const [splitOffset, setSplitOffset] = useState<number | undefined>()
@@ -416,7 +416,7 @@ export const split: Story = () => {
         series={splitSeries}
         dataKey="name"
         type="split"
-        splitColors={["red", "green"]}
+        splitColors={["red.400", "green.400"]}
         splitOffset={splitOffset}
       />
       <FormControl label="split offset">
@@ -469,7 +469,7 @@ const connectNullsData = [
     uv: 3490,
   },
 ]
-const connectNullsSeries = [{ name: "uv", color: "#008b8b" }]
+const connectNullsSeries = [{ name: "uv", color: "indigo.400" }]
 
 export const connectNulls: Story = () => {
   const [connectNulls, { toggle }] = useBoolean(true)
@@ -516,7 +516,7 @@ export const referenceLine: Story = () => {
       series={series}
       dataKey="name"
       referenceLines={[
-        { y: 5500, label: "x line", color: "red" },
+        { y: 5500, label: "x line", color: "red.500" },
         { x: "Page F", label: "y line" },
       ]}
     />

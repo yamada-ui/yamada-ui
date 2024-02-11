@@ -5,6 +5,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import { useToken, useValue } from "@yamada-ui/react"
 import { cx } from "@yamada-ui/utils"
 import { Fragment, useId, useState } from "react"
 import {
@@ -292,7 +293,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
 
   const areas = series.map((item) => {
     const id = `${baseId}-${item.color}`
-    const color = item.color
+    const color = useToken("colors", useValue(item.color)) ?? item.color
     const dimmed = shouldHighlight && highlightedArea !== item.name
 
     return (
@@ -309,7 +310,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
           activeDot={
             withActiveDots
               ? {
-                  fill: "#ffffff",
+                  fill: "#fff",
                   stroke: color,
                   strokeWidth: 2,
                   r: 4,
@@ -346,15 +347,16 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   })
 
   const referenceLinesItems = referenceLines?.map((line, index) => {
+    const color = useToken("colors", useValue(line.color)) ?? line.color
     return (
       <ReferenceLine
         key={index}
-        stroke={line.color ?? "grey"}
+        stroke={color ?? "gray"}
         strokeWidth={1}
         {...line}
         label={{
           value: line.label as string,
-          fill: line.color ?? "currentColor",
+          fill: color ?? "currentColor",
           fontSize: 12,
           position: "insideBottomLeft",
         }}
@@ -384,6 +386,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 strokeDasharray={strokeDasharray}
                 vertical={gridAxis === "y" || gridAxis === "xy"}
                 horizontal={gridAxis === "x" || gridAxis === "xy"}
+                // {...styles.grid}
                 {...gridProps}
               />
 
@@ -401,6 +404,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 interval="preserveStartEnd"
                 tickLine={withXTickLine ? { stroke: "currentColor" } : false}
                 minTickGap={5}
+                // {...styles.xAxis}
                 {...xAxisProps}
               />
 
@@ -421,6 +425,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 tickFormatter={
                   type === "percent" ? valueToPercent : valueFormatter
                 }
+                // {...styles.yAxis}
                 {...yAxisProps}
               />
 
@@ -491,16 +496,20 @@ type AreaSplitProps = {
 }
 
 const AreaSplit = ({ offset, id, colors, fillOpacity }: AreaSplitProps) => {
+  const _colors = colors.map(
+    (color) => useToken("colors", useValue(color)) ?? color,
+  )
+
   return (
     <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
       <stop
         offset={offset}
-        stopColor={colors[0]}
+        stopColor={_colors[0]}
         stopOpacity={fillOpacity ?? 0.2}
       />
       <stop
         offset={offset}
-        stopColor={colors[1]}
+        stopColor={_colors[1]}
         stopOpacity={fillOpacity ?? 0.2}
       />
     </linearGradient>

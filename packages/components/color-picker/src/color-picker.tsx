@@ -73,7 +73,23 @@ type ColorPickerOptions = {
 export type ColorPickerProps = ThemeProps<"ColorPicker"> &
   UseColorPickerProps &
   ColorPickerOptions
-
+ & Pick<
+   ColorSelectorProps,
+   | "withPicker"
+   | "withChannel"
+   | "saturationSliderRef"
+   | "saturationSliderProps"
+   | "swatchesProps"
+   | "withResult"
+   | "hueSliderRef"
+   | "hueSliderProps"
+   | "alphaSliderRef"
+   | "alphaSliderProps"
+   | "swatchesLabel"
+   | "swatches"
+   | "swatchesColumns"
+   | "channelProps"
+  >
 /**
  * `ColorPicker` is a component used by the user to select a color or enter an arbitrary color value.
  *
@@ -98,6 +114,20 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       swatchProps,
       eyeDropperProps,
       portalProps = { isDisabled: true },
+           withPicker,
+     withChannel,
+     saturationSliderRef,
+     saturationSliderProps,
+     swatchesProps,
+      withResult,
+     hueSliderRef,
+     hueSliderProps,
+     alphaSliderRef,
+     alphaSliderProps,
+     swatchesLabel,
+     swatches,
+     swatchesColumns,
+     channelProps,
       ...computedProps
     } = omitThemeProps(omitObject(mergedProps, ["withSwatch"]))
     const {
@@ -160,7 +190,22 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
               >
                 <ColorSelector
                   className="ui-color-picker__picker"
-                  {...getSelectorProps()}
+                                   {...getSelectorProps({
+                   withPicker,
+                   withChannel,
+                   saturationSliderRef,
+                   saturationSliderProps,
+                   swatchesProps,
+                   withResult,
+                   hueSliderRef,
+                   hueSliderProps,
+                   alphaSliderRef,
+                   alphaSliderProps,
+                   swatchesLabel,
+                   swatches,
+                   swatchesColumns,
+                   channelProps,
+                 })}
                 />
               </PopoverContent>
             </Portal>

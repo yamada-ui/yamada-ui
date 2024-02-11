@@ -18,19 +18,27 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
-import type { ReferenceLineProps, DotProps } from "recharts"
-import type { LayoutType } from "recharts/types/util/types"
+import type {
+  ReferenceLineProps,
+  DotProps,
+  XAxisProps,
+  YAxisProps,
+  LegendProps,
+  CartesianGridProps,
+  TooltipProps,
+} from "recharts"
 import { AreaChartProvider, useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
 
-export interface ChartSeries {
+export type LayoutType = "horizontal" | "vertical"
+
+export type ChartSeries = {
   name: string
-  // color: MantineColor;
   color: string
   label?: string
 }
 
-export interface AreaChartSeries extends ChartSeries {
+export type AreaChartSeries = ChartSeries & {
   strokeDasharray?: string | number
 }
 
@@ -49,7 +57,7 @@ type AreaChartOptions = {
   /**
    * Chart data.
    */
-  data: any[]
+  data: Record<string, any>[]
   /**
    * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
    */
@@ -66,8 +74,6 @@ type AreaChartOptions = {
   type?: AreaChartType
   /**
    *  Determines whether the chart area should be represented with a gradient instead of the solid color.
-   *
-   * @default false
    */
   withGradient?: boolean
   /**
@@ -83,27 +89,27 @@ type AreaChartOptions = {
    */
   withDots?: boolean
   /**
-   *  Props passed down to all dots. Ignored if `withDots={false}` is set.
+   *  Determines whether activeDots should be displayed.
+   *
+   * @default true
    */
-  dotProps?: Omit<DotProps, "ref">
+  withActiveDots?: boolean
   /**
-   *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
-   */
-  activeDotProps?: Omit<DotProps, "ref">
-  /**
-   *  Stroke width for the chart areas, `2` by default
+   *  Stroke width for the chart areas.
+   *
+   * @default 2
    */
   strokeWidth?: number
   /**
-   *  Props passed down to recharts `AreaChart` component
-   */
-  areaChartProps?: React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
-  /**
-   *  Controls fill opacity of all areas, `0.2` by default
+   *  Controls fill opacity of all areas.
+   *
+   * @default 0.2
    */
   fillOpacity?: number
   /**
-   *  A tuple of colors used when `type="split"` is set, ignored in all other cases. A tuple may include theme colors reference or any valid CSS colors `['green.7', 'red.7']` by default.
+   *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
+   *
+   * @default ["#28412c", "#ff0000"]
    */
   splitColors?: [string, string]
   /**
@@ -111,7 +117,9 @@ type AreaChartOptions = {
    */
   splitOffset?: number
   /**
-   *  Determines whether points with `null` values should be connected, `true` by default
+   *  Determines whether points with `null` values should be connected.
+   *
+   * @default true
    */
   connectNulls?: boolean
   /**
@@ -147,7 +155,7 @@ type AreaChartOptions = {
   /**
    * The option is the configuration of tick lines.
    *
-   * @default `y`
+   * @default 'y'
    */
   tickLine?: string
   /**
@@ -167,7 +175,7 @@ type AreaChartOptions = {
    */
   referenceLines?: ReferenceLineProps[]
   /**
-   * Dash array for the grid lines and cursor.
+   * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
    *
    * @default '5 5'
    */
@@ -180,6 +188,38 @@ type AreaChartOptions = {
    * A function to format values on Y axis and inside the tooltip
    */
   valueFormatter?: (value: number) => string
+  /**
+   *  Props passed down to recharts `AreaChart` component.
+   */
+  areaChartProps?: React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+  /**
+   *  Props passed down to all dots. Ignored if `withDots={false}` is set.
+   */
+  dotProps?: Omit<DotProps, "ref">
+  /**
+   *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
+   */
+  activeDotProps?: Omit<DotProps, "ref">
+  /**
+   *  Props passed down to recharts 'XAxis' component.
+   */
+  xAxisProps?: XAxisProps
+  /**
+   *  Props passed down to recharts 'YAxis' component.
+   */
+  yAxisProps?: YAxisProps
+  /**
+   *  Props passed down to recharts 'Legend' component.
+   */
+  legendProps?: Omit<LegendProps, "ref">
+  /**
+   *  Props passed down to recharts 'Tooltip' component.
+   */
+  tooltipProps?: Omit<TooltipProps<any, any>, "ref">
+  /**
+   *  Props passed down to recharts 'CartesianGrid' component.
+   */
+  gridProps?: CartesianGridProps
 }
 
 export type AreaChartProps = HTMLUIProps<"div"> &
@@ -195,35 +235,46 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const {
     className,
     data,
+    series,
+    dataKey,
+    type = "default",
+    withGradient,
+    curveType = "monotone",
+    withDots = true,
+    withActiveDots = true,
+    strokeWidth = 2,
+    fillOpacity = 0.2,
+    splitColors = ["#28412c", "#ff0000"],
+    splitOffset,
     withXAxis = true,
     withYAxis = true,
-    withDots = true,
     withTooltip = true,
     withLegend = false,
     connectNulls = true,
-    strokeWidth = 2,
     tooltipAnimationDuration = 0,
-    fillOpacity = 0.2,
     tickLine = "y",
-    strokeDasharray = "5 5",
-    curveType = "monotone",
     gridAxis = "x",
-    type = "default",
-    splitColors = ["green.7", "red.7"],
     orientation = "horizontal",
     referenceLines,
-    dataKey,
+    strokeDasharray = "5 5",
     unit,
-    series,
     valueFormatter,
-    withGradient,
+    areaChartProps,
     dotProps,
     activeDotProps,
+    xAxisProps,
+    yAxisProps,
+    legendProps,
+    tooltipProps,
+    gridProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {} = useChart(computedProps)
-  const {} = useAreaChart(computedProps)
+  const { getDefaultSplitOffset } = useAreaChart({
+    data,
+    series,
+  })
 
   const css: CSSUIObject = styles
   const baseId = useId()
@@ -235,11 +286,12 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const _withGradient =
     typeof withGradient === "boolean" ? withGradient : type === "default"
   const stacked = type === "stacked" || type === "percent"
+  //todo: legendでホバーした奴をハイライトするやつ
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
 
   const areas = series.map((item) => {
-    const id = `${baseId}-${item.color.replace(/[^a-zA-Z0-9]/g, "")}`
+    const id = `${baseId}-${item.color}`
     const color = item.color
     const dimmed = shouldHighlight && highlightedArea !== item.name
 
@@ -254,9 +306,8 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
           />
         </defs>
         <Area
-          // {...getStyles('area')}
           activeDot={
-            withDots
+            withActiveDots
               ? {
                   fill: "#ffffff",
                   stroke: color,
@@ -295,26 +346,26 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   })
 
   const referenceLinesItems = referenceLines?.map((line, index) => {
-    const color = "#000000"
     return (
       <ReferenceLine
         key={index}
-        stroke={line.color ? color : "var(--chart-grid-color)"}
+        stroke={line.color ?? "grey"}
         strokeWidth={1}
         {...line}
-        // label={{
-        //   value: line.label,
-        //   fill: line.color ? color : 'currentColor',
-        //   fontSize: 12,
-        //   position: line.labelPosition ?? 'insideBottomLeft',
-        // }}
-        // {...getStyles('referenceLine')}
+        label={{
+          value: line.label as string,
+          fill: line.color ?? "currentColor",
+          fontSize: 12,
+          position: "insideBottomLeft",
+        }}
       />
     )
   })
 
   return (
-    <ui.div ref={ref} className={cx("ui-line-chart", className)} __css={css}>
+    //!なぜかwidthとheightが効かない
+    // <ui.div ref={ref} as={ResponsiveContainer} width={730} height={250} className={cx("ui-area-chart", className)} __css={css}>
+    <ui.div ref={ref} className={cx("ui-area-chart", className)} __css={css}>
       <ChartProvider value={{ styles }}>
         <AreaChartProvider value={{}}>
           <ResponsiveContainer width={730} height={250}>
@@ -322,31 +373,18 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
               data={data}
               stackOffset={type === "percent" ? "expand" : undefined}
               layout={orientation}
+              {...areaChartProps}
             >
               {referenceLinesItems}
-              {withLegend ? <Legend /> : null}
-              {/* {withLegend && (
-            <Legend
-              verticalAlign="top"
-              content={(payload) => (
-                <ChartLegend
-                  payload={payload.payload}
-                  onHighlight={setHighlightedArea}
-                  legendPosition={legendProps?.verticalAlign || 'top'}
-                  classNames={resolvedClassNames}
-                  styles={resolvedStyles}
-                  series={series}
-                />
-              )}
-              height={44}
-              // {...legendProps}
-            />
-          )} */}
+              {withLegend ? (
+                <Legend verticalAlign="top" {...legendProps} />
+              ) : null}
 
               <CartesianGrid
                 strokeDasharray={strokeDasharray}
                 vertical={gridAxis === "y" || gridAxis === "xy"}
                 horizontal={gridAxis === "x" || gridAxis === "xy"}
+                {...gridProps}
               />
 
               <XAxis
@@ -363,6 +401,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 interval="preserveStartEnd"
                 tickLine={withXTickLine ? { stroke: "currentColor" } : false}
                 minTickGap={5}
+                {...xAxisProps}
               />
 
               <YAxis
@@ -382,44 +421,27 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 tickFormatter={
                   type === "percent" ? valueToPercent : valueFormatter
                 }
+                {...yAxisProps}
               />
 
-              {withTooltip ? <Tooltip /> : null}
-              {/* {withTooltip && (
-            <Tooltip
-              animationDuration={tooltipAnimationDuration}
-              isAnimationActive={isAnimationActive}
-              position={{ y: 0 }}
-              cursor={{
-                stroke: 'var(--chart-grid-color)',
-                strokeWidth: 1,
-                strokeDasharray,
-              }}
-              content={({ label, payload }) => (
-                <ChartTooltip
-                  label={label}
-                  payload={payload}
-                  unit={unit}
-                  classNames={resolvedClassNames}
-                  styles={resolvedStyles}
-                  series={series}
-                  valueFormatter={valueFormatter}
+              {withTooltip ? (
+                <Tooltip
+                  animationDuration={tooltipAnimationDuration}
+                  isAnimationActive={(tooltipAnimationDuration || 0) > 0}
+                  {...tooltipProps}
                 />
-              )}
-              // {...tooltipProps}
-            />
-          )} */}
+              ) : null}
 
-              {/* {type === 'split' && (
-            <defs>
-              <AreaSplit
-                colors={splitColors!}
-                id={splitId}
-                offset={splitOffset ?? getDefaultSplitOffset({ data: data!, series })}
-                fillOpacity={fillOpacity}
-              />
-            </defs>
-          )} */}
+              {type === "split" && (
+                <defs>
+                  <AreaSplit
+                    colors={splitColors!}
+                    id={splitId}
+                    offset={splitOffset ?? getDefaultSplitOffset()}
+                    fillOpacity={fillOpacity}
+                  />
+                </defs>
+              )}
 
               {areas}
             </ReChartsAreaChart>
@@ -431,19 +453,19 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
 })
 
 // area gradient
-interface AreaGradientProps {
+type AreaGradientProps = {
   color: string
   id: string
   withGradient: boolean | undefined
-  fillOpacity: number | undefined
+  fillOpacity: number
 }
 
-function AreaGradient({
+const AreaGradient = ({
   color,
   id,
   withGradient,
   fillOpacity,
-}: AreaGradientProps) {
+}: AreaGradientProps) => {
   return (
     <>
       {withGradient ? (
@@ -453,9 +475,34 @@ function AreaGradient({
         </linearGradient>
       ) : (
         <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop stopColor={color} stopOpacity={fillOpacity ?? 0.2} />
+          <stop stopColor={color} stopOpacity={fillOpacity} />
         </linearGradient>
       )}
     </>
+  )
+}
+
+//area split
+type AreaSplitProps = {
+  offset: number
+  colors: [string, string]
+  id?: string
+  fillOpacity: number | undefined
+}
+
+const AreaSplit = ({ offset, id, colors, fillOpacity }: AreaSplitProps) => {
+  return (
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+      <stop
+        offset={offset}
+        stopColor={colors[0]}
+        stopOpacity={fillOpacity ?? 0.2}
+      />
+      <stop
+        offset={offset}
+        stopColor={colors[1]}
+        stopOpacity={fillOpacity ?? 0.2}
+      />
+    </linearGradient>
   )
 }

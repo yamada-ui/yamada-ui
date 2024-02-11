@@ -4,8 +4,22 @@ import { AreaChart } from "@yamada-ui/charts"
 import type {
   AreaChartCurveType,
   AreaChartType,
+  LayoutType,
 } from "@yamada-ui/charts/src/area-chart"
-import { FormControl, HStack, Select, Switch, VStack } from "@yamada-ui/react"
+import {
+  FormControl,
+  HStack,
+  SegmentedControl,
+  Select,
+  Slider,
+  Switch,
+  VStack,
+  useBoolean,
+  Tooltip,
+  SliderThumb,
+  Card,
+  Text,
+} from "@yamada-ui/react"
 import { useState } from "react"
 
 type Story = StoryFn<typeof AreaChart>
@@ -68,17 +82,18 @@ const series = [
 ]
 
 export const basic: Story = () => {
-  return <AreaChart data={data} series={series} dataKey="testdata" />
+  return <AreaChart data={data} series={series} dataKey="name" />
 }
 
 export const custom: Story = () => {
   const [props, setProps] = useState({
     data: data,
     series: series,
-    dataKey: "testdata",
+    dataKey: "name",
     withXAxis: true,
     withYAxis: true,
     withDots: true,
+    withActiveDots: true,
     withTooltip: true,
     withLegend: false,
     connectNulls: true,
@@ -90,16 +105,26 @@ export const custom: Story = () => {
     curveType: "monotone",
     gridAxis: "x",
     type: "default",
-    splitColors: ["green.7", "red.7"],
+    splitColors: ["#28412c", "#ff0000"],
     orientation: "horizontal",
   } as AreaChartProps)
 
+  const [fillOpacityIsOpen, { on: fillOpacityOn, off: fillOpacityOff }] =
+    useBoolean(false)
+  const [strokeWidthIsOpen, { on: strokeWidthOn, off: strokeWidthOff }] =
+    useBoolean(false)
+  const [
+    tooltipAnimationDurationIsOpen,
+    { on: tooltipAnimationDurationOn, off: tooltipAnimationDurationOff },
+  ] = useBoolean(false)
+
   return (
-    <HStack>
+    <HStack alignItems="flex-start">
       <AreaChart {...props} />
-      <VStack>
+      <VStack gap="sm">
         <FormControl label="chart type">
           <Select
+            size="sm"
             defaultValue="default"
             items={[
               { label: "default", value: "default" },
@@ -115,6 +140,7 @@ export const custom: Story = () => {
         </FormControl>
         <FormControl label="curve type">
           <Select
+            size="sm"
             defaultValue="monotone"
             items={[
               { label: "monotone", value: "monotone" },
@@ -134,45 +160,477 @@ export const custom: Story = () => {
             }}
           />
         </FormControl>
+        <FormControl label="orientation">
+          <Select
+            size="sm"
+            defaultValue="horizontal"
+            items={[
+              { label: "horizontal", value: "horizontal" },
+              { label: "vertical", value: "vertical" },
+            ]}
+            value={props.orientation}
+            onChange={(value) => {
+              setProps((prev) => ({
+                ...prev,
+                orientation: value as LayoutType,
+              }))
+            }}
+          />
+        </FormControl>
+        <FormControl label="tick line">
+          <SegmentedControl
+            size="sm"
+            items={[
+              { label: "x", value: "x" },
+              { label: "y", value: "y" },
+              { label: "xy", value: "xy" },
+              { label: "none", value: "none" },
+            ]}
+            value={props.tickLine}
+            onChange={(value) => {
+              setProps((prev) => ({
+                ...prev,
+                tickLine: value as AreaChartType,
+              }))
+            }}
+          />
+        </FormControl>
+        <FormControl label="grid axis">
+          <SegmentedControl
+            size="sm"
+            items={[
+              { label: "x", value: "x" },
+              { label: "y", value: "y" },
+              { label: "xy", value: "xy" },
+              { label: "none", value: "none" },
+            ]}
+            value={props.gridAxis}
+            onChange={(value) => {
+              setProps((prev) => ({
+                ...prev,
+                gridAxis: value as AreaChartType,
+              }))
+            }}
+          />
+        </FormControl>
       </VStack>
-      <VStack>
-        <Switch
-          isChecked={props.withXAxis}
-          onChange={() => {
-            setProps((prev) => ({ ...prev, withXAxis: !prev.withXAxis }))
-          }}
-        >
-          x axis
-        </Switch>
-        <Switch
-          isChecked={props.withYAxis}
-          onChange={() => {
-            setProps((prev) => ({ ...prev, withYAxis: !prev.withYAxis }))
-          }}
-        >
-          y axis
-        </Switch>
-        <Switch
-          isChecked={props.withDots}
-          onChange={() => {
-            setProps((prev) => ({ ...prev, withDots: !prev.withDots }))
-          }}
-        >
-          dots
-        </Switch>
-        <Switch
-          isChecked={
-            typeof props.withGradient === "boolean"
-              ? props.withGradient
-              : props.type === "default"
-          }
-          onChange={() => {
-            setProps((prev) => ({ ...prev, withGradient: !prev.withGradient }))
-          }}
-        >
-          gradient
-        </Switch>
+      <VStack gap="md">
+        <FormControl label="fill opacity">
+          <Slider
+            value={props.fillOpacity! * 100}
+            min={0}
+            max={100}
+            onChange={(value) => {
+              setProps((prev) => ({ ...prev, fillOpacity: value / 100 }))
+            }}
+            onMouseEnter={fillOpacityOn}
+            onMouseLeave={fillOpacityOff}
+          >
+            <Tooltip
+              placement="top"
+              label={props.fillOpacity}
+              isOpen={fillOpacityIsOpen}
+            >
+              <SliderThumb />
+            </Tooltip>
+          </Slider>
+        </FormControl>
+        <FormControl label="stroke width">
+          <Slider
+            value={props.strokeWidth! * 10}
+            min={5}
+            max={50}
+            onChange={(value) => {
+              setProps((prev) => ({ ...prev, strokeWidth: value / 10 }))
+            }}
+            onMouseEnter={strokeWidthOn}
+            onMouseLeave={strokeWidthOff}
+          >
+            <Tooltip
+              placement="top"
+              label={props.strokeWidth}
+              isOpen={strokeWidthIsOpen}
+            >
+              <SliderThumb />
+            </Tooltip>
+          </Slider>
+        </FormControl>
+        <FormControl label="tooltip animation duration">
+          <Slider
+            value={props.tooltipAnimationDuration}
+            min={0}
+            max={2000}
+            onChange={(value) => {
+              setProps((prev) => ({ ...prev, tooltipAnimationDuration: value }))
+            }}
+            onMouseEnter={tooltipAnimationDurationOn}
+            onMouseLeave={tooltipAnimationDurationOff}
+          >
+            <Tooltip
+              placement="top"
+              label={props.tooltipAnimationDuration}
+              isOpen={tooltipAnimationDurationIsOpen}
+            >
+              <SliderThumb />
+            </Tooltip>
+          </Slider>
+        </FormControl>
+        <HStack alignItems="flex-start">
+          <VStack>
+            <Switch
+              size="sm"
+              isChecked={props.withXAxis}
+              onChange={() => {
+                setProps((prev) => ({ ...prev, withXAxis: !prev.withXAxis }))
+              }}
+            >
+              x axis
+            </Switch>
+            <Switch
+              size="sm"
+              isChecked={props.withYAxis}
+              onChange={() => {
+                setProps((prev) => ({ ...prev, withYAxis: !prev.withYAxis }))
+              }}
+            >
+              y axis
+            </Switch>
+            <Switch
+              size="sm"
+              isChecked={props.withLegend}
+              onChange={() => {
+                setProps((prev) => ({ ...prev, withLegend: !prev.withLegend }))
+              }}
+            >
+              legend
+            </Switch>
+            <Switch
+              size="sm"
+              isChecked={props.withTooltip}
+              onChange={() => {
+                setProps((prev) => ({
+                  ...prev,
+                  withTooltip: !prev.withTooltip,
+                }))
+              }}
+            >
+              tooltip
+            </Switch>
+          </VStack>
+          <VStack>
+            <Switch
+              size="sm"
+              isChecked={props.withDots}
+              onChange={() => {
+                setProps((prev) => ({ ...prev, withDots: !prev.withDots }))
+              }}
+            >
+              dots
+            </Switch>
+            <Switch
+              size="sm"
+              isChecked={props.withActiveDots}
+              onChange={() => {
+                setProps((prev) => ({
+                  ...prev,
+                  withActiveDots: !prev.withActiveDots,
+                }))
+              }}
+              whiteSpace="nowrap"
+            >
+              active dots
+            </Switch>
+            <Switch
+              size="sm"
+              isChecked={
+                typeof props.withGradient === "boolean"
+                  ? props.withGradient
+                  : props.type === "default"
+              }
+              onChange={() => {
+                setProps((prev) => ({
+                  ...prev,
+                  withGradient: !prev.withGradient,
+                }))
+              }}
+            >
+              gradient
+            </Switch>
+          </VStack>
+        </HStack>
       </VStack>
     </HStack>
+  )
+}
+
+const dashSeries = [
+  { name: "uv", color: "#008b8b" },
+  { name: "pv", color: "#ff6347" },
+  { name: "amt", color: "#4682b4", strokeDasharray: "5 5" },
+]
+
+export const dash: Story = () => {
+  return <AreaChart data={data} series={dashSeries} dataKey="name" />
+}
+
+const splitData = [
+  {
+    name: "Page A",
+    uv: 4000,
+  },
+  {
+    name: "Page B",
+    uv: -3000,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+  },
+  {
+    name: "Page E",
+    uv: -1890,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+  },
+]
+const splitSeries = [{ name: "uv", color: "#008b8b" }]
+
+export const split: Story = () => {
+  const [splitOffset, setSplitOffset] = useState<number | undefined>()
+  const [isOpen, { on, off }] = useBoolean()
+
+  return (
+    <HStack>
+      <AreaChart
+        data={splitData}
+        series={splitSeries}
+        dataKey="name"
+        type="split"
+        splitColors={["red", "green"]}
+        splitOffset={splitOffset}
+      />
+      <FormControl label="split offset">
+        <Slider
+          width={120}
+          value={splitOffset !== undefined ? splitOffset * 100 : 0}
+          min={0}
+          max={100}
+          onChange={(value) => {
+            setSplitOffset(value / 100)
+          }}
+          onMouseEnter={on}
+          onMouseLeave={off}
+        >
+          <Tooltip placement="top" label={splitOffset} isOpen={isOpen}>
+            <SliderThumb />
+          </Tooltip>
+        </Slider>
+      </FormControl>
+    </HStack>
+  )
+}
+
+const connectNullsData = [
+  {
+    name: "Page A",
+    uv: 4000,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+  },
+  {
+    name: "Page E",
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+  },
+]
+const connectNullsSeries = [{ name: "uv", color: "#008b8b" }]
+
+export const connectNulls: Story = () => {
+  const [connectNulls, { toggle }] = useBoolean(true)
+
+  return (
+    <HStack>
+      <AreaChart
+        data={connectNullsData}
+        series={connectNullsSeries}
+        dataKey="name"
+        type="default"
+        connectNulls={connectNulls}
+      />
+      <Switch size="sm" isChecked={connectNulls} onChange={toggle}>
+        connect nulls
+      </Switch>
+    </HStack>
+  )
+}
+
+export const sync: Story = () => {
+  return (
+    <VStack>
+      <AreaChart
+        data={data}
+        series={series}
+        dataKey="name"
+        areaChartProps={{ syncId: "syncId" }}
+      />
+      <AreaChart
+        data={data}
+        series={series}
+        dataKey="name"
+        areaChartProps={{ syncId: "syncId" }}
+      />
+    </VStack>
+  )
+}
+
+export const referenceLine: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      referenceLines={[
+        { y: 5500, label: "x line", color: "red" },
+        { x: "Page F", label: "y line" },
+      ]}
+    />
+  )
+}
+
+export const legendProps: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      withLegend
+      legendProps={{ verticalAlign: "bottom", height: 50 }}
+    />
+  )
+}
+
+export const axisProps: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      tickLine="xy"
+      yAxisProps={{ tickMargin: 15, orientation: "right", domain: [0, 15000] }}
+      xAxisProps={{
+        tickMargin: 15,
+        orientation: "top",
+        padding: { left: 30, right: 30 },
+      }}
+    />
+  )
+}
+
+export const valueFormatter: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      valueFormatter={(value) => new Intl.NumberFormat().format(value)}
+    />
+  )
+}
+
+export const strokeDasharray: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      gridAxis="xy"
+      strokeDasharray="15 15"
+    />
+  )
+}
+
+export const units: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      unit="views"
+      yAxisProps={{ width: 75 }}
+    />
+  )
+}
+
+export const customTooltip: Story = () => {
+  type TooltipProps = {
+    label: string
+    payload: Record<string, any>[] | undefined
+  }
+
+  const CustomTooltip = ({ label, payload }: TooltipProps) => {
+    if (!payload) return null
+
+    return (
+      <Card variant="subtle" colorScheme="gray" p="md">
+        <Text>{label}</Text>
+        {payload.map((value, index) => (
+          <HStack key={`payload-${index}`} justifyContent="space-between">
+            <Text>{value?.name}</Text>
+            <Text color={value?.color}>{value?.value}</Text>
+          </HStack>
+        ))}
+      </Card>
+    )
+  }
+
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      tooltipProps={{
+        content: ({ label, payload }) => (
+          <CustomTooltip label={label} payload={payload} />
+        ),
+      }}
+    />
+  )
+}
+
+export const customDots: Story = () => {
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      dotProps={{ r: 6, strokeWidth: 2, stroke: "#fff" }}
+      activeDotProps={{ r: 8, strokeWidth: 1, fill: "#fff" }}
+    />
   )
 }

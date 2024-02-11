@@ -120,7 +120,7 @@ type UseColorSelectorOptions = {
   /**
    * The initial value of the color selector.
    *
-   * @default "#ffffffff"
+   * @default "#ffffff"
    */
   defaultValue?: string
   /**
@@ -186,7 +186,7 @@ export const useColorSelector = ({
   const { supported: eyeDropperSupported, onOpen } = useEyeDropper()
   const [value, setValue] = useControllableState({
     value: valueProp,
-    defaultValue: defaultValue ?? fallbackValue ?? "#ffffffff",
+    defaultValue: defaultValue ?? fallbackValue ?? "#ffffff",
     onChange: onChangeProp,
   })
   const timeoutId = useRef<any>(undefined)

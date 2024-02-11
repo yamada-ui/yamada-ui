@@ -1,5 +1,28 @@
 # @yamada-ui/color-picker
 
+## 1.0.5
+
+### Patch Changes
+
+- [#714](https://github.com/hirotomoyamada/yamada-ui/pull/714) [`8bbdc3e`](https://github.com/hirotomoyamada/yamada-ui/commit/8bbdc3e1d5e2b3369324331abadd1c0c94cfd2fb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `fallbackValue` from `#ffffffff` to `#ffffff`.
+
+- [#714](https://github.com/hirotomoyamada/yamada-ui/pull/714) [`d7f3784`](https://github.com/hirotomoyamada/yamada-ui/commit/d7f3784c7520e12583f31015069d62c6305e619b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the initial color could not be selected.
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/button@1.0.13
+  - @yamada-ui/form-control@1.0.14
+  - @yamada-ui/icon@1.0.11
+  - @yamada-ui/input@1.0.14
+  - @yamada-ui/popover@1.0.12
+  - @yamada-ui/portal@1.0.5
+  - @yamada-ui/core@1.3.2
+  - @yamada-ui/use-controllable-state@1.0.5
+  - @yamada-ui/use-eye-dropper@1.0.2
+  - @yamada-ui/use-outside-click@1.0.5
+  - @yamada-ui/use-pan-event@1.0.5
+  - @yamada-ui/use-size@1.0.5
+
 ## 1.0.4
 
 ### Patch Changes

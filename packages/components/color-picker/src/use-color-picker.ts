@@ -275,7 +275,9 @@ export const useColorPicker = ({
     (value: string) => {
       setValue(value)
 
-      if (!isInputFocused.current) setInputValue(formatInput(value))
+      setTimeout(() => {
+        if (!isInputFocused.current) setInputValue(formatInput(value))
+      })
     },
     [setValue, formatInput],
   )

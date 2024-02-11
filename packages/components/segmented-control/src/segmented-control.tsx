@@ -188,7 +188,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
     const getContainerProps: UIPropGetter = useCallback(
       (props = {}, ref = null) => ({
-        ...omitObject(rest, ["onChange"]),
+        ...omitObject(rest, ["onChange", "aria-readonly"]),
         ...props,
         ref: mergeRefs(containerRef, ref),
         id,
@@ -209,7 +209,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
         const checked = props.value === selectedValue
 
         return {
-          ...omitObject(props, ["isDisabled", "isReadOnly"]),
+          ...omitObject(props, ["isDisabled", "isReadOnly", "aria-readonly"]),
           ref,
           id: `${id}-${index}`,
           type: "radio",

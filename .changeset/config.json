@@ -15,5 +15,5 @@
   "snapshot": {
     "useCalculatedVersion": true
   },
-  "ignore": ["create-react-app", "nextjs-app", "nextjs-pages"]
+  "ignore": ["create-react-app", "nextjs-app", "nextjs-pages", "vite-react"]
 }

@@ -16,7 +16,7 @@ const meta: Meta<typeof ColorPicker> = {
 export default meta
 
 export const basic: Story = () => {
-  return <ColorPicker placeholder="#4387f4ff" />
+  return <ColorPicker placeholder="#4387f4" />
 }
 
 export const withDefaultValue: Story = () => {
@@ -24,7 +24,7 @@ export const withDefaultValue: Story = () => {
 }
 
 export const withFallbackValue: Story = () => {
-  return <ColorPicker fallbackValue="#00000000" />
+  return <ColorPicker fallbackValue="#000000" />
 }
 
 export const withDefaultColor: Story = () => {

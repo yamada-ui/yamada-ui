@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "18"
+    "node": "20"
   },
   "license": "MIT",
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",

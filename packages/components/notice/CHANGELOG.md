@@ -1,5 +1,20 @@
 # @yamada-ui/notice
 
+## 1.0.12
+
+### Patch Changes
+
+- [#708](https://github.com/hirotomoyamada/yamada-ui/pull/708) [`6b9dc0a`](https://github.com/hirotomoyamada/yamada-ui/commit/6b9dc0ad458784a7aedd565a5ea93aa884b4669f) Thanks [@108yen](https://github.com/108yen)! - fix limit 1 on useNotice does not work
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/alert@1.0.12
+  - @yamada-ui/close-button@1.0.12
+  - @yamada-ui/motion@1.0.12
+  - @yamada-ui/portal@1.0.5
+  - @yamada-ui/core@1.3.2
+  - @yamada-ui/use-timeout@1.0.5
+
 ## 1.0.11
 
 ### Patch Changes

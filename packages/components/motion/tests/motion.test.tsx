@@ -50,7 +50,7 @@ describe("<Motion />", () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.1 }}
               >
                 Motion
               </Motion>
@@ -74,7 +74,7 @@ describe("<Motion />", () => {
       () => {
         expect(screen.queryByText("Motion")).toHaveStyle("opacity: 0")
       },
-      { timeout: 500 },
+      { timeout: 300 },
     )
   })
 })

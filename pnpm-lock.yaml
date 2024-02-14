@@ -809,6 +809,9 @@ importers:
 
   packages/components/charts:
     dependencies:
+      '@emotion/sheet':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core

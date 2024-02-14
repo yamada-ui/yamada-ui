@@ -47,9 +47,9 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
-    "react-resizable-panels": "^1.0.7"
+    "@yamada-ui/utils": "workspace:*",
+    "react-resizable-panels": "^2.0.8"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

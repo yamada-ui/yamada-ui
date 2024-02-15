@@ -10,7 +10,6 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { useToken, useValue } from "@yamada-ui/react"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { Fragment } from "react"
@@ -233,6 +232,7 @@ type AreaChartOptions = {
 }
 
 //!rechartのやつがあるなら、それを&で合わせればよいのでは
+//AxisLineのプロパティも作っていいかも
 export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
   AreaChartOptions
@@ -254,142 +254,49 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     maxHeight,
 
     className,
-    data,
     series,
-    dataKey,
     type = "default",
-    withGradient,
-    curveType = "monotone",
-    withDots = true,
-    withActiveDots = true,
-    strokeWidth = 2,
-    fillOpacity = 0.2,
-    splitColors = ["#28412c", "#ff0000"],
-    splitOffset,
-    withXAxis = true,
-    withYAxis = true,
     withTooltip = true,
     withLegend = false,
-    connectNulls = true,
-    tooltipAnimationDuration = 0,
-    tickLine = "y",
-    gridAxis = "x",
-    orientation = "horizontal",
     referenceLines,
-    strokeDasharray = "5 5",
-    unit,
-    valueFormatter,
-    areaChartProps,
-    dotProps,
-    activeDotProps,
-    xAxisProps,
-    yAxisProps,
-    legendProps,
-    tooltipProps,
-    gridProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {} = useChart(computedProps)
   const {
-    baseId,
-    splitId,
-    withXTickLine,
-    withYTickLine,
-    _withGradient,
-    stacked,
-    shouldHighlight,
-    highlightedArea,
-    getDefaultSplitOffset,
+    getAreaChartProps,
+    getAreaProps,
+    getReferenceLineProps,
     getGridProps,
     getContainerProps,
-    valueToPercent,
+    getXAxisProps,
+    getYAxisProps,
+    getLegendProps,
+    getTooltipProps,
+    getAreaSplitProps,
+    getAreaGradientProps,
   } = useAreaChart({
     height,
-    data,
     series,
-    gridProps,
-    strokeDasharray,
-    gridAxis,
-    tickLine,
-    withGradient,
     type,
+    ...computedProps,
   })
 
-  //!ループの中でhook使うのはダメ
-  //!どうしてもこのアプローチしかないならuseをつけない関数を作る
   const areas = series.map((item) => {
-    const id = `${baseId}-${item.color}`
-    const color = (useToken("colors", useValue(item.color)) ??
-      item.color) as string
-    const dimmed = shouldHighlight && highlightedArea !== item.name
+    const { id, stroke, ...rest } = getAreaProps(item, {}, ref)
 
     return (
       <Fragment key={item.name}>
         <defs>
-          <AreaGradient
-            color={color}
-            withGradient={_withGradient}
-            id={id}
-            fillOpacity={fillOpacity}
-          />
+          <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
         </defs>
-        <Area
-          activeDot={
-            withActiveDots
-              ? {
-                  fill: "#fff",
-                  stroke: color,
-                  strokeWidth: 2,
-                  r: 4,
-                  ...activeDotProps,
-                }
-              : false
-          }
-          dot={
-            withDots
-              ? {
-                  fill: color,
-                  fillOpacity: dimmed ? 0 : 1,
-                  strokeWidth: 2,
-                  r: 4,
-                  ...dotProps,
-                }
-              : false
-          }
-          name={item.name}
-          type={curveType}
-          dataKey={item.name}
-          fill={type === "split" ? `url(#${splitId})` : `url(#${id})`}
-          strokeWidth={strokeWidth}
-          stroke={color}
-          isAnimationActive={false}
-          connectNulls={connectNulls}
-          stackId={stacked ? "stack" : undefined}
-          fillOpacity={dimmed ? 0 : 1}
-          strokeOpacity={dimmed ? 0.5 : 1}
-          strokeDasharray={item.strokeDasharray}
-        />
+        <Area id={id} stroke={stroke} {...rest} />
       </Fragment>
     )
   })
 
   const referenceLinesItems = referenceLines?.map((line, index) => {
-    const color = useToken("colors", useValue(line.color)) ?? line.color
-    return (
-      <ReferenceLine
-        key={index}
-        stroke={color ?? "gray"}
-        strokeWidth={1}
-        {...line}
-        label={{
-          value: line.label as string,
-          fill: color ?? "currentColor",
-          fontSize: 12,
-          position: "insideBottomLeft",
-        }}
-      />
-    )
+    return <ReferenceLine key={index} {...getReferenceLineProps(line, ref)} />
   })
 
   return (
@@ -413,82 +320,20 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     >
       <ChartProvider value={{ styles }}>
         <AreaChartProvider value={{}}>
-          <ResponsiveContainer
-          // {...getContainerProps({}, ref)}
-          >
-            <ReChartsAreaChart
-              ref={ref}
-              data={data}
-              stackOffset={type === "percent" ? "expand" : undefined}
-              layout={orientation}
-              {...areaChartProps}
-            >
+          <ResponsiveContainer {...getContainerProps({}, ref)}>
+            <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
+              {areas}
               {referenceLinesItems}
-              {withLegend ? (
-                <Legend verticalAlign="top" {...legendProps} />
-              ) : null}
-
               <CartesianGrid {...getGridProps({}, ref)} />
-
-              <XAxis
-                hide={!withXAxis}
-                {...(orientation === "vertical"
-                  ? { type: "number" }
-                  : { dataKey })}
-                tick={{
-                  transform: "translate(0, 10)",
-                  fontSize: 12,
-                  fill: "currentColor",
-                }}
-                stroke=""
-                interval="preserveStartEnd"
-                tickLine={withXTickLine ? { stroke: "currentColor" } : false}
-                minTickGap={5}
-                // {...styles.xAxis}
-                {...xAxisProps}
-              />
-
-              <YAxis
-                hide={!withYAxis}
-                axisLine={false}
-                {...(orientation === "vertical"
-                  ? { dataKey, type: "category" }
-                  : { type: "number" })}
-                tickLine={withYTickLine ? { stroke: "currentColor" } : false}
-                tick={{
-                  transform: "translate(-10, 0)",
-                  fontSize: 12,
-                  fill: "currentColor",
-                }}
-                allowDecimals
-                unit={unit}
-                tickFormatter={
-                  type === "percent" ? valueToPercent : valueFormatter
-                }
-                // {...styles.yAxis}
-                {...yAxisProps}
-              />
-
-              {withTooltip ? (
-                <Tooltip
-                  animationDuration={tooltipAnimationDuration}
-                  isAnimationActive={(tooltipAnimationDuration || 0) > 0}
-                  {...tooltipProps}
-                />
-              ) : null}
-
+              <XAxis {...getXAxisProps()} />
+              <YAxis {...getYAxisProps()} />
+              {withLegend ? <Legend {...getLegendProps({}, ref)} /> : null}
+              {withTooltip ? <Tooltip {...getTooltipProps({}, ref)} /> : null}
               {type === "split" && (
                 <defs>
-                  <AreaSplit
-                    colors={splitColors!}
-                    id={splitId}
-                    offset={splitOffset ?? getDefaultSplitOffset()}
-                    fillOpacity={fillOpacity}
-                  />
+                  <AreaSplit {...getAreaSplitProps()} />
                 </defs>
               )}
-
-              {areas}
             </ReChartsAreaChart>
           </ResponsiveContainer>
         </AreaChartProvider>

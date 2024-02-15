@@ -130,7 +130,7 @@ export const custom: Story = () => {
 
   return (
     <HStack alignItems="flex-start" w="100%">
-      <AreaChart {...props} height="sm" />
+      <AreaChart {...props} />
       <VStack gap="sm" w="20%">
         <FormControl label="chart type">
           <Select

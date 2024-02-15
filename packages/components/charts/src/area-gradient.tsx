@@ -1,7 +1,7 @@
 export type AreaGradientProps = {
-  color: string
-  id: string
-  withGradient: boolean | undefined
+  id?: string
+  color?: string
+  withGradient?: boolean
   fillOpacity: number
 }
 

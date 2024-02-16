@@ -94,3 +94,39 @@ const Demo = () => {
 :::note
 これは、他のライブラリのコンポーネントにYamada UIのスタイルシステムを使いたい場合に有効です。
 :::
+
+もし、カスタムコンポーネントの`prop`と[Style Props](/styled-system/style-props)の`prop`が重複している場合、`prop`はYamada UIのスタイルシステムに取り込まれ、カスタムコンポーネントに渡されません。もし、`prop`をYamada UIのスタイルシステムに取り込まず、カスタムコンポーネントへ渡したい場合は、`disableStyleProp`を設定します。
+
+```tsx live=false
+const NewComponent = ui(YourComponent, {
+  disableStyleProp: (prop) => ["targetProp"].includes(prop),
+})
+```
+
+## `props`の転送を許可する
+
+デフォルトでは、`ui`はYamada UIのスタイルシステムの`props`をフィルタリングしてDOMに取り込まれます。どのように、どの`prop`を転送するかを制御する場合は、`shouldForwardProp`を設定します。
+
+これは、`targetProp`を除いたすべての`prop`(Yamada UIのスタイルシステムの`props`を含む)を許可する簡単な例です。
+
+```tsx live=false
+const NewComponent = ui(YourComponent, {
+  shouldForwardProp: (prop) => !["targetProp"].includes(prop),
+})
+```
+
+また、Yamada UIのデフォルトの`shouldForwardProp`と組み合わせた例です。
+
+```tsx live=false
+import { ui, shouldForwardProp } from "@yamada-ui/core"
+
+const NewComponent = ui(YourComponent, {
+  shouldForwardProp: (prop) => {
+    const isUIProps = !shouldForwardProp(prop)
+
+    if (isUIProps) return false
+
+    return !["targetProp"].includes(prop)
+  },
+})
+```

@@ -3,14 +3,14 @@ import type { RefObject } from "react"
 import { useRef } from "react"
 
 const useAutosize = (
-  libRef: RefObject<HTMLTextAreaElement>,
+  ref: RefObject<HTMLTextAreaElement>,
   maxRows: number,
   minRows: number,
 ) => {
   const heightRef = useRef(0)
 
   const resizeTextarea = () => {
-    const el = libRef.current
+    const el = ref.current
 
     if (!el) return
 

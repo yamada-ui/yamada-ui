@@ -166,7 +166,11 @@ To set keyboard step values, assign a numerical value to `keyboardStep`.
 
 To save values, set a key for saving to local storage in `storageKey`.
 
-:::note
+:::note status=warning
+When saving values to local storage or similar, you must set an `id` on `ResizableItem` to associate each saved value with the `ResizableItem`.
+:::
+
+:::note status=warning
 If you dynamically mount `ResizableItem`, you need to set a numerical value to `order` to determine the order of the items.
 :::
 

@@ -48,15 +48,15 @@ const I18nContext = createContext<I18nContext>({
 export type I18nProviderProps = PropsWithChildren
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
-  const { locale, pathname, asPath, push } = useRouter()
+  const { locale, asPath, push } = useRouter()
 
   const contents = useMemo(() => contentData[locale], [locale])
 
   const changeLocale = useCallback(
     (locale: Locale & StringLiteral) => {
-      push(pathname, asPath, { locale })
+      push(asPath, asPath, { locale })
     },
-    [push, pathname, asPath],
+    [push, asPath],
   )
 
   const t = useCallback(

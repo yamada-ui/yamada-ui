@@ -73,7 +73,7 @@ You can pass a custom component as an argument and generate a custom component w
 import { ui } from "@yamada-ui/core"
 import { YourComponent } from "./your-component"
 
-const NewComponent = ui("YourComponent")
+const NewComponent = ui(YourComponent)
 
 const Demo = () => {
   return (
@@ -94,3 +94,39 @@ const Demo = () => {
 :::note
 This is effective when you want to use the Yamada UI style system with components from other libraries.
 :::
+
+If a custom component's `prop` overlaps with a `prop` from [Style Props](/styled-system/style-props), the `prop` will be absorbed into the Yamada UI style system and will not be passed to the custom component. If you want to pass the `prop` to the custom component without it being absorbed by the Yamada UI style system, you can set `disableStyleProp`.
+
+```tsx live=false
+const NewComponent = ui(YourComponent, {
+  disableStyleProp: (prop) => ["targetProp"].includes(prop),
+})
+```
+
+## Allowing the Transfer of `props`
+
+By default, `ui` filters out the `props` of the Yamada UI style system and incorporates them into the DOM. To control how and which `props` are transferred, you can set `shouldForwardProp`.
+
+Here is a simple example that allows all `props` (including those of the Yamada UI style system) except for `targetProp`.
+
+```tsx live=false
+const NewComponent = ui(YourComponent, {
+  shouldForwardProp: (prop) => !["targetProp"].includes(prop),
+})
+```
+
+Here's an example combined with Yamada UI's default `shouldForwardProp`.
+
+```tsx live=false
+import { ui, shouldForwardProp } from "@yamada-ui/core"
+
+const NewComponent = ui(YourComponent, {
+  shouldForwardProp: (prop) => {
+    const isUIProps = !shouldForwardProp(prop)
+
+    if (isUIProps) return false
+
+    return !["targetProp"].includes(prop)
+  },
+})
+```

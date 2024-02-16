@@ -166,8 +166,12 @@ import {
 
 値を保存する場合は、`storageKey`にローカルストレージに保存するキーを設定します。
 
-:::note
-もし、`ResizableItem`を動的にマウントさせる場合は、`order`に数値を設定してアイテムの並び順を設定する必要があります。
+:::note status=warning
+ローカルストレージなどに値を保存する場合は、保存された各値と`ResizableItem`を関連付けするために`ResizableItem`に`id`を設定する必要があります。
+:::
+
+:::note status=warning
+もし、`ResizableItem`を動的にマウントさせる場合は、`order`に数値を設定してアイテムの並び順を固定化する必要があります。
 :::
 
 ```tsx functional=true

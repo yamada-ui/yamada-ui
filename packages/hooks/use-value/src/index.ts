@@ -1,6 +1,15 @@
-import type { ResponsiveObject, ColorModeArray } from "@yamada-ui/core"
-import { useColorModeValue } from "@yamada-ui/core"
-import { useBreakpointValue } from "@yamada-ui/use-breakpoint"
+import type {
+  ResponsiveObject,
+  ColorModeArray,
+  StyledTheme,
+  ColorMode,
+  Theme,
+} from "@yamada-ui/core"
+import { getColorModeValue, useColorModeValue } from "@yamada-ui/core"
+import {
+  getBreakpointValue,
+  useBreakpointValue,
+} from "@yamada-ui/use-breakpoint"
 import { isObject, isArray } from "@yamada-ui/utils"
 
 /**
@@ -19,3 +28,19 @@ export const useValue = <T extends any>(
     return value
   }
 }
+
+export const getValue =
+  <T extends any>(value: T | ResponsiveObject<T> | ColorModeArray<T>) =>
+  (
+    theme: StyledTheme,
+    colorMode: ColorMode,
+    breakpoint: Theme["breakpoints"],
+  ) => {
+    if (isObject<ResponsiveObject<T>>(value)) {
+      return getBreakpointValue(value)(theme, breakpoint)
+    } else if (isArray<ColorModeArray<T>>(value)) {
+      return getColorModeValue(...value)(colorMode)
+    } else {
+      return value
+    }
+  }

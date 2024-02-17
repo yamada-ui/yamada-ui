@@ -37,5 +37,14 @@ export const ScrollArea: ComponentStyle = {
     _scrollbarCorner: {
       bg: "transparent",
     },
+    "@-moz-document url-prefix()": {
+      scrollbarColor: "whiteAlpha.600 transparent",
+      _light: {
+        scrollbarColor: "whiteAlpha.600 transparent",
+      },
+      _dark: {
+        scrollbarColor: "whiteAlpha.600 transparent",
+      },
+    },
   },
 }

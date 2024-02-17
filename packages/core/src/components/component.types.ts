@@ -6,10 +6,15 @@ import type { StyleProps } from "../styles"
 import type { PropsTheme } from "../theme.types"
 import type { DOMElements } from "./element.types"
 
+export type BaseStyle =
+  | CSSUIObject
+  | ((props: StyledResolverProps) => CSSUIObject)
+
 export type StyledOptions = {
+  disableStyleProp?: (prop: string) => boolean
   shouldForwardProp?: (prop: string) => boolean
   label?: string
-  baseStyle?: CSSUIProps | ((props: StyledResolverProps) => CSSUIProps)
+  baseStyle?: BaseStyle
 }
 
 export type UIFactory = {

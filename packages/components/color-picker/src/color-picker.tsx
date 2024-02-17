@@ -208,6 +208,7 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
+      zIndex: 2,
       ...styles.swatch,
     }
 

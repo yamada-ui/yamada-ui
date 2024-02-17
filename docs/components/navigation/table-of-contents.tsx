@@ -99,7 +99,7 @@ export const TableOfContents = memo(
           pt="lg"
           pb="16"
           pl="md"
-          overflowY="scroll"
+          overflowY="auto"
           overscrollBehavior="contain"
         >
           <HStack gap="sm">

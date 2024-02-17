@@ -182,5 +182,11 @@ export const useColorModeValue = <L extends any, D extends any>(
 ): L | D => {
   const { colorMode } = useColorMode()
 
-  return colorMode === "light" ? light : dark
+  return getColorModeValue<L, D>(light, dark)(colorMode)
 }
+
+export const getColorModeValue =
+  <L extends any, D extends any>(light: L, dark: D) =>
+  (colorMode: ColorMode): L | D => {
+    return colorMode === "light" ? light : dark
+  }

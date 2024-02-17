@@ -47,17 +47,20 @@ const hiddenStyles: CSSUIObject = {
   "&::-webkit-scrollbar-track": { bg: "transparent" },
   _scrollbarThumb: { bg: "transparent" },
   "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+  scrollbarColor: "transparent transparent",
   _light: {
     _scrollbarTrack: { bg: "transparent" },
     "&::-webkit-scrollbar-track": { bg: "transparent" },
     _scrollbarThumb: { bg: "transparent" },
     "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+    scrollbarColor: "transparent transparent",
   },
   _dark: {
     _scrollbarTrack: { bg: "transparent" },
     "&::-webkit-scrollbar-track": { bg: "transparent" },
     _scrollbarThumb: { bg: "transparent" },
     "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+    scrollbarColor: "transparent transparent",
   },
 }
 

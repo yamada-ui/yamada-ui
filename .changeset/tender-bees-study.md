@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/core": patch
+"@yamada-ui/core": minor
 ---
 
 Added `useCSS` function.

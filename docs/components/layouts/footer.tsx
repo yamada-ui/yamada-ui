@@ -8,7 +8,7 @@ import {
   forwardRef,
 } from "@yamada-ui/react"
 import { memo } from "react"
-import { Github, Twitter } from "components/media-and-icons"
+import { Github, X } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
 
@@ -67,9 +67,9 @@ export const Footer = memo(
               color="muted"
               href={CONSTANT.SNS.TWITTER.HIROTOMO_YAMADA}
               target="_blank"
-              aria-label="Twitter Hirotomo Yamada"
+              aria-label="X Hirotomo Yamada"
             >
-              <Twitter />
+              <X />
             </Link>
           </HStack>
         </VStack>

@@ -6,6 +6,10 @@ import { Panel } from "react-resizable-panels"
 import type { UseResizableItemProps } from "./use-resizable"
 import { useResizableContext, useResizableItem } from "./use-resizable"
 
+const panelProps = new Set(["order"])
+
+const UIPanel = ui(Panel, { disableStyleProp: (prop) => panelProps.has(prop) })
+
 type ResizableItemOptions = {
   /**
    * Ref for resizable item inner element.
@@ -48,8 +52,7 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
     const css: CSSUIObject = { boxSize: "full", ...styles.item }
 
     return (
-      <ui.div
-        as={Panel}
+      <UIPanel
         {...getPanelProps({
           w,
           width,
@@ -73,7 +76,7 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
         >
           {children}
         </ui.div>
-      </ui.div>
+      </UIPanel>
     )
   },
 )

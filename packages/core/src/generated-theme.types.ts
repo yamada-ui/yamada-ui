@@ -865,7 +865,7 @@ export interface GeneratedTheme extends UITheme {
     }
     Resizable: {
       sizes: string & {}
-      variants: "border" | "spacer" | (string & {})
+      variants: "border" | "spacer" | "unstyled" | (string & {})
     }
     SaturationSlider: {
       sizes: "sm" | "md" | "lg" | "full" | (string & {})

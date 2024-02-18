@@ -8,7 +8,7 @@ import {
 import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
-import { cx, useMergeRefs, merge, dataAttr } from "@yamada-ui/utils"
+import { cx, merge, dataAttr, mergeRefs } from "@yamada-ui/utils"
 import type { ElementType, FC, ReactElement } from "react"
 import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
@@ -78,7 +78,7 @@ export type ButtonProps = HTMLUIProps<"button"> &
  * @see Docs https://yamada-ui.com/components/forms/button
  */
 export const Button = forwardRef<ButtonProps, "button">(
-  ({ children, ...props }, customRef) => {
+  ({ children, ...props }, ref) => {
     const group = useButtonGroup()
     const [styles, mergedProps] = useComponentStyle("Button", {
       ...group,
@@ -104,7 +104,6 @@ export const Button = forwardRef<ButtonProps, "button">(
     const trulyDisabled = isDisabled || isLoading
 
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
-    const ref = useMergeRefs(customRef, buttonRef)
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
       isDisabled: disableRipple || trulyDisabled,
@@ -147,7 +146,7 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     return (
       <ui.button
-        ref={ref}
+        ref={mergeRefs(ref, buttonRef)}
         as={as}
         className={cx("ui-button", className)}
         type={type ?? defaultType}

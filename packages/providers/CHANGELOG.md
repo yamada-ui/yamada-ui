@@ -1,5 +1,30 @@
 # @yamada-ui/providers
 
+## 1.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529), [`6b9dc0a`](https://github.com/hirotomoyamada/yamada-ui/commit/6b9dc0ad458784a7aedd565a5ea93aa884b4669f)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/notice@1.0.12
+  - @yamada-ui/loading@1.0.12
+  - @yamada-ui/motion@1.0.12
+  - @yamada-ui/core@1.3.2
+  - @yamada-ui/theme@1.4.3
+
+## 1.0.16
+
+### Patch Changes
+
+- [#697](https://github.com/hirotomoyamada/yamada-ui/pull/697) [`242afe6`](https://github.com/hirotomoyamada/yamada-ui/commit/242afe6508f50d67780f36b1b411810cb08a7238) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `storageKey` can not be changed.
+
+- Updated dependencies [[`398124a`](https://github.com/hirotomoyamada/yamada-ui/commit/398124ac60b0481c92c9ab983d932dd405c9d7ab), [`242afe6`](https://github.com/hirotomoyamada/yamada-ui/commit/242afe6508f50d67780f36b1b411810cb08a7238)]:
+  - @yamada-ui/theme@1.4.2
+  - @yamada-ui/core@1.3.1
+  - @yamada-ui/loading@1.0.11
+  - @yamada-ui/motion@1.0.11
+  - @yamada-ui/notice@1.0.11
+
 ## 1.0.15
 
 ### Patch Changes

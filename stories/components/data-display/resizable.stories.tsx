@@ -57,6 +57,14 @@ export const withVariant: Story = () => {
           Two
         </ResizableItem>
       </Resizable>
+
+      <Resizable variant="unstyled" h="md">
+        <ResizableItem as={Center}>One</ResizableItem>
+
+        <ResizableTrigger />
+
+        <ResizableItem as={Center}>Two</ResizableItem>
+      </Resizable>
     </>
   )
 }

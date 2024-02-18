@@ -1,5 +1,20 @@
 # @yamada-ui/form-control
 
+## 1.0.14
+
+### Patch Changes
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/core@1.3.2
+
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`398124a`](https://github.com/hirotomoyamada/yamada-ui/commit/398124ac60b0481c92c9ab983d932dd405c9d7ab), [`242afe6`](https://github.com/hirotomoyamada/yamada-ui/commit/242afe6508f50d67780f36b1b411810cb08a7238)]:
+  - @yamada-ui/core@1.3.1
+
 ## 1.0.12
 
 ### Patch Changes

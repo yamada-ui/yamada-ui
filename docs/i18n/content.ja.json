@@ -12805,5 +12805,11 @@
     "type": "fragment",
     "slug": "/styled-system/ui#コンポーネントを作る",
     "hierarchy": { "lv1": "ui", "lv2": "コンポーネントを作る" }
+  },
+  {
+    "title": "propsの転送を許可する",
+    "type": "fragment",
+    "slug": "/styled-system/ui#propsの転送を許可する",
+    "hierarchy": { "lv1": "ui", "lv2": "propsの転送を許可する" }
   }
 ]

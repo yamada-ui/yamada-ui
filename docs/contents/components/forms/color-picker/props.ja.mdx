@@ -20,6 +20,22 @@ tab: Props
 />
 
 <PropsCard
+  id="colorpicker-alphasliderprops"
+  name="alphaSliderProps"
+  type='Omit<AlphaSliderProps, "defaultValue" | "value">'
+  description={"Props for the alpha slider component."}
+/>
+
+<PropsCard
+  id="colorpicker-alphasliderref"
+  name="alphaSliderRef"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: HTMLInputElement | null) => void)
+  | MutableRefObject<HTMLInputElement | null>"
+  description={"Ref for the alpha slider component."}
+/>
+
+<PropsCard
   id="colorpicker-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
@@ -27,6 +43,20 @@ tab: Props
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
   defaultValue={"'clippingParents'"}
+/>
+
+<PropsCard
+  id="colorpicker-channelprops"
+  name="channelProps"
+  type='Omit<ColorSelectorChannelProps, "channelLabel">'
+  description={"Props for the chancel component."}
+/>
+
+<PropsCard
+  id="colorpicker-channelsprops"
+  name="channelsProps"
+  type="ColorSelectorChannelsProps"
+  description={"Props for the channels component."}
 />
 
 <PropsCard
@@ -203,6 +233,22 @@ tab: Props
 />
 
 <PropsCard
+  id="colorpicker-huesliderprops"
+  name="hueSliderProps"
+  type='Omit<HueSliderProps, "defaultValue" | "value">'
+  description={"Props for the hue slider component."}
+/>
+
+<PropsCard
+  id="colorpicker-huesliderref"
+  name="hueSliderRef"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: HTMLInputElement | null) => void)
+  | MutableRefObject<HTMLInputElement | null>"
+  description={"Ref for the hue slider component."}
+/>
+
+<PropsCard
   id="colorpicker-inputprops"
   name="inputProps"
   type='HTMLUIProps<"input">'
@@ -359,6 +405,22 @@ tab: Props
 />
 
 <PropsCard
+  id="colorpicker-saturationsliderprops"
+  name="saturationSliderProps"
+  type='Omit<SaturationSliderProps, "defaultValue" | "value">'
+  description={"Props for the saturation slider component."}
+/>
+
+<PropsCard
+  id="colorpicker-saturationsliderref"
+  name="saturationSliderRef"
+  type="type ONLY_FOR_FORMAT =
+  | ((instance: HTMLInputElement | null) => void)
+  | MutableRefObject<HTMLInputElement | null>"
+  description={"Ref for the saturation slider component."}
+/>
+
+<PropsCard
   id="colorpicker-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
@@ -402,6 +464,13 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
   description={"The swatches label to use."}
+/>
+
+<PropsCard
+  id="colorpicker-swatchesprops"
+  name="swatchesProps"
+  type="ColorSelectorSwatchesProps"
+  description={"Props for the swatches component."}
 />
 
 <PropsCard

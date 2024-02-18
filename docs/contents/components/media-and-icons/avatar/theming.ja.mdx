@@ -54,7 +54,12 @@ export const Avatar: ComponentMultiStyle = {
         fontSize: `calc(${get(t, "sizes.4")} / 2.5)`,
         lineHeight: get(t, "sizes.16"),
       },
-      excess: { w: "4", h: "4" },
+      excess: {
+        w: "4",
+        h: "4",
+        fontSize: `calc(${get(t, "sizes.4")} / 2.5)`,
+        lineHeight: get(t, "sizes.16"),
+      },
     }),
     xs: ({ theme: t }) => ({
       container: {

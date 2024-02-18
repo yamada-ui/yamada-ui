@@ -12139,5 +12139,11 @@
     "type": "fragment",
     "slug": "/styled-system/ui#creating-a-component",
     "hierarchy": { "lv1": "ui", "lv2": "Creating a Component" }
+  },
+  {
+    "title": "Allowing the Transfer of props",
+    "type": "fragment",
+    "slug": "/styled-system/ui#allowing-the-transfer-of-props",
+    "hierarchy": { "lv1": "ui", "lv2": "Allowing the Transfer of props" }
   }
 ]

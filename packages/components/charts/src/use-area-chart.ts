@@ -67,7 +67,6 @@ export type UseAreaChartProps = Omit<AreaChartProps, "fillOpacity"> & {
   fillOpacity?: number
 }
 
-//todo: ts(4023)
 export const useAreaChart = ({
   data,
   series,
@@ -554,32 +553,36 @@ export const useAreaChart = ({
       )
       const dotClassName = useCSS(dotUIProps)
 
+      let activeDot: DotProps | undefined
+      if (withActiveDots)
+        activeDot = {
+          className: activeDotClassName,
+          fill: "#fff",
+          stroke: color,
+          strokeWidth: 2,
+          r: 4,
+          ...(areaReChartsProps["activeDot"] as DotProps),
+          ...activeDotReChartsProps,
+        }
+
+      let dot: DotProps | undefined
+      if (withDots)
+        dot = {
+          className: dotClassName,
+          fill: color,
+          fillOpacity: dimmed ? 0 : 1,
+          strokeWidth: 2,
+          r: 4,
+          ...(areaReChartsProps["dot"] as DotProps),
+          ...dotReChartsProps,
+        }
+
       return {
         ref,
         className: cx(props.className, areaClassName),
         id,
-        activeDot: withActiveDots
-          ? {
-              className: activeDotClassName,
-              fill: "#fff",
-              stroke: color,
-              strokeWidth: 2,
-              r: 4,
-              ...(areaReChartsProps["activeDot"] as DotProps),
-              ...activeDotReChartsProps,
-            }
-          : false,
-        dot: withDots
-          ? {
-              className: dotClassName,
-              fill: color,
-              fillOpacity: dimmed ? 0 : 1,
-              strokeWidth: 2,
-              r: 4,
-              ...(areaReChartsProps["dot"] as DotProps),
-              ...dotReChartsProps,
-            }
-          : false,
+        activeDot,
+        dot,
         name: item.name,
         type: curveType,
         dataKey: item.name,
@@ -598,11 +601,11 @@ export const useAreaChart = ({
     },
     [
       activeDotProps,
+      dotProps,
       areaProps,
       baseId,
       connectNulls,
       curveType,
-      dotProps,
       highlightedArea,
       shouldHighlight,
       splitId,
@@ -665,7 +668,6 @@ export const useAreaChart = ({
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,
-    activeDotProps,
     getAreaProps,
     getAreaGradientProps,
     getCSSvariables,

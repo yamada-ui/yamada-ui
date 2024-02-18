@@ -45,4 +45,4 @@ const config: StorybookConfig = {
   },
 }
 
-module.exports = config
+export default config

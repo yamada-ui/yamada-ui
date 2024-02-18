@@ -31,6 +31,20 @@ export const withDefaultColor: Story = () => {
   return <ColorPicker defaultColor="#4387f4ff" />
 }
 
+export const withChildren: Story = () => {
+  return (
+    <>
+      <ColorPicker placeholder="#4387f4">
+        <Button>Submit</Button>
+      </ColorPicker>
+
+      <ColorPicker placeholder="#4387f4">
+        {({ value }) => <Button>Submit {value}</Button>}
+      </ColorPicker>
+    </>
+  )
+}
+
 export const withSize: Story = () => {
   return (
     <>

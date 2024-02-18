@@ -35,6 +35,20 @@ export const withSize: Story = () => {
   )
 }
 
+export const withChildren: Story = () => {
+  return (
+    <>
+      <ColorSelector>
+        <Button>Submit</Button>
+      </ColorSelector>
+
+      <ColorSelector>
+        {({ value }) => <Button>Submit {value}</Button>}
+      </ColorSelector>
+    </>
+  )
+}
+
 export const withDefaultValue: Story = () => {
   return <ColorSelector defaultValue="#ff0000ff" />
 }

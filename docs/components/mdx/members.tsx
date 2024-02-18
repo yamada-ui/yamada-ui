@@ -1,7 +1,7 @@
 import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
 import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
 import type { FC } from "react"
-import { Github, Twitter } from "components/media-and-icons"
+import { Github, X } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
 
@@ -50,7 +50,7 @@ export const Member: FC<MemberProps> = ({
             <Link
               href={twitter}
               target="_blank"
-              aria-label={`Twitter ${name}`}
+              aria-label={`X ${name}`}
               color={[`primary.600`, `primary.400`]}
               _hover={{
                 color: [`primary.500`, `primary.300`],
@@ -59,7 +59,7 @@ export const Member: FC<MemberProps> = ({
                 color: [`primary.700`, `primary.500`],
               }}
             >
-              <Twitter />
+              <X />
             </Link>
           ) : null}
         </HStack>

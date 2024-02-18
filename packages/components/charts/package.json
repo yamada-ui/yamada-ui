@@ -46,7 +46,6 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@emotion/sheet": "^1.2.2",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "recharts": "^2.11.0"

@@ -1,8 +1,6 @@
-import { StyleSheet } from "@emotion/sheet"
-import { useTheme, css } from "@yamada-ui/core"
-import { useToken, useValue } from "@yamada-ui/react"
+import type { StyleProps } from "@yamada-ui/react"
 import type { PropGetter } from "@yamada-ui/utils"
-import { createContext, createdDom, cx, splitObject } from "@yamada-ui/utils"
+import { createContext, cx, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef, ForwardedRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
@@ -25,10 +23,12 @@ type AreaChartPropGetter = (
 ) => ComponentPropsWithoutRef<typeof ReChartsAreaChart>
 type AreaPropGetter = (
   item: AreaChartSeries,
+  index: number,
   props?: Partial<AreaProps>,
   ref?: ForwardedRef<HTMLElement>,
 ) => Omit<AreaProps, "ref">
 type ReferenceLinePropGetter = (
+  index: number,
   props?: Partial<ReferenceLineProps>,
   ref?: ForwardedRef<HTMLElement>,
 ) => Omit<ReferenceLineProps, "ref">
@@ -61,12 +61,11 @@ export const [AreaChartProvider, useAreaChartContext] =
 
 export type AxisType = "x" | "y" | "xy" | "none"
 
-export type UseAreaChartProps = AreaChartProps & {
-  containerProps?: ResponsiveContainerProps
+export type UseAreaChartProps = Omit<AreaChartProps, "fillOpacity"> & {
+  fillOpacity?: number
 }
 
 export const useAreaChart = ({
-  height,
   data,
   series,
   type,
@@ -77,7 +76,7 @@ export const useAreaChart = ({
   gridAxis = "x",
   orientation = "horizontal",
   withGradient,
-  containerProps, //!入ってない
+  containerProps,
   xAxisProps,
   yAxisProps,
   withXAxis = true,
@@ -95,8 +94,9 @@ export const useAreaChart = ({
   tooltipAnimationDuration = 0,
   tooltipProps,
   fillOpacity = 0.2,
-  splitColors = ["#28412c", "#ff0000"],
+  splitColors = ["red.400", "green.400"],
   splitOffset,
+  referenceLines,
   valueFormatter,
 }: UseAreaChartProps) => {
   const baseId = useId()
@@ -105,9 +105,9 @@ export const useAreaChart = ({
     gridAxis !== "none" && (tickLine === "x" || tickLine === "xy")
   const withYTickLine =
     gridAxis !== "none" && (tickLine === "y" || tickLine === "xy")
+  const stacked = type === "stacked" || type === "percent"
   const _withGradient =
     typeof withGradient === "boolean" ? withGradient : type === "default"
-  const stacked = type === "stacked" || type === "percent"
 
   //todo: legendでホバーした奴をハイライトするやつ
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
@@ -127,78 +127,18 @@ export const useAreaChart = ({
     [areaChartProps, data, orientation, type],
   )
 
-  const getAreaProps: AreaPropGetter = useCallback(
-    (item, props = {}, ref = null) => {
-      const id = `${baseId}-${item.color}`
-      const color = (useToken("colors", useValue(item.color)) ??
-        item.color) as string
-      const dimmed = shouldHighlight && highlightedArea !== item.name
-
-      return {
-        ref,
-        id,
-        activeDot: withActiveDots
-          ? {
-              fill: "#fff",
-              stroke: color,
-              strokeWidth: 2,
-              r: 4,
-              ...activeDotProps,
-            }
-          : false,
-        dot: withDots
-          ? {
-              fill: color,
-              fillOpacity: dimmed ? 0 : 1,
-              strokeWidth: 2,
-              r: 4,
-              ...dotProps,
-            }
-          : false,
-        name: item.name,
-        type: curveType,
-        dataKey: item.name,
-        fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
-        strokeWidth: strokeWidth,
-        stroke: color,
-        isAnimationActive: false,
-        connectNulls: connectNulls,
-        stackId: stacked ? "stack" : undefined,
-        fillOpacity: dimmed ? 0 : 1,
-        strokeOpacity: dimmed ? 0.5 : 1,
-        strokeDasharray: item.strokeDasharray,
-        ...props,
-      }
-    },
-    [
-      activeDotProps,
-      baseId,
-      connectNulls,
-      curveType,
-      dotProps,
-      highlightedArea,
-      shouldHighlight,
-      splitId,
-      stacked,
-      strokeWidth,
-      type,
-      withActiveDots,
-      withDots,
-    ],
-  )
-
   const getReferenceLineProps: ReferenceLinePropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const color = useToken("colors", useValue(props.color)) ?? props.color
+    (index, props = {}, ref = null) => {
+      const color = `var(--ui-areachart-referenceline-${index})`
 
       return {
         ref,
-        stroke: color ?? "gray",
+        stroke: color,
         strokeWidth: 1,
         ...props,
         label: {
           value: props.label as string,
-          fill: color ?? "currentColor",
+          fill: color,
           fontSize: 12,
           position: "insideBottomLeft",
           ...(typeof props.label === "object" ? props.label : {}),
@@ -222,42 +162,25 @@ export const useAreaChart = ({
     [containerProps],
   )
 
-  const [gridRechartProps, gridUIProps] = splitObject(gridProps, [
-    "x",
-    "y",
-    "width",
-    "height",
-    "horizontal",
-    "vertical",
-    "horizontalPoints",
-    "horizontalCoordinatesGenerator",
-    "verticalPoints",
-    "verticalCoordinatesGenerator",
-    "fill",
-    "fillOpacity",
-    "strokeDasharray",
-  ])
-
-  const styleSheet = createdDom()
-    ? new StyleSheet({ key: "css", container: document.head })
-    : undefined
-  const { theme } = useTheme()
-  //!styleが取れない
-  const style = css({ ...gridUIProps })(theme)
-  //!class名が取れない
-  let gridClassName: string = ""
-  //    const gridClassName = styleSheet?.insert(style)
-  // if (style) {
-  //    const before = new Set(document.styleSheets[0].rules)
-  //    const gridClassName = styleSheet?.insert(style)
-  //    const after = new Set(document.styleSheets[0].rules)
-  //    const newRules = [...after].filter((rule) => !before.has(rule))
-  //    gridClassName = newRules.map((rule) => rule.selectorText.substring(1))
-  // }
-
-  //参考　resizable config.ts carousel
   const getGridProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
+      const [gridRechartProps, gridUIProps] = splitObject(gridProps, [
+        "x",
+        "y",
+        "width",
+        "height",
+        "horizontal",
+        "vertical",
+        "horizontalPoints",
+        "horizontalCoordinatesGenerator",
+        "verticalPoints",
+        "verticalCoordinatesGenerator",
+        "fill",
+        "fillOpacity",
+        "strokeDasharray",
+      ])
+      //todo gridUIProps入れたらクラス名が返ってくるやつが作られる
+      const gridClassName = ""
       return {
         strokeDasharray: strokeDasharray,
         vertical: gridAxis === "y" || gridAxis === "xy",
@@ -268,7 +191,7 @@ export const useAreaChart = ({
         className: cx(props.className, gridClassName),
       }
     },
-    [strokeDasharray, gridAxis, gridRechartProps, gridClassName],
+    [gridProps, strokeDasharray, gridAxis],
   )
 
   const getXAxisProps: XAxisPropGetter = useCallback(
@@ -373,13 +296,71 @@ export const useAreaChart = ({
 
       return {
         id: splitId,
-        colors: splitColors,
         offset: splitOffset ?? getDefaultSplitOffset(),
         fillOpacity,
         ...props,
       }
     },
-    [data, fillOpacity, series, splitColors, splitId, splitOffset],
+    [data, fillOpacity, series, splitId, splitOffset],
+  )
+
+  const getAreaProps: AreaPropGetter = useCallback(
+    (item, index, props = {}, ref = null) => {
+      const id = `${baseId}-${item.color}`
+      const color = `var(--ui-areachart-area-${index})`
+      const dimmed = shouldHighlight && highlightedArea !== item.name
+
+      return {
+        ref,
+        id,
+        activeDot: withActiveDots
+          ? {
+              fill: "#fff",
+              stroke: color,
+              strokeWidth: 2,
+              r: 4,
+              ...activeDotProps,
+            }
+          : false,
+        dot: withDots
+          ? {
+              fill: color,
+              fillOpacity: dimmed ? 0 : 1,
+              strokeWidth: 2,
+              r: 4,
+              ...dotProps,
+            }
+          : false,
+        name: item.name,
+        type: curveType,
+        dataKey: item.name,
+        fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
+        strokeWidth: strokeWidth,
+        stroke: color,
+        isAnimationActive: false,
+        connectNulls: connectNulls,
+        stackId: stacked ? "stack" : undefined,
+        fillOpacity: dimmed ? 0 : 1,
+        strokeOpacity: dimmed ? 0.5 : 1,
+        strokeDasharray: item.strokeDasharray,
+        ...props,
+      }
+    },
+    [
+      activeDotProps,
+      baseId,
+      connectNulls,
+      curveType,
+      dotProps,
+      highlightedArea,
+      shouldHighlight,
+      splitId,
+      stacked,
+      strokeWidth,
+      type,
+      withActiveDots,
+      withDots,
+    ],
   )
 
   const getAreaGradientProps: AreaGradientPropGetter = useCallback(
@@ -393,13 +374,38 @@ export const useAreaChart = ({
     [_withGradient, fillOpacity],
   )
 
-  function valueToPercent(value: number) {
+  const getCSSvariables = useCallback(() => {
+    const areaColors: StyleProps["var"] = series.map((item, index) => ({
+      name: `areachart-area-${index}`,
+      token: "colors",
+      value: item.color ?? "gray",
+    }))
+
+    const areaSplitColors: StyleProps["var"] = splitColors.map(
+      (color, index) => ({
+        name: `areachart-areasplit-${index}`,
+        token: "colors",
+        value: color,
+      }),
+    )
+
+    const referenceLineColors: StyleProps["var"] = referenceLines
+      ? referenceLines.map((line, index) => ({
+          name: `areachart-referenceline-${index}`,
+          token: "colors",
+          value: line.color ?? "gray",
+        }))
+      : []
+
+    return [...areaColors, ...areaSplitColors, ...referenceLineColors]
+  }, [referenceLines, series, splitColors])
+
+  const valueToPercent = (value: number) => {
     return `${(value * 100).toFixed(0)}%`
   }
 
   return {
     getAreaChartProps,
-    getAreaProps,
     getReferenceLineProps,
     getGridProps,
     getContainerProps,
@@ -408,7 +414,10 @@ export const useAreaChart = ({
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,
+    activeDotProps,
+    getAreaProps,
     getAreaGradientProps,
+    getCSSvariables,
   }
 }
 

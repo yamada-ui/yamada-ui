@@ -14,10 +14,10 @@ import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { Fragment } from "react"
 import {
-  Area,
   CartesianGrid,
   Legend,
   AreaChart as ReChartsAreaChart,
+  Area,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -32,6 +32,7 @@ import type {
   LegendProps,
   CartesianGridProps,
   TooltipProps,
+  ResponsiveContainerProps,
 } from "recharts"
 import { AreaGradient } from "./area-gradient"
 import { AreaSplit } from "./area-split"
@@ -118,7 +119,7 @@ type AreaChartOptions = {
   /**
    *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
    *
-   * @default ["#28412c", "#ff0000"]
+   * @default ["red.400", "green.400"]
    */
   splitColors?: [string, string]
   /**
@@ -202,6 +203,10 @@ type AreaChartOptions = {
    */
   areaChartProps?: React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
   /**
+   *  Props passed down to recharts `ResponsiveContainer` component.
+   */
+  containerProps?: ResponsiveContainerProps
+  /**
    *  Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
   dotProps?: Omit<DotProps, "ref">
@@ -252,7 +257,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     minHeight,
     maxH,
     maxHeight,
-
     className,
     series,
     type = "default",
@@ -265,7 +269,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const {} = useChart(computedProps)
   const {
     getAreaChartProps,
-    getAreaProps,
     getReferenceLineProps,
     getGridProps,
     getContainerProps,
@@ -274,19 +277,21 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,
+    getAreaProps,
     getAreaGradientProps,
+    getCSSvariables,
   } = useAreaChart({
-    height,
-    series,
     type,
+    series,
+    referenceLines,
     ...computedProps,
   })
 
-  const areas = series.map((item) => {
-    const { id, stroke, ...rest } = getAreaProps(item, {}, ref)
+  const areas = series.map((item, index) => {
+    const { id, stroke, ...rest } = getAreaProps(item, index, {}, ref)
 
     return (
-      <Fragment key={item.name}>
+      <Fragment key={`area-${item.name}`}>
         <defs>
           <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
         </defs>
@@ -295,13 +300,18 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     )
   })
 
-  const referenceLinesItems = referenceLines?.map((line, index) => {
-    return <ReferenceLine key={index} {...getReferenceLineProps(line, ref)} />
-  })
+  const referenceLinesItems = referenceLines?.map((line, index) => (
+    <ReferenceLine
+      key={`referenceLine-${index}`}
+      {...getReferenceLineProps(index, line, ref)}
+    />
+  ))
 
+  //todo varにmapでcolorを登録していく
   return (
     <ui.div
       className={cx("ui-area-chart", className)}
+      var={getCSSvariables()}
       {...{
         w,
         width,
@@ -322,7 +332,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
         <AreaChartProvider value={{}}>
           <ResponsiveContainer {...getContainerProps({}, ref)}>
             <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
-              {areas}
               {referenceLinesItems}
               <CartesianGrid {...getGridProps({}, ref)} />
               <XAxis {...getXAxisProps()} />
@@ -334,6 +343,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
                   <AreaSplit {...getAreaSplitProps()} />
                 </defs>
               )}
+              {areas}
             </ReChartsAreaChart>
           </ResponsiveContainer>
         </AreaChartProvider>

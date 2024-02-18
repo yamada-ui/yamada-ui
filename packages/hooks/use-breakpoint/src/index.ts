@@ -1,4 +1,4 @@
-import type { Theme, ResponsiveObject } from "@yamada-ui/core"
+import type { Theme, ResponsiveObject, StyledTheme } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
 import { createdDom } from "@yamada-ui/utils"
 import { useState, useMemo, useEffect } from "react"
@@ -80,30 +80,35 @@ export const useBreakpointValue = <T extends any>(
   values: ResponsiveObject<T>,
 ): T => {
   const { theme } = useTheme()
-
-  if (!theme)
-    throw Error(
-      "useBreakpoint: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
-    )
-
-  const breakpoints = theme.__breakpoints?.keys
-
-  if (!breakpoints)
-    throw Error(
-      "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
-    )
-
   const breakpoint = useBreakpoint()
 
-  const currentIndex = breakpoints.indexOf(breakpoint)
-
-  for (let i = currentIndex; 0 < i; i--) {
-    const nextBreakpoint = breakpoints[i]
-
-    if (values.hasOwnProperty(nextBreakpoint)) {
-      return values[nextBreakpoint] as T
-    }
-  }
-
-  return values.base as T
+  return getBreakpointValue<T>(values)(theme, breakpoint)
 }
+
+export const getBreakpointValue =
+  <T extends any>(values: ResponsiveObject<T>) =>
+  (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
+    if (!theme)
+      throw Error(
+        "useBreakpoint: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
+      )
+
+    const breakpoints = theme.__breakpoints?.keys
+
+    if (!breakpoints)
+      throw Error(
+        "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
+      )
+
+    const currentIndex = breakpoints.indexOf(breakpoint)
+
+    for (let i = currentIndex; 0 < i; i--) {
+      const nextBreakpoint = breakpoints[i]
+
+      if (values.hasOwnProperty(nextBreakpoint)) {
+        return values[nextBreakpoint] as T
+      }
+    }
+
+    return values.base as T
+  }

@@ -49,6 +49,17 @@ export const withResize: Story = () => {
   )
 }
 
+export const withAutosize: Story = () => {
+  return (
+    <>
+      <Textarea autosize placeholder="autosize" />
+      <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
+      <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
+      <Textarea rows={4} placeholder="rows 4" />
+    </>
+  )
+}
+
 export const withBorderColor: Story = () => {
   return (
     <>

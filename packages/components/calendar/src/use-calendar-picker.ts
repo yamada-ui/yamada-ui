@@ -8,7 +8,7 @@ import type {
 import {
   useFormControlProps,
   type FormControlOptions,
-  formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
@@ -210,10 +210,13 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   locale ??= theme.__config.date?.locale ?? "en"
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
   const [containerProps, inputProps] = splitObject<Dict, string>(
     omitObject(rest, [...popoverProperties]),
-    layoutStyleProperties,
+    [...layoutStyleProperties, "aria-readonly"],
   )
   const { disabled, readOnly } = formControlProps
 

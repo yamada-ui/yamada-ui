@@ -4,8 +4,10 @@ import { AreaChart } from "@yamada-ui/charts"
 import type {
   AreaChartCurveType,
   AreaChartType,
+  ChartSeries,
   LayoutType,
 } from "@yamada-ui/charts/src/area-chart"
+import type { AxisType } from "@yamada-ui/charts/src/use-area-chart"
 import {
   FormControl,
   HStack,
@@ -75,14 +77,22 @@ const data = [
     amt: 2100,
   },
 ]
-const series = [
-  { name: "uv", color: "indigo.400" },
-  { name: "pv", color: "rose.400" },
-  { name: "amt", color: "emerald.400" },
+
+const series: ChartSeries[] = [
+  { name: "uv", color: ["indigo.600", "indigo.400"] },
+  { name: "pv", color: ["rose.600", "rose.400"] },
+  { name: "amt", color: ["emerald.600", "emerald.400"] },
 ]
 
 export const basic: Story = () => {
-  return <AreaChart data={data} series={series} dataKey="name" />
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      gridProps={{ color: "red" }}
+    />
+  )
 }
 
 export const custom: Story = () => {
@@ -119,9 +129,9 @@ export const custom: Story = () => {
   ] = useBoolean(false)
 
   return (
-    <HStack alignItems="flex-start">
+    <HStack alignItems="flex-start" w="100%">
       <AreaChart {...props} />
-      <VStack gap="sm">
+      <VStack gap="sm" w="20%">
         <FormControl label="chart type">
           <Select
             size="sm"
@@ -208,13 +218,13 @@ export const custom: Story = () => {
             onChange={(value) => {
               setProps((prev) => ({
                 ...prev,
-                gridAxis: value as AreaChartType,
+                gridAxis: value as AxisType,
               }))
             }}
           />
         </FormControl>
       </VStack>
-      <VStack gap="md">
+      <VStack gap="md" w="20%">
         <FormControl label="fill opacity">
           <Slider
             value={props.fillOpacity! * 100}
@@ -410,8 +420,9 @@ export const split: Story = () => {
   const [isOpen, { on, off }] = useBoolean()
 
   return (
-    <HStack>
+    <HStack w="100%">
       <AreaChart
+        height="sm"
         data={splitData}
         series={splitSeries}
         dataKey="name"
@@ -419,9 +430,8 @@ export const split: Story = () => {
         splitColors={["red.400", "green.400"]}
         splitOffset={splitOffset}
       />
-      <FormControl label="split offset">
+      <FormControl label="split offset" w="20%">
         <Slider
-          width={120}
           value={splitOffset !== undefined ? splitOffset * 100 : 0}
           min={0}
           max={100}

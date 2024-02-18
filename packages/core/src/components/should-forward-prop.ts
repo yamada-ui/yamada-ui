@@ -23,5 +23,9 @@ const HTMLProps = new Set([
   "htmlTranslate",
 ])
 
-export const shouldForwardProp = (prop: string): boolean =>
-  HTMLProps.has(prop) || !UIProps.has(prop)
+export const shouldForwardProp =
+  (disableStyleProp?: (prop: string) => boolean) =>
+  (prop: string): boolean =>
+    HTMLProps.has(prop) ||
+    (disableStyleProp?.(prop) ?? false) ||
+    !UIProps.has(prop)

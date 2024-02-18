@@ -129,6 +129,12 @@ const addReviewers = async (
 
       if (draft) return
 
+      await octokit.issues.addAssignees({
+        ...COMMON_PARAMS,
+        issue_number: number,
+        assignees: ["hirotomoyamada"],
+      })
+
       const count = (requested_reviewers?.length ?? 0) + reviewers.length
 
       if (count >= 2) return
@@ -144,12 +150,6 @@ const addReviewers = async (
       const selectedReviewers = omitCollaboratorIds
         .sort(() => 0.5 - Math.random())
         .slice(0, 2 - count)
-
-      await octokit.issues.addAssignees({
-        ...COMMON_PARAMS,
-        issue_number: number,
-        assignees: ["hirotomoyamada"],
-      })
 
       await octokit.pulls.requestReviewers({
         ...COMMON_PARAMS,

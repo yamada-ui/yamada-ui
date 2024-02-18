@@ -1,6 +1,7 @@
-import type { StyleProps } from "@yamada-ui/react"
-import type { PropGetter } from "@yamada-ui/utils"
-import { createContext, cx, splitObject } from "@yamada-ui/utils"
+import { useCSS } from "@yamada-ui/core"
+import type { CSSUIObject, StyleProps } from "@yamada-ui/react"
+import type { Dict, PropGetter } from "@yamada-ui/utils"
+import { createContext, cx, omitObject, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef, ForwardedRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
@@ -12,6 +13,7 @@ import type {
   YAxisProps,
   LegendProps,
   TooltipProps,
+  DotProps,
 } from "recharts"
 import type { AreaChartProps, AreaChartSeries } from "./area-chart"
 import type { AreaGradientProps } from "./area-gradient"
@@ -65,34 +67,36 @@ export type UseAreaChartProps = Omit<AreaChartProps, "fillOpacity"> & {
   fillOpacity?: number
 }
 
+//todo: ts(4023)
 export const useAreaChart = ({
   data,
   series,
   type,
-  areaChartProps,
+  areaChartProps = {},
+  areaProps = { dataKey: "" },
   gridProps = {},
+  containerProps = {},
+  xAxisProps = {},
+  yAxisProps = {},
+  activeDotProps = {},
+  dotProps = {},
+  legendProps = {},
+  tooltipProps = {},
   strokeDasharray = "5 5",
   tickLine = "y",
   gridAxis = "x",
   orientation = "horizontal",
   withGradient,
-  containerProps,
-  xAxisProps,
-  yAxisProps,
   withXAxis = true,
   withYAxis = true,
   dataKey,
   unit,
   withDots = true,
   withActiveDots = true,
-  activeDotProps,
-  dotProps,
   curveType = "monotone",
   strokeWidth = 2,
   connectNulls = true,
-  legendProps,
   tooltipAnimationDuration = 0,
-  tooltipProps,
   fillOpacity = 0.2,
   splitColors = ["red.400", "green.400"],
   splitOffset,
@@ -115,18 +119,39 @@ export const useAreaChart = ({
 
   const getAreaChartProps: AreaChartPropGetter = useCallback(
     (props = {}, ref = null) => {
+      const [areaChartReChartsProps, areaChartUIProps] = splitObject(
+        areaChartProps,
+        [
+          "layout",
+          "syncId",
+          "syncMethod",
+          "width",
+          "height",
+          "data",
+          "margin",
+          "stackOffset",
+          "onClick",
+          "onMouseEnter",
+          "onMouseMove",
+          "onMouseLeave",
+        ],
+      )
+      const areaChartClassName = useCSS(areaChartUIProps)
+
       return {
         ref,
+        className: cx(props.className, areaChartClassName),
         data,
         stackOffset: type === "percent" ? "expand" : undefined,
         layout: orientation,
         ...props,
-        ...areaChartProps,
+        ...areaChartReChartsProps,
       }
     },
     [areaChartProps, data, orientation, type],
   )
 
+  //todo: ui props
   const getReferenceLineProps: ReferenceLinePropGetter = useCallback(
     (index, props = {}, ref = null) => {
       const color = `var(--ui-areachart-referenceline-${index})`
@@ -150,13 +175,30 @@ export const useAreaChart = ({
 
   const getContainerProps: ResponsiveContainerPropGetter = useCallback(
     (props = {}, ref = null) => {
-      //!divに合わせてくれるなら、こっちでsize指定いらんくない？
-      // const h = useToken("sizes", useValue(height)) ?? height
-      // console.log(h)
+      const [contaiterReChartsProps, containerUIProps] = splitObject(
+        containerProps,
+        [
+          "aspect",
+          "width",
+          "height",
+          "minWidth",
+          "minHeight",
+          "debounce",
+          "onResize",
+        ],
+      )
+      const containerClassName = useCSS(containerUIProps)
+
+      let className: string
+      if (typeof props.className === "number")
+        className = cx(props.className.toString(), containerClassName)
+      else className = cx(props.className, containerClassName)
+
       return {
-        ...props,
         ref,
-        ...containerProps,
+        className,
+        ...props,
+        ...contaiterReChartsProps,
       }
     },
     [containerProps],
@@ -164,7 +206,7 @@ export const useAreaChart = ({
 
   const getGridProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const [gridRechartProps, gridUIProps] = splitObject(gridProps, [
+      const [gridReChartsProps, gridUIProps] = splitObject(gridProps, [
         "x",
         "y",
         "width",
@@ -179,16 +221,16 @@ export const useAreaChart = ({
         "fillOpacity",
         "strokeDasharray",
       ])
-      //todo gridUIProps入れたらクラス名が返ってくるやつが作られる
-      const gridClassName = ""
+      const gridClassName = useCSS(gridUIProps as CSSUIObject)
+
       return {
+        ref,
+        className: cx(props.className, gridClassName),
         strokeDasharray: strokeDasharray,
         vertical: gridAxis === "y" || gridAxis === "xy",
         horizontal: gridAxis === "x" || gridAxis === "xy",
         ...props,
-        ref,
-        ...gridRechartProps,
-        className: cx(props.className, gridClassName),
+        ...gridReChartsProps,
       }
     },
     [gridProps, strokeDasharray, gridAxis],
@@ -196,7 +238,50 @@ export const useAreaChart = ({
 
   const getXAxisProps: XAxisPropGetter = useCallback(
     (props = {}) => {
+      const [xAxisReChartsProps, xAxisUIProps] = splitObject(xAxisProps, [
+        "hide",
+        "dataKey",
+        "xAxisId",
+        "width",
+        "height",
+        "orientation",
+        "type",
+        "allowDecimals",
+        "allowDataOverflow",
+        "allowDuplicatedCategory",
+        "angle",
+        "tickCount",
+        "domain",
+        "includeHidden",
+        "interval",
+        "padding",
+        "minTickGap",
+        "axisLine",
+        "tickLine",
+        "tickSize",
+        "tickFormatter",
+        "ticks",
+        "tick",
+        "mirror",
+        "reversed",
+        "label",
+        "scale",
+        "unit",
+        "name",
+        "onClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onMouseEnter",
+        "onMouseLeave",
+        "tickMargin",
+      ])
+      const xAxisClassName = useCSS(xAxisUIProps as CSSUIObject)
+
       return {
+        className: cx(props.className, xAxisClassName),
         hide: !withXAxis,
         ...(orientation === "vertical" ? { type: "number" } : { dataKey }),
         tick: {
@@ -209,7 +294,7 @@ export const useAreaChart = ({
         tickLine: withXTickLine ? { stroke: "currentColor" } : false,
         minTickGap: 5,
         ...props,
-        ...xAxisProps,
+        ...xAxisReChartsProps,
       }
     },
     [dataKey, orientation, withXAxis, withXTickLine, xAxisProps],
@@ -217,7 +302,49 @@ export const useAreaChart = ({
 
   const getYAxisProps: YAxisPropGetter = useCallback(
     (props = {}) => {
+      const [yAxisReChartsProps, yAxisUIProps] = splitObject(yAxisProps, [
+        "hide",
+        "dataKey",
+        "yAxisId",
+        "width",
+        "height",
+        "orientation",
+        "type",
+        "tickCount",
+        "domain",
+        "includeHidden",
+        "interval",
+        "padding",
+        "minTickGap",
+        "allowDecimals",
+        "allowDataOverflow",
+        "allowDuplicatedCategory",
+        "axisLine",
+        "tickLine",
+        "tickSize",
+        "tickFormatter",
+        "ticks",
+        "tick",
+        "mirror",
+        "reversed",
+        "label",
+        "scale",
+        "unit",
+        "name",
+        "onClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onMouseEnter",
+        "onMouseLeave",
+        "tickMargin",
+      ])
+      const yAxisClassName = useCSS(yAxisUIProps as CSSUIObject)
+
       return {
+        className: cx(props.className, yAxisClassName),
         hide: !withYAxis,
         axisLine: false,
         ...(orientation === "vertical"
@@ -233,7 +360,7 @@ export const useAreaChart = ({
         unit: unit,
         tickFormatter: type === "percent" ? valueToPercent : valueFormatter,
         ...props,
-        ...yAxisProps,
+        ...yAxisReChartsProps,
       }
     },
     [
@@ -250,11 +377,39 @@ export const useAreaChart = ({
 
   const getLegendProps: LegendPropGetter = useCallback(
     (props = {}, ref = null) => {
+      const [legendReChartProps, legendUIProps] = splitObject(legendProps, [
+        "width",
+        "height",
+        "layout",
+        "align",
+        "verticalAlign",
+        "iconSize",
+        "iconType",
+        "payload",
+        "chartWidth",
+        "chartHeight",
+        "margin",
+        "content",
+        "formatter",
+        "wrapperStyle",
+        "onClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onMouseEnter",
+        "onMouseLeave",
+      ])
+
+      const legendClassName = useCSS(legendUIProps as CSSUIObject)
+
       return {
         ref,
+        className: cx(props.className, legendClassName),
         verticalAlign: "top",
         ...props,
-        ...legendProps,
+        ...legendReChartProps,
       }
     },
     [legendProps],
@@ -262,12 +417,39 @@ export const useAreaChart = ({
 
   const getTooltipProps: TooltipPropGetter = useCallback(
     (props = {}, ref = null) => {
+      const [tooltipReChartsProps, tooltipUIProps] = splitObject(tooltipProps, [
+        "offset",
+        "filterNull",
+        "itemStyle",
+        "wrapperStyle",
+        "contentStyle",
+        "labelStyle",
+        "cursor",
+        "viewBox",
+        "allowEscapeViewBox",
+        "active",
+        "position",
+        "coordinate",
+        "payload",
+        "label",
+        "content",
+        "formatter",
+        "labelFormatter",
+        "itemSorter",
+        "isAnimationActive",
+        "animationDuration",
+        "animationEasing",
+      ])
+      const tooltipClassName = useCSS(tooltipUIProps)
+
       return {
         ref,
+        labelClassName: cx(props.labelClassName, tooltipClassName),
+        wrapperClassName: cx(props.wrapperClassName, tooltipClassName),
         animationDuration: tooltipAnimationDuration,
         isAnimationActive: (tooltipAnimationDuration || 0) > 0,
         ...props,
-        ...tooltipProps,
+        ...tooltipReChartsProps,
       }
     },
     [tooltipAnimationDuration, tooltipProps],
@@ -304,31 +486,98 @@ export const useAreaChart = ({
     [data, fillOpacity, series, splitId, splitOffset],
   )
 
+  //todo: 各エリアのPropsをループでとる必要がある
+  //todo: useCSSはダメなのでは
   const getAreaProps: AreaPropGetter = useCallback(
     (item, index, props = {}, ref = null) => {
       const id = `${baseId}-${item.color}`
       const color = `var(--ui-areachart-area-${index})`
       const dimmed = shouldHighlight && highlightedArea !== item.name
+      const [areaReChartsProps, areaUIProps] = splitObject(areaProps, [
+        "type",
+        "dataKey",
+        "xAxisId",
+        "yAxisId",
+        "legendType",
+        "dot",
+        "activeDot",
+        "label",
+        "stroke",
+        "strokeWidth",
+        "layout",
+        "baseLine",
+        "points",
+        "stackId",
+        "connectNulls",
+        "unit",
+        "name",
+        "isAnimationActive",
+        "animationBegin",
+        "animationDuration",
+        "animationEasing",
+        "id",
+        "onAnimationStart",
+        "onAnimationEnd",
+        "onClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onMouseEnter",
+        "onMouseLeave",
+      ])
+      const areaClassName = useCSS(areaUIProps as CSSUIObject)
+
+      const dotParams = [
+        "cx",
+        "cy",
+        "r",
+        "onClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onMouseEnter",
+        "onMouseLeave",
+      ]
+      const [activeDotReChartsProps, activeDotUIProps] = splitObject<
+        Dict,
+        string
+      >(activeDotProps, dotParams)
+      const activeDotClassName = useCSS(activeDotUIProps)
+
+      const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
+        dotProps,
+        dotParams,
+      )
+      const dotClassName = useCSS(dotUIProps)
 
       return {
         ref,
+        className: cx(props.className, areaClassName),
         id,
         activeDot: withActiveDots
           ? {
+              className: activeDotClassName,
               fill: "#fff",
               stroke: color,
               strokeWidth: 2,
               r: 4,
-              ...activeDotProps,
+              ...(areaReChartsProps["activeDot"] as DotProps),
+              ...activeDotReChartsProps,
             }
           : false,
         dot: withDots
           ? {
+              className: dotClassName,
               fill: color,
               fillOpacity: dimmed ? 0 : 1,
               strokeWidth: 2,
               r: 4,
-              ...dotProps,
+              ...(areaReChartsProps["dot"] as DotProps),
+              ...dotReChartsProps,
             }
           : false,
         name: item.name,
@@ -344,10 +593,12 @@ export const useAreaChart = ({
         strokeOpacity: dimmed ? 0.5 : 1,
         strokeDasharray: item.strokeDasharray,
         ...props,
+        ...omitObject(areaReChartsProps, ["dataKey", "dot", "activeDot"]),
       }
     },
     [
       activeDotProps,
+      areaProps,
       baseId,
       connectNulls,
       curveType,

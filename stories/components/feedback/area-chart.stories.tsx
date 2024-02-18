@@ -8,6 +8,7 @@ import type {
   LayoutType,
 } from "@yamada-ui/charts/src/area-chart"
 import type { AxisType } from "@yamada-ui/charts/src/use-area-chart"
+import type { Dict } from "@yamada-ui/react"
 import {
   FormControl,
   HStack,
@@ -85,14 +86,7 @@ const series: ChartSeries[] = [
 ]
 
 export const basic: Story = () => {
-  return (
-    <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
-      gridProps={{ color: "red" }}
-    />
-  )
+  return <AreaChart data={data} series={series} dataKey="name" />
 }
 
 export const custom: Story = () => {
@@ -557,6 +551,7 @@ export const axisProps: Story = () => {
         tickMargin: 15,
         orientation: "top",
         padding: { left: 30, right: 30 },
+        color: "red.500",
       }}
     />
   )
@@ -600,7 +595,7 @@ export const units: Story = () => {
 export const customTooltip: Story = () => {
   type TooltipProps = {
     label: string
-    payload: Record<string, any>[] | undefined
+    payload: Dict[] | undefined
   }
 
   const CustomTooltip = ({ label, payload }: TooltipProps) => {

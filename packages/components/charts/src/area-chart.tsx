@@ -10,7 +10,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
+import type { Dict, Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { Fragment } from "react"
 import {
@@ -33,6 +33,7 @@ import type {
   CartesianGridProps,
   TooltipProps,
   ResponsiveContainerProps,
+  AreaProps,
 } from "recharts"
 import { AreaGradient } from "./area-gradient"
 import { AreaSplit } from "./area-split"
@@ -201,42 +202,51 @@ type AreaChartOptions = {
   /**
    *  Props passed down to recharts `AreaChart` component.
    */
-  areaChartProps?: React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+  areaChartProps?: Merge<
+    CSSUIObject,
+    React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+  >
   /**
    *  Props passed down to recharts `ResponsiveContainer` component.
    */
-  containerProps?: ResponsiveContainerProps
+  containerProps?: Merge<
+    CSSUIObject,
+    Omit<ResponsiveContainerProps, "children">
+  >
   /**
    *  Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
-  dotProps?: Omit<DotProps, "ref">
+  dotProps?: Merge<CSSUIObject, Omit<DotProps, "ref">>
   /**
    *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
-  activeDotProps?: Omit<DotProps, "ref">
+  activeDotProps?: Merge<CSSUIObject, Omit<DotProps, "ref">>
   /**
    *  Props passed down to recharts 'XAxis' component.
    */
-  xAxisProps?: XAxisProps
+  xAxisProps?: Merge<CSSUIObject, XAxisProps>
   /**
    *  Props passed down to recharts 'YAxis' component.
    */
-  yAxisProps?: YAxisProps
+  yAxisProps?: Merge<CSSUIObject, YAxisProps>
   /**
    *  Props passed down to recharts 'Legend' component.
    */
-  legendProps?: Omit<LegendProps, "ref">
+  legendProps?: Merge<CSSUIObject, Omit<LegendProps, "ref">>
   /**
    *  Props passed down to recharts 'Tooltip' component.
    */
-  tooltipProps?: Omit<TooltipProps<any, any>, "ref">
+  tooltipProps?: Merge<CSSUIObject, Omit<TooltipProps<any, any>, "ref">>
   /**
    *  Props passed down to recharts 'CartesianGrid' component.
    */
-  gridProps?: CSSUIObject & CartesianGridProps
+  gridProps?: Merge<CSSUIObject, CartesianGridProps>
+  /**
+   *  Props passed down to recharts 'Area' component.
+   */
+  areaProps?: Merge<CSSUIObject, AreaProps>
 }
 
-//!rechartのやつがあるなら、それを&で合わせればよいのでは
 //AxisLineのプロパティも作っていいかも
 export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
@@ -307,7 +317,16 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     />
   ))
 
-  //todo varにmapでcolorを登録していく
+  const legend = () => {
+    const legendProps = getLegendProps({}, ref)
+    if (withLegend) return <Legend {...legendProps} />
+  }
+
+  const tooltip = () => {
+    const tooltipProps = getTooltipProps({}, ref)
+    if (withTooltip) return <Tooltip {...tooltipProps} />
+  }
+
   return (
     <ui.div
       className={cx("ui-area-chart", className)}
@@ -336,13 +355,13 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
               <CartesianGrid {...getGridProps({}, ref)} />
               <XAxis {...getXAxisProps()} />
               <YAxis {...getYAxisProps()} />
-              {withLegend ? <Legend {...getLegendProps({}, ref)} /> : null}
-              {withTooltip ? <Tooltip {...getTooltipProps({}, ref)} /> : null}
-              {type === "split" && (
+              {legend()}
+              {tooltip()}
+              {type === "split" ? (
                 <defs>
                   <AreaSplit {...getAreaSplitProps()} />
                 </defs>
-              )}
+              ) : null}
               {areas}
             </ReChartsAreaChart>
           </ResponsiveContainer>

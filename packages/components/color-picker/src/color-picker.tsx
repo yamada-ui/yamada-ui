@@ -14,6 +14,7 @@ import {
   omitObject,
 } from "@yamada-ui/utils"
 import { cloneElement } from "react"
+import type { ColorSelectorProps } from "./color-selector"
 import { ColorSelector } from "./color-selector"
 import { EyeDropperIcon } from "./color-selector-eye-dropper"
 import type { ColorSwatchProps } from "./color-swatch"
@@ -72,7 +73,19 @@ type ColorPickerOptions = {
 
 export type ColorPickerProps = ThemeProps<"ColorPicker"> &
   UseColorPickerProps &
-  ColorPickerOptions
+  ColorPickerOptions &
+  Pick<
+    ColorSelectorProps,
+    | "saturationSliderRef"
+    | "saturationSliderProps"
+    | "swatchesProps"
+    | "hueSliderRef"
+    | "hueSliderProps"
+    | "alphaSliderRef"
+    | "alphaSliderProps"
+    | "channelsProps"
+    | "channelProps"
+  >
 
 /**
  * `ColorPicker` is a component used by the user to select a color or enter an arbitrary color value.
@@ -97,6 +110,15 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       inputProps,
       swatchProps,
       eyeDropperProps,
+      saturationSliderRef,
+      saturationSliderProps,
+      swatchesProps,
+      hueSliderRef,
+      hueSliderProps,
+      alphaSliderRef,
+      alphaSliderProps,
+      channelsProps,
+      channelProps,
       portalProps = { isDisabled: true },
       ...computedProps
     } = omitThemeProps(omitObject(mergedProps, ["withSwatch"]))
@@ -160,7 +182,17 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
               >
                 <ColorSelector
                   className="ui-color-picker__picker"
-                  {...getSelectorProps()}
+                  {...getSelectorProps({
+                    saturationSliderRef,
+                    saturationSliderProps,
+                    swatchesProps,
+                    hueSliderRef,
+                    hueSliderProps,
+                    alphaSliderRef,
+                    alphaSliderProps,
+                    channelsProps,
+                    channelProps,
+                  })}
                 />
               </PopoverContent>
             </Portal>
@@ -208,6 +240,7 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
+      zIndex: 2,
       ...styles.swatch,
     }
 

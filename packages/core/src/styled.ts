@@ -17,7 +17,7 @@ import type {
   As,
 } from "./components"
 import { shouldForwardProp } from "./components"
-import type { CSSUIProps, CSSUIObject } from "./css"
+import type { CSSUIProps } from "./css"
 import { css } from "./css"
 import { useColorMode } from "./providers"
 import { pseudos } from "./pseudos"
@@ -27,18 +27,14 @@ const emotionStyled = interopDefault(createStyled)
 
 const styleProps = { ...styles, ...pseudos }
 
-export type BaseStyle =
-  | CSSUIObject
-  | ((props: StyledResolverProps) => CSSUIObject)
-
 type ToCSSObject = {
-  (options: {
-    baseStyle?: BaseStyle
-  }): FunctionInterpolation<StyledResolverProps>
+  (
+    options: Pick<StyledOptions, "baseStyle" | "disableStyleProp">,
+  ): FunctionInterpolation<StyledResolverProps>
 }
 
 export const toCSSObject: ToCSSObject =
-  ({ baseStyle }) =>
+  ({ baseStyle, disableStyleProp }) =>
   (props: StyledResolverProps) => {
     const { theme, css: customCSS, __css, sx, ...rest } = props
     const propsCSS = filterObject<Dict, CSSUIProps>(
@@ -49,19 +45,19 @@ export const toCSSObject: ToCSSObject =
 
     const computedCSS = css(
       assignAfter({}, __css, baseCSS, filterUndefined(propsCSS), sx),
-    )(theme)
+    )(theme, disableStyleProp)
 
     return customCSS ? [computedCSS, customCSS] : computedCSS
   }
 
 export const styled = <T extends As, P extends object = {}>(
   element: T,
-  { baseStyle, ...styledOptions }: StyledOptions = {},
+  { baseStyle, disableStyleProp, ...styledOptions }: StyledOptions = {},
 ) => {
   if (!styledOptions.shouldForwardProp)
-    styledOptions.shouldForwardProp = shouldForwardProp
+    styledOptions.shouldForwardProp = shouldForwardProp(disableStyleProp)
 
-  const CSSObject = toCSSObject({ baseStyle })
+  const CSSObject = toCSSObject({ baseStyle, disableStyleProp })
 
   const Component = emotionStyled(
     element as ComponentType<any>,

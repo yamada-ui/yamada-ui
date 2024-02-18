@@ -9,7 +9,7 @@ import {
   useFormControlProps,
   getFormControlProperties,
 } from "@yamada-ui/form-control"
-import type { PopoverProps } from "@yamada-ui/popover"
+import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useEyeDropper } from "@yamada-ui/use-eye-dropper"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
@@ -157,7 +157,10 @@ export const useColorPicker = ({
     getFormControlProperties({ omit: ["aria-readonly"] }),
   )
   const { disabled, readOnly } = formControlProps
-  const computedProps = splitObject(rest, layoutStyleProperties)
+  const [containerProps, inputProps] = splitObject<Dict, string>(
+    omitObject(rest, [...popoverProperties]),
+    [...layoutStyleProperties, "aria-readonly"],
+  )
 
   const containerRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLInputElement>(null)
@@ -336,20 +339,20 @@ export const useColorPicker = ({
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
-      ...computedProps[0],
+      ...containerProps,
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onContainerClick),
       onBlur: handlerAll(props.onBlur, rest.onBlur, onContainerBlur),
     }),
-    [computedProps, formControlProps, onContainerBlur, onContainerClick, rest],
+    [containerProps, formControlProps, onContainerBlur, onContainerClick, rest],
   )
 
   const getFieldProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(fieldRef, ref),
       tabIndex: !allowInput ? -1 : 0,
-      ...omitObject(computedProps[1] as Dict, ["aria-readonly"]),
+      ...inputProps,
       ...props,
       style: {
         ...props.style,
@@ -365,7 +368,7 @@ export const useColorPicker = ({
     }),
     [
       allowInput,
-      computedProps,
+      inputProps,
       inputValue,
       isOpen,
       rest,

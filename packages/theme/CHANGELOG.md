@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 1.4.4
+
+### Patch Changes
+
+- [#718](https://github.com/hirotomoyamada/yamada-ui/pull/718) [`c0a73be`](https://github.com/hirotomoyamada/yamada-ui/commit/c0a73be0e618001ed681ab08fe2828f033ad6cc8) Thanks [@setodeve](https://github.com/setodeve)! - Fixed a bug where fontSize of excessive numbers in AvatarGroup is not set to theme sizes.
+
+- Updated dependencies [[`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf), [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517), [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9)]:
+  - @yamada-ui/core@1.4.0
+
 ## 1.4.3
 
 ### Patch Changes

@@ -1,5 +1,77 @@
 # @yamada-ui/react
 
+## 1.2.6
+
+### Patch Changes
+
+- Updated dependencies [[`06d6496`](https://github.com/hirotomoyamada/yamada-ui/commit/06d649660bd31a90afd5a1a82e1f039bf9433164), [`14144ce`](https://github.com/hirotomoyamada/yamada-ui/commit/14144cee8ff73df146a6fe56e226e087d064abb0), [`af64be5`](https://github.com/hirotomoyamada/yamada-ui/commit/af64be58ca1ff955fc1394252d99ce0a9abff7ba), [`c60caed`](https://github.com/hirotomoyamada/yamada-ui/commit/c60caedc19aa15e47137dded7926e3d49b512803), [`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf), [`edfeb36`](https://github.com/hirotomoyamada/yamada-ui/commit/edfeb36f83ae13e6293e9a2c79167256289a6af1), [`cfea803`](https://github.com/hirotomoyamada/yamada-ui/commit/cfea803227db6339e57bfb1151fbd385a6a263e5), [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517), [`016b0b6`](https://github.com/hirotomoyamada/yamada-ui/commit/016b0b64fe4ae93028dfee47f00cb11e1245252d), [`ec92289`](https://github.com/hirotomoyamada/yamada-ui/commit/ec9228946b40b98656a13841a8007f01d0af9df8), [`5fcfaf2`](https://github.com/hirotomoyamada/yamada-ui/commit/5fcfaf2777a089bc59e7e71dfcd4a7ec84081059), [`072be60`](https://github.com/hirotomoyamada/yamada-ui/commit/072be60b12e79065b1ff543d50c0d18d78e0b9d1), [`205d27d`](https://github.com/hirotomoyamada/yamada-ui/commit/205d27db32d03bb03b436d001e2dd1155f9ce4e5), [`3f9aafd`](https://github.com/hirotomoyamada/yamada-ui/commit/3f9aafddfa8c6954da55ab6fceab8d5b1f2d7214), [`c0a73be`](https://github.com/hirotomoyamada/yamada-ui/commit/c0a73be0e618001ed681ab08fe2828f033ad6cc8), [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9), [`59de9ce`](https://github.com/hirotomoyamada/yamada-ui/commit/59de9ce78f7857022e38c0f963529eb9e9f84cd4), [`f2fbe35`](https://github.com/hirotomoyamada/yamada-ui/commit/f2fbe35c3c5f56fec4494c58f21f8d95e7059d54)]:
+  - @yamada-ui/button@1.0.14
+  - @yamada-ui/resizable@1.0.5
+  - @yamada-ui/color-picker@1.1.0
+  - @yamada-ui/core@1.4.0
+  - @yamada-ui/textarea@1.1.2
+  - @yamada-ui/use-token@1.1.0
+  - @yamada-ui/use-breakpoint@1.2.0
+  - @yamada-ui/modal@1.0.15
+  - @yamada-ui/theme@1.4.4
+  - @yamada-ui/use-value@1.1.0
+  - @yamada-ui/scroll-area@1.0.12
+  - @yamada-ui/file-button@1.0.16
+  - @yamada-ui/accordion@1.0.13
+  - @yamada-ui/alert@1.0.13
+  - @yamada-ui/autocomplete@1.0.18
+  - @yamada-ui/avatar@1.1.11
+  - @yamada-ui/badge@1.0.12
+  - @yamada-ui/breadcrumb@1.0.12
+  - @yamada-ui/card@1.0.13
+  - @yamada-ui/checkbox@1.0.16
+  - @yamada-ui/close-button@1.0.13
+  - @yamada-ui/editable@1.0.15
+  - @yamada-ui/file-input@1.0.15
+  - @yamada-ui/form-control@1.0.15
+  - @yamada-ui/highlight@1.0.12
+  - @yamada-ui/icon@1.0.12
+  - @yamada-ui/image@1.0.12
+  - @yamada-ui/indicator@1.1.11
+  - @yamada-ui/input@1.0.15
+  - @yamada-ui/kbd@1.0.12
+  - @yamada-ui/layouts@1.1.9
+  - @yamada-ui/link@1.0.12
+  - @yamada-ui/list@1.0.12
+  - @yamada-ui/loading@1.0.13
+  - @yamada-ui/menu@1.0.13
+  - @yamada-ui/motion@1.0.13
+  - @yamada-ui/native-select@1.0.16
+  - @yamada-ui/native-table@1.0.13
+  - @yamada-ui/notice@1.0.13
+  - @yamada-ui/number-input@1.0.15
+  - @yamada-ui/pagination@1.0.13
+  - @yamada-ui/pin-input@1.0.15
+  - @yamada-ui/popover@1.0.13
+  - @yamada-ui/progress@1.0.12
+  - @yamada-ui/radio@1.0.16
+  - @yamada-ui/rating@1.0.13
+  - @yamada-ui/reorder@1.0.13
+  - @yamada-ui/ripple@1.0.13
+  - @yamada-ui/segmented-control@1.0.14
+  - @yamada-ui/select@1.0.16
+  - @yamada-ui/skeleton@1.0.12
+  - @yamada-ui/slider@1.0.16
+  - @yamada-ui/snacks@1.0.5
+  - @yamada-ui/stat@1.0.10
+  - @yamada-ui/stepper@1.0.12
+  - @yamada-ui/switch@1.0.16
+  - @yamada-ui/tabs@1.0.13
+  - @yamada-ui/tag@1.0.12
+  - @yamada-ui/tooltip@1.0.14
+  - @yamada-ui/transitions@1.0.13
+  - @yamada-ui/typography@1.0.12
+  - @yamada-ui/use-animation@1.0.12
+  - @yamada-ui/use-popper@1.0.12
+  - @yamada-ui/providers@1.0.18
+  - @yamada-ui/theme-tools@1.0.17
+  - @yamada-ui/use-media-query@1.0.18
+
 ## 1.2.5
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @yamada-ui/modal
 
+## 1.0.15
+
+### Patch Changes
+
+- [#731](https://github.com/hirotomoyamada/yamada-ui/pull/731) [`205d27d`](https://github.com/hirotomoyamada/yamada-ui/commit/205d27db32d03bb03b436d001e2dd1155f9ce4e5) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed a bug where `isFullHeight` is inserted into DOM Element.
+
+- Updated dependencies [[`06d6496`](https://github.com/hirotomoyamada/yamada-ui/commit/06d649660bd31a90afd5a1a82e1f039bf9433164), [`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf), [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517), [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9), [`59de9ce`](https://github.com/hirotomoyamada/yamada-ui/commit/59de9ce78f7857022e38c0f963529eb9e9f84cd4)]:
+  - @yamada-ui/button@1.0.14
+  - @yamada-ui/core@1.4.0
+  - @yamada-ui/use-value@1.1.0
+  - @yamada-ui/close-button@1.0.13
+  - @yamada-ui/motion@1.0.13
+  - @yamada-ui/transitions@1.0.13
+
 ## 1.0.14
 
 ### Patch Changes

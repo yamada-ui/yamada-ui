@@ -11,6 +11,7 @@ import {
   getValidChildren,
   findChildren,
   cx,
+  omitObject,
 } from "@yamada-ui/utils"
 import { useModal } from "./modal"
 import type {
@@ -126,7 +127,13 @@ export const Drawer = forwardRef<DrawerProps, "div">(
         >
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
-          <DrawerContent {...{ withCloseButton, ...rest, placement }}>
+          <DrawerContent
+            {...{
+              withCloseButton,
+              ...omitObject(rest, ["isFullHeight"]),
+              placement,
+            }}
+          >
             {cloneChildren}
           </DrawerContent>
         </Modal>

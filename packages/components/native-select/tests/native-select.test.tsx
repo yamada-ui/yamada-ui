@@ -62,10 +62,11 @@ describe("<NativeSelect />", () => {
 
   test("should be read only", () => {
     render(<NativeSelect isReadOnly data-testid="Select" />)
-    expect(screen.getByTestId("Select")).toHaveAttribute(
+    expect(screen.getByTestId("Select")).not.toHaveAttribute(
       "aria-readonly",
       "true",
     )
+    expect(screen.getByTestId("Select")).not.toHaveAttribute("readonly", "true")
   })
 
   test("should be invalid", () => {

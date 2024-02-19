@@ -1,27 +1,33 @@
 import { pickObject } from "@yamada-ui/utils"
+import type { RefObject } from "react"
 import { useRef } from "react"
 
 const useAutosize = (
-  libRef: React.MutableRefObject<HTMLTextAreaElement | null>,
+  ref: RefObject<HTMLTextAreaElement>,
   maxRows: number,
   minRows: number,
 ) => {
   const heightRef = useRef(0)
 
   const resizeTextarea = () => {
-    const node = libRef.current!
-    const nodeSizeData = getSizingData(node)
+    const el = ref.current
+
+    if (!el) return
+
+    const nodeSizeData = getSizingData(el)
+
     if (!nodeSizeData) return
 
-    const height = calcHeight(
-      nodeSizeData,
-      node.value || node.placeholder || "x",
-      maxRows,
-      minRows,
-    )
+    let { value, placeholder, style } = el
+
+    value ??= placeholder ?? "x"
+
+    const height = calcHeight(nodeSizeData, value, maxRows, minRows)
+
     if (heightRef.current !== height) {
       heightRef.current = height
-      node.style.height = `${height}px`
+
+      style.height = `${height}px`
     }
   }
 
@@ -67,10 +73,10 @@ type SizingData = {
   borderSize: number
 }
 
-const getSizingData = (node: HTMLElement): SizingData | null => {
-  const style = window.getComputedStyle(node)
+const getSizingData = (el: HTMLElement): SizingData | null => {
+  const style = window?.getComputedStyle(el)
 
-  if (style === null) return null
+  if (style == null) return null
 
   const sizingStyle = pickObject(
     style,
@@ -78,7 +84,6 @@ const getSizingData = (node: HTMLElement): SizingData | null => {
   )
   const { boxSizing } = sizingStyle
 
-  // probably node is detached from DOM, can't read computed dimensions
   if (boxSizing === "") return null
 
   const paddingSize =
@@ -103,15 +108,12 @@ const calcHeight = (
   maxRows: number,
   minRows: number,
 ) => {
-  const getHeight = (node: HTMLElement, sizingData: SizingData): number => {
-    const height = node.scrollHeight
+  const getHeight = (el: HTMLElement, sizingData: SizingData): number => {
+    const height = el.scrollHeight
 
-    if (sizingData.sizingStyle.boxSizing === "border-box") {
-      // border-box: add border, since height = content + padding + border
+    if (sizingData.sizingStyle.boxSizing === "border-box")
       return height + sizingData.borderSize
-    }
 
-    // remove padding, since height = content
     return height - sizingData.paddingSize
   }
 
@@ -119,40 +121,44 @@ const calcHeight = (
     hiddenTextarea = document.createElement("textarea")
     hiddenTextarea.setAttribute("tabindex", "-1")
     hiddenTextarea.setAttribute("aria-hidden", "true")
+
     forceHiddenStyles(hiddenTextarea)
   }
 
-  if (hiddenTextarea.parentNode === null) {
+  if (hiddenTextarea.parentNode === null)
     document.body.appendChild(hiddenTextarea)
-  }
 
   const { paddingSize, borderSize, sizingStyle } = sizingData
   const { boxSizing } = sizingStyle
 
   Object.keys(sizingStyle).forEach((_key) => {
     const key = _key as keyof typeof sizingStyle
+
     hiddenTextarea!.style[key] = sizingStyle[key] as any
   })
 
   forceHiddenStyles(hiddenTextarea)
 
   hiddenTextarea.value = value
+
   let height = getHeight(hiddenTextarea, sizingData)
 
-  // measure height of a textarea with a single row
   hiddenTextarea.value = "x"
+
   const rowHeight = hiddenTextarea.scrollHeight - paddingSize
 
   let minHeight = rowHeight * minRows
-  if (boxSizing === "border-box") {
+
+  if (boxSizing === "border-box")
     minHeight = minHeight + paddingSize + borderSize
-  }
+
   height = Math.max(minHeight, height)
 
   let maxHeight = rowHeight * maxRows
-  if (boxSizing === "border-box") {
+
+  if (boxSizing === "border-box")
     maxHeight = maxHeight + paddingSize + borderSize
-  }
+
   height = Math.min(maxHeight, height)
 
   return height
@@ -170,9 +176,9 @@ const HIDDEN_TEXTAREA_STYLE = {
   right: "0",
 } as const
 
-const forceHiddenStyles = (node: HTMLElement) => {
+const forceHiddenStyles = (el: HTMLElement) => {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
-    node.style.setProperty(
+    el.style.setProperty(
       key,
       HIDDEN_TEXTAREA_STYLE[key as keyof typeof HIDDEN_TEXTAREA_STYLE],
       "important",

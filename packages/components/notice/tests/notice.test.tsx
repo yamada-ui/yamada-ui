@@ -64,6 +64,62 @@ describe("useNotice()", () => {
     })
   })
 
+  test("If the limit value is set to 1, only one is displayed", async () => {
+    const LimitedNoticeExample = () => {
+      const notice = useNotice({ limit: 1 })
+      const onOpen = () => {
+        notice({
+          title: "NoticeTitle",
+          description: "NoticeDescription",
+        })
+      }
+
+      return (
+        <>
+          <Button data-testid="OpenNotice" onClick={onOpen}>
+            Open Notice
+          </Button>
+        </>
+      )
+    }
+
+    render(<LimitedNoticeExample />)
+    for (let index = 0; index < 5; index++) {
+      fireEvent.click(screen.getByTestId("OpenNotice"))
+    }
+    await waitFor(() => {
+      expect(screen.getAllByText("NoticeTitle").length).toEqual(1)
+    })
+  })
+
+  test("Invalid limit value is ignored", async () => {
+    const LimitedNoticeExample = () => {
+      const notice = useNotice({ limit: -1 })
+      const onOpen = () => {
+        notice({
+          title: "NoticeTitle",
+          description: "NoticeDescription",
+        })
+      }
+
+      return (
+        <>
+          <Button data-testid="OpenNotice" onClick={onOpen}>
+            Open Notice
+          </Button>
+        </>
+      )
+    }
+
+    render(<LimitedNoticeExample />)
+    for (let index = 0; index < 5; index++) {
+      fireEvent.click(screen.getByTestId("OpenNotice"))
+    }
+    await waitFor(() => {
+      expect(screen.getAllByText("NoticeTitle").length).toEqual(5)
+    })
+  })
+
   test("Update notice", async () => {
     const UpdateNoticeExample = () => {
       const notice = useNotice()

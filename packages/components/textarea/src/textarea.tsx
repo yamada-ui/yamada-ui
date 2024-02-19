@@ -17,10 +17,13 @@ import {
   addDomEvent,
   createdDom,
   cx,
+  handlerAll,
+  mergeRefs,
+  noop,
   omitObject,
-  useMergeRefs,
+  useSafeLayoutEffect,
 } from "@yamada-ui/utils"
-import { useLayoutEffect, useRef } from "react"
+import { useRef } from "react"
 import useAutosize from "./use-autosize"
 
 type TextareaOptions = {
@@ -63,61 +66,66 @@ export type TextareaProps = Omit<
  *
  * @see Docs https://yamada-ui.com/components/forms/textarea
  */
-export const Textarea = forwardRef<TextareaProps, "textarea">(
-  (props, customRef) => {
-    const [styles, mergedProps] = useComponentStyle("Textarea", props)
-    let {
-      className,
-      rows,
-      resize = "none",
-      autosize,
-      maxRows = Infinity,
-      minRows = 1,
-      onChange,
-      ...rest
-    } = omitThemeProps(mergedProps)
+export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
+  const [styles, mergedProps] = useComponentStyle("Textarea", props)
+  let {
+    className,
+    rows,
+    resize = "none",
+    autosize,
+    maxRows = Infinity,
+    minRows = 1,
+    onChange,
+    ...rest
+  } = omitThemeProps(mergedProps)
+  rest = useFormControlProps(rest)
 
-    rest = useFormControlProps(rest)
+  const isBrowser = createdDom()
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const resizeTextarea = useAutosize(textareaRef, maxRows, minRows)
 
-    const css: CSSUIObject =
-      rows || autosize
-        ? omitObject(styles, [
-            "h",
-            "height",
-            "minH",
-            "minHeight",
-            "maxH",
-            "maxHeight",
-          ])
-        : styles
+  let css: CSSUIObject
 
-    const libRef = useRef<HTMLTextAreaElement | null>(null)
-    const ref = useMergeRefs(libRef, customRef)
+  if (rows || autosize) {
+    css = omitObject(styles, [
+      "h",
+      "height",
+      "minH",
+      "minHeight",
+      "maxH",
+      "maxHeight",
+    ])
+  } else {
+    css = styles
+  }
 
-    const resizeTextarea = useAutosize(libRef, maxRows, minRows)
+  useSafeLayoutEffect(() => {
+    if (!isBrowser || !autosize) return
 
-    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (autosize) resizeTextarea()
-      if (onChange) onChange(event)
-    }
+    resizeTextarea()
 
-    const isBrowser = createdDom()
-    if (isBrowser && autosize) {
-      useLayoutEffect(resizeTextarea)
-      addDomEvent(window, "resize", resizeTextarea)
-      addDomEvent(document.fonts, "loadingdone", resizeTextarea)
-    }
-
-    return (
-      <ui.textarea
-        ref={ref}
-        className={cx("ui-textarea", className)}
-        resize={resize}
-        rows={rows}
-        __css={css}
-        {...rest}
-        onChange={handleChange}
-      />
+    const unsubscribeResize = addDomEvent(window, "resize", resizeTextarea)
+    const unsubscribeLoadingdone = addDomEvent(
+      document.fonts,
+      "loadingdone",
+      resizeTextarea,
     )
-  },
-)
+
+    return () => {
+      unsubscribeResize()
+      unsubscribeLoadingdone()
+    }
+  }, [])
+
+  return (
+    <ui.textarea
+      ref={mergeRefs(ref, textareaRef)}
+      className={cx("ui-textarea", className)}
+      resize={resize}
+      rows={rows}
+      __css={css}
+      {...rest}
+      onChange={handlerAll(autosize ? resizeTextarea : noop, onChange)}
+    />
+  )
+})

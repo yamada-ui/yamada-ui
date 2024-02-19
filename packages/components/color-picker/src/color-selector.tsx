@@ -9,6 +9,7 @@ import { cx } from "@yamada-ui/utils"
 import type { ForwardedRef } from "react"
 import type { ColorSelectorBodyProps } from "./color-selector-body"
 import { ColorSelectorBody } from "./color-selector-body"
+import type { ColorSelectorChannelsProps } from "./color-selector-channels"
 import { ColorSelectorChannels } from "./color-selector-channels"
 import type { ColorSelectorSwatchesProps } from "./color-selector-swatches"
 import { ColorSelectorSwatches } from "./color-selector-swatches"
@@ -46,6 +47,10 @@ type ColorSelectorOptions = {
    * Props for the swatches component.
    */
   swatchesProps?: ColorSelectorSwatchesProps
+  /**
+   * Props for the channels component.
+   */
+  channelsProps?: ColorSelectorChannelsProps
 }
 
 export type ColorSelectorProps = ThemeProps<"ColorSelector"> &
@@ -65,7 +70,8 @@ export type ColorSelectorProps = ThemeProps<"ColorSelector"> &
   Pick<
     ColorSelectorSwatchesProps,
     "swatchesLabel" | "swatches" | "swatchesColumns" | "swatchProps"
-  >
+  > &
+  Pick<ColorSelectorChannelsProps, "channelProps">
 
 /**
  * `ColorSelector` is a component used by the user to select a color.
@@ -98,6 +104,8 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
       swatchesLabel,
       swatchProps,
       swatchesProps,
+      channelsProps,
+      channelProps,
       ...computedProps
     } = omitThemeProps(mergedProps)
     const {
@@ -150,7 +158,9 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
             />
           ) : null}
 
-          {withPicker && withChannel ? <ColorSelectorChannels /> : null}
+          {withPicker && withChannel ? (
+            <ColorSelectorChannels {...{ channelProps, ...channelsProps }} />
+          ) : null}
 
           <ColorSelectorSwatches
             {...{

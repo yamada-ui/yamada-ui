@@ -10,7 +10,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
+import type { Dict, Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { Fragment } from "react"
 import {
@@ -33,27 +33,16 @@ import type {
   CartesianGridProps,
   TooltipProps,
   ResponsiveContainerProps,
+  AreaProps as ReChartsAreaProps,
 } from "recharts"
 import { AreaGradient } from "./area-gradient"
 import { AreaSplit } from "./area-split"
-import type { AxisType } from "./use-area-chart"
 import { AreaChartProvider, useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
 
 export type LayoutType = "horizontal" | "vertical"
-
-export type ChartSeries = {
-  name: string
-  color: CSSUIProps["color"]
-  label?: string
-}
-
-export type AreaChartSeries = ChartSeries & {
-  strokeDasharray?: string | number
-}
-
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
-
+export type AxisType = "x" | "y" | "xy" | "none"
 export type AreaChartCurveType =
   | "bump"
   | "linear"
@@ -62,6 +51,28 @@ export type AreaChartCurveType =
   | "step"
   | "stepBefore"
   | "stepAfter"
+export type AreaChartSeries = Merge<
+  Merge<CSSUIObject, ReChartsAreaProps>,
+  { color: CSSUIProps["color"] }
+>
+export type ReferenceUILineProps = Merge<CSSUIObject, ReferenceLineProps>
+export type AreaChartUIProps = Merge<
+  CSSUIObject,
+  React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+>
+export type ContainerUIProps = Merge<
+  CSSUIObject,
+  Omit<ResponsiveContainerProps, "children">
+>
+export type DotUIProps = Merge<CSSUIObject, Omit<DotProps, "ref">>
+export type XAxisUIProps = Merge<CSSUIObject, XAxisProps>
+export type YAxisUIProps = Merge<CSSUIObject, YAxisProps>
+export type LegendUIProps = Merge<CSSUIObject, Omit<LegendProps, "ref">>
+export type TooltipUIProps = Merge<
+  CSSUIObject,
+  Omit<TooltipProps<any, any>, "ref">
+>
+export type GridUIProps = Merge<CSSUIObject, CartesianGridProps>
 
 type AreaChartOptions = {
   /**
@@ -167,7 +178,7 @@ type AreaChartOptions = {
    *
    * @default 'y'
    */
-  tickLine?: string
+  tickLine?: AxisType
   /**
    * Specifies which lines should be displayed in the grid.
    *
@@ -183,7 +194,7 @@ type AreaChartOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLines?: ReferenceLineProps[]
+  referenceLines?: ReferenceUILineProps[]
   /**
    * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
    *
@@ -201,42 +212,41 @@ type AreaChartOptions = {
   /**
    *  Props passed down to recharts `AreaChart` component.
    */
-  areaChartProps?: React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+  areaChartProps?: AreaChartUIProps
   /**
    *  Props passed down to recharts `ResponsiveContainer` component.
    */
-  containerProps?: ResponsiveContainerProps
+  containerProps?: ContainerUIProps
   /**
    *  Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
-  dotProps?: Omit<DotProps, "ref">
+  dotProps?: DotUIProps
   /**
    *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
-  activeDotProps?: Omit<DotProps, "ref">
+  activeDotProps?: DotUIProps
   /**
    *  Props passed down to recharts 'XAxis' component.
    */
-  xAxisProps?: XAxisProps
+  xAxisProps?: XAxisUIProps
   /**
    *  Props passed down to recharts 'YAxis' component.
    */
-  yAxisProps?: YAxisProps
+  yAxisProps?: YAxisUIProps
   /**
    *  Props passed down to recharts 'Legend' component.
    */
-  legendProps?: Omit<LegendProps, "ref">
+  legendProps?: LegendUIProps
   /**
    *  Props passed down to recharts 'Tooltip' component.
    */
-  tooltipProps?: Omit<TooltipProps<any, any>, "ref">
+  tooltipProps?: TooltipUIProps
   /**
    *  Props passed down to recharts 'CartesianGrid' component.
    */
-  gridProps?: CSSUIObject & CartesianGridProps
+  gridProps?: GridUIProps
 }
 
-//!rechartのやつがあるなら、それを&で合わせればよいのでは
 //AxisLineのプロパティも作っていいかも
 export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
@@ -291,7 +301,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     const { id, stroke, ...rest } = getAreaProps(item, index, {}, ref)
 
     return (
-      <Fragment key={`area-${item.name}`}>
+      <Fragment key={`area-${item.dataKey}`}>
         <defs>
           <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
         </defs>
@@ -307,47 +317,56 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     />
   ))
 
-  //todo varにmapでcolorを登録していく
+  const legend = () => {
+    const legendProps = getLegendProps({}, ref)
+    if (withLegend) return <Legend {...legendProps} />
+  }
+
+  const tooltip = () => {
+    const tooltipProps = getTooltipProps({}, ref)
+    if (withTooltip) return <Tooltip {...tooltipProps} />
+  }
+
   return (
-    <ui.div
-      className={cx("ui-area-chart", className)}
-      var={getCSSvariables()}
-      {...{
-        w,
-        width,
-        minW,
-        minWidth,
-        maxW,
-        maxWidth,
-        h,
-        height,
-        minH,
-        minHeight,
-        maxH,
-        maxHeight,
-      }}
-      __css={{ ...styles.container }}
-    >
-      <ChartProvider value={{ styles }}>
-        <AreaChartProvider value={{}}>
+    <ChartProvider value={{ styles }}>
+      <AreaChartProvider value={{}}>
+        <ui.div
+          className={cx("ui-area-chart", className)}
+          var={getCSSvariables()}
+          {...{
+            w,
+            width,
+            minW,
+            minWidth,
+            maxW,
+            maxWidth,
+            h,
+            height,
+            minH,
+            minHeight,
+            maxH,
+            maxHeight,
+          }}
+          __css={{ ...styles.container }}
+        >
           <ResponsiveContainer {...getContainerProps({}, ref)}>
             <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
               {referenceLinesItems}
               <CartesianGrid {...getGridProps({}, ref)} />
               <XAxis {...getXAxisProps()} />
               <YAxis {...getYAxisProps()} />
-              {withLegend ? <Legend {...getLegendProps({}, ref)} /> : null}
-              {withTooltip ? <Tooltip {...getTooltipProps({}, ref)} /> : null}
-              {type === "split" && (
+              {legend()}
+              {tooltip()}
+              {type === "split" ? (
                 <defs>
                   <AreaSplit {...getAreaSplitProps()} />
                 </defs>
-              )}
+              ) : null}
               {areas}
             </ReChartsAreaChart>
           </ResponsiveContainer>
-        </AreaChartProvider>
-      </ChartProvider>
-    </ui.div>
+        </ui.div>
+      </AreaChartProvider>
+    </ChartProvider>
   )
 })

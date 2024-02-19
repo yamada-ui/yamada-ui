@@ -1,5 +1,29 @@
 # @yamada-ui/color-picker
 
+## 1.1.0
+
+### Minor Changes
+
+- [#753](https://github.com/hirotomoyamada/yamada-ui/pull/753) [`072be60`](https://github.com/hirotomoyamada/yamada-ui/commit/072be60b12e79065b1ff543d50c0d18d78e0b9d1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `children` prop support.
+
+### Patch Changes
+
+- [#727](https://github.com/hirotomoyamada/yamada-ui/pull/727) [`af64be5`](https://github.com/hirotomoyamada/yamada-ui/commit/af64be58ca1ff955fc1394252d99ce0a9abff7ba) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `matchWidth` is inserted into DOM Element.
+
+- [#747](https://github.com/hirotomoyamada/yamada-ui/pull/747) [`c60caed`](https://github.com/hirotomoyamada/yamada-ui/commit/c60caedc19aa15e47137dded7926e3d49b512803) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended props for `ColorSelector` to `ColorPicker`.
+
+- [#747](https://github.com/hirotomoyamada/yamada-ui/pull/747) [`cfea803`](https://github.com/hirotomoyamada/yamada-ui/commit/cfea803227db6339e57bfb1151fbd385a6a263e5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Swatch` component becomes invisible.
+
+- [#747](https://github.com/hirotomoyamada/yamada-ui/pull/747) [`ec92289`](https://github.com/hirotomoyamada/yamada-ui/commit/ec9228946b40b98656a13841a8007f01d0af9df8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `channelsProps` and `channelProps` to `ColorSelector`.
+
+- Updated dependencies [[`06d6496`](https://github.com/hirotomoyamada/yamada-ui/commit/06d649660bd31a90afd5a1a82e1f039bf9433164), [`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf), [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517), [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9)]:
+  - @yamada-ui/button@1.0.14
+  - @yamada-ui/core@1.4.0
+  - @yamada-ui/form-control@1.0.15
+  - @yamada-ui/icon@1.0.12
+  - @yamada-ui/input@1.0.15
+  - @yamada-ui/popover@1.0.13
+
 ## 1.0.5
 
 ### Patch Changes

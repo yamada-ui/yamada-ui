@@ -1,5 +1,17 @@
 # @yamada-ui/resizable
 
+## 1.0.5
+
+### Patch Changes
+
+- [#736](https://github.com/hirotomoyamada/yamada-ui/pull/736) [`14144ce`](https://github.com/hirotomoyamada/yamada-ui/commit/14144cee8ff73df146a6fe56e226e087d064abb0) Thanks [@koralle](https://github.com/koralle)! - Update version of `react-resizable-panels` depended by `@yamada-ui/resizable`
+
+- [#742](https://github.com/hirotomoyamada/yamada-ui/pull/742) [`3f9aafd`](https://github.com/hirotomoyamada/yamada-ui/commit/3f9aafddfa8c6954da55ab6fceab8d5b1f2d7214) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the layout becomes strange when set order to `ResizableItem`.
+
+- Updated dependencies [[`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf), [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517), [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9)]:
+  - @yamada-ui/core@1.4.0
+  - @yamada-ui/icon@1.0.12
+
 ## 1.0.4
 
 ### Patch Changes

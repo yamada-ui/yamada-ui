@@ -94,7 +94,7 @@ type UseColorPickerOptions = {
 
 export type UseColorPickerProps = Omit<
   HTMLUIProps<"input">,
-  "size" | "offset" | "value" | "defaultValue" | "onChange"
+  "size" | "offset" | "value" | "defaultValue" | "onChange" | "children"
 > &
   Omit<UseColorSelectorBaseProps, "id" | "name"> &
   Omit<
@@ -107,6 +107,7 @@ export type UseColorPickerProps = Omit<
     | "restoreFocus"
     | "openDelay"
     | "closeDelay"
+    | "children"
   > &
   Pick<
     ColorSelectorProps,

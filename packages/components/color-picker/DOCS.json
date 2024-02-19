@@ -10,6 +10,16 @@
       "required": false,
       "description": "Ref for the alpha slider component."
     },
+    "channelProps": {
+      "type": "Omit<ColorSelectorChannelProps, \"channelLabel\">",
+      "required": false,
+      "description": "Props for the chancel component."
+    },
+    "channelsProps": {
+      "type": "ColorSelectorChannelsProps",
+      "required": false,
+      "description": "Props for the channels component."
+    },
     "colorScheme": {
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
@@ -190,11 +200,31 @@
       "required": false,
       "description": "If `true`, allows input."
     },
+    "alphaSliderProps": {
+      "type": "Omit<AlphaSliderProps, \"defaultValue\" | \"value\">",
+      "required": false,
+      "description": "Props for the alpha slider component."
+    },
+    "alphaSliderRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLInputElement | null) => void)\n  | MutableRefObject<HTMLInputElement | null>",
+      "required": false,
+      "description": "Ref for the alpha slider component."
+    },
     "boundary": {
       "type": "HTMLElement | \"clippingParents\" | \"scrollParent\"",
       "defaultValue": "'clippingParents'",
       "required": false,
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
+    },
+    "channelProps": {
+      "type": "Omit<ColorSelectorChannelProps, \"channelLabel\">",
+      "required": false,
+      "description": "Props for the chancel component."
+    },
+    "channelsProps": {
+      "type": "ColorSelectorChannelsProps",
+      "required": false,
+      "description": "Props for the channels component."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -313,6 +343,16 @@
       "required": false,
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
     },
+    "hueSliderProps": {
+      "type": "Omit<HueSliderProps, \"defaultValue\" | \"value\">",
+      "required": false,
+      "description": "Props for the hue slider component."
+    },
+    "hueSliderRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLInputElement | null) => void)\n  | MutableRefObject<HTMLInputElement | null>",
+      "required": false,
+      "description": "Ref for the hue slider component."
+    },
     "inputProps": {
       "type": "HTMLUIProps<\"input\">",
       "required": false,
@@ -419,6 +459,16 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
+    "saturationSliderProps": {
+      "type": "Omit<SaturationSliderProps, \"defaultValue\" | \"value\">",
+      "required": false,
+      "description": "Props for the saturation slider component."
+    },
+    "saturationSliderRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: HTMLInputElement | null) => void)\n  | MutableRefObject<HTMLInputElement | null>",
+      "required": false,
+      "description": "Ref for the saturation slider component."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
@@ -446,6 +496,11 @@
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false,
       "description": "The swatches label to use."
+    },
+    "swatchesProps": {
+      "type": "ColorSelectorSwatchesProps",
+      "required": false,
+      "description": "Props for the swatches component."
     },
     "swatchProps": {
       "type": "ColorSwatchProps",

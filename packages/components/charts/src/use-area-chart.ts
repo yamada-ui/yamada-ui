@@ -1,11 +1,11 @@
 import { useCSS } from "@yamada-ui/core"
 import type { CSSUIObject, StyleProps } from "@yamada-ui/react"
-import type { Dict, Merge, PropGetter } from "@yamada-ui/utils"
+import type { Dict, PropGetter } from "@yamada-ui/utils"
 import { createContext, cx, omitObject, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef, ForwardedRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
-  AreaChart as ReChartsAreaChart,
+  AreaChart,
   AreaProps,
   ReferenceLineProps,
   ResponsiveContainerProps,
@@ -15,14 +15,18 @@ import type {
   TooltipProps,
   DotProps,
 } from "recharts"
-import type { AreaChartProps, AreaChartSeries } from "./area-chart"
+import type {
+  AreaChartProps,
+  ReferenceUILineProps,
+  AreaChartSeries,
+} from "./area-chart"
 import type { AreaGradientProps } from "./area-gradient"
 import type { AreaSplitProps } from "./area-split"
 
 type AreaChartPropGetter = (
-  props?: ComponentPropsWithoutRef<typeof ReChartsAreaChart>,
+  props?: ComponentPropsWithoutRef<typeof AreaChart>,
   ref?: ForwardedRef<HTMLElement>,
-) => ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+) => ComponentPropsWithoutRef<typeof AreaChart>
 type AreaPropGetter = (
   item: AreaChartSeries,
   index: number,
@@ -31,7 +35,7 @@ type AreaPropGetter = (
 ) => Omit<AreaProps, "ref">
 type ReferenceLinePropGetter = (
   index: number,
-  props?: Partial<Merge<CSSUIObject, ReferenceLineProps>>,
+  props?: Partial<ReferenceUILineProps>,
   ref?: ForwardedRef<HTMLElement>,
 ) => Omit<ReferenceLineProps, "ref">
 type ResponsiveContainerPropGetter = (
@@ -61,8 +65,6 @@ export const [AreaChartProvider, useAreaChartContext] =
     errorMessage: `useAreaChartContext returned is 'undefined'. Seems you forgot to wrap the components in "<AreaChart />"`,
   })
 
-export type AxisType = "x" | "y" | "xy" | "none"
-
 export type UseAreaChartProps = Omit<AreaChartProps, "fillOpacity"> & {
   fillOpacity?: number
 }
@@ -72,7 +74,6 @@ export const useAreaChart = ({
   series,
   type,
   areaChartProps = {},
-  areaProps = { dataKey: "" },
   gridProps = {},
   containerProps = {},
   xAxisProps = {},
@@ -478,7 +479,7 @@ export const useAreaChart = ({
 
       const getDefaultSplitOffset = () => {
         if (series.length === 1) {
-          const dataKey = series[0].name
+          const dataKey = series[0].dataKey as string
           return getSplitOffset({ dataKey })
         }
 
@@ -495,14 +496,13 @@ export const useAreaChart = ({
     [data, fillOpacity, series, splitId, splitOffset],
   )
 
-  // todo: 各エリアのPropsをループでとる必要がある
   //todo: useCSSはダメなのでは
   const getAreaProps: AreaPropGetter = useCallback(
     (item, index, props = {}, ref = null) => {
       const id = `${baseId}-${item.color}`
       const color = `var(--ui-areachart-area-${index})`
-      const dimmed = shouldHighlight && highlightedArea !== item.name
-      const [areaReChartsProps, areaUIProps] = splitObject(areaProps, [
+      const dimmed = shouldHighlight && highlightedArea !== item.dataKey
+      const [areaReChartsProps, areaUIProps] = splitObject(item, [
         "type",
         "dataKey",
         "xAxisId",
@@ -595,9 +595,9 @@ export const useAreaChart = ({
         id,
         activeDot,
         dot,
-        name: item.name,
+        name: item.dataKey as string,
         type: curveType,
-        dataKey: item.name,
+        dataKey: item.dataKey,
         fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
         strokeWidth: strokeWidth,
         stroke: color,
@@ -614,7 +614,6 @@ export const useAreaChart = ({
     [
       activeDotProps,
       dotProps,
-      areaProps,
       baseId,
       connectNulls,
       curveType,

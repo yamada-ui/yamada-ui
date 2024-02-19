@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { AreaChartProps } from "@yamada-ui/charts"
-import { AreaChart } from "@yamada-ui/charts"
 import type {
+  AreaChartProps,
   AreaChartCurveType,
   AreaChartType,
-  ChartSeries,
   LayoutType,
-} from "@yamada-ui/charts/src/area-chart"
-import type { AxisType } from "@yamada-ui/charts/src/use-area-chart"
+  AreaChartSeries,
+  AxisType,
+} from "@yamada-ui/charts"
+import { AreaChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
 import {
   FormControl,
@@ -79,10 +79,10 @@ const data = [
   },
 ]
 
-const series: ChartSeries[] = [
-  { name: "uv", color: ["indigo.600", "indigo.400"] },
-  { name: "pv", color: ["rose.600", "rose.400"] },
-  { name: "amt", color: ["emerald.600", "emerald.400"] },
+const series: AreaChartSeries[] = [
+  { dataKey: "uv", color: ["indigo.600", "indigo.400"] },
+  { dataKey: "pv", color: ["rose.600", "rose.400"] },
+  { dataKey: "amt", color: ["emerald.600", "emerald.400"] },
 ]
 
 export const basic: Story = () => {
@@ -194,7 +194,7 @@ export const custom: Story = () => {
             onChange={(value) => {
               setProps((prev) => ({
                 ...prev,
-                tickLine: value as AreaChartType,
+                tickLine: value as AxisType,
               }))
             }}
           />
@@ -367,10 +367,10 @@ export const custom: Story = () => {
   )
 }
 
-const dashSeries = [
-  { name: "uv", color: "indigo.400" },
-  { name: "pv", color: "rose.400" },
-  { name: "amt", color: "emerald.400", strokeDasharray: "5 5" },
+const dashSeries: AreaChartSeries[] = [
+  { dataKey: "uv", color: "indigo.400" },
+  { dataKey: "pv", color: "rose.400" },
+  { dataKey: "amt", color: "emerald.400", strokeDasharray: "5 5" },
 ]
 
 export const dash: Story = () => {
@@ -407,7 +407,7 @@ const splitData = [
     uv: 3490,
   },
 ]
-const splitSeries = [{ name: "uv", color: "indigo.400" }]
+const splitSeries: AreaChartSeries[] = [{ dataKey: "uv", color: "indigo.400" }]
 
 export const split: Story = () => {
   const [splitOffset, setSplitOffset] = useState<number | undefined>()
@@ -473,7 +473,9 @@ const connectNullsData = [
     uv: 3490,
   },
 ]
-const connectNullsSeries = [{ name: "uv", color: "indigo.400" }]
+const connectNullsSeries: AreaChartSeries[] = [
+  { dataKey: "uv", color: "indigo.400" },
+]
 
 export const connectNulls: Story = () => {
   const [connectNulls, { toggle }] = useBoolean(true)

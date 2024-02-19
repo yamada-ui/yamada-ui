@@ -184,7 +184,7 @@ type AreaChartOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLines?: ReferenceLineProps[]
+  referenceLines?: Merge<CSSUIObject, ReferenceLineProps>[]
   /**
    * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
    *

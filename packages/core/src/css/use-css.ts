@@ -8,5 +8,10 @@ import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 export const useCSS = (cssObject: CSSObjectOrFunc | CSSUIObject = {}) => {
   const theme = useContext(ThemeContext) as StyledTheme
 
-  return useMemo(() => emotionCSS(css(cssObject)(theme)), [cssObject, theme])
+  return useMemo(() => getCSS(cssObject)(theme), [cssObject, theme])
 }
+
+export const getCSS =
+  (cssObject: CSSObjectOrFunc | CSSUIObject = {}) =>
+  (theme: StyledTheme) =>
+    emotionCSS(css(cssObject)(theme))

@@ -21,6 +21,12 @@ type ButtonOptions = {
    */
   type?: "button" | "reset" | "submit"
   /**
+   * If true, the button is full rounded. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  isRounded?: boolean
+  /**
    * If `true`, the loading state of the button is represented.
    *
    * @default false
@@ -88,6 +94,7 @@ export const Button = forwardRef<ButtonProps, "button">(
       className,
       as,
       type,
+      isRounded,
       isLoading,
       isActive,
       isDisabled = group?.isDisabled,
@@ -130,8 +137,9 @@ export const Button = forwardRef<ButtonProps, "button">(
         ...styles,
         ...__css,
         ...(!!group ? { _focus } : {}),
+        ...(isRounded ? { borderRadius: "9999px" } : {}),
       }
-    }, [styles, __css, group])
+    }, [styles, __css, group, isRounded])
 
     const contentProps = {
       leftIcon,

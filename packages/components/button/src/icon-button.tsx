@@ -14,7 +14,6 @@ type IconButtonOptions = {
    *
    * @default false
    */
-  isRounded?: boolean
 }
 
 export type IconButtonProps = Omit<
@@ -29,13 +28,12 @@ export type IconButtonProps = Omit<
  * @see Docs https://yamada-ui.com/components/forms/icon-button
  */
 export const IconButton = forwardRef<IconButtonProps, "button">(
-  ({ icon, isRounded, children, className, ...rest }, ref) => {
+  ({ icon, children, className, ...rest }, ref) => {
     return (
       <Button
         className={cx("ui-icon-button", className)}
         ref={ref}
         p={0}
-        {...(isRounded ? { rounded: "full" } : {})}
         {...rest}
       >
         {icon || children}

@@ -1,4 +1,4 @@
-import { a11y, render, screen, act, waitFor } from "@yamada-ui/test"
+import { a11y, act, render, screen, waitFor } from "@yamada-ui/test"
 import { PinInput } from "../src"
 
 describe("<PinInput />", () => {
@@ -27,10 +27,14 @@ describe("<PinInput />", () => {
     const { user } = render(<PinInput type="alphanumeric" />)
     const input = screen.getAllByRole("textbox")[0]
 
-    await user.tab()
-    await user.paste("a1")
+    await act(async () => {
+      await user.tab()
+      await user.paste("a1")
+    })
 
-    expect(input).toHaveValue("a1")
+    await waitFor(() => {
+      expect(input).toHaveValue("a1")
+    })
   })
 
   test("calls onChange and onComplete appropriately", async () => {
@@ -46,14 +50,22 @@ describe("<PinInput />", () => {
 
     const inputs = screen.getAllByRole("textbox")
 
-    await user.type(inputs[0], "1")
+    await act(async () => {
+      await user.type(inputs[0], "1")
+    })
 
-    expect(handleChange).toHaveBeenCalledWith("1")
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledWith("1")
+    })
 
-    await user.type(inputs[1], "2")
+    await act(async () => {
+      await user.type(inputs[1], "2")
+    })
 
-    expect(handleChange).toHaveBeenCalledWith("12")
-    expect(handleComplete).toHaveBeenCalledWith("12")
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledWith("12")
+      expect(handleComplete).toHaveBeenCalledWith("12")
+    })
   })
 
   test('input type should be "password" when mask is true', () => {
@@ -116,16 +128,22 @@ describe("<PinInput />", () => {
     const firstInput = inputs[0]
     const secondInput = inputs[1]
 
-    expect(firstInput.placeholder).toBe("○")
+    await waitFor(() => {
+      expect(firstInput.placeholder).toBe("○")
+    })
 
-    await user.tab()
+    await act(async () => {
+      await user.tab()
+    })
 
     await waitFor(() => {
       expect(document.activeElement).toBe(firstInput)
       expect(firstInput.placeholder).toBe("")
     })
 
-    await user.click(secondInput)
+    await act(async () => {
+      await user.click(secondInput)
+    })
 
     await waitFor(() => {
       expect(firstInput.placeholder).toBe("○")
@@ -140,12 +158,16 @@ describe("<PinInput />", () => {
     const inputs = screen.getAllByRole("textbox")
     const lastInput = inputs[3]
 
-    await user.click(lastInput)
-    await user.keyboard("[Backspace]")
+    await act(async () => {
+      await user.click(lastInput)
+      await user.keyboard("[Backspace]")
+    })
 
-    expect(document.activeElement).toEqual(inputs[2])
+    await waitFor(() => {
+      expect(document.activeElement).toEqual(inputs[2])
 
-    expect(inputs[2]).toHaveValue("")
+      expect(inputs[2]).toHaveValue("")
+    })
   })
 
   test("does not move focus on backspace if manageFocus is false", async () => {
@@ -154,10 +176,14 @@ describe("<PinInput />", () => {
     const inputs = screen.getAllByRole("textbox")
     const lastInput = inputs[3]
 
-    await user.click(lastInput)
-    await user.keyboard("[Backspace]")
+    await act(async () => {
+      await user.click(lastInput)
+      await user.keyboard("[Backspace]")
+    })
 
-    expect(document.activeElement).toEqual(lastInput)
+    await waitFor(() => {
+      expect(document.activeElement).toEqual(lastInput)
+    })
   })
 
   test("does not move focus if current input is not empty", async () => {
@@ -168,12 +194,16 @@ describe("<PinInput />", () => {
     const inputs = screen.getAllByRole("textbox")
     const thirdInput = inputs[2]
 
-    await user.click(thirdInput)
-    await user.keyboard("[Backspace]")
+    await act(async () => {
+      await user.click(thirdInput)
+      await user.keyboard("[Backspace]")
+    })
 
-    expect(document.activeElement).toEqual(thirdInput)
+    await waitFor(() => {
+      expect(document.activeElement).toEqual(thirdInput)
 
-    expect(thirdInput).toHaveValue("")
+      expect(thirdInput).toHaveValue("")
+    })
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {
@@ -185,7 +215,9 @@ describe("<PinInput />", () => {
 
     const firstInput = screen.getAllByRole("textbox")[0]
 
-    expect(document.activeElement).toEqual(firstInput)
+    await waitFor(() => {
+      expect(document.activeElement).toEqual(firstInput)
+    })
   })
 
   test("does not focus the first input on mount if autoFocus is false", async () => {
@@ -195,7 +227,9 @@ describe("<PinInput />", () => {
 
     const firstInput = screen.getAllByRole("textbox")[0]
 
-    expect(document.activeElement).not.toEqual(firstInput)
+    await waitFor(() => {
+      expect(document.activeElement).not.toEqual(firstInput)
+    })
   })
 
   test("correct input behavior when pasting a value of 2 characters", async () => {
@@ -204,10 +238,14 @@ describe("<PinInput />", () => {
     const inputs = screen.getAllByRole("textbox")
     const firstInput = inputs[0]
 
-    await user.click(firstInput)
-    await user.paste("12")
+    await act(async () => {
+      await user.click(firstInput)
+      await user.paste("12")
+    })
 
-    expect(firstInput).toHaveValue("12")
+    await waitFor(() => {
+      expect(firstInput).toHaveValue("12")
+    })
   })
 
   test("correct input behavior when pasting a value of more than 2 characters", async () => {
@@ -216,11 +254,15 @@ describe("<PinInput />", () => {
 
     const inputs = screen.getAllByRole("textbox")
 
-    await user.tab()
-    await user.paste(testValue)
+    await act(async () => {
+      await user.tab()
+      await user.paste(testValue)
+    })
 
-    inputs.forEach((input, index) => {
-      expect(input).toHaveValue(testValue[index])
+    await waitFor(() => {
+      inputs.forEach((input, index) => {
+        expect(input).toHaveValue(testValue[index])
+      })
     })
   })
 
@@ -230,20 +272,28 @@ describe("<PinInput />", () => {
 
     const inputs = screen.getAllByRole("textbox")
 
-    await user.tab()
-    await user.type(inputs[0], "9")
+    await act(async () => {
+      await user.tab()
+      await user.type(inputs[0], "9")
+    })
 
-    expect(inputs[0]).toHaveValue("9")
-    expect(inputs[1]).toHaveValue("2")
-    expect(inputs[2]).toHaveValue("3")
-    expect(inputs[3]).toHaveValue("4")
+    await waitFor(() => {
+      expect(inputs[0]).toHaveValue("9")
+      expect(inputs[1]).toHaveValue("2")
+      expect(inputs[2]).toHaveValue("3")
+      expect(inputs[3]).toHaveValue("4")
+    })
 
-    await user.click(inputs[2])
-    await user.type(inputs[2], "{backspace}")
+    await act(async () => {
+      await user.click(inputs[2])
+      await user.type(inputs[2], "{backspace}")
+    })
 
-    expect(inputs[0]).toHaveValue("9")
-    expect(inputs[1]).toHaveValue("2")
-    expect(inputs[2]).toHaveValue("")
-    expect(inputs[3]).toHaveValue("4")
+    await waitFor(() => {
+      expect(inputs[0]).toHaveValue("9")
+      expect(inputs[1]).toHaveValue("2")
+      expect(inputs[2]).toHaveValue("")
+      expect(inputs[3]).toHaveValue("4")
+    })
   })
 })

@@ -69,7 +69,7 @@ const expandCSS =
     return computedCSS
   }
 
-export const getCSS = ({
+const getCSS = ({
   theme,
   styles = {},
   pseudos = {},

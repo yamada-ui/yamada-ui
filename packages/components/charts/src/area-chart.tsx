@@ -267,7 +267,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   })
 
   const areas = series.map((item, index) => {
-    const { id, stroke, ...rest } = getAreaProps(item, index, {}, ref)
+    const { id, stroke, ...rest } = getAreaProps({ item, index }, ref)
 
     return (
       <Fragment key={`area-${item.dataKey}`}>
@@ -282,7 +282,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const referenceLinesItems = referenceLines?.map((line, index) => (
     <ReferenceLine
       key={`referenceLine-${index}`}
-      {...getReferenceLineProps(index, line, ref)}
+      {...getReferenceLineProps({ index, ...line }, ref)}
     />
   ))
 

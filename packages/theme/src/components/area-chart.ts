@@ -7,6 +7,13 @@ export const AreaChart: ComponentMultiStyle = {
       w: "4xl",
       h: "sm",
     },
+    areaChart: {},
+    referenceLine: {
+      strokeWidth: 1,
+      label: {
+        fontSize: 12,
+      },
+    },
     grid: {},
     xAxis: {},
     yAxis: {},

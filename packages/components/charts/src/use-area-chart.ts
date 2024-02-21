@@ -1,5 +1,5 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { useCSS, useTheme } from "@yamada-ui/core"
+import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict, PropGetter } from "@yamada-ui/utils"
 import { createContext, cx, omitObject, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef, ForwardedRef } from "react"
@@ -117,9 +117,7 @@ export const useAreaChart = ({
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
 
-  //todo:
   const { theme } = useTheme()
-  // getCSS(props)(theme)
   //todo: typeはuseAreaChartにすべて突っ込む　chart.types.ts motionがある
 
   const getAreaChartProps: AreaChartPropGetter = useCallback(
@@ -138,7 +136,7 @@ export const useAreaChart = ({
         "onMouseMove",
         "onMouseLeave",
       ])
-      const className = useCSS(uiProps)
+      const className = getCSS(uiProps)(theme)
 
       return {
         ref,
@@ -169,7 +167,7 @@ export const useAreaChart = ({
         "strokeWidth",
         "segment",
       ])
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
       const color = `var(--ui-areachart-referenceline-${index})`
 
       return {
@@ -204,7 +202,7 @@ export const useAreaChart = ({
         "onResize",
       ])
 
-      let className = useCSS(uiProps)
+      let className = getCSS(uiProps)(theme)
       if (typeof props.className === "number")
         className = cx(props.className.toString(), className)
       else className = cx(props.className, className)
@@ -236,7 +234,7 @@ export const useAreaChart = ({
         "fillOpacity",
         "strokeDasharray",
       ])
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
@@ -293,7 +291,7 @@ export const useAreaChart = ({
         "onMouseLeave",
         "tickMargin",
       ])
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         className: cx(props.className, className),
@@ -358,10 +356,10 @@ export const useAreaChart = ({
       ])
 
       //todo: useCSSで挿入した時の順番が担保されるのであれば2つ作った方がきれい
-      const className = useCSS({
-        ...styles.yAxisProps,
+      const className = getCSS({
+        ...styles.yAxis,
         ...(uiProps as CSSUIObject),
-      })
+      })(theme)
 
       return {
         className: cx(props.className, className),
@@ -423,7 +421,7 @@ export const useAreaChart = ({
         "onMouseLeave",
       ])
 
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
@@ -461,7 +459,7 @@ export const useAreaChart = ({
         "animationDuration",
         "animationEasing",
       ])
-      const className = useCSS(uiProps)
+      const className = getCSS(uiProps)(theme)
 
       return {
         ref,
@@ -547,7 +545,7 @@ export const useAreaChart = ({
         "onMouseEnter",
         "onMouseLeave",
       ])
-      const areaClassName = useCSS(areaUIProps as CSSUIObject)
+      const areaClassName = getCSS(areaUIProps as CSSUIObject)(theme)
 
       const dotParams = [
         "cx",
@@ -566,13 +564,13 @@ export const useAreaChart = ({
         Dict,
         string
       >(activeDotProps, dotParams)
-      const activeDotClassName = useCSS(activeDotUIProps)
+      const activeDotClassName = getCSS(activeDotUIProps)(theme)
 
       const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
         dotProps,
         dotParams,
       )
-      const dotClassName = useCSS(dotUIProps)
+      const dotClassName = getCSS(dotUIProps)(theme)
 
       let activeDot: DotProps | boolean
       if (withActiveDots)

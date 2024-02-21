@@ -24,8 +24,10 @@ describe("<PinInput />", () => {
   })
 
   test('allows alphanumeric input when type is "alphanumeric"', async () => {
-    const { user } = render(<PinInput type="alphanumeric" />)
-    const input = screen.getAllByRole("textbox")[0]
+    const { user, findAllByRole } = render(<PinInput type="alphanumeric" />)
+
+    const inputs = await findAllByRole("textbox")
+    const firstInput = inputs[0]
 
     await act(async () => {
       await user.tab()
@@ -33,14 +35,14 @@ describe("<PinInput />", () => {
     })
 
     await waitFor(() => {
-      expect(input).toHaveValue("a1")
+      expect(firstInput).toHaveValue("a1")
     })
   })
 
   test("calls onChange and onComplete appropriately", async () => {
     const handleChange = jest.fn()
     const handleComplete = jest.fn()
-    const { user } = render(
+    const { user, findAllByRole } = render(
       <PinInput
         onChange={handleChange}
         onComplete={handleComplete}
@@ -48,7 +50,7 @@ describe("<PinInput />", () => {
       />,
     )
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
 
     await act(async () => {
       await user.type(inputs[0], "1")
@@ -122,9 +124,9 @@ describe("<PinInput />", () => {
   })
 
   test("correct behavior on input focus", async () => {
-    const { user } = render(<PinInput />)
+    const { user, findAllByRole } = render(<PinInput />)
 
-    const inputs = screen.getAllByRole("textbox") as HTMLInputElement[]
+    const inputs = (await findAllByRole("textbox")) as HTMLInputElement[]
     const firstInput = inputs[0]
     const secondInput = inputs[1]
 
@@ -153,9 +155,11 @@ describe("<PinInput />", () => {
   })
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
-    const { user } = render(<PinInput defaultValue="123" manageFocus={true} />)
+    const { user, findAllByRole } = render(
+      <PinInput defaultValue="123" manageFocus={true} />,
+    )
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
     const lastInput = inputs[3]
 
     await act(async () => {
@@ -171,9 +175,11 @@ describe("<PinInput />", () => {
   })
 
   test("does not move focus on backspace if manageFocus is false", async () => {
-    const { user } = render(<PinInput defaultValue="123" manageFocus={false} />)
+    const { user, findAllByRole } = render(
+      <PinInput defaultValue="123" manageFocus={false} />,
+    )
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
     const lastInput = inputs[3]
 
     await act(async () => {
@@ -187,11 +193,11 @@ describe("<PinInput />", () => {
   })
 
   test("does not move focus if current input is not empty", async () => {
-    const { user } = render(
+    const { user, findAllByRole } = render(
       <PinInput defaultValue="1234" items={4} manageFocus={true} />,
     )
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
     const thirdInput = inputs[2]
 
     await act(async () => {
@@ -207,13 +213,14 @@ describe("<PinInput />", () => {
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {
-    render(<PinInput autoFocus={true} />)
+    const { findAllByRole } = render(<PinInput autoFocus={true} />)
 
     await act(async () => {
       await new Promise((resolve) => requestAnimationFrame(resolve))
     })
 
-    const firstInput = screen.getAllByRole("textbox")[0]
+    const inputs = await findAllByRole("textbox")
+    const firstInput = inputs[0]
 
     await waitFor(() => {
       expect(document.activeElement).toEqual(firstInput)
@@ -221,11 +228,12 @@ describe("<PinInput />", () => {
   })
 
   test("does not focus the first input on mount if autoFocus is false", async () => {
-    render(<PinInput autoFocus={false} />)
+    const { findAllByRole } = render(<PinInput autoFocus={false} />)
 
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
-    const firstInput = screen.getAllByRole("textbox")[0]
+    const inputs = await findAllByRole("textbox")
+    const firstInput = inputs[0]
 
     await waitFor(() => {
       expect(document.activeElement).not.toEqual(firstInput)
@@ -233,9 +241,9 @@ describe("<PinInput />", () => {
   })
 
   test("correct input behavior when pasting a value of 2 characters", async () => {
-    const { user } = render(<PinInput />)
+    const { user, findAllByRole } = render(<PinInput />)
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
 
     await act(async () => {
@@ -250,9 +258,9 @@ describe("<PinInput />", () => {
 
   test("correct input behavior when pasting a value of more than 2 characters", async () => {
     const testValue = "1234"
-    const { user } = render(<PinInput />)
+    const { user, findAllByRole } = render(<PinInput />)
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
 
     await act(async () => {
       await user.tab()
@@ -268,9 +276,11 @@ describe("<PinInput />", () => {
 
   test("the change in value does not impact other values", async () => {
     const defaultValue = "1234"
-    const { user } = render(<PinInput defaultValue={defaultValue} />)
+    const { user, findAllByRole } = render(
+      <PinInput defaultValue={defaultValue} />,
+    )
 
-    const inputs = screen.getAllByRole("textbox")
+    const inputs = await findAllByRole("textbox")
 
     await act(async () => {
       await user.tab()

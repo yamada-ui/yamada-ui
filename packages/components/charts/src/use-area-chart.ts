@@ -1,8 +1,8 @@
-import { useCSS } from "@yamada-ui/core"
-import type { CSSUIObject, StyleProps } from "@yamada-ui/react"
-import type { Dict, PropGetter } from "@yamada-ui/utils"
+import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import { getCSS, useTheme } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import { createContext, cx, omitObject, splitObject } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef, ForwardedRef } from "react"
+import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
   AreaChart,
@@ -14,47 +14,59 @@ import type {
   LegendProps,
   TooltipProps,
   DotProps,
+  CartesianGridProps,
 } from "recharts"
-import type {
-  AreaChartProps,
-  ReferenceUILineProps,
-  AreaChartSeries,
-} from "./area-chart"
+import type { AreaChartProps } from "./area-chart"
 import type { AreaGradientProps } from "./area-gradient"
 import type { AreaSplitProps } from "./area-split"
+import type { AreaChartSeries, ReferenceUILineProps } from "./chart.types"
 
 type AreaChartPropGetter = (
   props?: ComponentPropsWithoutRef<typeof AreaChart>,
-  ref?: ForwardedRef<HTMLElement>,
+  ref?: React.Ref<any>,
 ) => ComponentPropsWithoutRef<typeof AreaChart>
 type AreaPropGetter = (
-  item: AreaChartSeries,
-  index: number,
-  props?: Partial<AreaProps>,
-  ref?: ForwardedRef<HTMLElement>,
+  props: Partial<AreaProps> & {
+    item: AreaChartSeries
+    index: number
+  },
+  ref?: React.Ref<any>,
 ) => Omit<AreaProps, "ref">
 type ReferenceLinePropGetter = (
-  index: number,
-  props?: Partial<ReferenceUILineProps>,
-  ref?: ForwardedRef<HTMLElement>,
+  props: Partial<ReferenceUILineProps> & { index: number },
+  ref?: React.Ref<any>,
 ) => Omit<ReferenceLineProps, "ref">
 type ResponsiveContainerPropGetter = (
   props?: Partial<Omit<ResponsiveContainerProps, "children">>,
-  ref?: ForwardedRef<HTMLElement>,
+  ref?: React.Ref<any>,
 ) => Omit<ResponsiveContainerProps, "children">
-type XAxisPropGetter = (props?: Partial<XAxisProps>) => XAxisProps
-type YAxisPropGetter = (props?: Partial<YAxisProps>) => YAxisProps
+type GridPropGetter = (
+  props?: Partial<CartesianGridProps>,
+  ref?: React.Ref<any>,
+) => CartesianGridProps
+type XAxisPropGetter = (
+  props?: Partial<XAxisProps>,
+  ref?: React.Ref<any>,
+) => XAxisProps
+type YAxisPropGetter = (
+  props?: Partial<YAxisProps>,
+  ref?: React.Ref<any>,
+) => YAxisProps
 type LegendPropGetter = (
   props?: Partial<LegendProps>,
-  ref?: ForwardedRef<HTMLElement>,
+  ref?: React.Ref<any>,
 ) => Omit<LegendProps, "ref">
 type TooltipPropGetter = (
   props?: Partial<TooltipProps<any, any>>,
-  ref?: ForwardedRef<HTMLElement>,
+  ref?: React.Ref<any>,
 ) => Omit<TooltipProps<any, any>, "ref">
-type AreaSplitPropGetter = (props?: Partial<AreaSplitProps>) => AreaSplitProps
+type AreaSplitPropGetter = (
+  props?: Partial<AreaSplitProps>,
+  ref?: React.Ref<any>,
+) => AreaSplitProps
 type AreaGradientPropGetter = (
   props?: Partial<AreaGradientProps>,
+  ref?: React.Ref<any>,
 ) => AreaGradientProps
 
 type AreaChartContext = {}
@@ -67,6 +79,7 @@ export const [AreaChartProvider, useAreaChartContext] =
 
 export type UseAreaChartProps = Omit<AreaChartProps, "fillOpacity"> & {
   fillOpacity?: number
+  styles: Dict<CSSUIObject>
 }
 
 export const useAreaChart = ({
@@ -102,6 +115,7 @@ export const useAreaChart = ({
   splitOffset,
   referenceLines,
   valueFormatter,
+  styles,
 }: UseAreaChartProps) => {
   const baseId = useId()
   const splitId = `${baseId}-split`
@@ -116,6 +130,8 @@ export const useAreaChart = ({
   //todo: legendでホバーした奴をハイライトするやつ
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
+
+  const { theme } = useTheme()
 
   const getAreaChartProps: AreaChartPropGetter = useCallback(
     (props = {}, ref = null) => {
@@ -133,7 +149,7 @@ export const useAreaChart = ({
         "onMouseMove",
         "onMouseLeave",
       ])
-      const className = useCSS(uiProps)
+      const className = getCSS(uiProps)(theme)
 
       return {
         ref,
@@ -145,26 +161,30 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [areaChartProps, data, orientation, type],
+    [areaChartProps, data, orientation, theme, type],
   )
 
   const getReferenceLineProps: ReferenceLinePropGetter = useCallback(
-    (index, props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(props, [
-        "xAxisId",
-        "yAxisId",
-        "x",
-        "y",
-        "ifOverflow",
-        "viewBox",
-        "xAxis",
-        "yAxis",
-        "label",
-        "isFront",
-        "strokeWidth",
-        "segment",
-      ])
-      const className = useCSS(uiProps as CSSUIObject)
+    (props, ref = null) => {
+      const index = props.index
+      const [reChartsProps, uiProps] = splitObject(
+        omitObject(props, ["index"]),
+        [
+          "xAxisId",
+          "yAxisId",
+          "x",
+          "y",
+          "ifOverflow",
+          "viewBox",
+          "xAxis",
+          "yAxis",
+          "label",
+          "isFront",
+          "strokeWidth",
+          "segment",
+        ],
+      )
+      const className = getCSS(uiProps as CSSUIObject)(theme)
       const color = `var(--ui-areachart-referenceline-${index})`
 
       return {
@@ -184,7 +204,7 @@ export const useAreaChart = ({
         ...omitObject(reChartsProps, ["label"]),
       }
     },
-    [],
+    [theme],
   )
 
   const getContainerProps: ResponsiveContainerPropGetter = useCallback(
@@ -199,7 +219,7 @@ export const useAreaChart = ({
         "onResize",
       ])
 
-      let className = useCSS(uiProps)
+      let className = getCSS(uiProps)(theme)
       if (typeof props.className === "number")
         className = cx(props.className.toString(), className)
       else className = cx(props.className, className)
@@ -211,10 +231,10 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [containerProps],
+    [containerProps, theme],
   )
 
-  const getGridProps: PropGetter = useCallback(
+  const getGridProps: GridPropGetter = useCallback(
     (props = {}, ref = null) => {
       const [reChartsProps, uiProps] = splitObject(gridProps, [
         "x",
@@ -231,7 +251,7 @@ export const useAreaChart = ({
         "fillOpacity",
         "strokeDasharray",
       ])
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
@@ -243,7 +263,7 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [gridProps, strokeDasharray, gridAxis],
+    [gridProps, theme, strokeDasharray, gridAxis],
   )
 
   const getXAxisProps: XAxisPropGetter = useCallback(
@@ -288,7 +308,7 @@ export const useAreaChart = ({
         "onMouseLeave",
         "tickMargin",
       ])
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         className: cx(props.className, className),
@@ -307,7 +327,7 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [dataKey, orientation, withXAxis, withXTickLine, xAxisProps],
+    [dataKey, orientation, theme, withXAxis, withXTickLine, xAxisProps],
   )
 
   const getYAxisProps: YAxisPropGetter = useCallback(
@@ -351,7 +371,12 @@ export const useAreaChart = ({
         "onMouseLeave",
         "tickMargin",
       ])
-      const className = useCSS(uiProps as CSSUIObject)
+
+      //todo: useCSSで挿入した時の順番が担保されるのであれば2つ作った方がきれい
+      const className = getCSS({
+        ...styles.yAxis,
+        ...(uiProps as CSSUIObject),
+      })(theme)
 
       return {
         className: cx(props.className, className),
@@ -374,14 +399,16 @@ export const useAreaChart = ({
       }
     },
     [
-      dataKey,
-      orientation,
-      type,
-      unit,
-      valueFormatter,
-      withYAxis,
-      withYTickLine,
       yAxisProps,
+      styles.yAxis,
+      theme,
+      withYAxis,
+      orientation,
+      dataKey,
+      withYTickLine,
+      unit,
+      type,
+      valueFormatter,
     ],
   )
 
@@ -412,7 +439,7 @@ export const useAreaChart = ({
         "onMouseLeave",
       ])
 
-      const className = useCSS(uiProps as CSSUIObject)
+      const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
@@ -422,7 +449,7 @@ export const useAreaChart = ({
         ...reChartProps,
       }
     },
-    [legendProps],
+    [legendProps, theme],
   )
 
   const getTooltipProps: TooltipPropGetter = useCallback(
@@ -450,7 +477,7 @@ export const useAreaChart = ({
         "animationDuration",
         "animationEasing",
       ])
-      const className = useCSS(uiProps)
+      const className = getCSS(uiProps)(theme)
 
       return {
         ref,
@@ -462,7 +489,7 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [tooltipAnimationDuration, tooltipProps],
+    [theme, tooltipAnimationDuration, tooltipProps],
   )
 
   const getAreaSplitProps: AreaSplitPropGetter = useCallback(
@@ -496,9 +523,10 @@ export const useAreaChart = ({
     [data, fillOpacity, series, splitId, splitOffset],
   )
 
-  //todo: useCSSはダメなのでは
   const getAreaProps: AreaPropGetter = useCallback(
-    (item, index, props = {}, ref = null) => {
+    (props, ref = null) => {
+      const item = props.item
+      const index = props.index
       const id = `${baseId}-${item.color}`
       const color = `var(--ui-areachart-area-${index})`
       const dimmed = shouldHighlight && highlightedArea !== item.dataKey
@@ -536,7 +564,7 @@ export const useAreaChart = ({
         "onMouseEnter",
         "onMouseLeave",
       ])
-      const areaClassName = useCSS(areaUIProps as CSSUIObject)
+      const areaClassName = getCSS(areaUIProps as CSSUIObject)(theme)
 
       const dotParams = [
         "cx",
@@ -555,13 +583,13 @@ export const useAreaChart = ({
         Dict,
         string
       >(activeDotProps, dotParams)
-      const activeDotClassName = useCSS(activeDotUIProps)
+      const activeDotClassName = getCSS(activeDotUIProps)(theme)
 
       const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
         dotProps,
         dotParams,
       )
-      const dotClassName = useCSS(dotUIProps)
+      const dotClassName = getCSS(dotUIProps)(theme)
 
       let activeDot: DotProps | boolean
       if (withActiveDots)
@@ -571,8 +599,8 @@ export const useAreaChart = ({
           stroke: color,
           strokeWidth: 2,
           r: 4,
-          ...(areaReChartsProps["activeDot"] as DotProps),
           ...activeDotReChartsProps,
+          ...(areaReChartsProps["activeDot"] as DotProps),
         }
       else activeDot = false
 
@@ -584,8 +612,8 @@ export const useAreaChart = ({
           fillOpacity: dimmed ? 0 : 1,
           strokeWidth: 2,
           r: 4,
-          ...(areaReChartsProps["dot"] as DotProps),
           ...dotReChartsProps,
+          ...(areaReChartsProps["dot"] as DotProps),
         }
       else dot = false
 
@@ -612,19 +640,20 @@ export const useAreaChart = ({
       }
     },
     [
+      baseId,
+      shouldHighlight,
+      highlightedArea,
+      theme,
       activeDotProps,
       dotProps,
-      baseId,
-      connectNulls,
-      curveType,
-      highlightedArea,
-      shouldHighlight,
-      splitId,
-      stacked,
-      strokeWidth,
-      type,
       withActiveDots,
       withDots,
+      curveType,
+      type,
+      splitId,
+      strokeWidth,
+      connectNulls,
+      stacked,
     ],
   )
 
@@ -640,13 +669,13 @@ export const useAreaChart = ({
   )
 
   const getCSSvariables = useCallback(() => {
-    const areaColors: StyleProps["var"] = series.map((item, index) => ({
+    const areaColors: CSSUIProps["var"] = series.map((item, index) => ({
       name: `areachart-area-${index}`,
       token: "colors",
       value: item.color ?? "gray",
     }))
 
-    const areaSplitColors: StyleProps["var"] = splitColors.map(
+    const areaSplitColors: CSSUIProps["var"] = splitColors.map(
       (color, index) => ({
         name: `areachart-areasplit-${index}`,
         token: "colors",
@@ -654,7 +683,7 @@ export const useAreaChart = ({
       }),
     )
 
-    const referenceLineColors: StyleProps["var"] = referenceLines
+    const referenceLineColors: CSSUIProps["var"] = referenceLines
       ? referenceLines.map((line, index) => ({
           name: `areachart-referenceline-${index}`,
           token: "colors",
@@ -682,6 +711,7 @@ export const useAreaChart = ({
     getAreaProps,
     getAreaGradientProps,
     getCSSvariables,
+    setHighlightedArea,
   }
 }
 

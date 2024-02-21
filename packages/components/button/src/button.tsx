@@ -111,15 +111,13 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const css: CSSUIObject = useMemo(() => {
       const _focus =
-        "_focus" in styles
-          ? merge(styles._focus ?? {}, { zIndex: "yamcha" })
-          : {}
+        "_focus" in styles ? merge(styles._focus ?? {}, { zIndex: 1 }) : {}
 
       return {
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "2",
+        gap: "0.5rem",
         appearance: "none",
         userSelect: "none",
         position: "relative",

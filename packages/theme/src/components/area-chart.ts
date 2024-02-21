@@ -1,5 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
+//todo: 可能な限りここで設定できるようにする
 export const AreaChart: ComponentMultiStyle = {
   baseStyle: {
     container: {
@@ -9,11 +10,25 @@ export const AreaChart: ComponentMultiStyle = {
     grid: {},
     xAxis: {},
     yAxis: {},
+    dot: {},
   },
 
-  variants: {},
+  variants: {
+    subtl: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+      dot: { fill: ["white", "black"] },
+    }),
+    solid: {},
+  },
 
-  sizes: {},
+  sizes: {
+    sm: { dot: { strokeWidth: 1 } },
+    md: { dot: { strokeWidth: 2 } },
+    lg: { dot: { strokeWidth: 3 } },
+  },
 
-  defaultProps: {},
+  defaultProps: {
+    size: "md",
+    variant: "solid",
+    colorScheme: "primary",
+  },
 }

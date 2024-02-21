@@ -1,9 +1,4 @@
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  HTMLUIProps,
-  ThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIProps, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -15,7 +10,7 @@ import { cx } from "@yamada-ui/utils"
 import { Fragment } from "react"
 import {
   CartesianGrid,
-  Legend,
+  Legend as ReChartsLegend,
   AreaChart as ReChartsAreaChart,
   Area,
   ReferenceLine,
@@ -37,6 +32,7 @@ import type {
 } from "recharts"
 import { AreaGradient } from "./area-gradient"
 import { AreaSplit } from "./area-split"
+import { Legend } from "./legend"
 import { AreaChartProvider, useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
 
@@ -52,27 +48,28 @@ export type AreaChartCurveType =
   | "stepBefore"
   | "stepAfter"
 export type AreaChartSeries = Merge<
-  Merge<CSSUIObject, ReChartsAreaProps>,
+  Merge<CSSUIProps, ReChartsAreaProps>,
   { color: CSSUIProps["color"] }
 >
-export type ReferenceUILineProps = Merge<CSSUIObject, ReferenceLineProps>
+
+export type ReferenceUILineProps = Merge<CSSUIProps, ReferenceLineProps>
 export type AreaChartUIProps = Merge<
-  CSSUIObject,
+  CSSUIProps,
   React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
 >
 export type ContainerUIProps = Merge<
-  CSSUIObject,
+  CSSUIProps,
   Omit<ResponsiveContainerProps, "children">
 >
-export type DotUIProps = Merge<CSSUIObject, Omit<DotProps, "ref">>
-export type XAxisUIProps = Merge<CSSUIObject, XAxisProps>
-export type YAxisUIProps = Merge<CSSUIObject, YAxisProps>
-export type LegendUIProps = Merge<CSSUIObject, Omit<LegendProps, "ref">>
+export type DotUIProps = Merge<CSSUIProps, Omit<DotProps, "ref">>
+export type XAxisUIProps = Merge<CSSUIProps, XAxisProps>
+export type YAxisUIProps = Merge<CSSUIProps, YAxisProps>
+export type LegendUIProps = Merge<CSSUIProps, Omit<LegendProps, "ref">>
 export type TooltipUIProps = Merge<
-  CSSUIObject,
+  CSSUIProps,
   Omit<TooltipProps<any, any>, "ref">
 >
-export type GridUIProps = Merge<CSSUIObject, CartesianGridProps>
+export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
 
 type AreaChartOptions = {
   /**
@@ -290,10 +287,12 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     getAreaProps,
     getAreaGradientProps,
     getCSSvariables,
+    setHighlightedArea,
   } = useAreaChart({
     type,
     series,
     referenceLines,
+    styles,
     ...computedProps,
   })
 
@@ -319,7 +318,18 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
 
   const legend = () => {
     const legendProps = getLegendProps({}, ref)
-    if (withLegend) return <Legend {...legendProps} />
+    if (withLegend)
+      return (
+        <ReChartsLegend
+          content={(payload) => (
+            <Legend
+              payload={payload.payload}
+              onHeightlight={setHighlightedArea}
+            />
+          )}
+          {...legendProps}
+        />
+      )
   }
 
   const tooltip = () => {

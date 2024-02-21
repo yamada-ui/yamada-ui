@@ -293,6 +293,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
         <ReChartsLegend
           content={(payload) => (
             <Legend
+              ref={ref}
               payload={payload.payload}
               onHeightlight={setHighlightedArea}
             />

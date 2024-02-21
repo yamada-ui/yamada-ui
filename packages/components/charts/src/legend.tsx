@@ -1,37 +1,40 @@
-import { ui, type CSSUIProps } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 
 export type LegendProps = {
+  ref?: React.Ref<any>
   payload?: Dict[]
   onHeightlight: (area: string | null) => void
-  legendPosition?: "top" | "bottom" | "middle"
-  //?payloadでわたってこない？
-  series?: { dataKey: string; color: CSSUIProps["color"] }[]
 }
 
-//todo: yamada-ui/reactは利用しない　自作する ui.div
-export const Legend = ({
-  payload,
-  onHeightlight,
-  legendPosition,
-}: LegendProps) => {
-  // const items = payload?.map((entry, index) => (
-  //   <Box
-  //     key={`legend-${index}`}
-  //     display="flex"
-  //     gap="sm"
-  //     onMouseEnter={() => onHeightlight(entry.dataKey)}
-  //     onMouseLeave={() => onHeightlight(null)}
-  //   >
-  //     <ColorSwatch variant="rounded" color={entry.color} size="sm" />
-  //     {entry.dataKey}
-  //   </Box>
-  // ))
+export const Legend = ({ ref, payload, onHeightlight }: LegendProps) => {
+  const items = payload?.map((entry, index) => (
+    <ui.div
+      key={`legend-${index}`}
+      onMouseEnter={() => onHeightlight(entry.dataKey)}
+      onMouseLeave={() => onHeightlight(null)}
+      __css={{
+        display: "flex",
+        alignItems: "center",
+        gap: 2,
+      }}
+    >
+      <ui.div rounded="9999px" background={entry.color} boxSize={3} />
+      {entry.dataKey}
+    </ui.div>
+  ))
 
-  // return (
-  //   <HStack justifyContent="flex-end" m="md">
-  //     {items}
-  //   </HStack>
-  // )
-  return <ui.div></ui.div>
+  return (
+    <ui.div
+      ref={ref}
+      __css={{
+        justifyContent: "flex-end",
+        display: "flex",
+        gap: 5,
+        m: 3,
+      }}
+    >
+      {items}
+    </ui.div>
+  )
 }

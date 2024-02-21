@@ -5,8 +5,8 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
-import type { ForwardedRef } from "react"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import type { ForwardedRef, ReactNode } from "react"
 import type { ColorSelectorBodyProps } from "./color-selector-body"
 import { ColorSelectorBody } from "./color-selector-body"
 import type { ColorSelectorChannelsProps } from "./color-selector-channels"
@@ -51,6 +51,7 @@ type ColorSelectorOptions = {
    * Props for the channels component.
    */
   channelsProps?: ColorSelectorChannelsProps
+  children?: ReactNode | ((props: { value: string }) => ReactNode)
 }
 
 export type ColorSelectorProps = ThemeProps<"ColorSelector"> &
@@ -86,6 +87,7 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
     })
     const {
       className,
+      children,
       withResult = true,
       withPicker = true,
       withChannel = true,
@@ -109,6 +111,7 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
       ...computedProps
     } = omitThemeProps(mergedProps)
     const {
+      value,
       getContainerProps,
       getInputProps,
       getSaturationSliderProps,
@@ -122,7 +125,7 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
     }
 
     return (
-      <ColorSelectorProvider value={{ styles, size, ...rest }}>
+      <ColorSelectorProvider value={{ styles, size, value, ...rest }}>
         <ui.div
           ref={ref}
           className={cx("ui-color-selector", className)}
@@ -171,6 +174,8 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
               ...swatchesProps,
             }}
           />
+
+          {runIfFunc(children, { value })}
         </ui.div>
       </ColorSelectorProvider>
     )

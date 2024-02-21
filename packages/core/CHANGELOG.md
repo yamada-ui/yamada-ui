@@ -1,5 +1,17 @@
 # @yamada-ui/core
 
+## 1.4.0
+
+### Minor Changes
+
+- [#742](https://github.com/hirotomoyamada/yamada-ui/pull/742) [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `disableStyleProp` to `StyledOptions`.
+
+- [#749](https://github.com/hirotomoyamada/yamada-ui/pull/749) [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `useCSS` function.
+
+### Patch Changes
+
+- [#750](https://github.com/hirotomoyamada/yamada-ui/pull/750) [`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `getColorModeValue` function.
+
 ## 1.3.2
 
 ### Patch Changes

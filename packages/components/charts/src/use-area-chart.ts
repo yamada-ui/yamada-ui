@@ -15,13 +15,10 @@ import type {
   TooltipProps,
   DotProps,
 } from "recharts"
-import type {
-  AreaChartProps,
-  ReferenceUILineProps,
-  AreaChartSeries,
-} from "./area-chart"
+import type { AreaChartProps } from "./area-chart"
 import type { AreaGradientProps } from "./area-gradient"
 import type { AreaSplitProps } from "./area-split"
+import type { AreaChartSeries, ReferenceUILineProps } from "./chart.types"
 
 //todo Propgetterを使う
 type AreaChartPropGetter = (
@@ -395,6 +392,7 @@ export const useAreaChart = ({
       withYAxis,
       withYTickLine,
       yAxisProps,
+      styles,
     ],
   )
 

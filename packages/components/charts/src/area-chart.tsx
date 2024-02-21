@@ -1,11 +1,11 @@
-import type { CSSUIProps, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import type { Dict, Merge } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { Fragment } from "react"
 import {
@@ -19,57 +19,27 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
-import type {
-  ReferenceLineProps,
-  DotProps,
-  XAxisProps,
-  YAxisProps,
-  LegendProps,
-  CartesianGridProps,
-  TooltipProps,
-  ResponsiveContainerProps,
-  AreaProps as ReChartsAreaProps,
-} from "recharts"
 import { AreaGradient } from "./area-gradient"
 import { AreaSplit } from "./area-split"
+import type {
+  AreaChartCurveType,
+  AreaChartSeries,
+  AreaChartType,
+  AreaChartUIProps,
+  AxisType,
+  ContainerUIProps,
+  DotUIProps,
+  GridUIProps,
+  LayoutType,
+  LegendUIProps,
+  ReferenceUILineProps,
+  TooltipUIProps,
+  XAxisUIProps,
+  YAxisUIProps,
+} from "./chart.types"
 import { Legend } from "./legend"
 import { AreaChartProvider, useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
-
-export type LayoutType = "horizontal" | "vertical"
-export type AreaChartType = "default" | "stacked" | "percent" | "split"
-export type AxisType = "x" | "y" | "xy" | "none"
-export type AreaChartCurveType =
-  | "bump"
-  | "linear"
-  | "natural"
-  | "monotone"
-  | "step"
-  | "stepBefore"
-  | "stepAfter"
-export type AreaChartSeries = Merge<
-  Merge<CSSUIProps, ReChartsAreaProps>,
-  { color: CSSUIProps["color"] }
->
-
-export type ReferenceUILineProps = Merge<CSSUIProps, ReferenceLineProps>
-export type AreaChartUIProps = Merge<
-  CSSUIProps,
-  React.ComponentPropsWithoutRef<typeof ReChartsAreaChart>
->
-export type ContainerUIProps = Merge<
-  CSSUIProps,
-  Omit<ResponsiveContainerProps, "children">
->
-export type DotUIProps = Merge<CSSUIProps, Omit<DotProps, "ref">>
-export type XAxisUIProps = Merge<CSSUIProps, XAxisProps>
-export type YAxisUIProps = Merge<CSSUIProps, YAxisProps>
-export type LegendUIProps = Merge<CSSUIProps, Omit<LegendProps, "ref">>
-export type TooltipUIProps = Merge<
-  CSSUIProps,
-  Omit<TooltipProps<any, any>, "ref">
->
-export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
 
 type AreaChartOptions = {
   /**

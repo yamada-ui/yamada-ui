@@ -22,6 +22,12 @@ type CloseButtonOptions = {
    * @default false
    */
   disableRipple?: boolean
+  /**
+   * If true, the button is full rounded.
+   *
+   * @default false
+   */
+  isRounded?: boolean
 }
 
 export type CloseButtonProps = HTMLUIProps<"button"> &
@@ -31,8 +37,15 @@ export type CloseButtonProps = HTMLUIProps<"button"> &
 export const CloseButton = forwardRef<CloseButtonProps, "button">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentStyle("CloseButton", props)
-    const { className, children, isDisabled, __css, disableRipple, ...rest } =
-      omitThemeProps(mergedProps)
+    const {
+      className,
+      children,
+      isDisabled,
+      isRounded,
+      __css,
+      disableRipple,
+      ...rest
+    } = omitThemeProps(mergedProps)
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
       isDisabled: disableRipple || isDisabled,
@@ -48,6 +61,9 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
       flexShrink: 0,
       ...styles,
       ...__css,
+      ...(isRounded
+        ? { borderRadius: "9999px", border: "1px solid #000" }
+        : {}),
     }
 
     return (

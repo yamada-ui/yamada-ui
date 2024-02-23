@@ -45,7 +45,7 @@ describe("<Image />", () => {
   test("fires onload", () => {
     trackImageOnload()
 
-    const onLoad = jest.fn()
+    const onLoad = vi.fn()
 
     render(<Image src={src} fallback={fallback} onLoad={onLoad} />)
 

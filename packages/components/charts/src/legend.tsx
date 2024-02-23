@@ -1,13 +1,13 @@
-import { ui } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 
 export type LegendProps = {
-  ref?: React.Ref<any>
   payload?: Dict[]
   onHeightlight: (area: string | null) => void
 }
 
-export const Legend = ({ ref, payload, onHeightlight }: LegendProps) => {
+export const Legend = forwardRef<LegendProps, "div">((props, ref) => {
+  const { payload, onHeightlight } = props
   const items = payload?.map((entry, index) => (
     <ui.div
       key={`legend-${index}`}
@@ -37,4 +37,4 @@ export const Legend = ({ ref, payload, onHeightlight }: LegendProps) => {
       {items}
     </ui.div>
   )
-}
+})

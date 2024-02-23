@@ -38,6 +38,7 @@ import type {
   YAxisUIProps,
 } from "./chart.types"
 import { Legend } from "./legend"
+import { ChartTooltip } from "./tooltip"
 import { AreaChartProvider, useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
 
@@ -305,7 +306,15 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
 
   const tooltip = () => {
     const tooltipProps = getTooltipProps({}, ref)
-    if (withTooltip) return <Tooltip {...tooltipProps} />
+    if (withTooltip)
+      return (
+        <Tooltip
+          content={({ label, payload }) => (
+            <ChartTooltip ref={ref} label={label} payload={payload} />
+          )}
+          {...tooltipProps}
+        />
+      )
   }
 
   return (

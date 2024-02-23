@@ -137,13 +137,11 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
           onReorder={onReorder}
           __css={css}
           {...rest}
-          onMouseUp={handlerAll(
-            rest.onMouseUp,
-            () => onCompleteChange?.(values),
+          onMouseUp={handlerAll(rest.onMouseUp, () =>
+            onCompleteChange?.(values),
           )}
-          onTouchEnd={handlerAll(
-            rest.onTouchEnd,
-            () => onCompleteChange?.(values),
+          onTouchEnd={handlerAll(rest.onTouchEnd, () =>
+            onCompleteChange?.(values),
           )}
         >
           {cloneChildren}

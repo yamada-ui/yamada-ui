@@ -60,9 +60,8 @@ const filterIssues = async (issues: Issue[], collaborators: Collaborator[]) => {
 
   issues = issues.filter(({ pull_request }) => !pull_request)
 
-  issues = issues.filter(
-    ({ assignees }) =>
-      assignees?.some(({ login }) => !collaboratorIds.includes(login)),
+  issues = issues.filter(({ assignees }) =>
+    assignees?.some(({ login }) => !collaboratorIds.includes(login)),
   )
 
   const resolvedIssues = (

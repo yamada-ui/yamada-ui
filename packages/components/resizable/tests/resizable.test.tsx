@@ -147,7 +147,7 @@ describe("<Resizable />", () => {
     test("When `collapesible = true`, function `onCollapse` should be called", () => {
       const controlRef = createRef<ResizableItemControl>()
 
-      const onCollapse = jest.fn()
+      const onCollapse = vi.fn()
 
       const { container } = render(
         <Resizable h="md" rounded="md" borderWidth="1px">
@@ -196,7 +196,7 @@ describe("<Resizable />", () => {
     test("When `collapsible = false`, function `onCollapse` should not be called", () => {
       const controlRef = createRef<ResizableItemControl>()
 
-      const onCollapse = jest.fn()
+      const onCollapse = vi.fn()
 
       const { container } = render(
         <Resizable h="md" rounded="md" borderWidth="1px">
@@ -259,7 +259,7 @@ describe("<Resizable />", () => {
 
   describe("Handle Resize Events", () => {
     test("When Resize Event is occured, `onResize` function should be called", () => {
-      const onResize = jest.fn()
+      const onResize = vi.fn()
 
       const { container } = render(
         <Resizable h="md" rounded="md" borderWidth="1px">

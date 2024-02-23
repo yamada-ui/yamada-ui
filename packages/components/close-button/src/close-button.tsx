@@ -61,9 +61,7 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
       flexShrink: 0,
       ...styles,
       ...__css,
-      ...(isRounded
-        ? { borderRadius: "9999px", border: "1px solid currentColor" }
-        : {}),
+      ...(isRounded ? { borderRadius: "9999px" } : {}),
     }
 
     return (

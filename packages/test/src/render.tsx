@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event"
 import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
 import type { ReactElement } from "react"
-import "@testing-library/jest-dom"
+import "@testing-library/jest-dom/vitest"
 
 export type RenderProps = RenderOptions & {
   withProvider?: boolean

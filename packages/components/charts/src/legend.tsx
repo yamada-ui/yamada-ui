@@ -6,6 +6,7 @@ export type LegendProps = {
   onHeightlight: (area: string | null) => void
 }
 
+//todo: themeの当て方はいい感じにやる　絶対いじらないだろみたいなところは当ててないこともある
 export const Legend = forwardRef<LegendProps, "div">((props, ref) => {
   const { payload, onHeightlight } = props
   const items = payload?.map((entry, index) => (

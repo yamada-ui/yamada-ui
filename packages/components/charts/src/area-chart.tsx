@@ -283,7 +283,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const referenceLinesItems = referenceLines?.map((line, index) => (
     <ReferenceLine
       key={`referenceLine-${index}`}
-      {...getReferenceLineProps({ index, ...line }, ref)}
+      {...getReferenceLineProps({ index, line }, ref)}
     />
   ))
 

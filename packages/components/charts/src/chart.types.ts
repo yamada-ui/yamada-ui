@@ -1,4 +1,4 @@
-import type { CSSUIProps } from "@yamada-ui/core"
+import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
 import type {
   AreaChart as ReChartsAreaChart,
@@ -46,3 +46,15 @@ export type TooltipUIProps = Merge<
   Omit<TooltipProps<any, any>, "ref">
 >
 export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
+
+export type ChartPropGetter<
+  Y extends As = "div",
+  M = undefined,
+  D = undefined,
+> = (props?: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
+
+export type RequiredChartPropGetter<
+  Y extends As = "div",
+  M = undefined,
+  D = undefined,
+> = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D

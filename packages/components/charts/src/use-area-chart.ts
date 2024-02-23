@@ -19,11 +19,21 @@ import type {
 import type { AreaChartProps } from "./area-chart"
 import type { AreaGradientProps } from "./area-gradient"
 import type { AreaSplitProps } from "./area-split"
-import type {
-  AreaChartSeries,
-  ChartPropGetter,
-  ReferenceUILineProps,
-  RequiredChartPropGetter,
+import {
+  areaChartProperties,
+  referenceLineProperties,
+  type AreaChartSeries,
+  type ChartPropGetter,
+  type ReferenceUILineProps,
+  type RequiredChartPropGetter,
+  containerProperties,
+  gridProperties,
+  xAxisProperties,
+  yAxisProperties,
+  legendProperties,
+  tooltipProperties,
+  dotProperties,
+  areaProperties,
 } from "./chart.types"
 
 type AreaChartContext = {}
@@ -97,22 +107,10 @@ export const useAreaChart = ({
     ComponentPropsWithoutRef<typeof AreaChart>
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => {
-      //todo 何とかプロパティで大文字にして定数にするといいかも　keyof AreaChartPropsとかで型安全にもしたい form-controlがやってる
-      //todo typesに入れてもいいかも
-      const [reChartsProps, uiProps] = splitObject(areaChartProps, [
-        "layout",
-        "syncId",
-        "syncMethod",
-        "width",
-        "height",
-        "data",
-        "margin",
-        "stackOffset",
-        "onClick",
-        "onMouseEnter",
-        "onMouseMove",
-        "onMouseLeave",
-      ])
+      const [reChartsProps, uiProps] = splitObject(
+        areaChartProps,
+        areaChartProperties,
+      )
       const PropClassName = getCSS(uiProps)(theme)
 
       return {
@@ -130,7 +128,7 @@ export const useAreaChart = ({
 
   const getReferenceLineProps: RequiredChartPropGetter<
     "div",
-    Partial<ReferenceLineProps> & {
+    {
       line: ReferenceUILineProps
       index: number
     },
@@ -139,20 +137,10 @@ export const useAreaChart = ({
     (props, ref = null) => {
       const line = props.line
       const index = props.index
-      const [reChartsProps, uiProps] = splitObject(line, [
-        "xAxisId",
-        "yAxisId",
-        "x",
-        "y",
-        "ifOverflow",
-        "viewBox",
-        "xAxis",
-        "yAxis",
-        "label",
-        "isFront",
-        "strokeWidth",
-        "segment",
-      ])
+      const [reChartsProps, uiProps] = splitObject(
+        line,
+        referenceLineProperties,
+      )
       const stylesClassName = getCSS(styles)(theme)
       const className = getCSS(uiProps as CSSUIObject)(theme)
       //todo: スコープ内なので、areachartいらない
@@ -185,15 +173,10 @@ export const useAreaChart = ({
     Omit<ResponsiveContainerProps, "children">
   > = useCallback(
     (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(containerProps, [
-        "aspect",
-        "width",
-        "height",
-        "minWidth",
-        "minHeight",
-        "debounce",
-        "onResize",
-      ])
+      const [reChartsProps, uiProps] = splitObject(
+        containerProps,
+        containerProperties,
+      )
 
       let className = getCSS(uiProps)(theme)
       //todo is number
@@ -217,21 +200,7 @@ export const useAreaChart = ({
     CartesianGridProps
   > = useCallback(
     (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(gridProps, [
-        "x",
-        "y",
-        "width",
-        "height",
-        "horizontal",
-        "vertical",
-        "horizontalPoints",
-        "horizontalCoordinatesGenerator",
-        "verticalPoints",
-        "verticalCoordinatesGenerator",
-        "fill",
-        "fillOpacity",
-        "strokeDasharray",
-      ])
+      const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
       const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
@@ -253,46 +222,7 @@ export const useAreaChart = ({
     XAxisProps
   > = useCallback(
     (props = {}) => {
-      const [reChartsProps, uiProps] = splitObject(xAxisProps, [
-        "hide",
-        "dataKey",
-        "xAxisId",
-        "width",
-        "height",
-        "orientation",
-        "type",
-        "allowDecimals",
-        "allowDataOverflow",
-        "allowDuplicatedCategory",
-        "angle",
-        "tickCount",
-        "domain",
-        "includeHidden",
-        "interval",
-        "padding",
-        "minTickGap",
-        "axisLine",
-        "tickLine",
-        "tickSize",
-        "tickFormatter",
-        "ticks",
-        "tick",
-        "mirror",
-        "reversed",
-        "label",
-        "scale",
-        "unit",
-        "name",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-        "tickMargin",
-      ])
+      const [reChartsProps, uiProps] = splitObject(xAxisProps, xAxisProperties)
       const className = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
@@ -321,45 +251,7 @@ export const useAreaChart = ({
     YAxisProps
   > = useCallback(
     (props = {}) => {
-      const [reChartsProps, uiProps] = splitObject(yAxisProps, [
-        "hide",
-        "dataKey",
-        "yAxisId",
-        "width",
-        "height",
-        "orientation",
-        "type",
-        "tickCount",
-        "domain",
-        "includeHidden",
-        "interval",
-        "padding",
-        "minTickGap",
-        "allowDecimals",
-        "allowDataOverflow",
-        "allowDuplicatedCategory",
-        "axisLine",
-        "tickLine",
-        "tickSize",
-        "tickFormatter",
-        "ticks",
-        "tick",
-        "mirror",
-        "reversed",
-        "label",
-        "scale",
-        "unit",
-        "name",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-        "tickMargin",
-      ])
+      const [reChartsProps, uiProps] = splitObject(yAxisProps, yAxisProperties)
 
       //todo: useCSSで挿入した時の順番が担保されるのであれば2つ作った方がきれい
       const className = getCSS({
@@ -407,30 +299,7 @@ export const useAreaChart = ({
     Omit<LegendProps, "ref">
   > = useCallback(
     (props = {}, ref = null) => {
-      const [reChartProps, uiProps] = splitObject(legendProps, [
-        "width",
-        "height",
-        "layout",
-        "align",
-        "verticalAlign",
-        "iconSize",
-        "iconType",
-        "payload",
-        "chartWidth",
-        "chartHeight",
-        "margin",
-        "content",
-        "formatter",
-        "wrapperStyle",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-      ])
+      const [reChartProps, uiProps] = splitObject(legendProps, legendProperties)
 
       const className = getCSS(uiProps as CSSUIObject)(theme)
 
@@ -451,29 +320,10 @@ export const useAreaChart = ({
     Omit<TooltipProps<any, any>, "ref">
   > = useCallback(
     (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(tooltipProps, [
-        "offset",
-        "filterNull",
-        "itemStyle",
-        "wrapperStyle",
-        "contentStyle",
-        "labelStyle",
-        "cursor",
-        "viewBox",
-        "allowEscapeViewBox",
-        "active",
-        "position",
-        "coordinate",
-        "payload",
-        "label",
-        "content",
-        "formatter",
-        "labelFormatter",
-        "itemSorter",
-        "isAnimationActive",
-        "animationDuration",
-        "animationEasing",
-      ])
+      const [reChartsProps, uiProps] = splitObject(
+        tooltipProps,
+        tooltipProperties,
+      )
       const className = getCSS(uiProps)(theme)
 
       return {
@@ -526,7 +376,7 @@ export const useAreaChart = ({
 
   const getAreaProps: RequiredChartPropGetter<
     "div",
-    Partial<AreaProps> & {
+    {
       item: AreaChartSeries
       index: number
     },
@@ -538,64 +388,18 @@ export const useAreaChart = ({
       const id = `${uuid}-${item.color}`
       const color = `var(--ui-areachart-area-${index})`
       const dimmed = shouldHighlight && highlightedArea !== item.dataKey
-      const [areaReChartsProps, areaUIProps] = splitObject(item, [
-        "type",
-        "dataKey",
-        "xAxisId",
-        "yAxisId",
-        "legendType",
-        "dot",
-        "activeDot",
-        "label",
-        "stroke",
-        "strokeWidth",
-        "layout",
-        "baseLine",
-        "points",
-        "stackId",
-        "connectNulls",
-        "unit",
-        "name",
-        "isAnimationActive",
-        "animationBegin",
-        "animationDuration",
-        "animationEasing",
-        "id",
-        "onAnimationStart",
-        "onAnimationEnd",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-      ])
+      const [areaReChartsProps, areaUIProps] = splitObject(item, areaProperties)
       const areaClassName = getCSS(areaUIProps as CSSUIObject)(theme)
 
-      const dotParams = [
-        "cx",
-        "cy",
-        "r",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-      ]
       const [activeDotReChartsProps, activeDotUIProps] = splitObject<
         Dict,
         string
-      >(activeDotProps, dotParams)
+      >(activeDotProps, dotProperties)
       const activeDotClassName = getCSS(activeDotUIProps)(theme)
 
       const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
         dotProps,
-        dotParams,
+        dotProperties,
       )
       const dotClassName = getCSS(dotUIProps)(theme)
 
@@ -628,7 +432,7 @@ export const useAreaChart = ({
 
       return {
         ref,
-        className: cx(props.className, areaClassName),
+        className: cx(item.className, areaClassName),
         id,
         activeDot,
         dot,
@@ -644,8 +448,12 @@ export const useAreaChart = ({
         fillOpacity: dimmed ? 0 : 1,
         strokeOpacity: dimmed ? 0.5 : 1,
         strokeDasharray: item.strokeDasharray,
-        ...props,
-        ...omitObject(areaReChartsProps, ["dataKey", "dot", "activeDot"]),
+        ...omitObject(areaReChartsProps, [
+          "dataKey",
+          "dot",
+          "activeDot",
+          "color",
+        ]),
       }
     },
     [

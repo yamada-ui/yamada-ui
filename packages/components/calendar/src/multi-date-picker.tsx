@@ -248,8 +248,8 @@ export const MultiDatePickerField = forwardRef<
           const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
             ev.stopPropagation()
 
-            setValue(
-              (prev) => prev?.filter((value) => !isSameDate(value, date)),
+            setValue((prev) =>
+              prev?.filter((value) => !isSameDate(value, date)),
             )
 
             inputRef.current?.focus()

@@ -6,7 +6,7 @@
     "prepare": "husky install",
     "dev": "next dev",
     "start": "next start",
-    "prebuild": "pnpm gen:content && pnpm gen:search",
+    "prebuild": "pnpm gen:content && pnpm gen:search && pnpm gen:props && pnpm gen:css && pnpm gen:contributors && pnpm gen:theme",
     "build": "next build",
     "build:profile": "next build --profile",
     "gen:changelog": "tsx scripts/changelog",

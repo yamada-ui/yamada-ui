@@ -77,7 +77,7 @@ describe("<Carousel/>", () => {
 
   it("should render correctly when using autoplay", () => {
     const delayTimer = 500
-    jest.useFakeTimers()
+    vi.useFakeTimers()
 
     const carouselElement = (
       <Carousel autoplay delay={delayTimer}>
@@ -91,7 +91,7 @@ describe("<Carousel/>", () => {
 
     // First after delay timer should be slide 2
     act(() => {
-      jest.advanceTimersByTime(delayTimer)
+      vi.advanceTimersByTime(delayTimer)
     })
     rerender(carouselElement)
     expect(screen.getByText("Slide 2").parentNode).toHaveAttribute(
@@ -100,7 +100,7 @@ describe("<Carousel/>", () => {
 
     // Finally slide 3 must be have data-selected
     act(() => {
-      jest.advanceTimersByTime(delayTimer)
+      vi.advanceTimersByTime(delayTimer)
     })
     rerender(carouselElement)
     expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
@@ -127,7 +127,7 @@ describe("<Carousel/>", () => {
   })
 
   it("should stop autoplay on mouse enter", () => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
     const carouselElement = (
       <Carousel delay={500} autoplay stopMouseEnterAutoplay>
         {slidesContentArr.map((value) => (
@@ -140,7 +140,7 @@ describe("<Carousel/>", () => {
 
     fireEvent.mouseEnter(screen.getByText("Slide 1"))
 
-    jest.advanceTimersByTime(10000)
+    vi.advanceTimersByTime(10000)
     rerender(carouselElement)
 
     expect(screen.getByText("Slide 1").parentNode).toHaveAttribute(

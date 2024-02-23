@@ -40,8 +40,8 @@ describe("<PinInput />", () => {
   })
 
   test("calls onChange and onComplete appropriately", async () => {
-    const handleChange = jest.fn()
-    const handleComplete = jest.fn()
+    const handleChange = vi.fn()
+    const handleComplete = vi.fn()
     const { user, findAllByRole } = render(
       <PinInput
         onChange={handleChange}

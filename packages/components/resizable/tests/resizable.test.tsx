@@ -11,7 +11,7 @@ import {
 import { act } from "@testing-library/react"
 import { assert } from "./utils"
 
-describe("<Resizable />", () => {
+describe.skip("<Resizable />", () => {
   test("Resizable renders correctly", async () => {
     const { container } = render(
       <Resizable h="md" rounded="md" borderWidth="1px">

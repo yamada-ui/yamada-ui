@@ -1071,7 +1071,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur || !isHit,
+    enabled: isOpen && (closeOnBlur || !isHit),
   })
 
   const getPopoverProps = useCallback(

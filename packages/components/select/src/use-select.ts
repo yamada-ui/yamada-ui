@@ -537,7 +537,7 @@ export const useSelect = <T extends MaybeValue = string>({
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur,
+    enabled: isOpen && closeOnBlur,
   })
 
   useEffect(() => {

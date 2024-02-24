@@ -311,7 +311,7 @@ export const useColorPicker = ({
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur,
+    enabled: isOpen && closeOnBlur,
   })
 
   useUpdateEffect(() => {

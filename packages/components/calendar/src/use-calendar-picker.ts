@@ -380,7 +380,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur,
+    enabled: isOpen && closeOnBlur,
   })
 
   const getContainerProps: UIPropGetter = useCallback(

@@ -125,6 +125,14 @@ export const Header = memo(
             <Search
               display={{ base: "flex", sm: "none" }}
               borderColor={isScroll ? "transparent" : "border"}
+              bg={
+                isScroll
+                  ? ["whiteAlpha.600", "blackAlpha.500"]
+                  : ["whiteAlpha.900", "blackAlpha.600"]
+              }
+              backdropFilter="auto"
+              backdropSaturate="180%"
+              backdropBlur="10px"
             />
 
             <ButtonGroup {...{ isOpen, onOpen }} />

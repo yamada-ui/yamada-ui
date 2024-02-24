@@ -147,7 +147,7 @@ type DrawerContentProps = Omit<
   "color" | "transition" | "isOpen" | keyof ThemeProps
 >
 
-export const DrawerContent = forwardRef<DrawerContentProps, "div">(
+export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
   ({ className, children, placement, withCloseButton, ...rest }, ref) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()

@@ -84,7 +84,7 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
  *
  * @see Docs https://yamada-ui.com/components/overlay/dialog
  */
-export const Dialog = forwardRef<DialogProps, "section">(
+export const Dialog = forwardRef<DialogProps, "section", false>(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Dialog", {
       size,

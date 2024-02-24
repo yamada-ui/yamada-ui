@@ -122,11 +122,12 @@ export const useAreaChart = ({
         areaChartProps,
         areaChartProperties,
       )
+      const styleClassName = getCSS(styles.areaChart)(theme)
       const PropClassName = getCSS(uiProps)(theme)
 
       return {
         ref,
-        className: cx(className, PropClassName),
+        className: cx(className, PropClassName, styleClassName),
         data,
         stackOffset: type === "percent" ? "expand" : undefined,
         layout: orientation,
@@ -134,7 +135,7 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [areaChartProps, data, orientation, theme, type],
+    [areaChartProps, data, orientation, styles.areaChart, theme, type],
   )
 
   const getReferenceLineProps: RequiredChartPropGetter<
@@ -150,14 +151,13 @@ export const useAreaChart = ({
         line,
         referenceLineProperties,
       )
-      const stylesClassName = getCSS(styles)(theme)
+      const stylesClassName = getCSS(styles.referenceLine)(theme)
       const PropClassName = getCSS(uiProps as CSSUIObject)(theme)
       const color = `var(--ui-referenceline-${index})`
 
       const label: ReferenceLineProps["label"] = {
         value: reChartsProps.label as string,
         fill: color,
-        fontSize: styles.referenceLine.fontSize as number,
         position: "insideBottomLeft",
         ...(isObject(reChartsProps.label) ? reChartsProps.label : {}),
       }
@@ -166,7 +166,6 @@ export const useAreaChart = ({
         ref,
         className: cx(className, PropClassName, stylesClassName),
         stroke: color,
-        strokeWidth: styles.referenceLine.strokeWidth as number,
         label,
         ...omitObject(reChartsProps, ["label"]),
       }
@@ -208,11 +207,12 @@ export const useAreaChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => {
       const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
+      const styleClassName = getCSS(styles.grid)(theme)
       const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
-        className: cx(className, propClassName),
+        className: cx(className, propClassName, styleClassName),
         strokeDasharray: strokeDasharray,
         vertical: gridAxis === "y" || gridAxis === "xy",
         horizontal: gridAxis === "x" || gridAxis === "xy",
@@ -220,7 +220,7 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [gridProps, theme, strokeDasharray, gridAxis],
+    [gridProps, styles.grid, theme, strokeDasharray, gridAxis],
   )
 
   const getXAxisProps: ChartPropGetter<
@@ -230,16 +230,15 @@ export const useAreaChart = ({
   > = useCallback(
     ({ className, ...props } = {}) => {
       const [reChartsProps, uiProps] = splitObject(xAxisProps, xAxisProperties)
-      // const styleClassName = getCSS(styles.xAxis)(theme)
+      const styleClassName = getCSS(styles.xAxis)(theme)
       const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
-        className: cx(className, propClassName),
+        className: cx(className, propClassName, styleClassName),
         hide: !withXAxis,
         ...(orientation === "vertical" ? { type: "number" } : { dataKey }),
         tick: {
           transform: "translate(0, 10)",
-          fontSize: 12,
           fill: "currentColor",
         },
         stroke: "",
@@ -269,14 +268,11 @@ export const useAreaChart = ({
     ({ className, ...props } = {}) => {
       const [reChartsProps, uiProps] = splitObject(yAxisProps, yAxisProperties)
 
-      //todo: useCSSで挿入した時の順番が担保されるのであれば2つ作った方がきれい
-      const propClassName = getCSS({
-        ...styles.yAxis,
-        ...(uiProps as CSSUIObject),
-      })(theme)
+      const styleClassName = getCSS(styles.yAxis)(theme)
+      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
-        className: cx(className, propClassName),
+        className: cx(className, propClassName, styleClassName),
         hide: !withYAxis,
         axisLine: false,
         ...(orientation === "vertical"
@@ -285,7 +281,6 @@ export const useAreaChart = ({
         tickLine: withYTickLine ? { stroke: "currentColor" } : false,
         tick: {
           transform: "translate(-10, 0)",
-          fontSize: 12,
           fill: "currentColor",
         },
         allowDecimals: true,
@@ -402,25 +397,29 @@ export const useAreaChart = ({
       const color = `var(--ui-area-${index})`
       const dimmed = shouldHighlight && highlightedArea !== item.dataKey
       const [areaReChartsProps, areaUIProps] = splitObject(item, areaProperties)
+
+      const areaStyleClassName = getCSS(styles.area)(theme)
       const areaClassName = getCSS(areaUIProps as CSSUIObject)(theme)
 
       const [activeDotReChartsProps, activeDotUIProps] = splitObject<
         Dict,
         string
       >(activeDotProps, dotProperties)
+      const activeDotStyleClassName = getCSS(styles.activeDot)(theme)
       const activeDotClassName = getCSS(activeDotUIProps)(theme)
 
       const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
         dotProps,
         dotProperties,
       )
+      const dotStyleClassName = getCSS(styles.dot)(theme)
       const dotClassName = getCSS(dotUIProps)(theme)
 
       let activeDot: DotProps | boolean
       if (withActiveDots) {
         activeDot = {
-          className: cx(className, activeDotClassName),
-          fill: "#fff",
+          className: cx(className, activeDotClassName, activeDotStyleClassName),
+          fill: "white",
           stroke: color,
           strokeWidth: 2,
           r: 4,
@@ -434,7 +433,7 @@ export const useAreaChart = ({
       let dot: DotProps | boolean
       if (withDots) {
         dot = {
-          className: cx(className, dotClassName),
+          className: cx(className, dotClassName, dotStyleClassName),
           fill: color,
           fillOpacity: dimmed ? 0 : 1,
           strokeWidth: 2,
@@ -448,7 +447,7 @@ export const useAreaChart = ({
 
       return {
         ref,
-        className: cx(className, areaClassName),
+        className: cx(className, areaClassName, areaStyleClassName),
         id,
         activeDot,
         dot,
@@ -456,10 +455,10 @@ export const useAreaChart = ({
         type: curveType,
         dataKey: item.dataKey,
         fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
-        strokeWidth: strokeWidth,
+        strokeWidth,
         stroke: color,
         isAnimationActive: false,
-        connectNulls: connectNulls,
+        connectNulls,
         stackId: stacked ? "stack" : undefined,
         fillOpacity: dimmed ? 0 : 1,
         strokeOpacity: dimmed ? 0.5 : 1,
@@ -476,6 +475,9 @@ export const useAreaChart = ({
       uuid,
       shouldHighlight,
       highlightedArea,
+      styles.area,
+      styles.activeDot,
+      styles.dot,
       theme,
       activeDotProps,
       dotProps,

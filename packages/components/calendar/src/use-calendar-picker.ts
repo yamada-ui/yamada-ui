@@ -11,6 +11,7 @@ import {
   getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { Dict } from "@yamada-ui/utils"
 import {
@@ -32,7 +33,7 @@ import type {
   KeyboardEventHandler,
   MouseEvent,
 } from "react"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useRef } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
@@ -119,7 +120,6 @@ type UseCalendarPickerBaseProps<
   PopoverProps,
   | "initialFocusRef"
   | "closeOnButton"
-  | "isOpen"
   | "trigger"
   | "autoFocus"
   | "restoreFocus"
@@ -152,7 +152,6 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   let {
     id,
-    defaultIsOpen,
     closeOnBlur = true,
     closeOnEsc = true,
     placement = "bottom-start",
@@ -200,6 +199,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     pattern = /[^0-9\-\/]/g,
     inputFormat = "YYYY/MM/DD",
     autoFocus = true,
+    isOpen: isOpenProp,
+    defaultIsOpen,
     onOpen: onOpenProp,
     onClose: onCloseProp,
     onClear: onClearProp,
@@ -220,7 +221,16 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   )
   const { disabled, readOnly } = formControlProps
 
-  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
+  const {
+    isOpen,
+    onOpen: onInternalOpen,
+    onClose,
+  } = useDisclosure({
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+  })
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -271,18 +281,10 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   const onOpen = useCallback(() => {
     if (disabled || readOnly) return
 
-    setIsOpen(true)
+    onInternalOpen()
 
     if (autoFocus && allowInput) inputRef.current?.focus()
-
-    onOpenProp?.()
-  }, [autoFocus, allowInput, disabled, readOnly, onOpenProp])
-
-  const onClose = useCallback(() => {
-    setIsOpen(false)
-
-    onCloseProp?.()
-  }, [onCloseProp])
+  }, [autoFocus, allowInput, disabled, readOnly, onInternalOpen])
 
   const onClick = useCallback(() => {
     if (isOpen) {

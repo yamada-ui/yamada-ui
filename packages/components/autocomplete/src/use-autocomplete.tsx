@@ -9,6 +9,7 @@ import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { Dict, Union, DOMAttributes } from "@yamada-ui/utils"
 import {
@@ -251,7 +252,6 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
   PopoverProps,
   | "initialFocusRef"
   | "closeOnButton"
-  | "isOpen"
   | "trigger"
   | "autoFocus"
   | "restoreFocus"
@@ -343,7 +343,6 @@ export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
   UseAutocompleteBaseProps<T>
 
 export const useAutocomplete = <T extends string | string[] = string>({
-  defaultIsOpen,
   closeOnSelect = true,
   omitSelectedValues = false,
   maxSelectValues,
@@ -360,6 +359,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   placeholder,
   items,
   children,
+  isOpen: isOpenProp,
+  defaultIsOpen,
+  onOpen: onOpenProp,
+  onClose: onCloseProp,
   ...rest
 }: UseAutocompleteProps<T>) => {
   rest = useFormControlProps(rest)
@@ -405,9 +408,16 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
   const [isHit, setIsHit] = useState<boolean>(true)
-
-  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-
+  const {
+    isOpen,
+    onOpen: onInternalOpen,
+    onClose,
+  } = useDisclosure({
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+  })
   const isFocused = focusedIndex > -1
   const isCreate = focusedIndex === -2 && allowCreate
   const isMulti = isArray(value)
@@ -475,18 +485,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     if (!allowCreate && (isEmpty || isAllSelected)) return
 
-    setIsOpen(true)
+    onInternalOpen()
 
     if (inputRef.current) inputRef.current.focus()
-
-    rest.onOpen?.()
-  }, [allowCreate, formControlProps, isAllSelected, isEmpty, rest])
-
-  const onClose = useCallback(() => {
-    setIsOpen(false)
-
-    rest.onClose?.()
-  }, [rest])
+  }, [allowCreate, formControlProps, isAllSelected, isEmpty, onInternalOpen])
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {

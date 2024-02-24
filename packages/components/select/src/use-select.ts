@@ -9,6 +9,7 @@ import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { Dict } from "@yamada-ui/utils"
 import {
@@ -91,7 +92,6 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
     PopoverProps,
     | "initialFocusRef"
     | "closeOnButton"
-    | "isOpen"
     | "trigger"
     | "autoFocus"
     | "restoreFocus"
@@ -149,7 +149,6 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
   }
 
 export const useSelect = <T extends MaybeValue = string>({
-  defaultIsOpen,
   placeholder,
   closeOnBlur = true,
   closeOnEsc = true,
@@ -160,6 +159,10 @@ export const useSelect = <T extends MaybeValue = string>({
   isEmpty,
   placement = "bottom-start",
   duration = 0.2,
+  isOpen: isOpenProp,
+  defaultIsOpen,
+  onOpen: onOpenProp,
+  onClose: onCloseProp,
   optionProps,
   ...rest
 }: UseSelectProps<T>) => {
@@ -400,23 +403,24 @@ export const useSelect = <T extends MaybeValue = string>({
     [setLabel, setValue],
   )
 
-  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
+  const {
+    isOpen,
+    onOpen: onInternalOpen,
+    onClose,
+  } = useDisclosure({
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+  })
 
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return
 
     if (isEmpty || isAllSelected) return
 
-    setIsOpen(true)
-
-    rest.onOpen?.()
-  }, [formControlProps, isEmpty, isAllSelected, rest])
-
-  const onClose = useCallback(() => {
-    setIsOpen(false)
-
-    rest.onClose?.()
-  }, [rest])
+    onInternalOpen()
+  }, [formControlProps, isEmpty, isAllSelected, onInternalOpen])
 
   const onSelect = useCallback(() => {
     let enabledValue = descendants.value(focusedIndex)

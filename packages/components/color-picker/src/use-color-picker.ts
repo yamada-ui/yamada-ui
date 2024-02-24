@@ -309,7 +309,7 @@ export const useColorPicker = ({
   })
 
   useUpdateEffect(() => {
-    if (!format) return
+    if (!format || !value) return
 
     formatRef.current = format
 
@@ -319,7 +319,13 @@ export const useColorPicker = ({
 
     setInputValue(formatInput(nextValue))
     setValue(nextValue)
-  }, [format, fallbackValue])
+  }, [format])
+
+  useUpdateEffect(() => {
+    if (isInputFocused.current || !valueProp) return
+
+    setInputValue(formatInput(valueProp))
+  }, [valueProp])
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({

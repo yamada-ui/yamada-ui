@@ -1,15 +1,15 @@
-import type { HTMLUIProps, CSSUIObject, Token } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, Token } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
 import type {
-  HTMLMotionProps,
   WithTransitionProps,
   MotionTransitionVariants,
+  MotionProps,
 } from "@yamada-ui/motion"
 import {
-  motion,
   AnimatePresence,
   transitionEnter,
   transitionExit,
+  Motion,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
@@ -35,10 +35,7 @@ type SlideFadeOptions = {
   reverse?: boolean
 }
 
-export type SlideFadeProps = WithTransitionProps<
-  HTMLUIProps<"div"> & HTMLMotionProps<"div">
-> &
-  SlideFadeOptions
+export type SlideFadeProps = WithTransitionProps<MotionProps> & SlideFadeOptions
 
 const variants: MotionTransitionVariants = {
   initial: ({
@@ -96,7 +93,7 @@ export const slideFadeProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/slide-fade
  */
-export const SlideFade = forwardRef<SlideFadeProps, "div">(
+export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
   (
     {
       unmountOnExit,
@@ -137,8 +134,7 @@ export const SlideFade = forwardRef<SlideFadeProps, "div">(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <ui.div
-            as={motion.div}
+          <Motion
             ref={ref}
             className={cx("ui-slide-fade", className)}
             custom={custom}

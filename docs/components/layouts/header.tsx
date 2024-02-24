@@ -151,6 +151,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
           display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
           color="muted"
           icon={<Discord />}
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         />
 
         <NextLinkIconButton
@@ -161,6 +162,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
           display={{ base: "inline-flex", lg: !isMobile ? "none" : undefined }}
           color="muted"
           icon={<Github />}
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         />
 
         <ThemeSchemeButton
@@ -186,6 +188,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
             color="muted"
             onClick={onOpen}
             icon={<Hamburger />}
+            _hover={{ bg: [`blackAlpha.50`, `whiteAlpha.100`] }}
           />
         ) : (
           <CloseButton
@@ -194,6 +197,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
             display={{ base: "none", lg: "inline-flex" }}
             color="muted"
             onClick={onClose}
+            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
           />
         )}
       </HStack>
@@ -236,6 +240,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
         variant="ghost"
         color="muted"
         icon={<Translate />}
+        _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         {...rest}
       />
 
@@ -292,6 +297,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
           variant="ghost"
           color="muted"
           icon={colorMode === "dark" ? <Sun /> : <Moon />}
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
           {...rest}
         />
 
@@ -345,6 +351,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             variant="ghost"
             color="muted"
             icon={<ColorPalette />}
+            _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             {...rest}
           />
         </PopoverTrigger>

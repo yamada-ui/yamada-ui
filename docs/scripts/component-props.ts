@@ -66,7 +66,28 @@ const OVERRIDE_PATHS: Record<
   slider: ["range-slider"],
   table: ["paging-table"],
   autocomplete: ["multi-autocomplete"],
-  modal: ["dialog", "drawer"],
+  modal: [
+    {
+      parent: "dialog",
+      children: [
+        "dialog-header",
+        "dialog-body",
+        "dialog-footer",
+        "dialog-overlay",
+        "dialog-close-button",
+      ],
+    },
+    {
+      parent: "drawer",
+      children: [
+        "drawer-header",
+        "drawer-body",
+        "drawer-footer",
+        "drawer-overlay",
+        "drawer-close-button",
+      ],
+    },
+  ],
   typography: ["heading", "text"],
   transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
   progress: ["circle-progress"],

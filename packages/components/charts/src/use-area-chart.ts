@@ -230,6 +230,7 @@ export const useAreaChart = ({
   > = useCallback(
     ({ className, ...props } = {}) => {
       const [reChartsProps, uiProps] = splitObject(xAxisProps, xAxisProperties)
+      // const styleClassName = getCSS(styles.xAxis)(theme)
       const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
@@ -249,7 +250,15 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [dataKey, orientation, theme, withXAxis, withXTickLine, xAxisProps],
+    [
+      dataKey,
+      orientation,
+      styles.xAxis,
+      theme,
+      withXAxis,
+      withXTickLine,
+      xAxisProps,
+    ],
   )
 
   const getYAxisProps: ChartPropGetter<
@@ -498,14 +507,14 @@ export const useAreaChart = ({
 
   const getCSSvariables = useCallback(() => {
     const areaColors: CSSUIProps["var"] = series.map((item, index) => ({
-      name: `areachart-area-${index}`,
+      name: `area-${index}`,
       token: "colors",
       value: item.color ?? "gray",
     }))
 
     const areaSplitColors: CSSUIProps["var"] = splitColors.map(
       (color, index) => ({
-        name: `areachart-areasplit-${index}`,
+        name: `areasplit-${index}`,
         token: "colors",
         value: color,
       }),
@@ -513,7 +522,7 @@ export const useAreaChart = ({
 
     const referenceLineColors: CSSUIProps["var"] = referenceLines
       ? referenceLines.map((line, index) => ({
-          name: `areachart-referenceline-${index}`,
+          name: `referenceline-${index}`,
           token: "colors",
           value: line.color ?? "gray",
         }))

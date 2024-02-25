@@ -1,5 +1,13 @@
 # @yamada-ui/textarea
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`01a717c`](https://github.com/hirotomoyamada/yamada-ui/commit/01a717c877f24bd6052e7a51b5145efec2d29657), [`f63c0f6`](https://github.com/hirotomoyamada/yamada-ui/commit/f63c0f62a9664e3b5bd5afd2ca0702cba32bff00)]:
+  - @yamada-ui/core@1.4.1
+  - @yamada-ui/form-control@1.0.16
+
 ## 1.1.2
 
 ### Patch Changes

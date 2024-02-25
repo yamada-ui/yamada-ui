@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/calendar",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "Yamada UI calendar component",
   "keywords": [
     "yamada",
@@ -50,6 +50,7 @@
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/button": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",

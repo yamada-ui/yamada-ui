@@ -30,6 +30,12 @@
       "required": false,
       "description": "If `true`, the loading state of the button is represented."
     },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If true, the button is full rounded. Else, it'll be slightly round."
+    },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "required": false,
@@ -122,7 +128,7 @@
       "type": "boolean",
       "defaultValue": false,
       "required": false,
-      "description": "If `true`, the button will be perfectly round. Else, it'll be slightly round."
+      "description": "If true, the button is full rounded. Else, it'll be slightly round."
     }
   }
 }

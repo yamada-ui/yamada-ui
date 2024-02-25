@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/autocomplete",
-  "version": "1.0.18",
+  "version": "1.1.0",
   "description": "Yamada UI autocomplete component",
   "keywords": [
     "yamada",
@@ -51,6 +51,7 @@
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
+    "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/use-descendant": "workspace:*",

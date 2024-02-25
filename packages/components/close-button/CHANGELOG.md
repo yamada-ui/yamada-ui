@@ -1,5 +1,16 @@
 # @yamada-ui/close-button
 
+## 1.0.14
+
+### Patch Changes
+
+- [#773](https://github.com/hirotomoyamada/yamada-ui/pull/773) [`f158de3`](https://github.com/hirotomoyamada/yamada-ui/commit/f158de3786b2d7aa7703028791bc91aaf507f3ac) Thanks [@zvolcsey](https://github.com/zvolcsey)! - feat: added isRounded to the close-button
+
+- Updated dependencies [[`01a717c`](https://github.com/hirotomoyamada/yamada-ui/commit/01a717c877f24bd6052e7a51b5145efec2d29657), [`f63c0f6`](https://github.com/hirotomoyamada/yamada-ui/commit/f63c0f62a9664e3b5bd5afd2ca0702cba32bff00)]:
+  - @yamada-ui/core@1.4.1
+  - @yamada-ui/icon@1.0.13
+  - @yamada-ui/ripple@1.0.14
+
 ## 1.0.13
 
 ### Patch Changes

@@ -1,5 +1,25 @@
 # @yamada-ui/color-picker
 
+## 1.2.0
+
+### Minor Changes
+
+- [#811](https://github.com/hirotomoyamada/yamada-ui/pull/811) [`02ad67f`](https://github.com/hirotomoyamada/yamada-ui/commit/02ad67ff991ecc98916bdf5548ece8f7ab782741) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled `Popover` component control.
+
+### Patch Changes
+
+- [#811](https://github.com/hirotomoyamada/yamada-ui/pull/811) [`ccbe64a`](https://github.com/hirotomoyamada/yamada-ui/commit/ccbe64a767733f36ee62065963b484380c69f8f9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `onOpen` and `onClose` were being executed unnecessarily.
+
+- [#809](https://github.com/hirotomoyamada/yamada-ui/pull/809) [`f32cdf6`](https://github.com/hirotomoyamada/yamada-ui/commit/f32cdf6363795d6e672802e010f23bc2889a5df4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the value was inserted when the `format` prop was changed and a bug where the input value was not updated when the value was changed using `setState` etc.
+
+- Updated dependencies [[`01a717c`](https://github.com/hirotomoyamada/yamada-ui/commit/01a717c877f24bd6052e7a51b5145efec2d29657), [`3284b5c`](https://github.com/hirotomoyamada/yamada-ui/commit/3284b5cd19d65e5ae1210c09972a71b71c42767c), [`f63c0f6`](https://github.com/hirotomoyamada/yamada-ui/commit/f63c0f62a9664e3b5bd5afd2ca0702cba32bff00), [`d4090e7`](https://github.com/hirotomoyamada/yamada-ui/commit/d4090e796d7d039ea9d5f81f8330cbe6d7bbd1a6)]:
+  - @yamada-ui/core@1.4.1
+  - @yamada-ui/button@1.0.15
+  - @yamada-ui/form-control@1.0.16
+  - @yamada-ui/icon@1.0.13
+  - @yamada-ui/input@1.0.16
+  - @yamada-ui/popover@1.0.14
+
 ## 1.1.0
 
 ### Minor Changes

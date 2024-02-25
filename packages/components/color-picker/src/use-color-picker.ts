@@ -11,6 +11,7 @@ import {
 } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useEyeDropper } from "@yamada-ui/use-eye-dropper"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { ColorFormat, Dict } from "@yamada-ui/utils"
@@ -101,7 +102,6 @@ export type UseColorPickerProps = Omit<
     PopoverProps,
     | "initialFocusRef"
     | "closeOnButton"
-    | "isOpen"
     | "trigger"
     | "autoFocus"
     | "restoreFocus"
@@ -133,6 +133,7 @@ export const useColorPicker = ({
   closeOnEsc = true,
   placement = "bottom-start",
   duration = 0.2,
+  isOpen: isOpenProp,
   defaultIsOpen,
   onOpen: onOpenProp,
   onClose: onCloseProp,
@@ -178,16 +179,23 @@ export const useColorPicker = ({
   )
   const isInputFocused = useRef<boolean>(false)
   const [inputValue, setInputValue] = useState<string>(value ?? "")
-  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
+  const {
+    isOpen,
+    onOpen: onInternalOpen,
+    onClose: onInternalClose,
+  } = useDisclosure({
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+  })
   const isColorSelectorFull = colorSelectorSize === "full"
 
   const onOpen = useCallback(() => {
     if (disabled || readOnly) return
 
-    setIsOpen(true)
-
-    onOpenProp?.()
-  }, [onOpenProp, disabled, readOnly])
+    onInternalOpen()
+  }, [onInternalOpen, disabled, readOnly])
 
   const onClose = useCallback(() => {
     if (!isOpen) return
@@ -197,14 +205,12 @@ export const useColorPicker = ({
     setValue((prev) => (!next || prev === next ? prev : next))
     setInputValue(formatInput(next ?? ""))
 
-    setIsOpen(false)
-
-    onCloseProp?.()
+    onInternalClose()
   }, [
     formatRef,
     isOpen,
     setValue,
-    onCloseProp,
+    onInternalClose,
     value,
     formatInput,
     setInputValue,
@@ -305,11 +311,11 @@ export const useColorPicker = ({
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur,
+    enabled: isOpen && closeOnBlur,
   })
 
   useUpdateEffect(() => {
-    if (!format) return
+    if (!format || !value) return
 
     formatRef.current = format
 
@@ -319,7 +325,13 @@ export const useColorPicker = ({
 
     setInputValue(formatInput(nextValue))
     setValue(nextValue)
-  }, [format, fallbackValue])
+  }, [format])
+
+  useUpdateEffect(() => {
+    if (isInputFocused.current || !valueProp) return
+
+    setInputValue(formatInput(valueProp))
+  }, [valueProp])
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({

@@ -1,0 +1,298 @@
+import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
+import type { ComponentPropsWithoutRef } from "react"
+import type {
+  AreaChart as ReChartsAreaChart,
+  AreaProps as ReChartsAreaProps,
+  ReferenceLineProps,
+  DotProps,
+  XAxisProps,
+  YAxisProps,
+  LegendProps,
+  CartesianGridProps,
+  TooltipProps,
+  ResponsiveContainerProps,
+} from "recharts"
+
+export type ChartPropGetter<
+  Y extends As = "div",
+  M = undefined,
+  D = undefined,
+> = (props?: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
+
+export type RequiredChartPropGetter<
+  Y extends As = "div",
+  M = undefined,
+  D = undefined,
+> = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
+
+export type LayoutType = "horizontal" | "vertical"
+export type AreaChartType = "default" | "stacked" | "percent" | "split"
+export type AxisType = "x" | "y" | "xy" | "none"
+export type AreaChartCurveType =
+  | "bump"
+  | "linear"
+  | "natural"
+  | "monotone"
+  | "step"
+  | "stepBefore"
+  | "stepAfter"
+export type AreaChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsAreaProps>,
+  { color: CSSUIProps["color"] }
+>
+export type ReferenceUILineProps = Merge<CSSUIProps, ReferenceLineProps>
+export type AreaChartUIProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof ReChartsAreaChart>
+>
+export type ContainerUIProps = Merge<
+  CSSUIProps,
+  Omit<ResponsiveContainerProps, "children">
+>
+export type DotUIProps = Merge<CSSUIProps, Omit<DotProps, "ref">>
+export type XAxisUIProps = Merge<
+  Merge<CSSUIProps, XAxisProps>,
+  { color?: CSSUIProps["color"] }
+>
+export type YAxisUIProps = Merge<
+  Merge<CSSUIProps, YAxisProps>,
+  { color?: CSSUIProps["color"] }
+>
+export type LegendUIProps = Merge<CSSUIProps, Omit<LegendProps, "ref">>
+export type TooltipUIProps = Merge<
+  CSSUIProps,
+  Omit<TooltipProps<any, any>, "ref">
+>
+export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
+
+export const areaChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof ReChartsAreaChart
+>)[] = [
+  "layout",
+  "syncId",
+  "syncMethod",
+  "width",
+  "height",
+  "data",
+  "margin",
+  "stackOffset",
+  "onClick",
+  "onMouseEnter",
+  "onMouseMove",
+  "onMouseLeave",
+]
+export const referenceLineProperties: (keyof ReferenceLineProps)[] = [
+  "xAxisId",
+  "yAxisId",
+  "x",
+  "y",
+  "ifOverflow",
+  "viewBox",
+  "xAxis",
+  "yAxis",
+  "label",
+  "isFront",
+  "strokeWidth",
+  "segment",
+]
+export const containerProperties: (keyof Omit<
+  ResponsiveContainerProps,
+  "children"
+>)[] = [
+  "aspect",
+  "width",
+  "height",
+  "minWidth",
+  "minHeight",
+  "debounce",
+  "onResize",
+]
+export const gridProperties: (keyof CartesianGridProps)[] = [
+  "x",
+  "y",
+  "width",
+  "height",
+  "horizontal",
+  "vertical",
+  "horizontalPoints",
+  "horizontalCoordinatesGenerator",
+  "verticalPoints",
+  "verticalCoordinatesGenerator",
+  "fill",
+  "fillOpacity",
+  "strokeDasharray",
+]
+export const xAxisProperties: (keyof XAxisProps)[] = [
+  "hide",
+  "dataKey",
+  "xAxisId",
+  "width",
+  "height",
+  "orientation",
+  "type",
+  "allowDecimals",
+  "allowDataOverflow",
+  "allowDuplicatedCategory",
+  "angle",
+  "tickCount",
+  "domain",
+  "includeHidden",
+  "interval",
+  "padding",
+  "minTickGap",
+  "axisLine",
+  "tickLine",
+  "tickSize",
+  "tickFormatter",
+  "ticks",
+  "tick",
+  "mirror",
+  "reversed",
+  "label",
+  "scale",
+  "unit",
+  "name",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+  "tickMargin",
+]
+export const yAxisProperties: (keyof YAxisProps)[] = [
+  "hide",
+  "dataKey",
+  "yAxisId",
+  "width",
+  "height",
+  "orientation",
+  "type",
+  "tickCount",
+  "domain",
+  "includeHidden",
+  "interval",
+  "padding",
+  "minTickGap",
+  "allowDecimals",
+  "allowDataOverflow",
+  "allowDuplicatedCategory",
+  "axisLine",
+  "tickLine",
+  "tickSize",
+  "tickFormatter",
+  "ticks",
+  "tick",
+  "mirror",
+  "reversed",
+  "label",
+  "scale",
+  "unit",
+  "name",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+  "tickMargin",
+]
+export const legendProperties: (keyof Omit<LegendProps, "ref">)[] = [
+  "width",
+  "height",
+  "layout",
+  "align",
+  "verticalAlign",
+  "iconSize",
+  "iconType",
+  "payload",
+  "chartWidth",
+  "chartHeight",
+  "margin",
+  "content",
+  "formatter",
+  "wrapperStyle",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]
+export const tooltipProperties: (keyof TooltipProps<any, any>)[] = [
+  "offset",
+  "filterNull",
+  "itemStyle",
+  "wrapperStyle",
+  "contentStyle",
+  "labelStyle",
+  "cursor",
+  "viewBox",
+  "allowEscapeViewBox",
+  "active",
+  "position",
+  "coordinate",
+  "payload",
+  "label",
+  "content",
+  "formatter",
+  "labelFormatter",
+  "itemSorter",
+  "isAnimationActive",
+  "animationDuration",
+  "animationEasing",
+]
+export const areaProperties: (keyof Omit<ReChartsAreaProps, "ref">)[] = [
+  "type",
+  "dataKey",
+  "xAxisId",
+  "yAxisId",
+  "legendType",
+  "dot",
+  "activeDot",
+  "label",
+  "stroke",
+  "strokeWidth",
+  "layout",
+  "baseLine",
+  "points",
+  "stackId",
+  "connectNulls",
+  "unit",
+  "name",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "id",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]
+export const dotProperties: (keyof DotProps)[] = [
+  "cx",
+  "cy",
+  "r",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]

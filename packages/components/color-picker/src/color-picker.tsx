@@ -85,6 +85,7 @@ export type ColorPickerProps = ThemeProps<"ColorPicker"> &
     | "alphaSliderProps"
     | "channelsProps"
     | "channelProps"
+    | "children"
   >
 
 /**
@@ -100,6 +101,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     })
     let {
       className,
+      children,
       withEyeDropper = true,
       color,
       h,
@@ -193,7 +195,9 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
                     channelsProps,
                     channelProps,
                   })}
-                />
+                >
+                  {children}
+                </ColorSelector>
               </PopoverContent>
             </Portal>
           </ui.div>

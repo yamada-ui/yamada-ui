@@ -59,6 +59,15 @@ const hiddenStyles: CSSUIObject = {
     _scrollbarThumb: { bg: "transparent" },
     "&::-webkit-scrollbar-thumb": { bg: "transparent" },
   },
+  "@-moz-document url-prefix()": {
+    scrollbarColor: "transparent transparent",
+    _light: {
+      scrollbarColor: "transparent transparent",
+    },
+    _dark: {
+      scrollbarColor: "transparent transparent",
+    },
+  },
 }
 
 /**

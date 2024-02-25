@@ -163,7 +163,7 @@ describe("<FileInput />", () => {
     }
   })
 
-  test("should not not show files in the onChange function if no files are present", () => {
+  test("should not show files in the onChange function if no files are present", () => {
     let value: any = null
     const setValue = (val: any) => {
       value = val

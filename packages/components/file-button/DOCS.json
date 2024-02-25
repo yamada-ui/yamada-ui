@@ -47,6 +47,12 @@
       "required": false,
       "description": "If `true`, the form control will be required."
     },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If true, the button is full rounded. Else, it'll be slightly round."
+    },
     "leftIcon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
       "required": false,

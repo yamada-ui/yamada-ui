@@ -139,6 +139,11 @@
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
     },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
+    },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
@@ -462,6 +467,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+    },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
     },
     "isReadOnly": {
       "type": "boolean",

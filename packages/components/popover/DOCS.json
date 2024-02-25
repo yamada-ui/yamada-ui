@@ -168,6 +168,12 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the button is disabled."
+    },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If true, the button is full rounded."
     }
   },
   "PopoverContent": {

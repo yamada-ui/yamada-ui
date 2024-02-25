@@ -296,7 +296,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
             <Legend
               ref={ref}
               payload={payload.payload}
-              onHeightlight={setHighlightedArea}
+              onHighlight={setHighlightedArea}
             />
           )}
           {...legendProps}

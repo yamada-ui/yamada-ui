@@ -51,8 +51,14 @@ export type ContainerUIProps = Merge<
   Omit<ResponsiveContainerProps, "children">
 >
 export type DotUIProps = Merge<CSSUIProps, Omit<DotProps, "ref">>
-export type XAxisUIProps = Merge<CSSUIProps, XAxisProps>
-export type YAxisUIProps = Merge<CSSUIProps, YAxisProps>
+export type XAxisUIProps = Merge<
+  Merge<CSSUIProps, XAxisProps>,
+  { color?: CSSUIProps["color"] }
+>
+export type YAxisUIProps = Merge<
+  Merge<CSSUIProps, YAxisProps>,
+  { color?: CSSUIProps["color"] }
+>
 export type LegendUIProps = Merge<CSSUIProps, Omit<LegendProps, "ref">>
 export type TooltipUIProps = Merge<
   CSSUIProps,

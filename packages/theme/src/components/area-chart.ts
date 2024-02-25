@@ -5,13 +5,11 @@ export const AreaChart: ComponentMultiStyle = {
     container: {},
     areaChart: {},
     referenceLine: {
-      // strokeWidth: 1, //効かない
       fontSize: "xs",
       fillOpacity: 1,
     },
     grid: {
       strokeWidth: 1,
-      // strokeDasharray:"5 5" //こっちが優先されちゃう
     },
     xAxis: {
       fontSize: "xs",
@@ -20,15 +18,10 @@ export const AreaChart: ComponentMultiStyle = {
       fontSize: "xs",
     },
     area: {},
-    dot: {
-      // fill: "white", //効かない
-      // r: "4", //効かない
-      // strokeWidth: 2, //効かない
-    },
+    dot: {},
     activeDot: {
-      // fill: "white", //こっちが優先される
-      // r: "4", //こっちが優先される
-      // strokeWidth: 2, //こっちが優先される
+      fill: "white",
+      strokeWidth: 2,
     },
     legend: {
       justifyContent: "flex-end",
@@ -67,7 +60,7 @@ export const AreaChart: ComponentMultiStyle = {
   },
 
   variants: {
-    subtl: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       grid: {
         stroke: ["gray.400", "gray.600"],
       },
@@ -86,7 +79,7 @@ export const AreaChart: ComponentMultiStyle = {
         },
       },
     }),
-    solid: {
+    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       grid: {
         stroke: ["black", "white"],
       },
@@ -104,7 +97,7 @@ export const AreaChart: ComponentMultiStyle = {
           bgColor: ["blackAlpha.200", "whiteAlpha.200"],
         },
       },
-    },
+    }),
   },
 
   sizes: {

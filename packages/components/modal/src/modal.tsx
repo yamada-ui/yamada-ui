@@ -1,5 +1,4 @@
 import type {
-  HTMLUIProps,
   ThemeProps,
   CSSUIObject,
   CSSUIProps,
@@ -13,11 +12,8 @@ import {
 } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
 import { FocusLock } from "@yamada-ui/focus-lock"
-import type {
-  HTMLMotionProps,
-  MotionTransitionProperties,
-} from "@yamada-ui/motion"
-import { motion, AnimatePresence } from "@yamada-ui/motion"
+import type { MotionProps, MotionTransitionProperties } from "@yamada-ui/motion"
+import { AnimatePresence, Motion } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
@@ -161,10 +157,9 @@ type ModalOptions = Pick<
 }
 
 export type ModalProps = Omit<
-  HTMLUIProps<"section">,
-  "scrollBehavior" | "animation"
+  MotionProps<"section">,
+  "scrollBehavior" | "animation" | "color" | "transition"
 > &
-  Omit<HTMLMotionProps<"section">, "color" | "transition"> &
   ThemeProps<"Modal"> &
   ModalOptions
 
@@ -314,10 +309,9 @@ export const Modal = forwardRef<ModalProps, "section">(
 )
 
 type ModalContentProps = Omit<
-  HTMLUIProps<"section">,
-  "scrollBehavior" | "animation"
-> &
-  Omit<HTMLMotionProps<"section">, "color" | "transition">
+  MotionProps<"section">,
+  "scrollBehavior" | "animation" | "color" | "transition"
+>
 
 const getModalContentProps = (
   animation: ModalProps["animation"] = "scale",
@@ -352,7 +346,7 @@ const getModalContentProps = (
   }
 }
 
-const ModalContent = forwardRef<ModalContentProps, "section">(
+const ModalContent = forwardRef<ModalContentProps, "section", false>(
   ({ className, children, __css, ...rest }, ref) => {
     const {
       styles,
@@ -385,8 +379,8 @@ const ModalContent = forwardRef<ModalContentProps, "section">(
     }
 
     return (
-      <ui.section
-        as={motion.section}
+      <Motion
+        as="section"
         ref={ref}
         className={cx("ui-modal", className)}
         tabIndex={-1}
@@ -398,7 +392,7 @@ const ModalContent = forwardRef<ModalContentProps, "section">(
           (withCloseButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
-      </ui.section>
+      </Motion>
     )
   },
 )

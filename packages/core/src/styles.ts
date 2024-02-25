@@ -334,6 +334,7 @@ export const standardStyles: Configs = {
     token: "colors",
     transform: transforms.token("colors"),
   },
+  colorInterpolation: true,
   columnCount: true,
   columnFill: true,
   columnGap: {
@@ -932,7 +933,6 @@ export const standardStyles: Configs = {
   azimuth: true,
   baselineShift: true,
   clipRule: true,
-  colorInterpolation: true,
   dominantBaseline: true,
   fill: {
     properties: "fill",
@@ -2461,6 +2461,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
    */
   textColor?: Token<CSS.Property.Color, "colors">
+  /**
+   * The CSS `color-interpolation` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation
+   */
+  colorInterpolation?: Token<CSS.Property.ColorInterpolation>
   /**
    * The CSS `column-count` property.
    *
@@ -4606,12 +4612,6 @@ export type StyleProps = {
    */
   clipRule?: Token<CSS.Property.ClipRule>
   /**
-   * The CSS `color-interpolation` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color-interpolation
-   */
-  colorInterpolation?: Token<CSS.Property.ColorInterpolation>
-  /**
    * The CSS `dominant-baseline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline
@@ -5245,7 +5245,7 @@ export type StyleProps = {
    */
   var?: {
     name: string
-    token: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
+    token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
     value: Token<StringLiteral | number>
   }[]
   /**

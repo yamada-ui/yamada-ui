@@ -89,6 +89,30 @@ export const basic: Story = () => {
   return <AreaChart data={data} series={series} dataKey="name" />
 }
 
+export const variant: Story = () => {
+  return (
+    <VStack>
+      <AreaChart
+        data={data}
+        series={series}
+        dataKey="name"
+        variant="subtl"
+        withLegend
+      />
+      <AreaChart data={data} series={series} dataKey="name" withLegend />
+    </VStack>
+  )
+}
+export const size: Story = () => {
+  return (
+    <VStack>
+      <AreaChart data={data} series={series} dataKey="name" size="sm" />
+      <AreaChart data={data} series={series} dataKey="name" size="md" />
+      <AreaChart data={data} series={series} dataKey="name" size="lg" />
+    </VStack>
+  )
+}
+
 export const custom: Story = () => {
   const [props, setProps] = useState({
     data: data,

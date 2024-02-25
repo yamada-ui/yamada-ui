@@ -9,12 +9,12 @@ export const AreaSplit = ({ offset, id, fillOpacity }: AreaSplitProps) => {
     <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
       <stop
         offset={offset}
-        stopColor="var(--ui-areachart-areasplit-0)"
+        stopColor="var(--ui-areasplit-0)"
         stopOpacity={fillOpacity ?? 0.2}
       />
       <stop
         offset={offset}
-        stopColor="var(--ui-areachart-areasplit-1)"
+        stopColor="var(--ui-areasplit-1)"
         stopOpacity={fillOpacity ?? 0.2}
       />
     </linearGradient>

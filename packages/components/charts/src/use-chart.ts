@@ -15,3 +15,23 @@ export const useChart = ({}: UseChartProps = {}) => {
 }
 
 export type UseChartReturn = ReturnType<typeof useChart>
+
+export type UseLegendProps = {}
+
+export const useLegend = ({}: UseLegendProps = {}) => {
+  const { styles } = useChartContext()
+  return {
+    styles,
+  }
+}
+export type UseLegendReturn = ReturnType<typeof useLegend>
+
+export type UseTooltipProps = {}
+
+export const useTooltip = ({}: UseTooltipProps = {}) => {
+  const { styles } = useChartContext()
+  return {
+    styles,
+  }
+}
+export type UseTooltipReturn = ReturnType<typeof useTooltip>

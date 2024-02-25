@@ -1,7 +1,14 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { createContext, cx, omitObject, splitObject } from "@yamada-ui/utils"
+import {
+  createContext,
+  cx,
+  isNumber,
+  isObject,
+  omitObject,
+  splitObject,
+} from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
@@ -19,55 +26,24 @@ import type {
 import type { AreaChartProps } from "./area-chart"
 import type { AreaGradientProps } from "./area-gradient"
 import type { AreaSplitProps } from "./area-split"
-import type { AreaChartSeries, ReferenceUILineProps } from "./chart.types"
-
-type AreaChartPropGetter = (
-  props?: ComponentPropsWithoutRef<typeof AreaChart>,
-  ref?: React.Ref<any>,
-) => ComponentPropsWithoutRef<typeof AreaChart>
-type AreaPropGetter = (
-  props: Partial<AreaProps> & {
-    item: AreaChartSeries
-    index: number
-  },
-  ref?: React.Ref<any>,
-) => Omit<AreaProps, "ref">
-type ReferenceLinePropGetter = (
-  props: Partial<ReferenceUILineProps> & { index: number },
-  ref?: React.Ref<any>,
-) => Omit<ReferenceLineProps, "ref">
-type ResponsiveContainerPropGetter = (
-  props?: Partial<Omit<ResponsiveContainerProps, "children">>,
-  ref?: React.Ref<any>,
-) => Omit<ResponsiveContainerProps, "children">
-type GridPropGetter = (
-  props?: Partial<CartesianGridProps>,
-  ref?: React.Ref<any>,
-) => CartesianGridProps
-type XAxisPropGetter = (
-  props?: Partial<XAxisProps>,
-  ref?: React.Ref<any>,
-) => XAxisProps
-type YAxisPropGetter = (
-  props?: Partial<YAxisProps>,
-  ref?: React.Ref<any>,
-) => YAxisProps
-type LegendPropGetter = (
-  props?: Partial<LegendProps>,
-  ref?: React.Ref<any>,
-) => Omit<LegendProps, "ref">
-type TooltipPropGetter = (
-  props?: Partial<TooltipProps<any, any>>,
-  ref?: React.Ref<any>,
-) => Omit<TooltipProps<any, any>, "ref">
-type AreaSplitPropGetter = (
-  props?: Partial<AreaSplitProps>,
-  ref?: React.Ref<any>,
-) => AreaSplitProps
-type AreaGradientPropGetter = (
-  props?: Partial<AreaGradientProps>,
-  ref?: React.Ref<any>,
-) => AreaGradientProps
+import type {
+  AreaChartSeries,
+  ChartPropGetter,
+  ReferenceUILineProps,
+  RequiredChartPropGetter,
+} from "./chart.types"
+import {
+  areaChartProperties,
+  referenceLineProperties,
+  containerProperties,
+  gridProperties,
+  xAxisProperties,
+  yAxisProperties,
+  legendProperties,
+  tooltipProperties,
+  dotProperties,
+  areaProperties,
+} from "./chart.types"
 
 type AreaChartContext = {}
 
@@ -99,7 +75,7 @@ export const useAreaChart = ({
   tickLine = "y",
   gridAxis = "x",
   orientation = "horizontal",
-  withGradient,
+  withGradient: withGradientProp,
   withXAxis = true,
   withYAxis = true,
   dataKey,
@@ -117,43 +93,41 @@ export const useAreaChart = ({
   valueFormatter,
   styles,
 }: UseAreaChartProps) => {
-  const baseId = useId()
-  const splitId = `${baseId}-split`
+  const uuid = useId()
+  const splitId = `${uuid}-split`
   const withXTickLine =
     gridAxis !== "none" && (tickLine === "x" || tickLine === "xy")
   const withYTickLine =
     gridAxis !== "none" && (tickLine === "y" || tickLine === "xy")
   const stacked = type === "stacked" || type === "percent"
-  const _withGradient =
-    typeof withGradient === "boolean" ? withGradient : type === "default"
+  const withGradient =
+    typeof withGradientProp === "boolean"
+      ? withGradientProp
+      : type === "default"
 
-  //todo: legendでホバーした奴をハイライトするやつ
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
 
   const { theme } = useTheme()
 
-  const getAreaChartProps: AreaChartPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(areaChartProps, [
-        "layout",
-        "syncId",
-        "syncMethod",
-        "width",
-        "height",
-        "data",
-        "margin",
-        "stackOffset",
-        "onClick",
-        "onMouseEnter",
-        "onMouseMove",
-        "onMouseLeave",
-      ])
-      const className = getCSS(uiProps)(theme)
+  //todo: classnameだけで変更可能かは要検証　できるならそっちの方がよい
+  //?...propでとったやつ渡す必要ないのでは？
+  const getAreaChartProps: ChartPropGetter<
+    "div",
+    ComponentPropsWithoutRef<typeof AreaChart>,
+    ComponentPropsWithoutRef<typeof AreaChart>
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => {
+      const [reChartsProps, uiProps] = splitObject(
+        areaChartProps,
+        areaChartProperties,
+      )
+      const styleClassName = getCSS(styles.areaChart)(theme)
+      const PropClassName = getCSS(uiProps)(theme)
 
       return {
         ref,
-        className: cx(props.className, className),
+        className: cx(className, PropClassName, styleClassName),
         data,
         stackOffset: type === "percent" ? "expand" : undefined,
         layout: orientation,
@@ -161,72 +135,64 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [areaChartProps, data, orientation, theme, type],
+    [areaChartProps, data, orientation, styles.areaChart, theme, type],
   )
 
-  const getReferenceLineProps: ReferenceLinePropGetter = useCallback(
-    (props, ref = null) => {
-      const index = props.index
+  const getReferenceLineProps: RequiredChartPropGetter<
+    "div",
+    {
+      line: ReferenceUILineProps
+      index: number
+    },
+    Omit<ReferenceLineProps, "ref">
+  > = useCallback(
+    ({ line, index, className, ...props }, ref = null) => {
       const [reChartsProps, uiProps] = splitObject(
-        omitObject(props, ["index"]),
-        [
-          "xAxisId",
-          "yAxisId",
-          "x",
-          "y",
-          "ifOverflow",
-          "viewBox",
-          "xAxis",
-          "yAxis",
-          "label",
-          "isFront",
-          "strokeWidth",
-          "segment",
-        ],
+        line,
+        referenceLineProperties,
       )
-      const className = getCSS(uiProps as CSSUIObject)(theme)
-      const color = `var(--ui-areachart-referenceline-${index})`
+      const stylesClassName = getCSS(styles.referenceLine)(theme)
+      const PropClassName = getCSS(uiProps as CSSUIObject)(theme)
+      const color = `var(--ui-referenceline-${index})`
+
+      const label: ReferenceLineProps["label"] = {
+        value: reChartsProps.label as string,
+        fill: color,
+        position: "insideBottomLeft",
+        ...(isObject(reChartsProps.label) ? reChartsProps.label : {}),
+      }
 
       return {
         ref,
-        className: cx(props.className, className),
+        className: cx(className, PropClassName, stylesClassName),
         stroke: color,
-        strokeWidth: 1,
-        label: {
-          value: reChartsProps.label as string,
-          fill: color,
-          fontSize: 12,
-          position: "insideBottomLeft",
-          ...(typeof reChartsProps.label === "object"
-            ? reChartsProps.label
-            : {}),
-        },
+        label,
         ...omitObject(reChartsProps, ["label"]),
       }
     },
-    [theme],
+    [styles, theme],
   )
 
-  const getContainerProps: ResponsiveContainerPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(containerProps, [
-        "aspect",
-        "width",
-        "height",
-        "minWidth",
-        "minHeight",
-        "debounce",
-        "onResize",
-      ])
+  const getContainerProps: ChartPropGetter<
+    "div",
+    Partial<Omit<ResponsiveContainerProps, "children">>,
+    Omit<ResponsiveContainerProps, "children">
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => {
+      const [reChartsProps, uiProps] = splitObject(
+        containerProps,
+        containerProperties,
+      )
 
-      let className = getCSS(uiProps)(theme)
-      if (typeof props.className === "number")
-        className = cx(props.className.toString(), className)
-      else className = cx(props.className, className)
+      const PropClassName = getCSS(uiProps)(theme)
+      let containerClassName: string
+      if (isNumber(className))
+        containerClassName = cx(className.toString(), PropClassName)
+      else containerClassName = cx(className, className)
 
       return {
         ref,
-        className,
+        containerClassName,
         ...props,
         ...reChartsProps,
       }
@@ -234,28 +200,19 @@ export const useAreaChart = ({
     [containerProps, theme],
   )
 
-  const getGridProps: GridPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(gridProps, [
-        "x",
-        "y",
-        "width",
-        "height",
-        "horizontal",
-        "vertical",
-        "horizontalPoints",
-        "horizontalCoordinatesGenerator",
-        "verticalPoints",
-        "verticalCoordinatesGenerator",
-        "fill",
-        "fillOpacity",
-        "strokeDasharray",
-      ])
-      const className = getCSS(uiProps as CSSUIObject)(theme)
+  const getGridProps: ChartPropGetter<
+    "div",
+    Partial<CartesianGridProps>,
+    CartesianGridProps
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => {
+      const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
+      const styleClassName = getCSS(styles.grid)(theme)
+      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
-        className: cx(props.className, className),
+        className: cx(className, propClassName, styleClassName),
         strokeDasharray: strokeDasharray,
         vertical: gridAxis === "y" || gridAxis === "xy",
         horizontal: gridAxis === "x" || gridAxis === "xy",
@@ -263,60 +220,25 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [gridProps, theme, strokeDasharray, gridAxis],
+    [gridProps, styles.grid, theme, strokeDasharray, gridAxis],
   )
 
-  const getXAxisProps: XAxisPropGetter = useCallback(
-    (props = {}) => {
-      const [reChartsProps, uiProps] = splitObject(xAxisProps, [
-        "hide",
-        "dataKey",
-        "xAxisId",
-        "width",
-        "height",
-        "orientation",
-        "type",
-        "allowDecimals",
-        "allowDataOverflow",
-        "allowDuplicatedCategory",
-        "angle",
-        "tickCount",
-        "domain",
-        "includeHidden",
-        "interval",
-        "padding",
-        "minTickGap",
-        "axisLine",
-        "tickLine",
-        "tickSize",
-        "tickFormatter",
-        "ticks",
-        "tick",
-        "mirror",
-        "reversed",
-        "label",
-        "scale",
-        "unit",
-        "name",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-        "tickMargin",
-      ])
-      const className = getCSS(uiProps as CSSUIObject)(theme)
+  const getXAxisProps: ChartPropGetter<
+    "div",
+    Partial<XAxisProps>,
+    XAxisProps
+  > = useCallback(
+    ({ className, ...props } = {}) => {
+      const [reChartsProps, uiProps] = splitObject(xAxisProps, xAxisProperties)
+      const styleClassName = getCSS(styles.xAxis)(theme)
+      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
-        className: cx(props.className, className),
+        className: cx(className, propClassName, styleClassName),
         hide: !withXAxis,
         ...(orientation === "vertical" ? { type: "number" } : { dataKey }),
         tick: {
           transform: "translate(0, 10)",
-          fontSize: 12,
           fill: "currentColor",
         },
         stroke: "",
@@ -327,59 +249,30 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [dataKey, orientation, theme, withXAxis, withXTickLine, xAxisProps],
+    [
+      dataKey,
+      orientation,
+      styles.xAxis,
+      theme,
+      withXAxis,
+      withXTickLine,
+      xAxisProps,
+    ],
   )
 
-  const getYAxisProps: YAxisPropGetter = useCallback(
-    (props = {}) => {
-      const [reChartsProps, uiProps] = splitObject(yAxisProps, [
-        "hide",
-        "dataKey",
-        "yAxisId",
-        "width",
-        "height",
-        "orientation",
-        "type",
-        "tickCount",
-        "domain",
-        "includeHidden",
-        "interval",
-        "padding",
-        "minTickGap",
-        "allowDecimals",
-        "allowDataOverflow",
-        "allowDuplicatedCategory",
-        "axisLine",
-        "tickLine",
-        "tickSize",
-        "tickFormatter",
-        "ticks",
-        "tick",
-        "mirror",
-        "reversed",
-        "label",
-        "scale",
-        "unit",
-        "name",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-        "tickMargin",
-      ])
+  const getYAxisProps: ChartPropGetter<
+    "div",
+    Partial<YAxisProps>,
+    YAxisProps
+  > = useCallback(
+    ({ className, ...props } = {}) => {
+      const [reChartsProps, uiProps] = splitObject(yAxisProps, yAxisProperties)
 
-      //todo: useCSSで挿入した時の順番が担保されるのであれば2つ作った方がきれい
-      const className = getCSS({
-        ...styles.yAxis,
-        ...(uiProps as CSSUIObject),
-      })(theme)
+      const styleClassName = getCSS(styles.yAxis)(theme)
+      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
-        className: cx(props.className, className),
+        className: cx(className, propClassName, styleClassName),
         hide: !withYAxis,
         axisLine: false,
         ...(orientation === "vertical"
@@ -388,7 +281,6 @@ export const useAreaChart = ({
         tickLine: withYTickLine ? { stroke: "currentColor" } : false,
         tick: {
           transform: "translate(-10, 0)",
-          fontSize: 12,
           fill: "currentColor",
         },
         allowDecimals: true,
@@ -412,38 +304,18 @@ export const useAreaChart = ({
     ],
   )
 
-  const getLegendProps: LegendPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const [reChartProps, uiProps] = splitObject(legendProps, [
-        "width",
-        "height",
-        "layout",
-        "align",
-        "verticalAlign",
-        "iconSize",
-        "iconType",
-        "payload",
-        "chartWidth",
-        "chartHeight",
-        "margin",
-        "content",
-        "formatter",
-        "wrapperStyle",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-      ])
-
-      const className = getCSS(uiProps as CSSUIObject)(theme)
+  const getLegendProps: ChartPropGetter<
+    "div",
+    Partial<LegendProps>,
+    Omit<LegendProps, "ref">
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => {
+      const [reChartProps, uiProps] = splitObject(legendProps, legendProperties)
+      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
 
       return {
         ref,
-        className: cx(props.className, className),
+        className: cx(className, propClassName),
         verticalAlign: "top",
         ...props,
         ...reChartProps,
@@ -452,37 +324,22 @@ export const useAreaChart = ({
     [legendProps, theme],
   )
 
-  const getTooltipProps: TooltipPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(tooltipProps, [
-        "offset",
-        "filterNull",
-        "itemStyle",
-        "wrapperStyle",
-        "contentStyle",
-        "labelStyle",
-        "cursor",
-        "viewBox",
-        "allowEscapeViewBox",
-        "active",
-        "position",
-        "coordinate",
-        "payload",
-        "label",
-        "content",
-        "formatter",
-        "labelFormatter",
-        "itemSorter",
-        "isAnimationActive",
-        "animationDuration",
-        "animationEasing",
-      ])
-      const className = getCSS(uiProps)(theme)
+  const getTooltipProps: ChartPropGetter<
+    "div",
+    Partial<TooltipProps<any, any>>,
+    Omit<TooltipProps<any, any>, "ref">
+  > = useCallback(
+    ({ labelClassName, wrapperClassName, ...props } = {}, ref = null) => {
+      const [reChartsProps, uiProps] = splitObject(
+        tooltipProps,
+        tooltipProperties,
+      )
+      const propClassName = getCSS(uiProps)(theme)
 
       return {
         ref,
-        labelClassName: cx(props.labelClassName, className),
-        wrapperClassName: cx(props.wrapperClassName, className),
+        labelClassName: cx(labelClassName, propClassName),
+        wrapperClassName: cx(wrapperClassName, propClassName),
         animationDuration: tooltipAnimationDuration,
         isAnimationActive: (tooltipAnimationDuration || 0) > 0,
         ...props,
@@ -492,7 +349,11 @@ export const useAreaChart = ({
     [theme, tooltipAnimationDuration, tooltipProps],
   )
 
-  const getAreaSplitProps: AreaSplitPropGetter = useCallback(
+  const getAreaSplitProps: ChartPropGetter<
+    "div",
+    Partial<AreaSplitProps>,
+    AreaSplitProps
+  > = useCallback(
     (props = {}) => {
       const getSplitOffset = ({ dataKey }: { dataKey: string }) => {
         const dataMax = Math.max(...data.map((item) => item[dataKey]))
@@ -523,91 +384,56 @@ export const useAreaChart = ({
     [data, fillOpacity, series, splitId, splitOffset],
   )
 
-  const getAreaProps: AreaPropGetter = useCallback(
-    (props, ref = null) => {
-      const item = props.item
-      const index = props.index
-      const id = `${baseId}-${item.color}`
-      const color = `var(--ui-areachart-area-${index})`
+  const getAreaProps: RequiredChartPropGetter<
+    "div",
+    {
+      item: AreaChartSeries
+      index: number
+    },
+    Omit<AreaProps, "ref">
+  > = useCallback(
+    ({ item, index, className, ...props }, ref = null) => {
+      const id = `${uuid}-${item.color}`
+      const color = `var(--ui-area-${index})`
       const dimmed = shouldHighlight && highlightedArea !== item.dataKey
-      const [areaReChartsProps, areaUIProps] = splitObject(item, [
-        "type",
-        "dataKey",
-        "xAxisId",
-        "yAxisId",
-        "legendType",
-        "dot",
-        "activeDot",
-        "label",
-        "stroke",
-        "strokeWidth",
-        "layout",
-        "baseLine",
-        "points",
-        "stackId",
-        "connectNulls",
-        "unit",
-        "name",
-        "isAnimationActive",
-        "animationBegin",
-        "animationDuration",
-        "animationEasing",
-        "id",
-        "onAnimationStart",
-        "onAnimationEnd",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-      ])
+      const [areaReChartsProps, areaUIProps] = splitObject(item, areaProperties)
+
+      const areaStyleClassName = getCSS(styles.area)(theme)
       const areaClassName = getCSS(areaUIProps as CSSUIObject)(theme)
 
-      const dotParams = [
-        "cx",
-        "cy",
-        "r",
-        "onClick",
-        "onMouseDown",
-        "onMouseUp",
-        "onMouseMove",
-        "onMouseOver",
-        "onMouseOut",
-        "onMouseEnter",
-        "onMouseLeave",
-      ]
       const [activeDotReChartsProps, activeDotUIProps] = splitObject<
         Dict,
         string
-      >(activeDotProps, dotParams)
+      >(activeDotProps, dotProperties)
+      const activeDotStyleClassName = getCSS(styles.activeDot)(theme)
       const activeDotClassName = getCSS(activeDotUIProps)(theme)
 
       const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
         dotProps,
-        dotParams,
+        dotProperties,
       )
+      const dotStyleClassName = getCSS(styles.dot)(theme)
       const dotClassName = getCSS(dotUIProps)(theme)
 
       let activeDot: DotProps | boolean
-      if (withActiveDots)
+      if (withActiveDots) {
         activeDot = {
-          className: activeDotClassName,
-          fill: "#fff",
+          className: cx(className, activeDotClassName, activeDotStyleClassName),
+          fill: "white",
           stroke: color,
           strokeWidth: 2,
           r: 4,
           ...activeDotReChartsProps,
           ...(areaReChartsProps["activeDot"] as DotProps),
         }
-      else activeDot = false
+      } else {
+        activeDot = false
+      }
 
       let dot: DotProps | boolean
-      if (withDots)
+      if (withDots) {
         dot = {
-          className: dotClassName,
+          className: cx(className, dotClassName, dotStyleClassName),
           fill: color,
           fillOpacity: dimmed ? 0 : 1,
           strokeWidth: 2,
@@ -615,11 +441,13 @@ export const useAreaChart = ({
           ...dotReChartsProps,
           ...(areaReChartsProps["dot"] as DotProps),
         }
-      else dot = false
+      } else {
+        dot = false
+      }
 
       return {
         ref,
-        className: cx(props.className, areaClassName),
+        className: cx(className, areaClassName, areaStyleClassName),
         id,
         activeDot,
         dot,
@@ -627,22 +455,29 @@ export const useAreaChart = ({
         type: curveType,
         dataKey: item.dataKey,
         fill: type === "split" ? `url(#${splitId})` : `url(#${id})`,
-        strokeWidth: strokeWidth,
+        strokeWidth,
         stroke: color,
         isAnimationActive: false,
-        connectNulls: connectNulls,
+        connectNulls,
         stackId: stacked ? "stack" : undefined,
         fillOpacity: dimmed ? 0 : 1,
         strokeOpacity: dimmed ? 0.5 : 1,
         strokeDasharray: item.strokeDasharray,
-        ...props,
-        ...omitObject(areaReChartsProps, ["dataKey", "dot", "activeDot"]),
+        ...omitObject(areaReChartsProps, [
+          "dataKey",
+          "dot",
+          "activeDot",
+          "color",
+        ]),
       }
     },
     [
-      baseId,
+      uuid,
       shouldHighlight,
       highlightedArea,
+      styles.area,
+      styles.activeDot,
+      styles.dot,
       theme,
       activeDotProps,
       dotProps,
@@ -657,27 +492,31 @@ export const useAreaChart = ({
     ],
   )
 
-  const getAreaGradientProps: AreaGradientPropGetter = useCallback(
+  const getAreaGradientProps: ChartPropGetter<
+    "div",
+    Partial<AreaGradientProps>,
+    AreaGradientProps
+  > = useCallback(
     (props = {}) => {
       return {
-        withGradient: _withGradient,
+        withGradient: withGradient,
         fillOpacity,
         ...props,
       }
     },
-    [_withGradient, fillOpacity],
+    [withGradient, fillOpacity],
   )
 
   const getCSSvariables = useCallback(() => {
     const areaColors: CSSUIProps["var"] = series.map((item, index) => ({
-      name: `areachart-area-${index}`,
+      name: `area-${index}`,
       token: "colors",
       value: item.color ?? "gray",
     }))
 
     const areaSplitColors: CSSUIProps["var"] = splitColors.map(
       (color, index) => ({
-        name: `areachart-areasplit-${index}`,
+        name: `areasplit-${index}`,
         token: "colors",
         value: color,
       }),
@@ -685,7 +524,7 @@ export const useAreaChart = ({
 
     const referenceLineColors: CSSUIProps["var"] = referenceLines
       ? referenceLines.map((line, index) => ({
-          name: `areachart-referenceline-${index}`,
+          name: `referenceline-${index}`,
           token: "colors",
           value: line.color ?? "gray",
         }))
@@ -693,10 +532,6 @@ export const useAreaChart = ({
 
     return [...areaColors, ...areaSplitColors, ...referenceLineColors]
   }, [referenceLines, series, splitColors])
-
-  const valueToPercent = (value: number) => {
-    return `${(value * 100).toFixed(0)}%`
-  }
 
   return {
     getAreaChartProps,
@@ -716,3 +551,7 @@ export const useAreaChart = ({
 }
 
 export type UseAreaChartReturn = ReturnType<typeof useAreaChart>
+
+const valueToPercent = (value: number) => {
+  return `${(value * 100).toFixed(0)}%`
+}

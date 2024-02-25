@@ -4,19 +4,19 @@ import { useLegend } from "./use-chart"
 
 export type LegendProps = {
   payload?: Dict[]
-  onHeightlight: (area: string | null) => void
+  onHighlight: (area: string | null) => void
 }
 
 export const Legend = forwardRef<LegendProps, "div">((props, ref) => {
-  const { payload, onHeightlight } = props
+  const { payload, onHighlight } = props
 
   const { styles } = useLegend()
 
   const items = payload?.map((entry, index) => (
     <ui.div
       key={`legend-${index}`}
-      onMouseEnter={() => onHeightlight(entry.dataKey)}
-      onMouseLeave={() => onHeightlight(null)}
+      onMouseEnter={() => onHighlight(entry.dataKey)}
+      onMouseLeave={() => onHighlight(null)}
       __css={styles.legendItem}
     >
       <ui.div rounded="9999px" background={entry.color} boxSize={3} />

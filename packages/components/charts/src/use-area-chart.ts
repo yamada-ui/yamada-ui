@@ -110,8 +110,6 @@ export const useAreaChart = ({
 
   const { theme } = useTheme()
 
-  //todo: classnameだけで変更可能かは要検証　できるならそっちの方がよい
-  //?...propでとったやつ渡す必要ないのでは？
   const getAreaChartProps: ChartPropGetter<
     "div",
     ComponentPropsWithoutRef<typeof AreaChart>,
@@ -123,11 +121,11 @@ export const useAreaChart = ({
         areaChartProperties,
       )
       const styleClassName = getCSS(styles.areaChart)(theme)
-      const PropClassName = getCSS(uiProps)(theme)
+      const propClassName = getCSS(uiProps)(theme)
 
       return {
         ref,
-        className: cx(className, PropClassName, styleClassName),
+        className: cx(className, propClassName, styleClassName),
         data,
         stackOffset: type === "percent" ? "expand" : undefined,
         layout: orientation,
@@ -151,8 +149,8 @@ export const useAreaChart = ({
         line,
         referenceLineProperties,
       )
-      const stylesClassName = getCSS(styles.referenceLine)(theme)
-      const PropClassName = getCSS(uiProps as CSSUIObject)(theme)
+      const styleClassName = getCSS(styles.referenceLine)(theme)
+      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
       const color = `var(--ui-referenceline-${index})`
 
       const label: ReferenceLineProps["label"] = {
@@ -164,9 +162,10 @@ export const useAreaChart = ({
 
       return {
         ref,
-        className: cx(className, PropClassName, stylesClassName),
+        className: cx(className, propClassName, styleClassName),
         stroke: color,
         label,
+        ...(props as ReferenceLineProps),
         ...omitObject(reChartsProps, ["label"]),
       }
     },
@@ -246,7 +245,7 @@ export const useAreaChart = ({
         tickLine: withXTickLine ? { stroke: "currentColor" } : false,
         minTickGap: 5,
         ...props,
-        ...reChartsProps,
+        ...(reChartsProps as XAxisProps),
       }
     },
     [
@@ -287,7 +286,7 @@ export const useAreaChart = ({
         unit: unit,
         tickFormatter: type === "percent" ? valueToPercent : valueFormatter,
         ...props,
-        ...reChartsProps,
+        ...(reChartsProps as YAxisProps),
       }
     },
     [
@@ -419,9 +418,7 @@ export const useAreaChart = ({
       if (withActiveDots) {
         activeDot = {
           className: cx(className, activeDotClassName, activeDotStyleClassName),
-          fill: "white",
           stroke: color,
-          strokeWidth: 2,
           r: 4,
           ...activeDotReChartsProps,
           ...(areaReChartsProps["activeDot"] as DotProps),
@@ -463,6 +460,7 @@ export const useAreaChart = ({
         fillOpacity: dimmed ? 0 : 1,
         strokeOpacity: dimmed ? 0.5 : 1,
         strokeDasharray: item.strokeDasharray,
+        ...(props as Omit<AreaProps, "dataKey">),
         ...omitObject(areaReChartsProps, [
           "dataKey",
           "dot",

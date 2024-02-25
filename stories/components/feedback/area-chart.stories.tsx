@@ -96,7 +96,7 @@ export const variant: Story = () => {
         data={data}
         series={series}
         dataKey="name"
-        variant="subtl"
+        variant="subtle"
         withLegend
       />
       <AreaChart data={data} series={series} dataKey="name" withLegend />
@@ -577,7 +577,7 @@ export const axisProps: Story = () => {
         tickMargin: 15,
         orientation: "top",
         padding: { left: 30, right: 30 },
-        color: "red.500",
+        color: ["red.500", "red.500"],
       }}
     />
   )

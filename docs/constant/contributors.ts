@@ -42,6 +42,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Evande1",
   },
   {
+    id: 41576384,
+    name: "zvolcsey",
+    icon: "https://avatars.githubusercontent.com/u/41576384?v=4",
+    url: "https://github.com/zvolcsey",
+  },
+  {
     id: 105341123,
     name: "matsu3m",
     icon: "https://avatars.githubusercontent.com/u/105341123?v=4",

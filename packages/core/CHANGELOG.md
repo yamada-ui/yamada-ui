@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 1.4.1
+
+### Patch Changes
+
+- [#818](https://github.com/hirotomoyamada/yamada-ui/pull/818) [`01a717c`](https://github.com/hirotomoyamada/yamada-ui/commit/01a717c877f24bd6052e7a51b5145efec2d29657) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Make the var token of `StyleProps` optional.
+
+- [#764](https://github.com/hirotomoyamada/yamada-ui/pull/764) [`f63c0f6`](https://github.com/hirotomoyamada/yamada-ui/commit/f63c0f62a9664e3b5bd5afd2ca0702cba32bff00) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `getCSS` function.
+
 ## 1.4.0
 
 ### Minor Changes

@@ -45,7 +45,7 @@ const getIssues = async () => {
   let issues: Issue[] = []
   let page = 1
   let count = 0
-  const perPage = 10
+  const perPage = 100
 
   do {
     const { data } = await octokit.issues.listForRepo({

@@ -26,7 +26,7 @@
     "format:check": "prettier --check packages/**/**/src stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",
     "typecheck": "tsc --noEmit",
-    "test": "jest",
+    "test": "vitest",
     "test:coverage": "jest --coverage --silent && npx http-server ./coverage/lcov-report",
     "test:ci": "jest --coverage --silent --testLocationInResults --ci --json --outputFile=report.json",
     "quality": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",

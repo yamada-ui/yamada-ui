@@ -926,6 +926,8 @@ const RangeSliderThumb = forwardRef<
 
   const css: CSSUIObject = { ...styles.thumb }
 
+  const { children: propChildren } = thumbProps ?? {}
+
   return (
     <ui.div
       className={cx("ui-slider__thumb", className)}
@@ -942,7 +944,7 @@ const RangeSliderThumb = forwardRef<
       )}
     >
       <ui.input {...getInputProps({ ...inputProps, index }, ref)} />
-      {children}
+      {children ?? propChildren}
     </ui.div>
   )
 })

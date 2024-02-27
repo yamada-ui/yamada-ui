@@ -29,6 +29,7 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage --silent --run && vite preview --config vite.config.lcov-report.mts",
+    "test:ui": "vitest --coverage --watch --ui",
     "test:ci": "jest --coverage --silent --testLocationInResults --ci --json --outputFile=report.json",
     "quality": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
     "gen:css": "tsx scripts/generate-css",

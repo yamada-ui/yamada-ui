@@ -93,7 +93,7 @@ cd yamada-ui
 >
 > CIの設定やPrettierなどの小さな変更を行った場合は、`pnpm changeset add --empty`を実行して、空のchangesetファイルを生成し、変更を文書化することができます。
 
-5. 次に、[コミット規約](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention)に従ってコミットします。
+5. 次に、[コミット規約](#コミット規約)に従ってコミットします。
 
    - `変更の確認`: コマンドの`pnpm storybook`を実行すると、Storybookが起動します。Storybookのソースは、`./stories`です。
    - `新しいコンポーネントの作成`: コマンドの`pnpm gen:component`を実行すると、テンプレートからコンポーネントを作成し、依存関係もインストールします。

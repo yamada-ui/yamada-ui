@@ -284,8 +284,9 @@ const SearchModal: FC<SearchModalProps> = memo(
                     transitionDuration="normal"
                     _focus={{ outline: "none" }}
                     _focusVisible={{ boxShadow: "outline" }}
-                    _selected={{ bg: ["blackAlpha.100", "whiteAlpha.100"] }}
-                    _active={{ bg: ["blackAlpha.200", "whiteAlpha.200"] }}
+                    _hover={{ boxShadow: "outline" }}
+                    _selected={{ boxShadow: "outline" }}
+                    _active={{}}
                     onClick={onClose}
                     onMouseEnter={() => {
                       eventRef.current = "mouse"

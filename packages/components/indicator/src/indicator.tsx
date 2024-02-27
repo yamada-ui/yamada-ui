@@ -251,8 +251,8 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
               className="ui-indicator__icon__ping"
               __css={{
                 position: "absolute",
-                boxSize: "full",
-                rounded: "full",
+                boxSize: "100%",
+                rounded: "100%",
                 opacity: 0.75,
                 zIndex: -1,
                 bg: pingColor,

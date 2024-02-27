@@ -49,7 +49,7 @@ export const ResizableItem = forwardRef<ResizableItemProps, "div">(
       ...rest,
     })
 
-    const css: CSSUIObject = { boxSize: "full", ...styles.item }
+    const css: CSSUIObject = { boxSize: "100%", ...styles.item }
 
     return (
       <UIPanel

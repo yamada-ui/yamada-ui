@@ -93,6 +93,7 @@ const addHelpWantedLabel = async (issues: Issue[]) => {
                 "wontfix",
                 "duplicate",
                 "confirm",
+                "Challengers wanted",
               ].includes(label.name ?? ""),
           )
         )

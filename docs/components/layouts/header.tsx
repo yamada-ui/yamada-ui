@@ -128,7 +128,7 @@ export const Header = memo(
               bg={
                 isScroll
                   ? ["whiteAlpha.600", "blackAlpha.500"]
-                  : ["whiteAlpha.900", "blackAlpha.600"]
+                  : ["white", "black"]
               }
               backdropFilter="auto"
               backdropSaturate="180%"

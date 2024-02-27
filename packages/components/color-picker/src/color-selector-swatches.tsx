@@ -1,5 +1,5 @@
-import type { CSSUIObject, HTMLUIProps, Token } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, Token } from "@yamada-ui/core"
 import { cx, replaceObject } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import type { ColorSwatchProps } from "./color-swatch"

@@ -12,7 +12,7 @@ import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 import { toCamelCase } from "utils/assertion"
 import { omitObject } from "utils/object"
-// import { wait } from "utils/assertion"
+// import { wait } from "utils/async"
 
 config()
 

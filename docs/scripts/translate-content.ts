@@ -6,7 +6,7 @@ import { program } from "commander"
 import type { ChatCompletionMessageParam } from "openai/resources"
 import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
-import { wait } from "utils/assertion"
+import { wait } from "utils/async"
 
 const LOCALE_MAP = {
   ja: "Japanese",

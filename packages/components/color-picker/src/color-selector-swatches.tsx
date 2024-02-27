@@ -1,5 +1,5 @@
-import { forwardRef, ui } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps, Token } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, replaceObject } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import type { ColorSwatchProps } from "./color-swatch"
@@ -83,7 +83,7 @@ export const ColorSelectorSwatches = forwardRef<
               as="button"
               key={color}
               __css={{
-                boxSize: "full",
+                boxSize: "100%",
                 pointerEvents: readOnly ? "none" : undefined,
                 ...styles.swatch,
               }}

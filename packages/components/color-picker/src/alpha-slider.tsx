@@ -169,8 +169,8 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
           className="ui-alpha-slider__track"
           __css={{
             position: "relative",
-            w: "full",
-            h: "full",
+            w: "100%",
+            h: "100%",
             ...styles.track,
           }}
           {...getTrackProps(trackProps)}

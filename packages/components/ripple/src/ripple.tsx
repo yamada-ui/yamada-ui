@@ -31,7 +31,7 @@ export const Ripple: FC<RippleProps> = ({
   if (isDisabled) return null
 
   const css: CSSUIObject = {
-    rounded: "full",
+    rounded: "9999px",
     zIndex: "kurillin",
   }
 

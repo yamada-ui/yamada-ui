@@ -64,7 +64,7 @@ export const LinkBox = forwardRef<LinkBoxProps, "div">((props, ref) => {
   const css: CSSUIObject = {
     "a[href]:not(.ui-link-box__overlay), abbr[title]": {
       position: "relative",
-      zIndex: "yamcha",
+      zIndex: "1",
     },
     ...styles,
   }

@@ -130,8 +130,8 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
             className="ui-saturation-slider__track"
             __css={{
               position: "relative",
-              w: "full",
-              h: "full",
+              w: "100%",
+              h: "100%",
               ...styles.track,
             }}
             {...getTrackProps(trackProps)}

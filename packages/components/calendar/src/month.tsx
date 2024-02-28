@@ -153,7 +153,7 @@ export const Month: FC<MonthProps> = ({
                           <ui.div
                             className="ui-calendar__month__weekday"
                             __css={{
-                              w: "full",
+                              w: "100%",
                               display: "flex",
                               ...styles.weekday,
                             }}

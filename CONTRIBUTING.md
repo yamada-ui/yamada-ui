@@ -106,7 +106,7 @@ the following categories:
 > your changes.
 
 5. Next, commit your changes following the
-   [commit convention](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention).
+   [commit convention](#commit-convention).
 
    - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
    - `Creating a new component`: When you run the pnpm `gen:component` command, a component is created from a template and dependencies are installed.

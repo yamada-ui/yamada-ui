@@ -1,10 +1,10 @@
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useMultiComponentStyle,
 } from "@yamada-ui/core"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
 const defaultOverlays = (
@@ -123,7 +123,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
       __css={css}
       {...rest}
     >
-      <ui.div {...(isRounded ? { rounded: "100%" } : {})}>
+      <ui.div {...(isRounded ? { rounded: "9999px" } : {})}>
         {overlays.map((props, index) => (
           <ui.div
             key={index}

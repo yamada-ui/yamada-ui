@@ -1,0 +1,9 @@
+import { a11y, render } from "@yamada-ui/test"
+import { {{upperCase packageName}} } from "../src"
+
+describe("<{{upperCase packageName}} />", () => {
+  test("{{upperCase packageName}} renders correctly", async () => {
+    const { container } = render(<{{upperCase packageName}} />)
+    await a11y(container)
+  })
+})

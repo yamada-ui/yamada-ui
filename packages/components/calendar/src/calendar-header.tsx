@@ -58,7 +58,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   const css: CSSUIObject = {
     display: "flex",
     alignItems: "center",
-    w: "full",
+    w: "100%",
     ...styles.header,
   }
   const { icon: iconElOrProps, ...computedLabelProps } = labelProps ?? {}

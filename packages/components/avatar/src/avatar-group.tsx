@@ -31,8 +31,8 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
     max,
     borderColor,
     gap = "-sm",
-    borderRadius = "full",
-    rounded = "full",
+    borderRadius = "9999px",
+    rounded = "9999px",
     children,
     ...rest
   } = omitThemeProps(props)

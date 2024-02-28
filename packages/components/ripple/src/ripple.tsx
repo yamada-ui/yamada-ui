@@ -32,7 +32,7 @@ export const Ripple: FC<RippleProps> = ({
 
   const css: CSSUIObject = {
     rounded: "9999px",
-    zIndex: "kurillin",
+    zIndex: "9",
   }
 
   return (

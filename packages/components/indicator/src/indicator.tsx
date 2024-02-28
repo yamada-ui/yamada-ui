@@ -252,7 +252,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
               __css={{
                 position: "absolute",
                 boxSize: "100%",
-                rounded: "100%",
+                rounded: "9999px",
                 opacity: 0.75,
                 zIndex: -1,
                 bg: pingColor,

@@ -7,7 +7,7 @@ import type { AxeMatchers } from "vitest-axe/matchers"
 import { render } from "./render"
 
 declare module "vitest" {
-  export interface Assertion<T = any> extends AxeMatchers {}
+  export interface Assertion extends AxeMatchers {}
   export interface AsymmetricMatchersContaining extends AxeMatchers {}
 }
 

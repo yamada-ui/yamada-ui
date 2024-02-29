@@ -83,7 +83,7 @@ describe("<ScrollArea />", () => {
   })
 
   test("onScrollPositionChange works correctly", () => {
-    const mockScrollPositionChange = jest.fn()
+    const mockScrollPositionChange = vi.fn()
 
     const { getByTestId } = render(
       <ScrollArea

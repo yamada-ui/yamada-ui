@@ -55,7 +55,7 @@ describe("<Reorder />", () => {
   })
 
   test("warns about duplicate", () => {
-    const warnSpy = jest.spyOn(global.console, "warn")
+    const warnSpy = vi.spyOn(global.console, "warn")
 
     render(
       <Reorder data-testid="Reorder" orientation="vertical">

@@ -30,7 +30,7 @@ describe("<FileButton/ >", () => {
   })
 
   test("should call onClick", async () => {
-    const onClickMock = jest.fn()
+    const onClickMock = vi.fn()
     render(<FileButton onClick={onClickMock}>Upload</FileButton>)
     const button = screen.getByRole("button")
     fireEvent.click(button)
@@ -51,7 +51,7 @@ describe("<FileButton/ >", () => {
   })
 
   test("should not call onClick", async () => {
-    const onClickMock = jest.fn()
+    const onClickMock = vi.fn()
     render(
       <FileButton
         data-testid="FileButtonDisable"

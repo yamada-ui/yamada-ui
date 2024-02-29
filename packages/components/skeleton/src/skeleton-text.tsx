@@ -28,8 +28,8 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
       fadeDuration,
       speed,
       isLoaded,
-      gap = "2",
-      textHeight = "2",
+      gap = "0.5rem",
+      textHeight = "0.5rem",
       children,
       ...rest
     },
@@ -38,7 +38,7 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
     const computedLineClamp = useValue(lineClamp)
 
     const css: CSSUIObject = {
-      w: "full",
+      w: "100%",
     }
 
     return (

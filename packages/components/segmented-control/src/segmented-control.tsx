@@ -456,8 +456,8 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
 
   const css: CSSUIObject = {
     position: "absolute",
-    w: "full",
-    h: "full",
+    w: "100%",
+    h: "100%",
     ...styles.cursor,
   }
 

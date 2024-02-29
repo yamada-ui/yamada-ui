@@ -1,13 +1,13 @@
 import type { RenderOptions } from "@testing-library/react"
-import type { AxeMatchers } from "vitest-axe/matchers"
+import type { ImpactValue, RunOptions, Spec } from "axe-core"
 import type { ReactElement } from "react"
-import { axe } from "vitest-axe"
 import { isValidElement } from "react"
+import { axe } from "vitest-axe"
+import type { AxeMatchers } from "vitest-axe/matchers"
 import { render } from "./render"
-import { ImpactValue, RunOptions, Spec } from "axe-core"
 
 declare module "vitest" {
-  export interface Assertion<T = any> extends AxeMatchers {}
+  export interface Assertion extends AxeMatchers {}
   export interface AsymmetricMatchersContaining extends AxeMatchers {}
 }
 

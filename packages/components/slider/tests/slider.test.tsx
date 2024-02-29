@@ -1,4 +1,4 @@
-import { cleanup } from "@testing-library/react"
+import { Matcher, cleanup } from "@testing-library/react"
 import {
   a11y,
   act,
@@ -8,7 +8,7 @@ import {
   screen,
 } from "@yamada-ui/test"
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "../src"
-import { useSlider } from "../src/slider"
+import { SliderProps, useSlider } from "../src/slider"
 
 describe("<Slider />", () => {
   test("should render correctly", async () => {
@@ -86,16 +86,24 @@ describe("<Slider />", () => {
     expect(sliderThumb).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("can be readOnly", () => {
-    render(<Slider data-testid="slider" isReadOnly />)
+  test("Slider readOnly tests", () => {
+    const renderAndTestSlider = (props: SliderProps, testId: Matcher) => {
+      render(<Slider data-testid={testId} {...props} />)
 
-    const slider = screen.getByTestId("slider")
-    const sliderInput = slider.getElementsByTagName("input")[0]
-    const sliderThumb = screen.getByRole("slider")
+      const slider = screen.getByTestId(testId)
+      const sliderInput = slider.getElementsByTagName("input")[0]
+      const sliderThumb = screen.getByRole("slider")
 
-    expect(sliderInput).toHaveAttribute("aria-readonly", "true")
-    expect(sliderInput).toHaveAttribute("readonly", "")
-    expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
+      expect(sliderInput).toHaveAttribute("aria-readonly", "true")
+      expect(sliderInput).toHaveAttribute("readonly", "")
+      expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
+    }
+
+    renderAndTestSlider({ isReadOnly: true }, "slider1")
+
+    cleanup()
+
+    renderAndTestSlider({ focusThumbOnChange: false }, "slider2")
   })
 
   test("can have correct step", async () => {
@@ -159,18 +167,6 @@ describe("<Slider />", () => {
     expect(Number(sliderInput.value)).toBe(min)
     await act(() => fireEvent.keyDown(slider, { key: "End" }))
     expect(Number(sliderInput.value)).toBe(max)
-  })
-
-  test("should set isReadOnly to true when focusThumbOnChange is false", () => {
-    render(<Slider data-testid="slider" focusThumbOnChange={false} />)
-
-    const slider = screen.getByTestId("slider")
-    const sliderInput = slider.getElementsByTagName("input")[0]
-    const sliderThumb = screen.getByRole("slider")
-
-    expect(sliderInput).toHaveAttribute("aria-readonly", "true")
-    expect(sliderInput).toHaveAttribute("readonly", "")
-    expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
   })
 
   test("if SliderTrack, SliderFilledTrack and SliderThumb are rendered", () => {

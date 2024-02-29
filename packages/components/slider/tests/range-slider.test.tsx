@@ -134,7 +134,7 @@ describe("<RangeSlider />", () => {
     const renderWithInvalidProps = () =>
       render(<RangeSlider min={min} max={max} />)
 
-    const consoleSpy = jest.spyOn(console, "error")
+    const consoleSpy = vi.spyOn(console, "error")
     consoleSpy.mockImplementation(() => {})
 
     expect(renderWithInvalidProps).toThrow(
@@ -266,9 +266,9 @@ describe("<RangeSlider />", () => {
   })
 
   test("should use RangeSlider with props", () => {
-    const onChangeStart = jest.fn()
-    const onChangeEnd = jest.fn()
-    const onChange = jest.fn()
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+    const onChange = vi.fn()
 
     const { result } = renderHook(() =>
       useRangeSlider({
@@ -309,9 +309,9 @@ describe("<RangeSlider />", () => {
   })
 
   test("RangeSlider component with pointer events", () => {
-    const onChangeStart = jest.fn()
-    const onChangeEnd = jest.fn()
-    const onChange = jest.fn()
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+    const onChange = vi.fn()
 
     const { getAllByRole } = render(
       <RangeSlider

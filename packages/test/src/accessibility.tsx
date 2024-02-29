@@ -1,14 +1,22 @@
 import type { RenderOptions } from "@testing-library/react"
-import type { JestAxeConfigureOptions } from "jest-axe"
-import { axe, toHaveNoViolations } from "jest-axe"
+import type { AxeMatchers } from "vitest-axe/matchers"
 import type { ReactElement } from "react"
+import { axe } from "vitest-axe"
 import { isValidElement } from "react"
 import { render } from "./render"
-import "@testing-library/jest-dom"
+import { ImpactValue, RunOptions, Spec } from "axe-core"
 
-expect.extend(toHaveNoViolations)
+declare module "vitest" {
+  export interface Assertion<T = any> extends AxeMatchers {}
+  export interface AsymmetricMatchersContaining extends AxeMatchers {}
+}
 
-export type A11yProps = RenderOptions & { axeOptions?: JestAxeConfigureOptions }
+type A11yConfigureOptions = RunOptions & {
+  globalOptions?: Spec
+  impactLevels?: ImpactValue[]
+}
+
+export type A11yProps = RenderOptions & { axeOptions?: A11yConfigureOptions }
 
 export const a11y = async (
   ui: ReactElement | HTMLElement,

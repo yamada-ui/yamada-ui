@@ -100,7 +100,7 @@ describe("<FileInput />", () => {
   test("should receive the resetRef, which resets files when invoked", () => {
     const resetRef: { current: (() => void) | null } = { current: null }
     let files: any = null
-    const setFiles = jest.fn((newFiles: any) => {
+    const setFiles = vi.fn((newFiles: any) => {
       files = newFiles
     })
     const { container } = render(
@@ -140,7 +140,7 @@ describe("<FileInput />", () => {
 
   test("should receive the files onChange", () => {
     let files: any = null
-    const setFiles = jest.fn((newFiles: any) => {
+    const setFiles = vi.fn((newFiles: any) => {
       files = newFiles
     })
 
@@ -255,7 +255,7 @@ describe("<FileInput />", () => {
       <FileInput data-testid="file-input" isDisabled />,
     )
     const fileInputElement = container.querySelector('input[type="file"]')
-    const listener = jest.fn()
+    const listener = vi.fn()
 
     fileInputElement?.addEventListener("click", listener)
     screen.getByTestId("file-input").click()
@@ -268,7 +268,7 @@ describe("<FileInput />", () => {
       <FileInput data-testid="file-input" isReadOnly />,
     )
     const fileInputElement = container.querySelector('input[type="file"]')
-    const listener = jest.fn()
+    const listener = vi.fn()
 
     fileInputElement?.addEventListener("click", listener)
     screen.getByTestId("file-input").click()
@@ -279,7 +279,7 @@ describe("<FileInput />", () => {
   test("click should be called in the inner input element after click", () => {
     const { container } = render(<FileInput data-testid="file-input" />)
     const fileInputElement = container.querySelector('input[type="file"]')
-    const listener = jest.fn()
+    const listener = vi.fn()
     fileInputElement?.addEventListener("click", listener)
     screen.getByTestId("file-input").click()
 

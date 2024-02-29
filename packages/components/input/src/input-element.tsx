@@ -37,7 +37,7 @@ const InputElement = forwardRef<InputElementProps, "div">(
         styles.field?.h ??
         styles.field?.minHeight ??
         styles.field?.minH,
-      h: "full",
+      h: "100%",
       fontSize: styles.field?.fontSize,
       pointerEvents: isClick ? "auto" : "none",
       cursor: isClick ? "pointer" : "auto",

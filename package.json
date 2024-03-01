@@ -89,7 +89,6 @@
     "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.6.17",
     "@storybook/theming": "^7.6.17",
-    "@swc/core": "1.4.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/jsdom": "^21.1.6",

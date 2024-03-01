@@ -2119,6 +2119,13 @@
     }
   },
   {
+    "title": "PieChart",
+    "type": "page",
+    "description": "`PieChart`は、現在作成を検討しています。",
+    "slug": "/components/feedback/pie-chart",
+    "hierarchy": { "lv1": "PieChart" }
+  },
+  {
     "title": "Progress",
     "type": "page",
     "description": "`Progress`は、進行状況を視覚的に示すためのコンポーネントです。",
@@ -8192,13 +8199,6 @@
     "type": "fragment",
     "slug": "/components/navigation/pagination#制御する",
     "hierarchy": { "lv1": "Pagination", "lv2": "使い方", "lv3": "制御する" }
-  },
-  {
-    "title": "Spotlight",
-    "type": "page",
-    "description": "`Spotlight`は、現在作成を検討しています。",
-    "slug": "/components/navigation/spotlight",
-    "hierarchy": { "lv1": "Spotlight" }
   },
   {
     "title": "Stepper",

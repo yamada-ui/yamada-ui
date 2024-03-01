@@ -1998,6 +1998,13 @@
     "hierarchy": { "lv1": "Loading", "lv2": "Usage", "lv3": "Change Size" }
   },
   {
+    "title": "PieChart",
+    "type": "page",
+    "description": "We are currently considering the development of `PieChart`.",
+    "slug": "/components/feedback/pie-chart",
+    "hierarchy": { "lv1": "PieChart" }
+  },
+  {
     "title": "Progress",
     "type": "page",
     "description": "`Progress` is a component for visually indicating progress.",
@@ -7699,13 +7706,6 @@
     "type": "fragment",
     "slug": "/components/navigation/pagination#control",
     "hierarchy": { "lv1": "Pagination", "lv2": "Usage", "lv3": "Control" }
-  },
-  {
-    "title": "Spotlight",
-    "type": "page",
-    "description": "We are currently considering the development of `Spotlight`.",
-    "slug": "/components/navigation/spotlight",
-    "hierarchy": { "lv1": "Spotlight" }
   },
   {
     "title": "Stepper",

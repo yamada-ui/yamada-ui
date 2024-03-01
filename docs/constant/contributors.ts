@@ -12,6 +12,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/teru12012000",
   },
   {
+    id: 50972802,
+    name: "nogu66",
+    icon: "https://avatars.githubusercontent.com/u/50972802?v=4",
+    url: "https://github.com/nogu66",
+  },
+  {
     id: 25207729,
     name: "000000armor",
     icon: "https://avatars.githubusercontent.com/u/25207729?v=4",
@@ -48,6 +54,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/zvolcsey",
   },
   {
+    id: 88963450,
+    name: "YuukiHayashi0510",
+    icon: "https://avatars.githubusercontent.com/u/88963450?v=4",
+    url: "https://github.com/YuukiHayashi0510",
+  },
+  {
     id: 105341123,
     name: "matsu3m",
     icon: "https://avatars.githubusercontent.com/u/105341123?v=4",
@@ -58,6 +70,12 @@ export const CONTRIBUTORS = [
     name: "GensIto",
     icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
     url: "https://github.com/GensIto",
+  },
+  {
+    id: 75669598,
+    name: "prathamnagpure",
+    icon: "https://avatars.githubusercontent.com/u/75669598?v=4",
+    url: "https://github.com/prathamnagpure",
   },
   {
     id: 44593742,
@@ -90,33 +108,15 @@ export const CONTRIBUTORS = [
     url: "https://github.com/flyingbarbarian",
   },
   {
+    id: 12987013,
+    name: "suzukisan22",
+    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
+    url: "https://github.com/suzukisan22",
+  },
+  {
     id: 38555478,
     name: "kirikirisu",
     icon: "https://avatars.githubusercontent.com/u/38555478?v=4",
     url: "https://github.com/kirikirisu",
-  },
-  {
-    id: 62431514,
-    name: "Kritskii-A",
-    icon: "https://avatars.githubusercontent.com/u/62431514?v=4",
-    url: "https://github.com/Kritskii-A",
-  },
-  {
-    id: 74306132,
-    name: "Dexson-Dsouza",
-    icon: "https://avatars.githubusercontent.com/u/74306132?v=4",
-    url: "https://github.com/Dexson-Dsouza",
-  },
-  {
-    id: 55294484,
-    name: "HajimeMat-AVAP",
-    icon: "https://avatars.githubusercontent.com/u/55294484?v=4",
-    url: "https://github.com/HajimeMat-AVAP",
-  },
-  {
-    id: 28386792,
-    name: "Tsukuni",
-    icon: "https://avatars.githubusercontent.com/u/28386792?v=4",
-    url: "https://github.com/Tsukuni",
   },
 ]

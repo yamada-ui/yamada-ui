@@ -16,7 +16,7 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
       <Skeleton
         ref={ref}
         className={cx("ui-skeleton__circle", className)}
-        rounded="full"
+        rounded="9999px"
         isFitContent={isFitContent}
         {...(!isFitContent ? { boxSize } : {})}
         {...rest}

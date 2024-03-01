@@ -8,6 +8,10 @@ import { config } from "dotenv"
 import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
+type Contributor = Awaited<
+  ReturnType<typeof octokit.repos.listContributors>
+>["data"][number]
+
 config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
@@ -25,11 +29,28 @@ const REPO_REQUEST_PARAMETERS = {
 const getContributors: p.RequiredRunner = () => async (p, s) => {
   s.start(`Getting the Yamada UI contributors`)
 
-  const { data } = await octokit.repos.listContributors(REPO_REQUEST_PARAMETERS)
+  let contributors: Contributor[] = []
+  let page = 1
+  let count = 0
+  const perPage = 100
+
+  do {
+    const { data } = await octokit.repos.listContributors({
+      ...REPO_REQUEST_PARAMETERS,
+      per_page: 100,
+      page,
+    })
+
+    contributors.push(...data)
+
+    count = data.length
+
+    page++
+  } while (count === perPage)
 
   s.stop(`got the Yamada UI contributors`)
 
-  return data
+  return contributors
 }
 
 const writeContributors: p.RequiredRunner =

@@ -18,6 +18,7 @@ describe("<Loading />", () => {
         variant="oval"
         size="6xl"
         color="red.500"
+        secondaryColor="blue.500"
       />,
     )
 
@@ -41,14 +42,11 @@ describe("<Loading />", () => {
           <Loading
             data-testid={`loading-${variant}`}
             variant={variant as LoadingProps["variant"]}
-            color="red.500"
           />
           <Loading
             data-testid={`loading-${variant}-with-duration`}
             variant={variant as LoadingProps["variant"]}
             duration={10}
-            color="red.500"
-            secondaryColor="blue.500"
           />
         </>,
       )

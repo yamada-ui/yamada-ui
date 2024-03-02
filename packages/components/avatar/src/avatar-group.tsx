@@ -30,7 +30,7 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
     className,
     max,
     borderColor,
-    gap = "-sm",
+    gap = "-0.5rem",
     borderRadius = "9999px",
     rounded = "9999px",
     children,

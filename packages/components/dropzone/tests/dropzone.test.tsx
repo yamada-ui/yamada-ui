@@ -87,7 +87,7 @@ describe("<Dropzone />", () => {
 
   test("Is the onDrop return files correctly", async () => {
     const file = new File(["test"], "test.png", { type: "image/png" })
-    const onDrop = jest.fn()
+    const onDrop = vi.fn()
     const { container } = render(<Dropzone onDrop={onDrop} />)
 
     const dropzone = container.querySelector(".ui-dropzone")

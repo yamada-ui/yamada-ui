@@ -288,10 +288,14 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
               const isLast = label.length === index + 1
 
               return (
-                <ui.span key={index} display="inline-block" me="0.25rem">
-                  {value}
-                  {!isLast ? separator : null}
-                </ui.span>
+                <ui.span
+                  key={index}
+                  display="inline-block"
+                  me="0.25rem"
+                  dangerouslySetInnerHTML={{
+                    __html: `${value}${!isLast ? separator : ""}`,
+                  }}
+                />
               )
             })}
           </ui.span>

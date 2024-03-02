@@ -89,7 +89,7 @@ export const basic: Story = () => {
   return <AreaChart data={data} series={series} dataKey="name" />
 }
 
-export const variant: Story = () => {
+export const withVariant: Story = () => {
   return (
     <VStack>
       <AreaChart
@@ -103,7 +103,8 @@ export const variant: Story = () => {
     </VStack>
   )
 }
-export const size: Story = () => {
+
+export const withSize: Story = () => {
   return (
     <VStack>
       <AreaChart data={data} series={series} dataKey="name" size="sm" />
@@ -134,7 +135,7 @@ export const custom: Story = () => {
     gridAxis: "x",
     type: "default",
     splitColors: ["#28412c", "#ff0000"],
-    orientation: "horizontal",
+    layoutType: "horizontal",
   } as AreaChartProps)
 
   const [fillOpacityIsOpen, { on: fillOpacityOn, off: fillOpacityOff }] =
@@ -188,7 +189,7 @@ export const custom: Story = () => {
             }}
           />
         </FormControl>
-        <FormControl label="orientation">
+        <FormControl label="layout type">
           <Select
             size="sm"
             defaultValue="horizontal"
@@ -196,11 +197,11 @@ export const custom: Story = () => {
               { label: "horizontal", value: "horizontal" },
               { label: "vertical", value: "vertical" },
             ]}
-            value={props.orientation}
+            value={props.layoutType}
             onChange={(value) => {
               setProps((prev) => ({
                 ...prev,
-                orientation: value as LayoutType,
+                layoutType: value as LayoutType,
               }))
             }}
           />
@@ -397,7 +398,7 @@ const dashSeries: AreaChartSeries[] = [
   { dataKey: "amt", color: "emerald.400", strokeDasharray: "5 5" },
 ]
 
-export const dash: Story = () => {
+export const withDash: Story = () => {
   return <AreaChart data={data} series={dashSeries} dataKey="name" />
 }
 
@@ -433,7 +434,7 @@ const splitData = [
 ]
 const splitSeries: AreaChartSeries[] = [{ dataKey: "uv", color: "indigo.400" }]
 
-export const split: Story = () => {
+export const withSplit: Story = () => {
   const [splitOffset, setSplitOffset] = useState<number | undefined>()
   const [isOpen, { on, off }] = useBoolean()
 
@@ -501,7 +502,7 @@ const connectNullsSeries: AreaChartSeries[] = [
   { dataKey: "uv", color: "indigo.400" },
 ]
 
-export const connectNulls: Story = () => {
+export const withConnectNulls: Story = () => {
   const [connectNulls, { toggle }] = useBoolean(true)
 
   return (
@@ -520,7 +521,7 @@ export const connectNulls: Story = () => {
   )
 }
 
-export const sync: Story = () => {
+export const withSync: Story = () => {
   return (
     <VStack>
       <AreaChart
@@ -539,13 +540,13 @@ export const sync: Story = () => {
   )
 }
 
-export const referenceLine: Story = () => {
+export const withReferenceLine: Story = () => {
   return (
     <AreaChart
       data={data}
       series={series}
       dataKey="name"
-      referenceLines={[
+      referenceLineProps={[
         { y: 5500, label: "x line", color: "red.500" },
         { x: "Page F", label: "y line" },
       ]}
@@ -553,7 +554,7 @@ export const referenceLine: Story = () => {
   )
 }
 
-export const legendProps: Story = () => {
+export const withLegendProps: Story = () => {
   return (
     <AreaChart
       data={data}
@@ -565,7 +566,7 @@ export const legendProps: Story = () => {
   )
 }
 
-export const axisProps: Story = () => {
+export const withAxisProps: Story = () => {
   return (
     <AreaChart
       data={data}
@@ -583,7 +584,7 @@ export const axisProps: Story = () => {
   )
 }
 
-export const valueFormatter: Story = () => {
+export const withValueFormatter: Story = () => {
   return (
     <AreaChart
       data={data}
@@ -594,7 +595,7 @@ export const valueFormatter: Story = () => {
   )
 }
 
-export const strokeDasharray: Story = () => {
+export const withStrokeDasharray: Story = () => {
   return (
     <AreaChart
       data={data}
@@ -606,7 +607,7 @@ export const strokeDasharray: Story = () => {
   )
 }
 
-export const units: Story = () => {
+export const withUnits: Story = () => {
   return (
     <AreaChart
       data={data}
@@ -618,7 +619,7 @@ export const units: Story = () => {
   )
 }
 
-export const customTooltip: Story = () => {
+export const withCustomTooltip: Story = () => {
   type TooltipProps = {
     label: string
     payload: Dict[] | undefined
@@ -646,7 +647,7 @@ export const customTooltip: Story = () => {
       series={series}
       dataKey="name"
       tooltipProps={{
-        content: ({ label, payload }) => (
+        content: ({ label, payload }: TooltipProps) => (
           <CustomTooltip label={label} payload={payload} />
         ),
       }}
@@ -654,7 +655,7 @@ export const customTooltip: Story = () => {
   )
 }
 
-export const customDots: Story = () => {
+export const withCustomDots: Story = () => {
   return (
     <AreaChart
       data={data}

@@ -23,14 +23,25 @@ import type {
   DotProps,
   CartesianGridProps,
 } from "recharts"
-import type { AreaChartProps } from "./area-chart"
-import type { AreaGradientProps } from "./area-gradient"
-import type { AreaSplitProps } from "./area-split"
+import type { AreaGradientProps } from "./area-chart-gradient"
+import type { AreaSplitProps } from "./area-chart-split"
 import type {
+  AreaChartCurveType,
   AreaChartSeries,
+  AreaChartType,
+  AreaChartUIProps,
+  AxisType,
   ChartPropGetter,
+  ContainerUIProps,
+  DotUIProps,
+  GridUIProps,
+  LayoutType,
+  LegendUIProps,
   ReferenceUILineProps,
   RequiredChartPropGetter,
+  TooltipUIProps,
+  XAxisUIProps,
+  YAxisUIProps,
 } from "./chart.types"
 import {
   areaChartProperties,
@@ -53,13 +64,174 @@ export const [AreaChartProvider, useAreaChartContext] =
     errorMessage: `useAreaChartContext returned is 'undefined'. Seems you forgot to wrap the components in "<AreaChart />"`,
   })
 
-export type UseAreaChartProps = Omit<AreaChartProps, "fillOpacity"> & {
+export type UseAreaChartOptions = {
+  /**
+   * Chart data.
+   */
+  data: Dict[]
+  /**
+   *  The key of a group of data which should be unique in an area chart.
+   */
+  dataKey: string
+  /**
+   * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
+   */
+  series: AreaChartSeries[]
+  /**
+   *  Controls how chart areas are positioned relative to each other
+   *
+   * @default `default`
+   */
+  type?: AreaChartType
+  /**
+   *  Props passed down to recharts `AreaChart` component.
+   */
+  areaChartProps?: AreaChartUIProps
+  /**
+   *  Props passed down to recharts `ResponsiveContainer` component.
+   */
+  containerProps?: ContainerUIProps
+  /**
+   *  Props passed down to all dots. Ignored if `withDots={false}` is set.
+   */
+  dotProps?: DotUIProps
+  /**
+   *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
+   */
+  activeDotProps?: DotUIProps
+  /**
+   *  Props passed down to recharts 'XAxis' component.
+   */
+  xAxisProps?: XAxisUIProps
+  /**
+   *  Props passed down to recharts 'YAxis' component.
+   */
+  yAxisProps?: YAxisUIProps
+  /**
+   *  Props passed down to recharts 'Legend' component.
+   */
+  legendProps?: LegendUIProps
+  /**
+   *  Props passed down to recharts 'Tooltip' component.
+   */
+  tooltipProps?: TooltipUIProps
+  /**
+   *  Props passed down to recharts 'CartesianGrid' component.
+   */
+  gridProps?: GridUIProps
+  /**
+   * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
+   *
+   * @default '5 5'
+   */
+  strokeDasharray?: string | number
+  /**
+   * The option is the configuration of tick lines.
+   *
+   * @default 'y'
+   */
+  tickLine?: AxisType
+  /**
+   * Specifies which lines should be displayed in the grid.
+   *
+   * @default 'x'
+   */
+  gridAxis?: AxisType
+  /**
+   * Chart orientation.
+   *
+   * @default 'horizontal'
+   */
+  layoutType?: LayoutType
+  /**
+   *  Determines whether the chart area should be represented with a gradient instead of the solid color.
+   */
+  withGradient?: boolean
+  /**
+   * If `true`, X axis is visible.
+   *
+   * @default true
+   */
+  withXAxis?: boolean
+  /**
+   * If `true`, Y axis is visible.
+   *
+   * @default true
+   */
+  withYAxis?: boolean
+  /**
+   * Unit displayed next to each tick in y-axis.
+   */
+  unit?: string
+  /**
+   *  Determines whether dots should be displayed.
+   *
+   * @default true
+   */
+  withDots?: boolean
+  /**
+   *  Determines whether activeDots should be displayed.
+   *
+   * @default true
+   */
+  withActiveDots?: boolean
+  /**
+   *  Type of the curve.
+   *
+   * @default `monotone`
+   */
+  curveType?: AreaChartCurveType
+  /**
+   *  Stroke width for the chart areas.
+   *
+   * @default 2
+   */
+  strokeWidth?: number
+  /**
+   *  Determines whether points with `null` values should be connected.
+   *
+   * @default true
+   */
+  connectNulls?: boolean
+  /**
+   * Specifies the duration of animation, the unit of this option is ms.
+   *
+   * @default 0
+   */
+  tooltipAnimationDuration?: number
+  /**
+   *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
+   *
+   * @default '["red.400", "green.400"]'
+   */
+  splitColors?: [string, string]
+  /**
+   *  Offset for the split gradient. By default, value is inferred from `data` and `series` if possible. Must be generated from the data array with `getSplitOffset` function.
+   */
+  splitOffset?: number
+  /**
+   * Reference lines that should be displayed on the chart.
+   */
+  referenceLineProps?: ReferenceUILineProps[]
+  /**
+   * A function to format values on Y axis and inside the tooltip
+   */
+  valueFormatter?: (value: number) => string
+  /**
+   *  Controls fill opacity of all areas.
+   *
+   * @default 0.2
+   */
   fillOpacity?: number
+}
+
+export type UseAreaChartProps = UseAreaChartOptions & {
   styles: Dict<CSSUIObject>
 }
 
 export const useAreaChart = ({
   data,
+  dataKey,
   series,
   type,
   areaChartProps = {},
@@ -74,11 +246,10 @@ export const useAreaChart = ({
   strokeDasharray = "5 5",
   tickLine = "y",
   gridAxis = "x",
-  orientation = "horizontal",
+  layoutType = "horizontal",
   withGradient: withGradientProp,
   withXAxis = true,
   withYAxis = true,
-  dataKey,
   unit,
   withDots = true,
   withActiveDots = true,
@@ -89,11 +260,13 @@ export const useAreaChart = ({
   fillOpacity = 0.2,
   splitColors = ["red.400", "green.400"],
   splitOffset,
-  referenceLines,
+  referenceLineProps,
   valueFormatter,
   styles,
 }: UseAreaChartProps) => {
   const uuid = useId()
+  const { theme } = useTheme()
+  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const splitId = `${uuid}-split`
   const withXTickLine =
     gridAxis !== "none" && (tickLine === "x" || tickLine === "xy")
@@ -104,11 +277,7 @@ export const useAreaChart = ({
     typeof withGradientProp === "boolean"
       ? withGradientProp
       : type === "default"
-
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
-
-  const { theme } = useTheme()
 
   const getAreaChartProps: ChartPropGetter<
     "div",
@@ -128,12 +297,12 @@ export const useAreaChart = ({
         className: cx(className, propClassName, styleClassName),
         data,
         stackOffset: type === "percent" ? "expand" : undefined,
-        layout: orientation,
+        layout: layoutType,
         ...props,
         ...reChartsProps,
       }
     },
-    [areaChartProps, data, orientation, styles.areaChart, theme, type],
+    [areaChartProps, data, layoutType, styles.areaChart, theme, type],
   )
 
   const getReferenceLineProps: RequiredChartPropGetter<
@@ -151,7 +320,7 @@ export const useAreaChart = ({
       )
       const styleClassName = getCSS(styles.referenceLine)(theme)
       const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-      const color = `var(--ui-referenceline-${index})`
+      const color = `var(--ui-reference-line-${index})`
 
       const label: ReferenceLineProps["label"] = {
         value: reChartsProps.label as string,
@@ -199,16 +368,16 @@ export const useAreaChart = ({
     [containerProps, theme],
   )
 
+  const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
+  const styleClassName = getCSS(styles.grid)(theme)
+  const propClassName = getCSS(uiProps as CSSUIObject)(theme)
+
   const getGridProps: ChartPropGetter<
     "div",
     Partial<CartesianGridProps>,
     CartesianGridProps
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
-      const styleClassName = getCSS(styles.grid)(theme)
-      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-
       return {
         ref,
         className: cx(className, propClassName, styleClassName),
@@ -219,7 +388,7 @@ export const useAreaChart = ({
         ...reChartsProps,
       }
     },
-    [gridProps, styles.grid, theme, strokeDasharray, gridAxis],
+    [propClassName, styleClassName, strokeDasharray, gridAxis, reChartsProps],
   )
 
   const getXAxisProps: ChartPropGetter<
@@ -235,7 +404,7 @@ export const useAreaChart = ({
       return {
         className: cx(className, propClassName, styleClassName),
         hide: !withXAxis,
-        ...(orientation === "vertical" ? { type: "number" } : { dataKey }),
+        ...(layoutType === "vertical" ? { type: "number" } : { dataKey }),
         tick: {
           transform: "translate(0, 10)",
           fill: "currentColor",
@@ -250,7 +419,7 @@ export const useAreaChart = ({
     },
     [
       dataKey,
-      orientation,
+      layoutType,
       styles.xAxis,
       theme,
       withXAxis,
@@ -274,7 +443,7 @@ export const useAreaChart = ({
         className: cx(className, propClassName, styleClassName),
         hide: !withYAxis,
         axisLine: false,
-        ...(orientation === "vertical"
+        ...(layoutType === "vertical"
           ? { dataKey, type: "category" }
           : { type: "number" }),
         tickLine: withYTickLine ? { stroke: "currentColor" } : false,
@@ -294,7 +463,7 @@ export const useAreaChart = ({
       styles.yAxis,
       theme,
       withYAxis,
-      orientation,
+      layoutType,
       dataKey,
       withYTickLine,
       unit,
@@ -348,39 +517,41 @@ export const useAreaChart = ({
     [theme, tooltipAnimationDuration, tooltipProps],
   )
 
+  const getSplitOffset = ({ dataKey }: { dataKey: string }) => {
+    const dataMax = Math.max(...data.map((item) => item[dataKey]))
+    const dataMin = Math.min(...data.map((item) => item[dataKey]))
+
+    if (dataMax <= 0) return 0
+    if (dataMin >= 0) return 1
+
+    return dataMax / (dataMax - dataMin)
+  }
+
+  const getDefaultSplitOffset = () => {
+    if (series.length === 1) {
+      const dataKey = series[0].dataKey as string
+      return getSplitOffset({ dataKey })
+    }
+
+    return 0.5
+  }
+
+  const defaultSplitOffset = getDefaultSplitOffset()
+
   const getAreaSplitProps: ChartPropGetter<
     "div",
     Partial<AreaSplitProps>,
     AreaSplitProps
   > = useCallback(
     (props = {}) => {
-      const getSplitOffset = ({ dataKey }: { dataKey: string }) => {
-        const dataMax = Math.max(...data.map((item) => item[dataKey]))
-        const dataMin = Math.min(...data.map((item) => item[dataKey]))
-
-        if (dataMax <= 0) return 0
-        if (dataMin >= 0) return 1
-
-        return dataMax / (dataMax - dataMin)
-      }
-
-      const getDefaultSplitOffset = () => {
-        if (series.length === 1) {
-          const dataKey = series[0].dataKey as string
-          return getSplitOffset({ dataKey })
-        }
-
-        return 0.5
-      }
-
       return {
         id: splitId,
-        offset: splitOffset ?? getDefaultSplitOffset(),
+        offset: splitOffset ?? defaultSplitOffset,
         fillOpacity,
         ...props,
       }
     },
-    [data, fillOpacity, series, splitId, splitOffset],
+    [defaultSplitOffset, fillOpacity, splitId, splitOffset],
   )
 
   const getAreaProps: RequiredChartPropGetter<
@@ -514,22 +685,22 @@ export const useAreaChart = ({
 
     const areaSplitColors: CSSUIProps["var"] = splitColors.map(
       (color, index) => ({
-        name: `areasplit-${index}`,
+        name: `area-split-${index}`,
         token: "colors",
         value: color,
       }),
     )
 
-    const referenceLineColors: CSSUIProps["var"] = referenceLines
-      ? referenceLines.map((line, index) => ({
-          name: `referenceline-${index}`,
+    const referenceLineColors: CSSUIProps["var"] = referenceLineProps
+      ? referenceLineProps.map((line, index) => ({
+          name: `reference-line-${index}`,
           token: "colors",
           value: line.color ?? "gray",
         }))
       : []
 
     return [...areaColors, ...areaSplitColors, ...referenceLineColors]
-  }, [referenceLines, series, splitColors])
+  }, [referenceLineProps, series, splitColors])
 
   return {
     getAreaChartProps,

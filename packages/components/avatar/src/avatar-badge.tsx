@@ -125,7 +125,7 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
             className="ui-avatar__badge__ping"
             __css={{
               position: "absolute",
-              boxSize: "9999px",
+              boxSize: "100%",
               rounded: "9999px",
               opacity: 0.75,
               zIndex: -1,

@@ -83,7 +83,7 @@ export const ColorSelectorSwatches = forwardRef<
               as="button"
               key={color}
               __css={{
-                boxSize: "full",
+                boxSize: "100%",
                 pointerEvents: readOnly ? "none" : undefined,
                 ...styles.swatch,
               }}

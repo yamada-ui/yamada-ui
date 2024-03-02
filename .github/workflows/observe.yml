@@ -18,6 +18,7 @@ jobs:
         run: pnpm observe:issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_HELP_WANTED_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}
 
   pull-request:
     runs-on: ubuntu-latest

@@ -1,4 +1,4 @@
-import { a11y, render, screen, fireEvent } from "@yamada-ui/test"
+import { a11y, render, screen, fireEvent, act } from "@yamada-ui/test"
 import { FileInput } from "../src"
 
 describe("<FileInput />", () => {
@@ -95,5 +95,194 @@ describe("<FileInput />", () => {
       "aria-invalid",
       "true",
     )
+  })
+
+  test("should receive the resetRef, which resets files when invoked", () => {
+    const resetRef: { current: (() => void) | null } = { current: null }
+    let files: any = null
+    const setFiles = vi.fn((newFiles: any) => {
+      files = newFiles
+    })
+    const { container } = render(
+      <FileInput
+        data-testid="FileInput"
+        multiple
+        resetRef={resetRef}
+        onChange={setFiles}
+      />,
+    )
+    const mockedFile1 = new File(["foo"], "foo.txt", { type: "text/plain" })
+    const mockedFile2 = new File(["images"], "image.png", { type: "image/png" })
+    const mockedFile3 = new File(["pdf"], "doc.pdf", {
+      type: "application/pdf",
+    })
+    const fileInput = container.querySelector('input[type="file"]')!
+    const mockedFiles = [mockedFile1, mockedFile2, mockedFile3]
+    fireEvent.change(fileInput, {
+      target: { files: mockedFiles },
+    })
+
+    expect(files).toBeTruthy()
+    if (files) {
+      expect(files.length).toEqual(mockedFiles.length)
+      for (let i = 0; i < mockedFiles.length; ++i) {
+        expect(mockedFiles[i]).toEqual(files[i])
+      }
+    }
+    expect(resetRef).toBeTruthy()
+    expect(typeof resetRef.current).toEqual("function")
+    act(() => {
+      resetRef.current && resetRef.current()
+    })
+    expect(files).toBeFalsy()
+    expect(setFiles).toHaveBeenCalledTimes(2)
+  })
+
+  test("should receive the files onChange", () => {
+    let files: any = null
+    const setFiles = vi.fn((newFiles: any) => {
+      files = newFiles
+    })
+
+    const { container } = render(
+      <FileInput data-testid="FileInput" multiple onChange={setFiles} />,
+    )
+
+    const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
+    const fileInput = container.querySelector('input[type="file"]')!
+
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile, mockedFile, mockedFile] },
+    })
+
+    expect(setFiles).toHaveBeenCalledTimes(1)
+    expect(files).toBeTruthy()
+    if (files) {
+      expect(files.length).toEqual(3)
+      files.forEach((file: File) => expect(file).toEqual(mockedFile))
+    }
+  })
+
+  test("should not show files in the onChange function if no files are present", () => {
+    let value: any = null
+    const setValue = (val: any) => {
+      value = val
+    }
+    const { container } = render(
+      <FileInput data-testid="FileInput" onChange={setValue} />,
+    )
+    const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
+    const fileInput = container.querySelector('input[type="file"]')!
+
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile, mockedFile, mockedFile] },
+    })
+    fireEvent.change(fileInput, {
+      target: { files: null },
+    })
+
+    expect(value).toBeFalsy()
+  })
+
+  test("should work with custom component for displaying files", () => {
+    let files: any = []
+    const { container } = render(
+      <div>
+        <FileInput
+          multiple
+          component={({ value, index }) => {
+            files.push(value)
+            return (
+              <div>
+                {" "}
+                <div data-testId={"index " + index}>{index}</div>
+                <div data-testId={"name" + index}>{value.name}</div>
+                <div data-testId={"type" + index}>{value.type}</div>
+              </div>
+            )
+          }}
+          data-testid="FileInput"
+        />
+      </div>,
+    )
+    const fileInput = container.querySelector('input[type="file"]')!
+    const mockedFile1 = new File(["foo"], "foo.txt", { type: "text/plain" })
+    const mockedFile2 = new File(["foo bar"], "foo-bar.png", {
+      type: "image/png",
+    })
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile1, mockedFile2] },
+    })
+
+    expect(screen.getByText("foo.txt")).toBeInTheDocument()
+    expect(screen.getByText("foo-bar.png")).toBeInTheDocument()
+    expect(screen.getByText("0")).toBeInTheDocument()
+    expect(screen.getByText("1")).toBeInTheDocument()
+    expect(screen.getByText("text/plain")).toBeInTheDocument()
+    expect(screen.getByText("image/png")).toBeInTheDocument()
+  })
+
+  test("should work with custom component which returns null for displaying files", () => {
+    let files: any = []
+    const { container } = render(
+      <div>
+        <FileInput
+          multiple
+          component={({ value }) => {
+            files.push(value)
+            return null
+          }}
+          data-testid="FileInput"
+        />
+      </div>,
+    )
+    const fileInput = container.querySelector('input[type="file"]')!
+    const mockedFile1 = new File(["foo"], "foo.txt", { type: "text/plain" })
+    const mockedFile2 = new File(["foo bar"], "foo-bar.txt", {
+      type: "text/plain",
+    })
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile1, mockedFile2] },
+    })
+
+    expect(files).toEqual([mockedFile1, mockedFile2])
+    expect(screen.queryByText("foo.txt")).toBeNull()
+    expect(screen.queryByText("foo-bar.txt")).toBeNull()
+  })
+
+  test("click should not be called in the inner input element after click when disabled", () => {
+    const { container } = render(
+      <FileInput data-testid="file-input" isDisabled />,
+    )
+    const fileInputElement = container.querySelector('input[type="file"]')
+    const listener = vi.fn()
+
+    fileInputElement?.addEventListener("click", listener)
+    screen.getByTestId("file-input").click()
+
+    expect(listener).toHaveBeenCalledTimes(0)
+  })
+
+  test("click should not be called in the inner input element after click when readonly", () => {
+    const { container } = render(
+      <FileInput data-testid="file-input" isReadOnly />,
+    )
+    const fileInputElement = container.querySelector('input[type="file"]')
+    const listener = vi.fn()
+
+    fileInputElement?.addEventListener("click", listener)
+    screen.getByTestId("file-input").click()
+
+    expect(listener).toHaveBeenCalledTimes(0)
+  })
+
+  test("click should be called in the inner input element after click", () => {
+    const { container } = render(<FileInput data-testid="file-input" />)
+    const fileInputElement = container.querySelector('input[type="file"]')
+    const listener = vi.fn()
+    fileInputElement?.addEventListener("click", listener)
+    screen.getByTestId("file-input").click()
+
+    expect(listener).toHaveBeenCalledTimes(1)
   })
 })

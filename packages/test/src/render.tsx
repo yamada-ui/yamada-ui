@@ -3,11 +3,8 @@ import { render as reactRender } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
-import { toHaveNoViolations } from "jest-axe"
 import type { ReactElement } from "react"
-import "@testing-library/jest-dom"
-
-expect.extend(toHaveNoViolations)
+import "@testing-library/jest-dom/vitest"
 
 export type RenderProps = RenderOptions & {
   withProvider?: boolean

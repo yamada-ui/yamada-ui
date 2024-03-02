@@ -119,8 +119,6 @@ type UseColorSelectorOptions = {
   value?: string
   /**
    * The initial value of the color selector.
-   *
-   * @default "#ffffff"
    */
   defaultValue?: string
   /**
@@ -186,22 +184,23 @@ export const useColorSelector = ({
   const { supported: eyeDropperSupported, onOpen } = useEyeDropper()
   const [value, setValue] = useControllableState({
     value: valueProp,
-    defaultValue: defaultValue ?? fallbackValue ?? "#ffffff",
+    defaultValue: defaultValue ?? fallbackValue,
     onChange: onChangeProp,
   })
+  const resolvedValue = value ?? "#ffffff"
   const timeoutId = useRef<any>(undefined)
-  const formatRef = useRef<ColorFormat>(format ?? calcFormat(value))
+  const formatRef = useRef<ColorFormat>(format ?? calcFormat(resolvedValue))
   const isDraggingRef = useRef<boolean>(false)
   const [parsedValue, setParsedValue] = useState<Hsva>(
-    convertHsva(value, fallbackValue),
+    convertHsva(resolvedValue, fallbackValue),
   )
   const { h, s, v, a } = parsedValue
   const withAlpha = formatRef.current.endsWith("a")
   const isInteractive = !(disabled || readOnly)
 
   const channels: Channel[] = useMemo(() => {
-    if (value.startsWith("hsl")) {
-      const { h, s, l, a } = convertHsla(value, fallbackValue)
+    if (resolvedValue.startsWith("hsl")) {
+      const { h, s, l, a } = convertHsla(resolvedValue, fallbackValue)
 
       let channels: Channel[] = [
         { label: "H", space: "h", value: Math.round(h), min: 0, max: 360 },
@@ -236,7 +235,7 @@ export const useColorSelector = ({
 
       return channels
     } else {
-      const { r, g, b, a } = convertRgba(value, fallbackValue)
+      const { r, g, b, a } = convertRgba(resolvedValue, fallbackValue)
 
       let channels: Channel[] = [
         { label: "R", space: "r", value: Math.round(r), min: 0, max: 255 },
@@ -259,7 +258,7 @@ export const useColorSelector = ({
 
       return channels
     }
-  }, [value, withAlpha, fallbackValue])
+  }, [resolvedValue, withAlpha, fallbackValue])
 
   const onChange = useCallback(
     (value: string | Partial<Hsva>) => {
@@ -320,16 +319,16 @@ export const useColorSelector = ({
 
       let nextValue: string | undefined
 
-      if (value.startsWith("hsl")) {
+      if (resolvedValue.startsWith("hsl")) {
         const { h, s, l, a } = Object.assign(
-          convertHsla(value, fallbackValue),
+          convertHsla(resolvedValue, fallbackValue),
           { [space]: n },
         )
 
         nextValue = hslaTo([h, s, l, a], fallbackValue)(formatRef.current)
       } else {
         const { r, g, b, a } = Object.assign(
-          convertRgba(value, fallbackValue),
+          convertRgba(resolvedValue, fallbackValue),
           { [space]: n },
         )
 
@@ -341,7 +340,7 @@ export const useColorSelector = ({
       onChange(nextValue)
       onChangeEnd(nextValue)
     },
-    [value, onChange, onChangeEnd, formatRef, fallbackValue],
+    [resolvedValue, onChange, onChangeEnd, formatRef, fallbackValue],
   )
 
   const onEyeDropperClick = useCallback(async () => {
@@ -356,10 +355,10 @@ export const useColorSelector = ({
   }, [onOpen, onChange, onChangeEnd])
 
   useUpdateEffect(() => {
-    const value = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+    const nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
 
-    if (value) setValue(value)
-  }, [h, s, v, a, fallbackValue])
+    if (nextValue) setValue(nextValue)
+  }, [h, s, v, a])
 
   useUpdateEffect(() => {
     if (isDraggingRef.current) return
@@ -368,14 +367,14 @@ export const useColorSelector = ({
   }, [valueProp])
 
   useUpdateEffect(() => {
-    if (!format) return
+    if (!format || !value) return
 
     formatRef.current = format
 
     const nextValue = convertColor(value, fallbackValue)(format)
 
     if (nextValue) setValue(nextValue)
-  }, [format, fallbackValue])
+  }, [format])
 
   const getContainerProps: UIPropGetter = (props = {}, ref = null) => ({
     ...props,
@@ -391,12 +390,12 @@ export const useColorSelector = ({
       ref,
       type: "hidden",
       name,
-      value,
+      value: resolvedValue,
       required,
       disabled,
       readOnly,
     }),
-    [disabled, id, name, readOnly, required, rest, value],
+    [disabled, id, name, readOnly, required, rest, resolvedValue],
   )
 
   const getSaturationSliderProps: UIPropGetter<
@@ -560,7 +559,7 @@ export const useColorSelector = ({
   )
 
   return {
-    value,
+    value: resolvedValue,
     onChange,
     eyeDropperSupported,
     withAlpha,

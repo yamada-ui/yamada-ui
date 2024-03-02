@@ -1,13 +1,13 @@
-import { render, mocks, act } from "@yamada-ui/test"
+import { act, mocks, render } from "@yamada-ui/test"
 import { Avatar } from "../src"
 
 describe("<Avatar />", () => {
   beforeEach(() => {
-    jest.useFakeTimers()
+    vi.useFakeTimers()
   })
 
   afterEach(() => {
-    jest.useRealTimers()
+    vi.useRealTimers()
     mocks.image().restore()
   })
 
@@ -19,7 +19,7 @@ describe("<Avatar />", () => {
     )
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     const img = getByAltText("Dan Abramov")
@@ -32,11 +32,11 @@ describe("<Avatar />", () => {
 
     const src = "https://bit.ly/dan-abramov"
     const name = "Dan Abramov"
-    const onErrorFn = jest.fn()
+    const onErrorFn = vi.fn()
     render(<Avatar src={src} name={name} onError={onErrorFn} />)
 
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     expect(onErrorFn).toHaveBeenCalledTimes(1)

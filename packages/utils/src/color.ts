@@ -207,6 +207,8 @@ export const convertColor =
     try {
       const isAlpha = format.endsWith("a")
 
+      if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
+
       if (format.startsWith("hex")) {
         let hexa = c.toHex(color)
 
@@ -264,6 +266,8 @@ export const alphaToHex = (a: number) => {
 
 export const parseToRgba = (color: string, fallback?: string) => {
   try {
+    if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
+
     return c.parseToRgba(color)
   } catch {
     if (fallback) return c.parseToRgba(fallback)
@@ -272,6 +276,8 @@ export const parseToRgba = (color: string, fallback?: string) => {
 
 export const parseToHsla = (color: string, fallback?: string) => {
   try {
+    if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
+
     return c.parseToHsla(color)
   } catch {
     if (fallback) return c.parseToHsla(fallback)

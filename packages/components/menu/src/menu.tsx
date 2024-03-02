@@ -76,8 +76,8 @@ export const Menu: FC<MenuProps> = (props) => {
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const onFocusMenu = useCallback(() => {
-    requestAnimationFrame(
-      () => menuRef.current?.focus({ preventScroll: false }),
+    requestAnimationFrame(() =>
+      menuRef.current?.focus({ preventScroll: false }),
     )
   }, [])
 

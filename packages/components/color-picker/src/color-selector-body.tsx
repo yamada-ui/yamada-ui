@@ -59,7 +59,7 @@ export const ColorSelectorBody = forwardRef<ColorSelectorBodyProps, "div">(
 
     const css: CSSUIObject = {
       display: "flex",
-      w: "full",
+      w: "100%",
       ...styles.body,
     }
 

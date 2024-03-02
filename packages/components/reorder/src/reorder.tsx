@@ -9,7 +9,7 @@ import {
   handlerAll,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import { forwardRef, useCallback, useMemo, useState } from "react"
+import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 
 type ReorderContext = {
   orientation: "vertical" | "horizontal"
@@ -90,6 +90,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
       return omitDuplicated(values)
     }, [validChildren])
 
+    const prevValues = useRef<(string | number)[]>(defaultValues)
     const [values, setValues] = useState<(string | number)[]>(defaultValues)
 
     const onReorder = useCallback(
@@ -101,6 +102,17 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
       [onChange],
     )
 
+    const onCompleteReorder = useCallback(() => {
+      const isEqual =
+        JSON.stringify(prevValues.current) === JSON.stringify(values)
+
+      if (isEqual) return
+
+      prevValues.current = values
+
+      onCompleteChange?.(values)
+    }, [onCompleteChange, values])
+
     useUpdateEffect(() => {
       const isDone = defaultValues.every((defaultValue) =>
         values.includes(defaultValue),
@@ -108,6 +120,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
 
       if (isDone) return
 
+      prevValues.current = defaultValues
       setValues(defaultValues)
     }, [defaultValues])
 
@@ -137,14 +150,8 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
           onReorder={onReorder}
           __css={css}
           {...rest}
-          onMouseUp={handlerAll(
-            rest.onMouseUp,
-            () => onCompleteChange?.(values),
-          )}
-          onTouchEnd={handlerAll(
-            rest.onTouchEnd,
-            () => onCompleteChange?.(values),
-          )}
+          onMouseUp={handlerAll(rest.onMouseUp, onCompleteReorder)}
+          onTouchEnd={handlerAll(rest.onTouchEnd, onCompleteReorder)}
         >
           {cloneChildren}
         </ui.ul>

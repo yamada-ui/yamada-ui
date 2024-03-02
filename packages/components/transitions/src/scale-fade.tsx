@@ -1,15 +1,15 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
 import type {
-  HTMLMotionProps,
   WithTransitionProps,
   MotionTransitionVariants,
+  MotionProps,
 } from "@yamada-ui/motion"
 import {
-  motion,
   AnimatePresence,
   transitionEnter,
   transitionExit,
+  Motion,
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
@@ -29,7 +29,7 @@ type ScaleFadeOptions = {
 }
 
 export type ScaleFadeProps = WithTransitionProps<
-  Omit<HTMLUIProps<"div">, "scale"> & HTMLMotionProps<"div">
+  Omit<MotionProps<"div">, "scale">
 > &
   ScaleFadeOptions
 
@@ -71,7 +71,7 @@ export const scaleFadeProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/scale-fade
  */
-export const ScaleFade = forwardRef<ScaleFadeProps, "div">(
+export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
   (
     {
       unmountOnExit,
@@ -107,8 +107,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, "div">(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <ui.div
-            as={motion.div}
+          <Motion
             ref={ref}
             className={cx("ui-scale-fade", className)}
             custom={custom}

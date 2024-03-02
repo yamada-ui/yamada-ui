@@ -27,7 +27,6 @@
     },
     "defaultValue": {
       "type": "string",
-      "defaultValue": "#ffffff",
       "required": false,
       "description": "The initial value of the color selector."
     },
@@ -285,7 +284,6 @@
     },
     "defaultValue": {
       "type": "string",
-      "defaultValue": "#ffffff",
       "required": false,
       "description": "The initial value of the color selector."
     },
@@ -375,6 +373,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+    },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
     },
     "isReadOnly": {
       "type": "boolean",

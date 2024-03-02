@@ -1,5 +1,19 @@
 # @yamada-ui/modal
 
+## 1.0.16
+
+### Patch Changes
+
+- [#817](https://github.com/hirotomoyamada/yamada-ui/pull/817) [`c2e3667`](https://github.com/hirotomoyamada/yamada-ui/commit/c2e36674ab7fec557eb27b70883768a91aeb42b7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where animation was not executed when `as` was set.
+
+- Updated dependencies [[`01a717c`](https://github.com/hirotomoyamada/yamada-ui/commit/01a717c877f24bd6052e7a51b5145efec2d29657), [`3284b5c`](https://github.com/hirotomoyamada/yamada-ui/commit/3284b5cd19d65e5ae1210c09972a71b71c42767c), [`f158de3`](https://github.com/hirotomoyamada/yamada-ui/commit/f158de3786b2d7aa7703028791bc91aaf507f3ac), [`f63c0f6`](https://github.com/hirotomoyamada/yamada-ui/commit/f63c0f62a9664e3b5bd5afd2ca0702cba32bff00), [`dec603e`](https://github.com/hirotomoyamada/yamada-ui/commit/dec603e919578b7366c21ad51c50e8e744e6f5ca), [`d4090e7`](https://github.com/hirotomoyamada/yamada-ui/commit/d4090e796d7d039ea9d5f81f8330cbe6d7bbd1a6)]:
+  - @yamada-ui/core@1.4.1
+  - @yamada-ui/button@1.0.15
+  - @yamada-ui/close-button@1.0.14
+  - @yamada-ui/transitions@1.0.14
+  - @yamada-ui/motion@1.0.14
+  - @yamada-ui/use-value@1.1.1
+
 ## 1.0.15
 
 ### Patch Changes

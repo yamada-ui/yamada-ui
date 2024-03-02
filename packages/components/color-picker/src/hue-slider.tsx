@@ -137,7 +137,7 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
 
       <ui.div
         className="ui-hue-slider__track"
-        __css={{ position: "relative", w: "full", h: "full", ...styles.track }}
+        __css={{ position: "relative", w: "100%", h: "100%", ...styles.track }}
         {...getTrackProps(trackProps)}
       >
         <ui.div

@@ -306,9 +306,8 @@ export type AsyncState<T> =
       value: T
     }
 
-export type PromiseType<P extends Promise<any>> = P extends Promise<infer T>
-  ? T
-  : never
+export type PromiseType<P extends Promise<any>> =
+  P extends Promise<infer T> ? T : never
 
 type StateFromFunctionReturningPromise<T extends FunctionReturningPromise> =
   AsyncState<PromiseType<ReturnType<T>>>

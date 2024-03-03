@@ -32,3 +32,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           SKIP_PR: true
+          GIT_USERNAME: "hirotomoyamada"
+          GIT_EMAIL: "hirotomo.yamada@avap.co.jp"

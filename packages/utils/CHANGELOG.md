@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.0.6
+
+### Patch Changes
+
+- [#830](https://github.com/yamada-ui/yamada-ui/pull/830) [`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed to correctly recognize `hex` values without `#`.
+
 ## 1.0.5
 
 ### Patch Changes

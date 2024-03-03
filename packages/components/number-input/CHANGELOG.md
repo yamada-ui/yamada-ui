@@ -1,5 +1,20 @@
 # @yamada-ui/number-input
 
+## 1.0.17
+
+### Patch Changes
+
+- [#857](https://github.com/yamada-ui/yamada-ui/pull/857) [`94fe4e3`](https://github.com/yamada-ui/yamada-ui/commit/94fe4e39876f4de85f83d87b49c10ce0c92b4539) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where theme tokens were used in components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/form-control@1.0.17
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-counter@1.0.6
+  - @yamada-ui/use-event-listener@1.0.6
+  - @yamada-ui/use-interval@1.0.6
+
 ## 1.0.16
 
 ### Patch Changes

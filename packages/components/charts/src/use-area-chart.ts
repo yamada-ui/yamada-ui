@@ -8,8 +8,6 @@ import type {
   AreaChart,
   AreaProps,
   ReferenceLineProps,
-  XAxisProps,
-  YAxisProps,
   LegendProps,
   TooltipProps,
   DotProps,
@@ -31,15 +29,11 @@ import type {
   ReferenceUILineProps,
   RequiredChartPropGetter,
   TooltipUIProps,
-  XAxisUIProps,
-  YAxisUIProps,
 } from "./chart.types"
 import {
   areaChartProperties,
   referenceLineProperties,
   gridProperties,
-  xAxisProperties,
-  yAxisProperties,
   legendProperties,
   tooltipProperties,
   dotProperties,
@@ -51,10 +45,6 @@ export type UseAreaChartOptions = {
    * Chart data.
    */
   data: Dict[]
-  /**
-   *  The key of a group of data which should be unique in an area chart.
-   */
-  dataKey: string
   /**
    * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
    */
@@ -78,14 +68,6 @@ export type UseAreaChartOptions = {
    */
   activeDotProps?: DotUIProps
   /**
-   *  Props passed down to recharts 'XAxis' component.
-   */
-  xAxisProps?: XAxisUIProps
-  /**
-   *  Props passed down to recharts 'YAxis' component.
-   */
-  yAxisProps?: YAxisUIProps
-  /**
    *  Props passed down to recharts 'Legend' component.
    */
   legendProps?: LegendUIProps
@@ -104,12 +86,6 @@ export type UseAreaChartOptions = {
    */
   strokeDasharray?: string | number
   /**
-   * The option is the configuration of tick lines.
-   *
-   * @default 'y'
-   */
-  tickLine?: AxisType
-  /**
    * Specifies which lines should be displayed in the grid.
    *
    * @default 'x'
@@ -125,22 +101,6 @@ export type UseAreaChartOptions = {
    *  Determines whether the chart area should be represented with a gradient instead of the solid color.
    */
   withGradient?: boolean
-  /**
-   * If `true`, X axis is visible.
-   *
-   * @default true
-   */
-  withXAxis?: boolean
-  /**
-   * If `true`, Y axis is visible.
-   *
-   * @default true
-   */
-  withYAxis?: boolean
-  /**
-   * Unit displayed next to each tick in y-axis.
-   */
-  unit?: string
   /**
    *  Determines whether dots should be displayed.
    *
@@ -192,10 +152,6 @@ export type UseAreaChartOptions = {
    */
   referenceLineProps?: ReferenceUILineProps[]
   /**
-   * A function to format values on Y axis and inside the tooltip
-   */
-  valueFormatter?: (value: number) => string
-  /**
    *  Controls fill opacity of all areas.
    *
    * @default 0.2
@@ -209,25 +165,18 @@ export type UseAreaChartProps = UseAreaChartOptions & {
 
 export const useAreaChart = ({
   data,
-  dataKey,
   series,
   type,
   areaChartProps = {},
   gridProps = {},
-  xAxisProps = {},
-  yAxisProps = {},
   activeDotProps = {},
   dotProps = {},
   legendProps = {},
   tooltipProps = {},
   strokeDasharray = "5 5",
-  tickLine = "y",
   gridAxis = "x",
   layoutType = "horizontal",
   withGradient: withGradientProp,
-  withXAxis = true,
-  withYAxis = true,
-  unit,
   withDots = true,
   withActiveDots = true,
   curveType = "monotone",
@@ -238,17 +187,12 @@ export const useAreaChart = ({
   splitColors = ["red.400", "green.400"],
   splitOffset,
   referenceLineProps,
-  valueFormatter,
   styles,
 }: UseAreaChartProps) => {
   const uuid = useId()
   const { theme } = useTheme()
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const splitId = `${uuid}-split`
-  const withXTickLine =
-    gridAxis !== "none" && (tickLine === "x" || tickLine === "xy")
-  const withYTickLine =
-    gridAxis !== "none" && (tickLine === "y" || tickLine === "xy")
   const stacked = type === "stacked" || type === "percent"
   const withGradient =
     typeof withGradientProp === "boolean"
@@ -339,87 +283,6 @@ export const useAreaChart = ({
       }
     },
     [propClassName, styleClassName, strokeDasharray, gridAxis, reChartsProps],
-  )
-
-  const getXAxisProps: ChartPropGetter<
-    "div",
-    Partial<XAxisProps>,
-    XAxisProps
-  > = useCallback(
-    ({ className, ...props } = {}) => {
-      const [reChartsProps, uiProps] = splitObject(xAxisProps, xAxisProperties)
-      const styleClassName = getCSS(styles.xAxis)(theme)
-      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-
-      return {
-        className: cx(className, propClassName, styleClassName),
-        hide: !withXAxis,
-        ...(layoutType === "vertical" ? { type: "number" } : { dataKey }),
-        tick: {
-          transform: "translate(0, 10)",
-          fill: "currentColor",
-        },
-        stroke: "",
-        interval: "preserveStartEnd",
-        tickLine: withXTickLine ? { stroke: "currentColor" } : false,
-        minTickGap: 5,
-        ...props,
-        ...(reChartsProps as XAxisProps),
-      }
-    },
-    [
-      dataKey,
-      layoutType,
-      styles.xAxis,
-      theme,
-      withXAxis,
-      withXTickLine,
-      xAxisProps,
-    ],
-  )
-
-  const getYAxisProps: ChartPropGetter<
-    "div",
-    Partial<YAxisProps>,
-    YAxisProps
-  > = useCallback(
-    ({ className, ...props } = {}) => {
-      const [reChartsProps, uiProps] = splitObject(yAxisProps, yAxisProperties)
-
-      const styleClassName = getCSS(styles.yAxis)(theme)
-      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-
-      return {
-        className: cx(className, propClassName, styleClassName),
-        hide: !withYAxis,
-        axisLine: false,
-        ...(layoutType === "vertical"
-          ? { dataKey, type: "category" }
-          : { type: "number" }),
-        tickLine: withYTickLine ? { stroke: "currentColor" } : false,
-        tick: {
-          transform: "translate(-10, 0)",
-          fill: "currentColor",
-        },
-        allowDecimals: true,
-        unit: unit,
-        tickFormatter: type === "percent" ? valueToPercent : valueFormatter,
-        ...props,
-        ...(reChartsProps as YAxisProps),
-      }
-    },
-    [
-      yAxisProps,
-      styles.yAxis,
-      theme,
-      withYAxis,
-      layoutType,
-      dataKey,
-      withYTickLine,
-      unit,
-      type,
-      valueFormatter,
-    ],
   )
 
   const getLegendProps: ChartPropGetter<
@@ -656,8 +519,6 @@ export const useAreaChart = ({
     getAreaChartProps,
     getReferenceLineProps,
     getGridProps,
-    getXAxisProps,
-    getYAxisProps,
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,
@@ -669,7 +530,3 @@ export const useAreaChart = ({
 }
 
 export type UseAreaChartReturn = ReturnType<typeof useAreaChart>
-
-const valueToPercent = (value: number) => {
-  return `${(value * 100).toFixed(0)}%`
-}

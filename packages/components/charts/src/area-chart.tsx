@@ -25,6 +25,8 @@ import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
+import type { UseChartAxisOptions } from "./use-chart-axis"
+import { useChartAxis } from "./use-chart-axis"
 import type { UseChartContainerProps } from "./use-chart-container"
 import { useChartContainer } from "./use-chart-container"
 
@@ -47,7 +49,8 @@ export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
   AreaChartOptions &
   UseAreaChartOptions &
-  UseChartContainerProps
+  UseChartContainerProps &
+  UseChartAxisOptions
 
 export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
@@ -66,11 +69,21 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     maxHeight,
     className,
     series,
+    dataKey,
+    layoutType,
+    tickLine,
+    gridAxis,
+    withXAxis,
+    withYAxis,
+    xAxisProps,
+    yAxisProps,
     type = "default",
     withTooltip = true,
     withLegend = false,
     referenceLineProps,
     containerProps,
+    unit,
+    valueFormatter,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -79,8 +92,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     getAreaChartProps,
     getReferenceLineProps,
     getGridProps,
-    getXAxisProps,
-    getYAxisProps,
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,
@@ -89,6 +100,8 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     getCSSvariables,
     setHighlightedArea,
   } = useAreaChart({
+    layoutType,
+    gridAxis,
     type,
     series,
     referenceLineProps,
@@ -96,6 +109,20 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     ...computedProps,
   })
   const { getContainerProps } = useChartContainer({ containerProps })
+  const { getXAxisProps, getYAxisProps } = useChartAxis({
+    dataKey,
+    type,
+    layoutType,
+    tickLine,
+    gridAxis,
+    withXAxis,
+    withYAxis,
+    xAxisProps,
+    yAxisProps,
+    unit,
+    valueFormatter,
+    styles,
+  })
 
   const areas = series.map((item, index) => {
     const { id, stroke, ...rest } = getAreaProps({ item, index }, ref)

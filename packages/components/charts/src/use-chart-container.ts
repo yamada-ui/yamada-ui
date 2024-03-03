@@ -16,6 +16,11 @@ export const useChartContainer = ({
   containerProps = {},
 }: UseChartContainerProps) => {
   const { theme } = useTheme()
+  const [reChartsProps, uiProps] = splitObject(
+    containerProps,
+    containerProperties,
+  )
+  const propClassName = getCSS(uiProps)(theme)
 
   const getContainerProps: ChartPropGetter<
     "div",
@@ -23,11 +28,6 @@ export const useChartContainer = ({
     Omit<ResponsiveContainerProps, "children">
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(
-        containerProps,
-        containerProperties,
-      )
-      const propClassName = getCSS(uiProps)(theme)
       let containerClassName: string
       if (isNumber(className))
         containerClassName = cx(className.toString(), propClassName)
@@ -40,7 +40,7 @@ export const useChartContainer = ({
         ...reChartsProps,
       }
     },
-    [containerProps, theme],
+    [propClassName, reChartsProps],
   )
 
   return {

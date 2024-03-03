@@ -17,7 +17,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Build coverage
-        run: pnpm test:coverage
+        run: pnpm vitest --coverage --silent --run
 
       - name: Run GitHub File Sync
         uses: hirotomoyamada/repo-file-sync-action@main

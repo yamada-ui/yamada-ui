@@ -4,7 +4,7 @@ const baseTheme = {
   brandTitle: "Yamada UI",
   brandUrl: "https://github.com/yamada-ui/yamada-ui",
   brandImage:
-    "https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png",
+    "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png",
 
   // Colors
   colorPrimary: defaultTheme.colors.violet[500],

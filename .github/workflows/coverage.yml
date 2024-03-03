@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "packages/**/tests/**"
+      - "packages/test/**"
+      - "vitest.config.mts"
+      - "scripts/setup-test.ts"
     branches:
       - main
 
@@ -29,4 +32,3 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           SKIP_PR: true
-          TARGET_BRANCH: "coverage/main"

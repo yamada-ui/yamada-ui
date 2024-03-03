@@ -20,17 +20,6 @@ describe("<Accordion />", () => {
     await a11y(container)
   })
 
-  test("Accordion renders correctly", async () => {
-    const { container } = render(
-      <Accordion>
-        <AccordionItem label="Accordion Label">
-          This is an accordion item
-        </AccordionItem>
-      </Accordion>,
-    )
-    await a11y(container)
-  })
-
   test("should render correctly with defaultIndex item expanded", () => {
     render(
       <Accordion isToggle defaultIndex={0}>

@@ -135,9 +135,12 @@ const addReviewers = async (
         assignees: ["hirotomoyamada"],
       })
 
+      const count = (requested_reviewers?.length ?? 0) + reviewers.length
       let selectedReviewers: string[]
 
       if (head.label === "yamada-docs:changeset-release/main") {
+        if (count >= 1) return
+
         selectedReviewers = ["hirotomoyamada"]
 
         await octokit.issues.addLabels({
@@ -152,8 +155,6 @@ const addReviewers = async (
           reviewers: selectedReviewers,
         })
       } else {
-        const count = (requested_reviewers?.length ?? 0) + reviewers.length
-
         if (count >= 2) return
 
         const omitCollaboratorIds = collaboratorIds.filter(

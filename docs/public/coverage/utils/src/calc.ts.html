@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.41% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/48</span>
+                <span class='fraction'>48/48</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">46.15% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>6/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.41% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/48</span>
+                <span class='fraction'>48/48</span>
             </div>
         
             
@@ -116,7 +116,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">17472x</span>
+<span class="cline-any cline-yes">17598x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -127,11 +127,11 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">34944x</span>
-<span class="cline-any cline-yes">34944x</span>
-<span class="cline-any cline-yes">17472x</span>
-<span class="cline-any cline-yes">17472x</span>
-<span class="cline-any cline-yes">17472x</span>
+<span class="cline-any cline-yes">35228x</span>
+<span class="cline-any cline-yes">35228x</span>
+<span class="cline-any cline-yes">17598x</span>
+<span class="cline-any cline-yes">17598x</span>
+<span class="cline-any cline-yes">17598x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -144,13 +144,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
+<span class="cline-any cline-yes">64x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -191,14 +191,14 @@ type Calc = {
 }
 &nbsp;
 export const calc = Object.assign(
-<span class="fstat-no" title="function not covered" >  (x: Operand): Calc =&gt; ({</span>
-<span class="cstat-no" title="statement not covered" >    add: (...args) =&gt; calc(add(x, ...args)),</span>
-<span class="cstat-no" title="statement not covered" >    subtract: (...args) =&gt; calc(subtract(x, ...args)),</span>
-<span class="cstat-no" title="statement not covered" >    multiply: (...args) =&gt; calc(multiply(x, ...args)),</span>
-<span class="cstat-no" title="statement not covered" >    divide: (...args) =&gt; calc(divide(x, ...args)),</span>
-<span class="cstat-no" title="statement not covered" >    negate: () =&gt; calc(negate(x)),</span>
-<span class="cstat-no" title="statement not covered" >    toString: () =&gt; x.toString(),</span>
-<span class="cstat-no" title="statement not covered" >  }),</span>
+  (x: Operand): Calc =&gt; ({
+    add: <span class="fstat-no" title="function not covered" >(...args) =&gt; calc(add(x, ...args)),</span>
+    subtract: <span class="fstat-no" title="function not covered" >(...args) =&gt; calc(subtract(x, ...args)),</span>
+    multiply: <span class="fstat-no" title="function not covered" >(...args) =&gt; calc(multiply(x, ...args)),</span>
+    divide: <span class="fstat-no" title="function not covered" >(...args) =&gt; calc(divide(x, ...args)),</span>
+    negate: () =&gt; calc(negate(x)),
+    toString: () =&gt; x.toString(),
+  }),
   {
     add,
     subtract,
@@ -214,7 +214,7 @@ export const calc = Object.assign(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-03T18:56:14.686Z
+                at 2024-03-03T20:57:50.762Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

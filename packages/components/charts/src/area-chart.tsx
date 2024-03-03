@@ -23,7 +23,7 @@ import { AreaSplit } from "./area-chart-split"
 import { Legend } from "./legend"
 import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
-import { AreaChartProvider, useAreaChart } from "./use-area-chart"
+import { useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
 
 type AreaChartOptions = {
@@ -66,7 +66,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     type = "default",
     withTooltip = true,
     withLegend = false,
-    referenceLineProps: referenceLines,
+    referenceLineProps: referenceLineProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -88,7 +88,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   } = useAreaChart({
     type,
     series,
-    referenceLineProps: referenceLines,
+    referenceLineProps,
     styles,
     ...computedProps,
   })
@@ -106,83 +106,69 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     )
   })
 
-  const referenceLinesItems = referenceLines?.map((line, index) => (
+  const referenceLinesItems = referenceLineProps?.map((line, index) => (
     <ReferenceLine
       key={`referenceLine-${index}`}
       {...getReferenceLineProps({ index, line }, ref)}
     />
   ))
 
-  const legend = () => {
-    const legendProps = getLegendProps({}, ref)
-    if (withLegend)
-      return (
-        <ReChartsLegend
-          content={({ payload }) => (
-            <Legend
-              ref={ref}
-              payload={payload}
-              onHighlight={setHighlightedArea}
-            />
-          )}
-          {...legendProps}
-        />
-      )
-  }
-
-  const tooltip = () => {
-    const tooltipProps = getTooltipProps({}, ref)
-    if (withTooltip)
-      return (
-        <Tooltip
-          content={({ label, payload }) => (
-            <ChartTooltip ref={ref} label={label} payload={payload} />
-          )}
-          {...tooltipProps}
-        />
-      )
-  }
-
   return (
     <ChartProvider value={{ styles }}>
-      <AreaChartProvider value={{}}>
-        <ui.div
-          className={cx("ui-area-chart", className)}
-          var={getCSSvariables()}
-          {...{
-            w,
-            width,
-            minW,
-            minWidth,
-            maxW,
-            maxWidth,
-            h,
-            height,
-            minH,
-            minHeight,
-            maxH,
-            maxHeight,
-          }}
-          __css={{ ...styles.container }}
-        >
-          <ResponsiveContainer {...getContainerProps({}, ref)}>
-            <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
-              {referenceLinesItems}
-              <CartesianGrid {...getGridProps({}, ref)} />
-              <XAxis {...getXAxisProps()} />
-              <YAxis {...getYAxisProps()} />
-              {legend()}
-              {tooltip()}
-              {type === "split" ? (
-                <defs>
-                  <AreaSplit {...getAreaSplitProps()} />
-                </defs>
-              ) : null}
-              {areas}
-            </ReChartsAreaChart>
-          </ResponsiveContainer>
-        </ui.div>
-      </AreaChartProvider>
+      <ui.div
+        className={cx("ui-area-chart", className)}
+        var={getCSSvariables()}
+        {...{
+          w,
+          width,
+          minW,
+          minWidth,
+          maxW,
+          maxWidth,
+          h,
+          height,
+          minH,
+          minHeight,
+          maxH,
+          maxHeight,
+        }}
+        __css={{ ...styles.container }}
+      >
+        <ResponsiveContainer {...getContainerProps({}, ref)}>
+          <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
+            {referenceLinesItems}
+            <CartesianGrid {...getGridProps({}, ref)} />
+            <XAxis {...getXAxisProps()} />
+            <YAxis {...getYAxisProps()} />
+            {withLegend ? (
+              <ReChartsLegend
+                content={({ payload }) => (
+                  <Legend
+                    ref={ref}
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                  />
+                )}
+                {...getLegendProps({}, ref)}
+              />
+            ) : null}
+            {withTooltip ? (
+              <Tooltip
+                content={({ label, payload }) => (
+                  <ChartTooltip ref={ref} label={label} payload={payload} />
+                )}
+                {...getTooltipProps({}, ref)}
+              />
+            ) : null}
+            {type === "split" ? (
+              <defs>
+                <AreaSplit {...getAreaSplitProps()} />
+              </defs>
+            ) : null}
+            {areas}
+          </ReChartsAreaChart>
+        </ResponsiveContainer>
+      </ui.div>
     </ChartProvider>
   )
 })

@@ -2,7 +2,6 @@ import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import {
-  createContext,
   cx,
   isNumber,
   isObject,
@@ -55,14 +54,6 @@ import {
   dotProperties,
   areaProperties,
 } from "./chart.types"
-
-type AreaChartContext = {}
-
-export const [AreaChartProvider, useAreaChartContext] =
-  createContext<AreaChartContext>({
-    name: "AreaChartContext",
-    errorMessage: `useAreaChartContext returned is 'undefined'. Seems you forgot to wrap the components in "<AreaChart />"`,
-  })
 
 export type UseAreaChartOptions = {
   /**

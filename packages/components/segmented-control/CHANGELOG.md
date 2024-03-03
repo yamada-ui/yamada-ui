@@ -1,5 +1,19 @@
 # @yamada-ui/segmented-control
 
+## 1.0.16
+
+### Patch Changes
+
+- [#871](https://github.com/yamada-ui/yamada-ui/pull/871) [`5895f9c`](https://github.com/yamada-ui/yamada-ui/commit/5895f9c545a30ccbcf91cbcad2ea5d51a81561c6) Thanks [@hifumi9](https://github.com/hifumi9)! - Fixed a bug where theme tokens were used in components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/motion@1.0.15
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-controllable-state@1.0.6
+  - @yamada-ui/use-descendant@1.0.6
+  - @yamada-ui/use-focus-visible@1.0.6
+
 ## 1.0.15
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/use-value
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-breakpoint@1.2.2
+
 ## 1.1.1
 
 ### Patch Changes

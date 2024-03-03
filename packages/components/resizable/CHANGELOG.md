@@ -1,5 +1,16 @@
 # @yamada-ui/resizable
 
+## 1.0.7
+
+### Patch Changes
+
+- [#848](https://github.com/yamada-ui/yamada-ui/pull/848) [`53d1f88`](https://github.com/yamada-ui/yamada-ui/commit/53d1f880301dcd3166db1e54f1503280105aa7e2) Thanks [@piro-hiroki](https://github.com/piro-hiroki)! - Fixed a bug where theme tokens were used in components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/core@1.4.2
+
 ## 1.0.6
 
 ### Patch Changes

@@ -52,13 +52,10 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
             {icon || <CheckIcon />}
           </AutocompleteItemIcon>
         ) : null}
-        {icon ? (
-          <ui.span style={{ pointerEvents: "none", flex: 1 }} lineClamp={1}>
-            {children}
-          </ui.span>
-        ) : (
-          children
-        )}
+
+        <ui.span style={{ flex: 1 }} data-label>
+          {children}
+        </ui.span>
       </ui.li>
     )
   },

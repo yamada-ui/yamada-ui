@@ -1,5 +1,17 @@
 # @yamada-ui/indicator
 
+## 1.1.13
+
+### Patch Changes
+
+- [#860](https://github.com/yamada-ui/yamada-ui/pull/860) [`5fd37ff`](https://github.com/yamada-ui/yamada-ui/commit/5fd37ff8bf7f89a1b93b98ea5abe636bfcc7ae73) Thanks [@Exerea](https://github.com/Exerea)! - fix:Indicator theme token usage in styles
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-animation@1.0.14
+  - @yamada-ui/use-value@1.1.2
+
 ## 1.1.12
 
 ### Patch Changes

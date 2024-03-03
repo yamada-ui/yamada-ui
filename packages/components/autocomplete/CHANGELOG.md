@@ -1,5 +1,27 @@
 # @yamada-ui/autocomplete
 
+## 1.1.1
+
+### Patch Changes
+
+- [#884](https://github.com/yamada-ui/yamada-ui/pull/884) [`46a4257`](https://github.com/yamada-ui/yamada-ui/commit/46a4257d50c04144c54a0f72c56cf2b0c71eac0b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where when a string was set to `icon` of `optionProps` or `Option`, the string was inserted into the input value.
+
+- [#873](https://github.com/yamada-ui/yamada-ui/pull/873) [`a398e87`](https://github.com/yamada-ui/yamada-ui/commit/a398e87232cf534cdfaa6da502694ef5937c2b41) Thanks [@YuukiHayashi0510](https://github.com/YuukiHayashi0510)! - fixed a bug, autocomplete references theme tokens
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/form-control@1.0.17
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/motion@1.0.15
+  - @yamada-ui/popover@1.0.15
+  - @yamada-ui/portal@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-clickable@1.0.6
+  - @yamada-ui/use-controllable-state@1.0.6
+  - @yamada-ui/use-descendant@1.0.6
+  - @yamada-ui/use-disclosure@1.0.6
+  - @yamada-ui/use-outside-click@1.0.6
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,19 @@
 # @yamada-ui/slider
 
+## 1.0.18
+
+### Patch Changes
+
+- [#821](https://github.com/yamada-ui/yamada-ui/pull/821) [`ddad7a7`](https://github.com/yamada-ui/yamada-ui/commit/ddad7a779a1f587c7f4f9a4a21e0a4e0b75cf036) Thanks [@Teramon1031](https://github.com/Teramon1031)! - Fixed a bug where range slider thumb was not being applied
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/form-control@1.0.17
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-controllable-state@1.0.6
+  - @yamada-ui/use-pan-event@1.0.6
+  - @yamada-ui/use-size@1.0.6
+
 ## 1.0.17
 
 ### Patch Changes

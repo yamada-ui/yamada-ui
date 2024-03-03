@@ -703,7 +703,13 @@ export const useAutocomplete = <T extends string | string[] = string>({
       const enabledValues = descendants.enabledValues()
       const selectedValues = enabledValues
         .filter(({ node }) => node.dataset.value === newValue)
-        .map(({ node }) => node.textContent ?? "")
+        .map(({ node }) => {
+          const el = Array.from(node.children).find(
+            (child) => child.getAttribute("data-label") !== null,
+          )
+
+          return el?.textContent ?? ""
+        })
 
       if (allowFree && selectedValues.length === 0) {
         selectedValues.push(newValue)

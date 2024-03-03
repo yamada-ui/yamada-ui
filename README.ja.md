@@ -31,7 +31,7 @@ Yamada UIは、最先端のWebアプリケーションやウェブサイトの�
 - [インストール](#インストール)
 - [使い方](#使い方)
 - [CodeSandbox](#codesandbox)
-- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [Storybook](https://yamada-ui.github.io/yamada-ui/)
 - [サポートする](#サポートする)
 - [貢献する](#貢献する)
 - [ライセンス](#ライセンス)

@@ -18,16 +18,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/nogu66",
   },
   {
-    id: 25207729,
-    name: "000000armor",
-    icon: "https://avatars.githubusercontent.com/u/25207729?v=4",
-    url: "https://github.com/000000armor",
-  },
-  {
     id: 57742720,
     name: "apple-yagi",
     icon: "https://avatars.githubusercontent.com/u/57742720?v=4",
     url: "https://github.com/apple-yagi",
+  },
+  {
+    id: 25207729,
+    name: "000000armor",
+    icon: "https://avatars.githubusercontent.com/u/25207729?v=4",
+    url: "https://github.com/000000armor",
   },
   {
     id: 109917122,
@@ -42,10 +42,22 @@ export const CONTRIBUTORS = [
     url: "https://github.com/quangnmwork",
   },
   {
+    id: 12987013,
+    name: "suzukisan22",
+    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
+    url: "https://github.com/suzukisan22",
+  },
+  {
     id: 64961185,
     name: "Evande1",
     icon: "https://avatars.githubusercontent.com/u/64961185?v=4",
     url: "https://github.com/Evande1",
+  },
+  {
+    id: 103011756,
+    name: "piro-hiroki",
+    icon: "https://avatars.githubusercontent.com/u/103011756?v=4",
+    url: "https://github.com/piro-hiroki",
   },
   {
     id: 41576384,
@@ -108,10 +120,10 @@ export const CONTRIBUTORS = [
     url: "https://github.com/flyingbarbarian",
   },
   {
-    id: 12987013,
-    name: "suzukisan22",
-    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
-    url: "https://github.com/suzukisan22",
+    id: 72508905,
+    name: "june23hy",
+    icon: "https://avatars.githubusercontent.com/u/72508905?v=4",
+    url: "https://github.com/june23hy",
   },
   {
     id: 38555478,
@@ -120,16 +132,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/kirikirisu",
   },
   {
-    id: 2181977,
-    name: "hifumi9",
-    icon: "https://avatars.githubusercontent.com/u/2181977?v=4",
-    url: "https://github.com/hifumi9",
-  },
-  {
     id: 83756829,
     name: "ichien178",
     icon: "https://avatars.githubusercontent.com/u/83756829?v=4",
     url: "https://github.com/ichien178",
+  },
+  {
+    id: 2181977,
+    name: "hifumi9",
+    icon: "https://avatars.githubusercontent.com/u/2181977?v=4",
+    url: "https://github.com/hifumi9",
   },
   {
     id: 29009165,
@@ -142,18 +154,6 @@ export const CONTRIBUTORS = [
     name: "saki10",
     icon: "https://avatars.githubusercontent.com/u/66323139?v=4",
     url: "https://github.com/saki10",
-  },
-  {
-    id: 103011756,
-    name: "piro-hiroki",
-    icon: "https://avatars.githubusercontent.com/u/103011756?v=4",
-    url: "https://github.com/piro-hiroki",
-  },
-  {
-    id: 72508905,
-    name: "june23hy",
-    icon: "https://avatars.githubusercontent.com/u/72508905?v=4",
-    url: "https://github.com/june23hy",
   },
   {
     id: 49627888,

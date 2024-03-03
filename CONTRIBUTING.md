@@ -10,7 +10,7 @@ When it comes to open source, there are different ways you can contribute, all o
 
 The following steps will get you up and running to contribute to Yamada UI:
 
-1. Fork the [repository](https://github.com/hirotomoyamada/yamada-ui).
+1. Fork the [repository](https://github.com/yamada-ui/yamada-ui).
 
 2. Clone your fork locally.
 
@@ -52,7 +52,7 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 
 ## Think you found a bug?
 
-Please conform to the [issue template](https://github.com/hirotomoyamada/yamada-ui/issues/new/choose) and provide a clear path to reproduction.
+Please conform to the [issue template](https://github.com/yamada-ui/yamada-ui/issues/new/choose) and provide a clear path to reproduction.
 
 ## Proposing new or changed API?
 
@@ -86,7 +86,7 @@ the following categories:
 
 ### Steps to PR
 
-1. Fork and clone the [repository](https://github.com/hirotomoyamada/yamada-ui).
+1. Fork and clone the [repository](https://github.com/yamada-ui/yamada-ui).
 
 2. Create a new branch out of the `main` branch. We follow the convention
    `[type/scope]`. For example `fix/accordion-hook` or `docs/menu-typo`. `type`

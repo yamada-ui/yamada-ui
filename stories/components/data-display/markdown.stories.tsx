@@ -77,7 +77,7 @@ const README = `
     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
   </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
-  <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
+  <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
   <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
@@ -213,9 +213,9 @@ const Example = () => {
 
 Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
 
-The documentation site for Yamada UI is located in a separate [repository](https://github.com/hirotomoyamada/yamada-docs). If you're interested in contributing to the documentation, please refer to this [contribution guide](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.md).
+The documentation site for Yamada UI is located in a separate [repository](https://github.com/yamada-ui/yamada-docs). If you're interested in contributing to the documentation, please refer to this [contribution guide](https://github.com/yamada-ui/yamada-docs/blob/main/CONTRIBUTING.md).
 
 ## License
 
-MIT © [Hirotomo Yamada](https://github.com/hirotomoyamada)
+MIT © [Hirotomo Yamada](https://github.com/yamada-ui)
 `

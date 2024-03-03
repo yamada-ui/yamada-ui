@@ -1,20 +1,13 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import {
-  cx,
-  isNumber,
-  isObject,
-  omitObject,
-  splitObject,
-} from "@yamada-ui/utils"
+import { cx, isObject, omitObject, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
   AreaChart,
   AreaProps,
   ReferenceLineProps,
-  ResponsiveContainerProps,
   XAxisProps,
   YAxisProps,
   LegendProps,
@@ -31,7 +24,6 @@ import type {
   AreaChartUIProps,
   AxisType,
   ChartPropGetter,
-  ContainerUIProps,
   DotUIProps,
   GridUIProps,
   LayoutType,
@@ -45,7 +37,6 @@ import type {
 import {
   areaChartProperties,
   referenceLineProperties,
-  containerProperties,
   gridProperties,
   xAxisProperties,
   yAxisProperties,
@@ -78,10 +69,6 @@ export type UseAreaChartOptions = {
    *  Props passed down to recharts `AreaChart` component.
    */
   areaChartProps?: AreaChartUIProps
-  /**
-   *  Props passed down to recharts `ResponsiveContainer` component.
-   */
-  containerProps?: ContainerUIProps
   /**
    *  Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
@@ -227,7 +214,6 @@ export const useAreaChart = ({
   type,
   areaChartProps = {},
   gridProps = {},
-  containerProps = {},
   xAxisProps = {},
   yAxisProps = {},
   activeDotProps = {},
@@ -330,33 +316,6 @@ export const useAreaChart = ({
       }
     },
     [styles, theme],
-  )
-
-  const getContainerProps: ChartPropGetter<
-    "div",
-    Partial<Omit<ResponsiveContainerProps, "children">>,
-    Omit<ResponsiveContainerProps, "children">
-  > = useCallback(
-    ({ className, ...props } = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(
-        containerProps,
-        containerProperties,
-      )
-
-      const PropClassName = getCSS(uiProps)(theme)
-      let containerClassName: string
-      if (isNumber(className))
-        containerClassName = cx(className.toString(), PropClassName)
-      else containerClassName = cx(className, className)
-
-      return {
-        ref,
-        containerClassName,
-        ...props,
-        ...reChartsProps,
-      }
-    },
-    [containerProps, theme],
   )
 
   const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
@@ -697,7 +656,6 @@ export const useAreaChart = ({
     getAreaChartProps,
     getReferenceLineProps,
     getGridProps,
-    getContainerProps,
     getXAxisProps,
     getYAxisProps,
     getLegendProps,

@@ -25,6 +25,8 @@ import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
 import { ChartProvider, useChart } from "./use-chart"
+import type { UseChartContainerProps } from "./use-chart-container"
+import { useChartContainer } from "./use-chart-container"
 
 type AreaChartOptions = {
   /**
@@ -44,7 +46,8 @@ type AreaChartOptions = {
 export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
   AreaChartOptions &
-  UseAreaChartOptions
+  UseAreaChartOptions &
+  UseChartContainerProps
 
 export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
@@ -66,7 +69,8 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     type = "default",
     withTooltip = true,
     withLegend = false,
-    referenceLineProps: referenceLineProps,
+    referenceLineProps,
+    containerProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -75,7 +79,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     getAreaChartProps,
     getReferenceLineProps,
     getGridProps,
-    getContainerProps,
     getXAxisProps,
     getYAxisProps,
     getLegendProps,
@@ -92,6 +95,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     styles,
     ...computedProps,
   })
+  const { getContainerProps } = useChartContainer({ containerProps })
 
   const areas = series.map((item, index) => {
     const { id, stroke, ...rest } = getAreaProps({ item, index }, ref)

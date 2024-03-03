@@ -4,6 +4,8 @@ import type { ComponentPropsWithoutRef } from "react"
 import type {
   AreaChart as ReChartsAreaChart,
   AreaProps as ReChartsAreaProps,
+  BarChart as ReChartsBarChart,
+  BarProps as ReChartsBarProps,
   ReferenceLineProps,
   DotProps,
   XAxisProps,
@@ -287,6 +289,64 @@ export const dotProperties: (keyof DotProps)[] = [
   "cx",
   "cy",
   "r",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]
+
+export type BarChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsBarProps>,
+  { color: CSSUIProps["color"] }
+>
+
+export type BarChartUIProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof ReChartsBarChart>
+>
+
+export const barChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof ReChartsBarChart
+>)[] = [
+  "layout",
+  "syncId",
+  "syncMethod",
+  "width",
+  "height",
+  "data",
+  "margin",
+  "stackOffset",
+  "onClick",
+  "onMouseEnter",
+  "onMouseMove",
+  "onMouseLeave",
+]
+
+export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
+  "type",
+  "dataKey",
+  "xAxisId",
+  "yAxisId",
+  "legendType",
+  "label",
+  "stroke",
+  "strokeWidth",
+  "layout",
+  "points",
+  "stackId",
+  "unit",
+  "name",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "id",
+  "onAnimationStart",
+  "onAnimationEnd",
   "onClick",
   "onMouseDown",
   "onMouseUp",

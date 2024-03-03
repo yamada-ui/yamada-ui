@@ -1,39 +1,43 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { useToken, useValue } from "@yamada-ui/react"
+import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import { useState } from "react"
 import {
+  Legend as ReChartsLegend,
+  BarChart as ReChartsBarChart,
   Bar,
   CartesianGrid,
-  Legend,
-  BarChart as ReChartsBarChart,
   Tooltip,
   XAxis,
   YAxis,
+  ResponsiveContainer,
 } from "recharts"
-import type { LegendProps, XAxisProps, YAxisProps } from "recharts"
+import type { XAxisProps, YAxisProps } from "recharts"
+import type {
+  AreaChartType,
+  AxisType,
+  BarChartSeries,
+  BarChartUIProps,
+  ContainerUIProps,
+  LayoutType,
+  LegendUIProps,
+  TooltipUIProps,
+} from "./chart.types"
+import { Legend } from "./legend"
+import { ChartTooltip } from "./tooltip"
 import { BarChartProvider, useBarChart } from "./use-bar-chart"
 import { ChartProvider, useChart } from "./use-chart"
-
-export type LayoutType = "horizontal" | "vertical"
-export interface BarChartSeries extends ChartSeries {}
-export type ChartSeries = {
-  name: string
-  color: string
-  label?: string
-}
 
 type BarChartOptions = {
   /**
    * Chart data.
    */
-  data: Record<string, any>[]
+  data: Dict[]
   /**
    * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
    */
@@ -41,19 +45,41 @@ type BarChartOptions = {
   /**
    *  The key of a group of data which should be unique in an area chart.
    */
-  dataKey?: string
+  dataKey: string
   /**
    *  Controls how chart areas are positioned relative to each other
    *
    * @default `default`
    */
-  type?: string
+  type?: AreaChartType
   /**
    *  Controls fill opacity of all areas.
    *
    * @default 1
    */
   fillOpacity?: number
+  /**
+   *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
+   *
+   * @default '["red.400", "green.400"]'
+   */
+  splitColors?: [string, string]
+  /**
+   * A function to format values on Y axis and inside the tooltip
+   */
+  valueFormatter?: (value: number) => string
+  /**
+   *  Props passed down to recharts `AreaChart` component.
+   */
+  barChartProps?: BarChartUIProps
+  /**
+   *  Props passed down to recharts `ResponsiveContainer` component.
+   */
+  containerProps?: ContainerUIProps
+  /**
+   * Unit displayed next to each tick in y-axis.
+   */
+  unit?: string
   /**
    * If `true`, X axis is visible.
    *
@@ -79,23 +105,35 @@ type BarChartOptions = {
    */
   withLegend?: boolean
   /**
+   * Specifies the duration of animation, the unit of this option is ms.
+   *
+   * @default 0
+   */
+  tooltipAnimationDuration?: number
+  /**
    * The option is the configuration of tick lines.
    *
    * @default 'y'
    */
-  tickLine?: "x" | "y" | "xy" | "none"
+  tickLine?: AxisType
   /**
    * Specifies which lines should be displayed in the grid.
    *
    * @default 'x'
    */
-  gridAxis?: "x" | "y" | "xy" | "none"
+  gridAxis?: AxisType
   /**
    * Chart orientation.
    *
    * @default 'horizontal'
    */
-  orientation?: "horizontal" | "vertical"
+  orientation?: LayoutType
+  /**
+   *  Determines whether points with `null` values should be connected.
+   *
+   * @default true
+   */
+  connectNulls?: boolean
   /**
    *  Props passed down to recharts 'XAxis' component.
    */
@@ -107,7 +145,11 @@ type BarChartOptions = {
   /**
    *  Props passed down to recharts 'Legend' component.
    */
-  legendProps?: Omit<LegendProps, "ref">
+  legendProps?: LegendUIProps
+  /**
+   *  Props passed down to recharts 'Tooltip' component.
+   */
+  tooltipProps?: TooltipUIProps
 }
 
 export type BarChartProps = HTMLUIProps<"div"> &
@@ -117,52 +159,80 @@ export type BarChartProps = HTMLUIProps<"div"> &
 export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("BarChart", props)
   const {
+    w,
+    width,
+    minW,
+    minWidth,
+    maxW,
+    maxWidth,
+    h,
+    height,
+    minH,
+    minHeight,
+    maxH,
+    maxHeight,
     className,
     data,
-    dataKey,
-    series,
-    fillOpacity = 1,
-    withXAxis = true,
-    withYAxis = true,
     withTooltip = true,
+    series,
+    type = "default",
     withLegend = false,
-    tickLine = "y",
-    gridAxis = "x",
-    orientation = "horizontal",
-    onMouseLeave,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {} = useChart(computedProps)
-  const {} = useBarChart(computedProps)
+  const {
+    getBarProps,
+    getBarChartProps,
+    getContainerProps,
+    getXAxisProps,
+    getYAxisProps,
+    getLegendProps,
+    getTooltipProps,
+    getCSSvariables,
+    setHighlightedArea,
+  } = useBarChart({
+    data,
+    type,
+    series,
+    styles,
+    ...computedProps,
+  })
 
-  const withXTickLine =
-    gridAxis !== "none" && (tickLine === "x" || tickLine === "xy")
-  const withYTickLine =
-    gridAxis !== "none" && (tickLine === "y" || tickLine === "xy")
-  const css: CSSUIObject = {}
-
-  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
-  const shouldHighlight = highlightedArea !== null
-  const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
-    setHighlightedArea(null)
-    onMouseLeave?.(event)
+  const legend = () => {
+    const legendProps = getLegendProps({}, ref)
+    if (withLegend)
+      return (
+        <ReChartsLegend
+          content={(payload) => (
+            <Legend
+              ref={ref}
+              payload={payload.payload}
+              onHighlight={setHighlightedArea}
+            />
+          )}
+          {...legendProps}
+        />
+      )
   }
 
-  const bars = series.map((item) => {
-    const color = useToken("colors", useValue(item.color)) ?? item.color
-    const dimmed = shouldHighlight && highlightedArea !== item.name
+  const tooltip = () => {
+    const tooltipProps = getTooltipProps({}, ref)
+    if (withTooltip)
+      return (
+        <Tooltip
+          content={({ label, payload }) => (
+            <ChartTooltip ref={ref} label={label} payload={payload} />
+          )}
+          {...tooltipProps}
+        />
+      )
+  }
 
-    return (
-      <Bar
-        key={item.name}
-        dataKey={item.name}
-        fillOpacity={dimmed ? 0.1 : fillOpacity}
-        strokeOpacity={dimmed ? 0.2 : 0}
-        fill={color}
-        stroke={color}
-      />
-    )
+  const bars = series.map((item, index) => {
+    const { id, stroke, ...rest } = getBarProps({ item, index }, ref)
+
+    return <Bar key={id} id={id} stroke={stroke} {...rest} />
   })
 
   return (
@@ -170,32 +240,35 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       <BarChartProvider value={{}}>
         <ui.div
           ref={ref}
-          className={cx("ui-line-chart", className)}
-          __css={css}
+          className={cx("ui-bar-chart", className)}
+          var={getCSSvariables()}
+          {...{
+            w,
+            width,
+            minW,
+            minWidth,
+            maxW,
+            maxWidth,
+            h,
+            height,
+            minH,
+            minHeight,
+            maxH,
+            maxHeight,
+            data,
+          }}
+          __css={{ ...styles.container }}
         >
-          <ReChartsBarChart width={730} height={250} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              hide={!withXAxis}
-              {...(orientation === "vertical"
-                ? { type: "number" }
-                : { dataKey })}
-              tickLine={withXTickLine ? { stroke: "currentColor" } : false}
-            />
-            <YAxis
-              hide={!withYAxis}
-              axisLine={false}
-              {...(orientation === "vertical"
-                ? { dataKey, type: "category" }
-                : { type: "number" })}
-              tickLine={withYTickLine ? { stroke: "currentColor" } : false}
-            />
-            {withTooltip ? <Tooltip /> : null}
-            {withLegend ? <Legend /> : null}
-            <Legend />
-            <Tooltip />
-            {bars}
-          </ReChartsBarChart>
+          <ResponsiveContainer {...getContainerProps({}, ref)}>
+            <ReChartsBarChart {...getBarChartProps({}, ref)}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis {...getXAxisProps()} />
+              <YAxis {...getYAxisProps()} />
+              {tooltip()}
+              {legend()}
+              {bars}
+            </ReChartsBarChart>
+          </ResponsiveContainer>
         </ui.div>
       </BarChartProvider>
     </ChartProvider>

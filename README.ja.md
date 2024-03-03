@@ -8,7 +8,7 @@
     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
   </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
-  <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
+  <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
   <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
@@ -31,7 +31,7 @@ Yamada UIは、最先端のWebアプリケーションやウェブサイトの�
 - [インストール](#インストール)
 - [使い方](#使い方)
 - [CodeSandbox](#codesandbox)
-- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [Storybook](https://yamada-ui.github.io/yamada-ui/)
 - [サポートする](#サポートする)
 - [貢献する](#貢献する)
 - [ライセンス](#ライセンス)
@@ -146,7 +146,7 @@ const Example = () => {
 
 あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。
 
-また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/hirotomoyamada/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
+また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/yamada-ui/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/yamada-ui/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
 
 ## ライセンス
 

@@ -9,7 +9,7 @@
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui"
+    "url": "git+https://github.com/yamada-ui/yamada-ui"
   },
   "scripts": {
     "prepare": "husky install",

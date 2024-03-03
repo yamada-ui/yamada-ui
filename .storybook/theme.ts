@@ -2,7 +2,7 @@ import { defaultTheme } from "@yamada-ui/react"
 
 const baseTheme = {
   brandTitle: "Yamada UI",
-  brandUrl: "https://github.com/hirotomoyamada/yamada-ui",
+  brandUrl: "https://github.com/yamada-ui/yamada-ui",
   brandImage:
     "https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png",
 

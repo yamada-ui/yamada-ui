@@ -47,5 +47,3 @@ export const useChartContainer = ({
     getContainerProps,
   }
 }
-
-export type UseChartContainerReturn = ReturnType<typeof useChartContainer>

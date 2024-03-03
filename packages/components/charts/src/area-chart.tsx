@@ -29,6 +29,8 @@ import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
 import type { UseChartContainerProps } from "./use-chart-container"
 import { useChartContainer } from "./use-chart-container"
+import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
+import { useChartReferenceLine } from "./use-chart-reference-line"
 
 type AreaChartOptions = {
   /**
@@ -50,7 +52,8 @@ export type AreaChartProps = HTMLUIProps<"div"> &
   AreaChartOptions &
   UseAreaChartOptions &
   UseChartContainerProps &
-  UseChartAxisOptions
+  UseChartAxisOptions &
+  UseChartReferenceLineOptions
 
 export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
@@ -90,7 +93,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const {} = useChart(computedProps)
   const {
     getAreaChartProps,
-    getReferenceLineProps,
     getGridProps,
     getLegendProps,
     getTooltipProps,
@@ -123,6 +125,10 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     valueFormatter,
     styles,
   })
+  const { getReferenceLineProps } = useChartReferenceLine({
+    referenceLineProps,
+    styles,
+  })
 
   const areas = series.map((item, index) => {
     const { id, stroke, ...rest } = getAreaProps({ item, index }, ref)
@@ -137,10 +143,10 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     )
   })
 
-  const referenceLinesItems = referenceLineProps?.map((line, index) => (
+  const referenceLinesItems = referenceLineProps?.map((_, index) => (
     <ReferenceLine
       key={`referenceLine-${index}`}
-      {...getReferenceLineProps({ index, line }, ref)}
+      {...getReferenceLineProps({ index }, ref)}
     />
   ))
 

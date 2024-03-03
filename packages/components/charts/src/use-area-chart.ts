@@ -1,13 +1,12 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx, isObject, omitObject, splitObject } from "@yamada-ui/utils"
+import { cx, omitObject, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useState } from "react"
 import type {
   AreaChart,
   AreaProps,
-  ReferenceLineProps,
   LegendProps,
   TooltipProps,
   DotProps,
@@ -26,13 +25,11 @@ import type {
   GridUIProps,
   LayoutType,
   LegendUIProps,
-  ReferenceUILineProps,
   RequiredChartPropGetter,
   TooltipUIProps,
 } from "./chart.types"
 import {
   areaChartProperties,
-  referenceLineProperties,
   gridProperties,
   legendProperties,
   tooltipProperties,
@@ -224,42 +221,6 @@ export const useAreaChart = ({
       }
     },
     [areaChartProps, data, layoutType, styles.areaChart, theme, type],
-  )
-
-  const getReferenceLineProps: RequiredChartPropGetter<
-    "div",
-    {
-      line: ReferenceUILineProps
-      index: number
-    },
-    Omit<ReferenceLineProps, "ref">
-  > = useCallback(
-    ({ line, index, className, ...props }, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(
-        line,
-        referenceLineProperties,
-      )
-      const styleClassName = getCSS(styles.referenceLine)(theme)
-      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-      const color = `var(--ui-reference-line-${index})`
-
-      const label: ReferenceLineProps["label"] = {
-        value: reChartsProps.label as string,
-        fill: color,
-        position: "insideBottomLeft",
-        ...(isObject(reChartsProps.label) ? reChartsProps.label : {}),
-      }
-
-      return {
-        ref,
-        className: cx(className, propClassName, styleClassName),
-        stroke: color,
-        label,
-        ...(props as ReferenceLineProps),
-        ...omitObject(reChartsProps, ["label"]),
-      }
-    },
-    [styles, theme],
   )
 
   const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
@@ -517,7 +478,6 @@ export const useAreaChart = ({
 
   return {
     getAreaChartProps,
-    getReferenceLineProps,
     getGridProps,
     getLegendProps,
     getTooltipProps,

@@ -1,12 +1,17 @@
-name: Sync
+name: Coverage
 
 on:
-  pull_request:
+  push:
+    paths:
+      - "packages/**/tests/**"
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
-  sync:
+  coverage:
     name: Build
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +24,9 @@ jobs:
       - name: Build coverage
         run: pnpm vitest --coverage --silent --run
 
-      - name: Run GitHub File Sync
+      - name: Sync coverage
         uses: hirotomoyamada/repo-file-sync-action@main
         with:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          SKIP_PR: true
+          TARGET_BRANCH: main

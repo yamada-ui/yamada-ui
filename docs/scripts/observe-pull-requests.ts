@@ -12,7 +12,7 @@ type Review = Awaited<
   ReturnType<typeof octokit.pulls.listReviews>
 >["data"][number]
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-docs" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-docs" }
 const OMIT_GITHUB_IDS = ["hirotomoyamada", "hajimemat"]
 const DISCORD_USER_MAP: Record<string, string> = {
   hirotomoyamada: "434987704162451467",

@@ -59,7 +59,7 @@ const SOURCE_PSEUDO_PROPS_PATH = path.join(
 const DIST_PATH = path.join("contents", "styled-system")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const REPO_REQUEST_PARAMETERS = {
-  owner: "hirotomoyamada",
+  owner: "yamada-ui",
   repo: "yamada-ui",
   ref: "main",
 }
@@ -141,15 +141,13 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
 
     if (!hasJSDoc(member)) return
 
-    member.jsDoc.forEach(
-      ({ tags }) =>
-        tags?.forEach(({ tagName, comment }) => {
-          const tag = tagName.getText(sourceFile)
+    member.jsDoc.forEach(({ tags }) =>
+      tags?.forEach(({ tagName, comment }) => {
+        const tag = tagName.getText(sourceFile)
 
-          if (tag === "deprecated") data.deprecated = true
-          if (tag === "see")
-            data.urls = [...(data.urls ?? []), comment as string]
-        }),
+        if (tag === "deprecated") data.deprecated = true
+        if (tag === "see") data.urls = [...(data.urls ?? []), comment as string]
+      }),
     )
 
     props[prop] = data

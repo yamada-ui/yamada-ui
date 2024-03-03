@@ -102,7 +102,7 @@ const OVERRIDE_PATHS: Record<
   link: [{ parent: "link-box", children: ["link-overlay"] }],
 }
 const REPO_REQUEST_PARAMETERS = {
-  owner: "hirotomoyamada",
+  owner: "yamada-ui",
   repo: "yamada-ui",
   path: SOURCE_PATH,
   ref: "main",

@@ -21,7 +21,7 @@ export type PullRequestData = {
 }
 
 const REPO_REQUEST_PARAMETERS = {
-  owner: "hirotomoyamada",
+  owner: "yamada-ui",
   repo: "yamada-ui",
 }
 
@@ -55,7 +55,7 @@ const getPullRequests = async () => {
       ...REPO_REQUEST_PARAMETERS,
       state: "closed",
       base: "main",
-      head: "hirotomoyamada:changeset-release/main",
+      head: "yamada-ui:changeset-release/main",
       per_page: 1,
     })
 
@@ -74,7 +74,7 @@ const getPullRequests = async () => {
       ...REPO_REQUEST_PARAMETERS,
       state: "all",
       base: "main",
-      head: "hirotomoyamada:changeset-release/main",
+      head: "yamada-ui:changeset-release/main",
       per_page: 100,
     })
 

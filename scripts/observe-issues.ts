@@ -12,7 +12,7 @@ type Event = Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
 >["data"][number] & { created_at: number }
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-ui" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const INFORMATION_COMMENT = (id: string) =>
   [
     `@${id}`,
@@ -67,6 +67,21 @@ const getIssues = async () => {
   return issues
 }
 
+const getPullRequestEvents = async (issue_number: number) => {
+  const { data } = await octokit.issues.listEventsForTimeline({
+    ...COMMON_PARAMS,
+    issue_number,
+  })
+
+  const pullRequestEvents = data.filter(
+    ({ event, ...rest }) =>
+      event === "cross-referenced" &&
+      (rest as any).source?.issue?.state === "open",
+  )
+
+  return pullRequestEvents
+}
+
 const addHelpWantedLabel = async (issues: Issue[]) => {
   const url = process.env.DISCORD_HELP_WANTED_WEBHOOK_URL
 
@@ -103,6 +118,11 @@ const addHelpWantedLabel = async (issues: Issue[]) => {
         const limitTimestamp = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
 
         if (createdTimestamp > limitTimestamp) return
+
+        const pullRequestEvents = await getPullRequestEvents(number)
+        const hasPullRequest = pullRequestEvents.length
+
+        if (hasPullRequest) return
 
         await octokit.issues.addLabels({
           ...COMMON_PARAMS,

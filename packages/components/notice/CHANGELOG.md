@@ -1,5 +1,18 @@
 # @yamada-ui/notice
 
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/close-button@1.0.15
+  - @yamada-ui/alert@1.0.15
+  - @yamada-ui/motion@1.0.15
+  - @yamada-ui/portal@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-timeout@1.0.6
+
 ## 1.0.14
 
 ### Patch Changes

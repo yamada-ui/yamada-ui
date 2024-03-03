@@ -201,7 +201,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
           <ui.input
             className="ui-autocomplete__field__input"
             display="inline-block"
-            w="full"
+            w="100%"
             placeholder={placeholder}
             {...getInputProps(
               { ...inputProps, value: inputValue || label || "" },

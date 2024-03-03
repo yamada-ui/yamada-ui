@@ -126,6 +126,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     } = omitThemeProps(omitObject(mergedProps, ["withSwatch"]))
     const {
       allowInput,
+      eyeDropperSupported,
       getPopoverProps,
       getContainerProps,
       getFieldProps,
@@ -170,7 +171,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
                 />
               </PopoverTrigger>
 
-              {withEyeDropper ? (
+              {eyeDropperSupported && withEyeDropper ? (
                 <ColorPickerEyeDropper
                   {...getEyeDropperProps(eyeDropperProps)}
                 />

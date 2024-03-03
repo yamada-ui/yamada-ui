@@ -1,5 +1,17 @@
 # @yamada-ui/reorder
 
+## 1.0.15
+
+### Patch Changes
+
+- [#853](https://github.com/yamada-ui/yamada-ui/pull/853) [`97608d2`](https://github.com/yamada-ui/yamada-ui/commit/97608d222c290801ba683eaa8dde00c4f8378ebe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `onCompleteChange` is executed even though no changes have been made.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/motion@1.0.15
+  - @yamada-ui/core@1.4.2
+
 ## 1.0.14
 
 ### Patch Changes

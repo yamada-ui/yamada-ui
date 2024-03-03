@@ -12,7 +12,7 @@ type Review = Awaited<
   ReturnType<typeof octokit.pulls.listReviews>
 >["data"][number]
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-ui" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const OMIT_GITHUB_IDS = ["hirotomoyamada", "hajimemat"]
 const DISCORD_USER_MAP: Record<string, string> = {
   hirotomoyamada: "434987704162451467",
@@ -124,7 +124,7 @@ const addReviewers = async (
     pullRequests.map(async ({ number, title, user, html_url }) => {
       if (!user) return
 
-      const { draft, requested_reviewers, reviewers } =
+      const { draft, requested_reviewers, reviewers, head } =
         await getPullRequest(number)
 
       if (draft) return
@@ -136,26 +136,45 @@ const addReviewers = async (
       })
 
       const count = (requested_reviewers?.length ?? 0) + reviewers.length
+      let selectedReviewers: string[]
 
-      if (count >= 2) return
+      if (head.label === "yamada-ui:changeset-release/main") {
+        if (count >= 1) return
 
-      const omitCollaboratorIds = collaboratorIds.filter(
-        (id) =>
-          id !== user.login &&
-          !requested_reviewers?.some(({ login }) => login === id) &&
-          !reviewers.some(({ login }) => login === id) &&
-          !OMIT_GITHUB_IDS.includes(id),
-      )
+        selectedReviewers = ["hirotomoyamada"]
 
-      const selectedReviewers = omitCollaboratorIds
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 2 - count)
+        await octokit.issues.addLabels({
+          ...COMMON_PARAMS,
+          issue_number: number,
+          labels: ["release"],
+        })
 
-      await octokit.pulls.requestReviewers({
-        ...COMMON_PARAMS,
-        pull_number: number,
-        reviewers: selectedReviewers,
-      })
+        await octokit.pulls.requestReviewers({
+          ...COMMON_PARAMS,
+          pull_number: number,
+          reviewers: selectedReviewers,
+        })
+      } else {
+        if (count >= 2) return
+
+        const omitCollaboratorIds = collaboratorIds.filter(
+          (id) =>
+            id !== user.login &&
+            !requested_reviewers?.some(({ login }) => login === id) &&
+            !reviewers.some(({ login }) => login === id) &&
+            !OMIT_GITHUB_IDS.includes(id),
+        )
+
+        selectedReviewers = omitCollaboratorIds
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 2 - count)
+
+        await octokit.pulls.requestReviewers({
+          ...COMMON_PARAMS,
+          pull_number: number,
+          reviewers: selectedReviewers,
+        })
+      }
 
       console.log("Added Reviewers", number, title)
 
@@ -194,7 +213,9 @@ const addComment = async (
 
         if (
           labels.some(
-            (label) => isObject(label) && label.name === "help wanted",
+            (label) =>
+              isObject(label) &&
+              ["help wanted", "release"].includes(label.name ?? ""),
           )
         )
           return

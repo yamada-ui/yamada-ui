@@ -1,5 +1,24 @@
 # @yamada-ui/calendar
 
+## 1.2.1
+
+### Patch Changes
+
+- [#856](https://github.com/yamada-ui/yamada-ui/pull/856) [`675ef4a`](https://github.com/yamada-ui/yamada-ui/commit/675ef4a728e9e6e66d729d670111db8c06b1e274) Thanks [@nogu66](https://github.com/nogu66)! - Fixed a bug where theme tokents were used in components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/button@1.0.16
+  - @yamada-ui/form-control@1.0.17
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/popover@1.0.15
+  - @yamada-ui/portal@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-clickable@1.0.6
+  - @yamada-ui/use-controllable-state@1.0.6
+  - @yamada-ui/use-disclosure@1.0.6
+  - @yamada-ui/use-outside-click@1.0.6
+
 ## 1.2.0
 
 ### Minor Changes

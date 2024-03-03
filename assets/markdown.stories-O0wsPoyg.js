@@ -63,7 +63,7 @@ Status is error.
 :::
 `,Ic=`
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
+  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
 <p align="center">
@@ -73,9 +73,9 @@ Status is error.
   </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
   <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
-    <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
+    <img alt="MIT License" src="https://img.shields.io/github/license/yamada-ui/yamada-ui"/>
   </a>
-  <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
+  <img alt="Github Stars" src="https://img.shields.io/github/stars/yamada-ui/yamada-ui" />
   <a href="https://discord.gg/H7V5RfEDTR">
     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
   </a>

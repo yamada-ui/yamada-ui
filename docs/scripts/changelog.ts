@@ -27,7 +27,7 @@ const LOCALE_MENU_MAP = {
   ja: "変更履歴",
 }
 const REPO_REQUEST_PARAMETERS = {
-  owner: "hirotomoyamada",
+  owner: "yamada-ui",
   repo: "yamada-ui",
   path: SOURCE_PATH,
   ref: "main",

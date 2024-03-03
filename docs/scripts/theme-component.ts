@@ -97,7 +97,7 @@ const LOCALE_DESC_MAP = {
   },
 }
 const REPO_REQUEST_PARAMETERS = {
-  owner: "hirotomoyamada",
+  owner: "yamada-ui",
   repo: "yamada-ui",
   path: SOURCE_PATH,
   ref: "main",

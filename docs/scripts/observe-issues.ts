@@ -12,7 +12,7 @@ type Event = Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
 >["data"][number] & { created_at: number }
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-docs" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-docs" }
 const INFORMATION_COMMENT = (id: string) =>
   [
     `@${id}`,

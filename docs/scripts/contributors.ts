@@ -22,7 +22,7 @@ type Contributors =
 const DIST_PATH = path.join("constant", "contributors.ts")
 
 const REPO_REQUEST_PARAMETERS = {
-  owner: "hirotomoyamada",
+  owner: "yamada-ui",
   repo: "yamada-ui",
 }
 

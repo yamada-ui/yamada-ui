@@ -11,6 +11,13 @@ const nextConfig = {
     localeDetection: false,
   },
   productionBrowserSourceMaps: false,
+  redirects: async () => [
+    {
+      source: "/coverage",
+      destination: "/coverage/index.html",
+      permanent: true,
+    },
+  ],
 }
 
 module.exports = withContentlayer(nextConfig)

@@ -151,7 +151,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const { getLegendProps } = useChartLegend({ legendProps })
 
   const areas = series.map((item, index) => {
-    const { id, stroke, ...rest } = getAreaProps({ item, index }, ref)
+    const { id, stroke, ...rest } = getAreaProps({ index }, ref)
 
     return (
       <Fragment key={`area-${item.dataKey}`}>
@@ -174,7 +174,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     <ChartProvider value={{ styles }}>
       <ui.div
         className={cx("ui-area-chart", className)}
-        var={getCSSvariables()}
+        var={getCSSvariables}
         {...{
           w,
           width,

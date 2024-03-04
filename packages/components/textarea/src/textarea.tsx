@@ -15,6 +15,7 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControlProps } from "@yamada-ui/form-control"
 import {
   addDomEvent,
+  assignRef,
   createdDom,
   cx,
   handlerAll,
@@ -22,7 +23,9 @@ import {
   noop,
   omitObject,
   useSafeLayoutEffect,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
+import type { ForwardedRef } from "react"
 import { useRef } from "react"
 import useAutosize from "./use-autosize"
 
@@ -51,6 +54,10 @@ type TextareaOptions = {
    * @default 1
    */
   minRows?: number
+  /**
+   * Ref to a resize function.
+   */
+  resizeRef?: ForwardedRef<() => void>
 }
 
 export type TextareaProps = Omit<
@@ -75,6 +82,7 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     autosize,
     maxRows = Infinity,
     minRows = 1,
+    resizeRef,
     onChange,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -82,6 +90,7 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
 
   const isBrowser = createdDom()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const value = textareaRef.current?.value ?? ""
   const resizeTextarea = useAutosize(textareaRef, maxRows, minRows)
 
   let css: CSSUIObject
@@ -117,15 +126,22 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     }
   }, [])
 
+  useUpdateEffect(() => {
+    if (!autosize) return
+    resizeTextarea()
+  }, [value])
+
+  assignRef(resizeRef, resizeTextarea)
+
   return (
     <ui.textarea
       ref={mergeRefs(ref, textareaRef)}
       className={cx("ui-textarea", className)}
+      __css={css}
       resize={resize}
       rows={rows}
-      __css={css}
-      {...rest}
       onChange={handlerAll(autosize ? resizeTextarea : noop, onChange)}
+      {...rest}
     />
   )
 })

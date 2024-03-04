@@ -8,19 +8,21 @@ const useAutosize = (
   minRows: number,
 ) => {
   const heightRef = useRef(0)
+  const valueRef = useRef<string>()
 
   const resizeTextarea = () => {
     const el = ref.current
-
     if (!el) return
+
+    let { value, placeholder, style } = el
+    if (value === valueRef.current) return
+    else valueRef.current = value
+
+    value ??= placeholder ?? "x"
 
     const nodeSizeData = getSizingData(el)
 
     if (!nodeSizeData) return
-
-    let { value, placeholder, style } = el
-
-    value ??= placeholder ?? "x"
 
     const height = calcHeight(nodeSizeData, value, maxRows, minRows)
 

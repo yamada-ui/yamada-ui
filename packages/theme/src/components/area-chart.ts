@@ -36,6 +36,11 @@ export const AreaChart: ComponentMultiStyle = {
       paddingY: 1,
       rounded: 5,
     },
+    legendColorTip: {
+      rounded: "9999px",
+      boxSize: 3,
+    },
+    legendItemText: {},
     tooltip: {
       border: "solid",
       borderWidth: 0.2,
@@ -45,14 +50,30 @@ export const AreaChart: ComponentMultiStyle = {
       paddingX: 5,
       paddingY: 3,
     },
+    tooltipContent: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 12,
+    },
     tooltipTitle: {
       marginBottom: 2,
       fontSize: "md",
       fontWeight: 500,
     },
     tooltipLabel: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 4,
+    },
+    tooltipLabelText: {
       color: ["black", "gray.200"],
       fontSize: "md",
+    },
+    tooltipColorTip: {
+      rounded: "9999px",
+      boxSize: 3,
     },
     tooltipValue: {
       fontSize: "md",

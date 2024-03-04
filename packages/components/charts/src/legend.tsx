@@ -19,8 +19,8 @@ export const Legend = forwardRef<LegendProps, "div">((props, ref) => {
       onMouseLeave={() => onHighlight(null)}
       __css={styles.legendItem}
     >
-      <ui.div rounded="9999px" background={entry.color} boxSize={3} />
-      {entry.dataKey}
+      <ui.div background={entry.color} __css={styles.legendColorTip} />
+      <ui.div __css={styles.legendItemText}>{entry.dataKey}</ui.div>
     </ui.div>
   ))
 

@@ -14,25 +14,10 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     const { styles } = useTooltip()
 
     const items = payload?.map((value, index) => (
-      <ui.div
-        key={`tooltip-payload-${index}`}
-        __css={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 12,
-        }}
-      >
-        <ui.div
-          __css={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 4,
-          }}
-        >
-          <ui.div rounded="9999px" background={value?.color} boxSize={3} />
-          <ui.div __css={styles.tooltipLabel}>{value?.name}</ui.div>
+      <ui.div key={`tooltip-payload-${index}`} __css={styles.tooltipContent}>
+        <ui.div __css={styles.tooltipLabel}>
+          <ui.div background={value?.color} __css={styles.tooltipColorTip} />
+          <ui.div __css={styles.tooltipLabelText}>{value?.name}</ui.div>
         </ui.div>
         <ui.div __css={styles.tooltipValue}>{value?.value}</ui.div>
       </ui.div>

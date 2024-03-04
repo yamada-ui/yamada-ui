@@ -12,6 +12,7 @@ import type {
   CartesianGridProps,
   TooltipProps,
   ResponsiveContainerProps,
+  CellProps,
 } from "recharts"
 
 export type ChartPropGetter<
@@ -296,3 +297,5 @@ export const dotProperties: (keyof DotProps)[] = [
   "onMouseEnter",
   "onMouseLeave",
 ]
+
+export const cellProperties: (keyof CellProps)[] = ["fill", "stroke"]

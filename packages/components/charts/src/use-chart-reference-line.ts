@@ -6,17 +6,17 @@ import { useCallback } from "react"
 
 import type { ReferenceLineProps } from "recharts"
 
-import {
-  referenceLineProperties,
-  type ReferenceUILineProps,
-  type RequiredChartPropGetter,
+import type {
+  ReferenceLineUIProps,
+  RequiredChartPropGetter,
 } from "./chart.types"
+import { referenceLineProperties } from "./chart.types"
 
 export type UseChartReferenceLineOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps?: ReferenceUILineProps[]
+  referenceLineProps?: ReferenceLineUIProps[]
 }
 
 type UseChartReferenceLineProps = UseChartReferenceLineOptions & {

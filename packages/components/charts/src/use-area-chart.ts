@@ -15,7 +15,7 @@ import type {
   ChartPropGetter,
   DotUIProps,
   LayoutType,
-  ReferenceUILineProps,
+  ReferenceLineUIProps,
   RequiredChartPropGetter,
 } from "./chart.types"
 import {
@@ -104,7 +104,7 @@ export type UseAreaChartOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps?: ReferenceUILineProps[]
+  referenceLineProps?: ReferenceLineUIProps[]
   /**
    *  Controls fill opacity of all areas.
    *

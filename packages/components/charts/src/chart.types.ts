@@ -43,11 +43,19 @@ export type AreaChartSeries = Merge<
   Merge<CSSUIProps, ReChartsAreaProps>,
   { color: CSSUIProps["color"] }
 >
-export type ReferenceUILineProps = Merge<CSSUIProps, ReferenceLineProps>
+export type BarChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsBarProps>,
+  { color: CSSUIProps["color"] }
+>
 export type AreaChartUIProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof ReChartsAreaChart>
 >
+export type BarChartUIProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof ReChartsBarChart>
+>
+export type ReferenceLineUIProps = Merge<CSSUIProps, ReferenceLineProps>
 export type ContainerUIProps = Merge<
   CSSUIProps,
   Omit<ResponsiveContainerProps, "children">
@@ -70,6 +78,22 @@ export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
 
 export const areaChartProperties: (keyof ComponentPropsWithoutRef<
   typeof ReChartsAreaChart
+>)[] = [
+  "layout",
+  "syncId",
+  "syncMethod",
+  "width",
+  "height",
+  "data",
+  "margin",
+  "stackOffset",
+  "onClick",
+  "onMouseEnter",
+  "onMouseMove",
+  "onMouseLeave",
+]
+export const barChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof ReChartsBarChart
 >)[] = [
   "layout",
   "syncId",
@@ -285,47 +309,6 @@ export const areaProperties: (keyof Omit<ReChartsAreaProps, "ref">)[] = [
   "onMouseEnter",
   "onMouseLeave",
 ]
-export const dotProperties: (keyof DotProps)[] = [
-  "cx",
-  "cy",
-  "r",
-  "onClick",
-  "onMouseDown",
-  "onMouseUp",
-  "onMouseMove",
-  "onMouseOver",
-  "onMouseOut",
-  "onMouseEnter",
-  "onMouseLeave",
-]
-
-export type BarChartSeries = Merge<
-  Merge<CSSUIProps, ReChartsBarProps>,
-  { color: CSSUIProps["color"] }
->
-
-export type BarChartUIProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof ReChartsBarChart>
->
-
-export const barChartProperties: (keyof ComponentPropsWithoutRef<
-  typeof ReChartsBarChart
->)[] = [
-  "layout",
-  "syncId",
-  "syncMethod",
-  "width",
-  "height",
-  "data",
-  "margin",
-  "stackOffset",
-  "onClick",
-  "onMouseEnter",
-  "onMouseMove",
-  "onMouseLeave",
-]
-
 export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
   "type",
   "dataKey",
@@ -347,6 +330,19 @@ export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
   "id",
   "onAnimationStart",
   "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]
+export const dotProperties: (keyof DotProps)[] = [
+  "cx",
+  "cy",
+  "r",
   "onClick",
   "onMouseDown",
   "onMouseUp",

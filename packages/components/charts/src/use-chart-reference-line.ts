@@ -62,7 +62,7 @@ export const useChartReferenceLine = ({
         ...omitObject(reChartsProps, ["label"]),
       }
     },
-    [styleClassName, theme],
+    [propList, styleClassName],
   )
 
   return { getReferenceLineProps }

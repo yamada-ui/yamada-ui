@@ -29,6 +29,7 @@ import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
 import type { UseChartContainerProps } from "./use-chart-container"
 import { useChartContainer } from "./use-chart-container"
+import { useChartGrid } from "./use-chart-grid"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
 
@@ -86,6 +87,8 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     referenceLineProps,
     containerProps,
     unit,
+    gridProps,
+    strokeDasharray,
     valueFormatter,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -93,7 +96,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const {} = useChart(computedProps)
   const {
     getAreaChartProps,
-    getGridProps,
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,
@@ -103,7 +105,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     setHighlightedArea,
   } = useAreaChart({
     layoutType,
-    gridAxis,
     type,
     series,
     referenceLineProps,
@@ -127,6 +128,12 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   })
   const { getReferenceLineProps } = useChartReferenceLine({
     referenceLineProps,
+    styles,
+  })
+  const { getGridProps } = useChartGrid({
+    gridProps,
+    gridAxis,
+    strokeDasharray,
     styles,
   })
 

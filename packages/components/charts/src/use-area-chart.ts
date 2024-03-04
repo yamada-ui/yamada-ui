@@ -10,7 +10,6 @@ import type {
   LegendProps,
   TooltipProps,
   DotProps,
-  CartesianGridProps,
 } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
@@ -30,7 +29,6 @@ import type {
 } from "./chart.types"
 import {
   areaChartProperties,
-  gridProperties,
   legendProperties,
   tooltipProperties,
   dotProperties,
@@ -165,13 +163,10 @@ export const useAreaChart = ({
   series,
   type,
   areaChartProps = {},
-  gridProps = {},
   activeDotProps = {},
   dotProps = {},
   legendProps = {},
   tooltipProps = {},
-  strokeDasharray = "5 5",
-  gridAxis = "x",
   layoutType = "horizontal",
   withGradient: withGradientProp,
   withDots = true,
@@ -221,29 +216,6 @@ export const useAreaChart = ({
       }
     },
     [areaChartProps, data, layoutType, styles.areaChart, theme, type],
-  )
-
-  const [reChartsProps, uiProps] = splitObject(gridProps, gridProperties)
-  const styleClassName = getCSS(styles.grid)(theme)
-  const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-
-  const getGridProps: ChartPropGetter<
-    "div",
-    Partial<CartesianGridProps>,
-    CartesianGridProps
-  > = useCallback(
-    ({ className, ...props } = {}, ref = null) => {
-      return {
-        ref,
-        className: cx(className, propClassName, styleClassName),
-        strokeDasharray: strokeDasharray,
-        vertical: gridAxis === "y" || gridAxis === "xy",
-        horizontal: gridAxis === "x" || gridAxis === "xy",
-        ...props,
-        ...reChartsProps,
-      }
-    },
-    [propClassName, styleClassName, strokeDasharray, gridAxis, reChartsProps],
   )
 
   const getLegendProps: ChartPropGetter<
@@ -478,7 +450,6 @@ export const useAreaChart = ({
 
   return {
     getAreaChartProps,
-    getGridProps,
     getLegendProps,
     getTooltipProps,
     getAreaSplitProps,

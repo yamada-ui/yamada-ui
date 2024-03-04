@@ -18,12 +18,11 @@ import type {
   AreaChartSeries,
   AreaChartType,
   AreaChartUIProps,
-  AxisType,
   ChartPropGetter,
   DotUIProps,
-  GridUIProps,
   LayoutType,
   LegendUIProps,
+  ReferenceUILineProps,
   RequiredChartPropGetter,
   TooltipUIProps,
 } from "./chart.types"
@@ -70,22 +69,6 @@ export type UseAreaChartOptions = {
    *  Props passed down to recharts 'Tooltip' component.
    */
   tooltipProps?: TooltipUIProps
-  /**
-   *  Props passed down to recharts 'CartesianGrid' component.
-   */
-  gridProps?: GridUIProps
-  /**
-   * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
-   *
-   * @default '5 5'
-   */
-  strokeDasharray?: string | number
-  /**
-   * Specifies which lines should be displayed in the grid.
-   *
-   * @default 'x'
-   */
-  gridAxis?: AxisType
   /**
    * Chart orientation.
    *

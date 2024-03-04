@@ -4,13 +4,7 @@ import type { Dict } from "@yamada-ui/utils"
 import { cx, omitObject, splitObject } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useState } from "react"
-import type {
-  AreaChart,
-  AreaProps,
-  LegendProps,
-  TooltipProps,
-  DotProps,
-} from "recharts"
+import type { AreaChart, AreaProps, DotProps } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
 import type {
@@ -21,15 +15,11 @@ import type {
   ChartPropGetter,
   DotUIProps,
   LayoutType,
-  LegendUIProps,
   ReferenceUILineProps,
   RequiredChartPropGetter,
-  TooltipUIProps,
 } from "./chart.types"
 import {
   areaChartProperties,
-  legendProperties,
-  tooltipProperties,
   dotProperties,
   areaProperties,
 } from "./chart.types"
@@ -61,14 +51,6 @@ export type UseAreaChartOptions = {
    *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
   activeDotProps?: DotUIProps
-  /**
-   *  Props passed down to recharts 'Legend' component.
-   */
-  legendProps?: LegendUIProps
-  /**
-   *  Props passed down to recharts 'Tooltip' component.
-   */
-  tooltipProps?: TooltipUIProps
   /**
    * Chart orientation.
    *
@@ -110,12 +92,6 @@ export type UseAreaChartOptions = {
    */
   connectNulls?: boolean
   /**
-   * Specifies the duration of animation, the unit of this option is ms.
-   *
-   * @default 0
-   */
-  tooltipAnimationDuration?: number
-  /**
    *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
    *
    * @default '["red.400", "green.400"]'
@@ -148,8 +124,6 @@ export const useAreaChart = ({
   areaChartProps = {},
   activeDotProps = {},
   dotProps = {},
-  legendProps = {},
-  tooltipProps = {},
   layoutType = "horizontal",
   withGradient: withGradientProp,
   withDots = true,
@@ -157,7 +131,6 @@ export const useAreaChart = ({
   curveType = "monotone",
   strokeWidth = 2,
   connectNulls = true,
-  tooltipAnimationDuration = 0,
   fillOpacity = 0.2,
   splitColors = ["red.400", "green.400"],
   splitOffset,
@@ -201,51 +174,6 @@ export const useAreaChart = ({
     [areaChartProps, data, layoutType, styles.areaChart, theme, type],
   )
 
-  const getLegendProps: ChartPropGetter<
-    "div",
-    Partial<LegendProps>,
-    Omit<LegendProps, "ref">
-  > = useCallback(
-    ({ className, ...props } = {}, ref = null) => {
-      const [reChartProps, uiProps] = splitObject(legendProps, legendProperties)
-      const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-
-      return {
-        ref,
-        className: cx(className, propClassName),
-        verticalAlign: "top",
-        ...props,
-        ...reChartProps,
-      }
-    },
-    [legendProps, theme],
-  )
-
-  const getTooltipProps: ChartPropGetter<
-    "div",
-    Partial<TooltipProps<any, any>>,
-    Omit<TooltipProps<any, any>, "ref">
-  > = useCallback(
-    ({ labelClassName, wrapperClassName, ...props } = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(
-        tooltipProps,
-        tooltipProperties,
-      )
-      const propClassName = getCSS(uiProps)(theme)
-
-      return {
-        ref,
-        labelClassName: cx(labelClassName, propClassName),
-        wrapperClassName: cx(wrapperClassName, propClassName),
-        animationDuration: tooltipAnimationDuration,
-        isAnimationActive: (tooltipAnimationDuration || 0) > 0,
-        ...props,
-        ...reChartsProps,
-      }
-    },
-    [theme, tooltipAnimationDuration, tooltipProps],
-  )
-
   const getSplitOffset = ({ dataKey }: { dataKey: string }) => {
     const dataMax = Math.max(...data.map((item) => item[dataKey]))
     const dataMin = Math.min(...data.map((item) => item[dataKey]))
@@ -272,14 +200,12 @@ export const useAreaChart = ({
     Partial<AreaSplitProps>,
     AreaSplitProps
   > = useCallback(
-    (props = {}) => {
-      return {
-        id: splitId,
-        offset: splitOffset ?? defaultSplitOffset,
-        fillOpacity,
-        ...props,
-      }
-    },
+    (props = {}) => ({
+      id: splitId,
+      offset: splitOffset ?? defaultSplitOffset,
+      fillOpacity,
+      ...props,
+    }),
     [defaultSplitOffset, fillOpacity, splitId, splitOffset],
   )
 
@@ -395,13 +321,11 @@ export const useAreaChart = ({
     Partial<AreaGradientProps>,
     AreaGradientProps
   > = useCallback(
-    (props = {}) => {
-      return {
-        withGradient: withGradient,
-        fillOpacity,
-        ...props,
-      }
-    },
+    (props = {}) => ({
+      withGradient: withGradient,
+      fillOpacity,
+      ...props,
+    }),
     [withGradient, fillOpacity],
   )
 
@@ -433,8 +357,6 @@ export const useAreaChart = ({
 
   return {
     getAreaChartProps,
-    getLegendProps,
-    getTooltipProps,
     getAreaSplitProps,
     getAreaProps,
     getAreaGradientProps,

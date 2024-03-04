@@ -24,13 +24,15 @@ import { Legend } from "./legend"
 import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
-import { ChartProvider, useChart } from "./use-chart"
+import { ChartProvider } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
 import type { UseChartContainerProps } from "./use-chart-container"
 import { useChartContainer } from "./use-chart-container"
 import type { UseChartGridOptions } from "./use-chart-grid"
 import { useChartGrid } from "./use-chart-grid"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import { useChartLegend } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
 import type { UseChartTooltipProps } from "./use-chart-tooltip"
@@ -59,7 +61,8 @@ export type AreaChartProps = HTMLUIProps<"div"> &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipProps
+  UseChartTooltipProps &
+  UseChartLegendProps
 
 export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
@@ -97,13 +100,12 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     valueFormatter,
     tooltipProps,
     tooltipAnimationDuration,
+    legendProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const {} = useChart(computedProps)
   const {
     getAreaChartProps,
-    getLegendProps,
     getAreaSplitProps,
     getAreaProps,
     getAreaGradientProps,
@@ -146,6 +148,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     tooltipProps,
     tooltipAnimationDuration,
   })
+  const { getLegendProps } = useChartLegend({ legendProps })
 
   const areas = series.map((item, index) => {
     const { id, stroke, ...rest } = getAreaProps({ item, index }, ref)

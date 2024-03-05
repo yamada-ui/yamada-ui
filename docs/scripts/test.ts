@@ -11,13 +11,15 @@ const main = async () => {
   try {
     const { data: collaboratorsA } = await octokit.repos.listCollaborators({
       ...COMMON_PARAMS,
+      permission: "maintain",
+      per_page: 100,
     })
 
     console.log(collaboratorsA)
 
     const { data: collaboratorsB } = await octokit.repos.listCollaborators({
       ...COMMON_PARAMS,
-      affiliation: "all",
+      affiliation: "outside",
       per_page: 100,
     })
 

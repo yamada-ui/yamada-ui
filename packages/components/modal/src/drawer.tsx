@@ -30,6 +30,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "./"
+import { PanEventInfo } from "@yamada-ui/react"
 
 type DrawerOptions = {
   /**
@@ -49,7 +50,9 @@ export type DrawerProps = Omit<
   "scrollBehavior" | "animation" | "outside" | keyof ThemeProps
 > &
   ThemeProps<"Drawer"> &
-  DrawerOptions
+  DrawerOptions & {
+    closeOnDrag?: boolean
+  }
 
 type DrawerContext = Record<string, CSSUIObject>
 
@@ -64,7 +67,7 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
 export const Drawer = forwardRef<DrawerProps, "div">(
-  ({ size, placement = "right", ...props }, ref) => {
+  ({ size, placement = "right", closeOnDrag, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Drawer", {
       size,
       placement,
@@ -99,7 +102,6 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       validChildren,
       DrawerOverlay,
     )
-
     return (
       <DrawerProvider value={styles}>
         <Modal
@@ -128,6 +130,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
           <DrawerContent
+            closeOnDrag={closeOnDrag}
             {...{
               withCloseButton,
               ...omitObject(rest, ["isFullHeight"]),
@@ -148,7 +151,10 @@ type DrawerContentProps = Omit<
 >
 
 export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
-  ({ className, children, placement, withCloseButton, ...rest }, ref) => {
+  (
+    { className, children, placement, withCloseButton, closeOnDrag, ...rest },
+    ref,
+  ) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
 
@@ -167,9 +173,55 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       ...styles.container,
     }
 
+    const getDragDirectionRestriction = () => {
+      switch (placement) {
+        case "top":
+          return { bottom: 0 }
+        case "bottom":
+          return { top: 0 }
+        case "left":
+          return { right: 0 }
+        case "right":
+          return { left: 0 }
+      }
+    }
+    const getDragDirection = () => {
+      switch (placement) {
+        case "top":
+          return "y"
+        case "bottom":
+          return "y"
+        case "left":
+          return "x"
+        case "right":
+          return "x"
+      }
+    }
+    const isCloseByDragInfo = (info: PanEventInfo) => {
+      switch (placement) {
+        case "top":
+          return info.velocity.y <= -100 || info.offset.y <= -80
+        case "bottom":
+          return info.velocity.y >= 100 || info.offset.y >= 80
+        case "left":
+          return info.velocity.x <= -100 || info.offset.x <= -80
+        case "right":
+          return info.velocity.x >= 100 || info.offset.x >= 80
+      }
+    }
+
     return (
       <Slide
         ref={ref}
+        drag={closeOnDrag ? getDragDirection() : false}
+        dragConstraints={getDragDirectionRestriction()}
+        dragElastic={getDragDirectionRestriction()}
+        dragSnapToOrigin={true}
+        onDragEnd={(_, info) => {
+          if (isCloseByDragInfo(info)) {
+            onClose?.()
+          }
+        }}
         className={cx("ui-drawer", className)}
         tabIndex={-1}
         isOpen={isOpen}

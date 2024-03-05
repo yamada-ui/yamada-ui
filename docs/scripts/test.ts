@@ -9,21 +9,19 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const main = async () => {
   try {
-    const { data: collaboratorsA } = await octokit.repos.listCollaborators({
-      ...COMMON_PARAMS,
-      permission: "maintain",
+    const { data: members } = await octokit.orgs.listMembers({
+      org: "yamada-ui",
       per_page: 100,
     })
 
-    console.log(collaboratorsA)
+    console.log(members)
 
-    const { data: collaboratorsB } = await octokit.repos.listCollaborators({
+    const { data: collaborators } = await octokit.repos.listCollaborators({
       ...COMMON_PARAMS,
-      affiliation: "outside",
       per_page: 100,
     })
 
-    console.log(collaboratorsB)
+    console.log(collaborators)
   } catch (e) {
     if (e instanceof Error) console.log(e.message)
   }

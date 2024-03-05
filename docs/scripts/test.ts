@@ -18,6 +18,7 @@ const main = async () => {
 
     const { data: collaborators } = await octokit.repos.listCollaborators({
       ...COMMON_PARAMS,
+      permission: "push",
       per_page: 100,
     })
 

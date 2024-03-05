@@ -9,8 +9,9 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const main = async () => {
   try {
-    const { data: members } = await octokit.orgs.listMembers({
+    const { data: members } = await octokit.rest.teams.listMembersInOrg({
       org: "yamada-ui",
+      team_slug: "yamada-ui",
       per_page: 100,
     })
 

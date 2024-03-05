@@ -61,7 +61,10 @@ config()
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({ ...COMMON_PARAMS })
+  const { data } = await octokit.repos.listCollaborators({
+    ...COMMON_PARAMS,
+    per_page: 100,
+  })
 
   return data
 }

@@ -12,7 +12,7 @@ type Event = Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
 >["data"][number] & { created_at: number }
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-ui" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const INFORMATION_COMMENT = (id: string) =>
   [
     `@${id}`,
@@ -36,7 +36,10 @@ config()
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({ ...COMMON_PARAMS })
+  const { data } = await octokit.repos.listCollaborators({
+    ...COMMON_PARAMS,
+    per_page: 100,
+  })
 
   return data
 }

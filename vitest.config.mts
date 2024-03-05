@@ -1,5 +1,5 @@
-import { defineConfig } from "vitest/config"
 import react from "@vitejs/plugin-react-swc"
+import { defineConfig } from "vitest/config"
 
 export default defineConfig({
   plugins: [react()],
@@ -11,7 +11,13 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["packages"],
-      exclude: ["dist", "theme", "tests", "test"],
+      exclude: [
+        "**/dist",
+        "packages/theme",
+        "packages/**/tests",
+        "packages/test",
+        "packages/nextjs",
+      ],
     },
     setupFiles: ["./scripts/setup-test.ts"],
   },

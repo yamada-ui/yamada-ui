@@ -9,7 +9,7 @@ import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { cx, getValidChildren } from "@yamada-ui/utils"
-import type { ReactElement } from "react"
+import type { ReactElement, ReactNode } from "react"
 import type { SelectIconProps } from "./select-icon"
 import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -24,13 +24,17 @@ import {
 import type { OptionProps } from "./"
 import { OptionGroup, Option } from "./"
 
-type SelectBaseItem = Omit<OptionProps, "value" | "children"> & {
-  label?: string
+type SelectBaseItem = Omit<OptionProps, "value" | "children">
+
+type SelectItemWithValue = SelectBaseItem & {
+  label?: ReactNode
+  value?: string
 }
 
-type SelectItemWithValue = SelectBaseItem & { value?: string }
-
-type SelectItemWithItems = SelectBaseItem & { items?: SelectItemWithValue[] }
+type SelectItemWithItems = SelectBaseItem & {
+  label?: string
+  items?: SelectItemWithValue[]
+}
 
 export type SelectItem = SelectItemWithValue | SelectItemWithItems
 
@@ -229,9 +233,13 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
         __css={css}
         {...rest}
       >
-        <ui.span isTruncated={isTruncated} lineClamp={lineClamp}>
-          {label ?? placeholder}
-        </ui.span>
+        <ui.span
+          isTruncated={isTruncated}
+          lineClamp={lineClamp}
+          dangerouslySetInnerHTML={{
+            __html: label ?? placeholder ?? "",
+          }}
+        ></ui.span>
       </ui.div>
     )
   },

@@ -13,8 +13,8 @@ const omitIgnoredPaths = async (paths) => {
 }
 
 export default {
-  "**/*.{js,jsx,ts,tsx,md,mdx,yml,json,html,css}": ["prettier --write"],
-  "**/*.{js,jsx,ts,tsx}": async (paths) => {
+  "**/*.{js,jsx,ts,tsx,mjs,mts,md,mdx,yml,json,html,css}": ["prettier --write"],
+  "**/*.{js,jsx,ts,tsx,mjs,mts}": async (paths) => {
     const resolvedPaths = await omitIgnoredPaths(paths)
 
     return [`eslint --max-warnings=0 ${resolvedPaths}`]

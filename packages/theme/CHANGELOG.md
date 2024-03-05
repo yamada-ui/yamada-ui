@@ -1,5 +1,15 @@
 # @yamada-ui/theme
 
+## 1.4.6
+
+### Patch Changes
+
+- [#854](https://github.com/yamada-ui/yamada-ui/pull/854) [`630a8b9`](https://github.com/yamada-ui/yamada-ui/commit/630a8b9d29554fc318cd0dbfc62f7c7ee5eb4b64) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where when in dark mode, the focus border color of `Input` becomes thinner.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/core@1.4.2
+
 ## 1.4.5
 
 ### Patch Changes

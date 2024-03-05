@@ -25,4 +25,4 @@ Wouldn't you like to contribute? That's amazing! We have prepared a [contributio
 ## License
 
 This package is licensed under the terms of the
-[MIT license](https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE).
+[MIT license](https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE).

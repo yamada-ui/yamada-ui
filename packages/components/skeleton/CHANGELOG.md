@@ -1,5 +1,18 @@
 # @yamada-ui/skeleton
 
+## 1.0.14
+
+### Patch Changes
+
+- [#876](https://github.com/yamada-ui/yamada-ui/pull/876) [`fb68295`](https://github.com/yamada-ui/yamada-ui/commit/fb68295f868e820a96df8bebe933509e1e9d0d19) Thanks [@june23hy](https://github.com/june23hy)! - Fixed a bug where theme tokens were used in the Skeleton component.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-animation@1.0.14
+  - @yamada-ui/use-previous@1.0.6
+  - @yamada-ui/use-value@1.1.2
+
 ## 1.0.13
 
 ### Patch Changes

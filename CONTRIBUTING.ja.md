@@ -10,7 +10,7 @@
 
 以下の手順で、`Yamada UI`への貢献を始められるようになります。
 
-1. [リポジトリ](https://github.com/hirotomoyamada/yamada-ui)をフォークします。
+1. [リポジトリ](https://github.com/yamada-ui/yamada-ui)をフォークします。
 
 2. あなたのローカルにクローンします。
 
@@ -50,7 +50,7 @@ cd yamada-ui
 
 ## バグを見つけたと思いますか？
 
-[テンプレート](https://github.com/hirotomoyamada/yamada-ui/issues/new/choose)に従って、提供してください。
+[テンプレート](https://github.com/yamada-ui/yamada-ui/issues/new/choose)に従って、提供してください。
 
 ## 新規または変更のAPIを提案しますか？
 
@@ -79,7 +79,7 @@ cd yamada-ui
 
 ### プルリクエストの手順
 
-1. [リポジトリ](https://github.com/hirotomoyamada/yamada-ui)をフォークし、クローンします。
+1. [リポジトリ](https://github.com/yamada-ui/yamada-ui)をフォークし、クローンします。
 
 2. `main`ブランチから新しいブランチを作成します。[タイプ/スコープ]という命名規則に従います。例えば、`fix/accordion-hook`や`docs/menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
 

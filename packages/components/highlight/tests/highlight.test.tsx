@@ -20,16 +20,15 @@ describe("<Highlight/>", () => {
     },
   )
 
-  test('throws error if children is not string', () => {
-    const renderResult = () => render(
-      <Highlight query="Highlight">
-        {1 as any}
-      </Highlight>
-    )
+  test("throws error if children is not string", () => {
+    const renderResult = () =>
+      render(<Highlight query="Highlight">{1 as any}</Highlight>)
 
     const consoleSpy = vi.spyOn(console, "error")
     consoleSpy.mockImplementation(() => {})
-    expect(renderResult).toThrow("The children prop of Highlight must be a string")
+    expect(renderResult).toThrow(
+      "The children prop of Highlight must be a string",
+    )
     consoleSpy.mockRestore()
   })
 
@@ -37,18 +36,18 @@ describe("<Highlight/>", () => {
     const { container } = render(
       <Highlight isFragment query="">
         Highlight
-      </Highlight>
+      </Highlight>,
     )
     expect(container.firstChild?.nodeName).toBe("#text")
   })
 
   test("markProps prop works correctly", () => {
     const { getByText } = render(
-      <Highlight query="Highlight" markProps={{ borderRadius: '12px' }}>
+      <Highlight query="Highlight" markProps={{ borderRadius: "12px" }}>
         Highlight
-      </Highlight>
+      </Highlight>,
     )
-    expect(getByText('Highlight')).toHaveStyle("border-radius: 12px")
+    expect(getByText("Highlight")).toHaveStyle("border-radius: 12px")
   })
 
   test("useHighlight matches correctly", () => {

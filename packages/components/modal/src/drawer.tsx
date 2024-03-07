@@ -4,6 +4,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { PanEventInfo } from "@yamada-ui/react"
 import type { SlideProps } from "@yamada-ui/transitions"
 import { Slide } from "@yamada-ui/transitions"
 import {
@@ -30,7 +31,6 @@ import {
   ModalBody,
   ModalFooter,
 } from "./"
-import { PanEventInfo } from "@yamada-ui/react"
 
 type DrawerOptions = {
   /**
@@ -185,6 +185,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
           return { left: 0 }
       }
     }
+
     const getDragDirection = () => {
       switch (placement) {
         case "top":
@@ -197,6 +198,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
           return "x"
       }
     }
+
     const isCloseByDragInfo = (info: PanEventInfo) => {
       switch (placement) {
         case "top":
@@ -217,6 +219,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
         dragConstraints={getDragDirectionRestriction()}
         dragElastic={getDragDirectionRestriction()}
         dragSnapToOrigin={true}
+        dragMomentum={false}
         onDragEnd={(_, info) => {
           if (isCloseByDragInfo(info)) {
             onClose?.()

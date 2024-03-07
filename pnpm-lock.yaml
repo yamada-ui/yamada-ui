@@ -486,6 +486,15 @@ importers:
 
   examples/remix:
     dependencies:
+      '@fortawesome/free-brands-svg-icons':
+        specifier: ^6.5.1
+        version: 6.5.1
+      '@fortawesome/free-regular-svg-icons':
+        specifier: ^6.5.1
+        version: 6.5.1
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^6.5.1
+        version: 6.5.1
       '@remix-run/css-bundle':
         specifier: ^2.8.0
         version: 2.8.0
@@ -498,6 +507,27 @@ importers:
       '@remix-run/serve':
         specifier: ^2.8.0
         version: 2.8.0(typescript@5.3.3)
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../../packages/components/calendar
+      '@yamada-ui/carousel':
+        specifier: workspace:*
+        version: link:../../packages/components/carousel
+      '@yamada-ui/dropzone':
+        specifier: workspace:*
+        version: link:../../packages/components/dropzone
+      '@yamada-ui/fontawesome':
+        specifier: workspace:*
+        version: link:../../packages/components/fontawesome
+      '@yamada-ui/markdown':
+        specifier: workspace:*
+        version: link:../../packages/components/markdown
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      '@yamada-ui/table':
+        specifier: workspace:*
+        version: link:../../packages/components/table
       isbot:
         specifier: ^4.1.0
         version: 4.4.0

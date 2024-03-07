@@ -12,6 +12,16 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/fontawesome": "workspace:*",
+    "@yamada-ui/markdown": "workspace:*",
+    "@yamada-ui/dropzone": "workspace:*",
+    "@yamada-ui/carousel": "workspace:*",
+    "@yamada-ui/table": "workspace:*",
+    "@yamada-ui/calendar": "workspace:*",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@remix-run/css-bundle": "^2.8.0",
     "@remix-run/node": "^2.8.0",
     "@remix-run/react": "^2.8.0",

@@ -343,6 +343,11 @@ export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
   UseAutocompleteBaseProps<T>
 
 export const useAutocomplete = <T extends string | string[] = string>({
+  value: valueProp,
+  defaultValue,
+  onChange: onChangeProp,
+  onCreate: onCreateProp,
+  onSearch: onSearchProp,
   closeOnSelect = true,
   omitSelectedValues = false,
   maxSelectValues,
@@ -374,16 +379,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     getFormControlProperties({ omit: ["aria-readonly"] }),
   )
   const [containerProps, inputProps] = splitObject<Dict, string>(
-    omitObject(rest, [
-      ...popoverProperties,
-      "id",
-      "value",
-      "defaultValue",
-      "onChange",
-      "onCreate",
-      "onSearch",
-      "aria-readonly",
-    ]),
+    omitObject(rest, [...popoverProperties, "aria-readonly"]),
     layoutStyleProperties,
   )
 
@@ -399,9 +395,9 @@ export const useAutocomplete = <T extends string | string[] = string>({
     AutocompleteItem[] | undefined
   >(items)
   const [value, setValue] = useControllableState({
-    value: rest.value,
-    defaultValue: rest.defaultValue,
-    onChange: rest.onChange,
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
   })
   const [label, setLabel] = useState<T | undefined>(undefined)
   const [inputValue, setInputValue] = useState<string>("")
@@ -812,7 +808,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (!isOpen) onOpen()
 
-      rest.onSearch?.(ev)
+      onSearchProp?.(ev)
 
       const value = ev.target.value
       const computedValue = format(value)
@@ -825,7 +821,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       setInputValue(value)
     },
-    [isOpen, onOpen, format, rest, pickOptions, rebirthOptions],
+    [isOpen, onOpen, format, onSearchProp, pickOptions, rebirthOptions],
   )
 
   const onCompositionStart = useCallback(() => {
@@ -883,14 +879,14 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     setFocusedIndex(index)
 
-    rest.onCreate?.(newItem, newItems)
+    onCreateProp?.(newItem, newItems)
   }, [
     inputValue,
     resolvedItems,
     firstInsertPositionItem,
     onChange,
     rebirthOptions,
-    rest,
+    onCreateProp,
     secondInsertPositionItem,
     isMulti,
   ])
@@ -1439,6 +1435,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     isFocusable,
     closeOnSelect: customCloseOnSelect,
     children,
+    value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
 
@@ -1455,16 +1452,14 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const isMulti = isArray(value)
   const isDuplicated = !isMulti
-    ? frontValues.some(
-        ({ node }) => node.dataset.value === (computedProps.value ?? ""),
-      )
+    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
     : false
 
   const isSelected =
     !isDuplicated &&
     (!isMulti
-      ? (computedProps.value ?? "") === value
-      : value.includes(computedProps.value ?? ""))
+      ? (optionValue ?? "") === value
+      : value.includes(optionValue ?? ""))
   const isTarget = "target" in (itemRef.current?.dataset ?? {})
   const isFocused = index === focusedIndex
 
@@ -1486,7 +1481,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       setFocusedIndex(index)
 
-      onChange(computedProps.value ?? "")
+      onChange(optionValue ?? "")
 
       if (inputRef.current) inputRef.current.focus()
 
@@ -1498,7 +1493,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       onFocusNext,
       omitSelectedValues,
       isDisabled,
-      computedProps,
+      optionValue,
       setFocusedIndex,
       index,
       onChange,
@@ -1510,8 +1505,8 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   )
 
   useEffect(() => {
-    if (isSelected) onChangeLabel(computedProps.value ?? "", false)
-  }, [computedProps, isSelected, onChangeLabel])
+    if (isSelected) onChangeLabel(optionValue ?? "", false)
+  }, [optionValue, isSelected, onChangeLabel])
 
   const getOptionProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
@@ -1529,14 +1524,14 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       return {
         ref: mergeRefs(itemRef, ref, register),
-        ...omitObject(computedProps, ["value"]),
+        ...computedProps,
         ...props,
         role: "autocomplete-item",
         tabIndex: -1,
         style:
           !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
         "data-target": dataAttr(true),
-        "data-value": computedProps.value ?? "",
+        "data-value": optionValue ?? "",
         "data-focus": dataAttr(isFocused),
         "data-disabled": dataAttr(isDisabled),
         "aria-checked": ariaAttr(isSelected),
@@ -1545,6 +1540,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       }
     },
     [
+      optionValue,
       computedProps,
       isDisabled,
       isFocused,

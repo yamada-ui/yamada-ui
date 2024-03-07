@@ -8,6 +8,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react"
+import {
+  // ColorModeScript,
+  // ThemeSchemeScript,
+  UIProvider,
+} from "@yamada-ui/react"
+import { config } from "./theme"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -23,7 +29,20 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        {/* <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={config.initialColorMode}
+        />
+        <ThemeSchemeScript
+          type="cookie"
+          nonce="testing"
+          initialThemeScheme={config.initialThemeScheme}
+        /> */}
+
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

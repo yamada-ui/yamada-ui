@@ -379,7 +379,12 @@ export const useAutocomplete = <T extends string | string[] = string>({
     getFormControlProperties({ omit: ["aria-readonly"] }),
   )
   const [containerProps, inputProps] = splitObject<Dict, string>(
-    omitObject(rest, [...popoverProperties, "aria-readonly"]),
+    omitObject(rest, [
+      ...popoverProperties,
+      "onKeyDown",
+      "onFocus",
+      "aria-readonly",
+    ]),
     layoutStyleProperties,
   )
 

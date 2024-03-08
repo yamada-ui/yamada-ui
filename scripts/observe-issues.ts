@@ -173,8 +173,9 @@ const clearAssignIssues = async (
 ) => {
   const collaboratorIds = collaborators.map(({ login }) => login)
 
-  issues = issues.filter(({ assignees }) =>
-    assignees?.some(({ login }) => !collaboratorIds.includes(login)),
+  issues = issues.filter(
+    ({ assignees }) =>
+      !assignees?.some(({ login }) => collaboratorIds.includes(login)),
   )
 
   await Promise.all(
@@ -187,6 +188,11 @@ const clearAssignIssues = async (
       const limitTimestamp = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
 
       if (eventTimestamp > limitTimestamp) return
+
+      const pullRequestEvents = await getPullRequestEvents(number)
+      const hasPullRequest = pullRequestEvents.length
+
+      if (hasPullRequest) return
 
       await octokit.issues.createComment({
         ...COMMON_PARAMS,

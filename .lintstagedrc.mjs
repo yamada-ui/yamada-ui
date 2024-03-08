@@ -5,7 +5,11 @@ const omitIgnoredPaths = async (paths) => {
 
   const resolvedPaths = (
     await Promise.all(
-      paths.map((path) => (!eslint.isPathIgnored(path) ? path : undefined)),
+      paths.map(async (path) => {
+        const isPathIgnored = await eslint.isPathIgnored(path)
+
+        if (!isPathIgnored) return path
+      }),
     )
   ).filter(Boolean)
 

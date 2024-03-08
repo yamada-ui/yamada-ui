@@ -253,14 +253,22 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
         readOnly?: boolean
       }
     > = useCallback(
-      ({ index, ...props }, ref = null) => {
-        const disabled = props.disabled ?? props.isDisabled ?? isDisabled
-        const readOnly = props.readOnly ?? props.isReadOnly ?? isReadOnly
+      (
+        {
+          index,
+          isDisabled: isDisabledProp,
+          isReadOnly: isReadOnlyProp,
+          ...props
+        },
+        ref = null,
+      ) => {
+        const disabled = props.disabled ?? isDisabledProp ?? isDisabled
+        const readOnly = props.readOnly ?? isReadOnlyProp ?? isReadOnly
         const checked = props.value === selectedValue
         const focused = index === focusedIndex
 
         return {
-          props,
+          ...props,
           ref: mergeRefs(
             (node) => labelRefs.current.set(props.value, node),
             ref,

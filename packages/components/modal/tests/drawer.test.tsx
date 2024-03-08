@@ -16,7 +16,7 @@ describe("<Drawer />", () => {
     return (
       <>
         <Button data-testid="OpenDrawer" onClick={onOpen}>
-          Open Dialog
+          Open Drawer
         </Button>
 
         <Drawer data-testid="Drawer" isOpen={isOpen} onClose={onClose}>

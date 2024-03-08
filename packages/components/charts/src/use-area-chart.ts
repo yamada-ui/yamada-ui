@@ -8,7 +8,7 @@ import type { AreaChart, AreaProps, DotProps } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
 import type {
-  AreaChartCurveType,
+  CurveType,
   AreaChartSeries,
   AreaChartType,
   AreaChartUIProps,
@@ -78,7 +78,7 @@ export type UseAreaChartOptions = {
    *
    * @default `monotone`
    */
-  curveType?: AreaChartCurveType
+  curveType?: CurveType
   /**
    *  Stroke width for the chart areas.
    *

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -6,33 +6,205 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { ChartProvider, useChart } from "./use-chart"
-import { LineChartProvider, useLineChart } from "./use-line-chart"
+import {
+  LineChart as ReChartsLineChart,
+  Legend as ReChartsLegend,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+  ReferenceLine,
+  Line,
+} from "recharts"
+import { Legend } from "./legend"
+import { ChartTooltip } from "./tooltip"
+import { ChartProvider } from "./use-chart"
+import type { UseChartAxisOptions } from "./use-chart-axis"
+import { useChartAxis } from "./use-chart-axis"
+import type { UseChartContainerProps } from "./use-chart-container"
+import { useChartContainer } from "./use-chart-container"
+import type { UseChartGridOptions } from "./use-chart-grid"
+import { useChartGrid } from "./use-chart-grid"
+import { useChartLegend, type UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
+import { useChartReferenceLine } from "./use-chart-reference-line"
+import { useChartTooltip, type UseChartTooltipProps } from "./use-chart-tooltip"
+import { useLineChart } from "./use-line-chart"
+import type { UseLineChartOptions } from "./use-line-chart"
 
-type LineChartOptions = {}
+type LineChartOptions = {
+  /**
+   * If `true`, tooltip is visible.
+   *
+   * @default true
+   */
+  withTooltip?: boolean
+  /**
+   * If `true`, legend is visible.
+   *
+   * @default false
+   */
+  withLegend?: boolean
+}
 
 export type LineChartProps = HTMLUIProps<"div"> &
   ThemeProps<"LineChart"> &
-  LineChartOptions
+  LineChartOptions &
+  UseChartContainerProps &
+  UseChartAxisOptions &
+  UseChartReferenceLineOptions &
+  UseChartGridOptions &
+  UseChartTooltipProps &
+  UseChartLegendProps &
+  UseLineChartOptions
 
 export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("LineChart", props)
-  const { className, ...computedProps } = omitThemeProps(mergedProps)
+  const {
+    w,
+    width,
+    minW,
+    minWidth,
+    maxW,
+    maxWidth,
+    h,
+    height,
+    minH,
+    minHeight,
+    maxH,
+    maxHeight,
+    className,
+    containerProps,
+    gridProps,
+    gridAxis,
+    strokeDasharray,
+    dataKey,
+    type,
+    layoutType,
+    tickLine,
+    withXAxis,
+    withYAxis,
+    xAxisProps,
+    yAxisProps,
+    unit,
+    valueFormatter,
+    referenceLineProps,
+    tooltipProps,
+    tooltipAnimationDuration,
+    legendProps,
+    withLegend = false,
+    withTooltip = true,
+    series,
+    ...computedProps
+  } = omitThemeProps(mergedProps)
 
-  const {} = useChart(computedProps)
-  const {} = useLineChart(computedProps)
+  const { getContainerProps } = useChartContainer({ containerProps })
+  const { getGridProps } = useChartGrid({
+    gridProps,
+    gridAxis,
+    strokeDasharray,
+    styles,
+  })
+  const { getXAxisProps, getYAxisProps } = useChartAxis({
+    dataKey,
+    type,
+    layoutType,
+    tickLine,
+    gridAxis,
+    withXAxis,
+    withYAxis,
+    xAxisProps,
+    yAxisProps,
+    unit,
+    valueFormatter,
+    styles,
+  })
+  const { getReferenceLineProps } = useChartReferenceLine({
+    referenceLineProps,
+    styles,
+  })
+  const { getTooltipProps } = useChartTooltip({
+    tooltipProps,
+    tooltipAnimationDuration,
+  })
+  const { getLegendProps } = useChartLegend({ legendProps })
+  const {
+    getLineProps,
+    getLineChartProps,
+    getCSSvariables,
+    setHighlightedArea,
+  } = useLineChart({
+    layoutType,
+    series,
+    referenceLineProps,
+    styles,
+    ...computedProps,
+  })
 
-  const css: CSSUIObject = {}
+  const lines = series.map((_, index) => (
+    <Line key={`line-${index}`} {...getLineProps({ index }, ref)} />
+  ))
+
+  const referenceLinesItems = referenceLineProps?.map((_, index) => (
+    <ReferenceLine
+      key={`referenceLine-${index}`}
+      {...getReferenceLineProps({ index }, ref)}
+    />
+  ))
 
   return (
     <ChartProvider value={{ styles }}>
-      <LineChartProvider value={{}}>
-        <ui.div
-          ref={ref}
-          className={cx("ui-line-chart", className)}
-          __css={css}
-        ></ui.div>
-      </LineChartProvider>
+      <ui.div
+        ref={ref}
+        className={cx("ui-line-chart", className)}
+        var={getCSSvariables}
+        {...{
+          w,
+          width,
+          minW,
+          minWidth,
+          maxW,
+          maxWidth,
+          h,
+          height,
+          minH,
+          minHeight,
+          maxH,
+          maxHeight,
+        }}
+        __css={{ ...styles.container }}
+      >
+        <ResponsiveContainer {...getContainerProps({}, ref)}>
+          <ReChartsLineChart {...getLineChartProps({}, ref)}>
+            {referenceLinesItems}
+            <CartesianGrid {...getGridProps({}, ref)} />
+            <XAxis {...getXAxisProps()} />
+            <YAxis {...getYAxisProps()} />
+            {withLegend ? (
+              <ReChartsLegend
+                content={({ payload }) => (
+                  <Legend
+                    ref={ref}
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                  />
+                )}
+                {...getLegendProps({}, ref)}
+              />
+            ) : null}
+            {withTooltip ? (
+              <Tooltip
+                content={({ label, payload }) => (
+                  <ChartTooltip ref={ref} label={label} payload={payload} />
+                )}
+                {...getTooltipProps({}, ref)}
+              />
+            ) : null}
+            {lines}
+          </ReChartsLineChart>
+        </ResponsiveContainer>
+      </ui.div>
     </ChartProvider>
   )
 })

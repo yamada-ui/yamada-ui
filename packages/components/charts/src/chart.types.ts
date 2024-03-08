@@ -6,6 +6,8 @@ import type {
   AreaProps as ReChartsAreaProps,
   BarChart as ReChartsBarChart,
   BarProps as ReChartsBarProps,
+  LineChart as ReChartsLineChart,
+  LineProps as ReChartsLineProps,
   ReferenceLineProps,
   DotProps,
   XAxisProps,
@@ -32,7 +34,7 @@ export type RequiredChartPropGetter<
 export type LayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
 export type AxisType = "x" | "y" | "xy" | "none"
-export type AreaChartCurveType =
+export type CurveType =
   | "bump"
   | "linear"
   | "natural"
@@ -48,6 +50,10 @@ export type BarChartSeries = Merge<
   Merge<CSSUIProps, ReChartsBarProps>,
   { color: CSSUIProps["color"] }
 >
+export type LineChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsLineProps>,
+  { color: CSSUIProps["color"] }
+>
 export type AreaChartUIProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof ReChartsAreaChart>
@@ -55,6 +61,10 @@ export type AreaChartUIProps = Merge<
 export type BarChartUIProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof ReChartsBarChart>
+>
+export type LineChartUIProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof ReChartsLineChart>
 >
 export type ReferenceLineUIProps = Merge<CSSUIProps, ReferenceLineProps>
 export type ContainerUIProps = Merge<
@@ -104,6 +114,21 @@ export const barChartProperties: (keyof ComponentPropsWithoutRef<
   "data",
   "margin",
   "stackOffset",
+  "onClick",
+  "onMouseEnter",
+  "onMouseMove",
+  "onMouseLeave",
+]
+export const lineChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof ReChartsLineChart
+>)[] = [
+  "layout",
+  "syncId",
+  "syncMethod",
+  "width",
+  "height",
+  "data",
+  "margin",
   "onClick",
   "onMouseEnter",
   "onMouseMove",
@@ -339,6 +364,40 @@ export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
   "onMouseOut",
   "onMouseEnter",
   "onMouseLeave",
+]
+export const lineProperties: (keyof Omit<ReChartsLineProps, "ref">)[] = [
+  "type",
+  "dataKey",
+  "xAxisId",
+  "yAxisId",
+  "legendType",
+  "dot",
+  "activeDot",
+  "label",
+  "hide",
+  "points",
+  "stroke",
+  "strokeWidth",
+  "layout",
+  "connectNulls",
+  "unit",
+  "name",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "id",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+  "strokeDasharray",
 ]
 export const dotProperties: (keyof DotProps)[] = [
   "cx",

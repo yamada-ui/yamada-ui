@@ -8,6 +8,8 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export default function Index() {
-  return <Layout />
+const Index = () => {
+  return <Layout></Layout>
 }
+
+export default Index

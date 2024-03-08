@@ -1,8 +1,6 @@
-import { cssBundleHref } from "@remix-run/css-bundle"
 import type { LinksFunction } from "@remix-run/node"
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -19,7 +17,7 @@ import theme, { config } from "./theme"
 import { ClientOnly } from "remix-utils/client-only"
 
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
 ]
 
 export default function App() {
@@ -28,7 +26,6 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.svg" />
         <Meta />
         <Links />
       </head>
@@ -59,7 +56,6 @@ export default function App() {
         </UIProvider>
         <ScrollRestoration />
         <Scripts />
-        {/* <LiveReload /> */}
       </body>
     </html>
   )

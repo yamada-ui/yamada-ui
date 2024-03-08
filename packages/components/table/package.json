@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Yamada UI table component",
   "keywords": [
     "yamada",
@@ -30,11 +30,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/table"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",

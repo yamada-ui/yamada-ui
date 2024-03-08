@@ -1,5 +1,15 @@
 # @yamada-ui/link
 
+## 1.0.14
+
+### Patch Changes
+
+- [#858](https://github.com/yamada-ui/yamada-ui/pull/858) [`138004b`](https://github.com/yamada-ui/yamada-ui/commit/138004b15709ae3cc3e09680d04bc2d5ec674483) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where theme tokens were used in components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/core@1.4.2
+
 ## 1.0.13
 
 ### Patch Changes

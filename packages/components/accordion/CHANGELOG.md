@@ -1,5 +1,20 @@
 # @yamada-ui/accordion
 
+## 1.0.15
+
+### Patch Changes
+
+- [#831](https://github.com/yamada-ui/yamada-ui/pull/831) [`f29a44f`](https://github.com/yamada-ui/yamada-ui/commit/f29a44fe3725a7e2337ea29a94e48e9a1e3afd9f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where theme tokens were used in components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/motion@1.0.15
+  - @yamada-ui/transitions@1.0.15
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-controllable-state@1.0.6
+  - @yamada-ui/use-descendant@1.0.6
+
 ## 1.0.14
 
 ### Patch Changes

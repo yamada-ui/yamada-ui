@@ -9,7 +9,7 @@
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui"
+    "url": "git+https://github.com/yamada-ui/yamada-ui"
   },
   "scripts": {
     "prepare": "husky install",
@@ -21,7 +21,7 @@
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",
     "dev": "turbo run dev --filter=!./examples/*",
-    "lint": "eslint packages/**/**/src scripts/**/** --ext .ts,.tsx --max-warnings 0 --config .eslintrc --cache",
+    "lint": "eslint packages/**/**/src scripts/**/** vitest.config.mts vite.config.lcov-report.mts --ext .ts,.tsx,.mts --max-warnings 0 --config .eslintrc --cache",
     "format": "prettier --write .",
     "format:check": "prettier --check packages/**/**/src stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",
@@ -29,6 +29,7 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage --silent --run && vite preview --config vite.config.lcov-report.mts",
+    "test:ci": "vitest run --coverage",
     "test:ui": "vitest --coverage --watch --ui",
     "quality": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
     "gen:css": "tsx scripts/generate-css",
@@ -58,7 +59,10 @@
     "next-app:start": "pnpm --prefix examples/nextjs-app start",
     "vite:dev": "pnpm --prefix examples/vite dev",
     "vite:build": "pnpm --prefix examples/vite build",
-    "vite:preview": "pnpm --prefix examples/vite preview"
+    "vite:preview": "pnpm --prefix examples/vite preview",
+    "remix:dev": "pnpm --prefix examples/remix dev",
+    "remix:build": "pnpm --prefix examples/remix build",
+    "remix:start": "pnpm --prefix examples/remix start"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.5.0",

@@ -340,11 +340,17 @@ export const useSelect = <T extends MaybeValue = string>({
       const values = descendants.values()
       const selectedValues = values
         .filter(({ node }) => node.dataset.value === newValue)
-        .map(({ node, index }) =>
-          !(!!placeholder && placeholderInOptions) || index !== 0
-            ? node.textContent ?? ""
-            : undefined,
-        )
+        .map(({ node, index }) => {
+          if (!(!!placeholder && placeholderInOptions) || index !== 0) {
+            const el = Array.from(node.children).find(
+              (child) => child.getAttribute("data-label") !== null,
+            )
+
+            return el?.innerHTML ?? ""
+          } else {
+            return undefined
+          }
+        })
 
       setLabel((prev) => {
         if (!isMulti) {
@@ -797,18 +803,11 @@ export const useSelectOptionGroup = ({
 
 export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
-export type UseSelectOptionProps = Omit<
-  HTMLUIProps<"li">,
-  "value" | "children"
-> & {
+export type UseSelectOptionProps = Omit<HTMLUIProps<"li">, "value"> & {
   /**
    * The value of the select option.
    */
   value?: string
-  /**
-   * The label of the select option.
-   */
-  children?: string
   /**
    * If `true`, the select option will be disabled.
    *

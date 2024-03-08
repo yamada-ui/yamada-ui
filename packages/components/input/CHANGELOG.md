@@ -1,5 +1,18 @@
 # @yamada-ui/input
 
+## 1.0.17
+
+### Patch Changes
+
+- [#851](https://github.com/yamada-ui/yamada-ui/pull/851) [`67e1a62`](https://github.com/yamada-ui/yamada-ui/commit/67e1a6226dae2d3fc5691aa5143802f54dd4f252) Thanks [@banban9999](https://github.com/banban9999)! - Fixed a bug where theme tokens were used in the InputElement component.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/file-input@1.0.17
+  - @yamada-ui/form-control@1.0.17
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-token@1.1.2
+
 ## 1.0.16
 
 ### Patch Changes

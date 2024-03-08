@@ -8,9 +8,9 @@ body:
 
         Please search open/closed issues before submitting. Someone might have asked the same thing before 😎!
 
-          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
+          - [Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+          - [Discussions](https://github.com/yamada-ui/yamada-ui/discussions)
 
         We're all volunteers here, so please help us help you by taking the time to accurately fill out this template. 💖
   - type: dropdown
@@ -50,7 +50,7 @@ body:
     attributes:
       label: "Link to Reproduction"
       description: |
-        If possible, please include a link to a CodeSandbox with a minimal reproduction (see https://github.com/hirotomoyamada/yamada-ui#codesandbox for templates)
+        If possible, please include a link to a CodeSandbox with a minimal reproduction (see https://github.com/yamada-ui/yamada-ui#codesandbox for templates)
       placeholder: "https://codesandbox.io/"
   - type: textarea
     id: steps

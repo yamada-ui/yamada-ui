@@ -176,6 +176,7 @@ export const useAreaChart = ({
       series.map(({ color }, index) => ({
         name: `area-${index}`,
         token: "colors",
+        // TODO: `gray`を変更する
         value: color ?? "gray",
       })),
     [series],
@@ -197,6 +198,7 @@ export const useAreaChart = ({
         ? referenceLineProps.map(({ color }, index) => ({
             name: `reference-line-${index}`,
             token: "colors",
+            // TODO: `gray`を変更する
             value: color ?? "gray",
           }))
         : [],

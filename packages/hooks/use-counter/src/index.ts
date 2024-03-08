@@ -6,7 +6,7 @@ import {
 } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
 
-export interface UseCounterProps {
+export type UseCounterProps = {
   /**
    * The value of the counter.
    * Should be less than `max` and greater than `min`.

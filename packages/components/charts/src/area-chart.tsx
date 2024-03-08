@@ -52,6 +52,7 @@ type AreaChartOptions = {
    * @default false
    */
   withLegend?: boolean
+  // TODO: コメント追加
   containerRef?: RefObject<HTMLDivElement>
 }
 

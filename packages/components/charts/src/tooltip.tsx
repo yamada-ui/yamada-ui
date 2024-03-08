@@ -8,24 +8,25 @@ export type ChartTooltipProps = {
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
-  (props, ref) => {
-    const { label, payload } = props
-
+  ({ label, payload = [] }, ref) => {
     const { styles } = useTooltip()
 
-    const items = payload?.map((value, index) => (
+    const items = payload.map(({ color, name, value } = {}, index) => (
       <ui.div key={`tooltip-payload-${index}`} __css={styles.tooltipContent}>
-        <ui.div __css={styles.tooltipLabel}>
-          <ui.div background={value?.color} __css={styles.tooltipColorTip} />
-          <ui.div __css={styles.tooltipLabelText}>{value?.name}</ui.div>
-        </ui.div>
-        <ui.div __css={styles.tooltipValue}>{value?.value}</ui.div>
+        <ui.p __css={styles.tooltipLabel}>
+          <ui.div background={color} __css={styles.tooltipColorTip} />
+
+          <ui.span __css={styles.tooltipLabelText}>{name}</ui.span>
+        </ui.p>
+
+        <ui.span __css={styles.tooltipValue}>{value}</ui.span>
       </ui.div>
     ))
 
     return (
       <ui.div ref={ref} __css={styles.tooltip}>
-        <ui.div __css={styles.tooltipTitle}>{label}</ui.div>
+        <ui.p __css={styles.tooltipTitle}>{label}</ui.p>
+
         {items}
       </ui.div>
     )

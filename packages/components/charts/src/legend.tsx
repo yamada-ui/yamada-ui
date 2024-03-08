@@ -7,26 +7,27 @@ export type LegendProps = {
   onHighlight: (area: string | null) => void
 }
 
-export const Legend = forwardRef<LegendProps, "div">((props, ref) => {
-  const { payload, onHighlight } = props
+export const Legend = forwardRef<LegendProps, "div">(
+  ({ payload = [], onHighlight }, ref) => {
+    const { styles } = useLegend()
 
-  const { styles } = useLegend()
+    const items = payload.map(({ dataKey, color }, index) => (
+      <ui.div
+        key={`legend-${index}`}
+        onMouseEnter={() => onHighlight(dataKey)}
+        onMouseLeave={() => onHighlight(null)}
+        __css={styles.legendItem}
+      >
+        <ui.div background={color} __css={styles.legendColorTip} />
 
-  const items = payload?.map((entry, index) => (
-    <ui.div
-      key={`legend-${index}`}
-      onMouseEnter={() => onHighlight(entry.dataKey)}
-      onMouseLeave={() => onHighlight(null)}
-      __css={styles.legendItem}
-    >
-      <ui.div background={entry.color} __css={styles.legendColorTip} />
-      <ui.div __css={styles.legendItemText}>{entry.dataKey}</ui.div>
-    </ui.div>
-  ))
+        <ui.p __css={styles.legendItemText}>{dataKey}</ui.p>
+      </ui.div>
+    ))
 
-  return (
-    <ui.div ref={ref} __css={styles.legend}>
-      {items}
-    </ui.div>
-  )
-})
+    return (
+      <ui.div ref={ref} __css={styles.legend}>
+        {items}
+      </ui.div>
+    )
+  },
+)

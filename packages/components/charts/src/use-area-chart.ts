@@ -153,6 +153,7 @@ export const useAreaChart = ({
   strokeWidth = 2,
   connectNulls = true,
   fillOpacity = 0.2,
+  // TODO: テーマの値を使用している
   splitColors = ["red.400", "green.400"],
   splitOffset,
   referenceLineProps,

@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, render } from "@yamada-ui/test"
 import { Dialog, DialogHeader, DialogFooter, DialogBody } from "../src"
 
 describe("<Dialog />", () => {
@@ -73,34 +73,40 @@ describe("<Dialog />", () => {
   })
 
   test("Dialog renders correctly when open", async () => {
-    render(<DialogOpenExample />)
+    const { user, findByTestId } = render(<DialogOpenExample />)
 
-    expect(screen.getByTestId("OpenDialog")).toBeInTheDocument()
+    const openDialogButton = await findByTestId("OpenDialog")
+    expect(openDialogButton).toBeInTheDocument()
 
-    fireEvent.click(screen.getByTestId("OpenDialog"))
+    await user.click(openDialogButton)
 
-    expect(screen.getByTestId("Dialog")).toBeInTheDocument()
-    expect(screen.getByTestId("DialogHeader")).toHaveTextContent("header")
-    expect(screen.getByTestId("DialogBody")).toHaveTextContent("body")
-    expect(screen.getByTestId("DialogFooter")).toHaveTextContent("footer")
+    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    expect(await findByTestId("DialogHeader")).toHaveTextContent("header")
+    expect(await findByTestId("DialogBody")).toHaveTextContent("body")
+    expect(await findByTestId("DialogFooter")).toHaveTextContent("footer")
   })
 
   test("Dialog renders correctly when close", async () => {
-    render(<DialogCloseExample />)
+    const { user, findByTestId, getByText } = render(<DialogCloseExample />)
 
-    fireEvent.click(screen.getByTestId("OpenDialog"))
-    expect(screen.getByTestId("Dialog")).toBeInTheDocument()
-    fireEvent.click(screen.getByText("dialog-cancel"))
-    expect(screen.getByTestId("Dialog")).toBeNull
+    const openDialogButton = await findByTestId("OpenDialog")
 
-    fireEvent.click(screen.getByTestId("OpenDialog"))
-    expect(screen.getByTestId("Dialog")).toBeInTheDocument()
-    fireEvent.click(screen.getByText("dialog-other"))
-    expect(screen.getByTestId("Dialog")).toBeNull
+    await user.click(openDialogButton)
+    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    const cancelDialogButton = getByText("dialog-cancel")
+    await user.click(cancelDialogButton)
+    expect(await findByTestId("Dialog")).toBeNull
 
-    fireEvent.click(screen.getByTestId("OpenDialog"))
-    expect(screen.getByTestId("Dialog")).toBeInTheDocument()
-    fireEvent.click(screen.getByText("dialog-success"))
-    expect(screen.getByTestId("Dialog")).toBeNull
+    await user.click(openDialogButton)
+    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    const otherDialogButton = getByText("dialog-other")
+    await user.click(otherDialogButton)
+    expect(await findByTestId("Dialog")).toBeNull
+
+    await user.click(openDialogButton)
+    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    const successDialogButton = getByText("dialog-success")
+    await user.click(successDialogButton)
+    expect(await findByTestId("Dialog")).toBeNull
   })
 })

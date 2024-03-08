@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, render } from "@yamada-ui/test"
 import {
   Drawer,
   DrawerHeader,
@@ -40,13 +40,16 @@ describe("<Drawer />", () => {
   })
 
   test("Drawer renders correctly when open", async () => {
-    render(<DrawerOpenExample />)
+    const { user, findByTestId } = render(<DrawerOpenExample />)
 
-    fireEvent.click(screen.getByTestId("OpenDrawer"))
+    const openDrawerButton = await findByTestId("OpenDrawer")
+    expect(openDrawerButton).toBeInTheDocument()
 
-    expect(screen.getByTestId("Drawer")).toBeInTheDocument()
-    expect(screen.getByTestId("DrawerHeader")).toHaveTextContent("header")
-    expect(screen.getByTestId("DrawerBody")).toHaveTextContent("body")
-    expect(screen.getByTestId("DrawerFooter")).toHaveTextContent("footer")
+    await user.click(openDrawerButton)
+
+    expect(await findByTestId("Drawer")).toBeInTheDocument()
+    expect(await findByTestId("DrawerHeader")).toHaveTextContent("header")
+    expect(await findByTestId("DrawerBody")).toHaveTextContent("body")
+    expect(await findByTestId("DrawerFooter")).toHaveTextContent("footer")
   })
 })

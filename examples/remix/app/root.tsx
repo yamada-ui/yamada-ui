@@ -9,11 +9,14 @@ import {
   ScrollRestoration,
 } from "@remix-run/react"
 import {
-  // ColorModeScript,
-  // ThemeSchemeScript,
+  colorModeManager,
+  themeSchemeManager,
+  ColorModeScript,
+  ThemeSchemeScript,
   UIProvider,
 } from "@yamada-ui/react"
-import { config } from "./theme"
+import theme, { config } from "./theme"
+import { ClientOnly } from "remix-utils/client-only"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -25,27 +28,38 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.svg" />
         <Meta />
         <Links />
       </head>
       <body>
-        {/* <ColorModeScript
-          type="cookie"
-          nonce="testing"
-          initialColorMode={config.initialColorMode}
-        />
-        <ThemeSchemeScript
-          type="cookie"
-          nonce="testing"
-          initialThemeScheme={config.initialThemeScheme}
-        /> */}
-
-        <UIProvider>
+        <ClientOnly fallback={<></>}>
+          {() => (
+            <>
+              <ColorModeScript
+                type="cookie"
+                nonce="testing"
+                initialColorMode={config.initialColorMode}
+              />
+              <ThemeSchemeScript
+                type="cookie"
+                nonce="testing"
+                initialThemeScheme={config.initialThemeScheme}
+              />
+            </>
+          )}
+        </ClientOnly>
+        <UIProvider
+          config={config}
+          theme={theme}
+          colorModeManager={colorModeManager.cookieStorage}
+          themeSchemeManager={themeSchemeManager.cookieStorage}
+        >
           <Outlet />
         </UIProvider>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        {/* <LiveReload /> */}
       </body>
     </html>
   )

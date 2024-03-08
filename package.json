@@ -59,7 +59,10 @@
     "next-app:start": "pnpm --prefix examples/nextjs-app start",
     "vite:dev": "pnpm --prefix examples/vite dev",
     "vite:build": "pnpm --prefix examples/vite build",
-    "vite:preview": "pnpm --prefix examples/vite preview"
+    "vite:preview": "pnpm --prefix examples/vite preview",
+    "remix:dev": "pnpm --prefix examples/remix dev",
+    "remix:build": "pnpm --prefix examples/remix build",
+    "remix:start": "pnpm --prefix examples/remix start"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.5.0",

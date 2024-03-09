@@ -68,6 +68,29 @@ To specify a maximum number of rows, set a number to `maxRows`.
 </VStack>
 ```
 
+### Trigger Auto-sizing Height
+
+set `resizeRef` to a `ref`. A callback function is attached to the set `ref`, execute it.
+
+```tsx functional=true
+const resizeRef = useRef<() => void>(null)
+
+const onResize = () => {
+  resizeRef.current?.()
+}
+
+return (
+  <>
+    <VStack>
+      <Textarea placeholder="use resize" resizeRef={resizeRef} />
+      <Button alignSelf="flex-end" onClick={onResize}>
+        Resize
+      </Button>
+    </VStack>
+  </>
+)
+```
+
 ### Change Border Color
 
 To change the border color, set the color to `focusBorderColor` or `errorBorderColor`.

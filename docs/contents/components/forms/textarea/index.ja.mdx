@@ -68,6 +68,29 @@ import { Textarea } from "@yamada-ui/react"
 </VStack>
 ```
 
+### 高さの自動調整をトリガーする
+
+`resizeRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
+
+```tsx functional=true
+const resizeRef = useRef<() => void>(null)
+
+const onResize = () => {
+  resizeRef.current?.()
+}
+
+return (
+  <>
+    <VStack>
+      <Textarea placeholder="use resize" resizeRef={resizeRef} />
+      <Button alignSelf="flex-end" onClick={onResize}>
+        Resize
+      </Button>
+    </VStack>
+  </>
+)
+```
+
 ### ボーダーのカラーを変更する
 
 ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。

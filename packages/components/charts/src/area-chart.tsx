@@ -79,7 +79,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     type = "default",
     withTooltip = true,
     withLegend = false,
-    referenceLineProps,
+    referenceLineProps = [],
     containerProps,
     unit,
     gridProps,
@@ -180,12 +180,16 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     [getAreaGradientProps, getAreaProps, series],
   )
 
-  const referenceLinesItems = referenceLineProps?.map((_, index) => (
-    <ReferenceLine
-      key={`referenceLine-${index}`}
-      {...getReferenceLineProps({ index })}
-    />
-  ))
+  const referenceLinesItems = useMemo(
+    () =>
+      referenceLineProps.map((_, index) => (
+        <ReferenceLine
+          key={`referenceLine-${index}`}
+          {...getReferenceLineProps({ index })}
+        />
+      )),
+    [getReferenceLineProps, referenceLineProps],
+  )
 
   return (
     <ChartProvider value={{ styles }}>

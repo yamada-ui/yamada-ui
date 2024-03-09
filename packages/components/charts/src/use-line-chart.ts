@@ -1,6 +1,6 @@
 import { useTheme, getCSS } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { splitObject, cx, omitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
@@ -20,6 +20,7 @@ import type {
   CurveType,
   RequiredChartPropGetter,
 } from "./chart.types"
+import { getProps } from "./utils"
 
 export type UseLineChartOptions = {
   /**
@@ -27,7 +28,7 @@ export type UseLineChartOptions = {
    */
   data: Dict[]
   /**
-   * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
+   * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
    */
   series: LineChartSeries[]
   /**
@@ -85,7 +86,7 @@ export type UseLineChartOptions = {
   /**
    *  Controls fill opacity of all areas.
    *
-   * @default 0.2
+   * @default 1
    */
   fillOpacity?: number
 }
@@ -97,9 +98,9 @@ type UseLineChartProps = UseLineChartOptions & {
 export const useLineChart = ({
   data,
   series,
-  lineChartProps = {},
-  activeDotProps = {},
-  dotProps = {},
+  lineChartProps: _lineChartProps = {},
+  activeDotProps: _activeDotProps = {},
+  dotProps: _dotProps = {},
   layoutType = "horizontal",
   withDots = true,
   withActiveDots = true,
@@ -114,12 +115,121 @@ export const useLineChart = ({
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
 
-  const [lineChartReChartsProps, lineChartUiProps] = splitObject(
-    lineChartProps,
-    lineChartProperties,
+  const lineColors: CSSUIProps["var"] = useMemo(
+    () =>
+      series.map((item, index) => ({
+        name: `line-${index}`,
+        token: "colors",
+        value: item.color ?? "gray",
+      })),
+    [series],
   )
-  const lineChartStyleClassName = getCSS(styles.lineChart)(theme)
-  const lineChartPropClassName = getCSS(lineChartUiProps)(theme)
+
+  const referenceLineColors: CSSUIProps["var"] = useMemo(
+    () =>
+      referenceLineProps
+        ? referenceLineProps.map((line, index) => ({
+            name: `reference-line-${index}`,
+            token: "colors",
+            value: line.color ?? "gray",
+          }))
+        : [],
+    [referenceLineProps],
+  )
+
+  const getCSSvariables = useMemo(
+    () => [...lineColors, ...referenceLineColors],
+    [lineColors, referenceLineColors],
+  )
+
+  const [lineChartProps, lineChartClassName] = getProps<Dict, string>(
+    [_lineChartProps, lineChartProperties],
+    styles.lineChart,
+  )(theme)
+
+  const [activeDotProps, activeDotClassName] = getProps<Dict, string>(
+    [_activeDotProps, dotProperties],
+    styles.activeDot,
+  )(theme)
+
+  const [dotProps, dotClassName] = getProps<Dict, string>(
+    [_dotProps, dotProperties],
+    styles.dot,
+  )(theme)
+
+  const lineClassName = getCSS(styles.line)(theme)
+
+  const linePropList = useMemo(
+    () =>
+      series.map((props, index) => {
+        const {
+          dataKey,
+          strokeDasharray,
+          activeDot: _activeDot,
+          dot: _dot,
+        } = props
+        const color = `var(--ui-line-${index})`
+        const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const [rest, className] = getProps<Dict, string>(
+          [props, lineProperties],
+          lineClassName,
+        )(theme)
+
+        let activeDot: DotProps | boolean
+
+        if (withActiveDots) {
+          activeDot = {
+            className: activeDotClassName,
+            fill: color,
+            stroke: color,
+            r: 4,
+            ...activeDotProps,
+            ...(_activeDot as DotProps),
+          }
+        } else {
+          activeDot = false
+        }
+
+        let dot: DotProps | boolean
+
+        if (withDots) {
+          dot = {
+            className: dotClassName,
+            fill: color,
+            fillOpacity: dimmed ? 0 : 1,
+            strokeOpacity: dimmed ? 0 : 1,
+            ...dotProps,
+            ...(_dot as DotProps),
+          }
+        } else {
+          dot = false
+        }
+
+        return {
+          color,
+          dimmed,
+          className,
+          ...rest,
+          strokeDasharray,
+          dataKey,
+          activeDot,
+          dot,
+        }
+      }),
+    [
+      activeDotClassName,
+      activeDotProps,
+      dotClassName,
+      dotProps,
+      highlightedArea,
+      lineClassName,
+      series,
+      shouldHighlight,
+      theme,
+      withActiveDots,
+      withDots,
+    ],
+  )
 
   const getLineChartProps: ChartPropGetter<
     "div",
@@ -128,49 +238,14 @@ export const useLineChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, lineChartPropClassName, lineChartStyleClassName),
+      className: cx(className, lineChartClassName),
       data,
       layout: layoutType,
       ...props,
-      ...lineChartReChartsProps,
+      ...lineChartProps,
     }),
-    [
-      data,
-      layoutType,
-      lineChartPropClassName,
-      lineChartReChartsProps,
-      lineChartStyleClassName,
-    ],
+    [data, layoutType, lineChartClassName, lineChartProps],
   )
-
-  const lineStyleClassName = getCSS(styles.line)(theme)
-  const linePropList = series.map((props, index) => {
-    const color = `var(--ui-line-${index})`
-    const dimmed = shouldHighlight && highlightedArea !== props.dataKey
-    const [lineReChartsProps, lineUIProps] = splitObject(props, lineProperties)
-    const lineClassName = getCSS(lineUIProps as CSSUIObject)(theme)
-
-    return {
-      color,
-      dimmed,
-      lineReChartsProps,
-      lineClassName,
-      dataKey: props.dataKey,
-      strokeDasharray: props.strokeDasharray,
-    }
-  })
-  const [activeDotReChartsProps, activeDotUIProps] = splitObject<Dict, string>(
-    activeDotProps,
-    dotProperties,
-  )
-  const activeDotStyleClassName = getCSS(styles.activeDot)(theme)
-  const activeDotClassName = getCSS(activeDotUIProps)(theme)
-  const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
-    dotProps,
-    dotProperties,
-  )
-  const dotStyleClassName = getCSS(styles.dot)(theme)
-  const dotClassName = getCSS(dotUIProps)(theme)
 
   const getLineProps: RequiredChartPropGetter<
     "div",
@@ -179,47 +254,21 @@ export const useLineChart = ({
     },
     Omit<LineProps, "ref">
   > = useCallback(
-    ({ index, className, ...props }, ref = null) => {
+    ({ index, className: classNameProp, ...props }, ref = null) => {
       const {
         color,
         dimmed,
-        lineReChartsProps,
-        lineClassName,
+        className,
         dataKey,
         strokeDasharray,
+        activeDot,
+        dot,
+        ...rest
       } = linePropList[index]
-
-      let activeDot: DotProps | boolean
-      if (withActiveDots) {
-        activeDot = {
-          className: cx(className, activeDotClassName, activeDotStyleClassName),
-          fill: color,
-          stroke: color,
-          r: 4,
-          ...activeDotReChartsProps,
-          ...(lineReChartsProps["activeDot"] as DotProps),
-        }
-      } else {
-        activeDot = false
-      }
-
-      let dot: DotProps | boolean
-      if (withDots) {
-        dot = {
-          className: cx(className, dotClassName, dotStyleClassName),
-          fill: color,
-          fillOpacity: dimmed ? 0 : 1,
-          strokeOpacity: dimmed ? 0 : 1,
-          ...dotReChartsProps,
-          ...(lineReChartsProps["dot"] as DotProps),
-        }
-      } else {
-        dot = false
-      }
 
       return {
         ref,
-        className: cx(className, lineClassName, lineStyleClassName),
+        className: cx(classNameProp, className),
         activeDot,
         dot,
         name: dataKey as string,
@@ -234,55 +283,10 @@ export const useLineChart = ({
         strokeOpacity: dimmed ? 0.5 : fillOpacity,
         strokeDasharray,
         ...(props as Omit<LineProps, "dataKey">),
-        ...omitObject(lineReChartsProps, [
-          "dataKey",
-          "dot",
-          "activeDot",
-          "color",
-        ]),
+        ...rest,
       }
     },
-    [
-      activeDotClassName,
-      activeDotReChartsProps,
-      activeDotStyleClassName,
-      connectNulls,
-      curveType,
-      dotClassName,
-      dotReChartsProps,
-      dotStyleClassName,
-      fillOpacity,
-      linePropList,
-      lineStyleClassName,
-      strokeWidth,
-      withActiveDots,
-      withDots,
-    ],
-  )
-
-  const lineColors: CSSUIProps["var"] = useMemo(
-    () =>
-      series.map((item, index) => ({
-        name: `line-${index}`,
-        token: "colors",
-        value: item.color ?? "gray",
-      })),
-    [series],
-  )
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
-    () =>
-      referenceLineProps
-        ? referenceLineProps.map((line, index) => ({
-            name: `reference-line-${index}`,
-            token: "colors",
-            value: line.color ?? "gray",
-          }))
-        : [],
-    [referenceLineProps],
-  )
-  const getCSSvariables = useMemo(
-    () => [...lineColors, ...referenceLineColors],
-    [lineColors, referenceLineColors],
+    [connectNulls, curveType, fillOpacity, linePropList, strokeWidth],
   )
 
   return {

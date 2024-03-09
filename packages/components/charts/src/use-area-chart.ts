@@ -31,7 +31,7 @@ export type UseAreaChartOptions = {
    */
   data: Dict[]
   /**
-   * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
+   * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
    */
   series: AreaChartSeries[]
   /**

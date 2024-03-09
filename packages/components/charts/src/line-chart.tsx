@@ -6,6 +6,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import { useMemo } from "react"
 import {
   LineChart as ReChartsLineChart,
   Legend as ReChartsLegend,
@@ -62,18 +63,6 @@ export type LineChartProps = HTMLUIProps<"div"> &
 export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("LineChart", props)
   const {
-    w,
-    width,
-    minW,
-    minWidth,
-    maxW,
-    maxWidth,
-    h,
-    height,
-    minH,
-    minHeight,
-    maxH,
-    maxHeight,
     className,
     containerProps,
     gridProps,
@@ -96,16 +85,41 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     withLegend = false,
     withTooltip = true,
     series,
-    ...computedProps
+    data,
+    lineChartProps,
+    activeDotProps,
+    dotProps,
+    withDots,
+    withActiveDots,
+    curveType,
+    strokeWidth,
+    connectNulls,
+    fillOpacity,
+    ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getContainerProps } = useChart({ containerProps })
-  const { getGridProps } = useChartGrid({
-    gridProps,
-    gridAxis,
-    strokeDasharray,
+  const {
+    getLineProps,
+    getLineChartProps,
+    getCSSvariables,
+    setHighlightedArea,
+  } = useLineChart({
+    layoutType,
+    series,
+    referenceLineProps,
+    data,
+    lineChartProps,
+    activeDotProps,
+    dotProps,
+    withDots,
+    withActiveDots,
+    curveType,
+    strokeWidth,
+    connectNulls,
+    fillOpacity,
     styles,
   })
+  const { getContainerProps } = useChart({ containerProps })
   const { getXAxisProps, getYAxisProps } = useChartAxis({
     dataKey,
     type,
@@ -124,34 +138,36 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     referenceLineProps,
     styles,
   })
+  const { getGridProps } = useChartGrid({
+    gridProps,
+    gridAxis,
+    strokeDasharray,
+    styles,
+  })
   const { getTooltipProps } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
   })
   const { getLegendProps } = useChartLegend({ legendProps })
-  const {
-    getLineProps,
-    getLineChartProps,
-    getCSSvariables,
-    setHighlightedArea,
-  } = useLineChart({
-    layoutType,
-    series,
-    referenceLineProps,
-    styles,
-    ...computedProps,
-  })
 
-  const lines = series.map((_, index) => (
-    <Line key={`line-${index}`} {...getLineProps({ index }, ref)} />
-  ))
+  const lines = useMemo(
+    () =>
+      series.map((_, index) => (
+        <Line key={`line-${index}`} {...getLineProps({ index })} />
+      )),
+    [getLineProps, series],
+  )
 
-  const referenceLinesItems = referenceLineProps?.map((_, index) => (
-    <ReferenceLine
-      key={`referenceLine-${index}`}
-      {...getReferenceLineProps({ index }, ref)}
-    />
-  ))
+  const referenceLinesItems = useMemo(
+    () =>
+      referenceLineProps?.map((_, index) => (
+        <ReferenceLine
+          key={`referenceLine-${index}`}
+          {...getReferenceLineProps({ index })}
+        />
+      )),
+    [getReferenceLineProps, referenceLineProps],
+  )
 
   return (
     <ChartProvider value={{ styles }}>
@@ -159,48 +175,35 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-line-chart", className)}
         var={getCSSvariables}
-        {...{
-          w,
-          width,
-          minW,
-          minWidth,
-          maxW,
-          maxWidth,
-          h,
-          height,
-          minH,
-          minHeight,
-          maxH,
-          maxHeight,
-        }}
         __css={{ ...styles.container }}
+        {...rest}
       >
-        <ResponsiveContainer {...getContainerProps({}, ref)}>
-          <ReChartsLineChart {...getLineChartProps({}, ref)}>
+        <ResponsiveContainer {...getContainerProps()}>
+          <ReChartsLineChart {...getLineChartProps()}>
             {referenceLinesItems}
-            <CartesianGrid {...getGridProps({}, ref)} />
+
+            <CartesianGrid {...getGridProps()} />
             <XAxis {...getXAxisProps()} />
             <YAxis {...getYAxisProps()} />
+
             {withLegend ? (
               <ReChartsLegend
                 content={({ payload }) => (
-                  <Legend
-                    ref={ref}
-                    payload={payload}
-                    onHighlight={setHighlightedArea}
-                  />
+                  <Legend payload={payload} onHighlight={setHighlightedArea} />
                 )}
-                {...getLegendProps({}, ref)}
+                {...getLegendProps()}
               />
             ) : null}
+
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (
-                  <ChartTooltip ref={ref} label={label} payload={payload} />
+                  <ChartTooltip label={label} payload={payload} />
                 )}
                 {...getTooltipProps({}, ref)}
               />
             ) : null}
+
             {lines}
           </ReChartsLineChart>
         </ResponsiveContainer>

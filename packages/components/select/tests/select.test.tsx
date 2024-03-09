@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, act } from "@yamada-ui/test"
 import { Select, Option, OptionGroup, MultiSelect } from "../src"
 
 describe("<Select />", () => {
@@ -167,12 +167,19 @@ describe("<MultiSelect />", () => {
     )
 
     const multiSelect = screen.getByTestId("MultiSelect")
-    await user.click(multiSelect)
+    await act(async () => {
+      await user.click(multiSelect)
+    })
+
     const optionOne = screen.getByTestId("Option-One")
-    await user.click(optionOne)
+    await act(async () => {
+      await user.click(optionOne)
+    })
 
     const optionTwo = screen.getByTestId("Option-Two")
-    await user.click(optionTwo)
+    await act(async () => {
+      await user.click(optionTwo)
+    })
 
     expect(screen.getByText("One,")).toBeInTheDocument()
   })

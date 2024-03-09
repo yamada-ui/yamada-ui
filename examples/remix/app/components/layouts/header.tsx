@@ -140,6 +140,9 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
             <MenuOptionItem value="dark" closeOnSelect>
               Dark
             </MenuOptionItem>
+            <MenuOptionItem value="system" closeOnSelect>
+              System
+            </MenuOptionItem>
           </MenuOptionGroup>
         </MenuList>
       </Menu>

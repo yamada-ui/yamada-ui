@@ -1,7 +1,7 @@
-import type { CSSUIObject, CSSUIProps, StyledTheme } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx, isString, splitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useMemo, useState } from "react"
 import type { AreaChart, AreaProps, DotProps } from "recharts"
@@ -23,6 +23,7 @@ import {
   dotProperties,
   areaProperties,
 } from "./chart.types"
+import { getProps } from "./utils"
 
 export type UseAreaChartOptions = {
   /**
@@ -117,27 +118,6 @@ export type UseAreaChartProps = UseAreaChartOptions & {
   styles: Dict<CSSUIObject>
 }
 
-const getClassName =
-  (...styles: (Dict | string)[]) =>
-  (theme: StyledTheme) =>
-    cx(
-      ...styles.map((style) =>
-        isString(style) ? style : getCSS(style)(theme),
-      ),
-    )
-
-const getProps =
-  <T extends Dict, K extends keyof T>(
-    [obj, keys]: [T, K[]],
-    ...props: (Dict | string)[]
-  ) =>
-  (theme: StyledTheme) => {
-    const [pickedProps, omittedProps] = splitObject<T, K>(obj, keys)
-    const className = getClassName(omittedProps, ...props)(theme)
-
-    return [pickedProps, className] as const
-  }
-
 export const useAreaChart = ({
   data,
   series,
@@ -153,8 +133,7 @@ export const useAreaChart = ({
   strokeWidth = 2,
   connectNulls = true,
   fillOpacity = 0.2,
-  // TODO: テーマの値を使用している
-  splitColors = ["red.400", "green.400"],
+  splitColors = ["#ee6a5d", "#5fce7d"],
   splitOffset,
   referenceLineProps,
   styles,
@@ -209,7 +188,7 @@ export const useAreaChart = ({
     return [...areaColors, ...areaSplitColors, ...referenceLineColors]
   }, [areaColors, areaSplitColors, referenceLineColors])
 
-  const [areaChartProps, areaChartClassName] = getProps(
+  const [areaChartProps, areaChartClassName] = getProps<Dict, string>(
     [_areaChartProps, areaChartProperties],
     styles.areaChart,
   )(theme)
@@ -242,11 +221,16 @@ export const useAreaChart = ({
     return 0.5
   }, [data, series])
 
-  // TODO: メモ化による影響を調査する
   const areaPropList = useMemo(
     () =>
       series.map(({ ...props }, index) => {
-        const { color: colorProp, dataKey, strokeDasharray } = props
+        const {
+          color: colorProp,
+          dataKey,
+          strokeDasharray,
+          activeDot: _activeDot,
+          dot: _dot,
+        } = props
         const id = `${uuid}-${colorProp}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -263,7 +247,7 @@ export const useAreaChart = ({
             stroke: color,
             r: 4,
             ...activeDotProps,
-            ...(props.activeDot as DotProps),
+            ...(_activeDot as DotProps),
           }
         } else {
           activeDot = false
@@ -279,7 +263,7 @@ export const useAreaChart = ({
             strokeWidth: 2,
             r: 4,
             ...dotProps,
-            ...(props.dot as DotProps),
+            ...(_dot as DotProps),
           }
         } else {
           dot = false

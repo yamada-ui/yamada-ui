@@ -1,9 +1,10 @@
-import { getCSS, useTheme } from "@yamada-ui/core"
-import { cx, splitObject } from "@yamada-ui/utils"
+import { useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { TooltipProps } from "recharts"
 import type { ChartPropGetter, TooltipUIProps } from "./chart.types"
 import { tooltipProperties } from "./chart.types"
+import { getProps } from "./utils"
 
 export type UseChartTooltipProps = {
   /**
@@ -23,8 +24,10 @@ export const useChartTooltip = ({
   tooltipAnimationDuration = 0,
 }: UseChartTooltipProps) => {
   const { theme } = useTheme()
-  const [reChartsProps, uiProps] = splitObject(tooltipProps, tooltipProperties)
-  const propClassName = getCSS(uiProps)(theme)
+  const [reChartsProps, propClassName] = getProps([
+    tooltipProps,
+    tooltipProperties,
+  ])(theme)
 
   const getTooltipProps: ChartPropGetter<
     "div",

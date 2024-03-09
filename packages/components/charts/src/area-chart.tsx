@@ -6,7 +6,6 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { RefObject } from "react"
 import { Fragment, useMemo } from "react"
 import {
   CartesianGrid,
@@ -25,11 +24,10 @@ import { Legend } from "./legend"
 import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
-import { ChartProvider } from "./use-chart"
+import type { UseChartProps } from "./use-chart"
+import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
-import type { UseChartContainerProps } from "./use-chart-container"
-import { useChartContainer } from "./use-chart-container"
 import type { UseChartGridOptions } from "./use-chart-grid"
 import { useChartGrid } from "./use-chart-grid"
 import type { UseChartLegendProps } from "./use-chart-legend"
@@ -52,22 +50,20 @@ type AreaChartOptions = {
    * @default false
    */
   withLegend?: boolean
-  // TODO: コメント追加
-  containerRef?: RefObject<HTMLDivElement>
 }
 
 export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
   AreaChartOptions &
   UseAreaChartOptions &
-  UseChartContainerProps &
+  UseChartProps &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
   UseChartTooltipProps &
   UseChartLegendProps
 
-export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
+export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
   const {
     className,
@@ -92,7 +88,19 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     tooltipProps,
     tooltipAnimationDuration,
     legendProps,
-    containerRef,
+    data,
+    areaChartProps,
+    activeDotProps,
+    dotProps,
+    withGradient,
+    withDots,
+    withActiveDots,
+    curveType,
+    strokeWidth,
+    connectNulls,
+    fillOpacity,
+    splitColors,
+    splitOffset,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -108,11 +116,22 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     type,
     series,
     referenceLineProps,
+    data,
+    areaChartProps,
+    activeDotProps,
+    dotProps,
+    withGradient,
+    withDots,
+    withActiveDots,
+    curveType,
+    strokeWidth,
+    connectNulls,
+    fillOpacity,
+    splitColors,
+    splitOffset,
     styles,
-    ...rest,
   })
-  // TODO: useChartに突っ込む
-  const { getContainerProps } = useChartContainer({ containerProps })
+  const { getContainerProps } = useChart({ containerProps })
   const { getXAxisProps, getYAxisProps } = useChartAxis({
     dataKey,
     type,
@@ -143,7 +162,6 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 
-  // TODO: メモ化による影響を調査する
   const areas = useMemo(
     () =>
       series.map(({ dataKey }, index) => {
@@ -151,9 +169,9 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
 
         return (
           <Fragment key={`area-${dataKey}`}>
-            <ui.defs>
+            <defs>
               <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
-            </ui.defs>
+            </defs>
 
             <Area id={id} stroke={stroke} {...rest} />
           </Fragment>
@@ -169,23 +187,20 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     />
   ))
 
-  // TODO:
-  const gridRef = null
-
   return (
     <ChartProvider value={{ styles }}>
       <ui.div
-        ref={containerRef}
+        ref={ref}
         className={cx("ui-area-chart", className)}
         var={getCSSvariables}
         __css={{ ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer {...getContainerProps()}>
-          <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
+          <ReChartsAreaChart {...getAreaChartProps()}>
             {referenceLinesItems}
 
-            <CartesianGrid {...getGridProps({}, gridRef)} />
+            <CartesianGrid {...getGridProps()} />
             <XAxis {...getXAxisProps()} />
             <YAxis {...getYAxisProps()} />
 
@@ -208,9 +223,9 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
             ) : null}
 
             {type === "split" ? (
-              <ui.defs>
+              <defs>
                 <AreaSplit {...getAreaSplitProps()} />
-              </ui.defs>
+              </defs>
             ) : null}
             {areas}
           </ReChartsAreaChart>

@@ -1,8 +1,8 @@
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { splitObject, isObject, cx, omitObject } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import { isObject, cx } from "@yamada-ui/utils"
+import { useCallback, useMemo } from "react"
 
 import type { ReferenceLineProps } from "recharts"
 
@@ -11,6 +11,7 @@ import type {
   RequiredChartPropGetter,
 } from "./chart.types"
 import { referenceLineProperties } from "./chart.types"
+import { getProps } from "./utils"
 
 export type UseChartReferenceLineOptions = {
   /**
@@ -29,19 +30,25 @@ export const useChartReferenceLine = ({
 }: UseChartReferenceLineProps) => {
   const { theme } = useTheme()
   const styleClassName = getCSS(styles.referenceLine)(theme)
-  const propList = referenceLineProps?.map((props, index) => {
-    const [reChartsProps, uiProps] = splitObject(props, referenceLineProperties)
-    const propClassName = getCSS(uiProps as CSSUIObject)(theme)
-    const color = `var(--ui-reference-line-${index})`
-    const label: ReferenceLineProps["label"] = {
-      value: reChartsProps.label as string,
-      fill: color,
-      position: "insideBottomLeft",
-      ...(isObject(reChartsProps.label) ? reChartsProps.label : {}),
-    }
+  const propList = useMemo(
+    () =>
+      referenceLineProps.map((props, index) => {
+        const [{ label: _label, ...rest }, propClassName] = getProps(
+          [props, referenceLineProperties],
+          styleClassName,
+        )(theme)
+        const color = `var(--ui-reference-line-${index})`
+        const label: ReferenceLineProps["label"] = {
+          value: _label as string,
+          fill: color,
+          position: "insideBottomLeft",
+          ...(isObject(_label) ? _label : {}),
+        }
 
-    return { reChartsProps, propClassName, color, label }
-  })
+        return { propClassName, color, label, ...rest }
+      }),
+    [referenceLineProps, styleClassName, theme],
+  )
 
   const getReferenceLineProps: RequiredChartPropGetter<
     "div",
@@ -51,18 +58,18 @@ export const useChartReferenceLine = ({
     Omit<ReferenceLineProps, "ref">
   > = useCallback(
     ({ index, className, ...props }, ref = null) => {
-      const { reChartsProps, propClassName, color, label } = propList[index]
+      const { propClassName, color, label, ...rest } = propList[index]
 
       return {
         ref,
-        className: cx(className, propClassName, styleClassName),
+        className: cx(className, propClassName),
         stroke: color,
         label,
         ...(props as ReferenceLineProps),
-        ...omitObject(reChartsProps, ["label"]),
+        ...rest,
       }
     },
-    [propList, styleClassName],
+    [propList],
   )
 
   return { getReferenceLineProps }

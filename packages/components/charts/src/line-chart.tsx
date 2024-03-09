@@ -19,14 +19,14 @@ import {
 } from "recharts"
 import { Legend } from "./legend"
 import { ChartTooltip } from "./tooltip"
-import { ChartProvider } from "./use-chart"
+import type { UseChartProps } from "./use-chart"
+import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
-import type { UseChartContainerProps } from "./use-chart-container"
-import { useChartContainer } from "./use-chart-container"
 import type { UseChartGridOptions } from "./use-chart-grid"
 import { useChartGrid } from "./use-chart-grid"
-import { useChartLegend, type UseChartLegendProps } from "./use-chart-legend"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import { useChartLegend } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
 import { useChartTooltip, type UseChartTooltipProps } from "./use-chart-tooltip"
@@ -51,7 +51,7 @@ type LineChartOptions = {
 export type LineChartProps = HTMLUIProps<"div"> &
   ThemeProps<"LineChart"> &
   LineChartOptions &
-  UseChartContainerProps &
+  UseChartProps &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
@@ -99,7 +99,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const { getContainerProps } = useChartContainer({ containerProps })
+  const { getContainerProps } = useChart({ containerProps })
   const { getGridProps } = useChartGrid({
     gridProps,
     gridAxis,

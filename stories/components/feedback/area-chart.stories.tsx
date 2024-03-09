@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type {
   AreaChartProps,
-  AreaChartCurveType,
+  CurveType,
   AreaChartType,
   LayoutType,
   AreaChartSeries,
@@ -184,7 +184,7 @@ export const custom: Story = () => {
             onChange={(value) => {
               setProps((prev) => ({
                 ...prev,
-                curveType: value as AreaChartCurveType,
+                curveType: value as CurveType,
               }))
             }}
           />
@@ -647,7 +647,7 @@ export const withCustomTooltip: Story = () => {
       series={series}
       dataKey="name"
       tooltipProps={{
-        content: ({ label, payload }: TooltipProps) => (
+        content: ({ label, payload }) => (
           <CustomTooltip label={label} payload={payload} />
         ),
       }}

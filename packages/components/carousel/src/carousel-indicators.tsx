@@ -23,7 +23,7 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
 
     const css: CSSUIObject = {
       position: "absolute",
-      zIndex: "kurillin",
+      zIndex: 9,
       display: "flex",
       justifyContent: "center",
       ...styles.indicators,

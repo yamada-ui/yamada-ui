@@ -93,11 +93,13 @@ the following categories:
    can be either `docs`, `fix`, `feat`, `build`, or any other conventional
    commit type. `scope` is just a short id that describes the scope of work.
 
-3. Make and Run `pnpm changeset` to create a detailed description of your changes. This
+3. After making changes, please add test code for those changes. Run `pnpm test` or `pnpm test <package-name>` to ensure all tests pass.
+
+4. Run `pnpm changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
 
-4. Also, if you provide `jsx` snippets to the changeset, please turn off the
+5. Also, if you provide `jsx` snippets to the changeset, please turn off the
    live preview by doing the following at the beginning of the snippet:
    ` ```jsx live=false`
 
@@ -105,7 +107,7 @@ the following categories:
 > `pnpm changeset add --empty` to generate an empty changeset file to document
 > your changes.
 
-5. Next, commit your changes following the
+6. Next, commit your changes following the
    [commit convention](#commit-convention).
 
    - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
@@ -114,7 +116,7 @@ the following categories:
    - `Creating a new hook`: When you run the `pnpm gen:hook` command, a hook is created from a template and dependencies are installed.
    - `Adding functionality to an existing hook`: After adding, please add a story for the target hook so that the functionality can be understood.
 
-6. Once you have completed all of the above tasks, please push your changes.
+7. Once you have completed all of the above tasks, please push your changes.
    After pushing, a URL for the pull request will be generated. Follow the template and submit your request accordingly.
    Additionally, check the Checks within the pull request and ensure that the Quality check has successfully completed.
    If there are any issues, this pull request will not be merged.

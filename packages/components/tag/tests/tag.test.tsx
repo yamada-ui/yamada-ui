@@ -31,7 +31,7 @@ describe("<Tag />", () => {
 
   test("applies styles `gap` correctly", async () => {
     const { getByTestId } = render(
-      <Tag colorScheme="primary" size="sm" leftIcon={<Icon icon={faPlus} />}>
+      <Tag data-testid="tag" leftIcon={<Icon icon={faPlus} />}>
         Gap
       </Tag>,
     )
@@ -40,10 +40,14 @@ describe("<Tag />", () => {
 
   test("Is `fontSize` correctly applied to the close button style", async () => {
     const { getByTestId } = render(
-      <Tag colorScheme="primary" rounded="full" onClose={() => {}}>
+      <Tag data-testid="tag" onClose={() => {}}>
         Close
       </Tag>,
     )
-    expect(getByTestId("tag")).toHaveStyle("font-size: 0.25rem;")
+    expect(
+      getByTestId("tag")
+        .querySelector('span[aria-label="close"]')
+        ?.querySelector("svg"),
+    ).toHaveStyle("font-size: 1.125rem;")
   })
 })

@@ -68,21 +68,22 @@ To specify a maximum number of rows, set a number to `maxRows`.
 </VStack>
 ```
 
-### Trigger Auto-sizing Height
+### Handling Auto-Adjusting Height
 
-set `resizeRef` to a `ref`. A callback function is attached to the set `ref`, execute it.
+To handle auto-adjusting height, set a `ref` to `resizeRef`. A callback function will be attached to the set `ref`, so execute it.
 
 ```tsx functional=true
 const resizeRef = useRef<() => void>(null)
 
 const onResize = () => {
-  resizeRef.current?.()
+  if (resizeRef.current) resizeRef.current()
 }
 
 return (
   <>
     <VStack>
-      <Textarea placeholder="use resize" resizeRef={resizeRef} />
+      <Textarea autosize placeholder="use resize" resizeRef={resizeRef} />
+
       <Button alignSelf="flex-end" onClick={onResize}>
         Resize
       </Button>

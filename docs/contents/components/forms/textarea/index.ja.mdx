@@ -68,21 +68,22 @@ import { Textarea } from "@yamada-ui/react"
 </VStack>
 ```
 
-### 高さの自動調整をトリガーする
+### 高さの自動調整をハンドルする
 
-`resizeRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
+高さの自動調整をハンドルする場合は、`resizeRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
 
 ```tsx functional=true
 const resizeRef = useRef<() => void>(null)
 
 const onResize = () => {
-  resizeRef.current?.()
+  if (resizeRef.current) resizeRef.current()
 }
 
 return (
   <>
     <VStack>
-      <Textarea placeholder="use resize" resizeRef={resizeRef} />
+      <Textarea autosize placeholder="use resize" resizeRef={resizeRef} />
+
       <Button alignSelf="flex-end" onClick={onResize}>
         Resize
       </Button>

@@ -75,7 +75,7 @@ export const merge = <T extends Dict>(
   if (isObject(source)) {
     if (isObject(target)) {
       for (const [sourceKey, sourceValue] of Object.entries(source)) {
-        const targetValue = target[sourceKey]
+        const targetValue: any = target[sourceKey]
 
         if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
           result[sourceKey] = targetValue.concat(...sourceValue)

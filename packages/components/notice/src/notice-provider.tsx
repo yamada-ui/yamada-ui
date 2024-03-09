@@ -43,7 +43,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 
     const css: CSSUIObject = {
       position: "fixed",
-      zIndex: "zarbon",
+      zIndex: 160,
       pointerEvents: "none",
       display: "flex",
       flexDirection: "column",

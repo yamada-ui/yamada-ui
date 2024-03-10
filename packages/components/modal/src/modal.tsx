@@ -183,7 +183,7 @@ export const Modal = forwardRef<ModalProps, "section">(
       onEsc,
       onCloseComplete,
       placement: _placement = "center",
-      outside = "md",
+      outside = "1rem",
       withCloseButton = true,
       withOverlay = true,
       allowPinchZoom = false,

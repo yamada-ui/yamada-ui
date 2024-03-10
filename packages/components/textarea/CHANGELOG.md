@@ -1,5 +1,18 @@
 # @yamada-ui/textarea
 
+## 1.1.5
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#921](https://github.com/yamada-ui/yamada-ui/pull/921) [`badef10`](https://github.com/yamada-ui/yamada-ui/commit/badef1090040d5597aa388fdabbecbb35b3bcfb2) Thanks [@108yen](https://github.com/108yen)! - fix bug where resize was not triggered. And add functionality to trigger resize.
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/form-control@1.0.18
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
 ## 1.1.4
 
 ### Patch Changes

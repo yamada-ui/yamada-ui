@@ -1,5 +1,24 @@
 # @yamada-ui/carousel
 
+## 1.0.17
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#952](https://github.com/yamada-ui/yamada-ui/pull/952) [`fb4de98`](https://github.com/yamada-ui/yamada-ui/commit/fb4de98c8ae56ade0a97499220b6428f7bb122bf) Thanks [@y-hsgw](https://github.com/y-hsgw)! - Fixed useCarousel theme token usage in styled
+
+- [#936](https://github.com/yamada-ui/yamada-ui/pull/936) [`eb7956c`](https://github.com/yamada-ui/yamada-ui/commit/eb7956c6a1af9d06fbdb13dafe908548082f2ace) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Fixed Carousel theme token usage in styles
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/use-controllable-state@1.0.7
+  - @yamada-ui/button@1.0.17
+  - @yamada-ui/icon@1.0.15
+  - @yamada-ui/use-token@1.1.3
+  - @yamada-ui/use-value@1.1.3
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
 ## 1.0.16
 
 ### Patch Changes

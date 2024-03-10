@@ -56,6 +56,11 @@
       "required": false,
       "description": "Autosize up to minRows rows."
     },
+    "resizeRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void) | null) => void)\n  | MutableRefObject<(() => void) | null>",
+      "required": false,
+      "description": "Ref to a resize function."
+    },
     "size": {
       "defaultValue": "md",
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",

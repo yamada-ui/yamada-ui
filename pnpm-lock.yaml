@@ -358,6 +358,9 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.5.1
         version: 6.5.1
+      '@hono/vite-cloudflare-pages':
+        specifier: ^0.2.5
+        version: 0.2.5(hono@4.0.10)
       '@yamada-ui/calendar':
         specifier: workspace:*
         version: link:../../packages/components/calendar
@@ -6438,6 +6441,15 @@ packages:
     resolution: {integrity: sha512-h8l2TBLCPHZBUrrkosZ6L5CpBLj6zdESyF4B+zngiCDF7aZFQJ0alVbLx7jn8PCVi9EyoFf8a4hOZFi1tD95EA==}
     engines: {node: '>=18.14.1'}
     dev: true
+
+  /@hono/vite-cloudflare-pages@0.2.5(hono@4.0.10):
+    resolution: {integrity: sha512-/Cw4bREPf2OelHDc/2oVXYXemyKz+wXkC+5uK8ZLo8c2JV7vthSchQPWK7O6BGe7al0z5qKVqhTYkfZvuW0T5w==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: '*'
+    dependencies:
+      hono: 4.0.10
+    dev: false
 
   /@hono/vite-dev-server@0.8.2(hono@4.0.10):
     resolution: {integrity: sha512-KD+LkChriPWTZ8oJ4V3qlQA3EqBtdi3qG2a8IVYwAZv9BtPWYN2RzzIERL+Rhzu3TAgqOHcgUsI7MA+e3QL1+g==}

@@ -80,7 +80,7 @@ export const Snacks = forwardRef<SnacksProps, "div">(
       direction = "top",
       startIndex = 0,
       gutter = [0, 0],
-      gap = "md",
+      gap = "1rem",
       negateMargin = true,
       ...rest
     } = useMemo(

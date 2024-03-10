@@ -9,6 +9,8 @@ import {
   isObject,
   isString,
   createdDom,
+  toKebabCase,
+  filterUndefined,
 } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { ColorMode } from "./css"
@@ -254,6 +256,68 @@ const generateFilter =
     }
   }
 
+const generateAtRule =
+  (identifier: string): Transform =>
+  (values: any[], theme: StyledTheme) =>
+    values.reduce<Dict>(
+      (
+        prev,
+        {
+          type,
+          name,
+          query,
+          css,
+          w,
+          width,
+          minW,
+          minWidth,
+          maxW,
+          maxWidth,
+          h,
+          height,
+          minH,
+          minHeight,
+          maxH,
+          maxHeight,
+          ...rest
+        },
+      ) => {
+        width ??= w
+        minWidth ??= minW
+        maxWidth ??= maxW
+        height ??= h
+        minHeight ??= minH
+        maxHeight ??= maxH
+
+        if (!query) {
+          const resolvedRest = filterUndefined({
+            width,
+            minWidth,
+            maxWidth,
+            height,
+            minHeight,
+            maxHeight,
+            ...rest,
+          })
+
+          query = Object.entries(resolvedRest)
+            .map(([key, value]) => {
+              value = tokenToCSSVar("sizes", value)(theme)
+
+              return `(${toKebabCase(key)}: ${value})`
+            })
+            .join(" and ")
+        }
+
+        const condition = `@${identifier} ${type ?? name ?? ""} ${query}`
+
+        prev[condition] = css
+
+        return prev
+      },
+      {},
+    )
+
 export const mode =
   <L extends any, D extends any>(light: L, dark: D) =>
   (colorMode: ColorMode | undefined = "light"): L | D =>
@@ -373,4 +437,6 @@ export const transforms = {
   animation: generateAnimation,
   transform: generateTransform,
   filter: generateFilter,
+  media: generateAtRule("media"),
+  container: generateAtRule("container"),
 }

@@ -5,7 +5,7 @@ import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type { DotProps, LineChart, LineProps } from "recharts"
-import { getProps } from "./chart-utils"
+import { getComponentProps } from "./chart-utils"
 import {
   dotProperties,
   lineChartProperties,
@@ -142,17 +142,17 @@ export const useLineChart = ({
     [lineColors, referenceLineColors],
   )
 
-  const [lineChartProps, lineChartClassName] = getProps<Dict, string>(
+  const [lineChartProps, lineChartClassName] = getComponentProps<Dict, string>(
     [_lineChartProps, lineChartProperties],
     styles.lineChart,
   )(theme)
 
-  const [activeDotProps, activeDotClassName] = getProps<Dict, string>(
+  const [activeDotProps, activeDotClassName] = getComponentProps<Dict, string>(
     [_activeDotProps, dotProperties],
     styles.activeDot,
   )(theme)
 
-  const [dotProps, dotClassName] = getProps<Dict, string>(
+  const [dotProps, dotClassName] = getComponentProps<Dict, string>(
     [_dotProps, dotProperties],
     styles.dot,
   )(theme)
@@ -170,7 +170,7 @@ export const useLineChart = ({
         } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
-        const [rest, className] = getProps<Dict, string>(
+        const [rest, className] = getComponentProps<Dict, string>(
           [props, lineProperties],
           lineClassName,
         )(theme)

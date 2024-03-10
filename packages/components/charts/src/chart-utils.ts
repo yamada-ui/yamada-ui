@@ -12,7 +12,7 @@ export const getClassName =
       ),
     )
 
-export const getProps =
+export const getComponentProps =
   <T extends Dict, K extends keyof T>(
     [obj, keys]: [T, K[]],
     ...props: (Dict | string)[]

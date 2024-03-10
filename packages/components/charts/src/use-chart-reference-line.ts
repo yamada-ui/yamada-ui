@@ -4,7 +4,7 @@ import type { Dict } from "@yamada-ui/utils"
 import { isObject, cx } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type { ReferenceLineProps } from "recharts"
-import { getProps } from "./chart-utils"
+import { getComponentProps } from "./chart-utils"
 import type {
   ReferenceLineUIProps,
   RequiredChartPropGetter,
@@ -31,7 +31,7 @@ export const useChartReferenceLine = ({
   const propList = useMemo(
     () =>
       referenceLineProps.map((props, index) => {
-        const [{ label: _label, ...rest }, propClassName] = getProps(
+        const [{ label: _label, ...rest }, propClassName] = getComponentProps(
           [props, referenceLineProperties],
           styleClassName,
         )(theme)

@@ -5,7 +5,7 @@ import { cx } from "@yamada-ui/utils"
 import type { SVGProps } from "react"
 import { useCallback, useMemo } from "react"
 import type { XAxisProps, YAxisProps } from "recharts"
-import { getProps } from "./chart-utils"
+import { getComponentProps } from "./chart-utils"
 import type {
   AxisType,
   LayoutType,
@@ -117,12 +117,12 @@ export const useChartAxis = ({
   const yTickLine = getTickLine(withYTickLine)
   const tickFormatter = type === "percent" ? valueToPercent : valueFormatter
 
-  const [xAxisReChartsProps, xAxisClassName] = getProps<Dict, string>(
+  const [xAxisReChartsProps, xAxisClassName] = getComponentProps<Dict, string>(
     [_xAxisProps, xAxisProperties],
     styles.xAxis,
   )(theme)
 
-  const [yAxisReChartsProps, yAxisClassName] = getProps<Dict, string>(
+  const [yAxisReChartsProps, yAxisClassName] = getComponentProps<Dict, string>(
     [_yAxisProps, yAxisProperties],
     styles.yAxis,
   )(theme)

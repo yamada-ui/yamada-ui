@@ -7,7 +7,7 @@ import { useCallback, useId, useMemo, useState } from "react"
 import type { AreaChart, AreaProps, DotProps } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
-import { getProps } from "./chart-utils"
+import { getComponentProps } from "./chart-utils"
 import type {
   CurveType,
   AreaChartSeries,
@@ -188,17 +188,17 @@ export const useAreaChart = ({
     return [...areaColors, ...areaSplitColors, ...referenceLineColors]
   }, [areaColors, areaSplitColors, referenceLineColors])
 
-  const [areaChartProps, areaChartClassName] = getProps<Dict, string>(
+  const [areaChartProps, areaChartClassName] = getComponentProps<Dict, string>(
     [_areaChartProps, areaChartProperties],
     styles.areaChart,
   )(theme)
 
-  const [activeDotProps, activeDotClassName] = getProps<Dict, string>(
+  const [activeDotProps, activeDotClassName] = getComponentProps<Dict, string>(
     [_activeDotProps, dotProperties],
     styles.activeDot,
   )(theme)
 
-  const [dotProps, dotClassName] = getProps<Dict, string>(
+  const [dotProps, dotClassName] = getComponentProps<Dict, string>(
     [_dotProps, dotProperties],
     styles.dot,
   )(theme)
@@ -234,7 +234,7 @@ export const useAreaChart = ({
         const id = `${uuid}-${colorProp}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
-        const [rest, className] = getProps(
+        const [rest, className] = getComponentProps(
           [props, areaProperties],
           areaClassName,
         )(theme)

@@ -146,12 +146,6 @@ const addReviewers = async (
 
         selectedReviewers = ["hirotomoyamada"]
 
-        await octokit.issues.addLabels({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          labels: ["release"],
-        })
-
         await octokit.pulls.requestReviewers({
           ...COMMON_PARAMS,
           pull_number: number,
@@ -216,9 +210,7 @@ const addComment = async (
 
         if (
           labels.some(
-            (label) =>
-              isObject(label) &&
-              ["help wanted", "release"].includes(label.name ?? ""),
+            (label) => isObject(label) && "help wanted" === label?.name,
           )
         )
           return
@@ -229,6 +221,10 @@ const addComment = async (
         const limitTimestamp = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
 
         if (createdTimestamp > limitTimestamp) return
+
+        const { head } = await getPullRequest(number)
+
+        if (head.label === "yamada-docs:changeset-release/main") return
 
         await octokit.issues.createComment({
           ...COMMON_PARAMS,

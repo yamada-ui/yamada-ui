@@ -10,6 +10,7 @@
     "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:vitest/recommended",
     "prettier"
   ],
   "env": {

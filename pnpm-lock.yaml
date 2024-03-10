@@ -1591,6 +1591,9 @@ importers:
       '@types/react-syntax-highlighter':
         specifier: ^15.5.7
         version: 15.5.11
+      '@types/unist':
+        specifier: ^3.0.2
+        version: 3.0.2
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

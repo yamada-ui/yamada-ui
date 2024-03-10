@@ -1,0 +1,20 @@
+import{j as e}from"./jsx-runtime-5BUNAZ9W.js";import{U as m}from"./ui-provider-Sqcp8InZ.js";import{e as s}from"./extend-theme-vBbydtJS.js";import{H as u}from"./heading-BgbAltxm.js";import"./index-4g5l5LRQ.js";import"./_commonjsHelpers-4gQjN7DL.js";import"./index-qmmdymL1.js";import"./theme-provider-wPz8KGo2.js";import"./factory-Ph6enxrH.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-KmmwFJNj.js";import"./environment-provider-JVx4Dg5B.js";import"./motion-heeYkzTb.js";import"./loading-provider-h4dsf47s.js";import"./index-LrTlSQOV.js";import"./Combination-DfugsOYv.js";import"./loading-6Si3C0_e.js";import"./index-n36vw3Ek.js";import"./index-uwAkCu1e.js";import"./index-cLrauuw6.js";import"./icon-TnMv01N9.js";import"./forward-ref-A-8Arhkk.js";import"./motion-8yXhIBtj.js";import"./index-eMn_GZVX.js";import"./container-portal-WF9gZfZS.js";import"./index-jmm5gWkb.js";import"./notice-2_o-2-x1.js";import"./alert-WrfDtKAG.js";import"./use-component-style-ZmBgLZU3.js";import"./close-button-49Mp5j7Z.js";import"./use-ripple-hoxvAc5g.js";const D={title:"System / Theme / Text Styles"},t=()=>{const n=s({styles:{textStyles:{gradient:{w:"full",fontSize:"5xl",bgGradient:"linear(to-l, #7928CA, #FF0080)",bgClip:"text"}}}})();return e(m,{theme:n,children:e(u,{textStyle:"gradient",isTruncated:!0,children:"クリリンのことか……クリリンのことかーーーっ！！！！！"})})};var r,o,i;t.parameters={...t.parameters,docs:{...(r=t.parameters)==null?void 0:r.docs,source:{originalSource:`() => {
+  const textStyles: TextStyles = {
+    gradient: {
+      w: "full",
+      fontSize: "5xl",
+      bgGradient: "linear(to-l, #7928CA, #FF0080)",
+      bgClip: "text"
+    }
+  };
+  const theme = extendTheme({
+    styles: {
+      textStyles
+    }
+  })();
+  return <UIProvider theme={theme}>
+      <Heading textStyle="gradient" isTruncated>
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Heading>
+    </UIProvider>;
+}`,...(i=(o=t.parameters)==null?void 0:o.docs)==null?void 0:i.source}}};const J=["useTextStyle"];export{J as __namedExportsOrder,D as default,t as useTextStyle};

@@ -62,4 +62,38 @@ describe("useAutosize", () => {
     expect(textarea).toHaveValue("This")
     expect(textarea).toHaveAttribute("rows", "3")
   })
+
+  test("it adjusts the rows of the textarea based on the number of lines", () => {
+    const originalCloneNode = HTMLElement.prototype.cloneNode
+    HTMLElement.prototype.cloneNode = function (deep: boolean) {
+      const clonedNode = originalCloneNode.call(
+        this,
+        deep,
+      ) as HTMLTextAreaElement
+      Object.defineProperty(clonedNode, "scrollHeight", {
+        get: function () {
+          const lines = (this.value.match(/\n/g) || []).length + 1
+          return lines * 20
+        },
+      })
+      return clonedNode
+    }
+
+    render(<AutoSizeTextarea maxRows={5} minRows={1} />)
+
+    const textarea = screen.getByTestId("autosize-textarea")
+
+    fireEvent.input(textarea, { target: { value: "Line 1" } })
+    let rows = parseInt(textarea.getAttribute("rows") || "0")
+    expect(rows).toBeGreaterThanOrEqual(1)
+
+    fireEvent.input(textarea, { target: { value: "Line 1\nLine 2" } })
+    let newRows = parseInt(textarea.getAttribute("rows") || "0")
+    expect(newRows).toBeGreaterThanOrEqual(rows)
+
+    fireEvent.input(textarea, { target: { value: "Line 1" } })
+    rows = newRows
+    newRows = parseInt(textarea.getAttribute("rows") || "0")
+    expect(newRows).toBeLessThanOrEqual(rows)
+  })
 })

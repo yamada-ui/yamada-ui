@@ -1,5 +1,11 @@
 # @yamada-ui/use-boolean
 
+## 1.0.1
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
 ## 1.0.0
 
 ### Major Changes

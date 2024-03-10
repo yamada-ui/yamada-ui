@@ -3,9 +3,9 @@ import type { Dict } from "@yamada-ui/utils"
 import { createContext, cx, isNumber } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { ResponsiveContainerProps } from "recharts"
+import { getProps } from "./chart-utils"
 import type { ChartPropGetter, ContainerUIProps } from "./chart.types"
 import { containerProperties } from "./chart.types"
-import { getProps } from "./utils"
 
 type ChartContext = { styles: Record<string, CSSUIObject> }
 

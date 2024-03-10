@@ -2,9 +2,9 @@ import { useTheme } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { LegendProps } from "recharts"
+import { getProps } from "./chart-utils"
 import type { ChartPropGetter, LegendUIProps } from "./chart.types"
 import { legendProperties } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseChartLegendProps = {
   /**

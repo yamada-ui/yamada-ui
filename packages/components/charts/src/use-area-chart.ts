@@ -7,6 +7,7 @@ import { useCallback, useId, useMemo, useState } from "react"
 import type { AreaChart, AreaProps, DotProps } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
+import { getProps } from "./chart-utils"
 import type {
   CurveType,
   AreaChartSeries,
@@ -23,7 +24,6 @@ import {
   dotProperties,
   areaProperties,
 } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseAreaChartOptions = {
   /**

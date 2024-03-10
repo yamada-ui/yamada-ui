@@ -5,6 +5,7 @@ import { cx } from "@yamada-ui/utils"
 import type { SVGProps } from "react"
 import { useCallback, useMemo } from "react"
 import type { XAxisProps, YAxisProps } from "recharts"
+import { getProps } from "./chart-utils"
 import type {
   AxisType,
   LayoutType,
@@ -14,7 +15,6 @@ import type {
   AreaChartType,
 } from "./chart.types"
 import { xAxisProperties, yAxisProperties } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseChartAxisOptions = {
   /**

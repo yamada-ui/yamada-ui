@@ -5,6 +5,7 @@ import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type { DotProps, LineChart, LineProps } from "recharts"
+import { getProps } from "./chart-utils"
 import {
   dotProperties,
   lineChartProperties,
@@ -20,7 +21,6 @@ import type {
   CurveType,
   RequiredChartPropGetter,
 } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseLineChartOptions = {
   /**

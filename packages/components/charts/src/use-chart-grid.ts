@@ -4,9 +4,9 @@ import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { CartesianGridProps } from "recharts"
+import { getProps } from "./chart-utils"
 import type { AxisType, ChartPropGetter, GridUIProps } from "./chart.types"
 import { gridProperties } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseChartGridOptions = {
   /**

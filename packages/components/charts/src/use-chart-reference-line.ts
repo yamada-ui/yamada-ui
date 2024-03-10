@@ -3,15 +3,13 @@ import type { CSSUIObject } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { isObject, cx } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
-
 import type { ReferenceLineProps } from "recharts"
-
+import { getProps } from "./chart-utils"
 import type {
   ReferenceLineUIProps,
   RequiredChartPropGetter,
 } from "./chart.types"
 import { referenceLineProperties } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseChartReferenceLineOptions = {
   /**

@@ -2,9 +2,9 @@ import { useTheme } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { TooltipProps } from "recharts"
+import { getProps } from "./chart-utils"
 import type { ChartPropGetter, TooltipUIProps } from "./chart.types"
 import { tooltipProperties } from "./chart.types"
-import { getProps } from "./utils"
 
 export type UseChartTooltipProps = {
   /**

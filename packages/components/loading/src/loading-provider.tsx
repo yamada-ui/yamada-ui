@@ -358,7 +358,7 @@ const getOverlayStyle = (
   right: 0,
   bottom: 0,
   left: 0,
-  zIndex: "beerus",
+  zIndex: 9999,
   bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
   w: "100vw",
   h: "100dvh",
@@ -388,12 +388,12 @@ const ScreenComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      maxW: "md",
+      maxW: "24rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
+      gap: "0.5rem",
     }
 
     useTimeout(onFinish, duration)

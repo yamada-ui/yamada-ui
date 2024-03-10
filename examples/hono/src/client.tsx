@@ -1,54 +1,45 @@
-import { useState } from "react"
+import {
+  ColorModeScript,
+  ThemeSchemeScript,
+  UIProvider,
+  colorModeManager,
+  themeSchemeManager,
+} from "@yamada-ui/react"
+import type { ReactNode } from "react"
 import { createRoot } from "react-dom/client"
+import { Layout } from "./components/layouts"
+import { theme, config } from "./theme"
 
-function App() {
+const App = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <h1>Hello, Hono with React!</h1>
-      <h2>Example of useState()</h2>
-      <Counter />
-      <h2>Example of API fetch()</h2>
-      <ClockButton />
+      <ColorModeScript
+        type="cookie"
+        nonce="testing"
+        initialColorMode={config.initialColorMode}
+      />
+      <ThemeSchemeScript
+        type="cookie"
+        nonce="testing"
+        initialThemeScheme={config.initialThemeScheme}
+      />
+
+      <UIProvider
+        config={config}
+        theme={theme}
+        colorModeManager={colorModeManager.cookieStorage}
+        themeSchemeManager={themeSchemeManager.cookieStorage}
+      >
+        {children}
+      </UIProvider>
     </>
-  )
-}
-
-function Counter() {
-  const [count, setCount] = useState(0)
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      You clicked me {count} times
-    </button>
-  )
-}
-
-const ClockButton = () => {
-  const [response, setResponse] = useState<string | null>(null)
-
-  const handleClick = async () => {
-    const response = await fetch("/api/clock")
-    const data = await response.json()
-    const headers = Array.from(response.headers.entries()).reduce(
-      (acc, [key, value]) => ({ ...acc, [key]: value }),
-      {},
-    )
-    const fullResponse = {
-      url: response.url,
-      status: response.status,
-      headers,
-      body: data,
-    }
-    setResponse(JSON.stringify(fullResponse, null, 2))
-  }
-
-  return (
-    <div>
-      <button onClick={handleClick}>Get Server Time</button>
-      {response && <pre>{response}</pre>}
-    </div>
   )
 }
 
 const domNode = document.getElementById("root")!
 const root = createRoot(domNode)
-root.render(<App />)
+root.render(
+  <App>
+    <Layout />
+  </App>,
+)

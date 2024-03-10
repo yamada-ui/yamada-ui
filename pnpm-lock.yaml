@@ -349,6 +349,36 @@ importers:
 
   examples/hono:
     dependencies:
+      '@fortawesome/free-brands-svg-icons':
+        specifier: ^6.5.1
+        version: 6.5.1
+      '@fortawesome/free-regular-svg-icons':
+        specifier: ^6.5.1
+        version: 6.5.1
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^6.5.1
+        version: 6.5.1
+      '@yamada-ui/calendar':
+        specifier: workspace:*
+        version: link:../../packages/components/calendar
+      '@yamada-ui/carousel':
+        specifier: workspace:*
+        version: link:../../packages/components/carousel
+      '@yamada-ui/dropzone':
+        specifier: workspace:*
+        version: link:../../packages/components/dropzone
+      '@yamada-ui/fontawesome':
+        specifier: workspace:*
+        version: link:../../packages/components/fontawesome
+      '@yamada-ui/markdown':
+        specifier: workspace:*
+        version: link:../../packages/components/markdown
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      '@yamada-ui/table':
+        specifier: workspace:*
+        version: link:../../packages/components/table
       hono:
         specifier: ^4.0.9
         version: 4.0.10
@@ -9243,7 +9273,7 @@ packages:
       '@babel/types': 7.24.0
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
-      '@types/babel__traverse': 7.20.4
+      '@types/babel__traverse': 7.20.5
 
   /@types/babel__generator@7.6.8:
     resolution: {integrity: sha512-ASsj+tpEDsEiFr1arWrlN6V3mdfjRMZt6LtK/Vp/kreFLnr5QH5+DhvD5nINYZXzwJvXeGq+05iUXcAzVrqWtw==}
@@ -9541,6 +9571,7 @@ packages:
     resolution: {integrity: sha512-D08YG6rr8X90YB56tSIuBaddy/UXAA9RKJoFvrsnogAum/0pmjkgi4+2nx96A330FmioegBWmEYQ+syqCFaveg==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
 
   /@types/node@20.11.25:
     resolution: {integrity: sha512-TBHyJxk2b7HceLVGFcpAUjsa5zIdsPWlR6XHfyGzd0SFu+/NFgQgMAl96MSDZgQDvJAvV6BKsFOrt6zIL09JDw==}
@@ -10273,7 +10304,7 @@ packages:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.4.6
-      vite: 5.1.5(@types/node@20.10.4)
+      vite: 5.1.5(@types/node@20.11.25)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -24060,6 +24091,7 @@ packages:
       rollup: 4.12.1
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
 
   /vite@5.1.5(@types/node@20.11.25):
     resolution: {integrity: sha512-BdN1xh0Of/oQafhU+FvopafUp6WaYenLU/NFoL5WyJL++GxkNfieKzBhM24H3HVsPQrlAqB7iJYTHabzaRed5Q==}

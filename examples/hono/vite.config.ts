@@ -1,4 +1,4 @@
-import devServer from "@hono/vite-dev-server"
+import devServer, { defaultOptions } from "@hono/vite-dev-server"
 import { defineConfig } from "vite"
 
 export default defineConfig(({ mode }) => {
@@ -12,6 +12,11 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
+      resolve: {
+        alias: {
+          "@": "/src",
+        },
+      },
     }
   } else {
     return {
@@ -20,11 +25,17 @@ export default defineConfig(({ mode }) => {
       },
       plugins: [
         devServer({
+          exclude: ["/*", ...defaultOptions.exclude],
           entry: "src/index.tsx",
         }),
       ],
       server: {
         port: 4448,
+      },
+      resolve: {
+        alias: {
+          "@": "/src",
+        },
       },
     }
   }

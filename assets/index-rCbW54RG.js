@@ -1,0 +1,1 @@
+import{r as i}from"./index-4g5l5LRQ.js";import{g as l,B as p,l as V,H as m}from"./factory-PArTdL2L.js";const g=({value:u,...e})=>{e.onUpdate??(e.onUpdate=(t,a)=>t!==a);const s=l(e.onChange),c=l(e.onUpdate),[d,f]=i.useState(e.defaultValue),n=u!==void 0,o=n?u:d,r=l(t=>{const a=p(t,o);c(o,a)&&((!n||V(a)||m(a))&&f(a),s(a))},[n,o,s,c]);return[o,r]};export{g as u};

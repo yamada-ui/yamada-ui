@@ -359,7 +359,7 @@ const getOverlayStyle = (
   bottom: 0,
   left: 0,
   zIndex: 9999,
-  bg: type === "fill" ? ["#fbfbfb", "#141414"] : "rgba(0, 0, 0, 0.48)",
+  bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
   w: "100vw",
   h: "100dvh",
   p: "1rem",

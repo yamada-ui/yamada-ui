@@ -1,13 +1,20 @@
 {
+  "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.tsx"
+    "dev": "vite",
+    "build": "vite build --mode client && vite build"
   },
   "dependencies": {
-    "@hono/node-server": "^1.8.2",
-    "hono": "^4.0.9"
+    "hono": "^4.0.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@hono/vite-dev-server": "^0.8.2",
     "@types/node": "^20.11.17",
-    "tsx": "^3.12.2"
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "tsx": "^3.12.2",
+    "vite": "^5.1.5"
   }
 }

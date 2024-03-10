@@ -6852,6 +6852,16 @@
     }
   },
   {
+    "title": "Handling Auto-Adjusting Height",
+    "type": "fragment",
+    "slug": "/components/forms/textarea#handling-auto-adjusting-height",
+    "hierarchy": {
+      "lv1": "Textarea",
+      "lv2": "Usage",
+      "lv3": "Handling Auto-Adjusting Height"
+    }
+  },
+  {
     "title": "Change Border Color",
     "type": "fragment",
     "slug": "/components/forms/textarea#change-border-color",
@@ -10307,7 +10317,7 @@
   {
     "title": "useSnacks",
     "type": "page",
-    "description": "`useSnacks` is a custom hook for controlling notifications used in forms and the like.",
+    "description": "`useSnacks` is a custom hook for controlling notifications used in forms and other similar situations.",
     "slug": "/hooks/use-snacks",
     "hierarchy": { "lv1": "useSnacks" }
   },

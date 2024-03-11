@@ -136,6 +136,8 @@ const Example = () => {
 
 ### 組織
 
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?width=890" /></a>
+
 ### 個人
 
 <a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>

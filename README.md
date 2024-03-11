@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
+  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
 <p align="center">
@@ -145,8 +145,8 @@ const Example = () => {
 
 Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
 
-[![Avap co., Ltd.](https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only)](https://www.avap.co.jp/)
-[![Avap co., Ltd.](https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only)](https://www.avap.co.jp/)
+<a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="400" /></a>
+<a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="400" /></a>
 
 ### Organizations
 

@@ -31,16 +31,18 @@ export const useChartReferenceLine = ({
   const propList = useMemo(
     () =>
       referenceLineProps.map((props, index) => {
-        const [{ label: _label, ...rest }, propClassName] = getComponentProps(
-          [props, referenceLineProperties],
-          styleClassName,
-        )(theme)
+        const [{ label: labelProp, ...rest }, propClassName] =
+          getComponentProps(
+            [props, referenceLineProperties],
+            styleClassName,
+          )(theme)
+
         const color = `var(--ui-reference-line-${index})`
         const label: ReferenceLineProps["label"] = {
-          value: _label as string,
+          value: labelProp as string,
           fill: color,
           position: "insideBottomLeft",
-          ...(isObject(_label) ? _label : {}),
+          ...(isObject(labelProp) ? labelProp : {}),
         }
 
         return { propClassName, color, label, ...rest }

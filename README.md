@@ -145,13 +145,66 @@ const Example = () => {
 
 Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
 
+<style>
+  .logo {
+    max-width: 100%
+  }
+
+  .lg {
+    width: 400px
+  }
+
+  .md {
+    width: 320px
+  }
+
+  .sm {
+    width: 240px
+  }
+
+  @media (prefers-color-scheme: light) {
+    .light {
+      display: block;
+    }
+
+    .dark {
+      display: none;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .light {
+      display: none;
+    }
+
+    .dark {
+      display: block;
+    }
+  }
+</style>
+
+<p>
+  <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo lg dark" /></a>
+  <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo lg dark" /></a>
+</p>
+
+<p>
+  <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo md dark" /></a>
+  <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo md dark" /></a>
+</p>
+
+<p>
+  <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo sm dark" /></a>
+  <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo sm dark" /></a>
+</p>
+
 ### Organizations
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>
 
 ### Individuals
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40" /></a>
 
 ## Contributing
 

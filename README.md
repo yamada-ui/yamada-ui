@@ -145,8 +145,32 @@ const Example = () => {
 
 Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
 
-<a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="400" /></a>
-<a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="400" /></a>
+<p align="center" style="font-size: 24px; font-weight: 600;">Platinum Sponsors</p>
+
+<div align="center" style="display:flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 24px 0;">
+  <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="400" /></a>
+  <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="400" /></a>
+</div>
+
+<p align="center" style="font-size: 24px; font-weight: 600;">Gold Sponsors</p>
+
+<div align="center" style="display:flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 24px 0;">
+  <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="320" /></a>
+  <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="320" /></a>
+</div>
+
+<p align="center" style="font-size: 24px; font-weight: 600;">Silver Sponsors</p>
+
+<div align="center" style="display:flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 24px 0;">
+  <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="320" /></a>
+  <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="320" /></a>
+</div>
+
+<p align="center" style="font-size: 24px; font-weight: 600;">Bronze Sponsors</p>
+
+<p align="center" style="margin: 24px 0;">
+  <img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40&button=false" />
+</p>
 
 ### Organizations
 

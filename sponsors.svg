@@ -2,10 +2,6 @@
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
-        .logo {
-          max-width: 100%
-        }
-
         .lg {
           width: 400px
         }
@@ -17,43 +13,19 @@
         .sm {
           width: 240px
         }
-
-
-        @media (prefers-color-scheme: dark) {
-          .light {
-            display: none;
-          }
-
-          .dark {
-            display: inline-block;
-          }
-        }
-
-        @media (prefers-color-scheme: light) {
-          .light {
-            display: inline-block;
-          }
-
-          .dark {
-            display: none;
-          }
-        }
       </style>
 
       <div>
         <p>
-          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo lg dark" /></a>
-          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo lg dark" /></a>
+          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap.svg" alt="Avap co., Ltd." class="logo lg" /></a>
         </p>
 
         <p>
-          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo md dark" /></a>
-          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo md dark" /></a>
+          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap.svg" alt="Avap co., Ltd." class="logo md" /></a>
         </p>
 
         <p>
-          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo sm dark" /></a>
-          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-white.png" alt="Avap co., Ltd." class="logo sm dark" /></a>
+          <a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap.svg" alt="Avap co., Ltd." class="logo sm" /></a>
         </p>
       </div>
     </div>

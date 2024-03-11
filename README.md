@@ -154,22 +154,16 @@ Please support this project with you or your organization. Your logo will appear
 
 <h3 align="center">Gold Sponsors</h3>
 
-<p align="center">
-  <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="320" /></a>
-  <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="320" /></a>
-</p>
+<p align="center"></p>
 
 <h3 align="center">Silver Sponsors</h3>
 
-<p align="center">
-  <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="240" /></a>
-  <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="240" /></a>
-</p>
+<p align="center"></p>
 
 <h3 align="center">Bronze Sponsors</h3>
 
 <p align="center">
-  <img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40&button=false" />
+  <img src="https://opencollective.com/yamada-ui/tiers/bronze-sponsor.svg?avatarHeight=40&button=false" />
 </p>
 
 ### Organizations

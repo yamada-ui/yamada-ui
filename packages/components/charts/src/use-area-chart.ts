@@ -155,8 +155,7 @@ export const useAreaChart = ({
       series.map(({ color }, index) => ({
         name: `area-${index}`,
         token: "colors",
-        // TODO: `gray`を変更する
-        value: color ?? "gray",
+        value: color ?? "transparent",
       })),
     [series],
   )
@@ -166,7 +165,7 @@ export const useAreaChart = ({
       splitColors.map((color, index) => ({
         name: `area-split-${index}`,
         token: "colors",
-        value: color,
+        value: color ?? "transparent",
       })),
     [splitColors],
   )
@@ -177,14 +176,13 @@ export const useAreaChart = ({
         ? referenceLineProps.map(({ color }, index) => ({
             name: `reference-line-${index}`,
             token: "colors",
-            // TODO: `gray`を変更する
-            value: color ?? "gray",
+            value: color ?? "transparent",
           }))
         : [],
     [referenceLineProps],
   )
 
-  const getCSSvariables = useMemo(() => {
+  const areaVars = useMemo(() => {
     return [...areaColors, ...areaSplitColors, ...referenceLineColors]
   }, [areaColors, areaSplitColors, referenceLineColors])
 
@@ -221,7 +219,7 @@ export const useAreaChart = ({
     return 0.5
   }, [data, series])
 
-  const areaPropList = useMemo(
+  const areaPropsList = useMemo(
     () =>
       series.map(({ ...props }, index) => {
         const {
@@ -346,7 +344,7 @@ export const useAreaChart = ({
         activeDot,
         dot,
         ...rest
-      } = areaPropList[index]
+      } = areaPropsList[index]
 
       return {
         ref,
@@ -371,7 +369,7 @@ export const useAreaChart = ({
       }
     },
     [
-      areaPropList,
+      areaPropsList,
       connectNulls,
       curveType,
       splitId,
@@ -399,7 +397,7 @@ export const useAreaChart = ({
     getAreaSplitProps,
     getAreaProps,
     getAreaGradientProps,
-    getCSSvariables,
+    areaVars,
     setHighlightedArea,
   }
 }

@@ -109,7 +109,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     getAreaSplitProps,
     getAreaProps,
     getAreaGradientProps,
-    getCSSvariables,
+    areaVars,
     setHighlightedArea,
   } = useAreaChart({
     layoutType,
@@ -196,7 +196,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-area-chart", className)}
-        var={getCSSvariables}
+        var={areaVars}
         __css={{ ...styles.container }}
         {...rest}
       >

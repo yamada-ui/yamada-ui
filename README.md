@@ -147,6 +147,8 @@ Please support this project with you or your organization. Your logo will appear
 
 <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors.svg" style="width: 100%;" alt="Yamada UI Sponsors">
 
+<a href="https://www.avap.co.jp/"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap.svg" alt="Avap co., Ltd." class="logo lg" /></a>
+
 ### Organizations
 
 <a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>

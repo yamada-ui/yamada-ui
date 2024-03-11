@@ -147,28 +147,28 @@ Please support this project with you or your organization. Your logo will appear
 
 <h3 align="center">Platinum Sponsors</h3>
 
-<div align="center" style="display:flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 24px 0;">
+<p align="center">
   <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="400" /></a>
   <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="400" /></a>
-</div>
+</p>
 
 <h3 align="center">Gold Sponsors</h3>
 
-<div align="center" style="display:flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 24px 0;">
+<p align="center">
   <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="320" /></a>
   <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="320" /></a>
-</div>
+</p>
 
 <h3 align="center">Silver Sponsors</h3>
 
-<div align="center" style="display:flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin: 24px 0;">
+<p align="center">
   <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="240" /></a>
   <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="240" /></a>
-</div>
+</p>
 
 <h3 align="center">Bronze Sponsors</h3>
 
-<p align="center" style="margin: 24px 0;">
+<p align="center">
   <img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40&button=false" />
 </p>
 

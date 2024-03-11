@@ -1,3 +1,4 @@
+import { vi } from "vitest"
 import "@testing-library/jest-dom/vitest"
 import * as matchers from "vitest-axe/matchers"
 
@@ -29,12 +30,12 @@ if (typeof window.matchMedia !== "function") {
 
 global.TextEncoder = require("util").TextEncoder
 
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+global.ResizeObserver = vi.fn(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }))
 
-window.HTMLCanvasElement.prototype.getContext = vi
-  .fn()
-  .mockImplementation(() => ({}))
+vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(
+  () => null,
+)

@@ -105,7 +105,7 @@ describe("<Snacks />", () => {
 
     await waitFor(() => {
       const listItems = screen.getAllByRole("listitem")
-      expect(listItems.length).toBe(2)
+      expect(listItems).toHaveLength(2)
     })
 
     fireEvent.click(closeAllBtn)

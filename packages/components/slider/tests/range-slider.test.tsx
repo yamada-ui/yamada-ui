@@ -287,24 +287,24 @@ describe("<RangeSlider />", () => {
       }),
     )
 
-    expect(result.current.values).toEqual([25, 75])
+    expect(result.current.values).toStrictEqual([25, 75])
 
     act(() => {
       result.current.stepUp(1)
     })
-    expect(result.current.values).toEqual([25, 76])
+    expect(result.current.values).toStrictEqual([25, 76])
     expect(onChange).toHaveBeenCalledWith([25, 76])
 
     act(() => {
       result.current.stepDown(1)
     })
-    expect(result.current.values).toEqual([25, 75])
+    expect(result.current.values).toStrictEqual([25, 75])
     expect(onChange).toHaveBeenCalledWith([25, 75])
 
     act(() => {
       result.current.reset()
     })
-    expect(result.current.values).toEqual([25, 75])
+    expect(result.current.values).toStrictEqual([25, 75])
     expect(onChange).toHaveBeenCalledWith([25, 75])
   })
 
@@ -339,8 +339,8 @@ describe("<RangeSlider />", () => {
     })
 
     expect(onChangeStart).toHaveBeenCalledWith([25, 75])
-    expect(onChange).toHaveBeenCalled()
-    expect(onChangeEnd).toHaveBeenCalled()
+    expect(onChange).toHaveBeenCalledWith([0, 75])
+    expect(onChangeEnd).toHaveBeenCalledWith([25, 75])
 
     act(() => {
       fireEvent.focus(sliderEndThumb)
@@ -349,7 +349,7 @@ describe("<RangeSlider />", () => {
     })
 
     expect(onChangeStart).toHaveBeenCalledWith([25, 75])
-    expect(onChange).toHaveBeenCalled()
-    expect(onChangeEnd).toHaveBeenCalled()
+    expect(onChange).toHaveBeenCalledWith([0, 75])
+    expect(onChangeEnd).toHaveBeenCalledWith([0, 75])
   })
 })

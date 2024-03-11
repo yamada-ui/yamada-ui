@@ -32,7 +32,7 @@ describe("mergeStyle", () => {
       },
     }
 
-    expect(mergeStyle(target, source)()).toEqual(expected)
+    expect(mergeStyle(target, source)()).toStrictEqual(expected)
   })
 
   test("should merge many style objects", () => {
@@ -69,7 +69,7 @@ describe("mergeStyle", () => {
       },
     }
 
-    expect(mergeStyle(target1, target2, source)()).toEqual(expected)
+    expect(mergeStyle(target1, target2, source)()).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects with omitted keys", () => {
@@ -109,9 +109,9 @@ describe("mergeStyle", () => {
       },
     }
 
-    expect(mergeStyle(target, source)({ omit: ["variants", "sm"] })).toEqual(
-      expected,
-    )
+    expect(
+      mergeStyle(target, source)({ omit: ["variants", "sm"] }),
+    ).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects with picked keys", () => {
@@ -158,7 +158,7 @@ describe("mergeStyle", () => {
         target,
         source,
       )({ pick: ["sizes", "md", "variants", "solid"] }),
-    ).toEqual(expected)
+    ).toStrictEqual(expected)
   })
 
   test("should merge nested style objects", () => {
@@ -185,7 +185,7 @@ describe("mergeStyle", () => {
       },
     }
 
-    expect(mergeStyle(target, source)()).toEqual(expected)
+    expect(mergeStyle(target, source)()).toStrictEqual(expected)
   })
 
   test("should override functions with non-function values", () => {
@@ -199,9 +199,9 @@ describe("mergeStyle", () => {
       baseStyle: { color: "secondary", fontSize: "sm", m: "md" },
     }
 
-    expect(runIfFunc(mergeStyle(target, source)().baseStyle, props)).toEqual(
-      expected.baseStyle,
-    )
+    expect(
+      runIfFunc(mergeStyle(target, source)().baseStyle, props),
+    ).toStrictEqual(expected.baseStyle)
   })
 
   test("should handle function values", () => {
@@ -219,9 +219,9 @@ describe("mergeStyle", () => {
       baseStyle: { color: "secondary", fontSize: "lg", m: "md", w: "sm" },
     }
 
-    expect(runIfFunc(mergeStyle(target, source)().baseStyle, props)).toEqual(
-      expected.baseStyle,
-    )
+    expect(
+      runIfFunc(mergeStyle(target, source)().baseStyle, props),
+    ).toStrictEqual(expected.baseStyle)
   })
 
   test("should not modify the original objects", () => {
@@ -232,8 +232,10 @@ describe("mergeStyle", () => {
 
     mergeStyle(target, source)()
 
-    expect(target).toEqual({ baseStyle: { color: "primary" } })
-    expect(source).toEqual({ baseStyle: { color: "secondary", mt: "md" } })
+    expect(target).toStrictEqual({ baseStyle: { color: "primary" } })
+    expect(source).toStrictEqual({
+      baseStyle: { color: "secondary", mt: "md" },
+    })
   })
 })
 
@@ -273,7 +275,7 @@ describe("mergeMultiStyle", () => {
       },
     }
 
-    expect(mergeMultiStyle(target, source)()).toEqual(expected)
+    expect(mergeMultiStyle(target, source)()).toStrictEqual(expected)
   })
 
   test("should merge many style objects", () => {
@@ -318,7 +320,7 @@ describe("mergeMultiStyle", () => {
       },
     }
 
-    expect(mergeMultiStyle(target1, target2, source)()).toEqual(expected)
+    expect(mergeMultiStyle(target1, target2, source)()).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects with omitted keys", () => {
@@ -352,7 +354,7 @@ describe("mergeMultiStyle", () => {
 
     expect(
       mergeMultiStyle(target, source)({ omit: ["variants", "container"] }),
-    ).toEqual(expected)
+    ).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects or empty objects with omitted keys", () => {
@@ -385,9 +387,9 @@ describe("mergeMultiStyle", () => {
       },
     }
 
-    expect(mergeMultiStyle(target, source)({ omit: ["container"] })).toEqual(
-      expected,
-    )
+    expect(
+      mergeMultiStyle(target, source)({ omit: ["container"] }),
+    ).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects or functions with omitted keys", () => {
@@ -414,7 +416,7 @@ describe("mergeMultiStyle", () => {
         mergeMultiStyle(target, source)({ omit: ["container"] }).baseStyle,
         props,
       ),
-    ).toEqual(expected.baseStyle)
+    ).toStrictEqual(expected.baseStyle)
   })
 
   test("should correctly merge style objects with picked keys", () => {
@@ -442,7 +444,7 @@ describe("mergeMultiStyle", () => {
 
     expect(
       mergeMultiStyle(target, source)({ pick: ["baseStyle", "inner"] }),
-    ).toEqual(expected)
+    ).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects or empty objects with picked keys", () => {
@@ -475,7 +477,7 @@ describe("mergeMultiStyle", () => {
         target,
         source,
       )({ pick: ["variants", "solid", "container"] }),
-    ).toEqual(expected)
+    ).toStrictEqual(expected)
   })
 
   test("should correctly merge style objects or functions with picked keys", () => {
@@ -507,7 +509,7 @@ describe("mergeMultiStyle", () => {
         )({ pick: ["baseStyle", "inner", "item"] }).baseStyle,
         props,
       ),
-    ).toEqual(expected.baseStyle)
+    ).toStrictEqual(expected.baseStyle)
   })
 
   test("should merge nested style objects", () => {
@@ -536,7 +538,7 @@ describe("mergeMultiStyle", () => {
       },
     }
 
-    expect(mergeMultiStyle(target, source)()).toEqual(expected)
+    expect(mergeMultiStyle(target, source)()).toStrictEqual(expected)
   })
 
   test("should override functions with non-function values", () => {
@@ -552,7 +554,7 @@ describe("mergeMultiStyle", () => {
 
     expect(
       runIfFunc(mergeMultiStyle(target, source)().baseStyle, props),
-    ).toEqual(expected.baseStyle)
+    ).toStrictEqual(expected.baseStyle)
   })
 
   test("should handle function values", () => {
@@ -578,7 +580,7 @@ describe("mergeMultiStyle", () => {
 
     expect(
       runIfFunc(mergeMultiStyle(target, source)().baseStyle, props),
-    ).toEqual(expected.baseStyle)
+    ).toStrictEqual(expected.baseStyle)
   })
 
   test("should not modify the original objects", () => {
@@ -591,8 +593,10 @@ describe("mergeMultiStyle", () => {
 
     mergeMultiStyle(target, source)()
 
-    expect(target).toEqual({ baseStyle: { container: { color: "primary" } } })
-    expect(source).toEqual({
+    expect(target).toStrictEqual({
+      baseStyle: { container: { color: "primary" } },
+    })
+    expect(source).toStrictEqual({
       baseStyle: { container: { color: "secondary", mt: "md" } },
     })
   })

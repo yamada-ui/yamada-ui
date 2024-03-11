@@ -2,11 +2,11 @@ import { render, a11y, screen } from "@yamada-ui/test"
 import { Button } from "../src"
 
 describe("<Button/>", () => {
-  it("passes a11y test", async () => {
+  test("passes a11y test", async () => {
     await a11y(<Button>test</Button>)
   })
 
-  it("renders with icon", () => {
+  test("renders with icon", () => {
     const { rerender, getByText } = render(
       <Button rightIcon={<>right icon</>} />,
     )
@@ -16,7 +16,7 @@ describe("<Button/>", () => {
     expect(getByText("left icon")).toBeTruthy()
   })
 
-  it("shows loading text if isLoading, loadingText and loadingIcon", () => {
+  test("shows loading text if isLoading, loadingText and loadingIcon", () => {
     const { rerender, getByTestId } = render(
       <Button
         data-testid="btn"
@@ -56,7 +56,7 @@ describe("<Button/>", () => {
     )
   })
 
-  it("has the proper aria attributes", () => {
+  test("has the proper aria attributes", () => {
     const { rerender, getByTestId } = render(
       <Button data-testid="btn">Hello</Button>,
     )
@@ -75,7 +75,7 @@ describe("<Button/>", () => {
     expect(button).toHaveAttribute("data-active", "")
   })
 
-  it("has the proper type attribute", () => {
+  test("has the proper type attribute", () => {
     const { getByTestId, rerender } = render(
       <Button data-testid="btn">Submit</Button>,
     )
@@ -96,7 +96,7 @@ describe("<Button/>", () => {
     expect(getByTestId("btn")).toHaveAttribute("type")
   })
 
-  it("has no the type", () => {
+  test("has no the type", () => {
     const { getByTestId } = render(
       <Button data-testid="btn" as="span">
         Submit
@@ -105,7 +105,7 @@ describe("<Button/>", () => {
     expect(getByTestId("btn")).not.toHaveAttribute("type")
   })
 
-  it("should be disabled", () => {
+  test("should be disabled", () => {
     const { getByTestId, getByRole, rerender } = render(
       <Button isDisabled data-testid="btn">
         Invalid Button

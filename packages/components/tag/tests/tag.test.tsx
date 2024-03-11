@@ -1,12 +1,13 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { Icon } from "@yamada-ui/fontawesome"
 import { CheckIcon } from "@yamada-ui/icon"
-import { render } from "@yamada-ui/test"
+import { render, a11y } from "@yamada-ui/test"
 import { Tag } from "../src"
 
 describe("<Tag />", () => {
-  test("renders tag correctly", () => {
-    render(<Tag>Tag</Tag>)
+  test("renders tag correctly", async () => {
+    const { container } = render(<Tag>Tag</Tag>)
+    await a11y(container)
   })
 
   test("Tag with icon renders correctly", () => {

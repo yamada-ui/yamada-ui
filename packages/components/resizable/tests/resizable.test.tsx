@@ -1,14 +1,10 @@
-import { createRef } from "react"
+import { act } from "@testing-library/react"
 import { Center } from "@yamada-ui/react"
 import { a11y, render } from "@yamada-ui/test"
 import type { RenderReturn } from "@yamada-ui/test"
-import {
-  Resizable,
-  ResizableItem,
-  ResizableItemControl,
-  ResizableTrigger,
-} from "../src"
-import { act } from "@testing-library/react"
+import { createRef } from "react"
+import type { ResizableItemControl } from "../src"
+import { Resizable, ResizableItem, ResizableTrigger } from "../src"
 import { assert } from "./utils"
 
 describe.skip("<Resizable />", () => {
@@ -189,7 +185,7 @@ describe.skip("<Resizable />", () => {
       expect(leftItem.getAttribute("data-panel-size")).toBe("10.0")
       expect(rightItem.getAttribute("data-panel-size")).toBe("90.0")
 
-      expect(onCollapse).toHaveBeenCalled()
+      expect(onCollapse).toHaveBeenCalledWith()
       expect(onCollapse).toHaveBeenCalledTimes(1)
     })
 
@@ -281,7 +277,7 @@ describe.skip("<Resizable />", () => {
       assert(leftItem, "data-panel-id=`left-item` is not found")
       assert(rightItem, "data-panel-id=`right-item` is not found")
 
-      expect(onResize).toHaveBeenCalled()
+      expect(onResize).toHaveBeenCalledWith()
       expect(onResize).toHaveBeenCalledTimes(1)
     })
   })

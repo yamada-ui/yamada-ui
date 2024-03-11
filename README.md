@@ -145,27 +145,6 @@ const Example = () => {
 
 Please support this project with you or your organization. Your logo will appear here with a link to your website. We'll appreciate some support. [[Contribute](https://opencollective.com/yamada-ui/contribute)]
 
-<h3 align="center">Platinum Sponsors</h3>
-
-<p align="center">
-  <a href="https://www.avap.co.jp#gh-light-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-light.svg#gh-light-mode-only" alt="Avap co., Ltd." width="400" /></a>
-  <a href="https://www.avap.co.jp#gh-dark-mode-only"><img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/sponsors/avap-dark.svg#gh-dark-mode-only" alt="Avap co., Ltd." width="400" /></a>
-</p>
-
-<h3 align="center">Gold Sponsors</h3>
-
-<p align="center"></p>
-
-<h3 align="center">Silver Sponsors</h3>
-
-<p align="center"></p>
-
-<h3 align="center">Bronze Sponsors</h3>
-
-<p align="center">
-  <img src="https://opencollective.com/yamada-ui/tiers/bronze-sponsor.svg?avatarHeight=40&button=false" />
-</p>
-
 ### Organizations
 
 <a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>

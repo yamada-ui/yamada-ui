@@ -426,14 +426,14 @@ const PageComponent = memo(
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       bg: ["white", "black"],
-      maxW: "md",
+      maxW: "24rem",
       p: "md",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
-      rounded: "md",
+      gap: "0.5rem",
+      rounded: "0.375rem",
       boxShadow: ["lg", "dark-lg"],
     }
 
@@ -474,15 +474,15 @@ const BackgroundComponent = memo(
       position: "fixed",
       right: "md",
       bottom: "md",
-      zIndex: "beerus",
+      zIndex: 9999,
       bg: ["white", "black"],
-      maxW: "sm",
+      maxW: "20rem",
       p: "sm",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
-      rounded: "md",
+      gap: "0.5rem",
+      rounded: "0.375rem",
       boxShadow: ["3xl", "dark-lg"],
     }
 

@@ -1,4 +1,3 @@
-import pages from "@hono/vite-cloudflare-pages"
 import devServer, { defaultOptions } from "@hono/vite-dev-server"
 import { defineConfig } from "vite"
 
@@ -25,7 +24,6 @@ export default defineConfig(({ mode }) => {
         external: ["react", "react-dom"],
       },
       plugins: [
-        pages(),
         devServer({
           exclude: ["/*", ...defaultOptions.exclude],
           entry: "src/index.tsx",

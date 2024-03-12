@@ -65,7 +65,7 @@ the following categories:
 
 2. Create a new branch from the `main` branch, following the [type/scope] naming convention. For example, `fix/accordion-hook` or `menu-typo`. `Type` is one of the standard commit types such as `docs`, `fix`, `feat`, `build`, etc. `Scope` is a short word that represents the scope of work.
 
-3. Make changes and commit according to the [commit convention](https://github.com/yamada-ui/yamada-ui/blob/main/README.md#commit-convention). If a test is required, please check [Tips for Test](https://github.com/yamada-ui/yamada-ui/wiki/Tips-for-Test-in-English).
+3. Make changes and commit according to the [commit convention](https://github.com/yamada-ui/yamada-ui/blob/main/README.md#commit-convention). If a test is required, please check [Tips for Test](https://github.com/yamada-ui/yamada-ui/wiki/Tips-for-Test).
 
 4. Once all the tasks above are completed, push your changes. After pushing, a pull request URL will be generated. Please submit your request following the template. Also, check the checks within the pull request and make sure the build has completed successfully. If there are any issues, this pull request will not be merged.
 

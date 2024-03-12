@@ -7,28 +7,25 @@ const useAutosize = (
   maxRows: number,
   minRows: number,
 ) => {
-  const heightRef = useRef(0)
+  const valueRef = useRef<string>()
 
   const resizeTextarea = () => {
     const el = ref.current
-
     if (!el) return
+
+    let { value, placeholder } = el
+    if (value === valueRef.current) return
+    else valueRef.current = value
+
+    value ??= placeholder ?? "x"
 
     const nodeSizeData = getSizingData(el)
 
     if (!nodeSizeData) return
 
-    let { value, placeholder, style } = el
+    const rows = calcRows(el, nodeSizeData, value, maxRows, minRows)
 
-    value ??= placeholder ?? "x"
-
-    const height = calcHeight(nodeSizeData, value, maxRows, minRows)
-
-    if (heightRef.current !== height) {
-      heightRef.current = height
-
-      style.height = `${height}px`
-    }
+    el.rows = rows
   }
 
   return resizeTextarea
@@ -71,6 +68,7 @@ type SizingData = {
   sizingStyle: SizingStyle
   paddingSize: number
   borderSize: number
+  singleRowHeight: number
 }
 
 const getSizingData = (el: HTMLElement): SizingData | null => {
@@ -93,75 +91,45 @@ const getSizingData = (el: HTMLElement): SizingData | null => {
     parseFloat(sizingStyle.borderBottomWidth!) +
     parseFloat(sizingStyle.borderTopWidth!)
 
+  const singleRowHeight = parseFloat(sizingStyle.lineHeight!)
+
   return {
     sizingStyle,
     paddingSize,
     borderSize,
+    singleRowHeight,
   }
 }
 
-let hiddenTextarea: HTMLTextAreaElement | null = null
-
-const calcHeight = (
+const calcRows = (
+  el: HTMLTextAreaElement,
   sizingData: SizingData,
   value: string,
   maxRows: number,
   minRows: number,
 ) => {
-  const getHeight = (el: HTMLElement, sizingData: SizingData): number => {
-    const height = el.scrollHeight
+  const clone = el.cloneNode() as HTMLTextAreaElement
+  Object.assign(clone.style, sizingData.sizingStyle)
+  forceHiddenStyles(clone)
 
-    if (sizingData.sizingStyle.boxSizing === "border-box")
-      return height + sizingData.borderSize
+  clone.value = value
+  document.body.appendChild(clone)
 
-    return height - sizingData.paddingSize
+  let rows
+  if (clone.scrollHeight) {
+    const rowHeight = sizingData.singleRowHeight
+    rows = Math.min(
+      maxRows,
+      Math.max(minRows, Math.floor(clone.scrollHeight / rowHeight)),
+    )
+  } else {
+    const lineBreaks = (value.match(/\n/g) || []).length
+    rows = Math.min(maxRows, Math.max(minRows, lineBreaks + 1))
   }
 
-  if (!hiddenTextarea) {
-    hiddenTextarea = document.createElement("textarea")
-    hiddenTextarea.setAttribute("tabindex", "-1")
-    hiddenTextarea.setAttribute("aria-hidden", "true")
+  document.body.removeChild(clone)
 
-    forceHiddenStyles(hiddenTextarea)
-  }
-
-  if (hiddenTextarea.parentNode === null)
-    document.body.appendChild(hiddenTextarea)
-
-  const { paddingSize, borderSize, sizingStyle } = sizingData
-  const { boxSizing } = sizingStyle
-
-  Object.keys(sizingStyle).forEach((_key) => {
-    const key = _key as keyof typeof sizingStyle
-
-    hiddenTextarea!.style[key] = sizingStyle[key] as any
-  })
-
-  forceHiddenStyles(hiddenTextarea)
-
-  hiddenTextarea.value = value
-
-  let height = getHeight(hiddenTextarea, sizingData)
-
-  hiddenTextarea.value = "x"
-
-  const rowHeight = hiddenTextarea.scrollHeight - paddingSize
-
-  let minHeight = rowHeight * minRows
-
-  if (boxSizing === "border-box")
-    minHeight = minHeight + paddingSize + borderSize
-
-  height = Math.max(minHeight, height)
-
-  let maxHeight = rowHeight * maxRows
-
-  if (boxSizing === "border-box")
-    maxHeight = maxHeight + paddingSize + borderSize
-
-  height = Math.min(maxHeight, height)
-
-  return height
+  return rows
 }
 
 const HIDDEN_TEXTAREA_STYLE = {

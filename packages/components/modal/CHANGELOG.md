@@ -1,5 +1,24 @@
 # @yamada-ui/modal
 
+## 1.0.18
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#950](https://github.com/yamada-ui/yamada-ui/pull/950) [`c960633`](https://github.com/yamada-ui/yamada-ui/commit/c960633a416616de209fff6e3458a413fb4acbbf) Thanks [@txxxxc](https://github.com/txxxxc)! - Make Modal component not to use theme token
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7), [`5e1989c`](https://github.com/yamada-ui/yamada-ui/commit/5e1989cbf0ff4ac06d100c3a296acfb9d6795862)]:
+  - @yamada-ui/close-button@1.0.16
+  - @yamada-ui/transitions@1.0.16
+  - @yamada-ui/focus-lock@1.0.7
+  - @yamada-ui/button@1.0.17
+  - @yamada-ui/motion@1.0.16
+  - @yamada-ui/portal@1.0.7
+  - @yamada-ui/use-value@1.1.3
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
 ## 1.0.17
 
 ### Patch Changes

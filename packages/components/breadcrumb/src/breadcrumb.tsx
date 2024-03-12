@@ -55,7 +55,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     className,
     children,
     separator = "/",
-    gap = "sm",
+    gap = "0.5rem",
     listProps,
     ...rest
   } = omitThemeProps(mergedProps)

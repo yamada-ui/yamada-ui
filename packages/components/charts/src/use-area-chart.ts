@@ -109,7 +109,7 @@ export type UseAreaChartOptions = {
   /**
    *  Controls fill opacity of all areas.
    *
-   * @default 0.2
+   * @default 0.4
    */
   fillOpacity?: number
 }
@@ -132,7 +132,7 @@ export const useAreaChart = ({
   curveType = "monotone",
   strokeWidth = 2,
   connectNulls = true,
-  fillOpacity = 0.2,
+  fillOpacity = 0.4,
   splitColors = ["#ee6a5d", "#5fce7d"],
   splitOffset,
   referenceLineProps,

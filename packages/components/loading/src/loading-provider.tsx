@@ -427,7 +427,7 @@ const PageComponent = memo(
     const css: CSSUIObject = {
       bg: ["white", "black"],
       maxW: "24rem",
-      p: "md",
+      p: "1rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",

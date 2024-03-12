@@ -18,6 +18,7 @@ import { Members } from "./members"
 import { PackageManagers } from "./package-managers"
 import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
+import { Sponsors } from "./sponsors"
 import { LinkCard, CardContainer } from "components/navigation"
 
 const {
@@ -82,6 +83,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   SelectPackageManagers,
   ColorModeButton,
   Members: (props) => <Members {...props} />,
+  Sponsors: (props) => <Sponsors {...props} />,
   Contributors: (props) => <Contributors {...props} />,
   ColorPaletterContainer: (props) => <ColorPaletterContainer {...props} />,
   ColorPaletters: (props) => <ColorPaletters {...props} />,

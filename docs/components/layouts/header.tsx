@@ -16,6 +16,7 @@ import {
   DrawerHeader,
   HStack,
   IconButton,
+  Image,
   Menu,
   MenuButton,
   MenuList,
@@ -50,7 +51,6 @@ import {
   Discord,
   Github,
   Hamburger,
-  Logo,
   Moon,
   Sun,
   Translate,
@@ -108,7 +108,20 @@ export const Header = memo(
               _focusVisible={{ boxShadow: "outline" }}
               rounded="md"
             >
-              <Logo w={{ base: "10rem", md: "8rem" }} h="auto" />
+              <Image
+                src="/logo-black.png"
+                alt="Yamada UI"
+                w="auto"
+                h={{ base: "10", sm: "8" }}
+                _dark={{ display: "none" }}
+              />
+              <Image
+                src="/logo-white.png"
+                alt="Yamada UI"
+                w="auto"
+                h={{ base: "10", sm: "8" }}
+                _light={{ display: "none" }}
+              />
             </Box>
 
             <Tag

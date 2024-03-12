@@ -83,7 +83,7 @@ cd yamada-ui
 
 2. `main`ブランチから新しいブランチを作成します。[タイプ/スコープ]という命名規則に従います。例えば、`fix/accordion-hook`や`docs/menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
 
-3. 変更を行ったら、その変更のテストコードを追加してください。`pnpm test`または`pnpm test <package-name>`を実行して、すべてのテストが合格することを確認してください。更なるテストの情報は[テストのためのTips](https://github.com/yamada-ui/yamada-ui/wiki/%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AETips)を確認してください。
+3. 変更を行ったら、その変更のテストコードを追加してください。`pnpm test`または`pnpm test <package-name>`を実行して、すべてのテストが合格することを確認してください。更なるテストの情報は[テストのためのヒント](https://github.com/yamada-ui/yamada-ui/wiki/%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%83%92%E3%83%B3%E3%83%88)を確認してください。
 
 4. `pnpm changeset`を実行して、変更の詳細な説明を作成します。これは、更新を公開する際にチェンジログを生成するために使用されます。
    [Changesetについてさらに学ぶ](https://github.com/atlassian/changesets/tree/master/packages/cli)

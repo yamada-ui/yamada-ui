@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
+  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480" />
 </p>
 
 <p align="center">
@@ -147,11 +147,11 @@ Please support this project with you or your organization. Your logo will appear
 
 ### Organizations
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>
 
 ### Individuals
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40" /></a>
 
 ## Contributing
 

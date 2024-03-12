@@ -6,6 +6,7 @@ import type {
   AreaChartSeries,
   AxisType,
   AreaChartProps,
+  ChartTooltipType,
 } from "@yamada-ui/charts"
 import { AreaChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
@@ -777,13 +778,11 @@ export const customTooltip: Story = () => {
     [],
   )
 
-  // TODO: Yamada UI側で提供する。
-  type TooltipProps = {
-    label: string
-    payload: Dict[] | undefined
-  }
-
-  const CustomTooltip = ({ label, payload }: TooltipProps) => {
+  const CustomTooltip: ChartTooltipType = (props: {
+    label?: string
+    payload?: Dict[]
+  }) => {
+    const { label, payload } = props
     if (!payload) return null
 
     return (
@@ -805,11 +804,7 @@ export const customTooltip: Story = () => {
       series={series}
       dataKey="name"
       tooltipProps={{
-        content: ({ label, payload }) => (
-          <CustomTooltip label={label} payload={payload} />
-        ),
-        // TODO: 型エラーを解決する。
-        // content: CustomTooltip,
+        content: CustomTooltip,
       }}
     />
   )

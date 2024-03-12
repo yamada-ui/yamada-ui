@@ -1,6 +1,6 @@
 import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef } from "react"
+import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react"
 import type {
   AreaChart as ReChartsAreaChart,
   AreaProps as ReChartsAreaProps,
@@ -31,6 +31,14 @@ export type RequiredChartPropGetter<
   D = undefined,
 > = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
 
+export type ChartTooltipType =
+  | ReactElement
+  | ((
+      props: TooltipProps<
+        number | string | Array<number | string>,
+        number | string
+      >,
+    ) => ReactNode)
 export type LayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
 export type AxisType = "x" | "y" | "xy" | "none"

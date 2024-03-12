@@ -17,7 +17,10 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts"
-import { ChartProvider, useChart } from "./use-chart"
+import {
+  ChartProvider,
+  //  useChart
+} from "./use-chart"
 import { PieChartProvider, usePieChart } from "./use-pie-chart"
 
 // TODO: レスポンシブのheightをどうするか　固定値だとspの時に困る
@@ -153,7 +156,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     ...computedProps
   } = omitThemeProps({ ...defaultProps, ...mergedProps })
 
-  const {} = useChart(computedProps)
+  // const {} = useChart(computedProps)
   const { getCellProps, getCSSVariables } = usePieChart({
     data,
     styles,

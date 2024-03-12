@@ -18,8 +18,8 @@ import {
   ReferenceLine,
   Line,
 } from "recharts"
+import { ChartTooltip } from "./chart-tooltip"
 import { Legend } from "./legend"
-import { ChartTooltip } from "./tooltip"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"

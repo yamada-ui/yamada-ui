@@ -79,10 +79,14 @@ export type ContainerUIProps = Merge<
   CSSUIProps,
   Omit<ResponsiveContainerProps, "children">
 >
-export type DotUIProps = Merge<CSSUIProps, Omit<DotProps, "ref">>
+export type DotUIProps = Merge<Omit<DotProps, "ref">, CSSUIProps>
 export type XAxisUIProps = Merge<
   Merge<CSSUIProps, XAxisProps>,
-  { color?: CSSUIProps["color"] }
+  {
+    color?: CSSUIProps["color"]
+    stroke?: CSSUIProps["color"]
+    fill?: CSSUIProps["color"]
+  }
 >
 export type YAxisUIProps = Merge<
   Merge<CSSUIProps, YAxisProps>,

@@ -837,8 +837,6 @@ export const customDots: Story = () => {
       series={series}
       dataKey="name"
       dotProps={{ r: 8 }}
-      // TODO: 型更新。`stroke`なども見る。
-      // @ts-ignore
       activeDotProps={{ r: 7, strokeWidth: 1, fill: ["white", "black"] }}
     />
   )

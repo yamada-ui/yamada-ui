@@ -223,13 +223,12 @@ export const useAreaChart = ({
     () =>
       series.map(({ ...props }, index) => {
         const {
-          color: colorProp,
           dataKey,
           strokeDasharray,
           activeDot: _activeDot,
           dot: _dot,
         } = props
-        const id = `${uuid}-${colorProp}`
+        const id = `${uuid}-${dataKey}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const [rest, className] = getComponentProps(

@@ -23,7 +23,7 @@ export const Member: FC<MemberProps> = ({
 }) => {
   return (
     <HStack alignItems="flex-start" gap="6" {...rest}>
-      <Avatar name={name} size="xl" src={icon} />
+      <Avatar name={name} boxSize="20" src={icon} />
 
       <VStack gap="2">
         <Text fontWeight="semibold">{name}</Text>

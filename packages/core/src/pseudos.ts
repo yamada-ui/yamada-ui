@@ -111,7 +111,7 @@ export const pseudos = {
   /**
    * Styles to apply when the ARIA attribute `aria-selected` is `true`.
    */
-  _selected: "&[aria-selected=true], &[data-selected]",
+  _selected: "&[aria-selected=true], &[data-selected]&[data-selected]",
   /**
    * The CSS `[hidden=true]` pseudo-class.
    */

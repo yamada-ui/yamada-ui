@@ -362,7 +362,7 @@ const getOverlayStyle = (
   bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
   w: "100vw",
   h: "100dvh",
-  p: "md",
+  p: "1rem",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -434,7 +434,10 @@ const PageComponent = memo(
       alignItems: "center",
       gap: "0.5rem",
       rounded: "0.375rem",
-      boxShadow: ["lg", "dark-lg"],
+      boxShadow: [
+        "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",
+      ],
     }
 
     useTimeout(onFinish, duration)
@@ -472,18 +475,21 @@ const BackgroundComponent = memo(
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: "fixed",
-      right: "md",
-      bottom: "md",
+      right: "1rem",
+      bottom: "1rem",
       zIndex: 9999,
       bg: ["white", "black"],
       maxW: "20rem",
-      p: "sm",
+      p: "0.5rem",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       gap: "0.5rem",
       rounded: "0.375rem",
-      boxShadow: ["3xl", "dark-lg"],
+      boxShadow: [
+        "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25)",
+        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",
+      ],
     }
 
     useTimeout(onFinish, duration)

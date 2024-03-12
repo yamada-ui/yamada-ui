@@ -5,23 +5,28 @@ import { useTooltip } from "./use-chart"
 export type ChartTooltipProps = {
   label: string
   payload: Dict[] | undefined
+  valueFormatter?: (value: number) => string
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
-  ({ label, payload = [] }, ref) => {
+  ({ label, payload = [], valueFormatter }, ref) => {
     const { styles } = useTooltip()
 
-    const items = payload.map(({ color, name, value } = {}, index) => (
-      <ui.div key={`tooltip-payload-${index}`} __css={styles.tooltipContent}>
-        <ui.p __css={styles.tooltipLabel}>
-          <ui.div background={color} __css={styles.tooltipColorTip} />
+    const items = payload.map(({ color, name, value: _value } = {}, index) => {
+      const value = valueFormatter ? valueFormatter(_value) : _value
 
-          <ui.span __css={styles.tooltipLabelText}>{name}</ui.span>
-        </ui.p>
+      return (
+        <ui.div key={`tooltip-payload-${index}`} __css={styles.tooltipContent}>
+          <ui.p __css={styles.tooltipLabel}>
+            <ui.div background={color} __css={styles.tooltipColorTip} />
 
-        <ui.span __css={styles.tooltipValue}>{value}</ui.span>
-      </ui.div>
-    ))
+            <ui.span __css={styles.tooltipLabelText}>{name}</ui.span>
+          </ui.p>
+
+          <ui.span __css={styles.tooltipValue}>{value}</ui.span>
+        </ui.div>
+      )
+    })
 
     return (
       <ui.div ref={ref} __css={styles.tooltip}>

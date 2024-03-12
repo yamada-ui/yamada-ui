@@ -159,6 +159,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const { getTooltipProps } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
+    valueFormatter,
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 
@@ -220,7 +221,11 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (
-                  <ChartTooltip label={label} payload={payload} />
+                  <ChartTooltip
+                    label={label}
+                    payload={payload}
+                    valueFormatter={valueFormatter}
+                  />
                 )}
                 {...getTooltipProps()}
               />

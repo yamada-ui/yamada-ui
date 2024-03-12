@@ -681,7 +681,6 @@ export const withValueFormatter: Story = () => {
       data={data}
       series={series}
       dataKey="name"
-      // TODO: Tooltipの値も変更できないか？
       valueFormatter={(value) => value.toLocaleString()}
     />
   )

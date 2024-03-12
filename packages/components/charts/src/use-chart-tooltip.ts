@@ -17,11 +17,16 @@ export type UseChartTooltipProps = {
    * @default 0
    */
   tooltipAnimationDuration?: number
+  /**
+   * A function to format values on Y axis and inside the tooltip
+   */
+  valueFormatter?: (value: number) => string
 }
 
 export const useChartTooltip = ({
   tooltipProps = {},
   tooltipAnimationDuration = 0,
+  valueFormatter,
 }: UseChartTooltipProps) => {
   const { theme } = useTheme()
   const [reChartsProps, propClassName] = getComponentProps([
@@ -40,10 +45,11 @@ export const useChartTooltip = ({
       wrapperClassName: cx(wrapperClassName, propClassName),
       animationDuration: tooltipAnimationDuration,
       isAnimationActive: (tooltipAnimationDuration || 0) > 0,
+      formatter: valueFormatter,
       ...props,
       ...reChartsProps,
     }),
-    [propClassName, reChartsProps, tooltipAnimationDuration],
+    [propClassName, reChartsProps, tooltipAnimationDuration, valueFormatter],
   )
 
   return { getTooltipProps }

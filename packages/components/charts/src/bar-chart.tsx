@@ -18,6 +18,7 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import type { XAxisProps, YAxisProps } from "recharts"
+import { ChartTooltip } from "./chart-tooltip"
 import type {
   AreaChartType,
   AxisType,
@@ -29,7 +30,6 @@ import type {
   TooltipUIProps,
 } from "./chart.types"
 import { Legend } from "./legend"
-import { ChartTooltip } from "./tooltip"
 import { BarChartProvider, useBarChart } from "./use-bar-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import { useChartLegend } from "./use-chart-legend"

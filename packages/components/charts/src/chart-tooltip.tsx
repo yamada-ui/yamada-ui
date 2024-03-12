@@ -16,12 +16,10 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
       const value = valueFormatter ? valueFormatter(_value) : _value
 
       return (
-        <ui.div key={`tooltip-payload-${index}`} __css={styles.tooltipContent}>
-          <ui.p __css={styles.tooltipLabel}>
-            <ui.div background={color} __css={styles.tooltipColorTip} />
+        <ui.div key={`tooltip-payload-${index}`} __css={styles.tooltipItem}>
+          <ui.div background={color} __css={styles.tooltipSwatch} />
 
-            <ui.span __css={styles.tooltipLabelText}>{name}</ui.span>
-          </ui.p>
+          <ui.span __css={styles.tooltipLabel}>{name}</ui.span>
 
           <ui.span __css={styles.tooltipValue}>{value}</ui.span>
         </ui.div>
@@ -32,7 +30,7 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
       <ui.div ref={ref} __css={styles.tooltip}>
         <ui.p __css={styles.tooltipTitle}>{label}</ui.p>
 
-        {items}
+        <ui.div __css={styles.tooltipList}>{items}</ui.div>
       </ui.div>
     )
   },

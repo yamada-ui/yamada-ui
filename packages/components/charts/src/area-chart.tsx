@@ -20,8 +20,8 @@ import {
 } from "recharts"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
+import { ChartTooltip } from "./chart-tooltip"
 import { Legend } from "./legend"
-import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
@@ -198,7 +198,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-area-chart", className)}
         var={areaVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer {...getContainerProps()}>

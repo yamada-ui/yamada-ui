@@ -11,6 +11,14 @@
       "message": "Yamada UIは、多機能なReactコンポーネントライブラリです。アプリのアニメーションと柔軟性の力を解き放ちます。そして、高度なスタイリングをあなたのアプリケーションに統合するための直感的かつ効率的な方法を提供し、あなたのアイデアを現実のものにします。",
       "started": "はじめる",
       "github": "GitHub"
+    },
+    "support": {
+      "title": "Yamada UIをサポート",
+      "description": "私たちのメンテナーは、Yamada UIがより良くなり続けるために、時間・労力・そして心を捧げています。私たちのチームに寄付して私たちをサポートしてください。",
+      "open-collective": "Yamada UIのスポンサーになる",
+      "patreon": "Hirotomo Yamadaのスポンサーになる",
+      "platinum-sponsors": "プラチナスポンサー",
+      "gold-sponsors": "ゴールドスポンサー"
     }
   },
   "not-found": {

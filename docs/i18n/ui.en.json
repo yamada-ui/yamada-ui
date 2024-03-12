@@ -11,6 +11,14 @@
       "message": "Yamada UI is a versatile React component library, unleashing the power of your application's animation and flexibility. It provides an intuitive and efficient way to integrate advanced styling into your application, bringing your ideas to life.",
       "started": "Get Started",
       "github": "GitHub"
+    },
+    "support": {
+      "title": "Support Yamada UI",
+      "description": "Our maintainers dedicate their time, effort, and heart to ensure Yamada UI continues to improve. Please support us by donating to our team.",
+      "open-collective": "Sponsor the Yamada UI maintainers",
+      "patreon": "Sponsor the creator, Hirotomo Yamada",
+      "platinum-sponsors": "Platinum Sponsors",
+      "gold-sponsors": "Gold Sponsors"
     }
   },
   "not-found": {

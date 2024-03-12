@@ -98,7 +98,7 @@ export const custom: Story = () => {
     connectNulls: true,
     strokeWidth: 2,
     tooltipAnimationDuration: 0,
-    fillOpacity: 0.2,
+    fillOpacity: 0.4,
     tickLine: "y",
     strokeDasharray: "5 5",
     curveType: "monotone",
@@ -315,7 +315,7 @@ export const custom: Story = () => {
                     })),
                 },
                 {
-                  label: "active dots",
+                  label: "gradient",
                   isChecked:
                     typeof props.withGradient === "boolean"
                       ? props.withGradient
@@ -332,43 +332,6 @@ export const custom: Story = () => {
         </VStack>
       </Wrap>
     </Wrap>
-  )
-}
-
-export const withVariant: Story = () => {
-  const data = useMemo(
-    () =>
-      Array(7)
-        .fill(0)
-        .map((_, index) => ({
-          name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
-          amt: randomValue(),
-        })),
-    [],
-  )
-
-  const series: AreaChartSeries[] = useMemo(
-    () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
-    ],
-    [],
-  )
-
-  return (
-    <VStack>
-      <AreaChart
-        data={data}
-        series={series}
-        dataKey="name"
-        variant="subtle"
-        withLegend
-      />
-      <AreaChart data={data} series={series} dataKey="name" withLegend />
-    </VStack>
   )
 }
 
@@ -396,11 +359,12 @@ export const withSize: Story = () => {
   )
 
   return (
-    <VStack>
+    <>
       <AreaChart data={data} series={series} dataKey="name" size="sm" />
       <AreaChart data={data} series={series} dataKey="name" size="md" />
       <AreaChart data={data} series={series} dataKey="name" size="lg" />
-    </VStack>
+      <AreaChart data={data} series={series} dataKey="name" size="full" />
+    </>
   )
 }
 

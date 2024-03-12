@@ -171,7 +171,7 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
 
               {CONSTANT.SPONSORS.PLATINUM.length ? (
                 <>
-                  <Heading as="h3" size="lg">
+                  <Heading as="h3" size="lg" color="white">
                     {t("home.support.platinum-sponsors")}
                   </Heading>
 
@@ -225,7 +225,7 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
 
               {CONSTANT.SPONSORS.GOLD.length ? (
                 <>
-                  <Heading as="h3" size="lg">
+                  <Heading as="h3" size="lg" color="white">
                     {t("home.support.gold-sponsors")}
                   </Heading>
 

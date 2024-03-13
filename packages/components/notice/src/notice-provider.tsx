@@ -17,7 +17,7 @@ export type NoticeProviderProps = Omit<
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
-  gap = "md",
+  gap = "1rem",
   appendToParentPortal,
   containerRef,
 }) => {
@@ -43,7 +43,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 
     const css: CSSUIObject = {
       position: "fixed",
-      zIndex: "zarbon",
+      zIndex: 160,
       pointerEvents: "none",
       display: "flex",
       flexDirection: "column",
@@ -146,8 +146,8 @@ const NoticeComponent = memo(
 
     const css: CSSUIObject = {
       pointerEvents: "auto",
-      maxW: "2xl",
-      minW: "sm",
+      maxW: "36rem",
+      minW: "20rem",
       ...style,
     }
 

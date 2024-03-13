@@ -46,7 +46,7 @@ type DrawerOptions = {
 
 export type DrawerProps = Omit<
   ModalProps,
-  "scrollBehavior" | "animation" | "outside" | keyof ThemeProps
+  "scrollBehavior" | "animation" | "outside" | "placement" | keyof ThemeProps
 > &
   ThemeProps<"Drawer"> &
   DrawerOptions

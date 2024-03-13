@@ -2,7 +2,7 @@ export type AreaGradientProps = {
   id?: string
   color?: string
   withGradient?: boolean
-  fillOpacity: number
+  fillOpacity: number | string
 }
 
 export const AreaGradient = ({

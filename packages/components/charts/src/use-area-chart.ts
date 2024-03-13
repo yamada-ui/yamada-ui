@@ -111,7 +111,7 @@ export type UseAreaChartOptions = {
    *
    * @default 0.4
    */
-  fillOpacity?: number
+  fillOpacity?: number | [number, number]
 }
 
 export type UseAreaChartProps = UseAreaChartOptions & {
@@ -185,9 +185,14 @@ export const useAreaChart = ({
     [referenceLineProps],
   )
 
-  const areaVars = useMemo(() => {
-    return [...areaColors, ...areaSplitColors, ...referenceLineColors]
-  }, [areaColors, areaSplitColors, referenceLineColors])
+  const areaVars: CSSUIProps["var"] = useMemo(() => {
+    return [
+      ...areaColors,
+      ...areaSplitColors,
+      ...referenceLineColors,
+      { name: "fill-opacity", value: fillOpacity },
+    ]
+  }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
 
   const [areaChartProps, areaChartClassName] = getComponentProps<Dict, string>(
     [_areaChartProps, areaChartProperties],
@@ -322,10 +327,10 @@ export const useAreaChart = ({
     (props = {}) => ({
       id: splitId,
       offset: splitOffset ?? defaultSplitOffset,
-      fillOpacity,
+      fillOpacity: "var(--ui-fill-opacity)",
       ...props,
     }),
-    [defaultSplitOffset, fillOpacity, splitId, splitOffset],
+    [defaultSplitOffset, splitId, splitOffset],
   )
 
   const getAreaProps: RequiredChartPropGetter<
@@ -388,10 +393,10 @@ export const useAreaChart = ({
   > = useCallback(
     (props = {}) => ({
       withGradient,
-      fillOpacity,
+      fillOpacity: "var(--ui-fill-opacity)",
       ...props,
     }),
-    [withGradient, fillOpacity],
+    [withGradient],
   )
 
   return {

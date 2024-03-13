@@ -1,7 +1,7 @@
 export type AreaSplitProps = {
   offset: number
   id?: string
-  fillOpacity: number | undefined
+  fillOpacity: number | string | undefined
 }
 
 export const AreaSplit = ({ offset, id, fillOpacity }: AreaSplitProps) => {
@@ -10,12 +10,12 @@ export const AreaSplit = ({ offset, id, fillOpacity }: AreaSplitProps) => {
       <stop
         offset={offset}
         stopColor="var(--ui-area-split-0)"
-        stopOpacity={fillOpacity ?? 0.2}
+        stopOpacity={fillOpacity ?? 0.4}
       />
       <stop
         offset={offset}
         stopColor="var(--ui-area-split-1)"
-        stopOpacity={fillOpacity ?? 0.2}
+        stopOpacity={fillOpacity ?? 0.4}
       />
     </linearGradient>
   )

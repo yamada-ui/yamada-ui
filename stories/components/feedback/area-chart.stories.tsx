@@ -217,7 +217,7 @@ export const custom: Story = () => {
             items={[
               {
                 label: "Fill opacity",
-                value: props.fillOpacity,
+                value: props.fillOpacity as number,
                 min: 0,
                 max: 1,
                 step: 0.1,
@@ -680,6 +680,39 @@ export const withStrokeDasharray: Story = () => {
       dataKey="name"
       gridAxis="xy"
       strokeDasharray="15 15"
+    />
+  )
+}
+
+export const withFillOpacity: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      fillOpacity={[0.8, 0.7]}
     />
   )
 }

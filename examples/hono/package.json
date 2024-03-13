@@ -1,0 +1,37 @@
+{
+  "name": "hono-react",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --mode client && vite build"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@yamada-ui/calendar": "workspace:*",
+    "@yamada-ui/carousel": "workspace:*",
+    "@yamada-ui/dropzone": "workspace:*",
+    "@yamada-ui/fontawesome": "workspace:*",
+    "@yamada-ui/markdown": "workspace:*",
+    "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/table": "workspace:*",
+    "hono": "^4.0.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@hono/vite-dev-server": "^0.8.2",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "tsx": "^3.12.2",
+    "vite": "^5.1.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

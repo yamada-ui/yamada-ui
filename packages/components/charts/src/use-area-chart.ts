@@ -153,6 +153,7 @@ export const useAreaChart = ({
   const areaColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
+        __prefix: "ui",
         name: `area-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -163,6 +164,7 @@ export const useAreaChart = ({
   const areaSplitColors: CSSUIProps["var"] = useMemo(
     () =>
       splitColors.map((color, index) => ({
+        __prefix: "ui",
         name: `area-split-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -174,6 +176,7 @@ export const useAreaChart = ({
     () =>
       referenceLineProps
         ? referenceLineProps.map(({ color }, index) => ({
+            __prefix: "ui",
             name: `reference-line-${index}`,
             token: "colors",
             value: color ?? "transparent",

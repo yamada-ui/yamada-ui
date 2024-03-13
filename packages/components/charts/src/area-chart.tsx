@@ -166,7 +166,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const areas = useMemo(
     () =>
       series.map(({ dataKey }, index) => {
-        const { id, stroke, ...rest } = getAreaProps({ index })
+        const { className, id, stroke, ...rest } = getAreaProps({ index })
 
         return (
           <Fragment key={`area-${dataKey}`}>
@@ -174,7 +174,12 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
               <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
             </defs>
 
-            <Area id={id} stroke={stroke} {...rest} />
+            <Area
+              className={cx("ui-area-chart__area", className)}
+              id={id}
+              stroke={stroke}
+              {...rest}
+            />
           </Fragment>
         )
       }),
@@ -186,7 +191,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
       referenceLineProps.map((_, index) => (
         <ReferenceLine
           key={`referenceLine-${index}`}
-          {...getReferenceLineProps({ index })}
+          {...getReferenceLineProps({
+            index,
+            className: "ui-area-chart__reference-line",
+          })}
         />
       )),
     [getReferenceLineProps, referenceLineProps],
@@ -201,20 +209,26 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >
-        <ResponsiveContainer {...getContainerProps()}>
-          <ReChartsAreaChart {...getAreaChartProps()}>
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-area-chart__container" })}
+        >
+          <ReChartsAreaChart
+            {...getAreaChartProps({ className: "ui-area-chart__chart" })}
+          >
             {referenceLinesItems}
 
-            <CartesianGrid {...getGridProps()} />
-            <XAxis {...getXAxisProps()} />
-            <YAxis {...getYAxisProps()} />
+            <CartesianGrid
+              {...getGridProps({ className: "ui-area-chart__grid" })}
+            />
+            <XAxis {...getXAxisProps({ className: "ui-area-chart__x-axis" })} />
+            <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })} />
 
             {withLegend ? (
               <ReChartsLegend
                 content={({ payload }) => (
                   <Legend payload={payload} onHighlight={setHighlightedArea} />
                 )}
-                {...getLegendProps()}
+                {...getLegendProps({ className: "ui-area-chart__legend" })}
               />
             ) : null}
 
@@ -227,7 +241,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     valueFormatter={valueFormatter}
                   />
                 )}
-                {...getTooltipProps()}
+                {...getTooltipProps({ className: "ui-area-chart__tooltip" })}
               />
             ) : null}
 

@@ -30,7 +30,7 @@ if (typeof window.matchMedia !== "function") {
 
 global.TextEncoder = require("util").TextEncoder
 
-global.ResizeObserver = vi.fn(() => ({
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),

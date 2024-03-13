@@ -274,8 +274,8 @@ export type Transforms = keyof typeof transforms
 
 export const transforms = {
   var: (values: any[], theme: StyledTheme) =>
-    values.reduce<Dict>((prev, { name, token, value }) => {
-      const prefix = theme.__config.var?.prefix ?? "ui"
+    values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
+      const prefix = __prefix ?? theme.__config.var?.prefix ?? "ui"
 
       name = `--${prefix}-${name}`
 

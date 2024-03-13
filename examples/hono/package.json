@@ -1,4 +1,8 @@
 {
+  "name": "hono-react",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": false,
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -26,5 +30,8 @@
     "@types/react-dom": "^18.2.21",
     "tsx": "^3.12.2",
     "vite": "^5.1.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

@@ -19,7 +19,7 @@ export const getComponentProps =
   ) =>
   (theme: StyledTheme) => {
     const [pickedProps, omittedProps] = splitObject<T, K>(obj, keys)
-    const className = getClassName(omittedProps, ...props)(theme)
+    const className = getClassName(...props, omittedProps)(theme)
 
     return [pickedProps, className] as const
   }

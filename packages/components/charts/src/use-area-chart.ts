@@ -199,12 +199,12 @@ export const useAreaChart = ({
     styles.areaChart,
   )(theme)
 
-  const [activeDotProps, activeDotClassName] = getComponentProps<Dict, string>(
+  const [activeDotProps, _activeDotClassName] = getComponentProps<Dict, string>(
     [_activeDotProps, dotProperties],
     styles.activeDot,
   )(theme)
 
-  const [dotProps, dotClassName] = getComponentProps<Dict, string>(
+  const [dotProps, _dotClassName] = getComponentProps<Dict, string>(
     [_dotProps, dotProperties],
     styles.dot,
   )(theme)
@@ -229,12 +229,12 @@ export const useAreaChart = ({
 
   const areaPropsList = useMemo(
     () =>
-      series.map(({ ...props }, index) => {
+      series.map((props, index) => {
         const {
           dataKey,
           strokeDasharray,
-          activeDot: _activeDot,
-          dot: _dot,
+          activeDot: _activeDot = {},
+          dot: _dot = {},
         } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-area-${index})`
@@ -247,13 +247,18 @@ export const useAreaChart = ({
         let activeDot: DotProps | boolean
 
         if (withActiveDots) {
+          const [rest, activeDotClassName] = getComponentProps(
+            [_activeDot, dotProperties],
+            _activeDotClassName,
+          )(theme)
+
           activeDot = {
             className: activeDotClassName,
             stroke: color,
             r: 4,
             ...activeDotProps,
-            ...(_activeDot as DotProps),
-          }
+            ...rest,
+          } as DotProps
         } else {
           activeDot = false
         }
@@ -261,15 +266,25 @@ export const useAreaChart = ({
         let dot: DotProps | boolean
 
         if (withDots) {
+          const [rest, dotClassName] = getComponentProps(
+            [
+              {
+                fill: color,
+                strokeWidth: 20,
+                ..._dot,
+              },
+              dotProperties,
+            ],
+            _dotClassName,
+          )(theme)
+
           dot = {
             className: dotClassName,
-            fill: color,
             fillOpacity: dimmed ? 0 : 1,
-            strokeWidth: 2,
             r: 4,
             ...dotProps,
-            ...(_dot as DotProps),
-          }
+            ...rest,
+          } as DotProps
         } else {
           dot = false
         }
@@ -288,9 +303,9 @@ export const useAreaChart = ({
       }),
     [
       areaClassName,
-      activeDotClassName,
+      _activeDotClassName,
       activeDotProps,
-      dotClassName,
+      _dotClassName,
       dotProps,
       highlightedArea,
       series,

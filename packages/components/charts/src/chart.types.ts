@@ -415,7 +415,7 @@ export const lineProperties: (keyof Omit<ReChartsLineProps, "ref">)[] = [
   "onMouseLeave",
   "strokeDasharray",
 ]
-export const dotProperties: (keyof DotProps)[] = [
+export const dotProperties: (keyof Omit<DotProps, "ref">)[] = [
   "cx",
   "cy",
   "r",

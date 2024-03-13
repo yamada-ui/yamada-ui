@@ -839,6 +839,37 @@ export const customDots: Story = () => {
   )
 }
 
+export const customDots2: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "uv",
+        color: ["primary.500", "primary.400"],
+        dot: { r: 4, fill: ["red.500", "red.500"] },
+        activeDot: { r: 7, strokeWidth: 1, fill: ["red.500", "blue.500"] },
+      },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return <AreaChart data={data} series={series} dataKey="name" />
+}
+
 export const customLegend: Story = () => {
   const data = useMemo(
     () =>

@@ -267,20 +267,15 @@ export const useAreaChart = ({
 
         if (withDots) {
           const [rest, dotClassName] = getComponentProps(
-            [
-              {
-                fill: color,
-                strokeWidth: 20,
-                ..._dot,
-              },
-              dotProperties,
-            ],
+            [_dot, dotProperties],
             _dotClassName,
           )(theme)
 
           dot = {
             className: dotClassName,
+            fill: color,
             fillOpacity: dimmed ? 0 : 1,
+            strokeWidth: 2,
             r: 4,
             ...dotProps,
             ...rest,

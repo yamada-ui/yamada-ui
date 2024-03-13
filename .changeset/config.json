@@ -22,7 +22,7 @@
     "nextjs-app",
     "nextjs-pages",
     "vite-react",
-    "hono",
+    "hono-react",
     "remix"
   ]
 }

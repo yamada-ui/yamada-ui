@@ -5244,6 +5244,7 @@ export type StyleProps = {
    * ```
    */
   var?: {
+    __prefix?: string
     name: string
     token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
     value: Token<StringLiteral | number>

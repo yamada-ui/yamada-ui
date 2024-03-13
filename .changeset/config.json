@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "yamada-ui/yamada-ui" }
+    {
+      "repo": "yamada-ui/yamada-ui"
+    }
   ],
   "commit": false,
   "linked": [],
@@ -20,6 +22,7 @@
     "nextjs-app",
     "nextjs-pages",
     "vite-react",
+    "hono",
     "remix"
   ]
 }

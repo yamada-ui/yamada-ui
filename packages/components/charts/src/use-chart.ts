@@ -1,6 +1,6 @@
 import { useTheme, type CSSUIObject } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { createContext, cx, isNumber } from "@yamada-ui/utils"
+import { createContext, cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { ResponsiveContainerProps } from "recharts"
 import { getComponentProps } from "./chart-utils"
@@ -33,19 +33,12 @@ export const useChart = ({ containerProps = {} }: UseChartProps) => {
     Partial<Omit<ResponsiveContainerProps, "children">>,
     Omit<ResponsiveContainerProps, "children">
   > = useCallback(
-    ({ className, ...props } = {}, ref = null) => {
-      let containerClassName: string
-      if (isNumber(className))
-        containerClassName = cx(className.toString(), propClassName)
-      else containerClassName = cx(className, className)
-
-      return {
-        ref,
-        containerClassName,
-        ...props,
-        ...reChartsProps,
-      }
-    },
+    ({ className, ...props } = {}, ref = null) => ({
+      ref,
+      containerClassName: cx(className as string, propClassName),
+      ...props,
+      ...reChartsProps,
+    }),
     [propClassName, reChartsProps],
   )
 

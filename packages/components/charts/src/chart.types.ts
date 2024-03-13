@@ -52,7 +52,11 @@ export type CurveType =
   | "stepAfter"
 export type AreaChartSeries = Merge<
   Merge<CSSUIProps, ReChartsAreaProps>,
-  { color: CSSUIProps["color"] }
+  {
+    color: CSSUIProps["color"]
+    activeDot?: DotUIProps
+    dot?: DotUIProps
+  }
 >
 export type BarChartSeries = Merge<
   Merge<CSSUIProps, ReChartsBarProps>,

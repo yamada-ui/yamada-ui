@@ -5330,6 +5330,7 @@ export type StyleProps = {
     update?: StringLiteral
     videoDynamicRange?: StringLiteral
     css?: CSSUIObject
+    [key: string]: any
   }[]
   /**
    * The `@container` of CSS at-rule.
@@ -5370,5 +5371,6 @@ export type StyleProps = {
     maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
     orientation?: "portrait" | "landscape" | StringLiteral
     css?: CSSUIObject
+    [key: string]: any
   }[]
 }

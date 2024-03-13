@@ -353,6 +353,7 @@ export const uiProps = createUIProps({
       "update?: StringLiteral",
       "videoDynamicRange?: StringLiteral",
       "css?: CSSUIObject",
+      "[key: string]: any",
     ].join(";")} }[]`,
     hasToken: false,
     description: [
@@ -400,6 +401,7 @@ export const uiProps = createUIProps({
       'maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]',
       'orientation?: "portrait" | "landscape" | StringLiteral',
       "css?: CSSUIObject",
+      "[key: string]: any",
     ].join(";")}}[]`,
     hasToken: false,
     description: [

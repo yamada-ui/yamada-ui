@@ -2,9 +2,9 @@ import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Pagination } from "../src"
 
 describe("<Pagination/>", () => {
-  it("should pass a11y", async () => await a11y(<Pagination total={10} />))
+  test("should pass a11y", async () => await a11y(<Pagination total={10} />))
 
-  it("should render edges control button correctly", () => {
+  test("should render edges control button correctly", () => {
     render(
       <Pagination
         total={10}
@@ -18,7 +18,7 @@ describe("<Pagination/>", () => {
     expect(screen.getByText("Last edge")).toBeInTheDocument()
   })
 
-  it("should render control button correctly", () => {
+  test("should render control button correctly", () => {
     render(
       <Pagination
         total={10}
@@ -31,7 +31,7 @@ describe("<Pagination/>", () => {
     expect(screen.getByText("Next button")).toBeInTheDocument()
   })
 
-  it("should render siblings correctly", () => {
+  test("should render siblings correctly", () => {
     render(<Pagination total={77} siblings={3} />)
 
     fireEvent.click(screen.getByText("7"))
@@ -41,7 +41,7 @@ describe("<Pagination/>", () => {
     }
   })
 
-  it("should render boundaries correctly", () => {
+  test("should render boundaries correctly", () => {
     render(<Pagination total={77} boundaries={3} />)
 
     fireEvent.click(screen.getByText("7"))
@@ -51,7 +51,7 @@ describe("<Pagination/>", () => {
     }
   })
 
-  it("should render disabled correctly", () => {
+  test("should render disabled correctly", () => {
     render(<Pagination total={77} isDisabled />)
 
     expect(screen.getByRole("navigation")).toHaveAttribute("data-disabled")

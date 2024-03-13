@@ -26,10 +26,10 @@ describe("<Stepper/>", () => {
 
   test("separator renders correctly", () => {
     const { rerender } = render(<Stepper index={0} steps={mockSteps} />)
-    expect(screen.getAllByRole("separator").length).toBe(2)
+    expect(screen.getAllByRole("separator")).toHaveLength(2)
 
     rerender(<Stepper index={0} steps={mockStepsWithExtraProps} />)
-    expect(screen.queryAllByRole("separator").length).toBe(0)
+    expect(screen.queryAllByRole("separator")).toHaveLength(0)
   })
 
   test.each([
@@ -65,11 +65,11 @@ describe("<Stepper/>", () => {
 
     rerender(<Stepper index={2} steps={mockSteps} />)
 
-    expect(container.querySelectorAll("svg").length).toBe(2)
+    expect(container.querySelectorAll("svg")).toHaveLength(2)
     screen.getByText(3)
 
     rerender(<Stepper index={3} steps={mockSteps} />)
 
-    expect(container.querySelectorAll("svg").length).toBe(3)
+    expect(container.querySelectorAll("svg")).toHaveLength(3)
   })
 })

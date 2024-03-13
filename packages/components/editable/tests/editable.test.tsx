@@ -166,10 +166,10 @@ describe("<Editable />", () => {
       </Editable>,
     )
     fireEvent.focus(getByTestId("EditablePreview"))
-    expect(onEdit).toHaveBeenCalled()
+    expect(onEdit).toHaveBeenCalledWith()
   })
 
-  test("calls onCancel when Escape is pressed", () => {
+  test("focus and calls onCancel when Escape is pressed", () => {
     const onCancel = vi.fn()
     const { getByTestId } = render(
       <Editable onCancel={onCancel} defaultValue="Some text">
@@ -179,7 +179,7 @@ describe("<Editable />", () => {
     )
     fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Escape" })
-    expect(onCancel).toHaveBeenCalled()
+    expect(onCancel).toHaveBeenCalledWith("Some text")
   })
 
   test("calls onSubmit when onBlur is triggered with submitOnBlur", () => {
@@ -198,7 +198,7 @@ describe("<Editable />", () => {
     )
     fireEvent.click(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Enter" })
-    expect(onSubmit).toHaveBeenCalled()
+    expect(onSubmit).toHaveBeenCalledWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
   })
 })

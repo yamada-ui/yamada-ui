@@ -1,6 +1,6 @@
 import type { RenderOptions } from "@testing-library/react"
 import { render as reactRender } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
+import { userEvent } from "@testing-library/user-event"
 import { UIProvider } from "@yamada-ui/providers"
 import theme from "@yamada-ui/theme"
 import type { ReactElement } from "react"
@@ -22,8 +22,9 @@ export const render = (
 ): RenderReturn => {
   const user = userEvent.setup()
 
-  if (withProvider)
+  if (withProvider) {
     rest.wrapper = (props: any) => <UIProvider {...props} theme={theme} />
+  }
 
   const result = reactRender(ui, rest)
 

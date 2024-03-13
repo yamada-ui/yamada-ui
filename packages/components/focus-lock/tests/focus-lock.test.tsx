@@ -1,5 +1,5 @@
 import { FocusLock } from "@yamada-ui/react"
-import { screen, render, renderHook } from "@yamada-ui/test"
+import { render, renderHook, screen } from "@yamada-ui/test"
 import { useRef } from "react"
 
 describe("<FocusLock />", () => {
@@ -19,10 +19,10 @@ describe("<FocusLock />", () => {
 
     const focusedBtn = screen.getByRole("button", { name: "Focused Button" })
     focusedBtn.focus()
-    expect(document.activeElement).toEqual(focusedBtn)
+    expect(document.activeElement).toStrictEqual(focusedBtn)
 
     notFocusedBtn.focus()
-    expect(document.activeElement).toEqual(focusedBtn)
+    expect(document.activeElement).toStrictEqual(focusedBtn)
   })
 
   test("correctly focuses on the button with a reference when initialized", () => {
@@ -36,14 +36,12 @@ describe("<FocusLock />", () => {
     )
 
     const focusedBtn = screen.getByRole("button", { name: "Focused Button" })
-    expect(document.activeElement).toEqual(focusedBtn)
+    expect(document.activeElement).toStrictEqual(focusedBtn)
   })
 
-  test("correctly focuses on contentRef when no focusable elements exist", () => {
-    // TODO: Add test
-  })
+  test.todo("correctly focuses on contentRef when no focusable elements exist")
 
-  test("correctly focuses on the finalFocusRef when the FocusLock is unmounted", () => {
-    // TODO: Add test
-  })
+  test.todo(
+    "correctly focuses on the finalFocusRef when the FocusLock is unmounted",
+  )
 })

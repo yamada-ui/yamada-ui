@@ -1,5 +1,5 @@
 import type { UsageTheme } from "@yamada-ui/core"
-import { defaultTheme, baseTheme } from "@yamada-ui/theme"
+import { baseTheme, defaultTheme } from "@yamada-ui/theme"
 import { omitObject } from "@yamada-ui/utils"
 import { extendBaseTheme, extendTheme } from "../src"
 
@@ -14,7 +14,7 @@ describe("mergeStyle", () => {
       colors: { ...defaultTheme.colors, primary: "#000" },
     }
 
-    expect(extendTheme(source)()).toEqual(expected)
+    expect(extendTheme(source)()).toStrictEqual(expected)
   })
 
   test("should merge base theme", () => {
@@ -27,7 +27,7 @@ describe("mergeStyle", () => {
       colors: { ...baseTheme.colors, primary: "#000" },
     }
 
-    expect(extendBaseTheme(source)()).toEqual(expected)
+    expect(extendBaseTheme(source)()).toStrictEqual(expected)
   })
 
   test("should many merge theme", () => {
@@ -44,7 +44,7 @@ describe("mergeStyle", () => {
       colors: { ...defaultTheme.colors, primary: "#000", secondary: "red" },
     }
 
-    expect(extendTheme(source1, source2)()).toEqual(expected)
+    expect(extendTheme(source1, source2)()).toStrictEqual(expected)
   })
 
   test("should not merge", () => {
@@ -56,7 +56,7 @@ describe("mergeStyle", () => {
       colors: { primary: "#000" },
     }
 
-    expect(extendTheme(source)({ merge: false })).toEqual(expected)
+    expect(extendTheme(source)({ merge: false })).toStrictEqual(expected)
   })
 
   test("should correctly handle function themes", () => {
@@ -69,7 +69,7 @@ describe("mergeStyle", () => {
       colors: { ...defaultTheme.colors, tertiary: "#FF0" },
     }
 
-    expect(extendTheme(source)()).toEqual(expected)
+    expect(extendTheme(source)()).toStrictEqual(expected)
   })
 
   test("should correctly handle multiple function themes", () => {
@@ -86,7 +86,7 @@ describe("mergeStyle", () => {
       colors: { ...defaultTheme.colors, tertiary: "#FF0", quaternary: "#00F" },
     }
 
-    expect(extendTheme(source1, source2)()).toEqual(expected)
+    expect(extendTheme(source1, source2)()).toStrictEqual(expected)
   })
 
   test("should correctly handle theme with omitted keys", () => {
@@ -99,7 +99,7 @@ describe("mergeStyle", () => {
       colors: { primary: "#000", secondary: "#FFF" },
     }
 
-    expect(extendTheme(source)({ omit: ["colors"] })).toEqual(expected)
+    expect(extendTheme(source)({ omit: ["colors"] })).toStrictEqual(expected)
   })
 
   test("should correctly handle theme with picked keys", () => {
@@ -114,11 +114,11 @@ describe("mergeStyle", () => {
       },
     }
 
-    expect(extendTheme(source)({ pick: ["zIndices"] })).toEqual(expected)
+    expect(extendTheme(source)({ pick: ["zIndices"] })).toStrictEqual(expected)
   })
 
   test("should return an empty object when merge is false and no extensions are provided", () => {
-    expect(extendTheme()({ merge: false })).toEqual({})
+    expect(extendTheme()({ merge: false })).toStrictEqual({})
   })
 
   test("should not modify the original objects", () => {
@@ -128,6 +128,6 @@ describe("mergeStyle", () => {
 
     extendTheme(source)()
 
-    expect(source).toEqual({ colors: { primary: "#000" } })
+    expect(source).toStrictEqual({ colors: { primary: "#000" } })
   })
 })

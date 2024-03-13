@@ -2,7 +2,7 @@ import { a11y, render, screen, fireEvent } from "@yamada-ui/test"
 import { Radio, RadioGroup } from "../src"
 
 describe("<RadioGroup/>", () => {
-  it("should pass a11y test", async () => {
+  test("should pass a11y test", async () => {
     await a11y(
       <RadioGroup>
         <Radio>Radio 1</Radio>
@@ -12,7 +12,7 @@ describe("<RadioGroup/>", () => {
     )
   })
 
-  it("defaultValue should be checked correctly", async () => {
+  test("defaultValue should be checked correctly", async () => {
     render(
       <RadioGroup defaultValue="1">
         <Radio value="1" data-testid="radio-1">
@@ -36,7 +36,7 @@ describe("<RadioGroup/>", () => {
     ).not.toBeChecked()
   })
 
-  it("should be change value when click other radio button", async () => {
+  test("should be change value when click other radio button", async () => {
     render(
       <RadioGroup defaultValue="1">
         <Radio value="1" data-testid="radio-1">

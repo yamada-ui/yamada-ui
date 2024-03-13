@@ -31,7 +31,7 @@ export type RequiredChartPropGetter<
   D = undefined,
 > = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
 
-export type ChartTooltipType =
+export type ChartTooltip =
   | ReactElement
   | ((
       props: TooltipProps<

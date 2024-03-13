@@ -2,15 +2,36 @@ import { render, a11y, screen, fireEvent, waitFor } from "@yamada-ui/test"
 import type { FC } from "react"
 import { useState, useEffect } from "react"
 import {
+  AspectRatio,
   Box,
   Container,
   Flex,
   Divider,
+  SimpleGrid,
   Stack,
   HStack,
   VStack,
   Grid,
+  GridItem,
 } from "../src"
+
+describe("<AspectRatio />", () => {
+  test("passes a11y test", async () => {
+    await a11y(
+      <AspectRatio>
+        <img src="https://image.xyz/source" alt="placeholder" />
+      </AspectRatio>,
+    )
+  })
+
+  test("renders aspect ratio correctly", () => {
+    render(
+      <AspectRatio>
+        <img src="https://image.xyz/source" alt="placeholder" />
+      </AspectRatio>,
+    )
+  })
+})
 
 describe("<Box />", () => {
   test("passes a11y test", async () => {
@@ -93,6 +114,39 @@ describe("<Divider />", () => {
     expect(getByTestId("divider")).toHaveStyle({
       borderLeftWidth: "1px",
       height: "100%",
+    })
+  })
+})
+
+describe("<SimpleGrid />", () => {
+  test("renders SimpleGrid correctly", () => {
+    render(<SimpleGrid>GridSimple</SimpleGrid>)
+  })
+
+  test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {
+    const { getByTestId } = render(
+      <SimpleGrid
+        data-testid="simpleGrid"
+        columns={2}
+        minChildWidth={{ base: "4" }}
+      >
+        SimpleGrid
+      </SimpleGrid>,
+    )
+
+    expect(getByTestId("simpleGrid")).toHaveStyle({
+      gridTemplateColumns: "repeat(auto-fit, minmax(1rem, 1fr))",
+    })
+  })
+
+  test("columns - prop works correctly", () => {
+    const { getByTestId } = render(
+      <SimpleGrid data-testid="simpleGrid" columns={3}>
+        SimpleGrid
+      </SimpleGrid>,
+    )
+    expect(getByTestId("simpleGrid")).toHaveStyle({
+      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
     })
   })
 })
@@ -240,6 +294,25 @@ describe("<Grid />", () => {
     expect(getByTestId("grid")).toHaveStyle({
       gridTemplateColumns: "repeat(2, 1fr)",
       gridTemplateRows: "repeat(2, 1fr)",
+    })
+  })
+})
+
+describe("<GridItem />", () => {
+  test("renders grid correctly", () => {
+    render(<GridItem>GridItem</GridItem>)
+  })
+
+  test("renders all the allowed shorthand style props", () => {
+    const { getByTestId } = render(
+      <GridItem rowSpan={2} colSpan={2} data-testid="gridItem">
+        GridItem
+      </GridItem>,
+    )
+
+    expect(getByTestId("gridItem")).toHaveStyle({
+      gridColumn: "span 2/span 2",
+      gridRow: "span 2/span 2",
     })
   })
 })

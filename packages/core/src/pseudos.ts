@@ -111,7 +111,7 @@ export const pseudos = {
   /**
    * Styles to apply when the ARIA attribute `aria-selected` is `true`.
    */
-  _selected: "&[aria-selected=true], &[data-selected]&[data-selected]",
+  _selected: "&[aria-selected=true], &[data-selected]",
   /**
    * The CSS `[hidden=true]` pseudo-class.
    */
@@ -167,9 +167,9 @@ export const pseudos = {
   _filled: "&[data-filled]",
   _start: "&[data-start]",
   _end: "&[data-end]",
-  _outside: "&[data-outside]",
+  _outside: "&:where([data-outside])",
   _between: "&[data-between]",
-  _weekend: "&[data-weekend]",
+  _weekend: "&:where([data-weekend])",
   _holiday: "&[data-holiday]",
   _today: "&[data-today]",
   _accept: "&[data-accept]",

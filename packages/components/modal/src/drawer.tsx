@@ -14,6 +14,7 @@ import {
   cx,
   omitObject,
 } from "@yamada-ui/utils"
+import { useCallback } from "react"
 import { useModal } from "./modal"
 import type {
   ModalProps,
@@ -43,6 +44,12 @@ type DrawerOptions = {
    * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
    */
   isFullHeight?: boolean
+  /**
+   * If `true` then the drawer will close on drag.
+   *
+   * @default false
+   */
+  closeOnDrag?: boolean
 }
 
 export type DrawerProps = Omit<
@@ -50,9 +57,7 @@ export type DrawerProps = Omit<
   "scrollBehavior" | "animation" | "outside" | "placement" | keyof ThemeProps
 > &
   ThemeProps<"Drawer"> &
-  DrawerOptions & {
-    closeOnDrag?: boolean
-  }
+  DrawerOptions
 
 type DrawerContext = Record<string, CSSUIObject>
 
@@ -102,6 +107,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       validChildren,
       DrawerOverlay,
     )
+
     return (
       <DrawerProvider value={styles}>
         <Modal
@@ -173,7 +179,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       ...styles.container,
     }
 
-    const getDragDirectionRestriction = () => {
+    const getDragDirectionRestriction = useCallback(() => {
       switch (placement) {
         case "top":
           return { bottom: 0 }
@@ -184,33 +190,34 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
         case "right":
           return { left: 0 }
       }
-    }
+    }, [placement])
 
-    const getDragDirection = () => {
+    const getDragDirection = useCallback(() => {
       switch (placement) {
         case "top":
-          return "y"
         case "bottom":
           return "y"
         case "left":
-          return "x"
         case "right":
           return "x"
       }
-    }
+    }, [placement])
 
-    const isCloseByDragInfo = (info: PanEventInfo) => {
-      switch (placement) {
-        case "top":
-          return info.velocity.y <= -100 || info.offset.y <= -80
-        case "bottom":
-          return info.velocity.y >= 100 || info.offset.y >= 80
-        case "left":
-          return info.velocity.x <= -100 || info.offset.x <= -80
-        case "right":
-          return info.velocity.x >= 100 || info.offset.x >= 80
-      }
-    }
+    const isCloseByDragInfo = useCallback(
+      (info: PanEventInfo) => {
+        switch (placement) {
+          case "top":
+            return info.velocity.y <= -100 || info.offset.y <= -80
+          case "bottom":
+            return info.velocity.y >= 100 || info.offset.y >= 80
+          case "left":
+            return info.velocity.x <= -100 || info.offset.x <= -80
+          case "right":
+            return info.velocity.x >= 100 || info.offset.x >= 80
+        }
+      },
+      [placement],
+    )
 
     return (
       <Slide

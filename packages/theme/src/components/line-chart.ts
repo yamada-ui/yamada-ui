@@ -80,7 +80,7 @@ export const LineChart: ComponentMultiStyle = {
   },
 
   variants: {
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    subtle: () => ({
       grid: {
         stroke: ["gray.400", "gray.600"],
       },
@@ -99,7 +99,7 @@ export const LineChart: ComponentMultiStyle = {
         },
       },
     }),
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
+    solid: () => ({
       grid: {
         stroke: ["black", "white"],
       },

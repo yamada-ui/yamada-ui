@@ -28,8 +28,8 @@ export const PieChart: ComponentMultiStyle = {
   },
 
   variants: {
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({}),
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({}),
+    // subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({}),
+    // solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({}),
   },
 
   sizes: {

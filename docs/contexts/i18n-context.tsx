@@ -28,12 +28,12 @@ const contentData = { ja: CONTENT_JA, en: CONTENT_EN }
 
 type I18nContext = {
   locale: Locale
-  t: (path: Path<UIData>) => string
+  t: (path: Path<UIData> | StringLiteral) => string
   tc: (
-    path: Path<UIData>,
+    path: Path<UIData> | StringLiteral,
     callback?: (str: string, index: number) => JSX.Element,
   ) => string | JSX.Element[]
-  changeLocale: (locale: Locale & StringLiteral) => void
+  changeLocale: (locale: Locale | StringLiteral) => void
   contents: Dict[]
 }
 
@@ -53,20 +53,21 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const contents = useMemo(() => contentData[locale], [locale])
 
   const changeLocale = useCallback(
-    (locale: Locale & StringLiteral) => {
+    (locale: Locale | StringLiteral) => {
       push(asPath, asPath, { locale })
     },
     [push, asPath],
   )
 
   const t = useCallback(
-    (path: Path<UIData>) => get<string>(uiData[locale], path, ""),
+    (path: Path<UIData> | StringLiteral) =>
+      get<string>(uiData[locale], path, ""),
     [locale],
   )
 
   const tc = useCallback(
     (
-      path: Path<UIData>,
+      path: Path<UIData> | StringLiteral,
       callback?: (str: string, index: number) => JSX.Element,
     ) => {
       const strOrArray = get<string | string[]>(uiData[locale], path, "")

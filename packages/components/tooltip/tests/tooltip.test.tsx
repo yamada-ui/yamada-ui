@@ -2,7 +2,7 @@ import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { Tooltip } from "../src/tooltip"
 
 describe("<Tooltip/>", () => {
-  it("should pass a11y test", async () => {
+  test("should pass a11y test", async () => {
     await a11y(
       <Tooltip label="Tooltip hover">
         <span>Hover</span>
@@ -10,7 +10,7 @@ describe("<Tooltip/>", () => {
     )
   })
 
-  it("should render correctly", () => {
+  test("should render correctly", () => {
     render(
       <Tooltip label="Tooltip hover">
         <span>Hover</span>
@@ -20,7 +20,7 @@ describe("<Tooltip/>", () => {
     expect(screen.getByText("Hover")).toBeInTheDocument()
   })
 
-  it("should render label text when hover", async () => {
+  test("should render label text when hover", async () => {
     render(
       <Tooltip label="Tooltip hover">
         <span>Hover</span>
@@ -34,7 +34,7 @@ describe("<Tooltip/>", () => {
     })
   })
 
-  it("should not render label text when pointer leave", async () => {
+  test("should not render label text when pointer leave", async () => {
     render(
       <Tooltip label="Tooltip hover">
         <span>Hover</span>
@@ -54,7 +54,7 @@ describe("<Tooltip/>", () => {
     })
   })
 
-  it("should always display", () => {
+  test("should always display", () => {
     render(
       <Tooltip label="Tooltip hover" isOpen>
         <span>Hover</span>
@@ -64,7 +64,7 @@ describe("<Tooltip/>", () => {
     expect(screen.getByText("Tooltip hover")).toBeInTheDocument()
   })
 
-  it("should disable even if hover", async () => {
+  test("should disable even if hover", async () => {
     render(
       <Tooltip label="Tooltip hover" isDisabled>
         <span>Hover</span>

@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, act, render, screen } from "@yamada-ui/test"
+import { a11y, act, render } from "@yamada-ui/test"
 import {
   Popover,
   PopoverAnchor,
@@ -44,10 +44,10 @@ describe("<Popover />", () => {
       await user.click(triggerButton)
     })
 
-    expect(await findByLabelText("Close")).toBeVisible()
-    expect(await findByText("Popover Header")).toBeVisible()
-    expect(await findByText("Popover Body")).toBeVisible()
-    expect(await findByText("Popover Footer")).toBeVisible()
+    await expect(findByLabelText("Close")).resolves.toBeVisible()
+    await expect(findByText("Popover Header")).resolves.toBeVisible()
+    await expect(findByText("Popover Body")).resolves.toBeVisible()
+    await expect(findByText("Popover Footer")).resolves.toBeVisible()
   })
 
   test("should render correctly with anchor text", async () => {
@@ -81,11 +81,11 @@ describe("<Popover />", () => {
       await user.click(triggerButton)
     })
 
-    expect(await findByText("Popover Header")).toBeVisible()
-    expect(await findByText("anchor text")).toBeVisible()
-    expect(await findByLabelText("Close")).toBeVisible()
-    expect(await findByText("Popover Body")).toBeVisible()
-    expect(await findByText("Popover Footer")).toBeVisible()
+    await expect(findByText("Popover Header")).resolves.toBeVisible()
+    await expect(findByText("anchor text")).resolves.toBeVisible()
+    await expect(findByLabelText("Close")).resolves.toBeVisible()
+    await expect(findByText("Popover Body")).resolves.toBeVisible()
+    await expect(findByText("Popover Footer")).resolves.toBeVisible()
   })
 
   test("should hover props work", async () => {
@@ -97,10 +97,10 @@ describe("<Popover />", () => {
       await user.tab()
     })
 
-    expect(await findByText("Popover Header")).toBeVisible()
-    expect(await findByLabelText("Close")).toBeVisible()
-    expect(await findByText("Popover Body")).toBeVisible()
-    expect(await findByText("Popover Footer")).toBeVisible()
+    await expect(findByText("Popover Header")).resolves.toBeVisible()
+    await expect(findByLabelText("Close")).resolves.toBeVisible()
+    await expect(findByText("Popover Body")).resolves.toBeVisible()
+    await expect(findByText("Popover Footer")).resolves.toBeVisible()
   })
 
   test("can popover control", async () => {
@@ -135,16 +135,16 @@ describe("<Popover />", () => {
     })
 
     const closeButton = await findByLabelText("Close")
-    expect(await findByText("Popover Header")).toBeVisible()
+    await expect(findByText("Popover Header")).resolves.toBeVisible()
     expect(closeButton).toBeVisible()
-    expect(await findByText("Popover Body")).toBeVisible()
+    await expect(findByText("Popover Body")).resolves.toBeVisible()
 
     await act(async () => {
       await user.click(closeButton)
     })
 
-    expect(await findByText("Popover Header")).not.toBeVisible()
+    await expect(findByText("Popover Header")).resolves.not.toBeVisible()
     expect(closeButton).not.toBeVisible()
-    expect(await findByText("Popover Body")).not.toBeVisible()
+    await expect(findByText("Popover Body")).resolves.not.toBeVisible()
   })
 })

@@ -1,7 +1,7 @@
 import { shouldShowFallbackImage } from "../src/use-image"
 
 describe("useImage", () => {
-  it.each<{
+  test.each<{
     status: "loading" | "failed" | "pending" | "loaded"
     strategy: "onError" | "beforeLoadOrError"
     result: boolean

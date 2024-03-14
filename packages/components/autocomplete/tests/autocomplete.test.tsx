@@ -4,12 +4,11 @@ import {
   AutocompleteOption,
   AutocompleteOptionGroup,
 } from "@yamada-ui/react"
-import { render, screen, fireEvent, waitFor, act } from "@yamada-ui/test"
+import { act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 
 describe("<Autocomplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-autocomplete"
   const AUTOCOMPLETE_ITEM_ROLE = "autocomplete-item"
-  const AUTOCOMPLETE_NOT_FOUND_ERROR = "Autocomplete not found"
 
   describe("renders correctly", () => {
     const ITEMS: AutocompleteItem[] = [
@@ -41,9 +40,9 @@ describe("<Autocomplete />", () => {
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       await waitFor(() => {
         const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
         expect(optionElements).toHaveLength(3)
@@ -65,9 +64,9 @@ describe("<Autocomplete />", () => {
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       await waitFor(() => {
         const groupLabels = screen.getAllByText(/Group\d/)
         groupLabels.forEach((g) => {
@@ -79,7 +78,7 @@ describe("<Autocomplete />", () => {
       const { container } = render(<Autocomplete size={size} items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
       expect(autocomplete).toHaveStyle(`font-size: var(--ui-fontSizes-${size})`)
     })
@@ -124,9 +123,9 @@ describe("<Autocomplete />", () => {
       const { container } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       await waitFor(() => {
         const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
         fireEvent.click(optionElements[0])
@@ -137,9 +136,9 @@ describe("<Autocomplete />", () => {
       const { container } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
 
       const input = screen.getByRole("textbox")
       fireEvent.change(input, { target: { value: "option2" } })
@@ -152,9 +151,9 @@ describe("<Autocomplete />", () => {
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       expect(screen.getByText(NO_RESULTS)).toHaveStyle("position: absolute")
 
       fireEvent.change(screen.getByRole("textbox"), {
@@ -168,9 +167,9 @@ describe("<Autocomplete />", () => {
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       await waitFor(() => {
         const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
         fireEvent.click(optionElements[0])
@@ -189,9 +188,9 @@ describe("<Autocomplete />", () => {
       )
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       act(() => {
         screen.getByPlaceholderText("focus-other").focus()
       })
@@ -227,9 +226,9 @@ describe("<Autocomplete />", () => {
       const { container } = render(<Autocomplete allowCreate items={items} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+      expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete)
+      fireEvent.click(autocomplete!)
       await waitFor(() => {
         const input = screen.getByRole("textbox")
         fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
@@ -244,9 +243,9 @@ describe("<Autocomplete />", () => {
         )
 
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-        if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+        expect(autocomplete).toBeInTheDocument()
 
-        fireEvent.click(autocomplete)
+        fireEvent.click(autocomplete!)
         await waitFor(() => {
           const input = screen.getByRole("textbox")
           fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
@@ -261,9 +260,9 @@ describe("<Autocomplete />", () => {
         )
 
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-        if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+        expect(autocomplete).toBeInTheDocument()
 
-        fireEvent.click(autocomplete)
+        fireEvent.click(autocomplete!)
         await waitFor(() => {
           const input = screen.getByRole("textbox")
           fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
@@ -284,9 +283,9 @@ describe("<Autocomplete />", () => {
         )
 
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-        if (!autocomplete) throw new Error(AUTOCOMPLETE_NOT_FOUND_ERROR)
+        expect(autocomplete).toBeInTheDocument()
 
-        fireEvent.click(autocomplete)
+        fireEvent.click(autocomplete!)
         await waitFor(() => {
           const input = screen.getByRole("textbox")
           fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })

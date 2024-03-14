@@ -94,12 +94,20 @@ const analyzeCSSValue = (value: any) => {
 
 const tokenToCSSVar =
   (token: ThemeToken, value: any) => (theme: StyledTheme) => {
+    const match = isString(value)
+      ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
+      : null
+
+    const [, resolvedValue, fallbackValue] = match ?? []
+
+    if (resolvedValue) value = resolvedValue
+
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
       return theme.__cssMap[resolvedToken].ref
     } else {
-      return value
+      return fallbackValue ?? value
     }
   }
 
@@ -330,8 +338,8 @@ export type Transforms = keyof typeof transforms
 
 export const transforms = {
   var: (values: any[], theme: StyledTheme) =>
-    values.reduce<Dict>((prev, { name, token, value }) => {
-      const prefix = theme.__config.var?.prefix ?? "ui"
+    values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
+      const prefix = __prefix ?? theme.__config.var?.prefix ?? "ui"
 
       name = `--${prefix}-${name}`
 

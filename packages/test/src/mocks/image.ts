@@ -7,9 +7,7 @@ export const image = () => {
 
   //@ts-expect-error
   window.Image = class Image {
-    onload = () => {
-      console.log("called")
-    }
+    onload = () => {}
 
     onerror = () => {}
 

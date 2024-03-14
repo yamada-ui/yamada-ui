@@ -23,11 +23,11 @@ describe("<NativeTable />", () => {
     return (
       <TableContainer>
         <NativeTable {...rest}>
-          {withCaption && (
+          {withCaption ? (
             <TableCaption data-testid="TableCaption" placement="top">
               Table Caption
             </TableCaption>
-          )}
+          ) : null}
           <Thead>
             <Tr data-testid="Tr">
               <Th data-testid="Th">First Name</Th>

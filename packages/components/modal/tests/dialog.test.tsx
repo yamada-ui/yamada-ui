@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, render } from "@yamada-ui/test"
+import { a11y, render, waitFor, screen } from "@yamada-ui/test"
 import { Dialog, DialogHeader, DialogFooter, DialogBody } from "../src"
 
 describe("<Dialog />", () => {
@@ -80,10 +80,14 @@ describe("<Dialog />", () => {
 
     await user.click(openDialogButton)
 
-    expect(await findByTestId("Dialog")).toBeInTheDocument()
-    expect(await findByTestId("DialogHeader")).toHaveTextContent("header")
-    expect(await findByTestId("DialogBody")).toHaveTextContent("body")
-    expect(await findByTestId("DialogFooter")).toHaveTextContent("footer")
+    await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
+    await expect(findByTestId("DialogHeader")).resolves.toHaveTextContent(
+      "header",
+    )
+    await expect(findByTestId("DialogBody")).resolves.toHaveTextContent("body")
+    await expect(findByTestId("DialogFooter")).resolves.toHaveTextContent(
+      "footer",
+    )
   })
 
   test("Dialog renders correctly when close", async () => {
@@ -92,21 +96,26 @@ describe("<Dialog />", () => {
     const openDialogButton = await findByTestId("OpenDialog")
 
     await user.click(openDialogButton)
-    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const cancelDialogButton = getByText("dialog-cancel")
     await user.click(cancelDialogButton)
-    expect(await findByTestId("Dialog")).toBeNull
-
+    waitFor(() => {
+      expect(screen.findByTestId("Dialog")).toBeNull()
+    })
     await user.click(openDialogButton)
-    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const otherDialogButton = getByText("dialog-other")
     await user.click(otherDialogButton)
-    expect(await findByTestId("Dialog")).toBeNull
+    waitFor(() => {
+      expect(screen.findByTestId("Dialog")).toBeNull()
+    })
 
     await user.click(openDialogButton)
-    expect(await findByTestId("Dialog")).toBeInTheDocument()
+    await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const successDialogButton = getByText("dialog-success")
     await user.click(successDialogButton)
-    expect(await findByTestId("Dialog")).toBeNull
+    waitFor(() => {
+      expect(screen.findByTestId("Dialog")).toBeNull()
+    })
   })
 })

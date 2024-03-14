@@ -47,9 +47,13 @@ describe("<Drawer />", () => {
 
     await user.click(openDrawerButton)
 
-    expect(await findByTestId("Drawer")).toBeInTheDocument()
-    expect(await findByTestId("DrawerHeader")).toHaveTextContent("header")
-    expect(await findByTestId("DrawerBody")).toHaveTextContent("body")
-    expect(await findByTestId("DrawerFooter")).toHaveTextContent("footer")
+    await expect(findByTestId("Drawer")).resolves.toBeInTheDocument()
+    await expect(findByTestId("DrawerHeader")).resolves.toHaveTextContent(
+      "header",
+    )
+    await expect(findByTestId("DrawerBody")).resolves.toHaveTextContent("body")
+    await expect(findByTestId("DrawerFooter")).resolves.toHaveTextContent(
+      "footer",
+    )
   })
 })

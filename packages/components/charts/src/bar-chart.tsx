@@ -31,7 +31,7 @@ import type {
 import { Legend } from "./legend"
 import { ChartTooltip } from "./tooltip"
 import { BarChartProvider, useBarChart } from "./use-bar-chart"
-import { ChartProvider, useChart } from "./use-chart"
+import { ChartProvider } from "./use-chart"
 
 type BarChartOptions = {
   /**
@@ -180,7 +180,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     ...computedProps
   } = omitThemeProps(mergedProps)
 
-  const {} = useChart(computedProps)
   const {
     getBarProps,
     getBarChartProps,

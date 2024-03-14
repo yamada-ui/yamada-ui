@@ -8,14 +8,6 @@ export const [ChartProvider, useChartContext] = createContext<ChartContext>({
   errorMessage: `useChartContext returned is 'undefined'. Seems you forgot to wrap the components in "<LineChart />" or "<BarChart />" etc.`,
 })
 
-export type UseChartProps = {}
-
-export const useChart = ({}: UseChartProps = {}) => {
-  return {}
-}
-
-export type UseChartReturn = ReturnType<typeof useChart>
-
 export type UseLegendProps = {}
 
 export const useLegend = ({}: UseLegendProps = {}) => {

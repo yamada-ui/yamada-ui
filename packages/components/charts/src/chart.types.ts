@@ -6,6 +6,8 @@ import type {
   AreaProps as ReChartsAreaProps,
   BarChart as ReChartsBarChart,
   BarProps as ReChartsBarProps,
+  PieChart as ReChartsPieChart,
+  PieProps as RechartsPieProps,
   ReferenceLineProps,
   DotProps,
   XAxisProps,
@@ -15,6 +17,7 @@ import type {
   TooltipProps,
   ResponsiveContainerProps,
   CellProps,
+  PieProps,
 } from "recharts"
 
 export type ChartPropGetter<
@@ -76,6 +79,16 @@ export type TooltipUIProps = Merge<
   Omit<TooltipProps<any, any>, "ref">
 >
 export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
+
+export type PieChartUIProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof ReChartsPieChart>
+>
+export type PieUIProps = Merge<CSSUIProps, Omit<PieProps, "children">>
+export type PieChartProps = Merge<
+  Merge<CSSUIProps, RechartsPieProps>,
+  { color?: CSSUIProps["color"] }
+>
 
 export const areaChartProperties: (keyof ComponentPropsWithoutRef<
   typeof ReChartsAreaChart
@@ -354,4 +367,40 @@ export const dotProperties: (keyof DotProps)[] = [
   "onMouseLeave",
 ]
 
-export const cellProperties: (keyof CellProps)[] = ["fill", "stroke"]
+export const pieProperties: (keyof Omit<PieProps, "dataKey">)[] = [
+  "cx",
+  "cy",
+  "innerRadius",
+  "outerRadius",
+  "startAngle",
+  "endAngle",
+  "minAngle",
+  "paddingAngle",
+  "nameKey",
+  "legendType",
+  "label",
+  "labelLine",
+  "data",
+  "activeIndex",
+  "activeShape",
+  "inactiveShape",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]
+
+export const cellProperties: (keyof Omit<
+  CellProps,
+  "children" | "string" | "dangerouslySetInnerHTML" | "style"
+>)[] = ["fill", "stroke", "strokeWidth"]

@@ -5,11 +5,8 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-// import {Tooltip as ChartTooltip} from "@yamada-ui/tooltip"
-// import { useToken } from "@yamada-ui/use-token"
-// import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
-import type { PieLabel, PieProps } from "recharts"
+import { useMemo } from "react"
 import {
   Pie,
   Tooltip,
@@ -17,13 +14,17 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts"
-import { ChartProvider, useChart } from "./use-chart"
-import { PieChartProvider, usePieChart } from "./use-pie-chart"
+import type { PieChartUIProps, PieUIProps } from "./chart.types"
+import { ChartTooltip } from "./tooltip"
+import { ChartProvider } from "./use-chart"
+import { useChartCell } from "./use-chart-cell"
+import type { UseChartContainerProps } from "./use-chart-container"
+import { useChartContainer } from "./use-chart-container"
+import type { UseChartTooltipProps } from "./use-chart-tooltip"
+import { useChartTooltip } from "./use-chart-tooltip"
+import { usePieChart } from "./use-pie-chart"
 
-// TODO: レスポンシブのheightをどうするか　固定値だとspの時に困る
-// TODO: labelの位置を変える　外と内
-// TODO: tooltipの表示を変える
-export interface PieChartCell {
+export type PieChartCell = {
   name: string
   value: number
   color: CSSUIProps["color"]
@@ -32,33 +33,41 @@ export interface PieChartCell {
 /**
  * @see https://github.com/mantinedev/mantine/blob/master/packages/%40mantine/charts/src/PieChart/PieChart.story.tsx
  */
-type PieChartOptions = {
-  /** Data used to render chart */
+export type PieChartOptions = {
+  /**
+   * Chart data.
+   */
   data: PieChartCell[]
 
-  /** Determines whether the tooltip should be displayed when one of the section is hovered, `true` by default */
+  /**
+   * Determines whether the tooltip should be displayed when one of the section is hovered, `true` by default
+   *
+   * @default false
+   */
   withTooltip?: boolean
 
   /**
-   * Tooltip animation duration in ms, `0` by default
-   *
-   * @default 0
+   * Props passed down to recharts `PieChart` component
    */
-  tooltipAnimationDuration?: number
+  pieChartProps?: PieChartUIProps
 
-  /** Props passed down to recharts `PieChart` component */
-  pieChartProps?: React.ComponentPropsWithoutRef<typeof ReChartsPieChart>
+  /**
+   * Props passed down to recharts `Pie` component
+   */
+  pieProps?: PieUIProps
 
-  /** Props passed down to recharts `Pie` component */
-  pieProps?: Omit<PieProps, "ref">
-
-  /** Controls chart width and height, height is increased by 40 if `withLabels` prop is set. Cannot be less than `thickness`. `80` by default */
-  scale?: number
-
-  /** Determines whether each segment should have associated label, `false` by default */
+  /**
+   * Determines whether each segment should have associated label, `false` by default
+   *
+   * @default false
+   */
   withLabels?: boolean
 
-  /** Determines whether segments labels should have lines that connect the segment with the label, `true` by default */
+  /**
+   * Determines whether segments labels should have lines that connect the segment with the label, `true` by default
+   *
+   * @default true
+   */
   withLabelsLine?: boolean
 
   /**
@@ -89,25 +98,33 @@ type PieChartOptions = {
    */
   endAngle?: number
 
-  /** Determines which data is displayed in the tooltip. `'all'` – display all values, `'segment'` – display only hovered segment. `'all'` by default. */
-  tooltipDataSource?: "segment" | "all"
+  animationDuration?: number
 
-  /** Additional elements rendered inside `PieChart` component */
-  children?: React.ReactNode
+  /**
+   * Determines which data is displayed in the tooltip. `'all'` – display all values, `'segment'` – display only hovered segment. `'all'` by default.
+   *
+   * @default
+   */
+  tooltipDataSource?: "segment" | "all"
 
   /**
    * Controls labels position relative to the segment, `'outside'` by default
+   *
    * @default 'inside'
    */
   labelsPosition?: "inside" | "outside"
 
-  /** A function to format values inside the tooltip */
+  /**
+   * A function to format values inside the tooltip
+   */
   valueFormatter?: (value: number) => string
 }
 
 export type PieChartProps = Omit<HTMLUIProps<"div">, "scale"> &
   ThemeProps<"PieChart"> &
-  PieChartOptions
+  PieChartOptions &
+  UseChartContainerProps &
+  UseChartTooltipProps
 
 const defaultProps: Partial<PieChartProps> = {
   withTooltip: false,
@@ -115,7 +132,6 @@ const defaultProps: Partial<PieChartProps> = {
   withLabels: false,
   paddingAngle: 0,
   strokeWidth: 1,
-  scale: 200,
   startAngle: 0,
   endAngle: 360,
   tooltipDataSource: "all",
@@ -139,139 +155,81 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     maxHeight,
     data,
     strokeWidth,
-    withLabels,
     withTooltip,
     className,
     pieChartProps,
-    pieProps,
+    tooltipProps,
     tooltipAnimationDuration,
-    startAngle,
-    endAngle,
-    children,
-    labelsPosition,
-    withLabelsLine,
+    containerProps,
     ...computedProps
   } = omitThemeProps({ ...defaultProps, ...mergedProps })
 
-  const {} = useChart(computedProps)
-  const { getCellProps, getCSSVariables } = usePieChart({
+  const { getContainerProps } = useChartContainer({ containerProps })
+
+  const { getPieProps, cssVariables } = usePieChart({
     data,
     styles,
     ...computedProps,
   })
 
-  const insideLabelEl: PieLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    value,
-  }) => {
-    const RADIAN = Math.PI / 180
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
-    const x = cx + radius * Math.cos(-midAngle * RADIAN)
-    const y = cy + radius * Math.sin(-midAngle * RADIAN)
-
-    return (
-      <ui.text
-        x={x}
-        y={y}
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-        __css={{ color: black, fontSize: 10 }}
-        // className={classes.label}
-      >
-        {value}
-      </ui.text>
-    )
-  }
-
-  const black = "#ffffff"
-
-  const cellEl = data.map((item, index) => {
-    const { fill, stroke, id, ...rest } = getCellProps({ item, index }, ref)
-
-    rest.onCopy
-    return (
-      <Cell
-        id={id}
-        key={`pie-${index}`}
-        fill={fill}
-        stroke={stroke}
-        strokeWidth={strokeWidth}
-        {...rest}
-      />
-    )
+  const { getCellProps } = useChartCell({
+    data,
+    styles,
   })
+
+  const { getTooltipProps } = useChartTooltip({
+    tooltipProps,
+    tooltipAnimationDuration,
+  })
+
+  const cellEl = useMemo(
+    () =>
+      data.map((item, index) => (
+        <Cell
+          key={`cell-${index}`}
+          strokeWidth={strokeWidth}
+          {...getCellProps({ item, index }, ref)}
+        />
+      )),
+    [data, getCellProps, ref, strokeWidth],
+  )
 
   return (
     <ChartProvider value={{ styles }}>
-      <PieChartProvider value={{}}>
-        <ui.div
-          ref={ref}
-          className={cx("ui-pie-chart", className)}
-          var={getCSSVariables()}
-          {...{
-            w,
-            width,
-            minW,
-            minWidth,
-            maxW,
-            maxWidth,
-            h,
-            height,
-            minH,
-            minHeight,
-            maxH,
-            maxHeight,
-          }}
-          __css={{ ...styles.container }}
-        >
-          <ResponsiveContainer>
-            <ReChartsPieChart {...pieChartProps}>
-              <Pie
-                data={data}
-                innerRadius={0}
-                outerRadius="100%"
-                dataKey="value"
-                label={
-                  withLabels
-                    ? labelsPosition === "inside"
-                      ? insideLabelEl
-                      : { fill: black, fontSize: 14 }
-                    : false
-                }
-                labelLine={
-                  withLabelsLine && labelsPosition === "outside"
-                    ? {
-                        stroke: black,
-                        strokeWidth: 1,
-                      }
-                    : false
-                }
-                isAnimationActive={false}
-                paddingAngle={0}
-                startAngle={startAngle}
-                endAngle={endAngle}
-                {...pieProps}
-              >
-                {cellEl}
-              </Pie>
-
-              {withTooltip ? (
-                <Tooltip
-                  animationDuration={tooltipAnimationDuration}
-                  isAnimationActive={false}
-                  // content={({payload}) => {
-                  // return <ChartTooltip label='test' withPortal><p>test</p></ChartTooltip>}}
-                />
-              ) : null}
-              {children}
-            </ReChartsPieChart>
-          </ResponsiveContainer>
-        </ui.div>
-      </PieChartProvider>
+      <ui.div
+        ref={ref}
+        className={cx("ui-pie-chart", className)}
+        var={cssVariables}
+        {...{
+          w,
+          width,
+          minW,
+          minWidth,
+          maxW,
+          maxWidth,
+          h,
+          height,
+          minH,
+          minHeight,
+          maxH,
+          maxHeight,
+        }}
+        __css={{ ...styles.container }}
+      >
+        <ResponsiveContainer {...getContainerProps({}, ref)}>
+          <ReChartsPieChart {...pieChartProps}>
+            <Pie {...getPieProps({}, ref)}>{cellEl}</Pie>
+            {withTooltip ? (
+              <Tooltip
+                content={({ label, payload }) => (
+                  <ChartTooltip ref={ref} label={label} payload={payload} />
+                )}
+                {...getTooltipProps({}, ref)}
+              />
+            ) : null}
+          </ReChartsPieChart>
+        </ResponsiveContainer>
+      </ui.div>
     </ChartProvider>
   )
 })

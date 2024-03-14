@@ -29,6 +29,9 @@
     "back-to-home": "Back to Home"
   },
   "component": {
+    "tree": {
+      "yamada-colors": "Colors generator"
+    },
     "feedback": {
       "ad-banner": {
         "message": "Leave Yamada UI a star",

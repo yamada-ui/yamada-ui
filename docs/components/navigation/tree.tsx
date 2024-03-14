@@ -1,4 +1,4 @@
-import type { ListProps } from "@yamada-ui/react"
+import type { IconProps, ListProps } from "@yamada-ui/react"
 import {
   Center,
   ChevronIcon,
@@ -15,7 +15,19 @@ import Link from "next/link"
 import type { FC } from "react"
 import { memo, useEffect } from "react"
 import { Label } from "components/data-display"
+import {
+  Brush,
+  ColorPalette,
+  Compass,
+  Components,
+  Figma,
+  Function,
+  History,
+  World,
+} from "components/media-and-icons"
+import { CONSTANT } from "constant"
 import type { DocumentTypeTree } from "contentlayer/generated"
+import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
 
 export type TreeProps = ListProps
@@ -23,11 +35,22 @@ export type TreeProps = ListProps
 export const Tree = memo(
   forwardRef<TreeProps, "div">(({ ...rest }, ref) => {
     const { documentTree } = usePage()
+    const { t } = useI18n()
 
     return (
       <List ref={ref} gap="sm" fontSize="sm" {...rest}>
         {documentTree.map((document) => (
           <RecursiveListItem key={document.slug} {...document} />
+        ))}
+
+        {CONSTANT.MENU.map(({ icon, name, href }) => (
+          <ListItemLink
+            key={name}
+            menu_icon={icon}
+            slug={href}
+            title={t(`component.tree.${name}`)}
+            isExternal
+          />
         ))}
       </List>
     )
@@ -37,7 +60,7 @@ export const Tree = memo(
 type RecursiveListItemProps = DocumentTypeTree & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
-  ({ title, slug, label, children, isNested, is_expanded }) => {
+  ({ menu_icon, title, slug, label, children, isNested, is_expanded }) => {
     const [isOpen, { on, toggle }] = useBoolean(is_expanded)
 
     useEffect(() => {
@@ -52,6 +75,7 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
       <ListItem>
         <ListItemLink
           {...{
+            menu_icon,
             title,
             label,
             slug,
@@ -82,16 +106,18 @@ RecursiveListItem.displayName = "RecursiveListItem"
 
 type ListItemLinkProps = Pick<
   RecursiveListItemProps,
-  "title" | "label" | "slug" | "isNested"
+  "title" | "label" | "slug" | "isNested" | "menu_icon"
 > & {
   isSelected?: boolean
   isOpen?: boolean
   withToggleButton?: boolean
   onToggle?: () => void
+  isExternal?: boolean
 }
 
 const ListItemLink: FC<ListItemLinkProps> = memo(
   ({
+    menu_icon,
     title,
     label,
     slug,
@@ -100,6 +126,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
     isSelected,
     withToggleButton,
     onToggle,
+    isExternal,
   }) => {
     return (
       <HStack
@@ -146,6 +173,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           position="static"
           zIndex="yamcha"
           display="inline-flex"
+          alignItems="center"
           pl="3"
           pr={!withToggleButton ? "3" : undefined}
           py="sm"
@@ -154,7 +182,11 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           _focus={{ outline: "none" }}
           _focusVisible={{ boxShadow: "inline" }}
           onClick={!isOpen ? onToggle : undefined}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener" : undefined}
         >
+          <ListItemIcon icon={menu_icon} me="sm" />
+
           <Text as="span" lineClamp={1}>
             {title}
           </Text>
@@ -189,3 +221,38 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
 )
 
 ListItemLink.displayName = "ListItemLink"
+
+type ListItemIconProps = { icon: string } & IconProps
+
+const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
+  switch (icon) {
+    case "compass":
+      return <Compass {...rest} />
+
+    case "color-palette":
+      return <ColorPalette {...rest} />
+
+    case "components":
+      return <Components {...rest} />
+
+    case "world":
+      return <World {...rest} />
+
+    case "function":
+      return <Function {...rest} />
+
+    case "figma":
+      return <Figma {...rest} />
+
+    case "history":
+      return <History {...rest} />
+
+    case "brush":
+      return <Brush {...rest} />
+
+    default:
+      return <></>
+  }
+})
+
+ListItemIcon.displayName = "ListItemIcon"

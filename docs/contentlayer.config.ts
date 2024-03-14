@@ -221,6 +221,7 @@ const fields: DocumentTypeDef["fields"] = {
   package_name: { type: "string" },
   release_url: { type: "string" },
   release_date: { type: "string" },
+  menu_icon: { type: "string" },
 }
 
 const computedFields: DocumentTypeDef["computedFields"] = {

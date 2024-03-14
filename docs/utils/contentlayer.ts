@@ -75,27 +75,40 @@ export const getDocumentTree =
         )
       })
       .sort((a, b) => a.order - b.order)
-      .map(({ is_expanded, title, menu, slug, label, description, data }) => {
-        title = menu ?? title
-        label ??= null
-
-        is_expanded =
-          is_expanded ||
-          data.paths.every(
-            (path: string, index: number) => path === paths[index],
-          )
-
-        const children = getDocumentTree(documents, data.paths)(paths)
-
-        return {
+      .map(
+        ({
+          menu_icon,
+          is_expanded,
           title,
+          menu,
           slug,
           label,
           description,
-          is_expanded,
-          children,
-        }
-      })
+          data,
+        }) => {
+          title = menu ?? title
+          label ??= null
+          menu_icon ??= null
+
+          is_expanded =
+            is_expanded ||
+            data.paths.every(
+              (path: string, index: number) => path === paths[index],
+            )
+
+          const children = getDocumentTree(documents, data.paths)(paths)
+
+          return {
+            menu_icon,
+            title,
+            slug,
+            label,
+            description,
+            is_expanded,
+            children,
+          }
+        },
+      )
   }
 
 export const getDocumentPagination = (

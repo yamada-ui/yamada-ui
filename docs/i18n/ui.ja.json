@@ -29,6 +29,9 @@
     "back-to-home": "ホームにもどる"
   },
   "component": {
+    "tree": {
+      "yamada-colors": "カラージェネレーター"
+    },
     "feedback": {
       "ad-banner": {
         "message": "Yamada UIにスターをあげる",

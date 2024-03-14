@@ -19,7 +19,7 @@ declare module "contentlayer/generated" {
 
   type DocumentTypeTree = Pick<
     DocumentTypes,
-    "title" | "slug" | "label" | "description" | "is_expanded"
+    "title" | "slug" | "label" | "description" | "is_expanded" | "menu_icon"
   > & { children: DocumentTypeTree[] }
 
   type DocumentTypesWithChildren = DocumentTypes & {

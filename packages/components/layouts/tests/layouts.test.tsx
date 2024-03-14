@@ -23,14 +23,6 @@ describe("<AspectRatio />", () => {
       </AspectRatio>,
     )
   })
-
-  test("renders aspect ratio correctly", () => {
-    render(
-      <AspectRatio>
-        <img src="https://image.xyz/source" alt="placeholder" />
-      </AspectRatio>,
-    )
-  })
 })
 
 describe("<Box />", () => {
@@ -119,8 +111,8 @@ describe("<Divider />", () => {
 })
 
 describe("<SimpleGrid />", () => {
-  test("renders SimpleGrid correctly", () => {
-    render(<SimpleGrid>GridSimple</SimpleGrid>)
+  test("passes a11y test", async () => {
+    await a11y(<SimpleGrid>GridSimple</SimpleGrid>)
   })
 
   test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {
@@ -299,8 +291,8 @@ describe("<Grid />", () => {
 })
 
 describe("<GridItem />", () => {
-  test("renders grid correctly", () => {
-    render(<GridItem>GridItem</GridItem>)
+  test("passes a11y test", async () => {
+    await a11y(<GridItem>GridItem</GridItem>)
   })
 
   test("renders all the allowed shorthand style props", () => {

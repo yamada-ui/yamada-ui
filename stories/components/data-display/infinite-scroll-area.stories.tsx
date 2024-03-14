@@ -188,7 +188,7 @@ export const withInitialLoad: Story = () => {
     <InfiniteScrollArea
       initialLoad
       onLoad={async ({ index, finish }) => {
-        console.trace("load", index)
+        console.log("load", index)
 
         await wait(1000)
 

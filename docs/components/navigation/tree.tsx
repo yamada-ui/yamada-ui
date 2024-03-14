@@ -185,7 +185,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener" : undefined}
         >
-          <ListItemIcon icon={menu_icon} me="sm" />
+          <ListItemIcon icon={menu_icon} color="muted" me="sm" />
 
           <Text as="span" lineClamp={1}>
             {title}

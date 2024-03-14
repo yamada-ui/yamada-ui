@@ -136,6 +136,7 @@ const getMdxFileName = (fileName: string, locale: Locale) => {
 
 const writeMdxIndexFiles = async (data: Data, content: Content) => {
   data.order = 7
+  data.menu_icon = "history"
 
   await Promise.all(
     LOCALES.map(async (locale) => {

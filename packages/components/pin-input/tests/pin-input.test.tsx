@@ -10,7 +10,7 @@ describe.skip("<PinInput />", () => {
   test("renders the correct number of input elements", () => {
     render(<PinInput items={5} />)
     const inputs = screen.getAllByRole("textbox")
-    expect(inputs.length).toBe(5)
+    expect(inputs).toHaveLength(5)
   })
 
   test("id prop applies correctly", () => {
@@ -88,7 +88,7 @@ describe.skip("<PinInput />", () => {
       `input[placeholder="${customPlaceholder}"]`,
     )
 
-    expect(inputs.length).toBe(4)
+    expect(inputs).toHaveLength(4)
   })
 
   test('sets autoComplete to "one-time-code" when otp is true', () => {
@@ -120,7 +120,7 @@ describe.skip("<PinInput />", () => {
       expect(input).toHaveValue(defaultValue[index])
     })
 
-    expect(inputs.length).toBe(defaultValue.length)
+    expect(inputs).toHaveLength(defaultValue.length)
   })
 
   test("correct behavior on input focus", async () => {
@@ -168,7 +168,7 @@ describe.skip("<PinInput />", () => {
     })
 
     await waitFor(() => {
-      expect(document.activeElement).toEqual(inputs[2])
+      expect(document.activeElement).toStrictEqual(inputs[2])
 
       expect(inputs[2]).toHaveValue("")
     })
@@ -188,7 +188,7 @@ describe.skip("<PinInput />", () => {
     })
 
     await waitFor(() => {
-      expect(document.activeElement).toEqual(lastInput)
+      expect(document.activeElement).toStrictEqual(lastInput)
     })
   })
 
@@ -206,7 +206,7 @@ describe.skip("<PinInput />", () => {
     })
 
     await waitFor(() => {
-      expect(document.activeElement).toEqual(thirdInput)
+      expect(document.activeElement).toStrictEqual(thirdInput)
 
       expect(thirdInput).toHaveValue("")
     })
@@ -223,7 +223,7 @@ describe.skip("<PinInput />", () => {
     const firstInput = inputs[0]
 
     await waitFor(() => {
-      expect(document.activeElement).toEqual(firstInput)
+      expect(document.activeElement).toStrictEqual(firstInput)
     })
   })
 
@@ -236,7 +236,7 @@ describe.skip("<PinInput />", () => {
     const firstInput = inputs[0]
 
     await waitFor(() => {
-      expect(document.activeElement).not.toEqual(firstInput)
+      expect(document.activeElement).not.toStrictEqual(firstInput)
     })
   })
 

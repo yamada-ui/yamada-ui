@@ -1,3 +1,4 @@
+import { vi } from "vitest"
 import "@testing-library/jest-dom/vitest"
 import * as matchers from "vitest-axe/matchers"
 
@@ -35,6 +36,6 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }))
 
-window.HTMLCanvasElement.prototype.getContext = vi
-  .fn()
-  .mockImplementation(() => ({}))
+vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(
+  () => null,
+)

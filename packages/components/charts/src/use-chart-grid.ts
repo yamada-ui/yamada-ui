@@ -50,7 +50,7 @@ export const useChartGrid = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, propClassName),
+      className: cx("ui-chart__grid", className, propClassName),
       strokeDasharray: strokeDasharray,
       vertical: gridAxis === "y" || gridAxis === "xy",
       horizontal: gridAxis === "x" || gridAxis === "xy",

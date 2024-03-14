@@ -35,7 +35,7 @@ export const useChart = ({ containerProps = {} }: UseChartProps) => {
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      containerClassName: cx(className as string, propClassName),
+      className: cx("ui-chart__container", className as string, propClassName),
       ...props,
       ...reChartsProps,
     }),

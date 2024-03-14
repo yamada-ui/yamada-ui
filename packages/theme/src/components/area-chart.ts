@@ -45,7 +45,7 @@ export const AreaChart: ComponentMultiStyle = {
         bg: ["blackAlpha.50", "whiteAlpha.100"],
       },
     },
-    legendSwitch: {
+    legendSwatch: {
       boxSize: "3",
       rounded: "full",
     },

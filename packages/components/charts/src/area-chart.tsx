@@ -226,9 +226,13 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
             {withLegend ? (
               <ReChartsLegend
                 content={({ payload }) => (
-                  <Legend payload={payload} onHighlight={setHighlightedArea} />
+                  <Legend
+                    className="ui-area-chart__legend"
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                  />
                 )}
-                {...getLegendProps({ className: "ui-area-chart__legend" })}
+                {...getLegendProps()}
               />
             ) : null}
 
@@ -236,12 +240,13 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
               <Tooltip
                 content={({ label, payload }) => (
                   <ChartTooltip
+                    className="ui-area-chart__tooltip"
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
                   />
                 )}
-                {...getTooltipProps({ className: "ui-area-chart__tooltip" })}
+                {...getTooltipProps()}
               />
             ) : null}
 

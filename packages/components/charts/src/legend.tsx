@@ -1,5 +1,5 @@
 import { forwardRef, ui } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
+import { cx, type Dict } from "@yamada-ui/utils"
 import { useLegend } from "./use-chart"
 
 export type LegendProps = {
@@ -8,24 +8,33 @@ export type LegendProps = {
 }
 
 export const Legend = forwardRef<LegendProps, "div">(
-  ({ payload = [], onHighlight }, ref) => {
+  ({ className, payload = [], onHighlight }, ref) => {
     const { styles } = useLegend()
 
     const items = payload.map(({ dataKey, color }, index) => (
       <ui.div
+        className="ui-chart__legend-item"
         key={`legend-${index}`}
         onMouseEnter={() => onHighlight(dataKey)}
         onMouseLeave={() => onHighlight(null)}
         __css={styles.legendItem}
       >
-        <ui.div background={color} __css={styles.legendSwitch} />
+        <ui.div
+          className="ui-chart__legend-swatch"
+          background={color}
+          __css={styles.legendSwatch}
+        />
 
-        <ui.span>{dataKey}</ui.span>
+        <ui.span className="ui-chart__legend-label">{dataKey}</ui.span>
       </ui.div>
     ))
 
     return (
-      <ui.div ref={ref} __css={styles.legend}>
+      <ui.div
+        ref={ref}
+        className={cx("ui-chart__legend", className)}
+        __css={styles.legend}
+      >
         {items}
       </ui.div>
     )

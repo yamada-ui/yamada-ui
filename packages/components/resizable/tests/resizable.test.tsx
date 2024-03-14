@@ -1,14 +1,15 @@
-import { createRef } from "react"
+import { act } from "@testing-library/react"
 import { Center } from "@yamada-ui/react"
 import { a11y, render } from "@yamada-ui/test"
 import type { RenderReturn } from "@yamada-ui/test"
+import { createRef } from "react"
+import type { ResizableItemControl } from "../src"
 import {
   Resizable,
   ResizableItem,
-  ResizableItemControl,
   ResizableTrigger,
+  ResizableTriggerIcon,
 } from "../src"
-import { act } from "@testing-library/react"
 import { assert } from "./utils"
 
 describe.skip("<Resizable />", () => {
@@ -288,5 +289,16 @@ describe.skip("<Resizable />", () => {
 
   describe("Control", () => {
     // TODO: Add tests
+  })
+})
+
+describe("<Resizable />", () => {
+  test("applies styles `width` and `height` correctly", async () => {
+    const { getByTestId } = render(
+      <ResizableTriggerIcon data-testid="resizable" />,
+    )
+
+    expect(getByTestId("resizable")).toHaveStyle("width: 0.5rem")
+    expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
   })
 })

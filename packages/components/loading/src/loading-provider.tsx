@@ -359,7 +359,7 @@ const getOverlayStyle = (
   bottom: 0,
   left: 0,
   zIndex: 9999,
-  bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
+  bg: type === "fill" ? ["#fbfbfb", "#141414"] : "rgba(0, 0, 0, 0.48)",
   w: "100vw",
   h: "100dvh",
   p: "1rem",
@@ -425,7 +425,7 @@ const PageComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      bg: ["white", "black"],
+      bg: ["#fbfbfb", "#141414"],
       maxW: "24rem",
       p: "1rem",
       display: "flex",
@@ -478,7 +478,7 @@ const BackgroundComponent = memo(
       right: "1rem",
       bottom: "1rem",
       zIndex: 9999,
-      bg: ["white", "black"],
+      bg: ["#fbfbfb", "#141414"],
       maxW: "20rem",
       p: "0.5rem",
       display: "flex",

@@ -2,7 +2,7 @@ import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { Configs } from "./config"
 import { transforms } from "./config"
-import type { Token } from "./css"
+import type { CSSUIObject, Token } from "./css"
 import type { Theme } from "./theme.types"
 
 export const standardStyles: Configs = {
@@ -1161,6 +1161,7 @@ export const standardStyles: Configs = {
     properties: "--ui-backdrop-sepia",
     transform: transforms.function("sepia"),
   },
+  colorMode: { properties: "colorScheme" },
   lineClamp: {
     properties: "--ui-line-clamp",
     isSkip: true,
@@ -1189,7 +1190,6 @@ export const standardStyles: Configs = {
     transform: transforms.styles(),
   },
   var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
-  colorMode: { properties: "colorScheme" },
 }
 
 export const shorthandStyles: Configs = {
@@ -1292,9 +1292,22 @@ export const shorthandStyles: Configs = {
   roundedEnd: standardStyles.borderInlineEndRadius,
 }
 
-export const styles: Configs = { ...standardStyles, ...shorthandStyles }
+export const atRuleStyles: Configs = {
+  _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
+  _container: {
+    isProcessSkip: true,
+    isSkip: true,
+    transform: transforms.container,
+  },
+}
 
-export const processSkipProperties: string[] = ["var"]
+export const styles: Configs = {
+  ...standardStyles,
+  ...shorthandStyles,
+  ...atRuleStyles,
+}
+
+export const processSkipProperties: string[] = ["var", "_media", "_container"]
 
 export const styleProperties: any[] = Object.keys(styles)
 
@@ -5209,6 +5222,12 @@ export type StyleProps = {
    */
   backdropSepia?: Token<StringLiteral>
   /**
+   * The CSS `color-scheme` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+   */
+  colorMode?: Token<CSS.Property.ColorScheme>
+  /**
    * Used to visually truncate a text after a number of lines.
    */
   lineClamp?: Token<number>
@@ -5237,10 +5256,16 @@ export type StyleProps = {
   apply?: Token<StringLiteral>
   /**
    * Set CSS variables.
+   * @experimental
    *
    * @example
    * ```jsx
-   * <Box var={[{ name:"space", token: "spaces", value: "md" }] m="calc(var(--ui-space) * 2)">Box</Box>
+   * <Box
+   *   var={[{ name:"space", token: "spaces", value: "md" }]
+   *   m="calc(var(--ui-space) * 2)"
+   * >
+   *   Box
+   * </Box>
    * ```
    */
   var?: {
@@ -5250,9 +5275,103 @@ export type StyleProps = {
     value: Token<StringLiteral | number>
   }[]
   /**
-   * The CSS `color-scheme` property.
+   * The `@media` of CSS at-rule.
+   * @experimental
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+   * @example
+   * ```jsx
+   * <Box
+   *   _media={[{ maxW: "1200px", css: { color: "red" } }]
+   * >
+   *   Box
+   * </Box>
+   * ```
    */
-  colorMode?: Token<CSS.Property.ColorScheme>
+  _media?: {
+    type?: "all" | "print" | "screen" | "speech" | StringLiteral
+    query?: StringLiteral
+    w?: CSS.Property.Width | number | Theme["sizes"]
+    width?: CSS.Property.Width | number | Theme["sizes"]
+    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    h?: CSS.Property.Height | number | Theme["sizes"]
+    height?: CSS.Property.Height | number | Theme["sizes"]
+    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    anyHover?: StringLiteral
+    anyPointer?: StringLiteral
+    aspectRatio?: StringLiteral
+    color?: StringLiteral
+    colorGamut?: StringLiteral
+    colorIndex?: StringLiteral
+    deviceAspectRatio?: StringLiteral
+    deviceHeight?: StringLiteral
+    deviceWidth?: StringLiteral
+    displayMode?: StringLiteral
+    dynamicRange?: StringLiteral
+    forcedColors?: StringLiteral
+    grid?: StringLiteral
+    hover?: StringLiteral
+    invertedColors?: StringLiteral
+    monochrome?: StringLiteral
+    orientation?: StringLiteral
+    overflowBlock?: StringLiteral
+    overflowInline?: StringLiteral
+    pointer?: StringLiteral
+    prefersColorScheme?: StringLiteral
+    prefersContrast?: StringLiteral
+    prefersReducedMotion?: StringLiteral
+    resolution?: StringLiteral
+    scan?: StringLiteral
+    scripting?: StringLiteral
+    update?: StringLiteral
+    videoDynamicRange?: StringLiteral
+    css?: CSSUIObject
+    [key: string]: any
+  }[]
+  /**
+   * The `@container` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box containerType="size">
+   *   <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>
+   *     Box
+   *   </Text>
+   * </Box>
+   * ```
+   */
+  _container?: {
+    name?: StringLiteral
+    query?: StringLiteral
+    w?: CSS.Property.Width | number | Theme["sizes"]
+    width?: CSS.Property.Width | number | Theme["sizes"]
+    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    h?: CSS.Property.Height | number | Theme["sizes"]
+    height?: CSS.Property.Height | number | Theme["sizes"]
+    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    aspectRatio?: CSS.Property.AspectRatio
+    minAspectRatio?: CSS.Property.AspectRatio
+    maxAspectRatio?: CSS.Property.AspectRatio
+    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
+    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
+    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
+    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
+    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
+    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
+    orientation?: "portrait" | "landscape" | StringLiteral
+    css?: CSSUIObject
+    [key: string]: any
+  }[]
 }

@@ -1,6 +1,6 @@
 import { Text } from "@yamada-ui/react"
 import { a11y, render, screen } from "@yamada-ui/test"
-import { Tabs, Tab, TabPanel, TabList, TabPanels } from "../src"
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
 describe("<Tabs />", () => {
   test("Tabs renders correctly", async () => {
@@ -116,7 +116,7 @@ describe("<Tabs />", () => {
     expect(screen.getByTestId("TabList")).toBeInTheDocument()
   })
 
-  test("should render custom tablist", () => {
+  test("should render custom tablist (with TabPanels)", () => {
     render(
       <Tabs data-testid="Tabs">
         <Tab data-testid="Tab">Home</Tab>

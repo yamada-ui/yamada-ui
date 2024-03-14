@@ -374,7 +374,7 @@ describe("<Calendar />", () => {
         />,
       )
       const children = getByTestId("Calender").children
-      expect(children.length).toBe(number)
+      expect(children).toHaveLength(number)
     })
   })
 
@@ -656,24 +656,24 @@ describe("<Calendar />", () => {
     test("should render with withHeader false", () => {
       const { container } = render(<Calendar withHeader={false} />)
       const header = container.querySelector(".ui-calendar__header")
-      expect(header).toBe(null)
+      expect(header).toBeNull()
     })
     test("should render with withControls false", () => {
       const { container } = render(<Calendar withControls={false} />)
       const control = container.querySelector(".ui-calendar__header__control")
-      expect(control).toBe(null)
+      expect(control).toBeNull()
     })
     test("should render with withLabel false", () => {
       const { container } = render(<Calendar withLabel={false} />)
       const headerLabel = container.querySelector(".ui-calendar__header__label")
-      expect(headerLabel).toBe(null)
+      expect(headerLabel).toBeNull()
     })
     test("should render with withWeekdays false", () => {
       const { container } = render(<Calendar withWeekdays={false} />)
       const monthWeekday = container.querySelector(
         ".ui-calendar__month__weekday",
       )
-      expect(monthWeekday).toBe(null)
+      expect(monthWeekday).toBeNull()
     })
   })
 })

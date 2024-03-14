@@ -12,7 +12,7 @@ type Review = Awaited<
   ReturnType<typeof octokit.pulls.listReviews>
 >["data"][number]
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-ui" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const OMIT_GITHUB_IDS = ["hirotomoyamada", "hajimemat"]
 const DISCORD_USER_MAP: Record<string, string> = {
   hirotomoyamada: "434987704162451467",
@@ -61,7 +61,10 @@ config()
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({ ...COMMON_PARAMS })
+  const { data } = await octokit.repos.listCollaborators({
+    ...COMMON_PARAMS,
+    per_page: 100,
+  })
 
   return data
 }
@@ -124,7 +127,7 @@ const addReviewers = async (
     pullRequests.map(async ({ number, title, user, html_url }) => {
       if (!user) return
 
-      const { draft, requested_reviewers, reviewers } =
+      const { draft, requested_reviewers, reviewers, head } =
         await getPullRequest(number)
 
       if (draft) return
@@ -136,26 +139,39 @@ const addReviewers = async (
       })
 
       const count = (requested_reviewers?.length ?? 0) + reviewers.length
+      let selectedReviewers: string[]
 
-      if (count >= 2) return
+      if (head.label === "yamada-ui:changeset-release/main") {
+        if (count >= 1) return
 
-      const omitCollaboratorIds = collaboratorIds.filter(
-        (id) =>
-          id !== user.login &&
-          !requested_reviewers?.some(({ login }) => login === id) &&
-          !reviewers.some(({ login }) => login === id) &&
-          !OMIT_GITHUB_IDS.includes(id),
-      )
+        selectedReviewers = ["hirotomoyamada"]
 
-      const selectedReviewers = omitCollaboratorIds
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 2 - count)
+        await octokit.pulls.requestReviewers({
+          ...COMMON_PARAMS,
+          pull_number: number,
+          reviewers: selectedReviewers,
+        })
+      } else {
+        if (count >= 2) return
 
-      await octokit.pulls.requestReviewers({
-        ...COMMON_PARAMS,
-        pull_number: number,
-        reviewers: selectedReviewers,
-      })
+        const omitCollaboratorIds = collaboratorIds.filter(
+          (id) =>
+            id !== user.login &&
+            !requested_reviewers?.some(({ login }) => login === id) &&
+            !reviewers.some(({ login }) => login === id) &&
+            !OMIT_GITHUB_IDS.includes(id),
+        )
+
+        selectedReviewers = omitCollaboratorIds
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 2 - count)
+
+        await octokit.pulls.requestReviewers({
+          ...COMMON_PARAMS,
+          pull_number: number,
+          reviewers: selectedReviewers,
+        })
+      }
 
       console.log("Added Reviewers", number, title)
 
@@ -194,7 +210,7 @@ const addComment = async (
 
         if (
           labels.some(
-            (label) => isObject(label) && label.name === "help wanted",
+            (label) => isObject(label) && "help wanted" === label?.name,
           )
         )
           return
@@ -205,6 +221,10 @@ const addComment = async (
         const limitTimestamp = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
 
         if (createdTimestamp > limitTimestamp) return
+
+        const { head } = await getPullRequest(number)
+
+        if (head.label === "yamada-ui:changeset-release/main") return
 
         await octokit.issues.createComment({
           ...COMMON_PARAMS,

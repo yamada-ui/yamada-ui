@@ -1,5 +1,52 @@
 # @yamada-ui/color-picker
 
+## 1.2.2
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- Updated dependencies [[`65fbda3`](https://github.com/yamada-ui/yamada-ui/commit/65fbda315ebd3256a1412263267a54c244129621), [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/input@1.0.18
+  - @yamada-ui/use-controllable-state@1.0.7
+  - @yamada-ui/form-control@1.0.18
+  - @yamada-ui/use-outside-click@1.0.7
+  - @yamada-ui/use-eye-dropper@1.0.4
+  - @yamada-ui/use-disclosure@1.0.7
+  - @yamada-ui/use-latest-ref@1.0.1
+  - @yamada-ui/use-pan-event@1.0.7
+  - @yamada-ui/popover@1.0.16
+  - @yamada-ui/button@1.0.17
+  - @yamada-ui/portal@1.0.7
+  - @yamada-ui/icon@1.0.15
+  - @yamada-ui/use-size@1.0.7
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
+## 1.2.1
+
+### Patch Changes
+
+- [#875](https://github.com/yamada-ui/yamada-ui/pull/875) [`cc1ab79`](https://github.com/yamada-ui/yamada-ui/commit/cc1ab799e5596327f05be846a759fd8fc32c4b10) Thanks [@ichien178](https://github.com/ichien178)! - use eyeDropperSupported for color-picker
+
+- [#847](https://github.com/yamada-ui/yamada-ui/pull/847) [`43cabdd`](https://github.com/yamada-ui/yamada-ui/commit/43cabdd41b74a1a18a0c8be8c31a545a38b674d3) Thanks [@nogu66](https://github.com/nogu66)! - Fix a bug where theme tokens were used in color-picker components.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25), [`67e1a62`](https://github.com/yamada-ui/yamada-ui/commit/67e1a6226dae2d3fc5691aa5143802f54dd4f252)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/input@1.0.17
+  - @yamada-ui/button@1.0.16
+  - @yamada-ui/form-control@1.0.17
+  - @yamada-ui/icon@1.0.14
+  - @yamada-ui/popover@1.0.15
+  - @yamada-ui/portal@1.0.6
+  - @yamada-ui/core@1.4.2
+  - @yamada-ui/use-controllable-state@1.0.6
+  - @yamada-ui/use-disclosure@1.0.6
+  - @yamada-ui/use-eye-dropper@1.0.3
+  - @yamada-ui/use-outside-click@1.0.6
+  - @yamada-ui/use-pan-event@1.0.6
+  - @yamada-ui/use-size@1.0.6
+
 ## 1.2.0
 
 ### Minor Changes

@@ -12,7 +12,7 @@ type Event = Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
 >["data"][number] & { created_at: number }
 
-const COMMON_PARAMS = { owner: "hirotomoyamada", repo: "yamada-ui" }
+const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const INFORMATION_COMMENT = (id: string) =>
   [
     `@${id}`,
@@ -36,7 +36,10 @@ config()
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({ ...COMMON_PARAMS })
+  const { data } = await octokit.repos.listCollaborators({
+    ...COMMON_PARAMS,
+    per_page: 100,
+  })
 
   return data
 }
@@ -170,8 +173,9 @@ const clearAssignIssues = async (
 ) => {
   const collaboratorIds = collaborators.map(({ login }) => login)
 
-  issues = issues.filter(({ assignees }) =>
-    assignees?.some(({ login }) => !collaboratorIds.includes(login)),
+  issues = issues.filter(
+    ({ assignees }) =>
+      !assignees?.some(({ login }) => collaboratorIds.includes(login)),
   )
 
   await Promise.all(
@@ -184,6 +188,11 @@ const clearAssignIssues = async (
       const limitTimestamp = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
 
       if (eventTimestamp > limitTimestamp) return
+
+      const pullRequestEvents = await getPullRequestEvents(number)
+      const hasPullRequest = pullRequestEvents.length
+
+      if (hasPullRequest) return
 
       await octokit.issues.createComment({
         ...COMMON_PARAMS,

@@ -29,11 +29,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/{{dashCase packageName}}"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",
@@ -63,6 +63,10 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
   }
 }

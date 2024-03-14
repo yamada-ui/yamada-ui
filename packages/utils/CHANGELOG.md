@@ -1,5 +1,19 @@
 # @yamada-ui/utils
 
+## 1.0.7
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#946](https://github.com/yamada-ui/yamada-ui/pull/946) [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `LegacyRef` to `ReactRef`.
+
+## 1.0.6
+
+### Patch Changes
+
+- [#830](https://github.com/yamada-ui/yamada-ui/pull/830) [`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed to correctly recognize `hex` values without `#`.
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/button",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "Yamada UI button components",
   "keywords": [
     "yamada",
@@ -31,11 +31,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/button"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",

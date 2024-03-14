@@ -11,7 +11,7 @@ describe("<Rating />", () => {
     const filledIcons = screen
       .getByTestId("rating")
       .querySelectorAll("label[data-filled]")
-    expect(filledIcons.length).toBe(4 + 1)
+    expect(filledIcons).toHaveLength(4 + 1)
   })
 
   test("should render with the correct color scheme", () => {

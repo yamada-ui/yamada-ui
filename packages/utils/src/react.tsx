@@ -179,7 +179,7 @@ export const pickChildren = (
 export const cx = (...classNames: (string | undefined)[]) =>
   classNames.filter(Boolean).join(" ")
 
-type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T>
+type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T> | React.LegacyRef<T>
 
 export const isRefObject = (val: any): val is { current: any } =>
   "current" in val

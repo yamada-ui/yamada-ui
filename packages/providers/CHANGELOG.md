@@ -1,5 +1,31 @@
 # @yamada-ui/providers
 
+## 1.0.21
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`83b885b`](https://github.com/yamada-ui/yamada-ui/commit/83b885b4ed6fb09e34019a68a6194210b4ab8862), [`fde46e9`](https://github.com/yamada-ui/yamada-ui/commit/fde46e99dcf9dc5ff0b259eb955bda1499b133d7), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/loading@1.0.16
+  - @yamada-ui/motion@1.0.16
+  - @yamada-ui/notice@1.0.16
+  - @yamada-ui/theme@1.4.7
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`630a8b9`](https://github.com/yamada-ui/yamada-ui/commit/630a8b9d29554fc318cd0dbfc62f7c7ee5eb4b64), [`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/theme@1.4.6
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/loading@1.0.15
+  - @yamada-ui/motion@1.0.15
+  - @yamada-ui/notice@1.0.15
+  - @yamada-ui/core@1.4.2
+
 ## 1.0.19
 
 ### Patch Changes

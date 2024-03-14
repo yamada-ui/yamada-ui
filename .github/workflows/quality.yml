@@ -30,7 +30,16 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        run: pnpm test
+        run: pnpm test:ci
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: true
+          file: ./coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
 
   eslint:
     name: ESLint

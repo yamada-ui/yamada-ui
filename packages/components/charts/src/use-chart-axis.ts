@@ -1,10 +1,11 @@
 import type { CSSUIObject } from "@yamada-ui/core"
-import { getCSS, useTheme } from "@yamada-ui/core"
+import { useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx, splitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { SVGProps } from "react"
 import { useCallback, useMemo } from "react"
 import type { XAxisProps, YAxisProps } from "recharts"
+import { getComponentProps } from "./chart-utils"
 import type {
   AxisType,
   LayoutType,
@@ -86,8 +87,8 @@ export const useChartAxis = ({
   gridAxis = "x",
   withXAxis = true,
   withYAxis = true,
-  xAxisProps = {},
-  yAxisProps = {},
+  xAxisProps: _xAxisProps = {},
+  yAxisProps: _yAxisProps = {},
   unit,
   valueFormatter,
   styles,
@@ -104,18 +105,6 @@ export const useChartAxis = ({
         : { type: "number" },
     [dataKey, layoutType],
   )
-  const [xAxisReChartsProps, xAxisUiProps] = splitObject(
-    xAxisProps,
-    xAxisProperties,
-  )
-  const xAxisStyleClassName = getCSS(styles.xAxis)(theme)
-  const xAxisPropClassName = getCSS(xAxisUiProps as CSSUIObject)(theme)
-  const [yAxisReChartsProps, yAxisUiProps] = splitObject(
-    yAxisProps,
-    yAxisProperties,
-  )
-  const yAxisStyleClassName = getCSS(styles.yAxis)(theme)
-  const yAxisPropClassName = getCSS(yAxisUiProps as CSSUIObject)(theme)
   const withXTickLine =
     gridAxis !== "none" && (tickLine === "x" || tickLine === "xy")
   const withYTickLine =
@@ -128,13 +117,23 @@ export const useChartAxis = ({
   const yTickLine = getTickLine(withYTickLine)
   const tickFormatter = type === "percent" ? valueToPercent : valueFormatter
 
+  const [xAxisReChartsProps, xAxisClassName] = getComponentProps<Dict, string>(
+    [_xAxisProps, xAxisProperties],
+    styles.xAxis,
+  )(theme)
+
+  const [yAxisReChartsProps, yAxisClassName] = getComponentProps<Dict, string>(
+    [_yAxisProps, yAxisProperties],
+    styles.yAxis,
+  )(theme)
+
   const getXAxisProps: ChartPropGetter<
     "div",
     Partial<XAxisProps>,
     XAxisProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
-      className: cx(className, xAxisPropClassName, xAxisStyleClassName),
+      className: cx(className, xAxisClassName),
       hide: !withXAxis,
       ...xAxisKey,
       tick: {
@@ -148,14 +147,7 @@ export const useChartAxis = ({
       ...props,
       ...(xAxisReChartsProps as XAxisProps),
     }),
-    [
-      xAxisPropClassName,
-      xAxisStyleClassName,
-      withXAxis,
-      xAxisKey,
-      xTickLine,
-      xAxisReChartsProps,
-    ],
+    [xAxisClassName, withXAxis, xAxisKey, xTickLine, xAxisReChartsProps],
   )
 
   const getYAxisProps: ChartPropGetter<
@@ -164,7 +156,7 @@ export const useChartAxis = ({
     YAxisProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
-      className: cx(className, yAxisPropClassName, yAxisStyleClassName),
+      className: cx(className, yAxisClassName),
       hide: !withYAxis,
       axisLine: false,
       ...yAxisKey,
@@ -180,8 +172,7 @@ export const useChartAxis = ({
       ...(yAxisReChartsProps as YAxisProps),
     }),
     [
-      yAxisPropClassName,
-      yAxisStyleClassName,
+      yAxisClassName,
       withYAxis,
       yAxisKey,
       yTickLine,

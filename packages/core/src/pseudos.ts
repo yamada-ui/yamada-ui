@@ -20,6 +20,18 @@ export const pseudos = {
    */
   _nativeActive: "&:active",
   /**
+   * The CSS `:target` pseudo-class.
+   */
+  _target: "&:target, &[data-target]",
+  /**
+   * The CSS `:not(:target)` pseudo-class.
+   */
+  _notTarget: "&:not(:target)",
+  /**
+   * The CSS `:target` pseudo-class.
+   */
+  _nativeTarget: "&:target",
+  /**
    * The CSS `:focus` pseudo-class.
    */
   _focus: "&:focus, &[data-focus]",
@@ -35,6 +47,14 @@ export const pseudos = {
    * The CSS `:focus-visible` pseudo-class.
    */
   _nativeFocusVisible: "&:focus-visible",
+  /**
+   * The CSS `:focus-within` pseudo-class.
+   */
+  _focusWithin: "&:focus-within, &[data-focus-within]",
+  /**
+   * The CSS `:focus-within` pseudo-class.
+   */
+  _nativeFocusWithin: "&:focus-within",
   /**
    * The CSS `:disabled` pseudo-class.
    */
@@ -147,15 +167,15 @@ export const pseudos = {
   _filled: "&[data-filled]",
   _start: "&[data-start]",
   _end: "&[data-end]",
-  _outside: "&[data-outside]",
+  _outside: "&:where([data-outside])",
   _between: "&[data-between]",
-  _weekend: "&[data-weekend]",
+  _weekend: "&:where([data-weekend])",
   _holiday: "&[data-holiday]",
   _today: "&[data-today]",
   _accept: "&[data-accept]",
   _reject: "&[data-reject]",
   _idle: "&[data-idle]",
-  _loading: "&[data-loading]",
+  _loading: "&[data-loading], &[aria-busy=true]",
   _loaded: "&[data-loaded]",
   _ripple: "& .ui-ripple",
   /**

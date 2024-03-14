@@ -64,7 +64,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     const {
       className,
       orientation = "vertical",
-      gap = "md",
+      gap = "1rem",
       onChange,
       onCompleteChange,
       children,
@@ -114,11 +114,9 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     }, [onCompleteChange, values])
 
     useUpdateEffect(() => {
-      const isDone = defaultValues.every((defaultValue) =>
-        values.includes(defaultValue),
-      )
+      const isEqual = JSON.stringify(defaultValues) === JSON.stringify(values)
 
-      if (isDone) return
+      if (isEqual) return
 
       prevValues.current = defaultValues
       setValues(defaultValues)

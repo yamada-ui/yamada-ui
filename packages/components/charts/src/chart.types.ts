@@ -1,6 +1,6 @@
 import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef } from "react"
+import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react"
 import type {
   AreaChart as ReChartsAreaChart,
   AreaProps as ReChartsAreaProps,
@@ -8,6 +8,8 @@ import type {
   BarProps as ReChartsBarProps,
   PieChart as ReChartsPieChart,
   PieProps as RechartsPieProps,
+  LineChart as ReChartsLineChart,
+  LineProps as ReChartsLineProps,
   ReferenceLineProps,
   DotProps,
   XAxisProps,
@@ -32,10 +34,18 @@ export type RequiredChartPropGetter<
   D = undefined,
 > = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
 
+export type ChartTooltip =
+  | ReactElement
+  | ((
+      props: TooltipProps<
+        number | string | Array<number | string>,
+        number | string
+      >,
+    ) => ReactNode)
 export type LayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
 export type AxisType = "x" | "y" | "xy" | "none"
-export type AreaChartCurveType =
+export type CurveType =
   | "bump"
   | "linear"
   | "natural"
@@ -45,10 +55,18 @@ export type AreaChartCurveType =
   | "stepAfter"
 export type AreaChartSeries = Merge<
   Merge<CSSUIProps, ReChartsAreaProps>,
-  { color: CSSUIProps["color"] }
+  {
+    color: CSSUIProps["color"]
+    activeDot?: DotUIProps
+    dot?: DotUIProps
+  }
 >
 export type BarChartSeries = Merge<
   Merge<CSSUIProps, ReChartsBarProps>,
+  { color: CSSUIProps["color"] }
+>
+export type LineChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsLineProps>,
   { color: CSSUIProps["color"] }
 >
 export type AreaChartUIProps = Merge<
@@ -59,15 +77,23 @@ export type BarChartUIProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof ReChartsBarChart>
 >
+export type LineChartUIProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof ReChartsLineChart>
+>
 export type ReferenceLineUIProps = Merge<CSSUIProps, ReferenceLineProps>
 export type ContainerUIProps = Merge<
   CSSUIProps,
   Omit<ResponsiveContainerProps, "children">
 >
-export type DotUIProps = Merge<CSSUIProps, Omit<DotProps, "ref">>
+export type DotUIProps = Merge<Omit<DotProps, "ref">, CSSUIProps>
 export type XAxisUIProps = Merge<
   Merge<CSSUIProps, XAxisProps>,
-  { color?: CSSUIProps["color"] }
+  {
+    color?: CSSUIProps["color"]
+    stroke?: CSSUIProps["color"]
+    fill?: CSSUIProps["color"]
+  }
 >
 export type YAxisUIProps = Merge<
   Merge<CSSUIProps, YAxisProps>,
@@ -117,6 +143,21 @@ export const barChartProperties: (keyof ComponentPropsWithoutRef<
   "data",
   "margin",
   "stackOffset",
+  "onClick",
+  "onMouseEnter",
+  "onMouseMove",
+  "onMouseLeave",
+]
+export const lineChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof ReChartsLineChart
+>)[] = [
+  "layout",
+  "syncId",
+  "syncMethod",
+  "width",
+  "height",
+  "data",
+  "margin",
   "onClick",
   "onMouseEnter",
   "onMouseMove",
@@ -353,7 +394,41 @@ export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
   "onMouseEnter",
   "onMouseLeave",
 ]
-export const dotProperties: (keyof DotProps)[] = [
+export const lineProperties: (keyof Omit<ReChartsLineProps, "ref">)[] = [
+  "type",
+  "dataKey",
+  "xAxisId",
+  "yAxisId",
+  "legendType",
+  "dot",
+  "activeDot",
+  "label",
+  "hide",
+  "points",
+  "stroke",
+  "strokeWidth",
+  "layout",
+  "connectNulls",
+  "unit",
+  "name",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "id",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+  "strokeDasharray",
+]
+export const dotProperties: (keyof Omit<DotProps, "ref">)[] = [
   "cx",
   "cy",
   "r",

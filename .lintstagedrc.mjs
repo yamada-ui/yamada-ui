@@ -5,7 +5,11 @@ const omitIgnoredPaths = async (paths) => {
 
   const resolvedPaths = (
     await Promise.all(
-      paths.map((path) => (!eslint.isPathIgnored(path) ? path : undefined)),
+      paths.map(async (path) => {
+        const isPathIgnored = await eslint.isPathIgnored(path)
+
+        if (!isPathIgnored) return path
+      }),
     )
   ).filter(Boolean)
 
@@ -13,8 +17,8 @@ const omitIgnoredPaths = async (paths) => {
 }
 
 export default {
-  "**/*.{js,jsx,ts,tsx,md,mdx,yml,json,html,css}": ["prettier --write"],
-  "**/*.{js,jsx,ts,tsx}": async (paths) => {
+  "**/*.{js,jsx,ts,tsx,mjs,mts,md,mdx,yml,json,html,css}": ["prettier --write"],
+  "**/*.{js,jsx,ts,tsx,mjs,mts}": async (paths) => {
     const resolvedPaths = await omitIgnoredPaths(paths)
 
     return [`eslint --max-warnings=0 ${resolvedPaths}`]

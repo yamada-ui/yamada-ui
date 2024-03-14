@@ -24,7 +24,7 @@ const main = async () => {
 
     const [{ version }] = JSON.parse(manifest)
 
-    const text = `A new version of Yamada UI has been released😎\n\nversion: [${version}](https://github.com/hirotomoyamada/yamada-ui/blob/main/.changelog/v${version}.mdx)`
+    const text = `A new version of Yamada UI has been released😎\n\nversion: [${version}](https://github.com/yamada-ui/yamada-ui/blob/main/.changelog/v${version}.mdx)`
 
     s.stop(`Got the changelog`)
 

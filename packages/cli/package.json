@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate theme tokens for autocomplete",
   "keywords": [
     "theme",
@@ -26,11 +26,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "bin": {
     "yamada-cli": "bin/index.js"

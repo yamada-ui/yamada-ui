@@ -6,7 +6,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { Fragment } from "react"
+import { Fragment, useMemo } from "react"
 import {
   CartesianGrid,
   Legend as ReChartsLegend,
@@ -20,15 +20,14 @@ import {
 } from "recharts"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
+import { ChartTooltip } from "./chart-tooltip"
 import { Legend } from "./legend"
-import { ChartTooltip } from "./tooltip"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
-import { ChartProvider } from "./use-chart"
+import type { UseChartProps } from "./use-chart"
+import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
-import type { UseChartContainerProps } from "./use-chart-container"
-import { useChartContainer } from "./use-chart-container"
 import type { UseChartGridOptions } from "./use-chart-grid"
 import { useChartGrid } from "./use-chart-grid"
 import type { UseChartLegendProps } from "./use-chart-legend"
@@ -57,28 +56,16 @@ export type AreaChartProps = HTMLUIProps<"div"> &
   ThemeProps<"AreaChart"> &
   AreaChartOptions &
   UseAreaChartOptions &
-  UseChartContainerProps &
+  UseChartProps &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
   UseChartTooltipProps &
   UseChartLegendProps
 
-export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
+export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
   const {
-    w,
-    width,
-    minW,
-    minWidth,
-    maxW,
-    maxWidth,
-    h,
-    height,
-    minH,
-    minHeight,
-    maxH,
-    maxHeight,
     className,
     series,
     dataKey,
@@ -92,7 +79,7 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     type = "default",
     withTooltip = true,
     withLegend = false,
-    referenceLineProps,
+    referenceLineProps = [],
     containerProps,
     unit,
     gridProps,
@@ -101,7 +88,20 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     tooltipProps,
     tooltipAnimationDuration,
     legendProps,
-    ...computedProps
+    data,
+    areaChartProps,
+    activeDotProps,
+    dotProps,
+    withGradient,
+    withDots,
+    withActiveDots,
+    curveType,
+    strokeWidth,
+    connectNulls,
+    fillOpacity,
+    splitColors,
+    splitOffset,
+    ...rest
   } = omitThemeProps(mergedProps)
 
   const {
@@ -109,17 +109,29 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
     getAreaSplitProps,
     getAreaProps,
     getAreaGradientProps,
-    getCSSvariables,
+    areaVars,
     setHighlightedArea,
   } = useAreaChart({
     layoutType,
     type,
     series,
     referenceLineProps,
+    data,
+    areaChartProps,
+    activeDotProps,
+    dotProps,
+    withGradient,
+    withDots,
+    withActiveDots,
+    curveType,
+    strokeWidth,
+    connectNulls,
+    fillOpacity,
+    splitColors,
+    splitOffset,
     styles,
-    ...computedProps,
   })
-  const { getContainerProps } = useChartContainer({ containerProps })
+  const { getContainerProps } = useChart({ containerProps })
   const { getXAxisProps, getYAxisProps } = useChartAxis({
     dataKey,
     type,
@@ -147,76 +159,97 @@ export const AreaChart = forwardRef<AreaChartProps, "svg">((props, ref) => {
   const { getTooltipProps } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
+    valueFormatter,
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 
-  const areas = series.map((item, index) => {
-    const { id, stroke, ...rest } = getAreaProps({ index }, ref)
+  const areas = useMemo(
+    () =>
+      series.map(({ dataKey }, index) => {
+        const { className, id, stroke, ...rest } = getAreaProps({ index })
 
-    return (
-      <Fragment key={`area-${item.dataKey}`}>
-        <defs>
-          <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
-        </defs>
-        <Area id={id} stroke={stroke} {...rest} />
-      </Fragment>
-    )
-  })
+        return (
+          <Fragment key={`area-${dataKey}`}>
+            <defs>
+              <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
+            </defs>
 
-  const referenceLinesItems = referenceLineProps?.map((_, index) => (
-    <ReferenceLine
-      key={`referenceLine-${index}`}
-      {...getReferenceLineProps({ index }, ref)}
-    />
-  ))
+            <Area
+              className={cx("ui-area-chart__area", className)}
+              id={id}
+              stroke={stroke}
+              {...rest}
+            />
+          </Fragment>
+        )
+      }),
+    [getAreaGradientProps, getAreaProps, series],
+  )
+
+  const referenceLinesItems = useMemo(
+    () =>
+      referenceLineProps.map((_, index) => (
+        <ReferenceLine
+          key={`referenceLine-${index}`}
+          {...getReferenceLineProps({
+            index,
+            className: "ui-area-chart__reference-line",
+          })}
+        />
+      )),
+    [getReferenceLineProps, referenceLineProps],
+  )
 
   return (
     <ChartProvider value={{ styles }}>
       <ui.div
+        ref={ref}
         className={cx("ui-area-chart", className)}
-        var={getCSSvariables}
-        {...{
-          w,
-          width,
-          minW,
-          minWidth,
-          maxW,
-          maxWidth,
-          h,
-          height,
-          minH,
-          minHeight,
-          maxH,
-          maxHeight,
-        }}
-        __css={{ ...styles.container }}
+        var={areaVars}
+        __css={{ maxW: "full", ...styles.container }}
+        {...rest}
       >
-        <ResponsiveContainer {...getContainerProps({}, ref)}>
-          <ReChartsAreaChart {...getAreaChartProps({}, ref)}>
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-area-chart__container" })}
+        >
+          <ReChartsAreaChart
+            {...getAreaChartProps({ className: "ui-area-chart__chart" })}
+          >
             {referenceLinesItems}
-            <CartesianGrid {...getGridProps({}, ref)} />
-            <XAxis {...getXAxisProps()} />
-            <YAxis {...getYAxisProps()} />
+
+            <CartesianGrid
+              {...getGridProps({ className: "ui-area-chart__grid" })}
+            />
+            <XAxis {...getXAxisProps({ className: "ui-area-chart__x-axis" })} />
+            <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })} />
+
             {withLegend ? (
               <ReChartsLegend
                 content={({ payload }) => (
                   <Legend
-                    ref={ref}
+                    className="ui-area-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
                   />
                 )}
-                {...getLegendProps({}, ref)}
+                {...getLegendProps()}
               />
             ) : null}
+
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (
-                  <ChartTooltip ref={ref} label={label} payload={payload} />
+                  <ChartTooltip
+                    className="ui-area-chart__tooltip"
+                    label={label}
+                    payload={payload}
+                    valueFormatter={valueFormatter}
+                  />
                 )}
-                {...getTooltipProps({}, ref)}
+                {...getTooltipProps()}
               />
             ) : null}
+
             {type === "split" ? (
               <defs>
                 <AreaSplit {...getAreaSplitProps()} />

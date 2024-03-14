@@ -74,6 +74,7 @@ const onFocus = (ev: FocusEvent) => {
 
   if (!hasEventBeforeFocus && !hasBlurredWindowRecently) {
     modality = "virtual"
+
     trigger("virtual", ev)
   }
 
@@ -88,12 +89,12 @@ const onBlur = () => {
 
 const isFocusVisible = () => modality !== "pointer"
 
-const setupGlobalFocusEvents = () => {
+const setGlobalFocusEvents = () => {
   if (typeof window === "undefined" || hasSetup) return
 
   const { focus } = HTMLElement.prototype
 
-  HTMLElement.prototype.focus = (...args) => {
+  HTMLElement.prototype.focus = function customFocus(...args) {
     hasEventBeforeFocus = true
 
     if (this) focus.apply(this, args)
@@ -120,7 +121,7 @@ const setupGlobalFocusEvents = () => {
 }
 
 export const trackFocusVisible = (func: FocusVisibleCallback) => {
-  setupGlobalFocusEvents()
+  setGlobalFocusEvents()
 
   func(isFocusVisible())
 

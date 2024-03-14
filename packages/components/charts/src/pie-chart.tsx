@@ -15,12 +15,10 @@ import {
   Cell,
 } from "recharts"
 import type { PieChartUIProps, PieUIProps } from "./chart.types"
-import { ChartTooltip } from "./tooltip"
-import { ChartProvider } from "./use-chart"
+import { ChartProvider, type UseChartProps, useChart } from "./use-chart"
 import { useChartCell } from "./use-chart-cell"
-import type { UseChartContainerProps } from "./use-chart-container"
-import { useChartContainer } from "./use-chart-container"
 import type { UseChartTooltipProps } from "./use-chart-tooltip"
+import { ChartTooltip } from "./chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 import { usePieChart } from "./use-pie-chart"
 
@@ -123,7 +121,7 @@ export type PieChartOptions = {
 export type PieChartProps = Omit<HTMLUIProps<"div">, "scale"> &
   ThemeProps<"PieChart"> &
   PieChartOptions &
-  UseChartContainerProps &
+  UseChartProps &
   UseChartTooltipProps
 
 const defaultProps: Partial<PieChartProps> = {
@@ -164,7 +162,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     ...computedProps
   } = omitThemeProps({ ...defaultProps, ...mergedProps })
 
-  const { getContainerProps } = useChartContainer({ containerProps })
+  const { getContainerProps } = useChart({ containerProps })
 
   const { getPieProps, cssVariables } = usePieChart({
     data,

@@ -1,0 +1,36 @@
+name: Coverage
+
+on:
+  push:
+    paths:
+      - "packages/**/tests/**"
+      - "packages/test/**"
+      - "vitest.config.mts"
+      - "scripts/setup-test.ts"
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  coverage:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Build coverage
+        run: pnpm vitest --coverage --silent --run
+
+      - name: Sync coverage
+        uses: hirotomoyamada/repo-file-sync-action@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          SKIP_PR: true
+          GIT_USERNAME: "hirotomoyamada"
+          GIT_EMAIL: "hirotomo.yamada@avap.co.jp"

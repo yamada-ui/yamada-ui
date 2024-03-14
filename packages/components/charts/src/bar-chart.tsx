@@ -18,6 +18,7 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import type { XAxisProps, YAxisProps } from "recharts"
+import { ChartTooltip } from "./chart-tooltip"
 import type {
   AreaChartType,
   AxisType,
@@ -29,9 +30,10 @@ import type {
   TooltipUIProps,
 } from "./chart.types"
 import { Legend } from "./legend"
-import { ChartTooltip } from "./tooltip"
 import { BarChartProvider, useBarChart } from "./use-bar-chart"
 import { ChartProvider } from "./use-chart"
+import { useChartLegend } from "./use-chart-legend"
+import { useChartTooltip } from "./use-chart-tooltip"
 
 type BarChartOptions = {
   /**
@@ -177,6 +179,9 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     series,
     type = "default",
     withLegend = false,
+    tooltipProps,
+    tooltipAnimationDuration,
+    legendProps,
     ...computedProps
   } = omitThemeProps(mergedProps)
 
@@ -186,8 +191,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     getContainerProps,
     getXAxisProps,
     getYAxisProps,
-    getLegendProps,
-    getTooltipProps,
     getCSSvariables,
     setHighlightedArea,
   } = useBarChart({
@@ -198,40 +201,14 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     ...computedProps,
   })
 
-  const legend = () => {
-    const legendProps = getLegendProps({}, ref)
-    if (withLegend)
-      return (
-        <ReChartsLegend
-          content={(payload) => (
-            <Legend
-              ref={ref}
-              payload={payload.payload}
-              onHighlight={setHighlightedArea}
-            />
-          )}
-          {...legendProps}
-        />
-      )
-  }
-
-  const tooltip = () => {
-    const tooltipProps = getTooltipProps({}, ref)
-    if (withTooltip)
-      return (
-        <Tooltip
-          content={({ label, payload }) => (
-            <ChartTooltip ref={ref} label={label} payload={payload} />
-          )}
-          {...tooltipProps}
-        />
-      )
-  }
+  const { getTooltipProps } = useChartTooltip({
+    tooltipProps,
+    tooltipAnimationDuration,
+  })
+  const { getLegendProps } = useChartLegend({ legendProps })
 
   const bars = series.map((item, index) => {
-    const { id, stroke, ...rest } = getBarProps({ item, index }, ref)
-
-    return <Bar key={id} id={id} stroke={stroke} {...rest} />
+    return <Bar key={index} {...getBarProps({ item, index }, ref)} />
   })
 
   return (
@@ -263,8 +240,26 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis {...getXAxisProps()} />
               <YAxis {...getYAxisProps()} />
-              {tooltip()}
-              {legend()}
+
+              {withLegend ? (
+                <ReChartsLegend
+                  content={({ payload }) => (
+                    <Legend
+                      payload={payload}
+                      onHighlight={setHighlightedArea}
+                    />
+                  )}
+                  {...getLegendProps()}
+                />
+              ) : null}
+              {withTooltip ? (
+                <Tooltip
+                  content={({ label, payload }) => (
+                    <ChartTooltip label={label} payload={payload} />
+                  )}
+                  {...getTooltipProps()}
+                />
+              ) : null}
               {bars}
             </ReChartsBarChart>
           </ResponsiveContainer>

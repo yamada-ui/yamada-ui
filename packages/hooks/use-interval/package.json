@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-interval",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Yamada UI useInterval custom hook",
   "keywords": [
     "use-interval"
@@ -18,11 +18,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-interval"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",

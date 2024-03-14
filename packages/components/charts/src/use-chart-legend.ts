@@ -1,8 +1,8 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import { getCSS, useTheme } from "@yamada-ui/core"
-import { cx, splitObject } from "@yamada-ui/utils"
+import { useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { LegendProps } from "recharts"
+import { getComponentProps } from "./chart-utils"
 import type { ChartPropGetter, LegendUIProps } from "./chart.types"
 import { legendProperties } from "./chart.types"
 
@@ -15,8 +15,10 @@ export type UseChartLegendProps = {
 
 export const useChartLegend = ({ legendProps = {} }: UseChartLegendProps) => {
   const { theme } = useTheme()
-  const [reChartProps, uiProps] = splitObject(legendProps, legendProperties)
-  const propClassName = getCSS(uiProps as CSSUIObject)(theme)
+  const [reChartProps, propClassName] = getComponentProps([
+    legendProps,
+    legendProperties,
+  ])(theme)
 
   const getLegendProps: ChartPropGetter<
     "div",

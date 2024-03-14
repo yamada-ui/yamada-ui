@@ -35,7 +35,7 @@ const App: FC = () => {
       <Image
         w="full"
         maxW="xl"
-        src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png"
+        src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png"
       />
     </Center>
   )

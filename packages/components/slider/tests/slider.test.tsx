@@ -1,4 +1,5 @@
-import { Matcher, cleanup } from "@testing-library/react"
+import type { Matcher } from "@testing-library/react"
+import { cleanup } from "@testing-library/react"
 import {
   a11y,
   act,
@@ -8,7 +9,8 @@ import {
   screen,
 } from "@yamada-ui/test"
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "../src"
-import { SliderProps, useSlider } from "../src/slider"
+import type { SliderProps } from "../src/slider"
+import { useSlider } from "../src/slider"
 
 describe("<Slider />", () => {
   test("should render correctly", async () => {
@@ -300,7 +302,7 @@ describe("<Slider />", () => {
     })
 
     expect(onChangeStart).toHaveBeenCalledWith(50)
-    expect(onChange).toHaveBeenCalled()
-    expect(onChangeEnd).toHaveBeenCalled()
+    expect(onChange).toHaveBeenCalledWith(0)
+    expect(onChangeEnd).toHaveBeenCalledWith(50)
   })
 })

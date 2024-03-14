@@ -4,14 +4,14 @@ import { Link, LinkBox, LinkOverlay } from "../src"
 describe("<Link />", () => {
   test("Link renders correctly", async () => {
     const url =
-      "https://hirotomoyamada.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     const { container } = render(<Link href={url}>Welcome page</Link>)
     await a11y(container)
   })
 
   test("should open link in a new tab", () => {
     const url =
-      "https://hirotomoyamada.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
       <Link data-testid="Link" href={url} isExternal>
         Welcome page
@@ -28,7 +28,7 @@ describe("<Link />", () => {
 describe("<LinkOverlay />", () => {
   test("renders correctly", () => {
     const url =
-      "https://hirotomoyamada.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(<LinkOverlay href={url}>Welcome page</LinkOverlay>)
     const link = screen.getByRole("link")
 
@@ -39,7 +39,7 @@ describe("<LinkOverlay />", () => {
 
   test("opens link in a new tab when isExternal is true", () => {
     const url =
-      "https://hirotomoyamada.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
       <LinkOverlay href={url} isExternal>
         Welcome page
@@ -53,7 +53,7 @@ describe("<LinkOverlay />", () => {
 
   test("applies custom className", () => {
     const url =
-      "https://hirotomoyamada.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
       <LinkOverlay href={url} className="custom-class">
         Welcome page

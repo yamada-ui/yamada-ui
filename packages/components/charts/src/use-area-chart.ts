@@ -1,14 +1,15 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { getCSS, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
-import { cx, omitObject, splitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useMemo, useState } from "react"
 import type { AreaChart, AreaProps, DotProps } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
+import { getComponentProps } from "./chart-utils"
 import type {
-  AreaChartCurveType,
+  CurveType,
   AreaChartSeries,
   AreaChartType,
   AreaChartUIProps,
@@ -30,7 +31,7 @@ export type UseAreaChartOptions = {
    */
   data: Dict[]
   /**
-   * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
+   * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
    */
   series: AreaChartSeries[]
   /**
@@ -78,7 +79,7 @@ export type UseAreaChartOptions = {
    *
    * @default `monotone`
    */
-  curveType?: AreaChartCurveType
+  curveType?: CurveType
   /**
    *  Stroke width for the chart areas.
    *
@@ -108,9 +109,9 @@ export type UseAreaChartOptions = {
   /**
    *  Controls fill opacity of all areas.
    *
-   * @default 0.2
+   * @default 0.4
    */
-  fillOpacity?: number
+  fillOpacity?: number | [number, number]
 }
 
 export type UseAreaChartProps = UseAreaChartOptions & {
@@ -121,9 +122,9 @@ export const useAreaChart = ({
   data,
   series,
   type,
-  areaChartProps = {},
-  activeDotProps = {},
-  dotProps = {},
+  areaChartProps: _areaChartProps = {},
+  activeDotProps: _activeDotProps = {},
+  dotProps: _dotProps = {},
   layoutType = "horizontal",
   withGradient: withGradientProp,
   withDots = true,
@@ -131,8 +132,8 @@ export const useAreaChart = ({
   curveType = "monotone",
   strokeWidth = 2,
   connectNulls = true,
-  fillOpacity = 0.2,
-  splitColors = ["red.400", "green.400"],
+  fillOpacity = 0.4,
+  splitColors = ["#ee6a5d", "#5fce7d"],
   splitOffset,
   referenceLineProps,
   styles,
@@ -140,6 +141,7 @@ export const useAreaChart = ({
   const uuid = useId()
   const { theme } = useTheme()
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+
   const splitId = `${uuid}-split`
   const stacked = type === "stacked" || type === "percent"
   const withGradient =
@@ -148,12 +150,167 @@ export const useAreaChart = ({
       : type === "default"
   const shouldHighlight = highlightedArea !== null
 
-  const [areaChartReChartsProps, areaChartUiProps] = splitObject(
-    areaChartProps,
-    areaChartProperties,
+  const areaColors: CSSUIProps["var"] = useMemo(
+    () =>
+      series.map(({ color }, index) => ({
+        __prefix: "ui",
+        name: `area-${index}`,
+        token: "colors",
+        value: color ?? "transparent",
+      })),
+    [series],
   )
-  const areaChartStyleClassName = getCSS(styles.areaChart)(theme)
-  const areaChartPropClassName = getCSS(areaChartUiProps)(theme)
+
+  const areaSplitColors: CSSUIProps["var"] = useMemo(
+    () =>
+      splitColors.map((color, index) => ({
+        __prefix: "ui",
+        name: `area-split-${index}`,
+        token: "colors",
+        value: color ?? "transparent",
+      })),
+    [splitColors],
+  )
+
+  const referenceLineColors: CSSUIProps["var"] = useMemo(
+    () =>
+      referenceLineProps
+        ? referenceLineProps.map(({ color }, index) => ({
+            __prefix: "ui",
+            name: `reference-line-${index}`,
+            token: "colors",
+            value: color ?? "transparent",
+          }))
+        : [],
+    [referenceLineProps],
+  )
+
+  const areaVars: CSSUIProps["var"] = useMemo(() => {
+    return [
+      ...areaColors,
+      ...areaSplitColors,
+      ...referenceLineColors,
+      { name: "fill-opacity", value: fillOpacity },
+    ]
+  }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
+
+  const [areaChartProps, areaChartClassName] = getComponentProps<Dict, string>(
+    [_areaChartProps, areaChartProperties],
+    styles.areaChart,
+  )(theme)
+
+  const [activeDotProps, _activeDotClassName] = getComponentProps<Dict, string>(
+    [_activeDotProps, dotProperties],
+    styles.activeDot,
+  )(theme)
+
+  const [dotProps, _dotClassName] = getComponentProps<Dict, string>(
+    [_dotProps, dotProperties],
+    styles.dot,
+  )(theme)
+
+  const areaClassName = getCSS(styles.area)(theme)
+
+  const defaultSplitOffset = useMemo(() => {
+    if (series.length === 1) {
+      const dataKey = series[0].dataKey as string
+
+      const dataMax = Math.max(...data.map((item) => item[dataKey]))
+      const dataMin = Math.min(...data.map((item) => item[dataKey]))
+
+      if (dataMax <= 0) return 0
+      if (dataMin >= 0) return 1
+
+      return dataMax / (dataMax - dataMin)
+    }
+
+    return 0.5
+  }, [data, series])
+
+  const areaPropsList = useMemo(
+    () =>
+      series.map((props, index) => {
+        const {
+          dataKey,
+          strokeDasharray,
+          activeDot: _activeDot = {},
+          dot: _dot = {},
+        } = props
+        const id = `${uuid}-${dataKey}`
+        const color = `var(--ui-area-${index})`
+        const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const [rest, className] = getComponentProps(
+          [props, areaProperties],
+          areaClassName,
+        )(theme)
+
+        let activeDot: DotProps | boolean
+
+        if (withActiveDots) {
+          const [rest, activeDotClassName] = getComponentProps(
+            [_activeDot, dotProperties],
+            _activeDotClassName,
+          )(theme)
+
+          activeDot = {
+            className: activeDotClassName,
+            stroke: color,
+            r: 4,
+            ...activeDotProps,
+            ...rest,
+          } as DotProps
+        } else {
+          activeDot = false
+        }
+
+        let dot: DotProps | boolean
+
+        if (withDots) {
+          const [rest, dotClassName] = getComponentProps(
+            [_dot, dotProperties],
+            _dotClassName,
+          )(theme)
+
+          dot = {
+            className: dotClassName,
+            fill: color,
+            fillOpacity: dimmed ? 0 : 1,
+            strokeWidth: 2,
+            r: 4,
+            ...dotProps,
+            ...rest,
+          } as DotProps
+        } else {
+          dot = false
+        }
+
+        return {
+          id,
+          dimmed,
+          className,
+          ...rest,
+          color,
+          strokeDasharray,
+          dataKey,
+          activeDot,
+          dot,
+        }
+      }),
+    [
+      areaClassName,
+      _activeDotClassName,
+      activeDotProps,
+      _dotClassName,
+      dotProps,
+      highlightedArea,
+      series,
+      shouldHighlight,
+      theme,
+      uuid,
+      withActiveDots,
+      withDots,
+    ],
+  )
 
   const getAreaChartProps: ChartPropGetter<
     "div",
@@ -162,43 +319,15 @@ export const useAreaChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, areaChartPropClassName, areaChartStyleClassName),
+      className: cx(className, areaChartClassName),
       data,
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
       ...props,
-      ...areaChartReChartsProps,
+      ...areaChartProps,
     }),
-    [
-      data,
-      layoutType,
-      areaChartPropClassName,
-      areaChartReChartsProps,
-      areaChartStyleClassName,
-      type,
-    ],
+    [areaChartClassName, data, type, layoutType, areaChartProps],
   )
-
-  const getSplitOffset = ({ dataKey }: { dataKey: string }) => {
-    const dataMax = Math.max(...data.map((item) => item[dataKey]))
-    const dataMin = Math.min(...data.map((item) => item[dataKey]))
-
-    if (dataMax <= 0) return 0
-    if (dataMin >= 0) return 1
-
-    return dataMax / (dataMax - dataMin)
-  }
-
-  const getDefaultSplitOffset = () => {
-    if (series.length === 1) {
-      const dataKey = series[0].dataKey as string
-      return getSplitOffset({ dataKey })
-    }
-
-    return 0.5
-  }
-
-  const defaultSplitOffset = getDefaultSplitOffset()
 
   const getAreaSplitProps: ChartPropGetter<
     "div",
@@ -208,42 +337,11 @@ export const useAreaChart = ({
     (props = {}) => ({
       id: splitId,
       offset: splitOffset ?? defaultSplitOffset,
-      fillOpacity,
+      fillOpacity: "var(--ui-fill-opacity)",
       ...props,
     }),
-    [defaultSplitOffset, fillOpacity, splitId, splitOffset],
+    [defaultSplitOffset, splitId, splitOffset],
   )
-
-  const areaStyleClassName = getCSS(styles.area)(theme)
-  const areaPropList = series.map((props, index) => {
-    const id = `${uuid}-${props.color}`
-    const color = `var(--ui-area-${index})`
-    const dimmed = shouldHighlight && highlightedArea !== props.dataKey
-    const [areaReChartsProps, areaUIProps] = splitObject(props, areaProperties)
-    const areaClassName = getCSS(areaUIProps as CSSUIObject)(theme)
-
-    return {
-      id,
-      color,
-      dimmed,
-      areaReChartsProps,
-      areaClassName,
-      dataKey: props.dataKey,
-      strokeDasharray: props.strokeDasharray,
-    }
-  })
-  const [activeDotReChartsProps, activeDotUIProps] = splitObject<Dict, string>(
-    activeDotProps,
-    dotProperties,
-  )
-  const activeDotStyleClassName = getCSS(styles.activeDot)(theme)
-  const activeDotClassName = getCSS(activeDotUIProps)(theme)
-  const [dotReChartsProps, dotUIProps] = splitObject<Dict, string>(
-    dotProps,
-    dotProperties,
-  )
-  const dotStyleClassName = getCSS(styles.dot)(theme)
-  const dotClassName = getCSS(dotUIProps)(theme)
 
   const getAreaProps: RequiredChartPropGetter<
     "div",
@@ -252,48 +350,22 @@ export const useAreaChart = ({
     },
     Omit<AreaProps, "ref">
   > = useCallback(
-    ({ index, className, ...props }, ref = null) => {
+    ({ index, className: classNameProp, ...props }, ref = null) => {
       const {
         id,
         color,
         dimmed,
-        areaReChartsProps,
-        areaClassName,
+        className,
         dataKey,
         strokeDasharray,
-      } = areaPropList[index]
-
-      let activeDot: DotProps | boolean
-      if (withActiveDots) {
-        activeDot = {
-          className: cx(className, activeDotClassName, activeDotStyleClassName),
-          stroke: color,
-          r: 4,
-          ...activeDotReChartsProps,
-          ...(areaReChartsProps["activeDot"] as DotProps),
-        }
-      } else {
-        activeDot = false
-      }
-
-      let dot: DotProps | boolean
-      if (withDots) {
-        dot = {
-          className: cx(className, dotClassName, dotStyleClassName),
-          fill: color,
-          fillOpacity: dimmed ? 0 : 1,
-          strokeWidth: 2,
-          r: 4,
-          ...dotReChartsProps,
-          ...(areaReChartsProps["dot"] as DotProps),
-        }
-      } else {
-        dot = false
-      }
+        activeDot,
+        dot,
+        ...rest
+      } = areaPropsList[index]
 
       return {
         ref,
-        className: cx(className, areaClassName, areaStyleClassName),
+        className: cx(classNameProp, className),
         id,
         activeDot,
         dot,
@@ -310,31 +382,17 @@ export const useAreaChart = ({
         strokeOpacity: dimmed ? 0.5 : 1,
         strokeDasharray,
         ...(props as Omit<AreaProps, "dataKey">),
-        ...omitObject(areaReChartsProps, [
-          "dataKey",
-          "dot",
-          "activeDot",
-          "color",
-        ]),
+        ...rest,
       }
     },
     [
-      areaPropList,
-      withActiveDots,
-      withDots,
-      areaStyleClassName,
-      curveType,
-      type,
-      splitId,
-      strokeWidth,
+      areaPropsList,
       connectNulls,
+      curveType,
+      splitId,
       stacked,
-      activeDotClassName,
-      activeDotStyleClassName,
-      activeDotReChartsProps,
-      dotClassName,
-      dotStyleClassName,
-      dotReChartsProps,
+      strokeWidth,
+      type,
     ],
   )
 
@@ -344,52 +402,19 @@ export const useAreaChart = ({
     AreaGradientProps
   > = useCallback(
     (props = {}) => ({
-      withGradient: withGradient,
-      fillOpacity,
+      withGradient,
+      fillOpacity: "var(--ui-fill-opacity)",
       ...props,
     }),
-    [withGradient, fillOpacity],
+    [withGradient],
   )
-
-  const areaColors: CSSUIProps["var"] = useMemo(
-    () =>
-      series.map((item, index) => ({
-        name: `area-${index}`,
-        token: "colors",
-        value: item.color ?? "gray",
-      })),
-    [series],
-  )
-  const areaSplitColors: CSSUIProps["var"] = useMemo(
-    () =>
-      splitColors.map((color, index) => ({
-        name: `area-split-${index}`,
-        token: "colors",
-        value: color,
-      })),
-    [splitColors],
-  )
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
-    () =>
-      referenceLineProps
-        ? referenceLineProps.map((line, index) => ({
-            name: `reference-line-${index}`,
-            token: "colors",
-            value: line.color ?? "gray",
-          }))
-        : [],
-    [referenceLineProps],
-  )
-  const getCSSvariables = useMemo(() => {
-    return [...areaColors, ...areaSplitColors, ...referenceLineColors]
-  }, [areaColors, areaSplitColors, referenceLineColors])
 
   return {
     getAreaChartProps,
     getAreaSplitProps,
     getAreaProps,
     getAreaGradientProps,
-    getCSSvariables,
+    areaVars,
     setHighlightedArea,
   }
 }

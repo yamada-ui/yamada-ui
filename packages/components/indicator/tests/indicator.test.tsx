@@ -20,7 +20,7 @@ describe("<Indicator />", () => {
     expect(screen.getByTestId("Indicator")).toBeInTheDocument()
   })
 
-  test("should render indicator", () => {
+  test("should render indicator (with overflowCount)", () => {
     render(
       <Indicator data-testid="Indicator" label={100} overflowCount={99}>
         <div></div>

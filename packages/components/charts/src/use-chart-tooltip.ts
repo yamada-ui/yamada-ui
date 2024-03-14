@@ -1,7 +1,8 @@
-import { getCSS, useTheme } from "@yamada-ui/core"
-import { cx, splitObject } from "@yamada-ui/utils"
+import { useTheme } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { TooltipProps } from "recharts"
+import { getComponentProps } from "./chart-utils"
 import type { ChartPropGetter, TooltipUIProps } from "./chart.types"
 import { tooltipProperties } from "./chart.types"
 
@@ -16,15 +17,22 @@ export type UseChartTooltipProps = {
    * @default 0
    */
   tooltipAnimationDuration?: number
+  /**
+   * A function to format values on Y axis and inside the tooltip
+   */
+  valueFormatter?: (value: number) => string
 }
 
 export const useChartTooltip = ({
   tooltipProps = {},
   tooltipAnimationDuration = 0,
+  valueFormatter,
 }: UseChartTooltipProps) => {
   const { theme } = useTheme()
-  const [reChartsProps, uiProps] = splitObject(tooltipProps, tooltipProperties)
-  const propClassName = getCSS(uiProps)(theme)
+  const [reChartsProps, propClassName] = getComponentProps([
+    tooltipProps,
+    tooltipProperties,
+  ])(theme)
 
   const getTooltipProps: ChartPropGetter<
     "div",
@@ -37,10 +45,11 @@ export const useChartTooltip = ({
       wrapperClassName: cx(wrapperClassName, propClassName),
       animationDuration: tooltipAnimationDuration,
       isAnimationActive: (tooltipAnimationDuration || 0) > 0,
+      formatter: valueFormatter,
       ...props,
       ...reChartsProps,
     }),
-    [propClassName, reChartsProps, tooltipAnimationDuration],
+    [propClassName, reChartsProps, tooltipAnimationDuration, valueFormatter],
   )
 
   return { getTooltipProps }

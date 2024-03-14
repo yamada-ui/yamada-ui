@@ -8,4 +8,13 @@ export { PieChart } from "./pie-chart"
 export type { PieChartProps } from "./pie-chart"
 export { RadarChart } from "./radar-chart"
 export type { RadarChartProps } from "./radar-chart"
-export * from "./chart.types"
+export type {
+  AreaChartSeries,
+  LineChartSeries,
+  BarChartSeries,
+  CurveType,
+  LayoutType,
+  AxisType,
+  ChartTooltip,
+  AreaChartType,
+} from "./chart.types"

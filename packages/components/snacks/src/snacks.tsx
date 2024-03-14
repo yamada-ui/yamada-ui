@@ -80,7 +80,7 @@ export const Snacks = forwardRef<SnacksProps, "div">(
       direction = "top",
       startIndex = 0,
       gutter = [0, 0],
-      gap = "md",
+      gap = "1rem",
       negateMargin = true,
       ...rest
     } = useMemo(
@@ -95,7 +95,7 @@ export const Snacks = forwardRef<SnacksProps, "div">(
 
     const css: CSSUIObject = {
       w: "100%",
-      var: [{ name: "space", token: "spaces", value: gap }],
+      var: [{ __prefix: "ui", name: "space", token: "spaces", value: gap }],
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
     }
 

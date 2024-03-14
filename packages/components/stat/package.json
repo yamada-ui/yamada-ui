@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/stat",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "Yamada UI stat component",
   "keywords": [
     "yamada",
@@ -29,11 +29,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/stat"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",
@@ -64,6 +64,10 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
   }
 }

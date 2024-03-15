@@ -230,7 +230,7 @@ const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
       return <Compass {...rest} />
 
     case "color-palette":
-      return <ColorPalette {...rest} />
+      return <ColorPalette strokeWidth="1.75" {...rest} />
 
     case "components":
       return <Components {...rest} />

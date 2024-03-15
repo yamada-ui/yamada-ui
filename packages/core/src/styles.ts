@@ -1068,8 +1068,15 @@ export const standardStyles: Configs = {
     token: "sizes",
     transform: transforms.token("sizes", transforms.fraction(transforms.px)),
   },
-  minBoxSize: { properties: ["minWidth", "minHeight"] },
-  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
+  minBoxSize: {
+    properties: ["minWidth", "minHeight"],
+    token: "sizes",
+    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+  },
+  maxBoxSize: {
+    properties: ["maxWidth", "maxHeight"],
+    transform: transforms.fraction(transforms.px),
+  },
   translateX: {
     properties: "--ui-translate-x",
     token: "spaces",
@@ -5084,14 +5091,17 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minBoxSize?: Token<CSS.Property.MinHeight | CSS.Property.MinWidth>
+  minBoxSize?: Token<
+    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
+    "sizes"
+  >
   /**
    * The CSS `max-width` and `max-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth>
+  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth | number>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */

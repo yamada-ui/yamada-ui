@@ -1,158 +1,172 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const LineChart: ComponentMultiStyle = {
   baseStyle: {
     container: {},
-    lineChart: {},
+    chart: {},
     referenceLine: {
-      fontSize: "xs",
       fillOpacity: 1,
+      fontSize: "xs",
     },
     grid: {
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,
     },
     xAxis: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "xs",
     },
     yAxis: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "xs",
     },
     line: {},
-    dot: {},
-    activeDot: {
+    dot: {
       strokeWidth: 2,
     },
+    activeDot: {
+      strokeWidth: 2,
+      fill: ["white", "black"],
+    },
     legend: {
-      justifyContent: "flex-end",
       display: "flex",
-      marginY: 4,
+      justifyContent: "flex-end",
     },
     legendItem: {
       display: "flex",
       alignItems: "center",
-      gap: 2,
-      paddingX: 3,
-      paddingY: 1,
-      rounded: 5,
+      rounded: "md",
+      gap: "sm",
+      transitionProperty: "common",
+      transitionDuration: "slower",
+      color: ["blackAlpha.800", "whiteAlpha.700"],
+      _hover: {
+        bg: ["blackAlpha.50", "whiteAlpha.100"],
+      },
     },
-    legendColorTip: {
-      rounded: "9999px",
-      boxSize: 3,
+    legendSwatch: {
+      boxSize: "3",
+      rounded: "full",
     },
-    legendItemText: {},
     tooltip: {
-      border: "solid",
-      borderWidth: 0.2,
-      borderColor: ["blackAlpha.400", "whiteAlpha.400"],
-      bgColor: ["white", "neutral.900"],
-      rounded: 3,
-      paddingX: 5,
-      paddingY: 3,
-    },
-    tooltipContent: {
       display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: 12,
+      flexDirection: "column",
+      minW: "48",
+      gap: "sm",
+      rounded: "md",
+      bg: ["white", "black"],
+      border: "1px solid",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+      p: "3",
+      fontWeight: "medium",
+      fontSize: "sm",
+      color: "inherit",
+      boxShadow: ["md", "dark-md"],
+      maxW: "xs",
+      zIndex: "dodoria",
     },
     tooltipTitle: {
-      marginBottom: 2,
       fontSize: "md",
-      fontWeight: 500,
+    },
+    tooltipList: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "xs",
+    },
+    tooltipItem: {
+      display: "flex",
+      alignItems: "center",
+      gap: "sm",
+      fontSize: "sm",
+    },
+    tooltipSwatch: {
+      boxSize: "3",
+      rounded: "full",
     },
     tooltipLabel: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 4,
-    },
-    tooltipLabelText: {
-      color: ["black", "gray.200"],
-      fontSize: "md",
-    },
-    tooltipColorTip: {
-      rounded: "9999px",
-      boxSize: 3,
+      color: ["blackAlpha.800", "whiteAlpha.700"],
     },
     tooltipValue: {
-      fontSize: "md",
+      flex: 1,
+      textAlign: "end",
     },
   },
 
-  variants: {
-    subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
-      grid: {
-        stroke: ["gray.400", "gray.600"],
-      },
-      xAxis: {
-        color: ["gray.600", "gray.400"],
-      },
-      yAxis: {
-        color: ["gray.600", "gray.400"],
-      },
-      legend: {
-        color: ["gray.800", "gray.200"],
-      },
-      legendItem: {
-        _hover: {
-          bgColor: ["blackAlpha.100", "whiteAlpha.100"],
-        },
-      },
-    }),
-    solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
-      grid: {
-        stroke: ["black", "white"],
-      },
-      xAxis: {
-        color: ["black", "white"],
-      },
-      yAxis: {
-        color: ["black", "white"],
-      },
-      legend: {
-        color: ["black", "white"],
-      },
-      legendItem: {
-        _hover: {
-          bgColor: ["blackAlpha.200", "whiteAlpha.200"],
-        },
-      },
-    }),
-  },
+  variants: {},
 
   sizes: {
-    sm: {
+    sm: ({ theme: t }) => ({
       container: {
         w: "xl",
         h: "xs",
       },
-      xAxis: {
-        fontSize: "2xs",
+      legend: {
+        gap: "xs",
+        mb: "md",
       },
-      yAxis: {
-        fontSize: "2xs",
+      legendItem: {
+        minH: "6",
+        minW: "6",
+        fontSize: "xs",
+        px: "2",
+        lineHeight: get(t, "sizes.6"),
       },
-      referenceLine: {
-        fontSize: "2xs",
-      },
-    },
-    md: {
+    }),
+    md: ({ theme: t }) => ({
       container: {
         w: "3xl",
         h: "sm",
       },
-    },
-    lg: {
+      legend: {
+        gap: "xs",
+        mb: "md",
+      },
+      legendItem: {
+        minH: "7",
+        minW: "7",
+        fontSize: "sm",
+        px: "3",
+        lineHeight: get(t, "sizes.7"),
+      },
+    }),
+    lg: ({ theme: t }) => ({
       container: {
         w: "5xl",
         h: "md",
       },
-    },
+      legend: {
+        gap: "sm",
+        mb: "md",
+      },
+      legendItem: {
+        minH: "8",
+        minW: "8",
+        fontSize: "md",
+        px: "3",
+        lineHeight: get(t, "sizes.8"),
+      },
+    }),
+    full: ({ theme: t }) => ({
+      container: {
+        w: "full",
+        h: "md",
+      },
+      legend: {
+        gap: "sm",
+        mb: "md",
+      },
+      legendItem: {
+        minH: "8",
+        minW: "8",
+        fontSize: "md",
+        px: "3",
+        lineHeight: get(t, "sizes.8"),
+      },
+    }),
   },
 
   defaultProps: {
-    size: "md",
-    variant: "solid",
-    colorScheme: "primary",
+    size: "full",
   },
 }

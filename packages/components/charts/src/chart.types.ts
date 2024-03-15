@@ -58,12 +58,16 @@ export type AreaChartSeries = Merge<
     dot?: DotUIProps
   }
 >
-export type BarChartSeries = Merge<
-  Merge<CSSUIProps, ReChartsBarProps>,
-  { color: CSSUIProps["color"] }
->
 export type LineChartSeries = Merge<
   Merge<CSSUIProps, ReChartsLineProps>,
+  {
+    color: CSSUIProps["color"]
+    activeDot?: DotUIProps
+    dot?: DotUIProps
+  }
+>
+export type BarChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsBarProps>,
   { color: CSSUIProps["color"] }
 >
 export type AreaChartUIProps = Merge<

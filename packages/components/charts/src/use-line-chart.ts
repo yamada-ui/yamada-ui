@@ -117,10 +117,11 @@ export const useLineChart = ({
 
   const lineColors: CSSUIProps["var"] = useMemo(
     () =>
-      series.map((item, index) => ({
+      series.map(({ color }, index) => ({
+        __prefix: "ui",
         name: `line-${index}`,
         token: "colors",
-        value: item.color ?? "gray",
+        value: color ?? "transparent",
       })),
     [series],
   )
@@ -128,16 +129,17 @@ export const useLineChart = ({
   const referenceLineColors: CSSUIProps["var"] = useMemo(
     () =>
       referenceLineProps
-        ? referenceLineProps.map((line, index) => ({
+        ? referenceLineProps.map(({ color }, index) => ({
+            __prefix: "ui",
             name: `reference-line-${index}`,
             token: "colors",
-            value: line.color ?? "gray",
+            value: color ?? "transparent",
           }))
         : [],
     [referenceLineProps],
   )
 
-  const getCSSvariables = useMemo(
+  const lineVars: CSSUIProps["var"] = useMemo(
     () => [...lineColors, ...referenceLineColors],
     [lineColors, referenceLineColors],
   )
@@ -147,12 +149,12 @@ export const useLineChart = ({
     styles.lineChart,
   )(theme)
 
-  const [activeDotProps, activeDotClassName] = getComponentProps<Dict, string>(
+  const [activeDotProps, _activeDotClassName] = getComponentProps<Dict, string>(
     [_activeDotProps, dotProperties],
     styles.activeDot,
   )(theme)
 
-  const [dotProps, dotClassName] = getComponentProps<Dict, string>(
+  const [dotProps, _dotClassName] = getComponentProps<Dict, string>(
     [_dotProps, dotProperties],
     styles.dot,
   )(theme)
@@ -165,8 +167,8 @@ export const useLineChart = ({
         const {
           dataKey,
           strokeDasharray,
-          activeDot: _activeDot,
-          dot: _dot,
+          activeDot: _activeDot = {},
+          dot: _dot = {},
         } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -178,14 +180,19 @@ export const useLineChart = ({
         let activeDot: DotProps | boolean
 
         if (withActiveDots) {
+          const [rest, activeDotClassName] = getComponentProps(
+            [_activeDot, dotProperties],
+            _activeDotClassName,
+          )(theme)
+
           activeDot = {
-            className: activeDotClassName,
+            className: cx("ui-line-chart__active-dot", activeDotClassName),
             fill: color,
             stroke: color,
             r: 4,
             ...activeDotProps,
-            ...(_activeDot as DotProps),
-          }
+            ...rest,
+          } as DotProps
         } else {
           activeDot = false
         }
@@ -193,14 +200,19 @@ export const useLineChart = ({
         let dot: DotProps | boolean
 
         if (withDots) {
+          const [rest, dotClassName] = getComponentProps(
+            [_dot, dotProperties],
+            _dotClassName,
+          )(theme)
+
           dot = {
-            className: dotClassName,
+            className: cx("ui-line-chart__dot", dotClassName),
             fill: color,
             fillOpacity: dimmed ? 0 : 1,
             strokeOpacity: dimmed ? 0 : 1,
             ...dotProps,
-            ...(_dot as DotProps),
-          }
+            ...rest,
+          } as DotProps
         } else {
           dot = false
         }
@@ -217,9 +229,9 @@ export const useLineChart = ({
         }
       }),
     [
-      activeDotClassName,
+      _activeDotClassName,
       activeDotProps,
-      dotClassName,
+      _dotClassName,
       dotProps,
       highlightedArea,
       lineClassName,
@@ -292,7 +304,7 @@ export const useLineChart = ({
   return {
     getLineProps,
     getLineChartProps,
-    getCSSvariables,
+    getCSSvariables: lineVars,
     setHighlightedArea,
   }
 }

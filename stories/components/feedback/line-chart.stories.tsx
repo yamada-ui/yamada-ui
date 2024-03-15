@@ -2,27 +2,16 @@ import type { Meta, StoryFn } from "@storybook/react"
 import { LineChart } from "@yamada-ui/charts"
 import type {
   AxisType,
+  ChartTooltip,
   CurveType,
   LayoutType,
   LineChartProps,
   LineChartSeries,
 } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
-import {
-  Text,
-  Card,
-  FormControl,
-  HStack,
-  SegmentedControl,
-  Select,
-  Slider,
-  SliderThumb,
-  Switch,
-  Tooltip,
-  VStack,
-  useBoolean,
-} from "@yamada-ui/react"
-import { useState } from "react"
+import { Text, Card, HStack, VStack, Wrap } from "@yamada-ui/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof LineChart>
 
@@ -33,88 +22,58 @@ const meta: Meta<typeof LineChart> = {
 
 export default meta
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-]
-
-const series: LineChartSeries[] = [
-  { dataKey: "uv", color: ["indigo.600", "indigo.400"] },
-  { dataKey: "pv", color: ["rose.600", "rose.400"] },
-  { dataKey: "amt", color: ["emerald.600", "emerald.400"] },
-]
+const randomValue = () => Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000
 
 export const basic: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return <LineChart data={data} series={series} dataKey="name" />
 }
 
-export const withVariant: Story = () => {
-  return (
-    <VStack>
-      <LineChart
-        data={data}
-        series={series}
-        dataKey="name"
-        variant="subtle"
-        withLegend
-      />
-      <LineChart data={data} series={series} dataKey="name" withLegend />
-    </VStack>
-  )
-}
-
-export const withSize: Story = () => {
-  return (
-    <VStack>
-      <LineChart data={data} series={series} dataKey="name" size="sm" />
-      <LineChart data={data} series={series} dataKey="name" size="md" />
-      <LineChart data={data} series={series} dataKey="name" size="lg" />
-    </VStack>
-  )
-}
-
 export const custom: Story = () => {
-  const [props, setProps] = useState({
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  const [props, setProps] = useState<LineChartProps>({
     data: data,
     series: series,
     dataKey: "name",
@@ -133,294 +92,316 @@ export const custom: Story = () => {
     curveType: "monotone",
     gridAxis: "x",
     layoutType: "horizontal",
-  } as LineChartProps)
-
-  const [fillOpacityIsOpen, { on: fillOpacityOn, off: fillOpacityOff }] =
-    useBoolean(false)
-  const [strokeWidthIsOpen, { on: strokeWidthOn, off: strokeWidthOff }] =
-    useBoolean(false)
-  const [
-    tooltipAnimationDurationIsOpen,
-    { on: tooltipAnimationDurationOn, off: tooltipAnimationDurationOff },
-  ] = useBoolean(false)
+  })
 
   return (
-    <HStack alignItems="flex-start" w="100%">
+    <Wrap gap="md" alignItems="flex-start">
       <LineChart {...props} />
-      <VStack gap="sm" w="20%">
-        <FormControl label="curve type">
-          <Select
-            size="sm"
-            defaultValue="monotone"
+
+      <Wrap gap="md">
+        <VStack w="auto">
+          <PropControl
+            component="Select"
             items={[
-              { label: "monotone", value: "monotone" },
-              { label: "bump", value: "bump" },
-              { label: "linear", value: "linear" },
-              { label: "natural", value: "natural" },
-              { label: "step", value: "step" },
-              { label: "stepBefore", value: "stepBefore" },
-              { label: "stepAfter", value: "stepAfter" },
+              {
+                label: "Curve Type",
+                defaultValue: "monotone",
+                items: [
+                  { label: "monotone", value: "monotone" },
+                  { label: "bump", value: "bump" },
+                  { label: "linear", value: "linear" },
+                  { label: "natural", value: "natural" },
+                  { label: "step", value: "step" },
+                  { label: "stepBefore", value: "stepBefore" },
+                  { label: "stepAfter", value: "stepAfter" },
+                ],
+                value: props.curveType,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    curveType: value as CurveType,
+                  }))
+                },
+              },
+              {
+                label: "Layout Type",
+                defaultValue: "horizontal",
+                items: [
+                  { label: "horizontal", value: "horizontal" },
+                  { label: "vertical", value: "vertical" },
+                ],
+                value: props.layoutType,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    layoutType: value as LayoutType,
+                  }))
+                },
+              },
             ]}
-            value={props.curveType}
-            onChange={(value) => {
-              setProps((prev) => ({
-                ...prev,
-                curveType: value as CurveType,
-              }))
-            }}
           />
-        </FormControl>
-        <FormControl label="layout type">
-          <Select
-            size="sm"
-            defaultValue="horizontal"
+
+          <PropControl
+            component="SegmentedControl"
             items={[
-              { label: "horizontal", value: "horizontal" },
-              { label: "vertical", value: "vertical" },
+              {
+                label: "Tick Line",
+                items: [
+                  { label: "x", value: "x" },
+                  { label: "y", value: "y" },
+                  { label: "xy", value: "xy" },
+                  { label: "none", value: "none" },
+                ],
+                value: props.tickLine,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    tickLine: value as AxisType,
+                  }))
+                },
+              },
+              {
+                label: "Grid Axis",
+                items: [
+                  { label: "x", value: "x" },
+                  { label: "y", value: "y" },
+                  { label: "xy", value: "xy" },
+                  { label: "none", value: "none" },
+                ],
+                value: props.gridAxis,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    gridAxis: value as AxisType,
+                  }))
+                },
+              },
             ]}
-            value={props.layoutType}
-            onChange={(value) => {
-              setProps((prev) => ({
-                ...prev,
-                layoutType: value as LayoutType,
-              }))
-            }}
           />
-        </FormControl>
-        <FormControl label="tick line">
-          <SegmentedControl
-            size="sm"
+        </VStack>
+
+        <VStack w="auto">
+          <PropControl
+            component="Slider"
             items={[
-              { label: "x", value: "x" },
-              { label: "y", value: "y" },
-              { label: "xy", value: "xy" },
-              { label: "none", value: "none" },
+              {
+                label: "Fill opacity",
+                value: props.fillOpacity as number,
+                min: 0,
+                max: 1,
+                step: 0.1,
+                onChange: (value) => {
+                  setProps((prev) => ({ ...prev, fillOpacity: value }))
+                },
+              },
+              {
+                label: "Stroke width",
+                value: props.strokeWidth,
+                min: 0.5,
+                max: 5,
+                step: 0.5,
+                onChange: (value) => {
+                  setProps((prev) => ({ ...prev, strokeWidth: value }))
+                },
+              },
+              {
+                label: "Tooltip animation duration",
+                value: props.tooltipAnimationDuration,
+                min: 0,
+                max: 2000,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    tooltipAnimationDuration: value,
+                  }))
+                },
+              },
             ]}
-            value={props.tickLine}
-            onChange={(value) => {
-              setProps((prev) => ({
-                ...prev,
-                tickLine: value as AxisType,
-              }))
-            }}
           />
-        </FormControl>
-        <FormControl label="grid axis">
-          <SegmentedControl
-            size="sm"
-            items={[
-              { label: "x", value: "x" },
-              { label: "y", value: "y" },
-              { label: "xy", value: "xy" },
-              { label: "none", value: "none" },
-            ]}
-            value={props.gridAxis}
-            onChange={(value) => {
-              setProps((prev) => ({
-                ...prev,
-                gridAxis: value as AxisType,
-              }))
-            }}
-          />
-        </FormControl>
-      </VStack>
-      <VStack gap="md" w="20%">
-        <FormControl label="fill opacity">
-          <Slider
-            value={props.fillOpacity! * 100}
-            min={0}
-            max={100}
-            onChange={(value) => {
-              setProps((prev) => ({ ...prev, fillOpacity: value / 100 }))
-            }}
-            onMouseEnter={fillOpacityOn}
-            onMouseLeave={fillOpacityOff}
-          >
-            <Tooltip
-              placement="top"
-              label={props.fillOpacity}
-              isOpen={fillOpacityIsOpen}
-            >
-              <SliderThumb />
-            </Tooltip>
-          </Slider>
-        </FormControl>
-        <FormControl label="stroke width">
-          <Slider
-            value={props.strokeWidth! * 10}
-            min={5}
-            max={50}
-            onChange={(value) => {
-              setProps((prev) => ({ ...prev, strokeWidth: value / 10 }))
-            }}
-            onMouseEnter={strokeWidthOn}
-            onMouseLeave={strokeWidthOff}
-          >
-            <Tooltip
-              placement="top"
-              label={props.strokeWidth}
-              isOpen={strokeWidthIsOpen}
-            >
-              <SliderThumb />
-            </Tooltip>
-          </Slider>
-        </FormControl>
-        <FormControl label="tooltip animation duration">
-          <Slider
-            value={props.tooltipAnimationDuration}
-            min={0}
-            max={2000}
-            onChange={(value) => {
-              setProps((prev) => ({ ...prev, tooltipAnimationDuration: value }))
-            }}
-            onMouseEnter={tooltipAnimationDurationOn}
-            onMouseLeave={tooltipAnimationDurationOff}
-          >
-            <Tooltip
-              placement="top"
-              label={props.tooltipAnimationDuration}
-              isOpen={tooltipAnimationDurationIsOpen}
-            >
-              <SliderThumb />
-            </Tooltip>
-          </Slider>
-        </FormControl>
-        <HStack alignItems="flex-start">
-          <VStack>
-            <Switch
-              size="sm"
-              isChecked={props.withXAxis}
-              onChange={() => {
-                setProps((prev) => ({ ...prev, withXAxis: !prev.withXAxis }))
-              }}
-            >
-              x axis
-            </Switch>
-            <Switch
-              size="sm"
-              isChecked={props.withYAxis}
-              onChange={() => {
-                setProps((prev) => ({ ...prev, withYAxis: !prev.withYAxis }))
-              }}
-            >
-              y axis
-            </Switch>
-            <Switch
-              size="sm"
-              isChecked={props.withLegend}
-              onChange={() => {
-                setProps((prev) => ({ ...prev, withLegend: !prev.withLegend }))
-              }}
-            >
-              legend
-            </Switch>
-            <Switch
-              size="sm"
-              isChecked={props.withTooltip}
-              onChange={() => {
-                setProps((prev) => ({
-                  ...prev,
-                  withTooltip: !prev.withTooltip,
-                }))
-              }}
-            >
-              tooltip
-            </Switch>
-          </VStack>
-          <VStack>
-            <Switch
-              size="sm"
-              isChecked={props.withDots}
-              onChange={() => {
-                setProps((prev) => ({ ...prev, withDots: !prev.withDots }))
-              }}
-            >
-              dots
-            </Switch>
-            <Switch
-              size="sm"
-              isChecked={props.withActiveDots}
-              onChange={() => {
-                setProps((prev) => ({
-                  ...prev,
-                  withActiveDots: !prev.withActiveDots,
-                }))
-              }}
-              whiteSpace="nowrap"
-            >
-              active dots
-            </Switch>
-          </VStack>
-        </HStack>
-      </VStack>
-    </HStack>
+
+          <Wrap gap="md" alignItems="flex-start">
+            <PropControl
+              component="Switch"
+              items={[
+                {
+                  label: "x axis",
+                  isChecked: props.withXAxis,
+                  onChange: () =>
+                    setProps((prev) => ({
+                      ...prev,
+                      withXAxis: !prev.withXAxis,
+                    })),
+                },
+                {
+                  label: "y axis",
+                  isChecked: props.withYAxis,
+                  onChange: () =>
+                    setProps((prev) => ({
+                      ...prev,
+                      withYAxis: !prev.withYAxis,
+                    })),
+                },
+                {
+                  label: "legend",
+                  isChecked: props.withLegend,
+                  onChange: () =>
+                    setProps((prev) => ({
+                      ...prev,
+                      withLegend: !prev.withLegend,
+                    })),
+                },
+                {
+                  label: "tooltip",
+                  isChecked: props.withTooltip,
+                  onChange: () =>
+                    setProps((prev) => ({
+                      ...prev,
+                      withTooltip: !prev.withTooltip,
+                    })),
+                },
+              ]}
+            />
+
+            <PropControl
+              component="Switch"
+              items={[
+                {
+                  label: "dots",
+                  isChecked: props.withDots,
+                  onChange: () =>
+                    setProps((prev) => ({
+                      ...prev,
+                      withDots: !prev.withDots,
+                    })),
+                },
+                {
+                  label: "active dots",
+                  isChecked: props.withActiveDots,
+                  onChange: () =>
+                    setProps((prev) => ({
+                      ...prev,
+                      withActiveDots: !prev.withActiveDots,
+                    })),
+                },
+              ]}
+            />
+          </Wrap>
+        </VStack>
+      </Wrap>
+    </Wrap>
   )
 }
 
-const dashSeries: LineChartSeries[] = [
-  { dataKey: "uv", color: "indigo.400" },
-  { dataKey: "pv", color: "rose.400" },
-  { dataKey: "amt", color: "emerald.400", strokeDasharray: "5 5" },
-]
+export const withSize: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
 
-export const withDash: Story = () => {
-  return <LineChart data={data} series={dashSeries} dataKey="name" />
-}
-
-const connectNullsData = [
-  {
-    name: "Page A",
-    uv: 4000,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-  },
-  {
-    name: "Page E",
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-  },
-]
-
-const connectNullsSeries: LineChartSeries[] = [
-  { dataKey: "uv", color: "indigo.400" },
-]
-
-export const withConnectNulls: Story = () => {
-  const [connectNulls, { toggle }] = useBoolean(true)
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
 
   return (
-    <HStack>
-      <LineChart
-        data={connectNullsData}
-        series={connectNullsSeries}
-        dataKey="name"
-        type="default"
-        connectNulls={connectNulls}
-      />
-      <Switch size="sm" isChecked={connectNulls} onChange={toggle}>
-        connect nulls
-      </Switch>
-    </HStack>
+    <>
+      <LineChart data={data} series={series} dataKey="name" size="sm" />
+      <LineChart data={data} series={series} dataKey="name" size="md" />
+      <LineChart data={data} series={series} dataKey="name" size="lg" />
+      <LineChart data={data} series={series} dataKey="name" size="full" />
+    </>
+  )
+}
+
+export const withDash: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "uv",
+        color: ["primary.500", "primary.400"],
+        strokeDasharray: "5 5",
+      },
+    ],
+    [],
+  )
+
+  return <LineChart data={data} series={series} dataKey="name" />
+}
+
+export const withConnectNulls: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: index !== 4 ? randomValue() : null,
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
+    [],
+  )
+
+  return (
+    <LineChart
+      data={data}
+      series={series}
+      dataKey="name"
+      type="default"
+      connectNulls={false}
+    />
   )
 }
 
 export const withSync: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return (
     <VStack>
       <LineChart
@@ -440,6 +421,28 @@ export const withSync: Story = () => {
 }
 
 export const withReferenceLine: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return (
     <LineChart
       data={data}
@@ -453,19 +456,55 @@ export const withReferenceLine: Story = () => {
   )
 }
 
-export const withLegendProps: Story = () => {
-  return (
-    <LineChart
-      data={data}
-      series={series}
-      dataKey="name"
-      withLegend
-      legendProps={{ verticalAlign: "bottom", height: 50 }}
-    />
+export const withLegend: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
   )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return <LineChart data={data} series={series} dataKey="name" withLegend />
 }
 
 export const withAxisProps: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return (
     <LineChart
       data={data}
@@ -484,17 +523,61 @@ export const withAxisProps: Story = () => {
 }
 
 export const withValueFormatter: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return (
     <LineChart
       data={data}
       series={series}
       dataKey="name"
-      valueFormatter={(value) => new Intl.NumberFormat().format(value)}
+      valueFormatter={(value) => value.toLocaleString()}
     />
   )
 }
 
 export const withStrokeDasharray: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return (
     <LineChart
       data={data}
@@ -506,7 +589,29 @@ export const withStrokeDasharray: Story = () => {
   )
 }
 
-export const withUnits: Story = () => {
+export const withUnit: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
   return (
     <LineChart
       data={data}
@@ -518,13 +623,34 @@ export const withUnits: Story = () => {
   )
 }
 
-export const withCustomTooltip: Story = () => {
-  type TooltipProps = {
-    label: string
-    payload: Dict[] | undefined
-  }
+export const customTooltip: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
 
-  const CustomTooltip = ({ label, payload }: TooltipProps) => {
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  const CustomTooltip: ChartTooltip = (props: {
+    label?: string
+    payload?: Dict[]
+  }) => {
+    const { label, payload } = props
     if (!payload) return null
 
     return (
@@ -546,22 +672,75 @@ export const withCustomTooltip: Story = () => {
       series={series}
       dataKey="name"
       tooltipProps={{
-        content: ({ label, payload }) => (
-          <CustomTooltip label={label} payload={payload} />
-        ),
+        content: CustomTooltip,
       }}
     />
   )
 }
 
-export const withCustomDots: Story = () => {
+export const customDots: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
   return (
     <LineChart
       data={data}
       series={series}
       dataKey="name"
-      dotProps={{ r: 6, strokeWidth: 2, stroke: "#fff" }}
-      activeDotProps={{ r: 8, strokeWidth: 1, fill: "#fff" }}
+      dotProps={{ r: 8 }}
+      activeDotProps={{ r: 7, strokeWidth: 1, fill: ["white", "black"] }}
+    />
+  )
+}
+
+export const customLegend: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <LineChart
+      data={data}
+      series={series}
+      dataKey="name"
+      withLegend
+      legendProps={{ verticalAlign: "bottom" }}
     />
   )
 }

@@ -179,7 +179,7 @@ export const useLineChart = ({
 
         if (withActiveDots) {
           activeDot = {
-            className: activeDotClassName,
+            className: cx("ui-line-chart__active-dot", activeDotClassName),
             fill: color,
             stroke: color,
             r: 4,
@@ -194,7 +194,7 @@ export const useLineChart = ({
 
         if (withDots) {
           dot = {
-            className: dotClassName,
+            className: cx("ui-line-chart__dot", dotClassName),
             fill: color,
             fillOpacity: dimmed ? 0 : 1,
             strokeOpacity: dimmed ? 0 : 1,

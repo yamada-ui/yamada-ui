@@ -152,8 +152,11 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
 
   const lines = useMemo(
     () =>
-      series.map((_, index) => (
-        <Line key={`line-${index}`} {...getLineProps({ index })} />
+      series.map(({ dataKey }, index) => (
+        <Line
+          key={`line-${dataKey}`}
+          {...getLineProps({ index, className: "ui-line-chart__line" })}
+        />
       )),
     [getLineProps, series],
   )
@@ -163,7 +166,10 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       referenceLineProps?.map((_, index) => (
         <ReferenceLine
           key={`referenceLine-${index}`}
-          {...getReferenceLineProps({ index })}
+          {...getReferenceLineProps({
+            index,
+            className: "ui-line-chart__reference-line",
+          })}
         />
       )),
     [getReferenceLineProps, referenceLineProps],
@@ -178,18 +184,28 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
         __css={{ ...styles.container }}
         {...rest}
       >
-        <ResponsiveContainer {...getContainerProps()}>
-          <ReChartsLineChart {...getLineChartProps()}>
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-line-chart__container" })}
+        >
+          <ReChartsLineChart
+            {...getLineChartProps({ className: "ui-line-chart__chart" })}
+          >
             {referenceLinesItems}
 
-            <CartesianGrid {...getGridProps()} />
-            <XAxis {...getXAxisProps()} />
-            <YAxis {...getYAxisProps()} />
+            <CartesianGrid
+              {...getGridProps({ className: "ui-line-chart__grid" })}
+            />
+            <XAxis {...getXAxisProps({ className: "ui-line-chart__x-axis" })} />
+            <YAxis {...getYAxisProps({ className: "ui-line-chart__y-axis" })} />
 
             {withLegend ? (
               <ReChartsLegend
                 content={({ payload }) => (
-                  <Legend payload={payload} onHighlight={setHighlightedArea} />
+                  <Legend
+                    className="ui-line-chart__legend"
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                  />
                 )}
                 {...getLegendProps()}
               />
@@ -198,9 +214,13 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (
-                  <ChartTooltip label={label} payload={payload} />
+                  <ChartTooltip
+                    className="ui-line-chart__tooltip"
+                    label={label}
+                    payload={payload}
+                  />
                 )}
-                {...getTooltipProps({}, ref)}
+                {...getTooltipProps()}
               />
             ) : null}
 

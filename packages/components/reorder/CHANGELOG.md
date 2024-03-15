@@ -1,5 +1,21 @@
 # @yamada-ui/reorder
 
+## 1.0.16
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#940](https://github.com/yamada-ui/yamada-ui/pull/940) [`7c61c79`](https://github.com/yamada-ui/yamada-ui/commit/7c61c792d1c1192f3aeccd40703bf17022bfab12) Thanks [@june23hy](https://github.com/june23hy)! - Fixed a bug where theme tokens were used in the Reorder component.
+
+- [#929](https://github.com/yamada-ui/yamada-ui/pull/929) [`89f4cff`](https://github.com/yamada-ui/yamada-ui/commit/89f4cffa3eca739c0c76ec1d70f43c989a3b6309) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the sort order was not updated even if the `children` of `Reorder` were changed.
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/motion@1.0.16
+  - @yamada-ui/icon@1.0.15
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
 ## 1.0.15
 
 ### Patch Changes

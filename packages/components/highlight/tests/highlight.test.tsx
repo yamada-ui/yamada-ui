@@ -15,7 +15,7 @@ describe("<Highlight/>", () => {
       )
 
       expect(result.current).toHaveLength(1)
-      expect(result.current[0].match).toBe(false)
+      expect(result.current[0].match).toBeFalsy()
       expect(result.current[0].text).toBe(text)
     },
   )

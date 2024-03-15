@@ -60,7 +60,7 @@ describe("useNotice()", () => {
       fireEvent.click(screen.getByTestId("OpenNotice"))
     }
     await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle").length).toEqual(3)
+      expect(screen.getAllByText("NoticeTitle")).toHaveLength(3)
     })
   })
 
@@ -88,7 +88,7 @@ describe("useNotice()", () => {
       fireEvent.click(screen.getByTestId("OpenNotice"))
     }
     await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle").length).toEqual(1)
+      expect(screen.getAllByText("NoticeTitle")).toHaveLength(1)
     })
   })
 
@@ -116,7 +116,7 @@ describe("useNotice()", () => {
       fireEvent.click(screen.getByTestId("OpenNotice"))
     }
     await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle").length).toEqual(5)
+      expect(screen.getAllByText("NoticeTitle")).toHaveLength(5)
     })
   })
 
@@ -197,7 +197,7 @@ describe("useNotice()", () => {
       fireEvent.click(screen.getByTestId("OpenNotice"))
     }
     await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle").length).toEqual(5)
+      expect(screen.getAllByText("NoticeTitle")).toHaveLength(5)
     })
     fireEvent.click(screen.getByTestId("CloseAllNotice"))
     await waitFor(() => {

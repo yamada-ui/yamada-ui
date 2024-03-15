@@ -23,11 +23,13 @@ const defaultOverlays = (
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
       var: [
         {
+          __prefix: "ui",
           name: "checkers",
           token: "colors",
           value: ["blackAlpha.300", "whiteAlpha.300"],
         },
         {
+          __prefix: "ui",
           name: "body",
           token: "colors",
           value: ["whiteAlpha.500", "blackAlpha.500"],

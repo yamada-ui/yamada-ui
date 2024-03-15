@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/color-picker",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Yamada UI color picker component",
   "keywords": [
     "yamada",
@@ -76,6 +76,10 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
   }
 }

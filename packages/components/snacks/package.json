@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/snacks",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Yamada UI snacks component",
   "keywords": [
     "yamada",
@@ -69,6 +69,10 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
   }
 }

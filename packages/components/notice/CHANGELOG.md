@@ -1,5 +1,24 @@
 # @yamada-ui/notice
 
+## 1.0.16
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#943](https://github.com/yamada-ui/yamada-ui/pull/943) [`83b885b`](https://github.com/yamada-ui/yamada-ui/commit/83b885b4ed6fb09e34019a68a6194210b4ab8862) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Fixed NoticeProvider theme token usage in styles
+
+- [#933](https://github.com/yamada-ui/yamada-ui/pull/933) [`fde46e9`](https://github.com/yamada-ui/yamada-ui/commit/fde46e99dcf9dc5ff0b259eb955bda1499b133d7) Thanks [@Taiki0807](https://github.com/Taiki0807)! - Fixed a bug where theme tokens were used in notice components.
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/close-button@1.0.16
+  - @yamada-ui/motion@1.0.16
+  - @yamada-ui/portal@1.0.7
+  - @yamada-ui/use-timeout@1.0.7
+  - @yamada-ui/alert@1.0.16
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
 ## 1.0.15
 
 ### Patch Changes

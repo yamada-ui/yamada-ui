@@ -55,7 +55,7 @@ export const Stack = forwardRef<StackProps, "div">(
       justify: justifyContent,
       align: alignItems,
       wrap: flexWrap,
-      gap = "md",
+      gap = "fallback(md, 1rem)",
       divider,
       className,
       children,
@@ -214,7 +214,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
       className,
       direction = "bottom",
       startIndex = 0,
-      gap = "md",
+      gap = "fallback(md, 1rem)",
       reverse = false,
       fit = true,
       children,
@@ -236,7 +236,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     const css: CSSUIObject = {
       position: "relative",
       overflow: "hidden",
-      var: [{ name: "space", token: "spaces", value: gap }],
+      var: [{ __prefix: "ui", name: "space", token: "spaces", value: gap }],
       ...(fit ? boxSize : {}),
     }
 

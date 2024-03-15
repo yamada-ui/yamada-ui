@@ -17,12 +17,6 @@ import {
 import theme, { config } from "./theme"
 import { json, LoaderFunction } from "@remix-run/node"
 
-const parseCookie = (cookie: string, key: string) => {
-  const match = cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
-
-  return match?.[2]
-}
-
 export const links: LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
 ]

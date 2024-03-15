@@ -11,17 +11,14 @@ export const Components = forwardRef<SVGSVGElement, IconProps>(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         stroke="currentColor"
-        strokeWidth="1.5"
+        fill="none"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        fill="none"
         {...rest}
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M3 12l3 3l3 -3l-3 -3z" />
-        <path d="M15 12l3 3l3 -3l-3 -3z" />
-        <path d="M9 6l3 3l3 -3l-3 -3z" />
-        <path d="M9 18l3 3l3 -3l-3 -3z" />
+        <rect width="7" height="7" x="14" y="3" rx="1" />
+        <path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3" />
       </Icon>
     )
   },

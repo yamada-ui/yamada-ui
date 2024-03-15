@@ -41,6 +41,7 @@ export type ChartTooltip =
     ) => ReactNode)
 export type LayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
+export type BarChartType = Exclude<AreaChartType, "split">
 export type AxisType = "x" | "y" | "xy" | "none"
 export type CurveType =
   | "bump"

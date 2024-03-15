@@ -292,7 +292,7 @@ describe.skip("<Resizable />", () => {
   })
 })
 
-describe("<Resizable />", () => {
+describe("<ResizableTriggerIcon />", () => {
   test("applies styles `width` and `height` correctly", async () => {
     const { getByTestId } = render(
       <ResizableTriggerIcon data-testid="resizable" />,

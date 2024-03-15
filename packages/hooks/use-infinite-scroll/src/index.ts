@@ -220,6 +220,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
 
       if (isReverse) {
         const position = prevScrollPosition.current
+
         onScroll({ root, isVertical, position })
       }
 

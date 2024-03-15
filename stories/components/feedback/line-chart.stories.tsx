@@ -3,6 +3,8 @@ import { LineChart } from "@yamada-ui/charts"
 import type {
   AxisType,
   ChartTooltip,
+  CurveType,
+  LayoutType,
   LineChartProps,
   LineChartSeries,
 } from "@yamada-ui/charts"
@@ -113,6 +115,13 @@ export const custom: Story = () => {
                   { label: "stepBefore", value: "stepBefore" },
                   { label: "stepAfter", value: "stepAfter" },
                 ],
+                value: props.curveType,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    curveType: value as CurveType,
+                  }))
+                },
               },
               {
                 label: "Layout Type",
@@ -121,6 +130,13 @@ export const custom: Story = () => {
                   { label: "horizontal", value: "horizontal" },
                   { label: "vertical", value: "vertical" },
                 ],
+                value: props.layoutType,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    layoutType: value as LayoutType,
+                  }))
+                },
               },
             ]}
           />

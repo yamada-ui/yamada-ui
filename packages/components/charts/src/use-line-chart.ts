@@ -139,7 +139,7 @@ export const useLineChart = ({
     [referenceLineProps],
   )
 
-  const getCSSvariables = useMemo(
+  const lineVars: CSSUIProps["var"] = useMemo(
     () => [...lineColors, ...referenceLineColors],
     [lineColors, referenceLineColors],
   )
@@ -149,12 +149,12 @@ export const useLineChart = ({
     styles.lineChart,
   )(theme)
 
-  const [activeDotProps, activeDotClassName] = getComponentProps<Dict, string>(
+  const [activeDotProps, _activeDotClassName] = getComponentProps<Dict, string>(
     [_activeDotProps, dotProperties],
     styles.activeDot,
   )(theme)
 
-  const [dotProps, dotClassName] = getComponentProps<Dict, string>(
+  const [dotProps, _dotClassName] = getComponentProps<Dict, string>(
     [_dotProps, dotProperties],
     styles.dot,
   )(theme)
@@ -167,8 +167,8 @@ export const useLineChart = ({
         const {
           dataKey,
           strokeDasharray,
-          activeDot: _activeDot,
-          dot: _dot,
+          activeDot: _activeDot = {},
+          dot: _dot = {},
         } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -180,14 +180,19 @@ export const useLineChart = ({
         let activeDot: DotProps | boolean
 
         if (withActiveDots) {
+          const [rest, activeDotClassName] = getComponentProps(
+            [_activeDot, dotProperties],
+            _activeDotClassName,
+          )(theme)
+
           activeDot = {
             className: cx("ui-line-chart__active-dot", activeDotClassName),
             fill: color,
             stroke: color,
             r: 4,
             ...activeDotProps,
-            ...(_activeDot as DotProps),
-          }
+            ...rest,
+          } as DotProps
         } else {
           activeDot = false
         }
@@ -195,14 +200,19 @@ export const useLineChart = ({
         let dot: DotProps | boolean
 
         if (withDots) {
+          const [rest, dotClassName] = getComponentProps(
+            [_dot, dotProperties],
+            _dotClassName,
+          )(theme)
+
           dot = {
             className: cx("ui-line-chart__dot", dotClassName),
             fill: color,
             fillOpacity: dimmed ? 0 : 1,
             strokeOpacity: dimmed ? 0 : 1,
             ...dotProps,
-            ...(_dot as DotProps),
-          }
+            ...rest,
+          } as DotProps
         } else {
           dot = false
         }
@@ -219,9 +229,9 @@ export const useLineChart = ({
         }
       }),
     [
-      activeDotClassName,
+      _activeDotClassName,
       activeDotProps,
-      dotClassName,
+      _dotClassName,
       dotProps,
       highlightedArea,
       lineClassName,
@@ -294,7 +304,7 @@ export const useLineChart = ({
   return {
     getLineProps,
     getLineChartProps,
-    getCSSvariables,
+    getCSSvariables: lineVars,
     setHighlightedArea,
   }
 }

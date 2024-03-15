@@ -218,6 +218,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
                     className="ui-line-chart__tooltip"
                     label={label}
                     payload={payload}
+                    valueFormatter={valueFormatter}
                   />
                 )}
                 {...getTooltipProps()}

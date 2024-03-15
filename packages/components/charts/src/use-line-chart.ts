@@ -117,10 +117,11 @@ export const useLineChart = ({
 
   const lineColors: CSSUIProps["var"] = useMemo(
     () =>
-      series.map((item, index) => ({
+      series.map(({ color }, index) => ({
+        __prefix: "ui",
         name: `line-${index}`,
         token: "colors",
-        value: item.color ?? "gray",
+        value: color ?? "transparent",
       })),
     [series],
   )
@@ -128,10 +129,11 @@ export const useLineChart = ({
   const referenceLineColors: CSSUIProps["var"] = useMemo(
     () =>
       referenceLineProps
-        ? referenceLineProps.map((line, index) => ({
+        ? referenceLineProps.map(({ color }, index) => ({
+            __prefix: "ui",
             name: `reference-line-${index}`,
             token: "colors",
-            value: line.color ?? "gray",
+            value: color ?? "transparent",
           }))
         : [],
     [referenceLineProps],

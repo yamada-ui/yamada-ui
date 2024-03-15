@@ -87,6 +87,8 @@ export const tokens: Tokens = {
     "maxHeight",
     "maxBlockSize",
     "boxSize",
+    "minBoxSize",
+    "minBoxSize",
     "flexBasis",
   ],
   spaces: [

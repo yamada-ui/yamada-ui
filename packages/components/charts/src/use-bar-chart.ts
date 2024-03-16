@@ -41,13 +41,6 @@ export type UseBarChartOptions = {
    * @default 'horizontal'
    */
   layoutType?: LayoutType
-
-  /**
-   * A tuple of colors used when `type="split"` is set, ignored in all other cases.
-   *
-   * @default '["red.400", "green.400"]'
-   */
-  splitColors?: [string, string]
   /**
    * A function to format values on Y axis and inside the tooltip
    */
@@ -105,7 +98,7 @@ export type UseBarChartOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps: ReferenceLineUIProps[]
+  referenceLineProps?: ReferenceLineUIProps[]
   /**
    * Controls fill opacity of all bars.
    *
@@ -124,9 +117,8 @@ export const useBarChart = ({
   type,
   barChartProps: _barChartProps = {},
   layoutType = "horizontal",
-  splitColors = ["red.400", "green.400"],
   connectNulls = true,
-  referenceLineProps,
+  referenceLineProps = [],
   fillOpacity = 1,
   styles,
 }: UseBarChartProps) => {
@@ -148,17 +140,6 @@ export const useBarChart = ({
     [series],
   )
 
-  const barSplitColors: CSSUIProps["var"] = useMemo(
-    () =>
-      splitColors.map((color, index) => ({
-        __prefix: "ui",
-        name: `bar-split-${index}`,
-        token: "colors",
-        value: color ?? "transparent",
-      })),
-    [splitColors],
-  )
-
   const referenceLineColors: CSSUIProps["var"] = useMemo(
     () =>
       referenceLineProps.map(({ color }, index) => ({
@@ -171,8 +152,8 @@ export const useBarChart = ({
   )
 
   const barVars: CSSUIProps["var"] = useMemo(() => {
-    return [...barColors, ...barSplitColors, ...referenceLineColors]
-  }, [barColors, barSplitColors, referenceLineColors])
+    return [...barColors, ...referenceLineColors]
+  }, [barColors, referenceLineColors])
 
   const [barChartProps, barChartClassName] = getComponentProps<Dict, string>(
     [_barChartProps, areaChartProperties],
@@ -203,7 +184,7 @@ export const useBarChart = ({
     [highlightedArea, series, shouldHighlight, styles.area, theme, uuid],
   )
 
-  //TODO: fillOpacity dimmedも効いてない
+  //TODO: dimmed効いてないverticalで表示されない
   const getBarProps: RequiredChartPropGetter<
     "div",
     {

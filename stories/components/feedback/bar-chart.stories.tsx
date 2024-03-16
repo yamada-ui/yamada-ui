@@ -68,7 +68,7 @@ export const custom: Story = () => {
   const [props, setProps] = useState<BarChartProps>({
     data: data,
     series: series,
-    dataKey: "name",
+    dataKey: "month",
     withXAxis: true,
     withYAxis: true,
     withTooltip: true,
@@ -81,7 +81,6 @@ export const custom: Story = () => {
     strokeDasharray: "5 5",
     gridAxis: "x",
     type: "default",
-    splitColors: ["#28412c", "#ff0000"],
     layoutType: "horizontal",
   })
 

@@ -3,6 +3,25 @@ import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const BarChart: ComponentMultiStyle = {
   baseStyle: {
+    container: {},
+    chart: {},
+    referenceLine: {
+      fillOpacity: 1,
+      fontSize: "xs",
+    },
+    grid: {
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      strokeWidth: 1,
+    },
+    xAxis: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontSize: "xs",
+    },
+    yAxis: {
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+      fontSize: "xs",
+    },
+    bar: {},
     legend: {
       display: "flex",
       justifyContent: "flex-end",
@@ -141,8 +160,6 @@ export const BarChart: ComponentMultiStyle = {
   },
 
   defaultProps: {
-    size: "md",
-    variant: "solid",
-    colorScheme: "primary",
+    size: "full",
   },
 }

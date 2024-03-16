@@ -54,7 +54,7 @@ export type UseBarChartOptions = {
    *
    * @default 1
    */
-  fillOpacity?: number
+  fillOpacity?: number | [number, number]
 }
 
 export type UseBarChartProps = UseBarChartOptions & {
@@ -101,8 +101,12 @@ export const useBarChart = ({
   )
 
   const barVars: CSSUIProps["var"] = useMemo(() => {
-    return [...barColors, ...referenceLineColors]
-  }, [barColors, referenceLineColors])
+    return [
+      ...barColors,
+      ...referenceLineColors,
+      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+    ]
+  }, [barColors, fillOpacity, referenceLineColors])
 
   const [barChartProps, barChartClassName] = getComponentProps<Dict, string>(
     [_barChartProps, areaChartProperties],
@@ -133,7 +137,7 @@ export const useBarChart = ({
     [highlightedArea, series, shouldHighlight, styles.area, theme, uuid],
   )
 
-  //TODO: dimmed効いてないverticalで表示されない
+  //TODO: dimmed効いてない
   const getBarProps: RequiredChartPropGetter<
     "div",
     {
@@ -155,13 +159,13 @@ export const useBarChart = ({
         stroke: color,
         isAnimationActive: false,
         stackId: stacked ? "stack" : undefined,
-        fillOpacity: dimmed ? 0.1 : fillOpacity,
+        fillOpacity: dimmed ? 0.1 : "var(--ui-fill-opacity)",
         strokeOpacity: dimmed ? 0.2 : 0,
         ...(props as Omit<BarProps, "dataKey">),
         ...rest,
       }
     },
-    [barPropsList, fillOpacity, stacked],
+    [barPropsList, stacked],
   )
 
   const getBarChartProps: ChartPropGetter<

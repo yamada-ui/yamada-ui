@@ -75,7 +75,7 @@ export const custom: Story = () => {
     withLegend: false,
     strokeWidth: 2,
     tooltipAnimationDuration: 0,
-    fillOpacity: 0.4,
+    fillOpacity: 1,
     tickLine: "y",
     strokeDasharray: "5 5",
     gridAxis: "x",
@@ -179,16 +179,6 @@ export const custom: Story = () => {
                   setProps((prev) => ({ ...prev, fillOpacity: value }))
                 },
               },
-              // {
-              //   label: "Stroke width",
-              //   value: props.strokeWidth,
-              //   min: 0.5,
-              //   max: 5,
-              //   step: 0.5,
-              //   onChange: (value) => {
-              //     setProps((prev) => ({ ...prev, strokeWidth: value }))
-              //   },
-              // },
               {
                 label: "Tooltip animation duration",
                 value: props.tooltipAnimationDuration,
@@ -467,7 +457,6 @@ export const withStrokeDasharray: Story = () => {
   )
 }
 
-//TODO: fillOpacity
 export const withFillOpacity: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -492,7 +481,7 @@ export const withFillOpacity: Story = () => {
       data={data}
       series={series}
       dataKey="month"
-      // fillOpacity={[0.8, 0.7]}
+      fillOpacity={[0.8, 0.7]}
     />
   )
 }

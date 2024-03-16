@@ -130,15 +130,19 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 
-  //TODO : なんかbarにitem入ってる usememoしていない
-  const bars = series.map((item, index) => {
-    return (
-      <Bar
-        key={index}
-        {...getBarProps({ item, index, className: "ui-bar-chart__bar" })}
-      />
-    )
-  })
+  //TODO : なんかbarにitem入ってる
+  const bars = useMemo(
+    () =>
+      series.map((item, index) => {
+        return (
+          <Bar
+            key={index}
+            {...getBarProps({ item, index, className: "ui-bar-chart__bar" })}
+          />
+        )
+      }),
+    [getBarProps, series],
+  )
 
   const referenceLinesItems = useMemo(
     () =>

@@ -194,8 +194,6 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
           <ReChartsLineChart
             {...getLineChartProps({ className: "ui-line-chart__chart" })}
           >
-            {referenceLinesItems}
-
             <CartesianGrid
               {...getGridProps({ className: "ui-line-chart__grid" })}
             />
@@ -231,6 +229,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
             ) : null}
 
             {lines}
+            {referenceLinesItems}
           </ReChartsLineChart>
         </ResponsiveContainer>
       </ui.div>

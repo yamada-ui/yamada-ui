@@ -552,7 +552,7 @@ export const withReferenceLine: Story = () => {
       series={series}
       dataKey="name"
       referenceLineProps={[
-        { y: 5500, label: "x line", color: "red.500" },
+        { y: 3000, label: "x line", color: "red.500" },
         { x: "Page F", label: "y line" },
       ]}
     />

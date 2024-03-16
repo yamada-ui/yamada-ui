@@ -145,6 +145,8 @@ export const transformProps: TransformProps = {
     { properties: "maxHeight", transform: "px" },
     { properties: "maxBlockSize", transform: "px" },
     { properties: "boxSize", transform: "px" },
+    { properties: "minBoxSize", transform: "px" },
+    { properties: "maxBoxSize", transform: "px" },
   ],
   bgClip: ["backgroundClip"],
   gradient: ["backgroundImage"],

@@ -1,5 +1,5 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { getCSS, useTheme } from "@yamada-ui/core"
+import { useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
@@ -224,8 +224,6 @@ export const useAreaChart = ({
     styles.dot,
   )(theme)
 
-  const areaClassName = getCSS(styles.area)(theme)
-
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {
       const dataKey = series[0].dataKey as string
@@ -245,12 +243,7 @@ export const useAreaChart = ({
   const areaPropsList = useMemo(
     () =>
       series.map((props, index) => {
-        const {
-          dataKey,
-          strokeDasharray,
-          activeDot: _activeDot = {},
-          dot: _dot = {},
-        } = props
+        const { dataKey, activeDot: _activeDot = {}, dot: _dot = {} } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -263,7 +256,7 @@ export const useAreaChart = ({
         }
         const [rest, className] = getComponentProps(
           [resolvedProps, areaProperties],
-          areaClassName,
+          styles.area,
         )(theme)
 
         let activeDot: DotProps | boolean
@@ -313,7 +306,6 @@ export const useAreaChart = ({
           className,
           ...rest,
           color,
-          strokeDasharray,
           dataKey,
           activeDot,
           dot,
@@ -324,11 +316,11 @@ export const useAreaChart = ({
       uuid,
       shouldHighlight,
       highlightedArea,
-      areaClassName,
+      dimAreaProps,
+      styles.area,
       theme,
       withActiveDots,
       withDots,
-      dimAreaProps,
       _activeDotClassName,
       activeDotProps,
       dimDotProps,

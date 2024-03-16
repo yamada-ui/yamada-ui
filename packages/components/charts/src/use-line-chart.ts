@@ -68,7 +68,7 @@ export type UseLineChartOptions = {
    */
   curveType?: CurveType
   /**
-   *  Stroke width for the chart areas.
+   *  Stroke width for the chart lines.
    *
    * @default 2
    */
@@ -84,11 +84,11 @@ export type UseLineChartOptions = {
    */
   referenceLineProps?: ReferenceLineUIProps[]
   /**
-   *  Controls fill opacity of all areas.
+   *  Controls fill opacity of all lines.
    *
    * @default 1
    */
-  fillOpacity?: number
+  fillOpacity?: number | [number, number]
 }
 
 type UseLineChartProps = UseLineChartOptions & {
@@ -140,8 +140,12 @@ export const useLineChart = ({
   )
 
   const lineVars: CSSUIProps["var"] = useMemo(
-    () => [...lineColors, ...referenceLineColors],
-    [lineColors, referenceLineColors],
+    () => [
+      ...lineColors,
+      ...referenceLineColors,
+      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+    ],
+    [fillOpacity, lineColors, referenceLineColors],
   )
 
   const [lineChartProps, lineChartClassName] = getComponentProps<Dict, string>(
@@ -291,14 +295,14 @@ export const useLineChart = ({
         stroke: color,
         isAnimationActive: false,
         connectNulls,
-        fillOpacity: dimmed ? 0 : fillOpacity,
-        strokeOpacity: dimmed ? 0.5 : fillOpacity,
+        fillOpacity: dimmed ? 0 : "var(--ui-fill-opacity)",
+        strokeOpacity: dimmed ? 0.5 : "var(--ui-fill-opacity)",
         strokeDasharray,
         ...(props as Omit<LineProps, "dataKey">),
         ...rest,
       }
     },
-    [connectNulls, curveType, fillOpacity, linePropList, strokeWidth],
+    [connectNulls, curveType, linePropList, strokeWidth],
   )
 
   return {

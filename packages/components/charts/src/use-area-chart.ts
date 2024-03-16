@@ -190,7 +190,7 @@ export const useAreaChart = ({
       ...areaColors,
       ...areaSplitColors,
       ...referenceLineColors,
-      { name: "fill-opacity", value: fillOpacity },
+      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
     ]
   }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
 

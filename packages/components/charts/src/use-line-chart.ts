@@ -32,15 +32,27 @@ export type UseLineChartOptions = {
    */
   series: LineChartSeries[]
   /**
-   *  Props passed down to recharts `LineChart` component.
+   * Props passed down to recharts `LineChart` component.
    */
   lineChartProps?: LineChartUIProps
   /**
-   *  Props passed down to all dots. Ignored if `withDots={false}` is set.
+   * Props passed down to dim lines.
+   *
+   * @default "{ fillOpacity: 0, strokeOpacity: 0.3 }"
+   */
+  dimLineProps?: Omit<Partial<LineChartSeries>, "dataKey" | "dot" | "activeDot">
+  /**
+   * Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
   dotProps?: DotUIProps
   /**
-   *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
+   * Props passed down to dim dots.
+   *
+   * @default "{ fillOpacity: 0, strokeOpacity: 0 }"
+   */
+  dimDotProps?: DotUIProps
+  /**
+   * Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
   activeDotProps?: DotUIProps
   /**
@@ -50,31 +62,31 @@ export type UseLineChartOptions = {
    */
   layoutType?: LayoutType
   /**
-   *  Determines whether dots should be displayed.
+   * Determines whether dots should be displayed.
    *
    * @default true
    */
   withDots?: boolean
   /**
-   *  Determines whether activeDots should be displayed.
+   * Determines whether activeDots should be displayed.
    *
    * @default true
    */
   withActiveDots?: boolean
   /**
-   *  Type of the curve.
+   * Type of the curve.
    *
    * @default `monotone`
    */
   curveType?: CurveType
   /**
-   *  Stroke width for the chart areas.
+   * Stroke width for the chart lines.
    *
    * @default 2
    */
   strokeWidth?: number
   /**
-   *  Determines whether points with `null` values should be connected.
+   * Determines whether points with `null` values should be connected.
    *
    * @default true
    */
@@ -84,11 +96,11 @@ export type UseLineChartOptions = {
    */
   referenceLineProps?: ReferenceLineUIProps[]
   /**
-   *  Controls fill opacity of all areas.
+   * Controls fill opacity of all lines.
    *
    * @default 1
    */
-  fillOpacity?: number
+  fillOpacity?: number | [number, number]
 }
 
 type UseLineChartProps = UseLineChartOptions & {
@@ -100,7 +112,9 @@ export const useLineChart = ({
   series,
   lineChartProps: _lineChartProps = {},
   activeDotProps: _activeDotProps = {},
+  dimLineProps = { fillOpacity: 0, strokeOpacity: 0.3 },
   dotProps: _dotProps = {},
+  dimDotProps = { fillOpacity: 0, strokeOpacity: 0 },
   layoutType = "horizontal",
   withDots = true,
   withActiveDots = true,
@@ -140,8 +154,12 @@ export const useLineChart = ({
   )
 
   const lineVars: CSSUIProps["var"] = useMemo(
-    () => [...lineColors, ...referenceLineColors],
-    [lineColors, referenceLineColors],
+    () => [
+      ...lineColors,
+      ...referenceLineColors,
+      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+    ],
+    [fillOpacity, lineColors, referenceLineColors],
   )
 
   const [lineChartProps, lineChartClassName] = getComponentProps<Dict, string>(
@@ -172,8 +190,14 @@ export const useLineChart = ({
         } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const resolvedProps = {
+          fillOpacity: "var(--ui-fill-opacity)",
+          strokeOpacity: "var(--ui-fill-opacity)",
+          ...props,
+          ...(dimmed ? dimLineProps : {}),
+        }
         const [rest, className] = getComponentProps<Dict, string>(
-          [props, lineProperties],
+          [resolvedProps, lineProperties],
           lineClassName,
         )(theme)
 
@@ -200,8 +224,9 @@ export const useLineChart = ({
         let dot: DotProps | boolean
 
         if (withDots) {
+          const resolvedDot = { ..._dot, ...(dimmed ? dimDotProps : {}) }
           const [rest, dotClassName] = getComponentProps(
-            [_dot, dotProperties],
+            [resolvedDot, dotProperties],
             _dotClassName,
           )(theme)
 
@@ -219,7 +244,6 @@ export const useLineChart = ({
 
         return {
           color,
-          dimmed,
           className,
           ...rest,
           strokeDasharray,
@@ -229,17 +253,19 @@ export const useLineChart = ({
         }
       }),
     [
-      _activeDotClassName,
-      activeDotProps,
-      _dotClassName,
-      dotProps,
-      highlightedArea,
-      lineClassName,
       series,
       shouldHighlight,
+      highlightedArea,
+      dimLineProps,
+      lineClassName,
       theme,
       withActiveDots,
       withDots,
+      _activeDotClassName,
+      activeDotProps,
+      dimDotProps,
+      _dotClassName,
+      dotProps,
     ],
   )
 
@@ -269,7 +295,6 @@ export const useLineChart = ({
     ({ index, className: classNameProp, ...props }, ref = null) => {
       const {
         color,
-        dimmed,
         className,
         dataKey,
         strokeDasharray,
@@ -291,14 +316,12 @@ export const useLineChart = ({
         stroke: color,
         isAnimationActive: false,
         connectNulls,
-        fillOpacity: dimmed ? 0 : fillOpacity,
-        strokeOpacity: dimmed ? 0.5 : fillOpacity,
         strokeDasharray,
         ...(props as Omit<LineProps, "dataKey">),
         ...rest,
       }
     },
-    [connectNulls, curveType, fillOpacity, linePropList, strokeWidth],
+    [connectNulls, curveType, linePropList, strokeWidth],
   )
 
   return {

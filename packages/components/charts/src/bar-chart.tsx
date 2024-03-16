@@ -178,8 +178,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
           <ReChartsBarChart
             {...getBarChartProps({ className: "ui-bar-chart__chart" })}
           >
-            {referenceLinesItems}
-
             <CartesianGrid
               {...getGridProps({ className: "ui-area-chart__grid" })}
             />
@@ -214,6 +212,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
             ) : null}
 
             {bars}
+            {referenceLinesItems}
           </ReChartsBarChart>
         </ResponsiveContainer>
       </ui.div>

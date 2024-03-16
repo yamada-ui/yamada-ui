@@ -2,12 +2,12 @@ import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import { useLegend } from "./use-chart"
 
-export type LegendProps = {
+export type ChartLegendProps = {
   payload?: Dict[]
   onHighlight: (area: string | null) => void
 }
 
-export const Legend = forwardRef<LegendProps, "div">(
+export const ChartLegend = forwardRef<ChartLegendProps, "div">(
   ({ className, payload = [], onHighlight }, ref) => {
     const { styles } = useLegend()
 

@@ -27,6 +27,7 @@ const DISCORD_USER_MAP: Record<string, string> = {
   hoshico: "982900988073607269",
   "komura-c": "394133735567785996",
   melodyclue: "1039205048711913652",
+  imaimai17468: "394831848733409281",
 }
 
 const GITHUB_JOINING_COMMENT = (id: string) =>

@@ -123,4 +123,15 @@ export const CORE_MEMBERS = [
       ja: "フロントエンドと音に興味があるWebエンジニア。",
     },
   },
+  {
+    id: "melodyclue",
+    name: { en: "melodyclue", ja: "melodyclue" },
+    icon: "https://avatars.githubusercontent.com/u/117662771?v=4",
+    github: "https://github.com/melodyclue",
+    twitter: "https://twitter.com/melodyclue_v3",
+    description: {
+      en: "Front-end engineer, love Remix.",
+      ja: "Remixが好きなフロントエンドエンジニア",
+    },
+  },
 ]

@@ -18,11 +18,11 @@ import { xAxisProperties, yAxisProperties } from "./chart.types"
 
 export type UseChartAxisOptions = {
   /**
-   *  The key of a group of data which should be unique in an area chart.
+   * The key of a group of data which should be unique in an chart.
    */
   dataKey: string
   /**
-   *  Controls how chart areas are positioned relative to each other
+   * Controls how chart areas are positioned relative to each other
    *
    * @default `default`
    */
@@ -58,11 +58,11 @@ export type UseChartAxisOptions = {
    */
   withYAxis?: boolean
   /**
-   *  Props passed down to recharts 'XAxis' component.
+   * Props passed down to recharts 'XAxis' component.
    */
   xAxisProps?: XAxisUIProps
   /**
-   *  Props passed down to recharts 'YAxis' component.
+   * Props passed down to recharts 'YAxis' component.
    */
   yAxisProps?: YAxisUIProps
   /**

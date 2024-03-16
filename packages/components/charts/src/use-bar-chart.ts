@@ -33,7 +33,7 @@ export type UseBarChartOptions = {
    */
   series: BarChartSeries[]
   /**
-   *  Controls how chart areas are positioned relative to each other
+   * Controls how chart bars are positioned relative to each other
    *
    * @default `default`
    */
@@ -46,7 +46,7 @@ export type UseBarChartOptions = {
   layoutType?: LayoutType
 
   /**
-   *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
+   * A tuple of colors used when `type="split"` is set, ignored in all other cases.
    *
    * @default '["red.400", "green.400"]'
    */
@@ -56,7 +56,7 @@ export type UseBarChartOptions = {
    */
   valueFormatter?: (value: number) => string
   /**
-   *  Props passed down to recharts `AreaChart` component.
+   * Props passed down to recharts `BarChart` component.
    */
   barChartProps?: BarChartUIProps
   /**
@@ -100,13 +100,13 @@ export type UseBarChartOptions = {
    */
   orientation?: LayoutType
   /**
-   *  Determines whether points with `null` values should be connected.
+   * Determines whether points with `null` values should be connected.
    *
    * @default true
    */
   connectNulls?: boolean
   /**
-   *  Controls fill opacity of all areas.
+   * Controls fill opacity of all bars.
    *
    * @default 1
    */

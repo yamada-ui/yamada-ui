@@ -1,4 +1,4 @@
-import { useTheme, getCSS } from "@yamada-ui/core"
+import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
@@ -177,17 +177,10 @@ export const useLineChart = ({
     styles.dot,
   )(theme)
 
-  const lineClassName = getCSS(styles.line)(theme)
-
   const linePropList = useMemo(
     () =>
       series.map((props, index) => {
-        const {
-          dataKey,
-          strokeDasharray,
-          activeDot: _activeDot = {},
-          dot: _dot = {},
-        } = props
+        const { dataKey, activeDot: _activeDot = {}, dot: _dot = {} } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const resolvedProps = {
@@ -198,7 +191,7 @@ export const useLineChart = ({
         }
         const [rest, className] = getComponentProps<Dict, string>(
           [resolvedProps, lineProperties],
-          lineClassName,
+          styles.line,
         )(theme)
 
         let activeDot: DotProps | boolean
@@ -246,7 +239,6 @@ export const useLineChart = ({
           color,
           className,
           ...rest,
-          strokeDasharray,
           dataKey,
           activeDot,
           dot,
@@ -257,7 +249,7 @@ export const useLineChart = ({
       shouldHighlight,
       highlightedArea,
       dimLineProps,
-      lineClassName,
+      styles.line,
       theme,
       withActiveDots,
       withDots,
@@ -293,15 +285,8 @@ export const useLineChart = ({
     Omit<LineProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
-      const {
-        color,
-        className,
-        dataKey,
-        strokeDasharray,
-        activeDot,
-        dot,
-        ...rest
-      } = linePropList[index]
+      const { color, className, dataKey, activeDot, dot, ...rest } =
+        linePropList[index]
 
       return {
         ref,
@@ -316,7 +301,6 @@ export const useLineChart = ({
         stroke: color,
         isAnimationActive: false,
         connectNulls,
-        strokeDasharray,
         ...(props as Omit<LineProps, "dataKey">),
         ...rest,
       }

@@ -37,10 +37,26 @@ export const basic: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
+}
+
+export const useRangeData: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: [randomValue(), randomValue()],
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [{ dataKey: "Smartphones", color: ["primary.500", "primary.400"] }],
     [],
   )
   return <BarChart data={data} series={series} dataKey="month" />
@@ -59,9 +75,9 @@ export const custom: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -243,6 +259,36 @@ export const custom: Story = () => {
   )
 }
 
+export const withMix: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        stackId: "a",
+      },
+      {
+        dataKey: "Laptops",
+        color: ["secondary.500", "secondary.400"],
+        stackId: "a",
+      },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
+}
+
 export const withSize: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -255,9 +301,9 @@ export const withSize: Story = () => {
   }, [])
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -272,36 +318,43 @@ export const withSize: Story = () => {
 }
 
 export const withSync: Story = () => {
-  const data = useMemo(() => {
-    const monthes = ["January", "February", "March", "April", "May", "June"]
-    return monthes.map((month) => ({
-      month,
-      Smartphones: randomValue(),
-      Laptops: randomValue(),
-      Tablets: randomValue(),
-    }))
-  }, [])
-
-  const series: BarChartSeries[] = useMemo(
-    () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
-    ],
-    [],
-  )
-
+  const data = [
+    useMemo(() => {
+      const monthes = ["January", "February", "March", "April", "May", "June"]
+      return monthes.map((month) => ({
+        month,
+        Smartphones: randomValue(),
+      }))
+    }, []),
+    useMemo(() => {
+      const monthes = ["January", "February", "March", "April", "May", "June"]
+      return monthes.map((month) => ({
+        month,
+        Laptops: randomValue(),
+      }))
+    }, []),
+  ]
+  const series: BarChartSeries[][] = [
+    useMemo(
+      () => [{ dataKey: "Smartphones", color: ["primary.500", "primary.400"] }],
+      [],
+    ),
+    useMemo(
+      () => [{ dataKey: "Laptops", color: ["secondary.500", "secondary.400"] }],
+      [],
+    ),
+  ]
   return (
     <VStack>
       <BarChart
-        data={data}
-        series={series}
+        data={data[0]}
+        series={series[0]}
         dataKey="month"
         barChartProps={{ syncId: "syncId" }}
       />
       <BarChart
-        data={data}
-        series={series}
+        data={data[1]}
+        series={series[1]}
         dataKey="month"
         barChartProps={{ syncId: "syncId" }}
       />
@@ -322,9 +375,9 @@ export const withReferenceLine: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -353,9 +406,9 @@ export const withLegend: Story = () => {
   }, [])
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -375,9 +428,9 @@ export const withAxisProps: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -411,9 +464,9 @@ export const withValueFormatter: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -425,6 +478,32 @@ export const withValueFormatter: Story = () => {
       valueFormatter={(value) => value.toLocaleString()}
     />
   )
+}
+
+//TODO: radiusが効いてない（CSSは当たってる）backgroundの色もYamada UIにしないと
+export const withBarProps: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        background: { fill: "#eee" },
+        // radius: 10,
+      },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
 }
 
 export const withStrokeDasharray: Story = () => {
@@ -440,9 +519,9 @@ export const withStrokeDasharray: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -470,9 +549,9 @@ export const withFillOpacity: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -499,9 +578,9 @@ export const withUnit: Story = () => {
 
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -516,6 +595,30 @@ export const withUnit: Story = () => {
   )
 }
 
+//TODO:yamada-uiで対応する yamada-uiようのRectangleを作る
+export const customActiveBar: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        // activeBar: { fill: "red" },
+        // activeBar: <Rectangle fill="pink" stroke="blue" />,
+      },
+    ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
+}
+
 export const customTooltip: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -528,9 +631,9 @@ export const customTooltip: Story = () => {
   }, [])
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )
@@ -578,9 +681,9 @@ export const costomLegend: Story = () => {
   }, [])
   const series: BarChartSeries[] = useMemo(
     () => [
-      { dataKey: "Smartphones", color: ["indigo.600", "indigo.400"] },
-      { dataKey: "Laptops", color: ["rose.600", "rose.400"] },
-      { dataKey: "Tablets", color: ["emerald.600", "emerald.400"] },
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
     ],
     [],
   )

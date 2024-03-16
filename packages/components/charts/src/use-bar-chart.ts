@@ -137,7 +137,6 @@ export const useBarChart = ({
     [highlightedArea, series, shouldHighlight, styles.area, theme, uuid],
   )
 
-  //TODO: dimmed効いてない
   const getBarProps: RequiredChartPropGetter<
     "div",
     {

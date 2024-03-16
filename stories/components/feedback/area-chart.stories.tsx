@@ -759,6 +759,43 @@ export const withUnit: Story = () => {
   )
 }
 
+export const customDots: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "uv",
+        color: ["primary.500", "primary.400"],
+        dot: { fill: ["black", "white"] },
+      },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      dotProps={{ r: 8 }}
+      activeDotProps={{ r: 7, strokeWidth: 1, fill: ["white", "black"] }}
+    />
+  )
+}
+
 export const customTooltip: Story = () => {
   const data = useMemo(
     () =>
@@ -810,43 +847,6 @@ export const customTooltip: Story = () => {
       tooltipProps={{
         content: CustomTooltip,
       }}
-    />
-  )
-}
-
-export const customDots: Story = () => {
-  const data = useMemo(
-    () =>
-      Array(7)
-        .fill(0)
-        .map((_, index) => ({
-          name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
-          amt: randomValue(),
-        })),
-    [],
-  )
-
-  const series: AreaChartSeries[] = useMemo(
-    () => [
-      {
-        dataKey: "uv",
-        color: ["primary.500", "primary.400"],
-        dot: { fill: ["black", "white"] },
-      },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
-    ],
-    [],
-  )
-  return (
-    <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
-      dotProps={{ r: 8 }}
-      activeDotProps={{ r: 7, strokeWidth: 1, fill: ["white", "black"] }}
     />
   )
 }

@@ -6,7 +6,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { ChartProvider, useChart } from "./use-chart"
+import { ChartProvider } from "./use-chart"
 import { RadarChartProvider, useRadarChart } from "./use-radar-chart"
 
 type RadarChartOptions = {}
@@ -19,7 +19,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("RadarChart", props)
   const { className, ...computedProps } = omitThemeProps(mergedProps)
 
-  const {} = useChart(computedProps)
   const {} = useRadarChart(computedProps)
 
   const css: CSSUIObject = {}

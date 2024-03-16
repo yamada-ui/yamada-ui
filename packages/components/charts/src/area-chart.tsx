@@ -166,7 +166,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const areas = useMemo(
     () =>
       series.map(({ dataKey }, index) => {
-        const { className, id, stroke, ...rest } = getAreaProps({ index })
+        const { id, stroke, ...rest } = getAreaProps({
+          index,
+          className: "ui-area-chart__area",
+        })
 
         return (
           <Fragment key={`area-${dataKey}`}>
@@ -174,12 +177,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
               <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
             </defs>
 
-            <Area
-              className={cx("ui-area-chart__area", className)}
-              id={id}
-              stroke={stroke}
-              {...rest}
-            />
+            <Area id={id} stroke={stroke} {...rest} />
           </Fragment>
         )
       }),

@@ -14,11 +14,11 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts"
+import { ChartTooltip } from "./chart-tooltip"
 import type { PieChartUIProps, PieUIProps } from "./chart.types"
 import { ChartProvider, type UseChartProps, useChart } from "./use-chart"
 import { useChartCell } from "./use-chart-cell"
 import type { UseChartTooltipProps } from "./use-chart-tooltip"
-import { ChartTooltip } from "./chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 import { usePieChart } from "./use-pie-chart"
 
@@ -139,27 +139,35 @@ const defaultProps: Partial<PieChartProps> = {
 export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("PieChart", props)
   const {
-    w,
-    width,
-    minW,
-    minWidth,
-    maxW,
-    maxWidth,
-    h,
-    height,
-    minH,
-    minHeight,
-    maxH,
-    maxHeight,
+    // w,
+    // width,
+    // minW,
+    // minWidth,
+    // maxW,
+    // maxWidth,
+    // h,
+    // height,
+    // minH,
+    // minHeight,
+    // maxH,
+    // maxHeight,
     data,
     strokeWidth,
     withTooltip,
+    withLabelsLine,
     className,
     pieChartProps,
     tooltipProps,
+    withLabels,
+    paddingAngle,
+    startAngle,
+    endAngle,
+    tooltipDataSource = "all",
+    labelsPosition = "inside",
     tooltipAnimationDuration,
     containerProps,
-    ...computedProps
+    valueFormatter,
+    ...rest
   } = omitThemeProps({ ...defaultProps, ...mergedProps })
 
   const { getContainerProps } = useChart({ containerProps })
@@ -167,7 +175,17 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const { getPieProps, cssVariables } = usePieChart({
     data,
     styles,
-    ...computedProps,
+    strokeWidth,
+    withTooltip,
+    withLabelsLine,
+    pieChartProps,
+    withLabels,
+    paddingAngle,
+    startAngle,
+    endAngle,
+    tooltipDataSource,
+    labelsPosition,
+    valueFormatter,
   })
 
   const { getCellProps } = useChartCell({
@@ -198,31 +216,27 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-pie-chart", className)}
         var={cssVariables}
-        {...{
-          w,
-          width,
-          minW,
-          minWidth,
-          maxW,
-          maxWidth,
-          h,
-          height,
-          minH,
-          minHeight,
-          maxH,
-          maxHeight,
-        }}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", ...styles.container }}
+        {...rest}
       >
-        <ResponsiveContainer {...getContainerProps({}, ref)}>
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-pie-chart__container" })}
+        >
           <ReChartsPieChart {...pieChartProps}>
-            <Pie {...getPieProps({}, ref)}>{cellEl}</Pie>
+            <Pie {...getPieProps({ className: "ui-pie-chart__pie" })}>
+              {cellEl}
+            </Pie>
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (
-                  <ChartTooltip ref={ref} label={label} payload={payload} />
+                  <ChartTooltip
+                    className="ui-pie-chart__tooltip"
+                    label={label}
+                    payload={payload}
+                    valueFormatter={valueFormatter}
+                  />
                 )}
-                {...getTooltipProps({}, ref)}
+                {...getTooltipProps()}
               />
             ) : null}
           </ReChartsPieChart>

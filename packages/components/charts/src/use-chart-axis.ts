@@ -16,6 +16,7 @@ import type {
 } from "./chart.types"
 import { xAxisProperties, yAxisProperties } from "./chart.types"
 
+//TODO: type は共通なので、AreaChartTypeにすべきではない
 export type UseChartAxisOptions = {
   /**
    * The key of a group of data which should be unique in an chart.

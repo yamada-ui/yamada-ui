@@ -8,7 +8,7 @@ import { tooltipProperties } from "./chart.types"
 
 export type UseChartTooltipProps = {
   /**
-   *  Props passed down to recharts 'Tooltip' component.
+   * Props passed down to recharts 'Tooltip' component.
    */
   tooltipProps?: TooltipUIProps
   /**

@@ -10,7 +10,7 @@ import { gridProperties } from "./chart.types"
 
 export type UseChartGridOptions = {
   /**
-   *  Props passed down to recharts 'CartesianGrid' component.
+   * Props passed down to recharts 'CartesianGrid' component.
    */
   gridProps?: GridUIProps
   /**

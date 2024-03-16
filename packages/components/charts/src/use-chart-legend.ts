@@ -8,7 +8,7 @@ import { legendProperties } from "./chart.types"
 
 export type UseChartLegendProps = {
   /**
-   *  Props passed down to recharts 'Legend' component.
+   * Props passed down to recharts 'Legend' component.
    */
   legendProps?: LegendUIProps
 }

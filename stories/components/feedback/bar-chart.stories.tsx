@@ -73,7 +73,6 @@ export const custom: Story = () => {
     withYAxis: true,
     withTooltip: true,
     withLegend: false,
-    connectNulls: true,
     strokeWidth: 2,
     tooltipAnimationDuration: 0,
     fillOpacity: 0.4,

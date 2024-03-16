@@ -138,10 +138,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
 
   const bars = useMemo(
     () =>
-      series.map((_, index) => {
+      series.map(({ dataKey }, index) => {
         return (
           <Bar
-            key={index}
+            key={`bar-${dataKey}`}
             {...getBarProps({ index, className: "ui-bar-chart__bar" })}
           />
         )

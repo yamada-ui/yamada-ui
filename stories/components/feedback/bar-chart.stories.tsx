@@ -481,6 +481,7 @@ export const withValueFormatter: Story = () => {
 }
 
 //TODO: radiusが効いてない（CSSは当たってる）backgroundの色もYamada UIにしないと
+//結構だるい　backgroundはclassnameでどうこうできなそう
 export const withBarProps: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -496,7 +497,7 @@ export const withBarProps: Story = () => {
       {
         dataKey: "Smartphones",
         color: ["primary.500", "primary.400"],
-        background: { fill: "#eee" },
+        background: { fill: "#eee", stroke: "red", strokeWidth: 1 },
         // radius: 10,
       },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -595,7 +596,7 @@ export const withUnit: Story = () => {
   )
 }
 
-//TODO:yamada-uiで対応する yamada-uiようのRectangleを作る
+//TODO:yamada-uiで対応する yamada-uiようのRectangleを作る?
 export const customActiveBar: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]

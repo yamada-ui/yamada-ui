@@ -80,7 +80,7 @@ export const CORE_MEMBERS = [
     },
   },
   {
-    id: "nakayan",
+    id: "nakayan5",
     name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
     icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
     github: "https://github.com/nakayan5",

@@ -1,21 +1,15 @@
 export const CONTRIBUTORS = [
   {
-    id: 53973174,
-    name: "Dhoni77",
-    icon: "https://avatars.githubusercontent.com/u/53973174?v=4",
-    url: "https://github.com/Dhoni77",
-  },
-  {
     id: 12987013,
     name: "suzukisan22",
     icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
     url: "https://github.com/suzukisan22",
   },
   {
-    id: 117662771,
-    name: "melodyclue",
-    icon: "https://avatars.githubusercontent.com/u/117662771?v=4",
-    url: "https://github.com/melodyclue",
+    id: 53973174,
+    name: "Dhoni77",
+    icon: "https://avatars.githubusercontent.com/u/53973174?v=4",
+    url: "https://github.com/Dhoni77",
   },
   {
     id: 69517378,
@@ -66,6 +60,18 @@ export const CONTRIBUTORS = [
     url: "https://github.com/piro-hiroki",
   },
   {
+    id: 52590941,
+    name: "imaimai17468",
+    icon: "https://avatars.githubusercontent.com/u/52590941?v=4",
+    url: "https://github.com/imaimai17468",
+  },
+  {
+    id: 99778758,
+    name: "umaidashi",
+    icon: "https://avatars.githubusercontent.com/u/99778758?v=4",
+    url: "https://github.com/umaidashi",
+  },
+  {
     id: 41576384,
     name: "zvolcsey",
     icon: "https://avatars.githubusercontent.com/u/41576384?v=4",
@@ -100,12 +106,6 @@ export const CONTRIBUTORS = [
     name: "june23hy",
     icon: "https://avatars.githubusercontent.com/u/72508905?v=4",
     url: "https://github.com/june23hy",
-  },
-  {
-    id: 52590941,
-    name: "imaimai17468",
-    icon: "https://avatars.githubusercontent.com/u/52590941?v=4",
-    url: "https://github.com/imaimai17468",
   },
   {
     id: 93440667,
@@ -156,6 +156,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/flyingbarbarian",
   },
   {
+    id: 7753180,
+    name: "kyohei0423",
+    icon: "https://avatars.githubusercontent.com/u/7753180?v=4",
+    url: "https://github.com/kyohei0423",
+  },
+  {
     id: 38555478,
     name: "kirikirisu",
     icon: "https://avatars.githubusercontent.com/u/38555478?v=4",
@@ -168,22 +174,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/hifumi9",
   },
   {
-    id: 29009165,
-    name: "Teramon1031",
-    icon: "https://avatars.githubusercontent.com/u/29009165?v=4",
-    url: "https://github.com/Teramon1031",
-  },
-  {
     id: 52372050,
     name: "Taiki0807",
     icon: "https://avatars.githubusercontent.com/u/52372050?v=4",
     url: "https://github.com/Taiki0807",
   },
   {
-    id: 63556889,
-    name: "nakayan5",
-    icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
-    url: "https://github.com/nakayan5",
+    id: 29009165,
+    name: "Teramon1031",
+    icon: "https://avatars.githubusercontent.com/u/29009165?v=4",
+    url: "https://github.com/Teramon1031",
   },
   {
     id: 66323139,

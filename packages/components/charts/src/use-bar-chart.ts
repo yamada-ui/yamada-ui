@@ -127,6 +127,7 @@ export const useBarChart = ({
   splitColors = ["red.400", "green.400"],
   connectNulls = true,
   referenceLineProps,
+  fillOpacity = 1,
   styles,
 }: UseBarChartProps) => {
   const uuid = useId()
@@ -202,7 +203,7 @@ export const useBarChart = ({
     [highlightedArea, series, shouldHighlight, styles.area, theme, uuid],
   )
 
-  //TODO: fillOpacity
+  //TODO: fillOpacity dimmedも効いてない
   const getBarProps: RequiredChartPropGetter<
     "div",
     {
@@ -225,13 +226,13 @@ export const useBarChart = ({
         isAnimationActive: false,
         connectNulls,
         stackId: stacked ? "stack" : undefined,
-        fillOpacity: dimmed ? 0.1 : 1,
+        fillOpacity: dimmed ? 0.1 : fillOpacity,
         strokeOpacity: dimmed ? 0.2 : 0,
         ...(props as Omit<BarProps, "dataKey">),
         ...rest,
       }
     },
-    [barPropsList, connectNulls, stacked],
+    [barPropsList, connectNulls, fillOpacity, stacked],
   )
 
   const getBarChartProps: ChartPropGetter<

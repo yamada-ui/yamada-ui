@@ -20,6 +20,7 @@ import type {
   BarChartUIProps,
   ChartPropGetter,
   LayoutType,
+  ReferenceLineUIProps,
   RequiredChartPropGetter,
 } from "./chart.types"
 
@@ -106,6 +107,10 @@ export type UseBarChartOptions = {
    */
   connectNulls?: boolean
   /**
+   * Reference lines that should be displayed on the chart.
+   */
+  referenceLineProps: ReferenceLineUIProps[]
+  /**
    * Controls fill opacity of all bars.
    *
    * @default 1
@@ -125,6 +130,7 @@ export const useBarChart = ({
   layoutType = "horizontal",
   splitColors = ["red.400", "green.400"],
   connectNulls = true,
+  referenceLineProps,
   styles,
 }: UseBarChartProps) => {
   const uuid = useId()
@@ -135,9 +141,10 @@ export const useBarChart = ({
 
   const shouldHighlight = highlightedArea !== null
 
-  const areaColors: CSSUIProps["var"] = useMemo(
+  const barColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map((item, index) => ({
+        __prefix: "ui",
         name: `bar-${index}`,
         token: "colors",
         value: item.color ?? "transparent",
@@ -145,15 +152,31 @@ export const useBarChart = ({
     [series],
   )
 
-  const areaSplitColors: CSSUIProps["var"] = useMemo(
+  const barSplitColors: CSSUIProps["var"] = useMemo(
     () =>
       splitColors.map((color, index) => ({
+        __prefix: "ui",
         name: `barsplit-${index}`,
         token: "colors",
         value: color,
       })),
     [splitColors],
   )
+
+  const referenceLineColors: CSSUIProps["var"] = useMemo(
+    () =>
+      referenceLineProps.map(({ color }, index) => ({
+        __prefix: "ui",
+        name: `reference-line-${index}`,
+        token: "colors",
+        value: color ?? "transparent",
+      })),
+    [referenceLineProps],
+  )
+
+  const barVars = useMemo(() => {
+    return [...barColors, ...barSplitColors, ...referenceLineColors]
+  }, [barColors, barSplitColors, referenceLineColors])
 
   const getBarProps: RequiredChartPropGetter<
     "div",
@@ -225,10 +248,6 @@ export const useBarChart = ({
     },
     [barChartProps, data, layoutType, styles.barChart, theme, type],
   )
-
-  const barVars = useMemo(() => {
-    return [...areaColors, ...areaSplitColors]
-  }, [areaColors, areaSplitColors])
 
   return {
     barVars,

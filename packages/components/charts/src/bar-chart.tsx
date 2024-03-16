@@ -96,6 +96,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       type,
       series,
       data,
+      referenceLineProps,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })

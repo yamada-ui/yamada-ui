@@ -134,4 +134,15 @@ export const CORE_MEMBERS = [
       ja: "Remixが好きなフロントエンドエンジニア",
     },
   },
+  {
+    id: "imaimai17468",
+    name: { en: "Toshiki Imai", ja: "Toshiki Imai" },
+    icon: "https://avatars.githubusercontent.com/u/52590941?v=4",
+    github: "https://github.com/imaimai17468",
+    twitter: "https://twitter.com/imaimai17468",
+    description: {
+      en: "Multi-talented, frog-loving front-end engineer.",
+      ja: "多趣味なカエル好きのフロントエンドエンジニア",
+    },
+  },
 ]

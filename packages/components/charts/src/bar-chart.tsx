@@ -71,13 +71,11 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     withLegend = false,
     containerProps,
     unit,
-
     valueFormatter,
     tooltipProps,
     tooltipAnimationDuration,
     legendProps,
     data,
-
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -111,30 +109,41 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 
+  //TODO : なんかbarにitem入ってる
   const bars = series.map((item, index) => {
-    return <Bar key={index} {...getBarProps({ item, index })} />
+    return (
+      <Bar
+        key={index}
+        {...getBarProps({ item, index, className: "ui-bar-chart__bar" })}
+      />
+    )
   })
 
+  // TODO : gridのpropsがない,referenceLineがない,
   return (
     <ChartProvider value={{ styles }}>
       <ui.div
         ref={ref}
         className={cx("ui-bar-chart", className)}
         var={barVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >
-        <ResponsiveContainer {...getContainerProps({})}>
-          <ReChartsBarChart {...getBarChartProps({})}>
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-bar-chart__container" })}
+        >
+          <ReChartsBarChart
+            {...getBarChartProps({ className: "ui-bar-chart__chart" })}
+          >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis {...getXAxisProps()} />
-            <YAxis {...getYAxisProps()} />
+            <XAxis {...getXAxisProps({ className: "ui-bar-chart__x-axis" })} />
+            <YAxis {...getYAxisProps({ className: "ui-bar-chart__y-axis" })} />
 
             {withLegend ? (
               <Legend
                 content={({ payload }) => (
                   <ChartLegend
-                    className="ui-area-chart__legend"
+                    className="ui-bar-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
                   />
@@ -147,14 +156,16 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
               <Tooltip
                 content={({ label, payload }) => (
                   <ChartTooltip
+                    className="ui-bar-chart__tooltip"
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
                   />
                 )}
-                {...getTooltipProps({ className: "ui-area-chart__tooltip" })}
+                {...getTooltipProps()}
               />
             ) : null}
+
             {bars}
           </ReChartsBarChart>
         </ResponsiveContainer>

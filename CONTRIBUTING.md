@@ -93,7 +93,7 @@ the following categories:
    can be either `docs`, `fix`, `feat`, `build`, or any other conventional
    commit type. `scope` is just a short id that describes the scope of work.
 
-3. After making changes, please add test code for those changes. Run `pnpm test` or `pnpm test <package-name>` to ensure all tests pass.
+3. After making changes, please add test code for those changes. Run `pnpm test` or `pnpm test <package-name>` to ensure all tests pass. please check [Tips for Test](https://github.com/yamada-ui/yamada-ui/wiki/Tips-for-Test) for further guidance.
 
 4. Run `pnpm changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.

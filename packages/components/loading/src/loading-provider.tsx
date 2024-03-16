@@ -358,11 +358,11 @@ const getOverlayStyle = (
   right: 0,
   bottom: 0,
   left: 0,
-  zIndex: "beerus",
-  bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
+  zIndex: 9999,
+  bg: type === "fill" ? ["#fbfbfb", "#141414"] : "rgba(0, 0, 0, 0.48)",
   w: "100vw",
   h: "100dvh",
-  p: "md",
+  p: "1rem",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -388,12 +388,12 @@ const ScreenComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      maxW: "md",
+      maxW: "24rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
+      gap: "0.5rem",
     }
 
     useTimeout(onFinish, duration)
@@ -425,16 +425,19 @@ const PageComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      bg: ["white", "black"],
-      maxW: "md",
-      p: "md",
+      bg: ["#fbfbfb", "#141414"],
+      maxW: "24rem",
+      p: "1rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
-      rounded: "md",
-      boxShadow: ["lg", "dark-lg"],
+      gap: "0.5rem",
+      rounded: "0.375rem",
+      boxShadow: [
+        "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",
+      ],
     }
 
     useTimeout(onFinish, duration)
@@ -472,18 +475,21 @@ const BackgroundComponent = memo(
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: "fixed",
-      right: "md",
-      bottom: "md",
-      zIndex: "beerus",
-      bg: ["white", "black"],
-      maxW: "sm",
-      p: "sm",
+      right: "1rem",
+      bottom: "1rem",
+      zIndex: 9999,
+      bg: ["#fbfbfb", "#141414"],
+      maxW: "20rem",
+      p: "0.5rem",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
-      rounded: "md",
-      boxShadow: ["3xl", "dark-lg"],
+      gap: "0.5rem",
+      rounded: "0.375rem",
+      boxShadow: [
+        "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25)",
+        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",
+      ],
     }
 
     useTimeout(onFinish, duration)

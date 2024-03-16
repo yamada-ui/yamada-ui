@@ -1,8 +1,8 @@
 import { runIfFunc } from "@yamada-ui/utils"
 import {
-  pickStyle,
   type ComponentMultiStyle,
   type ComponentStyle,
+  pickStyle,
   type StyledTheme,
 } from "../src"
 
@@ -40,7 +40,7 @@ describe("pickStyle", () => {
       },
     }
 
-    expect(pickStyle(target, "container")).toEqual(expected)
+    expect(pickStyle(target, "container")).toStrictEqual(expected)
   })
 
   test("should picked style functions", () => {
@@ -74,13 +74,13 @@ describe("pickStyle", () => {
       },
     }
 
-    expect(runIfFunc(pickStyle(target, "container").baseStyle, props)).toEqual(
-      expected.baseStyle,
-    )
+    expect(
+      runIfFunc(pickStyle(target, "container").baseStyle, props),
+    ).toStrictEqual(expected.baseStyle)
 
     expect(
       runIfFunc(pickStyle(target, "container").variants?.outline, props),
-    ).toEqual(expected.variants?.outline)
+    ).toStrictEqual(expected.variants?.outline)
   })
 
   test("should picked style objects omitted props", () => {
@@ -107,6 +107,6 @@ describe("pickStyle", () => {
       },
     }
 
-    expect(pickStyle(target, "container", false)).toEqual(expected)
+    expect(pickStyle(target, "container", false)).toStrictEqual(expected)
   })
 })

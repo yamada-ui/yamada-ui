@@ -170,7 +170,9 @@ export const FileInput = forwardRef<FileInputProps, "input">(
                 marginInlineEnd: "0.25rem",
               }
 
-              return el ? cloneElement(el as ReactElement, { style }) : null
+              return el
+                ? cloneElement(el as ReactElement, { style, key: index })
+                : null
             })}
           </ui.span>
         )

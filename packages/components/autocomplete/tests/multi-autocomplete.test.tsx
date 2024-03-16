@@ -1,5 +1,5 @@
-import { MultiAutocomplete, AutocompleteOption } from "@yamada-ui/react"
-import { render, screen, fireEvent, waitFor } from "@yamada-ui/test"
+import { AutocompleteOption, MultiAutocomplete } from "@yamada-ui/react"
+import { fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 
 describe("<MultiAutoComplete />", () => {
   describe("renders correctly", () => {
@@ -20,9 +20,9 @@ describe("<MultiAutoComplete />", () => {
       const multiAutocomplete = container.querySelector(
         ".ui-multi-autocomplete",
       )
-      if (!multiAutocomplete) throw new Error("Multi Autocomplete not found")
+      expect(multiAutocomplete).toBeInTheDocument()
 
-      fireEvent.click(multiAutocomplete)
+      fireEvent.click(multiAutocomplete!)
       await waitFor(() => {
         const optionElements = screen.getAllByRole("autocomplete-item")
         expect(optionElements).toHaveLength(3)

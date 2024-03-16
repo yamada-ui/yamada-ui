@@ -71,7 +71,7 @@ export type ResizableTriggerIconProps = IconProps
 
 export const ResizableTriggerIcon: FC<ResizableTriggerIconProps> = (rest) => {
   return (
-    <Icon viewBox="0 0 23 39" w="2" h="4" {...rest}>
+    <Icon viewBox="0 0 23 39" w="0.5rem" h="1rem" {...rest}>
       <path
         d="M 5 0 C 7.761 0 10 2.239 10 5 C 10 7.761 7.761 10 5 10 C 2.239 10 0 7.761 0 5 C 0 2.239 2.239 0 5 0 Z"
         fill="currentColor"

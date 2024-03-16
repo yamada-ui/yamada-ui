@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.25% </span>
+                <span class="strong">57.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>300/515</span>
+                <span class='fraction'>300/521</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.25% </span>
+                <span class="strong">57.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>300/515</span>
+                <span class='fraction'>300/521</span>
             </div>
         
             
@@ -578,7 +578,13 @@
 <a name='L513'></a><a href='#L513'>513</a>
 <a name='L514'></a><a href='#L514'>514</a>
 <a name='L515'></a><a href='#L515'>515</a>
-<a name='L516'></a><a href='#L516'>516</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L516'></a><a href='#L516'>516</a>
+<a name='L517'></a><a href='#L517'>517</a>
+<a name='L518'></a><a href='#L518'>518</a>
+<a name='L519'></a><a href='#L519'>519</a>
+<a name='L520'></a><a href='#L520'>520</a>
+<a name='L521'></a><a href='#L521'>521</a>
+<a name='L522'></a><a href='#L522'>522</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1037,12 +1043,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1453,11 +1465,11 @@ const getOverlayStyle = <span class="fstat-no" title="function not covered" >(</
 <span class="cstat-no" title="statement not covered" >  right: 0,</span>
 <span class="cstat-no" title="statement not covered" >  bottom: 0,</span>
 <span class="cstat-no" title="statement not covered" >  left: 0,</span>
-<span class="cstat-no" title="statement not covered" >  zIndex: "beerus",</span>
-<span class="cstat-no" title="statement not covered" >  bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",</span>
+<span class="cstat-no" title="statement not covered" >  zIndex: 9999,</span>
+<span class="cstat-no" title="statement not covered" >  bg: type === "fill" ? ["#fbfbfb", "#141414"] : "rgba(0, 0, 0, 0.48)",</span>
 <span class="cstat-no" title="statement not covered" >  w: "100vw",</span>
 <span class="cstat-no" title="statement not covered" >  h: "100dvh",</span>
-<span class="cstat-no" title="statement not covered" >  p: "md",</span>
+<span class="cstat-no" title="statement not covered" >  p: "1rem",</span>
 <span class="cstat-no" title="statement not covered" >  display: "flex",</span>
 <span class="cstat-no" title="statement not covered" >  justifyContent: "center",</span>
 <span class="cstat-no" title="statement not covered" >  alignItems: "center",</span>
@@ -1483,12 +1495,12 @@ const ScreenComponent = memo(
 <span class="cstat-no" title="statement not covered" >    onFinish,</span>
 <span class="cstat-no" title="statement not covered" >  }: LoadingComponentProps) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const css: CSSUIObject = {</span>
-<span class="cstat-no" title="statement not covered" >      maxW: "md",</span>
+<span class="cstat-no" title="statement not covered" >      maxW: "24rem",</span>
 <span class="cstat-no" title="statement not covered" >      display: "flex",</span>
 <span class="cstat-no" title="statement not covered" >      flexDirection: "column",</span>
 <span class="cstat-no" title="statement not covered" >      justifyContent: "center",</span>
 <span class="cstat-no" title="statement not covered" >      alignItems: "center",</span>
-<span class="cstat-no" title="statement not covered" >      gap: "sm",</span>
+<span class="cstat-no" title="statement not covered" >      gap: "0.5rem",</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    useTimeout(onFinish, duration)</span>
@@ -1520,16 +1532,19 @@ const PageComponent = memo(
 <span class="cstat-no" title="statement not covered" >    onFinish,</span>
 <span class="cstat-no" title="statement not covered" >  }: LoadingComponentProps) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const css: CSSUIObject = {</span>
-<span class="cstat-no" title="statement not covered" >      bg: ["white", "black"],</span>
-<span class="cstat-no" title="statement not covered" >      maxW: "md",</span>
-<span class="cstat-no" title="statement not covered" >      p: "md",</span>
+<span class="cstat-no" title="statement not covered" >      bg: ["#fbfbfb", "#141414"],</span>
+<span class="cstat-no" title="statement not covered" >      maxW: "24rem",</span>
+<span class="cstat-no" title="statement not covered" >      p: "1rem",</span>
 <span class="cstat-no" title="statement not covered" >      display: "flex",</span>
 <span class="cstat-no" title="statement not covered" >      flexDirection: "column",</span>
 <span class="cstat-no" title="statement not covered" >      justifyContent: "center",</span>
 <span class="cstat-no" title="statement not covered" >      alignItems: "center",</span>
-<span class="cstat-no" title="statement not covered" >      gap: "sm",</span>
-<span class="cstat-no" title="statement not covered" >      rounded: "md",</span>
-<span class="cstat-no" title="statement not covered" >      boxShadow: ["lg", "dark-lg"],</span>
+<span class="cstat-no" title="statement not covered" >      gap: "0.5rem",</span>
+<span class="cstat-no" title="statement not covered" >      rounded: "0.375rem",</span>
+<span class="cstat-no" title="statement not covered" >      boxShadow: [</span>
+<span class="cstat-no" title="statement not covered" >        "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",</span>
+<span class="cstat-no" title="statement not covered" >        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",</span>
+<span class="cstat-no" title="statement not covered" >      ],</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    useTimeout(onFinish, duration)</span>
@@ -1567,18 +1582,21 @@ const BackgroundComponent = memo(
 <span class="cstat-no" title="statement not covered" >  }: LoadingComponentProps) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const css: CSSUIObject = {</span>
 <span class="cstat-no" title="statement not covered" >      position: "fixed",</span>
-<span class="cstat-no" title="statement not covered" >      right: "md",</span>
-<span class="cstat-no" title="statement not covered" >      bottom: "md",</span>
-<span class="cstat-no" title="statement not covered" >      zIndex: "beerus",</span>
-<span class="cstat-no" title="statement not covered" >      bg: ["white", "black"],</span>
-<span class="cstat-no" title="statement not covered" >      maxW: "sm",</span>
-<span class="cstat-no" title="statement not covered" >      p: "sm",</span>
+<span class="cstat-no" title="statement not covered" >      right: "1rem",</span>
+<span class="cstat-no" title="statement not covered" >      bottom: "1rem",</span>
+<span class="cstat-no" title="statement not covered" >      zIndex: 9999,</span>
+<span class="cstat-no" title="statement not covered" >      bg: ["#fbfbfb", "#141414"],</span>
+<span class="cstat-no" title="statement not covered" >      maxW: "20rem",</span>
+<span class="cstat-no" title="statement not covered" >      p: "0.5rem",</span>
 <span class="cstat-no" title="statement not covered" >      display: "flex",</span>
 <span class="cstat-no" title="statement not covered" >      justifyContent: "center",</span>
 <span class="cstat-no" title="statement not covered" >      alignItems: "center",</span>
-<span class="cstat-no" title="statement not covered" >      gap: "sm",</span>
-<span class="cstat-no" title="statement not covered" >      rounded: "md",</span>
-<span class="cstat-no" title="statement not covered" >      boxShadow: ["3xl", "dark-lg"],</span>
+<span class="cstat-no" title="statement not covered" >      gap: "0.5rem",</span>
+<span class="cstat-no" title="statement not covered" >      rounded: "0.375rem",</span>
+<span class="cstat-no" title="statement not covered" >      boxShadow: [</span>
+<span class="cstat-no" title="statement not covered" >        "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25)",</span>
+<span class="cstat-no" title="statement not covered" >        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",</span>
+<span class="cstat-no" title="statement not covered" >      ],</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    useTimeout(onFinish, duration)</span>
@@ -1615,7 +1633,7 @@ export const useLoading = <span class="fstat-no" title="function not covered" >(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-15T18:32:09.654Z
+                at 2024-03-16T06:07:07.487Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -158,7 +158,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         type={type ?? defaultType}
         disabled={trulyDisabled}
         data-active={dataAttr(isActive)}
-        data__loading={dataAttr(isLoading)}
+        data-loading={dataAttr(isLoading)}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}

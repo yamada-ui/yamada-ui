@@ -77,6 +77,14 @@ export const custom: Story = () => {
     data: data,
     series: series,
     dataKey: "name",
+    lineChartProps: {
+      margin: {
+        top: 20,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      },
+    },
     withXAxis: true,
     withYAxis: true,
     withDots: true,

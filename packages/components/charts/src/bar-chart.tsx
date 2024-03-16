@@ -19,7 +19,7 @@ import {
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import { useBarChart } from "./use-bar-chart"
-import type { UseBarChartOptios } from "./use-bar-chart"
+import type { UseBarChartOptions } from "./use-bar-chart"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
@@ -46,7 +46,7 @@ type BarChartOptions = {
 
 export type BarChartProps = HTMLUIProps<"div"> &
   ThemeProps<"BarChart"> &
-  UseBarChartOptios &
+  UseBarChartOptions &
   BarChartOptions &
   UseChartProps &
   UseChartAxisOptions &

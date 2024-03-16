@@ -23,7 +23,7 @@ import type {
   RequiredChartPropGetter,
 } from "./chart.types"
 
-export type UseBarChartOptios = {
+export type UseBarChartOptions = {
   /**
    * Chart data.
    */
@@ -113,7 +113,7 @@ export type UseBarChartOptios = {
   fillOpacity?: number
 }
 
-export type UseBarChartProps = UseBarChartOptios & {
+export type UseBarChartProps = UseBarChartOptions & {
   styles: Dict<CSSUIObject>
 }
 

@@ -13,6 +13,7 @@ import {
   useMemo,
 } from "react"
 import type { BarChart, BarProps } from "recharts"
+import { getComponentProps } from "./chart-utils"
 import { areaChartProperties, barProperties } from "./chart.types"
 import type {
   BarChartSeries,
@@ -126,7 +127,7 @@ export const useBarChart = ({
   data,
   series,
   type,
-  barChartProps = {},
+  barChartProps: _barChartProps = {},
   layoutType = "horizontal",
   splitColors = ["red.400", "green.400"],
   connectNulls = true,
@@ -138,7 +139,6 @@ export const useBarChart = ({
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
 
   const stacked = type === "stacked" || type === "percent"
-
   const shouldHighlight = highlightedArea !== null
 
   const barColors: CSSUIProps["var"] = useMemo(
@@ -174,10 +174,16 @@ export const useBarChart = ({
     [referenceLineProps],
   )
 
-  const barVars = useMemo(() => {
+  const barVars: CSSUIProps["var"] = useMemo(() => {
     return [...barColors, ...barSplitColors, ...referenceLineColors]
   }, [barColors, barSplitColors, referenceLineColors])
 
+  const [barChartProps, barChartClassName] = getComponentProps<Dict, string>(
+    [_barChartProps, areaChartProperties],
+    styles.barChart,
+  )(theme)
+
+  //TODO : 分離
   const getBarProps: RequiredChartPropGetter<
     "div",
     {
@@ -228,25 +234,16 @@ export const useBarChart = ({
     ComponentPropsWithoutRef<typeof BarChart>,
     ComponentPropsWithoutRef<typeof BarChart>
   > = useCallback(
-    ({ className, ...props } = {}, ref = null) => {
-      const [reChartsProps, uiProps] = splitObject(
-        barChartProps,
-        areaChartProperties,
-      )
-      const styleClassName = getCSS(styles.barChart)(theme)
-      const propClassName = getCSS(uiProps)(theme)
-
-      return {
-        ref,
-        className: cx(className, propClassName, styleClassName),
-        data,
-        stackOffset: type === "percent" ? "expand" : undefined,
-        layout: layoutType,
-        ...props,
-        ...reChartsProps,
-      }
-    },
-    [barChartProps, data, layoutType, styles.barChart, theme, type],
+    ({ className, ...props } = {}, ref = null) => ({
+      ref,
+      className: cx(className, barChartClassName),
+      data,
+      stackOffset: type === "percent" ? "expand" : undefined,
+      layout: layoutType,
+      ...props,
+      ...barChartProps,
+    }),
+    [barChartClassName, barChartProps, data, layoutType, type],
   )
 
   return {

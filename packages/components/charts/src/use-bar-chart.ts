@@ -1,10 +1,5 @@
-import {
-  type CSSUIObject,
-  getCSS,
-  useTheme,
-  type CSSUIProps,
-} from "@yamada-ui/core"
-import { type Dict, cx, splitObject, omitObject } from "@yamada-ui/utils"
+import { type CSSUIObject, useTheme, type CSSUIProps } from "@yamada-ui/core"
+import { type Dict, cx } from "@yamada-ui/utils"
 import {
   type ComponentPropsWithoutRef,
   useCallback,
@@ -143,11 +138,11 @@ export const useBarChart = ({
 
   const barColors: CSSUIProps["var"] = useMemo(
     () =>
-      series.map((item, index) => ({
+      series.map(({ color }, index) => ({
         __prefix: "ui",
         name: `bar-${index}`,
         token: "colors",
-        value: item.color ?? "transparent",
+        value: color ?? "transparent",
       })),
     [series],
   )
@@ -156,9 +151,9 @@ export const useBarChart = ({
     () =>
       splitColors.map((color, index) => ({
         __prefix: "ui",
-        name: `barsplit-${index}`,
+        name: `bar-split-${index}`,
         token: "colors",
-        value: color,
+        value: color ?? "transparent",
       })),
     [splitColors],
   )
@@ -183,29 +178,48 @@ export const useBarChart = ({
     styles.barChart,
   )(theme)
 
-  //TODO : 分離
+  const barPropsList = useMemo(
+    () =>
+      series.map((props, index) => {
+        const { dataKey } = props
+        const id = `${uuid}-${dataKey}`
+        const color = `var(--ui-bar-${index})`
+        const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const [rest, className] = getComponentProps(
+          [props, barProperties],
+          styles.area,
+        )(theme)
+
+        return {
+          id,
+          dimmed,
+          className,
+          ...rest,
+          color,
+          dataKey,
+        }
+      }),
+    [highlightedArea, series, shouldHighlight, styles.area, theme, uuid],
+  )
+
+  //TODO: fillOpacity
   const getBarProps: RequiredChartPropGetter<
     "div",
     {
-      item: BarChartSeries
       index: number
     },
     Omit<BarProps, "ref">
   > = useCallback(
-    ({ item, index, className, ...props }, ref = null) => {
-      const id = `${uuid}-${item.color}`
-      const color = `var(--ui-bar-${index})`
-      const dimmed = shouldHighlight && highlightedArea !== item.dataKey
-      const [barReChartsProps, barUIProps] = splitObject(item, barProperties)
-      const areaStyleClassName = getCSS(styles.area)(theme)
-      const areaClassName = getCSS(barUIProps as CSSUIObject)(theme)
+    ({ index, className: classNameProp, ...props }, ref = null) => {
+      const { id, dimmed, className, color, dataKey, ...rest } =
+        barPropsList[index]
 
       return {
         ref,
-        className: cx(className, areaClassName, areaStyleClassName),
+        className: cx(classNameProp, className),
         id,
-        name: item.dataKey as string,
-        dataKey: item.dataKey,
+        name: dataKey as string,
+        dataKey,
         fill: color,
         stroke: color,
         isAnimationActive: false,
@@ -213,20 +227,11 @@ export const useBarChart = ({
         stackId: stacked ? "stack" : undefined,
         fillOpacity: dimmed ? 0.1 : 1,
         strokeOpacity: dimmed ? 0.2 : 0,
-        strokeDasharray: item.strokeDasharray,
         ...(props as Omit<BarProps, "dataKey">),
-        ...omitObject(barReChartsProps, ["dataKey", "color"]),
+        ...rest,
       }
     },
-    [
-      uuid,
-      shouldHighlight,
-      highlightedArea,
-      styles.area,
-      theme,
-      connectNulls,
-      stacked,
-    ],
+    [barPropsList, connectNulls, stacked],
   )
 
   const getBarChartProps: ChartPropGetter<

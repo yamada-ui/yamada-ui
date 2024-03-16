@@ -219,6 +219,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    unit={unit}
                   />
                 )}
                 {...getTooltipProps()}

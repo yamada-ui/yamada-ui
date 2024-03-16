@@ -6,14 +6,15 @@ export type ChartTooltipProps = {
   label: string
   payload: Dict[] | undefined
   valueFormatter?: (value: number) => string
+  unit?: string
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
-  ({ label, className, payload = [], valueFormatter }, ref) => {
+  ({ label, className, payload = [], valueFormatter, unit }, ref) => {
     const { styles } = useTooltip()
 
-    const items = payload.map(({ color, name, value: _value } = {}, index) => {
-      const value = valueFormatter ? valueFormatter(_value) : _value
+    const items = payload.map(({ color, name, value } = {}, index) => {
+      value = valueFormatter?.(value) ?? value
 
       return (
         <ui.div
@@ -39,6 +40,7 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
             __css={styles.tooltipValue}
           >
             {value}
+            {unit ? unit : ""}
           </ui.span>
         </ui.div>
       )

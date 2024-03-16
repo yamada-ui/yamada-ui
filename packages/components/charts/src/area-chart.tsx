@@ -242,6 +242,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    unit={unit}
                   />
                 )}
                 {...getTooltipProps()}

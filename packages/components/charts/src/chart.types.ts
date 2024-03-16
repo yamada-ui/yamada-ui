@@ -44,6 +44,7 @@ export type ChartTooltip =
     ) => ReactNode)
 export type LayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
+export type BarChartType = Exclude<AreaChartType, "split">
 export type AxisType = "x" | "y" | "xy" | "none"
 export type CurveType =
   | "bump"
@@ -61,12 +62,16 @@ export type AreaChartSeries = Merge<
     dot?: DotUIProps
   }
 >
-export type BarChartSeries = Merge<
-  Merge<CSSUIProps, ReChartsBarProps>,
-  { color: CSSUIProps["color"] }
->
 export type LineChartSeries = Merge<
   Merge<CSSUIProps, ReChartsLineProps>,
+  {
+    color: CSSUIProps["color"]
+    activeDot?: DotUIProps
+    dot?: DotUIProps
+  }
+>
+export type BarChartSeries = Merge<
+  Merge<CSSUIProps, ReChartsBarProps>,
   { color: CSSUIProps["color"] }
 >
 export type AreaChartUIProps = Merge<

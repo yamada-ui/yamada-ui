@@ -9,7 +9,7 @@ import { cx } from "@yamada-ui/utils"
 import { Fragment, useMemo } from "react"
 import {
   CartesianGrid,
-  Legend as ReChartsLegend,
+  Legend,
   AreaChart as ReChartsAreaChart,
   Area,
   ReferenceLine,
@@ -20,8 +20,8 @@ import {
 } from "recharts"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
+import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import { Legend } from "./legend"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import { useAreaChart } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
@@ -166,7 +166,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const areas = useMemo(
     () =>
       series.map(({ dataKey }, index) => {
-        const { className, id, stroke, ...rest } = getAreaProps({ index })
+        const { id, stroke, ...rest } = getAreaProps({
+          index,
+          className: "ui-area-chart__area",
+        })
 
         return (
           <Fragment key={`area-${dataKey}`}>
@@ -174,12 +177,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
               <AreaGradient {...getAreaGradientProps({ id, color: stroke })} />
             </defs>
 
-            <Area
-              className={cx("ui-area-chart__area", className)}
-              id={id}
-              stroke={stroke}
-              {...rest}
-            />
+            <Area id={id} stroke={stroke} {...rest} />
           </Fragment>
         )
       }),
@@ -224,9 +222,9 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
             <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })} />
 
             {withLegend ? (
-              <ReChartsLegend
+              <Legend
                 content={({ payload }) => (
-                  <Legend
+                  <ChartLegend
                     className="ui-area-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}

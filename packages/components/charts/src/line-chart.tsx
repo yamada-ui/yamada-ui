@@ -9,7 +9,7 @@ import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
   LineChart as ReChartsLineChart,
-  Legend as ReChartsLegend,
+  Legend,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
@@ -18,8 +18,8 @@ import {
   ReferenceLine,
   Line,
 } from "recharts"
+import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import { Legend } from "./legend"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
@@ -152,8 +152,11 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
 
   const lines = useMemo(
     () =>
-      series.map((_, index) => (
-        <Line key={`line-${index}`} {...getLineProps({ index })} />
+      series.map(({ dataKey }, index) => (
+        <Line
+          key={`line-${dataKey}`}
+          {...getLineProps({ index, className: "ui-line-chart__line" })}
+        />
       )),
     [getLineProps, series],
   )
@@ -163,7 +166,10 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       referenceLineProps?.map((_, index) => (
         <ReferenceLine
           key={`referenceLine-${index}`}
-          {...getReferenceLineProps({ index })}
+          {...getReferenceLineProps({
+            index,
+            className: "ui-line-chart__reference-line",
+          })}
         />
       )),
     [getReferenceLineProps, referenceLineProps],
@@ -175,21 +181,31 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-line-chart", className)}
         var={getCSSvariables}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >
-        <ResponsiveContainer {...getContainerProps()}>
-          <ReChartsLineChart {...getLineChartProps()}>
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-line-chart__container" })}
+        >
+          <ReChartsLineChart
+            {...getLineChartProps({ className: "ui-line-chart__chart" })}
+          >
             {referenceLinesItems}
 
-            <CartesianGrid {...getGridProps()} />
-            <XAxis {...getXAxisProps()} />
-            <YAxis {...getYAxisProps()} />
+            <CartesianGrid
+              {...getGridProps({ className: "ui-line-chart__grid" })}
+            />
+            <XAxis {...getXAxisProps({ className: "ui-line-chart__x-axis" })} />
+            <YAxis {...getYAxisProps({ className: "ui-line-chart__y-axis" })} />
 
             {withLegend ? (
-              <ReChartsLegend
+              <Legend
                 content={({ payload }) => (
-                  <Legend payload={payload} onHighlight={setHighlightedArea} />
+                  <ChartLegend
+                    className="ui-line-chart__legend"
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                  />
                 )}
                 {...getLegendProps()}
               />
@@ -198,9 +214,14 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (
-                  <ChartTooltip label={label} payload={payload} />
+                  <ChartTooltip
+                    className="ui-line-chart__tooltip"
+                    label={label}
+                    payload={payload}
+                    valueFormatter={valueFormatter}
+                  />
                 )}
-                {...getTooltipProps({}, ref)}
+                {...getTooltipProps()}
               />
             ) : null}
 

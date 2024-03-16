@@ -89,6 +89,14 @@ export const custom: Story = () => {
     data: data,
     series: series,
     dataKey: "name",
+    areaChartProps: {
+      margin: {
+        top: 20,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      },
+    },
     withXAxis: true,
     withYAxis: true,
     withDots: true,
@@ -822,7 +830,11 @@ export const customDots: Story = () => {
 
   const series: AreaChartSeries[] = useMemo(
     () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      {
+        dataKey: "uv",
+        color: ["primary.500", "primary.400"],
+        dot: { fill: ["black", "white"] },
+      },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
       { dataKey: "amt", color: ["warning.500", "warning.400"] },
     ],

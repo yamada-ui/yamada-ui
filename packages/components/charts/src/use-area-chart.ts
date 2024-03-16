@@ -253,7 +253,7 @@ export const useAreaChart = ({
           )(theme)
 
           activeDot = {
-            className: activeDotClassName,
+            className: cx("ui-area-chart__active-dot", activeDotClassName),
             stroke: color,
             r: 4,
             ...activeDotProps,
@@ -272,7 +272,7 @@ export const useAreaChart = ({
           )(theme)
 
           dot = {
-            className: dotClassName,
+            className: cx("ui-area-chart__dot", dotClassName),
             fill: color,
             fillOpacity: dimmed ? 0 : 1,
             strokeWidth: 2,

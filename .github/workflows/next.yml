@@ -8,7 +8,7 @@ on:
       - "packages/**"
       - "stories/**"
     branches:
-      - "v*"
+      - v*
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

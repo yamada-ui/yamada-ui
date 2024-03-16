@@ -16,13 +16,14 @@ import type {
 } from "./chart.types"
 import { xAxisProperties, yAxisProperties } from "./chart.types"
 
+//TODO: type は共通なので、AreaChartTypeにすべきではない
 export type UseChartAxisOptions = {
   /**
-   *  The key of a group of data which should be unique in an area chart.
+   * The key of a group of data which should be unique in an chart.
    */
   dataKey: string
   /**
-   *  Controls how chart areas are positioned relative to each other
+   * Controls how chart areas are positioned relative to each other
    *
    * @default `default`
    */
@@ -58,11 +59,11 @@ export type UseChartAxisOptions = {
    */
   withYAxis?: boolean
   /**
-   *  Props passed down to recharts 'XAxis' component.
+   * Props passed down to recharts 'XAxis' component.
    */
   xAxisProps?: XAxisUIProps
   /**
-   *  Props passed down to recharts 'YAxis' component.
+   * Props passed down to recharts 'YAxis' component.
    */
   yAxisProps?: YAxisUIProps
   /**
@@ -98,6 +99,7 @@ export const useChartAxis = ({
     () => (layoutType === "vertical" ? { type: "number" } : { dataKey }),
     [dataKey, layoutType],
   )
+  //TODO: layoutType="vertical",type="parsent"is not display
   const yAxisKey: YAxisProps = useMemo(
     () =>
       layoutType === "vertical"

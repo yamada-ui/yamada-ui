@@ -16,7 +16,7 @@ export const [ChartProvider, useChartContext] = createContext<ChartContext>({
 
 export type UseChartProps = {
   /**
-   *  Props passed down to recharts `ResponsiveContainer` component.
+   * Props passed down to recharts `ResponsiveContainer` component.
    */
   containerProps?: ContainerUIProps
 }

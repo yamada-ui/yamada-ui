@@ -35,21 +35,33 @@ export type UseAreaChartOptions = {
    */
   series: AreaChartSeries[]
   /**
-   *  Controls how chart areas are positioned relative to each other
+   * Controls how chart areas are positioned relative to each other
    *
    * @default `default`
    */
   type?: AreaChartType
   /**
-   *  Props passed down to recharts `AreaChart` component.
+   * Props passed down to recharts `AreaChart` component.
    */
   areaChartProps?: AreaChartUIProps
   /**
-   *  Props passed down to all dots. Ignored if `withDots={false}` is set.
+   * Props passed down to dim areas.
+   *
+   * @default "{ fillOpacity: 0, strokeOpacity: 0.3 }"
+   */
+  dimAreaProps?: Omit<Partial<AreaChartSeries>, "dataKey" | "dot" | "activeDot">
+  /**
+   * Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
   dotProps?: DotUIProps
   /**
-   *  Props passed down to all active dots. Ignored if `withDots={false}` is set.
+   * Props passed down to dim dots.
+   *
+   * @default "{ fillOpacity: 0, strokeOpacity: 0 }"
+   */
+  dimDotProps?: DotUIProps
+  /**
+   * Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
   activeDotProps?: DotUIProps
   /**
@@ -59,47 +71,48 @@ export type UseAreaChartOptions = {
    */
   layoutType?: LayoutType
   /**
-   *  Determines whether the chart area should be represented with a gradient instead of the solid color.
+   * Determines whether the chart area should be represented with a gradient instead of the solid color.
    */
   withGradient?: boolean
   /**
-   *  Determines whether dots should be displayed.
+   * Determines whether dots should be displayed.
    *
    * @default true
    */
   withDots?: boolean
   /**
-   *  Determines whether activeDots should be displayed.
+   * Determines whether activeDots should be displayed.
    *
    * @default true
    */
   withActiveDots?: boolean
   /**
-   *  Type of the curve.
+   * Type of the curve.
    *
    * @default `monotone`
    */
   curveType?: CurveType
   /**
-   *  Stroke width for the chart areas.
+   * Stroke width for the chart areas.
    *
    * @default 2
    */
   strokeWidth?: number
   /**
-   *  Determines whether points with `null` values should be connected.
+   * Determines whether points with `null` values should be connected.
    *
    * @default true
    */
   connectNulls?: boolean
   /**
-   *  A tuple of colors used when `type="split"` is set, ignored in all other cases.
+   * A tuple of colors used when `type="split"` is set, ignored in all other cases.
    *
    * @default '["red.400", "green.400"]'
    */
   splitColors?: [string, string]
   /**
-   *  Offset for the split gradient. By default, value is inferred from `data` and `series` if possible. Must be generated from the data array with `getSplitOffset` function.
+   * Offset for the split gradient. By default, value is inferred from `data` and `series` if possible.
+   * Must be generated from the data array with `getSplitOffset` function.
    */
   splitOffset?: number
   /**
@@ -107,7 +120,7 @@ export type UseAreaChartOptions = {
    */
   referenceLineProps?: ReferenceLineUIProps[]
   /**
-   *  Controls fill opacity of all areas.
+   * Controls fill opacity of all areas.
    *
    * @default 0.4
    */
@@ -124,7 +137,9 @@ export const useAreaChart = ({
   type,
   areaChartProps: _areaChartProps = {},
   activeDotProps: _activeDotProps = {},
+  dimAreaProps = { fillOpacity: 0, strokeOpacity: 0.3 },
   dotProps: _dotProps = {},
+  dimDotProps = { fillOpacity: 0, strokeOpacity: 0 },
   layoutType = "horizontal",
   withGradient: withGradientProp,
   withDots = true,
@@ -190,7 +205,7 @@ export const useAreaChart = ({
       ...areaColors,
       ...areaSplitColors,
       ...referenceLineColors,
-      { name: "fill-opacity", value: fillOpacity },
+      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
     ]
   }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
 
@@ -239,8 +254,15 @@ export const useAreaChart = ({
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
+
+        const resolvedProps = {
+          fillOpacity: 1,
+          strokeOpacity: 1,
+          ...props,
+          ...(dimmed ? dimAreaProps : {}),
+        }
         const [rest, className] = getComponentProps(
-          [props, areaProperties],
+          [resolvedProps, areaProperties],
           areaClassName,
         )(theme)
 
@@ -266,15 +288,16 @@ export const useAreaChart = ({
         let dot: DotProps | boolean
 
         if (withDots) {
+          const resolvedDot = { ..._dot, ...(dimmed ? dimDotProps : {}) }
           const [rest, dotClassName] = getComponentProps(
-            [_dot, dotProperties],
+            [resolvedDot, dotProperties],
             _dotClassName,
           )(theme)
 
           dot = {
             className: cx("ui-area-chart__dot", dotClassName),
             fill: color,
-            fillOpacity: dimmed ? 0 : 1,
+            fillOpacity: 1,
             strokeWidth: 2,
             r: 4,
             ...dotProps,
@@ -297,18 +320,20 @@ export const useAreaChart = ({
         }
       }),
     [
-      areaClassName,
-      _activeDotClassName,
-      activeDotProps,
-      _dotClassName,
-      dotProps,
-      highlightedArea,
       series,
-      shouldHighlight,
-      theme,
       uuid,
+      shouldHighlight,
+      highlightedArea,
+      areaClassName,
+      theme,
       withActiveDots,
       withDots,
+      dimAreaProps,
+      _activeDotClassName,
+      activeDotProps,
+      dimDotProps,
+      _dotClassName,
+      dotProps,
     ],
   )
 
@@ -354,7 +379,6 @@ export const useAreaChart = ({
       const {
         id,
         color,
-        dimmed,
         className,
         dataKey,
         strokeDasharray,
@@ -378,8 +402,6 @@ export const useAreaChart = ({
         isAnimationActive: false,
         connectNulls,
         stackId: stacked ? "stack" : undefined,
-        fillOpacity: dimmed ? 0 : 1,
-        strokeOpacity: dimmed ? 0.5 : 1,
         strokeDasharray,
         ...(props as Omit<AreaProps, "dataKey">),
         ...rest,

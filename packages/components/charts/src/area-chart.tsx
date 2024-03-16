@@ -91,7 +91,9 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     data,
     areaChartProps,
     activeDotProps,
+    dimAreaProps,
     dotProps,
+    dimDotProps,
     withGradient,
     withDots,
     withActiveDots,
@@ -119,7 +121,9 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     data,
     areaChartProps,
     activeDotProps,
+    dimAreaProps,
     dotProps,
+    dimDotProps,
     withGradient,
     withDots,
     withActiveDots,
@@ -242,6 +246,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    unit={unit}
                   />
                 )}
                 {...getTooltipProps()}

@@ -9,7 +9,7 @@ import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
   LineChart as ReChartsLineChart,
-  Legend as ReChartsLegend,
+  Legend,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
@@ -18,8 +18,8 @@ import {
   ReferenceLine,
   Line,
 } from "recharts"
+import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import { Legend } from "./legend"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
@@ -199,9 +199,9 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
             <YAxis {...getYAxisProps({ className: "ui-line-chart__y-axis" })} />
 
             {withLegend ? (
-              <ReChartsLegend
+              <Legend
                 content={({ payload }) => (
-                  <Legend
+                  <ChartLegend
                     className="ui-line-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}

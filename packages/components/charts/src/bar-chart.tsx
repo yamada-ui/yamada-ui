@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import {
-  Legend as ReChartsLegend,
+  Legend,
   BarChart as ReChartsBarChart,
   Bar,
   CartesianGrid,
@@ -16,8 +16,8 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts"
+import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import { Legend } from "./legend"
 import { useBarChart } from "./use-bar-chart"
 import type { UseBarChartOptios } from "./use-bar-chart"
 import type { UseChartProps } from "./use-chart"
@@ -131,9 +131,9 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
             <YAxis {...getYAxisProps()} />
 
             {withLegend ? (
-              <ReChartsLegend
+              <Legend
                 content={({ payload }) => (
-                  <Legend
+                  <ChartLegend
                     className="ui-area-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}

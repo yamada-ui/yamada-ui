@@ -89,14 +89,17 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     gridProps,
     strokeDasharray,
     fillOpacity,
+    barChartProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const { getBarChartProps, getBarProps, barVars, setHighlightedArea } =
     useBarChart({
-      type,
-      series,
       data,
+      series,
+      type,
+      layoutType,
+      barChartProps,
       referenceLineProps,
       fillOpacity,
       styles,

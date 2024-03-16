@@ -98,6 +98,7 @@ export const useChartAxis = ({
     () => (layoutType === "vertical" ? { type: "number" } : { dataKey }),
     [dataKey, layoutType],
   )
+  //TODO: layoutType="vertical",type="parsent"is not display
   const yAxisKey: YAxisProps = useMemo(
     () =>
       layoutType === "vertical"

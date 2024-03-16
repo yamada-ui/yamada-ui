@@ -42,59 +42,9 @@ export type UseBarChartOptions = {
    */
   layoutType?: LayoutType
   /**
-   * A function to format values on Y axis and inside the tooltip
-   */
-  valueFormatter?: (value: number) => string
-  /**
    * Props passed down to recharts `BarChart` component.
    */
   barChartProps?: BarChartUIProps
-  /**
-   * Unit displayed next to each tick in y-axis.
-   */
-  unit?: string
-  /**
-   * If `true`, X axis is visible.
-   *
-   * @default true
-   */
-  withXAxis?: boolean
-  /**
-   * If `true`, Y axis is visible.
-   *
-   * @default true
-   */
-  withYAxis?: boolean
-  /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
-   */
-  withTooltip?: boolean
-  /**
-   * If `true`, legend is visible.
-   *
-   * @default false
-   */
-  withLegend?: boolean
-  /**
-   * Specifies the duration of animation, the unit of this option is ms.
-   *
-   * @default 0
-   */
-  tooltipAnimationDuration?: number
-  /**
-   * Chart orientation.
-   *
-   * @default 'horizontal'
-   */
-  orientation?: LayoutType
-  /**
-   * Determines whether points with `null` values should be connected.
-   *
-   * @default true
-   */
-  connectNulls?: boolean
   /**
    * Reference lines that should be displayed on the chart.
    */
@@ -117,7 +67,6 @@ export const useBarChart = ({
   type,
   barChartProps: _barChartProps = {},
   layoutType = "horizontal",
-  connectNulls = true,
   referenceLineProps = [],
   fillOpacity = 1,
   styles,
@@ -205,7 +154,6 @@ export const useBarChart = ({
         fill: color,
         stroke: color,
         isAnimationActive: false,
-        connectNulls,
         stackId: stacked ? "stack" : undefined,
         fillOpacity: dimmed ? 0.1 : fillOpacity,
         strokeOpacity: dimmed ? 0.2 : 0,
@@ -213,7 +161,7 @@ export const useBarChart = ({
         ...rest,
       }
     },
-    [barPropsList, connectNulls, fillOpacity, stacked],
+    [barPropsList, fillOpacity, stacked],
   )
 
   const getBarChartProps: ChartPropGetter<

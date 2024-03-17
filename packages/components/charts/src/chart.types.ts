@@ -72,7 +72,11 @@ export type LineChartSeries = Merge<
 >
 export type BarChartSeries = Merge<
   Merge<CSSUIProps, ReChartsBarProps>,
-  { color: CSSUIProps["color"] }
+  {
+    color: CSSUIProps["color"]
+    activeBar?: CSSUIProps
+    background?: CSSUIProps
+  }
 >
 export type AreaChartUIProps = Merge<
   CSSUIProps,
@@ -406,7 +410,9 @@ export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
   "onMouseOut",
   "onMouseEnter",
   "onMouseLeave",
+  "radius",
 ]
+export const barBackgroundProperties = ["radius"]
 export const lineProperties: (keyof Omit<ReChartsLineProps, "ref">)[] = [
   "type",
   "dataKey",

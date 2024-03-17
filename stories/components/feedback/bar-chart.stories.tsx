@@ -569,7 +569,6 @@ export const withUnit: Story = () => {
   )
 }
 
-//TODO: radiusが効いてない（CSSは当たってる）
 export const withBarProps: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -585,7 +584,7 @@ export const withBarProps: Story = () => {
       {
         dataKey: "Smartphones",
         color: ["primary.500", "primary.400"],
-        // radius: 10,
+        radius: 10,
       },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
     ],
@@ -613,6 +612,7 @@ export const customBackground: Story = () => {
           fill: ["blackAlpha.300", "whiteAlpha.300"],
           stroke: ["blackAlpha.500", "whiteAlpha.500"],
           strokeWidth: 1,
+          radius: 10,
         },
       },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },

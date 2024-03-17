@@ -9,7 +9,11 @@ import {
 } from "react"
 import type { BarChart, BarProps } from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import { areaChartProperties, barProperties } from "./chart.types"
+import {
+  areaChartProperties,
+  barBackgroundProperties,
+  barProperties,
+} from "./chart.types"
 import type {
   BarChartSeries,
   BarChartType,
@@ -116,7 +120,12 @@ export const useBarChart = ({
   const barPropsList = useMemo(
     () =>
       series.map((props, index) => {
-        const { dataKey, activeBar = {}, background = {}, ...restProps } = props
+        const {
+          dataKey,
+          activeBar: activeBarProp = {},
+          background: backgroundProp = {},
+          ...restProps
+        } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-bar-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -126,19 +135,30 @@ export const useBarChart = ({
         )(theme)
         const activeBarClassName = getClassName({
           ...styles.activeBar,
-          ...activeBar,
+          ...activeBarProp,
         })(theme)
-        const backgroundClassName = getClassName({
-          ...styles.barBackground,
-          ...background,
-        })(theme)
+        const [backgroundProps, backgroundClassName] = getComponentProps<
+          Dict,
+          string
+        >(
+          [backgroundProp, barBackgroundProperties],
+          styles.barBackground,
+        )(theme)
+
+        const activeBar = {
+          className: activeBarClassName,
+        }
+        const background = {
+          className: backgroundClassName,
+          ...backgroundProps,
+        }
 
         return {
           id,
           dimmed,
           className,
-          activeBarClassName,
-          backgroundClassName,
+          activeBar,
+          background,
           ...rest,
           color,
           dataKey,
@@ -168,8 +188,8 @@ export const useBarChart = ({
         id,
         dimmed,
         className,
-        activeBarClassName,
-        backgroundClassName,
+        activeBar,
+        background,
         color,
         dataKey,
         ...rest
@@ -178,8 +198,8 @@ export const useBarChart = ({
       return {
         ref,
         className: cx(classNameProp, className),
-        activeBar: { className: activeBarClassName },
-        background: { className: backgroundClassName },
+        activeBar,
+        background,
         id,
         name: dataKey as string,
         dataKey,

@@ -410,7 +410,9 @@ export const barProperties: (keyof Omit<ReChartsBarProps, "ref">)[] = [
   "onMouseOut",
   "onMouseEnter",
   "onMouseLeave",
+  "radius",
 ]
+export const barBackgroundProperties = ["radius"]
 export const lineProperties: (keyof Omit<ReChartsLineProps, "ref">)[] = [
   "type",
   "dataKey",

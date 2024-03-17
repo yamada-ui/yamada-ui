@@ -9,11 +9,6 @@ type IconButtonOptions = {
    * The icon to be used in the button.
    */
   icon?: ReactElement
-  /**
-   * If `true`, the button will be perfectly round. Else, it'll be slightly round.
-   *
-   * @default false
-   */
 }
 
 export type IconButtonProps = Omit<
@@ -36,7 +31,7 @@ export const IconButton = forwardRef<IconButtonProps, "button">(
         p={0}
         {...rest}
       >
-        {icon || children}
+        {children || icon}
       </Button>
     )
   },

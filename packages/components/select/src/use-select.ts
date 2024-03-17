@@ -9,6 +9,7 @@ import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { Dict } from "@yamada-ui/utils"
 import {
@@ -40,7 +41,6 @@ import type {
   CSSProperties,
 } from "react"
 import { useCallback, useRef, useState, useEffect } from "react"
-import { useDisclosure } from "../../../hooks/use-disclosure/src"
 import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>

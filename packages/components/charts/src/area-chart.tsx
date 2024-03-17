@@ -217,8 +217,6 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
           <ReChartsAreaChart
             {...getAreaChartProps({ className: "ui-area-chart__chart" })}
           >
-            {referenceLinesItems}
-
             <CartesianGrid
               {...getGridProps({ className: "ui-area-chart__grid" })}
             />
@@ -258,7 +256,9 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 <AreaSplit {...getAreaSplitProps()} />
               </defs>
             ) : null}
+
             {areas}
+            {referenceLinesItems}
           </ReChartsAreaChart>
         </ResponsiveContainer>
       </ui.div>

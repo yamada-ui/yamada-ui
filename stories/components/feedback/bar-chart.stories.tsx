@@ -564,7 +564,7 @@ export const customBar: Story = () => {
       {
         dataKey: "Smartphones",
         color: ["primary.500", "primary.400"],
-        radius: 10,
+        radius: [12, 12, 0, 0],
       },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
     ],

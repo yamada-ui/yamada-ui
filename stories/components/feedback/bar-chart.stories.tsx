@@ -243,36 +243,6 @@ export const custom: Story = () => {
   )
 }
 
-export const withMix: Story = () => {
-  const data = useMemo(() => {
-    const months = ["January", "February", "March", "April", "May", "June"]
-    return months.map((month) => ({
-      month,
-      Smartphones: randomValue(),
-      Laptops: randomValue(),
-      Tablets: randomValue(),
-    }))
-  }, [])
-
-  const series: BarChartSeries[] = useMemo(
-    () => [
-      {
-        dataKey: "Smartphones",
-        color: ["primary.500", "primary.400"],
-        stackId: "a",
-      },
-      {
-        dataKey: "Laptops",
-        color: ["secondary.500", "secondary.400"],
-        stackId: "a",
-      },
-      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
-    ],
-    [],
-  )
-  return <BarChart data={data} series={series} dataKey="month" />
-}
-
 export const withSize: Story = () => {
   const data = useMemo(() => {
     const months = ["January", "February", "March", "April", "May", "June"]
@@ -515,6 +485,36 @@ export const withUnit: Story = () => {
       yAxisProps={{ width: 75 }}
     />
   )
+}
+
+export const useMixData: Story = () => {
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+    return months.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        stackId: "a",
+      },
+      {
+        dataKey: "Laptops",
+        color: ["secondary.500", "secondary.400"],
+        stackId: "a",
+      },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
 }
 
 export const useRangeData: Story = () => {

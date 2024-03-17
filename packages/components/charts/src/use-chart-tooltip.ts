@@ -31,19 +31,46 @@ export const useChartTooltip = ({
   valueFormatter,
 }: UseChartTooltipProps) => {
   const { theme } = useTheme()
-  //TODO: defaultの設定＋stroke,strokewidth,strokedassarrayとか。他のチャートも必要
-  const { cursor = {}, ...rest } = _tooltipProps
+  const {
+    cursor = {
+      fill: ["blackAlpha.200", "whiteAlpha.200"],
+      stroke: ["blackAlpha.300", "whiteAlpha.300"],
+      strokeWidth: 1,
+      strokeDasharray: "",
+    },
+    ...rest
+  } = _tooltipProps
+
   const tooltipVars: CSSUIProps["var"] = useMemo(
     () => [
       {
         __prefix: "ui",
         name: "cursor-fill",
         token: "colors",
-        value: cursor.fill ?? "transparent",
+        value: cursor.fill!,
+      },
+      {
+        __prefix: "ui",
+        name: "cursor-stroke",
+        token: "colors",
+        value: cursor.stroke!,
+      },
+      {
+        __prefix: "ui",
+        name: "cursor-stroke-width",
+        token: "colors",
+        value: cursor.strokeWidth!,
+      },
+      {
+        __prefix: "ui",
+        name: "cursor-stroke-dasharray",
+        token: "colors",
+        value: cursor.strokeDasharray!,
       },
     ],
-    [cursor.fill],
+    [cursor.fill, cursor.stroke, cursor.strokeDasharray, cursor.strokeWidth],
   )
+
   const [tooltipProps, propClassName] = getComponentProps<Dict, string>([
     rest,
     tooltipProperties,
@@ -63,6 +90,9 @@ export const useChartTooltip = ({
       formatter: valueFormatter,
       cursor: {
         fill: "var(--ui-cursor-fill)",
+        stroke: "var(--ui-cursor-stroke)",
+        strokeWidth: "var(--ui-cursor-stroke-width)",
+        strokeDasharray: "var(--ui-cursor-stroke-dasharray)",
       },
       ...props,
       ...tooltipProps,

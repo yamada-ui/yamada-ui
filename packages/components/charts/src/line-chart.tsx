@@ -100,29 +100,25 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const {
-    getLineProps,
-    getLineChartProps,
-    getCSSvariables,
-    setHighlightedArea,
-  } = useLineChart({
-    layoutType,
-    series,
-    referenceLineProps,
-    data,
-    lineChartProps,
-    dimLineProps,
-    dotProps,
-    dimDotProps,
-    activeDotProps,
-    withDots,
-    withActiveDots,
-    curveType,
-    strokeWidth,
-    connectNulls,
-    fillOpacity,
-    styles,
-  })
+  const { getLineProps, getLineChartProps, lineVars, setHighlightedArea } =
+    useLineChart({
+      layoutType,
+      series,
+      referenceLineProps,
+      data,
+      lineChartProps,
+      dimLineProps,
+      dotProps,
+      dimDotProps,
+      activeDotProps,
+      withDots,
+      withActiveDots,
+      curveType,
+      strokeWidth,
+      connectNulls,
+      fillOpacity,
+      styles,
+    })
   const { getContainerProps } = useChart({ containerProps })
   const { getXAxisProps, getYAxisProps } = useChartAxis({
     dataKey,
@@ -148,7 +144,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const { getTooltipProps } = useChartTooltip({
+  const { getTooltipProps, tooltipVars } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
   })
@@ -184,7 +180,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-line-chart", className)}
-        var={getCSSvariables}
+        var={[...lineVars, ...tooltipVars]}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

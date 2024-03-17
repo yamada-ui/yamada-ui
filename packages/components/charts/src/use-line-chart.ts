@@ -311,7 +311,7 @@ export const useLineChart = ({
   return {
     getLineProps,
     getLineChartProps,
-    getCSSvariables: lineVars,
+    lineVars,
     setHighlightedArea,
   }
 }

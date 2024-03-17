@@ -695,7 +695,12 @@ export const customCursor: Story = () => {
       series={series}
       dataKey="month"
       tooltipProps={{
-        cursor: { fill: ["primary.100", "primary.900"] },
+        cursor: {
+          fill: ["primary.100", "primary.950"],
+          stroke: ["secondary.300", "secondary.700"],
+          strokeWidth: 1,
+          strokeDasharray: "5 5",
+        },
       }}
     />
   )

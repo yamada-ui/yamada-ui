@@ -160,7 +160,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const { getTooltipProps } = useChartTooltip({
+  const { getTooltipProps, tooltipVars } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
     valueFormatter,
@@ -207,7 +207,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-area-chart", className)}
-        var={areaVars}
+        var={[...areaVars, ...tooltipVars]}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

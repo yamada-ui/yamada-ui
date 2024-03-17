@@ -177,6 +177,8 @@ export const useBarChart = ({
             barBackgroundClassName,
             backgroundProp,
           )(theme),
+          // TODO:
+          // radiusをどうするか。また、その他のpropsはどうするか。型定義が間違っている。
         }
 
         return {

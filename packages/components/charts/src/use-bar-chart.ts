@@ -64,7 +64,7 @@ export type UseBarChartProps = UseBarChartOptions & {
 export const useBarChart = ({
   data,
   series,
-  type,
+  type = "default",
   barChartProps: _barChartProps = {},
   layoutType = "horizontal",
   referenceLineProps = [],

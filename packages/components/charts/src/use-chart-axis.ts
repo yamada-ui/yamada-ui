@@ -16,7 +16,6 @@ import type {
 } from "./chart.types"
 import { xAxisProperties, yAxisProperties } from "./chart.types"
 
-//TODO: type は共通なので、AreaChartTypeにすべきではない
 export type UseChartAxisOptions = {
   /**
    * The key of a group of data which should be unique in an chart.
@@ -99,7 +98,7 @@ export const useChartAxis = ({
     () => (layoutType === "vertical" ? { type: "number" } : { dataKey }),
     [dataKey, layoutType],
   )
-  //TODO: layoutType="vertical",type="parsent"is not display
+
   const yAxisKey: YAxisProps = useMemo(
     () =>
       layoutType === "vertical"
@@ -117,7 +116,14 @@ export const useChartAxis = ({
     withTickLine ? { stroke: "currentColor" } : false
   const xTickLine = getTickLine(withXTickLine)
   const yTickLine = getTickLine(withYTickLine)
-  const tickFormatter = type === "percent" ? valueToPercent : valueFormatter
+  const yAxisTickFormatter =
+    type === "percent" && layoutType !== "vertical"
+      ? valueToPercent
+      : valueFormatter
+  const xAxisTickFormatter =
+    type === "percent" && layoutType === "vertical"
+      ? valueToPercent
+      : valueFormatter
 
   const [xAxisReChartsProps, xAxisClassName] = getComponentProps<Dict, string>(
     [_xAxisProps, xAxisProperties],
@@ -146,10 +152,18 @@ export const useChartAxis = ({
       interval: "preserveStartEnd",
       tickLine: xTickLine,
       minTickGap: 5,
+      tickFormatter: xAxisTickFormatter,
       ...props,
       ...(xAxisReChartsProps as XAxisProps),
     }),
-    [xAxisClassName, withXAxis, xAxisKey, xTickLine, xAxisReChartsProps],
+    [
+      xAxisClassName,
+      withXAxis,
+      xAxisKey,
+      xTickLine,
+      xAxisTickFormatter,
+      xAxisReChartsProps,
+    ],
   )
 
   const getYAxisProps: ChartPropGetter<
@@ -169,7 +183,7 @@ export const useChartAxis = ({
       },
       allowDecimals: true,
       unit: unit,
-      tickFormatter: tickFormatter,
+      tickFormatter: yAxisTickFormatter,
       ...props,
       ...(yAxisReChartsProps as YAxisProps),
     }),
@@ -179,7 +193,7 @@ export const useChartAxis = ({
       yAxisKey,
       yTickLine,
       unit,
-      tickFormatter,
+      yAxisTickFormatter,
       yAxisReChartsProps,
     ],
   )

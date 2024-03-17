@@ -27,7 +27,7 @@ describe("<Button/>", () => {
         Submit
       </Button>,
     )
-    expect(getByTestId("btn")).toHaveAttribute("data__loading", "")
+    expect(getByTestId("btn")).toHaveAttribute("data-loading", "")
 
     // children text is hidden
     expect(screen.queryByText("Submit")).toBeNull()
@@ -63,12 +63,12 @@ describe("<Button/>", () => {
 
     const button = getByTestId("btn")
 
-    expect(button).not.toHaveAttribute("data__loading", "")
+    expect(button).not.toHaveAttribute("data-loading", "")
     expect(button).not.toHaveAttribute("data-active", "")
 
-    // isLoading sets data__loading=""
+    // isLoading sets data-loading=""
     rerender(<Button isLoading>Hello</Button>)
-    expect(button).toHaveAttribute("data__loading", "")
+    expect(button).toHaveAttribute("data-loading", "")
 
     // isActive sets data-active=""
     rerender(<Button isActive>Hello</Button>)

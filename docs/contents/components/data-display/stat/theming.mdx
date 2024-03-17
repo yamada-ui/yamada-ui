@@ -42,8 +42,18 @@ export const Stat: ComponentMultiStyle = {
       h: "3.5",
       verticalAlign: "middle",
       var: [
-        { name: "increase", token: "colors", value: "success.400" },
-        { name: "decrease", token: "colors", value: "danger.400" },
+        {
+          __prefix: "ui",
+          name: "increase",
+          token: "colors",
+          value: "success.400",
+        },
+        {
+          __prefix: "ui",
+          name: "decrease",
+          token: "colors",
+          value: "danger.400",
+        },
       ],
     },
   },

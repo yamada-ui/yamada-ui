@@ -83,6 +83,46 @@
     "hierarchy": { "lv1": "Team and Contributors", "lv2": "Sponsors" }
   },
   {
+    "title": "Platinum Sponsor",
+    "type": "fragment",
+    "slug": "/community/team#platinum-sponsor",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Sponsors",
+      "lv3": "Platinum Sponsor"
+    }
+  },
+  {
+    "title": "Gold Sponsor",
+    "type": "fragment",
+    "slug": "/community/team#gold-sponsor",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Sponsors",
+      "lv3": "Gold Sponsor"
+    }
+  },
+  {
+    "title": "Silver Sponsor",
+    "type": "fragment",
+    "slug": "/community/team#silver-sponsor",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Sponsors",
+      "lv3": "Silver Sponsor"
+    }
+  },
+  {
+    "title": "Bronze Sponsor",
+    "type": "fragment",
+    "slug": "/community/team#bronze-sponsor",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Sponsors",
+      "lv3": "Bronze Sponsor"
+    }
+  },
+  {
     "title": "Organizations",
     "type": "fragment",
     "slug": "/community/team#organizations",

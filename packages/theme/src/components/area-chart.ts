@@ -5,8 +5,4 @@ export const AreaChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     area: {},
   },
-
-  defaultProps: {
-    size: "full",
-  },
 })({ omit: ["line"] })

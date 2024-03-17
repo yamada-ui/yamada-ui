@@ -7,7 +7,7 @@ import { useCallback, useId, useMemo, useState } from "react"
 import type { AreaChart, AreaProps, DotProps } from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
-import { getComponentProps } from "./chart-utils"
+import { getClassName, getComponentProps } from "./chart-utils"
 import type {
   CurveType,
   AreaChartSeries,
@@ -224,6 +224,8 @@ export const useAreaChart = ({
     styles.dot,
   )(theme)
 
+  const areaClassName = getClassName(styles.area)(theme)
+
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {
       const dataKey = series[0].dataKey as string
@@ -256,7 +258,7 @@ export const useAreaChart = ({
         }
         const [rest, className] = getComponentProps(
           [resolvedProps, areaProperties],
-          styles.area,
+          areaClassName,
         )(theme)
 
         let activeDot: DotProps | boolean
@@ -317,7 +319,7 @@ export const useAreaChart = ({
       shouldHighlight,
       highlightedArea,
       dimAreaProps,
-      styles.area,
+      areaClassName,
       theme,
       withActiveDots,
       withDots,

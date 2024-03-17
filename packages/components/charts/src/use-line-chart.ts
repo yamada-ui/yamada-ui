@@ -5,7 +5,7 @@ import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type { DotProps, LineChart, LineProps } from "recharts"
-import { getComponentProps } from "./chart-utils"
+import { getClassName, getComponentProps } from "./chart-utils"
 import {
   dotProperties,
   lineChartProperties,
@@ -177,6 +177,8 @@ export const useLineChart = ({
     styles.dot,
   )(theme)
 
+  const lineClassName = getClassName(styles.line)(theme)
+
   const linePropList = useMemo(
     () =>
       series.map((props, index) => {
@@ -191,7 +193,7 @@ export const useLineChart = ({
         }
         const [rest, className] = getComponentProps<Dict, string>(
           [resolvedProps, lineProperties],
-          styles.line,
+          lineClassName,
         )(theme)
 
         let activeDot: DotProps | boolean
@@ -249,7 +251,7 @@ export const useLineChart = ({
       shouldHighlight,
       highlightedArea,
       dimLineProps,
-      styles.line,
+      lineClassName,
       theme,
       withActiveDots,
       withDots,

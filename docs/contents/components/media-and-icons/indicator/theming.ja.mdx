@@ -41,7 +41,14 @@ export const Indicator: ComponentStyle = {
     solid: ({ colorScheme: c = "primary" }) => ({
       bg: [`${c}.500`, `${c}.600`],
       color: `white`,
-      var: [{ name: "ping", token: "colors", value: [`${c}.300`, `${c}.400`] }],
+      var: [
+        {
+          __prefix: "ui",
+          name: "ping",
+          token: "colors",
+          value: [`${c}.300`, `${c}.400`],
+        },
+      ],
     }),
     subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({
       bg: [
@@ -51,6 +58,7 @@ export const Indicator: ComponentStyle = {
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       var: [
         {
+          __prefix: "ui",
           name: "ping",
           token: "colors",
           value: ["blackAlpha.400", "whiteAlpha.500"],

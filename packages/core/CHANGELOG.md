@@ -1,5 +1,15 @@
 # @yamada-ui/core
 
+## 1.4.4
+
+### Patch Changes
+
+- [#984](https://github.com/yamada-ui/yamada-ui/pull/984) [`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `minBoxSize` and `maxBoxSize` do not refer to theme sizes tokens.
+
+- [#975](https://github.com/yamada-ui/yamada-ui/pull/975) [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `fallback` function for theme token.
+
+- [#973](https://github.com/yamada-ui/yamada-ui/pull/973) [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `__prefix` to `var` props.
+
 ## 1.4.3
 
 ### Patch Changes

@@ -245,7 +245,13 @@ export const useAreaChart = ({
   const areaPropsList = useMemo(
     () =>
       series.map((props, index) => {
-        const { dataKey, activeDot: _activeDot = {}, dot: _dot = {} } = props
+        const {
+          dataKey,
+          activeDot: _activeDot = {},
+          dot: _dot = {},
+          strokeDasharray,
+          ...computedProps
+        } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -253,10 +259,10 @@ export const useAreaChart = ({
         const resolvedProps = {
           fillOpacity: 1,
           strokeOpacity: 1,
-          ...props,
+          ...computedProps,
           ...(dimmed ? dimAreaProps : {}),
         }
-        const [rest, className] = getComponentProps(
+        const [rest, className] = getComponentProps<Dict, string>(
           [resolvedProps, areaProperties],
           areaClassName,
         )(theme)
@@ -308,6 +314,7 @@ export const useAreaChart = ({
           className,
           ...rest,
           color,
+          strokeDasharray,
           dataKey,
           activeDot,
           dot,

@@ -182,13 +182,18 @@ export const useLineChart = ({
   const linePropList = useMemo(
     () =>
       series.map((props, index) => {
-        const { dataKey, activeDot: _activeDot = {}, dot: _dot = {} } = props
+        const {
+          dataKey,
+          activeDot: _activeDot = {},
+          dot: _dot = {},
+          ...computedProps
+        } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const resolvedProps = {
           fillOpacity: "var(--ui-fill-opacity)",
           strokeOpacity: "var(--ui-fill-opacity)",
-          ...props,
+          ...computedProps,
           ...(dimmed ? dimLineProps : {}),
         }
         const [rest, className] = getComponentProps<Dict, string>(

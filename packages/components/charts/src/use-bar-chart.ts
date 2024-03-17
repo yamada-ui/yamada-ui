@@ -8,7 +8,7 @@ import {
   useMemo,
 } from "react"
 import type { BarChart, BarProps } from "recharts"
-import { getComponentProps } from "./chart-utils"
+import { getClassName, getComponentProps } from "./chart-utils"
 import { areaChartProperties, barProperties } from "./chart.types"
 import type {
   BarChartSeries,
@@ -116,25 +116,37 @@ export const useBarChart = ({
   const barPropsList = useMemo(
     () =>
       series.map((props, index) => {
-        const { dataKey } = props
+        const { dataKey, activeBar = {}, ...restProps } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-bar-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
-        const [rest, className] = getComponentProps(
-          [props, barProperties],
-          styles.area,
+        const [rest, className] = getComponentProps<Dict, string>(
+          [restProps, barProperties],
+          styles.bar,
         )(theme)
-
+        const activeBarClassName = getClassName({
+          ...styles.activeBar,
+          ...activeBar,
+        })(theme)
         return {
           id,
           dimmed,
           className,
+          activeBarClassName,
           ...rest,
           color,
           dataKey,
         }
       }),
-    [highlightedArea, series, shouldHighlight, styles.area, theme, uuid],
+    [
+      highlightedArea,
+      series,
+      shouldHighlight,
+      styles.activeBar,
+      styles.bar,
+      theme,
+      uuid,
+    ],
   )
 
   const getBarProps: RequiredChartPropGetter<
@@ -145,12 +157,20 @@ export const useBarChart = ({
     Omit<BarProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
-      const { id, dimmed, className, color, dataKey, ...rest } =
-        barPropsList[index]
+      const {
+        id,
+        dimmed,
+        className,
+        activeBarClassName,
+        color,
+        dataKey,
+        ...rest
+      } = barPropsList[index]
 
       return {
         ref,
         className: cx(classNameProp, className),
+        activeBar: { className: activeBarClassName },
         id,
         name: dataKey as string,
         dataKey,
@@ -162,7 +182,7 @@ export const useBarChart = ({
         strokeOpacity: dimmed ? 0.2 : 0,
         ...(props as Omit<BarProps, "dataKey">),
         ...rest,
-      }
+      } as BarProps
     },
     [barPropsList, stacked],
   )

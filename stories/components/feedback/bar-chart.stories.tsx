@@ -596,7 +596,6 @@ export const withUnit: Story = () => {
   )
 }
 
-//TODO:yamada-uiで対応する yamada-uiようのRectangleを作る?
 export const customActiveBar: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -611,8 +610,7 @@ export const customActiveBar: Story = () => {
       {
         dataKey: "Smartphones",
         color: ["primary.500", "primary.400"],
-        // activeBar: { fill: "red" },
-        // activeBar: <Rectangle fill="pink" stroke="blue" />,
+        activeBar: { fill: ["secondary.500", "secondary.400"] },
       },
     ],
     [],

@@ -72,7 +72,7 @@ export type LineChartSeries = Merge<
 >
 export type BarChartSeries = Merge<
   Merge<CSSUIProps, ReChartsBarProps>,
-  { color: CSSUIProps["color"] }
+  { color: CSSUIProps["color"]; activeBar?: CSSUIProps }
 >
 export type AreaChartUIProps = Merge<
   CSSUIProps,

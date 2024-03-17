@@ -22,6 +22,7 @@ export const BarChart: ComponentMultiStyle = {
       fontSize: "xs",
     },
     bar: {},
+    activeBar: {},
     legend: {
       display: "flex",
       justifyContent: "flex-end",

@@ -21,6 +21,8 @@ import {
   Card,
   Text,
   Wrap,
+  CardBody,
+  CardHeader,
 } from "@yamada-ui/react"
 import { useMemo, useState } from "react"
 import { PropControl } from "../../components"
@@ -827,14 +829,25 @@ export const customTooltip: Story = () => {
     if (!payload) return null
 
     return (
-      <Card variant="subtle" colorScheme="gray" p="md">
-        <Text>{label}</Text>
-        {payload.map((value, index) => (
-          <HStack key={`payload-${index}`} justifyContent="space-between">
-            <Text>{value?.name}</Text>
-            <Text color={value?.color}>{value?.value}</Text>
-          </HStack>
-        ))}
+      <Card variant="subtle" colorScheme="gray">
+        <CardHeader>
+          <Text fontSize="lg" fontWeight="semibold">
+            {label}
+          </Text>
+        </CardHeader>
+
+        <CardBody gap="sm">
+          {payload.map((value, index) => (
+            <HStack
+              key={`payload-${index}`}
+              w="full"
+              justifyContent="space-between"
+            >
+              <Text>{value?.name}</Text>
+              <Text color={value?.color}>{value?.value}</Text>
+            </HStack>
+          ))}
+        </CardBody>
       </Card>
     )
   }

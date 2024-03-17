@@ -116,7 +116,7 @@ export const useBarChart = ({
   const barPropsList = useMemo(
     () =>
       series.map((props, index) => {
-        const { dataKey, activeBar = {}, ...restProps } = props
+        const { dataKey, activeBar = {}, background = {}, ...restProps } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-bar-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
@@ -128,11 +128,17 @@ export const useBarChart = ({
           ...styles.activeBar,
           ...activeBar,
         })(theme)
+        const backgroundClassName = getClassName({
+          ...styles.barBackground,
+          ...background,
+        })(theme)
+
         return {
           id,
           dimmed,
           className,
           activeBarClassName,
+          backgroundClassName,
           ...rest,
           color,
           dataKey,
@@ -144,6 +150,7 @@ export const useBarChart = ({
       shouldHighlight,
       styles.activeBar,
       styles.bar,
+      styles.barBackground,
       theme,
       uuid,
     ],
@@ -162,6 +169,7 @@ export const useBarChart = ({
         dimmed,
         className,
         activeBarClassName,
+        backgroundClassName,
         color,
         dataKey,
         ...rest
@@ -171,6 +179,7 @@ export const useBarChart = ({
         ref,
         className: cx(classNameProp, className),
         activeBar: { className: activeBarClassName },
+        background: { className: backgroundClassName },
         id,
         name: dataKey as string,
         dataKey,

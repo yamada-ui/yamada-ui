@@ -480,33 +480,6 @@ export const withValueFormatter: Story = () => {
   )
 }
 
-//TODO: radiusが効いてない（CSSは当たってる）backgroundの色もYamada UIにしないと
-//結構だるい　backgroundはclassnameでどうこうできなそう
-export const withBarProps: Story = () => {
-  const data = useMemo(() => {
-    const monthes = ["January", "February", "March", "April", "May", "June"]
-    return monthes.map((month) => ({
-      month,
-      Smartphones: randomValue(),
-      Laptops: randomValue(),
-    }))
-  }, [])
-
-  const series: BarChartSeries[] = useMemo(
-    () => [
-      {
-        dataKey: "Smartphones",
-        color: ["primary.500", "primary.400"],
-        background: { fill: "#eee", stroke: "red", strokeWidth: 1 },
-        // radius: 10,
-      },
-      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
-    ],
-    [],
-  )
-  return <BarChart data={data} series={series} dataKey="month" />
-}
-
 export const withStrokeDasharray: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]
@@ -594,6 +567,59 @@ export const withUnit: Story = () => {
       yAxisProps={{ width: 75 }}
     />
   )
+}
+
+//TODO: radiusが効いてない（CSSは当たってる）
+export const withBarProps: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        // radius: 10,
+      },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
+}
+
+export const customBackground: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        background: {
+          fill: ["blackAlpha.300", "whiteAlpha.300"],
+          stroke: ["blackAlpha.500", "whiteAlpha.500"],
+          strokeWidth: 1,
+        },
+      },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+  return <BarChart data={data} series={series} dataKey="month" />
 }
 
 export const customActiveBar: Story = () => {

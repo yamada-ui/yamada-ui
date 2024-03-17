@@ -9,11 +9,7 @@ import {
 } from "react"
 import type { BarChart, BarProps } from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import {
-  areaChartProperties,
-  barBackgroundProperties,
-  barProperties,
-} from "./chart.types"
+import { areaChartProperties, barProperties } from "./chart.types"
 import type {
   BarChartSeries,
   BarChartType,
@@ -39,6 +35,24 @@ export type UseBarChartOptions = {
    * @default `default`
    */
   type?: BarChartType
+  /**
+   * Props for the bars.
+   */
+  barProps?: CSSUIProps
+  /**
+   * Props passed down to dim bars.
+   *
+   * @default "{ fillOpacity: 0.1, strokeOpacity: 0.2 }"
+   */
+  dimBarProps?: CSSUIProps
+  /**
+   * Props for the background of bars.
+   */
+  barBackgroundProps?: CSSUIProps
+  /**
+   * Props for the active bars.
+   */
+  activeBarProps?: CSSUIProps
   /**
    * Chart orientation.
    *
@@ -69,6 +83,10 @@ export const useBarChart = ({
   data,
   series,
   type = "default",
+  barProps: _barProps = {},
+  barBackgroundProps: _barBackgroundProps = {},
+  dimBarProps = { fillOpacity: 0.1, strokeOpacity: 0 },
+  activeBarProps: _activeBarProps = {},
   barChartProps: _barChartProps = {},
   layoutType = "horizontal",
   referenceLineProps = [],
@@ -116,6 +134,15 @@ export const useBarChart = ({
     [_barChartProps, areaChartProperties],
     styles.barChart,
   )(theme)
+  const barClassName = getClassName(styles.bar, _barProps)(theme)
+  const barBackgroundClassName = getClassName(
+    styles.barBackground,
+    _barBackgroundProps,
+  )(theme)
+  const activeBarClassName = getClassName(
+    styles.activeBar,
+    _activeBarProps,
+  )(theme)
 
   const barPropsList = useMemo(
     () =>
@@ -124,33 +151,32 @@ export const useBarChart = ({
           dataKey,
           activeBar: activeBarProp = {},
           background: backgroundProp = {},
-          ...restProps
+          ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-bar-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
+
+        const resolvedProps = {
+          fillOpacity: "var(--ui-fill-opacity)",
+          strokeOpacity: 1,
+          ...computedProps,
+          ...(dimmed ? dimBarProps : {}),
+        }
         const [rest, className] = getComponentProps<Dict, string>(
-          [restProps, barProperties],
-          styles.bar,
-        )(theme)
-        const activeBarClassName = getClassName({
-          ...styles.activeBar,
-          ...activeBarProp,
-        })(theme)
-        const [backgroundProps, backgroundClassName] = getComponentProps<
-          Dict,
-          string
-        >(
-          [backgroundProp, barBackgroundProperties],
-          styles.barBackground,
+          [resolvedProps, barProperties],
+          barClassName,
         )(theme)
 
         const activeBar = {
-          className: activeBarClassName,
+          className: getClassName(activeBarClassName, activeBarProp)(theme),
         }
+
         const background = {
-          className: backgroundClassName,
-          ...backgroundProps,
+          className: getClassName(
+            barBackgroundClassName,
+            backgroundProp,
+          )(theme),
         }
 
         return {
@@ -165,12 +191,13 @@ export const useBarChart = ({
         }
       }),
     [
+      activeBarClassName,
+      barBackgroundClassName,
+      barClassName,
+      dimBarProps,
       highlightedArea,
       series,
       shouldHighlight,
-      styles.activeBar,
-      styles.bar,
-      styles.barBackground,
       theme,
       uuid,
     ],
@@ -184,16 +211,8 @@ export const useBarChart = ({
     Omit<BarProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
-      const {
-        id,
-        dimmed,
-        className,
-        activeBar,
-        background,
-        color,
-        dataKey,
-        ...rest
-      } = barPropsList[index]
+      const { id, className, activeBar, background, color, dataKey, ...rest } =
+        barPropsList[index]
 
       return {
         ref,
@@ -207,8 +226,6 @@ export const useBarChart = ({
         stroke: color,
         isAnimationActive: false,
         stackId: stacked ? "stack" : undefined,
-        fillOpacity: dimmed ? 0.1 : "var(--ui-fill-opacity)",
-        strokeOpacity: dimmed ? 0.2 : 0,
         ...(props as Omit<BarProps, "dataKey">),
         ...rest,
       } as BarProps

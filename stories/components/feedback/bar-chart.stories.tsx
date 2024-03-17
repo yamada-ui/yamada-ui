@@ -374,7 +374,15 @@ export const withLegend: Story = () => {
     ],
     [],
   )
-  return <BarChart data={data} series={series} dataKey="month" withLegend />
+  return (
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="month"
+      withLegend
+      dimBarProps={{ fillOpacity: 0, strokeOpacity: 1 }}
+    />
+  )
 }
 
 export const withValueFormatter: Story = () => {
@@ -644,7 +652,10 @@ export const customActiveBar: Story = () => {
       {
         dataKey: "Smartphones",
         color: ["primary.500", "primary.400"],
-        activeBar: { fill: ["secondary.500", "secondary.400"] },
+        activeBar: {
+          fill: ["secondary.500", "secondary.400"],
+          stroke: ["secondary.500", "secondary.400"],
+        },
       },
     ],
     [],
@@ -749,7 +760,7 @@ export const customCursor: Story = () => {
   )
 }
 
-export const costomLegend: Story = () => {
+export const customLegend: Story = () => {
   const data = useMemo(() => {
     const months = ["January", "February", "March", "April", "May", "June"]
     return months.map((month) => ({

@@ -73,6 +73,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     gridAxis,
     withXAxis,
     withYAxis,
+    barProps,
+    dimBarProps,
+    barBackgroundProps,
+    activeBarProps,
     xAxisProps,
     yAxisProps,
     type = "default",
@@ -100,6 +104,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       type,
       layoutType,
       barChartProps,
+      barProps,
+      dimBarProps,
+      barBackgroundProps,
+      activeBarProps,
       referenceLineProps,
       fillOpacity,
       styles,
@@ -205,6 +213,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    unit={unit}
                   />
                 )}
                 {...getTooltipProps()}

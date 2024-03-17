@@ -490,46 +490,6 @@ export const withLegend: Story = () => {
   return <LineChart data={data} series={series} dataKey="name" withLegend />
 }
 
-export const withAxisProps: Story = () => {
-  const data = useMemo(
-    () =>
-      Array(7)
-        .fill(0)
-        .map((_, index) => ({
-          name: `Page ${index}`,
-          uv: randomValue(),
-          pv: randomValue(),
-          amt: randomValue(),
-        })),
-    [],
-  )
-
-  const series: LineChartSeries[] = useMemo(
-    () => [
-      { dataKey: "uv", color: ["primary.500", "primary.400"] },
-      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
-      { dataKey: "amt", color: ["warning.500", "warning.400"] },
-    ],
-    [],
-  )
-
-  return (
-    <LineChart
-      data={data}
-      series={series}
-      dataKey="name"
-      tickLine="xy"
-      yAxisProps={{ tickMargin: 15, orientation: "right", domain: [0, 15000] }}
-      xAxisProps={{
-        tickMargin: 15,
-        orientation: "top",
-        padding: { left: 30, right: 30 },
-        color: ["red.500", "red.500"],
-      }}
-    />
-  )
-}
-
 export const withValueFormatter: Story = () => {
   const data = useMemo(
     () =>
@@ -627,6 +587,46 @@ export const withUnit: Story = () => {
       dataKey="name"
       unit="views"
       yAxisProps={{ width: 75 }}
+    />
+  )
+}
+
+export const customAxis: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: LineChartSeries[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <LineChart
+      data={data}
+      series={series}
+      dataKey="name"
+      tickLine="xy"
+      yAxisProps={{ tickMargin: 15, orientation: "right", domain: [0, 15000] }}
+      xAxisProps={{
+        tickMargin: 15,
+        orientation: "top",
+        padding: { left: 30, right: 30 },
+        color: ["red.500", "red.500"],
+      }}
     />
   )
 }

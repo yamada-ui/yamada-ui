@@ -1,5 +1,16 @@
 # @yamada-ui/layouts
 
+## 1.1.13
+
+### Patch Changes
+
+- [#973](https://github.com/yamada-ui/yamada-ui/pull/973) [`3f3019c`](https://github.com/yamada-ui/yamada-ui/commit/3f3019c0e334e59c8e70a32949f689794df86d79) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where styles were not applied when the prefix of a css variable was changed.
+
+- [#975](https://github.com/yamada-ui/yamada-ui/pull/975) [`841ac98`](https://github.com/yamada-ui/yamada-ui/commit/841ac98285a727b24dc475d0c360c46d99959e40) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed fallback value to be applied if theme token was missing.
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+
 ## 1.1.12
 
 ### Patch Changes

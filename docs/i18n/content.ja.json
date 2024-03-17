@@ -80,6 +80,46 @@
     "hierarchy": { "lv1": "チームと貢献者", "lv2": "スポンサー" }
   },
   {
+    "title": "プラチナスポンサー",
+    "type": "fragment",
+    "slug": "/community/team#プラチナスポンサー",
+    "hierarchy": {
+      "lv1": "チームと貢献者",
+      "lv2": "スポンサー",
+      "lv3": "プラチナスポンサー"
+    }
+  },
+  {
+    "title": "ゴールドスポンサー",
+    "type": "fragment",
+    "slug": "/community/team#ゴールドスポンサー",
+    "hierarchy": {
+      "lv1": "チームと貢献者",
+      "lv2": "スポンサー",
+      "lv3": "ゴールドスポンサー"
+    }
+  },
+  {
+    "title": "シルバースポンサー",
+    "type": "fragment",
+    "slug": "/community/team#シルバースポンサー",
+    "hierarchy": {
+      "lv1": "チームと貢献者",
+      "lv2": "スポンサー",
+      "lv3": "シルバースポンサー"
+    }
+  },
+  {
+    "title": "ブロンドスポンサー",
+    "type": "fragment",
+    "slug": "/community/team#ブロンドスポンサー",
+    "hierarchy": {
+      "lv1": "チームと貢献者",
+      "lv2": "スポンサー",
+      "lv3": "ブロンドスポンサー"
+    }
+  },
+  {
     "title": "組織",
     "type": "fragment",
     "slug": "/community/team#組織",

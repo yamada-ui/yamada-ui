@@ -129,7 +129,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const { getTooltipProps } = useChartTooltip({
+  const { getTooltipProps, tooltipVars } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
     valueFormatter,
@@ -168,7 +168,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-bar-chart", className)}
-        var={barVars}
+        var={[...barVars, ...tooltipVars]}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

@@ -1,6 +1,8 @@
+import type { CSSUIProps } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import type { TooltipProps } from "recharts"
 import { getComponentProps } from "./chart-utils"
 import type { ChartPropGetter, TooltipUIProps } from "./chart.types"
@@ -24,13 +26,26 @@ export type UseChartTooltipProps = {
 }
 
 export const useChartTooltip = ({
-  tooltipProps = {},
+  tooltipProps: _tooltipProps = {},
   tooltipAnimationDuration = 0,
   valueFormatter,
 }: UseChartTooltipProps) => {
   const { theme } = useTheme()
-  const [reChartsProps, propClassName] = getComponentProps([
-    tooltipProps,
+  //TODO: defaultの設定＋stroke,strokewidth,strokedassarrayとか。他のチャートも必要
+  const { cursor = {}, ...rest } = _tooltipProps
+  const tooltipVars: CSSUIProps["var"] = useMemo(
+    () => [
+      {
+        __prefix: "ui",
+        name: "cursor-fill",
+        token: "colors",
+        value: cursor.fill ?? "transparent",
+      },
+    ],
+    [cursor.fill],
+  )
+  const [tooltipProps, propClassName] = getComponentProps<Dict, string>([
+    rest,
     tooltipProperties,
   ])(theme)
 
@@ -46,11 +61,14 @@ export const useChartTooltip = ({
       animationDuration: tooltipAnimationDuration,
       isAnimationActive: (tooltipAnimationDuration || 0) > 0,
       formatter: valueFormatter,
+      cursor: {
+        fill: "var(--ui-cursor-fill)",
+      },
       ...props,
-      ...reChartsProps,
+      ...tooltipProps,
     }),
-    [propClassName, reChartsProps, tooltipAnimationDuration, valueFormatter],
+    [propClassName, tooltipAnimationDuration, valueFormatter, tooltipProps],
   )
 
-  return { getTooltipProps }
+  return { getTooltipProps, tooltipVars }
 }

@@ -106,8 +106,8 @@ export type YAxisUIProps = Merge<
 >
 export type LegendUIProps = Merge<CSSUIProps, Omit<LegendProps, "ref">>
 export type TooltipUIProps = Merge<
-  CSSUIProps,
-  Omit<TooltipProps<any, any>, "ref">
+  Merge<CSSUIProps, Omit<TooltipProps<any, any>, "ref">>,
+  { cursor?: CSSUIProps }
 >
 export type GridUIProps = Merge<CSSUIProps, CartesianGridProps>
 

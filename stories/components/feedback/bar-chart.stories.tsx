@@ -670,6 +670,37 @@ export const customTooltip: Story = () => {
   )
 }
 
+export const customCursor: Story = () => {
+  const data = useMemo(() => {
+    const monthes = ["January", "February", "March", "April", "May", "June"]
+    return monthes.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="month"
+      tooltipProps={{
+        cursor: { fill: ["primary.100", "primary.900"] },
+      }}
+    />
+  )
+}
+
 export const costomLegend: Story = () => {
   const data = useMemo(() => {
     const monthes = ["January", "February", "March", "April", "May", "June"]

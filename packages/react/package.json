@@ -105,6 +105,7 @@
     "@yamada-ui/textarea": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/theme-tools": "workspace:*",
+    "@yamada-ui/toggle": "workspace:*",
     "@yamada-ui/tooltip": "workspace:*",
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/typography": "workspace:*",

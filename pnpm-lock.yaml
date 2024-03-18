@@ -2371,6 +2371,31 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/toggle:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/ripple':
+        specifier: workspace:*
+        version: link:../ripple
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/tooltip:
     dependencies:
       '@yamada-ui/core':
@@ -3185,6 +3210,9 @@ importers:
       '@yamada-ui/theme-tools':
         specifier: workspace:*
         version: link:../theme-tools
+      '@yamada-ui/toggle':
+        specifier: workspace:*
+        version: link:../components/toggle
       '@yamada-ui/tooltip':
         specifier: workspace:*
         version: link:../components/tooltip

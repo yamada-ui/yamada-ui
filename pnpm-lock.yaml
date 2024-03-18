@@ -1379,6 +1379,25 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/infinite-scroll-area:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/use-infinite-scroll':
+        specifier: workspace:*
+        version: link:../../hooks/use-infinite-scroll
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/components/input:
     dependencies:
       '@yamada-ui/core':
@@ -2704,6 +2723,19 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/hooks/use-infinite-scroll:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+
   packages/hooks/use-interval:
     dependencies:
       '@yamada-ui/utils':
@@ -3061,6 +3093,9 @@ importers:
       '@yamada-ui/indicator':
         specifier: workspace:*
         version: link:../components/indicator
+      '@yamada-ui/infinite-scroll-area':
+        specifier: workspace:*
+        version: link:../components/infinite-scroll-area
       '@yamada-ui/input':
         specifier: workspace:*
         version: link:../components/input
@@ -3232,6 +3267,9 @@ importers:
       '@yamada-ui/use-idle':
         specifier: workspace:*
         version: link:../hooks/use-idle
+      '@yamada-ui/use-infinite-scroll':
+        specifier: workspace:*
+        version: link:../hooks/use-infinite-scroll
       '@yamada-ui/use-interval':
         specifier: workspace:*
         version: link:../hooks/use-interval

@@ -48,16 +48,10 @@ export const CONTRIBUTORS = [
     url: "https://github.com/quangnmwork",
   },
   {
-    id: 64961185,
-    name: "Evande1",
-    icon: "https://avatars.githubusercontent.com/u/64961185?v=4",
-    url: "https://github.com/Evande1",
-  },
-  {
-    id: 103011756,
-    name: "piro-hiroki",
-    icon: "https://avatars.githubusercontent.com/u/103011756?v=4",
-    url: "https://github.com/piro-hiroki",
+    id: 41576384,
+    name: "zvolcsey",
+    icon: "https://avatars.githubusercontent.com/u/41576384?v=4",
+    url: "https://github.com/zvolcsey",
   },
   {
     id: 99778758,
@@ -66,10 +60,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/umaidashi",
   },
   {
-    id: 41576384,
-    name: "zvolcsey",
-    icon: "https://avatars.githubusercontent.com/u/41576384?v=4",
-    url: "https://github.com/zvolcsey",
+    id: 103011756,
+    name: "piro-hiroki",
+    icon: "https://avatars.githubusercontent.com/u/103011756?v=4",
+    url: "https://github.com/piro-hiroki",
+  },
+  {
+    id: 64961185,
+    name: "Evande1",
+    icon: "https://avatars.githubusercontent.com/u/64961185?v=4",
+    url: "https://github.com/Evande1",
   },
   {
     id: 88963450,
@@ -82,6 +82,12 @@ export const CONTRIBUTORS = [
     name: "txxxxc",
     icon: "https://avatars.githubusercontent.com/u/22112440?v=4",
     url: "https://github.com/txxxxc",
+  },
+  {
+    id: 29519029,
+    name: "yasunogithub",
+    icon: "https://avatars.githubusercontent.com/u/29519029?v=4",
+    url: "https://github.com/yasunogithub",
   },
   {
     id: 105341123,

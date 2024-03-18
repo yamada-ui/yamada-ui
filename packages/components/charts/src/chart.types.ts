@@ -1,6 +1,11 @@
 import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import type { Merge } from "@yamada-ui/utils"
-import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react"
+import type {
+  ComponentPropsWithoutRef,
+  ReactElement,
+  ReactNode,
+  SVGProps,
+} from "react"
 import type * as Recharts from "recharts"
 
 export type ChartPropGetter<
@@ -28,31 +33,6 @@ export type ChartCurveType =
   | "stepBefore"
   | "stepAfter"
 
-export type AreaChartSeries = Merge<
-  Merge<CSSUIProps, Recharts.AreaProps>,
-  {
-    color: CSSUIProps["color"]
-    activeDot?: DotProps
-    dot?: DotProps
-  }
->
-export type LineChartSeries = Merge<
-  Merge<CSSUIProps, Recharts.LineProps>,
-  {
-    color: CSSUIProps["color"]
-    activeDot?: DotProps
-    dot?: DotProps
-  }
->
-export type BarChartSeries = Merge<
-  Merge<CSSUIProps, Recharts.BarProps>,
-  {
-    color: CSSUIProps["color"]
-    activeBar?: CSSUIProps
-    background?: CSSUIProps
-  }
->
-
 export type AreaChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.AreaChart>
@@ -74,6 +54,33 @@ export type ResponsiveContainerProps = Merge<
   CSSUIProps,
   Omit<Recharts.ResponsiveContainerProps, "children">
 >
+export type AreaProps = Merge<
+  Merge<CSSUIProps, Recharts.AreaProps>,
+  {
+    color: CSSUIProps["color"]
+    activeDot?: DotProps
+    dot?: DotProps
+    dim?: AreaProps
+  }
+>
+export type LineProps = Merge<
+  Merge<CSSUIProps, Recharts.LineProps>,
+  {
+    color: CSSUIProps["color"]
+    activeDot?: DotProps
+    dot?: DotProps
+    dim?: LineProps
+  }
+>
+export type BarProps = Merge<
+  Merge<CSSUIProps, Recharts.BarProps>,
+  {
+    color: CSSUIProps["color"]
+    activeBar?: Merge<CSSUIProps, SVGProps<SVGPathElement>>
+    background?: Merge<CSSUIProps, SVGProps<SVGPathElement>>
+    dim?: BarProps
+  }
+>
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>
 export type XAxisProps = Merge<
   Merge<CSSUIProps, Recharts.XAxisProps>,
@@ -93,6 +100,7 @@ export type TooltipProps = Merge<
   { cursor?: CSSUIProps }
 >
 export type GridProps = Merge<CSSUIProps, Recharts.CartesianGridProps>
+
 export type ChartTooltip =
   | ReactElement
   | ((

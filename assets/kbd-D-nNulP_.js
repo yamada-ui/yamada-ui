@@ -1,0 +1,1 @@
+import{j as a}from"./jsx-runtime-2xDJh5tt.js";import{f as c}from"./forward-ref-DuAegr0M.js";import{u as p}from"./use-component-style-D9HuanlY.js";import{o as f}from"./theme-provider-DXhTM26K.js";import{u as i,c as d}from"./factory-DLpD49Xl.js";const K=c((s,o)=>{const[r,m]=p("Kbd",s),{className:t,...e}=f(m);return a(i.kbd,{ref:o,className:d("ui-kbd",t),__css:r,...e})});export{K};

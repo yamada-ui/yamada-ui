@@ -1,5 +1,12 @@
 # @yamada-ui/calendar
 
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8)]:
+  - @yamada-ui/button@1.0.19
+
 ## 1.2.3
 
 ### Patch Changes

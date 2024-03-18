@@ -1,5 +1,11 @@
 # @yamada-ui/use-pan-event
 
+## 1.0.8
+
+### Patch Changes
+
+- [#924](https://github.com/yamada-ui/yamada-ui/pull/924) [`e512318`](https://github.com/yamada-ui/yamada-ui/commit/e512318cd10410893eeb2cdd261a6c61552f3b32) Thanks [@yasunogithub](https://github.com/yasunogithub)! - Export type PanEventInfo.
+
 ## 1.0.7
 
 ### Patch Changes

@@ -31,7 +31,7 @@ export const IconButton = forwardRef<IconButtonProps, "button">(
         p={0}
         {...rest}
       >
-        {children || icon}
+        {icon || children}
       </Button>
     )
   },

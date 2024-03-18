@@ -1,5 +1,16 @@
 # @yamada-ui/modal
 
+## 1.1.0
+
+### Minor Changes
+
+- [#924](https://github.com/yamada-ui/yamada-ui/pull/924) [`e61069c`](https://github.com/yamada-ui/yamada-ui/commit/e61069c5a8b77f7c6bdd50e5b3a5d63cf3ee223d) Thanks [@yasunogithub](https://github.com/yasunogithub)! - Close the Drawer by dragging
+
+### Patch Changes
+
+- Updated dependencies [[`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8)]:
+  - @yamada-ui/button@1.0.19
+
 ## 1.0.19
 
 ### Patch Changes

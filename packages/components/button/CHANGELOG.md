@@ -1,5 +1,11 @@
 # @yamada-ui/button
 
+## 1.0.19
+
+### Patch Changes
+
+- [`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where hidden icon of `iconButton`.
+
 ## 1.0.18
 
 ### Patch Changes

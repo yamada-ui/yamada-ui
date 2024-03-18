@@ -1,5 +1,17 @@
 # @yamada-ui/react
 
+## 1.2.11
+
+### Patch Changes
+
+- Updated dependencies [[`e61069c`](https://github.com/yamada-ui/yamada-ui/commit/e61069c5a8b77f7c6bdd50e5b3a5d63cf3ee223d), [`e512318`](https://github.com/yamada-ui/yamada-ui/commit/e512318cd10410893eeb2cdd261a6c61552f3b32), [`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8)]:
+  - @yamada-ui/modal@1.1.0
+  - @yamada-ui/use-pan-event@1.0.8
+  - @yamada-ui/button@1.0.19
+  - @yamada-ui/color-picker@1.2.4
+  - @yamada-ui/slider@1.0.21
+  - @yamada-ui/file-button@1.0.21
+
 ## 1.2.10
 
 ### Patch Changes

@@ -1,5 +1,20 @@
 # @yamada-ui/slider
 
+## 1.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`e512318`](https://github.com/yamada-ui/yamada-ui/commit/e512318cd10410893eeb2cdd261a6c61552f3b32)]:
+  - @yamada-ui/use-pan-event@1.0.8
+
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+  - @yamada-ui/form-control@1.0.19
+
 ## 1.0.19
 
 ### Patch Changes

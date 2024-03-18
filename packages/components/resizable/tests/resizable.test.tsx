@@ -4,7 +4,12 @@ import { a11y, render } from "@yamada-ui/test"
 import type { RenderReturn } from "@yamada-ui/test"
 import { createRef } from "react"
 import type { ResizableItemControl } from "../src"
-import { Resizable, ResizableItem, ResizableTrigger } from "../src"
+import {
+  Resizable,
+  ResizableItem,
+  ResizableTrigger,
+  ResizableTriggerIcon,
+} from "../src"
 import { assert } from "./utils"
 
 describe.skip("<Resizable />", () => {
@@ -140,7 +145,7 @@ describe.skip("<Resizable />", () => {
   })
 
   describe("Enable Collapsing", () => {
-    test("When `collapesible = true`, function `onCollapse` should be called", () => {
+    test("When `collapsible = true`, function `onCollapse` should be called", () => {
       const controlRef = createRef<ResizableItemControl>()
 
       const onCollapse = vi.fn()
@@ -254,7 +259,7 @@ describe.skip("<Resizable />", () => {
   })
 
   describe("Handle Resize Events", () => {
-    test("When Resize Event is occured, `onResize` function should be called", () => {
+    test("When Resize Event is occurred, `onResize` function should be called", () => {
       const onResize = vi.fn()
 
       const { container } = render(
@@ -284,5 +289,16 @@ describe.skip("<Resizable />", () => {
 
   describe("Control", () => {
     // TODO: Add tests
+  })
+})
+
+describe("<ResizableTriggerIcon />", () => {
+  test("applies styles `width` and `height` correctly", async () => {
+    const { getByTestId } = render(
+      <ResizableTriggerIcon data-testid="resizable" />,
+    )
+
+    expect(getByTestId("resizable")).toHaveStyle("width: 0.5rem")
+    expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
   })
 })

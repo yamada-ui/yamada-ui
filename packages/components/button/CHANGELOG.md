@@ -1,5 +1,24 @@
 # @yamada-ui/button
 
+## 1.0.19
+
+### Patch Changes
+
+- [`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where hidden icon of `iconButton`.
+
+## 1.0.18
+
+### Patch Changes
+
+- [#1002](https://github.com/yamada-ui/yamada-ui/pull/1002) [`59bc719`](https://github.com/yamada-ui/yamada-ui/commit/59bc7191b0ba3b26dff805d691be1c34942dfde3) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Fix Priority IconButton props
+
+- [#1001](https://github.com/yamada-ui/yamada-ui/pull/1001) [`9d31a78`](https://github.com/yamada-ui/yamada-ui/commit/9d31a78d2802040b098f55603f027f39392bbfbf) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Remove Unnecessary Comment
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`5a7e39e`](https://github.com/yamada-ui/yamada-ui/commit/5a7e39e36572ec6014bf5beb3a9ad957157e1d7c), [`6d8ad56`](https://github.com/yamada-ui/yamada-ui/commit/6d8ad56e1c366cf13d18a0e91d4d913834063efb), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+  - @yamada-ui/loading@1.0.17
+  - @yamada-ui/ripple@1.0.17
+
 ## 1.0.17
 
 ### Patch Changes

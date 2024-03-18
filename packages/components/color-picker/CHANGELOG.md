@@ -1,5 +1,29 @@
 # @yamada-ui/color-picker
 
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`e512318`](https://github.com/yamada-ui/yamada-ui/commit/e512318cd10410893eeb2cdd261a6c61552f3b32), [`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8)]:
+  - @yamada-ui/use-pan-event@1.0.8
+  - @yamada-ui/button@1.0.19
+
+## 1.2.3
+
+### Patch Changes
+
+- [#973](https://github.com/yamada-ui/yamada-ui/pull/973) [`3f3019c`](https://github.com/yamada-ui/yamada-ui/commit/3f3019c0e334e59c8e70a32949f689794df86d79) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where styles were not applied when the prefix of a css variable was changed.
+
+- [#977](https://github.com/yamada-ui/yamada-ui/pull/977) [`6d8ad56`](https://github.com/yamada-ui/yamada-ui/commit/6d8ad56e1c366cf13d18a0e91d4d913834063efb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `"use client"` to source code.
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`59bc719`](https://github.com/yamada-ui/yamada-ui/commit/59bc7191b0ba3b26dff805d691be1c34942dfde3), [`9d31a78`](https://github.com/yamada-ui/yamada-ui/commit/9d31a78d2802040b098f55603f027f39392bbfbf), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+  - @yamada-ui/button@1.0.18
+  - @yamada-ui/form-control@1.0.19
+  - @yamada-ui/icon@1.0.16
+  - @yamada-ui/input@1.0.19
+  - @yamada-ui/popover@1.0.17
+
 ## 1.2.2
 
 ### Patch Changes

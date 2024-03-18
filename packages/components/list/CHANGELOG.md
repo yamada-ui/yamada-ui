@@ -1,5 +1,15 @@
 # @yamada-ui/list
 
+## 1.0.16
+
+### Patch Changes
+
+- [#964](https://github.com/yamada-ui/yamada-ui/pull/964) [`2d4bcb2`](https://github.com/yamada-ui/yamada-ui/commit/2d4bcb27c27502ef6d73feeb3758980957c4390f) Thanks [@kyohei0423](https://github.com/kyohei0423)! - Make List component not to use theme token
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+  - @yamada-ui/icon@1.0.16
+
 ## 1.0.15
 
 ### Patch Changes

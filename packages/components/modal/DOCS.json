@@ -1927,6 +1927,12 @@
       "description": "If `true`, scrolling will be disabled on the `body` when the modal opens."
     },
     "className": { "type": "string", "required": false },
+    "closeOnDrag": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true` then the drawer will close on drag."
+    },
     "closeOnEsc": {
       "type": "boolean",
       "defaultValue": true,

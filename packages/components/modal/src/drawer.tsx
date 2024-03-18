@@ -4,6 +4,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { PanEventInfo } from "@yamada-ui/react"
 import type { SlideProps } from "@yamada-ui/transitions"
 import { Slide } from "@yamada-ui/transitions"
 import {
@@ -13,6 +14,7 @@ import {
   cx,
   omitObject,
 } from "@yamada-ui/utils"
+import { useCallback } from "react"
 import { useModal } from "./modal"
 import type {
   ModalProps,
@@ -42,6 +44,12 @@ type DrawerOptions = {
    * If `true` and drawer's placement is `top` or `bottom`, the drawer will occupy the viewport height (100dvh).
    */
   isFullHeight?: boolean
+  /**
+   * If `true` then the drawer will close on drag.
+   *
+   * @default false
+   */
+  closeOnDrag?: boolean
 }
 
 export type DrawerProps = Omit<
@@ -64,7 +72,7 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
 export const Drawer = forwardRef<DrawerProps, "div">(
-  ({ size, placement = "right", ...props }, ref) => {
+  ({ size, placement = "right", closeOnDrag, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Drawer", {
       size,
       placement,
@@ -128,6 +136,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
           <DrawerContent
+            closeOnDrag={closeOnDrag}
             {...{
               withCloseButton,
               ...omitObject(rest, ["isFullHeight"]),
@@ -148,7 +157,10 @@ type DrawerContentProps = Omit<
 >
 
 export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
-  ({ className, children, placement, withCloseButton, ...rest }, ref) => {
+  (
+    { className, children, placement, withCloseButton, closeOnDrag, ...rest },
+    ref,
+  ) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
 
@@ -167,9 +179,59 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       ...styles.container,
     }
 
+    const getDragDirectionRestriction = useCallback(() => {
+      switch (placement) {
+        case "top":
+          return { bottom: 0 }
+        case "bottom":
+          return { top: 0 }
+        case "left":
+          return { right: 0 }
+        case "right":
+          return { left: 0 }
+      }
+    }, [placement])
+
+    const getDragDirection = useCallback(() => {
+      switch (placement) {
+        case "top":
+        case "bottom":
+          return "y"
+        case "left":
+        case "right":
+          return "x"
+      }
+    }, [placement])
+
+    const isCloseByDragInfo = useCallback(
+      (info: PanEventInfo) => {
+        switch (placement) {
+          case "top":
+            return info.velocity.y <= -100 || info.offset.y <= -80
+          case "bottom":
+            return info.velocity.y >= 100 || info.offset.y >= 80
+          case "left":
+            return info.velocity.x <= -100 || info.offset.x <= -80
+          case "right":
+            return info.velocity.x >= 100 || info.offset.x >= 80
+        }
+      },
+      [placement],
+    )
+
     return (
       <Slide
         ref={ref}
+        drag={closeOnDrag ? getDragDirection() : false}
+        dragConstraints={getDragDirectionRestriction()}
+        dragElastic={getDragDirectionRestriction()}
+        dragSnapToOrigin={true}
+        dragMomentum={false}
+        onDragEnd={(_, info) => {
+          if (isCloseByDragInfo(info)) {
+            onClose?.()
+          }
+        }}
         className={cx("ui-drawer", className)}
         tabIndex={-1}
         isOpen={isOpen}

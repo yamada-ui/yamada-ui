@@ -1,5 +1,21 @@
 # @yamada-ui/snacks
 
+## 1.0.9
+
+### Patch Changes
+
+- [#973](https://github.com/yamada-ui/yamada-ui/pull/973) [`3f3019c`](https://github.com/yamada-ui/yamada-ui/commit/3f3019c0e334e59c8e70a32949f689794df86d79) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where styles were not applied when the prefix of a css variable was changed.
+
+- [#977](https://github.com/yamada-ui/yamada-ui/pull/977) [`6d8ad56`](https://github.com/yamada-ui/yamada-ui/commit/6d8ad56e1c366cf13d18a0e91d4d913834063efb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `"use client"` to source code.
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+  - @yamada-ui/alert@1.0.17
+  - @yamada-ui/close-button@1.0.17
+  - @yamada-ui/motion@1.0.17
+  - @yamada-ui/use-token@1.1.4
+  - @yamada-ui/use-value@1.1.4
+
 ## 1.0.8
 
 ### Patch Changes

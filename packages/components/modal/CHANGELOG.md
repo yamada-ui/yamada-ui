@@ -1,5 +1,30 @@
 # @yamada-ui/modal
 
+## 1.1.0
+
+### Minor Changes
+
+- [#924](https://github.com/yamada-ui/yamada-ui/pull/924) [`e61069c`](https://github.com/yamada-ui/yamada-ui/commit/e61069c5a8b77f7c6bdd50e5b3a5d63cf3ee223d) Thanks [@yasunogithub](https://github.com/yasunogithub)! - Close the Drawer by dragging
+
+### Patch Changes
+
+- Updated dependencies [[`48617af`](https://github.com/yamada-ui/yamada-ui/commit/48617af4b88f40403e8c7bfd7ca495fb8a7523f8)]:
+  - @yamada-ui/button@1.0.19
+
+## 1.0.19
+
+### Patch Changes
+
+- [#957](https://github.com/yamada-ui/yamada-ui/pull/957) [`8b6f7cb`](https://github.com/yamada-ui/yamada-ui/commit/8b6f7cb3251d17b4e36e74b81485c3e488fc2a64) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `placement` of types.
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`59bc719`](https://github.com/yamada-ui/yamada-ui/commit/59bc7191b0ba3b26dff805d691be1c34942dfde3), [`9d31a78`](https://github.com/yamada-ui/yamada-ui/commit/9d31a78d2802040b098f55603f027f39392bbfbf), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+  - @yamada-ui/button@1.0.18
+  - @yamada-ui/close-button@1.0.17
+  - @yamada-ui/motion@1.0.17
+  - @yamada-ui/transitions@1.0.17
+  - @yamada-ui/use-value@1.1.4
+
 ## 1.0.18
 
 ### Patch Changes

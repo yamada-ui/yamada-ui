@@ -9,7 +9,7 @@ import {
 } from "react"
 import type { BarChart, BarProps } from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import { areaChartProperties, barProperties } from "./chart.types"
+import { barChartProperties, barProperties } from "./chart.types"
 import type {
   BarChartSeries,
   BarChartType,
@@ -131,7 +131,7 @@ export const useBarChart = ({
   }, [barColors, fillOpacity, referenceLineColors])
 
   const [barChartProps, barChartClassName] = getComponentProps<Dict, string>(
-    [_barChartProps, areaChartProperties],
+    [_barChartProps, barChartProperties],
     styles.barChart,
   )(theme)
   const barClassName = getClassName(styles.bar, _barProps)(theme)

@@ -3,19 +3,16 @@ import type { CSSUIObject } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { isObject, cx } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
-import type { ReferenceLineProps } from "recharts"
+import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type {
-  ReferenceLineUIProps,
-  RequiredChartPropGetter,
-} from "./chart.types"
-import { referenceLineProperties } from "./chart.types"
+import type { ReferenceLineProps, RequiredChartPropGetter } from "./chart.types"
+import { referenceLineProperties } from "./rechart-properties"
 
 export type UseChartReferenceLineOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps?: ReferenceLineUIProps[]
+  referenceLineProps?: ReferenceLineProps[]
 }
 
 type UseChartReferenceLineProps = UseChartReferenceLineOptions & {
@@ -38,7 +35,7 @@ export const useChartReferenceLine = ({
           )(theme)
 
         const color = `var(--ui-reference-line-${index})`
-        const label: ReferenceLineProps["label"] = {
+        const label: Recharts.ReferenceLineProps["label"] = {
           value: labelProp as string,
           fill: color,
           position: "insideBottomLeft",
@@ -55,7 +52,7 @@ export const useChartReferenceLine = ({
     {
       index: number
     },
-    Omit<ReferenceLineProps, "ref">
+    Omit<Recharts.ReferenceLineProps, "ref">
   > = useCallback(
     ({ index, className, ...props }, ref = null) => {
       const { propClassName, color, label, ...rest } = propList[index]
@@ -65,7 +62,7 @@ export const useChartReferenceLine = ({
         className: cx(className, propClassName),
         stroke: color,
         label,
-        ...(props as ReferenceLineProps),
+        ...(props as Recharts.ReferenceLineProps),
         ...rest,
       }
     },

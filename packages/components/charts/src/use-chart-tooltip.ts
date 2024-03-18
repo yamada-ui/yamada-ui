@@ -3,16 +3,16 @@ import { useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
-import type { TooltipProps } from "recharts"
+import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ChartPropGetter, TooltipUIProps } from "./chart.types"
-import { tooltipProperties } from "./chart.types"
+import type { ChartPropGetter, TooltipProps } from "./chart.types"
+import { tooltipProperties } from "./rechart-properties"
 
 export type UseChartTooltipProps = {
   /**
    * Props passed down to recharts 'Tooltip' component.
    */
-  tooltipProps?: TooltipUIProps
+  tooltipProps?: TooltipProps
   /**
    * Specifies the duration of animation, the unit of this option is ms.
    *
@@ -78,8 +78,8 @@ export const useChartTooltip = ({
 
   const getTooltipProps: ChartPropGetter<
     "div",
-    Partial<TooltipProps<any, any>>,
-    Omit<TooltipProps<any, any>, "ref">
+    Partial<Recharts.TooltipProps<any, any>>,
+    Omit<Recharts.TooltipProps<any, any>, "ref">
   > = useCallback(
     ({ labelClassName, wrapperClassName, ...props } = {}, ref = null) => ({
       ref,

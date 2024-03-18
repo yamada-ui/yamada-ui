@@ -4,23 +4,23 @@ import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
-import type { DotProps, LineChart, LineProps } from "recharts"
+import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
+import type {
+  DotProps,
+  ChartLayoutType,
+  LineChartSeries,
+  LineChartProps,
+  ReferenceLineProps,
+  ChartPropGetter,
+  ChartCurveType,
+  RequiredChartPropGetter,
+} from "./chart.types"
 import {
   dotProperties,
   lineChartProperties,
   lineProperties,
-} from "./chart.types"
-import type {
-  DotUIProps,
-  LayoutType,
-  LineChartSeries,
-  LineChartUIProps,
-  ReferenceLineUIProps,
-  ChartPropGetter,
-  CurveType,
-  RequiredChartPropGetter,
-} from "./chart.types"
+} from "./rechart-properties"
 
 export type UseLineChartOptions = {
   /**
@@ -34,7 +34,7 @@ export type UseLineChartOptions = {
   /**
    * Props passed down to recharts `LineChart` component.
    */
-  lineChartProps?: LineChartUIProps
+  lineChartProps?: LineChartProps
   /**
    * Props passed down to dim lines.
    *
@@ -44,23 +44,23 @@ export type UseLineChartOptions = {
   /**
    * Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
-  dotProps?: DotUIProps
+  dotProps?: DotProps
   /**
    * Props passed down to dim dots.
    *
    * @default "{ fillOpacity: 0, strokeOpacity: 0 }"
    */
-  dimDotProps?: DotUIProps
+  dimDotProps?: DotProps
   /**
    * Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
-  activeDotProps?: DotUIProps
+  activeDotProps?: DotProps
   /**
    * Chart orientation.
    *
    * @default 'horizontal'
    */
-  layoutType?: LayoutType
+  layoutType?: ChartLayoutType
   /**
    * Determines whether dots should be displayed.
    *
@@ -78,7 +78,7 @@ export type UseLineChartOptions = {
    *
    * @default `monotone`
    */
-  curveType?: CurveType
+  curveType?: ChartCurveType
   /**
    * Stroke width for the chart lines.
    *
@@ -94,7 +94,7 @@ export type UseLineChartOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps?: ReferenceLineUIProps[]
+  referenceLineProps?: ReferenceLineProps[]
   /**
    * Controls fill opacity of all lines.
    *
@@ -201,7 +201,7 @@ export const useLineChart = ({
           lineClassName,
         )(theme)
 
-        let activeDot: DotProps | boolean
+        let activeDot: Recharts.DotProps | boolean
 
         if (withActiveDots) {
           const [rest, activeDotClassName] = getComponentProps(
@@ -216,12 +216,12 @@ export const useLineChart = ({
             r: 4,
             ...activeDotProps,
             ...rest,
-          } as DotProps
+          } as Recharts.DotProps
         } else {
           activeDot = false
         }
 
-        let dot: DotProps | boolean
+        let dot: Recharts.DotProps | boolean
 
         if (withDots) {
           const resolvedDot = { ..._dot, ...(dimmed ? dimDotProps : {}) }
@@ -237,7 +237,7 @@ export const useLineChart = ({
             strokeOpacity: dimmed ? 0 : 1,
             ...dotProps,
             ...rest,
-          } as DotProps
+          } as Recharts.DotProps
         } else {
           dot = false
         }
@@ -270,8 +270,8 @@ export const useLineChart = ({
 
   const getLineChartProps: ChartPropGetter<
     "div",
-    ComponentPropsWithoutRef<typeof LineChart>,
-    ComponentPropsWithoutRef<typeof LineChart>
+    ComponentPropsWithoutRef<typeof Recharts.LineChart>,
+    ComponentPropsWithoutRef<typeof Recharts.LineChart>
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
@@ -289,7 +289,7 @@ export const useLineChart = ({
     {
       index: number
     },
-    Omit<LineProps, "ref">
+    Omit<Recharts.LineProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
       const { color, className, dataKey, activeDot, dot, ...rest } =
@@ -308,7 +308,7 @@ export const useLineChart = ({
         stroke: color,
         isAnimationActive: false,
         connectNulls,
-        ...(props as Omit<LineProps, "dataKey">),
+        ...(props as Omit<Recharts.LineProps, "dataKey">),
         ...rest,
       }
     },

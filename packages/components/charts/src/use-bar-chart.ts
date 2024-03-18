@@ -9,16 +9,16 @@ import {
 } from "react"
 import type { BarChart, BarProps } from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import { barChartProperties, barProperties } from "./chart.types"
 import type {
   BarChartSeries,
   BarChartType,
-  BarChartUIProps,
+  BarChartProps,
   ChartPropGetter,
-  LayoutType,
-  ReferenceLineUIProps,
+  ChartLayoutType,
+  ReferenceLineProps,
   RequiredChartPropGetter,
 } from "./chart.types"
+import { barChartProperties, barProperties } from "./rechart-properties"
 
 export type UseBarChartOptions = {
   /**
@@ -58,15 +58,15 @@ export type UseBarChartOptions = {
    *
    * @default 'horizontal'
    */
-  layoutType?: LayoutType
+  layoutType?: ChartLayoutType
   /**
    * Props passed down to recharts `BarChart` component.
    */
-  barChartProps?: BarChartUIProps
+  barChartProps?: BarChartProps
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps?: ReferenceLineUIProps[]
+  referenceLineProps?: ReferenceLineProps[]
   /**
    * Controls fill opacity of all bars.
    *

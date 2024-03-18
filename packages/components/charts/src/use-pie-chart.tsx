@@ -8,9 +8,9 @@ import {
 import { splitObject, type Dict, cx, omitObject } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type { PieLabel, PieProps } from "recharts"
-import { pieProperties } from "./chart.types"
 import type { RequiredChartPropGetter } from "./chart.types"
 import type { PieChartOptions } from "./pie-chart"
+import { pieProperties } from "./rechart-properties"
 
 export type UsePieChartProps = PieChartOptions & {
   styles: Dict<CSSUIObject>

@@ -1,16 +1,16 @@
 import { useTheme } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
-import type { LegendProps } from "recharts"
+import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ChartPropGetter, LegendUIProps } from "./chart.types"
-import { legendProperties } from "./chart.types"
+import type { ChartPropGetter, LegendProps } from "./chart.types"
+import { legendProperties } from "./rechart-properties"
 
 export type UseChartLegendProps = {
   /**
    * Props passed down to recharts 'Legend' component.
    */
-  legendProps?: LegendUIProps
+  legendProps?: LegendProps
 }
 
 export const useChartLegend = ({ legendProps = {} }: UseChartLegendProps) => {
@@ -22,8 +22,8 @@ export const useChartLegend = ({ legendProps = {} }: UseChartLegendProps) => {
 
   const getLegendProps: ChartPropGetter<
     "div",
-    Partial<LegendProps>,
-    Omit<LegendProps, "ref">
+    Partial<Recharts.LegendProps>,
+    Omit<Recharts.LegendProps, "ref">
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => {
       return {

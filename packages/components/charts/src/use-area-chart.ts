@@ -4,26 +4,26 @@ import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useId, useMemo, useState } from "react"
-import type { AreaChart, AreaProps, DotProps } from "recharts"
+import type * as Recharts from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
 import { getClassName, getComponentProps } from "./chart-utils"
 import type {
-  CurveType,
+  ChartCurveType,
   AreaChartSeries,
   AreaChartType,
-  AreaChartUIProps,
+  AreaChartProps,
   ChartPropGetter,
-  DotUIProps,
-  LayoutType,
-  ReferenceLineUIProps,
+  DotProps,
+  ChartLayoutType,
+  ReferenceLineProps,
   RequiredChartPropGetter,
 } from "./chart.types"
 import {
   areaChartProperties,
   dotProperties,
   areaProperties,
-} from "./chart.types"
+} from "./rechart-properties"
 
 export type UseAreaChartOptions = {
   /**
@@ -43,7 +43,7 @@ export type UseAreaChartOptions = {
   /**
    * Props passed down to recharts `AreaChart` component.
    */
-  areaChartProps?: AreaChartUIProps
+  areaChartProps?: AreaChartProps
   /**
    * Props passed down to dim areas.
    *
@@ -53,23 +53,23 @@ export type UseAreaChartOptions = {
   /**
    * Props passed down to all dots. Ignored if `withDots={false}` is set.
    */
-  dotProps?: DotUIProps
+  dotProps?: DotProps
   /**
    * Props passed down to dim dots.
    *
    * @default "{ fillOpacity: 0, strokeOpacity: 0 }"
    */
-  dimDotProps?: DotUIProps
+  dimDotProps?: DotProps
   /**
    * Props passed down to all active dots. Ignored if `withDots={false}` is set.
    */
-  activeDotProps?: DotUIProps
+  activeDotProps?: DotProps
   /**
    * Chart orientation.
    *
    * @default 'horizontal'
    */
-  layoutType?: LayoutType
+  layoutType?: ChartLayoutType
   /**
    * Determines whether the chart area should be represented with a gradient instead of the solid color.
    */
@@ -91,7 +91,7 @@ export type UseAreaChartOptions = {
    *
    * @default `monotone`
    */
-  curveType?: CurveType
+  curveType?: ChartCurveType
   /**
    * Stroke width for the chart areas.
    *
@@ -118,7 +118,7 @@ export type UseAreaChartOptions = {
   /**
    * Reference lines that should be displayed on the chart.
    */
-  referenceLineProps?: ReferenceLineUIProps[]
+  referenceLineProps?: ReferenceLineProps[]
   /**
    * Controls fill opacity of all areas.
    *
@@ -267,7 +267,7 @@ export const useAreaChart = ({
           areaClassName,
         )(theme)
 
-        let activeDot: DotProps | boolean
+        let activeDot: Recharts.DotProps | boolean
 
         if (withActiveDots) {
           const [rest, activeDotClassName] = getComponentProps(
@@ -281,12 +281,12 @@ export const useAreaChart = ({
             r: 4,
             ...activeDotProps,
             ...rest,
-          } as DotProps
+          } as Recharts.DotProps
         } else {
           activeDot = false
         }
 
-        let dot: DotProps | boolean
+        let dot: Recharts.DotProps | boolean
 
         if (withDots) {
           const resolvedDot = { ..._dot, ...(dimmed ? dimDotProps : {}) }
@@ -303,7 +303,7 @@ export const useAreaChart = ({
             r: 4,
             ...dotProps,
             ...rest,
-          } as DotProps
+          } as Recharts.DotProps
         } else {
           dot = false
         }
@@ -340,8 +340,8 @@ export const useAreaChart = ({
 
   const getAreaChartProps: ChartPropGetter<
     "div",
-    ComponentPropsWithoutRef<typeof AreaChart>,
-    ComponentPropsWithoutRef<typeof AreaChart>
+    ComponentPropsWithoutRef<typeof Recharts.AreaChart>,
+    ComponentPropsWithoutRef<typeof Recharts.AreaChart>
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
@@ -374,7 +374,7 @@ export const useAreaChart = ({
     {
       index: number
     },
-    Omit<AreaProps, "ref">
+    Omit<Recharts.AreaProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
       const {
@@ -404,7 +404,7 @@ export const useAreaChart = ({
         connectNulls,
         stackId: stacked ? "stack" : undefined,
         strokeDasharray,
-        ...(props as Omit<AreaProps, "dataKey">),
+        ...(props as Omit<Recharts.AreaProps, "dataKey">),
         ...rest,
       }
     },

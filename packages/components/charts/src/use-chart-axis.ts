@@ -4,17 +4,17 @@ import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import type { SVGProps } from "react"
 import { useCallback, useMemo } from "react"
-import type { XAxisProps, YAxisProps } from "recharts"
+import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
 import type {
-  AxisType,
-  LayoutType,
-  XAxisUIProps,
-  YAxisUIProps,
+  ChartAxisType,
+  ChartLayoutType,
+  XAxisProps,
+  YAxisProps,
   ChartPropGetter,
   AreaChartType,
 } from "./chart.types"
-import { xAxisProperties, yAxisProperties } from "./chart.types"
+import { xAxisProperties, yAxisProperties } from "./rechart-properties"
 
 export type UseChartAxisOptions = {
   /**
@@ -32,19 +32,19 @@ export type UseChartAxisOptions = {
    *
    * @default 'horizontal'
    */
-  layoutType?: LayoutType
+  layoutType?: ChartLayoutType
   /**
    * The option is the configuration of tick lines.
    *
    * @default 'y'
    */
-  tickLine?: AxisType
+  tickLine?: ChartAxisType
   /**
    * Specifies which lines should be displayed in the grid.
    *
    * @default 'x'
    */
-  gridAxis?: AxisType
+  gridAxis?: ChartAxisType
   /**
    * If `true`, X axis is visible.
    *
@@ -60,11 +60,11 @@ export type UseChartAxisOptions = {
   /**
    * Props passed down to recharts 'XAxis' component.
    */
-  xAxisProps?: XAxisUIProps
+  xAxisProps?: XAxisProps
   /**
    * Props passed down to recharts 'YAxis' component.
    */
-  yAxisProps?: YAxisUIProps
+  yAxisProps?: YAxisProps
   /**
    * Unit displayed next to each tick in y-axis.
    */
@@ -94,12 +94,12 @@ export const useChartAxis = ({
   styles,
 }: UseChartAxisProps) => {
   const { theme } = useTheme()
-  const xAxisKey: XAxisProps = useMemo(
+  const xAxisKey: Recharts.XAxisProps = useMemo(
     () => (layoutType === "vertical" ? { type: "number" } : { dataKey }),
     [dataKey, layoutType],
   )
 
-  const yAxisKey: YAxisProps = useMemo(
+  const yAxisKey: Recharts.YAxisProps = useMemo(
     () =>
       layoutType === "vertical"
         ? { dataKey, type: "category" }
@@ -137,8 +137,8 @@ export const useChartAxis = ({
 
   const getXAxisProps: ChartPropGetter<
     "div",
-    Partial<XAxisProps>,
-    XAxisProps
+    Partial<Recharts.XAxisProps>,
+    Recharts.XAxisProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, xAxisClassName),
@@ -154,7 +154,7 @@ export const useChartAxis = ({
       minTickGap: 5,
       tickFormatter: xAxisTickFormatter,
       ...props,
-      ...(xAxisReChartsProps as XAxisProps),
+      ...(xAxisReChartsProps as Recharts.XAxisProps),
     }),
     [
       xAxisClassName,
@@ -168,8 +168,8 @@ export const useChartAxis = ({
 
   const getYAxisProps: ChartPropGetter<
     "div",
-    Partial<YAxisProps>,
-    YAxisProps
+    Partial<Recharts.YAxisProps>,
+    Recharts.YAxisProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className, yAxisClassName),
@@ -185,7 +185,7 @@ export const useChartAxis = ({
       unit: unit,
       tickFormatter: yAxisTickFormatter,
       ...props,
-      ...(yAxisReChartsProps as YAxisProps),
+      ...(yAxisReChartsProps as Recharts.YAxisProps),
     }),
     [
       yAxisClassName,

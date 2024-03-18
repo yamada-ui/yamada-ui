@@ -5,20 +5,20 @@ import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { CartesianGridProps } from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { AxisType, ChartPropGetter, GridUIProps } from "./chart.types"
-import { gridProperties } from "./chart.types"
+import type { ChartAxisType, ChartPropGetter, GridProps } from "./chart.types"
+import { gridProperties } from "./rechart-properties"
 
 export type UseChartGridOptions = {
   /**
    * Props passed down to recharts 'CartesianGrid' component.
    */
-  gridProps?: GridUIProps
+  gridProps?: GridProps
   /**
    * Specifies which lines should be displayed in the grid.
    *
    * @default 'x'
    */
-  gridAxis?: AxisType
+  gridAxis?: ChartAxisType
   /**
    * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
    *

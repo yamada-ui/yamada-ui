@@ -2,10 +2,10 @@ import { useTheme, type CSSUIObject } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { createContext, cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
-import type { ResponsiveContainerProps } from "recharts"
+import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ChartPropGetter, ContainerUIProps } from "./chart.types"
-import { containerProperties } from "./chart.types"
+import type { ChartPropGetter, ResponsiveContainerProps } from "./chart.types"
+import { containerProperties } from "./rechart-properties"
 
 type ChartContext = { styles: Record<string, CSSUIObject> }
 
@@ -18,7 +18,7 @@ export type UseChartProps = {
   /**
    * Props passed down to recharts `ResponsiveContainer` component.
    */
-  containerProps?: ContainerUIProps
+  containerProps?: ResponsiveContainerProps
 }
 
 export const useChart = ({ containerProps = {} }: UseChartProps) => {
@@ -30,8 +30,8 @@ export const useChart = ({ containerProps = {} }: UseChartProps) => {
 
   const getContainerProps: ChartPropGetter<
     "div",
-    Partial<Omit<ResponsiveContainerProps, "children">>,
-    Omit<ResponsiveContainerProps, "children">
+    Partial<Omit<Recharts.ResponsiveContainerProps, "children">>,
+    Omit<Recharts.ResponsiveContainerProps, "children">
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,

@@ -15,7 +15,7 @@ import {
   Cell,
 } from "recharts"
 import { ChartTooltip } from "./chart-tooltip"
-import type { PieChartUIProps, PieUIProps } from "./chart.types"
+// import type { PieChartProps, PieProps } from "./chart.types"
 import { ChartProvider, type UseChartProps, useChart } from "./use-chart"
 import { useChartCell } from "./use-chart-cell"
 import type { UseChartTooltipProps } from "./use-chart-tooltip"
@@ -47,12 +47,14 @@ export type PieChartOptions = {
   /**
    * Props passed down to recharts `PieChart` component
    */
-  pieChartProps?: PieChartUIProps
+  // pieChartProps?: PieChartProps
+  pieChartProps?: any
 
   /**
    * Props passed down to recharts `Pie` component
    */
-  pieProps?: PieUIProps
+  // pieProps?: PieProps
+  pieProps?: any
 
   /**
    * Determines whether each segment should have associated label, `false` by default

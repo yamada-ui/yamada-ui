@@ -1,71 +1,73 @@
-import { InfoIcon, WarningIcon, CheckIcon } from "@yamada-ui/icon"
+import { CheckIcon, InfoIcon, WarningIcon } from "@yamada-ui/icon"
 import { Loading } from "@yamada-ui/loading"
-import { render, a11y, screen } from "@yamada-ui/test"
-import { Alert, AlertIcon, AlertTitle, AlertDescription } from "../src"
+import { a11y, render, screen } from "@yamada-ui/test"
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from "../src"
 import { getStatusColorScheme, getStatusIcon } from "../src/alert"
 
-test("passes a11y test", async () => {
-  await a11y(
-    <Alert>
-      <AlertIcon />
-      <AlertTitle>Alert title</AlertTitle>
-      <AlertDescription>Alert description</AlertDescription>
-    </Alert>,
-  )
-})
-
-test("should have role='alert'", () => {
-  render(
-    <Alert>
-      <AlertIcon />
-      <AlertTitle>Alert title</AlertTitle>
-      <AlertDescription>Alert description</AlertDescription>
-    </Alert>,
-  )
-
-  expect(screen.getByRole("alert")).toBeInTheDocument()
-})
-
-describe("getStatusColorScheme", () => {
-  test("info", () => {
-    expect(getStatusColorScheme("info")).toBe("info")
+describe("<Alert />", () => {
+  test("passes a11y test", async () => {
+    await a11y(
+      <Alert>
+        <AlertIcon />
+        <AlertTitle>Alert title</AlertTitle>
+        <AlertDescription>Alert description</AlertDescription>
+      </Alert>,
+    )
   })
 
-  test("success", () => {
-    expect(getStatusColorScheme("success")).toBe("success")
+  test("should have role='alert'", () => {
+    render(
+      <Alert>
+        <AlertIcon />
+        <AlertTitle>Alert title</AlertTitle>
+        <AlertDescription>Alert description</AlertDescription>
+      </Alert>,
+    )
+
+    expect(screen.getByRole("alert")).toBeInTheDocument()
   })
 
-  test("warning", () => {
-    expect(getStatusColorScheme("warning")).toBe("warning")
+  describe("getStatusColorScheme", () => {
+    test("info", () => {
+      expect(getStatusColorScheme("info")).toBe("info")
+    })
+
+    test("success", () => {
+      expect(getStatusColorScheme("success")).toBe("success")
+    })
+
+    test("warning", () => {
+      expect(getStatusColorScheme("warning")).toBe("warning")
+    })
+
+    test("error", () => {
+      expect(getStatusColorScheme("error")).toBe("danger")
+    })
+
+    test("loading", () => {
+      expect(getStatusColorScheme("loading")).toBe("primary")
+    })
   })
 
-  test("error", () => {
-    expect(getStatusColorScheme("error")).toBe("danger")
-  })
+  describe("getStatusIcon", () => {
+    test("info", () => {
+      expect(getStatusIcon("info")).toBe(InfoIcon)
+    })
 
-  test("loading", () => {
-    expect(getStatusColorScheme("loading")).toBe("primary")
-  })
-})
+    test("success", () => {
+      expect(getStatusIcon("success")).toBe(CheckIcon)
+    })
 
-describe("getStatusIcon", () => {
-  test("info", () => {
-    expect(getStatusIcon("info")).toBe(InfoIcon)
-  })
+    test("warning", () => {
+      expect(getStatusIcon("warning")).toBe(WarningIcon)
+    })
 
-  test("success", () => {
-    expect(getStatusIcon("success")).toBe(CheckIcon)
-  })
+    test("error", () => {
+      expect(getStatusIcon("error")).toBe(WarningIcon)
+    })
 
-  test("warning", () => {
-    expect(getStatusIcon("warning")).toBe(WarningIcon)
-  })
-
-  test("error", () => {
-    expect(getStatusIcon("error")).toBe(WarningIcon)
-  })
-
-  test("loading", () => {
-    expect(getStatusIcon("loading")).toBe(Loading)
+    test("loading", () => {
+      expect(getStatusIcon("loading")).toBe(Loading)
+    })
   })
 })

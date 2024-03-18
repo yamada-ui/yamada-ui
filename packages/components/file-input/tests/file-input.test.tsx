@@ -1,4 +1,4 @@
-import { a11y, render, screen, fireEvent, act } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import { FileInput } from "../src"
 
 describe("<FileInput />", () => {
@@ -38,7 +38,9 @@ describe("<FileInput />", () => {
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
     const fileInput = container.querySelector('input[type="file"]')!
 
-    fireEvent.change(fileInput, { target: { files: [mockedFile, mockedFile] } })
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile, mockedFile] },
+    })
     expect(screen.getByTestId("FileInput")).toHaveTextContent("foo.txt;foo.txt")
   })
 
@@ -54,7 +56,9 @@ describe("<FileInput />", () => {
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
     const fileInput = container.querySelector('input[type="file"]')!
 
-    fireEvent.change(fileInput, { target: { files: [mockedFile, mockedFile] } })
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile, mockedFile] },
+    })
     expect(screen.getByTestId("FileInput")).toHaveTextContent("foo,foo")
   })
 
@@ -67,7 +71,9 @@ describe("<FileInput />", () => {
     const mockedFile = new File(["foo"], "foo.txt", { type: "text/plain" })
     const fileInput = container.querySelector('input[type="file"]')!
 
-    fireEvent.change(fileInput, { target: { files: [mockedFile, mockedFile] } })
+    fireEvent.change(fileInput, {
+      target: { files: [mockedFile, mockedFile] },
+    })
     expect(screen.getByTestId("FileInput")).toHaveTextContent("Selected: 2")
   })
 
@@ -99,8 +105,8 @@ describe("<FileInput />", () => {
 
   test("should receive the resetRef, which resets files when invoked", () => {
     const resetRef: { current: (() => void) | null } = { current: null }
-    let files: any = null
-    const setFiles = vi.fn((newFiles: any) => {
+    let files: File[] | undefined = []
+    const setFiles = vi.fn((newFiles: File[] | undefined) => {
       files = newFiles
     })
     const { container } = render(
@@ -112,7 +118,9 @@ describe("<FileInput />", () => {
       />,
     )
     const mockedFile1 = new File(["foo"], "foo.txt", { type: "text/plain" })
-    const mockedFile2 = new File(["images"], "image.png", { type: "image/png" })
+    const mockedFile2 = new File(["images"], "image.png", {
+      type: "image/png",
+    })
     const mockedFile3 = new File(["pdf"], "doc.pdf", {
       type: "application/pdf",
     })
@@ -122,15 +130,13 @@ describe("<FileInput />", () => {
       target: { files: mockedFiles },
     })
 
-    expect(files).toBeTruthy()
-    if (files) {
-      expect(files.length).toEqual(mockedFiles.length)
-      for (let i = 0; i < mockedFiles.length; ++i) {
-        expect(mockedFiles[i]).toEqual(files[i])
-      }
-    }
+    expect(files).toHaveLength(3)
+    expect(files[0]).toStrictEqual(mockedFile1)
+    expect(files[1]).toStrictEqual(mockedFile2)
+    expect(files[2]).toStrictEqual(mockedFile3)
+
     expect(resetRef).toBeTruthy()
-    expect(typeof resetRef.current).toEqual("function")
+    expect(typeof resetRef.current).toBe("function")
     act(() => {
       resetRef.current && resetRef.current()
     })
@@ -139,8 +145,8 @@ describe("<FileInput />", () => {
   })
 
   test("should receive the files onChange", () => {
-    let files: any = null
-    const setFiles = vi.fn((newFiles: any) => {
+    let files: File[] | undefined = []
+    const setFiles = vi.fn((newFiles: File[] | undefined) => {
       files = newFiles
     })
 
@@ -156,11 +162,9 @@ describe("<FileInput />", () => {
     })
 
     expect(setFiles).toHaveBeenCalledTimes(1)
-    expect(files).toBeTruthy()
-    if (files) {
-      expect(files.length).toEqual(3)
-      files.forEach((file: File) => expect(file).toEqual(mockedFile))
-    }
+    expect(files).toHaveLength(3)
+
+    files!.forEach((file: File) => expect(file).toStrictEqual(mockedFile))
   })
 
   test("should not show files in the onChange function if no files are present", () => {
@@ -245,7 +249,7 @@ describe("<FileInput />", () => {
       target: { files: [mockedFile1, mockedFile2] },
     })
 
-    expect(files).toEqual([mockedFile1, mockedFile2])
+    expect(files).toStrictEqual([mockedFile1, mockedFile2])
     expect(screen.queryByText("foo.txt")).toBeNull()
     expect(screen.queryByText("foo-bar.txt")).toBeNull()
   })

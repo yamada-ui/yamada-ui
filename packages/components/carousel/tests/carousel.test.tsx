@@ -4,7 +4,7 @@ import { Carousel, CarouselSlide } from "../src"
 const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
 
 describe("<Carousel/>", () => {
-  it("should pass a11y test", async () => {
+  test("should pass a11y test", async () => {
     await a11y(
       <Carousel>
         {slidesContentArr.map((value) => (
@@ -14,7 +14,7 @@ describe("<Carousel/>", () => {
     )
   })
 
-  it("should render defaultSlide correctly", () => {
+  test("should render defaultSlide correctly", () => {
     render(
       <Carousel defaultIndex={2}>
         {slidesContentArr.map((value) => (
@@ -28,7 +28,7 @@ describe("<Carousel/>", () => {
     )
   })
 
-  it("should render correctly slide when using control button", () => {
+  test("should render correctly slide when using control button", () => {
     render(
       <Carousel
         controlNextProps={{ icon: <span>Next slide</span> }}
@@ -55,7 +55,7 @@ describe("<Carousel/>", () => {
     )
   })
 
-  it("should switch to correctly slide when click on indicator", () => {
+  test("should switch to correctly slide when click on indicator", () => {
     render(
       <Carousel>
         {slidesContentArr.map((value) => (
@@ -75,7 +75,7 @@ describe("<Carousel/>", () => {
     )
   })
 
-  it("should render correctly when using autoplay", () => {
+  test("should render correctly when using autoplay", () => {
     const delayTimer = 500
     vi.useFakeTimers()
 
@@ -108,7 +108,7 @@ describe("<Carousel/>", () => {
     )
   })
 
-  it.skip("should do not stop autoplay on mouse enter", async () => {
+  test.skip("should do not stop autoplay on mouse enter", async () => {
     render(
       <Carousel delay={500} autoplay stopMouseEnterAutoplay={false}>
         {slidesContentArr.map((value) => (
@@ -126,7 +126,7 @@ describe("<Carousel/>", () => {
     })
   })
 
-  it("should stop autoplay on mouse enter", () => {
+  test("should stop autoplay on mouse enter", () => {
     vi.useFakeTimers()
     const carouselElement = (
       <Carousel delay={500} autoplay stopMouseEnterAutoplay>
@@ -148,7 +148,7 @@ describe("<Carousel/>", () => {
     )
   })
 
-  it("should disabled next and prev button when looping is disabled", () => {
+  test("should disabled next and prev button when looping is disabled", () => {
     render(
       <Carousel
         controlNextProps={{ icon: <span>Next slide</span> }}
@@ -177,7 +177,7 @@ describe("<Carousel/>", () => {
     expect(screen.getByText("Next slide").parentNode).toBeDisabled()
   })
 
-  it("should not display control element when withControl is false", () => {
+  test("should not display control element when withControl is false", () => {
     render(
       <Carousel withControls={false}>
         {slidesContentArr.map((value) => (
@@ -189,7 +189,7 @@ describe("<Carousel/>", () => {
     expect(document.querySelectorAll(".ui-carousel__control")).toHaveLength(0)
   })
 
-  it("should not display indicators element when withIndicators is false", () => {
+  test("should not display indicators element when withIndicators is false", () => {
     render(
       <Carousel withIndicators={false}>
         {slidesContentArr.map((value) => (

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/resizable",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Yamada UI resizable component",
   "keywords": [
     "yamada",
@@ -65,6 +65,10 @@
     "format": [
       "cjs",
       "esm"
-    ]
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
   }
 }

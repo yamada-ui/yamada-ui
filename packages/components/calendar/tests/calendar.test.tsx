@@ -1,5 +1,11 @@
 import { a11y, act, fireEvent, render } from "@yamada-ui/test"
-import { Calendar } from "../src"
+import {
+  Calendar,
+  DatePicker,
+  MultiDatePicker,
+  RangeDatePicker,
+  MonthPicker,
+} from "../src"
 
 describe("<Calendar />", () => {
   test("Calendar renders correctly", async () => {
@@ -368,7 +374,7 @@ describe("<Calendar />", () => {
         />,
       )
       const children = getByTestId("Calender").children
-      expect(children.length).toBe(number)
+      expect(children).toHaveLength(number)
     })
   })
 
@@ -650,24 +656,152 @@ describe("<Calendar />", () => {
     test("should render with withHeader false", () => {
       const { container } = render(<Calendar withHeader={false} />)
       const header = container.querySelector(".ui-calendar__header")
-      expect(header).toBe(null)
+      expect(header).toBeNull()
     })
     test("should render with withControls false", () => {
       const { container } = render(<Calendar withControls={false} />)
       const control = container.querySelector(".ui-calendar__header__control")
-      expect(control).toBe(null)
+      expect(control).toBeNull()
     })
     test("should render with withLabel false", () => {
       const { container } = render(<Calendar withLabel={false} />)
       const headerLabel = container.querySelector(".ui-calendar__header__label")
-      expect(headerLabel).toBe(null)
+      expect(headerLabel).toBeNull()
     })
     test("should render with withWeekdays false", () => {
       const { container } = render(<Calendar withWeekdays={false} />)
       const monthWeekday = container.querySelector(
         ".ui-calendar__month__weekday",
       )
-      expect(monthWeekday).toBe(null)
+      expect(monthWeekday).toBeNull()
     })
+  })
+})
+
+describe("<DatePicker />", () => {
+  test("DatePicker renders correctly", async () => {
+    const { container } = render(<DatePicker placeholder="basic" />)
+    await a11y(container)
+  })
+
+  test("should change selected date", async () => {
+    const { container } = render(
+      <DatePicker
+        placeholder="basic"
+        today
+        defaultValue={new Date(new Date().setDate(1))}
+      />,
+    )
+
+    const selectDate = new Date(new Date().setDate(7))
+    const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
+    const selectBtn = container.querySelector(`button[data-value="${dateStr}"]`)
+
+    act(() => {
+      fireEvent.click(selectBtn!)
+    })
+
+    expect(selectBtn).toHaveAttribute("data-selected")
+  })
+})
+
+describe("<MultiDatePicker />", () => {
+  test("MultiDatePicker renders correctly", async () => {
+    const { container } = render(<MultiDatePicker placeholder="basic" />)
+    await a11y(container)
+  })
+
+  test("should change selected dates", async () => {
+    const { container } = render(
+      <MultiDatePicker
+        placeholder="basic"
+        today
+        defaultValue={[new Date(new Date().setDate(1))]}
+      />,
+    )
+    const selectDate = new Date(new Date().setDate(7))
+    const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
+    const selectBtn = container.querySelector(`button[data-value="${dateStr}"]`)
+
+    act(() => {
+      fireEvent.click(selectBtn!)
+    })
+
+    expect(selectBtn).toHaveAttribute("data-selected")
+
+    const selectDateSecond = new Date(new Date().setDate(14))
+    const dateStrSecond = new Date(
+      selectDateSecond.setHours(0, 0, 0, 0),
+    ).toString()
+    const selectBtnSecond = container.querySelector(
+      `button[data-value="${dateStrSecond}"]`,
+    )
+
+    act(() => {
+      fireEvent.click(selectBtnSecond!)
+    })
+
+    expect(selectBtnSecond).toHaveAttribute("data-selected")
+  })
+})
+
+describe("<RangeDatePicker />", () => {
+  test("RangeDatePicker renders correctly", async () => {
+    const { container } = render(<RangeDatePicker placeholder="basic" />)
+    await a11y(container)
+  })
+
+  test("should render dates of range", async () => {
+    const { container } = render(
+      <RangeDatePicker
+        placeholder="basic"
+        today
+        defaultValue={[new Date(new Date().setDate(1))]}
+      />,
+    )
+    const selectDateFrom = new Date(new Date().setDate(7))
+    const dateStrFrom = new Date(selectDateFrom.setHours(0, 0, 0, 0)).toString()
+    const selectBtnFrom = container.querySelector(
+      `button[data-value="${dateStrFrom}"]`,
+    )
+
+    act(() => {
+      fireEvent.click(selectBtnFrom!)
+    })
+
+    expect(selectBtnFrom).toHaveAttribute("data-selected")
+
+    const selectDateTo = new Date(new Date().setDate(14))
+    const dateStrTo = new Date(selectDateTo.setHours(0, 0, 0, 0)).toString()
+    const selectBtnTo = container.querySelector(
+      `button[data-value="${dateStrTo}"]`,
+    )
+
+    act(() => {
+      fireEvent.click(selectBtnTo!)
+    })
+
+    expect(selectBtnTo).toHaveAttribute("data-selected")
+  })
+})
+
+describe("<MonthPicker />", () => {
+  test("MonthPicker renders correctly", async () => {
+    const { container } = render(<MonthPicker placeholder="basic" />)
+    await a11y(container)
+  })
+
+  test("should change selected Month", async () => {
+    const { container } = render(
+      <MonthPicker placeholder="basic" defaultValue={new Date(new Date())} />,
+    )
+
+    const selectBtn = container.querySelector(`button[data-value="1"]`)
+
+    act(() => {
+      fireEvent.click(selectBtn!)
+    })
+
+    expect(selectBtn).toHaveAttribute("data-selected")
   })
 })

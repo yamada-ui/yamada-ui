@@ -1,14 +1,15 @@
-import { createRef } from "react"
+import { act } from "@testing-library/react"
 import { Center } from "@yamada-ui/react"
 import { a11y, render } from "@yamada-ui/test"
 import type { RenderReturn } from "@yamada-ui/test"
+import { createRef } from "react"
+import type { ResizableItemControl } from "../src"
 import {
   Resizable,
   ResizableItem,
-  ResizableItemControl,
   ResizableTrigger,
+  ResizableTriggerIcon,
 } from "../src"
-import { act } from "@testing-library/react"
 import { assert } from "./utils"
 
 describe.skip("<Resizable />", () => {
@@ -144,7 +145,7 @@ describe.skip("<Resizable />", () => {
   })
 
   describe("Enable Collapsing", () => {
-    test("When `collapesible = true`, function `onCollapse` should be called", () => {
+    test("When `collapsible = true`, function `onCollapse` should be called", () => {
       const controlRef = createRef<ResizableItemControl>()
 
       const onCollapse = vi.fn()
@@ -189,7 +190,7 @@ describe.skip("<Resizable />", () => {
       expect(leftItem.getAttribute("data-panel-size")).toBe("10.0")
       expect(rightItem.getAttribute("data-panel-size")).toBe("90.0")
 
-      expect(onCollapse).toHaveBeenCalled()
+      expect(onCollapse).toHaveBeenCalledWith()
       expect(onCollapse).toHaveBeenCalledTimes(1)
     })
 
@@ -258,7 +259,7 @@ describe.skip("<Resizable />", () => {
   })
 
   describe("Handle Resize Events", () => {
-    test("When Resize Event is occured, `onResize` function should be called", () => {
+    test("When Resize Event is occurred, `onResize` function should be called", () => {
       const onResize = vi.fn()
 
       const { container } = render(
@@ -281,12 +282,23 @@ describe.skip("<Resizable />", () => {
       assert(leftItem, "data-panel-id=`left-item` is not found")
       assert(rightItem, "data-panel-id=`right-item` is not found")
 
-      expect(onResize).toHaveBeenCalled()
+      expect(onResize).toHaveBeenCalledWith()
       expect(onResize).toHaveBeenCalledTimes(1)
     })
   })
 
   describe("Control", () => {
     // TODO: Add tests
+  })
+})
+
+describe("<ResizableTriggerIcon />", () => {
+  test("applies styles `width` and `height` correctly", async () => {
+    const { getByTestId } = render(
+      <ResizableTriggerIcon data-testid="resizable" />,
+    )
+
+    expect(getByTestId("resizable")).toHaveStyle("width: 0.5rem")
+    expect(getByTestId("resizable")).toHaveStyle("height: 1rem")
   })
 })

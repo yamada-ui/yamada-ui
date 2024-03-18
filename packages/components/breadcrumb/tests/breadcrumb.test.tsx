@@ -79,6 +79,6 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb>,
     )
     const currentPageLink = screen.getByText("Link 2")
-    expect(currentPageLink.getAttribute("href")).toBe(null)
+    expect(currentPageLink.getAttribute("href")).toBeNull()
   })
 })

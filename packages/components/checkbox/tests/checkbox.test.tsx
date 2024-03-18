@@ -133,14 +133,14 @@ describe("<Checkbox />", () => {
     ).toHaveAttribute("data-indeterminate")
   })
 
-  it("should use the specified id when provided", () => {
+  test("should use the specified id when provided", () => {
     const customId = "custom-checkbox-id"
     render(<Checkbox id={customId}>Checkbox</Checkbox>)
 
     expect(screen.getByRole("checkbox")).toHaveAttribute("id", customId)
   })
 
-  it("should have a unique id for each input element", () => {
+  test("should have a unique id for each input element", () => {
     render(
       <>
         <Checkbox>First Checkbox</Checkbox>
@@ -154,7 +154,7 @@ describe("<Checkbox />", () => {
     expect(id1).not.toBe(id2)
   })
 
-  it("should have a unique id for each input element when using FormControl and CheckboxGroup", () => {
+  test("should have a unique id for each input element when using FormControl and CheckboxGroup", () => {
     render(
       <FormControl>
         <CheckboxGroup>

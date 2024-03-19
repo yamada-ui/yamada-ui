@@ -1,10 +1,7 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { useTheme } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
-import { cx } from "@yamada-ui/utils"
+import { splitObject, type Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
-import { getComponentProps } from "./chart-utils"
 import type { ChartPropGetter, TooltipProps } from "./chart.types"
 import { tooltipProperties } from "./rechart-properties"
 
@@ -30,7 +27,6 @@ export const useChartTooltip = ({
   tooltipAnimationDuration = 0,
   styles,
 }: UseChartTooltipProps) => {
-  const { theme } = useTheme()
   const { cursor, ...rest } = _tooltipProps
   const resolvedCursor = useMemo(
     () => ({ ...styles.cursor, ...cursor }),
@@ -69,20 +65,18 @@ export const useChartTooltip = ({
     [resolvedCursor],
   )
 
-  const [tooltipProps, propClassName] = getComponentProps<Dict, string>([
+  const [tooltipProps, tooltipUIProps] = splitObject<Dict, string>(
     rest,
     tooltipProperties,
-  ])(theme)
+  )
 
   const getTooltipProps: ChartPropGetter<
     "div",
     Partial<Recharts.TooltipProps<any, any>>,
     Omit<Recharts.TooltipProps<any, any>, "ref">
   > = useCallback(
-    ({ labelClassName, wrapperClassName, ...props } = {}, ref = null) => ({
+    (props, ref = null) => ({
       ref,
-      labelClassName: cx(labelClassName, propClassName),
-      wrapperClassName: cx(wrapperClassName, propClassName),
       animationDuration: tooltipAnimationDuration,
       isAnimationActive: (tooltipAnimationDuration || 0) > 0,
       cursor: {
@@ -94,8 +88,8 @@ export const useChartTooltip = ({
       ...props,
       ...tooltipProps,
     }),
-    [propClassName, tooltipAnimationDuration, tooltipProps],
+    [tooltipAnimationDuration, tooltipProps],
   )
 
-  return { getTooltipProps, tooltipVars }
+  return { tooltipProps: tooltipUIProps, getTooltipProps, tooltipVars }
 }

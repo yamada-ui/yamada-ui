@@ -141,7 +141,11 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const { getTooltipProps, tooltipVars } = useChartTooltip({
+  const {
+    tooltipProps: computedTooltipProps,
+    getTooltipProps,
+    tooltipVars,
+  } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
     styles,
@@ -219,6 +223,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
                     payload={payload}
                     valueFormatter={valueFormatter}
                     unit={unit}
+                    {...computedTooltipProps}
                   />
                 )}
                 {...getTooltipProps()}

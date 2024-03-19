@@ -10,7 +10,7 @@ export type ChartTooltipProps = {
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
-  ({ label, className, payload = [], valueFormatter, unit }, ref) => {
+  ({ label, className, payload = [], valueFormatter, unit, ...rest }, ref) => {
     const { styles } = useTooltip()
 
     const items = payload.map(
@@ -63,6 +63,7 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
         ref={ref}
         className={cx("ui-chart__tooltip", className)}
         __css={styles.tooltip}
+        {...rest}
       >
         <ui.p className="ui-chart__tooltip-title" __css={styles.tooltipTitle}>
           {label}

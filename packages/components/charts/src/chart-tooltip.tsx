@@ -1,5 +1,5 @@
 import { forwardRef, ui } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { cx, isArray, type Dict } from "@yamada-ui/utils"
 import { useTooltip } from "./use-chart"
 
 export type ChartTooltipProps = {
@@ -13,38 +13,50 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
   ({ label, className, payload = [], valueFormatter, unit }, ref) => {
     const { styles } = useTooltip()
 
-    const items = payload.map(({ color, name, value } = {}, index) => {
-      value = valueFormatter?.(value) ?? value
+    const items = payload.map(
+      ({ color, name, value: valueProp } = {}, index) => {
+        let value: string
 
-      return (
-        <ui.div
-          className="ui-chart__tooltip-item"
-          key={`tooltip-payload-${index}`}
-          __css={styles.tooltipItem}
-        >
+        if (isArray(valueProp)) {
+          value = valueProp
+            .map((value) => {
+              return `${valueFormatter?.(value) ?? value}`
+            })
+            .join(" - ")
+        } else {
+          value = valueFormatter?.(valueProp) ?? valueProp
+        }
+
+        return (
           <ui.div
-            className="ui-chart__tooltip-swatch"
-            background={color}
-            __css={styles.tooltipSwatch}
-          />
-
-          <ui.span
-            className="ui-chart__tooltip-label"
-            __css={styles.tooltipLabel}
+            className="ui-chart__tooltip-item"
+            key={`tooltip-payload-${index}`}
+            __css={styles.tooltipItem}
           >
-            {name}
-          </ui.span>
+            <ui.div
+              className="ui-chart__tooltip-swatch"
+              background={color}
+              __css={styles.tooltipSwatch}
+            />
 
-          <ui.span
-            className="ui-chart__tooltip-value"
-            __css={styles.tooltipValue}
-          >
-            {value}
-            {unit ? unit : ""}
-          </ui.span>
-        </ui.div>
-      )
-    })
+            <ui.span
+              className="ui-chart__tooltip-label"
+              __css={styles.tooltipLabel}
+            >
+              {name}
+            </ui.span>
+
+            <ui.span
+              className="ui-chart__tooltip-value"
+              __css={styles.tooltipValue}
+            >
+              {value}
+              {unit ? unit : ""}
+            </ui.span>
+          </ui.div>
+        )
+      },
+    )
 
     return (
       <ui.div

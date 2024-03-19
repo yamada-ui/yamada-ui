@@ -130,23 +130,26 @@ export const useBarChart = ({
     [rest.barChartProps, styles.barChart, theme],
   )
 
-  const [barProps, barClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>(
-        [computedBarProps, barProperties],
-        styles.bar,
-      )(theme),
-    [computedBarProps, styles.bar, theme],
-  )
+  const [barProps, barClassName] = useMemo(() => {
+    const resolvedBarProps = {
+      fillOpacity: "var(--ui-fill-opacity)",
+      strokeOpacity: 1,
+      ...computedBarProps,
+    }
 
-  const [dimBarProps, dimBarClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>([
-        dimBar ?? { fillOpacity: 0.1, strokeOpacity: 0 },
-        barProperties,
-      ])(theme),
-    [dimBar, theme],
-  )
+    return getComponentProps<Dict, string>(
+      [resolvedBarProps, barProperties],
+      styles.bar,
+    )(theme)
+  }, [computedBarProps, styles.bar, theme])
+
+  const [dimBarProps, dimBarClassName] = useMemo(() => {
+    const resolvedDimBar = { fillOpacity: 0.3, strokeOpacity: 0, ...dimBar }
+
+    return getComponentProps<Dict, string>([resolvedDimBar, barProperties])(
+      theme,
+    )
+  }, [dimBar, theme])
 
   const [activeBarProps, activeBarClassName] = useMemo(
     () =>
@@ -181,8 +184,6 @@ export const useBarChart = ({
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimBar = { ...dimBarProps, ...dimBar }
         const resolvedProps = {
-          fillOpacity: "var(--ui-fill-opacity)",
-          strokeOpacity: 1,
           ...barProps,
           ...computedProps,
           ...(dimmed ? computedDimBar : {}),

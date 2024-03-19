@@ -78,8 +78,8 @@ export type BarProps = Merge<
   Merge<CSSUIProps, Recharts.BarProps>,
   {
     color: CSSUIProps["color"]
-    activeBar?: Merge<CSSUIProps, SVGProps<SVGPathElement>>
-    background?: Merge<CSSUIProps, SVGProps<SVGPathElement>>
+    activeBar?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+    background?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
     dimBar?: Partial<BarProps>
   }
 >

@@ -6,17 +6,31 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import { useMemo } from "react"
 import {
   ResponsiveContainer,
   RadarChart as ReChartsRadarChart,
   PolarGrid,
   PolarAngleAxis,
   PolarRadiusAxis,
+  Radar,
+  Tooltip,
 } from "recharts"
-import { ChartProvider } from "./use-chart"
+import { ChartTooltip } from "./chart-tooltip"
+import type { UseChartProps } from "./use-chart"
+import { ChartProvider, useChart } from "./use-chart"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
+import { useChartTooltip } from "./use-chart-tooltip"
+import type { UseRadarChartOptions } from "./use-radar-chart"
 import { useRadarChart } from "./use-radar-chart"
 
 type RadarChartOptions = {
+  /**
+   * If `true`, tooltip is visible.
+   *
+   * @default true
+   */
+  withTooltip?: boolean
   /**
    * Determines whether polarGrid should be displayed.
    *
@@ -32,40 +46,120 @@ type RadarChartOptions = {
   /**
    * Determines whether polarRadiusAxis should be displayed.
    *
-   * @default true
+   * @default false
    */
   withPolarRadiusAxis?: boolean
+  /**
+   * Unit displayed next to each tick in y-axis.
+   */
+  unit?: string
+  /**
+   * A function to format values on Y axis and inside the tooltip
+   */
+  valueFormatter?: (value: number) => string
 }
 
 export type RadarChartProps = HTMLUIProps<"div"> &
   ThemeProps<"RadarChart"> &
-  RadarChartOptions
+  RadarChartOptions &
+  UseChartProps &
+  UseChartTooltipOptions &
+  UseRadarChartOptions
 
 export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("RadarChart", props)
   const {
     className,
+    data,
+    series,
+    radarProps,
+    radarChartProps,
+    containerProps,
+    tooltipProps,
+    tooltipAnimationDuration,
+    unit,
+    valueFormatter,
+    withDots,
+    withActiveDots,
+    strokeWidth,
+    fillOpacity,
+    withTooltip = true,
     withPolarGrid = true,
     withPolarAngleAxis = true,
     withPolarRadiusAxis = false,
-    ...computedProps
+    // ...rest
   } = omitThemeProps(mergedProps)
 
-  const {} = useRadarChart(computedProps)
+  const { getRadarProps, getRadarChartProps, radarVars } = useRadarChart({
+    data,
+    series,
+    radarProps,
+    radarChartProps,
+    withDots,
+    withActiveDots,
+    strokeWidth,
+    fillOpacity,
+    styles,
+  })
+  const { getContainerProps } = useChart({ containerProps })
+  const {
+    tooltipProps: computedTooltipProps,
+    getTooltipProps,
+    tooltipVars,
+  } = useChartTooltip({
+    tooltipProps,
+    tooltipAnimationDuration,
+    styles,
+  })
 
   const css: CSSUIObject = {}
 
-  // const radars = []
+  const radars = useMemo(
+    () =>
+      series.map(({ dataKey }, index) => (
+        <Radar
+          key={`radar=${dataKey}`}
+          {...getRadarProps({ index, className: "ui-radar-chart__radar" })}
+        />
+      )),
+    [getRadarProps, series],
+  )
 
   return (
     <ChartProvider value={{ styles }}>
-      <ui.div ref={ref} className={cx("ui-radar-chart", className)} __css={css}>
-        <ResponsiveContainer>
-          <ReChartsRadarChart>
+      <ui.div
+        ref={ref}
+        className={cx("ui-radar-chart", className)}
+        var={[...radarVars, ...tooltipVars]}
+        __css={css}
+      >
+        <ResponsiveContainer
+          {...getContainerProps({ className: "ui-radar-chart__container" })}
+        >
+          <ReChartsRadarChart
+            {...getRadarChartProps({ className: "ui-radar-chart__chart" })}
+          >
             {withPolarGrid ? <PolarGrid /> : null}
             {withPolarAngleAxis ? <PolarAngleAxis /> : null}
             {withPolarRadiusAxis ? <PolarRadiusAxis /> : null}
-            {/* {radars} */}
+
+            {withTooltip ? (
+              <Tooltip
+                content={({ label, payload }) => (
+                  <ChartTooltip
+                    className="ui-line-chart__tooltip"
+                    label={label}
+                    payload={payload}
+                    valueFormatter={valueFormatter}
+                    unit={unit}
+                    {...computedTooltipProps}
+                  />
+                )}
+                {...getTooltipProps()}
+              />
+            ) : null}
+
+            {radars}
           </ReChartsRadarChart>
         </ResponsiveContainer>
       </ui.div>

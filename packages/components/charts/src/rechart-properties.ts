@@ -56,6 +56,23 @@ export const lineChartProperties: (keyof ComponentPropsWithoutRef<
   "onMouseLeave",
 ]
 
+export const radarChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof Recharts.RadarChart
+>)[] = [
+  "width",
+  "height",
+  "data",
+  "cx",
+  "cy",
+  "startAngle",
+  "endAngle",
+  "innerRadius",
+  "outerRadius",
+  "margin",
+  "onMouseEnter",
+  "onClick",
+]
+
 export const referenceLineProperties: (keyof Recharts.ReferenceLineProps)[] = [
   "xAxisId",
   "yAxisId",
@@ -298,6 +315,22 @@ export const barProperties: (keyof Omit<Recharts.BarProps, "ref">)[] = [
   "onMouseEnter",
   "onMouseLeave",
   "radius",
+]
+
+export const radarProperties: (keyof Omit<Recharts.RadarProps, "ref">)[] = [
+  "dataKey",
+  "points",
+  "shape",
+  "dot",
+  "activeDot",
+  "legendType",
+  "label",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "onAnimationStart",
+  "onAnimationEnd",
 ]
 
 export const backgroundProperties = ["radius"]

@@ -49,6 +49,10 @@ export type PieChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.PieChart>
 >
+export type RadarChartProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof Recharts.RadarChart>
+>
 export type ReferenceLineProps = Merge<CSSUIProps, Recharts.ReferenceLineProps>
 export type ResponsiveContainerProps = Merge<
   CSSUIProps,
@@ -81,6 +85,14 @@ export type BarProps = Merge<
     activeBar?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
     background?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
     dimBar?: Partial<BarProps>
+  }
+>
+export type RadarProps = Merge<
+  Merge<CSSUIProps, Recharts.RadarProps>,
+  {
+    color: CSSUIProps["color"]
+    dot?: DotProps
+    activeDot?: DotProps
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>

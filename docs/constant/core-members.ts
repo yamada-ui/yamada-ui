@@ -35,8 +35,8 @@ export const CORE_MEMBERS = [
   {
     id: "koralle",
     name: {
-      en: "Mamoru Kosugiyama",
-      ja: "Mamoru Kosugiyama",
+      en: "koralle",
+      ja: "koralle",
     },
     icon: "https://avatars.githubusercontent.com/u/33865215?v=4",
     github: "https://github.com/koralle",

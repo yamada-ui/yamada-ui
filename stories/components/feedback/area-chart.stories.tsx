@@ -930,7 +930,7 @@ export const customLegend: Story = () => {
       series={series}
       dataKey="name"
       withLegend
-      legendProps={{ verticalAlign: "bottom" }}
+      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
     />
   )
 }

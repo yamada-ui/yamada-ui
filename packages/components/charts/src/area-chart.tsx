@@ -159,7 +159,9 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     styles,
   })
-  const { getLegendProps } = useChartLegend({ legendProps })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
+  })
 
   const areas = useMemo(
     () =>
@@ -224,6 +226,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     className="ui-area-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
                   />
                 )}
                 {...getLegendProps()}

@@ -136,7 +136,9 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     styles,
   })
-  const { getLegendProps } = useChartLegend({ legendProps })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
+  })
 
   const bars = useMemo(
     () =>
@@ -193,6 +195,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
                     className="ui-bar-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
                   />
                 )}
                 {...getLegendProps()}

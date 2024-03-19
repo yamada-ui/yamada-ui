@@ -146,7 +146,9 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     styles,
   })
-  const { getLegendProps } = useChartLegend({ legendProps })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
+  })
 
   const lines = useMemo(
     () =>
@@ -201,6 +203,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
                     className="ui-line-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
                   />
                 )}
                 {...getLegendProps()}

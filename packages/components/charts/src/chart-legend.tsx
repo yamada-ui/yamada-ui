@@ -1,14 +1,17 @@
+import type { HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import { useLegend } from "./use-chart"
 
-export type ChartLegendProps = {
+type ChartLegendOptions = {
   payload?: Dict[]
   onHighlight: (area: string | null) => void
 }
 
+export type ChartLegendProps = HTMLUIProps<"div"> & ChartLegendOptions
+
 export const ChartLegend = forwardRef<ChartLegendProps, "div">(
-  ({ className, payload = [], onHighlight }, ref) => {
+  ({ className, payload = [], onHighlight, ...rest }, ref) => {
     const { styles } = useLegend()
 
     const items = payload.map(({ dataKey, color }, index) => (
@@ -34,6 +37,7 @@ export const ChartLegend = forwardRef<ChartLegendProps, "div">(
         ref={ref}
         className={cx("ui-chart__legend", className)}
         __css={styles.legend}
+        {...rest}
       >
         {items}
       </ui.div>

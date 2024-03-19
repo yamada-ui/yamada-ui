@@ -188,11 +188,11 @@ export const useBarChart = ({
           ...(dimmed ? computedDimBar : {}),
         }
 
-        const [rest, className] = getComponentProps<Dict, string>(
+        const rest = getComponentProps<Dict, string>(
           [resolvedProps, barProperties],
           barClassName,
           dimmed ? dimBarClassName : undefined,
-        )(theme)
+        )(theme, true)
 
         const computedActiveBar = { ...activeBarProps, ...activeBar }
 
@@ -211,7 +211,6 @@ export const useBarChart = ({
         return {
           ...rest,
           id,
-          className,
           activeBar: resolvedActiveBar,
           background: resolvedBackground,
           color,

@@ -58,9 +58,10 @@ export type AreaProps = Merge<
   Merge<CSSUIProps, Recharts.AreaProps>,
   {
     color: CSSUIProps["color"]
-    activeDot?: DotProps
     dot?: DotProps
-    dimArea?: AreaProps
+    activeDot?: DotProps
+    dimDot?: DotProps
+    dimArea?: Partial<AreaProps>
   }
 >
 export type LineProps = Merge<
@@ -69,7 +70,8 @@ export type LineProps = Merge<
     color: CSSUIProps["color"]
     activeDot?: DotProps
     dot?: DotProps
-    dimLine?: LineProps
+    dimDot?: DotProps
+    dimLine?: Partial<LineProps>
   }
 >
 export type BarProps = Merge<
@@ -78,7 +80,7 @@ export type BarProps = Merge<
     color: CSSUIProps["color"]
     activeBar?: Merge<CSSUIProps, SVGProps<SVGPathElement>>
     background?: Merge<CSSUIProps, SVGProps<SVGPathElement>>
-    dimBar?: BarProps
+    dimBar?: Partial<BarProps>
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>

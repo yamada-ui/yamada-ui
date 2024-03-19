@@ -5,11 +5,10 @@ import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
-import { getClassName, getComponentProps } from "./chart-utils"
+import { getComponentProps } from "./chart-utils"
 import type {
-  DotProps,
   ChartLayoutType,
-  LineChartSeries,
+  LineProps,
   LineChartProps,
   ReferenceLineProps,
   ChartPropGetter,
@@ -30,31 +29,15 @@ export type UseLineChartOptions = {
   /**
    * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
    */
-  series: LineChartSeries[]
+  series: LineProps[]
+  /**
+   * Props for the lines.
+   */
+  lineProps?: Partial<LineProps>
   /**
    * Props passed down to recharts `LineChart` component.
    */
   lineChartProps?: LineChartProps
-  /**
-   * Props passed down to dim lines.
-   *
-   * @default "{ fillOpacity: 0, strokeOpacity: 0.3 }"
-   */
-  dimLineProps?: Omit<Partial<LineChartSeries>, "dataKey" | "dot" | "activeDot">
-  /**
-   * Props passed down to all dots. Ignored if `withDots={false}` is set.
-   */
-  dotProps?: DotProps
-  /**
-   * Props passed down to dim dots.
-   *
-   * @default "{ fillOpacity: 0, strokeOpacity: 0 }"
-   */
-  dimDotProps?: DotProps
-  /**
-   * Props passed down to all active dots. Ignored if `withDots={false}` is set.
-   */
-  activeDotProps?: DotProps
   /**
    * Chart orientation.
    *
@@ -110,11 +93,6 @@ type UseLineChartProps = UseLineChartOptions & {
 export const useLineChart = ({
   data,
   series,
-  lineChartProps: _lineChartProps = {},
-  activeDotProps: _activeDotProps = {},
-  dimLineProps = { fillOpacity: 0, strokeOpacity: 0.3 },
-  dotProps: _dotProps = {},
-  dimDotProps = { fillOpacity: 0, strokeOpacity: 0 },
   layoutType = "horizontal",
   withDots = true,
   withActiveDots = true,
@@ -124,10 +102,18 @@ export const useLineChart = ({
   referenceLineProps,
   fillOpacity = 1,
   styles,
+  ...rest
 }: UseLineChartProps) => {
   const { theme } = useTheme()
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
+  const {
+    dot = {},
+    activeDot = {},
+    dimDot,
+    dimLine,
+    ...computedLineProps
+  } = rest.lineProps ?? {}
 
   const lineColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -162,93 +148,139 @@ export const useLineChart = ({
     [fillOpacity, lineColors, referenceLineColors],
   )
 
-  const [lineChartProps, lineChartClassName] = getComponentProps<Dict, string>(
-    [_lineChartProps, lineChartProperties],
-    styles.lineChart,
-  )(theme)
+  const [lineChartProps, lineChartClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.lineChartProps ?? {}, lineChartProperties],
+        styles.lineChart,
+      )(theme),
+    [rest.lineChartProps, styles.lineChart, theme],
+  )
 
-  const [activeDotProps, _activeDotClassName] = getComponentProps<Dict, string>(
-    [_activeDotProps, dotProperties],
-    styles.activeDot,
-  )(theme)
+  const [lineProps, lineClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [computedLineProps, lineProperties],
+        styles.line,
+      )(theme),
+    [computedLineProps, styles.line, theme],
+  )
 
-  const [dotProps, _dotClassName] = getComponentProps<Dict, string>(
-    [_dotProps, dotProperties],
-    styles.dot,
-  )(theme)
+  const [dimLineProps, dimLineClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([
+        dimLine ?? { fillOpacity: 0, strokeOpacity: 0.3 },
+        lineProperties,
+      ])(theme),
+    [dimLine, theme],
+  )
 
-  const lineClassName = getClassName(styles.line)(theme)
+  const [dotProps, dotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([dot, dotProperties], styles.dot)(theme),
+    [dot, styles.dot, theme],
+  )
+
+  const [activeDotProps, activeDotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [activeDot, dotProperties],
+        styles.activeDot,
+      )(theme),
+    [activeDot, styles.activeDot, theme],
+  )
+
+  const [dimDotProps, dimDotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([
+        dimDot ?? { fillOpacity: 0, strokeOpacity: 0 },
+        dotProperties,
+      ])(theme),
+    [dimDot, theme],
+  )
 
   const linePropList = useMemo(
     () =>
       series.map((props, index) => {
         const {
           dataKey,
-          activeDot: _activeDot = {},
-          dot: _dot = {},
+          dot = {},
+          activeDot = {},
+          dimDot = {},
+          dimLine = {},
           ...computedProps
         } = props
         const color = `var(--ui-line-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const computedDimLine = { ...dimLineProps, ...dimLine }
         const resolvedProps = {
           fillOpacity: "var(--ui-fill-opacity)",
           strokeOpacity: "var(--ui-fill-opacity)",
+          ...lineProps,
           ...computedProps,
-          ...(dimmed ? dimLineProps : {}),
+          ...(dimmed ? computedDimLine : {}),
         }
-        const [rest, className] = getComponentProps<Dict, string>(
+
+        const rest = getComponentProps<Dict, string>(
           [resolvedProps, lineProperties],
           lineClassName,
-        )(theme)
+          dimmed ? dimLineClassName : undefined,
+        )(theme, true)
 
-        let activeDot: Recharts.DotProps | boolean
+        let resolvedActiveDot: Recharts.DotProps | boolean
 
         if (withActiveDots) {
-          const [rest, activeDotClassName] = getComponentProps(
-            [_activeDot, dotProperties],
-            _activeDotClassName,
+          const computedActiveDot = { ...activeDotProps, ...activeDot }
+
+          const [rest, className] = getComponentProps(
+            [computedActiveDot, dotProperties],
+            activeDotClassName,
           )(theme)
 
-          activeDot = {
-            className: cx("ui-line-chart__active-dot", activeDotClassName),
+          resolvedActiveDot = {
+            className: cx("ui-line-chart__active-dot", className),
             fill: color,
             stroke: color,
             r: 4,
-            ...activeDotProps,
             ...rest,
           } as Recharts.DotProps
         } else {
-          activeDot = false
+          resolvedActiveDot = false
         }
 
-        let dot: Recharts.DotProps | boolean
+        let resolvedDot: Recharts.DotProps | boolean
 
         if (withDots) {
-          const resolvedDot = { ..._dot, ...(dimmed ? dimDotProps : {}) }
-          const [rest, dotClassName] = getComponentProps(
-            [resolvedDot, dotProperties],
-            _dotClassName,
+          const computedDimDot = { ...dimDotProps, ...dimDot }
+          const computedDot = {
+            fillOpacity: 1,
+            strokeOpacity: 1,
+            ...dotProps,
+            ...dot,
+            ...(dimmed ? computedDimDot : {}),
+          }
+
+          const [rest, className] = getComponentProps(
+            [computedDot, dotProperties],
+            dotClassName,
+            dimmed ? dimDotClassName : undefined,
           )(theme)
 
-          dot = {
-            className: cx("ui-line-chart__dot", dotClassName),
+          resolvedDot = {
+            className: cx("ui-line-chart__dot", className),
             fill: color,
-            fillOpacity: dimmed ? 0 : 1,
-            strokeOpacity: dimmed ? 0 : 1,
-            ...dotProps,
             ...rest,
           } as Recharts.DotProps
         } else {
-          dot = false
+          resolvedDot = false
         }
 
         return {
-          color,
-          className,
           ...rest,
+          color,
           dataKey,
-          activeDot,
-          dot,
+          activeDot: resolvedActiveDot,
+          dot: resolvedDot,
         }
       }),
     [
@@ -256,15 +288,18 @@ export const useLineChart = ({
       shouldHighlight,
       highlightedArea,
       dimLineProps,
+      lineProps,
       lineClassName,
+      dimLineClassName,
       theme,
       withActiveDots,
       withDots,
-      _activeDotClassName,
       activeDotProps,
+      activeDotClassName,
       dimDotProps,
-      _dotClassName,
       dotProps,
+      dotClassName,
+      dimDotClassName,
     ],
   )
 

@@ -7,10 +7,10 @@ import {
   useId,
   useMemo,
 } from "react"
-import type { BarChart, BarProps } from "recharts"
-import { getClassName, getComponentProps } from "./chart-utils"
+import type * as Recharts from "recharts"
+import { getComponentProps } from "./chart-utils"
 import type {
-  BarChartSeries,
+  BarProps,
   BarChartType,
   BarChartProps,
   ChartPropGetter,
@@ -18,7 +18,11 @@ import type {
   ReferenceLineProps,
   RequiredChartPropGetter,
 } from "./chart.types"
-import { barChartProperties, barProperties } from "./rechart-properties"
+import {
+  backgroundProperties,
+  barChartProperties,
+  barProperties,
+} from "./rechart-properties"
 
 export type UseBarChartOptions = {
   /**
@@ -28,31 +32,17 @@ export type UseBarChartOptions = {
   /**
    * An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array.
    */
-  series: BarChartSeries[]
+  series: BarProps[]
+  /**
+   * Props for the bars.
+   */
+  barProps?: Partial<BarProps>
   /**
    * Controls how chart bars are positioned relative to each other
    *
    * @default `default`
    */
   type?: BarChartType
-  /**
-   * Props for the bars.
-   */
-  barProps?: CSSUIProps
-  /**
-   * Props passed down to dim bars.
-   *
-   * @default "{ fillOpacity: 0.1, strokeOpacity: 0.2 }"
-   */
-  dimBarProps?: CSSUIProps
-  /**
-   * Props for the background of bars.
-   */
-  barBackgroundProps?: CSSUIProps
-  /**
-   * Props for the active bars.
-   */
-  activeBarProps?: CSSUIProps
   /**
    * Chart orientation.
    *
@@ -83,22 +73,28 @@ export const useBarChart = ({
   data,
   series,
   type = "default",
-  barProps: _barProps = {},
-  barBackgroundProps: _barBackgroundProps = {},
-  dimBarProps = { fillOpacity: 0.1, strokeOpacity: 0 },
-  activeBarProps: _activeBarProps = {},
-  barChartProps: _barChartProps = {},
+  // barProps: _barProps = {},
+  // barBackgroundProps: _barBackgroundProps = {},
+  // dimBarProps = { fillOpacity: 0.1, strokeOpacity: 0 },
+  // activeBarProps: _activeBarProps = {},
+  // barChartProps: _barChartProps = {},
   layoutType = "horizontal",
   referenceLineProps = [],
   fillOpacity = 1,
   styles,
+  ...rest
 }: UseBarChartProps) => {
   const uuid = useId()
   const { theme } = useTheme()
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
-
   const stacked = type === "stacked" || type === "percent"
   const shouldHighlight = highlightedArea !== null
+  const {
+    activeBar = {},
+    background = {},
+    dimBar,
+    ...computedBarProps
+  } = rest.barProps ?? {}
 
   const barColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -130,72 +126,111 @@ export const useBarChart = ({
     ]
   }, [barColors, fillOpacity, referenceLineColors])
 
-  const [barChartProps, barChartClassName] = getComponentProps<Dict, string>(
-    [_barChartProps, barChartProperties],
-    styles.barChart,
-  )(theme)
-  const barClassName = getClassName(styles.bar, _barProps)(theme)
-  const barBackgroundClassName = getClassName(
-    styles.barBackground,
-    _barBackgroundProps,
-  )(theme)
-  const activeBarClassName = getClassName(
-    styles.activeBar,
-    _activeBarProps,
-  )(theme)
+  const [barChartProps, barChartClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.barChartProps ?? {}, barChartProperties],
+        styles.barChart,
+      )(theme),
+    [rest.barChartProps, styles.barChart, theme],
+  )
+
+  const [barProps, barClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [computedBarProps, barProperties],
+        styles.bar,
+      )(theme),
+    [computedBarProps, styles.bar, theme],
+  )
+
+  const [dimBarProps, dimBarClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([
+        dimBar ?? { fillOpacity: 0.1, strokeOpacity: 0 },
+        barProperties,
+      ])(theme),
+    [dimBar, theme],
+  )
+
+  const [activeBarProps, activeBarClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [activeBar, barProperties],
+        styles.activeBar,
+      )(theme),
+    [activeBar, styles.activeBar, theme],
+  )
+
+  const [backgroundProps, backgroundClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [background, backgroundProperties],
+        styles.background,
+      )(theme),
+    [background, styles.background, theme],
+  )
 
   const barPropsList = useMemo(
     () =>
       series.map((props, index) => {
         const {
           dataKey,
-          activeBar: activeBarProp = {},
-          background: backgroundProp = {},
+          activeBar = {},
+          background = {},
+          dimBar = {},
           ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-bar-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
-
+        const computedDimBar = { ...dimBarProps, ...dimBar }
         const resolvedProps = {
           fillOpacity: "var(--ui-fill-opacity)",
           strokeOpacity: 1,
+          ...barProps,
           ...computedProps,
-          ...(dimmed ? dimBarProps : {}),
+          ...(dimmed ? computedDimBar : {}),
         }
+
         const [rest, className] = getComponentProps<Dict, string>(
           [resolvedProps, barProperties],
           barClassName,
+          dimmed ? dimBarClassName : undefined,
         )(theme)
 
-        const activeBar = {
-          className: getClassName(activeBarClassName, activeBarProp)(theme),
-        }
+        const computedActiveBar = { ...activeBarProps, ...activeBar }
 
-        const background = {
-          className: getClassName(
-            barBackgroundClassName,
-            backgroundProp,
-          )(theme),
-          // TODO:
-          // radiusをどうするか。また、その他のpropsはどうするか。型定義が間違っている。
-        }
+        const resolvedActiveBar = getComponentProps<Dict, string>(
+          [computedActiveBar, barProperties],
+          activeBarClassName,
+        )(theme, true)
+
+        const computedBackground = { ...backgroundProps, ...background }
+
+        const resolvedBackground = getComponentProps<Dict, string>(
+          [computedBackground, backgroundProperties],
+          backgroundClassName,
+        )(theme, true)
 
         return {
-          id,
-          dimmed,
-          className,
-          activeBar,
-          background,
           ...rest,
+          id,
+          className,
+          activeBar: resolvedActiveBar,
+          background: resolvedBackground,
           color,
           dataKey,
         }
       }),
     [
       activeBarClassName,
-      barBackgroundClassName,
+      activeBarProps,
+      backgroundClassName,
+      backgroundProps,
       barClassName,
+      barProps,
+      dimBarClassName,
       dimBarProps,
       highlightedArea,
       series,
@@ -210,7 +245,7 @@ export const useBarChart = ({
     {
       index: number
     },
-    Omit<BarProps, "ref">
+    Omit<Recharts.BarProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
       const { id, className, activeBar, background, color, dataKey, ...rest } =
@@ -228,17 +263,17 @@ export const useBarChart = ({
         stroke: color,
         isAnimationActive: false,
         stackId: stacked ? "stack" : undefined,
-        ...(props as Omit<BarProps, "dataKey">),
+        ...(props as Omit<Recharts.BarProps, "dataKey">),
         ...rest,
-      } as BarProps
+      } as Recharts.BarProps
     },
     [barPropsList, stacked],
   )
 
   const getBarChartProps: ChartPropGetter<
     "div",
-    ComponentPropsWithoutRef<typeof BarChart>,
-    ComponentPropsWithoutRef<typeof BarChart>
+    ComponentPropsWithoutRef<typeof Recharts.BarChart>,
+    ComponentPropsWithoutRef<typeof Recharts.BarChart>
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,

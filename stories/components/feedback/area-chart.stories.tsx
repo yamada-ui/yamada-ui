@@ -821,8 +821,16 @@ export const customDots: Story = () => {
       data={data}
       series={series}
       dataKey="name"
-      dotProps={{ r: 8 }}
-      activeDotProps={{ r: 7, strokeWidth: 1, fill: ["white", "black"] }}
+      areaProps={{
+        dot: {
+          r: 8,
+        },
+        activeDot: {
+          r: 7,
+          strokeWidth: 1,
+          fill: ["white", "black"],
+        },
+      }}
     />
   )
 }

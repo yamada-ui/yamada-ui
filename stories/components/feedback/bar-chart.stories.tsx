@@ -380,7 +380,12 @@ export const withLegend: Story = () => {
       series={series}
       dataKey="month"
       withLegend
-      dimBarProps={{ fillOpacity: 0, strokeOpacity: 1 }}
+      barProps={{
+        dimBar: {
+          fillOpacity: 0,
+          strokeOpacity: 1,
+        },
+      }}
     />
   )
 }

@@ -7,14 +7,13 @@ import { useCallback, useId, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import type { AreaGradientProps } from "./area-chart-gradient"
 import type { AreaSplitProps } from "./area-chart-split"
-import { getClassName, getComponentProps } from "./chart-utils"
+import { getComponentProps } from "./chart-utils"
 import type {
   ChartCurveType,
-  AreaChartSeries,
+  AreaProps,
   AreaChartType,
   AreaChartProps,
   ChartPropGetter,
-  DotProps,
   ChartLayoutType,
   ReferenceLineProps,
   RequiredChartPropGetter,
@@ -33,9 +32,13 @@ export type UseAreaChartOptions = {
   /**
    * An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array.
    */
-  series: AreaChartSeries[]
+  series: AreaProps[]
   /**
-   * Controls how chart areas are positioned relative to each other
+   * Props for the areas.
+   */
+  areaProps?: Partial<AreaProps>
+  /**
+   * Controls how chart areas are positioned relative to each other.
    *
    * @default `default`
    */
@@ -44,26 +47,6 @@ export type UseAreaChartOptions = {
    * Props passed down to recharts `AreaChart` component.
    */
   areaChartProps?: AreaChartProps
-  /**
-   * Props passed down to dim areas.
-   *
-   * @default "{ fillOpacity: 0, strokeOpacity: 0.3 }"
-   */
-  dimAreaProps?: Omit<Partial<AreaChartSeries>, "dataKey" | "dot" | "activeDot">
-  /**
-   * Props passed down to all dots. Ignored if `withDots={false}` is set.
-   */
-  dotProps?: DotProps
-  /**
-   * Props passed down to dim dots.
-   *
-   * @default "{ fillOpacity: 0, strokeOpacity: 0 }"
-   */
-  dimDotProps?: DotProps
-  /**
-   * Props passed down to all active dots. Ignored if `withDots={false}` is set.
-   */
-  activeDotProps?: DotProps
   /**
    * Chart orientation.
    *
@@ -135,11 +118,6 @@ export const useAreaChart = ({
   data,
   series,
   type,
-  areaChartProps: _areaChartProps = {},
-  activeDotProps: _activeDotProps = {},
-  dimAreaProps = { fillOpacity: 0, strokeOpacity: 0.3 },
-  dotProps: _dotProps = {},
-  dimDotProps = { fillOpacity: 0, strokeOpacity: 0 },
   layoutType = "horizontal",
   withGradient: withGradientProp,
   withDots = true,
@@ -152,11 +130,11 @@ export const useAreaChart = ({
   splitOffset,
   referenceLineProps,
   styles,
+  ...rest
 }: UseAreaChartProps) => {
   const uuid = useId()
   const { theme } = useTheme()
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
-
   const splitId = `${uuid}-split`
   const stacked = type === "stacked" || type === "percent"
   const withGradient =
@@ -164,6 +142,13 @@ export const useAreaChart = ({
       ? withGradientProp
       : type === "default"
   const shouldHighlight = highlightedArea !== null
+  const {
+    dot = {},
+    activeDot = {},
+    dimDot,
+    dimArea,
+    ...computedAreaProps
+  } = rest.areaProps ?? {}
 
   const areaColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -209,22 +194,56 @@ export const useAreaChart = ({
     ]
   }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
 
-  const [areaChartProps, areaChartClassName] = getComponentProps<Dict, string>(
-    [_areaChartProps, areaChartProperties],
-    styles.areaChart,
-  )(theme)
+  const [areaChartProps, areaChartClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.areaChartProps ?? {}, areaChartProperties],
+        styles.areaChart,
+      )(theme),
+    [rest.areaChartProps, styles.areaChart, theme],
+  )
 
-  const [activeDotProps, _activeDotClassName] = getComponentProps<Dict, string>(
-    [_activeDotProps, dotProperties],
-    styles.activeDot,
-  )(theme)
+  const [areaProps, areaClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [computedAreaProps, areaProperties],
+        styles.area,
+      )(theme),
+    [computedAreaProps, styles.area, theme],
+  )
 
-  const [dotProps, _dotClassName] = getComponentProps<Dict, string>(
-    [_dotProps, dotProperties],
-    styles.dot,
-  )(theme)
+  const [dimAreaProps, dimAreaClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([
+        dimArea ?? { fillOpacity: 0, strokeOpacity: 0.3 },
+        areaProperties,
+      ])(theme),
+    [dimArea, theme],
+  )
 
-  const areaClassName = getClassName(styles.area)(theme)
+  const [dotProps, dotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([dot, dotProperties], styles.dot)(theme),
+    [dot, styles.dot, theme],
+  )
+
+  const [activeDotProps, activeDotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [activeDot, dotProperties],
+        styles.activeDot,
+      )(theme),
+    [activeDot, styles.activeDot, theme],
+  )
+
+  const [dimDotProps, dimDotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([
+        dimDot ?? { fillOpacity: 0, strokeOpacity: 0 },
+        dotProperties,
+      ])(theme),
+    [dimDot, theme],
+  )
 
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {
@@ -247,77 +266,87 @@ export const useAreaChart = ({
       series.map((props, index) => {
         const {
           dataKey,
-          activeDot: _activeDot = {},
-          dot: _dot = {},
+          dot = {},
+          activeDot = {},
+          dimDot = {},
+          dimArea = {},
           strokeDasharray,
           ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
         const color = `var(--ui-area-${index})`
         const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const computedDimArea = { ...dimAreaProps, ...dimArea }
 
         const resolvedProps = {
           fillOpacity: 1,
           strokeOpacity: 1,
+          ...areaProps,
           ...computedProps,
-          ...(dimmed ? dimAreaProps : {}),
+          ...(dimmed ? computedDimArea : {}),
         }
-        const [rest, className] = getComponentProps<Dict, string>(
+        const rest = getComponentProps<Dict, string>(
           [resolvedProps, areaProperties],
           areaClassName,
-        )(theme)
+          dimmed ? dimAreaClassName : undefined,
+        )(theme, true)
 
-        let activeDot: Recharts.DotProps | boolean
+        let resolvedActiveDot: Recharts.DotProps | boolean
 
         if (withActiveDots) {
-          const [rest, activeDotClassName] = getComponentProps(
-            [_activeDot, dotProperties],
-            _activeDotClassName,
+          const computedActiveDot = { ...activeDotProps, ...activeDot }
+
+          const [rest, className] = getComponentProps(
+            [computedActiveDot, dotProperties],
+            activeDotClassName,
           )(theme)
 
-          activeDot = {
-            className: cx("ui-area-chart__active-dot", activeDotClassName),
+          resolvedActiveDot = {
+            className: cx("ui-area-chart__active-dot", className),
             stroke: color,
             r: 4,
-            ...activeDotProps,
             ...rest,
           } as Recharts.DotProps
         } else {
-          activeDot = false
+          resolvedActiveDot = false
         }
 
-        let dot: Recharts.DotProps | boolean
+        let resolvedDot: Recharts.DotProps | boolean
 
         if (withDots) {
-          const resolvedDot = { ..._dot, ...(dimmed ? dimDotProps : {}) }
-          const [rest, dotClassName] = getComponentProps(
-            [resolvedDot, dotProperties],
-            _dotClassName,
-          )(theme)
-
-          dot = {
-            className: cx("ui-area-chart__dot", dotClassName),
-            fill: color,
+          const computedDimDot = { ...dimDotProps, ...dimDot }
+          const computedDot = {
             fillOpacity: 1,
             strokeWidth: 2,
-            r: 4,
             ...dotProps,
+            ...dot,
+            ...(dimmed ? computedDimDot : {}),
+          }
+
+          const [rest, className] = getComponentProps(
+            [computedDot, dotProperties],
+            dotClassName,
+            dimmed ? dimDotClassName : undefined,
+          )(theme)
+
+          resolvedDot = {
+            className: cx("ui-area-chart__dot", className),
+            fill: color,
+            r: 4,
             ...rest,
           } as Recharts.DotProps
         } else {
-          dot = false
+          resolvedDot = false
         }
 
         return {
-          id,
-          dimmed,
-          className,
           ...rest,
+          id,
           color,
           strokeDasharray,
           dataKey,
-          activeDot,
-          dot,
+          activeDot: resolvedActiveDot,
+          dot: resolvedDot,
         }
       }),
     [
@@ -326,15 +355,18 @@ export const useAreaChart = ({
       shouldHighlight,
       highlightedArea,
       dimAreaProps,
+      dimDotProps,
+      areaProps,
       areaClassName,
+      dimAreaClassName,
       theme,
       withActiveDots,
       withDots,
-      _activeDotClassName,
       activeDotProps,
-      dimDotProps,
-      _dotClassName,
+      activeDotClassName,
       dotProps,
+      dotClassName,
+      dimDotClassName,
     ],
   )
 

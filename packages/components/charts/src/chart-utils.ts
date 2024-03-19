@@ -4,7 +4,7 @@ import type { Dict } from "@yamada-ui/utils"
 import { cx, isString, splitObject } from "@yamada-ui/utils"
 
 export const getClassName =
-  (...styles: (Dict | string)[]) =>
+  (...styles: (Dict | string | undefined)[]) =>
   (theme: StyledTheme) =>
     cx(
       ...styles.map((style) =>
@@ -15,11 +15,15 @@ export const getClassName =
 export const getComponentProps =
   <T extends Dict, K extends keyof T>(
     [obj, keys]: [T, K[]],
-    ...props: (Dict | string)[]
+    ...props: (Dict | string | undefined)[]
   ) =>
-  (theme: StyledTheme) => {
+  <P extends boolean = false>(theme: StyledTheme, isContain?: P) => {
     const [pickedProps, omittedProps] = splitObject<T, K>(obj, keys)
     const className = getClassName(...props, omittedProps)(theme)
 
-    return [pickedProps, className] as const
+    return (
+      !isContain ? [pickedProps, className] : { ...pickedProps, className }
+    ) as P extends false
+      ? [{ [P in K]: T[P] }, string]
+      : { [P in K]: T[P] } & { className: string }
   }

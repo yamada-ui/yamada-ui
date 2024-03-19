@@ -300,7 +300,7 @@ export const barProperties: (keyof Omit<Recharts.BarProps, "ref">)[] = [
   "radius",
 ]
 
-export const barBackgroundProperties = ["radius"]
+export const backgroundProperties = ["radius"]
 
 export const lineProperties: (keyof Omit<Recharts.LineProps, "ref">)[] = [
   "type",

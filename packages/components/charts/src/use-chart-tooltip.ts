@@ -38,34 +38,34 @@ export const useChartTooltip = ({
   )
 
   // TODO: replace `className`
-  const tooltipVars: CSSUIProps["var"] = useMemo(
+  const tooltipVars: Required<CSSUIProps>["var"] = useMemo(
     () =>
       [
         {
           __prefix: "ui",
           name: "cursor-fill",
           token: "colors",
-          value: resolvedCursor.fill,
+          value: resolvedCursor.fill!,
         },
         {
           __prefix: "ui",
           name: "cursor-stroke",
           token: "colors",
-          value: resolvedCursor.stroke,
+          value: resolvedCursor.stroke!,
         },
         {
           __prefix: "ui",
           name: "cursor-stroke-width",
           token: "colors",
-          value: resolvedCursor.strokeWidth,
+          value: resolvedCursor.strokeWidth!,
         },
         {
           __prefix: "ui",
           name: "cursor-stroke-dasharray",
           token: "colors",
-          value: resolvedCursor.strokeDasharray,
+          value: resolvedCursor.strokeDasharray!,
         },
-      ] as CSSUIProps["var"],
+      ] as Required<CSSUIProps>["var"],
     [resolvedCursor],
   )
 

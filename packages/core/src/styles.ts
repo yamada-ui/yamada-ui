@@ -5203,6 +5203,8 @@ export type StyleProps = {
     prefersContrast?: "no-preference" | "high" | "low" | "custom"
     prefersReducedMotion?: "no-preference" | "reduce"
     resolution?: StringLiteral
+    minResolution?: StringLiteral
+    maxResolution?: StringLiteral
     scan?: "interlace" | "progressive"
     scripting?: "none" | "initial-only" | "enabled"
     update?: "none" | "slow" | "fast"

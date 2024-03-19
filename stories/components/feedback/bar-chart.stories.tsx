@@ -533,6 +533,79 @@ export const useMixData: Story = () => {
   return <BarChart data={data} series={series} dataKey="month" />
 }
 
+export const withGap: Story = () => {
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+    return months.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarChartSeries[] = useMemo(
+    () => [
+      {
+        dataKey: "Smartphones",
+        color: ["primary.500", "primary.400"],
+        stackId: "a",
+      },
+      {
+        dataKey: "Laptops",
+        color: ["secondary.500", "secondary.400"],
+        stackId: "a",
+      },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  const [props, setProps] = useState({
+    barGap: 4,
+    barCategoryGap: 10,
+  })
+
+  return (
+    <Wrap gap="md" alignItems="flex-start">
+      <BarChart
+        data={data}
+        series={series}
+        dataKey="month"
+        barChartProps={props}
+      />
+
+      <Wrap w="auto">
+        <PropControl
+          component="Slider"
+          items={[
+            {
+              label: "Bar Gap",
+              value: props.barGap,
+              min: 0,
+              max: 50,
+              step: 1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, barGap: value }))
+              },
+            },
+            {
+              label: "Bar Category Gap",
+              value: props.barCategoryGap,
+              min: 0,
+              max: 50,
+              step: 1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, barCategoryGap: value }))
+              },
+            },
+          ]}
+        />
+      </Wrap>
+    </Wrap>
+  )
+}
+
 export const useRangeData: Story = () => {
   const data = useMemo(() => {
     const months = ["January", "February", "March", "April", "May", "June"]

@@ -40,7 +40,7 @@ export const CORE_MEMBERS = [
     },
     icon: "https://avatars.githubusercontent.com/u/33865215?v=4",
     github: "https://github.com/koralle",
-    twitter: "https://twitter.com/koralle-tech",
+    twitter: "https://twitter.com/koralle_tech",
     description: {
       en: "Front-end engineer, likes React and Neovim.",
       ja: "ReactとNeovimが好きなフロントエンドエンジニア。",

@@ -374,20 +374,7 @@ export const withLegend: Story = () => {
     ],
     [],
   )
-  return (
-    <BarChart
-      data={data}
-      series={series}
-      dataKey="month"
-      withLegend
-      barProps={{
-        dimBar: {
-          fillOpacity: 0,
-          strokeOpacity: 1,
-        },
-      }}
-    />
-  )
+  return <BarChart data={data} series={series} dataKey="month" withLegend />
 }
 
 export const withValueFormatter: Story = () => {

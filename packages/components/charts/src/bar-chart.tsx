@@ -33,7 +33,7 @@ import {
   useChartReferenceLine,
   type UseChartReferenceLineOptions,
 } from "./use-chart-reference-line"
-import type { UseChartTooltipProps } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 type BarChartOptions = {
@@ -59,7 +59,7 @@ export type BarChartProps = HTMLUIProps<"div"> &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipProps &
+  UseChartTooltipOptions &
   UseChartLegendProps
 
 export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
@@ -74,9 +74,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     withXAxis,
     withYAxis,
     barProps,
-    dimBarProps,
-    barBackgroundProps,
-    activeBarProps,
     xAxisProps,
     yAxisProps,
     type = "default",
@@ -105,9 +102,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       layoutType,
       barChartProps,
       barProps,
-      dimBarProps,
-      barBackgroundProps,
-      activeBarProps,
       referenceLineProps,
       fillOpacity,
       styles,
@@ -137,12 +131,18 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const { getTooltipProps, tooltipVars } = useChartTooltip({
+  const {
+    tooltipProps: computedTooltipProps,
+    getTooltipProps,
+    tooltipVars,
+  } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
-    valueFormatter,
+    styles,
   })
-  const { getLegendProps } = useChartLegend({ legendProps })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
+  })
 
   const bars = useMemo(
     () =>
@@ -199,6 +199,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
                     className="ui-bar-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
                   />
                 )}
                 {...getLegendProps()}
@@ -214,6 +215,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
                     payload={payload}
                     valueFormatter={valueFormatter}
                     unit={unit}
+                    {...computedTooltipProps}
                   />
                 )}
                 {...getTooltipProps()}

@@ -34,7 +34,7 @@ import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
-import type { UseChartTooltipProps } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 type AreaChartOptions = {
@@ -60,7 +60,7 @@ export type AreaChartProps = HTMLUIProps<"div"> &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipProps &
+  UseChartTooltipOptions &
   UseChartLegendProps
 
 export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
@@ -90,10 +90,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     legendProps,
     data,
     areaChartProps,
-    activeDotProps,
-    dimAreaProps,
-    dotProps,
-    dimDotProps,
+    areaProps,
     withGradient,
     withDots,
     withActiveDots,
@@ -120,10 +117,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     referenceLineProps,
     data,
     areaChartProps,
-    activeDotProps,
-    dimAreaProps,
-    dotProps,
-    dimDotProps,
+    areaProps,
     withGradient,
     withDots,
     withActiveDots,
@@ -160,12 +154,18 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const { getTooltipProps, tooltipVars } = useChartTooltip({
+  const {
+    tooltipProps: computedTooltipProps,
+    getTooltipProps,
+    tooltipVars,
+  } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
-    valueFormatter,
+    styles,
   })
-  const { getLegendProps } = useChartLegend({ legendProps })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
+  })
 
   const areas = useMemo(
     () =>
@@ -230,6 +230,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     className="ui-area-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
                   />
                 )}
                 {...getLegendProps()}
@@ -245,6 +246,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     payload={payload}
                     valueFormatter={valueFormatter}
                     unit={unit}
+                    {...computedTooltipProps}
                   />
                 )}
                 {...getTooltipProps()}

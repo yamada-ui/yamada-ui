@@ -157,29 +157,35 @@ export const useLineChart = ({
     [rest.lineChartProps, styles.lineChart, theme],
   )
 
-  const [lineProps, lineClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>(
-        [computedLineProps, lineProperties],
-        styles.line,
-      )(theme),
-    [computedLineProps, styles.line, theme],
-  )
+  const [lineProps, lineClassName] = useMemo(() => {
+    const resolvedLineProps = {
+      fillOpacity: "var(--ui-fill-opacity)",
+      strokeOpacity: "var(--ui-fill-opacity)",
+      ...computedLineProps,
+    }
 
-  const [dimLineProps, dimLineClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>([
-        dimLine ?? { fillOpacity: 0, strokeOpacity: 0.3 },
-        lineProperties,
-      ])(theme),
-    [dimLine, theme],
-  )
+    return getComponentProps<Dict, string>(
+      [resolvedLineProps, lineProperties],
+      styles.line,
+    )(theme)
+  }, [computedLineProps, styles.line, theme])
 
-  const [dotProps, dotClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>([dot, dotProperties], styles.dot)(theme),
-    [dot, styles.dot, theme],
-  )
+  const [dimLineProps, dimLineClassName] = useMemo(() => {
+    const resolvedDimLine = { fillOpacity: 0, strokeOpacity: 0.3, ...dimLine }
+
+    return getComponentProps<Dict, string>([resolvedDimLine, lineProperties])(
+      theme,
+    )
+  }, [dimLine, theme])
+
+  const [dotProps, dotClassName] = useMemo(() => {
+    const resolvedDot = { fillOpacity: 1, strokeOpacity: 1, ...dot }
+
+    return getComponentProps<Dict, string>(
+      [resolvedDot, dotProperties],
+      styles.dot,
+    )(theme)
+  }, [dot, styles.dot, theme])
 
   const [activeDotProps, activeDotClassName] = useMemo(
     () =>
@@ -190,14 +196,17 @@ export const useLineChart = ({
     [activeDot, styles.activeDot, theme],
   )
 
-  const [dimDotProps, dimDotClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>([
-        dimDot ?? { fillOpacity: 0, strokeOpacity: 0 },
-        dotProperties,
-      ])(theme),
-    [dimDot, theme],
-  )
+  const [dimDotProps, dimDotClassName] = useMemo(() => {
+    const resolvedDimDot = {
+      fillOpacity: 0,
+      strokeOpacity: 0,
+      ...dimDot,
+    }
+
+    return getComponentProps<Dict, string>([resolvedDimDot, dotProperties])(
+      theme,
+    )
+  }, [dimDot, theme])
 
   const linePropList = useMemo(
     () =>
@@ -214,8 +223,6 @@ export const useLineChart = ({
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimLine = { ...dimLineProps, ...dimLine }
         const resolvedProps = {
-          fillOpacity: "var(--ui-fill-opacity)",
-          strokeOpacity: "var(--ui-fill-opacity)",
           ...lineProps,
           ...computedProps,
           ...(dimmed ? computedDimLine : {}),
@@ -253,8 +260,6 @@ export const useLineChart = ({
         if (withDots) {
           const computedDimDot = { ...dimDotProps, ...dimDot }
           const computedDot = {
-            fillOpacity: 1,
-            strokeOpacity: 1,
             ...dotProps,
             ...dot,
             ...(dimmed ? computedDimDot : {}),

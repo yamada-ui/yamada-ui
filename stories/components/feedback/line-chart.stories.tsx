@@ -6,7 +6,7 @@ import type {
   ChartCurveType,
   ChartLayoutType,
   LineChartProps,
-  LineChartSeries,
+  LineProps,
 } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
 import {
@@ -46,7 +46,7 @@ export const basic: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -72,7 +72,7 @@ export const custom: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -322,7 +322,7 @@ export const withSize: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -353,7 +353,7 @@ export const withDash: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       {
         dataKey: "uv",
@@ -379,7 +379,7 @@ export const withConnectNulls: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
     [],
   )
@@ -409,7 +409,7 @@ export const withSync: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -450,7 +450,7 @@ export const withReferenceLine: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -486,7 +486,7 @@ export const withLegend: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -512,7 +512,7 @@ export const withValueFormatter: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -545,7 +545,7 @@ export const withStrokeDasharray: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -579,7 +579,7 @@ export const withUnit: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -613,7 +613,7 @@ export const customAxis: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -653,7 +653,7 @@ export const customTooltip: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -719,7 +719,7 @@ export const customDots: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       {
         dataKey: "uv",
@@ -762,7 +762,7 @@ export const customLegend: Story = () => {
     [],
   )
 
-  const series: LineChartSeries[] = useMemo(
+  const series: LineProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -777,7 +777,7 @@ export const customLegend: Story = () => {
       series={series}
       dataKey="name"
       withLegend
-      legendProps={{ verticalAlign: "bottom" }}
+      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
     />
   )
 }

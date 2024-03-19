@@ -145,7 +145,7 @@ describe.skip("<Resizable />", () => {
   })
 
   describe("Enable Collapsing", () => {
-    test("When `collapesible = true`, function `onCollapse` should be called", () => {
+    test("When `collapsible = true`, function `onCollapse` should be called", () => {
       const controlRef = createRef<ResizableItemControl>()
 
       const onCollapse = vi.fn()
@@ -259,7 +259,7 @@ describe.skip("<Resizable />", () => {
   })
 
   describe("Handle Resize Events", () => {
-    test("When Resize Event is occured, `onResize` function should be called", () => {
+    test("When Resize Event is occurred, `onResize` function should be called", () => {
       const onResize = vi.fn()
 
       const { container } = render(

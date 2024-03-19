@@ -1927,6 +1927,12 @@
       "description": "If `true`, scrolling will be disabled on the `body` when the modal opens."
     },
     "className": { "type": "string", "required": false },
+    "closeOnDrag": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true` then the drawer will close on drag."
+    },
     "closeOnEsc": {
       "type": "boolean",
       "defaultValue": true,
@@ -2596,10 +2602,10 @@
       "required": false
     },
     "placement": {
-      "type": "UIValue<\n  | \"center\"\n  | \"bottom\"\n  | \"left\"\n  | \"right\"\n  | \"top\"\n  | \"top-left\"\n  | \"top-right\"\n  | \"bottom-left\"\n  | \"bottom-right\"\n> &\n  UIValue<\"bottom\" | \"left\" | \"right\" | \"top\">",
-      "defaultValue": "'center'",
+      "type": "UIValue<\"bottom\" | \"left\" | \"right\" | \"top\">",
+      "defaultValue": "'right'",
       "required": false,
-      "description": "The placement of the modal.\n\n\nThe placement of the drawer."
+      "description": "The placement of the drawer."
     },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",

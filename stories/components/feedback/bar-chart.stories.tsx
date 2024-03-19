@@ -3,8 +3,8 @@ import type {
   ChartTooltip,
   BarChartSeries,
   BarChartProps,
-  LayoutType,
-  AxisType,
+  ChartLayoutType,
+  ChartAxisType,
   BarChartType,
 } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
@@ -127,7 +127,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    layoutType: value as LayoutType,
+                    layoutType: value as ChartLayoutType,
                   }))
                 },
               },
@@ -149,7 +149,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    tickLine: value as AxisType,
+                    tickLine: value as ChartAxisType,
                   }))
                 },
               },
@@ -165,7 +165,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    gridAxis: value as AxisType,
+                    gridAxis: value as ChartAxisType,
                   }))
                 },
               },

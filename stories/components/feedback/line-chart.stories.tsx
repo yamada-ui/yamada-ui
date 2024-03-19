@@ -1,10 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { LineChart } from "@yamada-ui/charts"
 import type {
-  AxisType,
+  ChartAxisType,
   ChartTooltip,
-  CurveType,
-  LayoutType,
+  ChartCurveType,
+  ChartLayoutType,
   LineChartProps,
   LineChartSeries,
 } from "@yamada-ui/charts"
@@ -135,7 +135,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    curveType: value as CurveType,
+                    curveType: value as ChartCurveType,
                   }))
                 },
               },
@@ -150,7 +150,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    layoutType: value as LayoutType,
+                    layoutType: value as ChartLayoutType,
                   }))
                 },
               },
@@ -172,7 +172,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    tickLine: value as AxisType,
+                    tickLine: value as ChartAxisType,
                   }))
                 },
               },
@@ -188,7 +188,7 @@ export const custom: Story = () => {
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,
-                    gridAxis: value as AxisType,
+                    gridAxis: value as ChartAxisType,
                   }))
                 },
               },

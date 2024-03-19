@@ -121,14 +121,14 @@ export const useBarChart = ({
     ]
   }, [barColors, fillOpacity, referenceLineColors])
 
-  const [barChartProps, barChartClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>(
-        [rest.barChartProps ?? {}, barChartProperties],
-        styles.barChart,
-      )(theme),
-    [rest.barChartProps, styles.barChart, theme],
-  )
+  const [barChartProps, barChartClassName] = useMemo(() => {
+    const resolvedBarChartProps = { barGap: 8, ...rest.barChartProps }
+
+    return getComponentProps<Dict, string>(
+      [resolvedBarChartProps, barChartProperties],
+      styles.barChart,
+    )(theme)
+  }, [rest.barChartProps, styles.barChart, theme])
 
   const [barProps, barClassName] = useMemo(() => {
     const resolvedBarProps = {

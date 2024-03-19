@@ -1468,37 +1468,37 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
    */
-  accentColor?: Token<CSS.Property.AccentColor, "colors">
+  accentColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `accent-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
    */
-  accent?: Token<CSS.Property.AccentColor, "colors">
+  accent?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `align-content` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
    */
-  alignContent?: Token<CSS.Property.AlignContent>
+  alignContent?: Token<CSS.Property.any>
   /**
    * The CSS `align-items` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
    */
-  alignItems?: Token<CSS.Property.AlignItems>
+  alignItems?: Token<CSS.Property.any>
   /**
    * The CSS `align-self` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
    */
-  alignSelf?: Token<CSS.Property.AlignSelf>
+  alignSelf?: Token<CSS.Property.any>
   /**
    * The CSS `align-tracks` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-tracks
    */
-  alignTracks?: Token<CSS.Property.AlignTracks>
+  alignTracks?: Token<CSS.Property.any>
   /**
    * The CSS `all` property.
    *
@@ -1510,823 +1510,775 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation
    */
-  animation?: Token<CSS.Property.Animation, "animations">
+  animation?: Token<CSS.Property.any, "animations">
   /**
    * The CSS `animation-composition` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-composition
    */
-  animationComposition?: Token<CSS.Property.AnimationComposition>
+  animationComposition?: Token<CSS.Property.any>
   /**
    * The CSS `animation-delay` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
    */
-  animationDelay?: Token<CSS.Property.AnimationDelay>
+  animationDelay?: Token<CSS.Property.any>
   /**
    * The CSS `animation-direction` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
    */
-  animationDirection?: Token<CSS.Property.AnimationDirection>
+  animationDirection?: Token<CSS.Property.any>
   /**
    * The CSS `animation-duration` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
    */
-  animationDuration?: Token<
-    CSS.Property.AnimationDuration,
-    "transitionDuration"
-  >
+  animationDuration?: Token<CSS.Property.any, "transitionDuration">
   /**
    * The CSS `animation-fill-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
    */
-  animationFillMode?: Token<CSS.Property.AnimationFillMode>
+  animationFillMode?: Token<CSS.Property.any>
   /**
    * The CSS `animation-iteration-count` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
    */
-  animationIterationCount?: Token<CSS.Property.AnimationIterationCount>
+  animationIterationCount?: Token<CSS.Property.any>
   /**
    * The CSS `animation-name` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
    */
-  animationName?: Token<CSS.Property.AnimationName>
+  animationName?: Token<CSS.Property.any>
   /**
    * The CSS `animation-play-state` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
    */
-  animationPlayState?: Token<CSS.Property.AnimationPlayState>
+  animationPlayState?: Token<CSS.Property.any>
   /**
    * The CSS `animation-range` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range
    */
-  animationRange?: Token<CSS.Property.AnimationRange>
+  animationRange?: Token<CSS.Property.any>
   /**
    * The CSS `animation-range-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range-end
    */
-  animationRangeEnd?: Token<CSS.Property.AnimationRangeEnd>
+  animationRangeEnd?: Token<CSS.Property.any>
   /**
    * The CSS `animation-range-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range-start
    */
-  animationRangeStart?: Token<CSS.Property.AnimationRangeStart>
+  animationRangeStart?: Token<CSS.Property.any>
   /**
    * The CSS `animation-timeline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
    */
-  animationTimeline?: Token<CSS.Property.AnimationTimeline>
+  animationTimeline?: Token<CSS.Property.any>
   /**
    * The CSS `animation-timing-function` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
    */
-  animationTimingFunction?: Token<
-    CSS.Property.AnimationTimingFunction,
-    "transitionEasing"
-  >
+  animationTimingFunction?: Token<CSS.Property.any, "transitionEasing">
   /**
    * The CSS `appearance` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
    */
-  appearance?: Token<CSS.Property.Appearance>
+  appearance?: Token<CSS.Property.any>
   /**
    * The CSS `aspect-ratio` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
    */
-  aspectRatio?: Token<CSS.Property.AspectRatio>
+  aspectRatio?: Token<CSS.Property.any>
   /**
    * The CSS `backface-visibility` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility
    */
-  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility | number, "sizes">
+  backfaceVisibility?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `background` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
    */
-  background?: Token<CSS.Property.Background, "colors">
+  background?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `background` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
    */
-  bg?: Token<CSS.Property.Background, "colors">
+  bg?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `background-attachment` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
    */
-  backgroundAttachment?: Token<CSS.Property.BackgroundAttachment>
+  backgroundAttachment?: Token<CSS.Property.any>
   /**
    * The CSS `background-attachment` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
    */
-  bgAttachment?: Token<CSS.Property.BackgroundAttachment>
+  bgAttachment?: Token<CSS.Property.any>
   /**
    * The CSS `background-blend-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
    */
-  backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode>
+  backgroundBlendMode?: Token<CSS.Property.any>
   /**
    * The CSS `background-blend-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
    */
-  bgBlendMode?: Token<CSS.Property.BackgroundBlendMode>
+  bgBlendMode?: Token<CSS.Property.any>
   /**
    * The CSS `background-clip` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
    */
-  backgroundClip?: Token<CSS.Property.BackgroundClip>
+  backgroundClip?: Token<CSS.Property.any>
   /**
    * The CSS `background-clip` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
    */
-  bgClip?: Token<CSS.Property.BackgroundClip>
+  bgClip?: Token<CSS.Property.any>
   /**
    * The CSS `background-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
    */
-  backgroundColor?: Token<CSS.Property.BackgroundColor, "colors">
+  backgroundColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `background-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
    */
-  bgColor?: Token<CSS.Property.BackgroundColor, "colors">
+  bgColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `background-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
    */
-  backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  backgroundImage?: Token<CSS.Property.any, "gradients">
   /**
    * The CSS `background-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
    */
-  bgImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgImage?: Token<CSS.Property.any, "gradients">
   /**
    * The CSS `background-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
    */
-  bgImg?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgImg?: Token<CSS.Property.any, "gradients">
   /**
    * The CSS `background-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
    */
-  bgGradient?: Token<CSS.Property.BackgroundImage, "gradients">
+  bgGradient?: Token<CSS.Property.any, "gradients">
   /**
    * The CSS `background-origin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
    */
-  backgroundOrigin?: Token<CSS.Property.BackgroundOrigin>
+  backgroundOrigin?: Token<CSS.Property.any>
   /**
    * The CSS `background-origin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
    */
-  bgOrigin?: Token<CSS.Property.BackgroundOrigin>
+  bgOrigin?: Token<CSS.Property.any>
   /**
    * The CSS `background-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
    */
-  backgroundPosition?: Token<CSS.Property.BackgroundPosition>
+  backgroundPosition?: Token<CSS.Property.any>
   /**
    * The CSS `background-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
    */
-  bgPosition?: Token<CSS.Property.BackgroundPosition>
+  bgPosition?: Token<CSS.Property.any>
   /**
    * The CSS `background-position-x` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
    */
-  backgroundPositionX?: Token<CSS.Property.BackgroundPositionX>
+  backgroundPositionX?: Token<CSS.Property.any>
   /**
    * The CSS `background-position-x` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
    */
-  bgPositionX?: Token<CSS.Property.BackgroundPositionX>
+  bgPositionX?: Token<CSS.Property.any>
   /**
    * The CSS `background-position-x` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
    */
-  bgPosX?: Token<CSS.Property.BackgroundPositionX>
+  bgPosX?: Token<CSS.Property.any>
   /**
    * The CSS `background-position-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
    */
-  backgroundPositionY?: Token<CSS.Property.BackgroundPositionY>
+  backgroundPositionY?: Token<CSS.Property.any>
   /**
    * The CSS `background-position-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
    */
-  bgPositionY?: Token<CSS.Property.BackgroundPositionY>
+  bgPositionY?: Token<CSS.Property.any>
   /**
    * The CSS `background-position-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
    */
-  bgPosY?: Token<CSS.Property.BackgroundPositionY>
+  bgPosY?: Token<CSS.Property.any>
   /**
    * The CSS `background-repeat` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
    */
-  backgroundRepeat?: Token<CSS.Property.BackgroundRepeat>
+  backgroundRepeat?: Token<CSS.Property.any>
   /**
    * The CSS `background-repeat` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
    */
-  bgRepeat?: Token<CSS.Property.BackgroundRepeat>
+  bgRepeat?: Token<CSS.Property.any>
   /**
    * The CSS `background-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
    */
-  backgroundSize?: Token<CSS.Property.BackgroundSize>
+  backgroundSize?: Token<CSS.Property.any>
   /**
    * The CSS `background-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
    */
-  bgSize?: Token<CSS.Property.BackgroundSize>
+  bgSize?: Token<CSS.Property.any>
   /**
    * The CSS `block-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/block-size
    */
-  blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
+  blockSize?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `border` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border
    */
-  border?: Token<CSS.Property.Border | number, "borders">
+  border?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block
    */
-  borderBlock?: Token<CSS.Property.BorderBlock | number, "borders">
+  borderBlock?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-block-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-color
    */
-  borderBlockColor?: Token<CSS.Property.BorderBlockColor, "colors">
+  borderBlockColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-block-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end
    */
-  borderBlockEnd?: Token<CSS.Property.BorderBlockEnd | number, "borders">
+  borderBlockEnd?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-block-end-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-color
    */
-  borderBlockEndColor?: Token<CSS.Property.BorderBlockEndColor, "colors">
+  borderBlockEndColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-block-end-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-style
    */
-  borderBlockEndStyle?: Token<CSS.Property.BorderBlockEndStyle>
+  borderBlockEndStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-block-end-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-width
    */
-  borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number>
+  borderBlockEndWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-block-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start
    */
-  borderBlockStart?: Token<CSS.Property.BorderBlockStart | number, "borders">
+  borderBlockStart?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-block-start-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-color
    */
-  borderBlockStartColor?: Token<CSS.Property.BorderBlockStartColor, "colors">
+  borderBlockStartColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-block-start-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-style
    */
-  borderBlockStartStyle?: Token<CSS.Property.BorderBlockStartStyle>
+  borderBlockStartStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-block-start-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-width
    */
-  borderBlockStartWidth?: Token<CSS.Property.BorderBlockStartWidth | number>
+  borderBlockStartWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-block-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-style
    */
-  borderBlockStyle?: Token<CSS.Property.BorderBlockStyle>
+  borderBlockStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-block-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-width
    */
-  borderBlockWidth?: Token<CSS.Property.BorderBlockWidth | number>
+  borderBlockWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
    */
-  borderBottom?: Token<CSS.Property.BorderBottom | number, "borders">
+  borderBottom?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-bottom-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
    */
-  borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
+  borderBottomColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-bottom-left-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
    */
-  borderBottomLeftRadius?: Token<
-    CSS.Property.BorderBottomLeftRadius | number,
-    "radii"
-  >
+  borderBottomLeftRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-bottom-left-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
    */
-  roundedBottomLeft?: Token<
-    CSS.Property.BorderBottomLeftRadius | number,
-    "radii"
-  >
+  roundedBottomLeft?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-bottom-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRightRadius?: Token<
-    CSS.Property.BorderBottomRightRadius | number,
-    "radii"
-  >
+  borderBottomRightRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-bottom-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottomRight?: Token<
-    CSS.Property.BorderBottomRightRadius | number,
-    "radii"
-  >
+  roundedBottomRight?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-bottom-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
    */
-  borderBottomStyle?: Token<CSS.Property.BorderBottomStyle>
+  borderBottomStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-bottom-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
    */
-  borderBottomWidth?: Token<CSS.Property.BorderBottomWidth | number>
+  borderBottomWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-collapse` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
    */
-  borderCollapse?: Token<CSS.Property.BorderCollapse>
+  borderCollapse?: Token<CSS.Property.any>
   /**
    * The CSS `border-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
    */
-  borderColor?: Token<CSS.Property.BorderColor, "colors">
+  borderColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-end-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
    */
-  borderEndEndRadius?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
+  borderEndEndRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
    */
-  borderBottomEndRadius?: Token<
-    CSS.Property.BorderEndEndRadius | number,
-    "radii"
-  >
+  borderBottomEndRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
    */
-  roundedBottomEnd?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
+  roundedBottomEnd?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-start-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  borderEndStartRadius?: Token<
-    CSS.Property.BorderEndStartRadius | number,
-    "radii"
-  >
+  borderEndStartRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-start-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  borderBottomStartRadius?: Token<
-    CSS.Property.BorderEndStartRadius | number,
-    "radii"
-  >
+  borderBottomStartRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-start-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  roundedBottomStart?: Token<
-    CSS.Property.BorderEndStartRadius | number,
-    "radii"
-  >
+  roundedBottomStart?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image
    */
-  borderImage?: Token<CSS.Property.BorderImage | number, "borders">
+  borderImage?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-image-outset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
    */
-  borderImageOutset?: Token<CSS.Property.BorderImageOutset>
+  borderImageOutset?: Token<CSS.Property.any>
   /**
    * The CSS `border-image-repeat` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
    */
-  borderImageRepeat?: Token<CSS.Property.BorderImageRepeat>
+  borderImageRepeat?: Token<CSS.Property.any>
   /**
    * The CSS `border-image-slice` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
    */
-  borderImageSlice?: Token<CSS.Property.BorderImageSlice>
+  borderImageSlice?: Token<CSS.Property.any>
   /**
    * The CSS `border-image-source` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
    */
-  borderImageSource?: Token<CSS.Property.BorderImageSource>
+  borderImageSource?: Token<CSS.Property.any>
   /**
    * The CSS `border-image-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
    */
-  borderImageWidth?: Token<CSS.Property.BorderImageWidth | number>
+  borderImageWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline
    */
-  borderInline?: Token<CSS.Property.BorderInline | number, "borders">
+  borderInline?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-inline-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-color
    */
-  borderInlineColor?: Token<CSS.Property.BorderInlineColor, "colors">
+  borderInlineColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
    */
-  borderInlineEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
+  borderInlineEnd?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
    */
-  borderEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
+  borderEnd?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-inline-end-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
    */
-  borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  borderInlineEndColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-inline-end-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
    */
-  borderEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  borderEndColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-inline-end-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
    */
-  borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
+  borderInlineEndStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-inline-end-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
    */
-  borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
+  borderEndStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-inline-end-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
    */
-  borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
+  borderInlineEndWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-inline-end-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
    */
-  borderEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
+  borderEndWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
    */
-  borderInlineStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
+  borderInlineStart?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
    */
-  borderStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
+  borderStart?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-inline-start-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
    */
-  borderInlineStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  borderInlineStartColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-inline-start-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
    */
-  borderStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  borderStartColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-inline-start-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
    */
-  borderInlineStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
+  borderInlineStartStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-inline-start-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
    */
-  borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
+  borderStartStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-inline-start-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
    */
-  borderInlineStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
+  borderInlineStartWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-inline-start-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
    */
-  borderStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
+  borderStartWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-inline-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-style
    */
-  borderInlineStyle?: Token<CSS.Property.BorderInlineStyle>
+  borderInlineStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-inline-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-width
    */
-  borderInlineWidth?: Token<CSS.Property.BorderInlineWidth | number>
+  borderInlineWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
    */
-  borderLeft?: Token<CSS.Property.BorderLeft | number, "borders">
+  borderLeft?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-left-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
    */
-  borderLeftColor?: Token<CSS.Property.BorderLeftColor, "colors">
+  borderLeftColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-left-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
    */
-  borderLeftStyle?: Token<CSS.Property.BorderLeftStyle>
+  borderLeftStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-left-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
    */
-  borderLeftWidth?: Token<CSS.Property.BorderLeftWidth | number>
+  borderLeftWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
    */
-  borderRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
    */
-  rounded?: Token<CSS.Property.BorderRadius | number, "radii">
+  rounded?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
    */
-  borderRight?: Token<CSS.Property.BorderRight | number, "borders">
+  borderRight?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-right-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
    */
-  borderRightColor?: Token<CSS.Property.BorderRightColor, "colors">
+  borderRightColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-right-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
    */
-  borderRightStyle?: Token<CSS.Property.BorderRightStyle>
+  borderRightStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-right-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
    */
-  borderRightWidth?: Token<CSS.Property.BorderRightWidth | number>
+  borderRightWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-spacing` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
    */
-  borderSpacing?: Token<CSS.Property.BorderSpacing>
+  borderSpacing?: Token<CSS.Property.any>
   /**
    * The CSS `border-start-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
    */
-  borderStartEndRadius?: Token<
-    CSS.Property.BorderStartEndRadius | number,
-    "radii"
-  >
+  borderStartEndRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-start-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
    */
-  borderTopEndRadius?: Token<
-    CSS.Property.BorderStartEndRadius | number,
-    "radii"
-  >
+  borderTopEndRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-start-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
    */
-  roundedTopEnd?: Token<CSS.Property.BorderStartEndRadius | number, "radii">
+  roundedTopEnd?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-start-start-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  borderStartStartRadius?: Token<
-    CSS.Property.BorderStartStartRadius | number,
-    "radii"
-  >
+  borderStartStartRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-start-start-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  borderTopStartRadius?: Token<
-    CSS.Property.BorderStartStartRadius | number,
-    "radii"
-  >
+  borderTopStartRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-start-start-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  roundedTopStart?: Token<CSS.Property.BorderStartStartRadius | number, "radii">
+  roundedTopStart?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
    */
-  borderStyle?: Token<CSS.Property.BorderStyle>
+  borderStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
    */
-  borderTop?: Token<CSS.Property.BorderTop | number, "borders">
+  borderTop?: Token<CSS.Property.any | number, "borders">
   /**
    * The CSS `border-top-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
    */
-  borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
+  borderTopColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `border-top-left-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    */
-  borderTopLeftRadius?: Token<
-    CSS.Property.BorderTopLeftRadius | number,
-    "radii"
-  >
+  borderTopLeftRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-left-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    */
-  roundedTopLeft?: Token<CSS.Property.BorderTopLeftRadius | number, "radii">
+  roundedTopLeft?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRightRadius?: Token<
-    CSS.Property.BorderTopRightRadius | number,
-    "radii"
-  >
+  borderTopRightRadius?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
-  roundedTopRight?: Token<CSS.Property.BorderTopRightRadius | number, "radii">
+  roundedTopRight?: Token<CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
    */
-  borderTopStyle?: Token<CSS.Property.BorderTopStyle>
+  borderTopStyle?: Token<CSS.Property.any>
   /**
    * The CSS `border-top-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
    */
-  borderTopWidth?: Token<CSS.Property.BorderTopWidth | number>
+  borderTopWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `border-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
    */
-  borderWidth?: Token<CSS.Property.BorderWidth | number>
+  borderWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
    */
-  bottom?: Token<CSS.Property.Bottom | number, "spaces">
+  bottom?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `box-align` property.
    *
@@ -2334,13 +2286,13 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxAlign?: Token<CSS.Property.BoxAlign>
+  boxAlign?: Token<CSS.Property.any>
   /**
    * The CSS `box-decoration-break` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break
    */
-  boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak>
+  boxDecorationBreak?: Token<CSS.Property.any>
   /**
    * The CSS `box-direction` property.
    *
@@ -2348,7 +2300,7 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxDirection?: Token<CSS.Property.BoxDirection>
+  boxDirection?: Token<CSS.Property.any>
   /**
    * The CSS `box-flex` property.
    *
@@ -2356,7 +2308,7 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxFlex?: Token<CSS.Property.BoxFlex>
+  boxFlex?: Token<CSS.Property.any>
   /**
    * The CSS `box-flex-group` property.
    *
@@ -2364,7 +2316,7 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxFlexGroup?: Token<CSS.Property.BoxFlexGroup>
+  boxFlexGroup?: Token<CSS.Property.any>
   /**
    * The CSS `box-lines` property.
    *
@@ -2372,7 +2324,7 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxLines?: Token<CSS.Property.BoxLines>
+  boxLines?: Token<CSS.Property.any>
   /**
    * The CSS `box-ordinal-group` property.
    *
@@ -2380,7 +2332,7 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxOrdinalGroup?: Token<CSS.Property.BoxOrdinalGroup>
+  boxOrdinalGroup?: Token<CSS.Property.any>
   /**
    * The CSS `box-orient` property.
    *
@@ -2388,7 +2340,7 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxOrient?: Token<CSS.Property.BoxOrient>
+  boxOrient?: Token<CSS.Property.any>
   /**
    * The CSS `box-pack` property.
    *
@@ -2396,2083 +2348,2071 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  boxPack?: Token<CSS.Property.BoxPack>
+  boxPack?: Token<CSS.Property.any>
   /**
    * The CSS `box-shadow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
    */
-  boxShadow?: Token<CSS.Property.BoxShadow, "shadows">
+  boxShadow?: Token<CSS.Property.any, "shadows">
   /**
    * The CSS `box-shadow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
    */
-  shadow?: Token<CSS.Property.BoxShadow, "shadows">
+  shadow?: Token<CSS.Property.any, "shadows">
   /**
    * The CSS `box-sizing` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
    */
-  boxSizing?: Token<CSS.Property.BoxSizing>
+  boxSizing?: Token<CSS.Property.any>
   /**
    * The CSS `break-after` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-after
    */
-  breakAfter?: Token<CSS.Property.BreakAfter>
+  breakAfter?: Token<CSS.Property.any>
   /**
    * The CSS `break-before` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
    */
-  breakBefore?: Token<CSS.Property.BreakBefore>
+  breakBefore?: Token<CSS.Property.any>
   /**
    * The CSS `break-inside` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
    */
-  breakInside?: Token<CSS.Property.BreakInside>
+  breakInside?: Token<CSS.Property.any>
   /**
    * The CSS `caption-side` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
    */
-  captionSide?: Token<CSS.Property.CaptionSide>
+  captionSide?: Token<CSS.Property.any>
   /**
    * The CSS `caret-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
    */
-  caretColor?: Token<CSS.Property.CaretColor, "colors">
+  caretColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `caret-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
    */
-  caret?: Token<CSS.Property.CaretColor, "colors">
+  caret?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `clear` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clear
    */
-  clear?: Token<CSS.Property.Clear>
+  clear?: Token<CSS.Property.any>
   /**
    * The CSS `clip` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip
    */
-  clip?: Token<CSS.Property.Clip>
+  clip?: Token<CSS.Property.any>
   /**
    * The CSS `clip-path` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
    */
-  clipPath?: Token<CSS.Property.ClipPath>
+  clipPath?: Token<CSS.Property.any>
   /**
    * The CSS `color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
    */
-  color?: Token<CSS.Property.Color, "colors">
+  color?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
    */
-  textColor?: Token<CSS.Property.Color, "colors">
+  textColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `color-interpolation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation
    */
-  colorInterpolation?: Token<CSS.Property.ColorInterpolation>
+  colorInterpolation?: Token<CSS.Property.any>
   /**
    * The CSS `column-count` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
    */
-  columnCount?: Token<CSS.Property.ColumnCount>
+  columnCount?: Token<CSS.Property.any>
   /**
    * The CSS `column-fill` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
    */
-  columnFill?: Token<CSS.Property.ColumnFill>
+  columnFill?: Token<CSS.Property.any>
   /**
    * The CSS `column-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
    */
-  columnGap?: Token<CSS.Property.ColumnGap | number, "spaces">
+  columnGap?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `column-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
    */
-  gx?: Token<CSS.Property.ColumnGap | number, "spaces">
+  gx?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `column-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
    */
-  gapX?: Token<CSS.Property.ColumnGap | number, "spaces">
+  gapX?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `column-rule` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
    */
-  columnRule?: Token<CSS.Property.ColumnRule | number>
+  columnRule?: Token<CSS.Property.any | number>
   /**
    * The CSS `column-rule-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
    */
-  columnRuleColor?: Token<CSS.Property.ColumnRuleColor, "colors">
+  columnRuleColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `column-rule-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
    */
-  columnRuleStyle?: Token<CSS.Property.ColumnRuleStyle>
+  columnRuleStyle?: Token<CSS.Property.any>
   /**
    * The CSS `column-rule-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
    */
-  columnRuleWidth?: Token<CSS.Property.ColumnRuleWidth | number>
+  columnRuleWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `column-span` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
    */
-  columnSpan?: Token<CSS.Property.ColumnSpan>
+  columnSpan?: Token<CSS.Property.any>
   /**
    * The CSS `column-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
    */
-  columnWidth?: Token<CSS.Property.ColumnWidth | number>
+  columnWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `columns` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/columns
    */
-  columns?: Token<CSS.Property.Columns>
+  columns?: Token<CSS.Property.any>
   /**
    * The CSS `contain` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain
    */
-  contain?: Token<CSS.Property.Contain>
+  contain?: Token<CSS.Property.any>
   /**
    * The CSS `contain-intrinsic-block-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-block-size
    */
-  containIntrinsicBlockSize?: Token<CSS.Property.ContainIntrinsicBlockSize>
+  containIntrinsicBlockSize?: Token<CSS.Property.any>
   /**
    * The CSS `contain-intrinsic-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-height
    */
-  containIntrinsicHeight?: Token<CSS.Property.ContainIntrinsicHeight>
+  containIntrinsicHeight?: Token<CSS.Property.any>
   /**
    * The CSS `contain-intrinsic-inline-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-inline-size
    */
-  containIntrinsicInlineSize?: Token<CSS.Property.ContainIntrinsicInlineSize>
+  containIntrinsicInlineSize?: Token<CSS.Property.any>
   /**
    * The CSS `contain-intrinsic-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-size
    */
-  containIntrinsicSize?: Token<CSS.Property.ContainIntrinsicSize>
+  containIntrinsicSize?: Token<CSS.Property.any>
   /**
    * The CSS `contain-intrinsic-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-width
    */
-  containIntrinsicWidth?: Token<CSS.Property.ContainIntrinsicWidth | number>
+  containIntrinsicWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `container` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container
    */
-  container?: Token<CSS.Property.Container>
+  container?: Token<CSS.Property.any>
   /**
    * The CSS `container-name` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-name
    */
-  containerName?: Token<CSS.Property.ContainerName>
+  containerName?: Token<CSS.Property.any>
   /**
    * The CSS `container-type` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-type
    */
-  containerType?: Token<CSS.Property.ContainerType>
+  containerType?: Token<CSS.Property.any>
   /**
    * The CSS `content` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content
    */
-  content?: Token<CSS.Property.Content>
+  content?: Token<CSS.Property.any>
   /**
    * The CSS `content-visibility` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility
    */
-  contentVisibility?: Token<CSS.Property.ContentVisibility>
+  contentVisibility?: Token<CSS.Property.any>
   /**
    * The CSS `counter-increment` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
    */
-  counterIncrement?: Token<CSS.Property.CounterIncrement>
+  counterIncrement?: Token<CSS.Property.any>
   /**
    * The CSS `counter-reset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
    */
-  counterReset?: Token<CSS.Property.CounterReset>
+  counterReset?: Token<CSS.Property.any>
   /**
    * The CSS `counter-set` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-set
    */
-  counterSet?: Token<CSS.Property.CounterSet>
+  counterSet?: Token<CSS.Property.any>
   /**
    * The CSS `cursor` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
    */
-  cursor?: Token<CSS.Property.Cursor>
+  cursor?: Token<CSS.Property.any>
   /**
    * The CSS `direction` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/direction
    */
-  direction?: Token<CSS.Property.Direction>
+  direction?: Token<CSS.Property.any>
   /**
    * The CSS `display` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/display
    */
-  display?: Token<CSS.Property.Display>
+  display?: Token<CSS.Property.any>
   /**
    * The CSS `empty-cells` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
    */
-  emptyCells?: Token<CSS.Property.EmptyCells>
+  emptyCells?: Token<CSS.Property.any>
   /**
    * The CSS `flex` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex
    */
-  flex?: Token<CSS.Property.Flex>
+  flex?: Token<CSS.Property.any>
   /**
    * The CSS `flex-basis` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
    */
-  flexBasis?: Token<CSS.Property.FlexBasis | number, "sizes">
+  flexBasis?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `flex-direction` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
    */
-  flexDirection?: Token<CSS.Property.FlexDirection>
+  flexDirection?: Token<CSS.Property.any>
   /**
    * The CSS `flex-direction` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
    */
-  flexDir?: Token<CSS.Property.FlexDirection>
+  flexDir?: Token<CSS.Property.any>
   /**
    * The CSS `flex-flow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow
    */
-  flexFlow?: Token<CSS.Property.FlexFlow>
+  flexFlow?: Token<CSS.Property.any>
   /**
    * The CSS `flex-grow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
    */
-  flexGrow?: Token<CSS.Property.FlexGrow>
+  flexGrow?: Token<CSS.Property.any>
   /**
    * The CSS `flex-shrink` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
    */
-  flexShrink?: Token<CSS.Property.FlexShrink>
+  flexShrink?: Token<CSS.Property.any>
   /**
    * The CSS `flex-wrap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
    */
-  flexWrap?: Token<CSS.Property.FlexWrap>
+  flexWrap?: Token<CSS.Property.any>
   /**
    * The CSS `float` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/float
    */
-  float?: Token<CSS.Property.Float>
+  float?: Token<CSS.Property.any>
   /**
    * The CSS `font` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font
    */
-  font?: Token<CSS.Property.Font>
+  font?: Token<CSS.Property.any>
   /**
    * The CSS `font-family` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
    */
-  fontFamily?: Token<CSS.Property.FontFamily, "fonts">
+  fontFamily?: Token<CSS.Property.any, "fonts">
   /**
    * The CSS `font-feature-settings` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
    */
-  fontFeatureSettings?: Token<CSS.Property.FontFeatureSettings>
+  fontFeatureSettings?: Token<CSS.Property.any>
   /**
    * The CSS `font-kerning` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
    */
-  fontKerning?: Token<CSS.Property.FontKerning>
+  fontKerning?: Token<CSS.Property.any>
   /**
    * The CSS `font-language-override` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
    */
-  fontLanguageOverride?: Token<CSS.Property.FontLanguageOverride>
+  fontLanguageOverride?: Token<CSS.Property.any>
   /**
    * The CSS `font-optical-sizing` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-optical-sizing
    */
-  fontOpticalSizing?: Token<CSS.Property.FontOpticalSizing>
+  fontOpticalSizing?: Token<CSS.Property.any>
   /**
    * The CSS `font-palette` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-palette
    */
-  fontPalette?: Token<CSS.Property.FontPalette>
+  fontPalette?: Token<CSS.Property.any>
   /**
    * The CSS `font-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
    */
-  fontSize?: Token<CSS.Property.FontSize | number, "fontSizes">
+  fontSize?: Token<CSS.Property.any | number, "fontSizes">
   /**
    * The CSS `font-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
    */
-  text?: Token<CSS.Property.FontSize | number, "fontSizes">
+  text?: Token<CSS.Property.any | number, "fontSizes">
   /**
    * The CSS `font-size-adjust` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size-adjust
    */
-  fontSizeAdjust?: Token<CSS.Property.FontSizeAdjust>
+  fontSizeAdjust?: Token<CSS.Property.any>
   /**
    * The CSS `font-smooth` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
    */
-  fontSmooth?: Token<CSS.Property.FontSmooth>
+  fontSmooth?: Token<CSS.Property.any>
   /**
    * The CSS `font-stretch` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
    */
-  fontStretch?: Token<CSS.Property.FontStretch>
+  fontStretch?: Token<CSS.Property.any>
   /**
    * The CSS `font-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
    */
-  fontStyle?: Token<CSS.Property.FontStyle>
+  fontStyle?: Token<CSS.Property.any>
   /**
    * The CSS `font-synthesis` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
    */
-  fontSynthesis?: Token<CSS.Property.FontSynthesis>
+  fontSynthesis?: Token<CSS.Property.any>
   /**
    * The CSS `font-synthesis-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-position
    */
-  fontSynthesisPosition?: Token<CSS.Property.FontSynthesisPosition>
+  fontSynthesisPosition?: Token<CSS.Property.any>
   /**
    * The CSS `font-synthesis-small-caps` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps
    */
-  fontSynthesisSmallCaps?: Token<CSS.Property.FontSynthesisSmallCaps>
+  fontSynthesisSmallCaps?: Token<CSS.Property.any>
   /**
    * The CSS `font-synthesis-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-style
    */
-  fontSynthesisStyle?: Token<CSS.Property.FontSynthesisStyle>
+  fontSynthesisStyle?: Token<CSS.Property.any>
   /**
    * The CSS `font-synthesis-weight` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-weight
    */
-  fontSynthesisWeight?: Token<CSS.Property.FontSynthesisWeight>
+  fontSynthesisWeight?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
    */
-  fontVariant?: Token<CSS.Property.FontVariant>
+  fontVariant?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-alternates` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-alternates
    */
-  fontVariantAlternates?: Token<CSS.Property.FontVariantAlternates>
+  fontVariantAlternates?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-caps` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
    */
-  fontVariantCaps?: Token<CSS.Property.FontVariantCaps>
+  fontVariantCaps?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-east-asian` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
    */
-  fontVariantEastAsian?: Token<CSS.Property.FontVariantEastAsian>
+  fontVariantEastAsian?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-emoji` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-emoji
    */
-  fontVariantEmoji?: Token<CSS.Property.FontVariantEmoji>
+  fontVariantEmoji?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-ligatures` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-ligatures
    */
-  fontVariantLigatures?: Token<CSS.Property.FontVariantLigatures>
+  fontVariantLigatures?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-numeric` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
    */
-  fontVariantNumeric?: Token<CSS.Property.FontVariantNumeric>
+  fontVariantNumeric?: Token<CSS.Property.any>
   /**
    * The CSS `font-variant-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
    */
-  fontVariantPosition?: Token<CSS.Property.FontVariantPosition>
+  fontVariantPosition?: Token<CSS.Property.any>
   /**
    * The CSS `font-variation-settings` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings
    */
-  fontVariationSettings?: Token<CSS.Property.FontVariationSettings>
+  fontVariationSettings?: Token<CSS.Property.any>
   /**
    * The CSS `font-weight` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
    */
-  fontWeight?: Token<CSS.Property.FontWeight, "fontWeights">
+  fontWeight?: Token<CSS.Property.any, "fontWeights">
   /**
    * The CSS `forced-color-adjust` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/forced-color-adjust
    */
-  forcedColorAdjust?: Token<CSS.Property.ForcedColorAdjust>
+  forcedColorAdjust?: Token<CSS.Property.any>
   /**
    * The CSS `gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
    */
-  gap?: Token<CSS.Property.Gap | number, "spaces">
+  gap?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
    */
-  g?: Token<CSS.Property.Gap | number, "spaces">
+  g?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `grid` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid
    */
-  grid?: Token<CSS.Property.Grid>
+  grid?: Token<CSS.Property.any>
   /**
    * The CSS `grid-area` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
    */
-  gridArea?: Token<CSS.Property.GridArea>
+  gridArea?: Token<CSS.Property.any>
   /**
    * The CSS `grid-auto-columns` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
    */
-  gridAutoColumns?: Token<CSS.Property.GridAutoColumns>
+  gridAutoColumns?: Token<CSS.Property.any>
   /**
    * The CSS `grid-auto-flow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
    */
-  gridAutoFlow?: Token<CSS.Property.GridAutoFlow>
+  gridAutoFlow?: Token<CSS.Property.any>
   /**
    * The CSS `grid-auto-rows` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
    */
-  gridAutoRows?: Token<CSS.Property.GridAutoRows>
+  gridAutoRows?: Token<CSS.Property.any>
   /**
    * The CSS `grid-column` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
    */
-  gridColumn?: Token<CSS.Property.GridColumn>
+  gridColumn?: Token<CSS.Property.any>
   /**
    * The CSS `grid-column-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-end
    */
-  gridColumnEnd?: Token<CSS.Property.GridColumnEnd>
+  gridColumnEnd?: Token<CSS.Property.any>
   /**
    * The CSS `grid-column-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start
    */
-  gridColumnStart?: Token<CSS.Property.GridColumnStart>
+  gridColumnStart?: Token<CSS.Property.any>
   /**
    * The CSS `grid-row` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
    */
-  gridRow?: Token<CSS.Property.GridRow>
+  gridRow?: Token<CSS.Property.any>
   /**
    * The CSS `grid-row-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-end
    */
-  gridRowEnd?: Token<CSS.Property.GridRowEnd>
+  gridRowEnd?: Token<CSS.Property.any>
   /**
    * The CSS `grid-row-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-start
    */
-  gridRowStart?: Token<CSS.Property.GridRowStart>
+  gridRowStart?: Token<CSS.Property.any>
   /**
    * The CSS `grid-template` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template
    */
-  gridTemplate?: Token<CSS.Property.GridTemplate>
+  gridTemplate?: Token<CSS.Property.any>
   /**
    * The CSS `grid-template-areas` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
    */
-  gridTemplateAreas?: Token<CSS.Property.GridTemplateAreas>
+  gridTemplateAreas?: Token<CSS.Property.any>
   /**
    * The CSS `grid-template-columns` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
    */
-  gridTemplateColumns?: Token<CSS.Property.GridTemplateColumns>
+  gridTemplateColumns?: Token<CSS.Property.any>
   /**
    * The CSS `grid-template-rows` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
    */
-  gridTemplateRows?: Token<CSS.Property.GridTemplateRows>
+  gridTemplateRows?: Token<CSS.Property.any>
   /**
    * The CSS `hanging-punctuation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
    */
-  hangingPunctuation?: Token<CSS.Property.HangingPunctuation>
+  hangingPunctuation?: Token<CSS.Property.any>
   /**
    * The CSS `height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
    */
-  height?: Token<CSS.Property.Height | number, "sizes">
+  height?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
    */
-  h?: Token<CSS.Property.Height | number, "sizes">
+  h?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `hyphenate-character` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-character
    */
-  hyphenateCharacter?: Token<CSS.Property.HyphenateCharacter>
+  hyphenateCharacter?: Token<CSS.Property.any>
   /**
    * The CSS `hyphenate-limit-chars` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars
    */
-  hyphenateLimitChars?: Token<CSS.Property.HyphenateLimitChars>
+  hyphenateLimitChars?: Token<CSS.Property.any>
   /**
    * The CSS `hyphens` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
    */
-  hyphens?: Token<CSS.Property.Hyphens>
+  hyphens?: Token<CSS.Property.any>
   /**
    * The CSS `image-orientation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-orientation
    */
-  imageOrientation?: Token<CSS.Property.ImageOrientation>
+  imageOrientation?: Token<CSS.Property.any>
   /**
    * The CSS `image-rendering` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering
    */
-  imageRendering?: Token<CSS.Property.ImageRendering>
+  imageRendering?: Token<CSS.Property.any>
   /**
    * The CSS `image-resolution` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-resolution
    */
-  imageResolution?: Token<CSS.Property.ImageResolution>
+  imageResolution?: Token<CSS.Property.any>
   /**
    * The CSS `initial-letter` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/initial-letter
    */
-  initialLetter?: Token<CSS.Property.InitialLetter>
+  initialLetter?: Token<CSS.Property.any>
   /**
    * The CSS `inline-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inline-size
    */
-  inlineSize?: Token<CSS.Property.InlineSize | number, "sizes">
+  inlineSize?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `inset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset
    */
-  inset?: Token<CSS.Property.Inset | number, "spaces">
+  inset?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block
    */
-  insetBlock?: Token<CSS.Property.InsetBlock | number, "spaces">
+  insetBlock?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-block-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-end
    */
-  insetBlockEnd?: Token<CSS.Property.InsetBlockEnd | number, "spaces">
+  insetBlockEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-block-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-start
    */
-  insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, "spaces">
+  insetBlockStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline
    */
-  insetInline?: Token<CSS.Property.InsetInline | number, "spaces">
+  insetInline?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
    */
-  insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetInlineEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
    */
-  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start
    */
-  insetInlineStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
+  insetInlineStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `inset-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start
    */
-  insetStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
+  insetStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `isolation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
    */
-  isolation?: Token<CSS.Property.Isolation>
+  isolation?: Token<CSS.Property.any>
   /**
    * The CSS `justify-content` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
    */
-  justifyContent?: Token<CSS.Property.JustifyContent>
+  justifyContent?: Token<CSS.Property.any>
   /**
    * The CSS `justify-items` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
    */
-  justifyItems?: Token<CSS.Property.JustifyItems>
+  justifyItems?: Token<CSS.Property.any>
   /**
    * The CSS `justify-self` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
    */
-  justifySelf?: Token<CSS.Property.JustifySelf>
+  justifySelf?: Token<CSS.Property.any>
   /**
    * The CSS `justify-tracks` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-tracks
    */
-  justifyTracks?: Token<CSS.Property.JustifyTracks>
+  justifyTracks?: Token<CSS.Property.any>
   /**
    * The CSS `left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
    */
-  left?: Token<CSS.Property.Left | number, "spaces">
+  left?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `letter-spacing` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
    */
-  letterSpacing?: Token<CSS.Property.LetterSpacing, "letterSpacings">
+  letterSpacing?: Token<CSS.Property.any, "letterSpacings">
   /**
    * The CSS `letter-spacing` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
    */
-  tracking?: Token<CSS.Property.LetterSpacing, "letterSpacings">
+  tracking?: Token<CSS.Property.any, "letterSpacings">
   /**
    * The CSS `line-break` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
    */
-  lineBreak?: Token<CSS.Property.LineBreak>
+  lineBreak?: Token<CSS.Property.any>
   /**
    * The CSS `line-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
    */
-  lineHeight?: Token<CSS.Property.LineHeight, "lineHeights">
+  lineHeight?: Token<CSS.Property.any, "lineHeights">
   /**
    * The CSS `line-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
    */
-  leading?: Token<CSS.Property.LineHeight, "lineHeights">
+  leading?: Token<CSS.Property.any, "lineHeights">
   /**
    * The CSS `line-height-step` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height-step
    */
-  lineHeightStep?: Token<CSS.Property.LineHeightStep>
+  lineHeightStep?: Token<CSS.Property.any>
   /**
    * The CSS `list-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
    */
-  listStyle?: Token<CSS.Property.ListStyle>
+  listStyle?: Token<CSS.Property.any>
   /**
    * The CSS `list-style-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
    */
-  listStyleImage?: Token<CSS.Property.ListStyleImage>
+  listStyleImage?: Token<CSS.Property.any>
   /**
    * The CSS `list-style-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
    */
-  listStyleImg?: Token<CSS.Property.ListStyleImage>
+  listStyleImg?: Token<CSS.Property.any>
   /**
    * The CSS `list-style-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
    */
-  listStylePosition?: Token<CSS.Property.ListStylePosition>
+  listStylePosition?: Token<CSS.Property.any>
   /**
    * The CSS `list-style-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
    */
-  listStylePos?: Token<CSS.Property.ListStylePosition>
+  listStylePos?: Token<CSS.Property.any>
   /**
    * The CSS `list-style-type` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
    */
-  listStyleType?: Token<CSS.Property.ListStyleType>
+  listStyleType?: Token<CSS.Property.any>
   /**
    * The CSS `margin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
    */
-  margin?: Token<CSS.Property.Margin | number, "spaces">
+  margin?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
    */
-  m?: Token<CSS.Property.Margin | number, "spaces">
+  m?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block
    */
-  marginBlock?: Token<CSS.Property.MarginBlock | number, "spaces">
+  marginBlock?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-block-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-end
    */
-  marginBlockEnd?: Token<CSS.Property.MarginBlockEnd | number, "spaces">
+  marginBlockEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-block-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-start
    */
-  marginBlockStart?: Token<CSS.Property.MarginBlockStart | number, "spaces">
+  marginBlockStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
    */
-  marginBottom?: Token<CSS.Property.MarginBottom | number, "spaces">
+  marginBottom?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
    */
-  mb?: Token<CSS.Property.MarginBottom | number, "spaces">
+  mb?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline
    */
-  marginInline?: Token<CSS.Property.MarginInline | number, "spaces">
+  marginInline?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
    */
-  marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginInlineEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
    */
-  me?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
+  me?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
    */
-  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
-  marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
+  marginInlineStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
-  ms?: Token<CSS.Property.MarginInlineStart | number, "spaces">
+  ms?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
-  marginStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
+  marginStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
    */
-  marginLeft?: Token<CSS.Property.MarginLeft | number, "spaces">
+  marginLeft?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
    */
-  ml?: Token<CSS.Property.MarginLeft | number, "spaces">
+  ml?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
    */
-  marginRight?: Token<CSS.Property.MarginRight | number, "spaces">
+  marginRight?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
    */
-  mr?: Token<CSS.Property.MarginRight | number, "spaces">
+  mr?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
    */
-  marginTop?: Token<CSS.Property.MarginTop | number, "spaces">
+  marginTop?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
    */
-  mt?: Token<CSS.Property.MarginTop | number, "spaces">
+  mt?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-trim` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-trim
    */
-  marginTrim?: Token<CSS.Property.MarginTrim>
+  marginTrim?: Token<CSS.Property.any>
   /**
    * The CSS `mask` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask
    */
-  mask?: Token<CSS.Property.Mask>
+  mask?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border
    */
-  maskBorder?: Token<CSS.Property.MaskBorder>
+  maskBorder?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-mode
    */
-  maskBorderMode?: Token<CSS.Property.MaskBorderMode>
+  maskBorderMode?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border-outset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-outset
    */
-  maskBorderOutset?: Token<CSS.Property.MaskBorderOutset>
+  maskBorderOutset?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border-repeat` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-repeat
    */
-  maskBorderRepeat?: Token<CSS.Property.MaskBorderRepeat>
+  maskBorderRepeat?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border-slice` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-slice
    */
-  maskBorderSlice?: Token<CSS.Property.MaskBorderSlice>
+  maskBorderSlice?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border-source` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-source
    */
-  maskBorderSource?: Token<CSS.Property.MaskBorderSource>
+  maskBorderSource?: Token<CSS.Property.any>
   /**
    * The CSS `mask-border-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-width
    */
-  maskBorderWidth?: Token<CSS.Property.MaskBorderWidth | number>
+  maskBorderWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `mask-clip` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
    */
-  maskClip?: Token<CSS.Property.MaskClip>
+  maskClip?: Token<CSS.Property.any>
   /**
    * The CSS `mask-composite` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
    */
-  maskComposite?: Token<CSS.Property.MaskComposite>
+  maskComposite?: Token<CSS.Property.any>
   /**
    * The CSS `mask-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
    */
-  maskImage?: Token<CSS.Property.MaskImage>
+  maskImage?: Token<CSS.Property.any>
   /**
    * The CSS `mask-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
    */
-  maskMode?: Token<CSS.Property.MaskMode>
+  maskMode?: Token<CSS.Property.any>
   /**
    * The CSS `mask-origin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
    */
-  maskOrigin?: Token<CSS.Property.MaskOrigin>
+  maskOrigin?: Token<CSS.Property.any>
   /**
    * The CSS `mask-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
    */
-  maskPosition?: Token<CSS.Property.MaskPosition>
+  maskPosition?: Token<CSS.Property.any>
   /**
    * The CSS `mask-repeat` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
    */
-  maskRepeat?: Token<CSS.Property.MaskRepeat>
+  maskRepeat?: Token<CSS.Property.any>
   /**
    * The CSS `mask-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size
    */
-  maskSize?: Token<CSS.Property.MaskSize>
+  maskSize?: Token<CSS.Property.any>
   /**
    * The CSS `mask-type` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-type
    */
-  maskType?: Token<CSS.Property.MaskType>
+  maskType?: Token<CSS.Property.any>
   /**
    * The CSS `masonry-auto-flow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/masonry-auto-flow
    */
-  masonryAutoFlow?: Token<CSS.Property.MasonryAutoFlow>
+  masonryAutoFlow?: Token<CSS.Property.any>
   /**
    * The CSS `math-depth` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-depth
    */
-  mathDepth?: Token<CSS.Property.MathDepth>
+  mathDepth?: Token<CSS.Property.any>
   /**
    * The CSS `math-shift` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-shift
    */
-  mathShift?: Token<CSS.Property.MathShift>
+  mathShift?: Token<CSS.Property.any>
   /**
    * The CSS `math-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-style
    */
-  mathStyle?: Token<CSS.Property.MathStyle>
+  mathStyle?: Token<CSS.Property.any>
   /**
    * The CSS `max-block-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-block-size
    */
-  maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, "sizes">
+  maxBlockSize?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `max-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    */
-  maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
+  maxHeight?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `max-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    */
-  maxH?: Token<CSS.Property.MaxHeight | number, "sizes">
+  maxH?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `max-inline-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-inline-size
    */
-  maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, "sizes">
+  maxInlineSize?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `max-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxWidth?: Token<CSS.Property.MaxWidth | number, "sizes">
+  maxWidth?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `max-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxW?: Token<CSS.Property.MaxWidth | number, "sizes">
+  maxW?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-block-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-block-size
    */
-  minBlockSize?: Token<CSS.Property.MinBlockSize | number, "sizes">
+  minBlockSize?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
    */
-  minHeight?: Token<CSS.Property.MinHeight | number, "sizes">
+  minHeight?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
    */
-  minH?: Token<CSS.Property.MinHeight | number, "sizes">
+  minH?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-inline-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-inline-size
    */
-  minInlineSize?: Token<CSS.Property.MinInlineSize | number, "sizes">
+  minInlineSize?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minWidth?: Token<CSS.Property.MinWidth | number, "sizes">
+  minWidth?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minW?: Token<CSS.Property.MinWidth | number, "sizes">
+  minW?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `mix-blend-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
    */
-  mixBlendMode?: Token<CSS.Property.MixBlendMode>
+  mixBlendMode?: Token<CSS.Property.any>
   /**
    * The CSS `mix-blend-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
    */
-  blendMode?: Token<CSS.Property.MixBlendMode>
+  blendMode?: Token<CSS.Property.any>
   /**
    * The CSS `object-fit` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
    */
-  objectFit?: Token<CSS.Property.ObjectFit>
+  objectFit?: Token<CSS.Property.any>
   /**
    * The CSS `object-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/object-position
    */
-  objectPosition?: Token<CSS.Property.ObjectPosition>
+  objectPosition?: Token<CSS.Property.any>
   /**
    * The CSS `offset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset
    */
-  offset?: Token<CSS.Property.Offset>
+  offset?: Token<CSS.Property.any>
   /**
    * The CSS `offset-anchor` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-anchor
    */
-  offsetAnchor?: Token<CSS.Property.OffsetAnchor>
+  offsetAnchor?: Token<CSS.Property.any>
   /**
    * The CSS `offset-distance` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-distance
    */
-  offsetDistance?: Token<CSS.Property.OffsetDistance>
+  offsetDistance?: Token<CSS.Property.any>
   /**
    * The CSS `offset-path` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-path
    */
-  offsetPath?: Token<CSS.Property.OffsetPath>
+  offsetPath?: Token<CSS.Property.any>
   /**
    * The CSS `offset-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-position
    */
-  offsetPosition?: Token<CSS.Property.OffsetPosition>
+  offsetPosition?: Token<CSS.Property.any>
   /**
    * The CSS `offset-rotate` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-rotate
    */
-  offsetRotate?: Token<CSS.Property.OffsetRotate>
+  offsetRotate?: Token<CSS.Property.any>
   /**
    * The CSS `opacity` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
    */
-  opacity?: Token<CSS.Property.Opacity>
+  opacity?: Token<CSS.Property.any>
   /**
    * The CSS `order` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/order
    */
-  order?: Token<CSS.Property.Order>
+  order?: Token<CSS.Property.any>
   /**
    * The CSS `orphans` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
    */
-  orphans?: Token<CSS.Property.Orphans>
+  orphans?: Token<CSS.Property.any>
   /**
    * The CSS `outline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline
    */
-  outline?: Token<CSS.Property.Outline>
+  outline?: Token<CSS.Property.any>
   /**
    * The CSS `outline-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
    */
-  outlineColor?: Token<CSS.Property.OutlineColor, "colors">
+  outlineColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `outline-offset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
    */
-  outlineOffset?: Token<CSS.Property.OutlineOffset>
+  outlineOffset?: Token<CSS.Property.any>
   /**
    * The CSS `outline-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
    */
-  outlineStyle?: Token<CSS.Property.OutlineStyle>
+  outlineStyle?: Token<CSS.Property.any>
   /**
    * The CSS `outline-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
    */
-  outlineWidth?: Token<CSS.Property.OutlineWidth | number>
+  outlineWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `overflow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
    */
-  overflow?: Token<CSS.Property.Overflow>
+  overflow?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-anchor` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor
    */
-  overflowAnchor?: Token<CSS.Property.OverflowAnchor>
+  overflowAnchor?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block
    */
-  overflowBlock?: Token<CSS.Property.OverflowBlock>
+  overflowBlock?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-clip-margin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-clip-margin
    */
-  overflowClipMargin?: Token<CSS.Property.OverflowClipMargin>
+  overflowClipMargin?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline
    */
-  overflowInline?: Token<CSS.Property.OverflowInline>
+  overflowInline?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-wrap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
    */
-  overflowWrap?: Token<CSS.Property.OverflowWrap>
+  overflowWrap?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-x` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x
    */
-  overflowX?: Token<CSS.Property.OverflowX>
+  overflowX?: Token<CSS.Property.any>
   /**
    * The CSS `overflow-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y
    */
-  overflowY?: Token<CSS.Property.OverflowY>
+  overflowY?: Token<CSS.Property.any>
   /**
    * The CSS `overlay` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overlay
    */
-  overlay?: Token<CSS.Property.Overlay>
+  overlay?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
    */
-  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior>
+  overscrollBehavior?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
    */
-  overscroll?: Token<CSS.Property.OverscrollBehavior>
+  overscroll?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-block
    */
-  overscrollBehaviorBlock?: Token<CSS.Property.OverscrollBehaviorBlock>
+  overscrollBehaviorBlock?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-inline
    */
-  overscrollBehaviorInline?: Token<CSS.Property.OverscrollBehaviorInline>
+  overscrollBehaviorInline?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior-x` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX>
+  overscrollBehaviorX?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior-x` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollX?: Token<CSS.Property.OverscrollBehaviorX>
+  overscrollX?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY>
+  overscrollBehaviorY?: Token<CSS.Property.any>
   /**
    * The CSS `overscroll-behavior-y` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollY?: Token<CSS.Property.OverscrollBehaviorY>
+  overscrollY?: Token<CSS.Property.any>
   /**
    * The CSS `padding` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
    */
-  padding?: Token<CSS.Property.Padding | number, "spaces">
+  padding?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
    */
-  p?: Token<CSS.Property.Padding | number, "spaces">
+  p?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block
    */
-  paddingBlock?: Token<CSS.Property.PaddingBlock | number, "spaces">
+  paddingBlock?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-block-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block-end
    */
-  paddingBlockEnd?: Token<CSS.Property.PaddingBlockEnd | number, "spaces">
+  paddingBlockEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-block-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block-start
    */
-  paddingBlockStart?: Token<CSS.Property.PaddingBlockStart | number, "spaces">
+  paddingBlockStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
    */
-  paddingBottom?: Token<CSS.Property.PaddingBottom | number, "spaces">
+  paddingBottom?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
    */
-  pb?: Token<CSS.Property.PaddingBottom | number, "spaces">
+  pb?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline
    */
-  paddingInline?: Token<CSS.Property.PaddingInline | number, "spaces">
+  paddingInline?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
    */
-  paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingInlineEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
    */
-  pe?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
+  pe?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
    */
-  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingEnd?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
-  paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
+  paddingInlineStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
-  ps?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
+  ps?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
-  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
+  paddingStart?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
    */
-  paddingLeft?: Token<CSS.Property.PaddingLeft | number, "spaces">
+  paddingLeft?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
    */
-  pl?: Token<CSS.Property.PaddingLeft | number, "spaces">
+  pl?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
    */
-  paddingRight?: Token<CSS.Property.PaddingRight | number, "spaces">
+  paddingRight?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
    */
-  pr?: Token<CSS.Property.PaddingRight | number, "spaces">
+  pr?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
-  paddingTop?: Token<CSS.Property.PaddingTop | number, "spaces">
+  paddingTop?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
-  pt?: Token<CSS.Property.PaddingTop | number, "spaces">
+  pt?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `page` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page
    */
-  page?: Token<CSS.Property.Page>
+  page?: Token<CSS.Property.any>
   /**
    * The CSS `page-break-after` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after
    */
-  pageBreakAfter?: Token<CSS.Property.PageBreakAfter>
+  pageBreakAfter?: Token<CSS.Property.any>
   /**
    * The CSS `page-break-before` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-before
    */
-  pageBreakBefore?: Token<CSS.Property.PageBreakBefore>
+  pageBreakBefore?: Token<CSS.Property.any>
   /**
    * The CSS `page-break-inside` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-inside
    */
-  pageBreakInside?: Token<CSS.Property.PageBreakInside>
+  pageBreakInside?: Token<CSS.Property.any>
   /**
    * The CSS `paint-order` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
    */
-  paintOrder?: Token<CSS.Property.PaintOrder>
+  paintOrder?: Token<CSS.Property.any>
   /**
    * The CSS `perspective` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
    */
-  perspective?: Token<CSS.Property.Perspective>
+  perspective?: Token<CSS.Property.any>
   /**
    * The CSS `perspective-origin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
    */
-  perspectiveOrigin?: Token<CSS.Property.PerspectiveOrigin>
+  perspectiveOrigin?: Token<CSS.Property.any>
   /**
    * The CSS `place-content` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-content
    */
-  placeContent?: Token<CSS.Property.PlaceContent>
+  placeContent?: Token<CSS.Property.any>
   /**
    * The CSS `place-items` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-items
    */
-  placeItems?: Token<CSS.Property.PlaceItems>
+  placeItems?: Token<CSS.Property.any>
   /**
    * The CSS `place-self` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-self
    */
-  placeSelf?: Token<CSS.Property.PlaceSelf>
+  placeSelf?: Token<CSS.Property.any>
   /**
    * The CSS `pointer-events` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
    */
-  pointerEvents?: Token<CSS.Property.PointerEvents>
+  pointerEvents?: Token<CSS.Property.any>
   /**
    * The CSS `position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
    */
-  position?: Token<CSS.Property.Position>
+  position?: Token<CSS.Property.any>
   /**
    * The CSS `position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
    */
-  pos?: Token<CSS.Property.Position>
+  pos?: Token<CSS.Property.any>
   /**
    * The CSS `print-color-adjust` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust
    */
-  printColorAdjust?: Token<CSS.Property.PrintColorAdjust>
+  printColorAdjust?: Token<CSS.Property.any>
   /**
    * The CSS `quotes` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
    */
-  quotes?: Token<CSS.Property.Quotes>
+  quotes?: Token<CSS.Property.any>
   /**
    * The CSS `resize` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/resize
    */
-  resize?: Token<CSS.Property.Resize>
+  resize?: Token<CSS.Property.any>
   /**
    * The CSS `right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
    */
-  right?: Token<CSS.Property.Right | number, "spaces">
+  right?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `row-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
    */
-  rowGap?: Token<CSS.Property.RowGap | number, "spaces">
+  rowGap?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `row-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
    */
-  gy?: Token<CSS.Property.RowGap | number, "spaces">
+  gy?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `row-gap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
    */
-  gapY?: Token<CSS.Property.RowGap | number, "spaces">
+  gapY?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `ruby-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-align
    */
-  rubyAlign?: Token<CSS.Property.RubyAlign>
+  rubyAlign?: Token<CSS.Property.any>
   /**
    * The CSS `ruby-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-position
    */
-  rubyPosition?: Token<CSS.Property.RubyPosition>
+  rubyPosition?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-behavior` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
    */
-  scrollBehavior?: Token<CSS.Property.ScrollBehavior>
+  scrollBehavior?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
    */
-  scrollMargin?: Token<CSS.Property.ScrollMargin | number, "spaces">
+  scrollMargin?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-margin-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block
    */
-  scrollMarginBlock?: Token<CSS.Property.ScrollMarginBlock>
+  scrollMarginBlock?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin-block-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block-end
    */
-  scrollMarginBlockEnd?: Token<CSS.Property.ScrollMarginBlockEnd>
+  scrollMarginBlockEnd?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin-block-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block-start
    */
-  scrollMarginBlockStart?: Token<CSS.Property.ScrollMarginBlockStart>
+  scrollMarginBlockStart?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
    */
-  scrollMarginBottom?: Token<CSS.Property.ScrollMarginBottom | number, "spaces">
+  scrollMarginBottom?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-margin-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline
    */
-  scrollMarginInline?: Token<CSS.Property.ScrollMarginInline>
+  scrollMarginInline?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-end
    */
-  scrollMarginInlineEnd?: Token<CSS.Property.ScrollMarginInlineEnd>
+  scrollMarginInlineEnd?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-start
    */
-  scrollMarginInlineStart?: Token<CSS.Property.ScrollMarginInlineStart>
+  scrollMarginInlineStart?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-margin-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
    */
-  scrollMarginLeft?: Token<CSS.Property.ScrollMarginLeft | number, "spaces">
+  scrollMarginLeft?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-margin-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginRight?: Token<CSS.Property.ScrollMarginRight | number, "spaces">
+  scrollMarginRight?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-margin-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginTop?: Token<CSS.Property.ScrollMarginTop | number, "spaces">
+  scrollMarginTop?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
    */
-  scrollPadding?: Token<CSS.Property.ScrollPadding | number, "spaces">
+  scrollPadding?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding-block` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block
    */
-  scrollPaddingBlock?: Token<CSS.Property.ScrollPaddingBlock>
+  scrollPaddingBlock?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-padding-block-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block-end
    */
-  scrollPaddingBlockEnd?: Token<CSS.Property.ScrollPaddingBlockEnd>
+  scrollPaddingBlockEnd?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-padding-block-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block-start
    */
-  scrollPaddingBlockStart?: Token<CSS.Property.ScrollPaddingBlockStart>
+  scrollPaddingBlockStart?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-padding-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
    */
-  scrollPaddingBottom?: Token<
-    CSS.Property.ScrollPaddingBottom | number,
-    "spaces"
-  >
+  scrollPaddingBottom?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding-inline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline
    */
-  scrollPaddingInline?: Token<CSS.Property.ScrollPaddingInline>
+  scrollPaddingInline?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-padding-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-end
    */
-  scrollPaddingInlineEnd?: Token<CSS.Property.ScrollPaddingInlineEnd>
+  scrollPaddingInlineEnd?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-padding-inline-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-start
    */
-  scrollPaddingInlineStart?: Token<CSS.Property.ScrollPaddingInlineStart>
+  scrollPaddingInlineStart?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-padding-left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
    */
-  scrollPaddingLeft?: Token<CSS.Property.ScrollPaddingLeft | number, "spaces">
+  scrollPaddingLeft?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingRight?: Token<CSS.Property.ScrollPaddingRight | number, "spaces">
+  scrollPaddingRight?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding-top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingTop?: Token<CSS.Property.ScrollPaddingTop | number, "spaces">
+  scrollPaddingTop?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-snap-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
    */
-  scrollSnapAlign?: Token<CSS.Property.ScrollSnapAlign>
+  scrollSnapAlign?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-snap-stop` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop
    */
-  scrollSnapStop?: Token<CSS.Property.ScrollSnapStop>
+  scrollSnapStop?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-snap-type` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
    */
-  scrollSnapType?: Token<CSS.Property.ScrollSnapType>
+  scrollSnapType?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-timeline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline
    */
-  scrollTimeline?: Token<CSS.Property.ScrollTimeline>
+  scrollTimeline?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-timeline-axis` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline-axis
    */
-  scrollTimelineAxis?: Token<CSS.Property.ScrollTimelineAxis>
+  scrollTimelineAxis?: Token<CSS.Property.any>
   /**
    * The CSS `scroll-timeline-name` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline-name
    */
-  scrollTimelineName?: Token<CSS.Property.ScrollTimelineName>
+  scrollTimelineName?: Token<CSS.Property.any>
   /**
    * The CSS `scrollbar-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
    */
-  scrollbarColor?: Token<CSS.Property.ScrollbarColor>
+  scrollbarColor?: Token<CSS.Property.any>
   /**
    * The CSS `scrollbar-gutter` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
    */
-  scrollbarGutter?: Token<CSS.Property.ScrollbarGutter>
+  scrollbarGutter?: Token<CSS.Property.any>
   /**
    * The CSS `scrollbar-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
    */
-  scrollbarWidth?: Token<CSS.Property.ScrollbarWidth | number>
+  scrollbarWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `shape-image-threshold` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-image-threshold
    */
-  shapeImageThreshold?: Token<CSS.Property.ShapeImageThreshold>
+  shapeImageThreshold?: Token<CSS.Property.any>
   /**
    * The CSS `shape-margin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-margin
    */
-  shapeMargin?: Token<CSS.Property.ShapeMargin>
+  shapeMargin?: Token<CSS.Property.any>
   /**
    * The CSS `shape-outside` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-outside
    */
-  shapeOutside?: Token<CSS.Property.ShapeOutside>
+  shapeOutside?: Token<CSS.Property.any>
   /**
    * The CSS `tab-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
    */
-  tabSize?: Token<CSS.Property.TabSize>
+  tabSize?: Token<CSS.Property.any>
   /**
    * The CSS `table-layout` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
    */
-  tableLayout?: Token<CSS.Property.TableLayout>
+  tableLayout?: Token<CSS.Property.any>
   /**
    * The CSS `text-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
    */
-  textAlign?: Token<CSS.Property.TextAlign>
+  textAlign?: Token<CSS.Property.any>
   /**
    * The CSS `text-align-last` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
    */
-  textAlignLast?: Token<CSS.Property.TextAlignLast>
+  textAlignLast?: Token<CSS.Property.any>
   /**
    * The CSS `text-combine-upright` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-combine-upright
    */
-  textCombineUpright?: Token<CSS.Property.TextCombineUpright>
+  textCombineUpright?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
    */
-  textDecoration?: Token<CSS.Property.TextDecoration>
+  textDecoration?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
    */
-  textDecor?: Token<CSS.Property.TextDecoration>
+  textDecor?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
    */
-  textDecorationColor?: Token<CSS.Property.TextDecorationColor, "colors">
+  textDecorationColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `text-decoration-line` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
    */
-  textDecorationLine?: Token<CSS.Property.TextDecorationLine>
+  textDecorationLine?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration-skip` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
    */
-  textDecorationSkip?: Token<CSS.Property.TextDecorationSkip>
+  textDecorationSkip?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration-skip-ink` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
    */
-  textDecorationSkipInk?: Token<CSS.Property.TextDecorationSkipInk>
+  textDecorationSkipInk?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
    */
-  textDecorationStyle?: Token<CSS.Property.TextDecorationStyle>
+  textDecorationStyle?: Token<CSS.Property.any>
   /**
    * The CSS `text-decoration-thickness` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
    */
-  textDecorationThickness?: Token<CSS.Property.TextDecorationThickness>
+  textDecorationThickness?: Token<CSS.Property.any>
   /**
    * The CSS `text-emphasis` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
    */
-  textEmphasis?: Token<CSS.Property.TextEmphasis>
+  textEmphasis?: Token<CSS.Property.any>
   /**
    * The CSS `text-emphasis-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
    */
-  textEmphasisColor?: Token<CSS.Property.TextEmphasisColor, "colors">
+  textEmphasisColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `text-emphasis-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
    */
-  textEmphasisPosition?: Token<CSS.Property.TextEmphasisPosition>
+  textEmphasisPosition?: Token<CSS.Property.any>
   /**
    * The CSS `text-emphasis-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
    */
-  textEmphasisStyle?: Token<CSS.Property.TextEmphasisStyle>
+  textEmphasisStyle?: Token<CSS.Property.any>
   /**
    * The CSS `text-indent` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
    */
-  textIndent?: Token<CSS.Property.TextIndent>
+  textIndent?: Token<CSS.Property.any>
   /**
    * The CSS `text-justify` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
    */
-  textJustify?: Token<CSS.Property.TextJustify>
+  textJustify?: Token<CSS.Property.any>
   /**
    * The CSS `text-orientation` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
    */
-  textOrientation?: Token<CSS.Property.TextOrientation>
+  textOrientation?: Token<CSS.Property.any>
   /**
    * The CSS `text-overflow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
    */
-  textOverflow?: Token<CSS.Property.TextOverflow>
+  textOverflow?: Token<CSS.Property.any>
   /**
    * The CSS `text-rendering` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
    */
-  textRendering?: Token<CSS.Property.TextRendering>
+  textRendering?: Token<CSS.Property.any>
   /**
    * The CSS `text-shadow` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
    */
-  textShadow?: Token<CSS.Property.TextShadow, "shadows">
+  textShadow?: Token<CSS.Property.any, "shadows">
   /**
    * The CSS `text-size-adjust` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
    */
-  textSizeAdjust?: Token<CSS.Property.TextSizeAdjust>
+  textSizeAdjust?: Token<CSS.Property.any>
   /**
    * The CSS `text-transform` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
    */
-  textTransform?: Token<CSS.Property.TextTransform>
+  textTransform?: Token<CSS.Property.any>
   /**
    * The CSS `text-underline-offset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
    */
-  textUnderlineOffset?: Token<CSS.Property.TextUnderlineOffset>
+  textUnderlineOffset?: Token<CSS.Property.any>
   /**
    * The CSS `text-underline-position` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
    */
-  textUnderlinePosition?: Token<CSS.Property.TextUnderlinePosition>
+  textUnderlinePosition?: Token<CSS.Property.any>
   /**
    * The CSS `text-wrap` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap
    */
-  textWrap?: Token<CSS.Property.TextWrap>
+  textWrap?: Token<CSS.Property.any>
   /**
    * The CSS `timeline-scope` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/timeline-scope
    */
-  timelineScope?: Token<CSS.Property.TimelineScope>
+  timelineScope?: Token<CSS.Property.any>
   /**
    * The CSS `top` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
    */
-  top?: Token<CSS.Property.Top | number, "spaces">
+  top?: Token<CSS.Property.any | number, "spaces">
   /**
    * The CSS `touch-action` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action
    */
-  touchAction?: Token<CSS.Property.TouchAction>
+  touchAction?: Token<CSS.Property.any>
   /**
    * The CSS `transform` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform
    */
-  transform?: Token<CSS.Property.Transform>
+  transform?: Token<CSS.Property.any>
   /**
    * The CSS `transform-box` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-box
    */
-  transformBox?: Token<CSS.Property.TransformBox>
+  transformBox?: Token<CSS.Property.any>
   /**
    * The CSS `transform-origin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
    */
-  transformOrigin?: Token<CSS.Property.TransformOrigin>
+  transformOrigin?: Token<CSS.Property.any>
   /**
    * The CSS `transform-style` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
    */
-  transformStyle?: Token<CSS.Property.TransformStyle>
+  transformStyle?: Token<CSS.Property.any>
   /**
    * The CSS `transition-behavior` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior
    */
-  transitionBehavior?: Token<CSS.Property.TransitionBehavior>
+  transitionBehavior?: Token<CSS.Property.any>
   /**
    * The CSS `transition-delay` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
    */
-  transitionDelay?: Token<CSS.Property.TransitionDelay>
+  transitionDelay?: Token<CSS.Property.any>
   /**
    * The CSS `transition-duration` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration
    */
-  transitionDuration?: Token<
-    CSS.Property.TransitionDuration,
-    "transitionDuration"
-  >
+  transitionDuration?: Token<CSS.Property.any, "transitionDuration">
   /**
    * The CSS `transition-property` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
    */
-  transitionProperty?: Token<
-    CSS.Property.TransitionProperty,
-    "transitionProperty"
-  >
+  transitionProperty?: Token<CSS.Property.any, "transitionProperty">
   /**
    * The CSS `transition-timing-function` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
    */
-  transitionTimingFunction?: Token<
-    CSS.Property.TransitionTimingFunction,
-    "transitionEasing"
-  >
+  transitionTimingFunction?: Token<CSS.Property.any, "transitionEasing">
   /**
    * The CSS `translate` property.
    *
@@ -4484,133 +4424,133 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/unicode-bidi
    */
-  unicodeBidi?: Token<CSS.Property.UnicodeBidi>
+  unicodeBidi?: Token<CSS.Property.any>
   /**
    * The CSS `user-select` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
    */
-  userSelect?: Token<CSS.Property.UserSelect>
+  userSelect?: Token<CSS.Property.any>
   /**
    * The CSS `vertical-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
    */
-  verticalAlign?: Token<CSS.Property.VerticalAlign>
+  verticalAlign?: Token<CSS.Property.any>
   /**
    * The CSS `view-timeline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline
    */
-  viewTimeline?: Token<CSS.Property.ViewTimeline>
+  viewTimeline?: Token<CSS.Property.any>
   /**
    * The CSS `view-timeline-axis` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-axis
    */
-  viewTimelineAxis?: Token<CSS.Property.ViewTimelineAxis>
+  viewTimelineAxis?: Token<CSS.Property.any>
   /**
    * The CSS `view-timeline-inset` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-inset
    */
-  viewTimelineInset?: Token<CSS.Property.ViewTimelineInset>
+  viewTimelineInset?: Token<CSS.Property.any>
   /**
    * The CSS `view-timeline-name` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-name
    */
-  viewTimelineName?: Token<CSS.Property.ViewTimelineName>
+  viewTimelineName?: Token<CSS.Property.any>
   /**
    * The CSS `view-transition-name` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-name
    */
-  viewTransitionName?: Token<CSS.Property.ViewTransitionName>
+  viewTransitionName?: Token<CSS.Property.any>
   /**
    * The CSS `visibility` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
    */
-  visibility?: Token<CSS.Property.Visibility>
+  visibility?: Token<CSS.Property.any>
   /**
    * The CSS `white-space` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
    */
-  whiteSpace?: Token<CSS.Property.WhiteSpace>
+  whiteSpace?: Token<CSS.Property.any>
   /**
    * The CSS `white-space-collapse` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space-collapse
    */
-  whiteSpaceCollapse?: Token<CSS.Property.WhiteSpaceCollapse>
+  whiteSpaceCollapse?: Token<CSS.Property.any>
   /**
    * The CSS `widows` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/widows
    */
-  widows?: Token<CSS.Property.Widows>
+  widows?: Token<CSS.Property.any>
   /**
    * The CSS `width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
-  width?: Token<CSS.Property.Width | number, "sizes">
+  width?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
-  w?: Token<CSS.Property.Width | number, "sizes">
+  w?: Token<CSS.Property.any | number, "sizes">
   /**
    * The CSS `will-change` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/will-change
    */
-  willChange?: Token<CSS.Property.WillChange>
+  willChange?: Token<CSS.Property.any>
   /**
    * The CSS `word-break` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
    */
-  wordBreak?: Token<CSS.Property.WordBreak>
+  wordBreak?: Token<CSS.Property.any>
   /**
    * The CSS `word-spacing` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
    */
-  wordSpacing?: Token<CSS.Property.WordSpacing>
+  wordSpacing?: Token<CSS.Property.any>
   /**
    * The CSS `writing-mode` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
    */
-  writingMode?: Token<CSS.Property.WritingMode>
+  writingMode?: Token<CSS.Property.any>
   /**
    * The CSS `z-index` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
    */
-  zIndex?: Token<CSS.Property.ZIndex, "zIndices">
+  zIndex?: Token<CSS.Property.any, "zIndices">
   /**
    * The CSS `z-index` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
    */
-  z?: Token<CSS.Property.ZIndex, "zIndices">
+  z?: Token<CSS.Property.any, "zIndices">
   /**
    * The CSS `zoom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
    */
-  zoom?: Token<CSS.Property.Zoom>
+  zoom?: Token<CSS.Property.any>
   /**
    * The CSS `alignment-baseline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
    */
-  alignmentBaseline?: Token<CSS.Property.AlignmentBaseline>
+  alignmentBaseline?: Token<CSS.Property.any>
   /**
    * The CSS `azimuth` property.
    *
@@ -4618,115 +4558,115 @@ export type StyleProps = {
    *
    * @deprecated
    */
-  azimuth?: Token<CSS.Property.Azimuth>
+  azimuth?: Token<CSS.Property.any>
   /**
    * The CSS `baseline-shift` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
    */
-  baselineShift?: Token<CSS.Property.BaselineShift>
+  baselineShift?: Token<CSS.Property.any>
   /**
    * The CSS `clip-rule` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/clip-rule
    */
-  clipRule?: Token<CSS.Property.ClipRule>
+  clipRule?: Token<CSS.Property.any>
   /**
    * The CSS `dominant-baseline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline
    */
-  dominantBaseline?: Token<CSS.Property.DominantBaseline>
+  dominantBaseline?: Token<CSS.Property.any>
   /**
    * The CSS `fill` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill
    */
-  fill?: Token<CSS.Property.Fill, "colors">
+  fill?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `fill-opacity` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity
    */
-  fillOpacity?: Token<CSS.Property.FillOpacity>
+  fillOpacity?: Token<CSS.Property.any>
   /**
    * The CSS `fill-rule` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule
    */
-  fillRule?: Token<CSS.Property.FillRule>
+  fillRule?: Token<CSS.Property.any>
   /**
    * The CSS `flood-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
    */
-  floodColor?: Token<CSS.Property.FloodColor, "colors">
+  floodColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `flood-opacity` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
    */
-  floodOpacity?: Token<CSS.Property.FloodOpacity>
+  floodOpacity?: Token<CSS.Property.any>
   /**
    * The CSS `glyph-orientation-vertical` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/glyph-orientation-vertical
    */
-  glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
+  glyphOrientationVertical?: Token<CSS.Property.any>
   /**
    * The CSS `lighting-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
    */
-  lightingColor?: Token<CSS.Property.LightingColor, "colors">
+  lightingColor?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `marker-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-end
    */
-  markerEnd?: Token<CSS.Property.MarkerEnd>
+  markerEnd?: Token<CSS.Property.any>
   /**
    * The CSS `marker-mid` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-mid
    */
-  markerMid?: Token<CSS.Property.MarkerMid>
+  markerMid?: Token<CSS.Property.any>
   /**
    * The CSS `marker-start` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-start
    */
-  markerStart?: Token<CSS.Property.MarkerStart>
+  markerStart?: Token<CSS.Property.any>
   /**
    * The CSS `shape-rendering` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
    */
-  shapeRendering?: Token<CSS.Property.ShapeRendering>
+  shapeRendering?: Token<CSS.Property.any>
   /**
    * The CSS `stop-color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-color
    */
-  stopColor?: Token<CSS.Property.StopColor>
+  stopColor?: Token<CSS.Property.any>
   /**
    * The CSS `stop-opacity` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-opacity
    */
-  stopOpacity?: Token<CSS.Property.StopOpacity>
+  stopOpacity?: Token<CSS.Property.any>
   /**
    * The CSS `stroke` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke
    */
-  stroke?: Token<CSS.Property.Stroke, "colors">
+  stroke?: Token<CSS.Property.any, "colors">
   /**
    * The CSS `stroke-dasharray` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
    */
-  strokeDasharray?: Token<CSS.Property.StrokeDasharray>
+  strokeDasharray?: Token<CSS.Property.any>
   /**
    * The CSS `stroke-dashoffset` property.
    *
@@ -4738,215 +4678,169 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap
    */
-  strokeLinecap?: Token<CSS.Property.StrokeLinecap>
+  strokeLinecap?: Token<CSS.Property.any>
   /**
    * The CSS `stroke-linejoin` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin
    */
-  strokeLinejoin?: Token<CSS.Property.StrokeLinejoin>
+  strokeLinejoin?: Token<CSS.Property.any>
   /**
    * The CSS `stroke-miterlimit` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-miterlimit
    */
-  strokeMiterlimit?: Token<CSS.Property.StrokeMiterlimit>
+  strokeMiterlimit?: Token<CSS.Property.any>
   /**
    * The CSS `stroke-opacity` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-opacity
    */
-  strokeOpacity?: Token<CSS.Property.StrokeOpacity>
+  strokeOpacity?: Token<CSS.Property.any>
   /**
    * The CSS `stroke-width` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
    */
-  strokeWidth?: Token<CSS.Property.StrokeWidth | number>
+  strokeWidth?: Token<CSS.Property.any | number>
   /**
    * The CSS `text-anchor` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor
    */
-  textAnchor?: Token<CSS.Property.TextAnchor>
+  textAnchor?: Token<CSS.Property.any>
   /**
    * The CSS `vector-effect` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/vector-effect
    */
-  vectorEffect?: Token<CSS.Property.VectorEffect>
+  vectorEffect?: Token<CSS.Property.any>
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
-  marginX?: Token<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
-    "spaces"
-  >
+  marginX?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
    */
-  mx?: Token<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
-    "spaces"
-  >
+  mx?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-top` and `margin-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
    */
-  marginY?: Token<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
+  marginY?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `margin-top` and `margin-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
    */
-  my?: Token<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
+  my?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-start` and `padding-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
-  paddingX?: Token<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
+  paddingX?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-inline-start` and `padding-inline-end` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
    */
-  px?: Token<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
+  px?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-top` and `padding-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
-  paddingY?: Token<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
+  paddingY?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `padding-top` and `padding-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
    */
-  py?: Token<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
+  py?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-margin-left` and `scroll-margin-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginX?: Token<
-    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
-    "spaces"
-  >
+  scrollMarginX?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-margin-top` and `scroll-margin-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginY?: Token<
-    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
-    "spaces"
-  >
+  scrollMarginY?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding-left` and `scroll-padding-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingX?: Token<
-    CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
-    "spaces"
-  >
+  scrollPaddingX?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `scroll-padding-top` and `scroll-padding-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingY?: Token<
-    CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
-    "spaces"
-  >
+  scrollPaddingY?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `left` and `right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
    */
-  insetX?: Token<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  insetX?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `top` and `bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
    */
-  insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
+  insetY?: Token<CSS.Property.any | CSS.Property.any | number, "spaces">
   /**
    * The CSS `border-top` and `border-bottom` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
    */
-  borderY?: Token<CSS.Property.BorderBottom | CSS.Property.BorderTop, "borders">
+  borderY?: Token<CSS.Property.any | CSS.Property.any, "borders">
   /**
    * The CSS `border-left` and `border-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
    */
-  borderX?: Token<CSS.Property.BorderLeft | CSS.Property.BorderRight, "borders">
+  borderX?: Token<CSS.Property.any | CSS.Property.any, "borders">
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRadius?: Token<
-    | CSS.Property.BorderTopLeftRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
+  borderTopRadius?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
-  roundedTop?: Token<
-    | CSS.Property.BorderTopLeftRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
+  roundedTop?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
    *
@@ -4954,9 +4848,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
   borderBottomRadius?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderBottomRightRadius
-    | number,
+    CSS.Property.any | CSS.Property.any | number,
     "radii"
   >
   /**
@@ -4965,12 +4857,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottom?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderBottomRightRadius
-    | number,
-    "radii"
-  >
+  roundedBottom?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
    *
@@ -4978,9 +4865,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
   borderRightRadius?: Token<
-    | CSS.Property.BorderBottomRightRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
+    CSS.Property.any | CSS.Property.any | number,
     "radii"
   >
   /**
@@ -4989,12 +4874,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
    */
-  roundedRight?: Token<
-    | CSS.Property.BorderBottomRightRadius
-    | CSS.Property.BorderTopRightRadius
-    | number,
-    "radii"
-  >
+  roundedRight?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
    *
@@ -5002,9 +4882,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    */
   borderLeftRadius?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderTopLeftRadius
-    | number,
+    CSS.Property.any | CSS.Property.any | number,
     "radii"
   >
   /**
@@ -5013,12 +4891,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
    */
-  roundedLeft?: Token<
-    | CSS.Property.BorderBottomLeftRadius
-    | CSS.Property.BorderTopLeftRadius
-    | number,
-    "radii"
-  >
+  roundedLeft?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-start-start-radius` and `border-start-end-radius` property.
    *
@@ -5026,9 +4899,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
   borderInlineStartRadius?: Token<
-    | CSS.Property.BorderStartEndRadius
-    | CSS.Property.BorderStartStartRadius
-    | number,
+    CSS.Property.any | CSS.Property.any | number,
     "radii"
   >
   /**
@@ -5038,9 +4909,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
   borderStartRadius?: Token<
-    | CSS.Property.BorderStartEndRadius
-    | CSS.Property.BorderStartStartRadius
-    | number,
+    CSS.Property.any | CSS.Property.any | number,
     "radii"
   >
   /**
@@ -5049,12 +4918,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
    */
-  roundedStart?: Token<
-    | CSS.Property.BorderStartEndRadius
-    | CSS.Property.BorderStartStartRadius
-    | number,
-    "radii"
-  >
+  roundedStart?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
@@ -5062,9 +4926,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
   borderInlineEndRadius?: Token<
-    | CSS.Property.BorderEndEndRadius
-    | CSS.Property.BorderEndStartRadius
-    | number,
+    CSS.Property.any | CSS.Property.any | number,
     "radii"
   >
   /**
@@ -5073,48 +4935,35 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  borderEndRadius?: Token<
-    | CSS.Property.BorderEndEndRadius
-    | CSS.Property.BorderEndStartRadius
-    | number,
-    "radii"
-  >
+  borderEndRadius?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `border-end-start-radius` and `border-end-end-radius` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
    */
-  roundedEnd?: Token<
-    | CSS.Property.BorderEndEndRadius
-    | CSS.Property.BorderEndStartRadius
-    | number,
-    "radii"
-  >
+  roundedEnd?: Token<CSS.Property.any | CSS.Property.any | number, "radii">
   /**
    * The CSS `width` and `height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
    */
-  boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
+  boxSize?: Token<CSS.Property.any | CSS.Property.any | number, "sizes">
   /**
    * The CSS `min-width` and `min-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
    */
-  minBoxSize?: Token<
-    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
-    "sizes"
-  >
+  minBoxSize?: Token<CSS.Property.any | CSS.Property.any | number, "sizes">
   /**
    * The CSS `max-width` and `max-height` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth | number>
+  maxBoxSize?: Token<CSS.Property.any | CSS.Property.any | number>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */
@@ -5312,34 +5161,52 @@ export type StyleProps = {
     minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
     maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
     maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    anyHover?: StringLiteral
-    anyPointer?: StringLiteral
-    aspectRatio?: StringLiteral
-    color?: StringLiteral
-    colorGamut?: StringLiteral
-    colorIndex?: StringLiteral
-    deviceAspectRatio?: StringLiteral
-    deviceHeight?: StringLiteral
-    deviceWidth?: StringLiteral
-    displayMode?: StringLiteral
-    dynamicRange?: StringLiteral
-    forcedColors?: StringLiteral
-    grid?: StringLiteral
-    hover?: StringLiteral
-    invertedColors?: StringLiteral
-    monochrome?: StringLiteral
-    orientation?: StringLiteral
-    overflowBlock?: StringLiteral
-    overflowInline?: StringLiteral
-    pointer?: StringLiteral
-    prefersColorScheme?: StringLiteral
-    prefersContrast?: StringLiteral
-    prefersReducedMotion?: StringLiteral
+    anyHover?: "none" | "hover"
+    anyPointer?: "none" | "coarse" | "fine"
+    aspectRatio?: CSS.Property.AspectRatio
+    color?: number
+    minColor?: number
+    maxColor?: number
+    colorGamut?: "srgb" | "p3" | "rec2020"
+    colorIndex?: number
+    minColorIndex?: number
+    maxColorIndex?: number
+    deviceAspectRatio?: CSS.Property.AspectRatio
+    minDeviceAspectRatio?: CSS.Property.AspectRatio
+    maxDeviceAspectRatio?: CSS.Property.AspectRatio
+    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
+    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    displayMode?:
+      | "browser"
+      | "fullscreen"
+      | "minimal-ui"
+      | "picture-in-picture"
+      | "standalone"
+      | "window-controls-overlay"
+    dynamicRange?: "standard" | "high"
+    forcedColors?: "none" | "active"
+    grid?: 0 | 1
+    hover?: "none" | "hover"
+    invertedColors?: "none" | "inverted"
+    monochrome?: number
+    minMonochrome?: number
+    maxMonochrome?: number
+    orientation?: "portrait" | "landscape" | StringLiteral
+    overflowBlock?: "none" | "scroll" | "paged" | "optional-paged"
+    overflowInline?: "none" | "scroll"
+    pointer?: "none" | "coarse" | "fine"
+    prefersColorScheme?: "light" | "dark"
+    prefersContrast?: "no-preference" | "high" | "low" | "custom"
+    prefersReducedMotion?: "no-preference" | "reduce"
     resolution?: StringLiteral
-    scan?: StringLiteral
-    scripting?: StringLiteral
-    update?: StringLiteral
-    videoDynamicRange?: StringLiteral
+    scan?: "interlace" | "progressive"
+    scripting?: "none" | "initial-only" | "enabled"
+    update?: "none" | "slow" | "fast"
+    videoDynamicRange?: "standard" | "high"
     css?: CSSUIObject
     [key: string]: any
   }[]

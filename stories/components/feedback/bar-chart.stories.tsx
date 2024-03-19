@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type {
   ChartTooltip,
-  BarChartSeries,
   BarChartProps,
   ChartLayoutType,
   ChartAxisType,
   BarChartType,
+  BarProps,
 } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
@@ -43,7 +43,7 @@ export const basic: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -65,7 +65,7 @@ export const custom: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -261,7 +261,7 @@ export const withSize: Story = () => {
       Tablets: randomValue(),
     }))
   }, [])
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -296,7 +296,7 @@ export const withSync: Story = () => {
       }))
     }, []),
   ]
-  const series: BarChartSeries[][] = [
+  const series: BarProps[][] = [
     useMemo(
       () => [{ dataKey: "Smartphones", color: ["primary.500", "primary.400"] }],
       [],
@@ -335,7 +335,7 @@ export const withReferenceLine: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -366,7 +366,7 @@ export const withLegend: Story = () => {
       Tablets: randomValue(),
     }))
   }, [])
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -401,7 +401,7 @@ export const withValueFormatter: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -430,7 +430,7 @@ export const withStrokeDasharray: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -460,7 +460,7 @@ export const withFillOpacity: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -489,7 +489,7 @@ export const withUnit: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -519,7 +519,7 @@ export const useMixData: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       {
         dataKey: "Smartphones",
@@ -549,7 +549,7 @@ export const withGap: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       {
         dataKey: "Smartphones",
@@ -620,7 +620,7 @@ export const useRangeData: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [{ dataKey: "Smartphones", color: ["primary.500", "primary.400"] }],
     [],
   )
@@ -637,7 +637,7 @@ export const customBar: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       {
         dataKey: "Smartphones",
@@ -661,7 +661,7 @@ export const customBackground: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       {
         dataKey: "Smartphones",
@@ -691,7 +691,7 @@ export const customAxis: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -725,7 +725,7 @@ export const customActiveBar: Story = () => {
     }))
   }, [])
 
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       {
         dataKey: "Smartphones",
@@ -751,7 +751,7 @@ export const customTooltip: Story = () => {
       Tablets: randomValue(),
     }))
   }, [])
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -812,7 +812,7 @@ export const customCursor: Story = () => {
       Tablets: randomValue(),
     }))
   }, [])
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
@@ -848,7 +848,7 @@ export const customLegend: Story = () => {
       Tablets: randomValue(),
     }))
   }, [])
-  const series: BarChartSeries[] = useMemo(
+  const series: BarProps[] = useMemo(
     () => [
       { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
       { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },

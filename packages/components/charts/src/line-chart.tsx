@@ -30,7 +30,10 @@ import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
-import { useChartTooltip, type UseChartTooltipProps } from "./use-chart-tooltip"
+import {
+  useChartTooltip,
+  type UseChartTooltipOptions,
+} from "./use-chart-tooltip"
 import { useLineChart } from "./use-line-chart"
 import type { UseLineChartOptions } from "./use-line-chart"
 
@@ -56,7 +59,7 @@ export type LineChartProps = HTMLUIProps<"div"> &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipProps &
+  UseChartTooltipOptions &
   UseChartLegendProps &
   UseLineChartOptions
 
@@ -141,6 +144,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
   const { getTooltipProps, tooltipVars } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
+    styles,
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 

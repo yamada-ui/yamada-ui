@@ -3,7 +3,7 @@ import type {
   ChartCurveType,
   AreaChartType,
   ChartLayoutType,
-  AreaChartSeries,
+  AreaProps,
   ChartAxisType,
   AreaChartProps,
   ChartTooltip,
@@ -52,7 +52,7 @@ export const basic: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -78,7 +78,7 @@ export const custom: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -359,7 +359,7 @@ export const withSize: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -390,7 +390,7 @@ export const withDash: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       {
         dataKey: "uv",
@@ -416,7 +416,7 @@ export const withSplit: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
     [],
   )
@@ -468,7 +468,7 @@ export const withConnectNulls: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
     [],
   )
@@ -498,7 +498,7 @@ export const withSync: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -539,7 +539,7 @@ export const withReferenceLine: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -575,7 +575,7 @@ export const withLegend: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -601,7 +601,7 @@ export const withValueFormatter: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -634,7 +634,7 @@ export const withStrokeDasharray: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -668,7 +668,7 @@ export const withFillOpacity: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -701,7 +701,7 @@ export const withUnit: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -733,7 +733,7 @@ export const useRangeData: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [{ dataKey: "uv", color: ["primary.500", "primary.400"] }],
     [],
   )
@@ -764,7 +764,7 @@ export const customAxis: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -804,7 +804,7 @@ export const customDots: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       {
         dataKey: "uv",
@@ -849,7 +849,7 @@ export const customTooltip: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
@@ -915,7 +915,7 @@ export const customLegend: Story = () => {
     [],
   )
 
-  const series: AreaChartSeries[] = useMemo(
+  const series: AreaProps[] = useMemo(
     () => [
       { dataKey: "uv", color: ["primary.500", "primary.400"] },
       { dataKey: "pv", color: ["secondary.500", "secondary.400"] },

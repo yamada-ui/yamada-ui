@@ -13,6 +13,11 @@ export const LineChart: ComponentMultiStyle = {
       stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,
     },
+    cursor: {
+      fill: ["blackAlpha.200", "whiteAlpha.200"],
+      stroke: ["blackAlpha.300", "whiteAlpha.300"],
+      strokeWidth: 1,
+    },
     xAxis: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "xs",

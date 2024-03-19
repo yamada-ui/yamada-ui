@@ -34,7 +34,7 @@ import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
-import type { UseChartTooltipProps } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 type AreaChartOptions = {
@@ -60,7 +60,7 @@ export type AreaChartProps = HTMLUIProps<"div"> &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipProps &
+  UseChartTooltipOptions &
   UseChartLegendProps
 
 export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
@@ -157,7 +157,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const { getTooltipProps, tooltipVars } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
-    valueFormatter,
+    styles,
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 

@@ -33,7 +33,7 @@ import {
   useChartReferenceLine,
   type UseChartReferenceLineOptions,
 } from "./use-chart-reference-line"
-import type { UseChartTooltipProps } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 type BarChartOptions = {
@@ -59,7 +59,7 @@ export type BarChartProps = HTMLUIProps<"div"> &
   UseChartAxisOptions &
   UseChartReferenceLineOptions &
   UseChartGridOptions &
-  UseChartTooltipProps &
+  UseChartTooltipOptions &
   UseChartLegendProps
 
 export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
@@ -134,7 +134,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   const { getTooltipProps, tooltipVars } = useChartTooltip({
     tooltipProps,
     tooltipAnimationDuration,
-    valueFormatter,
+    styles,
   })
   const { getLegendProps } = useChartLegend({ legendProps })
 

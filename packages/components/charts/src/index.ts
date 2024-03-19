@@ -9,9 +9,6 @@ export type { PieChartProps } from "./pie-chart"
 export { RadarChart } from "./radar-chart"
 export type { RadarChartProps } from "./radar-chart"
 export type {
-  AreaChartSeries,
-  LineChartSeries,
-  BarChartSeries,
   ChartCurveType,
   ChartLayoutType,
   ChartAxisType,

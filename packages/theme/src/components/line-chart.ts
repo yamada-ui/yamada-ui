@@ -14,8 +14,8 @@ export const LineChart: ComponentMultiStyle = {
       strokeWidth: 1,
     },
     cursor: {
-      fill: ["blackAlpha.200", "whiteAlpha.200"],
-      stroke: ["blackAlpha.300", "whiteAlpha.300"],
+      fill: ["blackAlpha.50", "whiteAlpha.50"],
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,
     },
     xAxis: {

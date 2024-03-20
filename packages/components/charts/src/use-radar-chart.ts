@@ -108,6 +108,10 @@ export const useRadarChart = ({
     activeDot = {},
     ...computedRadarProps
   } = rest.radarProps ?? {}
+  const resolvedPolarGrid = useMemo(
+    () => ({ ...rest.polarGridProps, ...styles.polarGrid }),
+    [rest.polarGridProps, styles.polarGrid],
+  )
 
   const radarColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -121,11 +125,18 @@ export const useRadarChart = ({
   )
 
   const radarVars: CSSUIProps["var"] = useMemo(
-    () => [
-      ...radarColors,
-      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
-    ],
-    [fillOpacity, radarColors],
+    () =>
+      [
+        ...radarColors,
+        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+        {
+          __prefix: "ui",
+          name: "grid-stroke",
+          token: "colors",
+          value: resolvedPolarGrid.stroke!,
+        },
+      ] as Required<CSSUIProps>["var"],
+    [fillOpacity, radarColors, resolvedPolarGrid.stroke],
   )
 
   const [radarChartProps, radarChartClassName] = useMemo(
@@ -327,6 +338,7 @@ export const useRadarChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, polarGridClassName),
+      stroke: "var(--ui-grid-stroke)",
       ...props,
       ...polarGridProps,
     }),

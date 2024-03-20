@@ -635,6 +635,10 @@ export interface GeneratedTheme extends UITheme {
     | "beerus"
     | (string & {})
   components: {
+    Toggle: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "subtle" | "solid" | "outline" | "unstyled" | (string & {})
+    }
     Accordion: {
       sizes: string & {}
       variants: "basic" | "card" | "unstyled" | (string & {})

@@ -756,16 +756,8 @@
       "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerEnter\"]>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerEnterCapture\"]>",
-      "required": false
-    },
     "onPointerLeave": {
       "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerLeave\"]>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
-      "type": "NonNullable<HTMLMotionProps<Y>[\"onPointerLeaveCapture\"]>",
       "required": false
     },
     "onPointerMove": {

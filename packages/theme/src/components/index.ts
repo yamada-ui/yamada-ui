@@ -70,9 +70,11 @@ import { Table } from "./table"
 import { Tabs } from "./tabs"
 import { Tag } from "./tag"
 import { Textarea } from "./textarea"
+import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
 
 export default {
+  Toggle,
   Accordion,
   Alert,
   AlphaSlider,

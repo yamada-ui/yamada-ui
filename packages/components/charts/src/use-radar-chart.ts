@@ -69,7 +69,7 @@ export type UseRadarChartOptions = {
    */
   withActiveDots?: boolean
   /**
-   * Stroke width for the chart lines.
+   * Stroke width for the chart radars.
    *
    * @default 2
    */
@@ -81,7 +81,7 @@ export type UseRadarChartOptions = {
    */
   fillOpacity?: number | [number, number]
   /**
-   * A function to format values on Y axis and inside the tooltip
+   * A function to format values on Y axis and inside the tooltip.
    */
   valueFormatter?: (value: number) => string
 }

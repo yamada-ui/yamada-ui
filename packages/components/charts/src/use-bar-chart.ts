@@ -34,7 +34,7 @@ export type UseBarChartOptions = {
    */
   barProps?: Partial<BarProps>
   /**
-   * Controls how chart bars are positioned relative to each other
+   * Controls how chart bars are positioned relative to each other.
    *
    * @default `default`
    */

@@ -40,15 +40,15 @@ export const basic: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -68,15 +68,15 @@ export const withSize: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -103,14 +103,14 @@ export const withDash: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse: randomValue(),
+      sales: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
       {
-        dataKey: "salse",
+        dataKey: "sales",
         color: ["primary.500", "primary.400"],
         strokeDasharray: "5 5",
       },
@@ -133,15 +133,15 @@ export const custom: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -296,15 +296,15 @@ export const withLegend: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -324,15 +324,15 @@ export const withValueFormatter: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -360,15 +360,15 @@ export const withFillOpacity: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -395,15 +395,15 @@ export const useCircleGrid: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -430,15 +430,15 @@ export const customDots: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -476,15 +476,15 @@ export const customTooltip: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -544,15 +544,15 @@ export const customLegend: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )
@@ -580,15 +580,15 @@ export const customPolarRadiusAxis: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse_january: randomValue(),
-      salse_february: randomValue(),
+      sales_january: randomValue(),
+      sales_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
     () => [
-      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
-      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
     ],
     [],
   )

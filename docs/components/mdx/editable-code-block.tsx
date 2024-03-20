@@ -1,3 +1,6 @@
+import createEmotionCache from "@emotion/cache"
+import { CacheProvider } from "@emotion/react"
+import weakMemoize from "@emotion/weak-memoize"
 import { faker } from "@faker-js/faker"
 import {
   faMinus,
@@ -42,6 +45,7 @@ import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import * as MarkdownComponents from "@yamada-ui/markdown"
 import type { SkeletonProps } from "@yamada-ui/react"
 import {
+  ui,
   Box,
   Text,
   ScrollArea,
@@ -56,19 +60,20 @@ import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import type { PrismTheme } from "prism-react-renderer"
 import type { FC, PropsWithChildren } from "react"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
 import { useForm, Controller } from "react-hook-form"
 import { FaRobot, FaCheckCircle, FaPhone } from "react-icons/fa"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
-import { theme as defaultTheme } from "theme"
+import { theme as defaultTheme, config as defaultConfig } from "theme"
 import { wait } from "utils/async"
 import "dayjs/locale/ja"
 
 const UIProvider: FC<UIComponents.UIProviderProps> = ({
   theme = defaultTheme,
-  config,
+  config = defaultConfig,
   children,
 }) => {
   return (
@@ -149,6 +154,7 @@ export type EditableCodeBlockProps = {
   enableTypeScript?: boolean
   language?: string
   functional?: boolean
+  iframe?: boolean
   noInline?: boolean
   theme?: PrismTheme
   transformCode?: (code: string) => void
@@ -157,6 +163,7 @@ export type EditableCodeBlockProps = {
 export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
   code,
   functional,
+  iframe,
   ...rest
 }) => {
   code = code.trim().replace("// prettier-ignore", "").trim()
@@ -183,13 +190,19 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
     >
       <Box my="6">
         <Preview>
-          <Box
-            as={LivePreview}
-            p="md"
-            borderWidth="1px"
-            rounded="md"
-            overflowX="auto"
-          />
+          {iframe ? (
+            <Iframe>
+              <Box as={LivePreview} w="full" h="full" p="md" overflow="auto" />
+            </Iframe>
+          ) : (
+            <Box
+              as={LivePreview}
+              p="md"
+              borderWidth="1px"
+              rounded="md"
+              overflowX="auto"
+            />
+          )}
         </Preview>
 
         <Box rounded="md" overflow="hidden" my="4" position="relative">
@@ -241,6 +254,51 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
 }
 
 export default EditableCodeBlock
+
+const createCache = weakMemoize((container: Node) =>
+  createEmotionCache({ container, key: "iframe-css" }),
+)
+
+const Iframe: FC<PropsWithChildren> = ({ children }) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const headRef = useRef<HTMLHeadElement>(null)
+  const bodyRef = useRef<HTMLElement>(null)
+  const head = headRef.current
+  const body = bodyRef.current
+  const [, forceUpdate] = useState({})
+
+  useEffect(() => {
+    if (!iframeRef.current) return
+
+    const iframe = iframeRef.current
+
+    headRef.current = iframe.contentDocument.head
+    bodyRef.current = iframe.contentDocument.body
+
+    forceUpdate({})
+  }, [])
+
+  return (
+    <ui.iframe
+      title="react-live-iframe"
+      ref={iframeRef}
+      w="full"
+      h="xl"
+      border="1px solid"
+      borderColor="border"
+      rounded="md"
+    >
+      {head && body
+        ? createPortal(
+            <CacheProvider value={createCache(head)}>
+              <UIProvider>{children}</UIProvider>
+            </CacheProvider>,
+            body,
+          )
+        : null}
+    </ui.iframe>
+  )
+}
 
 const Preview: FC<SkeletonProps> = ({ ...rest }) => {
   const [isMounted, { on }] = useBoolean()

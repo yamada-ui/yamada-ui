@@ -62,7 +62,7 @@ Please support this project with you or your organization. Your logo will appear
 
 ### Individuals
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40" /></a>
 
 ## Contributing
 

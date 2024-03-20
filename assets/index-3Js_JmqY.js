@@ -1,0 +1,1 @@
+import{r as n}from"./index-CBqU2yxZ.js";import{g as o}from"./factory-Dr9dj2_3.js";const c=(e,s,r)=>{const t=o(s);n.useEffect(()=>(window.addEventListener(e,t,r),()=>{window.removeEventListener(e,t,r)}),[e,t,r])};export{c as u};

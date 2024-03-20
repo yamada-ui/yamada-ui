@@ -1,25 +1,31 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import { mergeConfig } from "vite"
-import path from "path"
+import path, { dirname, join } from "path"
 
 const config: StorybookConfig = {
-  framework: "@storybook/react-vite",
+  framework: getAbsolutePath("@storybook/react-vite"),
+
   features: {
     buildStoriesJson: true,
   },
+
   core: {
     disableTelemetry: true,
   },
-  stories: ["../stories/**/*.stories.@(tsx|mdx)"],
+
+  stories: ["../stories/**/*.@(mdx|stories.@(tsx))"],
+
   addons: [
-    "@storybook/addon-viewport",
-    "@storybook/addon-docs",
-    "@storybook/addon-a11y",
-    "@storybook/addon-backgrounds",
-    "@storybook/addon-measure",
-    "@storybook/addon-storysource",
-    "storybook-dark-mode",
+    getAbsolutePath("@storybook/addon-viewport"),
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-backgrounds"),
+    getAbsolutePath("@storybook/addon-measure"),
+    getAbsolutePath("@storybook/addon-storysource"),
+    getAbsolutePath("storybook-dark-mode"),
+    getAbsolutePath("@storybook/addon-mdx-gfm"),
   ],
+
   viteFinal: async (config) => {
     config = mergeConfig(config, {
       resolve: {
@@ -40,9 +46,18 @@ const config: StorybookConfig = {
 
     return config
   },
+
   typescript: {
     reactDocgen: false,
+  },
+
+  docs: {
+    autodocs: true,
   },
 }
 
 export default config
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")))
+}

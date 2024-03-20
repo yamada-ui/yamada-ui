@@ -13,7 +13,7 @@ export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
       strokeWidth: 1,
     },
     polarRadiusAxis: {
-      stroke: ["blackAlpha.700", "whiteAlpha.700"],
+      stroke: ["blackAlpha.700", "whiteAlpha.600"],
       strokeWidth: 1,
     },
   },

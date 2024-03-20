@@ -220,7 +220,7 @@ export const useRadarChart = ({
   }, [dimRadar, theme])
 
   const [dotProps, dotClassName] = useMemo(() => {
-    const resolvedDot = { fillOpacity: 1, strokeOpacity: 1, ...dot }
+    const resolvedDot = { fillOpacity: 1, strokeWidth: 2, ...dot }
 
     return getComponentProps<Dict, string>(
       [resolvedDot, dotProperties],
@@ -313,6 +313,7 @@ export const useRadarChart = ({
           resolvedDot = {
             className: cx("ui-radar-chart__dot", className),
             fill: color,
+            r: 4,
             ...rest,
           } as Recharts.DotProps
         } else {

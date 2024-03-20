@@ -5,10 +5,6 @@ import path, { dirname, join } from "path"
 const config: StorybookConfig = {
   framework: getAbsolutePath("@storybook/react-vite"),
 
-  features: {
-    buildStoriesJson: true,
-  },
-
   core: {
     disableTelemetry: true,
   },

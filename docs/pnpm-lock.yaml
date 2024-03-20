@@ -4086,7 +4086,7 @@ packages:
     dev: false
 
   /@yamada-ui/use-timeout@1.0.7(react@18.2.0):
-    resolution: {integrity: sha512-cC+vSUpzDNOOZfX7fk0gW/MmJ1R8MmuPeApiCvRa+m7mR/aVKNGnPwqBFo/9Wyn7eqbjwwKMJEHmMn+aWZAqQA==, tarball: https://registry.npmjs.org/@yamada-ui/use-timeout/-/use-timeout-1.0.7.tgz}
+    resolution: {integrity: sha512-cC+vSUpzDNOOZfX7fk0gW/MmJ1R8MmuPeApiCvRa+m7mR/aVKNGnPwqBFo/9Wyn7eqbjwwKMJEHmMn+aWZAqQA==}
     peerDependencies:
       react: '>=18'
     dependencies:

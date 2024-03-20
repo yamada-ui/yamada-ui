@@ -35,7 +35,7 @@
       "required": false,
       "description": "If `true`, the toggle button will be disabled."
     },
-    "isReadonly": {
+    "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,
@@ -82,7 +82,7 @@
       "required": false,
       "description": "If `true`, all wrapped toggle button will be disabled."
     },
-    "isReadonly": {
+    "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,

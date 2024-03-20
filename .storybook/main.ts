@@ -19,7 +19,6 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-measure"),
     getAbsolutePath("@storybook/addon-storysource"),
     getAbsolutePath("storybook-dark-mode"),
-    getAbsolutePath("@storybook/addon-mdx-gfm"),
   ],
 
   viteFinal: async (config) => {

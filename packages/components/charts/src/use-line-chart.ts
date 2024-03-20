@@ -152,9 +152,9 @@ export const useLineChart = ({
     () =>
       getComponentProps<Dict, string>(
         [rest.lineChartProps ?? {}, lineChartProperties],
-        styles.lineChart,
+        styles.chart,
       )(theme),
-    [rest.lineChartProps, styles.lineChart, theme],
+    [rest.lineChartProps, styles.chart, theme],
   )
 
   const [lineProps, lineClassName] = useMemo(() => {

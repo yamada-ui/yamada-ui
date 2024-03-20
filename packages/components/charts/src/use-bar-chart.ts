@@ -126,9 +126,9 @@ export const useBarChart = ({
 
     return getComponentProps<Dict, string>(
       [resolvedBarChartProps, barChartProperties],
-      styles.barChart,
+      styles.chart,
     )(theme)
-  }, [rest.barChartProps, styles.barChart, theme])
+  }, [rest.barChartProps, styles.chart, theme])
 
   const [barProps, barClassName] = useMemo(() => {
     const resolvedBarProps = {

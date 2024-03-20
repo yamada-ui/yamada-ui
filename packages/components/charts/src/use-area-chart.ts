@@ -198,9 +198,9 @@ export const useAreaChart = ({
     () =>
       getComponentProps<Dict, string>(
         [rest.areaChartProps ?? {}, areaChartProperties],
-        styles.areaChart,
+        styles.chart,
       )(theme),
-    [rest.areaChartProps, styles.areaChart, theme],
+    [rest.areaChartProps, styles.chart, theme],
   )
 
   const [areaProps, areaClassName] = useMemo(() => {

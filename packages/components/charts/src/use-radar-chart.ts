@@ -163,9 +163,9 @@ export const useRadarChart = ({
     () =>
       getComponentProps<Dict, string>(
         [rest.radarChartProps ?? {}, radarChartProperties],
-        styles.radarChart,
+        styles.chart,
       )(theme),
-    [rest.radarChartProps, styles.radarChart, theme],
+    [rest.radarChartProps, styles.chart, theme],
   )
 
   const [polarGridProps, polarGridClassName] = useMemo(

@@ -31,6 +31,9 @@ import {
   faFaceSmile,
   faFaceSmileBeam,
   faFaceGrinStars,
+  faItalic,
+  faBold,
+  faUnderline,
 } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
@@ -125,6 +128,9 @@ const fontAwesomeIcons = {
   faFaceSmile,
   faFaceSmileBeam,
   faFaceGrinStars,
+  faItalic,
+  faBold,
+  faUnderline,
 }
 const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
 const utils = { wait, faker, useForm, Controller }

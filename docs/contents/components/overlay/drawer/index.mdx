@@ -299,6 +299,49 @@ return (
 )
 ```
 
+### Close on drag
+
+If you want to close the `Drawer` on drag, set `closeOnDrag` to `true`.
+
+```tsx functional=true
+const placementMap = ["top", "right", "bottom", "left"]
+const [placement, setPlacement] = useState("center")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      {placementMap.map((placement) => (
+        <Button
+          key={placement}
+          onClick={() => {
+            setPlacement(placement)
+            onOpen()
+          }}
+        >
+          Open {placement} Drawer
+        </Button>
+      ))}
+    </Wrap>
+
+    <Drawer closeOnDrag isOpen={isOpen} onClose={onClose} placement={placement}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>
+        『ドラゴンボール』は、鳥山明による日本の漫画作品です。...
+      </DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
 ### Customize the Overlay
 
 If you want to customize the `DrawerOverlay` by passing `props`, etc., set it without omitting.

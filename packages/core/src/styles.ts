@@ -5282,7 +5282,7 @@ export type StyleProps = {
     __prefix?: string
     name: string
     token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
-    value: Token<StringLiteral | number>
+    value?: Token<StringLiteral | number>
   }[]
   /**
    * The `@media` of CSS at-rule.

@@ -12,6 +12,7 @@ export type {
   BarProps,
   AreaProps,
   LineProps,
+  RadarProps,
   DotProps,
   ChartCurveType,
   ChartLayoutType,

@@ -113,8 +113,9 @@ export type TooltipProps = Merge<
   Merge<CSSUIProps, Omit<Recharts.TooltipProps<any, any>, "ref">>,
   { cursor?: CSSUIProps }
 >
+//TODO:逆にするか
 export type GridProps = Merge<CSSUIProps, Recharts.CartesianGridProps>
-export type PolarGridProps = Merge<CSSUIProps, Recharts.PolarGridProps>
+export type PolarGridProps = Merge<Recharts.PolarGridProps, CSSUIProps>
 export type PolarAngleAxisProps = Merge<
   CSSUIProps,
   Recharts.PolarAngleAxisProps

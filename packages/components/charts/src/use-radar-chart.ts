@@ -33,6 +33,10 @@ export type UseRadarChartOptions = {
    */
   series: RadarProps[]
   /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: string
+  /**
    * Props for the radar.
    */
   radarProps?: Partial<RadarProps>
@@ -85,10 +89,11 @@ type UseRadarChartProps = UseRadarChartOptions & {
 export const useRadarChart = ({
   data,
   series,
+  dataKey,
   withDots = false,
   withActiveDots = false,
   strokeWidth = 2,
-  fillOpacity = 1,
+  fillOpacity = 0.4,
   styles,
   ...rest
 }: UseRadarChartProps) => {
@@ -331,10 +336,11 @@ export const useRadarChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, polarAngleAxisClassName),
+      dataKey,
       ...props,
       ...polarAngleAxisProps,
     }),
-    [polarAngleAxisClassName, polarAngleAxisProps],
+    [dataKey, polarAngleAxisClassName, polarAngleAxisProps],
   )
 
   const getPolarRadiusAxisProps: ChartPropGetter<

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -53,6 +53,7 @@ type RadarChartOptions = {
    * Unit displayed next to each tick in y-axis.
    */
   unit?: string
+  //TODO: grid use this
   /**
    * A function to format values on Y axis and inside the tooltip
    */
@@ -72,6 +73,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     className,
     data,
     series,
+    dataKey,
     radarProps,
     radarChartProps,
     polarGridProps,
@@ -90,7 +92,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     withPolarGrid = true,
     withPolarAngleAxis = true,
     withPolarRadiusAxis = false,
-    // ...rest
+    ...rest
   } = omitThemeProps(mergedProps)
 
   const {
@@ -103,6 +105,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   } = useRadarChart({
     data,
     series,
+    dataKey,
     radarProps,
     radarChartProps,
     polarGridProps,
@@ -125,8 +128,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     styles,
   })
 
-  const css: CSSUIObject = {}
-
   const radars = useMemo(
     () =>
       series.map(({ dataKey }, index) => (
@@ -144,7 +145,8 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-radar-chart", className)}
         var={[...radarVars, ...tooltipVars]}
-        __css={css}
+        __css={{ maxW: "full", ...styles.container }}
+        {...rest}
       >
         <ResponsiveContainer
           {...getContainerProps({ className: "ui-radar-chart__container" })}

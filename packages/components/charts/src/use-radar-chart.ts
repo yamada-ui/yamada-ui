@@ -116,6 +116,10 @@ export const useRadarChart = ({
     () => ({ ...rest.polarGridProps, ...styles.polarGrid }),
     [rest.polarGridProps, styles.polarGrid],
   )
+  const resolvedPolarRadiusAxis = useMemo(
+    () => ({ ...rest.polarRadiusAxisProps, ...styles.polarRadiusAxis }),
+    [rest.polarRadiusAxisProps, styles.polarRadiusAxis],
+  )
 
   const radarColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -128,6 +132,7 @@ export const useRadarChart = ({
     [series],
   )
 
+  // TODO: replace `className`
   const radarVars: CSSUIProps["var"] = useMemo(
     () =>
       [
@@ -139,8 +144,19 @@ export const useRadarChart = ({
           token: "colors",
           value: resolvedPolarGrid.stroke!,
         },
+        {
+          __prefix: "ui",
+          name: "polar-radius-axis-stroke",
+          token: "colors",
+          value: resolvedPolarRadiusAxis.stroke!,
+        },
       ] as Required<CSSUIProps>["var"],
-    [fillOpacity, radarColors, resolvedPolarGrid.stroke],
+    [
+      fillOpacity,
+      radarColors,
+      resolvedPolarGrid.stroke,
+      resolvedPolarRadiusAxis.stroke,
+    ],
   )
 
   const [radarChartProps, radarChartClassName] = useMemo(
@@ -412,6 +428,7 @@ export const useRadarChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, polarRadiusAxisClassName),
+      stroke: "var(--ui-polar-radius-axis-stroke)",
       tickFormatter: valueFormatter,
       ...props,
       ...polarRadiusAxisProps,

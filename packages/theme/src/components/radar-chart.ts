@@ -1,7 +1,6 @@
 import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
 import { LineChart } from "./line-chart"
 
-//TODO: RadarChartがないというかほかのところにもない。chartのまちがい？
 export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     radar: {},

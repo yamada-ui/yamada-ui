@@ -44,6 +44,71 @@ export const basic: Story = () => {
   return <RadarChart data={data} series={series} dataKey="fruit" />
 }
 
+export const withSize: Story = () => {
+  const data = useMemo(() => {
+    const fruit = [
+      "Apples",
+      "Oranges",
+      "Tomatoes",
+      "Grapes",
+      "Bananas",
+      "Lemons",
+    ]
+    return fruit.map((fruit) => ({
+      fruit,
+      salse_january: randomValue(),
+      salse_february: randomValue(),
+    }))
+  }, [])
+
+  const series: RadarProps[] = useMemo(
+    () => [
+      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <RadarChart data={data} series={series} dataKey="fruit" size="sm" />
+      <RadarChart data={data} series={series} dataKey="fruit" size="md" />
+      <RadarChart data={data} series={series} dataKey="fruit" size="lg" />
+      <RadarChart data={data} series={series} dataKey="fruit" size="full" />
+    </>
+  )
+}
+
+export const withDash: Story = () => {
+  const data = useMemo(() => {
+    const fruit = [
+      "Apples",
+      "Oranges",
+      "Tomatoes",
+      "Grapes",
+      "Bananas",
+      "Lemons",
+    ]
+    return fruit.map((fruit) => ({
+      fruit,
+      salse: randomValue(),
+    }))
+  }, [])
+
+  const series: RadarProps[] = useMemo(
+    () => [
+      {
+        dataKey: "salse",
+        color: ["primary.500", "primary.400"],
+        strokeDasharray: "5 5",
+      },
+    ],
+    [],
+  )
+
+  return <RadarChart data={data} series={series} dataKey="fruit" />
+}
+
 export const custom: Story = () => {
   const data = useMemo(() => {
     const fruit = [

@@ -333,8 +333,6 @@ export const radarProperties: (keyof Omit<Recharts.RadarProps, "ref">)[] = [
   "onAnimationEnd",
 ]
 
-export const backgroundProperties = ["radius"]
-
 export const lineProperties: (keyof Omit<Recharts.LineProps, "ref">)[] = [
   "type",
   "dataKey",

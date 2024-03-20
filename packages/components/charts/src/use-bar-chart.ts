@@ -18,11 +18,7 @@ import type {
   ReferenceLineProps,
   RequiredChartPropGetter,
 } from "./chart.types"
-import {
-  backgroundProperties,
-  barChartProperties,
-  barProperties,
-} from "./rechart-properties"
+import { barProperties, barChartProperties } from "./rechart-properties"
 
 export type UseBarChartOptions = {
   /**
@@ -163,7 +159,7 @@ export const useBarChart = ({
   const [backgroundProps, backgroundClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [background, backgroundProperties],
+        [background, barProperties],
         styles.background,
       )(theme),
     [background, styles.background, theme],
@@ -205,7 +201,7 @@ export const useBarChart = ({
         const computedBackground = { ...backgroundProps, ...background }
 
         const resolvedBackground = getComponentProps<Dict, string>(
-          [computedBackground, backgroundProperties],
+          [computedBackground, barProperties],
           backgroundClassName,
         )(theme, true)
 

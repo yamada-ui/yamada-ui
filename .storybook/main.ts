@@ -5,10 +5,6 @@ import path, { dirname, join } from "path"
 const config: StorybookConfig = {
   framework: getAbsolutePath("@storybook/react-vite"),
 
-  features: {
-    buildStoriesJson: true,
-  },
-
   core: {
     disableTelemetry: true,
   },
@@ -23,7 +19,6 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-measure"),
     getAbsolutePath("@storybook/addon-storysource"),
     getAbsolutePath("storybook-dark-mode"),
-    getAbsolutePath("@storybook/addon-mdx-gfm"),
   ],
 
   viteFinal: async (config) => {

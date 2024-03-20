@@ -1,0 +1,74 @@
+{
+  "InfiniteScrollArea": {
+    "behavior": {
+      "type": "ScrollBehavior",
+      "required": false,
+      "description": "Determines whether scrolling is instant or animates smoothly."
+    },
+    "finish": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The infinite scroll area finish to use."
+    },
+    "indexRef": {
+      "type": "RefObject<(index: number) => void>",
+      "required": false,
+      "description": "Ref to a reset index function."
+    },
+    "initialLoad": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, invoke `onLoad` function for the first time."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the infinite scroll is disabled."
+    },
+    "isReverse": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, reverse direction."
+    },
+    "loading": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The infinite scroll area loading to use."
+    },
+    "onLoad": {
+      "type": "({\n  index,\n  entry,\n  finish,\n}: {\n  index: number\n  finish: () => void\n  entry?: IntersectionObserverEntry | undefined\n}) => Promise<void>",
+      "required": false,
+      "description": "The callback invoked when trigger is intersect."
+    },
+    "orientation": {
+      "type": "\"vertical\" | \"horizontal\"",
+      "defaultValue": "'vertical'",
+      "required": false,
+      "description": "The orientation of the infinite scroll."
+    },
+    "resetRef": {
+      "type": "RefObject<\n  (index?: number | undefined, runScroll?: boolean | undefined) => void\n>",
+      "required": false,
+      "description": "Ref to a reset function."
+    },
+    "rootRef": {
+      "type": "RefObject<HTMLElement>",
+      "required": false,
+      "description": "The element that is used as the viewport for checking visibility of the target.\nDefaults to the browser viewport if not specified or if `null`."
+    },
+    "startIndex": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "If set the `onLoad` function will start from the given index.\nIf `initialLoad` is `true`, index starts from `0`."
+    },
+    "triggerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for infinite scroll area trigger component."
+    }
+  }
+}

@@ -27,6 +27,8 @@ config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
+const ref = process.argv[2] ?? "main"
+
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
 type Content = GrayMatterFile<Input>["content"]
@@ -61,7 +63,7 @@ const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const REPO_REQUEST_PARAMETERS = {
   owner: "yamada-ui",
   repo: "yamada-ui",
-  ref: "main",
+  ref,
 }
 const CONTENT_HEADER = {
   en: [

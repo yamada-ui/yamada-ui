@@ -121,12 +121,16 @@ export const custom: Story = () => {
     ]
     return fruit.map((fruit) => ({
       fruit,
-      salse: randomValue(),
+      salse_january: randomValue(),
+      salse_february: randomValue(),
     }))
   }, [])
 
   const series: RadarProps[] = useMemo(
-    () => [{ dataKey: "salse", color: ["primary.500", "primary.400"] }],
+    () => [
+      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+    ],
     [],
   )
 
@@ -134,58 +138,125 @@ export const custom: Story = () => {
     data: data,
     series: series,
     dataKey: "fruit",
+    withDots: false,
+    withActiveDots: false,
     withTooltip: true,
+    withLegend: false,
     withPolarGrid: true,
     withPolarAngleAxis: true,
     withPolarRadiusAxis: false,
+    tooltipAnimationDuration: 0,
+    fillOpacity: 0.4,
   })
 
   return (
     <Wrap gap="md" alignItems="flex-start">
       <RadarChart {...props} />
 
-      <Wrap gap="md">
+      <Wrap gap="md" alignItems="flex-start">
         <PropControl
-          component="Switch"
+          component="Slider"
           items={[
             {
-              label: "tooltip",
-              isChecked: props.withTooltip,
-              onChange: () =>
-                setProps((prev) => ({
-                  ...prev,
-                  withTooltip: !prev.withTooltip,
-                })),
+              label: "Fill opacity",
+              value: props.fillOpacity as number,
+              min: 0,
+              max: 1,
+              step: 0.1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, fillOpacity: value }))
+              },
             },
             {
-              label: "polar grid",
-              isChecked: props.withPolarGrid,
-              onChange: () =>
+              label: "Tooltip animation duration",
+              value: props.tooltipAnimationDuration,
+              min: 0,
+              max: 2000,
+              onChange: (value) => {
                 setProps((prev) => ({
                   ...prev,
-                  withPolarGrid: !prev.withPolarGrid,
-                })),
-            },
-            {
-              label: "polar angle axis",
-              isChecked: props.withPolarAngleAxis,
-              onChange: () =>
-                setProps((prev) => ({
-                  ...prev,
-                  withPolarAngleAxis: !prev.withPolarAngleAxis,
-                })),
-            },
-            {
-              label: "polar radius axis",
-              isChecked: props.withPolarRadiusAxis,
-              onChange: () =>
-                setProps((prev) => ({
-                  ...prev,
-                  withPolarRadiusAxis: !prev.withPolarRadiusAxis,
-                })),
+                  tooltipAnimationDuration: value,
+                }))
+              },
             },
           ]}
         />
+
+        <Wrap gap="md" alignItems="flex-start">
+          <PropControl
+            component="Switch"
+            items={[
+              {
+                label: "tooltip",
+                isChecked: props.withTooltip,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withTooltip: !prev.withTooltip,
+                  })),
+              },
+              {
+                label: "legend",
+                isChecked: props.withLegend,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withLegend: !prev.withLegend,
+                  })),
+              },
+              {
+                label: "polar grid",
+                isChecked: props.withPolarGrid,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withPolarGrid: !prev.withPolarGrid,
+                  })),
+              },
+              {
+                label: "polar angle axis",
+                isChecked: props.withPolarAngleAxis,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withPolarAngleAxis: !prev.withPolarAngleAxis,
+                  })),
+              },
+              {
+                label: "polar radius axis",
+                isChecked: props.withPolarRadiusAxis,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withPolarRadiusAxis: !prev.withPolarRadiusAxis,
+                  })),
+              },
+            ]}
+          />
+          <PropControl
+            component="Switch"
+            items={[
+              {
+                label: "dots",
+                isChecked: props.withDots,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withDots: !prev.withDots,
+                  })),
+              },
+              {
+                label: "active dots",
+                isChecked: props.withActiveDots,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withActiveDots: !prev.withActiveDots,
+                  })),
+              },
+            ]}
+          />
+        </Wrap>
       </Wrap>
     </Wrap>
   )

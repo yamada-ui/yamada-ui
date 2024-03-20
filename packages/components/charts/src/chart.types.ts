@@ -93,6 +93,8 @@ export type RadarProps = Merge<
     color: CSSUIProps["color"]
     dot?: DotProps
     activeDot?: DotProps
+    dimDot?: DotProps
+    dimRadar?: Partial<RadarProps>
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>
@@ -113,12 +115,11 @@ export type TooltipProps = Merge<
   Merge<CSSUIProps, Omit<Recharts.TooltipProps<any, any>, "ref">>,
   { cursor?: CSSUIProps }
 >
-//TODO:逆にするか
 export type GridProps = Merge<CSSUIProps, Recharts.CartesianGridProps>
-export type PolarGridProps = Merge<Recharts.PolarGridProps, CSSUIProps>
+export type PolarGridProps = Merge<CSSUIProps, Recharts.PolarGridProps>
 export type PolarAngleAxisProps = Merge<
-  CSSUIProps,
-  Recharts.PolarAngleAxisProps
+  Recharts.PolarAngleAxisProps,
+  CSSUIProps
 >
 export type PolarRadiusAxisProps = Merge<
   CSSUIProps,

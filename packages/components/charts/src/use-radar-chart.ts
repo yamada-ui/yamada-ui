@@ -2,7 +2,7 @@ import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
-import { useCallback, useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
 import type {
@@ -103,9 +103,13 @@ export const useRadarChart = ({
   ...rest
 }: UseRadarChartProps) => {
   const { theme } = useTheme()
+  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const shouldHighlight = highlightedArea !== null
   const {
     dot = {},
     activeDot = {},
+    dimDot,
+    dimRadar,
     ...computedRadarProps
   } = rest.radarProps ?? {}
   const resolvedPolarGrid = useMemo(
@@ -187,6 +191,18 @@ export const useRadarChart = ({
     )(theme)
   }, [computedRadarProps, styles.radar, theme])
 
+  const [dimRadarProps, dimRadarClassName] = useMemo(() => {
+    const resolvedDimRadar = {
+      fillOpacity: 0,
+      strokeOpacity: 0.3,
+      ...dimRadar,
+    }
+
+    return getComponentProps<Dict, string>([resolvedDimRadar, radarProperties])(
+      theme,
+    )
+  }, [dimRadar, theme])
+
   const [dotProps, dotClassName] = useMemo(() => {
     const resolvedDot = { fillOpacity: 1, strokeOpacity: 1, ...dot }
 
@@ -205,19 +221,37 @@ export const useRadarChart = ({
     [activeDot, styles.activeDot, theme],
   )
 
+  const [dimDotProps, dimDotClassName] = useMemo(() => {
+    const resolvedDimDot = { fillOpacity: 0, strokeOpacity: 0, ...dimDot }
+    return getComponentProps<Dict, string>([resolvedDimDot, dotProperties])(
+      theme,
+    )
+  }, [dimDot, theme])
+
   const radarPropList = useMemo(
     () =>
       series.map((props, index) => {
-        const { dataKey, dot = {}, activeDot = {}, ...computedProps } = props
+        const {
+          dataKey,
+          dot = {},
+          activeDot = {},
+          dimDot = {},
+          dimRadar = {},
+          ...computedProps
+        } = props
         const color = `var(--ui-radar-${index})`
+        const dimmed = shouldHighlight && highlightedArea !== dataKey
+        const computedDimRadar = { ...dimRadarProps, ...dimRadar }
+
         const resolvedProps = {
           ...radarProps,
           ...computedProps,
+          ...(dimmed ? computedDimRadar : {}),
         }
-
         const rest = getComponentProps<Dict, string>(
           [resolvedProps, radarProperties],
           radarClassName,
+          dimmed ? dimRadarClassName : undefined,
         )(theme, true)
 
         let resolvedActiveDot: Recharts.DotProps | boolean
@@ -247,14 +281,17 @@ export const useRadarChart = ({
         let resolvedDot: Recharts.DotProps | boolean
 
         if (withDots) {
+          const computedDimDot = { ...dimDotProps, ...dimDot }
           const computedDot = {
             ...dotProps,
             ...dot,
+            ...(dimmed ? computedDimDot : {}),
           }
 
           const [rest, className] = getComponentProps(
             [computedDot, dotProperties],
             dotClassName,
+            dimmed ? dimDotClassName : undefined,
           )(theme)
 
           resolvedDot = {
@@ -277,11 +314,17 @@ export const useRadarChart = ({
     [
       activeDotClassName,
       activeDotProps,
+      dimDotClassName,
+      dimDotProps,
+      dimRadarClassName,
+      dimRadarProps,
       dotClassName,
       dotProps,
+      highlightedArea,
       radarClassName,
       radarProps,
       series,
+      shouldHighlight,
       theme,
       withActiveDots,
       withDots,
@@ -383,6 +426,7 @@ export const useRadarChart = ({
     getPolarGridProps,
     getPolarAngleAxisProps,
     getPolarRadiusAxisProps,
+    setHighlightedArea,
   }
 }
 

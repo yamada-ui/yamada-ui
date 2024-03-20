@@ -15,10 +15,14 @@ import {
   PolarRadiusAxis,
   Radar,
   Tooltip,
+  Legend,
 } from "recharts"
+import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import { useChartLegend } from "./use-chart-legend"
 import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 import type { UseRadarChartOptions } from "./use-radar-chart"
@@ -31,6 +35,12 @@ type RadarChartOptions = {
    * @default true
    */
   withTooltip?: boolean
+  /**
+   * If `true`, legend is visible.
+   *
+   * @default false
+   */
+  withLegend?: boolean
   /**
    * Determines whether polarGrid should be displayed.
    *
@@ -60,6 +70,7 @@ export type RadarChartProps = HTMLUIProps<"div"> &
   RadarChartOptions &
   UseChartProps &
   UseChartTooltipOptions &
+  UseChartLegendProps &
   UseRadarChartOptions
 
 export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
@@ -76,6 +87,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     polarRadiusAxisProps,
     containerProps,
     tooltipProps,
+    legendProps,
     tooltipAnimationDuration,
     unit,
     valueFormatter,
@@ -84,6 +96,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     strokeWidth,
     fillOpacity,
     withTooltip = true,
+    withLegend = false,
     withPolarGrid = true,
     withPolarAngleAxis = true,
     withPolarRadiusAxis = false,
@@ -97,6 +110,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     getPolarAngleAxisProps,
     getPolarRadiusAxisProps,
     radarVars,
+    setHighlightedArea,
   } = useRadarChart({
     data,
     series,
@@ -122,6 +136,9 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     tooltipProps,
     tooltipAnimationDuration,
     styles,
+  })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
   })
 
   const radars = useMemo(
@@ -169,6 +186,20 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
                 {...getPolarRadiusAxisProps({
                   className: "ui-radar-chart__polar-radius-axis",
                 })}
+              />
+            ) : null}
+
+            {withLegend ? (
+              <Legend
+                content={({ payload }) => (
+                  <ChartLegend
+                    className="ui-area-chart__legend"
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
+                  />
+                )}
+                {...getLegendProps()}
               />
             ) : null}
 

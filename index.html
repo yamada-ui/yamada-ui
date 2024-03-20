@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
 
     <title>@storybook/cli - Storybook</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
@@ -28,17 +28,19 @@
     <link href="./sb-manager/runtime.js" rel="modulepreload" />
 
     
-    <link href="./sb-addons/viewport-0/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/storybook-core-server-presets-0/common-manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/a11y-1/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/viewport-1/manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/backgrounds-2/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/a11y-2/manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/measure-3/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/backgrounds-3/manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/storysource-4/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/measure-4/manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/storybook-dark-mode-esm-preset-5/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/storysource-5/manager-bundle.js" rel="modulepreload" />
+    
+    <link href="./sb-addons/storybook-dark-mode-esm-preset-6/manager-bundle.js" rel="modulepreload" />
       <link
   rel="icon"
   href="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/favicon.svg"
@@ -61,12 +63,10 @@
       
         
           window['FEATURES'] = {
-  "warnOnLegacyHierarchySeparator": true,
-  "buildStoriesJson": true,
-  "storyStoreV7": true,
   "argTypeTargetsV7": true,
   "legacyDecoratorFileOrder": false,
-  "disallowImplicitActionsInRenderV8": false
+  "disallowImplicitActionsInRenderV8": true,
+  "buildStoriesJson": true
 };
         
       
@@ -81,7 +81,7 @@
         
           window['DOCS_OPTIONS'] = {
   "defaultName": "Docs",
-  "autodocs": "tag"
+  "autodocs": true
 };
         
       
@@ -93,27 +93,60 @@
       
         
       
+        
+          window['TAGS_OPTIONS'] = {
+  "dev-only": {
+    "excludeFromDocsStories": true
+  },
+  "docs-only": {
+    "excludeFromSidebar": true
+  },
+  "test-only": {
+    "excludeFromSidebar": true,
+    "excludeFromDocsStories": true
+  }
+};
+        
+      
+        
+          window['STORYBOOK_RENDERER'] = "@storybook/react";
+        
+      
+        
+          window['STORYBOOK_BUILDER'] = "@storybook/builder-vite";
+        
+      
+        
+          window['STORYBOOK_FRAMEWORK'] = "/home/runner/work/yamada-ui/yamada-ui/node_modules/.pnpm/@storybook+react-vite@8.0.1_react-dom@18.2.0_react@18.2.0_typescript@5.4.2_vite@5.1.5/node_modules/@storybook/react-vite";
+        
+      
     </script>
     
 
     <script type="module">
+      import './sb-manager/globals-runtime.js';
+      
+      
+        import './sb-addons/storybook-core-server-presets-0/common-manager-bundle.js';
+      
+        import './sb-addons/viewport-1/manager-bundle.js';
+      
+        import './sb-addons/a11y-2/manager-bundle.js';
+      
+        import './sb-addons/backgrounds-3/manager-bundle.js';
+      
+        import './sb-addons/measure-4/manager-bundle.js';
+      
+        import './sb-addons/storysource-5/manager-bundle.js';
+      
+        import './sb-addons/storybook-dark-mode-esm-preset-6/manager-bundle.js';
+      
+      
       import './sb-manager/runtime.js';
-
-      
-      import './sb-addons/viewport-0/manager-bundle.js';
-      
-      import './sb-addons/a11y-1/manager-bundle.js';
-      
-      import './sb-addons/backgrounds-2/manager-bundle.js';
-      
-      import './sb-addons/measure-3/manager-bundle.js';
-      
-      import './sb-addons/storysource-4/manager-bundle.js';
-      
-      import './sb-addons/storybook-dark-mode-esm-preset-5/manager-bundle.js';
-      
     </script>
 
+    
     <link href="./sb-preview/runtime.js" rel="prefetch" as="script" />
+    
   </body>
 </html>

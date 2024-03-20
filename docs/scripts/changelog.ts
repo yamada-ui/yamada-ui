@@ -13,6 +13,8 @@ config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
+const ref = process.argv[2] ?? "main"
+
 type Input = string | Buffer
 type MdxFile = { name: string; version: number[]; data: Data; content: Content }
 type Data = GrayMatterFile<Input>["data"]
@@ -30,7 +32,7 @@ const REPO_REQUEST_PARAMETERS = {
   owner: "yamada-ui",
   repo: "yamada-ui",
   path: SOURCE_PATH,
-  ref: "main",
+  ref,
 }
 
 const getMdxFiles: p.RequiredRunner = () => async (p, s) => {

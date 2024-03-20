@@ -14,6 +14,7 @@ type Children = {
     className?: string
     title?: string
     functional?: string | boolean
+    iframe?: string | boolean
     live?: string | boolean
     noInline?: string | boolean
     children?: string
@@ -32,6 +33,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
     title,
     live = true,
     functional = false,
+    iframe = false,
     noInline,
     children: raw,
     highlight,
@@ -39,6 +41,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
 
   live = toBoolean(live)
   functional = toBoolean(functional)
+  iframe = toBoolean(iframe)
   noInline = toBoolean(noInline)
 
   const language = className?.replace(/language-/, "") ?? "sh"
@@ -48,7 +51,9 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
 
   if (isJSXorTSX && live) {
     return (
-      <EditableCodeBlock {...{ code, language, theme, noInline, functional }} />
+      <EditableCodeBlock
+        {...{ code, language, theme, noInline, functional, iframe }}
+      />
     )
   }
 

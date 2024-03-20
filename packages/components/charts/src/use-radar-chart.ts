@@ -142,13 +142,13 @@ export const useRadarChart = ({
           __prefix: "ui",
           name: "grid-stroke",
           token: "colors",
-          value: resolvedPolarGrid.stroke!,
+          value: resolvedPolarGrid.stroke,
         },
         {
           __prefix: "ui",
           name: "polar-radius-axis-stroke",
           token: "colors",
-          value: resolvedPolarRadiusAxis.stroke!,
+          value: resolvedPolarRadiusAxis.stroke,
         },
       ] as Required<CSSUIProps>["var"],
     [

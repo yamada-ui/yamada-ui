@@ -14,7 +14,7 @@ const meta: Meta<typeof RadarChart> = {
 
 export default meta
 
-const randomValue = () => Math.floor(Math.random() * 50) + 50
+const randomValue = () => Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000
 
 export const basic: Story = () => {
   const data = useMemo(() => {
@@ -123,5 +123,41 @@ export const custom: Story = () => {
         />
       </Wrap>
     </Wrap>
+  )
+}
+
+export const withValueFormatter: Story = () => {
+  const data = useMemo(() => {
+    const fruit = [
+      "Apples",
+      "Oranges",
+      "Tomatoes",
+      "Grapes",
+      "Bananas",
+      "Lemons",
+    ]
+    return fruit.map((fruit) => ({
+      fruit,
+      salse_january: randomValue(),
+      salse_february: randomValue(),
+    }))
+  }, [])
+
+  const series: RadarProps[] = useMemo(
+    () => [
+      { dataKey: "salse_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "salse_february", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="fruit"
+      withPolarRadiusAxis
+      valueFormatter={(value) => value.toLocaleString()}
+    />
   )
 }

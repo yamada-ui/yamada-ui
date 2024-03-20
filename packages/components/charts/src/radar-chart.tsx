@@ -53,11 +53,6 @@ type RadarChartOptions = {
    * Unit displayed next to each tick in y-axis.
    */
   unit?: string
-  //TODO: grid use this
-  /**
-   * A function to format values on Y axis and inside the tooltip
-   */
-  valueFormatter?: (value: number) => string
 }
 
 export type RadarChartProps = HTMLUIProps<"div"> &
@@ -115,6 +110,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     withActiveDots,
     strokeWidth,
     fillOpacity,
+    valueFormatter,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

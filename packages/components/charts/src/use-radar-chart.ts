@@ -80,6 +80,10 @@ export type UseRadarChartOptions = {
    * @default 1
    */
   fillOpacity?: number | [number, number]
+  /**
+   * A function to format values on Y axis and inside the tooltip
+   */
+  valueFormatter?: (value: number) => string
 }
 
 type UseRadarChartProps = UseRadarChartOptions & {
@@ -94,6 +98,7 @@ export const useRadarChart = ({
   withActiveDots = false,
   strokeWidth = 2,
   fillOpacity = 0.4,
+  valueFormatter,
   styles,
   ...rest
 }: UseRadarChartProps) => {
@@ -337,10 +342,11 @@ export const useRadarChart = ({
       ref,
       className: cx(className, polarAngleAxisClassName),
       dataKey,
+      tickFormatter: valueFormatter,
       ...props,
       ...polarAngleAxisProps,
     }),
-    [dataKey, polarAngleAxisClassName, polarAngleAxisProps],
+    [dataKey, polarAngleAxisClassName, polarAngleAxisProps, valueFormatter],
   )
 
   const getPolarRadiusAxisProps: ChartPropGetter<
@@ -351,10 +357,11 @@ export const useRadarChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, polarRadiusAxisClassName),
+      tickFormatter: valueFormatter,
       ...props,
       ...polarRadiusAxisProps,
     }),
-    [polarRadiusAxisClassName, polarRadiusAxisProps],
+    [polarRadiusAxisClassName, polarRadiusAxisProps, valueFormatter],
   )
 
   return {

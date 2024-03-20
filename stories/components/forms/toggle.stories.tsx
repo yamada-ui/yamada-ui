@@ -655,7 +655,7 @@ export const isReadonly: Story = () => {
         colorScheme="primary"
         variant="subtle"
         defaultIsSelected
-        isReadonly
+        isReadOnly
       />
       <Toggle
         icon={<Icon icon={faBold} />}
@@ -663,14 +663,14 @@ export const isReadonly: Story = () => {
         colorScheme="secondary"
         variant="solid"
         defaultIsSelected
-        isReadonly
+        isReadOnly
       />
       <Toggle
         icon={<Icon icon={faBold} />}
         aria-label="Toggle bold"
         variant="outline"
         defaultIsSelected
-        isReadonly
+        isReadOnly
       />
     </>
   )

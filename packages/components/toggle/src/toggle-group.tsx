@@ -21,7 +21,7 @@ type ToggleGroupContext = ThemeProps<"Button"> & {
   value?: string | number | (string | number)[]
   onChange?: <M extends string | number = string>(value: M | undefined) => void
   isDisabled?: boolean
-  isReadonly?: boolean
+  isReadOnly?: boolean
 }
 
 const [ToggleGroupProvider, useToggleGroup] = createContext<ToggleGroupContext>(
@@ -63,7 +63,7 @@ type ToggleGroupOptions<
    *
    * @default false
    */
-  isReadonly?: boolean
+  isReadOnly?: boolean
 }
 
 /**
@@ -88,7 +88,7 @@ export const ToggleGroup = forwardRef(
       variant,
       direction: flexDirection,
       isDisabled,
-      isReadonly,
+      isReadOnly,
       ...rest
     }: ToggleGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
@@ -141,11 +141,11 @@ export const ToggleGroup = forwardRef(
         size,
         variant,
         isDisabled,
-        isReadonly,
+        isReadOnly,
         isControlled: isControlledRef.current,
         onChange,
       }),
-      [value, size, variant, isDisabled, isReadonly, onChange],
+      [value, size, variant, isDisabled, isReadOnly, onChange],
     )
 
     useUpdateEffect(() => {

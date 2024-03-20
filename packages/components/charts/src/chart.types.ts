@@ -114,6 +114,15 @@ export type TooltipProps = Merge<
   { cursor?: CSSUIProps }
 >
 export type GridProps = Merge<CSSUIProps, Recharts.CartesianGridProps>
+export type PolarGridProps = Merge<CSSUIProps, Recharts.PolarGridProps>
+export type PolarAngleAxisProps = Merge<
+  CSSUIProps,
+  Recharts.PolarAngleAxisProps
+>
+export type PolarRadiusAxisProps = Merge<
+  CSSUIProps,
+  Recharts.PolarRadiusAxisProps
+>
 
 export type ChartTooltip =
   | ReactElement

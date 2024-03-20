@@ -74,6 +74,9 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     series,
     radarProps,
     radarChartProps,
+    polarGridProps,
+    polarAngleAxisProps,
+    polarRadiusAxisProps,
     containerProps,
     tooltipProps,
     tooltipAnimationDuration,
@@ -90,11 +93,21 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     // ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getRadarProps, getRadarChartProps, radarVars } = useRadarChart({
+  const {
+    getRadarProps,
+    getRadarChartProps,
+    getPolarGridProps,
+    getPolarAngleAxisProps,
+    getPolarRadiusAxisProps,
+    radarVars,
+  } = useRadarChart({
     data,
     series,
     radarProps,
     radarChartProps,
+    polarGridProps,
+    polarAngleAxisProps,
+    polarRadiusAxisProps,
     withDots,
     withActiveDots,
     strokeWidth,
@@ -139,9 +152,27 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
           <ReChartsRadarChart
             {...getRadarChartProps({ className: "ui-radar-chart__chart" })}
           >
-            {withPolarGrid ? <PolarGrid /> : null}
-            {withPolarAngleAxis ? <PolarAngleAxis /> : null}
-            {withPolarRadiusAxis ? <PolarRadiusAxis /> : null}
+            {withPolarGrid ? (
+              <PolarGrid
+                {...getPolarGridProps({
+                  className: "ui-radar-chart__polar-grid",
+                })}
+              />
+            ) : null}
+            {withPolarAngleAxis ? (
+              <PolarAngleAxis
+                {...getPolarAngleAxisProps({
+                  className: "ui-radar-chart__polar-angle-axis",
+                })}
+              />
+            ) : null}
+            {withPolarRadiusAxis ? (
+              <PolarRadiusAxis
+                {...getPolarRadiusAxisProps({
+                  className: "ui-radar-chart__polar-radius-axis",
+                })}
+              />
+            ) : null}
 
             {withTooltip ? (
               <Tooltip

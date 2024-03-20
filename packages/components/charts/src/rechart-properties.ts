@@ -384,6 +384,66 @@ export const dotProperties: (keyof Omit<Recharts.DotProps, "ref">)[] = [
   "onMouseLeave",
 ]
 
+export const polarGridProperties: (keyof Recharts.PolarGridProps)[] = [
+  "cx",
+  "cy",
+  "innerRadius",
+  "outerRadius",
+  "polarAngles",
+  "polarRadius",
+  "gridType",
+]
+
+export const polarAngleAxisProperties: (keyof Recharts.PolarAngleAxisProps)[] =
+  [
+    "dataKey",
+    "cx",
+    "cy",
+    "radius",
+    "axisLine",
+    "axisLineType",
+    "tickLine",
+    "tick",
+    "ticks",
+    "orient",
+    "tickFormatter",
+    "type",
+    "allowDuplicatedCategory",
+    "onClick",
+    "onMouseDown",
+    "onMouseUp",
+    "onMouseMove",
+    "onMouseOver",
+    "onMouseOut",
+    "onMouseEnter",
+    "onMouseLeave",
+  ]
+export const polarRadiusAxisProperties: (keyof Recharts.PolarRadiusAxisProps)[] =
+  [
+    "angle",
+    "type",
+    "allowDuplicatedCategory",
+    "cx",
+    "cy",
+    "domain",
+    "reversed",
+    "label",
+    "orientation",
+    "axisLine",
+    "tick",
+    "tickFormatter",
+    "tickCount",
+    "scale",
+    "onClick",
+    "onMouseDown",
+    "onMouseUp",
+    "onMouseMove",
+    "onMouseOver",
+    "onMouseOut",
+    "onMouseEnter",
+    "onMouseLeave",
+  ]
+
 export const pieProperties: (keyof Omit<Recharts.PieProps, "dataKey">)[] = [
   "cx",
   "cy",

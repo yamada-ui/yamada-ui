@@ -7,12 +7,18 @@ import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
 import type {
   ChartPropGetter,
+  PolarAngleAxisProps,
+  PolarGridProps,
+  PolarRadiusAxisProps,
   RadarChartProps,
   RadarProps,
   RequiredChartPropGetter,
 } from "./chart.types"
 import {
   dotProperties,
+  polarAngleAxisProperties,
+  polarGridProperties,
+  polarRadiusAxisProperties,
   radarChartProperties,
   radarProperties,
 } from "./rechart-properties"
@@ -34,6 +40,18 @@ export type UseRadarChartOptions = {
    * Props passed down to recharts `RadarChart` component.
    */
   radarChartProps?: RadarChartProps
+  /**
+   * Props passed down to recharts `PolarGrid` component.
+   */
+  polarGridProps?: PolarGridProps
+  /**
+   * Props passed down to recharts `PolarAngleAxis` component.
+   */
+  polarAngleAxisProps?: PolarAngleAxisProps
+  /**
+   * Props passed down to recharts `PolarRadiusAxis` component.
+   */
+  polarRadiusAxisProps?: PolarRadiusAxisProps
   /**
    * Determines whether dots should be displayed.
    *
@@ -107,6 +125,33 @@ export const useRadarChart = ({
         styles.radarChart,
       )(theme),
     [rest.radarChartProps, styles.radarChart, theme],
+  )
+
+  const [polarGridProps, polarGridClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.polarGridProps ?? {}, polarGridProperties],
+        styles.polarGrid,
+      )(theme),
+    [rest.polarGridProps, styles.polarGrid, theme],
+  )
+
+  const [polarAngleAxisProps, polarAngleAxisClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.polarAngleAxisProps ?? {}, polarAngleAxisProperties],
+        styles.polarAngleAxis,
+      )(theme),
+    [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
+  )
+
+  const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.polarRadiusAxisProps ?? {}, polarRadiusAxisProperties],
+        styles.polarRadiusAxis,
+      )(theme),
+    [rest.polarRadiusAxisProps, styles.polarRadiusAxis, theme],
   )
 
   const [radarProps, radarClassName] = useMemo(() => {
@@ -264,7 +309,56 @@ export const useRadarChart = ({
     [radarPropList, strokeWidth],
   )
 
-  return { radarVars, getRadarChartProps, getRadarProps }
+  const getPolarGridProps: ChartPropGetter<
+    "div",
+    Recharts.PolarGridProps,
+    Recharts.PolarGridProps
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => ({
+      ref,
+      className: cx(className, polarGridClassName),
+      ...props,
+      ...polarGridProps,
+    }),
+    [polarGridClassName, polarGridProps],
+  )
+
+  const getPolarAngleAxisProps: ChartPropGetter<
+    "div",
+    Recharts.PolarAngleAxisProps,
+    Omit<Recharts.PolarAngleAxisProps, "ref">
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => ({
+      ref,
+      className: cx(className, polarAngleAxisClassName),
+      ...props,
+      ...polarAngleAxisProps,
+    }),
+    [polarAngleAxisClassName, polarAngleAxisProps],
+  )
+
+  const getPolarRadiusAxisProps: ChartPropGetter<
+    "div",
+    Recharts.PolarRadiusAxisProps,
+    Omit<Recharts.PolarRadiusAxisProps, "ref">
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => ({
+      ref,
+      className: cx(className, polarRadiusAxisClassName),
+      ...props,
+      ...polarRadiusAxisProps,
+    }),
+    [polarRadiusAxisClassName, polarRadiusAxisProps],
+  )
+
+  return {
+    radarVars,
+    getRadarChartProps,
+    getRadarProps,
+    getPolarGridProps,
+    getPolarAngleAxisProps,
+    getPolarRadiusAxisProps,
+  }
 }
 
 export type UseRadarChartReturn = ReturnType<typeof useRadarChart>

@@ -145,4 +145,15 @@ export const CORE_MEMBERS = [
       ja: "多趣味なカエル好きのフロントエンドエンジニア",
     },
   },
+  {
+    id: "suzukisan22",
+    name: { en: "Ryota Suzuki", ja: "Ryota Suzuki" },
+    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
+    github: "https://github.com/suzukisan22",
+    twitter: "https://x.com/itsmeryota",
+    description: {
+      en: "Engineer living in Mie Prefecture, Japan",
+      ja: "三重県在住エンジニア",
+    },
+  },
 ]

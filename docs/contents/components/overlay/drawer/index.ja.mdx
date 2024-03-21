@@ -2,6 +2,7 @@
 title: Drawer
 description: "`Drawer`は、画面の端から表示されるパネルのコンポーネントです。"
 package_name: "@yamada-ui/modal"
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -282,6 +283,49 @@ return (
     <Button onClick={onOpen}>Open Drawer</Button>
 
     <Drawer isOpen={isOpen}>
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>
+        『ドラゴンボール』は、鳥山明による日本の漫画作品です。...
+      </DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
+### ドラッグして閉じる
+
+`Drawer`をドラッグで閉じたい場合は、`closeOnDrag`を`true`に設定します。
+
+```tsx functional=true
+const placementMap = ["top", "right", "bottom", "left"]
+const [placement, setPlacement] = useState("center")
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      {placementMap.map((placement) => (
+        <Button
+          key={placement}
+          onClick={() => {
+            setPlacement(placement)
+            onOpen()
+          }}
+        >
+          Open {placement} Drawer
+        </Button>
+      ))}
+    </Wrap>
+
+    <Drawer closeOnDrag isOpen={isOpen} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>

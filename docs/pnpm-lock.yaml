@@ -38,6 +38,9 @@ dependencies:
   '@yamada-ui/carousel':
     specifier: 1.0.19
     version: 1.0.19(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+  '@yamada-ui/charts':
+    specifier: ^1.0.0
+    version: 1.0.0(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/dropzone':
     specifier: 1.0.19
     version: 1.0.19(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
@@ -49,10 +52,10 @@ dependencies:
     version: 1.0.17(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/nextjs':
     specifier: 5.0.16
-    version: 5.0.16(@emotion/react@11.11.0)(@types/react@18.2.64)(@yamada-ui/react@1.3.0-next-20240320130716)(next@14.1.3)(react-dom@18.2.0)(react@18.2.0)
+    version: 5.0.16(@emotion/react@11.11.0)(@types/react@18.2.64)(@yamada-ui/react@1.3.0-next-20240322143453)(next@14.1.3)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
-    specifier: 1.3.0-next-20240320130716
-    version: 1.3.0-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(framer-motion@11.0.8)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.3.0-next-20240322143453
+    version: 1.3.0-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(framer-motion@11.0.8)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
     specifier: 1.0.21
     version: 1.0.21(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
@@ -1856,6 +1859,48 @@ packages:
       '@types/node': 20.11.25
     dev: true
 
+  /@types/d3-array@3.2.1:
+    resolution: {integrity: sha512-Y2Jn2idRrLzUfAKV2LyRImR+y4oa2AntrgID95SHJxuMUrkNXmanDSed71sRNZysveJVt1hLLemQZIady0FpEg==, tarball: https://registry.npmjs.org/@types/d3-array/-/d3-array-3.2.1.tgz}
+    dev: false
+
+  /@types/d3-color@3.1.3:
+    resolution: {integrity: sha512-iO90scth9WAbmgv7ogoq57O9YpKmFBbmoEoCHDB2xMBY0+/KVrqAaCDyCE16dUspeOvIxFFRI+0sEtqDqy2b4A==, tarball: https://registry.npmjs.org/@types/d3-color/-/d3-color-3.1.3.tgz}
+    dev: false
+
+  /@types/d3-ease@3.0.2:
+    resolution: {integrity: sha512-NcV1JjO5oDzoK26oMzbILE6HW7uVXOHLQvHshBUW4UMdZGfiY6v5BeQwh9a9tCzv+CeefZQHJt5SRgK154RtiA==, tarball: https://registry.npmjs.org/@types/d3-ease/-/d3-ease-3.0.2.tgz}
+    dev: false
+
+  /@types/d3-interpolate@3.0.4:
+    resolution: {integrity: sha512-mgLPETlrpVV1YRJIglr4Ez47g7Yxjl1lj7YKsiMCb27VJH9W8NVM6Bb9d8kkpG/uAQS5AmbA48q2IAolKKo1MA==, tarball: https://registry.npmjs.org/@types/d3-interpolate/-/d3-interpolate-3.0.4.tgz}
+    dependencies:
+      '@types/d3-color': 3.1.3
+    dev: false
+
+  /@types/d3-path@3.1.0:
+    resolution: {integrity: sha512-P2dlU/q51fkOc/Gfl3Ul9kicV7l+ra934qBFXCFhrZMOL6du1TM0pm1ThYvENukyOn5h9v+yMJ9Fn5JK4QozrQ==, tarball: https://registry.npmjs.org/@types/d3-path/-/d3-path-3.1.0.tgz}
+    dev: false
+
+  /@types/d3-scale@4.0.8:
+    resolution: {integrity: sha512-gkK1VVTr5iNiYJ7vWDI+yUFFlszhNMtVeneJ6lUTKPjprsvLLI9/tgEGiXJOnlINJA8FyA88gfnQsHbybVZrYQ==, tarball: https://registry.npmjs.org/@types/d3-scale/-/d3-scale-4.0.8.tgz}
+    dependencies:
+      '@types/d3-time': 3.0.3
+    dev: false
+
+  /@types/d3-shape@3.1.6:
+    resolution: {integrity: sha512-5KKk5aKGu2I+O6SONMYSNflgiP0WfZIQvVUMan50wHsLG1G94JlxEVnCpQARfTtzytuY0p/9PXXZb3I7giofIA==, tarball: https://registry.npmjs.org/@types/d3-shape/-/d3-shape-3.1.6.tgz}
+    dependencies:
+      '@types/d3-path': 3.1.0
+    dev: false
+
+  /@types/d3-time@3.0.3:
+    resolution: {integrity: sha512-2p6olUZ4w3s+07q3Tm2dbiMZy5pCDfYwtLXXHUnVzXgQlZ/OyPtUz6OL382BkOuGlLXqfT+wqv8Fw2v8/0geBw==, tarball: https://registry.npmjs.org/@types/d3-time/-/d3-time-3.0.3.tgz}
+    dev: false
+
+  /@types/d3-timer@3.0.2:
+    resolution: {integrity: sha512-Ps3T8E8dZDam6fUyNiMkekK3XUsaUEik+idO9/YjPtfj2qruF8tFBXS7XhtE4iIXBLxhmLjP3SXpLhVf21I9Lw==, tarball: https://registry.npmjs.org/@types/d3-timer/-/d3-timer-3.0.2.tgz}
+    dev: false
+
   /@types/debug@4.1.12:
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
     dependencies:
@@ -2232,15 +2277,15 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@yamada-ui/accordion@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-cEiIrxM82bF2gia+NDHLsaCd5FdnaEp470wPea+UggolYaXcCECHCI2kNBCM+ZF4kOE+N7ILF+uyA4nlAreLUw==, tarball: https://registry.npmjs.org/@yamada-ui/accordion/-/accordion-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/accordion@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-uPZQBcgSsDN4MvE61qq0r7kfnG2u9UdYEOlp6Kr+JGaHUr/Dlt601xhQbErGjc59v9aHpFnIkTN5NuKVtjFRqQ==, tarball: https://registry.npmjs.org/@yamada-ui/accordion/-/accordion-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/transitions': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-descendant': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -2265,14 +2310,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/alert@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ZFlMtQFMmfKzxj2RED98XcrcQmcQ/HLP0tFtGEjHEXnEGpi1bhMHQbnXKwPx8G9EQ0ENfiW3FwMp8Ypd75W4gg==, tarball: https://registry.npmjs.org/@yamada-ui/alert/-/alert-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/alert@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-KfWFsVR9i+9+85QmFPtqClYF7e5IlnesI9aplpK6TCRv1kgbJ+5ZCxQM46LszzoWW1JmQz5ptYvCe8BzI2185g==, tarball: https://registry.npmjs.org/@yamada-ui/alert/-/alert-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/loading': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/loading': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2280,16 +2325,16 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/autocomplete@1.1.4-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-8XKUr/4uQSVuPhzlKwdirjPLsY0fkG2Mr3yQZr9UBXmuOhtBKlzelQwk+plhcc3LrQlpmFhiL73ede6zDvVYPA==, tarball: https://registry.npmjs.org/@yamada-ui/autocomplete/-/autocomplete-1.1.4-next-20240320130716.tgz}
+  /@yamada-ui/autocomplete@1.1.4-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HngmwWHlw+NVm6GFmZ74nNvOCYRUTc8P2mlqVxqB4E4A6P68G+ojwAK9g+kAf1KMLqnKijW6BAPmGmxmgIEyvA==, tarball: https://registry.npmjs.org/@yamada-ui/autocomplete/-/autocomplete-1.1.4-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/popover': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/popover': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-clickable': 1.0.7(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
@@ -2303,15 +2348,15 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/avatar@1.1.16-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-mJdE6spFJ7R2B086IxQ9TkNrtz7PQmjsolMgrdaULa/3rcVbaCGkKBY9Vost4ISSu35hyc98zPMcQ0qoaVXaGA==, tarball: https://registry.npmjs.org/@yamada-ui/avatar/-/avatar-1.1.16-next-20240320130716.tgz}
+  /@yamada-ui/avatar@1.1.16-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-hWKQS36Tr+fTOMrty4ST/4TG1kDbQaiD+GlVgKR60GIvT8URli4CMOjfYaO4jQLMUFXOXveE1zol1cD1fPBcrQ==, tarball: https://registry.npmjs.org/@yamada-ui/avatar/-/avatar-1.1.16-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/image': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-animation': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/image': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-animation': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2319,12 +2364,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/badge@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Bckhe293kb9MYMnweixYOC/QGEnjumuyjO599Qqz8jWhLX/WtFAADUvugFUTbWjRoMseLnGShK1fGrTFdhrVJQ==, tarball: https://registry.npmjs.org/@yamada-ui/badge/-/badge-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/badge@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-14ppgL+8+cb5r1CQiLJv5hGRm4PNi0Nf5zg/8X67woEJnz6ipdy8ZX6kao/1BNAMsskT2dYliEKzu7mZ3IL+9w==, tarball: https://registry.npmjs.org/@yamada-ui/badge/-/badge-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2332,12 +2377,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/breadcrumb@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-yIVg/YTfTR2pKIen6ugWtaYxBHO3OLBK3Ogr4ZbAMEy6yJWHXj9i4Ak+uyJbI0BlVG2Zu4q0kUvDM4AmqMqcRQ==, tarball: https://registry.npmjs.org/@yamada-ui/breadcrumb/-/breadcrumb-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/breadcrumb@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-A4kcxfzU+WX1P9ufR41R9xsz6+7VOhJXHI/H3edNMNVnh4dO8MLsRzUnaBsX0PIqpMRzMpKF009BxGCT5M77yA==, tarball: https://registry.npmjs.org/@yamada-ui/breadcrumb/-/breadcrumb-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2360,14 +2405,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/button@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-2ONiNpvQSkWs/1TrX0RXNY2STVCwKGa7gay7rfI15rIgRpMh1/t+hfourkk3xF8U1chFKwU8zDW6FZodAYckyg==, tarball: https://registry.npmjs.org/@yamada-ui/button/-/button-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/button@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-g4PUNwih13NDTHoscLYnn67XHnAy6O+oeYDvJgcGQWFr4bfEynhViwrmPXuqCBghBSj0/rUHHN14boAqXRkbXw==, tarball: https://registry.npmjs.org/@yamada-ui/button/-/button-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/loading': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/ripple': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/loading': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/ripple': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2398,12 +2443,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/card@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-mO7+HIJ7oOUpBOTyjhh2IqQgskZOMoShm84KgJkBq7ehJg/vamcOXySV54uIYIEdbjCi7uvJhwq+0J8Xx6xIDw==, tarball: https://registry.npmjs.org/@yamada-ui/card/-/card-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/card@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-f7JxcevwGvwrkkmij5qer2Q2v8+KlupaxHIp2dSjcVvLeWFEa/SbTk7Dxe/aJm+WTG3CSYFyiYqMGBMaGHw7Ug==, tarball: https://registry.npmjs.org/@yamada-ui/card/-/card-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2430,6 +2475,23 @@ packages:
       - react-dom
     dev: false
 
+  /@yamada-ui/charts@1.0.0(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-T2KyqTUNz4CUgZ27FPWtoKu0EoKdcNVodaX/oR281qDnCldHEmbU8k4ICZiJjHhoBNe+NNS6biplzymPrvJWAw==, tarball: https://registry.npmjs.org/@yamada-ui/charts/-/charts-1.0.0.tgz}
+    peerDependencies:
+      react: '>=18'
+    dependencies:
+      '@yamada-ui/core': 1.4.4(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/tooltip': 1.0.18(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.4(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.4(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/utils': 1.0.7(react@18.2.0)
+      react: 18.2.0
+      recharts: 2.12.3(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+    dev: false
+
   /@yamada-ui/checkbox@1.0.20(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-d1ETPQmL/OMK0dilHiDwXHrqRLzsgJOGRuYeRrl9MDgEGo4Oi2bI4vaEKTLbixNJW5cvSWpmV/9E6sOnn2+51g==, tarball: https://registry.npmjs.org/@yamada-ui/checkbox/-/checkbox-1.0.20.tgz}
     peerDependencies:
@@ -2448,15 +2510,15 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/checkbox@1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-UhikMtXSKn2qJbK1Hb+vxirLv+eC4/jxPDb5R8TilU0f/CQUWEHwwFPoMTa8upg0by8poOiRipJMmiLWPwulRw==, tarball: https://registry.npmjs.org/@yamada-ui/checkbox/-/checkbox-1.0.21-next-20240320130716.tgz}
+  /@yamada-ui/checkbox@1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-4JiLzI1i+NIgAXNogrU75no2UbiCkAbdwHadWDk6n4cLj3j9+ADLd/qCZ2fSVq+N+CoDoVs14D9yaCSnRZxh+g==, tarball: https://registry.npmjs.org/@yamada-ui/checkbox/-/checkbox-1.0.21-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/layouts': 1.1.14-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/layouts': 1.1.14-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-focus-visible': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -2497,14 +2559,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/close-button@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-HJqaGV4Q9N8/MWnZEIaEwqlgkpSA4bPgTqlgjM8I4ckliSp/pIZch2hjHxtV8Judm9IPjuJH/IXWpfkRlc9kvw==, tarball: https://registry.npmjs.org/@yamada-ui/close-button/-/close-button-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/close-button@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-20jtG7PRdFGaIgxo3ZSYxhMaLXPO1tQ0bxqqngSTshvWRaHHaDXt5cnnYW3vUStpBg5RuilLmAWSxs4MCu24Sw==, tarball: https://registry.npmjs.org/@yamada-ui/close-button/-/close-button-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/ripple': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/ripple': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2512,17 +2574,17 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/color-picker@1.2.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ru3hgrSSa3P8JmGwwKrO7JEb56t224/AaLqqlKwTh2Lps9Rxt2ZahaM/t5yxFGJzV+Qdi7W8+2cwErMRP9cq6A==, tarball: https://registry.npmjs.org/@yamada-ui/color-picker/-/color-picker-1.2.5-next-20240320130716.tgz}
+  /@yamada-ui/color-picker@1.2.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-UrI4T5NO9ukTQ9KvFzElDOYh4Hz59O/e/QlO5Isp29iM3lA3bKFunZjcAq7UJDPVJuZO7Lr6qbQNjUOwyGUG0Q==, tarball: https://registry.npmjs.org/@yamada-ui/color-picker/-/color-picker-1.2.5-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/button': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/input': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/popover': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/button': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/input': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/popover': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-disclosure': 1.0.7(react@18.2.0)
@@ -2557,8 +2619,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/core@1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-DDW+3u09yTgFcRrv5xCkrwxycW9nxow/20BiyUC5oMNR3WVOmGgmKMxA3Xq+1ySVdnYjzGmvBmeulrQWDD20jQ==, tarball: https://registry.npmjs.org/@yamada-ui/core/-/core-1.5.0-next-20240320130716.tgz}
+  /@yamada-ui/core@1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-KJ+Vx7Xk5ES+f0fwllQa8Q9WgT7oRlfhdyuXym3OKWIIqnhRC9BAOLmJ3FQMgfDwXNpKjhVskHDzIvM+GaSX8Q==, tarball: https://registry.npmjs.org/@yamada-ui/core/-/core-1.5.0-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
@@ -2593,13 +2655,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/editable@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-bK7bGYcNBsfpDFn2r6B9zwmgnmGW8lCKBvIc5VladW1ndi/6zBlcCRyE3x+rKvCqdUOkYOc+GAOW1giUhQyijg==, tarball: https://registry.npmjs.org/@yamada-ui/editable/-/editable-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/editable@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-rXVpHpogfrR7B76U1T3Cyq1T0eFMXzPLHEL12XpRNJU8+xGCL+FOCG3wAemNU8TnDQKcgpZ47H0WW8kUupXpOQ==, tarball: https://registry.npmjs.org/@yamada-ui/editable/-/editable-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-focus': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -2609,14 +2671,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/file-button@1.0.22-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-C3VDVZbPaCth/aVBsG5yQ/8tTowT2hjfIqIzZ1dfSW5EknctrfsF53ABLSN8msLdvUM64H1JFbwCeny4aOfgvQ==, tarball: https://registry.npmjs.org/@yamada-ui/file-button/-/file-button-1.0.22-next-20240320130716.tgz}
+  /@yamada-ui/file-button@1.0.22-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-tlIhOFQ8IRwls3ycvfGfqKv6EwPunBK77nxde3T7rzb3xC/icfBhdxKy6YEF7xMVIY/O2QHK837OBNinGKZa9g==, tarball: https://registry.npmjs.org/@yamada-ui/file-button/-/file-button-1.0.22-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/button': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/button': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2624,13 +2686,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/file-input@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-wDysORWZz8NQ4izP6vgyp/XfR2fWvlwA/MTsWYrr7rOJsnvbRv7FjI5lCvnMIb928jBI0hHbMoGdHmytB5jixw==, tarball: https://registry.npmjs.org/@yamada-ui/file-input/-/file-input-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/file-input@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-f3ocXvnZXhihnOF6IxDOHfxeNNRImhHE1Z8bfszgBrSzoQBGtwmVf7csooVtThD8XpRpWBcrwcLQ1qqr7fWa3w==, tarball: https://registry.npmjs.org/@yamada-ui/file-input/-/file-input-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
@@ -2680,12 +2742,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/form-control@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-X2Y57LnnjDkS7cUn7mgZL0fTbJRu7UZWBxZWuC9YsPHJFihaCB8bncxQbcc7Nddst+PePssXsyBZ79um987qjQ==, tarball: https://registry.npmjs.org/@yamada-ui/form-control/-/form-control-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/form-control@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fEPUON1eKC6VIK8R8PUdqUzqrmEGT7nRHMG8Dfo0jzeahqxtEMJc8tlbiGRysUrgxlyX923ze0S+RJO7c38AlQ==, tarball: https://registry.npmjs.org/@yamada-ui/form-control/-/form-control-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2693,13 +2755,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/highlight@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-lBawWz3T766ZBLnK+dQLSpltRRm312sFmjRTEX5IbwbvW+qLdN2F+zsVt6RzcooZ5vJs4NGbifc62+Hcy9bPEA==, tarball: https://registry.npmjs.org/@yamada-ui/highlight/-/highlight-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/highlight@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TjHv6SmS2ITW/dAxYfVI2S6qQu+pQRuyzwVU9vqlyKErUaRjq5ioboJN//3wgQ6AH6xFAPvT6cPT4ozFoaeaqw==, tarball: https://registry.npmjs.org/@yamada-ui/highlight/-/highlight-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/typography': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/typography': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2721,13 +2783,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/icon@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-zIQOoAUScI1fK95bo7aeZOPkAqGoM33MVWrSNwl8YrvlcJiP5AioJ5ygfg7Tu7AOFgtVWYPWvhayHNQ8RYyKug==, tarball: https://registry.npmjs.org/@yamada-ui/icon/-/icon-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/icon@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-WMsKoFd8seXXs9TyIdx7kWMUp1yDvb9bLunAZtfCQC8ud5vmwcg1YGsuGkGnbc6XQqulyiZ0ZAo0HjEfo+po8A==, tarball: https://registry.npmjs.org/@yamada-ui/icon/-/icon-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-token': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2735,12 +2797,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/image@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-e+Mspqtmb1x2tqNYnz6RbfgFM0IpUan/NoQQc0gwhJoLm6ESY2y6Epi3noBi/N/KEr2NdXCidg8tVHvjuhCbLQ==, tarball: https://registry.npmjs.org/@yamada-ui/image/-/image-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/image@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ZJrR1tg8ijcNPC+LNLT77wsrXIvWDMH4tyCHsq5Sn95oe1nG8R/qQ4Vc5nSwovyqmDNdd7lFdtXqs1UsIq5Nlw==, tarball: https://registry.npmjs.org/@yamada-ui/image/-/image-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2748,14 +2810,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/indicator@1.1.16-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VvWmkY0RueTPGtWmw8SEMjsa+XI6ZqYeAaw23bu1g/r3wZYIDH5Xo4hPhB2pCeSyOdLHZ8ZmR851B3l3ZgFGuA==, tarball: https://registry.npmjs.org/@yamada-ui/indicator/-/indicator-1.1.16-next-20240320130716.tgz}
+  /@yamada-ui/indicator@1.1.16-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BBrmS15bdiLl8kWHI/evvQ7hILsIDJGrV8hsU779w/KOologp1id/KWO7kq4KgSnHIKHvXdOIbZyuDccN81YVg==, tarball: https://registry.npmjs.org/@yamada-ui/indicator/-/indicator-1.1.16-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-animation': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-animation': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2763,12 +2825,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/infinite-scroll-area@1.0.1-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-6x5WL16xA3iEISIOjAAlAojK5iyLMCm3j60CFBsEeTuwS0C8IIgxS14nY+vKMQX0FdIPW9xGP5hl/nFi/lMq8w==, tarball: https://registry.npmjs.org/@yamada-ui/infinite-scroll-area/-/infinite-scroll-area-1.0.1-next-20240320130716.tgz}
+  /@yamada-ui/infinite-scroll-area@1.0.1-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Xn4G+L3fG9RiF4qzxcr81qocusOleCcIwxKQ3bdDqBBFui0wsMjZfoNyHb3i1NgDcKt83w3QIwJh3ZZu+ikSuQ==, tarball: https://registry.npmjs.org/@yamada-ui/infinite-scroll-area/-/infinite-scroll-area-1.0.1-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-infinite-scroll': 1.0.0(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
@@ -2777,15 +2839,15 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/input@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-OGIUvOX2/DHu6zZeJasycx/mgr725vZLa7BwnA23SiAeaVuhye4rp49sT4MBlomuwDLlcVIS/KSh987ugdUuzg==, tarball: https://registry.npmjs.org/@yamada-ui/input/-/input-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/input@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9MvVNnR2hl32Wf15qenHhlqA10weByNH63SBummhNujz/Yi2jJKS5KtzAkjvDH7jse8MGY99HJZnwtxgJjcc2g==, tarball: https://registry.npmjs.org/@yamada-ui/input/-/input-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/file-input': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-token': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/file-input': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2793,12 +2855,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/kbd@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-R+TY/FzO2oFTRZaAonyWQsSFmsrIIc9P95Bpb5tUFPUK1KqWGzZHf6LleUq7w9+Yscz5nuFMKRK9ek4Soxs15w==, tarball: https://registry.npmjs.org/@yamada-ui/kbd/-/kbd-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/kbd@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-GtjeLcog1uKsehFRS7zySXM1tl5TgOJ0aXRSh3in1Ri4N8OGUe0X5XAFOF4wSixll8ZyKg5SiXqwSNcFNWkL9A==, tarball: https://registry.npmjs.org/@yamada-ui/kbd/-/kbd-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2819,12 +2881,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/layouts@1.1.14-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-INwOMkqG9ChbPD8gD9BiwGarHGWgwCi8xCVGO9qeqpevfIKtmis5NPsTIN8r4BfJTEgnv1Xa8uI/pMtdQbOKNg==, tarball: https://registry.npmjs.org/@yamada-ui/layouts/-/layouts-1.1.14-next-20240320130716.tgz}
+  /@yamada-ui/layouts@1.1.14-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-75ICf1/ws1uNl0XxdjPnFPcRf43IlhzJai1b4xw3/XYOS3wDzzFGF17AZXe6cJx5QXpbwW2fJCJOOQAmx74bxA==, tarball: https://registry.npmjs.org/@yamada-ui/layouts/-/layouts-1.1.14-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2832,12 +2894,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/link@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-NWkatzMLDr8d0hpcZths0jTnPWIQ1vXtEnthlBiHiDe1Px4DWLrE9JBkKQ+glDLmrRraWB8WY9ZGlQ9Ftsv79w==, tarball: https://registry.npmjs.org/@yamada-ui/link/-/link-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/link@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-4nCzphBJHv/Ok+Sg3oLM9Q2fdtOghpXo5iBbJD7a8syXfCj9rviNbRwJiJyJBNhCtW+i8D/q57MWeDPs2dTUlA==, tarball: https://registry.npmjs.org/@yamada-ui/link/-/link-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2845,13 +2907,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/list@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-1+YK/vK40DNO5JXzwoznXAIf6Xw3lmvBvwJKv7pgXLYe4U5+MhDMl8Uf2jOb0Q5xWodMIL7dYaGMIkG8G9Llrg==, tarball: https://registry.npmjs.org/@yamada-ui/list/-/list-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/list@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-6FmG0hjqXXwayn1GzVba5GS0rDRAIIuWMLOqnQ7PZF925IKSBboEnEttKNvG5f91b4ThO1y/vkMHt3no4v01eQ==, tarball: https://registry.npmjs.org/@yamada-ui/list/-/list-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -2879,18 +2941,18 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/loading@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-EXpUazcUFptyA+w9h+SEZua07vXsFMi+IMG9a/eS31LIXgGaUuB66mfq7mQ+72S3E/hUKKG1N7ZzIJLZk3A4Bg==, tarball: https://registry.npmjs.org/@yamada-ui/loading/-/loading-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/loading@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-GSLJvRyQbgieMxnZZIj4r58s8BLV0H6vK6M/jqkYDN8QMzAmCu+Kt7TsdGlPNYb9NNSY7uBTzzwMy2KovnrPKQ==, tarball: https://registry.npmjs.org/@yamada-ui/loading/-/loading-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-timeout': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-token': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
       react-remove-scroll: 2.5.7(@types/react@18.2.64)(react@18.2.0)
@@ -2919,15 +2981,15 @@ packages:
       - supports-color
     dev: false
 
-  /@yamada-ui/menu@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-koO1gWoBSLzC+2Pa+hmS8b65NQtAEntEy/EtUBhVsYf0CurRyqIgB8kLyJJSp00J32YWspVmO2EQ/NqeyHfjPA==, tarball: https://registry.npmjs.org/@yamada-ui/menu/-/menu-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/menu@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-jWturRdYCU1hVnDGA97td3UsZzYsIXg1H4nFY2Q6RiFEOoz4JvnY+6hbuEBf8bdsDOjZdR/xxzatmoyfDvjL5g==, tarball: https://registry.npmjs.org/@yamada-ui/menu/-/menu-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/popover': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/transitions': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/popover': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-clickable': 1.0.7(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-descendant': 1.0.7(react@18.2.0)
@@ -2939,19 +3001,19 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/modal@1.1.1-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-dIwIFsF1w6vXBLy0eOmO8Ws2/5ObUlltmRpetJjIXajOkSllIsiyQOdMYZ9ehdje3NdcgR2ERtRpzbZpCPYcWQ==, tarball: https://registry.npmjs.org/@yamada-ui/modal/-/modal-1.1.1-next-20240320130716.tgz}
+  /@yamada-ui/modal@1.1.1-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-JdwxkaI/ZEMaO/U4Ewg3h2OPBy/Qx2nJyhqQH0zK+urnSc32aPLKZ+Dg2zF8/XyMgs5ZNkhWsCW/Q/7Ear7hFw==, tarball: https://registry.npmjs.org/@yamada-ui/modal/-/modal-1.1.1-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/button': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/close-button': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/button': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/close-button': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/focus-lock': 1.0.7(@types/react@18.2.64)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/transitions': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
       react-remove-scroll: 2.5.7(@types/react@18.2.64)(react@18.2.0)
@@ -2974,12 +3036,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/motion@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-iJ78nG+Afhl1L4gqJZeNrCf1uej5XRD9bfbn6/FQzrNv7q+6eiK/OXV9vg1lzddtoSFA7h8iKFA/nhIfrHdBTA==, tarball: https://registry.npmjs.org/@yamada-ui/motion/-/motion-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/motion@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-b/8hhMM4UsWSKgi1fcLN4oMINVPnWPdRbwbeT/eMiqG5t3pP3vrvS3Mo3pMAU37gKqTA6QSGMwt4NTEU8GRbJQ==, tarball: https://registry.npmjs.org/@yamada-ui/motion/-/motion-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       framer-motion: 9.1.7(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -2988,14 +3050,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/native-select@1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Odp7GrF8YLuEvxwv66DaV9ZqQ5r7mcdp2Dp/1Qvmbu2eEeJQjL3bWD+/qXkIL9eP5AHPb3SoKnMoK7Qi5orZtg==, tarball: https://registry.npmjs.org/@yamada-ui/native-select/-/native-select-1.0.21-next-20240320130716.tgz}
+  /@yamada-ui/native-select@1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mjXpXueeEtoW+MkiNZjqIDK97Nukk8V/UrXv2Pt8C2XsSE9hCydQc0cZntyCz+pRY5FHZBSBjZXB+A/KLrJwEg==, tarball: https://registry.npmjs.org/@yamada-ui/native-select/-/native-select-1.0.21-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3016,12 +3078,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/native-table@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Nir+8kbxdQgsNArCoUYV8IiqRLmYaSBVuTNs29iRrl2khlf89ZBe6/d0jYH5wZI4M1qkpzbIAGzCBb2TueMw3g==, tarball: https://registry.npmjs.org/@yamada-ui/native-table/-/native-table-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/native-table@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pOuB3sR2RBvFDN8kZp/r0+yfGRgjeQaUDC5znk0fRI1iaf5pmeqm0jV7IAMj4PYniZeBlf6J7JFgE13rV73c+A==, tarball: https://registry.npmjs.org/@yamada-ui/native-table/-/native-table-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3029,7 +3091,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/nextjs@5.0.16(@emotion/react@11.11.0)(@types/react@18.2.64)(@yamada-ui/react@1.3.0-next-20240320130716)(next@14.1.3)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/nextjs@5.0.16(@emotion/react@11.11.0)(@types/react@18.2.64)(@yamada-ui/react@1.3.0-next-20240322143453)(next@14.1.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-tm49UEkVJ9JlQJ5FinzO+8R+XrIv/X+D5JBci8M1psjlJESXWHxaVGfEu7ZaRtvEDBpqW/Z+Dnwvy1k8hss2Eg==, tarball: https://registry.npmjs.org/@yamada-ui/nextjs/-/nextjs-5.0.16.tgz}
     peerDependencies:
       '@emotion/react': '>=11'
@@ -3040,7 +3102,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.0(@types/react@18.2.64)(react@18.2.0)
       '@yamada-ui/core': 1.4.4(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 1.3.0-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(framer-motion@11.0.8)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 1.3.0-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(framer-motion@11.0.8)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       next: 14.1.3(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -3049,15 +3111,15 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/notice@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-arqJTzv0J6wVlH/A3RvfbEaBvHvP4DErpeDFrw7aOJFyp30Y89+j83zz2sHMabE6BvBgbjnHEFbrDjDNsLsN7w==, tarball: https://registry.npmjs.org/@yamada-ui/notice/-/notice-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/notice@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-YStkzxgtYTz/+q310Vl9E4wTSBfnXsBudSfDD9mbymKjvL1cSAY2GO9G96Gxm17iPYUgxLktp5Xpynf6G3WLUg==, tarball: https://registry.npmjs.org/@yamada-ui/notice/-/notice-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/alert': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/close-button': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/alert': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/close-button': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-timeout': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -3067,14 +3129,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/number-input@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-5SibghJ4U9lfra5KOvYJ9mPW5LHx9NYcTjXNkjlcdyDPKHrNTFfipy3XhLXkUELsZWgeXJTQRIokt6mOBXKgEQ==, tarball: https://registry.npmjs.org/@yamada-ui/number-input/-/number-input-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/number-input@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-wf9eaUu82pCKbO8hbL29TsZ/uVqKcSy45IgIjDBy0NHDGI0Gwm9CCNGi2OfaXPj6KbAIIaJDMlZM18qPjEqV0A==, tarball: https://registry.npmjs.org/@yamada-ui/number-input/-/number-input-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-counter': 1.0.7(react@18.2.0)
       '@yamada-ui/use-event-listener': 1.0.7(react@18.2.0)
       '@yamada-ui/use-interval': 1.0.7(react@18.2.0)
@@ -3102,16 +3164,16 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/pagination@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-s2YScLi2ysw/VY5dts3tT7z7ViFHN3gaQg+ChGXvdyYxbbbaRQEteEQmBlDIzq6V/P1wOvF0Udce+jSEzuNMAw==, tarball: https://registry.npmjs.org/@yamada-ui/pagination/-/pagination-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/pagination@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-eWfY9ZK4qzhsfpibxydTPs02YJmUPA4FDdCoDoCvN1sQq0CEpilABC60EXo1bQ1stx7y1BXb/txofvqKv65MqQ==, tarball: https://registry.npmjs.org/@yamada-ui/pagination/-/pagination-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/ripple': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/ripple': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3119,13 +3181,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/pin-input@1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-xm8TvJE32aIGia0yFGXLx1KXNeAattVKe7vrkXVvTvvEn3yKbfVHOMU78Yjvm4iPcmSOzUQYH0AJzE2qNbuVhg==, tarball: https://registry.npmjs.org/@yamada-ui/pin-input/-/pin-input-1.0.20-next-20240320130716.tgz}
+  /@yamada-ui/pin-input@1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TPvMkfbJAzBsmENzJQRLlwJv2tnya9p9loGmfYCmZA5A4XIwV2+pv1fqLVI4h+VbfyN4iI0wf6TUVUWrGbYsow==, tarball: https://registry.npmjs.org/@yamada-ui/pin-input/-/pin-input-1.0.20-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-descendant': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -3155,19 +3217,19 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/popover@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ixYe+mfGzYqwd8K6dMO8vf6piawcnYxJ6FKGNGN0dfFe8x5cP3JlCsLDuxH9tsm9Xlwngy8h64HbCaAWjlstmw==, tarball: https://registry.npmjs.org/@yamada-ui/popover/-/popover-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/popover@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-dFynKjWQTQRn/MP4B6vUhmJQ/KwFLIFsYMyQOrcUdKEOQWyPnGwm87XYrKQjR1nTO5KDBbg8fiDLTLCBpyFlew==, tarball: https://registry.npmjs.org/@yamada-ui/popover/-/popover-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/close-button': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/transitions': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-animation': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/close-button': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-animation': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-disclosure': 1.0.7(react@18.2.0)
       '@yamada-ui/use-focus': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-popper': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-popper': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3186,15 +3248,15 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@yamada-ui/progress@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-920q3q/xjAs18XVwLsmIPWLwAsf/OeDHfIhf2jeLVtwZsZhYmmmPpQ6yBYWya4rWLdqGQBo5w5gxbVupMC1Afw==, tarball: https://registry.npmjs.org/@yamada-ui/progress/-/progress-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/progress@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-AGzAzr4X+4HSBTuExJSnp+dE0jwRLP2LDPDM2njM0rUSXJPG4pfAqGgR6uPXmcrcbBcUjPzgT7yNr398ZxmiEg==, tarball: https://registry.npmjs.org/@yamada-ui/progress/-/progress-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-animation': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-token': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-animation': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3202,8 +3264,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/providers@1.0.23-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-FkoPTiNmVGmiUThM4ZF/jq75IRSYRkqIPCJiafSmHiGXINNTyWoUmGjAzeeBwo98RXtaDI5lUgfbkbTNC4NiVw==, tarball: https://registry.npmjs.org/@yamada-ui/providers/-/providers-1.0.23-next-20240320130716.tgz}
+  /@yamada-ui/providers@1.0.23-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-UhyvVuIlS0KIpOyc5a0uvFtZHnZDZ0I1Vfzor2A2p/4brMCgyJ3yaRCIcf42YM/Ckv9DPf7S0HdHQ+OJqbPNKQ==, tarball: https://registry.npmjs.org/@yamada-ui/providers/-/providers-1.0.23-next-20240322143453.tgz}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -3212,11 +3274,11 @@ packages:
     dependencies:
       '@emotion/react': 11.11.0(@types/react@18.2.64)(react@18.2.0)
       '@emotion/styled': 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.64)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/loading': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/notice': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/theme': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/loading': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/notice': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/theme': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -3224,14 +3286,14 @@ packages:
       - '@types/react'
     dev: false
 
-  /@yamada-ui/radio@1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-0b8dKjXDt3Qwd5b9I1/7nDb3UhH38DUBZMuS4b6rhSdt360IKjjuZcvfhJkNeQ1tvoOyHmzuSGYN3BkTCJePzg==, tarball: https://registry.npmjs.org/@yamada-ui/radio/-/radio-1.0.21-next-20240320130716.tgz}
+  /@yamada-ui/radio@1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-e9LyGac/+zWpnLJWeYbDg58sbZ/FDEgYiE9W6lT4v7TUJZ7NoifgDDG2e9mUD3fDl6mKtJgyPC/I8qSVHf7DJQ==, tarball: https://registry.npmjs.org/@yamada-ui/radio/-/radio-1.0.21-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/layouts': 1.1.14-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/layouts': 1.1.14-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-focus-visible': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -3241,15 +3303,15 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/rating@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-f/N24atbCTuwKHtIc7U46ed+aSaFHuMspkcNhb+ENoLk/sFz+MiwNu4bCcF1bmHku9qiHbp1m5XLO4mEB++G0A==, tarball: https://registry.npmjs.org/@yamada-ui/rating/-/rating-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/rating@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Coj+hOzhrricccY1OCGZnDOegdAgmIf2vb7eDpPQqGPV1skTdsCpwEb7US3X7ir7ZyHi2N3zBWkaasCTeuQSPQ==, tarball: https://registry.npmjs.org/@yamada-ui/rating/-/rating-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-focus-visible': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -3259,8 +3321,8 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@1.3.0-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(framer-motion@11.0.8)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-xgG6NTv4yzAqGNV5a16VkMV0NGXrzhDYktiw1roUvlVhYNv+DjIuyBdS2Yrpjj08s1N7QKLhSvfrER3OOSfYlQ==, tarball: https://registry.npmjs.org/@yamada-ui/react/-/react-1.3.0-next-20240320130716.tgz}
+  /@yamada-ui/react@1.3.0-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(framer-motion@11.0.8)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-oq6L/64LogusaUuZ1NhsHcqx+F8BJrm4jl9lqNJGY9cvgj9dXgxEtV8smPp9RJWqp251HRyVD095EwpSa5Cwlw==, tarball: https://registry.npmjs.org/@yamada-ui/react/-/react-1.3.0-next-20240322143453.tgz}
     peerDependencies:
       '@emotion/react': ^11.0.0
       '@emotion/styled': ^11.0.0
@@ -3270,73 +3332,73 @@ packages:
     dependencies:
       '@emotion/react': 11.11.0(@types/react@18.2.64)(react@18.2.0)
       '@emotion/styled': 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.64)(react@18.2.0)
-      '@yamada-ui/accordion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/alert': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/autocomplete': 1.1.4-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/avatar': 1.1.16-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/badge': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/breadcrumb': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/button': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/card': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/checkbox': 1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/close-button': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/color-picker': 1.2.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/editable': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/file-button': 1.0.22-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/file-input': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/accordion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/alert': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/autocomplete': 1.1.4-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/avatar': 1.1.16-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/badge': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/breadcrumb': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/button': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/card': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/checkbox': 1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/close-button': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/color-picker': 1.2.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/editable': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/file-button': 1.0.22-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/file-input': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/focus-lock': 1.0.7(@types/react@18.2.64)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/highlight': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/image': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/indicator': 1.1.16-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/infinite-scroll-area': 1.0.1-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/input': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/kbd': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/layouts': 1.1.14-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/link': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/list': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/loading': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/menu': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/modal': 1.1.1-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/native-select': 1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/native-table': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/notice': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/number-input': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/pagination': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/pin-input': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/popover': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/highlight': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/image': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/indicator': 1.1.16-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/infinite-scroll-area': 1.0.1-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/input': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/kbd': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/layouts': 1.1.14-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/link': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/list': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/loading': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/menu': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/modal': 1.1.1-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/native-select': 1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/native-table': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/notice': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/number-input': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/pagination': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/pin-input': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/popover': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/progress': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/providers': 1.0.23-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/radio': 1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/rating': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/reorder': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/resizable': 1.0.10-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/ripple': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/scroll-area': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/segmented-control': 1.0.19-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/select': 1.2.3-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/skeleton': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/slider': 1.0.22-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/snacks': 1.0.10-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/stat': 1.0.15-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/stepper': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/switch': 1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/tabs': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/tag': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/textarea': 1.1.7-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/theme': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/theme-tools': 1.0.22-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/toggle': 1.0.1-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/tooltip': 1.0.19-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/transitions': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/typography': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-animation': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/progress': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/providers': 1.0.23-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/radio': 1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/rating': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/reorder': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/resizable': 1.0.10-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/ripple': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/scroll-area': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/segmented-control': 1.0.19-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/select': 1.2.3-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/skeleton': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/slider': 1.0.22-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/snacks': 1.0.10-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/stat': 1.0.15-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/stepper': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/switch': 1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/tabs': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/tag': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/textarea': 1.1.7-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/theme': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/theme-tools': 1.0.22-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/toggle': 1.0.1-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/tooltip': 1.0.19-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/typography': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-animation': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-boolean': 1.0.1(react@18.2.0)
-      '@yamada-ui/use-breakpoint': 1.2.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-breakpoint': 1.2.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-clickable': 1.0.7(react@18.2.0)
       '@yamada-ui/use-clipboard': 1.0.7(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
@@ -3353,17 +3415,17 @@ packages:
       '@yamada-ui/use-interval': 1.0.7(react@18.2.0)
       '@yamada-ui/use-latest-ref': 1.0.1(react@18.2.0)
       '@yamada-ui/use-local-storage': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-media-query': 1.0.23-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-media-query': 1.0.23-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-os': 1.0.7(react@18.2.0)
       '@yamada-ui/use-outside-click': 1.0.7(react@18.2.0)
       '@yamada-ui/use-pan-event': 1.0.8(react@18.2.0)
-      '@yamada-ui/use-popper': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-popper': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-previous': 1.0.7(react@18.2.0)
       '@yamada-ui/use-resize-observer': 1.0.7(react@18.2.0)
       '@yamada-ui/use-size': 1.0.7(react@18.2.0)
       '@yamada-ui/use-timeout': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-token': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-window-event': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       framer-motion: 11.0.8(react-dom@18.2.0)(react@18.2.0)
@@ -3373,14 +3435,14 @@ packages:
       - '@types/react'
     dev: false
 
-  /@yamada-ui/reorder@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-R5i7NpM0BtCWBwlMYa62K6HHNr+l0tb7ILhlNviEi98Muihdf6yxgqY6xxtwuX6T8kBJsc8B7MUsUqddfR0NOg==, tarball: https://registry.npmjs.org/@yamada-ui/reorder/-/reorder-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/reorder@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-4RRAqBcZWaBz11ug+ADI+ywIF6Sl1+/rqlYj+0+ssYBTVe4aEvGI2cp4sPb99hhHRyD0/ylCLRsJIupGcsl1nQ==, tarball: https://registry.npmjs.org/@yamada-ui/reorder/-/reorder-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3388,13 +3450,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/resizable@1.0.10-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-a3YUN6pcL5IIL7r82OSbmIlA8lK9mJjLUGrkrdanH6grwKv3taNbJfRVIMyuca3srGTzdDlwB/V01u+1UONnrg==, tarball: https://registry.npmjs.org/@yamada-ui/resizable/-/resizable-1.0.10-next-20240320130716.tgz}
+  /@yamada-ui/resizable@1.0.10-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-FU7qm7S05GUR7od1uAgc9LysIzub7vAr/A1LFBSBRZNIK+ysfNao3Qwcoa77tEwf4IBr3MD3oYvxxm25iw+kdA==, tarball: https://registry.npmjs.org/@yamada-ui/resizable/-/resizable-1.0.10-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
       react-resizable-panels: 2.0.12(react-dom@18.2.0)(react@18.2.0)
@@ -3417,13 +3479,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/ripple@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-WbAWXv3KEtLphuZlMHx1+/LT5U4mjWgj8FL/2e0oPsSydPkJMxu3qQ1htFy0w5l4BTzYavjCNwE1cUmg6xVaAQ==, tarball: https://registry.npmjs.org/@yamada-ui/ripple/-/ripple-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/ripple@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-nBJnBwClb4DIvagTpr2ZbK0IPwGBy2AiMCrCc9V5EuhMT60AOiz+OPWCqIZqLQbDdU+P8Qk4oh/DK0KkwbxQtg==, tarball: https://registry.npmjs.org/@yamada-ui/ripple/-/ripple-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3431,12 +3493,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/scroll-area@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-QjGpnvxLw/1X7xpl08KbyZ7XPcStQKLtAfQM3hYp1MtRFRuFX9WzFPk0LewDxk55RM05N80JKM+l4KKMDdUBSQ==, tarball: https://registry.npmjs.org/@yamada-ui/scroll-area/-/scroll-area-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/scroll-area@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-0w2M/HKiJkB9xYv0tY4f09p2ab90i4dcM8b7GiOwrKVH7CO0f/T19H0ElRqSPNF1zkPvenrrlHW+GJavrxGs3w==, tarball: https://registry.npmjs.org/@yamada-ui/scroll-area/-/scroll-area-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3444,13 +3506,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/segmented-control@1.0.19-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-nrJaJO9Li4H2MHq67XfMRKzWF4xTInu7mNFQ0uJrJJmAP/pi9twKmdC8zYpq+h2PfxrdGoVNAowC9ICTIGW5Ew==, tarball: https://registry.npmjs.org/@yamada-ui/segmented-control/-/segmented-control-1.0.19-next-20240320130716.tgz}
+  /@yamada-ui/segmented-control@1.0.19-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-F0QfmKT7clyaZnoWeEEwL+4BEKG9um4dBW8IwsuM7mztn5T+mn82cp2g1hdwJcCHRyG55bv3+2qznpVCF9krAA==, tarball: https://registry.npmjs.org/@yamada-ui/segmented-control/-/segmented-control-1.0.19-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-descendant': 1.0.7(react@18.2.0)
       '@yamada-ui/use-focus-visible': 1.0.7(react@18.2.0)
@@ -3484,16 +3546,16 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/select@1.2.3-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-4xY5vRZ4JB36ByfClxaNoRY2C5ZMK6jUnVtJnPPqpe4Itm68/1Vn8blQ8WpbitsC54+3sC1rdWTUyEhzORG8/A==, tarball: https://registry.npmjs.org/@yamada-ui/select/-/select-1.2.3-next-20240320130716.tgz}
+  /@yamada-ui/select@1.2.3-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-D3Lh+dLyom4keXVuVf4Hj46iovV7CmcR2Yls/yx39W+/chCiXW4m3Yhbe+Fz4X6T1lyvyWfHOjJEKm7L4ZUYeA==, tarball: https://registry.npmjs.org/@yamada-ui/select/-/select-1.2.3-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/popover': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/popover': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-clickable': 1.0.7(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
@@ -3507,15 +3569,15 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/skeleton@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-JRKyiruXLhgcLp2HnE9GTiW0PNSBuQ/AhDvfjnaMF8sbJAmimNC1oVf1+lUOYLnBpBX+YbTw39w1Facn1WkXBg==, tarball: https://registry.npmjs.org/@yamada-ui/skeleton/-/skeleton-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/skeleton@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ldKADzQRT90bTErZwHMHurRiskgqX/Y3U/g4NihlF3l7+eQw7S1LjlCJTBBHrYvI8NHlFX3CDl8/dGcWJle6YA==, tarball: https://registry.npmjs.org/@yamada-ui/skeleton/-/skeleton-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-animation': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-animation': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-previous': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3523,13 +3585,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/slider@1.0.22-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-uh3Bxbfv+wSRSzGyYpsDChdUBwtz4VlNmnbrXJVj8ekAXztngl02zQV9QsmVPIS3IAQD0173fdMyzbaJE4JXJA==, tarball: https://registry.npmjs.org/@yamada-ui/slider/-/slider-1.0.22-next-20240320130716.tgz}
+  /@yamada-ui/slider@1.0.22-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TqgztgiPsMQIEJ7WJWpcviYJWEyU0l1j7TwxN2HfbUCoOJ16i63z7MRwOhqtmlCUMnwzCL4D/d5DGrcb4eM6+A==, tarball: https://registry.npmjs.org/@yamada-ui/slider/-/slider-1.0.22-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-latest-ref': 1.0.1(react@18.2.0)
       '@yamada-ui/use-pan-event': 1.0.8(react@18.2.0)
@@ -3541,18 +3603,18 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/snacks@1.0.10-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-tBbRFHjrzk/rtO1Y9/5caQPPGC01AyoRxYdpTPSeadBb4N8VxK+DDYlhXiJNUIPAWJq5gCqVcxtpNrO9vxmcHg==, tarball: https://registry.npmjs.org/@yamada-ui/snacks/-/snacks-1.0.10-next-20240320130716.tgz}
+  /@yamada-ui/snacks@1.0.10-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-5f26YLAyU1PlW4foCK7KVNB7VAaWxShPNRV2cVNTvhJtvsPvrq/4ZWaLdM0w9tAu6eObkFuSLSKvPqQ97dKhiQ==, tarball: https://registry.npmjs.org/@yamada-ui/snacks/-/snacks-1.0.10-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/alert': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/close-button': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/alert': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/close-button': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-timeout': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-token': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-token': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3560,13 +3622,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/stat@1.0.15-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-skvrPOXVh8k4cQq71BorT2mCHft0ZOxILTclsHeziK0HCODk3dgM03+Mlz7bDZaS/9agvDCJnUuVi+bKolfFhg==, tarball: https://registry.npmjs.org/@yamada-ui/stat/-/stat-1.0.15-next-20240320130716.tgz}
+  /@yamada-ui/stat@1.0.15-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-2uBp8vRB29nPMyIGVC/Oe7dkV9nb3phmCBw1VpYXKpP4FJIT+FQNJQ0u/M0dt1czNjmGAgfI6mf/tGHL8YIg2g==, tarball: https://registry.npmjs.org/@yamada-ui/stat/-/stat-1.0.15-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3574,13 +3636,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/stepper@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-+1w4xd5Fkv/vN3nIepavspNniUhuqXjpANAd3wbLZqvOIlSrfpMk7Zl74rrbK6wwGjQ+emCiTdzHuOUAvkRXPA==, tarball: https://registry.npmjs.org/@yamada-ui/stepper/-/stepper-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/stepper@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Bvz+JNt+f1Ns8833Lk9KaIide6qfjK5Q4y8SF77XMaIm/CwNjKdQQt+aEiriubdKExBot7RTCgphbCLm52DjxQ==, tarball: https://registry.npmjs.org/@yamada-ui/stepper/-/stepper-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-descendant': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
@@ -3589,14 +3651,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/switch@1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-yo+qu3EIn+Ut5/55noGVL8d3L+i4pYg9ixJPrRdDFm4OVakY+Jbt7Je2RU3Eco5KNdiwC1FgnKTtSXnWx5u4zA==, tarball: https://registry.npmjs.org/@yamada-ui/switch/-/switch-1.0.21-next-20240320130716.tgz}
+  /@yamada-ui/switch@1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-x3ksWP+wguvmFPITbR4zIahK2ulIe7p0dfWtZH+cLsYh0RHE25Z62gX/HV+5YKeFPduoV0TCNbZ/d7FfEEY8Ug==, tarball: https://registry.npmjs.org/@yamada-ui/switch/-/switch-1.0.21-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/checkbox': 1.0.21-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/checkbox': 1.0.21-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3624,13 +3686,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/tabs@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-R/f0FkoBujoBP+gZh1Zl5ByrwqinLeHgrUG9KWnp033NN2/2dSK+mSg2yk9ZzTU7vwh72IpEWa3fucTX+VDDFQ==, tarball: https://registry.npmjs.org/@yamada-ui/tabs/-/tabs-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/tabs@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-EBdGJ0anaigc8cm9HEqsudT2ZerQasoPY68vTzmb/X2KDMTTrsaZoQLa7onMk0xPb6/vQdADC6fqr0VnfaP7iQ==, tarball: https://registry.npmjs.org/@yamada-ui/tabs/-/tabs-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/ripple': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/ripple': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-clickable': 1.0.7(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/use-descendant': 1.0.7(react@18.2.0)
@@ -3642,13 +3704,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/tag@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-DJy3FPYPj+f0aW779PXcaUjLpoFF2+4w7QGOV91nfg8HfN0euWF0k+dWOFflm4U2OtAF4hcU+Z2NFylBuK5oNw==, tarball: https://registry.npmjs.org/@yamada-ui/tag/-/tag-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/tag@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Xwd+U/i+BtpiYMnFDt+AovpBVzI39RrvOr1FbzDCLs29qxUwX2Ki3PcmmsMmik18Met2BvKPtD7FA8Y2zu71UA==, tarball: https://registry.npmjs.org/@yamada-ui/tag/-/tag-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/icon': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/icon': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-clickable': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
@@ -3657,13 +3719,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/textarea@1.1.7-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-xBXzWSEw5NIWVW8j7kMWkyizyX2yzFqifkaxXx8gKfO8qoL2KY9ArUQS1ekpVQ65C5If1z7KNFodlDD+Fr7Npw==, tarball: https://registry.npmjs.org/@yamada-ui/textarea/-/textarea-1.1.7-next-20240320130716.tgz}
+  /@yamada-ui/textarea@1.1.7-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-M3FcwapdQG1Me+5Mvzuvm27rrt77DgmjG/kbMDajIfkF0XoQeLCcZO71vT3v/+iv2vw6/qPcffeGInGmfV+smA==, tarball: https://registry.npmjs.org/@yamada-ui/textarea/-/textarea-1.1.7-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/form-control': 1.0.20-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/form-control': 1.0.20-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3671,11 +3733,11 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/theme-tools@1.0.22-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VyMnfKdMFhAgc171TOe9qapj0V+q2A3Hu2JPx5xdG2Jkuk+DwTY7fR9d6pGf2byOqwNYxuRWCNKJbmoNL0/1eA==, tarball: https://registry.npmjs.org/@yamada-ui/theme-tools/-/theme-tools-1.0.22-next-20240320130716.tgz}
+  /@yamada-ui/theme-tools@1.0.22-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-s2D/9iE/bOmsYPlm+zoQ9Ivmi6WGOdg6aYC3v2yD05SLBTSemCl4CtbJJdznL6PX5tNnND5sjt4AyCfp1P84QA==, tarball: https://registry.npmjs.org/@yamada-ui/theme-tools/-/theme-tools-1.0.22-next-20240322143453.tgz}
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/theme': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/theme': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
@@ -3683,10 +3745,10 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/theme@1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-uyhg8pChTYSxw+3Xo2kiuKTU+ePjs1wVsIwbbz7jbVz+QPePKz8XjUQty/5HJTchbz9QMYRMwQ6LIcwN8QA+Qw==, tarball: https://registry.npmjs.org/@yamada-ui/theme/-/theme-1.5.0-next-20240320130716.tgz}
+  /@yamada-ui/theme@1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ULOEvhDb+rrQsEETTQuKvxwLh5pfdi1sYfPkQvF5kg4J9xHGhYvfzRhnyVsCco7SivEJcqjYT7SyTr9sCNBmMg==, tarball: https://registry.npmjs.org/@yamada-ui/theme/-/theme-1.5.0-next-20240322143453.tgz}
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
@@ -3694,13 +3756,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/toggle@1.0.1-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-2YWrO+2T9OS522X7cVxMIjXvlGqesb54A17V0AUOS5S5KN+UlaCPHeIHoRfVCVbTLRecHr3fdxjdb+PLm96VMA==, tarball: https://registry.npmjs.org/@yamada-ui/toggle/-/toggle-1.0.1-next-20240320130716.tgz}
+  /@yamada-ui/toggle@1.0.1-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DaR2eQ55Nkpphw4H70RQVg5lztEleFhvUVnU6J0uypSkkYvIywymZOkZA0Xql8nX5MR6kQkT0xxL32+V+ZoWoQ==, tarball: https://registry.npmjs.org/@yamada-ui/toggle/-/toggle-1.0.1-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/ripple': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/ripple': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-controllable-state': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
@@ -3709,18 +3771,37 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/tooltip@1.0.19-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-CuXUYOaDPYxAfmPuXFTinhkuXX9GE1fseSfIwXJXOWlP7VaZQ4cq9sed8MH4FZQFH1CsE3B4k+uyHSTlmSCMUw==, tarball: https://registry.npmjs.org/@yamada-ui/tooltip/-/tooltip-1.0.19-next-20240320130716.tgz}
+  /@yamada-ui/tooltip@1.0.18(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1jM2LuEjRoTlx2G08zVmWqiOM+jx8P4xzqzBm8RUFpEAxGZSaj6oJPzULJKha+POwrSHFNBdsLS3bh61ygtxhQ==, tarball: https://registry.npmjs.org/@yamada-ui/tooltip/-/tooltip-1.0.18.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.4.4(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.17(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/transitions': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.17(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-disclosure': 1.0.7(react@18.2.0)
       '@yamada-ui/use-event-listener': 1.0.7(react@18.2.0)
-      '@yamada-ui/use-popper': 1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-popper': 1.0.16(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/utils': 1.0.7(react@18.2.0)
+      react: 18.2.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+    dev: false
+
+  /@yamada-ui/tooltip@1.0.19-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-r29trEe/379us5c+Qk1m3ja1zLXw8IcG2uOzbHGpZfpes3r16d8clH+VqLPJ55Ufg5//xQOSQ3bN0TNRYV5aYw==, tarball: https://registry.npmjs.org/@yamada-ui/tooltip/-/tooltip-1.0.19-next-20240322143453.tgz}
+    peerDependencies:
+      react: '>=18'
+    dependencies:
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/portal': 1.0.7(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/transitions': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-disclosure': 1.0.7(react@18.2.0)
+      '@yamada-ui/use-event-listener': 1.0.7(react@18.2.0)
+      '@yamada-ui/use-popper': 1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3743,14 +3824,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/transitions@1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-2G+TI6fxxbfLwU6MC/OYf6sJeGvKXXZTHqQrQjvSJlm1mKNQPPPuQUCFmJ5ZRovnoaUucU9Zfd2WpHBPbNI7TQ==, tarball: https://registry.npmjs.org/@yamada-ui/transitions/-/transitions-1.0.18-next-20240320130716.tgz}
+  /@yamada-ui/transitions@1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-i1ZTAyXspDgPf1E6nUTuFFX4HMzSMLnwZwJ/Cmj8Ej2T3too9pObNfN2WDUk4TrHPhieN2l+x9tvRSjAjreRAw==, tarball: https://registry.npmjs.org/@yamada-ui/transitions/-/transitions-1.0.18-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/motion': 1.0.18-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/motion': 1.0.18-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3758,12 +3839,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/typography@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-LevIYC/pNyhqkbhetAej4QHvnOAHpB8QhBH2OfNWnQeDPjD4ZvsN+szJ+dnNvREm1n2pY40tiQavHHagDU0sZQ==, tarball: https://registry.npmjs.org/@yamada-ui/typography/-/typography-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/typography@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-rXKbG9KuaSNP3kzB96q0vuu51sFNazUqldEVd51QVOKHc1dxC1hQeSaqVsPCApP5YCCnxWbA7B9G9pB1CAe0vA==, tarball: https://registry.npmjs.org/@yamada-ui/typography/-/typography-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3787,12 +3868,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/use-animation@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-U9+UpwnwvTWOT/L1sakg9Ep99+OGHyLIxlDmRm6NS7/YOIpaftrGjB/cAeVcyv2gbEOan3UuT+LoB1KH2j9gDw==, tarball: https://registry.npmjs.org/@yamada-ui/use-animation/-/use-animation-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/use-animation@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-PlUjo00hmywrdxtvecHx40nwfJTEBLmfJhtt0WvFmUITiQ9pFgamp8J5TkfncjJbHX0KgD6z8DpfiXoU0btiMg==, tarball: https://registry.npmjs.org/@yamada-ui/use-animation/-/use-animation-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-boolean': 1.0.1(react@18.2.0)
       '@yamada-ui/use-event-listener': 1.0.7(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
@@ -3824,12 +3905,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/use-breakpoint@1.2.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-8eAjIsIM5ayJ5D9WmW3VjCFuqulDwXw1AjgWrPoq21mhLJfCNBNgrw4mz3cKCfYnT5ixaEsT+zSVQ39Z9vxAnA==, tarball: https://registry.npmjs.org/@yamada-ui/use-breakpoint/-/use-breakpoint-1.2.5-next-20240320130716.tgz}
+  /@yamada-ui/use-breakpoint@1.2.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-rJEHb1Q9wepYVjp2wYmQTknuxUhmjGAfE3gtgw0XCQ0gu4YQi0nolWHzLJnFb4lIK23ZlnG3filHAlPiIMdekw==, tarball: https://registry.npmjs.org/@yamada-ui/use-breakpoint/-/use-breakpoint-1.2.5-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -3984,12 +4065,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@yamada-ui/use-media-query@1.0.23-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-mIy0knB52sn+grbQ2T4owtZvhvd9s5zCP2wuMSdYy3gLOUjtqbLs7vAbfkfBnYOfqKBsbRfrNIX1n6MsDzkeoQ==, tarball: https://registry.npmjs.org/@yamada-ui/use-media-query/-/use-media-query-1.0.23-next-20240320130716.tgz}
+  /@yamada-ui/use-media-query@1.0.23-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+WmRXJmfGvrmNYLFv9jwTul4boLncGFTbOSenPwVxWmeEasyzu2U3pGHqXk8hy0Fw+8UC7QCDo4KuBCsXslhJg==, tarball: https://registry.npmjs.org/@yamada-ui/use-media-query/-/use-media-query-1.0.23-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/providers': 1.0.23-next-20240320130716(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/providers': 1.0.23-next-20240322143453(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -4043,14 +4124,14 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/use-popper@1.0.17-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-VkT7hw9hg1fWTYa+dopIDZ1CRRfyt3ZRahSMGK0VqdYvFGMOQrK/OLCLDy1ef8XXUgXZlBPVQXZC+WyfcQ5qxA==, tarball: https://registry.npmjs.org/@yamada-ui/use-popper/-/use-popper-1.0.17-next-20240320130716.tgz}
+  /@yamada-ui/use-popper@1.0.17-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-RL4TjXOr8K6s/p8DK/EMvODBfD6GGjiRsMzqz/rSLWsEEN0iMrVbd6OOKaYAfLaADx6GGjaovDtv0LcL65ay4Q==, tarball: https://registry.npmjs.org/@yamada-ui/use-popper/-/use-popper-1.0.17-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
       '@popperjs/core': 2.11.8
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-value': 1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-value': 1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -4107,12 +4188,12 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/use-token@1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-jVQkOMq275CKvfxsODLaaO47y5QNM/yhDd0f7WDuG4snEdHrqvUOCFDWPmnMug8ZPGQVgG7J7GJ5eCZ4mluvmg==, tarball: https://registry.npmjs.org/@yamada-ui/use-token/-/use-token-1.1.5-next-20240320130716.tgz}
+  /@yamada-ui/use-token@1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-RXgL6JIXnU0FRBFdc8xrGMqqcVzypx50KGkRIZ8x4KgW9UOl0MeI8VrPFSjAyNtF5kIxH0VJOwFO3ve1wQD2Xg==, tarball: https://registry.npmjs.org/@yamada-ui/use-token/-/use-token-1.1.5-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -4134,13 +4215,13 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/use-value@1.1.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-TRJVMSrdC7hQKw0HC0Xv3Lcd40zxBzyisYpB5FH3CnPSy4vsjyPGiLG+jUXJOumE9t/pmiaaOacpY9+dGIfY4Q==, tarball: https://registry.npmjs.org/@yamada-ui/use-value/-/use-value-1.1.5-next-20240320130716.tgz}
+  /@yamada-ui/use-value@1.1.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-XEJDdOGSIEjaibcvO/9Uv74ZLSTbBH7cuo+SqMh8GdY+Iv6cpXNxrzIDRc9f5TghI8xzUiRq+pupnXhixwbc9g==, tarball: https://registry.npmjs.org/@yamada-ui/use-value/-/use-value-1.1.5-next-20240322143453.tgz}
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@yamada-ui/core': 1.5.0-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/use-breakpoint': 1.2.5-next-20240320130716(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/core': 1.5.0-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/use-breakpoint': 1.2.5-next-20240322143453(@types/react@18.2.64)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.0.7(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
@@ -5002,6 +5083,77 @@ packages:
   /csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
+  /d3-array@3.2.4:
+    resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==, tarball: https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      internmap: 2.0.3
+    dev: false
+
+  /d3-color@3.1.0:
+    resolution: {integrity: sha512-zg/chbXyeBtMQ1LbD/WSoW2DpC3I0mpmPdW+ynRTj/x2DAWYrIY7qeZIHidozwV24m4iavr15lNwIwLxRmOxhA==, tarball: https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
+  /d3-ease@3.0.1:
+    resolution: {integrity: sha512-wR/XK3D3XcLIZwpbvQwQ5fK+8Ykds1ip7A2Txe0yxncXSdq1L9skcG7blcedkOX+ZcgxGAmLX1FrRGbADwzi0w==, tarball: https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
+  /d3-format@3.1.0:
+    resolution: {integrity: sha512-YyUI6AEuY/Wpt8KWLgZHsIU86atmikuoOmCfommt0LYHiQSPjvX2AcFc38PX0CBpr2RCyZhjex+NS/LPOv6YqA==, tarball: https://registry.npmjs.org/d3-format/-/d3-format-3.1.0.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
+  /d3-interpolate@3.0.1:
+    resolution: {integrity: sha512-3bYs1rOD33uo8aqJfKP3JWPAibgw8Zm2+L9vBKEHJ2Rg+viTR7o5Mmv5mZcieN+FRYaAOWX5SJATX6k1PWz72g==, tarball: https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      d3-color: 3.1.0
+    dev: false
+
+  /d3-path@3.1.0:
+    resolution: {integrity: sha512-p3KP5HCf/bvjBSSKuXid6Zqijx7wIfNW+J/maPs+iwR35at5JCbLUT0LzF1cnjbCHWhqzQTIN2Jpe8pRebIEFQ==, tarball: https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
+  /d3-scale@4.0.2:
+    resolution: {integrity: sha512-GZW464g1SH7ag3Y7hXjf8RoUuAFIqklOAq3MRl4OaWabTFJY9PN/E1YklhXLh+OQ3fM9yS2nOkCoS+WLZ6kvxQ==, tarball: https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      d3-array: 3.2.4
+      d3-format: 3.1.0
+      d3-interpolate: 3.0.1
+      d3-time: 3.1.0
+      d3-time-format: 4.1.0
+    dev: false
+
+  /d3-shape@3.2.0:
+    resolution: {integrity: sha512-SaLBuwGm3MOViRq2ABk3eLoxwZELpH6zhl3FbAoJ7Vm1gofKx6El1Ib5z23NUEhF9AsGl7y+dzLe5Cw2AArGTA==, tarball: https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      d3-path: 3.1.0
+    dev: false
+
+  /d3-time-format@4.1.0:
+    resolution: {integrity: sha512-dJxPBlzC7NugB2PDLwo9Q8JiTR3M3e4/XANkreKSUxF8vvXKqm1Yfq4Q5dl8budlunRVlUUaDUgFt7eA8D6NLg==, tarball: https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      d3-time: 3.1.0
+    dev: false
+
+  /d3-time@3.1.0:
+    resolution: {integrity: sha512-VqKjzBLejbSMT4IgbmVgDjpkYrNWUYJnbCGo874u7MMKIWsILRX+OpX/gTk8MqjpT1A/c6HY2dCA77ZN0lkQ2Q==, tarball: https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz}
+    engines: {node: '>=12'}
+    dependencies:
+      d3-array: 3.2.4
+    dev: false
+
+  /d3-timer@3.0.1:
+    resolution: {integrity: sha512-ndfJ/JxxMd3nw31uyKoY2naivF+r29V+Lc0svZxe1JvvIRmi8hUsrMvdOwgS1o6uBHmiz91geQ0ylPP0aj1VUA==, tarball: https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.1.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
@@ -5040,6 +5192,10 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+
+  /decimal.js-light@2.5.1:
+    resolution: {integrity: sha512-qIMFpTMZmny+MMIitAB6D7iVPEorVw6YQRWkvarTkT4tBeSLLiHzcwj6q0MmYSFCiVpiqPJTJEYIrpcPzVEIvg==, tarball: https://registry.npmjs.org/decimal.js-light/-/decimal.js-light-2.5.1.tgz}
+    dev: false
 
   /decode-named-character-reference@1.0.2:
     resolution: {integrity: sha512-O8x12RzrUF8xyVcY0KJowWsmaJxQbmy0/EtnNtHRpsOcT7dFk5W598coHqBVpmWo1oQQfsCqfCmkZN5DJrZVdg==}
@@ -5151,6 +5307,13 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==, tarball: https://registry.npmjs.org/dom-helpers/-/dom-helpers-5.2.1.tgz}
+    dependencies:
+      '@babel/runtime': 7.24.0
+      csstype: 3.1.3
+    dev: false
 
   /dot-case@3.0.4:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
@@ -5855,6 +6018,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /eventemitter3@4.0.7:
+    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==, tarball: https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.7.tgz}
+    dev: false
+
   /eventemitter3@5.0.1:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
     dev: true
@@ -5913,6 +6080,11 @@ packages:
   /fast-diff@1.3.0:
     resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
     dev: true
+
+  /fast-equals@5.0.1:
+    resolution: {integrity: sha512-WF1Wi8PwwSY7/6Kx0vKXtw8RwuSGoM1bvDaJbu7MxDlR1vovZjIAKrnzyrThgAjm6JDTu0fVgWXDlMGspodfoQ==, tarball: https://registry.npmjs.org/fast-equals/-/fast-equals-5.0.1.tgz}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /fast-glob@3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
@@ -6787,6 +6959,11 @@ packages:
       side-channel: 1.0.6
     dev: true
 
+  /internmap@2.0.3:
+    resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==, tarball: https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
   /interpret@3.1.1:
     resolution: {integrity: sha512-6xwYfHbajpoF0xLW+iwLkhwgvLoZDfjYfoFNu8ftMoXINzwuymNLd9u/KmwtdT2GbR+/Cz66otEGEVVUHX9QLQ==}
     engines: {node: '>=10.13.0'}
@@ -7439,7 +7616,6 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols@3.0.0:
     resolution: {integrity: sha512-dSkNGuI7iG3mfvDzUuYZyvk5dD9ocYCYzNU6CYDE6+Xqd+gwme6Z00NS3dUh8mq/73HaEtT7m6W+yUPtU6BZnQ==}
@@ -9445,6 +9621,19 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /react-smooth@4.0.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OE4hm7XqR0jNOq3Qmk9mFLyd6p2+j6bvbPJ7qlB7+oo0eNcL2l7WQzG6MBnT3EXY6xzkLMUBec3AfewJdA0J8w==, tarball: https://registry.npmjs.org/react-smooth/-/react-smooth-4.0.1.tgz}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      fast-equals: 5.0.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
   /react-style-singleton@2.2.1(@types/react@18.2.64)(react@18.2.0):
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==, tarball: https://registry.npmjs.org/react-style-singleton/-/react-style-singleton-2.2.1.tgz}
     engines: {node: '>=10'}
@@ -9473,6 +9662,20 @@ packages:
       prismjs: 1.29.0
       react: 18.2.0
       refractor: 3.6.0
+    dev: false
+
+  /react-transition-group@4.4.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==, tarball: https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.24.0
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
@@ -9507,6 +9710,31 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+
+  /recharts-scale@0.4.5:
+    resolution: {integrity: sha512-kivNFO+0OcUNu7jQquLXAxz1FIwZj8nrj+YkOKc5694NbjCvcT6aSZiIzNzd2Kul4o4rTto8QVR9lMNtxD4G1w==, tarball: https://registry.npmjs.org/recharts-scale/-/recharts-scale-0.4.5.tgz}
+    dependencies:
+      decimal.js-light: 2.5.1
+    dev: false
+
+  /recharts@2.12.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-vE/F7wTlokf5mtCqVDJlVKelCjliLSJ+DJxj79XlMREm7gpV7ljwbrwE3CfeaoDlOaLX+6iwHaVRn9587YkwIg==, tarball: https://registry.npmjs.org/recharts/-/recharts-2.12.3.tgz}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      clsx: 2.1.0
+      eventemitter3: 4.0.7
+      lodash: 4.17.21
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-is: 16.13.1
+      react-smooth: 4.0.1(react-dom@18.2.0)(react@18.2.0)
+      recharts-scale: 0.4.5
+      tiny-invariant: 1.3.3
+      victory-vendor: 36.9.2
+    dev: false
 
   /rechoir@0.8.0:
     resolution: {integrity: sha512-/vxpCXddiX8NGfGO/mTafwjq4aFa/71pvamip0++IQk3zG8cbCj0fifNPrjjF1XMXUne91jL9OoxmdykoEtifQ==}
@@ -10269,6 +10497,10 @@ packages:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
 
+  /tiny-invariant@1.3.3:
+    resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==, tarball: https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.3.3.tgz}
+    dev: false
+
   /title-case@3.0.3:
     resolution: {integrity: sha512-e1zGYRvbffpcHIrnuqT0Dh+gEJtDaxDSoG4JAIpq4oDFyooziLBIiYQv0GBT4FUAnUop5uZ1hiIAj7oAF6sOCA==}
     dependencies:
@@ -10700,6 +10932,25 @@ packages:
       '@types/unist': 3.0.2
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
+
+  /victory-vendor@36.9.2:
+    resolution: {integrity: sha512-PnpQQMuxlwYdocC8fIJqVXvkeViHYzotI+NJrCuav0ZYFoq912ZHBk3mCeuj+5/VpodOjPe1z0Fk2ihgzlXqjQ==, tarball: https://registry.npmjs.org/victory-vendor/-/victory-vendor-36.9.2.tgz}
+    dependencies:
+      '@types/d3-array': 3.2.1
+      '@types/d3-ease': 3.0.2
+      '@types/d3-interpolate': 3.0.4
+      '@types/d3-scale': 4.0.8
+      '@types/d3-shape': 3.1.6
+      '@types/d3-time': 3.0.3
+      '@types/d3-timer': 3.0.2
+      d3-array: 3.2.4
+      d3-ease: 3.0.1
+      d3-interpolate: 3.0.1
+      d3-scale: 4.0.2
+      d3-shape: 3.2.0
+      d3-time: 3.1.0
+      d3-timer: 3.0.1
+    dev: false
 
   /wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}

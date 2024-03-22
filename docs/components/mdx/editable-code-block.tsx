@@ -40,6 +40,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
+import * as ChartComponents from "@yamada-ui/charts"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import * as MarkdownComponents from "@yamada-ui/markdown"
@@ -94,6 +95,7 @@ const react = { React, ...React }
 const components = {
   ...UIComponents,
   ...CarouselComponents,
+  ...ChartComponents,
   ...TableComponents,
   ...CalendarComponents,
   ...DropzoneComponents,

@@ -45,10 +45,6 @@ export type LineChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.LineChart>
 >
-export type PieChartProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof Recharts.PieChart>
->
 export type RadarChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.RadarChart>

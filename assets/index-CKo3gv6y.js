@@ -1,0 +1,1 @@
+import{r as u}from"./index-CBqU2yxZ.js";import{f as i}from"./factory-D1MzC1Q2.js";const n=(r,t)=>{const e=i(r);u.useEffect(()=>{if(t==null)return;let o=null;return o=window.setTimeout(e,t),()=>{o&&window.clearTimeout(o)}},[t,e])};export{n as u};

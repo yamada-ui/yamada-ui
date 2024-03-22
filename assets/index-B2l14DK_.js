@@ -1,0 +1,1 @@
+import{r as o}from"./index-CBqU2yxZ.js";import{f as s}from"./factory-D1MzC1Q2.js";const u=(n,t)=>{const e=s(n);o.useEffect(()=>{let r=null;return t!==null&&(r=window.setInterval(()=>e(),t)),()=>{r&&window.clearInterval(r)}},[t,e])};export{u};

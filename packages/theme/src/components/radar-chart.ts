@@ -8,15 +8,23 @@ export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
       stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,
     },
-    polarAngleAxis: {
-      stroke: ["blackAlpha.400", "whiteAlpha.400"],
-      strokeWidth: 1,
-      fontSize: "xs",
+    polarAngleAxis: {},
+    polarAngleAxisTick: {
+      "& > text": {
+        fill: ["blackAlpha.700", "whiteAlpha.600"],
+        fontSize: "xs",
+      },
     },
     polarRadiusAxis: {
-      stroke: ["blackAlpha.700", "whiteAlpha.600"],
-      strokeWidth: 1,
-      fontSize: "xs",
+      "& > line": {
+        stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      },
+    },
+    polarRadiusAxisTick: {
+      "& > text": {
+        fill: ["blackAlpha.700", "whiteAlpha.600"],
+        fontSize: "xs",
+      },
     },
   },
 

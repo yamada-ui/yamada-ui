@@ -1,6 +1,6 @@
 import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { cx, splitObject, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
@@ -52,10 +52,14 @@ export type UseRadarChartOptions = {
    * Props passed down to recharts `PolarAngleAxis` component.
    */
   polarAngleAxisProps?: PolarAngleAxisProps
+  // TODO: Provide polar-angle-axis-tick props
+  // polarAngleAxisTickProps?:any
   /**
    * Props passed down to recharts `PolarRadiusAxis` component.
    */
   polarRadiusAxisProps?: PolarRadiusAxisProps
+  // TODO: Provide polar-radius-axis-tick props
+  // polarRadiusAxisTickProps?:any
   /**
    * Determines whether dots should be displayed.
    *
@@ -112,14 +116,6 @@ export const useRadarChart = ({
     dimRadar,
     ...computedRadarProps
   } = rest.radarProps ?? {}
-  const resolvedPolarGrid = useMemo(
-    () => ({ ...rest.polarGridProps, ...styles.polarGrid }),
-    [rest.polarGridProps, styles.polarGrid],
-  )
-  const resolvedPolarRadiusAxis = useMemo(
-    () => ({ ...rest.polarRadiusAxisProps, ...styles.polarRadiusAxis }),
-    [rest.polarRadiusAxisProps, styles.polarRadiusAxis],
-  )
 
   const radarColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -132,41 +128,68 @@ export const useRadarChart = ({
     [series],
   )
 
-  // TODO: replace `className`
   const radarVars: CSSUIProps["var"] = useMemo(
     () =>
       [
         ...radarColors,
         { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
-        {
-          __prefix: "ui",
-          name: "grid-stroke",
-          token: "colors",
-          value: resolvedPolarGrid.stroke,
-        },
-        {
-          __prefix: "ui",
-          name: "polar-radius-axis-stroke",
-          token: "colors",
-          value: resolvedPolarRadiusAxis.stroke,
-        },
       ] as Required<CSSUIProps>["var"],
-    [
-      fillOpacity,
-      radarColors,
-      resolvedPolarGrid.stroke,
-      resolvedPolarRadiusAxis.stroke,
-    ],
+    [fillOpacity, radarColors],
   )
 
-  const [radarChartProps, radarChartClassName] = useMemo(
+  // TODO: Once a fix for recharts is released, I'll fix it.
+  const [polarAngleAxisProps, polarAngleAxisStyles] = useMemo(
     () =>
-      getComponentProps<Dict, string>(
-        [rest.radarChartProps ?? {}, radarChartProperties],
-        styles.chart,
-      )(theme),
-    [rest.radarChartProps, styles.chart, theme],
+      splitObject<Dict, string>(
+        rest.polarAngleAxisProps ?? {},
+        polarAngleAxisProperties,
+      ),
+    [rest.polarAngleAxisProps],
   )
+
+  // TODO: Once a fix for recharts is released, I'll fix it.
+  const [polarRadiusAxisProps, polarRadiusAxisStyles] = useMemo(
+    () =>
+      splitObject<Dict, string>(
+        rest.polarRadiusAxisProps ?? {},
+        polarRadiusAxisProperties,
+      ),
+    [rest.polarRadiusAxisProps],
+  )
+
+  // FIXME: replace className.
+  const [radarChartProps, radarChartClassName] = useMemo(() => {
+    const resolvedRadarChartProps = {
+      "& .recharts-polar-grid-concentric-polygon": { ...styles.polarGrid },
+      "& .recharts-polar-angle-axis": {
+        ...styles.polarAngleAxis,
+        ...polarAngleAxisStyles,
+      },
+      "& .recharts-polar-angle-axis-tick": { ...styles.polarAngleAxisTick },
+      "& .recharts-polar-radius-axis": {
+        ...styles.polarRadiusAxis,
+        ...polarRadiusAxisStyles,
+      },
+      "& .recharts-polar-radius-axis-tick": { ...styles.polarRadiusAxisTick },
+      ...rest.radarChartProps,
+    }
+
+    return getComponentProps<Dict, string>(
+      [resolvedRadarChartProps, radarChartProperties],
+      styles.chart,
+    )(theme)
+  }, [
+    polarAngleAxisStyles,
+    polarRadiusAxisStyles,
+    rest.radarChartProps,
+    styles.chart,
+    styles.polarAngleAxis,
+    styles.polarAngleAxisTick,
+    styles.polarGrid,
+    styles.polarRadiusAxis,
+    styles.polarRadiusAxisTick,
+    theme,
+  ])
 
   const [polarGridProps, polarGridClassName] = useMemo(
     () =>
@@ -177,23 +200,24 @@ export const useRadarChart = ({
     [rest.polarGridProps, styles.polarGrid, theme],
   )
 
-  const [polarAngleAxisProps, polarAngleAxisClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>(
-        [rest.polarAngleAxisProps ?? {}, polarAngleAxisProperties],
-        styles.polarAngleAxis,
-      )(theme),
-    [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
-  )
+  // TODO: Once a fix for recharts is released, I'll fix it.
+  // const [polarAngleAxisProps, polarAngleAxisClassName] = useMemo(
+  //   () =>
+  //     getComponentProps<Dict, string>(
+  //       [rest.polarAngleAxisProps ?? {}, polarAngleAxisProperties],
+  //       styles.polarAngleAxis,
+  //     )(theme),
+  //   [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
+  // )
 
-  const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>(
-        [rest.polarRadiusAxisProps ?? {}, polarRadiusAxisProperties],
-        styles.polarRadiusAxis,
-      )(theme),
-    [rest.polarRadiusAxisProps, styles.polarRadiusAxis, theme],
-  )
+  // const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
+  //   () =>
+  //     getComponentProps<Dict, string>(
+  //       [rest.polarRadiusAxisProps ?? {}, polarRadiusAxisProperties],
+  //       styles.polarRadiusAxis,
+  //     )(theme),
+  //   [rest.polarRadiusAxisProps, styles.polarRadiusAxis, theme],
+  // )
 
   const [radarProps, radarClassName] = useMemo(() => {
     const resolvedRadarProps = {
@@ -209,7 +233,7 @@ export const useRadarChart = ({
 
   const [dimRadarProps, dimRadarClassName] = useMemo(() => {
     const resolvedDimRadar = {
-      fillOpacity: 0,
+      fillOpacity: 0.3,
       strokeOpacity: 0.3,
       ...dimRadar,
     }
@@ -284,6 +308,7 @@ export const useRadarChart = ({
           )(theme)
 
           resolvedActiveDot = {
+            // BUG: className is not applied.
             className: cx("ui-radar-chart__active-dot", className),
             fill: color,
             stroke: color,
@@ -311,6 +336,7 @@ export const useRadarChart = ({
           )(theme)
 
           resolvedDot = {
+            // BUG: className is not applied.
             className: cx("ui-radar-chart__dot", className),
             fill: color,
             r: 4,
@@ -397,8 +423,8 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
+      // BUG: `.recharts-polar-grid-concentric-polygon` is not applied className.
       className: cx(className, polarGridClassName),
-      stroke: "var(--ui-grid-stroke)",
       ...props,
       ...polarGridProps,
     }),
@@ -412,13 +438,21 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, polarAngleAxisClassName),
+      // BUG: className is not applied.
+      // className: cx(className, polarAngleAxisClassName),
+      className,
       dataKey,
       tickFormatter: valueFormatter,
+      tickSize: 16,
       ...props,
       ...polarAngleAxisProps,
     }),
-    [dataKey, polarAngleAxisClassName, polarAngleAxisProps, valueFormatter],
+    [
+      dataKey,
+      // polarAngleAxisClassName,
+      polarAngleAxisProps,
+      valueFormatter,
+    ],
   )
 
   const getPolarRadiusAxisProps: ChartPropGetter<
@@ -428,13 +462,18 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, polarRadiusAxisClassName),
-      stroke: "var(--ui-polar-radius-axis-stroke)",
+      // BUG: className is not applied.
+      // className: cx(className, polarRadiusAxisClassName),
+      className,
       tickFormatter: valueFormatter,
       ...props,
       ...polarRadiusAxisProps,
     }),
-    [polarRadiusAxisClassName, polarRadiusAxisProps, valueFormatter],
+    [
+      // polarRadiusAxisClassName,
+      polarRadiusAxisProps,
+      valueFormatter,
+    ],
   )
 
   return {

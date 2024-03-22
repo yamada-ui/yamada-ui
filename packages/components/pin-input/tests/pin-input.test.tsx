@@ -202,13 +202,13 @@ describe("<PinInput />", () => {
 
     await act(async () => {
       await user.click(thirdInput)
-      await user.keyboard("[Backspace]")
+      await user.keyboard("[arrowleft][Backspace]")
     })
 
     await waitFor(() => {
-      expect(document.activeElement).toStrictEqual(inputs[3])
+      expect(document.activeElement).toStrictEqual(thirdInput)
 
-      expect(thirdInput).toHaveValue("")
+      expect(thirdInput).toHaveValue("3")
     })
   })
 

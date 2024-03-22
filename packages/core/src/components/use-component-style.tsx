@@ -246,6 +246,7 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
       componentStyle.variants ?? {},
       { theme, colorMode, themeScheme, ...args },
     )({ isMulti })
+
     const sizeStyles = getModifierStyles<IsMulti>(
       props.size,
       componentStyle.sizes ?? {},
@@ -274,4 +275,6 @@ export const useComponentStyle = <Props extends Dict = Dict>(
 export const useMultiComponentStyle = <Props extends Dict = Dict>(
   name: string,
   props: Props,
-) => setStyles<Props, true>(name, props, true)
+) => {
+  return setStyles<Props, true>(name, props, true)
+}

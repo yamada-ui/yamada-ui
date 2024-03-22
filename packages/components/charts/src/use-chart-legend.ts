@@ -1,0 +1,40 @@
+import type { Dict } from "@yamada-ui/utils"
+import { splitObject } from "@yamada-ui/utils"
+import { useCallback } from "react"
+import type * as Recharts from "recharts"
+import type { ChartPropGetter, LegendProps } from "./chart.types"
+import { legendProperties } from "./rechart-properties"
+
+export type UseChartLegendProps = {
+  /**
+   * Props passed down to recharts 'Legend' component.
+   */
+  legendProps?: LegendProps
+}
+
+export const useChartLegend = ({
+  legendProps: _legendProps = {},
+}: UseChartLegendProps) => {
+  const [rest, legendProps] = splitObject<Dict, string>(
+    _legendProps,
+    legendProperties,
+  )
+
+  const getLegendProps: ChartPropGetter<
+    "div",
+    Partial<Recharts.LegendProps>,
+    Omit<Recharts.LegendProps, "ref">
+  > = useCallback(
+    (props, ref = null) => {
+      return {
+        ref,
+        verticalAlign: "top",
+        ...props,
+        ...rest,
+      }
+    },
+    [rest],
+  )
+
+  return { legendProps, getLegendProps }
+}

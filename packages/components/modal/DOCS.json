@@ -605,15 +605,7 @@
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
@@ -1514,15 +1506,7 @@
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
@@ -2418,15 +2402,7 @@
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },

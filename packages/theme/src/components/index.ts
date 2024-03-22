@@ -1,9 +1,11 @@
 import { Accordion } from "./accordion"
 import { Alert } from "./alert"
 import { AlphaSlider } from "./alpha-slider"
+import { AreaChart } from "./area-chart"
 import { Autocomplete } from "./autocomplete"
 import { Avatar } from "./avatar"
 import { Badge } from "./badge"
+import { BarChart } from "./bar-chart"
 import { Breadcrumb } from "./breadcrumb"
 import { Button } from "./button"
 import { Calendar } from "./calendar"
@@ -28,6 +30,7 @@ import { HueSlider } from "./hue-slider"
 import { Indicator } from "./indicator"
 import { Input } from "./input"
 import { Kbd } from "./kbd"
+import { LineChart } from "./line-chart"
 import { Link } from "./link"
 import { List } from "./list"
 import { Mark } from "./mark"
@@ -43,9 +46,11 @@ import { NativeTable } from "./native-table"
 import { NumberInput } from "./number-input"
 import { Pagination } from "./pagination"
 import { PagingTable } from "./paging-table"
+import { PieChart } from "./pie-chart"
 import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
 import { Progress } from "./progress"
+import { RadarChart } from "./radar-chart"
 import { Radio } from "./radio"
 import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
@@ -65,15 +70,19 @@ import { Table } from "./table"
 import { Tabs } from "./tabs"
 import { Tag } from "./tag"
 import { Textarea } from "./textarea"
+import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
 
 export default {
+  Toggle,
   Accordion,
   Alert,
   AlphaSlider,
+  AreaChart,
   Autocomplete,
   Avatar,
   Badge,
+  BarChart,
   Breadcrumb,
   Button,
   Calendar,
@@ -98,6 +107,7 @@ export default {
   Indicator,
   Input,
   Kbd,
+  LineChart,
   Link,
   List,
   Mark,
@@ -112,9 +122,11 @@ export default {
   NumberInput,
   Pagination,
   PagingTable,
+  PieChart,
   PinInput,
   Popover,
   Progress,
+  RadarChart,
   Radio,
   RangeDatePicker,
   RangeSlider,

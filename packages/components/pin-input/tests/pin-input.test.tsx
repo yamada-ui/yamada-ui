@@ -206,7 +206,7 @@ describe("<PinInput />", () => {
     })
 
     await waitFor(() => {
-      expect(document.activeElement).toStrictEqual(thirdInput)
+      expect(document.activeElement).toStrictEqual(inputs[3])
 
       expect(thirdInput).toHaveValue("")
     })

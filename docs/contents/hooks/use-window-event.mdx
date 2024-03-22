@@ -2,6 +2,7 @@
 title: useWindowEvent
 description: "`useWindowEvent` is a custom hook that assigns an event listener to `window`."
 package_name: "@yamada-ui/use-window-event"
+label: Updated
 with_description: true
 ---
 
@@ -14,23 +15,11 @@ import { useWindowEvent } from "@yamada-ui/react"
 ## Usage
 
 ```tsx functional=true
-const inputRef = useRef<HTMLInputElement>(null)
+const [count, setCount] = useState(0)
 
-useWindowEvent("keydown", (ev) => {
-  if (ev.code === "KeyK" && (ev.ctrlKey || ev.metaKey)) {
-    ev.preventDefault()
-
-    if (inputRef.current) inputRef.current.focus()
-  }
+useWindowEvent("click", () => {
+  setCount(count + 1)
 })
 
-return (
-  <>
-    <Text>
-      Focus: <Kbd>Ctrl + K</Kbd>
-    </Text>
-
-    <Input ref={inputRef} mt="md" />
-  </>
-)
+return <Text>Click count: {count}</Text>
 ```

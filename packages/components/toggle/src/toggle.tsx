@@ -69,7 +69,7 @@ type ToggleOptions<Y extends string | number = string> = {
    *
    * @default false
    */
-  isReadonly?: boolean
+  isReadOnly?: boolean
   /**
    * If `true`, disable ripple effects when pressing a element.
    *
@@ -115,7 +115,7 @@ export const Toggle = forwardRef(
       isRounded,
       isActive,
       isDisabled = group?.isDisabled,
-      isReadonly = group?.isReadonly,
+      isReadOnly = group?.isReadOnly,
       disableRipple,
       children,
       ...rest
@@ -157,22 +157,22 @@ export const Toggle = forwardRef(
         verticalAlign: "middle",
         overflow: "hidden",
         outline: "none",
-        pointerEvents: isReadonly ? "none" : "auto",
+        pointerEvents: isReadOnly ? "none" : "auto",
         ...styles,
         ...(isRounded ? { borderRadius: "9999px" } : {}),
       }),
-      [isRounded, styles, isReadonly],
+      [isRounded, styles, isReadOnly],
     )
 
     return (
       <ui.button
         ref={ref}
         type="button"
-        tabIndex={isReadonly ? -1 : 0}
+        tabIndex={isReadOnly ? -1 : 0}
         disabled={isDisabled}
         data-active={dataAttr(isActive)}
         data-selected={dataAttr(trulySelected)}
-        data-readonly={dataAttr(isReadonly)}
+        data-readonly={dataAttr(isReadOnly)}
         aria-pressed={trulySelected}
         className={cx("ui-toggle", className)}
         __css={css}

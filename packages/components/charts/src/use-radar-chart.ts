@@ -161,6 +161,7 @@ export const useRadarChart = ({
   const [radarChartProps, radarChartClassName] = useMemo(() => {
     const resolvedRadarChartProps = {
       "& .recharts-polar-grid-concentric-polygon": { ...styles.polarGrid },
+      "& .recharts-polar-grid-concentric-circle": { ...styles.polarGrid },
       "& .recharts-polar-angle-axis": {
         ...styles.polarAngleAxis,
         ...polarAngleAxisStyles,
@@ -308,7 +309,6 @@ export const useRadarChart = ({
           )(theme)
 
           resolvedActiveDot = {
-            // BUG: className is not applied.
             className: cx("ui-radar-chart__active-dot", className),
             fill: color,
             stroke: color,
@@ -423,7 +423,7 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      // BUG: `.recharts-polar-grid-concentric-polygon` is not applied className.
+      // BUG: `.recharts-polar-grid-concentric-xxx` is not applied className.
       className: cx(className, polarGridClassName),
       ...props,
       ...polarGridProps,

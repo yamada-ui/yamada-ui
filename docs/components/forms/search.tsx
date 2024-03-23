@@ -17,6 +17,7 @@ import {
   dataAttr,
   useUpdateEffect,
   Button,
+  IconButton,
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
@@ -97,6 +98,53 @@ export const Search = memo(
           <Text flex="1">{tc("component.forms.search.message")}</Text>
           <Kbd>{actionKey} + K</Kbd>
         </HStack>
+
+        <SearchModal isOpen={isOpen} onClose={onClose} />
+      </>
+    )
+  }),
+)
+
+export const SearchIcon = memo(
+  forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
+    const { events } = useRouter()
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    useEffect(() => {
+      events.on("routeChangeComplete", onClose)
+
+      return () => {
+        events.off("routeChangeComplete", onClose)
+      }
+    }, [onClose, events])
+
+    useEventListener("keydown", (ev) => {
+      if (
+        ev.key.toLowerCase() !== "k" ||
+        !ev[isApple() ? "metaKey" : "ctrlKey"]
+      )
+        return
+
+      ev.preventDefault()
+
+      isOpen ? onClose() : onOpen()
+    })
+
+    return (
+      <>
+        <HStack
+          as={IconButton}
+          type="button"
+          ref={ref}
+          w="10"
+          h="10"
+          color="muted"
+          variant="ghost"
+          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+          icon={<MagnifyingGlass />}
+          {...rest}
+          onClick={handlerAll(rest.onClick, onOpen)}
+        />
 
         <SearchModal isOpen={isOpen} onClose={onClose} />
       </>

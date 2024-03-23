@@ -1,13 +1,30 @@
-import type { ContainerProps, Dict } from "@yamada-ui/react"
+import type {
+  ContainerProps,
+  Dict,
+  SegmentedControlProps,
+  SelectProps,
+  SliderProps,
+  StackProps,
+  SwitchProps,
+  ThemeProps,
+} from "@yamada-ui/react"
 import {
   Box,
   Container,
+  FormControl,
   HStack,
+  SegmentedControl,
+  Select,
+  Slider,
+  SliderThumb,
+  Switch,
   Text,
+  Tooltip,
   UIProvider,
   VStack,
   isArray,
   useColorMode,
+  useDisclosure,
 } from "@yamada-ui/react"
 import type { FC, ReactNode } from "react"
 import { useEffect } from "react"
@@ -104,4 +121,92 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
       </VStack>
     </HStack>
   )
+}
+
+type PropControlComponent = "Select" | "SegmentedControl" | "Slider" | "Switch"
+
+type PropControlItem<K extends PropControlComponent> = {
+  label: string
+} & (K extends "Select"
+  ? SelectProps
+  : K extends "SegmentedControl"
+    ? SegmentedControlProps
+    : K extends "Slider"
+      ? SliderProps
+      : SwitchProps)
+
+export type PropControlProps<K extends PropControlComponent> = {
+  component: K
+  items: PropControlItem<K>[]
+} & StackProps &
+  ThemeProps<K>
+
+export const PropControl = <K extends PropControlComponent = "Switch">({
+  component,
+  variant,
+  size,
+  colorScheme,
+  items,
+  ...rest
+}: PropControlProps<K>) => {
+  const props = { variant, size, colorScheme }
+
+  return (
+    <VStack w="auto" {...rest}>
+      {items.map((item, index) => (
+        <PropControlItem<K>
+          key={index}
+          component={component}
+          item={{ ...props, ...item }}
+        />
+      ))}
+    </VStack>
+  )
+}
+
+type PropControlItemProps<K extends PropControlComponent> = {
+  component: K
+  item: PropControlItem<K>
+}
+
+const PropControlItem = <K extends PropControlComponent>({
+  component,
+  item,
+}: PropControlItemProps<K>) => {
+  const { label, ...rest } = item
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  switch (component) {
+    case "Select":
+      return (
+        <FormControl label={label}>
+          <Select {...(rest as SelectProps)} />
+        </FormControl>
+      )
+
+    case "SegmentedControl":
+      return (
+        <FormControl label={label}>
+          <SegmentedControl {...(rest as SegmentedControlProps)} />
+        </FormControl>
+      )
+
+    case "Slider":
+      return (
+        <FormControl label={label}>
+          <Slider
+            onMouseEnter={onOpen}
+            onMouseLeave={onClose}
+            {...(rest as SliderProps)}
+          >
+            <Tooltip placement="top" label={rest.value} isOpen={isOpen}>
+              <SliderThumb />
+            </Tooltip>
+          </Slider>
+        </FormControl>
+      )
+
+    default:
+      return <Switch {...(rest as SwitchProps)}>{label}</Switch>
+  }
 }

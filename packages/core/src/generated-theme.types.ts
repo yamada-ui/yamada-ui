@@ -658,6 +658,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
     }
+    AreaChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     Autocomplete: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -669,6 +673,10 @@ export interface GeneratedTheme extends UITheme {
     Badge: {
       sizes: string & {}
       variants: "solid" | "subtle" | "outline" | (string & {})
+    }
+    BarChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
     }
     Button: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -779,6 +787,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
     }
+    LineChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     Mark: {
       sizes: string & {}
       variants:
@@ -837,12 +849,20 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | "xl" | (string & {})
       variants: "simple" | "striped" | "unstyled" | (string & {})
     }
+    PieChart: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
     PinInput: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
     }
     Progress: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    RadarChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
       variants: string & {}
     }
     Radio: { sizes: "sm" | "md" | "lg" | (string & {}); variants: string & {} }

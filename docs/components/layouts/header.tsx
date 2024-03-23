@@ -45,7 +45,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import type { FC } from "react"
 import { memo, useEffect, useRef, useState } from "react"
-import { Search, SearchIcon } from "components/forms"
+import { Search, SearchButton } from "components/forms"
 import {
   ColorPalette,
   Discord,
@@ -71,7 +71,6 @@ export const Header = memo(
     const [y, setY] = useState<number>(0)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { height = 0 } = headerRef.current?.getBoundingClientRect() ?? {}
-    const isMobile = useBreakpointValue({ base: false, md: true })
 
     useMotionValueEvent(scrollY, "change", setY)
 
@@ -136,22 +135,18 @@ export const Header = memo(
 
             <Spacer />
 
-            {isMobile ? (
-              <SearchIcon />
-            ) : (
-              <Search
-                display={{ base: "flex", sm: "none" }}
-                borderColor={isScroll ? "transparent" : "border"}
-                bg={
-                  isScroll
-                    ? ["whiteAlpha.600", "blackAlpha.500"]
-                    : ["white", "black"]
-                }
-                backdropFilter="auto"
-                backdropSaturate="180%"
-                backdropBlur="10px"
-              />
-            )}
+            <Search
+              display={{ base: "flex", sm: "none" }}
+              borderColor={isScroll ? "transparent" : "border"}
+              bg={
+                isScroll
+                  ? ["whiteAlpha.600", "blackAlpha.500"]
+                  : ["white", "black"]
+              }
+              backdropFilter="auto"
+              backdropSaturate="180%"
+              backdropBlur="10px"
+            />
 
             <ButtonGroup {...{ isOpen, onOpen }} />
           </HStack>
@@ -169,6 +164,10 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
   ({ isMobile, isOpen, onOpen, onClose }) => {
     return (
       <HStack gap="sm">
+        {!isOpen && (
+          <SearchButton display={{ base: "none", sm: "inline-flex" }} />
+        )}
+
         <NextLinkIconButton
           href={CONSTANT.SNS.DISCORD}
           isExternal

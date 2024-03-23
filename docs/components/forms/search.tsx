@@ -39,38 +39,41 @@ import { useEventListener } from "hooks/use-event-listener"
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"
 
+const useSearch = () => {
+  const { events } = useRouter()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
+
+  useEffect(() => {
+    if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
+  }, [])
+
+  useEffect(() => {
+    events.on("routeChangeComplete", onClose)
+
+    return () => {
+      events.off("routeChangeComplete", onClose)
+    }
+  }, [onClose, events])
+
+  useEventListener("keydown", (ev) => {
+    if (ev.key.toLowerCase() !== "k" || !ev[isApple() ? "metaKey" : "ctrlKey"])
+      return
+
+    ev.preventDefault()
+
+    isOpen ? onClose() : onOpen()
+  })
+
+  return { isOpen, onOpen, onClose, actionKey }
+}
+
 export type SearchProps = StackProps & {}
 
 export const Search = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
-    const { events } = useRouter()
     const { tc } = useI18n()
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
-
-    useEffect(() => {
-      if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
-    }, [])
-
-    useEffect(() => {
-      events.on("routeChangeComplete", onClose)
-
-      return () => {
-        events.off("routeChangeComplete", onClose)
-      }
-    }, [onClose, events])
-
-    useEventListener("keydown", (ev) => {
-      if (
-        ev.key.toLowerCase() !== "k" ||
-        !ev[isApple() ? "metaKey" : "ctrlKey"]
-      )
-        return
-
-      ev.preventDefault()
-
-      isOpen ? onClose() : onOpen()
-    })
+    const { isOpen, onOpen, onClose, actionKey } = useSearch()
 
     return (
       <>
@@ -105,30 +108,9 @@ export const Search = memo(
   }),
 )
 
-export const SearchIcon = memo(
+export const SearchButton = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
-    const { events } = useRouter()
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    useEffect(() => {
-      events.on("routeChangeComplete", onClose)
-
-      return () => {
-        events.off("routeChangeComplete", onClose)
-      }
-    }, [onClose, events])
-
-    useEventListener("keydown", (ev) => {
-      if (
-        ev.key.toLowerCase() !== "k" ||
-        !ev[isApple() ? "metaKey" : "ctrlKey"]
-      )
-        return
-
-      ev.preventDefault()
-
-      isOpen ? onClose() : onOpen()
-    })
+    const { isOpen, onOpen, onClose } = useSearch()
 
     return (
       <>
@@ -136,8 +118,6 @@ export const SearchIcon = memo(
           as={IconButton}
           type="button"
           ref={ref}
-          w="10"
-          h="10"
           color="muted"
           variant="ghost"
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}

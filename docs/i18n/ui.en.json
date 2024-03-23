@@ -21,6 +21,40 @@
       "gold-sponsors": "Gold Sponsors"
     }
   },
+  "examples": {
+    "title": "Examples",
+    "description": "A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
+    "hero": {
+      "heading": "`Check out some `examples",
+      "message": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
+      "started": "Get Started",
+      "components": "Components"
+    },
+    "mail": {
+      "title": "Mail"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "cards": {
+      "title": "Cards"
+    },
+    "tasks": {
+      "title": "Tasks"
+    },
+    "playground": {
+      "title": "Playground"
+    },
+    "forms": {
+      "title": "Forms"
+    },
+    "music": {
+      "title": "Music"
+    },
+    "authentication": {
+      "title": "Authentication"
+    }
+  },
   "not-found": {
     "title": "404: Not found",
     "description": "Page not found",

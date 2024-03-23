@@ -21,6 +21,40 @@
       "gold-sponsors": "ゴールドスポンサー"
     }
   },
+  "examples": {
+    "title": "例",
+    "description": "Reactアプリケーションのスタイリング、アニメーション、そして柔軟性の力を解き放つ、UIコンポーネントライブラリ。",
+    "hero": {
+      "heading": "いくつかの例`を見てみる`",
+      "message": "Yamada UIのコンポーネントを利用して作成された例です。これをガイドとして、あなたのアプリケーションを作成する際の参考にしてください。",
+      "started": "はじめる",
+      "components": "コンポーネント"
+    },
+    "mail": {
+      "title": "メール"
+    },
+    "dashboard": {
+      "title": "ダッシュボード"
+    },
+    "cards": {
+      "title": "カード"
+    },
+    "tasks": {
+      "title": "タスク"
+    },
+    "playground": {
+      "title": "プレイグラウンド"
+    },
+    "forms": {
+      "title": "フォーム"
+    },
+    "music": {
+      "title": "ミュージック"
+    },
+    "authentication": {
+      "title": "ログイン"
+    }
+  },
   "not-found": {
     "title": "404: 見つかりません",
     "description": "ページが見つかりません",

@@ -148,7 +148,6 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     const [focusedIndex, setFocusedIndex] = useState<number>(-1)
     const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const labelRefs = useRef<Map<string | number, HTMLLabelElement>>(new Map())
 
     const [selectedValue, setSelectedValue] = useControllableState({
       value,
@@ -269,10 +268,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
         return {
           ...props,
-          ref: mergeRefs(
-            (node) => labelRefs.current.set(props.value, node),
-            ref,
-          ),
+          ref,
           "aria-disabled": ariaAttr(disabled),
           "aria-readonly": ariaAttr(readOnly),
           "data-checked": dataAttr(checked),

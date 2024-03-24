@@ -20,52 +20,51 @@ comment:
   layout: "reach, diff, files, components"
   behavior: default
   require_changes: false
+# component_management:
+#   default_rules:
+#     statuses:
+#       - type: project
+#         target: auto
+#         branches:
+#           - "!main"
 
-component_management:
-  default_rules:
-    statuses:
-      - type: project
-        target: auto
-        branches:
-          - "!main"
+#   individual_components:
+#     - component_id: package_cli
+#       name: cli
+#       paths:
+#         - packages/cli/**
 
-  individual_components:
-    - component_id: package_cli
-      name: cli
-      paths:
-        - packages/cli/**
+#     - component_id: package_components
+#       name: components
+#       paths:
+#         - packages/components/**
 
-    - component_id: package_components
-      name: components
-      paths:
-        - packages/components/**
+#     - component_id: package_core
+#       name: core
+#       paths:
+#         - packages/core/**
 
-    - component_id: package_core
-      name: core
-      paths:
-        - packages/core/**
+#     - component_id: package_hooks
+#       name: hooks
+#       paths:
+#         - packages/hooks/**
 
-    - component_id: package_hooks
-      name: hooks
-      paths:
-        - packages/hooks/**
+#     - component_id: package_providers
+#       name: providers
+#       paths:
+#         - packages/providers/**
 
-    - component_id: package_providers
-      name: providers
-      paths:
-        - packages/providers/**
+#     - component_id: package_react
+#       name: react
+#       paths:
+#         - packages/react/**
 
-    - component_id: package_react
-      name: react
-      paths:
-        - packages/react/**
+#     - component_id: package_theme-tools
+#       name: theme-tools
+#       paths:
+#         - packages/theme-tools/**
 
-    - component_id: package_theme-tools
-      name: theme-tools
-      paths:
-        - packages/theme-tools/**
-
-    - component_id: package_utils
-      name: utils
-      paths:
-        - packages/utils/**
+#     - component_id: package_utils
+#       name: utils
+#       paths:
+#         - packages/utils/**

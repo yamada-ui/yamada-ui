@@ -117,14 +117,14 @@ const getIssues = async () => {
 
 const getExistPackages = (issues: Issue[]) =>
   issues.reduce(
-    (prev, { number, body }) => {
-      const packageName = body?.match(/^package: ([^\s]+)/m)?.[1]
+    (prev, issue) => {
+      const packageName = issue.body?.match(/^package: ([^\s]+)/m)?.[1]
 
-      if (packageName) prev[packageName] = number
+      if (packageName) prev[packageName] = issue
 
       return prev
     },
-    {} as Record<string, number>,
+    {} as Record<string, Issue>,
   )
 
 const getCoverageReport = async () => {
@@ -178,27 +178,35 @@ const getTargetPackages = (files: Record<string, number[]>) => {
 }
 
 const createIssues = async (
-  existPackages: Record<string, number>,
+  existPackages: Record<string, Issue>,
   packages: Record<string, Record<string, number[]>>,
 ) => {
   for await (const [packageName, files] of Object.entries(packages)) {
     const isExist = Object.keys(existPackages).includes(packageName)
 
+    const body = ISSUE_BODY(packageName, files)
+
     if (isExist) {
-      const issue_number = existPackages[packageName]
+      const { number, body: prevBody } = existPackages[packageName]
+
+      if (prevBody === body) {
+        console.log("Skipped issue", number, packageName)
+
+        continue
+      }
 
       await octokit.issues.update({
         ...GITHUB_OPTIONS,
-        issue_number,
-        body: ISSUE_BODY(packageName, files),
+        issue_number: number,
+        body,
       })
 
-      console.log("Updated issue", issue_number, packageName)
+      console.log("Updated issue", number, packageName)
     } else {
       await octokit.issues.create({
         ...GITHUB_OPTIONS,
         title: `Enhance Test Coverage for \`${packageName}\``,
-        body: ISSUE_BODY(packageName, files),
+        body,
         labels: ["coverage", "test", "good first issue"],
       })
 

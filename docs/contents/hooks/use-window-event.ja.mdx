@@ -18,7 +18,7 @@ import { useWindowEvent } from "@yamada-ui/react"
 const [count, setCount] = useState(0)
 
 useWindowEvent("click", () => {
-  setCount(count + 1)
+  setCount((prev) => prev + 1)
 })
 
 return <Text>{count}回クリックしました。</Text>

@@ -6,8 +6,8 @@ codecov:
 
 coverage:
   status:
-    project: false
-    patch: false
+    project: off
+    patch: off
 
 # coverage:
 #   status:

@@ -120,6 +120,7 @@ export const generateStyles = async (
 ) => {
   let standardStyles: string[] = []
   let shorthandStyles: string[] = []
+  let atRuleStyles: string[] = []
   let styleProps: string[] = []
   let processSkipProperties: string[] = []
   let pickedStyles: (CSSProperty & { type: string })[] = []
@@ -168,6 +169,7 @@ export const generateStyles = async (
         static: css,
         type,
         hasToken,
+        isAtRule,
         isProcessResult,
         isProcessSkip,
         isSkip,
@@ -203,7 +205,11 @@ export const generateStyles = async (
 
       const docs = generateDocs({ properties, description, urls, deprecated })
 
-      standardStyles = [...standardStyles, `${prop}: ${config}`]
+      if (isAtRule) {
+        atRuleStyles = [...atRuleStyles, `${prop}: ${config}`]
+      } else {
+        standardStyles = [...standardStyles, `${prop}: ${config}`]
+      }
       styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
 
       if (shorthands) {
@@ -228,7 +234,7 @@ export const generateStyles = async (
     import type * as CSS from "csstype"
     import type { Configs } from "./config"
     import { transforms } from "./config"
-    import type { Token } from "./css"
+    import type { CSSUIObject, Token } from "./css"
     import type { Theme } from "./theme.types"
 
     export const standardStyles: Configs = {
@@ -239,7 +245,11 @@ export const generateStyles = async (
       ${shorthandStyles.join(",\n")}
     }
 
-    export const styles: Configs = { ...standardStyles, ...shorthandStyles }
+    export const atRuleStyles: Configs = {
+      ${atRuleStyles.join(",\n")}
+    }
+
+    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...atRuleStyles }
 
     export const processSkipProperties: string[] = [${processSkipProperties.map(
       (property) => `"${property}"`,

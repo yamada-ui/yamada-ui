@@ -716,15 +716,7 @@
       "type": "PointerEventHandler<HTMLUListElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLUListElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLUListElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLUListElement>",
       "required": false
     },

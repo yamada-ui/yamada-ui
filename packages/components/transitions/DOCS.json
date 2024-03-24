@@ -587,15 +587,7 @@
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
@@ -1405,15 +1397,7 @@
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
@@ -2217,15 +2201,7 @@
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
@@ -3041,15 +3017,7 @@
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
@@ -3871,15 +3839,7 @@
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLDivElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLDivElement>",
       "required": false
     },

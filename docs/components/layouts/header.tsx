@@ -45,7 +45,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import type { FC } from "react"
 import { memo, useEffect, useRef, useState } from "react"
-import { Search } from "components/forms"
+import { Search, SearchButton } from "components/forms"
 import {
   ColorPalette,
   Discord,
@@ -136,7 +136,7 @@ export const Header = memo(
             <Spacer />
 
             <Search
-              display={{ base: "flex", sm: "none" }}
+              display={{ base: "flex", md: "none" }}
               borderColor={isScroll ? "transparent" : "border"}
               bg={
                 isScroll
@@ -164,6 +164,10 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
   ({ isMobile, isOpen, onOpen, onClose }) => {
     return (
       <HStack gap="sm">
+        <SearchButton
+          display={{ base: "none", md: !isMobile ? "inline-flex" : undefined }}
+        />
+
         <NextLinkIconButton
           href={CONSTANT.SNS.DISCORD}
           isExternal

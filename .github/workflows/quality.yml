@@ -41,6 +41,7 @@ jobs:
           flags: unittests
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
+          codecov_yml_path: ./codecov.yml
 
   eslint:
     name: ESLint

@@ -136,7 +136,7 @@ export const Header = memo(
             <Spacer />
 
             <Search
-              display={{ base: "flex", sm: "none" }}
+              display={{ base: "flex", md: "none" }}
               borderColor={isScroll ? "transparent" : "border"}
               bg={
                 isScroll
@@ -164,9 +164,9 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
   ({ isMobile, isOpen, onOpen, onClose }) => {
     return (
       <HStack gap="sm">
-        {!isOpen && (
-          <SearchButton display={{ base: "none", sm: "inline-flex" }} />
-        )}
+        <SearchButton
+          display={{ base: "none", md: !isMobile ? "inline-flex" : undefined }}
+        />
 
         <NextLinkIconButton
           href={CONSTANT.SNS.DISCORD}

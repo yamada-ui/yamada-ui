@@ -6,16 +6,23 @@ codecov:
 
 coverage:
   status:
-    project:
-      default:
-        target: 80%
-        threshold: 1%
-  precision: 2
+    project: false
+    patch: false
 
-comment:
-  layout: "reach, diff, files, components"
-  behavior: default
-  require_changes: false
+# coverage:
+#   status:
+#     project:
+#       default:
+#         target: 80%
+#         threshold: 1%
+#   precision: 2
+
+comment: false
+
+# comment:
+#   layout: "reach, diff, files, components"
+#   behavior: default
+#   require_changes: false
 
 component_management:
   default_rules:

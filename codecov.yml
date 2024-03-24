@@ -17,7 +17,7 @@ coverage:
 #         threshold: 1%
 #   precision: 2
 
-comment: false
+comment: off
 
 # comment:
 #   layout: "reach, diff, files, components"

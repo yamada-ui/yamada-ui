@@ -1,7 +1,7 @@
 import { a11y, act, render, screen, waitFor } from "@yamada-ui/test"
 import { PinInput } from "../src"
 
-describe.skip("<PinInput />", () => {
+describe("<PinInput />", () => {
   test("renders with no errors", async () => {
     const { container } = render(<PinInput />)
     await a11y(container)
@@ -202,13 +202,13 @@ describe.skip("<PinInput />", () => {
 
     await act(async () => {
       await user.click(thirdInput)
-      await user.keyboard("[Backspace]")
+      await user.keyboard("[arrowleft][Backspace]")
     })
 
     await waitFor(() => {
       expect(document.activeElement).toStrictEqual(thirdInput)
 
-      expect(thirdInput).toHaveValue("")
+      expect(thirdInput).toHaveValue("3")
     })
   })
 

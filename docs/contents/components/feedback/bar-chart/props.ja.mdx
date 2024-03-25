@@ -1,0 +1,212 @@
+---
+title: BarChart
+description: "`BarChart`は、現在作成を検討しています。"
+label: New
+tab: Props
+---
+
+## Props
+
+### BarChartProps
+
+<PropsCard
+  id="barchart-data"
+  name="data"
+  required
+  type="Dict[]"
+  description={"Chart data."}
+/>
+
+<PropsCard
+  id="barchart-datakey"
+  name="dataKey"
+  required
+  type="string"
+  description={"The key of a group of data which should be unique in an chart."}
+/>
+
+<PropsCard
+  id="barchart-series"
+  name="series"
+  required
+  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "layout" | "barSize" | "maxBarSize" | "style" | "className" | ... 494 more ... | "animationId"> & Omit<...> & BarProps, "color" | ... 2 more ... | "dimBar"> & { ...; })[]'
+  description={
+    "An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array."
+  }
+/>
+
+<PropsCard
+  id="barchart-barchartprops"
+  name="barChartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `BarChart` component."}
+/>
+
+<PropsCard
+  id="barchart-barprops"
+  name="barProps"
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "layout" | "barSize" | "maxBarSize" | "style" | "className" | ... 494 more ... | "animationId"> & Omit<...> & BarProps, "color" | ... 2 more ... | "dimBar"> & { ...; }>'
+  description={"Props for the bars."}
+/>
+
+<PropsCard
+  id="barchart-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="barchart-containerprops"
+  name="containerProps"
+  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  description={"Props passed down to recharts `ResponsiveContainer` component."}
+/>
+
+<PropsCard
+  id="barchart-gridaxis"
+  name="gridAxis"
+  type="ChartAxisType"
+  description={"Specifies which lines should be displayed in the grid."}
+  defaultValue={"'x'"}
+/>
+
+<PropsCard
+  id="barchart-gridprops"
+  name="gridProps"
+  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 463 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  description={"Props passed down to recharts 'CartesianGrid' component."}
+/>
+
+<PropsCard
+  id="barchart-layouttype"
+  name="layoutType"
+  type="ChartLayoutType"
+  description={"Chart orientation."}
+  defaultValue={"'horizontal'"}
+/>
+
+<PropsCard
+  id="barchart-legendprops"
+  name="legendProps"
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  description={"Props passed down to recharts 'Legend' component."}
+/>
+
+<PropsCard
+  id="barchart-referencelineprops"
+  name="referenceLineProps"
+  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 464 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  description={"Reference lines that should be displayed on the chart."}
+/>
+
+<PropsCard
+  id="barchart-size"
+  name="size"
+  type='"sm" | "md" | "lg" | "full"'
+  description={"The size of the BarChart."}
+  defaultValue={"full"}
+/>
+
+<PropsCard
+  id="barchart-tickline"
+  name="tickLine"
+  type="ChartAxisType"
+  description={"The option is the configuration of tick lines."}
+  defaultValue={"'y'"}
+/>
+
+<PropsCard
+  id="barchart-tooltipanimationduration"
+  name="tooltipAnimationDuration"
+  type="number"
+  description={
+    "Specifies the duration of animation, the unit of this option is ms."
+  }
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="barchart-tooltipprops"
+  name="tooltipProps"
+  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  description={"Props passed down to recharts 'Tooltip' component."}
+/>
+
+<PropsCard
+  id="barchart-type"
+  name="type"
+  type='"default" | "stacked" | "percent"'
+  description={
+    "Controls how chart bars are positioned relative to each other.\n\n\nControls how chart areas are positioned relative to each other"
+  }
+  defaultValue={"`default`"}
+/>
+
+<PropsCard
+  id="barchart-unit"
+  name="unit"
+  type="string"
+  description={"Unit displayed next to each tick in y-axis."}
+/>
+
+<PropsCard
+  id="barchart-valueformatter"
+  name="valueFormatter"
+  type="(value: number) => string"
+  description={"A function to format values on Y axis and inside the tooltip"}
+/>
+
+<PropsCard
+  id="barchart-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the BarChart."}
+/>
+
+<PropsCard
+  id="barchart-withlegend"
+  name="withLegend"
+  type="boolean"
+  description={"If `true`, legend is visible."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="barchart-withtooltip"
+  name="withTooltip"
+  type="boolean"
+  description={"If `true`, tooltip is visible."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="barchart-withxaxis"
+  name="withXAxis"
+  type="boolean"
+  description={"If `true`, X axis is visible."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="barchart-withyaxis"
+  name="withYAxis"
+  type="boolean"
+  description={"If `true`, Y axis is visible."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="barchart-xaxisprops"
+  name="xAxisProps"
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  description={"Props passed down to recharts 'XAxis' component."}
+/>
+
+<PropsCard
+  id="barchart-yaxisprops"
+  name="yAxisProps"
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  description={"Props passed down to recharts 'YAxis' component."}
+/>

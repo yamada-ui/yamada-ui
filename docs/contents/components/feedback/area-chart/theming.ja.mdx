@@ -1,0 +1,26 @@
+---
+title: AreaChart
+description: "`AreaChart`は、現在作成を検討しています。"
+label: New
+tab: テーマ
+---
+
+## テーマ
+
+`AreaChart`は、[単一パーツのコンポーネント](/styled-system/theming/component-style#単一パーツのコンポーネント)です。
+
+:::note
+`AreaChart`は、[LineChart](/components/feedback/line-chart)のスタイルを継承しています。
+:::
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const AreaChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
+  baseStyle: {
+    area: {},
+  },
+})({ omit: ["line"] })
+```

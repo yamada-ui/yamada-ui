@@ -117,3 +117,64 @@ const series: AreaProps[] = useMemo(
 
 return <AreaChart data={data} series={series} dataKey="name" size="sm" />
 ```
+
+### 波線にする
+
+```tsx functional=true
+const data = useMemo(
+  () => [
+    {
+      name: "Lugia",
+      H: 181,
+      A: 110,
+      B: 150,
+    },
+    {
+      name: "Gengar",
+      H: 135,
+      A: 85,
+      B: 80,
+    },
+    {
+      name: "Flygon",
+      H: 155,
+      A: 120,
+      B: 100,
+    },
+    {
+      name: "Tyranitar",
+      H: 100,
+      A: 134,
+      B: 110,
+    },
+    {
+      name: "Dragapult",
+      H: 163,
+      A: 140,
+      B: 95,
+    },
+  ],
+  [],
+)
+
+const series: AreaProps[] = useMemo(
+  () => [
+    {
+      dataKey: "H",
+      color: ["primary.500", "primary.400"],
+      strokeDasharray: "5 5",
+    },
+    { dataKey: "A", color: ["secondary.500", "secondary.400"] },
+    { dataKey: "B", color: ["warning.500", "warning.400"] },
+  ],
+  [],
+)
+
+return <AreaChart data={data} series={series} dataKey="name" />
+```
+
+### split
+
+```tsx functional=true
+
+```

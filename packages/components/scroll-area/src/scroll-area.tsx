@@ -7,7 +7,14 @@ import {
 } from "@yamada-ui/core"
 import { cx, handlerAll, merge } from "@yamada-ui/utils"
 import type { UIEvent } from "react"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useLayoutEffect,
+} from "react"
 
 type ScrollAreaOptions = {
   /**
@@ -95,6 +102,32 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   const hoverTimeout = useRef<any>(undefined)
   const scrollTimeout = useRef<any>(undefined)
 
+  const scrollAreaRef = useRef<HTMLDivElement>(null) // Added the safari ref here
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) // Added the safari check here
+  const rendercounter = useRef(0)
+  const start = useRef(-1)
+  const end = useRef(false)
+  if (isSafari) rendercounter.current++
+  const scrollPosition = useRef({ x: 0, y: 0 })
+  useLayoutEffect(() => {
+    if (scrollAreaRef.current && isSafari) {
+      if (start.current === -1) {
+        //Check when the operation starts and ends
+        start.current = -2
+      } else if (start.current === -2) {
+        start.current = 0
+      } else if (start.current === 1) {
+        end.current = true
+        start.current = 0
+      } else {
+        end.current = false
+        start.current++
+      }
+      scrollAreaRef.current.scrollLeft = scrollPosition.current.x //Set the scroll position artificially
+      scrollAreaRef.current.scrollTop = scrollPosition.current.y
+    }
+  })
+
   const onMouseEnter = useCallback(() => {
     if (type !== "hover") return
 
@@ -118,7 +151,15 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
         x: (ev.target as HTMLDivElement).scrollLeft,
         y: (ev.target as HTMLDivElement).scrollTop,
       })
-
+      scrollPosition.current = {
+        x: (ev.target as HTMLDivElement).scrollLeft, //Save the scroll position
+        y: (ev.target as HTMLDivElement).scrollTop,
+      }
+      if (end.current) {
+        //Check if the operation has ended to avoid infinite loop
+        end.current = false
+        return
+      }
       if (type !== "scroll") return
 
       if (!isScrolling) setIsScrolling(true)
@@ -153,24 +194,51 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     }
   }, [isAlways, isHovered, isNever, isScrolling, overflow, styles])
 
-  return (
-    <ui.div
-      ref={ref}
-      className={cx("ui-scroll-area", className)}
-      tabIndex={0}
-      __css={css}
-      {...rest}
-      onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}
-      onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
-      onScroll={handlerAll(rest.onScroll, onScroll)}
-    >
-      {innerProps ? (
-        <ui.div className="ui-scroll-area__inner" {...innerProps}>
-          {children}
-        </ui.div>
-      ) : (
-        children
-      )}
-    </ui.div>
-  )
+  if (isSafari) {
+    //Added the safari check here, reduce computing for other browsers
+    const componentKey = `${isHovered}-${isScrolling}`
+
+    return (
+      <ui.div
+        key={componentKey} // Added the key here
+        ref={scrollAreaRef}
+        className={cx("ui-scroll-area", className)}
+        tabIndex={0}
+        __css={css}
+        {...rest}
+        onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}
+        onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
+        onScroll={handlerAll(rest.onScroll, onScroll)}
+      >
+        {innerProps ? (
+          <ui.div className="ui-scroll-area__inner" {...innerProps}>
+            {children}
+          </ui.div>
+        ) : (
+          children
+        )}
+      </ui.div>
+    )
+  } else {
+    return (
+      <ui.div
+        ref={ref}
+        className={cx("ui-scroll-area", className)}
+        tabIndex={0}
+        __css={css}
+        {...rest}
+        onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}
+        onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
+        onScroll={handlerAll(rest.onScroll, onScroll)}
+      >
+        {innerProps ? (
+          <ui.div className="ui-scroll-area__inner" {...innerProps}>
+            {children}
+          </ui.div>
+        ) : (
+          children
+        )}
+      </ui.div>
+    )
+  }
 })

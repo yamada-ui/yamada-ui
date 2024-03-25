@@ -33,14 +33,15 @@ jobs:
       - name: Run tests
         run: pnpm test:ci
 
-      # - name: Upload coverage
-      #   uses: codecov/codecov-action@v4
-      #   with:
-      #     fail_ci_if_error: true
-      #     file: ./coverage/coverage-final.json
-      #     flags: unittests
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     verbose: true
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: false
+          file: ./coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml
 
   eslint:
     name: ESLint
@@ -80,58 +81,3 @@ jobs:
 
       - name: Run prettier
         run: pnpm format:check
-
-  # coverage:
-  #   name: Coverage
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     packages: ${{ steps.changed-packages.outputs.packages }}
-  #     empty: ${{ steps.changed-packages.outputs.empty }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Find changed packages
-  #       id: changed-packages
-  #       uses: AlexShukel/get-changed-workspaces-action@v2.0.0
-
-  # "coverage-report":
-  #   name: Coverage report
-  #   needs: [coverage]
-  #   runs-on: ubuntu-latest
-  #   if: ${{ !fromJson(needs.coverage.outputs.empty) }}
-  #   strategy:
-  #     matrix:
-  #       package: ${{ fromJson(needs.coverage.outputs.packages) }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Check exist tests
-  #       id: tests
-  #       run: |
-  #         echo "exist=$([ -d ${{ matrix.package.path }}/tests ] && echo true || echo false)" >> $GITHUB_OUTPUT
-  #         echo "path=$(echo ${{ matrix.package.path }} | rev | cut -d'/' -f1,2,3 | rev)" >> $GITHUB_OUTPUT
-  #       shell: bash
-
-  #     - name: Add PR comment
-  #       if: steps.tests.outputs.exist == 'false'
-  #       uses: peter-evans/create-or-update-comment@v4
-  #       with:
-  #         issue-number: ${{ github.event.pull_request.number }}
-  #         body: |
-  #           ## Coverage report for ${{ matrix.package.name }}
-  #           Test does not exist.
-
-  #     - name: Install
-  #       if: steps.tests.outputs.exist == 'true'
-  #       uses: ./.github/composite-actions/install
-
-  #     - name: Create coverage report
-  #       if: steps.tests.outputs.exist == 'true'
-  #       uses: ArtiomTr/jest-coverage-report-action@v2
-  #       with:
-  #         package-manager: pnpm
-  #         custom-title: Coverage report for ${{ matrix.package.name }}
-  #         test-script: pnpm test:ci "${{ steps.tests.outputs.path }}" --collectCoverageFrom="${{ steps.tests.outputs.path }}/**/*.{ts,tsx}"
-  #         skip-step: install

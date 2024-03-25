@@ -102,6 +102,7 @@ const OVERRIDE_PATHS: Record<
   ],
   button: ["icon-button"],
   link: [{ parent: "link-box", children: ["link-overlay"] }],
+  charts: ["bar-chart", "area-chart", "line-chart", "radar-chart"],
 }
 const REPO_REQUEST_PARAMETERS = {
   owner: "yamada-ui",

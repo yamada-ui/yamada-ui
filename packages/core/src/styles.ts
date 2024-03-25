@@ -5190,7 +5190,7 @@ export type StyleProps = {
       | StringLiteral
     dynamicRange?: "standard" | "high" | StringLiteral
     forcedColors?: "none" | "active" | StringLiteral
-    grid?: 0 | 1
+    grid?: 0 | 1 | "StringLiteral"
     hover?: "none" | "hover" | StringLiteral
     invertedColors?: "none" | "inverted" | StringLiteral
     monochrome?: number | StringLiteral

@@ -13,6 +13,8 @@ export default defineConfig({
       include: ["packages"],
       exclude: [
         "**/dist",
+        "**/bin",
+        "**/@types",
         "packages/theme",
         "packages/**/tests",
         "packages/test",

@@ -5282,7 +5282,7 @@ export type StyleProps = {
     __prefix?: string
     name: string
     token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
-    value?: Token<StringLiteral | number>
+    value?: Token<number | StringLiteral>
   }[]
   /**
    * The `@media` of CSS at-rule.
@@ -5312,34 +5312,65 @@ export type StyleProps = {
     minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
     maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
     maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    anyHover?: StringLiteral
-    anyPointer?: StringLiteral
-    aspectRatio?: StringLiteral
-    color?: StringLiteral
-    colorGamut?: StringLiteral
-    colorIndex?: StringLiteral
-    deviceAspectRatio?: StringLiteral
-    deviceHeight?: StringLiteral
-    deviceWidth?: StringLiteral
-    displayMode?: StringLiteral
-    dynamicRange?: StringLiteral
-    forcedColors?: StringLiteral
-    grid?: StringLiteral
-    hover?: StringLiteral
-    invertedColors?: StringLiteral
-    monochrome?: StringLiteral
-    orientation?: StringLiteral
-    overflowBlock?: StringLiteral
-    overflowInline?: StringLiteral
-    pointer?: StringLiteral
-    prefersColorScheme?: StringLiteral
-    prefersContrast?: StringLiteral
-    prefersReducedMotion?: StringLiteral
+    anyHover?: "none" | "hover" | StringLiteral
+    anyPointer?: "none" | "coarse" | "fine" | StringLiteral
+    aspectRatio?: CSS.Property.AspectRatio
+    color?: number | StringLiteral
+    minColor?: number | StringLiteral
+    maxColor?: number | StringLiteral
+    colorGamut?: "srgb" | "p3" | "rec2020" | StringLiteral
+    colorIndex?: number | StringLiteral
+    minColorIndex?: number | StringLiteral
+    maxColorIndex?: number | StringLiteral
+    deviceAspectRatio?: CSS.Property.AspectRatio
+    minDeviceAspectRatio?: CSS.Property.AspectRatio
+    maxDeviceAspectRatio?: CSS.Property.AspectRatio
+    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
+    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    displayMode?:
+      | "browser"
+      | "fullscreen"
+      | "minimal-ui"
+      | "picture-in-picture"
+      | "standalone"
+      | "window-controls-overlay"
+      | StringLiteral
+    dynamicRange?: "standard" | "high" | StringLiteral
+    forcedColors?: "none" | "active" | StringLiteral
+    grid?: 0 | 1 | "StringLiteral"
+    hover?: "none" | "hover" | StringLiteral
+    invertedColors?: "none" | "inverted" | StringLiteral
+    monochrome?: number | StringLiteral
+    minMonochrome?: number | StringLiteral
+    maxMonochrome?: number | StringLiteral
+    orientation?: "portrait" | "landscape" | StringLiteral
+    overflowBlock?:
+      | "none"
+      | "scroll"
+      | "paged"
+      | "optional-paged"
+      | StringLiteral
+    overflowInline?: "none" | "scroll" | StringLiteral
+    pointer?: "none" | "coarse" | "fine" | StringLiteral
+    prefersColorScheme?: "light" | "dark" | StringLiteral
+    prefersContrast?:
+      | "no-preference"
+      | "high"
+      | "low"
+      | "custom"
+      | StringLiteral
+    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
     resolution?: StringLiteral
-    scan?: StringLiteral
-    scripting?: StringLiteral
-    update?: StringLiteral
-    videoDynamicRange?: StringLiteral
+    minResolution?: StringLiteral
+    maxResolution?: StringLiteral
+    scan?: "interlace" | "progressive" | StringLiteral
+    scripting?: "none" | "initial-only" | "enabled" | StringLiteral
+    update?: "none" | "slow" | "fast" | StringLiteral
+    videoDynamicRange?: "standard" | "high" | StringLiteral
     css?: CSSUIObject
     [key: string]: any
   }[]

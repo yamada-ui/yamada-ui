@@ -33,15 +33,20 @@ jobs:
       - name: Run tests
         run: pnpm test:ci
 
+      - name: Install Codecov CLI
+        run: |
+          curl -Os https://cli.codecov.io/v0.7.2/linux/codecov
+          chmod +x codecov
+
       - name: Upload coverage
-        uses: codecov/codecov-action@v4
-        with:
-          codecov_yml_path: ./codecov.yml
-          fail_ci_if_error: true
-          file: ./coverage/coverage-final.json
-          flags: unittests
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true
+        run: |
+          ./codecov --verbose \
+            upload-process \
+            --fail-on-error \
+            -t ${{ secrets.CODECOV_TOKEN }} \
+            -n 'service'-${{ github.run_id }} \
+            -F service \
+            -f ./coverage/coverage-final.json
 
   eslint:
     name: ESLint

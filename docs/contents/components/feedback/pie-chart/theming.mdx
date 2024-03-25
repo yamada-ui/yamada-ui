@@ -1,0 +1,76 @@
+---
+title: PieChart
+description: We are currently considering the development of `PieChart`.
+label: Planned
+tab: Theming
+---
+
+## Theming
+
+The `PieChart` is a [multi part component](/styled-system/theming/component-style#multi-part-components).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const PieChart: ComponentMultiStyle = {
+  baseStyle: {
+    container: {},
+    cell: {},
+    tooltip: {
+      border: "solid",
+      borderWidth: 0.2,
+      borderColor: ["blackAlpha.400", "whiteAlpha.400"],
+      bgColor: ["white", "neutral.900"],
+      rounded: 3,
+      paddingX: 5,
+      paddingY: 3,
+    },
+    tooltipTitle: {
+      marginBottom: 2,
+      fontSize: "md",
+      fontWeight: 500,
+    },
+    tooltipLabel: {
+      color: ["black", "gray.200"],
+      fontSize: "md",
+    },
+    tooltipValue: {
+      fontSize: "md",
+    },
+  },
+
+  variants: {
+    // subtle: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({}),
+    // solid: ({ theme: t, colorMode: m, colorScheme: c = "primary" }) => ({}),
+  },
+
+  sizes: {
+    sm: {
+      container: {
+        w: "xl",
+        h: "xs",
+      },
+    },
+    md: {
+      container: {
+        w: "3xl",
+        h: "sm",
+      },
+    },
+    lg: {
+      container: {
+        w: "5xl",
+        h: "md",
+      },
+    },
+  },
+
+  defaultProps: {
+    size: "md",
+    variant: "solid",
+    colorScheme: "primary",
+  },
+}
+```

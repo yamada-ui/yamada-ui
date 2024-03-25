@@ -1,7 +1,9 @@
 ---
 title: AreaChart
 description: We are currently considering the development of `AreaChart`.
+package_name: "@yamada-ui/charts"
 label: New
+with_description: true
 tab: Props
 ---
 
@@ -127,11 +129,15 @@ tab: Props
   defaultValue={"full"}
 />
 
-<PropsCard id="areachart-splitcolors"
-name="splitColors"
-type='[string, string]'
-description={"A tuple of colors used when `type="split"` is set, ignored in all other cases."}
-defaultValue={"'[\"red.400\", \"green.400\"]'"} />
+<PropsCard
+  id="areachart-splitcolors"
+  name="splitColors"
+  type="[string, string]"
+  description={
+    'A tuple of colors used when `type="split"` is set, ignored in all other cases.'
+  }
+  defaultValue={'\'["red.400", "green.400"]\''}
+/>
 
 <PropsCard
   id="areachart-splitoffset"

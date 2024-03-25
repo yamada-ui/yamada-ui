@@ -329,8 +329,10 @@ const generateContent = async ({
         if (type !== undefined) props.push(`type='${type}'`)
 
         if (description !== undefined) {
-          if (typeof description === "string")
+          if (typeof description === "string") {
             description = description.replace(/\n/g, "\\n")
+            description = description.replace(/"/g, '\\"')
+          }
 
           props.push(`description={"${description}"}`)
         }

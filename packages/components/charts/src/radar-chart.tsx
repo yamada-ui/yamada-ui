@@ -73,6 +73,11 @@ export type RadarChartProps = HTMLUIProps<"div"> &
   UseChartLegendProps &
   UseRadarChartOptions
 
+/**
+ * `RadarChart` is a component for drawing radar charts to compare multiple sets of data.
+ *
+ * @see Docs https://yamada-ui.com/components/feedback/radar-chart
+ */
 export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("RadarChart", props)
   const {
@@ -81,7 +86,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     series,
     dataKey,
     radarProps,
-    radarChartProps,
+    chartProps,
     polarGridProps,
     polarAngleAxisProps,
     polarRadiusAxisProps,
@@ -116,7 +121,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     series,
     dataKey,
     radarProps,
-    radarChartProps,
+    chartProps,
     polarGridProps,
     polarAngleAxisProps,
     polarRadiusAxisProps,

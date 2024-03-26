@@ -46,7 +46,7 @@ export type UseAreaChartOptions = {
   /**
    * Props passed down to recharts `AreaChart` component.
    */
-  areaChartProps?: AreaChartProps
+  chartProps?: AreaChartProps
   /**
    * Chart orientation.
    *
@@ -194,13 +194,13 @@ export const useAreaChart = ({
     ]
   }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
 
-  const [areaChartProps, areaChartClassName] = useMemo(
+  const [chartProps, areaChartClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [rest.areaChartProps ?? {}, areaChartProperties],
+        [rest.chartProps ?? {}, areaChartProperties],
         styles.chart,
       )(theme),
-    [rest.areaChartProps, styles.chart, theme],
+    [rest.chartProps, styles.chart, theme],
   )
 
   const [areaProps, areaClassName] = useMemo(() => {
@@ -386,9 +386,9 @@ export const useAreaChart = ({
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
       ...props,
-      ...areaChartProps,
+      ...chartProps,
     }),
-    [areaChartClassName, data, type, layoutType, areaChartProps],
+    [areaChartClassName, data, type, layoutType, chartProps],
   )
 
   const getAreaSplitProps: ChartPropGetter<

@@ -85,7 +85,7 @@ export const custom: Story = () => {
     data: data,
     series: series,
     dataKey: "name",
-    lineChartProps: {
+    chartProps: {
       margin: {
         top: 20,
         right: 30,
@@ -424,13 +424,13 @@ export const withSync: Story = () => {
         data={data}
         series={series}
         dataKey="name"
-        lineChartProps={{ syncId: "syncId" }}
+        chartProps={{ syncId: "syncId" }}
       />
       <LineChart
         data={data}
         series={series}
         dataKey="name"
-        lineChartProps={{ syncId: "syncId" }}
+        chartProps={{ syncId: "syncId" }}
       />
     </VStack>
   )

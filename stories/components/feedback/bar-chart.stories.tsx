@@ -312,13 +312,13 @@ export const withSync: Story = () => {
         data={data[0]}
         series={series[0]}
         dataKey="month"
-        barChartProps={{ syncId: "syncId" }}
+        chartProps={{ syncId: "syncId" }}
       />
       <BarChart
         data={data[1]}
         series={series[1]}
         dataKey="month"
-        barChartProps={{ syncId: "syncId" }}
+        chartProps={{ syncId: "syncId" }}
       />
     </VStack>
   )
@@ -564,7 +564,7 @@ export const withGap: Story = () => {
         data={data}
         series={series}
         dataKey="month"
-        barChartProps={props}
+        chartProps={props}
       />
 
       <Wrap w="auto">

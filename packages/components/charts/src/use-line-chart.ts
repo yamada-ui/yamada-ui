@@ -37,7 +37,7 @@ export type UseLineChartOptions = {
   /**
    * Props passed down to recharts `LineChart` component.
    */
-  lineChartProps?: LineChartProps
+  chartProps?: LineChartProps
   /**
    * Chart orientation.
    *
@@ -148,13 +148,13 @@ export const useLineChart = ({
     [fillOpacity, lineColors, referenceLineColors],
   )
 
-  const [lineChartProps, lineChartClassName] = useMemo(
+  const [chartProps, lineChartClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [rest.lineChartProps ?? {}, lineChartProperties],
+        [rest.chartProps ?? {}, lineChartProperties],
         styles.chart,
       )(theme),
-    [rest.lineChartProps, styles.chart, theme],
+    [rest.chartProps, styles.chart, theme],
   )
 
   const [lineProps, lineClassName] = useMemo(() => {
@@ -319,9 +319,9 @@ export const useLineChart = ({
       data,
       layout: layoutType,
       ...props,
-      ...lineChartProps,
+      ...chartProps,
     }),
-    [data, layoutType, lineChartClassName, lineChartProps],
+    [data, layoutType, lineChartClassName, chartProps],
   )
 
   const getLineProps: RequiredChartPropGetter<

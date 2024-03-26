@@ -47,17 +47,6 @@ export const CORE_MEMBERS = [
     },
   },
   {
-    id: "oidon.",
-    name: { en: "oidon.", ja: "oidon." },
-    icon: "https://avatars.githubusercontent.com/u/99778758?v=4",
-    github: "https://github.com/umaidashi",
-    twitter: "https://twitter.com/umaidashi18",
-    description: {
-      en: "Web engineer. a university student.",
-      ja: "Webエンジニア。大学生。",
-    },
-  },
-  {
     id: "taroj1205",
     name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
     icon: "https://avatars.githubusercontent.com/u/61367823?v=4",
@@ -143,6 +132,17 @@ export const CORE_MEMBERS = [
     description: {
       en: "Multi-talented, frog-loving front-end engineer.",
       ja: "多趣味なカエル好きのフロントエンドエンジニア",
+    },
+  },
+  {
+    id: "suzukisan22",
+    name: { en: "Ryota Suzuki", ja: "Ryota Suzuki" },
+    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
+    github: "https://github.com/suzukisan22",
+    twitter: "https://x.com/itsmeryota",
+    description: {
+      en: "Engineer living in Mie Prefecture, Japan",
+      ja: "三重県在住エンジニア",
     },
   },
 ]

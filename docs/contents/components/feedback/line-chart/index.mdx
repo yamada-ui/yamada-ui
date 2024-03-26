@@ -930,4 +930,51 @@ return (
 
 To adjust the dashed line, set `strokeDasharray` with a string.
 
-CODEBLOCK_PLACEHOLDER_1
+```tsx functional=true
+const data = useMemo(
+  () => [
+    {
+      name: "ゼニガメ",
+      HP: 44,
+      こうげき: 48,
+      ぼうぎょ: 65,
+      とくこう: 50,
+      とくぼう: 64,
+      すばやさ: 43,
+    },
+    {
+      name: "ヒトカゲ",
+      HP: 39,
+      こうげき: 52,
+      ぼうぎょ: 43,
+      とくこう: 60,
+      とくぼう: 50,
+      すばやさ: 65,
+    },
+    {
+      name: "フシギダネ",
+      HP: 45,
+      こうげき: 49,
+      ぼうぎょ: 49,
+      とくこう: 65,
+      とくぼう: 65,
+      すばやさ: 45,
+    },
+  ],
+  [],
+)
+
+const series: LineProps[] = useMemo(
+  () => [
+    { dataKey: "HP", color: "green.500", strokeDasharray: "15 15" },
+    { dataKey: "こうげき", color: "red.500", strokeDasharray: "15 15" },
+    { dataKey: "ぼうぎょ", color: "blue.500", strokeDasharray: "15 15" },
+    { dataKey: "とくこう", color: "purple.500", strokeDasharray: "15 15" },
+    { dataKey: "とくぼう", color: "orange.500", strokeDasharray: "15 15" },
+    { dataKey: "すばやさ", color: "cyan.500", strokeDasharray: "15 15" },
+  ],
+  [],
+)
+
+return <LineChart data={data} series={series} dataKey="name" />
+```

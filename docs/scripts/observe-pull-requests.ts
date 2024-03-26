@@ -19,7 +19,6 @@ const DISCORD_USER_MAP: Record<string, string> = {
   illionillion: "1000629510078738432",
   koralle: "702799711404425246",
   "108yen": "281653488084189184",
-  umaidashi: "1001523961231839243",
   taroj1205: "631578250144907269",
   KenyaMasuko: "787761288088256512",
   nakayan5: "770535018040655873",
@@ -28,6 +27,7 @@ const DISCORD_USER_MAP: Record<string, string> = {
   "komura-c": "394133735567785996",
   melodyclue: "1039205048711913652",
   imaimai17468: "394831848733409281",
+  suzukisan22: "611441723712864256",
 }
 
 const GITHUB_JOINING_COMMENT = (id: string) =>

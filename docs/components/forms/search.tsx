@@ -1,4 +1,4 @@
-import type { StackProps, ModalProps } from "@yamada-ui/react"
+import type { StackProps, ModalProps, ButtonProps } from "@yamada-ui/react"
 import {
   ui,
   HStack,
@@ -17,6 +17,7 @@ import {
   dataAttr,
   useUpdateEffect,
   Button,
+  IconButton,
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
@@ -35,29 +36,36 @@ import scrollIntoView from "scroll-into-view-if-needed"
 import { File, Hash, MagnifyingGlass } from "components/media-and-icons"
 import { useI18n } from "contexts/i18n-context"
 import { useEventListener } from "hooks/use-event-listener"
+
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"
+
+const useSearch = () => {
+  const { events } = useRouter()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  useEffect(() => {
+    events.on("routeChangeComplete", onClose)
+
+    return () => {
+      events.off("routeChangeComplete", onClose)
+    }
+  }, [onClose, events])
+
+  return { isOpen, onOpen, onClose }
+}
 
 export type SearchProps = StackProps & {}
 
 export const Search = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
-    const { events } = useRouter()
     const { tc } = useI18n()
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useSearch()
     const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
 
     useEffect(() => {
       if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
     }, [])
-
-    useEffect(() => {
-      events.on("routeChangeComplete", onClose)
-
-      return () => {
-        events.off("routeChangeComplete", onClose)
-      }
-    }, [onClose, events])
 
     useEventListener("keydown", (ev) => {
       if (
@@ -97,6 +105,31 @@ export const Search = memo(
           <Text flex="1">{tc("component.forms.search.message")}</Text>
           <Kbd>{actionKey} + K</Kbd>
         </HStack>
+
+        <SearchModal isOpen={isOpen} onClose={onClose} />
+      </>
+    )
+  }),
+)
+
+export type SearchButtonProps = ButtonProps & {}
+
+export const SearchButton = memo(
+  forwardRef<SearchButtonProps, "button">(({ ...rest }, ref) => {
+    const { isOpen, onOpen, onClose } = useSearch()
+
+    return (
+      <>
+        <IconButton
+          type="button"
+          ref={ref}
+          color="muted"
+          variant="ghost"
+          _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
+          icon={<MagnifyingGlass />}
+          {...rest}
+          onClick={handlerAll(rest.onClick, onOpen)}
+        />
 
         <SearchModal isOpen={isOpen} onClose={onClose} />
       </>

@@ -23,7 +23,7 @@
 
 Yamada UIは、最先端のWebアプリケーションやウェブサイトの開発を効率化するReactのUIコンポーネントライブラリです。このライブラリは、他のReact UIコンポーネントライブラリでは提供されていない、カラーモードやアニメーションなどの様々な機能を提供しています。現代の複雑なユーザーインターフェースを構築するために、簡単に組み合わせることができるさまざまなコンポーネントを提供します。
 
-## Contents
+## コンテンツ
 
 - [リスペクト](#リスペクト)
 - [特徴](#特徴)
@@ -50,9 +50,11 @@ Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[MUI](https
 
 ### 組織
 
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>
+
 ### 個人
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40" /></a>
 
 ## 貢献する
 

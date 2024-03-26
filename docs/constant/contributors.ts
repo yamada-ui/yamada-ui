@@ -1,11 +1,5 @@
 export const CONTRIBUTORS = [
   {
-    id: 12987013,
-    name: "suzukisan22",
-    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
-    url: "https://github.com/suzukisan22",
-  },
-  {
     id: 53973174,
     name: "Dhoni77",
     icon: "https://avatars.githubusercontent.com/u/53973174?v=4",
@@ -22,6 +16,12 @@ export const CONTRIBUTORS = [
     name: "nogu66",
     icon: "https://avatars.githubusercontent.com/u/50972802?v=4",
     url: "https://github.com/nogu66",
+  },
+  {
+    id: 22112440,
+    name: "txxxxc",
+    icon: "https://avatars.githubusercontent.com/u/22112440?v=4",
+    url: "https://github.com/txxxxc",
   },
   {
     id: 57742720,
@@ -76,12 +76,6 @@ export const CONTRIBUTORS = [
     name: "YuukiHayashi0510",
     icon: "https://avatars.githubusercontent.com/u/88963450?v=4",
     url: "https://github.com/YuukiHayashi0510",
-  },
-  {
-    id: 22112440,
-    name: "txxxxc",
-    icon: "https://avatars.githubusercontent.com/u/22112440?v=4",
-    url: "https://github.com/txxxxc",
   },
   {
     id: 29519029,
@@ -144,6 +138,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/k1tikurisu",
   },
   {
+    id: 38555478,
+    name: "kirikirisu",
+    icon: "https://avatars.githubusercontent.com/u/38555478?v=4",
+    url: "https://github.com/kirikirisu",
+  },
+  {
     id: 52372050,
     name: "Taiki0807",
     icon: "https://avatars.githubusercontent.com/u/52372050?v=4",
@@ -162,16 +162,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/hifumi9",
   },
   {
-    id: 38555478,
-    name: "kirikirisu",
-    icon: "https://avatars.githubusercontent.com/u/38555478?v=4",
-    url: "https://github.com/kirikirisu",
-  },
-  {
     id: 7753180,
     name: "kyohei0423",
     icon: "https://avatars.githubusercontent.com/u/7753180?v=4",
     url: "https://github.com/kyohei0423",
+  },
+  {
+    id: 29660904,
+    name: "hawkcookie",
+    icon: "https://avatars.githubusercontent.com/u/29660904?v=4",
+    url: "https://github.com/hawkcookie",
   },
   {
     id: 50474981,
@@ -186,40 +186,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Sahillather002",
   },
   {
-    id: 66323139,
-    name: "saki10",
-    icon: "https://avatars.githubusercontent.com/u/66323139?v=4",
-    url: "https://github.com/saki10",
+    id: 62431514,
+    name: "Kritskii-A",
+    icon: "https://avatars.githubusercontent.com/u/62431514?v=4",
+    url: "https://github.com/Kritskii-A",
   },
   {
-    id: 49627888,
-    name: "sora33",
-    icon: "https://avatars.githubusercontent.com/u/49627888?v=4",
-    url: "https://github.com/sora33",
-  },
-  {
-    id: 29660904,
-    name: "hawkcookie",
-    icon: "https://avatars.githubusercontent.com/u/29660904?v=4",
-    url: "https://github.com/hawkcookie",
-  },
-  {
-    id: 28386792,
-    name: "Tsukuni",
-    icon: "https://avatars.githubusercontent.com/u/28386792?v=4",
-    url: "https://github.com/Tsukuni",
-  },
-  {
-    id: 55294484,
-    name: "HajimeMat-AVAP",
-    icon: "https://avatars.githubusercontent.com/u/55294484?v=4",
-    url: "https://github.com/HajimeMat-AVAP",
-  },
-  {
-    id: 97393820,
-    name: "Exerea",
-    icon: "https://avatars.githubusercontent.com/u/97393820?v=4",
-    url: "https://github.com/Exerea",
+    id: 75428655,
+    name: "atsushi729",
+    icon: "https://avatars.githubusercontent.com/u/75428655?v=4",
+    url: "https://github.com/atsushi729",
   },
   {
     id: 74306132,
@@ -228,9 +204,33 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Dexson-Dsouza",
   },
   {
-    id: 62431514,
-    name: "Kritskii-A",
-    icon: "https://avatars.githubusercontent.com/u/62431514?v=4",
-    url: "https://github.com/Kritskii-A",
+    id: 97393820,
+    name: "Exerea",
+    icon: "https://avatars.githubusercontent.com/u/97393820?v=4",
+    url: "https://github.com/Exerea",
+  },
+  {
+    id: 55294484,
+    name: "HajimeMat-AVAP",
+    icon: "https://avatars.githubusercontent.com/u/55294484?v=4",
+    url: "https://github.com/HajimeMat-AVAP",
+  },
+  {
+    id: 28386792,
+    name: "Tsukuni",
+    icon: "https://avatars.githubusercontent.com/u/28386792?v=4",
+    url: "https://github.com/Tsukuni",
+  },
+  {
+    id: 49627888,
+    name: "sora33",
+    icon: "https://avatars.githubusercontent.com/u/49627888?v=4",
+    url: "https://github.com/sora33",
+  },
+  {
+    id: 66323139,
+    name: "saki10",
+    icon: "https://avatars.githubusercontent.com/u/66323139?v=4",
+    url: "https://github.com/saki10",
   },
 ]

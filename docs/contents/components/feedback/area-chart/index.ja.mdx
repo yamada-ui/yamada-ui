@@ -1127,12 +1127,12 @@ const data = useMemo(
 
 const series: AreaProps[] = useMemo(
   () => [
-    { dataKey: "HP", color: "green.500" },
-    { dataKey: "こうげき", color: "red.500" },
-    { dataKey: "ぼうぎょ", color: "blue.500" },
-    { dataKey: "とくこう", color: "purple.500" },
-    { dataKey: "とくぼう", color: "orange.500" },
-    { dataKey: "すばやさ", color: "cyan.500" },
+    { dataKey: "HP", color: "green.500", strokeDasharray: "5 5" },
+    { dataKey: "こうげき", color: "red.500", strokeDasharray: "5 5" },
+    { dataKey: "ぼうぎょ", color: "blue.500", strokeDasharray: "5 5" },
+    { dataKey: "とくこう", color: "purple.500", strokeDasharray: "5 5" },
+    { dataKey: "とくぼう", color: "orange.500", strokeDasharray: "5 5" },
+    { dataKey: "すばやさ", color: "cyan.500", strokeDasharray: "5 5" },
   ],
   [],
 )

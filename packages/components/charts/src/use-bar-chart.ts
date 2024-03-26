@@ -48,7 +48,7 @@ export type UseBarChartOptions = {
   /**
    * Props passed down to recharts `BarChart` component.
    */
-  barChartProps?: BarChartProps
+  chartProps?: BarChartProps
   /**
    * Reference lines that should be displayed on the chart.
    */
@@ -117,14 +117,14 @@ export const useBarChart = ({
     ]
   }, [barColors, fillOpacity, referenceLineColors])
 
-  const [barChartProps, barChartClassName] = useMemo(() => {
-    const resolvedBarChartProps = { barGap: 8, ...rest.barChartProps }
+  const [chartProps, barChartClassName] = useMemo(() => {
+    const resolvedBarChartProps = { barGap: 8, ...rest.chartProps }
 
     return getComponentProps<Dict, string>(
       [resolvedBarChartProps, barChartProperties],
       styles.chart,
     )(theme)
-  }, [rest.barChartProps, styles.chart, theme])
+  }, [rest.chartProps, styles.chart, theme])
 
   const [barProps, barClassName] = useMemo(() => {
     const resolvedBarProps = {
@@ -273,9 +273,9 @@ export const useBarChart = ({
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
       ...props,
-      ...barChartProps,
+      ...chartProps,
     }),
-    [barChartClassName, barChartProps, data, layoutType, type],
+    [barChartClassName, chartProps, data, layoutType, type],
   )
 
   return {

@@ -48,7 +48,7 @@ To improve our development process, we have set up tools and systems. Yamada UI 
   - If the provider is true, then it is wrapped with a provider that contains the style to be used by the children.
 - **`pnpm gen:hook`**: create a hook package from a template using [Plop](https://plopjs.com/).
   - Please enter package and custom hook names in kebab case
-- **`pnpm gen:token`**: generate theme tokens.
+- **`pnpm gen:tokens`**: generate theme tokens.
 
 ## Think you found a bug?
 

@@ -55,7 +55,8 @@
     "rehype-raw": "^7.0.0",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.0",
-    "ts-pattern": "^5.0.8"
+    "ts-pattern": "^5.0.8",
+    "unist-util-remove": "^4.0.0"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.3",

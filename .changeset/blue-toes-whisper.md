@@ -2,4 +2,4 @@
 "@yamada-ui/core": patch
 ---
 
-Redefined value as optional property.
+Redefined `value` of `var` as optional property.

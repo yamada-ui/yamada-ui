@@ -139,7 +139,6 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
 
       const { scrollLeft: x, scrollTop: y } = el
       const { x: prevX, y: prevY } = scrollPosition.current
-      // const isEqual = x === prevX && y === prevY
       const isEqual = Math.abs(x - prevX) <= 5 && Math.abs(y - prevY) <= 5
 
       onScrollPositionChange?.({ x, y })
@@ -181,12 +180,13 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
 
   const computedProps = useMemo(
     () => ({
+      __css: css,
       ...rest,
       onMouseEnter: handlerAll(rest.onMouseEnter, onMouseEnter),
       onMouseLeave: handlerAll(rest.onMouseLeave, onMouseLeave),
       onScroll: handlerAll(rest.onScroll, onScroll),
     }),
-    [onMouseEnter, onMouseLeave, onScroll, rest],
+    [css, onMouseEnter, onMouseLeave, onScroll, rest],
   )
 
   if (isSafari) {
@@ -198,12 +198,11 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
         // Added the key here
         key={componentKey}
         ref={mergeRefs(ref, scrollAreaRef)}
-        __css={css}
         {...computedProps}
       />
     )
   } else {
-    return <InternalScrollArea ref={ref} __css={css} {...computedProps} />
+    return <InternalScrollArea ref={ref} {...computedProps} />
   }
 })
 

@@ -5,15 +5,22 @@ import {
   omitThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
-import { cx, handlerAll, merge } from "@yamada-ui/utils"
+import {
+  cx,
+  handlerAll,
+  isMac,
+  merge,
+  mergeRefs,
+  vendor,
+} from "@yamada-ui/utils"
 import type { UIEvent } from "react"
 import {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
-  useLayoutEffect,
 } from "react"
 
 type ScrollAreaOptions = {
@@ -85,47 +92,28 @@ const hiddenStyles: CSSUIObject = {
 export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("ScrollArea", props)
   const {
-    className,
     type = "hover",
     overflow = "overlay",
     scrollHideDelay = 1000,
     onScrollPositionChange,
-    children,
-    innerProps,
     ...rest
   } = omitThemeProps(mergedProps)
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"
   const isNever = type === "never"
+  const isSafari = isMac() && vendor(/apple/i)
 
   const hoverTimeout = useRef<any>(undefined)
   const scrollTimeout = useRef<any>(undefined)
-
-  const scrollAreaRef = useRef<HTMLDivElement>(null) // Added the safari ref here
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) // Added the safari check here
-  const rendercounter = useRef(0)
-  const start = useRef(-1)
-  const end = useRef(false)
-  if (isSafari) rendercounter.current++
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
   const scrollPosition = useRef({ x: 0, y: 0 })
+
   useLayoutEffect(() => {
-    if (scrollAreaRef.current && isSafari) {
-      if (start.current === -1) {
-        //Check when the operation starts and ends
-        start.current = -2
-      } else if (start.current === -2) {
-        start.current = 0
-      } else if (start.current === 1) {
-        end.current = true
-        start.current = 0
-      } else {
-        end.current = false
-        start.current++
-      }
-      scrollAreaRef.current.scrollLeft = scrollPosition.current.x //Set the scroll position artificially
-      scrollAreaRef.current.scrollTop = scrollPosition.current.y
-    }
+    if (!scrollAreaRef.current || !isSafari) return
+
+    scrollAreaRef.current.scrollLeft = scrollPosition.current.x
+    scrollAreaRef.current.scrollTop = scrollPosition.current.y
   })
 
   const onMouseEnter = useCallback(() => {
@@ -147,20 +135,17 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
 
   const onScroll = useCallback(
     (ev: UIEvent<HTMLDivElement>) => {
-      onScrollPositionChange?.({
-        x: (ev.target as HTMLDivElement).scrollLeft,
-        y: (ev.target as HTMLDivElement).scrollTop,
-      })
-      scrollPosition.current = {
-        x: (ev.target as HTMLDivElement).scrollLeft, //Save the scroll position
-        y: (ev.target as HTMLDivElement).scrollTop,
-      }
-      if (end.current) {
-        //Check if the operation has ended to avoid infinite loop
-        end.current = false
-        return
-      }
-      if (type !== "scroll") return
+      const el = ev.target as HTMLDivElement
+
+      const { scrollLeft: x, scrollTop: y } = el
+      const { x: prevX, y: prevY } = scrollPosition.current
+      // const isEqual = x === prevX && y === prevY
+      const isEqual = Math.abs(x - prevX) <= 5 && Math.abs(y - prevY) <= 5
+
+      onScrollPositionChange?.({ x, y })
+      scrollPosition.current = { x, y }
+
+      if (type !== "scroll" || isEqual) return
 
       if (!isScrolling) setIsScrolling(true)
 
@@ -194,42 +179,45 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
     }
   }, [isAlways, isHovered, isNever, isScrolling, overflow, styles])
 
+  const computedProps = useMemo(
+    () => ({
+      ...rest,
+      onMouseEnter: handlerAll(rest.onMouseEnter, onMouseEnter),
+      onMouseLeave: handlerAll(rest.onMouseLeave, onMouseLeave),
+      onScroll: handlerAll(rest.onScroll, onScroll),
+    }),
+    [onMouseEnter, onMouseLeave, onScroll, rest],
+  )
+
   if (isSafari) {
     //Added the safari check here, reduce computing for other browsers
     const componentKey = `${isHovered}-${isScrolling}`
 
     return (
-      <ui.div
-        key={componentKey} // Added the key here
-        ref={scrollAreaRef}
-        className={cx("ui-scroll-area", className)}
-        tabIndex={0}
+      <InternalScrollArea
+        // Added the key here
+        key={componentKey}
+        ref={mergeRefs(ref, scrollAreaRef)}
         __css={css}
-        {...rest}
-        onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}
-        onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
-        onScroll={handlerAll(rest.onScroll, onScroll)}
-      >
-        {innerProps ? (
-          <ui.div className="ui-scroll-area__inner" {...innerProps}>
-            {children}
-          </ui.div>
-        ) : (
-          children
-        )}
-      </ui.div>
+        {...computedProps}
+      />
     )
   } else {
+    return <InternalScrollArea ref={ref} __css={css} {...computedProps} />
+  }
+})
+
+type InternalScrollAreaProps = HTMLUIProps<"div"> &
+  Pick<ScrollAreaProps, "innerProps">
+
+const InternalScrollArea = forwardRef<InternalScrollAreaProps, "div">(
+  ({ className, innerProps, children, ...rest }, ref) => {
     return (
       <ui.div
         ref={ref}
         className={cx("ui-scroll-area", className)}
         tabIndex={0}
-        __css={css}
         {...rest}
-        onMouseEnter={handlerAll(rest.onMouseEnter, onMouseEnter)}
-        onMouseLeave={handlerAll(rest.onMouseLeave, onMouseLeave)}
-        onScroll={handlerAll(rest.onScroll, onScroll)}
       >
         {innerProps ? (
           <ui.div className="ui-scroll-area__inner" {...innerProps}>
@@ -240,5 +228,5 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
         )}
       </ui.div>
     )
-  }
-})
+  },
+)

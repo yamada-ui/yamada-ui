@@ -1,5 +1,21 @@
 # @yamada-ui/core
 
+## 1.5.0
+
+### Minor Changes
+
+- [#974](https://github.com/yamada-ui/yamada-ui/pull/974) [`308f87d`](https://github.com/yamada-ui/yamada-ui/commit/308f87dc6c047fde5550ad957cf9c793516e04bb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Allowed to define any values for `_media` and `_container`.
+
+- [#949](https://github.com/yamada-ui/yamada-ui/pull/949) [`c9183e2`](https://github.com/yamada-ui/yamada-ui/commit/c9183e20c108ac486eb7b9644af44cc51a8b458b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Supported `@media` and `@container` of CSS At-rules.
+
+### Patch Changes
+
+- [#1008](https://github.com/yamada-ui/yamada-ui/pull/1008) [`3520270`](https://github.com/yamada-ui/yamada-ui/commit/3520270ca29914ba29fe28cede32001f7ae4cc57) Thanks [@atsushi729](https://github.com/atsushi729)! - Redefined `value` of `var` as optional property.
+
+- Updated dependencies [[`8ea03f0`](https://github.com/yamada-ui/yamada-ui/commit/8ea03f0a19046e01e70e81c013e2adcd2f1cd147)]:
+  - @yamada-ui/utils@1.0.8
+  - @yamada-ui/portal@1.0.8
+
 ## 1.4.4
 
 ### Patch Changes

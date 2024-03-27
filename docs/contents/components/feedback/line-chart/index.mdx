@@ -687,7 +687,7 @@ return (
 
 ### Synchronize
 
-To synchronize the behavior of the charts, set a common string for `barChartProps.syncId` of each chart.
+To synchronize the behavior of the charts, set a common string for `chartProps.syncId` of each chart.
 
 ```tsx functional=true
 const data = useMemo(
@@ -741,13 +741,13 @@ return (
       data={data}
       series={series}
       dataKey="name"
-      lineChartProps={{ syncId: "syncId" }}
+      chartProps={{ syncId: "syncId" }}
     />
     <LineChart
       data={data}
       series={series}
       dataKey="name"
-      lineChartProps={{ syncId: "syncId" }}
+      chartProps={{ syncId: "syncId" }}
     />
   </VStack>
 )

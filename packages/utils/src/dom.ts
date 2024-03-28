@@ -16,7 +16,7 @@ export const vendor = (v: RegExp): boolean =>
 export const platform = (v: RegExp): boolean =>
   createdDom() && v.test(getPlatform())
 
-export const isMac = (): boolean => platform(/^mac/)
+export const isMac = (): boolean => platform(/^mac/i)
 export const isApple = (): boolean => platform(/mac|iphone|ipad|ipod/i)
 export const isSafari = (): boolean => isApple() && vendor(/apple/i)
 

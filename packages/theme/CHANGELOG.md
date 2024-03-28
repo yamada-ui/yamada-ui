@@ -1,5 +1,19 @@
 # @yamada-ui/theme
 
+## 1.5.0
+
+### Minor Changes
+
+- [#985](https://github.com/yamada-ui/yamada-ui/pull/985) [`bd4c3f1`](https://github.com/yamada-ui/yamada-ui/commit/bd4c3f1d345e0dd0fb8fd65b37daf9c10d6c6ccd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Toggle` component style.
+
+- [#1060](https://github.com/yamada-ui/yamada-ui/pull/1060) [`ed7ff01`](https://github.com/yamada-ui/yamada-ui/commit/ed7ff018b3044a5b9693c5890ccf7fb859e9d225) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `BarChart`, `RadarChart`, `LineChart` and `AreaChart` component style.
+
+### Patch Changes
+
+- Updated dependencies [[`3520270`](https://github.com/yamada-ui/yamada-ui/commit/3520270ca29914ba29fe28cede32001f7ae4cc57), [`308f87d`](https://github.com/yamada-ui/yamada-ui/commit/308f87dc6c047fde5550ad957cf9c793516e04bb), [`c9183e2`](https://github.com/yamada-ui/yamada-ui/commit/c9183e20c108ac486eb7b9644af44cc51a8b458b), [`8ea03f0`](https://github.com/yamada-ui/yamada-ui/commit/8ea03f0a19046e01e70e81c013e2adcd2f1cd147)]:
+  - @yamada-ui/core@1.5.0
+  - @yamada-ui/utils@1.0.8
+
 ## 1.4.8
 
 ### Patch Changes

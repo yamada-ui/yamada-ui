@@ -1,6 +1,8 @@
 ---
 title: AreaChart
-description: We are currently considering the development of `AreaChart`.
+description: >-
+  `AreaChart` is a component for drawing area charts to compare multiple sets of
+  data.
 package_name: "@yamada-ui/charts"
 label: New
 with_description: true
@@ -31,25 +33,25 @@ tab: Props
   id="areachart-series"
   name="series"
   required
-  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "cx" | ... 459 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; })[]'
+  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "cx" | ... 457 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; })[]'
   description={
     "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
   }
 />
 
 <PropsCard
-  id="areachart-areachartprops"
-  name="areaChartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
-  description={"Props passed down to recharts `AreaChart` component."}
+  id="areachart-areaprops"
+  name="areaProps"
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | ... 458 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; }>'
+  description={"Props for the areas."}
 />
 
 <PropsCard
-  id="areachart-areaprops"
-  name="areaProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | ... 460 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; }>'
-  description={"Props for the areas."}
+  id="areachart-chartprops"
+  name="chartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `AreaChart` component."}
 />
 
 <PropsCard
@@ -95,7 +97,7 @@ tab: Props
 <PropsCard
   id="areachart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 463 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -117,7 +119,7 @@ tab: Props
 <PropsCard
   id="areachart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 464 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -264,13 +266,13 @@ tab: Props
 <PropsCard
   id="areachart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
 <PropsCard
   id="areachart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
 />

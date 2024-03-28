@@ -733,6 +733,141 @@
     "hierarchy": { "lv1": "Data Display" }
   },
   {
+    "title": "InfiniteScrollArea",
+    "type": "page",
+    "description": "`InfiniteScrollArea` is a component that provides infinite scrolling functionality. This component offers a smooth scrolling experience by automatically loading and displaying the next dataset when the end of the component is reached.",
+    "slug": "/components/data-display/infinite-scroll-area",
+    "hierarchy": { "lv1": "InfiniteScrollArea" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#import",
+    "hierarchy": { "lv1": "InfiniteScrollArea", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#usage",
+    "hierarchy": { "lv1": "InfiniteScrollArea", "lv2": "Usage" }
+  },
+  {
+    "title": "Specify the Viewport",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#specify-the-viewport",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Specify the Viewport"
+    }
+  },
+  {
+    "title": "Set rootMargin",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#set-rootmargin",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Set rootMargin"
+    }
+  },
+  {
+    "title": "Set threshold",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#set-threshold",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Set threshold"
+    }
+  },
+  {
+    "title": "Initial Load",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#initial-load",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Initial Load"
+    }
+  },
+  {
+    "title": "Change the Starting index",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#change-the-starting-index",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Change the Starting index"
+    }
+  },
+  {
+    "title": "Change the Orientation",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#change-the-orientation",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Change the Orientation"
+    }
+  },
+  {
+    "title": "Reverse",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#reverse",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Reverse"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#disable",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Disable"
+    }
+  },
+  {
+    "title": "Reset",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#reset",
+    "hierarchy": { "lv1": "InfiniteScrollArea", "lv2": "Usage", "lv3": "Reset" }
+  },
+  {
+    "title": "Display an Element at the End of the Scroll",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#display-an-element-at-the-end-of-the-scroll",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Display an Element at the End of the Scroll"
+    }
+  },
+  {
+    "title": "Customize the Trigger",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#customize-the-trigger",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Customize the Trigger"
+    }
+  },
+  {
+    "title": "Customize the Loading",
+    "type": "fragment",
+    "slug": "/components/data-display/infinite-scroll-area#customize-the-loading",
+    "hierarchy": {
+      "lv1": "InfiniteScrollArea",
+      "lv2": "Usage",
+      "lv3": "Customize the Loading"
+    }
+  },
+  {
     "title": "Kbd",
     "type": "page",
     "description": "`Kbd` is a component that represents keyboard input.",
@@ -1313,6 +1448,13 @@
     }
   },
   {
+    "title": "SplitPanel",
+    "type": "page",
+    "description": "We are currently considering the development of `SplitPanel`.",
+    "slug": "/components/data-display/split-panel",
+    "hierarchy": { "lv1": "SplitPanel" }
+  },
+  {
     "title": "Stat",
     "type": "page",
     "description": "`Stat` is used to display numbers or data within a box.",
@@ -1839,6 +1981,13 @@
     "hierarchy": { "lv1": "Tabs", "lv2": "Usage", "lv3": "Control" }
   },
   {
+    "title": "Tree",
+    "type": "page",
+    "description": "We are currently considering the development of `Tree`.",
+    "slug": "/components/disclosure/tree",
+    "hierarchy": { "lv1": "Tree" }
+  },
+  {
     "title": "Alert",
     "type": "page",
     "description": "`Alert` is a component that conveys information to the user.",
@@ -1916,16 +2065,282 @@
   {
     "title": "AreaChart",
     "type": "page",
-    "description": "We are currently considering the development of `AreaChart`.",
+    "description": "`AreaChart` is a component for drawing area charts to compare multiple sets of data.",
     "slug": "/components/feedback/area-chart",
     "hierarchy": { "lv1": "AreaChart" }
   },
   {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#import",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#usage",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#change-size",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Stack",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#stack",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Stack" }
+  },
+  {
+    "title": "Make Proportional",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#make-proportional",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Make Proportional"
+    }
+  },
+  {
+    "title": "Change Curve",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#change-curve",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Change Curve" }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#change-direction",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#display-legend",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Reference Line",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#display-reference-line",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Display Reference Line"
+    }
+  },
+  {
+    "title": "Disable Gradient",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#disable-gradient",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Disable Gradient"
+    }
+  },
+  {
+    "title": "Hide Dots",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#hide-dots",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Dots" }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#hide-tooltip",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#hide-axis",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Change Grid Layout",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#change-grid-layout",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Change Grid Layout"
+    }
+  },
+  {
+    "title": "Mark Ticks",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#mark-ticks",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Mark Ticks" }
+  },
+  {
+    "title": "Synchronize",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#synchronize",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Synchronize" }
+  },
+  {
+    "title": "Add Unit",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#add-unit",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Add Unit" }
+  },
+  {
+    "title": "Format Value",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#format-value",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Format Value" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#adjust-opacity",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "Adjust Dashed Line",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#adjust-dashed-line",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Line"
+    }
+  },
+  {
     "title": "BarChart",
     "type": "page",
-    "description": "We are currently considering the development of `BarChart`.",
+    "description": "`BarChart` is a component for drawing bar charts to compare multiple sets of data.",
     "slug": "/components/feedback/bar-chart",
     "hierarchy": { "lv1": "BarChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#import",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#usage",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#change-size",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Stack",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#stack",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Stack" }
+  },
+  {
+    "title": "Convert to Percentage",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#convert-to-percentage",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Convert to Percentage"
+    }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#change-direction",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#display-legend",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Reference Line",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#display-reference-line",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Display Reference Line"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#hide-tooltip",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#hide-axis",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Change Grid Layout",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#change-grid-layout",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Change Grid Layout"
+    }
+  },
+  {
+    "title": "Mark Ticks",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#mark-ticks",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Mark Ticks" }
+  },
+  {
+    "title": "Synchronize",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#synchronize",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Synchronize" }
+  },
+  {
+    "title": "Add Unit",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#add-unit",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Add Unit" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#format-values",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#adjust-opacity",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "Adjust Dashed Line",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#adjust-dashed-line",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Line"
+    }
   },
   {
     "title": "CircleProgress",
@@ -1993,6 +2408,13 @@
     }
   },
   {
+    "title": "DonutChart",
+    "type": "page",
+    "description": "We are currently considering the development of `DonutChart`.",
+    "slug": "/components/feedback/donut-chart",
+    "hierarchy": { "lv1": "DonutChart" }
+  },
+  {
     "title": "Feedback",
     "type": "page",
     "description": "Components such as `Alert` and `Skeleton` are available for notifying users and prompting them to wait while content is loading.",
@@ -2002,9 +2424,127 @@
   {
     "title": "LineChart",
     "type": "page",
-    "description": "We are currently considering the development of `LineChart`.",
+    "description": "`LineChart` is a component for drawing line charts to compare multiple sets of data.",
     "slug": "/components/feedback/line-chart",
     "hierarchy": { "lv1": "LineChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#import",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#usage",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#change-size",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Curve",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#change-curve",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Change Curve" }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#change-direction",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#display-legend",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Reference Line",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#display-reference-line",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Display Reference Line"
+    }
+  },
+  {
+    "title": "Hide Dots",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#hide-dots",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Dots" }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#hide-tooltip",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#hide-axis",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Change Grid Layout",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#change-grid-layout",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Change Grid Layout"
+    }
+  },
+  {
+    "title": "Mark Ticks",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#mark-ticks",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Mark Ticks" }
+  },
+  {
+    "title": "Synchronize",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#synchronize",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Synchronize" }
+  },
+  {
+    "title": "Add Unit",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#add-unit",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Add Unit" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#format-values",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#adjust-opacity",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "Adjust Dashed Line",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#adjust-dashed-line",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Line"
+    }
   },
   {
     "title": "Loading",
@@ -2116,9 +2656,107 @@
   {
     "title": "RadarChart",
     "type": "page",
-    "description": "We are currently considering the development of `RadarChart`.",
+    "description": "`RadarChart` is a component for drawing radar charts to compare multiple sets of data.",
     "slug": "/components/feedback/radar-chart",
     "hierarchy": { "lv1": "RadarChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#import",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#usage",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#change-size",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#display-legend",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Display Legend"
+    }
+  },
+  {
+    "title": "Display Dots",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#display-dots",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Display Dots" }
+  },
+  {
+    "title": "Display Polar Radius Axis",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#display-polar-radius-axis",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Display Polar Radius Axis"
+    }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#hide-axis",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Hide Grid",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#hide-grid",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Grid" }
+  },
+  {
+    "title": "Make Grid Circular",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#make-grid-circular",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Make Grid Circular"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#hide-tooltip",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#format-values",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#adjust-opacity",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Opacity"
+    }
+  },
+  {
+    "title": "Adjust Dashed Lines",
+    "type": "fragment",
+    "slug": "/components/feedback/radar-chart#adjust-dashed-lines",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Lines"
+    }
   },
   {
     "title": "Skeleton",
@@ -5381,6 +6019,13 @@
     }
   },
   {
+    "title": "PhoneInput",
+    "type": "page",
+    "description": "We are currently considering the development of `PhoneInput`.",
+    "slug": "/components/forms/phone-input",
+    "hierarchy": { "lv1": "PhoneInput" }
+  },
+  {
     "title": "PinInput",
     "type": "page",
     "description": "`PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.",
@@ -6954,6 +7599,71 @@
     }
   },
   {
+    "title": "Toggle",
+    "type": "page",
+    "description": "`Button` is a component that has two states: on or off.",
+    "slug": "/components/forms/toggle",
+    "hierarchy": { "lv1": "Toggle" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#import",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#usage",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#change-variant",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Change Variant" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#change-size",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#change-color-scheme",
+    "hierarchy": {
+      "lv1": "Toggle",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#disable",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#make-read-only",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Make Read-Only" }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#control",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "Grouping",
+    "type": "fragment",
+    "slug": "/components/forms/toggle#grouping",
+    "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Grouping" }
+  },
+  {
     "title": "Components",
     "type": "page",
     "description": "Yamada UI provides prebuilt components to help you build projects faster.",
@@ -8083,6 +8793,20 @@
     "hierarchy": { "lv1": "Ripple", "lv2": "Usage", "lv3": "Disabling" }
   },
   {
+    "title": "Swipeable",
+    "type": "page",
+    "description": "We are currently considering the development of `Swipeable`.",
+    "slug": "/components/other/swipeable",
+    "hierarchy": { "lv1": "Swipeable" }
+  },
+  {
+    "title": "ContextMenu",
+    "type": "page",
+    "description": "We are currently considering the development of `ContextMenu`.",
+    "slug": "/components/overlay/context-menu",
+    "hierarchy": { "lv1": "ContextMenu" }
+  },
+  {
     "title": "Dialog",
     "type": "page",
     "description": "`Dialog` is a component used to confirm or interrupt user actions.",
@@ -8263,6 +8987,12 @@
       "lv2": "Usage",
       "lv3": "Disable the Close Button"
     }
+  },
+  {
+    "title": "Close on drag",
+    "type": "fragment",
+    "slug": "/components/overlay/drawer#close-on-drag",
+    "hierarchy": { "lv1": "Drawer", "lv2": "Usage", "lv3": "Close on drag" }
   },
   {
     "title": "Customize the Overlay",
@@ -8762,6 +9492,13 @@
     "type": "fragment",
     "slug": "/components/overlay/tooltip#always-display",
     "hierarchy": { "lv1": "Tooltip", "lv2": "Usage", "lv3": "Always Display" }
+  },
+  {
+    "title": "Tour",
+    "type": "page",
+    "description": "We are currently considering the development of `Tour`.",
+    "slug": "/components/overlay/tour",
+    "hierarchy": { "lv1": "Tour" }
   },
   {
     "title": "Collapse",
@@ -10028,6 +10765,85 @@
     "hierarchy": { "lv1": "useIdle", "lv2": "Usage" }
   },
   {
+    "title": "useInfiniteScroll",
+    "type": "page",
+    "description": "`useInfiniteScroll` is a custom hook that provides infinite scroll functionality.",
+    "slug": "/hooks/use-infinite-scroll",
+    "hierarchy": { "lv1": "useInfiniteScroll" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#import",
+    "hierarchy": { "lv1": "useInfiniteScroll", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#usage",
+    "hierarchy": { "lv1": "useInfiniteScroll", "lv2": "Usage" }
+  },
+  {
+    "title": "Specify the Viewport",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#specify-the-viewport",
+    "hierarchy": {
+      "lv1": "useInfiniteScroll",
+      "lv2": "Usage",
+      "lv3": "Specify the Viewport"
+    }
+  },
+  {
+    "title": "Set rootMargin",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#set-rootmargin",
+    "hierarchy": {
+      "lv1": "useInfiniteScroll",
+      "lv2": "Usage",
+      "lv3": "Set rootMargin"
+    }
+  },
+  {
+    "title": "Set threshold",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#set-threshold",
+    "hierarchy": {
+      "lv1": "useInfiniteScroll",
+      "lv2": "Usage",
+      "lv3": "Set threshold"
+    }
+  },
+  {
+    "title": "Load Initially",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#load-initially",
+    "hierarchy": {
+      "lv1": "useInfiniteScroll",
+      "lv2": "Usage",
+      "lv3": "Load Initially"
+    }
+  },
+  {
+    "title": "Change the Starting index",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#change-the-starting-index",
+    "hierarchy": {
+      "lv1": "useInfiniteScroll",
+      "lv2": "Usage",
+      "lv3": "Change the Starting index"
+    }
+  },
+  {
+    "title": "Reverse",
+    "type": "fragment",
+    "slug": "/hooks/use-infinite-scroll#reverse",
+    "hierarchy": {
+      "lv1": "useInfiniteScroll",
+      "lv2": "Usage",
+      "lv3": "Reverse"
+    }
+  },
+  {
     "title": "useInterval",
     "type": "page",
     "description": "`useInterval` is a custom hook that runs a function at a specified interval.",
@@ -10858,6 +11674,67 @@
       "lv2": "Motion",
       "lv3": "Global Configuration"
     }
+  },
+  {
+    "title": "At-Rules",
+    "type": "page",
+    "description": "Yamada UI supports CSS at-rules.",
+    "slug": "/styled-system/at-rules",
+    "hierarchy": { "lv1": "At-Rules" }
+  },
+  {
+    "title": "@media",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#media",
+    "hierarchy": { "lv1": "At-Rules", "lv2": "@media" }
+  },
+  {
+    "title": "Using Multiple Queries",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#using-multiple-queries",
+    "hierarchy": {
+      "lv1": "At-Rules",
+      "lv2": "@media",
+      "lv3": "Using Multiple Queries"
+    }
+  },
+  {
+    "title": "Using Custom Queries",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#using-custom-queries",
+    "hierarchy": {
+      "lv1": "At-Rules",
+      "lv2": "@media",
+      "lv3": "Using Custom Queries"
+    }
+  },
+  {
+    "title": "@container",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#container",
+    "hierarchy": { "lv1": "At-Rules", "lv2": "@container" }
+  },
+  {
+    "title": "Specifying a Container Name",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#specifying-a-container-name",
+    "hierarchy": {
+      "lv1": "At-Rules",
+      "lv2": "@container",
+      "lv3": "Specifying a Container Name"
+    }
+  },
+  {
+    "title": "@keyframes",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#keyframes",
+    "hierarchy": { "lv1": "At-Rules", "lv2": "@keyframes" }
+  },
+  {
+    "title": "Other At-Rules",
+    "type": "fragment",
+    "slug": "/styled-system/at-rules#other-at-rules",
+    "hierarchy": { "lv1": "At-Rules", "lv2": "Other At-Rules" }
   },
   {
     "title": "CLI",

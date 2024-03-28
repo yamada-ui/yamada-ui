@@ -1,6 +1,8 @@
 ---
 title: BarChart
-description: We are currently considering the development of `BarChart`.
+description: >-
+  `BarChart` is a component for drawing bar charts to compare multiple sets of
+  data.
 package_name: "@yamada-ui/charts"
 label: New
 with_description: true
@@ -38,18 +40,18 @@ tab: Props
 />
 
 <PropsCard
-  id="barchart-barchartprops"
-  name="barChartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
-  description={"Props passed down to recharts `BarChart` component."}
-/>
-
-<PropsCard
   id="barchart-barprops"
   name="barProps"
   type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "layout" | "barSize" | "maxBarSize" | "style" | "className" | ... 494 more ... | "animationId"> & Omit<...> & BarProps, "color" | ... 2 more ... | "dimBar"> & { ...; }>'
   description={"Props for the bars."}
+/>
+
+<PropsCard
+  id="barchart-chartprops"
+  name="chartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `BarChart` component."}
 />
 
 <PropsCard
@@ -77,7 +79,7 @@ tab: Props
 <PropsCard
   id="barchart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 463 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -99,7 +101,7 @@ tab: Props
 <PropsCard
   id="barchart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 464 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -202,13 +204,13 @@ tab: Props
 <PropsCard
   id="barchart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
 <PropsCard
   id="barchart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
 />

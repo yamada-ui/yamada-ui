@@ -6,13 +6,8 @@ codecov:
 
 coverage:
   status:
-    project:
-      default:
-        information: true
-    patch:
-      default:
-        information: true
-# comment:
-#   layout: "reach, diff, files, components"
-#   behavior: default
-#   require_changes: false
+    project: false
+    patch: false
+
+github_checks:
+  annotations: false

@@ -12,8 +12,7 @@ coverage:
     patch:
       default:
         information: true
-
-comment:
-  layout: "reach, diff, files, components"
-  behavior: default
-  require_changes: false
+# comment:
+#   layout: "reach, diff, files, components"
+#   behavior: default
+#   require_changes: false

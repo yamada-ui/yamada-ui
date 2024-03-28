@@ -36,14 +36,7 @@ export const ChartLegend = forwardRef<ChartLegendProps, "div">(
       <ui.div
         ref={ref}
         className={cx("ui-chart__legend", className)}
-        __css={{
-          ...styles.legend,
-          '@media (max-width: 600px)': {
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            overflowX: 'auto',
-          },
-        }}
+        __css={styles.legend}
         {...rest}
       >
         {items}

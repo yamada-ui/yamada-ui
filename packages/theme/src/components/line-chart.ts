@@ -36,6 +36,7 @@ export const LineChart: ComponentMultiStyle = {
     },
     legend: {
       display: "flex",
+      flexWarp: "wrap",
       justifyContent: "flex-end",
     },
     legendItem: {

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5387/5387</span>
+                <span class='fraction'>5418/5418</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5387/5387</span>
+                <span class='fraction'>5418/5418</span>
             </div>
         
             
@@ -5450,7 +5450,69 @@
 <a name='L5385'></a><a href='#L5385'>5385</a>
 <a name='L5386'></a><a href='#L5386'>5386</a>
 <a name='L5387'></a><a href='#L5387'>5387</a>
-<a name='L5388'></a><a href='#L5388'>5388</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L5388'></a><a href='#L5388'>5388</a>
+<a name='L5389'></a><a href='#L5389'>5389</a>
+<a name='L5390'></a><a href='#L5390'>5390</a>
+<a name='L5391'></a><a href='#L5391'>5391</a>
+<a name='L5392'></a><a href='#L5392'>5392</a>
+<a name='L5393'></a><a href='#L5393'>5393</a>
+<a name='L5394'></a><a href='#L5394'>5394</a>
+<a name='L5395'></a><a href='#L5395'>5395</a>
+<a name='L5396'></a><a href='#L5396'>5396</a>
+<a name='L5397'></a><a href='#L5397'>5397</a>
+<a name='L5398'></a><a href='#L5398'>5398</a>
+<a name='L5399'></a><a href='#L5399'>5399</a>
+<a name='L5400'></a><a href='#L5400'>5400</a>
+<a name='L5401'></a><a href='#L5401'>5401</a>
+<a name='L5402'></a><a href='#L5402'>5402</a>
+<a name='L5403'></a><a href='#L5403'>5403</a>
+<a name='L5404'></a><a href='#L5404'>5404</a>
+<a name='L5405'></a><a href='#L5405'>5405</a>
+<a name='L5406'></a><a href='#L5406'>5406</a>
+<a name='L5407'></a><a href='#L5407'>5407</a>
+<a name='L5408'></a><a href='#L5408'>5408</a>
+<a name='L5409'></a><a href='#L5409'>5409</a>
+<a name='L5410'></a><a href='#L5410'>5410</a>
+<a name='L5411'></a><a href='#L5411'>5411</a>
+<a name='L5412'></a><a href='#L5412'>5412</a>
+<a name='L5413'></a><a href='#L5413'>5413</a>
+<a name='L5414'></a><a href='#L5414'>5414</a>
+<a name='L5415'></a><a href='#L5415'>5415</a>
+<a name='L5416'></a><a href='#L5416'>5416</a>
+<a name='L5417'></a><a href='#L5417'>5417</a>
+<a name='L5418'></a><a href='#L5418'>5418</a>
+<a name='L5419'></a><a href='#L5419'>5419</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -16121,7 +16183,7 @@ export type StyleProps = {
     __prefix?: string
     name: string
     token?: keyof Omit&lt;Theme, "components" | "colorSchemes" | "themeSchemes"&gt;
-    value?: Token&lt;StringLiteral | number&gt;
+    value?: Token&lt;number | StringLiteral&gt;
   }[]
   /**
    * The `@media` of CSS at-rule.
@@ -16151,34 +16213,65 @@ export type StyleProps = {
     minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
     maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
     maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    anyHover?: StringLiteral
-    anyPointer?: StringLiteral
-    aspectRatio?: StringLiteral
-    color?: StringLiteral
-    colorGamut?: StringLiteral
-    colorIndex?: StringLiteral
-    deviceAspectRatio?: StringLiteral
-    deviceHeight?: StringLiteral
-    deviceWidth?: StringLiteral
-    displayMode?: StringLiteral
-    dynamicRange?: StringLiteral
-    forcedColors?: StringLiteral
-    grid?: StringLiteral
-    hover?: StringLiteral
-    invertedColors?: StringLiteral
-    monochrome?: StringLiteral
-    orientation?: StringLiteral
-    overflowBlock?: StringLiteral
-    overflowInline?: StringLiteral
-    pointer?: StringLiteral
-    prefersColorScheme?: StringLiteral
-    prefersContrast?: StringLiteral
-    prefersReducedMotion?: StringLiteral
+    anyHover?: "none" | "hover" | StringLiteral
+    anyPointer?: "none" | "coarse" | "fine" | StringLiteral
+    aspectRatio?: CSS.Property.AspectRatio
+    color?: number | StringLiteral
+    minColor?: number | StringLiteral
+    maxColor?: number | StringLiteral
+    colorGamut?: "srgb" | "p3" | "rec2020" | StringLiteral
+    colorIndex?: number | StringLiteral
+    minColorIndex?: number | StringLiteral
+    maxColorIndex?: number | StringLiteral
+    deviceAspectRatio?: CSS.Property.AspectRatio
+    minDeviceAspectRatio?: CSS.Property.AspectRatio
+    maxDeviceAspectRatio?: CSS.Property.AspectRatio
+    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
+    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    displayMode?:
+      | "browser"
+      | "fullscreen"
+      | "minimal-ui"
+      | "picture-in-picture"
+      | "standalone"
+      | "window-controls-overlay"
+      | StringLiteral
+    dynamicRange?: "standard" | "high" | StringLiteral
+    forcedColors?: "none" | "active" | StringLiteral
+    grid?: 0 | 1 | "StringLiteral"
+    hover?: "none" | "hover" | StringLiteral
+    invertedColors?: "none" | "inverted" | StringLiteral
+    monochrome?: number | StringLiteral
+    minMonochrome?: number | StringLiteral
+    maxMonochrome?: number | StringLiteral
+    orientation?: "portrait" | "landscape" | StringLiteral
+    overflowBlock?:
+      | "none"
+      | "scroll"
+      | "paged"
+      | "optional-paged"
+      | StringLiteral
+    overflowInline?: "none" | "scroll" | StringLiteral
+    pointer?: "none" | "coarse" | "fine" | StringLiteral
+    prefersColorScheme?: "light" | "dark" | StringLiteral
+    prefersContrast?:
+      | "no-preference"
+      | "high"
+      | "low"
+      | "custom"
+      | StringLiteral
+    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
     resolution?: StringLiteral
-    scan?: StringLiteral
-    scripting?: StringLiteral
-    update?: StringLiteral
-    videoDynamicRange?: StringLiteral
+    minResolution?: StringLiteral
+    maxResolution?: StringLiteral
+    scan?: "interlace" | "progressive" | StringLiteral
+    scripting?: "none" | "initial-only" | "enabled" | StringLiteral
+    update?: "none" | "slow" | "fast" | StringLiteral
+    videoDynamicRange?: "standard" | "high" | StringLiteral
     css?: CSSUIObject
     [key: string]: any
   }[]
@@ -16231,7 +16324,7 @@ export type StyleProps = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-25T16:46:17.300Z
+                at 2024-03-28T10:17:21.422Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

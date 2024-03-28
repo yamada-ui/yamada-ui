@@ -1,0 +1,73 @@
+---
+title: RadarChart
+description: We are currently considering the development of `RadarChart`.
+package_name: "@yamada-ui/charts"
+label: New
+with_description: true
+tab: Theming
+---
+
+## Theming
+
+The `RadarChart` is a [single part component](/styled-system/theming/component-style#single-part-components).
+
+:::note
+`RadarChart` inherits the style from [LineChart](/components/feedback/line-chart).
+:::
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
+  baseStyle: {
+    radar: {},
+    polarGrid: {
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      strokeWidth: 1,
+    },
+    polarAngleAxis: {},
+    polarAngleAxisTick: {
+      "& > text": {
+        fill: ["blackAlpha.700", "whiteAlpha.600"],
+        fontSize: "xs",
+      },
+    },
+    polarRadiusAxis: {
+      "& > line": {
+        stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      },
+    },
+    polarRadiusAxisTick: {
+      "& > text": {
+        fill: ["blackAlpha.700", "whiteAlpha.600"],
+        fontSize: "xs",
+      },
+    },
+  },
+
+  sizes: {
+    sm: {
+      container: {
+        w: "full",
+      },
+    },
+    md: {
+      container: {
+        w: "full",
+      },
+    },
+    lg: {
+      container: {
+        w: "full",
+      },
+    },
+    full: {
+      container: {
+        w: "full",
+      },
+    },
+  },
+})({ omit: ["line", "grid"] })
+```

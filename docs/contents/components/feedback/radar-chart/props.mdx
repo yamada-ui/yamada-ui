@@ -1,0 +1,197 @@
+---
+title: RadarChart
+description: We are currently considering the development of `RadarChart`.
+package_name: "@yamada-ui/charts"
+label: New
+with_description: true
+tab: Props
+---
+
+## Props
+
+### RadarChartProps
+
+<PropsCard
+  id="radarchart-data"
+  name="data"
+  required
+  type="Dict[]"
+  description={"Chart data."}
+/>
+
+<PropsCard
+  id="radarchart-datakey"
+  name="dataKey"
+  required
+  type="string"
+  description={"The key of a group of data which should be unique in an chart."}
+/>
+
+<PropsCard
+  id="radarchart-series"
+  name="series"
+  required
+  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | "cy" | ... 460 more ... | keyof RadarProps> & Omit<...> & RadarProps, "color" | ... 3 more ... | "dimRadar"> & { ...; })[]'
+  description={
+    "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
+  }
+/>
+
+<PropsCard
+  id="radarchart-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="radarchart-containerprops"
+  name="containerProps"
+  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  description={"Props passed down to recharts `ResponsiveContainer` component."}
+/>
+
+<PropsCard
+  id="radarchart-legendprops"
+  name="legendProps"
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  description={"Props passed down to recharts 'Legend' component."}
+/>
+
+<PropsCard
+  id="radarchart-polarangleaxisprops"
+  name="polarAngleAxisProps"
+  type='Omit<Props, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | "_nativeFocusVisible" | ... 55 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  description={"Props passed down to recharts `PolarAngleAxis` component."}
+/>
+
+<PropsCard
+  id="radarchart-polargridprops"
+  name="polarGridProps"
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 472 more ... | "radialLines"> & SVGProps<...> & PolarGridProps'
+  description={"Props passed down to recharts `PolarGrid` component."}
+/>
+
+<PropsCard
+  id="radarchart-polarradiusaxisprops"
+  name="polarRadiusAxisProps"
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "id" | "role" | "tabIndex" | "ref" | "clipPath" | "color" | "cursor" | "direction" | "display" | ... 245 more ... | keyof PolarRadiusAxisProps> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PolarRadiusAxisProps'
+  description={"Props passed down to recharts `PolarRadiusAxis` component."}
+/>
+
+<PropsCard
+  id="radarchart-radarchartprops"
+  name="radarChartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `RadarChart` component."}
+/>
+
+<PropsCard
+  id="radarchart-radarprops"
+  name="radarProps"
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | "cy" | ... 460 more ... | keyof RadarProps> & Omit<...> & RadarProps, "color" | ... 3 more ... | "dimRadar"> & { ...; }>'
+  description={"Props for the radar."}
+/>
+
+<PropsCard
+  id="radarchart-size"
+  name="size"
+  type='"sm" | "md" | "lg" | "full"'
+  description={"The size of the RadarChart."}
+  defaultValue={"full"}
+/>
+
+<PropsCard
+  id="radarchart-tooltipanimationduration"
+  name="tooltipAnimationDuration"
+  type="number"
+  description={
+    "Specifies the duration of animation, the unit of this option is ms."
+  }
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="radarchart-tooltipprops"
+  name="tooltipProps"
+  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  description={"Props passed down to recharts 'Tooltip' component."}
+/>
+
+<PropsCard
+  id="radarchart-unit"
+  name="unit"
+  type="string"
+  description={"Unit displayed next to each tick in y-axis."}
+/>
+
+<PropsCard
+  id="radarchart-valueformatter"
+  name="valueFormatter"
+  type="(value: number) => string"
+  description={"A function to format values on Y axis and inside the tooltip."}
+/>
+
+<PropsCard
+  id="radarchart-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the RadarChart."}
+/>
+
+<PropsCard
+  id="radarchart-withactivedots"
+  name="withActiveDots"
+  type="boolean"
+  description={"Determines whether activeDots should be displayed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="radarchart-withdots"
+  name="withDots"
+  type="boolean"
+  description={"Determines whether dots should be displayed."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radarchart-withlegend"
+  name="withLegend"
+  type="boolean"
+  description={"If `true`, legend is visible."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radarchart-withpolarangleaxis"
+  name="withPolarAngleAxis"
+  type="boolean"
+  description={"Determines whether polarAngleAxis should be displayed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="radarchart-withpolargrid"
+  name="withPolarGrid"
+  type="boolean"
+  description={"Determines whether polarGrid should be displayed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="radarchart-withpolarradiusaxis"
+  name="withPolarRadiusAxis"
+  type="boolean"
+  description={"Determines whether polarRadiusAxis should be displayed."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="radarchart-withtooltip"
+  name="withTooltip"
+  type="boolean"
+  description={"If `true`, tooltip is visible."}
+  defaultValue={"true"}
+/>

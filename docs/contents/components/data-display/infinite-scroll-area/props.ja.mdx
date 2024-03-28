@@ -1,0 +1,133 @@
+---
+title: InfiniteScrollArea
+description: >-
+  `InfiniteScrollArea`は、無限スクロール機能を提供するコンポーネントです。このコンポーネントは、コンポーネントの終わりに達したときに次のデータセットを自動的に読み込み、表示することで、スムーズなスクロール体験を提供します。
+package_name: "@yamada-ui/infinite-scroll-area"
+label: New
+with_description: true
+tab: Props
+---
+
+## Props
+
+### InfiniteScrollAreaProps
+
+<PropsCard
+  id="infinitescrollarea-behavior"
+  name="behavior"
+  type="ScrollBehavior"
+  description={"Determines whether scrolling is instant or animates smoothly."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-finish"
+  name="finish"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The infinite scroll area finish to use."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-indexref"
+  name="indexRef"
+  type="RefObject<(index: number) => void>"
+  description={"Ref to a reset index function."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-initialload"
+  name="initialLoad"
+  type="boolean"
+  description={"If `true`, invoke `onLoad` function for the first time."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="infinitescrollarea-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the infinite scroll is disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="infinitescrollarea-isreverse"
+  name="isReverse"
+  type="boolean"
+  description={"If `true`, reverse direction."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="infinitescrollarea-loading"
+  name="loading"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The infinite scroll area loading to use."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-onload"
+  name="onLoad"
+  type="({
+  index,
+  entry,
+  finish,
+}: {
+  index: number
+  finish: () => void
+  entry?: IntersectionObserverEntry | undefined
+}) => Promise<void>"
+  description={"The callback invoked when trigger is intersect."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-orientation"
+  name="orientation"
+  type='"vertical" | "horizontal"'
+  description={"The orientation of the infinite scroll."}
+  defaultValue={"'vertical'"}
+/>
+
+<PropsCard
+  id="infinitescrollarea-resetref"
+  name="resetRef"
+  type="RefObject<(index?: number | undefined, runScroll?: boolean | undefined) => void>"
+  description={"Ref to a reset function."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-rootref"
+  name="rootRef"
+  type="RefObject<HTMLElement>"
+  description={
+    "The element that is used as the viewport for checking visibility of the target.\nDefaults to the browser viewport if not specified or if `null`."
+  }
+/>
+
+<PropsCard
+  id="infinitescrollarea-startindex"
+  name="startIndex"
+  type="number"
+  description={
+    "If set the `onLoad` function will start from the given index.\nIf `initialLoad` is `true`, index starts from `0`."
+  }
+  defaultValue={"1"}
+/>
+
+<PropsCard
+  id="infinitescrollarea-triggerprops"
+  name="triggerProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for infinite scroll area trigger component."}
+/>

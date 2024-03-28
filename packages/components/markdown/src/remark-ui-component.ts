@@ -1,103 +1,219 @@
-import type { Dict } from "@yamada-ui/utils"
+import type { Status as AlertStatus } from "@yamada-ui/alert/src/alert"
+import type { Parent as HastParent } from "hast"
+import type { Break, Paragraph, PhrasingContent, Root } from "mdast"
+import type { ElementContent } from "react-markdown/lib"
+import { match, P } from "ts-pattern"
 import type { Plugin } from "unified"
+import { remove } from "unist-util-remove"
 import { visit } from "unist-util-visit"
+import { getFragmentPattern } from "./patterns"
+import type { ShouldRemoved } from "./utils"
+import { isBreak, isContainer, shouldRemoved } from "./utils"
 
-export const remarkUIComponent: Plugin = () => (tree) => {
-  visit(tree, "paragraph", (node: any) => {
-    try {
-      const { name, properties, children } = getValidChildren(node.children)
+const getStatus = (str: string | undefined): AlertStatus => {
+  return match(str)
+    .with(undefined, () => {
+      return "info" as const
+    })
+    .with("info", () => {
+      return "info" as const
+    })
+    .with("warning", () => {
+      return "warning" as const
+    })
+    .with("error", () => {
+      return "error" as const
+    })
+    .with("success", () => {
+      return "success" as const
+    })
+    .with("loading", () => {
+      return "loading" as const
+    })
+    .with(P._, () => {
+      return "info" as const
+    })
+    .exhaustive()
+}
 
-      switch (name) {
-        case "note":
-          insertElement({ name: "note", properties, children })(node)
-          break
-        default:
-          break
+export const remarkUIComponent: Plugin<[], Root, Root> = () => {
+  return (tree) => {
+    let nested = 0
+    let isMerging = false
+    let buf: PhrasingContent[] = []
+    let paragraph: Paragraph | undefined
+    let status: AlertStatus = "info"
+
+    visit(tree, "paragraph", (node, index) => {
+      for (const phrasingContent of node.children) {
+        match(phrasingContent)
+          .with({ type: "text" }, (textNode) => {
+            const startFragmentCapturedGroups = getFragmentPattern(
+              "start",
+              true,
+            ).exec(textNode.value)
+            const endFragmentCapturedGroups = getFragmentPattern(
+              "end",
+              true,
+            ).exec(textNode.value)
+
+            if (
+              startFragmentCapturedGroups !== null &&
+              endFragmentCapturedGroups !== null
+            ) {
+              if (isMerging) {
+                buf.push(textNode)
+                return
+              }
+
+              const content = textNode.value
+                .replace(startFragmentCapturedGroups.groups!.leftFragment, "")
+                .replace(endFragmentCapturedGroups.groups!.rightFlagment, "")
+
+              tree.children.splice(index!, 1, {
+                ...node,
+                type: "custom" as "paragraph",
+                data: {
+                  hName: "note",
+                  hChildren: [
+                    {
+                      type: "text",
+                      value: content,
+                    },
+                  ],
+                  hProperties: {
+                    status: getStatus(
+                      startFragmentCapturedGroups.groups?.status,
+                    ),
+                  },
+                },
+              })
+
+              return
+            }
+
+            const capturedGroups = getFragmentPattern("start", false).exec(
+              textNode.value,
+            )
+            if (capturedGroups !== null) {
+              isMerging = true
+
+              status = getStatus(capturedGroups.groups?.status)
+
+              if (buf.length > 0) {
+                nested++
+              }
+            }
+
+            if (!isMerging) {
+              return
+            }
+
+            buf.push(textNode)
+
+            if (getFragmentPattern("end", false).test(textNode.value)) {
+              if (nested > 0) {
+                nested--
+                return
+              }
+
+              if (isContainer(buf)) {
+                const secondNode = buf.at(1)!
+                const lastButOneNode = buf.at(-2)!
+
+                if (isBreak(secondNode) && isBreak(lastButOneNode)) {
+                  paragraph = {
+                    type: "paragraph",
+                    children: buf.slice(2, -2),
+                  }
+                } else if (isBreak(secondNode)) {
+                  paragraph = {
+                    type: "paragraph",
+                    children: buf.slice(2, -1),
+                  }
+                } else if (isBreak(lastButOneNode)) {
+                  paragraph = {
+                    type: "paragraph",
+                    children: buf.slice(1, -3),
+                  }
+                } else {
+                  paragraph = {
+                    type: "paragraph",
+                    children: buf,
+                  }
+                }
+
+                isMerging = false
+              } else {
+                paragraph = {
+                  type: "paragraph",
+                  children: buf,
+                }
+              }
+
+              buf = []
+            }
+          })
+          .with({ type: "break" }, (breakNode) => {
+            if (isMerging) {
+              buf.push(breakNode)
+            }
+          })
+          .with(P._, () => {})
       }
-    } catch (e) {}
-  })
-}
 
-const getValidChildren = (
-  children: any[],
-): { name: string; properties: Dict; children: any[] } => {
-  if (!children.length) throw new Error()
+      if (isMerging) {
+        const shouldRemovingNode = {
+          ...node,
+          shouldRemoved: true,
+        } satisfies ShouldRemoved
 
-  if (children.length === 1) {
-    const { type, value } = children[0]
+        tree.children.splice(index!, 1, shouldRemovingNode)
 
-    if (type !== "text" || !value) throw new Error()
+        buf.push({ type: "break" } satisfies Break)
+      } else {
+        if (paragraph !== undefined) {
+          tree.children.splice(index!, 1, {
+            ...node,
+            type: "custom" as "paragraph",
+            data: {
+              hName: "note",
+              hChildren: paragraph.children as ElementContent[],
+              hProperties: {
+                status: status,
+              },
+            },
+          })
 
-    const [, name, content] = value.match(/^:::(\w+)\s+([\s\S]*?)\s*:::$/) ?? []
+          paragraph = undefined
+        }
+      }
+    })
 
-    if (!name || !content) throw new Error()
+    remove(tree, (node) => {
+      return shouldRemoved(node)
+    })
 
-    const { properties, resolvedContent } = getProperties(content)
-
-    return {
-      name,
-      properties,
-      children: [{ type: "text", value: resolvedContent }],
+    if (isMerging) {
+      tree.children.push({
+        type: "paragraph",
+        children: buf,
+      })
     }
-  } else {
-    const firstChild = children.at(0)
-    const lastChild = children.at(-1)
-
-    const [, name, firstChildContent] =
-      firstChild.value.match(/^:::(\w+)\s+([\s\S]*?)$/) ?? []
-    const [, lastChildContent] =
-      lastChild.value.match(/([\s\S]*?)\s*:::$/) ?? []
-
-    if (!name) throw new Error()
-
-    const { properties, resolvedContent } = getProperties(firstChildContent)
-
-    if (resolvedContent) {
-      children[0].value = resolvedContent
-    } else {
-      children.shift()
-    }
-
-    if (lastChildContent) {
-      children[children.length - 1].value = lastChildContent
-    } else {
-      children.pop()
-    }
-
-    return { name, properties, children }
+    isMerging = false
+    buf = []
   }
 }
 
-const getProperties = (
-  content: string = "",
-): { properties: Dict; resolvedContent: string } => {
-  const properties: Dict = {}
-  const reg = /(\w+)=([^\s]+)(?=\s|$)/g
-  const results = [...content.matchAll(reg)]
-
-  results.forEach(([, name, value]) => {
-    properties[name] = value.trim()
-  })
-
-  const resolvedContent = content.replace(reg, "").replace(/^\s+/, "")
-
-  return { properties, resolvedContent }
-}
-const insertElement =
-  ({
-    name,
-    children = [],
-    properties = {},
-  }: {
-    name: string
-    children: any[]
-    properties?: Dict
-  }) =>
-  (node: any) => {
-    node.type = "custom"
-    node.data = {
-      hName: name,
-      hChildren: children,
-      hProperties: properties,
-    }
+export const rehypeBreakPlugin: Plugin = () => {
+  return (tree) => {
+    visit(tree, "break", (_, index, parent: HastParent) => {
+      parent.children.splice(index!, 1, {
+        type: "element",
+        tagName: "br",
+        properties: {},
+        children: [],
+      })
+    })
   }
+}

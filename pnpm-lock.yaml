@@ -1596,6 +1596,9 @@ importers:
       ts-pattern:
         specifier: ^5.0.8
         version: 5.0.8
+      unist-util-is:
+        specifier: ^6.0.0
+        version: 6.0.0
       unist-util-remove:
         specifier: ^4.0.0
         version: 4.0.0

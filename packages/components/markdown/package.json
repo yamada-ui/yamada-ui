@@ -57,6 +57,7 @@
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.0",
     "ts-pattern": "^5.0.8",
+    "unist-util-is": "^6.0.0",
     "unist-util-remove": "^4.0.0"
   },
   "devDependencies": {

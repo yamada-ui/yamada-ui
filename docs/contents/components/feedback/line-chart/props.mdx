@@ -1,6 +1,8 @@
 ---
 title: LineChart
-description: We are currently considering the development of `LineChart`.
+description: >-
+  `LineChart` is a component for drawing line charts to compare multiple sets of
+  data.
 package_name: "@yamada-ui/charts"
 label: New
 with_description: true
@@ -35,6 +37,14 @@ tab: Props
   description={
     "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
   }
+/>
+
+<PropsCard
+  id="linechart-chartprops"
+  name="chartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `LineChart` component."}
 />
 
 <PropsCard
@@ -80,7 +90,7 @@ tab: Props
 <PropsCard
   id="linechart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 463 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -100,14 +110,6 @@ tab: Props
 />
 
 <PropsCard
-  id="linechart-linechartprops"
-  name="lineChartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
-  description={"Props passed down to recharts `LineChart` component."}
-/>
-
-<PropsCard
   id="linechart-lineprops"
   name="lineProps"
   type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
@@ -117,7 +119,7 @@ tab: Props
 <PropsCard
   id="linechart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 464 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -234,13 +236,13 @@ tab: Props
 <PropsCard
   id="linechart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
 <PropsCard
   id="linechart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
 />

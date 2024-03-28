@@ -12,16 +12,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/teru12012000",
   },
   {
-    id: 50972802,
-    name: "nogu66",
-    icon: "https://avatars.githubusercontent.com/u/50972802?v=4",
-    url: "https://github.com/nogu66",
-  },
-  {
     id: 22112440,
     name: "txxxxc",
     icon: "https://avatars.githubusercontent.com/u/22112440?v=4",
     url: "https://github.com/txxxxc",
+  },
+  {
+    id: 50972802,
+    name: "nogu66",
+    icon: "https://avatars.githubusercontent.com/u/50972802?v=4",
+    url: "https://github.com/nogu66",
   },
   {
     id: 57742720,
@@ -106,6 +106,12 @@ export const CONTRIBUTORS = [
     name: "GensIto",
     icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
     url: "https://github.com/GensIto",
+  },
+  {
+    id: 50375170,
+    name: "AVAM16",
+    icon: "https://avatars.githubusercontent.com/u/50375170?v=4",
+    url: "https://github.com/AVAM16",
   },
   {
     id: 75669598,

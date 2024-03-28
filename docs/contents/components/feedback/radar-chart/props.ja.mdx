@@ -1,6 +1,6 @@
 ---
 title: RadarChart
-description: "`RadarChart`は、現在作成を検討しています。"
+description: "`RadarChart`は、複数のデータを比較するためのレーダーチャートを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
 label: New
 with_description: true
@@ -31,10 +31,18 @@ tab: Props
   id="radarchart-series"
   name="series"
   required
-  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | "cy" | ... 460 more ... | keyof RadarProps> & Omit<...> & RadarProps, "color" | ... 3 more ... | "dimRadar"> & { ...; })[]'
+  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | "cy" | ... 458 more ... | keyof RadarProps> & Omit<...> & RadarProps, "color" | ... 3 more ... | "dimRadar"> & { ...; })[]'
   description={
     "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
   }
+/>
+
+<PropsCard
+  id="radarchart-chartprops"
+  name="chartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `RadarChart` component."}
 />
 
 <PropsCard
@@ -68,7 +76,7 @@ tab: Props
 <PropsCard
   id="radarchart-polargridprops"
   name="polarGridProps"
-  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 472 more ... | "radialLines"> & SVGProps<...> & PolarGridProps'
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 470 more ... | "radialLines"> & SVGProps<...> & PolarGridProps'
   description={"Props passed down to recharts `PolarGrid` component."}
 />
 
@@ -80,17 +88,9 @@ tab: Props
 />
 
 <PropsCard
-  id="radarchart-radarchartprops"
-  name="radarChartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
-  description={"Props passed down to recharts `RadarChart` component."}
-/>
-
-<PropsCard
   id="radarchart-radarprops"
   name="radarProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | "cy" | ... 460 more ... | keyof RadarProps> & Omit<...> & RadarProps, "color" | ... 3 more ... | "dimRadar"> & { ...; }>'
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | "cy" | ... 458 more ... | keyof RadarProps> & Omit<...> & RadarProps, "color" | ... 3 more ... | "dimRadar"> & { ...; }>'
   description={"Props for the radar."}
 />
 

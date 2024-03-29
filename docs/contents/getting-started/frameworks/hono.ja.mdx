@@ -20,6 +20,26 @@ order: 6
   }}
 />
 
+必要なパッケージをインストールします。
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: "pnpm add react react-dom",
+    npm: "npm install react react-dom",
+    yarn: "yarn add react react-dom",
+    bun: "bun install react react-dom",
+  }}
+/>
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: "pnpm add -D @types/react @types/react-dom @hono/vite-dev-server vite",
+    npm: "npm install -D @types/react @types/react-dom @hono/vite-dev-server vite",
+    yarn: "yarn add -D @types/react @types/react-dom @hono/vite-dev-server vite",
+    bun: "bun install -D @types/react @types/react-dom @hono/vite-dev-server vite",
+  }}
+/>
+
 Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほとんどのコンポーネントやフックを使用できます。
 
 <PackageManagers packageNameOrCommand="@yamada-ui/react" />
@@ -67,27 +87,7 @@ Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほと�
 Yamada UIのスタイルシステムのみを使用したい場合は、[こちら](/getting-started/installation/minimal)。
 :::
 
-## Reactを動かす準備をする
-
-必要なパッケージをインストールします。
-
-<PackageManagers
-  packageNameOrCommand={{
-    pnpm: "pnpm add @yamada-ui/react react react-dom",
-    npm: "npm install @yamada-ui/react react react-dom",
-    yarn: "yarn @yamada-ui/react react react-dom",
-    bun: "bun install @yamada-ui/react react react-dom",
-  }}
-/>
-
-<PackageManagers
-  packageNameOrCommand={{
-    pnpm: "pnpm add -D @types/react @types/react-dom @hono/vite-dev-server vite",
-    npm: "npm install -D @types/react @types/react-dom @hono/vite-dev-server vite",
-    yarn: "yarn add -D @types/react @types/react-dom @hono/vite-dev-server vite",
-    bun: "bun install -D @types/react @types/react-dom @hono/vite-dev-server vite",
-  }}
-/>
+## セットアップ
 
 `index.ts`を`index.tsx`に変更して、内容も変更します。
 

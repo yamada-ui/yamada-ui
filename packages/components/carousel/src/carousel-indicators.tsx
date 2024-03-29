@@ -7,7 +7,7 @@ import { useCarouselContext, useCarouselIndicators } from "./use-carousel"
 
 type CarouselIndicatorsOptions = {
   /**
-   * The custom curousel indicator to use.
+   * The custom caroucel indicator to use.
    */
   component?: FC<{ index: number; isSelected: boolean }>
 }

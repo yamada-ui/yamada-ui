@@ -67,9 +67,146 @@ Yamada UIは、`@yamada-ui/react`をインストールするだけで、ほと�
 Yamada UIのスタイルシステムのみを使用したい場合は、[こちら](/getting-started/installation/minimal)。
 :::
 
+## Reactを動かす準備をする
+
+必要なパッケージをインストールします。
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: "pnpm add @yamada-ui/react react react-dom",
+    npm: "npm install @yamada-ui/react react react-dom",
+    yarn: "yarn @yamada-ui/react react react-dom",
+    bun: "bun install @yamada-ui/react react react-dom",
+  }}
+/>
+
+<PackageManagers
+  packageNameOrCommand={{
+    pnpm: "pnpm add -D @types/react @types/react-dom @hono/vite-dev-server vite",
+    npm: "npm install -D @types/react @types/react-dom @hono/vite-dev-server vite",
+    yarn: "yarn add -D @types/react @types/react-dom @hono/vite-dev-server vite",
+    bun: "bun install -D @types/react @types/react-dom @hono/vite-dev-server vite",
+  }}
+/>
+
+`index.ts`を`index.tsx`に変更して、内容も変更します。
+
+```tsx live=false title=index.tsx
+import { Hono } from "hono"
+import { renderToString } from "react-dom/server"
+
+const app = new Hono()
+
+app.get("*", (c) => {
+  return c.html(
+    renderToString(
+      <html lang="ja" data-mode="light">
+        <head>
+          <script type="module" src="/src/client.tsx"></script>
+        </head>
+        <body>
+          <div id="root"></div>
+        </body>
+      </html>,
+    ),
+  )
+})
+
+export default app
+```
+
+`package.json`に`"type": "module"`を追加します。
+
+```json live=false title=package.json highlight={2}
+{
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.9.0",
+    "@yamada-ui/react": "^1.3.0",
+    "hono": "^4.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@hono/vite-dev-server": "^0.10.0",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.22",
+    "tsx": "^3.12.2",
+    "vite": "^5.2.6"
+  }
+}
+```
+
+`tsconfig.json`の`"jsxImportSource"`を`"react"`にします。
+
+```json live=false title=tsconfig.json highlight={11}
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "types": ["node"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
+```
+
+`vite.config.ts`を追加します。
+
+```ts live=false title=vite.config.ts
+import devServer, { defaultOptions } from "@hono/vite-dev-server"
+import { defineConfig } from "vite"
+
+export default defineConfig(({ mode }) => {
+  if (mode === "client") {
+    return {
+      build: {
+        rollupOptions: {
+          input: "./src/client.tsx",
+          output: {
+            entryFileNames: "static/client.js",
+          },
+        },
+      },
+      resolve: {
+        alias: {
+          "@": "/src",
+        },
+      },
+    }
+  } else {
+    return {
+      ssr: {
+        external: ["react", "react-dom"],
+      },
+      plugins: [
+        devServer({
+          exclude: ["/*", ...defaultOptions.exclude],
+          entry: "src/index.tsx",
+        }),
+      ],
+      server: {
+        port: 4448,
+      },
+      resolve: {
+        alias: {
+          "@": "/src",
+        },
+      },
+    }
+  }
+})
+```
+
 ## `UIProvider`を追加する
 
-Yamada UIをインストール後、`UIProvider`を追加します。
+Yamada UIをインストール後、`client.tsx`を作成して、`UIProvider`を追加します。
 
 ```tsx live=false title=client.tsx highlight={1,8,10}
 import { UIProvider } from "@yamada-ui/react"

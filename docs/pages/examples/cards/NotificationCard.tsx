@@ -13,40 +13,60 @@ import { memo } from "react"
 
 export const NotificationsCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline">
-      <CardHeader>
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
+      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
         <Heading size="md">Notifications</Heading>
-      </CardHeader>
-      <CardBody pt={0}>
+
         <Text color="muted">Choose what you want to be notified about.</Text>
-        <VStack gap={2}>
+      </CardHeader>
+
+      <CardBody>
+        <VStack gap="sm">
           <HStack
-            _hover={{ bg: ["gray.100", "gray.800"] }}
+            cursor="pointer"
+            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
             w="full"
             rounded="md"
-            p={4}
+            p="md"
           >
             <FontAwesomeIcon icon={faBell} size="xl" />
-            <VStack gap={1}>
+
+            <VStack gap="xs">
               <Text>Everything</Text>
               <Text color="muted">Email digest, mentions & all activity.</Text>
             </VStack>
           </HStack>
-          <HStack bg={["gray.100", "gray.800"]} w="full" rounded="md" p={4}>
+
+          <HStack
+            cursor="pointer"
+            bg={["blackAlpha.50", "whiteAlpha.50"]}
+            w="full"
+            rounded="md"
+            p="md"
+          >
             <FontAwesomeIcon icon={faUser} size="xl" />
-            <VStack gap={1}>
+
+            <VStack gap="xs">
               <Text>Available</Text>
               <Text color="muted">Only mentions and comments.</Text>
             </VStack>
           </HStack>
+
           <HStack
-            _hover={{ bg: ["gray.50", "gray.800"] }}
+            cursor="pointer"
+            _hover={{ bg: ["blackAlpha.50", "whiteAlpha.50"] }}
             w="full"
             rounded="md"
-            p={4}
+            p="md"
           >
             <FontAwesomeIcon icon={faEyeSlash} size="xl" />
-            <VStack gap={1}>
+
+            <VStack gap="xs">
               <Text>Ignoring</Text>
               <Text color="muted">Turn off all notifications.</Text>
             </VStack>

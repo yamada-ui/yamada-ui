@@ -5,35 +5,54 @@ import {
   CardHeader,
   Heading,
   Text,
-  VStack,
   Center,
+  CardBody,
+  Spacer,
 } from "@yamada-ui/react"
 import { memo } from "react"
 import { FaRegCircle, FaRegStar } from "react-icons/fa"
 
 export const GitHubCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline">
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
       <CardHeader>
-        <VStack gap={1}>
-          <Heading size="md">yamada-ui</Heading>
-          <Text color="muted">
-            React UI components of the Yamada, by the Yamada, for the Yamada
-            built with React and Emotion.
-          </Text>
-        </VStack>
-        <Button mb="3.5rem" leftIcon={<FaRegStar />}>
-          Star
-        </Button>
+        <Heading as="h2" size="md" lineClamp={1}>
+          yamada-ui
+        </Heading>
+
+        <Spacer />
+
+        <Button leftIcon={<FaRegStar />}>Star</Button>
       </CardHeader>
-      <CardFooter mt="sm">
-        <Text as={Center} gap={1} color="muted">
+
+      <CardBody>
+        <Text color="muted">
+          React UI components of the Yamada, by the Yamada, for the Yamada built
+          with React and Emotion.
+        </Text>
+      </CardBody>
+
+      <CardFooter
+        flexDirection={{ base: "row", sm: "column" }}
+        alignItems={{ base: "center", sm: "flex-start" }}
+        gap={{ base: "md", sm: "sm" }}
+      >
+        <Text as={Center} gap="xs" color="muted">
           <FaRegCircle /> TypeScript
         </Text>
-        <Text as={Center} gap={1} color="muted">
+
+        <Text as={Center} gap="xs" color="muted">
           <FaRegStar /> 400
         </Text>
-        <Text color="muted">Updated 26 March 2024</Text>
+
+        <Text color="muted" lineClamp={1}>
+          Updated 26 March 2024
+        </Text>
       </CardFooter>
     </Card>
   )

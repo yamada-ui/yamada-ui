@@ -12,12 +12,20 @@ import { memo } from "react"
 
 export const CookieSettingsCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline">
-      <CardHeader>
-        <Heading size="md">Cookie Settings</Heading>
-      </CardHeader>
-      <CardBody pt={0}>
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
+      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+        <Heading as="h2" size="md">
+          Cookie Settings
+        </Heading>
         <Text color="muted">Manage your cookie settings here.</Text>
+      </CardHeader>
+
+      <CardBody>
         <Switch defaultIsChecked isReverse>
           <Text>Strictly Necessary</Text>
           <Text color="muted">
@@ -25,6 +33,7 @@ export const CookieSettingsCard = memo(() => {
             features.
           </Text>
         </Switch>
+
         <Switch isReverse>
           <Text>Functional Cookies</Text>
           <Text color="muted">
@@ -32,6 +41,7 @@ export const CookieSettingsCard = memo(() => {
             functionality.
           </Text>
         </Switch>
+
         <Switch isReverse>
           <Text>Performance Cookies</Text>
           <Text color="muted">
@@ -39,8 +49,9 @@ export const CookieSettingsCard = memo(() => {
           </Text>
         </Switch>
       </CardBody>
+
       <CardFooter>
-        <Button w="full" variant="outline">
+        <Button w="full" variant="outline" colorScheme="primary">
           Save Preferences
         </Button>
       </CardFooter>

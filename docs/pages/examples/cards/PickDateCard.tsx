@@ -4,10 +4,18 @@ import { memo } from "react"
 
 export const PickDateCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline">
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
       <CardHeader>
-        <Heading size="md">Pick a date</Heading>
+        <Heading as="h2" size="md">
+          Pick a date
+        </Heading>
       </CardHeader>
+
       <CardBody>
         <RangeDatePicker
           defaultValue={[

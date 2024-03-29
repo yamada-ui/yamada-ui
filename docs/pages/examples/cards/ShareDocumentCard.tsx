@@ -13,17 +13,33 @@ import { UserCard } from "./UserCard"
 
 export const ShareDocumentCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline">
-      <CardHeader>
-        <Heading size="md">Share this document</Heading>
-      </CardHeader>
-      <CardBody pt={0}>
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
+      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+        <Heading as="h2" size="md">
+          Share this document
+        </Heading>
         <Text color="muted">Anyone with the link can view this document.</Text>
-        <HStack w="full" gap={1}>
+      </CardHeader>
+
+      <CardBody>
+        <HStack
+          w="full"
+          gap="sm"
+          flexDirection={{ base: "row", sm: "column" }}
+          alignItems={{ base: "center", sm: "stretch" }}
+        >
           <Input flex={1} defaultValue="https://example.com/link/to/document" />
+
           <Button>Copy Link</Button>
         </HStack>
+
         <Text>People with access</Text>
+
         <UserCard
           avatarSrc="https://avatars.githubusercontent.com/u/84060430?v=4"
           username="Hirotomo Yamada"

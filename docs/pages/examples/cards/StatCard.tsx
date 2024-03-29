@@ -10,7 +10,12 @@ import { memo } from "react"
 
 export const StatCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline">
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
       <CardBody>
         <Stat
           label="Total Downloads"
@@ -21,12 +26,27 @@ export const StatCard = memo(() => {
           mx="auto"
         />
       </CardBody>
-      <CardFooter>
-        <Button size="sm" colorScheme="primary">
-          Add to Watchlist
+
+      <CardFooter
+        flexDirection={{ base: "row", sm: "column" }}
+        gap={{ base: "md", sm: "sm" }}
+      >
+        <Button
+          size="sm"
+          colorScheme="primary"
+          w={{ base: undefined, sm: "full" }}
+        >
+          Add to Watch list
         </Button>
-        <Spacer />
-        <Button size="sm" colorScheme="primary" variant="outline">
+
+        <Spacer display={{ base: "block", sm: "none" }} />
+
+        <Button
+          size="sm"
+          colorScheme="primary"
+          variant="outline"
+          w={{ base: undefined, sm: "full" }}
+        >
           See Breakdown
         </Button>
       </CardFooter>

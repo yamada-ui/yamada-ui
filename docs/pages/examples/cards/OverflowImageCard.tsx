@@ -12,18 +12,22 @@ import { memo } from "react"
 
 export const OverflowImageCard = memo(() => {
   return (
-    <Card rounded="xl" variant="outline" h="xl">
+    <Card breakInside="avoid" rounded="xl" variant="outline" h="xl">
       <CardHeader
         h="md"
         overflow="hidden"
         as={Image}
         src="https://picsum.photos/400"
         objectFit="cover"
-        p={0}
+        p="0"
         roundedTop="xl"
       />
-      <CardBody gap={1}>
-        <Heading size="md">Yamada UI</Heading>
+
+      <CardBody gap="xs">
+        <Heading as="h2" size="md">
+          Yamada UI
+        </Heading>
+
         <Text color="muted">
           Yamada UI is a versatile React component library, unleashing the power
           of your application's animation and flexibility. It provides an
@@ -31,10 +35,14 @@ export const OverflowImageCard = memo(() => {
           application, bringing your ideas to life.
         </Text>
       </CardBody>
+
       <Divider />
-      <CardFooter backdropFilter="blur(10px)" roundedBottom="xl" pt={4}>
+
+      <CardFooter backdropFilter="blur(10px)" roundedBottom="xl" pt="md">
         <Text fontSize="sm">1.2k views</Text>
+
         <Divider orientation="vertical" />
+
         <Text fontSize="sm">1 hour ago</Text>
       </CardFooter>
     </Card>

@@ -18,6 +18,7 @@ import {
   Center,
   Autocomplete,
   AutocompleteOption,
+  Icon,
 } from "@yamada-ui/react"
 import type { FC, ReactNode } from "react"
 import { memo } from "react"
@@ -26,31 +27,44 @@ import { FaApple, FaCreditCard, FaPaypal } from "react-icons/fa"
 export const PaymentMethodCard = memo(() => {
   const CustomRadio: FC<
     ReturnType<UseRadioGroupReturn["getRadioProps"]> & { icon: ReactNode }
-  > = (props) => {
-    const { getInputProps, getIconProps } = useRadio(props)
+  > = ({ icon, value, ...rest }) => {
+    const { getInputProps, getIconProps } = useRadio({ value, ...rest })
 
     return (
       <Box as="label" w="full">
         <ui.input {...getInputProps()} />
 
         <Box
+          as={VStack}
           {...getIconProps()}
           cursor="pointer"
-          borderWidth="1px"
-          py="md"
-          px="lg"
+          py={{ base: "md", sm: "sm" }}
+          px={{ base: "lg", sm: "md" }}
           rounded="md"
-          as={VStack}
-          gap={1}
+          gap="xs"
+          borderWidth="3px"
+          borderColor={["blackAlpha.200", "whiteAlpha.100"]}
           _checked={{
-            borderColor: "primary",
+            borderColor: ["primary", "primary"],
           }}
           _hover={{
-            bg: ["gray.50", "gray.800"],
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
+            _checked: {
+              bg: ["transparent", "transparent"],
+            },
           }}
+          transitionProperty="background"
+          transitionDuration="slow"
         >
-          <Center>{props.icon}</Center>
-          <Center>{props.value}</Center>
+          <Center>{icon}</Center>
+
+          <Text
+            as="span"
+            textAlign="center"
+            fontSize={{ base: "md", sm: "xs" }}
+          >
+            {value}
+          </Text>
         </Box>
       </Box>
     )
@@ -79,33 +93,49 @@ export const PaymentMethodCard = memo(() => {
   const years = Array.from({ length: 10 }, (_, i) => currentYear + i)
 
   return (
-    <Card rounded="xl" variant="outline">
-      <CardHeader>
-        <Heading size="md">Payment method</Heading>
-      </CardHeader>
-      <CardBody pt={0}>
+    <Card
+      breakInside="avoid"
+      mb={{ base: "lg", sm: "md" }}
+      rounded="xl"
+      variant="outline"
+    >
+      <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
+        <Heading as="h2" size="md">
+          Payment method
+        </Heading>
+
         <Text color="muted">Add a new payment method to your account.</Text>
+      </CardHeader>
+
+      <CardBody>
         <HStack gap="sm" w="full" {...getContainerProps()}>
           <CustomRadio
             {...getRadioProps({ value: "Card" })}
-            icon={<FaCreditCard size={30} />}
+            icon={<Icon as={FaCreditCard} boxSize={{ base: "8", sm: "6" }} />}
           />
           <CustomRadio
             {...getRadioProps({ value: "Paypal" })}
-            icon={<FaPaypal size={30} />}
+            icon={<Icon as={FaPaypal} boxSize={{ base: "8", sm: "6" }} />}
           />
           <CustomRadio
             {...getRadioProps({ value: "Apple" })}
-            icon={<FaApple size={30} />}
+            icon={<Icon as={FaApple} boxSize={{ base: "8", sm: "6" }} />}
           />
         </HStack>
+
         <FormControl isRequired label="Name">
           <Input type="text" placeholder="First Last" />
         </FormControl>
+
         <FormControl isRequired label="Card number">
           <Input type="text" />
         </FormControl>
-        <HStack>
+
+        <HStack
+          w="full"
+          flexDirection={{ base: "row", sm: "column" }}
+          gap={{ base: "sm", sm: "md" }}
+        >
           <FormControl isRequired label="Expires">
             <Autocomplete placeholder="Month">
               {months.map((month) => (
@@ -115,6 +145,7 @@ export const PaymentMethodCard = memo(() => {
               ))}
             </Autocomplete>
           </FormControl>
+
           <FormControl isRequired label="Year">
             <Autocomplete placeholder="Year">
               {years.map((year) => (
@@ -124,13 +155,17 @@ export const PaymentMethodCard = memo(() => {
               ))}
             </Autocomplete>
           </FormControl>
+
           <FormControl isRequired label="CVC">
             <Input type="text" placeholder="CVC" />
           </FormControl>
         </HStack>
       </CardBody>
+
       <CardFooter>
-        <Button w="full">Continue</Button>
+        <Button w="full" colorScheme="primary">
+          Continue
+        </Button>
       </CardFooter>
     </Card>
   )

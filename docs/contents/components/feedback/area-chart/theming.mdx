@@ -1,0 +1,30 @@
+---
+title: AreaChart
+description: >-
+  `AreaChart` is a component for drawing area charts to compare multiple sets of
+  data.
+package_name: "@yamada-ui/charts"
+label: New
+with_description: true
+tab: Theming
+---
+
+## Theming
+
+The `AreaChart` is a [single part component](/styled-system/theming/component-styles#single-part-components).
+
+:::note
+`AreaChart` inherits the style from [LineChart](/components/feedback/line-chart).
+:::
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const AreaChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
+  baseStyle: {
+    area: {},
+  },
+})({ omit: ["line"] })
+```

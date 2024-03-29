@@ -1,0 +1,73 @@
+---
+title: RadarChart
+description: "`RadarChart`は、複数のデータを比較するためのレーダーチャートを描画するコンポーネントです。"
+package_name: "@yamada-ui/charts"
+label: New
+with_description: true
+tab: テーマ
+---
+
+## テーマ
+
+`RadarChart`は、[単一パーツのコンポーネント](/styled-system/theming/component-styles#単一パーツのコンポーネント)です。
+
+:::note
+`RadarChart`は、[LineChart](/components/feedback/line-chart)のスタイルを継承しています。
+:::
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
+  baseStyle: {
+    radar: {},
+    polarGrid: {
+      stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      strokeWidth: 1,
+    },
+    polarAngleAxis: {},
+    polarAngleAxisTick: {
+      "& > text": {
+        fill: ["blackAlpha.700", "whiteAlpha.600"],
+        fontSize: "xs",
+      },
+    },
+    polarRadiusAxis: {
+      "& > line": {
+        stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      },
+    },
+    polarRadiusAxisTick: {
+      "& > text": {
+        fill: ["blackAlpha.700", "whiteAlpha.600"],
+        fontSize: "xs",
+      },
+    },
+  },
+
+  sizes: {
+    sm: {
+      container: {
+        w: "full",
+      },
+    },
+    md: {
+      container: {
+        w: "full",
+      },
+    },
+    lg: {
+      container: {
+        w: "full",
+      },
+    },
+    full: {
+      container: {
+        w: "full",
+      },
+    },
+  },
+})({ omit: ["line", "grid"] })
+```

@@ -42,7 +42,7 @@ const LOCALE_DESC_MAP = {
       "## Theming",
       `The \`${componentName}\` is a [${
         isMulti ? "multi" : "single"
-      } part component](/styled-system/theming/component-style#${
+      } part component](/styled-system/theming/component-styles#${
         isMulti ? "multi" : "single"
       }-part-components).`,
     ]
@@ -72,7 +72,7 @@ const LOCALE_DESC_MAP = {
       "## テーマ",
       `\`${componentName}\`は、[${
         isMulti ? "複数" : "単一"
-      }パーツのコンポーネント](/styled-system/theming/component-style#${
+      }パーツのコンポーネント](/styled-system/theming/component-styles#${
         isMulti ? "複数" : "単一"
       }パーツのコンポーネント)です。`,
     ]

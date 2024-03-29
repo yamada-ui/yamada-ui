@@ -1,0 +1,248 @@
+---
+title: LineChart
+description: >-
+  `LineChart` is a component for drawing line charts to compare multiple sets of
+  data.
+package_name: "@yamada-ui/charts"
+label: New
+with_description: true
+tab: Props
+---
+
+## Props
+
+### LineChartProps
+
+<PropsCard
+  id="linechart-data"
+  name="data"
+  required
+  type="Dict[]"
+  description={"Chart data."}
+/>
+
+<PropsCard
+  id="linechart-datakey"
+  name="dataKey"
+  required
+  type="string"
+  description={"The key of a group of data which should be unique in an chart."}
+/>
+
+<PropsCard
+  id="linechart-series"
+  name="series"
+  required
+  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; })[]'
+  description={
+    "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
+  }
+/>
+
+<PropsCard
+  id="linechart-chartprops"
+  name="chartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `LineChart` component."}
+/>
+
+<PropsCard
+  id="linechart-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="linechart-connectnulls"
+  name="connectNulls"
+  type="boolean"
+  description={
+    "Determines whether points with `null` values should be connected."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="linechart-containerprops"
+  name="containerProps"
+  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  description={"Props passed down to recharts `ResponsiveContainer` component."}
+/>
+
+<PropsCard
+  id="linechart-curvetype"
+  name="curveType"
+  type="ChartCurveType"
+  description={"Type of the curve."}
+  defaultValue={"`monotone`"}
+/>
+
+<PropsCard
+  id="linechart-gridaxis"
+  name="gridAxis"
+  type="ChartAxisType"
+  description={"Specifies which lines should be displayed in the grid."}
+  defaultValue={"'x'"}
+/>
+
+<PropsCard
+  id="linechart-gridprops"
+  name="gridProps"
+  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  description={"Props passed down to recharts 'CartesianGrid' component."}
+/>
+
+<PropsCard
+  id="linechart-layouttype"
+  name="layoutType"
+  type="ChartLayoutType"
+  description={"Chart orientation."}
+  defaultValue={"'horizontal'"}
+/>
+
+<PropsCard
+  id="linechart-legendprops"
+  name="legendProps"
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  description={"Props passed down to recharts 'Legend' component."}
+/>
+
+<PropsCard
+  id="linechart-lineprops"
+  name="lineProps"
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
+  description={"Props for the lines."}
+/>
+
+<PropsCard
+  id="linechart-referencelineprops"
+  name="referenceLineProps"
+  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  description={"Reference lines that should be displayed on the chart."}
+/>
+
+<PropsCard
+  id="linechart-size"
+  name="size"
+  type='"sm" | "md" | "lg" | "full"'
+  description={"The size of the LineChart."}
+  defaultValue={"full"}
+/>
+
+<PropsCard
+  id="linechart-tickline"
+  name="tickLine"
+  type="ChartAxisType"
+  description={"The option is the configuration of tick lines."}
+  defaultValue={"'y'"}
+/>
+
+<PropsCard
+  id="linechart-tooltipanimationduration"
+  name="tooltipAnimationDuration"
+  type="number"
+  description={
+    "Specifies the duration of animation, the unit of this option is ms."
+  }
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="linechart-tooltipprops"
+  name="tooltipProps"
+  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  description={"Props passed down to recharts 'Tooltip' component."}
+/>
+
+<PropsCard
+  id="linechart-type"
+  name="type"
+  type="AreaChartType"
+  description={"Controls how chart areas are positioned relative to each other"}
+  defaultValue={"`default`"}
+/>
+
+<PropsCard
+  id="linechart-unit"
+  name="unit"
+  type="string"
+  description={"Unit displayed next to each tick in y-axis."}
+/>
+
+<PropsCard
+  id="linechart-valueformatter"
+  name="valueFormatter"
+  type="(value: number) => string"
+  description={"A function to format values on Y axis and inside the tooltip"}
+/>
+
+<PropsCard
+  id="linechart-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the LineChart."}
+/>
+
+<PropsCard
+  id="linechart-withactivedots"
+  name="withActiveDots"
+  type="boolean"
+  description={"Determines whether activeDots should be displayed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="linechart-withdots"
+  name="withDots"
+  type="boolean"
+  description={"Determines whether dots should be displayed."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="linechart-withlegend"
+  name="withLegend"
+  type="boolean"
+  description={"If `true`, legend is visible."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="linechart-withtooltip"
+  name="withTooltip"
+  type="boolean"
+  description={"If `true`, tooltip is visible."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="linechart-withxaxis"
+  name="withXAxis"
+  type="boolean"
+  description={"If `true`, X axis is visible."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="linechart-withyaxis"
+  name="withYAxis"
+  type="boolean"
+  description={"If `true`, Y axis is visible."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="linechart-xaxisprops"
+  name="xAxisProps"
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  description={"Props passed down to recharts 'XAxis' component."}
+/>
+
+<PropsCard
+  id="linechart-yaxisprops"
+  name="yAxisProps"
+  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  description={"Props passed down to recharts 'YAxis' component."}
+/>

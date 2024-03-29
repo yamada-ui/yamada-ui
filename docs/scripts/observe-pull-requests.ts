@@ -19,7 +19,6 @@ const DISCORD_USER_MAP: Record<string, string> = {
   illionillion: "1000629510078738432",
   koralle: "702799711404425246",
   "108yen": "281653488084189184",
-  umaidashi: "1001523961231839243",
   taroj1205: "631578250144907269",
   KenyaMasuko: "787761288088256512",
   nakayan5: "770535018040655873",

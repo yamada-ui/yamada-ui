@@ -143,7 +143,7 @@ Add `"type": "module"` to `package.json`.
 
 Change `"jsxImportSource"` in `tsconfig.json` to `"react"`.
 
-```json live=false title=tsconfig.json highlight={11}
+```json live=false title=tsconfig.json highlight={9}
 {
   "compilerOptions": {
     "target": "ESNext",
@@ -211,7 +211,7 @@ After installing Yamada UI, add `UIProvider`.
 ```tsx live=false title=client.tsx highlight={1,8,10}
 import { UIProvider } from "@yamada-ui/react"
 import { createRoot } from "react-dom/client"
-import { App } from "./app"
+import App from "./app"
 
 const domNode = document.getElementById("root")!
 const root = createRoot(domNode)

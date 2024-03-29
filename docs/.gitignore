@@ -9,8 +9,6 @@ node_modules
 build
 .vercel
 .contentlayer
-.theme
-.docs
 
 # misc
 .DS_Store

@@ -52,7 +52,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
         {...rest}
       >
         <HStack>
-          <Heading as="h2" size="lg">
+          <Heading as="h2" size="normal">
             Playground
           </Heading>
 

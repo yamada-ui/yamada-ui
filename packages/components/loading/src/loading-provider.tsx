@@ -358,14 +358,14 @@ const getOverlayStyle = (
   right: 0,
   bottom: 0,
   left: 0,
-  zIndex: 9999,
+  zIndex: "fallback(full, 9999)",
   bg:
     type === "fill"
       ? ["fallback(white, #fbfbfb)", "fallback(black, #141414)"]
       : "fallback(blackAlpha.600, rgba(0, 0, 0, 0.48))",
   w: "100vw",
   h: "100dvh",
-  p: "1rem",
+  p: "fallback(4, 1rem)",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -396,7 +396,7 @@ const ScreenComponent = memo(
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "0.5rem",
+      gap: "fallback(2, 0.5rem)",
     }
 
     useTimeout(onFinish, duration)
@@ -430,16 +430,16 @@ const PageComponent = memo(
     const css: CSSUIObject = {
       bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
       maxW: "24rem",
-      p: "1rem",
+      p: "fallback(4, 1rem)",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "0.5rem",
-      rounded: "0.375rem",
+      gap: "fallback(2, 0.5rem)",
+      rounded: "fallback(md, 0.375rem)",
       boxShadow: [
-        "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
-        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",
+        "fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))",
+        "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
       ],
     }
 
@@ -478,20 +478,20 @@ const BackgroundComponent = memo(
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: "fixed",
-      right: "1rem",
-      bottom: "1rem",
-      zIndex: 9999,
+      right: "fallback(4, 1rem)",
+      bottom: "fallback(4, 1rem)",
+      zIndex: "fallback(full, 9999)",
       bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
       maxW: "20rem",
-      p: "0.5rem",
+      p: "fallback(2, 0.5rem)",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      gap: "0.5rem",
-      rounded: "0.375rem",
+      gap: "fallback(2, 0.5rem)",
+      rounded: "fallback(md, 0.375rem)",
       boxShadow: [
-        "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25)",
-        "0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4)",
+        "fallback(3xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25))",
+        "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
       ],
     }
 

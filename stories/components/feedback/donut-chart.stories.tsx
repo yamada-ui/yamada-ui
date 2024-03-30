@@ -47,12 +47,13 @@ export const custom: Story = () => {
     data: data,
     withTooltip: true,
     fillOpacity: 1,
-    thickness: 20,
     paddingAngle: 0,
     startAngle: 0,
     endAngle: 360,
     strokeWidth: 1,
     tooltipAnimationDuration: 0,
+    innerRadius: 60,
+    outerRadius: 80,
     tooltipDataSource: "all",
   })
 
@@ -64,16 +65,6 @@ export const custom: Story = () => {
         <PropControl
           component="Slider"
           items={[
-            {
-              label: "Thickness",
-              value: props.thickness,
-              min: 1,
-              max: 50,
-              step: 1,
-              onChange: (value) => {
-                setProps((prev) => ({ ...prev, thickness: value }))
-              },
-            },
             {
               label: "Padding angle",
               value: props.paddingAngle,
@@ -141,6 +132,36 @@ export const custom: Story = () => {
 
         <VStack w="auto">
           <PropControl
+            component="Slider"
+            items={[
+              {
+                label: "Inner Radius",
+                value: props.innerRadius as number,
+                min: 0,
+                max: 100,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    innerRadius: value,
+                  }))
+                },
+              },
+              {
+                label: "Outer Radius",
+                value: props.outerRadius as number,
+                min: 80,
+                max: 180,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    outerRadius: value,
+                  }))
+                },
+              },
+            ]}
+          />
+
+          <PropControl
             component="Select"
             items={[
               {
@@ -178,5 +199,26 @@ export const custom: Story = () => {
         </VStack>
       </Wrap>
     </Wrap>
+  )
+}
+
+export const withSize: Story = () => {
+  const data: CellProps[] = useMemo(
+    () => [
+      { name: "USA", value: 400, color: "red.500" },
+      { name: "India", value: 300, color: "orange.500" },
+      { name: "Japan", value: 100, color: "blue.500" },
+      { name: "Other", value: 200, color: "gray.500" },
+    ],
+    [],
+  )
+
+  return (
+    <>
+      <DonutChart data={data} size="sm" />
+      <DonutChart data={data} size="md" />
+      <DonutChart data={data} size="lg" />
+      <DonutChart data={data} size="full" />
+    </>
   )
 }

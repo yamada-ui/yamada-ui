@@ -750,6 +750,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: string & {}
       variants: "solid" | "dashed" | "dotted" | (string & {})
     }
+    DonutChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     Drawer: {
       sizes: "xs" | "sm" | "md" | "lg" | "xl" | "full" | (string & {})
       variants: string & {}

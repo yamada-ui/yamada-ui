@@ -20,6 +20,7 @@ import { Container } from "./container"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
 import { Divider } from "./divider"
+import { DonutChart } from "./donut-chart"
 import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
@@ -96,6 +97,7 @@ export default {
   DatePicker,
   Dialog,
   Divider,
+  DonutChart,
   Drawer,
   Dropzone,
   Editable,

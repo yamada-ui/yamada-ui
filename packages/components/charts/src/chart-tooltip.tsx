@@ -3,7 +3,7 @@ import { cx, isArray, type Dict } from "@yamada-ui/utils"
 import { useTooltip } from "./use-chart"
 
 export type ChartTooltipProps = {
-  label: string
+  label: string | undefined
   payload: Dict[] | undefined
   valueFormatter?: (value: number) => string
   unit?: string
@@ -14,8 +14,15 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     const { styles } = useTooltip()
 
     const items = payload.map(
-      ({ color, name, value: valueProp } = {}, index) => {
+      ({ color: colorProp, name, value: valueProp, ...rest } = {}, index) => {
         let value: string
+        let color: string
+
+        if (colorProp) {
+          color = colorProp
+        } else {
+          color = rest.payload.color
+        }
 
         if (isArray(valueProp)) {
           value = valueProp
@@ -65,9 +72,11 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
         __css={styles.tooltip}
         {...rest}
       >
-        <ui.p className="ui-chart__tooltip-title" __css={styles.tooltipTitle}>
-          {label}
-        </ui.p>
+        {label ? (
+          <ui.p className="ui-chart__tooltip-title" __css={styles.tooltipTitle}>
+            {label}
+          </ui.p>
+        ) : null}
 
         <ui.div className="ui-chart__tooltip-list" __css={styles.tooltipList}>
           {items}

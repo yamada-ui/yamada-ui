@@ -15,6 +15,7 @@ import {
   Tooltip,
 } from "recharts"
 import { ChartTooltip } from "./chart-tooltip"
+import type { TooltipDataSourceType } from "./chart.types"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import {
@@ -31,6 +32,12 @@ type DonutChartOptions = {
    * @default true
    */
   withTooltip?: boolean
+  /**
+   * Determines which data is displayed in the tooltip.
+   *
+   * @default 'all'
+   */
+  tooltipDataSource?: TooltipDataSourceType
   /**
    * If `true`, legend is visible.
    *
@@ -66,8 +73,10 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     withTooltip = true,
     tooltipProps,
     tooltipAnimationDuration,
+    tooltipDataSource = "all",
     valueFormatter,
     unit,
+    strokeWidth,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -76,6 +85,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
       data,
       donutProps,
       chartProps,
+      strokeWidth,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })
@@ -121,11 +131,11 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
 
             {withTooltip ? (
               <Tooltip
-                content={({ label }) => (
+                content={({ label, payload }) => (
                   <ChartTooltip
                     className="ui-donut-chart__tooltip"
                     label={label}
-                    payload={data}
+                    payload={tooltipDataSource === "segment" ? payload : data}
                     valueFormatter={valueFormatter}
                     unit={unit}
                     {...computedTooltipProps}

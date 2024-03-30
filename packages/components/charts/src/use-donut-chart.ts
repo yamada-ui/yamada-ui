@@ -19,13 +19,13 @@ export type UseDonutChartOptions = {
    */
   data: CellProps[]
   /**
-   * Props for the donut.
-   */
-  donutProps?: Partial<DonutProps>
-  /**
    * Props passed down to recharts `DonutChart` component.
    */
   chartProps?: DonutChartProps
+  /**
+   * Props for the donut.
+   */
+  donutProps?: Partial<DonutProps>
   /**
    * Props for the cell.
    */
@@ -54,8 +54,8 @@ type UseDonutChartProps = UseDonutChartOptions & {
 
 export const useDonutChart = ({
   data,
-  strokeWidth = 0,
-  fillOpacity = 0.4,
+  strokeWidth = 1,
+  fillOpacity = 1,
   styles,
   ...rest
 }: UseDonutChartProps) => {

@@ -19,6 +19,7 @@ export type {
   ChartLayoutType,
   ChartAxisType,
   ChartTooltip,
+  TooltipDataSourceType,
   AreaChartType,
   BarChartType,
 } from "./chart.types"

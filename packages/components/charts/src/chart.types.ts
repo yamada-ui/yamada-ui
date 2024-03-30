@@ -32,6 +32,7 @@ export type ChartCurveType =
   | "step"
   | "stepBefore"
   | "stepAfter"
+export type TooltipDataSourceType = "segment" | "all"
 
 export type AreaChartProps = Merge<
   CSSUIProps,

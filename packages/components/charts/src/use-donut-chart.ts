@@ -11,7 +11,7 @@ import type {
   DonutProps,
   RequiredChartPropGetter,
 } from "./chart.types"
-import { pieChartProperties } from "./rechart-properties"
+import { pieChartProperties, pieProperties } from "./rechart-properties"
 
 export type UseDonutChartOptions = {
   /**
@@ -130,21 +130,33 @@ export const useDonutChart = ({
     [fillOpacity, cellColors],
   )
 
-  const [chartProps, donutChartClassName] = useMemo(() => {
-    return getComponentProps<Dict, string>(
-      [rest.chartProps ?? {}, pieChartProperties],
-      styles.chart,
-    )(theme)
-  }, [rest.chartProps, styles.chart, theme])
+  const [chartProps, chartClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.chartProps ?? {}, pieChartProperties],
+        styles.chart,
+      )(theme),
+    [rest.chartProps, styles.chart, theme],
+  )
+
+  const [donutProps, donutClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.donutProps ?? {}, pieProperties],
+        styles.donut,
+      )(theme),
+    [rest.donutProps, styles.donut, theme],
+  )
 
   const cellClassName = useMemo(() => {
     const resolvedCellProps = {
       fillOpacity: "var(--ui-fill-opacity)",
+      ...styles.cell,
       ...rest.cellProps,
     }
 
     return getClassName(resolvedCellProps)(theme)
-  }, [rest.cellProps, theme])
+  }, [rest.cellProps, styles.cell, theme])
 
   const cellPropList = useMemo(
     () =>
@@ -167,11 +179,11 @@ export const useDonutChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, donutChartClassName),
+      className: cx(className, chartClassName),
       ...props,
       ...chartProps,
     }),
-    [chartProps, donutChartClassName],
+    [chartProps, chartClassName],
   )
 
   const getDonutProps: ChartPropGetter<
@@ -179,8 +191,9 @@ export const useDonutChart = ({
     Partial<Recharts.PieProps>,
     Omit<Recharts.PieProps, "ref">
   > = useCallback(
-    (props, ref = null) => ({
+    ({ className, ...props } = {}, ref = null) => ({
       ref,
+      className: cx(className, donutClassName),
       dataKey: "value",
       data,
       outerRadius,
@@ -192,15 +205,16 @@ export const useDonutChart = ({
       label: withLabel,
       labelLine: withLabelsLine,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
-      ...rest,
+      ...donutProps,
     }),
     [
       data,
+      donutClassName,
+      donutProps,
       endAngle,
       innerRadius,
       outerRadius,
       paddingAngle,
-      rest,
       startAngle,
       withLabel,
       withLabelsLine,
@@ -222,10 +236,9 @@ export const useDonutChart = ({
         stroke: color,
         strokeWidth,
         ...(props as Recharts.CellProps),
-        ...rest,
       }
     },
-    [cellPropList, rest, strokeWidth],
+    [cellPropList, strokeWidth],
   )
 
   return {

@@ -3,7 +3,8 @@ import { LineChart } from "./line-chart"
 
 export const DonutChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
-    area: {},
+    donut: {},
+    cell: {},
   },
 
   sizes: {

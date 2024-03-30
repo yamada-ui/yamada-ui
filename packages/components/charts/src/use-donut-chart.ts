@@ -31,6 +31,18 @@ export type UseDonutChartOptions = {
    */
   cellProps?: Partial<CellProps>
   /**
+   * Determines whether each segment should have associated label.
+   *
+   * @default false
+   */
+  withLabel?: boolean
+  /**
+   * Determines whether segments labels should have lines that connect the segment with the label.
+   *
+   * @default false
+   */
+  withLabelsLine?: boolean
+  /**
    * Controls innerRadius of the chart segments.
    *
    * @default '60%'
@@ -84,6 +96,8 @@ type UseDonutChartProps = UseDonutChartOptions & {
 
 export const useDonutChart = ({
   data,
+  withLabel = false,
+  withLabelsLine = false,
   strokeWidth = 1,
   fillOpacity = 1,
   innerRadius = "60%",
@@ -175,10 +189,22 @@ export const useDonutChart = ({
       startAngle,
       endAngle,
       isAnimationActive: false,
+      label: withLabel,
+      labelLine: withLabelsLine,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
       ...rest,
     }),
-    [data, endAngle, innerRadius, outerRadius, paddingAngle, rest, startAngle],
+    [
+      data,
+      endAngle,
+      innerRadius,
+      outerRadius,
+      paddingAngle,
+      rest,
+      startAngle,
+      withLabel,
+      withLabelsLine,
+    ],
   )
 
   const getCellProps: RequiredChartPropGetter<

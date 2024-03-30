@@ -194,6 +194,24 @@ export const custom: Story = () => {
                     withTooltip: !prev.withTooltip,
                   })),
               },
+              {
+                label: "label",
+                isChecked: props.withLabel,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withLabel: !prev.withLabel,
+                  })),
+              },
+              {
+                label: "label line",
+                isChecked: props.withLabelsLine,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withLabelsLine: !prev.withLabelsLine,
+                  })),
+              },
             ]}
           />
         </VStack>

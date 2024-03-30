@@ -82,6 +82,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     paddingAngle,
     startAngle,
     endAngle,
+    withLabel,
+    withLabelsLine,
     strokeWidth,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -98,6 +100,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
       startAngle,
       endAngle,
       strokeWidth,
+      withLabel,
+      withLabelsLine,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })

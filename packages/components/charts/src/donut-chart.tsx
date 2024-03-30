@@ -69,6 +69,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     data,
     donutProps,
     chartProps,
+    cellProps,
     containerProps,
     withTooltip = true,
     tooltipProps,
@@ -76,6 +77,10 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     tooltipDataSource = "all",
     valueFormatter,
     unit,
+    thickness,
+    paddingAngle,
+    startAngle,
+    endAngle,
     strokeWidth,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -85,6 +90,11 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
       data,
       donutProps,
       chartProps,
+      cellProps,
+      thickness,
+      paddingAngle,
+      startAngle,
+      endAngle,
       strokeWidth,
       styles,
     })

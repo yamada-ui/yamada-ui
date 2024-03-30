@@ -5,7 +5,7 @@ import type {
   TooltipDataSourceType,
 } from "@yamada-ui/charts"
 import { DonutChart } from "@yamada-ui/charts"
-import { Wrap } from "@yamada-ui/react"
+import { VStack, Wrap } from "@yamada-ui/react"
 import { useMemo, useState } from "react"
 import { PropControl } from "../../components"
 
@@ -47,6 +47,10 @@ export const custom: Story = () => {
     data: data,
     withTooltip: true,
     fillOpacity: 1,
+    thickness: 20,
+    paddingAngle: 0,
+    startAngle: 0,
+    endAngle: 360,
     strokeWidth: 1,
     tooltipAnimationDuration: 0,
     tooltipDataSource: "all",
@@ -58,37 +62,26 @@ export const custom: Story = () => {
 
       <Wrap gap="md" alignItems="flex-start">
         <PropControl
-          component="Select"
-          items={[
-            {
-              label: "Tooltip data source",
-              defaultValue: "all",
-              items: [
-                { label: "all", value: "all" },
-                { label: "segment", value: "segment" },
-              ],
-              value: props.tooltipDataSource,
-              onChange: (value) => {
-                setProps((prev) => ({
-                  ...prev,
-                  tooltipDataSource: value as TooltipDataSourceType,
-                }))
-              },
-            },
-          ]}
-        />
-
-        <PropControl
           component="Slider"
           items={[
             {
-              label: "Fill opacity",
-              value: props.fillOpacity as number,
-              min: 0,
-              max: 1,
-              step: 0.1,
+              label: "Thickness",
+              value: props.thickness,
+              min: 1,
+              max: 50,
+              step: 1,
               onChange: (value) => {
-                setProps((prev) => ({ ...prev, fillOpacity: value }))
+                setProps((prev) => ({ ...prev, thickness: value }))
+              },
+            },
+            {
+              label: "Padding angle",
+              value: props.paddingAngle,
+              min: 0,
+              max: 30,
+              step: 1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, paddingAngle: value }))
               },
             },
             {
@@ -99,6 +92,36 @@ export const custom: Story = () => {
               step: 0.5,
               onChange: (value) => {
                 setProps((prev) => ({ ...prev, strokeWidth: value }))
+              },
+            },
+            {
+              label: "Start angle",
+              value: props.startAngle,
+              min: 0,
+              max: 180,
+              step: 1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, startAngle: value }))
+              },
+            },
+            {
+              label: "End angle",
+              value: props.endAngle,
+              min: 180,
+              max: 360,
+              step: 1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, endAngle: value }))
+              },
+            },
+            {
+              label: "Fill opacity",
+              value: props.fillOpacity as number,
+              min: 0,
+              max: 1,
+              step: 0.1,
+              onChange: (value) => {
+                setProps((prev) => ({ ...prev, fillOpacity: value }))
               },
             },
             {
@@ -116,20 +139,43 @@ export const custom: Story = () => {
           ]}
         />
 
-        <PropControl
-          component="Switch"
-          items={[
-            {
-              label: "tooltip",
-              isChecked: props.withTooltip,
-              onChange: () =>
-                setProps((prev) => ({
-                  ...prev,
-                  withTooltip: !prev.withTooltip,
-                })),
-            },
-          ]}
-        />
+        <VStack w="auto">
+          <PropControl
+            component="Select"
+            items={[
+              {
+                label: "Tooltip data source",
+                defaultValue: "all",
+                items: [
+                  { label: "all", value: "all" },
+                  { label: "segment", value: "segment" },
+                ],
+                value: props.tooltipDataSource,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    tooltipDataSource: value as TooltipDataSourceType,
+                  }))
+                },
+              },
+            ]}
+          />
+
+          <PropControl
+            component="Switch"
+            items={[
+              {
+                label: "tooltip",
+                isChecked: props.withTooltip,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withTooltip: !prev.withTooltip,
+                  })),
+              },
+            ]}
+          />
+        </VStack>
       </Wrap>
     </Wrap>
   )

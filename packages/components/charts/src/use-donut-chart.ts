@@ -31,11 +31,35 @@ export type UseDonutChartOptions = {
    */
   cellProps?: Partial<CellProps>
   /**
+   * Controls thickness of the chart segments.
+   *
+   * @default 20
+   */
+  thickness?: number
+  /**
+   * Controls padding between segments.
+   *
+   * @default 0
+   */
+  paddingAngle?: number
+  /**
    * Stroke width for the chart donuts.
    *
    * @default 0
    */
   strokeWidth?: number
+  /**
+   * Controls angle at which chart starts.
+   *
+   * @default 0
+   */
+  startAngle?: number
+  /**
+   * Controls angle at which chart ends.
+   *
+   * @default 360
+   */
+  endAngle?: number
   /**
    * Controls fill opacity of all donuts.
    *
@@ -56,6 +80,10 @@ export const useDonutChart = ({
   data,
   strokeWidth = 1,
   fillOpacity = 1,
+  thickness = 20,
+  paddingAngle = 0,
+  startAngle = 0,
+  endAngle = 360,
   styles,
   ...rest
 }: UseDonutChartProps) => {
@@ -135,12 +163,15 @@ export const useDonutChart = ({
       dataKey: "value",
       data,
       outerRadius: 80,
-      innerRadius: 80 - 20,
+      innerRadius: 80 - thickness,
+      paddingAngle,
+      startAngle,
+      endAngle,
       isAnimationActive: false,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
       ...rest,
     }),
-    [data, rest],
+    [data, endAngle, paddingAngle, rest, startAngle, thickness],
   )
 
   const getCellProps: RequiredChartPropGetter<

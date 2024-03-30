@@ -49,6 +49,10 @@ export type RadarChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.RadarChart>
 >
+export type DonutChartProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof Recharts.PieChart>
+>
 export type ReferenceLineProps = Merge<CSSUIProps, Recharts.ReferenceLineProps>
 export type ResponsiveContainerProps = Merge<
   CSSUIProps,

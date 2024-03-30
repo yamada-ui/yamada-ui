@@ -1,14 +1,19 @@
-import { Center, Text } from "@yamada-ui/react"
+import { VStack } from "@yamada-ui/react"
 import { memo } from "react"
+import { Editor } from "./editor"
+import { Footer } from "./footer"
+import { Header } from "./header"
 // import { useI18n } from "contexts/i18n-context"
 
 export const Playground = memo(() => {
   // const { t } = useI18n()
 
   return (
-    <Center minH="lg">
-      <Text color="muted">Coming soon!</Text>
-    </Center>
+    <VStack gap="0">
+      <Header />
+      <Editor />
+      <Footer />
+    </VStack>
   )
 })
 

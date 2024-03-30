@@ -63,7 +63,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     donutProps,
     chartProps,
     containerProps,
-    withTooltip = false,
+    withTooltip = true,
     tooltipProps,
     tooltipAnimationDuration,
     valueFormatter,
@@ -108,12 +108,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
         var={[...donutVars, ...tooltipVars]}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
-        width="100%"
-        height="100%"
       >
         <ResponsiveContainer
-          width="100%"
-          height={400}
           {...getContainerProps({ className: "ui-donut-chart__container" })}
         >
           <RechartsDonutChart
@@ -125,11 +121,11 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
 
             {withTooltip ? (
               <Tooltip
-                content={({ label, payload }) => (
+                content={({ label }) => (
                   <ChartTooltip
-                    className="ui-line-chart__tooltip"
+                    className="ui-donut-chart__tooltip"
                     label={label}
-                    payload={payload}
+                    payload={data}
                     valueFormatter={valueFormatter}
                     unit={unit}
                     {...computedTooltipProps}

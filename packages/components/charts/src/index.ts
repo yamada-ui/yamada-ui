@@ -13,6 +13,7 @@ export type {
   AreaProps,
   LineProps,
   RadarProps,
+  CellProps,
   DotProps,
   ChartCurveType,
   ChartLayoutType,

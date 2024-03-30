@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { CellProps } from "@yamada-ui/charts"
 import { DonutChart } from "@yamada-ui/charts"
-import type { CellProps } from "@yamada-ui/charts/src/chart.types"
 
 type Story = StoryFn<typeof DonutChart>
 

@@ -5,4 +5,27 @@ export const DonutChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     area: {},
   },
-})({ omit: ["line"] })
+
+  sizes: {
+    sm: {
+      container: {
+        w: "full",
+      },
+    },
+    md: {
+      container: {
+        w: "full",
+      },
+    },
+    lg: {
+      container: {
+        w: "full",
+      },
+    },
+    full: {
+      container: {
+        w: "full",
+      },
+    },
+  },
+})({ omit: ["line", "grid"] })

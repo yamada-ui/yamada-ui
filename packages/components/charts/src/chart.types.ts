@@ -97,6 +97,20 @@ export type RadarProps = Merge<
     dimRadar?: Partial<RadarProps>
   }
 >
+export type DonutProps = Merge<
+  Merge<CSSUIProps, Recharts.PieProps>,
+  {
+    color: CSSUIProps["color"]
+    dimDonut?: Partial<DonutProps>
+  }
+>
+export type CellProps = Merge<
+  CSSUIProps,
+  {
+    name: string
+    value: number
+  }
+>
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>
 export type XAxisProps = Merge<
   Merge<CSSUIProps, Recharts.XAxisProps>,

@@ -1,10 +1,49 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
-import { useState } from "react"
+import { useTheme, type CSSUIObject, type CSSUIProps } from "@yamada-ui/core"
+import { cx, type Dict } from "@yamada-ui/utils"
+import type { ComponentPropsWithoutRef } from "react"
+import { useCallback, useMemo } from "react"
+import type * as Recharts from "recharts"
+import { getClassName, getComponentProps } from "./chart-utils"
+import type {
+  CellProps,
+  ChartPropGetter,
+  DonutChartProps,
+  DonutProps,
+  RequiredChartPropGetter,
+} from "./chart.types"
+import { pieChartProperties } from "./rechart-properties"
 
 export type UseDonutChartOptions = {
   /**
-   * A function to format values on Y axis and inside the tooltip.
+   * Chart data.
+   */
+  data: CellProps[]
+  /**
+   * Props for the donut.
+   */
+  donutProps?: Partial<DonutProps>
+  /**
+   * Props passed down to recharts `DonutChart` component.
+   */
+  chartProps?: DonutChartProps
+  /**
+   * Props for the cell.
+   */
+  cellProps?: Partial<CellProps>
+  /**
+   * Stroke width for the chart donuts.
+   *
+   * @default 0
+   */
+  strokeWidth?: number
+  /**
+   * Controls fill opacity of all donuts.
+   *
+   * @default 1
+   */
+  fillOpacity?: number | [number, number]
+  /**
+   * A function to format values inside the tooltip.
    */
   valueFormatter?: (value: number) => string
 }
@@ -13,12 +52,124 @@ type UseDonutChartProps = UseDonutChartOptions & {
   styles: Dict<CSSUIObject>
 }
 
-export const useDonutChart = ({}: UseDonutChartProps) => {
-  //TODO: replace
-  const [, setHighlightedArea] = useState<string | null>(null)
-  // const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+export const useDonutChart = ({
+  data,
+  strokeWidth = 0,
+  fillOpacity = 0.4,
+  styles,
+  ...rest
+}: UseDonutChartProps) => {
+  const { theme } = useTheme()
+
+  const cellColors: CSSUIProps["var"] = useMemo(
+    () =>
+      data.map(({ color }, index) => ({
+        __prefix: "ui",
+        name: `cell-${index}`,
+        token: "colors",
+        value: color ?? "transparent",
+      })),
+    [data],
+  )
+
+  const donutVars: CSSUIProps["var"] = useMemo(
+    () =>
+      [
+        ...cellColors,
+        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+      ] as Required<CSSUIProps>["var"],
+    [fillOpacity, cellColors],
+  )
+
+  const [chartProps, donutChartClassName] = useMemo(() => {
+    return getComponentProps<Dict, string>(
+      [rest.chartProps ?? {}, pieChartProperties],
+      styles.chart,
+    )(theme)
+  }, [rest.chartProps, styles.chart, theme])
+
+  const cellClassName = useMemo(() => {
+    const resolvedCellProps = {
+      fillOpacity: "var(--ui-fill-opacity)",
+      ...rest.cellProps,
+    }
+
+    return getClassName(resolvedCellProps)(theme)
+  }, [rest.cellProps, theme])
+
+  const cellPropList = useMemo(
+    () =>
+      data.map((props, index) => {
+        const color = `var(--ui-cell-${index})`
+        const className = getClassName({ cellClassName, ...props })(theme)
+
+        return {
+          color,
+          className,
+        }
+      }),
+    [cellClassName, data, theme],
+  )
+
+  const getDonutChartProps: ChartPropGetter<
+    "div",
+    ComponentPropsWithoutRef<typeof Recharts.PieChart>,
+    ComponentPropsWithoutRef<typeof Recharts.PieChart>
+  > = useCallback(
+    ({ className, ...props } = {}, ref = null) => ({
+      ref,
+      className: cx(className, donutChartClassName),
+      ...props,
+      ...chartProps,
+    }),
+    [chartProps, donutChartClassName],
+  )
+
+  const getDonutProps: ChartPropGetter<
+    "div",
+    Partial<Recharts.PieProps>,
+    Omit<Recharts.PieProps, "ref">
+  > = useCallback(
+    (props, ref = null) => ({
+      ref,
+      dataKey: "value",
+      data,
+      outerRadius: 80,
+      innerRadius: 80 - 20,
+      isAnimationActive: false,
+      ...(props as Omit<Recharts.PieProps, "dataKey">),
+      ...rest,
+    }),
+    [data, rest],
+  )
+
+  const getCellProps: RequiredChartPropGetter<
+    "div",
+    Omit<Recharts.CellProps, "ref"> & { index: number },
+    Omit<Recharts.CellProps, "ref">
+  > = useCallback(
+    ({ index, className: classNameProp, ...props }, ref = null) => {
+      const { className, color } = cellPropList[index]
+
+      return {
+        ref,
+        className: cx(classNameProp, className),
+        fill: color,
+        stroke: color,
+        strokeWidth,
+        ...(props as Recharts.CellProps),
+        ...rest,
+      }
+    },
+    [cellPropList, rest, strokeWidth],
+  )
 
   return {
-    setHighlightedArea,
+    donutVars,
+    getDonutProps,
+    getDonutChartProps,
+    getCellProps,
   }
 }
+
+export type UseDonutChartReturn = ReturnType<typeof useDonutChart>

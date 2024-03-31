@@ -202,7 +202,8 @@ export const useDonutChart = ({
       startAngle,
       endAngle,
       isAnimationActive: false,
-      label: withLabel,
+      //BUG: label and labelLine className is not applied.
+      label: withLabel ? { fillOpacity: 1 } : false,
       labelLine: withLabelsLine,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
       ...donutProps,

@@ -1,7 +1,5 @@
 ---
-"@yamada-ui/charts": patch
-"@yamada-ui/theme": patch
-"@yamada-ui/core": patch
+"@yamada-ui/charts": minor
 ---
 
 added `DonutChart`

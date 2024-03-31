@@ -48,6 +48,34 @@ const SLUGS = [
 
 type Slug = (typeof SLUGS)[number]
 
+type Paths = GetStaticPathsResult["paths"]
+
+const generatePaths = (slug: Slug): Paths =>
+  CONSTANT.I18N.LOCALES.map(({ value }) => ({
+    params: { slug },
+    locale: value,
+  }))
+
+export const getStaticPaths = async ({}: GetStaticPathsContext) => {
+  const paths: Paths = SLUGS.flatMap((slug) => generatePaths(slug))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps = async ({
+  locale,
+  params,
+}: GetStaticPropsContext) => {
+  const {
+    props: { documentTree },
+  } = await getStaticCommonProps({ locale })
+  const slug = params.slug as Slug
+
+  const props = { documentTree, slug }
+
+  return { props }
+}
+
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
 const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
@@ -174,31 +202,3 @@ const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
 }
 
 export default Page
-
-type Paths = GetStaticPathsResult["paths"]
-
-const generatePaths = (slug: Slug): Paths =>
-  CONSTANT.I18N.LOCALES.map(({ value }) => ({
-    params: { slug },
-    locale: value,
-  }))
-
-export const getStaticPaths = async ({}: GetStaticPathsContext) => {
-  const paths: Paths = SLUGS.flatMap((slug) => generatePaths(slug))
-
-  return { paths, fallback: false }
-}
-
-export const getStaticProps = async ({
-  locale,
-  params,
-}: GetStaticPropsContext) => {
-  const {
-    props: { documentTree },
-  } = await getStaticCommonProps({ locale })
-  const slug = params.slug as Slug
-
-  const props = { documentTree, slug }
-
-  return { props }
-}

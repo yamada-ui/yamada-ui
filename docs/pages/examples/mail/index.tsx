@@ -27,7 +27,7 @@ export const Mail = memo(() => {
   console.log(selectedTab)
 
   return (
-    <Resizable>
+    <Resizable maxH="3xl">
       <ResizableItem
         as={Box}
         defaultSize={17}
@@ -35,6 +35,7 @@ export const Mail = memo(() => {
         collapsible
         minSize={15}
         maxSize={22}
+        overflow="hidden"
         onCollapse={() => {
           on()
         }}
@@ -49,7 +50,7 @@ export const Mail = memo(() => {
         />
       </ResizableItem>
       <ResizableTrigger icon={<ResizableTriggerIcon />} />
-      <ResizableItem as={Box} defaultSize={30} minSize={28}>
+      <ResizableItem as={Box} defaultSize={30} minSize={28} overflow="hidden">
         <MailInbox
           mails={mails}
           selectedMail={selectedMail}
@@ -57,7 +58,7 @@ export const Mail = memo(() => {
         />
       </ResizableItem>
       <ResizableTrigger icon={<ResizableTriggerIcon />} />
-      <ResizableItem as={Box}>
+      <ResizableItem as={Box} minSize={40} overflow="hidden">
         <MailDetail mail={selectedMail} />
       </ResizableItem>
     </Resizable>

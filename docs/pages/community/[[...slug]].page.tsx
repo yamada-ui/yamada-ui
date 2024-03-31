@@ -5,6 +5,10 @@ import { PageProvider } from "contexts/page-context"
 import { DocumentLayout } from "layouts/document-layout"
 import { getStaticDocumentPaths, getStaticDocumentProps } from "utils/next"
 
+export const getStaticPaths = getStaticDocumentPaths("Community")
+
+export const getStaticProps = getStaticDocumentProps("Community")
+
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
 const Page: NextPage<PageProps> = ({ body, data, ...rest }) => {
@@ -20,7 +24,3 @@ const Page: NextPage<PageProps> = ({ body, data, ...rest }) => {
 }
 
 export default Page
-
-export const getStaticPaths = getStaticDocumentPaths("Community")
-
-export const getStaticProps = getStaticDocumentProps("Community")

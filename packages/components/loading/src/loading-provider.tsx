@@ -358,7 +358,7 @@ const getOverlayStyle = (
   right: 0,
   bottom: 0,
   left: 0,
-  zIndex: "fallback(full, 9999)",
+  zIndex: "fallback(beerus, 9999)",
   bg:
     type === "fill"
       ? ["fallback(white, #fbfbfb)", "fallback(black, #141414)"]
@@ -480,7 +480,7 @@ const BackgroundComponent = memo(
       position: "fixed",
       right: "fallback(4, 1rem)",
       bottom: "fallback(4, 1rem)",
-      zIndex: "fallback(full, 9999)",
+      zIndex: "fallback(beerus, 9999)",
       bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
       maxW: "20rem",
       p: "fallback(2, 0.5rem)",

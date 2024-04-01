@@ -8,6 +8,7 @@ import {
   IconButton,
   Spacer,
   Text,
+  Tooltip,
   VStack,
 } from "@yamada-ui/react"
 import { type Dispatch, type FC, type SetStateAction, memo } from "react"
@@ -79,11 +80,16 @@ const MailSidebarItem: FC<MailSidebarItemProps> = memo(
         justifyContent={!isCollapse && "space-between"}
       >
         {isCollapse ? (
-          <IconButton
-            variant={isSelected ? "solid" : "ghost"}
-            colorScheme={isSelected ? "primary" : "gray"}
-            icon={<FontAwesomeIcon icon={item.icon} size="lg" />}
-          />
+          <Tooltip
+            placement="right"
+            label={`${item.title} ${item.num && item.num > 0 ? item.num : ""}`}
+          >
+            <IconButton
+              variant={isSelected ? "solid" : "ghost"}
+              colorScheme={isSelected ? "primary" : "gray"}
+              icon={<FontAwesomeIcon icon={item.icon} size="lg" />}
+            />
+          </Tooltip>
         ) : (
           <Button
             w="full"

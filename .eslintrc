@@ -115,7 +115,8 @@
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "rules": {
-        "testing-library/prefer-query-by-disappearance": "error"
+        "testing-library/prefer-query-by-disappearance": "error",
+        "testing-library/no-dom-import": "error"
       }
     }
   ]

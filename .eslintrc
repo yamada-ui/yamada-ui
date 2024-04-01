@@ -111,6 +111,12 @@
       "rules": {
         "vitest/require-hook": "error"
       }
+    },
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "rules": {
+        "testing-library/prefer-query-by-disappearance": "error"
+      }
     }
   ]
 }

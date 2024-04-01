@@ -2,12 +2,10 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
   Badge,
-  Box,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Flex,
   HStack,
   Heading,
   Input,
@@ -17,6 +15,7 @@ import {
   SegmentedControlButton,
   Spacer,
   Text,
+  VStack,
   ui,
 } from "@yamada-ui/react"
 import {
@@ -40,9 +39,9 @@ export const MailInbox: FC<Props> = memo(
   ({ mails, selectedMail, setSelectedMail }) => {
     const [mode, changeMode] = useState<string>("all")
     return (
-      <Box>
+      <VStack gap={0}>
         <MailHeader>
-          <Flex w="full" alignItems="center">
+          <HStack w="full">
             <Text fontSize="lg" fontWeight="bold">
               Inbox
             </Text>
@@ -55,16 +54,16 @@ export const MailInbox: FC<Props> = memo(
                 Unread
               </SegmentedControlButton>
             </SegmentedControl>
-          </Flex>
+          </HStack>
         </MailHeader>
-        <Box px="sm" pt="sm">
+        <VStack p="sm">
           <InputGroup>
             <InputLeftElement>
               <FontAwesomeIcon icon={faSearch} />
             </InputLeftElement>
             <Input placeholder="Search" />
           </InputGroup>
-          <Flex direction="column" gap="sm" mt="sm" h="2xl" overflowY="scroll">
+          <VStack gap="sm" h="2xl" overflowY="scroll">
             {mails.map((mail: MailType) => {
               if (mode === "unread" && !mail.unRead) {
                 return null
@@ -78,9 +77,9 @@ export const MailInbox: FC<Props> = memo(
                 />
               )
             })}
-          </Flex>
-        </Box>
-      </Box>
+          </VStack>
+        </VStack>
+      </VStack>
     )
   },
 )

@@ -1,7 +1,6 @@
 import { faCloud } from "@fortawesome/free-solid-svg-icons"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
-  Box,
   Button,
   Center,
   Divider,
@@ -9,6 +8,7 @@ import {
   IconButton,
   Spacer,
   Text,
+  VStack,
 } from "@yamada-ui/react"
 import { type Dispatch, type FC, type SetStateAction, memo } from "react"
 import { MailHeader } from "./MailHeader"
@@ -23,7 +23,7 @@ type Props = {
 export const MailSidebar: FC<Props> = memo(
   ({ isCollapse, selectedTab, setSelectedTab }) => {
     return (
-      <Box>
+      <VStack gap={0}>
         <MailHeader isCenter={!isCollapse}>
           <Center>
             <HStack>
@@ -55,7 +55,7 @@ export const MailSidebar: FC<Props> = memo(
             setSelectedTab={setSelectedTab}
           />
         ))}
-      </Box>
+      </VStack>
     )
   },
 )
@@ -72,7 +72,7 @@ const MailSidebarItem: FC<MailSidebarItemProps> = memo(
   ({ isCollapse, item, isSelected, setSelectedTab }) => {
     console.log(isSelected, item.title)
     return (
-      <Box
+      <HStack
         as={Center}
         h={12}
         p="sm"
@@ -97,13 +97,13 @@ const MailSidebarItem: FC<MailSidebarItemProps> = memo(
             </Text>
             <Spacer />
             {item.num && item.num > 0 && (
-              <Text fontSize="sm" fontWeight="bolder">
+              <Text fontSize="sm" fontWeight="semibold">
                 {item.num}
               </Text>
             )}
           </Button>
         )}
-      </Box>
+      </HStack>
     )
   },
 )

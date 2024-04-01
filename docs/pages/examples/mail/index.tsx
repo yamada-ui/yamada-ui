@@ -27,7 +27,7 @@ export const Mail = memo(() => {
   console.log(selectedTab)
 
   return (
-    <Resizable maxH="3xl">
+    <Resizable h="3xl">
       <ResizableItem
         as={Box}
         defaultSize={17}

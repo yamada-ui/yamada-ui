@@ -11,7 +11,6 @@ import {
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
   Avatar,
-  Box,
   Button,
   Divider,
   Flex,
@@ -36,7 +35,7 @@ type Props = {
 
 export const MailDetail: FC<Props> = memo(({ mail }) => {
   return (
-    <Box>
+    <VStack gap={0} h="full">
       <MailHeader>
         <Flex h={8} w="full" gap={1} justifyContent="start" alignItems="center">
           <MailDetailHeaderIcon icon={faBoxArchive} label="Archive" />
@@ -52,49 +51,46 @@ export const MailDetail: FC<Props> = memo(({ mail }) => {
           <MailDetailHeaderIcon icon={faEllipsisVertical} />
         </Flex>
       </MailHeader>
-      <Flex direction="column" gap="md">
-        <Flex pt="md" px="md" gap={3}>
-          <Avatar name={mail.authorName} size="md" />
-          <VStack gap="xs">
-            <Text fontSize="sm" fontWeight="bolder">
-              {mail.authorName}
-            </Text>
-            <Text fontSize="xs" color="muted">
-              {mail.title}
-            </Text>
-            <Text fontSize="xs">
-              <ui.span fontWeight="bolder">Reply-To</ui.span>: {mail.email}
-            </Text>
-          </VStack>
-          <Spacer />
-          <Text textWrap="nowrap" color="muted" fontSize="xs">
-            {timestamp2date(mail.timestamp)}
+      <HStack p="md" gap={3} align="start">
+        <Avatar name={mail.authorName} size="md" />
+        <VStack gap="xs">
+          <Text fontSize="sm" fontWeight="bolder">
+            {mail.authorName}
           </Text>
-        </Flex>
-        <Divider />
-        <Box flex={1} px="md">
-          <Text>{mail.content}</Text>
-        </Box>
-        <Box>
-          <Divider />
-          <Box p="md">
-            <Textarea
-              placeholder={`Reply ${mail.authorName}`}
-              fontSize="sm"
-              autosize
-              minRows={3}
-              maxRows={6}
-            />
-          </Box>
-          <HStack px="md" pb="md">
-            <Switch>Mute this thread</Switch>
-            <Button size="sm" colorScheme="primary">
-              Send
-            </Button>
-          </HStack>
-        </Box>
-      </Flex>
-    </Box>
+          <Text fontSize="xs" color="muted">
+            {mail.title}
+          </Text>
+          <Text fontSize="xs">
+            <ui.span fontWeight="bolder">Reply-To</ui.span>: {mail.email}
+          </Text>
+        </VStack>
+        <Spacer />
+        <Text textWrap="nowrap" color="muted" fontSize="xs">
+          {timestamp2date(mail.timestamp)}
+        </Text>
+      </HStack>
+      <Divider />
+      <VStack p="md">
+        <Text>{mail.content}</Text>
+      </VStack>
+      <Spacer />
+      <Divider />
+      <VStack p="md">
+        <Textarea
+          placeholder={`Reply ${mail.authorName}`}
+          fontSize="sm"
+          autosize
+          minRows={3}
+          maxRows={6}
+        />
+      </VStack>
+      <HStack px="md" pb="md">
+        <Switch>Mute this thread</Switch>
+        <Button size="sm" colorScheme="primary">
+          Send
+        </Button>
+      </HStack>
+    </VStack>
   )
 })
 

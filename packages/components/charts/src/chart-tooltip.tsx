@@ -15,14 +15,8 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
 
     const items = payload.map(
       ({ color: colorProp, name, value: valueProp, ...rest } = {}, index) => {
+        const color = colorProp ?? rest.payload.color
         let value: string
-        let color: string
-
-        if (colorProp) {
-          color = colorProp
-        } else {
-          color = rest.payload.color
-        }
 
         if (isArray(valueProp)) {
           value = valueProp

@@ -39,9 +39,7 @@ type DonutChartOptions = {
    */
   tooltipDataSource?: TooltipDataSourceType
   /**
-   * If `true`, legend is visible.
-   *
-   * @default false
+   * A function to format values inside the tooltip
    */
   valueFormatter?: (value: number) => string
   /**

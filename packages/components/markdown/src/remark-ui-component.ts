@@ -1,4 +1,4 @@
-import type { Status as AlertStatus } from "@yamada-ui/alert/src/alert"
+import type { AlertStatus } from "@yamada-ui/core"
 import type { Parent as HastParent } from "hast"
 import type { Break, Paragraph, PhrasingContent, Root } from "mdast"
 import type { ElementContent } from "react-markdown/lib"

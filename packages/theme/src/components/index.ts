@@ -47,7 +47,6 @@ import { NativeTable } from "./native-table"
 import { NumberInput } from "./number-input"
 import { Pagination } from "./pagination"
 import { PagingTable } from "./paging-table"
-import { PieChart } from "./pie-chart"
 import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
 import { Progress } from "./progress"
@@ -124,7 +123,6 @@ export default {
   NumberInput,
   Pagination,
   PagingTable,
-  PieChart,
   PinInput,
   Popover,
   Progress,

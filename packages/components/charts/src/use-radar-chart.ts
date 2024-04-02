@@ -43,7 +43,7 @@ export type UseRadarChartOptions = {
   /**
    * Props passed down to recharts `RadarChart` component.
    */
-  radarChartProps?: RadarChartProps
+  chartProps?: RadarChartProps
   /**
    * Props passed down to recharts `PolarGrid` component.
    */
@@ -158,7 +158,7 @@ export const useRadarChart = ({
   )
 
   // FIXME: replace className.
-  const [radarChartProps, radarChartClassName] = useMemo(() => {
+  const [chartProps, radarChartClassName] = useMemo(() => {
     const resolvedRadarChartProps = {
       "& .recharts-polar-grid-concentric-polygon": { ...styles.polarGrid },
       "& .recharts-polar-grid-concentric-circle": { ...styles.polarGrid },
@@ -172,7 +172,7 @@ export const useRadarChart = ({
         ...polarRadiusAxisStyles,
       },
       "& .recharts-polar-radius-axis-tick": { ...styles.polarRadiusAxisTick },
-      ...rest.radarChartProps,
+      ...rest.chartProps,
     }
 
     return getComponentProps<Dict, string>(
@@ -182,7 +182,7 @@ export const useRadarChart = ({
   }, [
     polarAngleAxisStyles,
     polarRadiusAxisStyles,
-    rest.radarChartProps,
+    rest.chartProps,
     styles.chart,
     styles.polarAngleAxis,
     styles.polarAngleAxisTick,
@@ -384,9 +384,9 @@ export const useRadarChart = ({
       className: cx(className, radarChartClassName),
       data,
       ...props,
-      ...radarChartProps,
+      ...chartProps,
     }),
-    [data, radarChartClassName, radarChartProps],
+    [data, radarChartClassName, chartProps],
   )
 
   const getRadarProps: RequiredChartPropGetter<

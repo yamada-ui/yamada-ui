@@ -17,7 +17,7 @@ export type NoticeProviderProps = Omit<
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
-  gap = "1rem",
+  gap = "fallback(4, 1rem)",
   appendToParentPortal,
   containerRef,
 }) => {
@@ -43,7 +43,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 
     const css: CSSUIObject = {
       position: "fixed",
-      zIndex: 160,
+      zIndex: "fallback(zarbon, 160)",
       pointerEvents: "none",
       display: "flex",
       flexDirection: "column",

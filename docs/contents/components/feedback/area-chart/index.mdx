@@ -848,7 +848,7 @@ return (
 
 ### Synchronize
 
-To synchronize the behavior of the charts, set a common string for `chartProps.syncId` of each chart.
+To synchronize the behavior of the charts, set a common string for `syncId` of each chart.
 
 ```tsx functional=true
 const data = useMemo(
@@ -898,18 +898,8 @@ const series: AreaProps[] = useMemo(
 
 return (
   <VStack>
-    <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
-      chartProps={{ syncId: "syncId" }}
-    />
-    <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
-      chartProps={{ syncId: "syncId" }}
-    />
+    <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
+    <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
   </VStack>
 )
 ```

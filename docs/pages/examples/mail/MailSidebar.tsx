@@ -11,66 +11,59 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import { type Dispatch, type FC, type SetStateAction, memo } from "react"
+import { type FC, memo } from "react"
 import { MailHeader } from "./MailHeader"
 import { type MailSidebarItemType, mailSidebarItems } from "./data"
 
 type Props = {
   isCollapse: boolean
-  selectedTab: MailSidebarItemType
-  setSelectedTab: Dispatch<SetStateAction<MailSidebarItemType>>
 }
 
-export const MailSidebar: FC<Props> = memo(
-  ({ isCollapse, selectedTab, setSelectedTab }) => {
-    return (
-      <VStack gap={0}>
-        <MailHeader isCenter={!isCollapse}>
-          <Center>
-            <HStack>
-              <FontAwesomeIcon icon={faCloud} size="lg" />
-              {!isCollapse && (
-                <Text fontSize="lg" fontWeight="bold">
-                  Yamada UI
-                </Text>
-              )}
-            </HStack>
-          </Center>
-        </MailHeader>
-        {mailSidebarItems[0].map((item) => (
-          <MailSidebarItem
-            key={item.title}
-            isCollapse={isCollapse}
-            item={item}
-            isSelected={item.title === selectedTab.title}
-            setSelectedTab={setSelectedTab}
-          />
-        ))}
-        <Divider />
-        {mailSidebarItems[1].map((item) => (
-          <MailSidebarItem
-            key={item.title}
-            isCollapse={isCollapse}
-            item={item}
-            isSelected={item.title === selectedTab.title}
-            setSelectedTab={setSelectedTab}
-          />
-        ))}
-      </VStack>
-    )
-  },
-)
+export const MailSidebar: FC<Props> = memo(({ isCollapse }) => {
+  return (
+    <VStack gap={0}>
+      <MailHeader isCenter={!isCollapse}>
+        <Center>
+          <HStack>
+            <FontAwesomeIcon icon={faCloud} size="lg" />
+            {!isCollapse && (
+              <Text fontSize="lg" fontWeight="bold">
+                Yamada UI
+              </Text>
+            )}
+          </HStack>
+        </Center>
+      </MailHeader>
+      {mailSidebarItems[0].map((item) => (
+        <MailSidebarItem
+          key={item.title}
+          isCollapse={isCollapse}
+          item={item}
+          isSelected={item.title === "Inbox"}
+        />
+      ))}
+      <Divider />
+      {mailSidebarItems[1].map((item) => (
+        <MailSidebarItem
+          key={item.title}
+          isCollapse={isCollapse}
+          item={item}
+          isSelected={item.title === "Inbox"}
+        />
+      ))}
+    </VStack>
+  )
+})
 MailSidebar.displayName = "MailSidebar"
 
 type MailSidebarItemProps = {
   isCollapse: boolean
   item: MailSidebarItemType
   isSelected: boolean
-  setSelectedTab: Dispatch<SetStateAction<MailSidebarItemType>>
 }
 
 const MailSidebarItem: FC<MailSidebarItemProps> = memo(
-  ({ isCollapse, item, isSelected, setSelectedTab }) => {
+  ({ isCollapse, item, isSelected }) => {
     console.log(isSelected, item.title)
     return (
       <HStack
@@ -96,7 +89,6 @@ const MailSidebarItem: FC<MailSidebarItemProps> = memo(
             variant={isSelected ? "solid" : "ghost"}
             colorScheme={isSelected ? "primary" : "gray"}
             leftIcon={<FontAwesomeIcon icon={item.icon} size="lg" />}
-            onClick={() => setSelectedTab(item)}
           >
             <Text fontSize="md" fontWeight="medium">
               {item.title}

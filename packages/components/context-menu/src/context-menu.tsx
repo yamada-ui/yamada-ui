@@ -5,21 +5,22 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { Menu, MenuList, MenuItem } from "@yamada-ui/react"
+import { Menu, MenuList, MenuItem, PopoverTrigger } from "@yamada-ui/react"
 import type { MenuListProps } from "@yamada-ui/react"
 import { createContext, cx } from "@yamada-ui/utils"
-import { useState, useCallback } from "react"
 
 type ContextMenuContext = {
-  onOpen: (open: boolean) => void
+  styles: Record<string, CSSUIObject>
 }
 
 const [ContextMenuProvider, useContextMenu] = createContext<ContextMenuContext>(
   {
-    strict: false,
     name: "ContextMenuContext",
+    errorMessage: `useContextMenu returned is 'undefined'. Seems you forgot to wrap the components in "<ContextMenu />"`,
   },
 )
+
+export { useContextMenu }
 
 type ContextMenuOptions = {}
 
@@ -30,30 +31,22 @@ export type ContextMenuProps = HTMLUIProps<"div"> &
 export const ContextMenu = forwardRef<ContextMenuProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("ContextMenu", props)
   const { className, children, ...rest } = omitThemeProps(mergedProps)
-  const [open, setOpen] = useState(false)
-
-  const handleOpenChange = useCallback(
-    (open: boolean) => {
-      setOpen(open)
-    },
-    [setOpen],
-  )
 
   const css: CSSUIObject = {}
 
   return (
     <ContextMenuProvider
       value={{
-        ...styles,
-        onOpen: handleOpenChange,
+        styles,
       }}
     >
-      <Menu isOpen={open}>
+      <Menu trigger="contextmenu">
         <ui.div
           ref={ref}
           className={cx("ui-context-menu", className)}
           __css={css}
           {...rest}
+          styles={styles}
         >
           {children}
         </ui.div>
@@ -64,18 +57,16 @@ export const ContextMenu = forwardRef<ContextMenuProps, "div">((props, ref) => {
 
 type ContextMenuTriggerProps = HTMLUIProps<"div">
 export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
-  ({ ...rest }, ref) => {
-    const context = useContextMenu()
-
+  ({ children, className, as: As, ...rest }, ref) => {
+    const Component = As ?? Button
     return (
-      <ui.div
-        ref={ref}
-        onContextMenu={(event) => {
-          context.onOpen(true)
-          event.preventDefault()
-        }}
-        {...rest}
-      />
+      <PopoverTrigger>
+        <Component ref={ref} className={cx("ui-menu", className)} {...rest}>
+          <ui.span __css={{ pointerEvents: "none", flex: "1 1 auto", minW: 0 }}>
+            {children}
+          </ui.span>
+        </Component>
+      </PopoverTrigger>
     )
   },
 )
@@ -87,9 +78,46 @@ export const ContextMenuContent = forwardRef<ContextMenuContentProps, "ul">(
   },
 )
 
-type ContextMenuItemProps = HTMLUIProps<"button">
+type ContextMenuDividerProps = HTMLUIProps<"hr">
+export const ContextMenuDivider = forwardRef<ContextMenuDividerProps, "hr">(
+  ({ className, ...rest }, ref) => {
+    const { styles } = useContextMenu()
+
+    const css: CSSUIObject = { ...styles.divider }
+
+    return (
+      <ui.hr
+        __css={css}
+        ref={ref}
+        className={cx("ui-menu__divider", className)}
+        {...rest}
+      />
+    )
+  },
+)
+
+type ContextMenuItemProps = HTMLUIProps<"button"> & {
+  /**
+   * If `true`, the list element will be closed when selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
+}
 export const ContextMenuItem = forwardRef<ContextMenuItemProps, "button">(
   ({ ...rest }, ref) => {
     return <MenuItem ref={ref} {...rest} />
   },
 )
+
+type MenuButtonProps = HTMLUIProps<"button">
+const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
+  const css: CSSUIObject = {
+    display: "inline-flex",
+    appearance: "none",
+    alignItems: "center",
+    outline: 0,
+  }
+
+  return <ui.button ref={ref} __css={css} {...rest} />
+})

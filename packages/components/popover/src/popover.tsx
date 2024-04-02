@@ -112,7 +112,7 @@ type PopoverOptions = {
    *
    * @default 'click'
    */
-  trigger?: "click" | "hover" | "never"
+  trigger?: "click" | "hover" | "never" | "contextmenu"
   /**
    * The number of delay time to open.
    *
@@ -150,6 +150,10 @@ type PopoverOptions = {
    * The animation duration.
    */
   duration?: MotionTransitionProperties["duration"]
+  /**
+   * Callback fired when the contextmenu occur.
+   */
+  onContextMenu?: (event: MouseEvent) => void
 }
 
 export type PopoverProps = ThemeProps<"Popover"> &
@@ -244,7 +248,8 @@ export const Popover: FC<PopoverProps> = (props) => {
   useFocusOnShow(popoverRef, {
     focusRef: initialFocusRef,
     visible: isOpen,
-    shouldFocus: autoFocus && trigger === "click",
+    shouldFocus:
+      autoFocus && (trigger === "click" || trigger === "contextmenu"),
   })
 
   const shouldRenderChildren = useLazyDisclosure({
@@ -322,6 +327,22 @@ export const Popover: FC<PopoverProps> = (props) => {
 
       if (trigger === "click") {
         triggerProps.onClick = handlerAll(props.onClick, onToggle)
+        triggerProps.onBlur = handlerAll(props.onBlur, (ev) => {
+          const relatedTarget = getEventRelatedTarget(ev)
+          const isValidBlur = !isContains(popoverRef.current, relatedTarget)
+
+          if (isOpen && closeOnBlur && isValidBlur) onClose()
+        })
+      }
+
+      if (trigger === "contextmenu") {
+        triggerProps.onContextMenu = handlerAll(
+          props.onContextMenu,
+          onToggle,
+          (ev) => {
+            ev.preventDefault()
+          },
+        )
         triggerProps.onBlur = handlerAll(props.onBlur, (ev) => {
           const relatedTarget = getEventRelatedTarget(ev)
           const isValidBlur = !isContains(popoverRef.current, relatedTarget)

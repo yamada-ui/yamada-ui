@@ -4,6 +4,8 @@ import {
   ContextMenuContent,
   ContextMenuTrigger,
   ContextMenuItem,
+  ContextMenuDivider,
+  Button,
 } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof ContextMenu>
@@ -18,9 +20,14 @@ export default meta
 export const basic: Story = () => {
   return (
     <ContextMenu>
-      <ContextMenuTrigger>Triggerだよ</ContextMenuTrigger>
+      <ContextMenuTrigger as={Button}>Right Click Here</ContextMenuTrigger>
       <ContextMenuContent>
-        <ContextMenuItem>Itemだよ</ContextMenuItem>
+        <ContextMenuItem>Undo</ContextMenuItem>
+        <ContextMenuItem>Redo</ContextMenuItem>
+        <ContextMenuDivider />
+        <ContextMenuItem disabled>Cut</ContextMenuItem>
+        <ContextMenuItem>Copy</ContextMenuItem>
+        <ContextMenuItem>Paste</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   )

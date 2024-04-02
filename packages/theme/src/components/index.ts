@@ -64,6 +64,7 @@ import { Skeleton } from "./skeleton"
 import { Slider } from "./slider"
 import { Stat } from "./stat"
 import { Stepper } from "./stepper"
+import { Swipeable } from "./swipeable"
 import { Switch } from "./switch"
 import { Table } from "./table"
 import { Tabs } from "./tabs"
@@ -140,6 +141,7 @@ export default {
   Slider,
   Stat,
   Stepper,
+  Swipeable,
   Switch,
   Table,
   Tabs,

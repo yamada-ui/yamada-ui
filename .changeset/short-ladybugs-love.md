@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/snacks": major
+"@yamada-ui/snacks": patch
 ---
 
 fix: Apply theme token to Snacks component

@@ -1,4 +1,4 @@
-import { Center, Text } from "@yamada-ui/react"
+import { Box, Center, Text } from "@yamada-ui/react"
 
 export default {
   title: "System / Styles / At-rules",
@@ -80,5 +80,13 @@ export const withContainerName = () => {
         </Text>
       </Center>
     </Center>
+  )
+}
+
+export const supports = () => {
+  return (
+    <Box _supports={[{ query: "(display: flex)", css: { color: "red" } }]}>
+      <Text>Supported flex</Text>
+    </Box>
   )
 }

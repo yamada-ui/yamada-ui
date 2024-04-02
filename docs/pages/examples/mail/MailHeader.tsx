@@ -13,7 +13,7 @@ export const MailHeader: FC<Props> = memo(({ children, isCenter }) => {
         as={Center}
         h={12}
         px="md"
-        justifyContent={isCenter && "space-between"}
+        justifyContent={isCenter ? "space-between" : "center"}
       >
         {children}
       </Box>

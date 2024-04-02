@@ -26,11 +26,11 @@ export const MailSidebar: FC<Props> = memo(({ isCollapse }) => {
         <Center>
           <HStack>
             <FontAwesomeIcon icon={faCloud} size="lg" />
-            {!isCollapse && (
+            {!isCollapse ? (
               <Text fontSize="lg" fontWeight="bold">
                 Yamada UI
               </Text>
-            )}
+            ) : null}
           </HStack>
         </Center>
       </MailHeader>
@@ -70,7 +70,7 @@ const MailSidebarItem: FC<MailSidebarItemProps> = memo(
         as={Center}
         h={12}
         p="sm"
-        justifyContent={!isCollapse && "space-between"}
+        justifyContent={!isCollapse ? "space-between" : "center"}
       >
         {isCollapse ? (
           <Tooltip
@@ -94,11 +94,11 @@ const MailSidebarItem: FC<MailSidebarItemProps> = memo(
               {item.title}
             </Text>
             <Spacer />
-            {item.num && item.num > 0 && (
+            {item.num && item.num > 0 ? (
               <Text fontSize="sm" fontWeight="semibold">
                 {item.num}
               </Text>
-            )}
+            ) : null}
           </Button>
         )}
       </HStack>

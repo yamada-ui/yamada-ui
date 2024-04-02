@@ -105,14 +105,14 @@ const MailInboxCard: FC<MailInboxCardProps> = memo(
       >
         <CardHeader as={HStack}>
           <Heading size="xs">{mail.authorName}</Heading>
-          {mail.unRead && (
+          {mail.unRead ? (
             <ui.span
               w={2}
               h={2}
               bg={isSelected ? "current" : "primary"}
               rounded="full"
             />
-          )}
+          ) : null}
           <Spacer />
           <Text fontSize="xs">{dateDiff(mail.timestamp)}</Text>
         </CardHeader>

@@ -848,7 +848,7 @@ return (
 
 ### 同期させる
 
-グラフの動作を同期させる場合は、互いのグラフの`chartProps.syncId`に共通の文字列を設定します。
+グラフの動作を同期させる場合は、互いのグラフの`syncId`に共通の文字列を設定します。
 
 ```tsx functional=true
 const data = useMemo(
@@ -898,18 +898,8 @@ const series: AreaProps[] = useMemo(
 
 return (
   <VStack>
-    <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
-      chartProps={{ syncId: "syncId" }}
-    />
-    <AreaChart
-      data={data}
-      series={series}
-      dataKey="name"
-      chartProps={{ syncId: "syncId" }}
-    />
+    <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
+    <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
   </VStack>
 )
 ```

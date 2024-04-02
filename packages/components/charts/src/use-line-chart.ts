@@ -35,6 +35,11 @@ export type UseLineChartOptions = {
    */
   lineProps?: Partial<LineProps>
   /**
+   * If any two categorical charts have the same syncId,
+   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
+   */
+  syncId?: number | string
+  /**
    * Props passed down to recharts `LineChart` component.
    */
   chartProps?: LineChartProps
@@ -101,6 +106,7 @@ export const useLineChart = ({
   connectNulls = true,
   referenceLineProps,
   fillOpacity = 1,
+  syncId,
   styles,
   ...rest
 }: UseLineChartProps) => {
@@ -318,10 +324,11 @@ export const useLineChart = ({
       className: cx(className, lineChartClassName),
       data,
       layout: layoutType,
+      syncId,
       ...props,
       ...chartProps,
     }),
-    [data, layoutType, lineChartClassName, chartProps],
+    [data, layoutType, syncId, lineChartClassName, chartProps],
   )
 
   const getLineProps: RequiredChartPropGetter<

@@ -55,4 +55,12 @@ describe("<Slide />", () => {
       "transform: translateX(0px) translateY(100%) translateZ(0);",
     )
   })
+
+  test("applies styles `z-index` correctly", async () => {
+    const { getByTestId } = render(<Slide isOpen data-testid="slide" />)
+
+    expect(getByTestId("slide")).toHaveStyle(
+      "z-index: var(--ui-zIndices-jeice);",
+    )
+  })
 })

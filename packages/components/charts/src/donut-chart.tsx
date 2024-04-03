@@ -9,15 +9,19 @@ import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
   Cell,
+  Legend,
   Pie,
   PieChart as RechartsDonutChart,
   ResponsiveContainer,
   Tooltip,
 } from "recharts"
+import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import type { TooltipDataSourceType } from "./chart.types"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import { useChartLegend } from "./use-chart-legend"
 import {
   useChartTooltip,
   type UseChartTooltipOptions,
@@ -25,6 +29,7 @@ import {
 import type { UseDonutChartOptions } from "./use-donut-chart"
 import { useDonutChart } from "./use-donut-chart"
 
+//TODO: activeShape, legend
 type DonutChartOptions = {
   /**
    * If `true`, tooltip is visible.
@@ -32,6 +37,12 @@ type DonutChartOptions = {
    * @default true
    */
   withTooltip?: boolean
+  /**
+   * If `true`, legend is visible.
+   *
+   * @default false
+   */
+  withLegend?: boolean
   /**
    * Determines which data is displayed in the tooltip.
    *
@@ -53,6 +64,7 @@ export type DonutChartProps = HTMLUIProps<"div"> &
   DonutChartOptions &
   UseDonutChartOptions &
   UseChartTooltipOptions &
+  UseChartLegendProps &
   UseChartProps
 
 /**
@@ -70,6 +82,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     cellProps,
     containerProps,
     withTooltip = true,
+    withLegend = false,
     tooltipProps,
     tooltipAnimationDuration,
     tooltipDataSource = "all",
@@ -83,25 +96,31 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     withLabel,
     withLabelsLine,
     strokeWidth,
+    legendProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { donutVars, getDonutProps, getDonutChartProps, getCellProps } =
-    useDonutChart({
-      data,
-      donutProps,
-      chartProps,
-      cellProps,
-      innerRadius,
-      outerRadius,
-      paddingAngle,
-      startAngle,
-      endAngle,
-      strokeWidth,
-      withLabel,
-      withLabelsLine,
-      styles,
-    })
+  const {
+    donutVars,
+    getDonutProps,
+    getDonutChartProps,
+    getCellProps,
+    setHighlightedArea,
+  } = useDonutChart({
+    data,
+    donutProps,
+    chartProps,
+    cellProps,
+    innerRadius,
+    outerRadius,
+    paddingAngle,
+    startAngle,
+    endAngle,
+    strokeWidth,
+    withLabel,
+    withLabelsLine,
+    styles,
+  })
   const { getContainerProps } = useChart({ containerProps })
   const {
     tooltipProps: computedTooltipProps,
@@ -111,6 +130,9 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     tooltipProps,
     tooltipAnimationDuration,
     styles,
+  })
+  const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
+    legendProps,
   })
 
   const cells = useMemo(
@@ -142,6 +164,20 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
             <Pie {...getDonutProps({ className: "ui-donut-chart__donut" })}>
               {cells}
             </Pie>
+
+            {withLegend ? (
+              <Legend
+                content={({ payload }) => (
+                  <ChartLegend
+                    className="ui-area-chart__legend"
+                    payload={payload}
+                    onHighlight={setHighlightedArea}
+                    {...computedLegendProps}
+                  />
+                )}
+                {...getLegendProps()}
+              />
+            ) : null}
 
             {withTooltip ? (
               <Tooltip

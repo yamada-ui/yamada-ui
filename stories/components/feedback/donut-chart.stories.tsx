@@ -48,6 +48,7 @@ export const custom: Story = () => {
   const [props, setProps] = useState<DonutChartProps>({
     data: data,
     withTooltip: true,
+    withLegend: false,
     fillOpacity: 1,
     paddingAngle: 0,
     startAngle: 0,
@@ -197,6 +198,15 @@ export const custom: Story = () => {
                   })),
               },
               {
+                label: "legend",
+                isChecked: props.withLegend,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withLegend: !prev.withLegend,
+                  })),
+              },
+              {
                 label: "label",
                 isChecked: props.withLabel,
                 onChange: () =>
@@ -241,6 +251,20 @@ export const withSize: Story = () => {
       <DonutChart data={data} size="full" />
     </>
   )
+}
+
+export const withLegend: Story = () => {
+  const data: CellProps[] = useMemo(
+    () => [
+      { name: "USA", value: 400, color: "red.500" },
+      { name: "India", value: 300, color: "orange.500" },
+      { name: "Japan", value: 100, color: "blue.500" },
+      { name: "Other", value: 200, color: "gray.500" },
+    ],
+    [],
+  )
+
+  return <DonutChart data={data} withLegend />
 }
 
 export const withValueFomatter: Story = () => {
@@ -315,6 +339,26 @@ export const customTooltip: Story = () => {
       tooltipProps={{
         content: CustomTooltip,
       }}
+    />
+  )
+}
+
+export const customLegend: Story = () => {
+  const data: CellProps[] = useMemo(
+    () => [
+      { name: "USA", value: 400, color: "red.500" },
+      { name: "India", value: 300, color: "orange.500" },
+      { name: "Japan", value: 100, color: "blue.500" },
+      { name: "Other", value: 200, color: "gray.500" },
+    ],
+    [],
+  )
+
+  return (
+    <DonutChart
+      data={data}
+      withLegend
+      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
     />
   )
 }

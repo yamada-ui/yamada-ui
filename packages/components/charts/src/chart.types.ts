@@ -104,6 +104,7 @@ export type CellProps = Merge<
   {
     name: string
     value: number
+    dimCell?: Partial<CellProps>
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>

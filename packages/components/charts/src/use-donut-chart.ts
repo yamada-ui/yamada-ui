@@ -1,7 +1,7 @@
 import { useTheme, type CSSUIObject, type CSSUIProps } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
-import { useCallback, useMemo } from "react"
+import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
 import type {
@@ -109,6 +109,9 @@ export const useDonutChart = ({
   ...rest
 }: UseDonutChartProps) => {
   const { theme } = useTheme()
+  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const shouldHighlight = highlightedArea !== null
+  const { dimCell, ...computedCellProps } = rest.cellProps ?? {}
 
   const cellColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -152,24 +155,50 @@ export const useDonutChart = ({
     const resolvedCellProps = {
       fillOpacity: "var(--ui-fill-opacity)",
       ...styles.cell,
-      ...rest.cellProps,
+      ...computedCellProps,
     }
 
     return getClassName(resolvedCellProps)(theme)
-  }, [rest.cellProps, styles.cell, theme])
+  }, [computedCellProps, styles.cell, theme])
+
+  const dimCellClassName = useMemo(() => {
+    const resolvedDimCell = { fillOpacity: 0.3, strokeOpacity: 0, ...dimCell }
+
+    return getClassName(resolvedDimCell)(theme)
+  }, [dimCell, theme])
 
   const cellPropList = useMemo(
     () =>
       data.map((props, index) => {
+        const { name, dimCell = {}, ...computedProps } = props
         const color = `var(--ui-cell-${index})`
-        const className = getClassName({ cellClassName, ...props })(theme)
+        const dimmed = shouldHighlight && highlightedArea !== name
+        const resolvedProps = {
+          ...computedProps,
+          ...(dimmed ? dimCell : {}),
+        }
+
+        const className = getClassName(
+          {
+            cellClassName,
+            ...resolvedProps,
+          },
+          dimmed ? dimCellClassName : undefined,
+        )(theme)
 
         return {
           color,
           className,
         }
       }),
-    [cellClassName, data, theme],
+    [
+      cellClassName,
+      data,
+      dimCellClassName,
+      highlightedArea,
+      shouldHighlight,
+      theme,
+    ],
   )
 
   const getDonutChartProps: ChartPropGetter<
@@ -247,6 +276,7 @@ export const useDonutChart = ({
     getDonutProps,
     getDonutChartProps,
     getCellProps,
+    setHighlightedArea,
   }
 }
 

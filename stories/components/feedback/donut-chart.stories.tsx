@@ -300,6 +300,31 @@ export const withFillOpacity: Story = () => {
   return <DonutChart data={data} fillOpacity={[0.8, 0.7]} />
 }
 
+export const customActiveShape: Story = () => {
+  const data: CellProps[] = useMemo(
+    () => [
+      { name: "USA", value: 400, color: "red.500" },
+      { name: "India", value: 300, color: "orange.500" },
+      { name: "Japan", value: 100, color: "blue.500" },
+      { name: "Other", value: 200, color: "gray.500" },
+    ],
+    [],
+  )
+
+  return (
+    <DonutChart
+      data={data}
+      donutProps={{
+        activeShape: {
+          strokeWidth: 2,
+          stroke: ["black", "white"],
+        },
+        inactiveShape: { opacity: 0.5 },
+      }}
+    />
+  )
+}
+
 export const customTooltip: Story = () => {
   const data: CellProps[] = useMemo(
     () => [

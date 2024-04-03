@@ -4,6 +4,8 @@ import { LineChart } from "./line-chart"
 export const DonutChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     donut: {},
+    activeShape: {},
+    inactiveShape: {},
     cell: {},
   },
 

@@ -112,6 +112,11 @@ export const useDonutChart = ({
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
   const { dimCell, ...computedCellProps } = rest.cellProps ?? {}
+  const {
+    activeShape = {},
+    inactiveShape = {},
+    ...computedDonutProps
+  } = rest.donutProps ?? {}
 
   const cellColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -145,10 +150,10 @@ export const useDonutChart = ({
   const [donutProps, donutClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [rest.donutProps ?? {}, pieProperties],
+        [computedDonutProps, pieProperties],
         styles.donut,
       )(theme),
-    [rest.donutProps, styles.donut, theme],
+    [computedDonutProps, styles.donut, theme],
   )
 
   const cellClassName = useMemo(() => {
@@ -166,6 +171,24 @@ export const useDonutChart = ({
 
     return getClassName(resolvedDimCell)(theme)
   }, [dimCell, theme])
+
+  const resolvedActiveShape = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [activeShape, pieProperties],
+        styles.activeShape,
+      )(theme, true),
+    [activeShape, styles.activeShape, theme],
+  )
+
+  const resolvedInactiveShape = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [inactiveShape, pieProperties],
+        styles.inactiveShape,
+      )(theme, true),
+    [inactiveShape, styles.inactiveShape, theme],
+  )
 
   const cellPropList = useMemo(
     () =>
@@ -234,6 +257,8 @@ export const useDonutChart = ({
       //BUG: label and labelLine className is not applied.
       label: withLabel ? { fillOpacity: 1 } : false,
       labelLine: withLabelsLine,
+      activeShape: resolvedActiveShape,
+      inactiveShape: resolvedInactiveShape,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
       ...donutProps,
     }),
@@ -245,6 +270,8 @@ export const useDonutChart = ({
       innerRadius,
       outerRadius,
       paddingAngle,
+      resolvedActiveShape,
+      resolvedInactiveShape,
       startAngle,
       withLabel,
       withLabelsLine,

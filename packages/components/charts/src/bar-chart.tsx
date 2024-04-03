@@ -96,6 +96,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     strokeDasharray,
     fillOpacity,
     chartProps,
+    syncId,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -109,6 +110,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       barProps,
       referenceLineProps,
       fillOpacity,
+      syncId,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })

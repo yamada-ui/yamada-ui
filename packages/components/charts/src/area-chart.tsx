@@ -105,6 +105,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     fillOpacity,
     splitColors,
     splitOffset,
+    syncId,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -132,6 +133,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     fillOpacity,
     splitColors,
     splitOffset,
+    syncId,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

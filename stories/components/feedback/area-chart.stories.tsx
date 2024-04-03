@@ -509,18 +509,8 @@ export const withSync: Story = () => {
 
   return (
     <VStack>
-      <AreaChart
-        data={data}
-        series={series}
-        dataKey="name"
-        chartProps={{ syncId: "syncId" }}
-      />
-      <AreaChart
-        data={data}
-        series={series}
-        dataKey="name"
-        chartProps={{ syncId: "syncId" }}
-      />
+      <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
+      <AreaChart data={data} series={series} dataKey="name" syncId="syncId" />
     </VStack>
   )
 }

@@ -11,17 +11,6 @@ export const CORE_MEMBERS = [
     },
   },
   {
-    id: "illionillion",
-    name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
-    icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
-    github: "https://github.com/illionillion",
-    twitter: "https://twitter.com/dimyasvariant",
-    description: {
-      en: "Web engineer, a university student.",
-      ja: "Webエンジニア。大学生。",
-    },
-  },
-  {
     id: "108yen",
     name: { en: "Kazuki Shirai", ja: "Kazuki Shirai" },
     icon: "https://avatars.githubusercontent.com/u/9676316?v=4",
@@ -47,6 +36,17 @@ export const CORE_MEMBERS = [
     },
   },
   {
+    id: "illionillion",
+    name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
+    icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
+    github: "https://github.com/illionillion",
+    twitter: "https://twitter.com/dimyasvariant",
+    description: {
+      en: "Web engineer, a university student.",
+      ja: "Webエンジニア。大学生。",
+    },
+  },
+  {
     id: "taroj1205",
     name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
     icon: "https://avatars.githubusercontent.com/u/61367823?v=4",
@@ -58,14 +58,14 @@ export const CORE_MEMBERS = [
     },
   },
   {
-    id: "hoshico",
-    name: { en: "hoshico", ja: "hoshico" },
-    icon: "https://avatars.githubusercontent.com/u/77495217?v=4",
-    github: "https://github.com/hoshico",
-    twitter: "https://twitter.com/hoshihoshi_yasu",
+    id: "setodeve",
+    name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },
+    icon: "https://avatars.githubusercontent.com/u/83833293?v=4",
+    github: "https://github.com/setodeve",
+    twitter: "https://twitter.com/hjuko00",
     description: {
-      en: "Web engineer, likes TypeScript.",
-      ja: "TypeScriptが好きなWebエンジニア。",
+      en: "Engineer based in fukuoka.",
+      ja: "福岡在住のエンジニア。",
     },
   },
   {
@@ -91,14 +91,25 @@ export const CORE_MEMBERS = [
     },
   },
   {
-    id: "setodeve",
-    name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },
-    icon: "https://avatars.githubusercontent.com/u/83833293?v=4",
-    github: "https://github.com/setodeve",
-    twitter: "https://twitter.com/hjuko00",
+    id: "suzukisan22",
+    name: { en: "Ryota Suzuki", ja: "Ryota Suzuki" },
+    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
+    github: "https://github.com/suzukisan22",
+    twitter: "https://x.com/itsmeryota",
     description: {
-      en: "Engineer based in fukuoka.",
-      ja: "福岡在住のエンジニア。",
+      en: "Engineer living in Mie Prefecture, Japan",
+      ja: "三重県在住エンジニア",
+    },
+  },
+  {
+    id: "hoshico",
+    name: { en: "hoshico", ja: "hoshico" },
+    icon: "https://avatars.githubusercontent.com/u/77495217?v=4",
+    github: "https://github.com/hoshico",
+    twitter: "https://twitter.com/hoshihoshi_yasu",
+    description: {
+      en: "Web engineer, likes TypeScript.",
+      ja: "TypeScriptが好きなWebエンジニア。",
     },
   },
   {
@@ -132,17 +143,6 @@ export const CORE_MEMBERS = [
     description: {
       en: "Multi-talented, frog-loving front-end engineer.",
       ja: "多趣味なカエル好きのフロントエンドエンジニア",
-    },
-  },
-  {
-    id: "suzukisan22",
-    name: { en: "Ryota Suzuki", ja: "Ryota Suzuki" },
-    icon: "https://avatars.githubusercontent.com/u/12987013?v=4",
-    github: "https://github.com/suzukisan22",
-    twitter: "https://x.com/itsmeryota",
-    description: {
-      en: "Engineer living in Mie Prefecture, Japan",
-      ja: "三重県在住エンジニア",
     },
   },
 ]

@@ -46,6 +46,11 @@ export type UseBarChartOptions = {
    */
   layoutType?: ChartLayoutType
   /**
+   * If any two categorical charts have the same syncId,
+   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
+   */
+  syncId?: number | string
+  /**
    * Props passed down to recharts `BarChart` component.
    */
   chartProps?: BarChartProps
@@ -72,6 +77,7 @@ export const useBarChart = ({
   layoutType = "horizontal",
   referenceLineProps = [],
   fillOpacity = 1,
+  syncId,
   styles,
   ...rest
 }: UseBarChartProps) => {
@@ -272,10 +278,11 @@ export const useBarChart = ({
       data,
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
+      syncId,
       ...props,
       ...chartProps,
     }),
-    [barChartClassName, chartProps, data, layoutType, type],
+    [barChartClassName, chartProps, data, syncId, layoutType, type],
   )
 
   return {

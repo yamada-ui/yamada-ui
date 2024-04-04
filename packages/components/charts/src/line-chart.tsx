@@ -102,6 +102,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     strokeWidth,
     connectNulls,
     fillOpacity,
+    syncId,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -119,6 +120,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       strokeWidth,
       connectNulls,
       fillOpacity,
+      syncId,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })

@@ -151,7 +151,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     () =>
       series.map(({ dataKey }, index) => (
         <Radar
-          key={`radar=${dataKey}`}
+          key={`radar-${dataKey}`}
           {...getRadarProps({ index, className: "ui-radar-chart__radar" })}
         />
       )),

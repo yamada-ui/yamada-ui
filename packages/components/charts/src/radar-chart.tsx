@@ -98,6 +98,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     unit,
     valueFormatter,
+    strokeDasharray,
     withDots,
     withActiveDots,
     strokeWidth,
@@ -134,6 +135,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     strokeWidth,
     fillOpacity,
     valueFormatter,
+    strokeDasharray,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

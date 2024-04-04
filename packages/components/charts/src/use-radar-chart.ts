@@ -92,6 +92,10 @@ export type UseRadarChartOptions = {
    * A function to format values on Y axis and inside the tooltip.
    */
   valueFormatter?: (value: number) => string
+  /**
+   * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
+   */
+  strokeDasharray?: string | number
 }
 
 type UseRadarChartProps = UseRadarChartOptions & {
@@ -107,6 +111,7 @@ export const useRadarChart = ({
   strokeWidth = 2,
   fillOpacity = 0.4,
   valueFormatter,
+  strokeDasharray,
   styles,
   ...rest
 }: UseRadarChartProps) => {
@@ -398,10 +403,11 @@ export const useRadarChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, polarGridClassName),
+      strokeDasharray,
       ...props,
       ...polarGridProps,
     }),
-    [polarGridClassName, polarGridProps],
+    [polarGridClassName, polarGridProps, strokeDasharray],
   )
 
   const getPolarAngleAxisProps: ChartPropGetter<

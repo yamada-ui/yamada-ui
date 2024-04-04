@@ -1,6 +1,6 @@
 import { useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { cx, splitObject, type Dict } from "@yamada-ui/utils"
+import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
@@ -137,23 +137,9 @@ export const useRadarChart = ({
     [fillOpacity, radarColors],
   )
 
-  // TODO: Once a fix for recharts is released, I'll fix it.
-  const [polarAngleAxisProps, polarAngleAxisStyles] = useMemo(
-    () =>
-      splitObject<Dict, string>(
-        rest.polarAngleAxisProps ?? {},
-        polarAngleAxisProperties,
-      ),
-    [rest.polarAngleAxisProps],
-  )
-
   // FIXME: replace className.
   const [chartProps, radarChartClassName] = useMemo(() => {
     const resolvedRadarChartProps = {
-      "& .recharts-polar-angle-axis": {
-        ...styles.polarAngleAxis,
-        ...polarAngleAxisStyles,
-      },
       "& .recharts-polar-angle-axis-tick": { ...styles.polarAngleAxisTick },
       "& .recharts-polar-radius-axis-tick": { ...styles.polarRadiusAxisTick },
       ...rest.chartProps,
@@ -164,10 +150,8 @@ export const useRadarChart = ({
       styles.chart,
     )(theme)
   }, [
-    polarAngleAxisStyles,
     rest.chartProps,
     styles.chart,
-    styles.polarAngleAxis,
     styles.polarAngleAxisTick,
     styles.polarRadiusAxisTick,
     theme,
@@ -182,15 +166,14 @@ export const useRadarChart = ({
     [rest.polarGridProps, styles.polarGrid, theme],
   )
 
-  // TODO: Once a fix for recharts is released, I'll fix it.
-  // const [polarAngleAxisProps, polarAngleAxisClassName] = useMemo(
-  //   () =>
-  //     getComponentProps<Dict, string>(
-  //       [rest.polarAngleAxisProps ?? {}, polarAngleAxisProperties],
-  //       styles.polarAngleAxis,
-  //     )(theme),
-  //   [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
-  // )
+  const [polarAngleAxisProps, polarAngleAxisClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.polarAngleAxisProps ?? {}, polarAngleAxisProperties],
+        styles.polarAngleAxis,
+      )(theme),
+    [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
+  )
 
   const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
     () =>
@@ -417,21 +400,14 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      // BUG: className is not applied.
-      // className: cx(className, polarAngleAxisClassName),
-      className,
+      className: cx(className, polarAngleAxisClassName),
       dataKey,
       tickFormatter: valueFormatter,
       tickSize: 16,
       ...props,
       ...polarAngleAxisProps,
     }),
-    [
-      dataKey,
-      // polarAngleAxisClassName,
-      polarAngleAxisProps,
-      valueFormatter,
-    ],
+    [dataKey, polarAngleAxisClassName, polarAngleAxisProps, valueFormatter],
   )
 
   const getPolarRadiusAxisProps: ChartPropGetter<

@@ -29,7 +29,6 @@ import {
 import type { UseDonutChartOptions } from "./use-donut-chart"
 import { useDonutChart } from "./use-donut-chart"
 
-//TODO: activeShape, legend
 type DonutChartOptions = {
   /**
    * If `true`, tooltip is visible.
@@ -122,15 +121,12 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
-  const {
-    tooltipProps: computedTooltipProps,
-    getTooltipProps,
-    tooltipVars,
-  } = useChartTooltip({
-    tooltipProps,
-    tooltipAnimationDuration,
-    styles,
-  })
+  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+    useChartTooltip({
+      tooltipProps,
+      tooltipAnimationDuration,
+      styles,
+    })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
@@ -151,7 +147,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-donut-chart", className)}
-        var={[...donutVars, ...tooltipVars]}
+        var={donutVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

@@ -303,9 +303,10 @@ export const useColorPicker = ({
         if (!sRGBHex) return
 
         onColorSelectorChange(sRGBHex)
+        onChangeEnd?.(sRGBHex)
       } catch {}
     },
-    [onEyeDropperOpen, onColorSelectorChange],
+    [onEyeDropperOpen, onColorSelectorChange, onChangeEnd],
   )
 
   useOutsideClick({

@@ -348,6 +348,41 @@ export const withValueFormatter: Story = () => {
   )
 }
 
+export const withStrokeDasharray: Story = () => {
+  const data = useMemo(() => {
+    const fruit = [
+      "Apples",
+      "Oranges",
+      "Tomatoes",
+      "Grapes",
+      "Bananas",
+      "Lemons",
+    ]
+    return fruit.map((fruit) => ({
+      fruit,
+      sales_january: randomValue(),
+      sales_february: randomValue(),
+    }))
+  }, [])
+
+  const series: RadarProps[] = useMemo(
+    () => [
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="fruit"
+      strokeDasharray="15 15"
+    />
+  )
+}
+
 export const withFillOpacity: Story = () => {
   const data = useMemo(() => {
     const fruit = [

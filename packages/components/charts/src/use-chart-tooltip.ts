@@ -1,7 +1,8 @@
-import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import { useTheme, type CSSUIObject } from "@yamada-ui/core"
 import { splitObject, type Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
+import { getClassName } from "./chart-utils"
 import type { ChartPropGetter, TooltipProps } from "./chart.types"
 import { tooltipProperties } from "./rechart-properties"
 
@@ -27,42 +28,11 @@ export const useChartTooltip = ({
   tooltipAnimationDuration = 0,
   styles,
 }: UseChartTooltipProps) => {
+  const { theme } = useTheme()
   const { cursor, ...rest } = _tooltipProps
-  const resolvedCursor = useMemo(
-    () => ({ ...styles.cursor, ...cursor }),
-    [cursor, styles],
-  )
-
-  // TODO: replace `className`
-  const tooltipVars: Required<CSSUIProps>["var"] = useMemo(
-    () =>
-      [
-        {
-          __prefix: "ui",
-          name: "cursor-fill",
-          token: "colors",
-          value: resolvedCursor.fill,
-        },
-        {
-          __prefix: "ui",
-          name: "cursor-stroke",
-          token: "colors",
-          value: resolvedCursor.stroke,
-        },
-        {
-          __prefix: "ui",
-          name: "cursor-stroke-width",
-          token: "colors",
-          value: resolvedCursor.strokeWidth,
-        },
-        {
-          __prefix: "ui",
-          name: "cursor-stroke-dasharray",
-          token: "colors",
-          value: resolvedCursor.strokeDasharray,
-        },
-      ] as Required<CSSUIProps>["var"],
-    [resolvedCursor],
+  const cursorClassName = useMemo(
+    () => getClassName({ ...styles.cursor, ...cursor })(theme),
+    [cursor, styles.cursor, theme],
   )
 
   const [tooltipProps, tooltipUIProps] = splitObject<Dict, string>(
@@ -80,16 +50,13 @@ export const useChartTooltip = ({
       animationDuration: tooltipAnimationDuration,
       isAnimationActive: (tooltipAnimationDuration || 0) > 0,
       cursor: {
-        fill: "var(--ui-cursor-fill)",
-        stroke: "var(--ui-cursor-stroke)",
-        strokeWidth: "var(--ui-cursor-stroke-width)",
-        strokeDasharray: "var(--ui-cursor-stroke-dasharray)",
+        className: cursorClassName,
       },
       ...props,
       ...tooltipProps,
     }),
-    [tooltipAnimationDuration, tooltipProps],
+    [cursorClassName, tooltipAnimationDuration, tooltipProps],
   )
 
-  return { tooltipProps: tooltipUIProps, getTooltipProps, tooltipVars }
+  return { tooltipProps: tooltipUIProps, getTooltipProps }
 }

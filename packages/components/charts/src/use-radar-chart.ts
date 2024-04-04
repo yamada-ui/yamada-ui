@@ -4,7 +4,7 @@ import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
-import { getComponentProps } from "./chart-utils"
+import { getClassName, getComponentProps } from "./chart-utils"
 import type {
   ChartPropGetter,
   PolarAngleAxisProps,
@@ -52,14 +52,18 @@ export type UseRadarChartOptions = {
    * Props passed down to recharts `PolarAngleAxis` component.
    */
   polarAngleAxisProps?: PolarAngleAxisProps
-  // TODO: Provide polar-angle-axis-tick props
-  // polarAngleAxisTickProps?:any
+  /**
+   * Props passed down to recharts `tick` of `PolarAngleAxis` component.
+   */
+  polarAngleAxisTickProps?: CSSUIProps
   /**
    * Props passed down to recharts `PolarRadiusAxis` component.
    */
   polarRadiusAxisProps?: PolarRadiusAxisProps
-  // TODO: Provide polar-radius-axis-tick props
-  // polarRadiusAxisTickProps?:any
+  /**
+   * Props passed down to recharts `tick` of `PolarRadiusAxis` component.
+   */
+  polarRadiusAxisTickProps?: CSSUIProps
   /**
    * Determines whether dots should be displayed.
    *
@@ -137,25 +141,14 @@ export const useRadarChart = ({
     [fillOpacity, radarColors],
   )
 
-  // FIXME: replace className.
-  const [chartProps, radarChartClassName] = useMemo(() => {
-    const resolvedRadarChartProps = {
-      "& .recharts-polar-angle-axis-tick": { ...styles.polarAngleAxisTick },
-      "& .recharts-polar-radius-axis-tick": { ...styles.polarRadiusAxisTick },
-      ...rest.chartProps,
-    }
-
-    return getComponentProps<Dict, string>(
-      [resolvedRadarChartProps, radarChartProperties],
-      styles.chart,
-    )(theme)
-  }, [
-    rest.chartProps,
-    styles.chart,
-    styles.polarAngleAxisTick,
-    styles.polarRadiusAxisTick,
-    theme,
-  ])
+  const [chartProps, radarChartClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.chartProps ?? {}, radarChartProperties],
+        styles.chart,
+      )(theme),
+    [rest.chartProps, styles.chart, theme],
+  )
 
   const [polarGridProps, polarGridClassName] = useMemo(
     () =>
@@ -175,6 +168,15 @@ export const useRadarChart = ({
     [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
   )
 
+  const polarAngleAxisTickClassName = useMemo(
+    () =>
+      getClassName({
+        ...styles.polarAngleAxisTick,
+        ...rest.polarAngleAxisTickProps,
+      })(theme),
+    [rest.polarAngleAxisTickProps, styles.polarAngleAxisTick, theme],
+  )
+
   const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
@@ -182,6 +184,15 @@ export const useRadarChart = ({
         styles.polarRadiusAxis,
       )(theme),
     [rest.polarRadiusAxisProps, styles.polarRadiusAxis, theme],
+  )
+
+  const polarRadiusAxisTickClassName = useMemo(
+    () =>
+      getClassName({
+        ...styles.polarRadiusAxisTick,
+        ...rest.polarRadiusAxisTickProps,
+      })(theme),
+    [rest.polarRadiusAxisTickProps, styles.polarRadiusAxisTick, theme],
   )
 
   const [radarProps, radarClassName] = useMemo(() => {
@@ -402,12 +413,24 @@ export const useRadarChart = ({
       ref,
       className: cx(className, polarAngleAxisClassName),
       dataKey,
+      tick: {
+        className: cx(
+          "ui-radar-chart__polar-angle-axis-tick",
+          polarAngleAxisTickClassName,
+        ),
+      },
       tickFormatter: valueFormatter,
       tickSize: 16,
       ...props,
       ...polarAngleAxisProps,
     }),
-    [dataKey, polarAngleAxisClassName, polarAngleAxisProps, valueFormatter],
+    [
+      dataKey,
+      polarAngleAxisClassName,
+      polarAngleAxisProps,
+      polarAngleAxisTickClassName,
+      valueFormatter,
+    ],
   )
 
   const getPolarRadiusAxisProps: ChartPropGetter<
@@ -418,11 +441,22 @@ export const useRadarChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, polarRadiusAxisClassName),
+      tick: {
+        className: cx(
+          "ui-radar-chart__polar-radius-axis-tick",
+          polarRadiusAxisTickClassName,
+        ),
+      },
       tickFormatter: valueFormatter,
       ...props,
       ...polarRadiusAxisProps,
     }),
-    [polarRadiusAxisClassName, polarRadiusAxisProps, valueFormatter],
+    [
+      polarRadiusAxisClassName,
+      polarRadiusAxisProps,
+      polarRadiusAxisTickClassName,
+      valueFormatter,
+    ],
   )
 
   return {

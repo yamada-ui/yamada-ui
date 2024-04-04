@@ -1,5 +1,17 @@
 # @yamada-ui/charts
 
+## 1.0.2
+
+### Patch Changes
+
+- [#1127](https://github.com/yamada-ui/yamada-ui/pull/1127) [`94a4201`](https://github.com/yamada-ui/yamada-ui/commit/94a42011cf93bb6a8c84e3ef7696f97d46bf4b79) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `syncId` props.
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/tooltip@1.0.20
+  - @yamada-ui/use-token@1.1.6
+  - @yamada-ui/use-value@1.1.6
+
 ## 1.0.1
 
 ### Patch Changes

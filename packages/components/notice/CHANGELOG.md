@@ -1,5 +1,17 @@
 # @yamada-ui/notice
 
+## 1.0.19
+
+### Patch Changes
+
+- [#1114](https://github.com/yamada-ui/yamada-ui/pull/1114) [`8315d17`](https://github.com/yamada-ui/yamada-ui/commit/8315d17106ea494e2900c1756934cf11356e9b27) Thanks [@SatooRu65536](https://github.com/SatooRu65536)! - Apply theme's token to NoticeProvider component
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/alert@1.0.19
+  - @yamada-ui/close-button@1.0.19
+  - @yamada-ui/motion@1.0.19
+
 ## 1.0.18
 
 ### Patch Changes

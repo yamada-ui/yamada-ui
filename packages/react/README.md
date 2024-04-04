@@ -90,6 +90,9 @@ $ pnpm add @yamada-ui/carousel
 # Provide a convenient Dropzone component using `react-dropzone`.
 $ pnpm add @yamada-ui/dropzone
 
+# Provide a convenient Chart component using `recharts`.
+$ pnpm add @yamada-ui/charts
+
 # Provide a convenient Markdown component using `react-markdown` and `react-syntax-highlighter`.
 $ pnpm add @yamada-ui/markdown
 

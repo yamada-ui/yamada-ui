@@ -147,16 +147,6 @@ export const useRadarChart = ({
     [rest.polarAngleAxisProps],
   )
 
-  // TODO: Once a fix for recharts is released, I'll fix it.
-  const [polarRadiusAxisProps, polarRadiusAxisStyles] = useMemo(
-    () =>
-      splitObject<Dict, string>(
-        rest.polarRadiusAxisProps ?? {},
-        polarRadiusAxisProperties,
-      ),
-    [rest.polarRadiusAxisProps],
-  )
-
   // FIXME: replace className.
   const [chartProps, radarChartClassName] = useMemo(() => {
     const resolvedRadarChartProps = {
@@ -165,10 +155,6 @@ export const useRadarChart = ({
         ...polarAngleAxisStyles,
       },
       "& .recharts-polar-angle-axis-tick": { ...styles.polarAngleAxisTick },
-      "& .recharts-polar-radius-axis": {
-        ...styles.polarRadiusAxis,
-        ...polarRadiusAxisStyles,
-      },
       "& .recharts-polar-radius-axis-tick": { ...styles.polarRadiusAxisTick },
       ...rest.chartProps,
     }
@@ -179,12 +165,10 @@ export const useRadarChart = ({
     )(theme)
   }, [
     polarAngleAxisStyles,
-    polarRadiusAxisStyles,
     rest.chartProps,
     styles.chart,
     styles.polarAngleAxis,
     styles.polarAngleAxisTick,
-    styles.polarRadiusAxis,
     styles.polarRadiusAxisTick,
     theme,
   ])
@@ -208,14 +192,14 @@ export const useRadarChart = ({
   //   [rest.polarAngleAxisProps, styles.polarAngleAxis, theme],
   // )
 
-  // const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
-  //   () =>
-  //     getComponentProps<Dict, string>(
-  //       [rest.polarRadiusAxisProps ?? {}, polarRadiusAxisProperties],
-  //       styles.polarRadiusAxis,
-  //     )(theme),
-  //   [rest.polarRadiusAxisProps, styles.polarRadiusAxis, theme],
-  // )
+  const [polarRadiusAxisProps, polarRadiusAxisClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.polarRadiusAxisProps ?? {}, polarRadiusAxisProperties],
+        styles.polarRadiusAxis,
+      )(theme),
+    [rest.polarRadiusAxisProps, styles.polarRadiusAxis, theme],
+  )
 
   const [radarProps, radarClassName] = useMemo(() => {
     const resolvedRadarProps = {
@@ -333,7 +317,6 @@ export const useRadarChart = ({
           )(theme)
 
           resolvedDot = {
-            // BUG: className is not applied.
             className: cx("ui-radar-chart__dot", className),
             fill: color,
             r: 4,
@@ -458,18 +441,12 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      // BUG: className is not applied.
-      // className: cx(className, polarRadiusAxisClassName),
-      className,
+      className: cx(className, polarRadiusAxisClassName),
       tickFormatter: valueFormatter,
       ...props,
       ...polarRadiusAxisProps,
     }),
-    [
-      // polarRadiusAxisClassName,
-      polarRadiusAxisProps,
-      valueFormatter,
-    ],
+    [polarRadiusAxisClassName, polarRadiusAxisProps, valueFormatter],
   )
 
   return {

@@ -10279,6 +10279,40 @@
     }
   },
   {
+    "title": "Getting Started with Hono",
+    "type": "page",
+    "description": "A guide to installing and using Yamada UI in your Hono project.",
+    "slug": "/getting-started/frameworks/hono",
+    "hierarchy": { "lv1": "Getting Started with Hono" }
+  },
+  {
+    "title": "Install Packages",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/hono#install-packages",
+    "hierarchy": {
+      "lv1": "Getting Started with Hono",
+      "lv2": "Install Packages"
+    }
+  },
+  {
+    "title": "Setup",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/hono#setup",
+    "hierarchy": { "lv1": "Getting Started with Hono", "lv2": "Setup" }
+  },
+  {
+    "title": "Add UIProvider",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/hono#add-uiprovider",
+    "hierarchy": { "lv1": "Getting Started with Hono", "lv2": "Add UIProvider" }
+  },
+  {
+    "title": "Use Components",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/hono#use-components",
+    "hierarchy": { "lv1": "Getting Started with Hono", "lv2": "Use Components" }
+  },
+  {
     "title": "Framework",
     "type": "page",
     "description": "How to install and use Yamada UI for each framework.",

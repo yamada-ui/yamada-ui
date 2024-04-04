@@ -1,5 +1,14 @@
 # @yamada-ui/theme
 
+## 1.5.1
+
+### Patch Changes
+
+- [#1077](https://github.com/yamada-ui/yamada-ui/pull/1077) [`7716ae2`](https://github.com/yamada-ui/yamada-ui/commit/7716ae20f7c90a770aef232e5d6376da1b4cb3f0) Thanks [@quantumshiro](https://github.com/quantumshiro)! - made the legend wrap around
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+
 ## 1.5.0
 
 ### Minor Changes

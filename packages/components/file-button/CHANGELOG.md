@@ -1,5 +1,14 @@
 # @yamada-ui/file-button
 
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`1826fe8`](https://github.com/yamada-ui/yamada-ui/commit/1826fe8e07ac68541a39b9b3a51679389c4f30ef), [`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/button@1.0.21
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/form-control@1.0.21
+
 ## 1.0.22
 
 ### Patch Changes

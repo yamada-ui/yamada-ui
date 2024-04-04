@@ -1,5 +1,19 @@
 # @yamada-ui/color-picker
 
+## 1.2.6
+
+### Patch Changes
+
+- [#1122](https://github.com/yamada-ui/yamada-ui/pull/1122) [`b41e146`](https://github.com/yamada-ui/yamada-ui/commit/b41e146da8521569e1fa5ba11b92a42ef91b9bcd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `onChangeEnd` was not executed when a color was selected with `ColorPicker`'s `eyeDropper`.
+
+- Updated dependencies [[`1826fe8`](https://github.com/yamada-ui/yamada-ui/commit/1826fe8e07ac68541a39b9b3a51679389c4f30ef), [`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e), [`b6731ab`](https://github.com/yamada-ui/yamada-ui/commit/b6731abb0eab82b8fe5aa3b2e2549a7ce1843d28)]:
+  - @yamada-ui/button@1.0.21
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/input@1.0.21
+  - @yamada-ui/popover@1.0.19
+  - @yamada-ui/form-control@1.0.21
+  - @yamada-ui/icon@1.0.18
+
 ## 1.2.5
 
 ### Patch Changes

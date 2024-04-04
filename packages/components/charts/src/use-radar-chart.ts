@@ -160,8 +160,6 @@ export const useRadarChart = ({
   // FIXME: replace className.
   const [chartProps, radarChartClassName] = useMemo(() => {
     const resolvedRadarChartProps = {
-      "& .recharts-polar-grid-concentric-polygon": { ...styles.polarGrid },
-      "& .recharts-polar-grid-concentric-circle": { ...styles.polarGrid },
       "& .recharts-polar-angle-axis": {
         ...styles.polarAngleAxis,
         ...polarAngleAxisStyles,
@@ -186,7 +184,6 @@ export const useRadarChart = ({
     styles.chart,
     styles.polarAngleAxis,
     styles.polarAngleAxisTick,
-    styles.polarGrid,
     styles.polarRadiusAxis,
     styles.polarRadiusAxisTick,
     theme,
@@ -423,7 +420,6 @@ export const useRadarChart = ({
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      // BUG: `.recharts-polar-grid-concentric-xxx` is not applied className.
       className: cx(className, polarGridClassName),
       ...props,
       ...polarGridProps,

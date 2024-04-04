@@ -84,6 +84,9 @@ $ pnpm add @yamada-ui/carousel
 # `react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。
 $ pnpm add @yamada-ui/dropzone
 
+# `recharts`を使用した、便利なチャートコンポーネントを提供します。
+$ pnpm add @yamada-ui/charts
+
 # `react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。
 $ pnpm add @yamada-ui/markdown
 

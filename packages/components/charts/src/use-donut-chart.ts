@@ -115,6 +115,8 @@ export const useDonutChart = ({
   const {
     activeShape = {},
     inactiveShape = {},
+    label,
+    labelLine,
     ...computedDonutProps
   } = rest.donutProps ?? {}
 
@@ -172,7 +174,7 @@ export const useDonutChart = ({
     return getClassName(resolvedDimCell)(theme)
   }, [dimCell, theme])
 
-  const resolvedActiveShape = useMemo(
+  const activeShapeProps = useMemo(
     () =>
       getComponentProps<Dict, string>(
         [activeShape, pieProperties],
@@ -181,13 +183,23 @@ export const useDonutChart = ({
     [activeShape, styles.activeShape, theme],
   )
 
-  const resolvedInactiveShape = useMemo(
+  const inactiveShapeProps = useMemo(
     () =>
       getComponentProps<Dict, string>(
         [inactiveShape, pieProperties],
         styles.inactiveShape,
       )(theme, true),
     [inactiveShape, styles.inactiveShape, theme],
+  )
+
+  const labelClassName = useMemo(
+    () => getClassName({ ...styles.label, ...label })(theme),
+    [label, styles.label, theme],
+  )
+
+  const labelLineClassName = useMemo(
+    () => getClassName({ ...styles.labelLine, ...labelLine })(theme),
+    [labelLine, styles.labelLine, theme],
   )
 
   const cellPropList = useMemo(
@@ -254,27 +266,32 @@ export const useDonutChart = ({
       startAngle,
       endAngle,
       isAnimationActive: false,
-      //BUG: label and labelLine className is not applied.
-      label: withLabel ? { fillOpacity: 1 } : false,
-      labelLine: withLabelsLine,
-      activeShape: resolvedActiveShape,
-      inactiveShape: resolvedInactiveShape,
+      label: withLabel
+        ? { className: cx("ui-donut-chart__label", labelClassName) }
+        : false,
+      labelLine: withLabelsLine
+        ? { className: cx("ui-donut-chart__label-line", labelLineClassName) }
+        : false,
+      activeShape: activeShapeProps,
+      inactiveShape: inactiveShapeProps,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
       ...donutProps,
     }),
     [
-      data,
       donutClassName,
-      donutProps,
-      endAngle,
-      innerRadius,
+      data,
       outerRadius,
+      innerRadius,
       paddingAngle,
-      resolvedActiveShape,
-      resolvedInactiveShape,
       startAngle,
+      endAngle,
       withLabel,
+      labelClassName,
       withLabelsLine,
+      labelLineClassName,
+      activeShapeProps,
+      inactiveShapeProps,
+      donutProps,
     ],
   )
 

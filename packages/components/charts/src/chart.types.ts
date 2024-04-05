@@ -103,6 +103,8 @@ export type DonutProps = Merge<
   {
     activeShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
     inactiveShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+    label?: CSSUIProps
+    labelLine?: CSSUIProps
   }
 >
 export type CellProps = Merge<

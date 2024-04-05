@@ -14,6 +14,7 @@ import {
   findChildren,
   cx,
   omitObject,
+  isArray,
 } from "@yamada-ui/utils"
 import type { FC } from "react"
 import { useCallback, useMemo } from "react"
@@ -82,6 +83,10 @@ type DrawerOptions = {
    * @default 100
    */
   dragVelocity?: number
+  /**
+   * Props for the blank area when `closeOnDrag` is `true`.
+   */
+  blankForDragProps?: CSSUIObject
 }
 
 export type DrawerProps = Omit<
@@ -141,6 +146,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       dragElastic = 0.1,
       dragOffset = 80,
       dragVelocity = 100,
+      blankForDragProps,
       portalProps,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -187,6 +193,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
               dragVelocity,
               withCloseButton,
               withDragBar,
+              blankForDragProps,
               ...omitObject(rest, ["isFullHeight"]),
               placement,
               closeOnDrag,
@@ -228,6 +235,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       dragElastic,
       dragOffset,
       dragVelocity,
+      blankForDragProps,
       ...rest
     },
     ref,
@@ -242,6 +250,19 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       validChildren,
       DrawerCloseButton,
     )
+
+    const blankForDragBg = useMemo(() => {
+      const propBg =
+        rest.backgroundColor ?? rest.bgColor ?? rest.background ?? rest.bg
+      const styleBg =
+        styles.container?.backgroundColor ??
+        styles.container?.bgColor ??
+        styles.container?.background ??
+        styles.container?.bg
+      const computedBg = propBg ?? styleBg
+
+      return isArray(computedBg) ? computedBg : [computedBg]
+    }, [rest, styles])
 
     const blankForDrag = useMemo<CSSUIObject>(() => {
       let position: CSSUIObject = {}
@@ -264,18 +285,26 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
           break
       }
 
+      const [lightBg, darkBg] = blankForDragBg
+
       return {
         _after: {
           content: '""',
           display: "block",
           w: "100%",
           h: "100dvh",
-          bg: "black",
+          bg: lightBg,
           position: "absolute",
           ...position,
+          ...blankForDragProps,
+        },
+        _dark: {
+          _after: {
+            bg: darkBg,
+          },
         },
       }
-    }, [placement])
+    }, [placement, blankForDragBg, blankForDragProps])
 
     const css = useMemo<CSSUIObject>(
       () => ({

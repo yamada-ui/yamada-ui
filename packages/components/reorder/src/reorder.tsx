@@ -64,7 +64,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     const {
       className,
       orientation = "vertical",
-      gap = "1rem",
+      gap = "fallback(4,1rem)",
       onChange,
       onCompleteChange,
       children,

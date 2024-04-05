@@ -9620,6 +9620,16 @@
     }
   },
   {
+    "title": "ドラッグバーを非表示にする",
+    "type": "fragment",
+    "slug": "/components/overlay/drawer#ドラッグバーを非表示にする",
+    "hierarchy": {
+      "lv1": "Drawer",
+      "lv2": "使い方",
+      "lv3": "ドラッグバーを非表示にする"
+    }
+  },
+  {
     "title": "オーバーレイをカスタマイズする",
     "type": "fragment",
     "slug": "/components/overlay/drawer#オーバーレイをカスタマイズする",

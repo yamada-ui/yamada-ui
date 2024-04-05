@@ -8995,6 +8995,12 @@
     "hierarchy": { "lv1": "Drawer", "lv2": "Usage", "lv3": "Close on drag" }
   },
   {
+    "title": "Hide the Drag Bar",
+    "type": "fragment",
+    "slug": "/components/overlay/drawer#hide-the-drag-bar",
+    "hierarchy": { "lv1": "Drawer", "lv2": "Usage", "lv3": "Hide the Drag Bar" }
+  },
+  {
     "title": "Customize the Overlay",
     "type": "fragment",
     "slug": "/components/overlay/drawer#customize-the-overlay",

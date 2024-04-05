@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.6.0
+
+### Minor Changes
+
+- [#1123](https://github.com/yamada-ui/yamada-ui/pull/1123) [`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `@supports` of CSS At-rules.
+
 ## 1.5.0
 
 ### Minor Changes

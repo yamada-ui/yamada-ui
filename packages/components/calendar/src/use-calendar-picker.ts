@@ -216,8 +216,8 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     getFormControlProperties({ omit: ["aria-readonly"] }),
   )
   const [containerProps, inputProps] = splitObject<Dict, string>(
-    omitObject(rest, [...popoverProperties]),
-    [...layoutStyleProperties, "aria-readonly"],
+    omitObject(rest, popoverProperties),
+    layoutStyleProperties,
   )
   const { disabled, readOnly } = formControlProps
 

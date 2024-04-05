@@ -1,5 +1,19 @@
 # @yamada-ui/snacks
 
+## 1.0.11
+
+### Patch Changes
+
+- [#1125](https://github.com/yamada-ui/yamada-ui/pull/1125) [`844f07c`](https://github.com/yamada-ui/yamada-ui/commit/844f07c4b1035050e477c9f7ba7ac3109ba3052f) Thanks [@kametsun](https://github.com/kametsun)! - fix: Apply theme token to Snacks component
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/alert@1.0.19
+  - @yamada-ui/close-button@1.0.19
+  - @yamada-ui/motion@1.0.19
+  - @yamada-ui/use-token@1.1.6
+  - @yamada-ui/use-value@1.1.6
+
 ## 1.0.10
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @yamada-ui/modal
 
+## 1.1.2
+
+### Patch Changes
+
+- [#1109](https://github.com/yamada-ui/yamada-ui/pull/1109) [`8cf83a8`](https://github.com/yamada-ui/yamada-ui/commit/8cf83a81309f0065bad3d4d693840d34f5f62dbb) Thanks [@GensIto](https://github.com/GensIto)! - fixed zIndex & outside default value for modal
+
+- Updated dependencies [[`987747f`](https://github.com/yamada-ui/yamada-ui/commit/987747f956b51ce65557c5581a3725cd99e3fb16), [`1826fe8`](https://github.com/yamada-ui/yamada-ui/commit/1826fe8e07ac68541a39b9b3a51679389c4f30ef), [`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/transitions@1.0.19
+  - @yamada-ui/button@1.0.21
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/close-button@1.0.19
+  - @yamada-ui/motion@1.0.19
+  - @yamada-ui/use-value@1.1.6
+
 ## 1.1.1
 
 ### Patch Changes

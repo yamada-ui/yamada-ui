@@ -9,7 +9,7 @@ import {
   Text,
 } from "@yamada-ui/react"
 import { memo } from "react"
-import { UserCard } from "./UserCard"
+import { UserCard } from "./user-card"
 
 export const ShareDocumentCard = memo(() => {
   return (

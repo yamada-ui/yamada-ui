@@ -1,6 +1,6 @@
 import { Card, CardBody, CardHeader, Heading, Text } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
-import { UserCard } from "./UserCard"
+import { UserCard } from "./user-card"
 
 export const TeamMembersCard = memo(() => {
   const options = useMemo(() => ["Owner", "Admin", "Member", "Guest"], [])

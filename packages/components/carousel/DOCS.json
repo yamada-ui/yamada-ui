@@ -206,14 +206,14 @@
       "type": "boolean",
       "defaultValue": false,
       "required": false,
-      "description": "If `true`, the button will be perfectly round. Else, it'll be slightly round."
+      "description": "If true, the button is full rounded. Else, it'll be slightly round."
     }
   },
   "CarouselIndicators": {
     "component": {
       "type": "FC<{ index: number; isSelected: boolean }>",
       "required": false,
-      "description": "The custom curousel indicator to use."
+      "description": "The custom caroucel indicator to use."
     }
   }
 }

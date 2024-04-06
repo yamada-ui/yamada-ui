@@ -9,6 +9,8 @@ import {
   isObject,
   isString,
   createdDom,
+  toKebabCase,
+  filterUndefined,
 } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { ColorMode } from "./css"
@@ -92,12 +94,20 @@ const analyzeCSSValue = (value: any) => {
 
 const tokenToCSSVar =
   (token: ThemeToken, value: any) => (theme: StyledTheme) => {
+    const match = isString(value)
+      ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
+      : null
+
+    const [, resolvedValue, fallbackValue] = match ?? []
+
+    if (resolvedValue) value = resolvedValue
+
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
       return theme.__cssMap[resolvedToken].ref
     } else {
-      return value
+      return fallbackValue ?? value
     }
   }
 
@@ -254,6 +264,68 @@ const generateFilter =
     }
   }
 
+const generateAtRule =
+  (identifier: string): Transform =>
+  (values: any[], theme: StyledTheme) =>
+    values.reduce<Dict>(
+      (
+        prev,
+        {
+          type,
+          name,
+          query,
+          css,
+          w,
+          width,
+          minW,
+          minWidth,
+          maxW,
+          maxWidth,
+          h,
+          height,
+          minH,
+          minHeight,
+          maxH,
+          maxHeight,
+          ...rest
+        },
+      ) => {
+        width ??= w
+        minWidth ??= minW
+        maxWidth ??= maxW
+        height ??= h
+        minHeight ??= minH
+        maxHeight ??= maxH
+
+        if (!query) {
+          const resolvedRest = filterUndefined({
+            width,
+            minWidth,
+            maxWidth,
+            height,
+            minHeight,
+            maxHeight,
+            ...rest,
+          })
+
+          query = Object.entries(resolvedRest)
+            .map(([key, value]) => {
+              value = tokenToCSSVar("sizes", value)(theme)
+
+              return `(${toKebabCase(key)}: ${value})`
+            })
+            .join(" and ")
+        }
+
+        const condition = `@${identifier} ${type ?? name ?? ""} ${query}`
+
+        prev[condition] = css
+
+        return prev
+      },
+      {},
+    )
+
 export const mode =
   <L extends any, D extends any>(light: L, dark: D) =>
   (colorMode: ColorMode | undefined = "light"): L | D =>
@@ -265,31 +337,28 @@ export const keyframes = (...arg: CSSObject[]): Keyframes =>
 export type Transforms = keyof typeof transforms
 
 export const transforms = {
-  var: ({ name, token, value }: any, theme: StyledTheme) => {
-    if (isObject(value)) {
-      const resolvedValue = Object.entries(value).reduce<Dict>(
-        (prev, [key, value]) => {
-          prev[key] = { name, token, value }
+  var: (values: any[], theme: StyledTheme) =>
+    values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
+      const prefix = __prefix ?? theme.__config.var?.prefix ?? "ui"
 
-          return prev
-        },
-        {},
-      )
-
-      return { var: resolvedValue }
-    } else if (isArray(value)) {
-      const resolvedValue = value.map((value) => ({ name, token, value }))
-
-      return { var: resolvedValue }
-    } else {
-      const prefix = theme.__config.var?.prefix ?? "ui"
-
-      value = tokenToCSSVar(token, value)(theme)
       name = `--${prefix}-${name}`
 
-      return { [name]: value }
-    }
-  },
+      if (isObject(value)) {
+        value = Object.entries(value).reduce<Dict>((prev, [key, value]) => {
+          prev[key] = tokenToCSSVar(token, value)(theme)
+
+          return prev
+        }, {})
+      } else if (isArray(value)) {
+        value = value.map((value) => tokenToCSSVar(token, value)(theme))
+      } else {
+        value = tokenToCSSVar(token, value)(theme)
+      }
+
+      prev[name] = value
+
+      return prev
+    }, {}),
   token:
     (
       token: ThemeToken,
@@ -376,4 +445,7 @@ export const transforms = {
   animation: generateAnimation,
   transform: generateTransform,
   filter: generateFilter,
+  media: generateAtRule("media"),
+  container: generateAtRule("container"),
+  supports: generateAtRule("supports"),
 }

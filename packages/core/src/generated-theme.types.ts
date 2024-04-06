@@ -635,9 +635,9 @@ export interface GeneratedTheme extends UITheme {
     | "beerus"
     | (string & {})
   components: {
-    Indicator: {
-      sizes: "sm" | "md" | "lg" | (string & {})
-      variants: "solid" | "subtle" | (string & {})
+    Toggle: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "subtle" | "solid" | "outline" | "unstyled" | (string & {})
     }
     Accordion: {
       sizes: string & {}
@@ -654,6 +654,14 @@ export interface GeneratedTheme extends UITheme {
         | "top-accent"
         | (string & {})
     }
+    AlphaSlider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    AreaChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     Autocomplete: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -665,6 +673,10 @@ export interface GeneratedTheme extends UITheme {
     Badge: {
       sizes: string & {}
       variants: "solid" | "subtle" | "outline" | (string & {})
+    }
+    BarChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
     }
     Button: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -701,6 +713,18 @@ export interface GeneratedTheme extends UITheme {
     CloseButton: {
       sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
+    }
+    ColorPicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
+    ColorSelector: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
+    ColorSwatch: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: "basic" | "rounded" | (string & {})
     }
     DatePicker: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
@@ -751,9 +775,21 @@ export interface GeneratedTheme extends UITheme {
         | (string & {})
       variants: string & {}
     }
+    HueSlider: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    Indicator: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: "solid" | "subtle" | (string & {})
+    }
     Input: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
+    LineChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
     }
     Mark: {
       sizes: string & {}
@@ -789,6 +825,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
     }
+    MultiDatePicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
     MultiSelect: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
@@ -817,14 +857,34 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: string & {}
     }
+    RadarChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     Radio: { sizes: "sm" | "md" | "lg" | (string & {}); variants: string & {} }
+    RangeDatePicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
     RangeSlider: {
       sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
+    Rating: {
+      sizes: "xs" | "sm" | "md" | "lg" | "xl" | (string & {})
       variants: string & {}
     }
     Reorder: {
       sizes: "sm" | "md" | "normal" | "lg" | (string & {})
       variants: "elevated" | "outline" | "unstyled" | (string & {})
+    }
+    Resizable: {
+      sizes: string & {}
+      variants: "border" | "spacer" | "unstyled" | (string & {})
+    }
+    SaturationSlider: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
     }
     SegmentedControl: {
       sizes: "sm" | "md" | "lg" | (string & {})

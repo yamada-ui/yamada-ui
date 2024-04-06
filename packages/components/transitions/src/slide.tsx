@@ -1,16 +1,16 @@
-import type { HTMLUIProps, CSSUIObject, Token } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, Token } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
 import type {
-  HTMLMotionProps,
   WithTransitionProps,
   MotionTransitionVariants,
+  MotionProps,
 } from "@yamada-ui/motion"
 import {
-  motion,
   AnimatePresence,
   transitionEnter,
   transitionExit,
   MOTION_TRANSITION_VARIANTS,
+  Motion,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
@@ -39,10 +39,7 @@ type SlideOptions = {
   placement?: Token<"top" | "left" | "bottom" | "right">
 }
 
-export type SlideProps = WithTransitionProps<
-  HTMLUIProps<"div"> & HTMLMotionProps<"div">
-> &
-  SlideOptions
+export type SlideProps = WithTransitionProps<MotionProps> & SlideOptions
 
 const variants: MotionTransitionVariants = {
   enter: ({
@@ -85,7 +82,7 @@ export const slideProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/slide
  */
-export const Slide = forwardRef<SlideProps, "div">(
+export const Slide = forwardRef<SlideProps, "div", false>(
   (
     {
       unmountOnExit,
@@ -113,7 +110,7 @@ export const Slide = forwardRef<SlideProps, "div">(
 
     const css: CSSUIObject = {
       position: "fixed",
-      zIndex: "jeice",
+      zIndex: "fallback(jeice, 110)",
       ...__css,
       ...position,
     }
@@ -121,8 +118,7 @@ export const Slide = forwardRef<SlideProps, "div">(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <ui.div
-            as={motion.div}
+          <Motion
             ref={ref}
             className={cx("ui-slide", className)}
             custom={custom}

@@ -2,10 +2,12 @@ import type { Dict } from "@yamada-ui/utils"
 import { isArray, isObject, merge, runIfFunc } from "@yamada-ui/utils"
 import type { ConfigProps } from "../config"
 import { pseudos } from "../pseudos"
-import { styles } from "../styles"
+import { processSkipProperties, styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
+
+const isProcessSkip = (key: string) => processSkipProperties.includes(key)
 
 const expandColorMode = (key: string, value: any[]): Dict => ({
   [key]: value[0],
@@ -32,7 +34,7 @@ const expandResponsive = (
   }, {} as Dict)
 
 const expandCSS =
-  (css: Dict) =>
+  (css: Dict, isNested: boolean) =>
   (theme: StyledTheme): Dict => {
     if (!theme.__breakpoints) return css
 
@@ -45,13 +47,17 @@ const expandCSS =
 
       if (value == null) continue
 
-      if (isArray(value)) {
+      if (isArray(value) && !(isProcessSkip(key) && !isNested)) {
         computedCSS = merge(computedCSS, expandColorMode(key, value))
 
         continue
       }
 
-      if (isObject(value) && isResponsive(value)) {
+      if (
+        isObject(value) &&
+        isResponsive(value) &&
+        !(isProcessSkip(key) && !isNested)
+      ) {
         computedCSS = merge(computedCSS, expandResponsive(key, value, queries))
 
         continue
@@ -63,38 +69,42 @@ const expandCSS =
     return computedCSS
   }
 
-export const getCSS = ({
+const getCSS = ({
   theme,
   styles = {},
   pseudos = {},
+  disableStyleProp,
 }: {
   theme: StyledTheme
   styles: Dict
   pseudos: Dict
+  disableStyleProp?: (prop: string) => boolean
 }): ((cssOrFunc: CSSObjectOrFunc | CSSUIObject) => Dict) => {
   const createCSS = (
     cssOrFunc: CSSObjectOrFunc | CSSUIObject,
     isNested: boolean = false,
   ): Dict => {
     const css = runIfFunc(cssOrFunc, theme)
-    const computedCSS = expandCSS(css)(theme)
+    const computedCSS = expandCSS(css, isNested)(theme)
 
     let resolvedCSS: Dict = {}
 
-    for (let [key, value] of Object.entries(computedCSS)) {
+    for (let [prop, value] of Object.entries(computedCSS)) {
+      if (disableStyleProp?.(prop)) continue
+
       value = runIfFunc(value, theme)
 
       if (value == null) continue
 
-      if (key in pseudos) key = pseudos[key]
+      if (prop in pseudos) prop = pseudos[prop]
 
-      let style: ConfigProps | undefined | true = styles[key]
+      let style: ConfigProps | undefined | true = styles[prop]
 
-      if (style === true) style = { properties: key }
+      if (style === true) style = { properties: prop }
 
       if (isObject(value) && !style?.isProcessSkip) {
-        resolvedCSS[key] = resolvedCSS[key] ?? {}
-        resolvedCSS[key] = merge(resolvedCSS[key], createCSS(value, true))
+        resolvedCSS[prop] = resolvedCSS[prop] ?? {}
+        resolvedCSS[prop] = merge(resolvedCSS[prop], createCSS(value, true))
 
         continue
       }
@@ -136,7 +146,7 @@ export const getCSS = ({
         continue
       }
 
-      resolvedCSS[key] = value
+      resolvedCSS[prop] = value
     }
 
     return resolvedCSS
@@ -147,9 +157,10 @@ export const getCSS = ({
 
 export const css =
   (cssObject: CSSObjectOrFunc | CSSUIObject) =>
-  (theme: StyledTheme): Dict =>
+  (theme: StyledTheme, disableStyleProp?: (prop: string) => boolean): Dict =>
     getCSS({
       theme,
       styles,
       pseudos,
+      disableStyleProp,
     })(cssObject)

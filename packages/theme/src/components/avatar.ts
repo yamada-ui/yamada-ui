@@ -1,11 +1,13 @@
-import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mode, type ComponentMultiStyle } from "@yamada-ui/core"
 import { getMemoizedObject as get, isDark, randomColor } from "@yamada-ui/utils"
 
 export const Avatar: ComponentMultiStyle = {
   baseStyle: {
     group: {},
     container: ({ theme: t, colorMode: m, name: string }) => {
-      const bg = string ? randomColor({ string }) : "blackAlpha.600"
+      const bg = string
+        ? randomColor({ string })
+        : mode("gray.200", "gray.500")(m)
 
       return {
         bg,
@@ -38,7 +40,12 @@ export const Avatar: ComponentMultiStyle = {
         fontSize: `calc(${get(t, "sizes.4")} / 2.5)`,
         lineHeight: get(t, "sizes.16"),
       },
-      excess: { w: "4", h: "4" },
+      excess: {
+        w: "4",
+        h: "4",
+        fontSize: `calc(${get(t, "sizes.4")} / 2.5)`,
+        lineHeight: get(t, "sizes.16"),
+      },
     }),
     xs: ({ theme: t }) => ({
       container: {

@@ -358,11 +358,14 @@ const getOverlayStyle = (
   right: 0,
   bottom: 0,
   left: 0,
-  zIndex: "beerus",
-  bg: type === "fill" ? ["white", "black"] : "blackAlpha.600",
+  zIndex: "fallback(beerus, 9999)",
+  bg:
+    type === "fill"
+      ? ["fallback(white, #fbfbfb)", "fallback(black, #141414)"]
+      : "fallback(blackAlpha.600, rgba(0, 0, 0, 0.48))",
   w: "100vw",
   h: "100dvh",
-  p: "md",
+  p: "fallback(4, 1rem)",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -388,12 +391,12 @@ const ScreenComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      maxW: "md",
+      maxW: "24rem",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
+      gap: "fallback(2, 0.5rem)",
     }
 
     useTimeout(onFinish, duration)
@@ -425,16 +428,19 @@ const PageComponent = memo(
     onFinish,
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
-      bg: ["white", "black"],
-      maxW: "md",
-      p: "md",
+      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
+      maxW: "24rem",
+      p: "fallback(4, 1rem)",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
-      rounded: "md",
-      boxShadow: ["lg", "dark-lg"],
+      gap: "fallback(2, 0.5rem)",
+      rounded: "fallback(md, 0.375rem)",
+      boxShadow: [
+        "fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))",
+        "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
+      ],
     }
 
     useTimeout(onFinish, duration)
@@ -472,18 +478,21 @@ const BackgroundComponent = memo(
   }: LoadingComponentProps) => {
     const css: CSSUIObject = {
       position: "fixed",
-      right: "md",
-      bottom: "md",
-      zIndex: "beerus",
-      bg: ["white", "black"],
-      maxW: "sm",
-      p: "sm",
+      right: "fallback(4, 1rem)",
+      bottom: "fallback(4, 1rem)",
+      zIndex: "fallback(beerus, 9999)",
+      bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
+      maxW: "20rem",
+      p: "fallback(2, 0.5rem)",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      gap: "sm",
-      rounded: "md",
-      boxShadow: ["3xl", "dark-lg"],
+      gap: "fallback(2, 0.5rem)",
+      rounded: "fallback(md, 0.375rem)",
+      boxShadow: [
+        "fallback(3xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 -25px 50px -12px rgba(0, 0, 0, 0.25))",
+        "fallback(dark-lg, 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 5px 10px rgba(0, 0, 0, 0.2), 0px 15px 40px rgba(0, 0, 0, 0.4))",
+      ],
     }
 
     useTimeout(onFinish, duration)

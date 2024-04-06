@@ -160,6 +160,10 @@ export const FormControl = forwardRef<FormControlProps, "div">(
             ref={ref}
             className={cx("ui-form__control", className)}
             role="group"
+            data-focus={dataAttr(isFocused)}
+            data-disabled={dataAttr(isDisabled)}
+            data-invalid={dataAttr(isInvalid)}
+            data-readonly={dataAttr(isReadOnly)}
             __css={css}
             {...rest}
           >
@@ -248,6 +252,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
     "aria-readonly": ariaAttr(readOnly),
     "aria-required": ariaAttr(required),
     "aria-invalid": ariaAttr(isInvalid),
+    "data-readonly": dataAttr(readOnly),
     onFocus: handlerAll(control?.onFocus, onFocus),
     onBlur: handlerAll(control?.onBlur, onBlur),
     ...(disabled || readOnly
@@ -263,7 +268,7 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   }
 }
 
-export const formControlProperties: any[] = [
+export const formControlBaseProperties = [
   "disabled",
   "required",
   "readOnly",
@@ -271,6 +276,7 @@ export const formControlProperties: any[] = [
   "aria-readonly",
   "aria-required",
   "aria-invalid",
+  "data-readonly",
   "onFocus",
   "onBlur",
   "_hover",
@@ -278,7 +284,30 @@ export const formControlProperties: any[] = [
   "_focus",
   "_invalid",
   "_focusVisible",
-]
+] as const
+
+export const formControlProperties =
+  formControlBaseProperties as unknown as any[]
+
+export const getFormControlProperties = ({
+  omit = [],
+  pick = [],
+}: {
+  omit?: (typeof formControlBaseProperties)[number][]
+  pick?: (typeof formControlBaseProperties)[number][]
+}) => {
+  let result = formControlProperties
+
+  if (pick.length) {
+    result = result.filter((property) => pick.includes(property))
+  }
+
+  if (omit.length) {
+    result = result.filter((property) => !omit.includes(property))
+  }
+
+  return result
+}
 
 type LabelOptions = {
   requiredIndicator?: ReactNode

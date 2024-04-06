@@ -1,5 +1,3 @@
-hirotomoyamada/yamada-docs:
-  - source: .changelog/
-    dest: contents/changelog/
-    exclude: |
-      manifest.json
+yamada-ui/yamada-docs:
+  - source: coverage/
+    dest: public/coverage/

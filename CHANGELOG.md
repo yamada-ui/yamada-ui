@@ -2,9 +2,67 @@
 
 ## Latest Release
 
-### December 25, 2023: [v1.0.1](/.changelog/v1.0.1.mdx)
+### April 4, 2024: [v1.3.1](/.changelog/v1.3.1.mdx)
 
 ## Previous Releases
+
+### March 28, 2024: [v1.3.0](/.changelog/v1.3.0.mdx)
+
+### March 18, 2024: [v1.2.11](/.changelog/v1.2.11.mdx)
+
+### March 17, 2024: [v1.2.10](/.changelog/v1.2.10.mdx)
+
+### March 10, 2024: [v1.2.9](/.changelog/v1.2.9.mdx)
+
+### March 3, 2024: [v1.2.8](/.changelog/v1.2.8.mdx)
+
+### February 25, 2024: [v1.2.7](/.changelog/v1.2.7.mdx)
+
+### February 18, 2024: [v1.2.6](/.changelog/v1.2.6.mdx)
+
+### February 9, 2024: [v1.2.5](/.changelog/v1.2.5.mdx)
+
+### February 5, 2024: [v1.2.4](/.changelog/v1.2.4.mdx)
+
+### February 1, 2024: [v1.2.3](/.changelog/v1.2.3.mdx)
+
+### January 25, 2024: [v1.2.2](/.changelog/v1.2.2.mdx)
+
+### January 19, 2024: [v1.2.1](/.changelog/v1.2.1.mdx)
+
+### January 19, 2024: [v1.2.0](/.changelog/v1.2.0.mdx)
+
+### January 17, 2024: [v1.1.10](/.changelog/v1.1.10.mdx)
+
+### January 16, 2024: [v1.1.9](/.changelog/v1.1.9.mdx)
+
+### January 16, 2024: [v1.1.8](/.changelog/v1.1.8.mdx)
+
+### January 14, 2024: [v1.1.7](/.changelog/v1.1.7.mdx)
+
+### January 14, 2024: [v1.1.6](/.changelog/v1.1.6.mdx)
+
+### January 11, 2024: [v1.1.5](/.changelog/v1.1.5.mdx)
+
+### January 4, 2024: [v1.1.4](/.changelog/v1.1.4.mdx)
+
+### January 4, 2024: [v1.1.3](/.changelog/v1.1.3.mdx)
+
+### January 3, 2024: [v1.1.2](/.changelog/v1.1.2.mdx)
+
+### December 31, 2023: [v1.1.1](/.changelog/v1.1.1.mdx)
+
+### December 31, 2023: [v1.1.0](/.changelog/v1.1.0.mdx)
+
+### December 29, 2023: [v1.0.5](/.changelog/v1.0.5.mdx)
+
+### December 28, 2023: [v1.0.4](/.changelog/v1.0.4.mdx)
+
+### December 27, 2023: [v1.0.3](/.changelog/v1.0.3.mdx)
+
+### December 26, 2023: [v1.0.2](/.changelog/v1.0.2.mdx)
+
+### December 25, 2023: [v1.0.1](/.changelog/v1.0.1.mdx)
 
 ### December 24, 2023: [v1.0.0](/.changelog/v1.0.0.mdx)
 

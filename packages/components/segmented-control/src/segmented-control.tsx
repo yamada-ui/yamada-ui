@@ -1,4 +1,10 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  UIPropGetter,
+  RequiredUIPropGetter,
+} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -10,7 +16,6 @@ import { LayoutGroup, Motion } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -23,7 +28,13 @@ import {
   useCallbackRef,
   useIsMounted,
 } from "@yamada-ui/utils"
-import type { ChangeEvent, ChangeEventHandler, FC, ReactElement } from "react"
+import type {
+  ChangeEvent,
+  ChangeEventHandler,
+  FC,
+  FocusEventHandler,
+  ReactElement,
+} from "react"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 
 export type SegmentedControlItem = SegmentedControlButtonProps & {
@@ -35,8 +46,21 @@ const { DescendantsContextProvider, useDescendants, useDescendant } =
 
 type SegmentedControlContext = {
   selectedValue: string
-  getInputProps: RequiredPropGetter<{ index: number }>
-  getLabelProps: RequiredPropGetter<{ index: number }>
+  getInputProps: RequiredUIPropGetter<
+    "input",
+    { index: number; isDisabled?: boolean; isReadOnly?: boolean }
+  >
+  getLabelProps: RequiredUIPropGetter<
+    "label",
+    {
+      value: string
+      index: number
+      isDisabled?: boolean
+      isReadOnly?: boolean
+      disabled?: boolean
+      readOnly?: boolean
+    }
+  >
   styles: Record<string, CSSUIObject>
 }
 
@@ -124,7 +148,6 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     const [focusedIndex, setFocusedIndex] = useState<number>(-1)
     const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const labelRefs = useRef<Map<string | number, HTMLLabelElement>>(new Map())
 
     const [selectedValue, setSelectedValue] = useControllableState({
       value,
@@ -162,9 +185,9 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
     const onBlur = useCallback(() => setFocusedIndex(-1), [])
 
-    const getContainerProps: PropGetter = useCallback(
+    const getContainerProps: UIPropGetter = useCallback(
       (props = {}, ref = null) => ({
-        ...omitObject(rest, ["onChange"]),
+        ...omitObject(rest, ["onChange", "aria-readonly"]),
         ...props,
         ref: mergeRefs(containerRef, ref),
         id,
@@ -175,14 +198,17 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       [id, isDisabled, isReadOnly, onBlur, rest],
     )
 
-    const getInputProps: RequiredPropGetter<{ index: number }> = useCallback(
-      ({ index, ...props } = {}, ref = null) => {
+    const getInputProps: RequiredUIPropGetter<
+      "input",
+      { isDisabled?: boolean; isReadOnly?: boolean; index: number }
+    > = useCallback(
+      ({ index, ...props }, ref = null) => {
         const disabled = props.disabled ?? props.isDisabled ?? isDisabled
         const readOnly = props.readOnly ?? props.isReadOnly ?? isReadOnly
         const checked = props.value === selectedValue
 
         return {
-          ...omitObject(props, ["isDisabled", "isReadOnly"]),
+          ...omitObject(props, ["isDisabled", "isReadOnly", "aria-readonly"]),
           ref,
           id: `${id}-${index}`,
           type: "radio",
@@ -215,26 +241,42 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       [isDisabled, isReadOnly, selectedValue, id, name, focusedIndex, onChange],
     )
 
-    const getLabelProps: RequiredPropGetter<{ index: number }> = useCallback(
-      ({ index, ...props } = {}, ref = null) => {
-        const disabled = props.disabled ?? props.isDisabled ?? isDisabled
-        const readOnly = props.readOnly ?? props.isReadOnly ?? isReadOnly
+    const getLabelProps: RequiredUIPropGetter<
+      "label",
+      {
+        value: string
+        index: number
+        isDisabled?: boolean
+        isReadOnly?: boolean
+        disabled?: boolean
+        readOnly?: boolean
+      }
+    > = useCallback(
+      (
+        {
+          index,
+          isDisabled: isDisabledProp,
+          isReadOnly: isReadOnlyProp,
+          ...props
+        },
+        ref = null,
+      ) => {
+        const disabled = props.disabled ?? isDisabledProp ?? isDisabled
+        const readOnly = props.readOnly ?? isReadOnlyProp ?? isReadOnly
         const checked = props.value === selectedValue
         const focused = index === focusedIndex
 
         return {
-          props,
-          ref: mergeRefs(
-            (node) => labelRefs.current.set(props.value, node),
-            ref,
-          ),
+          ...props,
+          ref,
           "aria-disabled": ariaAttr(disabled),
           "aria-readonly": ariaAttr(readOnly),
           "data-checked": dataAttr(checked),
           "data-focus": dataAttr(focused),
           "data-focus-visible": dataAttr(focused && isFocusVisible),
-          onFocus: handlerAll(props.onFocus, () =>
-            onFocus(index, disabled || readOnly),
+          onFocus: handlerAll(
+            props.onFocus as unknown as FocusEventHandler<HTMLLabelElement>,
+            () => onFocus(index, disabled || readOnly || false),
           ),
           ...(disabled || readOnly
             ? {
@@ -262,7 +304,6 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     }, [])
 
     const css: CSSUIObject = {
-      position: "relative",
       display: "inline-flex",
       alignItems: "center",
       ...styles.container,
@@ -322,7 +363,7 @@ type SegmentedControlButtonOptions = {
   /**
    * The value of the segmented control button.
    */
-  value: string | number
+  value: string
   /**
    * The callback fired when any children radio is checked or unchecked.
    */
@@ -397,10 +438,10 @@ export const SegmentedControlButton = forwardRef<
         {...rest}
       >
         <ui.input {...getInputProps(props, mergeRefs(register, ref))} />
-        <ui.span>{children}</ui.span>
         {isSelected && isMounted ? (
           <SegmentedControlCursor {...motionProps} />
         ) : null}
+        <ui.span zIndex="1">{children}</ui.span>
       </ui.label>
     )
   },
@@ -419,9 +460,8 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
 
   const css: CSSUIObject = {
     position: "absolute",
-    zIndex: "-10",
-    w: "full",
-    h: "full",
+    w: "100%",
+    h: "100%",
     ...styles.cursor,
   }
 

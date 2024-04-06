@@ -83,7 +83,7 @@ type MultiSelectOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type MultiSelectProps = ThemeProps<"Select"> &
+export type MultiSelectProps = ThemeProps<"MultiSelect"> &
   Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty"> &
   MultiSelectOptions
 
@@ -275,7 +275,9 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
                 marginInlineEnd: "0.25rem",
               }
 
-              return el ? cloneElement(el as ReactElement, { style }) : null
+              return el
+                ? cloneElement(el as ReactElement, { key: index, style })
+                : null
             })}
           </ui.span>
         )
@@ -286,10 +288,14 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
               const isLast = label.length === index + 1
 
               return (
-                <ui.span key={index} display="inline-block" me="0.25rem">
-                  {value}
-                  {!isLast ? separator : null}
-                </ui.span>
+                <ui.span
+                  key={index}
+                  display="inline-block"
+                  me="0.25rem"
+                  dangerouslySetInnerHTML={{
+                    __html: `${value}${!isLast ? separator : ""}`,
+                  }}
+                />
               )
             })}
           </ui.span>
@@ -307,7 +313,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     ])
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",

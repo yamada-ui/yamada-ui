@@ -10,22 +10,19 @@ export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
     baseStyle: {
       container: {},
       field: {
-        cursor: "pointer",
+        cursor: "text",
         pb: "px",
         _focus: {
           zIndex: "unset",
         },
         _readOnly: {
           pointerEvents: "none",
-          _placeholder: {
-            color: "inherit !important",
-          },
         },
       },
       list: {
         w: "auto",
         minW: "auto",
-        maxH: "auto",
+        maxH: "inherit",
         overflowY: "inherit",
         p: "2",
       },
@@ -40,4 +37,4 @@ export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
       },
     },
   },
-)({ omit: ["addon", "group", "groupLabel", "item", "itemIcon"] })
+)({ omit: ["addon", "element", "group", "groupLabel", "item", "itemIcon"] })

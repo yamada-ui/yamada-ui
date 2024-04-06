@@ -76,7 +76,7 @@ type TooltipOptions = {
   /**
    * If `true`, the tooltip will hide on click.
    *
-   * @default true
+   * @default false
    */
   closeOnClick?: boolean
   /**
@@ -191,7 +191,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       openDelay = 0,
       closeDelay = 0,
       isDisabled,
-      closeOnClick = true,
+      closeOnClick,
       closeOnScroll,
       closeOnMouseDown,
       closeOnEsc = true,
@@ -229,13 +229,13 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
 
     const openWithDelay = useCallback(() => {
       if (!isDisabled && !openTimeout.current) {
-        closeNow()
+        if (isOpen) closeNow()
 
         const win = getOwnerWindow(triggerRef.current)
 
         openTimeout.current = win.setTimeout(onOpen, openDelay)
       }
-    }, [isDisabled, openDelay, closeNow, onOpen])
+    }, [isDisabled, isOpen, openDelay, closeNow, onOpen])
 
     const closeWithDelay = useCallback(() => {
       if (openTimeout.current) {

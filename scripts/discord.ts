@@ -14,7 +14,7 @@ const main = async () => {
   try {
     const start = process.hrtime.bigint()
 
-    const url = process.env.DISCORD_WEBHOOK_URL
+    const url = process.env.DISCORD_RELEASE_WEBHOOK_URL
 
     if (!url) throw new Error("Missing Discord Webhook URL\n")
 
@@ -24,7 +24,10 @@ const main = async () => {
 
     const [{ version }] = JSON.parse(manifest)
 
-    const content = `A new version of Yamada UI has been released😎\n\nversion: [${version}](https://github.com/hirotomoyamada/yamada-ui/blob/main/.changelog/v${version}.mdx)`
+    const content = [
+      `A new version of Yamada UI has been released😎`,
+      `version: [${version}](https://github.com/yamada-ui/yamada-ui/blob/main/.changelog/v${version}.mdx)`,
+    ].join("\n\n")
 
     s.stop(`Got the changelog`)
 

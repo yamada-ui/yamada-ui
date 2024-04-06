@@ -168,6 +168,12 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the button is disabled."
+    },
+    "isRounded": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If true, the button is full rounded."
     }
   },
   "PopoverContent": {
@@ -259,11 +265,16 @@
     "aria-valuemin": { "type": "number", "required": false },
     "aria-valuenow": { "type": "number", "required": false },
     "aria-valuetext": { "type": "string", "required": false },
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | \"b\" | \"base\" | \"bdi\" | \"bdo\" | \"big\" | \"blockquote\" | \"body\" | \"br\" | \"button\" | \"canvas\" | ... 149 more ... | \"view\"",
+      "required": false
+    },
     "autoCapitalize": { "type": "string", "required": false },
     "autoCorrect": { "type": "string", "required": false },
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
+    "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
       "required": false
@@ -685,15 +696,7 @@
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
-    "onPointerEnterCapture": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
     "onPointerLeave": {
-      "type": "PointerEventHandler<HTMLElement>",
-      "required": false
-    },
-    "onPointerLeaveCapture": {
       "type": "PointerEventHandler<HTMLElement>",
       "required": false
     },
@@ -868,7 +871,6 @@
       "type": "WheelEventHandler<HTMLElement>",
       "required": false
     },
-    "placeholder": { "type": "string", "required": false },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },
@@ -884,6 +886,7 @@
     "suppressHydrationWarning": { "type": "boolean", "required": false },
     "tabIndex": { "type": "number", "required": false },
     "title": { "type": "string", "required": false },
+    "translate": { "type": "\"yes\" | \"no\"", "required": false },
     "typeof": { "type": "string", "required": false },
     "unselectable": { "type": "\"on\" | \"off\"", "required": false },
     "vocab": { "type": "string", "required": false }

@@ -13,7 +13,21 @@ import {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControlProps } from "@yamada-ui/form-control"
-import { cx, omitObject } from "@yamada-ui/utils"
+import {
+  addDomEvent,
+  assignRef,
+  createdDom,
+  cx,
+  handlerAll,
+  mergeRefs,
+  noop,
+  omitObject,
+  useSafeLayoutEffect,
+  useUpdateEffect,
+} from "@yamada-ui/utils"
+import type { ForwardedRef } from "react"
+import { useRef } from "react"
+import useAutosize from "./use-autosize"
 
 type TextareaOptions = {
   /**
@@ -24,6 +38,26 @@ type TextareaOptions = {
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  /**
+   * If `true`, the Textarea height auto-adjusts to text height.
+   */
+  autosize?: boolean
+  /**
+   * Autosize up to maxRows rows.
+   *
+   * @default Infinity
+   */
+  maxRows?: number
+  /**
+   * Autosize up to minRows rows.
+   *
+   * @default 1
+   */
+  minRows?: number
+  /**
+   * Ref to a resize function.
+   */
+  resizeRef?: ForwardedRef<() => void>
 }
 
 export type TextareaProps = Omit<
@@ -45,21 +79,68 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     className,
     rows,
     resize = "none",
+    autosize,
+    maxRows = Infinity,
+    minRows = 1,
+    resizeRef,
+    onChange,
     ...rest
   } = omitThemeProps(mergedProps)
-
   rest = useFormControlProps(rest)
 
-  const css: CSSUIObject = rows
-    ? omitObject(styles, ["h", "minH", "height", "minHeight"])
-    : styles
+  const isBrowser = createdDom()
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const value = textareaRef.current?.value ?? ""
+  const resizeTextarea = useAutosize(textareaRef, maxRows, minRows)
+
+  let css: CSSUIObject
+
+  if (rows || autosize) {
+    css = omitObject(styles, [
+      "h",
+      "height",
+      "minH",
+      "minHeight",
+      "maxH",
+      "maxHeight",
+    ])
+  } else {
+    css = styles
+  }
+
+  useSafeLayoutEffect(() => {
+    if (!isBrowser || !autosize) return
+
+    resizeTextarea()
+
+    const unsubscribeResize = addDomEvent(window, "resize", resizeTextarea)
+    const unsubscribeLoadingdone = addDomEvent(
+      document.fonts,
+      "loadingdone",
+      resizeTextarea,
+    )
+
+    return () => {
+      unsubscribeResize()
+      unsubscribeLoadingdone()
+    }
+  }, [])
+
+  useUpdateEffect(() => {
+    if (!autosize) return
+    resizeTextarea()
+  }, [value])
+
+  assignRef(resizeRef, resizeTextarea)
 
   return (
     <ui.textarea
-      ref={ref}
+      ref={mergeRefs(ref, textareaRef)}
       className={cx("ui-textarea", className)}
-      resize={resize}
       __css={css}
+      resize={resize}
+      rows={rows}
+      onChange={handlerAll(autosize ? resizeTextarea : noop, onChange)}
       {...rest}
     />
   )

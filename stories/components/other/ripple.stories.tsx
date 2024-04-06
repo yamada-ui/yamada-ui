@@ -31,3 +31,25 @@ export const basic: Story = () => {
     </Box>
   )
 }
+
+export const withIsDisabled: Story = () => {
+  const { onPointerDown, ...rippleProps } = useRipple()
+
+  return (
+    <Box
+      as="button"
+      type="button"
+      p="md"
+      rounded="md"
+      bg="primary"
+      color="white"
+      position="relative"
+      overflow="hidden"
+      onPointerDown={onPointerDown}
+    >
+      <Text>Button</Text>
+
+      <Ripple {...rippleProps} isDisabled />
+    </Box>
+  )
+}

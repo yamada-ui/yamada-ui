@@ -100,6 +100,11 @@
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
     },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
+    },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
@@ -170,6 +175,11 @@
       "type": "Omit<OptionProps, \"children\" | \"value\">",
       "required": false,
       "description": "Props for select option element."
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder of the select."
     },
     "placeholderInOptions": {
       "type": "boolean",
@@ -336,6 +346,11 @@
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
     },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
+    },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
@@ -370,7 +385,7 @@
       "required": false,
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."
@@ -416,6 +431,11 @@
       "type": "Omit<OptionProps, \"children\" | \"value\">",
       "required": false,
       "description": "Props for select option element."
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "description": "The placeholder of the select."
     },
     "placement": {
       "type": "UIValue<Placement>",

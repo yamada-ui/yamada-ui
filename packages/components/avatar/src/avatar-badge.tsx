@@ -20,7 +20,7 @@ type AvatarBadgeOptions = {
   /**
    * It is used for the color of the ping animation.
    *
-   * @default '["blackAlpha.400", "whiteAlpha.500"]''
+   * @default '["blackAlpha.400", "whiteAlpha.500"]'
    */
   pingColor?: HTMLUIProps<"div">["backgroundColor"]
   /**
@@ -125,8 +125,8 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
             className="ui-avatar__badge__ping"
             __css={{
               position: "absolute",
-              boxSize: "full",
-              rounded: "full",
+              boxSize: "100%",
+              rounded: "9999px",
               opacity: 0.75,
               zIndex: -1,
               bg: pingColor,

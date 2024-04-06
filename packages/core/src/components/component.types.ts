@@ -1,14 +1,20 @@
 import type { CSSObject, Interpolation } from "@emotion/react"
+import type { Merge } from "@yamada-ui/utils"
 import type * as React from "react"
 import type { CSSUIObject, CSSUIProps } from "../css"
 import type { StyleProps } from "../styles"
 import type { PropsTheme } from "../theme.types"
 import type { DOMElements } from "./element.types"
 
+export type BaseStyle =
+  | CSSUIObject
+  | ((props: StyledResolverProps) => CSSUIObject)
+
 export type StyledOptions = {
+  disableStyleProp?: (prop: string) => boolean
   shouldForwardProp?: (prop: string) => boolean
   label?: string
-  baseStyle?: CSSUIProps | ((props: StyledResolverProps) => CSSUIProps)
+  baseStyle?: BaseStyle
 }
 
 export type UIFactory = {
@@ -53,10 +59,7 @@ export type UIProps = CSSUIProps & {
   css?: Interpolation<{}>
 }
 
-export type OmitProps<Y, M extends keyof any = never> = Omit<
-  Y,
-  "as" | "color" | M
->
+export type OmitProps<Y, M extends keyof any = never> = Omit<Y, "as" | M>
 
 export type IntersectionProps<
   Y extends object = {},
@@ -115,3 +118,17 @@ export type HTMLUIProps<Y extends As> = Omit<
     : "ref" | keyof StyleProps
 > &
   UIProps & { as?: As }
+
+export type UIPropGetter<Y extends As = "div", M = undefined, D = undefined> = (
+  props?: Merge<HTMLUIProps<Y>, M>,
+  ref?: React.Ref<any>,
+) => Merge<HTMLUIProps<Y> & React.RefAttributes<any>, D>
+
+export type RequiredUIPropGetter<
+  Y extends As = "div",
+  M = undefined,
+  D = undefined,
+> = (
+  props: Merge<HTMLUIProps<Y>, M>,
+  ref?: React.Ref<any>,
+) => Merge<HTMLUIProps<Y> & React.RefAttributes<any>, D>

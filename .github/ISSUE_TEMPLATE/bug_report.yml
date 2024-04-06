@@ -1,16 +1,16 @@
 name: "Bug Report"
 description: "File a bug report"
 body:
-  - type: "markdown"
+  - type: markdown
     attributes:
       value: |
         Thank you for creating an issue 😎!
 
         Please search open/closed issues before submitting. Someone might have asked the same thing before 😎!
 
-          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
+          - [Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+          - [Discussions](https://github.com/yamada-ui/yamada-ui/discussions)
 
         We're all volunteers here, so please help us help you by taking the time to accurately fill out this template. 💖
   - type: dropdown
@@ -28,16 +28,16 @@ body:
         - "@yamada-ui/cli"
     validations:
       required: true
-  - type: "input"
-    id: "version"
+  - type: input
+    id: version
     attributes:
       label: "Package Version"
       description: "The version of the package you are using."
       placeholder: "0.1.0"
     validations:
       required: true
-  - type: "textarea"
-    id: "description"
+  - type: textarea
+    id: description
     attributes:
       label: "Description"
       description: "A brief description of the issue."
@@ -45,15 +45,15 @@ body:
         When I ____, I expected ____ to happen, but ____ happened instead.
     validations:
       required: true
-  - type: "input"
-    id: "reproduction"
+  - type: input
+    id: reproduction
     attributes:
       label: "Link to Reproduction"
       description: |
-        If possible, please include a link to a CodeSandbox with a minimal reproduction (see https://github.com/hirotomoyamada/yamada-ui#codesandbox for templates)
+        If possible, please include a link to a CodeSandbox with a minimal reproduction (see https://github.com/yamada-ui/yamada-ui#codesandbox for templates)
       placeholder: "https://codesandbox.io/"
-  - type: "textarea"
-    id: "steps"
+  - type: textarea
+    id: steps
     attributes:
       label: "Steps to Reproduce"
       description: |
@@ -75,8 +75,8 @@ body:
         - "Edge"
         - "Opera"
         - "Other (add additional context)"
-  - type: "checkboxes"
-    id: "operating-system"
+  - type: checkboxes
+    id: operating-system
     attributes:
       label: "Operating System"
       description: "The operating system(s) on which this issue occurred."
@@ -98,10 +98,15 @@ body:
       options:
         - "Yes"
         - "No"
-  - type: "textarea"
-    id: "additional-information"
+  - type: textarea
+    id: additional-information
     attributes:
       label: "Additional Information"
       description: |
         Use this section to provide any additional information you might have,
         such as a possible fix, screenshots, notes, or links to ideas.
+  - type: markdown
+    attributes:
+      value: |
+        This issue will be automatically unassigned after two weeks have passed since it was assigned.
+        Once unassigned, it may be picked up by someone else for work.

@@ -1,16 +1,16 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject } from "@yamada-ui/core"
+import { forwardRef } from "@yamada-ui/core"
 import type {
-  HTMLMotionProps,
   WithTransitionProps,
   MotionTransitionVariants,
+  MotionProps,
 } from "@yamada-ui/motion"
 import {
-  motion,
   AnimatePresence,
   transitionEnter,
   transitionExit,
   MOTION_TRANSITION_EASINGS,
+  Motion,
 } from "@yamada-ui/motion"
 import { createdDom, cx } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
@@ -39,10 +39,7 @@ type CollapseOptions = {
   endingHeight?: number | string
 }
 
-export type CollapseProps = WithTransitionProps<
-  HTMLUIProps<"div"> & HTMLMotionProps<"div">
-> &
-  CollapseOptions
+export type CollapseProps = WithTransitionProps<MotionProps> & CollapseOptions
 
 const variants: MotionTransitionVariants = {
   enter: ({
@@ -89,7 +86,7 @@ export const collapseProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/collapse
  */
-export const Collapse = forwardRef<CollapseProps, "div">(
+export const Collapse = forwardRef<CollapseProps, "div", false>(
   (
     {
       unmountOnExit,
@@ -172,8 +169,7 @@ export const Collapse = forwardRef<CollapseProps, "div">(
     return (
       <AnimatePresence initial={false} custom={custom}>
         {isOpen ? (
-          <ui.div
-            as={motion.div}
+          <Motion
             ref={ref}
             className={cx("ui-collapse", className)}
             {...rest}

@@ -1,5 +1,212 @@
 # @yamada-ui/theme
 
+## 1.5.1
+
+### Patch Changes
+
+- [#1077](https://github.com/yamada-ui/yamada-ui/pull/1077) [`7716ae2`](https://github.com/yamada-ui/yamada-ui/commit/7716ae20f7c90a770aef232e5d6376da1b4cb3f0) Thanks [@quantumshiro](https://github.com/quantumshiro)! - made the legend wrap around
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+
+## 1.5.0
+
+### Minor Changes
+
+- [#985](https://github.com/yamada-ui/yamada-ui/pull/985) [`bd4c3f1`](https://github.com/yamada-ui/yamada-ui/commit/bd4c3f1d345e0dd0fb8fd65b37daf9c10d6c6ccd) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Toggle` component style.
+
+- [#1060](https://github.com/yamada-ui/yamada-ui/pull/1060) [`ed7ff01`](https://github.com/yamada-ui/yamada-ui/commit/ed7ff018b3044a5b9693c5890ccf7fb859e9d225) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `BarChart`, `RadarChart`, `LineChart` and `AreaChart` component style.
+
+### Patch Changes
+
+- Updated dependencies [[`3520270`](https://github.com/yamada-ui/yamada-ui/commit/3520270ca29914ba29fe28cede32001f7ae4cc57), [`308f87d`](https://github.com/yamada-ui/yamada-ui/commit/308f87dc6c047fde5550ad957cf9c793516e04bb), [`c9183e2`](https://github.com/yamada-ui/yamada-ui/commit/c9183e20c108ac486eb7b9644af44cc51a8b458b), [`8ea03f0`](https://github.com/yamada-ui/yamada-ui/commit/8ea03f0a19046e01e70e81c013e2adcd2f1cd147)]:
+  - @yamada-ui/core@1.5.0
+  - @yamada-ui/utils@1.0.8
+
+## 1.4.8
+
+### Patch Changes
+
+- [#973](https://github.com/yamada-ui/yamada-ui/pull/973) [`3f3019c`](https://github.com/yamada-ui/yamada-ui/commit/3f3019c0e334e59c8e70a32949f689794df86d79) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where styles were not applied when the prefix of a css variable was changed.
+
+- Updated dependencies [[`41538f5`](https://github.com/yamada-ui/yamada-ui/commit/41538f506e383f9cfa7095f0eb0f6d7f7856ca6b), [`68ad161`](https://github.com/yamada-ui/yamada-ui/commit/68ad161f60f01708ef05dc18ce8ec4dee0cdf43a), [`575220a`](https://github.com/yamada-ui/yamada-ui/commit/575220abd642948e10e71fecbd732934805864e6)]:
+  - @yamada-ui/core@1.4.4
+
+## 1.4.7
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`18c3ef3`](https://github.com/yamada-ui/yamada-ui/commit/18c3ef3e9288e4699a7d0d98dc5ec347eefb8dfa), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/utils@1.0.7
+  - @yamada-ui/core@1.4.3
+
+## 1.4.6
+
+### Patch Changes
+
+- [#854](https://github.com/yamada-ui/yamada-ui/pull/854) [`630a8b9`](https://github.com/yamada-ui/yamada-ui/commit/630a8b9d29554fc318cd0dbfc62f7c7ee5eb4b64) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where when in dark mode, the focus border color of `Input` becomes thinner.
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/core@1.4.2
+
+## 1.4.5
+
+### Patch Changes
+
+- Updated dependencies [[`01a717c`](https://github.com/hirotomoyamada/yamada-ui/commit/01a717c877f24bd6052e7a51b5145efec2d29657), [`f63c0f6`](https://github.com/hirotomoyamada/yamada-ui/commit/f63c0f62a9664e3b5bd5afd2ca0702cba32bff00)]:
+  - @yamada-ui/core@1.4.1
+
+## 1.4.4
+
+### Patch Changes
+
+- [#718](https://github.com/hirotomoyamada/yamada-ui/pull/718) [`c0a73be`](https://github.com/hirotomoyamada/yamada-ui/commit/c0a73be0e618001ed681ab08fe2828f033ad6cc8) Thanks [@setodeve](https://github.com/setodeve)! - Fixed a bug where fontSize of excessive numbers in AvatarGroup is not set to theme sizes.
+
+- Updated dependencies [[`c53943b`](https://github.com/hirotomoyamada/yamada-ui/commit/c53943b72eec2297af9224b25cd481f7e283edbf), [`7bf7129`](https://github.com/hirotomoyamada/yamada-ui/commit/7bf712902a58d19b31e53ff452b7195b52adf517), [`37c4149`](https://github.com/hirotomoyamada/yamada-ui/commit/37c414918eba9a7e66e6afd65b2097b9cb8ebda9)]:
+  - @yamada-ui/core@1.4.0
+
+## 1.4.3
+
+### Patch Changes
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/core@1.3.2
+
+## 1.4.2
+
+### Patch Changes
+
+- [#698](https://github.com/hirotomoyamada/yamada-ui/pull/698) [`398124a`](https://github.com/hirotomoyamada/yamada-ui/commit/398124ac60b0481c92c9ab983d932dd405c9d7ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added variant `unstyled` to `Resizable` component.
+
+- Updated dependencies [[`398124a`](https://github.com/hirotomoyamada/yamada-ui/commit/398124ac60b0481c92c9ab983d932dd405c9d7ab), [`242afe6`](https://github.com/hirotomoyamada/yamada-ui/commit/242afe6508f50d67780f36b1b411810cb08a7238)]:
+  - @yamada-ui/core@1.3.1
+
+## 1.4.1
+
+### Patch Changes
+
+- [#666](https://github.com/hirotomoyamada/yamada-ui/pull/666) [`6255da0`](https://github.com/hirotomoyamada/yamada-ui/commit/6255da0d4f04ac6c1145a1fe3c9f627fcf905c0f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where placeholder of `isReadOnly` style is reset.
+
+## 1.4.0
+
+### Minor Changes
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `ColorPicker`, `SaturationSlider`, `HueSlider`, `AlphaSlider` and `ColorSwatch` component.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Resizable` component.
+
+### Patch Changes
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `NativeSelect` icon disabled `opacity`.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted `DatePicker` and `NativeSelect` component styles.
+
+- [#663](https://github.com/hirotomoyamada/yamada-ui/pull/663) [`75f90ea`](https://github.com/hirotomoyamada/yamada-ui/commit/75f90ea007a9abc32ac9a863f637644f8a36085b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted shadow styles.
+
+- Updated dependencies [[`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`b678019`](https://github.com/hirotomoyamada/yamada-ui/commit/b6780198dc3441eac04bf1f7fd9210c726f32edb), [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf)]:
+  - @yamada-ui/utils@1.0.4
+  - @yamada-ui/core@1.3.0
+
+## 1.3.3
+
+### Patch Changes
+
+- Updated dependencies [[`ed0b334`](https://github.com/hirotomoyamada/yamada-ui/commit/ed0b33495e8ac9add8baf5591951c849cc125cd0)]:
+  - @yamada-ui/core@1.2.2
+
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`101b814`](https://github.com/hirotomoyamada/yamada-ui/commit/101b814104403c3089eb144938ad0e0d65af41ca)]:
+  - @yamada-ui/core@1.2.1
+
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`2c95896`](https://github.com/hirotomoyamada/yamada-ui/commit/2c95896137948e34c6b6459cb601eba0c6d4a1b4), [`6333168`](https://github.com/hirotomoyamada/yamada-ui/commit/633316826c00a278aeefbffe53174296b2fddf01), [`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/core@1.2.0
+  - @yamada-ui/utils@1.0.3
+
+## 1.3.0
+
+### Minor Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`d954e79`](https://github.com/hirotomoyamada/yamada-ui/commit/d954e792097c217d39009935722d211026edd2ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `MultiDatePicker` and `RangeDatePicker` component.
+
+### Patch Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`083892a`](https://github.com/hirotomoyamada/yamada-ui/commit/083892a557c2f94fea536657c8258ccdcc1eb8c9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Calendar` component range style.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`251f200`](https://github.com/hirotomoyamada/yamada-ui/commit/251f20027571426f81a440bf814277de5156bfc9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `Calendar` component `today` styles.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`0069f8c`](https://github.com/hirotomoyamada/yamada-ui/commit/0069f8c5a28d126bb6d0c9eecb972635bd560e17) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added placeholder style to global style.
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`8aaf81d`](https://github.com/hirotomoyamada/yamada-ui/commit/8aaf81d6621df0e37edb7933364c0bedd5754589) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added cursor style to `DatePicker` field.
+
+- Updated dependencies [[`0c9e7c2`](https://github.com/hirotomoyamada/yamada-ui/commit/0c9e7c26a0346a1ee5eb644af125072b1906d295), [`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/core@1.1.4
+  - @yamada-ui/utils@1.0.2
+
+## 1.2.2
+
+### Patch Changes
+
+- [`88ef91b`](https://github.com/hirotomoyamada/yamada-ui/commit/88ef91b854cee510389095267db8e052094c8bd5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `SegmentedControl` component `readonly` styles.
+
+## 1.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`a31abbc`](https://github.com/hirotomoyamada/yamada-ui/commit/a31abbc17f1784514975d863d57f22c7f488ae2e), [`536720b`](https://github.com/hirotomoyamada/yamada-ui/commit/536720b79837a14be9e2c7b74e3e7e1a6f57a9c3)]:
+  - @yamada-ui/core@1.1.3
+
+## 1.2.0
+
+### Minor Changes
+
+- [#527](https://github.com/hirotomoyamada/yamada-ui/pull/527) [`e7d8cee`](https://github.com/hirotomoyamada/yamada-ui/commit/e7d8cee41f6c9b47f577e35494df09e1a2304c3f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Stat` component.
+
+- [#549](https://github.com/hirotomoyamada/yamada-ui/pull/549) [`fb49fe6`](https://github.com/hirotomoyamada/yamada-ui/commit/fb49fe682862bcdfec3420364f64eaa9efccc1b9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Rating` component.
+
+### Patch Changes
+
+- [#565](https://github.com/hirotomoyamada/yamada-ui/pull/565) [`3edb463`](https://github.com/hirotomoyamada/yamada-ui/commit/3edb4635c9b9df7bf0bd68437c2c5e94e6cdfcb0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug with the roundness of the `Drawer` component.
+
+- Updated dependencies [[`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1), [`a723526`](https://github.com/hirotomoyamada/yamada-ui/commit/a7235269d4c5144eefe82c523041f22d5c3eb092), [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599), [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7), [`be74eb9`](https://github.com/hirotomoyamada/yamada-ui/commit/be74eb9b8f1285b0b66003748ffc1d0b7319aa1d), [`35b7763`](https://github.com/hirotomoyamada/yamada-ui/commit/35b7763aadeae7ef899e62e50656da4fa73e5d91), [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0), [`fb24a18`](https://github.com/hirotomoyamada/yamada-ui/commit/fb24a18863a3cdbf96afd4c30d4a76c2620ae55a)]:
+  - @yamada-ui/utils@1.0.1
+  - @yamada-ui/core@1.1.2
+
+## 1.1.4
+
+### Patch Changes
+
+- [#561](https://github.com/hirotomoyamada/yamada-ui/pull/561) [`e488f91`](https://github.com/hirotomoyamada/yamada-ui/commit/e488f91d6facc819748f78df5b9574cc8f830ada) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `SegmentedControl` styles.
+
+## 1.1.3
+
+### Patch Changes
+
+- [#555](https://github.com/hirotomoyamada/yamada-ui/pull/555) [`60163b6`](https://github.com/hirotomoyamada/yamada-ui/commit/60163b6b1d13a904754e207da3c0840a8e265e3e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `cursor: pointer` to `Button` component style.
+
+## 1.1.2
+
+### Patch Changes
+
+- [#547](https://github.com/hirotomoyamada/yamada-ui/pull/547) [`c382711`](https://github.com/hirotomoyamada/yamada-ui/commit/c3827110e32a7528ea5bd7bf84e9dccf7b1abfdc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated fallback background color of `Avatar`.
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`1918baa`](https://github.com/hirotomoyamada/yamada-ui/commit/1918baa2c62d08a4826e2ab6faf98a271f6bdc58)]:
+  - @yamada-ui/core@1.1.1
+
 ## 1.1.0
 
 ### Minor Changes

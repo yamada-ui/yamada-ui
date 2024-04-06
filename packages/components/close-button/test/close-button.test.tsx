@@ -12,7 +12,7 @@ describe("<CloseButton />", () => {
   })
 
   test("should call onClick", async () => {
-    const onClickMock = jest.fn()
+    const onClickMock = vi.fn()
     render(<CloseButton onClick={onClickMock} />)
     const button = screen.getByRole("button")
     fireEvent.click(button)
@@ -20,7 +20,7 @@ describe("<CloseButton />", () => {
   })
 
   test("should not call onClick", async () => {
-    const onClickMock = jest.fn()
+    const onClickMock = vi.fn()
     render(<CloseButton onClick={onClickMock} isDisabled />)
     const button = screen.getByRole("button")
     fireEvent.click(button)

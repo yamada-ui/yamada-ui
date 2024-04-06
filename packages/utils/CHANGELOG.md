@@ -1,5 +1,67 @@
 # @yamada-ui/utils
 
+## 1.0.8
+
+### Patch Changes
+
+- [`8ea03f0`](https://github.com/yamada-ui/yamada-ui/commit/8ea03f0a19046e01e70e81c013e2adcd2f1cd147) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhanced `isMac` function to be case-insensitive.
+
+## 1.0.7
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- [#946](https://github.com/yamada-ui/yamada-ui/pull/946) [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `LegacyRef` to `ReactRef`.
+
+## 1.0.6
+
+### Patch Changes
+
+- [#830](https://github.com/yamada-ui/yamada-ui/pull/830) [`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed to correctly recognize `hex` values without `#`.
+
+## 1.0.5
+
+### Patch Changes
+
+- [#714](https://github.com/hirotomoyamada/yamada-ui/pull/714) [`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `sameColor` function.
+
+## 1.0.4
+
+### Patch Changes
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `convertColor` and `alphaToHex` color functions.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `hslaTo` and `rgbaTo` color functions.
+
+- [#663](https://github.com/hirotomoyamada/yamada-ui/pull/663) [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where calc function not method `toString`.
+
+- [#622](https://github.com/hirotomoyamada/yamada-ui/pull/622) [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `toHsv` and `hsvTo` color functions.
+
+## 1.0.3
+
+### Patch Changes
+
+- [#645](https://github.com/hirotomoyamada/yamada-ui/pull/645) [`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3) Thanks [@Tsukuni](https://github.com/Tsukuni)! - add defaultValue to createContext
+
+## 1.0.2
+
+### Patch Changes
+
+- [#614](https://github.com/hirotomoyamada/yamada-ui/pull/614) [`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `data-disabled` attribute check to `isDisabled` function.
+
+## 1.0.1
+
+### Patch Changes
+
+- [#563](https://github.com/hirotomoyamada/yamada-ui/pull/563) [`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `DOMAttributes` type.
+
+- [#565](https://github.com/hirotomoyamada/yamada-ui/pull/565) [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `toKebabCase` and `toCamelCase` functions.
+
+- [#549](https://github.com/hirotomoyamada/yamada-ui/pull/549) [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `getPx` function
+
+- [#563](https://github.com/hirotomoyamada/yamada-ui/pull/563) [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the types of `PropGetter` and `RequiredPropGetter` was incorrect.
+
 ## 1.0.0
 
 ### Major Changes

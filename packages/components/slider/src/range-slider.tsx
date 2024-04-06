@@ -3,6 +3,8 @@ import type {
   HTMLUIProps,
   ThemeProps,
   CSSUIProps,
+  UIPropGetter,
+  RequiredUIPropGetter,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -14,12 +16,12 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControlProps,
   formControlProperties,
+  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSizes } from "@yamada-ui/use-size"
-import type { PropGetter, RequiredPropGetter } from "@yamada-ui/utils"
 import {
   clampNumber,
   createContext,
@@ -41,7 +43,7 @@ import {
   valueToPercent,
   includesChildren,
 } from "@yamada-ui/utils"
-import type { CSSProperties, KeyboardEvent } from "react"
+import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useId, useRef, useState } from "react"
 
 export type UseRangeSliderProps = FormControlOptions & {
@@ -121,7 +123,7 @@ export const useRangeSlider = ({
   focusThumbOnChange = true,
   ...props
 }: UseRangeSliderProps) => {
-  props.isReadOnly ??= !focusThumbOnChange
+  if (!focusThumbOnChange) props.isReadOnly = true
 
   let {
     id,
@@ -166,6 +168,7 @@ export const useRangeSlider = ({
   const values = computedValues.map((value) =>
     clampNumber(value, min, max),
   ) as [number, number]
+  const [startValue, endValue] = values
   const reversedValues = values.map((value) => max - value + min) as [
     number,
     number,
@@ -175,8 +178,8 @@ export const useRangeSlider = ({
     valueToPercent(value, min, max),
   ) as [number, number]
   const valueBounds = [
-    { min, max: values[1] - spacing },
-    { min: values[0] + spacing, max },
+    { min, max: endValue - spacing },
+    { min: startValue + spacing, max },
   ]
 
   const isVertical = orientation === "vertical"
@@ -191,12 +194,12 @@ export const useRangeSlider = ({
     isInteractive,
     isReversed,
     isVertical,
-    eventSource: null as "pointer" | "keyboard" | null,
     focusThumbOnChange,
     betweenThumbs,
     orientation,
   })
 
+  const eventSourceRef = useRef<"pointer" | "keyboard" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
 
@@ -279,7 +282,7 @@ export const useRangeSlider = ({
 
       const { min, max } = latestRef.current
 
-      latestRef.current.eventSource = "pointer"
+      eventSourceRef.current = "pointer"
 
       const { bottom, left, height, width } =
         trackRef.current.getBoundingClientRect()
@@ -367,7 +370,7 @@ export const useRangeSlider = ({
       const { valueBounds } = latestRef.current
       const { min, max } = valueBounds[activeIndex]
 
-      const actions: Record<string, React.KeyboardEventHandler> = {
+      const actions: Record<string, KeyboardEventHandler> = {
         ArrowRight: () => stepUp(activeIndex),
         ArrowUp: () => stepUp(activeIndex),
         ArrowLeft: () => stepDown(activeIndex),
@@ -387,18 +390,18 @@ export const useRangeSlider = ({
 
       action(ev)
 
-      latestRef.current.eventSource = "keyboard"
+      eventSourceRef.current = "keyboard"
     },
     [activeIndex, constrain, latestRef, stepDown, stepUp, tenStep],
   )
 
   useUpdateEffect(() => {
-    const { eventSource, values } = latestRef.current
+    const { values } = latestRef.current
 
-    if (eventSource === "keyboard") onChangeEnd(values)
-  }, [values, onChangeEnd])
+    if (eventSourceRef.current === "keyboard") onChangeEnd(values)
+  }, [startValue, endValue, onChangeEnd])
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const z = { width: 0, height: 0 }
       const p = isVertical ? "height" : "width"
@@ -422,7 +425,12 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...omitObject(rest, ["value", "onChangeStart", "onChangeEnd"]),
+        ...omitObject(rest, [
+          "aria-readonly",
+          "value",
+          "onChangeStart",
+          "onChangeEnd",
+        ]),
         ...props,
         id: `slider-container-${id}`,
         ref: mergeRefs(ref, containerRef),
@@ -433,23 +441,24 @@ export const useRangeSlider = ({
     [id, isVertical, rest, thumbSizes],
   )
 
-  const getInputProps: RequiredPropGetter<{ index: number }> = useCallback(
-    ({ index: i, ...props } = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
-      ...props,
-      ref,
-      id: getInputId(i),
-      type: "hidden",
-      name: isArray(name) ? name[i] : `${name}-${i}`,
-      value: values[i],
-      required,
-      disabled,
-      readOnly,
-    }),
-    [disabled, getInputId, name, readOnly, required, rest, values],
-  )
+  const getInputProps: RequiredUIPropGetter<"input", { index: number }> =
+    useCallback(
+      ({ index: i, ...props }, ref = null) => ({
+        ...pickObject(rest, formControlProperties),
+        ...props,
+        ref,
+        id: getInputId(i),
+        type: "hidden",
+        name: isArray(name) ? name[i] : `${name}-${i}`,
+        value: values[i],
+        required,
+        disabled,
+        readOnly,
+      }),
+      [disabled, getInputId, name, readOnly, required, rest, values],
+    )
 
-  const getTrackProps: PropGetter = useCallback(
+  const getTrackProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
@@ -468,7 +477,10 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...pickObject(rest, formControlProperties),
+        ...pickObject(
+          rest,
+          getFormControlProperties({ omit: ["aria-readonly"] }),
+        ),
         ...props,
         id: `slider-track-${id}`,
         ref: mergeRefs(ref, trackRef),
@@ -478,7 +490,7 @@ export const useRangeSlider = ({
     [id, isVertical, rest],
   )
 
-  const getFilledTrackProps: PropGetter = useCallback(
+  const getFilledTrackProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = Math.abs(thumbPercents[1] - thumbPercents[0])
       const s = isReversed ? 100 - thumbPercents[0] : thumbPercents[0]
@@ -502,7 +514,10 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...pickObject(rest, formControlProperties),
+        ...pickObject(
+          rest,
+          getFormControlProperties({ omit: ["aria-readonly"] }),
+        ),
         ...props,
         id: `slider-filled-track-${id}`,
         ref,
@@ -512,100 +527,105 @@ export const useRangeSlider = ({
     [id, isReversed, isVertical, rest, thumbPercents],
   )
 
-  const getMarkProps: RequiredPropGetter<{ value: number }> = useCallback(
-    (props = {}, ref = null) => {
-      let n = valueToPercent(props.value, min, max)
-      n = isReversed ? 100 - n : n
+  const getMarkProps: RequiredUIPropGetter<"div", { value: number }> =
+    useCallback(
+      (props, ref = null) => {
+        let n = valueToPercent(props.value, min, max)
+        n = isReversed ? 100 - n : n
 
-      const style: CSSProperties = {
-        ...props.style,
-        position: "absolute",
-        pointerEvents: "none",
-        ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
-      }
+        const style: CSSProperties = {
+          ...props.style,
+          position: "absolute",
+          pointerEvents: "none",
+          ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
+        }
 
-      return {
-        ...pickObject(rest, formControlProperties),
-        ...props,
-        ref,
-        id: getMarkerId(props.value),
-        "aria-hidden": true,
-        "data-invalid": dataAttr(props.value < min || max < props.value),
-        "data-highlighted": dataAttr(
-          values[0] <= props.value && props.value <= values[1],
-        ),
-        style,
-      }
-    },
-    [getMarkerId, isReversed, isVertical, max, min, rest, values],
-  )
+        return {
+          ...pickObject(
+            rest,
+            getFormControlProperties({ omit: ["aria-readonly"] }),
+          ),
+          ...props,
+          ref,
+          id: getMarkerId(props.value),
+          "aria-hidden": true,
+          "data-invalid": dataAttr(props.value < min || max < props.value),
+          "data-highlighted": dataAttr(
+            values[0] <= props.value && props.value <= values[1],
+          ),
+          style,
+        }
+      },
+      [getMarkerId, isReversed, isVertical, max, min, rest, values],
+    )
 
-  const getThumbProps: RequiredPropGetter<{ index: number }> = useCallback(
-    ({ index: i, ...props } = {}, ref = null) => {
-      const n = thumbPercents[i]
-      const { width: w, height: h } = thumbSizes[i] ?? { width: 0, height: 0 }
+  const getThumbProps: RequiredUIPropGetter<"div", { index: number }> =
+    useCallback(
+      ({ index: i, ...props }, ref = null) => {
+        const n = thumbPercents[i]
+        const { width: w, height: h } = thumbSizes[i] ?? { width: 0, height: 0 }
 
-      const style: CSSProperties = {
-        ...props.style,
-        position: "absolute",
-        userSelect: "none",
-        touchAction: "none",
-        ...(isVertical
-          ? { bottom: `calc(${n}% - ${h / 2}px)` }
-          : { left: `calc(${n}% - ${w / 2}px)` }),
-      }
+        const style: CSSProperties = {
+          ...props.style,
+          position: "absolute",
+          userSelect: "none",
+          touchAction: "none",
+          ...(isVertical
+            ? { bottom: `calc(${n}% - ${h / 2}px)` }
+            : { left: `calc(${n}% - ${w / 2}px)` }),
+        }
 
-      const value = values[i]
+        const value = values[i]
 
-      if (value == null)
-        throw new Error(
-          `Cannot find value at index '${i}'. The 'value' or 'defaultValue'`,
-        )
+        if (value == null)
+          throw new Error(
+            `Cannot find value at index '${i}'. The 'value' or 'defaultValue'`,
+          )
 
-      return {
-        "aria-label": "Slider thumb",
-        ...pickObject(rest, formControlProperties),
-        ...props,
-        ref,
-        id: getThumbId(i),
-        tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
-        role: "slider",
-        "aria-valuemin": min,
-        "aria-valuemax": max,
-        "aria-valuenow": value,
-        "data-active": dataAttr(
-          isDragging && focusThumbOnChange && activeIndex === i,
-        ),
-        "aria-orientation": orientation,
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-        onFocus: handlerAll(props.onFocus, rest.onFocus, () => {
-          setFocused(true)
-          setActiveIndex(i)
-        }),
-        onBlur: handlerAll(props.onBlur, rest.onBlur, () => {
-          setFocused(false)
-          setActiveIndex(-1)
-        }),
-        style,
-      }
-    },
-    [
-      min,
-      max,
-      focusThumbOnChange,
-      activeIndex,
-      getThumbId,
-      isDragging,
-      isInteractive,
-      isVertical,
-      onKeyDown,
-      orientation,
-      rest,
-      thumbPercents,
-      thumbSizes,
-      values,
-    ],
-  )
+        return {
+          "aria-label": "Slider thumb",
+          ...pickObject(rest, formControlProperties),
+          ...props,
+          ref,
+          id: getThumbId(i),
+          tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
+          role: "slider",
+          "aria-valuemin": min,
+          "aria-valuemax": max,
+          "aria-valuenow": value,
+          "data-active": dataAttr(
+            isDragging && focusThumbOnChange && activeIndex === i,
+          ),
+          "aria-orientation": orientation,
+          onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+          onFocus: handlerAll(props.onFocus, rest.onFocus, () => {
+            setFocused(true)
+            setActiveIndex(i)
+          }),
+          onBlur: handlerAll(props.onBlur, rest.onBlur, () => {
+            setFocused(false)
+            setActiveIndex(-1)
+          }),
+          style,
+        }
+      },
+      [
+        min,
+        max,
+        focusThumbOnChange,
+        activeIndex,
+        getThumbId,
+        isDragging,
+        isInteractive,
+        isVertical,
+        onKeyDown,
+        orientation,
+        rest,
+        thumbPercents,
+        thumbSizes,
+        values,
+      ],
+    )
 
   return {
     values,
@@ -692,7 +712,7 @@ export type RangeSliderProps = Omit<
   HTMLUIProps<"div">,
   keyof UseRangeSliderProps
 > &
-  ThemeProps<"Slider"> &
+  ThemeProps<"RangeSlider"> &
   UseRangeSliderProps &
   RangeSliderOptions
 
@@ -891,7 +911,7 @@ export const RangeSliderMark = forwardRef<RangeSliderMarkProps, "div">(
 export type RangeSliderThumbProps = HTMLUIProps<"div">
 
 const RangeSliderThumb = forwardRef<
-  RangeSliderThumbProps & { index?: number },
+  RangeSliderThumbProps & { index: number },
   "div"
 >(({ className, index, children, ...rest }, ref) => {
   const {
@@ -905,6 +925,8 @@ const RangeSliderThumb = forwardRef<
   } = useRangeSliderContext()
 
   const css: CSSUIObject = { ...styles.thumb }
+
+  const { children: propChildren } = thumbProps ?? {}
 
   return (
     <ui.div
@@ -922,7 +944,7 @@ const RangeSliderThumb = forwardRef<
       )}
     >
       <ui.input {...getInputProps({ ...inputProps, index }, ref)} />
-      {children}
+      {children ?? propChildren}
     </ui.div>
   )
 })

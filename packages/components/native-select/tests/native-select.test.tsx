@@ -29,10 +29,10 @@ describe("<NativeSelect />", () => {
     await user.selectOptions(screen.getByTestId("Select"), ["one"])
     expect(
       (screen.getByRole("option", { name: "Option 1" }) as any).selected,
-    ).toBe(true)
+    ).toBeTruthy()
     expect(
       (screen.getByRole("option", { name: "Option 2" }) as any).selected,
-    ).toBe(false)
+    ).toBeFalsy()
   })
 
   test("should render select without placeholder in options", async () => {
@@ -52,7 +52,7 @@ describe("<NativeSelect />", () => {
         </NativeOption>
       </NativeSelect>,
     )
-    expect(screen.queryAllByTestId("option").length).toEqual(2)
+    expect(screen.queryAllByTestId("option")).toHaveLength(2)
   })
 
   test("should disable select", () => {
@@ -62,10 +62,11 @@ describe("<NativeSelect />", () => {
 
   test("should be read only", () => {
     render(<NativeSelect isReadOnly data-testid="Select" />)
-    expect(screen.getByTestId("Select")).toHaveAttribute(
+    expect(screen.getByTestId("Select")).not.toHaveAttribute(
       "aria-readonly",
       "true",
     )
+    expect(screen.getByTestId("Select")).not.toHaveAttribute("readonly", "true")
   })
 
   test("should be invalid", () => {

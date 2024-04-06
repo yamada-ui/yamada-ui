@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "fs/promises"
+import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import { type ThemeComponents } from "@yamada-ui/react"
 import { defaultTheme } from "@yamada-ui/theme"
@@ -76,7 +76,7 @@ const merge = <T extends Record<string, any>>(
   if (isObject(source)) {
     if (isObject(target)) {
       for (const [sourceKey, sourceValue] of Object.entries(source)) {
-        const targetValue = target[sourceKey]
+        const targetValue: any = target[sourceKey]
 
         if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
           result[sourceKey] = targetValue.concat(...sourceValue)
@@ -107,7 +107,7 @@ const defaultColors = [
   "link",
 ]
 
-const hues = [
+const tones = [
   "50",
   "100",
   "200",
@@ -120,8 +120,8 @@ const hues = [
   "900",
 ]
 
-const isHue = (value: unknown): value is Record<string, string> =>
-  isObject(value) && hues.every((k) => isString(value[k]))
+const isTone = (value: unknown): value is Record<string, string> =>
+  isObject(value) && tones.every((k) => isString(value[k]))
 
 const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
 
@@ -131,7 +131,7 @@ const extractColorScheme = (
   if (!colors) return "string"
 
   const validColors = Object.entries(colors)
-    .filter(([key, values]) => isHue(values) || isDefaultColor(key))
+    .filter(([key, values]) => isTone(values) || isDefaultColor(key))
     .map(([name]) => name)
 
   return toLiteralStringType(validColors)
@@ -240,13 +240,16 @@ const extractPropertiesOfTypeName = async (
 
       const docTags = property.getJsDocTags()
 
+      const isPrivate = !!docTags.find(({ name }) => name === "private")
+
+      if (isPrivate) continue
+
+      const see = docTags.find(({ name }) => name === "see")?.text?.at(-1)?.text
       const defaultValue =
         docTags
           .find(({ name }) => name === "default")
           ?.text?.map(({ text }) => text)
           ?.join("\n") || undefined
-
-      const see = docTags.find(({ name }) => name === "see")?.text?.at(-1)?.text
 
       const nonNullableType = type.getNonNullableType()
 
@@ -404,11 +407,6 @@ const main = async () => {
     parser: "json",
   })
 
-  const rootPath = path.join(__dirname, "..")
-  const componentName = process.cwd().split("/").at(-1)
-
-  await mkdir(path.join(rootPath, ".docs"), { recursive: true })
-  await writeFile(path.join(rootPath, ".docs", `${componentName}.json`), data)
   await writeFile("DOCS.json", data)
 
   console.log("[docs]:", `Generated DOCS.json`)

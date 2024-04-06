@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/calendar",
-  "version": "1.0.1",
+  "version": "1.2.6",
   "description": "Yamada UI calendar component",
   "keywords": [
     "yamada",
@@ -29,11 +29,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/calendar"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",
@@ -50,6 +50,7 @@
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/button": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
+    "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
     "@yamada-ui/use-outside-click": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",

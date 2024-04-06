@@ -1,32 +1,24 @@
 import * as React from "react"
+import type { Merge } from "."
 import { isNumber, isString } from "."
 
 type DOMElement = Element & HTMLOrSVGElement
 
-type DataAttributes = {
-  [dataAttr: string]: any
-}
-
-export type DOMAttributes<Y = DOMElement> = React.AriaAttributes &
-  React.DOMAttributes<Y> &
-  DataAttributes & {
+export type DOMAttributes<Y = DOMElement> = React.HTMLAttributes<Y> &
+  React.AriaAttributes &
+  React.DOMAttributes<Y> & {
     id?: string
     role?: React.AriaRole
     tabIndex?: number
     style?: React.CSSProperties
   }
 
-type Merge<Y, M> = M extends Record<string, unknown> ? Y : Omit<Y, keyof M> & M
-
-export type PropGetter<Y = Record<string, unknown>, M = DOMAttributes> = (
+export type PropGetter<Y = undefined, M = DOMAttributes> = (
   props?: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
-export type RequiredPropGetter<
-  Y = Record<string, unknown>,
-  M = DOMAttributes,
-> = (
+export type RequiredPropGetter<Y = undefined, M = DOMAttributes> = (
   props: Merge<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
@@ -35,10 +27,11 @@ export type MaybeRenderProp<Y> =
   | React.ReactNode
   | ((props: Y) => React.ReactNode)
 
-type Options = {
+type Options<ContextType extends any = any> = {
   strict?: boolean
   errorMessage?: string
   name?: string
+  defaultValue?: ContextType
 }
 
 type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
@@ -47,8 +40,9 @@ export const createContext = <ContextType extends any = any>({
   strict = true,
   errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
   name,
-}: Options = {}) => {
-  const Context = React.createContext<ContextType | undefined>(undefined)
+  defaultValue,
+}: Options<ContextType> = {}) => {
+  const Context = React.createContext<ContextType | undefined>(defaultValue)
 
   Context.displayName = name
 
@@ -185,7 +179,7 @@ export const pickChildren = (
 export const cx = (...classNames: (string | undefined)[]) =>
   classNames.filter(Boolean).join(" ")
 
-type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T>
+type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T> | React.LegacyRef<T>
 
 export const isRefObject = (val: any): val is { current: any } =>
   "current" in val
@@ -312,9 +306,8 @@ export type AsyncState<T> =
       value: T
     }
 
-export type PromiseType<P extends Promise<any>> = P extends Promise<infer T>
-  ? T
-  : never
+export type PromiseType<P extends Promise<any>> =
+  P extends Promise<infer T> ? T : never
 
 type StateFromFunctionReturningPromise<T extends FunctionReturningPromise> =
   AsyncState<PromiseType<ReturnType<T>>>

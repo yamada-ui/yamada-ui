@@ -20,6 +20,18 @@ export const pseudos = {
    */
   _nativeActive: "&:active",
   /**
+   * The CSS `:target` pseudo-class.
+   */
+  _target: "&:target, &[data-target]",
+  /**
+   * The CSS `:not(:target)` pseudo-class.
+   */
+  _notTarget: "&:not(:target)",
+  /**
+   * The CSS `:target` pseudo-class.
+   */
+  _nativeTarget: "&:target",
+  /**
    * The CSS `:focus` pseudo-class.
    */
   _focus: "&:focus, &[data-focus]",
@@ -36,6 +48,14 @@ export const pseudos = {
    */
   _nativeFocusVisible: "&:focus-visible",
   /**
+   * The CSS `:focus-within` pseudo-class.
+   */
+  _focusWithin: "&:focus-within, &[data-focus-within]",
+  /**
+   * The CSS `:focus-within` pseudo-class.
+   */
+  _nativeFocusWithin: "&:focus-within",
+  /**
    * The CSS `:disabled` pseudo-class.
    */
   _disabled: "&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]",
@@ -49,13 +69,25 @@ export const pseudos = {
   _indeterminate:
     "&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]",
   /**
-   * The CSS `:before` pseudo-element.
+   * The CSS `::before` pseudo-element.
    */
   _before: "&::before",
   /**
-   * The CSS `:after` pseudo-element.
+   * The CSS `::after` pseudo-element.
    */
   _after: "&::after",
+  /**
+   * The CSS `::marker` pseudo-element.
+   */
+  _marker: "&::marker",
+  /**
+   * The CSS `::first-letter` pseudo-element.
+   */
+  _firstLetter: "&::first-letter",
+  /**
+   * The CSS `::first-line` pseudo-element.
+   */
+  _firstLine: "&::first-line",
   /**
    * The CSS `:empty` pseudo-class.
    */
@@ -73,7 +105,7 @@ export const pseudos = {
    */
   _invalid: "&[data-invalid], &[aria-invalid=true]",
   /**
-   * The CSS `:invalid` pseudo-class.
+   * The CSS `:valid` pseudo-class.
    */
   _valid: "&:valid, &[data-valid], &[data-state=valid]",
   /**
@@ -132,14 +164,18 @@ export const pseudos = {
    * The CSS `:-webkit-autofill` pseudo-class.
    */
   _autofill: "&:-webkit-autofill",
-  _outside: "&[data-outside]",
-  _weekend: "&[data-weekend]",
+  _filled: "&[data-filled]",
+  _start: "&[data-start]",
+  _end: "&[data-end]",
+  _outside: "&:where([data-outside])",
+  _between: "&[data-between]",
+  _weekend: "&:where([data-weekend])",
   _holiday: "&[data-holiday]",
   _today: "&[data-today]",
   _accept: "&[data-accept]",
   _reject: "&[data-reject]",
   _idle: "&[data-idle]",
-  _loading: "&[data-loading]",
+  _loading: "&[data-loading], &[aria-busy=true]",
   _loaded: "&[data-loaded]",
   _ripple: "& .ui-ripple",
   /**

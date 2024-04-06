@@ -1,16 +1,16 @@
 name: "Bug Report (日本語)"
 description: "バグ報告を作成します"
 body:
-  - type: "markdown"
+  - type: markdown
     attributes:
       value: |
         問題を作成していただきありがとうございます！ 😎
 
         提出する前に、オープン/クローズされた問題を検索してください。以前に、誰かが同じことを尋ねているかもしれません！ 😎
 
-          - [Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-          - [Closed Issues](https://github.com/hirotomoyamada/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-          - [Discussions](https://github.com/hirotomoyamada/yamada-ui/discussions)
+          - [Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+          - [Discussions](https://github.com/yamada-ui/yamada-ui/discussions)
 
         山田たちは、全てボランティアです。このテンプレートを正確に記入することで、山田たちの手助けになります。💖
   - type: dropdown
@@ -28,16 +28,16 @@ body:
         - "@yamada-ui/cli"
     validations:
       required: true
-  - type: "input"
-    id: "version"
+  - type: input
+    id: version
     attributes:
       label: "パッケージのバージョン"
       description: "使用しているパッケージのバージョン。"
       placeholder: "0.1.0"
     validations:
       required: true
-  - type: "textarea"
-    id: "description"
+  - type: textarea
+    id: description
     attributes:
       label: "概要"
       description: "問題の簡単な説明。"
@@ -45,15 +45,15 @@ body:
         ____ したとき、____ が起こると予想していましたが、代わりに ____ が起こりました。
     validations:
       required: true
-  - type: "input"
-    id: "reproduction"
+  - type: input
+    id: reproduction
     attributes:
       label: "再現へのリンク"
       description: |
-        可能であれば、最小限の再現を含むCodeSandboxへのリンクを含めてください。（テンプレートについては https://github.com/hirotomoyamada/yamada-ui#codesandbox を参照）
+        可能であれば、最小限の再現を含むCodeSandboxへのリンクを含めてください。（テンプレートについては https://github.com/yamada-ui/yamada-ui#codesandbox を参照）
       placeholder: "https://codesandbox.io/"
-  - type: "textarea"
-    id: "steps"
+  - type: textarea
+    id: steps
     attributes:
       label: "再現手順"
       description: |
@@ -75,8 +75,8 @@ body:
         - "Edge"
         - "Opera"
         - "その他（追加のコンテキストを追加）"
-  - type: "checkboxes"
-    id: "operating-system"
+  - type: checkboxes
+    id: operating-system
     attributes:
       label: "OS"
       description: "この問題が発生したOS。"
@@ -94,13 +94,18 @@ body:
   - type: dropdown
     id: participate
     attributes:
-      label: この問題の修正に参加し、修正を含むプルリクエストを作成する志はありますか？
+      label: この問題の修正に参加し、修正を含むプルリクエストを作成しますか？
       options:
         - "はい"
         - "いいえ"
-  - type: "textarea"
-    id: "additional-information"
+  - type: textarea
+    id: additional-information
     attributes:
       label: "追加情報"
       description: |
         考えられる修正、スクリーンショット、ノート、アイデアへのリンクなど、持っている追加情報をこのセクションで提供してください。
+  - type: markdown
+    attributes:
+      value: |
+        このイシューは、アサインされてから2週間経過すると自動的にアサインがクリアされます。
+        アサインがクリアされると、他の方が作業する可能性があります。

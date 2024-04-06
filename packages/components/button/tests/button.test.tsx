@@ -2,11 +2,11 @@ import { render, a11y, screen } from "@yamada-ui/test"
 import { Button } from "../src"
 
 describe("<Button/>", () => {
-  it("passes a11y test", async () => {
+  test("passes a11y test", async () => {
     await a11y(<Button>test</Button>)
   })
 
-  it("renders with icon", () => {
+  test("renders with icon", () => {
     const { rerender, getByText } = render(
       <Button rightIcon={<>right icon</>} />,
     )
@@ -16,7 +16,7 @@ describe("<Button/>", () => {
     expect(getByText("left icon")).toBeTruthy()
   })
 
-  it("shows loading text if isLoading, loadingText and loadingIcon", () => {
+  test("shows loading text if isLoading, loadingText and loadingIcon", () => {
     const { rerender, getByTestId } = render(
       <Button
         data-testid="btn"
@@ -27,7 +27,7 @@ describe("<Button/>", () => {
         Submit
       </Button>,
     )
-    expect(getByTestId("btn")).toHaveAttribute("data__loading", "")
+    expect(getByTestId("btn")).toHaveAttribute("data-loading", "")
 
     // children text is hidden
     expect(screen.queryByText("Submit")).toBeNull()
@@ -56,54 +56,56 @@ describe("<Button/>", () => {
     )
   })
 
-  it("has the proper aria attributes", () => {
+  test("has the proper aria attributes", () => {
     const { rerender, getByTestId } = render(
       <Button data-testid="btn">Hello</Button>,
     )
 
     const button = getByTestId("btn")
 
-    expect(button).not.toHaveAttribute("data__loading", "")
+    expect(button).not.toHaveAttribute("data-loading", "")
     expect(button).not.toHaveAttribute("data-active", "")
 
-    // isLoading sets data__loading=""
+    // isLoading sets data-loading=""
     rerender(<Button isLoading>Hello</Button>)
-    expect(button).toHaveAttribute("data__loading", "")
+    expect(button).toHaveAttribute("data-loading", "")
 
-    // isAvtive sets data-avtive=""
+    // isActive sets data-active=""
     rerender(<Button isActive>Hello</Button>)
     expect(button).toHaveAttribute("data-active", "")
   })
 
-  it("has the proper type attribute", () => {
+  test("has the proper type attribute", () => {
     const { getByTestId, rerender } = render(
-      <Button data-testid="btn">Subumit</Button>,
+      <Button data-testid="btn">Submit</Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "button")
 
     rerender(
       <Button data-testid="btn" type="submit">
-        Subumit
+        Submit
       </Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "submit")
 
     rerender(
       <Button data-testid="btn" as="button">
-        Subumit
+        Submit
       </Button>,
     )
     expect(getByTestId("btn")).toHaveAttribute("type")
+  })
 
-    rerender(
+  test("has no the type", () => {
+    const { getByTestId } = render(
       <Button data-testid="btn" as="span">
-        Subumit
+        Submit
       </Button>,
     )
     expect(getByTestId("btn")).not.toHaveAttribute("type")
   })
 
-  it("should be disabled", () => {
+  test("should be disabled", () => {
     const { getByTestId, getByRole, rerender } = render(
       <Button isDisabled data-testid="btn">
         Invalid Button

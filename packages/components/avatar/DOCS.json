@@ -10,6 +10,11 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
+    "crossOrigin": {
+      "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+      "required": false,
+      "description": "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
+    },
     "format": {
       "type": "(name: string) => string",
       "required": false,
@@ -79,7 +84,7 @@
     },
     "pingColor": {
       "type": "UIValue<\"link\" | \"border\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 319 more ... | \"secondary.950\">",
-      "defaultValue": "'[\"blackAlpha.400\", \"whiteAlpha.500\"]''",
+      "defaultValue": "'[\"blackAlpha.400\", \"whiteAlpha.500\"]'",
       "required": false,
       "description": "It is used for the color of the ping animation."
     },

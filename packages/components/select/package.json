@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/select",
-  "version": "1.0.1",
+  "version": "1.2.4",
   "description": "Yamada UI select component",
   "keywords": [
     "yamada",
@@ -30,11 +30,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/select"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",
@@ -50,6 +50,8 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
+    "@yamada-ui/use-disclosure": "workspace:*",
+    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/popover": "workspace:*",
     "@yamada-ui/portal": "workspace:*",

@@ -10,7 +10,7 @@ When it comes to open source, there are different ways you can contribute, all o
 
 The following steps will get you up and running to contribute to Yamada UI:
 
-1. Fork the [repository](https://github.com/hirotomoyamada/yamada-ui).
+1. Fork the [repository](https://github.com/yamada-ui/yamada-ui).
 
 2. Clone your fork locally.
 
@@ -48,11 +48,11 @@ To improve our development process, we have set up tools and systems. Yamada UI 
   - If the provider is true, then it is wrapped with a provider that contains the style to be used by the children.
 - **`pnpm gen:hook`**: create a hook package from a template using [Plop](https://plopjs.com/).
   - Please enter package and custom hook names in kebab case
-- **`pnpm gen:token`**: generate theme tokens.
+- **`pnpm gen:tokens`**: generate theme tokens.
 
 ## Think you found a bug?
 
-Please conform to the [issue template](https://github.com/hirotomoyamada/yamada-ui/issues/new/choose) and provide a clear path to reproduction.
+Please conform to the [issue template](https://github.com/yamada-ui/yamada-ui/issues/new/choose) and provide a clear path to reproduction.
 
 ## Proposing new or changed API?
 
@@ -86,18 +86,20 @@ the following categories:
 
 ### Steps to PR
 
-1. Fork and clone the [repository](https://github.com/hirotomoyamada/yamada-ui).
+1. Fork and clone the [repository](https://github.com/yamada-ui/yamada-ui).
 
 2. Create a new branch out of the `main` branch. We follow the convention
    `[type/scope]`. For example `fix/accordion-hook` or `docs/menu-typo`. `type`
    can be either `docs`, `fix`, `feat`, `build`, or any other conventional
    commit type. `scope` is just a short id that describes the scope of work.
 
-3. Make and Run `pnpm changeset` to create a detailed description of your changes. This
+3. After making changes, please add test code for those changes. Run `pnpm test` or `pnpm test <package-name>` to ensure all tests pass. please check [Tips for Test](https://github.com/yamada-ui/yamada-ui/wiki/Tips-for-Test) for further guidance.
+
+4. Run `pnpm changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
 
-4. Also, if you provide `jsx` snippets to the changeset, please turn off the
+5. Also, if you provide `jsx` snippets to the changeset, please turn off the
    live preview by doing the following at the beginning of the snippet:
    ` ```jsx live=false`
 
@@ -105,8 +107,8 @@ the following categories:
 > `pnpm changeset add --empty` to generate an empty changeset file to document
 > your changes.
 
-5. Next, commit your changes following the
-   [commit convention](https://github.com/hirotomoyamada/yamada-ui/blob/main/README.md#commit-convention).
+6. Next, commit your changes following the
+   [commit convention](#commit-convention).
 
    - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
    - `Creating a new component`: When you run the pnpm `gen:component` command, a component is created from a template and dependencies are installed.
@@ -114,7 +116,7 @@ the following categories:
    - `Creating a new hook`: When you run the `pnpm gen:hook` command, a hook is created from a template and dependencies are installed.
    - `Adding functionality to an existing hook`: After adding, please add a story for the target hook so that the functionality can be understood.
 
-6. Once you have completed all of the above tasks, please push your changes.
+7. Once you have completed all of the above tasks, please push your changes.
    After pushing, a URL for the pull request will be generated. Follow the template and submit your request accordingly.
    Additionally, check the Checks within the pull request and ensure that the Quality check has successfully completed.
    If there are any issues, this pull request will not be merged.

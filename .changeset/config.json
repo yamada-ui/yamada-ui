@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "hirotomoyamada/yamada-ui" }
+    {
+      "repo": "yamada-ui/yamada-ui"
+    }
   ],
   "commit": false,
   "linked": [],
@@ -12,5 +14,15 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
-  "ignore": ["create-react-app", "nextjs-app", "nextjs-pages"]
+  "snapshot": {
+    "useCalculatedVersion": true
+  },
+  "ignore": [
+    "create-react-app",
+    "nextjs-app",
+    "nextjs-pages",
+    "vite-react",
+    "hono-react",
+    "remix"
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/icon",
-  "version": "1.0.1",
+  "version": "1.0.18",
   "description": "Yamada UI icon components",
   "keywords": [
     "yamada",
@@ -29,11 +29,11 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/icon"
   },
   "bugs": {
-    "url": "https://github.com/hirotomoyamada/yamada-ui/issues"
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
     "dev": "pnpm build:fast -- --watch",

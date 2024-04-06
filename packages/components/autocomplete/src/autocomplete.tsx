@@ -57,11 +57,8 @@ type AutocompleteOptions = {
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type AutocompleteProps = ThemeProps<"Select"> &
-  Omit<
-    UseAutocompleteProps<string>,
-    "maxSelectedValues" | "omitSelectedValues"
-  > &
+export type AutocompleteProps = ThemeProps<"Autocomplete"> &
+  Omit<UseAutocompleteProps<string>, "maxSelectValues" | "omitSelectedValues"> &
   AutocompleteOptions
 
 /**
@@ -185,7 +182,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
     const { getInputProps } = useAutocompleteInput()
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",
@@ -204,7 +201,7 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
           <ui.input
             className="ui-autocomplete__field__input"
             display="inline-block"
-            w="full"
+            w="100%"
             placeholder={placeholder}
             {...getInputProps(
               { ...inputProps, value: inputValue || label || "" },

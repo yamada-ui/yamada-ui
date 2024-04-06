@@ -18,7 +18,7 @@
     "htmlSize": {
       "type": "number",
       "required": false,
-      "description": "The native HTML `size` attribute to be passed to the `input`"
+      "description": "The native HTML `size` attribute to be passed to the `input`."
     },
     "isDisabled": {
       "type": "boolean",

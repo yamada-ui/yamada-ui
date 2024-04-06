@@ -4,6 +4,7 @@ import type {
   ThemeProps,
   ColorModeToken,
   CSS,
+  UIPropGetter,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -237,7 +238,7 @@ export const useEditable = (props: UseEditableProps) => {
     [isEditing, submitOnBlur, onSubmit, onCancel],
   )
 
-  const getPreviewProps: PropGetter = useCallback(
+  const getPreviewProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, previewRef),
@@ -258,7 +259,7 @@ export const useEditable = (props: UseEditableProps) => {
     ],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -291,7 +292,7 @@ export const useEditable = (props: UseEditableProps) => {
     ],
   )
 
-  const getTextareaProps: PropGetter = useCallback(
+  const getTextareaProps: UIPropGetter<"textarea"> = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(rest, formControlProperties),
       ...props,
@@ -407,9 +408,9 @@ export const useEditableControl = () => {
 
 type EditableContext = {
   isEditing: boolean
-  getPreviewProps: PropGetter
-  getInputProps: PropGetter
-  getTextareaProps: PropGetter
+  getPreviewProps: UIPropGetter
+  getInputProps: UIPropGetter<"input">
+  getTextareaProps: UIPropGetter<"textarea">
   getEditProps: PropGetter
   getCancelProps: PropGetter
   getSubmitProps: PropGetter

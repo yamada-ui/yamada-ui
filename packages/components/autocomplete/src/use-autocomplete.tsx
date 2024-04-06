@@ -1,15 +1,17 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  formControlProperties,
+  getFormControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
+import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Dict, PropGetter, Union, DOMAttributes } from "@yamada-ui/utils"
+import type { Dict, Union, DOMAttributes } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -250,7 +252,6 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
   PopoverProps,
   | "initialFocusRef"
   | "closeOnButton"
-  | "isOpen"
   | "trigger"
   | "autoFocus"
   | "restoreFocus"
@@ -319,7 +320,7 @@ type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
     /**
      * The maximum selectable value.
      */
-    maxSelectedValues?: number
+    maxSelectValues?: number
     /**
      * Props for select option element.
      */
@@ -342,10 +343,14 @@ export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
   UseAutocompleteBaseProps<T>
 
 export const useAutocomplete = <T extends string | string[] = string>({
-  defaultIsOpen,
+  value: valueProp,
+  defaultValue,
+  onChange: onChangeProp,
+  onCreate: onCreateProp,
+  onSearch: onSearchProp,
   closeOnSelect = true,
   omitSelectedValues = false,
-  maxSelectedValues,
+  maxSelectValues,
   closeOnBlur = true,
   closeOnEsc = true,
   allowCreate = false,
@@ -359,23 +364,22 @@ export const useAutocomplete = <T extends string | string[] = string>({
   placeholder,
   items,
   children,
+  isOpen: isOpenProp,
+  defaultIsOpen,
+  onOpen: onOpenProp,
+  onClose: onCloseProp,
   ...rest
 }: UseAutocompleteProps<T>) => {
   rest = useFormControlProps(rest)
 
   const { id } = rest
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
   const [containerProps, inputProps] = splitObject<Dict, string>(
-    omitObject(rest, [
-      ...popoverProperties,
-      "id",
-      "value",
-      "defaultValue",
-      "onChange",
-      "onCreate",
-      "onSearch",
-    ]),
+    omitObject(rest, [...popoverProperties, "onKeyDown", "onFocus"]),
     layoutStyleProperties,
   )
 
@@ -386,23 +390,31 @@ export const useAutocomplete = <T extends string | string[] = string>({
   const inputRef = useRef<HTMLInputElement>(null)
   const timeoutIds = useRef<Set<any>>(new Set([]))
   const isComposition = useRef<boolean>(false)
+  const prevValue = useRef<T | undefined>(undefined)
 
   const [resolvedItems, setResolvedItems] = useState<
     AutocompleteItem[] | undefined
   >(items)
   const [value, setValue] = useControllableState({
-    value: rest.value,
-    defaultValue: rest.defaultValue,
-    onChange: rest.onChange,
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
   })
   const [label, setLabel] = useState<T | undefined>(undefined)
   const [inputValue, setInputValue] = useState<string>("")
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [isAllSelected, setIsAllSelected] = useState<boolean>(false)
   const [isHit, setIsHit] = useState<boolean>(true)
-
-  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
-
+  const {
+    isOpen,
+    onOpen: onInternalOpen,
+    onClose,
+  } = useDisclosure({
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+  })
   const isFocused = focusedIndex > -1
   const isCreate = focusedIndex === -2 && allowCreate
   const isMulti = isArray(value)
@@ -470,18 +482,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     if (!allowCreate && (isEmpty || isAllSelected)) return
 
-    setIsOpen(true)
+    onInternalOpen()
 
     if (inputRef.current) inputRef.current.focus()
-
-    rest.onOpen?.()
-  }, [allowCreate, formControlProps, isAllSelected, isEmpty, rest])
-
-  const onClose = useCallback(() => {
-    setIsOpen(false)
-
-    rest.onClose?.()
-  }, [rest])
+  }, [allowCreate, formControlProps, isAllSelected, isEmpty, onInternalOpen])
 
   const onFocusFirst = useCallback(() => {
     const id = setTimeout(() => {
@@ -691,18 +695,37 @@ export const useAutocomplete = <T extends string | string[] = string>({
     [descendants, onFocusFirst],
   )
 
+  const getSelectedValues = useCallback(
+    (newValues: string | string[]) => {
+      const enabledValues = descendants.enabledValues()
+
+      const resolvedValues = isArray(newValues) ? newValues : [newValues]
+
+      const selectedValues = resolvedValues
+        .map((value) => {
+          const { node } =
+            enabledValues.find(({ node }) => node.dataset.value === value) ?? {}
+
+          if (node) {
+            const el = Array.from(node.children).find(
+              (child) => child.getAttribute("data-label") !== null,
+            )
+
+            return el?.textContent ?? undefined
+          } else {
+            return allowFree ? value : undefined
+          }
+        })
+        .filter(Boolean) as string[]
+
+      return selectedValues
+    },
+    [allowFree, descendants],
+  )
+
   const onChangeLabel = useCallback(
     (newValue: string, runOmit: boolean = true) => {
-      const enabledValues = descendants.enabledValues()
-      const selectedValues = enabledValues
-        .filter(({ node }) => node.dataset.value === newValue)
-        .map(({ node }) => node.textContent ?? "")
-
-      if (allowFree && selectedValues.length === 0) {
-        selectedValues.push(newValue)
-
-        setInputValue("")
-      }
+      const selectedValues = getSelectedValues(newValue)
 
       setLabel((prev) => {
         if (!isMulti) {
@@ -727,23 +750,28 @@ export const useAutocomplete = <T extends string | string[] = string>({
         }
       })
     },
-    [descendants, isMulti, allowFree],
+    [getSelectedValues, isMulti],
   )
 
   const onChange = useCallback(
     (newValue: string, runRebirth: boolean = true) => {
       setValue((prev) => {
+        let next: T
+
         if (!isArray(prev)) {
-          return newValue as T
+          next = newValue as T
         } else {
           const isSelected = prev.includes(newValue)
 
           if (!isSelected) {
-            return [...prev, newValue] as T
+            next = [...prev, newValue] as T
           } else {
-            return prev.filter((value) => value !== newValue) as T
+            next = prev.filter((value) => value !== newValue) as T
           }
         }
+
+        prevValue.current = next
+        return next
       })
 
       const isHit =
@@ -755,7 +783,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       onChangeLabel(newValue)
 
-      if (!allowFree || isHit) setInputValue("")
+      if (allowFree || isHit) setInputValue("")
 
       if (isMulti && runRebirth) rebirthOptions(false)
     },
@@ -799,7 +827,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (!isOpen) onOpen()
 
-      rest.onSearch?.(ev)
+      onSearchProp?.(ev)
 
       const value = ev.target.value
       const computedValue = format(value)
@@ -812,7 +840,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       setInputValue(value)
     },
-    [isOpen, onOpen, format, rest, pickOptions, rebirthOptions],
+    [isOpen, onOpen, format, onSearchProp, pickOptions, rebirthOptions],
   )
 
   const onCompositionStart = useCallback(() => {
@@ -870,14 +898,14 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     setFocusedIndex(index)
 
-    rest.onCreate?.(newItem, newItems)
+    onCreateProp?.(newItem, newItems)
   }, [
     inputValue,
     resolvedItems,
     firstInsertPositionItem,
     onChange,
     rebirthOptions,
-    rest,
+    onCreateProp,
     secondInsertPositionItem,
     isMulti,
   ])
@@ -931,6 +959,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     (ev: MouseEvent<HTMLDivElement>) => {
       ev.stopPropagation()
 
+      prevValue.current = [] as unknown as T
       setValue([] as unknown as T)
       setLabel(undefined)
       setInputValue("")
@@ -1025,10 +1054,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   useEffect(() => {
     if (!isMulti) return
 
-    if (!omitSelectedValues && isUndefined(maxSelectedValues)) return
+    if (!omitSelectedValues && isUndefined(maxSelectValues)) return
 
     const isAll = value.length > 0 && value.length === descendants.count()
-    const isMax = value.length === maxSelectedValues
+    const isMax = value.length === maxSelectValues
 
     if (isAll || isMax) {
       onClose()
@@ -1042,8 +1071,25 @@ export const useAutocomplete = <T extends string | string[] = string>({
     descendants,
     isMulti,
     onClose,
-    maxSelectedValues,
+    maxSelectValues,
   ])
+
+  useEffect(() => {
+    if (isMulti) {
+      if (
+        JSON.stringify(prevValue.current ?? []) === JSON.stringify(value ?? [])
+      )
+        return
+
+      const label = getSelectedValues(value)
+
+      setLabel(label as T)
+    } else {
+      if (prevValue.current === value) return
+
+      onChangeLabel(value, false)
+    }
+  }, [isMulti, value, onChangeLabel, getSelectedValues])
 
   useUpdateEffect(() => {
     if (isOpen || allowFree) return
@@ -1064,7 +1110,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur || !isHit,
+    enabled: isOpen && (closeOnBlur || !isHit),
   })
 
   const getPopoverProps = useCallback(
@@ -1079,11 +1125,12 @@ export const useAutocomplete = <T extends string | string[] = string>({
       duration,
       trigger: "never",
       closeOnButton: false,
+      closeOnBlur,
     }),
-    [duration, isOpen, onClose, onOpen, placement, rest],
+    [duration, closeOnBlur, isOpen, onClose, onOpen, placement, rest],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -1096,7 +1143,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
-  const getFieldProps: PropGetter = useCallback(
+  const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       tabIndex: -1,
@@ -1174,7 +1221,7 @@ export const useAutocompleteInput = () => {
     if (isAllSelected && inputRef.current) inputRef.current.blur()
   }, [isAllSelected])
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(inputRef, ref),
       ...formControlProps,
@@ -1268,7 +1315,7 @@ export const useAutocompleteList = () => {
     if (!isOpen) beforeFocusedIndex.current = -1
   }, [isOpen])
 
-  const getListProps: PropGetter = useCallback(
+  const getListProps: MotionUIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
@@ -1324,7 +1371,7 @@ export const useAutocompleteOptionGroup = ({
 
   const computedRest = splitObject(rest, layoutStyleProperties)
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -1350,7 +1397,7 @@ export const useAutocompleteOptionGroup = ({
     [computedRest, isEmpty, label],
   )
 
-  const getGroupProps: PropGetter = useCallback(
+  const getGroupProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       ...props,
@@ -1425,6 +1472,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     isFocusable,
     closeOnSelect: customCloseOnSelect,
     children,
+    value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
 
@@ -1441,16 +1489,14 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
   const isMulti = isArray(value)
   const isDuplicated = !isMulti
-    ? frontValues.some(
-        ({ node }) => node.dataset.value === (computedProps.value ?? ""),
-      )
+    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
     : false
 
   const isSelected =
     !isDuplicated &&
     (!isMulti
-      ? (computedProps.value ?? "") === value
-      : value.includes(computedProps.value ?? ""))
+      ? (optionValue ?? "") === value
+      : value.includes(optionValue ?? ""))
   const isTarget = "target" in (itemRef.current?.dataset ?? {})
   const isFocused = index === focusedIndex
 
@@ -1472,7 +1518,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       setFocusedIndex(index)
 
-      onChange(computedProps.value ?? "")
+      onChange(optionValue ?? "")
 
       if (inputRef.current) inputRef.current.focus()
 
@@ -1484,7 +1530,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       onFocusNext,
       omitSelectedValues,
       isDisabled,
-      computedProps,
+      optionValue,
       setFocusedIndex,
       index,
       onChange,
@@ -1495,11 +1541,11 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     ],
   )
 
-  useEffect(() => {
-    if (isSelected) onChangeLabel(computedProps.value ?? "", false)
-  }, [computedProps, isSelected, onChangeLabel])
+  useUpdateEffect(() => {
+    if (isSelected) onChangeLabel(optionValue ?? "", false)
+  }, [optionValue])
 
-  const getOptionProps: PropGetter = useCallback(
+  const getOptionProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -1515,14 +1561,14 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       return {
         ref: mergeRefs(itemRef, ref, register),
-        ...omitObject(computedProps, ["value"]),
+        ...computedProps,
         ...props,
         role: "autocomplete-item",
         tabIndex: -1,
         style:
           !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
         "data-target": dataAttr(true),
-        "data-value": computedProps.value ?? "",
+        "data-value": optionValue ?? "",
         "data-focus": dataAttr(isFocused),
         "data-disabled": dataAttr(isDisabled),
         "aria-checked": ariaAttr(isSelected),
@@ -1531,6 +1577,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       }
     },
     [
+      optionValue,
       computedProps,
       isDisabled,
       isFocused,
@@ -1558,7 +1605,7 @@ export type UseAutocompleteOptionReturn = ReturnType<
 export const useAutocompleteCreate = () => {
   const { isHit, onCreate } = useAutocompleteContext()
 
-  const getCreateProps: PropGetter = useCallback(
+  const getCreateProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -1594,7 +1641,7 @@ export type UseAutocompleteCreateReturn = ReturnType<
 export const useAutocompleteEmpty = () => {
   const { isHit, isEmpty } = useAutocompleteContext()
 
-  const getEmptyProps: PropGetter = useCallback(
+  const getEmptyProps: UIPropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",

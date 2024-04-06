@@ -14,10 +14,25 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "types": ["vitest/globals"]
   },
-  "include": ["@types", "**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "examples"],
+  "include": [
+    "@types",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mts"
+  ],
+  "exclude": [
+    "node_modules",
+    "examples",
+    "dist",
+    ".changelog",
+    ".changeset",
+    ".turbo"
+  ],
   "ts-node": {
     "transpileOnly": true,
     "compilerOptions": {

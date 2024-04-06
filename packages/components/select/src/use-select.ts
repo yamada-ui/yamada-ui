@@ -1,15 +1,16 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  formControlProperties,
+  getFormControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
+import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
+import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Dict, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   dataAttr,
@@ -90,7 +91,6 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
     PopoverProps,
     | "initialFocusRef"
     | "closeOnButton"
-    | "isOpen"
     | "trigger"
     | "autoFocus"
     | "restoreFocus"
@@ -102,6 +102,10 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
      * The HTML `name` attribute used for forms.
      */
     name?: string
+    /**
+     * The placeholder of the select.
+     */
+    placeholder?: string
     /**
      * The value of the select.
      */
@@ -136,7 +140,7 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
     /**
      * The maximum selectable value.
      */
-    maxSelectedValues?: number
+    maxSelectValues?: number
     /**
      * Props for select option element.
      */
@@ -144,24 +148,33 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
   }
 
 export const useSelect = <T extends MaybeValue = string>({
-  defaultIsOpen,
   placeholder,
   closeOnBlur = true,
   closeOnEsc = true,
   closeOnSelect = true,
   placeholderInOptions = true,
   omitSelectedValues = false,
-  maxSelectedValues,
+  maxSelectValues,
   isEmpty,
   placement = "bottom-start",
   duration = 0.2,
+  isOpen: isOpenProp,
+  defaultIsOpen,
+  onOpen: onOpenProp,
+  onClose: onCloseProp,
   optionProps,
   ...rest
 }: UseSelectProps<T>) => {
   rest = useFormControlProps(rest)
 
-  const formControlProps = pickObject(rest, formControlProperties)
-  const computedProps = splitObject(rest, layoutStyleProperties)
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
+  const [containerProps, fieldProps] = splitObject(
+    omitObject(rest, ["value", "defaultValue", "onChange", "aria-readonly"]),
+    layoutStyleProperties,
+  )
 
   const descendants = useSelectDescendants()
 
@@ -329,11 +342,17 @@ export const useSelect = <T extends MaybeValue = string>({
       const values = descendants.values()
       const selectedValues = values
         .filter(({ node }) => node.dataset.value === newValue)
-        .map(({ node, index }) =>
-          !(!!placeholder && placeholderInOptions) || index !== 0
-            ? node.textContent ?? ""
-            : undefined,
-        )
+        .map(({ node, index }) => {
+          if (!(!!placeholder && placeholderInOptions) || index !== 0) {
+            const el = Array.from(node.children).find(
+              (child) => child.getAttribute("data-label") !== null,
+            )
+
+            return el?.innerHTML ?? ""
+          } else {
+            return undefined
+          }
+        })
 
       setLabel((prev) => {
         if (!isMulti) {
@@ -392,23 +411,24 @@ export const useSelect = <T extends MaybeValue = string>({
     [setLabel, setValue],
   )
 
-  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen ?? false)
+  const {
+    isOpen,
+    onOpen: onInternalOpen,
+    onClose,
+  } = useDisclosure({
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+  })
 
   const onOpen = useCallback(() => {
     if (formControlProps.disabled || formControlProps.readOnly) return
 
     if (isEmpty || isAllSelected) return
 
-    setIsOpen(true)
-
-    rest.onOpen?.()
-  }, [formControlProps, isEmpty, isAllSelected, rest])
-
-  const onClose = useCallback(() => {
-    setIsOpen(false)
-
-    rest.onClose?.()
-  }, [rest])
+    onInternalOpen()
+  }, [formControlProps, isEmpty, isAllSelected, onInternalOpen])
 
   const onSelect = useCallback(() => {
     let enabledValue = descendants.value(focusedIndex)
@@ -525,16 +545,16 @@ export const useSelect = <T extends MaybeValue = string>({
   useOutsideClick({
     ref: containerRef,
     handler: onClose,
-    enabled: closeOnBlur,
+    enabled: isOpen && closeOnBlur,
   })
 
   useEffect(() => {
     if (!isMulti) return
 
-    if (!omitSelectedValues && isUndefined(maxSelectedValues)) return
+    if (!omitSelectedValues && isUndefined(maxSelectValues)) return
 
     const isAll = value.length > 0 && value.length === descendants.count()
-    const isMax = value.length === maxSelectedValues
+    const isMax = value.length === maxSelectValues
 
     if (isAll || isMax) {
       onClose()
@@ -548,7 +568,7 @@ export const useSelect = <T extends MaybeValue = string>({
     descendants,
     isMulti,
     onClose,
-    maxSelectedValues,
+    maxSelectValues,
   ])
 
   useUpdateEffect(() => {
@@ -572,32 +592,29 @@ export const useSelect = <T extends MaybeValue = string>({
       duration,
       trigger: "never",
       closeOnButton: false,
+      closeOnBlur,
     }),
-    [duration, onClose, onOpen, placement, rest, isOpen],
+    [duration, closeOnBlur, onClose, onOpen, placement, rest, isOpen],
   )
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
-      ...computedProps[0],
+      ...containerProps,
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
 
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [computedProps, formControlProps, onBlur, onClick, rest],
+    [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
-  const getFieldProps: PropGetter = useCallback(
+  const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
-      ...omitObject(computedProps[1] as Dict, [
-        "value",
-        "defaultValue",
-        "onChange",
-      ]),
+      ...fieldProps,
       ...props,
       "data-active": dataAttr(isOpen),
       "data-placeholder": dataAttr(
@@ -607,7 +624,7 @@ export const useSelect = <T extends MaybeValue = string>({
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
+    [fieldProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
   )
 
   return {
@@ -687,7 +704,7 @@ export const useSelectList = () => {
     beforeFocusedIndex.current = selectedValue.index
   }, [listRef, selectedValue])
 
-  const getListProps: PropGetter = useCallback(
+  const getListProps: MotionUIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
@@ -740,7 +757,7 @@ export const useSelectOptionGroup = ({
 
   const computedRest = splitObject(rest, layoutStyleProperties)
 
-  const getContainerProps: PropGetter = useCallback(
+  const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -764,7 +781,7 @@ export const useSelectOptionGroup = ({
     [computedRest, isEmpty],
   )
 
-  const getGroupProps: PropGetter = useCallback(
+  const getGroupProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       ...props,
@@ -783,18 +800,11 @@ export const useSelectOptionGroup = ({
 
 export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
-export type UseSelectOptionProps = Omit<
-  HTMLUIProps<"li">,
-  "value" | "children"
-> & {
+export type UseSelectOptionProps = Omit<HTMLUIProps<"li">, "value"> & {
   /**
    * The value of the select option.
    */
   value?: string
-  /**
-   * The label of the select option.
-   */
-  children?: string
   /**
    * If `true`, the select option will be disabled.
    *
@@ -927,7 +937,7 @@ export const useSelectOption = (
     if (isSelected) onChangeLabel(computedProps.value ?? "", false)
   }, [computedProps, isSelected, onChangeLabel])
 
-  const getOptionProps: PropGetter = useCallback(
+  const getOptionProps: UIPropGetter<"li"> = useCallback(
     (props = {}) => {
       const style: CSSProperties = {
         border: "0px",

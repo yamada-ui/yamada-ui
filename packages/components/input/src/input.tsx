@@ -25,7 +25,7 @@ type InputOptions = {
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
   /**
-   * The native HTML `size` attribute to be passed to the `input`
+   * The native HTML `size` attribute to be passed to the `input`.
    */
   htmlSize?: number
 }
@@ -45,11 +45,11 @@ export type InputProps = Omit<
  */
 export const Input = forwardRef<InputProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Input", props)
-  let { className, htmlSize, ...rest } = omitThemeProps(mergedProps)
+  let { className, htmlSize, __css, ...rest } = omitThemeProps(mergedProps)
 
   rest = useFormControlProps(rest)
 
-  const css: CSSUIObject = { ...styles.field }
+  const css: CSSUIObject = { ...styles.field, ...__css }
 
   return (
     <ui.input

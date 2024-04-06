@@ -8,9 +8,9 @@ import {
 import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading as LoadingIcon } from "@yamada-ui/loading"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
-import { cx, useMergeRefs, merge, dataAttr } from "@yamada-ui/utils"
+import { cx, merge, dataAttr, mergeRefs } from "@yamada-ui/utils"
 import type { ElementType, FC, ReactElement } from "react"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
 type ButtonOptions = {
@@ -20,6 +20,12 @@ type ButtonOptions = {
    * @default 'button'
    */
   type?: "button" | "reset" | "submit"
+  /**
+   * If true, the button is full rounded. Else, it'll be slightly round.
+   *
+   * @default false
+   */
+  isRounded?: boolean
   /**
    * If `true`, the loading state of the button is represented.
    *
@@ -78,7 +84,7 @@ export type ButtonProps = HTMLUIProps<"button"> &
  * @see Docs https://yamada-ui.com/components/forms/button
  */
 export const Button = forwardRef<ButtonProps, "button">(
-  ({ children, ...props }, customRef) => {
+  ({ children, ...props }, ref) => {
     const group = useButtonGroup()
     const [styles, mergedProps] = useComponentStyle("Button", {
       ...group,
@@ -88,6 +94,7 @@ export const Button = forwardRef<ButtonProps, "button">(
       className,
       as,
       type,
+      isRounded,
       isLoading,
       isActive,
       isDisabled = group?.isDisabled,
@@ -104,7 +111,6 @@ export const Button = forwardRef<ButtonProps, "button">(
     const trulyDisabled = isDisabled || isLoading
 
     const { ref: buttonRef, type: defaultType } = useButtonType(as)
-    const ref = useMergeRefs(customRef, buttonRef)
     const { onPointerDown, ...rippleProps } = useRipple({
       ...rest,
       isDisabled: disableRipple || trulyDisabled,
@@ -113,14 +119,14 @@ export const Button = forwardRef<ButtonProps, "button">(
     const css: CSSUIObject = useMemo(() => {
       const _focus =
         "_focus" in styles
-          ? merge(styles._focus ?? {}, { zIndex: "yamcha" })
+          ? merge(styles._focus ?? {}, { zIndex: "fallback(yamcha, 1)" })
           : {}
 
       return {
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "2",
+        gap: "fallback(2, 0.5rem)",
         appearance: "none",
         userSelect: "none",
         position: "relative",
@@ -131,8 +137,9 @@ export const Button = forwardRef<ButtonProps, "button">(
         ...styles,
         ...__css,
         ...(!!group ? { _focus } : {}),
+        ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }
-    }, [styles, __css, group])
+    }, [styles, __css, group, isRounded])
 
     const contentProps = {
       leftIcon,
@@ -147,13 +154,13 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     return (
       <ui.button
-        ref={ref}
+        ref={mergeRefs(ref, buttonRef)}
         as={as}
         className={cx("ui-button", className)}
         type={type ?? defaultType}
         disabled={trulyDisabled}
         data-active={dataAttr(isActive)}
-        data__loading={dataAttr(isLoading)}
+        data-loading={dataAttr(isLoading)}
         __css={css}
         {...rest}
         onPointerDown={onPointerDown}
@@ -241,13 +248,13 @@ const Icon: FC<HTMLUIProps<"span">> = ({ children, className, ...rest }) => {
 }
 
 export const useButtonType = (value?: ElementType) => {
-  const [isButton, setIsButton] = useState(!value)
+  const isButton = useRef(!value)
 
   const ref = useCallback((node: HTMLElement | null) => {
-    if (node) setIsButton(node.tagName === "BUTTON")
+    if (node) isButton.current = node.tagName === "BUTTON"
   }, [])
 
-  const type = isButton ? "button" : undefined
+  const type = isButton.current ? "button" : undefined
 
   return { ref, type } as const
 }

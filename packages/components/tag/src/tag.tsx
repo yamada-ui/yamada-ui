@@ -62,6 +62,7 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     display: "inline-flex",
     alignItems: "center",
     gap: "fallback(1, 0.25rem)",
+    gap: "0.25rem",
     verticalAlign: "top",
     ...styles.container,
   }
@@ -98,7 +99,7 @@ const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
 
 const CloseIcon: FC = () => {
   return (
-    <Icon verticalAlign="inherit" viewBox="0 0 512 512" fontSize="lg">
+    <Icon verticalAlign="inherit" viewBox="0 0 512 512" fontSize="1.125rem">
       <path
         fill="currentColor"
         d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"

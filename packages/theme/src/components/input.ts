@@ -13,14 +13,6 @@ export const Input: ComponentMultiStyle = {
       appearance: "none",
       transitionProperty: "common",
       transitionDuration: "normal",
-      _placeholder: {
-        color: "blackAlpha.600",
-      },
-      _dark: {
-        _placeholder: {
-          color: "whiteAlpha.400",
-        },
-      },
       _disabled: {
         opacity: 0.4,
         cursor: "not-allowed",
@@ -58,16 +50,16 @@ export const Input: ComponentMultiStyle = {
             userSelect: "all",
           },
           _invalid: {
-            borderColor: errorBorderColor,
+            borderColor: [errorBorderColor, errorBorderColor],
             boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
           _active: {
-            borderColor: focusBorderColor,
+            borderColor: [focusBorderColor, focusBorderColor],
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
           _focusVisible: {
             zIndex: "yamcha",
-            borderColor: focusBorderColor,
+            borderColor: [focusBorderColor, focusBorderColor],
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
           },
         },
@@ -152,15 +144,15 @@ export const Input: ComponentMultiStyle = {
             userSelect: "all",
           },
           _invalid: {
-            borderColor: errorBorderColor,
+            borderColor: [errorBorderColor, errorBorderColor],
             boxShadow: `0px 1px 0px 0px ${errorBorderColor}`,
           },
           _active: {
-            borderColor: focusBorderColor,
+            borderColor: [focusBorderColor, focusBorderColor],
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
           _focusVisible: {
-            borderColor: focusBorderColor,
+            borderColor: [focusBorderColor, focusBorderColor],
             boxShadow: `0px 1px 0px 0px ${focusBorderColor}`,
           },
         },

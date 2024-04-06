@@ -88,10 +88,16 @@ type MultiAutocompleteOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default false
+   */
+  closeOnSelect?: boolean
 }
 
-export type MultiAutocompleteProps = ThemeProps<"Select"> &
-  UseAutocompleteProps<string[]> &
+export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
+  Omit<UseAutocompleteProps<string[]>, "closeOnSelect"> &
   MultiAutocompleteOptions
 
 /**
@@ -99,7 +105,7 @@ export type MultiAutocompleteProps = ThemeProps<"Select"> &
  *
  * @see Docs https://yamada-ui.com/components/forms/multi-autocomplete
  */
-export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "div">(
+export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle(
       "MultiAutocomplete",
@@ -239,7 +245,7 @@ type MultiAutocompleteFieldProps = HTMLUIProps<"div"> &
     "component" | "separator" | "keepPlaceholder" | "inputProps"
   >
 
-const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
+const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
   (
     {
       className,
@@ -264,8 +270,8 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
 
       if (component) {
         return (label as string[]).map((label, index) => {
-          const onRemove: MouseEventHandler<HTMLElement> = (e) => {
-            e.stopPropagation()
+          const onRemove: MouseEventHandler<HTMLElement> = (ev) => {
+            ev.stopPropagation()
 
             onChange(value[index])
 
@@ -280,13 +286,14 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
           })
 
           const style: CSSProperties = {
-            cursor: "default",
             marginBlockStart: "0.125rem",
             marginBlockEnd: "0.125rem",
             marginInlineEnd: "0.25rem",
           }
 
-          return el ? cloneElement(el as ReactElement, { style }) : null
+          return el
+            ? cloneElement(el as ReactElement, { key: index, style })
+            : null
         })
       } else {
         return (label as string[]).map((value, index) => {
@@ -303,7 +310,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "div">(
     }, [label, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
-      paddingEnd: "2rem",
+      pe: "2rem",
       h,
       minH,
       display: "flex",

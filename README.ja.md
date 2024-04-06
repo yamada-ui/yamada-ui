@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hirotomoyamada/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
+  <img src="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png" alt="Yamada UI" width="480"/>
 </p>
 
 <p align="center">
@@ -8,11 +8,11 @@
     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
   </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
-  <a href="https://github.com/hirotomoyamada/yamada-ui/blob/main/LICENSE">
-    <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
+  <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
+    <img alt="MIT License" src="https://img.shields.io/github/license/yamada-ui/yamada-ui"/>
   </a>
-  <img alt="Github Stars" src="https://img.shields.io/github/stars/hirotomoyamada/yamada-ui" />
-  <a href="https://discord.gg/ubYvRAxFEB">
+  <img alt="Github Stars" src="https://img.shields.io/github/stars/yamada-ui/yamada-ui" />
+  <a href="https://discord.gg/H7V5RfEDTR">
     <img alt="MIT License" src="https://img.shields.io/badge/Chat%20on-Discord-%235865f2"/>
   </a>
 </p>
@@ -31,7 +31,7 @@ Yamada UIは、最先端のWebアプリケーションやウェブサイトの�
 - [インストール](#インストール)
 - [使い方](#使い方)
 - [CodeSandbox](#codesandbox)
-- [Storybook](https://hirotomoyamada.github.io/yamada-ui/)
+- [Storybook](https://yamada-ui.github.io/yamada-ui/)
 - [サポートする](#サポートする)
 - [貢献する](#貢献する)
 - [ライセンス](#ライセンス)
@@ -83,6 +83,9 @@ $ pnpm add @yamada-ui/carousel
 
 # `react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。
 $ pnpm add @yamada-ui/dropzone
+
+# `recharts`を使用した、便利なチャートコンポーネントを提供します。
+$ pnpm add @yamada-ui/charts
 
 # `react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。
 $ pnpm add @yamada-ui/markdown
@@ -136,9 +139,11 @@ const Example = () => {
 
 ### 組織
 
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/organizations.svg?avatarHeight=40&button=false" /></a>
+
 ### 個人
 
-<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?width=890" /></a>
+<a href="https://opencollective.com/yamada-ui"><img src="https://opencollective.com/yamada-ui/individuals.svg?avatarHeight=40" /></a>
 
 ## 貢献する
 
@@ -146,7 +151,7 @@ const Example = () => {
 
 あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。
 
-また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/hirotomoyamada/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/hirotomoyamada/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
+また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/yamada-ui/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/yamada-ui/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
 
 ## ライセンス
 

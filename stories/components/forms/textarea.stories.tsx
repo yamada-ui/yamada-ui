@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Button, FormControl, Textarea, VStack } from "@yamada-ui/react"
+import { useRef } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { useForm } from "react-hook-form"
 
@@ -45,6 +46,17 @@ export const withResize: Story = () => {
       <Textarea resize="horizontal" placeholder="horizontal" />
       <Textarea resize="vertical" placeholder="vertical" />
       <Textarea resize="none" placeholder="none" />
+    </>
+  )
+}
+
+export const withAutosize: Story = () => {
+  return (
+    <>
+      <Textarea autosize placeholder="autosize" />
+      <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
+      <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
+      <Textarea rows={4} placeholder="rows 4" />
     </>
   )
 }
@@ -136,6 +148,24 @@ export const stylingPlaceholder: Story = () => {
         placeholder="custom placeholder"
         _placeholder={{ color: "inherit" }}
       />
+    </>
+  )
+}
+
+export const useResize: Story = () => {
+  const resizeRef = useRef<() => void>(null)
+  const onResize = () => {
+    resizeRef.current?.()
+  }
+
+  return (
+    <>
+      <VStack>
+        <Textarea placeholder="use resize" resizeRef={resizeRef} />
+        <Button alignSelf="flex-end" onClick={onResize}>
+          Resize
+        </Button>
+      </VStack>
     </>
   )
 }

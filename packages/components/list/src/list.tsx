@@ -33,7 +33,7 @@ type ListOptions = {
   /**
    * The CSS `gap` property.
    *
-   * @default 'sm'
+   * @default '2'
    */
   gap?: CSSUIObject["gap"]
 }
@@ -52,7 +52,7 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
     children,
     styleType: listStyleType = "none",
     stylePosition: listStylePosition,
-    gap = "sm",
+    gap = "fallback(2, 0.5rem)",
     ...rest
   } = omitThemeProps(mergedProps)
 

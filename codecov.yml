@@ -1,0 +1,18 @@
+codecov:
+  require_ci_to_pass: false
+  bot: hirotomoyamada
+  ci:
+    - github-actions
+
+coverage:
+  status:
+    project: false
+    patch: false
+
+comment:
+  layout: "reach, diff, files, components"
+  behavior: default
+  require_changes: false
+
+github_checks:
+  annotations: false

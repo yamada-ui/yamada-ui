@@ -1,4 +1,4 @@
-import { render, act, screen, a11y } from "@yamada-ui/test"
+import { a11y, act, render, screen } from "@yamada-ui/test"
 import { Image } from "../src"
 
 const src = "https://image.xyz/source"
@@ -26,7 +26,7 @@ describe("<Image />", () => {
     expect(screen.getByRole("img")).toBeInstanceOf(HTMLImageElement)
   })
 
-  it("passes a11y test", async () => {
+  test("passes a11y test", async () => {
     await a11y(<Image alt="img" src={src} fallback={fallback} />)
   })
 
@@ -45,7 +45,7 @@ describe("<Image />", () => {
   test("fires onload", () => {
     trackImageOnload()
 
-    const onLoad = jest.fn()
+    const onLoad = vi.fn()
 
     render(<Image src={src} fallback={fallback} onLoad={onLoad} />)
 
@@ -54,6 +54,6 @@ describe("<Image />", () => {
     })
 
     expect(screen.getByRole("img")).toHaveAttribute("src", src)
-    expect(onLoad).toHaveBeenCalled()
+    expect(onLoad).toHaveBeenCalledWith(undefined)
   })
 })

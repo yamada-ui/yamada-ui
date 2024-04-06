@@ -6,8 +6,9 @@ import type { IconProps } from "@yamada-ui/icon"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx, isValidElement } from "@yamada-ui/utils"
 import type { FC, ReactElement } from "react"
-import type { UseCalendarHeaderProps } from "./use-calendar"
-import { useCalendarContext, useCalendarHeader } from "./use-calendar"
+import { useCalendarContext } from "./use-calendar"
+import type { UseCalendarHeaderProps } from "./use-calendar-header"
+import { useCalendarHeader } from "./use-calendar-header"
 
 type CalendarHeaderOptions = {
   /**
@@ -57,7 +58,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   const css: CSSUIObject = {
     display: "flex",
     alignItems: "center",
-    w: "full",
+    w: "100%",
     ...styles.header,
   }
   const { icon: iconElOrProps, ...computedLabelProps } = labelProps ?? {}

@@ -28,7 +28,7 @@ const InputElement = forwardRef<InputElementProps, "div">(
       position: "absolute",
       top: "0",
       [placement === "left" ? "insetStart" : "insetEnd"]: "0",
-      zIndex: "kurillin",
+      zIndex: "fallback(kurillin, 9)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -37,7 +37,7 @@ const InputElement = forwardRef<InputElementProps, "div">(
         styles.field?.h ??
         styles.field?.minHeight ??
         styles.field?.minH,
-      h: "full",
+      h: "100%",
       fontSize: styles.field?.fontSize,
       pointerEvents: isClick ? "auto" : "none",
       cursor: isClick ? "pointer" : "auto",

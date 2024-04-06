@@ -1,5 +1,176 @@
 # @yamada-ui/use-media-query
 
+## 1.0.24
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.24
+
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`8ea03f0`](https://github.com/yamada-ui/yamada-ui/commit/8ea03f0a19046e01e70e81c013e2adcd2f1cd147)]:
+  - @yamada-ui/utils@1.0.8
+  - @yamada-ui/providers@1.0.23
+
+## 1.0.22
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.22
+
+## 1.0.21
+
+### Patch Changes
+
+- [#886](https://github.com/yamada-ui/yamada-ui/pull/886) [`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated Github URL.
+
+- Updated dependencies [[`ab85439`](https://github.com/yamada-ui/yamada-ui/commit/ab85439913736551e96fd5a55ec289e3e7fd5126), [`cf53295`](https://github.com/yamada-ui/yamada-ui/commit/cf532953b6a9045d578fa746ea7faa9b2e8afef7)]:
+  - @yamada-ui/providers@1.0.21
+  - @yamada-ui/utils@1.0.7
+
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`bd90941`](https://github.com/yamada-ui/yamada-ui/commit/bd909411b5155394bca8f714d195111cf2463d25)]:
+  - @yamada-ui/utils@1.0.6
+  - @yamada-ui/providers@1.0.20
+
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.19
+
+## 1.0.18
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.18
+
+## 1.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`d8febe5`](https://github.com/hirotomoyamada/yamada-ui/commit/d8febe550ef6159cdb1ddbcbaff1a56e310a6529)]:
+  - @yamada-ui/utils@1.0.5
+  - @yamada-ui/providers@1.0.17
+
+## 1.0.16
+
+### Patch Changes
+
+- Updated dependencies [[`242afe6`](https://github.com/hirotomoyamada/yamada-ui/commit/242afe6508f50d67780f36b1b411810cb08a7238)]:
+  - @yamada-ui/providers@1.0.16
+
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.15
+
+## 1.0.14
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.14
+
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf), [`73b2111`](https://github.com/hirotomoyamada/yamada-ui/commit/73b211195ffa3dd8a2e10897ccf103549b10906c), [`021f818`](https://github.com/hirotomoyamada/yamada-ui/commit/021f818babd2d04a8163807fa6fe8122b60738bf)]:
+  - @yamada-ui/utils@1.0.4
+  - @yamada-ui/providers@1.0.13
+
+## 1.0.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.12
+
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.11
+
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`59ef0ff`](https://github.com/hirotomoyamada/yamada-ui/commit/59ef0ff1fc1dcae8bf8486d446d777786c7c23e3)]:
+  - @yamada-ui/utils@1.0.3
+  - @yamada-ui/providers@1.0.10
+
+## 1.0.9
+
+### Patch Changes
+
+- Updated dependencies [[`1d27f16`](https://github.com/hirotomoyamada/yamada-ui/commit/1d27f16b73b2cf27c61bf70509c8aeb3524c006b)]:
+  - @yamada-ui/utils@1.0.2
+  - @yamada-ui/providers@1.0.9
+
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.8
+
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.7
+
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`489074c`](https://github.com/hirotomoyamada/yamada-ui/commit/489074c686cf15f89917caab6b9e715d3856e2e1), [`324f4eb`](https://github.com/hirotomoyamada/yamada-ui/commit/324f4eb82be80b634ca90d5022720af1af2b6599), [`e28a099`](https://github.com/hirotomoyamada/yamada-ui/commit/e28a099242d827f6e3a4410d4f38a62c28ae6fd7), [`6289260`](https://github.com/hirotomoyamada/yamada-ui/commit/62892609fcd0f68f7c78a8c6bec37907b7a846f0)]:
+  - @yamada-ui/utils@1.0.1
+  - @yamada-ui/providers@1.0.6
+
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.5
+
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.4
+
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.3
+
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

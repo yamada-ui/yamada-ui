@@ -139,6 +139,11 @@
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
     },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
+    },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
@@ -350,7 +355,7 @@
     },
     "closeOnSelect": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": false,
       "required": false,
       "description": "If `true`, the list element will be closed when value is selected."
     },
@@ -463,6 +468,11 @@
       "required": false,
       "description": "If `true`, the PopoverContent rendering will be deferred until the popover is open."
     },
+    "isOpen": {
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, the popover will be opened."
+    },
     "isReadOnly": {
       "type": "boolean",
       "defaultValue": false,
@@ -503,7 +513,7 @@
       "required": false,
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
     },
-    "maxSelectedValues": {
+    "maxSelectValues": {
       "type": "number",
       "required": false,
       "description": "The maximum selectable value."

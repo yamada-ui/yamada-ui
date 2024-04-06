@@ -1,5 +1,15 @@
 # @yamada-ui/list
 
+## 1.0.18
+
+### Patch Changes
+
+- [#1107](https://github.com/yamada-ui/yamada-ui/pull/1107) [`f5a6434`](https://github.com/yamada-ui/yamada-ui/commit/f5a6434a829dc82e1ca001e8c8bdb2151d139009) Thanks [@GensIto](https://github.com/GensIto)! - fixed gap default value for list
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/icon@1.0.18
+
 ## 1.0.17
 
 ### Patch Changes

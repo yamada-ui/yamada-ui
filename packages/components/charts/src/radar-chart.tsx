@@ -89,13 +89,16 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     chartProps,
     polarGridProps,
     polarAngleAxisProps,
+    polarAngleAxisTickProps,
     polarRadiusAxisProps,
+    polarRadiusAxisTickProps,
     containerProps,
     tooltipProps,
     legendProps,
     tooltipAnimationDuration,
     unit,
     valueFormatter,
+    strokeDasharray,
     withDots,
     withActiveDots,
     strokeWidth,
@@ -124,24 +127,24 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     chartProps,
     polarGridProps,
     polarAngleAxisProps,
+    polarAngleAxisTickProps,
     polarRadiusAxisProps,
+    polarRadiusAxisTickProps,
     withDots,
     withActiveDots,
     strokeWidth,
     fillOpacity,
     valueFormatter,
+    strokeDasharray,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
-  const {
-    tooltipProps: computedTooltipProps,
-    getTooltipProps,
-    tooltipVars,
-  } = useChartTooltip({
-    tooltipProps,
-    tooltipAnimationDuration,
-    styles,
-  })
+  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+    useChartTooltip({
+      tooltipProps,
+      tooltipAnimationDuration,
+      styles,
+    })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
@@ -150,7 +153,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     () =>
       series.map(({ dataKey }, index) => (
         <Radar
-          key={`radar=${dataKey}`}
+          key={`radar-${dataKey}`}
           {...getRadarProps({ index, className: "ui-radar-chart__radar" })}
         />
       )),
@@ -162,7 +165,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-radar-chart", className)}
-        var={[...radarVars, ...tooltipVars]}
+        var={radarVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

@@ -36,7 +36,7 @@ describe("<Tag />", () => {
         Gap
       </Tag>,
     )
-    expect(getByTestId("tag")).toHaveStyle("gap: 0.25rem;")
+    expect(getByTestId("tag")).toHaveStyle("gap: var(--ui-spaces-1);")
   })
 
   test("Is `fontSize` correctly applied to the close button style", async () => {

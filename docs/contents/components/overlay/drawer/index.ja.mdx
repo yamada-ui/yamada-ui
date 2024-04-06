@@ -343,6 +343,41 @@ return (
 )
 ```
 
+### ドラッグバーを非表示にする
+
+ドラッグバーを非表示にする場合は、`withDragBar`を`false`に設定します。
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnDrag
+      withDragBar={false}
+      withCloseButton
+    >
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>
+        『ドラゴンボール』は、鳥山明による日本の漫画作品です。...
+      </DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
 ### オーバーレイをカスタマイズする
 
 `DrawerOverlay`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。

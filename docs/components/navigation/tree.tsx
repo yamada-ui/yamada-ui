@@ -23,6 +23,7 @@ import {
   Figma,
   Function,
   History,
+  Window,
   World,
 } from "components/media-and-icons"
 import { CONSTANT } from "constant"
@@ -43,13 +44,13 @@ export const Tree = memo(
           <RecursiveListItem key={document.slug} {...document} />
         ))}
 
-        {CONSTANT.MENU.map(({ icon, name, href }) => (
+        {CONSTANT.MENU.map(({ icon, name, href, isExternal }) => (
           <ListItemLink
             key={name}
             menu_icon={icon}
             slug={href}
             title={t(`component.tree.${name}`)}
-            isExternal
+            isExternal={isExternal}
           />
         ))}
       </List>
@@ -249,6 +250,9 @@ const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
 
     case "brush":
       return <Brush {...rest} />
+
+    case "window":
+      return <Window {...rest} />
 
     default:
       return <></>

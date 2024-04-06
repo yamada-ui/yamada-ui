@@ -23,7 +23,7 @@
   },
   "examples": {
     "title": "Examples",
-    "description": "A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
+    "description": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
     "hero": {
       "heading": "`Check out some `examples",
       "message": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
@@ -64,7 +64,8 @@
   },
   "component": {
     "tree": {
-      "yamada-colors": "Colors generator"
+      "yamada-colors": "Colors generator",
+      "examples": "Examples"
     },
     "feedback": {
       "ad-banner": {

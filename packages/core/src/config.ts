@@ -447,4 +447,5 @@ export const transforms = {
   filter: generateFilter,
   media: generateAtRule("media"),
   container: generateAtRule("container"),
+  supports: generateAtRule("supports"),
 }

@@ -110,7 +110,7 @@ export const Slide = forwardRef<SlideProps, "div", false>(
 
     const css: CSSUIObject = {
       position: "fixed",
-      zIndex: 110,
+      zIndex: "fallback(jeice, 110)",
       ...__css,
       ...position,
     }

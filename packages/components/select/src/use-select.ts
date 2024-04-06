@@ -11,7 +11,6 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Dict } from "@yamada-ui/utils"
 import {
   createContext,
   dataAttr,
@@ -172,7 +171,10 @@ export const useSelect = <T extends MaybeValue = string>({
     rest,
     getFormControlProperties({ omit: ["aria-readonly"] }),
   )
-  const computedProps = splitObject(rest, layoutStyleProperties)
+  const [containerProps, fieldProps] = splitObject(
+    omitObject(rest, ["value", "defaultValue", "onChange", "aria-readonly"]),
+    layoutStyleProperties,
+  )
 
   const descendants = useSelectDescendants()
 
@@ -598,26 +600,21 @@ export const useSelect = <T extends MaybeValue = string>({
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
-      ...computedProps[0],
+      ...containerProps,
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
 
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
-    [computedProps, formControlProps, onBlur, onClick, rest],
+    [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
-      ...omitObject(computedProps[1] as Dict, [
-        "value",
-        "defaultValue",
-        "onChange",
-        "aria-readonly",
-      ]),
+      ...fieldProps,
       ...props,
       "data-active": dataAttr(isOpen),
       "data-placeholder": dataAttr(
@@ -627,7 +624,7 @@ export const useSelect = <T extends MaybeValue = string>({
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [computedProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
+    [fieldProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
   )
 
   return {

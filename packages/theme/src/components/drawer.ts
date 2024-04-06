@@ -1,17 +1,25 @@
 import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
-import { toCamelCase } from "@yamada-ui/utils"
+import { antonym, toCamelCase } from "@yamada-ui/utils"
 import { Modal } from "./modal"
 
 export const Drawer: ComponentMultiStyle = mergeMultiStyle(Modal, {
   baseStyle: {
     container: ({ isFullHeight, placement }) => ({
-      ...(isFullHeight ? { height: "100dvh", rounded: "0" } : {}),
-      w: "auto",
+      ...(isFullHeight ? { height: "100dvh", rounded: 0 } : {}),
       [`rounded${toCamelCase(placement)}`]: 0,
     }),
+    inner: {},
     body: {
       overflow: "auto",
     },
+    dragBar: ({ placement }) => ({
+      [`margin${toCamelCase(antonym(placement))}`]: "md",
+      ...(placement === "top" || placement === "bottom"
+        ? { mx: "auto", w: "3xs", minH: "2" }
+        : { my: "auto", minW: "2", h: "3xs" }),
+      bg: ["blackAlpha.100", "whiteAlpha.100"],
+      rounded: "full",
+    }),
   },
 
   sizes: {
@@ -21,7 +29,7 @@ export const Drawer: ComponentMultiStyle = mergeMultiStyle(Modal, {
     lg: { container: { maxW: "2xl" } },
     xl: { container: { maxW: "4xl" } },
     full: {
-      container: { minW: "100vw", minH: "100dvh" },
+      container: { minW: "100vw", minH: "100dvh", rounded: 0 },
     },
   },
 

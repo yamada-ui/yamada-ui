@@ -1,5 +1,16 @@
 # @yamada-ui/transitions
 
+## 1.0.19
+
+### Patch Changes
+
+- [#1120](https://github.com/yamada-ui/yamada-ui/pull/1120) [`987747f`](https://github.com/yamada-ui/yamada-ui/commit/987747f956b51ce65557c5581a3725cd99e3fb16) Thanks [@yamao-latte](https://github.com/yamao-latte)! - fixed zIndex default value for slide.
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/motion@1.0.19
+  - @yamada-ui/use-value@1.1.6
+
 ## 1.0.18
 
 ### Patch Changes

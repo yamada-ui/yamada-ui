@@ -80,6 +80,11 @@
       "required": false,
       "description": "The size of the LineChart."
     },
+    "syncId": {
+      "type": "string | number",
+      "required": false,
+      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush."
+    },
     "tickLine": {
       "type": "ChartAxisType",
       "defaultValue": "'y'",
@@ -233,6 +238,11 @@
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the BarChart."
+    },
+    "syncId": {
+      "type": "string | number",
+      "required": false,
+      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush."
     },
     "tickLine": {
       "type": "ChartAxisType",
@@ -398,6 +408,11 @@
       "type": "number",
       "required": false,
       "description": "Offset for the split gradient. By default, value is inferred from `data` and `series` if possible.\nMust be generated from the data array with `getSplitOffset` function."
+    },
+    "syncId": {
+      "type": "string | number",
+      "required": false,
+      "description": "If any two categorical charts have the same syncId,\nthese two charts can sync the position tooltip, and the startIndex, endIndex of Brush."
     },
     "tickLine": {
       "type": "ChartAxisType",

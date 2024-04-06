@@ -161,7 +161,7 @@ export const useColorPicker = ({
   const { disabled, readOnly } = formControlProps
   const [containerProps, inputProps] = splitObject<Dict, string>(
     omitObject(rest, [...popoverProperties]),
-    [...layoutStyleProperties, "aria-readonly"],
+    layoutStyleProperties,
   )
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -303,9 +303,10 @@ export const useColorPicker = ({
         if (!sRGBHex) return
 
         onColorSelectorChange(sRGBHex)
+        onChangeEnd?.(sRGBHex)
       } catch {}
     },
-    [onEyeDropperOpen, onColorSelectorChange],
+    [onEyeDropperOpen, onColorSelectorChange, onChangeEnd],
   )
 
   useOutsideClick({

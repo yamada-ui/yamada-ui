@@ -31,7 +31,7 @@ export const basic: Story = () => {
           <ContextMenuItem>Undo</ContextMenuItem>
           <ContextMenuItem>Redo</ContextMenuItem>
           <ContextMenuDivider />
-          <ContextMenuItem disabled>Cut</ContextMenuItem>
+          <ContextMenuItem isDisabled>Cut</ContextMenuItem>
           <ContextMenuItem>Copy</ContextMenuItem>
           <ContextMenuItem>Paste</ContextMenuItem>
         </ContextMenuContent>

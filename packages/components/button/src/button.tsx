@@ -118,13 +118,15 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const css: CSSUIObject = useMemo(() => {
       const _focus =
-        "_focus" in styles ? merge(styles._focus ?? {}, { zIndex: 1 }) : {}
+        "_focus" in styles
+          ? merge(styles._focus ?? {}, { zIndex: "fallback(yamcha, 1)" })
+          : {}
 
       return {
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "0.5rem",
+        gap: "fallback(2, 0.5rem)",
         appearance: "none",
         userSelect: "none",
         position: "relative",
@@ -135,7 +137,7 @@ export const Button = forwardRef<ButtonProps, "button">(
         ...styles,
         ...__css,
         ...(!!group ? { _focus } : {}),
-        ...(isRounded ? { borderRadius: "9999px" } : {}),
+        ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }
     }, [styles, __css, group, isRounded])
 

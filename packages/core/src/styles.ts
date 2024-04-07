@@ -1306,6 +1306,11 @@ export const atRuleStyles: Configs = {
     isSkip: true,
     transform: transforms.container,
   },
+  _supports: {
+    isProcessSkip: true,
+    isSkip: true,
+    transform: transforms.supports,
+  },
 }
 
 export const styles: Configs = {
@@ -1314,7 +1319,12 @@ export const styles: Configs = {
   ...atRuleStyles,
 }
 
-export const processSkipProperties: string[] = ["var", "_media", "_container"]
+export const processSkipProperties: string[] = [
+  "var",
+  "_media",
+  "_container",
+  "_supports",
+]
 
 export const styleProperties: any[] = Object.keys(styles)
 
@@ -5415,4 +5425,18 @@ export type StyleProps = {
     css?: CSSUIObject
     [key: string]: any
   }[]
+  /**
+   * The `@supports` of CSS at-rule.
+   * @experimental
+   *
+   * @example
+   * ```jsx
+   * <Box containerType="size">
+   *   <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>
+   *     Box
+   *   </Text>
+   * </Box>
+   * ```
+   */
+  _supports?: { query?: StringLiteral; css?: CSSUIObject }[]
 }

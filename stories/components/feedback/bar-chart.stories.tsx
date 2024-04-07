@@ -280,45 +280,42 @@ export const withSize: Story = () => {
 }
 
 export const withSync: Story = () => {
-  const data = [
-    useMemo(() => {
-      const months = ["January", "February", "March", "April", "May", "June"]
-      return months.map((month) => ({
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+
+    return [
+      months.map((month) => ({
         month,
         Smartphones: randomValue(),
-      }))
-    }, []),
-    useMemo(() => {
-      const months = ["January", "February", "March", "April", "May", "June"]
-      return months.map((month) => ({
+      })),
+      months.map((month) => ({
         month,
         Laptops: randomValue(),
-      }))
-    }, []),
-  ]
-  const series: BarProps[][] = [
-    useMemo(
-      () => [{ dataKey: "Smartphones", color: ["primary.500", "primary.400"] }],
-      [],
-    ),
-    useMemo(
-      () => [{ dataKey: "Laptops", color: ["secondary.500", "secondary.400"] }],
-      [],
-    ),
-  ]
+      })),
+    ]
+  }, [])
+
+  const series: BarProps[][] = useMemo(
+    () => [
+      [{ dataKey: "Smartphones", color: ["primary.500", "primary.400"] }],
+      [{ dataKey: "Laptops", color: ["secondary.500", "secondary.400"] }],
+    ],
+    [],
+  )
+
   return (
     <VStack>
       <BarChart
         data={data[0]}
         series={series[0]}
         dataKey="month"
-        chartProps={{ syncId: "syncId" }}
+        syncId="syncId"
       />
       <BarChart
         data={data[1]}
         series={series[1]}
         dataKey="month"
-        chartProps={{ syncId: "syncId" }}
+        syncId="syncId"
       />
     </VStack>
   )

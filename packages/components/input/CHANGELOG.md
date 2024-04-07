@@ -1,5 +1,17 @@
 # @yamada-ui/input
 
+## 1.0.21
+
+### Patch Changes
+
+- [#1110](https://github.com/yamada-ui/yamada-ui/pull/1110) [`b6731ab`](https://github.com/yamada-ui/yamada-ui/commit/b6731abb0eab82b8fe5aa3b2e2549a7ce1843d28) Thanks [@GensIto](https://github.com/GensIto)! - fixed zIndex default value for input-element
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/file-input@1.0.21
+  - @yamada-ui/form-control@1.0.21
+  - @yamada-ui/use-token@1.1.6
+
 ## 1.0.20
 
 ### Patch Changes

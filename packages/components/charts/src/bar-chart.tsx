@@ -96,6 +96,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     strokeDasharray,
     fillOpacity,
     chartProps,
+    syncId,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -109,6 +110,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       barProps,
       referenceLineProps,
       fillOpacity,
+      syncId,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })
@@ -136,15 +138,12 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const {
-    tooltipProps: computedTooltipProps,
-    getTooltipProps,
-    tooltipVars,
-  } = useChartTooltip({
-    tooltipProps,
-    tooltipAnimationDuration,
-    styles,
-  })
+  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+    useChartTooltip({
+      tooltipProps,
+      tooltipAnimationDuration,
+      styles,
+    })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
@@ -181,7 +180,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-bar-chart", className)}
-        var={[...barVars, ...tooltipVars]}
+        var={barVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

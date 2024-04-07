@@ -1,33 +1,46 @@
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { toHex, lighten } from "color2k"
+import { parseToHsla, hsla, toHex } from "color2k"
 import { prettier } from "../../utils"
 
-export const toneColor = (
-  color: string,
-  hue: number,
-  lCoef: number,
-  dCoef: number,
-) => {
-  const coef = hue < 500 ? lCoef : dCoef
+const tones = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-  const amount = (500 - hue) * 0.001 * coef
+const generateTones = (hex: string) => {
+  let [h, s, l] = parseToHsla(hex)
 
-  return toHex(lighten(color, amount))
+  l *= 100
+
+  const d = l <= 50
+  const x = ((!d ? 100 : 95) - l) / 5
+  const y = (l - (d ? 5 : 15)) / 5
+
+  return tones.reduce(
+    (prev, tone) => {
+      const t = tone / 100
+      let z: number
+
+      if (t <= 5) {
+        z = l + (5 - t) * x
+      } else {
+        z = l - (t - 5) * y
+      }
+
+      z /= 100
+
+      prev[tone] = toHex(hsla(h, s, z, 1))
+
+      return prev
+    },
+    {} as Record<string, any>,
+  )
 }
-
-const hues = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
 type Options = {
   name?: string
-  coef?: string
   out?: boolean
 }
 
-export const actionColors = async (
-  color: string,
-  { name, coef, out }: Options,
-) => {
+export const actionColors = async (color: string, { name, out }: Options) => {
   p.intro(c.magenta(`Generating Hue colors`))
 
   const s = p.spinner()
@@ -37,15 +50,7 @@ export const actionColors = async (
 
     s.start(`Computing the color`)
 
-    const [lCoef, dCoef] = coef?.split(",").map((v) => Number(v.trim())) ?? [
-      0.94, 0.86,
-    ]
-
-    const contents = hues.reduce<Record<string, any>>((prev, hue) => {
-      prev[hue] = toneColor(color, hue, lCoef, dCoef)
-
-      return prev
-    }, {})
+    const contents = generateTones(color)
 
     let result = contents
 

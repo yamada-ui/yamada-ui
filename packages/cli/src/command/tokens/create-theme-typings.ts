@@ -6,7 +6,7 @@ type Component = {
   variants: string[]
 }
 
-const hues = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+const tones = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
 export const printComponent = (components: Record<string, Component>) =>
   `components: { ${Object.entries(components)
@@ -79,12 +79,12 @@ export const extractTransitions = (theme: any) => {
   return { transitionProperty, transitionDuration, transitionEasing }
 }
 
-const isHue = (value: any) => {
+const isTone = (value: any) => {
   if (!isObject(value)) return false
 
   const keys = Object.keys(value)
 
-  return hues.every((key) => keys.includes(key.toString()))
+  return tones.every((key) => keys.includes(key.toString()))
 }
 
 export const extractColorSchemes = (theme: any) => {
@@ -97,7 +97,7 @@ export const extractColorSchemes = (theme: any) => {
   if (!isObject(colors)) return results
 
   Object.entries(colors).forEach(([key, value]) => {
-    if (!isHue(value)) return
+    if (!isTone(value)) return
 
     results.colorSchemes.push(key)
 

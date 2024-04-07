@@ -137,11 +137,12 @@ describe("<Calendar />", () => {
     test("should render with minDate and maxDate", () => {
       const { container } = render(
         <Calendar
-          minDate={new Date(new Date().setDate(1))}
-          maxDate={new Date(new Date().setDate(18))}
+          defaultValue={new Date(new Date(2024, 2))}
+          minDate={new Date(new Date(2024, 2).setDate(1))}
+          maxDate={new Date(new Date(2024, 2).setDate(18))}
         />,
       )
-      const minDateUnder = new Date(new Date().setDate(0))
+      const minDateUnder = new Date(new Date(2024, 2).setDate(0))
       const minDateUnderStr = new Date(
         minDateUnder.setHours(0, 0, 0, 0),
       ).toString()
@@ -150,7 +151,7 @@ describe("<Calendar />", () => {
       )
       expect(minDateUnderBtn).toHaveAttribute("data-disabled")
 
-      const maxDateOver = new Date(new Date().setDate(19))
+      const maxDateOver = new Date(new Date(2024, 2).setDate(19))
       const maxDateOverStr = new Date(
         maxDateOver.setHours(0, 0, 0, 0),
       ).toString()

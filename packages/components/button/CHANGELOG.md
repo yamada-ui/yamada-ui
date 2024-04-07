@@ -1,5 +1,16 @@
 # @yamada-ui/button
 
+## 1.0.21
+
+### Patch Changes
+
+- [#1104](https://github.com/yamada-ui/yamada-ui/pull/1104) [`1826fe8`](https://github.com/yamada-ui/yamada-ui/commit/1826fe8e07ac68541a39b9b3a51679389c4f30ef) Thanks [@mochi-sann](https://github.com/mochi-sann)! - fix: theme's token in the Button component
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e), [`0a5af46`](https://github.com/yamada-ui/yamada-ui/commit/0a5af465b1085b8e497c1771e02cc11b3d486a08)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/loading@1.0.19
+  - @yamada-ui/ripple@1.0.19
+
 ## 1.0.20
 
 ### Patch Changes

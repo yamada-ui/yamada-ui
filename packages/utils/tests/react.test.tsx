@@ -254,7 +254,12 @@ describe("React", () => {
     test("should return a function that handles async execution", async () => {
       const asyncFunction = () => Promise.resolve("test")
       const { result } = renderHook(() => useAsyncFunc(asyncFunction, []))
-      const asyncResult = result.current[1]()
+
+      let asyncResult: Promise<string>
+
+      await act(async () => {
+        asyncResult = result.current[1]()
+      })
 
       await waitFor(async () => {
         await expect(asyncResult).resolves.toBe("test")

@@ -7,6 +7,7 @@ import {
   ContextMenuDivider,
   ContextMenuOptionGroup,
   ContextMenuOptionItem,
+  ContextMenuGroup,
   Text,
 } from "@yamada-ui/react"
 
@@ -36,6 +37,30 @@ export const basic: Story = () => {
         </ContextMenuContent>
       </ContextMenu>
     </div>
+  )
+}
+
+export const WithGroup: Story = () => {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger style={triggerStyle}>
+        <Text style={{ textAlign: "center" }}>Right Click Here</Text>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuGroup label="order">
+          <ContextMenuOptionItem value="asc">Ascending</ContextMenuOptionItem>
+          <ContextMenuOptionItem value="desc">Descending</ContextMenuOptionItem>
+        </ContextMenuGroup>
+
+        <ContextMenuDivider />
+
+        <ContextMenuGroup label="display">
+          <ContextMenuOptionItem value="gender">gender</ContextMenuOptionItem>
+          <ContextMenuOptionItem value="email">email</ContextMenuOptionItem>
+          <ContextMenuOptionItem value="phone">phone</ContextMenuOptionItem>
+        </ContextMenuGroup>
+      </ContextMenuContent>
+    </ContextMenu>
   )
 }
 

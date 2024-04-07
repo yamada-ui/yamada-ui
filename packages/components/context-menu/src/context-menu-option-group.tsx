@@ -1,9 +1,9 @@
 import type { ComponentArgs, HTMLUIProps } from "@yamada-ui/core"
-import { MenuGroup } from "@yamada-ui/react"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, omitObject, isArray } from "@yamada-ui/utils"
 import type { ForwardedRef, Ref } from "react"
 import { cloneElement, forwardRef, useCallback } from "react"
+import { ContextMenuGroup } from "./context-menu-group"
 import { ContextMenuOptionItem } from "./context-menu-item"
 
 type ContextMenuOptionGroupOptions<Y extends string | string[] = string> = {
@@ -89,13 +89,13 @@ export const ContextMenuOptionGroup = forwardRef(
     })
 
     return (
-      <MenuGroup
+      <ContextMenuGroup
         ref={ref}
-        className={cx("ui-menu__item--group--option", className)}
+        className={cx("ui-context-menu__item--group--option", className)}
         {...omitObject(rest, ["value", "onChange"])}
       >
         {cloneChildren}
-      </MenuGroup>
+      </ContextMenuGroup>
     )
   },
 ) as {

@@ -1,4 +1,4 @@
-import { interopDefault } from "../src/module"
+import { interopDefault } from "../src"
 
 describe("Module", () => {
   test("should return the default export if it exists", () => {

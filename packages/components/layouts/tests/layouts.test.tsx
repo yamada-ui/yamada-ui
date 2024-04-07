@@ -13,6 +13,7 @@ import {
   VStack,
   Grid,
   GridItem,
+  ZStack,
 } from "../src"
 
 describe("<AspectRatio />", () => {
@@ -309,5 +310,64 @@ describe("<GridItem />", () => {
       gridColumn: "span 2/span 2",
       gridRow: "span 2/span 2",
     })
+  })
+})
+
+describe("<ZStack />", () => {
+  test("ZStack renders correctly", () => {
+    render(<ZStack>ZStack</ZStack>)
+  })
+
+  test("startIndex property works correctly", () => {
+    const { getByTestId } = render(
+      <ZStack data-testid="z-stack" startIndex={10}>
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+
+    const zStackItem = getByTestId("z-stack").firstChild
+    expect(zStackItem).toHaveStyle({ zIndex: 10 })
+  })
+
+  test("direction property works correctly", () => {
+    const { getByTestId } = render(
+      <ZStack data-testid="z-stack" direction="bottom-right">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+
+    const zStackItem = getByTestId("z-stack").firstChild
+    expect(zStackItem).toHaveStyle({
+      top: "calc(var(--ui-space) * 0)",
+      left: "calc(var(--ui-space) * 0)",
+    })
+  })
+
+  test("reverse property works correctly", () => {
+    const { getByTestId } = render(
+      <ZStack data-testid="z-stack" direction="bottom-right" reverse>
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+
+    const zStackItem = getByTestId("z-stack").firstChild
+    expect(zStackItem).toHaveStyle({
+      bottom: "calc(var(--ui-space) * 0)",
+      right: "calc(var(--ui-space) * 0)",
+    })
+  })
+
+  test("Child elements are correctly overlaid and rendered", () => {
+    const { getByTestId } = render(
+      <ZStack data-testid="z-stack">
+        <Box data-testid="item-1">Item 1</Box>
+        <Box data-testid="item-2">Item 2</Box>
+      </ZStack>,
+    )
+
+    const item1 = getByTestId("item-1")
+    const item2 = getByTestId("item-2")
+    expect(item1).toHaveStyle({ position: "absolute" })
+    expect(item2).toHaveStyle({ position: "absolute" })
   })
 })

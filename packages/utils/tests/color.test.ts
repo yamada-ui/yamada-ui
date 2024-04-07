@@ -1,4 +1,3 @@
-import { defaultTheme } from "@yamada-ui/theme"
 import * as c from "color2k"
 import {
   getColor,
@@ -22,6 +21,14 @@ import {
   hsvTo,
   sameColor,
 } from "../src/color"
+
+const defaultTheme = {
+  colors: {
+    gray: {
+      500: "#6b7280",
+    },
+  },
+}
 
 describe("Color", () => {
   test("getColor returns correct color", () => {

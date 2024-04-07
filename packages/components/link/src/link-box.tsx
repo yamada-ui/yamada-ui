@@ -1,8 +1,8 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -64,7 +64,7 @@ export const LinkBox = forwardRef<LinkBoxProps, "div">((props, ref) => {
   const css: CSSUIObject = {
     "a[href]:not(.ui-link-box__overlay), abbr[title]": {
       position: "relative",
-      zIndex: "1",
+      zIndex: "fallback(yamcha, 1)",
     },
     ...styles,
   }

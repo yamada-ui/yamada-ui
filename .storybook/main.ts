@@ -45,10 +45,6 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: false,
   },
-
-  docs: {
-    autodocs: true,
-  },
 }
 
 export default config

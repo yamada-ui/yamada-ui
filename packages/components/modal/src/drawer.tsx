@@ -1,10 +1,11 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
+  ui,
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import type { PanEventInfo } from "@yamada-ui/react"
+import { useValue, type PanEventInfo } from "@yamada-ui/react"
 import type { SlideProps } from "@yamada-ui/transitions"
 import { Slide } from "@yamada-ui/transitions"
 import {
@@ -13,8 +14,10 @@ import {
   findChildren,
   cx,
   omitObject,
+  isArray,
 } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import type { FC } from "react"
+import { useCallback, useMemo } from "react"
 import { useModal } from "./modal"
 import type {
   ModalProps,
@@ -45,16 +48,56 @@ type DrawerOptions = {
    */
   isFullHeight?: boolean
   /**
-   * If `true` then the drawer will close on drag.
+   * If `true`, then the drawer will close on drag.
    *
    * @default false
    */
   closeOnDrag?: boolean
+  /**
+   * If `true`, display the drag bar when `closeOnDrag` is `true`.
+   *
+   * @default true
+   */
+  withDragBar?: boolean
+  /**
+   * Applies constraints on the permitted draggable area.
+   *
+   * @default 0
+   */
+  dragConstraints?: number
+  /**
+   * The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.
+   *
+   * @default 0.1
+   */
+  dragElastic?: number
+  /**
+   * Offset from being dragged to closing.
+   *
+   * @default 80
+   */
+  dragOffset?: number
+  /**
+   * Velocity of the drag that triggers close.
+   *
+   * @default 100
+   */
+  dragVelocity?: number
+  /**
+   * Props for the blank area when `closeOnDrag` is `true`.
+   */
+  blankForDragProps?: CSSUIObject
 }
 
 export type DrawerProps = Omit<
   ModalProps,
-  "scrollBehavior" | "animation" | "outside" | "placement" | keyof ThemeProps
+  | "scrollBehavior"
+  | "animation"
+  | "outside"
+  | "placement"
+  | "dragConstraints"
+  | "dragElastic"
+  | keyof ThemeProps
 > &
   ThemeProps<"Drawer"> &
   DrawerOptions
@@ -72,10 +115,11 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
 export const Drawer = forwardRef<DrawerProps, "div">(
-  ({ size, placement = "right", closeOnDrag, ...props }, ref) => {
+  ({ size, placement = "right", closeOnDrag = false, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Drawer", {
       size,
       placement,
+      closeOnDrag,
       ...props,
     })
     const {
@@ -85,8 +129,9 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       onOverlayClick,
       onEsc,
       onCloseComplete,
-      withCloseButton = true,
+      withCloseButton = !closeOnDrag,
       withOverlay = true,
+      withDragBar = true,
       allowPinchZoom,
       autoFocus,
       restoreFocus,
@@ -97,6 +142,11 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       closeOnEsc,
       lockFocusAcrossFrames,
       duration = { enter: 0.4, exit: 0.3 },
+      dragConstraints = 0,
+      dragElastic = 0.1,
+      dragOffset = 80,
+      dragVelocity = 100,
+      blankForDragProps,
       portalProps,
       ...rest
     } = omitThemeProps(mergedProps)
@@ -136,11 +186,17 @@ export const Drawer = forwardRef<DrawerProps, "div">(
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
           <DrawerContent
-            closeOnDrag={closeOnDrag}
             {...{
+              dragConstraints,
+              dragElastic,
+              dragOffset,
+              dragVelocity,
               withCloseButton,
+              withDragBar,
+              blankForDragProps,
               ...omitObject(rest, ["isFullHeight"]),
               placement,
+              closeOnDrag,
             }}
           >
             {cloneChildren}
@@ -154,15 +210,39 @@ export const Drawer = forwardRef<DrawerProps, "div">(
 type DrawerContentProps = Omit<
   DrawerProps,
   "color" | "transition" | "isOpen" | keyof ThemeProps
->
+> &
+  Required<
+    Pick<
+      DrawerProps,
+      | "placement"
+      | "dragConstraints"
+      | "dragElastic"
+      | "dragOffset"
+      | "dragVelocity"
+    >
+  >
 
 export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
   (
-    { className, children, placement, withCloseButton, closeOnDrag, ...rest },
+    {
+      className,
+      children,
+      placement: _placement,
+      withCloseButton,
+      withDragBar,
+      closeOnDrag,
+      dragConstraints,
+      dragElastic,
+      dragOffset,
+      dragVelocity,
+      blankForDragProps,
+      ...rest
+    },
     ref,
   ) => {
     const { isOpen, onClose, duration } = useModal()
     const styles = useDrawer()
+    const placement = useValue(_placement)
 
     const validChildren = getValidChildren(children)
 
@@ -171,26 +251,88 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       DrawerCloseButton,
     )
 
-    const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      width: "100%",
-      outline: 0,
-      ...styles.container,
-    }
+    const blankForDragBg = useMemo(() => {
+      const propBg =
+        rest.backgroundColor ?? rest.bgColor ?? rest.background ?? rest.bg
+      const styleBg =
+        styles.container?.backgroundColor ??
+        styles.container?.bgColor ??
+        styles.container?.background ??
+        styles.container?.bg
+      const computedBg = propBg ?? styleBg
 
-    const getDragDirectionRestriction = useCallback(() => {
+      return isArray(computedBg) ? computedBg : [computedBg]
+    }, [rest, styles])
+
+    const blankForDrag = useMemo<CSSUIObject>(() => {
+      let position: CSSUIObject = {}
+
       switch (placement) {
         case "top":
-          return { bottom: 0 }
+          position = { top: "calc(-100dvh + 1px)", left: 0, right: 0 }
+          break
+
         case "bottom":
-          return { top: 0 }
+          position = { bottom: "calc(-100dvh + 1px)", left: 0, right: 0 }
+          break
+
         case "left":
-          return { right: 0 }
+          position = { left: "calc(-100% + 1px)", top: 0, bottom: 0 }
+          break
+
         case "right":
-          return { left: 0 }
+          position = { right: "calc(-100% + 1px)", top: 0, bottom: 0 }
+          break
       }
-    }, [placement])
+
+      const [lightBg, darkBg] = blankForDragBg
+
+      return {
+        _after: {
+          content: '""',
+          display: "block",
+          w: "100%",
+          h: "100dvh",
+          bg: lightBg,
+          position: "absolute",
+          ...position,
+          ...blankForDragProps,
+        },
+        _dark: {
+          _after: {
+            bg: darkBg,
+          },
+        },
+      }
+    }, [placement, blankForDragBg, blankForDragProps])
+
+    const css = useMemo<CSSUIObject>(
+      () => ({
+        display: "flex",
+        flexDirection:
+          placement === "top" || placement === "bottom" ? "column" : "row",
+        outline: 0,
+        ...(closeOnDrag ? blankForDrag : {}),
+        ...styles.container,
+      }),
+      [blankForDrag, closeOnDrag, placement, styles],
+    )
+
+    const getDragDirectionRestriction = useCallback(
+      (value: number) => {
+        switch (placement) {
+          case "top":
+            return { bottom: value }
+          case "bottom":
+            return { top: value }
+          case "left":
+            return { right: value }
+          case "right":
+            return { left: value }
+        }
+      },
+      [placement],
+    )
 
     const getDragDirection = useCallback(() => {
       switch (placement) {
@@ -207,43 +349,68 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
       (info: PanEventInfo) => {
         switch (placement) {
           case "top":
-            return info.velocity.y <= -100 || info.offset.y <= -80
+            return (
+              info.velocity.y <= dragVelocity * -1 ||
+              info.offset.y <= dragOffset * -1
+            )
           case "bottom":
-            return info.velocity.y >= 100 || info.offset.y >= 80
+            return (
+              info.velocity.y >= dragVelocity || info.offset.y >= dragOffset
+            )
           case "left":
-            return info.velocity.x <= -100 || info.offset.x <= -80
+            return (
+              info.velocity.x <= dragVelocity * -1 ||
+              info.offset.x <= dragOffset * -1
+            )
           case "right":
-            return info.velocity.x >= 100 || info.offset.x >= 80
+            return (
+              info.velocity.x >= dragVelocity || info.offset.x >= dragOffset
+            )
         }
       },
-      [placement],
+      [placement, dragVelocity, dragOffset],
     )
 
     return (
       <Slide
         ref={ref}
-        drag={closeOnDrag ? getDragDirection() : false}
-        dragConstraints={getDragDirectionRestriction()}
-        dragElastic={getDragDirectionRestriction()}
-        dragSnapToOrigin={true}
-        dragMomentum={false}
-        onDragEnd={(_, info) => {
-          if (isCloseByDragInfo(info)) {
-            onClose?.()
-          }
-        }}
         className={cx("ui-drawer", className)}
-        tabIndex={-1}
         isOpen={isOpen}
         placement={placement}
         duration={duration}
+        drag={closeOnDrag ? getDragDirection() : false}
+        dragConstraints={getDragDirectionRestriction(dragConstraints)}
+        dragElastic={getDragDirectionRestriction(dragElastic)}
+        dragSnapToOrigin
+        dragMomentum={false}
+        onDragEnd={(_, info) => {
+          if (isCloseByDragInfo(info)) onClose?.()
+        }}
+        tabIndex={-1}
         __css={css}
         {...rest}
       >
         {customDrawerCloseButton ??
           (withCloseButton && onClose ? <DrawerCloseButton /> : null)}
 
-        {cloneChildren}
+        {withDragBar &&
+        closeOnDrag &&
+        (placement === "bottom" || placement === "right") ? (
+          <DrawerDragBar />
+        ) : null}
+
+        <ui.div
+          className="ui-drawer__inner"
+          __css={{ display: "flex", flexDirection: "column", ...styles.inner }}
+        >
+          {cloneChildren}
+        </ui.div>
+
+        {withDragBar &&
+        closeOnDrag &&
+        (placement === "top" || placement === "left") ? (
+          <DrawerDragBar />
+        ) : null}
       </Slide>
     )
   },
@@ -267,6 +434,25 @@ export const DrawerOverlay = forwardRef<DrawerOverlayProps, "div">(
     )
   },
 )
+
+export type DrawerDragBarProps = HTMLUIProps<"div">
+
+export const DrawerDragBar: FC<DrawerDragBarProps> = ({
+  className,
+  ...rest
+}) => {
+  const styles = useDrawer()
+
+  const css: CSSUIObject = { ...styles.dragBar }
+
+  return (
+    <ui.div
+      className={cx("ui-drawer__drag-bar", className)}
+      __css={css}
+      {...rest}
+    />
+  )
+}
 
 export type DrawerCloseButtonProps = ModalCloseButtonProps
 

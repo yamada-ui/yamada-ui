@@ -61,7 +61,7 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     maxW: "100%",
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.25rem",
+    gap: "fallback(1, 0.25rem)",
     verticalAlign: "top",
     ...styles.container,
   }

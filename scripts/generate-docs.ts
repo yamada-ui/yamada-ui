@@ -107,7 +107,7 @@ const defaultColors = [
   "link",
 ]
 
-const hues = [
+const tones = [
   "50",
   "100",
   "200",
@@ -120,8 +120,8 @@ const hues = [
   "900",
 ]
 
-const isHue = (value: unknown): value is Record<string, string> =>
-  isObject(value) && hues.every((k) => isString(value[k]))
+const isTone = (value: unknown): value is Record<string, string> =>
+  isObject(value) && tones.every((k) => isString(value[k]))
 
 const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
 
@@ -131,7 +131,7 @@ const extractColorScheme = (
   if (!colors) return "string"
 
   const validColors = Object.entries(colors)
-    .filter(([key, values]) => isHue(values) || isDefaultColor(key))
+    .filter(([key, values]) => isTone(values) || isDefaultColor(key))
     .map(([name]) => name)
 
   return toLiteralStringType(validColors)

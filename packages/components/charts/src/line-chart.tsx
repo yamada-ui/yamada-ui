@@ -102,6 +102,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     strokeWidth,
     connectNulls,
     fillOpacity,
+    syncId,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -119,6 +120,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       strokeWidth,
       connectNulls,
       fillOpacity,
+      syncId,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })
@@ -146,15 +148,12 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const {
-    tooltipProps: computedTooltipProps,
-    getTooltipProps,
-    tooltipVars,
-  } = useChartTooltip({
-    tooltipProps,
-    tooltipAnimationDuration,
-    styles,
-  })
+  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+    useChartTooltip({
+      tooltipProps,
+      tooltipAnimationDuration,
+      styles,
+    })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
@@ -189,7 +188,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-line-chart", className)}
-        var={[...lineVars, ...tooltipVars]}
+        var={lineVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

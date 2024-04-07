@@ -213,6 +213,32 @@ export const withPosition: Story = () => {
   )
 }
 
+export const withFullHeight: Story = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  return (
+    <>
+      <Button onClick={onOpen}>Open Drawer</Button>
+
+      <Drawer isOpen={isOpen} onClose={onClose} placement="bottom" isFullHeight>
+        <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+        <DrawerBody>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </DrawerBody>
+
+        <DrawerFooter>
+          <Button variant="ghost" onClick={onClose}>
+            とじる
+          </Button>
+          <Button colorScheme="primary">Wikipedia</Button>
+        </DrawerFooter>
+      </Drawer>
+    </>
+  )
+}
+
 export const withCloseOnDrag: Story = () => {
   const [placement, setPlacement] = useState<DrawerProps["placement"]>("right")
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -281,14 +307,21 @@ export const withCloseOnDrag: Story = () => {
   )
 }
 
-export const withFullHeight: Story = () => {
+export const hiddenDragBar: Story = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Drawer</Button>
 
-      <Drawer isOpen={isOpen} onClose={onClose} placement="bottom" isFullHeight>
+      <Drawer
+        isOpen={isOpen}
+        onClose={onClose}
+        placement="bottom"
+        closeOnDrag
+        withDragBar={false}
+        withCloseButton
+      >
         <DrawerHeader>ドラゴンボール</DrawerHeader>
 
         <DrawerBody>

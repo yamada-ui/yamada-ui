@@ -1,5 +1,18 @@
 # @yamada-ui/loading
 
+## 1.0.19
+
+### Patch Changes
+
+- [#1108](https://github.com/yamada-ui/yamada-ui/pull/1108) [`0a5af46`](https://github.com/yamada-ui/yamada-ui/commit/0a5af465b1085b8e497c1771e02cc11b3d486a08) Thanks [@minagishl](https://github.com/minagishl)! - apply theme's token to LoadingProvider component
+
+- Updated dependencies [[`705923f`](https://github.com/yamada-ui/yamada-ui/commit/705923f5e4225fede62a368122f0d4b214e6f38e)]:
+  - @yamada-ui/core@1.6.0
+  - @yamada-ui/icon@1.0.18
+  - @yamada-ui/motion@1.0.19
+  - @yamada-ui/use-token@1.1.6
+  - @yamada-ui/use-value@1.1.6
+
 ## 1.0.18
 
 ### Patch Changes

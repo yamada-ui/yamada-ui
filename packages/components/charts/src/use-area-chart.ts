@@ -48,6 +48,11 @@ export type UseAreaChartOptions = {
    */
   chartProps?: AreaChartProps
   /**
+   * If any two categorical charts have the same syncId,
+   * these two charts can sync the position tooltip, and the startIndex, endIndex of Brush.
+   */
+  syncId?: number | string
+  /**
    * Chart orientation.
    *
    * @default 'horizontal'
@@ -129,6 +134,7 @@ export const useAreaChart = ({
   splitColors = ["#ee6a5d", "#5fce7d"],
   splitOffset,
   referenceLineProps,
+  syncId,
   styles,
   ...rest
 }: UseAreaChartProps) => {
@@ -385,10 +391,11 @@ export const useAreaChart = ({
       data,
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
+      syncId,
       ...props,
       ...chartProps,
     }),
-    [areaChartClassName, data, type, layoutType, chartProps],
+    [areaChartClassName, data, type, layoutType, syncId, chartProps],
   )
 
   const getAreaSplitProps: ChartPropGetter<

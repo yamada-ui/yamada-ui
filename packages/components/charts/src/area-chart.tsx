@@ -105,6 +105,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     fillOpacity,
     splitColors,
     splitOffset,
+    syncId,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -132,6 +133,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     fillOpacity,
     splitColors,
     splitOffset,
+    syncId,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
@@ -159,15 +161,12 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     strokeDasharray,
     styles,
   })
-  const {
-    tooltipProps: computedTooltipProps,
-    getTooltipProps,
-    tooltipVars,
-  } = useChartTooltip({
-    tooltipProps,
-    tooltipAnimationDuration,
-    styles,
-  })
+  const { tooltipProps: computedTooltipProps, getTooltipProps } =
+    useChartTooltip({
+      tooltipProps,
+      tooltipAnimationDuration,
+      styles,
+    })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
@@ -212,7 +211,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-area-chart", className)}
-        var={[...areaVars, ...tooltipVars]}
+        var={areaVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

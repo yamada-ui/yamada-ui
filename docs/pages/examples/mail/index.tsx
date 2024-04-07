@@ -1,51 +1,81 @@
+import type { ResizableItemControl } from "@yamada-ui/react"
 import {
-  Box,
+  Divider,
   Resizable,
   ResizableItem,
   ResizableTrigger,
-  ResizableTriggerIcon,
+  VStack,
+  noop,
   useBoolean,
 } from "@yamada-ui/react"
-import React, { memo, useState } from "react"
-import { MailDetail } from "./MailDetail"
-import { MailInbox } from "./MailInbox"
-import { MailSidebar } from "./MailSidebar"
-import { type MailType, mails } from "./data"
+import React, { memo, useRef } from "react"
+import type { MailItem } from "./data"
+import { DEFAULT_MAIL, MAILS } from "./data"
+import { Detail } from "./detail"
+import { Inbox } from "./inbox"
+import { Sidebar } from "./sidebar"
 
 export const Mail = memo(() => {
+  const controlRef = useRef<ResizableItemControl>(null)
   const [isCollapse, { on, off }] = useBoolean()
-  const [selectedMail, setSelectedMail] = useState<MailType>(mails[0])
+  const setMailRef = useRef<(mail: MailItem) => void>(noop)
 
   return (
-    <Resizable h="3xl">
+    <Resizable h={{ base: "5xl", sm: "6xl" }}>
       <ResizableItem
-        as={Box}
-        defaultSize={17}
+        controlRef={controlRef}
+        defaultSize={20}
         collapsedSize={4}
         collapsible
         minSize={15}
-        maxSize={22}
-        overflow="hidden"
-        onCollapse={() => {
-          on()
-        }}
-        onExpand={() => {
-          off()
-        }}
+        maxSize={20}
+        minW="14"
+        maxW={{ base: "64", xl: "14" }}
+        onCollapse={on}
+        onExpand={off}
       >
-        <MailSidebar isCollapse={isCollapse} />
+        <Sidebar isCollapse={isCollapse} />
       </ResizableItem>
-      <ResizableTrigger icon={<ResizableTriggerIcon />} />
-      <ResizableItem as={Box} defaultSize={30} minSize={28} overflow="hidden">
-        <MailInbox
-          mails={mails}
-          selectedMail={selectedMail}
-          setSelectedMail={setSelectedMail}
-        />
-      </ResizableItem>
-      <ResizableTrigger icon={<ResizableTriggerIcon />} />
-      <ResizableItem as={Box} minSize={40} overflow="hidden">
-        <MailDetail mail={selectedMail} />
+
+      <ResizableTrigger />
+
+      <ResizableItem>
+        <Resizable display={{ base: "block", lg: "none" }}>
+          <ResizableItem
+            defaultSize={40}
+            minSize={30}
+            maxSize={50}
+            minW={{ base: "md", lg: "inherit" }}
+          >
+            <Inbox
+              defaultMail={DEFAULT_MAIL}
+              mails={MAILS}
+              setMailRef={setMailRef}
+            />
+          </ResizableItem>
+
+          <ResizableTrigger />
+
+          <ResizableItem defaultSize={60} minSize={50} maxSize={70}>
+            <Detail defaultMail={DEFAULT_MAIL} setMailRef={setMailRef} />
+          </ResizableItem>
+        </Resizable>
+
+        <VStack
+          h="full"
+          display={{ base: "none", lg: "flex" }}
+          gap="0"
+          divider={<Divider />}
+        >
+          <Inbox
+            h={{ base: "full", lg: "28.8rem", sm: "27rem" }}
+            defaultMail={DEFAULT_MAIL}
+            mails={MAILS}
+            setMailRef={setMailRef}
+          />
+
+          <Detail defaultMail={DEFAULT_MAIL} setMailRef={setMailRef} />
+        </VStack>
       </ResizableItem>
     </Resizable>
   )

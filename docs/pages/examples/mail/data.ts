@@ -1,18 +1,5 @@
-import {
-  type IconDefinition,
-  faArchive,
-  faCartShopping,
-  faCircleExclamation,
-  faComments,
-  faFile,
-  faInbox,
-  faPaperPlane,
-  faTrash,
-  faUserGroup,
-} from "@fortawesome/free-solid-svg-icons"
-
-export type MailType = {
-  key: number
+export type MailItem = {
+  id: number
   title: string
   unRead: boolean
   authorName: string
@@ -22,9 +9,9 @@ export type MailType = {
   tags: string[]
 }
 
-export const mails: MailType[] = [
+export const MAILS: MailItem[] = [
   {
-    key: 1,
+    id: 1,
     title: "Weekend Plans",
     unRead: false,
     authorName: "Bob Johnson",
@@ -32,15 +19,15 @@ export const mails: MailType[] = [
     content: `Any plans for the weekend? I was thinking of going hiking in the nearby mountains. It's been a while since we had some outdoor fun.
 
     If you're interested, let me know, and we can plan the details. It'll be a great way to unwind and enjoy nature.
-    
+
     Looking forward to your response!
-    
+
     Best, Bob`,
     timestamp: new Date("2023-04-10 11:45"),
     tags: ["personal"],
   },
   {
-    key: 2,
+    id: 2,
     title: "Meeting Reminder",
     unRead: true,
     authorName: "Alice Smith",
@@ -56,7 +43,7 @@ export const mails: MailType[] = [
     tags: ["work", "important"],
   },
   {
-    key: 3,
+    id: 3,
     title: "New Recipe",
     unRead: true,
     authorName: "Chef Jamie",
@@ -76,7 +63,7 @@ export const mails: MailType[] = [
     tags: ["personal"],
   },
   {
-    key: 4,
+    id: 4,
     title: "Re: Project Update",
     unRead: false,
     authorName: "John Doe",
@@ -92,7 +79,7 @@ export const mails: MailType[] = [
     tags: ["work", "important"],
   },
   {
-    key: 5,
+    id: 5,
     title: "Weekend Plans",
     unRead: false,
     authorName: "Bob Johnson",
@@ -108,7 +95,7 @@ export const mails: MailType[] = [
     tags: ["personal"],
   },
   {
-    key: 6,
+    id: 6,
     title: "Meeting Reminder",
     unRead: true,
     authorName: "Alice Smith",
@@ -124,7 +111,7 @@ export const mails: MailType[] = [
     tags: ["work", "important"],
   },
   {
-    key: 7,
+    id: 7,
     title: "Re: Question about the project",
     unRead: true,
     authorName: "John Doe",
@@ -141,25 +128,4 @@ export const mails: MailType[] = [
   },
 ]
 
-export type MailSidebarItemType = {
-  icon: IconDefinition
-  title: string
-  num?: number
-}
-
-export const mailSidebarItems: MailSidebarItemType[][] = [
-  [
-    { icon: faInbox, title: "Inbox", num: 53 },
-    { icon: faFile, title: "Drafts", num: 4 },
-    { icon: faPaperPlane, title: "Sent" },
-    { icon: faTrash, title: "Trash" },
-    { icon: faArchive, title: "Archive" },
-  ],
-  [
-    { icon: faUserGroup, title: "Personal", num: 435 },
-    { icon: faCircleExclamation, title: "Updates", num: 342 },
-    { icon: faComments, title: "Forum", num: 167 },
-    { icon: faCartShopping, title: "Shopping", num: 8 },
-    { icon: faArchive, title: "Promotions", num: 13 },
-  ],
-]
+export const DEFAULT_MAIL = MAILS[0]

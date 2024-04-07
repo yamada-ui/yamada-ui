@@ -3,7 +3,7 @@ import type { HTMLUIProps } from "@yamada-ui/core"
 import { MenuItem, MenuOptionItem } from "@yamada-ui/react"
 import type { MenuOptionItemProps } from "@yamada-ui/react"
 
-type ContextMenuItemProps = HTMLUIProps<"button"> & {
+export type ContextMenuItemProps = HTMLUIProps<"button"> & {
   /**
    * If `true`, the list element will be closed when selected.
    *
@@ -17,7 +17,7 @@ export const ContextMenuItem = forwardRef<ContextMenuItemProps, "button">(
   },
 )
 
-type ContextMenuOptionItemProps = MenuOptionItemProps
+export type ContextMenuOptionItemProps = MenuOptionItemProps
 export const ContextMenuOptionItem = forwardRef<
   ContextMenuOptionItemProps,
   "button"

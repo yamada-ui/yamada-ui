@@ -3,7 +3,7 @@ import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useContextMenu } from "./context-menu"
 
-type ContextMenuDividerProps = HTMLUIProps<"hr">
+export type ContextMenuDividerProps = HTMLUIProps<"hr">
 export const ContextMenuDivider = forwardRef<ContextMenuDividerProps, "hr">(
   ({ className, ...rest }, ref) => {
     const { styles } = useContextMenu()

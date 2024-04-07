@@ -4,7 +4,7 @@ import { PopoverAnchor, PopoverTrigger } from "@yamada-ui/react"
 import { cx } from "@yamada-ui/utils"
 import { useState } from "react"
 
-type ContextMenuTriggerProps = HTMLUIProps<"div">
+export type ContextMenuTriggerProps = HTMLUIProps<"div">
 export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
   ({ children, className, as: As, ...rest }, ref) => {
     const Component = As ?? Button

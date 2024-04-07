@@ -16,7 +16,6 @@ export const run = async () => {
   program
     .command("colors <color>")
     .option("-n, --name <name>", "Token name of hue object to output")
-    .option("-c, --coef <coef>", "Coefficients that adjust the color tone")
     .option("-o, --out", "Out color json data")
     .action(actionColors)
 

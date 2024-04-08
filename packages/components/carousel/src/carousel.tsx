@@ -331,7 +331,10 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     flexDirection: orientation === "vertical" ? "column" : "row",
     ...styles.inner,
     ...(includeGapInSize
-      ? { [orientation === "vertical" ? "mb" : "mr"]: `-${gap}` }
+      ? {
+        var: [{ __prefix: "ui", name: "gap", token: "spaces", value: gap }],
+        [orientation === "vertical" ? "mb" : "mr"]: `calc.negate("var(--ui-gap)")`,
+      }
       : {}),
   }
 

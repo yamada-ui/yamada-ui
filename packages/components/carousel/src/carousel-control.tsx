@@ -69,7 +69,7 @@ const CarouselControl = forwardRef<
 
   const css: CSSUIObject = {
     position: "absolute",
-    zIndex: 9,
+    zIndex: "fallback(kurillin, 9)",
     ...styles.control,
     ...styles[operation],
   }

@@ -1,10 +1,10 @@
 import type { AlertProps } from "@yamada-ui/alert"
-import { Alert, AlertIcon, AlertDescription } from "@yamada-ui/alert"
-import type { HTMLUIProps, ThemeProps, ColorModeArray } from "@yamada-ui/core"
+import { Alert, AlertDescription, AlertIcon } from "@yamada-ui/alert"
+import type { ColorModeArray, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
-  ui,
   forwardRef,
   omitThemeProps,
+  ui,
   useComponentStyle,
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
@@ -14,10 +14,11 @@ import ReactMarkdown from "react-markdown"
 import type { Components, Options } from "react-markdown"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import rehypeRaw from "rehype-raw"
+import remarkBreaks from "remark-breaks"
 import remarkGfm from "remark-gfm"
 import type { CodeThemeNames } from "./code-theme"
 import { codeThemes } from "./code-theme"
-import { remarkUIComponent } from "./remark-ui-component"
+import { rehypeBreakPlugin, remarkUIComponent } from "./remark-ui-component"
 
 type UIComponents = {
   note?: FC<MarkdownComponentProps<"div">>
@@ -79,10 +80,15 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
 
   remarkPlugins = [
     remarkGfm,
+    remarkBreaks,
     remarkUIComponent,
     ...filterEmpty(remarkPlugins ?? []),
   ]
-  rehypePlugins = [rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
+  rehypePlugins = [
+    rehypeBreakPlugin,
+    rehypeRaw,
+    ...filterEmpty(rehypePlugins ?? []),
+  ]
   components = {
     ...uiComponents({ codeProps, noteProps }),
     ...components,

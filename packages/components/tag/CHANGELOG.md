@@ -1,5 +1,17 @@
 # @yamada-ui/tag
 
+## 1.0.19
+
+### Patch Changes
+
+- [#1106](https://github.com/yamada-ui/yamada-ui/pull/1106) [`e786b06`](https://github.com/yamada-ui/yamada-ui/commit/e786b0604b7ac7411fb8a2fd67a80ae5a697392a) Thanks [@ISAWASHUN](https://github.com/ISAWASHUN)! - Added `fallback` function.
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/icon@1.0.19
+  - @yamada-ui/use-clickable@1.0.9
+
 ## 1.0.18
 
 ### Patch Changes

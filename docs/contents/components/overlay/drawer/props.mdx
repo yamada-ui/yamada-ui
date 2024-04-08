@@ -268,6 +268,13 @@ tab: Props
 <PropsCard id="drawer-autosave" name="autoSave" type="string" />
 
 <PropsCard
+  id="drawer-blankfordragprops"
+  name="blankForDragProps"
+  type="CSSUIObject"
+  description={"Props for the blank area when `closeOnDrag` is `true`."}
+/>
+
+<PropsCard
   id="drawer-blockscrollonmount"
   name="blockScrollOnMount"
   type="boolean"
@@ -283,7 +290,7 @@ tab: Props
   id="drawer-closeondrag"
   name="closeOnDrag"
   type="boolean"
-  description={"If `true` then the drawer will close on drag."}
+  description={"If `true`, then the drawer will close on drag."}
   defaultValue={"false"}
 />
 
@@ -338,7 +345,41 @@ tab: Props
 
 <PropsCard id="drawer-dir" name="dir" type="string" />
 
+<PropsCard
+  id="drawer-dragconstraints"
+  name="dragConstraints"
+  type="number"
+  description={"Applies constraints on the permitted draggable area."}
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="drawer-dragelastic"
+  name="dragElastic"
+  type="number"
+  description={
+    "The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement."
+  }
+  defaultValue={"0.1"}
+/>
+
 <PropsCard id="drawer-draggable" name="draggable" type="Booleanish" />
+
+<PropsCard
+  id="drawer-dragoffset"
+  name="dragOffset"
+  type="number"
+  description={"Offset from being dragged to closing."}
+  defaultValue={"80"}
+/>
+
+<PropsCard
+  id="drawer-dragvelocity"
+  name="dragVelocity"
+  type="number"
+  description={"Velocity of the drag that triggers close."}
+  defaultValue={"100"}
+/>
 
 <PropsCard
   id="drawer-duration"
@@ -1477,6 +1518,14 @@ tab: Props
   name="withCloseButton"
   type="boolean"
   description={"If `true`, display the modal close button."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="drawer-withdragbar"
+  name="withDragBar"
+  type="boolean"
+  description={"If `true`, display the drag bar when `closeOnDrag` is `true`."}
   defaultValue={"true"}
 />
 

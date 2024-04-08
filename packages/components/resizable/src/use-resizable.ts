@@ -26,7 +26,7 @@ type TriggerPropGetter = (
 type As = { as?: keyof HTMLElementTagNameMap }
 
 type ResizableGroupProps = Omit<
-  PanelGroupProps,
+  Partial<PanelGroupProps>,
   "id" | "tagName" | "children"
 > &
   As

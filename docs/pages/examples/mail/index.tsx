@@ -18,7 +18,8 @@ import { Sidebar } from "./sidebar"
 export const Mail = memo(() => {
   const controlRef = useRef<ResizableItemControl>(null)
   const [isCollapse, { on, off }] = useBoolean()
-  const setMailRef = useRef<(mail: MailItem) => void>(noop)
+  const setDesktopMailRef = useRef<(mail: MailItem) => void>(noop)
+  const setMobileMailRef = useRef<(mail: MailItem) => void>(noop)
 
   return (
     <Resizable h={{ base: "5xl", sm: "6xl" }}>
@@ -50,14 +51,14 @@ export const Mail = memo(() => {
             <Inbox
               defaultMail={DEFAULT_MAIL}
               mails={MAILS}
-              setMailRef={setMailRef}
+              setMailRef={setDesktopMailRef}
             />
           </ResizableItem>
 
           <ResizableTrigger />
 
           <ResizableItem defaultSize={60} minSize={50} maxSize={70}>
-            <Detail defaultMail={DEFAULT_MAIL} setMailRef={setMailRef} />
+            <Detail defaultMail={DEFAULT_MAIL} setMailRef={setDesktopMailRef} />
           </ResizableItem>
         </Resizable>
 
@@ -71,10 +72,10 @@ export const Mail = memo(() => {
             h={{ base: "full", lg: "28.8rem", sm: "27rem" }}
             defaultMail={DEFAULT_MAIL}
             mails={MAILS}
-            setMailRef={setMailRef}
+            setMailRef={setMobileMailRef}
           />
 
-          <Detail defaultMail={DEFAULT_MAIL} setMailRef={setMailRef} />
+          <Detail defaultMail={DEFAULT_MAIL} setMailRef={setMobileMailRef} />
         </VStack>
       </ResizableItem>
     </Resizable>

@@ -34,7 +34,11 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
   return (
     <PageProvider {...{ documentTree }}>
       <TopLayout>
-        <SEO title={t("home.title")} description={t("home.description")} />
+        <SEO
+          title={t("home.title")}
+          description={t("home.description")}
+          disableTitleTemplate
+        />
 
         <Section>
           <VStack alignItems="center">

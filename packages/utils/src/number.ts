@@ -1,4 +1,4 @@
-const toNumber = (n: any): number => {
+export const toNumber = (n: any): number => {
   const num = parseFloat(n)
 
   return typeof num !== "number" || Number.isNaN(num) ? 0 : num

@@ -20,6 +20,9 @@ export const SwipeableRightAction = forwardRef<
     return 0
   })
 
+  const resolvedChildren =
+    typeof children === "string" ? <p>{children}</p> : children
+
   return (
     <motion.div
       className={cx("ui-swipeable__left-action", className)}
@@ -51,7 +54,7 @@ export const SwipeableRightAction = forwardRef<
           setDirection("none")
         }}
       >
-        {children}
+        {resolvedChildren}
       </ui.div>
     </motion.div>
   )

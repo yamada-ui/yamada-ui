@@ -81,9 +81,14 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     SwipeableRightAction,
   )
 
-  const cloneChildren = !isEmpty(children)
-    ? omitChildren(validChildren, SwipeableLeftAction)
-    : children
+  let cloneChildren: any
+  if (!isEmpty(children)) {
+    cloneChildren = omitChildren(validChildren, SwipeableLeftAction)
+  } else if (typeof children === "string") {
+    cloneChildren = <p>{children}</p>
+  } else {
+    cloneChildren = children
+  }
 
   const handleDragEnd = () =>
     // event: MouseEvent | TouchEvent | PointerEvent,

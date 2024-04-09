@@ -30,9 +30,9 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
     className,
     max,
     borderColor,
-    gap = "-0.5rem",
-    borderRadius = "9999px",
-    rounded = "9999px",
+    gap = "fallback(-2, -0.5rem)",
+    borderRadius = "fallback(full, 9999px)",
+    rounded = "fallback(full, 9999px)",
     children,
     ...rest
   } = omitThemeProps(props)

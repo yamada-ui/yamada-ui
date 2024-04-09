@@ -30,7 +30,7 @@ type BreadcrumbOptions = {
   /**
    * The left and right margin applied to the separator.
    *
-   * @default 'sm'
+   * @default '2'
    */
   gap?: CSSUIProps["mx"]
   /**
@@ -55,7 +55,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     className,
     children,
     separator = "/",
-    gap = "0.5rem",
+    gap = "fallback(2, 0.5rem)",
     listProps,
     ...rest
   } = omitThemeProps(mergedProps)

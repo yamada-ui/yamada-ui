@@ -182,12 +182,6 @@ export const useTheme = <T extends object = Dict>() => {
     ThemeContext,
   ) as PropsTheme<UsageTheme>
 
-  if (!Object.keys(internalTheme).length) {
-    throw Error(
-      "useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
-    )
-  }
-
   const theme = useMemo(() => {
     if (isUndefined(themeScheme) || themeScheme === "base") return internalTheme
 

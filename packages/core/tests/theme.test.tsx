@@ -1,5 +1,4 @@
 import { renderHook, act, render } from "@yamada-ui/test"
-import type { FC } from "react"
 import {
   GlobalStyle,
   ResetStyle,
@@ -92,26 +91,6 @@ describe("ThemeProvider", () => {
     )
 
     expect(document.body).toHaveStyle(`font-family: Arial;`)
-  })
-
-  test("throws an error if used outside of UIProvider", () => {
-    let errorMessage: string = ""
-
-    const Component: FC = () => {
-      try {
-        useTheme()
-      } catch (e) {
-        if (e instanceof Error) errorMessage = e.message
-      }
-
-      return <></>
-    }
-
-    render(<Component />, { withProvider: false })
-
-    expect(errorMessage).toContain(
-      "useTheme: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
-    )
   })
 })
 

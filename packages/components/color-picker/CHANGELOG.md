@@ -1,5 +1,27 @@
 # @yamada-ui/color-picker
 
+## 1.2.7
+
+### Patch Changes
+
+- [#1134](https://github.com/yamada-ui/yamada-ui/pull/1134) [`3fa78c6`](https://github.com/yamada-ui/yamada-ui/commit/3fa78c676c03b9b4ac55b1f8da35ae9e2ec71570) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify property omission logic
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/button@1.0.22
+  - @yamada-ui/form-control@1.0.22
+  - @yamada-ui/icon@1.0.19
+  - @yamada-ui/input@1.0.22
+  - @yamada-ui/popover@1.0.20
+  - @yamada-ui/portal@1.0.9
+  - @yamada-ui/use-controllable-state@1.0.9
+  - @yamada-ui/use-disclosure@1.0.9
+  - @yamada-ui/use-eye-dropper@1.0.6
+  - @yamada-ui/use-outside-click@1.0.9
+  - @yamada-ui/use-pan-event@1.0.10
+  - @yamada-ui/use-size@1.0.9
+
 ## 1.2.6
 
 ### Patch Changes

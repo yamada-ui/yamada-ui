@@ -5,9 +5,10 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { useValue, type PanEventInfo } from "@yamada-ui/react"
+import type { MotionPanInfo } from "@yamada-ui/motion"
 import type { SlideProps } from "@yamada-ui/transitions"
 import { Slide } from "@yamada-ui/transitions"
+import { useValue } from "@yamada-ui/use-value"
 import {
   createContext,
   getValidChildren,
@@ -346,7 +347,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
     }, [placement])
 
     const isCloseByDragInfo = useCallback(
-      (info: PanEventInfo) => {
+      (info: MotionPanInfo) => {
         switch (placement) {
           case "top":
             return (

@@ -319,29 +319,22 @@ export const withSlidesToScroll: Story = () => {
 
 export const withCard: Story = () => {
   return (
-    <Carousel
-      slideSize="50%"
-      align="start"
-      slidesToScroll={2}
-      h="auto"
-      controlProps={{ colorScheme: "whiteAlpha", color: "white" }}
-    >
-      <CarouselSlide as={Card} variant="subtle">
+    <Carousel slideSize="50%" align="start" slidesToScroll={2} h="auto">
+      <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
-            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
             rounded="md"
-            alt="ドラゴンボール"
+            alt="いちご100%"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『いちご100%』（いちごひゃくパーセント）</Heading>
 
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『いちご100%』（いちごひゃくパーセント）は、河下水希の漫画作品。放課後、校舎の屋上で出会ったいちごパンツの美少女。フツーの中学3年生・真中淳平は夕日に映えるその姿にすっかり心を奪われてしまった!!　彼女は誰？　いきなり恋の迷路に突入のいちご模様学園ラブコメディ登場!!
           </Text>
         </CardBody>
 
@@ -350,22 +343,21 @@ export const withCard: Story = () => {
         </CardFooter>
       </CarouselSlide>
 
-      <CarouselSlide as={Card} variant="subtle">
+      <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
-            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
             rounded="md"
-            alt="ドラゴンボール"
+            alt="いちご100%"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『いちご100%』（いちごひゃくパーセント）</Heading>
 
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『いちご100%』（いちごひゃくパーセント）は、河下水希の漫画作品。放課後、校舎の屋上で出会ったいちごパンツの美少女。フツーの中学3年生・真中淳平は夕日に映えるその姿にすっかり心を奪われてしまった!!　彼女は誰？　いきなり恋の迷路に突入のいちご模様学園ラブコメディ登場!!
           </Text>
         </CardBody>
 
@@ -374,22 +366,21 @@ export const withCard: Story = () => {
         </CardFooter>
       </CarouselSlide>
 
-      <CarouselSlide as={Card} variant="subtle">
+      <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
-            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
             rounded="md"
-            alt="ドラゴンボール"
+            alt="いちご100%"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『いちご100%』（いちごひゃくパーセント）</Heading>
 
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『いちご100%』（いちごひゃくパーセント）は、河下水希の漫画作品。放課後、校舎の屋上で出会ったいちごパンツの美少女。フツーの中学3年生・真中淳平は夕日に映えるその姿にすっかり心を奪われてしまった!!　彼女は誰？　いきなり恋の迷路に突入のいちご模様学園ラブコメディ登場!!
           </Text>
         </CardBody>
 
@@ -398,22 +389,21 @@ export const withCard: Story = () => {
         </CardFooter>
       </CarouselSlide>
 
-      <CarouselSlide as={Card} variant="subtle">
+      <CarouselSlide as={Card} variant="outline">
         <CardHeader justifyContent="center">
           <Image
-            src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+            src="https://asset.zebrack-comic.com/title/39/landscape/603536.jpg?drm_key=lDsO5yBXNSy0Teth3eO9iQ&expires=1766016000"
             w="full"
             rounded="md"
-            alt="ドラゴンボール"
+            alt="いちご100%"
           />
         </CardHeader>
 
         <CardBody>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『いちご100%』（いちごひゃくパーセント）</Heading>
 
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『いちご100%』（いちごひゃくパーセント）は、河下水希の漫画作品。放課後、校舎の屋上で出会ったいちごパンツの美少女。フツーの中学3年生・真中淳平は夕日に映えるその姿にすっかり心を奪われてしまった!!　彼女は誰？　いきなり恋の迷路に突入のいちご模様学園ラブコメディ登場!!
           </Text>
         </CardBody>
 

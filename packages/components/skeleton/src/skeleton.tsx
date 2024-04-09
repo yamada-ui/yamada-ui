@@ -114,7 +114,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const css: CSSUIObject = {
     w: isFitContent ? "fit-content" : "100%",
     maxW: "100%",
-    h: isFitContent ? "fit-content" : "1rem",
+    h: isFitContent ? "fit-content" : "fallback(4, 1rem)",
     boxShadow: "none",
     backgroundClip: "padding-box",
     cursor: "default",

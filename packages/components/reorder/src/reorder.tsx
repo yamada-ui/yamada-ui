@@ -64,7 +64,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     const {
       className,
       orientation = "vertical",
-      gap = "fallback(4,1rem)",
+      gap = "fallback(4, 1rem)",
       onChange,
       onCompleteChange,
       children,
@@ -89,9 +89,10 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
 
       return omitDuplicated(values)
     }, [validChildren])
+    const prevDefaultValues = useRef<(string | number)[]>(defaultValues)
 
-    const prevValues = useRef<(string | number)[]>(defaultValues)
     const [values, setValues] = useState<(string | number)[]>(defaultValues)
+    const prevValues = useRef<(string | number)[]>(defaultValues)
 
     const onReorder = useCallback(
       (newValues: (string | number)[]) => {
@@ -114,11 +115,15 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     }, [onCompleteChange, values])
 
     useUpdateEffect(() => {
-      const isEqual = JSON.stringify(defaultValues) === JSON.stringify(values)
+      const isEqual =
+        JSON.stringify(defaultValues) ===
+        JSON.stringify(prevDefaultValues.current)
 
       if (isEqual) return
 
       prevValues.current = defaultValues
+      prevDefaultValues.current = defaultValues
+
       setValues(defaultValues)
     }, [defaultValues])
 

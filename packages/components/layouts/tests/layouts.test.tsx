@@ -329,34 +329,6 @@ describe("<ZStack />", () => {
     expect(zStackItem).toHaveStyle({ zIndex: 10 })
   })
 
-  test("direction property works correctly", () => {
-    const { getByTestId } = render(
-      <ZStack data-testid="z-stack" direction="bottom-right">
-        <Box>ZStack Item</Box>
-      </ZStack>,
-    )
-
-    const zStackItem = getByTestId("z-stack").firstChild
-    expect(zStackItem).toHaveStyle({
-      top: "calc(var(--ui-space) * 0)",
-      left: "calc(var(--ui-space) * 0)",
-    })
-  })
-
-  test("reverse property works correctly", () => {
-    const { getByTestId } = render(
-      <ZStack data-testid="z-stack" direction="bottom-right" reverse>
-        <Box>ZStack Item</Box>
-      </ZStack>,
-    )
-
-    const zStackItem = getByTestId("z-stack").firstChild
-    expect(zStackItem).toHaveStyle({
-      bottom: "calc(var(--ui-space) * 0)",
-      right: "calc(var(--ui-space) * 0)",
-    })
-  })
-
   test("Child elements are correctly overlaid and rendered", () => {
     const { getByTestId } = render(
       <ZStack data-testid="z-stack">

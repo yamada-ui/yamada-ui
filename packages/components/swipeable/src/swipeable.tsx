@@ -7,8 +7,18 @@ import {
 } from "@yamada-ui/core"
 import type { MotionValue } from "@yamada-ui/motion"
 import { motion, useMotionValue } from "@yamada-ui/motion"
-import { createContext, cx, mergeRefs } from "@yamada-ui/utils"
+import {
+  createContext,
+  cx,
+  findChildren,
+  getValidChildren,
+  isEmpty,
+  mergeRefs,
+  omitChildren,
+} from "@yamada-ui/utils"
 import { useRef, useState } from "react"
+import { SwipeableLeftAction } from "./swipeable-left-action"
+import { SwipeableRightAction } from "./swipeable-right-action"
 
 type SwipeableContextOptions = {
   height: number
@@ -24,7 +34,16 @@ export const [SwipeableProvider, useSwipeable] =
     name: "SwipeableContext",
   })
 
-type SwipeableOptions = {}
+type SwipeableOptions = {
+  /**
+   * Displayed when swiping left.
+   */
+  renderLeftActions?: React.ReactElement
+  /**
+   * Displayed when swiping right.
+   */
+  renderRightActions?: React.ReactElement
+}
 
 export type SwipeableProps = HTMLUIProps<"div"> &
   ThemeProps<"Swipeable"> &
@@ -34,7 +53,13 @@ export type SwipeableDirection = "right" | "left" | "none"
 
 export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Swipeable", props)
-  const { className, children, ...rest } = omitThemeProps(mergedProps)
+  const {
+    className,
+    children,
+    renderLeftActions,
+    renderRightActions,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = { px: "normal", py: "normal", ...styles.container }
 
@@ -44,6 +69,21 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
   const height = componentRef.current?.offsetHeight ?? 0
   const x = useMotionValue(0)
   const translateX = useMotionValue(0)
+
+  const validChildren = getValidChildren(children)
+
+  const [customSwipeableLeftAction] = findChildren(
+    validChildren,
+    SwipeableLeftAction,
+  )
+  const [customSwipeableRightAction] = findChildren(
+    validChildren,
+    SwipeableRightAction,
+  )
+
+  const cloneChildren = !isEmpty(children)
+    ? omitChildren(validChildren, SwipeableLeftAction)
+    : children
 
   const handleDragEnd = () =>
     // event: MouseEvent | TouchEvent | PointerEvent,
@@ -75,7 +115,7 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
         } as SwipeableContext
       }
     >
-      <ui.div position="relative" __css={css} {...rest}>
+      <ui.div position="relative" overflow="hidden" __css={css} {...rest}>
         <motion.div
           ref={mergeRefs(ref, componentRef)}
           className={cx("ui-swipeable", className)}
@@ -87,7 +127,7 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
             translateX:
               direction === "right" ? width : direction === "left" ? -width : 0,
           }}
-          transition={{ damping: 100 }}
+          transition={{ type: "spring", bounce: 0 }}
           style={{
             position: "absolute",
             top: 0,
@@ -98,8 +138,16 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
             x,
             translateX,
           }}
-        />
-        {children}
+        >
+          {cloneChildren}
+        </motion.div>
+
+        {customSwipeableLeftAction ?? (
+          <SwipeableLeftAction>{renderLeftActions}</SwipeableLeftAction>
+        )}
+        {customSwipeableRightAction ?? (
+          <SwipeableRightAction>{renderRightActions}</SwipeableRightAction>
+        )}
       </ui.div>
     </SwipeableProvider>
   )

@@ -20,7 +20,7 @@ export const SwipeableLeftAction = forwardRef<SwipeableLeftActionProps, "div">(
 
     return (
       <motion.div
-        className={cx("ui-swipeable__actions", className)}
+        className={cx("ui-swipeable__right-action", className)}
         ref={ref}
         style={{
           position: "absolute",

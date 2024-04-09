@@ -25,7 +25,7 @@ const defaultStatuses = {
   loading: { icon: Loading, colorScheme: "primary" },
 } as const
 
-type Status = keyof typeof defaultStatuses
+export type Status = keyof typeof defaultStatuses
 
 type AlertContext = {
   status: Status

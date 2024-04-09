@@ -128,7 +128,7 @@ export const findChildren = (
     any,
     string | React.JSXElementConstructor<any>
   >[],
-  ...types: React.JSXElementConstructor<any>[]
+  ...types: (string | React.JSXElementConstructor<any>)[]
 ): [React.ReactElement | undefined, ...React.ReactElement[]] =>
   (children.find((child) => types.some((type) => child.type === type))
     ? children.sort((a, b) =>
@@ -148,7 +148,7 @@ export const includesChildren = (
     any,
     string | React.JSXElementConstructor<any>
   >[],
-  ...types: React.JSXElementConstructor<any>[]
+  ...types: (string | React.JSXElementConstructor<any>)[]
 ): boolean =>
   children.some((child) => {
     if (types.some((type) => child.type === type)) return true
@@ -163,7 +163,7 @@ export const omitChildren = (
     any,
     string | React.JSXElementConstructor<any>
   >[],
-  ...types: React.JSXElementConstructor<any>[]
+  ...types: (string | React.JSXElementConstructor<any>)[]
 ): React.ReactElement[] =>
   children.filter((child) => types.every((type) => child.type !== type))
 
@@ -172,7 +172,7 @@ export const pickChildren = (
     any,
     string | React.JSXElementConstructor<any>
   >[],
-  ...types: React.JSXElementConstructor<any>[]
+  ...types: (string | React.JSXElementConstructor<any>)[]
 ): React.ReactElement[] =>
   children.filter((child) => types.every((type) => child.type === type))
 

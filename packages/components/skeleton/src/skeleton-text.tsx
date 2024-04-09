@@ -28,8 +28,8 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
       fadeDuration,
       speed,
       isLoaded,
-      gap = "0.5rem",
-      textHeight = "0.5rem",
+      gap = "fallback(2, 0.5rem)",
+      textHeight = "fallback(2, 0.5rem)",
       children,
       ...rest
     },

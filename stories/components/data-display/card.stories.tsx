@@ -26,13 +26,13 @@ export const basic: Story = () => {
   return (
     <Card>
       <CardHeader>
-        <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+        <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
       </CardHeader>
 
       <CardBody>
         <Text>
-          『ドラゴンボール』（DRAGON
-          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+          『SLAM
+          DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
         </Text>
       </CardBody>
     </Card>
@@ -44,52 +44,52 @@ export const withSize: Story = () => {
     <>
       <Card size="sm">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card size="md">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card size="normal">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card size="lg">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
@@ -102,65 +102,65 @@ export const withVariant: Story = () => {
     <>
       <Card variant="elevated">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card variant="outline">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card variant="subtle">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card variant="solid">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
 
       <Card variant="unstyled">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
       </Card>
@@ -209,19 +209,19 @@ export const withImage: Story = () => {
     <Card maxW="md">
       <CardHeader justifyContent="center">
         <Image
-          src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+          src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
           w="full"
           rounded="md"
-          alt="ドラゴンボール"
+          alt="SLAM DUNK"
         />
       </CardHeader>
 
       <CardBody>
-        <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+        <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
 
         <Text>
-          『ドラゴンボール』（DRAGON
-          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+          『SLAM
+          DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
         </Text>
       </CardBody>
 
@@ -240,21 +240,21 @@ export const horizonCard: Story = () => {
       variant="outline"
     >
       <Image
-        src="https://www.toei.co.jp/movie/details/__icsFiles/afieldfile/2022/04/01/pub_honpos_wide_B_1.jpg"
+        src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
         objectFit="cover"
         maxW={{ base: "30%", md: "100%" }}
-        alt="ドラゴンボール"
+        alt="SLAM DUNK"
       />
 
       <VStack gap="0">
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
 
@@ -271,13 +271,13 @@ export const multiCards: Story = () => {
     <Grid templateColumns="repeat(auto-fill, minmax(320px, 1fr))" gap="md">
       <Card>
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
 
@@ -288,13 +288,13 @@ export const multiCards: Story = () => {
 
       <Card>
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
 
@@ -305,13 +305,13 @@ export const multiCards: Story = () => {
 
       <Card>
         <CardHeader>
-          <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
         </CardHeader>
 
         <CardBody>
           <Text>
-            『ドラゴンボール』（DRAGON
-            BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
           </Text>
         </CardBody>
 

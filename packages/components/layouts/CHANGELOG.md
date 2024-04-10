@@ -1,5 +1,15 @@
 # @yamada-ui/layouts
 
+## 1.1.17
+
+### Patch Changes
+
+- [#1143](https://github.com/yamada-ui/yamada-ui/pull/1143) [`a491e9d`](https://github.com/yamada-ui/yamada-ui/commit/a491e9d30a025d22edcc49f583cfdb48d82a8f05) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Ensured `offsetParent` exists before use.
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/core@1.6.2
+
 ## 1.1.16
 
 ### Patch Changes

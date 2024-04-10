@@ -1,5 +1,5 @@
 import { act, mocks, render } from "@yamada-ui/test"
-import { Avatar } from "../src"
+import { Avatar, AvatarBadge } from "../src"
 
 describe("<Avatar />", () => {
   beforeEach(() => {
@@ -44,19 +44,126 @@ describe("<Avatar />", () => {
 
   test("renders a name avatar if no src", () => {
     const { queryByText } = render(<Avatar name="Dan Abramov" />)
-    const intials = queryByText("DA")
-    expect(intials).toBeInTheDocument()
+    const initials = queryByText("DA")
+    expect(initials).toBeInTheDocument()
   })
 
   test("renders a single character if only one name is passed", () => {
     const { queryByText } = render(<Avatar name="Dan" />)
-    const intials = queryByText("D")
-    expect(intials).toBeInTheDocument()
+    const initials = queryByText("D")
+    expect(initials).toBeInTheDocument()
   })
 
   test("renders the first characters of the first and last name when more than two names are passed", () => {
     const { queryByText } = render(<Avatar name="Dan React Abramov" />)
-    const intials = queryByText("DA")
-    expect(intials).toBeInTheDocument()
+    const initials = queryByText("DA")
+    expect(initials).toBeInTheDocument()
+  })
+})
+
+describe("<AvatarBadge />", () => {
+  test("renders at specified placement top-start", () => {
+    const { getByTestId } = render(
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      >
+        <AvatarBadge
+          data-testid="avatar-badge"
+          bg="primary"
+          placement="top-start"
+        />
+      </Avatar>,
+    )
+    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+
+    expect(style["top"]).toBe("0px")
+    expect(style.getPropertyValue("inset-inline-start")).toBe("0px")
+    expect(style["transform"]).toBe("translate(-25%, -25%)")
+  })
+
+  test("renders at specified placement top-end", () => {
+    const { getByTestId } = render(
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      >
+        <AvatarBadge
+          data-testid="avatar-badge"
+          bg="primary"
+          placement="top-end"
+        />
+      </Avatar>,
+    )
+    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+
+    expect(style["top"]).toBe("0px")
+    expect(style.getPropertyValue("inset-inline-end")).toBe("0px")
+    expect(style["transform"]).toBe("translate(25%, -25%)")
+  })
+
+  test("renders at specified placement bottom-start", () => {
+    const { getByTestId } = render(
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      >
+        <AvatarBadge
+          data-testid="avatar-badge"
+          bg="primary"
+          placement="bottom-start"
+        />
+      </Avatar>,
+    )
+    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+
+    expect(style["bottom"]).toBe("0px")
+    expect(style.getPropertyValue("inset-inline-start")).toBe("0px")
+    expect(style["transform"]).toBe("translate(-25%, 25%)")
+  })
+
+  test("renders at specified placement bottom-end", () => {
+    const { getByTestId } = render(
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      >
+        <AvatarBadge
+          data-testid="avatar-badge"
+          bg="primary"
+          placement="bottom-end"
+        />
+      </Avatar>,
+    )
+    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+
+    expect(style["bottom"]).toBe("0px")
+    expect(style.getPropertyValue("inset-inline-end")).toBe("0px")
+    expect(style["transform"]).toBe("translate(25%, 25%)")
+  })
+
+  test("renders with ping animation", () => {
+    const { getByTestId } = render(
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      >
+        <AvatarBadge
+          data-testid="avatar-badge"
+          bg="primary"
+          ping
+          pingColor="rgb(255, 0, 0)"
+        />
+      </Avatar>,
+    )
+    const pingEl = getByTestId("avatar-badge").querySelector(
+      ".ui-avatar__badge__ping",
+    )
+    expect(pingEl).toBeInTheDocument()
+    const style = window.getComputedStyle(pingEl!)
+    expect(style["background"]).toBe("rgb(255, 0, 0)")
+    expect(style["animation"]).toMatch(
+      /animation-.* 1.4s cubic-bezier\(0,0,0.2,1\) 0s infinite normal forwards running/,
+    )
   })
 })

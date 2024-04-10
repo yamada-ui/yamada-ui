@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/color-picker": major
+"@yamada-ui/color-picker": patch
 ---
 
 fix theme token in ColorSwatch

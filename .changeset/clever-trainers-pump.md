@@ -1,7 +1,5 @@
 ---
-"@yamada-ui/indicator": major
-"@yamada-ui/avatar": major
-"@yamada-ui/ripple": major
+"@yamada-ui/indicator": patch
 ---
 
 fix css rounded

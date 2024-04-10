@@ -705,7 +705,7 @@ return (
 
 ### 同期させる
 
-グラフの動作を同期させる場合は、互いのグラフの`chartProps.syncId`に共通の文字列を設定します。
+グラフの動作を同期させる場合は、互いのグラフの`syncId`に共通の文字列を設定します。
 
 ```tsx functional=true
 const data = useMemo(
@@ -755,18 +755,8 @@ const series: BarProps[] = useMemo(
 
 return (
   <VStack>
-    <BarChart
-      data={data}
-      series={series}
-      dataKey="name"
-      chartProps={{ syncId: "syncId" }}
-    />
-    <BarChart
-      data={data}
-      series={series}
-      dataKey="name"
-      chartProps={{ syncId: "syncId" }}
-    />
+    <BarChart data={data} series={series} dataKey="name" syncId="syncId" />
+    <BarChart data={data} series={series} dataKey="name" syncId="syncId" />
   </VStack>
 )
 ```

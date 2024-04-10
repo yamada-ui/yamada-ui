@@ -8,6 +8,8 @@ import { PageProvider } from "contexts/page-context"
 import { TopLayout } from "layouts/top-layout"
 import { getStaticCommonProps } from "utils/next"
 
+export const getStaticProps = getStaticCommonProps
+
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
 const Page: NextPage<PageProps> = ({ documentTree }) => {
@@ -53,5 +55,3 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
 }
 
 export default Page
-
-export const getStaticProps = getStaticCommonProps

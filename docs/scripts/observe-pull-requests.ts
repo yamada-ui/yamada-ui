@@ -143,7 +143,7 @@ const addReviewers = async (
       const count = (requested_reviewers?.length ?? 0) + reviewers.length
       let selectedReviewers: string[]
 
-      if (head.label === "yamada-docs:changeset-release/main") {
+      if (head.label === "yamada-ui:changeset-release/main") {
         if (count >= 1) return
 
         selectedReviewers = ["hirotomoyamada"]

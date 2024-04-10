@@ -343,6 +343,41 @@ return (
 )
 ```
 
+### Hide the Drag Bar
+
+To hide the drag bar, set `withDragBar` to `false`.
+
+```tsx functional=true
+const { isOpen, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer
+      isOpen={isOpen}
+      onClose={onClose}
+      closeOnDrag
+      withDragBar={false}
+      withCloseButton
+    >
+      <DrawerHeader>ドラゴンボール</DrawerHeader>
+
+      <DrawerBody>
+        『ドラゴンボール』は、鳥山明による日本の漫画作品です。...
+      </DrawerBody>
+
+      <DrawerFooter>
+        <Button variant="ghost" onClick={onClose}>
+          とじる
+        </Button>
+        <Button colorScheme="primary">Wikipadia</Button>
+      </DrawerFooter>
+    </Drawer>
+  </>
+)
+```
+
 ### Customize the Overlay
 
 If you want to customize the `DrawerOverlay` by passing `props`, etc., set it without omitting.

@@ -248,11 +248,11 @@ const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
 
 return (
   <Wrap gap="md">
-    <Button onClick={() => changeColorMode("light")}>ライトモード</Button>
-    <Button onClick={() => changeColorMode("dark")}>ダークモード</Button>
-    <Button onClick={() => changeColorMode("system")}>システム</Button>
+    <Button onClick={() => changeColorMode("light")}>Light Mode</Button>
+    <Button onClick={() => changeColorMode("dark")}>Dark Mode</Button>
+    <Button onClick={() => changeColorMode("system")}>System</Button>
     <Button onClick={toggleColorMode}>
-      {colorMode === "light" ? "ダーク" : "ライト"}モードに切り替える
+      {colorMode === "light" ? "Switch to Dark" : "Switch to Light"} Mode
     </Button>
   </Wrap>
 )

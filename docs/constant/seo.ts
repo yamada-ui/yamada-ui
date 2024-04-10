@@ -6,9 +6,6 @@ export const SEO = {
       type: "website",
       locale: "ja_JP",
       url: "https://yamada-ui.com",
-      title: "Yamada UI",
-      description:
-        "A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
       site_name:
         "Yamada UI: A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
       images: [

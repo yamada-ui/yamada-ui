@@ -1,5 +1,12 @@
 # @yamada-ui/use-os
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+
 ## 1.0.9
 
 ### Patch Changes

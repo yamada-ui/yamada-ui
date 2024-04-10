@@ -1,5 +1,17 @@
 # @yamada-ui/reorder
 
+## 1.0.21
+
+### Patch Changes
+
+- [#1159](https://github.com/yamada-ui/yamada-ui/pull/1159) [`c294670`](https://github.com/yamada-ui/yamada-ui/commit/c29467004d7f09a137b1c63634f3f9defe0471bc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the sort order was not changed.
+
+- Updated dependencies [[`be96a67`](https://github.com/yamada-ui/yamada-ui/commit/be96a67f3924488275b26cc1bbf419b5c0a1131d), [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/motion@1.0.21
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/core@1.6.2
+
 ## 1.0.20
 
 ### Patch Changes

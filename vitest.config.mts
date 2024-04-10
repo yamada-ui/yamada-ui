@@ -15,6 +15,7 @@ export default defineConfig({
         "**/dist",
         "**/bin",
         "**/@types",
+        "packages/cli",
         "packages/theme",
         "packages/**/tests",
         "packages/test",

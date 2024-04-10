@@ -150,7 +150,7 @@ export const Toggle = forwardRef(
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "0.5rem",
+        gap: "fallback(2, 0.5rem)",
         appearance: "none",
         userSelect: "none",
         position: "relative",
@@ -159,7 +159,7 @@ export const Toggle = forwardRef(
         outline: "none",
         pointerEvents: isReadOnly ? "none" : "auto",
         ...styles,
-        ...(isRounded ? { borderRadius: "9999px" } : {}),
+        ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
       }),
       [isRounded, styles, isReadOnly],
     )

@@ -1,5 +1,29 @@
 # @yamada-ui/reorder
 
+## 1.0.21
+
+### Patch Changes
+
+- [#1159](https://github.com/yamada-ui/yamada-ui/pull/1159) [`c294670`](https://github.com/yamada-ui/yamada-ui/commit/c29467004d7f09a137b1c63634f3f9defe0471bc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the sort order was not changed.
+
+- Updated dependencies [[`be96a67`](https://github.com/yamada-ui/yamada-ui/commit/be96a67f3924488275b26cc1bbf419b5c0a1131d), [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/motion@1.0.21
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/core@1.6.2
+
+## 1.0.20
+
+### Patch Changes
+
+- [#1137](https://github.com/yamada-ui/yamada-ui/pull/1137) [`d4fce49`](https://github.com/yamada-ui/yamada-ui/commit/d4fce49e36284a68e4dc797abf7958bec56ad60f) Thanks [@PoPodada](https://github.com/PoPodada)! - change gap value in reorder component
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/icon@1.0.19
+  - @yamada-ui/motion@1.0.20
+
 ## 1.0.19
 
 ### Patch Changes

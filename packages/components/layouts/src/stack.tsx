@@ -325,6 +325,8 @@ export const ZStack = forwardRef<ZStackProps, "div">(
         let { offsetParent, offsetWidth, offsetHeight, offsetTop, offsetLeft } =
           ref.current
 
+        if (!offsetParent) continue
+
         if (isNegativeLeft) {
           offsetLeft =
             (offsetParent as HTMLDivElement).offsetWidth -

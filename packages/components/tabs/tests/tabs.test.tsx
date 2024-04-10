@@ -143,15 +143,15 @@ describe("<Tabs />", () => {
     render(
       <Tabs>
         <TabList>
-          <Tab data-testid="tab1">Tab 1</Tab>
-          <Tab data-testid="tab2">Tab 2</Tab>
-          <Tab data-testid="tab3">Tab 3</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
       </Tabs>,
     )
 
-    const tab1 = screen.getByTestId("tab1")
-    const tab3 = screen.getByTestId("tab3")
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
     await act(async () => {
       fireEvent.keyDown(tab1, { key: "ArrowLeft" })
     })
@@ -162,15 +162,15 @@ describe("<Tabs />", () => {
     render(
       <Tabs>
         <TabList>
-          <Tab data-testid="tab1">Tab 1</Tab>
-          <Tab data-testid="tab2">Tab 2</Tab>
-          <Tab data-testid="tab3">Tab 3</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
       </Tabs>,
     )
 
-    const tab1 = screen.getByTestId("tab1")
-    const tab2 = screen.getByTestId("tab2")
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab2 = screen.getByText(/Tab 2/)
     await act(async () => {
       fireEvent.keyDown(tab1, { key: "ArrowRight" })
     })
@@ -181,15 +181,15 @@ describe("<Tabs />", () => {
     render(
       <Tabs orientation="vertical">
         <TabList>
-          <Tab data-testid="tab1">Tab 1</Tab>
-          <Tab data-testid="tab2">Tab 2</Tab>
-          <Tab data-testid="tab3">Tab 3</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
       </Tabs>,
     )
 
-    const tab1 = screen.getByTestId("tab1")
-    const tab2 = screen.getByTestId("tab2")
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab2 = screen.getByText(/Tab 2/)
     await act(async () => {
       fireEvent.keyDown(tab1, { key: "ArrowDown" })
     })
@@ -200,15 +200,15 @@ describe("<Tabs />", () => {
     render(
       <Tabs orientation="vertical">
         <TabList>
-          <Tab data-testid="tab1">Tab 1</Tab>
-          <Tab data-testid="tab2">Tab 2</Tab>
-          <Tab data-testid="tab3">Tab 3</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
       </Tabs>,
     )
 
-    const tab1 = screen.getByTestId("tab1")
-    const tab3 = screen.getByTestId("tab3")
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
     await act(async () => {
       fireEvent.keyDown(tab1, { key: "ArrowUp" })
     })
@@ -219,15 +219,15 @@ describe("<Tabs />", () => {
     render(
       <Tabs>
         <TabList>
-          <Tab data-testid="tab1">Tab 1</Tab>
-          <Tab data-testid="tab2">Tab 2</Tab>
-          <Tab data-testid="tab3">Tab 3</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
       </Tabs>,
     )
 
-    const tab1 = screen.getByTestId("tab1")
-    const tab3 = screen.getByTestId("tab3")
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
     await act(async () => {
       tab3.focus()
       fireEvent.keyDown(tab3, { key: "Home" })
@@ -239,15 +239,15 @@ describe("<Tabs />", () => {
     render(
       <Tabs>
         <TabList>
-          <Tab data-testid="tab1">Tab 1</Tab>
-          <Tab data-testid="tab2">Tab 2</Tab>
-          <Tab data-testid="tab3">Tab 3</Tab>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
         </TabList>
       </Tabs>,
     )
 
-    const tab1 = screen.getByTestId("tab1")
-    const tab3 = screen.getByTestId("tab3")
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
     await act(async () => {
       tab1.focus()
       fireEvent.keyDown(tab1, { key: "End" })

@@ -2,6 +2,7 @@ import { forwardRef } from "@yamada-ui/core"
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { MenuItem, MenuOptionItem } from "@yamada-ui/react"
 import type { MenuOptionItemProps } from "@yamada-ui/react"
+import type { ReactElement } from "react"
 
 export type ContextMenuItemProps = HTMLUIProps<"button"> & {
   /**

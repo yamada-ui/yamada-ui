@@ -1,5 +1,17 @@
 # @yamada-ui/indicator
 
+## 1.1.19
+
+### Patch Changes
+
+- [#1163](https://github.com/yamada-ui/yamada-ui/pull/1163) [`7add7a9`](https://github.com/yamada-ui/yamada-ui/commit/7add7a991eb1d35f5433c154159577de6176ff8c) Thanks [@taku10101](https://github.com/taku10101)! - fix css rounded
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-animation@1.0.20
+  - @yamada-ui/use-value@1.1.8
+
 ## 1.1.18
 
 ### Patch Changes

@@ -290,18 +290,11 @@ describe("React", () => {
 
   describe("createId", () => {
     test("should create a unique id with prefix", () => {
-      let id1: string
-      let id2: string
-
-      id1 = createId("prefix")
-
-      setTimeout(() => {
-        id2 = createId("prefix")
-
-        expect(id1).not.toBe(id2)
-        expect(id1.startsWith("prefix-")).toBeTruthy()
-        expect(id2.startsWith("prefix-")).toBeTruthy()
-      }, 1)
+      const id1 = createId("prefix")
+      const id2 = createId("prefix")
+      expect(id1).not.toBe(id2)
+      expect(id1.startsWith("prefix-")).toBeTruthy()
+      expect(id2.startsWith("prefix-")).toBeTruthy()
     })
   })
 })

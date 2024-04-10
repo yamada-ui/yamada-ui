@@ -1,0 +1,4 @@
+import{j as t}from"./jsx-runtime-CKrituN3.js";import{useMDXComponents as n}from"./index-DSz_1G2r.js";import{M as m}from"./index-CtSFpLTY.js";import"./index-CBqU2yxZ.js";import"./_commonjsHelpers-BosuxZz1.js";import"./iframe-DZxvH6zg.js";import"../sb-preview/runtime.js";import"./_basePickBy-JkiXYT45.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-BPGUNDjC.js";import"./index-BtM5VmRH.js";import"./mapValues-JdRuaFY6.js";import"./_baseUniq-BldSWMm_.js";import"./index-CPAEj_5s.js";import"./index-DrFu-skq.js";function r(e){const o={code:"code",h1:"h1",pre:"pre",...n(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(m,{title:"Documents / Theme / Borders"}),`
+`,t.jsx(o.h1,{id:"borders",children:"Borders"}),`
+`,t.jsx(o.pre,{children:t.jsx(o.code,{className:"language-ts",children:`Not defined
+`})})]})}function g(e={}){const{wrapper:o}={...n(),...e.components};return o?t.jsx(o,{...e,children:t.jsx(r,{...e})}):r(e)}export{g as default};

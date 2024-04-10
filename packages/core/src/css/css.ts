@@ -25,7 +25,7 @@ const expandResponsive = (
     const breakpointValue = value[breakpoint]
 
     if (query) {
-      prev[query] = { [key]: breakpointValue }
+      if (breakpointValue) prev[query] = { [key]: breakpointValue }
     } else {
       prev[key] = value[breakpoint]
     }

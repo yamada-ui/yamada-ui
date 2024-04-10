@@ -1,20 +1,5 @@
-export const matchMedia = (media: string, matches: boolean) => {
-  const desc: PropertyDescriptor = {
-    writable: true,
-    configurable: true,
-    enumerable: true,
-    value: () => {
-      return {
-        matches,
-        media,
-        addEventListener: vi.fn(),
-        addListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        removeListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      }
-    },
-  }
+import MatchMediaMock from "vitest-matchmedia-mock"
 
-  Object.defineProperty(window, "matchMedia", desc)
-}
+export { MatchMediaMock }
+
+export const matchMedia = () => new MatchMediaMock()

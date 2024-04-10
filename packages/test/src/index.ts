@@ -1,4 +1,5 @@
-// @ts-ignore
+import type MatchMediaMock from "vitest-matchmedia-mock"
+export { MatchMediaMock }
 export {
   act,
   fireEvent,

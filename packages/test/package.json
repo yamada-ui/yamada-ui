@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@testing-library/user-event": "^14.4.3",
+    "vitest-matchmedia-mock": "^1.0.4",
     "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/utils": "workspace:*",

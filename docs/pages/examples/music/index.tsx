@@ -1,14 +1,19 @@
-import { Center, Text } from "@yamada-ui/react"
+import { Flex, Divider, VStack } from "@yamada-ui/react"
 import { memo } from "react"
-// import { useI18n } from "contexts/i18n-context"
+import Content from "./content/index"
+import Header from "./header/index"
+import Sidemenu from "./sidemenu/index"
 
 export const Music = memo(() => {
-  // const { t } = useI18n()
-
   return (
-    <Center minH="lg">
-      <Text color="muted">Coming soon!</Text>
-    </Center>
+    <VStack gap={0}>
+      <Header />
+      <Flex gap="md" h="100vh">
+        <Sidemenu />
+        <Divider orientation="vertical" variant="solid" />
+        <Content />
+      </Flex>
+    </VStack>
   )
 })
 

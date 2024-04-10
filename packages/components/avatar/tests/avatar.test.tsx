@@ -1,4 +1,4 @@
-import { act, mocks, render } from "@yamada-ui/test"
+import { act, mocks, render, screen } from "@yamada-ui/test"
 import { Avatar, AvatarBadge } from "../src"
 
 describe("<Avatar />", () => {
@@ -63,7 +63,7 @@ describe("<Avatar />", () => {
 
 describe("<AvatarBadge />", () => {
   test("renders at specified placement top-start", () => {
-    const { getByTestId } = render(
+    render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -75,7 +75,7 @@ describe("<AvatarBadge />", () => {
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
 
     expect(style["top"]).toBe("0px")
     expect(style.getPropertyValue("inset-inline-start")).toBe("0px")
@@ -83,7 +83,7 @@ describe("<AvatarBadge />", () => {
   })
 
   test("renders at specified placement top-end", () => {
-    const { getByTestId } = render(
+    render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -95,7 +95,7 @@ describe("<AvatarBadge />", () => {
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
 
     expect(style["top"]).toBe("0px")
     expect(style.getPropertyValue("inset-inline-end")).toBe("0px")
@@ -103,7 +103,7 @@ describe("<AvatarBadge />", () => {
   })
 
   test("renders at specified placement bottom-start", () => {
-    const { getByTestId } = render(
+    render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -115,7 +115,7 @@ describe("<AvatarBadge />", () => {
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
 
     expect(style["bottom"]).toBe("0px")
     expect(style.getPropertyValue("inset-inline-start")).toBe("0px")
@@ -123,7 +123,7 @@ describe("<AvatarBadge />", () => {
   })
 
   test("renders at specified placement bottom-end", () => {
-    const { getByTestId } = render(
+    render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -135,7 +135,7 @@ describe("<AvatarBadge />", () => {
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(getByTestId("avatar-badge"))
+    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
 
     expect(style["bottom"]).toBe("0px")
     expect(style.getPropertyValue("inset-inline-end")).toBe("0px")
@@ -143,7 +143,7 @@ describe("<AvatarBadge />", () => {
   })
 
   test("renders with ping animation", () => {
-    const { getByTestId } = render(
+    render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
@@ -156,9 +156,9 @@ describe("<AvatarBadge />", () => {
         />
       </Avatar>,
     )
-    const pingEl = getByTestId("avatar-badge").querySelector(
-      ".ui-avatar__badge__ping",
-    )
+    const pingEl = screen
+      .getByTestId("avatar-badge")
+      .querySelector(".ui-avatar__badge__ping")
     expect(pingEl).toBeInTheDocument()
     const style = window.getComputedStyle(pingEl!)
     expect(style["background"]).toBe("rgb(255, 0, 0)")

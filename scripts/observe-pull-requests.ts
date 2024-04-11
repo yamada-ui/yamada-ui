@@ -25,7 +25,6 @@ const DISCORD_USER_MAP: Record<string, string> = {
   setodeve: "441961406980554772",
   hoshico: "982900988073607269",
   "komura-c": "394133735567785996",
-  melodyclue: "1039205048711913652",
   imaimai17468: "394831848733409281",
   suzukisan22: "611441723712864256",
 }

@@ -278,12 +278,12 @@ describe("React", () => {
       }
       const { result } = renderHook(() => useAsyncRetry(asyncFunction, []))
       expect(result.current.loading).toBeTruthy()
-      await waitFor(() => {})
-      act(() => {
+
+      act(async () => {
         result.current.retry()
-      })
-      await waitFor(() => {
-        expect(result.current.value).toBe("success")
+        await waitFor(() => {
+          expect(result.current.value).toBe("success")
+        })
       })
     })
   })

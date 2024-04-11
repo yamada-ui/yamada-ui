@@ -1,6 +1,6 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { forwardRef } from "@yamada-ui/core"
-import { MenuGroup } from "@yamada-ui/react"
+import { MenuGroup } from "@yamada-ui/menu"
 import { useContextMenu } from "./context-menu"
 
 export type ContextMenuGroupProps = HTMLUIProps<"div"> & {

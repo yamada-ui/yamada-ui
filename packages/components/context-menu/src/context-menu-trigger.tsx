@@ -1,6 +1,6 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
-import { PopoverAnchor, PopoverTrigger } from "@yamada-ui/react"
+import { PopoverAnchor, PopoverTrigger } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
 import { useState } from "react"
 

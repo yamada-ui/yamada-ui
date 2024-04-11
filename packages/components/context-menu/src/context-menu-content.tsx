@@ -1,8 +1,8 @@
 import { forwardRef } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
-import { MenuList } from "@yamada-ui/react"
+import type { MenuListProps } from "@yamada-ui/menu"
+import { MenuList } from "@yamada-ui/menu"
 
-export type ContextMenuContentProps = MotionProps<"ul">
+export type ContextMenuContentProps = MenuListProps
 export const ContextMenuContent = forwardRef<ContextMenuContentProps, "ul">(
   ({ ...rest }, ref) => {
     return <MenuList ref={ref} {...rest} />

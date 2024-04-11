@@ -105,8 +105,8 @@ const Musicpage = () => {
           outline="Your personal playlists. Updated daily."
         />
 
-        <Box p={4} gap={4}>
-          <Flex>
+        <Box p={4}>
+          <Flex gap="4">
             <Card variant="elevated" maxW="xs">
               <CardHeader>
                 <Center>

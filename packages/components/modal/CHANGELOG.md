@@ -1,5 +1,41 @@
 # @yamada-ui/modal
 
+## 1.2.1
+
+### Patch Changes
+
+- [#1165](https://github.com/yamada-ui/yamada-ui/pull/1165) [`e091886`](https://github.com/yamada-ui/yamada-ui/commit/e0918868fd4290438d7414414745ce7f95446987) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated import and type usage.
+
+- Updated dependencies [[`be96a67`](https://github.com/yamada-ui/yamada-ui/commit/be96a67f3924488275b26cc1bbf419b5c0a1131d), [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/motion@1.0.21
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/transitions@1.0.21
+  - @yamada-ui/button@1.0.23
+  - @yamada-ui/close-button@1.0.21
+  - @yamada-ui/focus-lock@1.0.10
+  - @yamada-ui/portal@1.0.10
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-value@1.1.8
+
+## 1.2.0
+
+### Minor Changes
+
+- [#1133](https://github.com/yamada-ui/yamada-ui/pull/1133) [`a8b6406`](https://github.com/yamada-ui/yamada-ui/commit/a8b6406968a26f8ea8741d63e06df92fae190664) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `dragBar` and drag options to `Drawer` component.
+
+### Patch Changes
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/button@1.0.22
+  - @yamada-ui/close-button@1.0.20
+  - @yamada-ui/focus-lock@1.0.9
+  - @yamada-ui/motion@1.0.20
+  - @yamada-ui/portal@1.0.9
+  - @yamada-ui/transitions@1.0.20
+  - @yamada-ui/use-value@1.1.7
+
 ## 1.1.2
 
 ### Patch Changes

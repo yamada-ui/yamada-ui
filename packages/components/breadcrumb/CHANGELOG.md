@@ -1,5 +1,23 @@
 # @yamada-ui/breadcrumb
 
+## 1.0.20
+
+### Patch Changes
+
+- [#1162](https://github.com/yamada-ui/yamada-ui/pull/1162) [`b7cb944`](https://github.com/yamada-ui/yamada-ui/commit/b7cb94480ac1967a0b532af33b84195fd478968b) Thanks [@Tomoya-Matsubara](https://github.com/Tomoya-Matsubara)! - Use the theme's token in the `Breadcrumb` component
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/core@1.6.2
+
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+
 ## 1.0.18
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @yamada-ui/infinite-scroll-area
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-infinite-scroll@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes

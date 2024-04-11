@@ -1,5 +1,20 @@
 # @yamada-ui/number-input
 
+## 1.0.23
+
+### Patch Changes
+
+- [#1168](https://github.com/yamada-ui/yamada-ui/pull/1168) [`15b30aa`](https://github.com/yamada-ui/yamada-ui/commit/15b30aa14b599ecc1e981c1f97b6eddf8ff0ae69) Thanks [@saka-git](https://github.com/saka-git)! - use the theme's token in the NumberInput component
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/form-control@1.0.23
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-counter@1.0.10
+  - @yamada-ui/use-event-listener@1.0.10
+  - @yamada-ui/use-interval@1.0.10
+
 ## 1.0.22
 
 ### Patch Changes

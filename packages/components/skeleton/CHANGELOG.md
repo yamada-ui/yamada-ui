@@ -1,5 +1,18 @@
 # @yamada-ui/skeleton
 
+## 1.0.20
+
+### Patch Changes
+
+- [#1161](https://github.com/yamada-ui/yamada-ui/pull/1161) [`e91d5b2`](https://github.com/yamada-ui/yamada-ui/commit/e91d5b2faa084aed2a30dbe6b499a76ae2e016c0) Thanks [@SEKI-YUTA](https://github.com/SEKI-YUTA)! - If a theme is applied, use the theme's token in the Skeleton, SkeletonText and SkeletonCircle component #1088
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-animation@1.0.20
+  - @yamada-ui/use-previous@1.0.10
+  - @yamada-ui/use-value@1.1.8
+
 ## 1.0.19
 
 ### Patch Changes

@@ -174,6 +174,134 @@ export default function App() {
 For `props`' `initialColorMode`, please pass the same `initialColorMode` as your config. If you have your own config, pass its `initialColorMode`.
 :::
 
+## Adding a `colorModeManager`
+
+For sites rendered on the server side, such as Remix, you might want to include the color mode in the request to avoid changing it during hydration.
+
+:::note
+If you're not using server-side rendering, you don't need to follow these steps. Yamada UI uses `localStorage` by default.
+:::
+
+### Getting `cookies`
+
+To get `cookies`, you use `useLoaderData`.
+
+```tsx live=false title=root.tsx highlight={10,14,16,17,18,19,20,27,39,40}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "@remix-run/react"
+import { UIProvider } from "@yamada-ui/react"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
+import { json, LoaderFunction } from "@remix-run/node"
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const cookies = request.headers.get("Cookie")
+
+  return json({ cookies })
+}
+
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
+  const { cookies } = useLoaderData<{ cookies: string }>()
+
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={defaultConfig.initialColorMode}
+        />
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
+### Set `cookies` to `colorModeManager`
+
+Set `ssr` and `cookies` to `createColorModeManager`.
+
+```tsx live=false title=root.tsx highlight={12,29,45}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "@remix-run/react"
+import { UIProvider, createColorModeManager } from "@yamada-ui/react"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
+import { json, LoaderFunction } from "@remix-run/node"
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const cookies = request.headers.get("Cookie")
+
+  return json({ cookies })
+}
+
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
+  const { cookies } = useLoaderData<{ cookies: string }>()
+
+  const colorModeManager = createColorModeManager("ssr", cookies)
+
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={defaultConfig.initialColorMode}
+        />
+        <UIProvider colorModeManager={colorModeManager}>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
 ## Use Components
 
 After adding `UIProvider`, you can call components within your application.

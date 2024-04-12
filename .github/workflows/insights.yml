@@ -1,11 +1,8 @@
 name: Insight Report
 
 on:
-  push:
-    branches:
-      - main
-  # schedule:
-  #   - cron: "0 9 * * 5"
+  schedule:
+    - cron: "0 9 * * 5"
 
 jobs:
   insight:

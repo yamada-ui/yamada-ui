@@ -8,6 +8,9 @@ type Issue = Awaited<
 type Comment = Awaited<
   ReturnType<typeof octokit.issues.listCommentsForRepo>
 >["data"][number]
+type Commit = Awaited<
+  ReturnType<typeof octokit.repos.listCommits>
+>["data"][number]
 type Collaborator = Awaited<
   ReturnType<typeof octokit.repos.listCollaborators>
 >["data"][number]
@@ -15,6 +18,7 @@ type Collaborator = Awaited<
 type Insight = {
   login: string
   html_url: string
+  commits: Commit[]
   comments: Comment[]
   issues: {
     created: Issue[]
@@ -109,8 +113,43 @@ const getComments = async () => {
   return comments
 }
 
+const getCommits = async () => {
+  const { data: repositories } = await octokit.repos.listForOrg({
+    ...COMMON_PARAMS,
+  })
+
+  let commits = []
+  let page = 1
+  let count = 0
+
+  const perPage = 100
+
+  for await (const { name } of repositories) {
+    do {
+      const { data } = await octokit.repos.listCommits({
+        ...COMMON_PARAMS,
+        repo: name,
+        since: MIN_DATE.format(QUERY_FORMAT),
+        per_page: perPage,
+        page,
+      })
+
+      commits.push(...data)
+
+      count = data.length
+
+      page++
+    } while (count === perPage)
+
+    await wait(3000)
+  }
+
+  return commits
+}
+
 const getInsights = async (collaborators: Collaborator[]) => {
-  const comments = await getComments()
+  const allComments = await getComments()
+  const allCommits = await getCommits()
 
   const insights: Insight[] = []
 
@@ -127,7 +166,8 @@ const getInsights = async (collaborators: Collaborator[]) => {
       login,
       "reviewed-by",
     )
-    const sentComments = comments.filter(({ user }) => user?.login === login)
+    const comments = allComments.filter(({ user }) => user?.login === login)
+    const commits = allCommits.filter(({ author }) => author?.login === login)
     const createdIssues: Issue[] = []
     const createdPullRequests: Issue[] = []
 
@@ -142,7 +182,8 @@ const getInsights = async (collaborators: Collaborator[]) => {
     insights.push({
       login,
       html_url,
-      comments: sentComments,
+      commits: commits,
+      comments: comments,
       issues: {
         created: createdIssues,
       },
@@ -160,13 +201,14 @@ const getInsights = async (collaborators: Collaborator[]) => {
 
 const createReport = (insights: Insight[]) => {
   const contents = insights
-    .map(({ login, html_url, comments, issues, pullRequests }) => {
-      const sentCommentCount = comments.length
+    .map(({ login, html_url, comments, commits, issues, pullRequests }) => {
+      const commentCount = comments.length
+      const commitCount = commits.length
       const createdIssueCount = issues.created.length
       const createdPRCount = pullRequests.created.length
       const reviewedPRCount = pullRequests.reviewed.length
       const totalCount =
-        createdIssueCount + createdPRCount + reviewedPRCount + sentCommentCount
+        createdIssueCount + createdPRCount + reviewedPRCount + commentCount
 
       return {
         total: totalCount,
@@ -175,7 +217,8 @@ const createReport = (insights: Insight[]) => {
           `  - Issue: ${createdIssueCount}`,
           `  - PR: ${createdPRCount}`,
           `  - Review: ${reviewedPRCount}`,
-          `  - Comment: ${sentCommentCount}`,
+          `  - Comment: ${commentCount}`,
+          `  - Commit: ${commitCount}`,
         ].join("\n"),
       }
     })

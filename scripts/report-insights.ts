@@ -26,6 +26,7 @@ type Insight = {
 }
 
 const COMMON_PARAMS = {
+  org: "yamada-ui",
   owner: "yamada-ui",
   repo: "yamada-ui",
 }
@@ -75,26 +76,35 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
 }
 
 const getComments = async () => {
+  const { data: repositories } = await octokit.repos.listForOrg({
+    ...COMMON_PARAMS,
+  })
+
   let comments = []
   let page = 1
   let count = 0
 
   const perPage = 100
 
-  do {
-    const { data } = await octokit.issues.listCommentsForRepo({
-      ...COMMON_PARAMS,
-      since: MIN_DATE.format(QUERY_FORMAT),
-      per_page: perPage,
-      page,
-    })
+  for await (const { name } of repositories) {
+    do {
+      const { data } = await octokit.issues.listCommentsForRepo({
+        ...COMMON_PARAMS,
+        repo: name,
+        since: MIN_DATE.format(QUERY_FORMAT),
+        per_page: perPage,
+        page,
+      })
 
-    comments.push(...data)
+      comments.push(...data)
 
-    count = data.length
+      count = data.length
 
-    page++
-  } while (count === perPage)
+      page++
+    } while (count === perPage)
+
+    await wait(3000)
+  }
 
   return comments
 }

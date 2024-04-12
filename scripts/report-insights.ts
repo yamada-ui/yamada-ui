@@ -85,12 +85,13 @@ const getComments = async () => {
   })
 
   let comments = []
-  let page = 1
-  let count = 0
 
   const perPage = 100
 
   for await (const { name } of repositories) {
+    let page = 1
+    let count = 0
+
     do {
       const { data } = await octokit.issues.listCommentsForRepo({
         ...COMMON_PARAMS,
@@ -119,12 +120,13 @@ const getCommits = async () => {
   })
 
   let commits = []
-  let page = 1
-  let count = 0
 
   const perPage = 100
 
   for await (const { name } of repositories) {
+    let page = 1
+    let count = 0
+
     do {
       const { data } = await octokit.repos.listCommits({
         ...COMMON_PARAMS,

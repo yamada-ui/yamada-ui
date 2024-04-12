@@ -120,7 +120,8 @@
         "testing-library/no-debugging-utils": "error",
         "testing-library/no-global-regexp-flag-in-query": "error",
         "testing-library/no-promise-in-fire-event": "error",
-        "testing-library/prefer-find-by": "error"
+        "testing-library/prefer-find-by": "error",
+        "testing-library/no-await-sync-queries": "error"
       }
     }
   ]

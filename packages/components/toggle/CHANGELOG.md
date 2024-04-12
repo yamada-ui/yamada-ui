@@ -1,5 +1,17 @@
 # @yamada-ui/toggle
 
+## 1.0.4
+
+### Patch Changes
+
+- [#1169](https://github.com/yamada-ui/yamada-ui/pull/1169) [`ec6e6db`](https://github.com/yamada-ui/yamada-ui/commit/ec6e6dbec7a03627648e7ae3675b04eedcd5e9f9) Thanks [@nikawa2161](https://github.com/nikawa2161)! - If a theme is applied, change to use the theme tokens
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/ripple@1.0.21
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-controllable-state@1.0.10
+
 ## 1.0.3
 
 ### Patch Changes

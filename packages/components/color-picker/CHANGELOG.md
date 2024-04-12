@@ -1,5 +1,27 @@
 # @yamada-ui/color-picker
 
+## 1.2.8
+
+### Patch Changes
+
+- [#1170](https://github.com/yamada-ui/yamada-ui/pull/1170) [`7e57340`](https://github.com/yamada-ui/yamada-ui/commit/7e57340b84bf72e6fe016acb9768c9c2785bc257) Thanks [@dango-the-world](https://github.com/dango-the-world)! - fix theme token in ColorSwatch
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/popover@1.0.21
+  - @yamada-ui/button@1.0.23
+  - @yamada-ui/form-control@1.0.23
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/input@1.0.23
+  - @yamada-ui/portal@1.0.10
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-controllable-state@1.0.10
+  - @yamada-ui/use-disclosure@1.0.10
+  - @yamada-ui/use-eye-dropper@1.0.7
+  - @yamada-ui/use-outside-click@1.0.10
+  - @yamada-ui/use-pan-event@1.0.11
+  - @yamada-ui/use-size@1.0.10
+
 ## 1.2.7
 
 ### Patch Changes

@@ -1,5 +1,5 @@
 import { Text } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
 describe("<Tabs />", () => {
@@ -137,5 +137,121 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
     expect(screen.getByTestId("TabPanels")).toBeInTheDocument()
+  })
+
+  test("Move to the previous tab with the left arrow key", async () => {
+    render(
+      <Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+      </Tabs>,
+    )
+
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
+    await act(async () => {
+      fireEvent.keyDown(tab1, { key: "ArrowLeft" })
+    })
+    expect(document.activeElement).toStrictEqual(tab3)
+  })
+
+  test("Move to the next tab with the right arrow key", async () => {
+    render(
+      <Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+      </Tabs>,
+    )
+
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab2 = screen.getByText(/Tab 2/)
+    await act(async () => {
+      fireEvent.keyDown(tab1, { key: "ArrowRight" })
+    })
+    expect(document.activeElement).toStrictEqual(tab2)
+  })
+
+  test("Move to the next tab with the down arrow key (vertical orientation)", async () => {
+    render(
+      <Tabs orientation="vertical">
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+      </Tabs>,
+    )
+
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab2 = screen.getByText(/Tab 2/)
+    await act(async () => {
+      fireEvent.keyDown(tab1, { key: "ArrowDown" })
+    })
+    expect(document.activeElement).toStrictEqual(tab2)
+  })
+
+  test("Move to the previous tab with the up arrow key (vertical orientation)", async () => {
+    render(
+      <Tabs orientation="vertical">
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+      </Tabs>,
+    )
+
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
+    await act(async () => {
+      fireEvent.keyDown(tab1, { key: "ArrowUp" })
+    })
+    expect(document.activeElement).toStrictEqual(tab3)
+  })
+
+  test("Move to the first tab with the Home key", async () => {
+    render(
+      <Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+      </Tabs>,
+    )
+
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
+    await act(async () => {
+      tab3.focus()
+      fireEvent.keyDown(tab3, { key: "Home" })
+    })
+    expect(document.activeElement).toStrictEqual(tab1)
+  })
+
+  test("Move to the last tab with the End key", async () => {
+    render(
+      <Tabs>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          <Tab>Tab 2</Tab>
+          <Tab>Tab 3</Tab>
+        </TabList>
+      </Tabs>,
+    )
+
+    const tab1 = screen.getByText(/Tab 1/)
+    const tab3 = screen.getByText(/Tab 3/)
+    await act(async () => {
+      tab1.focus()
+      fireEvent.keyDown(tab1, { key: "End" })
+    })
+    expect(document.activeElement).toStrictEqual(tab3)
   })
 })

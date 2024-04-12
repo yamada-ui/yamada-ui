@@ -43,6 +43,7 @@
     "version:next": "changeset version --snapshot next",
     "observe:issue": "tsx scripts/observe-issues",
     "observe:pr": "tsx scripts/observe-pull-requests",
+    "report:insight": "tsx scripts/report-insights",
     "release": "changeset publish",
     "release:dev": "changeset publish --tag dev",
     "release:next": "changeset publish --tag next",

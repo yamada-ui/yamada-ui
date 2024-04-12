@@ -2,7 +2,7 @@ name: Observe Issues
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 15 * * *"
 
 jobs:
   issue:

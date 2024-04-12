@@ -6,7 +6,16 @@ import { Skeleton } from "./"
 export type SkeletonCircleProps = SkeletonProps
 
 export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
-  ({ className, boxSize = "12", children, isFitContent, ...rest }, ref) => {
+  (
+    {
+      className,
+      boxSize = "fallback(12, 3rem)",
+      children,
+      isFitContent,
+      ...rest
+    },
+    ref,
+  ) => {
     const validChildren = getValidChildren(children)
     const hasChildren = !!validChildren.length
 
@@ -16,7 +25,7 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
       <Skeleton
         ref={ref}
         className={cx("ui-skeleton__circle", className)}
-        rounded="9999px"
+        rounded="fallback(full, 9999px)"
         isFitContent={isFitContent}
         {...(!isFitContent ? { boxSize } : {})}
         {...rest}

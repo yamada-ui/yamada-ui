@@ -1,6 +1,4 @@
 import {
-  ColorModeScript,
-  ThemeSchemeScript,
   UIProvider,
   colorModeManager,
   themeSchemeManager,
@@ -13,17 +11,6 @@ import { theme, config } from "./theme"
 const App = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <ColorModeScript
-        type="cookie"
-        nonce="testing"
-        initialColorMode={config.initialColorMode}
-      />
-      <ThemeSchemeScript
-        type="cookie"
-        nonce="testing"
-        initialThemeScheme={config.initialThemeScheme}
-      />
-
       <UIProvider
         config={config}
         theme={theme}

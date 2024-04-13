@@ -23,7 +23,7 @@ export const getColorModeScript = ({
   initialColorMode = "light",
   type = "localStorage",
   storageKey = COLOR_MODE_STORAGE_KEY,
-}: Omit<ColorModeScriptProps, "nonce">) => {
+}: Omit<ColorModeScriptProps, "nonce"> = {}) => {
   const init = normalizeColorMode(initialColorMode)
 
   const isCookie = type === "cookie"

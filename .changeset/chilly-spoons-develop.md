@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/close-button": major
+"@yamada-ui/close-button": patch
 ---
 
-fix-thema-token-closedbutton
+fix-theme-token-closedbutton

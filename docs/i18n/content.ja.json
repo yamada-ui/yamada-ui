@@ -11014,6 +11014,45 @@
     }
   },
   {
+    "title": "colorModeManagerを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#colormodemanagerを追加する",
+    "hierarchy": {
+      "lv1": "Next.jsではじめる",
+      "lv2": "colorModeManagerを追加する"
+    }
+  },
+  {
+    "title": "getServerSidePropsを用意する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#getserversidepropsを用意する",
+    "hierarchy": {
+      "lv1": "Next.jsではじめる",
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "getServerSidePropsを用意する"
+    }
+  },
+  {
+    "title": "colorModeManagerにcookiesを設定する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#colormodemanagerにcookiesを設定する",
+    "hierarchy": {
+      "lv1": "Next.jsではじめる",
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "colorModeManagerにcookiesを設定する"
+    }
+  },
+  {
+    "title": "getServerSidePropsを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#getserversidepropsを追加する",
+    "hierarchy": {
+      "lv1": "Next.jsではじめる",
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "getServerSidePropsを追加する"
+    }
+  },
+  {
     "title": "コンポーネントを使用する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#コンポーネントを使用する",
@@ -11054,6 +11093,35 @@
     }
   },
   {
+    "title": "colorModeManagerを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#colormodemanagerを追加する",
+    "hierarchy": {
+      "lv1": "Remixではじめる",
+      "lv2": "colorModeManagerを追加する"
+    }
+  },
+  {
+    "title": "cookiesを取得する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#cookiesを取得する",
+    "hierarchy": {
+      "lv1": "Remixではじめる",
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "cookiesを取得する"
+    }
+  },
+  {
+    "title": "colorModeManagerにcookiesを設定する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#colormodemanagerにcookiesを設定する",
+    "hierarchy": {
+      "lv1": "Remixではじめる",
+      "lv2": "colorModeManagerを追加する",
+      "lv3": "colorModeManagerにcookiesを設定する"
+    }
+  },
+  {
     "title": "コンポーネントを使用する",
     "type": "fragment",
     "slug": "/getting-started/frameworks/remix#コンポーネントを使用する",
@@ -11080,6 +11148,22 @@
     "type": "fragment",
     "slug": "/getting-started/frameworks/vite#uiproviderを追加する",
     "hierarchy": { "lv1": "Viteではじめる", "lv2": "UIProviderを追加する" }
+  },
+  {
+    "title": "カラーモードに対応する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#カラーモードに対応する",
+    "hierarchy": { "lv1": "Viteではじめる", "lv2": "カラーモードに対応する" }
+  },
+  {
+    "title": "プラグインを追加する",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#プラグインを追加する",
+    "hierarchy": {
+      "lv1": "Viteではじめる",
+      "lv2": "カラーモードに対応する",
+      "lv3": "プラグインを追加する"
+    }
   },
   {
     "title": "コンポーネントを使用する",

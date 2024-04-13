@@ -98,19 +98,38 @@ If you want to use only the Yamada UI style system, please check [here](/getting
 Change `index.ts` to `index.tsx` and also change the content.
 
 ```tsx live=false title=index.tsx
+import {
+  ColorModeScript,
+  ThemeSchemeScript,
+  defaultConfig,
+} from "@yamada-ui/react"
 import { Hono } from "hono"
+import { getCookie } from "hono/cookie"
 import { renderToString } from "react-dom/server"
 
 const app = new Hono()
 
 app.get("*", (c) => {
+  const colorMode = getCookie(c, "ui-color-mode")
+  const themeScheme = getCookie(c, "ui-theme-scheme")
+
   return c.html(
     renderToString(
-      <html lang="ja" data-mode="light">
+      <html lang="ja">
         <head>
           <script type="module" src="/src/client.tsx"></script>
         </head>
         <body>
+          <ColorModeScript
+            type="cookie"
+            nonce="testing"
+            initialColorMode={colorMode ?? defaultConfig.initialColorMode}
+          />
+          <ThemeSchemeScript
+            type="cookie"
+            nonce="testing"
+            initialThemeScheme={themeScheme ?? defaultConfig.initialThemeScheme}
+          />
           <div id="root"></div>
         </body>
       </html>,
@@ -120,6 +139,10 @@ app.get("*", (c) => {
 
 export default app
 ```
+
+:::note
+`ColorModeScript` and `ThemeSchemeScript` must be added to prevent flashing in dark mode when `index.tsx` is generated and displayed on the server side first.
+:::
 
 Add `"type": "module"` to `package.json`.
 

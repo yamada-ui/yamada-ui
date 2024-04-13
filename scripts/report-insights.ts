@@ -30,7 +30,6 @@ type Insight = {
 }
 
 const COMMON_PARAMS = {
-  org: "yamada-ui",
   owner: "yamada-ui",
   repo: "yamada-ui",
 }
@@ -81,7 +80,7 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
 
 const getComments = async () => {
   const { data: repositories } = await octokit.repos.listForOrg({
-    ...COMMON_PARAMS,
+    org: "yamada-ui",
   })
 
   let comments = []
@@ -116,7 +115,7 @@ const getComments = async () => {
 
 const getCommits = async () => {
   const { data: repositories } = await octokit.repos.listForOrg({
-    ...COMMON_PARAMS,
+    org: "yamada-ui",
   })
 
   let commits = []

@@ -131,7 +131,7 @@ function injectScript(): Plugin {
     name: "vite-plugin-inject-scripts",
     transformIndexHtml(html, ctx) {
       const content = getColorModeScript({
-        initialColorMode: config.initialColorMode,
+        initialColorMode: defaultConfig.initialColorMode,
       })
 
       return html.replace("<body>", `<body><script>${content}</script>`)

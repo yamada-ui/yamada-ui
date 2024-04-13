@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Swipeable, Text } from "@yamada-ui/react"
+import { Box, Swipeable, Text } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Swipeable>
 
@@ -11,32 +11,40 @@ const meta: Meta<typeof Swipeable> = {
 export default meta
 
 export const basic: Story = () => {
-  const renderLeftActions = <Text>left</Text>
-  const renderRightActions = <Text>right</Text>
+  const renderLeftActions = () => (
+    <Box
+      h="100%"
+      w="100%"
+      background="green.500"
+      display="flex"
+      alignItems="center"
+      justifyContent="flex-end"
+      px={4}
+    >
+      <Text>left</Text>
+    </Box>
+  )
+  const renderRightActions = () => (
+    <Box
+      h="100%"
+      w="100%"
+      background="red.500"
+      display="flex"
+      alignItems="center"
+      justifyContent="flex-start"
+      px={4}
+    >
+      <Text textAlign="center">right</Text>
+    </Box>
+  )
 
   return (
     <Swipeable
-      renderLeftActions={renderLeftActions}
-      renderRightActions={renderRightActions}
+      maxLeftSwipe={200}
+      renderLeftActions={[{ children: renderLeftActions }]}
+      renderRightActions={[{ children: renderRightActions }]}
     >
       スワイプするやつ
     </Swipeable>
   )
 }
-
-// NOTE:こんな感じにしたい
-// <Swipeable renderLeftActions={<RenderLeftActions />} renderRightActions={<RenderRightActions />} >
-//  <Text>swipe me</Text>
-// </Swipeable>
-//
-// <Swipeable>
-//  <SwipeablePanel>
-//    <Text>swipe me</Text>
-//  </SwipeablePanel>
-//  <SwipeableLeftAction>
-//    <RenderLeftActions />
-//  </SwipeableLeftAction>
-//  <SwipeableRightAction>
-//    <RenderRightActions />
-//  </SwipeableRightAction>
-// </Swipeable>

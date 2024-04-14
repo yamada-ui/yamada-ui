@@ -50,7 +50,7 @@ export const MenuOptionGroup = forwardRef(
   ) => {
     const isRadio = type === "radio"
 
-    defaultValue = (isRadio ? "" : []) as Y
+    defaultValue ??= (isRadio ? "" : []) as Y
 
     const [value, setValue] = useControllableState({
       ...rest,

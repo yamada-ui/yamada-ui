@@ -1,4 +1,4 @@
-interface Task {
+export interface Task {
   id: string
   label: "documentation" | "bug" | "feature"
   title: string

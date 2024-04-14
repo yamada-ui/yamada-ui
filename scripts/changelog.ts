@@ -49,7 +49,7 @@ const manifest = {
   },
 }
 
-const getPullRequests = async () => {
+const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
   if (arg.includes("--latest")) {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
@@ -59,7 +59,7 @@ const getPullRequests = async () => {
       per_page: 1,
     })
 
-    return data[0] as PullRequest
+    return data[0]
   } else if (arg.includes("--number")) {
     const pull_number = +arg.replace("--number=", "")
 

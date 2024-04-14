@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.1.2
+
+### Patch Changes
+
+- [#1171](https://github.com/yamada-ui/yamada-ui/pull/1171) [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added logic to validate NaN in `getPx`.
+
 ## 1.1.1
 
 ### Patch Changes

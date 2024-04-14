@@ -1,5 +1,12 @@
 # @yamada-ui/use-idle
 
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies [[`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63)]:
+  - @yamada-ui/utils@1.1.2
+
 ## 1.0.10
 
 ### Patch Changes

@@ -9,7 +9,7 @@ import sync, { cancelSync, getFrameData } from "framesync"
 import type { RefObject } from "react"
 import { useEffect, useRef } from "react"
 
-export type PanEventInfo = {
+type PanEventInfo = {
   point: Point
   delta: Point
   offset: Point

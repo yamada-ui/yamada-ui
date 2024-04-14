@@ -31,6 +31,18 @@ describe("Function", () => {
       expect(mockFn2).toHaveBeenCalledWith(ev)
     })
 
+    test("should call all passed functions with the event and args", () => {
+      const mockFn1 = vi.fn()
+      const mockFn2 = vi.fn()
+      const ev = { defaultPrevented: false }
+      const args = ["test1", "test2"]
+
+      handlerAll(mockFn1, mockFn2)(ev, ...args)
+
+      expect(mockFn1).toHaveBeenCalledWith(ev, ...args)
+      expect(mockFn2).toHaveBeenCalledWith(ev, ...args)
+    })
+
     test("should stop calling functions if defaultPrevented is true", () => {
       const mockFn1 = vi.fn().mockImplementation((ev) => {
         ev.defaultPrevented = true
@@ -55,6 +67,17 @@ describe("Function", () => {
 
       expect(mockFn1).toHaveBeenCalledWith(arg)
       expect(mockFn2).toHaveBeenCalledWith(arg)
+    })
+
+    test("should call all passed functions with the arguments", () => {
+      const mockFn1 = vi.fn()
+      const mockFn2 = vi.fn()
+      const args = ["test1", "test2"]
+
+      funcAll(mockFn1, mockFn2)(...args)
+
+      expect(mockFn1).toHaveBeenCalledWith(...args)
+      expect(mockFn2).toHaveBeenCalledWith(...args)
     })
   })
 })

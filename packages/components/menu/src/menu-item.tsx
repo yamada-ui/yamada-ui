@@ -63,6 +63,8 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
       icon,
       command,
       children,
+      onClick: onClickProp,
+      onFocus: onFocusProp,
       ...props
     },
     ref,
@@ -86,23 +88,26 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
     const onClick = useCallback(
       (ev: MouseEvent<HTMLButtonElement>) => {
-        props.onClick?.(ev)
+        onClickProp?.(ev)
+
         if (!isTargetMenuItem(ev.currentTarget)) return
 
         if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
       },
-      [props, customCloseOnSelect, generalCloseOnSelect, onClose],
+      [onClickProp, customCloseOnSelect, generalCloseOnSelect, onClose],
     )
 
     const onFocus = useCallback(
       (ev: FocusEvent<HTMLButtonElement>) => {
-        props.onFocus?.(ev)
+        onFocusProp?.(ev)
+
         setFocusedIndex(index)
       },
-      [props, setFocusedIndex, index],
+      [onFocusProp, setFocusedIndex, index],
     )
 
-    const rest = useClickable({
+    const rest = useClickable<HTMLButtonElement>({
+      ...props,
       onClick,
       onFocus,
       ref: mergeRefs(register, buttonRef, ref),
@@ -124,7 +129,7 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
     children =
       icon || command ? (
-        <ui.span style={{ pointerEvents: "none", flex: 1 }}>{children}</ui.span>
+        <ui.span style={{ flex: 1 }}>{children}</ui.span>
       ) : (
         children
       )
@@ -145,7 +150,6 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
     return (
       <ui.li
-        {...props}
         {...rest}
         as={as}
         type={type}

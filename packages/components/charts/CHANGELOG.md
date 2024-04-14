@@ -1,5 +1,18 @@
 # @yamada-ui/charts
 
+## 1.0.5
+
+### Patch Changes
+
+- [#1195](https://github.com/yamada-ui/yamada-ui/pull/1195) [`259eb5f`](https://github.com/yamada-ui/yamada-ui/commit/259eb5f3db9a1f8d64af5b44514fb69fb4594860) Thanks [@xBlackTea](https://github.com/xBlackTea)! - fix: assigned className to cursor
+
+- Updated dependencies [[`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6), [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63), [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2), [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44), [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e)]:
+  - @yamada-ui/core@1.6.3
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/tooltip@1.0.23
+  - @yamada-ui/use-token@1.1.9
+  - @yamada-ui/use-value@1.1.9
+
 ## 1.0.4
 
 ### Patch Changes

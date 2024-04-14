@@ -1,5 +1,18 @@
 # @yamada-ui/test
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1176](https://github.com/yamada-ui/yamada-ui/pull/1176) [`ca1db9a`](https://github.com/yamada-ui/yamada-ui/commit/ca1db9acaafc4324cc226fa82b10ed40d26902a0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved `matchMedia`.
+
+### Patch Changes
+
+- Updated dependencies [[`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63)]:
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/providers@1.0.27
+  - @yamada-ui/theme@1.5.4
+
 ## 1.0.26
 
 ### Patch Changes

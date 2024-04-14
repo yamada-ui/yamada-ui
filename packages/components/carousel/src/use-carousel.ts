@@ -147,7 +147,7 @@ export type UseCarouselProps = Omit<
   /**
    * The CSS `gap` property.
    *
-   * @default 'md'
+   * @default '4'
    */
   gap?: CSSUIProps["gap"]
   /**

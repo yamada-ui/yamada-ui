@@ -1,5 +1,21 @@
 # @yamada-ui/use-pan-event
 
+## 1.0.12
+
+### Patch Changes
+
+- [#1167](https://github.com/yamada-ui/yamada-ui/pull/1167) [`8864fec`](https://github.com/yamada-ui/yamada-ui/commit/8864fecd6897532c5c7af0e857d4291c6835f5bb) Thanks [@taroj1205](https://github.com/taroj1205)! - Removed unnecessary export of type `PanEventInfo`.
+
+- Updated dependencies [[`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63)]:
+  - @yamada-ui/utils@1.1.2
+
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+
 ## 1.0.10
 
 ### Patch Changes

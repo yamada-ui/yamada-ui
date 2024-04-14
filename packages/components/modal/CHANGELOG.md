@@ -1,5 +1,37 @@
 # @yamada-ui/modal
 
+## 1.2.2
+
+### Patch Changes
+
+- Updated dependencies [[`fc4f77b`](https://github.com/yamada-ui/yamada-ui/commit/fc4f77bf2e4248f544d724545b967a45c64b93e2), [`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6), [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63), [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2), [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44), [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e)]:
+  - @yamada-ui/close-button@1.0.22
+  - @yamada-ui/core@1.6.3
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/button@1.0.24
+  - @yamada-ui/motion@1.0.22
+  - @yamada-ui/transitions@1.0.22
+  - @yamada-ui/use-value@1.1.9
+  - @yamada-ui/focus-lock@1.0.11
+  - @yamada-ui/portal@1.0.11
+
+## 1.2.1
+
+### Patch Changes
+
+- [#1165](https://github.com/yamada-ui/yamada-ui/pull/1165) [`e091886`](https://github.com/yamada-ui/yamada-ui/commit/e0918868fd4290438d7414414745ce7f95446987) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated import and type usage.
+
+- Updated dependencies [[`be96a67`](https://github.com/yamada-ui/yamada-ui/commit/be96a67f3924488275b26cc1bbf419b5c0a1131d), [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/motion@1.0.21
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/transitions@1.0.21
+  - @yamada-ui/button@1.0.23
+  - @yamada-ui/close-button@1.0.21
+  - @yamada-ui/focus-lock@1.0.10
+  - @yamada-ui/portal@1.0.10
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-value@1.1.8
+
 ## 1.2.0
 
 ### Minor Changes

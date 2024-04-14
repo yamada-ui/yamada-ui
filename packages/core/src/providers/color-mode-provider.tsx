@@ -165,10 +165,9 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 export const useColorMode = () => {
   const context = useContext(ColorModeContext)
 
-  if (context === undefined)
-    throw new Error("useColorMode must be used within a ColorModeProvider")
-
-  return context
+  return (
+    context ?? { colorMode: "light", internalColorMode: "light", forced: false }
+  )
 }
 
 /**

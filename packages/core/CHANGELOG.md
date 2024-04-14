@@ -1,5 +1,29 @@
 # @yamada-ui/core
 
+## 1.6.3
+
+### Patch Changes
+
+- [#1171](https://github.com/yamada-ui/yamada-ui/pull/1171) [`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added semicolons in theme scripts.
+
+- [#1171](https://github.com/yamada-ui/yamada-ui/pull/1171) [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where empty object styles were being generated.
+
+- [#1190](https://github.com/yamada-ui/yamada-ui/pull/1190) [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed `colorModeManager.ssr` and `getColorModeScript` arguments to optional.
+
+- [#1171](https://github.com/yamada-ui/yamada-ui/pull/1171) [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplified `useColorMode` and `useTheme` fallback logic.
+
+- Updated dependencies [[`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63)]:
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/portal@1.0.11
+
+## 1.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/portal@1.0.10
+
 ## 1.6.1
 
 ### Patch Changes

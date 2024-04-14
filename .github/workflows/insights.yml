@@ -1,0 +1,21 @@
+name: Insight Report
+
+on:
+  schedule:
+    - cron: "0 9 * * 5"
+
+jobs:
+  insight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Create insight report
+        run: pnpm report:insight
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_INSIGHTS_WEBHOOK_URL: ${{ secrets.DISCORD_INSIGHTS_WEBHOOK_URL }}

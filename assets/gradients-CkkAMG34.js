@@ -1,4 +1,0 @@
-import{j as t}from"./jsx-runtime-CKrituN3.js";import{useMDXComponents as r}from"./index-DSz_1G2r.js";import{M as i}from"./index-Dq-IT-a9.js";import"./index-CBqU2yxZ.js";import"./_commonjsHelpers-BosuxZz1.js";import"./iframe-C1thh1wH.js";import"../sb-preview/runtime.js";import"./_basePickBy-DnzVheQ4.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-BPGUNDjC.js";import"./index-BtM5VmRH.js";import"./mapValues-JdRuaFY6.js";import"./_baseUniq-BldSWMm_.js";import"./index-CPAEj_5s.js";import"./index-DrFu-skq.js";function o(e){const n={code:"code",h1:"h1",pre:"pre",...r(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(i,{title:"Documents / Theme / Gradients"}),`
-`,t.jsx(n.h1,{id:"gradients",children:"Gradients"}),`
-`,t.jsx(n.pre,{children:t.jsx(n.code,{className:"language-ts",children:`Not defined
-`})})]})}function D(e={}){const{wrapper:n}={...r(),...e.components};return n?t.jsx(n,{...e,children:t.jsx(o,{...e})}):o(e)}export{D as default};

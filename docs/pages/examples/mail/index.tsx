@@ -1,4 +1,3 @@
-import type { ResizableItemControl } from "@yamada-ui/react"
 import {
   Divider,
   Resizable,
@@ -16,7 +15,6 @@ import { Inbox } from "./inbox"
 import { Sidebar } from "./sidebar"
 
 export const Mail = memo(() => {
-  const controlRef = useRef<ResizableItemControl>(null)
   const [isCollapse, { on, off }] = useBoolean()
   const setDesktopMailRef = useRef<(mail: MailItem) => void>(noop)
   const setMobileMailRef = useRef<(mail: MailItem) => void>(noop)
@@ -24,7 +22,6 @@ export const Mail = memo(() => {
   return (
     <Resizable h={{ base: "5xl", sm: "6xl" }}>
       <ResizableItem
-        controlRef={controlRef}
         defaultSize={20}
         collapsedSize={4}
         collapsible

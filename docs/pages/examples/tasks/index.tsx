@@ -7,6 +7,7 @@ import { Table } from "./table"
 
 export const Tasks = memo(() => {
   const [pageSize, setPageSize] = useState<10 | 20 | 30 | 40 | 50>(10)
+  const [page, setPage] = useState(1)
   const [rowSelection, setRowSelection] = useState<Record<Task["id"], boolean>>(
     Object.fromEntries(tasks.map((task) => [task.id, false])),
   )
@@ -17,11 +18,14 @@ export const Tasks = memo(() => {
       <Table
         rowSelection={rowSelection}
         setRowSelection={setRowSelection}
+        page={page}
         pageSize={pageSize}
       />
       <Footer
         dataCount={tasks.length}
         selectedDataCount={Object.values(rowSelection).filter(Boolean).length}
+        page={page}
+        setPage={setPage}
         pageSize={pageSize}
         setPageSize={setPageSize}
       />

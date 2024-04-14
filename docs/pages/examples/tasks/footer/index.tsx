@@ -1,9 +1,18 @@
-import { Flex, Option, Select, Spacer, Text } from "@yamada-ui/react"
+import {
+  Flex,
+  Option,
+  Pagination,
+  Select,
+  Spacer,
+  Text,
+} from "@yamada-ui/react"
 import type { Dispatch, FC, SetStateAction } from "react"
 
 interface FooterProps {
   dataCount: number
   selectedDataCount: number
+  page: number
+  setPage: Dispatch<SetStateAction<number>>
   pageSize: 10 | 20 | 30 | 40 | 50
   setPageSize: Dispatch<SetStateAction<10 | 20 | 30 | 40 | 50>>
 }
@@ -11,6 +20,8 @@ interface FooterProps {
 export const Footer: FC<FooterProps> = ({
   dataCount,
   selectedDataCount,
+  page,
+  setPage,
   pageSize,
   setPageSize,
 }) => {
@@ -37,6 +48,15 @@ export const Footer: FC<FooterProps> = ({
           </Option>
         ))}
       </Select>
+      <Text fontSize="sm" fontWeight="bold">
+        Page {page} of {Math.ceil(dataCount / pageSize)}
+      </Text>
+      <Pagination
+        total={Math.ceil(dataCount / pageSize)}
+        page={page}
+        onChange={setPage}
+        size="sm"
+      />
     </Flex>
   )
 }

@@ -1,14 +1,14 @@
 import { Checkbox, Th, Thead, Tr } from "@yamada-ui/react"
 import type { Dispatch, FC, SetStateAction } from "react"
-import type { Task } from "../data/tasks"
-import { columns } from "../data/tasks"
+import type { Task } from "../../data/tasks"
+import { columns } from "../../data/tasks"
 
 interface HeaderProps {
   rowSelection: Record<Task["id"], boolean>
   setRowSelection: Dispatch<SetStateAction<Record<Task["id"], boolean>>>
 }
 
-export const Header: FC<HeaderProps> = ({ rowSelection, setRowSelection }) => {
+export const Head: FC<HeaderProps> = ({ rowSelection, setRowSelection }) => {
   const handleSelectAll = () => {
     const isAllSelected = Object.values(rowSelection).every(Boolean)
 

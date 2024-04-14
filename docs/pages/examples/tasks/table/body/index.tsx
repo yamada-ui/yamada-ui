@@ -1,8 +1,8 @@
 import { Checkbox, Flex, Tag, Tbody, Td, Tr } from "@yamada-ui/react"
 import type { Dispatch, FC, SetStateAction } from "react"
-import { priority, status } from "../data/data"
-import type { Task } from "../data/tasks"
-import { tasks } from "../data/tasks"
+import { priority, status } from "../../data/data"
+import type { Task } from "../../data/tasks"
+import { tasks } from "../../data/tasks"
 
 interface BodyProps {
   rowSelection: Record<Task["id"], boolean>

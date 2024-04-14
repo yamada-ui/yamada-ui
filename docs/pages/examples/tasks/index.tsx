@@ -1,8 +1,7 @@
-import { Container, NativeTable, TableContainer, Text } from "@yamada-ui/react"
+import { Container, Text } from "@yamada-ui/react"
 import { memo, useState } from "react"
-import { Body } from "./body"
 import { tasks, type Task } from "./data/tasks"
-import { Header } from "./head"
+import { Table } from "./table"
 
 export const Tasks = memo(() => {
   const [rowSelection, setRowSelection] = useState<Record<Task["id"], boolean>>(
@@ -11,15 +10,7 @@ export const Tasks = memo(() => {
 
   return (
     <Container>
-      <TableContainer>
-        <NativeTable withBorder>
-          <Header
-            rowSelection={rowSelection}
-            setRowSelection={setRowSelection}
-          />
-          <Body rowSelection={rowSelection} setRowSelection={setRowSelection} />
-        </NativeTable>
-      </TableContainer>
+      <Table rowSelection={rowSelection} setRowSelection={setRowSelection} />
       <Text fontSize="sm">
         {Object.values(rowSelection).filter(Boolean).length} of {tasks.length}{" "}
         row(s) selected.

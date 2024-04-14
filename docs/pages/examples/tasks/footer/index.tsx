@@ -29,6 +29,9 @@ export const Footer: FC<FooterProps> = ({
     const valueAsNumber = Number.parseInt(value, 10)
     if ([10, 20, 30, 40, 50].includes(valueAsNumber)) {
       setPageSize(valueAsNumber as 10 | 20 | 30 | 40 | 50)
+
+      const lastPage = Math.ceil(dataCount / valueAsNumber)
+      if (page > lastPage) setPage(lastPage)
     }
   }
 

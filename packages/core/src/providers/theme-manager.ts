@@ -92,7 +92,7 @@ export const createThemeSchemeManager = (
 export const themeSchemeManager = {
   localStorage: createLocalStorage(THEME_SCHEME_STORAGE_KEY),
   cookieStorage: createCookieStorage(THEME_SCHEME_STORAGE_KEY),
-  ssr: (cookie: string) =>
+  ssr: (cookie?: string) =>
     createCookieStorage(THEME_SCHEME_STORAGE_KEY, cookie),
   createLocalStorage,
   createCookieStorage,

@@ -9,6 +9,7 @@ interface TableProps {
   setRowSelection: Dispatch<SetStateAction<Record<Task["id"], boolean>>>
   page: number
   pageSize: 10 | 20 | 30 | 40 | 50
+  filteredTasks: Task[]
 }
 
 export const Table: FC<TableProps> = ({
@@ -16,6 +17,7 @@ export const Table: FC<TableProps> = ({
   setRowSelection,
   page,
   pageSize,
+  filteredTasks,
 }) => (
   <TableContainer>
     <NativeTable withBorder highlightOnHover>
@@ -25,6 +27,7 @@ export const Table: FC<TableProps> = ({
         setRowSelection={setRowSelection}
         page={page}
         pageSize={pageSize}
+        filteredTasks={filteredTasks}
       />
     </NativeTable>
   </TableContainer>

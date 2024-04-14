@@ -2,13 +2,13 @@ import { Checkbox, Flex, Tag, Tbody, Td, Text, Tr } from "@yamada-ui/react"
 import { useMemo, type Dispatch, type FC, type SetStateAction } from "react"
 import { priority, status } from "../../data/data"
 import type { Task } from "../../data/tasks"
-import { tasks } from "../../data/tasks"
 
 interface BodyProps {
   rowSelection: Record<Task["id"], boolean>
   setRowSelection: Dispatch<SetStateAction<Record<Task["id"], boolean>>>
   page: number
   pageSize: 10 | 20 | 30 | 40 | 50
+  filteredTasks: Task[]
 }
 
 export const Body: FC<BodyProps> = ({
@@ -16,6 +16,7 @@ export const Body: FC<BodyProps> = ({
   setRowSelection,
   page,
   pageSize,
+  filteredTasks,
 }) => {
   const handleCheck = (id: Task["id"]) => {
     setRowSelection((prev) => ({
@@ -32,7 +33,7 @@ export const Body: FC<BodyProps> = ({
 
   return (
     <Tbody>
-      {tasks.slice(pageStart, pageEnd).map((task) => (
+      {filteredTasks.slice(pageStart, pageEnd).map((task) => (
         <Tr key={task.id}>
           <Td verticalAlign="middle">
             <Checkbox

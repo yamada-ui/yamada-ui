@@ -1,14 +1,16 @@
-import { Center, Text } from "@yamada-ui/react"
+import { NativeTable, TableContainer } from "@yamada-ui/react"
 import { memo } from "react"
-// import { useI18n } from "contexts/i18n-context"
+import { Body } from "./body"
+import { Header } from "./head"
 
 export const Tasks = memo(() => {
-  // const { t } = useI18n()
-
   return (
-    <Center minH="lg">
-      <Text color="muted">Coming soon!</Text>
-    </Center>
+    <TableContainer>
+      <NativeTable>
+        <Header />
+        <Body />
+      </NativeTable>
+    </TableContainer>
   )
 })
 

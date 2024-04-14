@@ -7,9 +7,14 @@ import { tasks } from "../../data/tasks"
 interface BodyProps {
   rowSelection: Record<Task["id"], boolean>
   setRowSelection: Dispatch<SetStateAction<Record<Task["id"], boolean>>>
+  pageSize: 10 | 20 | 30 | 40 | 50
 }
 
-export const Body: FC<BodyProps> = ({ rowSelection, setRowSelection }) => {
+export const Body: FC<BodyProps> = ({
+  rowSelection,
+  setRowSelection,
+  pageSize,
+}) => {
   const handleCheck = (id: Task["id"]) => {
     setRowSelection((prev) => ({
       ...prev,
@@ -19,7 +24,7 @@ export const Body: FC<BodyProps> = ({ rowSelection, setRowSelection }) => {
 
   return (
     <Tbody>
-      {tasks.map((task) => (
+      {tasks.slice(0, pageSize).map((task) => (
         <Tr key={task.id}>
           <Td>
             <Checkbox

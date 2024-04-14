@@ -174,6 +174,134 @@ export default function App() {
 `props`の`initialColorMode`は、コンフィグと同じ`initialColorMode`を渡してください。もし、あなたのコンフィグがある場合は、そちらの`initialColorMode`を渡してください。
 :::
 
+## `colorModeManager`を追加する
+
+Remixなどのサーバー側でレンダリングされるサイトの場合は、カラーモードがハイドレーション中に変更することを避けるために、リクエストにカラーモードを含めたい場合があります。
+
+:::note
+サーバーサイドレンダリングを使用しない場合は、こちら手順をする必要はありません。Yamada UIは、デフォルトで`localStorage`を使用しています。
+:::
+
+### `cookies`を取得する
+
+`cookies`を取得する場合は、`useLoaderData`を使用しています。
+
+```tsx live=false title=root.tsx highlight={10,14,16,17,18,19,20,27,39,40}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "@remix-run/react"
+import { UIProvider } from "@yamada-ui/react"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
+import { json, LoaderFunction } from "@remix-run/node"
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const cookies = request.headers.get("Cookie")
+
+  return json({ cookies })
+}
+
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
+  const { cookies } = useLoaderData<{ cookies: string }>()
+
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={defaultConfig.initialColorMode}
+        />
+        <UIProvider>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
+### `colorModeManager`に`cookies`を設定する
+
+`createColorModeManager`に`ssr`と`cookies`を設定します。
+
+```tsx live=false title=root.tsx highlight={12,29,45}
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LinksFunction } from "@remix-run/node"
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "@remix-run/react"
+import { UIProvider, createColorModeManager } from "@yamada-ui/react"
+import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
+import { json, LoaderFunction } from "@remix-run/node"
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const cookies = request.headers.get("Cookie")
+
+  return json({ cookies })
+}
+
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+]
+
+export default function App() {
+  const { cookies } = useLoaderData<{ cookies: string }>()
+
+  const colorModeManager = createColorModeManager("ssr", cookies)
+
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <ColorModeScript
+          type="cookie"
+          nonce="testing"
+          initialColorMode={defaultConfig.initialColorMode}
+        />
+        <UIProvider colorModeManager={colorModeManager}>
+          <Outlet />
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  )
+}
+```
+
 ## コンポーネントを使用する
 
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを呼び出します。

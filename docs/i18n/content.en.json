@@ -10360,6 +10360,45 @@
     }
   },
   {
+    "title": "Add colorModeManager",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#add-colormodemanager",
+    "hierarchy": {
+      "lv1": "Getting Started with Next.js",
+      "lv2": "Add colorModeManager"
+    }
+  },
+  {
+    "title": "Prepare getServerSideProps",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#prepare-getserversideprops",
+    "hierarchy": {
+      "lv1": "Getting Started with Next.js",
+      "lv2": "Add colorModeManager",
+      "lv3": "Prepare getServerSideProps"
+    }
+  },
+  {
+    "title": "Set cookies in colorModeManager",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#set-cookies-in-colormodemanager",
+    "hierarchy": {
+      "lv1": "Getting Started with Next.js",
+      "lv2": "Add colorModeManager",
+      "lv3": "Set cookies in colorModeManager"
+    }
+  },
+  {
+    "title": "Add getServerSideProps",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/nextjs#add-getserversideprops",
+    "hierarchy": {
+      "lv1": "Getting Started with Next.js",
+      "lv2": "Add colorModeManager",
+      "lv3": "Add getServerSideProps"
+    }
+  },
+  {
     "title": "Use Components",
     "type": "fragment",
     "slug": "/getting-started/frameworks/nextjs#use-components",
@@ -10403,6 +10442,35 @@
     }
   },
   {
+    "title": "Adding a colorModeManager",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#adding-a-colormodemanager",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
+      "lv2": "Adding a colorModeManager"
+    }
+  },
+  {
+    "title": "Getting cookies",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#getting-cookies",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
+      "lv2": "Adding a colorModeManager",
+      "lv3": "Getting cookies"
+    }
+  },
+  {
+    "title": "Set cookies to colorModeManager",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/remix#set-cookies-to-colormodemanager",
+    "hierarchy": {
+      "lv1": "Getting Started with Remix",
+      "lv2": "Adding a colorModeManager",
+      "lv3": "Set cookies to colorModeManager"
+    }
+  },
+  {
     "title": "Use Components",
     "type": "fragment",
     "slug": "/getting-started/frameworks/remix#use-components",
@@ -10432,6 +10500,25 @@
     "type": "fragment",
     "slug": "/getting-started/frameworks/vite#add-uiprovider",
     "hierarchy": { "lv1": "Getting Started with Vite", "lv2": "Add UIProvider" }
+  },
+  {
+    "title": "Support for Color Modes",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#support-for-color-modes",
+    "hierarchy": {
+      "lv1": "Getting Started with Vite",
+      "lv2": "Support for Color Modes"
+    }
+  },
+  {
+    "title": "Adding a Plugin",
+    "type": "fragment",
+    "slug": "/getting-started/frameworks/vite#adding-a-plugin",
+    "hierarchy": {
+      "lv1": "Getting Started with Vite",
+      "lv2": "Support for Color Modes",
+      "lv3": "Adding a Plugin"
+    }
   },
   {
     "title": "Use Components",

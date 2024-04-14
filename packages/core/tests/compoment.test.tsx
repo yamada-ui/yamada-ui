@@ -90,8 +90,6 @@ const theme2 = {
 }
 
 describe("useComponentStyle", () => {
-  const defaultGetComputedStyle = window.getComputedStyle
-
   beforeAll(() => {
     vi.spyOn(window, "getComputedStyle").mockImplementation(
       () =>
@@ -102,7 +100,7 @@ describe("useComponentStyle", () => {
   })
 
   afterAll(() => {
-    window.getComputedStyle = defaultGetComputedStyle
+    vi.spyOn(window, "getComputedStyle").mockRestore()
   })
 
   test("returns the correct styles for a component", () => {

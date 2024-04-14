@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/react": major
+"@yamada-ui/carousel": patch
 ---
 
 patch

@@ -50,7 +50,11 @@ const manifest = {
   async update(data: PullRequestData) {
     const prevData = await this.read()
 
-    return this.write([data, ...prevData])
+    const computedData = prevData.map((prevData) =>
+      prevData.id === data.id ? data : prevData,
+    )
+
+    return this.write(computedData)
   },
 }
 
@@ -154,7 +158,7 @@ const restoreChangelog = async (content: string): Promise<string> => {
         const changelog = await getChangelog(dir)
 
         const match = new RegExp(
-          `## ${version}([\\s\\S]*?)(?=## \\d)`,
+          `## ${version}([\\s\\S]*?)(?=## \\d|$)`,
           "g",
         ).exec(changelog)
 

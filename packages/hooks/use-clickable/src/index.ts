@@ -1,9 +1,13 @@
 import { useEventListeners } from "@yamada-ui/use-event-listener"
+import type { Dict } from "@yamada-ui/utils"
 import { dataAttr, mergeRefs } from "@yamada-ui/utils"
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, Ref } from "react"
 import { useCallback, useState } from "react"
 
-export type UseClickableProps = HTMLAttributes<HTMLElement> & {
+export type UseClickableProps<
+  Y extends HTMLElement = HTMLElement,
+  M extends HTMLAttributes<Y> = Dict,
+> = M & {
   /**
    * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.
    *
@@ -44,22 +48,27 @@ const isValidElement = (
   )
 }
 
-export const useClickable = ({
-  ref,
-  isDisabled,
-  isFocusable,
-  clickOnEnter = true,
-  clickOnSpace = true,
-  onMouseDown,
-  onMouseUp,
-  onClick,
-  onKeyDown,
-  onKeyUp,
-  tabIndex: _tabIndex,
-  onMouseOver,
-  onMouseLeave,
-  ...props
-}: UseClickableProps = {}) => {
+export const useClickable = <
+  Y extends HTMLElement = HTMLElement,
+  M extends HTMLAttributes<Y> = Dict,
+>(
+  {
+    ref,
+    isDisabled,
+    isFocusable,
+    clickOnEnter = true,
+    clickOnSpace = true,
+    onMouseDown,
+    onMouseUp,
+    onClick,
+    onKeyDown,
+    onKeyUp,
+    tabIndex: _tabIndex,
+    onMouseOver,
+    onMouseLeave,
+    ...props
+  }: UseClickableProps<Y, M> = {} as UseClickableProps<Y, M>,
+) => {
   const [isButton, setIsButton] = useState<boolean>(true)
   const [isPressed, setIsPressed] = useState<boolean>(false)
 
@@ -75,7 +84,7 @@ export const useClickable = ({
   }
 
   const handleClick = useCallback(
-    (ev: MouseEvent<HTMLElement>) => {
+    (ev: MouseEvent<Y>) => {
       if (isDisabled) {
         ev.stopPropagation()
         ev.preventDefault()
@@ -90,7 +99,7 @@ export const useClickable = ({
   )
 
   const onDocumentKeyUp = useCallback(
-    (ev: KeyboardEvent) => {
+    (ev: KeyboardEvent<Y>) => {
       if (isPressed && isValidElement(ev)) {
         ev.preventDefault()
         ev.stopPropagation()
@@ -104,7 +113,7 @@ export const useClickable = ({
   )
 
   const handleKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLElement>) => {
+    (ev: KeyboardEvent<Y>) => {
       onKeyDown?.(ev)
 
       if (isDisabled || ev.defaultPrevented || ev.metaKey) return
@@ -135,7 +144,7 @@ export const useClickable = ({
   )
 
   const handleKeyUp = useCallback(
-    (ev: KeyboardEvent<HTMLElement>) => {
+    (ev: KeyboardEvent<Y>) => {
       onKeyUp?.(ev)
 
       if (isDisabled || ev.defaultPrevented || ev.metaKey) return
@@ -153,7 +162,7 @@ export const useClickable = ({
   )
 
   const onDocumentMouseUp = useCallback(
-    (ev: MouseEvent) => {
+    (ev: MouseEvent<Y>) => {
       if (ev.button !== 0) return
 
       setIsPressed(false)
@@ -164,7 +173,7 @@ export const useClickable = ({
   )
 
   const handleMouseDown = useCallback(
-    (ev: MouseEvent<HTMLElement>) => {
+    (ev: MouseEvent<Y>) => {
       if (ev.button !== 0) return
 
       if (isDisabled) {
@@ -186,7 +195,7 @@ export const useClickable = ({
   )
 
   const handleMouseUp = useCallback(
-    (ev: MouseEvent<HTMLElement>) => {
+    (ev: MouseEvent<Y>) => {
       if (ev.button !== 0) return
 
       if (!isButton) setIsPressed(false)
@@ -197,7 +206,7 @@ export const useClickable = ({
   )
 
   const handleMouseOver = useCallback(
-    (ev: MouseEvent<HTMLElement>) => {
+    (ev: MouseEvent<Y>) => {
       if (isDisabled) {
         ev.preventDefault()
 
@@ -210,7 +219,7 @@ export const useClickable = ({
   )
 
   const handleMouseLeave = useCallback(
-    (ev: MouseEvent<HTMLElement>) => {
+    (ev: MouseEvent<Y>) => {
       if (isPressed) {
         ev.preventDefault()
 

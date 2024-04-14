@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Tag, Tbody, Td, Tr } from "@yamada-ui/react"
+import { Checkbox, Flex, Tag, Tbody, Td, Text, Tr } from "@yamada-ui/react"
 import { useMemo, type Dispatch, type FC, type SetStateAction } from "react"
 import { priority, status } from "../../data/data"
 import type { Task } from "../../data/tasks"
@@ -34,26 +34,26 @@ export const Body: FC<BodyProps> = ({
     <Tbody>
       {tasks.slice(pageStart, pageEnd).map((task) => (
         <Tr key={task.id}>
-          <Td>
+          <Td verticalAlign="middle">
             <Checkbox
               isChecked={rowSelection[task.id]}
               onChange={() => handleCheck(task.id)}
             />
           </Td>
-          <Td>{task.id}</Td>
-          <Td>
+          <Td verticalAlign="middle">{task.id}</Td>
+          <Td verticalAlign="middle">
             <Flex alignItems="center" gap={4}>
               <Tag colorScheme="neutral">{task.label}</Tag>
-              {task.title}
+              <Text flexShrink={1}>{task.title}</Text>
             </Flex>
           </Td>
-          <Td>
+          <Td verticalAlign="middle">
             <Flex alignItems="center" gap={4}>
               {status[task.status].icon}
               {status[task.status].label}
             </Flex>
           </Td>
-          <Td>
+          <Td verticalAlign="middle">
             <Flex alignItems="center" gap={4}>
               {priority[task.priority].icon}
               {priority[task.priority].label}

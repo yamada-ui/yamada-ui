@@ -36,21 +36,23 @@ export const Footer: FC<FooterProps> = ({
   }
 
   return (
-    <Flex alignItems="center" g={4}>
+    <Flex alignItems="center" g={8}>
       <Text fontSize="sm">
         {selectedDataCount} of {dataCount} row(s) selected.
       </Text>
       <Spacer />
-      <Text fontSize="sm" fontWeight="bold">
-        Rows per page
-      </Text>
-      <Select value={`${pageSize}`} onChange={handleSelect} w={32} size="sm">
-        {[10, 20, 30, 40, 50].map((option) => (
-          <Option key={option} value={`${option}`}>
-            {option}
-          </Option>
-        ))}
-      </Select>
+      <Flex alignItems="center" g={4}>
+        <Text fontSize="sm" fontWeight="bold">
+          Rows per page
+        </Text>
+        <Select value={`${pageSize}`} onChange={handleSelect} w={24} size="sm">
+          {[10, 20, 30, 40, 50].map((option) => (
+            <Option key={option} value={`${option}`}>
+              {option}
+            </Option>
+          ))}
+        </Select>
+      </Flex>
       <Text fontSize="sm" fontWeight="bold">
         Page {page} of {Math.ceil(dataCount / pageSize)}
       </Text>

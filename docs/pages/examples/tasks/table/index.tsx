@@ -18,7 +18,7 @@ export const Table: FC<TableProps> = ({
   pageSize,
 }) => (
   <TableContainer>
-    <NativeTable withBorder>
+    <NativeTable withBorder highlightOnHover>
       <Head rowSelection={rowSelection} setRowSelection={setRowSelection} />
       <Body
         rowSelection={rowSelection}

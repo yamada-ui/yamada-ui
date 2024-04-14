@@ -2,4 +2,4 @@
 "@yamada-ui/charts": patch
 ---
 
-fix: assigned-cursor
+fix: assigned className to cursor

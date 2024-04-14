@@ -342,7 +342,6 @@ describe("<AreaChart />", () => {
     ).not.toBeInTheDocument()
   })
 
-  //TODO: .recharts-tooltip-cursor is rechart className. ui-chart__cursor shoud be used.
   test("cursor shoud be renderd along with tooltip", async () => {
     const { rerender, container } = render(
       <AreaChart
@@ -368,9 +367,7 @@ describe("<AreaChart />", () => {
       clientY: 200,
     })
 
-    expect(
-      container.querySelector(".recharts-tooltip-cursor"),
-    ).toBeInTheDocument()
+    expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
 
     rerender(
       <AreaChart
@@ -396,9 +393,7 @@ describe("<AreaChart />", () => {
       clientY: 200,
     })
 
-    expect(
-      container.querySelector(".recharts-tooltip-cursor"),
-    ).not.toBeInTheDocument()
+    expect(container.querySelector(".ui-chart__cursor")).not.toBeInTheDocument()
   })
 
   test("legend should be rendered according to withLegend", async () => {

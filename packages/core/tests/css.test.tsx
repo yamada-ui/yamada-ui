@@ -1,5 +1,8 @@
+import { render, screen } from "@yamada-ui/test"
+import type { FC } from "react"
+import type { MockInstance } from "vitest"
 import type { StyledTheme } from "../src"
-import { css, transformTheme } from "../src"
+import { css, transformTheme, useCSS, ui } from "../src"
 
 const theme = transformTheme(
   {
@@ -139,19 +142,21 @@ const theme = transformTheme(
 ) as StyledTheme
 
 describe("CSS", () => {
-  const defaultGetComputedStyle = window.getComputedStyle
+  let getComputedStyleMock: MockInstance
 
-  beforeAll(() => {
-    vi.spyOn(window, "getComputedStyle").mockImplementation(
-      () =>
-        ({
-          fontSize: "16px",
-        }) as CSSStyleDeclaration,
-    )
+  beforeEach(() => {
+    getComputedStyleMock = vi
+      .spyOn(window, "getComputedStyle")
+      .mockImplementation(
+        () =>
+          ({
+            fontSize: "16px",
+          }) as CSSStyleDeclaration,
+      )
   })
 
-  afterAll(() => {
-    window.getComputedStyle = defaultGetComputedStyle
+  afterEach(() => {
+    getComputedStyleMock.mockRestore()
   })
 
   test("returns system props styles", () => {
@@ -312,6 +317,47 @@ describe("CSS", () => {
       color: "transparent",
       fontSize: "var(--ui-fontSizes-5xl)",
       width: "full",
+    })
+  })
+})
+
+describe("useCSS", () => {
+  test("returns styles with theme values", async () => {
+    const Component: FC = () => {
+      const className = useCSS({
+        display: "block",
+        color: "gray.500",
+        fontSize: "md",
+        mx: "4",
+      })
+
+      return <ui.div data-testid="component" className={className} />
+    }
+
+    render(<Component />)
+
+    expect(screen.getByTestId("component")).toHaveStyle({
+      display: "block",
+      color: "var(--ui-colors-gray-500)",
+      fontSize: "var(--ui-fontSizes-md)",
+      marginInlineEnd: "var(--ui-spaces-4)",
+      marginInlineStart: "var(--ui-spaces-4)",
+    })
+  })
+
+  test("supports functional values", () => {
+    const Component: FC = () => {
+      const className = useCSS({
+        color: (t: StyledTheme) => t.colors.gray[500],
+      })
+
+      return <ui.div data-testid="component" className={className} />
+    }
+
+    render(<Component />)
+
+    expect(screen.getByTestId("component")).toHaveStyle({
+      color: "#6b7280",
     })
   })
 })

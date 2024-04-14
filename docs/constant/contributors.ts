@@ -6,6 +6,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Dhoni77",
   },
   {
+    id: 117662771,
+    name: "melodyclue",
+    icon: "https://avatars.githubusercontent.com/u/117662771?v=4",
+    url: "https://github.com/melodyclue",
+  },
+  {
     id: 69517378,
     name: "teru12012000",
     icon: "https://avatars.githubusercontent.com/u/69517378?v=4",
@@ -114,6 +120,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/june23hy",
   },
   {
+    id: 130725752,
+    name: "Hinata0607",
+    icon: "https://avatars.githubusercontent.com/u/130725752?v=4",
+    url: "https://github.com/Hinata0607",
+  },
+  {
     id: 50375170,
     name: "AVAM16",
     icon: "https://avatars.githubusercontent.com/u/50375170?v=4",
@@ -124,6 +136,12 @@ export const CONTRIBUTORS = [
     name: "yamao-latte",
     icon: "https://avatars.githubusercontent.com/u/50776036?v=4",
     url: "https://github.com/yamao-latte",
+  },
+  {
+    id: 131145050,
+    name: "xBlackTea",
+    icon: "https://avatars.githubusercontent.com/u/131145050?v=4",
+    url: "https://github.com/xBlackTea",
   },
   {
     id: 75669598,

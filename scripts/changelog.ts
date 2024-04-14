@@ -5,6 +5,8 @@ import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
 import { isArray } from "@yamada-ui/react"
 import c from "chalk"
+import type { Project } from "find-packages"
+import { findPackages } from "find-packages"
 import { prettier } from "./utils"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
@@ -19,6 +21,9 @@ export type PullRequestData = {
   date: string
   version: string | undefined
 }
+
+const OMITTED_DESCRIPTION =
+  "> The changelog information of each package has been omitted from this message, as the content exceeds the size limit."
 
 const REPO_REQUEST_PARAMETERS = {
   owner: "yamada-ui",
@@ -96,13 +101,92 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
   }
 }
 
-const generateChangelog = ({
+let cachePackages: Map<string, Project>
+
+const getPackages = async (): Promise<Map<string, Project>> => {
+  let packages: Map<string, Project> = new Map()
+
+  if (cachePackages) {
+    packages = cachePackages
+  } else {
+    const data = await findPackages("packages", {
+      ignore: ["**/node_modules/**", "**/tests/**"],
+    })
+
+    data.forEach((data) => {
+      if (data.manifest.name) packages.set(data.manifest.name, data)
+    })
+
+    cachePackages = packages
+  }
+
+  return packages
+}
+
+let cacheChangelogs: Map<string, string> = new Map()
+
+const getChangelog = async (dir: string) => {
+  let changelog = cacheChangelogs.get(dir)
+
+  if (!changelog) {
+    changelog = await readFile(`${dir}/CHANGELOG.md`, "utf-8")
+
+    cacheChangelogs.set(dir, changelog)
+  }
+
+  return changelog
+}
+
+const restoreChangelog = async (content: string): Promise<string> => {
+  const packages = await getPackages()
+
+  const changelogs = await Promise.all(
+    content
+      .split("\n## ")
+      .map((section) => section.replace("## ", "").trim())
+      .map(async (name) => {
+        const [, packageName, version] = name.match(/(@?[^@]+)@([^@]+)/) ?? []
+
+        const { dir } = packages.get(packageName) ?? {}
+
+        if (!dir) throw new Error(`Not found package ${packageName}`)
+
+        const changelog = await getChangelog(dir)
+
+        const match = new RegExp(
+          `## ${version}([\\s\\S]*?)(?=## \\d)`,
+          "g",
+        ).exec(changelog)
+
+        if (!match)
+          throw new Error(`Not found version ${packageName}@${version}`)
+
+        const content = match[0].replace(new RegExp(`## ${version}`), "").trim()
+
+        return { name, content }
+      }),
+  )
+
+  content = content
+    .split("\n## ")
+    .map((str) => {
+      const { content } =
+        changelogs.find(({ name }) => name === str.trim()) ?? {}
+
+      return `## ${str}\n` + content
+    })
+    .join("\n")
+
+  return content
+}
+
+const generateChangelog = async ({
   body: content,
   merged_at,
   updated_at,
   number: id,
   html_url: url,
-}: PullRequest): PullRequestData | undefined => {
+}: PullRequest): Promise<PullRequestData | undefined> => {
   if (!content) return
 
   const parts = content.split("# Releases")
@@ -119,6 +203,16 @@ const generateChangelog = ({
 
   if (!version) return
 
+  const isOmitted = new RegExp(`^\s*${OMITTED_DESCRIPTION}`, "m").test(content)
+
+  if (isOmitted) {
+    content = content
+      .replace(new RegExp(`^\s*${OMITTED_DESCRIPTION}`, "m"), "")
+      .trim()
+
+    content = await restoreChangelog(content)
+  }
+
   content = content
     .replace(/\n### /g, "\n#### ")
     .replace(/\n## /g, "\n### ")
@@ -127,7 +221,7 @@ const generateChangelog = ({
   const sections = content
     .split("\n### ")
     .slice(1)
-    .map((section) => "### " + section.trim())
+    .map((str) => "### " + str.trim())
 
   const { main, dependencies } = sections.reduce<{
     main: string[]
@@ -233,18 +327,18 @@ const main = async () => {
     s.start(`Generating the version file`)
 
     if (isArray(pullRequests)) {
-      const data = pullRequests
-        .map(generateChangelog)
-        .filter(Boolean) as PullRequestData[]
+      const data = await Promise.all(pullRequests.map(generateChangelog))
 
-      if (!data.length) throw new Error("Nothing to change")
+      const resolvedData = data.filter(Boolean) as PullRequestData[]
+
+      if (!resolvedData.length) throw new Error("Nothing to change")
 
       await Promise.allSettled([
-        ...data.map(writeVersionFile),
-        manifest.write(data),
+        ...resolvedData.map(writeVersionFile),
+        manifest.write(resolvedData),
       ])
     } else {
-      const data = generateChangelog(pullRequests)
+      const data = await generateChangelog(pullRequests)
 
       if (!data) throw new Error("Nothing to change")
 

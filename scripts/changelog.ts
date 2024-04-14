@@ -70,15 +70,29 @@ const getPullRequests = async () => {
 
     return data as PullRequest
   } else {
-    const { data } = await octokit.pulls.list({
-      ...REPO_REQUEST_PARAMETERS,
-      state: "all",
-      base: "main",
-      head: "yamada-ui:changeset-release/main",
-      per_page: 100,
-    })
+    let pullRequests: PullRequest[] = []
+    let page = 1
+    let count = 0
+    const perPage = 100
 
-    return (data as PullRequests).filter(({ merged_at }) => merged_at)
+    do {
+      const { data } = await octokit.pulls.list({
+        ...REPO_REQUEST_PARAMETERS,
+        state: "all",
+        base: "main",
+        head: "yamada-ui:changeset-release/main",
+        per_page: perPage,
+        page,
+      })
+
+      pullRequests.push(...data)
+
+      count = data.length
+
+      page++
+    } while (count === perPage)
+
+    return pullRequests.filter(({ merged_at }) => merged_at)
   }
 }
 

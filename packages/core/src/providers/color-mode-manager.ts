@@ -87,7 +87,7 @@ export const createColorModeManager = (
 export const colorModeManager = {
   localStorage: createLocalStorage(COLOR_MODE_STORAGE_KEY),
   cookieStorage: createCookieStorage(COLOR_MODE_STORAGE_KEY),
-  ssr: (cookie: string) => createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie),
+  ssr: (cookie?: string) => createCookieStorage(COLOR_MODE_STORAGE_KEY, cookie),
   createLocalStorage,
   createCookieStorage,
 }

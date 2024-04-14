@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, render, waitFor, screen } from "@yamada-ui/test"
+import { a11y, render, waitFor } from "@yamada-ui/test"
 import { Dialog, DialogHeader, DialogFooter, DialogBody } from "../src"
 
 describe("<Dialog />", () => {
@@ -91,7 +91,9 @@ describe("<Dialog />", () => {
   })
 
   test("Dialog renders correctly when close", async () => {
-    const { user, findByTestId, getByText } = render(<DialogCloseExample />)
+    const { user, findByTestId, queryByTestId, getByText } = render(
+      <DialogCloseExample />,
+    )
 
     const openDialogButton = await findByTestId("OpenDialog")
 
@@ -99,23 +101,23 @@ describe("<Dialog />", () => {
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const cancelDialogButton = getByText("dialog-cancel")
     await user.click(cancelDialogButton)
-    waitFor(() => {
-      expect(screen.findByTestId("Dialog")).toBeNull()
+    await waitFor(async () => {
+      expect(queryByTestId("Dialog")).toBeNull()
     })
     await user.click(openDialogButton)
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const otherDialogButton = getByText("dialog-other")
     await user.click(otherDialogButton)
-    waitFor(() => {
-      expect(screen.findByTestId("Dialog")).toBeNull()
+    await waitFor(async () => {
+      expect(queryByTestId("Dialog")).toBeNull()
     })
 
     await user.click(openDialogButton)
     await expect(findByTestId("Dialog")).resolves.toBeInTheDocument()
     const successDialogButton = getByText("dialog-success")
     await user.click(successDialogButton)
-    waitFor(() => {
-      expect(screen.findByTestId("Dialog")).toBeNull()
+    await waitFor(async () => {
+      expect(queryByTestId("Dialog")).toBeNull()
     })
   })
 })

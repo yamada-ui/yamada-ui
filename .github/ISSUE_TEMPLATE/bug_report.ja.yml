@@ -23,6 +23,7 @@ body:
         - "@yamada-ui/calendar"
         - "@yamada-ui/carousel"
         - "@yamada-ui/dropzone"
+        - "@yamada-ui/charts"
         - "@yamada-ui/markdown"
         - "@yamada-ui/fontawesome"
         - "@yamada-ui/cli"

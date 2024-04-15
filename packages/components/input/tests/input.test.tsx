@@ -1,5 +1,12 @@
 import { render, a11y, screen } from "@yamada-ui/test"
-import { Input, InputGroup, InputLeftElement, InputRightElement } from "../src"
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputLeftElement,
+  InputRightAddon,
+  InputRightElement,
+} from "../src"
 
 describe("<Input />", () => {
   test("passes a11y test", async () => {
@@ -26,6 +33,17 @@ describe("<Input />", () => {
     )
     expect(getByText("Hello")).toBeInTheDocument()
     expect(getByText("World")).toBeInTheDocument()
+  })
+
+  test("Elements inside input-addon render correctly", () => {
+    const { getByText } = render(
+      <InputGroup>
+        <InputLeftAddon>https:</InputLeftAddon>
+        <InputRightAddon>.com</InputRightAddon>
+      </InputGroup>,
+    )
+    expect(getByText("https:")).toBeInTheDocument()
+    expect(getByText(".com")).toBeInTheDocument()
   })
 
   test("Invalid input renders correctly", () => {

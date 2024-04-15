@@ -6,9 +6,14 @@ import { columns } from "../../data/tasks"
 interface HeaderProps {
   rowSelection: Record<Task["id"], boolean>
   setRowSelection: Dispatch<SetStateAction<Record<Task["id"], boolean>>>
+  displayColumns: Record<"title" | "status" | "priority", boolean>
 }
 
-export const Head: FC<HeaderProps> = ({ rowSelection, setRowSelection }) => {
+export const Head: FC<HeaderProps> = ({
+  rowSelection,
+  setRowSelection,
+  displayColumns,
+}) => {
   const handleSelectAll = () => {
     const isAllSelected = Object.values(rowSelection).every(Boolean)
 
@@ -32,9 +37,13 @@ export const Head: FC<HeaderProps> = ({ rowSelection, setRowSelection }) => {
             onChange={handleSelectAll}
           />
         </Th>
-        {columns.map((column) => (
-          <Th key={column.accessorKey}>{column.header}</Th>
-        ))}
+        {columns.map(
+          (column) =>
+            (column.accessorKey === "id" ||
+              displayColumns[column.accessorKey]) && (
+              <Th key={column.accessorKey}>{column.header}</Th>
+            ),
+        )}
       </Tr>
     </Thead>
   )

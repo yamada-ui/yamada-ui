@@ -22,6 +22,11 @@ export const Tasks = memo(() => {
   const [filterPriority, setFilterPriority] = useState<
     Record<Task["priority"], boolean>
   >(initialFilterPriority)
+  const [displayColumns, setDisplayColumns] = useState({
+    title: true,
+    status: true,
+    priority: true,
+  })
   const [pageSize, setPageSize] = useState<10 | 20 | 30 | 40 | 50>(10)
   const [page, setPage] = useState(1)
   const [rowSelection, setRowSelection] = useState<Record<Task["id"], boolean>>(
@@ -58,6 +63,8 @@ export const Tasks = memo(() => {
         setFilterStatus={setFilterStatus}
         filterPriority={filterPriority}
         setFilterPriority={setFilterPriority}
+        displayColumns={displayColumns}
+        setDisplayColumns={setDisplayColumns}
       />
       <Table
         rowSelection={rowSelection}
@@ -65,6 +72,7 @@ export const Tasks = memo(() => {
         page={page}
         pageSize={pageSize}
         filteredTasks={filteredTasks}
+        displayColumns={displayColumns}
       />
       <Footer
         rowSelection={rowSelection}

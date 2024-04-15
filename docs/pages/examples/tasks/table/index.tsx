@@ -10,6 +10,7 @@ interface TableProps {
   page: number
   pageSize: 10 | 20 | 30 | 40 | 50
   filteredTasks: Task[]
+  displayColumns: Record<"title" | "status" | "priority", boolean>
 }
 
 export const Table: FC<TableProps> = ({
@@ -18,16 +19,22 @@ export const Table: FC<TableProps> = ({
   page,
   pageSize,
   filteredTasks,
+  displayColumns,
 }) => (
   <TableContainer>
     <NativeTable withBorder highlightOnHover>
-      <Head rowSelection={rowSelection} setRowSelection={setRowSelection} />
+      <Head
+        rowSelection={rowSelection}
+        setRowSelection={setRowSelection}
+        displayColumns={displayColumns}
+      />
       <Body
         rowSelection={rowSelection}
         setRowSelection={setRowSelection}
         page={page}
         pageSize={pageSize}
         filteredTasks={filteredTasks}
+        displayColumns={displayColumns}
       />
     </NativeTable>
   </TableContainer>

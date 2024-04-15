@@ -9,6 +9,7 @@ interface BodyProps {
   page: number
   pageSize: 10 | 20 | 30 | 40 | 50
   filteredTasks: Task[]
+  displayColumns: Record<"title" | "status" | "priority", boolean>
 }
 
 export const Body: FC<BodyProps> = ({
@@ -17,6 +18,7 @@ export const Body: FC<BodyProps> = ({
   page,
   pageSize,
   filteredTasks,
+  displayColumns,
 }) => {
   const handleCheck = (id: Task["id"]) => {
     setRowSelection((prev) => ({
@@ -42,24 +44,30 @@ export const Body: FC<BodyProps> = ({
             />
           </Td>
           <Td verticalAlign="middle">{task.id}</Td>
-          <Td verticalAlign="middle">
-            <Flex alignItems="center" gap={4}>
-              <Tag colorScheme="neutral">{task.label}</Tag>
-              <Text flexShrink={1}>{task.title}</Text>
-            </Flex>
-          </Td>
-          <Td verticalAlign="middle">
-            <Flex alignItems="center" gap={4}>
-              {status[task.status].icon}
-              {status[task.status].label}
-            </Flex>
-          </Td>
-          <Td verticalAlign="middle">
-            <Flex alignItems="center" gap={4}>
-              {priority[task.priority].icon}
-              {priority[task.priority].label}
-            </Flex>
-          </Td>
+          {displayColumns.title && (
+            <Td verticalAlign="middle">
+              <Flex alignItems="center" gap={4}>
+                <Tag colorScheme="neutral">{task.label}</Tag>
+                <Text flexShrink={1}>{task.title}</Text>
+              </Flex>
+            </Td>
+          )}
+          {displayColumns.status && (
+            <Td verticalAlign="middle">
+              <Flex alignItems="center" gap={4}>
+                {status[task.status].icon}
+                {status[task.status].label}
+              </Flex>
+            </Td>
+          )}
+          {displayColumns.priority && (
+            <Td verticalAlign="middle">
+              <Flex alignItems="center" gap={4}>
+                {priority[task.priority].icon}
+                {priority[task.priority].label}
+              </Flex>
+            </Td>
+          )}
         </Tr>
       ))}
     </Tbody>

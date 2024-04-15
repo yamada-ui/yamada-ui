@@ -1,4 +1,4 @@
-import { Button, Flex, Icon, Input } from "@yamada-ui/react"
+import { Button, Flex, Icon, Input, Spacer } from "@yamada-ui/react"
 import {
   useMemo,
   type ChangeEvent,
@@ -11,6 +11,7 @@ import { priority, status } from "../data/data"
 import type { Task } from "../data/tasks"
 import { Priority } from "./priority"
 import { Status } from "./status"
+import { View } from "./view"
 
 interface FilterProps {
   filterWord: string
@@ -19,6 +20,10 @@ interface FilterProps {
   setFilterStatus: Dispatch<SetStateAction<Record<Task["status"], boolean>>>
   filterPriority: Record<Task["priority"], boolean>
   setFilterPriority: Dispatch<SetStateAction<Record<Task["priority"], boolean>>>
+  displayColumns: Record<"title" | "status" | "priority", boolean>
+  setDisplayColumns: Dispatch<
+    SetStateAction<Record<"title" | "status" | "priority", boolean>>
+  >
 }
 
 const initialFilterStatus = Object.fromEntries(
@@ -36,6 +41,8 @@ export const Filter: FC<FilterProps> = ({
   setFilterStatus,
   filterPriority,
   setFilterPriority,
+  displayColumns,
+  setDisplayColumns,
 }) => {
   const isFiltered = useMemo(
     () =>
@@ -81,6 +88,11 @@ export const Filter: FC<FilterProps> = ({
           Reset
         </Button>
       )}
+      <Spacer />
+      <View
+        displayColumns={displayColumns}
+        setDisplayColumns={setDisplayColumns}
+      />
     </Flex>
   )
 }

@@ -141,7 +141,7 @@ export default app
 ```
 
 :::note
-`index.tsx`が先にサーバー側で生成され表示される際の、ダークモード時のフラッシュを防止するために、`ColorModeScript`と`ThemeSchemeScript`を追加する必要があります。
+`index.tsx`に`ColorModeScript`と`ThemeSchemeScript`を追加する必要があるのは、サーバーサイドでレンダリングされたページがクライアントに送信された際、ダークモードを使用している場合の画面のフラッシュを防ぐためです。
 :::
 
 `package.json`に`"type": "module"`を追加します。

@@ -141,7 +141,7 @@ export default app
 ```
 
 :::note
-`ColorModeScript` and `ThemeSchemeScript` must be added to prevent flashing in dark mode when `index.tsx` is generated and displayed on the server side first.
+The reason for adding `ColorModeScript` and `ThemeSchemeScript` to `index.tsx` is to prevent the screen from flashing when a page rendered on the server-side is sent to the client, especially when dark mode is being used.
 :::
 
 Add `"type": "module"` to `package.json`.

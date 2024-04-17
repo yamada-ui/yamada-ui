@@ -75,6 +75,11 @@ type PopoverOptions = {
    */
   initialFocusRef?: RefObject<{ focus(): void }>
   /**
+   * The `ref` of the element related to the popover.
+   * This is used during the `onBlur` event.
+   */
+  relatedRef?: RefObject<HTMLElement>
+  /**
    * If `true`, focus will be returned to the element that triggers the popover when it closes.
    *
    * @default true
@@ -193,6 +198,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     lazyBehavior = "unmount",
     animation = "scale",
     duration,
+    relatedRef,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -272,8 +278,12 @@ export const Popover: FC<PopoverProps> = (props) => {
           const relatedTarget = getEventRelatedTarget(ev)
           const targetIsPopover = isContains(popoverRef.current, relatedTarget)
           const targetIsTrigger = isContains(triggerRef.current, relatedTarget)
+          const targetIsRelated = relatedRef?.current
+            ? isContains(relatedRef.current, relatedTarget)
+            : false
 
-          const isValidBlur = !targetIsPopover && !targetIsTrigger
+          const isValidBlur =
+            !targetIsPopover && !targetIsTrigger && !targetIsRelated
 
           if (isOpen && closeOnBlur && isValidBlur) onClose()
         }),
@@ -303,6 +313,7 @@ export const Popover: FC<PopoverProps> = (props) => {
       shouldRenderChildren,
       transformOrigin,
       trigger,
+      relatedRef,
     ],
   )
 

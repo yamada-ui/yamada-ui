@@ -1,5 +1,24 @@
 # @yamada-ui/menu
 
+## 1.0.23
+
+### Patch Changes
+
+- [#1206](https://github.com/yamada-ui/yamada-ui/pull/1206) [`574b5b3`](https://github.com/yamada-ui/yamada-ui/commit/574b5b3824626214a1abd05c68f7fb46f824d1d3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `defaultValue` of `MenuOptionGroup` was not working.
+
+- [#1207](https://github.com/yamada-ui/yamada-ui/pull/1207) [`c73cc51`](https://github.com/yamada-ui/yamada-ui/commit/c73cc51ad744c1a694c96765d8640c0efb0c29f3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `MenuItem` event handlers were not working.
+
+- Updated dependencies [[`a539f54`](https://github.com/yamada-ui/yamada-ui/commit/a539f54ef32239b068b20eec5add0c5ebe1f1b76), [`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/use-clickable@1.1.0
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/motion@1.0.23
+  - @yamada-ui/popover@1.0.23
+  - @yamada-ui/transitions@1.0.23
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-controllable-state@1.0.12
+  - @yamada-ui/use-descendant@1.0.12
+  - @yamada-ui/use-disclosure@1.0.12
+
 ## 1.0.22
 
 ### Patch Changes

@@ -12,6 +12,31 @@ import {
 } from "@yamada-ui/react"
 import { memo } from "react"
 
+const checkboxElements = [
+  "All new messages",
+  "Direct messages and mentions",
+  "Nothing",
+]
+
+const cardElements = [
+  {
+    header: "Communication emails",
+    body: "Receive emails about your account activity.",
+  },
+  {
+    header: "Marketing emails",
+    body: "Receive emails about new products, features, and more.",
+  },
+  {
+    header: "Social emails",
+    body: "Receive emails for friend requests, follows, and more.",
+  },
+  {
+    header: "Security emails",
+    body: "Receive emails about your account activity and security.",
+  },
+]
+
 export const NotificationsForm = memo(() => {
   return (
     <VStack divider={<Divider />}>
@@ -27,57 +52,28 @@ export const NotificationsForm = memo(() => {
         <Text as="h6" fontSize="sm">
           Notify me about...
         </Text>
-        <Checkbox>All new messages</Checkbox>
-        <Checkbox>Direct messages and mentions</Checkbox>
-        <Checkbox>Nothing</Checkbox>
+        {checkboxElements.map((checkboxElement, index) => (
+          <Checkbox key={index}>{checkboxElement}</Checkbox>
+        ))}
         <Spacer />
         <Text as="h6" fontSize="sm">
           Email Notifications
         </Text>
-        <Card variant="outline">
-          <CardHeader>Communication emails</CardHeader>
-          <CardBody>
-            <HStack>
-              <Text as="p" color="muted" fontSize="xs">
-                Receive emails about your account activity.
-              </Text>
-              <Switch />
-            </HStack>
-          </CardBody>
-        </Card>
-        <Card variant="outline">
-          <CardHeader>Marketing emails</CardHeader>
-          <CardBody>
-            <HStack>
-              <Text as="p" color="muted" fontSize="xs">
-                Receive emails about new products, features, and more.
-              </Text>
-              <Switch />
-            </HStack>
-          </CardBody>
-        </Card>
-        <Card variant="outline">
-          <CardHeader>Social emails</CardHeader>
-          <CardBody>
-            <HStack>
-              <Text as="p" color="muted" fontSize="xs">
-                Receive emails for friend requests, follows, and more.
-              </Text>
-              <Switch />
-            </HStack>
-          </CardBody>
-        </Card>
-        <Card variant="outline">
-          <CardHeader>Security emails</CardHeader>
-          <CardBody>
-            <HStack>
-              <Text as="p" color="muted" fontSize="xs">
-                Receive emails about your account activity and security.
-              </Text>
-              <Switch />
-            </HStack>
-          </CardBody>
-        </Card>
+
+        {cardElements.map((cardElement, index) => (
+          <Card key={index} variant="outline">
+            <CardHeader>{cardElement.header}</CardHeader>
+            <CardBody>
+              <HStack>
+                <Text as="p" color="muted" fontSize="xs">
+                  {cardElement.body}
+                </Text>
+                <Switch />
+              </HStack>
+            </CardBody>
+          </Card>
+        ))}
+
         <Spacer />
         <HStack>
           <Checkbox />

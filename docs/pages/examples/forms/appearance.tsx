@@ -5,8 +5,13 @@ import {
   Divider,
   NativeSelect,
   NativeOption,
+  Radio,
+  HStack,
+  Box,
 } from "@yamada-ui/react"
 import { memo } from "react"
+
+const fonts = ["Inter", "Manrope", "System"]
 
 export const AppearanceForm = memo(() => {
   return (
@@ -25,9 +30,11 @@ export const AppearanceForm = memo(() => {
           Font
         </Text>
         <NativeSelect width="xs">
-          <NativeOption value="Inter">Inter</NativeOption>
-          <NativeOption value="Manrope">Manrope</NativeOption>
-          <NativeOption value="System">System</NativeOption>
+          {fonts.map((font, index) => (
+            <NativeOption key={index} value={font}>
+              {font}
+            </NativeOption>
+          ))}
         </NativeSelect>
         <Text as="p" color="muted" fontSize="xs">
           Set the font you want to use in the dashboard.
@@ -39,6 +46,12 @@ export const AppearanceForm = memo(() => {
         <Text as="p" color="muted" fontSize="xs">
           Select the theme for the dashboard.
         </Text>
+        <HStack>
+          <Radio>
+            <Box>aaa</Box>
+          </Radio>
+          <Radio></Radio>
+        </HStack>
       </>
     </VStack>
   )

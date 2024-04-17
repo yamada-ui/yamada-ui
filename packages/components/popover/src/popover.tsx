@@ -298,7 +298,8 @@ export const Popover: FC<PopoverProps> = (props) => {
           if (ev.nativeEvent.relatedTarget === null) return
 
           isHoveringRef.current = false
-          setTimeout(onClose, closeDelay)
+
+          if (closeOnBlur) setTimeout(onClose, closeDelay)
         })
       }
 
@@ -371,7 +372,7 @@ export const Popover: FC<PopoverProps> = (props) => {
           }
 
           closeTimeout.current = window.setTimeout(() => {
-            if (isHoveringRef.current === false) onClose()
+            if (!isHoveringRef.current) onClose()
           }, closeDelay)
         })
       }

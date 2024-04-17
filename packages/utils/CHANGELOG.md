@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.1.3
+
+### Patch Changes
+
+- [#1204](https://github.com/yamada-ui/yamada-ui/pull/1204) [`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended `handlerAll` to support multiple args.
+
 ## 1.1.2
 
 ### Patch Changes

@@ -10,6 +10,18 @@ import {
 } from "@yamada-ui/react"
 import { memo } from "react"
 
+const countries = [
+  "English",
+  "French",
+  "German",
+  "Spanish",
+  "Portuguese",
+  "Russian",
+  "Japanese",
+  "Korean",
+  "Chinese",
+]
+
 export const AccountForm = memo(() => {
   return (
     <VStack divider={<Divider />}>
@@ -43,15 +55,11 @@ export const AccountForm = memo(() => {
           Language
         </Text>
         <Select width="xs">
-          <Option value="English">English</Option>
-          <Option value="French">French</Option>
-          <Option value="German">German</Option>
-          <Option value="Spanish">Spanish</Option>
-          <Option value="Portuguese">Portuguese</Option>
-          <Option value="Russian">Russian</Option>
-          <Option value="Japanese">Japanese</Option>
-          <Option value="Korean">Korean</Option>
-          <Option value="Chinese">Chinese</Option>
+          {countries.map((country, index) => (
+            <Option key={index} value={country}>
+              {country}
+            </Option>
+          ))}
         </Select>
         <Text as="p" color="muted" fontSize="xs">
           This is the language that will be used in the dashboard.

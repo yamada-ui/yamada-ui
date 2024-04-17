@@ -11,6 +11,8 @@ import {
 } from "@yamada-ui/react"
 import { memo } from "react"
 
+const emails = ["m@example.com", "m@google.com", "m@support.com"]
+
 export const ProfileForm = memo(() => {
   return (
     <VStack divider={<Divider />}>
@@ -36,9 +38,11 @@ export const ProfileForm = memo(() => {
           Email
         </Text>
         <Select>
-          <Option value="m@example.com">m@example.com</Option>
-          <Option value="m@google.com">m@google.com</Option>
-          <Option value="m@support.com">m@support.com</Option>
+          {emails.map((email, index) => (
+            <Option key={index} value={email}>
+              {email}
+            </Option>
+          ))}
         </Select>
         <Text as="p" color="muted" fontSize="xs">
           You can manage verified email addresses in your email settings.

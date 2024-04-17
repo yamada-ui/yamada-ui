@@ -8,6 +8,15 @@ import {
 } from "@yamada-ui/react"
 import { memo } from "react"
 
+const checkboxElements = [
+  "Recents",
+  "Home",
+  "Applications",
+  "Desktop",
+  "Downloads",
+  "Documents",
+]
+
 export const DisplayForm = memo(() => {
   return (
     <VStack divider={<Divider />}>
@@ -27,12 +36,9 @@ export const DisplayForm = memo(() => {
           Select the items you want to display in the sidebar.
         </Text>
         <VStack gap={0}>
-          <Checkbox>Recents</Checkbox>
-          <Checkbox>Home</Checkbox>
-          <Checkbox>Applications</Checkbox>
-          <Checkbox>Desktop</Checkbox>
-          <Checkbox>Downloads</Checkbox>
-          <Checkbox>Documents</Checkbox>
+          {checkboxElements.map((checkboxElement, index) => (
+            <Checkbox key={index}>{checkboxElement}</Checkbox>
+          ))}
         </VStack>
         <Spacer />
         <Button

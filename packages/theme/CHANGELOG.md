@@ -1,5 +1,15 @@
 # @yamada-ui/theme
 
+## 1.5.5
+
+### Patch Changes
+
+- [#1208](https://github.com/yamada-ui/yamada-ui/pull/1208) [`22cd8ca`](https://github.com/yamada-ui/yamada-ui/commit/22cd8ca1c539b35feb43f81066b502940e95dc88) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where hover and focus styling was applied even when `MenuItem` was disabled.
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/core@1.6.4
+
 ## 1.5.4
 
 ### Patch Changes

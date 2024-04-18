@@ -6,7 +6,7 @@ export type OvalProps = IconProps & {
   /**
    * The CSS `stroke` property.
    */
-  secondaryColor: string
+  secondaryColor?: string
   /**
    * The CSS `dur` property.
    *

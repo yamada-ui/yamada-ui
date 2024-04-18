@@ -147,7 +147,7 @@ export type UseCarouselProps = Omit<
   /**
    * The CSS `gap` property.
    *
-   * @default 'md'
+   * @default '4'
    */
   gap?: CSSUIProps["gap"]
   /**
@@ -173,7 +173,7 @@ export const useCarousel = ({
   loop = true,
   speed = 10,
   delay = 4000,
-  gap = "1rem",
+  gap = "fallback(4, 1rem)",
   slidesToScroll = 1,
   draggable = true,
   dragFree = false,

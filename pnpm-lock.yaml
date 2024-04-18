@@ -1538,12 +1538,6 @@ importers:
       '@yamada-ui/use-timeout':
         specifier: workspace:*
         version: link:../../hooks/use-timeout
-      '@yamada-ui/use-token':
-        specifier: workspace:*
-        version: link:../../hooks/use-token
-      '@yamada-ui/use-value':
-        specifier: workspace:*
-        version: link:../../hooks/use-value
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils
@@ -10156,7 +10150,7 @@ packages:
       color-convert: 2.0.1
 
   /ansi-styles@5.2.0:
-    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
+    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz}
     engines: {node: '>=10'}
 
   /ansi-styles@6.2.1:

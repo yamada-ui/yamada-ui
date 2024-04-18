@@ -1,5 +1,14 @@
 # @yamada-ui/use-animation
 
+## 1.0.22
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-event-listener@1.0.12
+
 ## 1.0.21
 
 ### Patch Changes

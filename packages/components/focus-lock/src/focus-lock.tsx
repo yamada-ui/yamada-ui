@@ -54,6 +54,12 @@ export type FocusLockProps = {
   lockFocusAcrossFrames?: boolean
 }
 
+/**
+ * `FocusLock` is a component that improves accessibility by restricting focus within elements such as modals and dialogs, and locking the focus within that range.
+ *
+ * @see Docs https://yamada-ui.com/components/other/focus-lock
+ */
+
 export const FocusLock: FC<FocusLockProps> = ({
   initialFocusRef,
   finalFocusRef,

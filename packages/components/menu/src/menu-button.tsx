@@ -109,7 +109,7 @@ export const MenuItemButton = forwardRef<MenuItemButtonProps, "button">(
     return (
       <MenuButton
         ref={ref}
-        className={cx("ui-menu__item--button", className)}
+        className={cx("ui-menu__item-button", className)}
         flex="1"
         {...rest}
       >

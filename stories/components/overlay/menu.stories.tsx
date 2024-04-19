@@ -15,6 +15,7 @@ import {
   MenuDivider,
   MenuGroup,
   MenuItem,
+  MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
@@ -304,6 +305,45 @@ export const withPortal: Story = () => {
           <MenuItem>Preferences</MenuItem>
         </MenuList>
       </Portal>
+    </Menu>
+  )
+}
+
+export const nestedMenu: Story = () => {
+  return (
+    <Menu>
+      <MenuButton
+        as={Button}
+        rightIcon={<Icon size="xs" icon={faChevronDown} />}
+      >
+        Menu
+      </MenuButton>
+
+      <MenuList>
+        <MenuItem>
+          <Menu>
+            <MenuItemButton>Settings</MenuItemButton>
+
+            <MenuList>
+              <MenuItem>Extensions</MenuItem>
+              <MenuItem>
+                <Menu>
+                  <MenuItemButton>Theme</MenuItemButton>
+
+                  <MenuList>
+                    <MenuItem>Color Theme</MenuItem>
+                    <MenuItem>File Icon Theme</MenuItem>
+                    <MenuItem>Product Icon Theme</MenuItem>
+                  </MenuList>
+                </Menu>
+              </MenuItem>
+              <MenuItem>User Tasks</MenuItem>
+            </MenuList>
+          </Menu>
+        </MenuItem>
+        <MenuItem>Edit Profile</MenuItem>
+        <MenuItem>Preferences</MenuItem>
+      </MenuList>
     </Menu>
   )
 }

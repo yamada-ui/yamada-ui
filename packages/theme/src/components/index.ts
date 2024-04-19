@@ -33,6 +33,7 @@ import { Kbd } from "./kbd"
 import { LineChart } from "./line-chart"
 import { Link } from "./link"
 import { List } from "./list"
+import { Loading } from "./loading"
 import { Mark } from "./mark"
 import { Markdown } from "./markdown"
 import { Menu } from "./menu"
@@ -109,6 +110,7 @@ export default {
   LineChart,
   Link,
   List,
+  Loading,
   Mark,
   Markdown,
   Menu,

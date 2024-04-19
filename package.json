@@ -69,7 +69,6 @@
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.1",
     "@changesets/get-release-plan": "^4.0.0",
     "@changesets/types": "^6.0.0",
     "@clack/prompts": "^0.7.0",
@@ -165,5 +164,8 @@
       "react": "^18.2.0",
       "react-dom": "^18.2.0"
     }
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1"
   }
 }

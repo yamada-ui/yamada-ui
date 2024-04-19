@@ -1,13 +1,21 @@
-import { Center, Text } from "@yamada-ui/react"
+import { Center, Grid } from "@yamada-ui/react"
 import { memo } from "react"
-// import { useI18n } from "contexts/i18n-context"
+import { HeaderBottom } from "./header-bottom"
+import { HeaderTop } from "./header-top"
+import { Item } from "./item"
+import { Overview } from "./overview"
+import { RecentSales } from "./recent-sales"
 
 export const Dashboard = memo(() => {
-  // const { t } = useI18n()
-
   return (
-    <Center minH="lg">
-      <Text color="muted">Coming soon!</Text>
+    <Center minH="lg" style={{ display: "flex", flexDirection: "column" }}>
+      <HeaderTop />
+      <HeaderBottom />
+      <Item />
+      <Grid templateColumns="repeat(2, 1fr)" gap="md">
+        <Overview />
+        <RecentSales />
+      </Grid>
     </Center>
   )
 })

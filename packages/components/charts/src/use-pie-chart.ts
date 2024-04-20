@@ -7,25 +7,25 @@ import { getClassName, getComponentProps } from "./chart-utils"
 import type {
   CellProps,
   ChartPropGetter,
-  DonutChartProps,
-  DonutProps,
+  PieChartProps,
+  PieProps,
   RequiredChartPropGetter,
 } from "./chart.types"
 import { pieChartProperties, pieProperties } from "./rechart-properties"
 
-export type UseDonutChartOptions = {
+export type UsePieChartOptions = {
   /**
    * Chart data.
    */
   data: CellProps[]
   /**
-   * Props passed down to recharts `DonutChart` component.
+   * Props passed down to recharts `PieChart` component.
    */
-  chartProps?: DonutChartProps
+  chartProps?: PieChartProps
   /**
-   * Props for the donut.
+   * Props for the pie.
    */
-  donutProps?: Partial<DonutProps>
+  pieProps?: Partial<PieProps>
   /**
    * Props for the cell.
    */
@@ -61,7 +61,7 @@ export type UseDonutChartOptions = {
    */
   paddingAngle?: number
   /**
-   * Stroke width for the chart donuts.
+   * Stroke width for the chart pies.
    *
    * @default 0
    */
@@ -79,7 +79,7 @@ export type UseDonutChartOptions = {
    */
   endAngle?: number
   /**
-   * Controls fill opacity of all donuts.
+   * Controls fill opacity of all pies.
    *
    * @default 1
    */
@@ -90,11 +90,11 @@ export type UseDonutChartOptions = {
   valueFormatter?: (value: number) => string
 }
 
-type UseDonutChartProps = UseDonutChartOptions & {
+type UsePieChartProps = UsePieChartOptions & {
   styles: Dict<CSSUIObject>
 }
 
-export const useDonutChart = ({
+export const usePieChart = ({
   data,
   withLabels = false,
   withLabelLines = false,
@@ -107,7 +107,7 @@ export const useDonutChart = ({
   endAngle = 360,
   styles,
   ...rest
-}: UseDonutChartProps) => {
+}: UsePieChartProps) => {
   const { theme } = useTheme()
   const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
   const shouldHighlight = highlightedArea !== null
@@ -117,8 +117,8 @@ export const useDonutChart = ({
     inactiveShape = {},
     label,
     labelLine,
-    ...computedDonutProps
-  } = rest.donutProps ?? {}
+    ...computedPieProps
+  } = rest.pieProps ?? {}
 
   const cellColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -131,7 +131,7 @@ export const useDonutChart = ({
     [data],
   )
 
-  const donutVars: CSSUIProps["var"] = useMemo(
+  const pieVars: CSSUIProps["var"] = useMemo(
     () =>
       [
         ...cellColors,
@@ -149,13 +149,13 @@ export const useDonutChart = ({
     [rest.chartProps, styles.chart, theme],
   )
 
-  const [donutProps, donutClassName] = useMemo(
+  const [pieProps, pieClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [computedDonutProps, pieProperties],
-        styles.donut,
+        [computedPieProps, pieProperties],
+        styles.pie,
       )(theme),
-    [computedDonutProps, styles.donut, theme],
+    [computedPieProps, styles.pie, theme],
   )
 
   const cellClassName = useMemo(() => {
@@ -236,7 +236,7 @@ export const useDonutChart = ({
     ],
   )
 
-  const getDonutChartProps: ChartPropGetter<
+  const getPieChartProps: ChartPropGetter<
     "div",
     ComponentPropsWithoutRef<typeof Recharts.PieChart>,
     ComponentPropsWithoutRef<typeof Recharts.PieChart>
@@ -250,14 +250,15 @@ export const useDonutChart = ({
     [chartProps, chartClassName],
   )
 
-  const getDonutProps: ChartPropGetter<
+  // TODO: label and labelLine className should be separate donut and pie
+  const getPieProps: ChartPropGetter<
     "div",
     Partial<Recharts.PieProps>,
     Omit<Recharts.PieProps, "ref">
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,
-      className: cx(className, donutClassName),
+      className: cx(className, pieClassName),
       dataKey: "value",
       data,
       outerRadius,
@@ -267,18 +268,18 @@ export const useDonutChart = ({
       endAngle,
       isAnimationActive: false,
       label: withLabels
-        ? { className: cx("ui-donut-chart__label", labelClassName) }
+        ? { className: cx("ui-pie-chart__label", labelClassName) }
         : false,
       labelLine: withLabelLines
-        ? { className: cx("ui-donut-chart__label-line", labelLineClassName) }
+        ? { className: cx("ui-pie-chart__label-line", labelLineClassName) }
         : false,
       activeShape: activeShapeProps,
       inactiveShape: inactiveShapeProps,
       ...(props as Omit<Recharts.PieProps, "dataKey">),
-      ...donutProps,
+      ...pieProps,
     }),
     [
-      donutClassName,
+      pieClassName,
       data,
       outerRadius,
       innerRadius,
@@ -291,7 +292,7 @@ export const useDonutChart = ({
       labelLineClassName,
       activeShapeProps,
       inactiveShapeProps,
-      donutProps,
+      pieProps,
     ],
   )
 
@@ -316,12 +317,12 @@ export const useDonutChart = ({
   )
 
   return {
-    donutVars,
-    getDonutProps,
-    getDonutChartProps,
+    pieVars,
+    getPieProps,
+    getPieChartProps,
     getCellProps,
     setHighlightedArea,
   }
 }
 
-export type UseDonutChartReturn = ReturnType<typeof useDonutChart>
+export type UsePieChartReturn = ReturnType<typeof usePieChart>

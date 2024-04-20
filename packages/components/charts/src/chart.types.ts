@@ -50,7 +50,7 @@ export type RadarChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.RadarChart>
 >
-export type DonutChartProps = Merge<
+export type PieChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.PieChart>
 >
@@ -98,7 +98,7 @@ export type RadarProps = Merge<
     dimRadar?: Partial<RadarProps>
   }
 >
-export type DonutProps = Merge<
+export type PieProps = Merge<
   Merge<CSSUIProps, Recharts.PieProps>,
   {
     activeShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>

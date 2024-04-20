@@ -314,7 +314,7 @@ export const customActiveShape: Story = () => {
   return (
     <DonutChart
       data={data}
-      donutProps={{
+      pieProps={{
         activeShape: {
           strokeWidth: 2,
           stroke: ["black", "white"],

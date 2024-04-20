@@ -11,7 +11,7 @@ import {
   Cell,
   Legend,
   Pie,
-  PieChart as RechartsDonutChart,
+  PieChart as RechartsPieChart,
   ResponsiveContainer,
   Tooltip,
 } from "recharts"
@@ -26,8 +26,8 @@ import {
   useChartTooltip,
   type UseChartTooltipOptions,
 } from "./use-chart-tooltip"
-import type { UseDonutChartOptions } from "./use-donut-chart"
-import { useDonutChart } from "./use-donut-chart"
+import type { UsePieChartOptions } from "./use-pie-chart"
+import { usePieChart } from "./use-pie-chart"
 
 type DonutChartOptions = {
   /**
@@ -73,7 +73,7 @@ type DonutChartOptions = {
 export type DonutChartProps = HTMLUIProps<"div"> &
   ThemeProps<"DonutChart"> &
   DonutChartOptions &
-  UseDonutChartOptions &
+  UsePieChartOptions &
   UseChartTooltipOptions &
   UseChartLegendProps &
   UseChartProps
@@ -88,7 +88,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
   const {
     className,
     data,
-    donutProps,
+    pieProps,
     chartProps,
     cellProps,
     containerProps,
@@ -112,14 +112,14 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const {
-    donutVars,
-    getDonutProps,
-    getDonutChartProps,
+    pieVars,
+    getPieProps,
+    getPieChartProps,
     getCellProps,
     setHighlightedArea,
-  } = useDonutChart({
+  } = usePieChart({
     data,
-    donutProps,
+    pieProps,
     chartProps,
     cellProps,
     innerRadius,
@@ -159,17 +159,17 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-donut-chart", className)}
-        var={donutVars}
+        var={pieVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer
           {...getContainerProps({ className: "ui-donut-chart__container" })}
         >
-          <RechartsDonutChart
-            {...getDonutChartProps({ className: "ui-donut-chart__chart" })}
+          <RechartsPieChart
+            {...getPieChartProps({ className: "ui-donut-chart__chart" })}
           >
-            <Pie {...getDonutProps({ className: "ui-donut-chart__donut" })}>
+            <Pie {...getPieProps({ className: "ui-donut-chart__donut" })}>
               {cells}
             </Pie>
 
@@ -202,7 +202,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
                 {...getTooltipProps()}
               />
             ) : null}
-          </RechartsDonutChart>
+          </RechartsPieChart>
         </ResponsiveContainer>
       </ui.div>
     </ChartProvider>

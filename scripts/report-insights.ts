@@ -37,6 +37,8 @@ const OMIT_GITHUB_IDS = ["hajimemat"]
 const MIN_DATE = dayjs().subtract(7, "days").hour(18).minute(0).second(0)
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
 const REPORT_FORMAT = "YYYY/MM/DD"
+const INTERVAL_TIME = 5000
+
 config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
@@ -107,7 +109,7 @@ const getComments = async () => {
       page++
     } while (count === perPage)
 
-    await wait(3000)
+    await wait(INTERVAL_TIME)
   }
 
   return comments
@@ -142,7 +144,7 @@ const getCommits = async () => {
       page++
     } while (count === perPage)
 
-    await wait(3000)
+    await wait(INTERVAL_TIME)
   }
 
   return commits
@@ -194,7 +196,7 @@ const getInsights = async (collaborators: Collaborator[]) => {
       },
     })
 
-    await wait(3000)
+    await wait(INTERVAL_TIME)
   }
 
   return insights

@@ -31,6 +31,18 @@ import { useDonutChart } from "./use-donut-chart"
 
 type DonutChartOptions = {
   /**
+   * Controls angle at which chart starts.
+   *
+   * @default 90
+   */
+  startAngle?: number
+  /**
+   * Controls angle at which chart ends.
+   *
+   * @default 270
+   */
+  endAngle?: number
+  /**
    * If `true`, tooltip is visible.
    *
    * @default true
@@ -90,8 +102,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     innerRadius,
     outerRadius,
     paddingAngle,
-    startAngle,
-    endAngle,
+    startAngle = 90,
+    endAngle = 270,
     withLabels,
     withLabelLines,
     strokeWidth,

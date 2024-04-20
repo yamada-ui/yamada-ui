@@ -29,7 +29,6 @@ export type PortalProps = {
  *
  * @see Docs https://yamada-ui.com/components/other/portal
  */
-
 export const Portal = ({
   containerRef,
   appendToParentPortal = true,

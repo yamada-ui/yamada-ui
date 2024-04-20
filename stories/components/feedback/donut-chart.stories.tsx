@@ -59,10 +59,15 @@ export const custom: Story = () => {
     outerRadius: 80,
     tooltipDataSource: "all",
   })
+  const { innerRadius, outerRadius, ...rest } = props
 
   return (
     <Wrap gap="md" alignItems="flex-start">
-      <DonutChart {...props} />
+      <DonutChart
+        innerRadius={`${innerRadius}%`}
+        outerRadius={`${outerRadius}%`}
+        {...rest}
+      />
 
       <Wrap gap="md" alignItems="flex-start">
         <PropControl
@@ -152,8 +157,8 @@ export const custom: Story = () => {
               {
                 label: "Outer Radius",
                 value: props.outerRadius as number,
-                min: 80,
-                max: 180,
+                min: 0,
+                max: 100,
                 onChange: (value) => {
                   setProps((prev) => ({
                     ...prev,

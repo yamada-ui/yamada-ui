@@ -126,7 +126,13 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
           <RechartsPieChart
             {...getPieChartProps({ className: "ui-donut-chart__chart" })}
           >
-            <Pie {...getPieProps({ className: "ui-donut-chart__donut" })}>
+            <Pie
+              {...getPieProps({
+                className: "ui-donut-chart__donut",
+                labelClassName: "ui-donut-chart__label",
+                labelLineClassName: "ui-donut-chart__label-line",
+              })}
+            >
               {cells}
             </Pie>
 

@@ -254,13 +254,23 @@ export const usePieChart = ({
     [chartProps, chartClassName],
   )
 
-  // TODO: label and labelLine className should be separate donut and pie
-  const getPieProps: ChartPropGetter<
+  const getPieProps: RequiredChartPropGetter<
     "div",
-    Partial<Recharts.PieProps>,
+    Partial<Recharts.PieProps> & {
+      labelClassName: string
+      labelLineClassName: string
+    },
     Omit<Recharts.PieProps, "ref">
   > = useCallback(
-    ({ className, ...props } = {}, ref = null) => ({
+    (
+      {
+        className,
+        labelClassName: labelClassNameProp,
+        labelLineClassName: labelLineClassNameProp,
+        ...props
+      },
+      ref = null,
+    ) => ({
       ref,
       className: cx(className, pieClassName),
       dataKey: "value",
@@ -273,10 +283,10 @@ export const usePieChart = ({
       endAngle,
       isAnimationActive: false,
       label: withLabels
-        ? { className: cx("ui-pie-chart__label", labelClassName) }
+        ? { className: cx(labelClassNameProp, labelClassName) }
         : false,
       labelLine: withLabelLines
-        ? { className: cx("ui-pie-chart__label-line", labelLineClassName) }
+        ? { className: cx(labelLineClassNameProp, labelLineClassName) }
         : false,
       activeShape: activeShapeProps,
       inactiveShape: inactiveShapeProps,

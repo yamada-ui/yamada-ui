@@ -2,4 +2,4 @@
 "@yamada-ui/charts": minor
 ---
 
-added `DonutChart`
+added `DonutChart` and `PieChart`

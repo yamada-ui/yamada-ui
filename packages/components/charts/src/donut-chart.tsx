@@ -93,7 +93,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     startAngle,
     endAngle,
     withLabels,
-    withLabelsLine,
+    withLabelLines,
     strokeWidth,
     legendProps,
     ...rest
@@ -117,7 +117,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     endAngle,
     strokeWidth,
     withLabels,
-    withLabelsLine,
+    withLabelLines,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

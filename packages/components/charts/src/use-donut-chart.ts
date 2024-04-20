@@ -41,7 +41,7 @@ export type UseDonutChartOptions = {
    *
    * @default false
    */
-  withLabelsLine?: boolean
+  withLabelLines?: boolean
   /**
    * Controls innerRadius of the chart segments.
    *
@@ -97,7 +97,7 @@ type UseDonutChartProps = UseDonutChartOptions & {
 export const useDonutChart = ({
   data,
   withLabels = false,
-  withLabelsLine = false,
+  withLabelLines = false,
   strokeWidth = 1,
   fillOpacity = 1,
   innerRadius = "60%",
@@ -269,7 +269,7 @@ export const useDonutChart = ({
       label: withLabels
         ? { className: cx("ui-donut-chart__label", labelClassName) }
         : false,
-      labelLine: withLabelsLine
+      labelLine: withLabelLines
         ? { className: cx("ui-donut-chart__label-line", labelLineClassName) }
         : false,
       activeShape: activeShapeProps,
@@ -287,7 +287,7 @@ export const useDonutChart = ({
       endAngle,
       withLabels,
       labelClassName,
-      withLabelsLine,
+      withLabelLines,
       labelLineClassName,
       activeShapeProps,
       inactiveShapeProps,

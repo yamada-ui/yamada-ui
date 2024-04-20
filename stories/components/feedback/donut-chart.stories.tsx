@@ -212,16 +212,16 @@ export const custom: Story = () => {
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
-                    withLabel: !prev.withLabels,
+                    withLabels: !prev.withLabels,
                   })),
               },
               {
                 label: "label line",
-                isChecked: props.withLabelsLine,
+                isChecked: props.withLabelLines,
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
-                    withLabelsLine: !prev.withLabelsLine,
+                    withLabelLines: !prev.withLabelLines,
                   })),
               },
             ]}

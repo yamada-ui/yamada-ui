@@ -6,7 +6,7 @@ export const DonutChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
     donut: {},
     activeShape: {},
     inactiveShape: {},
-    label: { fillOpacity: 1 },
+    label: {},
     labelLine: {},
     cell: {},
   },

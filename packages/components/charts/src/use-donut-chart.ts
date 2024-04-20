@@ -193,7 +193,7 @@ export const useDonutChart = ({
   )
 
   const labelClassName = useMemo(
-    () => getClassName({ ...styles.label, ...label })(theme),
+    () => getClassName({ fillOpacity: 1, ...styles.label, ...label })(theme),
     [label, styles.label, theme],
   )
 

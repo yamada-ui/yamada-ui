@@ -31,24 +31,6 @@ import { usePieChart } from "./use-pie-chart"
 
 type PieChartOptions = {
   /**
-   * Controls innerRadius of the chart segments.
-   *
-   * @default '0%'
-   */
-  innerRadius?: number | string
-  /**
-   * Controls angle at which chart starts.
-   *
-   * @default 0
-   */
-  startAngle?: number
-  /**
-   * Controls angle at which chart ends.
-   *
-   * @default 360
-   */
-  endAngle?: number
-  /**
    * If `true`, tooltip is visible.
    *
    * @default true
@@ -105,11 +87,11 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     tooltipDataSource = "all",
     valueFormatter,
     unit,
-    innerRadius = "0%",
+    innerRadius,
     outerRadius,
     paddingAngle,
-    startAngle = 0,
-    endAngle = 360,
+    startAngle,
+    endAngle,
     withLabels,
     withLabelLines,
     strokeWidth,

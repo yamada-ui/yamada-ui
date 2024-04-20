@@ -1,4 +1,3 @@
-import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
@@ -17,66 +16,22 @@ import {
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import type { TooltipDataSourceType } from "./chart.types"
-import type { UseChartProps } from "./use-chart"
+import type { PieChartProps } from "./pie-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import {
-  useChartTooltip,
-  type UseChartTooltipOptions,
-} from "./use-chart-tooltip"
-import type { UsePieChartOptions } from "./use-pie-chart"
+import { useChartTooltip } from "./use-chart-tooltip"
 import { usePieChart } from "./use-pie-chart"
 
 type DonutChartOptions = {
   /**
-   * Controls angle at which chart starts.
+   * Controls innerRadius of the chart segments.
    *
-   * @default 90
+   * @default '60%'
    */
-  startAngle?: number
-  /**
-   * Controls angle at which chart ends.
-   *
-   * @default 270
-   */
-  endAngle?: number
-  /**
-   * If `true`, tooltip is visible.
-   *
-   * @default true
-   */
-  withTooltip?: boolean
-  /**
-   * If `true`, legend is visible.
-   *
-   * @default false
-   */
-  withLegend?: boolean
-  /**
-   * Determines which data is displayed in the tooltip.
-   *
-   * @default 'all'
-   */
-  tooltipDataSource?: TooltipDataSourceType
-  /**
-   * A function to format values inside the tooltip
-   */
-  valueFormatter?: (value: number) => string
-  /**
-   * Unit displayed next to each tick in y-axis.
-   */
-  unit?: string
+  innerRadius?: number | string
 }
 
-export type DonutChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"DonutChart"> &
-  DonutChartOptions &
-  UsePieChartOptions &
-  UseChartTooltipOptions &
-  UseChartLegendProps &
-  UseChartProps
+export type DonutChartProps = PieChartProps & DonutChartOptions
 
 /**
  * `DonutChart` is a component for drawing donut charts to compare multiple sets of data.
@@ -99,11 +54,11 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     tooltipDataSource = "all",
     valueFormatter,
     unit,
-    innerRadius,
+    innerRadius = "60%",
     outerRadius,
     paddingAngle,
-    startAngle = 90,
-    endAngle = 270,
+    startAngle,
+    endAngle,
     withLabels,
     withLabelLines,
     strokeWidth,

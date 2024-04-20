@@ -45,7 +45,7 @@ export type UsePieChartOptions = {
   /**
    * Controls innerRadius of the chart segments.
    *
-   * @default '60%'
+   * @default '0%'
    */
   innerRadius?: number | string
   /**
@@ -69,13 +69,13 @@ export type UsePieChartOptions = {
   /**
    * Controls angle at which chart starts.
    *
-   * @default 0
+   * @default 90
    */
   startAngle?: number
   /**
    * Controls angle at which chart ends.
    *
-   * @default 360
+   * @default -270
    */
   endAngle?: number
   /**
@@ -100,11 +100,11 @@ export const usePieChart = ({
   withLabelLines = false,
   strokeWidth = 1,
   fillOpacity = 1,
-  innerRadius = "60%",
+  innerRadius = "0%",
   outerRadius = "80%",
   paddingAngle = 0,
-  startAngle = 0,
-  endAngle = 360,
+  startAngle = 90,
+  endAngle = -270,
   styles,
   ...rest
 }: UsePieChartProps) => {

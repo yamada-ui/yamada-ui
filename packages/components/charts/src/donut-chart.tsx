@@ -25,6 +25,8 @@ import { usePieChart } from "./use-pie-chart"
 type DonutChartOptions = {
   /**
    * Controls innerRadius of the chart segments.
+   * If it is a number, it is the width of the radius.
+   * For example, `60` means the radius is `60px` and the diameter is `120px`.
    *
    * @default '60%'
    */

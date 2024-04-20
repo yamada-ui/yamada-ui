@@ -44,12 +44,16 @@ export type UsePieChartOptions = {
   withLabelLines?: boolean
   /**
    * Controls innerRadius of the chart segments.
+   * If it is a number, it is the width of the radius.
+   * For example, `60` means the radius is `60px` and the diameter is `120px`.
    *
    * @default '0%'
    */
   innerRadius?: number | string
   /**
-   * Controls thickness of the chart segments.
+   * Controls thickness of the chart segments. If it is a number, it is calculated as px.
+   * If it is a number, it is the width of the radius.
+   * For example, `60` means the radius is `60px` and the diameter is `120px`.
    *
    * @default '80%'
    */
@@ -63,7 +67,7 @@ export type UsePieChartOptions = {
   /**
    * Stroke width for the chart pies.
    *
-   * @default 0
+   * @default 1
    */
   strokeWidth?: number
   /**

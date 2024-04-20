@@ -1,5 +1,43 @@
 # @yamada-ui/resizable
 
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/core@1.6.4
+
+## 1.0.14
+
+### Patch Changes
+
+- Updated dependencies [[`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6), [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63), [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2), [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44), [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e)]:
+  - @yamada-ui/core@1.6.3
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/icon@1.0.21
+
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/core@1.6.2
+
+## 1.0.12
+
+### Patch Changes
+
+- [#1142](https://github.com/yamada-ui/yamada-ui/pull/1142) [`7dbaa85`](https://github.com/yamada-ui/yamada-ui/commit/7dbaa85a5d26abdde9fd1a0e053792fd2a973c7c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `groupProps`'s `direction` was required.
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/icon@1.0.19
+
 ## 1.0.11
 
 ### Patch Changes

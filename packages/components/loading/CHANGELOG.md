@@ -1,5 +1,61 @@
 # @yamada-ui/loading
 
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/motion@1.0.23
+  - @yamada-ui/portal@1.0.12
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-timeout@1.0.12
+  - @yamada-ui/use-token@1.1.10
+  - @yamada-ui/use-value@1.1.10
+
+## 1.0.22
+
+### Patch Changes
+
+- Updated dependencies [[`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6), [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63), [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2), [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44), [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e)]:
+  - @yamada-ui/core@1.6.3
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/icon@1.0.21
+  - @yamada-ui/motion@1.0.22
+  - @yamada-ui/use-token@1.1.9
+  - @yamada-ui/use-value@1.1.9
+  - @yamada-ui/portal@1.0.11
+  - @yamada-ui/use-timeout@1.0.11
+
+## 1.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`be96a67`](https://github.com/yamada-ui/yamada-ui/commit/be96a67f3924488275b26cc1bbf419b5c0a1131d), [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/motion@1.0.21
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/portal@1.0.10
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-timeout@1.0.10
+  - @yamada-ui/use-token@1.1.8
+  - @yamada-ui/use-value@1.1.8
+
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/icon@1.0.19
+  - @yamada-ui/motion@1.0.20
+  - @yamada-ui/portal@1.0.9
+  - @yamada-ui/use-timeout@1.0.9
+  - @yamada-ui/use-token@1.1.7
+  - @yamada-ui/use-value@1.1.7
+
 ## 1.0.19
 
 ### Patch Changes

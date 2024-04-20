@@ -1,5 +1,5 @@
 import { useTheme, type CSSUIObject } from "@yamada-ui/core"
-import { splitObject, type Dict } from "@yamada-ui/utils"
+import { splitObject, type Dict, cx } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
 import { getClassName } from "./chart-utils"
@@ -50,7 +50,7 @@ export const useChartTooltip = ({
       animationDuration: tooltipAnimationDuration,
       isAnimationActive: (tooltipAnimationDuration || 0) > 0,
       cursor: {
-        className: cursorClassName,
+        className: cx("ui-chart__cursor", cursorClassName),
       },
       ...props,
       ...tooltipProps,

@@ -76,7 +76,9 @@ export const getPx = (value: string | number | undefined): number => {
   if (isBrowser) {
     const style = window.getComputedStyle(document.documentElement)
 
-    fontSize = parseFloat(style.fontSize)
+    const computedFontSize = parseFloat(style.fontSize)
+
+    if (!isNaN(computedFontSize)) fontSize = computedFontSize
   }
 
   return parseFloat(value) * fontSize

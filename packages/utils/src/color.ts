@@ -6,7 +6,7 @@ type ColorMode = "light" | "dark"
 
 export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
 
-export const hues = [
+export const tones = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 
@@ -17,7 +17,7 @@ export const isAccessible = (colorScheme: string) =>
   colorScheme === "yellow" || colorScheme === "cyan" || colorScheme === "lime"
 
 export const getColor =
-  (color: string, fallback?: string) =>
+  (color: string, fallback: string = "#000000") =>
   (theme: Dict = {}, colorMode?: ColorMode) => {
     const [token, hue] = color.split(".")
 
@@ -39,7 +39,11 @@ export const getColor =
         return c.toHex(String(hex))
       }
     } catch {
-      return fallback ?? "#000000"
+      try {
+        return c.toHex(fallback)
+      } catch {
+        return "#000000"
+      }
     }
   }
 
@@ -77,44 +81,6 @@ export const transparentizeColor =
 
     return c.transparentize(raw, 1 - alpha)
   }
-
-export const toneColor =
-  (
-    color: string,
-    hue: (typeof hues)[number],
-    lCoef: number = 0.94,
-    dCoef: number = 0.86,
-  ) =>
-  (theme?: Dict, colorMode?: ColorMode) => {
-    if (hue < 50 || 950 < hue) return color
-
-    let raw = color
-
-    if (theme && colorMode) getColor(color, color)(theme, colorMode)
-
-    const coef = hue < 500 ? lCoef : dCoef
-    const amount = (500 - hue) * 0.001 * coef
-
-    return c.toHex(c.lighten(raw, amount))
-  }
-
-export const toneColors = (
-  color: string,
-  lCoef: number = 0.94,
-  dCoef: number = 0.86,
-) => {
-  const colors: Record<string, string> = {}
-
-  hues.forEach((hue) => {
-    const coef = hue < 500 ? lCoef : dCoef
-
-    const amount = (500 - hue) * 0.001 * coef
-
-    colors[hue] = c.toHex(c.lighten(color, amount))
-  })
-
-  return colors
-}
 
 export const randomColor = ({
   string,

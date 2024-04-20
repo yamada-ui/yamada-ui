@@ -1,5 +1,89 @@
 # @yamada-ui/color-picker
 
+## 1.2.10
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/button@1.0.25
+  - @yamada-ui/form-control@1.0.25
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/input@1.0.25
+  - @yamada-ui/popover@1.0.23
+  - @yamada-ui/portal@1.0.12
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-controllable-state@1.0.12
+  - @yamada-ui/use-disclosure@1.0.12
+  - @yamada-ui/use-eye-dropper@1.0.9
+  - @yamada-ui/use-outside-click@1.0.12
+  - @yamada-ui/use-pan-event@1.0.13
+  - @yamada-ui/use-size@1.0.12
+
+## 1.2.9
+
+### Patch Changes
+
+- Updated dependencies [[`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6), [`8864fec`](https://github.com/yamada-ui/yamada-ui/commit/8864fecd6897532c5c7af0e857d4291c6835f5bb), [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63), [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2), [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44), [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e)]:
+  - @yamada-ui/core@1.6.3
+  - @yamada-ui/use-pan-event@1.0.12
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/popover@1.0.22
+  - @yamada-ui/button@1.0.24
+  - @yamada-ui/form-control@1.0.24
+  - @yamada-ui/icon@1.0.21
+  - @yamada-ui/input@1.0.24
+  - @yamada-ui/portal@1.0.11
+  - @yamada-ui/use-controllable-state@1.0.11
+  - @yamada-ui/use-disclosure@1.0.11
+  - @yamada-ui/use-eye-dropper@1.0.8
+  - @yamada-ui/use-outside-click@1.0.11
+  - @yamada-ui/use-size@1.0.11
+
+## 1.2.8
+
+### Patch Changes
+
+- [#1170](https://github.com/yamada-ui/yamada-ui/pull/1170) [`7e57340`](https://github.com/yamada-ui/yamada-ui/commit/7e57340b84bf72e6fe016acb9768c9c2785bc257) Thanks [@dango-the-world](https://github.com/dango-the-world)! - fix theme token in ColorSwatch
+
+- Updated dependencies [[`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/popover@1.0.21
+  - @yamada-ui/button@1.0.23
+  - @yamada-ui/form-control@1.0.23
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/input@1.0.23
+  - @yamada-ui/portal@1.0.10
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-controllable-state@1.0.10
+  - @yamada-ui/use-disclosure@1.0.10
+  - @yamada-ui/use-eye-dropper@1.0.7
+  - @yamada-ui/use-outside-click@1.0.10
+  - @yamada-ui/use-pan-event@1.0.11
+  - @yamada-ui/use-size@1.0.10
+
+## 1.2.7
+
+### Patch Changes
+
+- [#1134](https://github.com/yamada-ui/yamada-ui/pull/1134) [`3fa78c6`](https://github.com/yamada-ui/yamada-ui/commit/3fa78c676c03b9b4ac55b1f8da35ae9e2ec71570) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify property omission logic
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/button@1.0.22
+  - @yamada-ui/form-control@1.0.22
+  - @yamada-ui/icon@1.0.19
+  - @yamada-ui/input@1.0.22
+  - @yamada-ui/popover@1.0.20
+  - @yamada-ui/portal@1.0.9
+  - @yamada-ui/use-controllable-state@1.0.9
+  - @yamada-ui/use-disclosure@1.0.9
+  - @yamada-ui/use-eye-dropper@1.0.6
+  - @yamada-ui/use-outside-click@1.0.9
+  - @yamada-ui/use-pan-event@1.0.10
+  - @yamada-ui/use-size@1.0.9
+
 ## 1.2.6
 
 ### Patch Changes

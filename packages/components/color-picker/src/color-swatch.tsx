@@ -121,11 +121,11 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     <ui.div
       ref={ref}
       className={cx("ui-color-swatch", className)}
-      {...(isRounded ? { rounded: "9999px" } : {})}
+      {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
       __css={css}
       {...rest}
     >
-      <ui.div {...(isRounded ? { rounded: "9999px" } : {})}>
+      <ui.div {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}>
         {overlays.map((props, index) => (
           <ui.div
             key={index}
@@ -137,7 +137,7 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
               bottom: 0,
               ...styles.overlay,
             }}
-            {...(isRounded ? { rounded: "9999px" } : {})}
+            {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}
             {...props}
           />
         ))}

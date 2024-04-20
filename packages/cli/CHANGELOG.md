@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.0.4
+
+### Patch Changes
+
+- [#1129](https://github.com/yamada-ui/yamada-ui/pull/1129) [`a58ddbc`](https://github.com/yamada-ui/yamada-ui/commit/a58ddbcf4f669db1c1f7bcece6ac2da63aec5f6d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify color tone generation function.
+
 ## 1.0.3
 
 ### Patch Changes

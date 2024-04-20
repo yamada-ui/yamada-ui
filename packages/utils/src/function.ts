@@ -8,10 +8,15 @@ export const runIfFunc = <T, U extends Array<any>>(
 ): T => (isFunction(valOrFunc) ? valOrFunc(...args) : valOrFunc)
 
 export const handlerAll =
-  <T extends (event: any) => void>(...funcs: (T | undefined)[]) =>
-  (event: (T extends (...args: infer R) => any ? R : never)[0]) => {
+  <T extends (event: any, ...args: any[]) => void>(
+    ...funcs: (T | undefined)[]
+  ) =>
+  (
+    event: T extends (event: infer R, ...args: any[]) => any ? R : never,
+    ...args: T extends (event: any, ...args: infer R) => any ? R : never
+  ) => {
     funcs.some((func) => {
-      func?.(event)
+      func?.(event, ...args)
 
       return event?.defaultPrevented
     })
@@ -19,5 +24,5 @@ export const handlerAll =
 
 export const funcAll =
   <T extends (...args: any[]) => any>(...funcs: (T | undefined)[]) =>
-  (arg: (T extends (...args: infer R) => any ? R : never)[0]) =>
-    funcs.forEach((func) => func?.(arg))
+  (...args: T extends (...args: infer R) => any ? R : never) =>
+    funcs.forEach((func) => func?.(...args))

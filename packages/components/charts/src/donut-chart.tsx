@@ -177,7 +177,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
               <Legend
                 content={({ payload }) => (
                   <ChartLegend
-                    className="ui-area-chart__legend"
+                    className="ui-donut-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
                     {...computedLegendProps}

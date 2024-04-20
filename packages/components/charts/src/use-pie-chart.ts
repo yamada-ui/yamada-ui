@@ -105,7 +105,7 @@ export const usePieChart = ({
   strokeWidth = 1,
   fillOpacity = 1,
   innerRadius = "0%",
-  outerRadius = "80%",
+  outerRadius = withLabels ? "80%" : "100%",
   paddingAngle = 0,
   startAngle = 90,
   endAngle = -270,
@@ -181,7 +181,7 @@ export const usePieChart = ({
   const activeShapeProps = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [activeShape, pieProperties],
+        [{ _focus: { outline: "none" }, ...activeShape }, pieProperties],
         styles.activeShape,
       )(theme, true),
     [activeShape, styles.activeShape, theme],
@@ -265,6 +265,7 @@ export const usePieChart = ({
       className: cx(className, pieClassName),
       dataKey: "value",
       data,
+      rootTabIndex: -1,
       outerRadius,
       innerRadius,
       paddingAngle,

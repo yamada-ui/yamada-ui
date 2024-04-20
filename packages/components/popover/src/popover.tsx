@@ -1,8 +1,3 @@
-/**
- * `Popover` is a component that floats around an element to display information.
- *
- * @see Docs https://yamada-ui.com/components/overlay/popover
- */
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type {
@@ -74,6 +69,11 @@ type PopoverOptions = {
    * The `ref` of the element that should receive focus when the popover opens.
    */
   initialFocusRef?: RefObject<{ focus(): void }>
+  /**
+   * The `ref` of the element related to the popover.
+   * This is used during the `onBlur` event.
+   */
+  relatedRef?: RefObject<HTMLElement>
   /**
    * If `true`, focus will be returned to the element that triggers the popover when it closes.
    *
@@ -176,6 +176,11 @@ const [PopoverProvider, usePopover] = createContext<PopoverContext>({
 
 export { usePopover }
 
+/**
+ * `Popover` is a component that floats around an element to display information.
+ *
+ * @see Docs https://yamada-ui.com/components/overlay/popover
+ */
 export const Popover: FC<PopoverProps> = (props) => {
   const [styles, mergedProps] = useMultiComponentStyle("Popover", props)
   const {
@@ -193,6 +198,7 @@ export const Popover: FC<PopoverProps> = (props) => {
     lazyBehavior = "unmount",
     animation = "scale",
     duration,
+    relatedRef,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -272,8 +278,12 @@ export const Popover: FC<PopoverProps> = (props) => {
           const relatedTarget = getEventRelatedTarget(ev)
           const targetIsPopover = isContains(popoverRef.current, relatedTarget)
           const targetIsTrigger = isContains(triggerRef.current, relatedTarget)
+          const targetIsRelated = relatedRef?.current
+            ? isContains(relatedRef.current, relatedTarget)
+            : false
 
-          const isValidBlur = !targetIsPopover && !targetIsTrigger
+          const isValidBlur =
+            !targetIsPopover && !targetIsTrigger && !targetIsRelated
 
           if (isOpen && closeOnBlur && isValidBlur) onClose()
         }),
@@ -288,7 +298,8 @@ export const Popover: FC<PopoverProps> = (props) => {
           if (ev.nativeEvent.relatedTarget === null) return
 
           isHoveringRef.current = false
-          setTimeout(onClose, closeDelay)
+
+          if (closeOnBlur) setTimeout(onClose, closeDelay)
         })
       }
 
@@ -303,6 +314,7 @@ export const Popover: FC<PopoverProps> = (props) => {
       shouldRenderChildren,
       transformOrigin,
       trigger,
+      relatedRef,
     ],
   )
 
@@ -360,7 +372,7 @@ export const Popover: FC<PopoverProps> = (props) => {
           }
 
           closeTimeout.current = window.setTimeout(() => {
-            if (isHoveringRef.current === false) onClose()
+            if (!isHoveringRef.current) onClose()
           }, closeDelay)
         })
       }

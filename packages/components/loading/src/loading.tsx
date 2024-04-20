@@ -1,8 +1,6 @@
-import type { CSSUIProps } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { CSSUIProps, ThemeProps, UIProps } from "@yamada-ui/core"
+import { forwardRef, useComponentStyle } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
-import { useToken } from "@yamada-ui/use-token"
-import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import { Audio } from "./audio"
@@ -12,6 +10,11 @@ import { Grid } from "./grid"
 import { Oval } from "./oval"
 import { Puff } from "./puff"
 import { Rings } from "./rings"
+
+type ComponentProps = Omit<UIProps, "color"> & {
+  color: string
+  secondaryColor?: string
+}
 
 type LoadingOptions = {
   /**
@@ -32,62 +35,90 @@ type LoadingOptions = {
   duration?: IconProps["dur"]
 }
 
-export type LoadingProps = Omit<IconProps, "dur"> & LoadingOptions
+export type LoadingProps = IconProps &
+  Pick<ThemeProps<"Loading">, "colorScheme"> &
+  LoadingOptions
 
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
  * @see Docs https://yamada-ui.com/components/feedback/loading
  */
-export const Loading = forwardRef<LoadingProps, "svg">(
-  (
+export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
+  const [
+    styles,
     {
       className,
       variant = "oval",
-      color: _color = "primary",
-      secondaryColor: _secondaryColor,
+      color,
+      secondaryColor,
+      colorScheme = "primary",
       size = "1em",
+      dur,
       duration,
       ...rest
     },
-    ref,
-  ) => {
-    const color = (useToken("colors", useValue(_color)) ?? _color) as string
-    const secondaryColor = (useToken("colors", useValue(_secondaryColor)) ??
-      _secondaryColor) as string
+  ] = useComponentStyle("Loading", props)
 
-    const props = useMemo(
-      () => ({
-        className: cx("ui-loading", className),
-        size,
-        color,
-        duration,
-        ...rest,
-      }),
-      [className, color, duration, rest, size],
-    )
+  const computedProps = useMemo<ComponentProps>(
+    () => ({
+      className: cx("ui-loading", className),
+      size,
+      var: [
+        {
+          __prefix: "ui",
+          name: "color",
+          token: "colors",
+          value: color ?? colorScheme,
+        },
+        {
+          __prefix: "ui",
+          name: "secondary-color",
+          token: "colors",
+          value: secondaryColor,
+        },
+      ],
+      color: "var(--ui-color)",
+      ...(secondaryColor
+        ? { secondaryColor: "var(--ui-secondary-color)" }
+        : {}),
+      duration: duration ?? dur,
+      __css: { ...styles },
+      ...rest,
+    }),
+    [
+      className,
+      color,
+      secondaryColor,
+      colorScheme,
+      size,
+      duration,
+      dur,
+      rest,
+      styles,
+    ],
+  )
 
-    switch (variant) {
-      case "grid":
-        return <Grid ref={ref} {...props} />
+  switch (variant) {
+    case "grid":
+      return <Grid ref={ref} {...computedProps} />
 
-      case "audio":
-        return <Audio ref={ref} {...props} />
+    case "audio":
+      return <Audio ref={ref} {...computedProps} />
 
-      case "dots":
-        return <Dots ref={ref} {...props} />
+    case "dots":
+      return <Dots ref={ref} {...computedProps} />
 
-      case "puff":
-        return <Puff ref={ref} {...props} />
+    case "puff":
+      return <Puff ref={ref} {...computedProps} />
 
-      case "rings":
-        return <Rings ref={ref} {...props} />
+    case "rings":
+      return <Rings ref={ref} {...computedProps} />
 
-      case "circles":
-        return <Circles ref={ref} {...props} />
+    case "circles":
+      return <Circles ref={ref} {...computedProps} />
 
-      default:
-        return <Oval ref={ref} {...props} secondaryColor={secondaryColor} />
-    }
-  },
-)
+    default:
+      return <Oval ref={ref} {...computedProps} />
+  }
+})

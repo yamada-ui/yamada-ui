@@ -33,6 +33,13 @@ export type UseClickableProps<
    */
   clickOnSpace?: boolean
   /**
+   * Whether or not to focus the element when it is clicked.
+   * If `true`, the element will receive focus upon click.
+   *
+   * @default true
+   */
+  focusOnClick?: boolean
+  /**
    * The ref for the element.
    */
   ref?: Ref<HTMLElement>
@@ -58,6 +65,7 @@ export const useClickable = <
     isFocusable,
     clickOnEnter = true,
     clickOnSpace = true,
+    focusOnClick = true,
     onMouseDown,
     onMouseUp,
     onClick,
@@ -92,10 +100,10 @@ export const useClickable = <
         return
       }
 
-      ev.currentTarget.focus()
+      if (focusOnClick) ev.currentTarget.focus()
       onClick?.(ev)
     },
-    [isDisabled, onClick],
+    [isDisabled, focusOnClick, onClick],
   )
 
   const onDocumentKeyUp = useCallback(

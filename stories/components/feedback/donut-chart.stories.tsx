@@ -208,11 +208,11 @@ export const custom: Story = () => {
               },
               {
                 label: "label",
-                isChecked: props.withLabel,
+                isChecked: props.withLabels,
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
-                    withLabel: !prev.withLabel,
+                    withLabel: !prev.withLabels,
                   })),
               },
               {
@@ -267,7 +267,7 @@ export const withLegend: Story = () => {
   return <DonutChart data={data} withLegend />
 }
 
-export const withValueFomatter: Story = () => {
+export const withValueFormatter: Story = () => {
   const data: CellProps[] = useMemo(
     () => [
       { name: "USA", value: 400, color: "red.500" },

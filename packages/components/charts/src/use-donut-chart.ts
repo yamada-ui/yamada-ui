@@ -35,7 +35,7 @@ export type UseDonutChartOptions = {
    *
    * @default false
    */
-  withLabel?: boolean
+  withLabels?: boolean
   /**
    * Determines whether segments labels should have lines that connect the segment with the label.
    *
@@ -96,7 +96,7 @@ type UseDonutChartProps = UseDonutChartOptions & {
 
 export const useDonutChart = ({
   data,
-  withLabel = false,
+  withLabels = false,
   withLabelsLine = false,
   strokeWidth = 1,
   fillOpacity = 1,
@@ -266,7 +266,7 @@ export const useDonutChart = ({
       startAngle,
       endAngle,
       isAnimationActive: false,
-      label: withLabel
+      label: withLabels
         ? { className: cx("ui-donut-chart__label", labelClassName) }
         : false,
       labelLine: withLabelsLine
@@ -285,7 +285,7 @@ export const useDonutChart = ({
       paddingAngle,
       startAngle,
       endAngle,
-      withLabel,
+      withLabels,
       labelClassName,
       withLabelsLine,
       labelLineClassName,

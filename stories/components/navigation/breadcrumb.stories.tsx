@@ -68,3 +68,28 @@ export const withCustomSeparator: Story = () => {
     </Breadcrumb>
   )
 }
+
+export const WithMaxItems: Story = () => {
+  return (
+    <Breadcrumb maxItems={3}>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">悟空少年編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">ピッコロ大魔王編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  )
+}

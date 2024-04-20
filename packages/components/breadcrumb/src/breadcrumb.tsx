@@ -11,7 +11,8 @@ import {
   useMultiComponentStyle,
 } from "@yamada-ui/core"
 import { cx, createContext, getValidChildren } from "@yamada-ui/utils"
-import { cloneElement } from "react"
+import { cloneElement, useMemo } from "react"
+import { FaEllipsis } from "react-icons/fa6"
 
 const [BreadcrumbProvider, useBreadcrumb] = createContext<
   Record<string, CSSUIObject>
@@ -37,6 +38,29 @@ type BreadcrumbOptions = {
    * Props for ol element.
    */
   listProps?: HTMLUIProps<"ol">
+  /**
+   * If max items is exceeded, the number of items to show before the ellipsis.
+   * @default 1
+   */
+  itemsBeforeCollapse?: number
+  /**
+   * If max items is exceeded, the number of items to show after the ellipsis.
+   * @default 2
+   */
+  itemsAfterCollapse?: number
+  /**
+   * Specifies the maximum number of breadcrumbs to display. When there are more
+   * than the maximum number, only the first `itemsBeforeCollapse` and last `itemsAfterCollapse`
+   * will be shown, with an ellipsis in between.
+   * @default 8
+   */
+  maxItems?: number
+  /**
+   * The visual ellipsis
+   *
+   * @default '<FaEllipsis />'
+   */
+  ellipsis?: string | JSX.Element
 }
 
 export type BreadcrumbProps = Omit<HTMLUIProps<"nav">, "gap"> &
@@ -57,6 +81,10 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     separator = "/",
     gap = "0.5rem",
     listProps,
+    itemsBeforeCollapse = 1,
+    itemsAfterCollapse = 2,
+    maxItems = 8,
+    ellipsis,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -69,13 +97,64 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   const validChildren = getValidChildren(children)
   const count = validChildren.length
 
-  const cloneChildren = validChildren.map((child, index) =>
-    cloneElement(child, {
-      separator,
-      gap,
-      isLastChild: count === index + 1,
-    }),
-  )
+  const content = useMemo(() => {
+    const items = validChildren.map((child, index) =>
+      cloneElement(child, {
+        separator,
+        gap,
+        isLastChild: count === index + 1,
+      }),
+    )
+
+    if (!items) return null
+
+    if (count < maxItems) {
+      return items
+    }
+
+    if (itemsBeforeCollapse + itemsAfterCollapse >= count) {
+      console.warn(
+        `You have provided an invalid combination of props to the Breadcrumbs. itemsAfterCollapse={${itemsAfterCollapse}} + itemsBeforeCollapse={${itemsBeforeCollapse}} >= itemsCount={${count}}`,
+        "Breadcrumbs",
+      )
+    }
+
+    const itemsInEllipsis = items.slice(
+      itemsBeforeCollapse,
+      items.length - itemsAfterCollapse,
+    )
+
+    if (itemsInEllipsis.length < 1) {
+      return items
+    }
+
+    const ellipsisIcon = ellipsis ? (
+      <ui.span>{ellipsis}</ui.span>
+    ) : (
+      <FaEllipsis />
+    )
+
+    const collapsedItem = cloneElement(itemsInEllipsis[0], {
+      ...itemsInEllipsis[0].props,
+      key: "ellipsis",
+      children: ellipsisIcon,
+    })
+
+    return [
+      ...items.slice(0, itemsBeforeCollapse),
+      collapsedItem,
+      ...items.slice(items.length - itemsAfterCollapse, items.length),
+    ]
+  }, [
+    count,
+    gap,
+    itemsBeforeCollapse,
+    itemsAfterCollapse,
+    maxItems,
+    separator,
+    validChildren,
+    ellipsis,
+  ])
 
   return (
     <BreadcrumbProvider value={styles}>
@@ -86,7 +165,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
         {...rest}
       >
         <ui.ol className="ui-breadcrumb__list" {...listProps} __css={css}>
-          {cloneChildren}
+          {content}
         </ui.ol>
       </ui.nav>
     </BreadcrumbProvider>

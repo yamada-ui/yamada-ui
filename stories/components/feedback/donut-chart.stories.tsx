@@ -62,7 +62,7 @@ export const custom: Story = () => {
   const { innerRadius, outerRadius, ...rest } = props
 
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <VStack>
       <DonutChart
         innerRadius={`${innerRadius}%`}
         outerRadius={`${outerRadius}%`}
@@ -233,7 +233,7 @@ export const custom: Story = () => {
           />
         </VStack>
       </Wrap>
-    </Wrap>
+    </VStack>
   )
 }
 
@@ -253,7 +253,6 @@ export const withSize: Story = () => {
       <DonutChart data={data} size="sm" />
       <DonutChart data={data} size="md" />
       <DonutChart data={data} size="lg" />
-      <DonutChart data={data} size="full" />
     </>
   )
 }

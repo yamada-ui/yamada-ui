@@ -61,7 +61,7 @@ export const custom: Story = () => {
   const { outerRadius, ...rest } = props
 
   return (
-    <Wrap gap="md" alignItems="flex-start">
+    <VStack>
       <PieChart outerRadius={`${outerRadius}%`} {...rest} />
 
       <Wrap gap="md" alignItems="flex-start">
@@ -216,7 +216,7 @@ export const custom: Story = () => {
           />
         </VStack>
       </Wrap>
-    </Wrap>
+    </VStack>
   )
 }
 
@@ -236,7 +236,6 @@ export const withSize: Story = () => {
       <PieChart data={data} size="sm" />
       <PieChart data={data} size="md" />
       <PieChart data={data} size="lg" />
-      <PieChart data={data} size="full" />
     </>
   )
 }

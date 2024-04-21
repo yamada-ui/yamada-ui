@@ -853,6 +853,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | "xl" | (string & {})
       variants: "simple" | "striped" | "unstyled" | (string & {})
     }
+    PieChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     PinInput: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})

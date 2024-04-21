@@ -63,4 +63,69 @@ describe("<Pagination/>", () => {
         expect(paginationItemEle).toHaveAttribute("disabled"),
       )
   })
+
+  test("should render pagination with previous dots and without next dots correctly", () => {
+    render(<Pagination total={100} page={95} siblings={2} boundaries={2} />)
+
+    for (let page = 93; page <= 100; page++) {
+      expect(screen.getByText(page.toString())).toBeInTheDocument()
+    }
+
+    for (let page = 1; page <= 2; page++) {
+      expect(screen.getByText(page.toString())).toBeInTheDocument()
+    }
+
+    const dots = screen.getByLabelText("Jump to omitted pages")
+    expect(dots).toBeInTheDocument()
+  })
+
+  test("should not render dots when there are less than 7 pages", () => {
+    render(<Pagination total={6} />)
+
+    for (let page = 1; page <= 6; page++) {
+      expect(screen.getByText(page.toString())).toBeInTheDocument()
+    }
+
+    const dots = screen.queryByLabelText("Jump to omitted pages")
+    expect(dots).not.toBeInTheDocument()
+  })
+
+  test("should correctly apply itemProps to pagination props", () => {
+    render(<Pagination total={10} itemProps={{ "aria-label": "item props" }} />)
+
+    expect(screen.getAllByLabelText("item props")).toHaveLength(7)
+  })
+
+  test("should correctly apply edgeProps to edge buttons", () => {
+    render(
+      <Pagination
+        total={10}
+        withEdges
+        edgeProps={{ "aria-label": "edge props" }}
+      />,
+    )
+
+    expect(screen.getAllByLabelText("edge props")).toHaveLength(2)
+  })
+
+  test("should correctly apply controlProps to control buttons", () => {
+    render(
+      <Pagination
+        total={10}
+        controlProps={{ "aria-label": "control-props" }}
+      />,
+    )
+
+    expect(screen.getAllByLabelText("control-props")).toHaveLength(2)
+  })
+
+  test("should not render control buttons when withControls is false", () => {
+    render(<Pagination total={10} withControls={false} />)
+
+    expect(screen.getAllByRole("button")).toHaveLength(7)
+    expect(
+      screen.queryByLabelText("Go to previous page"),
+    ).not.toBeInTheDocument()
+    expect(screen.queryByLabelText("Go to next page")).not.toBeInTheDocument()
+  })
 })

@@ -17,7 +17,7 @@ export const PopoverBody = forwardRef<PopoverBodyProps, "main">(
     }
 
     return (
-      <ui.main
+      <ui.div
         ref={ref}
         className={cx("ui-popover__body", className)}
         __css={css}

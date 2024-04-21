@@ -28,7 +28,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "test:issue": "tsx scripts/coverage-issues",
+    "test:issue": "tsx scripts/coverage-issues && tsx scripts/a11y-issues",
     "test:ci": "vitest run --coverage",
     "test:ui": "vitest --coverage --watch --ui",
     "test:a11y": "test-storybook",

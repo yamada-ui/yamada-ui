@@ -108,7 +108,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
 
     if (!items) return null
 
-    if (count < maxItems) {
+    if (count <= maxItems) {
       return items
     }
 

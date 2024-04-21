@@ -228,7 +228,7 @@ const createIssues = async (
       console.log("Created issue", path)
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 5000))
+    await new Promise((resolve) => setTimeout(resolve, 3000))
   }
 }
 

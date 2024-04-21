@@ -1,5 +1,14 @@
 # @yamada-ui/transitions
 
+## 1.0.24
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/motion@1.0.24
+  - @yamada-ui/use-value@1.1.11
+
 ## 1.0.23
 
 ### Patch Changes

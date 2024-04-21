@@ -1,5 +1,13 @@
 # @yamada-ui/textarea
 
+## 1.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/form-control@1.0.26
+
 ## 1.1.12
 
 ### Patch Changes

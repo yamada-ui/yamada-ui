@@ -1,5 +1,15 @@
 # @yamada-ui/avatar
 
+## 1.1.22
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/icon@1.0.23
+  - @yamada-ui/image@1.0.23
+  - @yamada-ui/use-animation@1.0.23
+
 ## 1.1.21
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @yamada-ui/input
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/file-input@1.0.26
+  - @yamada-ui/form-control@1.0.26
+  - @yamada-ui/use-token@1.1.11
+
 ## 1.0.25
 
 ### Patch Changes

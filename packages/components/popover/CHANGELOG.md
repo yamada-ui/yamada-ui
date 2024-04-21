@@ -1,5 +1,25 @@
 # @yamada-ui/popover
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`9f81804`](https://github.com/yamada-ui/yamada-ui/commit/9f818041d4dc604bd09d3f544f9257d2d1114fcf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `relatedRef` to handle `onBlur` events.
+
+### Patch Changes
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`81da807`](https://github.com/yamada-ui/yamada-ui/commit/81da8073d308a385fdf87e46d590262d1f99c7b1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `JSDoc` was not being applied correctly to components.
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`01c715e`](https://github.com/yamada-ui/yamada-ui/commit/01c715e480d32a116ecea3feed27bae252bfb68f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `Popover` would close when the pointer moved outside, even when `trigger` was `"hover"` and `closeOnBlur` was `false`.
+
+- Updated dependencies [[`674763e`](https://github.com/yamada-ui/yamada-ui/commit/674763e0e62ed18ceefbac953f969fc5693cf02a)]:
+  - @yamada-ui/close-button@1.0.24
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/motion@1.0.24
+  - @yamada-ui/transitions@1.0.24
+  - @yamada-ui/use-animation@1.0.23
+  - @yamada-ui/use-popper@1.0.23
+
 ## 1.0.23
 
 ### Patch Changes

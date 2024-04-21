@@ -1,5 +1,14 @@
 # @yamada-ui/tabs
 
+## 1.0.24
+
+### Patch Changes
+
+- Updated dependencies [[`e440971`](https://github.com/yamada-ui/yamada-ui/commit/e4409713f962edf69275617b2c60eb4b5c59a1b6), [`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff)]:
+  - @yamada-ui/ripple@1.0.24
+  - @yamada-ui/use-clickable@1.2.0
+  - @yamada-ui/core@1.6.5
+
 ## 1.0.23
 
 ### Patch Changes

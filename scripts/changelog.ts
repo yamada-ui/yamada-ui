@@ -50,9 +50,13 @@ const manifest = {
   async update(data: PullRequestData) {
     const prevData = await this.read()
 
-    const computedData = prevData.map((prevData) =>
-      prevData.id === data.id ? data : prevData,
-    )
+    const hasPrev = prevData.some((prev) => prev.id === data.id)
+
+    let computedData = hasPrev
+      ? prevData.map((prevData) => (prevData.id === data.id ? data : prevData))
+      : [data, ...prevData]
+
+    computedData = computedData.sort((a, b) => b.id - a.id)
 
     return this.write(computedData)
   },
@@ -65,7 +69,6 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
       state: "closed",
       base: "main",
       head: "yamada-ui:changeset-release/main",
-      per_page: 1,
     })
 
     return data[0]

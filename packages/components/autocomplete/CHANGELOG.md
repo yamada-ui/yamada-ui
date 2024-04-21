@@ -1,5 +1,18 @@
 # @yamada-ui/autocomplete
 
+## 1.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`9f81804`](https://github.com/yamada-ui/yamada-ui/commit/9f818041d4dc604bd09d3f544f9257d2d1114fcf), [`81da807`](https://github.com/yamada-ui/yamada-ui/commit/81da8073d308a385fdf87e46d590262d1f99c7b1), [`01c715e`](https://github.com/yamada-ui/yamada-ui/commit/01c715e480d32a116ecea3feed27bae252bfb68f), [`f34b463`](https://github.com/yamada-ui/yamada-ui/commit/f34b4639128215c37efaaa989587f9b9f06117ec), [`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff)]:
+  - @yamada-ui/popover@1.1.0
+  - @yamada-ui/portal@1.0.13
+  - @yamada-ui/use-clickable@1.2.0
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/form-control@1.0.26
+  - @yamada-ui/icon@1.0.23
+  - @yamada-ui/motion@1.0.24
+
 ## 1.1.9
 
 ### Patch Changes

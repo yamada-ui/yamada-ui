@@ -1,5 +1,11 @@
 # @yamada-ui/use-clickable
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `focusOnClick` prop.
+
 ## 1.1.0
 
 ### Minor Changes

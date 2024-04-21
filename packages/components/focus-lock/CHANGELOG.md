@@ -1,5 +1,11 @@
 # @yamada-ui/focus-lock
 
+## 1.0.13
+
+### Patch Changes
+
+- [#1226](https://github.com/yamada-ui/yamada-ui/pull/1226) [`5fad1b8`](https://github.com/yamada-ui/yamada-ui/commit/5fad1b846835a17411146b3bfdb5c6adf018ffd0) Thanks [@dango-the-world](https://github.com/dango-the-world)! - add jsdoc to focuslock component
+
 ## 1.0.12
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @yamada-ui/layouts
 
+## 1.1.20
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+
 ## 1.1.19
 
 ### Patch Changes

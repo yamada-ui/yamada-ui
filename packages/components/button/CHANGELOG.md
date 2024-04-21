@@ -1,5 +1,14 @@
 # @yamada-ui/button
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies [[`0869a2a`](https://github.com/yamada-ui/yamada-ui/commit/0869a2a94b286d801de4123d3305270f117c543a), [`e440971`](https://github.com/yamada-ui/yamada-ui/commit/e4409713f962edf69275617b2c60eb4b5c59a1b6)]:
+  - @yamada-ui/loading@1.1.0
+  - @yamada-ui/ripple@1.0.24
+  - @yamada-ui/core@1.6.5
+
 ## 1.0.25
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @yamada-ui/slider
 
+## 1.0.28
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/form-control@1.0.26
+
 ## 1.0.27
 
 ### Patch Changes

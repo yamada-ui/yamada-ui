@@ -1,5 +1,15 @@
 # @yamada-ui/dropzone
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies [[`0869a2a`](https://github.com/yamada-ui/yamada-ui/commit/0869a2a94b286d801de4123d3305270f117c543a)]:
+  - @yamada-ui/loading@1.1.0
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/form-control@1.0.26
+  - @yamada-ui/transitions@1.0.24
+
 ## 1.0.25
 
 ### Patch Changes

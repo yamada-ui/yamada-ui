@@ -1,5 +1,14 @@
 # @yamada-ui/radio
 
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/form-control@1.0.26
+  - @yamada-ui/layouts@1.1.20
+
 ## 1.0.26
 
 ### Patch Changes

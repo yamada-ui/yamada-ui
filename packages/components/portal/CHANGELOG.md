@@ -1,5 +1,11 @@
 # @yamada-ui/portal
 
+## 1.0.13
+
+### Patch Changes
+
+- [#1238](https://github.com/yamada-ui/yamada-ui/pull/1238) [`f34b463`](https://github.com/yamada-ui/yamada-ui/commit/f34b4639128215c37efaaa989587f9b9f06117ec) Thanks [@KekmaTime](https://github.com/KekmaTime)! - add jsdoc to portal component
+
 ## 1.0.12
 
 ### Patch Changes

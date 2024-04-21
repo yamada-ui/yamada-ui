@@ -1,5 +1,15 @@
 # @yamada-ui/ripple
 
+## 1.0.24
+
+### Patch Changes
+
+- [#1225](https://github.com/yamada-ui/yamada-ui/pull/1225) [`e440971`](https://github.com/yamada-ui/yamada-ui/commit/e4409713f962edf69275617b2c60eb4b5c59a1b6) Thanks [@taku10101](https://github.com/taku10101)! - Add JSDoc to Ripple component
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/motion@1.0.24
+
 ## 1.0.23
 
 ### Patch Changes

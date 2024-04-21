@@ -32,6 +32,7 @@ export type ChartCurveType =
   | "step"
   | "stepBefore"
   | "stepAfter"
+export type TooltipDataSourceType = "segment" | "all"
 
 export type AreaChartProps = Merge<
   CSSUIProps,
@@ -48,6 +49,10 @@ export type LineChartProps = Merge<
 export type RadarChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.RadarChart>
+>
+export type PieChartProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof Recharts.PieChart>
 >
 export type ReferenceLineProps = Merge<CSSUIProps, Recharts.ReferenceLineProps>
 export type ResponsiveContainerProps = Merge<
@@ -91,6 +96,23 @@ export type RadarProps = Merge<
     activeDot?: DotProps
     dimDot?: DotProps
     dimRadar?: Partial<RadarProps>
+  }
+>
+export type PieProps = Merge<
+  Merge<CSSUIProps, Recharts.PieProps>,
+  {
+    activeShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+    inactiveShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+    label?: CSSUIProps
+    labelLine?: CSSUIProps
+  }
+>
+export type CellProps = Merge<
+  CSSUIProps,
+  {
+    name: string
+    value: number
+    dimCell?: Partial<CellProps>
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>

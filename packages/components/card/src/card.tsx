@@ -32,7 +32,7 @@ export type CardProps = Omit<HTMLUIProps<"article">, "direction"> &
   CardOptions
 
 /**
- * `Card` is a component that groups and displays related information. By default, it renders a `section` element.
+ * `Card` is a component that groups and displays related information. By default, it renders a `article` element.
  *
  * @see Docs https://yamada-ui.com/components/data-display/card
  */

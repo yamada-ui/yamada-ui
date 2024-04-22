@@ -1,5 +1,11 @@
 # @yamada-ui/menu
 
+## 1.1.1
+
+### Patch Changes
+
+- [#1283](https://github.com/yamada-ui/yamada-ui/pull/1283) [`771b400`](https://github.com/yamada-ui/yamada-ui/commit/771b4006e2753543b02e386cbab3e4a1f278dd5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug with circular references.
+
 ## 1.1.0
 
 ### Minor Changes

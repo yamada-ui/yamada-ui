@@ -1,5 +1,14 @@
 # @yamada-ui/react
 
+## 1.3.7
+
+### Patch Changes
+
+- Updated dependencies [[`7890957`](https://github.com/yamada-ui/yamada-ui/commit/7890957bb684acd475707e0662953c904e8a937d), [`acf86ce`](https://github.com/yamada-ui/yamada-ui/commit/acf86ce98c94db25d82e0dc4ff4ef96db979933a), [`771b400`](https://github.com/yamada-ui/yamada-ui/commit/771b4006e2753543b02e386cbab3e4a1f278dd5c)]:
+  - @yamada-ui/modal@1.2.5
+  - @yamada-ui/card@1.0.25
+  - @yamada-ui/menu@1.1.1
+
 ## 1.3.6
 
 ### Patch Changes

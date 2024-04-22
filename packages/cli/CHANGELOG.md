@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.0.5
+
+### Patch Changes
+
+- [#1280](https://github.com/yamada-ui/yamada-ui/pull/1280) [`236c067`](https://github.com/yamada-ui/yamada-ui/commit/236c0674daba4a0724e001cf1baa856e977f4e0e) Thanks [@108yen](https://github.com/108yen)! - Fixed a bug that `generated-theme.types.d.ts` cannot be searched on windows.
+
 ## 1.0.4
 
 ### Patch Changes

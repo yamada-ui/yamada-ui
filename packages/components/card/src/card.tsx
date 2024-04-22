@@ -32,7 +32,7 @@ export type CardProps = Omit<HTMLUIProps<"article">, "direction"> &
   CardOptions
 
 /**
- * `Card` is a component that groups and displays related information. By default, it renders a `section` element.
+ * `Card` is a component that groups and displays related information. By default, it renders a `article` element.
  *
  * @see Docs https://yamada-ui.com/components/data-display/card
  */
@@ -57,7 +57,7 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
 
   return (
     <CardProvider value={styles}>
-      <ui.section
+      <ui.article
         ref={ref}
         className={cx("ui-card", className)}
         __css={css}
@@ -81,7 +81,7 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
     }
 
     return (
-      <ui.div
+      <ui.header
         ref={ref}
         className={cx("ui-card__header", className)}
         __css={css}
@@ -129,7 +129,7 @@ export const CardFooter = forwardRef<CardFooterProps, "footer">(
     }
 
     return (
-      <ui.div
+      <ui.footer
         ref={ref}
         className={cx("ui-card__footer", className)}
         __css={css}

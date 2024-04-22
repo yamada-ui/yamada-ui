@@ -57,7 +57,7 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
 
   return (
     <CardProvider value={styles}>
-      <ui.section
+      <ui.article
         ref={ref}
         className={cx("ui-card", className)}
         __css={css}
@@ -81,7 +81,7 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
     }
 
     return (
-      <ui.div
+      <ui.header
         ref={ref}
         className={cx("ui-card__header", className)}
         __css={css}
@@ -129,7 +129,7 @@ export const CardFooter = forwardRef<CardFooterProps, "footer">(
     }
 
     return (
-      <ui.div
+      <ui.footer
         ref={ref}
         className={cx("ui-card__footer", className)}
         __css={css}

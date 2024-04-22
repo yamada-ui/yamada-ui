@@ -1,5 +1,11 @@
 # @yamada-ui/modal
 
+## 1.2.5
+
+### Patch Changes
+
+- [#1273](https://github.com/yamada-ui/yamada-ui/pull/1273) [`7890957`](https://github.com/yamada-ui/yamada-ui/commit/7890957bb684acd475707e0662953c904e8a937d) Thanks [@eda-saizaku](https://github.com/eda-saizaku)! - Fixed a bug where used `main` tag in `ModalBody`, to align with WHATWG standards
+
 ## 1.2.4
 
 ### Patch Changes

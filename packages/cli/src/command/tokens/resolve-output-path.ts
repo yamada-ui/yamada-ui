@@ -13,6 +13,8 @@ const resolveThemePath = async (): Promise<string | undefined> => {
   const paths = [
     path.join("node_modules", ".pnpm", "@yamada-ui+core@*", ...themePath),
     path.join(...themePath),
+    path.posix.join("node_modules", ".pnpm", "@yamada-ui+core@*", ...themePath),
+    path.posix.join(...themePath),
   ]
 
   const triedPaths = await Promise.all(

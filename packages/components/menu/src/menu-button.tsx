@@ -1,7 +1,7 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
+import { ChevronIcon } from "@yamada-ui/icon"
 import { PopoverTrigger } from "@yamada-ui/popover"
-import { ChevronIcon } from "@yamada-ui/react"
 import {
   ariaAttr,
   assignRef,

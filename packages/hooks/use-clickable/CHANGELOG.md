@@ -1,5 +1,23 @@
 # @yamada-ui/use-clickable
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `focusOnClick` prop.
+
+## 1.1.0
+
+### Minor Changes
+
+- [#1207](https://github.com/yamada-ui/yamada-ui/pull/1207) [`a539f54`](https://github.com/yamada-ui/yamada-ui/commit/a539f54ef32239b068b20eec5add0c5ebe1f1b76) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended `useClickable` to generic type.
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/use-event-listener@1.0.12
+
 ## 1.0.11
 
 ### Patch Changes

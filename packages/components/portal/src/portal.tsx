@@ -24,6 +24,11 @@ export type PortalProps = {
   isDisabled?: boolean
 }
 
+/**
+ * `Portal` is a component that renders elements outside of the current `DOM` hierarchy.
+ *
+ * @see Docs https://yamada-ui.com/components/other/portal
+ */
 export const Portal = ({
   containerRef,
   appendToParentPortal = true,

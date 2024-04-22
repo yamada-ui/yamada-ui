@@ -57,7 +57,7 @@
       "description": "The callback invoked when the index changes."
     },
     "orientation": {
-      "type": "\"horizontal\" | \"vertical\"",
+      "type": "\"vertical\" | \"horizontal\"",
       "defaultValue": "'horizontal'",
       "required": false,
       "description": "The orientation of the tab list."
@@ -86,32 +86,7 @@
     }
   },
   "TabList": {},
-  "Tab": {
-    "clickOnEnter": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Whether or not trigger click on pressing `Enter`."
-    },
-    "clickOnSpace": {
-      "type": "boolean",
-      "defaultValue": true,
-      "required": false,
-      "description": "Whether or not trigger click on pressing `Space`."
-    },
-    "isDisabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
-    },
-    "isFocusable": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
-    }
-  },
+  "Tab": {},
   "TabPanels": {},
   "TabPanel": {}
 }

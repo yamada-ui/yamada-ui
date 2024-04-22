@@ -1,5 +1,31 @@
 # @yamada-ui/carousel
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.26
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/icon@1.0.23
+  - @yamada-ui/use-token@1.1.11
+  - @yamada-ui/use-value@1.1.11
+
+## 1.0.25
+
+### Patch Changes
+
+- [#1164](https://github.com/yamada-ui/yamada-ui/pull/1164) [`20ccebe`](https://github.com/yamada-ui/yamada-ui/commit/20ccebe6b8a90a5cea47994f5b5f54d201936acd) Thanks [@KekmaTime](https://github.com/KekmaTime)! - patch
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/button@1.0.25
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-controllable-state@1.0.12
+  - @yamada-ui/use-token@1.1.10
+  - @yamada-ui/use-value@1.1.10
+
 ## 1.0.24
 
 ### Patch Changes

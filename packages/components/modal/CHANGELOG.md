@@ -1,5 +1,40 @@
 # @yamada-ui/modal
 
+## 1.2.5
+
+### Patch Changes
+
+- [#1273](https://github.com/yamada-ui/yamada-ui/pull/1273) [`7890957`](https://github.com/yamada-ui/yamada-ui/commit/7890957bb684acd475707e0662953c904e8a937d) Thanks [@eda-saizaku](https://github.com/eda-saizaku)! - Fixed a bug where used `main` tag in `ModalBody`, to align with WHATWG standards
+
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`674763e`](https://github.com/yamada-ui/yamada-ui/commit/674763e0e62ed18ceefbac953f969fc5693cf02a), [`5fad1b8`](https://github.com/yamada-ui/yamada-ui/commit/5fad1b846835a17411146b3bfdb5c6adf018ffd0), [`f34b463`](https://github.com/yamada-ui/yamada-ui/commit/f34b4639128215c37efaaa989587f9b9f06117ec)]:
+  - @yamada-ui/close-button@1.0.24
+  - @yamada-ui/focus-lock@1.0.13
+  - @yamada-ui/portal@1.0.13
+  - @yamada-ui/button@1.0.26
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/motion@1.0.24
+  - @yamada-ui/transitions@1.0.24
+  - @yamada-ui/use-value@1.1.11
+
+## 1.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/button@1.0.25
+  - @yamada-ui/close-button@1.0.23
+  - @yamada-ui/focus-lock@1.0.12
+  - @yamada-ui/motion@1.0.23
+  - @yamada-ui/portal@1.0.12
+  - @yamada-ui/transitions@1.0.23
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-value@1.1.10
+
 ## 1.2.2
 
 ### Patch Changes

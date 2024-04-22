@@ -1,5 +1,33 @@
 # @yamada-ui/loading
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1224](https://github.com/yamada-ui/yamada-ui/pull/1224) [`0869a2a`](https://github.com/yamada-ui/yamada-ui/commit/0869a2a94b286d801de4123d3305270f117c543a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Supported theme system.
+
+### Patch Changes
+
+- Updated dependencies [[`f34b463`](https://github.com/yamada-ui/yamada-ui/commit/f34b4639128215c37efaaa989587f9b9f06117ec)]:
+  - @yamada-ui/portal@1.0.13
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/icon@1.0.23
+  - @yamada-ui/motion@1.0.24
+
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/motion@1.0.23
+  - @yamada-ui/portal@1.0.12
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-timeout@1.0.12
+  - @yamada-ui/use-token@1.1.10
+  - @yamada-ui/use-value@1.1.10
+
 ## 1.0.22
 
 ### Patch Changes

@@ -445,7 +445,7 @@
   {
     "title": "Card",
     "type": "page",
-    "description": "`Card` is a component that groups and displays related information. By default, it renders a `section` element.",
+    "description": "`Card` is a component that groups and displays related information. By default, it renders a `article` element.",
     "slug": "/components/data-display/card",
     "hierarchy": { "lv1": "Card" }
   },

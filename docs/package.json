@@ -40,7 +40,7 @@
     "@vercel/speed-insights": "^1.0.10",
     "@yamada-ui/calendar": "1.2.10",
     "@yamada-ui/carousel": "1.0.25",
-    "@yamada-ui/charts": "1.0.6",
+    "@yamada-ui/charts": "1.1.0",
     "@yamada-ui/dropzone": "1.0.25",
     "@yamada-ui/fontawesome": "1.0.22",
     "@yamada-ui/markdown": "1.0.23",

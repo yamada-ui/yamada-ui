@@ -450,7 +450,7 @@
   {
     "title": "Card",
     "type": "page",
-    "description": "`Card`は、関連する情報をグループ化して表示するコンポーネントです。デフォルトでは、`section`要素をレンダリングします。",
+    "description": "`Card`は、関連する情報をグループ化して表示するコンポーネントです。デフォルトでは、`article`要素をレンダリングします。",
     "slug": "/components/data-display/card",
     "hierarchy": { "lv1": "Card" }
   },

@@ -1,5 +1,92 @@
 # @yamada-ui/autocomplete
 
+## 1.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`9f81804`](https://github.com/yamada-ui/yamada-ui/commit/9f818041d4dc604bd09d3f544f9257d2d1114fcf), [`81da807`](https://github.com/yamada-ui/yamada-ui/commit/81da8073d308a385fdf87e46d590262d1f99c7b1), [`01c715e`](https://github.com/yamada-ui/yamada-ui/commit/01c715e480d32a116ecea3feed27bae252bfb68f), [`f34b463`](https://github.com/yamada-ui/yamada-ui/commit/f34b4639128215c37efaaa989587f9b9f06117ec), [`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff)]:
+  - @yamada-ui/popover@1.1.0
+  - @yamada-ui/portal@1.0.13
+  - @yamada-ui/use-clickable@1.2.0
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/form-control@1.0.26
+  - @yamada-ui/icon@1.0.23
+  - @yamada-ui/motion@1.0.24
+
+## 1.1.9
+
+### Patch Changes
+
+- Updated dependencies [[`a539f54`](https://github.com/yamada-ui/yamada-ui/commit/a539f54ef32239b068b20eec5add0c5ebe1f1b76), [`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/use-clickable@1.1.0
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/form-control@1.0.25
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/motion@1.0.23
+  - @yamada-ui/popover@1.0.23
+  - @yamada-ui/portal@1.0.12
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-controllable-state@1.0.12
+  - @yamada-ui/use-descendant@1.0.12
+  - @yamada-ui/use-disclosure@1.0.12
+  - @yamada-ui/use-outside-click@1.0.12
+
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies [[`9a9d9c8`](https://github.com/yamada-ui/yamada-ui/commit/9a9d9c866be785276afc1cd18291cbc4bcc8afd6), [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63), [`8c5ec99`](https://github.com/yamada-ui/yamada-ui/commit/8c5ec994bd34ad3bcdf2479aafe349c3cc08a3b2), [`b9c0b43`](https://github.com/yamada-ui/yamada-ui/commit/b9c0b435f8ed021b2d4144646433f383c7b6de44), [`96ff446`](https://github.com/yamada-ui/yamada-ui/commit/96ff4467100a4ae756d9824b1791f201c2c8340e)]:
+  - @yamada-ui/core@1.6.3
+  - @yamada-ui/utils@1.1.2
+  - @yamada-ui/popover@1.0.22
+  - @yamada-ui/form-control@1.0.24
+  - @yamada-ui/icon@1.0.21
+  - @yamada-ui/motion@1.0.22
+  - @yamada-ui/portal@1.0.11
+  - @yamada-ui/use-clickable@1.0.11
+  - @yamada-ui/use-controllable-state@1.0.11
+  - @yamada-ui/use-descendant@1.0.11
+  - @yamada-ui/use-disclosure@1.0.11
+  - @yamada-ui/use-outside-click@1.0.11
+
+## 1.1.7
+
+### Patch Changes
+
+- Updated dependencies [[`be96a67`](https://github.com/yamada-ui/yamada-ui/commit/be96a67f3924488275b26cc1bbf419b5c0a1131d), [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89)]:
+  - @yamada-ui/motion@1.0.21
+  - @yamada-ui/utils@1.1.1
+  - @yamada-ui/popover@1.0.21
+  - @yamada-ui/form-control@1.0.23
+  - @yamada-ui/icon@1.0.20
+  - @yamada-ui/portal@1.0.10
+  - @yamada-ui/core@1.6.2
+  - @yamada-ui/use-clickable@1.0.10
+  - @yamada-ui/use-controllable-state@1.0.10
+  - @yamada-ui/use-descendant@1.0.10
+  - @yamada-ui/use-disclosure@1.0.10
+  - @yamada-ui/use-outside-click@1.0.10
+
+## 1.1.6
+
+### Patch Changes
+
+- [#1134](https://github.com/yamada-ui/yamada-ui/pull/1134) [`3fa78c6`](https://github.com/yamada-ui/yamada-ui/commit/3fa78c676c03b9b4ac55b1f8da35ae9e2ec71570) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify property omission logic
+
+- Updated dependencies [[`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7), [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8), [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca), [`08ffbbd`](https://github.com/yamada-ui/yamada-ui/commit/08ffbbde1fcf1ab5e5f313e21e34e39096685031)]:
+  - @yamada-ui/utils@1.1.0
+  - @yamada-ui/core@1.6.1
+  - @yamada-ui/form-control@1.0.22
+  - @yamada-ui/icon@1.0.19
+  - @yamada-ui/motion@1.0.20
+  - @yamada-ui/popover@1.0.20
+  - @yamada-ui/portal@1.0.9
+  - @yamada-ui/use-clickable@1.0.9
+  - @yamada-ui/use-controllable-state@1.0.9
+  - @yamada-ui/use-descendant@1.0.9
+  - @yamada-ui/use-disclosure@1.0.9
+  - @yamada-ui/use-outside-click@1.0.9
+
 ## 1.1.5
 
 ### Patch Changes

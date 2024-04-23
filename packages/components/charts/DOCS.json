@@ -545,6 +545,11 @@
       "required": false,
       "description": "Props passed down to recharts `PolarAngleAxis` component."
     },
+    "polarAngleAxisTickProps": {
+      "type": "CSSUIProps",
+      "required": false,
+      "description": "Props passed down to recharts `tick` of `PolarAngleAxis` component."
+    },
     "polarGridProps": {
       "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | ... 470 more ... | \"radialLines\"> & SVGProps<...> & PolarGridProps",
       "required": false,
@@ -554,6 +559,11 @@
       "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"id\" | \"role\" | \"tabIndex\" | \"ref\" | \"clipPath\" | \"color\" | \"cursor\" | \"direction\" | \"display\" | ... 245 more ... | keyof PolarRadiusAxisProps> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PolarRadiusAxisProps",
       "required": false,
       "description": "Props passed down to recharts `PolarRadiusAxis` component."
+    },
+    "polarRadiusAxisTickProps": {
+      "type": "CSSUIProps",
+      "required": false,
+      "description": "Props passed down to recharts `tick` of `PolarRadiusAxis` component."
     },
     "radarProps": {
       "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | \"cy\" | ... 458 more ... | keyof RadarProps> & Omit<...> & RadarProps, \"color\" | ... 3 more ... | \"dimRadar\"> & { ...; }>",
@@ -627,6 +637,264 @@
       "defaultValue": false,
       "required": false,
       "description": "Determines whether polarRadiusAxis should be displayed."
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, tooltip is visible."
+    }
+  },
+  "DonutChart": {
+    "data": {
+      "type": "(Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; })[]",
+      "required": true,
+      "description": "Chart data."
+    },
+    "cellProps": {
+      "type": "Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; }>",
+      "required": false,
+      "description": "Props for the cell."
+    },
+    "chartProps": {
+      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "required": false,
+      "description": "Props passed down to recharts `PieChart` component."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "containerProps": {
+      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "required": false,
+      "description": "Props passed down to recharts `ResponsiveContainer` component."
+    },
+    "endAngle": {
+      "type": "number",
+      "defaultValue": "-270",
+      "required": false,
+      "description": "Controls angle at which chart ends."
+    },
+    "innerRadius": {
+      "type": "string | number",
+      "defaultValue": "'0%'",
+      "required": false,
+      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "legendProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "required": false,
+      "description": "Props passed down to recharts 'Legend' component."
+    },
+    "outerRadius": {
+      "type": "string | number",
+      "defaultValue": "'80%'",
+      "required": false,
+      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "paddingAngle": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "Controls padding between segments."
+    },
+    "pieProps": {
+      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 494 more ... | \"cornerRadius\"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, \"label\" | ... 2 more ... | \"l...",
+      "required": false,
+      "description": "Props for the pie."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "description": "The size of the DonutChart."
+    },
+    "startAngle": {
+      "type": "number",
+      "defaultValue": "90",
+      "required": false,
+      "description": "Controls angle at which chart starts."
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "Specifies the duration of animation, the unit of this option is ms."
+    },
+    "tooltipDataSource": {
+      "type": "TooltipDataSourceType",
+      "defaultValue": "'all'",
+      "required": false,
+      "description": "Determines which data is displayed in the tooltip."
+    },
+    "tooltipProps": {
+      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "required": false,
+      "description": "Props passed down to recharts 'Tooltip' component."
+    },
+    "unit": {
+      "type": "string",
+      "required": false,
+      "description": "Unit displayed next to each tick in y-axis."
+    },
+    "valueFormatter": {
+      "type": "((value: number) => string) & ((value: number) => string)",
+      "required": false,
+      "description": "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the DonutChart."
+    },
+    "withLabelLines": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether segments labels should have lines that connect the segment with the label."
+    },
+    "withLabels": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether each segment should have associated label."
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, legend is visible."
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, tooltip is visible."
+    }
+  },
+  "PieChart": {
+    "data": {
+      "type": "(Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; })[]",
+      "required": true,
+      "description": "Chart data."
+    },
+    "cellProps": {
+      "type": "Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; }>",
+      "required": false,
+      "description": "Props for the cell."
+    },
+    "chartProps": {
+      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "required": false,
+      "description": "Props passed down to recharts `PieChart` component."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "containerProps": {
+      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "required": false,
+      "description": "Props passed down to recharts `ResponsiveContainer` component."
+    },
+    "endAngle": {
+      "type": "number",
+      "defaultValue": "-270",
+      "required": false,
+      "description": "Controls angle at which chart ends."
+    },
+    "innerRadius": {
+      "type": "string | number",
+      "defaultValue": "'0%'",
+      "required": false,
+      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "legendProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "required": false,
+      "description": "Props passed down to recharts 'Legend' component."
+    },
+    "outerRadius": {
+      "type": "string | number",
+      "defaultValue": "'80%'",
+      "required": false,
+      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "paddingAngle": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "Controls padding between segments."
+    },
+    "pieProps": {
+      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 494 more ... | \"cornerRadius\"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, \"label\" | ... 2 more ... | \"l...",
+      "required": false,
+      "description": "Props for the pie."
+    },
+    "size": {
+      "defaultValue": "md",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "description": "The size of the PieChart."
+    },
+    "startAngle": {
+      "type": "number",
+      "defaultValue": "90",
+      "required": false,
+      "description": "Controls angle at which chart starts."
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "Specifies the duration of animation, the unit of this option is ms."
+    },
+    "tooltipDataSource": {
+      "type": "TooltipDataSourceType",
+      "defaultValue": "'all'",
+      "required": false,
+      "description": "Determines which data is displayed in the tooltip."
+    },
+    "tooltipProps": {
+      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "required": false,
+      "description": "Props passed down to recharts 'Tooltip' component."
+    },
+    "unit": {
+      "type": "string",
+      "required": false,
+      "description": "Unit displayed next to each tick in y-axis."
+    },
+    "valueFormatter": {
+      "type": "((value: number) => string) & ((value: number) => string)",
+      "required": false,
+      "description": "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the PieChart."
+    },
+    "withLabelLines": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether segments labels should have lines that connect the segment with the label."
+    },
+    "withLabels": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether each segment should have associated label."
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, legend is visible."
     },
     "withTooltip": {
       "type": "boolean",
@@ -716,6 +984,14 @@
     },
     "dot": {
       "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "required": false
+    }
+  },
+  "Cell": {
+    "name": { "type": "string", "required": true },
+    "value": { "type": "number", "required": true },
+    "dimCell": {
+      "type": "Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; }>",
       "required": false
     }
   },

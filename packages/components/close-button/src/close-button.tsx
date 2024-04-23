@@ -34,6 +34,12 @@ export type CloseButtonProps = HTMLUIProps<"button"> &
   ThemeProps<"CloseButton"> &
   CloseButtonOptions
 
+/**
+ * `CloseButton` is a component used primarily to trigger the close functionality of a component.
+ *
+ * @see Docs https://yamada-ui.com/components/other/close-button
+ */
+
 export const CloseButton = forwardRef<CloseButtonProps, "button">(
   (props, ref) => {
     const [styles, mergedProps] = useComponentStyle("CloseButton", props)
@@ -61,7 +67,7 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
       flexShrink: 0,
       ...styles,
       ...__css,
-      ...(isRounded ? { borderRadius: "9999px" } : {}),
+      ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),
     }
 
     return (

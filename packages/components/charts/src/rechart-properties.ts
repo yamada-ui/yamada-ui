@@ -73,6 +73,10 @@ export const radarChartProperties: (keyof ComponentPropsWithoutRef<
   "onClick",
 ]
 
+export const pieChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof Recharts.PieChart
+>)[] = ["width", "height", "margin", "onClick", "onMouseEnter", "onMouseLeave"]
+
 export const referenceLineProperties: (keyof Recharts.ReferenceLineProps)[] = [
   "xAxisId",
   "yAxisId",
@@ -366,6 +370,40 @@ export const lineProperties: (keyof Omit<Recharts.LineProps, "ref">)[] = [
   "onMouseEnter",
   "onMouseLeave",
   "strokeDasharray",
+]
+
+export const pieProperties: (keyof Omit<Recharts.PieProps, "ref">)[] = [
+  "cx",
+  "cy",
+  "innerRadius",
+  "outerRadius",
+  "startAngle",
+  "endAngle",
+  "minAngle",
+  "paddingAngle",
+  "nameKey",
+  "dataKey",
+  "legendType",
+  "label",
+  "labelLine",
+  "data",
+  "activeIndex",
+  "activeShape",
+  "inactiveShape",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
 ]
 
 export const dotProperties: (keyof Omit<Recharts.DotProps, "ref">)[] = [

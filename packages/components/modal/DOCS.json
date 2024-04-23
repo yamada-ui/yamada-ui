@@ -1904,6 +1904,11 @@
       "description": "If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts."
     },
     "autoSave": { "type": "string", "required": false },
+    "blankForDragProps": {
+      "type": "CSSUIObject",
+      "required": false,
+      "description": "Props for the blank area when `closeOnDrag` is `true`."
+    },
     "blockScrollOnMount": {
       "type": "boolean",
       "defaultValue": true,
@@ -1915,7 +1920,7 @@
       "type": "boolean",
       "defaultValue": false,
       "required": false,
-      "description": "If `true` then the drawer will close on drag."
+      "description": "If `true`, then the drawer will close on drag."
     },
     "closeOnEsc": {
       "type": "boolean",
@@ -1951,7 +1956,31 @@
       "required": false
     },
     "dir": { "type": "string", "required": false },
+    "dragConstraints": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "Applies constraints on the permitted draggable area."
+    },
+    "dragElastic": {
+      "type": "number",
+      "defaultValue": "0.1",
+      "required": false,
+      "description": "The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement."
+    },
     "draggable": { "type": "Booleanish", "required": false },
+    "dragOffset": {
+      "type": "number",
+      "defaultValue": "80",
+      "required": false,
+      "description": "Offset from being dragged to closing."
+    },
+    "dragVelocity": {
+      "type": "number",
+      "defaultValue": "100",
+      "required": false,
+      "description": "Velocity of the drag that triggers close."
+    },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
       "required": false,
@@ -2629,6 +2658,12 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, display the modal close button."
+    },
+    "withDragBar": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, display the drag bar when `closeOnDrag` is `true`."
     },
     "withOverlay": {
       "type": "boolean",

@@ -1,5 +1,11 @@
 {
   "Loading": {
+    "colorScheme": {
+      "defaultValue": "primary",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "duration": {
       "type": "string | number",
       "required": false,
@@ -16,13 +22,14 @@
       "description": "The CSS `color` property."
     },
     "size": {
-      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
+      "defaultValue": "1em",
+      "type": "string",
       "required": false,
-      "description": "The CSS `font-size` property."
+      "description": "The size of the Loading."
     },
     "variant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | \"oval\"\n  | \"audio\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
-      "defaultValue": "'oval'",
+      "defaultValue": "oval",
+      "type": "string",
       "required": false,
       "description": "The variant of the Loading."
     }

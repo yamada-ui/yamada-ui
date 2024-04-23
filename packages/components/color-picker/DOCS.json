@@ -462,6 +462,11 @@
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
     },
+    "relatedRef": {
+      "type": "RefObject<HTMLElement>",
+      "required": false,
+      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
+    },
     "saturationSliderProps": {
       "type": "Omit<SaturationSliderProps, \"defaultValue\" | \"value\">",
       "required": false,

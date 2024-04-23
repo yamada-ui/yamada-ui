@@ -126,7 +126,7 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
             __css={{
               position: "absolute",
               boxSize: "100%",
-              rounded: "9999px",
+              rounded: "fallback(full, 9999px)",
               opacity: 0.75,
               zIndex: -1,
               bg: pingColor,

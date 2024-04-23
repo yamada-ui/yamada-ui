@@ -1,5 +1,35 @@
 # @yamada-ui/utils
 
+## 1.1.3
+
+### Patch Changes
+
+- [#1204](https://github.com/yamada-ui/yamada-ui/pull/1204) [`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extended `handlerAll` to support multiple args.
+
+## 1.1.2
+
+### Patch Changes
+
+- [#1171](https://github.com/yamada-ui/yamada-ui/pull/1171) [`fc33b93`](https://github.com/yamada-ui/yamada-ui/commit/fc33b934297bf520afbb2ee08f270bf729910a63) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added logic to validate NaN in `getPx`.
+
+## 1.1.1
+
+### Patch Changes
+
+- [`86907c8`](https://github.com/yamada-ui/yamada-ui/commit/86907c82f9d23fd1da8fc8d5eebeab063ef3cb89) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `createId` was not returning a unique value.
+
+## 1.1.0
+
+### Minor Changes
+
+- [#1133](https://github.com/yamada-ui/yamada-ui/pull/1133) [`297361e`](https://github.com/yamada-ui/yamada-ui/commit/297361ebfb08c2c15b59d3e561a859698e68c5a7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `antonym` function.
+
+### Patch Changes
+
+- [#1141](https://github.com/yamada-ui/yamada-ui/pull/1141) [`4755584`](https://github.com/yamada-ui/yamada-ui/commit/475558456e916eb22a90b49de514f9e0261f9bd8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated function exports and regex patterns.
+
+- [#1129](https://github.com/yamada-ui/yamada-ui/pull/1129) [`811975a`](https://github.com/yamada-ui/yamada-ui/commit/811975a659cd8f28bcc36ca2ab25689d3fe7daca) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved `getColor` fallback handling.
+
 ## 1.0.8
 
 ### Patch Changes

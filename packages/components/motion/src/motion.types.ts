@@ -26,6 +26,7 @@ export type {
   AnimationOptions as MotionAnimationOptions,
   AnimationPlaybackControls as MotionAnimationPlaybackControls,
   MotionValue,
+  PanInfo as MotionPanInfo,
 } from "framer-motion"
 
 export type MotionAs = keyof typeof motion

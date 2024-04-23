@@ -215,6 +215,7 @@ return <DonutChart data={mewtwo} paddingAngle={15} />
 ### 内半径、外半径を調整する
 
 内半径を調整する場合は`innerRadius`に、外半径を調整する場合は`outerRadius`にパーセンテージまたは数値を設定します。
+
 :::note
 パーセンテージを設定した場合は、チャートの高さに対する割合として計算されます。
 数値を設定した場合は、半径の`px`として計算されます。
@@ -354,9 +355,9 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} withLabels withLabelLines />
 ```
 
-### ツールチップを切り替える
+### ツールチップに表示するデータを切り替える
 
-ツールチップに表示するデータを切り替える場合は、`tooltipDataSource`を設定します。デフォルトは、`all`です。
+ツールチップに表示するデータを切り替える場合は、`tooltipDataSource`に`all`または`segment`を設定します。デフォルトは、`all`です。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(

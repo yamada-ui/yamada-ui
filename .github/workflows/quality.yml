@@ -31,7 +31,13 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        run: pnpm test:ci
+        run:
+          git diff --name-only origin/${{ github.base_ref }} HEAD --relative ./packages |\
+          grep '\.\(js\|jsx\|ts\|tsx\)$' |\
+          xargs basename |\
+          cut -d "." -f 1 |\
+          uniq |\
+          xargs pnpm test:ci
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4

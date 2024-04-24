@@ -1,8 +1,8 @@
 import { a11y, render, waitFor, screen, fireEvent } from "@yamada-ui/test"
 import type { CellProps } from "../src"
-import { DonutChart } from "../src"
+import { PieChart } from "../src"
 
-describe("<DonutChart />", () => {
+describe("<PieChart />", () => {
   const defaultResizeObserver = global.ResizeObserver
 
   beforeAll(() => {
@@ -72,17 +72,17 @@ describe("<DonutChart />", () => {
 
   test("should pass a11y test", async () => {
     await a11y(
-      <DonutChart containerProps={{ width: 400, height: "80%" }} data={data} />,
+      <PieChart containerProps={{ width: 400, height: "80%" }} data={data} />,
     )
   })
 
   test("cells should be rendered", async () => {
     const { container } = render(
-      <DonutChart containerProps={{ width: 400, height: "80%" }} data={data} />,
+      <PieChart containerProps={{ width: 400, height: "80%" }} data={data} />,
     )
 
     await waitFor(() =>
-      expect(container.querySelectorAll(".ui-donut-chart__cell")).toHaveLength(
+      expect(container.querySelectorAll(".ui-pie-chart__cell")).toHaveLength(
         data.length,
       ),
     )
@@ -90,7 +90,7 @@ describe("<DonutChart />", () => {
 
   test("labels should be rendered according to withLabels", async () => {
     const { rerender, container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={true}
@@ -98,13 +98,13 @@ describe("<DonutChart />", () => {
     )
 
     await waitFor(() =>
-      expect(container.querySelectorAll(".ui-donut-chart__label")).toHaveLength(
+      expect(container.querySelectorAll(".ui-pie-chart__label")).toHaveLength(
         data.length,
       ),
     )
 
     rerender(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={false}
@@ -113,14 +113,14 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__label"),
+        container.querySelector(".ui-pie-chart__label"),
       ).not.toBeInTheDocument(),
     )
   })
 
   test("labelLines should be rendered according to withLabelLines", async () => {
     const { rerender, container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={true}
@@ -130,12 +130,12 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelectorAll(".ui-donut-chart__label-line"),
+        container.querySelectorAll(".ui-pie-chart__label-line"),
       ).toHaveLength(data.length),
     )
 
     rerender(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={true}
@@ -145,14 +145,14 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__label-line"),
+        container.querySelector(".ui-pie-chart__label-line"),
       ).not.toBeInTheDocument(),
     )
   })
 
   test("if withLabels is false, labelLines should not be rendered", async () => {
     const { container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={false}
@@ -162,14 +162,14 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__label-line"),
+        container.querySelector(".ui-pie-chart__label-line"),
       ).not.toBeInTheDocument(),
     )
   })
 
   test("tooltip should be rendered according to withTooltip", async () => {
     const { rerender, container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withTooltip={true}
@@ -178,11 +178,11 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__chart"),
+        container.querySelector(".ui-pie-chart__chart"),
       ).toBeInTheDocument(),
     )
 
-    let chartElement = container.querySelector(".ui-donut-chart__chart")
+    let chartElement = container.querySelector(".ui-pie-chart__chart")
     assert(chartElement !== null)
 
     fireEvent.mouseOver(chartElement, {
@@ -198,7 +198,7 @@ describe("<DonutChart />", () => {
     }
 
     rerender(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withTooltip={false}
@@ -207,11 +207,11 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__chart"),
+        container.querySelector(".ui-pie-chart__chart"),
       ).toBeInTheDocument(),
     )
 
-    chartElement = container.querySelector(".ui-donut-chart__chart")
+    chartElement = container.querySelector(".ui-pie-chart__chart")
     assert(chartElement !== null)
 
     fireEvent.mouseOver(chartElement, {
@@ -227,7 +227,7 @@ describe("<DonutChart />", () => {
   // TODO: Contents of `tooltip` not rendered.
   test.skip("if tooltip data source is segment, the data displayed in the tooltip is segmented", async () => {
     const { container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withTooltip={true}
@@ -237,11 +237,11 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__chart"),
+        container.querySelector(".ui-pie-chart__chart"),
       ).toBeInTheDocument(),
     )
 
-    let chartElement = container.querySelector(".ui-donut-chart__chart")
+    let chartElement = container.querySelector(".ui-pie-chart__chart")
     assert(chartElement !== null)
 
     fireEvent.mouseOver(chartElement, {
@@ -259,7 +259,7 @@ describe("<DonutChart />", () => {
 
   test("legend should be rendered according to withLegend", async () => {
     const { rerender, container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLegend={true}
@@ -276,7 +276,7 @@ describe("<DonutChart />", () => {
     }
 
     rerender(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLegend={false}
@@ -297,7 +297,7 @@ describe("<DonutChart />", () => {
 
   test("render valueFormatter", async () => {
     const { container } = render(
-      <DonutChart
+      <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         valueFormatter={(value) => value.toLocaleString()}
@@ -306,11 +306,11 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__chart"),
+        container.querySelector(".ui-pie-chart__chart"),
       ).toBeInTheDocument(),
     )
 
-    let chartElement = container.querySelector(".ui-donut-chart__chart")
+    let chartElement = container.querySelector(".ui-pie-chart__chart")
     assert(chartElement !== null)
 
     fireEvent.mouseOver(chartElement, {

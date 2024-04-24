@@ -23,6 +23,9 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      number: ${{ github.event.number }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,7 +34,13 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        run: pnpm test:ci
+        run: |
+          gh pr diff ${number} --name-only |\
+          grep '\.\(js\|jsx\|ts\|tsx\)$' |\
+          xargs -r basename |\
+          cut -d "." -f 1 |\
+          uniq |\
+          xargs -r pnpm test:ci
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4

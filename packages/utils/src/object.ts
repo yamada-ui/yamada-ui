@@ -1,33 +1,73 @@
-import type { Dict } from "."
-import { isObject, isArray, isFunction } from "."
+import type { Dict, Union } from "."
+import { isObject, isArray, isFunction, isString } from "."
 
-export const omitObject = <T extends Dict, K extends keyof T>(
+const omitObjectHelper = <T extends Dict, K extends keyof T>(
   obj: T,
-  keys: K[],
-): Omit<T, K> => {
-  const result: Dict = {}
+  path: Union<K>[],
+): any => {
+  if (!path.length) return obj
 
-  Object.keys(obj).forEach((key) => {
-    if (keys.includes(key as K)) return
+  const [primaryKey, ...restKeys] = path
 
-    result[key] = obj[key]
-  })
+  if (restKeys.length === 0 && primaryKey in obj) {
+    const { [primaryKey]: _, ...rest } = obj
 
-  return result as Omit<T, K>
+    return rest
+  }
+
+  if (obj[primaryKey] && isObject(obj[primaryKey])) {
+    return {
+      ...obj,
+      [primaryKey]: omitObjectHelper(obj[primaryKey], restKeys),
+    }
+  }
+
+  return obj
 }
 
-export const pickObject = <T extends Dict, K extends keyof T>(
-  obj: T,
-  keys: K[],
-): { [P in K]: T[P] } => {
-  const result = {} as { [P in K]: T[P] }
+export const omitObject = <
+  Y extends Dict,
+  M extends keyof Y,
+  D extends unknown,
+>(
+  obj: Y,
+  keys: Union<M>[],
+) => {
+  return keys.reduce((prev, key) => {
+    const path = (isString(key) ? key.split(".") : []) as Union<M>[]
 
-  keys.forEach((key) => {
-    if (key in obj) result[key] = obj[key]
-  })
-
-  return result
+    return omitObjectHelper(prev, path)
+  }, obj) as unknown as D extends unknown ? Omit<Y, M> : D
 }
+
+export const pickObject = <
+  Y extends Dict,
+  M extends keyof Y,
+  D extends unknown,
+>(
+  obj: Y,
+  keys: Union<M>[],
+  fallbackValue = "__fallback",
+) =>
+  keys.reduce((prev, key) => {
+    const path = isString(key) ? key.split(".") : []
+
+    if (!path.length) return prev
+
+    const value = getMemoizedObject(obj, key as string, fallbackValue)
+
+    if (value === fallbackValue) return prev
+
+    prev = merge(
+      prev,
+      path.reduceRight(
+        (prev, key) => ({ [key]: key === path.at(-1) ? value : prev }),
+        {},
+      ),
+    )
+
+    return prev
+  }, {}) as D extends unknown ? { [H in M]: Y[H] } : D
 
 export const splitObject = <T extends Dict, K extends keyof T>(
   obj: T,

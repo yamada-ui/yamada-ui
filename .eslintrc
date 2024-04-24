@@ -24,7 +24,14 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".mts", ".d.ts"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".mts",
+          ".d.ts"
+        ]
       }
     }
   },
@@ -44,16 +51,37 @@
       }
     ],
     "no-var": "error",
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "off",
     "react/no-unescaped-entities": "off",
     "react/jsx-curly-brace-presence": "error",
     "react/jsx-no-leaked-render": "error",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ],
     "@typescript-eslint/consistent-type-imports": "error",
     "unused-imports/no-unused-imports": "error",
-    "vitest/consistent-test-it": ["error", { "fn": "test" }],
+    "vitest/consistent-test-it": [
+      "error",
+      {
+        "fn": "test"
+      }
+    ],
     "vitest/expect-expect": "off",
     "vitest/no-alias-methods": "error",
     "vitest/no-conditional-expect": "error",
@@ -83,37 +111,57 @@
     "vitest/require-hook": "off",
     "vitest/require-to-throw-message": "error",
     "vitest/require-top-level-describe": "error",
-    "vitest/valid-expect": ["error", {
-      "alwaysAwait": true
-    }]
+    "vitest/valid-expect": [
+      "error",
+      {
+        "alwaysAwait": true
+      }
+    ]
   },
   "overrides": [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json"]
+        "project": [
+          "tsconfig.json"
+        ]
       }
     },
     {
-      "files": ["scripts/**/*", "packages/cli/**/*", "stories/**/*"],
+      "files": [
+        "scripts/**/*",
+        "packages/cli/**/*",
+        "stories/**/*"
+      ],
       "rules": {
         "no-console": "off"
       }
     },
     {
-      "files": ["scripts/setup-test.ts"],
+      "files": [
+        "scripts/setup-test.ts"
+      ],
       "rules": {
         "vitest/prefer-spy-on": "off"
       }
     },
     {
-      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "files": [
+        "**/*.test.ts",
+        "**/*.test.tsx"
+      ],
       "rules": {
         "vitest/require-hook": "error"
       }
     },
     {
-      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "files": [
+        "**/*.test.ts",
+        "**/*.test.tsx"
+      ],
       "rules": {
         "testing-library/prefer-query-by-disappearance": "error",
         "testing-library/no-dom-import": "error",

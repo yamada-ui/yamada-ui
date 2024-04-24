@@ -55,7 +55,7 @@ dependencies:
     version: 5.0.23(@emotion/react@11.11.0)(@types/react@18.2.77)(@yamada-ui/react@1.3.7)(next@14.2.1)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/react':
     specifier: 1.3.7
-    version: 1.3.7(@emotion/react@11.11.0)(@emotion/styled@11.11.5)(@types/react@18.2.77)(framer-motion@11.1.7)(react-dom@18.2.0)(react@18.2.0)
+    version: 1.3.7(@emotion/react@11.11.0)(@emotion/styled@11.11.5)(@types/react@18.2.77)(framer-motion@11.1.3)(react-dom@18.2.0)(react@18.2.0)
   '@yamada-ui/table':
     specifier: 1.0.28
     version: 1.0.28(@types/react@18.2.77)(react-dom@18.2.0)(react@18.2.0)
@@ -538,6 +538,10 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
+      '@effect-ts/core':
+        optional: true
+      '@effect-ts/otel':
+        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:
@@ -2515,7 +2519,7 @@ packages:
       '@yamada-ui/use-value': 1.1.11(@types/react@18.2.77)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.1.3(react@18.2.0)
       react: 18.2.0
-      recharts: 2.12.6(react-dom@18.2.0)(react@18.2.0)
+      recharts: 2.12.5(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - react-dom
@@ -2685,7 +2689,7 @@ packages:
     dependencies:
       '@yamada-ui/utils': 1.1.3(react@18.2.0)
       react: 18.2.0
-      react-focus-lock: 2.12.1(@types/react@18.2.77)(react@18.2.0)
+      react-focus-lock: 2.11.3(@types/react@18.2.77)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -2995,7 +2999,7 @@ packages:
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.0(@types/react@18.2.77)(react@18.2.0)
       '@yamada-ui/core': 1.6.5(@types/react@18.2.77)(react-dom@18.2.0)(react@18.2.0)
-      '@yamada-ui/react': 1.3.7(@emotion/react@11.11.0)(@emotion/styled@11.11.5)(@types/react@18.2.77)(framer-motion@11.1.7)(react-dom@18.2.0)(react@18.2.0)
+      '@yamada-ui/react': 1.3.7(@emotion/react@11.11.0)(@emotion/styled@11.11.5)(@types/react@18.2.77)(framer-motion@11.1.3)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.1.3(react@18.2.0)
       next: 14.2.1(@opentelemetry/api@1.8.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -3177,7 +3181,7 @@ packages:
       - react-dom
     dev: false
 
-  /@yamada-ui/react@1.3.7(@emotion/react@11.11.0)(@emotion/styled@11.11.5)(@types/react@18.2.77)(framer-motion@11.1.7)(react-dom@18.2.0)(react@18.2.0):
+  /@yamada-ui/react@1.3.7(@emotion/react@11.11.0)(@emotion/styled@11.11.5)(@types/react@18.2.77)(framer-motion@11.1.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-xIPTcjQvBBoq/Z45ZiXAa0U/GaCqkZxZx5JKWrdP90W+hyfY+5oPuilzFRcLkEn4uEaocaCJQ9T/xwgLq3PhBQ==}
     peerDependencies:
       '@emotion/react': ^11.0.0
@@ -3284,7 +3288,7 @@ packages:
       '@yamada-ui/use-value': 1.1.11(@types/react@18.2.77)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/use-window-event': 1.0.12(react@18.2.0)
       '@yamada-ui/utils': 1.1.3(react@18.2.0)
-      framer-motion: 11.1.7(react-dom@18.2.0)(react@18.2.0)
+      framer-motion: 11.1.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -3315,7 +3319,7 @@ packages:
       '@yamada-ui/icon': 1.0.23(@types/react@18.2.77)(react-dom@18.2.0)(react@18.2.0)
       '@yamada-ui/utils': 1.1.3(react@18.2.0)
       react: 18.2.0
-      react-resizable-panels: 2.0.18(react-dom@18.2.0)(react@18.2.0)
+      react-resizable-panels: 2.0.17(react-dom@18.2.0)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - react-dom
@@ -5992,8 +5996,8 @@ packages:
     dependencies:
       fetch-blob: 3.2.0
 
-  /framer-motion@11.1.7(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-cW11Pu53eDAXUEhv5hEiWuIXWhfkbV32PlgVISn7jRdcAiVrJ1S03YQQ0/DzoswGYYwKi4qYmHHjCzAH52eSdQ==}
+  /framer-motion@11.1.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/t74b1WQu+mpZtra6xFSfsRfdTymJjNYgFudVIsUmoOWjznr3x5o9HbrX7Jt9655OCA2Js0W79bMZEKE7owp9w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -9233,8 +9237,8 @@ packages:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
     dev: false
 
-  /react-focus-lock@2.12.1(@types/react@18.2.77)(react@18.2.0):
-    resolution: {integrity: sha512-lfp8Dve4yJagkHiFrC1bGtib3mF2ktqwPJw4/WGcgPW+pJ/AVQA5X2vI7xgp13FcxFEpYBBHpXai/N2DBNC0Jw==}
+  /react-focus-lock@2.11.3(@types/react@18.2.77)(react@18.2.0):
+    resolution: {integrity: sha512-CfWYS86y6KvAIGxYzO1/HlWI2zGON9Fa3L2xfREDGMNFAtYj3m/ZRvnsMH4H75dj5FpgDy2LWA1Vyx+twV80vw==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -9343,8 +9347,8 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.77)(react@18.2.0)
     dev: false
 
-  /react-resizable-panels@2.0.18(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-rKagCW6C8tTjWRq5jNsASsi4TB2a+IixL9++0G1+kPgAgvULPVf7kE0VbHysC3wdvcGYMa70O46C9YpG7CCkeA==}
+  /react-resizable-panels@2.0.17(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-MhnHUjYB6NCZ7rmTXuTg/8+IKaj0PkQP8dm+r3Riljd+lGPElqbTX+mfqr0HJBDWJF0JH30cwe6CnuiNG6RIIg==}
     peerDependencies:
       react: ^16.14.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
@@ -9449,8 +9453,8 @@ packages:
       decimal.js-light: 2.5.1
     dev: false
 
-  /recharts@2.12.6(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-D+7j9WI+D0NHauah3fKHuNNcRK8bOypPW7os1DERinogGBGaHI7i6tQKJ0aUF3JXyBZ63dyfKIW2WTOPJDxJ8w==}
+  /recharts@2.12.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Cy+BkqrFIYTHJCyKHJEPvbHE2kVQEP6PKbOHJ8ztRGTAhvHuUnCwDaKVb13OwRFZ0QNUk1QvGTDdgWSMbuMtKw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0

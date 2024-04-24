@@ -445,7 +445,7 @@
   {
     "title": "Card",
     "type": "page",
-    "description": "`Card` is a component that groups and displays related information. By default, it renders a `article` element.",
+    "description": "`Card` is a component that groups and displays related information. By default, it renders a `section` element.",
     "slug": "/components/data-display/card",
     "hierarchy": { "lv1": "Card" }
   },
@@ -2410,9 +2410,109 @@
   {
     "title": "DonutChart",
     "type": "page",
-    "description": "We are currently considering the development of `DonutChart`.",
+    "description": "`DonutChart` is a component for drawing donut charts to compare multiple sets of data.",
     "slug": "/components/feedback/donut-chart",
     "hierarchy": { "lv1": "DonutChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#import",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#usage",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#change-size",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#display-legend",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Display Legend"
+    }
+  },
+  {
+    "title": "Adjust spacing",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#adjust-spacing",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust spacing"
+    }
+  },
+  {
+    "title": "Adjust inner radius, outer radius",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#adjust-inner-radius-outer-radius",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust inner radius, outer radius"
+    }
+  },
+  {
+    "title": "Adjust start angle, end angle",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#adjust-start-angle-end-angle",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust start angle, end angle"
+    }
+  },
+  {
+    "title": "Display Labels",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#display-labels",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Display Labels"
+    }
+  },
+  {
+    "title": "Switching the data displayed in the tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#switching-the-data-displayed-in-the-tooltip",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Switching the data displayed in the tooltip"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#hide-tooltip",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#format-values",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#adjust-opacity",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Opacity"
+    }
   },
   {
     "title": "Feedback",
@@ -2580,9 +2680,83 @@
   {
     "title": "PieChart",
     "type": "page",
-    "description": "We are currently considering the development of `PieChart`.",
+    "description": "`PieChart` is a component for drawing pie charts to compare multiple sets of data.",
     "slug": "/components/feedback/pie-chart",
     "hierarchy": { "lv1": "PieChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#import",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#usage",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#change-size",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#display-legend",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Adjust spacing",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#adjust-spacing",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Adjust spacing" }
+  },
+  {
+    "title": "Adjust start angle, end angle",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#adjust-start-angle-end-angle",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Adjust start angle, end angle"
+    }
+  },
+  {
+    "title": "Display Labels",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#display-labels",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Labels" }
+  },
+  {
+    "title": "Switching the data displayed in the tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#switching-the-data-displayed-in-the-tooltip",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Switching the data displayed in the tooltip"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#hide-tooltip",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#format-values",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#adjust-opacity",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
   },
   {
     "title": "Progress",

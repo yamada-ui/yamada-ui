@@ -78,6 +78,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@emotion/react": "11.11.0",
     "@emotion/styled": "11.11.0",
+    "@eslint/eslintrc": "^3.0.2",
     "@faker-js/faker": "^8.4.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
@@ -141,6 +142,7 @@
     "execa": "^8.0.1",
     "find-packages": "^10.0.4",
     "glob": "^10.3.12",
+    "globals": "^15.1.0",
     "husky": "^9.0.11",
     "jsdom": "^24.0.0",
     "lint-staged": "15.2.2",
@@ -160,6 +162,7 @@
     "tsx": "^4.7.2",
     "turbo": "^1.13.2",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0",
     "vite": "^5.2.10",
     "vitest": "^1.5.1",
     "vitest-axe": "^0.1.0"

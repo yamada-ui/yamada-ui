@@ -25,7 +25,7 @@ import { memo, useRef, useState } from "react"
 import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"
 import { Header } from "./header"
-import { dateDiff } from "./utils"
+import { getDateDiff } from "./utils"
 
 type Props = StackProps & {
   mails: MailItem[]
@@ -89,9 +89,12 @@ export const Inbox: FC<Props> = memo(
               const defaultIsSelected = id === defaultMail.id
 
               return (
-                <Box as="li" key={id}>
+                <Box
+                  as="li"
+                  key={id}
+                  display={mode === "unread" && !unRead ? "none" : "block"}
+                >
                   <InboxItem
-                    display={mode === "unread" && !unRead ? "none" : "flex"}
                     defaultIsSelected={defaultIsSelected}
                     resetMapRef={resetMapRef}
                     onClick={() => setMailRef.current(props)}
@@ -157,7 +160,7 @@ const InboxItem: FC<InboxItemProps> = memo(
           <Spacer />
 
           <Text fontSize="xs" color="muted">
-            {dateDiff(timestamp)}
+            {getDateDiff(timestamp)}
           </Text>
         </CardHeader>
 

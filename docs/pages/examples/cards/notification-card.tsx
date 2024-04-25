@@ -1,14 +1,14 @@
-import { faBell, faEyeSlash, faUser } from "@fortawesome/free-solid-svg-icons"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
   Card,
   CardBody,
   CardHeader,
   HStack,
   Heading,
+  Icon,
   Text,
   VStack,
 } from "@yamada-ui/react"
+import { Bell, EyeOff, User } from "lucide-react"
 import { memo } from "react"
 
 export const NotificationsCard = memo(() => {
@@ -34,7 +34,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <FontAwesomeIcon icon={faBell} size="xl" />
+            <Icon as={Bell} size="2xl" />
 
             <VStack gap="xs">
               <Text>Everything</Text>
@@ -49,7 +49,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <FontAwesomeIcon icon={faUser} size="xl" />
+            <Icon as={User} size="2xl" />
 
             <VStack gap="xs">
               <Text>Available</Text>
@@ -64,7 +64,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <FontAwesomeIcon icon={faEyeSlash} size="xl" />
+            <Icon as={EyeOff} size="2xl" />
 
             <VStack gap="xs">
               <Text>Ignoring</Text>

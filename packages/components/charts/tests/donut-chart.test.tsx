@@ -224,9 +224,8 @@ describe("<DonutChart />", () => {
     ).not.toBeInTheDocument()
   })
 
-  // TODO: Contents of `tooltip` not rendered.
-  test.skip("if tooltip data source is segment, the data displayed in the tooltip is segmented", async () => {
-    const { container } = render(
+  test("if tooltip data source is segment, the data displayed in the tooltip is segmented", async () => {
+    const { container, user } = render(
       <DonutChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
@@ -241,20 +240,13 @@ describe("<DonutChart />", () => {
       ).toBeInTheDocument(),
     )
 
-    let chartElement = container.querySelector(".ui-donut-chart__chart")
-    assert(chartElement !== null)
+    let cellElement = container.querySelector(".ui-donut-chart__cell")
+    assert(cellElement !== null)
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
-    })
+    await user.hover(cellElement)
 
-    let timesFound = 0
-    for (const { name } of data) {
-      const textElement = screen.queryByText(name)
-      if (textElement) timesFound += 1
-    }
-    expect(timesFound).toBe(1)
+    const textElement = await screen.findByText(/Page\s+/)
+    expect(textElement).toBeInTheDocument()
   })
 
   test("legend should be rendered according to withLegend", async () => {

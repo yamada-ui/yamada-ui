@@ -2567,9 +2567,121 @@
   {
     "title": "DonutChart",
     "type": "page",
-    "description": "`DonutChart`は、現在作成を検討しています。",
+    "description": "`DonutChart`は、複数のデータを比較するためのドーナツチャートを描画するコンポーネントです。",
     "slug": "/components/feedback/donut-chart",
     "hierarchy": { "lv1": "DonutChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#インポート",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#使い方",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#凡例を表示する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "間隔を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#間隔を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "間隔を調整する"
+    }
+  },
+  {
+    "title": "内半径、外半径を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#内半径外半径を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "内半径、外半径を調整する"
+    }
+  },
+  {
+    "title": "開始、終了の角度を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#開始終了の角度を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "開始、終了の角度を調整する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "ツールチップに表示するデータを切り替える",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#ツールチップに表示するデータを切り替える",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップに表示するデータを切り替える"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
   },
   {
     "title": "フィードバック",
@@ -2781,9 +2893,103 @@
   {
     "title": "PieChart",
     "type": "page",
-    "description": "`PieChart`は、現在作成を検討しています。",
+    "description": "`PieChart`は、複数のデータを比較するためのパイチャートを描画するコンポーネントです。",
     "slug": "/components/feedback/pie-chart",
     "hierarchy": { "lv1": "PieChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#インポート",
+    "hierarchy": { "lv1": "PieChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#使い方",
+    "hierarchy": { "lv1": "PieChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#凡例を表示する",
+    "hierarchy": { "lv1": "PieChart", "lv2": "使い方", "lv3": "凡例を表示する" }
+  },
+  {
+    "title": "間隔を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#間隔を調整する",
+    "hierarchy": { "lv1": "PieChart", "lv2": "使い方", "lv3": "間隔を調整する" }
+  },
+  {
+    "title": "開始、終了の角度を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#開始終了の角度を調整する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "開始、終了の角度を調整する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "ツールチップに表示するデータを切り替える",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#ツールチップに表示するデータを切り替える",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップに表示するデータを切り替える"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
   },
   {
     "title": "Progress",

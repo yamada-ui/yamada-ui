@@ -184,7 +184,8 @@ const generateData = async (path: string, overrideData?: Data) => {
 }
 
 const getIsMulti = (content: string) => {
-  const reg = /import(\s+type)?\s+{\s*(ComponentMultiStyle)\s*}\s+from/g
+  const reg =
+    /import[\s\S]*{[\s\S]*(type\s+)?(ComponentMultiStyle)[\s\S]*?}\s*from/g
 
   return !![...content.matchAll(reg)].length
 }

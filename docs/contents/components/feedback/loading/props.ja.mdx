@@ -11,6 +11,14 @@ tab: Props
 ### LoadingProps
 
 <PropsCard
+  id="loading-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue={"primary"}
+/>
+
+<PropsCard
   id="loading-duration"
   name="duration"
   type="string | number"
@@ -40,21 +48,15 @@ tab: Props
 <PropsCard
   id="loading-size"
   name="size"
-  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
-  description={"The CSS `font-size` property."}
+  type="string"
+  description={"The size of the Loading."}
+  defaultValue={"1em"}
 />
 
 <PropsCard
   id="loading-variant"
   name="variant"
-  type='type ONLY_FOR_FORMAT =
-  | "grid"
-  | "oval"
-  | "audio"
-  | "dots"
-  | "puff"
-  | "rings"
-  | "circles"'
+  type="string"
   description={"The variant of the Loading."}
-  defaultValue={"'oval'"}
+  defaultValue={"oval"}
 />

@@ -1,5 +1,6 @@
 import { Container } from "@yamada-ui/react"
 import { memo, useMemo, useState } from "react"
+import type { SortOption } from "./data/data"
 import { priority, status } from "./data/data"
 import { tasks, type Task } from "./data/tasks"
 import { Filter } from "./filter"
@@ -32,10 +33,23 @@ export const Tasks = memo(() => {
   const [rowSelection, setRowSelection] = useState<Record<Task["id"], boolean>>(
     Object.fromEntries(tasks.map((task) => [task.id, false])),
   )
+  const [sortOption, setSortOption] = useState<SortOption | null>(null)
+
+  const sortedTasks = useMemo(() => {
+    if (sortOption === null) return tasks
+
+    return tasks.toSorted(
+      (a, b) =>
+        a[sortOption.by].localeCompare(b[sortOption.by], undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }) * (sortOption.order === "asc" ? 1 : -1),
+    )
+  }, [sortOption])
 
   const filteredTasks = useMemo(
     () =>
-      tasks.filter((task) => {
+      sortedTasks.filter((task) => {
         const isMatchStatus = Object.values(filterStatus).some(Boolean)
           ? filterStatus[task.status]
           : true
@@ -50,7 +64,7 @@ export const Tasks = memo(() => {
           )
         return isMatchStatus && isMatchPriority && isMatchWord
       }),
-    [filterWord, filterStatus, filterPriority],
+    [filterWord, filterStatus, filterPriority, sortedTasks],
   )
 
   return (
@@ -73,6 +87,9 @@ export const Tasks = memo(() => {
         pageSize={pageSize}
         filteredTasks={filteredTasks}
         displayColumns={displayColumns}
+        setDisplayColumns={setDisplayColumns}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
       />
       <Footer
         rowSelection={rowSelection}

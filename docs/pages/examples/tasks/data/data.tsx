@@ -22,6 +22,11 @@ interface Priority {
   icon: ReactElement<IconType>
 }
 
+export interface SortOption {
+  by: Exclude<keyof Task, "id" | "label">
+  order: "asc" | "desc"
+}
+
 const iconProps = {
   size: 16,
   color: "#777",

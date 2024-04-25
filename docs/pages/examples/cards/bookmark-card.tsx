@@ -10,9 +10,10 @@ import {
   Spacer,
   IconButton,
   Image,
+  Icon,
 } from "@yamada-ui/react"
+import { Bookmark } from "lucide-react"
 import { memo } from "react"
-import { FaRegBookmark } from "react-icons/fa"
 
 export const BookmarkCard = memo(() => {
   return (
@@ -31,7 +32,7 @@ export const BookmarkCard = memo(() => {
           <Text color="muted">Tokyo, Japan</Text>
         </VStack>
 
-        <IconButton variant="ghost" icon={<FaRegBookmark />} />
+        <IconButton variant="ghost" icon={<Icon as={Bookmark} size="2xl" />} />
       </CardHeader>
 
       <CardBody>

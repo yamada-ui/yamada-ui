@@ -20,9 +20,10 @@ import {
   AutocompleteOption,
   Icon,
 } from "@yamada-ui/react"
+import { CreditCard } from "lucide-react"
 import type { FC, ReactNode } from "react"
 import { memo } from "react"
-import { FaApple, FaCreditCard, FaPaypal } from "react-icons/fa"
+import { FaApple, FaPaypal } from "react-icons/fa"
 
 export const PaymentMethodCard = memo(() => {
   const CustomRadio: FC<
@@ -111,7 +112,7 @@ export const PaymentMethodCard = memo(() => {
         <HStack gap="sm" w="full" {...getContainerProps()}>
           <CustomRadio
             {...getRadioProps({ value: "Card" })}
-            icon={<Icon as={FaCreditCard} boxSize={{ base: "8", sm: "6" }} />}
+            icon={<Icon as={CreditCard} boxSize={{ base: "8", sm: "6" }} />}
           />
           <CustomRadio
             {...getRadioProps({ value: "Paypal" })}

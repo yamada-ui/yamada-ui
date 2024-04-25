@@ -53,7 +53,7 @@ export const Tbody = ({ ...rest }: TableBodyProps) => {
             {...mergedRowProps}
             data-selected={dataAttr(isSelected)}
             data-disabled={dataAttr(isDisabled)}
-            aria-checked={ariaAttr(isSelected)}
+            aria-selected={ariaAttr(isSelected)}
             aria-disabled={ariaAttr(isDisabled)}
           >
             {cells.map((cell) => {

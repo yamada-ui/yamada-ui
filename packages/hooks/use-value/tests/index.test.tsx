@@ -26,7 +26,7 @@ describe("useValue", () => {
     mock.clear()
   })
 
-  test("レスポンシブオブジェクトを渡すと、ベースの値を返す", () => {
+  test("Returns the base value when passing a responsive object", () => {
     const { result } = renderHook(() => useValue({ base: "base", md: "md" }), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -37,7 +37,7 @@ describe("useValue", () => {
     expect(result.current).toBe("base")
   })
 
-  test("現在の画面幅に基づいて適切なブレークポイント値を返す", async () => {
+  test("Returns the correct breakpoint value based on the current screen width", async () => {
     mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const { result } = renderHook(() => useValue({ base: "base", md: "md" }), {
@@ -51,7 +51,7 @@ describe("useValue", () => {
     expect(result.current).toBe("md")
   })
 
-  test("現在のライトモードに基づいて適切な値を返す", () => {
+  test("Returns the correct value based on the current light mode", () => {
     const { result } = renderHook(() => useValue(["lightValue", "darkValue"]), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -62,7 +62,7 @@ describe("useValue", () => {
     expect(result.current).toBe("lightValue")
   })
 
-  test("現在のダークモードに基づいて適切な値を返す", () => {
+  test("Returns the correct value based on the current dark mode", () => {
     const { result } = renderHook(() => useValue(["lightValue", "darkValue"]), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -73,7 +73,7 @@ describe("useValue", () => {
     expect(result.current).toBe("darkValue")
   })
 
-  test("通常の値を渡すと、その値がそのまま返される", () => {
+  test("Returns the same value when passing a normal value", () => {
     const { result } = renderHook(() => useValue("normalValue"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>

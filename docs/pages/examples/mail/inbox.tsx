@@ -89,9 +89,12 @@ export const Inbox: FC<Props> = memo(
               const defaultIsSelected = id === defaultMail.id
 
               return (
-                <Box as="li" key={id}>
+                <Box
+                  as="li"
+                  key={id}
+                  display={mode === "unread" && !unRead ? "none" : "block"}
+                >
                   <InboxItem
-                    display={mode === "unread" && !unRead ? "none" : "flex"}
                     defaultIsSelected={defaultIsSelected}
                     resetMapRef={resetMapRef}
                     onClick={() => setMailRef.current(props)}

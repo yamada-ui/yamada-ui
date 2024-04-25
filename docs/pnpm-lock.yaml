@@ -68,6 +68,9 @@ dependencies:
   glob:
     specifier: ^10.3.12
     version: 10.3.12
+  lucide-react:
+    specifier: ^0.373.0
+    version: 0.373.0(react@18.2.0)
   match-sorter:
     specifier: ^6.3.4
     version: 6.3.4
@@ -7376,6 +7379,14 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+
+  /lucide-react@0.373.0(react@18.2.0):
+    resolution: {integrity: sha512-0kygFhk/DmK4mi+zf1t5mNStJQGaElACZdDdLiHOHFJzi7g3maC3SR86AcaUsxvDkZPId3XCd4vRngnjkPHu3Q==, tarball: https://registry.npmjs.org/lucide-react/-/lucide-react-0.373.0.tgz}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /make-iterator@1.0.1:
     resolution: {integrity: sha512-pxiuXh0iVEq7VM7KMIhs5gxsfxCux2URptUQaXo4iZZJxBAzTPOLE2BumO5dbfVYq/hBJFBR/a1mFDmOx5AGmw==}

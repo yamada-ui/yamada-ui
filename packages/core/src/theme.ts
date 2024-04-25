@@ -8,6 +8,7 @@ import {
   isObject,
   runIfFunc,
   isFunction,
+  merge,
 } from "@yamada-ui/utils"
 import type { CSSUIObject, ThemeProps, UIStyle, UIStyleProps } from "./css"
 import { analyzeBreakpoints, createVars } from "./css"
@@ -304,12 +305,22 @@ const internalFilterStyle =
         target[nestedKey] = (props) =>
           internalFilterStyle(value(props), newKeys, isMulti, newRefs)(func)
       } else {
-        target[nestedKey] = internalFilterStyle(
-          value,
-          newKeys,
-          isMulti,
-          newRefs,
-        )(func)
+        if (
+          func === omitObject ||
+          Object.keys(value).some((key) => newKeys.includes(key))
+        ) {
+          target[nestedKey] = internalFilterStyle(
+            value,
+            newKeys,
+            isMulti,
+            newRefs,
+          )(func)
+        } else {
+          target[nestedKey] = merge(
+            target[nestedKey],
+            internalFilterStyle(value, newKeys, isMulti, newRefs)(func),
+          )
+        }
       }
     })
 

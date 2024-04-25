@@ -1,5 +1,30 @@
 # @yamada-ui/theme
 
+## 1.6.0
+
+### Minor Changes
+
+- [#1224](https://github.com/yamada-ui/yamada-ui/pull/1224) [`5ffd82a`](https://github.com/yamada-ui/yamada-ui/commit/5ffd82ac9efca314162635c051ac6429f3f3c929) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Loading` component style.
+
+- [#1131](https://github.com/yamada-ui/yamada-ui/pull/1131) [`fb270a1`](https://github.com/yamada-ui/yamada-ui/commit/fb270a18627ec74b9f5445de70b203f9631ead7a) Thanks [@108yen](https://github.com/108yen)! - added `DonutChart` and `PieChart` theme
+
+### Patch Changes
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`adb1005`](https://github.com/yamada-ui/yamada-ui/commit/adb1005f4cf992082c6e228e61f0eed727bd71a6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `Menu` hover and active styles.
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+
+## 1.5.5
+
+### Patch Changes
+
+- [#1208](https://github.com/yamada-ui/yamada-ui/pull/1208) [`22cd8ca`](https://github.com/yamada-ui/yamada-ui/commit/22cd8ca1c539b35feb43f81066b502940e95dc88) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where hover and focus styling was applied even when `MenuItem` was disabled.
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/core@1.6.4
+
 ## 1.5.4
 
 ### Patch Changes

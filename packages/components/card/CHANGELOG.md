@@ -1,5 +1,26 @@
 # @yamada-ui/card
 
+## 1.0.25
+
+### Patch Changes
+
+- [#1281](https://github.com/yamada-ui/yamada-ui/pull/1281) [`acf86ce`](https://github.com/yamada-ui/yamada-ui/commit/acf86ce98c94db25d82e0dc4ff4ef96db979933a) Thanks [@ryota-k0827](https://github.com/ryota-k0827)! - Fixed a bug in which `section` tags were used in the Card component
+
+## 1.0.24
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/core@1.6.4
+
 ## 1.0.22
 
 ### Patch Changes

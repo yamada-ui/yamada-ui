@@ -1,5 +1,24 @@
 # @yamada-ui/tag
 
+## 1.0.23
+
+### Patch Changes
+
+- Updated dependencies [[`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff)]:
+  - @yamada-ui/use-clickable@1.2.0
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/icon@1.0.23
+
+## 1.0.22
+
+### Patch Changes
+
+- Updated dependencies [[`a539f54`](https://github.com/yamada-ui/yamada-ui/commit/a539f54ef32239b068b20eec5add0c5ebe1f1b76), [`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/use-clickable@1.1.0
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/icon@1.0.22
+  - @yamada-ui/core@1.6.4
+
 ## 1.0.21
 
 ### Patch Changes

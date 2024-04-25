@@ -22,6 +22,13 @@ describe("<Card />", () => {
     })
   })
 
+  test("<Card /> renders <ui.article /> component", () => {
+    const { container } = render(<Card>Card</Card>)
+    const articleElement = container.querySelector("article")
+
+    expect(articleElement).not.toBeNull()
+  })
+
   test("<CardHeader /> renders correctly", () => {
     const { getByTestId } = render(
       <Card>
@@ -60,6 +67,17 @@ describe("<Card />", () => {
       justifyContent: "flex-start",
       alignItems: "center",
     })
+  })
+
+  test("<CardHeader /> renders <ui.header /> component", () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>CardHeader</CardHeader>
+      </Card>,
+    )
+    const headerElement = container.querySelector("header")
+
+    expect(headerElement).not.toBeNull()
   })
 
   test("<CardBody /> renders correctly", () => {
@@ -140,5 +158,16 @@ describe("<Card />", () => {
       justifyContent: "flex-start",
       alignItems: "center",
     })
+  })
+
+  test("<CardFooter /> renders <ui.footer /> component", () => {
+    const { container } = render(
+      <Card>
+        <CardFooter>CardFooter</CardFooter>
+      </Card>,
+    )
+    const footerElement = container.querySelector("footer")
+
+    expect(footerElement).not.toBeNull()
   })
 })

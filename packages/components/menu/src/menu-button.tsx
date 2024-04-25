@@ -1,16 +1,28 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
+import { ChevronIcon } from "@yamada-ui/icon"
 import { PopoverTrigger } from "@yamada-ui/popover"
-import { ariaAttr, cx, dataAttr, funcAll, handlerAll } from "@yamada-ui/utils"
-import type { KeyboardEvent } from "react"
+import {
+  ariaAttr,
+  assignRef,
+  cx,
+  dataAttr,
+  funcAll,
+  handlerAll,
+} from "@yamada-ui/utils"
+import type { KeyboardEvent, ReactNode } from "react"
 import { useCallback } from "react"
 import { useMenu } from "./menu"
+import type { MenuIconProps } from "./menu-item"
+import { MenuIcon, useUpstreamMenuItem } from "./menu-item"
 
 export type MenuButtonProps = HTMLUIProps<"button">
 
 export const MenuButton = forwardRef<MenuButtonProps, "button">(
   ({ className, children, as: As, ...rest }, ref) => {
-    const { isOpen, onOpen, onFocusFirstItem, onFocusLastItem } = useMenu()
+    const { onKeyDownRef, onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
+    const { isOpen, onOpen, onClose, onFocusFirstItem, onFocusLastItem } =
+      useMenu()
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
@@ -25,13 +37,35 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
         if (!action) return
 
         ev.preventDefault()
-        ev.stopPropagation()
+
         action()
       },
       [onFocusFirstItem, onFocusLastItem, onOpen],
     )
 
-    const Component = As || Button
+    const onItemKeyDown = useCallback(
+      (ev: KeyboardEvent) => {
+        const actions: Record<string, Function | undefined> = {
+          ArrowRight: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
+          ArrowLeft: isOpen
+            ? funcAll(onUpstreamRestoreFocus, onClose)
+            : undefined,
+        }
+
+        const action = actions[ev.key]
+
+        if (!action) return
+
+        ev.preventDefault()
+
+        action()
+      },
+      [isOpen, onOpen, onFocusFirstItem, onUpstreamRestoreFocus, onClose],
+    )
+
+    assignRef(onKeyDownRef, onItemKeyDown)
+
+    const Component = As ? ui(As) : Button
 
     return (
       <PopoverTrigger>
@@ -43,9 +77,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
           aria-expanded={ariaAttr(isOpen)}
           onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
         >
-          <ui.span __css={{ pointerEvents: "none", flex: "1 1 auto", minW: 0 }}>
-            {children}
-          </ui.span>
+          {children}
         </Component>
       </PopoverTrigger>
     )
@@ -65,3 +97,30 @@ const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
 
   return <ui.button ref={ref} __css={css} {...rest} />
 })
+
+export type MenuItemButtonProps = MenuButtonProps & {
+  innerProps?: HTMLUIProps<"span">
+  iconProps?: MenuIconProps
+  icon?: ReactNode
+}
+
+export const MenuItemButton = forwardRef<MenuItemButtonProps, "button">(
+  ({ className, children, innerProps, icon, iconProps, ...rest }, ref) => {
+    return (
+      <MenuButton
+        ref={ref}
+        className={cx("ui-menu__item-button", className)}
+        flex="1"
+        {...rest}
+      >
+        <ui.span as="span" flex="1" {...innerProps}>
+          {children}
+        </ui.span>
+
+        <MenuIcon {...iconProps}>
+          {icon ?? <ChevronIcon fontSize="1.5em" transform="rotate(-90deg)" />}
+        </MenuIcon>
+      </MenuButton>
+    )
+  },
+)

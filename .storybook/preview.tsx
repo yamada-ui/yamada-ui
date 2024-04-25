@@ -3,6 +3,7 @@ import { Decorator, Parameters } from "@storybook/react"
 import { themes } from "@storybook/theming"
 import { UITheme } from "./theme"
 import { StoryProvider, DocsContainer } from "./components"
+import { A11Y_RULES } from "./constant"
 
 export const parameters: Parameters = {
   darkMode: {
@@ -16,10 +17,7 @@ export const parameters: Parameters = {
   },
   a11y: {
     config: {
-      rules: [
-        { id: "color-contrast", enabled: false },
-        { id: "landmark-unique", enabled: false },
-      ],
+      rules: A11Y_RULES,
     },
   },
   backgrounds: { disable: true },

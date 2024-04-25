@@ -1,5 +1,20 @@
 # @yamada-ui/nextjs
 
+## 5.0.23
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+
+## 5.0.22
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/core@1.6.4
+
 ## 5.0.21
 
 ### Patch Changes

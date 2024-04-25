@@ -750,6 +750,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: string & {}
       variants: "solid" | "dashed" | "dotted" | (string & {})
     }
+    DonutChart: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
+    }
     Drawer: {
       sizes: "xs" | "sm" | "md" | "lg" | "xl" | "full" | (string & {})
       variants: string & {}
@@ -848,6 +852,10 @@ export interface GeneratedTheme extends UITheme {
     PagingTable: {
       sizes: "sm" | "md" | "lg" | "xl" | (string & {})
       variants: "simple" | "striped" | "unstyled" | (string & {})
+    }
+    PieChart: {
+      sizes: "sm" | "md" | "lg" | (string & {})
+      variants: string & {}
     }
     PinInput: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})

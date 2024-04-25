@@ -1,5 +1,30 @@
 # @yamada-ui/charts
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1131](https://github.com/yamada-ui/yamada-ui/pull/1131) [`11513b2`](https://github.com/yamada-ui/yamada-ui/commit/11513b2113c2defb8bfeef68346462667a5cf8cc) Thanks [@108yen](https://github.com/108yen)! - added `DonutChart` and `PieChart`
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/tooltip@1.0.25
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/use-token@1.1.11
+  - @yamada-ui/use-value@1.1.11
+
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`8306ab9`](https://github.com/yamada-ui/yamada-ui/commit/8306ab9b862e228cc08a2a3b7427fc6f1165d8ea)]:
+  - @yamada-ui/utils@1.1.3
+  - @yamada-ui/tooltip@1.0.24
+  - @yamada-ui/core@1.6.4
+  - @yamada-ui/use-token@1.1.10
+  - @yamada-ui/use-value@1.1.10
+
 ## 1.0.5
 
 ### Patch Changes

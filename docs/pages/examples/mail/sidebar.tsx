@@ -27,19 +27,19 @@ import { type FC, memo } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
-  { icon: faInbox, title: "Inbox", num: 53 },
-  { icon: faFile, title: "Drafts", num: 4 },
-  { icon: faPaperPlane, title: "Sent" },
-  { icon: faTrash, title: "Trash" },
-  { icon: faArchive, title: "Archive" },
+  { icon: faInbox, label: "Inbox", num: 53 },
+  { icon: faFile, label: "Drafts", num: 4 },
+  { icon: faPaperPlane, label: "Sent" },
+  { icon: faTrash, label: "Trash" },
+  { icon: faArchive, label: "Archive" },
 ]
 
 export const SUB_MENU_ITEMS = [
-  { icon: faUserGroup, title: "Personal", num: 435 },
-  { icon: faCircleExclamation, title: "Updates", num: 342 },
-  { icon: faComments, title: "Forum", num: 167 },
-  { icon: faCartShopping, title: "Shopping", num: 8 },
-  { icon: faArchive, title: "Promotions", num: 13 },
+  { icon: faUserGroup, label: "Personal", num: 435 },
+  { icon: faCircleExclamation, label: "Updates", num: 342 },
+  { icon: faComments, label: "Forum", num: 167 },
+  { icon: faCartShopping, label: "Shopping", num: 8 },
+  { icon: faArchive, label: "Promotions", num: 13 },
 ]
 
 type SidebarProps = {
@@ -65,24 +65,24 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
 
       <VStack as="nav" divider={<Divider />} gap="0">
         <VStack as="ul" p="sm" gap="sm">
-          {MAIN_MENU_ITEMS.map(({ icon, title, num }) => (
+          {MAIN_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem
-              key={title}
+              key={label}
               icon={icon}
-              title={title}
+              label={label}
               num={num}
               isCollapse={isCollapse}
-              isSelected={title === "Inbox"}
+              isSelected={label === "Inbox"}
             />
           ))}
         </VStack>
 
         <VStack as="ul" p="sm" gap="sm">
-          {SUB_MENU_ITEMS.map(({ icon, title, num }) => (
+          {SUB_MENU_ITEMS.map(({ icon, label, num }) => (
             <SidebarItem
-              key={title}
+              key={label}
               icon={icon}
-              title={title}
+              label={label}
               num={num}
               isCollapse={isCollapse}
             />
@@ -97,14 +97,14 @@ Sidebar.displayName = "Sidebar"
 
 type SidebarItemProps = {
   icon: IconDefinition
-  title: string
+  label: string
   num: number
   isCollapse?: boolean
   isSelected?: boolean
 }
 
 const SidebarItem: FC<SidebarItemProps> = memo(
-  ({ icon, title, num, isCollapse = false, isSelected = false }) => {
+  ({ icon, label, num, isCollapse = false, isSelected = false }) => {
     const showNum = num && num > 0
 
     return (
@@ -114,7 +114,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             placement="right"
             label={
               <HStack gap="sm">
-                <Text as="span">{title}</Text>
+                <Text as="span">{label}</Text>
 
                 {showNum ? (
                   <Text as="span" color="muted">
@@ -156,7 +156,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
               fontSize="md"
               display={{ base: "inline", xl: "none" }}
             >
-              {title}
+              {label}
             </Text>
 
             <Spacer />

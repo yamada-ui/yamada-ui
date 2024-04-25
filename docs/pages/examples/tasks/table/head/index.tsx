@@ -44,6 +44,7 @@ export const Head: FC<HeaderProps> = ({
               <Th key={column.accessorKey}>{column.header}</Th>
             ),
         )}
+        <Th />
       </Tr>
     </Thead>
   )

@@ -1,5 +1,21 @@
-import { Checkbox, Flex, Tag, Tbody, Td, Text, Tr } from "@yamada-ui/react"
+import {
+  Checkbox,
+  Flex,
+  Icon,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Tag,
+  Tbody,
+  Td,
+  Text,
+  Tr,
+} from "@yamada-ui/react"
 import { useMemo, type Dispatch, type FC, type SetStateAction } from "react"
+import { BsThreeDots } from "react-icons/bs"
 import { priority, status } from "../../data/data"
 import type { Task } from "../../data/tasks"
 
@@ -68,6 +84,23 @@ export const Body: FC<BodyProps> = ({
               </Flex>
             </Td>
           )}
+          <Td verticalAlign="middle">
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                icon={<Icon as={BsThreeDots} />}
+                size="sm"
+                variant="ghost"
+              />
+              <MenuList>
+                <MenuItem>Edit</MenuItem>
+                <MenuItem>Make a copy</MenuItem>
+                <MenuItem>Favorite</MenuItem>
+                <MenuDivider />
+                <MenuItem command="⌘⌫">Delete</MenuItem>
+              </MenuList>
+            </Menu>
+          </Td>
         </Tr>
       ))}
     </Tbody>

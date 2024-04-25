@@ -751,7 +751,7 @@ export interface GeneratedTheme extends UITheme {
       variants: "solid" | "dashed" | "dotted" | (string & {})
     }
     DonutChart: {
-      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
     }
     Drawer: {
@@ -854,7 +854,7 @@ export interface GeneratedTheme extends UITheme {
       variants: "simple" | "striped" | "unstyled" | (string & {})
     }
     PieChart: {
-      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      sizes: "sm" | "md" | "lg" | (string & {})
       variants: string & {}
     }
     PinInput: {

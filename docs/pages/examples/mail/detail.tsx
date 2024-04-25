@@ -29,7 +29,7 @@ import { memo, useState } from "react"
 import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"
 import { Header } from "./header"
-import { timestamp2date } from "./utils"
+import { getTimestamp } from "./utils"
 
 type DetailProps = StackProps & {
   defaultMail: MailItem
@@ -111,7 +111,7 @@ export const Detail: FC<DetailProps> = memo(
               <Spacer display={{ base: "block", sm: "none" }} />
 
               <Text textWrap="nowrap" color="muted" fontSize="xs">
-                {timestamp2date(timestamp)}
+                {getTimestamp(timestamp)}
               </Text>
             </HStack>
           </HStack>

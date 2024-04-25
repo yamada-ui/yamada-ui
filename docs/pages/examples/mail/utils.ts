@@ -1,4 +1,4 @@
-export const dateDiff = (date: Date): string => {
+export const getDateDiff = (date: Date): string => {
   const diff = new Date().getTime() - date.getTime()
   const diffInYears = Math.floor(diff / (1000 * 60 * 60 * 24 * 365))
   const diffInMonths = Math.floor(diff / (1000 * 60 * 60 * 24 * 30))
@@ -15,7 +15,7 @@ export const dateDiff = (date: Date): string => {
   return "Today"
 }
 
-export const timestamp2date = (timestamp: Date): string => {
+export const getTimestamp = (timestamp: Date): string => {
   const date = new Date(timestamp)
 
   return date.toLocaleDateString("ja-JP", {

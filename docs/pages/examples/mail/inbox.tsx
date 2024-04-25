@@ -25,7 +25,7 @@ import { memo, useRef, useState } from "react"
 import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"
 import { Header } from "./header"
-import { dateDiff } from "./utils"
+import { getDateDiff } from "./utils"
 
 type Props = StackProps & {
   mails: MailItem[]
@@ -160,7 +160,7 @@ const InboxItem: FC<InboxItemProps> = memo(
           <Spacer />
 
           <Text fontSize="xs" color="muted">
-            {dateDiff(timestamp)}
+            {getDateDiff(timestamp)}
           </Text>
         </CardHeader>
 

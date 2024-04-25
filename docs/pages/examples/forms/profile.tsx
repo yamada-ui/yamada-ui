@@ -1,82 +1,150 @@
+import type { StackProps } from "@yamada-ui/react"
 import {
   Input,
-  Select,
-  Spacer,
-  Text,
-  Option,
-  VStack,
-  Divider,
   Textarea,
   Button,
+  FormControl,
+  HelperMessage,
+  Autocomplete,
+  VStack,
+  Text,
 } from "@yamada-ui/react"
-import { memo } from "react"
+import type { FC } from "react"
+import { Fragment, memo } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useFieldArray, useForm } from "react-hook-form"
+import { Form } from "./form"
 
-const emails = ["m@example.com", "m@google.com", "m@support.com"]
+const EMAIL_ITEMS = [
+  { label: "m@example.com", value: "m@example.com" },
+  { label: "m@google.com", value: "m@google.com" },
+  { label: "m@support.com", value: "m@support.com" },
+]
 
-export const ProfileForm = memo(() => {
+type Data = {
+  username: string
+  email: string
+  bio: string
+  urls: { url: string }[]
+}
+
+export type ProfileProps = StackProps
+
+export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
+  const {
+    control,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Data>({
+    defaultValues: {
+      urls: [
+        { url: "https://yamada-ui.com/" },
+        { url: "https://twitter.com/hirotomoyamada" },
+      ],
+    },
+  })
+  const { fields, append } = useFieldArray({
+    control,
+    name: "urls",
+    rules: { maxLength: 5 },
+  })
+
+  const onSubmit: SubmitHandler<Data> = () => {}
+
   return (
-    <VStack divider={<Divider />}>
-      <>
-        <Text as="h5" fontSize="xl">
-          Profile
-        </Text>
-        <Text as="p" color="muted" fontSize="xs">
-          This is how others will see you on the site.
-        </Text>
-      </>
-      <>
-        <Text as="h6" fontSize="sm">
-          Username
-        </Text>
-        <Input placeholder="yamada" />
-        <Text as="p" color="muted" fontSize="xs">
-          This is your public display name. It can be your real name or a
-          pseudonym. You can only change this once every 30 days.
-        </Text>
-        <Spacer />
-        <Text as="h6" fontSize="sm">
-          Email
-        </Text>
-        <Select>
-          {emails.map((email, index) => (
-            <Option key={index} value={email}>
-              {email}
-            </Option>
-          ))}
-        </Select>
-        <Text as="p" color="muted" fontSize="xs">
-          You can manage verified email addresses in your email settings.
-        </Text>
-        <Spacer />
-        <Text as="h6" fontSize="sm">
-          Bio
-        </Text>
-        <Textarea defaultValue="I own a computer" />
-        <Text as="p" color="muted" fontSize="xs">
-          You can @mention other users and organizations to link to them.
-        </Text>
-        <Spacer />
-        <Text as="h6" fontSize="sm">
-          URLs
-        </Text>
-        <Text as="p" color="muted" fontSize="xs">
+    <Form
+      title="Profile"
+      description="This is how others will see you on the site."
+      submit="Update profile"
+      onSubmit={handleSubmit(onSubmit)}
+      {...rest}
+    >
+      <FormControl
+        label="Username"
+        helperMessage="This is your public display name. It can be your real name or a
+        pseudonym. You can only change this once every 30 days."
+        isReplace={false}
+        isInvalid={!!errors.username?.message}
+        errorMessage={errors.username?.message}
+      >
+        <Input
+          placeholder="yamada"
+          autoComplete="username"
+          {...register("username", {
+            required: { value: true, message: "This is required." },
+          })}
+        />
+      </FormControl>
+
+      <FormControl
+        label="Email"
+        helperMessage="You can manage verified email addresses in your email settings."
+        isReplace={false}
+        isInvalid={!!errors.email?.message}
+        errorMessage={errors.email?.message}
+      >
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: { value: true, message: "This is required." } }}
+          render={({ field }) => (
+            <Autocomplete
+              placeholder="Select a verified email to display"
+              items={EMAIL_ITEMS}
+              {...field}
+            />
+          )}
+        />
+      </FormControl>
+
+      <FormControl
+        label="Bio"
+        helperMessage="You can @mention other users and organizations to link to them."
+        isReplace={false}
+        isInvalid={!!errors.bio?.message}
+        errorMessage={errors.bio?.message}
+      >
+        <Textarea
+          defaultValue="I own a computer"
+          {...register("bio", {
+            required: { value: true, message: "This is required." },
+          })}
+        />
+      </FormControl>
+
+      <FormControl label="URLs">
+        <HelperMessage mb="sm">
           Add links to your website, blog, or social media profiles.
-        </Text>
-        <Input defaultValue="https://yamada-ui.com/" />
-        <Input defaultValue="https://twitter.com/hirotomoyamada" />
-        <Button width="xs">Add URL</Button>
-        <Spacer />
-        <Button
-          width="xs"
-          bgColor="black"
-          color="white"
-          _hover={{ bgColor: "black" }}
-        >
-          Update profile
-        </Button>
-      </>
-    </VStack>
+        </HelperMessage>
+
+        <VStack>
+          <VStack gap="sm">
+            {fields.map(({ id }, index) => (
+              <Fragment key={id}>
+                <Input
+                  {...register(`urls.${index}.url`, {
+                    required: { value: true, message: "This is required." },
+                  })}
+                  isInvalid={!!errors.urls?.[index]?.url?.message}
+                />
+
+                {errors.urls?.[index]?.url?.message ? (
+                  <Text color={["danger.500", "danger.400"]} fontSize="sm">
+                    {errors.urls?.[index]?.url?.message}
+                  </Text>
+                ) : null}
+              </Fragment>
+            ))}
+          </VStack>
+
+          <Button alignSelf="flex-start" onClick={() => append({ url: "" })}>
+            Add URL
+          </Button>
+        </VStack>
+      </FormControl>
+    </Form>
   )
 })
 
-ProfileForm.displayName = "ProfileForm"
+Profile.displayName = "Profile"

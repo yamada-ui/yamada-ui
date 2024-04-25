@@ -1,57 +1,64 @@
-import {
-  Spacer,
-  Text,
-  VStack,
-  Divider,
-  Checkbox,
-  Button,
-} from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
+import { FormControl, CheckboxGroup, HelperMessage } from "@yamada-ui/react"
+import type { FC } from "react"
 import { memo } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
+import { Form } from "./form"
 
-const checkboxElements = [
-  "Recents",
-  "Home",
-  "Applications",
-  "Desktop",
-  "Downloads",
-  "Documents",
+const SIDEBAR_ITEMS = [
+  { label: "Recent", value: "Recent" },
+  { label: "Home", value: "Home" },
+  { label: "Applications", value: "Applications" },
+  { label: "Desktop", value: "Desktop" },
+  { label: "Downloads", value: "Downloads" },
+  { label: "Documents", value: "Documents" },
 ]
 
-export const DisplayForm = memo(() => {
+type Data = {
+  sidebar: string[]
+}
+
+export type DisplayProps = StackProps
+
+export const Display: FC<DisplayProps> = memo(({ ...rest }) => {
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Data>()
+
+  const onSubmit: SubmitHandler<Data> = () => {}
+
   return (
-    <VStack divider={<Divider />}>
-      <>
-        <Text as="h5" fontSize="xl">
-          Display
-        </Text>
-        <Text as="p" color="muted" fontSize="xs">
-          Turn items on or off to control what's displayed in the app.
-        </Text>
-      </>
-      <>
-        <Text as="h6" fontSize="sm">
-          Sidebar
-        </Text>
-        <Text as="p" color="muted" fontSize="xs">
+    <Form
+      title="Display"
+      description="Turn items on or off to control what's displayed in the app."
+      submit="Update display"
+      onSubmit={handleSubmit(onSubmit)}
+      {...rest}
+    >
+      <FormControl
+        label="Sidebar"
+        isReplace={false}
+        isInvalid={!!errors.sidebar?.message}
+        errorMessage={errors.sidebar?.message}
+      >
+        <HelperMessage mb="sm">
           Select the items you want to display in the sidebar.
-        </Text>
-        <VStack gap={0}>
-          {checkboxElements.map((checkboxElement, index) => (
-            <Checkbox key={index}>{checkboxElement}</Checkbox>
-          ))}
-        </VStack>
-        <Spacer />
-        <Button
-          width="xs"
-          bgColor="black"
-          color="white"
-          _hover={{ bgColor: "black" }}
-        >
-          Update profile
-        </Button>
-      </>
-    </VStack>
+        </HelperMessage>
+
+        <Controller
+          name="sidebar"
+          control={control}
+          rules={{ required: { value: true, message: "This is required." } }}
+          render={({ field }) => (
+            <CheckboxGroup items={SIDEBAR_ITEMS} {...field} />
+          )}
+        />
+      </FormControl>
+    </Form>
   )
 })
 
-DisplayForm.displayName = "DisplayForm"
+Display.displayName = "Display"

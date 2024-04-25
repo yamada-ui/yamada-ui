@@ -1,46 +1,76 @@
-import { Divider, HStack, Heading, Text, VStack } from "@yamada-ui/react"
-import { memo, useCallback, useState } from "react"
-import { SelectedForm } from "./selectedForm"
+import { Divider, HStack, VStack, assignRef } from "@yamada-ui/react"
+import type { FC, MutableRefObject } from "react"
+import { memo, useCallback, useRef, useState } from "react"
+import { Account } from "./account"
+import { Appearance } from "./appearance"
+import { Display } from "./display"
+import { Header } from "./header"
+import { Notifications } from "./notification"
+import { Profile } from "./profile"
 import { Sidebar } from "./sidebar"
 
-export type menuType =
+export type FormType =
   | "profile"
   | "account"
   | "appearance"
   | "notifications"
   | "display"
 
+export const DEFAULT_FORM_TYPE: FormType = "profile"
+
 export const Forms = memo(() => {
-  const [selectedMenu, setSelectedMenu] = useState<menuType>("profile")
-  const onChangeMenu = useCallback((menu: menuType) => {
-    setSelectedMenu(menu)
-  }, [])
+  const setTypeRef = useRef<(type: FormType) => void>()
+
+  const onChangeType = useCallback(
+    (type: FormType) => setTypeRef.current(type),
+    [],
+  )
+
   return (
-    <>
-      <VStack
-        divider={<Divider />}
-        borderBottomWidth="1px"
-        px={{ base: "lg", sm: "md" }}
-        py="md"
-        // {...rest}
+    <VStack
+      divider={<Divider />}
+      borderBottomWidth="1px"
+      p={{ base: "lg", sm: "md" }}
+      gap={{ base: "lg", sm: "md" }}
+    >
+      <Header />
+
+      <HStack
+        flexDirection={{ base: "row", md: "column" }}
+        alignItems="flex-start"
+        gap={{ base: "lg", sm: "md" }}
       >
-        <HStack>
-          <VStack>
-            <Heading as="h2" size="normal">
-              Settings
-            </Heading>
-            <Text color="muted">
-              Manage your account settings and set e-mail preferences.
-            </Text>
-          </VStack>
-        </HStack>
-        <HStack alignItems="flex-start">
-          <Sidebar onChangeMenu={onChangeMenu} />
-          <SelectedForm selectedMenu={selectedMenu} />
-        </HStack>
-      </VStack>
-    </>
+        <Sidebar onChangeType={onChangeType} />
+
+        <Form setTypeRef={setTypeRef} />
+      </HStack>
+    </VStack>
   )
 })
 
 Forms.displayName = "Forms"
+
+type FormProps = {
+  setTypeRef: MutableRefObject<(type: FormType) => void>
+}
+
+export const Form: FC<FormProps> = ({ setTypeRef }) => {
+  const [type, setType] = useState<FormType>(DEFAULT_FORM_TYPE)
+
+  assignRef(setTypeRef, setType)
+
+  switch (type) {
+    case "profile":
+      return <Profile />
+    case "account":
+      return <Account />
+    case "appearance":
+      return <Appearance />
+    case "notifications":
+      return <Notifications />
+    case "display":
+      return <Display />
+    default:
+      return <></>
+  }
+}

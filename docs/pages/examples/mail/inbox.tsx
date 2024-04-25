@@ -132,7 +132,7 @@ const InboxItem: FC<InboxItemProps> = memo(
     resetMapRef,
     ...rest
   }) => {
-    const [isSelected, { toggle, off }] = useBoolean(defaultIsSelected)
+    const [isSelected, { on, off }] = useBoolean(defaultIsSelected)
 
     resetMapRef.current.set(id, off)
 
@@ -148,7 +148,7 @@ const InboxItem: FC<InboxItemProps> = memo(
         variant="outline"
         cursor="pointer"
         bg={isSelected ? ["blackAlpha.50", "whiteAlpha.100"] : "transparent"}
-        onClick={handlerAll(onClick, toggle, reset)}
+        onClick={handlerAll(onClick, on, reset)}
         {...rest}
       >
         <CardHeader as={HStack}>

@@ -7,6 +7,7 @@ import {
   MenuButton,
   MenuDivider,
   MenuItem,
+  MenuItemButton,
   MenuList,
   Tag,
   Tbody,
@@ -15,7 +16,7 @@ import {
   Tr,
 } from "@yamada-ui/react"
 import { useMemo, type Dispatch, type FC, type SetStateAction } from "react"
-import { BsThreeDots } from "react-icons/bs"
+import { BsDot, BsThreeDots } from "react-icons/bs"
 import { priority, status } from "../../data/data"
 import type { Task } from "../../data/tasks"
 
@@ -96,6 +97,31 @@ export const Body: FC<BodyProps> = ({
                 <MenuItem>Edit</MenuItem>
                 <MenuItem>Make a copy</MenuItem>
                 <MenuItem>Favorite</MenuItem>
+                <MenuDivider />
+                <MenuItem>
+                  <Menu>
+                    <MenuItemButton>Labels</MenuItemButton>
+                    <MenuList>
+                      {["Bug", "Feature", "Documentation"].map((label) => (
+                        <MenuItem
+                          key={label}
+                          icon={
+                            <Icon
+                              size="xl"
+                              as={
+                                label.toLowerCase() === task.label
+                                  ? BsDot
+                                  : null
+                              }
+                            />
+                          }
+                        >
+                          {label}
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </Menu>
+                </MenuItem>
                 <MenuDivider />
                 <MenuItem command="⌘⌫">Delete</MenuItem>
               </MenuList>

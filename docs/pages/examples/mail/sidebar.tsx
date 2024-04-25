@@ -1,45 +1,45 @@
-import type { IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import {
-  faCloud,
-  faArchive,
-  faCartShopping,
-  faCircleExclamation,
-  faComments,
-  faFile,
-  faInbox,
-  faPaperPlane,
-  faTrash,
-  faUserGroup,
-} from "@fortawesome/free-solid-svg-icons"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import {
   Button,
   Divider,
   HStack,
   Heading,
+  Icon,
   IconButton,
   Spacer,
   Text,
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
+import type { LucideIcon } from "lucide-react"
+import {
+  Archive,
+  CircleAlert,
+  Cloud,
+  File,
+  Inbox,
+  MessageSquare,
+  Send,
+  ShoppingCart,
+  Trash,
+  Users,
+} from "lucide-react"
 import { type FC, memo } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
-  { icon: faInbox, label: "Inbox", num: 53 },
-  { icon: faFile, label: "Drafts", num: 4 },
-  { icon: faPaperPlane, label: "Sent" },
-  { icon: faTrash, label: "Trash" },
-  { icon: faArchive, label: "Archive" },
+  { icon: Inbox, label: "Inbox", num: 53 },
+  { icon: File, label: "Drafts", num: 4 },
+  { icon: Send, label: "Sent" },
+  { icon: Trash, label: "Trash" },
+  { icon: Archive, label: "Archive" },
 ]
 
 export const SUB_MENU_ITEMS = [
-  { icon: faUserGroup, label: "Personal", num: 435 },
-  { icon: faCircleExclamation, label: "Updates", num: 342 },
-  { icon: faComments, label: "Forum", num: 167 },
-  { icon: faCartShopping, label: "Shopping", num: 8 },
-  { icon: faArchive, label: "Promotions", num: 13 },
+  { icon: Users, label: "Personal", num: 435 },
+  { icon: CircleAlert, label: "Updates", num: 342 },
+  { icon: MessageSquare, label: "Forum", num: 167 },
+  { icon: ShoppingCart, label: "Shopping", num: 8 },
+  { icon: Archive, label: "Promotions", num: 13 },
 ]
 
 type SidebarProps = {
@@ -54,7 +54,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
           isCollapse ? "center" : { base: "flex-start", xl: "center" }
         }
       >
-        <FontAwesomeIcon icon={faCloud} size="xl" />
+        <Icon as={Cloud} size="xl" />
 
         {!isCollapse ? (
           <Heading as="h3" size="md" display={{ base: "inline", xl: "none" }}>
@@ -96,7 +96,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
 Sidebar.displayName = "Sidebar"
 
 type SidebarItemProps = {
-  icon: IconDefinition
+  icon: LucideIcon
   label: string
   num: number
   isCollapse?: boolean
@@ -128,8 +128,8 @@ const SidebarItem: FC<SidebarItemProps> = memo(
               variant={isSelected ? "solid" : "ghost"}
               colorScheme={isSelected ? "primary" : "gray"}
               icon={
-                <FontAwesomeIcon
-                  icon={icon}
+                <Icon
+                  as={icon}
                   size="md"
                   color={isSelected ? "white" : "muted"}
                 />
@@ -142,8 +142,8 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             variant={isSelected ? "solid" : "ghost"}
             colorScheme={isSelected ? "primary" : "gray"}
             leftIcon={
-              <FontAwesomeIcon
-                icon={icon}
+              <Icon
+                as={icon}
                 size="md"
                 color={isSelected ? "white" : "muted"}
               />

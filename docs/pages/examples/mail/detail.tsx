@@ -1,14 +1,3 @@
-import {
-  type IconDefinition,
-  faBoxArchive,
-  faClock,
-  faEllipsisVertical,
-  faReply,
-  faReplyAll,
-  faShare,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import type { IconButtonProps, StackProps } from "@yamada-ui/react"
 import {
   Avatar,
@@ -16,6 +5,7 @@ import {
   Divider,
   HStack,
   Heading,
+  Icon,
   IconButton,
   Spacer,
   Switch,
@@ -25,6 +15,16 @@ import {
   VStack,
   assignRef,
 } from "@yamada-ui/react"
+import {
+  Reply,
+  type LucideIcon,
+  ReplyAll,
+  Share,
+  Clock,
+  Trash,
+  Archive,
+  EllipsisVertical,
+} from "lucide-react"
 import { memo, useState } from "react"
 import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"
@@ -47,15 +47,15 @@ export const Detail: FC<DetailProps> = memo(
       <VStack gap={0} h="full" {...rest}>
         <Header px="sm">
           <HStack gap="xs">
-            <ControlIcon icon={faBoxArchive} label="Archive" />
-            <ControlIcon icon={faTrash} label="Move to trash" />
+            <ControlIcon icon={Archive} label="Archive" />
+            <ControlIcon icon={Trash} label="Move to trash" />
             <Divider
               orientation="vertical"
               h="6"
               display={{ base: "block", sm: "none" }}
             />
             <ControlIcon
-              icon={faClock}
+              icon={Clock}
               label="Snooze"
               display={{ base: "flex", sm: "none" }}
             />
@@ -64,15 +64,15 @@ export const Detail: FC<DetailProps> = memo(
           <Spacer display={{ base: "block", sm: "none" }} />
 
           <HStack gap="xs">
-            <ControlIcon icon={faReply} label="Reply" />
-            <ControlIcon icon={faReplyAll} label="Reply all" />
-            <ControlIcon icon={faShare} label="Forward" />
+            <ControlIcon icon={Reply} label="Reply" />
+            <ControlIcon icon={ReplyAll} label="Reply all" />
+            <ControlIcon icon={Share} label="Forward" />
             <Divider
               orientation="vertical"
               h="6"
               display={{ base: "block", sm: "none" }}
             />
-            <ControlIcon icon={faEllipsisVertical} />
+            <ControlIcon icon={EllipsisVertical} />
           </HStack>
         </Header>
 
@@ -147,7 +147,7 @@ export const Detail: FC<DetailProps> = memo(
 Detail.displayName = "Detail"
 
 type ControlIconProps = Omit<IconButtonProps, "icon"> & {
-  icon: IconDefinition
+  icon: LucideIcon
   label?: string
 }
 
@@ -155,7 +155,7 @@ const ControlIcon: FC<ControlIconProps> = memo(({ icon, label, ...rest }) => {
   return (
     <Tooltip label={label} placement="top">
       <IconButton
-        icon={<FontAwesomeIcon icon={icon} size="md" color="muted" />}
+        icon={<Icon as={icon} size="md" color="muted" />}
         variant="ghost"
         {...rest}
       />

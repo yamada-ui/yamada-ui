@@ -1,5 +1,6 @@
+import type { BarProps } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
-import { Card, CardBody, CardHeader, Heading } from "@yamada-ui/react"
+import { Card, CardBody, CardHeader, Heading, isNumber } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 
 export const Overview = memo(() => {
@@ -21,30 +22,32 @@ export const Overview = memo(() => {
     [],
   )
 
+  const series = useMemo<BarProps[]>(
+    () => [
+      { dataKey: "value", color: ["black", "white"], radius: [4, 4, 0, 0] },
+    ],
+    [],
+  )
+
   return (
-    <Card
-      breakInside="avoid"
-      ml={{ base: "lg", sm: "md" }}
-      mb={{ base: "lg", sm: "md" }}
-      rounded="xl"
-      variant="outline"
-    >
+    <Card variant="outline">
       <CardHeader alignItems="flex-start" gap="0">
-        <Heading as="h2" size="md">
+        <Heading as="h4" size="md">
           Overview
         </Heading>
       </CardHeader>
 
       <CardBody>
         <BarChart
-          width={600}
-          height={450}
           data={data}
+          series={series}
           dataKey="month"
-          series={[{ dataKey: "value", color: "black.500" }]}
-          unit="$"
           withTooltip={false}
-        ></BarChart>
+          valueFormatter={(value) =>
+            isNumber(value) ? `$${value}` : `${value}`
+          }
+          gridAxis="none"
+        />
       </CardBody>
     </Card>
   )

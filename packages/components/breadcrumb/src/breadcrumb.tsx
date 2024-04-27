@@ -10,8 +10,8 @@ import {
   omitThemeProps,
   useMultiComponentStyle,
 } from "@yamada-ui/core"
-import { Icon } from "@yamada-ui/react"
-import type { IconProps } from "@yamada-ui/react"
+import { Icon } from "@yamada-ui/icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { cx, createContext, getValidChildren } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 

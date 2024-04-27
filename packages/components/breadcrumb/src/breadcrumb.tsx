@@ -246,6 +246,7 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
     return (
       <Icon
         ref={ref}
+        title="ellipsis"
         className={cx("ui-breadcrumb__item__ellipsis", className)}
         __css={css}
         xmlns="http://www.w3.org/2000/svg"

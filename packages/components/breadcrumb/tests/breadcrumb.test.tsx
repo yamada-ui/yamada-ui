@@ -1,5 +1,10 @@
 import { render, screen } from "@yamada-ui/test"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "../src"
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "../src"
 
 describe("<Breadcrumb />", () => {
   test("renders breadcrumb correctly", () => {
@@ -80,5 +85,22 @@ describe("<Breadcrumb />", () => {
     )
     const currentPageLink = screen.getByText("Link 2")
     expect(currentPageLink.getAttribute("href")).toBeNull()
+  })
+
+  test("renders breadcrumbEllipsis correctly", () => {
+    render(
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbEllipsis />
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href="#">Link 3</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>,
+    )
+    expect(screen.getByTitle("ellipsis")).toBeInTheDocument()
   })
 })

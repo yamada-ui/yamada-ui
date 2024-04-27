@@ -10,13 +10,7 @@ import {
 } from "@yamada-ui/react"
 import type { InferGetStaticPropsType, NextPage } from "next"
 import { Section } from "components/layouts"
-import {
-  SEO,
-  Arrow,
-  Github,
-  OpenCollective,
-  Patreon,
-} from "components/media-and-icons"
+import { SEO, Arrow, OpenCollective, Patreon } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
@@ -84,11 +78,9 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
             <NextLinkButton
               size="xl"
               w={{ base: "auto", md: "full" }}
-              leftIcon={<Github />}
-              href={CONSTANT.SNS.GITHUB.YAMADA_UI}
-              isExternal
+              href="/examples/mail"
             >
-              {tc("home.hero.github")}
+              {tc("home.hero.examples")}
             </NextLinkButton>
           </HStack>
         </Section>

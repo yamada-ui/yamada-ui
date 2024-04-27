@@ -28,6 +28,7 @@ export const Forms = memo(() => {
 
   return (
     <VStack
+      as="section"
       divider={<Divider />}
       borderBottomWidth="1px"
       p={{ base: "lg", sm: "md" }}

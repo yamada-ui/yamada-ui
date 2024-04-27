@@ -9,7 +9,7 @@ export const Playground = memo(() => {
   // const { t } = useI18n()
 
   return (
-    <VStack gap="0">
+    <VStack as="section" gap="0">
       <Header />
       <Editor />
       <Footer />

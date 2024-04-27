@@ -20,7 +20,7 @@ export const Mail = memo(() => {
   const setMobileMailRef = useRef<(mail: MailItem) => void>(noop)
 
   return (
-    <Resizable h={{ base: "5xl", sm: "6xl" }}>
+    <Resizable as="section" h={{ base: "5xl", sm: "6xl" }}>
       <ResizableItem
         defaultSize={20}
         collapsedSize={4}

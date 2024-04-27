@@ -14,7 +14,7 @@ export const Music = memo(() => {
   const [isCollapse, { on, off }] = useBoolean()
 
   return (
-    <VStack gap="0">
+    <VStack as="section" gap="0">
       <Header />
 
       <Resizable>

@@ -18,6 +18,7 @@ import { TeamMembersCard } from "./team-members-card"
 export const Cards = memo(() => {
   return (
     <Box
+      as="section"
       columnCount={{ base: 3, xl: 2, lg: 1 }}
       gap={{ base: "lg", sm: "md" }}
       p={{ base: "lg", sm: "md" }}

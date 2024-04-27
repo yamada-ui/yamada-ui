@@ -457,8 +457,8 @@ export type ThemeConfig = {
   }
 }
 
-export type LayerStyles = Record<string, UIStyle>
-export type TextStyles = Record<string, UIStyle>
+export type LayerStyles = Record<string, CSSUIObject>
+export type TextStyles = Record<string, CSSUIObject>
 export type ThemeTokens = {
   [key: string | number]:
     | string

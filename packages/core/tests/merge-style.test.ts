@@ -110,7 +110,7 @@ describe("mergeStyle", () => {
     }
 
     expect(
-      mergeStyle(target, source)({ omit: ["variants", "sm"] }),
+      mergeStyle(target, source)({ omit: ["variants", "sizes.sm"] }),
     ).toStrictEqual(expected)
   })
 
@@ -149,15 +149,12 @@ describe("mergeStyle", () => {
         solid: { bg: "primary" },
       },
       sizes: {
-        md: { w: "md" },
+        sm: { w: "sm" },
       },
     }
 
     expect(
-      mergeStyle(
-        target,
-        source,
-      )({ pick: ["sizes", "md", "variants", "solid"] }),
+      mergeStyle(target, source)({ pick: ["sizes.sm", "variants"] }),
     ).toStrictEqual(expected)
   })
 
@@ -440,10 +437,16 @@ describe("mergeMultiStyle", () => {
         container: { p: "lg", _hover: { color: "success" }, m: "md" },
         inner: { p: { base: "md", lg: "sm" } },
       },
+      variants: {
+        solid: { container: { bg: "primary" } },
+      },
     }
 
     expect(
-      mergeMultiStyle(target, source)({ pick: ["baseStyle", "inner"] }),
+      mergeMultiStyle(
+        target,
+        source,
+      )({ pick: ["baseStyle", "inner", "variants.solid"] }),
     ).toStrictEqual(expected)
   })
 
@@ -476,7 +479,7 @@ describe("mergeMultiStyle", () => {
       mergeMultiStyle(
         target,
         source,
-      )({ pick: ["variants", "solid", "container"] }),
+      )({ pick: ["variants.solid", "container"] }),
     ).toStrictEqual(expected)
   })
 

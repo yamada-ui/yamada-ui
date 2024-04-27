@@ -7,13 +7,6 @@ describe("<AvatarGroup />", () => {
       <AvatarGroup>
         <Avatar />
       </AvatarGroup>,
-      {
-        axeOptions: {
-          rules: {
-            "svg-img-alt": { enabled: false },
-          },
-        },
-      },
     )
   })
 

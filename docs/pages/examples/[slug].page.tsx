@@ -173,7 +173,7 @@ const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
           </HStack>
         </Section>
 
-        <Section py="xl" display="block">
+        <Section display="block" pt="xl" pb="0">
           <ScrollArea as={Center} type="never" tabIndex={-1} m="0 auto">
             <SegmentedControl as="nav" variant="simple" value={currentSlug}>
               {SLUGS.map((slug) => {

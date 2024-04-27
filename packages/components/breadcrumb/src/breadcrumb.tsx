@@ -10,6 +10,8 @@ import {
   omitThemeProps,
   useMultiComponentStyle,
 } from "@yamada-ui/core"
+import { Icon } from "@yamada-ui/react"
+import type { IconProps } from "@yamada-ui/react"
 import { cx, createContext, getValidChildren } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 
@@ -225,6 +227,39 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
       >
         {children}
       </ui.span>
+    )
+  },
+)
+
+type BreadcrumbEllipsisOptions = {}
+
+export type BreadcrumbEllipsisProps = IconProps & BreadcrumbEllipsisOptions
+
+export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
+  ({ className, ...rest }, ref) => {
+    const styles = useBreadcrumb()
+
+    const css: CSSUIObject = {
+      ...styles.ellipsis,
+    }
+
+    return (
+      <Icon
+        ref={ref}
+        className={cx("ui-breadcrumb__item__ellipsis", className)}
+        __css={css}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 36 24"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...rest}
+      >
+        <circle cx="10" cy="12" r="2" fill="currentColor" />
+        <circle cx="20" cy="12" r="2" fill="currentColor" />
+        <circle cx="30" cy="12" r="2" fill="currentColor" />
+      </Icon>
     )
   },
 )

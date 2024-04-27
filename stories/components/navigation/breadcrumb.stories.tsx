@@ -2,6 +2,7 @@ import { faCaretRight } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
+import { BreadcrumbEllipsis } from "../../../packages/components/breadcrumb/src/breadcrumb"
 
 type Story = StoryFn<typeof Breadcrumb>
 
@@ -58,6 +59,25 @@ export const withCustomSeparator: Story = () => {
       </BreadcrumbItem>
       <BreadcrumbItem>
         <BreadcrumbLink href="/">ナメック星編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem isCurrentPage>
+        <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  )
+}
+
+export const withEllipsis: Story = () => {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbEllipsis />
       </BreadcrumbItem>
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>

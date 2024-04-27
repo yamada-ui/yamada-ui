@@ -1,4 +1,4 @@
-import type { AvatarProps, StackProps } from "@yamada-ui/react"
+import type { AvatarProps, CardProps, StackProps } from "@yamada-ui/react"
 import {
   Card,
   Text,
@@ -45,9 +45,11 @@ const ITEMS: ItemProps[] = [
   },
 ]
 
-export const RecentSales = memo(() => {
+export type RecentSalesProps = CardProps
+
+export const RecentSales: FC<RecentSalesProps> = memo(({ ...rest }) => {
   return (
-    <Card variant="outline">
+    <Card variant="outline" {...rest}>
       <CardHeader flexDirection="column" alignItems="flex-start" gap="0">
         <Heading as="h4" size="md">
           RecentSales
@@ -81,9 +83,9 @@ type ItemProps = StackProps & {
 }
 
 const Item: FC<ItemProps> = memo(
-  ({ src, avatarProps, name, email, isIncrease = true, number }) => {
+  ({ src, avatarProps, name, email, isIncrease = true, number, ...rest }) => {
     return (
-      <HStack as="li" gap={{ base: "md", sm: "sm" }}>
+      <HStack as="li" gap={{ base: "md", sm: "sm" }} {...rest}>
         <Avatar src={src} boxSize={{ base: "10", sm: "8" }} {...avatarProps} />
 
         <VStack gap="0">

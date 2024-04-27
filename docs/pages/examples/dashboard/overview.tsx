@@ -1,9 +1,13 @@
 import type { BarProps } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
+import type { CardProps } from "@yamada-ui/react"
 import { Card, CardBody, CardHeader, Heading, isNumber } from "@yamada-ui/react"
+import type { FC } from "react"
 import { memo, useMemo } from "react"
 
-export const Overview = memo(() => {
+export type OverviewProps = CardProps
+
+export const Overview: FC<OverviewProps> = memo(({ ...rest }) => {
   const data = useMemo(
     () => [
       { month: "Jan", value: 3750 },
@@ -30,7 +34,7 @@ export const Overview = memo(() => {
   )
 
   return (
-    <Card variant="outline">
+    <Card variant="outline" {...rest}>
       <CardHeader alignItems="flex-start" gap="0">
         <Heading as="h4" size="md">
           Overview

@@ -93,7 +93,7 @@ describe("<Breadcrumb />", () => {
         <BreadcrumbItem>
           <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
+        <BreadcrumbItem>
           <BreadcrumbEllipsis />
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>

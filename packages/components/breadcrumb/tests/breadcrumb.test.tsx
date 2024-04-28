@@ -26,7 +26,7 @@ describe("<Breadcrumb />", () => {
     )
   })
 
-  test("separator propertie is being passed accurately", () => {
+  test("separator property is being passed accurately", () => {
     render(
       <Breadcrumb separator="-">
         <BreadcrumbItem>
@@ -42,7 +42,7 @@ describe("<Breadcrumb />", () => {
     expect(separatorEle).toBeInTheDocument()
   })
 
-  test("isCurrentPage propertie is being passed accurately", () => {
+  test("isCurrentPage property is being passed accurately", () => {
     const { container } = render(
       <Breadcrumb separator="-">
         <BreadcrumbItem>

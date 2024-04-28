@@ -18,7 +18,7 @@ import { cloneElement } from "react"
 const [BreadcrumbProvider, useBreadcrumb] = createContext<
   Record<string, CSSUIObject>
 >({
-  name: `BreadcrumbContext`,
+  name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
 

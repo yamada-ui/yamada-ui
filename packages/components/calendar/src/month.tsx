@@ -2,7 +2,13 @@ import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
-import { cx, dataAttr, filterUndefined } from "@yamada-ui/utils"
+import {
+  cx,
+  dataAttr,
+  filterUndefined,
+  isNull,
+  isUndefined,
+} from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { FC } from "react"
 import { useMemo } from "react"
@@ -199,8 +205,8 @@ export const Month: FC<MonthProps> = ({
                           })
 
                           const isDisplayed =
-                            day !== null &&
-                            day !== undefined &&
+                            !isNull(day) &&
+                            !isUndefined(day) &&
                             typeof day !== "boolean"
 
                           return (

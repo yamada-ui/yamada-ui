@@ -6,6 +6,7 @@ import {
   cx,
   dataAttr,
   filterUndefined,
+  isBoolean,
   isNull,
   isUndefined,
 } from "@yamada-ui/utils"
@@ -205,9 +206,7 @@ export const Month: FC<MonthProps> = ({
                           })
 
                           const isDisplayed =
-                            !isNull(day) &&
-                            !isUndefined(day) &&
-                            typeof day !== "boolean"
+                            !isNull(day) && !isUndefined(day) && !isBoolean(day)
 
                           return (
                             <ui.td

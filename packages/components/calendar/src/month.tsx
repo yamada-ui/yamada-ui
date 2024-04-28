@@ -188,6 +188,21 @@ export const Month: FC<MonthProps> = ({
                             index,
                           })
 
+                          const day = customDay({
+                            date,
+                            row,
+                            col,
+                            weekday: weekdays[col],
+                            isSelected,
+                            isWeekend,
+                            isOutside,
+                          })
+
+                          const isDisplayed =
+                            day !== null &&
+                            day !== undefined &&
+                            typeof day !== "boolean"
+
                           return (
                             <ui.td
                               key={col}
@@ -206,20 +221,14 @@ export const Month: FC<MonthProps> = ({
                                   p: 0,
                                   fontSize: undefined,
                                   fontWeight: "normal",
-                                  ...(isHidden ? { display: "none" } : {}),
+                                  ...(isHidden || !isDisplayed
+                                    ? { display: "none" }
+                                    : {}),
                                   ...styles.day,
                                 }}
                                 {...props}
                               >
-                                {customDay({
-                                  date,
-                                  row,
-                                  col,
-                                  weekday: weekdays[col],
-                                  isSelected,
-                                  isWeekend,
-                                  isOutside,
-                                })}
+                                {day}
                               </Button>
                             </ui.td>
                           )

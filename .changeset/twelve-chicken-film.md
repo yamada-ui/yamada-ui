@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/popover": minor
+"@yamada-ui/popover": patch
 ---
 
-removed extra main tag
+Removed extra `main` tag.

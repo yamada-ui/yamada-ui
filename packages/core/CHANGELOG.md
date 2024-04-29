@@ -1,5 +1,21 @@
 # @yamada-ui/core
 
+## 1.6.6
+
+### Patch Changes
+
+- [#1292](https://github.com/yamada-ui/yamada-ui/pull/1292) [`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `DonutChart` and `PieChart` sizes.
+
+- [#1305](https://github.com/yamada-ui/yamada-ui/pull/1305) [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f) Thanks [@Yutan0423](https://github.com/Yutan0423)! - Fixed a bug where TextStyles and LayerStyles have more types than necessary.
+
+- [#1292](https://github.com/yamada-ui/yamada-ui/pull/1292) [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `mergeStyle` or `mergeMultiStyle` was not merging correctly.
+
+- [#1313](https://github.com/yamada-ui/yamada-ui/pull/1313) [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `omitThemeProps` to accept custom keys.
+
+- Updated dependencies [[`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273)]:
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/portal@1.0.14
+
 ## 1.6.5
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # @yamada-ui/charts
 
+## 1.1.1
+
+### Patch Changes
+
+- [#1216](https://github.com/yamada-ui/yamada-ui/pull/1216) [`8885032`](https://github.com/yamada-ui/yamada-ui/commit/888503284d0e3cd1fe285b4ad8abed40afc564c4) Thanks [@108yen](https://github.com/108yen)! - Fixed typo in `className`
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/tooltip@1.0.26
+  - @yamada-ui/use-token@1.1.12
+  - @yamada-ui/use-value@1.1.12
+
 ## 1.1.0
 
 ### Minor Changes

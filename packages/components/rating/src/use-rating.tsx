@@ -20,7 +20,6 @@ import {
   handlerAll,
   mergeRefs,
   pickObject,
-  omitObject,
   runIfFunc,
 } from "@yamada-ui/utils"
 import type {
@@ -181,7 +180,7 @@ export const useRating = ({
   filledIcon,
   ...props
 }: UseRatingProps) => {
-  let { id, ...rest } = useFormControlProps(props)
+  let { id, "aria-readonly": _isReadOnly, ...rest } = useFormControlProps(props)
   const { disabled, readOnly } = rest
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -196,10 +195,8 @@ export const useRating = ({
   id ??= useId()
   name ??= `rating-${id}`
 
-  const formControlProps = pickObject(
-    rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
-  )
+  const formControlProps = pickObject(rest, getFormControlProperties())
+
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)
   const decimal = 1 / resolvedFractions
@@ -272,7 +269,7 @@ export const useRating = ({
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
-      ...omitObject(rest, ["aria-readonly"]),
+      ...rest,
       ...props,
       id,
       onMouseEnter: handlerAll(

@@ -20,7 +20,7 @@ export type HeaderProps = StackProps & {}
 
 export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
   return (
-    <HStack {...rest}>
+    <HStack mb={{ base: "md", sm: "0" }} {...rest}>
       <VStack gap="0">
         <Heading as="h3" size="lg">
           Welcome back!

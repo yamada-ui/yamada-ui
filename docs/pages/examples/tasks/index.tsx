@@ -1,4 +1,4 @@
-import { Container, noop } from "@yamada-ui/react"
+import { noop, VStack } from "@yamada-ui/react"
 import { memo, useRef } from "react"
 import type { Priority, Status, View } from "./data"
 import { DataTable } from "./data-table"
@@ -12,7 +12,7 @@ export const Tasks = memo(() => {
   const viewRef = useRef<(value: View[]) => void>(noop)
 
   return (
-    <Container>
+    <VStack as="section" p={{ base: "lg", sm: "md" }} gap="md">
       <Header />
       <Filter
         titleRef={titleRef}
@@ -26,7 +26,7 @@ export const Tasks = memo(() => {
         priorityRef={priorityRef}
         viewRef={viewRef}
       />
-    </Container>
+    </VStack>
   )
 })
 

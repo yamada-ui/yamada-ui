@@ -16,7 +16,6 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControlProps,
   formControlProperties,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
@@ -34,7 +33,6 @@ import {
   isArray,
   isEmpty,
   mergeRefs,
-  omitObject,
   percentToValue,
   pickObject,
   roundNumberToStep,
@@ -138,20 +136,28 @@ export const useRangeSlider = ({
     required,
     disabled,
     readOnly,
+    value: valueProp,
     onChange,
+    onChangeStart: onChangeStartProp,
+    onChangeEnd: onChangeEndProp,
+    onFocus,
+    onBlur,
+    "aria-readonly": ariaReadonly,
     ...rest
   } = useFormControlProps(props)
+
+  const formControlProps = pickObject(rest, formControlProperties)
 
   defaultValue = defaultValue ?? [min + (max - min) / 4, max - (max - min) / 4]
 
   if (max < min)
     throw new Error("Do not assign a number less than 'min' to 'max'")
 
-  const onChangeStart = useCallbackRef(rest.onChangeStart)
-  const onChangeEnd = useCallbackRef(rest.onChangeEnd)
+  const onChangeStart = useCallbackRef(onChangeStartProp)
+  const onChangeEnd = useCallbackRef(onChangeEndProp)
 
   const [computedValues, setValues] = useControllableState({
-    value: rest.value,
+    value: valueProp,
     defaultValue,
     onChange,
   })
@@ -425,12 +431,7 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...omitObject(rest, [
-          "aria-readonly",
-          "value",
-          "onChangeStart",
-          "onChangeEnd",
-        ]),
+        ...rest,
         ...props,
         id: `slider-container-${id}`,
         ref: mergeRefs(ref, containerRef),
@@ -444,7 +445,8 @@ export const useRangeSlider = ({
   const getInputProps: RequiredUIPropGetter<"input", { index: number }> =
     useCallback(
       ({ index: i, ...props }, ref = null) => ({
-        ...pickObject(rest, formControlProperties),
+        "aria-readonly": ariaReadonly,
+        ...formControlProps,
         ...props,
         ref,
         id: getInputId(i),
@@ -455,7 +457,16 @@ export const useRangeSlider = ({
         disabled,
         readOnly,
       }),
-      [disabled, getInputId, name, readOnly, required, rest, values],
+      [
+        ariaReadonly,
+        disabled,
+        getInputId,
+        name,
+        readOnly,
+        required,
+        formControlProps,
+        values,
+      ],
     )
 
   const getTrackProps: UIPropGetter = useCallback(
@@ -477,17 +488,14 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...pickObject(
-          rest,
-          getFormControlProperties({ omit: ["aria-readonly"] }),
-        ),
+        ...formControlProps,
         ...props,
         id: `slider-track-${id}`,
         ref: mergeRefs(ref, trackRef),
         style,
       }
     },
-    [id, isVertical, rest],
+    [id, isVertical, formControlProps],
   )
 
   const getFilledTrackProps: UIPropGetter = useCallback(
@@ -514,17 +522,14 @@ export const useRangeSlider = ({
       }
 
       return {
-        ...pickObject(
-          rest,
-          getFormControlProperties({ omit: ["aria-readonly"] }),
-        ),
+        ...formControlProps,
         ...props,
         id: `slider-filled-track-${id}`,
         ref,
         style,
       }
     },
-    [id, isReversed, isVertical, rest, thumbPercents],
+    [id, isReversed, isVertical, formControlProps, thumbPercents],
   )
 
   const getMarkProps: RequiredUIPropGetter<"div", { value: number }> =
@@ -541,10 +546,7 @@ export const useRangeSlider = ({
         }
 
         return {
-          ...pickObject(
-            rest,
-            getFormControlProperties({ omit: ["aria-readonly"] }),
-          ),
+          ...formControlProps,
           ...props,
           ref,
           id: getMarkerId(props.value),
@@ -556,7 +558,7 @@ export const useRangeSlider = ({
           style,
         }
       },
-      [getMarkerId, isReversed, isVertical, max, min, rest, values],
+      [getMarkerId, isReversed, isVertical, max, min, formControlProps, values],
     )
 
   const getThumbProps: RequiredUIPropGetter<"div", { index: number }> =
@@ -584,7 +586,8 @@ export const useRangeSlider = ({
 
         return {
           "aria-label": "Slider thumb",
-          ...pickObject(rest, formControlProperties),
+          "aria-readonly": ariaReadonly,
+          ...formControlProps,
           ...props,
           ref,
           id: getThumbId(i),
@@ -598,11 +601,11 @@ export const useRangeSlider = ({
           ),
           "aria-orientation": orientation,
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-          onFocus: handlerAll(props.onFocus, rest.onFocus, () => {
+          onFocus: handlerAll(props.onFocus, onFocus, () => {
             setFocused(true)
             setActiveIndex(i)
           }),
-          onBlur: handlerAll(props.onBlur, rest.onBlur, () => {
+          onBlur: handlerAll(props.onBlur, onBlur, () => {
             setFocused(false)
             setActiveIndex(-1)
           }),
@@ -610,20 +613,23 @@ export const useRangeSlider = ({
         }
       },
       [
-        min,
-        max,
-        focusThumbOnChange,
-        activeIndex,
-        getThumbId,
-        isDragging,
-        isInteractive,
-        isVertical,
-        onKeyDown,
-        orientation,
-        rest,
         thumbPercents,
         thumbSizes,
+        isVertical,
         values,
+        ariaReadonly,
+        formControlProps,
+        getThumbId,
+        isInteractive,
+        focusThumbOnChange,
+        min,
+        max,
+        isDragging,
+        activeIndex,
+        orientation,
+        onKeyDown,
+        onFocus,
+        onBlur,
       ],
     )
 

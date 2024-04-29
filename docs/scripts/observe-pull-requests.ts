@@ -33,7 +33,7 @@ const GITHUB_JOINING_COMMENT = (id: string) =>
   [
     `@${id}`,
     `Hi, Thanks for the PR!`,
-    `A week has passed since this PR was created, so core members will be joining this PR.`,
+    `A week has passed since this PR was created, so maintainers will be joining this PR.`,
   ].join("\n\n")
 const DISCORD_HELP_WANTED_COMMENT = (
   number: number,

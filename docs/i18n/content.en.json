@@ -59,7 +59,7 @@
   {
     "title": "Community",
     "type": "page",
-    "description": "Yamada UIのコミュニティ",
+    "description": "The Yamada UI Community",
     "slug": "/community",
     "hierarchy": { "lv1": "Community" }
   },
@@ -9313,6 +9313,12 @@
     "type": "fragment",
     "slug": "/components/overlay/menu#selectable-items",
     "hierarchy": { "lv1": "Menu", "lv2": "Usage", "lv3": "Selectable Items" }
+  },
+  {
+    "title": "Nested Menus",
+    "type": "fragment",
+    "slug": "/components/overlay/menu#nested-menus",
+    "hierarchy": { "lv1": "Menu", "lv2": "Usage", "lv3": "Nested Menus" }
   },
   {
     "title": "Keeping the Menu Open When an Item is Selected",

@@ -353,7 +353,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
     if (!cloneChildren.length)
       for (let i = 0; i < items; i++) {
-        cloneChildren.push(<PinInputField key={i} />)
+        cloneChildren.push(<PinInputField key={i} {...rest} />)
       }
 
     return (
@@ -362,7 +362,6 @@ export const PinInput = forwardRef<PinInputProps, "div">(
           <ui.div
             ref={ref}
             className={cx("ui-pin-input", className)}
-            {...rest}
             __css={css}
           >
             {cloneChildren}

@@ -62,7 +62,7 @@ export const usePagination = ({
   siblings = 1,
   boundaries = 1,
   isDisabled = false,
-  ...rest
+  onChange: onChangeProp,
 }: UsePaginationProps) => {
   const computedSiblings = useValue(siblings)
   const computedBoundaries = useValue(boundaries)
@@ -70,7 +70,7 @@ export const usePagination = ({
   const [currentPage, setCurrentPage] = useControllableState({
     value: page,
     defaultValue: defaultPage,
-    onChange: rest.onChange,
+    onChange: onChangeProp,
   })
 
   const onFirst = useCallback(() => setCurrentPage(1), [setCurrentPage])

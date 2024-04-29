@@ -14,9 +14,8 @@ import {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  useFormControlProps,
   formControlProperties,
-  getFormControlProperties,
+  useFormControlProps,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
@@ -25,7 +24,6 @@ import { useSize } from "@yamada-ui/use-size"
 import {
   createContext,
   cx,
-  omitObject,
   pickObject,
   useCallbackRef,
   valueToPercent,
@@ -129,18 +127,26 @@ export const useSlider = ({
     required,
     disabled,
     readOnly,
+    value: valueProp,
     onChange,
+    onChangeStart: onChangeStartProp,
+    onChangeEnd: onChangeEndProp,
+    onFocus,
+    onBlur,
+    "aria-readonly": ariaReadonly,
     ...rest
   } = useFormControlProps(props)
+
+  const formControlProps = pickObject(rest, formControlProperties)
 
   if (max < min)
     throw new Error("Do not assign a number less than 'min' to 'max'")
 
-  const onChangeStart = useCallbackRef(rest.onChangeStart)
-  const onChangeEnd = useCallbackRef(rest.onChangeEnd)
+  const onChangeStart = useCallbackRef(onChangeStartProp)
+  const onChangeEnd = useCallbackRef(onChangeEndProp)
 
   const [computedValue, setValue] = useControllableState({
-    value: rest.value,
+    value: valueProp,
     defaultValue: defaultValue ?? min + (max - min) / 2,
     onChange,
   })
@@ -332,12 +338,7 @@ export const useSlider = ({
       }
 
       return {
-        ...omitObject(rest, [
-          "aria-readonly",
-          "value",
-          "onChangeStart",
-          "onChangeEnd",
-        ]),
+        ...rest,
         ...props,
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
@@ -349,7 +350,8 @@ export const useSlider = ({
 
   const getInputProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      "aria-readonly": ariaReadonly,
+      ...formControlProps,
       ...props,
       id,
       ref,
@@ -360,7 +362,16 @@ export const useSlider = ({
       disabled,
       readOnly,
     }),
-    [disabled, id, name, readOnly, required, rest, value],
+    [
+      ariaReadonly,
+      disabled,
+      formControlProps,
+      id,
+      name,
+      readOnly,
+      required,
+      value,
+    ],
   )
 
   const getTrackProps: UIPropGetter = useCallback(
@@ -382,16 +393,13 @@ export const useSlider = ({
       }
 
       return {
-        ...pickObject(
-          rest,
-          getFormControlProperties({ omit: ["aria-readonly"] }),
-        ),
+        ...formControlProps,
         ...props,
         ref: mergeRefs(ref, trackRef),
         style,
       }
     },
-    [isVertical, rest],
+    [isVertical, formControlProps],
   )
 
   const getFilledTrackProps: UIPropGetter = useCallback(
@@ -417,16 +425,13 @@ export const useSlider = ({
       }
 
       return {
-        ...pickObject(
-          rest,
-          getFormControlProperties({ omit: ["aria-readonly"] }),
-        ),
+        ...formControlProps,
         ...props,
         ref,
         style,
       }
     },
-    [isReversed, isVertical, rest, thumbPercent],
+    [isReversed, isVertical, formControlProps, thumbPercent],
   )
 
   const getMarkProps: RequiredUIPropGetter<"div", { value: number }> =
@@ -443,10 +448,7 @@ export const useSlider = ({
         }
 
         return {
-          ...pickObject(
-            rest,
-            getFormControlProperties({ omit: ["aria-readonly"] }),
-          ),
+          ...formControlProps,
           ...props,
           ref,
           "aria-hidden": true,
@@ -455,7 +457,7 @@ export const useSlider = ({
           style,
         }
       },
-      [isReversed, isVertical, max, min, rest, value],
+      [isReversed, isVertical, max, min, formControlProps, value],
     )
 
   const getThumbProps: UIPropGetter = useCallback(
@@ -475,7 +477,8 @@ export const useSlider = ({
 
       return {
         "aria-label": "Slider thumb",
-        ...pickObject(rest, formControlProperties),
+        "aria-readonly": ariaReadonly,
+        ...formControlProps,
         ...props,
         ref: mergeRefs(ref, thumbRef),
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
@@ -486,26 +489,27 @@ export const useSlider = ({
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         "aria-orientation": orientation,
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-        onFocus: handlerAll(props.onFocus, rest.onFocus, () =>
-          setFocused(true),
-        ),
-        onBlur: handlerAll(props.onBlur, rest.onBlur, () => setFocused(false)),
+        onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
+        onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
         style,
       }
     },
     [
+      thumbPercent,
+      thumbSize,
+      isVertical,
+      ariaReadonly,
+      formControlProps,
+      isInteractive,
+      focusThumbOnChange,
       min,
       max,
       value,
-      focusThumbOnChange,
       isDragging,
-      isInteractive,
-      isVertical,
-      onKeyDown,
       orientation,
-      rest,
-      thumbPercent,
-      thumbSize,
+      onKeyDown,
+      onFocus,
+      onBlur,
     ],
   )
 

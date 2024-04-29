@@ -1,5 +1,24 @@
 # @yamada-ui/calendar
 
+## 1.2.12
+
+### Patch Changes
+
+- [#1308](https://github.com/yamada-ui/yamada-ui/pull/1308) [`fac4584`](https://github.com/yamada-ui/yamada-ui/commit/fac45849e2b07c62d56d433ba64fe0eb4a60e4af) Thanks [@Alesion30](https://github.com/Alesion30)! - Fixed to set `display: none` on button if a custom component is not displayed element (e.g. null, undefined, boolean) in order to address a11y violations.
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e), [`fa56c72`](https://github.com/yamada-ui/yamada-ui/commit/fa56c7257bc9e31ccbce6d15270eb6b2f55178b3)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/popover@1.1.1
+  - @yamada-ui/button@1.0.27
+  - @yamada-ui/form-control@1.0.27
+  - @yamada-ui/icon@1.0.24
+  - @yamada-ui/portal@1.0.14
+  - @yamada-ui/use-clickable@1.2.1
+  - @yamada-ui/use-controllable-state@1.0.13
+  - @yamada-ui/use-disclosure@1.0.13
+  - @yamada-ui/use-outside-click@1.0.13
+
 ## 1.2.11
 
 ### Patch Changes

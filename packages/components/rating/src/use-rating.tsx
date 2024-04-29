@@ -6,7 +6,7 @@ import type {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  getFormControlProperties,
+  formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import type { RequiredMotionUIPropGetter } from "@yamada-ui/motion"
@@ -195,7 +195,7 @@ export const useRating = ({
   id ??= useId()
   name ??= `rating-${id}`
 
-  const formControlProps = pickObject(rest, getFormControlProperties())
+  const formControlProps = pickObject(rest, formControlProperties)
 
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)

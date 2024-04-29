@@ -10,7 +10,7 @@ import {
 import type { MotionTransition } from "@yamada-ui/motion"
 import { motion } from "@yamada-ui/motion"
 import { cx, dataAttr, omitObject } from "@yamada-ui/utils"
-import type { InputHTMLAttributes, ReactElement } from "react"
+import type { DOMAttributes, InputHTMLAttributes, ReactElement } from "react"
 import { cloneElement } from "react"
 
 export type SwitchIconProps = {
@@ -157,7 +157,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         <ui.span
           className={cx("ui-switch__label", className)}
           __css={{ ...styles.label }}
-          {...getLabelProps(labelProps)}
+          {...getLabelProps(labelProps as DOMAttributes<HTMLElement>)}
         >
           {children}
         </ui.span>

@@ -9980,6 +9980,12 @@
     "hierarchy": { "lv1": "Menu", "lv2": "使い方", "lv3": "選択可能な項目" }
   },
   {
+    "title": "ネストしたメニュー",
+    "type": "fragment",
+    "slug": "/components/overlay/menu#ネストしたメニュー",
+    "hierarchy": { "lv1": "Menu", "lv2": "使い方", "lv3": "ネストしたメニュー" }
+  },
+  {
     "title": "項目選択時にメニューを閉じない",
     "type": "fragment",
     "slug": "/components/overlay/menu#項目選択時にメニューを閉じない",

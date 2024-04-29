@@ -52,7 +52,7 @@ export const withFallback: Story = () => {
   return (
     <Wrap gap="md">
       <Avatar bg="secondary" src="https://not-found.com" />
-      <Avatar src="https://not-found.com" />
+      <Avatar src="https://not-found.com" alt="alternative text" />
       <Avatar icon={<Icon icon={faPoo} />} src="https://not-found.com" />
     </Wrap>
   )

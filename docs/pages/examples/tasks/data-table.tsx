@@ -1,3 +1,4 @@
+import type { TdProps } from "@yamada-ui/react"
 import {
   Menu,
   MenuButton,
@@ -14,10 +15,10 @@ import {
   Tag,
   assignRef,
 } from "@yamada-ui/react"
-import type { Column, PagingTableProps } from "@yamada-ui/table"
+import type { Cell, Column, PagingTableProps } from "@yamada-ui/table"
 import { PagingTable } from "@yamada-ui/table"
 import { Ellipsis } from "lucide-react"
-import { memo, useMemo, useState } from "react"
+import { memo, useCallback, useMemo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
 import type { Data, Priority, Status, View } from "./data"
 import { DATA, LABEL, PRIORITY, STATUS, VIEW } from "./data"
@@ -27,24 +28,30 @@ const TITLE_COLUMN: Column<Data> = {
   accessorKey: "title",
   css: { minW: "60%" },
   cell: ({ getValue, row }) => {
-    const { label } = row.original
+    const { label, empty } = row.original
+    const value = getValue()
+
+    if (empty) return value
 
     const colorScheme =
       label === "Bug" ? "red" : label === "Feature" ? "purple" : "blue"
+
     return (
       <HStack gap="sm">
-        <Tag
-          variant="outline"
-          size="sm"
-          colorScheme={colorScheme}
-          whiteSpace="nowrap"
-          minW="auto"
-        >
-          {row.original.label}
-        </Tag>
+        {label ? (
+          <Tag
+            variant="outline"
+            size="sm"
+            colorScheme={colorScheme}
+            whiteSpace="nowrap"
+            minW="auto"
+          >
+            {label}
+          </Tag>
+        ) : null}
 
         <Text as="span" lineClamp={1}>
-          {getValue()}
+          {value}
         </Text>
       </HStack>
     )
@@ -55,34 +62,46 @@ const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data> = (hasTitle) => ({
   header: "Status",
   accessorKey: "status",
   css: hasTitle ? { w: "12.5%" } : { minW: "12.5%" },
-  cell: ({ getValue }) => (
-    <HStack gap="sm">
-      <Icon as={STATUS[getValue()].icon} />
-      <Text as="span" lineClamp={1} color="muted">
-        {STATUS[getValue()].label}
-      </Text>
-    </HStack>
-  ),
+  cell: ({ getValue }) => {
+    const value = getValue()
+
+    if (!value) return null
+
+    return (
+      <HStack gap="sm">
+        <Icon as={STATUS[value].icon} color="muted" />
+        <Text as="span" lineClamp={1}>
+          {STATUS[value].label}
+        </Text>
+      </HStack>
+    )
+  },
 })
 
 const PRIORITY_COLUMN: (hasTitle?: boolean) => Column<Data> = (hasTitle) => ({
   header: "Priority",
   accessorKey: "priority",
   css: hasTitle ? { w: "12.5%" } : { minW: "12.5%" },
-  cell: ({ getValue }) => (
-    <HStack gap="sm">
-      <Icon as={PRIORITY[getValue()].icon} color="muted" />
-      <Text as="span" lineClamp={1}>
-        {PRIORITY[getValue()].label}
-      </Text>
-    </HStack>
-  ),
+  cell: ({ getValue }) => {
+    const value = getValue()
+
+    if (!value) return null
+
+    return (
+      <HStack gap="sm">
+        <Icon as={PRIORITY[value].icon} color="muted" />
+        <Text as="span" lineClamp={1}>
+          {PRIORITY[value].label}
+        </Text>
+      </HStack>
+    )
+  },
 })
 
 const CONTROL_COLUMN: Column<Data> = {
   id: "control",
   css: { w: "2.5%" },
-  cell: () => <ControlMenu />,
+  cell: ({ row }) => (row.original.id ? <ControlMenu /> : null),
 }
 
 export type DataTableProps = Omit<PagingTableProps, "columns" | "data"> & {
@@ -147,7 +166,28 @@ export const DataTable: FC<DataTableProps> = memo(
 
           return isSelectedStatus && isSelectedPriority && isSelectedTitle
         }),
+
       [inputtedTitle, selectedPriorities, selectedStatuses],
+    )
+
+    const cellProps: PagingTableProps<Data>["cellProps"] = useCallback(
+      ({ column, row }: Cell<Data, unknown>) => {
+        const props: TdProps = { verticalAlign: "middle" }
+
+        if (row.original.empty) {
+          if (column.columnDef.header === "Title") {
+            props.colSpan = 6
+            props.textAlign = "center"
+            props.color = "muted"
+            props.h = "3xs"
+          } else {
+            props.display = "none"
+          }
+        }
+
+        return props
+      },
+      [],
     )
 
     assignRef(titleRef, setInputtedTitle)
@@ -155,22 +195,37 @@ export const DataTable: FC<DataTableProps> = memo(
     assignRef(priorityRef, setSelectedPriorities)
     assignRef(viewRef, setSelectedViews)
 
+    const hasData = !!computedData.length
+    const resolvedData: Data[] = hasData
+      ? computedData
+      : [{ title: "No results.", empty: true }]
+
     return (
       <TableContainer whiteSpace={{ base: "inherit", lg: "nowrap" }}>
-        <PagingTable
+        <PagingTable<Data>
+          borderCollapse="separate"
+          borderWidth="1px"
+          rounded="md"
+          sx={{ "tbody > tr:last-of-type > td": { borderBottomWidth: "0px" } }}
           columns={columns}
-          data={computedData}
+          data={resolvedData}
           rowId="id"
-          rowsClickSelect
-          highlightOnHover
-          highlightOnSelected
+          rowsClickSelect={hasData}
+          highlightOnHover={hasData}
+          highlightOnSelected={hasData}
+          checkboxProps={{ isDisabled: !hasData }}
           headerProps={{ textTransform: "capitalize" }}
-          cellProps={{ verticalAlign: "middle" }}
+          // @ts-ignore
+          cellProps={cellProps}
           pagingControlProps={{
             gridTemplateColumns: { base: undefined, sm: "1fr" },
           }}
           paginationProps={{
-            innerProps: { flex: { base: "inherit", sm: 1 } },
+            isDisabled: !hasData,
+            innerProps: {
+              flex: { base: "inherit", sm: 1 },
+              display: hasData ? "flex" : "none",
+            },
             gridColumn: { base: undefined, sm: "1 / 2" },
           }}
           selectProps={{ gridColumn: { base: undefined, sm: "1 / 2" } }}

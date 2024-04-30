@@ -60,11 +60,12 @@ export const VIEW = ["title", "status", "priority"] as const
 export type View = (typeof VIEW)[number]
 
 export type Data = {
-  id: string
+  id?: string
   title: string
-  status: Status
-  label: Label
-  priority: Priority
+  status?: Status
+  label?: Label
+  priority?: Priority
+  empty?: boolean
 }
 
 export const DATA: Data[] = [

@@ -1,10 +1,10 @@
-name: Release
+name: Sync
 
 on: [workflow_dispatch]
 
 jobs:
-  release:
-    name: Release
+  sync:
+    name: Sync
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,7 +53,7 @@ jobs:
           base: main
           delete-branch: true
           commit-message: "ci(changesets): version packages"
-          title: "Version Packages"
+          title: "Updated dependencies"
           branch: changeset-release/main
           assignees: "hirotomoyamada"
           reviewers: "hirotomoyamada"

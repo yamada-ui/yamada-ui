@@ -46,6 +46,12 @@ const baseConfigs = [
       "no-console": "off",
     },
   },
+  {
+    files: ["packages/utils/src/object.ts"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+    },
+  },
 ]
 
 const importConfigs = [

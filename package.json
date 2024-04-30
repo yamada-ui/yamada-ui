@@ -21,7 +21,7 @@
     "build": "turbo run build --filter=!./examples/*",
     "build:fast": "turbo run build:fast --filter=!./examples/*",
     "dev": "turbo run dev --filter=!./examples/*",
-    "lint": "eslint 'packages/**/{src,tests}/**' 'scripts/**' vitest.config.mts --ext .ts,.tsx,.mts --max-warnings 0 --config .eslintrc --cache",
+    "lint": "eslint 'packages/**/{src,tests}/**' 'scripts/**' --max-warnings 0 --config eslint.config.mjs --cache",
     "format": "prettier --write .",
     "format:check": "prettier --check packages/**/**/src stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/**/src stories/**/** scripts/**/** --cache",

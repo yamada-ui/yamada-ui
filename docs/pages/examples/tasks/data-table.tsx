@@ -214,6 +214,7 @@ export const DataTable: FC<DataTableProps> = memo(
           highlightOnHover={hasData}
           highlightOnSelected={hasData}
           checkboxProps={{ isDisabled: !hasData }}
+          // @ts-ignore
           headerProps={{ textTransform: "capitalize" }}
           // @ts-ignore
           cellProps={cellProps}

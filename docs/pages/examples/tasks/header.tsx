@@ -26,9 +26,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
           Welcome back!
         </Heading>
 
-        <Text fontSize="sm" color="muted">
-          Here's a list of your tasks for this month!
-        </Text>
+        <Text color="muted">Here's a list of your tasks for this month!</Text>
       </VStack>
 
       <Menu gutter={16}>

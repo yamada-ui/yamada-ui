@@ -22,20 +22,6 @@ export const CORE_MEMBERS = [
     },
   },
   {
-    id: "koralle",
-    name: {
-      en: "koralle",
-      ja: "koralle",
-    },
-    icon: "https://avatars.githubusercontent.com/u/33865215?v=4",
-    github: "https://github.com/koralle",
-    twitter: "https://twitter.com/koralle_tech",
-    description: {
-      en: "Front-end engineer, likes React and Neovim.",
-      ja: "ReactとNeovimが好きなフロントエンドエンジニア。",
-    },
-  },
-  {
     id: "illionillion",
     name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
     icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
@@ -44,6 +30,17 @@ export const CORE_MEMBERS = [
     description: {
       en: "Web engineer, a university student.",
       ja: "Webエンジニア。大学生。",
+    },
+  },
+  {
+    id: "nakayan5",
+    name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
+    icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
+    github: "https://github.com/nakayan5",
+    twitter: "https://twitter.com/nakachan_js",
+    description: {
+      en: "Software engineer based in tokyo.",
+      ja: "東京を拠点に活動するソフトウェアエンジニア。",
     },
   },
   {
@@ -58,6 +55,20 @@ export const CORE_MEMBERS = [
     },
   },
   {
+    id: "koralle",
+    name: {
+      en: "koralle",
+      ja: "koralle",
+    },
+    icon: "https://avatars.githubusercontent.com/u/33865215?v=4",
+    github: "https://github.com/koralle",
+    twitter: "https://twitter.com/koralle_tech",
+    description: {
+      en: "Front-end engineer, likes React and Neovim.",
+      ja: "ReactとNeovimが好きなフロントエンドエンジニア。",
+    },
+  },
+  {
     id: "setodeve",
     name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },
     icon: "https://avatars.githubusercontent.com/u/83833293?v=4",
@@ -66,17 +77,6 @@ export const CORE_MEMBERS = [
     description: {
       en: "Engineer based in fukuoka.",
       ja: "福岡在住のエンジニア。",
-    },
-  },
-  {
-    id: "nakayan5",
-    name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
-    icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
-    github: "https://github.com/nakayan5",
-    twitter: "https://twitter.com/nakachan_js",
-    description: {
-      en: "Software engineer based in tokyo.",
-      ja: "東京を拠点に活動するソフトウェアエンジニア。",
     },
   },
   {
@@ -102,6 +102,17 @@ export const CORE_MEMBERS = [
     },
   },
   {
+    id: "imaimai17468",
+    name: { en: "Toshiki Imai", ja: "Toshiki Imai" },
+    icon: "https://avatars.githubusercontent.com/u/52590941?v=4",
+    github: "https://github.com/imaimai17468",
+    twitter: "https://twitter.com/imaimai17468",
+    description: {
+      en: "Multi-talented, frog-loving front-end engineer.",
+      ja: "多趣味なカエル好きのフロントエンドエンジニア",
+    },
+  },
+  {
     id: "hoshico",
     name: { en: "hoshico", ja: "hoshico" },
     icon: "https://avatars.githubusercontent.com/u/77495217?v=4",
@@ -121,17 +132,6 @@ export const CORE_MEMBERS = [
     description: {
       en: "Web developer, interested in front-end and audio.",
       ja: "フロントエンドと音に興味があるWebエンジニア。",
-    },
-  },
-  {
-    id: "imaimai17468",
-    name: { en: "Toshiki Imai", ja: "Toshiki Imai" },
-    icon: "https://avatars.githubusercontent.com/u/52590941?v=4",
-    github: "https://github.com/imaimai17468",
-    twitter: "https://twitter.com/imaimai17468",
-    description: {
-      en: "Multi-talented, frog-loving front-end engineer.",
-      ja: "多趣味なカエル好きのフロントエンドエンジニア",
     },
   },
 ]

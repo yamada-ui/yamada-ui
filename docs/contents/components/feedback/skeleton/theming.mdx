@@ -1,0 +1,30 @@
+---
+title: Skeleton
+description: "`Skeleton` is a component that acts as a placeholder until content is loaded."
+package_name: "@yamada-ui/skeleton"
+with_description: true
+tab: Theming
+---
+
+## Theming
+
+The `Skeleton` is a [single part component](/styled-system/theming/component-styles#single-part-components).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Skeleton: ComponentStyle = {
+  baseStyle: {
+    background: ["blackAlpha.300", "whiteAlpha.300"],
+    borderColor: ["blackAlpha.400", "whiteAlpha.400"],
+    opacity: 0.7,
+    borderRadius: "sm",
+  },
+  defaultProps: {
+    startColor: ["blackAlpha.300", "whiteAlpha.300"],
+    endColor: ["blackAlpha.400", "whiteAlpha.400"],
+  },
+}
+```

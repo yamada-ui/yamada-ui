@@ -1,0 +1,148 @@
+---
+title: Toggle
+description: "`Button`は、オンまたはオフの２つの状態をコンポーネントです。"
+package_name: "@yamada-ui/toggle"
+label: New
+with_description: true
+tab: Props
+---
+
+## Props
+
+### ToggleProps
+
+<PropsCard
+  id="toggle-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue={"gray"}
+/>
+
+<PropsCard
+  id="toggle-defaultisselected"
+  name="defaultIsSelected"
+  type="boolean"
+  description={"If `true`, the toggle button will be initially selected."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-disableripple"
+  name="disableRipple"
+  type="boolean"
+  description={"If `true`, disable ripple effects when pressing a element."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-icon"
+  name="icon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The icon to be used in the button."}
+/>
+
+<PropsCard
+  id="toggle-isactive"
+  name="isActive"
+  type="boolean"
+  description={"If `true`, the toggle button is represented as active."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the toggle button will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the toggle button will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-isrounded"
+  name="isRounded"
+  type="boolean"
+  description={
+    "If true, the toggle button is full rounded. Else, it'll be slightly round."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="toggle-isselected"
+  name="isSelected"
+  type="boolean"
+  description={"If `true`, the toggle button will be selected."}
+/>
+
+<PropsCard
+  id="toggle-onchange"
+  name="onChange"
+  type="(isSelected: boolean) => void"
+  description={"The callback invoked when selected state changes."}
+/>
+
+<PropsCard
+  id="toggle-size"
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the Toggle."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="toggle-variant"
+  name="variant"
+  type='"subtle" | "solid" | "outline" | "unstyled"'
+  description={"The variant of the Toggle."}
+  defaultValue={"subtle"}
+/>
+
+### ToggleGroupProps
+
+<PropsCard
+  id="togglegroup-direction"
+  name="direction"
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | ResponsiveObject<FlexDirection> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  description={"The CSS `flex-direction` property."}
+/>
+
+<PropsCard
+  id="togglegroup-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, all wrapped toggle button will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="togglegroup-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, all wrapped toggle button will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="togglegroup-onchange"
+  name="onChange"
+  type="(value: Y extends any[] ? Y : Y | undefined) => void"
+  description={
+    "The callback fired when any children toggle button is selected or unselected."
+  }
+/>
+
+<PropsCard
+  id="togglegroup-value"
+  name="value"
+  type="NonNullable<Y extends any[] ? Y : Y | undefined>"
+  description={"The value of the toggle button group."}
+/>

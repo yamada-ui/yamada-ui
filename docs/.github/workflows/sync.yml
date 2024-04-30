@@ -1,0 +1,59 @@
+name: Sync
+
+on: [workflow_dispatch]
+
+jobs:
+  sync:
+    name: Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          ref: main
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Update changelog
+        run: pnpm gen:changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update CSS properties
+        run: pnpm gen:css
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update theme
+        run: pnpm gen:theme
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update props
+        run: pnpm gen:props
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update contributors
+        run: pnpm gen:contributors
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update search content
+        run: pnpm gen:search
+
+      - name: Update Yamada UI
+        run: pnpm up '@yamada-ui/*' --latest
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          delete-branch: true
+          commit-message: "ci(changesets): version packages"
+          title: "Updated dependencies"
+          branch: changeset-release/main
+          assignees: "hirotomoyamada"
+          reviewers: "hirotomoyamada"

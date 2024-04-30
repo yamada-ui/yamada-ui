@@ -94,7 +94,7 @@ jobs:
           clean: true
           clean-exclude: .nojekyll
 
-      - name: Release docs
+      - name: Sync docs
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:
@@ -103,11 +103,11 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'yamada-ui',
               repo: 'yamada-docs',
-              workflow_id: 'release.yml',
+              workflow_id: 'sync.yml',
               ref: 'main'
             })
 
-      - name: Release colors
+      - name: Sync colors
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:
@@ -116,11 +116,11 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'yamada-ui',
               repo: 'yamada-colors',
-              workflow_id: 'release.yml',
+              workflow_id: 'sync.yml',
               ref: 'main'
             })
 
-      - name: Release components
+      - name: Sync components
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:
@@ -129,6 +129,6 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'yamada-ui',
               repo: 'yamada-components',
-              workflow_id: 'release.yml',
+              workflow_id: 'sync.yml',
               ref: 'main'
             })

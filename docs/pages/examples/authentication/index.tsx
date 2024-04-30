@@ -1,14 +1,18 @@
-import { Center, Text } from "@yamada-ui/react"
+import { Grid } from "@yamada-ui/react"
 import { memo } from "react"
-// import { useI18n } from "contexts/i18n-context"
+import { Company } from "./company"
+import { Form } from "./form"
 
 export const Authentication = memo(() => {
-  // const { t } = useI18n()
-
   return (
-    <Center minH="lg">
-      <Text color="muted">Coming soon!</Text>
-    </Center>
+    <Grid
+      as="section"
+      templateColumns={{ base: "repeat(2, 1fr)", lg: "1fr" }}
+      minH={{ base: "5xl", sm: "2xl" }}
+    >
+      <Company />
+      <Form />
+    </Grid>
   )
 })
 

@@ -30,6 +30,9 @@
       "started": "Get Started",
       "components": "Components"
     },
+    "author": {
+      "description": "Create by"
+    },
     "mail": {
       "title": "Mail"
     },

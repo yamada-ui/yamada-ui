@@ -30,6 +30,9 @@
       "started": "はじめる",
       "components": "コンポーネント"
     },
+    "author": {
+      "description": "作者"
+    },
     "mail": {
       "title": "メール"
     },

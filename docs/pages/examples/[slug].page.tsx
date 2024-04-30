@@ -1,4 +1,6 @@
 import {
+  Avatar,
+  AvatarGroup,
   Box,
   Center,
   HStack,
@@ -7,6 +9,7 @@ import {
   SegmentedControl,
   SegmentedControlButton,
   Text,
+  Tooltip,
   VStack,
 } from "@yamada-ui/react"
 import type {
@@ -21,6 +24,8 @@ import { useMemo } from "react"
 import { Authentication } from "./authentication"
 import { Cards } from "./cards"
 import { Dashboard } from "./dashboard"
+import type { Slug } from "./data"
+import { SLUGS, AUTHORS } from "./data"
 import { Forms } from "./forms"
 import { Mail } from "./mail"
 import { Music } from "./music"
@@ -34,19 +39,6 @@ import { useI18n } from "contexts/i18n-context"
 import { PageProvider } from "contexts/page-context"
 import { TopLayout } from "layouts/top-layout"
 import { getStaticCommonProps } from "utils/next"
-
-const SLUGS = [
-  "mail",
-  "dashboard",
-  "cards",
-  "tasks",
-  "playground",
-  "forms",
-  "music",
-  "authentication",
-] as const
-
-type Slug = (typeof SLUGS)[number]
 
 type Paths = GetStaticPathsResult["paths"]
 
@@ -196,6 +188,36 @@ const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
             {examples}
           </Box>
         </Section>
+
+        {AUTHORS[currentSlug].length ? (
+          <Center mt="normal" gap="sm">
+            <Text fontSize="sm" color="muted">
+              {t("examples.author.description")}
+            </Text>
+
+            <AvatarGroup borderColor={["white", "black"]} gap="-3">
+              {AUTHORS[currentSlug].map(({ name, src, href }) => (
+                <Box
+                  key={name}
+                  position="relative"
+                  borderRadius="full"
+                  sx={{ borderWidth: { base: "5px", sm: "3px" } }}
+                >
+                  <Tooltip label={name} placement="top" flexShrink="0">
+                    <Avatar
+                      as="a"
+                      target="_blank"
+                      href={href}
+                      name={name}
+                      src={src}
+                      boxSize="10"
+                    />
+                  </Tooltip>
+                </Box>
+              ))}
+            </AvatarGroup>
+          </Center>
+        ) : null}
       </TopLayout>
     </PageProvider>
   )

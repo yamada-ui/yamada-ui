@@ -45,8 +45,14 @@ export const customTheme: UsageTheme = {
       ...prev,
       [colorScheme]: {
         semantics: {
-          colors: { primary: `${colorScheme}.500` },
-          colorSchemes: { primary: colorScheme },
+          colors: {
+            primary: `${colorScheme}.500`,
+            ...(colorScheme === "violet" ? { secondary: "fuchsia.500" } : {}),
+          },
+          colorSchemes: {
+            primary: colorScheme,
+            ...(colorScheme === "violet" ? { secondary: "fuchsia" } : {}),
+          },
         },
       },
     }),

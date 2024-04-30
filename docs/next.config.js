@@ -17,6 +17,11 @@ const nextConfig = {
       destination: "/coverage/index.html",
       permanent: true,
     },
+    {
+      source: "/examples",
+      destination: "/examples/mail",
+      permanent: true,
+    },
   ],
 }
 

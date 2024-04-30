@@ -10,7 +10,7 @@
       ],
       "message": "Yamada UI is a versatile React component library, unleashing the power of your application's animation and flexibility. It provides an intuitive and efficient way to integrate advanced styling into your application, bringing your ideas to life.",
       "started": "Get Started",
-      "github": "GitHub"
+      "examples": "Examples"
     },
     "support": {
       "title": "Support Yamada UI",
@@ -19,6 +19,43 @@
       "patreon": "Sponsor the creator, Hirotomo Yamada",
       "platinum-sponsors": "Platinum Sponsors",
       "gold-sponsors": "Gold Sponsors"
+    }
+  },
+  "examples": {
+    "title": "Examples",
+    "description": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
+    "hero": {
+      "heading": "`Check out some `examples",
+      "message": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
+      "started": "Get Started",
+      "components": "Components"
+    },
+    "author": {
+      "description": "Create by"
+    },
+    "mail": {
+      "title": "Mail"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "cards": {
+      "title": "Cards"
+    },
+    "tasks": {
+      "title": "Tasks"
+    },
+    "playground": {
+      "title": "Playground"
+    },
+    "forms": {
+      "title": "Forms"
+    },
+    "music": {
+      "title": "Music"
+    },
+    "authentication": {
+      "title": "Authentication"
     }
   },
   "not-found": {
@@ -30,7 +67,8 @@
   },
   "component": {
     "tree": {
-      "yamada-colors": "Colors generator"
+      "yamada-colors": "Colors generator",
+      "examples": "Examples"
     },
     "feedback": {
       "ad-banner": {

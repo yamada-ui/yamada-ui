@@ -191,9 +191,7 @@ const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
 
         {AUTHORS[currentSlug].length ? (
           <Center mt="normal" gap="sm">
-            <Text fontSize="sm" color="muted">
-              {t("examples.author.description")}
-            </Text>
+            <Text color="muted">{t("examples.author.description")}</Text>
 
             <AvatarGroup borderColor={["white", "black"]} gap="-3">
               {AUTHORS[currentSlug].map(({ name, src, href }) => (

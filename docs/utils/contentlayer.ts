@@ -1,4 +1,3 @@
-import { toKebabCase } from "./string"
 import { CONSTANT } from "constant"
 import { allDocuments } from "contentlayer/generated"
 import type {
@@ -11,6 +10,7 @@ import type {
 } from "contentlayer/generated"
 import { flattenArray } from "utils/array"
 import { otherLocales } from "utils/i18n"
+import { toKebabCase } from "./string"
 
 const OTHER_LOCALES = `(${otherLocales.join("|")})`
 

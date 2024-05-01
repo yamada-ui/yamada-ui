@@ -1,9 +1,9 @@
-import type { BarProps } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
-import type { CardProps } from "@yamada-ui/react"
+import type { BarProps } from "@yamada-ui/charts"
 import { Card, CardBody, CardHeader, Heading, isNumber } from "@yamada-ui/react"
-import type { FC } from "react"
+import type { CardProps } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
+import type { FC } from "react"
 
 export type OverviewProps = CardProps
 

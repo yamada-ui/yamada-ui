@@ -7,10 +7,10 @@ import {
   Tag,
   Text,
 } from "@yamada-ui/react"
-import type { FC } from "react"
-import { Link } from "./link"
 import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts/i18n-context"
+import type { FC } from "react"
+import { Link } from "./link"
 
 export type PropsCardProps = CardProps & {
   id: string

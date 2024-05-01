@@ -1,11 +1,11 @@
-import type { FC, PropsWithChildren } from "react"
-import { createContext, useContext, useMemo } from "react"
 import type {
   DocumentTypesPagination,
   DocumentTypes,
   DocumentTypesNavigationItem,
   DocumentTypeTree,
 } from "contentlayer/generated"
+import type { FC, PropsWithChildren } from "react"
+import { createContext, useContext, useMemo } from "react"
 
 type PageContext = Omit<PageProviderProps, "children"> & {
   documentMap: Pick<DocumentTypes, "title" | "description" | "label" | "slug">[]

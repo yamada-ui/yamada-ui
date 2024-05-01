@@ -8,8 +8,8 @@ import {
   useBoolean,
 } from "@yamada-ui/react"
 import React, { memo, useRef } from "react"
-import type { MailItem } from "./data"
 import { DEFAULT_MAIL, MAILS } from "./data"
+import type { MailItem } from "./data"
 import { Detail } from "./detail"
 import { Inbox } from "./inbox"
 import { Sidebar } from "./sidebar"

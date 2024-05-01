@@ -1,7 +1,7 @@
 import { Image, Wrap, ui } from "@yamada-ui/react"
 import type { FlexProps, ImageProps } from "@yamada-ui/react"
-import type { FC } from "react"
 import { CONSTANT } from "constant"
+import type { FC } from "react"
 
 type Item = ImageProps & { href: string }
 

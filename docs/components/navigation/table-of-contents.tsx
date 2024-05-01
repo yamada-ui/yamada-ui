@@ -1,4 +1,3 @@
-import type { StackProps } from "@yamada-ui/react"
 import {
   Box,
   HStack,
@@ -14,15 +13,16 @@ import {
   useToken,
   useUpdateEffect,
 } from "@yamada-ui/react"
-import type { RefObject } from "react"
-import { createRef, memo, useRef, useState } from "react"
-import scrollIntoView from "scroll-into-view-if-needed"
+import type { StackProps } from "@yamada-ui/react"
 import { ScrollShadow } from "components/data-display"
 import { List as ListIcon } from "components/media-and-icons"
 import { TextWithCode } from "components/typography"
 import type { DocumentContent } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
 import { useEventListener } from "hooks/use-event-listener"
+import type { RefObject } from "react"
+import { createRef, memo, useRef, useState } from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
 
 export type TableOfContentsProps = StackProps & { contents: DocumentContent[] }
 

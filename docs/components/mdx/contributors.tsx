@@ -1,8 +1,8 @@
-import type { FlexProps } from "@yamada-ui/react"
 import { Avatar, Wrap } from "@yamada-ui/react"
-import type { FC } from "react"
+import type { FlexProps } from "@yamada-ui/react"
 import { NextLink } from "components/navigation"
 import { CONSTANT } from "constant"
+import type { FC } from "react"
 
 export type ContributorsProps = FlexProps
 

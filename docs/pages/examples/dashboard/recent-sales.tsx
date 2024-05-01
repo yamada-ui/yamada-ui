@@ -1,4 +1,3 @@
-import type { AvatarProps, CardProps, StackProps } from "@yamada-ui/react"
 import {
   Card,
   Text,
@@ -9,8 +8,9 @@ import {
   VStack,
   Avatar,
 } from "@yamada-ui/react"
-import type { FC, ReactNode } from "react"
+import type { AvatarProps, CardProps, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
+import type { FC, ReactNode } from "react"
 
 const ITEMS: ItemProps[] = [
   {

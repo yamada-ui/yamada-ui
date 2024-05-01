@@ -1,6 +1,6 @@
+import { type DocumentTypeNames } from "contentlayer/generated"
 import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
 import { toArray } from "./array"
-import { toKebabCase } from "./string"
 import {
   getDocumentBreadcrumbs,
   getDocument,
@@ -12,7 +12,7 @@ import {
   getActiveDocuments,
   getDocumentPaths,
 } from "./contentlayer"
-import { type DocumentTypeNames } from "contentlayer/generated"
+import { toKebabCase } from "./string"
 
 export const getStaticCommonProps = async ({
   locale,

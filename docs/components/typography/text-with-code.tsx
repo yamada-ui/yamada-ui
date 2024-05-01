@@ -1,8 +1,8 @@
-import type { TextProps } from "@yamada-ui/react"
 import { Text } from "@yamada-ui/react"
-import type { FC } from "react"
-import { Fragment, memo } from "react"
+import type { TextProps } from "@yamada-ui/react"
 import { NextLink } from "components/navigation"
+import { Fragment, memo } from "react"
+import type { FC } from "react"
 
 export type TextWithCodeOrLinkProps = TextProps
 

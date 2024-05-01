@@ -1,5 +1,5 @@
-import type { StackProps } from "@yamada-ui/react"
 import { HStack } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import { type FC, memo } from "react"
 
 type HeaderProps = StackProps & {

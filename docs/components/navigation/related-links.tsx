@@ -1,11 +1,11 @@
-import type { ButtonProps, FlexProps, LinkProps } from "@yamada-ui/react"
 import { Button, forwardRef, Link, Wrap } from "@yamada-ui/react"
-import type { FC } from "react"
-import { memo } from "react"
+import type { ButtonProps, FlexProps, LinkProps } from "@yamada-ui/react"
 import { Github, Npm } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
+import type { FC } from "react"
+import { memo } from "react"
 
 export type RelatedLinksProps = FlexProps
 

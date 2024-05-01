@@ -1,4 +1,3 @@
-import type { GridProps, StackProps, defaultTheme } from "@yamada-ui/react"
 import {
   Box,
   Grid,
@@ -9,6 +8,7 @@ import {
   useToken,
   useValue,
 } from "@yamada-ui/react"
+import type { GridProps, StackProps, defaultTheme } from "@yamada-ui/react"
 import type { FC } from "react"
 
 export type ColorPaletterProps = Omit<StackProps, "color"> & {

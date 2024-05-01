@@ -1,9 +1,9 @@
-import type { BoxProps } from "@yamada-ui/react"
 import { forwardRef, Box, Tabs as UITabs, Tab } from "@yamada-ui/react"
+import type { BoxProps } from "@yamada-ui/react"
+import { usePage } from "contexts/page-context"
 import { useRouter } from "next/router"
 import { memo } from "react"
 import { NextLink } from "./next-link"
-import { usePage } from "contexts/page-context"
 
 export type TabsProps = BoxProps
 

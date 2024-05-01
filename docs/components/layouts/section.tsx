@@ -1,5 +1,5 @@
-import type { StackProps } from "@yamada-ui/react"
 import { VStack, forwardRef } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 
 export type SectionProps = StackProps & {}

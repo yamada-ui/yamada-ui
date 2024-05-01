@@ -10,7 +10,6 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import type { LucideIcon } from "lucide-react"
 import {
   Archive,
   CircleAlert,
@@ -23,6 +22,7 @@ import {
   Trash,
   Users,
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { type FC, memo } from "react"
 import { Header } from "./header"
 

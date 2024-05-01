@@ -1,5 +1,4 @@
 import { Box, Center, Divider, HStack, Heading, VStack } from "@yamada-ui/react"
-import type { FC, PropsWithChildren } from "react"
 import { StarBanner } from "components/feedback"
 import { Footer, Header, Sidebar } from "components/layouts"
 import { SEO } from "components/media-and-icons"
@@ -15,6 +14,7 @@ import {
 import { TextWithCodeOrLink } from "components/typography"
 import type { DocumentData, DocumentTypes } from "contentlayer/generated"
 import { usePage } from "contexts/page-context"
+import type { FC, PropsWithChildren } from "react"
 
 export type DocumentLayoutProps = PropsWithChildren<
   DocumentTypes & DocumentData

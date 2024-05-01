@@ -1,13 +1,3 @@
-import type {
-  BoxProps,
-  CenterProps,
-  ColorMode,
-  DrawerProps,
-  IconButtonProps,
-  MenuProps,
-  PopoverProps,
-  UseDisclosureReturn,
-} from "@yamada-ui/react"
 import {
   Box,
   Center,
@@ -43,10 +33,16 @@ import {
   useScroll,
   useTheme,
 } from "@yamada-ui/react"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import type { FC } from "react"
-import { memo, useEffect, useRef, useState } from "react"
+import type {
+  BoxProps,
+  CenterProps,
+  ColorMode,
+  DrawerProps,
+  IconButtonProps,
+  MenuProps,
+  PopoverProps,
+  UseDisclosureReturn,
+} from "@yamada-ui/react"
 import { Search, SearchButton } from "components/forms"
 import {
   ColorPalette,
@@ -60,7 +56,11 @@ import {
 import { NextLinkIconButton, Tree } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
+import Link from "next/link"
+import { useRouter } from "next/router"
 import packageJSON from "package.json"
+import type { FC } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 
 const version = `v${packageJSON.dependencies["@yamada-ui/react"].split("-")[0]}`
 

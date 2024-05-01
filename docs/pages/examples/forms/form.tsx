@@ -1,5 +1,5 @@
-import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import { VStack, Text, Divider, Button, Heading } from "@yamada-ui/react"
+import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC, ReactNode } from "react"
 

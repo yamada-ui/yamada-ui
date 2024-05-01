@@ -1,10 +1,10 @@
-import type { BoxProps, StringLiteral } from "@yamada-ui/react"
 import { Box, Tab, Tabs, isArray, isObject } from "@yamada-ui/react"
-import { themes } from "prism-react-renderer"
-import type { FC } from "react"
-import { useState } from "react"
-import { Highlight } from "./code-block"
+import type { BoxProps, StringLiteral } from "@yamada-ui/react"
 import { CopyButton } from "components/forms"
+import { themes } from "prism-react-renderer"
+import { useState } from "react"
+import type { FC } from "react"
+import { Highlight } from "./code-block"
 
 type PackageMangerNames = "pnpm" | "npm" | "yarn" | "bun"
 

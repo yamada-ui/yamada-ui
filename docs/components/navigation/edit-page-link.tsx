@@ -1,9 +1,9 @@
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
 import { Icon } from "@yamada-ui/fontawesome"
-import type { StackProps } from "@yamada-ui/react"
 import { HStack, Text } from "@yamada-ui/react"
-import type { FC } from "react"
+import type { StackProps } from "@yamada-ui/react"
 import { useI18n } from "contexts/i18n-context"
+import type { FC } from "react"
 
 export type EditPageLinkProps = StackProps & { href?: string }
 

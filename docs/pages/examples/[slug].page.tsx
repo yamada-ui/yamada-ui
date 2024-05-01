@@ -12,6 +12,13 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
+import { Section } from "components/layouts"
+import { Arrow, Components, SEO } from "components/media-and-icons"
+import { NextLinkButton } from "components/navigation"
+import { CONSTANT } from "constant"
+import { useI18n } from "contexts/i18n-context"
+import { PageProvider } from "contexts/page-context"
+import { TopLayout } from "layouts/top-layout"
 import type {
   GetStaticPathsContext,
   GetStaticPathsResult,
@@ -21,24 +28,17 @@ import type {
 } from "next"
 import Link from "next/link"
 import { useMemo } from "react"
+import { getStaticCommonProps } from "utils/next"
 import { Authentication } from "./authentication"
 import { Cards } from "./cards"
 import { Dashboard } from "./dashboard"
-import type { Slug } from "./data"
 import { SLUGS, AUTHORS } from "./data"
+import type { Slug } from "./data"
 import { Forms } from "./forms"
 import { Mail } from "./mail"
 import { Music } from "./music"
 import { Playground } from "./playground"
 import { Tasks } from "./tasks"
-import { Section } from "components/layouts"
-import { Arrow, Components, SEO } from "components/media-and-icons"
-import { NextLinkButton } from "components/navigation"
-import { CONSTANT } from "constant"
-import { useI18n } from "contexts/i18n-context"
-import { PageProvider } from "contexts/page-context"
-import { TopLayout } from "layouts/top-layout"
-import { getStaticCommonProps } from "utils/next"
 
 type Paths = GetStaticPathsResult["paths"]
 

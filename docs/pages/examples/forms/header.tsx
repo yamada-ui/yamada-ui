@@ -1,5 +1,5 @@
-import type { StackProps } from "@yamada-ui/react"
 import { Heading, Text, VStack } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 

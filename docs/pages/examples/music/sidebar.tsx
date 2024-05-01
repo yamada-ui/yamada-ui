@@ -17,7 +17,6 @@ import type {
   HeadingProps,
   StackProps,
 } from "@yamada-ui/react"
-import type { LucideIcon } from "lucide-react"
 import {
   CirclePlay,
   Globe,
@@ -27,6 +26,7 @@ import {
   Radio,
   User,
 } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { memo, useMemo } from "react"
 import type { FC, ReactElement } from "react"
 

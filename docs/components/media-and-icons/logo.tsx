@@ -1,5 +1,5 @@
-import type { IconProps } from "@yamada-ui/react"
 import { Icon } from "@yamada-ui/react"
+import type { IconProps } from "@yamada-ui/react"
 import { forwardRef } from "react"
 
 export const Logo = forwardRef<SVGSVGElement, IconProps>(({ ...rest }, ref) => {

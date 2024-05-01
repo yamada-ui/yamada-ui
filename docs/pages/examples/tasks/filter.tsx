@@ -22,12 +22,12 @@ import type {
   InputProps,
   MenuProps,
 } from "@yamada-ui/react"
-import type { LucideIcon } from "lucide-react"
 import { CirclePlus, SlidersHorizontal, X } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import type { FC, MutableRefObject, ReactNode } from "react"
-import type { Priority, Status, View } from "./data"
 import { PRIORITY, STATUS, VIEW } from "./data"
+import type { Priority, Status, View } from "./data"
 
 export type FilterProps = GridProps & {
   titleRef: MutableRefObject<(value: string) => void>

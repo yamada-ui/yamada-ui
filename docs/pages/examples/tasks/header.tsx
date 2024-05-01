@@ -1,4 +1,3 @@
-import type { StackProps } from "@yamada-ui/react"
 import {
   Avatar,
   HStack,
@@ -13,6 +12,7 @@ import {
   Heading,
   Box,
 } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 

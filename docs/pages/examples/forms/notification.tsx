@@ -1,4 +1,3 @@
-import type { StackProps } from "@yamada-ui/react"
 import {
   Spacer,
   Text,
@@ -9,10 +8,11 @@ import {
   FormControl,
   RadioGroup,
 } from "@yamada-ui/react"
-import type { FC } from "react"
+import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
-import type { SubmitHandler } from "react-hook-form"
+import type { FC } from "react"
 import { Controller, useForm } from "react-hook-form"
+import type { SubmitHandler } from "react-hook-form"
 import { Form } from "./form"
 
 const NOTIFY_ME_ABOUT_ITEMS = [

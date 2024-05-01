@@ -1,7 +1,7 @@
-import type { ButtonProps } from "@yamada-ui/react"
 import { Button, useColorMode, useColorModeValue } from "@yamada-ui/react"
-import type { FC } from "react"
+import type { ButtonProps } from "@yamada-ui/react"
 import { useI18n } from "contexts/i18n-context"
+import type { FC } from "react"
 
 export type ColorModeButtonProps = ButtonProps
 

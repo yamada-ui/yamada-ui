@@ -1,6 +1,6 @@
 import { Divider, HStack, VStack, assignRef, noop } from "@yamada-ui/react"
-import type { FC, MutableRefObject } from "react"
 import { memo, useCallback, useRef, useState } from "react"
+import type { FC, MutableRefObject } from "react"
 import { Account } from "./account"
 import { Appearance } from "./appearance"
 import { Display } from "./display"

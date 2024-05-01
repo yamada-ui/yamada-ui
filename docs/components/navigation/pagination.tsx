@@ -1,4 +1,3 @@
-import type { GridItemProps, GridProps } from "@yamada-ui/react"
 import {
   Box,
   ChevronIcon,
@@ -7,12 +6,13 @@ import {
   Text,
   forwardRef,
 } from "@yamada-ui/react"
-import Link from "next/link"
-import type { FC } from "react"
-import { memo } from "react"
+import type { GridItemProps, GridProps } from "@yamada-ui/react"
 import type { DocumentTypesNavigationItem } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
+import Link from "next/link"
+import { memo } from "react"
+import type { FC } from "react"
 
 export type PaginationProps = GridProps
 

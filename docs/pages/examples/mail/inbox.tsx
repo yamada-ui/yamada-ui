@@ -1,6 +1,5 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
-import type { CardProps, StackProps } from "@yamada-ui/react"
 import {
   Box,
   Card,
@@ -21,6 +20,7 @@ import {
   handlerAll,
   useBoolean,
 } from "@yamada-ui/react"
+import type { CardProps, StackProps } from "@yamada-ui/react"
 import { memo, useRef, useState } from "react"
 import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"

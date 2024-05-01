@@ -1,4 +1,3 @@
-import type { UseRadioGroupReturn } from "@yamada-ui/react"
 import {
   Button,
   Card,
@@ -20,9 +19,10 @@ import {
   AutocompleteOption,
   Icon,
 } from "@yamada-ui/react"
+import type { UseRadioGroupReturn } from "@yamada-ui/react"
 import { CreditCard } from "lucide-react"
-import type { FC, ReactNode } from "react"
 import { memo } from "react"
+import type { FC, ReactNode } from "react"
 import { FaApple, FaPaypal } from "react-icons/fa"
 
 export const PaymentMethodCard = memo(() => {

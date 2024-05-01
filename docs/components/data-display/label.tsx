@@ -1,5 +1,5 @@
-import type { TagProps } from "@yamada-ui/react"
 import { forwardRef, Tag } from "@yamada-ui/react"
+import type { TagProps } from "@yamada-ui/react"
 import { memo } from "react"
 
 export type LabelProps = TagProps

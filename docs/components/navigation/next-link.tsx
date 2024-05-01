@@ -1,11 +1,11 @@
+import { Button, IconButton, Link as UILink } from "@yamada-ui/react"
 import type {
   ButtonProps,
   IconButtonProps,
   LinkProps as UILinkProps,
 } from "@yamada-ui/react"
-import { Button, IconButton, Link as UILink } from "@yamada-ui/react"
-import type { LinkProps } from "next/link"
 import Link from "next/link"
+import type { LinkProps } from "next/link"
 import type { FC } from "react"
 
 export type NextLinkProps = UILinkProps

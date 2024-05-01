@@ -1,4 +1,3 @@
-import type { IconButtonProps, StackProps } from "@yamada-ui/react"
 import {
   Avatar,
   Button,
@@ -15,6 +14,7 @@ import {
   VStack,
   assignRef,
 } from "@yamada-ui/react"
+import type { IconButtonProps, StackProps } from "@yamada-ui/react"
 import {
   Reply,
   type LucideIcon,

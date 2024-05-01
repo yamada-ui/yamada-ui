@@ -1,4 +1,3 @@
-import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
 import {
   Breadcrumb as UIBreadcrumb,
   BreadcrumbItem,
@@ -7,9 +6,10 @@ import {
   ChevronIcon,
   forwardRef,
 } from "@yamada-ui/react"
+import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
+import { usePage } from "contexts/page-context"
 import Link from "next/link"
 import { memo } from "react"
-import { usePage } from "contexts/page-context"
 
 export type BreadcrumbProps = UIBreadcrumbProps
 

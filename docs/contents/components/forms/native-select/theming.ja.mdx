@@ -1,0 +1,75 @@
+---
+title: NativeSelect
+description: >-
+  `NativeSelect`は、ユーザーがオプションのリストから1つを選択するために使用されるコンポーネントです。ブラウザ（ユーザーエージェント）によって提供されるネイティブなドロップダウンリストを表示します。
+package_name: "@yamada-ui/native-select"
+with_description: true
+tab: テーマ
+---
+
+## テーマ
+
+`NativeSelect`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
+
+:::note
+`NativeSelect`は、[Input](/components/forms/input)のスタイルを継承しています。
+:::
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const NativeSelect: ComponentMultiStyle = mergeMultiStyle(Input, {
+  baseStyle: {
+    container: {},
+    field: {
+      cursor: "pointer",
+      pr: "8",
+      pb: "px",
+      _focus: {
+        zIndex: "unset",
+      },
+      _readOnly: {
+        pointerEvents: "none",
+      },
+    },
+    icon: {
+      w: "6",
+      py: "2",
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+      fontSize: "xl",
+      outline: 0,
+      rounded: "md",
+      _disabled: {
+        opacity: 0.4,
+      },
+    },
+  },
+
+  sizes: {
+    xs: {
+      icon: {
+        pt: "3",
+        fontSize: "lg",
+        insetEnd: "1",
+      },
+    },
+    sm: {
+      icon: {
+        insetEnd: "2",
+      },
+    },
+    md: {
+      icon: {
+        insetEnd: "2",
+      },
+    },
+    lg: {
+      icon: {
+        insetEnd: "2",
+      },
+    },
+  },
+})({ omit: ["addon", "element"] })
+```

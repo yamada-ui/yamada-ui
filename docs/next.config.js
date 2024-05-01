@@ -4,6 +4,9 @@ const { withContentlayer } = require("next-contentlayer")
 const nextConfig = {
   optimizeFonts: true,
   reactStrictMode: false,
+  experimental: {
+    externalDir: true,
+  },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {
     defaultLocale: "en",
@@ -12,11 +15,6 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: false,
   redirects: async () => [
-    {
-      source: "/coverage",
-      destination: "/coverage/index.html",
-      permanent: true,
-    },
     {
       source: "/examples",
       destination: "/examples/mail",

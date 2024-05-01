@@ -1,5 +1,6 @@
 .next
 .turbo
+.contentlayer
 dist
 node_modules
 build

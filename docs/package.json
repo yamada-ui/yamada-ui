@@ -6,7 +6,6 @@
     "prepare": "husky install",
     "dev": "next dev",
     "start": "next start",
-    "prebuild": "pnpm gen:content",
     "build": "next build",
     "build:profile": "next build --profile",
     "gen:changelog": "tsx scripts/changelog",
@@ -21,7 +20,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",
-    "lint": "next lint",
+    "lint": "next lint -d pages components constant contexts hooks layouts libs scripts theme utils",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf .contentlayer .next",
     "clean:all": "rimraf .contentlayer .next node_modules"

@@ -50,7 +50,7 @@
     "release:next": "changeset publish --tag next",
     "notification:discord": "tsx scripts/discord",
     "notification:mattermost": "tsx scripts/mattermost",
-    "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log",
+    "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log node_modules",
     "docs:dev": "pnpm --prefix docs dev",
     "docs:start": "pnpm --prefix docs start",
     "docs:build": "pnpm --prefix docs build",

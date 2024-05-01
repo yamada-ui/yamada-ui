@@ -22,8 +22,7 @@
     "format:write": "prettier --write --cache .",
     "lint": "next lint -d pages components constant contexts hooks layouts libs scripts theme utils",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf .contentlayer .next",
-    "clean:all": "rimraf .contentlayer .next node_modules"
+    "clean": "rimraf .contentlayer .next node_modules"
   },
   "dependencies": {
     "@emotion/cache": "11.11.0",

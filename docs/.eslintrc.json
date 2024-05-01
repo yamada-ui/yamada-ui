@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["next", "../.eslintrc.base"],
+  "extends": ["next/core-web-vitals", "../.eslintrc.base"],
   "plugins": [],
   "rules": {},
   "overrides": [

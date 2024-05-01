@@ -28,6 +28,7 @@
   "exclude": [
     "node_modules",
     "examples",
+    "docs",
     "dist",
     ".changelog",
     ".changeset",

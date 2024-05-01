@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "extends": ["next", "../.eslintrc.base"],
+  "plugins": [],
+  "rules": {},
+  "overrides": [
+    {
+      "files": ["scripts/**/*"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

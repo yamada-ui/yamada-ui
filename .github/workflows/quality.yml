@@ -5,8 +5,17 @@ on:
     branches:
       - main
       - v*
-    paths-ignore:
-      - "docs/**"
+    paths:
+      - "packages/**"
+      - "scripts/setup-test.ts"
+      - "package.json"
+      - ".eslintrc.json"
+      - ".eslintrc.base.json"
+      - ".eslintignore"
+      - ".prettierrc.json"
+      - ".prettierignore"
+      - "turbo.json"
+      - "vitest.config.mts"
 
 jobs:
   build:

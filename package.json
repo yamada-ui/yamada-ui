@@ -54,6 +54,7 @@
     "docs:dev": "pnpm --prefix docs dev",
     "docs:start": "pnpm --prefix docs start",
     "docs:build": "pnpm --prefix docs build",
+    "docs:lint": "pnpm --prefix docs lint",
     "docs:changelog": "pnpm --prefix docs gen:changelog",
     "docs:theme": "pnpm --prefix docs gen:theme",
     "docs:css": "pnpm --prefix docs gen:css",

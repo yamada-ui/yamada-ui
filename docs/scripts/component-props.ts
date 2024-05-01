@@ -3,15 +3,15 @@ import path from "path"
 import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
+import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 // import type { ChatCompletionMessageParam } from "openai/resources"
-import { CONSTANT } from "constant"
 // import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
-import { toCamelCase } from "utils/assertion"
 import { omitObject } from "utils/object"
+import { toCamelCase } from "utils/string"
 // import { wait } from "utils/async"
 
 config()
@@ -213,7 +213,7 @@ const getDirs = async (path: string) => {
   return dirents
 }
 
-const getPaths: p.RequiredRunner = () => async (p, s) => {
+const getPaths: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the content paths`)
 
   const categoryDirs = await getDirs(DIST_PATH)
@@ -322,7 +322,7 @@ const generateContent = async ({
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }
 
-        if (typeof defaultValue === "string") {
+        if (typeof defaultValue === "string" && description) {
           description = description.replace(/\n/g, "\\n")
         }
 

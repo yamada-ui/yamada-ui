@@ -3,12 +3,12 @@ import path from "path"
 import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
+import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
-import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
-import { toCamelCase, toKebabCase } from "utils/assertion"
+import { toCamelCase, toKebabCase } from "utils/string"
 
 config()
 
@@ -105,7 +105,7 @@ const REPO_REQUEST_PARAMETERS = {
   ref,
 }
 
-const getThemes: p.RequiredRunner = () => async (p, s) => {
+const getThemes: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the Yamada UI component themes`)
 
   const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
@@ -144,7 +144,7 @@ const getDirs = async (path: string) => {
   return dirents
 }
 
-const getPaths: p.RequiredRunner = () => async (p, s) => {
+const getPaths: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the component theme paths`)
 
   const categoryDirs = await getDirs(DIST_PATH)

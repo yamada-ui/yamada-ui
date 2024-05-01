@@ -13,7 +13,7 @@ export const LinkCards = memo(
 
       return (
         <CardContainer ref={ref} {...rest}>
-          {documentChildrenTree.map(({ title, description, label, slug }) => (
+          {documentChildrenTree?.map(({ title, description, label, slug }) => (
             <GridItem key={slug}>
               <LinkCard
                 {...{

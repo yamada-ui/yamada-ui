@@ -14,7 +14,10 @@ export type MenuProps = StackProps & {
 export const Menu: FC<MenuProps> = memo(({ onChangeMode, ...rest }) => {
   return (
     <VStack {...rest}>
-      <SwitchMode defaultValue={DEFAULT_EDITOR_MODE} onChange={onChangeMode} />
+      <SwitchMode
+        defaultValue={DEFAULT_EDITOR_MODE}
+        onChange={(value) => onChangeMode(value as EditorMode)}
+      />
 
       <Model />
 

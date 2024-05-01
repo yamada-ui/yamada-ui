@@ -263,8 +263,8 @@ const createCache = weakMemoize((container: Node) =>
 
 const Iframe: FC<PropsWithChildren> = ({ children }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const headRef = useRef<HTMLHeadElement>(null)
-  const bodyRef = useRef<HTMLElement>(null)
+  const headRef = useRef<HTMLHeadElement | null>(null)
+  const bodyRef = useRef<HTMLElement | null>(null)
   const head = headRef.current
   const body = bodyRef.current
   const [, forceUpdate] = useState({})
@@ -274,8 +274,8 @@ const Iframe: FC<PropsWithChildren> = ({ children }) => {
 
     const iframe = iframeRef.current
 
-    headRef.current = iframe.contentDocument.head
-    bodyRef.current = iframe.contentDocument.body
+    headRef.current = iframe.contentDocument?.head ?? null
+    bodyRef.current = iframe.contentDocument?.body ?? null
 
     forceUpdate({})
   }, [])

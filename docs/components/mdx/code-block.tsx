@@ -5,7 +5,7 @@ import type { HighlightProps as ReactHighlightProps } from "prism-react-renderer
 import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
 import { CopyButton } from "components/forms"
-import { toBoolean } from "utils/assertion"
+import { toBoolean } from "utils/boolean"
 
 const EditableCodeBlock = dynamic(() => import("./editable-code-block"))
 
@@ -98,14 +98,14 @@ const REG = /{([\d,-]+)}/
 const computeHighlight = (highlight: string) => {
   if (!REG.test(highlight)) return () => false
 
-  const lines = REG.exec(highlight)[1]
+  const lines = REG.exec(highlight)?.[1]
     .split(`,`)
     .map((str) => str.split(`-`).map((x) => parseInt(x, 10)))
 
   return (index: number) => {
     const line = index + 1
 
-    return lines.some(([start, end]) =>
+    return lines?.some(([start, end]) =>
       end ? line >= start && line <= end : line === start,
     )
   }
@@ -120,7 +120,7 @@ export const Highlight: FC<HighlightProps> = ({
   highlight,
   ...rest
 }) => {
-  const shouldHighlight = computeHighlight(highlight)
+  const shouldHighlight = computeHighlight(highlight ?? "")
 
   return (
     <ReactHighlight language={language} {...rest}>

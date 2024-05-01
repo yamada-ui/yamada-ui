@@ -9,8 +9,8 @@ import type { Plugin } from "unified"
 import { visit } from "unist-util-visit"
 import { CONSTANT } from "./constant"
 import { includes } from "./utils/array"
-import { toCamelCase } from "./utils/assertion"
 import { locales, otherLocales } from "./utils/i18n"
+import { toCamelCase } from "./utils/string"
 
 const OTHER_LOCALES = `(${otherLocales.join("|")})`
 

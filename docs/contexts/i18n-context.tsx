@@ -48,9 +48,9 @@ const I18nContext = createContext<I18nContext>({
 export type I18nProviderProps = PropsWithChildren
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
-  const { locale, asPath, push } = useRouter()
+  const { locale = CONSTANT.I18N.DEFAULT_LOCALE, asPath, push } = useRouter()
 
-  const contents = useMemo(() => contentData[locale], [locale])
+  const contents = useMemo(() => contentData[locale as Locale], [locale])
 
   const changeLocale = useCallback(
     (locale: Locale | StringLiteral) => {
@@ -61,7 +61,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
 
   const t = useCallback(
     (path: Path<UIData> | StringLiteral) =>
-      get<string>(uiData[locale], path, ""),
+      get<string>(uiData[locale as Locale], path, ""),
     [locale],
   )
 
@@ -70,7 +70,11 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
       path: Path<UIData> | StringLiteral,
       callback?: (str: string, index: number) => JSX.Element,
     ) => {
-      const strOrArray = get<string | string[]>(uiData[locale], path, "")
+      const strOrArray = get<string | string[]>(
+        uiData[locale as Locale],
+        path,
+        "",
+      )
 
       if (isString(strOrArray)) {
         const match = strOrArray.match(/`([^`]+)`/)

@@ -4,8 +4,8 @@ import * as p from "@clack/prompts"
 import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
-import { config } from "dotenv"
 import { CONSTANT } from "constant"
+import { config } from "dotenv"
 import { prettier } from "libs/prettier"
 
 type Contributor = Awaited<
@@ -26,7 +26,7 @@ const REPO_REQUEST_PARAMETERS = {
   repo: "yamada-ui",
 }
 
-const getContributors: p.RequiredRunner = () => async (p, s) => {
+const getContributors: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the Yamada UI contributors`)
 
   let contributors: Contributor[] = []
@@ -54,14 +54,15 @@ const getContributors: p.RequiredRunner = () => async (p, s) => {
 }
 
 const writeContributors: p.RequiredRunner =
-  (contributors: Contributors) => async (p, s) => {
+  (contributors: Contributors) => async (_, s) => {
     s.start(`Writing file "${DIST_PATH}"`)
 
     const coreMembers = CONSTANT.CORE_MEMBERS.map(({ id }) => id)
 
     const resolvedContributors = contributors
       .filter(
-        ({ login, type }) => type === "User" && !coreMembers.includes(login),
+        ({ login, type }) =>
+          type === "User" && login && !coreMembers.includes(login),
       )
       .map(({ id, login, avatar_url, html_url }) => ({
         id,

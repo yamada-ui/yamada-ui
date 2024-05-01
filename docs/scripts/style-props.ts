@@ -4,9 +4,11 @@ import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
 import { isArray, merge } from "@yamada-ui/react"
 import c from "chalk"
+import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import matter from "gray-matter"
 import type { GrayMatterFile } from "gray-matter"
+import { prettier } from "libs/prettier"
 import type { JSDoc, SourceFile, TypeAliasDeclaration } from "typescript"
 import {
   ScriptTarget,
@@ -19,9 +21,7 @@ import {
   isTypeLiteralNode,
   isVariableStatement,
 } from "typescript"
-import { CONSTANT } from "constant"
-import { prettier } from "libs/prettier"
-import { toKebabCase } from "utils/assertion"
+import { toKebabCase } from "utils/string"
 
 config()
 
@@ -106,7 +106,7 @@ const sortObject = (obj: Record<string, any>) =>
       {} as Record<string, any>,
     )
 
-const getProps: p.RequiredRunner = (type: Type) => async (p, s) => {
+const getProps: p.RequiredRunner = (type: Type) => async (_, s) => {
   s.start(`Getting the Yamada UI ${type} props`)
 
   const path =
@@ -186,7 +186,7 @@ const getData = (prop: string, value: string) => {
 }
 
 const parseProps: p.RequiredRunner =
-  (type: Type, source: string) => async (p, s) => {
+  (type: Type, source: string) => async (_, s) => {
     s.start(`Parsing the ${type} props`)
 
     const targetStatements = ["standardStyles", "shorthandStyles", "pseudos"]
@@ -336,7 +336,7 @@ const generateTable = (props: Props) => (locale: Locale) => {
 }
 
 const generateProps: p.RequiredRunner =
-  (styleProps: Props, pseudoProps: Props) => async (p, s) => {
+  (styleProps: Props, pseudoProps: Props) => async (_, s) => {
     s.start(`Writing files`)
 
     await Promise.all(
@@ -387,8 +387,6 @@ const main = async () => {
 
     p.outro(c.green(`Done in ${duration}s\n`))
   } catch (e) {
-    console.log(e)
-
     s.stop(`An error occurred`, 500)
 
     p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))

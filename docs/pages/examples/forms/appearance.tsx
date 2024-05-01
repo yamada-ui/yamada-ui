@@ -114,6 +114,8 @@ const ThemeCard: FC<ThemeCardProps> = (props) => {
     ? "blackAlpha.300"
     : "whiteAlpha.600"
 
+  if (!value) return null
+
   return (
     <Box as="label" flex={{ base: undefined, md: "1" }}>
       <ui.input {...getInputProps()} aria-label={value} />

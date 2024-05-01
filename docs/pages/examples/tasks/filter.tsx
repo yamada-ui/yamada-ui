@@ -214,7 +214,10 @@ const FilterControlButton = <T extends Status | Priority>({
               ) : (
                 value.map((key) => (
                   <Text key={key} as="span" {...labelProps}>
-                    {items[key as string].label}
+                    {
+                      (items as unknown as typeof STATUS & typeof PRIORITY)[key]
+                        .label
+                    }
                   </Text>
                 ))
               )}

@@ -12,7 +12,7 @@ export const Tabs = memo(
     const { documentTabs } = usePage()
     const { asPath } = useRouter()
 
-    return documentTabs.length ? (
+    return documentTabs?.length ? (
       <Box ref={ref} as="nav" mt="normal" {...rest}>
         <UITabs
           as="ul"

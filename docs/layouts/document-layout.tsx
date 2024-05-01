@@ -80,7 +80,7 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
             <Box>
               {children}
 
-              {with_children && documentChildrenTree.length ? (
+              {with_children && documentChildrenTree?.length ? (
                 <>
                   <Divider mt="xl" />
 

@@ -18,7 +18,7 @@ import { usePage } from "contexts/page-context"
 export type LinkCardProps = CardProps & {
   href: string
   title: ReactNode
-  label: StringLiteral
+  label?: StringLiteral
   description: ReactNode
   with_description?: boolean
 }
@@ -72,7 +72,7 @@ export const LinkCard = memo(
               {title}
             </Heading>
 
-            <Label>{label}</Label>
+            {label ? <Label>{label}</Label> : null}
           </CardHeader>
 
           {with_description ? (

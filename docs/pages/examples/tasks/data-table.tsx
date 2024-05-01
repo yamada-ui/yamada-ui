@@ -58,7 +58,9 @@ const TITLE_COLUMN: Column<Data> = {
   },
 }
 
-const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data> = (hasTitle) => ({
+const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data, Status> = (
+  hasTitle,
+) => ({
   header: "Status",
   accessorKey: "status",
   css: hasTitle ? { w: "12.5%" } : { minW: "12.5%" },
@@ -78,7 +80,9 @@ const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data> = (hasTitle) => ({
   },
 })
 
-const PRIORITY_COLUMN: (hasTitle?: boolean) => Column<Data> = (hasTitle) => ({
+const PRIORITY_COLUMN: (hasTitle?: boolean) => Column<Data, Priority> = (
+  hasTitle,
+) => ({
   header: "Priority",
   accessorKey: "priority",
   css: hasTitle ? { w: "12.5%" } : { minW: "12.5%" },
@@ -127,12 +131,10 @@ export const DataTable: FC<DataTableProps> = memo(
         {
           header: "Task",
           accessorKey: "id",
-          css: {
-            minW: "24",
-            ...(!hasTitle && !hasStatus && !hasPriority
+          css:
+            !hasTitle && !hasStatus && !hasPriority
               ? { minW: "12.5%" }
-              : { w: "12.5%" }),
-          },
+              : { minW: "24", w: "12.5%" },
           enableSorting: false,
         },
       ]
@@ -158,10 +160,10 @@ export const DataTable: FC<DataTableProps> = memo(
               .toUpperCase()
               .includes(inputtedTitle.toUpperCase())
 
-          if (selectedStatuses.length)
+          if (selectedStatuses.length && status)
             isSelectedStatus = selectedStatuses.includes(status)
 
-          if (selectedPriorities.length)
+          if (selectedPriorities.length && priority)
             isSelectedPriority = selectedPriorities.includes(priority)
 
           return isSelectedStatus && isSelectedPriority && isSelectedTitle

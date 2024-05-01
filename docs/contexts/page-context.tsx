@@ -18,7 +18,9 @@ const defaultValue = {
 
 export const PageContext = createContext<PageContext>(defaultValue)
 
-const getDocumentMap = (tree: DocumentTypeTree[]) =>
+const getDocumentMap = (
+  tree: DocumentTypeTree[],
+): Pick<DocumentTypes, "title" | "slug" | "label" | "description">[] =>
   tree.flatMap(({ title, slug, label, description, children }) => [
     { title, slug, label, description },
     ...getDocumentMap(children),

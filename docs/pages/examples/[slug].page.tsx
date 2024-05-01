@@ -61,7 +61,7 @@ export const getStaticProps = async ({
   const {
     props: { documentTree },
   } = await getStaticCommonProps({ locale })
-  const slug = params.slug as Slug
+  const slug = params?.slug as Slug
 
   const props = { documentTree, slug }
 

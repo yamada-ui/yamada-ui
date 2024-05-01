@@ -1,6 +1,6 @@
 import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
 import { toArray } from "./array"
-import { toKebabCase } from "./assertion"
+import { toKebabCase } from "./string"
 import {
   getDocumentBreadcrumbs,
   getDocument,
@@ -67,7 +67,7 @@ export const getStaticDocumentProps =
 
 export const getStaticDocumentPaths =
   (documentTypeName: DocumentTypeNames) =>
-  async ({ defaultLocale, locales }: GetStaticPathsContext) => {
+  async ({ defaultLocale, locales = [] }: GetStaticPathsContext) => {
     const documents = locales.flatMap(
       getActiveDocuments({ documentTypeName, defaultLocale }),
     )

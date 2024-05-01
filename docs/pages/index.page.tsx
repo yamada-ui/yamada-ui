@@ -227,7 +227,7 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
                     {t("home.support.gold-sponsors")}
                   </Heading>
 
-                  <Wrap
+                  {/* <Wrap
                     w="full"
                     maxW="6xl"
                     justifyContent="center"
@@ -271,7 +271,7 @@ const Page: NextPage<PageProps> = ({ documentTree }) => {
                         </Center>
                       ),
                     )}
-                  </Wrap>
+                  </Wrap> */}
                 </>
               ) : null}
             </VStack>

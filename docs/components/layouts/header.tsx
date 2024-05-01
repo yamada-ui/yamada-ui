@@ -1,6 +1,7 @@
 import type {
   BoxProps,
   CenterProps,
+  ColorMode,
   DrawerProps,
   IconButtonProps,
   MenuProps,
@@ -32,6 +33,7 @@ import {
   VStack,
   forwardRef,
   mergeRefs,
+  noop,
   useBreakpoint,
   useBreakpointValue,
   useColorMode,
@@ -327,7 +329,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
         />
 
         <MenuList>
-          <MenuOptionGroup<string>
+          <MenuOptionGroup<ColorMode | "system">
             value={internalColorMode}
             onChange={changeColorMode}
             type="radio"
@@ -446,14 +448,14 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
   const breakpoint = useBreakpoint()
 
   useEffect(() => {
-    if (!["lg", "md", "sm"].includes(breakpoint)) onClose()
+    if (!["lg", "md", "sm"].includes(breakpoint)) onClose?.()
   }, [breakpoint, onClose])
 
   useEffect(() => {
-    events.on("routeChangeComplete", onClose)
+    events.on("routeChangeComplete", onClose ?? noop)
 
     return () => {
-      events.off("routeChangeComplete", onClose)
+      events.off("routeChangeComplete", onClose ?? noop)
     }
   }, [events, onClose])
 

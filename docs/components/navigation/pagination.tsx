@@ -19,7 +19,7 @@ export type PaginationProps = GridProps
 export const Pagination = memo(
   forwardRef<PaginationProps, "div">(({ ...rest }, ref) => {
     const { documentPagination } = usePage()
-    const { prevDocument, nextDocument } = documentPagination
+    const { prevDocument, nextDocument } = documentPagination ?? {}
 
     if (!prevDocument && !nextDocument) return
 
@@ -31,9 +31,11 @@ export const Pagination = memo(
         mt="xl"
         {...rest}
       >
-        <PaginationItem {...prevDocument} isPrev />
+        {prevDocument ? <PaginationItem {...prevDocument} isPrev /> : null}
 
-        <PaginationItem {...nextDocument} alignItems="flex-end" />
+        {nextDocument ? (
+          <PaginationItem {...nextDocument} alignItems="flex-end" />
+        ) : null}
       </Grid>
     )
   }),

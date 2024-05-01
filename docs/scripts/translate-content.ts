@@ -3,9 +3,9 @@ import { readFile, readdir, writeFile } from "fs/promises"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { program } from "commander"
-import type { ChatCompletionMessageParam } from "openai/resources"
 import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
+import type { ChatCompletionMessageParam } from "openai/resources"
 import { wait } from "utils/async"
 
 const LOCALE_MAP = {
@@ -88,7 +88,7 @@ const restoreCodeBlocks = (
 const translateContent = async (
   content: string,
   locale: keyof typeof LOCALE_MAP,
-  retry?: number,
+  retry: number = 0,
 ): Promise<string> => {
   try {
     const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
@@ -118,7 +118,7 @@ const translateContent = async (
     })
 
     return restoreCodeBlocks(
-      choices[0].message?.content,
+      choices[0].message.content ?? "",
       codeBlocks,
       placeholders,
     )
@@ -183,7 +183,7 @@ program
                 `Translated the contents [${successes.size} / ${totalCount}]`,
               )
             } catch (e) {
-              errors.set(path, e.message)
+              if (e instanceof Error) errors.set(path, e.message)
             }
           }),
         )

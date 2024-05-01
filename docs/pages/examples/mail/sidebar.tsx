@@ -98,7 +98,7 @@ Sidebar.displayName = "Sidebar"
 type SidebarItemProps = {
   icon: LucideIcon
   label: string
-  num: number
+  num?: number
   isCollapse?: boolean
   isSelected?: boolean
 }

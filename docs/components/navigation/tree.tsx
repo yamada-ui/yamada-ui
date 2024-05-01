@@ -223,7 +223,7 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
 
 ListItemLink.displayName = "ListItemLink"
 
-type ListItemIconProps = { icon: string } & IconProps
+type ListItemIconProps = { icon?: string } & IconProps
 
 const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
   switch (icon) {

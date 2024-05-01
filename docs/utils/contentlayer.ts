@@ -1,4 +1,4 @@
-import { toKebabCase } from "./assertion"
+import { toKebabCase } from "./string"
 import { CONSTANT } from "constant"
 import { allDocuments } from "contentlayer/generated"
 import type {
@@ -14,7 +14,9 @@ import { otherLocales } from "utils/i18n"
 
 const OTHER_LOCALES = `(${otherLocales.join("|")})`
 
-export const getDocuments = (locale: string): DocumentTypes[] =>
+export const getDocuments = (
+  locale: string = CONSTANT.I18N.DEFAULT_LOCALE,
+): DocumentTypes[] =>
   allDocuments
     .filter(({ _id, is_active, data }) => {
       if (!is_active) return false
@@ -38,7 +40,7 @@ export const getDocuments = (locale: string): DocumentTypes[] =>
 export const getDocument = (
   documents: DocumentTypes[],
   paths: string[],
-  locale: string,
+  locale: string = CONSTANT.I18N.DEFAULT_LOCALE,
 ): DocumentTypes => {
   const ext = `${
     locale !== CONSTANT.I18N.DEFAULT_LOCALE ? `${locale}.` : ""
@@ -53,7 +55,7 @@ export const getDocument = (
         _id.endsWith(`${paths.join("/")}.${ext}`)
       )
     }
-  })
+  }) as DocumentTypes
 }
 
 export const getDocumentTree =
@@ -87,8 +89,8 @@ export const getDocumentTree =
           data,
         }) => {
           title = menu ?? title
-          label ??= null
-          menu_icon ??= null
+          label ??= undefined
+          menu_icon ??= undefined
 
           is_expanded =
             is_expanded ||
@@ -148,8 +150,8 @@ export const getDocumentPagination = (
 export const getDocumentBreadcrumbs = (
   documents: DocumentTypes[],
   paths: string[],
-  locale: string,
-  defaultLocale: string,
+  locale: string = CONSTANT.I18N.DEFAULT_LOCALE,
+  defaultLocale: string = CONSTANT.I18N.DEFAULT_LOCALE,
 ): DocumentTypesNavigationItem[] => {
   let breadcrumbs: DocumentTypesNavigationItem[] = []
 
@@ -197,9 +199,11 @@ export const getDocumentTabs = (
     if (!parentDocument?.is_tabs) parentDocument = undefined
 
     if (parentDocument) {
+      const parentDocumentSlug = parentDocument.slug
       parentPaths = parentDocument.slug.split("/").slice(1)
+
       const resolvedDocuments = documents.filter(({ slug }) =>
-        new RegExp(`^${parentDocument.slug}($|\\/[^\\/]+$)`).test(slug),
+        new RegExp(`^${parentDocumentSlug}($|\\/[^\\/]+$)`).test(slug),
       )
 
       documentTabs = resolvedDocuments.map(({ title, menu, tab, slug }) => ({
@@ -227,10 +231,10 @@ export const getPath = (id: string) =>
 export const getActiveDocuments =
   ({
     documentTypeName,
-    defaultLocale,
+    defaultLocale = CONSTANT.I18N.DEFAULT_LOCALE,
   }: {
     documentTypeName: DocumentTypeNames
-    defaultLocale: string
+    defaultLocale?: string
   }) =>
   (locale: string) =>
     allDocuments.filter(({ type, is_active, _id }) => {

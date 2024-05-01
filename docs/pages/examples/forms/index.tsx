@@ -1,4 +1,4 @@
-import { Divider, HStack, VStack, assignRef } from "@yamada-ui/react"
+import { Divider, HStack, VStack, assignRef, noop } from "@yamada-ui/react"
 import type { FC, MutableRefObject } from "react"
 import { memo, useCallback, useRef, useState } from "react"
 import { Account } from "./account"
@@ -19,7 +19,7 @@ export type FormType =
 export const DEFAULT_FORM_TYPE: FormType = "profile"
 
 export const Forms = memo(() => {
-  const setTypeRef = useRef<(type: FormType) => void>()
+  const setTypeRef = useRef<(type: FormType) => void>(noop)
 
   const onChangeType = useCallback(
     (type: FormType) => setTypeRef.current(type),

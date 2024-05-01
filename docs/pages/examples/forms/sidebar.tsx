@@ -50,7 +50,7 @@ export const Sidebar: FC<MenuProps> = memo(
 Sidebar.displayName = "Sidebar"
 
 export type SidebarButtonProps = ButtonProps & {
-  label?: FormType
+  label: FormType
   resetMapRef: MutableRefObject<Map<FormType, () => void>>
 }
 

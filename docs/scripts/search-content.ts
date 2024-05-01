@@ -4,9 +4,9 @@ import * as p from "@clack/prompts"
 import c from "chalk"
 import { program } from "commander"
 import matter from "gray-matter"
+import { prettier } from "libs/prettier"
 import toc from "markdown-toc"
 import { otherLocales } from "../utils/i18n"
-import { prettier } from "libs/prettier"
 
 type Content = {
   title: string
@@ -21,13 +21,7 @@ type Content = {
   }
 }
 
-type TableOfContent = {
-  content: string
-  slug: string
-  lvl: 1 | 2 | 3 | 4
-}
-
-const getRecursivePaths = async (path: string) => {
+const getRecursivePaths = async (path: string): Promise<string[]> => {
   try {
     const dirents = await readdir(path, { withFileTypes: true })
 
@@ -53,7 +47,7 @@ const getRecursivePaths = async (path: string) => {
 
 const getPaths: p.RequiredRunner =
   (path: string = "contents") =>
-  async (p, s): Promise<string[]> => {
+  async (_, s): Promise<string[]> => {
     s.start(`Getting the Yamada UI document paths`)
 
     const paths = getRecursivePaths(path)
@@ -65,7 +59,7 @@ const getPaths: p.RequiredRunner =
 
 const getReducePaths: p.RequiredRunner =
   (paths: string[]) =>
-  (p, s): Record<string, string[]> => {
+  (_, s): Record<string, string[]> => {
     s.start(`Groping the document paths`)
 
     const resolvedPaths: Record<string, string[]> = {}
@@ -161,7 +155,7 @@ const generateSearchContent: p.RequiredRunner =
                 },
               ]
 
-              const tableOfContents = toc(content).json as TableOfContent[]
+              const tableOfContents = toc(content).json
 
               tableOfContents.forEach((item, index) => {
                 const prevTableOfContents = tableOfContents.slice(0, index)
@@ -198,7 +192,7 @@ const generateSearchContent: p.RequiredRunner =
                     ({ lvl }) => lvl < item.lvl,
                   )
                   const lv2Item = prevTableOfContents.findLast(
-                    ({ lvl }) => lvl < lv3Item?.lvl,
+                    ({ lvl }) => lv3Item && lvl < lv3Item.lvl,
                   )
 
                   if (!lv3Item) {

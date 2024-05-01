@@ -1,4 +1,4 @@
-import type { BoxProps } from "@yamada-ui/react"
+import type { BoxProps, StringLiteral } from "@yamada-ui/react"
 import { Box, Tab, Tabs, isArray, isObject } from "@yamada-ui/react"
 import { themes } from "prism-react-renderer"
 import type { FC } from "react"
@@ -16,7 +16,7 @@ const PACKAGE_MANAGER_COMMANDS: Record<PackageMangerNames, string> = {
 }
 
 const getCode = (
-  selectedPackageName: string,
+  selectedPackageName: PackageMangerNames & StringLiteral,
   packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>,
 ): string => {
   if (isObject(packageNameOrCommand) && !isArray(packageNameOrCommand)) {
@@ -41,7 +41,8 @@ export const PackageManagers: FC<PackageManagersProps> = ({
   packageNameOrCommand,
   ...rest
 }) => {
-  const [selectedPackageName, setSelectedPackageName] = useState<string>("pnpm")
+  const [selectedPackageName, setSelectedPackageName] =
+    useState<PackageMangerNames>("pnpm")
   const language = "bash"
   const code = getCode(selectedPackageName, packageNameOrCommand)
   const theme = themes.nightOwl
@@ -64,7 +65,7 @@ export const PackageManagers: FC<PackageManagersProps> = ({
                 color: ["white", "white"],
                 borderColor: [`primary.500`, `primary.400`],
               }}
-              onClick={() => setSelectedPackageName(name)}
+              onClick={() => setSelectedPackageName(name as PackageMangerNames)}
               _focusVisible={{ bg: "whiteAlpha.50" }}
             >
               {name}

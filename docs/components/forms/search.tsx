@@ -145,7 +145,7 @@ const SearchModal: FC<SearchModalProps> = memo(
     const [selectedIndex, setSelectedIndex] = useState<number>(0)
     const { t, contents } = useI18n()
     const router = useRouter()
-    const eventRef = useRef<"mouse" | "keyboard">(null)
+    const eventRef = useRef<"mouse" | "keyboard" | null>(null)
     const directionRef = useRef<"up" | "down">("down")
     const compositionRef = useRef<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -190,7 +190,7 @@ const SearchModal: FC<SearchModalProps> = memo(
           Enter: () => {
             if (!hits.length) return
 
-            onClose()
+            onClose?.()
             router.push(hits[selectedIndex].slug)
           },
           Home: () => {
@@ -230,7 +230,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
       const itemRef = itemRefs.current.get(selectedIndex)
 
-      if (!itemRef.current) return
+      if (!itemRef?.current) return
 
       scrollIntoView(itemRef.current, {
         behavior: (actions) =>

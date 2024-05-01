@@ -13,9 +13,9 @@ export const TextWithCodeOrLink: FC<TextWithCodeOrLinkProps> = memo(
         <Text {...rest}>
           {children.split(/(\[.*?\]\(.*?\))/).map((value, index) => {
             if (index % 2 === 1) {
-              const [, nestedValue, href] = value.match(
-                /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/,
-              )
+              const [, nestedValue, href] =
+                value.match(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/) ?? []
+
               return (
                 <NextLink
                   key={index}

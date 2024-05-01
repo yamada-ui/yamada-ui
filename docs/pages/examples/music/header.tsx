@@ -228,7 +228,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 Header.displayName = "Header"
 
 type ControlMenuProps = MenuProps & {
-  label: string
+  label?: string
   items: MenuItem[]
   isNested?: boolean
 }
@@ -329,9 +329,9 @@ type ControlMenuItemProps = Merge<MenuItemProps, MenuOptionItemProps>
 
 const ControlMenuItem: FC<ControlMenuItemProps> = memo(({ value, ...rest }) => {
   if (isUndefined(value)) {
-    return <MenuItem {...rest} />
+    return <MenuItem {...(rest as MenuItemProps)} />
   } else {
-    return <MenuOptionItem value={value} {...rest} />
+    return <MenuOptionItem value={value} {...(rest as MenuOptionItemProps)} />
   }
 })
 

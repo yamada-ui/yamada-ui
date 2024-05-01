@@ -3,10 +3,10 @@ import path from "path"
 import * as p from "@clack/prompts"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
+import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
-import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
 config()
@@ -35,7 +35,7 @@ const REPO_REQUEST_PARAMETERS = {
   ref,
 }
 
-const getMdxFiles: p.RequiredRunner = () => async (p, s) => {
+const getMdxFiles: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the Yamada UI changelogs`)
 
   const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)

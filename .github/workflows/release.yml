@@ -94,19 +94,6 @@ jobs:
           clean: true
           clean-exclude: .nojekyll
 
-      - name: Sync docs
-        if: steps.changesets.outputs.published == 'true'
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'yamada-ui',
-              repo: 'yamada-docs',
-              workflow_id: 'sync.yml',
-              ref: 'main'
-            })
-
       - name: Sync colors
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7

@@ -33,7 +33,7 @@ describe("<MultiAutoComplete />", () => {
       const { container } = render(
         <MultiAutocomplete
           placeholder="Select Option"
-          defaultValue={["option1"]}
+          defaultValue={["option1", "option2"]}
         >
           <AutocompleteOption value="option1">option1</AutocompleteOption>
           <AutocompleteOption value="option2">option2</AutocompleteOption>
@@ -45,6 +45,7 @@ describe("<MultiAutoComplete />", () => {
         ".ui-multi-autocomplete",
       )
       expect(multiAutocomplete).toBeInTheDocument()
+      expect(screen.getByText("option1,")).toBeInTheDocument()
 
       fireEvent.click(multiAutocomplete!)
       await waitFor(() => {

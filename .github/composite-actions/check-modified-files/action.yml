@@ -1,0 +1,26 @@
+name: "Check for Modified Files"
+description: "Check for modified files in specific paths"
+
+inputs:
+  paths:
+    description: "File paths to check for modifications"
+    required: true
+outputs:
+  changed:
+    description: "Whether any specified files have been modified"
+    value: ${{ steps.check-modified.outputs.changed }}
+
+runs:
+  using: composite
+  steps:
+    - name: Check for modified files
+      id: check-modified
+      run: |
+        echo "Checking for modified files..."
+        MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)')
+        if [ -z "$MODIFIED_FILES" ]; then
+          echo "::set-output name=changed::false"
+        else
+          echo "::set-output name=changed::true"
+        fi
+      shell: bash

@@ -1,19 +1,15 @@
-import { writeFile } from "fs/promises"
+import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
-import { Octokit } from "@octokit/rest"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { prettier } from "libs/prettier"
+import { PATH } from "constant/path"
 
-config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-const ref = process.argv[2] ?? "main"
+config({ path: PATH.ENV })
 
 type Input = string | Buffer
 type MdxFile = { name: string; version: number[]; data: Data; content: Content }
@@ -21,47 +17,38 @@ type Data = GrayMatterFile<Input>["data"]
 type Content = GrayMatterFile<Input>["content"]
 type Locale = (typeof LOCALES)[number]
 
-const SOURCE_PATH = path.join(".changelog")
+const SOURCE_PATH = path.join(PATH.ROOT, ".changelog")
 const DIST_PATH = path.join("contents", "changelog")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_MENU_MAP = {
   en: "Changelog",
   ja: "変更履歴",
 }
-const REPO_REQUEST_PARAMETERS = {
-  owner: "yamada-ui",
-  repo: "yamada-ui",
-  path: SOURCE_PATH,
-  ref,
-}
 
 const getMdxFiles: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the Yamada UI changelogs`)
 
-  const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
-
   const mdxFiles: Omit<MdxFile, "version">[] = []
 
-  if (Array.isArray(data)) {
-    await Promise.all(
-      data.map(async ({ name, path }) => {
-        if (name.startsWith("manifest")) return
+  const dirents = await readdir(SOURCE_PATH, { withFileTypes: true })
 
-        const res = await octokit.repos.getContent({
-          ...REPO_REQUEST_PARAMETERS,
-          path,
-        })
+  await Promise.all(
+    dirents.map(async (dirent) => {
+      if (dirent.isDirectory()) return
 
-        if ("content" in res.data) {
-          const file = Buffer.from(res.data.content, "base64").toString("utf-8")
+      const { name, path } = dirent
 
-          const { data, content } = matter(file)
+      if (name.startsWith("manifest")) return
 
-          mdxFiles.push({ name, data, content })
-        }
-      }),
-    )
-  }
+      const file = await readFile(`${path}/${name}`, "utf-8")
+
+      const { data, content } = matter(file)
+
+      mdxFiles.push({ name, data, content })
+
+      return
+    }),
+  )
 
   const resolvedMdxFiles = mdxFiles
     .map((item) => ({

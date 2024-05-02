@@ -1,7 +1,6 @@
 import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
-import { Octokit } from "@octokit/rest"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
@@ -12,13 +11,10 @@ import matter from "gray-matter"
 import { prettier } from "libs/prettier"
 import { omitObject } from "utils/object"
 import { toCamelCase } from "utils/string"
+import { PATH } from "constant/path"
 // import { wait } from "utils/async"
 
-config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-const ref = process.argv[2] ?? "main"
+config({ path: PATH.ENV })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -33,7 +29,7 @@ type Props = {
   see?: string
 }
 
-const SOURCE_PATH = path.join("packages", "components")
+const SOURCE_PATH = path.join(PATH.ROOT, "packages", "components")
 const DIST_PATH = path.join("contents", "components")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {
@@ -111,85 +107,70 @@ const OVERRIDE_PATHS: Record<
     "donut-chart",
   ],
 }
-const REPO_REQUEST_PARAMETERS = {
-  owner: "yamada-ui",
-  repo: "yamada-ui",
-  path: SOURCE_PATH,
-  ref,
-}
 
 export const getDocs: p.RequiredRunner = () => async (p, s) => {
   s.start(`Getting the Yamada UI docs`)
 
-  const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
+  const dirents = await readdir(SOURCE_PATH, { withFileTypes: true })
 
   const docs: Record<string, Doc> = {}
 
   let notDocsList: string[] = []
 
-  if (Array.isArray(data)) {
-    await Promise.all(
-      data.map(async ({ name, path }) => {
-        try {
-          path += "/DOCS.json"
+  await Promise.all(
+    dirents.map(async (dirent) => {
+      try {
+        if (!dirent.isDirectory()) throw new Error("Not component folder")
 
-          const { data } = await octokit.repos.getContent({
-            ...REPO_REQUEST_PARAMETERS,
-            path,
+        let { name, path } = dirent
+
+        const content = await readFile(`${path}/${name}/DOCS.json`, "utf-8")
+
+        let doc = JSON.parse(content)
+
+        if (Object.keys(OVERRIDE_PATHS).includes(name)) {
+          const names = OVERRIDE_PATHS[name]
+
+          names.forEach((name) => {
+            if (typeof name === "string") {
+              const displayName = toCamelCase(name)
+              const nestedDoc = doc[displayName]
+
+              if (nestedDoc) docs[name] = { [displayName]: nestedDoc }
+
+              doc = omitObject(doc, [displayName])
+            } else {
+              const { parent, children } = name
+
+              const displayName = toCamelCase(parent)
+              const nestedDoc = doc[displayName]
+
+              if (nestedDoc) docs[parent] = { [displayName]: nestedDoc }
+
+              children.forEach((child) => {
+                const displayName = toCamelCase(child)
+                const nestedDoc = doc[displayName]
+
+                if (nestedDoc)
+                  docs[parent] = {
+                    ...docs[parent],
+                    [displayName]: nestedDoc,
+                  }
+
+                doc = omitObject(doc, [displayName])
+              })
+
+              doc = omitObject(doc, [displayName])
+            }
           })
 
-          if ("content" in data) {
-            const content = Buffer.from(data.content, "base64").toString(
-              "utf-8",
-            )
-
-            let doc = JSON.parse(content)
-
-            if (Object.keys(OVERRIDE_PATHS).includes(name)) {
-              const names = OVERRIDE_PATHS[name]
-
-              names.forEach((name) => {
-                if (typeof name === "string") {
-                  const displayName = toCamelCase(name)
-                  const nestedDoc = doc[displayName]
-
-                  if (nestedDoc) docs[name] = { [displayName]: nestedDoc }
-
-                  doc = omitObject(doc, [displayName])
-                } else {
-                  const { parent, children } = name
-
-                  const displayName = toCamelCase(parent)
-                  const nestedDoc = doc[displayName]
-
-                  if (nestedDoc) docs[parent] = { [displayName]: nestedDoc }
-
-                  children.forEach((child) => {
-                    const displayName = toCamelCase(child)
-                    const nestedDoc = doc[displayName]
-
-                    if (nestedDoc)
-                      docs[parent] = {
-                        ...docs[parent],
-                        [displayName]: nestedDoc,
-                      }
-
-                    doc = omitObject(doc, [displayName])
-                  })
-
-                  doc = omitObject(doc, [displayName])
-                }
-              })
-            }
-
-            if (Object.keys(doc).length) docs[name] = doc
-          }
-        } catch (e) {
-          notDocsList = [...notDocsList, name]
+          if (Object.keys(doc).length) docs[name] = doc
         }
-      }),
-    )
-  }
+      } catch (e) {
+        notDocsList = [...notDocsList, dirent.name]
+      }
+    }),
+  )
 
   s.stop(`Got the Yamada UI docs`)
 

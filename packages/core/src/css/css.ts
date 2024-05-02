@@ -84,8 +84,8 @@ const getCSS = ({
     cssOrFunc: CSSObjectOrFunc | CSSUIObject,
     isNested: boolean = false,
   ): Dict => {
-    const css = runIfFunc(cssOrFunc, theme)
-    const computedCSS = expandCSS(css, isNested)(theme)
+    const cssObject = runIfFunc(cssOrFunc, theme)
+    const computedCSS = expandCSS(cssObject, isNested)(theme)
 
     let resolvedCSS: Dict = {}
 
@@ -109,7 +109,7 @@ const getCSS = ({
         continue
       }
 
-      value = style?.transform?.(value, theme) ?? value
+      value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
 
       if (style?.isProcessResult || style?.isProcessSkip)
         value = createCSS(value, true)
@@ -156,11 +156,11 @@ const getCSS = ({
 }
 
 export const css =
-  (cssObject: CSSObjectOrFunc | CSSUIObject) =>
+  (cssOrFunc: CSSObjectOrFunc | CSSUIObject) =>
   (theme: StyledTheme, disableStyleProp?: (prop: string) => boolean): Dict =>
     getCSS({
       theme,
       styles,
       pseudos,
       disableStyleProp,
-    })(cssObject)
+    })(cssOrFunc)

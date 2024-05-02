@@ -14,7 +14,6 @@ import {
 import type { SVGMotionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   omitObject,
@@ -39,7 +38,6 @@ import type {
   SyntheticEvent,
   ForwardedRef,
   Ref,
-  DOMAttributes,
 } from "react"
 import {
   cloneElement,
@@ -246,7 +244,7 @@ export const useCheckbox = <Y extends string | number = string>(
     ],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(
         rest,
@@ -298,7 +296,7 @@ export const useCheckbox = <Y extends string | number = string>(
     ],
   )
 
-  const getLabelProps: PropGetter = useCallback(
+  const getLabelProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...pickObject(
         rest,
@@ -477,7 +475,7 @@ export const Checkbox = forwardRef(
         <ui.span
           className="ui-checkbox__label"
           __css={{ ...styles.label }}
-          {...getLabelProps(labelProps as DOMAttributes<HTMLElement>)}
+          {...getLabelProps(labelProps)}
         >
           {children}
         </ui.span>

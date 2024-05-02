@@ -35,13 +35,7 @@ const COMMON_PARAMS = {
   repo: "yamada-ui",
 }
 const OMIT_GITHUB_IDS = ["hajimemat"]
-
-// const START_DATE = dayjs("2024-02-01").hour(0).minute(0).second(0)
-// const END_DATE = dayjs("2024-04-31").hour(23).minute(59).second(59)
-
-const START_DATE = dayjs().subtract(7, "days").hour(18).minute(0).second(0)
-const END_DATE = dayjs().hour(18).minute(0).second(0)
-
+const MIN_DATE = dayjs().subtract(7, "days").hour(18).minute(0).second(0)
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
 const REPORT_FORMAT = "YYYY/MM/DD"
 
@@ -84,7 +78,7 @@ const getCollaborators = async () => {
 const getIssuesAndPullRequests = async (username: string, filter: string) => {
   let issues: Issue[] = []
 
-  const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:>=${START_DATE.format(QUERY_FORMAT)} created:<=${END_DATE.format(QUERY_FORMAT)}`
+  const query = `${filter}:${username} created:>=${MIN_DATE.format(QUERY_FORMAT)}`
   const perPage = 100
 
   const fetchIssuesAndPullRequests = async (page: number = 1) => {
@@ -109,7 +103,7 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
 
 const getComments = async () => {
   const { data: repositories } = await octokit.repos.listForOrg({
-    org: COMMON_PARAMS["owner"],
+    org: "yamada-ui",
   })
 
   let comments: Comment[] = []
@@ -124,8 +118,7 @@ const getComments = async () => {
       const { data } = await octokit.issues.listCommentsForRepo({
         ...COMMON_PARAMS,
         repo: name,
-        since: START_DATE.format(QUERY_FORMAT),
-        until: END_DATE.format(QUERY_FORMAT),
+        since: MIN_DATE.format(QUERY_FORMAT),
         per_page: perPage,
         page,
       })
@@ -149,7 +142,7 @@ const getComments = async () => {
 
 const getCommits = async () => {
   const { data: repositories } = await octokit.repos.listForOrg({
-    org: COMMON_PARAMS["owner"],
+    org: "yamada-ui",
   })
 
   let commits: Commit[] = []
@@ -164,8 +157,7 @@ const getCommits = async () => {
       const { data } = await octokit.repos.listCommits({
         ...COMMON_PARAMS,
         repo: name,
-        since: START_DATE.format(QUERY_FORMAT),
-        until: END_DATE.format(QUERY_FORMAT),
+        since: MIN_DATE.format(QUERY_FORMAT),
         per_page: perPage,
         page,
       })
@@ -263,13 +255,13 @@ const createReport = (insights: Insight[]) => {
     .sort((a, b) => b.total - a.total)
     .map(({ content }) => content)
 
-  const startDate = START_DATE.format(REPORT_FORMAT)
-  const endDate = dayjs().format(REPORT_FORMAT)
+  const minDate = MIN_DATE.format(REPORT_FORMAT)
+  const maxDate = dayjs().format(REPORT_FORMAT)
 
   return [
     `<@&1202956318718304276>`,
     `## Insight Report`,
-    `${startDate} - ${endDate}`,
+    `${minDate} - ${maxDate}`,
     "",
     ...contents,
   ].join("\n")

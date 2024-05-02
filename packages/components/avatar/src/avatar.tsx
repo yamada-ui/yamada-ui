@@ -172,7 +172,7 @@ const AvatarImage: FC<AvatarImageProps> = ({
     return name ? (
       <AvatarName name={name} format={format} />
     ) : (
-      cloneElement(icon, { role: "img", "aria-label": alt ?? "Avatar Icon" })
+      cloneElement(icon, { role: "img" })
     )
 
   const css: CSSUIObject = {

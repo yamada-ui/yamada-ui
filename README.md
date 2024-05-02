@@ -160,7 +160,7 @@ Please support this project with you or your organization. Your logo will appear
 
 Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
 
-If you're interested in contributing to the documentation, please refer to this [contribution guide](https://yamada-ui.com/community/contributing).
+The documentation site for Yamada UI is located in a separate [repository](https://github.com/yamada-ui/yamada-docs). If you're interested in contributing to the documentation, please refer to this [contribution guide](https://github.com/yamada-ui/yamada-docs/blob/main/CONTRIBUTING.md).
 
 ## License
 

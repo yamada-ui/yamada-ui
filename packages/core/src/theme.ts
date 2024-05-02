@@ -204,13 +204,8 @@ const mergeVars =
 const omitTheme = (theme: Dict): Dict =>
   omitObject(theme, ["__cssMap", "__cssVar", "__breakpoints"])
 
-export const omitThemeProps = <
-  T extends ThemeProps,
-  K extends Exclude<keyof T, "size" | "variant" | "colorScheme"> = never,
->(
-  props: T,
-  keys: K[] = [],
-) => omitObject(props, ["size", "variant", "colorScheme", ...keys])
+export const omitThemeProps = <T extends ThemeProps>(props: T) =>
+  omitObject(props, ["size", "variant", "colorScheme"])
 
 type MergeStyleOptions = Omit<Partial<FilterStyleOptions>, "isMulti">
 

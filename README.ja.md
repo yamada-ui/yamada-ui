@@ -151,7 +151,7 @@ const Example = () => {
 
 あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。
 
-もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://yamada-ui.com/ja/community/contributing)を参照してください。
+また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/yamada-ui/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/yamada-ui/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
 
 ## ライセンス
 

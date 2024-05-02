@@ -1,13 +1,5 @@
 # @yamada-ui/utils
 
-## 1.2.0
-
-### Minor Changes
-
-- [#1309](https://github.com/yamada-ui/yamada-ui/pull/1309) [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `isBoolean` function.
-
-- [#1292](https://github.com/yamada-ui/yamada-ui/pull/1292) [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Support for nested keys in `pickObject` and `omitObject`.
-
 ## 1.1.3
 
 ### Patch Changes

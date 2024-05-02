@@ -9,9 +9,6 @@ node_modules
 storybook-static
 coverage
 dist
-build
-.vercel
-.contentlayer
 
 # misc
 .DS_Store
@@ -26,16 +23,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
 # cache
 .eslintcache
 .turbo
-.next
 
 # dotenv environment variables file
 .env
 .env.*
-!.env.example

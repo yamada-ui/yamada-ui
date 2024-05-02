@@ -33,8 +33,6 @@ cd yamada-ui
 - [Storybook](https://storybook.js.org/) コンポーネントの迅速な開発とテスト
 - [Testing Library](https://testing-library.com/) コンポーネントとフックのテスト
 - [Changeset](https://github.com/atlassian/changesets) 変更のドキュメンテーション・ログの生成、リリースの管理
-- [Next.js](https://nextjs.org/) ドキュメントサイトのフレームワーク
-- [Contentlayer](https://contentlayer.dev/) ドキュメントサイトのコンテンツの管理
 
 ### コマンド
 

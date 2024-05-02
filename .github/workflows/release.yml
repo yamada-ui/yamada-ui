@@ -58,33 +58,19 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update component docs
-        if: steps.changesets.outputs.published != 'true'
+      - name: Update docs
+        if: steps.changesets.outputs.published == 'true'
         run: |
           pnpm gen:docs
           git add .
           git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs' && git push)
 
       - name: Update changelog
-        if: steps.changesets.outputs.published != 'true'
+        if: steps.changesets.outputs.published == 'true'
         run: |
           pnpm changelog:latest
           git add .
           git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
-
-      - name: Update docs
-        if: steps.changesets.outputs.published != 'true'
-        run: |
-          pnpm docs:changelog
-          pnpm docs:css
-          pnpm docs:theme
-          pnpm docs:props
-          pnpm docs:contributors
-          pnpm docs:search
-          git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changesets): version packages' && git push)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Notification Mattermost and Discord
         if: steps.changesets.outputs.published == 'true'
@@ -108,7 +94,20 @@ jobs:
           clean: true
           clean-exclude: .nojekyll
 
-      - name: Sync colors
+      - name: Release docs
+        if: steps.changesets.outputs.published == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'yamada-ui',
+              repo: 'yamada-docs',
+              workflow_id: 'release.yml',
+              ref: 'main'
+            })
+
+      - name: Release colors
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:
@@ -117,11 +116,11 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'yamada-ui',
               repo: 'yamada-colors',
-              workflow_id: 'sync.yml',
+              workflow_id: 'release.yml',
               ref: 'main'
             })
 
-      - name: Sync components
+      - name: Release components
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:
@@ -130,6 +129,6 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'yamada-ui',
               repo: 'yamada-components',
-              workflow_id: 'sync.yml',
+              workflow_id: 'release.yml',
               ref: 'main'
             })

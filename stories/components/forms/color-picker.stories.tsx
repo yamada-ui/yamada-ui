@@ -13,40 +13,32 @@ const meta: Meta<typeof ColorPicker> = {
   component: ColorPicker,
 }
 
-const defaultPlaceholder = "#4387f4"
-
 export default meta
 
 export const basic: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} />
+  return <ColorPicker placeholder="#4387f4" />
 }
 
 export const withDefaultValue: Story = () => {
-  return (
-    <ColorPicker placeholder={defaultPlaceholder} defaultValue="#4387f4ff" />
-  )
+  return <ColorPicker defaultValue="#4387f4ff" />
 }
 
 export const withFallbackValue: Story = () => {
-  return (
-    <ColorPicker placeholder={defaultPlaceholder} fallbackValue="#000000" />
-  )
+  return <ColorPicker fallbackValue="#000000" />
 }
 
 export const withDefaultColor: Story = () => {
-  return (
-    <ColorPicker placeholder={defaultPlaceholder} defaultColor="#4387f4ff" />
-  )
+  return <ColorPicker defaultColor="#4387f4ff" />
 }
 
 export const withChildren: Story = () => {
   return (
     <>
-      <ColorPicker placeholder={defaultPlaceholder}>
+      <ColorPicker placeholder="#4387f4">
         <Button>Submit</Button>
       </ColorPicker>
 
-      <ColorPicker placeholder={defaultPlaceholder}>
+      <ColorPicker placeholder="#4387f4">
         {({ value }) => <Button>Submit {value}</Button>}
       </ColorPicker>
     </>
@@ -87,13 +79,7 @@ export const withVariant: Story = () => {
 }
 
 export const withFormat: Story = () => {
-  return (
-    <ColorPicker
-      placeholder="hsla(240, 100%, 50%, 1)"
-      defaultValue="hsla(240, 100%, 50%, 1)"
-      format="hsla"
-    />
-  )
+  return <ColorPicker defaultValue="hsla(240, 100%, 50%, 1)" format="hsla" />
 }
 
 export const withFormatInput: Story = () => {
@@ -108,7 +94,6 @@ export const withFormatInput: Story = () => {
 export const withSwatches: Story = () => {
   return (
     <ColorPicker
-      placeholder={defaultPlaceholder}
       swatchesLabel="Saved Colors"
       swatches={[
         "#2e2e2e",
@@ -133,7 +118,6 @@ export const withSwatches: Story = () => {
 export const withSwatchesColumns: Story = () => {
   return (
     <ColorPicker
-      placeholder={defaultPlaceholder}
       swatchesLabel="Saved Colors"
       swatchesColumns={{ base: 8, md: 7 }}
       swatches={[
@@ -159,7 +143,6 @@ export const withSwatchesColumns: Story = () => {
 export const withCloseOnSelectSwatch: Story = () => {
   return (
     <ColorPicker
-      placeholder={defaultPlaceholder}
       swatchesLabel="Saved Colors"
       swatches={[
         "#2e2e2e",
@@ -183,13 +166,12 @@ export const withCloseOnSelectSwatch: Story = () => {
 }
 
 export const disabledAllowInput: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} allowInput={false} />
+  return <ColorPicker placeholder="#4387f4ff" allowInput={false} />
 }
 
 export const disabledPicker: Story = () => {
   return (
     <ColorPicker
-      placeholder={defaultPlaceholder}
       withPicker={false}
       swatchesLabel="Saved Colors"
       swatches={[
@@ -214,25 +196,23 @@ export const disabledPicker: Story = () => {
 }
 
 export const disabledChannel: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} withChannel={false} />
+  return <ColorPicker withChannel={false} />
 }
 
 export const disabledSwatch: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} withSwatch={false} />
+  return <ColorPicker withSwatch={false} />
 }
 
 export const disabledEyeDropper: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} withEyeDropper={false} />
+  return <ColorPicker withEyeDropper={false} />
 }
 
 export const enabledColorPickerEyeDropper: Story = () => {
-  return (
-    <ColorPicker placeholder={defaultPlaceholder} withColorSelectorEyeDropper />
-  )
+  return <ColorPicker withColorSelectorEyeDropper />
 }
 
 export const enabledResult: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} withResult />
+  return <ColorPicker withResult />
 }
 
 export const withBorderColor: Story = () => {
@@ -255,32 +235,32 @@ export const withBorderColor: Story = () => {
 }
 
 export const withPlacement: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} placement="bottom-end" />
+  return <ColorPicker placeholder="#4387f4" placement="bottom-end" />
 }
 
 export const withOffset: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} offset={[16, 16]} />
+  return <ColorPicker placeholder="#4387f4" offset={[16, 16]} />
 }
 
 export const withGutter: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} gutter={32} />
+  return <ColorPicker placeholder="#4387f4" gutter={32} />
 }
 
 export const withDuration: Story = () => {
-  return <ColorPicker placeholder={defaultPlaceholder} duration={0.4} />
+  return <ColorPicker placeholder="#4387f4" duration={0.4} />
 }
 
 export const isDisabled: Story = () => {
   return (
     <>
-      <ColorPicker placeholder={defaultPlaceholder} isDisabled />
+      <ColorPicker placeholder="#4387f4" isDisabled />
 
       <FormControl
         isDisabled
         label="Pick color"
         helperMessage="Please select your favorite color"
       >
-        <ColorPicker placeholder={defaultPlaceholder} />
+        <ColorPicker placeholder="#4387f4" />
       </FormControl>
     </>
   )
@@ -289,14 +269,14 @@ export const isDisabled: Story = () => {
 export const isReadonly: Story = () => {
   return (
     <>
-      <ColorPicker placeholder={defaultPlaceholder} isReadOnly />
+      <ColorPicker placeholder="#4387f4" isReadOnly />
 
       <FormControl
         isReadOnly
         label="Pick color"
         helperMessage="Please select your favorite color"
       >
-        <ColorPicker placeholder={defaultPlaceholder} />
+        <ColorPicker placeholder="#4387f4" />
       </FormControl>
     </>
   )
@@ -309,13 +289,11 @@ export const customEyeDropperIcon: Story = () => {
         eyeDropperProps={{
           color: "primary",
         }}
-        placeholder={defaultPlaceholder}
       />
       <ColorPicker
         eyeDropperProps={{
           children: <Icon icon={faPoo} />,
         }}
-        placeholder={defaultPlaceholder}
       />
     </>
   )
@@ -324,13 +302,7 @@ export const customEyeDropperIcon: Story = () => {
 export const customControl: Story = () => {
   const [value, onChange] = useState<string>("#4387f4ff")
 
-  return (
-    <ColorPicker
-      placeholder={defaultPlaceholder}
-      value={value}
-      onChange={onChange}
-    />
-  )
+  return <ColorPicker value={value} onChange={onChange} />
 }
 
 export const reactHookForm: Story = () => {

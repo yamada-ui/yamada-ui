@@ -707,7 +707,7 @@
     },
     "size": {
       "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the DonutChart."
     },
@@ -836,7 +836,7 @@
     },
     "size": {
       "defaultValue": "md",
-      "type": "\"sm\" | \"md\" | \"lg\"",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the PieChart."
     },

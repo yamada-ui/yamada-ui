@@ -295,7 +295,7 @@ export const getFormControlProperties = ({
 }: {
   omit?: (typeof formControlBaseProperties)[number][]
   pick?: (typeof formControlBaseProperties)[number][]
-} = {}) => {
+}) => {
   let result = formControlProperties
 
   if (pick.length) {

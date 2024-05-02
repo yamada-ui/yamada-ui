@@ -11,11 +11,11 @@ const factory = () => {
   const cache = new Map<DOMElements, UIComponent<DOMElements>>()
 
   return new Proxy(styled, {
-    apply: (_target, _thisArg, [el, options]: [DOMElements, StyledOptions]) => {
+    apply: (target, thisArg, [el, options]: [DOMElements, StyledOptions]) => {
       return styled(el, options)
     },
 
-    get: (_target, el: DOMElements) => {
+    get: (target, el: DOMElements) => {
       if (!cache.has(el)) cache.set(el, styled(el))
 
       return cache.get(el)

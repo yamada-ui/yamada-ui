@@ -1,8 +1,8 @@
 import type {
   CSSUIObject,
-  CSSUIProps,
   HTMLUIProps,
   ThemeProps,
+  CSSUIProps,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -176,20 +176,10 @@ const getTooltipProps = (
  */
 export const Tooltip = forwardRef<TooltipProps, "div">(
   (
-    {
-      closeOnPointerDown,
-      z: zProp,
-      zIndex: zIndexProp,
-      portalProps,
-      withPortal = true,
-      ...props
-    },
+    { closeOnPointerDown, zIndex, portalProps, withPortal = true, ...props },
     ref,
   ) => {
-    let [{ z, zIndex, ...styles }, mergedProps] = useComponentStyle(
-      "Tooltip",
-      props,
-    )
+    const [styles, mergedProps] = useComponentStyle("Tooltip", props)
     const {
       className,
       children,
@@ -320,15 +310,10 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
 
     const css: CSSUIObject = {
       position: "relative",
-      ...styles,
+      ...omitObject(styles, ["zIndex"]),
     }
 
     if (!label) return <>{children}</>
-
-    const resolvedZIndex = (zIndexProp ??
-      zProp ??
-      zIndex ??
-      z) as CSSUIProps["zIndex"]
 
     return (
       <>
@@ -339,7 +324,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
             <Portal isDisabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
-                zIndex={resolvedZIndex}
+                zIndex={(zIndex ?? styles.zIndex) as CSSUIProps["zIndex"]}
                 pointerEvents="none"
               >
                 <ui.div

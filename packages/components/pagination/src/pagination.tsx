@@ -11,7 +11,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
-import { cx, dataAttr, handlerAll } from "@yamada-ui/utils"
+import { cx, omitObject, dataAttr, handlerAll } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef, FC } from "react"
 import { useMemo } from "react"
 import type { PaginationItemProps } from "./pagination-item"
@@ -98,29 +98,23 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
     edgeProps,
     edgeFirstProps,
     edgeLastProps,
-    page,
-    defaultPage,
-    total,
-    siblings,
-    boundaries,
-    isDisabled,
-    onChange: onChangeProp,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const computedWithControls = useValue(withControls)
   const computedWithEdges = useValue(withEdges)
 
-  const { currentPage, onFirst, onLast, onPrev, onNext, onChange, range } =
-    usePagination({
-      page,
-      defaultPage,
-      total,
-      siblings,
-      boundaries,
-      isDisabled,
-      onChange: onChangeProp,
-    })
+  const {
+    currentPage,
+    total,
+    isDisabled,
+    onFirst,
+    onLast,
+    onPrev,
+    onNext,
+    onChange,
+    range,
+  } = usePagination(rest)
 
   const children = useMemo(
     () =>
@@ -156,7 +150,15 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         className={cx("ui-pagination", className)}
         role="navigation"
         __css={css}
-        {...rest}
+        {...omitObject(rest, [
+          "page",
+          "defaultPage",
+          "total",
+          "siblings",
+          "boundaries",
+          "isDisabled",
+          "onChange",
+        ])}
         data-disabled={dataAttr(isDisabled)}
       >
         {computedWithEdges ? (

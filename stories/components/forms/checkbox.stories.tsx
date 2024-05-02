@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { CheckboxItem, UseCheckboxGroupReturn } from "@yamada-ui/react"
 import {
-  ui,
   Checkbox,
   CheckboxGroup,
   FormControl,
@@ -263,7 +262,7 @@ export const customHook: Story = () => {
 
     return (
       <Box as="label">
-        <ui.input {...getInputProps()} aria-label={props.value} />
+        <input {...getInputProps()} aria-label={props.value} />
 
         <Box
           {...getIconProps()}

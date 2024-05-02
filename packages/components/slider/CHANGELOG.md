@@ -1,15 +1,5 @@
 # @yamada-ui/slider
 
-## 1.0.30-dev-20240502093643
-
-### Patch Changes
-
-- [#1343](https://github.com/yamada-ui/yamada-ui/pull/1343) [`a2f4b12`](https://github.com/yamada-ui/yamada-ui/commit/a2f4b12d5d954e7f1b3b4f492fd055eaa69a8fca) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update `Slider` and `RangeSlider` handling and props.
-
-- Updated dependencies [[`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5), [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0)]:
-  - @yamada-ui/core@1.6.7-dev-20240502093643
-  - @yamada-ui/form-control@1.0.28-dev-20240502093643
-
 ## 1.0.29
 
 ### Patch Changes

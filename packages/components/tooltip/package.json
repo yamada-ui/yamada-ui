@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/tooltip",
-  "version": "1.0.27-dev-20240502093643",
+  "version": "1.0.26",
   "description": "Yamada UI tooltip component",
   "keywords": [
     "yamada",

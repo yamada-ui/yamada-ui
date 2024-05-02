@@ -1,15 +1,5 @@
 # @yamada-ui/charts
 
-## 1.1.2-dev-20240502093643
-
-### Patch Changes
-
-- Updated dependencies [[`04f008c`](https://github.com/yamada-ui/yamada-ui/commit/04f008ca8bbdd73e797d50e5e8125b8cc86d9707), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
-  - @yamada-ui/tooltip@1.0.27-dev-20240502093643
-  - @yamada-ui/core@1.6.7-dev-20240502093643
-  - @yamada-ui/use-token@1.1.13-dev-20240502093643
-  - @yamada-ui/use-value@1.1.13-dev-20240502093643
-
 ## 1.1.1
 
 ### Patch Changes

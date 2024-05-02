@@ -1,13 +1,5 @@
 # @yamada-ui/test
 
-## 1.1.4-dev-20240502093643
-
-### Patch Changes
-
-- Updated dependencies []:
-  - @yamada-ui/providers@1.0.31-dev-20240502093643
-  - @yamada-ui/theme@1.6.2-dev-20240502093643
-
 ## 1.1.3
 
 ### Patch Changes

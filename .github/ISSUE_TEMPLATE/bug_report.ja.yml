@@ -1,5 +1,5 @@
 name: "Bug Report (日本語)"
-description: "バグ報告を作成します"
+description: "バグ報告を作成します。"
 body:
   - type: markdown
     attributes:

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/pagination",
-  "version": "1.0.24",
+  "version": "1.0.26-dev-20240502093643",
   "description": "Yamada UI pagination component",
   "keywords": [
     "yamada",

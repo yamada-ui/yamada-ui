@@ -12,6 +12,7 @@ import {
   getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
+import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   useCallbackRef,
@@ -29,6 +30,7 @@ import type {
   InputHTMLAttributes,
   KeyboardEvent,
   SyntheticEvent,
+  DOMAttributes,
 } from "react"
 import { forwardRef, useCallback, useEffect, useId, useState } from "react"
 import { useRadioGroupContext } from "./radio-group"
@@ -150,7 +152,7 @@ export const useRadio = <Y extends string | number = string>(
     [checked, isActive, isFocused, isFocusVisible, isHovered, formControlProps],
   )
 
-  const getInputProps: UIPropGetter<"input"> = useCallback(
+  const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
@@ -197,7 +199,7 @@ export const useRadio = <Y extends string | number = string>(
     ],
   )
 
-  const getLabelProps: UIPropGetter = useCallback(
+  const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       props,
@@ -334,7 +336,7 @@ export const Radio = forwardRef(
 
         <ui.span
           className="ui-radio__label"
-          {...getLabelProps(labelProps)}
+          {...getLabelProps(labelProps as DOMAttributes<HTMLElement>)}
           __css={{ ...styles.label }}
         >
           {children}

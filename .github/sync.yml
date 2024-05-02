@@ -1,3 +1,0 @@
-yamada-ui/yamada-docs:
-  - source: coverage/
-    dest: public/coverage/

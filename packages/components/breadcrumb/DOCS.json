@@ -46,5 +46,12 @@
       "description": "If `true`, change to span element."
     }
   },
-  "BreadcrumbSeparator": {}
+  "BreadcrumbSeparator": {},
+  "BreadcrumbEllipsis": {
+    "size": {
+      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 13 more ... | \"9xl\">",
+      "required": false,
+      "description": "The CSS `font-size` property."
+    }
+  }
 }

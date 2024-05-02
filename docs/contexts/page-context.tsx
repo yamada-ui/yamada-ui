@@ -15,6 +15,7 @@ type PageContext = Omit<PageProviderProps, "children"> & {
 }
 
 const defaultValue = {
+  currentVersion: undefined,
   documentTree: [],
   documentMap: [],
 }
@@ -31,6 +32,7 @@ const getDocumentMap = (
 
 export type PageProviderProps = PropsWithChildren<
   {
+    currentVersion: string | undefined | null
     documentTree: DocumentTypeTree[]
     documentTabs?: DocumentTypesNavigationItem[]
     documentBreadcrumbs?: DocumentTypesNavigationItem[]

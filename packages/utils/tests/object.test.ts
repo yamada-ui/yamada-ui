@@ -21,10 +21,24 @@ describe("Object", () => {
     })
   })
 
+  describe("omitObject with nested keys", () => {
+    test("should omit specified keys from an object", () => {
+      const obj = { a: { b: 2, c: 3 }, d: 4 }
+      expect(omitObject(obj, ["a.b", "d"])).toStrictEqual({ a: { c: 3 } })
+    })
+  })
+
   describe("pickObject", () => {
     test("should pick specified keys from an object", () => {
       const obj = { a: 1, b: 2, c: 3 }
       expect(pickObject(obj, ["a", "c"])).toStrictEqual({ a: 1, c: 3 })
+    })
+  })
+
+  describe("pickObject with nested keys", () => {
+    test("should omit specified keys from an object", () => {
+      const obj = { a: { b: 2, c: 3 }, d: 4 }
+      expect(pickObject(obj, ["a.b", "d"])).toStrictEqual({ a: { b: 2 }, d: 4 })
     })
   })
 

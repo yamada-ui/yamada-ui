@@ -157,6 +157,14 @@
     }
   },
   "MenuButton": {},
+  "MenuItemButton": {
+    "icon": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false
+    },
+    "iconProps": { "type": "MenuIconProps", "required": false },
+    "innerProps": { "type": "HTMLUIProps<\"span\">", "required": false }
+  },
   "MenuList": {
     "about": { "type": "string", "required": false },
     "accessKey": { "type": "string", "required": false },
@@ -993,6 +1001,8 @@
       "description": "If `true`, the menu item will be focusable."
     }
   },
+  "MenuIcon": {},
+  "MenuCommand": {},
   "MenuGroup": {
     "label": {
       "type": "string",

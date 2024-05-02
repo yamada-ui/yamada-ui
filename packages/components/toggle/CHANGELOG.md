@@ -1,5 +1,13 @@
 # @yamada-ui/toggle
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`e440971`](https://github.com/yamada-ui/yamada-ui/commit/e4409713f962edf69275617b2c60eb4b5c59a1b6)]:
+  - @yamada-ui/ripple@1.0.24
+  - @yamada-ui/core@1.6.5
+
 ## 1.0.6
 
 ### Patch Changes

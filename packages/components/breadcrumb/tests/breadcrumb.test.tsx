@@ -1,5 +1,10 @@
 import { render, screen } from "@yamada-ui/test"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "../src"
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "../src"
 
 describe("<Breadcrumb />", () => {
   test("renders breadcrumb correctly", () => {
@@ -21,7 +26,7 @@ describe("<Breadcrumb />", () => {
     )
   })
 
-  test("separator propertie is being passed accurately", () => {
+  test("separator property is being passed accurately", () => {
     render(
       <Breadcrumb separator="-">
         <BreadcrumbItem>
@@ -37,7 +42,7 @@ describe("<Breadcrumb />", () => {
     expect(separatorEle).toBeInTheDocument()
   })
 
-  test("isCurrentPage propertie is being passed accurately", () => {
+  test("isCurrentPage property is being passed accurately", () => {
     const { container } = render(
       <Breadcrumb separator="-">
         <BreadcrumbItem>
@@ -80,5 +85,22 @@ describe("<Breadcrumb />", () => {
     )
     const currentPageLink = screen.getByText("Link 2")
     expect(currentPageLink.getAttribute("href")).toBeNull()
+  })
+
+  test("renders breadcrumbEllipsis correctly", () => {
+    render(
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Link 1</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbEllipsis />
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href="#">Link 3</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>,
+    )
+    expect(screen.getByTitle("ellipsis")).toBeInTheDocument()
   })
 })

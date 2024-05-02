@@ -1,5 +1,12 @@
 # @yamada-ui/infinite-scroll-area
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+
 ## 1.0.6
 
 ### Patch Changes

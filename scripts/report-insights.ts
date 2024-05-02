@@ -1,4 +1,5 @@
 import { Octokit } from "@octokit/rest"
+import { AxiosError } from "axios"
 import dayjs from "dayjs"
 import { config } from "dotenv"
 
@@ -37,11 +38,33 @@ const OMIT_GITHUB_IDS = ["hajimemat"]
 const MIN_DATE = dayjs().subtract(7, "days").hour(18).minute(0).second(0)
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
 const REPORT_FORMAT = "YYYY/MM/DD"
+
 config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const recursiveFetch = async (callback: () => Promise<void>) => {
+  try {
+    await callback()
+  } catch (e) {
+    if (
+      e instanceof AxiosError &&
+      e.status === 403 &&
+      e.response?.headers["x-ratelimit-remaining"] === "0"
+    ) {
+      const resetTime =
+        parseInt(e.response.headers?.["x-ratelimit-reset"] ?? "0") * 1000
+      const waitTime = resetTime - Date.now() + 1000
+
+      await wait(waitTime)
+      await recursiveFetch(callback)
+    } else {
+      throw e
+    }
+  }
+}
 
 const getCollaborators = async () => {
   const { data } = await octokit.repos.listCollaborators({
@@ -54,13 +77,11 @@ const getCollaborators = async () => {
 
 const getIssuesAndPullRequests = async (username: string, filter: string) => {
   let issues: Issue[] = []
-  let page = 1
-  let count = 0
 
   const query = `${filter}:${username} created:>=${MIN_DATE.format(QUERY_FORMAT)}`
   const perPage = 100
 
-  do {
+  const fetchIssuesAndPullRequests = async (page: number = 1) => {
     const { data } = await octokit.search.issuesAndPullRequests({
       q: query,
       per_page: perPage,
@@ -70,10 +91,12 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
 
     issues.push(...items)
 
-    count = total_count
+    if (total_count === perPage) {
+      await recursiveFetch(() => fetchIssuesAndPullRequests(page + 1))
+    }
+  }
 
-    page++
-  } while (count === perPage)
+  await recursiveFetch(() => fetchIssuesAndPullRequests())
 
   return issues
 }
@@ -83,7 +106,7 @@ const getComments = async () => {
     org: "yamada-ui",
   })
 
-  let comments = []
+  let comments: Comment[] = []
 
   const perPage = 100
 
@@ -91,7 +114,7 @@ const getComments = async () => {
     let page = 1
     let count = 0
 
-    do {
+    const fetchComments = async () => {
       const { data } = await octokit.issues.listCommentsForRepo({
         ...COMMON_PARAMS,
         repo: name,
@@ -104,10 +127,14 @@ const getComments = async () => {
 
       count = data.length
 
-      page++
-    } while (count === perPage)
+      if (count === perPage) {
+        page++
 
-    await wait(3000)
+        await recursiveFetch(fetchComments)
+      }
+    }
+
+    await recursiveFetch(fetchComments)
   }
 
   return comments
@@ -118,7 +145,7 @@ const getCommits = async () => {
     org: "yamada-ui",
   })
 
-  let commits = []
+  let commits: Commit[] = []
 
   const perPage = 100
 
@@ -126,7 +153,7 @@ const getCommits = async () => {
     let page = 1
     let count = 0
 
-    do {
+    const fetchCommits = async () => {
       const { data } = await octokit.repos.listCommits({
         ...COMMON_PARAMS,
         repo: name,
@@ -139,10 +166,14 @@ const getCommits = async () => {
 
       count = data.length
 
-      page++
-    } while (count === perPage)
+      if (count === perPage) {
+        page++
 
-    await wait(3000)
+        await recursiveFetch(fetchCommits)
+      }
+    }
+
+    await recursiveFetch(fetchCommits)
   }
 
   return commits
@@ -193,8 +224,6 @@ const getInsights = async (collaborators: Collaborator[]) => {
         reviewed: reviewedPullRequest,
       },
     })
-
-    await wait(3000)
   }
 
   return insights

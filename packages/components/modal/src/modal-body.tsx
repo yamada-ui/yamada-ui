@@ -18,7 +18,7 @@ export const ModalBody = forwardRef<ModalBodyProps, "main">(
     }
 
     return (
-      <ui.main
+      <ui.div
         ref={ref}
         className={cx("ui-modal__body", className)}
         __css={css}

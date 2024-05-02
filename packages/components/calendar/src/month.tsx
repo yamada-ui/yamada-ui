@@ -2,7 +2,14 @@ import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
-import { cx, dataAttr, filterUndefined } from "@yamada-ui/utils"
+import {
+  cx,
+  dataAttr,
+  filterUndefined,
+  isBoolean,
+  isNull,
+  isUndefined,
+} from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { FC } from "react"
 import { useMemo } from "react"
@@ -188,6 +195,19 @@ export const Month: FC<MonthProps> = ({
                             index,
                           })
 
+                          const day = customDay({
+                            date,
+                            row,
+                            col,
+                            weekday: weekdays[col],
+                            isSelected,
+                            isWeekend,
+                            isOutside,
+                          })
+
+                          const isDisplayed =
+                            !isNull(day) && !isUndefined(day) && !isBoolean(day)
+
                           return (
                             <ui.td
                               key={col}
@@ -206,20 +226,14 @@ export const Month: FC<MonthProps> = ({
                                   p: 0,
                                   fontSize: undefined,
                                   fontWeight: "normal",
-                                  ...(isHidden ? { display: "none" } : {}),
+                                  ...(isHidden || !isDisplayed
+                                    ? { display: "none" }
+                                    : {}),
                                   ...styles.day,
                                 }}
                                 {...props}
                               >
-                                {customDay({
-                                  date,
-                                  row,
-                                  col,
-                                  weekday: weekdays[col],
-                                  isSelected,
-                                  isWeekend,
-                                  isOutside,
-                                })}
+                                {day}
                               </Button>
                             </ui.td>
                           )

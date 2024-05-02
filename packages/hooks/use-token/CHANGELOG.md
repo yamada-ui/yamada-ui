@@ -1,5 +1,12 @@
 # @yamada-ui/use-token
 
+## 1.1.11
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/core@1.6.5
+
 ## 1.1.10
 
 ### Patch Changes

@@ -1,5 +1,26 @@
 # @yamada-ui/menu
 
+## 1.1.1
+
+### Patch Changes
+
+- [#1283](https://github.com/yamada-ui/yamada-ui/pull/1283) [`771b400`](https://github.com/yamada-ui/yamada-ui/commit/771b4006e2753543b02e386cbab3e4a1f278dd5c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug with circular references.
+
+## 1.1.0
+
+### Minor Changes
+
+- [#1219](https://github.com/yamada-ui/yamada-ui/pull/1219) [`adb1005`](https://github.com/yamada-ui/yamada-ui/commit/adb1005f4cf992082c6e228e61f0eed727bd71a6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `MenuItemButton` and supported nested menu layout.
+
+### Patch Changes
+
+- Updated dependencies [[`9f81804`](https://github.com/yamada-ui/yamada-ui/commit/9f818041d4dc604bd09d3f544f9257d2d1114fcf), [`81da807`](https://github.com/yamada-ui/yamada-ui/commit/81da8073d308a385fdf87e46d590262d1f99c7b1), [`01c715e`](https://github.com/yamada-ui/yamada-ui/commit/01c715e480d32a116ecea3feed27bae252bfb68f), [`125ed43`](https://github.com/yamada-ui/yamada-ui/commit/125ed43595ac00c17bdfd1028c5755e530658eff)]:
+  - @yamada-ui/popover@1.1.0
+  - @yamada-ui/use-clickable@1.2.0
+  - @yamada-ui/core@1.6.5
+  - @yamada-ui/motion@1.0.24
+  - @yamada-ui/transitions@1.0.24
+
 ## 1.0.23
 
 ### Patch Changes

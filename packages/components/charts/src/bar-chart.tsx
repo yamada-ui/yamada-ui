@@ -191,7 +191,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
             {...getBarChartProps({ className: "ui-bar-chart__chart" })}
           >
             <CartesianGrid
-              {...getGridProps({ className: "ui-area-chart__grid" })}
+              {...getGridProps({ className: "ui-bar-chart__grid" })}
             />
             <XAxis {...getXAxisProps({ className: "ui-bar-chart__x-axis" })} />
             <YAxis {...getYAxisProps({ className: "ui-bar-chart__y-axis" })} />

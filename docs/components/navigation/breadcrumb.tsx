@@ -28,7 +28,6 @@ export const Breadcrumb = memo(
         listProps={{ h: 6 }}
         {...rest}
       >
-        {/* @ts-ignore */}
         {documentBreadcrumbs.map(({ title, slug }, index) => (
           <BreadcrumbItem key={slug}>
             <BreadcrumbLink as={Link} href={slug}>

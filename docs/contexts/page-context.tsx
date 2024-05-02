@@ -8,7 +8,10 @@ import type { FC, PropsWithChildren } from "react"
 import { createContext, useContext, useMemo } from "react"
 
 type PageContext = Omit<PageProviderProps, "children"> & {
-  documentMap: Pick<DocumentTypes, "title" | "description" | "label" | "slug">[]
+  documentMap: Pick<
+    DocumentTypeTree,
+    "title" | "description" | "label" | "slug"
+  >[]
 }
 
 const defaultValue = {
@@ -20,7 +23,7 @@ export const PageContext = createContext<PageContext>(defaultValue)
 
 const getDocumentMap = (
   tree: DocumentTypeTree[],
-): Pick<DocumentTypes, "title" | "slug" | "label" | "description">[] =>
+): Pick<DocumentTypeTree, "title" | "slug" | "label" | "description">[] =>
   tree.flatMap(({ title, slug, label, description, children }) => [
     { title, slug, label, description },
     ...getDocumentMap(children),

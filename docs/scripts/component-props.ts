@@ -11,10 +11,9 @@ import matter from "gray-matter"
 import { prettier } from "libs/prettier"
 import { omitObject } from "utils/object"
 import { toCamelCase } from "utils/string"
-import { PATH } from "constant/path"
 // import { wait } from "utils/async"
 
-config({ path: PATH.ENV })
+config({ path: CONSTANT.PATH.ENV })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -29,7 +28,7 @@ type Props = {
   see?: string
 }
 
-const SOURCE_PATH = path.join(PATH.ROOT, "packages", "components")
+const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, "packages", "components")
 const DIST_PATH = path.join("contents", "components")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {

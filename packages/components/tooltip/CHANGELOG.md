@@ -1,5 +1,17 @@
 # @yamada-ui/tooltip
 
+## 1.0.27-dev-20240502093643
+
+### Patch Changes
+
+- [#1334](https://github.com/yamada-ui/yamada-ui/pull/1334) [`04f008c`](https://github.com/yamada-ui/yamada-ui/commit/04f008ca8bbdd73e797d50e5e8125b8cc86d9707) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Tooltip` did not reflect `z`.
+
+- Updated dependencies [[`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/core@1.6.7-dev-20240502093643
+  - @yamada-ui/motion@1.0.26-dev-20240502093643
+  - @yamada-ui/transitions@1.0.26-dev-20240502093643
+  - @yamada-ui/use-popper@1.0.25-dev-20240502093643
+
 ## 1.0.26
 
 ### Patch Changes

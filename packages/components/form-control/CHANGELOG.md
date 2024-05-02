@@ -1,5 +1,14 @@
 # @yamada-ui/form-control
 
+## 1.0.28-dev-20240502093643
+
+### Patch Changes
+
+- [#1343](https://github.com/yamada-ui/yamada-ui/pull/1343) [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `getFormControlProperties` arguments were required.
+
+- Updated dependencies [[`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/core@1.6.7-dev-20240502093643
+
 ## 1.0.27
 
 ### Patch Changes

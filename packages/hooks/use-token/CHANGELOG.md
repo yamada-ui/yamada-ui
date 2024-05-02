@@ -1,5 +1,12 @@
 # @yamada-ui/use-token
 
+## 1.1.13-dev-20240502093643
+
+### Patch Changes
+
+- Updated dependencies [[`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/core@1.6.7-dev-20240502093643
+
 ## 1.1.12
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # @yamada-ui/checkbox
 
+## 1.0.29-dev-20240502093643
+
+### Patch Changes
+
+- [#1345](https://github.com/yamada-ui/yamada-ui/pull/1345) [`191d059`](https://github.com/yamada-ui/yamada-ui/commit/191d05987c7690b81aa9a3a84264d8112064ccbe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the type definitions of `getInputProps` and `getLabelProps` were incorrect.
+
+- Updated dependencies [[`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5), [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0)]:
+  - @yamada-ui/core@1.6.7-dev-20240502093643
+  - @yamada-ui/form-control@1.0.28-dev-20240502093643
+  - @yamada-ui/layouts@1.1.22-dev-20240502093643
+  - @yamada-ui/motion@1.0.26-dev-20240502093643
+
 ## 1.0.28
 
 ### Patch Changes

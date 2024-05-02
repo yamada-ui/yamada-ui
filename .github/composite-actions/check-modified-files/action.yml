@@ -13,14 +13,8 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Check for modified files
+    - name: Check modified files
       id: check-modified
       run: |
-        echo "Checking for modified files..."
-        MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)')
-        if [ -z "$MODIFIED_FILES" ]; then
-          echo "::set-output name=changed::false"
-        else
-          echo "::set-output name=changed::true"
-        fi
+        echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)' && echo true || echo false)" >> $GITHUB_OUTPUT
       shell: bash

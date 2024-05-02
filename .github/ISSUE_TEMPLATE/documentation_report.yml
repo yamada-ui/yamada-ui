@@ -1,0 +1,38 @@
+name: "Documentation Report"
+description: "Create a report for errors or inappropriate expressions in the documentation site"
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for creating an issue 😎!
+
+        Please search open/closed issues before submitting. Someone might have asked the same thing before 😎!
+
+          - [Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+
+        We're all volunteers here, so please help us help you by taking the time to accurately fill out this template. 💖
+  - type: textarea
+    id: quote
+    attributes:
+      label: "Provide the exact quote of the error or issue"
+      description: "A brief description of the error or issue."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Does the docs page already exist? Please link to it.
+      description: "Example: https://yamada-ui.com/getting-started/installation"
+  - type: dropdown
+    id: participate
+    attributes:
+      label: Are you willing to participate in fixing this issue and create a pull request with the fix?
+      options:
+        - "Yes"
+        - "No"
+  - type: markdown
+    attributes:
+      value: |
+        This issue will be automatically unassigned after two weeks have passed since it was assigned.
+        Once unassigned, it may be picked up by someone else for work.

@@ -13,26 +13,27 @@ Yamada UIへの貢献に興味をもってくれて、ありがとうござい�
 
 以下の手順で、`Yamada UI`への貢献を始められるようになります。
 
-1. [リポジトリ](https://github.com/yamada-ui/yamada-docs)をフォークします。
+1. [リポジトリ](https://github.com/yamada-ui/yamada-ui)をフォークします。
 
 2. あなたのローカルにクローンします。
 
 ```sh
-git clone https://github.com/<your_github_username>/yamada-docs.git
+git clone https://github.com/<your_github_username>/yamada-ui.git
 
-cd yamada-docs
+cd yamada-ui
 ```
 
 3. `pnpm install`を実行して、すべての依存関係とパッケージをセットアップします。このコマンドは、依存関係をインストールします。
 
-4. `pnpm dev`を実行してローカルサーバーを起動します。`Windows`の場合は、`contentlayer`が期待通りに動作しない可能性があります。その場合は、`pnpm dev`の前に`npx contentlayer build`を実行してください。
+4. `pnpm dev`を実行してローカルサーバーを起動します。`Windows`の場合は、`contentlayer`が期待通りに動作しない可能性があります。その場合は、`pnpm docs:dev`の前に`pnpm docs:content`を実行してください。
 
 ## コマンド
 
 - **`pnpm install`**: すべての依存関係とパッケージをセットアップします。
-- **`pnpm dev`**: ローカルサーバーを起動します。
-- **`pnpm build`**: サイトを構築します。
-- **`pnpm lint`**: コードの問題をチェックします。
+- **`pnpm docs:dev`**: ローカルサーバーを起動します。
+- **`pnpm docs:start`**: プロダクションサーバーを起動します。
+- **`pnpm docs:build`**: サイトを構築します。
+- **`pnpm docs:lint`**: コードの問題をチェックします。
 
 ## ドキュメントを更新する
 
@@ -55,7 +56,7 @@ cd yamada-docs
 
 ### プルリクエストの手順
 
-1. [リポジトリ](https://github.com/yamada-ui/yamada-docs)をフォークし、クローンします。
+1. [リポジトリ](https://github.com/yamada-ui/yamada-ui)をフォークし、クローンします。
 
 2. `main`ブランチから新しいブランチを作成します。`[タイプ/スコープ]`という命名規則に従います。例えば、`fix/accordion-hook`や`menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
 

@@ -1,8 +1,6 @@
 import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
-import { Octokit } from "@octokit/rest"
-import { isArray, merge } from "@yamada-ui/react"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
@@ -22,12 +20,9 @@ import {
   isVariableStatement,
 } from "typescript"
 import { toKebabCase } from "utils/string"
+import { PATH } from "constant/path"
 
-config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-const ref = process.argv[2] ?? "main"
+config({ path: PATH.ENV })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -47,12 +42,14 @@ type Props = Record<
 type JSDocs = Record<string, { urls?: string[]; deprecated?: boolean }>
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
+  PATH.ROOT,
   "packages",
   "core",
   "src",
   "styles.ts",
 )
 const SOURCE_PSEUDO_PROPS_PATH = path.join(
+  PATH.ROOT,
   "packages",
   "core",
   "src",
@@ -60,11 +57,6 @@ const SOURCE_PSEUDO_PROPS_PATH = path.join(
 )
 const DIST_PATH = path.join("contents", "styled-system")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
-const REPO_REQUEST_PARAMETERS = {
-  owner: "yamada-ui",
-  repo: "yamada-ui",
-  ref,
-}
 const CONTENT_HEADER = {
   en: [
     "`Style props` is a method to change the style of a component just by passing `props` to the component. It also provides many useful shorthands, improving development efficiency.",
@@ -109,19 +101,16 @@ const sortObject = (obj: Record<string, any>) =>
 const getProps: p.RequiredRunner = (type: Type) => async (_, s) => {
   s.start(`Getting the Yamada UI ${type} props`)
 
-  const path =
-    type === "style" ? SOURCE_STYLE_PROPS_PATH : SOURCE_PSEUDO_PROPS_PATH
+  try {
+    const path =
+      type === "style" ? SOURCE_STYLE_PROPS_PATH : SOURCE_PSEUDO_PROPS_PATH
 
-  const { data } = await octokit.repos.getContent({
-    ...REPO_REQUEST_PARAMETERS,
-    path,
-  })
+    const data = await readFile(path, "utf-8")
 
-  if ("content" in data) {
     s.stop(`Got the Yamada UI ${type} props`)
 
-    return Buffer.from(data.content, "base64").toString("utf-8")
-  } else {
+    return data
+  } catch {
     throw new Error(`Failed get the ${type} props`)
   }
 }
@@ -170,7 +159,7 @@ const getData = (prop: string, value: string) => {
     if (isSkip) return
 
     if (properties) {
-      if (isArray(properties)) {
+      if (Array.isArray(properties)) {
         properties = properties.map((property) => toKebabCase(property))
       } else {
         properties = [toKebabCase(properties)]
@@ -225,7 +214,7 @@ const parseProps: p.RequiredRunner =
                 if (!isShorthand) {
                   const data = getData(prop, value)
 
-                  if (data) props[prop] = merge(props[prop], data)
+                  if (data) props[prop] = { ...props[prop], ...data }
                 } else {
                   if (isStringObject(value)) {
                     value = JSON.parse(value).properties
@@ -233,11 +222,10 @@ const parseProps: p.RequiredRunner =
                     value = value.split(".")[1]
                   }
 
-                  props[value] = merge(
-                    props[value] ?? {},
-                    { shorthands: [prop] },
-                    true,
-                  )
+                  props[value] = {
+                    ...(props[value] ?? {}),
+                    shorthands: [...(props[value].shorthands ?? []), prop],
+                  }
                 }
               } else {
                 value = value.replace(/^"|"$/g, "")

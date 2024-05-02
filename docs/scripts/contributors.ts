@@ -7,12 +7,13 @@ import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import { prettier } from "libs/prettier"
+import { PATH } from "constant/path"
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>
 >["data"][number]
 
-config()
+config({ path: PATH.ENV })
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
@@ -20,7 +21,6 @@ type Contributors =
   RestEndpointMethodTypes["repos"]["listContributors"]["response"]["data"]
 
 const DIST_PATH = path.join("constant", "contributors.ts")
-
 const REPO_REQUEST_PARAMETERS = {
   owner: "yamada-ui",
   repo: "yamada-ui",

@@ -1,7 +1,6 @@
 import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
-import { Octokit } from "@octokit/rest"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
@@ -9,12 +8,9 @@ import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { prettier } from "libs/prettier"
 import { toCamelCase, toKebabCase } from "utils/string"
+import { PATH } from "constant/path"
 
-config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
-
-const ref = process.argv[2] ?? "main"
+config({ path: PATH.ENV })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -29,7 +25,13 @@ type Options = {
   }[]
 }
 
-const SOURCE_PATH = path.join("packages", "theme", "src", "components")
+const SOURCE_PATH = path.join(
+  PATH.ROOT,
+  "packages",
+  "theme",
+  "src",
+  "components",
+)
 const DIST_PATH = path.join("contents", "components")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {
@@ -98,38 +100,27 @@ const LOCALE_DESC_MAP = {
     return content.join("\n")
   },
 }
-const REPO_REQUEST_PARAMETERS = {
-  owner: "yamada-ui",
-  repo: "yamada-ui",
-  path: SOURCE_PATH,
-  ref,
-}
 
 const getThemes: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the Yamada UI component themes`)
 
-  const { data } = await octokit.repos.getContent(REPO_REQUEST_PARAMETERS)
+  const dirents = await readdir(SOURCE_PATH, { withFileTypes: true })
 
   const themes: Record<string, string> = {}
 
-  if (Array.isArray(data)) {
-    await Promise.all(
-      data.map(async ({ name, path }) => {
-        const { data } = await octokit.repos.getContent({
-          ...REPO_REQUEST_PARAMETERS,
-          path,
-        })
+  await Promise.all(
+    dirents.map(async (dirent) => {
+      if (dirent.isDirectory()) return
 
-        if ("content" in data) {
-          const content = Buffer.from(data.content, "base64").toString("utf-8")
+      let { name, path } = dirent
 
-          name = name.replace(".ts", "")
+      const content = await readFile(`${path}/${name}`, "utf-8")
 
-          if (name !== "index") themes[name] = content
-        }
-      }),
-    )
-  }
+      name = name.replace(".ts", "")
+
+      if (name !== "index") themes[name] = content
+    }),
+  )
 
   s.stop(`Got the Yamada UI component themes`)
 

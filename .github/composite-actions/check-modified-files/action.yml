@@ -13,8 +13,12 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Fetch base branch
+      run: git fetch origin ${{ github.base_ref }}
+      shell: bash
+
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(git diff --name-only ${{ github.base_ref }} ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)' && echo true || echo false)" >> $GITHUB_OUTPUT
       shell: bash

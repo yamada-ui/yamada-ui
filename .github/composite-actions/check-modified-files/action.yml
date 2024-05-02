@@ -20,5 +20,10 @@ runs:
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)' && echo true || echo false)" >> $GITHUB_OUTPUT
+        changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)')
+        if [ -z "$changed" ]; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
       shell: bash

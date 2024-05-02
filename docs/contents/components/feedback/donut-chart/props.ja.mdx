@@ -1,0 +1,197 @@
+---
+title: DonutChart
+description: "`DonutChart`は、複数のデータを比較するためのドーナツチャートを描画するコンポーネントです。"
+package_name: "@yamada-ui/charts"
+label: New
+with_description: true
+tab: Props
+---
+
+## Props
+
+### DonutChartProps
+
+<PropsCard
+  id="donutchart-data"
+  name="data"
+  required
+  type='(Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; })[]'
+  description={"Chart data."}
+/>
+
+<PropsCard
+  id="donutchart-cellprops"
+  name="cellProps"
+  type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
+  description={"Props for the cell."}
+/>
+
+<PropsCard
+  id="donutchart-chartprops"
+  name="chartProps"
+  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
+  CategoricalChartProps"
+  description={"Props passed down to recharts `PieChart` component."}
+/>
+
+<PropsCard
+  id="donutchart-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="donutchart-containerprops"
+  name="containerProps"
+  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  description={"Props passed down to recharts `ResponsiveContainer` component."}
+/>
+
+<PropsCard
+  id="donutchart-endangle"
+  name="endAngle"
+  type="number"
+  description={"Controls angle at which chart ends."}
+  defaultValue={"-270"}
+/>
+
+<PropsCard
+  id="donutchart-innerradius"
+  name="innerRadius"
+  type="string | number"
+  description={
+    "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+  }
+  defaultValue={"'0%'"}
+/>
+
+<PropsCard
+  id="donutchart-legendprops"
+  name="legendProps"
+  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  description={"Props passed down to recharts 'Legend' component."}
+/>
+
+<PropsCard
+  id="donutchart-outerradius"
+  name="outerRadius"
+  type="string | number"
+  description={
+    "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+  }
+  defaultValue={"'80%'"}
+/>
+
+<PropsCard
+  id="donutchart-paddingangle"
+  name="paddingAngle"
+  type="number"
+  description={"Controls padding between segments."}
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="donutchart-pieprops"
+  name="pieProps"
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 494 more ... | "cornerRadius"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, "label" | ... 2 more ... | "l...'
+  description={"Props for the pie."}
+/>
+
+<PropsCard
+  id="donutchart-size"
+  name="size"
+  type='"sm" | "md" | "lg" | "full"'
+  description={"The size of the DonutChart."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="donutchart-startangle"
+  name="startAngle"
+  type="number"
+  description={"Controls angle at which chart starts."}
+  defaultValue={"90"}
+/>
+
+<PropsCard
+  id="donutchart-tooltipanimationduration"
+  name="tooltipAnimationDuration"
+  type="number"
+  description={
+    "Specifies the duration of animation, the unit of this option is ms."
+  }
+  defaultValue={"0"}
+/>
+
+<PropsCard
+  id="donutchart-tooltipdatasource"
+  name="tooltipDataSource"
+  type="TooltipDataSourceType"
+  description={"Determines which data is displayed in the tooltip."}
+  defaultValue={"'all'"}
+/>
+
+<PropsCard
+  id="donutchart-tooltipprops"
+  name="tooltipProps"
+  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  description={"Props passed down to recharts 'Tooltip' component."}
+/>
+
+<PropsCard
+  id="donutchart-unit"
+  name="unit"
+  type="string"
+  description={"Unit displayed next to each tick in y-axis."}
+/>
+
+<PropsCard
+  id="donutchart-valueformatter"
+  name="valueFormatter"
+  type="((value: number) => string) & ((value: number) => string)"
+  description={
+    "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
+  }
+/>
+
+<PropsCard
+  id="donutchart-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the DonutChart."}
+/>
+
+<PropsCard
+  id="donutchart-withlabellines"
+  name="withLabelLines"
+  type="boolean"
+  description={
+    "Determines whether segments labels should have lines that connect the segment with the label."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="donutchart-withlabels"
+  name="withLabels"
+  type="boolean"
+  description={"Determines whether each segment should have associated label."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="donutchart-withlegend"
+  name="withLegend"
+  type="boolean"
+  description={"If `true`, legend is visible."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="donutchart-withtooltip"
+  name="withTooltip"
+  type="boolean"
+  description={"If `true`, tooltip is visible."}
+  defaultValue={"true"}
+/>

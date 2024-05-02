@@ -1,5 +1,5 @@
 name: "Bug Report"
-description: "File a bug report"
+description: "Create a bug report."
 body:
   - type: markdown
     attributes:

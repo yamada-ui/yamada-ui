@@ -1,0 +1,173 @@
+---
+title: Avatar
+description: >-
+  `Avatar` is a component that displays a profile picture or an icon with
+  initials representing a user.
+package_name: "@yamada-ui/avatar"
+with_description: true
+tab: Props
+---
+
+## Props
+
+### AvatarProps
+
+<PropsCard
+  id="avatar-alt"
+  name="alt"
+  type="string"
+  description={"The `HTMLImageElement` property `alt`."}
+/>
+
+<PropsCard
+  id="avatar-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="avatar-crossorigin"
+  name="crossOrigin"
+  type='"" | "anonymous" | "use-credentials"'
+  description={
+    "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
+  }
+/>
+
+<PropsCard
+  id="avatar-format"
+  name="format"
+  type="(name: string) => string"
+  description={"Function to get the initials to display."}
+/>
+
+<PropsCard
+  id="avatar-icon"
+  name="icon"
+  type="ReactElement<any, string | JSXElementConstructor<any>>"
+  description={"The avatar icon to use."}
+/>
+
+<PropsCard
+  id="avatar-ignorefallback"
+  name="ignoreFallback"
+  type="boolean"
+  description={
+    "If `true`, opt out of the avatar's `fallback` logic and renders the `img` at all times."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="avatar-loading"
+  name="loading"
+  type='"eager" | "lazy"'
+  description={"Defines loading strategy."}
+/>
+
+<PropsCard
+  id="avatar-name"
+  name="name"
+  type="string"
+  description={
+    "The name of the person in the avatar.\n\n- If `src` has loaded, the name will be used as the `alt` attribute of the `img`\n- If `src` is not loaded, the name will be used to create the initials"
+  }
+/>
+
+<PropsCard
+  id="avatar-referrerpolicy"
+  name="referrerPolicy"
+  type="HTMLAttributeReferrerPolicy"
+  description={"Defining which referrer is sent when fetching the resource."}
+/>
+
+<PropsCard
+  id="avatar-size"
+  name="size"
+  type='"2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl"'
+  description={"The size of the Avatar."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="avatar-src"
+  name="src"
+  type="string"
+  description={"The image url of the avatar."}
+/>
+
+<PropsCard
+  id="avatar-srcset"
+  name="srcSet"
+  type="string"
+  description={"List of sources to use for different screen resolutions."}
+/>
+
+<PropsCard
+  id="avatar-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the Avatar."}
+/>
+
+### AvatarGroupProps
+
+<PropsCard
+  id="avatargroup-max"
+  name="max"
+  type="number"
+  description={"The maximum number of visible avatars."}
+/>
+
+### AvatarBadgeProps
+
+<PropsCard
+  id="avatarbadge-ping"
+  name="ping"
+  type="boolean"
+  description={
+    "If `true`, make an element scale and fade like a radar ping or ripple of water."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="avatarbadge-pingcolor"
+  name="pingColor"
+  type='UIValue<"link" | "border" | BackgroundColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | ... 319 more ... | "secondary.950">'
+  description={"It is used for the color of the ping animation."}
+  defaultValue={'\'["blackAlpha.400", "whiteAlpha.500"]\''}
+/>
+
+<PropsCard
+  id="avatarbadge-pingcount"
+  name="pingCount"
+  type="AnimationIterationCount"
+  description={"It is used for the count of the ping animation."}
+  defaultValue={"infinite"}
+/>
+
+<PropsCard
+  id="avatarbadge-pingduration"
+  name="pingDuration"
+  type="AnimationDirection"
+  description={"It is used for the duration of the ping animation."}
+  defaultValue={"1.4s"}
+/>
+
+<PropsCard
+  id="avatarbadge-pingscale"
+  name="pingScale"
+  type="number"
+  description={"It is used for the scale of the ping animation."}
+  defaultValue={"1.8"}
+/>
+
+<PropsCard
+  id="avatarbadge-placement"
+  name="placement"
+  type='"top-start" | "top-end" | "bottom-start" | "bottom-end"'
+  description={"The placement of the badge."}
+  defaultValue={"'bottom-end'"}
+/>

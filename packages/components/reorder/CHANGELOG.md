@@ -1,5 +1,24 @@
 # @yamada-ui/reorder
 
+## 1.0.26-dev-20240502093643
+
+### Patch Changes
+
+- Updated dependencies [[`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/core@1.6.7-dev-20240502093643
+  - @yamada-ui/icon@1.0.25-dev-20240502093643
+  - @yamada-ui/motion@1.0.26-dev-20240502093643
+
+## 1.0.25
+
+### Patch Changes
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/icon@1.0.24
+  - @yamada-ui/motion@1.0.25
+
 ## 1.0.24
 
 ### Patch Changes

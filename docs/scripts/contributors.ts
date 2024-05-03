@@ -7,13 +7,12 @@ import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import { prettier } from "libs/prettier"
-import { PATH } from "constant/path"
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>
 >["data"][number]
 
-config({ path: PATH.ENV })
+config({ path: CONSTANT.PATH.ENV })
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 

@@ -8,9 +8,8 @@ import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { prettier } from "libs/prettier"
 import { toCamelCase, toKebabCase } from "utils/string"
-import { PATH } from "constant/path"
 
-config({ path: PATH.ENV })
+config({ path: CONSTANT.PATH.ENV })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -26,7 +25,7 @@ type Options = {
 }
 
 const SOURCE_PATH = path.join(
-  PATH.ROOT,
+  CONSTANT.PATH.ROOT,
   "packages",
   "theme",
   "src",

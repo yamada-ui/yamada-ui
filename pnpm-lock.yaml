@@ -415,6 +415,9 @@ importers:
       eslint-config-next:
         specifier: ^14.2.3
         version: 14.2.3(eslint@8.57.0)(typescript@5.4.5)
+      find-packages:
+        specifier: ^10.0.4
+        version: 10.0.4
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
@@ -6629,7 +6632,6 @@ packages:
   /@gwhitney/detect-indent@7.0.1:
     resolution: {integrity: sha512-7bQW+gkKa2kKZPeJf6+c6gFK9ARxQfn+FKy9ScTBppyKRWH2KzsmweXUoklqeEiHiNVWaeP5csIdsNq6w7QhzA==, tarball: https://registry.npmjs.org/@gwhitney/detect-indent/-/detect-indent-7.0.1.tgz}
     engines: {node: '>=12.20'}
-    dev: false
 
   /@hapi/hoek@9.3.0:
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==, tarball: https://registry.npmjs.org/@hapi/hoek/-/hoek-9.3.0.tgz}
@@ -7808,21 +7810,18 @@ packages:
   /@pnpm/constants@6.1.0:
     resolution: {integrity: sha512-L6AiU3OXv9kjKGTJN9j8n1TeJGDcLX9atQlZvAkthlvbXjvKc5SKNWESc/eXhr5nEfuMWhQhiKHDJCpYejmeCQ==, tarball: https://registry.npmjs.org/@pnpm/constants/-/constants-6.1.0.tgz}
     engines: {node: '>=14.19'}
-    dev: false
 
   /@pnpm/error@4.0.0:
     resolution: {integrity: sha512-NI4DFCMF6xb1SA0bZiiV5KrMCaJM2QmPJFC6p78FXujn7FpiRSWhT9r032wpuQumsl7DEmN4s3wl/P8TA+bL8w==, tarball: https://registry.npmjs.org/@pnpm/error/-/error-4.0.0.tgz}
     engines: {node: '>=14.6'}
     dependencies:
       '@pnpm/constants': 6.1.0
-    dev: false
 
   /@pnpm/graceful-fs@2.0.0:
     resolution: {integrity: sha512-ogUZCGf0/UILZt6d8PsO4gA4pXh7f0BumXeFkcCe4AQ65PXPKfAkHC0C30Lheh2EgFOpLZm3twDP1Eiww18gew==, tarball: https://registry.npmjs.org/@pnpm/graceful-fs/-/graceful-fs-2.0.0.tgz}
     engines: {node: '>=14.19'}
     dependencies:
       graceful-fs: 4.2.11
-    dev: false
 
   /@pnpm/network.ca-file@1.0.2:
     resolution: {integrity: sha512-YcPQ8a0jwYU9bTdJDpXjMi7Brhkr1mXsXrUJvjqM2mQDgkRiz8jFaQGOdaLxgjtUfQgZhKy/O3cG/YwmgKaxLA==, tarball: https://registry.npmjs.org/@pnpm/network.ca-file/-/network.ca-file-1.0.2.tgz}
@@ -7857,24 +7856,20 @@ packages:
       read-yaml-file: 2.1.0
       sort-keys: 4.2.0
       strip-bom: 4.0.0
-    dev: false
 
   /@pnpm/text.comments-parser@1.0.0:
     resolution: {integrity: sha512-iG0qrFcObze3uK+HligvzaTocZKukqqIj1dC3NOH58NeMACUW1NUitSKBgeWuNIE4LJT3SPxnyLEBARMMcqVKA==, tarball: https://registry.npmjs.org/@pnpm/text.comments-parser/-/text.comments-parser-1.0.0.tgz}
     engines: {node: '>=14.6'}
     dependencies:
       strip-comments-strings: 1.2.0
-    dev: false
 
   /@pnpm/types@8.9.0:
     resolution: {integrity: sha512-3MYHYm8epnciApn6w5Fzx6sepawmsNU7l6lvIq+ER22/DPSrr83YMhU/EQWnf4lORn2YyiXFj0FJSyJzEtIGmw==, tarball: https://registry.npmjs.org/@pnpm/types/-/types-8.9.0.tgz}
     engines: {node: '>=14.6'}
-    dev: false
 
   /@pnpm/util.lex-comparator@1.0.0:
     resolution: {integrity: sha512-3aBQPHntVgk5AweBWZn+1I/fqZ9krK/w01197aYVkAJQGftb+BVWgEepxY5GChjSW12j52XX+CmfynYZ/p0DFQ==, tarball: https://registry.npmjs.org/@pnpm/util.lex-comparator/-/util.lex-comparator-1.0.0.tgz}
     engines: {node: '>=12.22.0'}
-    dev: false
 
   /@pnpm/write-project-manifest@4.1.1:
     resolution: {integrity: sha512-nRqvPYO8xUVdgy/KhJuaCrWlVT/4uZr97Mpbuizsa6CmvtCQf3NuYnVvOOrpYiKUJcZYtEvm84OooJ8+lJytMQ==, tarball: https://registry.npmjs.org/@pnpm/write-project-manifest/-/write-project-manifest-4.1.1.tgz}
@@ -7885,7 +7880,6 @@ packages:
       json5: 2.2.3
       write-file-atomic: 5.0.1
       write-yaml-file: 4.2.0
-    dev: false
 
   /@polka/url@1.0.0-next.25:
     resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==, tarball: https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.25.tgz}
@@ -10279,7 +10273,7 @@ packages:
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.5)
       '@vanilla-extract/babel-plugin-debug-ids': 1.0.5
       '@vanilla-extract/css': 1.15.1
-      esbuild: 0.17.6
+      esbuild: 0.19.12
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -14637,7 +14631,6 @@ packages:
       '@pnpm/util.lex-comparator': 1.0.0
       fast-glob: 3.3.2
       p-filter: 2.1.0
-    dev: false
 
   /find-pkg@0.1.2:
     resolution: {integrity: sha512-0rnQWcFwZr7eO0513HahrWafsc3CTFioEB7DRiEYCUM/70QXSY8f3mCST17HXLcPvEhzH/Ty/Bxd72ZZsr/yvw==, tarball: https://registry.npmjs.org/find-pkg/-/find-pkg-0.1.2.tgz}
@@ -16383,7 +16376,6 @@ packages:
   /is-plain-obj@2.1.0:
     resolution: {integrity: sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==, tarball: https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-2.1.0.tgz}
     engines: {node: '>=8'}
-    dev: false
 
   /is-plain-obj@3.0.0:
     resolution: {integrity: sha512-gwsOE28k+23GP1B6vFl1oVh/WOzmawBrKwo5Ev6wMKzPkaXaCDIQKzLnvsA42DRlbVTWorkgTKIviAKCWkfUwA==, tarball: https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-3.0.0.tgz}
@@ -16533,7 +16525,6 @@ packages:
   /is-windows@1.0.2:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==, tarball: https://registry.npmjs.org/is-windows/-/is-windows-1.0.2.tgz}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /is-wsl@2.2.0:
     resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==, tarball: https://registry.npmjs.org/is-wsl/-/is-wsl-2.2.0.tgz}
@@ -20356,7 +20347,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       p-map: 2.1.0
-    dev: false
 
   /p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==, tarball: https://registry.npmjs.org/p-limit/-/p-limit-2.3.0.tgz}
@@ -20412,7 +20402,6 @@ packages:
   /p-map@2.1.0:
     resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==, tarball: https://registry.npmjs.org/p-map/-/p-map-2.1.0.tgz}
     engines: {node: '>=6'}
-    dev: false
 
   /p-map@3.0.0:
     resolution: {integrity: sha512-d3qXVTF/s+W+CdJ5A29wywV2n8CQQYahlgz2bFiA+4eVNJbHJodPZ+/gXwPGh0bOqA+j8S+6+ckmvLGPk1QpxQ==, tarball: https://registry.npmjs.org/p-map/-/p-map-3.0.0.tgz}
@@ -22289,7 +22278,6 @@ packages:
     dependencies:
       js-yaml: 4.1.0
       strip-bom: 4.0.0
-    dev: false
 
   /readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==, tarball: https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.8.tgz}
@@ -23316,7 +23304,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       is-plain-obj: 2.1.0
-    dev: false
 
   /source-list-map@2.0.1:
     resolution: {integrity: sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==, tarball: https://registry.npmjs.org/source-list-map/-/source-list-map-2.0.1.tgz}
@@ -23716,7 +23703,6 @@ packages:
 
   /strip-comments-strings@1.2.0:
     resolution: {integrity: sha512-zwF4bmnyEjZwRhaak9jUWNxc0DoeKBJ7lwSN/LEc8dQXZcUFG6auaaTQJokQWXopLdM3iTx01nQT8E4aL29DAQ==, tarball: https://registry.npmjs.org/strip-comments-strings/-/strip-comments-strings-1.2.0.tgz}
-    dev: false
 
   /strip-comments@2.0.1:
     resolution: {integrity: sha512-ZprKx+bBLXv067WTCALv8SSz5l2+XhpYCsVtSqlMnkAXMWDq+/ekVbl1ghqP9rUHTzv6sm/DwCOiYutU/yp1fw==, tarball: https://registry.npmjs.org/strip-comments/-/strip-comments-2.0.1.tgz}
@@ -25833,7 +25819,6 @@ packages:
     dependencies:
       imurmurhash: 0.1.4
       signal-exit: 4.1.0
-    dev: false
 
   /write-yaml-file@4.2.0:
     resolution: {integrity: sha512-LwyucHy0uhWqbrOkh9cBluZBeNVxzHjDaE9mwepZG3n3ZlbM4v3ndrFw51zW/NXYFFqP+QWZ72ihtLWTh05e4Q==, tarball: https://registry.npmjs.org/write-yaml-file/-/write-yaml-file-4.2.0.tgz}
@@ -25841,7 +25826,6 @@ packages:
     dependencies:
       js-yaml: 4.1.0
       write-file-atomic: 3.0.3
-    dev: false
 
   /ws@7.5.9:
     resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==, tarball: https://registry.npmjs.org/ws/-/ws-7.5.9.tgz}

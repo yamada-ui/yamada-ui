@@ -13,8 +13,7 @@ import {
   filterUndefined,
 } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import type { ColorMode } from "./css"
-import { css } from "./css"
+import type { CSSObjectOrFunc, CSSUIObject, ColorMode } from "./css"
 import type { ThemeToken } from "./theme"
 import type { StyledTheme } from "./theme.types"
 
@@ -24,7 +23,14 @@ type CSSProperties = Union<
   | keyof CSS.ObsoleteProperties
 >
 
-export type Transform = (value: any, theme: StyledTheme, css?: Dict) => any
+export type Transform = (
+  value: any,
+  theme: StyledTheme,
+  css: (
+    cssObject: CSSObjectOrFunc | CSSUIObject,
+  ) => (theme: StyledTheme) => Dict,
+  prev?: Dict,
+) => any
 
 export type ConfigProps = {
   static?: CSSObject
@@ -174,7 +180,7 @@ const transformAnimationValue = (value: Dict) =>
     return prev
   }, {} as Dict)
 
-export const generateAnimation: Transform = (value, theme) => {
+export const generateAnimation: Transform = (value, theme, css) => {
   if (value == null || globalValues.has(value)) return value
 
   if (isObject(value)) {
@@ -365,18 +371,18 @@ export const transforms = {
       transform?: Transform,
       compose?: Transform,
     ): Transform =>
-    (value, theme) => {
+    (value, theme, css) => {
       value = tokenToCSSVar(token, value)(theme)
 
-      let result = transform?.(value, theme) ?? value
+      let result = transform?.(value, theme, css) ?? value
 
-      if (compose) result = compose(result, theme)
+      if (compose) result = compose(result, theme, css)
 
       return result
     },
   styles:
     (prefix?: string): Transform =>
-    (value, theme, css = {}) => {
+    (value, theme, _css, prev = {}) => {
       const resolvedCSS: Dict = {}
 
       const style = get<Dict>(
@@ -386,7 +392,7 @@ export const transforms = {
       )
 
       for (const prop in style) {
-        const done = prop in css && css[prop] != null
+        const done = prop in prev && prev[prop] != null
 
         if (!done) resolvedCSS[prop] = style[prop]
       }

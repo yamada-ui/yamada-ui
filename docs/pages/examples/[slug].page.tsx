@@ -59,18 +59,22 @@ export const getStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
   const {
-    props: { documentTree },
+    props: { currentVersion, documentTree },
   } = await getStaticCommonProps({ locale })
   const slug = params?.slug as Slug
 
-  const props = { documentTree, slug }
+  const props = { currentVersion, documentTree, slug }
 
   return { props }
 }
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
+const Page: NextPage<PageProps> = ({
+  currentVersion,
+  slug: currentSlug,
+  documentTree,
+}) => {
   const { t, tc } = useI18n()
 
   const examples = useMemo(() => {
@@ -105,7 +109,7 @@ const Page: NextPage<PageProps> = ({ slug: currentSlug, documentTree }) => {
   }, [currentSlug])
 
   return (
-    <PageProvider {...{ documentTree }}>
+    <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
         <SEO
           title={t(`examples.${currentSlug}.title`)}

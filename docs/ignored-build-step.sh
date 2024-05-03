@@ -10,6 +10,8 @@ else
 
   git diff --name-only FETCH_HEAD HEAD
 
+  git diff FETCH_HEAD HEAD --quiet -- ./docs && echo true || echo false
+
   git diff FETCH_HEAD HEAD --quiet -- ./docs
 
   if [ $? -eq 0 ]; then

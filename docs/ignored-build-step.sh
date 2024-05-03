@@ -3,8 +3,8 @@
 echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
 
 if [ "$VERCEL_GIT_COMMIT_REF" == "main" ]; then
-  echo "run"
-  exit 1;
+  echo "stop"
+  exit 0;
 else
   git fetch https://github.com/yamada-ui/yamada-ui.git main
 

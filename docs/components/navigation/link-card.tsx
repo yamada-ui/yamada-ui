@@ -18,7 +18,7 @@ import type { ReactNode } from "react"
 export type LinkCardProps = CardProps & {
   href: string
   title: ReactNode
-  label?: StringLiteral
+  label?: StringLiteral | null
   description: ReactNode
   with_description?: boolean
 }

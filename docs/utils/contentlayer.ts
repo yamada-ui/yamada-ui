@@ -89,8 +89,6 @@ export const getDocumentTree =
           data,
         }) => {
           title = menu ?? title
-          label ??= undefined
-          menu_icon ??= undefined
 
           is_expanded =
             is_expanded ||
@@ -101,10 +99,10 @@ export const getDocumentTree =
           const children = getDocumentTree(documents, data.paths)(paths)
 
           return {
-            menu_icon,
+            menu_icon: menu_icon ?? null,
             title,
             slug,
-            label,
+            label: label ?? null,
             description,
             is_expanded,
             children,

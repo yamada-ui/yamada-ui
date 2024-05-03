@@ -12,8 +12,10 @@ else
   git diff FETCH_HEAD HEAD --quiet -- ./docs
 
   if [ $? -eq 0 ]; then
+    echo "stop"
     exit 0
   else
+    echo "run"
     exit 1;
   fi
 fi

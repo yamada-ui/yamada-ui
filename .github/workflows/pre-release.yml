@@ -26,13 +26,13 @@ jobs:
         run: |
           pnpm gen:docs
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs' && git push)
+          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs [skip ci]' && git push)
 
       - name: Update changelog
         run: |
           pnpm changelog:latest
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
+          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog [skip ci]' && git push)
 
       - name: Update docs
         run: |
@@ -43,6 +43,6 @@ jobs:
           pnpm docs:contributors
           pnpm docs:search
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changesets): version packages' && git push)
+          git diff --staged --exit-code || (git commit -m 'ci(changesets): version packages [skip ci]' && git push)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,48 @@
+name: Pre-release
+
+on:
+  push:
+    branches:
+      - changeset-release/main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Update component docs
+        run: |
+          pnpm gen:docs
+          git add .
+          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs' && git push)
+
+      - name: Update changelog
+        run: |
+          pnpm changelog:latest
+          git add .
+          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
+
+      - name: Update docs
+        run: |
+          pnpm docs:changelog
+          pnpm docs:css
+          pnpm docs:theme
+          pnpm docs:props
+          pnpm docs:contributors
+          pnpm docs:search
+          git add .
+          git diff --staged --exit-code || (git commit -m 'ci(changesets): version packages' && git push)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

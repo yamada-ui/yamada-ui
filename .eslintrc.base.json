@@ -1,9 +1,5 @@
 {
   "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 10,
-    "project": "./tsconfig.json"
-  },
   "extends": [
     "plugin:import/typescript",
     "plugin:react/recommended",
@@ -45,12 +41,5 @@
     "@typescript-eslint/consistent-type-imports": "error",
     "unused-imports/no-unused-imports": "error"
   },
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parserOptions": {
-        "project": ["tsconfig.json"]
-      }
-    }
-  ]
+  "overrides": []
 }

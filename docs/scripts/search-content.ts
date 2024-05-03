@@ -7,6 +7,7 @@ import matter from "gray-matter"
 import { prettier } from "libs/prettier"
 import toc from "markdown-toc"
 import { otherLocales } from "../utils/i18n"
+import { getResolvedPath } from "utils/path"
 
 type Content = {
   title: string
@@ -46,7 +47,7 @@ const getRecursivePaths = async (path: string): Promise<string[]> => {
 }
 
 const getPaths: p.RequiredRunner =
-  (path: string = "contents") =>
+  (path: string = getResolvedPath("contents")) =>
   async (_, s): Promise<string[]> => {
     s.start(`Getting the Yamada UI document paths`)
 
@@ -92,10 +93,11 @@ const getReducePaths: p.RequiredRunner =
   }
 
 const getSlug = (path: string) => {
-  const reg = new RegExp(`(/index)?(.(${otherLocales.join("|")}))?.mdx$`)
-
-  path = path.replace(/^contents/, "")
-  path = path.replace(reg, "")
+  path = path.replace(new RegExp(`^${getResolvedPath("contents")}`), "")
+  path = path.replace(
+    new RegExp(`(/index)?(.(${otherLocales.join("|")}))?.mdx$`),
+    "",
+  )
 
   return path
 }

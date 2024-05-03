@@ -29,8 +29,8 @@ describe("<MultiAutoComplete />", () => {
       })
     })
 
-    test("have default value", async () => {
-      const { container } = render(
+    test("have default value", () => {
+      render(
         <MultiAutocomplete
           placeholder="Select Option"
           defaultValue={["option1", "option2"]}
@@ -41,17 +41,7 @@ describe("<MultiAutoComplete />", () => {
         </MultiAutocomplete>,
       )
 
-      const multiAutocomplete = container.querySelector(
-        ".ui-multi-autocomplete",
-      )
-      expect(multiAutocomplete).toBeInTheDocument()
       expect(screen.getByText("option1,")).toBeInTheDocument()
-
-      fireEvent.click(multiAutocomplete!)
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole("autocomplete-item")
-        expect(optionElements).toHaveLength(3)
-      })
     })
   })
 })

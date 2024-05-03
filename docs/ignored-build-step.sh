@@ -13,7 +13,7 @@ else
 
   if [ $? -eq 0 ]; then
     echo "stop"
-    exit 0
+    exit 0;
   else
     echo "run"
     exit 1;

@@ -21,9 +21,7 @@ runs:
       id: check-modified
       run: |
         changed=$(\
-          git diff --name-only FETCH_HEAD ${{ github.sha }} | \
-          grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)'\
-        )
+          git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -E '^(packages/|scripts/setup-test.ts|package.json|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|turbo.json|vitest.config.mts)')
         if [ -z "$changed" ]; then
           echo "changed=false" >> $GITHUB_OUTPUT
         else

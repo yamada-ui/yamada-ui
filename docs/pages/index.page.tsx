@@ -22,11 +22,11 @@ export const getStaticProps = getStaticCommonProps
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const Page: NextPage<PageProps> = ({ documentTree }) => {
+const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
   const { t, tc } = useI18n()
 
   return (
-    <PageProvider {...{ documentTree }}>
+    <PageProvider {...{ currentVersion, documentTree }}>
       <TopLayout>
         <SEO
           title={t("home.title")}

@@ -13,19 +13,34 @@ import {
   getDocumentPaths,
 } from "./contentlayer"
 import { toKebabCase } from "./string"
+import { findPackages } from "find-packages"
+import path from "path"
+import { CONSTANT } from "constant"
+
+const getVersion = async () => {
+  const packages = await findPackages(
+    path.resolve(CONSTANT.PATH.ROOT, "packages", "react"),
+  )
+
+  const { version } = packages[0].manifest
+
+  return version ? `v${version}` : null
+}
 
 export const getStaticCommonProps = async ({
   locale,
 }: GetStaticPropsContext) => {
+  const currentVersion = await getVersion()
   const documents = getDocuments(locale)
   const documentTree = getDocumentTree(omitDocumentTabs(documents))()
 
-  return { props: { documents, documentTree } }
+  return { props: { currentVersion, documents, documentTree } }
 }
 
 export const getStaticDocumentProps =
   (documentTypeName: DocumentTypeNames) =>
   async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
+    const currentVersion = await getVersion()
     const paths = [
       toKebabCase(documentTypeName),
       ...toArray(params?.slug ?? []),
@@ -55,6 +70,7 @@ export const getStaticDocumentProps =
 
     return {
       props: {
+        currentVersion,
         ...document,
         documentTree,
         documentBreadcrumbs,

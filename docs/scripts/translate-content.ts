@@ -7,6 +7,7 @@ import { openai } from "libs/openai"
 import { prettier } from "libs/prettier"
 import type { ChatCompletionMessageParam } from "openai/resources"
 import { wait } from "utils/async"
+import { getResolvedPath } from "utils/path"
 
 const LOCALE_MAP = {
   ja: "Japanese",
@@ -16,15 +17,15 @@ const LOCALE_MAP = {
 type Option = { out?: string; locale?: keyof typeof LOCALE_MAP; logs?: boolean }
 
 const getPaths = async (
-  path: string,
+  targetPath: string,
   lang: keyof typeof LOCALE_MAP,
 ): Promise<string[]> => {
   try {
-    const dirents = await readdir(path, { withFileTypes: true })
+    const dirents = await readdir(targetPath, { withFileTypes: true })
 
     const paths = await Promise.all(
       dirents.flatMap(async (dirent) => {
-        const resolvedPath = `${path}/${dirent.name}`
+        const resolvedPath = `${targetPath}/${dirent.name}`
 
         if (dirent.isDirectory()) {
           return await getPaths(resolvedPath, lang)
@@ -42,9 +43,9 @@ const getPaths = async (
 
     return resolvedPaths
   } catch {
-    const isExist = existsSync(path)
+    const isExist = existsSync(targetPath)
 
-    return isExist ? [path] : []
+    return isExist ? [targetPath] : []
   }
 }
 
@@ -148,6 +149,8 @@ program
         const start = process.hrtime.bigint()
 
         s.start("Getting the contents")
+
+        targetPath = getResolvedPath(targetPath)
 
         const resolvedPaths = await getPaths(targetPath, locale)
 

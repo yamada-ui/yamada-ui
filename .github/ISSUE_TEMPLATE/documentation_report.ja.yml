@@ -1,0 +1,38 @@
+name: "Documentation Report (日本語)"
+description: "ドキュメントサイトの間違いや不適切な表現などの報告を作成します。"
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        問題を作成していただきありがとうございます！ 😎
+
+        提出する前に、オープン/クローズされた問題を検索してください。以前に、誰かが同じことを尋ねているかもしれません！ 😎
+
+          - [Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+          - [Closed Issues](https://github.com/yamada-ui/yamada-ui/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+
+        山田たちは、全てボランティアです。このテンプレートを正確に記入することで、山田たちの手助けになります。💖
+  - type: textarea
+    id: quote
+    attributes:
+      label: "エラーまたは問題の正確な引用"
+      description: "エラーまたは問題の簡単な説明。"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "ドキュメントのページはすでに存在しますか？リンクを貼ってください。"
+      description: "例: https://yamada-ui.com/getting-started/installation"
+  - type: dropdown
+    id: participate
+    attributes:
+      label: この問題の修正に参加し、修正を含むプルリクエストを作成しますか？
+      options:
+        - "はい"
+        - "いいえ"
+  - type: markdown
+    attributes:
+      value: |
+        このイシューは、アサインされてから2週間経過すると自動的にアサインがクリアされます。
+        アサインがクリアされると、他の方が作業する可能性があります。

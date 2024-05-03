@@ -36,7 +36,11 @@ const manifest = {
   async write(data: PullRequestData[]) {
     data = data.sort((a, b) => b.id - a.id)
 
-    return writeFile(this.path, JSON.stringify(data, null, 2))
+    const body = await prettier(JSON.stringify(data, null, 2), {
+      parser: "json",
+    })
+
+    return writeFile(this.path, body)
   },
 
   async read(): Promise<PullRequestData[]> {

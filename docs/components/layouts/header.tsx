@@ -56,18 +56,17 @@ import {
 import { NextLinkIconButton, Tree } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
+import { usePage } from "contexts/page-context"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import packageJSON from "package.json"
 import type { FC } from "react"
 import { memo, useEffect, useRef, useState } from "react"
-
-const version = `v${packageJSON.dependencies["@yamada-ui/react"].split("-")[0]}`
 
 export type HeaderProps = CenterProps & {}
 
 export const Header = memo(
   forwardRef<HeaderProps, "div">(({ ...rest }, ref) => {
+    const { currentVersion } = usePage()
     const headerRef = useRef<HTMLHeadingElement>()
     const { scrollY } = useScroll()
     const [y, setY] = useState<number>(0)
@@ -132,7 +131,7 @@ export const Header = memo(
               letterSpacing="1px"
               minW="auto"
             >
-              {version}
+              {currentVersion}
             </Tag>
 
             <Spacer />

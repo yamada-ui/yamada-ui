@@ -1,0 +1,32 @@
+---
+title: Kbd
+description: "`Kbd`は、キーボード入力を表すコンポーネントです。"
+package_name: "@yamada-ui/kbd"
+with_description: true
+tab: テーマ
+---
+
+## テーマ
+
+`Kbd`は、[単一パーツのコンポーネント](/styled-system/theming/component-styles#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const Kbd: ComponentStyle = {
+  baseStyle: {
+    fontFamily: "mono",
+    bg: ["blackAlpha.50", "whiteAlpha.50"],
+    rounded: "md",
+    borderWidth: "1px",
+    fontSize: "0.8em",
+    fontWeight: "bold",
+    lineHeight: "shorter",
+    py: "0.2em",
+    px: "0.4em",
+    whiteSpace: "nowrap",
+  },
+}
+```

@@ -24,7 +24,6 @@ import {
   getValidChildren,
   handlerAll,
   mergeRefs,
-  omitObject,
   useCallbackRef,
   useIsMounted,
 } from "@yamada-ui/utils"
@@ -135,13 +134,14 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       items = [],
       value,
       defaultValue,
+      onChange: onChangeProp,
       ...rest
     } = omitThemeProps(mergedProps)
 
     id ??= useId()
     name ??= `segmented-control-${useId()}`
 
-    rest.onChange = useCallbackRef(rest.onChange)
+    const onChangeRef = useCallbackRef(onChangeProp)
 
     const descendants = useDescendants()
 
@@ -152,7 +152,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     const [selectedValue, setSelectedValue] = useControllableState({
       value,
       defaultValue,
-      onChange: rest.onChange,
+      onChange: onChangeRef,
     })
 
     const onChange = useCallback(
@@ -187,12 +187,12 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
     const getContainerProps: UIPropGetter = useCallback(
       (props = {}, ref = null) => ({
-        ...omitObject(rest, ["onChange", "aria-readonly"]),
+        ...rest,
         ...props,
         ref: mergeRefs(containerRef, ref),
         id,
         "aria-disabled": ariaAttr(isDisabled),
-        "aria-readonly": ariaAttr(isReadOnly),
+        "data-readonly": dataAttr(isReadOnly),
         onBlur: handlerAll(props.onBlur, onBlur),
       }),
       [id, isDisabled, isReadOnly, onBlur, rest],
@@ -202,13 +202,21 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       "input",
       { isDisabled?: boolean; isReadOnly?: boolean; index: number }
     > = useCallback(
-      ({ index, ...props }, ref = null) => {
-        const disabled = props.disabled ?? props.isDisabled ?? isDisabled
-        const readOnly = props.readOnly ?? props.isReadOnly ?? isReadOnly
+      (
+        {
+          index,
+          isDisabled: isDisabledProp,
+          isReadOnly: isReadOnlyProp,
+          ...props
+        },
+        ref = null,
+      ) => {
+        const disabled = props.disabled ?? isDisabledProp ?? isDisabled
+        const readOnly = props.readOnly ?? isReadOnlyProp ?? isReadOnly
         const checked = props.value === selectedValue
 
         return {
-          ...omitObject(props, ["isDisabled", "isReadOnly", "aria-readonly"]),
+          ...props,
           ref,
           id: `${id}-${index}`,
           type: "radio",
@@ -217,7 +225,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
           readOnly,
           checked,
           "aria-disabled": ariaAttr(disabled),
-          "aria-readonly": ariaAttr(readOnly),
+          "data-readonly": dataAttr(readOnly),
           "data-checked": dataAttr(checked),
           "data-focus": dataAttr(index === focusedIndex),
           style: {
@@ -270,7 +278,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
           ...props,
           ref,
           "aria-disabled": ariaAttr(disabled),
-          "aria-readonly": ariaAttr(readOnly),
+          "data-readonly": dataAttr(readOnly),
           "data-checked": dataAttr(checked),
           "data-focus": dataAttr(focused),
           "data-focus-visible": dataAttr(focused && isFocusVisible),
@@ -411,7 +419,6 @@ export const SegmentedControlButton = forwardRef<
     const props = {
       index,
       value,
-      onChange,
       disabled,
       readOnly,
       isDisabled,
@@ -432,12 +439,14 @@ export const SegmentedControlButton = forwardRef<
 
     return (
       <ui.label
-        {...getLabelProps(omitObject(props, ["onChange"]))}
+        {...getLabelProps(props)}
         className={cx("ui-segmented-control__button", className)}
         __css={css}
         {...rest}
       >
-        <ui.input {...getInputProps(props, mergeRefs(register, ref))} />
+        <ui.input
+          {...getInputProps({ onChange, ...props }, mergeRefs(register, ref))}
+        />
         {isSelected && isMounted ? (
           <SegmentedControlCursor {...motionProps} />
         ) : null}

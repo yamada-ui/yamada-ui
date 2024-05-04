@@ -20,9 +20,8 @@ import {
   isVariableStatement,
 } from "typescript"
 import { toKebabCase } from "utils/string"
-import { PATH } from "constant/path"
 
-config({ path: PATH.ENV })
+config({ path: CONSTANT.PATH.ENV })
 
 type Input = string | Buffer
 type Data = GrayMatterFile<Input>["data"]
@@ -42,14 +41,14 @@ type Props = Record<
 type JSDocs = Record<string, { urls?: string[]; deprecated?: boolean }>
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
-  PATH.ROOT,
+  CONSTANT.PATH.ROOT,
   "packages",
   "core",
   "src",
   "styles.ts",
 )
 const SOURCE_PSEUDO_PROPS_PATH = path.join(
-  PATH.ROOT,
+  CONSTANT.PATH.ROOT,
   "packages",
   "core",
   "src",

@@ -1,5 +1,5 @@
 import type { AnimationStyle, Theme } from "@yamada-ui/core"
-import { useTheme, generateAnimation } from "@yamada-ui/core"
+import { useTheme, generateAnimation, css } from "@yamada-ui/core"
 import { useBoolean } from "@yamada-ui/use-boolean"
 import { useEventListener } from "@yamada-ui/use-event-listener"
 import {
@@ -24,9 +24,11 @@ export const useAnimation = (styles: Styles): string => {
   const { theme } = useTheme()
 
   if (isArray(styles)) {
-    return styles.map((style) => generateAnimation(style, theme)).join(", ")
+    return styles
+      .map((style) => generateAnimation(style, theme, css))
+      .join(", ")
   } else {
-    return generateAnimation(styles, theme)
+    return generateAnimation(styles, theme, css)
   }
 }
 
@@ -67,10 +69,12 @@ export const useDynamicAnimation = <
       if (isArray(styles)) {
         cache.current.set(
           key,
-          styles.map((style) => generateAnimation(style, theme)).join(", "),
+          styles
+            .map((style) => generateAnimation(style, theme, css))
+            .join(", "),
         )
       } else {
-        cache.current.set(key, generateAnimation(styles, theme))
+        cache.current.set(key, generateAnimation(styles, theme, css))
       }
     }
 

@@ -39,6 +39,7 @@
     "gen:hook": "plop hook && pnpm install",
     "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
     "changelog": "tsx scripts/changelog",
+    "changelog:ci": "tsx scripts/changelog --current",
     "changelog:latest": "tsx scripts/changelog --latest",
     "version:dev": "changeset version --snapshot dev",
     "version:next": "changeset version --snapshot next",

@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "yamada-docs",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -78,6 +78,7 @@
     "remark-slug": "^7.0.1",
     "typescript": "^5.4.5",
     "unified": "^10.1.2",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "find-packages": "^10.0.4"
   }
 }

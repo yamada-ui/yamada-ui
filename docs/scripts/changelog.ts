@@ -7,9 +7,8 @@ import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
 import { prettier } from "libs/prettier"
-import { PATH } from "constant/path"
 
-config({ path: PATH.ENV })
+config({ path: CONSTANT.PATH.ENV })
 
 type Input = string | Buffer
 type MdxFile = { name: string; version: number[]; data: Data; content: Content }
@@ -17,7 +16,7 @@ type Data = GrayMatterFile<Input>["data"]
 type Content = GrayMatterFile<Input>["content"]
 type Locale = (typeof LOCALES)[number]
 
-const SOURCE_PATH = path.join(PATH.ROOT, ".changelog")
+const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, ".changelog")
 const DIST_PATH = path.join("contents", "changelog")
 const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_MENU_MAP = {

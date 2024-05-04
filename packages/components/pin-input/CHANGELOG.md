@@ -1,5 +1,17 @@
 # @yamada-ui/pin-input
 
+## 1.0.28
+
+### Patch Changes
+
+- [#1335](https://github.com/yamada-ui/yamada-ui/pull/1335) [`5152d81`](https://github.com/yamada-ui/yamada-ui/commit/5152d815e3fbf3ed8c00f815a5d1e7e8930b4605) Thanks [@GensIto](https://github.com/GensIto)! - fix a11y for pin-input
+
+- [#1384](https://github.com/yamada-ui/yamada-ui/pull/1384) [`8b475e8`](https://github.com/yamada-ui/yamada-ui/commit/8b475e8d36ac9225ae68b7cb5795e8ecce1ffd66) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated handling of props and states.
+
+- Updated dependencies [[`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5), [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0)]:
+  - @yamada-ui/core@1.6.7
+  - @yamada-ui/form-control@1.0.28
+
 ## 1.0.27
 
 ### Patch Changes

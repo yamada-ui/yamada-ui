@@ -6,6 +6,8 @@ if [ "$VERCEL_GIT_COMMIT_REF" == "main" ]; then
   echo "Run because the committed branch is 'main'."
   exit 1
 else
+  git fetch https://github.com/yamada-ui/yamada-ui.git main
+
   git_diff_result=$(git diff --name-only $(git merge-base HEAD main) HEAD)
 
   echo "$git_diff_result"

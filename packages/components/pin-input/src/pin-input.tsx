@@ -356,14 +356,16 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         cloneChildren.push(<PinInputField key={i} />)
       }
 
+    const { "aria-readonly": _, ...restWithoutAriaReadonly } = rest
+
     return (
       <DescendantsContextProvider value={descendants}>
         <PinInputProvider value={{ getInputProps, styles }}>
           <ui.div
             ref={ref}
             className={cx("ui-pin-input", className)}
-            {...rest}
             __css={css}
+            {...restWithoutAriaReadonly}
           >
             {cloneChildren}
           </ui.div>

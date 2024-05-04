@@ -6,9 +6,8 @@ on:
       - ".storybook/**"
       - ".changeset/**"
       - "packages/**"
+      - "!packages/**/tests/**"
       - "stories/**"
-    paths-ignore:
-      - "packages/**/tests/**"
     branches:
       - main
 

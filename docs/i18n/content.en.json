@@ -16,10 +16,30 @@
     }
   },
   {
+    "title": "Development",
+    "type": "fragment",
+    "slug": "/community/contributing#development",
+    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Development" }
+  },
+  {
+    "title": "Tooling",
+    "type": "fragment",
+    "slug": "/community/contributing#tooling",
+    "hierarchy": {
+      "lv1": "Contributing to Yamada UI",
+      "lv2": "Development",
+      "lv3": "Tooling"
+    }
+  },
+  {
     "title": "Commands",
     "type": "fragment",
     "slug": "/community/contributing#commands",
-    "hierarchy": { "lv1": "Contributing to Yamada UI", "lv2": "Commands" }
+    "hierarchy": {
+      "lv1": "Contributing to Yamada UI",
+      "lv2": "Development",
+      "lv3": "Commands"
+    }
   },
   {
     "title": "Update the Document",

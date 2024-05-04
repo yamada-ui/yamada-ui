@@ -8,6 +8,9 @@
     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
   </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
+  <a href="https://codecov.io/gh/yamada-ui/yamada-ui" >
+    <img src="https://codecov.io/gh/yamada-ui/yamada-ui/graph/badge.svg?token=LRQMRQNE7N"/>
+  </a>
   <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/hirotomoyamada/yamada-ui"/>
   </a>
@@ -147,4 +150,5 @@ If you're interested in contributing to the documentation, please refer to this 
 
 ## License
 
-MIT © [Hirotomo Yamada](https://github.com/yamada-ui)
+This package is licensed under the terms of the
+[MIT license](https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE).

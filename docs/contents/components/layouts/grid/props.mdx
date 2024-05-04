@@ -15,63 +15,63 @@ tab: Props
 <PropsCard
   id="grid-area"
   name="area"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridArea> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-area` property."}
 />
 
 <PropsCard
   id="grid-autocolumns"
   name="autoColumns"
-  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | ResponsiveObject<GridAutoColumns<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridAutoColumns<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledThe...'
   description={"The CSS `grid-auto-columns` property."}
 />
 
 <PropsCard
   id="grid-autoflow"
   name="autoFlow"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "row" | "dense" | ResponsiveObject<GridAutoFlow> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "row" | "dense" | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-auto-flow` property."}
 />
 
 <PropsCard
   id="grid-autorows"
   name="autoRows"
-  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | ResponsiveObject<GridAutoRows<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridAutoRows<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme)...'
   description={"The CSS `grid-auto-rows` property."}
 />
 
 <PropsCard
   id="grid-column"
   name="column"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridColumn> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-column` property."}
 />
 
 <PropsCard
   id="grid-row"
   name="row"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridRow> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-row` property."}
 />
 
 <PropsCard
   id="grid-templateareas"
   name="templateAreas"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "none" | ResponsiveObject<GridTemplateAreas> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "none" | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-template-areas` property."}
 />
 
 <PropsCard
   id="grid-templatecolumns"
   name="templateColumns"
-  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | "none" | "subgrid" | ResponsiveObject<GridTemplateColumns<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIVa...'
+  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | "none" | "subgrid" | Partial<Record<"base" | ... 5 more ... | "2xl", GridTemplateColumns<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme...'
   description={"The CSS `grid-template-columns` property."}
 />
 
 <PropsCard
   id="grid-templaterows"
   name="templateRows"
-  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | "none" | "subgrid" | ResponsiveObject<GridTemplateRows<0 | (string & {})>> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...'
+  type='0 | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | "max-content" | "min-content" | "none" | "subgrid" | Partial<Record<"base" | ... 5 more ... | "2xl", GridTemplateRows<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) =...'
   description={"The CSS `grid-template-rows` property."}
 />
 
@@ -80,14 +80,14 @@ tab: Props
 <PropsCard
   id="griditem-area"
   name="area"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridArea> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-area` property."}
 />
 
 <PropsCard
   id="griditem-colend"
   name="colEnd"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridColumnEnd> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridColumnEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-column-end` property."}
 />
 
@@ -101,14 +101,14 @@ tab: Props
 <PropsCard
   id="griditem-colstart"
   name="colStart"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridColumnStart> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridColumnStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-column-start` property."}
 />
 
 <PropsCard
   id="griditem-rowend"
   name="rowEnd"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridRowEnd> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridRowEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-row-end` property."}
 />
 
@@ -122,6 +122,6 @@ tab: Props
 <PropsCard
   id="griditem-rowstart"
   name="rowStart"
-  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | ResponsiveObject<GridRowStart> | ColorModeArray<...> | ResponsiveObject<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "auto" | (number & {}) | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", GridRowStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `grid-row-start` property."}
 />

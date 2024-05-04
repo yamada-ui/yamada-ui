@@ -7,6 +7,8 @@ on:
       - ".changeset/**"
       - "packages/**"
       - "stories/**"
+    paths-ignore:
+      - "packages/**/tests/**"
     branches:
       - main
 

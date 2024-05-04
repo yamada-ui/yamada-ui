@@ -1,5 +1,13 @@
 # @yamada-ui/core
 
+## 1.6.7
+
+### Patch Changes
+
+- [#1374](https://github.com/yamada-ui/yamada-ui/pull/1374) [`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a circular reference bug.
+
+- [#1356](https://github.com/yamada-ui/yamada-ui/pull/1356) [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Made the `base` of `ResponsiveObject` optional.
+
 ## 1.6.6
 
 ### Patch Changes

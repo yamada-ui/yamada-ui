@@ -22,27 +22,41 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Update component docs
+      - name: Update component
         run: |
           pnpm gen:docs
+          pnpm docs:theme
+          pnpm docs:props
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs [skip ci]' && git push)
+          git diff --staged --exit-code || git commit -m 'ci(component): updated component [skip ci]'
 
       - name: Update changelog
         run: |
           pnpm changelog:latest
+          pnpm docs:changelog
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog [skip ci]' && git push)
+          git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog [skip ci]'
+
+      - name: Update css
+        run: |
+          pnpm docs:css
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(css): updated css [skip ci]'
+
+      - name: Update contributors
+        run: |
+          pnpm docs:contributors
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors [skip ci]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update docs
         run: |
-          pnpm docs:changelog
-          pnpm docs:css
-          pnpm docs:theme
-          pnpm docs:props
-          pnpm docs:contributors
           pnpm docs:search
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changesets): version packages [skip ci]' && git push)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git diff --staged --exit-code || git commit -m 'ci(docs): updated docs [skip ci]'
+
+      - name: Push commit
+        run: |
+          git push

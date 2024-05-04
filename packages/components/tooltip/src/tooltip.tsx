@@ -17,6 +17,7 @@ import type {
 import { motion, AnimatePresence } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
+import { useOutsideClick } from "@yamada-ui/react"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useEventListener } from "@yamada-ui/use-event-listener"
@@ -295,7 +296,29 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       () => (isOpen && closeOnScroll ? closeNow() : undefined),
     )
 
-    useEventListener(() => triggerRef.current, "pointerleave", closeWithDelay)
+    useEventListener(
+      () => triggerRef.current,
+      "pointerleave",
+      (e) => {
+        if (e.pointerType !== "touch") closeWithDelay()
+      },
+    )
+
+    useEventListener(
+      () => triggerRef.current,
+      "touchstart",
+      () => {
+        if (isOpen) closeWithDelay()
+        else openWithDelay()
+      },
+    )
+
+    useOutsideClick({
+      ref: triggerRef,
+      handler: () => {
+        closeWithDelay()
+      },
+    })
 
     useEffect(
       () => () => {
@@ -309,9 +332,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       (props = {}, ref = null) => ({
         ...props,
         ref: mergeRefs(triggerRef, ref, referenceRef),
-        onPointerEnter: handlerAll(props.onPointerEnter, (e) =>
-          e.pointerType !== "touch" ? openWithDelay() : undefined,
-        ),
+        onPointerEnter: handlerAll(props.onPointerEnter, openWithDelay),
         onClick: handlerAll(props.onClick, onClick),
         onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
         onFocus: handlerAll(props.onFocus, openWithDelay),

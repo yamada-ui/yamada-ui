@@ -96,6 +96,12 @@ jobs:
         with:
           name: patches
 
+      - name: Setup Git user
+        shell: bash
+        run: |
+          git config --global user.email "hirotomo.yamada@avap.co.jp"
+          git config --global user.name "hirotomoyamada"
+
       - name: Apply patches and commit individually
         run: |
           if [ -f component.patch ]; then

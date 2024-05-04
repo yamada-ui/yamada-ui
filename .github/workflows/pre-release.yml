@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - changeset-release/main
-    paths-ignore:
-      - "docs/**"
-      - ".changelog/**"
-      - "packages/**/DOCS.json"
-      - "CHANGELOG.md"
+    paths:
+      - ".changeset/**"
+      - "packages/**"
+      - "!packages/**/DOCS.json"
+      - "!docs/**"
+      - "!.changelog/**"
+      - "!CHANGELOG.md"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

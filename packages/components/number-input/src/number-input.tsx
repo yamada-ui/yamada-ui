@@ -13,8 +13,8 @@ import {
 } from "@yamada-ui/core"
 import type { UseFormControlProps } from "@yamada-ui/form-control"
 import {
-  useFormControlProps,
   formControlProperties,
+  useFormControlProps,
 } from "@yamada-ui/form-control"
 import { ChevronIcon } from "@yamada-ui/icon"
 import type { UseCounterProps } from "@yamada-ui/use-counter"
@@ -28,7 +28,6 @@ import {
   cx,
   handlerAll,
   mergeRefs,
-  omitObject,
   pickObject,
   useCallbackRef,
   useSafeLayoutEffect,
@@ -40,7 +39,7 @@ import type {
   KeyboardEvent,
   KeyboardEventHandler,
 } from "react"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)
@@ -148,6 +147,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const {
     id,
     name,
+    value: valueProp,
+    defaultValue,
     inputMode = "decimal",
     pattern = "[0-9]*(.[0-9]+)?",
     required,
@@ -159,10 +160,20 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     allowMouseWheel,
     min = Number.MIN_SAFE_INTEGER,
     max = Number.MAX_SAFE_INTEGER,
+    step: stepProp,
     precision,
+    parse: parseProp,
+    format: formatProp,
+    onInvalid: onInvalidProp,
+    isValidCharacter: isValidCharacterProp,
+    getAriaValueText: getAriaValueTextProp,
+    onChange: onChangeProp,
+    onFocus: onFocusProp,
+    onBlur: onBlurProp,
     "aria-invalid": isInvalid,
     ...rest
   } = useFormControlProps(props)
+  const formControlProps = pickObject(rest, formControlProperties)
 
   const isRequired = required
   const isReadOnly = readOnly
@@ -180,7 +191,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const decrementRef = useRef<HTMLButtonElement>(null)
 
   const onFocus = useCallbackRef(
-    handlerAll(rest.onFocus, (ev) => {
+    handlerAll(onFocusProp, (ev) => {
       setFocused(true)
 
       if (!inputSelectionRef.current) return
@@ -192,15 +203,16 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     }),
   )
   const onBlur = useCallbackRef(
-    handlerAll(rest.onBlur, () => {
+    handlerAll(onBlurProp, () => {
       setFocused(false)
 
       if (clampValueOnBlur) validateAndClamp()
     }),
   )
-  const onInvalid = useCallbackRef(rest.onInvalid)
+  const onInvalid = useCallbackRef(onInvalidProp)
+  const getAriaValueText = useCallbackRef(getAriaValueTextProp)
   const isValidCharacter = useCallbackRef(
-    rest.isValidCharacter ?? isDefaultValidCharacter,
+    isValidCharacterProp ?? isDefaultValidCharacter,
   )
 
   const {
@@ -214,12 +226,25 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     cast,
     ...counter
   } = useCounter({
+    value: valueProp,
+    defaultValue,
+    step: stepProp,
     min,
     max,
     precision,
     keepWithinRange,
-    ...rest,
+    onChange: onChangeProp,
   })
+
+  const valueText = useMemo(() => {
+    let text = getAriaValueText?.(value)
+
+    if (text != null) return text
+
+    text = value.toString()
+
+    return !text ? undefined : text
+  }, [value, getAriaValueText])
 
   const sanitize = useCallback(
     (value: string) => value.split("").filter(isValidCharacter).join(""),
@@ -227,27 +252,27 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const parse = useCallback(
-    (value: string) => rest.parse?.(value) ?? value,
-    [rest],
+    (value: string) => parseProp?.(value) ?? value,
+    [parseProp],
   )
 
   const format = useCallback(
-    (value: string | number) => (rest.format?.(value) ?? value).toString(),
-    [rest],
+    (value: string | number) => (formatProp?.(value) ?? value).toString(),
+    [formatProp],
   )
 
   const increment = useCallback(
-    (step = rest.step ?? 1) => {
+    (step = stepProp ?? 1) => {
       if (isInteractive) counter.increment(step)
     },
-    [isInteractive, counter, rest.step],
+    [isInteractive, counter, stepProp],
   )
 
   const decrement = useCallback(
-    (step = rest.step ?? 1) => {
+    (step = stepProp ?? 1) => {
       if (isInteractive) counter.decrement(step)
     },
-    [isInteractive, counter, rest.step],
+    [isInteractive, counter, stepProp],
   )
 
   const validateAndClamp = useCallback(() => {
@@ -291,7 +316,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       if (!isValidNumericKeyboardEvent(ev, isValidCharacter))
         ev.preventDefault()
 
-      const step = getStep(ev) * (rest.step ?? 1)
+      const step = getStep(ev) * (stepProp ?? 1)
 
       const keyMap: Record<string, KeyboardEventHandler> = {
         ArrowUp: () => increment(step),
@@ -307,7 +332,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       ev.preventDefault()
       action(ev)
     },
-    [decrement, increment, isValidCharacter, max, min, rest.step, update],
+    [decrement, increment, isValidCharacter, max, min, stepProp, update],
   )
 
   const { up, down, stop, isSpinning } = useSpinner(increment, decrement)
@@ -371,7 +396,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
       ev.preventDefault()
 
-      const step = getStep(ev as any) * (rest.step ?? 1)
+      const step = getStep(ev as any) * (stepProp ?? 1)
       const direction = Math.sign(ev.deltaY)
 
       if (direction === -1) {
@@ -388,15 +413,23 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       id,
       name,
       type: "text",
+      role: "spinbutton",
       inputMode,
       pattern,
       required,
       disabled,
       readOnly,
-      ...pickObject(rest, formControlProperties),
-      ...omitObject(props, ["defaultValue"]),
+      ...formControlProps,
+      ...props,
+      min,
+      max,
+      step: stepProp,
       ref: mergeRefs(inputRef, ref),
       value: format(value),
+      "aria-valuemin": min,
+      "aria-valuemax": max,
+      "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
+      "aria-valuetext": valueText,
       "aria-invalid": ariaAttr(isInvalid ?? isOut),
       autoComplete: "off",
       autoCorrect: "off",
@@ -413,9 +446,14 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       required,
       disabled,
       readOnly,
-      rest,
+      formControlProps,
+      min,
+      max,
+      stepProp,
       format,
       value,
+      valueAsNumber,
+      valueText,
       isInvalid,
       isOut,
       onChange,
@@ -433,7 +471,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         required,
         readOnly,
         disabled: trulyDisabled,
-        ...pickObject(rest, formControlProperties),
+        ...formControlProps,
         ...props,
         style: {
           ...props.style,
@@ -449,7 +487,16 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         onPointerUp: handlerAll(props.onPointerUp, stop),
       }
     },
-    [keepWithinRange, isMax, disabled, required, readOnly, rest, stop, eventUp],
+    [
+      disabled,
+      keepWithinRange,
+      isMax,
+      required,
+      readOnly,
+      formControlProps,
+      stop,
+      eventUp,
+    ],
   )
 
   const getDecrementProps: PropGetter = useCallback(
@@ -460,7 +507,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         required,
         readOnly,
         disabled: trulyDisabled,
-        ...pickObject(rest, formControlProperties),
+        ...formControlProps,
         ...props,
         style: {
           ...props.style,
@@ -477,18 +524,19 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       }
     },
     [
+      disabled,
       keepWithinRange,
       isMin,
-      disabled,
       required,
       readOnly,
-      rest,
+      formControlProps,
       stop,
       eventDown,
     ],
   )
 
   return {
+    uiProps: rest,
     value: format(value),
     valueAsNumber,
     isFocused,
@@ -654,14 +702,10 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       addonProps,
       incrementProps,
       decrementProps,
-      onChange,
       ...rest
     } = omitThemeProps(mergedProps)
-    const { getInputProps, getIncrementProps, getDecrementProps } =
-      useNumberInput({
-        onChange,
-        ...rest,
-      })
+    const { uiProps, getInputProps, getIncrementProps, getDecrementProps } =
+      useNumberInput(rest)
 
     const css: CSSUIObject = {
       position: "relative",
@@ -679,23 +723,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
           {...containerProps}
         >
           <NumberInputField
-            {...getInputProps(
-              omitObject(rest, [
-                "keepWithinRange",
-                "clampValueOnBlur",
-                "isDisabled",
-                "isReadOnly",
-                "isRequired",
-                "isInvalid",
-                "allowMouseWheel",
-                "onInvalid",
-                "getAriaValueText",
-                "isValidCharacter",
-                "parse",
-                "format",
-              ]) as DOMAttributes<HTMLElement>,
-              ref,
-            )}
+            {...getInputProps(uiProps as DOMAttributes<HTMLElement>, ref)}
           />
 
           {isStepper ? (

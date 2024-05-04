@@ -76,6 +76,15 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
     })
 
     return data[0]
+  } else if (arg.includes("--current")) {
+    const { data } = await octokit.pulls.list({
+      ...REPO_REQUEST_PARAMETERS,
+      state: "open",
+      base: "main",
+      head: "yamada-ui:changeset-release/main",
+    })
+
+    return data[0]
   } else if (arg.includes("--number")) {
     const pull_number = +arg.replace("--number=", "")
 

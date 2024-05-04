@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - changeset-release/main
+    paths:
+      - ".changeset/**"
+      - "packages/**"
+      - "!packages/**/DOCS.json"
+      - "!docs/**"
+      - "!.changelog/**"
+      - "!CHANGELOG.md"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,27 +29,37 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Update component docs
+      - name: Update component
         run: |
           pnpm gen:docs
+          pnpm docs:theme
+          pnpm docs:props
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs [skip ci]' && git push)
+          git diff --staged --exit-code || (git commit -m 'ci(component): updated component' && git push)
 
       - name: Update changelog
         run: |
-          pnpm changelog:latest
+          pnpm changelog:ci
+          pnpm docs:changelog
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog [skip ci]' && git push)
+          git diff --staged --exit-code || (git commit -m 'ci(changelog): updated changelog' && git push)
+
+      - name: Update css
+        run: |
+          pnpm docs:css
+          git add .
+          git diff --staged --exit-code || (git commit -m 'ci(css): updated css' && git push)
+
+      - name: Update contributors
+        run: |
+          pnpm docs:contributors
+          git add .
+          git diff --staged --exit-code || (git commit -m 'ci(contributors): updated contributors' && git push)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update docs
         run: |
-          pnpm docs:changelog
-          pnpm docs:css
-          pnpm docs:theme
-          pnpm docs:props
-          pnpm docs:contributors
           pnpm docs:search
           git add .
-          git diff --staged --exit-code || (git commit -m 'ci(changesets): version packages [skip ci]' && git push)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git diff --staged --exit-code || (git commit -m 'ci(docs): updated docs' && git push)

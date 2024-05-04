@@ -6,6 +6,7 @@ on:
       - ".storybook/**"
       - ".changeset/**"
       - "packages/**"
+      - "!packages/**/tests/**"
       - "stories/**"
     branches:
       - main

@@ -37,7 +37,7 @@ jobs:
 
       - name: Update changelog
         run: |
-          pnpm changelog:latest
+          pnpm changelog:ci
           pnpm docs:changelog
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog'

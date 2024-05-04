@@ -29,7 +29,6 @@ import {
   mergeRefs,
   getOwnerWindow,
   getOwnerDocument,
-  omitObject,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { Children, cloneElement, useCallback, useEffect, useRef } from "react"
@@ -207,12 +206,21 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       closeOnEsc = true,
       animation,
       duration,
+      isOpen: isOpenProp,
+      defaultIsOpen: defaultIsOpenProp,
+      onOpen: onOpenProp,
+      onClose: onCloseProp,
       ...rest
     } = omitThemeProps(mergedProps)
 
     closeOnPointerDown = closeOnMouseDown
 
-    const { isOpen, onOpen, onClose } = useDisclosure(rest)
+    const { isOpen, onOpen, onClose } = useDisclosure({
+      isOpen: isOpenProp,
+      defaultIsOpen: defaultIsOpenProp,
+      onOpen: onOpenProp,
+      onClose: onCloseProp,
+    })
 
     const triggerRef = useRef<HTMLElement>(null)
 
@@ -354,12 +362,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                   animate={isOpen ? "enter" : "exit"}
                   exit="exit"
                   __css={css}
-                  {...omitObject(rest, [
-                    "isOpen",
-                    "defaultIsOpen",
-                    "onOpen",
-                    "onClose",
-                  ])}
+                  {...rest}
                 >
                   {label}
                 </ui.div>

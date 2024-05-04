@@ -1,0 +1,45 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "plugin:import/typescript",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint/eslint-plugin", "unused-imports", "import"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    "no-var": "error",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-curly-brace-presence": "error",
+    "react/jsx-no-leaked-render": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": "error",
+    "unused-imports/no-unused-imports": "error"
+  },
+  "overrides": []
+}

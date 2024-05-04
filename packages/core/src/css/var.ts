@@ -4,6 +4,7 @@ import { generateAnimation, generateGradient } from "../config"
 import { pseudos } from "../pseudos"
 import type { VarTokens } from "../theme"
 import type { CSSMap, StyledTheme } from "../theme.types"
+import { css } from "./css"
 
 type Var = {
   variable: string
@@ -56,19 +57,15 @@ export const createVars =
       let resolvedLightValue: string | number | undefined
       let resolvedDarkValue: string | number | undefined
 
+      const theme = { __cssMap: cssMap } as StyledTheme
+
       if (token.startsWith("animations.")) {
         if (isArray(value)) {
           resolvedLightValue = value
-            .map((value) =>
-              generateAnimation(value, {
-                __cssMap: cssMap,
-              } as StyledTheme),
-            )
+            .map((value) => generateAnimation(value, theme, css))
             .join(",")
         } else {
-          resolvedLightValue = generateAnimation(value, {
-            __cssMap: cssMap,
-          } as StyledTheme)
+          resolvedLightValue = generateAnimation(value, theme, css)
         }
       } else {
         let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
@@ -80,17 +77,17 @@ export const createVars =
           if (lightParentVar) {
             resolvedLightValue = lightParentRef
           } else {
-            resolvedLightValue = generateGradient(fetchParent(lightValue)[1], {
-              __cssMap: cssMap,
-            } as StyledTheme)
+            resolvedLightValue = generateGradient(
+              fetchParent(lightValue)[1],
+              theme,
+              css,
+            )
           }
 
           if (darkParentVar) {
             resolvedDarkValue = darkParentRef
           } else {
-            resolvedDarkValue = generateGradient(darkValue, {
-              __cssMap: cssMap,
-            } as StyledTheme)
+            resolvedDarkValue = generateGradient(darkValue, theme, css)
           }
         } else {
           resolvedLightValue = lightValue

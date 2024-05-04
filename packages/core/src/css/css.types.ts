@@ -27,8 +27,9 @@ export type ThemeProps<
 
 export type ColorModeArray<Y> = [Y, Y]
 
-export type ResponsiveObject<Y> = Record<"base", Y> &
-  Partial<Record<Theme["breakpoints"], Y>>
+export type ResponsiveObject<Y> = Partial<
+  Record<Theme["breakpoints"] | "base", Y>
+>
 
 type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
 

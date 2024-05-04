@@ -6,6 +6,7 @@ import {
   transforms,
   mode,
   keyframes,
+  css,
 } from "../src"
 
 const theme = transformTheme(
@@ -237,12 +238,12 @@ describe("transforms", () => {
   })
 
   test("token transform", () => {
-    const result = transforms.token("colors")("gray.500", theme)
+    const result = transforms.token("colors")("gray.500", theme, css)
     expect(result).toBe("var(--ui-colors-gray-500)")
   })
 
   test("styles transform", () => {
-    const result = transforms.styles("textStyles")("gradient", theme)
+    const result = transforms.styles("textStyles")("gradient", theme, css)
     expect(result).toStrictEqual({})
   })
 
@@ -265,7 +266,7 @@ describe("transforms", () => {
   })
 
   test("fraction transform", () => {
-    const result = transforms.fraction()(0.5, theme)
+    const result = transforms.fraction()(0.5, theme, css)
     expect(result).toBe("50%")
   })
 
@@ -291,16 +292,20 @@ describe("transforms", () => {
   })
 
   test("function transform", () => {
-    const result1 = transforms.function("translateX")("100px", theme)
-    const result2 = transforms.function("translateX", transforms.px)(100, theme)
+    const result1 = transforms.function("translateX")("100px", theme, css)
+    const result2 = transforms.function("translateX", transforms.px)(
+      100,
+      theme,
+      css,
+    )
     expect(result1).toBe("translateX(100px)")
     expect(result2).toBe("translateX(100px)")
   })
 
   test("transform transform", () => {
-    const result1 = transforms.transform("auto", theme)
-    const result2 = transforms.transform("auto-3d", theme)
-    const result3 = transforms.transform(null, theme)
+    const result1 = transforms.transform("auto", theme, css)
+    const result2 = transforms.transform("auto-3d", theme, css)
+    const result3 = transforms.transform(null, theme, css)
     expect(result1).toBe(
       "translateX(var(--ui-translate-x, 0)) translateY(var(--ui-translate-y, 0)) rotate(var(--ui-rotate, 0)) scaleX(var(--ui-scale-x, 1)) scaleY(var(--ui-scale-y, 1)) skewX(var(--ui-skew-x, 0)) skewY(var(--ui-skew-y, 0))",
     )
@@ -311,9 +316,9 @@ describe("transforms", () => {
   })
 
   test("filter transform", () => {
-    const result1 = transforms.filter("filter")("blur(5px)", theme)
-    const result2 = transforms.filter("filter")("auto", theme)
-    const result3 = transforms.filter("backdrop")("auto", theme)
+    const result1 = transforms.filter("filter")("blur(5px)", theme, css)
+    const result2 = transforms.filter("filter")("auto", theme, css)
+    const result3 = transforms.filter("backdrop")("auto", theme, css)
     expect(result1).toBe("blur(5px)")
     expect(result2).toBe(
       "var(--ui-blur, /*!*/ /*!*/) var(--ui-brightness, /*!*/ /*!*/) var(--ui-contrast, /*!*/ /*!*/) var(--ui-drop-shadow, /*!*/ /*!*/) var(--ui-grayscale, /*!*/ /*!*/) var(--ui-hue-rotate, /*!*/ /*!*/) var(--ui-invert, /*!*/ /*!*/) var(--ui-opacity, /*!*/ /*!*/) var(--ui-saturate, /*!*/ /*!*/) var(--ui-sepia, /*!*/ /*!*/)",
@@ -327,6 +332,7 @@ describe("transforms", () => {
     const result = transforms.media(
       [{ type: "print", css: { color: "black" } }],
       theme,
+      css,
     )
     expect(result).toStrictEqual({
       "@media print ": { color: "black" },
@@ -337,10 +343,12 @@ describe("transforms", () => {
     const result1 = transforms.container(
       [{ name: "sm", css: { maxWidth: "640px" } }],
       theme,
+      css,
     )
     const result2 = transforms.container(
       [{ name: "xl", maxWidth: "xl", css: { maxWidth: "640px" } }],
       theme,
+      css,
     )
     expect(result1).toStrictEqual({
       "@container sm ": { maxWidth: "640px" },
@@ -354,6 +362,7 @@ describe("transforms", () => {
     const result = transforms.supports(
       [{ query: "(display: grid)", css: { display: "grid" } }],
       theme,
+      css,
     )
     expect(result).toStrictEqual({
       "@supports  (display: grid)": { display: "grid" },
@@ -387,14 +396,20 @@ describe("utils", () => {
 
 describe("generateGradient", () => {
   test("returns linear gradient CSS string", () => {
-    const result1 = generateGradient("linear(to-r, #7928CA, #FF0080)", theme)
+    const result1 = generateGradient(
+      "linear(to-r, #7928CA, #FF0080)",
+      theme,
+      css,
+    )
     const result2 = generateGradient(
       "linear(to-r, #7928CA 30%, #FF0080)",
       theme,
+      css,
     )
     const result3 = generateGradient(
       "linear(to-r, #7928CA calc(30% - 10px), #FF0080)",
       theme,
+      css,
     )
     expect(result1).toBe("linear-gradient(to right, #7928CA, #FF0080)")
     expect(result2).toBe("linear-gradient(to right, #7928CA 30%, #FF0080)")
@@ -404,39 +419,43 @@ describe("generateGradient", () => {
   })
 
   test("returns radial gradient CSS string", () => {
-    const result = generateGradient("radial(circle, #7928CA, #FF0080)", theme)
+    const result = generateGradient(
+      "radial(circle, #7928CA, #FF0080)",
+      theme,
+      css,
+    )
     expect(result).toBe("radial-gradient(circle, #7928CA, #FF0080)")
   })
 
   test("returns original value if not a gradient", () => {
-    expect(generateGradient("path/to/image.png", theme)).toBe(
+    expect(generateGradient("path/to/image.png", theme, css)).toBe(
       "url('path/to/image.png')",
     )
   })
 
   test("handles global and null values", () => {
-    expect(generateGradient(null, theme)).toBeNull()
-    expect(generateGradient("()", theme)).toBe("()")
-    expect(generateGradient("inherit", theme)).toBe("inherit")
+    expect(generateGradient(null, theme, css)).toBeNull()
+    expect(generateGradient("()", theme, css)).toBe("()")
+    expect(generateGradient("inherit", theme, css)).toBe("inherit")
   })
 
   test("returns the value as is if the color is empty", () => {
-    expect(generateGradient("linear()", theme)).toBe("linear()")
+    expect(generateGradient("linear()", theme, css)).toBe("linear()")
   })
 
   test("returns the value as is", () => {
     expect(
-      generateGradient("radial-gradient(circle, #7928CA, #FF0080)", theme),
+      generateGradient("radial-gradient(circle, #7928CA, #FF0080)", theme, css),
     ).toBe("radial-gradient(circle, #7928CA, #FF0080)")
   })
 
   test("If the value is incorrect, return the value as is.", () => {
-    expect(generateGradient("()", theme)).toBe("()")
-    expect(generateGradient("linear(to-r)", theme)).toBe("linear(to-r)")
+    expect(generateGradient("()", theme, css)).toBe("()")
+    expect(generateGradient("linear(to-r)", theme, css)).toBe("linear(to-r)")
   })
 
   test("returns the value as is the theme token", () => {
-    expect(generateGradient("var(--ui-gradients-primary)", theme)).toBe(
+    expect(generateGradient("var(--ui-gradients-primary)", theme, css)).toBe(
       "var(--ui-gradients-primary)",
     )
   })
@@ -459,6 +478,7 @@ describe("generateAnimation", () => {
         timingFunction: "ease-in-out",
       },
       theme,
+      css,
     )
     expect(result).toMatch(
       /animation-.* var\(--ui-transitions-duration-slower\) var\(--ui-transitions-easing-ease-in-out\) 0s 1 normal forwards running/,
@@ -466,24 +486,24 @@ describe("generateAnimation", () => {
   })
 
   test("returns animation CSS string for string notation", () => {
-    const result = generateAnimation("gradient1", theme)
+    const result = generateAnimation("gradient1", theme, css)
     expect(result).toBe("var(--ui-animations-gradient1)")
   })
 
   test("returns animation CSS multi string for string notation", () => {
-    const result = generateAnimation("gradient1, gradient2", theme)
+    const result = generateAnimation("gradient1, gradient2", theme, css)
     expect(result).toBe(
       "var(--ui-animations-gradient1),var(--ui-animations-gradient2)",
     )
   })
 
   test("handles global values", () => {
-    const result = generateAnimation("inherit", theme)
+    const result = generateAnimation("inherit", theme, css)
     expect(result).toBe("inherit")
   })
 
   test("returns original value if not an animation", () => {
-    const result = generateAnimation("none", theme)
+    const result = generateAnimation("none", theme, css)
     expect(result).toBe("none")
   })
 })

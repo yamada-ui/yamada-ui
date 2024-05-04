@@ -74,7 +74,10 @@ const getResponsiveStyles =
     const providedKeys = keysFormObject(value)
 
     if (providedKeys.length === 1 && "base" in value) {
-      return getStyles<IsMulti>(modifierStyles[value.base], props)({ isMulti })
+      return getStyles<IsMulti>(
+        modifierStyles[value.base as string],
+        props,
+      )({ isMulti })
     } else {
       const { queries = [] } = props.theme.__breakpoints ?? {}
       const { breakpoint } = props.theme.__config ?? {}
@@ -102,12 +105,12 @@ const getResponsiveStyles =
           if (!modifier) return prev
 
           if (!hasBaseStyles) {
-            const baseModifier = value["base"]
+            const baseModifier = value.base
             const prevQuery = queries[index - 1]
             const query = prevQuery?.[isDown ? "minWQuery" : "maxWQuery"]
 
             const baseStyles = getStyles<IsMulti>(
-              modifierStyles[baseModifier],
+              baseModifier ? modifierStyles[baseModifier] : {},
               props,
             )({ isMulti, query })
 

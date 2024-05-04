@@ -1,0 +1,34 @@
+---
+title: Wrap
+description: "`Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`."
+package_name: "@yamada-ui/layouts"
+with_description: true
+---
+
+## Import
+
+```ts
+import { Wrap } from "@yamada-ui/react"
+```
+
+## Usage
+
+```tsx
+<Wrap gap="md">
+  {Array(20)
+    .fill(0)
+    .map((_, index) =>
+      ["primary", "secondary", "warning", "danger"].map((bg, nestedIndex) => (
+        <Box
+          key={`${index}-${nestedIndex}`}
+          p="md"
+          rounded="md"
+          bg={bg}
+          color="white"
+        >
+          Box
+        </Box>
+      )),
+    )}
+</Wrap>
+```

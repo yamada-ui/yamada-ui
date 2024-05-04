@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   pre-release:
-    name: Release
+    name: Pre-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,6 +30,12 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
+      - name: Setup Git user
+        shell: bash
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
       - name: Update docs
         run: |
           pnpm gen:docs
@@ -37,17 +43,22 @@ jobs:
           pnpm docs:props
           git add .
           git diff --staged --exit-code || git commit -m 'ci(component): updated component'
+
           pnpm changelog:ci
           pnpm docs:changelog
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog'
+
           pnpm docs:css
           git add .
           git diff --staged --exit-code || git commit -m 'ci(css): updated css'
+
           pnpm docs:contributors
           git add .
           git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors'
+
           pnpm docs:search
           git add .
           git diff --staged --exit-code || git commit -m 'ci(docs): updated docs'
+
           git push

@@ -3,13 +3,18 @@
 echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
 
 if [ "$VERCEL_GIT_COMMIT_REF" == "main" ]; then
-  exit 1;
+  echo "Run because the committed branch is 'main'."
+  exit 1
 else
-  git fetch https://github.com/yamada-ui/yamada-ui.git main
+  git_diff_result=$(git diff --name-only $(git merge-base HEAD main) HEAD)
 
-  if git diff --name-only FETCH_HEAD HEAD | grep -q "^docs/"; then
-    exit 1;
+  echo "$git_diff_result"
+
+  if echo "$git_diff_result" | grep -q "^docs/"; then
+    echo "Run because './docs' is included in the difference with the 'main' branch."
+    exit 1
   else
-    exit 0;
+    echo "Run was canceled because './docs' was not included in the difference with the 'main' branch."
+    exit 0
   fi
 fi

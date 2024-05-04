@@ -16,117 +16,37 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  prepare-updates:
-    name: Prepare Updates
+  pre-release:
+    name: Release
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Set Matrix
-        id: set-matrix
-        run: echo "::set-output name=matrix::value"
 
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Update component
+      - name: Update docs
         run: |
           pnpm gen:docs
           pnpm docs:theme
           pnpm docs:props
-          git diff > component.patch
-          if [ -s component.patch ]; then echo "::set-output name=component::true"; fi
-
-      - name: Update changelog
-        run: |
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(component): updated component'
           pnpm changelog:ci
           pnpm docs:changelog
-          git diff > changelog.patch
-          if [ -s changelog.patch ]; then echo "::set-output name=changelog::true"; fi
-
-      - name: Update css
-        run: |
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog'
           pnpm docs:css
-          git diff > css.patch
-          if [ -s css.patch ]; then echo "::set-output name=css::true"; fi
-
-      - name: Update contributors
-        run: |
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(css): updated css'
           pnpm docs:contributors
-          git diff > contributors.patch
-          if [ -s contributors.patch ]; then echo "::set-output name=contributors::true"; fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update docs
-        run: |
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors'
           pnpm docs:search
-          git diff > docs.patch
-          if [ -s docs.patch ]; then echo "::set-output name=docs::true"; fi
-
-      - name: Upload patches as artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: patches
-          path: |
-            component.patch
-            changelog.patch
-            css.patch
-            contributors.patch
-            docs.patch
-
-  pre-release:
-    needs: prepare-updates
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Download patches
-        uses: actions/download-artifact@v2
-        with:
-          name: patches
-
-      - name: Setup Git user
-        shell: bash
-        run: |
-          git config --global user.email "hirotomo.yamada@avap.co.jp"
-          git config --global user.name "hirotomoyamada"
-
-      - name: Apply patches and commit individually
-        run: |
-          if [ -f component.patch ]; then
-            git apply component.patch
-            git add .
-            git diff --staged --exit-code || git commit -m 'ci(component): updated component'
-          fi
-          if [ -f changelog.patch ]; then
-            git apply changelog.patch
-            git add .
-            git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog'
-          fi
-          if [ -f css.patch ]; then
-            git apply css.patch
-            git add .
-            git diff --staged --exit-code || git commit -m 'ci(css): updated css'
-          fi
-          if [ -f contributors.patch ]; then
-            git apply contributors.patch
-            git add .
-            git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors'
-          fi
-          if [ -f docs.patch ]; then
-            git apply docs.patch
-            git add .
-            git diff --staged --exit-code || git commit -m 'ci(docs): updated docs'
-          fi
+          git add .
+          git diff --staged --exit-code || git commit -m 'ci(docs): updated docs'
           git push

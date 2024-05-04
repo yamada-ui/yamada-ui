@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - changeset-release/main
+    paths-ignore:
+      - "docs/**"
+      - ".changelog/**"
+      - "packages/**/DOCS.json"
+      - "CHANGELOG.md"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -28,26 +33,26 @@ jobs:
           pnpm docs:theme
           pnpm docs:props
           git add .
-          git diff --staged --exit-code || git commit -m 'ci(component): updated component [skip ci]'
+          git diff --staged --exit-code || git commit -m 'ci(component): updated component'
 
       - name: Update changelog
         run: |
           pnpm changelog:latest
           pnpm docs:changelog
           git add .
-          git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog [skip ci]'
+          git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog'
 
       - name: Update css
         run: |
           pnpm docs:css
           git add .
-          git diff --staged --exit-code || git commit -m 'ci(css): updated css [skip ci]'
+          git diff --staged --exit-code || git commit -m 'ci(css): updated css'
 
       - name: Update contributors
         run: |
           pnpm docs:contributors
           git add .
-          git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors [skip ci]'
+          git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -55,7 +60,7 @@ jobs:
         run: |
           pnpm docs:search
           git add .
-          git diff --staged --exit-code || git commit -m 'ci(docs): updated docs [skip ci]'
+          git diff --staged --exit-code || git commit -m 'ci(docs): updated docs'
 
       - name: Push commit
         run: |

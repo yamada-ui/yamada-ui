@@ -13,7 +13,7 @@ import {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
-  getFormControlProperties,
+  formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
@@ -28,7 +28,7 @@ import {
   getValidChildren,
 } from "@yamada-ui/utils"
 import type { ChangeEvent, KeyboardEvent, Ref } from "react"
-import { useCallback, useEffect, useId, useState } from "react"
+import { useCallback, useEffect, useId, useMemo, useState } from "react"
 
 const toArray = (value?: string) => value?.split("")
 
@@ -157,12 +157,22 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       manageFocus = true,
       otp = false,
       mask,
-      onChange,
+      readOnly,
+      "aria-readonly": ariaReadonly,
+      onChange: onChangeProp,
       onComplete,
       items = 4,
       children,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
+    const formControlProps = useMemo(
+      () => ({
+        ...pickObject(rest, formControlProperties),
+        readOnly,
+        ariaReadonly,
+      }),
+      [ariaReadonly, readOnly, rest],
+    )
 
     id ??= useId()
 
@@ -184,7 +194,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     const [values, setValues] = useControllableState<string[]>({
       value: toArray(value),
       defaultValue: toArray(defaultValue) || [],
-      onChange: (values) => onChange?.(values.join("")),
+      onChange: (values) => onChangeProp?.(values.join("")),
     })
 
     const focusNext = useCallback(
@@ -242,15 +252,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       [],
     )
 
-    const getInputProps = useCallback(
-      ({
-        index,
-        ...props
-      }: PinInputFieldProps & {
-        index: number
-        ref?: Ref<HTMLInputElement>
-      }): PinInputFieldProps => {
-        const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const onChange = useCallback(
+      (index: number) =>
+        ({ target }: ChangeEvent<HTMLInputElement>) => {
           const eventValue = target.value
           const currentValue = values[index]
           const nextValue = getNextValue(currentValue, eventValue)
@@ -279,12 +283,21 @@ export const PinInput = forwardRef<PinInputProps, "div">(
 
             setMoveFocus(true)
           }
-        }
+        },
+      [
+        descendants,
+        getNextValue,
+        onComplete,
+        setValue,
+        setValues,
+        type,
+        values,
+      ],
+    )
 
-        const onKeyDown = ({
-          key,
-          target,
-        }: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyDown = useCallback(
+      (index: number) =>
+        ({ key, target }: KeyboardEvent<HTMLInputElement>) => {
           if (key !== "Backspace" || !manageFocus) return
 
           if ((target as HTMLInputElement).value === "") {
@@ -298,48 +311,55 @@ export const PinInput = forwardRef<PinInputProps, "div">(
           } else {
             setMoveFocus(false)
           }
-        }
+        },
+      [descendants, manageFocus, setValue],
+    )
 
-        const onFocus = () => setFocusedIndex(index)
+    const onFocus = useCallback(
+      (index: number) => () => setFocusedIndex(index),
+      [],
+    )
 
-        const onBlur = () => setFocusedIndex(-1)
+    const onBlur = useCallback(() => setFocusedIndex(-1), [])
 
-        return {
-          inputMode: type === "number" ? "numeric" : "text",
-          type: mask ? "password" : type === "number" ? "tel" : "text",
-          ...pickObject(
-            rest,
-            getFormControlProperties({ omit: ["aria-readonly"] }),
-          ),
-          ...filterUndefined(props),
-          id: `${id}-${index}`,
-          value: values[index] || "",
-          onChange: handlerAll(props.onChange, onChange),
-          onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-          onFocus: handlerAll(props.onFocus, onFocus),
-          onBlur: handlerAll(props.onBlur, onBlur),
-          autoComplete: otp ? "one-time-code" : "off",
-          placeholder:
-            focusedIndex === index && !rest.readOnly && !props.readOnly
-              ? ""
-              : placeholder,
-        }
-      },
+    const getInputProps = useCallback(
+      ({
+        index,
+        ...props
+      }: PinInputFieldProps & {
+        index: number
+        ref?: Ref<HTMLInputElement>
+      }): PinInputFieldProps => ({
+        inputMode: type === "number" ? "numeric" : "text",
+        type: mask ? "password" : type === "number" ? "tel" : "text",
+        ...formControlProps,
+        ...filterUndefined(props),
+        id: `${id}-${index}`,
+        value: values[index] || "",
+        onChange: handlerAll(props.onChange, onChange(index)),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
+        onFocus: handlerAll(props.onFocus, onFocus(index)),
+        onBlur: handlerAll(props.onBlur, onBlur),
+        autoComplete: otp ? "one-time-code" : "off",
+        placeholder:
+          focusedIndex === index && !readOnly && !props.readOnly
+            ? ""
+            : placeholder,
+      }),
       [
-        descendants,
-        focusedIndex,
-        getNextValue,
-        id,
-        manageFocus,
-        mask,
-        onComplete,
-        otp,
-        placeholder,
-        rest,
-        setValue,
-        setValues,
         type,
+        mask,
+        formControlProps,
+        id,
         values,
+        onChange,
+        onKeyDown,
+        onFocus,
+        onBlur,
+        otp,
+        focusedIndex,
+        readOnly,
+        placeholder,
       ],
     )
 
@@ -356,8 +376,6 @@ export const PinInput = forwardRef<PinInputProps, "div">(
         cloneChildren.push(<PinInputField key={i} />)
       }
 
-    const { "aria-readonly": _, ...restWithoutAriaReadonly } = rest
-
     return (
       <DescendantsContextProvider value={descendants}>
         <PinInputProvider value={{ getInputProps, styles }}>
@@ -365,7 +383,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
             ref={ref}
             className={cx("ui-pin-input", className)}
             __css={css}
-            {...restWithoutAriaReadonly}
+            {...rest}
           >
             {cloneChildren}
           </ui.div>

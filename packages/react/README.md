@@ -147,4 +147,5 @@ If you're interested in contributing to the documentation, please refer to this 
 
 ## License
 
-MIT © [Hirotomo Yamada](https://github.com/yamada-ui)
+This package is licensed under the terms of the
+[MIT license](https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE).

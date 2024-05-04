@@ -5,7 +5,6 @@ on:
     branches:
       - changeset-release/main
     paths:
-      - "debug.txt"
       - ".changeset/**"
       - "packages/**"
       - "!packages/**/DOCS.json"

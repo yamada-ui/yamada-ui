@@ -28,5 +28,20 @@ describe("<MultiAutoComplete />", () => {
         expect(optionElements).toHaveLength(3)
       })
     })
+
+    test("have default value", () => {
+      render(
+        <MultiAutocomplete
+          placeholder="Select Option"
+          defaultValue={["option1", "option2"]}
+        >
+          <AutocompleteOption value="option1">option1</AutocompleteOption>
+          <AutocompleteOption value="option2">option2</AutocompleteOption>
+          <AutocompleteOption value="option3">option3</AutocompleteOption>
+        </MultiAutocomplete>,
+      )
+
+      expect(screen.getByText("option1,")).toBeInTheDocument()
+    })
   })
 })

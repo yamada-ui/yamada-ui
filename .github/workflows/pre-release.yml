@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   pre-release:
-    name: Release
+    name: Pre-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,17 +36,22 @@ jobs:
           pnpm docs:props
           git add .
           git diff --staged --exit-code || git commit -m 'ci(component): updated component'
+
           pnpm changelog:ci
           pnpm docs:changelog
           git add .
           git diff --staged --exit-code || git commit -m 'ci(changelog): updated changelog'
+
           pnpm docs:css
           git add .
           git diff --staged --exit-code || git commit -m 'ci(css): updated css'
+
           pnpm docs:contributors
           git add .
           git diff --staged --exit-code || git commit -m 'ci(contributors): updated contributors'
+
           pnpm docs:search
           git add .
           git diff --staged --exit-code || git commit -m 'ci(docs): updated docs'
+
           git push

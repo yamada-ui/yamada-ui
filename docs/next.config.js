@@ -8,10 +8,18 @@ const nextConfig = {
     externalDir: true,
   },
   eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+    dirs: [
+      "pages",
+      "components",
+      "constant",
+      "contexts",
+      "hooks",
+      "layouts",
+      "libs",
+      "scripts",
+      "theme",
+      "utils",
+    ],
   },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {

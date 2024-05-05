@@ -20,7 +20,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",
-    "lint": "next lint -d pages components constant contexts hooks layouts libs scripts theme utils",
+    "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf .contentlayer .next node_modules"
   },

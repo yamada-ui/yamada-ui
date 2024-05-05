@@ -2,9 +2,7 @@
   "root": true,
   "extends": ["next/core-web-vitals", "../.eslintrc.base"],
   "plugins": [],
-  "rules": {
-    "import/order": "off"
-  },
+  "rules": {},
   "overrides": [
     {
       "files": ["scripts/**/*"],

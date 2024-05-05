@@ -21,6 +21,9 @@ const nextConfig = {
       "utils",
     ],
   },
+  typescript: {
+    tsconfigPath: "./tsconfig.json",
+  },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {
     defaultLocale: "en",

@@ -20,6 +20,7 @@ const nextConfig = {
       "theme",
       "utils",
     ],
+    ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,

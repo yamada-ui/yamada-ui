@@ -50,12 +50,15 @@
   },
   "overrides": [],
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".mts", ".cts", ".tsx", ".d.ts"]
     },
     "import/resolver": {
       "eslint-import-resolver-node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".mts", ".d.ts"]
       },
       "eslint-import-resolver-typescript": {
         "alwaysTryTypes": true

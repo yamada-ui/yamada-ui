@@ -8,12 +8,12 @@ import {
   useRipple,
 } from "@yamada-ui/react"
 import type { CardProps, StringLiteral } from "@yamada-ui/react"
-import Link from "next/link"
-import { memo } from "react"
-import type { ReactNode } from "react"
 import { Label } from "components/data-display"
 import { TextWithCode } from "components/typography"
 import { usePage } from "contexts/page-context"
+import Link from "next/link"
+import { memo } from "react"
+import type { ReactNode } from "react"
 
 export type LinkCardProps = CardProps & {
   href: string

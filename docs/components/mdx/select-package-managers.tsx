@@ -1,10 +1,10 @@
 import { useBreakpoint } from "@yamada-ui/react"
 import { Table } from "@yamada-ui/table"
 import type { Column } from "@yamada-ui/table"
-import { useMemo, useState } from "react"
-import type { FC } from "react"
 import { TextWithCodeOrLink } from "components/typography"
 import { useI18n } from "contexts/i18n-context"
+import { useMemo, useState } from "react"
+import type { FC } from "react"
 import { PackageManagers } from "./package-managers"
 
 type Package = { name: string; description: string; isDefaultCheck?: boolean }

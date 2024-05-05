@@ -1,8 +1,8 @@
 import path from "path"
-import { findPackages } from "find-packages"
-import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
 import { CONSTANT } from "constant"
 import { type DocumentTypeNames } from "contentlayer/generated"
+import { findPackages } from "find-packages"
+import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
 import { toArray } from "./array"
 import {
   getDocumentBreadcrumbs,

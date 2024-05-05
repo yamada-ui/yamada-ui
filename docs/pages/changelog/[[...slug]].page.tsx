@@ -1,8 +1,8 @@
-import type { NextPage, InferGetStaticPropsType } from "next"
-import { useMDXComponent } from "next-contentlayer/hooks"
 import { MDXComponents } from "components/mdx"
 import { PageProvider } from "contexts/page-context"
 import { DocumentLayout } from "layouts/document-layout"
+import type { NextPage, InferGetStaticPropsType } from "next"
+import { useMDXComponent } from "next-contentlayer/hooks"
 import { getStaticDocumentPaths, getStaticDocumentProps } from "utils/next"
 
 export const getStaticPaths = getStaticDocumentPaths("Changelog")

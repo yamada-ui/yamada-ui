@@ -1,7 +1,7 @@
 import { forwardRef, Grid, GridItem } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
-import { memo } from "react"
 import { usePage } from "contexts/page-context"
+import { memo } from "react"
 import { LinkCard } from "./link-card"
 
 export type LinkCardsProps = GridProps & { with_description?: boolean }

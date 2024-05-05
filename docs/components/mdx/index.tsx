@@ -5,6 +5,7 @@ import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import type { MDXComponents as MDXComponentsType } from "mdx/types"
+import { LinkCard, CardContainer } from "components/navigation"
 import { CodeBlock } from "./code-block"
 import { ColorModeButton } from "./color-mode-button"
 import {
@@ -20,7 +21,6 @@ import { PackageManagers } from "./package-managers"
 import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
-import { LinkCard, CardContainer } from "components/navigation"
 
 const {
   Heading,

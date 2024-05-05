@@ -2,10 +2,10 @@ import { readFile, readdir, writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { GrayMatterFile } from "gray-matter"
 import matter from "gray-matter"
+import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
 config({ path: CONSTANT.PATH.ENV })

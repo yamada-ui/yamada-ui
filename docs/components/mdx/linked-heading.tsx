@@ -1,7 +1,7 @@
 import { Heading, Link } from "@yamada-ui/react"
 import type { HeadingProps } from "@yamada-ui/react"
-import { Link as LinkIcon } from "components/media-and-icons"
 import type { FC } from "react"
+import { Link as LinkIcon } from "components/media-and-icons"
 
 export type LinkedHeadingProps = HeadingProps
 

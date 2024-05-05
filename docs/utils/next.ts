@@ -1,5 +1,8 @@
-import { type DocumentTypeNames } from "contentlayer/generated"
+import path from "path"
+import { findPackages } from "find-packages"
 import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
+import { CONSTANT } from "constant"
+import { type DocumentTypeNames } from "contentlayer/generated"
 import { toArray } from "./array"
 import {
   getDocumentBreadcrumbs,
@@ -13,9 +16,6 @@ import {
   getDocumentPaths,
 } from "./contentlayer"
 import { toKebabCase } from "./string"
-import { findPackages } from "find-packages"
-import path from "path"
-import { CONSTANT } from "constant"
 
 const getVersion = async () => {
   const packages = await findPackages(

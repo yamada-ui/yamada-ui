@@ -12,13 +12,6 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import { Section } from "components/layouts"
-import { Arrow, Components, SEO } from "components/media-and-icons"
-import { NextLinkButton } from "components/navigation"
-import { CONSTANT } from "constant"
-import { useI18n } from "contexts/i18n-context"
-import { PageProvider } from "contexts/page-context"
-import { TopLayout } from "layouts/top-layout"
 import type {
   GetStaticPathsContext,
   GetStaticPathsResult,
@@ -28,6 +21,13 @@ import type {
 } from "next"
 import Link from "next/link"
 import { useMemo } from "react"
+import { Section } from "components/layouts"
+import { Arrow, Components, SEO } from "components/media-and-icons"
+import { NextLinkButton } from "components/navigation"
+import { CONSTANT } from "constant"
+import { useI18n } from "contexts/i18n-context"
+import { PageProvider } from "contexts/page-context"
+import { TopLayout } from "layouts/top-layout"
 import { getStaticCommonProps } from "utils/next"
 import { Authentication } from "./authentication"
 import { Cards } from "./cards"

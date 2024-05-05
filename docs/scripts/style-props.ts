@@ -2,11 +2,9 @@ import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import matter from "gray-matter"
 import type { GrayMatterFile } from "gray-matter"
-import { prettier } from "libs/prettier"
 import type { JSDoc, SourceFile, TypeAliasDeclaration } from "typescript"
 import {
   ScriptTarget,
@@ -19,6 +17,8 @@ import {
   isTypeLiteralNode,
   isVariableStatement,
 } from "typescript"
+import { CONSTANT } from "constant"
+import { prettier } from "libs/prettier"
 import { toKebabCase } from "utils/string"
 
 config({ path: CONSTANT.PATH.ENV })

@@ -5,11 +5,11 @@ import {
   createColorModeManager,
   createThemeSchemeManager,
 } from "@yamada-ui/react"
-import { I18nProvider } from "contexts/i18n-context"
 import type { AppProps } from "next/app"
 import { Inter } from "next/font/google"
 import Head from "next/head"
 import type { FC } from "react"
+import { I18nProvider } from "contexts/i18n-context"
 import { theme, config } from "theme"
 
 const inter = Inter({

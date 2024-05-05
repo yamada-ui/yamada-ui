@@ -1,6 +1,6 @@
-import { PATH } from "constant/path"
 import dotenv from "dotenv"
 import OpenAI from "openai"
+import { PATH } from "constant/path"
 
 dotenv.config({ path: PATH.ENV })
 

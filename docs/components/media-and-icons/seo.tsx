@@ -1,7 +1,7 @@
-import { CONSTANT } from "constant"
 import { NextSeo } from "next-seo"
 import type { NextSeoProps } from "next-seo"
 import React from "react"
+import { CONSTANT } from "constant"
 
 export type SEOProps = Pick<NextSeoProps, "title" | "description"> & {
   disableTitleTemplate?: boolean

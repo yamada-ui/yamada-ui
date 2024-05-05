@@ -4,8 +4,8 @@ import * as p from "@clack/prompts"
 import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
+import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 
 type Contributor = Awaited<

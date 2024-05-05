@@ -5,11 +5,6 @@ import {
   Text,
   noop,
 } from "@yamada-ui/react"
-import { CONSTANT } from "constant"
-import CONTENT_EN from "i18n/content.en.json"
-import CONTENT_JA from "i18n/content.ja.json"
-import UI_EN from "i18n/ui.en.json"
-import UI_JA from "i18n/ui.ja.json"
 import { useRouter } from "next/router"
 import {
   createContext,
@@ -19,6 +14,11 @@ import {
   Fragment,
 } from "react"
 import type { PropsWithChildren, FC } from "react"
+import { CONSTANT } from "constant"
+import CONTENT_EN from "i18n/content.en.json"
+import CONTENT_JA from "i18n/content.ja.json"
+import UI_EN from "i18n/ui.en.json"
+import UI_JA from "i18n/ui.ja.json"
 import type { Locale } from "utils/i18n"
 
 type UIData = typeof UI_EN

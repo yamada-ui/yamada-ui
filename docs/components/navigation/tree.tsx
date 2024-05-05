@@ -28,8 +28,8 @@ import type { DocumentTypeTree } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
 import Link from "next/link"
-import type { FC } from "react"
 import { memo, useEffect } from "react"
+import type { FC } from "react"
 
 export type TreeProps = ListProps
 

@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for modified files
+      - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
 
@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for modified files
+      - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
 
@@ -63,16 +63,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for modified files
+      - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
 
+      - name: Check docs modified files
+        id: check-docs-modified
+        uses: ./.github/composite-actions/check-docs-modified-files
+
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
-      - name: Run ESLint
+      - name: Run lint
         if: steps.check-modified.outputs.changed == 'true'
+        run: pnpm lint
+
+      - name: Run docs lint
+        if: steps.check-docs-modified.outputs.changed == 'true'
         run: pnpm lint
 
   type:
@@ -82,16 +90,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for modified files
+      - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
 
+      - name: Check docs modified files
+        id: check-docs-modified
+        uses: ./.github/composite-actions/check-docs-modified-files
+
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
         if: steps.check-modified.outputs.changed == 'true'
+        run: pnpm typecheck
+
+      - name: Run docs typecheck
+        if: steps.check-docs-modified.outputs.changed == 'true'
         run: pnpm typecheck
 
   prettier:
@@ -101,7 +117,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for modified files
+      - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
 
@@ -109,6 +125,6 @@ jobs:
         if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
-      - name: Run prettier
+      - name: Run format
         if: steps.check-modified.outputs.changed == 'true'
         run: pnpm format:check

@@ -16,5 +16,5 @@ runs:
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -q -E '^(packages/|scripts/setup-test.ts|.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|tsconfig.json|turbo.json|vitest.config.mts)' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -q -E '^(docs/|.github/workflows/quality.yml|.github/composite-actions/check-docs-modified-files/|package.json|.eslintrc.base.json)' && echo true || echo false)" >> $GITHUB_OUTPUT
       shell: bash

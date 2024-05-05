@@ -8,6 +8,18 @@ const nextConfig = {
     externalDir: true,
   },
   eslint: {
+    dirs: [
+      "pages",
+      "components",
+      "constant",
+      "contexts",
+      "hooks",
+      "layouts",
+      "libs",
+      "scripts",
+      "theme",
+      "utils",
+    ],
     ignoreDuringBuilds: true,
   },
   typescript: {

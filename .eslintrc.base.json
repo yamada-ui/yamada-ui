@@ -12,16 +12,9 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "unknown",
-          "parent",
-          "sibling",
-          "index",
-          "object"
-        ]
+        "alphabetize": {
+          "order": "asc"
+        }
       }
     ],
     "no-console": [

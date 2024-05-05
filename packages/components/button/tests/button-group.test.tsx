@@ -1,0 +1,58 @@
+import { a11y, render } from "@yamada-ui/test"
+import { Button, ButtonGroup } from "../src"
+
+describe("<Button/>", () => {
+  test("passes a11y test", async () => {
+    await a11y(
+      <ButtonGroup>
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>,
+    )
+  })
+
+  test("`isAttached` style is applied correctly", async () => {
+    const { getByRole } = render(
+      <ButtonGroup isAttached variant="outline">
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>,
+    )
+
+    const buttonGroup = getByRole("group")
+
+    expect(buttonGroup.firstChild).toHaveStyle({
+      borderTopRightRadius: "0px",
+      borderBottomRightRadius: "0px",
+    })
+
+    expect(buttonGroup.lastChild).toHaveStyle({
+      borderTopLeftRadius: "0px",
+      borderBottomLeftRadius: "0px",
+    })
+  })
+
+  test("`isAttached` column style is applied correctly", async () => {
+    const { getByRole } = render(
+      <ButtonGroup direction="column" isAttached variant="outline">
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>,
+    )
+
+    const buttonGroup = getByRole("group")
+
+    expect(buttonGroup.firstChild).toHaveStyle({
+      borderBottomLeftRadius: "0px",
+      borderBottomRightRadius: "0px",
+    })
+
+    expect(buttonGroup.lastChild).toHaveStyle({
+      borderTopLeftRadius: "0px",
+      borderTopRightRadius: "0px",
+    })
+  })
+})

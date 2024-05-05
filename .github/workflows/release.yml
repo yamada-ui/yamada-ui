@@ -6,6 +6,7 @@ on:
       - ".storybook/**"
       - ".changeset/**"
       - "packages/**"
+      - "!packages/**/tests/**"
       - "stories/**"
     branches:
       - main
@@ -33,7 +34,7 @@ jobs:
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Build
+      - name: Build packages
         run: pnpm build
 
       - name: Create release PR or publish to NPM
@@ -80,7 +81,7 @@ jobs:
           clean: true
           clean-exclude: .nojekyll
 
-      - name: Sync colors
+      - name: Sync Colors
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:
@@ -93,7 +94,7 @@ jobs:
               ref: 'main'
             })
 
-      - name: Sync components
+      - name: Sync Components
         if: steps.changesets.outputs.published == 'true'
         uses: actions/github-script@v7
         with:

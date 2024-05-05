@@ -207,7 +207,6 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           ref={mergeRefs(inputRef, ref)}
           type="file"
           aria-hidden
-          aria-readonly
           tabIndex={-1}
           id={id}
           name={name}

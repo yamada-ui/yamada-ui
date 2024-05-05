@@ -8,6 +8,7 @@
   ],
   "plugins": ["@typescript-eslint/eslint-plugin", "unused-imports", "import"],
   "rules": {
+    "no-var": "error",
     "import/order": [
       "error",
       {
@@ -16,7 +17,6 @@
         }
       }
     ],
-    "no-var": "error",
     "no-console": [
       "warn",
       {
@@ -41,5 +41,21 @@
     "@typescript-eslint/consistent-type-imports": "error",
     "unused-imports/no-unused-imports": "error"
   },
-  "overrides": []
+  "overrides": [],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".mts", ".cts", ".tsx", ".d.ts"]
+    },
+    "import/resolver": {
+      "eslint-import-resolver-node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".mts", ".d.ts"]
+      },
+      "eslint-import-resolver-typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
 }

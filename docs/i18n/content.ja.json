@@ -13,10 +13,30 @@
     "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "セットアップ" }
   },
   {
+    "title": "開発手段",
+    "type": "fragment",
+    "slug": "/community/contributing#開発手段",
+    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "開発手段" }
+  },
+  {
+    "title": "ツール",
+    "type": "fragment",
+    "slug": "/community/contributing#ツール",
+    "hierarchy": {
+      "lv1": "Yamada UIへ貢献する",
+      "lv2": "開発手段",
+      "lv3": "ツール"
+    }
+  },
+  {
     "title": "コマンド",
     "type": "fragment",
     "slug": "/community/contributing#コマンド",
-    "hierarchy": { "lv1": "Yamada UIへ貢献する", "lv2": "コマンド" }
+    "hierarchy": {
+      "lv1": "Yamada UIへ貢献する",
+      "lv2": "開発手段",
+      "lv3": "コマンド"
+    }
   },
   {
     "title": "ドキュメントを更新する",

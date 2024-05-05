@@ -1,5 +1,5 @@
 import { Text, VStack } from "@yamada-ui/react"
-import { a11y, act, fireEvent, render } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, waitFor } from "@yamada-ui/test"
 import { ScrollArea } from "../src"
 import { Content } from "./content"
 
@@ -103,5 +103,72 @@ describe("<ScrollArea />", () => {
     )
 
     expect(mockScrollPositionChange).toHaveBeenCalledWith({ x: 0, y: 100 })
+  })
+
+  test("onMouseEnter and onMouseLeave work correctly", async () => {
+    const { getByTestId } = render(
+      <ScrollArea data-testid="ScrollArea" type="hover">
+        <Content />
+      </ScrollArea>,
+    )
+
+    const scrollArea = getByTestId("ScrollArea")
+
+    await act(() => fireEvent.mouseEnter(scrollArea))
+    expect(scrollArea).toHaveAttribute("data-hovered")
+
+    await act(() => fireEvent.mouseLeave(scrollArea))
+
+    await waitFor(
+      () => {
+        expect(scrollArea).not.toHaveAttribute("data-hovered")
+      },
+      { timeout: 2000 },
+    )
+  })
+
+  test("never style is applied correctly", async () => {
+    const { getByTestId } = render(
+      <ScrollArea data-testid="ScrollArea" type="never">
+        <Content />
+      </ScrollArea>,
+    )
+
+    const scrollArea = getByTestId("ScrollArea")
+
+    expect(scrollArea).toHaveStyle({ scrollbarWidth: "none" })
+  })
+
+  test("renders with specific key for Safari", () => {
+    const defaultPlatform = window.navigator.platform
+    const defaultVendor = window.navigator.vendor
+
+    Object.defineProperty(window.navigator, "platform", {
+      value: "MacOS",
+      writable: true,
+    })
+    Object.defineProperty(window.navigator, "vendor", {
+      value: "Apple Computer, Inc.",
+      writable: true,
+    })
+
+    const { getByTestId } = render(
+      <ScrollArea data-testid="ScrollArea" type="never">
+        <Content />
+      </ScrollArea>,
+    )
+
+    const scrollArea = getByTestId("ScrollArea")
+
+    expect(scrollArea).toHaveAttribute("data-key", "false-false")
+
+    Object.defineProperty(window.navigator, "platform", {
+      value: defaultPlatform,
+      writable: false,
+    })
+    Object.defineProperty(window.navigator, "vendor", {
+      value: defaultVendor,
+      writable: false,
+    })
   })
 })

@@ -1119,6 +1119,9 @@ importers:
         specifier: workspace:*
         version: link:../../utils
     devDependencies:
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

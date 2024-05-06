@@ -17,10 +17,10 @@ import type {
 import { motion, AnimatePresence } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { useOutsideClick } from "@yamada-ui/react"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useEventListener } from "@yamada-ui/use-event-listener"
+import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
 import { usePopper } from "@yamada-ui/use-popper"
 import type { PropGetter } from "@yamada-ui/utils"
@@ -311,6 +311,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
         if (isOpen) closeWithDelay()
         else openWithDelay()
       },
+      { passive: true },
     )
 
     useOutsideClick({

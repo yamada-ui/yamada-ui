@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/image": minor
+"@yamada-ui/image": patch
 ---
 
 delete the redundant omitObject

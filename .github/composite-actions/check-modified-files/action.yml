@@ -37,5 +37,5 @@ runs:
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(${{ steps.get-modified.outputs.modified_files }} | grep -q -E '^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | perl -ne 'print if /^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})/' && echo true || echo false)" >> $GITHUB_OUTPUT
       shell: bash

@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/table": minor
+"@yamada-ui/table": patch
 ---
 
 Integrate omitObject handling with omitThemeProps

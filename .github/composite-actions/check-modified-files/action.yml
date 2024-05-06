@@ -12,7 +12,7 @@ outputs:
     value: ${{ steps.check-modified.outputs.changed }}
   modified_files:
     description: "modified files"
-    value: ${{ steps.check-modified.outputs.modified_files }}
+    value: ${{ steps.get-modified.outputs.modified_files }}
 
 runs:
   using: composite
@@ -28,8 +28,15 @@ runs:
         echo "regex_pattern=$regex_pattern" >> $GITHUB_ENV
       shell: bash
 
+    - name: Get modified files
+      id: get-modified
+      run: |
+        echo "modified_files=$(git diff --name-only FETCH_HEAD ${{ github.sha }})" >> $GITHUB_OUTPUT
+      shell: bash
+
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -q -E '^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "changed=$(${{ env.modified_files }} | grep -q -E '^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "modified_files=$(git diff --name-only FETCH_HEAD ${{ github.sha }})" >> $GITHUB_OUTPUT
       shell: bash

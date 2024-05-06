@@ -1,3 +1,4 @@
+import { fireEvent } from "@testing-library/react"
 import { render, screen } from "@yamada-ui/test"
 import { AlphaSlider } from "../src"
 
@@ -32,5 +33,25 @@ describe("<AlphaSlider />", () => {
     expect(thumb).toHaveAttribute("aria-valuemax", "0.8")
     expect(thumb).toHaveAttribute("aria-valuemin", "0.2")
     expect(thumb).toHaveAttribute("aria-valuenow", "0.5")
+  })
+
+  test("AlphaSlider updates value on thumb move", () => {
+    const onChange = vi.fn()
+    const { getByRole } = render(<AlphaSlider onChange={onChange} />)
+
+    const sliderThumb = getByRole("slider")
+
+    fireEvent.keyDown(sliderThumb, { key: "ArrowRight" })
+    expect(onChange).toHaveBeenCalledWith(0.51)
+  })
+
+  test("AlphaSlider disabled behaviour", () => {
+    const onChange = vi.fn()
+    const { getByRole } = render(<AlphaSlider onChange={onChange} disabled />)
+
+    const sliderThumb = getByRole("slider")
+
+    fireEvent.keyDown(sliderThumb, { key: "ArrowRight" })
+    expect(onChange).not.toHaveBeenCalled()
   })
 })

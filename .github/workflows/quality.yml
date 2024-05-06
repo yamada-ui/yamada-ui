@@ -18,7 +18,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/(?!.*\\/tests\\/).+,tsconfig.json"
+          file_patterns: "packages/,tsconfig.json"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'

@@ -9,9 +9,8 @@ type WindowWithEyeDropper = Window &
 const mockEyeDropper = vi.fn()
 
 const setupEyeDropperMock = () => {
-  const originalEyeDropper = ((window as WindowWithEyeDropper).EyeDropper(
-    window as WindowWithEyeDropper,
-  ).EyeDropper = mockEyeDropper)
+  const originalEyeDropper = ((window as WindowWithEyeDropper).EyeDropper =
+    mockEyeDropper)
 
   const utils = render(<ColorPicker />)
 
@@ -19,8 +18,7 @@ const setupEyeDropperMock = () => {
 }
 
 const resetEyeDropperMock = () => {
-  // @ts-ignore
-  window.EyeDropper = undefined
+  ;(window as WindowWithEyeDropper).EyeDropper = undefined
 }
 
 describe("<ColorPicker />", () => {

@@ -541,7 +541,7 @@ describe("<AreaChart />", () => {
     expect(unitElements.length).toBeGreaterThan(0)
   })
 
-  test("linearGradient should be rendered according to withGradient", async () => {
+  test("linearGradient should be rendered according to withGradient false", async () => {
     const { container } = render(
       <AreaChart
         containerProps={{ width: 400, height: "80%" }}
@@ -562,7 +562,7 @@ describe("<AreaChart />", () => {
     ).toBeNull()
   })
 
-  test("linearGradient should be rendered according to type=split and splitOffset", async () => {
+  test("linearGradient default splitOffset should be rendered according to type=split", async () => {
     const { container } = render(
       <AreaChart
         containerProps={{ width: 400, height: "80%" }}
@@ -570,7 +570,6 @@ describe("<AreaChart />", () => {
         data={data}
         series={series}
         type="split"
-        splitOffset={0.5}
       />,
     )
 
@@ -582,6 +581,68 @@ describe("<AreaChart />", () => {
     expect(
       (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
     ).toBe("0.5")
+  })
+
+  test("linearGradient calculated splitOffset should be rendered according to type=split", async () => {
+    const dataForSplitCalculated = [
+      {
+        name: "Page A",
+        uv: -6000,
+      },
+      {
+        name: "Page B",
+        uv: 3000,
+      },
+      {
+        name: "Page C",
+        uv: 1000,
+      },
+    ]
+
+    const seriesForSplitCalculated: AreaProps[] = [
+      { dataKey: "uv", color: "primary.500" },
+    ]
+
+    const { container } = render(
+      <AreaChart
+        containerProps={{ width: 400, height: "80%" }}
+        dataKey="name"
+        data={dataForSplitCalculated}
+        series={seriesForSplitCalculated}
+        type="split"
+      />,
+    )
+
+    await waitFor(() =>
+      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+    )
+
+    const gradientElement = container.querySelector("linearGradient")
+    expect(
+      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+    ).toBe("0.3333333333333333")
+  })
+
+  test("linearGradient should be rendered according to type=split and splitOffset", async () => {
+    const { container } = render(
+      <AreaChart
+        containerProps={{ width: 400, height: "80%" }}
+        dataKey="name"
+        data={data}
+        series={series}
+        type="split"
+        splitOffset={0.3}
+      />,
+    )
+
+    await waitFor(() =>
+      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+    )
+
+    const gradientElement = container.querySelector("linearGradient")
+    expect(
+      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+    ).toBe("0.3")
   })
 
   test("shoud be rendered reference line", async () => {

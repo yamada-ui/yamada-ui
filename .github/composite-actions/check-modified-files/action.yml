@@ -10,6 +10,9 @@ outputs:
   changed:
     description: "Whether any specified files have been modified"
     value: ${{ steps.check-modified.outputs.changed }}
+  modified_files:
+    description: "modified files"
+    value: ${{ steps.check-modified.outputs.modified_files }}
 
 runs:
   using: composite

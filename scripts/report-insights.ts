@@ -36,8 +36,8 @@ const COMMON_PARAMS = {
 }
 const OMIT_GITHUB_IDS = ["hajimemat"]
 
-// const START_DATE = dayjs("2024-02-01").hour(0).minute(0).second(0)
-// const END_DATE = dayjs("2024-04-31").hour(23).minute(59).second(59)
+// const START_DATE = dayjs("2024-04-26").hour(18).minute(0).second(0)
+// const END_DATE = dayjs("2024-05-03").hour(18).minute(0).second(0)
 
 const START_DATE = dayjs().subtract(7, "days").hour(18).minute(0).second(0)
 const END_DATE = dayjs().hour(18).minute(0).second(0)
@@ -84,7 +84,7 @@ const getCollaborators = async () => {
 const getIssuesAndPullRequests = async (username: string, filter: string) => {
   let issues: Issue[] = []
 
-  const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:>=${START_DATE.format(QUERY_FORMAT)} created:<=${END_DATE.format(QUERY_FORMAT)}`
+  const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:${START_DATE.format(QUERY_FORMAT)}..${END_DATE.format(QUERY_FORMAT)}`
   const perPage = 100
 
   const fetchIssuesAndPullRequests = async (page: number = 1) => {

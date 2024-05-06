@@ -541,6 +541,49 @@ describe("<AreaChart />", () => {
     expect(unitElements.length).toBeGreaterThan(0)
   })
 
+  test("linearGradient should be rendered according to withGradient", async () => {
+    const { container } = render(
+      <AreaChart
+        containerProps={{ width: 400, height: "80%" }}
+        dataKey="name"
+        data={data}
+        series={series}
+        withGradient={false}
+      />,
+    )
+
+    await waitFor(() =>
+      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+    )
+
+    const gradientElement = container.querySelector("linearGradient")
+    expect(
+      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+    ).toBeNull()
+  })
+
+  test("linearGradient should be rendered according to type=split and splitOffset", async () => {
+    const { container } = render(
+      <AreaChart
+        containerProps={{ width: 400, height: "80%" }}
+        dataKey="name"
+        data={data}
+        series={series}
+        type="split"
+        splitOffset={0.5}
+      />,
+    )
+
+    await waitFor(() =>
+      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+    )
+
+    const gradientElement = container.querySelector("linearGradient")
+    expect(
+      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+    ).toBe("0.5")
+  })
+
   test("shoud be rendered reference line", async () => {
     const { container } = render(
       <AreaChart

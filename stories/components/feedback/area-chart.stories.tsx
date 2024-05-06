@@ -449,8 +449,8 @@ export const withSplit: Story = () => {
         series={series}
         dataKey="name"
         type="split"
-        splitColors={["red.400", "green.400"]}
-        splitOffset={splitOffset}
+        // splitColors={["red.400", "green.400"]}
+        splitOffset={0.6}
       />
     </VStack>
   )

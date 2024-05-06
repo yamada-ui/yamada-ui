@@ -85,9 +85,7 @@ jobs:
 
       - name: Run lint
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm eslint $MODIFIED_FILES --ext .js,.ts,.jsx,.tsx --max-warnings 0 --cache
-        env:
-          MODIFIED_FILES: ${{ steps.check-modified.outputs.modified_files }}
+        run: pnpm lint
 
       - name: Run docs lint
         if: steps.check-docs-modified.outputs.changed == 'true'
@@ -149,12 +147,8 @@ jobs:
 
       - name: Run format
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm prettier --check $MODIFIED_FILES --cache
-        env:
-          MODIFIED_FILES: ${{ steps.check-modified.outputs.modified_files }}
+        run: pnpm format:check
 
       - name: Run docs format
         if: steps.check-docs-modified.outputs.changed == 'true'
-        run: cd docs && pnpm prettier --check $MODIFIED_FILES --cache
-        env:
-          MODIFIED_FILES: ${{ steps.check-docs-modified.outputs.modified_files }}
+        run: pnpm docs:format:check

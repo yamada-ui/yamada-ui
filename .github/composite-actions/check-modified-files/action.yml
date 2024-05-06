@@ -32,12 +32,11 @@ runs:
       id: get-modified
       run: |
         modified_files=$(git diff --name-only FETCH_HEAD ${{ github.sha }})
-        echo "modified_files=$modified_files" >> $GITHUB_ENV
-        echo "modified_files=$modified_files" >> $GITHUB_OUTPUT
+        echo "::set-output name=modified_files::$modified_files"
       shell: bash
 
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(${{ env.modified_files }} | grep -q -E '^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "changed=$(${{ steps.get-modified.outputs.modified_files }} | grep -q -E '^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})' && echo true || echo false)" >> $GITHUB_OUTPUT
       shell: bash

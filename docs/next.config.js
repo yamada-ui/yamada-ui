@@ -20,11 +20,8 @@ const nextConfig = {
       "theme",
       "utils",
     ],
-    ignoreDuringBuilds: true,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  typescript: {},
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {
     defaultLocale: "en",

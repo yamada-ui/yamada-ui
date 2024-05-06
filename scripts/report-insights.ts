@@ -264,7 +264,7 @@ const createReport = (insights: Insight[]) => {
     .map(({ content }) => content)
 
   const startDate = START_DATE.format(REPORT_FORMAT)
-  const endDate = dayjs().format(REPORT_FORMAT)
+  const endDate = END_DATE.format(REPORT_FORMAT)
 
   return [
     `<@&1202956318718304276>`,

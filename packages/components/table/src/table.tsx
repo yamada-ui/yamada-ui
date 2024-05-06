@@ -2,12 +2,7 @@ import type { RowData } from "@tanstack/react-table"
 import type { ComponentArgs, CSSUIObject } from "@yamada-ui/core"
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import { TableStyleProvider, TableCaption } from "@yamada-ui/native-table"
-import {
-  cx,
-  pickChildren,
-  getValidChildren,
-  omitObject,
-} from "@yamada-ui/utils"
+import { cx, pickChildren, getValidChildren } from "@yamada-ui/utils"
 import type { ForwardedRef, Ref } from "react"
 import { forwardRef } from "react"
 import type { TableBodyProps } from "./tbody"
@@ -112,15 +107,15 @@ export const Table = forwardRef(
       layout,
       children,
       ...computedProps
-    } = omitThemeProps(mergedProps)
+    } = omitThemeProps(mergedProps, [
+      "highlightOnSelected",
+      "highlightOnHover",
+      "withBorder",
+      "withColumnBorders",
+    ])
 
     const { getTableProps, ...rest } = useTable<Y>({
-      ...omitObject(computedProps, [
-        "highlightOnSelected",
-        "highlightOnHover",
-        "withBorder",
-        "withColumnBorders",
-      ]),
+      ...computedProps,
       checkboxProps: { colorScheme, ...checkboxProps },
     })
 

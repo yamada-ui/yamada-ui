@@ -5,7 +5,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { createContext, cx, omitObject } from "@yamada-ui/utils"
+import { createContext, cx } from "@yamada-ui/utils"
 
 type TableStyleContext = Record<string, CSSUIObject>
 
@@ -52,7 +52,11 @@ export type NativeTableProps = HTMLUIProps<"table"> &
 export const NativeTable = forwardRef<NativeTableProps, "table">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("NativeTable", props)
-    const { className, layout, ...rest } = omitThemeProps(mergedProps)
+    const { className, layout, ...rest } = omitThemeProps(mergedProps, [
+      "withBorder",
+      "withColumnBorders",
+      "highlightOnHover",
+    ])
 
     const css: CSSUIObject = { tableLayout: layout, ...styles.table }
 
@@ -62,11 +66,7 @@ export const NativeTable = forwardRef<NativeTableProps, "table">(
           ref={ref}
           className={cx("ui-table", className)}
           __css={css}
-          {...omitObject(rest, [
-            "withBorder",
-            "withColumnBorders",
-            "highlightOnHover",
-          ])}
+          {...rest}
         />
       </TableStyleProvider>
     )

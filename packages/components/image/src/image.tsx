@@ -47,6 +47,8 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
     crossOrigin,
     className,
     fallbackStrategy = "beforeLoadOrError",
+    onError,
+    onLoad,
     referrerPolicy,
     size: boxSize,
     fit: objectFit,
@@ -55,7 +57,7 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
 
   ignoreFallback = loading != null || ignoreFallback || !fallback
 
-  const status = useImage({ ...props, crossOrigin, ignoreFallback })
+  const status = useImage({ ...props, ignoreFallback })
 
   const css = useMemo(() => ({ boxSize, objectFit }), [boxSize, objectFit])
 
@@ -71,7 +73,7 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
           className={cx("ui-image--fallback", className)}
           src={fallback as string | undefined}
           __css={css}
-          {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
+          {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
         />
       )
     }

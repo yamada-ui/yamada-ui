@@ -18,7 +18,7 @@ const REQUEST_OPTIONS: RequestInit = {
   },
 }
 
-const TARGET_COVERAGE = 80
+const TARGET_COVERAGE = 90
 
 const GITHUB_OPTIONS = { owner: "yamada-ui", repo: "yamada-ui" }
 

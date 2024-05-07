@@ -5,13 +5,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { Icon } from "@yamada-ui/fontawesome"
 import { Button, IconButton } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import {
   Menu,
   MenuButton,
   MenuDivider,
   MenuGroup,
   MenuItem,
+  MenuItemButton,
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
@@ -185,5 +186,142 @@ describe("<Menu />", () => {
       "aria-disabled",
       "true",
     )
+  })
+
+  test("keydown events for ArrowDown", async () => {
+    const { getByRole } = render(
+      <Menu>
+        <MenuButton>Menu</MenuButton>
+        <MenuList>
+          <MenuItem>Add item</MenuItem>
+          <MenuItem>Edit item</MenuItem>
+        </MenuList>
+      </Menu>,
+    )
+
+    const menuButton = getByRole("button", { name: "Menu" })
+
+    fireEvent.focus(menuButton)
+
+    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
+    expect(screen.getByText("Add item")).toHaveFocus()
+  })
+
+  test("keydown events for ArrowUp", async () => {
+    const { getByRole } = render(
+      <Menu>
+        <MenuButton>Menu</MenuButton>
+        <MenuList>
+          <MenuItem>Add item</MenuItem>
+          <MenuItem>Edit item</MenuItem>
+        </MenuList>
+      </Menu>,
+    )
+
+    const menuButton = getByRole("button", { name: "Menu" })
+
+    fireEvent.focus(menuButton)
+
+    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowUp" }))
+    expect(screen.getByText("Edit item")).toHaveFocus()
+  })
+
+  test("keydown events for Enter", async () => {
+    const { getByRole } = render(
+      <Menu>
+        <MenuButton>Menu</MenuButton>
+        <MenuList>
+          <MenuItem>Add item</MenuItem>
+          <MenuItem>Edit item</MenuItem>
+        </MenuList>
+      </Menu>,
+    )
+
+    const menuButton = getByRole("button", { name: "Menu" })
+
+    fireEvent.focus(menuButton)
+
+    await act(() => fireEvent.keyDown(menuButton, { key: "Enter" }))
+    expect(screen.getByText("Add item")).toHaveFocus()
+  })
+
+  test("Nested menu keyboard interactions", async () => {
+    const { getByRole } = render(
+      <Menu>
+        <MenuButton>Menu</MenuButton>
+
+        <MenuList>
+          <MenuItem>
+            <Menu>
+              <MenuItemButton>Settings</MenuItemButton>
+
+              <MenuList>
+                <MenuItem>Extensions</MenuItem>
+                <MenuItem>User Tasks</MenuItem>
+              </MenuList>
+            </Menu>
+          </MenuItem>
+          <MenuItem>Edit Profile</MenuItem>
+          <MenuItem>Preferences</MenuItem>
+        </MenuList>
+      </Menu>,
+    )
+
+    const menuButton = getByRole("button", { name: "Menu" })
+    const menuItemButton = screen.getByText("Settings")
+
+    fireEvent.focus(menuButton)
+
+    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
+    await act(() => fireEvent.keyDown(menuItemButton, { key: "ArrowRight" }))
+
+    expect(screen.getByText("Extensions")).toHaveFocus()
+
+    await act(() =>
+      fireEvent.keyDown(screen.getByText("Extensions"), { key: "ArrowLeft" }),
+    )
+
+    expect(menuItemButton.parentElement?.parentElement).toHaveFocus()
+  })
+
+  test("Keyboard operations within the list", async () => {
+    const { getByRole } = render(
+      <Menu>
+        <MenuButton>Menu</MenuButton>
+
+        <MenuList>
+          <MenuItem>Settings</MenuItem>
+          <MenuItem>Edit Profile</MenuItem>
+          <MenuItem>Preferences</MenuItem>
+        </MenuList>
+      </Menu>,
+    )
+
+    const menuButton = getByRole("button", { name: "Menu" })
+
+    await act(() => fireEvent.click(menuButton))
+
+    const menuList = getByRole("menu")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "ArrowDown" }))
+    expect(document.activeElement).toHaveTextContent("Settings")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "ArrowDown" }))
+    expect(document.activeElement).toHaveTextContent("Edit Profile")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "ArrowUp" }))
+    expect(document.activeElement).toHaveTextContent("Settings")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "Tab" }))
+    expect(document.activeElement).toHaveTextContent("Settings")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "Home" }))
+    expect(document.activeElement).toHaveTextContent("Settings")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "End" }))
+    expect(document.activeElement).toHaveTextContent("Preferences")
+
+    await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
+    expect(menuList).not.toBeVisible()
   })
 })

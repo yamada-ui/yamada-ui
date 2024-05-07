@@ -14,7 +14,6 @@ import {
   getValidChildren,
   findChildren,
   cx,
-  omitObject,
   isArray,
 } from "@yamada-ui/utils"
 import type { FC } from "react"
@@ -150,7 +149,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
       blankForDragProps,
       portalProps,
       ...rest
-    } = omitThemeProps(mergedProps)
+    } = omitThemeProps(mergedProps, ["isFullHeight"])
 
     const validChildren = getValidChildren(children)
 
@@ -195,7 +194,7 @@ export const Drawer = forwardRef<DrawerProps, "div">(
               withCloseButton,
               withDragBar,
               blankForDragProps,
-              ...omitObject(rest, ["isFullHeight"]),
+              ...rest,
               placement,
               closeOnDrag,
             }}

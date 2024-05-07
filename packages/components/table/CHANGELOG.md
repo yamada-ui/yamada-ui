@@ -1,5 +1,11 @@
 # @yamada-ui/table
 
+## 1.0.31
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
 ## 1.0.30
 
 ### Patch Changes

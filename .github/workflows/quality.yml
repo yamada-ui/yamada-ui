@@ -17,6 +17,8 @@ jobs:
       - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "packages/,tsconfig.json"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -36,6 +38,8 @@ jobs:
       - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "packages/,scripts/setup-test.ts,vitest.config.mts"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -66,10 +70,14 @@ jobs:
       - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "packages/,.eslintrc.json,.eslintrc.base.json,.eslintignore,tsconfig.json"
 
       - name: Check docs modified files
         id: check-docs-modified
-        uses: ./.github/composite-actions/check-docs-modified-files
+        uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "docs/,.eslintrc.base.json"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
@@ -81,7 +89,7 @@ jobs:
 
       - name: Run docs lint
         if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm lint
+        run: pnpm docs:lint
 
   type:
     name: TypeScript
@@ -93,10 +101,14 @@ jobs:
       - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "packages/,stories/,scripts/,tsconfig.json"
 
       - name: Check docs modified files
         id: check-docs-modified
-        uses: ./.github/composite-actions/check-docs-modified-files
+        uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "docs/"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
@@ -108,7 +120,9 @@ jobs:
 
       - name: Run docs typecheck
         if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm typecheck
+        run: |
+          pnpm docs:content
+          pnpm docs:typecheck
 
   prettier:
     name: Prettier
@@ -120,11 +134,23 @@ jobs:
       - name: Check modified files
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "packages/,stories/,scripts/,.prettierrc.json,.prettierignore"
+
+      - name: Check docs modified files
+        id: check-docs-modified
+        uses: ./.github/composite-actions/check-modified-files
+        with:
+          file_patterns: "docs/"
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run format
         if: steps.check-modified.outputs.changed == 'true'
         run: pnpm format:check
+
+      - name: Run docs format
+        if: steps.check-docs-modified.outputs.changed == 'true'
+        run: pnpm docs:format:check

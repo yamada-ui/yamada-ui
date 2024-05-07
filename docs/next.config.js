@@ -22,6 +22,9 @@ const nextConfig = {
     ],
   },
   typescript: {},
+  images: {
+    domains: ["images.pexels.com"],
+  },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {
     defaultLocale: "en",

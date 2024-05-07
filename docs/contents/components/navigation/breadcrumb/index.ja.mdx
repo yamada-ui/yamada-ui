@@ -77,3 +77,41 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
   </BreadcrumbItem>
 </Breadcrumb>
 ```
+
+### 省略文字を使用する
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbEllipsis />
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+### 省略文字をカスタマイズする
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbEllipsis>-</BreadcrumbEllipsis>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+  </BreadcrumbItem>
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
+```

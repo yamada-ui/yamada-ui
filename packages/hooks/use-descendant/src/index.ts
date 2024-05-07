@@ -50,24 +50,30 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-type DescendantOptions<T, K = {}> = K & {
+export type DescendantOptions<
+  T extends HTMLElement = HTMLElement,
+  K = {},
+> = K & {
   disabled?: boolean
   id?: string
   filter?: FilterDescendant<T, K>
 }
 
-type Descendant<T, K> = DescendantOptions<K> & {
+export type Descendant<
+  T extends HTMLElement = HTMLElement,
+  K = {},
+> = DescendantOptions<T, K> & {
   node: T
   index: number
 }
 
-type FilterDescendant<T, K> = (
+export type FilterDescendant<T extends HTMLElement = HTMLElement, K = {}> = (
   value: Descendant<T, K>,
   index: number,
   array: Descendant<T, K>[],
 ) => boolean
 
-const descendantsManager = <T extends HTMLElement, K = {}>() => {
+const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   const descendants = new Map<T, Descendant<T, K>>()
 
   const assignIndex = (newDescendants: Node[]) => {

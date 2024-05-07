@@ -199,9 +199,9 @@ describe("<FileInput />", () => {
             return (
               <div>
                 {" "}
-                <div data-testId={"index " + index}>{index}</div>
-                <div data-testId={"name" + index}>{value.name}</div>
-                <div data-testId={"type" + index}>{value.type}</div>
+                <div data-testid={"index " + index}>{index}</div>
+                <div data-testid={"name" + index}>{value.name}</div>
+                <div data-testid={"type" + index}>{value.type}</div>
               </div>
             )
           }}

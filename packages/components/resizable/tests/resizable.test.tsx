@@ -23,7 +23,7 @@ describe("<Resizable />", () => {
     await a11y(container)
   })
 
-  test("The default size of the left panel should be 30", () => {
+  test("The default size of the left panel should be 30 and 70", () => {
     const { container } = render(
       <Resizable h="md" rounded="md" borderWidth="1px">
         <ResizableItem id="left-item" as={Center} defaultSize={30}>
@@ -32,7 +32,7 @@ describe("<Resizable />", () => {
 
         <ResizableTrigger />
 
-        <ResizableItem id="right-item" as={Center}>
+        <ResizableItem id="right-item" as={Center} defaultSize={70}>
           Two
         </ResizableItem>
       </Resizable>,
@@ -48,7 +48,7 @@ describe("<Resizable />", () => {
     expect(rightItem.getAttribute("data-panel-id")).toBe("right-item")
 
     expect(leftItem.getAttribute("data-panel-size")).toBe("30.0")
-    expect(rightItem.getAttribute("data-panel-size")).toBe("1.0")
+    expect(rightItem.getAttribute("data-panel-size")).toBe("70.0")
   })
 })
 
@@ -65,14 +65,18 @@ describe("<ResizableTriggerIcon />", () => {
   test("icon renders correctly", async () => {
     const { getByTestId } = render(
       <Resizable>
-        <ResizableItem as={Center}>One</ResizableItem>
+        <ResizableItem as={Center} defaultSize={50}>
+          One
+        </ResizableItem>
 
         <ResizableTrigger
           data-testid="resizable"
           icon={<ResizableTriggerIcon />}
         />
 
-        <ResizableItem as={Center}>Two</ResizableItem>
+        <ResizableItem as={Center} defaultSize={50}>
+          Two
+        </ResizableItem>
       </Resizable>,
     )
 

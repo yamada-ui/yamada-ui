@@ -136,14 +136,15 @@ export const useCounter = ({
   const reset = useCallback(() => {
     let next: string | number
 
-    if (defaultValue == null) {
+    if (props.defaultValue == null) {
       next = ""
     } else {
-      next = casting(defaultValue, props.step ?? 1, props.precision) ?? min
+      next =
+        casting(props.defaultValue, props.step ?? 1, props.precision) ?? min
     }
 
     update(next)
-  }, [defaultValue, props.precision, props.step, update, min])
+  }, [props.defaultValue, props.precision, props.step, update, min])
 
   const cast = useCallback(
     (value: string | number) => {

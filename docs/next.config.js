@@ -25,6 +25,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ["images.pexels.com"],
+  },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {
     defaultLocale: "en",

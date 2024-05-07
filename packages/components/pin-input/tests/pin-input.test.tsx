@@ -52,17 +52,13 @@ describe("<PinInput />", () => {
 
     const inputs = await findAllByRole("textbox")
 
-    await act(async () => {
-      await user.type(inputs[0], "1")
-    })
+    await user.type(inputs[0], "1")
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("1")
     })
 
-    await act(async () => {
-      await user.type(inputs[1], "2")
-    })
+    await user.type(inputs[1], "2")
 
     await waitFor(() => {
       expect(handleChange).toHaveBeenCalledWith("12")
@@ -246,10 +242,8 @@ describe("<PinInput />", () => {
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
 
-    await act(async () => {
-      await user.click(firstInput)
-      await user.paste("12")
-    })
+    await user.click(firstInput)
+    await user.paste("12")
 
     await waitFor(() => {
       expect(firstInput).toHaveValue("12")

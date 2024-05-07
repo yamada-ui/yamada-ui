@@ -1,5 +1,11 @@
 # @yamada-ui/carousel
 
+## 1.0.29
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where dist was not included in the package.
+
 ## 1.0.28
 
 ### Patch Changes

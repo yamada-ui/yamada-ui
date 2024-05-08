@@ -1,5 +1,11 @@
 # @yamada-ui/charts
 
+## 1.1.3
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
 ## 1.1.2
 
 ### Patch Changes

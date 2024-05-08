@@ -169,7 +169,7 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       () => ({
         ...pickObject(rest, formControlProperties),
         readOnly,
-        ariaReadonly,
+        "aria-readonly": ariaReadonly,
       }),
       [ariaReadonly, readOnly, rest],
     )

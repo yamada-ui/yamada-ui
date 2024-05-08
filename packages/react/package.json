@@ -108,6 +108,7 @@
     "@yamada-ui/toggle": "workspace:*",
     "@yamada-ui/tooltip": "workspace:*",
     "@yamada-ui/transitions": "workspace:*",
+    "@yamada-ui/tree": "workspace:*",
     "@yamada-ui/typography": "workspace:*",
     "@yamada-ui/use-animation": "workspace:*",
     "@yamada-ui/use-boolean": "workspace:*",

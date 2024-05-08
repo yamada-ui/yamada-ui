@@ -1,5 +1,11 @@
 # @yamada-ui/fontawesome
 
+## 1.0.26
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
 ## 1.0.25
 
 ### Patch Changes

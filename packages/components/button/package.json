@@ -55,7 +55,8 @@
   },
   "devDependencies": {
     "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "@yamada-ui/icon": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18"

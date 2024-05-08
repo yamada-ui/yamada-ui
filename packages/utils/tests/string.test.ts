@@ -16,7 +16,21 @@ describe("String", () => {
   describe("antonym", () => {
     test("should return the antonym of the given direction", () => {
       expect(antonym("top")).toBe("bottom")
+      expect(antonym("bottom")).toBe("top")
       expect(antonym("left")).toBe("right")
+      expect(antonym("right")).toBe("left")
+      expect(antonym("start")).toBe("end")
+      expect(antonym("end")).toBe("start")
+      expect(antonym("x")).toBe("y")
+      expect(antonym("y")).toBe("x")
+      expect(antonym("enter")).toBe("exit")
+      expect(antonym("exit")).toBe("enter")
+      expect(antonym("vertical")).toBe("horizontal")
+      expect(antonym("horizontal")).toBe("vertical")
+      expect(antonym("up")).toBe("down")
+      expect(antonym("down")).toBe("up")
+      expect(antonym("block")).toBe("inline")
+      expect(antonym("inline")).toBe("block")
     })
 
     test("should return the same value if no antonym exists", () => {

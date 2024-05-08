@@ -14,9 +14,9 @@ import type {
   PopoverContentProps,
   PopoverProps,
 } from "@yamada-ui/react"
-import { Copy } from "components/media-and-icons"
 import { memo } from "react"
 import type { FC } from "react"
+import { Copy } from "components/media-and-icons"
 
 export type ShareButtonProps = ButtonProps & {
   popoverProps?: PopoverProps

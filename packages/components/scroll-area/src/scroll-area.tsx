@@ -7,6 +7,7 @@ import {
 } from "@yamada-ui/core"
 import {
   cx,
+  dataAttr,
   handlerAll,
   isMac,
   merge,
@@ -198,11 +199,21 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
         // Added the key here
         key={componentKey}
         ref={mergeRefs(ref, scrollAreaRef)}
+        data-key={componentKey}
+        data-hovered={dataAttr(isHovered)}
+        data-scrolling={dataAttr(isScrolling)}
         {...computedProps}
       />
     )
   } else {
-    return <InternalScrollArea ref={ref} {...computedProps} />
+    return (
+      <InternalScrollArea
+        ref={ref}
+        data-hovered={dataAttr(isHovered)}
+        data-scrolling={dataAttr(isScrolling)}
+        {...computedProps}
+      />
+    )
   }
 })
 

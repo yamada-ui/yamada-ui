@@ -6,8 +6,8 @@ import type {
   HTMLUIProps,
 } from "@yamada-ui/core"
 import {
+  formControlProperties,
   useFormControlProps,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
@@ -154,9 +154,9 @@ export const useColorPicker = ({
 }: UseColorPickerProps) => {
   rest = useFormControlProps(rest)
 
-  const formControlProps = pickObject(
+  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
+    formControlProperties,
   )
   const { disabled, readOnly } = formControlProps
   const [containerProps, inputProps] = splitObject<Dict, string>(

@@ -1,6 +1,6 @@
 # @yamada-ui/nextjs
 
-Yamada UI Integrations for Next.js 13
+Yamada UI Integrations for Next.js 14
 
 ## Installation
 

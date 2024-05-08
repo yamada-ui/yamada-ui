@@ -14,9 +14,9 @@ import {
   useBoolean,
 } from "@yamada-ui/react"
 import type { ButtonProps, StackProps } from "@yamada-ui/react"
-import { Hamburger } from "components/media-and-icons"
 import { memo } from "react"
 import type { FC } from "react"
+import { Hamburger } from "components/media-and-icons"
 
 const TEAM_ITEMS = [
   {

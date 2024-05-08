@@ -16,12 +16,12 @@ import {
   omitChildren,
   pickChildren,
   useUpdateEffect,
-  useAsync,
-  useAsyncFunc,
   useAsyncRetry,
   createId,
   assignRef,
   mergeRefs,
+  useAsync,
+  useAsyncFunc,
 } from "../src"
 
 describe("React", () => {
@@ -270,21 +270,26 @@ describe("React", () => {
   describe("useAsyncRetry", () => {
     test("should retry async function on retry call", async () => {
       let attempt = 0
-      const asyncFunction = () => {
-        attempt += 1
-        return attempt === 2
-          ? Promise.resolve("success")
-          : Promise.reject("fail")
-      }
+      const asyncFunction = async () =>
+        new Promise((resolve, reject) => {
+          attempt += 1
+          if (attempt === 2) {
+            resolve("success")
+          } else {
+            reject("fail")
+          }
+        })
       const { result } = renderHook(() => useAsyncRetry(asyncFunction, []))
+
       expect(result.current.loading).toBeTruthy()
 
-      act(async () => {
+      await waitFor(() => expect(result.current.loading).toBeFalsy())
+      await waitFor(async () => {
         result.current.retry()
-        await waitFor(() => {
-          expect(result.current.value).toBe("success")
-        })
       })
+      await waitFor(() => expect(result.current.loading).toBeFalsy())
+
+      expect(result.current.value).toBe("success")
     })
   })
 

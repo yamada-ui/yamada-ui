@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "Yamada UI table component",
   "keywords": [
     "yamada",
@@ -9,7 +9,7 @@
     "emotion",
     "component",
     "table",
-    "paging-tabel",
+    "paging-table",
     "ui",
     "uikit",
     "styled",

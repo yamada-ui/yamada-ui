@@ -20,10 +20,10 @@ const nextConfig = {
       "theme",
       "utils",
     ],
-    ignoreDuringBuilds: true,
   },
-  typescript: {
-    ignoreBuildErrors: true,
+  typescript: {},
+  images: {
+    domains: ["images.pexels.com"],
   },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {

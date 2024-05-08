@@ -1,5 +1,11 @@
 # @yamada-ui/calendar
 
+## 1.2.14
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
 ## 1.2.13
 
 ### Patch Changes

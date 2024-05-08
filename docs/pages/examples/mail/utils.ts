@@ -18,7 +18,7 @@ export const getDateDiff = (date: Date): string => {
 export const getTimestamp = (timestamp: Date): string => {
   const date = new Date(timestamp)
 
-  return date.toLocaleDateString("ja-JP", {
+  return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",

@@ -7,7 +7,6 @@ import {
   HStack,
   Heading,
   Icon,
-  Image,
   Input,
   Modal,
   ModalBody,
@@ -20,12 +19,13 @@ import {
   VStack,
   useDisclosure,
 } from "@yamada-ui/react"
-import type { ImageProps, StackProps } from "@yamada-ui/react"
+import type { StackProps } from "@yamada-ui/react"
 import { PlusCircle, Podcast } from "lucide-react"
 import { memo, useState } from "react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
+import { Image, type ImageProps } from "@yamada-ui/nextjs"
 
-type CarouselItem = Omit<ImageProps, "size"> & {
+type CarouselItem = Omit<ImageProps, "alt"> & {
   title: string
   description: string
 }
@@ -354,18 +354,24 @@ const ContentCarouselItem: FC<ContentCarouselItemProps> = memo(
   ({ containerProps, size = "md", title, description, ...rest }) => {
     return (
       <VStack as="article" w="auto" gap="sm" {...containerProps}>
-        <Box overflow="hidden" rounded="md">
+        <Box
+          overflow="hidden"
+          rounded="md"
+          w={{
+            base: size === "md" ? "xs" : "2xs",
+            sm: size === "md" ? "2xs" : "3xs",
+          }}
+          h={{
+            base: size === "md" ? "sm" : "2xs",
+            sm: size === "md" ? "xs" : "3xs",
+          }}
+          position="relative"
+        >
           <Image
-            src="https://cdn.pixabay.com/photo/2024/04/04/12/26/ai-generated-8675021_960_720.png"
             alt={title}
-            w={{
-              base: size === "md" ? "xs" : "2xs",
-              sm: size === "md" ? "2xs" : "3xs",
-            }}
-            h={{
-              base: size === "md" ? "sm" : "2xs",
-              sm: size === "md" ? "xs" : "3xs",
-            }}
+            fill
+            sizes="100%"
+            priority
             objectFit="cover"
             transitionProperty="transform"
             transitionDuration="slow"

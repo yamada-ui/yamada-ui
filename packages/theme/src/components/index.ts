@@ -74,8 +74,10 @@ import { Tag } from "./tag"
 import { Textarea } from "./textarea"
 import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
+import { Tree } from "./tree"
 
 export default {
+  Tree,
   Toggle,
   Accordion,
   Alert,

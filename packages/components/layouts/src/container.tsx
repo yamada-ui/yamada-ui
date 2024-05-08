@@ -42,6 +42,7 @@ export const Container = forwardRef<ContainerProps, "section">((props, ref) => {
     <ui.section
       ref={ref}
       className={cx("ui-container", className)}
+      tabIndex="0"
       __css={css}
       {...rest}
     />

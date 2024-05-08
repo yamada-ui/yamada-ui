@@ -331,6 +331,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
           {cloneChildren}
 
           <ui.input
+            aria-label="mutilAutocomplete"
             className="ui-multi-autocomplete__field__input"
             display="inline-block"
             flex="1"

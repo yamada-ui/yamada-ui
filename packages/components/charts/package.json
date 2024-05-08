@@ -48,9 +48,6 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/tooltip": "workspace:*",
-    "@yamada-ui/use-value": "workspace:*",
-    "@yamada-ui/use-token": "workspace:*",
     "recharts": "^2.12.4"
   },
   "devDependencies": {

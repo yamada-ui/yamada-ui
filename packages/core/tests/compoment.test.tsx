@@ -194,6 +194,29 @@ describe("useComponentStyle", () => {
     })
   })
 
+  test("returns base styles when only 'base' key is provided in responsive object", () => {
+    const { result } = renderHook(
+      () =>
+        useComponentStyle("Button", {
+          variant: { base: "solid" },
+          size: { base: "sm" },
+        }),
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+        ),
+      },
+    )
+
+    expect(result.current[0]).toStrictEqual({
+      bg: "blue.500",
+      color: "white",
+      fontSize: "sm",
+      padding: "4px 8px",
+      borderRadius: "4px",
+    })
+  })
+
   test("applies size styles correctly", () => {
     const { result } = renderHook(
       () => useComponentStyle("Button", { size: "sm" }),
@@ -209,6 +232,65 @@ describe("useComponentStyle", () => {
       padding: "4px 8px",
       borderRadius: "4px",
       bg: "blue.500",
+      color: "white",
+    })
+  })
+
+  test("returns correct styles for multiple breakpoints", () => {
+    const { result } = renderHook(
+      () =>
+        useComponentStyle("Button", {
+          variant: { sm: "solid", md: "outline", lg: "solid" },
+          size: { sm: "sm", md: "md", lg: "lg" },
+        }),
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+        ),
+      },
+    )
+
+    expect(result.current[0]).toStrictEqual({
+      "@media screen and (max-width: 1280px)": {},
+      "@media screen and (min-width: 481px) and (max-width: 768px)": {
+        border: "1px solid",
+        borderColor: "blue.500",
+        color: "blue.500",
+        fontSize: "md",
+        padding: "8px 12px",
+      },
+      "@media screen and (min-width: 769px)": {
+        bg: "blue.500",
+        color: "white",
+      },
+      bg: "blue.500",
+      borderRadius: "4px",
+      color: "white",
+      fontSize: "sm",
+      padding: "4px 8px",
+    })
+  })
+
+  test("returns correct styles for color modes", () => {
+    const { result } = renderHook(
+      () =>
+        useComponentStyle("Button", {
+          colorMode: "dark",
+          variant: "solid",
+          size: "md",
+        }),
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+        ),
+      },
+    )
+
+    expect(result.current[0]).toStrictEqual({
+      padding: "8px 12px",
+      borderRadius: "4px",
+      bg: "blue.500",
+      fontSize: "md",
       color: "white",
     })
   })

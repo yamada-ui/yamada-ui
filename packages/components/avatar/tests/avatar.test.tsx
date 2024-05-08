@@ -158,12 +158,32 @@ describe("<AvatarBadge />", () => {
     )
     const pingEl = screen
       .getByTestId("avatar-badge")
-      .querySelector(".ui-avatar__badge__ping")
+      .querySelector(".ui-avatar__ping")
     expect(pingEl).toBeInTheDocument()
     const style = window.getComputedStyle(pingEl!)
     expect(style["background"]).toBe("rgb(255, 0, 0)")
     expect(style["animation"]).toMatch(
       /animation-.* 1.4s cubic-bezier\(0,0,0.2,1\) 0s infinite normal forwards running/,
     )
+  })
+
+  test("AvatarBadge has `ui-avatar__ping` class correctly", () => {
+    render(
+      <Avatar
+        name="Hirotomo Yamada"
+        src="https://avatars.githubusercontent.com/u/84060430?v=4"
+      >
+        <AvatarBadge
+          data-testid="avatar-badge"
+          bg="primary"
+          ping
+          pingColor="rgb(255, 0, 0)"
+        />
+      </Avatar>,
+    )
+    const pingEl = screen
+      .getByTestId("avatar-badge")
+      .querySelector(".ui-avatar__ping")
+    expect(pingEl).toBeInTheDocument()
   })
 })

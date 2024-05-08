@@ -1,14 +1,18 @@
-name: "Check for Modified Files"
+name: "Check modified files for Quality"
 description: "Check for modified files in specific paths"
 
 inputs:
-  paths:
-    description: "File paths to check for modifications"
+  file_patterns:
+    description: "Regex patterns of files to check for modifications"
     required: true
+
 outputs:
   changed:
     description: "Whether any specified files have been modified"
     value: ${{ steps.check-modified.outputs.changed }}
+  modified_files:
+    description: "modified files"
+    value: ${{ steps.get-modified.outputs.modified_files }}
 
 runs:
   using: composite
@@ -17,8 +21,21 @@ runs:
       run: git fetch origin ${{ github.base_ref }}
       shell: bash
 
+    - name: Convert comma-separated to regex pattern
+      id: convert-pattern
+      run: |
+        regex_pattern=$(echo "${{ inputs.file_patterns }}" | sed 's/,/|/g')
+        echo "regex_pattern=$regex_pattern" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Get modified files
+      id: get-modified
+      run: |
+        echo "modified_files=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | tr '\n' ' ')" >> $GITHUB_OUTPUT
+      shell: bash
+
     - name: Check modified files
       id: check-modified
       run: |
-        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -q -E '^(packages/|scripts/setup-test.ts|.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|.eslintrc.json|.eslintrc.base.json|.eslintignore|.prettierrc.json|.prettierignore|tsconfig.json|turbo.json|vitest.config.mts)' && echo true || echo false)" >> $GITHUB_OUTPUT
+        echo "changed=$(git diff --name-only FETCH_HEAD ${{ github.sha }} | grep -q -E '^(.github/workflows/quality.yml|.github/composite-actions/check-modified-files/|package.json|pnpm-workspace.yaml|turbo.json|${{ env.regex_pattern }})' && echo true || echo false)" >> $GITHUB_OUTPUT
       shell: bash

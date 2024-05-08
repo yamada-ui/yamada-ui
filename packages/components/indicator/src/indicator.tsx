@@ -13,7 +13,7 @@ import {
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { useValue } from "@yamada-ui/use-value"
-import { cx, omitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useMemo } from "react"
 
@@ -181,7 +181,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     pingCount = "infinite",
     pingScale = 1.8,
     ...rest
-  } = omitThemeProps(mergedProps)
+  } = omitThemeProps(mergedProps, ["withBorder"])
   const animation = useAnimation({
     keyframes: {
       "75%, 100%": {
@@ -242,7 +242,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
           ref={ref}
           className={cx("ui-indicator__icon", className)}
           __css={css}
-          {...omitObject(rest, ["withBorder"])}
+          {...rest}
         >
           {renderLabel}
 

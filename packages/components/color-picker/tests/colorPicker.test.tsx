@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@yamada-ui/test"
 import { ColorPicker } from "../src"
+import { mockEyeDropper, resetEyeDropperMock } from "./utils/mock-eye-dropper"
 
 describe("<ColorPicker />", () => {
   test("ColorPicker renders correctly", async () => {
@@ -27,5 +28,23 @@ describe("<ColorPicker />", () => {
     const colorPicker = screen.getByTestId("colorPicker")
 
     expect(colorPicker).toHaveValue("#00ff00")
+  })
+
+  test("ColorPicker renders with eye dropper", () => {
+    mockEyeDropper()
+
+    render(
+      <ColorPicker
+        defaultValue="#00ff00"
+        data-testid="colorPicker"
+        withEyeDropper
+      />,
+    )
+
+    const colorPicker = screen.getByTestId("colorPicker")
+
+    expect(colorPicker).toHaveValue("#00ff00")
+
+    resetEyeDropperMock()
   })
 })

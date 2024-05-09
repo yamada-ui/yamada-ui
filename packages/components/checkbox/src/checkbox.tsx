@@ -173,11 +173,6 @@ export const useCheckbox = <
     [setActive],
   )
 
-  const formControlProps = pickObject(
-    rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
-  )
-
   useEffect(() => {
     return trackFocusVisible(setIsFocusVisible)
   }, [])

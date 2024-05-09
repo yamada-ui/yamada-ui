@@ -536,7 +536,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   return {
-    uiProps: rest,
+    props: rest,
     value: format(value),
     valueAsNumber,
     isFocused,
@@ -702,10 +702,14 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
       addonProps,
       incrementProps,
       decrementProps,
-      ...rest
+      ...computedProps
     } = omitThemeProps(mergedProps)
-    const { uiProps, getInputProps, getIncrementProps, getDecrementProps } =
-      useNumberInput(rest)
+    const {
+      getInputProps,
+      getIncrementProps,
+      getDecrementProps,
+      props: rest,
+    } = useNumberInput(computedProps)
 
     const css: CSSUIObject = {
       position: "relative",
@@ -723,7 +727,7 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
           {...containerProps}
         >
           <NumberInputField
-            {...getInputProps(uiProps as DOMAttributes<HTMLElement>, ref)}
+            {...getInputProps(rest as DOMAttributes<HTMLElement>, ref)}
           />
 
           {isStepper ? (

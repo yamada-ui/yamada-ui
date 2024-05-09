@@ -7,12 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal, type PortalProps } from "@yamada-ui/portal"
-import {
-  cx,
-  getValidChildren,
-  isValidElement,
-  omitObject,
-} from "@yamada-ui/utils"
+import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import { ColorSelector } from "./color-selector"
@@ -123,7 +118,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       channelProps,
       portalProps = { isDisabled: true },
       ...computedProps
-    } = omitThemeProps(omitObject(mergedProps, ["withSwatch"]))
+    } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
       allowInput,
       eyeDropperSupported,

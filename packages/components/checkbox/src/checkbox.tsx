@@ -163,6 +163,11 @@ export const useCheckbox = <Y extends string | number = string>(
     [setActive],
   )
 
+  const formControlProps = pickObject(
+    rest,
+    getFormControlProperties({ omit: ["aria-readonly"] }),
+  )
+
   useEffect(() => {
     return trackFocusVisible(setIsFocusVisible)
   }, [])
@@ -191,10 +196,7 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === "LABEL")
@@ -208,15 +210,12 @@ export const useCheckbox = <Y extends string | number = string>(
         requestAnimationFrame(() => inputRef.current?.focus())
       }),
     }),
-    [checked, isLabel, rest],
+    [checked, isLabel, formControlProps],
   )
 
   const getIconProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref,
       "data-active": dataAttr(isActive),
@@ -242,16 +241,13 @@ export const useCheckbox = <Y extends string | number = string>(
       isHovered,
       isFocusVisible,
       isIndeterminate,
-      rest,
+      formControlProps,
     ],
   )
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(inputRef, ref),
       id,
@@ -281,7 +277,7 @@ export const useCheckbox = <Y extends string | number = string>(
       onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
-      rest,
+      formControlProps,
       id,
       name,
       value,
@@ -300,10 +296,7 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref,
       "data-checked": dataAttr(checked),
@@ -316,7 +309,7 @@ export const useCheckbox = <Y extends string | number = string>(
         ev.stopPropagation()
       }),
     }),
-    [checked, rest],
+    [checked, formControlProps],
   )
 
   return {

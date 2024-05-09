@@ -7,9 +7,9 @@ import type {
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
+  formControlProperties,
   useFormControl,
   useFormControlProps,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
 import type { PropGetter } from "@yamada-ui/utils"
@@ -73,9 +73,9 @@ export const useRadio = <Y extends string | number = string>(
   const { name, value, required, disabled, readOnly, ...rest } =
     useFormControlProps(props)
   const id = props.id || useId()
-  const formControlProps = pickObject(
+  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
+    formControlProperties,
   )
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)

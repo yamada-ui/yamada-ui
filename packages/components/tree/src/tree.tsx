@@ -17,6 +17,7 @@ import {
   createContext,
   cx,
   isArray,
+  isNull,
   isObject,
   isValidElement,
 } from "@yamada-ui/utils"
@@ -164,13 +165,13 @@ export const Tree = forwardRef<TreeProps, "ul">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  if (isDefaultExpanded && (value || defaultValue) != null) {
+  if (isDefaultExpanded && !isNull(value || defaultValue)) {
     console.warn(
       `Tree: If 'isDefaultExpanded' is true, then 'index' or 'defaultIndex' must not be passed.`,
     )
   }
 
-  if ((value || defaultValue) != null && !isArray(value || defaultValue)) {
+  if (!isNull(value || defaultValue) && !isArray(value || defaultValue)) {
     console.warn(`Tree: 'index' or 'defaultIndex' must be an array.`)
   }
 

@@ -1,5 +1,5 @@
 import type { Break, Node, Paragraph, Text } from "mdast"
-import type { Literal, Parent } from "unist"
+import type { Literal } from "unist"
 import { is } from "unist-util-is"
 import { getFragmentPattern } from "./patterns"
 
@@ -14,10 +14,6 @@ const isObject = (target: unknown): target is { [key: string]: unknown } => {
 
 export const isNode = (node: unknown): node is Node => {
   return isObject(node) && "type" in node
-}
-
-export const isParent = (node: unknown): node is Parent => {
-  return isObject(node) && Array.isArray(node.children)
 }
 
 export const isLiteral = (node: unknown): node is Literal => {

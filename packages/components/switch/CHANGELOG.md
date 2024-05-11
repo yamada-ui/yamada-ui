@@ -1,5 +1,14 @@
 # @yamada-ui/switch
 
+## 1.0.30
+
+### Patch Changes
+
+- [#1430](https://github.com/yamada-ui/yamada-ui/pull/1430) [`0a956cf`](https://github.com/yamada-ui/yamada-ui/commit/0a956cf64c6acaa08723ba686904a05624fe6787) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The loop processing used internally was removed to improve performance.
+
+- Updated dependencies [[`0a956cf`](https://github.com/yamada-ui/yamada-ui/commit/0a956cf64c6acaa08723ba686904a05624fe6787), [`c8540e6`](https://github.com/yamada-ui/yamada-ui/commit/c8540e6fe79f0580c8e799da42e5a4ade429758c)]:
+  - @yamada-ui/checkbox@1.0.30
+
 ## 1.0.29
 
 ### Patch Changes

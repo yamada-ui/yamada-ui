@@ -1,5 +1,17 @@
 # @yamada-ui/checkbox
 
+## 1.0.30
+
+### Patch Changes
+
+- [#1430](https://github.com/yamada-ui/yamada-ui/pull/1430) [`0a956cf`](https://github.com/yamada-ui/yamada-ui/commit/0a956cf64c6acaa08723ba686904a05624fe6787) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The loop processing used internally was removed to improve performance.
+
+- [#1476](https://github.com/yamada-ui/yamada-ui/pull/1476) [`c8540e6`](https://github.com/yamada-ui/yamada-ui/commit/c8540e6fe79f0580c8e799da42e5a4ade429758c) Thanks [@GensIto](https://github.com/GensIto)! - fix checkbox
+
+- Updated dependencies [[`686a0b6`](https://github.com/yamada-ui/yamada-ui/commit/686a0b6caf0b34512719d61ffd7c7bef96673282), [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/use-focus-visible@1.1.0
+  - @yamada-ui/form-control@1.1.0
+
 ## 1.0.29
 
 ### Patch Changes

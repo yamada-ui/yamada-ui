@@ -237,6 +237,9 @@ importers:
       glob:
         specifier: ^10.3.12
         version: 10.3.12
+      globals:
+        specifier: ^15.2.0
+        version: 15.2.0
       husky:
         specifier: ^9.0.11
         version: 9.0.11
@@ -16556,6 +16559,11 @@ packages:
 
   /globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
+    engines: {node: '>=18'}
+    dev: false
+
+  /globals@15.2.0:
+    resolution: {integrity: sha512-FQ5YwCHZM3nCmtb5FzEWwdUc9K5d3V/w9mzcz8iGD1gC/aOTHc6PouYu0kkKipNJqHAT7m51sqzQjEjIP+cK0A==}
     engines: {node: '>=18'}
     dev: false
 

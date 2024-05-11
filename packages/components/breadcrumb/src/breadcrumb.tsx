@@ -221,7 +221,7 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className="ui-breadcrumb__item__separator"
+        className="ui-breadcrumb__separator"
         __css={css}
         {...rest}
       >
@@ -247,7 +247,7 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
       <Icon
         ref={ref}
         title="ellipsis"
-        className={cx("ui-breadcrumb__item__ellipsis", className)}
+        className={cx("ui-breadcrumb__ellipsis", className)}
         __css={css}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 36 24"

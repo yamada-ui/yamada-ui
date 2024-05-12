@@ -1,5 +1,11 @@
 # @yamada-ui/scroll-area
 
+## 1.0.26
+
+### Patch Changes
+
+- [#1396](https://github.com/yamada-ui/yamada-ui/pull/1396) [`bef30d4`](https://github.com/yamada-ui/yamada-ui/commit/bef30d4c4511a0264fbda7eccb6b0f2bb2f63ea0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added data attributes for easy identification.
+
 ## 1.0.25
 
 ### Patch Changes

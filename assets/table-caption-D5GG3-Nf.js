@@ -1,0 +1,1 @@
+import{j as c}from"./jsx-runtime-Nms4Y4qS.js";import{u as e}from"./td-LhEsDk2q.js";import{f as m}from"./forward-ref-BmTAT9U5.js";import{u as p,c as n}from"./factory-QgPjGyGX.js";const b=m(({className:s,placement:o="bottom",...t},a)=>{const r=e(),i={captionSide:o,...r.caption};return c.jsx(p.caption,{ref:a,className:n("ui-table__caption",s),__css:i,...t})});export{b as T};

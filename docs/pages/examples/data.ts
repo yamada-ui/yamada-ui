@@ -41,12 +41,12 @@ export const AUTHORS: Record<
     {
       name: "taroj1205",
       src: "https://avatars.githubusercontent.com/u/61367823?v=4",
-      href: "https://github.com/hirotomoyamada",
+      href: "https://github.com/taroj1205",
     },
     {
       name: "hirotomoyamada",
       src: "https://avatars.githubusercontent.com/u/84060430?v=4",
-      href: "https://github.com/taroj1205",
+      href: "https://github.com/hirotomoyamada",
     },
   ],
   tasks: [

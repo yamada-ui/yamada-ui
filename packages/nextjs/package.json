@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/nextjs",
-  "version": "5.0.24",
-  "description": "Yamada UI Integrations for Next.js 13",
+  "version": "5.0.25",
+  "description": "Yamada UI Integrations for Next.js 14",
   "keywords": [
     "yamada",
     "yamada ui",
@@ -45,13 +45,13 @@
   "devDependencies": {
     "clean-package": "2.2.0",
     "react": "^18.0.0",
-    "next": ">=13"
+    "next": ">=14"
   },
   "peerDependencies": {
     "react": ">=18",
-    "next": ">=13",
+    "next": ">=14",
     "@emotion/react": ">=11",
-    "@yamada-ui/react": ">=0.5.0"
+    "@yamada-ui/react": ">=1"
   },
   "clean-package": "../../clean-package.config.json",
   "tsup": {

@@ -120,7 +120,16 @@ const setGlobalFocusEvents = () => {
   hasSetup = true
 }
 
-export const trackFocusVisible = (func: FocusVisibleCallback) => {
+type TrackFocusVisibleOptions = {
+  force?: boolean
+}
+
+export const trackFocusVisible = (
+  func: FocusVisibleCallback,
+  { force }: TrackFocusVisibleOptions = {},
+) => {
+  if (force) hasSetup = false
+
   setGlobalFocusEvents()
 
   func(isFocusVisible())
@@ -134,13 +143,13 @@ export const trackFocusVisible = (func: FocusVisibleCallback) => {
   }
 }
 
-export const useFocusVisible = () => {
+export const useFocusVisible = (options?: TrackFocusVisibleOptions) => {
   const [focusVisible, setFocusVisible] = useState(false)
   const [focus, setFocus] = useState(false)
 
   useEffect(() => {
-    return trackFocusVisible(setFocusVisible)
-  }, [])
+    return trackFocusVisible(setFocusVisible, options)
+  }, [options])
 
   return {
     focusVisible: focusVisible && focus,

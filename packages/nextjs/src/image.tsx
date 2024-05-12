@@ -1,17 +1,18 @@
 import type { UIComponent, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
 import type { ImageProps as NextImageProps } from "next/image"
 import NextImage from "next/image"
 
-export type ImageProps = Omit<HTMLUIProps<"img">, keyof NextImageProps> &
-  NextImageProps
+type OmittedNextImageProps = Omit<NextImageProps, "objectFit">
+
+export type ImageProps = Merge<HTMLUIProps<"img">, OmittedNextImageProps>
 
 export const Image: UIComponent<"img", ImageProps> = ui(NextImage, {
   shouldForwardProp: (prop) =>
     [
       "src",
       "alt",
-      "sizes",
       "width",
       "height",
       "fill",
@@ -22,14 +23,7 @@ export const Image: UIComponent<"img", ImageProps> = ui(NextImage, {
       "placeholder",
       "blurDataURL",
       "unoptimized",
-      "onLoadingComplete",
-      "alt",
-      "crossOrigin",
-      "decoding",
-      "loading",
-      "referrerPolicy",
+      "overrideSrc",
       "sizes",
-      "src",
-      "useMap",
     ].includes(prop),
 })

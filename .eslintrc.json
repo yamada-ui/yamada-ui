@@ -13,16 +13,7 @@
     "browser": true,
     "node": true
   },
-  "settings": {
-    "react": {
-      "version": "detect"
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".mts", ".d.ts"]
-      }
-    }
-  },
+  "settings": {},
   "plugins": ["testing-library"],
   "rules": {},
   "overrides": [

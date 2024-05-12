@@ -1,5 +1,22 @@
 # @yamada-ui/calendar
 
+## 1.2.14
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
+## 1.2.13
+
+### Patch Changes
+
+- Updated dependencies [[`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`da08897`](https://github.com/yamada-ui/yamada-ui/commit/da08897c113f6e3eee7d3fe53b5c84314ea509ae), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5), [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0)]:
+  - @yamada-ui/core@1.6.7
+  - @yamada-ui/popover@1.1.2
+  - @yamada-ui/form-control@1.0.28
+  - @yamada-ui/button@1.0.28
+  - @yamada-ui/icon@1.0.25
+
 ## 1.2.12
 
 ### Patch Changes

@@ -4,8 +4,8 @@ import { Github, Npm } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
 import { usePage } from "contexts/page-context"
-import type { FC } from "react"
 import { memo } from "react"
+import type { FC } from "react"
 
 export type RelatedLinksProps = FlexProps
 

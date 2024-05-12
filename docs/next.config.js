@@ -8,10 +8,22 @@ const nextConfig = {
     externalDir: true,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    dirs: [
+      "pages",
+      "components",
+      "constant",
+      "contexts",
+      "hooks",
+      "layouts",
+      "libs",
+      "scripts",
+      "theme",
+      "utils",
+    ],
   },
-  typescript: {
-    ignoreBuildErrors: true,
+  typescript: {},
+  images: {
+    domains: ["images.pexels.com"],
   },
   pageExtensions: ["page.jsx", "page.tsx"],
   i18n: {

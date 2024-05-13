@@ -65,7 +65,7 @@ export const ColorSelectorSwatches = forwardRef<
       <ui.div {...swatchesContainerProps}>
         {swatchesLabel ? (
           <ui.p
-            className="ui-color-selector__swatches__label"
+            className="ui-color-selector__swatches-label"
             __css={{ ...styles.swatchesLabel }}
           >
             {swatchesLabel}

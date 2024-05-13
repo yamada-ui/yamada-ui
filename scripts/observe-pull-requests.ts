@@ -11,6 +11,11 @@ type Collaborator = Awaited<
 type Review = Awaited<
   ReturnType<typeof octokit.pulls.listReviews>
 >["data"][number]
+type Reviewer = Awaited<ReturnType<typeof getPullRequest>>["user"]
+type RequestedReviewers = Awaited<
+  ReturnType<typeof getPullRequest>
+>["requested_reviewers"]
+type Head = Awaited<ReturnType<typeof getPullRequest>>["head"]
 
 const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const OMIT_GITHUB_IDS = ["hirotomoyamada", "hajimemat"]
@@ -28,6 +33,8 @@ const DISCORD_USER_MAP: Record<string, string> = {
   imaimai17468: "394831848733409281",
   suzukisan22: "611441723712864256",
 }
+
+const USER_LENGTH = Object.keys(DISCORD_USER_MAP).length
 
 const GITHUB_JOINING_COMMENT = (id: string) =>
   [
@@ -114,11 +121,46 @@ const getPullRequest = async (number: number) => {
   return { ...data, reviewers }
 }
 
+const getReviewers = async (pullRequests: Issue[]) => {
+  const alreadyReviewing: string[] = []
+  const prs: {
+    [key: number]: {
+      requested_reviewers: RequestedReviewers
+      draft: boolean | undefined
+      reviewers: Reviewer[]
+      head: Head
+    }
+  } = {}
+
+  for await (const { number } of pullRequests) {
+    const pullRequest = await getPullRequest(number)
+
+    if (!pullRequest) continue
+
+    const { requested_reviewers, draft, reviewers, head } = pullRequest
+
+    prs[number] = { requested_reviewers, draft, reviewers, head }
+
+    if (!requested_reviewers) continue
+
+    for (const { login } of requested_reviewers) {
+      if (!alreadyReviewing.includes(DISCORD_USER_MAP[login])) {
+        alreadyReviewing.push(DISCORD_USER_MAP[login])
+      }
+    }
+  }
+
+  return { alreadyReviewing, prs }
+}
+
 const addReviewers = async (
   pullRequests: Issue[],
   collaborators: Collaborator[],
 ) => {
   const collaboratorIds = collaborators.map(({ login }) => login)
+  const { alreadyReviewing, prs } = await getReviewers(pullRequests)
+
+  let assignedReviewers: string[] = [...alreadyReviewing]
 
   const url = process.env.DISCORD_REVIEWS_WEBHOOK_URL
 
@@ -128,8 +170,9 @@ const addReviewers = async (
     pullRequests.map(async ({ number, title, user, html_url }) => {
       if (!user) return
 
-      const { draft, requested_reviewers, reviewers, head } =
-        await getPullRequest(number)
+      if (!prs[number]) return
+
+      const { draft, requested_reviewers, reviewers, head } = prs[number]
 
       if (draft) return
 
@@ -160,12 +203,19 @@ const addReviewers = async (
             id !== user.login &&
             !requested_reviewers?.some(({ login }) => login === id) &&
             !reviewers.some(({ login }) => login === id) &&
-            !OMIT_GITHUB_IDS.includes(id),
+            !OMIT_GITHUB_IDS.includes(id) &&
+            (assignedReviewers.length < USER_LENGTH - count
+              ? !assignedReviewers.some((login) => login === id)
+              : true),
         )
 
         selectedReviewers = omitCollaboratorIds
           .sort(() => 0.5 - Math.random())
           .slice(0, 2 - count)
+
+        assignedReviewers = [
+          ...new Set([...assignedReviewers, ...selectedReviewers]),
+        ]
 
         await octokit.pulls.requestReviewers({
           ...COMMON_PARAMS,

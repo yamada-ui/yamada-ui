@@ -1,4 +1,5 @@
 import type { AlertStatus } from "@yamada-ui/core"
+import { isNull, isUndefined } from "@yamada-ui/utils"
 import type { Parent as HastParent } from "hast"
 import type { Break, Paragraph, PhrasingContent, Root } from "mdast"
 import type { ElementContent } from "react-markdown/lib"
@@ -58,8 +59,8 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             ).exec(textNode.value)
 
             if (
-              startFragmentCapturedGroups !== null &&
-              endFragmentCapturedGroups !== null
+              !isNull(startFragmentCapturedGroups) &&
+              !isNull(endFragmentCapturedGroups)
             ) {
               if (isMerging) {
                 buf.push(textNode)
@@ -95,7 +96,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             const capturedGroups = getFragmentPattern("start", false).exec(
               textNode.value,
             )
-            if (capturedGroups !== null) {
+            if (!isNull(capturedGroups)) {
               isMerging = true
 
               status = getStatus(capturedGroups.groups?.status)
@@ -172,7 +173,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
 
         buf.push({ type: "break" } satisfies Break)
       } else {
-        if (paragraph !== undefined) {
+        if (!isUndefined(paragraph)) {
           tree.children.splice(index!, 1, {
             ...node,
             type: "custom" as "paragraph",

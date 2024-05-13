@@ -3,7 +3,7 @@ import { NumberInput } from "../src"
 
 describe("<NumberInput />", () => {
   test("NumberInput renders correctly", async () => {
-    const { container } = render(<NumberInput aria-label="number-input" />)
+    const { container } = render(<NumberInput aria-label="Input number" />)
     await a11y(container)
   })
 
@@ -28,7 +28,7 @@ describe("<NumberInput />", () => {
     render(
       <NumberInput
         data-testid="NumberInput"
-        aria-label="number-input"
+        aria-label="Input number"
         defaultValue={20}
         step={5}
         min={5}
@@ -46,7 +46,7 @@ describe("<NumberInput />", () => {
     render(
       <NumberInput
         data-testid="NumberInput"
-        aria-label="number-input"
+        aria-label="Input number"
         disabled
       />,
     )

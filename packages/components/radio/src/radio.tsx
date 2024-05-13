@@ -9,18 +9,17 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
   useFormControlProps,
-  getFormControlProperties,
+  formControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter } from "@yamada-ui/utils"
+import type { Dict, PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   useCallbackRef,
-  omitObject,
   funcAll,
   handlerAll,
   dataAttr,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import type {
   ForwardedRef,
@@ -67,26 +66,40 @@ export type UseRadioProps<Y extends string | number = string> =
     onChange?: ChangeEventHandler<HTMLInputElement>
   }
 
-export const useRadio = <Y extends string | number = string>(
-  props: UseRadioProps<Y>,
-) => {
-  const { name, value, required, disabled, readOnly, ...rest } =
-    useFormControlProps(props)
-  const id = props.id || useId()
-  const formControlProps = pickObject(
-    rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
-  )
+export const useRadio = <
+  Y extends string | number = string,
+  M extends Dict = Dict,
+>({
+  id,
+  ...props
+}: UseRadioProps<Y> & M) => {
+  id ??= useId()
+  const {
+    id: _id,
+    name,
+    value,
+    isChecked: isCheckedProp,
+    defaultIsChecked,
+    required,
+    disabled,
+    readOnly,
+    onChange: onChangeProp,
+    onFocus: onFocusProp,
+    onBlur: onBlurProp,
+    ...computedProps
+  } = useFormControlProps({ id, ...props })
+  const [{ "aria-readonly": _ariaReadonly, ...formControlProps }, rest] =
+    splitObject(computedProps, formControlProperties)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
   const [isHovered, setHovered] = useState<boolean>(false)
   const [isActive, setActive] = useState<boolean>(false)
 
-  const [isChecked, setIsChecked] = useState<boolean>(!!props.defaultIsChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(!!defaultIsChecked)
 
-  const isControlled = props.isChecked !== undefined
-  const checked = isControlled ? (props.isChecked as boolean) : isChecked
+  const isControlled = isCheckedProp !== undefined
+  const checked = isControlled ? (isCheckedProp as boolean) : isChecked
 
   useEffect(() => {
     return trackFocusVisible(setIsFocusVisible)
@@ -102,12 +115,12 @@ export const useRadio = <Y extends string | number = string>(
 
       if (!isControlled) setIsChecked(ev.target.checked)
 
-      rest.onChange?.(ev)
+      onChangeProp?.(ev)
     },
     [readOnly, disabled, isControlled],
   )
-  const onBlur = useCallbackRef(rest.onBlur)
-  const onFocus = useCallbackRef(rest.onFocus)
+  const onFocus = useCallbackRef(onFocusProp)
+  const onBlur = useCallbackRef(onBlurProp)
 
   const onKeyDown = useCallback(
     ({ key }: KeyboardEvent<Element>) => {
@@ -218,6 +231,7 @@ export const useRadio = <Y extends string | number = string>(
   )
 
   return {
+    props: rest,
     isFocusVisible,
     isFocused,
     isHovered,
@@ -257,57 +271,57 @@ export const Radio = forwardRef(
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const group = useRadioGroupContext()
+    const { value: groupValue, ...groupProps } = { ...group }
     const control = useFormControl(props)
     const [styles, mergedProps] = useMultiComponentStyle("Radio", {
-      ...group,
+      ...groupProps,
       ...props,
     })
     const {
       className,
       gap = "0.5rem",
-      isRequired = group?.isRequired ?? control.isRequired,
-      isReadOnly = group?.isReadOnly ?? control.isReadOnly,
-      isDisabled = group?.isDisabled ?? control.isDisabled,
-      isInvalid = group?.isInvalid ?? control.isInvalid,
+      isRequired = groupProps.isRequired ?? control.isRequired,
+      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
+      isDisabled = groupProps.isDisabled ?? control.isDisabled,
+      isInvalid = groupProps.isInvalid ?? control.isInvalid,
       iconProps,
       inputProps,
       labelProps,
       children,
-      ...rest
+      ...computedProps
     } = omitThemeProps(mergedProps)
 
-    const { getContainerProps, getInputProps, getIconProps, getLabelProps } =
-      useRadio({
-        ...rest,
-        isRequired,
-        isReadOnly,
-        isDisabled,
-        isInvalid,
-        isChecked:
-          group?.value && rest.value
-            ? group.value === rest.value
-            : rest.isChecked,
-        onChange:
-          group?.onChange && rest.value
-            ? funcAll(group.onChange, rest.onChange)
-            : rest.onChange,
-      })
+    const isChecked =
+      groupValue && computedProps.value
+        ? groupValue === computedProps.value
+        : computedProps.isChecked
+
+    const onChange =
+      groupProps.onChange && computedProps.value
+        ? funcAll(groupProps.onChange, computedProps.onChange)
+        : computedProps.onChange
+
+    const {
+      getContainerProps,
+      getInputProps,
+      getIconProps,
+      getLabelProps,
+      props: rest,
+    } = useRadio({
+      ...computedProps,
+      isRequired,
+      isReadOnly,
+      isDisabled,
+      isInvalid,
+      isChecked,
+      onChange,
+    })
 
     return (
       <ui.label
         className={cx("ui-radio", className)}
         {...getContainerProps()}
-        {...omitObject(rest, [
-          "id",
-          "name",
-          "value",
-          "defaultValue",
-          "defaultIsChecked",
-          "isChecked",
-          "onChange",
-          "onBlur",
-          "onFocus",
-        ])}
+        {...rest}
         __css={{
           cursor: "pointer",
           position: "relative",

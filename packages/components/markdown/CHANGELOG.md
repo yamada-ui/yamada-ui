@@ -1,5 +1,17 @@
 # @yamada-ui/markdown
 
+## 1.0.28
+
+### Patch Changes
+
+- [#1490](https://github.com/yamada-ui/yamada-ui/pull/1490) [`a7a25a2`](https://github.com/yamada-ui/yamada-ui/commit/a7a25a2901d55b46977f02819821e2d4696bba72) Thanks [@koralle](https://github.com/koralle)! - Remove unneeded functions
+
+## 1.0.27
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
 ## 1.0.26
 
 ### Patch Changes

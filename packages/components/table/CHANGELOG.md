@@ -1,5 +1,24 @@
 # @yamada-ui/table
 
+## 1.0.32
+
+### Patch Changes
+
+- [#1411](https://github.com/yamada-ui/yamada-ui/pull/1411) [`c519f44`](https://github.com/yamada-ui/yamada-ui/commit/c519f446b2f48471bdf98a7437e5a9b14d595ded) Thanks [@Eiji-Kudo](https://github.com/Eiji-Kudo)! - Integrate omitObject handling with omitThemeProps
+
+- [#1424](https://github.com/yamada-ui/yamada-ui/pull/1424) [`03f65fd`](https://github.com/yamada-ui/yamada-ui/commit/03f65fd68092f7598280ec9e187286a76a62888a) Thanks [@sacky3105](https://github.com/sacky3105)! - Integrate `omitObject` handling with `omitThemeProps`
+
+- Updated dependencies [[`0a956cf`](https://github.com/yamada-ui/yamada-ui/commit/0a956cf64c6acaa08723ba686904a05624fe6787), [`c8540e6`](https://github.com/yamada-ui/yamada-ui/commit/c8540e6fe79f0580c8e799da42e5a4ade429758c), [`61f1b30`](https://github.com/yamada-ui/yamada-ui/commit/61f1b300724151bcc30f3368a0b9acf90e959f11), [`745a925`](https://github.com/yamada-ui/yamada-ui/commit/745a92553bd30c3bdb62062f91be0d85fabcb94f)]:
+  - @yamada-ui/checkbox@1.0.30
+  - @yamada-ui/select@1.2.12
+  - @yamada-ui/native-table@1.0.27
+
+## 1.0.31
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
 ## 1.0.30
 
 ### Patch Changes

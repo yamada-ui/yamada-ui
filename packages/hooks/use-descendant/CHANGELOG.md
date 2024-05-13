@@ -1,5 +1,11 @@
 # @yamada-ui/use-descendant
 
+## 1.0.14
+
+### Patch Changes
+
+- [#1425](https://github.com/yamada-ui/yamada-ui/pull/1425) [`659fe11`](https://github.com/yamada-ui/yamada-ui/commit/659fe11b4457c6a2e8be228dd3d47648f759010b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exported descendant types and interfaces.
+
 ## 1.0.13
 
 ### Patch Changes

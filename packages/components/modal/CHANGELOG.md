@@ -1,5 +1,11 @@
 # @yamada-ui/modal
 
+## 1.2.8
+
+### Patch Changes
+
+- [#1426](https://github.com/yamada-ui/yamada-ui/pull/1426) [`33a0ac6`](https://github.com/yamada-ui/yamada-ui/commit/33a0ac6fb72476201b765fe105273a7ca60d456e) Thanks [@sacky3105](https://github.com/sacky3105)! - Integrate `omitObject` handling with `omitThemeProps`
+
 ## 1.2.7
 
 ### Patch Changes

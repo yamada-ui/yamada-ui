@@ -8,8 +8,8 @@ import {
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
+  formControlProperties,
   useFormControlProps,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { ChevronIcon } from "@yamada-ui/icon"
 import {
@@ -122,9 +122,9 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
 
     rest = useFormControlProps(rest)
 
-    const formControlProps = pickObject(
+    const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
       rest,
-      getFormControlProperties({ omit: ["aria-readonly"] }),
+      formControlProperties,
     )
     const [layoutProps, selectProps] = splitObject(
       omitObject(rest, ["aria-readonly"]),

@@ -541,7 +541,7 @@ export const useColorSelector = ({
     ColorSwatchProps
   > = useCallback(
     ({ color, ...props } = {}, ref = null) => ({
-      "aria-label": `select ${color} as the color`,
+      "aria-label": `Select ${color} as the color`,
       disabled,
       readOnly,
       ...props,

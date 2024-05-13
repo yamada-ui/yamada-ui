@@ -1,4 +1,5 @@
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { act } from "react"
 import { Select, Option, OptionGroup, MultiSelect } from "../src"
 
 describe("<Select />", () => {
@@ -179,5 +180,26 @@ describe("<MultiSelect />", () => {
     await user.click(optionTwo)
 
     expect(screen.getByText("One,")).toBeInTheDocument()
+  })
+
+  test("should not focus disabled element", async () => {
+    const { getByTestId } = render(
+      <MultiSelect data-testid="MultiSelect">
+        <Option data-testid="Option-One" value="one">
+          One
+        </Option>
+        <Option data-testid="Option-Two" isDisabled value="two">
+          Two
+        </Option>
+        <Option data-testid="Option-Three" value="three">
+          Three
+        </Option>
+      </MultiSelect>,
+    )
+
+    act(() => {
+      fireEvent.click(getByTestId("MultiSelect"))
+      fireEvent.keyDown(getByTestId("MultiSelect"), { key: "ArrowDown" })
+    })
   })
 })

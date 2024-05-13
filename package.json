@@ -101,6 +101,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@octokit/request-error": "^6.1.1",
     "@octokit/rest": "^20.1.0",
     "@storybook/addon-a11y": "^8.0.9",
     "@storybook/addon-backgrounds": "^8.0.9",

@@ -6,7 +6,7 @@ import { NativeOption, NativeSelect } from "../src"
 describe("<NativeSelect />", () => {
   test("NativeSelect renders correctly", async () => {
     const { container } = render(
-      <NativeSelect aria-label="select" placeholder="Options">
+      <NativeSelect aria-label="Select value" placeholder="Options">
         <NativeOption value="one">Option 1</NativeOption>
         <NativeOption value="two">Option 2</NativeOption>
       </NativeSelect>,

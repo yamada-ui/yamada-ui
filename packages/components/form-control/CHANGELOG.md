@@ -1,5 +1,11 @@
 # @yamada-ui/form-control
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1430](https://github.com/yamada-ui/yamada-ui/pull/1430) [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Made `useFormControl` a generic function and returned other props.
+
 ## 1.0.28
 
 ### Patch Changes

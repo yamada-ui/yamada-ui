@@ -1,5 +1,5 @@
+import type { RequestError } from "@octokit/request-error"
 import { Octokit } from "@octokit/rest"
-import { AxiosError } from "axios"
 import dayjs from "dayjs"
 import { config } from "dotenv"
 
@@ -55,13 +55,14 @@ const recursiveFetch = async (callback: () => Promise<void>) => {
   try {
     await callback()
   } catch (e) {
-    if (
-      e instanceof AxiosError &&
-      e.status === 403 &&
-      e.response?.headers["x-ratelimit-remaining"] === "0"
-    ) {
-      const resetTime =
-        parseInt(e.response.headers?.["x-ratelimit-reset"] ?? "0") * 1000
+    const isForbidden = (e as RequestError).status === 403
+    const isRateLimitExceeded =
+      (e as RequestError).response?.headers["x-ratelimit-remaining"] === "0"
+
+    if (isForbidden && isRateLimitExceeded) {
+      const ratelimitReset =
+        (e as RequestError).response?.headers?.["x-ratelimit-reset"] ?? "0"
+      const resetTime = parseInt(ratelimitReset) * 1000
       const waitTime = resetTime - Date.now() + 1000
 
       await wait(waitTime)
@@ -87,7 +88,9 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
   const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:${START_DATE.format(QUERY_FORMAT)}..${END_DATE.format(QUERY_FORMAT)}`
   const perPage = 100
 
-  const fetchIssuesAndPullRequests = async (page: number = 1) => {
+  let page = 1
+
+  const fetchIssuesAndPullRequests = async () => {
     const { data } = await octokit.search.issuesAndPullRequests({
       q: query,
       per_page: perPage,
@@ -98,11 +101,13 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
     issues.push(...items)
 
     if (total_count === perPage) {
-      await recursiveFetch(() => fetchIssuesAndPullRequests(page + 1))
+      page++
+
+      await recursiveFetch(fetchIssuesAndPullRequests)
     }
   }
 
-  await recursiveFetch(() => fetchIssuesAndPullRequests())
+  await recursiveFetch(fetchIssuesAndPullRequests)
 
   return issues
 }

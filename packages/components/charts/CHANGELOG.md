@@ -1,5 +1,11 @@
 # @yamada-ui/charts
 
+## 1.1.4
+
+### Patch Changes
+
+- [#1480](https://github.com/yamada-ui/yamada-ui/pull/1480) [`beeefa6`](https://github.com/yamada-ui/yamada-ui/commit/beeefa67929159bce5bbe712981f73fadcad4de9) Thanks [@108yen](https://github.com/108yen)! - delete unnecessary dependencies
+
 ## 1.1.3
 
 ### Patch Changes

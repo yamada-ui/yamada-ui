@@ -6,9 +6,9 @@ import type {
   RequiredUIPropGetter,
 } from "@yamada-ui/core"
 import {
+  formControlProperties,
   useFormControlProps,
   type FormControlOptions,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
@@ -211,9 +211,9 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   locale ??= theme.__config.date?.locale ?? "en"
 
-  const formControlProps = pickObject(
+  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
+    formControlProperties,
   )
   const [containerProps, inputProps] = splitObject<Dict, string>(
     omitObject(rest, popoverProperties),

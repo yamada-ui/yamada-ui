@@ -4,11 +4,11 @@ import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
 import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
+import type { Dict } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
   isObject,
-  omitObject,
   useCallbackRef,
   getValidChildren,
 } from "@yamada-ui/utils"
@@ -48,16 +48,22 @@ export type UseCheckboxGroupProps<Y extends string | number = string> = {
   isNative?: boolean
 }
 
-export const useCheckboxGroup = <Y extends string | number = string>({
+export const useCheckboxGroup = <
+  Y extends string | number = string,
+  M extends Dict = Dict,
+>({
+  value: valueProp,
+  defaultValue = [],
+  onChange: onChangeProp,
   isNative,
   ...props
-}: UseCheckboxGroupProps<Y>) => {
-  props.onChange = useCallbackRef(props.onChange)
+}: UseCheckboxGroupProps<Y> & M) => {
+  const onChangeRef = useCallbackRef(onChangeProp)
 
   const [value, setValue] = useControllableState({
-    value: props.value,
-    defaultValue: props.defaultValue || [],
-    onChange: props.onChange,
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeRef,
   })
 
   const onChange = useCallback(
@@ -92,7 +98,7 @@ export const useCheckboxGroup = <Y extends string | number = string>({
       [onChange, isNative, value],
     )
 
-  return { value, setValue, onChange, getCheckboxProps }
+  return { props, value, setValue, onChange, getCheckboxProps }
 }
 
 export type UseCheckboxGroupReturn<Y extends string | number = string> =
@@ -143,9 +149,9 @@ export const CheckboxGroup = forwardRef(
     }: CheckboxGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const { value, onChange } = useCheckboxGroup<Y>(props)
-    const { isRequired, isReadOnly, isDisabled, isInvalid } =
-      useFormControl(props)
+    const { value, onChange, props: computedProps } = useCheckboxGroup<Y>(props)
+    const { isRequired, isReadOnly, isDisabled, isInvalid, ...rest } =
+      useFormControl(computedProps)
 
     const validChildren = getValidChildren(children)
     let computedChildren: ReactElement[] = []
@@ -180,15 +186,7 @@ export const CheckboxGroup = forwardRef(
           role="group"
           direction={direction}
           gap={gap ?? (direction === "row" ? "1rem" : undefined)}
-          {...omitObject(props, [
-            "value",
-            "defaultValue",
-            "onChange",
-            "isInvalid",
-            "isDisabled",
-            "isRequired",
-            "isReadOnly",
-          ])}
+          {...rest}
         >
           {children ?? computedChildren}
         </Flex>

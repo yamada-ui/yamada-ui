@@ -746,6 +746,13 @@
     }
   },
   {
+    "title": "Dockable",
+    "type": "page",
+    "description": "We are currently considering the development of `Dockable`.",
+    "slug": "/components/data-display/dockable",
+    "hierarchy": { "lv1": "Dockable" }
+  },
+  {
     "title": "Data Display",
     "type": "page",
     "description": "Components for constructing the display of project data, such as `Table` and `Calendar`, are available.",
@@ -1466,13 +1473,6 @@
       "lv2": "Usage",
       "lv3": "Control the scroll"
     }
-  },
-  {
-    "title": "SplitPanel",
-    "type": "page",
-    "description": "We are currently considering the development of `SplitPanel`.",
-    "slug": "/components/data-display/split-panel",
-    "hierarchy": { "lv1": "SplitPanel" }
   },
   {
     "title": "Stat",
@@ -8491,6 +8491,26 @@
       "lv1": "Breadcrumb",
       "lv2": "Usage",
       "lv3": "Use an icon as a separator"
+    }
+  },
+  {
+    "title": "Use the ellipsis",
+    "type": "fragment",
+    "slug": "/components/navigation/breadcrumb#use-the-ellipsis",
+    "hierarchy": {
+      "lv1": "Breadcrumb",
+      "lv2": "Usage",
+      "lv3": "Use the ellipsis"
+    }
+  },
+  {
+    "title": "Customize the ellipsis",
+    "type": "fragment",
+    "slug": "/components/navigation/breadcrumb#customize-the-ellipsis",
+    "hierarchy": {
+      "lv1": "Breadcrumb",
+      "lv2": "Usage",
+      "lv3": "Customize the ellipsis"
     }
   },
   {

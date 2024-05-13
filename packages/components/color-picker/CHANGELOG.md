@@ -1,5 +1,17 @@
 # @yamada-ui/color-picker
 
+## 1.2.14
+
+### Patch Changes
+
+- [#1474](https://github.com/yamada-ui/yamada-ui/pull/1474) [`64a4f21`](https://github.com/yamada-ui/yamada-ui/commit/64a4f2138a150afdee926d46a5a1e9199ce55d06) Thanks [@EndoTaishi](https://github.com/EndoTaishi)! - Unnecessary omitObject in ColorPicker is integrated with omitThemeProps.
+
+- [#1477](https://github.com/yamada-ui/yamada-ui/pull/1477) [`61f1b30`](https://github.com/yamada-ui/yamada-ui/commit/61f1b300724151bcc30f3368a0b9acf90e959f11) Thanks [@cidkumagai](https://github.com/cidkumagai)! - use destructuring assignment
+
+- Updated dependencies [[`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/form-control@1.1.0
+  - @yamada-ui/input@1.0.29
+
 ## 1.2.13
 
 ### Patch Changes

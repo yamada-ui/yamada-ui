@@ -1,5 +1,11 @@
 # @yamada-ui/indicator
 
+## 1.1.25
+
+### Patch Changes
+
+- [#1435](https://github.com/yamada-ui/yamada-ui/pull/1435) [`7109377`](https://github.com/yamada-ui/yamada-ui/commit/7109377aca1b354ed5c4f571be6ebdbb3b8bc3c3) Thanks [@sacky3105](https://github.com/sacky3105)! - Integrate `omitObject` handling with `omitThemeProps`
+
 ## 1.1.24
 
 ### Patch Changes

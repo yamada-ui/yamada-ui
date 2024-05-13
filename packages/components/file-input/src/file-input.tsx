@@ -111,7 +111,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       lineClamp = 1,
       separator = ",",
       resetRef,
-      "aria-readonly": isReadOnly,
+      "aria-readonly": ariaReadonly,
       onChange: onChangeProp,
       onClick: onClickProp,
       ...rest
@@ -227,7 +227,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
             position: "absolute",
           }}
           onChange={onChange}
-          area-readonly={isReadOnly}
+          aria-readonly={ariaReadonly}
           {...pickObject(rest, formControlProperties)}
         />
 

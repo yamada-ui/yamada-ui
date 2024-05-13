@@ -91,9 +91,9 @@ describe("<Pagination/>", () => {
   })
 
   test("should correctly apply itemProps to pagination props", () => {
-    render(<Pagination total={10} itemProps={{ "aria-label": "item props" }} />)
+    render(<Pagination total={10} itemProps={{ "aria-label": "Go to page" }} />)
 
-    expect(screen.getAllByLabelText("item props")).toHaveLength(7)
+    expect(screen.getAllByLabelText("Go to page")).toHaveLength(7)
   })
 
   test("should correctly apply edgeProps to edge buttons", () => {
@@ -101,22 +101,19 @@ describe("<Pagination/>", () => {
       <Pagination
         total={10}
         withEdges
-        edgeProps={{ "aria-label": "edge props" }}
+        edgeProps={{ "aria-label": "Go to page" }}
       />,
     )
 
-    expect(screen.getAllByLabelText("edge props")).toHaveLength(2)
+    expect(screen.getAllByLabelText("Go to page")).toHaveLength(2)
   })
 
   test("should correctly apply controlProps to control buttons", () => {
     render(
-      <Pagination
-        total={10}
-        controlProps={{ "aria-label": "control-props" }}
-      />,
+      <Pagination total={10} controlProps={{ "aria-label": "Go to page" }} />,
     )
 
-    expect(screen.getAllByLabelText("control-props")).toHaveLength(2)
+    expect(screen.getAllByLabelText("Go to page")).toHaveLength(2)
   })
 
   test("should not render control buttons when withControls is false", () => {

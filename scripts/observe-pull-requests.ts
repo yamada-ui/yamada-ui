@@ -11,7 +11,7 @@ type Collaborator = Awaited<
 type Review = Awaited<
   ReturnType<typeof octokit.pulls.listReviews>
 >["data"][number]
-type Reviewer = Awaited<ReturnType<typeof getPullRequest>>["user"]
+type Reviewers = Awaited<ReturnType<typeof getPullRequest>>["reviewers"]
 type RequestedReviewers = Awaited<
   ReturnType<typeof getPullRequest>
 >["requested_reviewers"]
@@ -127,7 +127,7 @@ const getReviewers = async (pullRequests: Issue[]) => {
     [key: number]: {
       requested_reviewers: RequestedReviewers
       draft: boolean | undefined
-      reviewers: Reviewer[]
+      reviewers: Reviewers
       head: Head
     }
   } = {}

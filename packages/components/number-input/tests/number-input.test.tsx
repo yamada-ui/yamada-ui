@@ -109,7 +109,7 @@ describe("<NumberInput />", () => {
     expect(screen.getByText("-")).toBeInTheDocument()
   })
 
-  test("キーボード操作で数値の計算が正しく反映される", async () => {
+  test("should correctly reflect value changes with keyboard operations", async () => {
     render(
       <NumberInput
         data-testid="NumberInput"
@@ -139,7 +139,7 @@ describe("<NumberInput />", () => {
     expect(el).toHaveValue("30")
   })
 
-  test("キーボード操作でステップをもとに数値の計算が正しく反映される", async () => {
+  test("should correctly reflect value changes based on step with keyboard operations", async () => {
     render(<NumberInput data-testid="NumberInput" defaultValue={10} step={5} />)
     const el = screen.getByTestId("NumberInput")
     expect(el).toHaveValue("10")
@@ -154,7 +154,7 @@ describe("<NumberInput />", () => {
     expect(el).toHaveValue("10")
   })
 
-  test("ステッパー要素で数値の計算が正しく反映される", async () => {
+  test("should correctly reflect value changes with stepper elements", async () => {
     const { user } = render(
       <NumberInput
         data-testid="NumberInput"

@@ -1,4 +1,4 @@
-import { a11y, render, screen, fireEvent } from "@yamada-ui/test"
+import { a11y, render, screen, fireEvent, act } from "@yamada-ui/test"
 import { NumberInput } from "../src"
 
 describe("<NumberInput />", () => {
@@ -107,5 +107,107 @@ describe("<NumberInput />", () => {
     )
     expect(screen.getByText("+")).toBeInTheDocument()
     expect(screen.getByText("-")).toBeInTheDocument()
+  })
+
+  test("キーボード操作で数値の計算が正しく反映される", async () => {
+    render(
+      <NumberInput
+        data-testid="NumberInput"
+        defaultValue={10}
+        min={0}
+        max={30}
+      />,
+    )
+    const el = screen.getByTestId("NumberInput")
+    expect(el).toHaveValue("10")
+    await act(async () => {
+      fireEvent.focus(el)
+      fireEvent.keyDown(el, { key: "ArrowUp" })
+    })
+    expect(el).toHaveValue("11")
+    await act(async () => {
+      fireEvent.keyDown(el, { key: "ArrowDown" })
+    })
+    expect(el).toHaveValue("10")
+    await act(async () => {
+      fireEvent.keyDown(el, { key: "Home" })
+    })
+    expect(el).toHaveValue("0")
+    await act(async () => {
+      fireEvent.keyDown(el, { key: "End" })
+    })
+    expect(el).toHaveValue("30")
+  })
+
+  test("キーボード操作でステップをもとに数値の計算が正しく反映される", async () => {
+    render(<NumberInput data-testid="NumberInput" defaultValue={10} step={5} />)
+    const el = screen.getByTestId("NumberInput")
+    expect(el).toHaveValue("10")
+    await act(async () => {
+      fireEvent.focus(el)
+      fireEvent.keyDown(el, { key: "ArrowUp" })
+    })
+    expect(el).toHaveValue("15")
+    await act(async () => {
+      fireEvent.keyDown(el, { key: "ArrowDown" })
+    })
+    expect(el).toHaveValue("10")
+  })
+
+  test("ステッパー要素で数値の計算が正しく反映される", async () => {
+    const { user } = render(
+      <NumberInput
+        data-testid="NumberInput"
+        defaultValue={10}
+        min={0}
+        max={30}
+      />,
+    )
+    const el = screen.getByTestId("NumberInput")
+    const incrementStepperEl = document.querySelector(
+      ".ui-number-input__stepper--up",
+    )
+    const decrementStepperEl = document.querySelector(
+      ".ui-number-input__stepper--down",
+    )
+    expect(el).toHaveValue("10")
+    await user.pointer([{ target: incrementStepperEl!, keys: "[MouseLeft>]" }])
+    expect(el).toHaveValue("11")
+    await user.pointer([{ target: decrementStepperEl!, keys: "[MouseLeft>]" }])
+    expect(el).toHaveValue("10")
+  })
+
+  test("increments the value on wheel up", async () => {
+    const { user, getByTestId } = render(
+      <NumberInput
+        data-testid="NumberInput"
+        defaultValue={10}
+        allowMouseWheel
+      />,
+    )
+    const el = getByTestId("NumberInput")
+    expect(el).toHaveValue("10")
+    await user.tab()
+    await act(async () => {
+      fireEvent.wheel(el, { deltaY: -100 })
+    })
+    expect(el).toHaveValue("11")
+  })
+
+  test("decrements the value on wheel down", async () => {
+    const { user, getByTestId } = render(
+      <NumberInput
+        data-testid="NumberInput"
+        defaultValue={10}
+        allowMouseWheel
+      />,
+    )
+    const el = getByTestId("NumberInput")
+    expect(el).toHaveValue("10")
+    await user.tab()
+    await act(async () => {
+      fireEvent.wheel(el, { deltaY: 100 })
+    })
+    expect(el).toHaveValue("9")
   })
 })

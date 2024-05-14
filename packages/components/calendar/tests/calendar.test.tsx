@@ -495,14 +495,13 @@ describe("<Calendar />", () => {
       const monthDaysPrev = container.querySelectorAll(
         ".ui-calendar__month__day",
       )
-      ;[monthDaysPrev[7], monthDaysPrev[10], monthDaysPrev[13]].forEach(
-        (monthDayBtn) => {
-          act(() => {
-            fireEvent.click(monthDayBtn)
-          })
-          expect(monthDayBtn).toHaveAttribute("data-selected")
-        },
-      )
+      const days = [monthDaysPrev[7], monthDaysPrev[10], monthDaysPrev[13]]
+      days.forEach((monthDayBtn) => {
+        act(() => {
+          fireEvent.click(monthDayBtn)
+        })
+        expect(monthDayBtn).toHaveAttribute("data-selected")
+      })
 
       const nextBtn = container.querySelector(
         `button.ui-calendar__header__control--next`,

@@ -332,7 +332,7 @@ return (
 ### Use `React Hook Form`
 
 ```tsx functional=true
-type Data = { MonthPicker: Date | null }
+type Data = { monthPicker: Date | null }
 
 const {
   control,
@@ -348,12 +348,12 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.MonthPicker}
+      isInvalid={!!errors.monthPicker}
       label="Birthday"
-      errorMessage={errors.MonthPicker ? errors.MonthPicker.message : undefined}
+      errorMessage={errors.monthPicker ? errors.monthPicker.message : undefined}
     >
       <Controller
-        name="MonthPicker"
+        name="monthPicker"
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
         render={({ field }) => <MonthPicker placeholder="YYYY/MM" {...field} />}

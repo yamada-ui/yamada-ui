@@ -74,6 +74,7 @@ import { Tag } from "./tag"
 import { Textarea } from "./textarea"
 import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
+import { YearPicker } from "./year-picker"
 
 export default {
   Toggle,
@@ -152,4 +153,5 @@ export default {
   Tag,
   Textarea,
   Tooltip,
+  YearPicker,
 }

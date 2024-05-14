@@ -102,17 +102,13 @@ export const useMonthPicker = ({
   } = useCalendarPicker({
     inputFormat: "YYYY/MM",
     ...rest,
-    selectMonthWith: "value",
+    __selectType: "month",
     value,
     defaultValue,
     onChange: setValue,
     type,
     defaultType,
-    onChangeType: (
-      type: "month" | "year" | "date",
-      year?: number,
-      month?: number,
-    ) => {
+    onChangeType: (type, year, month) => {
       if (type !== "date") {
         setType(type)
       } else {

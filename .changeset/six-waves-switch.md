@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/menu-option-group": patch
+"@yamada-ui/menu": patch
 ---
 
 Remove unnecessary omitObjects in MenuOptionGroup component

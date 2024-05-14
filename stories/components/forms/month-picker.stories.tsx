@@ -7,8 +7,8 @@ import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
-import "dayjs/locale/ja"
 import { colorSchemes } from "../../components"
+import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof MonthPicker>
 
@@ -323,7 +323,7 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { datePicker: Date | undefined }
+  type Data = { monthPicker: Date | undefined }
 
   const {
     control,
@@ -339,12 +339,12 @@ export const reactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
-        isInvalid={!!errors.datePicker}
+        isInvalid={!!errors.monthPicker}
         label="Birthday"
-        errorMessage={errors.datePicker?.message}
+        errorMessage={errors.monthPicker?.message}
       >
         <Controller
-          name="datePicker"
+          name="monthPicker"
           control={control}
           rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (
@@ -361,10 +361,10 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { datePicker: Date | undefined }
+  type Data = { monthPicker: Date | undefined }
 
   const defaultValues: Data = {
-    datePicker: new Date(),
+    monthPicker: new Date(),
   }
 
   const {
@@ -381,12 +381,12 @@ export const reactHookFormWithDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
-        isInvalid={!!errors.datePicker}
+        isInvalid={!!errors.monthPicker}
         label="Birthday"
-        errorMessage={errors.datePicker?.message}
+        errorMessage={errors.monthPicker?.message}
       >
         <Controller
-          name="datePicker"
+          name="monthPicker"
           control={control}
           rules={{ required: { value: true, message: "This is required." } }}
           render={({ field }) => (

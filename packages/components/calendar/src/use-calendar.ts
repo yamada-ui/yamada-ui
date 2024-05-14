@@ -422,11 +422,11 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   useUpdateEffect(() => {
     if (!value || amountOfMonths > 1) return
 
-    const resolvedValue: Date | undefined = isMulti ? value[0] : value
+    if (isMulti || isRange) return
 
-    if (!resolvedValue) return
+    if (!value) return
 
-    const year = resolvedValue.getFullYear()
+    const year = value.getFullYear()
 
     if (type === "year") {
       setYear(year)
@@ -440,7 +440,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
         }
       })
     } else {
-      setMonth(resolvedValue)
+      setMonth(value)
     }
   }, [value, amountOfMonths])
 

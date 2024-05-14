@@ -1,5 +1,5 @@
 import { CONTRIBUTORS } from "./contributors"
-import { CORE_MEMBERS } from "./core-members"
+import { MAINTAINERS } from "./maintainers"
 import { I18N } from "./i18n"
 import { MENU } from "./menu"
 import { PATH } from "./path"
@@ -12,7 +12,7 @@ export const CONSTANT = {
   SEO,
   I18N,
   CONTRIBUTORS,
-  CORE_MEMBERS,
+  MAINTAINERS,
   SPONSORS,
   MENU,
   PATH,

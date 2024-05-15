@@ -1,4 +1,4 @@
-export const CORE_MEMBERS = [
+export const MAINTAINERS = [
   {
     id: "hirotomoyamada",
     name: { en: "Hirotomo Yamada", ja: "Hirotomo Yamada" },

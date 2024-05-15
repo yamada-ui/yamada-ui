@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/rest"
 import { config } from "dotenv"
+import { recursiveOctokit } from "./utils"
 
 config()
 
@@ -94,7 +95,7 @@ const getIssues = async () => {
   let count = 0
   const perPage = 100
 
-  do {
+  const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...GITHUB_OPTIONS,
       state: "open",
@@ -107,8 +108,14 @@ const getIssues = async () => {
 
     count = data.length
 
-    page++
-  } while (count === perPage)
+    if (count === perPage) {
+      page++
+
+      await recursiveOctokit(listForRepo)
+    }
+  }
+
+  await recursiveOctokit(listForRepo)
 
   issues = issues.filter(({ pull_request }) => !pull_request)
 

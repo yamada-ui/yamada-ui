@@ -188,6 +188,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
           {...rest}
         >
           <ui.input
+            aria-label="Input date value"
             ref={mergeRefs(ref, inputRef)}
             className="ui-date-picker__field__input"
             display="inline-block"

@@ -21,7 +21,7 @@
     "build": "turbo run build --filter=./packages/**",
     "build:fast": "turbo run build:fast --filter=./packages/**",
     "dev": "turbo run dev --filter=./packages/**",
-    "lint": "eslint packages/**/{src,tests}/** scripts/**/** vitest.config.mts --ext .js,.ts,.jsx,.tsx --max-warnings 0 --cache",
+    "lint": "eslint packages/**/{src,tests}/** scripts/**/** --max-warnings 0 --cache",
     "format": "prettier --write .",
     "format:check": "prettier --check packages/**/** stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/** stories/**/** scripts/**/** --cache",

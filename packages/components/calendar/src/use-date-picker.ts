@@ -136,6 +136,7 @@ export const useDatePicker = ({
       return {
         placeholder,
         ...formControlProps,
+        autoComplete: "off",
         ...inputProps,
         ...props,
         ref,

@@ -56,12 +56,12 @@ const writeContributors: p.RequiredRunner =
   (contributors: Contributors) => async (_, s) => {
     s.start(`Writing file "${DIST_PATH}"`)
 
-    const coreMembers = CONSTANT.CORE_MEMBERS.map(({ id }) => id)
+    const maintainers = CONSTANT.MAINTAINERS.map(({ id }) => id)
 
     const resolvedContributors = contributors
       .filter(
         ({ login, type }) =>
-          type === "User" && login && !coreMembers.includes(login),
+          type === "User" && login && !maintainers.includes(login),
       )
       .map(({ id, login, avatar_url, html_url }) => ({
         id,

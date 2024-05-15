@@ -96,6 +96,7 @@
     "@emotion/react": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@eslint/compat": "^1.0.1",
+    "@eslint/eslintrc": "^3.0.2",
     "@faker-js/faker": "^8.4.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",

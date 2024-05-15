@@ -27,7 +27,7 @@ describe("useMediaQuery", () => {
     expect(result.current[0]).toBeTruthy()
   })
 
-  test("配列を正しく受け入れる", () => {
+  test("should correctly accept an array", () => {
     mock.useMediaQuery("(max-width: 480px)")
 
     const { result } = renderHook(() =>
@@ -38,7 +38,7 @@ describe("useMediaQuery", () => {
     expect(result.current[1]).toBeFalsy()
   })
 
-  test("サーバーサイドレンダリングを無効にする", () => {
+  test("should disable server-side rendering", () => {
     mock.useMediaQuery("(prefers-color-scheme: dark)")
 
     const { result } = renderHook(() =>
@@ -48,7 +48,7 @@ describe("useMediaQuery", () => {
     expect(result.current[0]).toBeTruthy()
   })
 
-  test("フォールバックの値を正しく返す", () => {
+  test("should correctly return fallback values", () => {
     const environment = {
       getWindow: () => undefined,
       getDocument: () => undefined,
@@ -79,7 +79,7 @@ describe("useMediaQuery", () => {
     expect(result2.current[0]).toBeTruthy()
   })
 
-  test("リスナーが正しく実行される", async () => {
+  test("should correctly execute listeners", async () => {
     const { result } = renderHook(() =>
       useMediaQuery("(prefers-color-scheme: dark)"),
     )
@@ -91,7 +91,7 @@ describe("useMediaQuery", () => {
     expect(result.current[0]).toBeTruthy()
   })
 
-  test("addListenerがサポートされていない場合は、addEventListenerを使用する", async () => {
+  test("should use addEventListener if addListener is not supported", async () => {
     vi.spyOn(window, "matchMedia").mockImplementation(
       (query) =>
         ({

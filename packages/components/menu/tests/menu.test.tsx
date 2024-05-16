@@ -169,6 +169,51 @@ describe("<Menu />", () => {
     )
   })
 
+  test("should update value with menu option group", async () => {
+    render(
+      <Menu placement="right-start">
+        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuList>
+          <MenuOptionGroup
+            data-testid="MenuOptionGroup-a"
+            label="item"
+            type="radio"
+          >
+            <MenuOptionItem data-testid="MenuOptionItemRadio">
+              Add item
+            </MenuOptionItem>
+            <MenuOptionItem>Edit item</MenuOptionItem>
+          </MenuOptionGroup>
+
+          <MenuOptionGroup
+            type="checkbox"
+            label="order"
+            defaultValue={["desc"]}
+          >
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-a" value="asc">
+              Ascending
+            </MenuOptionItem>
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-b" value="desc">
+              Descending
+            </MenuOptionItem>
+          </MenuOptionGroup>
+        </MenuList>
+      </Menu>,
+    )
+
+    const radioItem = screen.getByTestId("MenuOptionItemRadio")
+    await act(() => fireEvent.click(radioItem))
+    expect(radioItem).toHaveAttribute("aria-checked", "true")
+
+    const checkboxItemA = screen.getByTestId("MenuOptionItemCheckbox-a")
+    await act(() => fireEvent.click(checkboxItemA))
+    expect(checkboxItemA).toHaveAttribute("aria-checked", "true")
+
+    const checkboxItemB = screen.getByTestId("MenuOptionItemCheckbox-b")
+    await act(() => fireEvent.click(checkboxItemB))
+    expect(checkboxItemB).not.toHaveAttribute("aria-checked")
+  })
+
   test("should disable the menu item", () => {
     render(
       <Menu>

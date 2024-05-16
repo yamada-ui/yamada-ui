@@ -39,11 +39,11 @@ describe("<ColorSelector />", () => {
 
     const label = screen.getByText("Swatch label")
     const swatchButtons = screen.getAllByRole("button", {
-      name: /^select #.* as the color$/,
+      name: /^Select #.* as the color$/,
     })
     const expectedSwatchAriaLabels = [
-      "select #2e2e2e as the color",
-      "select #868e96 as the color",
+      "Select #2e2e2e as the color",
+      "Select #868e96 as the color",
     ]
 
     expect(label).toBeInTheDocument()

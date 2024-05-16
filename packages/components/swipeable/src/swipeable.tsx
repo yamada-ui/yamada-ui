@@ -1,34 +1,14 @@
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  HTMLUIProps,
-  ThemeProps,
-} from "@yamada-ui/core"
+import type { CSSUIProps, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   forwardRef,
   useMultiComponentStyle,
   omitThemeProps,
   ui,
 } from "@yamada-ui/core"
-import type { MotionValue } from "@yamada-ui/motion"
 import { motion, useMotionValue, useTransform } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
-import { createContext, cx, mergeRefs, runIfFunc } from "@yamada-ui/utils"
+import { cx, mergeRefs, runIfFunc } from "@yamada-ui/utils"
 import { useRef, useState } from "react"
-
-type SwipeableContextOptions = {
-  height: number
-  x: MotionValue<number>
-  translateX: MotionValue<number>
-  setDirection: React.Dispatch<React.SetStateAction<SwipeableDirection>>
-}
-type SwipeableContext = Record<string, CSSUIObject> & SwipeableContextOptions
-
-export const [SwipeableProvider, useSwipeable] =
-  createContext<SwipeableContext>({
-    strict: false,
-    name: "SwipeableContext",
-  })
 
 type ActionProps = {}
 
@@ -219,118 +199,104 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     }
 
   return (
-    <SwipeableProvider
-      value={
-        {
-          height,
+    <ui.div
+      position="relative"
+      __css={{ px: "normal", py: "normal", ...styles.container }}
+      {...rest}
+    >
+      <motion.div
+        ref={mergeRefs(ref, componentRef)}
+        className={cx("ui-swipeable", className)}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={dragElastic}
+        onDragEnd={handleDragEnd}
+        animate={{
+          translateX: animateTranslateX,
+        }}
+        transition={{ type: "spring", bounce: 0 }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          border: "solid",
           x,
           translateX,
-          setDirection,
-          ...styles,
-        } as SwipeableContext
-      }
-    >
-      <ui.div
-        position="relative"
-        overflow="hidden"
-        __css={{ px: "normal", py: "normal", ...styles.container }}
-        {...rest}
+        }}
       >
-        <motion.div
-          ref={mergeRefs(ref, componentRef)}
-          className={cx("ui-swipeable", className)}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={dragElastic}
-          onDragEnd={handleDragEnd}
-          animate={{
-            translateX: animateTranslateX,
-          }}
-          transition={{ type: "spring", bounce: 0 }}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            border: "solid",
-            x,
-            translateX,
-          }}
-        >
-          {cloneChildren}
-        </motion.div>
+        {cloneChildren}
+      </motion.div>
 
-        {/*  left-actions */}
-        <motion.div
-          className={cx("ui-swipeable__left-action", className)}
-          // ref={ref}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            height,
-            width: leftWidth,
-            overflow: "hidden",
+      {/*  left-actions */}
+      <motion.div
+        className={cx("ui-swipeable__left-action", className)}
+        // ref={ref}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height,
+          width: leftWidth,
+          overflow: "hidden",
+        }}
+      >
+        <ui.div
+          __css={{
+            zIndex: -1,
+            w: "100%",
+            h: "100%",
+            display: "grid",
+            ...styles.swipeableLeftAction,
+          }}
+          gridTemplateColumns={`repeat(${renderLeftActions?.length ?? 0},1fr)`}
+          {...rest}
+          onClick={() => {
+            setDirection("none")
           }}
         >
-          <ui.div
-            __css={{
-              zIndex: -1,
-              w: maxLeftSwipe ?? "100%",
-              h: "100%",
-              display: "grid",
-              ...styles.swipeableLeftAction,
-            }}
-            gridTemplate={`repeat(${renderLeftActions?.length ?? 0},1fr)`}
-            {...rest}
-            onClick={() => {
-              setDirection("none")
-            }}
-          >
-            {renderLeftActions?.map(({ children, ...rest }, index) => (
-              <ui.button key={index} {...rest}>
-                {runIfFunc(children, {})}
-              </ui.button>
-            ))}
-          </ui.div>
-        </motion.div>
+          {renderLeftActions?.map(({ children, ...rest }, index) => (
+            <ui.button key={index} {...rest}>
+              {runIfFunc(children, {})}
+            </ui.button>
+          ))}
+        </ui.div>
+      </motion.div>
 
-        {/* right-actions */}
-        <motion.div
-          className={cx("ui-swipeable__right-action", className)}
-          // ref={ref}
-          style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            height,
-            width: rightWidth,
-            overflow: "hidden",
+      {/* right-actions */}
+      <motion.div
+        className={cx("ui-swipeable__right-action", className)}
+        // ref={ref}
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          height,
+          width: rightWidth,
+          overflow: "hidden",
+        }}
+      >
+        <ui.div
+          __css={{
+            zIndex: -1,
+            w: maxRightSwipe ?? "100%",
+            h: "100%",
+            display: "grid",
+            ...styles.swipeableRightAction,
+          }}
+          gridTemplate={`repeat(${renderRightActions?.length ?? 0},1fr)`}
+          {...rest}
+          onClick={() => {
+            setDirection("none")
           }}
         >
-          <ui.div
-            __css={{
-              zIndex: -1,
-              w: maxRightSwipe ?? "100%",
-              h: "100%",
-              display: "grid",
-              ...styles.swipeableRightAction,
-            }}
-            gridTemplate={`repeat(${renderRightActions?.length ?? 0},1fr)`}
-            {...rest}
-            onClick={() => {
-              setDirection("none")
-            }}
-          >
-            {renderRightActions?.map(({ children, ...rest }, index) => (
-              <ui.button key={index} {...rest}>
-                {runIfFunc(children, {})}
-              </ui.button>
-            ))}
-          </ui.div>
-        </motion.div>
-      </ui.div>
-    </SwipeableProvider>
+          {renderRightActions?.map(({ children, ...rest }, index) => (
+            <ui.button key={index} {...rest}>
+              {runIfFunc(children, {})}
+            </ui.button>
+          ))}
+        </ui.div>
+      </motion.div>
+    </ui.div>
   )
 })

@@ -222,11 +222,14 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   if (isOpen) hasBeenOpened.current = true
 
-  const { referenceRef, getPopperProps, forceUpdate, transformOrigin } =
-    usePopper({
-      ...rest,
-      enabled: isOpen,
-    })
+  const {
+    referenceRef,
+    getPopperProps,
+    update: forceUpdate,
+  } = usePopper({
+    ...rest,
+    enabled: isOpen,
+  })
 
   useEffect(() => {
     return () => {
@@ -266,7 +269,6 @@ export const Popover: FC<PopoverProps> = (props) => {
         ...props,
         style: {
           ...props.style,
-          transformOrigin,
         },
         ref: mergeRefs(popoverRef, ref),
         children: shouldRenderChildren ? props.children : null,
@@ -312,24 +314,22 @@ export const Popover: FC<PopoverProps> = (props) => {
       isOpen,
       onClose,
       shouldRenderChildren,
-      transformOrigin,
       trigger,
       relatedRef,
     ],
   )
 
-  const maybeReferenceRef = useCallback(
-    (node: Element) => {
-      if (anchorRef.current == null) referenceRef(node)
-    },
-    [referenceRef],
-  )
+  const maybeReferenceRef = useCallback(() => {
+    if (anchorRef.current == null) {
+      return referenceRef
+    }
+  }, [referenceRef])
 
   const getTriggerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const triggerProps: RefAttributes<any> & DOMAttributes = {
         ...props,
-        ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
+        ref: mergeRefs(triggerRef, ref, maybeReferenceRef()),
       }
 
       if (trigger === "click") {

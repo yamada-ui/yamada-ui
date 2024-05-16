@@ -126,7 +126,7 @@ type TooltipOptions = {
 export type TooltipProps = Omit<HTMLUIProps<"div">, "offset"> &
   ThemeProps<"Tooltip"> &
   Omit<HTMLMotionProps<"div">, "color" | "style" | "variants" | "transition"> &
-  Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &
+  Pick<UsePopperProps, "middlewares" | "offset" | "placement"> &
   TooltipOptions
 
 const getTooltipProps = (
@@ -195,8 +195,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       children,
       label,
       placement,
-      modifiers,
-      gutter,
+      middlewares,
       offset,
       openDelay = 0,
       closeDelay = 0,
@@ -228,11 +227,10 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
     const openTimeout = useRef<number>()
     const closeTimeout = useRef<number>()
 
-    const { referenceRef, getPopperProps, transformOrigin } = usePopper({
+    const { referenceRef, getPopperProps } = usePopper({
       enabled: isOpen,
       placement,
-      modifiers,
-      gutter,
+      middlewares,
       offset,
     })
 
@@ -376,7 +374,6 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                   as={motion.div}
                   ref={ref}
                   className={cx("ui-tooltip", className)}
-                  style={{ transformOrigin }}
                   {...(animation !== "none"
                     ? getTooltipProps(animation, duration)
                     : {})}

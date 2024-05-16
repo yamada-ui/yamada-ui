@@ -16,7 +16,7 @@ type PanEventInfo = {
   velocity: Point
 }
 
-type PanEventHandler = (event: AnyPointerEvent, info: PanEventInfo) => void
+type PanEventHandler = (ev: AnyPointerEvent, info: PanEventInfo) => void
 
 type TimestampedPoint = Point & { timestamp: number }
 
@@ -113,7 +113,7 @@ const panEvent = (
   const win = ev.view ?? window
   const info = { point: getEventPoint(ev) }
   const { timestamp } = getFrameData()
-  const { onSessionStart } = handlers
+  const { onSessionStart, onStart, onMove, onEnd, onSessionEnd } = handlers
 
   const history: PanEventHistory = [{ ...info.point, timestamp }]
 
@@ -142,8 +142,6 @@ const panEvent = (
 
     history.push({ ...info.point, timestamp })
 
-    const { onStart, onMove } = handlers
-
     if (!isPanStarted) {
       onStart?.(lastEvent, info)
 
@@ -160,17 +158,16 @@ const panEvent = (
     sync.update(updatePoint, true)
   }
 
-  const onPointerUp = (event: AnyPointerEvent, info: PointerEventInfo) => {
+  const onPointerUp = (ev: AnyPointerEvent, info: PointerEventInfo) => {
     const panInfo = getPanInfo(info, history)
-    const { onEnd, onSessionEnd } = handlers
 
-    onSessionEnd?.(event, panInfo)
+    onSessionEnd?.(ev, panInfo)
 
     end()
 
     if (!onEnd || !startEvent) return
 
-    onEnd?.(event, panInfo)
+    onEnd?.(ev, panInfo)
   }
 
   const updateHandlers = (newHandlers: Partial<PanEventHandlers>) => {
@@ -227,10 +224,10 @@ export const usePanEvent = (
     onSessionEnd,
     onStart,
     onMove,
-    onEnd: (event, info) => {
+    onEnd: (ev, info) => {
       panSession.current = null
 
-      onEnd?.(event, info)
+      onEnd?.(ev, info)
     },
   })
 
@@ -243,8 +240,8 @@ export const usePanEvent = (
 
     if (!node || !hasPanEvents) return
 
-    const onPointerDown = (event: AnyPointerEvent) => {
-      panSession.current = panEvent(event, handlersRef.current, threshold)
+    const onPointerDown = (ev: AnyPointerEvent) => {
+      panSession.current = panEvent(ev, handlersRef.current, threshold)
     }
 
     return addPointerEvent(node, "pointerdown", onPointerDown)

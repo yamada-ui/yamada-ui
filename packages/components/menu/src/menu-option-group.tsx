@@ -1,6 +1,6 @@
 import type { ComponentArgs, HTMLUIProps } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { cx, getValidChildren, omitObject, isArray } from "@yamada-ui/utils"
+import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
 import type { ForwardedRef, Ref } from "react"
 import { cloneElement, forwardRef, useCallback } from "react"
 import { MenuGroup } from "./menu-group"
@@ -41,7 +41,9 @@ export const MenuOptionGroup = forwardRef(
   <Y extends string | string[] = string>(
     {
       className,
+      value: valueProp,
       defaultValue,
+      onChange: onChangeProp,
       type,
       children,
       ...rest
@@ -53,8 +55,9 @@ export const MenuOptionGroup = forwardRef(
     defaultValue ??= (isRadio ? "" : []) as Y
 
     const [value, setValue] = useControllableState({
-      ...rest,
+      value: valueProp,
       defaultValue,
+      onChange: onChangeProp,
     })
 
     const onChange = useCallback(
@@ -94,7 +97,7 @@ export const MenuOptionGroup = forwardRef(
       <MenuGroup
         ref={ref}
         className={cx("ui-menu__item--group--option", className)}
-        {...omitObject(rest, ["value", "onChange"])}
+        {...rest}
       >
         {cloneChildren}
       </MenuGroup>

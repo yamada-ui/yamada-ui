@@ -2,14 +2,7 @@ import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { PopoverTrigger } from "@yamada-ui/popover"
-import {
-  ariaAttr,
-  assignRef,
-  cx,
-  dataAttr,
-  funcAll,
-  handlerAll,
-} from "@yamada-ui/utils"
+import { assignRef, cx, dataAttr, funcAll, handlerAll } from "@yamada-ui/utils"
 import type { KeyboardEvent, ReactNode } from "react"
 import { useCallback } from "react"
 import { useMenu } from "./menu"
@@ -72,9 +65,10 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
         <Component
           ref={ref}
           className={cx("ui-menu", className)}
+          aria-haspopup="menu"
+          aria-expanded={isOpen}
           {...rest}
           data-active={dataAttr(isOpen)}
-          aria-expanded={ariaAttr(isOpen)}
           onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
         >
           {children}

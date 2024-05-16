@@ -12,7 +12,7 @@ describe("<MultiAutoComplete />", () => {
         </MultiAutocomplete>,
       )
 
-      expect(screen.getByRole("textbox")).toHaveAttribute(
+      expect(screen.getByRole("combobox")).toHaveAttribute(
         "placeholder",
         "Select Option",
       )

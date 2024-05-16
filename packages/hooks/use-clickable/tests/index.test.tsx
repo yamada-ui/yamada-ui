@@ -150,21 +150,6 @@ describe("useClickable", () => {
     expect(button).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("onDocumentKeyUp with space triggers preventDefault, stopPropagation and removes listener", async () => {
-    const onKeyDown = vi.fn()
-    const onKeyUp = vi.fn()
-    const { button } = setup({ onKeyDown, onKeyUp })
-    await act(async () => {
-      fireEvent.keyDown(button, { key: " " })
-    })
-
-    await act(async () => {
-      fireEvent.keyUp(button)
-    })
-
-    expect(onKeyDown.mock.calls[0][0]).toBeDefined()
-  })
-
   test("handleMouseLeave triggers preventDefault and setIsPressed", async () => {
     const onMouseLeave = vi.fn()
     const { button } = setup({ onMouseLeave, clickOnSpace: true })

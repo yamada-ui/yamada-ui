@@ -59,6 +59,8 @@ type SwipeableOptions = {
   dragOffsetFromRightEdge?: number
   /**
    * Indicating if the swipeable panel can be pulled further than the left actions panel's width.
+   *
+   * @default true
    */
   overshootLeft?: boolean
   /**
@@ -121,15 +123,15 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     children,
     renderLeftActions,
     renderRightActions,
-    dragElastic = 1,
+    dragElastic = 0.7,
     leftThreshold: leftThreasholdProp,
     rightThreshold: rightThreasholdProp,
     //NOTE:なんのやつかわからん
     // dragOffsetFromLeftEdge,
     // dragOffsetFromRightEdge,
+    // overshootFriction,
     // overshootLeft = true,
     // overshootRight = true,
-    // overshootFriction,
     // onSwipeableOpen,
     // onSwipeableClose,
     // onSwipeableWillOpen,
@@ -149,7 +151,7 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
   const leftThreshold = leftThreasholdProp ?? width / 2
   const rightThreshold = rightThreasholdProp ?? width / 2
 
-  let animateTranslateX
+  let animateTranslateX: number
 
   if (direction === "right") {
     animateTranslateX = maxLeftSwipe ?? width
@@ -159,20 +161,31 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     animateTranslateX = 0
   }
 
-  const leftWidth = useTransform(
+  const leftActionsWidth = useTransform(
     [x, translateX],
     ([x, translateX]: number[]) => {
       const delta = x + translateX
-      if (delta > 0) return delta
+
+      if (delta > 0) {
+        if (maxLeftSwipe && delta > maxLeftSwipe) return maxLeftSwipe
+
+        return delta
+      }
+
       return 0
     },
   )
 
-  const rightWidth = useTransform(
+  const rightActionsWidth = useTransform(
     [x, translateX],
     ([x, translateX]: number[]) => {
       const delta = x + translateX
-      if (delta < 0) return -delta
+      if (delta < 0) {
+        if (maxRightSwipe && -delta > maxRightSwipe) return maxRightSwipe
+
+        return -delta
+      }
+
       return 0
     },
   )
@@ -208,7 +221,10 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
         ref={mergeRefs(ref, componentRef)}
         className={cx("ui-swipeable", className)}
         drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
+        dragConstraints={{
+          left: 0,
+          right: 0,
+        }}
         dragElastic={dragElastic}
         onDragEnd={handleDragEnd}
         animate={{
@@ -237,7 +253,7 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
           top: 0,
           left: 0,
           height,
-          width: leftWidth,
+          width: leftActionsWidth,
           overflow: "hidden",
         }}
       >
@@ -272,7 +288,7 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
           top: 0,
           right: 0,
           height,
-          width: rightWidth,
+          width: rightActionsWidth,
           overflow: "hidden",
         }}
       >

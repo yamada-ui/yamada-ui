@@ -70,7 +70,6 @@ export const multiActions: Story = () => {
       children: () => (
         <Box
           h="100%"
-          w="100%"
           background="green.500"
           display="flex"
           alignItems="center"
@@ -85,7 +84,6 @@ export const multiActions: Story = () => {
       children: () => (
         <Box
           h="100%"
-          w="100%"
           background="blue.500"
           display="flex"
           alignItems="center"
@@ -100,7 +98,6 @@ export const multiActions: Story = () => {
       children: () => (
         <Box
           h="100%"
-          w="100%"
           background="gray.500"
           display="flex"
           alignItems="center"
@@ -129,6 +126,7 @@ export const multiActions: Story = () => {
   return (
     <Swipeable
       maxLeftSwipe={200}
+      overshootLeft={false}
       renderLeftActions={renderLeftActions}
       renderRightActions={[{ children: renderRightActions }]}
     >

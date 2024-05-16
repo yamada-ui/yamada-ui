@@ -6,7 +6,7 @@ import type { PaginationProps } from "@yamada-ui/pagination"
 import { Pagination } from "@yamada-ui/pagination"
 import type { SelectProps } from "@yamada-ui/select"
 import { Select } from "@yamada-ui/select"
-import { cx, isFunction, omitObject } from "@yamada-ui/utils"
+import { cx, isFunction } from "@yamada-ui/utils"
 import type { ForwardedRef, ReactNode, Ref } from "react"
 import { forwardRef } from "react"
 import type { TableBodyProps } from "./tbody"
@@ -161,7 +161,12 @@ export const PagingTable = forwardRef(
       layout,
       children,
       ...computedProps
-    } = omitThemeProps(mergedProps)
+    } = omitThemeProps(mergedProps, [
+      "highlightOnSelected",
+      "highlightOnHover",
+      "withBorder",
+      "withColumnBorders",
+    ])
 
     const {
       state,
@@ -176,12 +181,7 @@ export const PagingTable = forwardRef(
       pageSizeList,
       ...rest
     } = useTable<Y>({
-      ...omitObject(computedProps, [
-        "highlightOnSelected",
-        "highlightOnHover",
-        "withBorder",
-        "withColumnBorders",
-      ]),
+      ...computedProps,
       checkboxProps: { colorScheme, ...checkboxProps },
       enablePagination: true,
     })

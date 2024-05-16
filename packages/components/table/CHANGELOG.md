@@ -1,5 +1,52 @@
 # @yamada-ui/table
 
+## 1.0.32
+
+### Patch Changes
+
+- [#1411](https://github.com/yamada-ui/yamada-ui/pull/1411) [`c519f44`](https://github.com/yamada-ui/yamada-ui/commit/c519f446b2f48471bdf98a7437e5a9b14d595ded) Thanks [@Eiji-Kudo](https://github.com/Eiji-Kudo)! - Integrate omitObject handling with omitThemeProps
+
+- [#1424](https://github.com/yamada-ui/yamada-ui/pull/1424) [`03f65fd`](https://github.com/yamada-ui/yamada-ui/commit/03f65fd68092f7598280ec9e187286a76a62888a) Thanks [@sacky3105](https://github.com/sacky3105)! - Integrate `omitObject` handling with `omitThemeProps`
+
+- Updated dependencies [[`0a956cf`](https://github.com/yamada-ui/yamada-ui/commit/0a956cf64c6acaa08723ba686904a05624fe6787), [`c8540e6`](https://github.com/yamada-ui/yamada-ui/commit/c8540e6fe79f0580c8e799da42e5a4ade429758c), [`61f1b30`](https://github.com/yamada-ui/yamada-ui/commit/61f1b300724151bcc30f3368a0b9acf90e959f11), [`745a925`](https://github.com/yamada-ui/yamada-ui/commit/745a92553bd30c3bdb62062f91be0d85fabcb94f)]:
+  - @yamada-ui/checkbox@1.0.30
+  - @yamada-ui/select@1.2.12
+  - @yamada-ui/native-table@1.0.27
+
+## 1.0.31
+
+### Patch Changes
+
+- Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `dist` was not included in the package.
+
+## 1.0.30
+
+### Patch Changes
+
+- Updated dependencies [[`191d059`](https://github.com/yamada-ui/yamada-ui/commit/191d05987c7690b81aa9a3a84264d8112064ccbe), [`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/checkbox@1.0.29
+  - @yamada-ui/core@1.6.7
+  - @yamada-ui/icon@1.0.25
+  - @yamada-ui/native-table@1.0.26
+  - @yamada-ui/pagination@1.0.26
+  - @yamada-ui/select@1.2.11
+
+## 1.0.29
+
+### Patch Changes
+
+- [#1293](https://github.com/yamada-ui/yamada-ui/pull/1293) [`43af4e9`](https://github.com/yamada-ui/yamada-ui/commit/43af4e98978f093a104123d2b0edbc1f373ad217) Thanks [@daichi000](https://github.com/daichi000)! - Fix a11y error by changing aria-checked to aria-selected on tr tag
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e), [`69fcd17`](https://github.com/yamada-ui/yamada-ui/commit/69fcd17112aec9c6b62925a862dd0c0671a5ae32)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/pagination@1.0.25
+  - @yamada-ui/checkbox@1.0.28
+  - @yamada-ui/icon@1.0.24
+  - @yamada-ui/native-table@1.0.25
+  - @yamada-ui/select@1.2.10
+  - @yamada-ui/use-controllable-state@1.0.13
+
 ## 1.0.28
 
 ### Patch Changes

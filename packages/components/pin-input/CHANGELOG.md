@@ -1,5 +1,38 @@
 # @yamada-ui/pin-input
 
+## 1.0.29
+
+### Patch Changes
+
+- [#1427](https://github.com/yamada-ui/yamada-ui/pull/1427) [`102e26a`](https://github.com/yamada-ui/yamada-ui/commit/102e26ae55e9bfbd98e3d484705d0b92b379a506) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Changed attribute to `aria-readonly`.
+
+- Updated dependencies [[`659fe11`](https://github.com/yamada-ui/yamada-ui/commit/659fe11b4457c6a2e8be228dd3d47648f759010b), [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/use-descendant@1.0.14
+  - @yamada-ui/form-control@1.1.0
+
+## 1.0.28
+
+### Patch Changes
+
+- [#1335](https://github.com/yamada-ui/yamada-ui/pull/1335) [`5152d81`](https://github.com/yamada-ui/yamada-ui/commit/5152d815e3fbf3ed8c00f815a5d1e7e8930b4605) Thanks [@GensIto](https://github.com/GensIto)! - fix a11y for pin-input
+
+- [#1384](https://github.com/yamada-ui/yamada-ui/pull/1384) [`8b475e8`](https://github.com/yamada-ui/yamada-ui/commit/8b475e8d36ac9225ae68b7cb5795e8ecce1ffd66) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated handling of props and states.
+
+- Updated dependencies [[`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5), [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0)]:
+  - @yamada-ui/core@1.6.7
+  - @yamada-ui/form-control@1.0.28
+
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/form-control@1.0.27
+  - @yamada-ui/use-controllable-state@1.0.13
+  - @yamada-ui/use-descendant@1.0.13
+
 ## 1.0.26
 
 ### Patch Changes

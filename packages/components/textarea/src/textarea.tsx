@@ -21,7 +21,6 @@ import {
   handlerAll,
   mergeRefs,
   noop,
-  omitObject,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "@yamada-ui/utils"
@@ -74,7 +73,10 @@ export type TextareaProps = Omit<
  * @see Docs https://yamada-ui.com/components/forms/textarea
  */
 export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle("Textarea", props)
+  const [
+    { h, height, minH, minHeight, maxH, maxHeight, ...styles },
+    mergedProps,
+  ] = useComponentStyle("Textarea", props)
   let {
     className,
     rows,
@@ -96,16 +98,9 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
   let css: CSSUIObject
 
   if (rows || autosize) {
-    css = omitObject(styles, [
-      "h",
-      "height",
-      "minH",
-      "minHeight",
-      "maxH",
-      "maxHeight",
-    ])
-  } else {
     css = styles
+  } else {
+    css = { h, height, minH, minHeight, maxH, maxHeight, ...styles }
   }
 
   useSafeLayoutEffect(() => {

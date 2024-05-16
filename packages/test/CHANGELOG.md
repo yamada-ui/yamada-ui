@@ -1,5 +1,34 @@
 # @yamada-ui/test
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1404](https://github.com/yamada-ui/yamada-ui/pull/1404) [`413c16f`](https://github.com/yamada-ui/yamada-ui/commit/413c16ff16d198ad0672646da2e3a0133a7e5ddf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed localstorage utils.
+
+### Patch Changes
+
+- Updated dependencies [[`913c1d9`](https://github.com/yamada-ui/yamada-ui/commit/913c1d90ab82391a6833dfb99327e816a36c615d), [`16df3f4`](https://github.com/yamada-ui/yamada-ui/commit/16df3f4f0aceadf91a49c4cd671249652a6d65c4)]:
+  - @yamada-ui/theme@1.6.3
+  - @yamada-ui/providers@1.0.32
+
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.31
+  - @yamada-ui/theme@1.6.2
+
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273)]:
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/providers@1.0.30
+  - @yamada-ui/theme@1.6.1
+
 ## 1.1.2
 
 ### Patch Changes

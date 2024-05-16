@@ -13,6 +13,9 @@ export const isNumeric = (value: any): boolean =>
 export const isString = (value: any): value is string =>
   Object.prototype.toString.call(value) === "[object String]"
 
+export const isBoolean = (value: any): value is boolean =>
+  typeof value === "boolean"
+
 export const isUndefined = (value: any): value is undefined =>
   typeof value === "undefined" && value === undefined
 

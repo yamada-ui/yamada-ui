@@ -36,7 +36,11 @@ const manifest = {
   async write(data: PullRequestData[]) {
     data = data.sort((a, b) => b.id - a.id)
 
-    return writeFile(this.path, JSON.stringify(data, null, 2))
+    const body = await prettier(JSON.stringify(data, null, 2), {
+      parser: "json",
+    })
+
+    return writeFile(this.path, body)
   },
 
   async read(): Promise<PullRequestData[]> {
@@ -67,6 +71,15 @@ const getPullRequests = async (): Promise<PullRequest | PullRequest[]> => {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
       state: "closed",
+      base: "main",
+      head: "yamada-ui:changeset-release/main",
+    })
+
+    return data[0]
+  } else if (arg.includes("--current")) {
+    const { data } = await octokit.pulls.list({
+      ...REPO_REQUEST_PARAMETERS,
+      state: "open",
       base: "main",
       head: "yamada-ui:changeset-release/main",
     })

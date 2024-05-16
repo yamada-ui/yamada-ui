@@ -1,5 +1,28 @@
 # @yamada-ui/theme
 
+## 1.6.3
+
+### Patch Changes
+
+- [#1377](https://github.com/yamada-ui/yamada-ui/pull/1377) [`913c1d9`](https://github.com/yamada-ui/yamada-ui/commit/913c1d90ab82391a6833dfb99327e816a36c615d) Thanks [@hoshico](https://github.com/hoshico)! - Added ellipsis to breadcrumb component.
+
+- [#1393](https://github.com/yamada-ui/yamada-ui/pull/1393) [`16df3f4`](https://github.com/yamada-ui/yamada-ui/commit/16df3f4f0aceadf91a49c4cd671249652a6d65c4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Menu` did not have the same `z-index` as `Popover`. `Menu` is also affected because it is also used in the `Select` and `Autocomplete` styles.
+
+## 1.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/core@1.6.7
+
+## 1.6.1
+
+### Patch Changes
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+
 ## 1.6.0
 
 ### Minor Changes

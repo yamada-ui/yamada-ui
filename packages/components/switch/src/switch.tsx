@@ -9,8 +9,9 @@ import {
 } from "@yamada-ui/core"
 import type { MotionTransition } from "@yamada-ui/motion"
 import { motion } from "@yamada-ui/motion"
-import { cx, dataAttr, omitObject } from "@yamada-ui/utils"
-import type { InputHTMLAttributes, ReactElement } from "react"
+import type { Merge } from "@yamada-ui/utils"
+import { cx, dataAttr } from "@yamada-ui/utils"
+import type { DOMAttributes, InputHTMLAttributes, ReactElement } from "react"
 import { cloneElement } from "react"
 
 export type SwitchIconProps = {
@@ -45,8 +46,10 @@ type SwitchOptions = {
   transition?: MotionTransition
 }
 
-export type SwitchProps = Omit<UseCheckboxProps, "isIndeterminate"> &
-  Omit<HTMLUIProps<"label">, keyof UseCheckboxProps> &
+export type SwitchProps = Merge<
+  HTMLUIProps<"label">,
+  Omit<UseCheckboxProps, "isIndeterminate">
+> &
   ThemeProps<"Switch"> &
   SwitchOptions
 
@@ -71,7 +74,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       stiffness: 700,
       damping: 40,
     },
-    ...rest
+    ...computedProps
   } = omitThemeProps(mergedProps)
 
   const {
@@ -83,7 +86,8 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
     getIconProps,
     getInputProps,
     getLabelProps,
-  } = useCheckbox(rest)
+    props: rest,
+  } = useCheckbox(computedProps)
 
   const cloneIcon = icon
     ? cloneElement(icon, {
@@ -109,20 +113,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         ...styles.container,
       }}
       {...getContainerProps()}
-      {...omitObject(rest, [
-        "id",
-        "name",
-        "value",
-        "defaultValue",
-        "checked",
-        "defaultIsChecked",
-        "isChecked",
-        "isDisabled",
-        "isReadOnly",
-        "onChange",
-        "onBlur",
-        "onFocus",
-      ])}
+      {...rest}
     >
       <ui.input
         className={cx("ui-switch__input", className)}
@@ -157,7 +148,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         <ui.span
           className={cx("ui-switch__label", className)}
           __css={{ ...styles.label }}
-          {...getLabelProps(labelProps)}
+          {...getLabelProps(labelProps as DOMAttributes<HTMLElement>)}
         >
           {children}
         </ui.span>

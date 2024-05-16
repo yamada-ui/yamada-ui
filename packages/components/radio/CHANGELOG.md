@@ -1,5 +1,40 @@
 # @yamada-ui/radio
 
+## 1.0.30
+
+### Patch Changes
+
+- [#1430](https://github.com/yamada-ui/yamada-ui/pull/1430) [`0a956cf`](https://github.com/yamada-ui/yamada-ui/commit/0a956cf64c6acaa08723ba686904a05624fe6787) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The loop processing used internally was removed to improve performance.
+
+- [#1477](https://github.com/yamada-ui/yamada-ui/pull/1477) [`61f1b30`](https://github.com/yamada-ui/yamada-ui/commit/61f1b300724151bcc30f3368a0b9acf90e959f11) Thanks [@cidkumagai](https://github.com/cidkumagai)! - use destructuring assignment
+
+- Updated dependencies [[`686a0b6`](https://github.com/yamada-ui/yamada-ui/commit/686a0b6caf0b34512719d61ffd7c7bef96673282), [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/use-focus-visible@1.1.0
+  - @yamada-ui/form-control@1.1.0
+
+## 1.0.29
+
+### Patch Changes
+
+- [#1345](https://github.com/yamada-ui/yamada-ui/pull/1345) [`191d059`](https://github.com/yamada-ui/yamada-ui/commit/191d05987c7690b81aa9a3a84264d8112064ccbe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the type definitions of `getInputProps` and `getLabelProps` were incorrect.
+
+- Updated dependencies [[`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5), [`764def0`](https://github.com/yamada-ui/yamada-ui/commit/764def00e98ccd2db91f0838ee746a0ef1b34dc0)]:
+  - @yamada-ui/core@1.6.7
+  - @yamada-ui/form-control@1.0.28
+  - @yamada-ui/layouts@1.1.22
+
+## 1.0.28
+
+### Patch Changes
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/form-control@1.0.27
+  - @yamada-ui/layouts@1.1.21
+  - @yamada-ui/use-controllable-state@1.0.13
+  - @yamada-ui/use-focus-visible@1.0.13
+
 ## 1.0.27
 
 ### Patch Changes

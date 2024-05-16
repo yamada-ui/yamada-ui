@@ -8,6 +8,9 @@
     <img alt="MIT License" src="https://img.shields.io/npm/v/@yamada-ui/react"/>
   </a>
   <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@yamada-ui/react.svg?style=flat"/>
+  <a href="https://codecov.io/gh/yamada-ui/yamada-ui" >
+    <img src="https://codecov.io/gh/yamada-ui/yamada-ui/graph/badge.svg?token=LRQMRQNE7N"/>
+  </a>
   <a href="https://github.com/yamada-ui/yamada-ui/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/github/license/yamada-ui/yamada-ui"/>
   </a>
@@ -151,7 +154,7 @@ const Example = () => {
 
 あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。
 
-また、Yamada UIのドキュメントサイトは別の[リポジトリ](https://github.com/yamada-ui/yamada-docs)にあります。もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://github.com/yamada-ui/yamada-docs/blob/main/CONTRIBUTING.ja.md)を参照してください。
+もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://yamada-ui.com/ja/community/contributing)を参照してください。
 
 ## ライセンス
 

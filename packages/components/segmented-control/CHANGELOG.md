@@ -1,5 +1,35 @@
 # @yamada-ui/segmented-control
 
+## 1.0.28
+
+### Patch Changes
+
+- Updated dependencies [[`686a0b6`](https://github.com/yamada-ui/yamada-ui/commit/686a0b6caf0b34512719d61ffd7c7bef96673282), [`659fe11`](https://github.com/yamada-ui/yamada-ui/commit/659fe11b4457c6a2e8be228dd3d47648f759010b)]:
+  - @yamada-ui/use-focus-visible@1.1.0
+  - @yamada-ui/use-descendant@1.0.14
+
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies [[`38bd41d`](https://github.com/yamada-ui/yamada-ui/commit/38bd41db027d7e6a13452b7e00664954682992d0), [`2a9c0a2`](https://github.com/yamada-ui/yamada-ui/commit/2a9c0a29f70093719632814e147f6c9c195414c5)]:
+  - @yamada-ui/core@1.6.7
+  - @yamada-ui/motion@1.0.26
+
+## 1.0.26
+
+### Patch Changes
+
+- [#1342](https://github.com/yamada-ui/yamada-ui/pull/1342) [`84843d4`](https://github.com/yamada-ui/yamada-ui/commit/84843d4ae4063165cf7224cbd1034705d4d1c6df) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `aria-readonly` was assigned.
+
+- Updated dependencies [[`2b3be94`](https://github.com/yamada-ui/yamada-ui/commit/2b3be94dfff8e69c497daf74c7668a9a63cea202), [`4abbdab`](https://github.com/yamada-ui/yamada-ui/commit/4abbdabfee5fa65ac95e80cf698e9e12916e8561), [`0e7fbd8`](https://github.com/yamada-ui/yamada-ui/commit/0e7fbd87246671dda9202c69e626c9fc9556a273), [`0ac7043`](https://github.com/yamada-ui/yamada-ui/commit/0ac7043ef0151ff60ae46e223731d634594f602f), [`f8e3935`](https://github.com/yamada-ui/yamada-ui/commit/f8e3935eb4c1796f343710dd49d217003b3c1833), [`44e70f5`](https://github.com/yamada-ui/yamada-ui/commit/44e70f586637d881a5667ad160944b6172e9863e)]:
+  - @yamada-ui/core@1.6.6
+  - @yamada-ui/utils@1.2.0
+  - @yamada-ui/motion@1.0.25
+  - @yamada-ui/use-controllable-state@1.0.13
+  - @yamada-ui/use-descendant@1.0.13
+  - @yamada-ui/use-focus-visible@1.0.13
+
 ## 1.0.25
 
 ### Patch Changes

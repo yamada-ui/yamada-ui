@@ -22,5 +22,6 @@ export const Breadcrumb: ComponentMultiStyle = {
       },
     },
     separator: {},
+    ellipsis: {},
   },
 }

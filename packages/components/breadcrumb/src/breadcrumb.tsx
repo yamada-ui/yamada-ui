@@ -10,13 +10,15 @@ import {
   omitThemeProps,
   useMultiComponentStyle,
 } from "@yamada-ui/core"
+import { Icon } from "@yamada-ui/icon"
+import type { IconProps } from "@yamada-ui/icon"
 import { cx, createContext, getValidChildren } from "@yamada-ui/utils"
 import { cloneElement } from "react"
 
 const [BreadcrumbProvider, useBreadcrumb] = createContext<
   Record<string, CSSUIObject>
 >({
-  name: `BreadcrumbContext`,
+  name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
 
@@ -225,6 +227,42 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
       >
         {children}
       </ui.span>
+    )
+  },
+)
+
+type BreadcrumbEllipsisOptions = {}
+
+export type BreadcrumbEllipsisProps = IconProps & BreadcrumbEllipsisOptions
+
+export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
+  ({ children, className, ...rest }, ref) => {
+    const styles = useBreadcrumb()
+
+    const css: CSSUIObject = {
+      ...styles.ellipsis,
+    }
+
+    return (
+      children ?? (
+        <Icon
+          ref={ref}
+          title="ellipsis"
+          className={cx("ui-breadcrumb__item__ellipsis", className)}
+          __css={css}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 36 24"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          {...rest}
+        >
+          <circle cx="10" cy="12" r="2" fill="currentColor" />
+          <circle cx="20" cy="12" r="2" fill="currentColor" />
+          <circle cx="30" cy="12" r="2" fill="currentColor" />
+        </Icon>
+      )
     )
   },
 )

@@ -24,16 +24,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Check changed stories
-        id: stories
-        run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -e '^\.storybook/' -e '^stories/' && echo true || echo false)" >> $GITHUB_OUTPUT
-        shell: bash
-
       - name: Install
         uses: ./.github/composite-actions/install
 
-      - name: Build
+      - name: Build packages
         run: pnpm build
 
       - name: Create @next release
@@ -43,16 +37,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Storybook
-        if: steps.stories.outputs.changed == 'true'
-        run: pnpm build:storybook
-
-      - name: Update Storybook
-        if: steps.stories.outputs.changed == 'true'
-        uses: JamesIves/github-pages-deploy-action@v4.5.0
-        with:
-          branch: gh-pages
-          folder: storybook-static
-          clean: true
-          clean-exclude: .nojekyll

@@ -1,0 +1,78 @@
+---
+title: Menu
+description: "`Menu` is a component that displays a common dropdown menu."
+package_name: "@yamada-ui/menu"
+label: Updated
+with_description: true
+tab: Theming
+---
+
+## Theming
+
+The `Menu` is a [multi part component](/styled-system/theming/component-styles#multi-part-components).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const Menu: ComponentMultiStyle = {
+  baseStyle: {
+    button: {
+      transitionProperty: "common",
+      transitionDuration: "normal",
+    },
+    list: {
+      rounded: "md",
+      minW: "xs",
+      py: "2",
+      bg: ["white", "black"],
+      border: "1px solid",
+      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
+      color: "inherit",
+      boxShadow: ["lg", "dark-lg"],
+      zIndex: "guldo",
+    },
+    item: {
+      cursor: "pointer",
+      py: "1.5",
+      px: "3",
+      transitionProperty: "background",
+      transitionDuration: "ultra-fast",
+      transitionTimingFunction: "ease-in",
+      _focus: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+      },
+      _active: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+        _disabled: {
+          bg: ["white", "black"],
+        },
+      },
+      _disabled: {
+        opacity: 0.4,
+        cursor: "not-allowed",
+      },
+    },
+    icon: {
+      color: ["blackAlpha.600", "whiteAlpha.700"],
+    },
+    command: {
+      opacity: 0.6,
+    },
+    divider: {
+      my: "2",
+      borderBottomWidth: "1px",
+      borderColor: "inherit",
+    },
+    group: {},
+    groupLabel: {
+      py: "1.5",
+      px: "3",
+      fontSize: "sm",
+      fontWeight: "semibold",
+      color: ["blackAlpha.700", "whiteAlpha.600"],
+    },
+  },
+}
+```

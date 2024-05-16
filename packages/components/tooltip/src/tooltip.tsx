@@ -1,8 +1,8 @@
 import type {
   CSSUIObject,
+  CSSUIProps,
   HTMLUIProps,
   ThemeProps,
-  CSSUIProps,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -29,7 +29,6 @@ import {
   mergeRefs,
   getOwnerWindow,
   getOwnerDocument,
-  omitObject,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { Children, cloneElement, useCallback, useEffect, useRef } from "react"
@@ -176,10 +175,20 @@ const getTooltipProps = (
  */
 export const Tooltip = forwardRef<TooltipProps, "div">(
   (
-    { closeOnPointerDown, zIndex, portalProps, withPortal = true, ...props },
+    {
+      closeOnPointerDown,
+      z: zProp,
+      zIndex: zIndexProp,
+      portalProps,
+      withPortal = true,
+      ...props
+    },
     ref,
   ) => {
-    const [styles, mergedProps] = useComponentStyle("Tooltip", props)
+    let [{ z, zIndex, ...styles }, mergedProps] = useComponentStyle(
+      "Tooltip",
+      props,
+    )
     const {
       className,
       children,
@@ -197,12 +206,21 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       closeOnEsc = true,
       animation,
       duration,
+      isOpen: isOpenProp,
+      defaultIsOpen: defaultIsOpenProp,
+      onOpen: onOpenProp,
+      onClose: onCloseProp,
       ...rest
     } = omitThemeProps(mergedProps)
 
     closeOnPointerDown = closeOnMouseDown
 
-    const { isOpen, onOpen, onClose } = useDisclosure(rest)
+    const { isOpen, onOpen, onClose } = useDisclosure({
+      isOpen: isOpenProp,
+      defaultIsOpen: defaultIsOpenProp,
+      onOpen: onOpenProp,
+      onClose: onCloseProp,
+    })
 
     const triggerRef = useRef<HTMLElement>(null)
 
@@ -310,10 +328,15 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
 
     const css: CSSUIObject = {
       position: "relative",
-      ...omitObject(styles, ["zIndex"]),
+      ...styles,
     }
 
     if (!label) return <>{children}</>
+
+    const resolvedZIndex = (zIndexProp ??
+      zProp ??
+      zIndex ??
+      z) as CSSUIProps["zIndex"]
 
     return (
       <>
@@ -324,7 +347,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
             <Portal isDisabled={!withPortal} {...portalProps}>
               <ui.div
                 {...getPopperProps()}
-                zIndex={(zIndex ?? styles.zIndex) as CSSUIProps["zIndex"]}
+                zIndex={resolvedZIndex}
                 pointerEvents="none"
               >
                 <ui.div
@@ -339,12 +362,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                   animate={isOpen ? "enter" : "exit"}
                   exit="exit"
                   __css={css}
-                  {...omitObject(rest, [
-                    "isOpen",
-                    "defaultIsOpen",
-                    "onOpen",
-                    "onClose",
-                  ])}
+                  {...rest}
                 >
                   {label}
                 </ui.div>

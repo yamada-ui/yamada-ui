@@ -24,7 +24,6 @@ import {
   handlerAll,
   isNull,
   mergeRefs,
-  omitObject,
   pickObject,
 } from "@yamada-ui/utils"
 import type {
@@ -112,6 +111,9 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       lineClamp = 1,
       separator = ",",
       resetRef,
+      "aria-readonly": isReadOnly,
+      onChange: onChangeProp,
+      onClick: onClickProp,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
 
@@ -122,7 +124,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     const [values, setValues] = useControllableState<File[] | undefined>({
       value,
       defaultValue,
-      onChange: rest.onChange,
+      onChange: onChangeProp,
     })
 
     const onClick = useCallback(() => {
@@ -207,7 +209,6 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           ref={mergeRefs(inputRef, ref)}
           type="file"
           aria-hidden
-          aria-readonly
           tabIndex={-1}
           id={id}
           name={name}
@@ -226,6 +227,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
             position: "absolute",
           }}
           onChange={onChange}
+          area-readonly={isReadOnly}
           {...pickObject(rest, formControlProperties)}
         />
 
@@ -233,11 +235,11 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           ref={ref}
           className={cx("ui-file-input", className)}
           py={values?.length && component ? "0.125rem" : undefined}
-          {...omitObject(rest, ["onChange", "aria-readonly"])}
+          {...rest}
           __css={css}
           tabIndex={0}
           data-placeholder={dataAttr(!values?.length)}
-          onClick={handlerAll(rest.onClick, onClick)}
+          onClick={handlerAll(onClickProp, onClick)}
         >
           {cloneChildren}
         </ui.div>

@@ -189,21 +189,31 @@ export const FormControl = forwardRef<FormControlProps, "div">(
   },
 )
 
-export const useFormControl = (
-  props: FormControlOptions & {
-    id?: string
-    disabled?: boolean
-    readOnly?: boolean
-    required?: boolean
-  },
-) => {
+type UseFormControlOptions = FormControlOptions & {
+  id?: string
+  disabled?: boolean
+  readOnly?: boolean
+  required?: boolean
+}
+
+export const useFormControl = <Y extends Dict = Dict>({
+  id: idProp,
+  disabled,
+  readOnly,
+  required,
+  isDisabled: isDisabledProp,
+  isReadOnly: isReadOnlyProp,
+  isRequired: isRequiredProp,
+  isInvalid: isInvalidProp,
+  ...rest
+}: UseFormControlOptions & Y) => {
   const control = useFormControlContext()
 
-  const id = props.id ?? control?.id
-  const isDisabled = props.disabled ?? props.isDisabled ?? control?.isDisabled
-  const isReadOnly = props.readOnly ?? props.isReadOnly ?? control?.isReadOnly
-  const isRequired = props.required ?? props.isRequired ?? control?.isRequired
-  const isInvalid = props.isInvalid ?? control?.isInvalid
+  const id = idProp ?? control?.id
+  const isDisabled = disabled ?? isDisabledProp ?? control?.isDisabled
+  const isReadOnly = readOnly ?? isReadOnlyProp ?? control?.isReadOnly
+  const isRequired = required ?? isRequiredProp ?? control?.isRequired
+  const isInvalid = isInvalidProp ?? control?.isInvalid
 
   return {
     id,
@@ -211,6 +221,7 @@ export const useFormControl = (
     isReadOnly,
     isRequired,
     isInvalid,
+    ...rest,
   }
 }
 
@@ -295,7 +306,7 @@ export const getFormControlProperties = ({
 }: {
   omit?: (typeof formControlBaseProperties)[number][]
   pick?: (typeof formControlBaseProperties)[number][]
-}) => {
+} = {}) => {
   let result = formControlProperties
 
   if (pick.length) {

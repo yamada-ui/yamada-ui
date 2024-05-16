@@ -2,7 +2,7 @@
   English | <a href='./CONTRIBUTING.ja.md'>日本語</a>
 </p>
 
-## Thanks for for your interest in contribute to Yamada UI 😎, you are amazing!!!
+## Thanks for your interest in contribute to Yamada UI 😎, you are amazing!!!
 
 When it comes to open source, there are different ways you can contribute, all of which are valuable. Here are some guidelines that should help you as you prepare your contribution.
 
@@ -36,6 +36,8 @@ To improve our development process, we have set up tools and systems. Yamada UI 
   hooks
 - [Changeset](https://github.com/atlassian/changesets) for changes
   documentation, changelog generation, and release management.
+- [Next.js](https://nextjs.org/) Framework for documentation sites.
+- [Contentlayer](https://contentlayer.dev/) Content management for documentation sites.
 
 ### Commands
 

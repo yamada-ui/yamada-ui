@@ -1,0 +1,28 @@
+import { Center, VStack } from "@yamada-ui/react"
+import { StarBanner } from "components/feedback"
+import { Footer, Header } from "components/layouts"
+import type { FC, PropsWithChildren } from "react"
+
+export const TopLayout: FC<PropsWithChildren> = ({ children }) => {
+  return (
+    <>
+      <StarBanner />
+
+      <Header />
+
+      <Center as="main">
+        <VStack
+          w="full"
+          maxW="9xl"
+          gap="0"
+          py={{ base: "lg", md: "normal" }}
+          px={{ base: "lg", md: "md" }}
+        >
+          {children}
+        </VStack>
+      </Center>
+
+      <Footer />
+    </>
+  )
+}

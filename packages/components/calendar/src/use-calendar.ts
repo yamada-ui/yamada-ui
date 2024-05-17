@@ -44,7 +44,7 @@ export type CalendarContext = Pick<
   | "weekendDays"
   | "holidays"
   | "today"
-  | "selectMonthWith"
+  | "__selectType"
   | "enableRange"
 > &
   Pick<
@@ -281,11 +281,11 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
   enableRange?: boolean
   /**
    * Changes the judgment of the currently selected year and month.
-   * This is an internal utility primarily used by `MonthPicker`.
+   * This is an internal utility primarily used by `MonthPicker` and `YearPicker`.
    *
    * @private
    */
-  selectMonthWith?: "month" | "value"
+  __selectType?: "year" | "month" | "date"
 }
 
 export const useCalendar = <Y extends MaybeValue = Date>({
@@ -324,7 +324,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   maxSelectValues,
   enableMultiple = false,
   enableRange = false,
-  selectMonthWith = "month",
+  __selectType = "date",
   ...rest
 }: UseCalendarProps<Y>) => {
   const { theme } = useTheme()
@@ -379,7 +379,8 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     onUpdate: (prev, next) => !isSameDate(prev, next),
   })
 
-  const [year, setYear] = useState<number>(month.getFullYear())
+  const defaultYear = month.getFullYear()
+  const [year, setYear] = useState<number>(defaultYear)
   const [internalYear, setInternalYear] = useState<number>(year)
   const minYear = minDate instanceof Date ? minDate.getFullYear() : 1
   const maxYear = maxDate instanceof Date ? maxDate.getFullYear() : 10000
@@ -419,12 +420,39 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   }, [valueProp])
 
   useUpdateEffect(() => {
+    if (!value || amountOfMonths > 1) return
+
+    if (isMulti || isRange) return
+
+    if (!value) return
+
+    const year = value.getFullYear()
+
+    if (type === "year") {
+      setYear(year)
+      setInternalYear((prev) => {
+        const isContain = rangeYears.includes(year)
+
+        if (isContain) {
+          return prev
+        } else {
+          return year
+        }
+      })
+    } else {
+      setMonth(value)
+    }
+  }, [value, amountOfMonths])
+
+  useUpdateEffect(() => {
     if (!isRange) return
 
     if (value.length !== 1) setHoveredValue(undefined)
   }, [isRange, value])
 
   useUpdateEffect(() => {
+    if (__selectType === "year") return
+
     setYear(month.getFullYear())
     setInternalYear(month.getFullYear())
   }, [month.getFullYear()])
@@ -517,7 +545,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     monthRefs,
     dayRefs,
     maxSelectValues,
-    selectMonthWith,
+    __selectType,
     enableRange,
   }
 }

@@ -14,7 +14,6 @@ import {
   isFunction,
   isNull,
   mergeRefs,
-  omitObject,
   pickObject,
 } from "@yamada-ui/utils"
 import type { ChangeEvent, ForwardedRef, ReactNode } from "react"
@@ -57,8 +56,17 @@ export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
  */
 export const FileButton = forwardRef<FileButtonProps, "input">(
   ({ className, resetRef, as: As, children, ...props }, ref) => {
-    const { id, name, accept, multiple, form, ...rest } =
-      useFormControlProps(props)
+    const {
+      id,
+      name,
+      accept,
+      multiple,
+      form,
+      "aria-readonly": ariaReadonly,
+      onClick: onClickProp,
+      onChange: onChangeProp,
+      ...rest
+    } = useFormControlProps(props)
 
     const { disabled, readOnly, required, "aria-invalid": isInvalid } = rest
 
@@ -76,9 +84,9 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
           ? Array.from(ev.currentTarget.files)
           : undefined
 
-        rest.onChange?.(files)
+        onChangeProp?.(files)
       },
-      [rest],
+      [onChangeProp],
     )
 
     const onReset = useCallback(() => {
@@ -91,8 +99,8 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
       children = (
         <Component
           className={cx("ui-file-button", className)}
-          {...omitObject(rest, ["onChange", "aria-readonly"])}
-          onClick={handlerAll(rest.onClick, onClick)}
+          {...rest}
+          onClick={handlerAll(onClickProp, onClick)}
         >
           {children}
         </Component>
@@ -125,6 +133,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">(
             position: "absolute",
           }}
           onChange={onChange}
+          aria-readonly={ariaReadonly}
           {...pickObject(rest, formControlProperties)}
         />
 

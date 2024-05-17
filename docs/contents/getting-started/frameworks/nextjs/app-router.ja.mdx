@@ -101,14 +101,14 @@ export default function RootLayout({
 テーマやコンフィグをカスタマイズしたい場合は、[テーマをカスタマイズする](/styled-system/theming/customize-theme)と[コンフィグをカスタマイズする](/styled-system/configure/customize-config)をご覧ください。
 :::
 
-## `ColorModeScript`と`colorModeManager`を追加する
+## `ColorModeScript`を追加する
 
 カラーモードを正常に動作させるために、`body`内に`ColorModeScript`を追加する必要があります。
 
 理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 ```tsx live=false title=layout.tsx highlight={1,11,13}
-import { UIProvider, colorModeManager, ColorModeScript } from "@yamada-ui/react"
+import { UIProvider, ColorModeScript } from "@yamada-ui/react"
 
 export default function RootLayout({
   children,
@@ -118,20 +118,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ColorModeScript type="cookie" nonce="testing" />
+        <ColorModeScript />
 
-        <UIProvider colorModeManager={{ ...colorModeManager }.cookieStorage}>
-          {children}
-        </UIProvider>
+        <UIProvider>{children}</UIProvider>
       </body>
     </html>
   )
 }
 ```
-
-:::note status=warning
-`colorModeManager`は、スプレッド構文などでオブジェクトをシャローコピーする必要があります。これは、`react-server-dom-webpack`の不具合の可能性があり、修正されるまでの一時的なアプローチです。
-:::
 
 ## コンポーネントを使用する
 

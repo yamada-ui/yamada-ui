@@ -34,7 +34,7 @@ describe("<Autocomplete />", () => {
         </Autocomplete>,
       )
 
-      expect(screen.getByRole("textbox")).toHaveAttribute(
+      expect(screen.getByRole("combobox")).toHaveAttribute(
         "placeholder",
         "Select Option",
       )
@@ -85,19 +85,19 @@ describe("<Autocomplete />", () => {
     test("with default value", () => {
       render(<Autocomplete defaultValue="option1" items={ITEMS} />)
 
-      expect(screen.getByRole("textbox")).toHaveValue("option1")
+      expect(screen.getByRole("combobox")).toHaveValue("option1")
     })
     test("with disabled", () => {
       render(<Autocomplete isDisabled items={ITEMS} />)
-      expect(screen.getByRole("textbox")).toBeDisabled()
+      expect(screen.getByRole("combobox")).toBeDisabled()
     })
     test("with readOnly", () => {
       render(<Autocomplete isReadOnly items={ITEMS} />)
-      expect(screen.getByRole("textbox")).toHaveAttribute("readonly")
+      expect(screen.getByRole("combobox")).toHaveAttribute("readonly")
     })
     test("with invalid", () => {
       render(<Autocomplete isInvalid items={ITEMS} />)
-      expect(screen.getByRole("textbox")).toHaveAttribute(
+      expect(screen.getByRole("combobox")).toHaveAttribute(
         "aria-invalid",
         "true",
       )
@@ -130,9 +130,9 @@ describe("<Autocomplete />", () => {
         const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
         fireEvent.click(optionElements[0])
       })
-      expect(screen.getByRole("textbox")).toHaveValue("option1")
+      expect(screen.getByRole("combobox")).toHaveValue("option1")
     })
-    test("update the value when typing in the textbox", async () => {
+    test("update the value when typing in the combobox", async () => {
       const { container } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
@@ -140,7 +140,7 @@ describe("<Autocomplete />", () => {
 
       fireEvent.click(autocomplete!)
 
-      const input = screen.getByRole("textbox")
+      const input = screen.getByRole("combobox")
       fireEvent.change(input, { target: { value: "option2" } })
       expect(input).toHaveValue("option2")
     })
@@ -156,7 +156,7 @@ describe("<Autocomplete />", () => {
       fireEvent.click(autocomplete!)
       expect(screen.getByText(NO_RESULTS)).toHaveStyle("position: absolute")
 
-      fireEvent.change(screen.getByRole("textbox"), {
+      fireEvent.change(screen.getByRole("combobox"), {
         target: { value: "option4" },
       })
       expect(screen.getByText(NO_RESULTS)).not.toHaveStyle("position: absolute")
@@ -230,11 +230,11 @@ describe("<Autocomplete />", () => {
 
       fireEvent.click(autocomplete!)
       await waitFor(() => {
-        const input = screen.getByRole("textbox")
+        const input = screen.getByRole("combobox")
         fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
         fireEvent.keyDown(input, { key: "Enter" })
       })
-      expect(screen.getByRole("textbox")).toHaveValue(CREATE_OPTION_VALUE)
+      expect(screen.getByRole("combobox")).toHaveValue(CREATE_OPTION_VALUE)
     })
     describe("with insert position", () => {
       test("first", async () => {
@@ -247,7 +247,7 @@ describe("<Autocomplete />", () => {
 
         fireEvent.click(autocomplete!)
         await waitFor(() => {
-          const input = screen.getByRole("textbox")
+          const input = screen.getByRole("combobox")
           fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
           fireEvent.keyDown(input, { key: "Enter" })
         })
@@ -264,7 +264,7 @@ describe("<Autocomplete />", () => {
 
         fireEvent.click(autocomplete!)
         await waitFor(() => {
-          const input = screen.getByRole("textbox")
+          const input = screen.getByRole("combobox")
           fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
           fireEvent.keyDown(input, { key: "Enter" })
         })
@@ -287,7 +287,7 @@ describe("<Autocomplete />", () => {
 
         fireEvent.click(autocomplete!)
         await waitFor(() => {
-          const input = screen.getByRole("textbox")
+          const input = screen.getByRole("combobox")
           fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
           fireEvent.keyDown(input, { key: "Enter" })
         })

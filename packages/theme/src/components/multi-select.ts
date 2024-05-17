@@ -11,6 +11,9 @@ export const MultiSelect: ComponentMultiStyle = mergeMultiStyle(Select, {
       _hover: {
         opacity: 0.8,
       },
+      _readOnly: {
+        pointerEvents: "none",
+      },
       _disabled: {
         pointerEvents: "none",
         opacity: 0.4,

@@ -85,18 +85,21 @@ export const useCheckboxGroup = <
     [value, setValue],
   )
 
-  const getCheckboxProps: UIPropGetter<"input", { value?: Y }, { value?: Y }> =
-    useCallback(
-      (props, ref = null) => ({
-        ...props,
-        ref,
-        [isNative ? "checked" : "isChecked"]: value.some(
-          (val) => String(props?.value) === String(val),
-        ),
-        onChange,
-      }),
-      [onChange, isNative, value],
-    )
+  const getCheckboxProps: UIPropGetter<
+    "input",
+    { value?: Y },
+    { value?: Y; isChecked?: boolean }
+  > = useCallback(
+    (props, ref = null) => ({
+      ...props,
+      ref,
+      [isNative ? "checked" : "isChecked"]: value.some(
+        (val) => String(props?.value) === String(val),
+      ),
+      onChange,
+    }),
+    [onChange, isNative, value],
+  )
 
   return { props, value, setValue, onChange, getCheckboxProps }
 }

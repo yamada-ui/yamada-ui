@@ -209,7 +209,7 @@ describe("<Checkbox />", () => {
     expect(props.checked).toBeTruthy()
   })
 
-  test("should return checked attribute when isNative is", () => {
+  test("should return isChecked attribute when isNative is false", () => {
     const { result } = renderHook(() =>
       useCheckboxGroup({ defaultValue: ["Yes"], isNative: false }),
     )

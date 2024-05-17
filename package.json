@@ -96,6 +96,7 @@
     "@emotion/react": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@faker-js/faker": "^8.4.1",
+    "@floating-ui/react": "^0.26.13",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",

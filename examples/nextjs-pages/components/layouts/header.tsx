@@ -31,6 +31,7 @@ import { useRef } from 'react'
 import { useState } from 'react'
 import { memo } from 'react'
 import { FC } from 'react'
+import { shift } from '@floating-ui/react'
 
 export type HeaderProps = CenterProps
 
@@ -97,18 +98,15 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
   return (
     <Menu
       restoreFocus={false}
-      modifiers={[
-        {
-          name: 'preventOverflow',
-          options: {
-            padding: {
-              top: 32,
-              bottom: 32,
-              left: 32,
-              right: 32,
-            },
+      middlewares={[
+        shift({
+          padding: {
+            top: 32,
+            bottom: 32,
+            left: 32,
+            right: 32,
           },
-        },
+        }),
       ]}
       {...menuProps}
     >
@@ -162,18 +160,15 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(({ popoverProps, ...r
       onClose={onClose}
       closeOnButton={false}
       restoreFocus={false}
-      modifiers={[
-        {
-          name: 'preventOverflow',
-          options: {
-            padding: {
-              top: 32,
-              bottom: 32,
-              left: 32,
-              right: 32,
-            },
+      middlewares={[
+        shift({
+          padding: {
+            top: 32,
+            bottom: 32,
+            left: 32,
+            right: 32,
           },
-        },
+        }),
       ]}
     >
       <PopoverTrigger>

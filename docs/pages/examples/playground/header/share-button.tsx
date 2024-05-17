@@ -17,6 +17,7 @@ import type {
 import { memo } from "react"
 import type { FC } from "react"
 import { Copy } from "components/media-and-icons"
+import { shift } from "@floating-ui/react"
 
 export type ShareButtonProps = ButtonProps & {
   popoverProps?: PopoverProps
@@ -28,18 +29,15 @@ export const ShareButton: FC<ShareButtonProps> = memo(
     return (
       <Popover
         placement="bottom-end"
-        modifiers={[
-          {
-            name: "preventOverflow",
-            options: {
-              padding: {
-                top: 16,
-                bottom: 16,
-                left: 16,
-                right: 16,
-              },
+        middlewares={[
+          shift({
+            padding: {
+              top: 16,
+              bottom: 16,
+              left: 16,
+              right: 16,
             },
-          },
+          }),
         ]}
         {...popoverProps}
       >

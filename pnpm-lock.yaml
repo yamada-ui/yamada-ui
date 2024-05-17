@@ -42,6 +42,9 @@ importers:
       '@faker-js/faker':
         specifier: ^8.4.1
         version: 8.4.1
+      '@floating-ui/react':
+        specifier: ^0.26.13
+        version: 0.26.14(react-dom@18.2.0)(react@18.2.0)
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.5.2
         version: 6.5.2
@@ -318,6 +321,9 @@ importers:
       '@faker-js/faker':
         specifier: ^8.4.1
         version: 8.4.1
+      '@floating-ui/react':
+        specifier: ^0.26.13
+        version: 0.26.14(react-dom@18.2.0)(react@18.2.0)
       '@fortawesome/free-regular-svg-icons':
         specifier: ^6.5.2
         version: 6.5.2

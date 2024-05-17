@@ -31,6 +31,7 @@
     "@emotion/react": "11.11.0",
     "@emotion/weak-memoize": "^0.3.1",
     "@faker-js/faker": "^8.4.1",
+    "@floating-ui/react": "^0.26.13",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@vercel/analytics": "^1.2.2",
@@ -66,6 +67,7 @@
     "@yamada-ui/cli": "workspace:*",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
+    "find-packages": "^10.0.4",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "markdown-toc": "^1.2.0",
@@ -79,7 +81,6 @@
     "remark-slug": "^7.0.1",
     "typescript": "^5.4.5",
     "unified": "^10.1.2",
-    "unist-util-visit": "^5.0.0",
-    "find-packages": "^10.0.4"
+    "unist-util-visit": "^5.0.0"
   }
 }

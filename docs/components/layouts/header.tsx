@@ -61,6 +61,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { memo, useEffect, useRef, useState } from "react"
 import type { FC } from "react"
+import { shift } from "@floating-ui/react"
 
 export type HeaderProps = CenterProps & {}
 
@@ -244,18 +245,15 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
   return (
     <Menu
       placement="bottom"
-      modifiers={[
-        {
-          name: "preventOverflow",
-          options: {
-            padding: {
-              top: padding,
-              bottom: padding,
-              left: padding,
-              right: padding,
-            },
+      middlewares={[
+        shift({
+          padding: {
+            top: padding,
+            bottom: padding,
+            left: padding,
+            right: padding,
           },
-        },
+        }),
       ]}
       restoreFocus={false}
       {...menuProps}
@@ -301,18 +299,15 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
     return (
       <Menu
         placement="bottom"
-        modifiers={[
-          {
-            name: "preventOverflow",
-            options: {
-              padding: {
-                top: padding,
-                bottom: padding,
-                left: padding,
-                right: padding,
-              },
+        middlewares={[
+          shift({
+            padding: {
+              top: padding,
+              bottom: padding,
+              left: padding,
+              right: padding,
             },
-          },
+          }),
         ]}
         restoreFocus={false}
         {...menuProps}

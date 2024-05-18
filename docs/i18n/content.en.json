@@ -12161,7 +12161,11 @@
     "title": "Add colorModeManager",
     "type": "fragment",
     "slug": "/styled-system/color-mode#add-colormodemanager",
-    "hierarchy": { "lv1": "Color Mode", "lv2": "Add colorModeManager" }
+    "hierarchy": {
+      "lv1": "Color Mode",
+      "lv2": "Setup",
+      "lv3": "Add colorModeManager"
+    }
   },
   {
     "title": "Prepare getServerSideProps",
@@ -12169,8 +12173,9 @@
     "slug": "/styled-system/color-mode#prepare-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Add colorModeManager",
-      "lv3": "Prepare getServerSideProps"
+      "lv2": "Setup",
+      "lv3": "Add colorModeManager",
+      "lv4": "Prepare getServerSideProps"
     }
   },
   {
@@ -12179,8 +12184,9 @@
     "slug": "/styled-system/color-mode#set-cookies-in-colormodemanager",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Add colorModeManager",
-      "lv3": "Set cookies in colorModeManager"
+      "lv2": "Setup",
+      "lv3": "Add colorModeManager",
+      "lv4": "Set cookies in colorModeManager"
     }
   },
   {
@@ -12189,8 +12195,9 @@
     "slug": "/styled-system/color-mode#add-getserversideprops",
     "hierarchy": {
       "lv1": "Color Mode",
-      "lv2": "Add colorModeManager",
-      "lv3": "Add getServerSideProps"
+      "lv2": "Setup",
+      "lv3": "Add colorModeManager",
+      "lv4": "Add getServerSideProps"
     }
   },
   {

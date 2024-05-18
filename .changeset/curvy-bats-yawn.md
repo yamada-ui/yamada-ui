@@ -2,4 +2,4 @@
 "@yamada-ui/checkbox": patch
 ---
 
-add return type isChecked
+Add return type isChecked

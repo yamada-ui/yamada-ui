@@ -12853,7 +12853,11 @@
     "title": "colorModeManagerを追加する",
     "type": "fragment",
     "slug": "/styled-system/color-mode#colormodemanagerを追加する",
-    "hierarchy": { "lv1": "カラーモード", "lv2": "colorModeManagerを追加する" }
+    "hierarchy": {
+      "lv1": "カラーモード",
+      "lv2": "セットアップ",
+      "lv3": "colorModeManagerを追加する"
+    }
   },
   {
     "title": "getServerSidePropsを用意する",
@@ -12861,8 +12865,9 @@
     "slug": "/styled-system/color-mode#getserversidepropsを用意する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "colorModeManagerを追加する",
-      "lv3": "getServerSidePropsを用意する"
+      "lv2": "セットアップ",
+      "lv3": "colorModeManagerを追加する",
+      "lv4": "getServerSidePropsを用意する"
     }
   },
   {
@@ -12871,8 +12876,9 @@
     "slug": "/styled-system/color-mode#colormodemanagerにcookiesを設定する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "colorModeManagerを追加する",
-      "lv3": "colorModeManagerにcookiesを設定する"
+      "lv2": "セットアップ",
+      "lv3": "colorModeManagerを追加する",
+      "lv4": "colorModeManagerにcookiesを設定する"
     }
   },
   {
@@ -12881,8 +12887,9 @@
     "slug": "/styled-system/color-mode#getserversidepropsを追加する",
     "hierarchy": {
       "lv1": "カラーモード",
-      "lv2": "colorModeManagerを追加する",
-      "lv3": "getServerSidePropsを追加する"
+      "lv2": "セットアップ",
+      "lv3": "colorModeManagerを追加する",
+      "lv4": "getServerSidePropsを追加する"
     }
   },
   {

@@ -9,16 +9,14 @@ import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
   useFormControlProps,
-  getFormControlProperties,
+  formControlProperties,
 } from "@yamada-ui/form-control"
 import type { SVGMotionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { PropGetter } from "@yamada-ui/utils"
+import type { Dict, Merge, PropGetter } from "@yamada-ui/utils"
 import {
   cx,
-  omitObject,
-  pickObject,
   useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
@@ -26,6 +24,7 @@ import {
   dataAttr,
   mergeRefs,
   funcAll,
+  splitObject,
 } from "@yamada-ui/utils"
 import type {
   ChangeEvent,
@@ -102,21 +101,32 @@ export type UseCheckboxProps<Y extends string | number = string> =
     tabIndex?: number
   }
 
-export const useCheckbox = <Y extends string | number = string>(
-  props: UseCheckboxProps<Y>,
-) => {
+export const useCheckbox = <
+  Y extends string | number = string,
+  M extends Dict = Dict,
+>({
+  id,
+  ...props
+}: UseCheckboxProps<Y> & M) => {
+  id ??= useId()
   const {
+    id: _id,
     name,
     value,
+    isChecked: isCheckedProp,
     defaultIsChecked,
     tabIndex,
     required,
     disabled,
     readOnly,
     isIndeterminate,
-    ...rest
-  } = useFormControlProps(props)
-  const id = props.id || useId()
+    onChange: onChangeProp,
+    onFocus: onFocusProp,
+    onBlur: onBlurProp,
+    ...computedProps
+  } = useFormControlProps({ id, ...props })
+  const [{ "aria-readonly": _ariaReadonly, ...formControlProps }, rest] =
+    splitObject(computedProps, formControlProperties)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -128,8 +138,8 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const [isChecked, setIsChecked] = useState<boolean>(!!defaultIsChecked)
 
-  const isControlled = props.isChecked !== undefined
-  const checked = isControlled ? (props.isChecked as boolean) : isChecked
+  const isControlled = isCheckedProp !== undefined
+  const checked = isControlled ? (isCheckedProp as boolean) : isChecked
 
   const onChange = useCallbackRef(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -142,12 +152,12 @@ export const useCheckbox = <Y extends string | number = string>(
       if (!isControlled)
         setIsChecked(!checked || isIndeterminate ? true : ev.target.checked)
 
-      rest.onChange?.(ev)
+      onChangeProp?.(ev)
     },
     [readOnly, disabled, isControlled, checked, isIndeterminate],
   )
-  const onBlur = useCallbackRef(rest.onBlur)
-  const onFocus = useCallbackRef(rest.onFocus)
+  const onFocus = useCallbackRef(onFocusProp)
+  const onBlur = useCallbackRef(onBlurProp)
 
   const onKeyDown = useCallback(
     ({ key }: KeyboardEvent<Element>) => {
@@ -191,10 +201,7 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
         if (el) setIsLabel(el.tagName === "LABEL")
@@ -208,15 +215,12 @@ export const useCheckbox = <Y extends string | number = string>(
         requestAnimationFrame(() => inputRef.current?.focus())
       }),
     }),
-    [checked, isLabel, rest],
+    [checked, isLabel, formControlProps],
   )
 
   const getIconProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref,
       "data-active": dataAttr(isActive),
@@ -242,16 +246,13 @@ export const useCheckbox = <Y extends string | number = string>(
       isHovered,
       isFocusVisible,
       isIndeterminate,
-      rest,
+      formControlProps,
     ],
   )
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(inputRef, ref),
       id,
@@ -281,7 +282,7 @@ export const useCheckbox = <Y extends string | number = string>(
       onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
-      rest,
+      formControlProps,
       id,
       name,
       value,
@@ -300,10 +301,7 @@ export const useCheckbox = <Y extends string | number = string>(
 
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref,
       "data-checked": dataAttr(checked),
@@ -316,10 +314,11 @@ export const useCheckbox = <Y extends string | number = string>(
         ev.stopPropagation()
       }),
     }),
-    [checked, rest],
+    [checked, formControlProps],
   )
 
   return {
+    props: rest,
     isFocusVisible,
     isFocused,
     isHovered,
@@ -351,11 +350,10 @@ type CheckboxOptions = {
 }
 
 export type CheckboxProps<Y extends string | number = string> = Omit<
-  HTMLUIProps<"label">,
-  keyof UseCheckboxProps | "checked"
+  Merge<HTMLUIProps<"label">, UseCheckboxProps<Y>>,
+  "checked"
 > &
   ThemeProps<"Checkbox"> &
-  UseCheckboxProps<Y> &
   CheckboxOptions
 
 /**
@@ -369,24 +367,34 @@ export const Checkbox = forwardRef(
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const group = useCheckboxGroupContext()
+    const { value: groupValue, ...groupProps } = { ...group }
     const control = useFormControl(props)
     const [styles, mergedProps] = useMultiComponentStyle("Checkbox", {
-      ...(group ? omitObject(group, ["value"]) : {}),
+      ...groupProps,
       ...props,
     })
     const {
       className,
       gap = "0.5rem",
-      isRequired = group?.isRequired ?? control.isRequired,
-      isReadOnly = group?.isReadOnly ?? control.isReadOnly,
-      isDisabled = group?.isDisabled ?? control.isDisabled,
-      isInvalid = group?.isInvalid ?? control.isInvalid,
+      isRequired = groupProps.isRequired ?? control.isRequired,
+      isReadOnly = groupProps.isReadOnly ?? control.isReadOnly,
+      isDisabled = groupProps.isDisabled ?? control.isDisabled,
+      isInvalid = groupProps.isInvalid ?? control.isInvalid,
       iconProps,
       inputProps,
       labelProps,
       children,
-      ...rest
+      ...computedProps
     } = omitThemeProps(mergedProps)
+
+    const isCheckedProp =
+      groupValue && computedProps.value
+        ? groupValue.includes(computedProps.value)
+        : computedProps.isChecked
+    const onChange =
+      groupProps.onChange && computedProps.value
+        ? funcAll(groupProps.onChange, computedProps.onChange)
+        : computedProps.onChange
 
     const {
       isChecked,
@@ -395,23 +403,19 @@ export const Checkbox = forwardRef(
       getInputProps,
       getIconProps,
       getLabelProps,
+      props: rest,
     } = useCheckbox({
-      ...rest,
+      ...computedProps,
       isRequired,
       isReadOnly,
       isDisabled,
       isInvalid,
-      isChecked:
-        group?.value && rest.value
-          ? group.value.includes(rest.value)
-          : rest.isChecked,
-      onChange:
-        group?.onChange && rest.value
-          ? funcAll(group.onChange, rest.onChange)
-          : rest.onChange,
+      isChecked: isCheckedProp,
+      onChange,
     })
 
-    const cloneIcon = cloneElement(iconProps?.children ?? <CheckboxIcon />, {
+    const { children: customIcon, ...resolvedIconProps } = { ...iconProps }
+    const cloneIcon = cloneElement(customIcon ?? <CheckboxIcon />, {
       __css: {
         opacity: isChecked || isIndeterminate ? 1 : 0,
         transform: isChecked || isIndeterminate ? "scale(1)" : "scale(0.95)",
@@ -439,19 +443,7 @@ export const Checkbox = forwardRef(
           gap,
           ...styles.container,
         }}
-        {...omitObject(rest, [
-          "id",
-          "name",
-          "value",
-          "defaultValue",
-          "defaultIsChecked",
-          "isChecked",
-          "isIndeterminate",
-          "onChange",
-          "onBlur",
-          "onFocus",
-          "tabIndex",
-        ])}
+        {...rest}
       >
         <ui.input
           className="ui-checkbox__input"
@@ -467,9 +459,7 @@ export const Checkbox = forwardRef(
             userSelect: "none",
             ...styles.icon,
           }}
-          {...getIconProps(
-            omitObject(iconProps ?? { children: undefined }, ["children"]),
-          )}
+          {...getIconProps(resolvedIconProps)}
         >
           {cloneIcon}
         </ui.span>
@@ -512,15 +502,12 @@ export type CheckboxIconProps = HTMLUIProps<"svg"> &
 export const CheckboxIcon: FC<CheckboxIconProps> = ({
   isIndeterminate,
   isChecked,
+  isRequired: _isRequired,
+  isReadOnly: _isReadOnly,
+  isDisabled: _isDisabled,
+  isInvalid: _isInvalid,
   ...rest
 }) => {
-  const iconProps = omitObject(rest, [
-    "isRequired",
-    "isReadOnly",
-    "isDisabled",
-    "isInvalid",
-  ])
-
   return (
     <AnimatePresence initial={false}>
       {isIndeterminate || isChecked ? (
@@ -550,9 +537,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
             }
           >
             {isIndeterminate ? (
-              <IndeterminateIcon {...iconProps} />
+              <IndeterminateIcon {...rest} />
             ) : (
-              <CheckIcon {...iconProps} />
+              <CheckIcon {...rest} />
             )}
           </ui.div>
         </ui.div>

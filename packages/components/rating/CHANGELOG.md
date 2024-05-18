@@ -1,5 +1,13 @@
 # @yamada-ui/rating
 
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies [[`686a0b6`](https://github.com/yamada-ui/yamada-ui/commit/686a0b6caf0b34512719d61ffd7c7bef96673282), [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/use-focus-visible@1.1.0
+  - @yamada-ui/form-control@1.1.0
+
 ## 1.0.26
 
 ### Patch Changes

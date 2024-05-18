@@ -3,7 +3,9 @@ import { Switch } from "../src"
 
 describe("<Switch />", () => {
   test("Switch renders correctly", async () => {
-    const { container } = render(<Switch aria-label="switch">basic</Switch>)
+    const { container } = render(
+      <Switch aria-label="Switch value">basic</Switch>,
+    )
     await a11y(container)
   })
 

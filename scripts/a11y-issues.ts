@@ -2,6 +2,7 @@ import { Octokit } from "@octokit/rest"
 import { toCamelCase, toKebabCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import { execa } from "execa"
+import { recursiveOctokit } from "./utils"
 
 type Story = { name: string; messages: string[] }
 type Issue = Awaited<
@@ -56,7 +57,7 @@ const getIssues = async () => {
   let count = 0
   const perPage = 100
 
-  do {
+  const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...COMMON_PARAMS,
       state: "open",
@@ -69,8 +70,14 @@ const getIssues = async () => {
 
     count = data.length
 
-    page++
-  } while (count === perPage)
+    if (count === perPage) {
+      page++
+
+      await recursiveOctokit(listForRepo)
+    }
+  }
+
+  await recursiveOctokit(listForRepo)
 
   issues = issues.filter(({ pull_request }) => !pull_request)
 
@@ -210,20 +217,24 @@ const createIssues = async (
         continue
       }
 
-      await octokit.issues.update({
-        ...COMMON_PARAMS,
-        issue_number: number,
-        body,
-      })
+      await recursiveOctokit(() =>
+        octokit.issues.update({
+          ...COMMON_PARAMS,
+          issue_number: number,
+          body,
+        }),
+      )
 
       console.log("Updated issue", number, path)
     } else {
-      await octokit.issues.create({
-        ...COMMON_PARAMS,
-        title: `Enhance a11y for \`${name}\``,
-        body,
-        labels: ["a11y", "test", "good first issue"],
-      })
+      await recursiveOctokit(() =>
+        octokit.issues.create({
+          ...COMMON_PARAMS,
+          title: `Enhance a11y for \`${name}\``,
+          body,
+          labels: ["a11y", "test", "good first issue"],
+        }),
+      )
 
       console.log("Created issue", path)
     }

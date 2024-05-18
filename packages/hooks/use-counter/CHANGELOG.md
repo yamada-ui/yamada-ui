@@ -1,5 +1,11 @@
 # @yamada-ui/use-counter
 
+## 1.0.14
+
+### Patch Changes
+
+- [#1403](https://github.com/yamada-ui/yamada-ui/pull/1403) [`c4b320e`](https://github.com/yamada-ui/yamada-ui/commit/c4b320e1c69eeff7f44814d3565e6423c3cbdec9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the reset function was not initializing the values correctly.
+
 ## 1.0.13
 
 ### Patch Changes

@@ -29,12 +29,14 @@ export const useMediaQuery = (
       media,
       matches: ssr
         ? !!fallbackValues[index]
-        : getWindow().matchMedia(media).matches,
+        : !!getWindow()?.matchMedia(media).matches,
     }))
   })
 
   useEffect(() => {
     const win = getWindow()
+
+    if (!win) return
 
     setValue(
       queries.map((media) => ({
@@ -45,30 +47,30 @@ export const useMediaQuery = (
 
     const mql = queries.map((query) => win.matchMedia(query))
 
-    const handler = (evt: MediaQueryListEvent) => {
+    const handler = (ev: MediaQueryListEvent) => {
       setValue((prev) =>
         prev.slice().map((item) => {
-          if (item.media === evt.media) return { ...item, matches: evt.matches }
+          if (item.media === ev.media) return { ...item, matches: ev.matches }
 
           return item
         }),
       )
     }
 
-    mql.forEach((mql) => {
-      if (isFunction(mql.addListener)) {
-        mql.addListener(handler)
+    mql.forEach((mq) => {
+      if (isFunction(mq.addListener)) {
+        mq.addListener(handler)
       } else {
-        mql.addEventListener("change", handler)
+        mq.addEventListener("change", handler)
       }
     })
 
     return () => {
-      mql.forEach((mql) => {
-        if (isFunction(mql.removeListener)) {
-          mql.removeListener(handler)
+      mql.forEach((mq) => {
+        if (isFunction(mq.removeListener)) {
+          mq.removeListener(handler)
         } else {
-          mql.removeEventListener("change", handler)
+          mq.removeEventListener("change", handler)
         }
       })
     }

@@ -771,6 +771,13 @@
     }
   },
   {
+    "title": "Dockable",
+    "type": "page",
+    "description": "`Dockable`は、現在作成を検討しています。",
+    "slug": "/components/data-display/dockable",
+    "hierarchy": { "lv1": "Dockable" }
+  },
+  {
     "title": "データディスプレイ",
     "type": "page",
     "description": "`Table`や`Calendar`など、プロジェクトのデータの表示を構築するコンポーネントが用意されています。",
@@ -1515,13 +1522,6 @@
       "lv2": "使い方",
       "lv3": "スクロールを制御する"
     }
-  },
-  {
-    "title": "SplitPanel",
-    "type": "page",
-    "description": "`SplitPanel`は、現在作成を検討しています。",
-    "slug": "/components/data-display/split-panel",
-    "hierarchy": { "lv1": "SplitPanel" }
   },
   {
     "title": "Stat",
@@ -9116,6 +9116,26 @@
       "lv1": "Breadcrumb",
       "lv2": "使い方",
       "lv3": "アイコンを区切りとして使用する"
+    }
+  },
+  {
+    "title": "省略文字を使用する",
+    "type": "fragment",
+    "slug": "/components/navigation/breadcrumb#省略文字を使用する",
+    "hierarchy": {
+      "lv1": "Breadcrumb",
+      "lv2": "使い方",
+      "lv3": "省略文字を使用する"
+    }
+  },
+  {
+    "title": "省略文字をカスタマイズする",
+    "type": "fragment",
+    "slug": "/components/navigation/breadcrumb#省略文字をカスタマイズする",
+    "hierarchy": {
+      "lv1": "Breadcrumb",
+      "lv2": "使い方",
+      "lv3": "省略文字をカスタマイズする"
     }
   },
   {

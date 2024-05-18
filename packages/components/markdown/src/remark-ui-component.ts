@@ -1,6 +1,7 @@
 import type { AlertStatus } from "@yamada-ui/core"
+import { isNull, isUndefined } from "@yamada-ui/utils"
 import type { Parent as HastParent } from "hast"
-import type { Break, Paragraph, PhrasingContent, Root } from "mdast"
+import type { Break, Paragraph, PhrasingContent, Root, Strong } from "mdast"
 import type { ElementContent } from "react-markdown/lib"
 import { match, P } from "ts-pattern"
 import type { Plugin } from "unified"
@@ -58,8 +59,8 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             ).exec(textNode.value)
 
             if (
-              startFragmentCapturedGroups !== null &&
-              endFragmentCapturedGroups !== null
+              !isNull(startFragmentCapturedGroups) &&
+              !isNull(endFragmentCapturedGroups)
             ) {
               if (isMerging) {
                 buf.push(textNode)
@@ -95,7 +96,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
             const capturedGroups = getFragmentPattern("start", false).exec(
               textNode.value,
             )
-            if (capturedGroups !== null) {
+            if (!isNull(capturedGroups)) {
               isMerging = true
 
               status = getStatus(capturedGroups.groups?.status)
@@ -159,6 +160,11 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
               buf.push(breakNode)
             }
           })
+          .with({ type: "strong" }, (strongNode) => {
+            if (isMerging) {
+              buf.push(strongNode)
+            }
+          })
           .with(P._, () => {})
       }
 
@@ -172,7 +178,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
 
         buf.push({ type: "break" } satisfies Break)
       } else {
-        if (paragraph !== undefined) {
+        if (!isUndefined(paragraph)) {
           tree.children.splice(index!, 1, {
             ...node,
             type: "custom" as "paragraph",
@@ -213,6 +219,15 @@ export const rehypeBreakPlugin: Plugin = () => {
         tagName: "br",
         properties: {},
         children: [],
+      })
+    })
+
+    visit(tree, "strong", (node: Strong, index: number, parent: HastParent) => {
+      parent.children.splice(index!, 1, {
+        type: "element",
+        tagName: "strong",
+        properties: {},
+        children: [...node.children] as ElementContent[],
       })
     })
   }

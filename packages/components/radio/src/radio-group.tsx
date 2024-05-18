@@ -4,14 +4,13 @@ import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
 import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { DOMAttributes, PropGetter } from "@yamada-ui/utils"
+import type { DOMAttributes, Dict, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
   isObject,
   mergeRefs,
   useCallbackRef,
-  omitObject,
   getValidChildren,
 } from "@yamada-ui/utils"
 import type { ChangeEvent, ForwardedRef, Ref, ReactElement } from "react"
@@ -58,21 +57,27 @@ export type UseRadioGroupProps<Y extends string | number = string> = {
   isNative?: boolean
 }
 
-export const useRadioGroup = <Y extends string | number = string>({
+export const useRadioGroup = <
+  Y extends string | number = string,
+  M extends Dict = Dict,
+>({
   id,
   name,
   isNative,
+  value: valueProp,
+  defaultValue,
+  onChange: onChangeProp,
   ...props
-}: UseRadioGroupProps<Y>) => {
+}: UseRadioGroupProps<Y> & M) => {
   id ??= useId()
   name ??= `radio-${id}`
 
-  props.onChange = useCallbackRef(props.onChange)
+  const onChangeRef = useCallbackRef(onChangeProp)
 
   const [value, setValue] = useControllableState({
-    value: props.value,
-    defaultValue: props.defaultValue,
-    onChange: props.onChange,
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeRef,
   })
 
   const containerRef = useRef<any>(null)
@@ -130,6 +135,8 @@ export const useRadioGroup = <Y extends string | number = string>({
     )
 
   return {
+    props,
+    id,
     name,
     value,
     setValue,
@@ -189,9 +196,19 @@ export const RadioGroup = forwardRef(
     }: RadioGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const { name, value, onChange, getContainerProps } = useRadioGroup(props)
-    const { isRequired, isReadOnly, isDisabled, isInvalid } =
-      useFormControl(props)
+    const {
+      id,
+      name,
+      value,
+      onChange,
+      getContainerProps,
+      props: computedProps,
+    } = useRadioGroup(props)
+    const { isRequired, isReadOnly, isDisabled, isInvalid, ...rest } =
+      useFormControl({
+        id,
+        ...computedProps,
+      })
 
     const validChildren = getValidChildren(children)
     let computedChildren: ReactElement[] = []
@@ -225,15 +242,11 @@ export const RadioGroup = forwardRef(
           ref={ref}
           className={cx("ui-radio-group", className)}
           gap={gap ?? (direction === "row" ? "1rem" : undefined)}
-          {...getContainerProps(
-            omitObject(props, [
-              "onChange",
-              "isInvalid",
-              "isDisabled",
-              "isRequired",
-              "isReadOnly",
-            ]) as DOMAttributes<HTMLElement>,
-          )}
+          {...getContainerProps({
+            ...rest,
+            id,
+            name,
+          } as DOMAttributes<HTMLElement>)}
           direction={direction}
         >
           {children ?? computedChildren}

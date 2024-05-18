@@ -219,5 +219,55 @@ describe("Markdown / With Note Components", () => {
       const noteText = await screen.findByText(/This is an Alert component\./)
       expect(noteText).toBeInTheDocument()
     })
+
+    test("if nested, only the outermost one should be converted to an `Alert` component.", async () => {
+      const content = dedent`
+        :::note status=error
+        :::note
+        Status is error.
+        :::
+        :::
+      `
+      render(<Markdown>{content}</Markdown>)
+
+      const firstLineText = screen.queryByText(/:::note/)
+      expect(firstLineText).toBeInTheDocument()
+
+      const noteText = await screen.findByText(/Status is error\./)
+      expect(noteText).toBeInTheDocument()
+
+      const thirdLineText = screen.queryByText(/:::/)
+      expect(thirdLineText).toBeInTheDocument()
+    })
+
+    test("if there is no string between `:::note` and `:::`, nothing should be rendered.", async () => {
+      const content = dedent`
+        :::note
+        :::
+      `
+      render(<Markdown>{content}</Markdown>)
+
+      const firstLineText = screen.queryByText(/:::note/)
+      expect(firstLineText).toBeNull()
+
+      const thirdLineText = screen.queryByText(/:::/)
+      expect(thirdLineText).toBeNull()
+    })
+
+    test("When the markdown syntax for strong (**) is used, it should render as a <strong> tag.", async () => {
+      const content = dedent`
+        :::note status=success
+        This is a success **note**.
+        :::
+      `
+      render(<Markdown>{content}</Markdown>)
+
+      const text = screen.queryByText(/This is a success/)
+      expect(text).toBeInTheDocument()
+
+      const strong = text!.querySelector("strong")
+      expect(strong).toBeInTheDocument()
+      expect(strong).toHaveTextContent("note")
+    })
   })
 })

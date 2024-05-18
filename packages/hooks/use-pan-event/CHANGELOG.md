@@ -1,5 +1,11 @@
 # @yamada-ui/use-pan-event
 
+## 1.0.15
+
+### Patch Changes
+
+- [#1579](https://github.com/yamada-ui/yamada-ui/pull/1579) [`dd3c5ab`](https://github.com/yamada-ui/yamada-ui/commit/dd3c5abb82faa81fbc5d70bd357edfea660051e3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Streamlined handler destructuring and naming.
+
 ## 1.0.14
 
 ### Patch Changes

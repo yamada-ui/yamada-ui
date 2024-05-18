@@ -1,5 +1,13 @@
 # @yamada-ui/markdown
 
+## 1.0.29
+
+### Patch Changes
+
+- [#1526](https://github.com/yamada-ui/yamada-ui/pull/1526) [`362c81d`](https://github.com/yamada-ui/yamada-ui/commit/362c81d0af46d3d79947528bbace3acdfe024801) Thanks [@koralle](https://github.com/koralle)! - Use dedicated methods for `null`, `undefined` checks.
+
+- [#1538](https://github.com/yamada-ui/yamada-ui/pull/1538) [`04e418f`](https://github.com/yamada-ui/yamada-ui/commit/04e418f2ad3b8122bde0c28ad6f9504d7ac3653f) Thanks [@koralle](https://github.com/koralle)! - Enable use of strong syntax (`**`) within note syntax
+
 ## 1.0.28
 
 ### Patch Changes

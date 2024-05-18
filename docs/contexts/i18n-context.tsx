@@ -28,7 +28,11 @@ const contentData = { ja: CONTENT_JA, en: CONTENT_EN }
 
 type I18nContext = {
   locale: Locale
-  t: (path: Path<UIData> | StringLiteral) => string
+  t: (
+    path: Path<UIData> | StringLiteral,
+    replaceValue?: string | Record<string, string>,
+    pattern?: string,
+  ) => string
   tc: (
     path: Path<UIData> | StringLiteral,
     callback?: (str: string, index: number) => JSX.Element,
@@ -60,8 +64,27 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   )
 
   const t = useCallback(
-    (path: Path<UIData> | StringLiteral) =>
-      get<string>(uiData[locale as Locale], path, ""),
+    (
+      path: Path<UIData> | StringLiteral,
+      replaceValue?: string | Record<string, string>,
+      pattern: string = "label",
+    ) => {
+      let value = get<string>(uiData[locale as Locale], path, "")
+
+      if (!replaceValue) return value
+
+      if (isString(replaceValue)) {
+        value = value.replace(new RegExp(`{${pattern}}`, "g"), replaceValue)
+      } else {
+        value = Object.entries(replaceValue).reduce(
+          (prev, [pattern, value]) =>
+            prev.replace(new RegExp(`{${pattern}}`, "g"), value),
+          value,
+        )
+      }
+
+      return value
+    },
     [locale],
   )
 

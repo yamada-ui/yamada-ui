@@ -1,5 +1,12 @@
 # @yamada-ui/slider
 
+## 1.0.32
+
+### Patch Changes
+
+- Updated dependencies [[`dd3c5ab`](https://github.com/yamada-ui/yamada-ui/commit/dd3c5abb82faa81fbc5d70bd357edfea660051e3)]:
+  - @yamada-ui/use-pan-event@1.0.15
+
 ## 1.0.31
 
 ### Patch Changes

@@ -124,7 +124,7 @@ describe("<Thead />", () => {
       name: "ドラゴンボール超",
       firstBroadcast: "2015年7月5日",
       lastBroadcast: "2018年3月25日",
-      episode: "全153話",
+      episode: "全131話",
     },
   ]
 

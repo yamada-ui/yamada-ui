@@ -15,40 +15,22 @@ type CalendarProps = Pick<
   | "value"
   | "defaultValue"
   | "onChange"
-  | "month"
-  | "defaultMonth"
-  | "onChangeMonth"
   | "locale"
   | "minDate"
   | "maxDate"
   | "yearFormat"
-  | "monthFormat"
   | "withHeader"
   | "withControls"
   | "withLabel"
 >
 
-type UseMonthPickerOptions = {
-  /**
-   * The type of the month picker.
-   */
-  type?: "month" | "year"
-  /**
-   * The initial type of the month picker.
-   *
-   * @default 'month'
-   */
-  defaultType?: "month" | "year"
-  /**
-   * The callback invoked when type state changes.
-   */
-  onChangeType?: (type: "month" | "year") => void
+type UseYearPickerOptions = {
   /**
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
    *
    * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
-   * @default 'YYYY/MM'
+   * @default 'YYYY'
    */
   inputFormat?: string
   /**
@@ -59,29 +41,21 @@ type UseMonthPickerOptions = {
   closeOnSelect?: boolean
 }
 
-export type UseMonthPickerProps = UseCalendarPickerProps<CalendarProps> &
-  UseMonthPickerOptions
+export type UseYearPickerProps = UseCalendarPickerProps<CalendarProps> &
+  UseYearPickerOptions
 
-export const useMonthPicker = ({
+export const useYearPicker = ({
   value: valueProp,
   defaultValue,
   onChange: onChangeProp,
-  type: typeProp,
-  defaultType = "month",
-  onChangeType: onChangeTypeProp,
   placeholder,
   closeOnSelect = true,
   ...rest
-}: UseMonthPickerProps) => {
+}: UseYearPickerProps) => {
   const [value, setValue] = useControllableState<Date | undefined>({
     value: valueProp,
     defaultValue,
     onChange: onChangeProp,
-  })
-  const [type, setType] = useControllableState({
-    value: typeProp,
-    defaultValue: defaultType,
-    onChange: onChangeTypeProp,
   })
 
   const {
@@ -100,30 +74,25 @@ export const useMonthPicker = ({
     getCalendarProps,
     getIconProps,
   } = useCalendarPicker({
-    inputFormat: "YYYY/MM",
+    inputFormat: "YYYY",
     ...rest,
-    __selectType: "month",
+    __selectType: "year",
     value,
     defaultValue,
     onChange: setValue,
-    type,
-    defaultType,
-    onChangeType: (type, year, month) => {
-      if (type !== "date") {
-        setType(type)
-      } else {
-        let value: Date | undefined = undefined
+    type: "year",
+    onChangeType: (__type, year, month) => {
+      let value: Date | undefined = undefined
 
-        if (typeof year === "number" && typeof month === "number")
-          value = new Date(year, month)
+      if (typeof year === "number" && typeof month === "number")
+        value = new Date(year, month)
 
-        const inputValue = dateToString(value)
+      const inputValue = dateToString(value)
 
-        setValue(value)
-        setInputValue(inputValue)
+      setValue(value)
+      setInputValue(inputValue)
 
-        if (closeOnSelect && value) onClose()
-      }
+      if (closeOnSelect && value) onClose()
     },
     onClear: () => {
       setValue(undefined)
@@ -214,4 +183,4 @@ export const useMonthPicker = ({
   }
 }
 
-export type UseMonthPickerReturn = ReturnType<typeof useMonthPicker>
+export type UseYearPickerReturn = ReturnType<typeof useYearPicker>

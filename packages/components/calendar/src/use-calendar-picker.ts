@@ -191,7 +191,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     withControls,
     withLabel,
     maxSelectValues,
-    selectMonthWith,
+    __selectType,
     calendarProps,
     allowInput = true,
     allowInputBeyond = false,
@@ -478,7 +478,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       maxDate,
       excludeDate,
       locale,
-      selectMonthWith,
+      __selectType,
       enableMultiple,
       enableRange,
     }),
@@ -519,7 +519,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       withLabel,
       withWeekdays,
       yearFormat,
-      selectMonthWith,
+      __selectType,
     ],
   )
 

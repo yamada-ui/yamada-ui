@@ -93,3 +93,53 @@ describe("<PagingTable />", () => {
     expect(getByText("goku@dbz.com")).toBeVisible()
   })
 })
+
+describe("<Thead />", () => {
+  const columns = [
+    {
+      header: "作品名",
+      accessorKey: "name",
+    },
+    {
+      header: "放送期間",
+      accessorKey: "broadcastPeriod",
+      columns: [
+        {
+          header: "初回放送",
+          accessorKey: "firstBroadcast",
+        },
+        {
+          header: "最終回放送",
+          accessorKey: "lastBroadcast",
+        },
+      ],
+    },
+    {
+      header: "話数",
+      accessorKey: "episode",
+    },
+  ]
+  const data = [
+    {
+      name: "ドラゴンボール",
+      firstBroadcast: "2015年7月5日",
+      lastBroadcast: "2018年3月25日",
+      episode: "全153話",
+    },
+  ]
+
+  test("nested header renders collectly", async () => {
+    const { getByText } = render(
+      <Table columns={columns} data={data} withFooter data-testid="Table" />,
+    )
+    expect(getByText("初回放送")).toBeVisible()
+    expect(getByText("最終回放送")).toBeVisible()
+  })
+  test("data property renders collectly", async () => {
+    const { getByText } = render(
+      <Table columns={columns} data={data} withFooter data-testid="Table" />,
+    )
+    expect(getByText("2015年7月5日")).toBeVisible()
+    expect(getByText("2018年3月25日")).toBeVisible()
+  })
+})

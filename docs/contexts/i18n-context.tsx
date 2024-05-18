@@ -5,6 +5,7 @@ import {
   Text,
   noop,
   isObject,
+  isUndefined,
 } from "@yamada-ui/react"
 import { CONSTANT } from "constant"
 import CONTENT_EN from "i18n/content.en.json"
@@ -72,7 +73,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
     ) => {
       let value = get<string>(uiData[locale as Locale], path, "")
 
-      if (!replaceValue) return value
+      if (isUndefined(replaceValue)) return value
 
       if (!isObject(replaceValue)) {
         value = value.replace(

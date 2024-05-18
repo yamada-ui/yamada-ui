@@ -1,6 +1,8 @@
 import { FormControl } from "@yamada-ui/form-control"
-import { a11y, render, screen } from "@yamada-ui/test"
-import { Checkbox, CheckboxGroup } from "../src"
+import { a11y, render, renderHook, screen } from "@yamada-ui/test"
+import type { ChangeEvent } from "react"
+import { act } from "react"
+import { Checkbox, CheckboxGroup, useCheckboxGroup } from "../src"
 import type { CheckboxItem } from "../src"
 
 describe("<Checkbox />", () => {
@@ -168,5 +170,51 @@ describe("<Checkbox />", () => {
       .getAllByRole("checkbox")
       .map((checkbox) => checkbox.id)
     expect(id1).not.toBe(id2)
+  })
+
+  test("should add value when checkbox is checked", () => {
+    const { result } = renderHook(() => useCheckboxGroup({ defaultValue: [] }))
+    const event = {
+      target: {
+        checked: true,
+        value: "Yes",
+      },
+    }
+
+    act(() => {
+      result.current.onChange(event as ChangeEvent<HTMLInputElement>)
+    })
+
+    expect(result.current.value).toStrictEqual(["Yes"])
+  })
+
+  test("should remove value when checkbox is unchecked", () => {
+    const { result } = renderHook(() =>
+      useCheckboxGroup({ defaultValue: ["Yes"] }),
+    )
+
+    act(() => {
+      result.current.onChange("Yes")
+    })
+
+    expect(result.current.value).toStrictEqual([])
+  })
+
+  test("should return checked attribute when isNative is true", () => {
+    const { result } = renderHook(() =>
+      useCheckboxGroup({ defaultValue: ["Yes"], isNative: true }),
+    )
+    const props = result.current.getCheckboxProps({ value: "Yes" })
+
+    expect(props.checked).toBeTruthy()
+  })
+
+  test("should return isChecked attribute when isNative is false", () => {
+    const { result } = renderHook(() =>
+      useCheckboxGroup({ defaultValue: ["Yes"], isNative: false }),
+    )
+    const props = result.current.getCheckboxProps({ value: "Yes" })
+
+    expect(props.isChecked).toBeTruthy()
   })
 })

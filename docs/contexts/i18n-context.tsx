@@ -4,6 +4,7 @@ import {
   isString,
   Text,
   noop,
+  isObject,
 } from "@yamada-ui/react"
 import { CONSTANT } from "constant"
 import CONTENT_EN from "i18n/content.en.json"
@@ -30,7 +31,7 @@ type I18nContext = {
   locale: Locale
   t: (
     path: Path<UIData> | StringLiteral,
-    replaceValue?: string | Record<string, string>,
+    replaceValue?: string | number | Record<string, string | number>,
     pattern?: string,
   ) => string
   tc: (
@@ -66,19 +67,22 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const t = useCallback(
     (
       path: Path<UIData> | StringLiteral,
-      replaceValue?: string | Record<string, string>,
+      replaceValue?: string | number | Record<string, string | number>,
       pattern: string = "label",
     ) => {
       let value = get<string>(uiData[locale as Locale], path, "")
 
       if (!replaceValue) return value
 
-      if (isString(replaceValue)) {
-        value = value.replace(new RegExp(`{${pattern}}`, "g"), replaceValue)
+      if (!isObject(replaceValue)) {
+        value = value.replace(
+          new RegExp(`{${pattern}}`, "g"),
+          `${replaceValue}`,
+        )
       } else {
         value = Object.entries(replaceValue).reduce(
           (prev, [pattern, value]) =>
-            prev.replace(new RegExp(`{${pattern}}`, "g"), value),
+            prev.replace(new RegExp(`{${pattern}}`, "g"), `${value}`),
           value,
         )
       }

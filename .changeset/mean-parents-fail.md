@@ -2,4 +2,4 @@
 "@yamada-ui/notice": major
 ---
 
-fix Notice className
+Fix Notice className

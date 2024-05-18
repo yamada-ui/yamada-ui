@@ -30,7 +30,7 @@ describe("<Rating />", () => {
       .getByTestId("rating")
       .querySelectorAll("label[data-filled]")[1]
     expect(filledIcon.getElementsByTagName("div")[0]).toHaveClass(
-      "ui-rating__item__icon css-sqp1dq",
+      "ui-rating__item-icon css-sqp1dq",
     )
   })
 

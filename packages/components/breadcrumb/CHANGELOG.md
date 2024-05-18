@@ -1,5 +1,11 @@
 # @yamada-ui/breadcrumb
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1423](https://github.com/yamada-ui/yamada-ui/pull/1423) [`8133ea2`](https://github.com/yamada-ui/yamada-ui/commit/8133ea2d5fe42fdaa4c2badbeb75c82b4086fcce) Thanks [@hoshico](https://github.com/hoshico)! - Added children to breadcrumbEllipsis's props
+
 ## 1.0.25
 
 ### Patch Changes

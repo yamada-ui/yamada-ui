@@ -1,5 +1,12 @@
 # @yamada-ui/stepper
 
+## 1.0.26
+
+### Patch Changes
+
+- Updated dependencies [[`659fe11`](https://github.com/yamada-ui/yamada-ui/commit/659fe11b4457c6a2e8be228dd3d47648f759010b)]:
+  - @yamada-ui/use-descendant@1.0.14
+
 ## 1.0.25
 
 ### Patch Changes

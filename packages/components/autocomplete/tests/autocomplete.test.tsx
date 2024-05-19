@@ -144,6 +144,20 @@ describe("<Autocomplete />", () => {
       fireEvent.change(input, { target: { value: "option2" } })
       expect(input).toHaveValue("option2")
     })
+    test("should be searchable in uppercase and full-width characters", async () => {
+      const { container } = render(<Autocomplete items={ITEMS} />)
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      fireEvent.click(autocomplete!)
+
+      const input = screen.getByRole("combobox")
+      fireEvent.change(input, { target: { value: "ＯＰＴＩＯＮ２" } })
+      fireEvent.keyDown(input, { key: "Enter" })
+
+      expect(input).toHaveValue("option2")
+    })
     test("display 'No results found' when selecting a non-existent option", async () => {
       const NO_RESULTS = "No results found"
       const { container } = render(

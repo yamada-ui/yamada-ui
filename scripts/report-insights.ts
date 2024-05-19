@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/rest"
-import { AxiosError } from "axios"
 import dayjs from "dayjs"
 import { config } from "dotenv"
+import { recursiveOctokit } from "./utils"
 
 type Issue = Awaited<
   ReturnType<typeof octokit.search.issuesAndPullRequests>
@@ -49,34 +49,13 @@ config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-
-const recursiveFetch = async (callback: () => Promise<void>) => {
-  try {
-    await callback()
-  } catch (e) {
-    if (
-      e instanceof AxiosError &&
-      e.status === 403 &&
-      e.response?.headers["x-ratelimit-remaining"] === "0"
-    ) {
-      const resetTime =
-        parseInt(e.response.headers?.["x-ratelimit-reset"] ?? "0") * 1000
-      const waitTime = resetTime - Date.now() + 1000
-
-      await wait(waitTime)
-      await recursiveFetch(callback)
-    } else {
-      throw e
-    }
-  }
-}
-
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({
-    ...COMMON_PARAMS,
-    per_page: 100,
-  })
+  const { data } = await recursiveOctokit(() =>
+    octokit.repos.listCollaborators({
+      ...COMMON_PARAMS,
+      per_page: 100,
+    }),
+  )
 
   return data
 }
@@ -87,7 +66,9 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
   const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:${START_DATE.format(QUERY_FORMAT)}..${END_DATE.format(QUERY_FORMAT)}`
   const perPage = 100
 
-  const fetchIssuesAndPullRequests = async (page: number = 1) => {
+  let page = 1
+
+  const issuesAndPullRequests = async () => {
     const { data } = await octokit.search.issuesAndPullRequests({
       q: query,
       per_page: perPage,
@@ -98,19 +79,23 @@ const getIssuesAndPullRequests = async (username: string, filter: string) => {
     issues.push(...items)
 
     if (total_count === perPage) {
-      await recursiveFetch(() => fetchIssuesAndPullRequests(page + 1))
+      page++
+
+      await recursiveOctokit(issuesAndPullRequests)
     }
   }
 
-  await recursiveFetch(() => fetchIssuesAndPullRequests())
+  await recursiveOctokit(issuesAndPullRequests)
 
   return issues
 }
 
 const getComments = async () => {
-  const { data: repositories } = await octokit.repos.listForOrg({
-    org: COMMON_PARAMS["owner"],
-  })
+  const { data: repositories } = await recursiveOctokit(() =>
+    octokit.repos.listForOrg({
+      org: COMMON_PARAMS["owner"],
+    }),
+  )
 
   let comments: Comment[] = []
 
@@ -120,7 +105,7 @@ const getComments = async () => {
     let page = 1
     let count = 0
 
-    const fetchComments = async () => {
+    const listCommentsForRepo = async () => {
       const { data } = await octokit.issues.listCommentsForRepo({
         ...COMMON_PARAMS,
         repo: name,
@@ -137,11 +122,11 @@ const getComments = async () => {
       if (count === perPage) {
         page++
 
-        await recursiveFetch(fetchComments)
+        await recursiveOctokit(listCommentsForRepo)
       }
     }
 
-    await recursiveFetch(fetchComments)
+    await recursiveOctokit(listCommentsForRepo)
   }
 
   return comments
@@ -160,7 +145,7 @@ const getCommits = async () => {
     let page = 1
     let count = 0
 
-    const fetchCommits = async () => {
+    const listCommits = async () => {
       const { data } = await octokit.repos.listCommits({
         ...COMMON_PARAMS,
         repo: name,
@@ -177,11 +162,11 @@ const getCommits = async () => {
       if (count === perPage) {
         page++
 
-        await recursiveFetch(fetchCommits)
+        await recursiveOctokit(listCommits)
       }
     }
 
-    await recursiveFetch(fetchCommits)
+    await recursiveOctokit(listCommits)
   }
 
   return commits

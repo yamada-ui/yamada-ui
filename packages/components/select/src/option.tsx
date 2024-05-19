@@ -69,7 +69,7 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-select__item__icon", className)}
+        className={cx("ui-select__item-icon", className)}
         __css={css}
         {...rest}
       />

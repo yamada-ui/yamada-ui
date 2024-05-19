@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { isObject } from "@yamada-ui/react"
 import { config } from "dotenv"
+import { recursiveOctokit } from "./utils"
 
 type Issue = Awaited<
   ReturnType<typeof octokit.issues.listForRepo>
@@ -11,6 +12,8 @@ type Collaborator = Awaited<
 type Review = Awaited<
   ReturnType<typeof octokit.pulls.listReviews>
 >["data"][number]
+type PullRequest = Awaited<ReturnType<typeof getPullRequest>>
+type PullRequestMap = { [key: number]: PullRequest }
 
 const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const OMIT_GITHUB_IDS = ["hirotomoyamada", "hajimemat"]
@@ -28,6 +31,7 @@ const DISCORD_USER_MAP: Record<string, string> = {
   imaimai17468: "394831848733409281",
   suzukisan22: "611441723712864256",
 }
+const REVIEWER_COUNT = 2
 
 const GITHUB_JOINING_COMMENT = (id: string) =>
   [
@@ -62,10 +66,12 @@ config()
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({
-    ...COMMON_PARAMS,
-    per_page: 100,
-  })
+  const { data } = await recursiveOctokit(() =>
+    octokit.repos.listCollaborators({
+      ...COMMON_PARAMS,
+      per_page: 100,
+    }),
+  )
 
   return data
 }
@@ -76,7 +82,7 @@ const getPullRequests = async () => {
   let count = 0
   const perPage = 100
 
-  do {
+  const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...COMMON_PARAMS,
       state: "open",
@@ -88,8 +94,14 @@ const getPullRequests = async () => {
 
     count = data.length
 
-    page++
-  } while (count === perPage)
+    if (count === perPage) {
+      page++
+
+      await recursiveOctokit(listForRepo)
+    }
+  }
+
+  await recursiveOctokit(listForRepo)
 
   pullRequests = pullRequests.filter(({ pull_request }) => pull_request)
 
@@ -102,10 +114,12 @@ const getPullRequest = async (number: number) => {
     pull_number: number,
   })
 
-  const { data: reviews } = await octokit.pulls.listReviews({
-    ...COMMON_PARAMS,
-    pull_number: number,
-  })
+  const { data: reviews } = await recursiveOctokit(() =>
+    octokit.pulls.listReviews({
+      ...COMMON_PARAMS,
+      pull_number: number,
+    }),
+  )
 
   const reviewers = reviews
     .map(({ user }) => user)
@@ -114,88 +128,150 @@ const getPullRequest = async (number: number) => {
   return { ...data, reviewers }
 }
 
+const getPullRequestAndReviewers = async (pullRequests: Issue[]) => {
+  const alreadyReviewing: string[] = []
+  const pullRequestMap: { [key: number]: PullRequest } = {}
+
+  await Promise.all(
+    pullRequests.map(async ({ number }) => {
+      const pullRequest = await recursiveOctokit(() => getPullRequest(number))
+
+      if (!pullRequest) return
+
+      pullRequestMap[number] = pullRequest
+
+      if (!pullRequest.requested_reviewers) return
+
+      for (const { login } of pullRequest.requested_reviewers) {
+        if (
+          !alreadyReviewing.includes(login) &&
+          !OMIT_GITHUB_IDS.includes(login)
+        )
+          alreadyReviewing.push(login)
+      }
+    }),
+  )
+
+  return { alreadyReviewing, pullRequestMap }
+}
+
 const addReviewers = async (
   pullRequests: Issue[],
+  pullRequestMap: PullRequestMap,
+  alreadyReviewing: string[],
   collaborators: Collaborator[],
 ) => {
-  const collaboratorIds = collaborators.map(({ login }) => login)
+  const collaboratorIds = collaborators
+    .map(({ login }) => login)
+    .filter((login) => !OMIT_GITHUB_IDS.includes(login))
+
+  let assignedReviewers: string[] = [...alreadyReviewing]
 
   const url = process.env.DISCORD_REVIEWS_WEBHOOK_URL
 
   if (!url) throw new Error("Missing Discord Webhook URL\n")
 
-  await Promise.all(
-    pullRequests.map(async ({ number, title, user, html_url }) => {
-      if (!user) return
+  for await (const { number, title, user, html_url } of pullRequests) {
+    if (!user) continue
 
-      const { draft, requested_reviewers, reviewers, head } =
-        await getPullRequest(number)
+    if (!pullRequestMap[number]) continue
 
-      if (draft) return
+    const { draft, requested_reviewers, reviewers, head } =
+      pullRequestMap[number]
 
-      await octokit.issues.addAssignees({
+    if (draft) continue
+
+    await recursiveOctokit(() =>
+      octokit.issues.addAssignees({
         ...COMMON_PARAMS,
         issue_number: number,
         assignees: ["hirotomoyamada"],
-      })
+      }),
+    )
 
-      const count = (requested_reviewers?.length ?? 0) + reviewers.length
-      let selectedReviewers: string[]
+    const count = (requested_reviewers?.length ?? 0) + reviewers.length
+    let selectedReviewers: string[]
 
-      if (head.label === "yamada-ui:changeset-release/main") {
-        if (count >= 1) return
+    if (head.label === "yamada-ui:changeset-release/main") {
+      if (count >= 1) continue
 
-        selectedReviewers = ["hirotomoyamada"]
+      selectedReviewers = ["hirotomoyamada"]
 
-        await octokit.pulls.requestReviewers({
+      await recursiveOctokit(() =>
+        octokit.pulls.requestReviewers({
           ...COMMON_PARAMS,
           pull_number: number,
           reviewers: selectedReviewers,
-        })
-      } else {
-        if (count >= 2) return
+        }),
+      )
+    } else {
+      if (count >= REVIEWER_COUNT) continue
 
-        const omitCollaboratorIds = collaboratorIds.filter(
-          (id) =>
-            id !== user.login &&
-            !requested_reviewers?.some(({ login }) => login === id) &&
-            !reviewers.some(({ login }) => login === id) &&
-            !OMIT_GITHUB_IDS.includes(id),
-        )
+      const omitCollaboratorIds = collaboratorIds.filter(
+        (id) =>
+          id !== user.login &&
+          !requested_reviewers?.some(({ login }) => login === id) &&
+          !reviewers.some(({ login }) => login === id),
+      )
 
-        selectedReviewers = omitCollaboratorIds
+      const targetCollaboratorIds = collaboratorIds.filter(
+        (id) => !assignedReviewers.some((login) => login === id),
+      )
+
+      const assignCount = REVIEWER_COUNT - count
+
+      selectedReviewers = targetCollaboratorIds
+        .sort(() => 0.5 - Math.random())
+        .slice(0, assignCount)
+
+      const addCount = assignCount - selectedReviewers.length
+
+      if (addCount > 0) {
+        const additionReviewers = omitCollaboratorIds
           .sort(() => 0.5 - Math.random())
-          .slice(0, 2 - count)
+          .slice(0, addCount)
 
-        await octokit.pulls.requestReviewers({
-          ...COMMON_PARAMS,
-          pull_number: number,
-          reviewers: selectedReviewers,
-        })
+        selectedReviewers.push(...additionReviewers)
       }
 
-      console.log("Added Reviewers", number, title)
+      assignedReviewers = [
+        ...new Set([...assignedReviewers, ...selectedReviewers]),
+      ]
 
-      const selectedReviewerIds = selectedReviewers.map(
-        (id) => DISCORD_USER_MAP[id],
+      if (assignedReviewers.length === collaboratorIds.length)
+        assignedReviewers = []
+
+      await recursiveOctokit(() =>
+        octokit.pulls.requestReviewers({
+          ...COMMON_PARAMS,
+          pull_number: number,
+          reviewers: selectedReviewers,
+        }),
       )
+    }
 
-      const content = DISCORD_REVIEW_COMMENT(
-        selectedReviewerIds,
-        number,
-        title,
-        html_url,
-      )
+    console.log("Added Reviewers", number, title, ...selectedReviewers)
 
-      await sendDiscordChannel(url, content)
+    const selectedReviewerIds = selectedReviewers.map(
+      (id) => DISCORD_USER_MAP[id],
+    )
 
-      console.log("Send discord", number, title)
-    }),
-  )
+    const content = DISCORD_REVIEW_COMMENT(
+      selectedReviewerIds,
+      number,
+      title,
+      html_url,
+    )
+
+    await sendDiscordChannel(url, content)
+
+    console.log("Send discord", number, title)
+  }
 }
 
 const addComment = async (
   pullRequests: Issue[],
+  pullRequestMap: PullRequestMap,
   collaborators: Collaborator[],
 ) => {
   const collaboratorIds = collaborators.map(({ login }) => login)
@@ -223,21 +299,27 @@ const addComment = async (
 
         if (createdTimestamp > limitTimestamp) return
 
-        const { head } = await getPullRequest(number)
+        if (!pullRequestMap[number]) return
+
+        const { head } = pullRequestMap[number]
 
         if (head.label === "yamada-ui:changeset-release/main") return
 
-        await octokit.issues.createComment({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          body: GITHUB_JOINING_COMMENT(user.login),
-        })
+        await recursiveOctokit(() =>
+          octokit.issues.createComment({
+            ...COMMON_PARAMS,
+            issue_number: number,
+            body: GITHUB_JOINING_COMMENT(user.login),
+          }),
+        )
 
-        await octokit.issues.addLabels({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          labels: ["help wanted"],
-        })
+        await recursiveOctokit(() =>
+          octokit.issues.addLabels({
+            ...COMMON_PARAMS,
+            issue_number: number,
+            labels: ["help wanted"],
+          }),
+        )
 
         console.log("Added comment", number, title)
 
@@ -267,10 +349,17 @@ const main = async () => {
     const collaborators = await getCollaborators()
 
     const pullRequests = await getPullRequests()
+    const { pullRequestMap, alreadyReviewing } =
+      await getPullRequestAndReviewers(pullRequests)
 
-    await addReviewers(pullRequests, collaborators)
+    await addReviewers(
+      pullRequests,
+      pullRequestMap,
+      alreadyReviewing,
+      collaborators,
+    )
 
-    await addComment(pullRequests, collaborators)
+    await addComment(pullRequests, pullRequestMap, collaborators)
   } catch (e) {
     if (e instanceof Error) console.log(e.message)
   }

@@ -13,7 +13,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
-import { createContext, cx, omitObject, valueToPercent } from "@yamada-ui/utils"
+import { createContext, cx, valueToPercent } from "@yamada-ui/utils"
 import type { FC } from "react"
 
 const [ProgressProvider, useProgress] = createContext<
@@ -96,7 +96,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
     borderRadius: _borderRadius,
     rounded,
     ...rest
-  } = omitThemeProps(mergedProps)
+  } = omitThemeProps(mergedProps, ["filledTrackColor"])
 
   const borderRadius =
     _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
@@ -115,7 +115,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
         className={cx("ui-progress", className)}
         __css={css}
         borderRadius={borderRadius}
-        {...omitObject(rest, ["filledTrackColor"])}
+        {...rest}
       >
         <ProgressFilledTrack
           min={min}

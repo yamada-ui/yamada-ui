@@ -95,7 +95,7 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
 
   return (
     <ui.div
-      className={cx("ui-rating__item__icon", className)}
+      className={cx("ui-rating__item-icon", className)}
       __css={css}
       {...rest}
     >

@@ -101,14 +101,14 @@ The [default theme](/styled-system/theming/default-theme) is included within `UI
 If you want to customize the theme or config, please check [Customize Theme](/styled-system/theming/customize-theme) and [Customize Config](/styled-system/configure/customize-config).
 :::
 
-## Add `ColorModeScript` and `colorModeManager`
+## Add `ColorModeScript`
 
 To make the color mode work properly, you need to add `ColorModeScript` inside the `body`.
 
 This is because the color mode is implemented using `localStorage` or `cookies`, and it needs to synchronize correctly at the time of page loading.
 
 ```tsx live=false title=layout.tsx highlight={1,11,13}
-import { UIProvider, colorModeManager, ColorModeScript } from "@yamada-ui/react"
+import { UIProvider, ColorModeScript } from "@yamada-ui/react"
 
 export default function RootLayout({
   children,
@@ -118,20 +118,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ColorModeScript type="cookie" nonce="testing" />
+        <ColorModeScript />
 
-        <UIProvider colorModeManager={{ ...colorModeManager }.cookieStorage}>
-          {children}
-        </UIProvider>
+        <UIProvider>{children}</UIProvider>
       </body>
     </html>
   )
 }
 ```
-
-:::note status=warning
-`colorModeManager` requires shallow copying of the object using the spread syntax or similar methods. This may be due to a bug in `react-server-dom-webpack` and is a temporary approach until it is fixed.
-:::
 
 ## Use components
 

@@ -234,6 +234,26 @@ describe("<Autocomplete />", () => {
         expect(o).toBeVisible()
       })
     })
+
+    test("onFocusLast should work correctly", async () => {
+      const { container } = render(<Autocomplete items={ITEMS} />)
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await act(() => fireEvent.click(autocomplete!))
+
+      const input = screen.getByRole("combobox")
+      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+
+      fireEvent.keyDown(input, { key: "End" })
+
+      await waitFor(() =>
+        expect(optionElements[optionElements.length - 1]).toHaveAttribute(
+          "data-focus",
+        ),
+      )
+    })
   })
 
   describe("create option", () => {
@@ -276,7 +296,7 @@ describe("<Autocomplete />", () => {
       )
     })
 
-    test("correct warnings should be issued when both `allowCreate` and `children` are present", async () => {
+    test("correct warnings should be issued when both `allowCreate` and `children` are present", () => {
       const consoleWarnSpy = vi
         .spyOn(console, "warn")
         .mockImplementation(() => {})

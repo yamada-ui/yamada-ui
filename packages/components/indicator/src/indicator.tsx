@@ -248,7 +248,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
 
           {ping ? (
             <ui.div
-              className="ui-ui-indicator__ping"
+              className="ui-indicator__ping"
               __css={{
                 position: "absolute",
                 boxSize: "100%",

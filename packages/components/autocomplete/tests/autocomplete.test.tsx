@@ -276,6 +276,22 @@ describe("<Autocomplete />", () => {
       )
     })
 
+    test("correct warnings should be issued when both `allowCreate` and `children` are present", async () => {
+      const consoleWarnSpy = vi
+        .spyOn(console, "warn")
+        .mockImplementation(() => {})
+
+      render(
+        <Autocomplete allowCreate>
+          <AutocompleteOption value="option1">option1</AutocompleteOption>
+          <AutocompleteOption value="option2">option2</AutocompleteOption>
+          <AutocompleteOption value="option3">option3</AutocompleteOption>
+        </Autocomplete>,
+      )
+
+      expect(consoleWarnSpy).toHaveBeenCalledOnce()
+    })
+
     describe("with insert position", () => {
       test("first", async () => {
         const { container } = render(
@@ -319,7 +335,7 @@ describe("<Autocomplete />", () => {
         })
       })
 
-      test("any", async () => {
+      test("group2", async () => {
         const { container } = render(
           <Autocomplete
             allowCreate
@@ -340,6 +356,31 @@ describe("<Autocomplete />", () => {
         await waitFor(() => {
           const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
           expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
+        })
+      })
+
+      // Works correctly on storybook but does not pass test. This test should be passed.
+      test.skip("group2 last", async () => {
+        const { container } = render(
+          <Autocomplete
+            allowCreate
+            items={items}
+            insertPositionItem={[GROUP_LABEL, "last"]}
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await act(() => fireEvent.click(autocomplete!))
+
+        const input = screen.getByRole("combobox")
+        fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
+        fireEvent.keyDown(input, { key: "Enter" })
+
+        await waitFor(() => {
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[2]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
       })
     })

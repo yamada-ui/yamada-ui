@@ -234,7 +234,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowDown", async () => {
-    const { getByRole } = render(
+    const { user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -244,16 +244,15 @@ describe("<Menu />", () => {
       </Menu>,
     )
 
-    const menuButton = getByRole("button", { name: "Menu" })
-
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
+    // focus the menu button
+    await user.keyboard("[Tab]")
+    // open the menu
+    await user.keyboard("[ArrowDown]")
     expect(screen.getByText("Add item")).toHaveFocus()
   })
 
   test("keydown events for ArrowUp", async () => {
-    const { getByRole } = render(
+    const { user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -263,16 +262,15 @@ describe("<Menu />", () => {
       </Menu>,
     )
 
-    const menuButton = getByRole("button", { name: "Menu" })
-
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowUp" }))
+    // focus the menu button
+    await user.keyboard("[Tab]")
+    // open the menu
+    await user.keyboard("[ArrowUp]")
     expect(screen.getByText("Edit item")).toHaveFocus()
   })
 
   test("keydown events for Enter", async () => {
-    const { getByRole } = render(
+    const { user } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -281,12 +279,10 @@ describe("<Menu />", () => {
         </MenuList>
       </Menu>,
     )
-
-    const menuButton = getByRole("button", { name: "Menu" })
-
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "Enter" }))
+    // focus the menu button
+    await user.keyboard("[Tab]")
+    // open the menu
+    await user.keyboard("[Enter]")
     expect(screen.getByText("Add item")).toHaveFocus()
   })
 

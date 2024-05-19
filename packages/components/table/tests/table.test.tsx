@@ -129,16 +129,12 @@ describe("<Thead />", () => {
   ]
 
   test("nested header renders collectly", async () => {
-    const { getByText } = render(
-      <Table columns={columns} data={data} withFooter data-testid="Table" />,
-    )
+    const { getByText } = render(<Table columns={columns} data={data} />)
     expect(getByText("初回放送")).toBeVisible()
     expect(getByText("最終回放送")).toBeVisible()
   })
   test("data property renders collectly", async () => {
-    const { getByText } = render(
-      <Table columns={columns} data={data} withFooter data-testid="Table" />,
-    )
+    const { getByText } = render(<Table columns={columns} data={data} />)
     expect(getByText("2015年7月5日")).toBeVisible()
     expect(getByText("2018年3月25日")).toBeVisible()
   })

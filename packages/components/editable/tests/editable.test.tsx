@@ -1,9 +1,10 @@
-import { a11y, fireEvent, render } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render } from "@yamada-ui/test"
 import {
   Editable,
   EditableInput,
   EditablePreview,
   EditableTextarea,
+  useEditableControl,
 } from "../src"
 
 describe("<Editable />", () => {
@@ -182,7 +183,7 @@ describe("<Editable />", () => {
     expect(onCancel).toHaveBeenCalledWith("Some text")
   })
 
-  test("calls onSubmit when onBlur is triggered with submitOnBlur", () => {
+  test("focus and calls onSubmit when Enter is pressed", () => {
     const onCancel = vi.fn()
     const onSubmit = vi.fn()
     const { getByTestId } = render(
@@ -196,10 +197,64 @@ describe("<Editable />", () => {
         <EditableInput data-testid="EditableInput" />
       </Editable>,
     )
-    fireEvent.click(getByTestId("EditablePreview"))
+    fireEvent.focus(getByTestId("EditablePreview"))
     fireEvent.keyDown(getByTestId("EditableInput"), { key: "Enter" })
     expect(onSubmit).toHaveBeenCalledWith("Some text")
     expect(onCancel).not.toHaveBeenCalled()
+  })
+
+  test("calls onSubmit when onBlur is triggered with submitOnBlur", async () => {
+    const onCancel = vi.fn()
+    const onSubmit = vi.fn()
+    const { getByTestId } = render(
+      <Editable
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+        submitOnBlur
+        defaultValue="Some text"
+      >
+        <EditablePreview data-testid="EditablePreview" />
+        <EditableInput data-testid="EditableInput" />
+      </Editable>,
+    )
+    await act(async () => fireEvent.focus(getByTestId("EditablePreview")))
+    await act(async () => fireEvent.blur(getByTestId("EditableInput")))
+    expect(onSubmit).toHaveBeenCalledWith("Some text")
+    expect(onCancel).not.toHaveBeenCalled()
+  })
+
+  test("calls onCancel when onBlur", async () => {
+    const onCancel = vi.fn()
+    const onSubmit = vi.fn()
+    const { getByTestId } = render(
+      <Editable
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+        defaultValue="Some text"
+        submitOnBlur={false}
+      >
+        <EditablePreview data-testid="EditablePreview" />
+        <EditableInput data-testid="EditableInput" />
+      </Editable>,
+    )
+    await act(async () => fireEvent.focus(getByTestId("EditablePreview")))
+    await act(async () => fireEvent.blur(getByTestId("EditableInput")))
+    expect(onSubmit).not.toHaveBeenCalled()
+    expect(onCancel).toHaveBeenCalledWith("Some text")
+  })
+
+  test("initially in correct edit mode", () => {
+    const { getByTestId } = render(
+      <Editable
+        data-testid="Editable"
+        startWithEditView
+        defaultValue="Some text"
+      >
+        <EditablePreview data-testid="EditablePreview" />
+        <EditableInput data-testid="EditableInput" />
+      </Editable>,
+    )
+    expect(getByTestId("EditableInput")).not.toHaveAttribute("hidden")
   })
 })
 
@@ -226,5 +281,81 @@ describe("<EditableTextarea />", () => {
     )
     const textarea = getByTestId("EditableTextarea")
     expect(textarea).toHaveClass("custom-class")
+  })
+})
+
+describe("useEditableControl", () => {
+  test("props are applied correctly", async () => {
+    const onCancel = vi.fn()
+    const onSubmit = vi.fn()
+    const CustomControls = () => {
+      const { getSubmitProps, getCancelProps, getEditProps } =
+        useEditableControl()
+
+      return (
+        <>
+          <button data-testid="edit" {...getEditProps()}>
+            Edit
+          </button>
+          <button data-testid="submit" {...getSubmitProps()}>
+            Submit
+          </button>
+          <button data-testid="cancel" {...getCancelProps()}>
+            Cancel
+          </button>
+        </>
+      )
+    }
+    const { getByTestId } = render(
+      <Editable
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+        isPreviewFocusable={false}
+      >
+        <EditablePreview />
+        <EditableInput />
+        <CustomControls />
+      </Editable>,
+    )
+    expect(getByTestId("edit")).toHaveAttribute("type", "button")
+    expect(getByTestId("submit")).toHaveAttribute("type", "button")
+    expect(getByTestId("cancel")).toHaveAttribute("type", "button")
+    await act(async () => fireEvent.click(getByTestId("submit")))
+    await act(async () => fireEvent.click(getByTestId("cancel")))
+    expect(onSubmit).toHaveBeenCalledWith("")
+    expect(onCancel).toHaveBeenCalledWith("")
+  })
+
+  test("switches to edit mode correctly", async () => {
+    const CustomControls = () => {
+      const { isEditing, getSubmitProps, getCancelProps, getEditProps } =
+        useEditableControl()
+
+      return isEditing ? (
+        <>
+          <button data-testid="submit" {...getSubmitProps()}>
+            Submit
+          </button>
+          <button data-testid="cancel" {...getCancelProps()}>
+            Cancel
+          </button>
+        </>
+      ) : (
+        <button data-testid="edit" {...getEditProps()}>
+          Edit
+        </button>
+      )
+    }
+    const { getByTestId } = render(
+      <Editable isPreviewFocusable={false}>
+        <EditablePreview />
+        <EditableInput />
+        <CustomControls />
+      </Editable>,
+    )
+    expect(getByTestId("edit")).toBeInTheDocument()
+    await act(async () => fireEvent.click(getByTestId("edit")))
+    expect(getByTestId("submit")).toBeInTheDocument()
+    expect(getByTestId("cancel")).toBeInTheDocument()
   })
 })

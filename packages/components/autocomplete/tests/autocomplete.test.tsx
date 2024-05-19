@@ -25,6 +25,7 @@ describe("<Autocomplete />", () => {
         value: "option3",
       },
     ]
+
     test("default", async () => {
       const { container } = render(
         <Autocomplete placeholder="Select Option">
@@ -42,12 +43,14 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
+      await act(() => fireEvent.click(autocomplete!))
+
       await waitFor(() => {
         const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
         expect(optionElements).toHaveLength(3)
       })
     })
+
     test("with group label", async () => {
       const { container } = render(
         <Autocomplete>
@@ -66,7 +69,8 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
+      await act(() => fireEvent.click(autocomplete!))
+
       await waitFor(() => {
         const groupLabels = screen.getAllByText(/Group\d/)
         groupLabels.forEach((g) => {
@@ -74,6 +78,7 @@ describe("<Autocomplete />", () => {
         })
       })
     })
+
     test.each(["xs", "sm", "md", "lg"])(`with size prop %s`, (size) => {
       const { container } = render(<Autocomplete size={size} items={ITEMS} />)
 
@@ -82,19 +87,23 @@ describe("<Autocomplete />", () => {
 
       expect(autocomplete).toHaveStyle(`font-size: var(--ui-fontSizes-${size})`)
     })
+
     test("with default value", () => {
       render(<Autocomplete defaultValue="option1" items={ITEMS} />)
 
       expect(screen.getByRole("combobox")).toHaveValue("option1")
     })
+
     test("with disabled", () => {
       render(<Autocomplete isDisabled items={ITEMS} />)
       expect(screen.getByRole("combobox")).toBeDisabled()
     })
+
     test("with readOnly", () => {
       render(<Autocomplete isReadOnly items={ITEMS} />)
       expect(screen.getByRole("combobox")).toHaveAttribute("readonly")
     })
+
     test("with invalid", () => {
       render(<Autocomplete isInvalid items={ITEMS} />)
       expect(screen.getByRole("combobox")).toHaveAttribute(
@@ -103,6 +112,7 @@ describe("<Autocomplete />", () => {
       )
     })
   })
+
   describe("select options", () => {
     const ITEMS: AutocompleteItem[] = [
       {
@@ -125,32 +135,38 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        fireEvent.click(optionElements[0])
-      })
-      expect(screen.getByRole("combobox")).toHaveValue("option1")
+      await act(() => fireEvent.click(autocomplete!))
+
+      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      fireEvent.click(optionElements[0])
+
+      await waitFor(() =>
+        expect(screen.getByRole("combobox")).toHaveValue("option1"),
+      )
     })
+
     test("update the value when typing in the combobox", async () => {
       const { container } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
+      await act(() => fireEvent.click(autocomplete!))
 
       const input = screen.getByRole("combobox")
       fireEvent.change(input, { target: { value: "option2" } })
+      fireEvent.keyDown(input, { key: "Enter" })
+
       expect(input).toHaveValue("option2")
     })
+
     test("should be searchable in uppercase and full-width characters", async () => {
       const { container } = render(<Autocomplete items={ITEMS} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
+      await act(() => fireEvent.click(autocomplete!))
 
       const input = screen.getByRole("combobox")
       fireEvent.change(input, { target: { value: "ＯＰＴＩＯＮ２" } })
@@ -158,6 +174,7 @@ describe("<Autocomplete />", () => {
 
       expect(input).toHaveValue("option2")
     })
+
     test("display 'No results found' when selecting a non-existent option", async () => {
       const NO_RESULTS = "No results found"
       const { container } = render(
@@ -167,7 +184,8 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
+      await act(() => fireEvent.click(autocomplete!))
+
       expect(screen.getByText(NO_RESULTS)).toHaveStyle("position: absolute")
 
       fireEvent.change(screen.getByRole("combobox"), {
@@ -175,6 +193,7 @@ describe("<Autocomplete />", () => {
       })
       expect(screen.getByText(NO_RESULTS)).not.toHaveStyle("position: absolute")
     })
+
     test("does not close the dropdown list when an option is selected", async () => {
       const { container } = render(
         <Autocomplete closeOnSelect={false} items={ITEMS} />,
@@ -183,16 +202,16 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        fireEvent.click(optionElements[0])
-      })
+      await act(() => fireEvent.click(autocomplete!))
+
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      fireEvent.click(optionElements[0])
+
       optionElements.forEach((o) => {
         expect(o).toBeVisible()
       })
     })
+
     test("does not close the dropdown list when blurred", async () => {
       const { container } = render(
         <>
@@ -204,16 +223,19 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
+      await act(() => fireEvent.click(autocomplete!))
+
       act(() => {
         screen.getByPlaceholderText("focus-other").focus()
       })
+
       const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       optionElements.forEach((o) => {
         expect(o).toBeVisible()
       })
     })
   })
+
   describe("create option", () => {
     const GROUP_LABEL = "Group2"
     const CREATE_OPTION_VALUE = "option4"
@@ -236,20 +258,24 @@ describe("<Autocomplete />", () => {
         value: "option3",
       },
     ]
+
     test("create option when no options are available", async () => {
       const { container } = render(<Autocomplete allowCreate items={items} />)
 
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
-      fireEvent.click(autocomplete!)
-      await waitFor(() => {
-        const input = screen.getByRole("combobox")
-        fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
-        fireEvent.keyDown(input, { key: "Enter" })
-      })
-      expect(screen.getByRole("combobox")).toHaveValue(CREATE_OPTION_VALUE)
+      await act(() => fireEvent.click(autocomplete!))
+
+      const input = screen.getByRole("combobox")
+      fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
+      fireEvent.keyDown(input, { key: "Enter" })
+
+      await waitFor(() =>
+        expect(screen.getByRole("combobox")).toHaveValue(CREATE_OPTION_VALUE),
+      )
     })
+
     describe("with insert position", () => {
       test("first", async () => {
         const { container } = render(
@@ -259,15 +285,18 @@ describe("<Autocomplete />", () => {
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
         expect(autocomplete).toBeInTheDocument()
 
-        fireEvent.click(autocomplete!)
+        await act(() => fireEvent.click(autocomplete!))
+
+        const input = screen.getByRole("combobox")
+        fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
+        fireEvent.keyDown(input, { key: "Enter" })
+
         await waitFor(() => {
-          const input = screen.getByRole("combobox")
-          fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
-          fireEvent.keyDown(input, { key: "Enter" })
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
       })
+
       test("last", async () => {
         const { container } = render(
           <Autocomplete allowCreate items={items} insertPositionItem="last" />,
@@ -276,17 +305,20 @@ describe("<Autocomplete />", () => {
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
         expect(autocomplete).toBeInTheDocument()
 
-        fireEvent.click(autocomplete!)
+        await act(() => fireEvent.click(autocomplete!))
+
+        const input = screen.getByRole("combobox")
+        fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
+        fireEvent.keyDown(input, { key: "Enter" })
+
         await waitFor(() => {
-          const input = screen.getByRole("combobox")
-          fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
-          fireEvent.keyDown(input, { key: "Enter" })
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[optionElements.length - 1]).toHaveTextContent(
+            CREATE_OPTION_VALUE,
+          )
         })
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements[optionElements.length - 1]).toHaveTextContent(
-          CREATE_OPTION_VALUE,
-        )
       })
+
       test("any", async () => {
         const { container } = render(
           <Autocomplete
@@ -299,14 +331,16 @@ describe("<Autocomplete />", () => {
         const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
         expect(autocomplete).toBeInTheDocument()
 
-        fireEvent.click(autocomplete!)
+        await act(() => fireEvent.click(autocomplete!))
+
+        const input = screen.getByRole("combobox")
+        fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
+        fireEvent.keyDown(input, { key: "Enter" })
+
         await waitFor(() => {
-          const input = screen.getByRole("combobox")
-          fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
-          fireEvent.keyDown(input, { key: "Enter" })
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
       })
     })
   })

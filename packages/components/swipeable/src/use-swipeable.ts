@@ -1,7 +1,41 @@
-import type { PropGetter } from "@yamada-ui/utils"
-import { useCallback } from "react"
+import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
+import type { HTMLMotionProps } from "@yamada-ui/motion"
+import { useMotionValue, useTransform } from "@yamada-ui/motion"
+import {
+  mergeRefs,
+  type Dict,
+  type Merge,
+  type PropGetter,
+} from "@yamada-ui/utils"
+import { useCallback, useRef, useState } from "react"
 
-export type UseSwipeableProps = {
+type ActionProps = {}
+
+export type SwipeableDirection = "right" | "left" | "none"
+
+export type UseSwipeableOptions = {
+  /**
+   * Displayed when swiping right.
+   */
+  renderRightActions?: Merge<
+    HTMLUIProps<"button">,
+    {
+      children: (props?: ActionProps) => React.ReactElement
+    }
+  >[]
+  /**
+   * Displayed when swiping left.
+   */
+  renderLeftActions?: Merge<
+    HTMLUIProps<"button">,
+    {
+      children: (props?: ActionProps) => React.ReactElement
+    }
+  >[]
+  //NOTE: UIValue<"number">
+  maxLeftSwipe?: number
+  maxRightSwipe?: number
+  leftActionProps?: CSSUIProps
   /**
    * Specifies how much the visual interaction is elastic compared to the distance of the drag..
    *
@@ -77,44 +111,211 @@ export type UseSwipeableProps = {
   reset?: boolean
 }
 
-export const useSwipeable = ({}: UseSwipeableProps) => {
-  const getRightActionsMotionProps: PropGetter = useCallback(
+export type UseSwipeableProps = UseSwipeableOptions & {
+  styles: Dict<CSSUIObject>
+}
+
+export const useSwipeable = ({
+  renderRightActions,
+  renderLeftActions,
+  dragElastic = 0.7,
+  leftThreshold: leftThreasholdProp,
+  rightThreshold: rightThreasholdProp,
+  //NOTE:なんのやつかわからん
+  // dragOffsetFromLeftEdge,
+  // dragOffsetFromRightEdge,
+  // overshootFriction,
+  // overshootLeft = true,
+  // overshootRight = true,
+  // onSwipeableOpen,
+  // onSwipeableClose,
+  // onSwipeableWillOpen,
+  // onSwipeableWillClose,
+  maxLeftSwipe,
+  maxRightSwipe,
+  styles,
+}: UseSwipeableProps) => {
+  const [direction, setDirection] = useState<SwipeableDirection>("none")
+  const componentRef = useRef<HTMLDivElement>(null)
+  const x = useMotionValue(0)
+  const translateX = useMotionValue(0)
+
+  const width = componentRef.current?.offsetWidth ?? 0
+  const height = componentRef.current?.offsetHeight ?? 0
+  const leftThreshold = leftThreasholdProp ?? width / 2
+  const rightThreshold = rightThreasholdProp ?? width / 2
+
+  let animateTranslateX: number
+
+  if (direction === "right") {
+    animateTranslateX = maxLeftSwipe ?? width
+  } else if (direction === "left") {
+    animateTranslateX = -(maxRightSwipe ?? width)
+  } else {
+    animateTranslateX = 0
+  }
+
+  const leftActionsWidth = useTransform(
+    [x, translateX],
+    ([x, translateX]: number[]) => {
+      const delta = x + translateX
+
+      if (delta > 0) {
+        if (maxLeftSwipe && delta > maxLeftSwipe) return maxLeftSwipe
+
+        return delta
+      }
+
+      return 0
+    },
+  )
+
+  const rightActionsWidth = useTransform(
+    [x, translateX],
+    ([x, translateX]: number[]) => {
+      const delta = x + translateX
+      if (delta < 0) {
+        if (maxRightSwipe && -delta > maxRightSwipe) return maxRightSwipe
+
+        return -delta
+      }
+
+      return 0
+    },
+  )
+
+  const handleDragEnd = useCallback(() =>
+    // event: MouseEvent | TouchEvent | PointerEvent,
+    // info: any,
+    {
+      if (
+        (direction === "right" && x.get() < -leftThreshold) ||
+        (direction === "left" && x.get() > rightThreshold)
+      ) {
+        setDirection("none")
+      } else {
+        if (x.get() > leftThreshold) {
+          setDirection("right")
+        } else if (x.get() < -rightThreshold) {
+          setDirection("left")
+        }
+      }
+    }, [direction, leftThreshold, rightThreshold, x])
+
+  const getSwipeableProps: PropGetter<
+    HTMLMotionProps<"div">,
+    HTMLMotionProps<"div">
+  > = useCallback(
+    ({ className, ...props } = {}, ref) => ({
+      ref: mergeRefs(ref, componentRef),
+      className,
+      drag: "x",
+      dragConstraints: {
+        left: 0,
+        right: 0,
+      },
+      dragElastic: dragElastic,
+      onDragEnd: handleDragEnd,
+      animate: {
+        translateX: animateTranslateX,
+      },
+      transition: { type: "spring", bounce: 0 },
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        border: "solid",
+        x,
+        translateX,
+      },
+      ...props,
+    }),
+    [animateTranslateX, dragElastic, handleDragEnd, translateX, x],
+  )
+
+  const getRightActionsMotionProps: PropGetter<
+    HTMLMotionProps<"div">,
+    HTMLMotionProps<"div">
+  > = useCallback(
     ({ className, ...props } = {}, ref) => ({
       ref,
       className,
+      style: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+        height,
+        width: rightActionsWidth,
+        overflow: "hidden",
+      },
       ...props,
     }),
-    [],
+    [height, rightActionsWidth],
   )
 
   const getRightActionsContainerProps: PropGetter = useCallback(
     ({ className, ...props } = {}, ref) => ({
       ref,
       className,
+      __css: {
+        zIndex: -1,
+        w: maxRightSwipe ?? "100%",
+        h: "100%",
+        display: "grid",
+        ...styles.swipeableRightAction,
+      },
+      gridTemplate: `repeat(${renderRightActions?.length ?? 0},1fr)`,
+      onClick: () => {
+        setDirection("none")
+      },
       ...props,
     }),
-    [],
+    [maxRightSwipe, renderRightActions?.length, styles.swipeableRightAction],
   )
 
-  const getLeftActionsMotionProps: PropGetter = useCallback(
+  const getLeftActionsMotionProps: PropGetter<
+    HTMLMotionProps<"div">,
+    HTMLMotionProps<"div">
+  > = useCallback(
     ({ className, ...props } = {}, ref) => ({
       ref,
       className,
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        height,
+        width: leftActionsWidth,
+        overflow: "hidden",
+      },
       ...props,
     }),
-    [],
+    [height, leftActionsWidth],
   )
 
   const getLeftActionsContainerProps: PropGetter = useCallback(
     ({ className, ...props } = {}, ref) => ({
       ref,
       className,
+      __css: {
+        zIndex: -1,
+        w: maxLeftSwipe ?? "100%",
+        h: "100%",
+        display: "grid",
+        ...styles.swipeableLeftAction,
+      },
+      gridTemplate: `repeat(${renderLeftActions?.length ?? 0},1fr)`,
+      onClick: () => {
+        setDirection("none")
+      },
       ...props,
     }),
-    [],
+    [maxLeftSwipe, renderLeftActions?.length, styles.swipeableLeftAction],
   )
 
   return {
+    getSwipeableProps,
     getRightActionsMotionProps,
     getRightActionsContainerProps,
     getLeftActionsMotionProps,

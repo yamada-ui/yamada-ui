@@ -21,7 +21,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",
-    "lint": "next lint",
+    "lint": "eslint @types/** utils/** libs/** components/** constant/** layouts/** scripts/** theme/** hooks/** pages/** --max-warnings 0 --cache --config eslint.config.mjs",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf .contentlayer .next node_modules"
   },

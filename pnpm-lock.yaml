@@ -1363,6 +1363,9 @@ importers:
       '@yamada-ui/menu':
         specifier: workspace:*
         version: link:../menu
+      '@yamada-ui/popover':
+        specifier: workspace:*
+        version: link:../popover
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

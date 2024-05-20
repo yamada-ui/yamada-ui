@@ -214,7 +214,7 @@ const addReviewers = async (
           !reviewers.some(({ login }) => login === id),
       )
 
-      const targetCollaboratorIds = collaboratorIds.filter(
+      const targetCollaboratorIds = omitCollaboratorIds.filter(
         (id) => !assignedReviewers.some((login) => login === id),
       )
 

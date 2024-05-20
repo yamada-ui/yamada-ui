@@ -56,6 +56,7 @@
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/color-picker": "workspace:*",
+    "@yamada-ui/context-menu": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/editable": "workspace:*",
     "@yamada-ui/file-button": "workspace:*",

@@ -1,5 +1,5 @@
 import { a11y } from "@yamada-ui/test"
-import { Md3dRotation } from "react-icons/md"
+import { Md3DRotation } from "react-icons/md"
 import { Icon } from "../src"
 
 describe("<Icon/>", () => {
@@ -8,6 +8,6 @@ describe("<Icon/>", () => {
   })
 
   test("passes a11y test given a third-party icon", async () => {
-    await a11y(<Icon as={Md3dRotation} />)
+    await a11y(<Icon as={Md3DRotation} />)
   })
 })

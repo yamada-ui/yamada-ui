@@ -48,7 +48,8 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/menu": "workspace:*"
+    "@yamada-ui/menu": "workspace:*",
+    "@yamada-ui/popover": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

@@ -1,13 +1,10 @@
 import { config as tseslintConfig } from "typescript-eslint"
 import { tsESLintConfig } from "../eslint/typescript.mjs"
-import { reactConfig, reactHooksConfig } from "../eslint/react.mjs"
+import { reactConfig } from "../eslint/react.mjs"
 import { importConfig } from "../eslint/import.mjs"
-import pluginReact from "eslint-plugin-react"
-import { FlatCompat } from "@eslint/eslintrc"
+import pluginNext from "@next/eslint-plugin-next"
 
-const compat = new FlatCompat({})
-
-const exts = "{ts,tsx,cts,mts,d.ts}"
+const exts = "{js,jsx,cjs,mjs,ts,tsx,cts,mts,d.ts}"
 
 export default tseslintConfig(
   {
@@ -19,7 +16,6 @@ export default tseslintConfig(
       "pnpm-lock.yaml",
     ],
   },
-  ...compat.extends("next/core-web-vitals"),
   {
     files: [
       `@types/**/*.${exts}`,
@@ -50,7 +46,7 @@ export default tseslintConfig(
       `hooks/**/*.${exts}`,
       `pages/**/*.${exts}`,
     ],
-    ...importConfig[0],
+    ...importConfig,
   },
   {
     files: [
@@ -64,7 +60,12 @@ export default tseslintConfig(
       `hooks/**/*.${exts}`,
       `pages/**/*.${exts}`,
     ],
-    ...reactConfig[0],
+    plugins: {
+      "@next/next": pluginNext,
+    },
+    rules: {
+      ...pluginNext.configs["core-web-vitals"].rules,
+    },
   },
   {
     files: [
@@ -78,6 +79,6 @@ export default tseslintConfig(
       `hooks/**/*.${exts}`,
       `pages/**/*.${exts}`,
     ],
-    ...reactHooksConfig[0],
+    ...reactConfig,
   },
 )

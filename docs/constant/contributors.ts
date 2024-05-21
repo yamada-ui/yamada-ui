@@ -102,6 +102,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Evande1",
   },
   {
+    id: 74392116,
+    name: "saku-1101",
+    icon: "https://avatars.githubusercontent.com/u/74392116?v=4",
+    url: "https://github.com/saku-1101",
+  },
+  {
     id: 41576384,
     name: "zvolcsey",
     icon: "https://avatars.githubusercontent.com/u/41576384?v=4",
@@ -138,12 +144,6 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Eiji-Kudo",
   },
   {
-    id: 73173075,
-    name: "kinjo1130",
-    icon: "https://avatars.githubusercontent.com/u/73173075?v=4",
-    url: "https://github.com/kinjo1130",
-  },
-  {
     id: 127584315,
     name: "kametsun",
     icon: "https://avatars.githubusercontent.com/u/127584315?v=4",
@@ -160,6 +160,12 @@ export const CONTRIBUTORS = [
     name: "sacky3105",
     icon: "https://avatars.githubusercontent.com/u/37340365?v=4",
     url: "https://github.com/sacky3105",
+  },
+  {
+    id: 73173075,
+    name: "kinjo1130",
+    icon: "https://avatars.githubusercontent.com/u/73173075?v=4",
+    url: "https://github.com/kinjo1130",
   },
   {
     id: 83756829,

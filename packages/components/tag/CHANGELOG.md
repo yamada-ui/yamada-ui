@@ -1,5 +1,11 @@
 # @yamada-ui/tag
 
+## 1.0.26
+
+### Patch Changes
+
+- [#1524](https://github.com/yamada-ui/yamada-ui/pull/1524) [`c1349c3`](https://github.com/yamada-ui/yamada-ui/commit/c1349c3acb24eb0164aabeb59860c649e98d4c21) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Capitalize `aria-label` texts.
+
 ## 1.0.25
 
 ### Patch Changes

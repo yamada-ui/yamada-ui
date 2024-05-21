@@ -1,5 +1,15 @@
 # @yamada-ui/autocomplete
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1525](https://github.com/yamada-ui/yamada-ui/pull/1525) [`1b4dedb`](https://github.com/yamada-ui/yamada-ui/commit/1b4dedbf596fb919287fff4f89b849dba9c40d44) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria attributes.
+
+### Patch Changes
+
+- [#1473](https://github.com/yamada-ui/yamada-ui/pull/1473) [`e8010fc`](https://github.com/yamada-ui/yamada-ui/commit/e8010fc3d3e83b92b39aa8c3634f2bd3fe737a94) Thanks [@aojunhao123](https://github.com/aojunhao123)! - improve accessibility support
+
 ## 1.1.13
 
 ### Patch Changes

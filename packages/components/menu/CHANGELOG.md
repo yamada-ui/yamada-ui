@@ -1,5 +1,15 @@
 # @yamada-ui/menu
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1525](https://github.com/yamada-ui/yamada-ui/pull/1525) [`e4b5126`](https://github.com/yamada-ui/yamada-ui/commit/e4b512620f5b7f9da44bace7490dce13c5d6ec97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria attributes.
+
+### Patch Changes
+
+- [#1539](https://github.com/yamada-ui/yamada-ui/pull/1539) [`3204016`](https://github.com/yamada-ui/yamada-ui/commit/3204016d3639c01221e8789559972fba4b38b196) Thanks [@jasonmokk](https://github.com/jasonmokk)! - Remove unnecessary omitObjects in MenuOptionGroup component
+
 ## 1.1.4
 
 ### Patch Changes

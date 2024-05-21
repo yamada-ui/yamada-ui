@@ -80,7 +80,7 @@ const theme = {
 }
 
 describe("useToken", () => {
-  test("正しく値を取得する", () => {
+  test("correctly retrieves the value", () => {
     const { result } = renderHook(() => useToken("colors", "gray.500"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -90,7 +90,7 @@ describe("useToken", () => {
     expect(result.current).toBe("#6b7280")
   })
 
-  test("不明なトークンの場合、正しくundefinedを返す", () => {
+  test("returns undefined correctly for an unknown token", () => {
     const { result } = renderHook(() => useToken("colors", "unknown"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -100,7 +100,7 @@ describe("useToken", () => {
     expect(result.current).toBeUndefined()
   })
 
-  test("正しくライトモードの値を取得する", () => {
+  test("correctly retrieves the value in light mode", () => {
     const { result } = renderHook(() => useToken("colors", "pink.500"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -112,7 +112,7 @@ describe("useToken", () => {
     expect(result.current).toBe("#ff4281")
   })
 
-  test("正しくダークモードの値を取得する", () => {
+  test("correctly retrieves the value in dark mode", () => {
     const { result } = renderHook(() => useToken("colors", "pink.500"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -124,7 +124,7 @@ describe("useToken", () => {
     expect(result.current).toBe("#ff578f")
   })
 
-  test("正しくlayerStyleの値を取得する", () => {
+  test("correctly retrieves the value for layerStyle", () => {
     const { result } = renderHook(() => useToken("layerStyles", "muted"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -134,7 +134,7 @@ describe("useToken", () => {
     expect(result.current).toStrictEqual({ bg: "gray.500" })
   })
 
-  test("正しくtextStyleの値を取得する", () => {
+  test("correctly retrieves the value for textStyle", () => {
     const { result } = renderHook(() => useToken("textStyles", "gradient"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -149,7 +149,7 @@ describe("useToken", () => {
     })
   })
 
-  test("正しくtransitionsの値を取得する", () => {
+  test("correctly retrieves the value for transitions", () => {
     const { result: result1 } = renderHook(
       () => useToken("transitionProperty", "common"),
       {
@@ -182,7 +182,7 @@ describe("useToken", () => {
     expect(result3.current).toBe("cubic-bezier(0.4, 0, 1, 1)")
   })
 
-  test("正しくセマンティックの値を取得する", () => {
+  test("correctly retrieves the value for semantics", () => {
     const { result } = renderHook(() => useToken("colors", "primary"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -192,7 +192,7 @@ describe("useToken", () => {
     expect(result.current).toBe("#6b7280")
   })
 
-  test("正しくライトモードのセマンティックの値を取得する", () => {
+  test("correctly retrieves the value for semantics in light mode", () => {
     const { result } = renderHook(() => useToken("colors", "secondary"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -204,7 +204,7 @@ describe("useToken", () => {
     expect(result.current).toBe("#ff4281")
   })
 
-  test("正しくダークモードのセマンティックの値を取得する", () => {
+  test("correctly retrieves the value for semantics in dark mode", () => {
     const { result } = renderHook(() => useToken("colors", "secondary"), {
       wrapper: ({ children }) => (
         <ThemeProvider theme={theme}>
@@ -216,7 +216,7 @@ describe("useToken", () => {
     expect(result.current).toBe("#ff78a5")
   })
 
-  test("セマンティックのトークンに関連したトークンがない場合、セマンティックの値を返す", () => {
+  test("returns the semantic value if no related token is found for semantics", () => {
     const { result: result1 } = renderHook(
       () => useToken("colors", "tertiary"),
       {

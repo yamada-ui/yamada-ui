@@ -1,7 +1,6 @@
 import { FormControl } from "@yamada-ui/form-control"
-import { a11y, render, renderHook, screen } from "@yamada-ui/test"
+import { act, a11y, render, renderHook, screen } from "@yamada-ui/test"
 import type { ChangeEvent } from "react"
-import { act } from "react"
 import { Checkbox, CheckboxGroup, useCheckboxGroup } from "../src"
 import type { CheckboxItem } from "../src"
 

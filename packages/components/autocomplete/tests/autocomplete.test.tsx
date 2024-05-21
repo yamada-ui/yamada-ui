@@ -533,6 +533,8 @@ describe("<Autocomplete />", () => {
       )
 
       expect(consoleWarnSpy).toHaveBeenCalledOnce()
+
+      consoleWarnSpy.mockRestore()
     })
 
     describe("with insert position", () => {
@@ -602,7 +604,7 @@ describe("<Autocomplete />", () => {
         })
       })
 
-      // Works correctly on storybook but does not pass test. This test should be passed.
+      //TODO: Does not pass test. This test should be passed.
       test.skip("group2 last", async () => {
         const { container } = render(
           <Autocomplete
@@ -625,6 +627,34 @@ describe("<Autocomplete />", () => {
           const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
           expect(optionElements[2]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
+      })
+
+      //TODO: Does not pass test. This test should be passed.
+      test.skip("correct warnings should be  issued when insertPosition does not exist", async () => {
+        const consoleWarnSpy = vi
+          .spyOn(console, "warn")
+          .mockImplementation(() => {})
+
+        const { container } = render(
+          <Autocomplete
+            allowCreate
+            items={items}
+            insertPositionItem="Group4"
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await act(() => fireEvent.click(autocomplete!))
+
+        const input = screen.getByRole("combobox")
+        fireEvent.change(input, { target: { value: CREATE_OPTION_VALUE } })
+        fireEvent.keyDown(input, { key: "Enter" })
+
+        await waitFor(() => expect(consoleWarnSpy).toHaveBeenCalledOnce())
+
+        consoleWarnSpy.mockRestore()
       })
     })
   })

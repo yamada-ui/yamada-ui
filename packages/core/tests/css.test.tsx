@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { render, screen } from "@yamada-ui/test"
 import type { FC } from "react"
 import type { MockInstance } from "vitest"

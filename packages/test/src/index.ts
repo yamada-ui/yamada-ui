@@ -3,7 +3,9 @@ export { MatchMediaMock }
 export {
   act,
   fireEvent,
+  // eslint-disable-next-line import/named
   screen,
+  // eslint-disable-next-line import/named
   waitFor,
   renderHook,
 } from "@testing-library/react"

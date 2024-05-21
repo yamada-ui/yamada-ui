@@ -1,26 +1,43 @@
-import { FlatCompat } from "@eslint/eslintrc"
 import pluginImport from "eslint-plugin-import"
+import pluginUnusedImports from "eslint-plugin-unused-imports"
 
-const compat = new FlatCompat({
-  recommendedConfig: pluginImport.configs.recommended,
-})
-
-export const importConfig = compat.config({
-  plugins: ["import", "unused-imports"],
+export const importConfig = {
+  plugins: { import: pluginImport, "unused-imports": pluginUnusedImports },
   rules: {
+    ...pluginImport.configs.recommended.rules,
     "unused-imports/no-unused-imports": "error",
   },
   settings: {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".mts", ".cts", ".tsx", ".d.ts"],
+      "@typescript-eslint/parser": [
+        ".js",
+        ".jsx",
+        ".cjs",
+        ".mjs",
+        ".ts",
+        ".mts",
+        ".cts",
+        ".tsx",
+        ".d.ts",
+      ],
     },
     "import/resolver": {
       node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".mts", ".d.ts"],
+        extensions: [
+          ".js",
+          ".jsx",
+          ".cjs",
+          ".mjs",
+          ".ts",
+          ".tsx",
+          ".cts",
+          ".mts",
+          ".d.ts",
+        ],
       },
       typescript: {
         alwaysTryTypes: true,
       },
     },
   },
-})
+}

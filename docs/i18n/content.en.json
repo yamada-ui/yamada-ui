@@ -1784,6 +1784,13 @@
     }
   },
   {
+    "title": "Timeline",
+    "type": "page",
+    "description": "We are currently considering the development of `Timeline`.",
+    "slug": "/components/data-display/timeline",
+    "hierarchy": { "lv1": "Timeline" }
+  },
+  {
     "title": "Accordion",
     "type": "page",
     "description": "`Accordion` is a component for a list that displays information in an expandable or collapsible manner.",
@@ -4984,13 +4991,13 @@
     }
   },
   {
-    "title": "Change Display Position",
+    "title": "Change Placement",
     "type": "fragment",
-    "slug": "/components/forms/month-picker#change-display-position",
+    "slug": "/components/forms/month-picker#change-placement",
     "hierarchy": {
       "lv1": "MonthPicker",
       "lv2": "Usage",
-      "lv3": "Change Display Position"
+      "lv3": "Change Placement"
     }
   },
   {
@@ -7793,6 +7800,13 @@
     }
   },
   {
+    "title": "TimePicker",
+    "type": "page",
+    "description": "We are currently considering the development of `TimePicker`.",
+    "slug": "/components/forms/time-picker",
+    "hierarchy": { "lv1": "TimePicker" }
+  },
+  {
     "title": "Toggle",
     "type": "page",
     "description": "`Button` is a component that has two states: on or off.",
@@ -7856,6 +7870,213 @@
     "type": "fragment",
     "slug": "/components/forms/toggle#grouping",
     "hierarchy": { "lv1": "Toggle", "lv2": "Usage", "lv3": "Grouping" }
+  },
+  {
+    "title": "YearPicker",
+    "type": "page",
+    "description": "`YearPicker` is a component used for users to select a year.",
+    "slug": "/components/forms/year-picker",
+    "hierarchy": { "lv1": "YearPicker" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#import",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#usage",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Variant",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-variant",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Change Variant"
+    }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-size",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Color Scheme",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-color-scheme",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "Set Default Value",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#set-default-value",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Set Default Value"
+    }
+  },
+  {
+    "title": "Set Pattern",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#set-pattern",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Set Pattern" }
+  },
+  {
+    "title": "Date Parsing",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#date-parsing",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Date Parsing" }
+  },
+  {
+    "title": "Set Minimum and Maximum Year",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#set-minimum-and-maximum-year",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Set Minimum and Maximum Year"
+    }
+  },
+  {
+    "title": "Set Locale",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#set-locale",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Set Locale" }
+  },
+  {
+    "title": "Change Year Format",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-year-format",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Change Year Format"
+    }
+  },
+  {
+    "title": "Do Not Close Calendar on Selection",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#do-not-close-calendar-on-selection",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Do Not Close Calendar on Selection"
+    }
+  },
+  {
+    "title": "Do Not Close Calendar on Blur",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#do-not-close-calendar-on-blur",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Do Not Close Calendar on Blur"
+    }
+  },
+  {
+    "title": "Disable Clearing",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#disable-clearing",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Disable Clearing"
+    }
+  },
+  {
+    "title": "Disable Input",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#disable-input",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Disable Input" }
+  },
+  {
+    "title": "Change Placement",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-placement",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Change Placement"
+    }
+  },
+  {
+    "title": "Change Offset",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-offset",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Change Offset" }
+  },
+  {
+    "title": "Change Border Color",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#change-border-color",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Change Border Color"
+    }
+  },
+  {
+    "title": "Disable",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#disable",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Disable" }
+  },
+  {
+    "title": "Make Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#make-read-only",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Make Read-Only"
+    }
+  },
+  {
+    "title": "Make Input Invalid",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#make-input-invalid",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Make Input Invalid"
+    }
+  },
+  {
+    "title": "Customize Icon",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#customize-icon",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Customize Icon"
+    }
+  },
+  {
+    "title": "Control",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#control",
+    "hierarchy": { "lv1": "YearPicker", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "Use React Hook Form",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#use-react-hook-form",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Use React Hook Form"
+    }
   },
   {
     "title": "Components",

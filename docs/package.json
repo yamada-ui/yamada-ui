@@ -59,6 +59,7 @@
     "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.3",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.79",
@@ -66,6 +67,7 @@
     "@yamada-ui/cli": "workspace:*",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
+    "find-packages": "^10.0.4",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "markdown-toc": "^1.2.0",
@@ -79,7 +81,6 @@
     "remark-slug": "^7.0.1",
     "typescript": "^5.4.5",
     "unified": "^10.1.2",
-    "unist-util-visit": "^5.0.0",
-    "find-packages": "^10.0.4"
+    "unist-util-visit": "^5.0.0"
   }
 }

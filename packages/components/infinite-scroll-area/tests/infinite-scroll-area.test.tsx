@@ -1,32 +1,24 @@
-import { a11y, render } from "@yamada-ui/test"
+import { a11y, render, fireEvent, waitFor } from "@yamada-ui/test"
+import { useState, useRef } from "react"
 import { Fragment } from "react/jsx-runtime"
 import { InfiniteScrollArea } from "../src"
+import type { InfiniteScrollAreaProps } from "../src"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
+  const IntersectionObserverMock = vi.fn(() => ({
+    disconnect: vi.fn(),
+    observe: vi.fn(),
+    takeRecords: vi.fn(),
+    unobserve: vi.fn(),
+  }))
 
   beforeAll(() => {
-    global.IntersectionObserver = class IntersectionObserver {
-      constructor(public callback: Function) {}
-
-      root = null
-      rootMargin = ""
-      thresholds = []
-
-      observe() {}
-
-      disconnect() {}
-
-      unobserve() {}
-
-      takeRecords() {
-        return []
-      }
-    }
+    vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
   })
 
   afterAll(() => {
-    global.IntersectionObserver = defaultIntersectionObserver
+    vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
 
   test("InfiniteScrollArea renders correctly", async () => {
@@ -40,5 +32,77 @@ describe("<InfiniteScrollArea />", () => {
       </InfiniteScrollArea>,
     )
     await a11y(container)
+  })
+
+  test("InfiniteScrollArea renders with initialLoad correctly", async () => {
+    const MyComponent = () => {
+      const [count, setCount] = useState<number>(50)
+
+      return (
+        <InfiniteScrollArea
+          onLoad={async ({ index, finish }) => {
+            setCount((prev) => prev + 50)
+
+            if (index >= 5) finish()
+          }}
+          initialLoad
+          loading={<>Loading…</>}
+        >
+          {Array(count)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index}>{index}</div>
+            ))}
+        </InfiniteScrollArea>
+      )
+    }
+
+    const { getByText } = render(<MyComponent />)
+    expect(getByText("51")).toBeInTheDocument()
+  })
+
+  test("InfiniteScrollArea renders with Reverse correctly", async () => {
+    const MyComponent = ({
+      isReverse,
+    }: Pick<InfiniteScrollAreaProps, "isReverse">) => {
+      const rootRef = useRef<HTMLDivElement>(null)
+
+      return (
+        <div ref={rootRef}>
+          <InfiniteScrollArea
+            isReverse={isReverse}
+            rootRef={rootRef}
+            loading={<>Loading…</>}
+          >
+            {Array(50)
+              .fill(0)
+              .map((_, index) => (
+                <div key={index}>{index}</div>
+              ))}
+          </InfiniteScrollArea>
+        </div>
+      )
+    }
+
+    const { container, rerender } = render(<MyComponent isReverse={true} />)
+    await waitFor(async () => {
+      fireEvent.scroll(container, {
+        target: {
+          scrollTop: 1000,
+        },
+      })
+      expect(container.scrollTop).toBe(1000)
+    })
+
+    rerender(<MyComponent isReverse={true} />)
+
+    expect(IntersectionObserverMock).toHaveBeenLastCalledWith(
+      expect.any(Function),
+      {
+        root: null,
+        rootMargin: undefined,
+        threshold: undefined,
+      },
+    )
   })
 })

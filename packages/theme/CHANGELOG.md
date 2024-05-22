@@ -1,5 +1,15 @@
 # @yamada-ui/theme
 
+## 1.7.0
+
+### Minor Changes
+
+- [#1537](https://github.com/yamada-ui/yamada-ui/pull/1537) [`bdd263a`](https://github.com/yamada-ui/yamada-ui/commit/bdd263a17b709a3bf98f0706d71f8c9c7651d0a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `YearPicker` component style.
+
+### Patch Changes
+
+- [#1591](https://github.com/yamada-ui/yamada-ui/pull/1591) [`be74307`](https://github.com/yamada-ui/yamada-ui/commit/be74307a86508b1407be388d3e2b03130f344430) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the clear button of `MultiSelect` could be clicked when `isReadOnly` was `true`.
+
 ## 1.6.3
 
 ### Patch Changes

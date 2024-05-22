@@ -23,6 +23,8 @@ export const [ReorderProvider, useReorderContext] =
     errorMessage: `useReorderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Reorder />"`,
   })
 
+export type ReorderGenerateItem = ReorderItemProps
+
 type ReorderOptions = {
   /**
    * The orientation of the reorder.
@@ -31,10 +33,10 @@ type ReorderOptions = {
    */
   orientation?: "vertical" | "horizontal"
   /**
-   * The orientation of the reorder.
+   * If provided, generate reorder items based on items.
    *
    */
-  items?: ReorderItemProps[]
+  items?: ReorderGenerateItem[]
   /**
    * The callback invoked when reorder items are moved.
    */

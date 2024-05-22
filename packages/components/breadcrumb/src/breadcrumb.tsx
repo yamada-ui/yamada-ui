@@ -124,10 +124,9 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     (providedItems?: BreadcrumbGenerateItem[]) => {
       if (!ellipsis) return null
 
-      const resolvedItems = providedItems ?? [
-        ...items.slice(0, startBoundaries!),
-        ...items.slice(items.length - endBoundaries!),
-      ]
+      const resolvedItems =
+        providedItems ??
+        items.slice(startBoundaries!, items.length - endBoundaries!)
 
       return runIfFunc(ellipsis, { items: resolvedItems })
     },

@@ -28,7 +28,7 @@ const ISSUE_BODY = (packageName: string, files: Record<string, number[]>) =>
     `package: ${packageName}`,
     "",
     "### Description",
-    `\`${packageName}\` has a test coverage of less than 80%. We will enhance it to above 80%.`,
+    `\`${packageName}\` has a test coverage of less than ${TARGET_COVERAGE}%. We will enhance it to above ${TARGET_COVERAGE}%.`,
     "",
     "### Target files",
     ...Object.entries(files).flatMap(([path, lines]) => [

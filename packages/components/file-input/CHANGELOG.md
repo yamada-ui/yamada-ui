@@ -1,5 +1,11 @@
 # @yamada-ui/file-input
 
+## 1.0.30
+
+### Patch Changes
+
+- [#1524](https://github.com/yamada-ui/yamada-ui/pull/1524) [`4a85293`](https://github.com/yamada-ui/yamada-ui/commit/4a85293213e73a4054ec95de69996ac6e654a4c2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected `aria-readonly` attribute names.
+
 ## 1.0.29
 
 ### Patch Changes

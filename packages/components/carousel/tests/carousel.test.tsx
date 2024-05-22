@@ -1,4 +1,6 @@
+import { Button } from "@yamada-ui/button"
 import { a11y, act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import type { FC } from "react"
 import { Carousel, CarouselSlide } from "../src"
 
 const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
@@ -12,6 +14,36 @@ describe("<Carousel/>", () => {
         ))}
       </Carousel>,
     )
+  })
+
+  test("should render correctly when orientation is set", () => {
+    const { container, rerender } = render(
+      <Carousel orientation="horizontal">
+        {slidesContentArr.map((value) => (
+          <CarouselSlide key={value}>{value}</CarouselSlide>
+        ))}
+      </Carousel>,
+    )
+
+    let sliders = container.querySelector(".ui-carousel__sliders__inner")
+    expect(sliders).toBeInTheDocument()
+
+    let styles = window.getComputedStyle(sliders!)
+    expect(styles.flexDirection).toBe("row")
+
+    rerender(
+      <Carousel orientation="vertical">
+        {slidesContentArr.map((value) => (
+          <CarouselSlide key={value}>{value}</CarouselSlide>
+        ))}
+      </Carousel>,
+    )
+
+    sliders = container.querySelector(".ui-carousel__sliders__inner")
+    expect(sliders).toBeInTheDocument()
+
+    styles = window.getComputedStyle(sliders!)
+    expect(styles.flexDirection).toBe("column")
   })
 
   test("should render defaultSlide correctly", () => {
@@ -201,5 +233,28 @@ describe("<Carousel/>", () => {
     expect(document.querySelectorAll(".ui-carousel__indicators")).toHaveLength(
       0,
     )
+  })
+
+  test("should render function indicator correctly", () => {
+    const indicatorComponent: FC<{
+      index: number
+      isSelected: boolean
+    }> = ({ index }) => {
+      return <Button>{`test indicator ${index}`}</Button>
+    }
+
+    render(
+      <Carousel indicatorsProps={{ component: indicatorComponent }}>
+        {slidesContentArr.map((value) => (
+          <CarouselSlide key={value}>{value}</CarouselSlide>
+        ))}
+      </Carousel>,
+    )
+
+    const indicators = screen.getAllByText(/test indicator \d+/i)
+
+    expect(indicators).toHaveLength(slidesContentArr.length)
+
+    indicators.forEach((indicator) => expect(indicator).toBeInTheDocument())
   })
 })

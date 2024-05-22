@@ -1,5 +1,11 @@
 # @yamada-ui/infinite-scroll-area
 
+## 1.0.10
+
+### Patch Changes
+
+- [#1473](https://github.com/yamada-ui/yamada-ui/pull/1473) [`e8010fc`](https://github.com/yamada-ui/yamada-ui/commit/e8010fc3d3e83b92b39aa8c3634f2bd3fe737a94) Thanks [@aojunhao123](https://github.com/aojunhao123)! - improve accessibility support
+
 ## 1.0.9
 
 ### Patch Changes

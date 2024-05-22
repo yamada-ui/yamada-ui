@@ -3,6 +3,7 @@ import type {
   ThemeProps,
   CSSUIObject,
   CSSUIProps,
+  Token,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -12,8 +13,16 @@ import {
 } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import type { IconProps } from "@yamada-ui/icon"
-import { cx, createContext, getValidChildren } from "@yamada-ui/utils"
-import { cloneElement } from "react"
+import { useValue } from "@yamada-ui/use-value"
+import {
+  cx,
+  createContext,
+  getValidChildren,
+  isNumber,
+  runIfFunc,
+} from "@yamada-ui/utils"
+import type { ReactNode } from "react"
+import { Fragment, cloneElement, useCallback, useMemo } from "react"
 
 const [BreadcrumbProvider, useBreadcrumb] = createContext<
   Record<string, CSSUIObject>
@@ -21,6 +30,12 @@ const [BreadcrumbProvider, useBreadcrumb] = createContext<
   name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
+
+export type BreadcrumbGenerateItem = BreadcrumbLinkProps & {
+  name?: ReactNode
+  containerProps?: Omit<BreadcrumbItemProps, "isLastChild">
+  isEllipsisPage?: boolean
+}
 
 type BreadcrumbOptions = {
   /**
@@ -39,6 +54,24 @@ type BreadcrumbOptions = {
    * Props for ol element.
    */
   listProps?: HTMLUIProps<"ol">
+  /**
+   * If provided, generate breadcrumb items based on items.
+   */
+  items?: BreadcrumbGenerateItem[]
+  /**
+   * Number of elements visible on the start(left) edges.
+   */
+  startBoundaries?: Token<number>
+  /**
+   * Number of elements visible on the end(right) edges.
+   */
+  endBoundaries?: Token<number>
+  /**
+   * The icon to be used in the ellipsis.
+   */
+  ellipsis?:
+    | ReactNode
+    | ((props: { items: BreadcrumbGenerateItem[] }) => ReactNode)
 }
 
 export type BreadcrumbProps = Omit<HTMLUIProps<"nav">, "gap"> &
@@ -59,8 +92,24 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     separator = "/",
     gap = "fallback(2, 0.5rem)",
     listProps,
+    items = [],
+    startBoundaries: _startBoundaries,
+    endBoundaries: _endBoundaries,
+    ellipsis,
     ...rest
   } = omitThemeProps(mergedProps)
+  let startBoundaries = useValue(_startBoundaries)
+  let endBoundaries = useValue(_endBoundaries)
+
+  if (startBoundaries === 0) startBoundaries = 1
+  if (endBoundaries === 0) endBoundaries = 1
+
+  if (startBoundaries) endBoundaries ??= 1
+  if (endBoundaries) startBoundaries ??= 1
+
+  const hasBoundaries = isNumber(startBoundaries) && isNumber(endBoundaries)
+  const isExceed =
+    hasBoundaries && startBoundaries! + endBoundaries! < items.length
 
   const css: CSSUIObject = {
     display: "flex",
@@ -69,15 +118,107 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   }
 
   const validChildren = getValidChildren(children)
-  const count = validChildren.length
+  const hasChildren = validChildren.length
 
-  const cloneChildren = validChildren.map((child, index) =>
-    cloneElement(child, {
-      separator,
-      gap,
-      isLastChild: count === index + 1,
-    }),
+  const customEllipsis = useCallback(
+    (providedItems?: BreadcrumbGenerateItem[]) => {
+      if (!ellipsis) return null
+
+      const resolvedItems =
+        providedItems ??
+        items.slice(startBoundaries!, items.length - endBoundaries!)
+
+      return runIfFunc(ellipsis, { items: resolvedItems })
+    },
+    [ellipsis, endBoundaries, items, startBoundaries],
   )
+
+  const cloneChildren = useMemo(() => {
+    if (hasChildren) {
+      return validChildren.map((child, index) =>
+        cloneElement(child, {
+          separator,
+          gap,
+          isLastChild: validChildren.length === index + 1,
+        }),
+      )
+    } else {
+      let hiddenEllipsis: BreadcrumbGenerateItem[] = []
+
+      return items.map((item, index) => {
+        const { containerProps, name, isCurrentPage, isEllipsisPage, ...rest } =
+          item
+        const isLastChild = items.length === index + 1
+        const props: BreadcrumbItemProps = {
+          separator,
+          gap,
+          isCurrentPage,
+          ...containerProps,
+        }
+
+        if (!hasBoundaries && isEllipsisPage) {
+          hiddenEllipsis.push(item)
+
+          return isLastChild ? (
+            <BreadcrumbItem key={index} {...props} isLastChild>
+              {customEllipsis([item]) ?? <BreadcrumbEllipsis />}
+            </BreadcrumbItem>
+          ) : null
+        }
+
+        if (hasBoundaries && isExceed) {
+          const lastIndex = items.length - index - 1
+
+          if (startBoundaries! <= index && endBoundaries! <= lastIndex) {
+            if (startBoundaries === index) {
+              return (
+                <BreadcrumbItem key={index} {...props}>
+                  {customEllipsis() ?? <BreadcrumbEllipsis />}
+                </BreadcrumbItem>
+              )
+            } else {
+              return null
+            }
+          }
+        }
+
+        if (hiddenEllipsis.length) {
+          const resolvedEllipsis = customEllipsis(hiddenEllipsis) ?? (
+            <BreadcrumbEllipsis />
+          )
+
+          hiddenEllipsis = []
+
+          return (
+            <Fragment key={index}>
+              <BreadcrumbItem {...props}>{resolvedEllipsis}</BreadcrumbItem>
+
+              <BreadcrumbItem {...props} isLastChild={isLastChild}>
+                <BreadcrumbLink {...rest}>{name}</BreadcrumbLink>
+              </BreadcrumbItem>
+            </Fragment>
+          )
+        } else {
+          return (
+            <BreadcrumbItem key={index} {...props} isLastChild={isLastChild}>
+              <BreadcrumbLink {...rest}>{name}</BreadcrumbLink>
+            </BreadcrumbItem>
+          )
+        }
+      })
+    }
+  }, [
+    hasChildren,
+    validChildren,
+    separator,
+    gap,
+    items,
+    hasBoundaries,
+    isExceed,
+    startBoundaries,
+    endBoundaries,
+    customEllipsis,
+  ])
 
   return (
     <BreadcrumbProvider value={styles}>
@@ -247,7 +388,7 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
       children ?? (
         <Icon
           ref={ref}
-          title="ellipsis"
+          aria-label="ellipsis"
           className={cx("ui-breadcrumb__item__ellipsis", className)}
           __css={css}
           xmlns="http://www.w3.org/2000/svg"

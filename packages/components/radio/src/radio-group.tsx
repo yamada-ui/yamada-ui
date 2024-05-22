@@ -121,18 +121,21 @@ export const useRadioGroup = <
     [],
   )
 
-  const getRadioProps: UIPropGetter<"input", { value?: Y }, { value?: Y }> =
-    useCallback(
-      (props = {}, ref = null) => ({
-        ...props,
-        ref,
-        name,
-        [isNative ? "checked" : "isChecked"]:
-          value != null ? props.value === value : undefined,
-        onChange,
-      }),
-      [name, value, onChange, isNative],
-    )
+  const getRadioProps: UIPropGetter<
+    "input",
+    { value?: Y },
+    { value?: Y; isChecked?: boolean }
+  > = useCallback(
+    (props = {}, ref = null) => ({
+      ...props,
+      ref,
+      name,
+      [isNative ? "checked" : "isChecked"]:
+        value != null ? props.value === value : undefined,
+      onChange,
+    }),
+    [name, value, onChange, isNative],
+  )
 
   return {
     props,

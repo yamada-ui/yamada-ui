@@ -1,6 +1,7 @@
 import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
+import type { ReorderGenerateItem } from "@yamada-ui/react"
 import {
   Divider,
   HStack,
@@ -9,6 +10,7 @@ import {
   ReorderTrigger,
   Text,
 } from "@yamada-ui/react"
+import { useMemo } from "react"
 
 type Story = StoryFn<typeof Reorder>
 
@@ -29,6 +31,21 @@ export const basic: Story = () => {
       <ReorderItem label="グルド">グルド</ReorderItem>
     </Reorder>
   )
+}
+
+export const withItems: Story = () => {
+  const items = useMemo<ReorderGenerateItem[]>(
+    () => [
+      { label: "ギニュー", children: "ギニュー" },
+      { label: "リクーム", children: "リクーム" },
+      { label: "バータ", children: "バータ" },
+      { label: "ジース", children: "ジース" },
+      { label: "グルド", children: "グルド" },
+    ],
+    [],
+  )
+
+  return <Reorder items={items} />
 }
 
 export const withOrientation: Story = () => {

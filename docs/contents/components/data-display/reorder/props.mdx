@@ -4,6 +4,7 @@ description: >-
   `Reorder` is a component that allows you to change the order of items using
   drag and drop.
 package_name: "@yamada-ui/reorder"
+label: Updated
 with_description: true
 tab: Props
 ---
@@ -17,6 +18,13 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="reorder-items"
+  name="items"
+  type="ReorderItemProps[]"
+  description={"If provided, generate reorder items based on items."}
 />
 
 <PropsCard

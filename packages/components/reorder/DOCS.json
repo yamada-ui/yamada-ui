@@ -5,6 +5,11 @@
       "required": false,
       "description": "The visual color appearance of the component."
     },
+    "items": {
+      "type": "ReorderItemProps[]",
+      "required": false,
+      "description": "If provided, generate reorder items based on items."
+    },
     "onChange": {
       "type": "(labels: (string | number)[]) => void",
       "required": false,

@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 1.3.12
+
+### Patch Changes
+
+- Updated dependencies [[`9aa2a1f`](https://github.com/yamada-ui/yamada-ui/commit/9aa2a1f60e1f41e4abf197f48726ce0a5a5ee7b2), [`ecf0789`](https://github.com/yamada-ui/yamada-ui/commit/ecf0789e6e3bc4fbe6e764efdda2cb2c276e255a)]:
+  - @yamada-ui/breadcrumb@1.2.0
+  - @yamada-ui/reorder@1.1.0
+
 ## 1.3.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/breadcrumb
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1629](https://github.com/yamada-ui/yamada-ui/pull/1629) [`9aa2a1f`](https://github.com/yamada-ui/yamada-ui/commit/9aa2a1f60e1f41e4abf197f48726ce0a5a5ee7b2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added the ability to render child elements using `items`.
+
 ## 1.1.0
 
 ### Minor Changes

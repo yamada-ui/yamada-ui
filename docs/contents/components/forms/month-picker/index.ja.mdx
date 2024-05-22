@@ -72,13 +72,13 @@ import { MonthPicker } from "@yamada-ui/calendar"
     calendarVariant="solid"
     calendarColorScheme="secondary"
     today
-    defaultValue={new Date(new Date().setDate(1))}
+    defaultValue={new Date()}
   />
   <MonthPicker
     calendarVariant="subtle"
     calendarColorScheme="green"
     today
-    defaultValue={new Date(new Date().setDate(1))}
+    defaultValue={new Date()}
   />
 </VStack>
 ```
@@ -107,7 +107,7 @@ import { MonthPicker } from "@yamada-ui/calendar"
 デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08-18")} />
+<MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08")} />
 ```
 
 ### パターンを設定する
@@ -142,6 +142,7 @@ import { MonthPicker } from "@yamada-ui/calendar"
 ```tsx
 <MonthPicker
   placeholder="YYYY/MM"
+  defaultValue={new Date(1997, 0)}
   minDate={new Date(1993, 8)}
   maxDate={new Date(2000, 10)}
 />
@@ -165,7 +166,7 @@ import "dayjs/locale/ja"
 
 ### 年月のフォーマットを変更する
 
-日付のフォーマットを変更する場合は、`inputFormat`や`yearFormat`に文字列を設定します。
+年月のフォーマットを変更する場合は、`inputFormat`や`yearFormat`に文字列を設定します。
 
 ```tsx
 <VStack>

@@ -1,5 +1,16 @@
 # @yamada-ui/providers
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1558](https://github.com/yamada-ui/yamada-ui/pull/1558) [`49a5333`](https://github.com/yamada-ui/yamada-ui/commit/49a5333a4003e629835b71e67c7f5ab954538a26) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated environment provider exports and types.
+
+### Patch Changes
+
+- Updated dependencies [[`bdd263a`](https://github.com/yamada-ui/yamada-ui/commit/bdd263a17b709a3bf98f0706d71f8c9c7651d0a5), [`be74307`](https://github.com/yamada-ui/yamada-ui/commit/be74307a86508b1407be388d3e2b03130f344430)]:
+  - @yamada-ui/theme@1.7.0
+
 ## 1.0.32
 
 ### Patch Changes

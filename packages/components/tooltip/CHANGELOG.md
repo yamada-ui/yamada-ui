@@ -1,5 +1,11 @@
 # @yamada-ui/tooltip
 
+## 1.0.28
+
+### Patch Changes
+
+- [#1386](https://github.com/yamada-ui/yamada-ui/pull/1386) [`e078f57`](https://github.com/yamada-ui/yamada-ui/commit/e078f57e444071e31ed291020990054f69c83297) Thanks [@quangnmwork](https://github.com/quangnmwork)! - Fixed tooltip behavior on mobile devices.
+
 ## 1.0.27
 
 ### Patch Changes

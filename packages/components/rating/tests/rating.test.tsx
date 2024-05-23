@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Rating } from "../src"
 
 describe("<Rating />", () => {
@@ -118,7 +118,7 @@ describe("<Rating />", () => {
     const { container } = render(<Rating onChange={onChange} />)
 
     const items = container.querySelectorAll(".ui-rating__item")
-    await act(() => fireEvent.touchStart(items[3]))
+    fireEvent.touchStart(items[3])
 
     expect(onChange).toHaveBeenCalledWith(3)
   })

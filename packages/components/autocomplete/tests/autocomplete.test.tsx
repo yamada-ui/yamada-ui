@@ -4,7 +4,7 @@ import {
   AutocompleteOption,
   AutocompleteOptionGroup,
 } from "@yamada-ui/react"
-import { act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { act, render, screen, waitFor } from "@yamada-ui/test"
 
 describe("<Autocomplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-autocomplete"
@@ -253,10 +253,13 @@ describe("<Autocomplete />", () => {
     ]
 
     test("arrowDown keyDown should work correctly", async () => {
-      render(<Autocomplete items={ITEMS} />)
+      const { user, container } = render(<Autocomplete items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
-      await act(() => fireEvent.keyDown(input, { key: "ArrowDown" }))
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{ArrowDown>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
 
@@ -265,14 +268,14 @@ describe("<Autocomplete />", () => {
       )
 
       for (let i = 1; i < ITEMS.length; i++) {
-        await act(() => fireEvent.keyDown(input, { key: "ArrowDown" }))
+        await user.keyboard("{ArrowDown>}")
 
         await waitFor(() =>
           expect(optionElements[i]).toHaveAttribute("data-focus"),
         )
       }
 
-      await act(() => fireEvent.keyDown(input, { key: "ArrowDown" }))
+      await user.keyboard("{ArrowDown>}")
 
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
@@ -280,11 +283,15 @@ describe("<Autocomplete />", () => {
     })
 
     test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
-      render(<Autocomplete items={ITEMS} defaultValue="option2" />)
+      const { user, container } = render(
+        <Autocomplete items={ITEMS} defaultValue="option2" />,
+      )
 
-      const input = screen.getByRole("combobox")
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
 
-      await act(() => fireEvent.keyDown(input, { key: "ArrowDown" }))
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{ArrowDown>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
@@ -293,10 +300,13 @@ describe("<Autocomplete />", () => {
     })
 
     test("arrowUp keyDown should work correctly", async () => {
-      render(<Autocomplete items={ITEMS} />)
+      const { user, container } = render(<Autocomplete items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
-      await act(() => fireEvent.keyDown(input, { key: "ArrowUp" }))
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{ArrowUp>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
 
@@ -305,14 +315,14 @@ describe("<Autocomplete />", () => {
       )
 
       for (let i = ITEMS.length - 2; i >= 0; i--) {
-        await act(() => fireEvent.keyDown(input, { key: "ArrowUp" }))
+        await user.keyboard("{ArrowUp>}")
 
         await waitFor(() =>
           expect(optionElements[i]).toHaveAttribute("data-focus"),
         )
       }
 
-      await act(() => fireEvent.keyDown(input, { key: "ArrowUp" }))
+      await user.keyboard("{ArrowUp>}")
 
       await waitFor(() =>
         expect(optionElements[ITEMS.length - 1]).toHaveAttribute("data-focus"),
@@ -320,11 +330,15 @@ describe("<Autocomplete />", () => {
     })
 
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
-      render(<Autocomplete items={ITEMS} defaultValue="option2" />)
+      const { user, container } = render(
+        <Autocomplete items={ITEMS} defaultValue="option2" />,
+      )
 
-      const input = screen.getByRole("combobox")
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
 
-      await act(() => fireEvent.keyDown(input, { key: "ArrowUp" }))
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{ArrowUp>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
@@ -333,18 +347,22 @@ describe("<Autocomplete />", () => {
     })
 
     test("space keyDown should work correctly", async () => {
-      render(<Autocomplete items={ITEMS} />)
+      const { user, container } = render(<Autocomplete items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
-      await act(() => fireEvent.keyDown(input, { key: "Space" }))
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{Space>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
 
-      await act(() => fireEvent.keyDown(input, { key: "Space" }))
+      await user.keyboard("{Space>}")
 
+      const input = screen.getByRole("combobox")
       await waitFor(() => expect(input).toHaveValue("option1"))
     })
 
@@ -369,18 +387,22 @@ describe("<Autocomplete />", () => {
     })
 
     test("enter keyDown should work correctly", async () => {
-      render(<Autocomplete items={ITEMS} />)
+      const { user, container } = render(<Autocomplete items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
-      await act(() => fireEvent.keyDown(input, { key: "Enter" }))
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{Enter>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
 
-      await act(() => fireEvent.keyDown(input, { key: "Enter" }))
+      await user.keyboard("{Enter>}")
 
+      const input = screen.getByRole("combobox")
       await waitFor(() => expect(input).toHaveValue("option1"))
     })
 
@@ -405,10 +427,13 @@ describe("<Autocomplete />", () => {
     })
 
     test("home keyDown should work correctly", async () => {
-      render(<Autocomplete items={ITEMS} />)
+      const { user, container } = render(<Autocomplete items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
-      await act(() => fireEvent.keyDown(input, { key: "ArrowUp" }))
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+      await user.keyboard("{Escape>}{ArrowUp>}")
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
 
@@ -416,7 +441,7 @@ describe("<Autocomplete />", () => {
         expect(optionElements[ITEMS.length - 1]).toHaveAttribute("data-focus"),
       )
 
-      await act(() => fireEvent.keyDown(input, { key: "Home" }))
+      await user.keyboard("{Home>}")
 
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
@@ -460,20 +485,24 @@ describe("<Autocomplete />", () => {
     })
 
     test("backspace keyDown should work correctly", async () => {
-      render(<Autocomplete items={ITEMS} />)
+      const { user, container } = render(<Autocomplete items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
-      await act(() => fireEvent.keyDown(input, { key: "Enter" }))
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
 
       const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
 
-      await act(() => fireEvent.keyDown(input, { key: "Enter" }))
+      const input = screen.getByRole("combobox")
+
+      await user.keyboard("{Enter>}{Enter>}")
       await waitFor(() => expect(input).toHaveValue("option1"))
 
-      await act(() => fireEvent.keyDown(input, { key: "Backspace" }))
+      await user.keyboard("{Backspace>}")
       await waitFor(() => expect(input).not.toHaveValue())
     })
   })

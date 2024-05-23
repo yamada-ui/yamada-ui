@@ -1,7 +1,17 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import { Icon } from "@yamada-ui/fontawesome"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
+import type { BreadcrumbGenerateItem } from "@yamada-ui/react"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@yamada-ui/react"
+import { useMemo } from "react"
 import { BreadcrumbEllipsis } from "../../../packages/components/breadcrumb/src/breadcrumb"
 
 type Story = StoryFn<typeof Breadcrumb>
@@ -29,6 +39,85 @@ export const basic: Story = () => {
         <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
+  )
+}
+
+export const withItems: Story = () => {
+  const items = useMemo<BreadcrumbGenerateItem[]>(
+    () => [
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編" },
+      { href: "/", name: "人造人間編" },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    ],
+    [],
+  )
+
+  return <Breadcrumb items={items} />
+}
+
+export const withBoundaries: Story = () => {
+  const items = useMemo<BreadcrumbGenerateItem[]>(
+    () => [
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編" },
+      { href: "/", name: "人造人間編" },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    ],
+    [],
+  )
+
+  return <Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />
+}
+
+export const customBoundaries: Story = () => {
+  const items = useMemo<BreadcrumbGenerateItem[]>(
+    () => [
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編", isEllipsisPage: true },
+      { href: "/", name: "人造人間編", isEllipsisPage: true },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    ],
+    [],
+  )
+
+  return <Breadcrumb items={items} />
+}
+
+export const customEllipsis: Story = () => {
+  const items = useMemo<BreadcrumbGenerateItem[]>(
+    () => [
+      { href: "/", name: "サイヤ人編" },
+      { href: "/", name: "ナメック星編" },
+      { href: "/", name: "人造人間編" },
+      { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    ],
+    [],
+  )
+
+  return (
+    <Breadcrumb
+      items={items}
+      startBoundaries={1}
+      endBoundaries={1}
+      ellipsis={({ items }) => {
+        return (
+          <Menu>
+            <MenuButton>
+              <BreadcrumbEllipsis />
+            </MenuButton>
+
+            <MenuList>
+              {items.map(({ href, name }, index) => (
+                <MenuItem key={index} as="a" href={href}>
+                  {name}
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
+        )
+      }}
+    />
   )
 }
 
@@ -74,10 +163,45 @@ export const withEllipsis: Story = () => {
   return (
     <Breadcrumb>
       <BreadcrumbItem>
-        <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
+        <BreadcrumbLink href="/">孫悟空少年編</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbItem>
         <BreadcrumbEllipsis />
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem isCurrentPage>
+        <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  )
+}
+
+export const withMenu: Story = () => {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">孫悟空少年編</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <Menu>
+          <MenuButton>
+            <BreadcrumbEllipsis />
+          </MenuButton>
+
+          <MenuList>
+            <MenuItem as="a" href="/">
+              ピッコロ大魔王編
+            </MenuItem>
+            <MenuItem as="a" href="/">
+              サイヤ人編
+            </MenuItem>
+            <MenuItem as="a" href="/">
+              フリーザ編
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </BreadcrumbItem>
       <BreadcrumbItem>
         <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>

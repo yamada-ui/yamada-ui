@@ -59,13 +59,11 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Notification Mattermost and Discord
+      - name: Notification release
         if: steps.changesets.outputs.published == 'true'
         run: |
-          pnpm notification:mattermost
-          pnpm notification:discord
+          pnpm notification:release
         env:
-          MATTERMOST_RELEASE_WEBHOOK_URL: ${{ secrets.MATTERMOST_RELEASE_WEBHOOK_URL }}
           DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
 
       - name: Build Storybook

@@ -1,5 +1,31 @@
 # @yamada-ui/react
 
+## 1.3.11
+
+### Patch Changes
+
+- Updated dependencies [[`9060bc5`](https://github.com/yamada-ui/yamada-ui/commit/9060bc524dc2379c64b00b240432a9d1a86917f6), [`c1349c3`](https://github.com/yamada-ui/yamada-ui/commit/c1349c3acb24eb0164aabeb59860c649e98d4c21), [`10a3798`](https://github.com/yamada-ui/yamada-ui/commit/10a3798fdfd141e8df8f2b85159f9d08e5c4d204), [`e078f57`](https://github.com/yamada-ui/yamada-ui/commit/e078f57e444071e31ed291020990054f69c83297), [`1d0855b`](https://github.com/yamada-ui/yamada-ui/commit/1d0855b15710b3197b7ddd0c2eb154455532991d), [`e4b5126`](https://github.com/yamada-ui/yamada-ui/commit/e4b512620f5b7f9da44bace7490dce13c5d6ec97), [`20efbb8`](https://github.com/yamada-ui/yamada-ui/commit/20efbb84734a67ce411f0d5f66f0be4a8f7b0d6c), [`45ce378`](https://github.com/yamada-ui/yamada-ui/commit/45ce378af1254faeb68525a33d5ec1c0d227cef2), [`e8010fc`](https://github.com/yamada-ui/yamada-ui/commit/e8010fc3d3e83b92b39aa8c3634f2bd3fe737a94), [`4a85293`](https://github.com/yamada-ui/yamada-ui/commit/4a85293213e73a4054ec95de69996ac6e654a4c2), [`0235653`](https://github.com/yamada-ui/yamada-ui/commit/02356539d40dfac434cd284a04cd58a11bf90a17), [`1b4dedb`](https://github.com/yamada-ui/yamada-ui/commit/1b4dedbf596fb919287fff4f89b849dba9c40d44), [`3204016`](https://github.com/yamada-ui/yamada-ui/commit/3204016d3639c01221e8789559972fba4b38b196), [`bdd263a`](https://github.com/yamada-ui/yamada-ui/commit/bdd263a17b709a3bf98f0706d71f8c9c7651d0a5), [`82575b8`](https://github.com/yamada-ui/yamada-ui/commit/82575b878d509de68f1e4cf5f050733eb011b2fb), [`be74307`](https://github.com/yamada-ui/yamada-ui/commit/be74307a86508b1407be388d3e2b03130f344430), [`dd3c5ab`](https://github.com/yamada-ui/yamada-ui/commit/dd3c5abb82faa81fbc5d70bd357edfea660051e3), [`49a5333`](https://github.com/yamada-ui/yamada-ui/commit/49a5333a4003e629835b71e67c7f5ab954538a26)]:
+  - @yamada-ui/theme-tools@1.0.32
+  - @yamada-ui/color-picker@1.2.15
+  - @yamada-ui/tag@1.0.26
+  - @yamada-ui/checkbox@1.0.31
+  - @yamada-ui/tooltip@1.0.28
+  - @yamada-ui/textarea@1.1.17
+  - @yamada-ui/menu@1.2.0
+  - @yamada-ui/progress@1.0.26
+  - @yamada-ui/file-button@1.0.32
+  - @yamada-ui/infinite-scroll-area@1.0.10
+  - @yamada-ui/autocomplete@1.2.0
+  - @yamada-ui/file-input@1.0.30
+  - @yamada-ui/use-media-query@1.0.33
+  - @yamada-ui/theme@1.7.0
+  - @yamada-ui/editable@1.0.30
+  - @yamada-ui/use-pan-event@1.0.15
+  - @yamada-ui/providers@1.1.0
+  - @yamada-ui/switch@1.0.31
+  - @yamada-ui/input@1.0.30
+  - @yamada-ui/slider@1.0.32
+
 ## 1.3.10
 
 ### Patch Changes

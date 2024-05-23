@@ -1,5 +1,11 @@
 # @yamada-ui/checkbox
 
+## 1.0.31
+
+### Patch Changes
+
+- [#1587](https://github.com/yamada-ui/yamada-ui/pull/1587) [`10a3798`](https://github.com/yamada-ui/yamada-ui/commit/10a3798fdfd141e8df8f2b85159f9d08e5c4d204) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Add return type isChecked
+
 ## 1.0.30
 
 ### Patch Changes

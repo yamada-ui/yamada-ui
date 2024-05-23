@@ -11,4 +11,5 @@ export type {
   BreadcrumbLinkProps,
   BreadcrumbSeparatorProps,
   BreadcrumbEllipsisProps,
+  BreadcrumbGenerateItem,
 } from "./breadcrumb"

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/infinite-scroll-area",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Yamada UI infinite scroll area component",
   "keywords": [
     "yamada",
@@ -8,7 +8,7 @@
     "react",
     "emotion",
     "component",
-    "accordion",
+    "infinite-scroll",
     "ui",
     "uikit",
     "styled",

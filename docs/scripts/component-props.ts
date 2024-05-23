@@ -59,7 +59,13 @@ const OVERRIDE_PATHS: Record<
     "stack",
   ],
   select: ["multi-select"],
-  calendar: ["date-picker", "month-picker"],
+  calendar: [
+    "date-picker",
+    "multi-date-picker",
+    "range-date-picker",
+    "month-picker",
+    "year-picker",
+  ],
   slider: ["range-slider"],
   table: ["paging-table"],
   autocomplete: ["multi-autocomplete"],
@@ -98,11 +104,11 @@ const OVERRIDE_PATHS: Record<
   button: ["icon-button"],
   link: [{ parent: "link-box", children: ["link-overlay"] }],
   charts: [
-    "bar-chart",
-    "area-chart",
-    "line-chart",
-    "radar-chart",
-    "pie-chart",
+    { parent: "bar-chart", children: ["bar"] },
+    { parent: "area-chart", children: ["area"] },
+    { parent: "line-chart", children: ["line", "dot"] },
+    { parent: "radar-chart", children: ["radar"] },
+    { parent: "pie-chart", children: ["cell"] },
     "donut-chart",
   ],
 }
@@ -162,9 +168,11 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
               doc = omitObject(doc, [displayName])
             }
           })
-
-          if (Object.keys(doc).length) docs[name] = doc
         }
+
+        if (name === "charts") console.log(doc)
+
+        if (Object.keys(doc).length) docs[name] = doc
       } catch (e) {
         notDocsList = [...notDocsList, dirent.name]
       }

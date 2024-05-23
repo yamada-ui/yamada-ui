@@ -1,5 +1,11 @@
 # @yamada-ui/file-button
 
+## 1.0.32
+
+### Patch Changes
+
+- [#1580](https://github.com/yamada-ui/yamada-ui/pull/1580) [`45ce378`](https://github.com/yamada-ui/yamada-ui/commit/45ce378af1254faeb68525a33d5ec1c0d227cef2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extracted props and updated callbacks.
+
 ## 1.0.31
 
 ### Patch Changes

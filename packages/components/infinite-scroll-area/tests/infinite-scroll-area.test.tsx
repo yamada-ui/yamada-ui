@@ -85,12 +85,12 @@ describe("<InfiniteScrollArea />", () => {
     }
 
     const { container, rerender } = render(<MyComponent isReverse={true} />)
+    fireEvent.scroll(container, {
+      target: {
+        scrollTop: 1000,
+      },
+    })
     await waitFor(async () => {
-      fireEvent.scroll(container, {
-        target: {
-          scrollTop: 1000,
-        },
-      })
       expect(container.scrollTop).toBe(1000)
     })
 

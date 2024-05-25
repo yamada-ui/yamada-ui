@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-X2b_N9AH.js";import{a as m}from"./menu-list-CeRjY23L.js";import{f as a}from"./forward-ref-Dr5Hqd9a.js";import{u,c}from"./factory-0Lglu3Ih.js";const x=a(({className:s,...r},o)=>{const{styles:e}=m(),i={...e.divider};return t.jsx(u.hr,{ref:o,className:c("ui-menu__divider",s),__css:i,...r})});export{x as M};

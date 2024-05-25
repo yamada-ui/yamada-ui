@@ -84,17 +84,15 @@ describe("<InfiniteScrollArea />", () => {
       )
     }
 
-    const { container, rerender } = render(<MyComponent isReverse={true} />)
+    const { container } = render(<MyComponent isReverse={true} />)
     fireEvent.scroll(container, {
       target: {
         scrollTop: 1000,
       },
     })
-    await waitFor(async () => {
+    await waitFor(() => {
       expect(container.scrollTop).toBe(1000)
     })
-
-    rerender(<MyComponent isReverse={true} />)
 
     expect(IntersectionObserverMock).toHaveBeenLastCalledWith(
       expect.any(Function),

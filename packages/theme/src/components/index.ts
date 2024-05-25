@@ -17,6 +17,7 @@ import { ColorPicker } from "./color-picker"
 import { ColorSelector } from "./color-selector"
 import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
+import { ContextMenu } from "./context-menu"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
 import { Divider } from "./divider"
@@ -97,6 +98,7 @@ export default {
   ColorSelector,
   ColorSwatch,
   Container,
+  ContextMenu,
   DatePicker,
   Dialog,
   Divider,

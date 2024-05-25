@@ -18,6 +18,7 @@ import type {
   SetStateAction,
 } from "react"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
+import { useContextMenu } from "./context-menu"
 import { useUpstreamMenuItem } from "./menu-item"
 
 const {
@@ -82,7 +83,11 @@ export type MenuProps = ThemeProps<"Menu"> &
  * @see Docs https://yamada-ui.com/components/overlay/menu
  */
 export const Menu: FC<MenuProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Menu", props)
+  const { styles: contextMenuStyles } = useContextMenu() ?? {}
+  const [styles, mergedProps] = useMultiComponentStyle("Menu", props, {
+    isProcessSkip: !!contextMenuStyles,
+    styles: contextMenuStyles,
+  })
   let {
     initialFocusRef,
     closeOnSelect = true,

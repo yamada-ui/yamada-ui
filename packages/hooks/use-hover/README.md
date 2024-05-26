@@ -22,7 +22,7 @@ $ npm install @yamada-ui/use-hover
 
 ## Contribution
 
-Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
+Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](https://github.com/yamada-ui/yamada-ui/blob/main/CONTRIBUTING.md) to assist you.
 
 ## License
 

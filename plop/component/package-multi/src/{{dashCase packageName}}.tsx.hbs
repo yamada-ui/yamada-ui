@@ -16,6 +16,11 @@ const [{{upperCase packageName}}Provider, use{{upperCase packageName}}] = create
 
 type {{upperCase packageName}}Options = {}
 
+/**
+ * `{{upperCase packageName}}` is component.
+ *
+ * @see Docs https://yamada-ui.com/components/{{dashCase categoryName}}/{{dashCase packageName}}
+ */
 export type {{upperCase packageName}}Props = HTMLUIProps<"div"> & ThemeProps<"{{upperCase packageName}}"> & {{upperCase packageName}}Options
 
 export const {{upperCase packageName}} = forwardRef<{{upperCase packageName}}Props, "div">((props, ref) => {

@@ -1001,6 +1001,28 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
+  packages/components/audio-player:
+    dependencies:
+      '@yamada-ui/button':
+        specifier: workspace:^
+        version: link:../button
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/slider':
+        specifier: workspace:^
+        version: link:../slider
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/autocomplete:
     dependencies:
       '@yamada-ui/core':
@@ -3310,6 +3332,9 @@ importers:
       '@yamada-ui/alert':
         specifier: workspace:*
         version: link:../components/alert
+      '@yamada-ui/audio-player':
+        specifier: workspace:*
+        version: link:../components/audio-player
       '@yamada-ui/autocomplete':
         specifier: workspace:*
         version: link:../components/autocomplete
@@ -20854,8 +20879,8 @@ snapshots:
       '@babel/core': 7.24.4
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.4)
       '@vanilla-extract/babel-plugin-debug-ids': 1.0.5
-      '@vanilla-extract/css': 1.14.2
-      esbuild: 0.19.12
+      '@vanilla-extract/css': 1.15.1
+      esbuild: 0.17.6
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0

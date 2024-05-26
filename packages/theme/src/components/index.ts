@@ -2,6 +2,7 @@ import { Accordion } from "./accordion"
 import { Alert } from "./alert"
 import { AlphaSlider } from "./alpha-slider"
 import { AreaChart } from "./area-chart"
+import { AudioPlayer } from "./audio-player"
 import { Autocomplete } from "./autocomplete"
 import { Avatar } from "./avatar"
 import { Badge } from "./badge"
@@ -83,6 +84,7 @@ export default {
   Alert,
   AlphaSlider,
   AreaChart,
+  AudioPlayer,
   Autocomplete,
   Avatar,
   Badge,

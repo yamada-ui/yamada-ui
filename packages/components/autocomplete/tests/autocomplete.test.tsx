@@ -635,8 +635,7 @@ describe("<Autocomplete />", () => {
         })
       })
 
-      //TODO: Does not pass test. This test should be passed.
-      test.skip("group2 last", async () => {
+      test("group2 last", async () => {
         const { user, container } = render(
           <Autocomplete
             allowCreate
@@ -660,8 +659,7 @@ describe("<Autocomplete />", () => {
         })
       })
 
-      //TODO: Does not pass test. This test should be passed.
-      test.skip("correct warnings should be  issued when insertPosition does not exist", async () => {
+      test("correct warnings should be  issued when insertPosition does not exist", async () => {
         const consoleWarnSpy = vi
           .spyOn(console, "warn")
           .mockImplementation(() => {})
@@ -687,6 +685,72 @@ describe("<Autocomplete />", () => {
 
         consoleWarnSpy.mockRestore()
       })
+    })
+
+    test("original list is not affected", async () => {
+      const original: AutocompleteItem[] = [
+        {
+          label: "option1",
+          value: "option1",
+        },
+        {
+          label: GROUP_LABEL,
+          items: [
+            {
+              label: "option2",
+              value: "option2",
+            },
+          ],
+        },
+        {
+          label: "option3",
+          value: "option3",
+        },
+      ]
+
+      const items: AutocompleteItem[] = [
+        {
+          label: "option1",
+          value: "option1",
+        },
+        {
+          label: GROUP_LABEL,
+          items: [
+            {
+              label: "option2",
+              value: "option2",
+            },
+          ],
+        },
+        {
+          label: "option3",
+          value: "option3",
+        },
+      ]
+
+      const { user, container } = render(
+        <Autocomplete
+          allowCreate
+          items={items}
+          insertPositionItem={GROUP_LABEL}
+        />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const input = screen.getByRole("combobox")
+      await user.type(input, CREATE_OPTION_VALUE)
+      await user.keyboard("{Enter>}")
+
+      await waitFor(() => {
+        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+        expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
+      })
+
+      expect(items).toStrictEqual(original)
     })
   })
 })

@@ -2,6 +2,7 @@
 title: Reorder
 description: "`Reorder` is a component that allows you to change the order of items using drag and drop."
 package_name: "@yamada-ui/reorder"
+label: Updated
 is_tabs: true
 with_description: true
 tab: Usage
@@ -27,6 +28,23 @@ import { Reorder, ReorderItem, ReorderTrigger } from "@yamada-ui/react"
   <ReorderItem label="ジース">ジース</ReorderItem>
   <ReorderItem label="グルド">グルド</ReorderItem>
 </Reorder>
+```
+
+Alternatively, you can omit `ReorderItem` by setting `items`.
+
+```tsx functional=true
+const items = useMemo<ReorderGenerateItem[]>(
+  () => [
+    { label: "ギニュー", children: "ギニュー" },
+    { label: "リクーム", children: "リクーム" },
+    { label: "バータ", children: "バータ" },
+    { label: "ジース", children: "ジース" },
+    { label: "グルド", children: "グルド" },
+  ],
+  [],
+)
+
+return <Reorder items={items} />
 ```
 
 ### Change Variants

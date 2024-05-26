@@ -2,6 +2,7 @@
 title: Reorder
 description: "`Reorder`は、項目の順序をドラッグアンドドロップで変更できるコンポーネントです。"
 package_name: "@yamada-ui/reorder"
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -27,6 +28,23 @@ import { Reorder, ReorderItem, ReorderTrigger } from "@yamada-ui/react"
   <ReorderItem label="ジース">ジース</ReorderItem>
   <ReorderItem label="グルド">グルド</ReorderItem>
 </Reorder>
+```
+
+または、`items`を設定することで`ReorderItem`を省略することができます。
+
+```tsx functional=true
+const items = useMemo<ReorderGenerateItem[]>(
+  () => [
+    { label: "ギニュー", children: "ギニュー" },
+    { label: "リクーム", children: "リクーム" },
+    { label: "バータ", children: "バータ" },
+    { label: "ジース", children: "ジース" },
+    { label: "グルド", children: "グルド" },
+  ],
+  [],
+)
+
+return <Reorder items={items} />
 ```
 
 ### バリアントを変更する

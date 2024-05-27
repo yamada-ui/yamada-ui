@@ -12,17 +12,11 @@ import {
   isMac,
   merge,
   mergeRefs,
+  useSafeLayoutEffect,
   vendor,
 } from "@yamada-ui/utils"
 import type { UIEvent } from "react"
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 type ScrollAreaOptions = {
   /**
@@ -110,7 +104,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const scrollPosition = useRef({ x: 0, y: 0 })
 
-  useLayoutEffect(() => {
+  useSafeLayoutEffect(() => {
     if (!scrollAreaRef.current || !isSafari) return
 
     scrollAreaRef.current.scrollLeft = scrollPosition.current.x

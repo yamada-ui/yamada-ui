@@ -38,4 +38,32 @@ describe("<Textarea />", () => {
 
     expect(screen.getByRole("textbox")).toHaveAttribute("placeholder", "text")
   })
+  test("Rows Textarea renders correctly", () => {
+    render(<Textarea rows={1} />)
+    expect(screen.getByRole("textbox")).not.toHaveStyle({
+      minHeight: expect.anything(),
+    })
+  })
+
+  test("Autosize Textarea renders correctly", () => {
+    let fontsData =
+      "fonts" in global.document ? global.document.fonts : undefined
+
+    Object.defineProperty(global.document, "fonts", {
+      value: {
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      },
+      writable: true,
+    })
+    render(<Textarea autosize />)
+    expect(screen.getByRole("textbox")).not.toHaveStyle({
+      minHeight: expect.anything(),
+    })
+
+    Object.defineProperty(global.document, "fonts", {
+      value: fontsData,
+      writable: true,
+    })
+  })
 })

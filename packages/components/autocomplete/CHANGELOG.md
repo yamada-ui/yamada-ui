@@ -1,5 +1,11 @@
 # @yamada-ui/autocomplete
 
+## 1.2.2
+
+### Patch Changes
+
+- [#1666](https://github.com/yamada-ui/yamada-ui/pull/1666) [`d4f2f39`](https://github.com/yamada-ui/yamada-ui/commit/d4f2f397c3c3d6579f0b6f07bbb4fe10b07468f1) Thanks [@108yen](https://github.com/108yen)! - Fix bug where original `items` were changed.
+
 ## 1.2.1
 
 ### Patch Changes

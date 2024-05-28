@@ -55,9 +55,7 @@ describe("<Textarea />", () => {
       writable: true,
     })
     render(<Textarea autosize />)
-    expect(screen.getByRole("textbox")).not.toHaveStyle({
-      minHeight: "var(--ui-sizes-20)",
-    })
+    expect(screen.getByRole("textbox")).toHaveProperty("rows", 1)
     Object.defineProperty(global.document, "fonts", {
       value: fontsData,
       writable: true,

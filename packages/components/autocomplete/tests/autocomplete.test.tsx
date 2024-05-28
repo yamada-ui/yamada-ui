@@ -708,25 +708,7 @@ describe("<Autocomplete />", () => {
         },
       ]
 
-      const items: AutocompleteItem[] = [
-        {
-          label: "option1",
-          value: "option1",
-        },
-        {
-          label: GROUP_LABEL,
-          items: [
-            {
-              label: "option2",
-              value: "option2",
-            },
-          ],
-        },
-        {
-          label: "option3",
-          value: "option3",
-        },
-      ]
+      const items: AutocompleteItem[] = JSON.parse(JSON.stringify(original))
 
       const { user, container } = render(
         <Autocomplete
@@ -745,10 +727,8 @@ describe("<Autocomplete />", () => {
       await user.type(input, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter>}")
 
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
-      })
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
 
       expect(items).toStrictEqual(original)
     })

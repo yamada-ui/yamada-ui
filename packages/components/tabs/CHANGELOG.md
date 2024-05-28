@@ -1,5 +1,15 @@
 # @yamada-ui/tabs
 
+## 1.0.28
+
+### Patch Changes
+
+- [#1665](https://github.com/yamada-ui/yamada-ui/pull/1665) [`65909fd`](https://github.com/yamada-ui/yamada-ui/commit/65909fdfb8bb3fab28d11d481bc6e4a9d097dabc) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix JSDoc having a full-width space.
+
+- Updated dependencies [[`853a609`](https://github.com/yamada-ui/yamada-ui/commit/853a6090a750b9a4c1d2b13d7fe31c204e59981f), [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/ripple@1.0.27
+  - @yamada-ui/core@1.7.0
+
 ## 1.0.27
 
 ### Patch Changes

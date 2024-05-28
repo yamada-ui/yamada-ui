@@ -1,5 +1,15 @@
 # @yamada-ui/stat
 
+## 1.0.24
+
+### Patch Changes
+
+- [#1645](https://github.com/yamada-ui/yamada-ui/pull/1645) [`853a609`](https://github.com/yamada-ui/yamada-ui/commit/853a6090a750b9a4c1d2b13d7fe31c204e59981f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated contribution guide links.
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/icon@1.0.26
+
 ## 1.0.23
 
 ### Patch Changes

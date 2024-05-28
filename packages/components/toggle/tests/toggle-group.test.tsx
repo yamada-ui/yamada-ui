@@ -1,12 +1,8 @@
-import { cleanup, render, screen, fireEvent } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 import { a11y } from "@yamada-ui/test"
 import { ToggleGroup, Toggle } from "../src"
 
 describe("<ToggleGroup />", () => {
-  afterEach(() => {
-    cleanup()
-  })
-
   test("should render ToggleGroup and its children correctly", async () => {
     const { container } = render(
       <ToggleGroup>

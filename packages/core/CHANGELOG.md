@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.7.0
+
+### Minor Changes
+
+- [#1639](https://github.com/yamada-ui/yamada-ui/pull/1639) [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Added options to `useComponentStyle` and `useMultiComponentStyle`.
+
 ## 1.6.7
 
 ### Patch Changes

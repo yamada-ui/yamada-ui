@@ -1,5 +1,11 @@
 # @yamada-ui/use-eye-dropper
 
+## 1.0.11
+
+### Patch Changes
+
+- [#1645](https://github.com/yamada-ui/yamada-ui/pull/1645) [`853a609`](https://github.com/yamada-ui/yamada-ui/commit/853a6090a750b9a4c1d2b13d7fe31c204e59981f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated contribution guide links.
+
 ## 1.0.10
 
 ### Patch Changes

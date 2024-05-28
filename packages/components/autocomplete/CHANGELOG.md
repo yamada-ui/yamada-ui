@@ -1,5 +1,18 @@
 # @yamada-ui/autocomplete
 
+## 1.2.1
+
+### Patch Changes
+
+- [#1666](https://github.com/yamada-ui/yamada-ui/pull/1666) [`d4f2f39`](https://github.com/yamada-ui/yamada-ui/commit/d4f2f397c3c3d6579f0b6f07bbb4fe10b07468f1) Thanks [@108yen](https://github.com/108yen)! - Fix bug where original `items` were changed.
+
+- Updated dependencies [[`b578a69`](https://github.com/yamada-ui/yamada-ui/commit/b578a697c73202ba271352a00b0711f640b18758), [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/popover@1.2.0
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/form-control@1.1.1
+  - @yamada-ui/icon@1.0.26
+  - @yamada-ui/motion@1.0.27
+
 ## 1.2.0
 
 ### Minor Changes

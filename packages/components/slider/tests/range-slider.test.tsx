@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { a11y, act, fireEvent, renderHook } from "@yamada-ui/test"
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "../src"
 import { useRangeSlider } from "../src/range-slider"
@@ -54,7 +54,7 @@ describe("<RangeSlider />", () => {
   })
 
   test("can change RangeSlider orientation", () => {
-    const { container } = render(
+    const { container, rerender } = render(
       <RangeSlider orientation="vertical" data-testid="slider" />,
     )
 
@@ -66,14 +66,10 @@ describe("<RangeSlider />", () => {
     })
     expect(filledTrack).toHaveStyle("height: 100%")
 
-    cleanup()
+    rerender(<RangeSlider orientation="horizontal" data-testid="slider" />)
 
-    const { container: horizontalContainer } = render(
-      <RangeSlider orientation="horizontal" data-testid="slider" />,
-    )
-
-    sliderThumbs = horizontalContainer.querySelectorAll(".ui-slider__thumb")
-    filledTrack = horizontalContainer.querySelector(".ui-slider__track")
+    sliderThumbs = container.querySelectorAll(".ui-slider__thumb")
+    filledTrack = container.querySelector(".ui-slider__track")
 
     sliderThumbs.forEach((sliderThumb) => {
       expect(sliderThumb).toHaveAttribute("aria-orientation", "horizontal")

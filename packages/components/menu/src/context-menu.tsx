@@ -25,7 +25,7 @@ export type ContextMenuProps = Omit<MenuProps, "trigger"> &
   ContextMenuOptions
 
 /**
- * `ContextMenu` is displays a menu to the user such as a set of actions or functions triggered by a button.
+ * `ContextMenu` is triggered by a right click and displays a menu at the pointer's position.
  *
  * @see Docs https://yamada-ui.com/components/overlay/context-menu
  */

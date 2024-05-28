@@ -1,5 +1,17 @@
 # @yamada-ui/toggle
 
+## 1.0.10
+
+### Patch Changes
+
+- [#1645](https://github.com/yamada-ui/yamada-ui/pull/1645) [`853a609`](https://github.com/yamada-ui/yamada-ui/commit/853a6090a750b9a4c1d2b13d7fe31c204e59981f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated contribution guide links.
+
+- [#1642](https://github.com/yamada-ui/yamada-ui/pull/1642) [`19369ea`](https://github.com/yamada-ui/yamada-ui/commit/19369eafa038ef8fdd4da7ac0dda081240f922d6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated keywords in package.json files.
+
+- Updated dependencies [[`853a609`](https://github.com/yamada-ui/yamada-ui/commit/853a6090a750b9a4c1d2b13d7fe31c204e59981f), [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/ripple@1.0.27
+  - @yamada-ui/core@1.7.0
+
 ## 1.0.9
 
 ### Patch Changes

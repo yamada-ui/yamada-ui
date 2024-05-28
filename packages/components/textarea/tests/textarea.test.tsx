@@ -40,9 +40,7 @@ describe("<Textarea />", () => {
   })
   test("Rows Textarea renders correctly", () => {
     render(<Textarea rows={1} />)
-    expect(screen.getByRole("textbox")).not.toHaveStyle({
-      minHeight: "var(--ui-sizes-20)",
-    })
+    expect(screen.getByRole("textbox")).toHaveProperty("rows", 1)
   })
 
   test("Autosize Textarea renders correctly", () => {

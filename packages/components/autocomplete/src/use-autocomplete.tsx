@@ -394,7 +394,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const [resolvedItems, setResolvedItems] = useState<
     AutocompleteItem[] | undefined
-  >(items)
+  >(items ? JSON.parse(JSON.stringify(items)) : undefined)
   const [value, setValue] = useControllableState({
     value: valueProp,
     defaultValue,

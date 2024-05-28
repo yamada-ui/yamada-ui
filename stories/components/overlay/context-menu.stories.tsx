@@ -30,7 +30,7 @@ export const basic: Story = () => {
         p="md"
         rounded="md"
       >
-        <Text>Right Click Here</Text>
+        <Text>Right click here</Text>
       </ContextMenuTrigger>
 
       <MenuList>

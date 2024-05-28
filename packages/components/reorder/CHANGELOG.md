@@ -1,5 +1,18 @@
 # @yamada-ui/reorder
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1627](https://github.com/yamada-ui/yamada-ui/pull/1627) [`ecf0789`](https://github.com/yamada-ui/yamada-ui/commit/ecf0789e6e3bc4fbe6e764efdda2cb2c276e255a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `items` so that `items` can also be rendered.
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/icon@1.0.26
+  - @yamada-ui/motion@1.0.27
+
 ## 1.0.26
 
 ### Patch Changes

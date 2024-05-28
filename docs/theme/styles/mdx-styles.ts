@@ -2,32 +2,44 @@ import type { CSSUIObject } from "@yamada-ui/react"
 
 export const mdx: Record<string, CSSUIObject> = {
   h1: {
+    fontFamily: "heading",
+    fontWeight: "bold",
     mt: "12",
     mb: "6",
-    fontSize: { base: "4xl" },
+    fontSize: "4xl",
   },
   h2: {
+    fontFamily: "heading",
+    fontWeight: "bold",
     mt: "12",
     mb: "6",
-    fontSize: { base: "2xl" },
+    fontSize: "3xl",
   },
   h3: {
+    fontFamily: "heading",
+    fontWeight: "bold",
     mt: "8",
     mb: "6",
-    fontSize: { base: "xl" },
+    fontSize: "2xl",
   },
   h4: {
-    mt: "8",
-    mb: "6",
-    fontSize: { base: "lg" },
+    fontFamily: "heading",
+    fontWeight: "bold",
+    mt: "6",
+    mb: "4",
+    fontSize: "xl",
   },
   h5: {
+    fontFamily: "heading",
+    fontWeight: "bold",
     my: "6",
-    fontSize: { base: "md" },
+    fontSize: "lg",
   },
   h6: {
+    fontFamily: "heading",
+    fontWeight: "bold",
     my: "6",
-    fontSize: { base: "sm" },
+    fontSize: "md",
   },
   p: {
     my: "6",

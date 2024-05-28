@@ -41,7 +41,7 @@ describe("<Textarea />", () => {
   test("Rows Textarea renders correctly", () => {
     render(<Textarea rows={1} />)
     expect(screen.getByRole("textbox")).not.toHaveStyle({
-      minHeight: expect.anything(),
+      minHeight: "var(--ui-sizes-20)",
     })
   })
 
@@ -58,9 +58,8 @@ describe("<Textarea />", () => {
     })
     render(<Textarea autosize />)
     expect(screen.getByRole("textbox")).not.toHaveStyle({
-      minHeight: expect.anything(),
+      minHeight: "var(--ui-sizes-20)",
     })
-
     Object.defineProperty(global.document, "fonts", {
       value: fontsData,
       writable: true,

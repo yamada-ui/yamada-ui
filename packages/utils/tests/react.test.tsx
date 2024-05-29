@@ -170,6 +170,14 @@ describe("React", () => {
       const nonRefObject = { notCurrent: null }
       expect(isRefObject(nonRefObject)).toBeFalsy()
     })
+
+    test("should return false for null", () => {
+      expect(isRefObject(null)).toBeFalsy()
+    })
+
+    test("should return false for undefined", () => {
+      expect(isRefObject(undefined)).toBeFalsy()
+    })
   })
 
   describe("useMergeRefs", () => {

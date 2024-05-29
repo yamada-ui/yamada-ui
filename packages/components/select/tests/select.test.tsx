@@ -479,4 +479,242 @@ describe("<MultiSelect />", () => {
     expect(input).toHaveTextContent(/one/i)
     expect(input).toHaveTextContent(/two/i)
   })
+
+  test("arrowDown should work correctly when omitSelectedValues is set", async () => {
+    const items = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    const { user } = render(
+      <MultiSelect role="combobox" omitSelectedValues items={items} />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard("{Escape>}{ArrowDown>}")
+
+    const options = await screen.findAllByRole("select-item")
+
+    expect(options[0]).toHaveAttribute("data-focus")
+
+    for (let i = 1; i < items.length; i++) {
+      await user.keyboard("{ArrowDown>}")
+
+      expect(options[i]).toHaveAttribute("data-focus")
+    }
+
+    await user.keyboard("{ArrowDown>}")
+    expect(options[0]).toHaveAttribute("data-focus")
+  })
+
+  test("arrowDown should work correctly when defaultValue and omitSelectedValues is set", async () => {
+    const items = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    const { user } = render(
+      <MultiSelect
+        role="combobox"
+        omitSelectedValues
+        items={items}
+        defaultValue={["option2"]}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard("{Escape>}{ArrowDown>}")
+
+    const options = await screen.findAllByRole("select-item")
+    expect(options[0]).toHaveAttribute("data-focus")
+
+    await user.keyboard("{ArrowDown>}")
+    expect(options[2]).toHaveAttribute("data-focus")
+
+    await user.keyboard("{ArrowDown>}")
+    expect(options[0]).toHaveAttribute("data-focus")
+  })
+
+  test("arrowUp should work correctly when omitSelectedValues is set", async () => {
+    const items = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    const { user } = render(
+      <MultiSelect role="combobox" omitSelectedValues items={items} />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard("{Escape>}{ArrowUp>}")
+
+    const options = await screen.findAllByRole("select-item")
+
+    expect(options[items.length - 1]).toHaveAttribute("data-focus")
+
+    for (let i = items.length - 2; i >= 0; i--) {
+      await user.keyboard("{ArrowUp>}")
+
+      expect(options[i]).toHaveAttribute("data-focus")
+    }
+
+    await user.keyboard("{ArrowUp>}")
+    expect(options[items.length - 1]).toHaveAttribute("data-focus")
+  })
+
+  test("arrowUp should work correctly when defaultValue and omitSelectedValues is set", async () => {
+    const items = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    const { user } = render(
+      <MultiSelect
+        role="combobox"
+        omitSelectedValues
+        items={items}
+        defaultValue={["option2"]}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard("{Escape>}{ArrowUp>}")
+
+    const options = await screen.findAllByRole("select-item")
+    expect(options[2]).toHaveAttribute("data-focus")
+
+    await user.keyboard("{ArrowUp>}")
+    expect(options[0]).toHaveAttribute("data-focus")
+
+    await user.keyboard("{ArrowUp>}")
+    expect(options[2]).toHaveAttribute("data-focus")
+  })
+
+  test("home should work correctly when the topmost option is excluded", async () => {
+    const items = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    const { user } = render(
+      <MultiSelect
+        role="combobox"
+        omitSelectedValues
+        items={items}
+        defaultValue={["option1"]}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard("{Escape>}{ArrowUp>}")
+
+    const options = await screen.findAllByRole("select-item")
+    expect(options[items.length - 1]).toHaveAttribute("data-focus")
+
+    await user.keyboard("{Home>}")
+    expect(options[1]).toHaveAttribute("data-focus")
+  })
+
+  test("end should work correctly when the lowest option is excluded", async () => {
+    const items = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    const { user } = render(
+      <MultiSelect
+        role="combobox"
+        omitSelectedValues
+        items={items}
+        defaultValue={["option3"]}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+    await user.keyboard("{Escape>}{ArrowDown>}")
+
+    const options = await screen.findAllByRole("select-item")
+    expect(options[0]).toHaveAttribute("data-focus")
+
+    await user.keyboard("{End>}")
+    expect(options[1]).toHaveAttribute("data-focus")
+  })
 })

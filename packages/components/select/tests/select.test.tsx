@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { Select, Option, OptionGroup, MultiSelect } from "../src"
 
 describe("<Select />", () => {
@@ -184,6 +184,199 @@ describe("<Select />", () => {
     expect(options[0]).toHaveTextContent(/one/i)
     expect(options[0]).toHaveAttribute("data-disabled")
     expect(options[0]).toHaveAttribute("aria-disabled", "true")
+  })
+
+  test("correct warnings should be issued when set empty value and placeholder in options", () => {
+    const consoleWarnSpy = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => {})
+
+    render(
+      <Select
+        role="combobox"
+        placeholder="Select numbers"
+        placeholderInOptions={true}
+        items={[
+          { label: "One", value: "" },
+          { label: "Two", value: "" },
+        ]}
+      />,
+    )
+
+    expect(consoleWarnSpy).toHaveBeenCalledTimes(2)
+
+    consoleWarnSpy.mockRestore()
+  })
+
+  describe("keyDown event", () => {
+    const ITEMS = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("arrowDown keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{ArrowDown>}")
+
+      const options = await screen.findAllByRole("select-item")
+
+      expect(options[0]).toHaveAttribute("data-focus")
+
+      for (let i = 1; i < ITEMS.length; i++) {
+        await user.keyboard("{ArrowDown>}")
+
+        expect(options[i]).toHaveAttribute("data-focus")
+      }
+
+      await user.keyboard("{ArrowDown>}")
+      expect(options[0]).toHaveAttribute("data-focus")
+    })
+
+    test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
+      const { user } = render(
+        <Select role="combobox" items={ITEMS} defaultValue="option2" />,
+      )
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{ArrowDown>}")
+
+      const options = await screen.findAllByRole("select-item")
+      expect(options[1]).toHaveAttribute("data-focus")
+    })
+
+    test("arrowUp keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{ArrowUp>}")
+
+      const options = await screen.findAllByRole("select-item")
+
+      expect(options[ITEMS.length - 1]).toHaveAttribute("data-focus")
+
+      for (let i = ITEMS.length - 2; i >= 0; i--) {
+        await user.keyboard("{ArrowUp>}")
+
+        expect(options[i]).toHaveAttribute("data-focus")
+      }
+
+      await user.keyboard("{ArrowUp>}")
+      expect(options[ITEMS.length - 1]).toHaveAttribute("data-focus")
+    })
+
+    test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
+      const { user } = render(
+        <Select role="combobox" items={ITEMS} defaultValue="option2" />,
+      )
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{ArrowUp>}")
+
+      const options = await screen.findAllByRole("select-item")
+      expect(options[1]).toHaveAttribute("data-focus")
+    })
+
+    test("space keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{Space>}")
+
+      const options = await screen.findAllByRole("select-item")
+      expect(options[0]).toHaveAttribute("data-focus")
+
+      await user.keyboard("{Space>}")
+      expect(input).toHaveTextContent("option1")
+    })
+
+    test("enter keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{Enter>}")
+
+      const options = await screen.findAllByRole("select-item")
+      expect(options[0]).toHaveAttribute("data-focus")
+
+      await user.keyboard("{Enter>}")
+      expect(input).toHaveTextContent("option1")
+    })
+
+    test("home keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+      await user.keyboard("{Escape>}{ArrowUp>}")
+
+      const options = await screen.findAllByRole("select-item")
+      expect(options[ITEMS.length - 1]).toHaveAttribute("data-focus")
+
+      await user.keyboard("{Home>}")
+      expect(options[0]).toHaveAttribute("data-focus")
+    })
+
+    test("end keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+
+      const options = await screen.findAllByRole("select-item")
+      expect(options[0]).toHaveAttribute("data-focus")
+
+      await user.keyboard("{End>}")
+      expect(options[options.length - 1]).toHaveAttribute("data-focus")
+    })
+
+    test("escape keyDown should work correctly", async () => {
+      const { user } = render(<Select role="combobox" items={ITEMS} />)
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+
+      const select = screen.getByRole("select")
+      expect(select).toHaveStyle({ visibility: "visible" })
+
+      await user.keyboard("{Escape>}")
+      await waitFor(() => expect(select).toHaveStyle({ visibility: "hidden" }))
+    })
   })
 })
 

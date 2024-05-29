@@ -29,6 +29,55 @@ describe("<Select />", () => {
     expect(options[1]).toHaveTextContent(/two/i)
   })
 
+  test("when items passed to props, renders correctly", async () => {
+    const { user } = render(
+      <Select
+        role="combobox"
+        items={[
+          { label: "One", value: "one" },
+          { label: "Two", value: "two" },
+        ]}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+
+    const options = screen.getAllByRole("select-item")
+    expect(options[0]).toHaveTextContent(/one/i)
+    expect(options[1]).toHaveTextContent(/two/i)
+  })
+
+  test("when nested items passed to props, renders correctly", async () => {
+    const { user } = render(
+      <Select
+        role="combobox"
+        items={[
+          {
+            label: "Numbers",
+            items: [{ label: "One", value: "one" }],
+          },
+          {
+            label: "Two",
+            value: "two",
+          },
+        ]}
+      />,
+    )
+
+    const input = screen.getByRole("combobox")
+    expect(input).toBeInTheDocument()
+
+    await user.click(input)
+
+    const select = screen.getByRole("select")
+    expect(select).toBeInTheDocument()
+    expect(select).toHaveTextContent(/numbers/i)
+    expect(select).toHaveTextContent(/one/i)
+  })
+
   test("should render select with option group", async () => {
     const { user } = render(
       <Select role="combobox">

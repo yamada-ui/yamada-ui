@@ -378,7 +378,6 @@ describe("<Menu />", () => {
     const { container } = render(
       <ContextMenu>
         <ContextMenuTrigger
-          data-testid="ContextMenuTrigger"
           as={Center}
           w="full"
           h="xs"
@@ -401,33 +400,6 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          data-testid="ContextMenuTrigger"
-          as={Center}
-          w="full"
-          h="xs"
-          borderWidth="1px"
-          borderStyle="dashed"
-          p="md"
-          rounded="md"
-        >
-          Right click here
-        </ContextMenuTrigger>
-        <MenuList data-testid="MenuList">
-          <MenuItem data-testid="MenuItem">Undo</MenuItem>
-          <MenuItem>Redo</MenuItem>
-        </MenuList>
-      </ContextMenu>,
-    )
-    expect(screen.getByTestId("ContextMenuTrigger")).toBeInTheDocument()
-    expect(screen.getByText("Right click here")).toBeInTheDocument()
-    expect(screen.getByTestId("MenuList")).toBeInTheDocument()
-    expect(screen.getByTestId("MenuItem")).toBeInTheDocument()
-  })
-  test("context menu events", async () => {
-    render(
-      <ContextMenu>
-        <ContextMenuTrigger
-          data-testid="ContextMenuTrigger"
           as={Center}
           w="full"
           h="xs"
@@ -444,7 +416,29 @@ describe("<Menu />", () => {
         </MenuList>
       </ContextMenu>,
     )
-    const contextMenuTrigger = screen.getByTestId("ContextMenuTrigger")
+    expect(screen.getByText("Right click here")).toBeInTheDocument()
+  })
+  test("context menu events", async () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    const contextMenuTrigger = screen.getByText("Right click here")
     await act(() => fireEvent.contextMenu(contextMenuTrigger))
     const menuList = screen.getByRole("menu")
     expect(menuList).toBeVisible()

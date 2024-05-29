@@ -1,5 +1,21 @@
 # @yamada-ui/popover
 
+## 1.2.0
+
+### Minor Changes
+
+- [#1639](https://github.com/yamada-ui/yamada-ui/pull/1639) [`b578a69`](https://github.com/yamada-ui/yamada-ui/commit/b578a697c73202ba271352a00b0711f640b18758) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Added `contextmenu` trigger logic.
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/close-button@1.0.27
+  - @yamada-ui/motion@1.0.27
+  - @yamada-ui/transitions@1.0.27
+  - @yamada-ui/use-animation@1.0.26
+  - @yamada-ui/use-popper@1.0.26
+
 ## 1.1.2
 
 ### Patch Changes

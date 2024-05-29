@@ -194,3 +194,15 @@ tab: Props
   description={"If `true`, tooltip is visible."}
   defaultValue={"true"}
 />
+
+### CellProps
+
+<PropsCard id="cell-name" name="name" required type="string" />
+
+<PropsCard id="cell-value" name="value" required type="number" />
+
+<PropsCard
+  id="cell-dimcell"
+  name="dimCell"
+  type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
+/>

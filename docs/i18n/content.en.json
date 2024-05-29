@@ -9242,6 +9242,19 @@
     "hierarchy": { "lv1": "ContextMenu" }
   },
   {
+    "title": "ContextMenu",
+    "type": "page",
+    "description": "We are currently considering the development of `ContextMenu`.",
+    "slug": "/components/overlay/context-menu/theming",
+    "hierarchy": { "lv1": "ContextMenu" }
+  },
+  {
+    "title": "Theming",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu/theming#theming",
+    "hierarchy": { "lv1": "ContextMenu", "lv2": "Theming" }
+  },
+  {
     "title": "Dialog",
     "type": "page",
     "description": "`Dialog` is a component used to confirm or interrupt user actions.",

@@ -1,0 +1,4 @@
+{
+  "contentDirInclude": ["components/**"],
+  "contentDirExclude": ["changelog/**"]
+}

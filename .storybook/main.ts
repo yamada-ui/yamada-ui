@@ -26,23 +26,6 @@ const config: StorybookConfig = {
 
   viteFinal: async (config) => {
     config = mergeConfig<InlineConfig, UserConfig>(config, {
-      plugins: [
-        {
-          name: "force-reload-on-specific-files",
-          handleHotUpdate: ({ file, server }) => {
-            const isTheme = file.startsWith(
-              path.resolve(__dirname, "../packages/theme/src"),
-            )
-            const isProviders = file.startsWith(
-              path.resolve(__dirname, "../packages/providers/src"),
-            )
-
-            if (isTheme || isProviders) {
-              server.hot.send({ type: "full-reload" })
-            }
-          },
-        },
-      ],
       resolve: {
         alias: [
           {

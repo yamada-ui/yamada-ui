@@ -47,7 +47,7 @@ const getContributors: p.RequiredRunner = () => async (_, s) => {
     page++
   } while (count === perPage)
 
-  s.stop(`got the Yamada UI contributors`)
+  s.stop(`Got the Yamada UI contributors`)
 
   return contributors
 }

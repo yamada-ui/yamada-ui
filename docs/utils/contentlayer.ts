@@ -198,6 +198,7 @@ export const getDocumentTabs = (
 
     if (parentDocument) {
       const parentDocumentSlug = parentDocument.slug
+
       parentPaths = parentDocument.slug.split("/").slice(1)
 
       const resolvedDocuments = documents.filter(({ slug }) =>

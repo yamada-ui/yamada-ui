@@ -45,7 +45,7 @@ describe("<AvatarGroup />", () => {
   })
 
   test("does not render a number avatar showing count of truncated avatars if max is more than avatars given", async () => {
-    const tools = render(
+    const { container } = render(
       <AvatarGroup max={6}>
         <Avatar />
         <Avatar />
@@ -53,7 +53,7 @@ describe("<AvatarGroup />", () => {
         <Avatar />
       </AvatarGroup>,
     )
-    const moreLabel = tools.container.querySelector(".ui-avatar__excess")
+    const moreLabel = container.querySelector(".ui-avatar__excess")
     expect(moreLabel).not.toBeInTheDocument()
   })
 })

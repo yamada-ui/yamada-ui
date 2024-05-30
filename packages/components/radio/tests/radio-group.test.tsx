@@ -1,4 +1,4 @@
-import { a11y, render, screen, fireEvent, renderHook } from "@yamada-ui/test"
+import { a11y, render, screen, renderHook, fireEvent } from "@yamada-ui/test"
 import type { RadioItem } from "../src"
 import { Radio, RadioGroup, useRadioGroup } from "../src"
 
@@ -16,51 +16,41 @@ describe("<RadioGroup/>", () => {
   test("defaultValue should be checked correctly", async () => {
     render(
       <RadioGroup defaultValue="1">
-        <Radio value="1" data-testid="radio-1">
-          Radio 1
-        </Radio>
-        <Radio value="2" data-testid="radio-2">
-          Radio 2
-        </Radio>
-        <Radio value="3" data-testid="radio-3">
-          Radio 3
-        </Radio>
+        <Radio value="1">Radio 1</Radio>
+        <Radio value="2">Radio 2</Radio>
+        <Radio value="3">Radio 3</Radio>
       </RadioGroup>,
     )
 
-    expect(screen.getByTestId("radio-1").querySelector("input")).toBeChecked()
-    expect(
-      screen.getByTestId("radio-2").querySelector("input"),
-    ).not.toBeChecked()
-    expect(
-      screen.getByTestId("radio-3").querySelector("input"),
-    ).not.toBeChecked()
+    const radio1 = await screen.findByRole("radio", { name: "Radio 1" })
+    const radio2 = await screen.findByRole("radio", { name: "Radio 2" })
+    const radio3 = await screen.findByRole("radio", { name: "Radio 3" })
+
+    expect(radio1).toBeChecked()
+    expect(radio2).not.toBeChecked()
+    expect(radio3).not.toBeChecked()
   })
 
   test("should be change value when click other radio button", async () => {
     render(
       <RadioGroup defaultValue="1">
-        <Radio value="1" data-testid="radio-1">
-          Radio 1
-        </Radio>
-        <Radio value="2" data-testid="radio-2">
-          Radio 2
-        </Radio>
-        <Radio value="3" data-testid="radio-3">
-          Radio 3
-        </Radio>
+        <Radio value="1">Radio 1</Radio>
+        <Radio value="2">Radio 2</Radio>
+        <Radio value="3">Radio 3</Radio>
       </RadioGroup>,
     )
 
-    fireEvent.click(screen.getByTestId("radio-2"))
+    const radio1 = await screen.findByRole("radio", { name: "Radio 1" })
+    const radio2 = await screen.findByRole("radio", { name: "Radio 2" })
+    const radio3 = await screen.findByRole("radio", { name: "Radio 3" })
 
-    expect(
-      screen.getByTestId("radio-1").querySelector("input"),
-    ).not.toBeChecked()
-    expect(screen.getByTestId("radio-2").querySelector("input")).toBeChecked()
-    expect(
-      screen.getByTestId("radio-3").querySelector("input"),
-    ).not.toBeChecked()
+    // Due to a bug in the nwsapi library, which jsdom depends on,
+    // writing `await user.click(radio2)` here causes an error to be thrown.
+    fireEvent.click(radio2)
+
+    expect(radio1).not.toBeChecked()
+    expect(radio2).toBeChecked()
+    expect(radio3).not.toBeChecked()
   })
 
   test("should return checked attribute when isNative is true", () => {
@@ -81,7 +71,7 @@ describe("<RadioGroup/>", () => {
     expect(props).toHaveProperty("isChecked")
   })
 
-  test("renders Radio components from items when validChildren is empty and items is not empty", () => {
+  test("renders Radio components from items when validChildren is empty and items is not empty", async () => {
     const items: RadioItem[] = [
       { value: "1", label: "Option 1" },
       { value: "2", label: "Option 2" },
@@ -90,57 +80,69 @@ describe("<RadioGroup/>", () => {
 
     render(<RadioGroup items={items} />)
 
-    items.forEach(({ label }) => {
-      const radio = screen.getByLabelText(label as string)
-      expect(radio).toBeInTheDocument()
-      expect(radio.getAttribute("type")).toBe("radio")
-    })
+    const radio1 = await screen.findByRole("radio", { name: "Option 1" })
+    const radio2 = await screen.findByRole("radio", { name: "Option 2" })
+    const radio3 = await screen.findByRole("radio", { name: "Option 3" })
+
+    expect(radio1).toBeInTheDocument()
+    expect(radio2).toBeInTheDocument()
+    expect(radio3).toBeInTheDocument()
   })
 
   test("onChange with focus should move to the first Radio", async () => {
     const { result } = renderHook(() => useRadioGroup({ defaultValue: "1" }))
 
-    render(
+    const { user } = render(
       <div
         {...result.current.getContainerProps()}
         onFocus={result.current.onFocus}
       >
-        <input type="radio" data-testid="radio-1" />
-        <input type="radio" data-testid="radio-2" />
+        <label>
+          <input type="radio" />
+          Radio 1
+        </label>
+        <label>
+          <input type="radio" />
+          Radio 2
+        </label>
       </div>,
     )
 
-    const radioGroup = screen.getByRole("group")
-    fireEvent.focus(radioGroup)
+    await user.tab()
 
-    const radioOne = screen.getByTestId("radio-1")
-    const radioTwo = screen.getByTestId("radio-2")
+    const radio1 = await screen.findByRole("radio", { name: "Radio 1" })
+    const radio2 = await screen.findByRole("radio", { name: "Radio 2" })
 
-    expect(radioOne).toHaveFocus()
-    expect(radioTwo).not.toHaveFocus()
+    expect(radio1).toHaveFocus()
+    expect(radio2).not.toHaveFocus()
   })
 
   test("onChange with focus should move to the second Radio", async () => {
     const { result } = renderHook(() => useRadioGroup({ defaultValue: "2" }))
 
-    render(
+    const { user } = render(
       <div
         {...result.current.getContainerProps()}
         onFocus={result.current.onFocus}
       >
-        <input type="radio" data-testid="radio-1" disabled />
-        <input type="radio" data-testid="radio-2" />
+        <label>
+          <input type="radio" disabled />
+          Radio 1
+        </label>
+        <label>
+          <input type="radio" />
+          Radio 2
+        </label>
       </div>,
     )
 
-    const radioGroup = screen.getByRole("group")
-    fireEvent.focus(radioGroup)
+    await user.tab()
 
-    const radioOne = screen.getByTestId("radio-1")
-    const radioTwo = screen.getByTestId("radio-2")
+    const radio1 = await screen.findByRole("radio", { name: "Radio 1" })
+    const radio2 = await screen.findByRole("radio", { name: "Radio 2" })
 
-    expect(radioOne).not.toHaveFocus()
-    expect(radioTwo).toHaveFocus()
+    expect(radio1).not.toHaveFocus()
+    expect(radio2).toHaveFocus()
   })
 
   test("should add value when radiobutton is checked", () => {
@@ -149,21 +151,17 @@ describe("<RadioGroup/>", () => {
     expect(result.current.value).toBe("1")
   })
 
-  test("RadioGroup should have gap property set to 2px", () => {
-    render(<RadioGroup gap="2px" data-testid="radio-group" />)
+  test("RadioGroup should have gap property set to 2px", async () => {
+    render(<RadioGroup gap="2px" />)
 
-    const radioGroup = screen.getByTestId("radio-group")
-    expect(window.getComputedStyle(radioGroup).getPropertyValue("gap")).toBe(
-      "2px",
-    )
+    const radioGroup = await screen.findByRole("group")
+    expect(radioGroup).toHaveStyle({ gap: "2px" })
   })
 
-  test("RadioGroup with direction row should have gap property set to 1rem", () => {
-    render(<RadioGroup direction="row" data-testid="radio-group" />)
+  test("RadioGroup with direction row should have gap property set to 1rem", async () => {
+    render(<RadioGroup direction="row" />)
 
-    const radioGroup = screen.getByTestId("radio-group")
-    expect(window.getComputedStyle(radioGroup).getPropertyValue("gap")).toBe(
-      "1rem",
-    )
+    const radioGroup = await screen.findByRole("group")
+    expect(radioGroup).toHaveStyle({ gap: "1rem" })
   })
 })

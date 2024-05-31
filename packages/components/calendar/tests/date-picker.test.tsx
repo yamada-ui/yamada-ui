@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import { DatePicker } from "../src"
 
 describe("<DatePicker />", () => {
@@ -25,5 +25,23 @@ describe("<DatePicker />", () => {
     })
 
     expect(selectBtn).toHaveAttribute("data-selected")
+  })
+
+  test("whether Calendar is displayed when DatePicker is focused", async () => {
+    const { container } = render(
+      <DatePicker
+        placeholder="basic"
+        today
+        defaultValue={new Date(new Date().setDate(1))}
+      />,
+    )
+
+    const popover = container.querySelector(".ui-popover")
+
+    act(() => {
+      fireEvent.focus(screen.getByPlaceholderText("basic"))
+    })
+
+    expect(popover).toHaveStyle("visibility: visible;")
   })
 })

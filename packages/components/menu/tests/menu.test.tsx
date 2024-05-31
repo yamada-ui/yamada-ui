@@ -53,7 +53,7 @@ describe("<Menu />", () => {
     )
     expect(screen.getByTestId("MenuButton")).toBeInTheDocument()
     expect(screen.getByTestId("MenuList")).toBeInTheDocument()
-    expect(screen.getByTestId("MenuList")).toBeInTheDocument()
+    expect(screen.getByTestId("MenuItem")).toBeInTheDocument()
   })
 
   test("should render the menu with command", () => {

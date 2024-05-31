@@ -29,10 +29,8 @@ describe("<PinInput />", () => {
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
 
-    await act(async () => {
-      await user.tab()
-      await user.paste("a1")
-    })
+    await user.tab()
+    await user.paste("a1")
 
     await waitFor(() => {
       expect(firstInput).toHaveValue("a1")

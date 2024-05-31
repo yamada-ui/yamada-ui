@@ -6,32 +6,43 @@ describe("<RangeDatePicker />", () => {
     await a11y(<RangeDatePicker placeholder="basic" />)
   })
 
-  test("should render dates of range", async () => {
-    const { container } = render(
-      <RangeDatePicker
-        placeholder="basic"
-        today
-        defaultValue={[new Date(new Date().setDate(1))]}
-      />,
-    )
-    const selectDateFrom = new Date(new Date().setDate(7))
-    const dateStrFrom = new Date(selectDateFrom.setHours(0, 0, 0, 0)).toString()
-    const selectBtnFrom = container.querySelector(
-      `button[data-value="${dateStrFrom}"]`,
-    )
+  describe("RangeDatePicker test", () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
 
-    fireEvent.click(selectBtnFrom!)
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+    test("should render dates of range", async () => {
+      const { container } = render(
+        <RangeDatePicker
+          placeholder="basic"
+          today
+          defaultValue={[new Date(new Date().setDate(1))]}
+        />,
+      )
+      const selectDateFrom = new Date(new Date().setDate(7))
+      const dateStrFrom = new Date(
+        selectDateFrom.setHours(0, 0, 0, 0),
+      ).toString()
+      const selectBtnFrom = container.querySelector(
+        `button[data-value="${dateStrFrom}"]`,
+      )
 
-    expect(selectBtnFrom).toHaveAttribute("data-selected")
+      fireEvent.click(selectBtnFrom!)
 
-    const selectDateTo = new Date(new Date().setDate(14))
-    const dateStrTo = new Date(selectDateTo.setHours(0, 0, 0, 0)).toString()
-    const selectBtnTo = container.querySelector(
-      `button[data-value="${dateStrTo}"]`,
-    )
+      expect(selectBtnFrom).toHaveAttribute("data-selected")
 
-    fireEvent.click(selectBtnTo!)
+      const selectDateTo = new Date(new Date().setDate(14))
+      const dateStrTo = new Date(selectDateTo.setHours(0, 0, 0, 0)).toString()
+      const selectBtnTo = container.querySelector(
+        `button[data-value="${dateStrTo}"]`,
+      )
 
-    expect(selectBtnTo).toHaveAttribute("data-selected")
+      fireEvent.click(selectBtnTo!)
+
+      expect(selectBtnTo).toHaveAttribute("data-selected")
+    })
   })
 })

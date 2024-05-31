@@ -6,41 +6,49 @@ describe("<DatePicker />", () => {
     await a11y(<DatePicker placeholder="basic" />)
   })
 
-  test("should change selected date", async () => {
-    vi.useFakeTimers()
-    const { container } = render(
-      <DatePicker
-        placeholder="basic"
-        today
-        defaultValue={new Date(new Date().setDate(1))}
-      />,
-    )
+  describe("DatePicker test", () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
 
-    const selectDate = new Date(new Date().setDate(7))
-    const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
-    const selectBtn = container.querySelector(`button[data-value="${dateStr}"]`)
+    afterEach(() => {
+      vi.useRealTimers()
+    })
 
-    fireEvent.click(selectBtn!)
+    test("should change selected date", async () => {
+      const { container } = render(
+        <DatePicker
+          placeholder="basic"
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />,
+      )
 
-    expect(selectBtn).toHaveAttribute("data-selected")
-    vi.useRealTimers()
-  })
+      const selectDate = new Date(new Date().setDate(7))
+      const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
+      const selectBtn = container.querySelector(
+        `button[data-value="${dateStr}"]`,
+      )
 
-  test("whether Calendar is displayed when DatePicker is focused", async () => {
-    vi.useFakeTimers()
-    const { container } = render(
-      <DatePicker
-        placeholder="basic"
-        today
-        defaultValue={new Date(new Date().setDate(1))}
-      />,
-    )
+      fireEvent.click(selectBtn!)
 
-    const popover = container.querySelector(".ui-popover")
+      expect(selectBtn).toHaveAttribute("data-selected")
+    })
 
-    fireEvent.focus(screen.getByPlaceholderText("basic"))
+    test("whether Calendar is displayed when DatePicker is focused", async () => {
+      const { container } = render(
+        <DatePicker
+          placeholder="basic"
+          today
+          defaultValue={new Date(new Date().setDate(1))}
+        />,
+      )
 
-    expect(popover).toHaveStyle({ visibility: "visible" })
-    vi.useRealTimers()
+      const popover = container.querySelector(".ui-popover")
+
+      fireEvent.focus(screen.getByPlaceholderText("basic"))
+
+      expect(popover).toHaveStyle({ visibility: "visible" })
+    })
   })
 })

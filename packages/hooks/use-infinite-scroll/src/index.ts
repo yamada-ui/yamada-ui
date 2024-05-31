@@ -102,7 +102,7 @@ export type UseInfiniteScrollProps = Omit<IntersectionObserverInit, "root"> & {
     index: number
     finish: () => void
     entry?: IntersectionObserverEntry
-  }) => Promise<void>
+  }) => void | Promise<void>
   /**
    * Ref to a reset function.
    */

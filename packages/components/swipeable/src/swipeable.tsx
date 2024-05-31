@@ -88,9 +88,13 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
           className: "ui-swipeable__left-action",
         })}
       >
-        <ui.div {...getLeftActionsContainerProps({ className: "" })}>
+        <ui.div
+          {...getLeftActionsContainerProps({
+            className: "ui-swipeable__left-action-container",
+          })}
+        >
           {renderLeftActions?.map(({ children, ...rest }, index) => (
-            <ui.button key={index} {...rest}>
+            <ui.button key={index} __css={{ overflow: "hidden" }} {...rest}>
               {runIfFunc(children, {})}
             </ui.button>
           ))}
@@ -103,9 +107,13 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
           className: "ui-swipeable__right-action",
         })}
       >
-        <ui.div {...getRightActionsContainerProps({ className: "" })}>
+        <ui.div
+          {...getRightActionsContainerProps({
+            className: "ui-swipeable__right-action-container",
+          })}
+        >
           {renderRightActions?.map(({ children, ...rest }, index) => (
-            <ui.button key={index} {...rest}>
+            <ui.button key={index} __css={{ overflow: "hidden" }} {...rest}>
               {runIfFunc(children, {})}
             </ui.button>
           ))}

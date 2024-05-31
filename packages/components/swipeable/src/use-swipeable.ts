@@ -260,18 +260,18 @@ export const useSwipeable = ({
       className,
       __css: {
         zIndex: -1,
-        w: maxRightSwipe ?? "100%",
+        w: "100%",
         h: "100%",
         display: "grid",
+        gridTemplateColumns: `repeat(${renderRightActions?.length ?? 0},1fr)`,
         ...styles.swipeableRightAction,
       },
-      gridTemplate: `repeat(${renderRightActions?.length ?? 0},1fr)`,
       onClick: () => {
         setDirection("none")
       },
       ...props,
     }),
-    [maxRightSwipe, renderRightActions?.length, styles.swipeableRightAction],
+    [renderRightActions?.length, styles.swipeableRightAction],
   )
 
   const getLeftActionsMotionProps: PropGetter<
@@ -287,7 +287,6 @@ export const useSwipeable = ({
         left: 0,
         height,
         width: leftActionsWidth,
-        overflow: "hidden",
       },
       ...props,
     }),
@@ -300,18 +299,18 @@ export const useSwipeable = ({
       className,
       __css: {
         zIndex: -1,
-        w: maxLeftSwipe ?? "100%",
+        w: "100%",
         h: "100%",
         display: "grid",
+        gridTemplateColumns: `repeat(${renderLeftActions?.length ?? 0},1fr)`,
         ...styles.swipeableLeftAction,
       },
-      gridTemplate: `repeat(${renderLeftActions?.length ?? 0},1fr)`,
       onClick: () => {
         setDirection("none")
       },
       ...props,
     }),
-    [maxLeftSwipe, renderLeftActions?.length, styles.swipeableLeftAction],
+    [renderLeftActions?.length, styles.swipeableLeftAction],
   )
 
   return {

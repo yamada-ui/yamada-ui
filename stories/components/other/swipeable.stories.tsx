@@ -19,38 +19,100 @@ const meta: Meta<typeof Swipeable> = {
 export default meta
 
 export const basic: Story = () => {
-  const renderLeftAction = () => (
-    <Box
-      h="100%"
-      w="100%"
-      background="green.500"
-      display="flex"
-      alignItems="center"
-      justifyContent="flex-end"
-      px={4}
+  const renderLeftAction = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="green.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+          px={4}
+        >
+          <Text>left</Text>
+        </Box>
+      ),
+    },
+  ]
+  const renderRightAction = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="red.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          px={4}
+        >
+          <Text textAlign="center">right</Text>
+        </Box>
+      ),
+    },
+  ]
+
+  return (
+    <Swipeable
+      renderLeftActions={renderLeftAction}
+      renderRightActions={renderRightAction}
     >
-      <Text>left</Text>
-    </Box>
+      <Card size="sm">
+        <CardHeader>
+          <Heading size="md">title</Heading>
+        </CardHeader>
+        <CardBody>
+          <Text>body</Text>
+        </CardBody>
+      </Card>
+    </Swipeable>
   )
-  const renderRightAction = () => (
-    <Box
-      h="100%"
-      w="100%"
-      background="red.500"
-      display="flex"
-      alignItems="center"
-      justifyContent="flex-start"
-      px={4}
-    >
-      <Text textAlign="center">right</Text>
-    </Box>
-  )
+}
+
+export const setSwipeLimit: Story = () => {
+  const renderLeftAction = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="green.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+          px={4}
+        >
+          <Text>left</Text>
+        </Box>
+      ),
+    },
+  ]
+  const renderRightAction = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="red.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          px={4}
+        >
+          <Text textAlign="center">right</Text>
+        </Box>
+      ),
+    },
+  ]
 
   return (
     <Swipeable
       maxLeftSwipe={200}
-      renderLeftActions={[{ children: renderLeftAction }]}
-      renderRightActions={[{ children: renderRightAction }]}
+      maxRightSwipe={100}
+      renderLeftActions={renderLeftAction}
+      renderRightActions={renderRightAction}
     >
       <Card size="sm">
         <CardHeader>
@@ -109,26 +171,29 @@ export const multiActions: Story = () => {
       ),
     },
   ]
-  const renderRightActions = () => (
-    <Box
-      h="100%"
-      w="100%"
-      background="red.500"
-      display="flex"
-      alignItems="center"
-      justifyContent="flex-start"
-      px={4}
-    >
-      <Text textAlign="center">right</Text>
-    </Box>
-  )
+  const renderRightActions = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="red.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          px={4}
+        >
+          <Text textAlign="center">right</Text>
+        </Box>
+      ),
+    },
+  ]
 
   return (
     <Swipeable
       maxLeftSwipe={200}
-      overshootLeft={false}
       renderLeftActions={renderLeftActions}
-      renderRightActions={[{ children: renderRightActions }]}
+      renderRightActions={renderRightActions}
     >
       <Card size="sm">
         <CardHeader>

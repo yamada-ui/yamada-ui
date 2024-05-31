@@ -6,32 +6,44 @@ describe("<MultiDatePicker />", () => {
     await a11y(<MultiDatePicker placeholder="basic" />)
   })
 
-  test("should change selected dates", async () => {
-    const { container } = render(
-      <MultiDatePicker
-        placeholder="basic"
-        today
-        defaultValue={[new Date(new Date().setDate(1))]}
-      />,
-    )
-    const selectDate = new Date(new Date().setDate(7))
-    const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
-    const selectBtn = container.querySelector(`button[data-value="${dateStr}"]`)
+  describe("MultiDatePicker test", () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
 
-    fireEvent.click(selectBtn!)
+    afterEach(() => {
+      vi.useRealTimers()
+    })
 
-    expect(selectBtn).toHaveAttribute("data-selected")
+    test("should change selected dates", async () => {
+      const { container } = render(
+        <MultiDatePicker
+          placeholder="basic"
+          today
+          defaultValue={[new Date(new Date().setDate(1))]}
+        />,
+      )
+      const selectDate = new Date(new Date().setDate(7))
+      const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
+      const selectBtn = container.querySelector(
+        `button[data-value="${dateStr}"]`,
+      )
 
-    const selectDateSecond = new Date(new Date().setDate(14))
-    const dateStrSecond = new Date(
-      selectDateSecond.setHours(0, 0, 0, 0),
-    ).toString()
-    const selectBtnSecond = container.querySelector(
-      `button[data-value="${dateStrSecond}"]`,
-    )
+      fireEvent.click(selectBtn!)
 
-    fireEvent.click(selectBtnSecond!)
+      expect(selectBtn).toHaveAttribute("data-selected")
 
-    expect(selectBtnSecond).toHaveAttribute("data-selected")
+      const selectDateSecond = new Date(new Date().setDate(14))
+      const dateStrSecond = new Date(
+        selectDateSecond.setHours(0, 0, 0, 0),
+      ).toString()
+      const selectBtnSecond = container.querySelector(
+        `button[data-value="${dateStrSecond}"]`,
+      )
+
+      fireEvent.click(selectBtnSecond!)
+
+      expect(selectBtnSecond).toHaveAttribute("data-selected")
+    })
   })
 })

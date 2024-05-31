@@ -6,15 +6,24 @@ describe("<MonthPicker />", () => {
     await a11y(<MonthPicker placeholder="basic" />)
   })
 
-  test("should change selected Month", async () => {
-    const { container } = render(
-      <MonthPicker placeholder="basic" defaultValue={new Date(new Date())} />,
-    )
+  describe("MonthPicker test", () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
 
-    const selectBtn = container.querySelector(`button[data-value="1"]`)
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+    test("should change selected Month", async () => {
+      const { container } = render(
+        <MonthPicker placeholder="basic" defaultValue={new Date(new Date())} />,
+      )
 
-    fireEvent.click(selectBtn!)
+      const selectBtn = container.querySelector(`button[data-value="1"]`)
 
-    expect(selectBtn).toHaveAttribute("data-selected")
+      fireEvent.click(selectBtn!)
+
+      expect(selectBtn).toHaveAttribute("data-selected")
+    })
   })
 })

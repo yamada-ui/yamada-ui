@@ -11,6 +11,8 @@ import { CONSTANT } from "./constant"
 import { includes } from "./utils/array"
 import { locales, otherLocales } from "./utils/i18n"
 import { toCamelCase } from "./utils/string"
+import { readFileSync } from "fs"
+import path from "path"
 
 const OTHER_LOCALES = `(${otherLocales.join("|")})`
 
@@ -258,8 +260,27 @@ const documentTypes = documentTypeNames.map((documentTypeName) =>
   })),
 )
 
+let contentDirInclude: string[] = []
+let contentDirExclude: string[] = []
+
+if (process.env.NODE_ENV === "development") {
+  try {
+    const data = readFileSync(
+      path.join(process.cwd(), "contentlayer.config.json"),
+      "utf-8",
+    )
+
+    const config = JSON.parse(data)
+
+    contentDirInclude = config.contentDirInclude
+    contentDirExclude = config.contentDirExclude
+  } catch {}
+}
+
 export default makeSource({
   contentDirPath: "contents",
+  contentDirInclude,
+  contentDirExclude,
   documentTypes,
   mdx: {
     rehypePlugins: [rehypeCodeMeta],

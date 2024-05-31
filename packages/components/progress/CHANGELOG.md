@@ -1,5 +1,21 @@
 # @yamada-ui/progress
 
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/use-animation@1.0.26
+  - @yamada-ui/use-token@1.1.14
+  - @yamada-ui/use-value@1.1.14
+
+## 1.0.26
+
+### Patch Changes
+
+- [#1529](https://github.com/yamada-ui/yamada-ui/pull/1529) [`20efbb8`](https://github.com/yamada-ui/yamada-ui/commit/20efbb84734a67ce411f0d5f66f0be4a8f7b0d6c) Thanks [@teru12012000](https://github.com/teru12012000)! - Integrate `omitObject` handling with `omitThemeProps`.
+
 ## 1.0.25
 
 ### Patch Changes

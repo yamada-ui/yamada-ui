@@ -1,5 +1,19 @@
 # @yamada-ui/editable
 
+## 1.0.31
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/form-control@1.1.1
+
+## 1.0.30
+
+### Patch Changes
+
+- [#1518](https://github.com/yamada-ui/yamada-ui/pull/1518) [`82575b8`](https://github.com/yamada-ui/yamada-ui/commit/82575b878d509de68f1e4cf5f050733eb011b2fb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor props handling in `useEditable`.
+
 ## 1.0.29
 
 ### Patch Changes

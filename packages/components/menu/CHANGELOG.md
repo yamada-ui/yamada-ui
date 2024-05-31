@@ -1,5 +1,30 @@
 # @yamada-ui/menu
 
+## 1.3.0
+
+### Minor Changes
+
+- [#1639](https://github.com/yamada-ui/yamada-ui/pull/1639) [`4ac5fc3`](https://github.com/yamada-ui/yamada-ui/commit/4ac5fc38af65a923343ca875c866643b144e9782) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Added `ContextMenu` component.
+
+### Patch Changes
+
+- Updated dependencies [[`b578a69`](https://github.com/yamada-ui/yamada-ui/commit/b578a697c73202ba271352a00b0711f640b18758), [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/popover@1.2.0
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/icon@1.0.26
+  - @yamada-ui/motion@1.0.27
+  - @yamada-ui/transitions@1.0.27
+
+## 1.2.0
+
+### Minor Changes
+
+- [#1525](https://github.com/yamada-ui/yamada-ui/pull/1525) [`e4b5126`](https://github.com/yamada-ui/yamada-ui/commit/e4b512620f5b7f9da44bace7490dce13c5d6ec97) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria attributes.
+
+### Patch Changes
+
+- [#1539](https://github.com/yamada-ui/yamada-ui/pull/1539) [`3204016`](https://github.com/yamada-ui/yamada-ui/commit/3204016d3639c01221e8789559972fba4b38b196) Thanks [@jasonmokk](https://github.com/jasonmokk)! - Remove unnecessary omitObjects in MenuOptionGroup component
+
 ## 1.1.4
 
 ### Patch Changes

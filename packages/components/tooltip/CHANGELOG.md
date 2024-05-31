@@ -1,5 +1,21 @@
 # @yamada-ui/tooltip
 
+## 1.0.29
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/motion@1.0.27
+  - @yamada-ui/transitions@1.0.27
+  - @yamada-ui/use-popper@1.0.26
+
+## 1.0.28
+
+### Patch Changes
+
+- [#1386](https://github.com/yamada-ui/yamada-ui/pull/1386) [`e078f57`](https://github.com/yamada-ui/yamada-ui/commit/e078f57e444071e31ed291020990054f69c83297) Thanks [@quangnmwork](https://github.com/quangnmwork)! - Fixed tooltip behavior on mobile devices.
+
 ## 1.0.27
 
 ### Patch Changes

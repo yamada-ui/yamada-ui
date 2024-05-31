@@ -394,7 +394,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const [resolvedItems, setResolvedItems] = useState<
     AutocompleteItem[] | undefined
-  >(items)
+  >(items ? JSON.parse(JSON.stringify(items)) : undefined)
   const [value, setValue] = useControllableState({
     value: valueProp,
     defaultValue,
@@ -1215,6 +1215,7 @@ export const useAutocompleteInput = () => {
     isAllSelected,
     formControlProps,
     inputProps,
+    isOpen,
   } = useAutocompleteContext()
 
   useUpdateEffect(() => {
@@ -1225,6 +1226,13 @@ export const useAutocompleteInput = () => {
     (props = {}, ref = null) => ({
       ref: mergeRefs(inputRef, ref),
       ...formControlProps,
+      role: "combobox",
+      "aria-haspopup": "listbox",
+      "aria-autocomplete": "list",
+      "aria-expanded": isOpen,
+      autoCapitalize: "none",
+      autoComplete: "off",
+      spellCheck: "false",
       ...inputProps,
       ...props,
       id,
@@ -1245,6 +1253,7 @@ export const useAutocompleteInput = () => {
       ),
     }),
     [
+      isOpen,
       inputProps,
       inputRef,
       formControlProps,

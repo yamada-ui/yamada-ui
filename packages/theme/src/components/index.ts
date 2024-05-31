@@ -17,6 +17,7 @@ import { ColorPicker } from "./color-picker"
 import { ColorSelector } from "./color-selector"
 import { ColorSwatch } from "./color-swatch"
 import { Container } from "./container"
+import { ContextMenu } from "./context-menu"
 import { DatePicker } from "./date-picker"
 import { Dialog } from "./dialog"
 import { Divider } from "./divider"
@@ -75,6 +76,7 @@ import { Tag } from "./tag"
 import { Textarea } from "./textarea"
 import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
+import { YearPicker } from "./year-picker"
 
 export default {
   Toggle,
@@ -97,6 +99,7 @@ export default {
   ColorSelector,
   ColorSwatch,
   Container,
+  ContextMenu,
   DatePicker,
   Dialog,
   Divider,
@@ -154,4 +157,5 @@ export default {
   Tag,
   Textarea,
   Tooltip,
+  YearPicker,
 }

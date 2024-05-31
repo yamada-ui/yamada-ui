@@ -1,5 +1,19 @@
 # @yamada-ui/textarea
 
+## 1.1.18
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/form-control@1.1.1
+
+## 1.1.17
+
+### Patch Changes
+
+- [#1515](https://github.com/yamada-ui/yamada-ui/pull/1515) [`1d0855b`](https://github.com/yamada-ui/yamada-ui/commit/1d0855b15710b3197b7ddd0c2eb154455532991d) Thanks [@hayato-yokoyama](https://github.com/hayato-yokoyama)! - Remove unnecessary omitObjects in Textarea component
+
 ## 1.1.16
 
 ### Patch Changes

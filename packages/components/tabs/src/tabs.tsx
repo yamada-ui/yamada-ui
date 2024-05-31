@@ -65,7 +65,7 @@ type TabsOptions = {
    */
   align?: "start" | "end" | "center"
   /**
-   * If `true`, the tabs will be manually activated and　display its panel by pressing Space or Enter.
+   * If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.
    *
    * If `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.
    *

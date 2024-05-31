@@ -35,7 +35,7 @@ export const useMonthList = () => {
     monthRefs,
     minYear,
     maxYear,
-    selectMonthWith,
+    __selectType,
   } = useCalendarContext()
 
   const isMulti = isArray(selectedValue)
@@ -127,6 +127,33 @@ export const useMonthList = () => {
     [year, setMonth, setType],
   )
 
+  const getIsSelectedYear = useCallback(() => {
+    if (__selectType === "date") {
+      return month.getFullYear() === year
+    } else {
+      const selectedYear = !isMulti
+        ? selectedValue?.getFullYear()
+        : selectedValue[0]?.getFullYear()
+
+      return selectedYear === year
+    }
+  }, [__selectType, isMulti, month, selectedValue, year])
+
+  const getIsSelected = useCallback(
+    (value: number) => {
+      if (__selectType === "date") {
+        return month.getMonth() === value
+      } else {
+        const month = !isMulti
+          ? selectedValue?.getMonth()
+          : selectedValue[0]?.getMonth()
+
+        return month === value
+      }
+    },
+    [__selectType, isMulti, month, selectedValue],
+  )
+
   useUpdateEffect(() => {
     if (typeof beforeYear.current !== "number") return
 
@@ -151,19 +178,8 @@ export const useMonthList = () => {
     useCallback(
       ({ value, ...props }, ref = null) => {
         const isControlled = typeof beforeYear.current === "number"
-        const isSelectedYear =
-          (selectMonthWith === "month"
-            ? month.getFullYear()
-            : !isMulti
-              ? selectedValue?.getFullYear()
-              : selectedValue[0]?.getFullYear()) === year
-        const isSelected =
-          isSelectedYear &&
-          (selectMonthWith === "month"
-            ? month.getMonth()
-            : !isMulti
-              ? selectedValue?.getMonth()
-              : selectedValue[0]?.getMonth()) === value
+        const isSelectedYear = getIsSelectedYear()
+        const isSelected = isSelectedYear && getIsSelected(value)
         const isDisabled = !isMonthInRange({
           date: new Date(year, value),
           minDate,
@@ -172,17 +188,21 @@ export const useMonthList = () => {
 
         monthRefs.current.set(value, createRef<HTMLButtonElement>())
 
+        let tabIndex = -1
+
+        if (isControlled) {
+          tabIndex = -1
+        } else if (!isSelectedYear && value === 0) {
+          tabIndex = 0
+        } else if (isSelected) {
+          tabIndex = 0
+        }
+
         return {
           isDisabled,
           ref: mergeRefs(ref, monthRefs.current.get(value)),
           ...props,
-          tabIndex: isControlled
-            ? -1
-            : !isSelectedYear && value === 0
-              ? 0
-              : isSelected
-                ? 0
-                : -1,
+          tabIndex,
           "data-selected": dataAttr(isSelected),
           "data-disabled": dataAttr(isDisabled),
           "data-value": value ?? "",
@@ -191,15 +211,13 @@ export const useMonthList = () => {
         }
       },
       [
-        isMulti,
-        maxDate,
+        getIsSelectedYear,
+        getIsSelected,
+        year,
         minDate,
-        month,
+        maxDate,
         monthRefs,
         onClick,
-        selectMonthWith,
-        selectedValue,
-        year,
       ],
     )
 

@@ -1,6 +1,7 @@
-const fs = require("fs").promises
-const path = require("path")
-const { findPackages } = require("find-packages")
+import { readdirSync } from "fs"
+import { appendFile, readFile, writeFile } from "fs/promises"
+import path from "path"
+import { findPackages } from "find-packages"
 
 const cwd = process.cwd()
 
@@ -10,23 +11,20 @@ const camelCase = (t) => t.replace(/[-_](\w)/g, (_, c) => c.toUpperCase())
 const dashCase = (t) => t.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase())
 const titleCase = (t) => t.replace(/[-_](\w)/g, (_, c) => " " + c.toUpperCase())
 const descCase = (t) => t.replace(/[-_]/g, " ")
+const validateDashCase = (i) => !/[A-Z]/.test(i) && !/_/.test(i)
 
-const workspaces = [
-  "data-display",
-  "disclosure",
-  "feedback",
-  "forms",
-  "layouts",
-  "motion",
-  "media-and-icons",
-  "navigation",
-  "other",
-  "overlay",
-  "transitions",
-  "typography",
-]
+const components = readdirSync("./packages/components").filter(
+  (n) => !n.includes("."),
+)
+const hooks = readdirSync("./packages/hooks").filter((n) => !n.includes("."))
+const categories = readdirSync("./stories/components").filter(
+  (n) => !n.includes("."),
+)
 
-module.exports = function (plop) {
+export default function plop(
+  /** @type {import('plop').NodePlopAPI} */
+  plop,
+) {
   plop.setHelper("upperCase", (text) => upperCase(camelCase(text)))
   plop.setHelper("titleCase", (text) => upperCase(titleCase(text)))
   plop.setHelper("descCase", (text) => descCase(text))
@@ -47,7 +45,7 @@ module.exports = function (plop) {
 
     project.writeProjectManifest(manifest)
 
-    await fs.appendFile(
+    await appendFile(
       path.join(cwd, "packages", "react", "src", "index.ts"),
       `export * from '@yamada-ui/${dashCase(lowerCase(packageName))}'`,
     )
@@ -58,7 +56,7 @@ module.exports = function (plop) {
 
     const { packageName } = answers
 
-    let data = await fs.readFile(
+    let data = await readFile(
       path.join(cwd, "packages", "theme", "src", "components", "index.ts"),
       "utf8",
     )
@@ -75,7 +73,7 @@ module.exports = function (plop) {
       `\n  ${upperCase(camelCase(packageName))},` +
       data.slice(target)
 
-    await fs.writeFile(
+    await writeFile(
       path.join(cwd, "packages", "theme", "src", "components", "index.ts"),
       data,
     )
@@ -88,13 +86,39 @@ module.exports = function (plop) {
         type: "input",
         name: "packageName",
         message: "Enter component name:",
+        validate: (input) => {
+          if (!input) return "component name is required."
+
+          if (!validateDashCase(input))
+            return `Please enter the component name in kebab case.`
+
+          if (components.includes(input)) return `${input} already exist.`
+
+          return true
+        },
       },
       {
         type: "list",
-        name: "packageType",
-        message: "Where does this belong?:",
+        name: "categoryName",
+        message: "Which category does this belong?:",
         default: "layouts",
-        choices: workspaces,
+        choices: [...categories, "Create new category."],
+      },
+      {
+        type: "input",
+        name: "newCategoryName",
+        message: "Enter category name:",
+        when: ({ categoryName }) => categoryName === "Create new category.",
+        validate: (input) => {
+          if (!input) return "category name is required."
+
+          if (!validateDashCase(input))
+            return `Please enter the category name in kebab case.`
+
+          if (categories.includes(input)) return `${input} already exist.`
+
+          return true
+        },
       },
       {
         type: "list",
@@ -110,7 +134,8 @@ module.exports = function (plop) {
 
       if (!answers) return actions
 
-      const { packageName, packageType, componentType } = answers
+      const { packageName, categoryName, newCategoryName, componentType } =
+        answers
 
       actions.push({
         type: "addMany",
@@ -130,9 +155,9 @@ module.exports = function (plop) {
       actions.push({
         type: "addMany",
         templateFiles: "plop/component/storybook/**",
-        destination: `./stories/components/{{dashCase packageType}}`,
+        destination: `./stories/components/{{dashCase ${newCategoryName ? `newCategoryName` : `categoryName`}}}`,
         base: "plop/component/storybook",
-        data: { packageName, packageType },
+        data: { packageName, categoryName: newCategoryName ?? categoryName },
         abortOnFail: true,
       })
 
@@ -147,7 +172,7 @@ module.exports = function (plop) {
           componentType === "Yes"
             ? "plop/component/theme-multi"
             : "plop/component/theme",
-        data: { packageName },
+        data: { packageName, categoryName: newCategoryName ?? categoryName },
         abortOnFail: true,
       })
 
@@ -170,6 +195,16 @@ module.exports = function (plop) {
         type: "input",
         name: "packageName",
         message: "Enter custom hook name:",
+        validate: (input) => {
+          if (!input) return "custom hook name is required."
+
+          if (!validateDashCase(input))
+            return `Please enter the custom hook name in kebab case.`
+
+          if (hooks.includes(input)) return `${input} already exist.`
+
+          return true
+        },
       },
     ],
 

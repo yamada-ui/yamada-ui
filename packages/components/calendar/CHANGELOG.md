@@ -1,5 +1,28 @@
 # @yamada-ui/calendar
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`b578a69`](https://github.com/yamada-ui/yamada-ui/commit/b578a697c73202ba271352a00b0711f640b18758), [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/popover@1.2.0
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/button@1.0.29
+  - @yamada-ui/form-control@1.1.1
+  - @yamada-ui/icon@1.0.26
+
+## 1.3.0
+
+### Minor Changes
+
+- [#1537](https://github.com/yamada-ui/yamada-ui/pull/1537) [`eba2b77`](https://github.com/yamada-ui/yamada-ui/commit/eba2b77b8a044a8ff75d1aac80a4acbe408bcdda) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `YearPicker` component.
+
+- [#1525](https://github.com/yamada-ui/yamada-ui/pull/1525) [`1b4dedb`](https://github.com/yamada-ui/yamada-ui/commit/1b4dedbf596fb919287fff4f89b849dba9c40d44) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria attributes.
+
+### Patch Changes
+
+- [#1473](https://github.com/yamada-ui/yamada-ui/pull/1473) [`e8010fc`](https://github.com/yamada-ui/yamada-ui/commit/e8010fc3d3e83b92b39aa8c3634f2bd3fe737a94) Thanks [@aojunhao123](https://github.com/aojunhao123)! - improve accessibility support
+
 ## 1.2.15
 
 ### Patch Changes

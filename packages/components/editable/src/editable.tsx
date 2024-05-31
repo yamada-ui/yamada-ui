@@ -23,7 +23,6 @@ import type { PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
-  omitObject,
   runIfFunc,
   useCallbackRef,
   useSafeLayoutEffect,
@@ -95,6 +94,11 @@ export const useEditable = (props: UseEditableProps) => {
   const {
     id,
     placeholder,
+    value: valueProp,
+    onChange: onChangeProp,
+    onCancel: onCancelProp,
+    onSubmit: onSubmitProp,
+    onEdit: onEditProp,
     defaultValue,
     required,
     disabled,
@@ -105,7 +109,8 @@ export const useEditable = (props: UseEditableProps) => {
     selectAllOnFocus = true,
     ...rest
   } = useFormControlProps(props)
-  rest.onEdit = useCallbackRef(rest.onEdit)
+  const onEditRef = useCallbackRef(onEditProp)
+  const formControlProps = pickObject(rest, formControlProperties)
 
   const [isEditing, setIsEditing] = useState<boolean>(
     !!startWithEditView && !disabled,
@@ -113,8 +118,8 @@ export const useEditable = (props: UseEditableProps) => {
 
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue || "",
-    value: rest.value,
-    onChange: rest.onChange,
+    value: valueProp,
+    onChange: onChangeProp,
   })
 
   const isInteractive = !isEditing && !disabled
@@ -153,8 +158,8 @@ export const useEditable = (props: UseEditableProps) => {
 
     if (selectAllOnFocus) inputRef.current?.select()
 
-    rest.onEdit?.()
-  }, [isEditing, rest.onEdit, selectAllOnFocus])
+    onEditRef()
+  }, [isEditing, onEditRef, selectAllOnFocus])
 
   useEffect(() => {
     if (isEditing) return
@@ -180,14 +185,14 @@ export const useEditable = (props: UseEditableProps) => {
   const onCancel = useCallback(() => {
     setIsEditing(false)
     setValue(prevValue)
-    rest.onCancel?.(prevValue)
-  }, [prevValue, rest, setValue])
+    onCancelProp?.(prevValue)
+  }, [prevValue, onCancelProp, setValue])
 
   const onSubmit = useCallback(() => {
     setIsEditing(false)
     setPrevValue(value)
-    rest.onSubmit?.(value)
-  }, [rest, value])
+    onSubmitProp?.(value)
+  }, [onSubmitProp, value])
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<Element>) => {
@@ -261,7 +266,7 @@ export const useEditable = (props: UseEditableProps) => {
 
   const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(ref, inputRef),
       id,
@@ -287,14 +292,14 @@ export const useEditable = (props: UseEditableProps) => {
       placeholder,
       readOnly,
       required,
-      rest,
+      formControlProps,
       value,
     ],
   )
 
   const getTextareaProps: UIPropGetter<"textarea"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(ref, inputRef),
       id,
@@ -320,66 +325,48 @@ export const useEditable = (props: UseEditableProps) => {
       placeholder,
       readOnly,
       required,
-      rest,
+      formControlProps,
       value,
     ],
   )
 
   const getEditProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...formControlProps,
       ...props,
-      ...omitObject(rest, [
-        "value",
-        "onChange",
-        "onCancel",
-        "onSubmit",
-        "onEdit",
-      ]),
       ref: mergeRefs(ref, editRef),
       type: "button",
       disabled,
       readOnly,
       onClick: handlerAll(props.onClick, onEdit),
     }),
-    [disabled, onEdit, readOnly, rest],
+    [disabled, onEdit, readOnly, formControlProps],
   )
 
   const getSubmitProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...formControlProps,
       ...props,
-      ...omitObject(rest, [
-        "value",
-        "onChange",
-        "onCancel",
-        "onSubmit",
-        "onEdit",
-      ]),
       ref: mergeRefs(submitRef, ref),
       type: "button",
       disabled,
       readOnly,
       onClick: handlerAll(props.onClick, onSubmit),
     }),
-    [disabled, onSubmit, readOnly, rest],
+    [disabled, onSubmit, readOnly, formControlProps],
   )
 
   const getCancelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      ...formControlProps,
       ...props,
-      ...omitObject(rest, [
-        "value",
-        "onChange",
-        "onCancel",
-        "onSubmit",
-        "onEdit",
-      ]),
       ref: mergeRefs(cancelRef, ref),
       type: "button",
       disabled,
       readOnly,
       onClick: handlerAll(props.onClick, onCancel),
     }),
-    [disabled, onCancel, readOnly, rest],
+    [disabled, onCancel, readOnly, formControlProps],
   )
 
   return {
@@ -423,6 +410,13 @@ const [EditableProvider, useEditableContext] = createContext<EditableContext>({
     "useEditableContext: context is undefined. Seems you forgot to wrap the editable components in `<Editable />`",
 })
 
+type EditableElementProps = Pick<
+  UseEditableReturn,
+  "isEditing" | "onSubmit" | "onCancel" | "onEdit"
+>
+
+type EditableElement = (props: EditableElementProps) => ReactNode
+
 type EditableOptions = {
   /**
    * The border color when the input is focused.
@@ -432,14 +426,7 @@ type EditableOptions = {
    * The border color when the input is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  children?:
-    | ReactNode
-    | ((
-        props: Pick<
-          UseEditableReturn,
-          "isEditing" | "onSubmit" | "onCancel" | "onEdit"
-        >,
-      ) => ReactNode)
+  children?: ReactNode | EditableElement
 }
 
 export type EditableProps = Omit<
@@ -462,7 +449,26 @@ export const Editable = forwardRef<EditableProps, "div">(
       errorBorderColor,
       ...props,
     })
-    const { className, children, ...rest } = omitThemeProps(mergedProps)
+    const {
+      className,
+      children,
+      isInvalid,
+      isReadOnly,
+      isRequired,
+      isDisabled,
+      placeholder,
+      value,
+      defaultValue,
+      startWithEditView,
+      isPreviewFocusable,
+      submitOnBlur,
+      selectAllOnFocus,
+      onChange,
+      onCancel: onCancelProp,
+      onSubmit: onSubmitProp,
+      onEdit: onEditProp,
+      ...rest
+    } = omitThemeProps(mergedProps)
     const {
       isEditing,
       getPreviewProps,
@@ -474,7 +480,23 @@ export const Editable = forwardRef<EditableProps, "div">(
       onSubmit,
       onCancel,
       onEdit,
-    } = useEditable(rest)
+    } = useEditable({
+      isInvalid,
+      isReadOnly,
+      isRequired,
+      isDisabled,
+      placeholder,
+      value,
+      defaultValue,
+      startWithEditView,
+      isPreviewFocusable,
+      submitOnBlur,
+      selectAllOnFocus,
+      onChange,
+      onCancel: onCancelProp,
+      onSubmit: onSubmitProp,
+      onEdit: onEditProp,
+    })
 
     const cloneChildren = runIfFunc(children, {
       isEditing,
@@ -501,23 +523,7 @@ export const Editable = forwardRef<EditableProps, "div">(
         <ui.div
           ref={ref}
           className={cx("ui-editable", className)}
-          {...omitObject(rest, [
-            "placeholder",
-            "value",
-            "defaultValue",
-            "isInvalid",
-            "isReadOnly",
-            "isRequired",
-            "isDisabled",
-            "startWithEditView",
-            "isPreviewFocusable",
-            "submitOnBlur",
-            "selectAllOnFocus",
-            "onChange",
-            "onCancel",
-            "onSubmit",
-            "onEdit",
-          ])}
+          {...rest}
           __css={css}
         >
           {cloneChildren}

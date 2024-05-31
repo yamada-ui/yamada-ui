@@ -1,5 +1,26 @@
 # @yamada-ui/theme
 
+## 1.8.0
+
+### Minor Changes
+
+- [#1639](https://github.com/yamada-ui/yamada-ui/pull/1639) [`0005796`](https://github.com/yamada-ui/yamada-ui/commit/000579678d1317d5a901cc79eed26d017cfc764d) Thanks [@suzukisan22](https://github.com/suzukisan22)! - Added `ContextMenu` component styles.
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+
+## 1.7.0
+
+### Minor Changes
+
+- [#1537](https://github.com/yamada-ui/yamada-ui/pull/1537) [`bdd263a`](https://github.com/yamada-ui/yamada-ui/commit/bdd263a17b709a3bf98f0706d71f8c9c7651d0a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `YearPicker` component style.
+
+### Patch Changes
+
+- [#1591](https://github.com/yamada-ui/yamada-ui/pull/1591) [`be74307`](https://github.com/yamada-ui/yamada-ui/commit/be74307a86508b1407be388d3e2b03130f344430) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the clear button of `MultiSelect` could be clicked when `isReadOnly` was `true`.
+
 ## 1.6.3
 
 ### Patch Changes

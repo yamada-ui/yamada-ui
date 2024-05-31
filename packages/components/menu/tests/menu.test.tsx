@@ -169,6 +169,51 @@ describe("<Menu />", () => {
     )
   })
 
+  test("should update value with menu option group", async () => {
+    render(
+      <Menu placement="right-start">
+        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuList>
+          <MenuOptionGroup
+            data-testid="MenuOptionGroup-a"
+            label="item"
+            type="radio"
+          >
+            <MenuOptionItem data-testid="MenuOptionItemRadio">
+              Add item
+            </MenuOptionItem>
+            <MenuOptionItem>Edit item</MenuOptionItem>
+          </MenuOptionGroup>
+
+          <MenuOptionGroup
+            type="checkbox"
+            label="order"
+            defaultValue={["desc"]}
+          >
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-a" value="asc">
+              Ascending
+            </MenuOptionItem>
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-b" value="desc">
+              Descending
+            </MenuOptionItem>
+          </MenuOptionGroup>
+        </MenuList>
+      </Menu>,
+    )
+
+    const radioItem = screen.getByTestId("MenuOptionItemRadio")
+    await act(() => fireEvent.click(radioItem))
+    expect(radioItem).toHaveAttribute("aria-checked", "true")
+
+    const checkboxItemA = screen.getByTestId("MenuOptionItemCheckbox-a")
+    await act(() => fireEvent.click(checkboxItemA))
+    expect(checkboxItemA).toHaveAttribute("aria-checked", "true")
+
+    const checkboxItemB = screen.getByTestId("MenuOptionItemCheckbox-b")
+    await act(() => fireEvent.click(checkboxItemB))
+    expect(checkboxItemB).not.toHaveAttribute("aria-checked")
+  })
+
   test("should disable the menu item", () => {
     render(
       <Menu>
@@ -189,7 +234,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowDown", async () => {
-    const { getByRole } = render(
+    const { user, getByRole } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -200,15 +245,16 @@ describe("<Menu />", () => {
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
+    // focus the menu button
+    menuButton.focus()
+    // ArrowDown on the MenuButton
+    await user.keyboard("[ArrowDown]")
 
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
     expect(screen.getByText("Add item")).toHaveFocus()
   })
 
   test("keydown events for ArrowUp", async () => {
-    const { getByRole } = render(
+    const { user, getByRole } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -220,14 +266,16 @@ describe("<Menu />", () => {
 
     const menuButton = getByRole("button", { name: "Menu" })
 
-    fireEvent.focus(menuButton)
+    // focus the menu button
+    menuButton.focus()
+    // ArrowUp on the MenuButton
+    await user.keyboard("[ArrowUp]")
 
-    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowUp" }))
     expect(screen.getByText("Edit item")).toHaveFocus()
   })
 
   test("keydown events for Enter", async () => {
-    const { getByRole } = render(
+    const { user, getByRole } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -238,10 +286,11 @@ describe("<Menu />", () => {
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
+    // focus the menu button
+    menuButton.focus()
+    // Enter on the MenuButton
+    await user.keyboard("[Enter]")
 
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "Enter" }))
     expect(screen.getByText("Add item")).toHaveFocus()
   })
 

@@ -2,7 +2,6 @@
 title: LineChart
 description: "`LineChart`は、複数のデータを比較するためのラインチャートを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
-label: New
 with_description: true
 tab: Props
 ---
@@ -253,3 +252,37 @@ tab: Props
   type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
 />
+
+### LineProps
+
+<PropsCard
+  id="line-activedot"
+  name="activeDot"
+  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+/>
+
+<PropsCard
+  id="line-color"
+  name="color"
+  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+/>
+
+<PropsCard
+  id="line-dimdot"
+  name="dimDot"
+  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+/>
+
+<PropsCard
+  id="line-dimline"
+  name="dimLine"
+  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
+/>
+
+<PropsCard
+  id="line-dot"
+  name="dot"
+  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+/>
+
+### DotProps

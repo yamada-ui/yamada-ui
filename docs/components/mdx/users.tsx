@@ -5,7 +5,7 @@ import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
 import type { FC } from "react"
 
-export type MemberProps = StackProps &
+export type UserProps = StackProps &
   Pick<AvatarProps, "name"> & {
     icon?: string
     description: string
@@ -13,7 +13,7 @@ export type MemberProps = StackProps &
     twitter?: string
   }
 
-export const Member: FC<MemberProps> = ({
+export const User: FC<UserProps> = ({
   name,
   icon,
   description,
@@ -72,9 +72,9 @@ export const Member: FC<MemberProps> = ({
   )
 }
 
-export type MembersProps = GridProps
+export type UsersProps = GridProps
 
-export const Members: FC<MembersProps> = ({ ...rest }) => {
+export const Users: FC<UsersProps> = ({ ...rest }) => {
   const { locale } = useI18n()
   return (
     <Grid
@@ -83,9 +83,9 @@ export const Members: FC<MembersProps> = ({ ...rest }) => {
       gap="6"
       {...rest}
     >
-      {CONSTANT.CORE_MEMBERS.map(
+      {CONSTANT.MAINTAINERS.map(
         ({ id, name, icon, description, github, twitter }) => (
-          <Member
+          <User
             key={id}
             name={name[locale]}
             icon={icon}

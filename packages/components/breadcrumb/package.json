@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/breadcrumb",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Yamada UI breadcrumb component",
   "keywords": [
     "yamada",
@@ -48,7 +48,8 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/icon": "workspace:*"
+    "@yamada-ui/icon": "workspace:*",
+    "@yamada-ui/use-value": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",

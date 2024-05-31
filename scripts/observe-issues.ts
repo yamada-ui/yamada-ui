@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { isObject } from "@yamada-ui/react"
 import { config } from "dotenv"
+import { recursiveOctokit } from "./utils"
 
 type Issue = Awaited<
   ReturnType<typeof octokit.issues.listForRepo>
@@ -36,10 +37,12 @@ config()
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 const getCollaborators = async () => {
-  const { data } = await octokit.repos.listCollaborators({
-    ...COMMON_PARAMS,
-    per_page: 100,
-  })
+  const { data } = await recursiveOctokit(() =>
+    octokit.repos.listCollaborators({
+      ...COMMON_PARAMS,
+      per_page: 100,
+    }),
+  )
 
   return data
 }
@@ -50,7 +53,7 @@ const getIssues = async () => {
   let count = 0
   const perPage = 100
 
-  do {
+  const listForRepo = async () => {
     const { data } = await octokit.issues.listForRepo({
       ...COMMON_PARAMS,
       state: "open",
@@ -62,8 +65,14 @@ const getIssues = async () => {
 
     count = data.length
 
-    page++
-  } while (count === perPage)
+    if (count === perPage) {
+      page++
+
+      await recursiveOctokit(listForRepo)
+    }
+  }
+
+  await recursiveOctokit(listForRepo)
 
   issues = issues.filter(({ pull_request }) => !pull_request)
 
@@ -71,10 +80,12 @@ const getIssues = async () => {
 }
 
 const getPullRequestEvents = async (issue_number: number) => {
-  const { data } = await octokit.issues.listEventsForTimeline({
-    ...COMMON_PARAMS,
-    issue_number,
-  })
+  const { data } = await recursiveOctokit(() =>
+    octokit.issues.listEventsForTimeline({
+      ...COMMON_PARAMS,
+      issue_number,
+    }),
+  )
 
   const pullRequestEvents = data.filter(
     ({ event, ...rest }) =>
@@ -127,11 +138,13 @@ const addHelpWantedLabel = async (issues: Issue[]) => {
 
         if (hasPullRequest) return
 
-        await octokit.issues.addLabels({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          labels: ["help wanted"],
-        })
+        await recursiveOctokit(() =>
+          octokit.issues.addLabels({
+            ...COMMON_PARAMS,
+            issue_number: number,
+            labels: ["help wanted"],
+          }),
+        )
 
         console.log("Added label", number, title)
 
@@ -157,10 +170,12 @@ const sendDiscordChannel = async (url: string, content: string) => {
 }
 
 const getAssignedEvent = async (issue_number: number) => {
-  const { data } = await octokit.issues.listEvents({
-    ...COMMON_PARAMS,
-    issue_number,
-  })
+  const { data } = await recursiveOctokit(() =>
+    octokit.issues.listEvents({
+      ...COMMON_PARAMS,
+      issue_number,
+    }),
+  )
 
   const assignedEvents = data.filter(({ event }) => event === "assigned")
 
@@ -194,17 +209,21 @@ const clearAssignIssues = async (
 
       if (hasPullRequest) return
 
-      await octokit.issues.createComment({
-        ...COMMON_PARAMS,
-        issue_number: number,
-        body: INFORMATION_COMMENT(assignee.login),
-      })
+      await recursiveOctokit(() =>
+        octokit.issues.createComment({
+          ...COMMON_PARAMS,
+          issue_number: number,
+          body: INFORMATION_COMMENT(assignee.login),
+        }),
+      )
 
-      await octokit.issues.removeAssignees({
-        ...COMMON_PARAMS,
-        issue_number: number,
-        assignees: [assignee.login],
-      })
+      await recursiveOctokit(() =>
+        octokit.issues.removeAssignees({
+          ...COMMON_PARAMS,
+          issue_number: number,
+          assignees: [assignee.login],
+        }),
+      )
 
       console.log("Clear assignees", number, title)
 

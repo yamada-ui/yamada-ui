@@ -126,7 +126,7 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   const rest = useClickable({ ref, ...(props as HTMLAttributes<HTMLElement>) })
 
   return (
-    <ui.span aria-label="close" __css={css} {...rest}>
+    <ui.span aria-label="Close tag" __css={css} {...rest}>
       {children}
     </ui.span>
   )

@@ -1,5 +1,22 @@
 # @yamada-ui/theme-tools
 
+## 1.0.33
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842), [`0005796`](https://github.com/yamada-ui/yamada-ui/commit/000579678d1317d5a901cc79eed26d017cfc764d)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/theme@1.8.0
+
+## 1.0.32
+
+### Patch Changes
+
+- [#1516](https://github.com/yamada-ui/yamada-ui/pull/1516) [`9060bc5`](https://github.com/yamada-ui/yamada-ui/commit/9060bc524dc2379c64b00b240432a9d1a86917f6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed parameter in `extendConfig` function.
+
+- Updated dependencies [[`bdd263a`](https://github.com/yamada-ui/yamada-ui/commit/bdd263a17b709a3bf98f0706d71f8c9c7651d0a5), [`be74307`](https://github.com/yamada-ui/yamada-ui/commit/be74307a86508b1407be388d3e2b03130f344430)]:
+  - @yamada-ui/theme@1.7.0
+
 ## 1.0.31
 
 ### Patch Changes

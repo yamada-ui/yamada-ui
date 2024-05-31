@@ -33,8 +33,6 @@ export type UseSwipeableOptions = {
     }
   >[]
   //NOTE: UIValue<"number">
-  maxLeftSwipe?: number
-  maxRightSwipe?: number
   leftActionProps?: CSSUIProps
   /**
    * Specifies how much the visual interaction is elastic compared to the distance of the drag..
@@ -131,8 +129,8 @@ export const useSwipeable = ({
   // onSwipeableClose,
   // onSwipeableWillOpen,
   // onSwipeableWillClose,
-  maxLeftSwipe,
-  maxRightSwipe,
+  dragOffsetFromLeftEdge,
+  dragOffsetFromRightEdge,
   styles,
 }: UseSwipeableProps) => {
   const [direction, setDirection] = useState<SwipeableDirection>("none")
@@ -148,9 +146,9 @@ export const useSwipeable = ({
   let animateTranslateX: number
 
   if (direction === "right") {
-    animateTranslateX = maxLeftSwipe ?? width
+    animateTranslateX = dragOffsetFromLeftEdge ?? width
   } else if (direction === "left") {
-    animateTranslateX = -(maxRightSwipe ?? width)
+    animateTranslateX = -(dragOffsetFromRightEdge ?? width)
   } else {
     animateTranslateX = 0
   }
@@ -161,7 +159,8 @@ export const useSwipeable = ({
       const delta = x + translateX
 
       if (delta > 0) {
-        if (maxLeftSwipe && delta > maxLeftSwipe) return maxLeftSwipe
+        if (dragOffsetFromLeftEdge && delta > dragOffsetFromLeftEdge)
+          return dragOffsetFromLeftEdge
 
         return delta
       }
@@ -175,7 +174,8 @@ export const useSwipeable = ({
     ([x, translateX]: number[]) => {
       const delta = x + translateX
       if (delta < 0) {
-        if (maxRightSwipe && -delta > maxRightSwipe) return maxRightSwipe
+        if (dragOffsetFromRightEdge && -delta > dragOffsetFromRightEdge)
+          return dragOffsetFromRightEdge
 
         return -delta
       }

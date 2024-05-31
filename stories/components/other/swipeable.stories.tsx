@@ -71,7 +71,7 @@ export const basic: Story = () => {
   )
 }
 
-export const setSwipeLimit: Story = () => {
+export const dragOffset: Story = () => {
   const renderLeftAction = [
     {
       children: () => (
@@ -109,8 +109,8 @@ export const setSwipeLimit: Story = () => {
 
   return (
     <Swipeable
-      maxLeftSwipe={200}
-      maxRightSwipe={100}
+      dragOffsetFromLeftEdge={200}
+      dragOffsetFromRightEdge={100}
       renderLeftActions={renderLeftAction}
       renderRightActions={renderRightAction}
     >
@@ -191,7 +191,7 @@ export const multiActions: Story = () => {
 
   return (
     <Swipeable
-      maxLeftSwipe={200}
+      dragOffsetFromLeftEdge={200}
       renderLeftActions={renderLeftActions}
       renderRightActions={renderRightActions}
     >

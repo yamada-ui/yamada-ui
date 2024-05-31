@@ -37,8 +37,6 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     onSwipeableClose,
     onSwipeableWillOpen,
     onSwipeableWillClose,
-    maxLeftSwipe,
-    maxRightSwipe,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -63,8 +61,6 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     onSwipeableClose,
     onSwipeableWillOpen,
     onSwipeableWillClose,
-    maxLeftSwipe,
-    maxRightSwipe,
     styles,
   })
 

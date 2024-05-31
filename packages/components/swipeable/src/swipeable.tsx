@@ -75,7 +75,11 @@ export const Swipeable = forwardRef<SwipeableProps, "div">((props, ref) => {
     <ui.div
       className={cx(className, "")}
       position="relative"
-      __css={{ px: "normal", py: "normal", ...styles.container }}
+      __css={{
+        px: "normal",
+        py: "normal",
+        ...styles.container,
+      }}
       {...rest}
     >
       <motion.div {...getSwipeableProps({ className: "ui-swipeable" }, ref)}>

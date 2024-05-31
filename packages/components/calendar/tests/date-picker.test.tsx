@@ -8,6 +8,7 @@ describe("<DatePicker />", () => {
   })
 
   test("should change selected date", async () => {
+    vi.useFakeTimers()
     const { container } = render(
       <DatePicker
         placeholder="basic"
@@ -23,9 +24,11 @@ describe("<DatePicker />", () => {
     fireEvent.click(selectBtn!)
 
     expect(selectBtn).toHaveAttribute("data-selected")
+    vi.useRealTimers()
   })
 
   test("whether Calendar is displayed when DatePicker is focused", async () => {
+    vi.useFakeTimers()
     const { container } = render(
       <DatePicker
         placeholder="basic"
@@ -39,5 +42,6 @@ describe("<DatePicker />", () => {
     fireEvent.focus(screen.getByPlaceholderText("basic"))
 
     expect(popover).toHaveStyle({ visibility: "visible" })
+    vi.useRealTimers()
   })
 })

@@ -77,19 +77,11 @@ export type UseSwipeableOptions = {
   /**
    * Called when action panel gets open.
    */
-  onSwipeableOpen?: () => void
+  onSwipeableOpen?: (direction: SwipeableDirection) => void
   /**
    * Called when action panel is closed.
    */
-  onSwipeableClose?: () => void
-  /**
-   * Called when action panel starts animating on open.
-   */
-  onSwipeableWillOpen?: () => void
-  /**
-   * Called when action panel starts animating on close.
-   */
-  onSwipeableWillClose?: () => void
+  onSwipeableClose?: (direction: SwipeableDirection) => void
   /**
    * Method that closes component.
    */
@@ -125,15 +117,14 @@ export const useSwipeable = ({
   // overshootFriction,
   // overshootLeft = true,
   // overshootRight = true,
-  // onSwipeableOpen,
-  // onSwipeableClose,
-  // onSwipeableWillOpen,
-  // onSwipeableWillClose,
+  onSwipeableOpen,
+  onSwipeableClose,
   dragOffsetFromLeftEdge,
   dragOffsetFromRightEdge,
   styles,
 }: UseSwipeableProps) => {
   const [direction, setDirection] = useState<SwipeableDirection>("none")
+  const preDirection = useRef<SwipeableDirection>("none")
   const componentRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const translateX = useMotionValue(0)
@@ -147,10 +138,19 @@ export const useSwipeable = ({
 
   if (direction === "right") {
     animateTranslateX = dragOffsetFromLeftEdge ?? width
+    onSwipeableOpen?.(direction)
+
+    preDirection.current = direction
   } else if (direction === "left") {
     animateTranslateX = -(dragOffsetFromRightEdge ?? width)
+    onSwipeableOpen?.(direction)
+
+    preDirection.current = direction
   } else {
     animateTranslateX = 0
+    onSwipeableClose?.(preDirection.current)
+
+    preDirection.current = direction
   }
 
   const leftActionsWidth = useTransform(
@@ -173,6 +173,7 @@ export const useSwipeable = ({
     [x, translateX],
     ([x, translateX]: number[]) => {
       const delta = x + translateX
+
       if (delta < 0) {
         if (dragOffsetFromRightEdge && -delta > dragOffsetFromRightEdge)
           return dragOffsetFromRightEdge

@@ -262,6 +262,57 @@ export const threshold: Story = () => {
   )
 }
 
-export const customSwipe: Story = () => {
-  return <></>
+export const onSwipeableOpen: Story = () => {
+  const renderLeftAction = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="green.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+          px={4}
+        >
+          <Text>left</Text>
+        </Box>
+      ),
+    },
+  ]
+  const renderRightAction = [
+    {
+      children: () => (
+        <Box
+          h="100%"
+          w="100%"
+          background="red.500"
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-start"
+          px={4}
+        >
+          <Text textAlign="center">right</Text>
+        </Box>
+      ),
+    },
+  ]
+
+  return (
+    <Swipeable
+      onSwipeableOpen={(direction) => console.log(`swipe to ${direction}`)}
+      onSwipeableClose={(direction) => console.log(`close from ${direction}`)}
+      renderLeftActions={renderLeftAction}
+      renderRightActions={renderRightAction}
+    >
+      <Card size="sm">
+        <CardHeader>
+          <Heading size="md">title</Heading>
+        </CardHeader>
+        <CardBody>
+          <Text>body</Text>
+        </CardBody>
+      </Card>
+    </Swipeable>
+  )
 }

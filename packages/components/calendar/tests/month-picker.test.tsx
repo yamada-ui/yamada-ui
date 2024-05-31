@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render } from "@yamada-ui/test"
+import { a11y, fireEvent, render } from "@yamada-ui/test"
 import { MonthPicker } from "../src"
 
 describe("<MonthPicker />", () => {
@@ -14,9 +14,7 @@ describe("<MonthPicker />", () => {
 
     const selectBtn = container.querySelector(`button[data-value="1"]`)
 
-    act(() => {
-      fireEvent.click(selectBtn!)
-    })
+    fireEvent.click(selectBtn!)
 
     expect(selectBtn).toHaveAttribute("data-selected")
   })

@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { DatePicker } from "../src"
 
 describe("<DatePicker />", () => {
@@ -20,9 +20,7 @@ describe("<DatePicker />", () => {
     const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
     const selectBtn = container.querySelector(`button[data-value="${dateStr}"]`)
 
-    act(() => {
-      fireEvent.click(selectBtn!)
-    })
+    fireEvent.click(selectBtn!)
 
     expect(selectBtn).toHaveAttribute("data-selected")
   })
@@ -38,10 +36,8 @@ describe("<DatePicker />", () => {
 
     const popover = container.querySelector(".ui-popover")
 
-    act(() => {
-      fireEvent.focus(screen.getByPlaceholderText("basic"))
-    })
+    fireEvent.focus(screen.getByPlaceholderText("basic"))
 
-    expect(popover).toHaveStyle("visibility: visible;")
+    expect(popover).toHaveStyle({ visibility: "visible" })
   })
 })

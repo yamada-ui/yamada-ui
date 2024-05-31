@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render } from "@yamada-ui/test"
+import { a11y, fireEvent, render } from "@yamada-ui/test"
 import { RangeDatePicker } from "../src"
 
 describe("<RangeDatePicker />", () => {
@@ -21,9 +21,7 @@ describe("<RangeDatePicker />", () => {
       `button[data-value="${dateStrFrom}"]`,
     )
 
-    act(() => {
-      fireEvent.click(selectBtnFrom!)
-    })
+    fireEvent.click(selectBtnFrom!)
 
     expect(selectBtnFrom).toHaveAttribute("data-selected")
 
@@ -33,9 +31,7 @@ describe("<RangeDatePicker />", () => {
       `button[data-value="${dateStrTo}"]`,
     )
 
-    act(() => {
-      fireEvent.click(selectBtnTo!)
-    })
+    fireEvent.click(selectBtnTo!)
 
     expect(selectBtnTo).toHaveAttribute("data-selected")
   })

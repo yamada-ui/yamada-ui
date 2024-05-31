@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render } from "@yamada-ui/test"
+import { a11y, fireEvent, render } from "@yamada-ui/test"
 import { MultiDatePicker } from "../src"
 
 describe("<MultiDatePicker />", () => {
@@ -19,9 +19,7 @@ describe("<MultiDatePicker />", () => {
     const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
     const selectBtn = container.querySelector(`button[data-value="${dateStr}"]`)
 
-    act(() => {
-      fireEvent.click(selectBtn!)
-    })
+    fireEvent.click(selectBtn!)
 
     expect(selectBtn).toHaveAttribute("data-selected")
 
@@ -33,9 +31,7 @@ describe("<MultiDatePicker />", () => {
       `button[data-value="${dateStrSecond}"]`,
     )
 
-    act(() => {
-      fireEvent.click(selectBtnSecond!)
-    })
+    fireEvent.click(selectBtnSecond!)
 
     expect(selectBtnSecond).toHaveAttribute("data-selected")
   })

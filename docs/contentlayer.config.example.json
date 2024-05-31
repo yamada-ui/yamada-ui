@@ -1,0 +1,14 @@
+{
+  "contentDirInclude": ["components/**"],
+  "contentDirExclude": [
+    "changelog/**",
+    "node_modules",
+    ".git",
+    ".yarn",
+    ".cache",
+    ".next",
+    ".contentlayer",
+    "package.json",
+    "tsconfig.json"
+  ]
+}

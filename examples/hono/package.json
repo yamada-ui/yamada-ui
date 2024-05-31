@@ -24,8 +24,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@hono/vite-dev-server": "^0.10.0",
-    "@types/node": "^20.12.5",
+    "@hono/vite-dev-server": "^0.12.1",
+    "@types/node": "^20.12.13",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
     "vite": "^5.2.8"

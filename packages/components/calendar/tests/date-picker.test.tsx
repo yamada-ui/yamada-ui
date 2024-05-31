@@ -3,8 +3,7 @@ import { DatePicker } from "../src"
 
 describe("<DatePicker />", () => {
   test("DatePicker renders correctly", async () => {
-    const { container } = render(<DatePicker placeholder="basic" />)
-    await a11y(container)
+    await a11y(<DatePicker placeholder="basic" />)
   })
 
   test("should change selected date", async () => {

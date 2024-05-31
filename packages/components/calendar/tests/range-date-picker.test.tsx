@@ -3,8 +3,7 @@ import { RangeDatePicker } from "../src"
 
 describe("<RangeDatePicker />", () => {
   test("RangeDatePicker renders correctly", async () => {
-    const { container } = render(<RangeDatePicker placeholder="basic" />)
-    await a11y(container)
+    await a11y(<RangeDatePicker placeholder="basic" />)
   })
 
   test("should render dates of range", async () => {

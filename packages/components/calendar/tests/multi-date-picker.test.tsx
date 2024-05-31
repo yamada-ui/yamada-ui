@@ -3,8 +3,7 @@ import { MultiDatePicker } from "../src"
 
 describe("<MultiDatePicker />", () => {
   test("MultiDatePicker renders correctly", async () => {
-    const { container } = render(<MultiDatePicker placeholder="basic" />)
-    await a11y(container)
+    await a11y(<MultiDatePicker placeholder="basic" />)
   })
 
   test("should change selected dates", async () => {

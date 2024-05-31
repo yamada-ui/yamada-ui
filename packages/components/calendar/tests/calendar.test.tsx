@@ -3,8 +3,7 @@ import { Calendar } from "../src"
 
 describe("<Calendar />", () => {
   test("Calendar renders correctly", async () => {
-    const { container } = render(<Calendar />)
-    await a11y(container)
+    await a11y(<Calendar />)
   })
 
   test("should change selected date", async () => {

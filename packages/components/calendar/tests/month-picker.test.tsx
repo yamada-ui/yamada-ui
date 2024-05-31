@@ -3,8 +3,7 @@ import { MonthPicker } from "../src"
 
 describe("<MonthPicker />", () => {
   test("MonthPicker renders correctly", async () => {
-    const { container } = render(<MonthPicker placeholder="basic" />)
-    await a11y(container)
+    await a11y(<MonthPicker placeholder="basic" />)
   })
 
   test("should change selected Month", async () => {

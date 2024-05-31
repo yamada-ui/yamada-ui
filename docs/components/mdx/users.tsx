@@ -72,10 +72,14 @@ export const User: FC<UserProps> = ({
   )
 }
 
-export type UsersProps = GridProps
+export type UsersProps = GridProps & { type: "maintainers" | "members" }
 
-export const Users: FC<UsersProps> = ({ ...rest }) => {
+export const Users: FC<UsersProps> = ({ type, ...rest }) => {
   const { locale } = useI18n()
+
+  const users =
+    type === "maintainers" ? CONSTANT.TEAM.MAINTAINERS : CONSTANT.TEAM.MEMBERS
+
   return (
     <Grid
       my="6"
@@ -83,18 +87,16 @@ export const Users: FC<UsersProps> = ({ ...rest }) => {
       gap="6"
       {...rest}
     >
-      {CONSTANT.MAINTAINERS.map(
-        ({ id, name, icon, description, github, twitter }) => (
-          <User
-            key={id}
-            name={name[locale]}
-            icon={icon}
-            description={description[locale]}
-            github={github}
-            twitter={twitter}
-          />
-        ),
-      )}
+      {users.map(({ id, name, icon, description, github, twitter }) => (
+        <User
+          key={id}
+          name={name[locale]}
+          icon={icon}
+          description={description[locale]}
+          github={github}
+          twitter={twitter}
+        />
+      ))}
     </Grid>
   )
 }

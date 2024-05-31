@@ -209,7 +209,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     ...rest
   } = useFormControlProps(props)
 
-  locale ??= theme.__config.date?.locale ?? "en"
+  locale ??= theme.__config?.date?.locale ?? "en"
 
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,

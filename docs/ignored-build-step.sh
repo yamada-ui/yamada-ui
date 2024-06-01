@@ -4,11 +4,6 @@ echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
 
 TARGET_BRANCH="main"
 
-if [ ! -d "./docs" ]; then
-  echo "Run was canceled because './docs' directory does not exist."
-  exit 0
-fi
-
 if [ "$VERCEL_GIT_COMMIT_REF" == "$TARGET_BRANCH" ]; then
   echo "Run because the committed branch is '$TARGET_BRANCH'."
   exit 1

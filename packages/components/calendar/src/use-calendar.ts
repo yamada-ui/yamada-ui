@@ -329,7 +329,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
 }: UseCalendarProps<Y>) => {
   const { theme } = useTheme()
 
-  locale ??= theme.__config.date?.locale ?? "en"
+  locale ??= theme.__config?.date?.locale ?? "en"
 
   const [type, onChangeType] = useControllableState({
     value: typeProp,

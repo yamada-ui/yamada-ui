@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { FileInput } from "../src"
 
 describe("<FileInput />", () => {
@@ -137,9 +137,7 @@ describe("<FileInput />", () => {
 
     expect(resetRef).toBeTruthy()
     expect(typeof resetRef.current).toBe("function")
-    act(() => {
-      resetRef.current && resetRef.current()
-    })
+    resetRef.current && resetRef.current()
     expect(files).toBeFalsy()
     expect(setFiles).toHaveBeenCalledTimes(2)
   })

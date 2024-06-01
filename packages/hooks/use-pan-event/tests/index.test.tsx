@@ -1,4 +1,4 @@
-import { render } from "@yamada-ui/test"
+import { render, waitFor } from "@yamada-ui/test"
 import type { FC } from "react"
 import { useRef } from "react"
 import type { UsePanEventProps } from "../src"
@@ -69,9 +69,11 @@ describe("usePanEvent", () => {
       coords: { x: 0, y: 0 },
     })
 
-    expect(onSessionStart).toHaveBeenCalledWith(
-      expect.any(Object),
-      expect.any(Object),
+    await waitFor(() =>
+      expect(onSessionStart).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      ),
     )
     expect(onSessionStart.mock.calls[0][1]).toMatchObject({
       point: { x: 0, y: 0 },
@@ -90,7 +92,12 @@ describe("usePanEvent", () => {
 
     await user.pointer(pointerInput(el))
 
-    expect(onStart).toHaveBeenCalledWith(expect.any(Object), expect.any(Object))
+    await waitFor(() =>
+      expect(onStart).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      ),
+    )
     const { point } = onStart.mock.calls[0][1]
     expect(point.x).toBeGreaterThanOrEqual(10)
     expect(point.x).toBeLessThanOrEqual(100)
@@ -107,7 +114,12 @@ describe("usePanEvent", () => {
 
     await user.pointer(pointerInput(el))
 
-    expect(onMove).toHaveBeenCalledWith(expect.any(Object), expect.any(Object))
+    await waitFor(() =>
+      expect(onMove).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      ),
+    )
     const { point } = onMove.mock.calls[0][1]
     expect(point.x).toBeGreaterThanOrEqual(10)
     expect(point.x).toBeLessThanOrEqual(100)
@@ -124,7 +136,12 @@ describe("usePanEvent", () => {
 
     await user.pointer(pointerInput(el))
 
-    expect(onEnd).toHaveBeenCalledWith(expect.any(Object), expect.any(Object))
+    await waitFor(() =>
+      expect(onEnd).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      ),
+    )
     const { point } = onEnd.mock.calls[0][1]
     expect(point.x).toBeGreaterThanOrEqual(100)
     expect(point.y).toBeGreaterThanOrEqual(100)
@@ -139,9 +156,11 @@ describe("usePanEvent", () => {
 
     await user.pointer(pointerInput(el))
 
-    expect(onSessionEnd).toHaveBeenCalledWith(
-      expect.any(Object),
-      expect.any(Object),
+    await waitFor(() =>
+      expect(onSessionEnd).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.any(Object),
+      ),
     )
     const { point } = onSessionEnd.mock.calls[0][1]
     expect(point.x).toBeGreaterThanOrEqual(100)

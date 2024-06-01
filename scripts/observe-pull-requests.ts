@@ -27,9 +27,12 @@ const DISCORD_USER_MAP: Record<string, string> = {
   nakayan5: "770535018040655873",
   setodeve: "441961406980554772",
   hoshico: "982900988073607269",
-  "komura-c": "394133735567785996",
   imaimai17468: "394831848733409281",
   suzukisan22: "611441723712864256",
+  cidkumagai: "831092312238719026",
+  yasmro: "738432159441879151",
+  fffk10: "385445321263677440",
+  quantumshiro: "528930667094867978",
 }
 const REVIEWER_COUNT = 2
 

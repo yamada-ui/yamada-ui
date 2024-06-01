@@ -7,46 +7,58 @@ describe("<Radio/>", () => {
     await a11y(<Radio>Radio button</Radio>)
   })
 
-  test("should render correctly", () => {
+  test("should render correctly", async () => {
     render(<Radio>Radio button</Radio>)
 
-    expect(screen.getByRole("radio")).toBeInTheDocument()
-    expect(screen.getByText("Radio button")).toBeInTheDocument()
+    const radio = await screen.findByRole("radio", { name: "Radio button" })
+    expect(radio).toBeInTheDocument()
   })
 
-  test("should be defaultChecked", () => {
+  test("should be defaultChecked", async () => {
     render(<Radio defaultIsChecked>Radio defaultChecked</Radio>)
 
-    expect(screen.getByRole("radio")).toBeChecked()
+    const radio = await screen.findByRole("radio", {
+      name: "Radio defaultChecked",
+    })
+    expect(radio).toBeChecked()
   })
 
-  test("should be readonly", () => {
+  test("should be readonly", async () => {
     render(<Radio isReadOnly>Radio readonly</Radio>)
 
-    expect(screen.getByRole("radio")).toHaveAttribute("readonly")
+    const radio = await screen.findByRole("radio", { name: "Radio readonly" })
+    expect(radio).toHaveAttribute("readonly")
   })
 
-  test("should be contain invalid attribute", () => {
+  test("should be contain invalid attribute", async () => {
     render(<Radio isInvalid>Radio invalid</Radio>)
 
-    expect(screen.getByRole("radio").getAttribute("aria-invalid")).toBe("true")
+    const radio = await screen.findByRole("radio", { name: "Radio invalid" })
+    expect(radio).not.toBeValid()
   })
 
-  test("should be checked when click on element", () => {
+  test("should be checked when click on element", async () => {
     render(<Radio>Radio button</Radio>)
 
-    fireEvent.click(screen.getByText("Radio button"))
-    expect(screen.getByRole("radio")).toBeChecked()
+    const radio = await screen.findByRole("radio", { name: "Radio button" })
+
+    // Due to a bug in the nwsapi library, which jsdom depends on,
+    // writing `await user.click(radio2)` here causes an error to be thrown.
+    fireEvent.click(radio)
+
+    expect(radio).toBeChecked()
   })
 
-  test("should use the specified id when provided", () => {
+  test("should use the specified id when provided", async () => {
     const customId = "custom-radio-id"
     render(<Radio id={customId}>Radio Button</Radio>)
 
-    expect(screen.getByRole("radio")).toHaveAttribute("id", customId)
+    const radio = await screen.findByRole("radio", { name: "Radio Button" })
+
+    expect(radio).toHaveAttribute("id", customId)
   })
 
-  test("should have a unique id for each input element", () => {
+  test("should have a unique id for each input element", async () => {
     render(
       <>
         <Radio>First Radio Button</Radio>
@@ -54,11 +66,17 @@ describe("<Radio/>", () => {
       </>,
     )
 
-    const [id1, id2] = screen.getAllByRole("radio").map((radio) => radio.id)
-    expect(id1).not.toBe(id2)
+    const firstRadioButton = await screen.findByRole("radio", {
+      name: "First Radio Button",
+    })
+    const secondRadioButton = await screen.findByRole("radio", {
+      name: "Second Radio Button",
+    })
+
+    expect(firstRadioButton.id).not.toBe(secondRadioButton.id)
   })
 
-  test("should have a unique id for each input element when using FormControl and RadioGroup", () => {
+  test("should have a unique id for each input element when using FormControl and RadioGroup", async () => {
     render(
       <FormControl>
         <RadioGroup>
@@ -68,7 +86,13 @@ describe("<Radio/>", () => {
       </FormControl>,
     )
 
-    const [id1, id2] = screen.getAllByRole("radio").map((radio) => radio.id)
-    expect(id1).not.toBe(id2)
+    const firstRadioButton = await screen.findByRole("radio", {
+      name: "First Radio Button",
+    })
+    const secondRadioButton = await screen.findByRole("radio", {
+      name: "Second Radio Button",
+    })
+
+    expect(firstRadioButton.id).not.toBe(secondRadioButton.id)
   })
 })

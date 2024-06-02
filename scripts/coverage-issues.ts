@@ -187,42 +187,43 @@ const getTargetPackages = (files: Record<string, number[]>) => {
 const createIssues = async (
   existPackages: Record<string, Issue>,
   packages: Record<string, Record<string, number[]>>,
-) => {
-  for await (const [packageName, files] of Object.entries(packages)) {
-    const isExist = Object.keys(existPackages).includes(packageName)
+) =>
+  Promise.all(
+    Object.entries(packages).map(([packageName, files]) =>
+      recursiveOctokit(async () => {
+        const isExist = Object.keys(existPackages).includes(packageName)
 
-    const body = ISSUE_BODY(packageName, files)
+        const body = ISSUE_BODY(packageName, files)
 
-    if (isExist) {
-      const { number, body: prevBody } = existPackages[packageName]
+        if (isExist) {
+          const { number, body: prevBody } = existPackages[packageName]
 
-      if (prevBody === body) {
-        console.log("Skipped issue", number, packageName)
+          if (prevBody === body) {
+            console.log("Skipped issue", number, packageName)
 
-        continue
-      }
+            return
+          }
 
-      await octokit.issues.update({
-        ...GITHUB_OPTIONS,
-        issue_number: number,
-        body,
-      })
+          await octokit.issues.update({
+            ...GITHUB_OPTIONS,
+            issue_number: number,
+            body,
+          })
 
-      console.log("Updated issue", number, packageName)
-    } else {
-      await octokit.issues.create({
-        ...GITHUB_OPTIONS,
-        title: `Enhance Test Coverage for \`${packageName}\``,
-        body,
-        labels: ["coverage", "test", "good first issue"],
-      })
+          console.log("Updated issue", number, packageName)
+        } else {
+          await octokit.issues.create({
+            ...GITHUB_OPTIONS,
+            title: `Enhance Test Coverage for \`${packageName}\``,
+            body,
+            labels: ["coverage", "test", "good first issue"],
+          })
 
-      console.log("Created issue", packageName)
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-  }
-}
+          console.log("Created issue", packageName)
+        }
+      }),
+    ),
+  )
 
 const main = async () => {
   try {

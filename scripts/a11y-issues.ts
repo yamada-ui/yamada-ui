@@ -199,49 +199,50 @@ const sortReport = (report: string) => {
 const createIssues = async (
   existStories: Record<string, Issue>,
   fails: [string, Story[]][],
-) => {
-  for await (const [path, stories] of fails) {
-    let [, name] = path.match(/\/([\w-]+)\.stories.(tsx|ts)/) ?? []
-    name = toCamelCase(name)
+) =>
+  Promise.all(
+    fails.map(([path, stories]) =>
+      recursiveOctokit(async () => {
+        let [, name] = path.match(/\/([\w-]+)\.stories.(tsx|ts)/) ?? []
+        name = toCamelCase(name)
 
-    const isExist = Object.keys(existStories).includes(path)
+        const isExist = Object.keys(existStories).includes(path)
 
-    const body = ISSUE_BODY(name, path, stories)
+        const body = ISSUE_BODY(name, path, stories)
 
-    if (isExist) {
-      const { number, body: prevBody } = existStories[path]
+        if (isExist) {
+          const { number, body: prevBody } = existStories[path]
 
-      if (prevBody === body) {
-        console.log("Skipped issue", number, path)
+          if (prevBody === body) {
+            console.log("Skipped issue", number, path)
 
-        continue
-      }
+            return
+          }
 
-      await recursiveOctokit(() =>
-        octokit.issues.update({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          body,
-        }),
-      )
+          await recursiveOctokit(() =>
+            octokit.issues.update({
+              ...COMMON_PARAMS,
+              issue_number: number,
+              body,
+            }),
+          )
 
-      console.log("Updated issue", number, path)
-    } else {
-      await recursiveOctokit(() =>
-        octokit.issues.create({
-          ...COMMON_PARAMS,
-          title: `Enhance a11y for \`${name}\``,
-          body,
-          labels: ["a11y", "test", "good first issue"],
-        }),
-      )
+          console.log("Updated issue", number, path)
+        } else {
+          await recursiveOctokit(() =>
+            octokit.issues.create({
+              ...COMMON_PARAMS,
+              title: `Enhance a11y for \`${name}\``,
+              body,
+              labels: ["a11y", "test", "good first issue"],
+            }),
+          )
 
-      console.log("Created issue", path)
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-  }
-}
+          console.log("Created issue", path)
+        }
+      }),
+    ),
+  )
 
 const main = async () => {
   try {

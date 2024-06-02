@@ -1,0 +1,86 @@
+---
+title: Tabs
+description: "`Tabs` is a component for switching between different display areas."
+package_name: "@yamada-ui/tabs"
+with_description: true
+tab: Accessibility
+---
+
+The Tabs component follows the [WAI-ARIA - Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs) for accessibility.
+
+When using only icons in `Tab`, set `aria-label` for the `Tab`.
+
+```tsx live=false
+<Tabs>
+  <Tab>フリーザ</Tab>
+  <Tab aria-label="Send an email to Frieza">
+    <FontAwesomeIcon icon={faEnvelope} />
+  </Tab>
+
+  <TabPanel>
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+  </TabPanel>
+  <TabPanel>フリーザ様にメールを送る</TabPanel>
+</Tabs>
+```
+
+Setting `aria-label` on `TabList` will make it readable by screen readers.
+
+```tsx live=false
+<Tabs tabListProps={{ "aria-label": "DRAGON BALL characters" }}>
+  <Tab>孫悟空</Tab>
+  <Tab>ベジータ</Tab>
+  <Tab>フリーザ</Tab>
+
+  <TabPanel>クリリンのことか……クリリンのことかーーーっ！！！！！</TabPanel>
+  <TabPanel>へっ！きたねぇ花火だ</TabPanel>
+  <TabPanel>
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+  </TabPanel>
+</Tabs>
+```
+
+Or,
+
+```tsx live=false
+<Tabs>
+  <TabList aria-label="DRAGON BALL characters">
+    <Tab>孫悟空</Tab>
+    <Tab>ベジータ</Tab>
+    <Tab>フリーザ</Tab>
+  </TabList>
+
+  <TabPanel>クリリンのことか……クリリンのことかーーーっ！！！！！</TabPanel>
+  <TabPanel>へっ！きたねぇ花火だ</TabPanel>
+  <TabPanel>
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+  </TabPanel>
+</Tabs>
+```
+
+## Keyboard Navigation
+
+| Key              | Description                                                      | State                      |
+| ---------------- | ---------------------------------------------------------------- | -------------------------- |
+| `Tab`            | When focus moves to the tab list, the active tab is focused.     | -                          |
+| `ArrowRight`     | Focuses and activates the previous tab that is not disabled.     | `orientation="horizontal"` |
+| `ArrowLeft`      | Focuses and activates the next tab that is not disabled.         | `orientation="horizontal"` |
+| `ArrowUp`        | Focuses and activates the previous tab that is not disabled.     | `orientation="vertical"`   |
+| `ArrowDown`      | Focuses and activates the next tab that is not disabled.         | `orientation="vertical"`   |
+| `Space`, `Enter` | Activates the tab that was not automatically activated on focus. | `isManual={true}`          |
+| `Home`           | Focuses and activates the first tab that is not disabled.        | -                          |
+| `End`            | Focuses and activates the last tab that is not disabled.         | -                          |
+
+## ARIA Roles and Attributes
+
+| Component  | Roles and Attributes | Usage                                                                      |
+| ---------- | -------------------- | -------------------------------------------------------------------------- |
+| `TabList`  | `role="tablist"`     | Indicates that it is a tab list.                                           |
+|            | `aria-orientation`   | Set to `"horizontal"` or `"vertical"` based on the value of `orientation`. |
+| `Tab`      | `role="tab"`         | Indicates that it is a tab.                                                |
+|            | `id`                 | The `id` used to associate with `role="tabpanel"`.                         |
+|            | `aria-controls`      | Sets the `id` of the related `role="tabpanel"`.                            |
+|            | `aria-selected`      | Set to `true` for the active tab, and `false` for all other tabs.          |
+| `TabPanel` | `role="tabpanel"`    | Indicates that it is a tab panel.                                          |
+|            | `id`                 | The `id` used to associate with `role="tab"`.                              |
+|            | `aria-labelledby`    | Sets the `id` of the related `role="tab"`.                                 |

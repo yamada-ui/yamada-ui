@@ -2,6 +2,7 @@ import { waitFor } from "@testing-library/react"
 import { useDisclosure, Button } from "@yamada-ui/react"
 import { a11y, render, screen } from "@yamada-ui/test"
 import { SlideFade } from "../src"
+
 describe("<SlideFade />", () => {
   test("passes a11y test", async () => {
     await a11y(<SlideFade />)
@@ -14,14 +15,14 @@ describe("<SlideFade />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <SlideFade isOpen={isOpen}>slide fade test</SlideFade>
+          <SlideFade isOpen={isOpen} data-testid="slide-fade" />
         </>
       )
     }
 
     const { user } = render(<SlideFadeTestComponent />)
 
-    const slideFade = await screen.findByText(/slide fade test/i)
+    const slideFade = screen.getByTestId("slide-fade")
     expect(slideFade).not.toBeVisible()
 
     const button = await screen.findByRole("button", { name: /button/i })
@@ -36,9 +37,9 @@ describe("<SlideFade />", () => {
   test("default offset is set correctly", () => {
     const { getByTestId } = render(<SlideFade data-testid="slide-fade" />)
 
-    expect(getByTestId("slide-fade")).toHaveStyle(
-      "transform: translateX(0px) translateY(8px) translateZ(0);",
-    )
+    expect(getByTestId("slide-fade")).toHaveStyle({
+      transform: "translateX(0px) translateY(8px) translateZ(0)",
+    })
   })
 
   test("applies offsetX correctly", () => {
@@ -46,9 +47,9 @@ describe("<SlideFade />", () => {
       <SlideFade offsetX={10} data-testid="slide-fade" />,
     )
 
-    expect(getByTestId("slide-fade")).toHaveStyle(
-      "transform: translateX(10px) translateY(8px) translateZ(0);",
-    )
+    expect(getByTestId("slide-fade")).toHaveStyle({
+      transform: "translateX(10px) translateY(8px) translateZ(0)",
+    })
   })
 
   test("applies offsetY correctly", () => {
@@ -56,8 +57,8 @@ describe("<SlideFade />", () => {
       <SlideFade offsetY={10} data-testid="slide-fade" />,
     )
 
-    expect(getByTestId("slide-fade")).toHaveStyle(
-      "transform: translateX(0px) translateY(10px) translateZ(0);",
-    )
+    expect(getByTestId("slide-fade")).toHaveStyle({
+      transform: "translateX(0px) translateY(10px) translateZ(0)",
+    })
   })
 })

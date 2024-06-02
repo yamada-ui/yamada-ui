@@ -9,7 +9,7 @@ describe("<SlideFade />", () => {
   })
 
   test("fade-in and fade-out work correctly", async () => {
-    const SlideFadeTestComponent = () => {
+    const TestComponent = () => {
       const { isOpen, onToggle } = useDisclosure()
 
       return (
@@ -20,7 +20,7 @@ describe("<SlideFade />", () => {
       )
     }
 
-    const { user } = render(<SlideFadeTestComponent />)
+    const { user } = render(<TestComponent />)
 
     const slideFade = screen.getByTestId("slide-fade")
     expect(slideFade).not.toBeVisible()
@@ -60,5 +60,34 @@ describe("<SlideFade />", () => {
     expect(getByTestId("slide-fade")).toHaveStyle({
       transform: "translateX(0px) translateY(10px) translateZ(0)",
     })
+  })
+
+  test("unmountOnExit works correctly", async () => {
+    const TestComponent = () => {
+      const { isOpen, onToggle } = useDisclosure()
+
+      return (
+        <>
+          <Button onClick={onToggle}>button</Button>
+          <SlideFade isOpen={isOpen} unmountOnExit data-testid="slide-fade" />
+        </>
+      )
+    }
+
+    const { user } = render(<TestComponent />)
+
+    expect(screen.queryByTestId("slide-fade")).not.toBeInTheDocument()
+
+    const button = await screen.findByRole("button", { name: /button/i })
+
+    await user.click(button)
+    await waitFor(() =>
+      expect(screen.queryByTestId("slide-fade")).toBeVisible(),
+    )
+
+    await user.click(button)
+    await waitFor(() =>
+      expect(screen.queryByTestId("slide-fade")).not.toBeInTheDocument(),
+    )
   })
 })

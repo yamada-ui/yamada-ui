@@ -34,6 +34,36 @@ describe("<SlideFade />", () => {
     await waitFor(() => expect(slideFade).not.toBeVisible())
   })
 
+  test("fade-in and fade-out work correctly when `initial` is passed to an `initial` property", async () => {
+    const TestComponent = () => {
+      const { isOpen, onToggle } = useDisclosure()
+
+      return (
+        <>
+          <Button onClick={onToggle}>button</Button>
+          <SlideFade
+            isOpen={isOpen}
+            initial="initial"
+            data-testid="slide-fade"
+          />
+        </>
+      )
+    }
+
+    const { user } = render(<TestComponent />)
+
+    const slideFade = screen.getByTestId("slide-fade")
+    expect(slideFade).not.toBeVisible()
+
+    const button = await screen.findByRole("button", { name: /button/i })
+
+    await user.click(button)
+    await waitFor(() => expect(slideFade).toBeVisible())
+
+    await user.click(button)
+    await waitFor(() => expect(slideFade).not.toBeVisible())
+  })
+
   test("default offset is set correctly", () => {
     const { getByTestId } = render(<SlideFade data-testid="slide-fade" />)
 

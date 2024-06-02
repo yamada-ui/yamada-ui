@@ -140,33 +140,6 @@ export const isSameDate = (
   comparison: Date | undefined,
 ) => isSameMonth(date, comparison) && date?.getDate() === comparison?.getDate()
 
-export const getRangeDates = (
-  startDate: Date | undefined,
-  endDate: Date | undefined,
-) => {
-  const dates: Date[] = []
-
-  if (!startDate || !endDate) {
-    if (startDate) dates.push(startDate)
-    if (endDate) dates.push(endDate)
-  } else {
-    const resolvedStartDate = dayjs(startDate).startOf("day")
-    const resolvedEndDate = dayjs(endDate).startOf("day")
-
-    const dates: Date[] = []
-
-    const n = Math.abs(resolvedStartDate.diff(resolvedEndDate, "day"))
-
-    let date = resolvedStartDate
-
-    for (let i = 0; i <= n; i++) {
-      dates.push(date.add(i, "day").toDate())
-    }
-  }
-
-  return dates
-}
-
 export const isAfterMonth = (value: Date, date: Date | undefined) =>
   date instanceof Date && dayjs(value).startOf("month").isAfter(date)
 

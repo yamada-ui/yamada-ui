@@ -7,7 +7,6 @@ export {
   getMonthDays,
   getRangeYears,
   getRangeMonths,
-  getRangeDates,
   getFormattedLabel,
   sortDates,
   isInRange,

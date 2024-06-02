@@ -181,9 +181,6 @@ export const isMonthInRange = ({
   return maxInRange && minInRange
 }
 
-export const isIncludeDates = (date: Date, dates: Date[]) =>
-  dates.some((d) => dayjs(d).isSame(date, "day"))
-
 export const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
   if (type === "asc") {
     return dates.sort((a, b) => (dayjs(a).isAfter(b, "day") ? 1 : -1))

@@ -10,7 +10,6 @@ export {
   getFormattedLabel,
   sortDates,
   isInRange,
-  isIncludeDates,
   isMonthInRange,
   isSameMonth,
   isSameDate,

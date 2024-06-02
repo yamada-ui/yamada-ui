@@ -106,7 +106,7 @@ describe("<SlideFade />", () => {
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByTestId("slide-fade")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("slide-fade")).toBeNull()
 
     const button = await screen.findByRole("button", { name: /button/i })
 
@@ -116,8 +116,6 @@ describe("<SlideFade />", () => {
     )
 
     await user.click(button)
-    await waitFor(() =>
-      expect(screen.queryByTestId("slide-fade")).not.toBeInTheDocument(),
-    )
+    await waitFor(() => expect(screen.queryByTestId("slide-fade")).toBeNull())
   })
 })

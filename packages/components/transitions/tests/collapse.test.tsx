@@ -89,7 +89,7 @@ describe("<Collapse />", () => {
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByTestId("collapse")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("collapse")).toBeNull()
 
     const button = await screen.findByRole("button", { name: /button/i })
 
@@ -97,8 +97,6 @@ describe("<Collapse />", () => {
     await waitFor(() => expect(screen.queryByTestId("collapse")).toBeVisible())
 
     await user.click(button)
-    await waitFor(() =>
-      expect(screen.queryByTestId("collapse")).not.toBeInTheDocument(),
-    )
+    await waitFor(() => expect(screen.queryByTestId("collapse")).toBeNull())
   })
 })

@@ -1,6 +1,5 @@
-import { waitFor } from "@testing-library/react"
 import { useDisclosure, Button } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { SlideFade } from "../src"
 
 describe("<SlideFade />", () => {

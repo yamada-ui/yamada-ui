@@ -140,12 +140,6 @@ export const isSameDate = (
   comparison: Date | undefined,
 ) => isSameMonth(date, comparison) && date?.getDate() === comparison?.getDate()
 
-export const isAfterMonth = (value: Date, date: Date | undefined) =>
-  date instanceof Date && dayjs(value).startOf("month").isAfter(date)
-
-export const isBeforeMonth = (value: Date, date: Date | undefined) =>
-  date instanceof Date && dayjs(value).startOf("month").isBefore(date)
-
 export const isInRange = (date: Date, minDate?: Date, maxDate?: Date) => {
   const hasMinDate = minDate instanceof Date
   const hasMaxDate = maxDate instanceof Date

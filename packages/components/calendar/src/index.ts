@@ -17,8 +17,6 @@ export {
   isSomeBeforeDate,
   isAfterDate,
   isBeforeDate,
-  isAfterMonth,
-  isBeforeMonth,
 } from "./calendar-utils"
 export { DatePicker } from "./date-picker"
 export type { DatePickerProps } from "./date-picker"

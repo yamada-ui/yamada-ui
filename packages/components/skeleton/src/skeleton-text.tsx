@@ -16,7 +16,8 @@ type SkeletonTextOptions = {
   textHeight?: CSSUIProps["height"]
 }
 
-export type SkeletonTextProps = SkeletonProps & SkeletonTextOptions
+export type SkeletonTextProps = Omit<SkeletonProps, "isFitContent"> &
+  SkeletonTextOptions
 
 export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
   (

@@ -59,6 +59,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Update docs
+        if: steps.changesets.outputs.published == 'true'
+        uses: ./.github/composite-actions/update-docs
+
       - name: Notification release
         if: steps.changesets.outputs.published == 'true'
         run: |

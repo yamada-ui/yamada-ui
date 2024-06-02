@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { Merge } from "."
-import { isNumber, isString } from "."
+import { isNumber, isObject, isString } from "."
 
 type DOMElement = Element & HTMLOrSVGElement
 
@@ -182,7 +182,7 @@ export const cx = (...classNames: (string | undefined)[]) =>
 type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T> | React.LegacyRef<T>
 
 export const isRefObject = (val: any): val is { current: any } =>
-  "current" in val
+  isObject(val) && "current" in val
 
 export const assignRef = <T extends any = any>(
   ref: ReactRef<T> | undefined,

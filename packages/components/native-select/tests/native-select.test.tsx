@@ -6,13 +6,12 @@ import { NativeOption, NativeSelect } from "../src"
 
 describe("<NativeSelect />", () => {
   test("NativeSelect renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <NativeSelect aria-label="Select value" placeholder="Options">
         <NativeOption value="one">Option 1</NativeOption>
         <NativeOption value="two">Option 2</NativeOption>
       </NativeSelect>,
     )
-    await a11y(container)
   })
 
   test("should render select with props", async () => {

@@ -74,4 +74,31 @@ describe("<Collapse />", () => {
     await user.click(button)
     await waitFor(() => expect(collapse).toHaveStyle({ height: "200px" }))
   })
+
+  test("unmountOnExit works correctly", async () => {
+    const TestComponent = () => {
+      const { isOpen, onToggle } = useDisclosure()
+
+      return (
+        <>
+          <Button onClick={onToggle}>button</Button>
+          <Collapse isOpen={isOpen} unmountOnExit data-testid="collapse" />
+        </>
+      )
+    }
+
+    const { user } = render(<TestComponent />)
+
+    expect(screen.queryByTestId("collapse")).not.toBeInTheDocument()
+
+    const button = await screen.findByRole("button", { name: /button/i })
+
+    await user.click(button)
+    await waitFor(() => expect(screen.queryByTestId("collapse")).toBeVisible())
+
+    await user.click(button)
+    await waitFor(() =>
+      expect(screen.queryByTestId("collapse")).not.toBeInTheDocument(),
+    )
+  })
 })

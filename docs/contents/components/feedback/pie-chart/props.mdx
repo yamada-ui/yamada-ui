@@ -4,7 +4,6 @@ description: >-
   `PieChart` is a component for drawing pie charts to compare multiple sets of
   data.
 package_name: "@yamada-ui/charts"
-label: New
 with_description: true
 tab: Props
 ---
@@ -196,4 +195,16 @@ tab: Props
   type="boolean"
   description={"If `true`, tooltip is visible."}
   defaultValue={"true"}
+/>
+
+### CellProps
+
+<PropsCard id="cell-name" name="name" required type="string" />
+
+<PropsCard id="cell-value" name="value" required type="number" />
+
+<PropsCard
+  id="cell-dimcell"
+  name="dimCell"
+  type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
 />

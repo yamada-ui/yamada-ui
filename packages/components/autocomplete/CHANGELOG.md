@@ -1,5 +1,38 @@
 # @yamada-ui/autocomplete
 
+## 1.2.1
+
+### Patch Changes
+
+- [#1666](https://github.com/yamada-ui/yamada-ui/pull/1666) [`d4f2f39`](https://github.com/yamada-ui/yamada-ui/commit/d4f2f397c3c3d6579f0b6f07bbb4fe10b07468f1) Thanks [@108yen](https://github.com/108yen)! - Fix bug where original `items` were changed.
+
+- Updated dependencies [[`b578a69`](https://github.com/yamada-ui/yamada-ui/commit/b578a697c73202ba271352a00b0711f640b18758), [`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/popover@1.2.0
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/form-control@1.1.1
+  - @yamada-ui/icon@1.0.26
+  - @yamada-ui/motion@1.0.27
+
+## 1.2.0
+
+### Minor Changes
+
+- [#1525](https://github.com/yamada-ui/yamada-ui/pull/1525) [`1b4dedb`](https://github.com/yamada-ui/yamada-ui/commit/1b4dedbf596fb919287fff4f89b849dba9c40d44) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added aria attributes.
+
+### Patch Changes
+
+- [#1473](https://github.com/yamada-ui/yamada-ui/pull/1473) [`e8010fc`](https://github.com/yamada-ui/yamada-ui/commit/e8010fc3d3e83b92b39aa8c3634f2bd3fe737a94) Thanks [@aojunhao123](https://github.com/aojunhao123)! - improve accessibility support
+
+## 1.1.13
+
+### Patch Changes
+
+- [#1477](https://github.com/yamada-ui/yamada-ui/pull/1477) [`61f1b30`](https://github.com/yamada-ui/yamada-ui/commit/61f1b300724151bcc30f3368a0b9acf90e959f11) Thanks [@cidkumagai](https://github.com/cidkumagai)! - use destructuring assignment
+
+- Updated dependencies [[`659fe11`](https://github.com/yamada-ui/yamada-ui/commit/659fe11b4457c6a2e8be228dd3d47648f759010b), [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/use-descendant@1.0.14
+  - @yamada-ui/form-control@1.1.0
+
 ## 1.1.12
 
 ### Patch Changes

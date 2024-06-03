@@ -1,5 +1,30 @@
 # @yamada-ui/use-media-query
 
+## 1.0.34
+
+### Patch Changes
+
+- [#1645](https://github.com/yamada-ui/yamada-ui/pull/1645) [`853a609`](https://github.com/yamada-ui/yamada-ui/commit/853a6090a750b9a4c1d2b13d7fe31c204e59981f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated contribution guide links.
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.1.1
+
+## 1.0.33
+
+### Patch Changes
+
+- [#1558](https://github.com/yamada-ui/yamada-ui/pull/1558) [`0235653`](https://github.com/yamada-ui/yamada-ui/commit/02356539d40dfac434cd284a04cd58a11bf90a17) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved null safety and event handling.
+
+- Updated dependencies [[`49a5333`](https://github.com/yamada-ui/yamada-ui/commit/49a5333a4003e629835b71e67c7f5ab954538a26)]:
+  - @yamada-ui/providers@1.1.0
+
+## 1.0.32
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/providers@1.0.32
+
 ## 1.0.31
 
 ### Patch Changes

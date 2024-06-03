@@ -15,7 +15,6 @@ import {
   Highlight,
   dataAttr,
   useUpdateEffect,
-  Button,
   IconButton,
 } from "@yamada-ui/react"
 import type { StackProps, ModalProps, ButtonProps } from "@yamada-ui/react"
@@ -149,9 +148,7 @@ const SearchModal: FC<SearchModalProps> = memo(
     const directionRef = useRef<"up" | "down">("down")
     const compositionRef = useRef<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const itemRefs = useRef<Map<number, RefObject<HTMLButtonElement>>>(
-      new Map(),
-    )
+    const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
 
     const hits = useMemo(() => {
       if (query.length < 1) return []
@@ -296,16 +293,17 @@ const SearchModal: FC<SearchModalProps> = memo(
             <VStack as="ul" gap="sm">
               {hits.map(({ title, type, slug, hierarchy }, index) => {
                 const isSelected = index === selectedIndex
-                const ref = createRef<HTMLButtonElement>()
+                const ref = createRef<HTMLDivElement>()
 
                 itemRefs.current.set(index, ref)
 
                 return (
-                  <Button
+                  <HStack
                     as={NextLink}
                     ref={ref}
                     key={slug}
                     href={slug}
+                    gap="2"
                     borderWidth="1px"
                     rounded="md"
                     minH="16"
@@ -359,7 +357,7 @@ const SearchModal: FC<SearchModalProps> = memo(
                         {title}
                       </Highlight>
                     </VStack>
-                  </Button>
+                  </HStack>
                 )
               })}
             </VStack>

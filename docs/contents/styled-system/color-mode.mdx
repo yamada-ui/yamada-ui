@@ -116,7 +116,7 @@ export default function Document() {
 
 Depending on the project, you may need to retrieve values from `cookies`. In that case, use `createColorModeManager("cookie")`.
 
-```tsx live=false title=_document.tsx highlight={2,11,12}
+```tsx live=false title=_document.tsx highlight={11,12}
 import { Html, Head, Main, NextScript } from "next/document"
 import { ColorModeScript, defaultConfig } from "@yamada-ui/react"
 
@@ -162,7 +162,7 @@ Please pass the same `initialColorMode` to `props` as in your config. If you hav
 For the case of App Router, please check [here](/getting-started/frameworks/nextjs/app-router#add-colormodescript).
 :::
 
-## Add `colorModeManager`
+### Add `colorModeManager`
 
 For sites rendered on the server side, such as Next.js, you may want to include the color mode in the request to avoid changes during hydration.
 
@@ -170,7 +170,7 @@ For sites rendered on the server side, such as Next.js, you may want to include 
 If you are not using server-side rendering, you do not need to follow these steps. Yamada UI uses `localStorage` by default.
 :::
 
-### Prepare `getServerSideProps`
+#### Prepare `getServerSideProps`
 
 To standardize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
 
@@ -188,7 +188,7 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-### Set `cookies` in `colorModeManager`
+#### Set `cookies` in `colorModeManager`
 
 Set `ssr` and `cookies` in `createColorModeManager`.
 
@@ -208,7 +208,7 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
-### Add `getServerSideProps`
+#### Add `getServerSideProps`
 
 Add the previously created `getServerSideCommonProps` to each page.
 

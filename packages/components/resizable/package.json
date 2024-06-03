@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/resizable",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Yamada UI resizable component",
   "keywords": [
     "yamada",
@@ -8,7 +8,7 @@
     "react",
     "emotion",
     "component",
-    "accordion",
+    "resizable",
     "ui",
     "uikit",
     "styled",

@@ -56,8 +56,7 @@ describe("<NativeTable />", () => {
   }
 
   test("NativeTable renders correctly", async () => {
-    const { container } = render(<Table />)
-    await a11y(container)
+    await a11y(<Table />)
   })
 
   test("should render a table with provided props", async () => {

@@ -19,8 +19,8 @@ describe("<Input />", () => {
     })
   })
 
-  test("Elements inside input render correctly", () => {
-    const { getByText } = render(
+  test("Elements inside input render correctly", async () => {
+    render(
       <InputGroup>
         <InputLeftElement>
           <span>Hello</span>
@@ -31,42 +31,53 @@ describe("<Input />", () => {
         </InputRightElement>
       </InputGroup>,
     )
-    expect(getByText("Hello")).toBeInTheDocument()
-    expect(getByText("World")).toBeInTheDocument()
+
+    const hello = await screen.findByText(/Hello/i)
+    const world = await screen.findByText(/World/i)
+    expect(hello).toBeInTheDocument()
+    expect(world).toBeInTheDocument()
   })
 
-  test("Elements inside input-addon render correctly", () => {
-    const { getByText } = render(
+  test("Elements inside input-addon render correctly", async () => {
+    render(
       <InputGroup>
         <InputLeftAddon>https:</InputLeftAddon>
         <InputRightAddon>.com</InputRightAddon>
       </InputGroup>,
     )
-    expect(getByText("https:")).toBeInTheDocument()
-    expect(getByText(".com")).toBeInTheDocument()
+
+    const scheme = await screen.findByText(/https:/i)
+    const tld = await screen.findByText(/\.com/i)
+    expect(scheme).toBeInTheDocument()
+    expect(tld).toBeInTheDocument()
   })
 
-  test("Invalid input renders correctly", () => {
+  test("Invalid input renders correctly", async () => {
     render(<Input isInvalid />)
 
-    expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
+    const input = await screen.findByRole("textbox")
+    expect(input).toBeInvalid()
+    expect(input).toHaveAttribute("aria-invalid", "true")
   })
 
-  test("Disabled input renders correctly", () => {
+  test("Disabled input renders correctly", async () => {
     render(<Input isDisabled />)
 
-    expect(screen.getByRole("textbox")).toHaveAttribute("disabled")
+    const input = await screen.findByRole("textbox")
+    expect(input).toBeDisabled()
   })
 
-  test("Readonly input renders correctly", () => {
+  test("Readonly input renders correctly", async () => {
     render(<Input isReadOnly />)
 
-    expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
+    const input = await screen.findByRole("textbox")
+    expect(input).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("Input with native size renders correctly", () => {
+  test("Input with native size renders correctly", async () => {
     render(<Input htmlSize={4} />)
 
-    expect(screen.getByRole("textbox")).toHaveAttribute("size", "4")
+    const input = await screen.findByRole("textbox")
+    expect(input).toHaveAttribute("size", "4")
   })
 })

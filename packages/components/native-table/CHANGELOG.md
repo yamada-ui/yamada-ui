@@ -1,5 +1,18 @@
 # @yamada-ui/native-table
 
+## 1.0.28
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+
+## 1.0.27
+
+### Patch Changes
+
+- [#1420](https://github.com/yamada-ui/yamada-ui/pull/1420) [`745a925`](https://github.com/yamada-ui/yamada-ui/commit/745a92553bd30c3bdb62062f91be0d85fabcb94f) Thanks [@teru12012000](https://github.com/teru12012000)! - Integrate `omitObject` handling with `omitThemeProps`
+
 ## 1.0.26
 
 ### Patch Changes

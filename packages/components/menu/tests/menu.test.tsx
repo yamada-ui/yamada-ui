@@ -4,7 +4,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import { Icon } from "@yamada-ui/fontawesome"
-import { Button, IconButton } from "@yamada-ui/react"
+import { Button, IconButton, Center } from "@yamada-ui/react"
 import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import {
   Menu,
@@ -16,6 +16,8 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  ContextMenu,
+  ContextMenuTrigger,
 } from "../src"
 
 describe("<Menu />", () => {
@@ -28,7 +30,6 @@ describe("<Menu />", () => {
         >
           Menu
         </MenuButton>
-
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
@@ -52,7 +53,7 @@ describe("<Menu />", () => {
     )
     expect(screen.getByTestId("MenuButton")).toBeInTheDocument()
     expect(screen.getByTestId("MenuList")).toBeInTheDocument()
-    expect(screen.getByTestId("MenuList")).toBeInTheDocument()
+    expect(screen.getByTestId("MenuItem")).toBeInTheDocument()
   })
 
   test("should render the menu with command", () => {
@@ -169,6 +170,51 @@ describe("<Menu />", () => {
     )
   })
 
+  test("should update value with menu option group", async () => {
+    render(
+      <Menu placement="right-start">
+        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuList>
+          <MenuOptionGroup
+            data-testid="MenuOptionGroup-a"
+            label="item"
+            type="radio"
+          >
+            <MenuOptionItem data-testid="MenuOptionItemRadio">
+              Add item
+            </MenuOptionItem>
+            <MenuOptionItem>Edit item</MenuOptionItem>
+          </MenuOptionGroup>
+
+          <MenuOptionGroup
+            type="checkbox"
+            label="order"
+            defaultValue={["desc"]}
+          >
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-a" value="asc">
+              Ascending
+            </MenuOptionItem>
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox-b" value="desc">
+              Descending
+            </MenuOptionItem>
+          </MenuOptionGroup>
+        </MenuList>
+      </Menu>,
+    )
+
+    const radioItem = screen.getByTestId("MenuOptionItemRadio")
+    await act(() => fireEvent.click(radioItem))
+    expect(radioItem).toHaveAttribute("aria-checked", "true")
+
+    const checkboxItemA = screen.getByTestId("MenuOptionItemCheckbox-a")
+    await act(() => fireEvent.click(checkboxItemA))
+    expect(checkboxItemA).toHaveAttribute("aria-checked", "true")
+
+    const checkboxItemB = screen.getByTestId("MenuOptionItemCheckbox-b")
+    await act(() => fireEvent.click(checkboxItemB))
+    expect(checkboxItemB).not.toHaveAttribute("aria-checked")
+  })
+
   test("should disable the menu item", () => {
     render(
       <Menu>
@@ -189,7 +235,7 @@ describe("<Menu />", () => {
   })
 
   test("keydown events for ArrowDown", async () => {
-    const { getByRole } = render(
+    const { user, getByRole } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -200,15 +246,16 @@ describe("<Menu />", () => {
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
+    // focus the menu button
+    menuButton.focus()
+    // ArrowDown on the MenuButton
+    await user.keyboard("[ArrowDown]")
 
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowDown" }))
     expect(screen.getByText("Add item")).toHaveFocus()
   })
 
   test("keydown events for ArrowUp", async () => {
-    const { getByRole } = render(
+    const { user, getByRole } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -220,14 +267,16 @@ describe("<Menu />", () => {
 
     const menuButton = getByRole("button", { name: "Menu" })
 
-    fireEvent.focus(menuButton)
+    // focus the menu button
+    menuButton.focus()
+    // ArrowUp on the MenuButton
+    await user.keyboard("[ArrowUp]")
 
-    await act(() => fireEvent.keyDown(menuButton, { key: "ArrowUp" }))
     expect(screen.getByText("Edit item")).toHaveFocus()
   })
 
   test("keydown events for Enter", async () => {
-    const { getByRole } = render(
+    const { user, getByRole } = render(
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
@@ -238,10 +287,11 @@ describe("<Menu />", () => {
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
+    // focus the menu button
+    menuButton.focus()
+    // Enter on the MenuButton
+    await user.keyboard("[Enter]")
 
-    fireEvent.focus(menuButton)
-
-    await act(() => fireEvent.keyDown(menuButton, { key: "Enter" }))
     expect(screen.getByText("Add item")).toHaveFocus()
   })
 
@@ -321,6 +371,77 @@ describe("<Menu />", () => {
     await act(() => fireEvent.keyDown(menuList, { key: "End" }))
     expect(document.activeElement).toHaveTextContent("Preferences")
 
+    await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
+    expect(menuList).not.toBeVisible()
+  })
+  test("Context menu renders correctly", async () => {
+    const { container } = render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    await a11y(container)
+  })
+  test("should render the context menu", () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    expect(screen.getByText("Right click here")).toBeInTheDocument()
+  })
+  test("context menu events", async () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    const contextMenuTrigger = screen.getByText("Right click here")
+    await act(() => fireEvent.contextMenu(contextMenuTrigger))
+    const menuList = screen.getByRole("menu")
+    expect(menuList).toBeVisible()
     await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
     expect(menuList).not.toBeVisible()
   })

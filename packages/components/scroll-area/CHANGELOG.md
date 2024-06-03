@@ -1,5 +1,20 @@
 # @yamada-ui/scroll-area
 
+## 1.0.27
+
+### Patch Changes
+
+- [#1663](https://github.com/yamada-ui/yamada-ui/pull/1663) [`096672e`](https://github.com/yamada-ui/yamada-ui/commit/096672e1dddeceddcea1421112f60cbb87b15d49) Thanks [@taroj1205](https://github.com/taroj1205)! - Fixed error with `useLayoutEffect` when using `ScrollArea`.
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+
+## 1.0.26
+
+### Patch Changes
+
+- [#1396](https://github.com/yamada-ui/yamada-ui/pull/1396) [`bef30d4`](https://github.com/yamada-ui/yamada-ui/commit/bef30d4c4511a0264fbda7eccb6b0f2bb2f63ea0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added data attributes for easy identification.
+
 ## 1.0.25
 
 ### Patch Changes

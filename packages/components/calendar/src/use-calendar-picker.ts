@@ -6,9 +6,9 @@ import type {
   RequiredUIPropGetter,
 } from "@yamada-ui/core"
 import {
+  formControlProperties,
   useFormControlProps,
   type FormControlOptions,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
@@ -191,7 +191,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     withControls,
     withLabel,
     maxSelectValues,
-    selectMonthWith,
+    __selectType,
     calendarProps,
     allowInput = true,
     allowInputBeyond = false,
@@ -209,11 +209,11 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     ...rest
   } = useFormControlProps(props)
 
-  locale ??= theme.__config.date?.locale ?? "en"
+  locale ??= theme.__config?.date?.locale ?? "en"
 
-  const formControlProps = pickObject(
+  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
-    getFormControlProperties({ omit: ["aria-readonly"] }),
+    formControlProperties,
   )
   const [containerProps, inputProps] = splitObject<Dict, string>(
     omitObject(rest, popoverProperties),
@@ -478,7 +478,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       maxDate,
       excludeDate,
       locale,
-      selectMonthWith,
+      __selectType,
       enableMultiple,
       enableRange,
     }),
@@ -519,7 +519,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       withLabel,
       withWeekdays,
       yearFormat,
-      selectMonthWith,
+      __selectType,
     ],
   )
 

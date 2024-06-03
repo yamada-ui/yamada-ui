@@ -10,6 +10,7 @@ import {
   useUpdateEffect,
 } from "@yamada-ui/utils"
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
+import { ReorderItem, type ReorderItemProps } from "./reorder-item"
 
 type ReorderContext = {
   orientation: "vertical" | "horizontal"
@@ -22,6 +23,8 @@ export const [ReorderProvider, useReorderContext] =
     errorMessage: `useReorderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Reorder />"`,
   })
 
+export type ReorderGenerateItem = ReorderItemProps
+
 type ReorderOptions = {
   /**
    * The orientation of the reorder.
@@ -29,6 +32,11 @@ type ReorderOptions = {
    * @default 'vertical'
    */
   orientation?: "vertical" | "horizontal"
+  /**
+   * If provided, generate reorder items based on items.
+   *
+   */
+  items?: ReorderGenerateItem[]
   /**
    * The callback invoked when reorder items are moved.
    */
@@ -65,6 +73,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
       className,
       orientation = "vertical",
       gap = "fallback(4, 1rem)",
+      items = [],
       onChange,
       onCompleteChange,
       children,
@@ -74,9 +83,12 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     const axis = orientation === "vertical" ? "y" : "x"
 
     const validChildren = getValidChildren(children)
+    const hasChildren = !!validChildren.length
 
     const defaultValues = useMemo(() => {
-      const values = validChildren.map(({ props }) => props.label)
+      const values = hasChildren
+        ? validChildren.map(({ props }) => props.label)
+        : items.map(({ label }) => label)
 
       const duplicatedValues = pickDuplicated(values)
 
@@ -88,7 +100,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
         )
 
       return omitDuplicated(values)
-    }, [validChildren])
+    }, [hasChildren, validChildren, items])
     const prevDefaultValues = useRef<(string | number)[]>(defaultValues)
 
     const [values, setValues] = useState<(string | number)[]>(defaultValues)
@@ -129,10 +141,16 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
 
     const cloneChildren = useMemo(
       () =>
-        values.map((value) =>
-          validChildren.find(({ props }) => props.label === value),
-        ),
-      [values, validChildren],
+        values.map((value) => {
+          if (hasChildren) {
+            return validChildren.find(({ props }) => props.label === value)
+          } else {
+            const props = items.find(({ label }) => label === value)
+
+            return props ? <ReorderItem key={props.label} {...props} /> : null
+          }
+        }),
+      [values, hasChildren, validChildren, items],
     )
 
     const css: CSSUIObject = {

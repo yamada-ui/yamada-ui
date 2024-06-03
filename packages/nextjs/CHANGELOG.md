@@ -1,5 +1,18 @@
 # @yamada-ui/nextjs
 
+## 6.0.1
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+
+## 6.0.0
+
+### Major Changes
+
+- [#1400](https://github.com/yamada-ui/yamada-ui/pull/1400) [`972ab4f`](https://github.com/yamada-ui/yamada-ui/commit/972ab4f753a5d47ffdf54670bbd06545496d963b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Supported Next.js v14.
+
 ## 5.0.25
 
 ### Patch Changes

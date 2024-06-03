@@ -154,7 +154,7 @@ const NoticeComponent = memo(
     return (
       <motion.li
         layout
-        className="ui-notice__list__item"
+        className="ui-notice__item"
         variants={variants}
         initial="initial"
         animate="animate"
@@ -173,7 +173,7 @@ const NoticeComponent = memo(
           } as MotionStyle
         }
       >
-        <ui.div className="ui-notice__list__item__inner" __css={css}>
+        <ui.div className="ui-notice__item-inner" __css={css}>
           {runIfFunc(message, { onClose })}
         </ui.div>
       </motion.li>

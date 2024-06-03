@@ -16,14 +16,13 @@ import {
 import { Contributors } from "./contributors"
 import { Link } from "./link"
 import { LinkedHeading } from "./linked-heading"
-import { Members } from "./members"
+import { Users } from "./users"
 import { PackageManagers } from "./package-managers"
 import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
 
 const {
-  Heading,
   Text,
   Kbd,
   Divider,
@@ -49,12 +48,12 @@ export const MDXUIComponents = {
 } as unknown as MDXComponentsType
 
 export const MDXBaseComponents: MDXComponentsType = {
-  h1: (props) => <Heading as="h1" apply="mdx.h1" {...props} />,
+  h1: (props) => <Text as="h1" apply="mdx.h1" {...props} />,
   h2: (props) => <LinkedHeading as="h2" apply="mdx.h2" {...props} />,
   h3: (props) => <LinkedHeading as="h3" apply="mdx.h3" {...props} />,
   h4: (props) => <LinkedHeading as="h4" apply="mdx.h4" {...props} />,
-  h5: (props) => <Heading as="h5" apply="mdx.h5" {...props} />,
-  h6: (props) => <Heading as="h6" apply="mdx.h6" {...props} />,
+  h5: (props) => <Text as="h5" apply="mdx.h5" {...props} />,
+  h6: (props) => <Text as="h6" apply="mdx.h6" {...props} />,
   p: (props) => <Text apply="mdx.p" {...props} />,
   strong: (props) => <Text as="strong" apply="mdx.strong" {...props} />,
   code: (props) => <Text as="code" apply="mdx.code" {...props} />,
@@ -84,7 +83,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   PackageManagers,
   SelectPackageManagers,
   ColorModeButton,
-  Members: (props) => <Members {...props} />,
+  Users: (props) => <Users {...props} />,
   Sponsors: (props) => <Sponsors {...props} />,
   Contributors: (props) => <Contributors {...props} />,
   ColorPaletterContainer: (props) => <ColorPaletterContainer {...props} />,

@@ -27,6 +27,24 @@ cd yamada-ui
 
 4. `pnpm dev`を実行してローカルサーバーを起動します。`Windows`の場合は、`contentlayer`が期待通りに動作しない可能性があります。その場合は、`pnpm docs:dev`の前に`pnpm docs:content`を実行してください。
 
+Yamada UIのドキュメントサイトが800ページを超えているため、開発環境に負荷を感じるかもしれません。
+もし、開発環境に負荷を感じた場合は、以下の手順で開発時に必要なページを選択してください。
+
+5. `contentlayer.config.json`を生成します。
+
+```sh
+# Linux, MacOS
+cp ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
+
+# Windows
+copy ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
+```
+
+6. `contentlayer.config.json`の内容を変更します。
+
+- `contentDirInclude`: 指定されたディレクトリを包含します。
+- `contentDirExclude`: 指定されたディレクトリを除外します。
+
 ## 開発手段
 
 開発プロセスを快適するために、ツールとシステムを用意しています。
@@ -67,9 +85,9 @@ cd yamada-ui
 
 1. [リポジトリ](https://github.com/yamada-ui/yamada-ui)をフォークし、クローンします。
 
-2. `main`ブランチから新しいブランチを作成します。`[タイプ/スコープ]`という命名規則に従います。例えば、`fix/accordion-hook`や`menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
+2. `main`ブランチから新しいブランチを作成します。`[タイプ/スコープ]`という命名規則に従います。例えば、`fix/accordion-hook`や`docs/menu-typo`などです。`タイプ`は`docs`、`fix`、`feat`、`build`などの標準的なコミットタイプのいずれかです。`スコープ`は作業範囲を表す短い言葉です。
 
-3. 変更を行い、[コミット規約](https://github.com/yamada-ui/yamada-ui/blob/main/README.md#commit-convention)に従ってコミットします。
+3. 変更を行い、[コミット規約](#コミット規約)に従ってコミットします。
 
 4. 上記の全てのタスクを完了したら、変更をプッシュしてください。プッシュ後、プルリクエストのURLが生成されます。テンプレートに従ってリクエストを提出してください。また、プルリクエスト内のチェックを確認し、ビルドが正常に完了していることを確認してください。問題がある場合、このプルリクエストはマージされません。
 

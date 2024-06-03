@@ -1,5 +1,20 @@
 # @yamada-ui/indicator
 
+## 1.1.26
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/use-animation@1.0.26
+  - @yamada-ui/use-value@1.1.14
+
+## 1.1.25
+
+### Patch Changes
+
+- [#1435](https://github.com/yamada-ui/yamada-ui/pull/1435) [`7109377`](https://github.com/yamada-ui/yamada-ui/commit/7109377aca1b354ed5c4f571be6ebdbb3b8bc3c3) Thanks [@sacky3105](https://github.com/sacky3105)! - Integrate `omitObject` handling with `omitThemeProps`
+
 ## 1.1.24
 
 ### Patch Changes

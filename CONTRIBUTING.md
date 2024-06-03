@@ -47,7 +47,7 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 - **`pnpm test`**: run test for all component packages.
 - **`pnpm gen:component`**: create a component package from a template using [Plop](https://plopjs.com/).
   - Please enter package and component names in kebab case
-  - If the provider is true, then it is wrapped with a provider that contains the style to be used by the children.
+  - If the provider is true, it sets up a provider that provides styles used in `children`.
 - **`pnpm gen:hook`**: create a hook package from a template using [Plop](https://plopjs.com/).
   - Please enter package and custom hook names in kebab case
 - **`pnpm gen:tokens`**: generate theme tokens.
@@ -125,7 +125,6 @@ the following categories:
 
 ## License
 
-By contributing your code to the yamada-ui GitHub repository, you agree to
-license your contribution under the MIT license.
+By contributing code to the `Yamada UI` GitHub repository, you agree that your contributed code will be licensed under the MIT license.
 
 ### Thank you for reading till the end. I love you too. 💖

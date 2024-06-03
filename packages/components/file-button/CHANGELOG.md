@@ -1,5 +1,27 @@
 # @yamada-ui/file-button
 
+## 1.0.33
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/button@1.0.29
+  - @yamada-ui/form-control@1.1.1
+
+## 1.0.32
+
+### Patch Changes
+
+- [#1580](https://github.com/yamada-ui/yamada-ui/pull/1580) [`45ce378`](https://github.com/yamada-ui/yamada-ui/commit/45ce378af1254faeb68525a33d5ec1c0d227cef2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Extracted props and updated callbacks.
+
+## 1.0.31
+
+### Patch Changes
+
+- Updated dependencies [[`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/form-control@1.1.0
+
 ## 1.0.30
 
 ### Patch Changes

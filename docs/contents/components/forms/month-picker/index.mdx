@@ -72,13 +72,13 @@ To change the size of the calendar, set the `calendarSize`.
     calendarVariant="solid"
     calendarColorScheme="secondary"
     today
-    defaultValue={new Date(new Date().setDate(1))}
+    defaultValue={new Date()}
   />
   <MonthPicker
     calendarVariant="subtle"
     calendarColorScheme="green"
     today
-    defaultValue={new Date(new Date().setDate(1))}
+    defaultValue={new Date()}
   />
 </VStack>
 ```
@@ -107,7 +107,7 @@ To change the default type, set `defaultType` to `month` or `year`. By default, 
 To set a default month, set a `Date` to `defaultMonth`.
 
 ```tsx
-<MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08-18")} />
+<MonthPicker placeholder="YYYY/MM" defaultMonth={new Date("1993-08")} />
 ```
 
 ### Set Pattern
@@ -125,7 +125,7 @@ To set a pattern, set a regular expression to `pattern`. By default, `'/[^0-9\-\
 
 ### Date Parsing
 
-You can customize the method of parsing dates.
+You can customize the way dates are parsed.
 
 ```tsx
 <MonthPicker
@@ -142,6 +142,7 @@ To set the selectable minimum and maximum month, set a `Date` to `minDate` and `
 ```tsx
 <MonthPicker
   placeholder="YYYY/MM"
+  defaultValue={new Date(1997, 0)}
   minDate={new Date(1993, 8)}
   maxDate={new Date(2000, 10)}
 />
@@ -160,12 +161,12 @@ import "dayjs/locale/ja"
 ```
 
 :::note
-For information about locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
+For locales, please check [here](https://day.js.org/docs/en/i18n/instance-locale).
 :::
 
 ### Change Year-Month Format
 
-To change the format of the date, set a string to `inputFormat` or `yearFormat`.
+To change the format of year and month, set a string to `inputFormat` or `yearFormat`.
 
 ```tsx
 <VStack>
@@ -180,12 +181,12 @@ To change the format of the date, set a string to `inputFormat` or `yearFormat`.
 ```
 
 :::note
-For information about formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
+For formats, please check [here](https://day.js.org/docs/en/display/format#list-of-localized-formats).
 :::
 
 ### Do Not Close Calendar on Selection
 
-By default, the calendar closes automatically upon selection. To prevent the calendar from closing on selection, set `closeOnSelect` to `false`.
+By default, the calendar closes automatically upon selection. To prevent the calendar from closing on select, set `closeOnSelect` to `false`.
 
 ```tsx
 <MonthPicker placeholder="YYYY/MM" closeOnSelect={false} />
@@ -215,9 +216,9 @@ To disallow input, set `allowInput` to `false`.
 <MonthPicker placeholder="YYYY/MM" allowInput={false} />
 ```
 
-### Change Display Position
+### Change Placement
 
-To change the display position, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
+To change the placement, set `placement` to `top`, `left-start`, etc. By default, `bottom` is set.
 
 ```tsx
 <MonthPicker placeholder="YYYY/MM" placement="bottom-end" />
@@ -277,7 +278,7 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make input invalid, set `isInvalid` to `true`.
 
 ```tsx
 <VStack>
@@ -332,7 +333,7 @@ return (
 ### Use `React Hook Form`
 
 ```tsx functional=true
-type Data = { MonthPicker: Date | null }
+type Data = { monthPicker: Date | null }
 
 const {
   control,
@@ -348,12 +349,12 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.MonthPicker}
+      isInvalid={!!errors.monthPicker}
       label="Birthday"
-      errorMessage={errors.MonthPicker ? errors.MonthPicker.message : undefined}
+      errorMessage={errors.monthPicker ? errors.monthPicker.message : undefined}
     >
       <Controller
-        name="MonthPicker"
+        name="monthPicker"
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
         render={({ field }) => <MonthPicker placeholder="YYYY/MM" {...field} />}

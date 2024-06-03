@@ -47,7 +47,7 @@ describe("<Tag />", () => {
     )
     expect(
       getByTestId("tag")
-        .querySelector('span[aria-label="close"]')
+        .querySelector('span[aria-label="Close tag"]')
         ?.querySelector("svg"),
     ).toHaveStyle("font-size: 1.125rem;")
   })

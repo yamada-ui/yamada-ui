@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/color-picker",
-  "version": "1.2.13",
+  "version": "1.2.16",
   "description": "Yamada UI color picker component",
   "keywords": [
     "yamada",
@@ -8,7 +8,7 @@
     "react",
     "emotion",
     "component",
-    "accordion",
+    "color-picker",
     "ui",
     "uikit",
     "styled",

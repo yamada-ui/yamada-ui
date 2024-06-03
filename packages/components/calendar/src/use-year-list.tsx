@@ -28,7 +28,7 @@ export const useYearList = () => {
     maxYear,
     yearRefs,
     value: selectedValue,
-    selectMonthWith,
+    __selectType,
   } = useCalendarContext()
 
   const isMulti = isArray(selectedValue)
@@ -121,6 +121,21 @@ export const useYearList = () => {
     [month, setMonth, setType, setYear],
   )
 
+  const getIsSelected = useCallback(
+    (value: number) => {
+      if (__selectType === "date" || __selectType === "year") {
+        return year === value
+      } else {
+        const year = !isMulti
+          ? selectedValue?.getFullYear()
+          : selectedValue[0]?.getFullYear()
+
+        return year === value
+      }
+    },
+    [__selectType, isMulti, selectedValue, year],
+  )
+
   useUpdateEffect(() => {
     if (typeof beforeInternalYear.current !== "number") return
 
@@ -152,27 +167,26 @@ export const useYearList = () => {
   > = useCallback(
     ({ value, index, ...props }, ref = null) => {
       const isControlled = typeof beforeInternalYear.current === "number"
-      const isSelected =
-        (selectMonthWith === "month"
-          ? year
-          : !isMulti
-            ? selectedValue?.getFullYear()
-            : selectedValue[0]?.getFullYear()) === value
+      const isSelected = getIsSelected(value)
       const isDisabled = value < minYear || value > maxYear
 
       yearRefs.current.set(index, createRef<HTMLButtonElement>())
+
+      let tabIndex = -1
+
+      if (isControlled) {
+        tabIndex = -1
+      } else if (!rangeYears.includes(year) && rangeYears[0] === value) {
+        tabIndex = 0
+      } else if (isSelected) {
+        tabIndex = 0
+      }
 
       return {
         isDisabled,
         ref: mergeRefs(ref, yearRefs.current.get(index)),
         ...props,
-        tabIndex: isControlled
-          ? -1
-          : !rangeYears.includes(year) && rangeYears[0] === value
-            ? 0
-            : isSelected
-              ? 0
-              : -1,
+        tabIndex,
         "data-selected": dataAttr(isSelected),
         "data-value": value ?? "",
         "data-disabled": dataAttr(isDisabled),
@@ -180,17 +194,7 @@ export const useYearList = () => {
         onClick: handlerAll(props.onClick, (ev) => onClick(ev, value)),
       }
     },
-    [
-      isMulti,
-      maxYear,
-      minYear,
-      onClick,
-      rangeYears,
-      selectMonthWith,
-      selectedValue,
-      year,
-      yearRefs,
-    ],
+    [getIsSelected, minYear, maxYear, yearRefs, rangeYears, year, onClick],
   )
 
   return { rangeYears, getContainerProps, getButtonProps }

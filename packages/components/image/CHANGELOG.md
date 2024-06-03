@@ -1,5 +1,18 @@
 # @yamada-ui/image
 
+## 1.0.27
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+
+## 1.0.26
+
+### Patch Changes
+
+- [#1407](https://github.com/yamada-ui/yamada-ui/pull/1407) [`6e495d3`](https://github.com/yamada-ui/yamada-ui/commit/6e495d330c93679b58e22b279eeacd44eb773b29) Thanks [@Eiji-Kudo](https://github.com/Eiji-Kudo)! - delete the redundant omitObject
+
 ## 1.0.25
 
 ### Patch Changes

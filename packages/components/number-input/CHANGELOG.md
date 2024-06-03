@@ -1,5 +1,29 @@
 # @yamada-ui/number-input
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`4bfc75b`](https://github.com/yamada-ui/yamada-ui/commit/4bfc75b06a74ec10d0e71440bad84429d4e42842)]:
+  - @yamada-ui/core@1.7.0
+  - @yamada-ui/form-control@1.1.1
+  - @yamada-ui/icon@1.0.26
+
+## 1.1.0
+
+### Minor Changes
+
+- [#1372](https://github.com/yamada-ui/yamada-ui/pull/1372) [`f932764`](https://github.com/yamada-ui/yamada-ui/commit/f932764a026888adf53d7b222cc8ddd8fd6d6c18) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - - Enhanced aria attributes.
+  - Fixed a bug where getAriaValueText was not working.
+
+### Patch Changes
+
+- [#1430](https://github.com/yamada-ui/yamada-ui/pull/1430) [`5d782f2`](https://github.com/yamada-ui/yamada-ui/commit/5d782f2a7fb006fbf57afa9c1536e3ca393dda8a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Rename `uiProps` to `props`.
+
+- Updated dependencies [[`c4b320e`](https://github.com/yamada-ui/yamada-ui/commit/c4b320e1c69eeff7f44814d3565e6423c3cbdec9), [`00866a3`](https://github.com/yamada-ui/yamada-ui/commit/00866a3b2b2e2e961314e94b0721ea4e450ce8a9)]:
+  - @yamada-ui/use-counter@1.0.14
+  - @yamada-ui/form-control@1.1.0
+
 ## 1.0.28
 
 ### Patch Changes

@@ -80,9 +80,7 @@ describe("<Dropzone />", () => {
         <Text>Drag file here or click to select file</Text>
       </Dropzone>,
     )
-    expect(
-      container.querySelector(".ui-dropzone__overlay__loading"),
-    ).toBeTruthy()
+    expect(container.querySelector(".ui-dropzone__loading")).toBeTruthy()
   })
 
   test("Is the onDrop return files correctly", async () => {

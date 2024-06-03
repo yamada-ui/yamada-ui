@@ -1,5 +1,11 @@
 # @yamada-ui/use-focus-visible
 
+## 1.1.0
+
+### Minor Changes
+
+- [#1416](https://github.com/yamada-ui/yamada-ui/pull/1416) [`686a0b6`](https://github.com/yamada-ui/yamada-ui/commit/686a0b6caf0b34512719d61ffd7c7bef96673282) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added options to `useFocusVisible`.
+
 ## 1.0.13
 
 ### Patch Changes

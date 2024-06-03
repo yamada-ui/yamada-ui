@@ -47,4 +47,20 @@ describe("<ColorPicker />", () => {
 
     resetEyeDropperMock()
   })
+
+  test("ColorPicker renders as disabled", () => {
+    render(<ColorPicker data-testid="colorPicker" disabled />)
+
+    const colorPicker = screen.getByTestId("colorPicker")
+
+    expect(colorPicker).toHaveAttribute("disabled")
+  })
+
+  test("ColorSelector renders initially when isOpen is specified for ColorPicer", () => {
+    render(<ColorPicker data-testid="colorPicker" isOpen />)
+
+    const popover = document.getElementsByClassName("ui-popover")
+
+    expect(popover[0]).toBeInTheDocument()
+  })
 })

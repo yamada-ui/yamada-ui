@@ -3,8 +3,7 @@ import { FileInput } from "../src"
 
 describe("<FileInput />", () => {
   test("FileInput renders correctly", async () => {
-    const { container } = render(<FileInput placeholder="basic" />)
-    await a11y(container)
+    await a11y(<FileInput placeholder="basic" />)
   })
 
   test("should render FileInput", () => {

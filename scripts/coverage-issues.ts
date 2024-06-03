@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/rest"
 import { config } from "dotenv"
-import { recursiveOctokit } from "./utils"
+import { recursiveOctokit, wait } from "./utils"
 
 config()
 
@@ -187,43 +187,43 @@ const getTargetPackages = (files: Record<string, number[]>) => {
 const createIssues = async (
   existPackages: Record<string, Issue>,
   packages: Record<string, Record<string, number[]>>,
-) =>
-  Promise.all(
-    Object.entries(packages).map(([packageName, files]) =>
-      recursiveOctokit(async () => {
-        const isExist = Object.keys(existPackages).includes(packageName)
+) => {
+  for await (const [packageName, files] of Object.entries(packages)) {
+    const isExist = Object.keys(existPackages).includes(packageName)
+    const body = ISSUE_BODY(packageName, files)
 
-        const body = ISSUE_BODY(packageName, files)
+    await recursiveOctokit(async () => {
+      if (isExist) {
+        const { number, body: prevBody } = existPackages[packageName]
 
-        if (isExist) {
-          const { number, body: prevBody } = existPackages[packageName]
+        if (prevBody === body) {
+          console.log("Skipped issue", number, packageName)
 
-          if (prevBody === body) {
-            console.log("Skipped issue", number, packageName)
-
-            return
-          }
-
-          await octokit.issues.update({
-            ...GITHUB_OPTIONS,
-            issue_number: number,
-            body,
-          })
-
-          console.log("Updated issue", number, packageName)
-        } else {
-          await octokit.issues.create({
-            ...GITHUB_OPTIONS,
-            title: `Enhance Test Coverage for \`${packageName}\``,
-            body,
-            labels: ["coverage", "test", "good first issue"],
-          })
-
-          console.log("Created issue", packageName)
+          return
         }
-      }),
-    ),
-  )
+
+        await octokit.issues.update({
+          ...GITHUB_OPTIONS,
+          issue_number: number,
+          body,
+        })
+
+        console.log("Updated issue", number, packageName)
+      } else {
+        await octokit.issues.create({
+          ...GITHUB_OPTIONS,
+          title: `Enhance Test Coverage for \`${packageName}\``,
+          body,
+          labels: ["coverage", "test", "good first issue"],
+        })
+
+        console.log("Created issue", packageName)
+      }
+    })
+
+    await wait(3000)
+  }
+}
 
 const main = async () => {
   try {

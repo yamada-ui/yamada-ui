@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/rest"
 import { config } from "dotenv"
-import { recursiveOctokit } from "./utils"
+import { recursiveOctokit, wait } from "./utils"
 
 config()
 
@@ -190,37 +190,38 @@ const createIssues = async (
 ) => {
   for await (const [packageName, files] of Object.entries(packages)) {
     const isExist = Object.keys(existPackages).includes(packageName)
-
     const body = ISSUE_BODY(packageName, files)
 
-    if (isExist) {
-      const { number, body: prevBody } = existPackages[packageName]
+    await recursiveOctokit(async () => {
+      if (isExist) {
+        const { number, body: prevBody } = existPackages[packageName]
 
-      if (prevBody === body) {
-        console.log("Skipped issue", number, packageName)
+        if (prevBody === body) {
+          console.log("Skipped issue", number, packageName)
 
-        continue
+          return
+        }
+
+        await octokit.issues.update({
+          ...GITHUB_OPTIONS,
+          issue_number: number,
+          body,
+        })
+
+        console.log("Updated issue", number, packageName)
+      } else {
+        await octokit.issues.create({
+          ...GITHUB_OPTIONS,
+          title: `Enhance Test Coverage for \`${packageName}\``,
+          body,
+          labels: ["coverage", "test", "good first issue"],
+        })
+
+        console.log("Created issue", packageName)
       }
+    })
 
-      await octokit.issues.update({
-        ...GITHUB_OPTIONS,
-        issue_number: number,
-        body,
-      })
-
-      console.log("Updated issue", number, packageName)
-    } else {
-      await octokit.issues.create({
-        ...GITHUB_OPTIONS,
-        title: `Enhance Test Coverage for \`${packageName}\``,
-        body,
-        labels: ["coverage", "test", "good first issue"],
-      })
-
-      console.log("Created issue", packageName)
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    await wait(3000)
   }
 }
 

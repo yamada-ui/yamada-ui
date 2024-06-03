@@ -22,7 +22,7 @@ import {
 
 describe("<Menu />", () => {
   test("Menu renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <Menu>
         <MenuButton
           as={Button}
@@ -36,7 +36,6 @@ describe("<Menu />", () => {
         </MenuList>
       </Menu>,
     )
-    await a11y(container)
   })
 
   test("should render the menu", () => {

@@ -370,7 +370,7 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-menu__item__icon", className)}
+        className={cx("ui-menu__item-icon", className)}
         __css={css}
         {...rest}
       />
@@ -389,7 +389,7 @@ export const MenuCommand = forwardRef<MenuCommandProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-menu__item__command", className)}
+        className={cx("ui-menu__item-command", className)}
         __css={css}
         {...rest}
       />

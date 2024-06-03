@@ -1,4 +1,4 @@
-import { a11y, render } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { Card, CardBody, CardFooter, CardHeader } from "../src"
 
 describe("<Card />", () => {
@@ -8,60 +8,60 @@ describe("<Card />", () => {
     await a11y(container)
   })
 
-  test("renders all the allowed shorthand style props", () => {
-    const { getByTestId } = render(
-      <Card data-testid="card" direction="row" justify="start" align="start">
+  test("renders all the allowed shorthand style props", async () => {
+    render(
+      <Card direction="row" justify="start" align="start">
         Flex
       </Card>,
     )
 
-    expect(getByTestId("card")).toHaveStyle({
+    const card = await screen.findByRole("article")
+    expect(card).toHaveStyle({
       flexDirection: "row",
       justifyContent: "start",
       alignItems: "start",
     })
   })
 
-  test("<Card /> renders <ui.article /> component", () => {
-    const { container } = render(<Card>Card</Card>)
-    const articleElement = container.querySelector("article")
+  test("<Card /> renders <ui.article /> component", async () => {
+    render(<Card>Card</Card>)
 
-    expect(articleElement).not.toBeNull()
+    const article = await screen.findByRole("article")
+    expect(article).toBeInTheDocument()
+    expect(article).toHaveTextContent("Card")
   })
 
-  test("<CardHeader /> renders correctly", () => {
-    const { getByTestId } = render(
+  test("<CardHeader /> renders correctly", async () => {
+    render(
       <Card>
-        <CardHeader data-testid="header">Card Header</CardHeader>
+        <CardHeader>Card Header</CardHeader>
       </Card>,
     )
-    const header = getByTestId("header")
 
+    const header = await screen.findByRole("banner")
     expect(header).toBeInTheDocument()
     expect(header).toHaveTextContent("Card Header")
   })
 
-  test("<CardHeader /> applies custom className", () => {
-    const { getByTestId } = render(
+  test("<CardHeader /> applies custom className", async () => {
+    render(
       <Card>
-        <CardHeader data-testid="header" className="custom-class">
-          Card Header
-        </CardHeader>
+        <CardHeader className="custom-class">Card Header</CardHeader>
       </Card>,
     )
-    const header = getByTestId("header")
 
+    const header = await screen.findByRole("banner")
     expect(header).toHaveClass("custom-class")
   })
 
-  test("<CardHeader /> applies styles correctly", () => {
-    const { getByTestId } = render(
+  test("<CardHeader /> applies styles correctly", async () => {
+    render(
       <Card>
-        <CardHeader data-testid="header">Card Header</CardHeader>
+        <CardHeader>Card Header</CardHeader>
       </Card>,
     )
-    const header = getByTestId("header")
 
+    const header = await screen.findByRole("banner")
     expect(header).toHaveStyle({
       display: "flex",
       justifyContent: "flex-start",
@@ -69,50 +69,50 @@ describe("<Card />", () => {
     })
   })
 
-  test("<CardHeader /> renders <ui.header /> component", () => {
-    const { container } = render(
+  test("<CardHeader /> renders <ui.header /> component", async () => {
+    render(
       <Card>
         <CardHeader>CardHeader</CardHeader>
       </Card>,
     )
-    const headerElement = container.querySelector("header")
 
-    expect(headerElement).not.toBeNull()
+    const header = await screen.findByRole("banner")
+    expect(header).toBeInTheDocument()
   })
 
-  test("<CardBody /> renders correctly", () => {
-    const { getByTestId } = render(
+  test("<CardBody /> renders correctly", async () => {
+    render(
       <Card>
         <CardBody data-testid="body">Card Body</CardBody>
       </Card>,
     )
-    const body = getByTestId("body")
 
+    const body = await screen.findByTestId("body")
     expect(body).toBeInTheDocument()
     expect(body).toHaveTextContent("Card Body")
   })
 
-  test("<CardBody /> applies custom className", () => {
-    const { getByTestId } = render(
+  test("<CardBody /> applies custom className", async () => {
+    render(
       <Card>
         <CardBody data-testid="body" className="custom-class">
           Card Body
         </CardBody>
       </Card>,
     )
-    const body = getByTestId("body")
 
+    const body = await screen.findByTestId("body")
     expect(body).toHaveClass("custom-class")
   })
 
-  test("<CardBody /> applies styles correctly", () => {
-    const { getByTestId } = render(
+  test("<CardBody /> applies styles correctly", async () => {
+    render(
       <Card>
         <CardBody data-testid="body">Card Body</CardBody>
       </Card>,
     )
-    const body = getByTestId("body")
 
+    const body = await screen.findByTestId("body")
     expect(body).toHaveStyle({
       display: "flex",
       flexDirection: "column",
@@ -120,39 +120,37 @@ describe("<Card />", () => {
     })
   })
 
-  test("<CardFooter /> renders correctly", () => {
-    const { getByTestId } = render(
+  test("<CardFooter /> renders correctly", async () => {
+    render(
       <Card>
-        <CardFooter data-testid="footer">Card Footer</CardFooter>
+        <CardFooter>Card Footer</CardFooter>
       </Card>,
     )
-    const footer = getByTestId("footer")
 
+    const footer = await screen.findByRole("contentinfo")
     expect(footer).toBeInTheDocument()
     expect(footer).toHaveTextContent("Card Footer")
   })
 
-  test("<CardFooter /> applies custom className", () => {
-    const { getByTestId } = render(
+  test("<CardFooter /> applies custom className", async () => {
+    render(
       <Card>
-        <CardFooter data-testid="footer" className="custom-class">
-          Card Footer
-        </CardFooter>
+        <CardFooter className="custom-class">Card Footer</CardFooter>
       </Card>,
     )
-    const footer = getByTestId("footer")
 
+    const footer = await screen.findByRole("contentinfo")
     expect(footer).toHaveClass("custom-class")
   })
 
-  test("<CardFooter /> applies styles correctly", () => {
-    const { getByTestId } = render(
+  test("<CardFooter /> applies styles correctly", async () => {
+    render(
       <Card>
-        <CardFooter data-testid="footer">Card Footer</CardFooter>
+        <CardFooter>Card Footer</CardFooter>
       </Card>,
     )
-    const footer = getByTestId("footer")
 
+    const footer = await screen.findByRole("contentinfo")
     expect(footer).toHaveStyle({
       display: "flex",
       justifyContent: "flex-start",
@@ -160,14 +158,14 @@ describe("<Card />", () => {
     })
   })
 
-  test("<CardFooter /> renders <ui.footer /> component", () => {
-    const { container } = render(
+  test("<CardFooter /> renders <ui.footer /> component", async () => {
+    render(
       <Card>
         <CardFooter>CardFooter</CardFooter>
       </Card>,
     )
-    const footerElement = container.querySelector("footer")
 
-    expect(footerElement).not.toBeNull()
+    const footer = await screen.findByRole("contentinfo")
+    expect(footer).toBeInTheDocument()
   })
 })

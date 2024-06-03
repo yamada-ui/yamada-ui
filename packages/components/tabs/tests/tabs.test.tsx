@@ -162,9 +162,12 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
     const tab3 = await screen.findByRole("tab", { name: /Tab 3/i })
 
-    await user.tab()
+    await user.click(tab1)
+    expect(tab1).toHaveFocus()
+
     await user.keyboard("{arrowleft}")
     expect(tab3).toHaveFocus()
   })
@@ -180,9 +183,10 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
     const tab2 = await screen.findByRole("tab", { name: /Tab 2/i })
 
-    await user.tab()
+    await user.click(tab1)
     await user.keyboard("{arrowright}")
     expect(tab2).toHaveFocus()
   })
@@ -198,9 +202,10 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
     const tab2 = await screen.findByRole("tab", { name: /Tab 2/i })
 
-    await user.tab()
+    await user.click(tab1)
     await user.keyboard("{arrowdown}")
     expect(tab2).toHaveFocus()
   })
@@ -216,9 +221,10 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
     const tab3 = await screen.findByRole("tab", { name: /Tab 3/i })
 
-    await user.tab()
+    await user.click(tab1)
     await user.keyboard("{arrowup}")
     expect(tab3).toHaveFocus()
   })
@@ -236,7 +242,7 @@ describe("<Tabs />", () => {
 
     const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
 
-    await user.tab()
+    await user.click(tab1)
     await user.keyboard("{arrowright}")
     await user.keyboard("{arrowright}")
     await user.keyboard("{home}")
@@ -255,9 +261,10 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
     const tab3 = await screen.findByRole("tab", { name: /Tab 3/i })
 
-    await user.tab()
+    await user.click(tab1)
     await user.keyboard("{end}")
 
     expect(tab3).toHaveFocus()

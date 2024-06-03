@@ -105,7 +105,7 @@ export const AutocompleteItemIcon = forwardRef<
   return (
     <ui.span
       ref={ref}
-      className={cx("ui-autocomplete__item__icon", className)}
+      className={cx("ui-autocomplete__item-icon", className)}
       __css={css}
       {...rest}
     />

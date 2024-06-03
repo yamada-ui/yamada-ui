@@ -32,7 +32,7 @@ export const ColorSelectorEyeDropper = forwardRef<
       __css={css}
       {...getEyeDropperProps(rest, ref)}
     >
-      <EyeDropperIcon className="ui-color-selector__eye-dropper__icon" />
+      <EyeDropperIcon className="ui-color-selector__eye-dropper-icon" />
     </IconButton>
   )
 })

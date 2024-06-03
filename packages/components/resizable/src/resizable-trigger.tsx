@@ -42,7 +42,7 @@ export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
       >
         {icon ? (
           <ui.div
-            className="ui-resizable__trigger__icon"
+            className="ui-resizable__trigger-icon"
             __css={{
               position: "absolute",
               top: "50%",

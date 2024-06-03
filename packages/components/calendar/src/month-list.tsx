@@ -81,7 +81,7 @@ export const MonthList: FC<MonthListProps> = ({
         {rangeMonths.map((month, index) => (
           <Button
             key={index}
-            className="ui-calendar__month-list__button"
+            className="ui-calendar__month-list-button"
             variant="ghost"
             __css={{
               minW: "auto",

@@ -312,8 +312,6 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
     }, [])
 
     const css: CSSUIObject = {
-      display: "inline-flex",
-      alignItems: "center",
       ...styles.container,
     }
 
@@ -426,12 +424,6 @@ export const SegmentedControlButton = forwardRef<
     }
 
     const css: CSSUIObject = {
-      position: "relative",
-      cursor: "pointer",
-      flex: "1 1 0%",
-      display: "inline-flex",
-      justifyContent: "center",
-      alignItems: "center",
       ...styles.button,
     }
 
@@ -468,9 +460,6 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
   const { styles } = useSegmentedControl()
 
   const css: CSSUIObject = {
-    position: "absolute",
-    w: "100%",
-    h: "100%",
     ...styles.cursor,
   }
 

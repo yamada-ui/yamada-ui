@@ -17,7 +17,27 @@ export const Select: ComponentMultiStyle = mergeMultiStyle(NativeSelect, Menu, {
       maxH: "xs",
       overflowY: "auto",
     },
+    icon: {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      pointerEvents: "none",
+      cursor: "pointer",
+    },
     item: {
+      textDecoration: "none",
+      color: "inherit",
+      userSelect: "none",
+      display: "flex",
+      width: "100%",
+      alignItems: "center",
+      textAlign: "start",
+      flex: "0 0 auto",
+      outline: 0,
+      gap: "0.75rem",
       _hover: {
         bg: ["blackAlpha.100", "whiteAlpha.100"],
         _disabled: {

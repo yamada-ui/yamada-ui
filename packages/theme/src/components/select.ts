@@ -5,7 +5,13 @@ import { NativeSelect } from "./native-select"
 
 export const Select: ComponentMultiStyle = mergeMultiStyle(NativeSelect, Menu, {
   baseStyle: {
-    inner: {},
+    container: {
+      w: "100%",
+      h: "fit-content",
+    },
+    inner: {
+      position: "relative",
+    },
     list: {
       w: "100%",
       maxH: "xs",
@@ -23,5 +29,10 @@ export const Select: ComponentMultiStyle = mergeMultiStyle(NativeSelect, Menu, {
       },
     },
     itemIcon: {},
+    field: {
+      pe: "2rem",
+      display: "flex",
+      alignItems: "center",
+    },
   },
 })({ omit: ["button", "command"] })

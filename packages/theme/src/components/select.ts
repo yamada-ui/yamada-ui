@@ -48,7 +48,13 @@ export const Select: ComponentMultiStyle = mergeMultiStyle(NativeSelect, Menu, {
         bg: ["blackAlpha.200", "whiteAlpha.200"],
       },
     },
-    itemIcon: {},
+    itemIcon: {
+      flexShrink: 0,
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize: "0.85em",
+    },
     field: {
       pe: "2rem",
       display: "flex",

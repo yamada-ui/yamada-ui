@@ -16,13 +16,6 @@ export const MultiSelect: ComponentMultiStyle = mergeMultiStyle(Select, {
       display: "flex",
       alignItems: "center",
     },
-    itemIcon: {
-      flexShrink: 0,
-      display: "inline-flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: "0.85em",
-    },
     clearIcon: {
       transitionProperty: "common",
       transitionDuration: "normal",

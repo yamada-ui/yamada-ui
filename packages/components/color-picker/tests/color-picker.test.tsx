@@ -61,6 +61,6 @@ describe("<ColorPicker />", () => {
 
     const popover = document.getElementsByClassName("ui-popover")
 
-    expect(popover[0]).toBeInTheDocument()
+    expect(popover[0]).toBeVisible()
   })
 })

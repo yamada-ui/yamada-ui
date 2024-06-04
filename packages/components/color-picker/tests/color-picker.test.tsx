@@ -49,11 +49,11 @@ describe("<ColorPicker />", () => {
   })
 
   test("ColorPicker renders as disabled", () => {
-    render(<ColorPicker data-testid="colorPicker" disabled />)
+    render(<ColorPicker disabled />)
 
-    const colorPicker = screen.getByTestId("colorPicker")
+    const colorPicker = screen.getByRole("textbox")
 
-    expect(colorPicker).toHaveAttribute("disabled")
+    expect(colorPicker).toBeDisabled()
   })
 
   test("ColorSelector renders initially when isOpen is specified for ColorPicer", () => {
@@ -62,5 +62,13 @@ describe("<ColorPicker />", () => {
     const popover = document.getElementsByClassName("ui-popover")
 
     expect(popover[0]).toBeVisible()
+  })
+
+  test("ColorSelector does not render initially when isOpen is not specified for ColorPicer", () => {
+    render(<ColorPicker data-testid="colorPicker" />)
+
+    const popover = document.getElementsByClassName("ui-popover")
+
+    expect(popover[0]).not.toBeVisible()
   })
 })

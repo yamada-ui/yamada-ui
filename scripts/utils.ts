@@ -28,7 +28,8 @@ export const toKebabCase = (value: string & {}) =>
     .toLowerCase()
     .replace(/^-/, "")
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+export const wait = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))
 
 export const recursiveOctokit = async <T extends any = void>(
   callback: () => Promise<T>,

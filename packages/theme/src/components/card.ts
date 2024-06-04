@@ -3,12 +3,26 @@ import { shadeColor, tintColor } from "@yamada-ui/utils"
 
 export const Card: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
-    header: {},
+    container: {
+      display: "flex",
+      wordWrap: "break-word",
+    },
+    header: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
     body: {
       flex: "1",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
     },
-    footer: {},
+    footer: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
   },
 
   variants: {

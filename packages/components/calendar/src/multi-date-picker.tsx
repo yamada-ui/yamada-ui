@@ -308,7 +308,7 @@ export const MultiDatePickerField = forwardRef<
           <ui.input
             aria-label="Input date value"
             ref={mergeRefs(ref, inputPropRef, inputRef)}
-            className="ui-multi-date-picker__field__input"
+            className="ui-multi-date-picker__field-input"
             display="inline-block"
             flex="1"
             overflow="hidden"

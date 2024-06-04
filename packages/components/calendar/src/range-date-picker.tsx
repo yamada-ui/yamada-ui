@@ -234,7 +234,7 @@ export const RangeDatePickerField = forwardRef<
         >
           <AutosizingInput
             ref={mergeRefs(ref, startInputRef)}
-            className="ui-range-date-picker__field__start-input"
+            className="ui-range-date-picker__field-input ui-range-date-picker__field-input--start"
             aria-label="Start date"
             placeholder={startPlaceholder}
             {...computedStartInputProps}
@@ -250,7 +250,7 @@ export const RangeDatePickerField = forwardRef<
           ) : null}
 
           <AutosizingInput
-            className="ui-range-date-picker__field__end-input"
+            className="ui-range-date-picker__field-input ui-range-date-picker__field-input--end"
             aria-label="End date"
             placeholder={endPlaceholder}
             {...computedEndInputProps}

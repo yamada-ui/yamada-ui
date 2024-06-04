@@ -75,11 +75,6 @@ export const Alert = forwardRef<AlertProps, "div">(
     const { className, children, ...rest } = omitThemeProps(mergedProps)
 
     const css: CSSUIObject = {
-      w: "100%",
-      display: "flex",
-      alignItems: "center",
-      position: "relative",
-      overflow: "hidden",
       ...styles.container,
     }
 

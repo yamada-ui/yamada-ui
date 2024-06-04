@@ -4,6 +4,11 @@ import { shadeColor, tintColor } from "@yamada-ui/utils"
 export const Alert: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      w: "100%",
+      display: "flex",
+      alignItems: "center",
+      position: "relative",
+      overflow: "hidden",
       px: 4,
       py: 3,
       rounded: "md",

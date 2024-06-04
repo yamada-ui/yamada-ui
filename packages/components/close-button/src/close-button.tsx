@@ -58,13 +58,6 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
     })
 
     const css: CSSUIObject = {
-      position: "relative",
-      overflow: "hidden",
-      outline: 0,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexShrink: 0,
       ...styles,
       ...__css,
       ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),

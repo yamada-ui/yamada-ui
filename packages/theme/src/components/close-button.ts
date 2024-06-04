@@ -3,6 +3,13 @@ import { Button } from "./button"
 
 export const CloseButton: ComponentStyle = mergeStyle(Button, {
   baseStyle: {
+    position: "relative",
+    overflow: "hidden",
+    outline: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexShrink: 0,
     _hover: {
       bg: ["blackAlpha.100", "whiteAlpha.100"],
     },

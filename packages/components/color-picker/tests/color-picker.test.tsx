@@ -57,17 +57,17 @@ describe("<ColorPicker />", () => {
   })
 
   test("ColorSelector renders initially when isOpen is specified for ColorPicer", () => {
-    render(<ColorPicker data-testid="colorPicker" isOpen />)
+    const { container } = render(<ColorPicker isOpen />)
 
-    const popover = document.getElementsByClassName("ui-popover")
+    const popover = container.querySelectorAll(".ui-popover")
 
     expect(popover[0]).toBeVisible()
   })
 
   test("ColorSelector does not render initially when isOpen is not specified for ColorPicer", () => {
-    render(<ColorPicker data-testid="colorPicker" />)
+    const { container } = render(<ColorPicker />)
 
-    const popover = document.getElementsByClassName("ui-popover")
+    const popover = container.querySelectorAll(".ui-popover")
 
     expect(popover[0]).not.toBeVisible()
   })

@@ -47,11 +47,9 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    display: "flex",
     flexDirection,
     justifyContent,
     alignItems,
-    wordWrap: "break-word",
     ...styles.container,
   }
 
@@ -74,9 +72,6 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
     const styles = useCard()
 
     const css: CSSUIObject = {
-      display: "flex",
-      justifyContent: "flex-start",
-      alignItems: "center",
       ...styles.header,
     }
 
@@ -98,9 +93,6 @@ export const CardBody = forwardRef<CardBodyProps, "main">(
     const styles = useCard()
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
       ...styles.body,
     }
 
@@ -122,9 +114,6 @@ export const CardFooter = forwardRef<CardFooterProps, "footer">(
     const styles = useCard()
 
     const css: CSSUIObject = {
-      display: "flex",
-      justifyContent: "flex-start",
-      alignItems: "center",
       ...styles.footer,
     }
 

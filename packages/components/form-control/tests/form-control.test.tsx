@@ -42,9 +42,7 @@ describe("<FormControl />", () => {
       </FormControl>,
     )
     expect(screen.queryByText("Email is required.")).toBeInTheDocument()
-    expect(
-      screen.queryByText("Please enter your email"),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByText("Please enter your email")).toBeNull()
   })
 
   test("should be appeared helperMessage", () => {
@@ -71,7 +69,7 @@ describe("<FormControl />", () => {
         <Input type="email" />
       </FormControl>,
     )
-    expect(screen.getByRole("textbox")).toHaveAttribute("required")
+    expect(screen.getByRole("textbox")).toBeRequired()
   })
 
   test("should be disabled", () => {
@@ -80,7 +78,7 @@ describe("<FormControl />", () => {
         <Input type="email" />
       </FormControl>,
     )
-    expect(screen.getByRole("textbox")).toHaveAttribute("aria-disabled", "true")
+    expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
   test("should be read only", () => {

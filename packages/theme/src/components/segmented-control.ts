@@ -4,15 +4,26 @@ import { isAccessible, isGray } from "@yamada-ui/utils"
 export const SegmentedControl: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      display: "inline-flex",
+      alignItems: "center",
       p: "1",
       bg: ["blackAlpha.100", "whiteAlpha.50"],
       _readOnly: { cursor: "default" },
       _disabled: { cursor: "not-allowed" },
     },
     cursor: {
+      position: "absolute",
+      w: "100%",
+      h: "100%",
       boxShadow: ["md", "dark-md"],
     },
     button: {
+      position: "relative",
+      cursor: "pointer",
+      flex: "1 1 0%",
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
       transitionProperty: "common",
       transitionDuration: "ultra-slow",
       fontWeight: "medium",

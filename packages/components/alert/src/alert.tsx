@@ -139,7 +139,6 @@ export const AlertTitle = forwardRef<AlertTitleProps, "p">(
     const { styles } = useAlert()
 
     const css: CSSUIObject = {
-      display: "block",
       ...styles.title,
     }
 

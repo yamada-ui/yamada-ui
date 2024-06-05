@@ -27,6 +27,7 @@ export const Alert: ComponentMultiStyle = {
       marginEnd: 2,
       fontWeight: "bold",
       lineHeight: 5,
+      display: "block",
     },
     description: {
       lineHeight: 5,

@@ -57,12 +57,6 @@ export const Tab = forwardRef<TabProps, "button">(
     })
 
     const css: CSSUIObject = {
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      outline: "0",
       ...styles.tab,
     }
 

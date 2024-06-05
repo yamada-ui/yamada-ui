@@ -5,14 +5,22 @@ import { getColor, isGray, shadeColor, tintColor } from "@yamada-ui/utils"
 export const Tabs: ComponentMultiStyle = {
   baseStyle: {
     container: ({ orientation }) => ({
+      w: "100%",
       display: "flex",
       flexDirection: orientation === "vertical" ? "row" : "column",
     }),
     tabList: ({ align, orientation }) => ({
+      display: "flex",
       flexDirection: orientation === "vertical" ? "column" : "row",
       justifyContent: align === "center" ? align : `flex-${align}`,
     }),
     tab: ({ isFitted }) => ({
+      position: "relative",
+      overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      outline: "0",
       flex: isFitted ? 1 : undefined,
       whiteSpace: "nowrap",
       transitionProperty: "common",
@@ -28,7 +36,9 @@ export const Tabs: ComponentMultiStyle = {
         opacity: 0.4,
       },
     }),
-    tabPanels: {},
+    tabPanels: {
+      w: "100%",
+    },
     tabPanel: {
       p: "md",
     },

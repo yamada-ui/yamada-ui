@@ -349,7 +349,6 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
     const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
 
     const css: CSSUIObject = {
-      position: "relative",
       ...styles,
     }
 

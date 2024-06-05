@@ -4,7 +4,11 @@ import { getColor, isArray } from "@yamada-ui/utils"
 
 export const Input: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
+    container: {
+      width: "100%",
+      display: "flex",
+      position: "relative",
+    },
     field: {
       width: "100%",
       minWidth: 0,

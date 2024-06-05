@@ -25,7 +25,7 @@ describe("<FormControl />", () => {
       </FormControl>,
     )
     expect(screen.getByText("Email")).toHaveAttribute("data-invalid")
-    expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
+    expect(screen.getByRole("textbox")).toBeInvalid()
     expect(screen.getByText("Email is required.")).toBeInTheDocument()
   })
 
@@ -41,7 +41,7 @@ describe("<FormControl />", () => {
         <Input type="email" />
       </FormControl>,
     )
-    expect(screen.queryByText("Email is required.")).toBeInTheDocument()
+    expect(screen.getByText("Email is required.")).toBeInTheDocument()
     expect(screen.queryByText("Please enter your email")).toBeNull()
   })
 
@@ -59,7 +59,7 @@ describe("<FormControl />", () => {
         </FormControl>
       </>,
     )
-    expect(screen.queryByText("Email is required.")).toBeInTheDocument()
+    expect(screen.getByText("Email is required.")).toBeInTheDocument()
     expect(screen.queryByText("Please enter your email")).toBeInTheDocument()
   })
 

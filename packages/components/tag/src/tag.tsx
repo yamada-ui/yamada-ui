@@ -58,11 +58,6 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    maxW: "100%",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "fallback(1, 0.25rem)",
-    verticalAlign: "top",
     ...styles.container,
   }
 
@@ -115,11 +110,6 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   const [styles] = useMultiComponentStyle("Tag", props)
 
   const css: CSSUIObject = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    outline: "0",
-    cursor: "pointer",
     ...styles.closeButton,
   }
 

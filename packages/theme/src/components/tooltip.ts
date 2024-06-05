@@ -14,5 +14,6 @@ export const Tooltip: ComponentStyle = {
     boxShadow: ["md", "dark-md"],
     maxW: "xs",
     zIndex: "dodoria",
+    position: "relative",
   },
 }

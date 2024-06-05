@@ -144,8 +144,6 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
   )
 
   const css: CSSUIObject = {
-    display: "flex",
-    alignItems: "center",
     ...styles.container,
   }
 

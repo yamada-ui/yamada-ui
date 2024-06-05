@@ -4,6 +4,8 @@ import { transparentizeColor, isGray, isAccessible } from "@yamada-ui/utils"
 export const Pagination: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      display: "flex",
+      alignItems: "center",
       _disabled: {
         cursor: "not-allowed",
       },
@@ -12,6 +14,12 @@ export const Pagination: ComponentMultiStyle = {
       flex: 1,
     },
     item: {
+      position: "relative",
+      overflow: "hidden",
+      userSelect: "none",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       px: 1,
       color: ["blackAlpha.600", "whiteAlpha.700"],
       rounded: "md",

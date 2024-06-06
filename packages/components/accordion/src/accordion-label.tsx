@@ -82,8 +82,6 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   const css: CSSUIObject = {
     opacity: isDisabled ? 0.4 : 1,
     transform: isOpen ? "rotate(-180deg)" : undefined,
-    transition: "transform 0.2s",
-    transformOrigin: "center",
     ...styles.icon,
   }
 

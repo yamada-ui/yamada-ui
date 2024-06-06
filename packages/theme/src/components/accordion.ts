@@ -33,6 +33,8 @@ export const Accordion: ComponentMultiStyle = {
       ml: "auto",
       fontSize: "1.25em",
       color: ["blackAlpha.600", "whiteAlpha.700"],
+      transition: "transform 0.2s",
+      transformOrigin: "center",
     },
   },
 

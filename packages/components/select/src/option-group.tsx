@@ -27,7 +27,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
         {...getContainerProps()}
       >
         <ui.span
-          className="ui-select__item__group-label"
+          className="ui-select__group-label"
           __css={styles.groupLabel}
           lineClamp={1}
         >
@@ -36,7 +36,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
 
         <ui.ul
           {...getGroupProps({}, ref)}
-          className="ui-select__item__group"
+          className="ui-select__group"
           __css={{ h, minH, ...styles.group }}
         >
           {children}

@@ -81,7 +81,7 @@ describe("<ResizableTriggerIcon />", () => {
     )
 
     expect(
-      getByTestId("resizable").querySelector(".ui-resizable__trigger__icon"),
+      getByTestId("resizable").querySelector(".ui-resizable__trigger-icon"),
     ).toBeInTheDocument()
   })
 })

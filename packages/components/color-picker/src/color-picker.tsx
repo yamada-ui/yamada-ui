@@ -298,7 +298,7 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
         {isValidElement(children) ? (
           cloneChildren
         ) : (
-          <EyeDropperIcon className="ui-color-picker__eye-dropper__icon" />
+          <EyeDropperIcon className="ui-color-picker__eye-dropper-icon" />
         )}
       </ui.button>
     )

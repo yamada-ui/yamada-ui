@@ -44,19 +44,19 @@ describe("<Calendar />", () => {
       )
 
       const headerLabelBtn = container.querySelector(
-        `button.ui-calendar__header__label`,
+        `button.ui-calendar__header-label`,
       )
       fireEvent.click(headerLabelBtn!)
 
       const monthListBtns = container.querySelectorAll(
-        `button.ui-calendar__month-list__button`,
+        `button.ui-calendar__month-list-button`,
       )
       const targetMonthElem = monthListBtns[7]
       expect(targetMonthElem).toHaveTextContent("Aug")
       fireEvent.click(targetMonthElem)
 
       const headerLabelBtnAfter = container.querySelector(
-        `button.ui-calendar__header__label`,
+        `button.ui-calendar__header-label`,
       )
       expect(headerLabelBtnAfter).toHaveTextContent(
         "August " + new Date().getFullYear(),
@@ -108,7 +108,7 @@ describe("<Calendar />", () => {
           <Calendar defaultMonth={defaultSelectMonth} />,
         )
         const defaultValueBtn = container.querySelector(
-          `button.ui-calendar__header__label`,
+          `button.ui-calendar__header-label`,
         )
         expect(defaultValueBtn).toHaveTextContent("August 1993")
       })
@@ -118,14 +118,14 @@ describe("<Calendar />", () => {
       test("should render with firstDayOfWeek sunday", () => {
         const { container } = render(<Calendar firstDayOfWeek="sunday" />)
         const defaultValueBtn = container.querySelector(
-          `.ui-calendar__month__weekday__label`,
+          `.ui-calendar__month-weekday-label`,
         )
         expect(defaultValueBtn).toHaveTextContent("Su")
       })
       test("should render with firstDayOfWeek monday", () => {
         const { container } = render(<Calendar firstDayOfWeek="monday" />)
         const defaultValueBtn = container.querySelector(
-          `.ui-calendar__month__weekday__label`,
+          `.ui-calendar__month-weekday-label`,
         )
         expect(defaultValueBtn).toHaveTextContent("Mo")
       })
@@ -174,7 +174,7 @@ describe("<Calendar />", () => {
     describe("Set Weekend Days", () => {
       test("should render with weekendDays", () => {
         const { container } = render(<Calendar weekendDays={[0, 1]} />)
-        const monthDays = container.querySelectorAll(".ui-calendar__month__day")
+        const monthDays = container.querySelectorAll(".ui-calendar__month-day")
         ;[monthDays[6], monthDays[0]].forEach((monthDay) => {
           expect(monthDay).toHaveAttribute("data-weekend")
         })
@@ -222,7 +222,7 @@ describe("<Calendar />", () => {
         })
 
         const prevBtn = container.querySelector(
-          `button.ui-calendar__header__control--prev`,
+          `button.ui-calendar__header-control--prev`,
         )
 
         fireEvent.click(prevBtn!)
@@ -236,7 +236,7 @@ describe("<Calendar />", () => {
         })
 
         const nextBtn = container.querySelector(
-          `button.ui-calendar__header__control--next`,
+          `button.ui-calendar__header-control--next`,
         )
 
         fireEvent.click(nextBtn!)
@@ -260,7 +260,7 @@ describe("<Calendar />", () => {
             excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6}
           />,
         )
-        const monthDays = container.querySelectorAll(".ui-calendar__month__day")
+        const monthDays = container.querySelectorAll(".ui-calendar__month-day")
         ;[monthDays[12], monthDays[13]].forEach((monthDay) => {
           expect(monthDay).toHaveAttribute("data-disabled")
         })
@@ -275,7 +275,7 @@ describe("<Calendar />", () => {
       test("should render with locale", () => {
         const { container } = render(<Calendar locale="ja" />)
         const weekdayLabel = container.querySelector(
-          ".ui-calendar__month__weekday__label",
+          ".ui-calendar__month-weekday-label",
         )
         expect(weekdayLabel).toHaveTextContent("月")
       })
@@ -292,7 +292,7 @@ describe("<Calendar />", () => {
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
-          ".ui-calendar__header__label",
+          ".ui-calendar__header-label",
         )
         expect(headerLabel).toHaveTextContent(
           today.getFullYear() + "年 " + (+today.getMonth() + 1) + "月",
@@ -305,7 +305,7 @@ describe("<Calendar />", () => {
         )
         const today = new Date(new Date().setHours(0, 0, 0, 0))
         const headerLabel = container.querySelector(
-          ".ui-calendar__header__label",
+          ".ui-calendar__header-label",
         )
         expect(headerLabel).toHaveTextContent(today.getFullYear() + "年")
       })
@@ -315,7 +315,7 @@ describe("<Calendar />", () => {
           <Calendar locale="ja" defaultType="month" monthFormat="MM" />,
         )
         const headerLabel = container.querySelector(
-          ".ui-calendar__month-list__button",
+          ".ui-calendar__month-list-button",
         )
         expect(headerLabel).toHaveTextContent("01")
       })
@@ -338,7 +338,7 @@ describe("<Calendar />", () => {
           <Calendar locale="ja" weekdayFormat="dd曜" />,
         )
         const weekdayLabel = container.querySelector(
-          `.ui-calendar__month__weekday__label`,
+          `.ui-calendar__month-weekday-label`,
         )
         expect(weekdayLabel).toHaveTextContent("月曜")
       })
@@ -391,26 +391,26 @@ describe("<Calendar />", () => {
           />,
         )
         const headerLabelBtn = container.querySelector(
-          ".ui-calendar__header__label",
+          ".ui-calendar__header-label",
         )
         expect(headerLabelBtn).toHaveTextContent("January 2024")
 
         const prevBtn = container.querySelector(
-          `button.ui-calendar__header__control--prev`,
+          `button.ui-calendar__header-control--prev`,
         )
         fireEvent.click(prevBtn!)
         const headerLabelBtnAfterPrev = container.querySelector(
-          ".ui-calendar__header__label",
+          ".ui-calendar__header-label",
         )
         expect(headerLabelBtnAfterPrev).toHaveTextContent("November 2023")
 
         const nextBtn = container.querySelector(
-          `button.ui-calendar__header__control--next`,
+          `button.ui-calendar__header-control--next`,
         )
         fireEvent.click(nextBtn!)
         fireEvent.click(nextBtn!)
         const headerLabelBtnAfterNext = container.querySelector(
-          ".ui-calendar__header__label",
+          ".ui-calendar__header-label",
         )
         expect(headerLabelBtnAfterNext).toHaveTextContent("March 2024")
       })
@@ -433,26 +433,26 @@ describe("<Calendar />", () => {
             />,
           )
           const headerLabelBtn = container.querySelector(
-            ".ui-calendar__header__label",
+            ".ui-calendar__header-label",
           )
           expect(headerLabelBtn).toHaveTextContent("January 2024")
 
           const prevBtn = container.querySelector(
-            `button.ui-calendar__header__control--prev`,
+            `button.ui-calendar__header-control--prev`,
           )
           fireEvent.click(prevBtn!)
           const headerLabelBtnAfterPrev = container.querySelector(
-            ".ui-calendar__header__label",
+            ".ui-calendar__header-label",
           )
           expect(headerLabelBtnAfterPrev).toHaveTextContent(expectedPrev)
 
           const nextBtn = container.querySelector(
-            `button.ui-calendar__header__control--next`,
+            `button.ui-calendar__header-control--next`,
           )
           fireEvent.click(nextBtn!)
           fireEvent.click(nextBtn!)
           const headerLabelBtnAfterNext = container.querySelector(
-            ".ui-calendar__header__label",
+            ".ui-calendar__header-label",
           )
           expect(headerLabelBtnAfterNext).toHaveTextContent(expectedNext)
         },
@@ -466,7 +466,7 @@ describe("<Calendar />", () => {
       ])("should render with enableMultiple %#", (jsx) => {
         const { container } = render(jsx)
 
-        const monthDays = container.querySelectorAll(".ui-calendar__month__day")
+        const monthDays = container.querySelectorAll(".ui-calendar__month-day")
         const selectDays = [monthDays[7], monthDays[10], monthDays[13]]
         selectDays.forEach((monthDayBtn) => {
           fireEvent.click(monthDayBtn)
@@ -474,12 +474,12 @@ describe("<Calendar />", () => {
         })
 
         const prevBtn = container.querySelector(
-          `button.ui-calendar__header__control--prev`,
+          `button.ui-calendar__header-control--prev`,
         )
         fireEvent.click(prevBtn!)
 
         const monthDaysPrev = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         const days = [monthDaysPrev[7], monthDaysPrev[10], monthDaysPrev[13]]
         days.forEach((monthDayBtn) => {
@@ -488,7 +488,7 @@ describe("<Calendar />", () => {
         })
 
         const nextBtn = container.querySelector(
-          `button.ui-calendar__header__control--next`,
+          `button.ui-calendar__header-control--next`,
         )
         fireEvent.click(nextBtn!)
         selectDays.forEach((monthDayBtn) => {
@@ -506,23 +506,23 @@ describe("<Calendar />", () => {
       test("should render with enableRange", () => {
         const { container } = render(<Calendar enableRange />)
         const prevBtn = container.querySelector(
-          `button.ui-calendar__header__control--prev`,
+          `button.ui-calendar__header-control--prev`,
         )
         fireEvent.click(prevBtn!)
         const monthDaysPrev = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         const selectDayFrom = monthDaysPrev[7]
         fireEvent.click(selectDayFrom)
         expect(selectDayFrom).toHaveAttribute("data-selected")
 
         const nextBtn = container.querySelector(
-          `button.ui-calendar__header__control--next`,
+          `button.ui-calendar__header-control--next`,
         )
         fireEvent.click(nextBtn!)
         fireEvent.click(nextBtn!)
         const monthDaysNext = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         const selectDayTo = monthDaysNext[7]
         fireEvent.click(selectDayTo)
@@ -536,7 +536,7 @@ describe("<Calendar />", () => {
 
         fireEvent.click(prevBtn!)
         const monthDaysCurrent = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         expect(monthDaysCurrent[14]).toHaveAttribute("data-between")
       })
@@ -548,22 +548,22 @@ describe("<Calendar />", () => {
           <Calendar enableMultiple maxSelectValues={3} />,
         )
         const prevBtn = container.querySelector(
-          `button.ui-calendar__header__control--prev`,
+          `button.ui-calendar__header-control--prev`,
         )
         fireEvent.click(prevBtn!)
         const monthDaysPrev = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         const selectDay1 = monthDaysPrev[7]
         fireEvent.click(selectDay1)
         expect(selectDay1).toHaveAttribute("data-selected")
 
         const nextBtn = container.querySelector(
-          `button.ui-calendar__header__control--next`,
+          `button.ui-calendar__header-control--next`,
         )
         fireEvent.click(nextBtn!)
         const monthDaysCurrent = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         const selectDay2 = monthDaysCurrent[14]
         fireEvent.click(selectDay2)
@@ -571,7 +571,7 @@ describe("<Calendar />", () => {
 
         fireEvent.click(nextBtn!)
         const monthDaysNext = container.querySelectorAll(
-          ".ui-calendar__month__day",
+          ".ui-calendar__month-day",
         )
         const selectDay3 = monthDaysNext[21]
         fireEvent.click(selectDay3)
@@ -584,7 +584,7 @@ describe("<Calendar />", () => {
         const { container } = render(
           <Calendar enableRange maxSelectValues={3} />,
         )
-        const monthDays = container.querySelectorAll(".ui-calendar__month__day")
+        const monthDays = container.querySelectorAll(".ui-calendar__month-day")
         fireEvent.click(monthDays[14])
         expect(monthDays[14]).toHaveAttribute("data-selected")
         expect(monthDays[11]).toHaveAttribute("data-disabled")
@@ -610,20 +610,20 @@ describe("<Calendar />", () => {
       })
       test("should render with withControls false", () => {
         const { container } = render(<Calendar withControls={false} />)
-        const control = container.querySelector(".ui-calendar__header__control")
+        const control = container.querySelector(".ui-calendar__header-control")
         expect(control).toBeNull()
       })
       test("should render with withLabel false", () => {
         const { container } = render(<Calendar withLabel={false} />)
         const headerLabel = container.querySelector(
-          ".ui-calendar__header__label",
+          ".ui-calendar__header-label",
         )
         expect(headerLabel).toBeNull()
       })
       test("should render with withWeekdays false", () => {
         const { container } = render(<Calendar withWeekdays={false} />)
         const monthWeekday = container.querySelector(
-          ".ui-calendar__month__weekday",
+          ".ui-calendar__month-weekday",
         )
         expect(monthWeekday).toBeNull()
       })

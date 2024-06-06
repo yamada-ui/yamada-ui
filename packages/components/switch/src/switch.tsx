@@ -103,12 +103,8 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       ref={ref}
       className={cx("ui-switch", className)}
       __css={{
-        cursor: "pointer",
-        position: "relative",
-        display: "inline-flex",
         flexDirection: flexDirection ?? (isReverse ? "row-reverse" : "row"),
-        alignItems: "center",
-        verticalAlign: "top",
+
         gap,
         ...styles.container,
       }}
@@ -124,11 +120,6 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         <ui.span
           className={cx("ui-switch__track", className)}
           __css={{
-            boxSizing: "content-box",
-            display: "inline-flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            flexShrink: 0,
             ...styles.track,
           }}
           {...getIconProps()}

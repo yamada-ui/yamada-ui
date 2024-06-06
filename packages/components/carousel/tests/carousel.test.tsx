@@ -97,7 +97,7 @@ describe("<Carousel/>", () => {
     )
 
     fireEvent.click(
-      document.querySelectorAll(".ui-carousel__indicators__indicator")[
+      document.querySelectorAll(".ui-carousel__indicator")[
         slidesContentArr.length - 1
       ],
     )
@@ -200,7 +200,7 @@ describe("<Carousel/>", () => {
 
     // Move to the last slide
     fireEvent.click(
-      document.querySelectorAll(".ui-carousel__indicators__indicator")[
+      document.querySelectorAll(".ui-carousel__indicator")[
         slidesContentArr.length - 1
       ],
     )

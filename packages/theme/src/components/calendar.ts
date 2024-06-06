@@ -53,14 +53,22 @@ export const Calendar: ComponentMultiStyle = {
     cell: {
       transitionProperty: "common",
       transitionDuration: "slower",
+      fontWeight: "normal",
     },
     weekday: {
       userSelect: "none",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       justifyContent: "center",
       alignItems: "center",
+      w: "100%",
+      display: "flex",
     },
     day: {
+      minW: "auto",
+      h: "auto",
+      p: 0,
+      fontSize: undefined,
+      fontWeight: "normal",
       _weekend: {
         color: ["red.600", "red.400"],
       },

@@ -81,14 +81,14 @@ describe("<PagingTable />", () => {
     },
   ]
 
-  test("columns property renders correctly", async () => {
+  test("columns property renders correctly", () => {
     render(<PagingTable columns={columns} data={data} />)
     expect(screen.getByText("Name")).toBeVisible()
     expect(screen.getByText("Age")).toBeVisible()
     expect(screen.getByText("Email")).toBeVisible()
   })
 
-  test("data property renders correctly", async () => {
+  test("data property renders correctly", () => {
     render(<PagingTable columns={columns} data={data} />)
     expect(screen.getByText("Goku")).toBeVisible()
     expect(screen.getByText("35")).toBeVisible()
@@ -130,12 +130,12 @@ describe("<Thead />", () => {
     },
   ]
 
-  test("nested header renders collectly", async () => {
+  test("nested header renders collectly", () => {
     render(<Table columns={columns} data={data} />)
     expect(screen.getByText("初回放送")).toBeVisible()
     expect(screen.getByText("最終回放送")).toBeVisible()
   })
-  test("data property renders collectly", async () => {
+  test("data property renders collectly", () => {
     render(<Table columns={columns} data={data} />)
     expect(screen.getByText("2015年7月5日")).toBeVisible()
     expect(screen.getByText("2018年3月25日")).toBeVisible()

@@ -130,7 +130,7 @@ export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
     return () => setFocusedIndex(-1)
   }, [])
 
-  const css: CSSUIObject = { w: "100%", ...styles.container }
+  const css: CSSUIObject = { ...styles.container }
 
   return (
     <DescendantsContextProvider value={descendants}>

@@ -2,9 +2,17 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Accordion: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
-    item: {},
+    container: {
+      w: "100%",
+    },
+    item: {
+      overflowAnchor: "none",
+    },
     button: {
+      display: "inline-flex",
+      alignItems: "center",
+      width: "100%",
+      outline: 0,
       transitionProperty: "common",
       transitionDuration: "normal",
       _focusVisible: {

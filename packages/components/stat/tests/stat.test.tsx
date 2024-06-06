@@ -48,7 +48,7 @@ describe("<Stat />", () => {
         centerContent
       />,
     )
-    expect(screen.getByTestId("stat-test")).toHaveClass("ui-stat css-dvxtzn")
+    expect(screen.getByTestId("stat-test")).toHaveClass("ui-stat css-1efvhw7")
   })
 
   //display decrease icon

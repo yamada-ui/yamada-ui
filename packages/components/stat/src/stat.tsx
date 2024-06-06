@@ -95,8 +95,6 @@ export const Stat = forwardRef<StatProps, "dl">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    display: "flex",
-    flexDirection: "column",
     alignItems: centerContent ? "center" : "flex-start",
     ...styles.container,
   }

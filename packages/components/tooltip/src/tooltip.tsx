@@ -32,7 +32,14 @@ import {
   getOwnerDocument,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import { Children, cloneElement, useCallback, useEffect, useRef } from "react"
+import {
+  Children,
+  cloneElement,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+} from "react"
 
 type TooltipOptions = {
   /**
@@ -343,10 +350,18 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
     )
 
+    const tooltipId = useId()
+
     const child = Children.only(children) as React.ReactElement & {
       ref?: React.Ref<any>
     }
-    const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
+    const trigger = cloneElement(
+      child,
+      getTriggerProps(
+        { ...child.props, "aria-describedby": tooltipId },
+        child.ref,
+      ),
+    )
 
     const css: CSSUIObject = {
       position: "relative",
@@ -371,6 +386,8 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                 {...getPopperProps()}
                 zIndex={resolvedZIndex}
                 pointerEvents="none"
+                role="tooltip"
+                id={tooltipId}
               >
                 <ui.div
                   as={motion.div}

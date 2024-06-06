@@ -31,11 +31,13 @@ export const Pagination = memo(
         mt="xl"
         {...rest}
       >
-        {prevDocument ? <PaginationItem {...prevDocument} isPrev /> : null}
+        {prevDocument ? <PaginationItem {...prevDocument} isPrev /> : <Box />}
 
         {nextDocument ? (
           <PaginationItem {...nextDocument} alignItems="flex-end" />
-        ) : null}
+        ) : (
+          <Box />
+        )}
       </Grid>
     )
   }),

@@ -350,7 +350,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
     )
 
-    const tooltipId = useId()
+    const tooltipContentId = useId()
 
     const child = Children.only(children) as React.ReactElement & {
       ref?: React.Ref<any>
@@ -358,7 +358,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
     const trigger = cloneElement(
       child,
       getTriggerProps(
-        { ...child.props, "aria-describedby": tooltipId },
+        { ...child.props, "aria-describedby": tooltipContentId },
         child.ref,
       ),
     )
@@ -387,7 +387,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                 zIndex={resolvedZIndex}
                 pointerEvents="none"
                 role="tooltip"
-                id={tooltipId}
+                id={tooltipContentId}
               >
                 <ui.div
                   as={motion.div}

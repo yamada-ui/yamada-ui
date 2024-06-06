@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { PagingTable, Table } from "@yamada-ui/table"
 import { a11y } from "@yamada-ui/test"
 
@@ -7,18 +7,22 @@ describe("<Table />", () => {
   const data = [{ name: "ドラゴンボール" }]
 
   test("Table renders correctly", async () => {
-    const { container } = render(<Table columns={columns} data={data} />)
-    await a11y(container)
+    await a11y(<Table columns={columns} data={data} />)
   })
 
-  test("columns property renders correctly", async () => {
-    const { getByText } = render(<Table columns={columns} data={data} />)
-    expect(getByText("作品名")).toBeVisible()
+  test("columns property renders correctly", () => {
+    render(<Table columns={columns} data={data} />)
+    expect(screen.getByText("作品名")).toBeVisible()
   })
 
-  test("data property renders correctly", async () => {
-    const { getByText } = render(<Table columns={columns} data={data} />)
-    expect(getByText("ドラゴンボール")).toBeVisible()
+  test("data property renders correctly", () => {
+    render(<Table columns={columns} data={data} />)
+    expect(screen.getByText("ドラゴンボール")).toBeVisible()
+  })
+
+  test("whether it works correctly when enableRowSelection is false", () => {
+    render(<Table columns={columns} data={data} enableRowSelection={false} />)
+    expect(screen.queryAllByRole("checkbox")).toHaveLength(0)
   })
 })
 
@@ -50,16 +54,14 @@ describe("<Tfoot />", () => {
 
   test("renders footer when withFooter is provided", () => {
     const { container } = render(
-      <Table columns={columns} data={data} withFooter data-testid="Table" />,
+      <Table columns={columns} data={data} withFooter />,
     )
     const tfootElement = container.querySelector("tfoot")
     expect(tfootElement).toBeInTheDocument()
   })
 
   test("does not render footer when withFooter is not provided", () => {
-    const { container } = render(
-      <Table columns={columns} data={data} data-testid="Table" />,
-    )
+    const { container } = render(<Table columns={columns} data={data} />)
     const tfootElement = container.querySelector("tfoot")
     expect(tfootElement).toBeNull()
   })
@@ -80,17 +82,17 @@ describe("<PagingTable />", () => {
   ]
 
   test("columns property renders correctly", async () => {
-    const { getByText } = render(<PagingTable columns={columns} data={data} />)
-    expect(getByText("Name")).toBeVisible()
-    expect(getByText("Age")).toBeVisible()
-    expect(getByText("Email")).toBeVisible()
+    render(<PagingTable columns={columns} data={data} />)
+    expect(screen.getByText("Name")).toBeVisible()
+    expect(screen.getByText("Age")).toBeVisible()
+    expect(screen.getByText("Email")).toBeVisible()
   })
 
   test("data property renders correctly", async () => {
-    const { getByText } = render(<PagingTable columns={columns} data={data} />)
-    expect(getByText("Goku")).toBeVisible()
-    expect(getByText("35")).toBeVisible()
-    expect(getByText("goku@dbz.com")).toBeVisible()
+    render(<PagingTable columns={columns} data={data} />)
+    expect(screen.getByText("Goku")).toBeVisible()
+    expect(screen.getByText("35")).toBeVisible()
+    expect(screen.getByText("goku@dbz.com")).toBeVisible()
   })
 })
 
@@ -129,13 +131,13 @@ describe("<Thead />", () => {
   ]
 
   test("nested header renders collectly", async () => {
-    const { getByText } = render(<Table columns={columns} data={data} />)
-    expect(getByText("初回放送")).toBeVisible()
-    expect(getByText("最終回放送")).toBeVisible()
+    render(<Table columns={columns} data={data} />)
+    expect(screen.getByText("初回放送")).toBeVisible()
+    expect(screen.getByText("最終回放送")).toBeVisible()
   })
   test("data property renders collectly", async () => {
-    const { getByText } = render(<Table columns={columns} data={data} />)
-    expect(getByText("2015年7月5日")).toBeVisible()
-    expect(getByText("2018年3月25日")).toBeVisible()
+    render(<Table columns={columns} data={data} />)
+    expect(screen.getByText("2015年7月5日")).toBeVisible()
+    expect(screen.getByText("2018年3月25日")).toBeVisible()
   })
 })

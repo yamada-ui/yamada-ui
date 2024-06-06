@@ -2,8 +2,13 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Breadcrumb: ComponentMultiStyle = {
   baseStyle: {
+    display: "flex",
+    alignItems: "center",
     container: {},
-    item: {},
+    item: {
+      display: "inline-flex",
+      alignItems: "center",
+    },
     link: {
       transitionProperty: "common",
       transitionDuration: "fast",

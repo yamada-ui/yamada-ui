@@ -256,5 +256,16 @@ export const TEAM = {
         ja: "Webを学んでいる高専生。",
       },
     },
+    {
+      id: "kurakke",
+      name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
+      icon: "https://avatars.githubusercontent.com/u/84060430?v=4",
+      github: "https://github.com/kurakke",
+      twitter: "https://twitter.com/kurakke",
+      description: {
+        en: "A student engineer who enjoys front-end and back-end development.",
+        ja: "フロントエンドとバックエンドを楽しむ学生エンジニア。",
+      },
+    },
   ],
 }

@@ -13,6 +13,8 @@ export const Calendar: ComponentMultiStyle = {
       display: "flex",
       flexWrap: "wrap",
       alignItems: "flex-start",
+      w: "100%",
+      h: "fit-content",
     },
     header: {},
     label: {
@@ -37,8 +39,14 @@ export const Calendar: ComponentMultiStyle = {
     },
     month: {
       gridTemplateColumns: "repeat(3, 1fr)",
+      display: "grid",
     },
     button: {
+      minW: "auto",
+      h: "auto",
+      p: 0,
+      fontSize: undefined,
+      fontWeight: "normal",
       _disabled: {
         opacity: 0.4,
         cursor: "not-allowed",
@@ -85,6 +93,9 @@ export const Calendar: ComponentMultiStyle = {
           display: "none",
         },
       },
+    },
+    inner: {
+      position: "relative",
     },
   },
 

@@ -15,6 +15,9 @@ export const NativeSelect: ComponentMultiStyle = mergeMultiStyle(Input, {
       _readOnly: {
         pointerEvents: "none",
       },
+      "& > option, optgroup": {
+        bg: ["white", "black"],
+      },
     },
     icon: {
       w: "6",

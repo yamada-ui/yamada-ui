@@ -101,8 +101,6 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -115,10 +113,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
           __css={css}
           {...getContainerProps(containerProps)}
         >
-          <ui.div
-            className="ui-year-picker__inner"
-            __css={{ position: "relative", ...styles.inner }}
-          >
+          <ui.div className="ui-year-picker__inner" __css={{ ...styles.inner }}>
             <DatePickerField
               className="ui-year-picker__field"
               {...getFieldProps({ h, minH }, ref)}

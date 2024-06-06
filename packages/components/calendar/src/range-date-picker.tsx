@@ -118,8 +118,6 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
       ...styles.container,
     }
@@ -134,7 +132,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
           >
             <ui.div
               className="ui-range-date-picker__inner"
-              __css={{ position: "relative", ...styles.inner }}
+              __css={{ ...styles.inner }}
             >
               <RangeDatePickerField
                 separator={separator}
@@ -217,11 +215,8 @@ export const RangeDatePickerField = forwardRef<
     const hasSeparator = hasPlaceholder || hasValue
 
     const css: CSSUIObject = {
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
       ...styles.field,
     }
 

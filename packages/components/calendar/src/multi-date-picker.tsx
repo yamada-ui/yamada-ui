@@ -139,8 +139,6 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
       ...styles.container,
     }
@@ -155,7 +153,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
           >
             <ui.div
               className="ui-multi-date-picker__inner"
-              __css={{ position: "relative", ...styles.inner }}
+              __css={{ ...styles.inner }}
             >
               <MultiDatePickerField
                 component={component}
@@ -287,12 +285,8 @@ export const MultiDatePickerField = forwardRef<
     }, [component, setValue, dateToString, isOpen, separator, value])
 
     const css: CSSUIObject = {
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
       ...styles.field,
     }
 

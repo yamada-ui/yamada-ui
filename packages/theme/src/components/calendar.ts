@@ -16,9 +16,18 @@ export const Calendar: ComponentMultiStyle = {
       w: "100%",
       h: "fit-content",
     },
-    header: {},
+    header: {
+      display: "flex",
+      alignItems: "center",
+      w: "100%",
+    },
     label: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
+      flex: 1,
+      h: "auto",
+      fontSize: undefined,
+      fontWeight: "normal",
+      gap: 1,
     },
     labelIcon: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
@@ -26,6 +35,8 @@ export const Calendar: ComponentMultiStyle = {
     control: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
       fontSize: "1.25em",
+      minW: "auto",
+      h: "auto",
       _hidden: {
         opacity: 0,
         pointerEvents: "none",
@@ -36,6 +47,7 @@ export const Calendar: ComponentMultiStyle = {
     content: {},
     year: {
       gridTemplateColumns: "repeat(4, 1fr)",
+      display: "grid",
     },
     month: {
       gridTemplateColumns: "repeat(3, 1fr)",
@@ -96,6 +108,22 @@ export const Calendar: ComponentMultiStyle = {
     },
     inner: {
       position: "relative",
+    },
+    field: {
+      pe: "2rem",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+    },
+    icon: {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      pointerEvents: "none",
+      cursor: "pointer",
     },
   },
 

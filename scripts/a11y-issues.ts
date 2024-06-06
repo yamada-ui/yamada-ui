@@ -2,7 +2,7 @@ import { Octokit } from "@octokit/rest"
 import { toCamelCase, toKebabCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import { execa } from "execa"
-import { recursiveOctokit } from "./utils"
+import { recursiveOctokit, wait } from "./utils"
 
 type Story = { name: string; messages: string[] }
 type Issue = Awaited<
@@ -205,41 +205,42 @@ const createIssues = async (
     name = toCamelCase(name)
 
     const isExist = Object.keys(existStories).includes(path)
-
     const body = ISSUE_BODY(name, path, stories)
 
-    if (isExist) {
-      const { number, body: prevBody } = existStories[path]
+    await recursiveOctokit(async () => {
+      if (isExist) {
+        const { number, body: prevBody } = existStories[path]
 
-      if (prevBody === body) {
-        console.log("Skipped issue", number, path)
+        if (prevBody === body) {
+          console.log("Skipped issue", number, path)
 
-        continue
+          return
+        }
+
+        await recursiveOctokit(() =>
+          octokit.issues.update({
+            ...COMMON_PARAMS,
+            issue_number: number,
+            body,
+          }),
+        )
+
+        console.log("Updated issue", number, path)
+      } else {
+        await recursiveOctokit(() =>
+          octokit.issues.create({
+            ...COMMON_PARAMS,
+            title: `Enhance a11y for \`${name}\``,
+            body,
+            labels: ["a11y", "test", "good first issue"],
+          }),
+        )
+
+        console.log("Created issue", path)
       }
+    })
 
-      await recursiveOctokit(() =>
-        octokit.issues.update({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          body,
-        }),
-      )
-
-      console.log("Updated issue", number, path)
-    } else {
-      await recursiveOctokit(() =>
-        octokit.issues.create({
-          ...COMMON_PARAMS,
-          title: `Enhance a11y for \`${name}\``,
-          body,
-          labels: ["a11y", "test", "good first issue"],
-        }),
-      )
-
-      console.log("Created issue", path)
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    await wait(3000)
   }
 }
 

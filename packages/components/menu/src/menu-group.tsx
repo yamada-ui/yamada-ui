@@ -26,14 +26,14 @@ export const MenuGroup = forwardRef<MenuGroupProps, "div">(
       >
         {label ? (
           <ui.span
-            className={cx("ui-menu__item--group-label")}
+            className={cx("ui-menu__group-label")}
             __css={styles.groupLabel}
           >
             {label}
           </ui.span>
         ) : null}
 
-        <ui.ul className="ui-menu__item__group">{children}</ui.ul>
+        <ui.ul className="ui-menu__group">{children}</ui.ul>
       </ui.li>
     )
   },

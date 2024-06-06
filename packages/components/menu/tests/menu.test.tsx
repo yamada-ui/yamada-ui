@@ -4,7 +4,7 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import { Icon } from "@yamada-ui/fontawesome"
-import { Button, IconButton } from "@yamada-ui/react"
+import { Button, IconButton, Center } from "@yamada-ui/react"
 import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import {
   Menu,
@@ -16,11 +16,13 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  ContextMenu,
+  ContextMenuTrigger,
 } from "../src"
 
 describe("<Menu />", () => {
   test("Menu renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <Menu>
         <MenuButton
           as={Button}
@@ -28,14 +30,12 @@ describe("<Menu />", () => {
         >
           Menu
         </MenuButton>
-
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
         </MenuList>
       </Menu>,
     )
-    await a11y(container)
   })
 
   test("should render the menu", () => {
@@ -52,7 +52,7 @@ describe("<Menu />", () => {
     )
     expect(screen.getByTestId("MenuButton")).toBeInTheDocument()
     expect(screen.getByTestId("MenuList")).toBeInTheDocument()
-    expect(screen.getByTestId("MenuList")).toBeInTheDocument()
+    expect(screen.getByTestId("MenuItem")).toBeInTheDocument()
   })
 
   test("should render the menu with command", () => {
@@ -370,6 +370,77 @@ describe("<Menu />", () => {
     await act(() => fireEvent.keyDown(menuList, { key: "End" }))
     expect(document.activeElement).toHaveTextContent("Preferences")
 
+    await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
+    expect(menuList).not.toBeVisible()
+  })
+  test("Context menu renders correctly", async () => {
+    const { container } = render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    await a11y(container)
+  })
+  test("should render the context menu", () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    expect(screen.getByText("Right click here")).toBeInTheDocument()
+  })
+  test("context menu events", async () => {
+    render(
+      <ContextMenu>
+        <ContextMenuTrigger
+          as={Center}
+          w="full"
+          h="xs"
+          borderWidth="1px"
+          borderStyle="dashed"
+          p="md"
+          rounded="md"
+        >
+          Right click here
+        </ContextMenuTrigger>
+        <MenuList>
+          <MenuItem>Undo</MenuItem>
+          <MenuItem>Redo</MenuItem>
+        </MenuList>
+      </ContextMenu>,
+    )
+    const contextMenuTrigger = screen.getByText("Right click here")
+    await act(() => fireEvent.contextMenu(contextMenuTrigger))
+    const menuList = screen.getByRole("menu")
+    expect(menuList).toBeVisible()
     await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
     expect(menuList).not.toBeVisible()
   })

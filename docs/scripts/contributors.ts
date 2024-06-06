@@ -47,7 +47,7 @@ const getContributors: p.RequiredRunner = () => async (_, s) => {
     page++
   } while (count === perPage)
 
-  s.stop(`got the Yamada UI contributors`)
+  s.stop(`Got the Yamada UI contributors`)
 
   return contributors
 }
@@ -56,12 +56,14 @@ const writeContributors: p.RequiredRunner =
   (contributors: Contributors) => async (_, s) => {
     s.start(`Writing file "${DIST_PATH}"`)
 
-    const maintainers = CONSTANT.MAINTAINERS.map(({ id }) => id)
+    const team = [
+      ...CONSTANT.TEAM.MAINTAINERS.map(({ id }) => id),
+      ...CONSTANT.TEAM.MEMBERS.map(({ id }) => id),
+    ]
 
     const resolvedContributors = contributors
       .filter(
-        ({ login, type }) =>
-          type === "User" && login && !maintainers.includes(login),
+        ({ login, type }) => type === "User" && login && !team.includes(login),
       )
       .map(({ id, login, avatar_url, html_url }) => ({
         id,

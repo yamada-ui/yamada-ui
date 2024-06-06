@@ -10,6 +10,9 @@ import {
 
 export const Badge: ComponentStyle = {
   baseStyle: {
+    display: "inline-block",
+    whiteSpace: "nowrap",
+    verticalAlign: "middle",
     px: 1,
     textTransform: "uppercase",
     fontSize: "xs",

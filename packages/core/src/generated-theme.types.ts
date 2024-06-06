@@ -940,5 +940,9 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
     }
+    YearPicker: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
   }
 }

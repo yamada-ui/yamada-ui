@@ -4,7 +4,7 @@ export const TEAM = {
       id: "hirotomoyamada",
       name: { en: "Hirotomo Yamada", ja: "Hirotomo Yamada" },
       icon: "https://avatars.githubusercontent.com/u/84060430?v=4",
-      github: "https://github.com/yamada-ui",
+      github: "https://github.com/hirotomoyamada",
       twitter: "https://twitter.com/hirotomoyamada",
       description: {
         en: "Developer of Yamada UI. Designer, design system and UI engineer.",
@@ -76,7 +76,7 @@ export const TEAM = {
       github: "https://github.com/setodeve",
       twitter: "https://twitter.com/hjuko00",
       description: {
-        en: "Engineer based in fukuoka.",
+        en: "Engineer based in Fukuoka.",
         ja: "福岡在住のエンジニア。",
       },
     },

@@ -139,14 +139,10 @@ export const Highlight: FC<HighlightProps> = ({
                 pl="4"
                 pr="16"
                 bg={shouldHighlight(index) ? "whiteAlpha.200" : undefined}
-                {...getLineProps({ line, key: index })}
+                {...getLineProps({ line })}
               >
                 {line.map((token, index) => (
-                  <Text
-                    key={index}
-                    as="span"
-                    {...getTokenProps({ token, key: index })}
-                  />
+                  <Text key={index} as="span" {...getTokenProps({ token })} />
                 ))}
               </Box>
             ))}

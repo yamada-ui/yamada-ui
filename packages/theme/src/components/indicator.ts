@@ -3,6 +3,7 @@ import { isGray, shadeColor } from "@yamada-ui/utils"
 
 export const Indicator: ComponentStyle = {
   baseStyle: ({ withBorder }) => ({
+    position: "absolute",
     zIndex: "kurillin",
     rounded: "full",
     w: "fit-content",
@@ -25,6 +26,11 @@ export const Indicator: ComponentStyle = {
 
   variants: {
     solid: ({ colorScheme: c = "primary" }) => ({
+      position: "absolute",
+      boxSize: "100%",
+      rounded: "fallback(full, 9999px)",
+      opacity: 0.75,
+      zIndex: -1,
       bg: [`${c}.500`, `${c}.600`],
       color: `white`,
       var: [

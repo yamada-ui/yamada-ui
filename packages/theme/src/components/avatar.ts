@@ -10,6 +10,14 @@ export const Avatar: ComponentMultiStyle = {
         : mode("gray.200", "gray.500")(m)
 
       return {
+        position: "relative",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexShrink: 0,
+        textAlign: "center",
+        textTransform: "uppercase",
+        fontWeight: "medium",
         bg,
         color: isDark(bg)(t, m) ? "white" : "black",
         borderColor: ["white", "black"],

@@ -80,9 +80,6 @@ export const Calendar = forwardRef(
     })
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "flex-start",
       ...styles.container,
     }
 

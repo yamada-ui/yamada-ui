@@ -10,6 +10,9 @@ export const Calendar: ComponentMultiStyle = {
   baseStyle: {
     container: {
       gap: "md",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "flex-start",
     },
     header: {},
     label: {

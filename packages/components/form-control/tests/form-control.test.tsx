@@ -60,7 +60,7 @@ describe("<FormControl />", () => {
       </>,
     )
     expect(screen.getByText("Email is required.")).toBeInTheDocument()
-    expect(screen.queryByText("Please enter your email")).toBeInTheDocument()
+    expect(screen.getByText("Please enter your email")).toBeInTheDocument()
   })
 
   test("should be required", () => {

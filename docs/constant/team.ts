@@ -259,7 +259,7 @@ export const TEAM = {
     {
       id: "kurakke",
       name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
-      icon: "https://avatars.githubusercontent.com/u/84060430?v=4",
+      icon: "https://avatars.githubusercontent.com/u/84614038?v=4",
       github: "https://github.com/kurakke",
       twitter: "https://twitter.com/kurakke",
       description: {

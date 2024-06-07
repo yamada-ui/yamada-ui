@@ -154,6 +154,7 @@ export const useRadio = <
       "data-active": dataAttr(isActive),
       "data-hover": dataAttr(isHovered),
       "data-checked": dataAttr(checked),
+      "aria-checked": checked,
       "data-focus": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocused && isFocusVisible),
       "aria-hidden": true,

@@ -1,6 +1,6 @@
 import * as React from "react"
-import type { Merge } from "."
-import { isNumber, isObject, isString } from "."
+import { isNumber, isObject, isString } from "./assertion"
+import type { Merge } from "./index.types"
 
 type DOMElement = Element & HTMLOrSVGElement
 

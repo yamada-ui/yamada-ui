@@ -8,13 +8,7 @@ import {
 import { Icon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx } from "@yamada-ui/utils"
-import type {
-  FC,
-  HTMLAttributes,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-} from "react"
+import type { FC, HTMLAttributes, MouseEventHandler, ReactElement } from "react"
 import { useRef } from "react"
 
 type TagOptions = {
@@ -74,8 +68,13 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       {...rest}
     >
       {leftIcon}
-      <TagLabel>{children}</TagLabel>
+
+      <ui.span lineClamp={1} __css={styles.label}>
+        {children}
+      </ui.span>
+
       {rightIcon}
+
       {onClose ? (
         <CloseButton isDisabled={isDisabled} onClick={onClose}>
           <CloseIcon />
@@ -84,17 +83,6 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
     </ui.span>
   )
 })
-
-const TagLabel: FC<{ children: ReactNode }> = ({ children, ...props }) => {
-  const [styles] = useMultiComponentStyle("Tag", props)
-  const css = styles.label
-
-  return (
-    <ui.span lineClamp={1} __css={css}>
-      {children}
-    </ui.span>
-  )
-}
 
 const CloseIcon: FC = () => {
   return (

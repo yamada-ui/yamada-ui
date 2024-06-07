@@ -1,5 +1,5 @@
 import { Text } from "@yamada-ui/react"
-import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
 describe("<Tabs />", () => {
@@ -24,15 +24,15 @@ describe("<Tabs />", () => {
     await a11y(container)
   })
 
-  test("should render tabs", () => {
+  test("should render tabs", async () => {
     render(
-      <Tabs data-testid="Tabs">
-        <Tab data-testid="Tab">Home</Tab>
+      <Tabs>
+        <Tab>Home</Tab>
         <Tab>About</Tab>
         <Tab>Contact</Tab>
 
-        <TabPanel data-testid="TabPanel">
-          <Text data-testid="Text">This is home tab</Text>
+        <TabPanel>
+          <Text>This is home tab</Text>
         </TabPanel>
         <TabPanel>
           <Text>This is about tab</Text>
@@ -42,93 +42,103 @@ describe("<Tabs />", () => {
         </TabPanel>
       </Tabs>,
     )
-    expect(screen.getByTestId("Tabs")).toBeInTheDocument()
-    expect(screen.getByTestId("Tab")).toBeInTheDocument()
-    expect(screen.getByTestId("TabPanel")).toBeInTheDocument()
-    expect(screen.getByTestId("Text")).toBeInTheDocument()
+
+    const tab = await screen.findByRole("tablist")
+    const tabButton = await screen.findByRole("tab", { name: /Home/i })
+    const tabPanel = await screen.findByRole("tabpanel")
+    const tabPanelText = await screen.findByRole("paragraph")
+    expect(tab).toBeInTheDocument()
+    expect(tabButton).toBeInTheDocument()
+    expect(tabPanel).toBeInTheDocument()
+    expect(tabPanelText).toBeInTheDocument()
   })
 
-  test("should render default tab", () => {
+  test("should render default tab", async () => {
     render(
-      <Tabs data-testid="Tabs" defaultIndex={1}>
+      <Tabs defaultIndex={1}>
         <Tab>Home</Tab>
-        <Tab data-testid="Tab">About</Tab>
+        <Tab>About</Tab>
         <Tab>Contact</Tab>
 
-        <TabPanel data-testid="TabPanel">
+        <TabPanel>
           <Text>This is home tab</Text>
         </TabPanel>
         <TabPanel>
-          <Text data-testid="Text">This is about tab</Text>
+          <Text>This is about tab</Text>
         </TabPanel>
         <TabPanel>
           <Text>This is contact tab</Text>
         </TabPanel>
       </Tabs>,
     )
-    expect(screen.getByTestId("Text")).toBeInTheDocument()
-    expect(screen.getByTestId("TabPanel")).toHaveAttribute("hidden")
+
+    const aboutTabPanel = await screen.findByRole("tabpanel")
+    const homeTabPanelText = screen.queryByText(/This is home tab/i)
+    expect(aboutTabPanel).toBeInTheDocument()
+    expect(homeTabPanelText).toBeNull()
   })
 
-  test("should disable tab", () => {
+  test("should disable tab", async () => {
     render(
-      <Tabs data-testid="Tabs">
+      <Tabs>
         <Tab>Home</Tab>
-        <Tab data-testid="Tab" isDisabled>
-          About
-        </Tab>
+        <Tab isDisabled>About</Tab>
         <Tab>Contact</Tab>
 
-        <TabPanel data-testid="TabPanel">
+        <TabPanel>
           <Text>This is home tab</Text>
         </TabPanel>
         <TabPanel>
-          <Text data-testid="Text">This is about tab</Text>
+          <Text>This is about tab</Text>
         </TabPanel>
         <TabPanel>
           <Text>This is contact tab</Text>
         </TabPanel>
       </Tabs>,
     )
-    expect(screen.getByTestId("Tab")).toBeDisabled()
+
+    const aboutTab = await screen.findByRole("tab", { name: /About/i })
+    expect(aboutTab).toBeDisabled()
   })
 
-  test("should render custom tablist", () => {
+  test("should render custom tablist", async () => {
     render(
-      <Tabs data-testid="Tabs">
-        <TabList data-testid="TabList">
-          <Tab data-testid="Tab">Home</Tab>
+      <Tabs>
+        <TabList>
+          <Tab>Home</Tab>
           <Tab>About</Tab>
           <Tab>Contact</Tab>
         </TabList>
 
-        <TabPanel data-testid="TabPanel">
+        <TabPanel>
           <Text>This is home tab</Text>
         </TabPanel>
         <TabPanel>
-          <Text data-testid="Text">This is about tab</Text>
+          <Text>This is about tab</Text>
         </TabPanel>
         <TabPanel>
           <Text>This is contact tab</Text>
         </TabPanel>
       </Tabs>,
     )
-    expect(screen.getByTestId("TabList")).toBeInTheDocument()
+
+    const tabList = await screen.findByRole("tablist")
+    expect(tabList).toBeInTheDocument()
   })
 
-  test("should render custom tablist (with TabPanels)", () => {
+  test("should render custom tablist (with TabPanels)", async () => {
     render(
-      <Tabs data-testid="Tabs">
-        <Tab data-testid="Tab">Home</Tab>
+      <Tabs>
+        <Tab>Home</Tab>
         <Tab>About</Tab>
         <Tab>Contact</Tab>
 
-        <TabPanels data-testid="TabPanels">
-          <TabPanel data-testid="TabPanel">
+        <TabPanels>
+          <TabPanel>
             <Text>This is home tab</Text>
           </TabPanel>
           <TabPanel>
-            <Text data-testid="Text">This is about tab</Text>
+            <Text>This is about tab</Text>
           </TabPanel>
           <TabPanel>
             <Text>This is contact tab</Text>
@@ -136,11 +146,13 @@ describe("<Tabs />", () => {
         </TabPanels>
       </Tabs>,
     )
-    expect(screen.getByTestId("TabPanels")).toBeInTheDocument()
+
+    const tabList = await screen.findByRole("tablist")
+    expect(tabList).toBeInTheDocument()
   })
 
   test("Move to the previous tab with the left arrow key", async () => {
-    render(
+    const { user } = render(
       <Tabs>
         <TabList>
           <Tab>Tab 1</Tab>
@@ -150,16 +162,18 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
-    const tab1 = screen.getByText(/Tab 1/)
-    const tab3 = screen.getByText(/Tab 3/)
-    await act(async () => {
-      fireEvent.keyDown(tab1, { key: "ArrowLeft" })
-    })
-    expect(document.activeElement).toStrictEqual(tab3)
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
+    const tab3 = await screen.findByRole("tab", { name: /Tab 3/i })
+
+    await user.click(tab1)
+    expect(tab1).toHaveFocus()
+
+    await user.keyboard("{arrowleft}")
+    expect(tab3).toHaveFocus()
   })
 
   test("Move to the next tab with the right arrow key", async () => {
-    render(
+    const { user } = render(
       <Tabs>
         <TabList>
           <Tab>Tab 1</Tab>
@@ -169,16 +183,16 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
-    const tab1 = screen.getByText(/Tab 1/)
-    const tab2 = screen.getByText(/Tab 2/)
-    await act(async () => {
-      fireEvent.keyDown(tab1, { key: "ArrowRight" })
-    })
-    expect(document.activeElement).toStrictEqual(tab2)
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
+    const tab2 = await screen.findByRole("tab", { name: /Tab 2/i })
+
+    await user.click(tab1)
+    await user.keyboard("{arrowright}")
+    expect(tab2).toHaveFocus()
   })
 
   test("Move to the next tab with the down arrow key (vertical orientation)", async () => {
-    render(
+    const { user } = render(
       <Tabs orientation="vertical">
         <TabList>
           <Tab>Tab 1</Tab>
@@ -188,16 +202,16 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
-    const tab1 = screen.getByText(/Tab 1/)
-    const tab2 = screen.getByText(/Tab 2/)
-    await act(async () => {
-      fireEvent.keyDown(tab1, { key: "ArrowDown" })
-    })
-    expect(document.activeElement).toStrictEqual(tab2)
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
+    const tab2 = await screen.findByRole("tab", { name: /Tab 2/i })
+
+    await user.click(tab1)
+    await user.keyboard("{arrowdown}")
+    expect(tab2).toHaveFocus()
   })
 
   test("Move to the previous tab with the up arrow key (vertical orientation)", async () => {
-    render(
+    const { user } = render(
       <Tabs orientation="vertical">
         <TabList>
           <Tab>Tab 1</Tab>
@@ -207,16 +221,16 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
-    const tab1 = screen.getByText(/Tab 1/)
-    const tab3 = screen.getByText(/Tab 3/)
-    await act(async () => {
-      fireEvent.keyDown(tab1, { key: "ArrowUp" })
-    })
-    expect(document.activeElement).toStrictEqual(tab3)
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
+    const tab3 = await screen.findByRole("tab", { name: /Tab 3/i })
+
+    await user.click(tab1)
+    await user.keyboard("{arrowup}")
+    expect(tab3).toHaveFocus()
   })
 
   test("Move to the first tab with the Home key", async () => {
-    render(
+    const { user } = render(
       <Tabs>
         <TabList>
           <Tab>Tab 1</Tab>
@@ -226,17 +240,18 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
-    const tab1 = screen.getByText(/Tab 1/)
-    const tab3 = screen.getByText(/Tab 3/)
-    await act(async () => {
-      tab3.focus()
-      fireEvent.keyDown(tab3, { key: "Home" })
-    })
-    expect(document.activeElement).toStrictEqual(tab1)
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
+
+    await user.click(tab1)
+    await user.keyboard("{arrowright}")
+    await user.keyboard("{arrowright}")
+    await user.keyboard("{home}")
+
+    expect(tab1).toHaveFocus()
   })
 
   test("Move to the last tab with the End key", async () => {
-    render(
+    const { user } = render(
       <Tabs>
         <TabList>
           <Tab>Tab 1</Tab>
@@ -246,12 +261,12 @@ describe("<Tabs />", () => {
       </Tabs>,
     )
 
-    const tab1 = screen.getByText(/Tab 1/)
-    const tab3 = screen.getByText(/Tab 3/)
-    await act(async () => {
-      tab1.focus()
-      fireEvent.keyDown(tab1, { key: "End" })
-    })
-    expect(document.activeElement).toStrictEqual(tab3)
+    const tab1 = await screen.findByRole("tab", { name: /Tab 1/i })
+    const tab3 = await screen.findByRole("tab", { name: /Tab 3/i })
+
+    await user.click(tab1)
+    await user.keyboard("{end}")
+
+    expect(tab3).toHaveFocus()
   })
 })

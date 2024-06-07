@@ -1,6 +1,6 @@
 ---
-"@yamada-ui/autocomplete": patch
-"@yamada-ui/theme": patch
+"@yamada-ui/autocomplete": major
+"@yamada-ui/theme": major
 ---
 
 Remove static css params.

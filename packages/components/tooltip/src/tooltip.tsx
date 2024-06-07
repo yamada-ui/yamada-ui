@@ -379,36 +379,36 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       <>
         {trigger}
 
-        <AnimatePresence>
-          {isOpen ? (
-            <Portal isDisabled={!withPortal} {...portalProps}>
-              <ui.div
-                {...getPopperProps()}
-                zIndex={resolvedZIndex}
-                pointerEvents="none"
-                role="tooltip"
-                id={tooltipContentId}
-              >
+        <ui.div id={tooltipContentId} role="tooltip" aria-label={`${label}`}>
+          <AnimatePresence>
+            {isOpen ? (
+              <Portal isDisabled={!withPortal} {...portalProps}>
                 <ui.div
-                  as={motion.div}
-                  ref={ref}
-                  className={cx("ui-tooltip", className)}
-                  style={{ transformOrigin }}
-                  {...(animation !== "none"
-                    ? getTooltipProps(animation, duration)
-                    : {})}
-                  initial="exit"
-                  animate={isOpen ? "enter" : "exit"}
-                  exit="exit"
-                  __css={css}
-                  {...rest}
+                  {...getPopperProps()}
+                  zIndex={resolvedZIndex}
+                  pointerEvents="none"
                 >
-                  {label}
+                  <ui.div
+                    as={motion.div}
+                    ref={ref}
+                    className={cx("ui-tooltip", className)}
+                    style={{ transformOrigin }}
+                    {...(animation !== "none"
+                      ? getTooltipProps(animation, duration)
+                      : {})}
+                    initial="exit"
+                    animate={isOpen ? "enter" : "exit"}
+                    exit="exit"
+                    __css={css}
+                    {...rest}
+                  >
+                    {label}
+                  </ui.div>
                 </ui.div>
-              </ui.div>
-            </Portal>
-          ) : null}
-        </AnimatePresence>
+              </Portal>
+            ) : null}
+          </AnimatePresence>
+        </ui.div>
       </>
     )
   },

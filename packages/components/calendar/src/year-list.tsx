@@ -86,7 +86,7 @@ export const YearList: FC<YearListProps> = ({
         {rangeYears.map((year, index) => (
           <Button
             key={index}
-            className="ui-calendar__year-list__button"
+            className="ui-calendar__year-list-button"
             variant="ghost"
             __css={{
               minW: "auto",

@@ -4,6 +4,11 @@ import { isGray, shadeColor } from "@yamada-ui/utils"
 export const Switch: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      cursor: "pointer",
+      position: "relative",
+      display: "inline-flex",
+      alignItems: "center",
+      verticalAlign: "top",
       _readOnly: { cursor: "auto" },
       _disabled: {
         opacity: 0.4,
@@ -11,6 +16,11 @@ export const Switch: ComponentMultiStyle = {
       },
     },
     track: {
+      boxSizing: "content-box",
+      display: "inline-flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      flexShrink: 0,
       rounded: "full",
       bg: ["blackAlpha.400", "whiteAlpha.300"],
       transitionProperty: "common",

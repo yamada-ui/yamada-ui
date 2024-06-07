@@ -221,7 +221,6 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   }, [isNumeric, label, overflowCount])
 
   const css: CSSUIObject = {
-    position: "absolute",
     ...getPlacementStyle(computedPlacement, computedOffset),
     ...(isNumeric ? { fontWeight: "medium" } : {}),
     ...styles,
@@ -248,7 +247,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
 
           {ping ? (
             <ui.div
-              className="ui-indicator__icon__ping"
+              className="ui-indicator__ping"
               __css={{
                 position: "absolute",
                 boxSize: "100%",

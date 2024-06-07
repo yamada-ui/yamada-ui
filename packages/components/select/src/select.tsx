@@ -165,8 +165,6 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -182,10 +180,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
             __css={css}
             {...getContainerProps(containerProps)}
           >
-            <ui.div
-              className="ui-select__inner"
-              __css={{ position: "relative", ...styles.inner }}
-            >
+            <ui.div className="ui-select__inner" __css={{ ...styles.inner }}>
               <PopoverTrigger>
                 <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
               </PopoverTrigger>
@@ -218,11 +213,8 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
     const { label, placeholder, styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
       ...styles.field,
     }
 

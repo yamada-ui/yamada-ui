@@ -18,16 +18,6 @@ export const Option = forwardRef<OptionProps, "li">(
     icon ??= customIcon
 
     const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
-      alignItems: "center",
-      textAlign: "start",
-      flex: "0 0 auto",
-      outline: 0,
-      gap: "0.75rem",
       ...styles.item,
     }
 
@@ -58,18 +48,13 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
     const { styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      flexShrink: 0,
-      display: "inline-flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: "0.85em",
       ...styles.itemIcon,
     }
 
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-select__item__icon", className)}
+        className={cx("ui-select__item-icon", className)}
         __css={css}
         {...rest}
       />

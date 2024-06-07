@@ -435,11 +435,6 @@ export const Checkbox = forwardRef(
         className={cx("ui-checkbox", className)}
         {...getContainerProps()}
         __css={{
-          cursor: "pointer",
-          position: "relative",
-          display: "inline-flex",
-          alignItems: "center",
-          verticalAlign: "top",
           gap,
           ...styles.container,
         }}
@@ -454,9 +449,6 @@ export const Checkbox = forwardRef(
           className="ui-checkbox__icon"
           __css={{
             pointerEvents: isReadOnly ? "none" : undefined,
-            position: "relative",
-            display: "inline-block",
-            userSelect: "none",
             ...styles.icon,
           }}
           {...getIconProps(resolvedIconProps)}

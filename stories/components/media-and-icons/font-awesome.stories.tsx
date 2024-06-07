@@ -6,7 +6,7 @@ import { HStack } from "@yamada-ui/react"
 type Story = StoryFn<typeof Icon>
 
 const meta: Meta<typeof Icon> = {
-  title: "Components / Media And Icons / FontAwesomeIcon",
+  title: "Components / Media And Icons / FontAwesome",
   component: Icon,
 }
 

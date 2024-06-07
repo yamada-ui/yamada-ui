@@ -94,11 +94,6 @@ export const AutocompleteItemIcon = forwardRef<
   const { styles } = useAutocompleteContext()
 
   const css: CSSUIObject = {
-    flexShrink: 0,
-    display: "inline-flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "0.85em",
     ...styles.itemIcon,
   }
 

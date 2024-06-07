@@ -30,16 +30,6 @@ export const AutocompleteEmpty = forwardRef<AutocompleteEmptyProps, "li">(
     children ??= emptyMessage
 
     const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
-      alignItems: "center",
-      textAlign: "start",
-      flex: "0 0 auto",
-      outline: 0,
-      gap: "0.75rem",
       pointerEvents: "none",
       ...styles.item,
     }

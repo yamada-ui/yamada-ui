@@ -16,10 +16,14 @@ export const Popover: ComponentMultiStyle = {
       },
     },
     closeButton: {
+      position: "absolute",
       top: "2",
       right: "2",
     },
     header: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
       p: "sm",
       gap: "sm",
       fontWeight: "semibold",
@@ -27,11 +31,17 @@ export const Popover: ComponentMultiStyle = {
       borderColor: "inherit",
     },
     body: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
       my: "sm",
       px: "sm",
       gap: "sm",
     },
     footer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
       p: "sm",
       gap: "sm",
       borderTop: "1px solid",

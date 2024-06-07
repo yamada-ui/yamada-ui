@@ -221,7 +221,6 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   }, [isNumeric, label, overflowCount])
 
   const css: CSSUIObject = {
-    position: "absolute",
     ...getPlacementStyle(computedPlacement, computedOffset),
     ...(isNumeric ? { fontWeight: "medium" } : {}),
     ...styles,

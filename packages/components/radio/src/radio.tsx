@@ -154,7 +154,6 @@ export const useRadio = <
       "data-active": dataAttr(isActive),
       "data-hover": dataAttr(isHovered),
       "data-checked": dataAttr(checked),
-      "aria-checked": checked,
       "data-focus": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocused && isFocusVisible),
       "aria-hidden": true,
@@ -179,6 +178,7 @@ export const useRadio = <
       disabled,
       readOnly,
       checked,
+      "aria-checked": checked,
       style: {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",

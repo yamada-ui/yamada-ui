@@ -1,5 +1,5 @@
-import type { Dict, Union } from "."
-import { isObject, isArray, isFunction, isString } from "."
+import { isObject, isArray, isFunction, isString } from "./assertion"
+import type { Dict, Union } from "./index.types"
 
 const omitObjectHelper = <T extends Dict, K extends keyof T>(
   obj: T,

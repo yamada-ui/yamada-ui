@@ -29,6 +29,16 @@ export const Autocomplete: ComponentMultiStyle = mergeMultiStyle(Select, {
       outline: 0,
       gap: "0.75rem",
     },
+    icon: {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      pointerEvents: "none",
+      cursor: "pointer",
+    },
     itemIcon: {
       flexShrink: 0,
       display: "inline-flex",

@@ -12,6 +12,9 @@ export const Pagination: ComponentMultiStyle = {
     },
     inner: {
       flex: 1,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
     item: {
       position: "relative",

@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type FlipHorizontal2Props = LucideIconProps
 
 /**
-
-
+ * `FlipHorizontal2` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const FlipHorizontal2 = forwardRef<FlipHorizontal2Props, "svg">(

@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type HospitalProps = LucideIconProps
 
 /**
-
-
+ * `Hospital` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Hospital = forwardRef<HospitalProps, "svg">((props, ref) => (

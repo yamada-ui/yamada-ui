@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type ChevronsUpDownProps = LucideIconProps
 
 /**
-
-
+ * `ChevronsUpDown` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ChevronsUpDown = forwardRef<ChevronsUpDownProps, "svg">(

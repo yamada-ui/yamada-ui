@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type EarProps = LucideIconProps
 
 /**
-
-
+ * `Ear` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Ear = forwardRef<EarProps, "svg">((props, ref) => (

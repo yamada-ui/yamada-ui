@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type MailMinusProps = LucideIconProps
 
 /**
-
-
+ * `MailMinus` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const MailMinus = forwardRef<MailMinusProps, "svg">((props, ref) => (

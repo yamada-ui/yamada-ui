@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type MemoryStickProps = LucideIconProps
 
 /**
-
-
+ * `MemoryStick` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const MemoryStick = forwardRef<MemoryStickProps, "svg">((props, ref) => (

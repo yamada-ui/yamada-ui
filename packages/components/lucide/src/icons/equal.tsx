@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type EqualProps = LucideIconProps
 
 /**
-
-
+ * `Equal` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Equal = forwardRef<EqualProps, "svg">((props, ref) => (

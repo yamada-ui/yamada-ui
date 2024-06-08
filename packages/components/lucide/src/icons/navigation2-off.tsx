@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type Navigation2OffProps = LucideIconProps
 
 /**
-
-
+ * `Navigation2Off` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Navigation2Off = forwardRef<Navigation2OffProps, "svg">(

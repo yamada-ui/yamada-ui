@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type FoldersProps = LucideIconProps
 
 /**
-
-
+ * `Folders` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Folders = forwardRef<FoldersProps, "svg">((props, ref) => (

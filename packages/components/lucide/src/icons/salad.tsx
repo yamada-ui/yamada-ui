@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type SaladProps = LucideIconProps
 
 /**
-
-
+ * `Salad` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Salad = forwardRef<SaladProps, "svg">((props, ref) => (

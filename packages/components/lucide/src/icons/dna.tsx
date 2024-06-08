@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type DnaProps = LucideIconProps
 
 /**
-
-
+ * `Dna` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Dna = forwardRef<DnaProps, "svg">((props, ref) => (

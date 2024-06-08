@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type ScanTextProps = LucideIconProps
 
 /**
-
-
+ * `ScanText` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ScanText = forwardRef<ScanTextProps, "svg">((props, ref) => (

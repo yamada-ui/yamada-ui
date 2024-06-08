@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type PauseProps = LucideIconProps
 
 /**
-
-
+ * `Pause` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Pause = forwardRef<PauseProps, "svg">((props, ref) => (

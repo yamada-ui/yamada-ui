@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type BeefProps = LucideIconProps
 
 /**
-
-
+ * `Beef` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Beef = forwardRef<BeefProps, "svg">((props, ref) => (

@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type Repeat2Props = LucideIconProps
 
 /**
-
-
+ * `Repeat2` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Repeat2 = forwardRef<Repeat2Props, "svg">((props, ref) => (

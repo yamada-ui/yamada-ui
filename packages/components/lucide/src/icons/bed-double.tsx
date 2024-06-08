@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type BedDoubleProps = LucideIconProps
 
 /**
-
-
+ * `BedDouble` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const BedDouble = forwardRef<BedDoubleProps, "svg">((props, ref) => (

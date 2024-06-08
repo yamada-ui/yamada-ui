@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type HandCoinsProps = LucideIconProps
 
 /**
-
-
+ * `HandCoins` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const HandCoins = forwardRef<HandCoinsProps, "svg">((props, ref) => (

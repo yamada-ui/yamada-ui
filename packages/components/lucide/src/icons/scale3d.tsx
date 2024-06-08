@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type Scale3dProps = LucideIconProps
 
 /**
-
-
+ * `Scale3d` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Scale3d = forwardRef<Scale3dProps, "svg">((props, ref) => (

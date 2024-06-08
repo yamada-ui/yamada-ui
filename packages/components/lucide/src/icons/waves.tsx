@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type WavesProps = LucideIconProps
 
 /**
-
-
+ * `Waves` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Waves = forwardRef<WavesProps, "svg">((props, ref) => (

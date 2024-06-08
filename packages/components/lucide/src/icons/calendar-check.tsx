@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type CalendarCheckProps = LucideIconProps
 
 /**
-
-
+ * `CalendarCheck` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const CalendarCheck = forwardRef<CalendarCheckProps, "svg">(

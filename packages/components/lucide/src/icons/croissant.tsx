@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type CroissantProps = LucideIconProps
 
 /**
-
-
+ * `Croissant` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Croissant = forwardRef<CroissantProps, "svg">((props, ref) => (

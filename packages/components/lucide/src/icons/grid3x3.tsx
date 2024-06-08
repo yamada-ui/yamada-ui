@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type Grid3x3Props = LucideIconProps
 
 /**
-
-
+ * `Grid3x3` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Grid3x3 = forwardRef<Grid3x3Props, "svg">((props, ref) => (

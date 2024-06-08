@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type MoveRightProps = LucideIconProps
 
 /**
-
-
+ * `MoveRight` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const MoveRight = forwardRef<MoveRightProps, "svg">((props, ref) => (

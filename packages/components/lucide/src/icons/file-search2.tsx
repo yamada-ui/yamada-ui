@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type FileSearch2Props = LucideIconProps
 
 /**
-
-
+ * `FileSearch2` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const FileSearch2 = forwardRef<FileSearch2Props, "svg">((props, ref) => (

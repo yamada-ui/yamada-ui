@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type BrainProps = LucideIconProps
 
 /**
-
-
+ * `Brain` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Brain = forwardRef<BrainProps, "svg">((props, ref) => (

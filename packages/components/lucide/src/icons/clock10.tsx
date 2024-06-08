@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type Clock10Props = LucideIconProps
 
 /**
-
-
+ * `Clock10` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Clock10 = forwardRef<Clock10Props, "svg">((props, ref) => (

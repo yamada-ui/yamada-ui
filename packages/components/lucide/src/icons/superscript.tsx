@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type SuperscriptProps = LucideIconProps
 
 /**
-
-
+ * `Superscript` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Superscript = forwardRef<SuperscriptProps, "svg">((props, ref) => (

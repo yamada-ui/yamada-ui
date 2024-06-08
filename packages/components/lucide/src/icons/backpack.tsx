@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type BackpackProps = LucideIconProps
 
 /**
-
-
+ * `Backpack` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Backpack = forwardRef<BackpackProps, "svg">((props, ref) => (

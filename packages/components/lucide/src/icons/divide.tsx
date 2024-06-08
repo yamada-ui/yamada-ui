@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type DivideProps = LucideIconProps
 
 /**
-
-
+ * `Divide` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Divide = forwardRef<DivideProps, "svg">((props, ref) => (

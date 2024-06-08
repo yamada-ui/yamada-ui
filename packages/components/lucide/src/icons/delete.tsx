@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type DeleteProps = LucideIconProps
 
 /**
-
-
+ * `Delete` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Delete = forwardRef<DeleteProps, "svg">((props, ref) => (

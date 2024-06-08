@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type LampDeskProps = LucideIconProps
 
 /**
-
-
+ * `LampDesk` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const LampDesk = forwardRef<LampDeskProps, "svg">((props, ref) => (

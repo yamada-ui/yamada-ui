@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type BarChart2Props = LucideIconProps
 
 /**
-
-
+ * `BarChart2` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const BarChart2 = forwardRef<BarChart2Props, "svg">((props, ref) => (

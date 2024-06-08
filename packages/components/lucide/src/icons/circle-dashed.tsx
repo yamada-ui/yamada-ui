@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type CircleDashedProps = LucideIconProps
 
 /**
-
-
+ * `CircleDashed` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const CircleDashed = forwardRef<CircleDashedProps, "svg">(

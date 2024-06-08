@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type Axis3dProps = LucideIconProps
 
 /**
-
-
+ * `Axis3d` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Axis3d = forwardRef<Axis3dProps, "svg">((props, ref) => (

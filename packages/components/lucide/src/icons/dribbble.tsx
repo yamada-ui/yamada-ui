@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type DribbbleProps = LucideIconProps
 
 /**
-
-
+ * `Dribbble` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Dribbble = forwardRef<DribbbleProps, "svg">((props, ref) => (

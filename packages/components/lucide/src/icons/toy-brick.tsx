@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type ToyBrickProps = LucideIconProps
 
 /**
-
-
+ * `ToyBrick` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ToyBrick = forwardRef<ToyBrickProps, "svg">((props, ref) => (

@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type GalleryVerticalProps = LucideIconProps
 
 /**
-
-
+ * `GalleryVertical` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const GalleryVertical = forwardRef<GalleryVerticalProps, "svg">(

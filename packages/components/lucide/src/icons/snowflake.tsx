@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type SnowflakeProps = LucideIconProps
 
 /**
-
-
+ * `Snowflake` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Snowflake = forwardRef<SnowflakeProps, "svg">((props, ref) => (

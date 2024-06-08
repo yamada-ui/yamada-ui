@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type ArmchairProps = LucideIconProps
 
 /**
-
-
+ * `Armchair` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Armchair = forwardRef<ArmchairProps, "svg">((props, ref) => (

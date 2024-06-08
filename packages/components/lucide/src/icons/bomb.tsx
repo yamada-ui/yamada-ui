@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type BombProps = LucideIconProps
 
 /**
-
-
+ * `Bomb` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Bomb = forwardRef<BombProps, "svg">((props, ref) => (

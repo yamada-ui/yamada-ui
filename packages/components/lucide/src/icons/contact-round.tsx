@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type ContactRoundProps = LucideIconProps
 
 /**
-
-
+ * `ContactRound` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ContactRound = forwardRef<ContactRoundProps, "svg">(

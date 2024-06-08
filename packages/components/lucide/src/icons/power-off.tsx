@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type PowerOffProps = LucideIconProps
 
 /**
-
-
+ * `PowerOff` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const PowerOff = forwardRef<PowerOffProps, "svg">((props, ref) => (

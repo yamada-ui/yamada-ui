@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type HourglassProps = LucideIconProps
 
 /**
-
-
+ * `Hourglass` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Hourglass = forwardRef<HourglassProps, "svg">((props, ref) => (

@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type ThermometerSunProps = LucideIconProps
 
 /**
-
-
+ * `ThermometerSun` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const ThermometerSun = forwardRef<ThermometerSunProps, "svg">(

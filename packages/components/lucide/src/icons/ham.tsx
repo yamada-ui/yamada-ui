@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type HamProps = LucideIconProps
 
 /**
-
-
+ * `Ham` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Ham = forwardRef<HamProps, "svg">((props, ref) => (

@@ -6,8 +6,8 @@ import type { LucideIconProps } from "../lucide-icon"
 export type PinProps = LucideIconProps
 
 /**
-
-
+ * `Pin` is [Lucide](https://lucide.dev) SVG icon component.
+ *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
 export const Pin = forwardRef<PinProps, "svg">((props, ref) => (

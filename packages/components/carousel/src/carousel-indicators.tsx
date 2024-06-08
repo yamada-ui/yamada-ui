@@ -22,10 +22,6 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
     const { indexes, getIndicatorProps } = useCarouselIndicators()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      zIndex: "fallback(kurillin, 9)",
-      display: "flex",
-      justifyContent: "center",
       ...styles.indicators,
       ...(orientation === "vertical"
         ? { flexDirection: "column" }

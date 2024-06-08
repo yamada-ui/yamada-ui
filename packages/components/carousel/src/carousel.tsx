@@ -328,7 +328,6 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
   const { orientation, includeGapInSize, gap, styles } = useCarouselContext()
 
   const css: CSSUIObject = {
-    display: "flex",
     flexDirection: orientation === "vertical" ? "column" : "row",
     ...styles.inner,
     ...(includeGapInSize

@@ -5,9 +5,14 @@ export const Carousel: ComponentMultiStyle = {
     container: {
       w: "100%",
     },
-    inner: {},
+    inner: {
+      display: "flex",
+    },
     slide: {},
-    control: {},
+    control: {
+      position: "absolute",
+      zIndex: "fallback(kurillin, 9)",
+    },
     prev: ({ orientation: o }) => ({
       ...(o === "vertical"
         ? { left: "50%", top: "4", transform: "translateX(-50%)" }
@@ -19,6 +24,10 @@ export const Carousel: ComponentMultiStyle = {
         : { top: "50%", right: "4", transform: "translateY(-50%)" }),
     }),
     indicators: ({ orientation: o }) => ({
+      position: "absolute",
+      zIndex: "fallback(kurillin, 9)",
+      display: "flex",
+      justifyContent: "center",
       gap: "md",
       ...(o === "vertical"
         ? {

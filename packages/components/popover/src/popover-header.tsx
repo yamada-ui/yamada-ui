@@ -10,9 +10,6 @@ export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
     const { styles } = usePopover()
 
     const css: CSSUIObject = {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-start",
       ...styles.header,
     }
 

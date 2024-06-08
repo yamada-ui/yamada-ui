@@ -10,9 +10,6 @@ export const PopoverFooter = forwardRef<PopoverFooterProps, "footer">(
     const { styles } = usePopover()
 
     const css: CSSUIObject = {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-start",
       ...styles.footer,
     }
 

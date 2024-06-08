@@ -53,6 +53,11 @@ config()
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
+const chunkArray = <T extends any>(array: T[], n: number) =>
+  new Array(Math.ceil(array.length / n))
+    .fill(0)
+    .map((_, i) => array.slice(i * n, (i + 1) * n))
+
 const getCollaborators = async () => {
   const { data } = await recursiveOctokit(() =>
     octokit.repos.listCollaborators({
@@ -278,8 +283,8 @@ const getInsights = async (collaborators: Collaborator[]) => {
   return insights
 }
 
-const createReport = (insights: Insight[]) => {
-  const contents = insights
+const createReports = (insights: Insight[]) =>
+  insights
     .map(
       ({
         login,
@@ -314,31 +319,41 @@ const createReport = (insights: Insight[]) => {
     .sort((a, b) => b.total - a.total)
     .map(({ content }) => content)
 
-  const startDate = START_DATE.format(REPORT_FORMAT)
-  const endDate = END_DATE.format(REPORT_FORMAT)
-
-  return [
-    `<@&1202956318718304276>`,
-    `## Insight Report`,
-    `${startDate} - ${endDate}`,
-    "",
-    ...contents,
-  ].join("\n")
-}
-
-const sendDiscordChannel = async (content: string) => {
+const sendDiscordChannel = async (reports: string[]) => {
   const url = process.env.DISCORD_INSIGHTS_WEBHOOK_URL
 
   if (!url) throw new Error("Missing Discord Webhook URL\n")
 
-  const data = { username: "GitHub", content }
+  const startDate = START_DATE.format(REPORT_FORMAT)
+  const endDate = END_DATE.format(REPORT_FORMAT)
 
-  const headers = { "Content-Type": "application/json" }
-  const body = JSON.stringify(data)
+  for await (const [index, contents] of Object.entries(
+    chunkArray(reports, 10),
+  )) {
+    const isFirst = index === "0"
 
-  const { ok } = await fetch(url, { method: "POST", headers, body })
+    let chunks = isFirst
+      ? [
+          `<@&1202956318718304276>`,
+          `## Insight Report`,
+          `${startDate} - ${endDate}`,
+          "",
+        ]
+      : []
 
-  if (!ok) throw new Error("Failed to send message to Discord\n")
+    chunks = [...chunks, ...contents]
+
+    const content = chunks.join("\n")
+
+    const data = { username: "GitHub", content }
+
+    const headers = { "Content-Type": "application/json" }
+    const body = JSON.stringify(data)
+
+    const { ok } = await fetch(url, { method: "POST", headers, body })
+
+    if (!ok) throw new Error("Failed to send message to Discord\n")
+  }
 }
 
 const main = async () => {
@@ -346,9 +361,9 @@ const main = async () => {
 
   const insights = await getInsights(collaborators)
 
-  const report = createReport(insights)
+  const reports = createReports(insights)
 
-  await sendDiscordChannel(report)
+  await sendDiscordChannel(reports)
 }
 
 main()

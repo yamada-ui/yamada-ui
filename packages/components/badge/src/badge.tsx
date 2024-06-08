@@ -19,9 +19,6 @@ export const Badge = forwardRef<BadgeProps, "span">((props, ref) => {
   const { className, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    display: "inline-block",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
     ...styles,
   }
 

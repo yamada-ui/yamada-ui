@@ -2,7 +2,10 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const Stat: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
+    container: {
+      display: "flex",
+      flexDirection: "column",
+    },
     label: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontWeight: "medium",

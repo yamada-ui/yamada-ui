@@ -60,7 +60,7 @@ export const TabList = forwardRef<TabListProps, "div">(
       [onFirst, onLast, isVertical, onPrev, onNext],
     )
 
-    const css: CSSUIObject = { display: "flex", ...styles.tabList }
+    const css: CSSUIObject = { ...styles.tabList }
 
     return (
       <ui.div

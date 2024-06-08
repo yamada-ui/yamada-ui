@@ -11,6 +11,11 @@ import {
 export const Tag: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      maxW: "100%",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "fallback(1, 0.25rem)",
+      verticalAlign: "top",
       outline: 0,
       fontWeight: "medium",
       rounded: "md",
@@ -22,6 +27,11 @@ export const Tag: ComponentMultiStyle = {
       overflow: "visible",
     },
     closeButton: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      outline: "0",
+      cursor: "pointer",
       transitionProperty: "common",
       transitionDuration: "normal",
       rounded: "full",

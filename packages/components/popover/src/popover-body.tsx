@@ -10,9 +10,6 @@ export const PopoverBody = forwardRef<PopoverBodyProps, "main">(
     const { styles } = usePopover()
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
       ...styles.body,
     }
 

@@ -14,14 +14,6 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
     const { styles } = useAutocompleteContext()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      pointerEvents: "none",
-      cursor: "pointer",
       ...styles.icon,
       ...__css,
     }
@@ -94,11 +86,6 @@ export const AutocompleteItemIcon = forwardRef<
   const { styles } = useAutocompleteContext()
 
   const css: CSSUIObject = {
-    flexShrink: 0,
-    display: "inline-flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "0.85em",
     ...styles.itemIcon,
   }
 

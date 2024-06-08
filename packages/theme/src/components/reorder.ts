@@ -14,6 +14,13 @@ export const Reorder: ComponentMultiStyle = {
       },
     },
     trigger: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      cursor: "grab",
+      _selected: {
+        cursor: "grabbing",
+      },
       color: ["blackAlpha.300", "whiteAlpha.300"],
     },
   },

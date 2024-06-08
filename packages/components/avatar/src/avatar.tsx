@@ -99,14 +99,6 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const css: CSSUIObject = {
-    position: "relative",
-    display: "inline-flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexShrink: 0,
-    textAlign: "center",
-    textTransform: "uppercase",
-    fontWeight: "medium",
     ...styles.container,
   }
 

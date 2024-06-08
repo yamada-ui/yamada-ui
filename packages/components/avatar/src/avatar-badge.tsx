@@ -102,10 +102,6 @@ export const AvatarBadge = forwardRef<AvatarBadgeProps, "div">(
     })
 
     const css: CSSUIObject = {
-      position: "absolute",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
       ...placementStyles[placement],
       ...styles.badge,
     }

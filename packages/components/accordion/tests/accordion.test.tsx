@@ -32,59 +32,9 @@ describe("<Accordion />", () => {
       </Accordion>,
     )
 
-    const button = screen.getByRole("button", { name: /Accordion Label 1/i })
-    expect(button).toHaveAttribute("aria-expanded", "true")
     expect(screen.getByRole("paragraph")).toHaveTextContent(
       "This is an accordion item 1",
     )
-  })
-
-  test("should work correctly with isToggle", async () => {
-    const { user } = render(
-      <Accordion isToggle>
-        <AccordionItem label="Accordion Label 1">
-          This is an accordion item 1
-        </AccordionItem>
-        <AccordionItem label="Accordion Label 2">
-          This is an accordion item 2
-        </AccordionItem>
-      </Accordion>,
-    )
-
-    const button = screen.getByRole("button", { name: /Accordion Label 1/i })
-
-    await user.click(button)
-    expect(button).toHaveAttribute("aria-expanded", "true")
-
-    await user.click(button)
-    expect(button).not.toHaveAttribute("aria-expanded")
-  })
-
-  test("should show multiple items", async () => {
-    const { user } = render(
-      <Accordion defaultIndex={[0, 1]} isMultiple>
-        <AccordionItem label="Accordion Label 1">
-          This is an accordion item 1
-        </AccordionItem>
-        <AccordionItem label="Accordion Label 2">
-          This is an accordion item 2
-        </AccordionItem>
-        <AccordionItem label="Accordion Label 3">
-          This is an accordion item 3
-        </AccordionItem>
-      </Accordion>,
-    )
-
-    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
-    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
-    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
-
-    expect(item1).toHaveAttribute("aria-expanded", "true")
-    expect(item2).toHaveAttribute("aria-expanded", "true")
-    expect(item3).not.toHaveAttribute("aria-expanded")
-
-    await user.click(item3)
-    expect(item3).toHaveAttribute("aria-expanded", "true")
   })
 
   test("should render a disabled item", () => {

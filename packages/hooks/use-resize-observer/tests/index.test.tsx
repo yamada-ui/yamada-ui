@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { Button } from "@yamada-ui/react"
 import { useResizeObserver } from "../src"
 
@@ -43,11 +43,8 @@ describe("useResizeObserver", () => {
 
   test("return contentRect value correctly", async () => {
     render(<ButtonWithSize />)
-    await waitFor(() => {
-      return screen.findByRole("button")
-    })
+    const button = await screen.findByRole("button", {}, { timeout: 10000 })
 
-    const button = screen.getByRole("button")
     expect(button.textContent).toBe("400 x 320")
   })
 })

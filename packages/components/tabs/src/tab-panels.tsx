@@ -30,7 +30,6 @@ export const TabPanels = forwardRef<TabPanelsProps, "div">(
     })
 
     const css: CSSUIObject = {
-      w: "100%",
       ...styles.tabPanels,
     }
 

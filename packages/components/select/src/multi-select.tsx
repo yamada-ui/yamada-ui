@@ -175,8 +175,6 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -192,7 +190,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
           >
             <ui.div
               className="ui-multi-select__inner"
-              __css={{ position: "relative", ...styles.inner }}
+              __css={{ ...styles.inner }}
             >
               <PopoverTrigger>
                 <MultiSelectField
@@ -313,11 +311,8 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     ])
 
     const css: CSSUIObject = {
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
       ...styles.field,
     }
 

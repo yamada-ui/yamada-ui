@@ -262,19 +262,7 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
         children
       )
 
-    const css: CSSUIObject = {
-      textDecoration: "none",
-      color: "inherit",
-      userSelect: "none",
-      display: "flex",
-      width: "100%",
-      alignItems: "center",
-      textAlign: "start",
-      flex: "0 0 auto",
-      outline: 0,
-      gap: "0.75rem",
-      ...styles.item,
-    }
+    const css: CSSUIObject = { ...styles.item }
 
     return (
       <UpstreamMenuItemProvider
@@ -370,7 +358,7 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-menu__item__icon", className)}
+        className={cx("ui-menu__item-icon", className)}
         __css={css}
         {...rest}
       />
@@ -389,7 +377,7 @@ export const MenuCommand = forwardRef<MenuCommandProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-menu__item__command", className)}
+        className={cx("ui-menu__item-command", className)}
         __css={css}
         {...rest}
       />

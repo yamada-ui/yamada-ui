@@ -120,7 +120,6 @@ export const Table = forwardRef(
     })
 
     const css: CSSUIObject = {
-      w: "100%",
       tableLayout: layout,
       ...styles.table,
     }

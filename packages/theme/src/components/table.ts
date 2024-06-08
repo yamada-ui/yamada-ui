@@ -5,6 +5,9 @@ import { NativeTable } from "./native-table"
 export const Table: ComponentMultiStyle = mergeMultiStyle(NativeTable, {
   baseStyle: {
     sortIcon: {},
+    table: {
+      w: "100%",
+    },
   },
 
   sizes: {

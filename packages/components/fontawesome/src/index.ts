@@ -1,2 +1,2 @@
-export { Icon } from "./fontawesome-icon"
-export type { IconProps } from "./fontawesome-icon"
+export { Icon } from "./icon"
+export type { IconProps } from "./icon"

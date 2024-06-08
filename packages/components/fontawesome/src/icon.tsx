@@ -3,7 +3,6 @@ import type {
   IconProp,
 } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import type { CSSUIProps } from "@yamada-ui/core"
 import { forwardRef } from "@yamada-ui/core"
 import type { IconProps as UIIconProps } from "@yamada-ui/icon"
 import { Icon as UIIcon } from "@yamada-ui/icon"
@@ -12,22 +11,18 @@ import { useMemo } from "react"
 
 type IconOptions = {
   /**
-   * The icon of the font awesome.
+   * The icon of the [Font Awesome](https://fontawesome.com).
    * Check the docs to see the icon of possible modifiers you can pass.
    *
    * @see Docs https://fontawesome.com/v5/docs/web/use-with/react
    */
   icon: IconDefinition | IconProp
-  /**
-   * The CSS `font-size` property.
-   */
-  size?: CSSUIProps["fontSize"]
 }
 
 export type IconProps = UIIconProps & IconOptions
 
 /**
- * `Icon` is a useful component for using `Font Awesome`.
+ * `Icon` is a useful component for using [Font Awesome](https://fontawesome.com).
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/fontawesome
  */

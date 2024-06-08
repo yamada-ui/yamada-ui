@@ -18,6 +18,7 @@ export default defineConfig({
         "packages/cli",
         "packages/theme",
         "packages/**/tests",
+        "packages/**/scripts",
         "packages/test",
         "packages/nextjs",
       ],

@@ -1,6 +1,6 @@
-import type { Matcher } from "@testing-library/react"
-import { cleanup } from "@testing-library/react"
+import type { Matcher } from "@yamada-ui/test"
 import {
+  cleanup,
   a11y,
   act,
   fireEvent,

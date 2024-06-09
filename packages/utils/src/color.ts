@@ -1,6 +1,7 @@
 import * as c from "color2k"
-import type { Dict } from "."
-import { getMemoizedObject as get, isArray, isNumber } from "."
+import { isArray, isNumber } from "./assertion"
+import type { Dict } from "./index.types"
+import { getMemoizedObject as get } from "./object"
 
 type ColorMode = "light" | "dark"
 

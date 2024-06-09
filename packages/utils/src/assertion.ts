@@ -1,4 +1,4 @@
-import type { Dict } from "."
+import type { Dict } from "./index.types"
 
 export const isNumber = (value: any): value is number =>
   typeof value === "number"

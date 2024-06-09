@@ -147,16 +147,6 @@ export const Toggle = forwardRef(
 
     const css: CSSUIObject = useMemo(
       () => ({
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "fallback(2, 0.5rem)",
-        appearance: "none",
-        userSelect: "none",
-        position: "relative",
-        verticalAlign: "middle",
-        overflow: "hidden",
-        outline: "none",
         pointerEvents: isReadOnly ? "none" : "auto",
         ...styles,
         ...(isRounded ? { borderRadius: "fallback(full, 9999px)" } : {}),

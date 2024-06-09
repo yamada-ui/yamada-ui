@@ -158,8 +158,6 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
       ...styles.container,
     }
@@ -185,7 +183,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
             >
               <ui.div
                 className="ui-multi-autocomplete__inner"
-                __css={{ position: "relative", ...styles.inner }}
+                __css={{ ...styles.inner }}
               >
                 <MultiAutocompleteField
                   component={component}
@@ -310,14 +308,9 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
     }, [label, component, value, onChange, isOpen, inputRef, separator])
 
     const css: CSSUIObject = {
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
       ...styles.field,
-      cursor: "text",
     }
 
     return (

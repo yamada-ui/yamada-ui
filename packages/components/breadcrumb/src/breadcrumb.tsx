@@ -112,7 +112,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     hasBoundaries && startBoundaries! + endBoundaries! < items.length
 
   const css: CSSUIObject = {
-    ...styles.list,
+    ...styles.container,
   }
 
   const validChildren = getValidChildren(children)

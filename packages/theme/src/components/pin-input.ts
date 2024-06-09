@@ -5,6 +5,8 @@ import { Input } from "./input"
 export const PinInput: ComponentMultiStyle = mergeMultiStyle(Input, {
   baseStyle: {
     container: {
+      display: "flex",
+      alignItems: "center",
       gap: "sm",
     },
     field: {

@@ -59,8 +59,6 @@ export const List = forwardRef<ListProps, "ul">((props, ref) => {
   const validChildren = getValidChildren(children)
 
   const css: CSSUIObject = {
-    display: "flex",
-    flexDirection: "column",
     gap,
     ms: listStyleType !== "none" ? "1.4em" : undefined,
     "& > li": { ps: listStyleType === "decimal" ? "0.3em" : undefined },

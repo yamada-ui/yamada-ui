@@ -14,14 +14,6 @@ export const SelectIcon = forwardRef<SelectIconProps, "div">(
     const { styles } = useSelectContext()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      pointerEvents: "none",
-      cursor: "pointer",
       ...styles.icon,
       ...__css,
     }

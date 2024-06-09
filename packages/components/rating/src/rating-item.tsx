@@ -36,8 +36,6 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
       : {}
 
     const css: CSSUIObject = {
-      display: "block",
-      lineHeight: "0",
       ...styles.item,
       ...customColor,
     }
@@ -87,9 +85,6 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
   )
 
   const css: CSSUIObject = {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
     ...styles.icon,
   }
 

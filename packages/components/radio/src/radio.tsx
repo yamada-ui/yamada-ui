@@ -215,7 +215,7 @@ export const useRadio = <
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
-      props,
+      ...props,
       ref,
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()

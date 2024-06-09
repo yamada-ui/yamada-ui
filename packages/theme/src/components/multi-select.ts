@@ -4,6 +4,18 @@ import { Select } from "./select"
 
 export const MultiSelect: ComponentMultiStyle = mergeMultiStyle(Select, {
   baseStyle: {
+    container: {
+      w: "100%",
+      h: "fit-content",
+    },
+    inner: {
+      position: "relative",
+    },
+    field: {
+      pe: "2rem",
+      display: "flex",
+      alignItems: "center",
+    },
     clearIcon: {
       transitionProperty: "common",
       transitionDuration: "normal",

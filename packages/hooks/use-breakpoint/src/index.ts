@@ -1,6 +1,7 @@
 import type { Theme, ResponsiveObject, StyledTheme } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
-import { createdDom } from "@yamada-ui/utils"
+import { createdDom, useUpdateEffect } from "@yamada-ui/utils"
+import type { DependencyList } from "react"
 import { useState, useMemo, useEffect } from "react"
 
 /**
@@ -86,7 +87,7 @@ export const useBreakpointValue = <T extends any>(
 }
 
 export const getBreakpointValue =
-  <T extends any>(values: ResponsiveObject<T>) =>
+  <T extends any>(values: ResponsiveObject<T> = {}) =>
   (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
     if (!theme)
       throw Error(
@@ -112,3 +113,49 @@ export const getBreakpointValue =
 
     return values.base as T
   }
+
+/**
+ * `useBreakpointState` is a custom hook that takes a responsive object as an initial state and returns a state corresponding to the current breakpoint.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-breakpoint-state
+ */
+export const useBreakpointState = <T extends any>(
+  initialState: ResponsiveObject<T>,
+) => {
+  const state = useBreakpointValue(initialState)
+
+  return useState(state)
+}
+
+/**
+ * `useBreakpointEffect` is a custom hook that executes a specific callback function when the breakpoint changes.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-breakpoint-effect
+ */
+export const useBreakpointEffect = (
+  callback: (breakpoint: Theme["breakpoints"]) => void,
+  deps: DependencyList,
+) => {
+  const breakpoint = useBreakpoint()
+
+  useEffect(() => {
+    callback(breakpoint)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [breakpoint, ...deps])
+}
+
+/**
+ * `useUpdateBreakpointEffect` is a custom hook that skips the side effect on the initial render and executes a specific callback function when the breakpoint changes.
+ *
+ * @see Docs https://yamada-ui.com/hooks/use-update-breakpoint-effect
+ */
+export const useUpdateBreakpointEffect = (
+  callback: (breakpoint: Theme["breakpoints"]) => void,
+  deps: DependencyList,
+) => {
+  const breakpoint = useBreakpoint()
+
+  useUpdateEffect(() => {
+    callback(breakpoint)
+  }, [breakpoint, ...deps])
+}

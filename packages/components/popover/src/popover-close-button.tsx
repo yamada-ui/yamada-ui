@@ -12,7 +12,6 @@ export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
     const { styles, onClose } = usePopover()
 
     const css: CSSUIObject = {
-      position: "absolute",
       ...styles.closeButton,
     }
 

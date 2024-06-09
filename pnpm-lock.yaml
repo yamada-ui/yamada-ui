@@ -2753,6 +2753,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/visually-hidden:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/core:
     dependencies:
       '@emotion/css':
@@ -3600,6 +3616,9 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
+      '@yamada-ui/visually-hidden':
+        specifier: workspace:*
+        version: link:../components/visually-hidden
       framer-motion:
         specifier: '>=9.0.0'
         version: 9.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

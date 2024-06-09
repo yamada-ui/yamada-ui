@@ -3,13 +3,26 @@ import { getMemoizedObject as get, isDark, randomColor } from "@yamada-ui/utils"
 
 export const Avatar: ComponentMultiStyle = {
   baseStyle: {
-    group: {},
+    group: {
+      display: "flex",
+      flexDirection: "row-reverse",
+      justifyContent: "flex-end",
+      alignItems: "center",
+    },
     container: ({ theme: t, colorMode: m, name: string }) => {
       const bg = string
         ? randomColor({ string })
         : mode("gray.200", "gray.500")(m)
 
       return {
+        position: "relative",
+        display: "inline-flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexShrink: 0,
+        textAlign: "center",
+        textTransform: "uppercase",
+        fontWeight: "medium",
         bg,
         color: isDark(bg)(t, m) ? "white" : "black",
         borderColor: ["white", "black"],
@@ -19,10 +32,23 @@ export const Avatar: ComponentMultiStyle = {
     },
     name: {},
     excess: {
+      position: "relative",
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexShrink: 0,
+      textAlign: "center",
+      textTransform: "uppercase",
+      fontWeight: "medium",
+      borderWidth: "2px",
       borderColor: ["white", "black"],
       bg: ["blackAlpha.200", "whiteAlpha.200"],
     },
     badge: {
+      position: "absolute",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       rounded: "full",
       borderWidth: "0.2em",
       borderColor: ["white", "black"],

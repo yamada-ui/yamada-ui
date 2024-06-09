@@ -123,6 +123,7 @@ export const Month: FC<MonthProps> = ({
               />
 
               <ui.table
+                role="grid"
                 className={cx("ui-calendar__month", className)}
                 __css={{
                   w: styles.content?.w ?? styles.content?.width,

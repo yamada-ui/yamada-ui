@@ -68,6 +68,7 @@ export const YearList: FC<YearListProps> = ({
       />
 
       <ui.div
+        role="grid"
         className={cx("ui-calendar__year-list", className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,

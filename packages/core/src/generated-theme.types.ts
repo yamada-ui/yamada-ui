@@ -635,10 +635,6 @@ export interface GeneratedTheme extends UITheme {
     | "beerus"
     | (string & {})
   components: {
-    Toggle: {
-      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
-      variants: "subtle" | "solid" | "outline" | "unstyled" | (string & {})
-    }
     Accordion: {
       sizes: string & {}
       variants: "basic" | "card" | "unstyled" | (string & {})
@@ -939,6 +935,10 @@ export interface GeneratedTheme extends UITheme {
     Textarea: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})
+    }
+    Toggle: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants: "subtle" | "solid" | "outline" | "unstyled" | (string & {})
     }
     YearPicker: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})

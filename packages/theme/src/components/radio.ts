@@ -3,10 +3,17 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Radio: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      cursor: "pointer",
+      position: "relative",
+      display: "inline-flex",
+      alignItems: "center",
+      verticalAlign: "top",
       _readOnly: { cursor: "auto" },
       _disabled: { cursor: "not-allowed" },
     },
     icon: ({ colorScheme: c = "primary" }) => ({
+      position: "relative",
+      userSelect: "none",
       transitionProperty: "box-shadow",
       transitionDuration: "normal",
       border: "2px solid",

@@ -144,7 +144,6 @@ export type UseNumberInputProps = UseFormControlProps<HTMLInputElement> &
   }
 
 export const useNumberInput = (props: UseNumberInputProps = {}) => {
-  const id = useId()
   const {
     id: _id,
     name,
@@ -180,6 +179,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const isReadOnly = readOnly
   const isDisabled = disabled
 
+  const id = useId()
   const [isFocused, setFocused] = useState(false)
   const isInteractive = !(readOnly || disabled)
 
@@ -411,7 +411,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      id,
+      _id,
       name,
       type: "text",
       role: "spinbutton",
@@ -441,7 +441,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       onBlur: handlerAll(props.onBlur, onBlur),
     }),
     [
-      id,
+      _id,
       name,
       inputMode,
       pattern,
@@ -462,6 +462,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       onKeyDown,
       onFocus,
       onBlur,
+      id,
     ],
   )
 

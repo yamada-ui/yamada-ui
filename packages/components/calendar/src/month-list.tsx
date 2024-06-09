@@ -63,6 +63,7 @@ export const MonthList: FC<MonthListProps> = ({
       />
 
       <ui.div
+        role="grid"
         className={cx("ui-calendar__month-list", className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,

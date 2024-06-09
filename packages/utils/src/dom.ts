@@ -1,5 +1,5 @@
 import type React from "react"
-import { isNumber, isUndefined } from "."
+import { isNumber, isUndefined } from "./assertion"
 
 export const createdDom = (): boolean =>
   !!(

@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react"
 import { Button } from "@yamada-ui/react"
+import { render, screen, waitFor } from "@yamada-ui/test"
 import { useResizeObserver } from "../src"
 
 describe("useResizeObserver", () => {
@@ -45,6 +45,6 @@ describe("useResizeObserver", () => {
     render(<ButtonWithSize />)
     const button = await screen.findByRole("button")
 
-    expect(button.textContent).toBe("400 x 320")
+    await waitFor(() => expect(button.textContent).toBe("400 x 320"))
   })
 })

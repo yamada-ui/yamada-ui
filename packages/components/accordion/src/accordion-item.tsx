@@ -13,7 +13,7 @@ import {
   omitChildren,
 } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler, ReactNode } from "react"
-import { useCallback } from "react"
+import { useCallback, useId } from "react"
 import { useAccordionContext, useAccordionDescendant } from "./accordion"
 import { AccordionLabel } from "./accordion-label"
 import { AccordionPanel } from "./accordion-panel"
@@ -61,6 +61,8 @@ export type AccordionItemProps = Omit<HTMLUIProps<"li">, "children"> &
 
 export const AccordionItem = forwardRef<AccordionItemProps, "li">(
   ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
+    const panelId = useId()
+
     const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
       useAccordionContext()
 
@@ -141,17 +143,21 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
         ref: mergeRefs(register, ref),
         type: "button",
         disabled: isDisabled,
-        "aria-expanded": ariaAttr(isOpen),
+        "aria-controls": panelId,
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }),
-      [isDisabled, isOpen, onClick, onFocus, onKeyDown, register],
+      [isDisabled, onClick, onFocus, onKeyDown, register, panelId],
     )
 
     const getPanelProps: UIPropGetter = useCallback(
-      (props = {}, ref = null) => ({ ...props, ref }),
-      [],
+      (props = {}, ref = null) => ({
+        ...props,
+        ref,
+        id: panelId,
+      }),
+      [panelId],
     )
 
     const css: CSSUIObject = { ...styles.item, overflowAnchor: "none" }

@@ -39,7 +39,7 @@ import type {
   KeyboardEvent,
   KeyboardEventHandler,
 } from "react"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)
@@ -144,8 +144,9 @@ export type UseNumberInputProps = UseFormControlProps<HTMLInputElement> &
   }
 
 export const useNumberInput = (props: UseNumberInputProps = {}) => {
+  const id = useId()
   const {
-    id,
+    id: _id,
     name,
     value: valueProp,
     defaultValue,
@@ -431,6 +432,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       "aria-valuenow": Number.isNaN(valueAsNumber) ? undefined : valueAsNumber,
       "aria-valuetext": valueText,
       "aria-invalid": ariaAttr(isInvalid ?? isOut),
+      ...(disabled ? { "aria-labelledby": id } : { "aria-label": id }),
       autoComplete: "off",
       autoCorrect: "off",
       onChange: handlerAll(props.onChange, onChange),

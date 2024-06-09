@@ -11,6 +11,18 @@ describe("<Reorder />", () => {
     )
   })
 
+  test("render items correctly", () => {
+    render(
+      <Reorder>
+        <ReorderItem label="Item 1">Item 1</ReorderItem>
+        <ReorderItem label="Item 2">Item 2</ReorderItem>
+      </Reorder>,
+    )
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
+
   test("handles orientation correctly", () => {
     render(
       <Reorder data-testid="Reorder" orientation="horizontal">

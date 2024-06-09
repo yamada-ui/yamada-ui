@@ -46,7 +46,7 @@ import { burger } from "@lucide/lab"
 
 It is also possible to create a single generic component, but it is not recommended.
 
-```tsx functional=true
+```tsx live=false
 const LucideIcon: FC<IconProps & { name: IconNames }> = ({ name, ...rest }) => {
   const Icon = icons[name]
 

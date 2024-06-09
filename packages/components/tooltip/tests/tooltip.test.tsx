@@ -44,15 +44,13 @@ describe("<Tooltip/>", () => {
     fireEvent.pointerEnter(screen.getByText("Hover"))
 
     await waitFor(() => {
-      expect(screen.getByText("Tooltip hover")).toBeInTheDocument()
+      expect(screen.getAllByText("Tooltip hover")[1]).toBeInTheDocument()
     })
 
     fireEvent.pointerLeave(screen.getByText("Hover"))
 
     await waitFor(() => {
-      expect(screen.getAllByText("Tooltip hover")[1].style.visibility).toBe(
-        "hidden",
-      )
+      expect(screen.queryByRole("tooltip")).toBeNull()
     })
   })
 

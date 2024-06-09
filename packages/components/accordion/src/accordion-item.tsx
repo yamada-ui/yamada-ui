@@ -154,7 +154,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
       [],
     )
 
-    const css: CSSUIObject = { ...styles.item, overflowAnchor: "none" }
+    const css: CSSUIObject = { ...styles.item }
 
     const cloneLabel =
       typeof label === "function"

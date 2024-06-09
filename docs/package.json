@@ -35,6 +35,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
+    "@yamada-ui/lucide": "workspace:*",
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/charts": "workspace:*",

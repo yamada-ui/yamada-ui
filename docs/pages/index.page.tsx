@@ -1,3 +1,4 @@
+import { ArrowRight } from "@yamada-ui/lucide"
 import {
   Center,
   HStack,
@@ -9,7 +10,7 @@ import {
   Wrap,
 } from "@yamada-ui/react"
 import { Section } from "components/layouts"
-import { SEO, Arrow, OpenCollective, Patreon } from "components/media-and-icons"
+import { SEO, OpenCollective, Patreon } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
@@ -69,7 +70,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
               size="xl"
               colorScheme="primary"
               w={{ base: "auto", md: "full" }}
-              rightIcon={<Arrow />}
+              rightIcon={<ArrowRight />}
               href="/getting-started"
             >
               {tc("home.hero.started")}

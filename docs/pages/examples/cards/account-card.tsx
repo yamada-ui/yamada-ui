@@ -14,7 +14,7 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import { memo } from "react"
-import { Github, Twitter } from "components/media-and-icons"
+import { Github, X } from "components/media-and-icons"
 
 export const AccountCard = memo(() => {
   return (
@@ -36,12 +36,12 @@ export const AccountCard = memo(() => {
 
       <CardBody>
         <ButtonGroup variant="outline" gap="sm" w="full">
-          <Button w="full" leftIcon={<Github />}>
+          <Button w="full" leftIcon={<Github boxSize="1.25rem" />}>
             GitHub
           </Button>
 
-          <Button w="full" leftIcon={<Twitter />}>
-            Twitter
+          <Button w="full" leftIcon={<X boxSize="1.25rem" />}>
+            X
           </Button>
         </ButtonGroup>
 

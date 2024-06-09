@@ -267,5 +267,16 @@ export const TEAM = {
         ja: "フロントエンドとバックエンドを楽しむ学生エンジニア。",
       },
     },
+    {
+      id: "Hayato1031",
+      name: { en: "Hayato Nakamura", ja: "Hayato Nakamura" },
+      icon: "https://avatars.githubusercontent.com/u/105223982?v=4",
+      github: "https://github.com/Hayato1031",
+      twitter: "https://twitter.com/lit_myura",
+      description: {
+        en: "A college student who enjoys teaching programming to middle and high school students.",
+        ja: "中高生にプログラミングを教えることを楽しんでいる大学生。",
+      },
+    },
   ],
 }

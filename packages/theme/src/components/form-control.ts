@@ -7,6 +7,7 @@ export const FormControl: ComponentMultiStyle = {
       position: "relative",
     },
     label: {
+      display: "block",
       fontSize: "md",
       me: "3",
       mb: "2",

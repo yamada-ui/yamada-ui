@@ -22,7 +22,7 @@ export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
 
   const { getContainerProps, children, ...rest } = useRating(computedProps)
 
-  const css: CSSUIObject = { display: "flex", ...styles.container }
+  const css: CSSUIObject = { ...styles.container }
 
   return (
     <RatingProvider value={{ styles, ...rest }}>

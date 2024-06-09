@@ -58,8 +58,7 @@ import {
   Skeleton,
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
-import { Icon as LucideIcon } from "@yamada-ui/lucide"
-import * as LucideIcons from "@yamada-ui/lucide"
+import { Icon as LucideIcon, Ghost } from "@yamada-ui/lucide"
 import type { SkeletonProps } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
@@ -96,7 +95,6 @@ const UIProvider: FC<UIComponents.UIProviderProps> = ({
 
 const react = { React, ...React }
 const components = {
-  ...LucideIcons,
   ...UIComponents,
   ...CarouselComponents,
   ...ChartComponents,
@@ -144,6 +142,7 @@ const fontAwesomeIcons = {
   faBold,
   faUnderline,
 }
+const lucideIcons = { Ghost }
 const lucideLabIcons = { burger }
 const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
 const utils = { wait, faker, useForm, Controller }
@@ -153,6 +152,7 @@ const scope = {
   ...components,
   ...fontAwesomeIcons,
   ...reactIcons,
+  ...lucideIcons,
   ...lucideLabIcons,
   ...utils,
 }

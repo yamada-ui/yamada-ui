@@ -119,8 +119,6 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
     } = useColorSelector(computedProps)
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
       ...styles.container,
     }
 

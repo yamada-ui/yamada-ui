@@ -4,8 +4,13 @@ import { Menu } from "./menu"
 
 export const ColorPicker: ComponentMultiStyle = mergeMultiStyle(Input, Menu, {
   baseStyle: {
-    container: {},
-    inner: {},
+    container: {
+      w: "100%",
+      h: "fit-content",
+    },
+    inner: {
+      position: "relative",
+    },
     field: {
       pr: "8",
       pb: "px",
@@ -15,8 +20,18 @@ export const ColorPicker: ComponentMultiStyle = mergeMultiStyle(Input, Menu, {
       _readOnly: {
         pointerEvents: "none",
       },
+      ps: "2rem",
+      pe: "2rem",
+      display: "flex",
+      alignItems: "center",
     },
-    swatch: {},
+    swatch: {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      zIndex: 2,
+      boxSize: "100%",
+    },
     eyeDropper: {
       w: "6",
       py: "1",
@@ -26,6 +41,13 @@ export const ColorPicker: ComponentMultiStyle = mergeMultiStyle(Input, Menu, {
       transitionProperty: "common",
       transitionDuration: "normal",
       pointerEvents: "auto",
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 1,
       color: ["blackAlpha.600", "whiteAlpha.700"],
       _hover: {
         color: ["blackAlpha.500", "whiteAlpha.600"],

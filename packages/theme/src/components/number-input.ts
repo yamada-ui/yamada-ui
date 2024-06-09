@@ -4,7 +4,33 @@ import { Input } from "./input"
 
 export const NumberInput: ComponentMultiStyle = mergeMultiStyle(Input, {
   baseStyle: {
+    container: {
+      position: "relative",
+      zIndex: 0,
+    },
+    field: {
+      width: "100%",
+    },
+    addon: {
+      display: "flex",
+      flexDirection: "column",
+      position: "absolute",
+      top: "0",
+      insetEnd: "0px",
+      margin: "1px",
+      height: "calc(100% - 2px)",
+      zIndex: "fallback(yamcha, 1)",
+    },
     stepper: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flex: 1,
+      transitionProperty: "common",
+      transitionDuration: "normal",
+      userSelect: "none",
+      cursor: "pointer",
+      lineHeight: "normal",
       borderStart: "1px solid",
       borderColor: "inherit",
       color: ["blackAlpha.600", "whiteAlpha.700"],

@@ -1,0 +1,6 @@
+import{j as r}from"./jsx-runtime-X2b_N9AH.js";import{I as s,d as p}from"./icon-C1r1eWas.js";import{b as a}from"./factory-C0k1XOS4.js";import{B as m}from"./button-_JTXAVU6.js";import"./index-uCp2LrAq.js";import"./_commonjsHelpers-BosuxZz1.js";import"./index-D3ylJrlI.js";import"./icon-DcmOu1fx.js";import"./index-CdvFIPz6.js";import"./theme-provider-DuMcMORV.js";import"./forward-ref-Dr5Hqd9a.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-xaNYqS-v.js";import"./use-ripple-Bqtteuio.js";import"./index-DSHhgXSs.js";import"./motion-BNFRb361.js";import"./motion-Q3KpEpwi.js";import"./loading-H_BVrVfo.js";import"./use-component-style-BxdeC6kK.js";const n=a("span",{baseStyle:{border:"0",clip:"rect(0, 0, 0, 0)",height:"1px",width:"1px",margin:"-1px",padding:"0",overflow:"hidden",whiteSpace:"nowrap",position:"absolute"}}),S={title:"Components / Other / VisuallyHidden",component:n},o=()=>r.jsxs(m,{children:[r.jsx(n,{children:"Checkmark"}),r.jsx(s,{icon:p})]});var t,i,e;o.parameters={...o.parameters,docs:{...(t=o.parameters)==null?void 0:t.docs,source:{originalSource:`() => {
+  return <Button>
+      <VisuallyHidden>Checkmark</VisuallyHidden>
+      <Icon icon={faCheck} />
+    </Button>;
+}`,...(e=(i=o.parameters)==null?void 0:i.docs)==null?void 0:e.source}}};const E=["basic"];export{E as __namedExportsOrder,o as basic,S as default};

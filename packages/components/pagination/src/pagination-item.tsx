@@ -69,12 +69,6 @@ export const PaginationItem: FC<PaginationItemProps> = ({
   children ??= iconMap[page] ?? page
 
   const css: CSSUIObject = {
-    position: "relative",
-    overflow: "hidden",
-    userSelect: "none",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     ...styles.item,
     ...styles[page],
   }

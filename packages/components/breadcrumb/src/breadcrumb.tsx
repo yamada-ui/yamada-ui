@@ -112,9 +112,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
     hasBoundaries && startBoundaries! + endBoundaries! < items.length
 
   const css: CSSUIObject = {
-    display: "flex",
-    alignItems: "center",
-    ...styles.list,
+    ...styles.container,
   }
 
   const validChildren = getValidChildren(children)
@@ -288,8 +286,6 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, "li">(
     })
 
     const css: CSSUIObject = {
-      display: "inline-flex",
-      alignItems: "center",
       ...styles.item,
     }
 

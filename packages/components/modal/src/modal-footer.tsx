@@ -10,9 +10,6 @@ export const ModalFooter = forwardRef<ModalFooterProps, "footer">(
     const { styles } = useModal()
 
     const css: CSSUIObject = {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-end",
       ...(__css ? __css : styles.footer),
     }
 

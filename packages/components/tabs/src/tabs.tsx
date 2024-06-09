@@ -166,7 +166,7 @@ export const Tabs = forwardRef<TabsProps, "div">(
       if (index != null) setFocusedIndex(index)
     }, [index])
 
-    const css: CSSUIObject = { w: "100%", ...styles.container }
+    const css: CSSUIObject = { ...styles.container }
 
     return (
       <DescendantsContextProvider value={descendants}>

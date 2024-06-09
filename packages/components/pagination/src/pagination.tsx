@@ -144,8 +144,6 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
   )
 
   const css: CSSUIObject = {
-    display: "flex",
-    alignItems: "center",
     ...styles.container,
   }
 
@@ -194,9 +192,6 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         <ui.div
           className="ui-pagination-inner"
           __css={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             ...styles.inner,
           }}
           {...innerProps}

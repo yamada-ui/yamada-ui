@@ -898,9 +898,6 @@ export const RangeSliderMark = forwardRef<RangeSliderMarkProps, "div">(
     const { styles, getMarkProps } = useRangeSliderContext()
 
     const css: CSSUIObject = {
-      display: "inline-flex",
-      justifyContent: "center",
-      alignItems: "center",
       ...styles.mark,
     }
 

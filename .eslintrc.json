@@ -38,12 +38,6 @@
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "rules": {
-        "vitest/require-hook": "error"
-      }
-    },
-    {
-      "files": ["**/*.test.ts", "**/*.test.tsx"],
-      "rules": {
         "import-replace/import-replace": [
           "error",
           [
@@ -60,6 +54,7 @@
         "testing-library/no-promise-in-fire-event": "error",
         "testing-library/prefer-find-by": "error",
         "testing-library/no-await-sync-queries": "error",
+        "vitest/require-hook": "error",
         "vitest/consistent-test-it": [
           "error",
           {

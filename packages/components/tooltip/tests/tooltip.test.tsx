@@ -50,9 +50,7 @@ describe("<Tooltip/>", () => {
     fireEvent.pointerLeave(screen.getByText("Hover"))
 
     await waitFor(() => {
-      expect(screen.getAllByText("Tooltip hover")[1].style.visibility).toBe(
-        "hidden",
-      )
+      expect(screen.getByText("Tooltip hover").style.visibility).toBe("hidden")
     })
   })
 
@@ -63,7 +61,7 @@ describe("<Tooltip/>", () => {
       </Tooltip>,
     )
 
-    expect(screen.getAllByText("Tooltip hover")[1]).toBeInTheDocument()
+    expect(screen.getByText("Tooltip hover")).toBeInTheDocument()
   })
 
   test("should disable even if hover", async () => {

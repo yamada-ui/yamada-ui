@@ -3,17 +3,12 @@ import { Reorder, ReorderItem, ReorderTrigger } from "../src"
 
 describe("<Reorder />", () => {
   test("renders with no errors", async () => {
-    const { container } = render(
+    await a11y(
       <Reorder>
         <ReorderItem label="Item 1">Item 1</ReorderItem>
         <ReorderItem label="Item 2">Item 2</ReorderItem>
       </Reorder>,
     )
-
-    screen.getByText("Item 1")
-    screen.getByText("Item 2")
-
-    await a11y(container)
   })
 
   test("handles orientation correctly", () => {
@@ -44,21 +39,21 @@ describe("<Reorder />", () => {
 
   test("renders trigger correctly inside of an item", () => {
     render(
-      <Reorder data-testid="Reorder" orientation="vertical">
+      <Reorder orientation="vertical">
         <ReorderItem label="Item 1">
           <ReorderTrigger data-testid="ReorderTrigger" />
         </ReorderItem>
       </Reorder>,
     )
 
-    screen.getByTestId("ReorderTrigger")
+    expect(screen.getByTestId("ReorderTrigger")).toBeInTheDocument()
   })
 
   test("warns about duplicate", () => {
     const warnSpy = vi.spyOn(global.console, "warn")
 
     render(
-      <Reorder data-testid="Reorder" orientation="vertical">
+      <Reorder orientation="vertical">
         <ReorderItem label="Item 1">Item 1</ReorderItem>
         <ReorderItem label="Item 1">Item 1</ReorderItem>
       </Reorder>,

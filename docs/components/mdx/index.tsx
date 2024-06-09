@@ -1,18 +1,8 @@
-import {
-  Text,
-  Kbd,
-  Divider,
-  DiscList,
-  DecimalList,
-  ListItem,
-  Alert,
-  AlertIcon,
-  AlertDescription,
-  TableContainer,
-  NativeTable,
-  Th,
-  Td,
-} from "@yamada-ui/react"
+import * as CalendarComponents from "@yamada-ui/calendar"
+import * as CarouselComponents from "@yamada-ui/carousel"
+import * as ChartComponents from "@yamada-ui/charts"
+import * as UIComponents from "@yamada-ui/react"
+import * as TableComponents from "@yamada-ui/table"
 import { LinkCard, CardContainer } from "components/navigation"
 import type { MDXComponents as MDXComponentsType } from "mdx/types"
 import { CodeBlock } from "./code-block"
@@ -31,7 +21,31 @@ import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
 
-export const MDXComponents: MDXComponentsType = {
+const {
+  Text,
+  Kbd,
+  Divider,
+  DiscList,
+  DecimalList,
+  ListItem,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  TableContainer,
+  NativeTable,
+  Th,
+  Td,
+} = UIComponents
+
+export const MDXUIComponents = {
+  ...UIComponents,
+  ...CarouselComponents,
+  ...TableComponents,
+  ...CalendarComponents,
+  ...ChartComponents,
+} as unknown as MDXComponentsType
+
+export const MDXBaseComponents: MDXComponentsType = {
   h1: (props) => <Text as="h1" apply="mdx.h1" {...props} />,
   h2: (props) => <LinkedHeading as="h2" apply="mdx.h2" {...props} />,
   h3: (props) => <LinkedHeading as="h3" apply="mdx.h3" {...props} />,
@@ -77,3 +91,8 @@ export const MDXComponents: MDXComponentsType = {
   LinkCard: (props) => <LinkCard {...props} />,
   PropsCard: (props) => <PropsCard {...props} />,
 }
+
+export const MDXComponents = {
+  ...MDXUIComponents,
+  ...MDXBaseComponents,
+} as unknown as MDXComponentsType

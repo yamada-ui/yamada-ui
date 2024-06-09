@@ -3,10 +3,26 @@ import { isGray, transparentizeColor } from "@yamada-ui/utils"
 
 export const Resizable: ComponentMultiStyle = {
   baseStyle: ({ direction: d }) => ({
-    container: {},
-    item: {},
-    trigger: {},
+    container: {
+      w: "100%",
+      h: "100%",
+    },
+    item: {
+      boxSize: "100%",
+    },
+    trigger: {
+      position: "relative",
+    },
     icon: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "auto",
+      translateY: "-50%",
+      translateX: "-50%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],
       rotate: d === "vertical" ? "90deg" : "0deg",
     },

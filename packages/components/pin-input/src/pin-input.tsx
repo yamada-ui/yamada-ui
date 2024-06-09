@@ -364,8 +364,6 @@ export const PinInput = forwardRef<PinInputProps, "div">(
     )
 
     const css: CSSUIObject = {
-      display: "flex",
-      alignItems: "center",
       ...styles.container,
     }
 

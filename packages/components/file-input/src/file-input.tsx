@@ -197,8 +197,6 @@ export const FileInput = forwardRef<FileInputProps, "input">(
     }, [children, format, lineClamp, placeholder, separator, component, values])
 
     const css: CSSUIObject = {
-      display: "flex",
-      alignItems: "center",
       cursor: !readOnly ? "pointer" : "auto",
       ...styles.field,
     }

@@ -41,7 +41,7 @@ export const Resizable = forwardRef<ResizableProps, "div">(
       ...computedProps,
     })
 
-    const css: CSSUIObject = { w: "100%", h: "100%", ...styles.container }
+    const css: CSSUIObject = { ...styles.container }
 
     return (
       <ResizableProvider value={{ styles, ...rest }}>

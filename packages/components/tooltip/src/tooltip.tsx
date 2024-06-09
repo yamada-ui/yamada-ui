@@ -379,7 +379,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       <>
         {trigger}
 
-        <ui.span id={tooltipContentId} __css={{ visibility: "hidden" }}>
+        <ui.span id={tooltipContentId} __css={{ display: "none" }}>
           {label}
         </ui.span>
 

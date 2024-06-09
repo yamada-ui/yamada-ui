@@ -38,6 +38,7 @@ import {
   faBold,
   faUnderline,
 } from "@fortawesome/free-solid-svg-icons"
+import { burger } from "@lucide/lab"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as ChartComponents from "@yamada-ui/charts"
@@ -57,6 +58,8 @@ import {
   Skeleton,
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
+import { Icon as LucideIcon } from "@yamada-ui/lucide"
+import * as LucideIcons from "@yamada-ui/lucide"
 import type { SkeletonProps } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
@@ -93,6 +96,7 @@ const UIProvider: FC<UIComponents.UIProviderProps> = ({
 
 const react = { React, ...React }
 const components = {
+  ...LucideIcons,
   ...UIComponents,
   ...CarouselComponents,
   ...ChartComponents,
@@ -100,6 +104,7 @@ const components = {
   ...CalendarComponents,
   ...DropzoneComponents,
   ...MarkdownComponents,
+  LucideIcon,
   FontAwesomeIcon,
   UIProvider,
 }
@@ -139,6 +144,7 @@ const fontAwesomeIcons = {
   faBold,
   faUnderline,
 }
+const lucideLabIcons = { burger }
 const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
 const utils = { wait, faker, useForm, Controller }
 
@@ -147,6 +153,7 @@ const scope = {
   ...components,
   ...fontAwesomeIcons,
   ...reactIcons,
+  ...lucideLabIcons,
   ...utils,
 }
 

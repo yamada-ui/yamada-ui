@@ -1,8 +1,8 @@
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as ChartComponents from "@yamada-ui/charts"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 import * as UIComponents from "@yamada-ui/react"
+import * as LucideIcons from "@yamada-ui/lucide"
 import * as TableComponents from "@yamada-ui/table"
 import { LinkCard, CardContainer } from "components/navigation"
 import type { MDXComponents as MDXComponentsType } from "mdx/types"
@@ -39,12 +39,12 @@ const {
 } = UIComponents
 
 export const MDXUIComponents = {
+  ...LucideIcons,
   ...UIComponents,
   ...CarouselComponents,
   ...TableComponents,
   ...CalendarComponents,
   ...ChartComponents,
-  FontAwesomeIcon,
 } as unknown as MDXComponentsType
 
 export const MDXBaseComponents: MDXComponentsType = {

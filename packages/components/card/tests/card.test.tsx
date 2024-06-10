@@ -3,9 +3,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "../src"
 
 describe("<Card />", () => {
   test("renders card correctly", async () => {
-    const { container } = render(<Card>Card</Card>)
-
-    await a11y(container)
+    await a11y(<Card>Card</Card>)
   })
 
   test("renders all the allowed shorthand style props", async () => {

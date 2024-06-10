@@ -58,6 +58,13 @@
       "title": "Authentication"
     }
   },
+  "icons": {
+    "title": "Icons",
+    "description": "Beautiful & consistent icon toolkit made by the Lucide community.",
+    "placeholder": "Search {label} icons",
+    "not-found": "Icon not found.",
+    "reset": "Clear your search and try again"
+  },
   "not-found": {
     "title": "404: Not found",
     "description": "Page not found",
@@ -68,7 +75,8 @@
   "component": {
     "tree": {
       "yamada-colors": "Colors generator",
-      "examples": "Examples"
+      "examples": "Examples",
+      "icons": "Icons"
     },
     "feedback": {
       "ad-banner": {

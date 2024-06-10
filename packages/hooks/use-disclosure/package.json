@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-disclosure",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Yamada UI useDisclosure custom hook",
   "keywords": [
     "use-disclosure"

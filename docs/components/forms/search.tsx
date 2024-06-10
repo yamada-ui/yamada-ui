@@ -17,8 +17,8 @@ import {
   useUpdateEffect,
   IconButton,
 } from "@yamada-ui/react"
+import { File, Hash, Search as SearchIcon } from "@yamada-ui/lucide"
 import type { StackProps, ModalProps, ButtonProps } from "@yamada-ui/react"
-import { File, Hash, MagnifyingGlass } from "components/media-and-icons"
 import { useI18n } from "contexts/i18n-context"
 import { useEventListener } from "hooks/use-event-listener"
 import { matchSorter } from "match-sorter"
@@ -100,7 +100,7 @@ export const Search = memo(
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         >
-          <MagnifyingGlass />
+          <SearchIcon fontSize="xl" />
           <Text flex="1">{tc("component.forms.search.message")}</Text>
           <Kbd>{actionKey} + K</Kbd>
         </HStack>
@@ -125,7 +125,7 @@ export const SearchButton = memo(
           color="muted"
           variant="ghost"
           _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
-          icon={<MagnifyingGlass />}
+          icon={<SearchIcon fontSize="2xl" />}
           {...rest}
           onClick={handlerAll(rest.onClick, onOpen)}
         />
@@ -275,7 +275,8 @@ const SearchModal: FC<SearchModalProps> = memo(
               }}
             />
 
-            <MagnifyingGlass
+            <SearchIcon
+              fontSize="2xl"
               position="absolute"
               top="50%"
               left="0"
@@ -326,12 +327,12 @@ const SearchModal: FC<SearchModalProps> = memo(
                   >
                     {type === "page" ? (
                       <File
-                        fontSize="xl"
+                        fontSize="2xl"
                         color={["blackAlpha.700", "whiteAlpha.600"]}
                       />
                     ) : (
                       <Hash
-                        fontSize="xl"
+                        fontSize="2xl"
                         color={["blackAlpha.500", "whiteAlpha.400"]}
                       />
                     )}

@@ -1,6 +1,6 @@
 import { Link, Text } from "@yamada-ui/react"
 import type { HeadingProps } from "@yamada-ui/react"
-import { Link as LinkIcon } from "components/media-and-icons"
+import { Link as LinkIcon } from "@yamada-ui/lucide"
 import type { FC } from "react"
 
 export type LinkedHeadingProps = HeadingProps
@@ -35,7 +35,7 @@ export const LinkedHeading: FC<LinkedHeadingProps> = ({
           _focusVisible={{ boxShadow: "none" }}
           tabIndex={-1}
         >
-          <LinkIcon />
+          <LinkIcon fontSize="0.875em" />
         </Link>
       ) : null}
     </Text>

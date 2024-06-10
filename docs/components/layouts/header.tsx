@@ -1,4 +1,11 @@
 import {
+  Languages,
+  Moon,
+  Palette,
+  Sun,
+  Menu as MenuIcon,
+} from "@yamada-ui/lucide"
+import {
   Box,
   Center,
   CloseButton,
@@ -44,15 +51,7 @@ import type {
   UseDisclosureReturn,
 } from "@yamada-ui/react"
 import { Search, SearchButton } from "components/forms"
-import {
-  ColorPalette,
-  Discord,
-  Github,
-  Hamburger,
-  Moon,
-  Sun,
-  Translate,
-} from "components/media-and-icons"
+import { Discord, Github } from "components/media-and-icons"
 import { NextLinkIconButton, Tree } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
@@ -213,7 +212,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
             display={{ base: "none", lg: "inline-flex" }}
             color="muted"
             onClick={onOpen}
-            icon={<Hamburger />}
+            icon={<MenuIcon fontSize="2xl" />}
             _hover={{ bg: [`blackAlpha.50`, `whiteAlpha.100`] }}
           />
         ) : (
@@ -265,7 +264,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
         aria-label="Open language switching menu"
         variant="ghost"
         color="muted"
-        icon={<Translate />}
+        icon={<Languages fontSize="2xl" />}
         _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
         {...rest}
       />
@@ -322,7 +321,13 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
           aria-label="Open color mode switching menu"
           variant="ghost"
           color="muted"
-          icon={colorMode === "dark" ? <Sun /> : <Moon />}
+          icon={
+            colorMode === "dark" ? (
+              <Sun fontSize="2xl" />
+            ) : (
+              <Moon fontSize="2xl" />
+            )
+          }
           _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
           {...rest}
         />
@@ -376,7 +381,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             aria-label="Open color mode switching menu"
             variant="ghost"
             color="muted"
-            icon={<ColorPalette />}
+            icon={<Palette fontSize="2xl" />}
             _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
             {...rest}
           />

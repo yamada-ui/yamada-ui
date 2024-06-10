@@ -1,0 +1,14 @@
+{
+  "Icon": {
+    "icon": {
+      "type": "IconNode",
+      "required": true,
+      "description": "The icon of the [Lucide lab](https://github.com/lucide-icons/lucide-lab)."
+    },
+    "size": {
+      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
+      "required": false,
+      "description": "The CSS `font-size` property."
+    }
+  }
+}

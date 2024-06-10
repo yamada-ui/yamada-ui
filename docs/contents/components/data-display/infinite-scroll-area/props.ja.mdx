@@ -20,6 +20,13 @@ tab: Props
 />
 
 <PropsCard
+  id="infinitescrollarea-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
   id="infinitescrollarea-finish"
   name="finish"
   type="type ONLY_FOR_FORMAT =
@@ -87,7 +94,7 @@ tab: Props
   index: number
   finish: () => void
   entry?: IntersectionObserverEntry | undefined
-}) => Promise<void>"
+}) => void | Promise<void>"
   description={"The callback invoked when trigger is intersect."}
 />
 
@@ -116,6 +123,13 @@ tab: Props
 />
 
 <PropsCard
+  id="infinitescrollarea-size"
+  name="size"
+  type="string"
+  description={"The size of the InfiniteScrollArea."}
+/>
+
+<PropsCard
   id="infinitescrollarea-startindex"
   name="startIndex"
   type="number"
@@ -130,4 +144,11 @@ tab: Props
   name="triggerProps"
   type='HTMLUIProps<"div">'
   description={"Props for infinite scroll area trigger component."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the InfiniteScrollArea."}
 />

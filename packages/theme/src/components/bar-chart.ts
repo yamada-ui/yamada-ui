@@ -3,6 +3,9 @@ import { LineChart } from "./line-chart"
 
 export const BarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
+    container: {
+      maxWidth: "full",
+    },
     bar: {},
     activeBar: {},
     background: { fill: "transparent" },

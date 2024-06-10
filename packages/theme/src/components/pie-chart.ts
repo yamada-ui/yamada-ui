@@ -4,6 +4,9 @@ import { LineChart } from "./line-chart"
 
 export const PieChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
+    container: {
+      maxWidth: "full",
+    },
     pie: {},
     activeShape: {},
     inactiveShape: {},

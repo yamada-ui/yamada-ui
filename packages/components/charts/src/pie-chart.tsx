@@ -148,7 +148,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-pie-chart", className)}
         var={pieVars}
-        __css={{ maxW: "full", ...styles.container }}
+        __css={{ ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

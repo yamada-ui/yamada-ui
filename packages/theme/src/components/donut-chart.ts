@@ -1,4 +1,10 @@
 import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
 import { PieChart } from "./pie-chart"
 
-export const DonutChart: ComponentMultiStyle = mergeMultiStyle(PieChart)()
+export const DonutChart: ComponentMultiStyle = mergeMultiStyle(PieChart, {
+  baseStyle: {
+    container: {
+      maxWidth: "full",
+    },
+  },
+})({ omit: [] })

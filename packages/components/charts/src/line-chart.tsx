@@ -189,7 +189,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
         ref={ref}
         className={cx("ui-line-chart", className)}
         var={lineVars}
-        __css={{ maxW: "full", ...styles.container }}
+        __css={{ ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

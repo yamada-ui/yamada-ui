@@ -3,7 +3,9 @@ import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const LineChart: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
+    container: {
+      maxWidth: "full",
+    },
     chart: {},
     referenceLine: {
       fillOpacity: 1,

@@ -170,8 +170,6 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
           })
         }
 
-        if (name === "charts") console.log(doc)
-
         if (Object.keys(doc).length) docs[name] = doc
       } catch (e) {
         notDocsList = [...notDocsList, dirent.name]

@@ -333,6 +333,9 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.5.2
         version: 6.5.2
+      '@lucide/lab':
+        specifier: ^0.1.1
+        version: 0.1.1
       '@vercel/analytics':
         specifier: ^1.2.2
         version: 1.3.1(next@14.2.3(@babel/core@7.24.7)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -354,6 +357,9 @@ importers:
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../packages/components/markdown
@@ -427,12 +433,18 @@ importers:
       eslint-config-next:
         specifier: ^14.2.3
         version: 14.2.3(eslint@8.57.0)(typescript@5.4.5)
+      execa:
+        specifier: ^9.1.0
+        version: 9.1.0
       find-packages:
         specifier: ^10.0.4
         version: 10.0.4
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
+      glob:
+        specifier: ^10.4.1
+        version: 10.4.1
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -463,6 +475,9 @@ importers:
       remark-slug:
         specifier: ^7.0.1
         version: 7.0.1
+      rimraf:
+        specifier: ^5.0.7
+        version: 5.0.7
       typescript:
         specifier: ^5.4.5
         version: 5.4.5

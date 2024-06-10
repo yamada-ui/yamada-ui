@@ -540,12 +540,6 @@ export const EditablePreview = forwardRef<EditablePreviewProps, "span">(
     const { styles, getPreviewProps } = useEditableContext()
 
     const css: CSSUIObject = {
-      cursor: "text",
-      display: "inline-block",
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      textAlign: "inherit",
-      bg: "transparent",
       ...styles.preview,
     }
 
@@ -566,11 +560,6 @@ export const EditableInput = forwardRef<EditableInputProps, "input">(
     const { styles, getInputProps } = useEditableContext()
 
     const css: CSSUIObject = {
-      outline: 0,
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      textAlign: "inherit",
-      bg: "transparent",
       ...styles.input,
     }
 
@@ -591,11 +580,6 @@ export const EditableTextarea = forwardRef<EditableTextareaProps, "textarea">(
     const { styles, getTextareaProps } = useEditableContext()
 
     const css: CSSUIObject = {
-      outline: 0,
-      fontSize: "inherit",
-      fontWeight: "inherit",
-      textAlign: "inherit",
-      bg: "transparent",
       ...styles.textarea,
     }
 

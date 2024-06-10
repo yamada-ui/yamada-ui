@@ -31,7 +31,7 @@ export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
       ...rest,
     })
 
-    const css: CSSUIObject = { position: "relative", ...styles.trigger }
+    const css: CSSUIObject = { ...styles.trigger }
 
     return (
       <ui.div
@@ -44,15 +44,6 @@ export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
           <ui.div
             className="ui-resizable__trigger-icon"
             __css={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "auto",
-              translateY: "-50%",
-              translateX: "-50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               ...styles.icon,
             }}
             {...getIconProps(iconProps)}

@@ -3,6 +3,10 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Menu: ComponentMultiStyle = {
   baseStyle: {
     button: {
+      display: "inline-flex",
+      appearance: "none",
+      alignItems: "center",
+      outline: 0,
       transitionProperty: "common",
       transitionDuration: "normal",
     },
@@ -18,6 +22,16 @@ export const Menu: ComponentMultiStyle = {
       zIndex: "guldo",
     },
     item: {
+      textDecoration: "none",
+      color: "inherit",
+      userSelect: "none",
+      display: "flex",
+      width: "100%",
+      alignItems: "center",
+      textAlign: "start",
+      flex: "0 0 auto",
+      outline: 0,
+      gap: "0.75rem",
       cursor: "pointer",
       py: "1.5",
       px: "3",

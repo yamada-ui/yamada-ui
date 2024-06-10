@@ -493,12 +493,18 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:../../packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/components/charts
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../../packages/components/dropzone
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../../packages/components/markdown
@@ -563,12 +569,18 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:../../packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/components/charts
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../../packages/components/dropzone
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../../packages/components/markdown
@@ -621,12 +633,18 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:../../packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/components/charts
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../../packages/components/dropzone
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../../packages/components/markdown
@@ -691,12 +709,18 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:../../packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/components/charts
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../../packages/components/dropzone
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../../packages/components/markdown
@@ -767,12 +791,18 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:../../packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/components/charts
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../../packages/components/dropzone
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../../packages/components/markdown
@@ -852,12 +882,18 @@ importers:
       '@yamada-ui/carousel':
         specifier: workspace:*
         version: link:../../packages/components/carousel
+      '@yamada-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/components/charts
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:../../packages/components/dropzone
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:../../packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:../../packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:../../packages/components/markdown
@@ -5726,10 +5762,6 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
-      '@effect-ts/core':
-        optional: true
-      '@effect-ts/otel':
-        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:

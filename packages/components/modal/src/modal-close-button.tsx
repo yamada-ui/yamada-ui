@@ -12,7 +12,6 @@ export const ModalCloseButton = forwardRef<ModalCloseButtonProps, "button">(
     const { styles, onClose } = useModal()
 
     const css: CSSUIObject = {
-      position: "absolute",
       ...(__css ? __css : styles.closeButton),
     }
 

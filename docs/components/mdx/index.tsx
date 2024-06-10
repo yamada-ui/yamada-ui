@@ -5,7 +5,7 @@ import * as UIComponents from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { LinkCard, CardContainer } from "components/navigation"
 import type { MDXComponents as MDXComponentsType } from "mdx/types"
-import { CodeBlock } from "./code-block"
+import { Pre } from "./code-block"
 import { ColorModeButton } from "./color-mode-button"
 import {
   ColorPaletters,
@@ -55,7 +55,7 @@ export const MDXBaseComponents: MDXComponentsType = {
   p: (props) => <Text apply="mdx.p" {...props} />,
   strong: (props) => <Text as="strong" apply="mdx.strong" {...props} />,
   code: (props) => <Text as="code" apply="mdx.code" {...props} />,
-  pre: (props) => <CodeBlock {...props} />,
+  pre: (props) => <Pre {...props} />,
   a: (props) => <Link apply="mdx.a" {...props} />,
   ul: (props) => <DiscList apply="mdx.ul" {...props} />,
   ol: (props) => <DecimalList apply="mdx.ol" {...props} />,

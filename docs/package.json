@@ -68,8 +68,10 @@
     "@yamada-ui/cli": "workspace:*",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
+    "execa": "^9.1.0",
     "find-packages": "^10.0.4",
     "github-slugger": "^2.0.0",
+    "glob": "^10.4.1",
     "gray-matter": "^4.0.3",
     "markdown-toc": "^1.2.0",
     "markdown-wasm": "^1.2.0",
@@ -80,6 +82,7 @@
     "remark-emoji": "4.0.0",
     "remark-gfm": "^3.0.1",
     "remark-slug": "^7.0.1",
+    "rimraf": "^5.0.7",
     "typescript": "^5.4.5",
     "unified": "^10.1.2",
     "unist-util-visit": "^5.0.0"

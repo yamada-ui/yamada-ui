@@ -15,7 +15,7 @@ import {
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import { ScrollShadow } from "components/data-display"
-import { List as ListIcon } from "components/media-and-icons"
+import { List as ListIcon } from "@yamada-ui/lucide"
 import { TextWithCode } from "components/typography"
 import type { DocumentContent } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
@@ -103,7 +103,7 @@ export const TableOfContents = memo(
           overscrollBehavior="contain"
         >
           <HStack gap="sm">
-            <ListIcon />
+            <ListIcon fontSize="2xl" />
             <Text>{t("component.table-of-contents.title")}</Text>
           </HStack>
 

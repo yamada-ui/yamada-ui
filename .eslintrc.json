@@ -54,7 +54,6 @@
         "testing-library/no-promise-in-fire-event": "error",
         "testing-library/prefer-find-by": "error",
         "testing-library/no-await-sync-queries": "error",
-        "vitest/require-hook": "error",
         "vitest/consistent-test-it": [
           "error",
           {
@@ -87,7 +86,7 @@
         "vitest/prefer-to-contain": "error",
         "vitest/prefer-to-have-length": "error",
         "vitest/prefer-todo": "error",
-        "vitest/require-hook": "off",
+        "vitest/require-hook": "error",
         "vitest/require-to-throw-message": "error",
         "vitest/require-top-level-describe": "error",
         "vitest/valid-expect": [

@@ -433,12 +433,18 @@ importers:
       eslint-config-next:
         specifier: ^14.2.3
         version: 14.2.3(eslint@8.57.0)(typescript@5.4.5)
+      execa:
+        specifier: ^9.1.0
+        version: 9.1.0
       find-packages:
         specifier: ^10.0.4
         version: 10.0.4
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
+      glob:
+        specifier: ^10.4.1
+        version: 10.4.1
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -469,6 +475,9 @@ importers:
       remark-slug:
         specifier: ^7.0.1
         version: 7.0.1
+      rimraf:
+        specifier: ^5.0.7
+        version: 5.0.7
       typescript:
         specifier: ^5.4.5
         version: 5.4.5

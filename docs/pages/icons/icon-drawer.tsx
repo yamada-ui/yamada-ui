@@ -56,8 +56,8 @@ export const IconDrawer: FC<IconDrawerProps> = memo(({ openRef }) => {
           <IconGrid position="absolute" top="0" left="0" />
         </Center>
 
-        <HStack w="full" alignItems="flex-start">
-          <Heading as="h3" flex="1">
+        <HStack w="full" minW="0" alignItems="flex-start">
+          <Heading as="h3" flex="1" lineClamp={1}>
             {name}
           </Heading>
 

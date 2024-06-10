@@ -32,7 +32,14 @@ import {
   getOwnerDocument,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import { Children, cloneElement, useCallback, useEffect, useRef } from "react"
+import {
+  Children,
+  cloneElement,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+} from "react"
 
 type TooltipOptions = {
   /**
@@ -343,10 +350,18 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
     )
 
+    const tooltipContentId = useId()
+
     const child = Children.only(children) as React.ReactElement & {
       ref?: React.Ref<any>
     }
-    const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
+    const trigger = cloneElement(
+      child,
+      getTriggerProps(
+        { ...child.props, "aria-describedby": tooltipContentId },
+        child.ref,
+      ),
+    )
 
     const css: CSSUIObject = {
       position: "relative",
@@ -363,6 +378,10 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
     return (
       <>
         {trigger}
+
+        <ui.span id={tooltipContentId} __css={{ display: "none" }}>
+          {label}
+        </ui.span>
 
         <AnimatePresence>
           {isOpen ? (
@@ -385,6 +404,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                   exit="exit"
                   __css={css}
                   {...rest}
+                  role="tooltip"
                 >
                   {label}
                 </ui.div>

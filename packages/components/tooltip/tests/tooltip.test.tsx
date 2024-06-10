@@ -44,13 +44,13 @@ describe("<Tooltip/>", () => {
     fireEvent.pointerEnter(screen.getByText("Hover"))
 
     await waitFor(() => {
-      expect(screen.getByText("Tooltip hover")).toBeInTheDocument()
+      expect(screen.getAllByText("Tooltip hover")[1]).toBeInTheDocument()
     })
 
     fireEvent.pointerLeave(screen.getByText("Hover"))
 
     await waitFor(() => {
-      expect(screen.getByText("Tooltip hover").style.visibility).toBe("hidden")
+      expect(screen.queryByRole("tooltip")).toBeNull()
     })
   })
 
@@ -61,20 +61,20 @@ describe("<Tooltip/>", () => {
       </Tooltip>,
     )
 
-    expect(screen.getByText("Tooltip hover")).toBeInTheDocument()
+    expect(screen.getAllByText("Tooltip hover")[1]).toBeInTheDocument()
   })
 
   test("should disable even if hover", async () => {
-    render(
+    const { user } = render(
       <Tooltip label="Tooltip hover" isDisabled>
         <span>Hover</span>
       </Tooltip>,
     )
 
-    fireEvent.pointerEnter(screen.getByText("Hover"))
+    const tooltipTriggerElement = await screen.findByText("Hover")
+    await user.hover(tooltipTriggerElement)
 
-    await waitFor(() => {
-      expect(screen.queryByText("Tooltip hover")).toBeNull()
-    })
+    const tooltip = screen.queryByRole("tooltip")
+    expect(tooltip).toBeNull()
   })
 })

@@ -4,8 +4,5 @@ import { LineChart } from "./line-chart"
 export const AreaChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     area: {},
-    container: {
-      maxWidth: "full",
-    },
   },
 })({ omit: ["line"] })

@@ -154,14 +154,14 @@ describe("<RadioGroup/>", () => {
   test("RadioGroup should have gap property set to 2px", async () => {
     render(<RadioGroup gap="2px" />)
 
-    const radioGroup = await screen.findByRole("group")
+    const radioGroup = await screen.findByRole("radiogroup")
     expect(radioGroup).toHaveStyle({ gap: "2px" })
   })
 
   test("RadioGroup with direction row should have gap property set to 1rem", async () => {
     render(<RadioGroup direction="row" />)
 
-    const radioGroup = await screen.findByRole("group")
+    const radioGroup = await screen.findByRole("radiogroup")
     expect(radioGroup).toHaveStyle({ gap: "1rem" })
   })
 })

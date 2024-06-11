@@ -621,7 +621,7 @@ export const useSelect = <T extends MaybeValue = string>({
       "data-placeholder": dataAttr(
         !isMulti ? label === undefined : !label?.length,
       ),
-      "aria-expanded": dataAttr(isOpen),
+      "aria-expanded": isOpen,
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
@@ -709,7 +709,7 @@ export const useSelectList = () => {
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
-      role: "select",
+      role: "listbox",
       tabIndex: -1,
       ...props,
     }),

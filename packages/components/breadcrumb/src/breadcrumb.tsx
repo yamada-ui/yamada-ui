@@ -87,6 +87,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Breadcrumb", props)
 
   const {
+    id: idProps,
     className,
     children,
     separator = "/",
@@ -107,6 +108,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   if (startBoundaries) endBoundaries ??= 1
   if (endBoundaries) startBoundaries ??= 1
 
+  const id = idProps ?? "breadcrumb"
   const hasBoundaries = isNumber(startBoundaries) && isNumber(endBoundaries)
   const isExceed =
     hasBoundaries && startBoundaries! + endBoundaries! < items.length
@@ -223,9 +225,11 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   return (
     <BreadcrumbProvider value={styles}>
       <ui.nav
+        id={id}
         ref={ref}
         className={cx("ui-breadcrumb", className)}
         __css={styles.container}
+        aria-label={id}
         {...rest}
       >
         <ui.ol className="ui-breadcrumb__list" {...listProps} __css={css}>

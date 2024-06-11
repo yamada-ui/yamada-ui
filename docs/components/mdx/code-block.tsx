@@ -1,4 +1,5 @@
 // import * as DropzoneComponents from '@yamada-ui/dropzone'
+import type { BoxProps } from "@yamada-ui/react"
 import { Box, Text } from "@yamada-ui/react"
 import { CopyButton } from "components/forms"
 import dynamic from "next/dynamic"
@@ -22,12 +23,12 @@ type Children = {
   }
 }
 
-export type CodeBlockProps = DetailedHTMLProps<
+export type PreProps = DetailedHTMLProps<
   HTMLAttributes<HTMLPreElement>,
   HTMLPreElement
 >
 
-export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
+export const Pre: FC<PreProps> = ({ children }) => {
   let {
     className,
     title,
@@ -57,13 +58,33 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
     )
   }
 
+  return <CodeBlock {...{ title, code, language, theme, highlight }} />
+}
+
+export type CodeBlockProps = {
+  title?: string
+  innerProps?: BoxProps
+} & HighlightProps &
+  BoxProps
+
+export const CodeBlock: FC<CodeBlockProps> = ({
+  title,
+  code,
+  language,
+  theme,
+  highlight,
+  innerProps,
+  ...rest
+}) => {
   return (
-    <Box position="relative" my="6">
+    <Box position="relative" my="6" {...rest}>
       <Box
+        h="full"
         rounded="md"
         bg={["neutral.800", "neutral.900"]}
         sx={{ "& > div": { py: "6" } }}
         overflow="hidden"
+        {...innerProps}
       >
         {title ? (
           <Text
@@ -88,6 +109,7 @@ export const CodeBlock: FC<CodeBlockProps> = ({ children }) => {
         position="absolute"
         top={title ? "3.3rem" : "1.125rem"}
         right="4"
+        zIndex="1"
       />
     </Box>
   )

@@ -202,7 +202,7 @@ describe("useInfiniteScroll", () => {
     })
   })
 
-  test("should be called onReset horizontal reverse scrooll to body", async () => {
+  test("should be called onReset horizontal scrooll to body", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
         finish()

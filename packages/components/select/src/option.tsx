@@ -33,6 +33,7 @@ export const Option = forwardRef<OptionProps, "li">(
 
     return (
       <ui.li
+        role="option"
         className={cx("ui-select__item", className)}
         __css={css}
         {...getOptionProps()}

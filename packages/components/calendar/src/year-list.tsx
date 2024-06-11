@@ -69,7 +69,7 @@ export const YearList: FC<YearListProps> = ({
 
       <ui.div
         role="grid"
-        aria-label={`from ${minYearLabel} to ${maxYearLabel}`}
+        aria-label={`From ${minYearLabel} to ${maxYearLabel}`}
         className={cx("ui-calendar__year-list", className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,

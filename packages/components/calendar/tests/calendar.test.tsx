@@ -23,6 +23,52 @@ describe("<Calendar />", () => {
         name: "June 2024",
       })
       expect(button).toBeInTheDocument()
+
+      const days = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "31",
+      ]
+
+      for (const day of days) {
+        const dayButton = screen.getByRole("button", {
+          name: day,
+        })
+        expect(dayButton).toBeInTheDocument()
+      }
+
+      for (const day of ["27", "28", "29", "30"]) {
+        const dayButtons = screen.getAllByRole("button", {
+          name: day,
+        })
+        for (const button of dayButtons) {
+          expect(button).toBeInTheDocument()
+        }
+      }
     })
 
     test("should render months", () => {

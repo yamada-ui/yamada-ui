@@ -145,7 +145,7 @@ export type UseNumberInputProps = UseFormControlProps<HTMLInputElement> &
 
 export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const {
-    id: _id,
+    id: idProps,
     name,
     value: valueProp,
     defaultValue,
@@ -411,7 +411,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const getInputProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      _id,
+      idProps,
       name,
       type: "text",
       role: "spinbutton",
@@ -441,7 +441,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       onBlur: handlerAll(props.onBlur, onBlur),
     }),
     [
-      _id,
+      idProps,
       name,
       inputMode,
       pattern,

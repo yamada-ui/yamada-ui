@@ -6,7 +6,6 @@ runs:
   steps:
     - name: Update docs
       run: |
-        pnpm changelog:latest
         pnpm gen:docs
         pnpm docs:theme
         pnpm docs:props

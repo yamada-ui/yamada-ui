@@ -3,6 +3,14 @@ import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const LineChart: ComponentMultiStyle = {
   baseStyle: {
+    area: {
+      fillOpacity: 1,
+      strokeOpacity: 1,
+    },
+    dimArea: {
+      fillOpacity: 0,
+      strokeOpacity: 0.3,
+    },
     container: {
       maxWidth: "full",
     },
@@ -30,7 +38,12 @@ export const LineChart: ComponentMultiStyle = {
     },
     line: {},
     dot: {
+      fillOpacity: 1,
       strokeWidth: 2,
+    },
+    dimDot: {
+      fillOpacity: 0,
+      strokeOpacity: 0,
     },
     activeDot: {
       strokeWidth: 2,

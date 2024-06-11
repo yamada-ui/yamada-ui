@@ -211,8 +211,6 @@ export const useAreaChart = ({
 
   const [areaProps, areaClassName] = useMemo(() => {
     const resolvedAreaProps = {
-      fillOpacity: 1,
-      strokeOpacity: 1,
       ...computedAreaProps,
     }
 
@@ -224,18 +222,17 @@ export const useAreaChart = ({
 
   const [dimAreaProps, dimAreaClassName] = useMemo(() => {
     const resolvedDimArea = {
-      fillOpacity: 0,
-      strokeOpacity: 0.3,
       ...dimArea,
     }
 
-    return getComponentProps<Dict, string>([resolvedDimArea, areaProperties])(
-      theme,
-    )
-  }, [dimArea, theme])
+    return getComponentProps<Dict, string>(
+      [resolvedDimArea, areaProperties],
+      styles.dimArea,
+    )(theme)
+  }, [dimArea, styles.dimArea, theme])
 
   const [dotProps, dotClassName] = useMemo(() => {
-    const resolvedDot = { fillOpacity: 1, strokeWidth: 2, ...dot }
+    const resolvedDot = { ...dot }
 
     return getComponentProps<Dict, string>(
       [resolvedDot, dotProperties],
@@ -253,11 +250,12 @@ export const useAreaChart = ({
   )
 
   const [dimDotProps, dimDotClassName] = useMemo(() => {
-    const resolvedDimDot = { fillOpacity: 0, strokeOpacity: 0, ...dimDot }
-    return getComponentProps<Dict, string>([resolvedDimDot, dotProperties])(
-      theme,
-    )
-  }, [dimDot, theme])
+    const resolvedDimDot = { ...dimDot }
+    return getComponentProps<Dict, string>(
+      [resolvedDimDot, dotProperties],
+      styles.dimDot,
+    )(theme)
+  }, [dimDot, styles.dimDot, theme])
 
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {

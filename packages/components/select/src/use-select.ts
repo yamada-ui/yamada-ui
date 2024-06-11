@@ -612,6 +612,7 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
+      role: "combobox",
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
       ...fieldProps,

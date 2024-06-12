@@ -13,8 +13,6 @@ export const Calendar: ComponentMultiStyle = {
       display: "flex",
       flexWrap: "wrap",
       alignItems: "flex-start",
-      w: "100%",
-      h: "fit-content",
     },
     header: {
       display: "flex",
@@ -105,25 +103,6 @@ export const Calendar: ComponentMultiStyle = {
           display: "none",
         },
       },
-    },
-    inner: {
-      position: "relative",
-    },
-    field: {
-      pe: "2rem",
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
-    },
-    icon: {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      pointerEvents: "none",
-      cursor: "pointer",
     },
   },
 

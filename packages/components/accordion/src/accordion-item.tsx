@@ -143,12 +143,13 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
         ref: mergeRefs(register, ref),
         type: "button",
         disabled: isDisabled,
+        "aria-expanded": ariaAttr(isOpen),
         "aria-controls": panelId,
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }),
-      [isDisabled, onClick, onFocus, onKeyDown, register, panelId],
+      [isDisabled, isOpen, onClick, onFocus, onKeyDown, register, panelId],
     )
 
     const getPanelProps: UIPropGetter = useCallback(

@@ -956,8 +956,8 @@ export const useSelectOption = (
         "data-value": optionValue ?? "",
         "data-focus": dataAttr(isFocused),
         "data-disabled": dataAttr(isDisabled),
-        "aria-checked": isMulti ? isSelected : undefined,
-        "aria-selected": isMulti ? undefined : isSelected,
+        "aria-checked": isMulti && !isDisabled ? isSelected : undefined,
+        "aria-selected": isMulti || isDisabled ? undefined : isSelected,
         "aria-disabled": ariaAttr(isDisabled),
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }

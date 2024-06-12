@@ -3,6 +3,7 @@ title: InfiniteScrollArea
 description: >-
   `InfiniteScrollArea`は、無限スクロール機能を提供するコンポーネントです。このコンポーネントは、コンポーネントの終わりに達したときに次のデータセットを自動的に読み込み、表示することで、スムーズなスクロール体験を提供します。
 package_name: "@yamada-ui/infinite-scroll-area"
+label: Updated
 with_description: true
 tab: Props
 ---
@@ -16,6 +17,13 @@ tab: Props
   name="behavior"
   type="ScrollBehavior"
   description={"Determines whether scrolling is instant or animates smoothly."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
 />
 
 <PropsCard
@@ -86,7 +94,7 @@ tab: Props
   index: number
   finish: () => void
   entry?: IntersectionObserverEntry | undefined
-}) => Promise<void>"
+}) => void | Promise<void>"
   description={"The callback invoked when trigger is intersect."}
 />
 
@@ -115,6 +123,13 @@ tab: Props
 />
 
 <PropsCard
+  id="infinitescrollarea-size"
+  name="size"
+  type="string"
+  description={"The size of the InfiniteScrollArea."}
+/>
+
+<PropsCard
   id="infinitescrollarea-startindex"
   name="startIndex"
   type="number"
@@ -129,4 +144,11 @@ tab: Props
   name="triggerProps"
   type='HTMLUIProps<"div">'
   description={"Props for infinite scroll area trigger component."}
+/>
+
+<PropsCard
+  id="infinitescrollarea-variant"
+  name="variant"
+  type="string"
+  description={"The variant of the InfiniteScrollArea."}
 />

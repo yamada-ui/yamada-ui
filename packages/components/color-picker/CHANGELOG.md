@@ -1,5 +1,25 @@
 # @yamada-ui/color-picker
 
+## 1.2.17
+
+### Patch Changes
+
+- Updated dependencies [[`55fa828`](https://github.com/yamada-ui/yamada-ui/commit/55fa8285c6a74ec9d919b50251f91b3c06b58a70), [`ddc0038`](https://github.com/yamada-ui/yamada-ui/commit/ddc0038afb933b6883b71f047cf40bd5abb169c1), [`5ec5a23`](https://github.com/yamada-ui/yamada-ui/commit/5ec5a231cc134a280eeb7841f99348c74cd4b948), [`8799de2`](https://github.com/yamada-ui/yamada-ui/commit/8799de254372718a7416b5cceaa2780157394d63)]:
+  - @yamada-ui/utils@1.2.1
+  - @yamada-ui/use-pan-event@1.0.16
+  - @yamada-ui/core@1.7.1
+  - @yamada-ui/button@1.0.30
+  - @yamada-ui/form-control@1.1.2
+  - @yamada-ui/icon@1.0.27
+  - @yamada-ui/input@1.0.32
+  - @yamada-ui/popover@1.2.1
+  - @yamada-ui/portal@1.0.15
+  - @yamada-ui/use-controllable-state@1.0.14
+  - @yamada-ui/use-disclosure@1.0.14
+  - @yamada-ui/use-eye-dropper@1.0.12
+  - @yamada-ui/use-outside-click@1.0.14
+  - @yamada-ui/use-size@1.0.14
+
 ## 1.2.16
 
 ### Patch Changes

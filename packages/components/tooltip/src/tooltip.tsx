@@ -31,8 +31,15 @@ import {
   getOwnerWindow,
   getOwnerDocument,
 } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
-import { Children, cloneElement, useCallback, useEffect, useRef } from "react"
+import type { ReactElement, ReactNode, Ref } from "react"
+import {
+  Children,
+  cloneElement,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+} from "react"
 
 type TooltipOptions = {
   /**
@@ -216,18 +223,16 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
 
     closeOnPointerDown = closeOnMouseDown
 
+    const labelId = useId()
     const { isOpen, onOpen, onClose } = useDisclosure({
       isOpen: isOpenProp,
       defaultIsOpen: defaultIsOpenProp,
       onOpen: onOpenProp,
       onClose: onCloseProp,
     })
-
     const triggerRef = useRef<HTMLElement>(null)
-
     const openTimeout = useRef<number>()
     const closeTimeout = useRef<number>()
-
     const { referenceRef, getPopperProps, transformOrigin } = usePopper({
       enabled: isOpen,
       placement,
@@ -284,6 +289,20 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       [isOpen, closeWithDelay],
     )
 
+    const getTriggerProps: PropGetter = useCallback(
+      (props = {}, ref = null) => ({
+        ...props,
+        ref: mergeRefs(triggerRef, ref, referenceRef),
+        onPointerEnter: handlerAll(props.onPointerEnter, openWithDelay),
+        onClick: handlerAll(props.onClick, onClick),
+        onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
+        onFocus: handlerAll(props.onFocus, openWithDelay),
+        onBlur: handlerAll(props.onBlur, closeWithDelay),
+      }),
+
+      [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
+    )
+
     useEventListener(
       () => getOwnerDocument(triggerRef.current),
       "keydown",
@@ -329,31 +348,24 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       [],
     )
 
-    const getTriggerProps: PropGetter = useCallback(
-      (props = {}, ref = null) => ({
-        ...props,
-        ref: mergeRefs(triggerRef, ref, referenceRef),
-        onPointerEnter: handlerAll(props.onPointerEnter, openWithDelay),
-        onClick: handlerAll(props.onClick, onClick),
-        onPointerDown: handlerAll(props.onPointerDown, onPointerDown),
-        onFocus: handlerAll(props.onFocus, openWithDelay),
-        onBlur: handlerAll(props.onBlur, closeWithDelay),
-      }),
+    if (!label) return <>{children}</>
 
-      [referenceRef, onClick, onPointerDown, openWithDelay, closeWithDelay],
-    )
-
-    const child = Children.only(children) as React.ReactElement & {
-      ref?: React.Ref<any>
+    const child = Children.only(children) as ReactElement & {
+      ref?: Ref<HTMLElement>
     }
-    const trigger = cloneElement(child, getTriggerProps(child.props, child.ref))
+
+    const trigger = cloneElement(
+      child,
+      getTriggerProps(
+        { ...child.props, "aria-describedby": labelId },
+        child.ref,
+      ),
+    )
 
     const css: CSSUIObject = {
       position: "relative",
       ...styles,
     }
-
-    if (!label) return <>{children}</>
 
     const resolvedZIndex = (zIndexProp ??
       zProp ??
@@ -363,6 +375,23 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
     return (
       <>
         {trigger}
+
+        <ui.span
+          id={labelId}
+          style={{
+            border: "0px",
+            clip: "rect(0px, 0px, 0px, 0px)",
+            height: "1px",
+            width: "1px",
+            margin: "-1px",
+            padding: "0px",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            position: "absolute",
+          }}
+        >
+          {label}
+        </ui.span>
 
         <AnimatePresence>
           {isOpen ? (
@@ -376,6 +405,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                   as={motion.div}
                   ref={ref}
                   className={cx("ui-tooltip", className)}
+                  role="tooltip"
                   style={{ transformOrigin }}
                   {...(animation !== "none"
                     ? getTooltipProps(animation, duration)

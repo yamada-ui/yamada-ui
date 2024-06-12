@@ -15,6 +15,8 @@
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/dropzone": "workspace:*",
+    "@yamada-ui/charts": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
     "@yamada-ui/fontawesome": "workspace:*",
     "@yamada-ui/markdown": "workspace:*",
     "@yamada-ui/nextjs": "workspace:*",

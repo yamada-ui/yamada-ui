@@ -2,4 +2,6 @@ packages:
   - "packages/**/**"
   - "examples/**"
   - "docs/**"
+  - "!docs/.next"
+  - "!docs/.contentlayer"
   - "!examples/**/.next"

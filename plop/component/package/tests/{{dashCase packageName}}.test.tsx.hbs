@@ -3,7 +3,6 @@ import { {{upperCase packageName}} } from "../src"
 
 describe("<{{upperCase packageName}} />", () => {
   test("{{upperCase packageName}} renders correctly", async () => {
-    const { container } = render(<{{upperCase packageName}} />)
-    await a11y(container)
+    await a11y(<{{upperCase packageName}} />)
   })
 })

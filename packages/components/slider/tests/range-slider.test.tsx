@@ -1,5 +1,11 @@
-import { render, screen } from "@testing-library/react"
-import { a11y, act, fireEvent, renderHook } from "@yamada-ui/test"
+import {
+  render,
+  screen,
+  a11y,
+  act,
+  fireEvent,
+  renderHook,
+} from "@yamada-ui/test"
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "../src"
 import { useRangeSlider } from "../src/range-slider"
 

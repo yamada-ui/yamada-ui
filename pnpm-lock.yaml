@@ -57,6 +57,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.5.2)(react@18.3.1)
+      '@lucide/lab':
+        specifier: ^0.1.1
+        version: 0.1.1
       '@octokit/request-error':
         specifier: ^6.1.1
         version: 6.1.1
@@ -153,6 +156,9 @@ importers:
       '@yamada-ui/fontawesome':
         specifier: workspace:*
         version: link:packages/components/fontawesome
+      '@yamada-ui/lucide':
+        specifier: workspace:*
+        version: link:packages/components/lucide
       '@yamada-ui/markdown':
         specifier: workspace:*
         version: link:packages/components/markdown
@@ -246,6 +252,9 @@ importers:
       list-it:
         specifier: ^1.3.12
         version: 1.3.12
+      lucide-react:
+        specifier: ^0.390.0
+        version: 0.390.0(react@18.3.1)
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -283,8 +292,8 @@ importers:
         specifier: 8.0.2
         version: 8.0.2(@swc/core@1.5.7(@swc/helpers@0.5.5))(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.7(@swc/helpers@0.5.5))(@types/node@20.13.0)(typescript@5.4.5))(typescript@5.4.5)
       tsx:
-        specifier: ^4.11.0
-        version: 4.11.0
+        specifier: 4.12.1
+        version: 4.12.1
       turbo:
         specifier: ^1.13.3
         version: 1.13.3
@@ -1730,6 +1739,46 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/lucide:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/icon':
+        specifier: workspace:*
+        version: link:../icon
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+      lucide-react:
+        specifier: 0.390.0
+        version: 0.390.0(react@18.3.1)
+    devDependencies:
+      '@babel/parser':
+        specifier: ^7.24.7
+        version: 7.24.7
+      '@babel/traverse':
+        specifier: ^7.24.7
+        version: 7.24.7
+      '@lucide/lab':
+        specifier: ^0.1.1
+        version: 0.1.1
+      '@types/babel__traverse':
+        specifier: ^7.20.6
+        version: 7.20.6
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      prettier:
+        specifier: ^3.2.5
+        version: 3.3.1
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      tsx:
+        specifier: 4.12.1
+        version: 4.12.1
+
   packages/components/markdown:
     dependencies:
       '@yamada-ui/alert':
@@ -2704,6 +2753,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/visually-hidden:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/core:
     dependencies:
       '@emotion/css':
@@ -3551,6 +3616,9 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
+      '@yamada-ui/visually-hidden':
+        specifier: workspace:*
+        version: link:../components/visually-hidden
       framer-motion:
         specifier: '>=9.0.0'
         version: 9.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5659,6 +5727,9 @@ packages:
   '@ljharb/through@2.3.13':
     resolution: {integrity: sha512-/gKJun8NNiWGZJkGzI/Ragc53cOdcLNdzjLaIa+GEjguQs0ulsurx8WN0jijdK9yPqDvziX995sMRLyLt1uZMQ==}
     engines: {node: '>= 0.4'}
+
+  '@lucide/lab@0.1.1':
+    resolution: {integrity: sha512-yv0QPDxfhzo0kYQSmA1KZzNgnzQZBcAkUs/ZEER0uyMCSQYQKCgZLWuxYOBr1EQ8TiBalmOO9JrOPryAY80kwA==, tarball: https://registry.npmjs.org/@lucide/lab/-/lab-0.1.1.tgz}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==, tarball: https://registry.npmjs.org/@manypkg/find-root/-/find-root-1.1.0.tgz}
@@ -8223,11 +8294,11 @@ packages:
     engines: {node: '>=8'}
 
   ansi-styles@5.2.0:
-    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
+    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz}
     engines: {node: '>=10'}
 
   ansi-styles@6.2.1:
-    resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
+    resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==, tarball: https://registry.npmjs.org/ansi-styles/-/ansi-styles-6.2.1.tgz}
     engines: {node: '>=12'}
 
   ansi-wrap@0.1.0:
@@ -9703,10 +9774,10 @@ packages:
     engines: {node: '>=10'}
 
   emoji-regex@10.3.0:
-    resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==}
+    resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.3.0.tgz}
 
   emoji-regex@8.0.0:
-    resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
+    resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz}
 
   emoji-regex@9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
@@ -10607,7 +10678,7 @@ packages:
     engines: {node: '>= 0.4'}
 
   get-tsconfig@4.7.5:
-    resolution: {integrity: sha512-ZCuZCnlqNzjb4QprAzXKdpp/gh6KTxSJuw3IBsPnV/7fV4NxC9ckB+vPTt8w7fJA0TaSD7c55BR47JD6MEDyDw==}
+    resolution: {integrity: sha512-ZCuZCnlqNzjb4QprAzXKdpp/gh6KTxSJuw3IBsPnV/7fV4NxC9ckB+vPTt8w7fJA0TaSD7c55BR47JD6MEDyDw==, tarball: https://registry.npmjs.org/get-tsconfig/-/get-tsconfig-4.7.5.tgz}
 
   giget@1.2.3:
     resolution: {integrity: sha512-8EHPljDvs7qKykr6uw8b+lqLiUc/vUg+KVTI0uND4s63TdsZM2Xus3mflvF0DDG9SiM4RlCkFGL+7aAjRmV7KA==, tarball: https://registry.npmjs.org/giget/-/giget-1.2.3.tgz}
@@ -11254,7 +11325,7 @@ packages:
     resolution: {integrity: sha512-0by5vtUJs8iFQb5TYUHHPudOR+qXYIMKtiUzvLIZITZUjknFmziyBJuLhVRc+Ds0dREFlskDNJKYIdIzu/9pfw==}
 
   is-fullwidth-code-point@3.0.0:
-    resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
+    resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==, tarball: https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz}
     engines: {node: '>=8'}
 
   is-fullwidth-code-point@4.0.0:
@@ -12256,6 +12327,11 @@ packages:
 
   lucide-react@0.381.0:
     resolution: {integrity: sha512-cft0ywFfHkGprX5pwKyS9jme/ksh9eYAHSZqFRKN0XGp70kia4uqZOTPB+i+O51cqiJlvGLqzMGWnMHaeJTs3g==, tarball: https://registry.npmjs.org/lucide-react/-/lucide-react-0.381.0.tgz}
+    peerDependencies:
+      react: ^18.2.0
+
+  lucide-react@0.390.0:
+    resolution: {integrity: sha512-APqbfEcVuHnZbiy3E97gYWLeBdkE4e6NbY6AuVETZDZVn/bQCHYUoHyxcUHyvRopfPOHhFUEvDyyQzHwM+S9/w==, tarball: https://registry.npmjs.org/lucide-react/-/lucide-react-0.390.0.tgz}
     peerDependencies:
       react: ^18.2.0
 
@@ -14901,7 +14977,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   source-map@0.6.1:
-    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, tarball: https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz}
     engines: {node: '>=0.10.0'}
 
   source-map@0.7.4:
@@ -15043,7 +15119,7 @@ packages:
     resolution: {integrity: sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==}
 
   string-width@4.2.3:
-    resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
+    resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==, tarball: https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz}
     engines: {node: '>=8'}
 
   string-width@5.1.2:
@@ -15499,8 +15575,8 @@ packages:
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
 
-  tsx@4.11.0:
-    resolution: {integrity: sha512-vzGGELOgAupsNVssAmZjbUDfdm/pWP4R+Kg8TVdsonxbXk0bEpE1qh0yV6/QxUVXaVlNemgcPajGdJJ82n3stg==, tarball: https://registry.npmjs.org/tsx/-/tsx-4.11.0.tgz}
+  tsx@4.12.1:
+    resolution: {integrity: sha512-roBBguHaP2EpOheka1uHkD4XMSsp1/K5KqtMOjuA+TqRzUsmwpVjHdoNTm/XJWltjB3opmPmYQoE8c2rCS2bqQ==, tarball: https://registry.npmjs.org/tsx/-/tsx-4.12.1.tgz}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -16280,7 +16356,7 @@ packages:
     engines: {node: '>=8'}
 
   wrap-ansi@7.0.0:
-    resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
+    resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==, tarball: https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz}
     engines: {node: '>=10'}
 
   wrap-ansi@8.1.0:
@@ -18791,6 +18867,8 @@ snapshots:
   '@ljharb/through@2.3.13':
     dependencies:
       call-bind: 1.0.7
+
+  '@lucide/lab@0.1.1': {}
 
   '@manypkg/find-root@1.1.0':
     dependencies:
@@ -27854,6 +27932,10 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  lucide-react@0.390.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   lz-string@1.5.0: {}
 
   magic-string@0.25.9:
@@ -31964,7 +32046,7 @@ snapshots:
       tslib: 1.14.1
       typescript: 5.4.5
 
-  tsx@4.11.0:
+  tsx@4.12.1:
     dependencies:
       esbuild: 0.20.2
       get-tsconfig: 4.7.5

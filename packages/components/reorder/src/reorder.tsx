@@ -154,7 +154,6 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
     )
 
     const css: CSSUIObject = {
-      display: "flex",
       flexDirection: orientation === "vertical" ? "column" : "row",
       gap,
       ...styles.container,

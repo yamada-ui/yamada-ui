@@ -5,6 +5,10 @@ import { getColor, isArray, transparentizeColor } from "@yamada-ui/utils"
 export const Dropzone: ComponentMultiStyle = {
   baseStyle: ({ theme: t, colorMode: m }) => ({
     container: {
+      position: "relative",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       rounded: "md",
       w: "100%",
@@ -38,6 +42,14 @@ export const Dropzone: ComponentMultiStyle = {
     overlay: {
       bg: ["whiteAlpha.600", "blackAlpha.600"],
       zIndex: "kurillin",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      w: "100%",
+      h: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
   }),
 

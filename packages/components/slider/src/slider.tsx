@@ -745,9 +745,6 @@ export const SliderMark = forwardRef<SliderMarkProps, "div">(
     const { styles, getMarkProps } = useSliderContext()
 
     const css: CSSUIObject = {
-      display: "inline-flex",
-      justifyContent: "center",
-      alignItems: "center",
       ...styles.mark,
     }
 

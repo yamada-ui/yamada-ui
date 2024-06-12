@@ -2,13 +2,26 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 
 export const ColorSelector: ComponentMultiStyle = {
   baseStyle: {
-    container: { w: "full" },
+    container: {
+      w: "full",
+      display: "flex",
+      flexDirection: "column",
+    },
     saturationSlider: { maxW: "full" },
-    body: {},
-    sliders: { flex: "1" },
+    body: {
+      display: "flex",
+      w: "100%",
+    },
+    sliders: {
+      display: "flex",
+      flex: "1",
+      flexDirection: "column",
+    },
     hueSlider: {},
     alphaSlider: {},
     eyeDropper: {
+      h: "auto",
+      minW: "auto",
       borderColor: "border",
       color: ["blackAlpha.600", "whiteAlpha.700"],
       _hover: {
@@ -19,17 +32,22 @@ export const ColorSelector: ComponentMultiStyle = {
       },
     },
     result: {},
-    channels: {},
+    channels: {
+      display: "grid",
+    },
     channelLabel: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontWeight: "medium",
+      display: "block",
     },
     channel: {},
     swatchesLabel: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontWeight: "medium",
     },
-    swatches: {},
+    swatches: {
+      display: "grid",
+    },
     swatch: {
       _readOnly: { cursor: "auto" },
       _disabled: {

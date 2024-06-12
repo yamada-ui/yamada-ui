@@ -123,17 +123,6 @@ export const Button = forwardRef<ButtonProps, "button">(
           : {}
 
       return {
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "fallback(2, 0.5rem)",
-        appearance: "none",
-        userSelect: "none",
-        position: "relative",
-        whiteSpace: "nowrap",
-        verticalAlign: "middle",
-        overflow: "hidden",
-        outline: "none",
         ...styles,
         ...__css,
         ...(!!group ? { _focus } : {}),

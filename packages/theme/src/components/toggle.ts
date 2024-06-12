@@ -9,6 +9,16 @@ import {
 
 export const Toggle: ComponentStyle = {
   baseStyle: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "fallback(2, 0.5rem)",
+    appearance: "none",
+    userSelect: "none",
+    position: "relative",
+    verticalAlign: "middle",
+    overflow: "hidden",
+    outline: "none",
     cursor: "pointer",
     rounded: "md",
     transitionProperty: "common",

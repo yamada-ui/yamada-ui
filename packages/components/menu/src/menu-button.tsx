@@ -81,13 +81,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
   const { styles } = useMenu()
 
-  const css: CSSUIObject = {
-    display: "inline-flex",
-    appearance: "none",
-    alignItems: "center",
-    outline: 0,
-    ...styles.button,
-  }
+  const css: CSSUIObject = { ...styles.button }
 
   return <ui.button ref={ref} __css={css} {...rest} />
 })

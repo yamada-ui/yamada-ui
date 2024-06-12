@@ -348,7 +348,6 @@ export const Label = forwardRef<LabelProps, "label">(
     isResolveRequired ??= isRequired
 
     const css: CSSUIObject = {
-      display: "block",
       pointerEvents: isReadOnly ? "none" : undefined,
       ...styles.label,
     }

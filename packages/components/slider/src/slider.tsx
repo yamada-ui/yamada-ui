@@ -107,10 +107,15 @@ export type UseSliderProps = FormControlOptions & {
    * Function called whenever the slider value changes.
    */
   onChange?: (value: number) => void
+  /**
+   * aria-valuetext is used to provide a user-friendly text representation of the current value of the slider.
+   */
+  ["aria-valuetext"]?: string
 }
 
 export const useSlider = ({
   focusThumbOnChange = true,
+  "aria-valuetext": ariaValueText,
   ...props
 }: UseSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
@@ -488,6 +493,7 @@ export const useSlider = ({
         "aria-valuenow": value,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         "aria-orientation": orientation,
+        "aria-valuetext": ariaValueText,
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
         onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
         onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
@@ -510,6 +516,7 @@ export const useSlider = ({
       onKeyDown,
       onFocus,
       onBlur,
+      ariaValueText,
     ],
   )
 

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/react",
-  "version": "1.3.12",
+  "version": "1.4.0",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -140,7 +140,8 @@
     "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/use-window-event": "workspace:*",
-    "@yamada-ui/utils": "workspace:*"
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/visually-hidden": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

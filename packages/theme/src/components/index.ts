@@ -30,6 +30,7 @@ import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
 import { Indicator } from "./indicator"
+import { InfiniteScrollArea } from "./infinite-scroll-area"
 import { Input } from "./input"
 import { Kbd } from "./kbd"
 import { LineChart } from "./line-chart"
@@ -78,7 +79,6 @@ import { Tooltip } from "./tooltip"
 import { YearPicker } from "./year-picker"
 
 export default {
-  Toggle,
   Accordion,
   Alert,
   AlphaSlider,
@@ -111,6 +111,7 @@ export default {
   Heading,
   HueSlider,
   Indicator,
+  InfiniteScrollArea,
   Input,
   Kbd,
   LineChart,
@@ -154,6 +155,7 @@ export default {
   Tabs,
   Tag,
   Textarea,
+  Toggle,
   Tooltip,
   YearPicker,
 }

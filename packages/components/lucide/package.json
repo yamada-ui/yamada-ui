@@ -1,0 +1,84 @@
+{
+  "name": "@yamada-ui/lucide",
+  "version": "1.0.1",
+  "description": "Yamada UI lucide component",
+  "keywords": [
+    "yamada",
+    "yamada ui",
+    "react",
+    "emotion",
+    "component",
+    "lucide",
+    "icon",
+    "icons",
+    "ui",
+    "uikit",
+    "styled",
+    "style-props",
+    "styled-component",
+    "css-in-js"
+  ],
+  "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://yamada-ui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "directory": "packages/components/lucide"
+  },
+  "bugs": {
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
+  },
+  "scripts": {
+    "dev": "pnpm build:fast -- --watch",
+    "prebuild": "pnpm gen:icons",
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore",
+    "gen:icons": "tsx ./scripts/generate-icons",
+    "gen:docs": "tsx ../../../scripts/generate-docs"
+  },
+  "dependencies": {
+    "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/icon": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
+    "lucide-react": "0.390.0"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.24.7",
+    "@babel/traverse": "^7.24.7",
+    "@lucide/lab": "^0.1.1",
+    "@types/babel__traverse": "^7.20.6",
+    "clean-package": "2.2.0",
+    "prettier": "^3.2.5",
+    "react": "^18.0.0",
+    "tsx": "4.12.1"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "clean-package": "../../../clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "banner": {
+      "js": "\"use client\""
+    },
+    "sourcemap": true
+  }
+}

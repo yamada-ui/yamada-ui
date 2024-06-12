@@ -4,7 +4,7 @@ export const TEAM = {
       id: "hirotomoyamada",
       name: { en: "Hirotomo Yamada", ja: "Hirotomo Yamada" },
       icon: "https://avatars.githubusercontent.com/u/84060430?v=4",
-      github: "https://github.com/yamada-ui",
+      github: "https://github.com/hirotomoyamada",
       twitter: "https://twitter.com/hirotomoyamada",
       description: {
         en: "Developer of Yamada UI. Designer, design system and UI engineer.",
@@ -76,7 +76,7 @@ export const TEAM = {
       github: "https://github.com/setodeve",
       twitter: "https://twitter.com/hjuko00",
       description: {
-        en: "Engineer based in fukuoka.",
+        en: "Engineer based in Fukuoka.",
         ja: "福岡在住のエンジニア。",
       },
     },
@@ -254,6 +254,28 @@ export const TEAM = {
       description: {
         en: "Web engineer, a technical college student.",
         ja: "Webを学んでいる高専生。",
+      },
+    },
+    {
+      id: "kurakke",
+      name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
+      icon: "https://avatars.githubusercontent.com/u/84614038?v=4",
+      github: "https://github.com/kurakke",
+      twitter: "https://twitter.com/kurakke",
+      description: {
+        en: "A student engineer who enjoys front-end and back-end development.",
+        ja: "フロントエンドとバックエンドを楽しむ学生エンジニア。",
+      },
+    },
+    {
+      id: "Hayato1031",
+      name: { en: "Hayato Nakamura", ja: "Hayato Nakamura" },
+      icon: "https://avatars.githubusercontent.com/u/105223982?v=4",
+      github: "https://github.com/Hayato1031",
+      twitter: "https://twitter.com/lit_myura",
+      description: {
+        en: "A college student who enjoys teaching programming to middle and high school students.",
+        ja: "中高生にプログラミングを教えることを楽しんでいる大学生。",
       },
     },
   ],

@@ -1,5 +1,17 @@
 # @yamada-ui/breadcrumb
 
+## 1.2.1
+
+### Patch Changes
+
+- [#1997](https://github.com/yamada-ui/yamada-ui/pull/1997) [`c486023`](https://github.com/yamada-ui/yamada-ui/commit/c48602308b7fa77a2009d812aeb7c727311784f5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `container` style of the theme was not applied.
+
+- Updated dependencies [[`55fa828`](https://github.com/yamada-ui/yamada-ui/commit/55fa8285c6a74ec9d919b50251f91b3c06b58a70), [`5ec5a23`](https://github.com/yamada-ui/yamada-ui/commit/5ec5a231cc134a280eeb7841f99348c74cd4b948), [`8799de2`](https://github.com/yamada-ui/yamada-ui/commit/8799de254372718a7416b5cceaa2780157394d63)]:
+  - @yamada-ui/utils@1.2.1
+  - @yamada-ui/core@1.7.1
+  - @yamada-ui/icon@1.0.27
+  - @yamada-ui/use-value@1.1.15
+
 ## 1.2.0
 
 ### Minor Changes

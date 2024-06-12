@@ -114,7 +114,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   const css: CSSUIObject = {
     display: "flex",
     alignItems: "center",
-    ...styles.list,
+    ...styles.container,
   }
 
   const validChildren = getValidChildren(children)

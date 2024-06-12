@@ -38,6 +38,7 @@ import {
   faBold,
   faUnderline,
 } from "@fortawesome/free-solid-svg-icons"
+import { burger } from "@lucide/lab"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
 import * as ChartComponents from "@yamada-ui/charts"
@@ -57,6 +58,7 @@ import {
   Skeleton,
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
+import { Icon as LucideIcon, Ghost, Check } from "@yamada-ui/lucide"
 import type { SkeletonProps } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
@@ -100,6 +102,7 @@ const components = {
   ...CalendarComponents,
   ...DropzoneComponents,
   ...MarkdownComponents,
+  LucideIcon,
   FontAwesomeIcon,
   UIProvider,
 }
@@ -139,6 +142,8 @@ const fontAwesomeIcons = {
   faBold,
   faUnderline,
 }
+const lucideIcons = { Ghost, Check }
+const lucideLabIcons = { burger }
 const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
 const utils = { wait, faker, useForm, Controller }
 
@@ -147,6 +152,8 @@ const scope = {
   ...components,
   ...fontAwesomeIcons,
   ...reactIcons,
+  ...lucideIcons,
+  ...lucideLabIcons,
   ...utils,
 }
 

@@ -5,7 +5,7 @@ import {
   getEventPoint,
   isMultiTouchEvent,
 } from "@yamada-ui/utils"
-import sync, { cancelSync, getFrameData } from "framesync"
+import sync, { getFrameData } from "framesync"
 import type { RefObject } from "react"
 import { useEffect, useRef } from "react"
 
@@ -163,7 +163,7 @@ const panEvent = (
 
     onSessionEnd?.(ev, panInfo)
 
-    end()
+    removeListeners()
 
     if (!onEnd || !startEvent) return
 
@@ -174,21 +174,15 @@ const panEvent = (
     handlers = newHandlers
   }
 
-  let removeListeners = pipe(
+  const removeListeners = pipe(
     addPointerEvent(win, "pointermove", onPointerMove),
     addPointerEvent(win, "pointerup", onPointerUp),
     addPointerEvent(win, "pointercancel", onPointerUp),
   )
 
-  const end = () => {
-    removeListeners?.()
-
-    cancelSync.update(updatePoint)
-  }
-
   return {
     updateHandlers,
-    end,
+    removeListeners,
   }
 }
 
@@ -249,7 +243,7 @@ export const usePanEvent = (
 
   useEffect(() => {
     return () => {
-      panSession.current?.end()
+      panSession.current?.removeListeners()
       panSession.current = null
     }
   }, [])

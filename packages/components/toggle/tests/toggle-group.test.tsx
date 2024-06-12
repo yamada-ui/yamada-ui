@@ -1,19 +1,16 @@
-import { render, screen, fireEvent } from "@testing-library/react"
-import { a11y } from "@yamada-ui/test"
+import { render, screen, fireEvent, a11y } from "@yamada-ui/test"
 import { ToggleGroup, Toggle } from "../src"
 
 describe("<ToggleGroup />", () => {
   test("should render ToggleGroup and its children correctly", async () => {
-    const { container } = render(
+    await a11y(
       <ToggleGroup>
         <Toggle value="opt1">Option 1</Toggle>
         <Toggle value="opt2">Option 2</Toggle>
       </ToggleGroup>,
     )
 
-    await a11y(container)
-
-    expect(container.querySelector(".ui-toggle-group")).toBeInTheDocument()
+    expect(screen.getByRole("group")).toBeInTheDocument()
     expect(screen.getByText("Option 1")).toBeInTheDocument()
     expect(screen.getByText("Option 2")).toBeInTheDocument()
   })

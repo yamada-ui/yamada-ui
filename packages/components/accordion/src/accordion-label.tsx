@@ -28,13 +28,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
     } = useAccordionItemContext()
     const { icon: generalIcon, iconHidden, styles } = useAccordionContext()
 
-    const css: CSSUIObject = {
-      display: "inline-flex",
-      alignItems: "center",
-      width: "100%",
-      outline: 0,
-      ...styles.button,
-    }
+    const css: CSSUIObject = { ...styles.button }
 
     const cloneCustomIcon =
       typeof customIcon === "function"
@@ -88,8 +82,6 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   const css: CSSUIObject = {
     opacity: isDisabled ? 0.4 : 1,
     transform: isOpen ? "rotate(-180deg)" : undefined,
-    transition: "transform 0.2s",
-    transformOrigin: "center",
     ...styles.icon,
   }
 

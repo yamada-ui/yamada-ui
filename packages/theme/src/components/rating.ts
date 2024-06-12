@@ -3,6 +3,7 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Rating: ComponentMultiStyle = {
   baseStyle: ({ colorScheme: c = "yellow" }) => ({
     container: {
+      display: "flex",
       w: "max-content",
     },
     group: {
@@ -10,6 +11,8 @@ export const Rating: ComponentMultiStyle = {
     },
     item: {
       cursor: "pointer",
+      display: "block",
+      lineHeight: "0",
       rounded: "sm",
       color: ["blackAlpha.300", "whiteAlpha.300"],
       outline: "none",
@@ -33,6 +36,9 @@ export const Rating: ComponentMultiStyle = {
       },
     },
     icon: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
       fill: "currentColor",
     },
   }),

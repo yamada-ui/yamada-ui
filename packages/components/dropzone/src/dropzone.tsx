@@ -164,10 +164,6 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const isDragIdle = !isDragAccept && !isDragReject
 
   const css: CSSUIObject = {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     ...styles.container,
   }
 
@@ -205,14 +201,6 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   const { isLoading, styles } = useDropzoneContext()
 
   const css: CSSUIObject = {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    w: "100%",
-    h: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     ...styles.overlay,
   }
 

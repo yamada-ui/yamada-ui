@@ -51,8 +51,6 @@ export const ColorSelectorSliders = forwardRef<
     if (size === "full") size = "lg"
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
       ...styles.sliders,
     }
 

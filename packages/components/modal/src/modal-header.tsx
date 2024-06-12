@@ -10,9 +10,6 @@ export const ModalHeader = forwardRef<ModalHeaderProps, "header">(
     const { styles } = useModal()
 
     const css: CSSUIObject = {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-start",
       ...(__css ? __css : styles.header),
     }
 

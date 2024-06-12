@@ -64,10 +64,6 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
       ref={ref}
       className={cx("ui-avatar-group", className)}
       __css={{
-        display: "flex",
-        flexDirection: "row-reverse",
-        justifyContent: "flex-end",
-        alignItems: "center",
         ...styles.group,
       }}
       {...rest}
@@ -79,15 +75,6 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
           rounded={rounded}
           ms={gap}
           __css={{
-            position: "relative",
-            display: "inline-flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexShrink: 0,
-            textAlign: "center",
-            textTransform: "uppercase",
-            fontWeight: "medium",
-            borderWidth: "2px",
             ...styles.excess,
           }}
         >

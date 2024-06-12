@@ -18,6 +18,12 @@
   "rules": {},
   "overrides": [
     {
+      "files": "packages/**/src/*",
+      "rules": {
+        "no-restricted-imports": ["error", "@yamada-ui/react"]
+      }
+    },
+    {
       "files": ["scripts/**/*", "packages/cli/**/*", "stories/**/*"],
       "rules": {
         "no-console": "off"

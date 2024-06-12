@@ -157,7 +157,7 @@ export const Month: FC<MonthProps> = ({
                           {...thProps}
                         >
                           <ui.div
-                            className="ui-calendar__month__weekday"
+                            className="ui-calendar__month-weekday"
                             __css={{
                               ...styles.weekday,
                             }}
@@ -215,7 +215,7 @@ export const Month: FC<MonthProps> = ({
                               {...tdProps}
                             >
                               <Button
-                                className="ui-calendar__month__day"
+                                className="ui-calendar__month-day"
                                 variant="ghost"
                                 __css={{
                                   ...(isHidden || !isDisplayed
@@ -246,7 +246,7 @@ export type WeekdayProps = { weekday: string; index: number }
 
 export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
   return (
-    <ui.span className="ui-calendar__month__weekday__label">{weekday}</ui.span>
+    <ui.span className="ui-calendar__month-weekday-label">{weekday}</ui.span>
   )
 }
 
@@ -262,8 +262,6 @@ export type DayProps = {
 
 export const Day: FC<DayProps> = ({ date }) => {
   return (
-    <ui.span className="ui-calendar__month__day__label">
-      {date.getDate()}
-    </ui.span>
+    <ui.span className="ui-calendar__month-day-label">{date.getDate()}</ui.span>
   )
 }

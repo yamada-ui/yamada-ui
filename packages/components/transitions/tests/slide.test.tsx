@@ -1,11 +1,10 @@
-import { render } from "@yamada-ui/test"
+import { Button, useDisclosure } from "@yamada-ui/react"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { Slide } from "../src"
 
 describe("<Slide />", () => {
-  test("renders correctly", async () => {
-    const { getByText } = render(<Slide isOpen={false}>Test</Slide>)
-
-    getByText("Test")
+  test("passes a11y test", async () => {
+    await a11y(<Slide />)
   })
 
   test("applies default styles correctly", async () => {
@@ -56,11 +55,28 @@ describe("<Slide />", () => {
     )
   })
 
-  test("applies styles `z-index` correctly", async () => {
-    const { getByTestId } = render(<Slide isOpen data-testid="slide" />)
+  test("unmountOnExit works correctly", async () => {
+    const TestComponent = () => {
+      const { isOpen, onToggle } = useDisclosure()
 
-    expect(getByTestId("slide")).toHaveStyle(
-      "z-index: var(--ui-zIndices-jeice);",
-    )
+      return (
+        <>
+          <Button onClick={onToggle}>button</Button>
+          <Slide isOpen={isOpen} unmountOnExit data-testid="slide" />
+        </>
+      )
+    }
+
+    const { user } = render(<TestComponent />)
+
+    expect(screen.queryByTestId("slide")).toBeNull()
+
+    const button = await screen.findByRole("button", { name: /button/i })
+
+    await user.click(button)
+    await waitFor(() => expect(screen.queryByTestId("slide")).toBeVisible())
+
+    await user.click(button)
+    await waitFor(() => expect(screen.queryByTestId("slide")).toBeNull())
   })
 })

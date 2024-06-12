@@ -41,8 +41,10 @@ const DISCORD_USER_MAP: Record<string, string> = {
   "haru-036": "1063410330153259078",
   zonoryo17: "968897190783246416",
   harutsuka: "1084831703387877549",
+  Hayato1031: "663701704990130177",
+  kurakke: "1009394043974856704",
 }
-const REVIEWER_COUNT = 2
+const REVIEWER_COUNT = 4
 
 const GITHUB_JOINING_COMMENT = (id: string) =>
   [

@@ -215,7 +215,7 @@ export const useRadio = <
   const getLabelProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
-      props,
+      ...props,
       ref,
       onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
@@ -323,11 +323,6 @@ export const Radio = forwardRef(
         {...getContainerProps()}
         {...rest}
         __css={{
-          cursor: "pointer",
-          position: "relative",
-          display: "inline-flex",
-          alignItems: "center",
-          verticalAlign: "top",
           gap,
           ...styles.container,
         }}
@@ -341,9 +336,6 @@ export const Radio = forwardRef(
           className="ui-radio__icon"
           {...getIconProps(iconProps)}
           __css={{
-            position: "relative",
-            display: "inline-block",
-            userSelect: "none",
             ...styles.icon,
           }}
         />

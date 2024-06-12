@@ -113,7 +113,7 @@ const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
 
   return (
     <Button
-      className={cx("ui-calendar__header__label", className)}
+      className={cx("ui-calendar__header-label", className)}
       variant="ghost"
       __css={css}
       {...rest}
@@ -135,7 +135,7 @@ const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
 
   return (
     <ChevronIcon
-      className={cx("ui-calendar__header__label__icon", className)}
+      className={cx("ui-calendar__header-label-icon", className)}
       __css={css}
       {...rest}
     />
@@ -151,7 +151,7 @@ const CalendarControlPrev: FC<CalendarControlProps> = ({
   return (
     <CalendarControl
       operation="prev"
-      className={cx("ui-calendar__header__control--prev", className)}
+      className={cx("ui-calendar__header-control--prev", className)}
       icon={<ChevronIcon __css={{ transform: "rotate(90deg)" }} />}
       {...rest}
     />
@@ -165,7 +165,7 @@ const CalendarControlNext: FC<CalendarControlProps> = ({
   return (
     <CalendarControl
       operation="next"
-      className={cx("ui-calendar__header__control--next", className)}
+      className={cx("ui-calendar__header-control--next", className)}
       icon={<ChevronIcon __css={{ transform: "rotate(-90deg)" }} />}
       {...rest}
     />
@@ -184,7 +184,7 @@ const CalendarControl: FC<
 
   return (
     <IconButton
-      className={cx("ui-calendar__header__control", className)}
+      className={cx("ui-calendar__header-control", className)}
       variant="ghost"
       __css={css}
       {...rest}

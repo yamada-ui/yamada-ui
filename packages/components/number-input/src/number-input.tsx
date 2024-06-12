@@ -712,8 +712,6 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
     } = useNumberInput(computedProps)
 
     const css: CSSUIObject = {
-      position: "relative",
-      zIndex: 0,
       ...styles.container,
     }
 
@@ -752,7 +750,6 @@ const NumberInputField = forwardRef<NumberInputFieldProps, "input">(
     const { styles } = useNumberInputContext()
 
     const css: CSSUIObject = {
-      width: "100%",
       ...styles.field,
     }
 
@@ -774,14 +771,6 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
     const { styles } = useNumberInputContext()
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      position: "absolute",
-      top: "0",
-      insetEnd: "0px",
-      margin: "1px",
-      height: "calc(100% - 2px)",
-      zIndex: "fallback(yamcha, 1)",
       ...styles.addon,
     }
 
@@ -797,20 +786,6 @@ const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
   },
 )
 
-const Stepper = ui("div", {
-  baseStyle: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    transitionProperty: "common",
-    transitionDuration: "normal",
-    userSelect: "none",
-    cursor: "pointer",
-    lineHeight: "normal",
-  },
-})
-
 type NumberIncrementStepperProps = HTMLUIProps<"div">
 
 const NumberIncrementStepper = forwardRef<NumberIncrementStepperProps, "div">(
@@ -820,13 +795,13 @@ const NumberIncrementStepper = forwardRef<NumberIncrementStepperProps, "div">(
     const css: CSSUIObject = { ...styles.stepper }
 
     return (
-      <Stepper
+      <ui.div
         className={cx("ui-number-input__stepper--up", className)}
         {...getIncrementProps(rest as DOMAttributes<HTMLElement>, ref)}
         __css={css}
       >
         {children ?? <ChevronIcon __css={{ transform: "rotate(180deg)" }} />}
-      </Stepper>
+      </ui.div>
     )
   },
 )
@@ -840,13 +815,13 @@ const NumberDecrementStepper = forwardRef<NumberDecrementStepperProps, "div">(
     const css: CSSUIObject = { ...styles.stepper }
 
     return (
-      <Stepper
+      <ui.div
         className={cx("ui-number-input__stepper--down", className)}
         {...getDecrementProps(rest as DOMAttributes<HTMLElement>, ref)}
         __css={css}
       >
         {children ?? <ChevronIcon />}
-      </Stepper>
+      </ui.div>
     )
   },
 )

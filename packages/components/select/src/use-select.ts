@@ -39,7 +39,7 @@ import type {
   MouseEvent,
   CSSProperties,
 } from "react"
-import { useCallback, useRef, useState, useEffect } from "react"
+import { useCallback, useRef, useState, useEffect, useId } from "react"
 import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -622,10 +622,21 @@ export const useSelect = <T extends MaybeValue = string>({
         !isMulti ? label === undefined : !label?.length,
       ),
       "aria-expanded": isOpen,
+      "aria-activedescendant": descendants.enabledValue(focusedIndex)?.node.id,
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [fieldProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
+    [
+      descendants,
+      fieldProps,
+      focusedIndex,
+      isOpen,
+      isMulti,
+      label,
+      rest,
+      onFocus,
+      onKeyDown,
+    ],
   )
 
   return {
@@ -847,6 +858,7 @@ export const useSelectOption = (
   } = useSelectContext()
 
   let {
+    id,
     icon: customIcon,
     isDisabled,
     isFocusable,
@@ -855,6 +867,8 @@ export const useSelectOption = (
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
+
+  id ??= useId()
 
   const trulyDisabled = !!isDisabled && !isFocusable
 
@@ -947,6 +961,7 @@ export const useSelectOption = (
       }
 
       return {
+        id,
         ref: mergeRefs(itemRef, ref, register),
         ...computedProps,
         ...props,
@@ -965,6 +980,7 @@ export const useSelectOption = (
     [
       optionValue,
       computedProps,
+      id,
       isDisabled,
       isFocused,
       isMulti,

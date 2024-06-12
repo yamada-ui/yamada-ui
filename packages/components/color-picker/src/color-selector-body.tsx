@@ -58,8 +58,6 @@ export const ColorSelectorBody = forwardRef<ColorSelectorBodyProps, "div">(
     const { value, eyeDropperSupported, styles } = useColorSelectorContext()
 
     const css: CSSUIObject = {
-      display: "flex",
-      w: "100%",
       ...styles.body,
     }
 

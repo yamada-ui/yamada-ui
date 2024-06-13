@@ -143,7 +143,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
         ref: mergeRefs(register, ref),
         type: "button",
         disabled: isDisabled,
-        "aria-expanded": ariaAttr(isOpen),
+        "data-expanded": ariaAttr(isOpen),
         "aria-controls": panelId,
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),

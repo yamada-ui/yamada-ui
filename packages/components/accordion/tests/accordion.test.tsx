@@ -33,7 +33,7 @@ describe("<Accordion />", () => {
     )
 
     const button = screen.getByRole("button", { name: /Accordion Label 1/i })
-    expect(button).toHaveAttribute("aria-expanded", "true")
+    expect(button).toHaveAttribute("data-expanded", "true")
     expect(screen.getByRole("paragraph")).toHaveTextContent(
       "This is an accordion item 1",
     )
@@ -54,10 +54,10 @@ describe("<Accordion />", () => {
     const button = screen.getByRole("button", { name: /Accordion Label 1/i })
 
     await user.click(button)
-    expect(button).toHaveAttribute("aria-expanded", "true")
+    expect(button).toHaveAttribute("data-expanded", "true")
 
     await user.click(button)
-    expect(button).not.toHaveAttribute("aria-expanded")
+    expect(button).not.toHaveAttribute("data-expanded")
   })
 
   test("should show multiple items", async () => {
@@ -79,12 +79,12 @@ describe("<Accordion />", () => {
     const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
     const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
 
-    expect(item1).toHaveAttribute("aria-expanded", "true")
-    expect(item2).toHaveAttribute("aria-expanded", "true")
-    expect(item3).not.toHaveAttribute("aria-expanded")
+    expect(item1).toHaveAttribute("data-expanded", "true")
+    expect(item2).toHaveAttribute("data-expanded", "true")
+    expect(item3).not.toHaveAttribute("data-expanded")
 
     await user.click(item3)
-    expect(item3).toHaveAttribute("aria-expanded", "true")
+    expect(item3).toHaveAttribute("data-expanded", "true")
   })
 
   test("should render a disabled item", () => {

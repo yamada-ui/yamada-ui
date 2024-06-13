@@ -1,5 +1,3 @@
-import type { Matcher } from "@testing-library/react"
-import { cleanup } from "@testing-library/react"
 import {
   a11y,
   act,
@@ -9,7 +7,6 @@ import {
   screen,
 } from "@yamada-ui/test"
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "../src"
-import type { SliderProps } from "../src/slider"
 import { useSlider } from "../src/slider"
 
 describe("<Slider />", () => {
@@ -49,7 +46,7 @@ describe("<Slider />", () => {
   })
 
   test("can change slider orientation", () => {
-    const { container } = render(<Slider orientation="vertical" />)
+    const { container, rerender } = render(<Slider orientation="vertical" />)
 
     let sliderThumb = container.querySelector(".ui-slider__thumb")
     let filledTrack = container.querySelector(".ui-slider__track")
@@ -57,14 +54,10 @@ describe("<Slider />", () => {
     expect(sliderThumb).toHaveAttribute("aria-orientation", "vertical")
     expect(filledTrack).toHaveStyle("height: 100%")
 
-    cleanup()
+    rerender(<Slider orientation="horizontal" />)
 
-    const { container: horizontalContainer } = render(
-      <Slider orientation="horizontal" />,
-    )
-
-    sliderThumb = horizontalContainer.querySelector(".ui-slider__thumb")
-    filledTrack = horizontalContainer.querySelector(".ui-slider__track")
+    sliderThumb = container.querySelector(".ui-slider__thumb")
+    filledTrack = container.querySelector(".ui-slider__track")
 
     expect(sliderThumb).toHaveAttribute("aria-orientation", "horizontal")
     expect(filledTrack).toHaveStyle("width: 100%")
@@ -89,23 +82,25 @@ describe("<Slider />", () => {
   })
 
   test("Slider readOnly tests", () => {
-    const renderAndTestSlider = (props: SliderProps, testId: Matcher) => {
-      render(<Slider data-testid={testId} {...props} />)
+    const { rerender } = render(<Slider data-testid="slider1" isReadOnly />)
 
-      const slider = screen.getByTestId(testId)
-      const sliderInput = slider.getElementsByTagName("input")[0]
-      const sliderThumb = screen.getByRole("slider")
+    let slider = screen.getByTestId("slider1")
+    let sliderInput = slider.getElementsByTagName("input")[0]
+    let sliderThumb = screen.getByRole("slider")
 
-      expect(sliderInput).toHaveAttribute("aria-readonly", "true")
-      expect(sliderInput).toHaveAttribute("readonly", "")
-      expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
-    }
+    expect(sliderInput).toHaveAttribute("aria-readonly", "true")
+    expect(sliderInput).toHaveAttribute("readonly", "")
+    expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
 
-    renderAndTestSlider({ isReadOnly: true }, "slider1")
+    rerender(<Slider data-testid="slider2" focusThumbOnChange={false} />)
 
-    cleanup()
+    slider = screen.getByTestId("slider2")
+    sliderInput = slider.getElementsByTagName("input")[0]
+    sliderThumb = screen.getByRole("slider")
 
-    renderAndTestSlider({ focusThumbOnChange: false }, "slider2")
+    expect(sliderInput).toHaveAttribute("aria-readonly", "true")
+    expect(sliderInput).toHaveAttribute("readonly", "")
+    expect(sliderThumb).toHaveAttribute("aria-readonly", "true")
   })
 
   test("can have correct step", async () => {

@@ -152,7 +152,6 @@ export const Month: FC<MonthProps> = ({
                         <ui.th
                           key={index}
                           __css={{
-                            fontWeight: "normal",
                             ...styles.cell,
                           }}
                           {...thProps}
@@ -160,8 +159,6 @@ export const Month: FC<MonthProps> = ({
                           <ui.div
                             className="ui-calendar__month-weekday"
                             __css={{
-                              w: "100%",
-                              display: "flex",
                               ...styles.weekday,
                             }}
                             {...computedWeekdayProps}
@@ -221,11 +218,6 @@ export const Month: FC<MonthProps> = ({
                                 className="ui-calendar__month-day"
                                 variant="ghost"
                                 __css={{
-                                  minW: "auto",
-                                  h: "auto",
-                                  p: 0,
-                                  fontSize: undefined,
-                                  fontWeight: "normal",
                                   ...(isHidden || !isDisplayed
                                     ? { display: "none" }
                                     : {}),

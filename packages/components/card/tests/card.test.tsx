@@ -81,11 +81,11 @@ describe("<Card />", () => {
   test("<CardBody /> renders correctly", async () => {
     render(
       <Card>
-        <CardBody data-testid="body">Card Body</CardBody>
+        <CardBody>Card Body</CardBody>
       </Card>,
     )
 
-    const body = await screen.findByTestId("body")
+    const body = screen.getByText("Card Body")
     expect(body).toBeInTheDocument()
     expect(body).toHaveTextContent("Card Body")
   })
@@ -93,24 +93,22 @@ describe("<Card />", () => {
   test("<CardBody /> applies custom className", async () => {
     render(
       <Card>
-        <CardBody data-testid="body" className="custom-class">
-          Card Body
-        </CardBody>
+        <CardBody className="custom-class">Card Body</CardBody>
       </Card>,
     )
 
-    const body = await screen.findByTestId("body")
+    const body = screen.getByText("Card Body")
     expect(body).toHaveClass("custom-class")
   })
 
   test("<CardBody /> applies styles correctly", async () => {
     render(
       <Card>
-        <CardBody data-testid="body">Card Body</CardBody>
+        <CardBody>Card Body</CardBody>
       </Card>,
     )
 
-    const body = await screen.findByTestId("body")
+    const body = screen.getByText("Card Body")
     expect(body).toHaveStyle({
       display: "flex",
       flexDirection: "column",

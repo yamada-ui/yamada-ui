@@ -9,7 +9,7 @@ import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { cx, getValidChildren } from "@yamada-ui/utils"
-import type { ReactElement, ReactNode } from "react"
+import { useId, type ReactElement, type ReactNode } from "react"
 import type { SelectIconProps } from "./select-icon"
 import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -171,6 +171,8 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     ...styles.container,
   }
 
+  const listBoxId = listProps?.id ?? useId()
+
   return (
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider
@@ -192,6 +194,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
                   minH={minH}
                   {...getFieldProps(
                     {
+                      "aria-controls": listBoxId,
                       "aria-label": props["aria-label"],
                       "aria-labelledby": props["aria-labelledby"],
                     },
@@ -205,7 +208,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
 
             {!isEmpty ? (
               <Portal {...portalProps}>
-                <SelectList {...listProps}>
+                <SelectList id={listBoxId} {...listProps}>
                   {!!placeholder && placeholderInOptions ? (
                     <Option>{placeholder}</Option>
                   ) : null}

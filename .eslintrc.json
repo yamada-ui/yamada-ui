@@ -14,7 +14,7 @@
     "node": true
   },
   "settings": {},
-  "plugins": ["testing-library"],
+  "plugins": ["testing-library", "import-replace"],
   "rules": {},
   "overrides": [
     {
@@ -38,12 +38,15 @@
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "rules": {
-        "vitest/require-hook": "error"
-      }
-    },
-    {
-      "files": ["**/*.test.ts", "**/*.test.tsx"],
-      "rules": {
+        "import-replace/import-replace": [
+          "error",
+          [
+            {
+              "from": "@testing-library/react",
+              "to": "@yamada-ui/test"
+            }
+          ]
+        ],
         "testing-library/prefer-query-by-disappearance": "error",
         "testing-library/no-dom-import": "error",
         "testing-library/no-debugging-utils": "error",
@@ -83,7 +86,7 @@
         "vitest/prefer-to-contain": "error",
         "vitest/prefer-to-have-length": "error",
         "vitest/prefer-todo": "error",
-        "vitest/require-hook": "off",
+        "vitest/require-hook": "error",
         "vitest/require-to-throw-message": "error",
         "vitest/require-top-level-describe": "error",
         "vitest/valid-expect": [

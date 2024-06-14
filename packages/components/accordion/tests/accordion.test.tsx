@@ -32,9 +32,59 @@ describe("<Accordion />", () => {
       </Accordion>,
     )
 
+    const button = screen.getByRole("button", { name: /Accordion Label 1/i })
+    expect(button).toHaveAttribute("data-expanded")
     expect(screen.getByRole("paragraph")).toHaveTextContent(
       "This is an accordion item 1",
     )
+  })
+
+  test("should work correctly with isToggle", async () => {
+    const { user } = render(
+      <Accordion isToggle>
+        <AccordionItem label="Accordion Label 1">
+          This is an accordion item 1
+        </AccordionItem>
+        <AccordionItem label="Accordion Label 2">
+          This is an accordion item 2
+        </AccordionItem>
+      </Accordion>,
+    )
+
+    const button = screen.getByRole("button", { name: /Accordion Label 1/i })
+
+    await user.click(button)
+    expect(button).toHaveAttribute("data-expanded")
+
+    await user.click(button)
+    expect(button).not.toHaveAttribute("data-expanded")
+  })
+
+  test("should show multiple items", async () => {
+    const { user } = render(
+      <Accordion defaultIndex={[0, 1]} isMultiple>
+        <AccordionItem label="Accordion Label 1">
+          This is an accordion item 1
+        </AccordionItem>
+        <AccordionItem label="Accordion Label 2">
+          This is an accordion item 2
+        </AccordionItem>
+        <AccordionItem label="Accordion Label 3">
+          This is an accordion item 3
+        </AccordionItem>
+      </Accordion>,
+    )
+
+    const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
+    const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
+    const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
+
+    expect(item1).toHaveAttribute("data-expanded")
+    expect(item2).toHaveAttribute("data-expanded")
+    expect(item3).not.toHaveAttribute("data-expanded")
+
+    await user.click(item3)
+    expect(item3).toHaveAttribute("data-expanded")
   })
 
   test("should render a disabled item", () => {

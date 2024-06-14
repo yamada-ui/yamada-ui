@@ -21,6 +21,7 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSizes } from "@yamada-ui/use-size"
+import type { Merge } from "@yamada-ui/utils"
 import {
   clampNumber,
   createContext,
@@ -44,7 +45,7 @@ import {
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useId, useRef, useState } from "react"
 
-export type UseRangeSliderProps = FormControlOptions & {
+export type UseRangeSliderOptions = {
   /**
    * The base `id` to use for the slider.
    */
@@ -116,6 +117,10 @@ export type UseRangeSliderProps = FormControlOptions & {
    */
   onChange?: (value: [number, number]) => void
 }
+export type UseRangeSliderProps = Merge<
+  HTMLUIProps<"div">,
+  FormControlOptions & UseRangeSliderOptions
+>
 
 export const useRangeSlider = ({
   focusThumbOnChange = true,
@@ -714,11 +719,7 @@ type RangeSliderOptions = {
   thumbSize?: CSSUIProps["boxSize"]
 }
 
-export type RangeSliderProps = Omit<
-  HTMLUIProps<"div">,
-  keyof UseRangeSliderProps
-> &
-  ThemeProps<"RangeSlider"> &
+export type RangeSliderProps = ThemeProps<"RangeSlider"> &
   UseRangeSliderProps &
   RangeSliderOptions
 

@@ -1,5 +1,18 @@
 # @yamada-ui/radio
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2003](https://github.com/yamada-ui/yamada-ui/pull/2003) [`7aaa11f`](https://github.com/yamada-ui/yamada-ui/commit/7aaa11f34c7a93a954b9f248ce7d286e2436aa57) Thanks [@illionillion](https://github.com/illionillion)! - modify aria
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/form-control@1.1.3
+  - @yamada-ui/layouts@1.1.25
+
 ## 1.0.32
 
 ### Patch Changes

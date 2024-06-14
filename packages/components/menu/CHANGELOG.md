@@ -1,5 +1,16 @@
 # @yamada-ui/menu
 
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/icon@1.0.28
+  - @yamada-ui/motion@1.0.29
+  - @yamada-ui/popover@1.2.2
+  - @yamada-ui/transitions@1.0.29
+
 ## 1.3.1
 
 ### Patch Changes

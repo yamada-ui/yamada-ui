@@ -490,6 +490,10 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     }
   }, [type])
 
+  useUpdateEffect(() => {
+    setValue(valueProp as Y)
+  }, [valueProp])
+
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,

@@ -22,6 +22,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
 
     return (
       <ui.li
+        role="group"
         className={cx("ui-select__item", "ui-select__item--group", className)}
         __css={{ w: "100%", h: "fit-content", color }}
         {...getContainerProps()}
@@ -35,6 +36,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
         </ui.span>
 
         <ui.ul
+          role="group"
           {...getGroupProps({}, ref)}
           className="ui-select__item__group"
           __css={{ h, minH, ...styles.group }}

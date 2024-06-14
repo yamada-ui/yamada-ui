@@ -6,7 +6,6 @@ runs:
   steps:
     - name: Update docs
       run: |
-        pnpm changelog:latest
         pnpm gen:docs
         pnpm docs:theme
         pnpm docs:props
@@ -19,7 +18,7 @@ runs:
     - name: Create PR
       uses: peter-evans/create-pull-request@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ env.GITHUB_TOKEN }}
         base: main
         commit-message: "ci(changesets): version packages"
         title: "Updated dependencies"

@@ -226,6 +226,7 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
         ref={ref}
         className={cx("ui-breadcrumb", className)}
         __css={styles.container}
+        aria-label="Breadcrumb"
         {...rest}
       >
         <ui.ol className="ui-breadcrumb__list" {...listProps} __css={css}>

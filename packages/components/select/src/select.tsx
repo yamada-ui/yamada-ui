@@ -187,7 +187,17 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
               __css={{ position: "relative", ...styles.inner }}
             >
               <PopoverTrigger>
-                <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
+                <SelectField
+                  h={h}
+                  minH={minH}
+                  {...getFieldProps(
+                    {
+                      "aria-label": props["aria-label"],
+                      "aria-labelledby": props["aria-labelledby"],
+                    },
+                    ref,
+                  )}
+                />
               </PopoverTrigger>
 
               <SelectIcon {...iconProps} {...formControlProps} />

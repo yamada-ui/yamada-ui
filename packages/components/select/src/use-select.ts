@@ -623,6 +623,11 @@ export const useSelect = <T extends MaybeValue = string>({
       ),
       "aria-expanded": isOpen,
       "aria-activedescendant": descendants.enabledValue(focusedIndex)?.node.id,
+      "aria-labelledby": props["aria-labelledby"],
+      "aria-label":
+        props["aria-label"] ??
+        placeholder ??
+        "Please select one from the options.",
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
@@ -636,6 +641,7 @@ export const useSelect = <T extends MaybeValue = string>({
       rest,
       onFocus,
       onKeyDown,
+      placeholder,
     ],
   )
 

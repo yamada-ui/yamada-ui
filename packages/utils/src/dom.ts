@@ -161,6 +161,8 @@ export const hasNegativeTabIndex = (el: HTMLElement): boolean =>
 export const isTabbable = (el?: HTMLElement | null): boolean =>
   el ? isHTMLElement(el) && isFocusable(el) && !hasNegativeTabIndex(el) : false
 
+export const isTouchDevice = () => "ontouchstart" in window
+
 export const getOwnerWindow = (
   node?: Element | null,
 ): Window & typeof globalThis => getOwnerDocument(node)?.defaultView ?? window

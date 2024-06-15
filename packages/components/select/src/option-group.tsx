@@ -22,8 +22,6 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
 
     return (
       <ui.li
-        role="group"
-        aria-label={rest["aria-label"] ?? label}
         className={cx("ui-select__item", "ui-select__item--group", className)}
         __css={{ w: "100%", h: "fit-content", color }}
         {...getContainerProps()}

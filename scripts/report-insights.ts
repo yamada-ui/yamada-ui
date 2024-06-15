@@ -334,7 +334,7 @@ const sendDiscordChannel = async (reports: string[]) => {
 
     let chunks = isFirst
       ? [
-          `<@&1202956318718304276> <@&1250950832078454795>`,
+          `<@&1202956318718304276> <@&1246174065216192662>`,
           `## Insight Report`,
           `${startDate} - ${endDate}`,
           "",

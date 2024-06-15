@@ -1,11 +1,15 @@
 import { act, fireEvent, render } from "@yamada-ui/test"
 import { type FC } from "react"
 import { vi } from "vitest"
+import type { UseClickableProps } from "../src"
 import { useClickable } from "../src"
 
-const setup = (props = {}) => {
+const setup = (props: UseClickableProps = {}) => {
   const Component: FC = () => {
-    const clickableProps = useClickable(props)
+    const clickableProps = useClickable({
+      disableTouchBehavior: false,
+      ...props,
+    })
     return (
       <div data-testid="button" {...clickableProps}>
         Dummy button

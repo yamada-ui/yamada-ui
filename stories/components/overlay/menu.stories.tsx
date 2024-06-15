@@ -97,7 +97,7 @@ export const withIcon: Story = () => {
 }
 
 export const withInitialFocusRef: Story = () => {
-  const ref = useRef<HTMLButtonElement>(null)
+  const ref = useRef<HTMLLIElement>(null)
 
   return (
     <Menu initialFocusRef={ref}>

@@ -40,6 +40,12 @@ export type UseClickableProps<
    */
   focusOnClick?: boolean
   /**
+   * Disable the touch device behavior.
+   *
+   * @default true
+   */
+  disableTouchBehavior?: boolean
+  /**
    * The ref for the element.
    */
   ref?: Ref<HTMLElement>
@@ -66,6 +72,7 @@ export const useClickable = <
     clickOnEnter = true,
     clickOnSpace = true,
     focusOnClick = true,
+    disableTouchBehavior = true,
     onMouseDown,
     onMouseUp,
     onClick,
@@ -221,11 +228,11 @@ export const useClickable = <
         return
       }
 
-      if (isTouchDevice()) return
+      if (disableTouchBehavior && isTouchDevice()) return
 
       onMouseOver?.(ev)
     },
-    [isDisabled, onMouseOver],
+    [isDisabled, onMouseOver, disableTouchBehavior],
   )
 
   const handleMouseLeave = useCallback(
@@ -236,11 +243,11 @@ export const useClickable = <
         setIsPressed(false)
       }
 
-      if (isTouchDevice()) return
+      if (disableTouchBehavior && isTouchDevice()) return
 
       onMouseLeave?.(ev)
     },
-    [isPressed, onMouseLeave],
+    [isPressed, onMouseLeave, disableTouchBehavior],
   )
 
   if (isButton) {

@@ -3,8 +3,7 @@ import { Progress } from "../src"
 
 describe("<Progress />", () => {
   test("Progress renders correctly", async () => {
-    const { container } = render(<Progress value={100} />)
-    await a11y(container)
+    await a11y(<Progress value={100} />)
   })
 
   test("renders correctly with props", () => {

@@ -1,5 +1,14 @@
 # @yamada-ui/use-pan-event
 
+## 1.0.16
+
+### Patch Changes
+
+- [#2019](https://github.com/yamada-ui/yamada-ui/pull/2019) [`ddc0038`](https://github.com/yamada-ui/yamada-ui/commit/ddc0038afb933b6883b71f047cf40bd5abb169c1) Thanks [@108yen](https://github.com/108yen)! - Fixed a bug that caused event processing to not occur due to incorrect usage of `cancelSync`.
+
+- Updated dependencies [[`55fa828`](https://github.com/yamada-ui/yamada-ui/commit/55fa8285c6a74ec9d919b50251f91b3c06b58a70), [`5ec5a23`](https://github.com/yamada-ui/yamada-ui/commit/5ec5a231cc134a280eeb7841f99348c74cd4b948)]:
+  - @yamada-ui/utils@1.2.1
+
 ## 1.0.15
 
 ### Patch Changes

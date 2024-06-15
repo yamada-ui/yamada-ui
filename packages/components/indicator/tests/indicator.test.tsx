@@ -3,21 +3,20 @@ import { Indicator } from "../src"
 
 describe("<Indicator />", () => {
   test("Indicator renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <Indicator label="new">
         <div></div>
       </Indicator>,
     )
-    await a11y(container)
   })
 
   test("should render indicator", () => {
     render(
-      <Indicator data-testid="Indicator" label="new">
+      <Indicator label="new">
         <div></div>
       </Indicator>,
     )
-    expect(screen.getByTestId("Indicator")).toBeInTheDocument()
+    expect(screen.getByText("new")).toBeInTheDocument()
   })
 
   test("should render indicator (with overflowCount)", () => {

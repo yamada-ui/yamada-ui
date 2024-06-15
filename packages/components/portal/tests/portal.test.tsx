@@ -1,17 +1,16 @@
-import { within } from "@testing-library/react"
-import { render, a11y } from "@yamada-ui/test"
+import { screen, render, a11y } from "@yamada-ui/test"
 import { useRef } from "react"
 import { Portal } from "../src"
 
 describe("<Portal />", () => {
   test("Portal renders correctly", async () => {
-    const { container } = render(<Portal>Hello</Portal>)
-    await a11y(container)
+    await a11y(<Portal>Hello</Portal>)
   })
 
   test("Portal with containerRef renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
+
       return (
         <div>
           order1
@@ -21,16 +20,19 @@ describe("<Portal />", () => {
       )
     }
 
-    const { getByText } = render(<TestContainer />)
-    const order1 = getByText("order1")
-    const order2 = getByText("order2")
-    expect(within(order1).getByText("order2")).toBeInTheDocument()
-    expect(within(order2).getByText("order3")).toBeInTheDocument()
+    render(<TestContainer />)
+
+    const order1 = screen.getByText("order1")
+    const order2 = screen.getByText("order2")
+
+    expect(order1).toHaveTextContent("order2")
+    expect(order2).toHaveTextContent("order3")
   })
 
   test("Nested Portal with containerRef renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
+
       return (
         <>
           <Portal containerRef={ref}>
@@ -44,15 +46,18 @@ describe("<Portal />", () => {
       )
     }
 
-    const { getByText } = render(<TestContainer />)
-    const order1 = getByText("order1")
-    expect(within(order1).getByText("order2")).toBeInTheDocument()
-    expect(within(order1).getByText("order3")).toBeInTheDocument()
+    render(<TestContainer />)
+
+    const order1 = screen.getByText("order1")
+
+    expect(order1).toHaveTextContent("order2")
+    expect(order1).toHaveTextContent("order3")
   })
 
   test("Nested Portal with setting appendToParentPortal to false renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
+
       return (
         <>
           <Portal containerRef={ref}>
@@ -66,17 +71,20 @@ describe("<Portal />", () => {
       )
     }
 
-    const { getByText } = render(<TestContainer />)
-    const order1 = getByText("order1")
-    expect(within(order1).getByText("order2")).toBeInTheDocument()
-    expect(within(order1).queryByText("order3")).not.toBeInTheDocument()
+    render(<TestContainer />)
+
+    const order1 = screen.getByText("order1")
+
+    expect(order1).toHaveTextContent("order2")
+    expect(order1).not.toHaveTextContent("order3")
     // order3 element is portaling at the end of document.body
-    expect(getByText("order3")).toBeInTheDocument()
+    expect(screen.getByText("order3")).toBeInTheDocument()
   })
 
   test("Portal with isDisabled renders correctly", () => {
     const TestContainer = () => {
       const ref = useRef<HTMLDivElement>(null)
+
       return (
         <>
           <Portal isDisabled containerRef={ref}>
@@ -87,8 +95,10 @@ describe("<Portal />", () => {
       )
     }
 
-    const { getByText } = render(<TestContainer />)
-    const order2 = getByText("order2")
-    expect(within(order2).getByText("order1")).toBeInTheDocument()
+    render(<TestContainer />)
+
+    const order2 = screen.getByText("order2")
+
+    expect(order2).toHaveTextContent("order1")
   })
 })

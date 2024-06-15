@@ -3,6 +3,8 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Carousel: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      position: "relative",
+      h: "fit-content",
       w: "100%",
     },
     inner: {

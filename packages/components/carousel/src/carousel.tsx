@@ -272,8 +272,6 @@ export const Carousel = forwardRef<CarouselProps, "div">(
         <ui.div
           className={cx("ui-carousel", className)}
           __css={{
-            position: "relative",
-            h: "fit-content",
             ...styles.container,
           }}
           {...getContainerProps({}, ref)}

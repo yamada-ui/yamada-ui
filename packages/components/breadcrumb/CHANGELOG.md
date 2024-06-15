@@ -1,5 +1,18 @@
 # @yamada-ui/breadcrumb
 
+## 1.3.0
+
+### Minor Changes
+
+- [#2080](https://github.com/yamada-ui/yamada-ui/pull/2080) [`da0075c`](https://github.com/yamada-ui/yamada-ui/commit/da0075ceddcfab36e614f52c00e66c69ff13c7b3) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Update @yamada-ui/breadcrumb accessibility
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/icon@1.0.28
+  - @yamada-ui/use-value@1.1.16
+
 ## 1.2.1
 
 ### Patch Changes

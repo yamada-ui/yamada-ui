@@ -1,5 +1,17 @@
 # @yamada-ui/slider
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2060](https://github.com/yamada-ui/yamada-ui/pull/2060) [`3258ffb`](https://github.com/yamada-ui/yamada-ui/commit/3258ffb034bf26b8ad4b29af41ad888697a2bd33) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Update Slider accessibility
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/form-control@1.1.3
+
 ## 1.0.34
 
 ### Patch Changes

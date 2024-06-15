@@ -1,5 +1,14 @@
 # @yamada-ui/native-select
 
+## 1.0.33
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/form-control@1.1.3
+  - @yamada-ui/icon@1.0.28
+
 ## 1.0.32
 
 ### Patch Changes

@@ -369,12 +369,7 @@ const ModalContent = forwardRef<ModalContentProps, "section", false>(
       animation !== "none" ? getModalContentProps(animation, duration) : {}
 
     const css: CSSUIObject = {
-      position: "relative",
-      maxH: "100%",
-      display: "flex",
-      flexDirection: "column",
       overflow: scrollBehavior === "inside" ? "hidden" : "auto",
-      outline: 0,
       ...(__css ? __css : styles.container),
     }
 

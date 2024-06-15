@@ -3,6 +3,7 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 export const Reorder: ComponentMultiStyle = {
   baseStyle: {
     container: {
+      display: "flex",
       w: "100%",
     },
     item: {
@@ -13,6 +14,13 @@ export const Reorder: ComponentMultiStyle = {
       },
     },
     trigger: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      cursor: "grab",
+      _selected: {
+        cursor: "grabbing",
+      },
       color: ["blackAlpha.300", "whiteAlpha.300"],
     },
   },

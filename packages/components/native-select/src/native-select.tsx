@@ -166,9 +166,6 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
         <ui.div
           className="ui-select"
           __css={{
-            position: "relative",
-            w: "100%",
-            h: "fit-content",
             color,
             ...styles.container,
           }}
@@ -180,7 +177,6 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
             ref={ref}
             className={cx("ui-select__field", className)}
             __css={{
-              pe: "2rem",
               h: h ?? height,
               minH: minH ?? minHeight,
               ...styles.field,
@@ -212,13 +208,6 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   const styles = useNativeSelect()
 
   const css: CSSUIObject = {
-    position: "absolute",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    pointerEvents: "none",
-    top: "50%",
-    transform: "translateY(-50%)",
     ...styles.icon,
   }
 

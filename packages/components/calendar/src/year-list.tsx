@@ -76,7 +76,6 @@ export const YearList: FC<YearListProps> = ({
           h: styles.content?.h ?? styles.content?.height,
           minH: styles.content?.minH ?? styles.content?.minHeight,
           maxH: styles.content?.maxH ?? styles.content?.maxHeight,
-          display: "grid",
           ...styles.year,
         }}
         {...getContainerProps(
@@ -89,11 +88,6 @@ export const YearList: FC<YearListProps> = ({
             className="ui-calendar__year-list-button"
             variant="ghost"
             __css={{
-              minW: "auto",
-              h: "auto",
-              p: 0,
-              fontSize: undefined,
-              fontWeight: "normal",
               ...styles.button,
             }}
             {...getButtonProps({ ...computedYearProps, value: year, index })}

@@ -10,9 +10,6 @@ export const ModalBody = forwardRef<ModalBodyProps, "main">(
     const { styles, scrollBehavior } = useModal()
 
     const css: CSSUIObject = {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
       overflow: scrollBehavior === "inside" ? "auto" : undefined,
       ...(__css ? __css : styles.body),
     }

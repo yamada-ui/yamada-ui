@@ -18,8 +18,6 @@ export const ColorSelectorEyeDropper = forwardRef<
     useColorSelectorContext()
 
   const css: CSSUIObject = {
-    h: "auto",
-    minW: "auto",
     pointerEvents: readOnly ? "none" : undefined,
     ...styles.eyeDropper,
   }

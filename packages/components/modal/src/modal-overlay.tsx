@@ -21,11 +21,6 @@ export const ModalOverlay = forwardRef<ModalOverlayProps, "div">(
     } = useModal()
 
     const css: CSSUIObject = {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      w: "100vw",
-      h: "100vh",
       ...(__css ? __css : styles.overlay),
     }
 

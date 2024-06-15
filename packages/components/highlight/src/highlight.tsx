@@ -101,8 +101,6 @@ export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
   const { className, ...rest } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    bg: "transparent",
-    whiteSpace: "nowrap",
     ...styles,
   }
 

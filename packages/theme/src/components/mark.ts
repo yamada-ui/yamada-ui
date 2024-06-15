@@ -4,6 +4,8 @@ import { getColor, isGray, shadeColor, tintColor } from "@yamada-ui/utils"
 
 export const Mark: ComponentStyle = {
   baseStyle: {
+    bg: "transparent",
+    whiteSpace: "nowrap",
     px: "1",
     py: "1",
   },

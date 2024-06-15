@@ -16,7 +16,7 @@ import {
 import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
-import { Hamburger } from "components/media-and-icons"
+import { Menu as MenuIcon } from "@yamada-ui/lucide"
 
 const TEAM_ITEMS = [
   {
@@ -68,7 +68,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
           variant="ghost"
           display={{ base: "none", md: "flex" }}
         >
-          <Hamburger />
+          <MenuIcon fontSize="2xl" />
         </MenuButton>
 
         <MenuList>

@@ -6,8 +6,7 @@ import { Tag } from "../src"
 
 describe("<Tag />", () => {
   test("renders tag correctly", async () => {
-    const { container } = render(<Tag>Tag</Tag>)
-    await a11y(container)
+    await a11y(<Tag>Tag</Tag>)
   })
 
   test("Tag with icon renders correctly", () => {

@@ -1,5 +1,26 @@
 # @yamada-ui/resizable
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/icon@1.0.28
+
+## 1.1.0
+
+### Minor Changes
+
+- [#1971](https://github.com/yamada-ui/yamada-ui/pull/1971) [`abdbb39`](https://github.com/yamada-ui/yamada-ui/commit/abdbb39606e36fbee56b8b7132c50aaf3381e40f) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Update @yamada-ui/resizable accessibility
+
+### Patch Changes
+
+- Updated dependencies [[`55fa828`](https://github.com/yamada-ui/yamada-ui/commit/55fa8285c6a74ec9d919b50251f91b3c06b58a70), [`5ec5a23`](https://github.com/yamada-ui/yamada-ui/commit/5ec5a231cc134a280eeb7841f99348c74cd4b948), [`8799de2`](https://github.com/yamada-ui/yamada-ui/commit/8799de254372718a7416b5cceaa2780157394d63)]:
+  - @yamada-ui/utils@1.2.1
+  - @yamada-ui/core@1.7.1
+  - @yamada-ui/icon@1.0.27
+
 ## 1.0.19
 
 ### Patch Changes

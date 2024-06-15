@@ -1,4 +1,16 @@
 import {
+  AppWindowMac,
+  Blocks,
+  Compass,
+  Figma,
+  Globe,
+  History,
+  Paintbrush,
+  Palette,
+  Parentheses,
+  Smile,
+} from "@yamada-ui/lucide"
+import {
   Center,
   ChevronIcon,
   Collapse,
@@ -12,17 +24,6 @@ import {
 } from "@yamada-ui/react"
 import type { IconProps, ListProps } from "@yamada-ui/react"
 import { Label } from "components/data-display"
-import {
-  Brush,
-  ColorPalette,
-  Compass,
-  Components,
-  Figma,
-  Function,
-  History,
-  Window,
-  World,
-} from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import type { DocumentTypeTree } from "contentlayer/generated"
 import { useI18n } from "contexts/i18n-context"
@@ -228,31 +229,34 @@ type ListItemIconProps = { icon?: string | null } & IconProps
 const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
   switch (icon) {
     case "compass":
-      return <Compass {...rest} />
+      return <Compass fontSize="2xl" {...rest} />
 
-    case "color-palette":
-      return <ColorPalette strokeWidth="1.75" {...rest} />
+    case "palette":
+      return <Palette fontSize="2xl" {...rest} />
 
-    case "components":
-      return <Components {...rest} />
+    case "blocks":
+      return <Blocks fontSize="2xl" {...rest} />
 
-    case "world":
-      return <World {...rest} />
+    case "globe":
+      return <Globe fontSize="2xl" {...rest} />
 
-    case "function":
-      return <Function {...rest} />
+    case "parentheses":
+      return <Parentheses fontSize="2xl" {...rest} />
 
     case "figma":
-      return <Figma {...rest} />
+      return <Figma fontSize="2xl" {...rest} />
 
     case "history":
-      return <History {...rest} />
+      return <History fontSize="2xl" {...rest} />
 
-    case "brush":
-      return <Brush {...rest} />
+    case "paintbrush":
+      return <Paintbrush fontSize="2xl" {...rest} />
 
-    case "window":
-      return <Window {...rest} />
+    case "app-window-mac":
+      return <AppWindowMac fontSize="2xl" {...rest} />
+
+    case "smile":
+      return <Smile fontSize="2xl" {...rest} />
 
     default:
       return <></>

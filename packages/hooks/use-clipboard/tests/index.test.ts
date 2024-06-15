@@ -2,11 +2,14 @@ import { act, renderHook, waitFor } from "@yamada-ui/test"
 import { useClipboard } from "../src"
 
 describe("useClipboard", () => {
-  let defaultClipboardData =
-    "clipboardData" in window ? window.clipboardData : undefined
-  let defaultClipboard = global.navigator.clipboard
+  let defaultClipboardData: unknown
+  let defaultClipboard: Clipboard
 
   beforeAll(() => {
+    defaultClipboardData =
+      "clipboardData" in window ? window.clipboardData : undefined
+    defaultClipboard = global.navigator.clipboard
+
     let clipboardData = ""
 
     Object.defineProperty(window, "clipboardData", {

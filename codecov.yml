@@ -5,7 +5,7 @@ codecov:
     - github-actions
 
 coverage:
-  range: 70..90
+  range: 75..95
   status:
     project: false
     patch: false

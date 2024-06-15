@@ -1,6 +1,6 @@
 import { useEventListeners } from "@yamada-ui/use-event-listener"
 import type { Dict } from "@yamada-ui/utils"
-import { dataAttr, mergeRefs } from "@yamada-ui/utils"
+import { dataAttr, isTouchDevice, mergeRefs } from "@yamada-ui/utils"
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, Ref } from "react"
 import { useCallback, useState } from "react"
 
@@ -221,6 +221,8 @@ export const useClickable = <
         return
       }
 
+      if (isTouchDevice()) return
+
       onMouseOver?.(ev)
     },
     [isDisabled, onMouseOver],
@@ -233,6 +235,8 @@ export const useClickable = <
 
         setIsPressed(false)
       }
+
+      if (isTouchDevice()) return
 
       onMouseLeave?.(ev)
     },

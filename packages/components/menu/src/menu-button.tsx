@@ -37,7 +37,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
     )
 
     const onItemKeyDown = useCallback(
-      (ev: KeyboardEvent) => {
+      (ev: KeyboardEvent<HTMLLIElement>) => {
         const actions: Record<string, Function | undefined> = {
           ArrowRight: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
           ArrowLeft: isOpen

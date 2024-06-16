@@ -27,7 +27,7 @@ const DISCORD_HELP_WANTED_COMMENT = (
   html_url: string,
 ) =>
   [
-    `<@&1202956318718304276>`,
+    `<@&1202956318718304276> <@&1246174065216192662>`,
     `Help!, I need somebody, Help!, not just anybody,\nHelp!, you know I need someone, Help!`,
     `[${number}: ${title}](${html_url})`,
   ].join("\n\n")

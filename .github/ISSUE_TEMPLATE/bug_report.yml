@@ -86,6 +86,9 @@ body:
         - label: "macOS"
         - label: "Windows"
         - label: "Linux"
+        - label: "iPadOS"
+        - label: "iOS"
+        - label: "Android"
   - type: dropdown
     id: fix
     attributes:

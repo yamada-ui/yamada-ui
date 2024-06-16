@@ -1,6 +1,5 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import { Button, ColorPicker, FormControl, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
@@ -313,7 +312,7 @@ export const customEyeDropperIcon: Story = () => {
       />
       <ColorPicker
         eyeDropperProps={{
-          children: <Icon icon={faPoo} />,
+          children: <Ghost fontSize="2xl" />,
         }}
         placeholder={defaultPlaceholder}
       />

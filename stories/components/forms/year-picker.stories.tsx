@@ -1,7 +1,6 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import { YearPicker } from "@yamada-ui/calendar"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
@@ -253,7 +252,7 @@ export const customIcon: Story = () => {
 
       <YearPicker
         placeholder="YYYY"
-        iconProps={{ children: <Icon icon={faPoo} /> }}
+        iconProps={{ children: <Ghost fontSize="2xl" /> }}
       />
     </>
   )

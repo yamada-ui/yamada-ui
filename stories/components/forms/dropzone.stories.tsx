@@ -1,8 +1,3 @@
-import {
-  faArrowUpFromBracket,
-  faImage,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import {
   Dropzone,
@@ -11,7 +6,7 @@ import {
   DropzoneIdle,
   IMAGE_ACCEPT_TYPE,
 } from "@yamada-ui/dropzone"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Image as UploadImage, Upload, X } from "@yamada-ui/lucide"
 import { HStack, VStack, Text, FormControl, Button } from "@yamada-ui/react"
 import { useRef } from "react"
 
@@ -124,16 +119,14 @@ export const withStatus: Story = () => {
   return (
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
-        <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
-        </DropzoneAccept>
+        <DropzoneAccept></DropzoneAccept>
 
         <DropzoneReject>
-          <Icon icon={faXmark} size="6xl" color="danger" />
+          <X fontSize="6xl" color="danger" />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <Icon icon={faImage} size="6xl" />
+          <UploadImage fontSize="6xl" />
         </DropzoneIdle>
 
         <VStack gap="2xs">
@@ -163,15 +156,15 @@ export const useOnDrop: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
+          <Upload fontSize="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <Icon icon={faXmark} size="6xl" color="danger" />
+          <X fontSize="6xl" color="danger" />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <Icon icon={faImage} size="6xl" />
+          <UploadImage fontSize="6xl" />
         </DropzoneIdle>
 
         <VStack gap="2xs">
@@ -194,15 +187,15 @@ export const useOnDropAccepted: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
+          <Upload fontSize="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <Icon icon={faXmark} size="6xl" color="danger" />
+          <X fontSize="6xl" color="danger" />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <Icon icon={faImage} size="6xl" />
+          <UploadImage fontSize="6xl" />
         </DropzoneIdle>
 
         <VStack gap="2xs">
@@ -225,15 +218,15 @@ export const useOnDropRejected: Story = () => {
     >
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
         <DropzoneAccept>
-          <Icon icon={faArrowUpFromBracket} size="6xl" color="success" />
+          <Upload fontSize="6xl" color="success" />
         </DropzoneAccept>
 
         <DropzoneReject>
-          <Icon icon={faXmark} size="6xl" color="danger" />
+          <X fontSize="6xl" color="danger" />
         </DropzoneReject>
 
         <DropzoneIdle>
-          <Icon icon={faImage} size="6xl" />
+          <UploadImage fontSize="6xl" />
         </DropzoneIdle>
 
         <VStack gap="2xs">

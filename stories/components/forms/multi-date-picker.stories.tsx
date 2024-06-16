@@ -1,8 +1,7 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import type { MultiDatePickerProps } from "@yamada-ui/calendar"
 import { MultiDatePicker } from "@yamada-ui/calendar"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import {
   Button,
   FormControl,
@@ -487,7 +486,7 @@ export const customIcon: Story = () => {
 
       <MultiDatePicker
         placeholder="YYYY/MM/DD"
-        iconProps={{ children: <Icon icon={faPoo} /> }}
+        iconProps={{ children: <Ghost fontSize="2xl" /> }}
       />
     </>
   )

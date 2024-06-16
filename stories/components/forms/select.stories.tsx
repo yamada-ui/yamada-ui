@@ -1,6 +1,5 @@
-import { faCaretDown, faCheck } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Check, ChevronsDown } from "@yamada-ui/lucide"
 import type { SelectItem } from "@yamada-ui/react"
 import {
   Select,
@@ -287,7 +286,7 @@ export const customIcon: Story = () => {
 
       <Select
         placeholder="キャラクターを選択"
-        iconProps={{ children: <Icon icon={faCaretDown} /> }}
+        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -311,7 +310,7 @@ export const customOption: Story = () => {
 
       <Select
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Icon icon={faCheck} color="green.500" /> }}
+        optionProps={{ icon: <Check fontSize="xl" color="green.500" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>

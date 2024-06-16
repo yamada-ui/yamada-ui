@@ -1,6 +1,5 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import { Avatar, AvatarBadge, AvatarGroup, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Avatar>
@@ -53,7 +52,7 @@ export const withFallback: Story = () => {
     <Wrap gap="md">
       <Avatar bg="secondary" src="https://not-found.com" />
       <Avatar src="https://not-found.com" alt="alternative text" />
-      <Avatar icon={<Icon icon={faPoo} />} src="https://not-found.com" />
+      <Avatar icon={<Ghost fontSize="2xl" />} src="https://not-found.com" />
     </Wrap>
   )
 }

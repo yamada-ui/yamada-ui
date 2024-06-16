@@ -1,6 +1,5 @@
-import { faClose, faFile } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { File, X } from "@yamada-ui/lucide"
 import {
   FileInput,
   FormControl,
@@ -164,7 +163,7 @@ export const useAddon: Story = () => {
   return (
     <InputGroup>
       <InputLeftAddon>
-        <Icon icon={faFile} />
+        <File fontSize="xl" />
       </InputLeftAddon>
       <FileInput type="tel" placeholder="Please upload file" />
     </InputGroup>
@@ -175,7 +174,7 @@ export const useElement: Story = () => {
   return (
     <InputGroup>
       <InputLeftElement>
-        <Icon icon={faFile} color="gray.500" />
+        <File fontSize="xl" color="gray.500" />
       </InputLeftElement>
       <FileInput type="email" placeholder="Please upload file" />
     </InputGroup>
@@ -205,7 +204,7 @@ export const useReset: Story = () => {
 
         {value?.length ? (
           <InputRightElement isClick onClick={onReset}>
-            <Icon icon={faClose} color="gray.500" />
+            <X fontSize="xl" color="gray.500" />
           </InputRightElement>
         ) : null}
       </InputGroup>
@@ -262,7 +261,7 @@ export const reactHookForm: Story = () => {
 
               {field.value?.length ? (
                 <InputRightElement isClick onClick={onReset}>
-                  <Icon icon={faClose} color="gray.500" />
+                  <X fontSize="xl" color="gray.500" />
                 </InputRightElement>
               ) : null}
             </InputGroup>

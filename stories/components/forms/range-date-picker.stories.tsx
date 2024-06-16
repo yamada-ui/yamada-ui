@@ -1,8 +1,7 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import type { RangeDatePickerProps } from "@yamada-ui/calendar"
 import { RangeDatePicker } from "@yamada-ui/calendar"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
@@ -472,7 +471,7 @@ export const customIcon: Story = () => {
 
       <RangeDatePicker
         placeholder="YYYY/MM/DD"
-        iconProps={{ children: <Icon icon={faPoo} /> }}
+        iconProps={{ children: <Ghost fontSize="2xl" /> }}
       />
     </>
   )

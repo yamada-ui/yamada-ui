@@ -1,10 +1,5 @@
-import {
-  faCaretDown,
-  faCheck,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Check, ChevronsDown, Trash2 } from "@yamada-ui/lucide"
 import type { SelectItem } from "@yamada-ui/react"
 import {
   MultiSelect,
@@ -380,7 +375,7 @@ export const customIcon: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        iconProps={{ children: <Icon icon={faCaretDown} /> }}
+        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -394,7 +389,7 @@ export const customClearIcon: Story = () => {
   return (
     <MultiSelect
       placeholder="キャラクターを選択"
-      clearIconProps={{ children: <Icon icon={faTrash} w="0.5em" /> }}
+      clearIconProps={{ children: <Trash2 fontSize="md" /> }}
     >
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
@@ -417,7 +412,7 @@ export const customOption: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Icon icon={faCheck} color="green.500" /> }}
+        optionProps={{ icon: <Check fontSize="md" color="green.500" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>

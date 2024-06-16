@@ -1,8 +1,3 @@
-import {
-  faArrowLeft,
-  faArrowRight,
-  faPoo,
-} from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import {
   Carousel,
@@ -11,7 +6,7 @@ import {
   CarouselControlPrev,
   CarouselIndicators,
 } from "@yamada-ui/carousel"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost, ArrowLeft, ArrowRight } from "@yamada-ui/lucide"
 import {
   Progress,
   Center,
@@ -635,7 +630,7 @@ export const customControl: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Carousel controlProps={{ icon: <Icon icon={faPoo} /> }}>
+      <Carousel controlProps={{ icon: <Ghost fontSize="2xl" /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -650,7 +645,7 @@ export const customControlButton: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlPrevProps={{ icon: <Icon icon={faArrowLeft} /> }}>
+      <Carousel controlPrevProps={{ icon: <ArrowLeft fontSize="2xl" /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -665,7 +660,7 @@ export const customControlButton: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlNextProps={{ icon: <Icon icon={faArrowRight} /> }}>
+      <Carousel controlNextProps={{ icon: <ArrowRight fontSize="2xl" /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -681,8 +676,8 @@ export const customControlButton: Story = () => {
       </Carousel>
 
       <Carousel>
-        <CarouselControlPrev icon={<Icon icon={faArrowLeft} />} />
-        <CarouselControlNext icon={<Icon icon={faArrowRight} />} />
+        <CarouselControlPrev icon={<ArrowLeft fontSize="2xl" />} />
+        <CarouselControlNext icon={<ArrowRight fontSize="2xl" />} />
 
         <CarouselSlide as={Center} bg="primary">
           1
@@ -708,8 +703,8 @@ export const customIndicators: Story = () => {
         indicatorsProps={{
           bottom: "8",
           component: ({ isSelected }) => (
-            <Icon
-              icon={faPoo}
+            <Ghost
+              fontSize="2xl"
               color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
               cursor="pointer"
             />

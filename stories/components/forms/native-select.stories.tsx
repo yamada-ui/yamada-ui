@@ -1,6 +1,5 @@
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { ChevronsDown } from "@yamada-ui/lucide"
 import type { NativeSelectItem } from "@yamada-ui/react"
 import {
   Button,
@@ -302,7 +301,7 @@ export const customIcon: Story = () => {
       <NativeSelect
         placeholder="キャラクターを選択"
         aria-label="Native Select"
-        iconProps={{ children: <Icon icon={faCaretDown} /> }}
+        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
       >
         <NativeOption value="孫悟空">孫悟空</NativeOption>
         <NativeOption value="ベジータ">ベジータ</NativeOption>

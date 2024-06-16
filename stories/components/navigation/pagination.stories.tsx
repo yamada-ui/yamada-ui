@@ -1,6 +1,5 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import { Pagination, VStack, Wrap } from "@yamada-ui/react"
 import { useState } from "react"
 import { colorSchemes } from "../../components"
@@ -126,15 +125,15 @@ export const customControlButton: Story = () => {
     <>
       <Pagination
         total={10}
-        controlProps={{ children: <Icon icon={faPoo} /> }}
+        controlProps={{ children: <Ghost fontSize="xl" /> }}
       />
       <Pagination
         total={10}
-        controlPrevProps={{ children: <Icon icon={faPoo} /> }}
+        controlPrevProps={{ children: <Ghost fontSize="xl" /> }}
       />
       <Pagination
         total={10}
-        controlNextProps={{ children: <Icon icon={faPoo} /> }}
+        controlNextProps={{ children: <Ghost fontSize="xl" /> }}
       />
     </>
   )
@@ -146,17 +145,17 @@ export const customEdgeButton: Story = () => {
       <Pagination
         total={10}
         withEdges
-        edgeProps={{ children: <Icon icon={faPoo} /> }}
+        edgeProps={{ children: <Ghost fontSize="xl" /> }}
       />
       <Pagination
         total={10}
         withEdges
-        edgeFirstProps={{ children: <Icon icon={faPoo} /> }}
+        edgeFirstProps={{ children: <Ghost fontSize="xl" /> }}
       />
       <Pagination
         total={10}
         withEdges
-        edgeLastProps={{ children: <Icon icon={faPoo} /> }}
+        edgeLastProps={{ children: <Ghost fontSize="xl" /> }}
       />
     </>
   )

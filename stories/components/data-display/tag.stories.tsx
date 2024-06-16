@@ -1,6 +1,5 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Plus } from "@yamada-ui/lucide"
 import { Wrap, Tag } from "@yamada-ui/react"
 import { colorSchemes } from "../../components"
 
@@ -70,15 +69,15 @@ export const withSize: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md" alignItems="flex-start">
-      <Tag colorScheme="primary" size="sm" leftIcon={<Icon icon={faPlus} />}>
+      <Tag colorScheme="primary" size="sm" leftIcon={<Plus fontSize="sm" />}>
         Small
       </Tag>
 
-      <Tag colorScheme="secondary" size="md" rightIcon={<Icon icon={faPlus} />}>
+      <Tag colorScheme="secondary" size="md" rightIcon={<Plus fontSize="md" />}>
         Medium
       </Tag>
 
-      <Tag colorScheme="warning" size="lg" leftIcon={<Icon icon={faPlus} />}>
+      <Tag colorScheme="warning" size="lg" leftIcon={<Plus fontSize="lg" />}>
         Large
       </Tag>
     </Wrap>

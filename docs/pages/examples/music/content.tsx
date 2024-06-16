@@ -20,7 +20,7 @@ import {
   useDisclosure,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { PlusCircle, Podcast } from "lucide-react"
+import { CirclePlus, Podcast } from "@yamada-ui/lucide"
 import { memo, useState } from "react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
 import { Image, type ImageProps } from "@yamada-ui/nextjs"
@@ -166,7 +166,7 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
         <Button
           colorScheme="primary"
           size="sm"
-          leftIcon={<Icon as={PlusCircle} />}
+          leftIcon={<Icon as={CirclePlus} />}
         >
           Add Music
         </Button>

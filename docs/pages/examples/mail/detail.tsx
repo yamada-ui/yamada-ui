@@ -17,16 +17,15 @@ import {
 import type { IconButtonProps, StackProps } from "@yamada-ui/react"
 import {
   Reply,
-  type LucideIcon,
   ReplyAll,
   Share,
   Clock,
   Trash,
   Archive,
   EllipsisVertical,
-} from "lucide-react"
+} from "@yamada-ui/lucide"
 import { memo, useState } from "react"
-import type { MutableRefObject, FC } from "react"
+import type { MutableRefObject, FC, ElementType } from "react"
 import { type MailItem } from "./data"
 import { Header } from "./header"
 import { getTimestamp } from "./utils"
@@ -147,7 +146,7 @@ export const Detail: FC<DetailProps> = memo(
 Detail.displayName = "Detail"
 
 type ControlIconProps = Omit<IconButtonProps, "icon"> & {
-  icon: LucideIcon
+  icon: ElementType
   label?: string
 }
 

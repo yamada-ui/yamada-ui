@@ -21,9 +21,8 @@ import {
   ShoppingCart,
   Trash,
   Users,
-} from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import { type FC, memo } from "react"
+} from "@yamada-ui/lucide"
+import { type FC, memo, ElementType } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
@@ -96,7 +95,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
 Sidebar.displayName = "Sidebar"
 
 type SidebarItemProps = {
-  icon: LucideIcon
+  icon: ElementType
   label: string
   num?: number
   isCollapse?: boolean

@@ -22,10 +22,9 @@ import type {
   InputProps,
   MenuProps,
 } from "@yamada-ui/react"
-import { CirclePlus, SlidersHorizontal, X } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import { CirclePlus, SlidersHorizontal, X } from "@yamada-ui/lucide"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
-import type { FC, MutableRefObject, ReactNode } from "react"
+import type { ElementType, FC, MutableRefObject, ReactNode } from "react"
 import { PRIORITY, STATUS, VIEW } from "./data"
 import type { Priority, Status, View } from "./data"
 
@@ -138,7 +137,7 @@ TitleInput.displayName = "TitleInput"
 
 type FilterControlButtonProps<T extends Status | Priority> = MenuProps & {
   label: ReactNode
-  icon?: LucideIcon
+  icon?: ElementType
   items: T extends Status ? typeof STATUS : typeof PRIORITY
   buttonProps?: ButtonProps
   passValueRef: MutableRefObject<(value: T[]) => void>

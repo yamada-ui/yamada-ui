@@ -1,5 +1,5 @@
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ellipsis } from "@yamada-ui/lucide"
+import { Icon } from "@yamada-ui/react"
 import {
   IconButton,
   Menu,
@@ -23,7 +23,7 @@ export const ControlButton: FC<ControlButtonProps> = memo(
       <Menu {...menuProps}>
         <MenuButton
           as={IconButton}
-          icon={<Icon icon={faEllipsis} fontSize="1.125em" />}
+          icon={<Icon as={Ellipsis} fontSize="1.3em" />}
           {...rest}
         />
 

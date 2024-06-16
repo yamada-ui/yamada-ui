@@ -17,7 +17,7 @@ import {
 import type { TdProps } from "@yamada-ui/react"
 import { PagingTable } from "@yamada-ui/table"
 import type { Cell, Column, PagingTableProps } from "@yamada-ui/table"
-import { Ellipsis } from "lucide-react"
+import { Ellipsis } from "@yamada-ui/lucide"
 import { memo, useCallback, useMemo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
 import { DATA, LABEL, PRIORITY, STATUS, VIEW } from "./data"

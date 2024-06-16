@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { Bell, EyeOff, User } from "lucide-react"
+import { Bell, EyeOff, User } from "@yamada-ui/lucide"
 import { memo } from "react"
 
 export const NotificationsCard = memo(() => {

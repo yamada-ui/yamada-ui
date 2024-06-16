@@ -20,10 +20,10 @@ import {
   Icon,
 } from "@yamada-ui/react"
 import type { UseRadioGroupReturn } from "@yamada-ui/react"
-import { CreditCard } from "lucide-react"
+import { CreditCard } from "@yamada-ui/lucide"
 import { memo } from "react"
 import type { FC, ReactNode } from "react"
-import { FaApple, FaPaypal } from "react-icons/fa"
+import { Apple, Paypal } from "components/media-and-icons"
 
 export const PaymentMethodCard = memo(() => {
   const CustomRadio: FC<
@@ -116,11 +116,11 @@ export const PaymentMethodCard = memo(() => {
           />
           <CustomRadio
             {...getRadioProps({ value: "Paypal" })}
-            icon={<Icon as={FaPaypal} boxSize={{ base: "8", sm: "6" }} />}
+            icon={<Paypal boxSize={{ base: "8", sm: "6" }} />}
           />
           <CustomRadio
             {...getRadioProps({ value: "Apple" })}
-            icon={<Icon as={FaApple} boxSize={{ base: "8", sm: "6" }} />}
+            icon={<Apple boxSize={{ base: "8", sm: "6" }} />}
           />
         </HStack>
 

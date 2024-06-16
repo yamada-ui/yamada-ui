@@ -15,7 +15,7 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import type { SegmentedControlItem, StackProps } from "@yamada-ui/react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown } from "@yamada-ui/lucide"
 import { memo } from "react"
 import type { FC } from "react"
 import { Cards } from "./cards"

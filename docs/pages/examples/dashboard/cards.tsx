@@ -14,15 +14,9 @@ import type {
   IconProps,
   StatProps,
 } from "@yamada-ui/react"
-import {
-  Users,
-  type LucideIcon,
-  CreditCard,
-  Activity,
-  DollarSign,
-} from "lucide-react"
+import { Users, CreditCard, Activity, DollarSign } from "@yamada-ui/lucide"
 import { memo } from "react"
-import type { FC } from "react"
+import type { ElementType, FC } from "react"
 
 const ITEMS: ItemProps[] = [
   {
@@ -81,7 +75,7 @@ Cards.displayName = "Cards"
 type ItemProps = CardProps &
   Pick<StatProps, "number" | "helperMessage"> & {
     title: string
-    icon: LucideIcon
+    icon: ElementType
     iconProps?: IconProps
     statProps?: StatProps
     statIcon?: StatProps["icon"]

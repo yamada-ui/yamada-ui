@@ -1,5 +1,5 @@
-import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
+import { History } from "@yamada-ui/lucide"
+import { Icon } from "@yamada-ui/react"
 import { Button, HStack, IconButton } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
@@ -20,9 +20,7 @@ export const Footer: FC<FooterProps> = memo(({ ...rest }) => {
 
       <IconButton
         variant="ghost"
-        icon={
-          <Icon icon={faClockRotateLeft} fontSize="1.125em" color="muted" />
-        }
+        icon={<Icon as={History} fontSize="1.125em" color="muted" />}
         size={{ base: "lg" }}
       />
     </HStack>

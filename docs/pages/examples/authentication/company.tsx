@@ -1,6 +1,6 @@
 import { Heading, HStack, Icon, Spacer, Text, VStack } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { Mountain } from "lucide-react"
+import { Mountain } from "@yamada-ui/lucide"
 import { memo } from "react"
 import type { FC } from "react"
 

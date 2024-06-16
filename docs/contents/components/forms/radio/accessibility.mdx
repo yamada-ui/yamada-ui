@@ -1,0 +1,31 @@
+---
+title: Radio
+description: "`Radio` is a component used for allowing users to select one option from multiple choices."
+package_name: "@yamada-ui/radio"
+with_description: true
+tab: Accessibility
+---
+
+The `Radio` follows the[WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio) for accessibility.
+
+## Keyboard Navigation
+
+| キー         | 説明                                                                                                                                                | 状態 |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| `Tab`        | When focus moves to the radio group, it moves to the checked radio button. <br/> If no radio button is checked, it moves to the first radio button. | -    |
+| `Space`      | Checks the focused radio button that is not checked.                                                                                                | -    |
+| `ArrowLeft`  | Checks the previous radio button that is not disabled.                                                                                              | -    |
+| `ArrowRight` | Checks the next radio button that is not disabled.                                                                                                  | -    |
+| `ArrowUp`    | Checks the previous radio button that is not disabled.                                                                                              | -    |
+| `ArrowDown`  | Checks the next radio button that is not disabled.                                                                                                  | -    |
+
+## ARIA Roles and Attributes
+
+| コンポーネント | ロールと属性        | 使い方                                                                          |
+| -------------- | ------------------- | ------------------------------------------------------------------------------- |
+| `RadioGroup`   | `role="radiogroup"` | Indicates that it is a group of radio buttons.                                  |
+|                | `id`                | `id` used to associate with `Radio`.                                            |
+|                | `aria-labelledby`   | Sets the `id` associated with `Radio`.                                          |
+| `Radio`        | `role="radio"`      | Indicates that it is a radio button.                                            |
+|                | `id`                | `id` used to associate with `RadioGroup`.                                       |
+|                | `aria-checked`      | Set to `true` if the radio button is checked, and `false` if it is not checked. |

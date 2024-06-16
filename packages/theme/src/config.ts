@@ -4,5 +4,5 @@ export const config: ThemeConfig = {
   initialThemeScheme: "base",
   initialColorMode: "light",
   var: { prefix: "ui" },
-  breakpoint: "down",
+  breakpoint: { direction: "down" },
 }

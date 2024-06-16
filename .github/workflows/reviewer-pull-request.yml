@@ -1,4 +1,4 @@
-name: Observe Pull Requests
+name: Add Reviwers Pull Requests
 
 on:
   schedule:
@@ -15,7 +15,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Update pull requests
-        run: pnpm observe:pr
+        run: pnpm reviewer:pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISCORD_REVIEWS_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEWS_WEBHOOK_URL }}

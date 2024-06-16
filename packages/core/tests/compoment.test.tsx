@@ -182,11 +182,11 @@ describe("useComponentStyle", () => {
       padding: "4px 8px",
       borderRadius: "4px",
       fontSize: "sm",
-      "@media screen and (max-width: 976px)": {
+      "@media screen and (min-width: 769px)": {
         bg: "blue.500",
         color: "white",
       },
-      "@media screen and (min-width: 481px)": {
+      "@media screen and (max-width: 768px)": {
         border: "1px solid",
         borderColor: "blue.500",
         color: "blue.500",
@@ -251,23 +251,26 @@ describe("useComponentStyle", () => {
     )
 
     expect(result.current[0]).toStrictEqual({
-      "@media screen and (max-width: 1280px)": {},
-      "@media screen and (min-width: 481px) and (max-width: 768px)": {
-        border: "1px solid",
-        borderColor: "blue.500",
-        color: "blue.500",
-        fontSize: "md",
-        padding: "8px 12px",
-      },
-      "@media screen and (min-width: 769px)": {
+      padding: "8px 12px",
+      borderRadius: "4px",
+      "@media screen and (min-width: 977px)": {},
+      "@media screen and (min-width: 769px) and (max-width: 976px)": {
         bg: "blue.500",
         color: "white",
       },
-      bg: "blue.500",
-      borderRadius: "4px",
-      color: "white",
-      fontSize: "sm",
-      padding: "4px 8px",
+      "@media screen and (min-width: 481px) and (max-width: 768px)": {
+        fontSize: "md",
+        padding: "8px 12px",
+        border: "1px solid",
+        borderColor: "blue.500",
+        color: "blue.500",
+      },
+      "@media screen and (max-width: 480px)": {
+        fontSize: "sm",
+        padding: "4px 8px",
+        bg: "blue.500",
+        color: "white",
+      },
     })
   })
 

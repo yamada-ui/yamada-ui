@@ -92,8 +92,8 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
               gap="md"
             >
               {data.map(({ name, Icon }) => (
-                <AspectRatio key={name} ratio={1 / 1}>
-                  <Tooltip label={name}>
+                <Tooltip key={name} label={name}>
+                  <AspectRatio ratio={1 / 1}>
                     <Center
                       as="button"
                       aria-label={name}
@@ -109,8 +109,8 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
                     >
                       <Icon size="2xl" />
                     </Center>
-                  </Tooltip>
-                </AspectRatio>
+                  </AspectRatio>
+                </Tooltip>
               ))}
             </Grid>
           ) : (

@@ -1,5 +1,17 @@
 # @yamada-ui/tooltip
 
+## 1.1.1
+
+### Patch Changes
+
+- [#2055](https://github.com/yamada-ui/yamada-ui/pull/2055) [`8858a7d`](https://github.com/yamada-ui/yamada-ui/commit/8858a7d8e20c6beeaa8eb8e9d8a819cfb35a4b4a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where visually hidden elements in `Tooltip` were not recognized by screen readers and the specificity of CSS was low.
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/motion@1.0.29
+  - @yamada-ui/transitions@1.0.29
+  - @yamada-ui/use-popper@1.0.28
+
 ## 1.1.0
 
 ### Minor Changes

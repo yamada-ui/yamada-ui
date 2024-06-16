@@ -1,5 +1,4 @@
-import { fireEvent } from "@testing-library/react"
-import { render, screen } from "@yamada-ui/test"
+import { fireEvent, render, screen } from "@yamada-ui/test"
 import { AlphaSlider } from "../src"
 
 describe("<AlphaSlider />", () => {

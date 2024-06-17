@@ -99,7 +99,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps, ["filledTrackColor"])
 
   const borderRadius =
-    _borderRadius ?? rounded ?? (styles.track.borderRadius as string | number)
+    _borderRadius ?? rounded ?? (styles.track?.borderRadius as string | number)
 
   const css: CSSUIObject = {
     w: "100%",

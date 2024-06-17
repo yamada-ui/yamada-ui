@@ -1,5 +1,18 @@
 # @yamada-ui/select
 
+## 1.2.15
+
+### Patch Changes
+
+- [#2087](https://github.com/yamada-ui/yamada-ui/pull/2087) [`ac4855b`](https://github.com/yamada-ui/yamada-ui/commit/ac4855be8a2789895ec9ca9c361373ed64deeb4b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unnecessary `omitObject`.
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/form-control@1.1.3
+  - @yamada-ui/icon@1.0.28
+  - @yamada-ui/motion@1.0.29
+  - @yamada-ui/popover@1.2.2
+
 ## 1.2.14
 
 ### Patch Changes

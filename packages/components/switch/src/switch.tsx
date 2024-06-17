@@ -116,6 +116,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       {...rest}
     >
       <ui.input
+        role="switch"
         className={cx("ui-switch__input", className)}
         {...getInputProps(inputProps, ref)}
       />

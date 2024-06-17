@@ -116,7 +116,7 @@ export const useRadioGroup = <
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, containerRef),
-      role: "group",
+      role: "radiogroup",
     }),
     [],
   )

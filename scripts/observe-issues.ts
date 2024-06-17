@@ -1,40 +1,40 @@
 import { Octokit } from "@octokit/rest"
 import { isObject } from "@yamada-ui/react"
 import { config } from "dotenv"
-import { recursiveOctokit } from "./utils"
+import type { Constant } from "./utils"
+import { getConstant, recursiveOctokit } from "./utils"
 
 type Issue = Awaited<
   ReturnType<typeof octokit.issues.listForRepo>
->["data"][number]
-type Collaborator = Awaited<
-  ReturnType<typeof octokit.repos.listCollaborators>
 >["data"][number]
 type Event = Awaited<
   ReturnType<typeof octokit.issues.listEventsForTimeline>
 >["data"][number] & { created_at: number }
 
+config()
+
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
+let constant: Constant = {}
+
 const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
-const INFORMATION_COMMENT = (id: string) =>
+const GITHUB_INFORMATION_COMMENT = (ids: string[]) =>
   [
-    `@${id}`,
-    `Hi, Thanks for the working on this issue!`,
-    `We will return this issue assignment to initial state.`,
-    `If you are working on this issue and would like to be reassigned, please contact us.`,
-  ].join("\n\n")
+    ids.map((id) => `@${id}`).join(" "),
+    "",
+    constant.message.issue.clearAssignees,
+  ].join("\n")
 const DISCORD_HELP_WANTED_COMMENT = (
   number: number,
   title: string,
   html_url: string,
 ) =>
   [
-    `<@&1202956318718304276>`,
-    `Help!, I need somebody, Help!, not just anybody,\nHelp!, you know I need someone, Help!`,
+    `<@&1202956318718304276> <@&1246174065216192662>`,
+    "",
+    constant.message.issue.addHelpWanted,
+    "",
     `[${number}: ${title}](${html_url})`,
-  ].join("\n\n")
-
-config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
+  ].join("\n")
 
 const getCollaborators = async () => {
   const { data } = await recursiveOctokit(() =>
@@ -96,69 +96,68 @@ const getPullRequestEvents = async (issue_number: number) => {
   return pullRequestEvents
 }
 
-const addHelpWantedLabel = async (issues: Issue[]) => {
+const addHelpWanted = async ({
+  number,
+  title,
+  labels,
+  created_at,
+  assignee,
+  html_url,
+}: Issue) => {
+  if (assignee) return
+
+  if (labels.every((label) => isObject(label) && label.name !== "bug")) return
+
+  if (
+    labels.some(
+      (label) =>
+        isObject(label) &&
+        [
+          "fixed",
+          "discussion",
+          "help wanted",
+          "question",
+          "wontfix",
+          "duplicate",
+          "confirm",
+          "Challengers wanted",
+        ].includes(label.name ?? ""),
+    )
+  )
+    return
+
+  const createdTimestamp = new Date(created_at)
+  const limitTimestamp = new Date(
+    Date.now() - constant.issue.addHelpWantedDay * 24 * 60 * 60 * 1000,
+  )
+
+  if (createdTimestamp > limitTimestamp) return
+
+  const pullRequestEvents = await getPullRequestEvents(number)
+  const hasPullRequest = pullRequestEvents.length
+
+  if (hasPullRequest) return
+
+  await recursiveOctokit(() =>
+    octokit.issues.addLabels({
+      ...COMMON_PARAMS,
+      issue_number: number,
+      labels: ["help wanted"],
+    }),
+  )
+
+  console.log("Added label", number, title)
+
+  const content = DISCORD_HELP_WANTED_COMMENT(number, title, html_url)
+
+  await sendDiscordChannel(content)
+}
+
+const sendDiscordChannel = async (content: string) => {
   const url = process.env.DISCORD_HELP_WANTED_WEBHOOK_URL
 
   if (!url) throw new Error("Missing Discord Webhook URL\n")
 
-  await Promise.all(
-    issues.map(
-      async ({ number, title, labels, created_at, assignee, html_url }) => {
-        if (assignee) return
-
-        if (labels.every((label) => isObject(label) && label.name !== "bug"))
-          return
-
-        if (
-          labels.some(
-            (label) =>
-              isObject(label) &&
-              [
-                "fixed",
-                "discussion",
-                "help wanted",
-                "question",
-                "ongoing",
-                "wontfix",
-                "duplicate",
-                "confirm",
-                "Challengers wanted",
-              ].includes(label.name ?? ""),
-          )
-        )
-          return
-
-        const createdTimestamp = new Date(created_at)
-        const limitTimestamp = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
-
-        if (createdTimestamp > limitTimestamp) return
-
-        const pullRequestEvents = await getPullRequestEvents(number)
-        const hasPullRequest = pullRequestEvents.length
-
-        if (hasPullRequest) return
-
-        await recursiveOctokit(() =>
-          octokit.issues.addLabels({
-            ...COMMON_PARAMS,
-            issue_number: number,
-            labels: ["help wanted"],
-          }),
-        )
-
-        console.log("Added label", number, title)
-
-        const content = DISCORD_HELP_WANTED_COMMENT(number, title, html_url)
-
-        await sendDiscordChannel(url, content)
-
-        console.log("Send discord", number, title)
-      },
-    ),
-  )
-}
-
-const sendDiscordChannel = async (url: string, content: string) => {
   const data = { username: "GitHub", content }
 
   const headers = { "Content-Type": "application/json" }
@@ -179,67 +178,74 @@ const getAssignedEvent = async (issue_number: number) => {
 
   const assignedEvents = data.filter(({ event }) => event === "assigned")
 
-  return assignedEvents.at(-1) as Event
+  return assignedEvents.at(-1) as Event | undefined
 }
 
-const clearAssignIssues = async (
-  issues: Issue[],
-  collaborators: Collaborator[],
-) => {
-  const collaboratorIds = collaborators.map(({ login }) => login)
-
-  issues = issues.filter(
-    ({ assignees }) =>
-      !assignees?.some(({ login }) => collaboratorIds.includes(login)),
+const clearAssignees = async (issue: Issue, collaboratorIds: string[]) => {
+  const { number, title, assignees } = issue
+  const hasCollaborators = assignees?.some(({ login }) =>
+    collaboratorIds.includes(login),
   )
 
-  await Promise.all(
-    issues.map(async ({ number, title, assignee }) => {
-      if (!assignee) return
+  if (hasCollaborators) return
 
-      const { created_at } = await getAssignedEvent(number)
+  const { created_at } = (await getAssignedEvent(number)) ?? {}
 
-      const eventTimestamp = new Date(created_at)
-      const limitTimestamp = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
+  if (!created_at) return
 
-      if (eventTimestamp > limitTimestamp) return
+  const eventTimestamp = new Date(created_at)
+  const limitTimestamp = new Date(
+    Date.now() - constant.issue.clearAssigneesDay * 24 * 60 * 60 * 1000,
+  )
 
-      const pullRequestEvents = await getPullRequestEvents(number)
-      const hasPullRequest = pullRequestEvents.length
+  if (eventTimestamp > limitTimestamp) return
 
-      if (hasPullRequest) return
+  const pullRequestEvents = await getPullRequestEvents(number)
+  const hasPullRequest = pullRequestEvents.length
 
-      await recursiveOctokit(() =>
-        octokit.issues.createComment({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          body: INFORMATION_COMMENT(assignee.login),
-        }),
-      )
+  if (hasPullRequest) return
 
-      await recursiveOctokit(() =>
-        octokit.issues.removeAssignees({
-          ...COMMON_PARAMS,
-          issue_number: number,
-          assignees: [assignee.login],
-        }),
-      )
+  const assigneeIds = assignees?.map(({ login }) => login)
 
-      console.log("Clear assignees", number, title)
+  if (!assigneeIds?.length) return
 
-      return
+  await recursiveOctokit(() =>
+    octokit.issues.createComment({
+      ...COMMON_PARAMS,
+      issue_number: number,
+      body: GITHUB_INFORMATION_COMMENT(assigneeIds),
     }),
   )
+
+  await recursiveOctokit(() =>
+    octokit.issues.removeAssignees({
+      ...COMMON_PARAMS,
+      issue_number: number,
+      assignees: assigneeIds,
+    }),
+  )
+
+  issue.assignee = null
+
+  console.log("Clear assignees", number, title)
 }
 
 const main = async () => {
   try {
+    constant = await getConstant()
+
     const collaborators = await getCollaborators()
 
     const issues = await getIssues()
 
-    await addHelpWantedLabel(issues)
-    await clearAssignIssues(issues, collaborators)
+    const collaboratorIds = collaborators.map(({ login }) => login)
+
+    await Promise.all(
+      issues.map(async (issue) => {
+        await clearAssignees(issue, collaboratorIds)
+        await addHelpWanted(issue)
+      }),
+    )
   } catch (e) {
     if (e instanceof Error) console.log(e.message)
   }

@@ -31,4 +31,12 @@ describe("<Skeleton />", () => {
     expect(screen.getByTestId("SkeletonCircle")).toBeInTheDocument()
     expect(screen.getByTestId("SkeletonText")).toBeInTheDocument()
   })
+  test("should render with isLoaded", () => {
+    render(
+      <>
+        <Skeleton data-testid="Skeleton" isLoaded />
+      </>,
+    )
+    expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
+  })
 })

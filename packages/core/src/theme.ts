@@ -298,38 +298,40 @@ const internalFilterStyle =
   (func: typeof omitObject | typeof pickObject) => {
     if (!isObject(target)) return target
 
-    target = func(target, keys)
+    let result = Object.assign({}, target)
 
-    Object.entries(target ?? {}).forEach(([nestedKey, value]) => {
+    result = func(result, keys)
+
+    Object.entries(result ?? {}).forEach(([nestedKey, value]) => {
       const newKeys = keys.filter((key) => key !== nestedKey)
       const newRefs = [...refs, nestedKey]
 
       if (!onValidFilterStyleKey(newRefs, isMulti)) return
 
       if (isFunction(value)) {
-        target[nestedKey] = (props) =>
+        result[nestedKey] = (props) =>
           internalFilterStyle(value(props), newKeys, isMulti, newRefs)(func)
       } else {
         if (
           func === omitObject ||
           Object.keys(value).some((key) => newKeys.includes(key))
         ) {
-          target[nestedKey] = internalFilterStyle(
+          result[nestedKey] = internalFilterStyle(
             value,
             newKeys,
             isMulti,
             newRefs,
           )(func)
         } else {
-          target[nestedKey] = merge(
-            target[nestedKey],
+          result[nestedKey] = merge(
+            result[nestedKey],
             internalFilterStyle(value, newKeys, isMulti, newRefs)(func),
           )
         }
       }
     })
 
-    return target
+    return result
   }
 
 const onValidFilterStyleKey = (keys: string[], isMulti: boolean): boolean => {

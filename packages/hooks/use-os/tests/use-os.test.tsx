@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react"
+import { renderHook } from "@yamada-ui/test"
 import { useOS } from "../src"
 
 describe("useOS", () => {

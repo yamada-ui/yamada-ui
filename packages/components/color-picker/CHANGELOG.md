@@ -1,5 +1,17 @@
 # @yamada-ui/color-picker
 
+## 1.2.18
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/button@1.0.31
+  - @yamada-ui/form-control@1.1.3
+  - @yamada-ui/icon@1.0.28
+  - @yamada-ui/input@1.0.33
+  - @yamada-ui/popover@1.2.2
+
 ## 1.2.17
 
 ### Patch Changes

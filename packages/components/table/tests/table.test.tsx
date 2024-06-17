@@ -1,6 +1,5 @@
-import { render, screen } from "@testing-library/react"
 import { PagingTable, Table } from "@yamada-ui/table"
-import { a11y } from "@yamada-ui/test"
+import { render, screen, a11y } from "@yamada-ui/test"
 
 describe("<Table />", () => {
   const columns = [{ header: "作品名", accessorKey: "name" }]

@@ -22,7 +22,7 @@ import {
   Trash,
   Users,
 } from "@yamada-ui/lucide"
-import { type FC, memo, ElementType } from "react"
+import { type FC, type ElementType, memo } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [

@@ -189,23 +189,15 @@ export const customControl: Story = () => {
     return isEditing ? (
       <ButtonGroup size="sm" gap="sm">
         <IconButton
-          icon={<Check fontSize="xl" />}
+          icon={<Check />}
           {...getSubmitProps()}
           aria-label="Submit"
         />
-        <IconButton
-          icon={<X fontSize="xl" />}
-          {...getCancelProps()}
-          aria-label="Cancel"
-        />
+        <IconButton icon={<X />} {...getCancelProps()} aria-label="Cancel" />
       </ButtonGroup>
     ) : (
       <ButtonGroup size="sm" gap="sm">
-        <IconButton
-          icon={<Pencil fontSize="xl" />}
-          {...getEditProps()}
-          aria-label="Edit"
-        />
+        <IconButton icon={<Pencil />} {...getEditProps()} aria-label="Edit" />
       </ButtonGroup>
     )
   }

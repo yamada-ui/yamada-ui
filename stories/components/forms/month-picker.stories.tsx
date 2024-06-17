@@ -283,10 +283,7 @@ export const customIcon: Story = () => {
     <>
       <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
 
-      <MonthPicker
-        placeholder="YYYY/MM"
-        iconProps={{ children: <Ghost fontSize="2xl" /> }}
-      />
+      <MonthPicker placeholder="YYYY/MM" iconProps={{ children: <Ghost /> }} />
     </>
   )
 }

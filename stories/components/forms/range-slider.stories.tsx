@@ -351,17 +351,17 @@ export const customThumb: Story = () => {
         thumbProps={{
           color: "blue.500",
           boxSize: "6",
-          children: <Activity fontSize="md" />,
+          children: <Activity />,
         }}
       />
 
       <RangeSlider>
         <RangeSliderStartThumb color="blue.500" boxSize="6">
-          <Activity fontSize="md" />
+          <Activity />
         </RangeSliderStartThumb>
 
         <RangeSliderEndThumb color="blue.500" boxSize="6">
-          <Activity fontSize="md" />
+          <Activity />
         </RangeSliderEndThumb>
       </RangeSlider>
     </>

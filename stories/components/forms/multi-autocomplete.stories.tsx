@@ -542,7 +542,7 @@ export const customIcon: Story = () => {
 
       <MultiAutocomplete
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
+        iconProps={{ children: <ChevronsDown /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -556,7 +556,7 @@ export const customClearIcon: Story = () => {
   return (
     <MultiAutocomplete
       placeholder="キャラクターを選択"
-      clearIconProps={{ children: <Trash2 fontSize="md" /> }}
+      clearIconProps={{ children: <Trash2 /> }}
     >
       <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
       <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -579,7 +579,7 @@ export const customOption: Story = () => {
 
       <MultiAutocomplete
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Check fontSize="md" color="green.500" /> }}
+        optionProps={{ icon: <Check color="green.500" /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>

@@ -312,7 +312,7 @@ export const customEyeDropperIcon: Story = () => {
       />
       <ColorPicker
         eyeDropperProps={{
-          children: <Ghost fontSize="2xl" />,
+          children: <Ghost fontSize="lg" />,
         }}
         placeholder={defaultPlaceholder}
       />

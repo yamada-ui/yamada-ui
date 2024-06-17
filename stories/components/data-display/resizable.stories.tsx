@@ -251,7 +251,7 @@ export const withIcon: Story = () => {
       <Resizable h="md" rounded="md" borderWidth="1px">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger icon={<GripVertical fontSize="xl" />} />
+        <ResizableTrigger icon={<GripVertical />} />
 
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
@@ -261,7 +261,7 @@ export const withIcon: Story = () => {
           One
         </ResizableItem>
 
-        <ResizableTrigger icon={<GripVertical fontSize="xl" />} />
+        <ResizableTrigger icon={<GripVertical />} />
 
         <ResizableItem as={Center} rounded="md" borderWidth="1px">
           Two
@@ -277,7 +277,7 @@ export const customIcon: Story = () => {
       <Resizable h="md" rounded="md" borderWidth="1px">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger icon={<MoveHorizontal fontSize="xl" />} />
+        <ResizableTrigger icon={<MoveHorizontal />} />
 
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
@@ -285,7 +285,7 @@ export const customIcon: Story = () => {
       <Resizable direction="vertical" h="md" rounded="md" borderWidth="1px">
         <ResizableItem as={Center}>One</ResizableItem>
 
-        <ResizableTrigger icon={<MoveHorizontal fontSize="xl" />} />
+        <ResizableTrigger icon={<MoveHorizontal />} />
 
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>

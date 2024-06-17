@@ -437,7 +437,7 @@ export const customIcon: Story = () => {
 
       <Autocomplete
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
+        iconProps={{ children: <ChevronsDown /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -461,7 +461,7 @@ export const customOption: Story = () => {
 
       <Autocomplete
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Check fontSize="xl" color="green.500" /> }}
+        optionProps={{ icon: <Check color="green.500" /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>

@@ -162,7 +162,7 @@ export const withTrigger: Story = () => {
       <ReorderItem label="ベジータ">
         <HStack>
           <ReorderTrigger>
-            <Ghost fontSize="md" />
+            <Ghost />
           </ReorderTrigger>
           <Text>ベジータ</Text>
         </HStack>

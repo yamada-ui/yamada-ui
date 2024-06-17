@@ -301,7 +301,7 @@ export const customIcon: Story = () => {
       <NativeSelect
         placeholder="キャラクターを選択"
         aria-label="Native Select"
-        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
+        iconProps={{ children: <ChevronsDown /> }}
       >
         <NativeOption value="孫悟空">孫悟空</NativeOption>
         <NativeOption value="ベジータ">ベジータ</NativeOption>

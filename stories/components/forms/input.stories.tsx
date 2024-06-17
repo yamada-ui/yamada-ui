@@ -153,18 +153,18 @@ export const useElement: Story = () => {
     <>
       <InputGroup>
         <InputLeftElement>
-          <Phone fontSize="xl" />
+          <Phone />
         </InputLeftElement>
         <Input type="tel" placeholder="your phone number" />
       </InputGroup>
 
       <InputGroup>
         <InputLeftElement>
-          <Mail fontSize="xl" />
+          <Mail />
         </InputLeftElement>
         <Input type="email" placeholder="your email address" />
         <InputRightElement>
-          <Check fontSize="xl" color="green.500" />
+          <Check color="green.500" />
         </InputRightElement>
       </InputGroup>
 
@@ -270,7 +270,7 @@ export const reactHookForm: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <Mail fontSize="xl" />
+            <Mail />
           </InputLeftElement>
           <Input
             type="email"
@@ -348,7 +348,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <Mail fontSize="xl" />
+            <Mail />
           </InputLeftElement>
           <Input
             type="email"

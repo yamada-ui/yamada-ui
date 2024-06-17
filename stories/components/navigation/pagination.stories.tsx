@@ -123,18 +123,9 @@ export const customControl: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Pagination
-        total={10}
-        controlProps={{ children: <Ghost fontSize="xl" /> }}
-      />
-      <Pagination
-        total={10}
-        controlPrevProps={{ children: <Ghost fontSize="xl" /> }}
-      />
-      <Pagination
-        total={10}
-        controlNextProps={{ children: <Ghost fontSize="xl" /> }}
-      />
+      <Pagination total={10} controlProps={{ children: <Ghost /> }} />
+      <Pagination total={10} controlPrevProps={{ children: <Ghost /> }} />
+      <Pagination total={10} controlNextProps={{ children: <Ghost /> }} />
     </>
   )
 }
@@ -142,20 +133,16 @@ export const customControlButton: Story = () => {
 export const customEdgeButton: Story = () => {
   return (
     <>
+      <Pagination total={10} withEdges edgeProps={{ children: <Ghost /> }} />
       <Pagination
         total={10}
         withEdges
-        edgeProps={{ children: <Ghost fontSize="xl" /> }}
+        edgeFirstProps={{ children: <Ghost /> }}
       />
       <Pagination
         total={10}
         withEdges
-        edgeFirstProps={{ children: <Ghost fontSize="xl" /> }}
-      />
-      <Pagination
-        total={10}
-        withEdges
-        edgeLastProps={{ children: <Ghost fontSize="xl" /> }}
+        edgeLastProps={{ children: <Ghost /> }}
       />
     </>
   )

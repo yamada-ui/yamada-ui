@@ -281,13 +281,13 @@ export const customThumb: Story = () => {
         thumbProps={{
           color: "blue.500",
           boxSize: "6",
-          children: <Activity fontSize="md" />,
+          children: <Activity />,
         }}
       />
 
       <Slider>
         <SliderThumb color="blue.500" boxSize="6">
-          <Activity fontSize="md" />
+          <Activity />
         </SliderThumb>
       </Slider>
     </>

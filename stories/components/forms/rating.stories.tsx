@@ -149,19 +149,19 @@ export const customIcon: Story = () => {
   const getIcon = (value: number) => {
     switch (value) {
       case 1:
-        return <Angry fontSize="xl" />
+        return <Angry />
 
       case 2:
-        return <Frown fontSize="xl" />
+        return <Frown />
 
       case 3:
-        return <Smile fontSize="xl" />
+        return <Smile />
 
       case 4:
-        return <Laugh fontSize="xl" />
+        return <Laugh />
 
       case 5:
-        return <SmilePlus fontSize="xl" />
+        return <SmilePlus />
 
       default:
         return null
@@ -170,17 +170,13 @@ export const customIcon: Story = () => {
 
   return (
     <>
-      <Rating
-        defaultValue={3}
-        emptyIcon={<Ghost fontSize="xl" />}
-        filledIcon={<Ghost fontSize="xl" />}
-      />
+      <Rating defaultValue={3} emptyIcon={<Ghost />} filledIcon={<Ghost />} />
 
       <Rating
         defaultValue={2}
         fractions={3}
-        emptyIcon={<Ghost fontSize="xl" />}
-        filledIcon={<Ghost fontSize="xl" />}
+        emptyIcon={<Ghost />}
+        filledIcon={<Ghost />}
       />
 
       <Rating gap="xs" emptyIcon={getIcon} filledIcon={getIcon} />

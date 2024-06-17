@@ -119,7 +119,9 @@ export const withStatus: Story = () => {
   return (
     <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
       <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
-        <DropzoneAccept></DropzoneAccept>
+        <DropzoneAccept>
+          <Upload fontSize="6xl" color="success" />
+        </DropzoneAccept>
 
         <DropzoneReject>
           <X fontSize="6xl" color="danger" />

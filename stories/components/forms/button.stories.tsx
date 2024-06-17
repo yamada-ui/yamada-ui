@@ -368,35 +368,23 @@ export const withDisabled: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button
-        colorScheme="primary"
-        variant="solid"
-        leftIcon={<Plus fontSize="2xl" />}
-      >
+      <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        rightIcon={<ArrowRight fontSize="2xl" />}
+        rightIcon={<ArrowRight />}
       >
         Button
       </Button>
 
-      <Button
-        colorScheme="warning"
-        variant="ghost"
-        leftIcon={<Mail fontSize="2xl" />}
-      >
+      <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
         Button
       </Button>
 
-      <Button
-        colorScheme="danger"
-        variant="link"
-        leftIcon={<Check fontSize="2xl" />}
-      >
+      <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
         Button
       </Button>
     </Wrap>
@@ -489,7 +477,7 @@ export const buttonGroup: Story = () => {
     <>
       <ButtonGroup isAttached variant="outline">
         <Button>Button</Button>
-        <IconButton icon={<Plus fontSize="2xl" />} aria-label="Add" />
+        <IconButton icon={<Plus />} aria-label="Add" />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">

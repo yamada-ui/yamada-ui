@@ -250,10 +250,7 @@ export const customIcon: Story = () => {
     <>
       <YearPicker placeholder="YYYY" iconProps={{ color: "primary" }} />
 
-      <YearPicker
-        placeholder="YYYY"
-        iconProps={{ children: <Ghost fontSize="2xl" /> }}
-      />
+      <YearPicker placeholder="YYYY" iconProps={{ children: <Ghost /> }} />
     </>
   )
 }

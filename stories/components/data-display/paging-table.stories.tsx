@@ -624,7 +624,7 @@ export const customPagination: Story = () => {
 
             <IconButton
               size="sm"
-              icon={<ChevronLeft fontSize="2xl" />}
+              icon={<ChevronLeft fontSize="lg" />}
               isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
               aria-label="Go to previous page"
@@ -642,7 +642,7 @@ export const customPagination: Story = () => {
 
             <IconButton
               size="sm"
-              icon={<ChevronRight fontSize="2xl" />}
+              icon={<ChevronRight fontSize="lg" />}
               isDisabled={!getCanNextPage()}
               onClick={nextPage}
               aria-label="Go to next page"

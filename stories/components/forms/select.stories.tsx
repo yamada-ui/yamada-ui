@@ -286,7 +286,7 @@ export const customIcon: Story = () => {
 
       <Select
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
+        iconProps={{ children: <ChevronsDown /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -310,7 +310,7 @@ export const customOption: Story = () => {
 
       <Select
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Check fontSize="xl" color="green.500" /> }}
+        optionProps={{ icon: <Check color="green.500" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>

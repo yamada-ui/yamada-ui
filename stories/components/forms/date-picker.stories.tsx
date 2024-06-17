@@ -445,7 +445,7 @@ export const customIcon: Story = () => {
 
       <DatePicker
         placeholder="YYYY/MM/DD"
-        iconProps={{ children: <Ghost fontSize="2xl" /> }}
+        iconProps={{ children: <Ghost /> }}
       />
     </>
   )

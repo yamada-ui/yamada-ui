@@ -630,7 +630,7 @@ export const customControl: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Carousel controlProps={{ icon: <Ghost fontSize="2xl" /> }}>
+      <Carousel controlProps={{ icon: <Ghost /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -645,7 +645,7 @@ export const customControlButton: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlPrevProps={{ icon: <ArrowLeft fontSize="2xl" /> }}>
+      <Carousel controlPrevProps={{ icon: <ArrowLeft /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -660,7 +660,7 @@ export const customControlButton: Story = () => {
         </CarouselSlide>
       </Carousel>
 
-      <Carousel controlNextProps={{ icon: <ArrowRight fontSize="2xl" /> }}>
+      <Carousel controlNextProps={{ icon: <ArrowRight /> }}>
         <CarouselSlide as={Center} bg="primary">
           1
         </CarouselSlide>
@@ -676,8 +676,8 @@ export const customControlButton: Story = () => {
       </Carousel>
 
       <Carousel>
-        <CarouselControlPrev icon={<ArrowLeft fontSize="2xl" />} />
-        <CarouselControlNext icon={<ArrowRight fontSize="2xl" />} />
+        <CarouselControlPrev icon={<ArrowLeft />} />
+        <CarouselControlNext icon={<ArrowRight />} />
 
         <CarouselSlide as={Center} bg="primary">
           1

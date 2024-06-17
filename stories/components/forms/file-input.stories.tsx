@@ -163,7 +163,7 @@ export const useAddon: Story = () => {
   return (
     <InputGroup>
       <InputLeftAddon>
-        <File fontSize="xl" />
+        <File />
       </InputLeftAddon>
       <FileInput type="tel" placeholder="Please upload file" />
     </InputGroup>
@@ -174,7 +174,7 @@ export const useElement: Story = () => {
   return (
     <InputGroup>
       <InputLeftElement>
-        <File fontSize="xl" color="gray.500" />
+        <File color="gray.500" />
       </InputLeftElement>
       <FileInput type="email" placeholder="Please upload file" />
     </InputGroup>
@@ -204,7 +204,7 @@ export const useReset: Story = () => {
 
         {value?.length ? (
           <InputRightElement isClick onClick={onReset}>
-            <X fontSize="xl" color="gray.500" />
+            <X color="gray.500" />
           </InputRightElement>
         ) : null}
       </InputGroup>
@@ -261,7 +261,7 @@ export const reactHookForm: Story = () => {
 
               {field.value?.length ? (
                 <InputRightElement isClick onClick={onReset}>
-                  <X fontSize="xl" color="gray.500" />
+                  <X color="gray.500" />
                 </InputRightElement>
               ) : null}
             </InputGroup>

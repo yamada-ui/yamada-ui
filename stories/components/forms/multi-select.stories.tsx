@@ -375,7 +375,7 @@ export const customIcon: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        iconProps={{ children: <ChevronsDown fontSize="xl" /> }}
+        iconProps={{ children: <ChevronsDown /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>
@@ -389,7 +389,7 @@ export const customClearIcon: Story = () => {
   return (
     <MultiSelect
       placeholder="キャラクターを選択"
-      clearIconProps={{ children: <Trash2 fontSize="md" /> }}
+      clearIconProps={{ children: <Trash2 /> }}
     >
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
@@ -412,7 +412,7 @@ export const customOption: Story = () => {
 
       <MultiSelect
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Check fontSize="md" color="green.500" /> }}
+        optionProps={{ icon: <Check color="green.500" /> }}
       >
         <Option value="孫悟空">孫悟空</Option>
         <Option value="ベジータ">ベジータ</Option>

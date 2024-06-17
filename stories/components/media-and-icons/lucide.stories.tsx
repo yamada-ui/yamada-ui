@@ -1,6 +1,7 @@
+import { burger } from "@lucide/lab"
 import type { Meta, StoryFn } from "@storybook/react"
 import type { IconNames } from "@yamada-ui/lucide"
-import { Ghost, Pizza, icons } from "@yamada-ui/lucide"
+import { Ghost, Icon, icons } from "@yamada-ui/lucide"
 import type { IconProps } from "@yamada-ui/react"
 import { HStack } from "@yamada-ui/react"
 import type { FC } from "react"
@@ -33,7 +34,7 @@ export const basic: Story = () => {
 }
 
 export const customIcon: Story = () => {
-  return <Pizza fontSize="4xl" />
+  return <Icon icon={burger} fontSize="4xl" />
 }
 
 export const oneGenericIcon: Story = () => {

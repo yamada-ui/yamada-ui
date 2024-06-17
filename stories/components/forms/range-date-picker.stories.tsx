@@ -471,7 +471,7 @@ export const customIcon: Story = () => {
 
       <RangeDatePicker
         placeholder="YYYY/MM/DD"
-        iconProps={{ children: <Ghost fontSize="2xl" /> }}
+        iconProps={{ children: <Ghost /> }}
       />
     </>
   )

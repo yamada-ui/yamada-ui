@@ -14,17 +14,17 @@ export default meta
 export const basic: Story = () => {
   return (
     <HStack alignItems="flex-end">
-      <Icon as={FaRobot} size="6xl" color="gray.400" />
+      <Icon as={FaRobot} fontSize="6xl" color="gray.400" />
 
-      <Icon as={FaRobot} size="5xl" color="gray.400" />
+      <Icon as={FaRobot} fontSize="5xl" color="gray.400" />
 
-      <Icon as={FaRobot} size="4xl" color="gray.400" />
+      <Icon as={FaRobot} fontSize="4xl" color="gray.400" />
 
-      <Icon as={FaRobot} size="3xl" color="gray.400" />
+      <Icon as={FaRobot} fontSize="3xl" color="gray.400" />
 
-      <Icon as={FaRobot} size="2xl" color="gray.400" />
+      <Icon as={FaRobot} fontSize="2xl" color="gray.400" />
 
-      <Icon as={FaRobot} size="xl" color="gray.400" />
+      <Icon as={FaRobot} fontSize="xl" color="gray.400" />
     </HStack>
   )
 }

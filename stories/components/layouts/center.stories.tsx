@@ -1,6 +1,5 @@
-import { faSkull } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Skull } from "@yamada-ui/lucide"
 import { Center } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Center>
@@ -23,7 +22,7 @@ export const basic: Story = () => {
 export const iconWithFrame: Story = () => {
   return (
     <Center minW="6xs" minH="6xs" rounded="full" bg="gray.500" color="white">
-      <Icon icon={faSkull} size="3xl" />
+      <Skull fontSize="3xl" />
     </Center>
   )
 }

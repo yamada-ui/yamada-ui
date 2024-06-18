@@ -1,6 +1,5 @@
-import { faCheck, faPen, faXmark } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Check, Pencil, X } from "@yamada-ui/lucide"
 import {
   ButtonGroup,
   Editable,
@@ -190,23 +189,15 @@ export const customControl: Story = () => {
     return isEditing ? (
       <ButtonGroup size="sm" gap="sm">
         <IconButton
-          icon={<Icon icon={faCheck} />}
+          icon={<Check />}
           {...getSubmitProps()}
           aria-label="Submit"
         />
-        <IconButton
-          icon={<Icon icon={faXmark} />}
-          {...getCancelProps()}
-          aria-label="Cancel"
-        />
+        <IconButton icon={<X />} {...getCancelProps()} aria-label="Cancel" />
       </ButtonGroup>
     ) : (
       <ButtonGroup size="sm" gap="sm">
-        <IconButton
-          icon={<Icon icon={faPen} />}
-          {...getEditProps()}
-          aria-label="Edit"
-        />
+        <IconButton icon={<Pencil />} {...getEditProps()} aria-label="Edit" />
       </ButtonGroup>
     )
   }

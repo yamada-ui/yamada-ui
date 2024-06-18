@@ -7,7 +7,6 @@ import { forwardRef } from "@yamada-ui/core"
 import type { IconProps as UIIconProps } from "@yamada-ui/icon"
 import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import type { ElementType } from "react"
 import { useMemo } from "react"
 
 type IconOptions = {
@@ -17,7 +16,7 @@ type IconOptions = {
    *
    * @see Docs https://fontawesome.com/v5/docs/web/use-with/react
    */
-  icon: IconDefinition | IconProp | ElementType
+  icon: IconDefinition | IconProp
 }
 
 export type IconProps = UIIconProps & IconOptions

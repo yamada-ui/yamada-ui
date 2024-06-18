@@ -1,4 +1,4 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject, ComponentArgs } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { HTMLMotionProps, DragControls } from "@yamada-ui/motion"
 import {
@@ -7,6 +7,7 @@ import {
   useDragControls,
 } from "@yamada-ui/motion"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
+import type { ForwardedRef, ReactNode } from "react"
 import { forwardRef, useCallback, useEffect, useState } from "react"
 import { useReorderContext } from "./reorder"
 
@@ -22,19 +23,29 @@ export const [ReorderItemProvider, useReorderItemContext] =
     errorMessage: `useReorderItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<ReorderItem />"`,
   })
 
-type ReorderItemOptions = {
+type ReorderItemOptions<Y extends any = string> = {
   /**
    * The label of the reorder item.
    */
-  label: string | number
+  label?: ReactNode
+  /**
+   * The value of the reorder item.
+   */
+  value: Y
 }
 
-export type ReorderItemProps = Omit<HTMLUIProps<"li">, "as"> &
-  Omit<HTMLMotionProps<"li">, "as" | "layout"> &
-  ReorderItemOptions
+export type ReorderItemProps<Y extends any = string> = Omit<
+  HTMLUIProps<"li">,
+  "as" | "value"
+> &
+  Omit<HTMLMotionProps<"li">, "as" | "layout" | "value"> &
+  ReorderItemOptions<Y>
 
-export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
-  ({ className, label, ...rest }, ref) => {
+export const ReorderItem = forwardRef(
+  <Y extends any = string>(
+    { className, label, value, children, ...rest }: ReorderItemProps<Y>,
+    ref: ForwardedRef<HTMLLIElement>,
+  ) => {
     const { orientation, styles } = useReorderContext()
 
     const dragControls = useDragControls()
@@ -65,12 +76,15 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
     }, [orientation, x, y])
 
     const css: CSSUIObject = {
+      _selected: {
+        cursor: "grabbing",
+      },
       ...(!hasTrigger ? { cursor: "grab" } : { userSelect: "none" }),
       ...styles.item,
       ...(!hasTrigger
         ? {
             _selected: {
-              ...(styles.item as any)?._selected,
+              ...styles.item?._selected,
               cursor: "grabbing",
             },
           }
@@ -83,18 +97,23 @@ export const ReorderItem = forwardRef<HTMLLIElement, ReorderItemProps>(
           ref={ref}
           as={MotionReorder.Item}
           className={cx("ui-reorder__item", className)}
-          value={label}
+          value={value}
           __css={css}
           {...rest}
-          // @ts-ignore
           dragListener={!hasTrigger}
           dragControls={dragControls}
           data-selected={dataAttr(isDrag)}
           style={{ ...rest.style, x, y }}
-        />
+        >
+          {children ?? label}
+        </ui.li>
       </ReorderItemProvider>
     )
   },
-)
+) as {
+  <Y extends any = string>(
+    props: ReorderItemProps<Y> & { ref?: ForwardedRef<HTMLLIElement> },
+  ): JSX.Element
+} & ComponentArgs
 
 ReorderItem.displayName = "ReorderItem"

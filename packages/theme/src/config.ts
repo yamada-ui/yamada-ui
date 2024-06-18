@@ -4,5 +4,5 @@ export const config: ThemeConfig = {
   initialThemeScheme: "base",
   initialColorMode: "light",
   var: { prefix: "ui" },
-  breakpoint: { direction: "down" },
+  breakpoint: { direction: "down", identifier: "@media screen" },
 }

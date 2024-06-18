@@ -86,7 +86,7 @@ const getResponsiveStyles =
       )({ isMulti })
     } else {
       const { queries = [] } = props.theme.__breakpoints ?? {}
-      const { direction = "down", identifier = "@media screen" } =
+      const { direction = "down", identifier } =
         props.theme.__config?.breakpoint ?? {}
       const isDown = direction !== "up"
 

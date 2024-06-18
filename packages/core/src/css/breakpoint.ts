@@ -21,8 +21,8 @@ type Breakpoints = {
 }
 
 export const createQuery = (
-  min?: number,
-  max?: number,
+  min: number | undefined,
+  max: number | undefined,
   identifier: string = "@media screen",
 ): string | undefined => {
   const query = [identifier]

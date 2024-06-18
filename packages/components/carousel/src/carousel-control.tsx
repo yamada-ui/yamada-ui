@@ -68,8 +68,6 @@ const CarouselControl = forwardRef<
   const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha")
 
   const css: CSSUIObject = {
-    position: "absolute",
-    zIndex: "fallback(kurillin, 9)",
     ...styles.control,
     ...styles[operation],
   }

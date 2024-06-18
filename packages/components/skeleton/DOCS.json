@@ -98,12 +98,6 @@
       "required": false,
       "description": "The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition."
     },
-    "isFitContent": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the skeleton will take the width of it's children."
-    },
     "isLoaded": {
       "type": "boolean",
       "defaultValue": false,

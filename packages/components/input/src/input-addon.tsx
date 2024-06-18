@@ -32,11 +32,6 @@ const InputAddon = forwardRef<InputAddonProps, "div">(
     }
 
     const css: CSSUIObject = {
-      flex: "0 0 auto",
-      w: "auto",
-      display: "flex",
-      alignItems: "center",
-      whiteSpace: "nowrap",
       ...styles.addon,
       ...placementStyles[placement],
     }

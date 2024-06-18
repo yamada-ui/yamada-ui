@@ -3,7 +3,7 @@
     "icon": {
       "type": "IconDefinition | IconProp",
       "required": true,
-      "description": "The icon of the font awesome.\nCheck the docs to see the icon of possible modifiers you can pass.",
+      "description": "The icon of the [Font Awesome](https://fontawesome.com).\nCheck the docs to see the icon of possible modifiers you can pass.",
       "see": "https://fontawesome.com/v5/docs/web/use-with/react"
     },
     "size": {

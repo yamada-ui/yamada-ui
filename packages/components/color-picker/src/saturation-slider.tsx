@@ -115,11 +115,6 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
               key={index}
               className="ui-saturation-slider__overlay"
               __css={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
                 ...styles.overlay,
               }}
               {...props}
@@ -129,9 +124,6 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
           <ui.div
             className="ui-saturation-slider__track"
             __css={{
-              position: "relative",
-              w: "100%",
-              h: "100%",
               ...styles.track,
             }}
             {...getTrackProps(trackProps)}

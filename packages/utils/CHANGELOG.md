@@ -1,5 +1,13 @@
 # @yamada-ui/utils
 
+## 1.2.1
+
+### Patch Changes
+
+- [#1999](https://github.com/yamada-ui/yamada-ui/pull/1999) [`55fa828`](https://github.com/yamada-ui/yamada-ui/commit/55fa8285c6a74ec9d919b50251f91b3c06b58a70) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated import paths for better clarity.
+
+- [#1684](https://github.com/yamada-ui/yamada-ui/pull/1684) [`5ec5a23`](https://github.com/yamada-ui/yamada-ui/commit/5ec5a231cc134a280eeb7841f99348c74cd4b948) Thanks [@yasuaki640](https://github.com/yasuaki640)! - Fixed isRefObject to return false if null or undefined is passed.
+
 ## 1.2.0
 
 ### Minor Changes

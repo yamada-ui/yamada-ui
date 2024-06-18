@@ -71,7 +71,6 @@ export const MonthList: FC<MonthListProps> = ({
           h: styles.content?.h ?? styles.content?.height,
           minH: styles.content?.minH ?? styles.content?.minHeight,
           maxH: styles.content?.maxH ?? styles.content?.maxHeight,
-          display: "grid",
           ...styles.month,
         }}
         {...getContainerProps(
@@ -84,11 +83,6 @@ export const MonthList: FC<MonthListProps> = ({
             className="ui-calendar__month-list-button"
             variant="ghost"
             __css={{
-              minW: "auto",
-              h: "auto",
-              p: 0,
-              fontSize: undefined,
-              fontWeight: "normal",
               ...styles.button,
             }}
             {...getButtonProps({ ...computedMonthProps, value: index })}

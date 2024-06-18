@@ -25,19 +25,12 @@ const InputElement = forwardRef<InputElementProps, "div">(
     const styles = useInputGroup()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      top: "0",
       [placement === "left" ? "insetStart" : "insetEnd"]: "0",
-      zIndex: "fallback(kurillin, 9)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
       w:
         styles.field?.height ??
         styles.field?.h ??
         styles.field?.minHeight ??
         styles.field?.minH,
-      h: "100%",
       fontSize: styles.field?.fontSize,
       pointerEvents: isClick ? "auto" : "none",
       cursor: isClick ? "pointer" : "auto",

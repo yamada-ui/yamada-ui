@@ -56,9 +56,6 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
     useCalendarHeader({ index })
 
   const css: CSSUIObject = {
-    display: "flex",
-    alignItems: "center",
-    w: "100%",
     ...styles.header,
   }
   const { icon: iconElOrProps, ...computedLabelProps } = labelProps ?? {}
@@ -111,11 +108,6 @@ const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
   const { styles } = useCalendarContext()
 
   const css: CSSUIObject = {
-    flex: 1,
-    h: "auto",
-    fontSize: undefined,
-    fontWeight: "normal",
-    gap: 1,
     ...styles.label,
   }
 
@@ -186,8 +178,6 @@ const CalendarControl: FC<
   const { styles } = useCalendarContext()
 
   const css: CSSUIObject = {
-    minW: "auto",
-    h: "auto",
     ...styles.control,
     ...styles[operation],
   }

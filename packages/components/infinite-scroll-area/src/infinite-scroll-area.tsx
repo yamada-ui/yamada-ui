@@ -91,10 +91,7 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
 
     const css: CSSUIObject = useMemo(
       () => ({
-        w: "100%",
-        display: "flex",
         flexDirection: isVertical ? "column" : "row",
-        gap: "1rem",
         ...styles.container,
       }),
       [isVertical, styles],
@@ -138,11 +135,6 @@ const InfiniteScrollTrigger = forwardRef<InfiniteScrollTrigger, "div">(
     const styles = useInfiniteScrollAreaContext()
     const css: CSSUIObject = useMemo(
       () => ({
-        w: "100%",
-        flex: 1,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         ...styles.trigger,
       }),
       [styles],

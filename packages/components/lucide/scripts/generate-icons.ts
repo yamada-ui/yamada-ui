@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "fs/promises"
+import { readdir, readFile, unlink, writeFile } from "fs/promises"
 import path from "path"
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
@@ -23,6 +23,14 @@ export const prettier = async (content: string, options?: Options) => {
   } catch {
     return content
   }
+}
+
+const clearIcons = async () => {
+  const fileNames = await readdir(DIST_PATH)
+
+  await Promise.all(
+    fileNames.map((fileName) => unlink(path.resolve(DIST_PATH, fileName))),
+  )
 }
 
 const getIconNames = async () => {
@@ -77,7 +85,7 @@ const createIcons = (iconNames: string[]) =>
 const createTypes = async (iconNames: string[]) => {
   const fileName = "index.types.ts"
   let data = [
-    `export type IconNames = ${iconNames.map((iconName) => `\"${iconName}\"`).join(" | ")}`,
+    `export type IconNames = ${iconNames.flatMap((iconName) => [`\"${iconName}\"`, `\"${iconName}Icon\"`]).join(" | ")}`,
   ].join("\n")
 
   data = await prettier(data)
@@ -86,6 +94,8 @@ const createTypes = async (iconNames: string[]) => {
 }
 
 const main = async () => {
+  await clearIcons()
+
   const iconNames = await getIconNames()
 
   await createIcons(iconNames)
@@ -95,8 +105,8 @@ const main = async () => {
     const fileName = toKebabCase(iconName)
 
     return [
-      `export { ${iconName} } from "./${fileName}"`,
-      `export type { ${iconName}Props } from "./${fileName}"`,
+      `export { ${iconName}, ${iconName} as ${iconName}Icon } from "./${fileName}"`,
+      `export type { ${iconName}Props, ${iconName}Props as ${iconName}IconProps } from "./${fileName}"`,
     ]
   })
 

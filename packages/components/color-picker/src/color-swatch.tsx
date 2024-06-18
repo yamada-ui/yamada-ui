@@ -93,26 +93,6 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
-    position: "relative",
-    _before: {
-      content: `""`,
-      display: "block",
-      h: 0,
-      pb: "100%",
-    },
-    "& > *": {
-      overflow: "hidden",
-      position: "absolute",
-      top: "0",
-      right: "0",
-      bottom: "0",
-      left: "0",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      w: "100%",
-      h: "100%",
-    },
     ...styles.container,
     ...__css,
   }
@@ -130,11 +110,6 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
           <ui.div
             key={index}
             __css={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
               ...styles.overlay,
             }}
             {...(isRounded ? { rounded: "fallback(full, 9999px)" } : {})}

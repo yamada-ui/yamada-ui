@@ -101,8 +101,6 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -117,7 +115,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
         >
           <ui.div
             className="ui-month-picker__inner"
-            __css={{ position: "relative", ...styles.inner }}
+            __css={{ ...styles.inner }}
           >
             <DatePickerField
               className="ui-month-picker__field"

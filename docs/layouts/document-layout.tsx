@@ -17,7 +17,7 @@ import { usePage } from "contexts/page-context"
 import type { FC, PropsWithChildren } from "react"
 
 export type DocumentLayoutProps = PropsWithChildren<
-  DocumentTypes & DocumentData
+  Partial<DocumentTypes & DocumentData>
 >
 
 export const DocumentLayout: FC<DocumentLayoutProps> = ({
@@ -58,7 +58,7 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
             py={{ base: "lg", md: "normal" }}
             pl={{ base: "md", lg: "0" }}
             pr={
-              with_table_of_contents && contents.length
+              with_table_of_contents && contents?.length
                 ? { base: "md", xl: "0" }
                 : undefined
             }
@@ -90,13 +90,13 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
                 </>
               ) : null}
 
-              <EditPageLink href={editUrl} />
+              {editUrl ? <EditPageLink href={editUrl} /> : null}
 
               <Pagination />
             </Box>
           </VStack>
 
-          {with_table_of_contents && contents.length ? (
+          {with_table_of_contents && contents?.length ? (
             <TableOfContents
               display={{ base: "flex", xl: "none" }}
               contents={contents}

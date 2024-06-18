@@ -138,7 +138,6 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
       })
 
     const css: CSSUIObject = {
-      position: "relative",
       ...styles.container,
       ...__css,
     }
@@ -156,11 +155,6 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
             key={index}
             className="ui-alpha-slider__overlay"
             __css={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
               ...styles.overlay,
             }}
             {...props}
@@ -170,9 +164,6 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
         <ui.div
           className="ui-alpha-slider__track"
           __css={{
-            position: "relative",
-            w: "100%",
-            h: "100%",
             ...styles.track,
           }}
           {...getTrackProps(trackProps)}

@@ -108,8 +108,6 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   minH ??= minHeight
 
   const css: CSSUIObject = {
-    w: "100%",
-    h: "fit-content",
     color,
     ...styles.container,
   }
@@ -122,10 +120,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
           __css={css}
           {...getContainerProps(containerProps)}
         >
-          <ui.div
-            className="ui-date-picker__inner"
-            __css={{ position: "relative", ...styles.inner }}
-          >
+          <ui.div className="ui-date-picker__inner" __css={{ ...styles.inner }}>
             <DatePickerField
               {...getFieldProps({ h, minH }, ref)}
               inputProps={getInputProps(inputProps)}
@@ -172,11 +167,8 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
       inputProps as RefAttributes<HTMLInputElement> & HTMLUIProps<"input">
 
     const css: CSSUIObject = {
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
       ...styles.field,
     }
 
@@ -208,14 +200,6 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
     const styles = useDatePickerContext()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      pointerEvents: "none",
-      cursor: "pointer",
       ...styles.icon,
       ...__css,
     }

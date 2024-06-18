@@ -28,13 +28,26 @@ export const LineChart: ComponentMultiStyle = {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "xs",
     },
-    line: {},
+    line: {
+      fillOpacity: "var(--ui-fill-opacity)",
+      strokeOpacity: "var(--ui-fill-opacity)",
+    },
+    dimLine: {
+      fillOpacity: 0,
+      strokeOpacity: 0.3,
+    },
     dot: {
+      fillOpacity: 1,
+      strokeOpacity: 1,
       strokeWidth: 2,
     },
     activeDot: {
       strokeWidth: 2,
       fill: ["white", "black"],
+    },
+    dimDot: {
+      fillOpacity: 0,
+      strokeOpacity: 0,
     },
     legend: {
       display: "flex",

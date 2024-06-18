@@ -164,7 +164,6 @@ export const usePieChart = ({
 
   const cellClassName = useMemo(() => {
     const resolvedCellProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
       ...styles.cell,
       ...computedCellProps,
     }
@@ -173,15 +172,15 @@ export const usePieChart = ({
   }, [computedCellProps, styles.cell, theme])
 
   const dimCellClassName = useMemo(() => {
-    const resolvedDimCell = { fillOpacity: 0.3, strokeOpacity: 0, ...dimCell }
+    const resolvedDimCell = { ...styles.dimCell, ...dimCell }
 
     return getClassName(resolvedDimCell)(theme)
-  }, [dimCell, theme])
+  }, [dimCell, styles.dimCell, theme])
 
   const activeShapeProps = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [{ _focus: { outline: "none" }, ...activeShape }, pieProperties],
+        [{ ...activeShape }, pieProperties],
         styles.activeShape,
       )(theme, true),
     [activeShape, styles.activeShape, theme],
@@ -197,7 +196,7 @@ export const usePieChart = ({
   )
 
   const labelClassName = useMemo(
-    () => getClassName({ fillOpacity: 1, ...styles.label, ...label })(theme),
+    () => getClassName({ ...styles.label, ...label })(theme),
     [label, styles.label, theme],
   )
 

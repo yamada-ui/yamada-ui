@@ -3,7 +3,21 @@ import { LineChart } from "./line-chart"
 
 export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
-    radar: {},
+    radar: {
+      fillOpacity: "var(--ui-fill-opacity)",
+    },
+    dimRadar: {
+      fillOpacity: 0.3,
+      strokeOpacity: 0.3,
+    },
+    dot: {
+      fillOpacity: 1,
+      strokeWidth: 2,
+    },
+    dimDot: {
+      fillOpacity: 0,
+      strokeOpacity: 0,
+    },
     polarGrid: {
       stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,

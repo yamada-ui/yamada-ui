@@ -202,7 +202,6 @@ export const useRadarChart = ({
 
   const [radarProps, radarClassName] = useMemo(() => {
     const resolvedRadarProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
       ...computedRadarProps,
     }
 
@@ -214,18 +213,17 @@ export const useRadarChart = ({
 
   const [dimRadarProps, dimRadarClassName] = useMemo(() => {
     const resolvedDimRadar = {
-      fillOpacity: 0.3,
-      strokeOpacity: 0.3,
       ...dimRadar,
     }
 
-    return getComponentProps<Dict, string>([resolvedDimRadar, radarProperties])(
-      theme,
-    )
-  }, [dimRadar, theme])
+    return getComponentProps<Dict, string>(
+      [resolvedDimRadar, radarProperties],
+      styles.dimRadar,
+    )(theme)
+  }, [dimRadar, styles.dimRadar, theme])
 
   const [dotProps, dotClassName] = useMemo(() => {
-    const resolvedDot = { fillOpacity: 1, strokeWidth: 2, ...dot }
+    const resolvedDot = { ...dot }
 
     return getComponentProps<Dict, string>(
       [resolvedDot, dotProperties],
@@ -243,11 +241,12 @@ export const useRadarChart = ({
   )
 
   const [dimDotProps, dimDotClassName] = useMemo(() => {
-    const resolvedDimDot = { fillOpacity: 0, strokeOpacity: 0, ...dimDot }
-    return getComponentProps<Dict, string>([resolvedDimDot, dotProperties])(
-      theme,
-    )
-  }, [dimDot, theme])
+    const resolvedDimDot = { ...dimDot }
+    return getComponentProps<Dict, string>(
+      [resolvedDimDot, dotProperties],
+      styles.dimDot,
+    )(theme)
+  }, [dimDot, styles.dimDot, theme])
 
   const radarPropList = useMemo(
     () =>

@@ -4,7 +4,6 @@ import {
   Divider,
   HStack,
   Heading,
-  Icon,
   IconButton,
   Spacer,
   Switch,
@@ -14,7 +13,12 @@ import {
   VStack,
   assignRef,
 } from "@yamada-ui/react"
-import type { IconButtonProps, StackProps } from "@yamada-ui/react"
+import type {
+  Component,
+  IconButtonProps,
+  IconProps,
+  StackProps,
+} from "@yamada-ui/react"
 import {
   Reply,
   ReplyAll,
@@ -25,7 +29,7 @@ import {
   EllipsisVertical,
 } from "@yamada-ui/lucide"
 import { memo, useState } from "react"
-import type { MutableRefObject, FC, ElementType } from "react"
+import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"
 import { Header } from "./header"
 import { getTimestamp } from "./utils"
@@ -146,20 +150,22 @@ export const Detail: FC<DetailProps> = memo(
 Detail.displayName = "Detail"
 
 type ControlIconProps = Omit<IconButtonProps, "icon"> & {
-  icon: ElementType
+  icon: Component<"svg", IconProps>
   label?: string
 }
 
-const ControlIcon: FC<ControlIconProps> = memo(({ icon, label, ...rest }) => {
-  return (
-    <Tooltip label={label} placement="top">
-      <IconButton
-        icon={<Icon as={icon} size="md" color="muted" />}
-        variant="ghost"
-        {...rest}
-      />
-    </Tooltip>
-  )
-})
+const ControlIcon: FC<ControlIconProps> = memo(
+  ({ icon: Icon, label, ...rest }) => {
+    return (
+      <Tooltip label={label} placement="top">
+        <IconButton
+          icon={<Icon size="md" color="muted" />}
+          variant="ghost"
+          {...rest}
+        />
+      </Tooltip>
+    )
+  },
+)
 
 ControlIcon.displayName = "ControlIcon"

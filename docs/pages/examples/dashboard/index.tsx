@@ -4,7 +4,6 @@ import {
   Grid,
   HStack,
   Heading,
-  Icon,
   IconButton,
   Menu,
   MenuButton,
@@ -84,7 +83,7 @@ const Content: FC<ContentProps> = memo(({ children, ...rest }) => {
               variant="ghost"
               display={{ base: "none", md: "flex" }}
             >
-              <Icon as={ChevronDown} fontSize="2xl" />
+              <ChevronDown fontSize="2xl" />
             </MenuButton>
 
             <MenuList>

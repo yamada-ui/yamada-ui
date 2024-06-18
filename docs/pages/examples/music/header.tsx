@@ -1,5 +1,4 @@
 import { Globe, Mic } from "@yamada-ui/lucide"
-import { Icon } from "@yamada-ui/react"
 import {
   Button,
   HStack,
@@ -152,12 +151,12 @@ const EDIT_MENU_ITEMS: MenuItem[] = [
     items: [
       {
         label: "Smart Dictation…",
-        icon: <Icon as={Mic} fontSize="1.5em" />,
+        icon: <Mic fontSize="1.5em" />,
         flexDirection: "row-reverse",
       },
       {
         label: "Emoji & Symbols…",
-        icon: <Icon as={Globe} fontSize="1.5em" />,
+        icon: <Globe fontSize="1.5em" />,
         flexDirection: "row-reverse",
       },
     ],

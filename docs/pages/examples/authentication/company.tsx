@@ -1,4 +1,4 @@
-import { Heading, HStack, Icon, Spacer, Text, VStack } from "@yamada-ui/react"
+import { Heading, HStack, Spacer, Text, VStack } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import { Mountain } from "@yamada-ui/lucide"
 import { memo } from "react"
@@ -11,7 +11,6 @@ export const Company: FC<CompanyProps> = memo(({ ...rest }) => {
     <VStack
       as="section"
       display={{ base: "flex", lg: "none" }}
-      // bg={["blackAlpha.900", "blackAlpha.300"]}
       bgGradient={[
         "linear(-60deg, primary.500, secondary.500)",
         "linear(-60deg, primary.600, secondary.600)",
@@ -21,7 +20,7 @@ export const Company: FC<CompanyProps> = memo(({ ...rest }) => {
       {...rest}
     >
       <HStack as="header" alignItems="flex-end" gap="sm">
-        <Icon as={Mountain} size="3xl" />
+        <Mountain size="3xl" />
 
         <Heading as="h2" size="md" lineHeight={1.125} fontWeight="normal">
           Yamada Inc

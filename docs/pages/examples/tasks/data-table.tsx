@@ -2,7 +2,6 @@ import {
   Menu,
   MenuButton,
   IconButton,
-  Icon,
   HStack,
   Text,
   MenuList,
@@ -69,9 +68,11 @@ const STATUS_COLUMN: (hasTitle?: boolean) => Column<Data, Status> = (
 
     if (!value) return null
 
+    const Icon = STATUS[value].icon
+
     return (
       <HStack gap="sm">
-        <Icon as={STATUS[value].icon} color="muted" />
+        <Icon color="muted" />
         <Text as="span" lineClamp={1}>
           {STATUS[value].label}
         </Text>
@@ -91,9 +92,11 @@ const PRIORITY_COLUMN: (hasTitle?: boolean) => Column<Data, Priority> = (
 
     if (!value) return null
 
+    const Icon = PRIORITY[value].icon
+
     return (
       <HStack gap="sm">
-        <Icon as={PRIORITY[value].icon} color="muted" />
+        <Icon color="muted" />
         <Text as="span" lineClamp={1}>
           {PRIORITY[value].label}
         </Text>
@@ -247,7 +250,7 @@ const ControlMenu = memo(
       <Menu isLazy>
         <MenuButton
           as={IconButton}
-          icon={<Icon as={Ellipsis} />}
+          icon={<Ellipsis />}
           size="sm"
           variant="ghost"
           onClick={(ev) => {

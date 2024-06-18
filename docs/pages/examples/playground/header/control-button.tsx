@@ -1,5 +1,4 @@
 import { Ellipsis } from "@yamada-ui/lucide"
-import { Icon } from "@yamada-ui/react"
 import {
   IconButton,
   Menu,
@@ -23,7 +22,7 @@ export const ControlButton: FC<ControlButtonProps> = memo(
       <Menu {...menuProps}>
         <MenuButton
           as={IconButton}
-          icon={<Icon as={Ellipsis} fontSize="1.3em" />}
+          icon={<Ellipsis fontSize="1.3em" />}
           {...rest}
         />
 

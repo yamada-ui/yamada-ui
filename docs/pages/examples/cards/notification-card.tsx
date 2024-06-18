@@ -4,7 +4,6 @@ import {
   CardHeader,
   HStack,
   Heading,
-  Icon,
   Text,
   VStack,
 } from "@yamada-ui/react"
@@ -34,7 +33,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <Icon as={Bell} size="2xl" />
+            <Bell size="2xl" />
 
             <VStack gap="xs">
               <Text>Everything</Text>
@@ -49,7 +48,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <Icon as={User} size="2xl" />
+            <User size="2xl" />
 
             <VStack gap="xs">
               <Text>Available</Text>
@@ -64,7 +63,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <Icon as={EyeOff} size="2xl" />
+            <EyeOff size="2xl" />
 
             <VStack gap="xs">
               <Text>Ignoring</Text>

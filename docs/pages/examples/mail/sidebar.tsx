@@ -1,9 +1,9 @@
+import type { Component, IconProps } from "@yamada-ui/react"
 import {
   Button,
   Divider,
   HStack,
   Heading,
-  Icon,
   IconButton,
   Spacer,
   Text,
@@ -22,7 +22,7 @@ import {
   Trash,
   Users,
 } from "@yamada-ui/lucide"
-import { type FC, type ElementType, memo } from "react"
+import { type FC, memo } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
@@ -53,7 +53,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
           isCollapse ? "center" : { base: "flex-start", xl: "center" }
         }
       >
-        <Icon as={Cloud} size="xl" />
+        <Cloud size="xl" />
 
         {!isCollapse ? (
           <Heading as="h3" size="md" display={{ base: "inline", xl: "none" }}>
@@ -95,7 +95,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
 Sidebar.displayName = "Sidebar"
 
 type SidebarItemProps = {
-  icon: ElementType
+  icon: Component<"svg", IconProps>
   label: string
   num?: number
   isCollapse?: boolean
@@ -103,7 +103,7 @@ type SidebarItemProps = {
 }
 
 const SidebarItem: FC<SidebarItemProps> = memo(
-  ({ icon, label, num, isCollapse = false, isSelected = false }) => {
+  ({ icon: Icon, label, num, isCollapse = false, isSelected = false }) => {
     const showNum = num && num > 0
 
     return (
@@ -126,13 +126,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             <IconButton
               variant={isSelected ? "solid" : "ghost"}
               colorScheme={isSelected ? "primary" : "gray"}
-              icon={
-                <Icon
-                  as={icon}
-                  size="md"
-                  color={isSelected ? "white" : "muted"}
-                />
-              }
+              icon={<Icon color={isSelected ? "white" : "muted"} />}
             />
           </Tooltip>
         ) : (
@@ -140,13 +134,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             w="full"
             variant={isSelected ? "solid" : "ghost"}
             colorScheme={isSelected ? "primary" : "gray"}
-            leftIcon={
-              <Icon
-                as={icon}
-                size="md"
-                color={isSelected ? "white" : "muted"}
-              />
-            }
+            leftIcon={<Icon color={isSelected ? "white" : "muted"} />}
             px="3"
             justifyContent="flex-start"
           >

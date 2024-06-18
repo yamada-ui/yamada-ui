@@ -65,6 +65,7 @@
     "docs:css": "pnpm --prefix docs gen:css",
     "docs:props": "pnpm --prefix docs gen:props",
     "docs:search": "pnpm --prefix docs gen:search",
+    "docs:icon": "pnpm --prefix docs gen:icon",
     "docs:contributors": "pnpm --prefix docs gen:contributors",
     "docs:content": "pnpm --prefix docs gen:content",
     "docs:translate": "pnpm --prefix docs gen:translate",

@@ -13,6 +13,7 @@ runs:
         pnpm docs:css
         pnpm docs:contributors
         pnpm docs:search
+        pnpm docs:icon
       shell: bash
 
     - name: Create PR

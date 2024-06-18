@@ -382,6 +382,7 @@ const ModalContent = forwardRef<ModalContentProps, "section", false>(
       <Motion
         as="section"
         role="dialog"
+        aria-modal="true"
         ref={ref}
         className={cx("ui-modal", className)}
         tabIndex={-1}

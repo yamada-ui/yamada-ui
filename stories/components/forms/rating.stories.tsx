@@ -1,13 +1,5 @@
-import {
-  faFaceGrinStars,
-  faFaceSadCry,
-  faFaceSadTear,
-  faFaceSmile,
-  faFaceSmileBeam,
-  faPoo,
-} from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Angry, Frown, Laugh, Smile, SmilePlus, Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Rating, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
@@ -157,19 +149,19 @@ export const customIcon: Story = () => {
   const getIcon = (value: number) => {
     switch (value) {
       case 1:
-        return <Icon icon={faFaceSadCry} />
+        return <Angry />
 
       case 2:
-        return <Icon icon={faFaceSadTear} />
+        return <Frown />
 
       case 3:
-        return <Icon icon={faFaceSmile} />
+        return <Smile />
 
       case 4:
-        return <Icon icon={faFaceSmileBeam} />
+        return <Laugh />
 
       case 5:
-        return <Icon icon={faFaceGrinStars} />
+        return <SmilePlus />
 
       default:
         return null
@@ -178,17 +170,13 @@ export const customIcon: Story = () => {
 
   return (
     <>
-      <Rating
-        defaultValue={3}
-        emptyIcon={<Icon icon={faPoo} />}
-        filledIcon={<Icon icon={faPoo} />}
-      />
+      <Rating defaultValue={3} emptyIcon={<Ghost />} filledIcon={<Ghost />} />
 
       <Rating
         defaultValue={2}
         fractions={3}
-        emptyIcon={<Icon icon={faPoo} />}
-        filledIcon={<Icon icon={faPoo} />}
+        emptyIcon={<Ghost />}
+        filledIcon={<Ghost />}
       />
 
       <Rating gap="xs" emptyIcon={getIcon} filledIcon={getIcon} />

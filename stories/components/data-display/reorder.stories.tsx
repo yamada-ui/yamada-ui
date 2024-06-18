@@ -1,6 +1,5 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import type { ReorderGenerateItem } from "@yamada-ui/react"
 import {
   Divider,
@@ -163,7 +162,7 @@ export const withTrigger: Story = () => {
       <ReorderItem label="ベジータ">
         <HStack>
           <ReorderTrigger>
-            <Icon icon={faPoo} />
+            <Ghost />
           </ReorderTrigger>
           <Text>ベジータ</Text>
         </HStack>

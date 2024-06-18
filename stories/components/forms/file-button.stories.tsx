@@ -1,6 +1,5 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Plus } from "@yamada-ui/lucide"
 import {
   Button,
   FileButton,
@@ -33,7 +32,7 @@ export const basic: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         aria-label="Upload file"
       />
 
@@ -51,7 +50,7 @@ export const withMultiple: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         multiple
         aria-label="Upload file"
       />
@@ -70,7 +69,7 @@ export const withAccept: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         accept="image/png,image/jpeg"
         aria-label="Upload file"
       />
@@ -155,7 +154,7 @@ export const isDisabled: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         isDisabled
         aria-label="Upload file"
       />
@@ -195,7 +194,7 @@ export const isReadonly: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         isReadOnly
         aria-label="Upload file"
       />
@@ -234,7 +233,7 @@ export const isInvalid: Story = () => {
 
       <FileButton
         as={IconButton}
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         isInvalid
         aria-label="Upload file"
       />

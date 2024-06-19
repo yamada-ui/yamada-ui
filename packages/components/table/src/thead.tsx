@@ -15,8 +15,19 @@ import type { SortDirection, Column } from "./use-table"
 import { useTableContext, render } from "./use-table"
 
 export type TableHeadProps = NativeTableHeadProps
+export type AriaSort = {
+  none: "none"
+  asc: "ascending"
+  desc: "descending"
+}
 
 export const Thead = ({ ...rest }: TableHeadProps) => {
+  const ariaSort: AriaSort = {
+    none: "none",
+    asc: "ascending",
+    desc: "descending",
+  }
+
   const { headerGroups, headerGroupProps, headerProps, sortIconProps } =
     useTableContext()
 
@@ -85,15 +96,10 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
               const resolvedRowSpan = (customRowSpan ?? rowSpan) || 1
 
               const isSorted = getIsSorted()
-              const ariaSort = !isSorted
-                ? "none"
-                : isSorted === "desc"
-                  ? "descending"
-                  : "ascending"
 
               const props = {
                 "aria-label": ariaLabel,
-                "aria-sorted": ariaSort,
+                "aria-sort": !isSorted ? ariaSort.none : ariaSort[isSorted],
                 ...computedHeaderProps,
                 colSpan: resolvedColSpan,
                 rowSpan: resolvedRowSpan,

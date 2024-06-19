@@ -3,6 +3,7 @@ import { useCallback, useState } from "react"
 export type UseStepsProps = {
   index?: number
   count?: number
+  colorScheme?: string
 }
 
 export const useSteps = ({ index = 0, count }: UseStepsProps) => {

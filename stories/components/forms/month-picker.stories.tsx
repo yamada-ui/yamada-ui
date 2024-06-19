@@ -1,8 +1,7 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import type { MonthPickerProps } from "@yamada-ui/calendar"
 import { MonthPicker } from "@yamada-ui/calendar"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
@@ -284,10 +283,7 @@ export const customIcon: Story = () => {
     <>
       <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
 
-      <MonthPicker
-        placeholder="YYYY/MM"
-        iconProps={{ children: <Icon icon={faPoo} /> }}
-      />
+      <MonthPicker placeholder="YYYY/MM" iconProps={{ children: <Ghost /> }} />
     </>
   )
 }

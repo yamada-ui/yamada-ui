@@ -1,8 +1,7 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
 import type { CalendarProps } from "@yamada-ui/calendar"
 import { Calendar } from "@yamada-ui/calendar"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import {
   Heading,
   Wrap,
@@ -366,9 +365,7 @@ export const customLabelButton: Story = () => {
     <>
       <Calendar labelProps={{ color: "gray.500" }} />
 
-      <Calendar
-        labelProps={{ icon: <Icon icon={faPoo} fontSize="0.75em" /> }}
-      />
+      <Calendar labelProps={{ icon: <Ghost fontSize="sm" /> }} />
     </>
   )
 }
@@ -376,13 +373,11 @@ export const customLabelButton: Story = () => {
 export const customControlButton: Story = () => {
   return (
     <>
-      <Calendar
-        controlProps={{ icon: <Icon icon={faPoo} fontSize="0.75em" /> }}
-      />
+      <Calendar controlProps={{ icon: <Ghost fontSize="sm" /> }} />
 
-      <Calendar prevProps={{ icon: <Icon icon={faPoo} fontSize="0.75em" /> }} />
+      <Calendar prevProps={{ icon: <Ghost fontSize="sm" /> }} />
 
-      <Calendar nextProps={{ icon: <Icon icon={faPoo} fontSize="0.75em" /> }} />
+      <Calendar nextProps={{ icon: <Ghost fontSize="sm" /> }} />
     </>
   )
 }

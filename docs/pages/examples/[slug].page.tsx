@@ -22,7 +22,7 @@ import type {
 import Link from "next/link"
 import { useMemo } from "react"
 import { Section } from "components/layouts"
-import { Arrow, Components, SEO } from "components/media-and-icons"
+import { SEO } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts/i18n-context"
@@ -39,6 +39,7 @@ import { Mail } from "./mail"
 import { Music } from "./music"
 import { Playground } from "./playground"
 import { Tasks } from "./tasks"
+import { ArrowRight, Blocks } from "@yamada-ui/lucide"
 
 type Paths = GetStaticPathsResult["paths"]
 
@@ -152,7 +153,7 @@ const Page: NextPage<PageProps> = ({
               size="xl"
               colorScheme="primary"
               w={{ base: "auto", md: "full" }}
-              rightIcon={<Arrow />}
+              rightIcon={<ArrowRight />}
               href="/getting-started"
             >
               {t("examples.hero.started")}
@@ -161,7 +162,7 @@ const Page: NextPage<PageProps> = ({
             <NextLinkButton
               size="xl"
               w={{ base: "auto", md: "full" }}
-              rightIcon={<Components fontSize="0.75em" />}
+              rightIcon={<Blocks />}
               href="/components"
             >
               {t("examples.hero.components")}

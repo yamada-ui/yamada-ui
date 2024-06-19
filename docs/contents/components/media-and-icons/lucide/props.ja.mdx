@@ -1,0 +1,31 @@
+---
+title: Lucide Icon
+description: >-
+  `@yamada-ui/lucide`は、[Lucide](https://lucide.dev)のアイコンにYamada
+  UIのスタイルシステムを取り入れたコンポーネントです。
+package_name: "@yamada-ui/lucide"
+label: New
+with_description: true
+tab: Props
+---
+
+## Props
+
+### IconProps
+
+<PropsCard
+  id="icon-icon"
+  name="icon"
+  required
+  type="IconNode"
+  description={
+    "The icon of the [Lucide lab](https://github.com/lucide-icons/lucide-lab)."
+  }
+/>
+
+<PropsCard
+  id="icon-size"
+  name="size"
+  type='UIValue<number | "small" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "large" | "medium" | "x-large" | "x-small" | "xx-large" | "xx-small" | ... 16 more ... | "9xl">'
+  description={"The CSS `font-size` property."}
+/>

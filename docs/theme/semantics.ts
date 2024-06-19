@@ -2,6 +2,6 @@ import type { ThemeSemantics } from "@yamada-ui/react"
 
 export const semantics: ThemeSemantics = {
   colors: {
-    muted: ["blackAlpha.700", "whiteAlpha.700"],
+    muted: ["#656565", "#b3b3b3"],
   },
 }

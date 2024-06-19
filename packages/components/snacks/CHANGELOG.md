@@ -1,5 +1,31 @@
 # @yamada-ui/snacks
 
+## 1.0.21
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/alert@1.0.29
+  - @yamada-ui/close-button@1.0.29
+  - @yamada-ui/motion@1.0.29
+  - @yamada-ui/use-token@1.1.16
+  - @yamada-ui/use-value@1.1.16
+
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`55fa828`](https://github.com/yamada-ui/yamada-ui/commit/55fa8285c6a74ec9d919b50251f91b3c06b58a70), [`5ec5a23`](https://github.com/yamada-ui/yamada-ui/commit/5ec5a231cc134a280eeb7841f99348c74cd4b948), [`8799de2`](https://github.com/yamada-ui/yamada-ui/commit/8799de254372718a7416b5cceaa2780157394d63)]:
+  - @yamada-ui/utils@1.2.1
+  - @yamada-ui/core@1.7.1
+  - @yamada-ui/alert@1.0.28
+  - @yamada-ui/close-button@1.0.28
+  - @yamada-ui/motion@1.0.28
+  - @yamada-ui/use-timeout@1.0.14
+  - @yamada-ui/use-token@1.1.15
+  - @yamada-ui/use-value@1.1.15
+
 ## 1.0.19
 
 ### Patch Changes

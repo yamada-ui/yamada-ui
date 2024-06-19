@@ -6,6 +6,7 @@ export const SaturationSlider: ComponentMultiStyle = {
       w: "full",
       rounded: "md",
       cursor: "pointer",
+      position: "relative",
       _readOnly: { cursor: "auto" },
       _disabled: {
         opacity: 0.6,
@@ -17,8 +18,17 @@ export const SaturationSlider: ComponentMultiStyle = {
     },
     overlay: {
       rounded: "md",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
-    track: {},
+    track: {
+      position: "relative",
+      w: "100%",
+      h: "100%",
+    },
     thumb: {
       rounded: "full",
       outline: 0,

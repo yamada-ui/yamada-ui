@@ -43,9 +43,6 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
   const { className, children, ...rest } = omitThemeProps(props)
 
   const css: CSSUIObject = {
-    width: "100%",
-    display: "flex",
-    position: "relative",
     ...styles.container,
   }
   const groupProps: CSSUIProps = {}

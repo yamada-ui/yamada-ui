@@ -24,7 +24,6 @@ export const ColorSelectorChannels = forwardRef<
     useColorSelectorContext()
 
   const css: CSSUIObject = {
-    display: "grid",
     gridTemplateColumns: `repeat(${withAlpha ? "4" : "3"}, 1fr)`,
     ...styles.channels,
   }
@@ -75,7 +74,6 @@ export const ColorSelectorChannel = forwardRef<
           htmlFor={id}
           style={{ cursor: disabled ? "not-allowed" : undefined }}
           __css={{
-            display: "block",
             pointerEvents: readOnly ? "none" : undefined,
             ...styles.channelLabel,
           }}

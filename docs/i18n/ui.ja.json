@@ -58,6 +58,13 @@
       "title": "ログイン"
     }
   },
+  "icons": {
+    "title": "アイコン",
+    "description": "Lucideコミュニティによって作られた美しく一貫性のあるアイコンツールキット。",
+    "placeholder": "{label}個のアイコンを検索する",
+    "not-found": "アイコンが見つかりません。",
+    "reset": "検索をクリアしてもう一度試す"
+  },
   "not-found": {
     "title": "404: 見つかりません",
     "description": "ページが見つかりません",
@@ -68,7 +75,8 @@
   "component": {
     "tree": {
       "yamada-colors": "カラージェネレーター",
-      "examples": "いくつかの例"
+      "examples": "いくつかの例",
+      "icons": "アイコン"
     },
     "feedback": {
       "ad-banner": {

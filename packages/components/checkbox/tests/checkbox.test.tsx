@@ -6,8 +6,7 @@ import type { CheckboxItem } from "../src"
 
 describe("<Checkbox />", () => {
   test("Checkbox renders correctly", async () => {
-    const { container } = render(<Checkbox>Yes</Checkbox>)
-    await a11y(container)
+    await a11y(<Checkbox>Yes</Checkbox>)
   })
 
   test("should be checked", () => {

@@ -93,6 +93,9 @@ $ pnpm add @yamada-ui/charts
 # `react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。
 $ pnpm add @yamada-ui/markdown
 
+# `Lucide`を使用した、便利なアイコンコンポーネントを提供します。
+$ pnpm add @yamada-ui/lucide
+
 # `Font Awesome`を便利に使用するためのコンポーネントを提供します。
 $ pnpm add @yamada-ui/fontawesome
 ```

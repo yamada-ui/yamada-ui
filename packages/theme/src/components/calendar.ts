@@ -10,10 +10,22 @@ export const Calendar: ComponentMultiStyle = {
   baseStyle: {
     container: {
       gap: "md",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "flex-start",
     },
-    header: {},
+    header: {
+      display: "flex",
+      alignItems: "center",
+      w: "100%",
+    },
     label: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
+      flex: 1,
+      h: "auto",
+      fontSize: undefined,
+      fontWeight: "normal",
+      gap: 1,
     },
     labelIcon: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
@@ -21,6 +33,8 @@ export const Calendar: ComponentMultiStyle = {
     control: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
       fontSize: "1.25em",
+      minW: "auto",
+      h: "auto",
       _hidden: {
         opacity: 0,
         pointerEvents: "none",
@@ -31,11 +45,18 @@ export const Calendar: ComponentMultiStyle = {
     content: {},
     year: {
       gridTemplateColumns: "repeat(4, 1fr)",
+      display: "grid",
     },
     month: {
       gridTemplateColumns: "repeat(3, 1fr)",
+      display: "grid",
     },
     button: {
+      minW: "auto",
+      h: "auto",
+      p: 0,
+      fontSize: undefined,
+      fontWeight: "normal",
       _disabled: {
         opacity: 0.4,
         cursor: "not-allowed",
@@ -50,14 +71,22 @@ export const Calendar: ComponentMultiStyle = {
     cell: {
       transitionProperty: "common",
       transitionDuration: "slower",
+      fontWeight: "normal",
     },
     weekday: {
       userSelect: "none",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       justifyContent: "center",
       alignItems: "center",
+      w: "100%",
+      display: "flex",
     },
     day: {
+      minW: "auto",
+      h: "auto",
+      p: 0,
+      fontSize: undefined,
+      fontWeight: "normal",
       _weekend: {
         color: ["red.600", "red.400"],
       },

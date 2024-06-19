@@ -1,5 +1,4 @@
-import { fireEvent } from "@testing-library/react"
-import { render, screen } from "@yamada-ui/test"
+import { fireEvent, render, screen } from "@yamada-ui/test"
 import { expect } from "vitest"
 import { ColorSelector } from "../src"
 import { resetEyeDropperMock, mockEyeDropper } from "./utils/mock-eye-dropper"

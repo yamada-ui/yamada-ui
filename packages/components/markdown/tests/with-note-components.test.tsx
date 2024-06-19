@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen } from "@yamada-ui/test"
 import dedent from "dedent"
 import { Markdown } from "../src"
 

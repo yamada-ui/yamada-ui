@@ -5,6 +5,11 @@
       "required": false,
       "description": "Determines whether scrolling is instant or animates smoothly."
     },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "finish": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false,
@@ -39,7 +44,7 @@
       "description": "The infinite scroll area loading to use."
     },
     "onLoad": {
-      "type": "({\n  index,\n  entry,\n  finish,\n}: {\n  index: number\n  finish: () => void\n  entry?: IntersectionObserverEntry | undefined\n}) => Promise<void>",
+      "type": "({\n  index,\n  entry,\n  finish,\n}: {\n  index: number\n  finish: () => void\n  entry?: IntersectionObserverEntry | undefined\n}) => void | Promise<void>",
       "required": false,
       "description": "The callback invoked when trigger is intersect."
     },
@@ -59,6 +64,11 @@
       "required": false,
       "description": "The element that is used as the viewport for checking visibility of the target.\nDefaults to the browser viewport if not specified or if `null`."
     },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the InfiniteScrollArea."
+    },
     "startIndex": {
       "type": "number",
       "defaultValue": "1",
@@ -69,6 +79,11 @@
       "type": "HTMLUIProps<\"div\">",
       "required": false,
       "description": "Props for infinite scroll area trigger component."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the InfiniteScrollArea."
     }
   }
 }

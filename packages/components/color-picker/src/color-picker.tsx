@@ -134,8 +134,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     minH ??= minHeight
 
     const css: CSSUIObject = {
-      w: "100%",
-      h: "fit-content",
       color,
       ...styles.container,
     }
@@ -151,7 +149,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
             <ui.div
               className="ui-color-picker__inner"
               __css={{
-                position: "relative",
                 cursor: !allowInput ? "pointer" : undefined,
                 ...styles.inner,
               }}
@@ -210,12 +207,8 @@ const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
     const { styles } = useColorPickerContext()
 
     const css: CSSUIObject = {
-      ps: "2rem",
-      pe: "2rem",
       h,
       minH,
-      display: "flex",
-      alignItems: "center",
       ...styles.field,
     }
 
@@ -237,10 +230,6 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
     const { value, styles } = useColorPickerContext()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      zIndex: 2,
       ...styles.swatch,
     }
 
@@ -264,13 +253,6 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
     const { styles } = useColorPickerContext()
 
     const css: CSSUIObject = {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 1,
       ...styles.eyeDropper,
     }
 

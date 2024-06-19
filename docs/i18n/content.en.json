@@ -97,6 +97,26 @@
     "hierarchy": { "lv1": "Team and Contributors", "lv2": "Core Team" }
   },
   {
+    "title": "Maintainers",
+    "type": "fragment",
+    "slug": "/community/team#maintainers",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Core Team",
+      "lv3": "Maintainers"
+    }
+  },
+  {
+    "title": "Members",
+    "type": "fragment",
+    "slug": "/community/team#members",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Core Team",
+      "lv3": "Members"
+    }
+  },
+  {
     "title": "Sponsors",
     "type": "fragment",
     "slug": "/community/team#sponsors",
@@ -8509,7 +8529,7 @@
   {
     "title": "Fontawesome Icon",
     "type": "page",
-    "description": "`@yamada-ui/fontawesome` provides convenient components for using `Font Awesome`.",
+    "description": "`@yamada-ui/fontawesome` provides convenient components for using [Font Awesome](https://fontawesome.com).",
     "slug": "/components/media-and-icons/fontawesome",
     "hierarchy": { "lv1": "Fontawesome Icon" }
   },
@@ -8676,6 +8696,45 @@
     "hierarchy": { "lv1": "Indicator", "lv2": "Usage", "lv3": "Hide Indicator" }
   },
   {
+    "title": "Lucide Icon",
+    "type": "page",
+    "description": "`@yamada-ui/lucide` is a component that incorporates the Yamada UI style system into [Lucide](https://lucide.dev) icons.",
+    "slug": "/components/media-and-icons/lucide",
+    "hierarchy": { "lv1": "Lucide Icon" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/lucide#import",
+    "hierarchy": { "lv1": "Lucide Icon", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/lucide#usage",
+    "hierarchy": { "lv1": "Lucide Icon", "lv2": "Usage" }
+  },
+  {
+    "title": "Using icons from [Lucide lab](https://github.com/lucide-icons/lucide-lab)",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/lucide#using-icons-from-lucide-labhttpsgithubcomlucide-iconslucide-lab",
+    "hierarchy": {
+      "lv1": "Lucide Icon",
+      "lv2": "Usage",
+      "lv3": "Using icons from [Lucide lab](https://github.com/lucide-icons/lucide-lab)"
+    }
+  },
+  {
+    "title": "Creating a single generic component",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/lucide#creating-a-single-generic-component",
+    "hierarchy": {
+      "lv1": "Lucide Icon",
+      "lv2": "Usage",
+      "lv3": "Creating a single generic component"
+    }
+  },
+  {
     "title": "Breadcrumb",
     "type": "page",
     "description": "`Breadcrumb` is a component that helps users understand the hierarchy of a website.",
@@ -8695,43 +8754,49 @@
     "hierarchy": { "lv1": "Breadcrumb", "lv2": "Usage" }
   },
   {
-    "title": "Customize the separator",
+    "title": "Customize the Separator",
     "type": "fragment",
     "slug": "/components/navigation/breadcrumb#customize-the-separator",
     "hierarchy": {
       "lv1": "Breadcrumb",
       "lv2": "Usage",
-      "lv3": "Customize the separator"
+      "lv3": "Customize the Separator"
     }
   },
   {
-    "title": "Use an icon as a separator",
+    "title": "Use an Icon as a Separator",
     "type": "fragment",
     "slug": "/components/navigation/breadcrumb#use-an-icon-as-a-separator",
     "hierarchy": {
       "lv1": "Breadcrumb",
       "lv2": "Usage",
-      "lv3": "Use an icon as a separator"
+      "lv3": "Use an Icon as a Separator"
     }
   },
   {
-    "title": "Use the ellipsis",
+    "title": "Use Ellipsis",
     "type": "fragment",
-    "slug": "/components/navigation/breadcrumb#use-the-ellipsis",
+    "slug": "/components/navigation/breadcrumb#use-ellipsis",
+    "hierarchy": { "lv1": "Breadcrumb", "lv2": "Usage", "lv3": "Use Ellipsis" }
+  },
+  {
+    "title": "Display Ellipsed Items in a Menu",
+    "type": "fragment",
+    "slug": "/components/navigation/breadcrumb#display-ellipsed-items-in-a-menu",
     "hierarchy": {
       "lv1": "Breadcrumb",
       "lv2": "Usage",
-      "lv3": "Use the ellipsis"
+      "lv3": "Display Ellipsed Items in a Menu"
     }
   },
   {
-    "title": "Customize the ellipsis",
+    "title": "Customize the Ellipsis",
     "type": "fragment",
     "slug": "/components/navigation/breadcrumb#customize-the-ellipsis",
     "hierarchy": {
       "lv1": "Breadcrumb",
       "lv2": "Usage",
-      "lv3": "Customize the ellipsis"
+      "lv3": "Customize the Ellipsis"
     }
   },
   {
@@ -9235,24 +9300,214 @@
     "hierarchy": { "lv1": "Swipeable" }
   },
   {
+    "title": "VisuallyHidden",
+    "type": "page",
+    "description": "`VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.",
+    "slug": "/components/other/visually-hidden",
+    "hierarchy": { "lv1": "VisuallyHidden" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/other/visually-hidden#import",
+    "hierarchy": { "lv1": "VisuallyHidden", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/other/visually-hidden#usage",
+    "hierarchy": { "lv1": "VisuallyHidden", "lv2": "Usage" }
+  },
+  {
     "title": "ContextMenu",
     "type": "page",
-    "description": "We are currently considering the development of `ContextMenu`.",
+    "description": "`ContextMenu` is triggered by a right click and displays a menu at the pointer's position.",
     "slug": "/components/overlay/context-menu",
     "hierarchy": { "lv1": "ContextMenu" }
   },
   {
-    "title": "ContextMenu",
-    "type": "page",
-    "description": "We are currently considering the development of `ContextMenu`.",
-    "slug": "/components/overlay/context-menu/theming",
-    "hierarchy": { "lv1": "ContextMenu" }
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#import",
+    "hierarchy": { "lv1": "ContextMenu", "lv2": "Import" }
   },
   {
-    "title": "Theming",
+    "title": "Usage",
     "type": "fragment",
-    "slug": "/components/overlay/context-menu/theming#theming",
-    "hierarchy": { "lv1": "ContextMenu", "lv2": "Theming" }
+    "slug": "/components/overlay/context-menu#usage",
+    "hierarchy": { "lv1": "ContextMenu", "lv2": "Usage" }
+  },
+  {
+    "title": "Accessing Internal State",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#accessing-internal-state",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Accessing Internal State"
+    }
+  },
+  {
+    "title": "Displaying Commands on Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#displaying-commands-on-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Displaying Commands on Items"
+    }
+  },
+  {
+    "title": "Displaying Icons on Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#displaying-icons-on-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Displaying Icons on Items"
+    }
+  },
+  {
+    "title": "Focusing on Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#focusing-on-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Focusing on Items"
+    }
+  },
+  {
+    "title": "Changing the Position",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#changing-the-position",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Changing the Position"
+    }
+  },
+  {
+    "title": "Changing the Animation",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#changing-the-animation",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Changing the Animation"
+    }
+  },
+  {
+    "title": "Changing the Offset",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#changing-the-offset",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Changing the Offset"
+    }
+  },
+  {
+    "title": "Changing the Duration",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#changing-the-duration",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Changing the Duration"
+    }
+  },
+  {
+    "title": "Adding Dividers Between Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#adding-dividers-between-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Adding Dividers Between Items"
+    }
+  },
+  {
+    "title": "Grouping Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#grouping-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Grouping Items"
+    }
+  },
+  {
+    "title": "Selectable Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#selectable-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Selectable Items"
+    }
+  },
+  {
+    "title": "Nested Menus",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#nested-menus",
+    "hierarchy": { "lv1": "ContextMenu", "lv2": "Usage", "lv3": "Nested Menus" }
+  },
+  {
+    "title": "Keeping the Menu Open After Item Selection",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#keeping-the-menu-open-after-item-selection",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Keeping the Menu Open After Item Selection"
+    }
+  },
+  {
+    "title": "Keeping the Menu Open When Focus is Lost",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#keeping-the-menu-open-when-focus-is-lost",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Keeping the Menu Open When Focus is Lost"
+    }
+  },
+  {
+    "title": "Disabling Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#disabling-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Disabling Items"
+    }
+  },
+  {
+    "title": "Allowing Focus on Disabled Items",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#allowing-focus-on-disabled-items",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Allowing Focus on Disabled Items"
+    }
+  },
+  {
+    "title": "Lazy Rendering",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#lazy-rendering",
+    "hierarchy": {
+      "lv1": "ContextMenu",
+      "lv2": "Usage",
+      "lv3": "Lazy Rendering"
+    }
+  },
+  {
+    "title": "Controlling",
+    "type": "fragment",
+    "slug": "/components/overlay/context-menu#controlling",
+    "hierarchy": { "lv1": "ContextMenu", "lv2": "Usage", "lv3": "Controlling" }
   },
   {
     "title": "Dialog",
@@ -11125,6 +11380,44 @@
     }
   },
   {
+    "title": "useBreakpointEffect",
+    "type": "page",
+    "description": "`useBreakpointEffect` is a custom hook that executes a specific callback function when the breakpoint changes.",
+    "slug": "/hooks/use-breakpoint-effect",
+    "hierarchy": { "lv1": "useBreakpointEffect" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint-effect#import",
+    "hierarchy": { "lv1": "useBreakpointEffect", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint-effect#usage",
+    "hierarchy": { "lv1": "useBreakpointEffect", "lv2": "Usage" }
+  },
+  {
+    "title": "useBreakpointState",
+    "type": "page",
+    "description": "`useBreakpointState` is a custom hook that takes a responsive object as an initial state and returns a state corresponding to the current breakpoint.",
+    "slug": "/hooks/use-breakpoint-state",
+    "hierarchy": { "lv1": "useBreakpointState" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint-state#import",
+    "hierarchy": { "lv1": "useBreakpointState", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-breakpoint-state#usage",
+    "hierarchy": { "lv1": "useBreakpointState", "lv2": "Usage" }
+  },
+  {
     "title": "useBreakpointValue",
     "type": "page",
     "description": "`useBreakpointValue` is a custom hook that returns the value of the current breakpoint from the provided object. This hook monitors changes in the window size and returns the appropriate value.",
@@ -11972,6 +12265,25 @@
     "type": "fragment",
     "slug": "/hooks/use-token#usage",
     "hierarchy": { "lv1": "useToken", "lv2": "Usage" }
+  },
+  {
+    "title": "useBreakpointEffect",
+    "type": "page",
+    "description": "`useBreakpointEffect` is a custom hook that skips the side effect on the initial render and executes a specific callback function when the breakpoint changes.",
+    "slug": "/hooks/use-update-breakpoint-effect",
+    "hierarchy": { "lv1": "useBreakpointEffect" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/hooks/use-update-breakpoint-effect#import",
+    "hierarchy": { "lv1": "useBreakpointEffect", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/hooks/use-update-breakpoint-effect#usage",
+    "hierarchy": { "lv1": "useBreakpointEffect", "lv2": "Usage" }
   },
   {
     "title": "useUpdateEffect",

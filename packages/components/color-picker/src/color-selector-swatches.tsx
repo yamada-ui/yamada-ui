@@ -54,7 +54,6 @@ export const ColorSelectorSwatches = forwardRef<
     const { getSwatchProps, readOnly, styles } = useColorSelectorContext()
 
     const css: CSSUIObject = {
-      display: "grid",
       gridTemplateColumns: replaceObject(swatchesColumns, (value) =>
         value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,
       ) as CSSUIObject["gridTemplateColumns"],
@@ -83,7 +82,6 @@ export const ColorSelectorSwatches = forwardRef<
               as="button"
               key={color}
               __css={{
-                boxSize: "100%",
                 pointerEvents: readOnly ? "none" : undefined,
                 ...styles.swatch,
               }}

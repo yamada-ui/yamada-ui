@@ -851,6 +851,7 @@ export const useSelectOption = (
     isFocusable,
     closeOnSelect: customCloseOnSelect,
     children,
+    value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
 
@@ -867,24 +868,17 @@ export const useSelectOption = (
 
   const isMulti = isArray(value)
   const isDuplicated = !isMulti
-    ? frontValues.some(
-        ({ node }) => node.dataset.value === (computedProps.value ?? ""),
-      )
+    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
     : false
 
   const isSelected =
     !isDuplicated &&
     (!isMulti
-      ? (computedProps.value ?? "") === value
-      : value.includes(computedProps.value ?? ""))
+      ? (optionValue ?? "") === value
+      : value.includes(optionValue ?? ""))
   const isFocused = index === focusedIndex
 
-  if (
-    !!placeholder &&
-    index > 0 &&
-    placeholderInOptions &&
-    !computedProps.value
-  ) {
+  if (!!placeholder && index > 0 && placeholderInOptions && !optionValue) {
     console.warn(
       `${
         !isMulti ? "Select" : "MultiSelect"
@@ -910,7 +904,7 @@ export const useSelectOption = (
 
       setFocusedIndex(index)
 
-      onChange(computedProps.value ?? "")
+      onChange(optionValue ?? "")
 
       if (fieldRef.current) fieldRef.current.focus()
 
@@ -923,7 +917,7 @@ export const useSelectOption = (
       setFocusedIndex,
       index,
       onChange,
-      computedProps.value,
+      optionValue,
       fieldRef,
       customCloseOnSelect,
       generalCloseOnSelect,
@@ -934,8 +928,8 @@ export const useSelectOption = (
   )
 
   useEffect(() => {
-    if (isSelected) onChangeLabel(computedProps.value ?? "", false)
-  }, [computedProps, isSelected, onChangeLabel])
+    if (isSelected) onChangeLabel(optionValue ?? "", false)
+  }, [optionValue, isSelected, onChangeLabel])
 
   const getOptionProps: UIPropGetter<"li"> = useCallback(
     (props = {}) => {
@@ -953,12 +947,12 @@ export const useSelectOption = (
 
       return {
         ref: mergeRefs(itemRef, ref, register),
-        ...omitObject(computedProps, ["value"]),
+        ...computedProps,
         ...props,
         role: "select-item",
         tabIndex: -1,
         style: omitSelectedValues && isSelected ? style : undefined,
-        "data-value": computedProps.value ?? "",
+        "data-value": optionValue ?? "",
         "data-focus": dataAttr(isFocused),
         "data-disabled": dataAttr(isDisabled),
         "aria-checked": ariaAttr(isSelected),
@@ -967,6 +961,7 @@ export const useSelectOption = (
       }
     },
     [
+      optionValue,
       computedProps,
       isDisabled,
       isFocused,

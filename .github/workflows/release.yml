@@ -31,6 +31,17 @@ jobs:
           echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -e '^\.storybook/' -e '^stories/' && echo true || echo false)" >> $GITHUB_OUTPUT
         shell: bash
 
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
       - name: Install
         uses: ./.github/composite-actions/install
 
@@ -65,12 +76,6 @@ jobs:
           pnpm changelog:latest
           git add .
           git diff --staged --exit-code || (git commit -m 'ci(changelog): added changelog' && git push)
-
-      - name: Update docs
-        if: steps.changesets.outputs.published == 'true'
-        uses: ./.github/composite-actions/update-docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Notification release
         if: steps.changesets.outputs.published == 'true'
@@ -117,3 +122,9 @@ jobs:
               workflow_id: 'sync.yml',
               ref: 'main'
             })
+
+      - name: Sync Docs
+        if: steps.changesets.outputs.published == 'true'
+        uses: ./.github/composite-actions/update-docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

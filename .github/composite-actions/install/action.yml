@@ -4,9 +4,6 @@ description: "Sets up Node.js and runs install"
 runs:
   using: composite
   steps:
-    - name: Launch Turbo remote cache server
-      uses: dtinth/setup-github-actions-caching-for-turbo@v1.2.0
-
     - name: Setup PNPM
       uses: pnpm/action-setup@v3.0.0
       with:

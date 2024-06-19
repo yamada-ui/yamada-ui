@@ -116,6 +116,8 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
       {...rest}
     >
       <ui.input
+        role="switch"
+        aria-checked={isChecked}
         className={cx("ui-switch__input", className)}
         {...getInputProps(inputProps, ref)}
       />

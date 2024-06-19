@@ -3,7 +3,9 @@ import { getMemoizedObject as get } from "@yamada-ui/utils"
 
 export const LineChart: ComponentMultiStyle = {
   baseStyle: {
-    container: {},
+    container: {
+      maxWidth: "full",
+    },
     chart: {},
     referenceLine: {
       fillOpacity: 1,
@@ -27,12 +29,22 @@ export const LineChart: ComponentMultiStyle = {
       fontSize: "xs",
     },
     line: {},
+    dimLine: {
+      fillOpacity: 0,
+      strokeOpacity: 0.3,
+    },
     dot: {
+      fillOpacity: 1,
+      strokeOpacity: 1,
       strokeWidth: 2,
     },
     activeDot: {
       strokeWidth: 2,
       fill: ["white", "black"],
+    },
+    dimDot: {
+      fillOpacity: 0,
+      strokeOpacity: 0,
     },
     legend: {
       display: "flex",

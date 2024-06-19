@@ -121,8 +121,8 @@ export const useRadarChart = ({
   const {
     dot = {},
     activeDot = {},
-    dimDot,
-    dimRadar,
+    dimDot = {},
+    dimRadar = {},
     ...computedRadarProps
   } = rest.radarProps ?? {}
 
@@ -212,26 +212,20 @@ export const useRadarChart = ({
     )(theme)
   }, [computedRadarProps, styles.radar, theme])
 
-  const [dimRadarProps, dimRadarClassName] = useMemo(() => {
-    const resolvedDimRadar = {
-      fillOpacity: 0.3,
-      strokeOpacity: 0.3,
-      ...dimRadar,
-    }
+  const [dimRadarProps, dimRadarClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [dimRadar, radarProperties],
+        styles.dimRadar,
+      )(theme),
+    [dimRadar, styles.dimRadar, theme],
+  )
 
-    return getComponentProps<Dict, string>([resolvedDimRadar, radarProperties])(
-      theme,
-    )
-  }, [dimRadar, theme])
-
-  const [dotProps, dotClassName] = useMemo(() => {
-    const resolvedDot = { fillOpacity: 1, strokeWidth: 2, ...dot }
-
-    return getComponentProps<Dict, string>(
-      [resolvedDot, dotProperties],
-      styles.dot,
-    )(theme)
-  }, [dot, styles.dot, theme])
+  const [dotProps, dotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([dot, dotProperties], styles.dot)(theme),
+    [dot, styles.dot, theme],
+  )
 
   const [activeDotProps, activeDotClassName] = useMemo(
     () =>
@@ -242,12 +236,14 @@ export const useRadarChart = ({
     [activeDot, styles.activeDot, theme],
   )
 
-  const [dimDotProps, dimDotClassName] = useMemo(() => {
-    const resolvedDimDot = { fillOpacity: 0, strokeOpacity: 0, ...dimDot }
-    return getComponentProps<Dict, string>([resolvedDimDot, dotProperties])(
-      theme,
-    )
-  }, [dimDot, theme])
+  const [dimDotProps, dimDotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [dimDot, dotProperties],
+        styles.dimDot,
+      )(theme),
+    [dimDot, styles.dimDot, theme],
+  )
 
   const radarPropList = useMemo(
     () =>

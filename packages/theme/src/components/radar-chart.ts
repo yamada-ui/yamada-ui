@@ -4,6 +4,10 @@ import { LineChart } from "./line-chart"
 export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     radar: {},
+    dimRadar: {
+      fillOpacity: 0.3,
+      strokeOpacity: 0.3,
+    },
     polarGrid: {
       stroke: ["blackAlpha.400", "whiteAlpha.400"],
       strokeWidth: 1,

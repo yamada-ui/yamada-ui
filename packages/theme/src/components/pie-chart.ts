@@ -5,11 +5,19 @@ import { LineChart } from "./line-chart"
 export const PieChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     pie: {},
-    activeShape: {},
-    inactiveShape: {},
-    label: {},
-    labelLine: {},
     cell: {},
+    dimCell: {
+      fillOpacity: 0.3,
+      strokeOpacity: 0,
+    },
+    activeShape: {
+      _focus: { outline: "none" },
+    },
+    inactiveShape: {},
+    label: {
+      fillOpacity: 1,
+    },
+    labelLine: {},
   },
 
   sizes: {

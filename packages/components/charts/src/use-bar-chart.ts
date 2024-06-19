@@ -89,7 +89,7 @@ export const useBarChart = ({
   const {
     activeBar = {},
     background = {},
-    dimBar,
+    dimBar = {},
     ...computedBarProps
   } = rest.barProps ?? {}
 
@@ -135,7 +135,6 @@ export const useBarChart = ({
   const [barProps, barClassName] = useMemo(() => {
     const resolvedBarProps = {
       fillOpacity: "var(--ui-fill-opacity)",
-      strokeOpacity: 1,
       ...computedBarProps,
     }
 
@@ -145,13 +144,14 @@ export const useBarChart = ({
     )(theme)
   }, [computedBarProps, styles.bar, theme])
 
-  const [dimBarProps, dimBarClassName] = useMemo(() => {
-    const resolvedDimBar = { fillOpacity: 0.3, strokeOpacity: 0, ...dimBar }
-
-    return getComponentProps<Dict, string>([resolvedDimBar, barProperties])(
-      theme,
-    )
-  }, [dimBar, theme])
+  const [dimBarProps, dimBarClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [dimBar, barProperties],
+        styles.dimBar,
+      )(theme),
+    [dimBar, styles.dimBar, theme],
+  )
 
   const [activeBarProps, activeBarClassName] = useMemo(
     () =>

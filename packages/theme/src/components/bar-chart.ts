@@ -3,7 +3,13 @@ import { LineChart } from "./line-chart"
 
 export const BarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
-    bar: {},
+    bar: {
+      strokeOpacity: 1,
+    },
+    dimBar: {
+      fillOpacity: 0.3,
+      strokeOpacity: 0,
+    },
     activeBar: {},
     background: { fill: "transparent" },
     cursor: { strokeDasharray: "5 5" },

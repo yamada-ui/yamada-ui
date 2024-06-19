@@ -1,6 +1,5 @@
-import { faCaretDown, faCheck } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { ChevronsDown, Check } from "@yamada-ui/lucide"
 import type { AutocompleteItem } from "@yamada-ui/react"
 import {
   Autocomplete,
@@ -438,7 +437,7 @@ export const customIcon: Story = () => {
 
       <Autocomplete
         placeholder="キャラクターを選択"
-        iconProps={{ children: <Icon icon={faCaretDown} /> }}
+        iconProps={{ children: <ChevronsDown /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
@@ -462,7 +461,7 @@ export const customOption: Story = () => {
 
       <Autocomplete
         placeholder="キャラクターを選択"
-        optionProps={{ icon: <Icon icon={faCheck} color="green.500" /> }}
+        optionProps={{ icon: <Check color="green.500" /> }}
       >
         <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
         <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>

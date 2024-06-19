@@ -84,8 +84,16 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
               const resolvedColSpan = (customColSpan ?? colSpan) || 1
               const resolvedRowSpan = (customRowSpan ?? rowSpan) || 1
 
+              const isSorted = getIsSorted()
+              const ariaSort = !isSorted
+                ? "none"
+                : isSorted === "desc"
+                  ? "descending"
+                  : "ascending"
+
               const props = {
                 "aria-label": ariaLabel,
+                "aria-sorted": ariaSort,
                 ...computedHeaderProps,
                 colSpan: resolvedColSpan,
                 rowSpan: resolvedRowSpan,
@@ -110,9 +118,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
                 >
                   {render(columnDef.header, getContext())}
                   {getCanSort() ? (
-                    <SortIcon
-                      {...{ isSorted: getIsSorted(), ...sortIconProps }}
-                    />
+                    <SortIcon {...{ isSorted, ...sortIconProps }} />
                   ) : null}
                 </Th>
               )

@@ -55,12 +55,17 @@ export const Tbody = ({ ...rest }: TableBodyProps) => {
             data-disabled={dataAttr(isDisabled)}
             aria-selected={ariaAttr(isSelected)}
             aria-disabled={ariaAttr(isDisabled)}
+            aria-colindex={row.index}
           >
-            {cells.map((cell) => {
+            {cells.map((cell, index) => {
               const { id, column, getContext } = cell
 
               return (
-                <Td key={id} {...runIfFunc(cellProps, cell)}>
+                <Td
+                  key={id}
+                  {...runIfFunc(cellProps, cell)}
+                  aria-rowindex={index}
+                >
                   {render(column.columnDef.cell, getContext())}
                 </Td>
               )

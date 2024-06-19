@@ -4,7 +4,6 @@ import { LineChart } from "./line-chart"
 export const BarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     bar: {
-      fillOpacity: "var(--ui-fill-opacity)",
       strokeOpacity: 1,
     },
     dimBar: {

@@ -151,8 +151,8 @@ export const useAreaChart = ({
   const {
     dot = {},
     activeDot = {},
-    dimDot,
-    dimArea,
+    dimDot = {},
+    dimArea = {},
     ...computedAreaProps
   } = rest.areaProps ?? {}
 
@@ -220,25 +220,20 @@ export const useAreaChart = ({
     )(theme)
   }, [computedAreaProps, styles.area, theme])
 
-  const [dimAreaProps, dimAreaClassName] = useMemo(() => {
-    const resolvedDimArea = {
-      ...dimArea,
-    }
+  const [dimAreaProps, dimAreaClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [dimArea, areaProperties],
+        styles.dimArea,
+      )(theme),
+    [dimArea, styles.dimArea, theme],
+  )
 
-    return getComponentProps<Dict, string>(
-      [resolvedDimArea, areaProperties],
-      styles.dimArea,
-    )(theme)
-  }, [dimArea, styles.dimArea, theme])
-
-  const [dotProps, dotClassName] = useMemo(() => {
-    const resolvedDot = { ...dot }
-
-    return getComponentProps<Dict, string>(
-      [resolvedDot, dotProperties],
-      styles.dot,
-    )(theme)
-  }, [dot, styles.dot, theme])
+  const [dotProps, dotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>([dot, dotProperties], styles.dot)(theme),
+    [dot, styles.dot, theme],
+  )
 
   const [activeDotProps, activeDotClassName] = useMemo(
     () =>
@@ -249,13 +244,14 @@ export const useAreaChart = ({
     [activeDot, styles.activeDot, theme],
   )
 
-  const [dimDotProps, dimDotClassName] = useMemo(() => {
-    const resolvedDimDot = { ...dimDot }
-    return getComponentProps<Dict, string>(
-      [resolvedDimDot, dotProperties],
-      styles.dimDot,
-    )(theme)
-  }, [dimDot, styles.dimDot, theme])
+  const [dimDotProps, dimDotClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [dimDot, dotProperties],
+        styles.dimDot,
+      )(theme),
+    [dimDot, styles.dimDot, theme],
+  )
 
   const defaultSplitOffset = useMemo(() => {
     if (series.length === 1) {

@@ -164,6 +164,7 @@ export const usePieChart = ({
 
   const cellClassName = useMemo(() => {
     const resolvedCellProps = {
+      fillOpacity: "var(--ui-fill-opacity)",
       ...styles.cell,
       ...computedCellProps,
     }
@@ -180,7 +181,7 @@ export const usePieChart = ({
   const activeShapeProps = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [{ ...activeShape }, pieProperties],
+        [activeShape, pieProperties],
         styles.activeShape,
       )(theme, true),
     [activeShape, styles.activeShape, theme],

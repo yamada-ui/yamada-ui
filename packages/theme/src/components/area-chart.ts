@@ -11,12 +11,5 @@ export const AreaChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
       fillOpacity: 0,
       strokeOpacity: 0.3,
     },
-    dot: {
-      fillOpacity: 1,
-    },
-    dimDot: {
-      fillOpacity: 0,
-      strokeOpacity: 0,
-    },
   },
 })({ omit: ["line"] })

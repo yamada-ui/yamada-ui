@@ -28,10 +28,7 @@ export const LineChart: ComponentMultiStyle = {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "xs",
     },
-    line: {
-      fillOpacity: "var(--ui-fill-opacity)",
-      strokeOpacity: "var(--ui-fill-opacity)",
-    },
+    line: {},
     dimLine: {
       fillOpacity: 0,
       strokeOpacity: 0.3,

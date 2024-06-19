@@ -9,6 +9,8 @@ import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
 export type StepStatusProps = {
+  colorScheme?: string
+} & {
   [key in "complete" | "active" | "incomplete"]?:
     | ReactNode
     | ((props: Omit<StepContext, "status">) => ReactNode)
@@ -18,6 +20,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
   (
     {
       className,
+      colorScheme,
       complete = <StepIcon />,
       incomplete = <StepNumber />,
       active = <StepNumber />,
@@ -28,7 +31,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
     const { styles } = useStepperContext()
     const { status, ...props } = useStepContext()
 
-    const css: CSSUIObject = { ...styles.status }
+    const css: CSSUIObject = { ...styles.status, color: colorScheme }
 
     let component: ReactNode | null = null
 

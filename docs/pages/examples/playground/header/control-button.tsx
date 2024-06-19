@@ -22,7 +22,7 @@ export const ControlButton: FC<ControlButtonProps> = memo(
       <Menu {...menuProps}>
         <MenuButton
           as={IconButton}
-          icon={<Ellipsis fontSize="1.3em" />}
+          icon={<Ellipsis fontSize="2xl" />}
           {...rest}
         />
 

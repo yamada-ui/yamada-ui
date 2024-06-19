@@ -1,6 +1,5 @@
-import { faCheck, faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
+import { Check, Mail, Phone } from "@yamada-ui/lucide"
 import {
   Input,
   InputGroup,
@@ -8,7 +7,6 @@ import {
   InputRightAddon,
   InputLeftElement,
   InputRightElement,
-  Icon,
   Button,
   useBoolean,
   FormControl,
@@ -16,7 +14,6 @@ import {
 } from "@yamada-ui/react"
 import type { SubmitHandler } from "react-hook-form"
 import { useForm } from "react-hook-form"
-import { FaPhone } from "react-icons/fa"
 
 type Story = StoryFn<typeof Input>
 
@@ -156,18 +153,18 @@ export const useElement: Story = () => {
     <>
       <InputGroup>
         <InputLeftElement>
-          <Icon as={FaPhone} />
+          <Phone />
         </InputLeftElement>
         <Input type="tel" placeholder="your phone number" />
       </InputGroup>
 
       <InputGroup>
         <InputLeftElement>
-          <FontAwesomeIcon icon={faEnvelope} />
+          <Mail />
         </InputLeftElement>
         <Input type="email" placeholder="your email address" />
         <InputRightElement>
-          <FontAwesomeIcon icon={faCheck} color="green.500" />
+          <Check color="green.500" />
         </InputRightElement>
       </InputGroup>
 
@@ -273,7 +270,7 @@ export const reactHookForm: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <FontAwesomeIcon icon={faEnvelope} />
+            <Mail />
           </InputLeftElement>
           <Input
             type="email"
@@ -351,7 +348,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
       >
         <InputGroup>
           <InputLeftElement>
-            <FontAwesomeIcon icon={faEnvelope} />
+            <Mail />
           </InputLeftElement>
           <Input
             type="email"

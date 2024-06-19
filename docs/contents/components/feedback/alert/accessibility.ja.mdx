@@ -1,0 +1,21 @@
+---
+title: Alert
+description: "`Alert`は、ユーザーに情報を伝達するコンポーネントです。"
+package_name: "@yamada-ui/alert"
+with_description: true
+tab: アクセシビリティ
+---
+
+`Alert`は、アクセシビリティに関して[WAI-ARIA - Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)に従います。
+
+## キーボード操作
+
+キーボード操作は不要です。
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性            | 使い方                                        |
+| -------------- | ----------------------- | --------------------------------------------- |
+| `Alert`        | `	role="alert"`          | alertであることを示します。                   |
+|                | `	aria-live="assertive"` | 緊急の通知であることを示します。              |
+|                | `	aria-atomic=true`      | alert要素全体が通知対象であることを示します。 |

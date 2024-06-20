@@ -1,5 +1,5 @@
 import type { AutocompleteItem } from "@yamada-ui/react"
-import { AutocompleteOption, MultiAutocomplete } from "@yamada-ui/react"
+import { AutocompleteOption, MultiAutocomplete, Tag } from "@yamada-ui/react"
 import { fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 
 describe("<MultiAutoComplete />", () => {
@@ -46,6 +46,26 @@ describe("<MultiAutoComplete />", () => {
       )
 
       expect(screen.getByText("option1,")).toBeInTheDocument()
+    })
+
+    test("with component", () => {
+      render(
+        <MultiAutocomplete
+          defaultValue={["option1"]}
+          component={({ label, onRemove }) => (
+            <Tag onClose={onRemove} role="check">
+              {label}
+            </Tag>
+          )}
+        >
+          <AutocompleteOption value="option1">option1</AutocompleteOption>
+          <AutocompleteOption value="option2">option2</AutocompleteOption>
+          <AutocompleteOption value="option3">option3</AutocompleteOption>
+        </MultiAutocomplete>,
+      )
+
+      // span is used to display the label
+      expect(screen.getByRole("check")).toBeInTheDocument()
     })
   })
 

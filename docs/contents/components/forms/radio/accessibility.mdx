@@ -8,24 +8,37 @@ tab: Accessibility
 
 The `Radio` follows the[WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio) for accessibility.
 
+If not using FormControl, set aria-labelledby on the RadioGroup.
+
+```tsx live=false
+<VStack gap="sm">
+  <Text as="h3" id="group">
+    キャラクター
+  </Text>
+
+  <RadioGroup aria-labelledby="group">
+    <Radio value="孫悟空">孫悟空</Radio>
+    <Radio value="ベジータ">ベジータ</Radio>
+    <Radio value="フリーザ">フリーザ</Radio>
+  </RadioGroup>
+</VStack>
+```
+
 ## Keyboard Navigation
 
-| Key          | Description                                                                                                                                         | State |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| `Tab`        | When focus moves to the radio group, it moves to the checked radio button. <br/> If no radio button is checked, it moves to the first radio button. | -     |
-| `Space`      | Checks the focused radio button that is not checked.                                                                                                | -     |
-| `ArrowLeft`  | Checks the previous radio button that is not disabled.                                                                                              | -     |
-| `ArrowRight` | Checks the next radio button that is not disabled.                                                                                                  | -     |
-| `ArrowUp`    | Checks the previous radio button that is not disabled.                                                                                              | -     |
-| `ArrowDown`  | Checks the next radio button that is not disabled.                                                                                                  | -     |
+| Key          | Description                                                                                                                                   | State |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| `Tab`        | When focus moves to the radio group, it moves to the checked radio button. If no radio button is checked, it moves to the first radio button. | -     |
+| `Space`      | Checks the focused radio button that is not checked.                                                                                          | -     |
+| `ArrowLeft`  | Checks the previous radio button that is not disabled.                                                                                        | -     |
+| `ArrowRight` | Checks the next radio button that is not disabled.                                                                                            | -     |
+| `ArrowUp`    | Checks the previous radio button that is not disabled.                                                                                        | -     |
+| `ArrowDown`  | Checks the next radio button that is not disabled.                                                                                            | -     |
 
 ## ARIA Roles and Attributes
 
-| Component    | Roles and Attributes | Usage                                                                           |
-| ------------ | -------------------- | ------------------------------------------------------------------------------- |
-| `RadioGroup` | `role="radiogroup"`  | Indicates that it is a group of radio buttons.                                  |
-|              | `id`                 | `id` used to associate with `Radio`.                                            |
-|              | `aria-labelledby`    | Sets the `id` associated with `Radio`.                                          |
-| `Radio`      | `role="radio"`       | Indicates that it is a radio button.                                            |
-|              | `id`                 | `id` used to associate with `RadioGroup`.                                       |
-|              | `aria-checked`       | Set to `true` if the radio button is checked, and `false` if it is not checked. |
+| Component    | Roles and Attributes | Usage                                                                                   |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------- |
+| `RadioGroup` | `role="radiogroup"`  | Indicates that this is a radio group.                                                   |
+|              | `aria-labelledby`    | If RadioGroup is within a FormControl and FormControl has a label or Label, set its id. |
+| `Radio`      | `aria-checked`       | Sets to "true" if the radio button is checked, and "false" if it is not checked.        |

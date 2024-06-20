@@ -22,11 +22,11 @@ import { Reorder, ReorderItem, ReorderTrigger } from "@yamada-ui/react"
 
 ```tsx
 <Reorder>
-  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-  <ReorderItem label="リクーム">リクーム</ReorderItem>
-  <ReorderItem label="バータ">バータ</ReorderItem>
-  <ReorderItem label="ジース">ジース</ReorderItem>
-  <ReorderItem label="グルド">グルド</ReorderItem>
+  <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem value="リクーム">リクーム</ReorderItem>
+  <ReorderItem value="バータ">バータ</ReorderItem>
+  <ReorderItem value="ジース">ジース</ReorderItem>
+  <ReorderItem value="グルド">グルド</ReorderItem>
 </Reorder>
 ```
 
@@ -35,11 +35,11 @@ import { Reorder, ReorderItem, ReorderTrigger } from "@yamada-ui/react"
 ```tsx functional=true
 const items = useMemo<ReorderGenerateItem[]>(
   () => [
-    { label: "ギニュー", children: "ギニュー" },
-    { label: "リクーム", children: "リクーム" },
-    { label: "バータ", children: "バータ" },
-    { label: "ジース", children: "ジース" },
-    { label: "グルド", children: "グルド" },
+    { label: "ギニュー", value: "ギニュー" },
+    { label: "リクーム", value: "リクーム" },
+    { label: "バータ", value: "バータ" },
+    { label: "ジース", value: "ジース" },
+    { label: "グルド", value: "グルド" },
   ],
   [],
 )
@@ -52,27 +52,27 @@ return <Reorder items={items} />
 ```tsx
 <VStack divider={<Divider />}>
   <Reorder variant="outline">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 
   <Reorder variant="elevated">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 
   <Reorder variant="unstyled">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 </VStack>
 ```
@@ -82,35 +82,35 @@ return <Reorder items={items} />
 ```tsx
 <VStack divider={<Divider />}>
   <Reorder size="sm">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 
   <Reorder size="md">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 
   <Reorder size="normal">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 
   <Reorder size="lg">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 </VStack>
 ```
@@ -122,19 +122,19 @@ return <Reorder items={items} />
 ```tsx
 <VStack divider={<Divider />}>
   <Reorder orientation="vertical">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 
   <Reorder orientation="horizontal">
-    <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-    <ReorderItem label="リクーム">リクーム</ReorderItem>
-    <ReorderItem label="バータ">バータ</ReorderItem>
-    <ReorderItem label="ジース">ジース</ReorderItem>
-    <ReorderItem label="グルド">グルド</ReorderItem>
+    <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+    <ReorderItem value="リクーム">リクーム</ReorderItem>
+    <ReorderItem value="バータ">バータ</ReorderItem>
+    <ReorderItem value="ジース">ジース</ReorderItem>
+    <ReorderItem value="グルド">グルド</ReorderItem>
   </Reorder>
 </VStack>
 ```
@@ -145,14 +145,14 @@ return <Reorder items={items} />
 
 ```tsx
 <Reorder>
-  <ReorderItem label="孫悟空">
+  <ReorderItem value="孫悟空">
     <HStack>
       <ReorderTrigger />
       <Text>孫悟空</Text>
     </HStack>
   </ReorderItem>
 
-  <ReorderItem label="ベジータ">
+  <ReorderItem value="ベジータ">
     <HStack>
       <ReorderTrigger>
         <FontAwesomeIcon icon={faPoo} />
@@ -168,12 +168,12 @@ return <Reorder items={items} />
 項目の順序が変更されたイベントをハンドルしたい場合は、`onChange`を使用します。`onChange`は、現在の順序を配列を提供します。
 
 ```tsx
-<Reorder onChange={(labels) => console.log(`changed '${labels.join(`', '`)}'`)}>
-  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-  <ReorderItem label="リクーム">リクーム</ReorderItem>
-  <ReorderItem label="バータ">バータ</ReorderItem>
-  <ReorderItem label="ジース">ジース</ReorderItem>
-  <ReorderItem label="グルド">グルド</ReorderItem>
+<Reorder onChange={(values) => console.log(`changed '${values.join(`', '`)}'`)}>
+  <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem value="リクーム">リクーム</ReorderItem>
+  <ReorderItem value="バータ">バータ</ReorderItem>
+  <ReorderItem value="ジース">ジース</ReorderItem>
+  <ReorderItem value="グルド">グルド</ReorderItem>
 </Reorder>
 ```
 
@@ -183,15 +183,15 @@ return <Reorder items={items} />
 
 ```tsx
 <Reorder
-  onCompleteChange={(labels) =>
-    console.log(`completed '${labels.join(`', '`)}'`)
+  onCompleteChange={(values) =>
+    console.log(`completed '${values.join(`', '`)}'`)
   }
 >
-  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-  <ReorderItem label="リクーム">リクーム</ReorderItem>
-  <ReorderItem label="バータ">バータ</ReorderItem>
-  <ReorderItem label="ジース">ジース</ReorderItem>
-  <ReorderItem label="グルド">グルド</ReorderItem>
+  <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem value="リクーム">リクーム</ReorderItem>
+  <ReorderItem value="バータ">バータ</ReorderItem>
+  <ReorderItem value="ジース">ジース</ReorderItem>
+  <ReorderItem value="グルド">グルド</ReorderItem>
 </Reorder>
 ```
 
@@ -201,10 +201,10 @@ return <Reorder items={items} />
 
 ```tsx
 <Reorder h="xs" overflowY="auto" layoutScroll>
-  <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-  <ReorderItem label="リクーム">リクーム</ReorderItem>
-  <ReorderItem label="バータ">バータ</ReorderItem>
-  <ReorderItem label="ジース">ジース</ReorderItem>
-  <ReorderItem label="グルド">グルド</ReorderItem>
+  <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+  <ReorderItem value="リクーム">リクーム</ReorderItem>
+  <ReorderItem value="バータ">バータ</ReorderItem>
+  <ReorderItem value="ジース">ジース</ReorderItem>
+  <ReorderItem value="グルド">グルド</ReorderItem>
 </Reorder>
 ```

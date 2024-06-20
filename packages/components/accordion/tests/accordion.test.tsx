@@ -20,7 +20,7 @@ describe("<Accordion />", () => {
     )
   })
 
-  test("should render correctly with defaultIndex item expanded", () => {
+  test("should render correctly with defaultIndex item expanded", async () => {
     render(
       <Accordion defaultIndex={0}>
         <AccordionItem label="Accordion Label 1">
@@ -32,11 +32,12 @@ describe("<Accordion />", () => {
       </Accordion>,
     )
 
-    const button = screen.getByRole("button", { name: /Accordion Label 1/i })
+    const button = await screen.findByRole("button", {
+      name: /Accordion Label 1/i,
+    })
     expect(button).toHaveAttribute("data-expanded")
-    expect(screen.getByRole("paragraph")).toHaveTextContent(
-      "This is an accordion item 1",
-    )
+    const paragraph = await screen.findByRole("paragraph")
+    expect(paragraph).toHaveTextContent("This is an accordion item 1")
   })
 
   test("should work correctly with isToggle", async () => {
@@ -100,7 +101,7 @@ describe("<Accordion />", () => {
     expect(button).toBeDisabled()
   })
 
-  test("should render item with panel", () => {
+  test("should render item with panel", async () => {
     render(
       <Accordion defaultIndex={0}>
         <AccordionItem label="Accordion Label">
@@ -109,9 +110,9 @@ describe("<Accordion />", () => {
       </Accordion>,
     )
 
-    expect(screen.getByRole("paragraph")).toHaveTextContent(
-      "This is an accordion item",
-    )
+    const paragraph = await screen.findByRole("paragraph")
+
+    expect(paragraph).toHaveTextContent("This is an accordion item")
   })
 
   test("should render item with custom icon", async () => {

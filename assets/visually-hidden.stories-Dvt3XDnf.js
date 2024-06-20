@@ -1,6 +1,0 @@
-import{j as t}from"./jsx-runtime-X2b_N9AH.js";import{b as s}from"./factory-Bf0a1C4O.js";import{B as n}from"./button-DOTfyR12.js";import{C as m}from"./check-CREkQX8R.js";import"./index-uCp2LrAq.js";import"./_commonjsHelpers-BosuxZz1.js";import"./emotion-use-insertion-effect-with-fallbacks.browser.esm-xaNYqS-v.js";import"./forward-ref-Dr5Hqd9a.js";import"./use-ripple-op6oFSyJ.js";import"./index-B5H6KlGO.js";import"./motion-B-hZ6xRg.js";import"./motion-BPPCNfSa.js";import"./loading-BMMGc-Ko.js";import"./icon-CVBZDjqd.js";import"./index-BJ39ysE2.js";import"./theme-provider-zwL-D6eR.js";import"./use-component-style-C0MoE1pt.js";import"./lucide-icon-BNUZiTU8.js";const p=s("span",{baseStyle:{border:"0",clip:"rect(0, 0, 0, 0)",height:"1px",width:"1px",margin:"-1px",padding:"0",overflow:"hidden",whiteSpace:"nowrap",position:"absolute"}}),V={title:"Components / Other / VisuallyHidden",component:p},r=()=>t.jsxs(n,{children:[t.jsx(p,{children:"Checkmark"}),t.jsx(m,{fontSize:"2xl"})]});var o,i,e;r.parameters={...r.parameters,docs:{...(o=r.parameters)==null?void 0:o.docs,source:{originalSource:`() => {
-  return <Button>
-      <VisuallyHidden>Checkmark</VisuallyHidden>
-      <Check fontSize="2xl" />
-    </Button>;
-}`,...(e=(i=r.parameters)==null?void 0:i.docs)==null?void 0:e.source}}};const z=["basic"];export{z as __namedExportsOrder,r as basic,V as default};

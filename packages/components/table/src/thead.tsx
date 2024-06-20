@@ -99,7 +99,7 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
 
               const props = {
                 "aria-label": ariaLabel,
-                "aria-sort": !isSorted ? ariaSort.none : ariaSort[isSorted],
+                "aria-sort": isSorted ? ariaSort[isSorted] : ariaSort.none,
                 ...computedHeaderProps,
                 colSpan: resolvedColSpan,
                 rowSpan: resolvedRowSpan,

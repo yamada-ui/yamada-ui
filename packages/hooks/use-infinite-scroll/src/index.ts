@@ -161,6 +161,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   const isMountedRef = useRef<boolean>(false)
   const prevScrollPosition = useRef<number>(0)
   const [isFinish, setIsFinish] = useState<boolean>(false)
+  const [isLoad, setIsLoad] = useState<boolean>(false)
   const onLoad = useCallbackRef(onLoadProp)
   const isVertical = orientation === "vertical"
   const options: IntersectionObserverInit = useMemo(() => {
@@ -206,6 +207,8 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
     const observer = new IntersectionObserver(async ([entry]) => {
       if (!entry.isIntersecting || processingRef.current) return
 
+      setIsLoad(true)
+
       const props = { index: indexRef.current, entry, finish: onFinish }
 
       processingRef.current = true
@@ -226,6 +229,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
 
       indexRef.current += 1
       processingRef.current = false
+      setIsLoad(false)
     }, options)
 
     return observer
@@ -276,6 +280,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
     isDisabled,
     isReverse,
     isVertical,
+    isLoad,
     onFinish,
     onLoad,
     rootRef,
@@ -286,5 +291,5 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   assignRef(resetRef, onReset)
   assignRef(indexRefProp, (index) => (indexRef.current = index))
 
-  return { ref, isFinish }
+  return { ref, isFinish, isLoad }
 }

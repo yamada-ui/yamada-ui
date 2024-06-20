@@ -78,7 +78,7 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
     const {
       ref: triggerRef,
       isFinish,
-      isLoad,
+      processingRef,
     } = useInfiniteScroll({
       orientation,
       rootRef: rootRefProp ?? rootRef,
@@ -114,7 +114,7 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
           tabIndex={0}
           className={cx("ui-infinite-scroll-area", className)}
           role="feed"
-          aria-busy={isLoad}
+          aria-busy={processingRef.current}
           __css={css}
           {...rest}
         >

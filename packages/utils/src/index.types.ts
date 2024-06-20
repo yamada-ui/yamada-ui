@@ -19,7 +19,9 @@ export type Path<T> = {
 
 export type Dict<T = any> = Record<string, T>
 
-export type StringLiteral = string & {}
+export type ObjectLiteral = {}
+
+export type StringLiteral = string & ObjectLiteral
 
 export type Union<T> = T | StringLiteral
 

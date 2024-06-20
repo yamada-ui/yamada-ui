@@ -7,7 +7,7 @@ import {
   CircleHelp,
   CircleX,
   Timer,
-} from "lucide-react"
+} from "@yamada-ui/lucide"
 
 export const STATUS = {
   backlog: {

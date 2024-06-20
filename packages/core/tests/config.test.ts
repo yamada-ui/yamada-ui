@@ -205,7 +205,7 @@ const theme = transformTheme(
     initialThemeScheme: "base",
     initialColorMode: "light",
     var: { prefix: "ui" },
-    breakpoint: "down",
+    breakpoint: { direction: "down" },
   },
 ) as StyledTheme
 

@@ -24,7 +24,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).toHaveTextContent(/one/i)
     expect(options[1]).toHaveTextContent(/two/i)
   })
@@ -45,7 +45,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).toHaveTextContent(/one/i)
     expect(options[1]).toHaveTextContent(/two/i)
   })
@@ -72,7 +72,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const select = screen.getByRole("select")
+    const select = await screen.findByRole("select")
     expect(select).toBeInTheDocument()
     expect(select).toHaveTextContent(/numbers/i)
     expect(select).toHaveTextContent(/one/i)
@@ -93,7 +93,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const select = screen.getByRole("select")
+    const select = await screen.findByRole("select")
     expect(select).toBeInTheDocument()
     expect(select).toHaveTextContent(/numbers/i)
     expect(select).toHaveTextContent(/one/i)
@@ -113,7 +113,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).toHaveTextContent(/select numbers/i)
   })
 
@@ -135,7 +135,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).not.toHaveTextContent(/select numbers/i)
   })
 
@@ -180,7 +180,7 @@ describe("<Select />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).toHaveTextContent(/one/i)
     expect(options[0]).toHaveAttribute("data-disabled")
     expect(options[0]).toHaveAttribute("aria-disabled", "true")
@@ -371,7 +371,7 @@ describe("<Select />", () => {
 
       await user.click(input)
 
-      const select = screen.getByRole("select")
+      const select = await screen.findByRole("select")
       expect(select).toHaveStyle({ visibility: "visible" })
 
       await user.keyboard("{Escape>}")
@@ -403,7 +403,7 @@ describe("<MultiSelect />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).toHaveTextContent(/one/i)
     expect(options[1]).toHaveTextContent(/two/i)
   })
@@ -424,7 +424,7 @@ describe("<MultiSelect />", () => {
 
     await user.click(input)
 
-    const options = screen.getAllByRole("select-item")
+    const options = await screen.findAllByRole("select-item")
     expect(options[0]).toHaveTextContent(/one/i)
     expect(options[1]).toHaveTextContent(/two/i)
   })
@@ -451,7 +451,7 @@ describe("<MultiSelect />", () => {
 
     await user.click(input)
 
-    const select = screen.getByRole("select")
+    const select = await screen.findByRole("select")
     expect(select).toBeInTheDocument()
     expect(select).toHaveTextContent(/numbers/i)
     expect(select).toHaveTextContent(/one/i)
@@ -470,10 +470,10 @@ describe("<MultiSelect />", () => {
 
     await user.click(input)
 
-    const option1 = screen.getByText(/one/i)
+    const option1 = await screen.findByText(/one/i)
     await user.click(option1)
 
-    const option2 = screen.getByText(/two/i)
+    const option2 = await screen.findByText(/two/i)
     await user.click(option2)
 
     expect(input).toHaveTextContent(/one/i)

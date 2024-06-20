@@ -999,6 +999,11 @@
       "defaultValue": false,
       "required": false,
       "description": "If `true`, the menu item will be focusable."
+    },
+    "type": {
+      "type": "\"checkbox\" | \"radio\"",
+      "required": false,
+      "description": "The type of the menu option item."
     }
   },
   "MenuIcon": {},

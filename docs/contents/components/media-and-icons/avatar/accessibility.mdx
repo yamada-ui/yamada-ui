@@ -1,0 +1,16 @@
+---
+title: Radio
+description: "`Avatar` is a component that displays a profile picture or an icon with initials representing a user."
+package_name: "@yamada-ui/avatar"
+with_description: true
+tab: Accessibility
+---
+
+## ARIA Roles and Attributes
+
+| Component     | Role and Attributes        | Usage                                                                                               |
+| ------------- | -------------------------- | --------------------------------------------------------------------------------------------------- |
+| `AvatarName`  | `role="img"`               | Indicates that it is an image when the image set in `src` is not yet loaded or if `src` is not set. |
+|               | `aria-label=name`          | Sets the name when `name` is set.                                                                   |
+| `AvatarImage` | `role="img"`               | Indicates that it is an image.                                                                      |
+|               | `aria-label="Avatar Icon"` | Sets `"Avatar Icon"` if `aria-label` is not set.                                                    |

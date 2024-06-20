@@ -45,4 +45,30 @@ describe("<Indicator />", () => {
     )
     expect(screen.queryByTestId("Indicator")).not.toBeInTheDocument()
   })
+
+  test("renders indicator at bottom-left", () => {
+    render(
+      <Indicator placement="bottom-left" data-testid="Indicator" label="new">
+        <div></div>
+      </Indicator>,
+    )
+    expect(screen.queryByTestId("Indicator")).toHaveStyle({ bottom: "0" })
+    expect(screen.queryByTestId("Indicator")).toHaveStyle({ left: "0" })
+    expect(screen.queryByTestId("Indicator")).toHaveStyle({
+      transform: "translate(-50%, 50%)",
+    })
+  })
+
+  test("renders indicator with ping element", () => {
+    render(
+      <Indicator data-testid="Indicator" ping label="new">
+        <div></div>
+      </Indicator>,
+    )
+    expect(screen.queryByTestId("Indicator")).toHaveClass("ui-indicator__icon")
+    expect(screen.queryByText("new")).toHaveClass("ui-indicator__icon")
+    expect(screen.queryByText("new")!.querySelector("div")).toHaveClass(
+      "ui-indicator__icon__ping",
+    )
+  })
 })

@@ -1,5 +1,5 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "../src"
 
 describe("<Modal />", () => {
@@ -46,7 +46,7 @@ describe("<Modal />", () => {
     await user.click(openModalButton)
 
     const modal = await screen.findByRole("dialog", { name: /modal header/i })
-    expect(modal).toBeVisible()
+    await waitFor(() => expect(modal).toBeVisible())
 
     const modalHeader = await screen.findByText(/modal header/i)
     expect(modalHeader).toBeInTheDocument()

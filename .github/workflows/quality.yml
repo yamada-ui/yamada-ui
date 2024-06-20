@@ -165,3 +165,18 @@ jobs:
       - name: Run docs format
         if: steps.check-docs-modified.outputs.changed == 'true'
         run: pnpm docs:format:check
+
+  pr-test:
+    name: PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Sync Docs
+        uses: ./.github/composite-actions/update-docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

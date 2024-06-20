@@ -116,7 +116,7 @@
       "description": "Props for autocomplete input element."
     },
     "insertPositionItem": {
-      "type": "Union<\"first\" | \"last\"> | [string, \"first\" | \"last\"]",
+      "type": "string | [string, \"first\" | \"last\"]",
       "defaultValue": "'first'",
       "required": false,
       "description": "The position to be inserted when the autocomplete option is created."
@@ -444,7 +444,7 @@
       "description": "Props for multi autocomplete input element."
     },
     "insertPositionItem": {
-      "type": "Union<\"first\" | \"last\"> | [string, \"first\" | \"last\"]",
+      "type": "string | [string, \"first\" | \"last\"]",
       "defaultValue": "'first'",
       "required": false,
       "description": "The position to be inserted when the autocomplete option is created."

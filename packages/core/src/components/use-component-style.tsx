@@ -86,8 +86,9 @@ const getResponsiveStyles =
       )({ isMulti })
     } else {
       const { queries = [] } = props.theme.__breakpoints ?? {}
-      const { breakpoint } = props.theme.__config ?? {}
-      const isDown = breakpoint === "down"
+      const { direction = "down", identifier } =
+        props.theme.__config?.breakpoint ?? {}
+      const isDown = direction !== "up"
 
       const finalQuery = queries
         .filter(
@@ -148,7 +149,7 @@ const getResponsiveStyles =
             minW = isDown ? nextQuery?.minW : minW
             maxW = isDown ? maxW : nextQuery?.maxW
 
-            query = createQuery(minW, maxW)
+            query = createQuery(minW, maxW, identifier)
           }
 
           const queryStyles = getStyles<IsMulti>(

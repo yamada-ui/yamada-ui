@@ -1,3 +1,5 @@
+import { faPoo } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import type { Meta, StoryFn } from "@storybook/react"
 import { Ghost } from "@yamada-ui/lucide"
 import type { Steps } from "@yamada-ui/react"
@@ -62,6 +64,48 @@ export const withSize: Story = () => {
       <Stepper size="md" index={1} steps={steps} />
 
       <Stepper size="lg" index={1} steps={steps} />
+    </>
+  )
+}
+
+export const separateColorScheme: Story = () => {
+  const steps: Steps = [
+    {
+      title: "孫悟空少年編",
+      description: "レッドリボン軍",
+      colorScheme: "red",
+    },
+    { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
+    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+  ]
+  const { activeStep, onStepPrev, onStepNext } = useSteps({
+    index: 1,
+    count: steps.length,
+  })
+
+  return (
+    <>
+      <Stepper index={activeStep}>
+        {steps.map(({ title, description, colorScheme }, index) => (
+          <Step key={index}>
+            <StepStatus
+              complete={<FontAwesomeIcon icon={faPoo} />}
+              colorScheme={colorScheme}
+            />
+
+            <Box flexShrink="0">
+              <StepTitle>{title}</StepTitle>
+              <StepDescription>{description}</StepDescription>
+            </Box>
+
+            <StepSeparator />
+          </Step>
+        ))}
+      </Stepper>
+      <HStack>
+        <Button onClick={onStepPrev}>Prev</Button>
+        <Button onClick={onStepNext}>Next</Button>
+      </HStack>
     </>
   )
 }

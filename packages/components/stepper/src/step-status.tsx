@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, Theme } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
@@ -8,37 +8,48 @@ import type { StepContext } from "./step"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
-export type StepStatusProps = {
-  colorScheme?: string
-} & {
+export type StepStatusProps = {} & {
   [key in "complete" | "active" | "incomplete"]?:
     | ReactNode
     | ((props: Omit<StepContext, "status">) => ReactNode)
-}
+} & { colorScheme?: Theme["colorSchemes"] }
 
 export const StepStatus = forwardRef<StepStatusProps, "div">(
   (
     {
       className,
-      colorScheme,
       complete = <StepIcon />,
       incomplete = <StepNumber />,
       active = <StepNumber />,
+      colorScheme,
       ...rest
     },
     ref,
   ) => {
     const { styles } = useStepperContext()
     const { status, ...props } = useStepContext()
-
-    const css: CSSUIObject = { ...styles.status, color: colorScheme }
+    let css: CSSUIObject = {
+      ...styles.status,
+    }
+    if (colorScheme) {
+      css = {
+        ...css,
+        "&[data-status=complete]": {
+          bgColor: colorScheme,
+          color: "white",
+        },
+        "&[data-status=active]": {
+          borderColor: colorScheme,
+          borderWidth: "2px",
+        },
+      }
+    }
 
     let component: ReactNode | null = null
 
     switch (status) {
       case "complete":
         component = runIfFunc(complete, props)
-
         break
       case "incomplete":
         component = runIfFunc(incomplete, props)
@@ -49,7 +60,6 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
 
         break
     }
-
     return (
       <ui.div
         ref={ref}

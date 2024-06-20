@@ -1,4 +1,4 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, Theme, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -54,6 +54,10 @@ export type Steps = ({
    * Props for step separator element.
    */
   separatorProps?: StepSeparatorProps
+  /**
+   * Props for color sheme element.
+   */
+  colorScheme?: Theme["colorSchemes"]
 } & StepProps)[]
 
 type StepperOptions = {

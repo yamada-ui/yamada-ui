@@ -422,4 +422,239 @@ describe("<MultiAutoComplete />", () => {
       expect(option2Span).not.toBeInTheDocument()
     })
   })
+
+  describe("create option", () => {
+    const GROUP_LABEL = "Group2"
+    const CREATE_OPTION_VALUE = "option4"
+    const items: AutocompleteItem[] = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: GROUP_LABEL,
+        items: [
+          {
+            label: "option2",
+            value: "option2",
+          },
+        ],
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("create option when no options are available", async () => {
+      const { user, container } = render(
+        <MultiAutocomplete allowCreate items={items} />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const input = screen.getByRole("combobox")
+      await user.type(input, CREATE_OPTION_VALUE)
+      await user.keyboard("{Enter>}")
+
+      await waitFor(() => {
+        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+        expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
+      })
+    })
+
+    test("correct warnings should be issued when both `allowCreate` and `children` are present", () => {
+      const consoleWarnSpy = vi
+        .spyOn(console, "warn")
+        .mockImplementation(() => {})
+
+      render(
+        <MultiAutocomplete allowCreate>
+          <AutocompleteOption value="option1">option1</AutocompleteOption>
+          <AutocompleteOption value="option2">option2</AutocompleteOption>
+          <AutocompleteOption value="option3">option3</AutocompleteOption>
+        </MultiAutocomplete>,
+      )
+
+      expect(consoleWarnSpy).toHaveBeenCalledOnce()
+
+      consoleWarnSpy.mockRestore()
+    })
+
+    describe("with insert position", () => {
+      test("first", async () => {
+        const { user, container } = render(
+          <MultiAutocomplete
+            allowCreate
+            items={items}
+            insertPositionItem="first"
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await user.click(autocomplete!)
+
+        const input = screen.getByRole("combobox")
+        await user.type(input, CREATE_OPTION_VALUE)
+        await user.keyboard("{Enter>}")
+
+        await waitFor(() => {
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
+        })
+      })
+
+      test("last", async () => {
+        const { user, container } = render(
+          <MultiAutocomplete
+            allowCreate
+            items={items}
+            insertPositionItem="last"
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await user.click(autocomplete!)
+
+        const input = screen.getByRole("combobox")
+        await user.type(input, CREATE_OPTION_VALUE)
+        await user.keyboard("{Enter>}")
+
+        await waitFor(() => {
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[optionElements.length - 1]).toHaveTextContent(
+            CREATE_OPTION_VALUE,
+          )
+        })
+      })
+
+      test("group2", async () => {
+        const { user, container } = render(
+          <MultiAutocomplete
+            allowCreate
+            items={items}
+            insertPositionItem={GROUP_LABEL}
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await user.click(autocomplete!)
+
+        const input = screen.getByRole("combobox")
+        await user.type(input, CREATE_OPTION_VALUE)
+        await user.keyboard("{Enter>}")
+
+        await waitFor(() => {
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
+        })
+      })
+
+      test("group2 last", async () => {
+        const { user, container } = render(
+          <MultiAutocomplete
+            allowCreate
+            items={items}
+            insertPositionItem={[GROUP_LABEL, "last"]}
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await user.click(autocomplete!)
+
+        const input = screen.getByRole("combobox")
+        await user.type(input, CREATE_OPTION_VALUE)
+        await user.keyboard("{Enter>}")
+
+        await waitFor(() => {
+          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+          expect(optionElements[2]).toHaveTextContent(CREATE_OPTION_VALUE)
+        })
+      })
+
+      test("correct warnings should be  issued when insertPosition does not exist", async () => {
+        const consoleWarnSpy = vi
+          .spyOn(console, "warn")
+          .mockImplementation(() => {})
+
+        const { user, container } = render(
+          <MultiAutocomplete
+            allowCreate
+            items={items}
+            insertPositionItem="Group4"
+          />,
+        )
+
+        const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+        expect(autocomplete).toBeInTheDocument()
+
+        await user.click(autocomplete!)
+
+        const input = screen.getByRole("combobox")
+        await user.type(input, CREATE_OPTION_VALUE)
+        await user.keyboard("{Enter>}")
+
+        await waitFor(() => expect(consoleWarnSpy).toHaveBeenCalledOnce())
+
+        consoleWarnSpy.mockRestore()
+      })
+    })
+
+    test("original list is not affected", async () => {
+      const original: AutocompleteItem[] = [
+        {
+          label: "option1",
+          value: "option1",
+        },
+        {
+          label: GROUP_LABEL,
+          items: [
+            {
+              label: "option2",
+              value: "option2",
+            },
+          ],
+        },
+        {
+          label: "option3",
+          value: "option3",
+        },
+      ]
+
+      const items: AutocompleteItem[] = JSON.parse(JSON.stringify(original))
+
+      const { user, container } = render(
+        <MultiAutocomplete
+          allowCreate
+          items={items}
+          insertPositionItem={GROUP_LABEL}
+        />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const input = screen.getByRole("combobox")
+      await user.type(input, CREATE_OPTION_VALUE)
+      await user.keyboard("{Enter>}")
+
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
+
+      expect(items).toStrictEqual(original)
+    })
+  })
 })

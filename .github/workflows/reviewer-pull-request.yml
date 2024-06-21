@@ -17,6 +17,6 @@ jobs:
       - name: Update pull requests
         run: pnpm reviewer:pr
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           DISCORD_REVIEWS_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEWS_WEBHOOK_URL }}
           DISCORD_HELP_WANTED_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}

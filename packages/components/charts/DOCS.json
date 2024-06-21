@@ -913,7 +913,7 @@
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimBar": {
@@ -927,7 +927,7 @@
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimArea": {
@@ -949,7 +949,7 @@
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimDot": {
@@ -971,7 +971,7 @@
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimDot": {

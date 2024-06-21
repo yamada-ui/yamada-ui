@@ -84,7 +84,7 @@ export const withContainer = () => {
           sm: "purple.500",
         }}
       >
-        The root breakpoint is "{breakpoint}"
+        The container breakpoint is "{breakpoint}"
       </Text>
     )
   }
@@ -109,7 +109,7 @@ export const withContainer = () => {
           sm: "purple.500",
         }}
       >
-        The container breakpoint is "{breakpoint}"
+        The root breakpoint is "{breakpoint}"
       </Text>
 
       <UIProvider config={config}>

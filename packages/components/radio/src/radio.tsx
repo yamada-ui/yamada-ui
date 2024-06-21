@@ -292,7 +292,7 @@ export const Radio = forwardRef(
       ...computedProps
     } = omitThemeProps(mergedProps)
 
-    const isChecked =
+    const isCheckedProp =
       groupValue && computedProps.value
         ? groupValue === computedProps.value
         : computedProps.isChecked
@@ -303,6 +303,7 @@ export const Radio = forwardRef(
         : computedProps.onChange
 
     const {
+      isChecked,
       getContainerProps,
       getInputProps,
       getIconProps,
@@ -314,15 +315,16 @@ export const Radio = forwardRef(
       isReadOnly,
       isDisabled,
       isInvalid,
-      isChecked,
+      isChecked: isCheckedProp,
       onChange,
     })
+
+    const tabIndex = !groupValue ? 0 : isChecked ? 0 : -1
 
     return (
       <ui.label
         className={cx("ui-radio", className)}
-        {...getContainerProps()}
-        {...rest}
+        {...getContainerProps(rest)}
         __css={{
           cursor: "pointer",
           position: "relative",
@@ -335,7 +337,13 @@ export const Radio = forwardRef(
       >
         <ui.input
           className="ui-radio__input"
-          {...getInputProps(inputProps, ref)}
+          {...getInputProps(
+            {
+              ...inputProps,
+              tabIndex,
+            },
+            ref,
+          )}
         />
 
         <ui.span

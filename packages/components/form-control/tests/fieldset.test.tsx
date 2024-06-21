@@ -1,4 +1,4 @@
-import { Checkbox } from "@yamada-ui/checkbox"
+import { Checkbox } from "@yamada-ui/react"
 import { a11y, render, screen, filterVisuallyHidden } from "@yamada-ui/test"
 import { Fieldset } from "../src"
 

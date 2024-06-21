@@ -1,4 +1,4 @@
-import { Input } from "@yamada-ui/input"
+import { Input } from "@yamada-ui/react"
 import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
 import { FormControl } from "../src"
 

@@ -1571,12 +1571,6 @@ importers:
         specifier: workspace:*
         version: link:../visually-hidden
     devDependencies:
-      '@yamada-ui/checkbox':
-        specifier: workspace:*
-        version: link:../checkbox
-      '@yamada-ui/input':
-        specifier: workspace:*
-        version: link:../input
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

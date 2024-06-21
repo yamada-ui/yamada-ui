@@ -16,3 +16,5 @@ export type {
   UseFormControlProps,
   FormControlOptions,
 } from "./form-control"
+export { Fieldset, Legend } from "./fieldset"
+export type { FieldsetProps, LegendProps } from "./fieldset"

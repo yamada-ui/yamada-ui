@@ -4,6 +4,10 @@ description: "Update the documentation sites after the release"
 runs:
   using: composite
   steps:
+    - name: Fetch latest from origin
+      run: git fetch origin
+      shell: bash
+
     - name: Update docs
       run: |
         pnpm gen:docs

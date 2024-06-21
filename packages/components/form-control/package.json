@@ -47,11 +47,14 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/visually-hidden": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "@yamada-ui/input": "workspace:*",
+    "@yamada-ui/checkbox": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18"

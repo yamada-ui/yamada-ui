@@ -114,23 +114,28 @@ export const useRadioGroup = <
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
+      role: "radiogroup",
       ...props,
       ref: mergeRefs(ref, containerRef),
-      role: "radiogroup",
     }),
     [],
   )
 
   const getRadioProps: UIPropGetter<"input", { value?: Y }, { value?: Y }> =
     useCallback(
-      (props = {}, ref = null) => ({
-        ...props,
-        ref,
-        name,
-        [isNative ? "checked" : "isChecked"]:
-          value != null ? props.value === value : undefined,
-        onChange,
-      }),
+      (props = {}, ref = null) => {
+        const isChecked = props.value === value
+
+        return {
+          ...props,
+          ref,
+          name,
+          [isNative ? "checked" : "isChecked"]:
+            value != null ? isChecked : undefined,
+          "aria-checked": isChecked,
+          onChange,
+        }
+      },
       [name, value, onChange, isNative],
     )
 
@@ -184,6 +189,7 @@ export { useRadioGroupContext }
 export const RadioGroup = forwardRef(
   <Y extends string | number = string>(
     {
+      id: idProp,
       className,
       size,
       variant,
@@ -197,18 +203,24 @@ export const RadioGroup = forwardRef(
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
     const {
+      labelId,
+      isRequired,
+      isReadOnly,
+      isDisabled,
+      isInvalid,
+      ...computedProps
+    } = useFormControl({
+      id: idProp,
+      ...props,
+    })
+    const {
       id,
       name,
       value,
       onChange,
       getContainerProps,
-      props: computedProps,
-    } = useRadioGroup(props)
-    const { isRequired, isReadOnly, isDisabled, isInvalid, ...rest } =
-      useFormControl({
-        id,
-        ...computedProps,
-      })
+      props: rest,
+    } = useRadioGroup(computedProps)
 
     const validChildren = getValidChildren(children)
     let computedChildren: ReactElement[] = []
@@ -243,9 +255,9 @@ export const RadioGroup = forwardRef(
           className={cx("ui-radio-group", className)}
           gap={gap ?? (direction === "row" ? "1rem" : undefined)}
           {...getContainerProps({
-            ...rest,
             id,
-            name,
+            "aria-labelledby": labelId,
+            ...rest,
           } as DOMAttributes<HTMLElement>)}
           direction={direction}
         >

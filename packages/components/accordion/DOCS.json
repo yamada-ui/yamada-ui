@@ -118,7 +118,7 @@
       "description": "The height you want the content in its collapsed state."
     },
     "transition": {
-      "type": "Partial<Record<\"enter\" | \"exit\", Transition>>",
+      "type": "Partial<Record<\"enter\" | \"exit\", Transition$1>>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },

@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { config } from "dotenv"
 import type { Constant } from "./utils"
-import { getConstant } from "./utils"
+import { getConstant, recursiveOctokit } from "./utils"
 
 type PullRequest = Awaited<ReturnType<typeof octokit.pulls.get>>["data"]
 
@@ -32,10 +32,12 @@ const getPullRequest = async (): Promise<PullRequest> => {
     throw new Error("Invalid pull request number\n")
   }
 
-  const { data } = await octokit.pulls.get({
-    ...COMMON_PARAMS,
-    pull_number,
-  })
+  const { data } = await recursiveOctokit(() =>
+    octokit.pulls.get({
+      ...COMMON_PARAMS,
+      pull_number,
+    }),
+  )
 
   return data
 }
@@ -60,29 +62,72 @@ const args = process.argv.slice(3)
 const main = async () => {
   try {
     constant = await getConstant()
+    const collaborators = [...constant.maintainers, ...constant.members]
 
     const pullRequest = await getPullRequest()
 
-    if (args.includes("--requested")) {
-      const login = args
-        .find((arg) => arg.includes("--requested"))
-        ?.split("=")[1]
+    const requestedId = args
+      .find((arg) => arg.includes("--requested"))
+      ?.split("=")[1]
+    const removedId = args
+      .find((arg) => arg.includes("--removed"))
+      ?.split("=")[1]
 
-      if (!login) throw new Error("Invalid login\n")
-
+    if (requestedId) {
       const { number, title, html_url } = pullRequest
 
-      const discordId = [...constant.maintainers, ...constant.members].find(
-        ({ github }) => github.id === login,
+      const discordId = collaborators.find(
+        ({ github }) => github.id === requestedId,
       )?.discord?.id
 
       await sendDiscordChannel(
         DISCORD_REVIEW_COMMENT(discordId, number, title, html_url),
       )
-    } else if (args.includes("--removed")) {
-      const login = args
-        .find((arg) => arg.includes("--requested"))
-        ?.split("=")[1]
+    }
+
+    if (removedId) {
+      const { number, title, html_url } = pullRequest
+
+      const { data } = await recursiveOctokit(() =>
+        octokit.issues.listEventsForTimeline({
+          ...COMMON_PARAMS,
+          issue_number: pullRequest.number,
+        }),
+      )
+
+      const previousReviewers = data
+        .map((timeline) => {
+          if (timeline.event !== "review_requested") return
+
+          if (!("requested_reviewer" in timeline)) return
+
+          return timeline.requested_reviewer?.login
+        })
+        .filter(Boolean) as string[]
+
+      const omitCollaborators = collaborators.filter(
+        ({ github }) => !previousReviewers.includes(github.id),
+      )
+
+      const additionReviewer = omitCollaborators.sort(
+        () => 0.5 - Math.random(),
+      )[0]
+
+      const { github, discord } = additionReviewer
+
+      await recursiveOctokit(() =>
+        octokit.pulls.requestReviewers({
+          ...COMMON_PARAMS,
+          pull_number: number,
+          reviewers: [github.id],
+        }),
+      )
+
+      console.log("Added Reviewers", number, title, github.id)
+
+      await sendDiscordChannel(
+        DISCORD_REVIEW_COMMENT(discord.id, number, title, html_url),
+      )
     }
   } catch (e) {
     if (e instanceof Error) console.log(e.message)

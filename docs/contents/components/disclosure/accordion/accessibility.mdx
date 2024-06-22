@@ -10,27 +10,27 @@ tab: Accessibility
 
 ## Keyboard Navigation
 
-| key              | Description                                                                                                                | Condition                              |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| `Tab`            | When focus moves to the accordion, it moves to the first item. <br/> When within the accordion, it moves to the next item. | -                                      |
-| `Shift` + `Tab`  | When the focus is within the accordion, it moves to the previous item.                                                     | -                                      |
-| `ArrowUp`        | Focuses on the previous item that is not disabled. <br/> If at the last item, it moves focus to the first item.            | -                                      |
-| `ArrowDown`      | Focuses on the next item that is not disabled. <br/> If at the first item, it moves focus to the last item.                | -                                      |
-| `Space`, `Enter` | Expands the panel of the item that is not disabled.                                                                        | -                                      |
-|                  | Expands the panel of the item that is not disabled. If already expanded, it collapses it.                                  | `isMultiple={true}`, `isToggle={true}` |
-| `Home`           | Focuses on the first item that is not disabled.                                                                            | -                                      |
-| `End`            | Focuses on the last item that is not disabled.                                                                             | -                                      |
+| Key              | Description                                                                                                         | State                                  |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `Tab`            | Focuses the first item when focus moves to the accordion. Focuses the next item if already within the accordion.    | -                                      |
+| `Shift` + `Tab`  | Focuses the previous item that is not disabled.                                                                     | -                                      |
+| `ArrowUp`        | Focuses the previous item that is not disabled. If it's the first item, focuses the last item that is not disabled. | -                                      |
+| `ArrowDown`      | Focuses the next item that is not disabled. If it's the last item, focuses the first item that is not disabled.     | -                                      |
+| `Space`, `Enter` | Expands the panel of the focused item.                                                                              | -                                      |
+|                  | Expands the panel of the focused item and collapses it if it is already expanded.                                   | `isMultiple={true}`, `isToggle={true}` |
+| `Home`           | Focuses the first item that is not disabled.                                                                        | -                                      |
+| `End`            | Focuses the last item that is not disabled.                                                                         | -                                      |
 
 ## ARIA Roles and Attributes
 
-| Component        | Roles and Attributes | Usage                                                                                                    |
-| ---------------- | -------------------- | -------------------------------------------------------------------------------------------------------- |
-| `AccordionItem`  | `role="heading"`     | Indicates that it is a heading.                                                                          |
-|                  | `aria-level`         | Sets the heading level from 1 to 6.                                                                      |
-|                  | `aria-disabled`      | Set to true if the panel of the item is expanded, and to false if the panel of another item is expanded. |
-| `AccordionLabel` | `type="button"`      | Indicates that it is a button.                                                                           |
-|                  | `aria-controls`      | Sets the `id` of the associated `AccordionPanel`.                                                        |
-|                  | `aria-expanded`      | Set to true if the panel of the item is expanded, and to false if it is collapsed.                       |
-| `AccordionPanel` | `role="region"`      | Indicates that it is a landmark region.                                                                  |
-|                  | `id`                 | `id` used to associate with `AccordionLabel`.                                                            |
-|                  | `aria-labelledby`    | Sets the `id` of the associated `AccordionLabel`.                                                        |
+| Component        | Role and Attributes    | Usage                                                                                                                                                                                                                          |
+| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `AccordionLabel` | `role="heading"`       | Indicates that it is a heading.                                                                                                                                                                                                |
+|                  | `aria-level="3"`       | Indicates that it is at hierarchy level 3.                                                                                                                                                                                     |
+|                  | `aria-disabled="true"` | Sets to `"true"` when the panel of the item is expanded. However, if `Accordion` is set with `isMultiple={true}` or `isToggle={true}` and `AccordionItem` is not disabled, it does not become `"true"` as it can be collapsed. |
+|                  | `id`                   | Used to associate with `AccordionPanel`.                                                                                                                                                                                       |
+|                  | `aria-controls`        | Sets the `id` of the associated `AccordionPanel`.                                                                                                                                                                              |
+|                  | `aria-expanded`        | Sets to `"true"` when the panel of the item is expanded, and `"false"` when it is collapsed.                                                                                                                                   |
+| `AccordionPanel` | `role="region"`        | Indicates that it is a landmark region.                                                                                                                                                                                        |
+|                  | `id`                   | Used to associate with `AccordionLabel`.                                                                                                                                                                                       |
+|                  | `aria-labelledby`      | Sets the `id` of the associated `AccordionLabel`.                                                                                                                                                                              |

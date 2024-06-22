@@ -19,8 +19,8 @@ jobs:
 
       - name: Notification requested reviewer
         if: ${{ github.event.action == 'review_requested' }}
-        run: pnpm notification:reviewer ${{ github.event.pull_request.number }}
+        run: pnpm notification:reviewer ${{ github.event.pull_request.number }} --requested=${{ github.event.requested_reviewer.login }}
 
       - name: Notification removed reviewer
         if: ${{ github.event.action == 'review_request_removed' }}
-        run: pnpm notification:reviewer ${{ github.event.pull_request.number }} --removed=${{ github.event.requested_reviewer.id }}
+        run: pnpm notification:reviewer ${{ github.event.pull_request.number }} --removed=${{ github.event.requested_reviewer.login }}

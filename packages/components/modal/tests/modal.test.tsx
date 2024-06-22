@@ -138,6 +138,6 @@ describe("<Modal />", () => {
       name: /secondary modal/i,
     })
 
-    expect(secondaryModal).toBeVisible()
+    await waitFor(() => expect(secondaryModal).toBeVisible())
   })
 })

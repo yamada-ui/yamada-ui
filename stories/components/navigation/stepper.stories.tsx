@@ -76,7 +76,11 @@ export const separateColorScheme: Story = () => {
       colorScheme: "red",
     },
     { title: "ピッコロ大魔王編", description: "ピッコロ大魔王" },
-    { title: "サイヤ人編", description: "ベジータ・ナッパ" },
+    {
+      title: "サイヤ人編",
+      description: "ベジータ・ナッパ",
+      colorScheme: "green",
+    },
   ]
   const { activeStep, onStepPrev, onStepNext } = useSteps({
     index: 1,
@@ -98,7 +102,7 @@ export const separateColorScheme: Story = () => {
               <StepDescription>{description}</StepDescription>
             </Box>
 
-            <StepSeparator />
+            <StepSeparator colorScheme={colorScheme} />
           </Step>
         ))}
       </Stepper>

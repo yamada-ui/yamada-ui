@@ -1,5 +1,4 @@
 import { Octokit } from "@octokit/rest"
-import { isEmpty } from "@yamada-ui/react"
 import { config } from "dotenv"
 import type { Constant } from "./utils"
 import { getConstant } from "./utils"
@@ -13,13 +12,13 @@ let constant: Constant = {}
 
 const COMMON_PARAMS = { owner: "yamada-ui", repo: "yamada-ui" }
 const DISCORD_REVIEW_COMMENT = (
-  ids: string[],
+  id: string,
   number: number,
   title: string,
   html_url: string,
 ) =>
   [
-    ids.map((id) => `<@${id}>`).join(" "),
+    `<@${id}>`,
     "",
     constant.message.pullRequest.addReviewer,
     "",
@@ -30,7 +29,7 @@ const getPullRequest = async (): Promise<PullRequest> => {
   const pull_number = parseInt(process.argv[2] ?? "")
 
   if (isNaN(pull_number)) {
-    throw new Error("Invalid pull request number")
+    throw new Error("Invalid pull request number\n")
   }
 
   const { data } = await octokit.pulls.get({
@@ -64,27 +63,27 @@ const main = async () => {
 
     const pullRequest = await getPullRequest()
 
-    if (args.includes("--removed")) {
-    } else {
-      const { requested_reviewers, number, title, html_url } = pullRequest
+    if (args.includes("--requested")) {
+      const login = args
+        .find((arg) => arg.includes("--requested"))
+        ?.split("=")[1]
 
-      if (isEmpty(requested_reviewers)) return
+      if (!login) throw new Error("Invalid login\n")
 
-      const selectedReviewerIds = (requested_reviewers ?? [])
-        .map(
-          ({ login }) =>
-            [...constant.maintainers, ...constant.members].find(
-              ({ github }) => github.id === login,
-            )?.discord?.id,
-        )
-        .filter(Boolean)
+      const { number, title, html_url } = pullRequest
+
+      const discordId = [...constant.maintainers, ...constant.members].find(
+        ({ github }) => github.id === login,
+      )?.discord?.id
 
       await sendDiscordChannel(
-        DISCORD_REVIEW_COMMENT(selectedReviewerIds, number, title, html_url),
+        DISCORD_REVIEW_COMMENT(discordId, number, title, html_url),
       )
+    } else if (args.includes("--removed")) {
+      const login = args
+        .find((arg) => arg.includes("--requested"))
+        ?.split("=")[1]
     }
-
-    console.log(pullRequest)
   } catch (e) {
     if (e instanceof Error) console.log(e.message)
   }

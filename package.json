@@ -51,7 +51,6 @@
     "release:next": "changeset publish --tag next",
     "report:insight": "tsx scripts/report-insight",
     "notification:release": "tsx scripts/notification-release",
-    "notification:reviewer": "tsx scripts/notification-reviewer",
     "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log node_modules",
     "docs:dev": "pnpm --prefix docs dev",
     "docs:start": "pnpm --prefix docs start",

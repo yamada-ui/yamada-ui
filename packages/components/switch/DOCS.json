@@ -100,7 +100,7 @@
       "description": "The tab-index property of the underlying input element."
     },
     "transition": {
-      "type": "Transition",
+      "type": "Transition$1",
       "required": false,
       "description": "Motion transition settings."
     },

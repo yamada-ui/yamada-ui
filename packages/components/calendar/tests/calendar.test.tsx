@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Calendar } from "../src"
 
 describe("<Calendar />", () => {
@@ -13,6 +13,141 @@ describe("<Calendar />", () => {
 
     afterEach(() => {
       vi.useRealTimers()
+    })
+
+    test("should render days", () => {
+      const defaultDate = new Date("2024-06-10")
+      render(<Calendar defaultValue={defaultDate} />)
+
+      const button = screen.getByRole("button", {
+        name: "June 2024",
+      })
+      expect(button).toBeInTheDocument()
+
+      const days = [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "31",
+      ]
+
+      for (const day of days) {
+        const dayButton = screen.getByRole("button", {
+          name: day,
+        })
+        expect(dayButton).toBeInTheDocument()
+      }
+
+      for (const day of ["27", "28", "29", "30"]) {
+        const dayButtons = screen.getAllByRole("button", {
+          name: day,
+        })
+        for (const button of dayButtons) {
+          expect(button).toBeInTheDocument()
+        }
+      }
+    })
+
+    test("should render months", () => {
+      const defaultDate = new Date("2024-06-10")
+      render(<Calendar defaultValue={defaultDate} />)
+
+      const button = screen.getByRole("button", {
+        name: "June 2024",
+      })
+
+      fireEvent.click(button)
+
+      const yearButton = screen.getByRole("button", {
+        name: "2024",
+      })
+      expect(yearButton).toBeInTheDocument()
+
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ]
+      for (const month of months) {
+        const monthButton = screen.getByRole("button", {
+          name: month,
+        })
+        expect(monthButton).toBeInTheDocument()
+      }
+    })
+
+    test("should render years", () => {
+      const defaultDate = new Date("2024-06-10")
+      render(<Calendar defaultValue={defaultDate} />)
+
+      const button = screen.getByRole("button", {
+        name: "June 2024",
+      })
+
+      fireEvent.click(button)
+
+      const yearButton = screen.getByRole("button", {
+        name: "2024",
+      })
+      fireEvent.click(yearButton)
+
+      const yearRangeButton = screen.getByRole("button", {
+        name: "2018 - 2029",
+      })
+      fireEvent.click(yearRangeButton)
+
+      const years = [
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026",
+        "2027",
+        "2028",
+        "2029",
+      ]
+      for (const year of years) {
+        const yearButton = screen.getByRole("button", {
+          name: year,
+        })
+        expect(yearButton).toBeInTheDocument()
+      }
     })
 
     test("should change selected date", async () => {

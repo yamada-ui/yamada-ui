@@ -23,21 +23,21 @@ tab: Props
 <PropsCard
   id="reorder-items"
   name="items"
-  type="ReorderItemProps[]"
+  type="ReorderGenerateItem<string>[]"
   description={"If provided, generate reorder items based on items."}
 />
 
 <PropsCard
   id="reorder-onchange"
   name="onChange"
-  type="(labels: (string | number)[]) => void"
+  type="(values: Y[]) => void"
   description={"The callback invoked when reorder items are moved."}
 />
 
 <PropsCard
   id="reorder-oncompletechange"
   name="onCompleteChange"
-  type="(labels: (string | number)[]) => void"
+  type="(values: Y[]) => void"
   description={
     "The callback invoked when the movement of reorder items is completed."
   }
@@ -72,9 +72,21 @@ tab: Props
 <PropsCard
   id="reorderitem-label"
   name="label"
-  required
-  type="string | number"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
   description={"The label of the reorder item."}
+/>
+
+<PropsCard
+  id="reorderitem-value"
+  name="value"
+  type="NonNullable<Y>"
+  description={"The value of the reorder item."}
 />
 
 ### ReorderTriggerProps

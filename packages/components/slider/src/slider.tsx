@@ -44,6 +44,23 @@ import {
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
 
+export const getThumbSize = (
+  thumbSize: CSSUIProps["boxSize"] | undefined,
+  styles: Record<string, CSSUIObject>,
+) =>
+  (thumbSize ??
+    styles.thumb?.boxSize ??
+    styles.thumb?.minBoxSize ??
+    styles.thumb?.width ??
+    styles.thumb?.w ??
+    styles.thumb?.minWidth ??
+    styles.thumb?.minW ??
+    styles.thumb?.height ??
+    styles.thumb?.h ??
+    styles.thumb?.minHeight ??
+    styles.thumb?.minH ??
+    "3.5") as CSSUIProps["boxSize"] | undefined
+
 export type UseSliderOptions = {
   /**
    * The base `id` to use for the slider.
@@ -97,6 +114,11 @@ export type UseSliderOptions = {
    */
   focusThumbOnChange?: boolean
   /**
+   * The CSS `box-size` property.
+   * Used for calculating the width, height, and percentage of the container element.
+   */
+  thumbSize?: CSSUIProps["boxSize"]
+  /**
    * Function called when the user starts selecting a new value.
    */
   onChangeStart?: (value: number) => void
@@ -129,6 +151,7 @@ export const useSlider = ({
     step = 1,
     defaultValue,
     orientation = "horizontal",
+    thumbSize: thumbSizeProp,
     isReversed,
     required,
     disabled,
@@ -330,7 +353,14 @@ export const useSlider = ({
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
-      const { width: w, height: h } = thumbSize ?? { width: 0, height: 0 }
+      const { width: w, height: h } = thumbSize ?? {
+        width: "var(--ui-thumbSize)",
+        height: "var(--ui-thumbSize)",
+      }
+
+      const padding = isVertical
+        ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
+        : { paddingTop: `calc(${h} / 2)`, paddingBottom: `calc(${h} / 2)` }
 
       const style: CSSProperties = {
         ...props.style,
@@ -339,9 +369,7 @@ export const useSlider = ({
         touchAction: "none",
         WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
         outline: 0,
-        ...(isVertical
-          ? { paddingLeft: w / 2, paddingRight: w / 2 }
-          : { paddingTop: h / 2, paddingBottom: h / 2 }),
+        ...padding,
       }
 
       return {
@@ -350,9 +378,17 @@ export const useSlider = ({
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
         style,
+        var: [
+          {
+            __prefix: "ui",
+            name: "thumbSize",
+            token: "sizes",
+            value: thumbSizeProp,
+          },
+        ],
       }
     },
-    [isVertical, rest, thumbSize],
+    [isVertical, rest, thumbSize, thumbSizeProp],
   )
 
   const getInputProps: UIPropGetter = useCallback(
@@ -470,16 +506,23 @@ export const useSlider = ({
   const getThumbProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
-      const { width: w, height: h } = thumbSize ?? { width: 0, height: 0 }
+      let w: string | number = "var(--ui-thumbSize)"
+      let h: string | number = "var(--ui-thumbSize)"
+
+      if (thumbSize) {
+        w = `${thumbSize.width}px`
+        h = `${thumbSize.height}px`
+      }
+
+      const bottom = `calc(${n}% - (${h} / 2))`
+      const left = `calc(${n}% - (${w} / 2))`
 
       const style: CSSProperties = {
         ...props.style,
         position: "absolute",
         userSelect: "none",
         touchAction: "none",
-        ...(isVertical
-          ? { bottom: `calc(${n}% - ${h / 2}px)` }
-          : { left: `calc(${n}% - ${w / 2}px)` }),
+        ...(isVertical ? { bottom } : { left }),
       }
 
       return {
@@ -627,7 +670,7 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
     getFilledTrackProps,
     getMarkProps,
     getThumbProps,
-  } = useSlider(rest)
+  } = useSlider({ ...rest, thumbSize: getThumbSize(thumbSize, styles) })
 
   const css: CSSUIObject = { ...styles.container }
 

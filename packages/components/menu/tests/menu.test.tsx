@@ -350,7 +350,7 @@ describe("<Menu />", () => {
 
     await act(() => fireEvent.click(menuButton))
 
-    const menuList = getByRole("menu")
+    const menuList = await screen.findByRole("menu")
 
     await act(() => fireEvent.keyDown(menuList, { key: "ArrowDown" }))
     expect(document.activeElement).toHaveTextContent("Settings")
@@ -439,7 +439,7 @@ describe("<Menu />", () => {
     )
     const contextMenuTrigger = screen.getByText("Right click here")
     await act(() => fireEvent.contextMenu(contextMenuTrigger))
-    const menuList = screen.getByRole("menu")
+    const menuList = await screen.findByRole("menu")
     expect(menuList).toBeVisible()
     await act(() => fireEvent.keyDown(menuList, { key: "Escape" }))
     expect(menuList).not.toBeVisible()

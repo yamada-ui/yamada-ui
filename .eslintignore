@@ -4,6 +4,6 @@ dist
 node_modules
 build
 pnpm-lock.yaml
-examples
+/examples
 coverage
 storybook-static

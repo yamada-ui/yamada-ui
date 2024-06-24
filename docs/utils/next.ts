@@ -2,7 +2,12 @@ import path from "path"
 import { CONSTANT } from "constant"
 import { type DocumentTypeNames } from "contentlayer/generated"
 import { findPackages } from "find-packages"
-import type { GetStaticPathsContext, GetStaticPropsContext } from "next"
+import type {
+  GetStaticPathsContext,
+  GetStaticPropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next"
 import { toArray } from "./array"
 import {
   getDocumentBreadcrumbs,
@@ -16,6 +21,17 @@ import {
   getDocumentPaths,
 } from "./contentlayer"
 import { toKebabCase } from "./string"
+import type { Constant } from "./github"
+
+export type APIHandler = ({
+  req,
+  res,
+  constant,
+}: {
+  req: NextApiRequest
+  res: NextApiResponse
+  constant: Constant
+}) => Promise<void>
 
 const getVersion = async () => {
   const packages = await findPackages(

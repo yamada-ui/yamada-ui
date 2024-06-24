@@ -9,6 +9,10 @@ import { useAccordionItemContext } from "./accordion-item"
 
 type AccordionLabelOptions = {
   /**
+   * Props the container element.
+   */
+  containerProps?: HTMLUIProps<"div">
+  /**
    * The accordion icon to use.
    */
   icon?:
@@ -19,7 +23,7 @@ type AccordionLabelOptions = {
 export type AccordionLabelProps = HTMLUIProps<"button"> & AccordionLabelOptions
 
 export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
-  ({ className, icon: customIcon, children, ...rest }, ref) => {
+  ({ className, icon: customIcon, containerProps, children, ...rest }, ref) => {
     const {
       isOpen,
       isDisabled = false,
@@ -61,18 +65,20 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         : generalIcon
 
     return (
-      <ui.button
-        {...getLabelProps(rest, ref)}
-        className={cx("ui-accordion__label", className)}
-        __css={css}
-      >
-        {children}
-        {!iconHidden ? (
-          <AccordionIcon>
-            {cloneCustomIcon ?? cloneSupplementIcon ?? cloneGeneralIcon}
-          </AccordionIcon>
-        ) : null}
-      </ui.button>
+      <ui.div role="heading" aria-level="3" {...containerProps}>
+        <ui.button
+          {...getLabelProps(rest, ref)}
+          className={cx("ui-accordion__label", className)}
+          __css={css}
+        >
+          {children}
+          {!iconHidden ? (
+            <AccordionIcon>
+              {cloneCustomIcon ?? cloneSupplementIcon ?? cloneGeneralIcon}
+            </AccordionIcon>
+          ) : null}
+        </ui.button>
+      </ui.div>
     )
   },
 )

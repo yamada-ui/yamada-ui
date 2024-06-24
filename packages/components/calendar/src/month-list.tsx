@@ -49,12 +49,14 @@ export const MonthList: FC<MonthListProps> = ({
   const minH = rest.minH ?? rest.minHeight
   const maxH = rest.maxH ?? rest.maxHeight
 
+  const formattedLabel = getFormattedLabel(year, locale, yearFormat)
+
   return (
     <ui.div __css={{ ...styles.content }} {...filterUndefined(rest)}>
       <CalendarHeader
         {...{
           ...headerProps,
-          label: getFormattedLabel(year, locale, yearFormat),
+          label: formattedLabel,
           labelProps,
           controlProps,
           prevProps,
@@ -63,6 +65,8 @@ export const MonthList: FC<MonthListProps> = ({
       />
 
       <ui.div
+        role="grid"
+        aria-label={formattedLabel}
         className={cx("ui-calendar__month-list", className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,

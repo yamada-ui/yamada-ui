@@ -13,7 +13,7 @@ import {
   Motion,
 } from "@yamada-ui/motion"
 import { createdDom, cx } from "@yamada-ui/utils"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 const isNumeric = (value?: string | number) =>
   value != null && parseFloat(value.toString()) > 0
@@ -94,7 +94,7 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
       animationOpacity = true,
       startingHeight = 0,
       endingHeight = "auto",
-      transition,
+      transition: transitionProp,
       transitionEnd,
       delay,
       duration,
@@ -113,13 +113,17 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
       if (isBrowser) setMounted(true)
     }, [])
 
-    const hasStartingHeight = parseFloat(startingHeight.toString()) > 0
     const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     isOpen = unmountOnExit ? isOpen : true
-    transition = !mounted
-      ? { enter: { duration: 0 } }
-      : transition ?? {
+
+    const transition = useMemo(() => {
+      if (!mounted) {
+        return { enter: { duration: 0 } }
+      } else if (transitionProp) {
+        return transitionProp
+      } else {
+        return {
           enter: {
             height: {
               duration: duration ?? 0.3,
@@ -141,15 +145,8 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
             },
           },
         }
-    transitionEnd = unmountOnExit
-      ? transitionEnd
-      : {
-          ...transitionEnd,
-          exit: {
-            ...transitionEnd?.exit,
-            display: hasStartingHeight ? "block" : "none",
-          },
-        }
+      }
+    }, [mounted, duration, transitionProp])
 
     const custom = {
       animationOpacity,
@@ -178,11 +175,7 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
             animate={animate}
             initial={unmountOnExit ? "exit" : false}
             __css={css}
-            style={{
-              overflow: "hidden",
-              display: "block",
-              ...style,
-            }}
+            style={{ overflow: "hidden", ...style }}
           />
         ) : null}
       </AnimatePresence>

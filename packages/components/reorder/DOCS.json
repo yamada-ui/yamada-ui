@@ -6,17 +6,17 @@
       "description": "The visual color appearance of the component."
     },
     "items": {
-      "type": "ReorderItemProps[]",
+      "type": "ReorderGenerateItem<string>[]",
       "required": false,
       "description": "If provided, generate reorder items based on items."
     },
     "onChange": {
-      "type": "(labels: (string | number)[]) => void",
+      "type": "(values: Y[]) => void",
       "required": false,
       "description": "The callback invoked when reorder items are moved."
     },
     "onCompleteChange": {
-      "type": "(labels: (string | number)[]) => void",
+      "type": "(values: Y[]) => void",
       "required": false,
       "description": "The callback invoked when the movement of reorder items is completed."
     },
@@ -41,9 +41,14 @@
   },
   "ReorderItem": {
     "label": {
-      "type": "string | number",
-      "required": true,
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
       "description": "The label of the reorder item."
+    },
+    "value": {
+      "type": "NonNullable<Y>",
+      "required": false,
+      "description": "The value of the reorder item."
     }
   },
   "ReorderTrigger": {}

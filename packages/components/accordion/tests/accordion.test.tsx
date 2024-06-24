@@ -35,9 +35,9 @@ describe("<Accordion />", () => {
     const button = await screen.findByRole("button", {
       name: /Accordion Label 1/i,
     })
-    expect(button).toHaveAttribute("data-expanded")
-    const paragraph = await screen.findByRole("paragraph")
-    expect(paragraph).toHaveTextContent("This is an accordion item 1")
+    expect(button).toHaveAttribute("aria-expanded", "true")
+    const paragraphs = await screen.findAllByRole("paragraph")
+    expect(paragraphs[0]).toHaveTextContent("This is an accordion item 1")
   })
 
   test("should work correctly with isToggle", async () => {
@@ -55,10 +55,10 @@ describe("<Accordion />", () => {
     const button = screen.getByRole("button", { name: /Accordion Label 1/i })
 
     await user.click(button)
-    expect(button).toHaveAttribute("data-expanded")
+    expect(button).toHaveAttribute("aria-expanded", "true")
 
     await user.click(button)
-    expect(button).not.toHaveAttribute("data-expanded")
+    expect(button).toHaveAttribute("aria-expanded", "false")
   })
 
   test("should show multiple items", async () => {
@@ -80,12 +80,12 @@ describe("<Accordion />", () => {
     const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
     const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
 
-    expect(item1).toHaveAttribute("data-expanded")
-    expect(item2).toHaveAttribute("data-expanded")
-    expect(item3).not.toHaveAttribute("data-expanded")
+    expect(item1).toHaveAttribute("aria-expanded", "true")
+    expect(item2).toHaveAttribute("aria-expanded", "true")
+    expect(item3).toHaveAttribute("aria-expanded", "false")
 
     await user.click(item3)
-    expect(item3).toHaveAttribute("data-expanded")
+    expect(item3).toHaveAttribute("aria-expanded", "true")
   })
 
   test("should render a disabled item", () => {

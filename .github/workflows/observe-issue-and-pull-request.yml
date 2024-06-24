@@ -20,6 +20,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           DISCORD_HELP_WANTED_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}
 
+      - name: Create or update test issues
+        run: pnpm test:issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}
+
   pull-request:
     runs-on: ubuntu-latest
     steps:
@@ -35,18 +41,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           DISCORD_REVIEWS_WEBHOOK_URL: ${{ secrets.DISCORD_REVIEWS_WEBHOOK_URL }}
           DISCORD_HELP_WANTED_WEBHOOK_URL: ${{ secrets.DISCORD_HELP_WANTED_WEBHOOK_URL }}
-
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install
-        uses: ./.github/composite-actions/install
-
-      - name: Create or update issues
-        run: pnpm test:issue
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          CODECOV_API_TOKEN: ${{ secrets.CODECOV_API_TOKEN }}

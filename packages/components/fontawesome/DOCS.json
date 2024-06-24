@@ -7,7 +7,7 @@
       "see": "https://fontawesome.com/v5/docs/web/use-with/react"
     },
     "size": {
-      "type": "UIValue<number | \"small\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
+      "type": "UIValue<number | (string & {}) | \"small\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
       "required": false,
       "description": "The CSS `font-size` property."
     }

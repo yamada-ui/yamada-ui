@@ -1,4 +1,4 @@
-import { render, screen, a11y, fireEvent } from "@yamada-ui/test"
+import { render, screen, a11y } from "@yamada-ui/test"
 import { Switch } from "../src"
 
 describe("<Switch />", () => {
@@ -9,22 +9,40 @@ describe("<Switch />", () => {
     await a11y(container)
   })
 
-  test("should render switch", () => {
-    render(<Switch data-testid="Switch">basic</Switch>)
-    fireEvent.click(screen.getByTestId("Switch"))
-    expect(
-      screen.getByTestId("Switch").getElementsByTagName("input")[0],
-    ).toBeChecked()
+  test("should render switch", async () => {
+    const { user } = render(<Switch>basic</Switch>)
+
+    const switchElement = await screen.findByRole("switch", { name: /basic/i })
+    expect(switchElement).toHaveAttribute("aria-checked", "false")
+
+    await user.click(switchElement)
+
+    expect(switchElement).toBeChecked()
+    expect(switchElement).toHaveAttribute("aria-checked", "true")
   })
 
-  test("should be checked by default", () => {
-    render(
-      <Switch data-testid="Switch" defaultIsChecked>
-        basic
-      </Switch>,
-    )
-    expect(
-      screen.getByTestId("Switch").getElementsByTagName("input")[0],
-    ).toBeChecked()
+  test("should be checked by default", async () => {
+    render(<Switch defaultIsChecked>basic</Switch>)
+
+    const switchElement = await screen.findByRole("switch", { name: /basic/i })
+
+    expect(switchElement).toBeChecked()
+    expect(switchElement).toHaveAttribute("aria-checked", "true")
+  })
+
+  test("When `Space` key (` `) pressed, the state should be changed.", async () => {
+    const { user } = render(<Switch>basic</Switch>)
+
+    const switchElement = await screen.findByRole("switch", { name: /basic/i })
+
+    await user.tab()
+    expect(switchElement).toHaveFocus()
+    expect(switchElement).not.toBeChecked()
+    expect(switchElement).toHaveAttribute("aria-checked", "false")
+
+    await user.keyboard(" ")
+
+    expect(switchElement).toBeChecked()
+    expect(switchElement).toHaveAttribute("aria-checked", "true")
   })
 })

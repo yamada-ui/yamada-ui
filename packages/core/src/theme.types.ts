@@ -1,7 +1,7 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
 import type { MotionConfigProps, Variants } from "framer-motion"
-import type { FC, ReactNode } from "react"
+import type { FC, ReactNode, RefObject } from "react"
 import type {
   UIStyle,
   AnimationStyle,
@@ -15,6 +15,34 @@ import type { GeneratedTheme } from "./generated-theme.types"
 import type { UITheme } from "./ui-theme.types"
 
 export type BreakpointDirection = "up" | "down"
+
+export type BreakpointOptions = {
+  /**
+   * The `breakpoint` direction controls the responsive design approach.
+   *
+   * - `up`: mobile-first using `min-width`.
+   * - `down`: desktop-first using `max-width`.
+   *
+   * @default "down"
+   */
+  direction?: BreakpointDirection
+  /**
+   * The `ref` of the container element used in `useBreakpoint` and others.
+   *
+   * Even if this `ref` is not set, CSS query will work, but JavaScript operations such as `useBreakpoint` will not work.
+   *
+   * @external
+   */
+  containerRef?: RefObject<HTMLElement>
+  /**
+   * The `breakpoint` custom identifier.
+   *
+   * @external
+   *
+   * @default "@media screen"
+   */
+  identifier?: "@media screen" | `@container` | `@container ${string}`
+}
 
 export type LoadingVariant =
   | "oval"
@@ -311,14 +339,9 @@ export type ThemeConfig = {
    */
   disableTransitionOnChange?: boolean
   /**
-   * The `breakpoint` direction controls the responsive design approach.
-   *
-   * - `up`: mobile-first using `min-width`.
-   * - `down`: desktop-first using `max-width`.
-   *
-   * @default "down"
+   * The config of breakpoint.
    */
-  breakpoint?: BreakpointDirection
+  breakpoint?: BreakpointOptions
   /**
    * The config of the calendar or date picker etc.
    */

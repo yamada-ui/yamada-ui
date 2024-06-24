@@ -34,7 +34,7 @@ export const basic: Story = () => {
 }
 
 export const customIcon: Story = () => {
-  return <Icon icon={burger} size="4xl" />
+  return <Icon icon={burger} fontSize="4xl" />
 }
 
 export const oneGenericIcon: Story = () => {

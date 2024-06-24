@@ -60,9 +60,17 @@ export const pseudos = {
    */
   _disabled: "&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]",
   /**
+   * The CSS `:disabled` pseudo-class.
+   */
+  _nativeDisabled: "&:disabled, &[disabled]",
+  /**
    * The CSS `:read-only` pseudo-class.
    */
   _readOnly: "&[readonly], &[aria-readonly=true], &[data-readonly]",
+  /**
+   * The CSS `:read-only` pseudo-class.
+   */
+  _nativeReadOnly: "&[readonly], &[aria-readonly=true]",
   /**
    * The CSS `:indeterminate` pseudo-class.
    */
@@ -101,6 +109,10 @@ export const pseudos = {
    */
   _checked: "&:checked, &[data-checked], &[aria-checked=true]",
   /**
+   * The CSS `:checked` pseudo-class.
+   */
+  _nativeChecked: "&:checked",
+  /**
    * The CSS `:invalid` pseudo-class.
    */
   _invalid: "&[data-invalid], &[aria-invalid=true]",
@@ -109,6 +121,10 @@ export const pseudos = {
    */
   _valid: "&:valid, &[data-valid], &[data-state=valid]",
   /**
+   * The CSS `:valid` pseudo-class.
+   */
+  _nativeValid: "&:valid",
+  /**
    * Styles to apply when the ARIA attribute `aria-selected` is `true`.
    */
   _selected: "&[aria-selected=true], &[data-selected]",
@@ -116,6 +132,10 @@ export const pseudos = {
    * The CSS `[hidden=true]` pseudo-class.
    */
   _hidden: "&[hidden], &[data-hidden]",
+  /**
+   * The CSS `[hidden=true]` pseudo-class.
+   */
+  _nativeHidden: "&[hidden]",
   /**
    * The CSS `:visited` pseudo-class.
    */
@@ -181,11 +201,13 @@ export const pseudos = {
   /**
    * The CSS `:vertical` pseudo-class.
    */
-  _vertical: "&:vertical, &[data-orientation=vertical]",
+  _vertical:
+    "&:vertical, &[aria-orientation=vertical], &[data-orientation=vertical]",
   /**
    * The CSS `:horizontal` pseudo-class.
    */
-  _horizontal: "&:horizontal, &[data-orientation=horizontal]",
+  _horizontal:
+    "&:horizontal, &[aria-orientation=horizontal], &[data-orientation=horizontal]",
   /**
    * The CSS `::-webkit-scrollbar` pseudo-element.
    */

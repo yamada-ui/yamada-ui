@@ -17,5 +17,5 @@ jobs:
       - name: Create insight report
         run: pnpm report:insight
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           DISCORD_INSIGHTS_WEBHOOK_URL: ${{ secrets.DISCORD_INSIGHTS_WEBHOOK_URL }}

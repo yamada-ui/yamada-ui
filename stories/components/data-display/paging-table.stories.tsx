@@ -1,10 +1,6 @@
 import { faker } from "@faker-js/faker"
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { ChevronLeft, ChevronRight } from "@yamada-ui/lucide"
 import {
   HStack,
   IconButton,
@@ -628,7 +624,7 @@ export const customPagination: Story = () => {
 
             <IconButton
               size="sm"
-              icon={<Icon icon={faChevronLeft} />}
+              icon={<ChevronLeft fontSize="lg" />}
               isDisabled={!getCanPreviousPage()}
               onClick={previousPage}
               aria-label="Go to previous page"
@@ -646,7 +642,7 @@ export const customPagination: Story = () => {
 
             <IconButton
               size="sm"
-              icon={<Icon icon={faChevronRight} />}
+              icon={<ChevronRight fontSize="lg" />}
               isDisabled={!getCanNextPage()}
               onClick={nextPage}
               aria-label="Go to next page"

@@ -2,11 +2,11 @@ import type {
   EmitterWebhookEvent,
   EmitterWebhookEventName,
 } from "@octokit/webhooks"
-import { Webhooks } from "@octokit/webhooks"
-import type { NextApiRequest, NextApiResponse } from "next"
+import type { NextApiRequest } from "next"
 import { Octokit } from "@octokit/rest"
 import type { RequestError } from "@octokit/request-error"
 import { wait } from "./async"
+import crypto from "crypto"
 
 const COMMON_PARAMS = {
   owner: "yamada-ui",
@@ -17,33 +17,24 @@ const COMMON_PARAMS = {
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-const webhooks = new Webhooks({
-  secret: process.env.GITHUB_API_SECRET as string,
-})
-
 export type Event<T extends EmitterWebhookEventName> =
   EmitterWebhookEvent<T>["payload"]
 
 export type EventAction = Event<"pull_request">["action"]
 
-export type EventHandler = ({
-  req,
-  res,
-  constant,
-}: {
-  req: NextApiRequest
-  res: NextApiResponse
-  constant: Constant
-}) => Promise<void>
-
 export const verifySignature = async ({ headers, body }: NextApiRequest) => {
-  const signature = headers["x-hub-signature-256"] as string | undefined
+  const signature = (headers["x-hub-signature-256"] ??
+    headers["x-signature"]) as string | undefined
 
   if (!signature) throw new Error("Invalid signature")
 
-  const isVerified = await webhooks.verify(JSON.stringify(body), signature)
+  const hmac = crypto.createHmac(
+    "sha256",
+    process.env.GITHUB_API_SECRET as string,
+  )
+  const digest = "sha256=" + hmac.update(JSON.stringify(body)).digest("hex")
 
-  if (!isVerified) throw new Error("Invalid signature")
+  if (signature !== digest) throw new Error("Invalid signature")
 }
 
 const toCamelCase = (value: string & {}) =>

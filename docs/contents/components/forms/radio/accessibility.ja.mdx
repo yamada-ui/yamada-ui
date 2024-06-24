@@ -1,0 +1,44 @@
+---
+title: Radio
+description: "`Radio`は、ユーザーが複数の選択肢の中から1つを選択するための使用されるコンポーネントです。"
+package_name: "@yamada-ui/radio"
+with_description: true
+tab: アクセシビリティ
+---
+
+Radioコンポーネントは、アクセシビリティに関して[WAI-ARIA - Radio Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio)に従います。
+
+`FormControl`を使用しない場合は、`RadioGroup`に`aria-labeledby`を設定します。
+
+```tsx live=false
+<VStack gap="sm">
+  <Text as="h3" id="group">
+    キャラクター
+  </Text>
+
+  <RadioGroup aria-labelledby="group">
+    <Radio value="孫悟空">孫悟空</Radio>
+    <Radio value="ベジータ">ベジータ</Radio>
+    <Radio value="フリーザ">フリーザ</Radio>
+  </RadioGroup>
+</VStack>
+```
+
+## キーボード操作
+
+| キー         | 説明                                                                                                                                                       | 状態 |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| `Tab`        | ラジオグループ内のチェックされたラジオボタンにフォーカスを移動します。ラジオボタンがチェックされていない場合、先頭のラジオボタンにフォーカスを移動します。 | -    |
+| `Space`      | フォーカスされたラジオボタンをチェックします。                                                                                                             | -    |
+| `ArrowLeft`  | 無効化されていない前のラジオボタンをチェックします。                                                                                                       | -    |
+| `ArrowRight` | 無効化されていない次のラジオボタンをチェックします。 　                                                                                                    | -    |
+| `ArrowUp`    | 無効化されていない前のラジオボタンをチェックします。                                                                                                       | -    |
+| `ArrowDown`  | 無効化されていない次のラジオボタンをチェックします。                                                                                                       | -    |
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性        | 使い方                                                                                                               |
+| -------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `RadioGroup`   | `role="radiogroup"` | ラジオグループであることを示します。                                                                                 |
+|                | `aria-labelledby`   | `RadioGroup`が`FormControl`内にあり、`FormControl`に`label`または`Label`が設定されている場合、その`id`を設定します。 |
+| `Radio`        | `aria-checked`      | ラジオボタンがチェックされている場合は、`"true"`を設定し、チェックされていないは、`"false"`を設定します。            |

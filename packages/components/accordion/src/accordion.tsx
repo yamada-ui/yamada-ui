@@ -147,7 +147,7 @@ export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
           styles,
         }}
       >
-        <ui.ul
+        <ui.div
           ref={ref}
           className={cx("ui-accordion", className)}
           __css={css}

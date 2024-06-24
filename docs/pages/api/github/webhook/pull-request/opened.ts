@@ -1,11 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
-import {
-  recursiveOctokit,
-  type Constant,
-  type Event,
-  type EventHandler,
-} from "utils/github"
+import { recursiveOctokit, type Constant, type Event } from "utils/github"
+import type { APIHandler } from "utils/next"
 
 export const DISCORD_REVIEW_COMMENT =
   (constant: Constant) =>
@@ -20,7 +16,7 @@ export const DISCORD_REVIEW_COMMENT =
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-export const opened: EventHandler = async ({ req, res, constant }) => {
+export const opened: APIHandler = async ({ req, res, constant }) => {
   const { repository, pull_request } = req.body as Event<"pull_request.opened">
   const owner = "yamada-ui"
   const repo = repository.name

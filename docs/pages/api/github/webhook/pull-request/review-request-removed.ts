@@ -1,12 +1,12 @@
-import type { EventHandler } from "utils/github"
 import { recursiveOctokit, type Event } from "utils/github"
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
 import { DISCORD_REVIEW_COMMENT } from "./opened"
+import type { APIHandler } from "utils/next"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
-export const reviewRequestedRemoved: EventHandler = async ({
+export const reviewRequestedRemoved: APIHandler = async ({
   req,
   res,
   constant,

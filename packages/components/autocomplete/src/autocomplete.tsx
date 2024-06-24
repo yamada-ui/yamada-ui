@@ -9,6 +9,8 @@ import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal } from "@yamada-ui/portal"
 import type { PortalProps } from "@yamada-ui/portal"
 import { cx } from "@yamada-ui/utils"
+import type { AutocompleteCreateProps } from "./autocomplete-create"
+import type { AutocompleteEmptyProps } from "./autocomplete-empty"
 import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteIcon } from "./autocomplete-icon"
 import type { AutocompleteListProps } from "./autocomplete-list"
@@ -55,6 +57,14 @@ type AutocompleteOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * Props for autocomplete create element.
+   */
+  createProps?: Omit<AutocompleteCreateProps, "children">
+  /**
+   * Props for autocomplete empty element.
+   */
+  emptyProps?: Omit<AutocompleteEmptyProps, "children">
 }
 
 export type AutocompleteProps = ThemeProps<"Autocomplete"> &
@@ -82,6 +92,8 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       inputProps,
       iconProps,
       portalProps = { isDisabled: true },
+      createProps,
+      emptyProps,
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
@@ -145,9 +157,9 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                 <Portal {...portalProps}>
                   <AutocompleteList {...listProps}>
                     {allowCreate ? (
-                      <AutocompleteCreate />
+                      <AutocompleteCreate {...createProps} />
                     ) : (
-                      <AutocompleteEmpty />
+                      <AutocompleteEmpty {...emptyProps} />
                     )}
 
                     {children ?? computedChildren}
@@ -157,9 +169,9 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                 <Portal {...portalProps}>
                   <AutocompleteList {...listProps}>
                     {allowCreate && inputValue ? (
-                      <AutocompleteCreate />
+                      <AutocompleteCreate {...createProps} />
                     ) : (
-                      <AutocompleteEmpty />
+                      <AutocompleteEmpty {...emptyProps} />
                     )}
                   </AutocompleteList>
                 </Portal>

@@ -1,5 +1,5 @@
 import { Input } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
 import { FormControl } from "../src"
 
 describe("<FormControl />", () => {
@@ -14,7 +14,9 @@ describe("<FormControl />", () => {
       </FormControl>,
     )
     expect(screen.getByText("Email")).toBeInTheDocument()
-    expect(screen.getByText("Please enter your email")).toBeInTheDocument()
+    expect(
+      screen.getByText(filterVisuallyHidden("Please enter your email")),
+    ).toBeInTheDocument()
     expect(screen.getByRole("textbox")).toBeInTheDocument()
   })
 
@@ -26,7 +28,9 @@ describe("<FormControl />", () => {
     )
     expect(screen.getByText("Email")).toHaveAttribute("data-invalid")
     expect(screen.getByRole("textbox")).toBeInvalid()
-    expect(screen.getByText("Email is required.")).toBeInTheDocument()
+    expect(
+      screen.getByText(filterVisuallyHidden("Email is required.")),
+    ).toBeInTheDocument()
   })
 
   test("should be hidden helperMessage", () => {
@@ -41,8 +45,12 @@ describe("<FormControl />", () => {
         <Input type="email" />
       </FormControl>,
     )
-    expect(screen.getByText("Email is required.")).toBeInTheDocument()
-    expect(screen.queryByText("Please enter your email")).toBeNull()
+    expect(
+      screen.getByText(filterVisuallyHidden("Email is required.")),
+    ).toBeInTheDocument()
+    expect(
+      screen.queryByText(filterVisuallyHidden("Please enter your email")),
+    ).toBeNull()
   })
 
   test("should be appeared helperMessage", () => {
@@ -59,8 +67,12 @@ describe("<FormControl />", () => {
         </FormControl>
       </>,
     )
-    expect(screen.getByText("Email is required.")).toBeInTheDocument()
-    expect(screen.getByText("Please enter your email")).toBeInTheDocument()
+    expect(
+      screen.getByText(filterVisuallyHidden("Email is required.")),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(filterVisuallyHidden("Please enter your email")),
+    ).toBeInTheDocument()
   })
 
   test("should be required", () => {
@@ -81,7 +93,7 @@ describe("<FormControl />", () => {
     expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
-  test("should be read only", () => {
+  test("should be readonly", () => {
     render(
       <FormControl label="Email" isReadOnly>
         <Input type="email" />

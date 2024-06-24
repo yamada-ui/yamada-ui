@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
+    "@yamada-ui/visually-hidden": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

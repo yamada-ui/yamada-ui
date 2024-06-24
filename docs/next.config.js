@@ -25,7 +25,7 @@ const nextConfig = {
   images: {
     domains: ["images.pexels.com"],
   },
-  pageExtensions: ["page.jsx", "page.tsx"],
+  pageExtensions: ["page.jsx", "page.tsx", "api.js", "api.ts"],
   i18n: {
     defaultLocale: "en",
     locales: ["en", "ja"],

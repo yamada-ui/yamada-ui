@@ -13,10 +13,10 @@ describe("getMinMaxQuery", () => {
   test("down direction with specific breakpoints", () => {
     const theme = transformTheme(
       { breakpoints },
-      { breakpoint: "down" },
+      { breakpoint: { direction: "down" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config.breakpoint!
+    const direction = theme.__config.breakpoint?.direction!
     const pickKey = ["sm", "md"]
     const result = getMinMaxQuery(queries, direction, pickKey)
 
@@ -27,10 +27,10 @@ describe("getMinMaxQuery", () => {
   test("up direction with specific breakpoints", () => {
     const theme = transformTheme(
       { breakpoints },
-      { breakpoint: "up" },
+      { breakpoint: { direction: "up" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config.breakpoint!
+    const direction = theme.__config.breakpoint?.direction!
     const pickKey = ["lg", "xl"]
     const result = getMinMaxQuery(queries, direction, pickKey)
 
@@ -41,10 +41,10 @@ describe("getMinMaxQuery", () => {
   test("empty pickKey array should return undefined for both minQuery and maxQuery", () => {
     const theme = transformTheme(
       { breakpoints },
-      { breakpoint: "down" },
+      { breakpoint: { direction: "down" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config.breakpoint!
+    const direction = theme.__config.breakpoint?.direction!
     const pickKey: string[] = []
     const result = getMinMaxQuery(queries, direction, pickKey)
 
@@ -55,10 +55,10 @@ describe("getMinMaxQuery", () => {
   test("non-existent breakpoints in pickKey should return undefined for both minQuery and maxQuery", () => {
     const theme = transformTheme(
       { breakpoints },
-      { breakpoint: "down" },
+      { breakpoint: { direction: "down" } },
     ) as StyledTheme
     const queries = theme.__breakpoints?.queries ?? []
-    const direction = theme.__config.breakpoint!
+    const direction = theme.__config.breakpoint?.direction!
     const pickKey = ["xxl"]
     const result = getMinMaxQuery(queries, direction, pickKey)
 

@@ -1,6 +1,6 @@
 import { Button } from "@yamada-ui/react"
 import { a11y, render, fireEvent, screen, waitFor } from "@yamada-ui/test"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useNotice } from "../src"
 
 describe("useNotice()", () => {
@@ -202,6 +202,85 @@ describe("useNotice()", () => {
     fireEvent.click(screen.getByTestId("CloseAllNotice"))
     await waitFor(() => {
       expect(screen.queryByText("NoticeTitle")).not.toBeInTheDocument()
+    })
+  })
+
+  test("Close notice with using close", async () => {
+    const CloseNoticeExample = () => {
+      const notice = useNotice()
+      const [noticeId, setNoticeId] = useState<number | string | null>(null)
+
+      const onOpen = () => {
+        const id = notice({
+          title: "NoticeTitle",
+          description: "NoticeDescription",
+        })
+        setNoticeId(id)
+      }
+
+      const onClose = () => {
+        notice.close(noticeId as number | string)
+      }
+
+      return (
+        <>
+          <Button data-testid="OpenNotice" onClick={onOpen}>
+            Open Notice
+          </Button>
+          <Button data-testid="CloseNotice" onClick={onClose}>
+            Close Notice
+          </Button>
+        </>
+      )
+    }
+
+    render(<CloseNoticeExample />)
+    fireEvent.click(screen.getByTestId("OpenNotice"))
+
+    await waitFor(() => {
+      expect(screen.getAllByText("NoticeTitle")).toHaveLength(1)
+    })
+
+    fireEvent.click(screen.getByTestId("CloseNotice"))
+
+    await waitFor(() => {
+      expect(screen.queryByText("NoticeTitle")).not.toBeInTheDocument()
+    })
+  })
+
+  test("Close notice with using isClosable", async () => {
+    const CloseNoticeExample = () => {
+      const notice = useNotice()
+      const onOpen = () => {
+        notice({
+          title: "NoticeTitle",
+          description: "NoticeDescription",
+          isClosable: true,
+        })
+      }
+
+      return (
+        <>
+          <Button data-testid="OpenNotice" onClick={onOpen}>
+            Open Notice
+          </Button>
+        </>
+      )
+    }
+
+    render(<CloseNoticeExample />)
+    fireEvent.click(screen.getByTestId("OpenNotice"))
+
+    await waitFor(() => {
+      expect(screen.getAllByText("NoticeTitle")).toHaveLength(1)
+    })
+
+    const closeButton = screen.getByRole("button", { name: /close/i })
+    expect(closeButton).toBeInTheDocument()
+
+    fireEvent.click(closeButton)
+    await waitFor(() => {
+      expect(screen.queryByText("NoticeTitle")).toBeNull()
     })
   })
 })

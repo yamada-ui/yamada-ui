@@ -36,8 +36,8 @@ describe("<Accordion />", () => {
       name: /Accordion Label 1/i,
     })
     expect(button).toHaveAttribute("aria-expanded", "true")
-    const paragraph = await screen.findByRole("paragraph")
-    expect(paragraph).toHaveTextContent("This is an accordion item 1")
+    const paragraphs = await screen.findAllByRole("paragraph")
+    expect(paragraphs[0]).toHaveTextContent("This is an accordion item 1")
   })
 
   test("should work correctly with isToggle", async () => {

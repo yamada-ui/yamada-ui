@@ -16,7 +16,10 @@ export const reviewRequestedRemoved: APIHandler = async ({
   const owner = "yamada-ui"
   const repo = repository.name
   const { number, title, html_url, user, requested_reviewers } = pull_request
-  const count = requested_reviewers?.length ?? 0
+  const omittedRequestReviewers = requested_reviewers?.filter(
+    ({ login }: any) => !constant.pullRequest.excludeReviewers.includes(login),
+  )
+  const count = omittedRequestReviewers?.length ?? 0
   const { login } = requested_reviewer ?? {}
   const collaborators = [...constant.maintainers, ...constant.members].filter(
     ({ github }) =>

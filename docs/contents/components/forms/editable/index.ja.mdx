@@ -94,18 +94,12 @@ const CustomControls = () => {
 
   return isEditing ? (
     <ButtonGroup size="sm" gap="sm">
-      <IconButton
-        icon={<FontAwesomeIcon icon={faCheck} />}
-        {...getSubmitProps()}
-      />
-      <IconButton
-        icon={<FontAwesomeIcon icon={faClose} />}
-        {...getCancelProps()}
-      />
+      <IconButton icon={<Check />} {...getSubmitProps()} />
+      <IconButton icon={<X />} {...getCancelProps()} />
     </ButtonGroup>
   ) : (
     <ButtonGroup size="sm" gap="sm">
-      <IconButton icon={<FontAwesomeIcon icon={faPen} />} {...getEditProps()} />
+      <IconButton icon={<Pen />} {...getEditProps()} />
     </ButtonGroup>
   )
 }

@@ -97,18 +97,9 @@ import { Pagination } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Pagination
-    total={10}
-    controlProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-  />
-  <Pagination
-    total={10}
-    controlPrevProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-  />
-  <Pagination
-    total={10}
-    controlNextProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-  />
+  <Pagination total={10} controlProps={{ children: <Ghost /> }} />
+  <Pagination total={10} controlPrevProps={{ children: <Ghost /> }} />
+  <Pagination total={10} controlNextProps={{ children: <Ghost /> }} />
 </VStack>
 ```
 
@@ -120,21 +111,9 @@ import { Pagination } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Pagination
-    total={10}
-    withEdges
-    edgeProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-  />
-  <Pagination
-    total={10}
-    withEdges
-    edgeFirstProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-  />
-  <Pagination
-    total={10}
-    withEdges
-    edgeLastProps={{ children: <FontAwesomeIcon icon={faPoo} /> }}
-  />
+  <Pagination total={10} withEdges edgeProps={{ children: <Ghost /> }} />
+  <Pagination total={10} withEdges edgeFirstProps={{ children: <Ghost /> }} />
+  <Pagination total={10} withEdges edgeLastProps={{ children: <Ghost /> }} />
 </VStack>
 ```
 

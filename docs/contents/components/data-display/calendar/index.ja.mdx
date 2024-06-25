@@ -372,9 +372,7 @@ return <Calendar value={value} onChange={onChange} />
 ```tsx
 <VStack>
   <Calendar labelProps={{ color: "red.500" }} />
-  <Calendar
-    labelProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
-  />
+  <Calendar labelProps={{ icon: <Ghost /> }} />
 </VStack>
 ```
 
@@ -384,15 +382,9 @@ return <Calendar value={value} onChange={onChange} />
 
 ```tsx
 <VStack>
-  <Calendar
-    controlProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
-  />
-  <Calendar
-    prevProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
-  />
-  <Calendar
-    nextProps={{ icon: <FontAwesomeIcon icon={faPoo} fontSize="0.75em" /> }}
-  />
+  <Calendar controlProps={{ icon: <Ghost /> }} />
+  <Calendar prevProps={{ icon: <Ghost /> }} />
+  <Calendar nextProps={{ icon: <Ghost /> }} />
 </VStack>
 ```
 

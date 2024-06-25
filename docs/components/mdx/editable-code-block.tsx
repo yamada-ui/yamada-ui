@@ -2,42 +2,7 @@ import createEmotionCache from "@emotion/cache"
 import { CacheProvider } from "@emotion/react"
 import weakMemoize from "@emotion/weak-memoize"
 import { faker } from "@faker-js/faker"
-import {
-  faMinus,
-  faPlus,
-  faPoo,
-  faBars,
-  faCheck,
-  faArrowUpRightFromSquare,
-  faEdit,
-  faCaretRight,
-  faArrowLeft,
-  faArrowRight,
-  faChevronDown,
-  faChevronLeft,
-  faChevronRight,
-  faArrowsLeftRight,
-  faEnvelope,
-  faSun,
-  faMoon,
-  faWaveSquare,
-  faPen,
-  faXmark,
-  faClose,
-  faFile,
-  faImage,
-  faCaretDown,
-  faArrowUpFromBracket,
-  faTrash,
-  faFaceSadCry,
-  faFaceSadTear,
-  faFaceSmile,
-  faFaceSmileBeam,
-  faFaceGrinStars,
-  faItalic,
-  faBold,
-  faUnderline,
-} from "@fortawesome/free-solid-svg-icons"
+import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import { burger } from "@lucide/lab"
 import * as CalendarComponents from "@yamada-ui/calendar"
 import * as CarouselComponents from "@yamada-ui/carousel"
@@ -58,7 +23,42 @@ import {
   Skeleton,
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
-import { Icon as LucideIcon, Ghost, Check } from "@yamada-ui/lucide"
+import {
+  Icon as LucideIcon,
+  Ghost,
+  Check,
+  Plus,
+  Minus,
+  Sun,
+  Moon,
+  Bold,
+  Italic,
+  Underline,
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  MenuIcon,
+  FilePenLine,
+  ExternalLink,
+  File,
+  X,
+  Image,
+  Upload,
+  Mail,
+  Phone,
+  Activity,
+  Trash,
+  MoveHorizontal,
+  Pen,
+  Angry,
+  Frown,
+  Laugh,
+  Smile,
+  SmilePlus,
+  CircleCheck,
+} from "@yamada-ui/lucide"
 import type { SkeletonProps } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
@@ -68,7 +68,7 @@ import React, { useEffect, useRef, useState } from "react"
 import type { FC, PropsWithChildren } from "react"
 import { createPortal } from "react-dom"
 import { useForm, Controller } from "react-hook-form"
-import { FaRobot, FaCheckCircle, FaPhone } from "react-icons/fa"
+import { FaRobot } from "react-icons/fa"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { theme as defaultTheme, config as defaultConfig } from "theme"
 import { wait } from "utils/async"
@@ -107,44 +107,45 @@ const components = {
   UIProvider,
 }
 const fontAwesomeIcons = {
-  faMinus,
-  faPlus,
   faPoo,
-  faBars,
-  faCheck,
-  faArrowUpRightFromSquare,
-  faEdit,
-  faCaretRight,
-  faArrowLeft,
-  faArrowRight,
-  faArrowsLeftRight,
-  faChevronDown,
-  faChevronLeft,
-  faChevronRight,
-  faEnvelope,
-  faSun,
-  faMoon,
-  faWaveSquare,
-  faPen,
-  faXmark,
-  faClose,
-  faFile,
-  faImage,
-  faCaretDown,
-  faArrowUpFromBracket,
-  faTrash,
-  faFaceSadCry,
-  faFaceSadTear,
-  faFaceSmile,
-  faFaceSmileBeam,
-  faFaceGrinStars,
-  faItalic,
-  faBold,
-  faUnderline,
 }
-const lucideIcons = { Ghost, Check }
+const lucideIcons = {
+  Ghost,
+  Check,
+  CircleCheck,
+  Plus,
+  Minus,
+  Sun,
+  Moon,
+  Bold,
+  Italic,
+  Underline,
+  ArrowLeft,
+  ArrowRight,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  MenuIcon,
+  FilePenLine,
+  ExternalLink,
+  File,
+  Image,
+  Mail,
+  Phone,
+  Upload,
+  Activity,
+  Trash,
+  MoveHorizontal,
+  Pen,
+  X,
+  Angry,
+  Frown,
+  Laugh,
+  Smile,
+  SmilePlus,
+}
 const lucideLabIcons = { burger }
-const reactIcons = { FaRobot, FaCheckCircle, FaPhone }
+const reactIcons = { FaRobot }
 const utils = { wait, faker, useForm, Controller }
 
 const scope = {

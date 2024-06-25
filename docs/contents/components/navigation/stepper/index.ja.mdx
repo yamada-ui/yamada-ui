@@ -236,7 +236,7 @@ return (
     <Stepper index={activeStep}>
       {steps.map(({ title, description }, index) => (
         <Step key={index}>
-          <StepStatus complete={<FontAwesomeIcon icon={faPoo} />} />
+          <StepStatus complete={<Ghost />} />
 
           <Box flexShrink="0">
             <StepTitle>{title}</StepTitle>

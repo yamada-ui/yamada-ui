@@ -1,5 +1,14 @@
 # @yamada-ui/use-pan-event
 
+## 1.0.17
+
+### Patch Changes
+
+- [#2128](https://github.com/yamada-ui/yamada-ui/pull/2128) [`d39a857`](https://github.com/yamada-ui/yamada-ui/commit/d39a8579e523bc9c8ae77b7aad33917ab51ef1c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The `usePanEvent` was rolled back to [#1579](https://github.com/yamada-ui/yamada-ui/pull/1579).
+
+- Updated dependencies [[`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/utils@1.3.0
+
 ## 1.0.16
 
 ### Patch Changes

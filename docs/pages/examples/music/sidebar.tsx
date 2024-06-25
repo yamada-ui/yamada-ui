@@ -25,13 +25,12 @@ import {
   Music2,
   Radio,
   User,
-} from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+} from "@yamada-ui/lucide"
 import { memo, useMemo } from "react"
-import type { FC, ReactElement } from "react"
+import type { ElementType, FC, ReactElement } from "react"
 
 type MenuItem = {
-  icon?: LucideIcon
+  icon?: ElementType
   label: string
   isSelected?: boolean
 } & Omit<ButtonProps, "children">

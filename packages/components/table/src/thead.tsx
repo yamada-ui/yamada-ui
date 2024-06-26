@@ -1,7 +1,10 @@
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon, ChevronIcon } from "@yamada-ui/icon"
-import type { TableHeadProps as NativeTableHeadProps } from "@yamada-ui/native-table"
+import type {
+  TableHeadProps as NativeTableHeadProps,
+  ThProps,
+} from "@yamada-ui/native-table"
 import {
   Thead as NativeThead,
   Tr,
@@ -15,19 +18,8 @@ import type { SortDirection, Column } from "./use-table"
 import { useTableContext, render } from "./use-table"
 
 export type TableHeadProps = NativeTableHeadProps
-export type AriaSort = {
-  none: "none"
-  asc: "ascending"
-  desc: "descending"
-}
 
 export const Thead = ({ ...rest }: TableHeadProps) => {
-  const ariaSort: AriaSort = {
-    none: "none",
-    asc: "ascending",
-    desc: "descending",
-  }
-
   const { headerGroups, headerGroupProps, headerProps, sortIconProps } =
     useTableContext()
 
@@ -97,9 +89,13 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
 
               const isSorted = getIsSorted()
 
-              const props = {
+              const props: ThProps = {
                 "aria-label": ariaLabel,
-                "aria-sort": isSorted ? ariaSort[isSorted] : ariaSort.none,
+                "aria-sort": isSorted
+                  ? isSorted === "asc"
+                    ? "ascending"
+                    : "descending"
+                  : "none",
                 ...computedHeaderProps,
                 colSpan: resolvedColSpan,
                 rowSpan: resolvedRowSpan,

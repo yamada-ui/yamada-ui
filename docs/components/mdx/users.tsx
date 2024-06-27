@@ -10,7 +10,7 @@ export type UserProps = StackProps &
     icon?: string
     description: string
     github?: string
-    twitter?: string
+    x?: string
   }
 
 export const User: FC<UserProps> = ({
@@ -18,7 +18,7 @@ export const User: FC<UserProps> = ({
   icon,
   description,
   github,
-  twitter,
+  x,
   ...rest
 }) => {
   return (
@@ -46,9 +46,9 @@ export const User: FC<UserProps> = ({
             </Link>
           ) : null}
 
-          {twitter ? (
+          {x ? (
             <Link
-              href={twitter}
+              href={x}
               target="_blank"
               aria-label={`X ${name}`}
               color={[`primary.600`, `primary.400`]}
@@ -77,8 +77,7 @@ export type UsersProps = GridProps & { type: "maintainers" | "members" }
 export const Users: FC<UsersProps> = ({ type, ...rest }) => {
   const { locale } = useI18n()
 
-  const users =
-    type === "maintainers" ? CONSTANT.TEAM.MAINTAINERS : CONSTANT.TEAM.MEMBERS
+  const users = type === "maintainers" ? CONSTANT.MAINTAINERS : CONSTANT.MEMBERS
 
   return (
     <Grid
@@ -87,14 +86,14 @@ export const Users: FC<UsersProps> = ({ type, ...rest }) => {
       gap="6"
       {...rest}
     >
-      {users.map(({ id, name, icon, description, github, twitter }) => (
+      {users.map(({ name, description, github, x }) => (
         <User
-          key={id}
+          key={github.id}
           name={name[locale]}
-          icon={icon}
           description={description[locale]}
-          github={github}
-          twitter={twitter}
+          icon={github.icon}
+          github={github.url}
+          x={x?.url}
         />
       ))}
     </Grid>

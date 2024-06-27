@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.9.0
+
+### Minor Changes
+
+- [#2155](https://github.com/yamada-ui/yamada-ui/pull/2155) [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added native CSS pseudo-class selectors.
+
 ## 1.8.0
 
 ### Minor Changes

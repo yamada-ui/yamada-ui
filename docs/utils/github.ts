@@ -20,7 +20,9 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 export type Event<T extends EmitterWebhookEventName> =
   EmitterWebhookEvent<T>["payload"]
 
-export type EventAction = Event<"pull_request">["action"]
+export type PullRequestAction = Event<"pull_request">["action"]
+
+export type PullRequestReviewAction = Event<"pull_request_review">["action"]
 
 export const verifySignature = async ({ headers, body }: NextApiRequest) => {
   const signature = (headers["x-hub-signature-256"] ??

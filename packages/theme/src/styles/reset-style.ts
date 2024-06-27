@@ -183,7 +183,6 @@ export const resetStyle: UIStyle = {
   fieldset: {
     margin: 0,
     padding: 0,
-    border: 0,
     minWidth: 0,
   },
 

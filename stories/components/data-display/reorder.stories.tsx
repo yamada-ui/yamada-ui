@@ -1,6 +1,5 @@
-import { faPoo } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Ghost } from "@yamada-ui/lucide"
 import type { ReorderGenerateItem } from "@yamada-ui/react"
 import {
   Divider,
@@ -24,11 +23,11 @@ export default meta
 export const basic: Story = () => {
   return (
     <Reorder>
-      <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-      <ReorderItem label="リクーム">リクーム</ReorderItem>
-      <ReorderItem label="バータ">バータ</ReorderItem>
-      <ReorderItem label="ジース">ジース</ReorderItem>
-      <ReorderItem label="グルド">グルド</ReorderItem>
+      <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+      <ReorderItem value="リクーム">リクーム</ReorderItem>
+      <ReorderItem value="バータ">バータ</ReorderItem>
+      <ReorderItem value="ジース">ジース</ReorderItem>
+      <ReorderItem value="グルド">グルド</ReorderItem>
     </Reorder>
   )
 }
@@ -36,11 +35,11 @@ export const basic: Story = () => {
 export const withItems: Story = () => {
   const items = useMemo<ReorderGenerateItem[]>(
     () => [
-      { label: "ギニュー", children: "ギニュー" },
-      { label: "リクーム", children: "リクーム" },
-      { label: "バータ", children: "バータ" },
-      { label: "ジース", children: "ジース" },
-      { label: "グルド", children: "グルド" },
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
     ],
     [],
   )
@@ -52,21 +51,21 @@ export const withOrientation: Story = () => {
   return (
     <>
       <Reorder orientation="vertical">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
       <Divider />
 
       <Reorder orientation="horizontal">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
     </>
   )
@@ -76,41 +75,41 @@ export const withSize: Story = () => {
   return (
     <>
       <Reorder size="sm">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
       <Divider />
 
       <Reorder size="md">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
       <Divider />
 
       <Reorder size="normal">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
       <Divider />
 
       <Reorder size="lg">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
     </>
   )
@@ -120,31 +119,31 @@ export const withVariant: Story = () => {
   return (
     <>
       <Reorder variant="outline">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
       <Divider />
 
       <Reorder variant="elevated">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
 
       <Divider />
 
       <Reorder variant="unstyled">
-        <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem label="リクーム">リクーム</ReorderItem>
-        <ReorderItem label="バータ">バータ</ReorderItem>
-        <ReorderItem label="ジース">ジース</ReorderItem>
-        <ReorderItem label="グルド">グルド</ReorderItem>
+        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+        <ReorderItem value="リクーム">リクーム</ReorderItem>
+        <ReorderItem value="バータ">バータ</ReorderItem>
+        <ReorderItem value="ジース">ジース</ReorderItem>
+        <ReorderItem value="グルド">グルド</ReorderItem>
       </Reorder>
     </>
   )
@@ -153,17 +152,17 @@ export const withVariant: Story = () => {
 export const withTrigger: Story = () => {
   return (
     <Reorder>
-      <ReorderItem label="孫悟空">
+      <ReorderItem value="孫悟空">
         <HStack>
           <ReorderTrigger />
           <Text>孫悟空</Text>
         </HStack>
       </ReorderItem>
 
-      <ReorderItem label="ベジータ">
+      <ReorderItem value="ベジータ">
         <HStack>
           <ReorderTrigger>
-            <Icon icon={faPoo} />
+            <Ghost />
           </ReorderTrigger>
           <Text>ベジータ</Text>
         </HStack>
@@ -177,11 +176,11 @@ export const withOnChange: Story = () => {
     <Reorder
       onChange={(labels) => console.log(`changed '${labels.join(`', '`)}'`)}
     >
-      <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-      <ReorderItem label="リクーム">リクーム</ReorderItem>
-      <ReorderItem label="バータ">バータ</ReorderItem>
-      <ReorderItem label="ジース">ジース</ReorderItem>
-      <ReorderItem label="グルド">グルド</ReorderItem>
+      <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+      <ReorderItem value="リクーム">リクーム</ReorderItem>
+      <ReorderItem value="バータ">バータ</ReorderItem>
+      <ReorderItem value="ジース">ジース</ReorderItem>
+      <ReorderItem value="グルド">グルド</ReorderItem>
     </Reorder>
   )
 }
@@ -193,11 +192,11 @@ export const withOnCompleteChange: Story = () => {
         console.log(`completed '${labels.join(`', '`)}'`)
       }
     >
-      <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-      <ReorderItem label="リクーム">リクーム</ReorderItem>
-      <ReorderItem label="バータ">バータ</ReorderItem>
-      <ReorderItem label="ジース">ジース</ReorderItem>
-      <ReorderItem label="グルド">グルド</ReorderItem>
+      <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+      <ReorderItem value="リクーム">リクーム</ReorderItem>
+      <ReorderItem value="バータ">バータ</ReorderItem>
+      <ReorderItem value="ジース">ジース</ReorderItem>
+      <ReorderItem value="グルド">グルド</ReorderItem>
     </Reorder>
   )
 }
@@ -215,11 +214,11 @@ export const useContainerScroll: Story = () => {
       outline="0"
       _focusVisible={{ boxShadow: "outline" }}
     >
-      <ReorderItem label="ギニュー">ギニュー</ReorderItem>
-      <ReorderItem label="リクーム">リクーム</ReorderItem>
-      <ReorderItem label="バータ">バータ</ReorderItem>
-      <ReorderItem label="ジース">ジース</ReorderItem>
-      <ReorderItem label="グルド">グルド</ReorderItem>
+      <ReorderItem value="ギニュー">ギニュー</ReorderItem>
+      <ReorderItem value="リクーム">リクーム</ReorderItem>
+      <ReorderItem value="バータ">バータ</ReorderItem>
+      <ReorderItem value="ジース">ジース</ReorderItem>
+      <ReorderItem value="グルド">グルド</ReorderItem>
     </Reorder>
   )
 }

@@ -1,5 +1,34 @@
 # @yamada-ui/menu
 
+## 1.3.3
+
+### Patch Changes
+
+- [#2108](https://github.com/yamada-ui/yamada-ui/pull/2108) [`3ded97f`](https://github.com/yamada-ui/yamada-ui/commit/3ded97ff879c1a90770ad3cea30ec8a6411b5c55) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an bug where `MenuItem` could not be selected without tapping twice on touch device.
+
+- Updated dependencies [[`7327145`](https://github.com/yamada-ui/yamada-ui/commit/73271452091f90c45eabd01424053e811f9cd5ae), [`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`28a276f`](https://github.com/yamada-ui/yamada-ui/commit/28a276fc7c11bce28424e763a0f5fba8b5fd8fd0), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/use-clickable@1.2.3
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+  - @yamada-ui/motion@2.0.0
+  - @yamada-ui/icon@1.0.29
+  - @yamada-ui/popover@1.2.3
+  - @yamada-ui/transitions@1.0.30
+  - @yamada-ui/use-controllable-state@1.0.15
+  - @yamada-ui/use-descendant@1.0.16
+  - @yamada-ui/use-disclosure@1.0.15
+
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/icon@1.0.28
+  - @yamada-ui/motion@1.0.29
+  - @yamada-ui/popover@1.2.2
+  - @yamada-ui/transitions@1.0.29
+
 ## 1.3.1
 
 ### Patch Changes

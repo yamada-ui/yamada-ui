@@ -23,11 +23,13 @@ export const FormControl: ComponentMultiStyle = {
       color: ["danger.500", "danger.400"],
     },
     helperMessage: {
+      display: "block",
       mt: "2",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "sm",
     },
     errorMessage: {
+      display: "block",
       mt: "2",
       color: ["danger.500", "danger.400"],
       fontSize: "sm",

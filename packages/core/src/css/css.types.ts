@@ -1,3 +1,4 @@
+import type { ObjectLiteral, StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
@@ -56,28 +57,19 @@ type StyleValue<Y extends keyof StyleProperties> = StyledProps<
   UIValue<StyleProperties[Y]>
 >
 
-export type StyleUIValue = {
+export type UIStyles = {
   [Y in keyof StyleProperties]?: Y extends keyof StyleProps
     ? StyleProps[Y] | StyleValue<Y>
     : StyleValue<Y>
 }
 
-type StyleDefinition<Y> = Y | string | RecursiveStyles<Y | string>
-
-type PseudoDefinition<Y> = Y | RecursivePseudos<Y>
-
 export type RecursiveStyles<Y> = {
-  [key: string]: (StyleDefinition<Y> | PseudoDefinition<Y>) & Y
+  [K in keyof CSS.Pseudos | keyof PseudoProps | StringLiteral]?:
+    | (Y & RecursiveStyles<Y>)
+    | ObjectLiteral
 }
 
-export type RecursivePseudos<Y> = {
-  [K in keyof CSS.Pseudos | keyof PseudoProps]?: PseudoDefinition<Y> & Y
-}
-
-export type RecursiveCSSUIObject<Y> = Y &
-  (Y | RecursivePseudos<Y> | RecursiveStyles<Y>)
-
-export type CSSUIObject = RecursiveCSSUIObject<StyleUIValue>
+export type CSSUIObject = UIStyles & RecursiveStyles<UIStyles>
 
 export type CSSUIProps = StyleProps & PseudoProps
 
@@ -95,7 +87,7 @@ export type UIMultiStyle =
   | ((props: UIStyleProps) => Record<string, UIStyle>)
 
 export type AnimationStyle = {
-  keyframes: Record<string, StyleUIValue>
+  keyframes: Record<string, UIStyles>
   duration?: BaseToken<CSS.Property.AnimationDuration, "transitionDuration">
   timingFunction?: BaseToken<
     CSS.Property.AnimationTimingFunction,

@@ -1,5 +1,36 @@
 # @yamada-ui/modal
 
+## 1.3.0
+
+### Minor Changes
+
+- [#2134](https://github.com/yamada-ui/yamada-ui/pull/2134) [`c688f84`](https://github.com/yamada-ui/yamada-ui/commit/c688f84e2637f0dea392cfef7fec1c49322124b1) Thanks [@koralle](https://github.com/koralle)! - Enhance `Modal` component accessibility
+
+### Patch Changes
+
+- Updated dependencies [[`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`28a276f`](https://github.com/yamada-ui/yamada-ui/commit/28a276fc7c11bce28424e763a0f5fba8b5fd8fd0), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+  - @yamada-ui/motion@2.0.0
+  - @yamada-ui/button@1.0.32
+  - @yamada-ui/close-button@1.0.30
+  - @yamada-ui/focus-lock@1.0.16
+  - @yamada-ui/portal@1.0.16
+  - @yamada-ui/transitions@1.0.30
+  - @yamada-ui/use-value@1.1.17
+
+## 1.2.11
+
+### Patch Changes
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/button@1.0.31
+  - @yamada-ui/close-button@1.0.29
+  - @yamada-ui/motion@1.0.29
+  - @yamada-ui/transitions@1.0.29
+  - @yamada-ui/use-value@1.1.16
+
 ## 1.2.10
 
 ### Patch Changes

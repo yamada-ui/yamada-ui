@@ -1,5 +1,35 @@
 # @yamada-ui/calendar
 
+## 1.3.4
+
+### Patch Changes
+
+- Updated dependencies [[`7327145`](https://github.com/yamada-ui/yamada-ui/commit/73271452091f90c45eabd01424053e811f9cd5ae), [`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/use-clickable@1.2.3
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+  - @yamada-ui/button@1.0.32
+  - @yamada-ui/form-control@1.1.4
+  - @yamada-ui/icon@1.0.29
+  - @yamada-ui/popover@1.2.3
+  - @yamada-ui/portal@1.0.16
+  - @yamada-ui/use-controllable-state@1.0.15
+  - @yamada-ui/use-disclosure@1.0.15
+  - @yamada-ui/use-outside-click@1.0.15
+
+## 1.3.3
+
+### Patch Changes
+
+- [#2095](https://github.com/yamada-ui/yamada-ui/pull/2095) [`603a835`](https://github.com/yamada-ui/yamada-ui/commit/603a835def60c822b41ef67ae392f82b267fd568) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `value` inside the `Calendar` component was not changed even if the `value` was changed.
+
+- Updated dependencies [[`0640ca9`](https://github.com/yamada-ui/yamada-ui/commit/0640ca98a2335af3c36e9da1739bf12c3773f557)]:
+  - @yamada-ui/core@1.7.2
+  - @yamada-ui/button@1.0.31
+  - @yamada-ui/form-control@1.1.3
+  - @yamada-ui/icon@1.0.28
+  - @yamada-ui/popover@1.2.2
+
 ## 1.3.2
 
 ### Patch Changes

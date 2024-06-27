@@ -264,6 +264,7 @@ export const useCheckbox = <
       disabled,
       readOnly,
       checked,
+      "aria-checked": isIndeterminate ? "mixed" : checked,
       style: {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
@@ -282,6 +283,7 @@ export const useCheckbox = <
       onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
+      isIndeterminate,
       formControlProps,
       id,
       name,

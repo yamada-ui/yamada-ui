@@ -134,16 +134,13 @@ To display icons on items, set a `ReactElement` to `icon`.
   </ContextMenuTrigger>
 
   <MenuList>
-    <MenuItem icon={<FontAwesomeIcon icon={faPlus} />} command="⌘T">
+    <MenuItem icon={<Plus size="lg" />} command="⌘T">
       New Tab
     </MenuItem>
-    <MenuItem
-      icon={<FontAwesomeIcon icon={faArrowUpRightFromSquare} />}
-      command="⌘N"
-    >
+    <MenuItem icon={<ExternalLink size="lg" />} command="⌘N">
       New Window
     </MenuItem>
-    <MenuItem icon={<FontAwesomeIcon icon={faEdit} />} command="⌘O">
+    <MenuItem icon={<FilePenLine size="lg" />} command="⌘O">
       Open File
     </MenuItem>
   </MenuList>

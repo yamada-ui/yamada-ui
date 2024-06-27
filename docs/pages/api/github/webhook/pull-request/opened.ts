@@ -22,7 +22,10 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
   const repo = repository.name
   const { number, title, html_url, head, user, requested_reviewers } =
     pull_request
-  const count = requested_reviewers?.length ?? 0
+  const omittedRequestReviewers = requested_reviewers?.filter(
+    ({ login }) => !constant.pullRequest.excludeReviewers.includes(login),
+  )
+  const count = omittedRequestReviewers?.length ?? 0
   const collaborators = [...constant.maintainers, ...constant.members]
   const omittedCollaborators = collaborators.filter(
     ({ github }) =>

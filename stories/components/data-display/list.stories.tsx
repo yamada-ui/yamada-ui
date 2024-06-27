@@ -1,6 +1,5 @@
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Check, CircleCheck } from "@yamada-ui/lucide"
 import {
   List,
   DiscList,
@@ -8,7 +7,6 @@ import {
   ListItem,
   ListIcon,
 } from "@yamada-ui/react"
-import { FaCheckCircle } from "react-icons/fa"
 
 type Story = StoryFn<typeof List>
 
@@ -71,23 +69,23 @@ export const withIcon: Story = () => {
   return (
     <List>
       <ListItem>
-        <ListIcon as={FaCheckCircle} color="green.500" />
+        <ListIcon as={CircleCheck} color="green.500" />
         よろしければわたしが喜びのダンスを踊りましょうか！
       </ListItem>
       <ListItem>
-        <ListIcon as={FaCheckCircle} color="green.500" />
+        <ListIcon as={CircleCheck} color="green.500" />
         お命頂だい!!!　とうっ!!!
       </ListItem>
       <ListItem>
-        <ListIcon as={FaCheckCircle} color="green.500" />
+        <ListIcon as={CircleCheck} color="green.500" />
         う…宇宙一のスピードを誇るオ…オレさまのうしろに……
       </ListItem>
       <ListItem>
-        <ListIcon as={FaCheckCircle} color="green.500" />
+        <ListIcon as={CircleCheck} color="green.500" />
         オ…オレたちが勝てるわけはなかったはずだ………
       </ListItem>
       <ListItem>
-        <ListIcon as={Icon} icon={faCheck} color="green.500" />
+        <ListIcon as={Check} color="green.500" />
         オレは試合場のゴミ拾いみたいなもんかよ…
       </ListItem>
     </List>

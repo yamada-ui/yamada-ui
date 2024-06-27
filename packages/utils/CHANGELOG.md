@@ -1,5 +1,15 @@
 # @yamada-ui/utils
 
+## 1.3.0
+
+### Minor Changes
+
+- [#2126](https://github.com/yamada-ui/yamada-ui/pull/2126) [`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added type `ObjectLiteral`.
+
+- [#2108](https://github.com/yamada-ui/yamada-ui/pull/2108) [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `isTouchDevice` function.
+
+- [#2122](https://github.com/yamada-ui/yamada-ui/pull/2122) [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `is` function.
+
 ## 1.2.1
 
 ### Patch Changes

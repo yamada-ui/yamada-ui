@@ -104,6 +104,8 @@ export const Month: FC<MonthProps> = ({
           const month = dayjs(selectedMonth).add(index, "months").toDate()
           const days = getMonthDays(month, firstDayOfWeek)
 
+          const formattedLabel = getFormattedLabel(month, locale, dateFormat)
+
           return (
             <ui.div
               key={index}
@@ -113,7 +115,7 @@ export const Month: FC<MonthProps> = ({
               <CalendarHeader
                 {...{
                   ...headerProps,
-                  label: getFormattedLabel(month, locale, dateFormat),
+                  label: formattedLabel,
                   index,
                   labelProps,
                   controlProps,
@@ -123,6 +125,8 @@ export const Month: FC<MonthProps> = ({
               />
 
               <ui.table
+                role="grid"
+                aria-label={formattedLabel}
                 className={cx("ui-calendar__month", className)}
                 __css={{
                   w: styles.content?.w ?? styles.content?.width,

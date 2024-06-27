@@ -1,5 +1,18 @@
 # @yamada-ui/theme
 
+## 1.11.0
+
+### Minor Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`b1bfbf2`](https://github.com/yamada-ui/yamada-ui/commit/b1bfbf262cfd4e8df208a887c1481da21f271ced) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Fieldset` component style and updated reset styles.
+
+### Patch Changes
+
+- [#2155](https://github.com/yamada-ui/yamada-ui/pull/2155) [`1f52442`](https://github.com/yamada-ui/yamada-ui/commit/1f52442fce7fa1044fb5c4829ac1bfd85cb9ed6e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added native pseudo-class to `Accordion` component.
+
+- Updated dependencies [[`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/core@1.9.0
+
 ## 1.10.0
 
 ### Minor Changes

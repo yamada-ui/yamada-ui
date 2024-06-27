@@ -1,5 +1,19 @@
 # @yamada-ui/checkbox
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`d772f23`](https://github.com/yamada-ui/yamada-ui/commit/d772f2339b5ff6e5bfc11fb979566cd38a04df37) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added support for container props and aria attributes.
+
+### Patch Changes
+
+- Updated dependencies [[`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/form-control@2.0.0
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/layouts@1.1.27
+  - @yamada-ui/motion@2.0.1
+
 ## 1.0.35
 
 ### Patch Changes

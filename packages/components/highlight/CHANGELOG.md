@@ -1,5 +1,13 @@
 # @yamada-ui/highlight
 
+## 1.0.30
+
+### Patch Changes
+
+- Updated dependencies [[`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/typography@1.0.30
+
 ## 1.0.29
 
 ### Patch Changes

@@ -35,7 +35,7 @@ describe("<Accordion />", () => {
     const button = await screen.findByRole("button", {
       name: /Accordion Label 1/i,
     })
-    expect(button).toHaveAttribute("data-expanded")
+    expect(button).toHaveAttribute("aria-expanded", "true")
     const paragraphs = await screen.findAllByRole("paragraph")
     expect(paragraphs[0]).toHaveTextContent("This is an accordion item 1")
   })

@@ -1,5 +1,18 @@
 # @yamada-ui/radio
 
+## 1.2.0
+
+### Minor Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`b0fbd24`](https://github.com/yamada-ui/yamada-ui/commit/b0fbd24ed0c1bc8434c25aacee149dd64d2ab7cf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance `RadioGroup` and `Radio` accessibility.
+
+### Patch Changes
+
+- Updated dependencies [[`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/form-control@2.0.0
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/layouts@1.1.27
+
 ## 1.1.1
 
 ### Patch Changes

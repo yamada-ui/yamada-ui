@@ -1,10 +1,9 @@
 import { a11y, render, screen } from "@yamada-ui/test"
-import { CircleProgress } from "../src"
+import { CircleProgress, CircleProgressLabel } from "../src"
 
 describe("<CircleProgress />", () => {
   test("CircleProgress renders correctly", async () => {
-    const { container } = render(<CircleProgress />)
-    await a11y(container)
+    await a11y(<CircleProgress />)
   })
 
   test("renders correctly without animation", () => {
@@ -43,5 +42,28 @@ describe("<CircleProgress />", () => {
     )
     expect(screen.getByTestId("circle-progress-b")).toBeInTheDocument()
     expect(screen.getByTestId("circle-progress-c")).toBeInTheDocument()
+  })
+
+  test("Whether the size is render correctly", () => {
+    render(
+      <CircleProgress data-testid="circle-progress" value={50} size="120px" />,
+    )
+
+    const circleProgressChild =
+      screen.getByTestId("circle-progress").children[0]
+    expect(circleProgressChild).toHaveStyle({
+      width: "120px",
+      height: "120px",
+    })
+  })
+
+  test("Whether CircleProgressLabel is render correctly", () => {
+    render(
+      <CircleProgress value={50}>
+        <CircleProgressLabel>50%</CircleProgressLabel>
+      </CircleProgress>,
+    )
+
+    expect(screen.getByText("50%")).toBeInTheDocument()
   })
 })

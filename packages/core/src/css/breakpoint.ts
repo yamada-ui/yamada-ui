@@ -1,6 +1,6 @@
 import type { Dict } from "@yamada-ui/utils"
 import { keysFormObject, getPx } from "@yamada-ui/utils"
-import type { BreakpointDirection } from "../theme.types"
+import type { BreakpointDirection, BreakpointOptions } from "../theme.types"
 
 type BreakpointQuery = {
   breakpoint: string
@@ -20,20 +20,27 @@ type Breakpoints = {
   queries: BreakpointQueries
 }
 
-export const createQuery = (min?: number, max?: number): string | undefined => {
-  const query = ["@media screen"]
+export const createQuery = (
+  min: number | undefined,
+  max: number | undefined,
+  identifier: string = "@media screen",
+): string | undefined => {
+  const query = [identifier]
 
   if (min) query.push("and", `(min-width: ${min}px)`)
   if (max) query.push("and", `(max-width: ${max}px)`)
 
-  return query.length > 1 ? query.join(" ") : undefined
+  return query.length > 1
+    ? query.join(" ").replace(/^@container(\s+\w*)?\s+and/, `@container$1`)
+    : undefined
 }
 
 const createQueries = (
   breakpoints: Dict,
-  direction: BreakpointDirection,
+  options: BreakpointOptions,
 ): BreakpointQueries => {
-  const isDown = direction === "down"
+  const { direction, identifier } = options
+  const isDown = direction !== "up"
 
   return Object.entries(breakpoints).map(([breakpoint, width], i, entry) => {
     const [, relatedWidth] = entry[i + 1] ?? []
@@ -54,10 +61,10 @@ const createQueries = (
       if (maxW) maxW -= 1
     }
 
-    const maxWQuery = createQuery(undefined, maxW)
-    const minWQuery = createQuery(minW)
-    const minMaxQuery = createQuery(minW, maxW)
-    const query = direction === "down" ? maxWQuery : minWQuery
+    const maxWQuery = createQuery(undefined, maxW, identifier)
+    const minWQuery = createQuery(minW, undefined, identifier)
+    const minMaxQuery = createQuery(minW, maxW, identifier)
+    const query = isDown ? maxWQuery : minWQuery
 
     return {
       breakpoint,
@@ -73,13 +80,13 @@ const createQueries = (
 
 const transformBreakpoints = (
   breakpoints: Dict,
-  direction: BreakpointDirection,
+  options: BreakpointOptions,
 ): Dict => {
   return Object.fromEntries(
     Object.entries(breakpoints)
       .map(([name, value]) => [name, getPx(value)] as const)
       .sort((a, b) => {
-        if (direction === "down") {
+        if (options.direction !== "up") {
           return b[1] - a[1]
         } else {
           return a[1] - b[1]
@@ -90,17 +97,17 @@ const transformBreakpoints = (
 
 export const analyzeBreakpoints = (
   breakpoints: Dict,
-  direction: BreakpointDirection = "down",
+  options: BreakpointOptions = { direction: "down" },
 ): Breakpoints | undefined => {
   if (!breakpoints) return
 
-  breakpoints.base = direction === "down" ? "9999px" : "0px"
+  breakpoints.base = options.direction !== "up" ? "9999px" : "0px"
 
-  breakpoints = transformBreakpoints(breakpoints, direction)
+  breakpoints = transformBreakpoints(breakpoints, options)
 
   const keys = keysFormObject(breakpoints)
 
-  const queries = createQueries(breakpoints, direction)
+  const queries = createQueries(breakpoints, options)
 
   const isResponsive = (obj: Dict) => {
     const providedKeys = Object.keys(obj)
@@ -131,7 +138,7 @@ export const getMinMaxQuery = (
   const minQuery = omitQueries.sort((a, b) => (a.minW ?? 0) - (b.minW ?? 0))[0]
   const maxQuery = omitQueries.sort((a, b) => (b.maxW ?? 0) - (a.maxW ?? 0))[0]
 
-  if (direction === "down") {
+  if (direction !== "up") {
     return { minQuery, maxQuery }
   } else {
     return { minQuery, maxQuery }

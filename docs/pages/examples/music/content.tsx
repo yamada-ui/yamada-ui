@@ -6,7 +6,6 @@ import {
   FormControl,
   HStack,
   Heading,
-  Icon,
   Input,
   Modal,
   ModalBody,
@@ -20,7 +19,7 @@ import {
   useDisclosure,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { PlusCircle, Podcast } from "lucide-react"
+import { CirclePlus, Podcast } from "@yamada-ui/lucide"
 import { memo, useState } from "react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
 import { Image, type ImageProps } from "@yamada-ui/nextjs"
@@ -163,11 +162,7 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
 
         <Spacer display={{ base: "block", sm: "none" }} />
 
-        <Button
-          colorScheme="primary"
-          size="sm"
-          leftIcon={<Icon as={PlusCircle} />}
-        >
+        <Button colorScheme="primary" size="sm" leftIcon={<CirclePlus />}>
           Add Music
         </Button>
       </HStack>
@@ -270,7 +265,7 @@ const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
           borderWidth="1px"
           borderStyle="dashed"
         >
-          <Icon as={Podcast} color={["gray.400", "gray.500"]} fontSize="5xl" />
+          <Podcast color={["gray.400", "gray.500"]} fontSize="5xl" />
           <Heading as="h3" size={{ base: "md" }}>
             No episodes added
           </Heading>

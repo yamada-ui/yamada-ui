@@ -8,9 +8,8 @@ import {
   Center,
   CardBody,
   Spacer,
-  Icon,
 } from "@yamada-ui/react"
-import { Circle, Star } from "lucide-react"
+import { Circle, Star } from "@yamada-ui/lucide"
 import { memo } from "react"
 
 export const GitHubCard = memo(() => {
@@ -28,7 +27,7 @@ export const GitHubCard = memo(() => {
 
         <Spacer />
 
-        <Button leftIcon={<Icon as={Star} />}>Star</Button>
+        <Button leftIcon={<Star />}>Star</Button>
       </CardHeader>
 
       <CardBody>
@@ -44,11 +43,11 @@ export const GitHubCard = memo(() => {
         gap={{ base: "md", sm: "sm" }}
       >
         <Text as={Center} gap="xs" color="muted">
-          <Icon as={Circle} /> TypeScript
+          <Circle /> TypeScript
         </Text>
 
         <Text as={Center} gap="xs" color="muted">
-          <Icon as={Star} /> 400
+          <Star /> 400
         </Text>
 
         <Text color="muted" lineClamp={1}>

@@ -114,6 +114,24 @@ describe("<Autocomplete />", () => {
         "true",
       )
     })
+
+    test("with emptyProps icon", async () => {
+      const { user, container } = render(
+        <Autocomplete
+          emptyProps={{ icon: <svg data-testid="icon" /> }}
+          items={ITEMS}
+        />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      await waitFor(() => {
+        expect(screen.getByTestId("icon")).toBeInTheDocument()
+      })
+    })
   })
 
   describe("select options", () => {
@@ -140,7 +158,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await user.click(optionElements[0])
 
       await waitFor(() =>
@@ -204,7 +222,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await user.click(optionElements[0])
 
       optionElements.forEach((o) => {
@@ -456,7 +474,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
@@ -477,7 +495,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const select = screen.getByRole("select")
+      const select = await screen.findByRole("select")
       await waitFor(() => expect(select).toHaveStyle({ visibility: "visible" }))
 
       await user.keyboard("{Escape>}")
@@ -492,7 +510,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
@@ -731,6 +749,31 @@ describe("<Autocomplete />", () => {
       expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
 
       expect(items).toStrictEqual(original)
+    })
+
+    test("with createProps icon", async () => {
+      const { user, container } = render(
+        <Autocomplete
+          allowCreate
+          items={items}
+          createProps={{
+            icon: <svg data-testid="icon" />,
+          }}
+        />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const input = screen.getByRole("combobox")
+      await user.type(input, CREATE_OPTION_VALUE)
+      await user.keyboard("{Enter>}")
+
+      await waitFor(() => {
+        expect(screen.getByTestId("icon")).toBeInTheDocument()
+      })
     })
   })
 })

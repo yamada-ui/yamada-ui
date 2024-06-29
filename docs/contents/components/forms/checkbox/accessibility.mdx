@@ -1,0 +1,41 @@
+---
+title: Checkbox
+description: "`Checkbox` is a component used for allowing users to select one option from multiple choices."
+package_name: "@yamada-ui/checkbox"
+with_description: true
+tab: Accessibility
+---
+
+The `Checkbox` follows the[WAI-ARIA - Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox) for accessibility.
+
+If not using FormControl, set aria-labelledby on the CheckboxGroup.
+
+```tsx live=false
+<VStack gap="sm">
+  <Heading as="h3" size="lg">
+    キャラクター
+  </Heading>
+
+  <CheckboxGroup aria-labelledby="group">
+    <Checkbox value="孫悟空">孫悟空</Checkbox>
+    <Checkbox value="ベジータ">ベジータ</Checkbox>
+    <Checkbox value="フリーザ">フリーザ</Checkbox>
+  </CheckboxGroup>
+</VStack>
+```
+
+## Keyboard Navigation
+
+| Key     | Description                          | State |
+| ------- | ------------------------------------ | ----- |
+| `Tab`   | Moves focus to the enabled checkbox. | -     |
+| `Space` | Checks the focused checkbox.         | -     |
+
+## ARIA Roles and Attributes
+
+| Component       | Roles and Attributes | Usage                                                                                                                      |
+| --------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `CheckboxGroup` | `role="group"`       | Indicates that it is a group of checkboxes.                                                                                |
+|                 | `aria-labelledby`    | If the CheckboxGroup is within a FormControl and the FormControl has a label or Label, set this to the id of that element. |
+| `Checkbox`      | `role="checkbox"`    | Indicates that it is a checkbox.                                                                                           |
+|                 | `aria-checked`       | Set to "true" if the checkbox is checked, and to "false" if it is not checked.                                             |

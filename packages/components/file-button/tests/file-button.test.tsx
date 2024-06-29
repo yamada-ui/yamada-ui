@@ -2,7 +2,7 @@ import { Link } from "@yamada-ui/react"
 import { a11y, render, screen } from "@yamada-ui/test"
 import { FileButton } from "../src"
 
-describe("<FileButton/ >", () => {
+describe("<FileButton />", () => {
   afterAll(() => {
     vi.restoreAllMocks()
   })

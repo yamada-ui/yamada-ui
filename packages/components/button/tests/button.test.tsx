@@ -1,7 +1,7 @@
 import { render, a11y, screen } from "@yamada-ui/test"
 import { Button } from "../src"
 
-describe("<Button/>", () => {
+describe("<Button />", () => {
   test("passes a11y test", async () => {
     await a11y(<Button>test</Button>)
   })

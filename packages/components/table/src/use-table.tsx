@@ -487,10 +487,12 @@ export const useTable = <Y extends RowData>({
   const getTableProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
+      "aria-colcount": columns.length,
+      "aria-rowcount": data.length,
       ...props,
       ref,
     }),
-    [rest],
+    [rest, columns, data],
   )
 
   const state = getState()

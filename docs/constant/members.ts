@@ -240,4 +240,45 @@ export const MEMBERS = [
     x: { url: "https://x.com/lit_myura" },
     discord: { id: "663701704990130177" },
   },
+  {
+    name: { en: "Kaito Suzuki", ja: "Kaito Suzuki" },
+    description: {
+      en: "A student engineer who is studying front-end and back-end.",
+      ja: "フロントエンドとバックエンドを勉強している学生エンジニア。",
+    },
+    github: {
+      id: "kaitobq",
+      icon: "https://avatars.githubusercontent.com/u/157810570?v=4",
+      url: "https://github.com/kaitobq",
+    },
+    x: { url: "https://x.com/kaitobq" },
+    discord: { id: "349526549474705408" },
+  },
+  {
+    name: { en: "Shuta Yanagawa", ja: "Shuta Yanagaawa" },
+    description: {
+      en: "Web front-end engineer. a NIT Student.",
+      ja: "Webフロントエンドエンジニア。高専生。",
+    },
+    github: {
+      id: "Shunii85",
+      icon: "https://avatars.githubusercontent.com/u/137262383?v=4",
+      url: "https://github.com/Shunii85",
+    },
+    x: { url: "https://x.com/shunii_hack" },
+    discord: { id: "1098389261738328084" },
+  },
+  {
+    name: { en: "Motohiro Yamagishi", ja: "Motohiro Yamagishi" },
+    description: {
+      en: "Front-end engineer, a little bit of back-end.",
+      ja: "フロントエンドエンジニア、少しだけバックエンド。",
+    },
+    github: {
+      id: "mokun632",
+      icon: "https://avatars.githubusercontent.com/mokun632",
+      url: "https://github.com/mokun632",
+    },
+    discord: { id: "1221042700304912437" },
+  },
 ]

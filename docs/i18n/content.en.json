@@ -4035,7 +4035,7 @@
   {
     "title": "Dropzone",
     "type": "page",
-    "description": "Dropzone is a component used for uploading files via drag and drop.",
+    "description": "`Dropzone` is a component used for uploading files via drag and drop.",
     "slug": "/components/forms/dropzone",
     "hierarchy": { "lv1": "Dropzone" }
   },
@@ -4525,7 +4525,7 @@
   {
     "title": "FormControl",
     "type": "page",
-    "description": "`FormControl` is a component used to group form elements with labels, help messages, error messages, etc.",
+    "description": "`FormControl` is a component used to group form elements with label, helper message, error message, etc.",
     "slug": "/components/forms/form-control",
     "hierarchy": { "lv1": "FormControl" }
   },
@@ -8575,6 +8575,12 @@
     "type": "fragment",
     "slug": "/components/media-and-icons/icon#use-custom-icons",
     "hierarchy": { "lv1": "Icon", "lv2": "Usage", "lv3": "Use Custom Icons" }
+  },
+  {
+    "title": "Use Lucide",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/icon#use-lucide",
+    "hierarchy": { "lv1": "Icon", "lv2": "Usage", "lv3": "Use Lucide" }
   },
   {
     "title": "Use Font Awesome",

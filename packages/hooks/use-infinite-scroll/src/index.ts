@@ -292,5 +292,5 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   assignRef(resetRef, onReset)
   assignRef(indexRefProp, (index) => (indexRef.current = index))
 
-  return { ref, isFinish, processingRef }
+  return { ref, isFinish }
 }

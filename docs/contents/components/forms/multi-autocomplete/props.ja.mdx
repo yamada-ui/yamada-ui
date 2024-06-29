@@ -105,6 +105,13 @@ tab: Props
 />
 
 <PropsCard
+  id="multiautocomplete-createprops"
+  name="createProps"
+  type='Omit<AutocompleteCreateProps, "children">'
+  description={"Props for autocomplete create element."}
+/>
+
+<PropsCard
   id="multiautocomplete-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
@@ -131,6 +138,13 @@ tab: Props
   type="string"
   description={"The message displayed when the search yields no hits."}
   defaultValue={"'No results found'"}
+/>
+
+<PropsCard
+  id="multiautocomplete-emptyprops"
+  name="emptyProps"
+  type='Omit<AutocompleteEmptyProps, "children">'
+  description={"Props for autocomplete empty element."}
 />
 
 <PropsCard

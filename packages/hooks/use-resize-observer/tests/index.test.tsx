@@ -5,31 +5,27 @@ import { useElementSize, useResizeObserver } from "../src"
 describe("useResizeObserver", () => {
   const defaultResizeObserver = global.ResizeObserver
 
-  beforeAll(() => {
-    global.ResizeObserver = class ResizeObserver {
-      constructor(cb: ResizeObserverCallback) {
-        ;(() => {
-          cb(
-            [
-              {
-                contentRect: {
-                  height: 320,
-                  width: 400,
-                },
-              },
-            ] as ResizeObserverEntry[],
-            this,
-          )
-        })()
-      }
-      observe = vi.fn()
-      unobserve = vi.fn()
-      disconnect = vi.fn()
-    }
+  const ResizeObserverMock = vi.fn((cb) => ({
+    disconnect: vi.fn(),
+    observe: vi.fn().mockImplementation(() => {
+      cb([
+        {
+          contentRect: {
+            height: 320,
+            width: 400,
+          },
+        },
+      ])
+    }),
+    unobserve: vi.fn(),
+  }))
+
+  beforeEach(() => {
+    vi.stubGlobal("ResizeObserver", ResizeObserverMock)
   })
 
-  afterAll(() => {
-    global.ResizeObserver = defaultResizeObserver
+  afterEach(() => {
+    vi.stubGlobal("ResizeObserver", defaultResizeObserver)
   })
 
   const ButtonWithSize = () => {
@@ -46,6 +42,7 @@ describe("useResizeObserver", () => {
     const button = await screen.findByRole("button")
 
     await waitFor(() => expect(button.textContent).toBe("400 x 320"))
+    await waitFor(() => expect(ResizeObserverMock).toHaveBeenCalledTimes(1))
   })
 })
 

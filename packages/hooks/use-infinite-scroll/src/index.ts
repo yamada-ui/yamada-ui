@@ -226,9 +226,9 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
         onScroll({ root, isVertical, position })
       }
 
-      if (root) root.ariaBusy = "false"
       indexRef.current += 1
       processingRef.current = false
+      if (root) root.ariaBusy = "false"
     }, options)
 
     return observer
@@ -239,14 +239,17 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
       const el = ref.current
       const isMounted = isMountedRef.current
       const index = indexRef.current
+      const root = rootRef?.current
 
       if (initialLoad && !isMounted) {
         processingRef.current = true
+        if (root) root.ariaBusy = "true"
 
         await onLoad({ index, finish: onFinish })
 
         indexRef.current += 1
         processingRef.current = false
+        if (root) root.ariaBusy = "false"
       }
 
       if (isDisabled) return

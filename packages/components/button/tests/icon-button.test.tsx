@@ -2,7 +2,7 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import { a11y, render } from "@yamada-ui/test"
 import { IconButton } from "../src"
 
-describe("<IconButton/>", () => {
+describe("<IconButton />", () => {
   test("passes a11y test", async () => {
     await a11y(
       <IconButton

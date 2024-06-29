@@ -4364,7 +4364,7 @@
   {
     "title": "Dropzone",
     "type": "page",
-    "description": "Dropzone`は、ファイルをドラッグアンドドロップでアップロードするために使用されるコンポーネントです。",
+    "description": "`Dropzone`は、ファイルをドラッグアンドドロップでアップロードするために使用されるコンポーネントです。",
     "slug": "/components/forms/dropzone",
     "hierarchy": { "lv1": "Dropzone" }
   },
@@ -4898,7 +4898,7 @@
   {
     "title": "FormControl",
     "type": "page",
-    "description": "`FormControl`は、フォーム要素に、ラベル、ヘルプメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。",
+    "description": "`FormControl`は、フォーム要素に、ラベル、ヘルパーメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。",
     "slug": "/components/forms/form-control",
     "hierarchy": { "lv1": "FormControl" }
   },
@@ -9192,6 +9192,12 @@
       "lv2": "使い方",
       "lv3": "独自のアイコンを使う"
     }
+  },
+  {
+    "title": "Lucideを使う",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/icon#lucideを使う",
+    "hierarchy": { "lv1": "Icon", "lv2": "使い方", "lv3": "Lucideを使う" }
   },
   {
     "title": "Font Awesomeを使う",

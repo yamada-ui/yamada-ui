@@ -1,7 +1,7 @@
 import { render, renderHook } from "@yamada-ui/test"
 import { Highlight, useHighlight } from "../src"
 
-describe("<Highlight/>", () => {
+describe("<Highlight />", () => {
   test.each([[], ""])(
     "useHighlight returns no matches if queries is empty but returns original value",
     (query) => {

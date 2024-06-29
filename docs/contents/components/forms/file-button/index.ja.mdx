@@ -23,7 +23,7 @@ import { FileButton } from "@yamada-ui/react"
 <VStack alignItems="flex-start">
   <FileButton>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<FontAwesomeIcon icon={faPlus} />} />
+  <FileButton as={IconButton} icon={<Plus />} />
 </VStack>
 ```
 
@@ -124,11 +124,7 @@ import { FileButton } from "@yamada-ui/react"
 <VStack alignItems="flex-start">
   <FileButton isDisabled>Upload</FileButton>
 
-  <FileButton
-    as={IconButton}
-    icon={<FontAwesomeIcon icon={faPlus} />}
-    isDisabled
-  />
+  <FileButton as={IconButton} icon={<Plus />} isDisabled />
 
   <FileButton isDisabled>
     {({ onClick, isDisabled }) => (
@@ -161,11 +157,7 @@ import { FileButton } from "@yamada-ui/react"
 <VStack alignItems="flex-start">
   <FileButton isReadOnly>Upload</FileButton>
 
-  <FileButton
-    as={IconButton}
-    icon={<FontAwesomeIcon icon={faPlus} />}
-    isReadOnly
-  />
+  <FileButton as={IconButton} icon={<Plus />} isReadOnly />
 
   <FileButton isReadOnly>
     {({ onClick, isReadOnly }) => (
@@ -197,11 +189,7 @@ import { FileButton } from "@yamada-ui/react"
 <VStack alignItems="flex-start">
   <FileButton isInvalid>Upload</FileButton>
 
-  <FileButton
-    as={IconButton}
-    icon={<FontAwesomeIcon icon={faPlus} />}
-    isInvalid
-  />
+  <FileButton as={IconButton} icon={<Plus />} isInvalid />
 
   <FormControl isInvalid label="Upload file" errorMessage="File is required.">
     <FileButton>Upload</FileButton>

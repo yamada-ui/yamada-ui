@@ -4,7 +4,7 @@ import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
 import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { Dict } from "@yamada-ui/utils"
+import type { Dict, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -85,6 +85,15 @@ export const useCheckboxGroup = <
     [value, setValue],
   )
 
+  const getContainerProps: PropGetter = useCallback(
+    (props = {}, ref = null) => ({
+      role: "group",
+      ...props,
+      ref,
+    }),
+    [],
+  )
+
   const getCheckboxProps: UIPropGetter<
     "input",
     { value?: Y },
@@ -101,7 +110,14 @@ export const useCheckboxGroup = <
     [onChange, isNative, value],
   )
 
-  return { props, value, setValue, onChange, getCheckboxProps }
+  return {
+    props,
+    value,
+    setValue,
+    onChange,
+    getContainerProps,
+    getCheckboxProps,
+  }
 }
 
 export type UseCheckboxGroupReturn<Y extends string | number = string> =
@@ -152,8 +168,13 @@ export const CheckboxGroup = forwardRef(
     }: CheckboxGroupProps<Y>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const { value, onChange, props: computedProps } = useCheckboxGroup<Y>(props)
-    const { isRequired, isReadOnly, isDisabled, isInvalid, ...rest } =
+    const {
+      value,
+      onChange,
+      props: computedProps,
+      getContainerProps,
+    } = useCheckboxGroup<Y>(props)
+    const { labelId, isRequired, isReadOnly, isDisabled, isInvalid, ...rest } =
       useFormControl(computedProps)
 
     const validChildren = getValidChildren(children)
@@ -186,10 +207,12 @@ export const CheckboxGroup = forwardRef(
         <Flex
           ref={ref}
           className={cx("ui-checkbox-group", className)}
-          role="group"
           direction={direction}
           gap={gap ?? (direction === "row" ? "1rem" : undefined)}
-          {...rest}
+          {...getContainerProps({
+            "aria-labelledby": labelId,
+            ...rest,
+          })}
         >
           {children ?? computedChildren}
         </Flex>

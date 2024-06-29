@@ -174,7 +174,7 @@ tab: Props
 <PropsCard
   id="accordionpanel-transition"
   name="transition"
-  type='Partial<Record<"enter" | "exit", Transition>>'
+  type='Partial<Record<"enter" | "exit", Transition$1>>'
   description={"Custom `transition` definition for `enter` and `exit`."}
 />
 
@@ -195,6 +195,13 @@ tab: Props
 />
 
 ### AccordionLabelProps
+
+<PropsCard
+  id="accordionlabel-containerprops"
+  name="containerProps"
+  type='HTMLUIProps<"div">'
+  description={"Props the container element."}
+/>
 
 <PropsCard
   id="accordionlabel-icon"

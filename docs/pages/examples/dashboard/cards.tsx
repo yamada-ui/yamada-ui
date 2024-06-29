@@ -4,23 +4,17 @@ import {
   CardHeader,
   Grid,
   Heading,
-  Icon,
   Spacer,
   Stat,
 } from "@yamada-ui/react"
 import type {
   CardProps,
+  Component,
   GridProps,
   IconProps,
   StatProps,
 } from "@yamada-ui/react"
-import {
-  Users,
-  type LucideIcon,
-  CreditCard,
-  Activity,
-  DollarSign,
-} from "lucide-react"
+import { Users, CreditCard, Activity, DollarSign } from "@yamada-ui/lucide"
 import { memo } from "react"
 import type { FC } from "react"
 
@@ -81,7 +75,7 @@ Cards.displayName = "Cards"
 type ItemProps = CardProps &
   Pick<StatProps, "number" | "helperMessage"> & {
     title: string
-    icon: LucideIcon
+    icon: Component<"svg", IconProps>
     iconProps?: IconProps
     statProps?: StatProps
     statIcon?: StatProps["icon"]
@@ -90,7 +84,7 @@ type ItemProps = CardProps &
 const Item: FC<ItemProps> = memo(
   ({
     title,
-    icon,
+    icon: Icon,
     iconProps,
     number,
     helperMessage,
@@ -107,7 +101,7 @@ const Item: FC<ItemProps> = memo(
 
           <Spacer />
 
-          <Icon as={icon} color="muted" {...iconProps} />
+          <Icon color="muted" size="2xl" {...iconProps} />
         </CardHeader>
 
         <CardBody pt={{ base: "sm", sm: "xs" }}>

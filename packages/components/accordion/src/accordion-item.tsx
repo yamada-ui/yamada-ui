@@ -61,8 +61,13 @@ export type AccordionItemProps = Omit<HTMLUIProps<"li">, "children"> &
   AccordionItemOptions
 
 export const AccordionItem = forwardRef<AccordionItemProps, "li">(
-  ({ className, isDisabled = false, label, icon, children, ...rest }, ref) => {
-    const panelId = useId()
+  (
+    { id, className, isDisabled = false, label, icon, children, ...rest },
+    ref,
+  ) => {
+    id ??= useId()
+    const itemId = `${id}-item`
+    const panelId = `${id}-panel`
 
     const { index, setIndex, setFocusedIndex, isMultiple, isToggle, styles } =
       useAccordionContext()
@@ -140,26 +145,43 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
 
     const getLabelProps: UIPropGetter<"button"> = useCallback(
       (props = {}, ref = null) => ({
-        ...props,
-        ref: mergeRefs(register, ref),
+        id: itemId,
         type: "button",
-        disabled: isDisabled,
-        "data-expanded": dataAttr(isOpen),
+        "aria-expanded": isOpen,
         "aria-controls": panelId,
+        "aria-disabled": ariaAttr(
+          (!isMultiple && !isToggle && isOpen) || isDisabled,
+        ),
+        ...props,
+        disabled: isDisabled,
+        ref: mergeRefs(register, ref),
         onClick: handlerAll(props.onClick, onClick),
         onFocus: handlerAll(props.onFocus, onFocus),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }),
-      [isDisabled, isOpen, onClick, onFocus, onKeyDown, register, panelId],
+      [
+        itemId,
+        isOpen,
+        panelId,
+        isMultiple,
+        isToggle,
+        isDisabled,
+        register,
+        onClick,
+        onFocus,
+        onKeyDown,
+      ],
     )
 
     const getPanelProps: UIPropGetter = useCallback(
       (props = {}, ref = null) => ({
+        id: panelId,
+        role: "region",
+        "aria-labelledby": itemId,
         ...props,
         ref,
-        id: panelId,
       }),
-      [panelId],
+      [itemId, panelId],
     )
 
     const css: CSSUIObject = { ...styles.item, overflowAnchor: "none" }
@@ -188,10 +210,11 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
       <AccordionItemProvider
         value={{ isOpen, isDisabled, icon, getLabelProps, getPanelProps }}
       >
-        <ui.li
+        <ui.div
           ref={ref}
           className={cx("ui-accordion__item", className)}
-          aria-expanded={ariaAttr(isOpen)}
+          id={id}
+          data-expanded={dataAttr(isOpen)}
           __css={css}
           {...rest}
         >
@@ -201,7 +224,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
           {customAccordionPanel ?? (
             <AccordionPanel>{cloneChildren}</AccordionPanel>
           )}
-        </ui.li>
+        </ui.div>
       </AccordionItemProvider>
     )
   },

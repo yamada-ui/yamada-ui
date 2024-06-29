@@ -727,6 +727,8 @@ export const useAutocomplete = <T extends string | string[] = string>({
     (newValue: string, runOmit: boolean = true) => {
       const selectedValues = getSelectedValues(newValue)
 
+      if (!selectedValues.length) return
+
       setLabel((prev) => {
         if (!isMulti) {
           return selectedValues[0] as T

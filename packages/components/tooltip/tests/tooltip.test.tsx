@@ -1,7 +1,7 @@
 import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { Tooltip } from "../src/tooltip"
 
-describe("<Tooltip/>", () => {
+describe("<Tooltip />", () => {
   test("should pass a11y test", async () => {
     await a11y(
       <Tooltip label="Tooltip hover">

@@ -9,10 +9,10 @@ export const submitted: APIHandler = async ({ req, constant }) => {
     req.body as Event<"pull_request_review.submitted">
   const owner = "yamada-ui"
   const repo = repository.name
-  const { user } = review
+  const { user, state } = review
   const { number } = pull_request
 
-  if (!user) return
+  if (!user || state !== "approved") return
 
   if (constant.pullRequest.excludeReviewers.includes(user.login)) return
 
@@ -22,7 +22,7 @@ export const submitted: APIHandler = async ({ req, constant }) => {
         owner,
         repo,
         issue_number: number,
-        labels: ["request merge"],
+        labels: ["merge request"],
       }),
     )
   } catch {}

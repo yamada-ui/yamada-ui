@@ -1,6 +1,6 @@
 ---
 title: FormControl
-description: "`FormControl`は、フォーム要素に、ラベル、ヘルプメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
+description: "`FormControl`は、フォーム要素に、ラベル、ヘルパーメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/form-control"
 with_description: true
 tab: Props
@@ -24,6 +24,13 @@ tab: Props
 />
 
 <PropsCard
+  id="formcontrol-errormessageprops"
+  name="errorMessageProps"
+  type="ErrorMessageProps"
+  description={"Props the error message component."}
+/>
+
+<PropsCard
   id="formcontrol-helpermessage"
   name="helperMessage"
   type="type ONLY_FOR_FORMAT =
@@ -34,6 +41,13 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
   description={"The form control helper message to use."}
+/>
+
+<PropsCard
+  id="formcontrol-helpermessageprops"
+  name="helperMessageProps"
+  type="HelperMessageProps"
+  description={"Props the label component."}
 />
 
 <PropsCard
@@ -89,6 +103,13 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
   description={"The form control label to use."}
+/>
+
+<PropsCard
+  id="formcontrol-labelprops"
+  name="labelProps"
+  type="LabelProps"
+  description={"Props the label component."}
 />
 
 <PropsCard
@@ -200,3 +221,159 @@ tab: Props
 <PropsCard id="useformcontrol-readonly" name="readOnly" type="boolean" />
 
 <PropsCard id="useformcontrol-required" name="required" type="boolean" />
+
+### FieldsetProps
+
+<PropsCard
+  id="fieldset-errormessage"
+  name="errorMessage"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The fieldset error message to use."}
+/>
+
+<PropsCard
+  id="fieldset-errormessageprops"
+  name="errorMessageProps"
+  type="ErrorMessageProps"
+  description={"Props the error message component."}
+/>
+
+<PropsCard
+  id="fieldset-helpermessage"
+  name="helperMessage"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The fieldset helper message to use."}
+/>
+
+<PropsCard
+  id="fieldset-helpermessageprops"
+  name="helperMessageProps"
+  type="HelperMessageProps"
+  description={"Props the helper message component."}
+/>
+
+<PropsCard
+  id="fieldset-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={"If `true`, the fieldset will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="fieldset-isinvalid"
+  name="isInvalid"
+  type="boolean"
+  description={"If `true`, the fieldset will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="fieldset-isreadonly"
+  name="isReadOnly"
+  type="boolean"
+  description={"If `true`, the fieldset will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="fieldset-isreplace"
+  name="isReplace"
+  type="boolean"
+  description={
+    "If `true`, switch between helper message and error message using isInvalid."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="fieldset-isrequired"
+  name="isRequired"
+  type="boolean"
+  description={"If `true`, the fieldset will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="fieldset-legend"
+  name="legend"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+  description={"The fieldset legend to use."}
+/>
+
+<PropsCard
+  id="fieldset-legendprops"
+  name="legendProps"
+  type="LegendProps"
+  description={"Props the label component."}
+/>
+
+<PropsCard
+  id="fieldset-optionalindicator"
+  name="optionalIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+<PropsCard
+  id="fieldset-requiredindicator"
+  name="requiredIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+### LegendProps
+
+<PropsCard id="legend-isrequired" name="isRequired" type="boolean" />
+
+<PropsCard
+  id="legend-optionalindicator"
+  name="optionalIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>
+
+<PropsCard
+  id="legend-requiredindicator"
+  name="requiredIndicator"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | number
+  | boolean
+  | ReactElement<any, string | JSXElementConstructor<any>>
+  | Iterable<ReactNode>
+  | ReactPortal"
+/>

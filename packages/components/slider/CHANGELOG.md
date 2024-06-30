@@ -1,5 +1,15 @@
 # @yamada-ui/slider
 
+## 1.1.2
+
+### Patch Changes
+
+- [#2130](https://github.com/yamada-ui/yamada-ui/pull/2130) [`fb3b444`](https://github.com/yamada-ui/yamada-ui/commit/fb3b44495b25719422945863076af0bac376a89d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - The default value of `thumbSize` was obtained from the theme to support server-side rendering.
+
+- Updated dependencies [[`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/form-control@2.0.0
+  - @yamada-ui/core@1.9.0
+
 ## 1.1.1
 
 ### Patch Changes

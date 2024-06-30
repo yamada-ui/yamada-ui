@@ -1,4 +1,4 @@
-name: Insight Report
+name: Insights Report
 
 on:
   schedule:
@@ -15,7 +15,7 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Create insight report
-        run: pnpm report:insight
+        run: pnpm report:insights --publish
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           DISCORD_INSIGHTS_WEBHOOK_URL: ${{ secrets.DISCORD_INSIGHTS_WEBHOOK_URL }}

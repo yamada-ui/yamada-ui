@@ -97,4 +97,47 @@ describe("<Tooltip />", () => {
       expect(screen.queryByRole("tooltip")).toBeNull()
     })
   })
+
+  test.each([
+    {
+      closeOnMouseDown: false,
+      closeOnPointerDown: true,
+    },
+    {
+      closeOnMouseDown: true,
+      closeOnPointerDown: false,
+    },
+    {
+      closeOnMouseDown: true,
+      closeOnPointerDown: true,
+    },
+  ])(
+    "Tooltip should be hidden (when `closeOnMouseDown` is $closeOnMouseDown and `closeOnPointerDown` is $closeOnPointerDown)",
+    async ({ closeOnMouseDown, closeOnPointerDown }) => {
+      const { user } = render(
+        <Tooltip
+          label="Tooltip hover"
+          closeOnMouseDown={closeOnMouseDown}
+          closeOnPointerDown={closeOnPointerDown}
+        >
+          <span>Hover</span>
+        </Tooltip>,
+      )
+
+      const tooltipTriggerElement = await screen.findByText("Hover")
+      await user.hover(tooltipTriggerElement)
+
+      const tooltip = await screen.findByRole("tooltip", {
+        name: /Tooltip hover/i,
+      })
+      expect(tooltip).toBeVisible()
+
+      await user.pointer({ target: tooltipTriggerElement, keys: "[MouseLeft]" })
+      await waitFor(() => {
+        expect(
+          screen.queryByRole("tooltip", { name: /Tooltip hover/i }),
+        ).toBeNull()
+      })
+    },
+  )
 })

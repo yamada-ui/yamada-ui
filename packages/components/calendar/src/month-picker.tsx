@@ -145,6 +145,8 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
             >
               <Calendar
                 className="ui-month-picker__calendar"
+                role="dialog"
+                aria-modal="true"
                 {...getCalendarProps()}
               />
             </PopoverContent>

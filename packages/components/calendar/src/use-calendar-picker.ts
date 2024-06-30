@@ -33,7 +33,7 @@ import type {
   KeyboardEventHandler,
   MouseEvent,
 } from "react"
-import { useCallback, useRef } from "react"
+import { useCallback, useId, useRef } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
@@ -234,6 +234,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const ariaControlRef = useRef<string>("")
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -425,11 +426,14 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       return {
         ref: mergeRefs(inputRef, ref),
         tabIndex: !allowInput ? 0 : -1,
+        role: "combobox",
         ...props,
         ...formControlProps,
         style,
+        "aria-haspopup": "dialog",
+        "aria-controls": ariaControlRef.current,
         "data-active": dataAttr(isOpen),
-        "aria-expanded": dataAttr(isOpen),
+        "aria-expanded": isOpen,
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(
           props.onKeyDown,
@@ -442,46 +446,52 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
   )
 
   const getCalendarProps = useCallback(
-    (props?: CalendarProps): CalendarProps => ({
-      ...props,
-      type,
-      defaultType,
-      onChangeType,
-      month,
-      defaultMonth,
-      onChangeMonth,
-      firstDayOfWeek,
-      amountOfMonths,
-      paginateBy,
-      withWeekdays,
-      disableOutsideDays,
-      hiddenOutsideDays,
-      yearFormat,
-      monthFormat,
-      weekdayFormat,
-      dateFormat,
-      weekendDays,
-      today,
-      holidays,
-      withHeader,
-      withControls,
-      withLabel,
-      maxSelectValues,
-      variant: calendarVariant,
-      size: calendarSize,
-      colorScheme: calendarColorScheme,
-      ...calendarProps,
-      value,
-      defaultValue,
-      onChange,
-      minDate,
-      maxDate,
-      excludeDate,
-      locale,
-      __selectType,
-      enableMultiple,
-      enableRange,
-    }),
+    (props?: CalendarProps): CalendarProps => {
+      const id = props?.id || useId()
+      ariaControlRef.current = id
+
+      return {
+        ...props,
+        id,
+        type,
+        defaultType,
+        onChangeType,
+        month,
+        defaultMonth,
+        onChangeMonth,
+        firstDayOfWeek,
+        amountOfMonths,
+        paginateBy,
+        withWeekdays,
+        disableOutsideDays,
+        hiddenOutsideDays,
+        yearFormat,
+        monthFormat,
+        weekdayFormat,
+        dateFormat,
+        weekendDays,
+        today,
+        holidays,
+        withHeader,
+        withControls,
+        withLabel,
+        maxSelectValues,
+        variant: calendarVariant,
+        size: calendarSize,
+        colorScheme: calendarColorScheme,
+        ...calendarProps,
+        value,
+        defaultValue,
+        onChange,
+        minDate,
+        maxDate,
+        excludeDate,
+        locale,
+        __selectType,
+        enableMultiple,
+        enableRange,
+      }
+    },
     [
       hiddenOutsideDays,
       maxSelectValues,

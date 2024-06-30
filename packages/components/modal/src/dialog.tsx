@@ -155,11 +155,11 @@ export const Dialog = forwardRef<DialogProps, "section", false>(
           className={cx("ui-dialog", className)}
           __css={css}
           {...{
-            size,
             onClose,
             withOverlay: false,
             withCloseButton: false,
             ...rest,
+            size,
           }}
         >
           {customDialogOverlay ??

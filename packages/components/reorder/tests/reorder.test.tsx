@@ -5,8 +5,8 @@ describe("<Reorder />", () => {
   test("renders with no errors", async () => {
     await a11y(
       <Reorder>
-        <ReorderItem label="Item 1">Item 1</ReorderItem>
-        <ReorderItem label="Item 2">Item 2</ReorderItem>
+        <ReorderItem value="Item 1">Item 1</ReorderItem>
+        <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
     )
   })
@@ -14,8 +14,8 @@ describe("<Reorder />", () => {
   test("render items correctly", () => {
     render(
       <Reorder>
-        <ReorderItem label="Item 1">Item 1</ReorderItem>
-        <ReorderItem label="Item 2">Item 2</ReorderItem>
+        <ReorderItem value="Item 1">Item 1</ReorderItem>
+        <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
     )
 
@@ -26,8 +26,8 @@ describe("<Reorder />", () => {
   test("handles orientation correctly", () => {
     render(
       <Reorder data-testid="Reorder" orientation="horizontal">
-        <ReorderItem label="Item 1">Item 1</ReorderItem>
-        <ReorderItem label="Item 2">Item 2</ReorderItem>
+        <ReorderItem value="Item 1">Item 1</ReorderItem>
+        <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
     )
 
@@ -39,8 +39,8 @@ describe("<Reorder />", () => {
   test("applies correct styles for vertical orientation", () => {
     render(
       <Reorder data-testid="Reorder" orientation="vertical">
-        <ReorderItem label="Item 1">Item 1</ReorderItem>
-        <ReorderItem label="Item 2">Item 2</ReorderItem>
+        <ReorderItem value="Item 1">Item 1</ReorderItem>
+        <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
     )
 
@@ -52,7 +52,7 @@ describe("<Reorder />", () => {
   test("renders trigger correctly inside of an item", () => {
     render(
       <Reorder orientation="vertical">
-        <ReorderItem label="Item 1">
+        <ReorderItem value="Item 1">
           <ReorderTrigger data-testid="ReorderTrigger" />
         </ReorderItem>
       </Reorder>,
@@ -66,13 +66,13 @@ describe("<Reorder />", () => {
 
     render(
       <Reorder orientation="vertical">
-        <ReorderItem label="Item 1">Item 1</ReorderItem>
-        <ReorderItem label="Item 1">Item 1</ReorderItem>
+        <ReorderItem value="Item 1">Item 1</ReorderItem>
+        <ReorderItem value="Item 1">Item 1</ReorderItem>
       </Reorder>,
     )
 
     expect(warnSpy).toHaveBeenCalledWith(
-      "Reorder: 'label' of 'ReorderItem' must not be duplicated. duplicate 'label' is 'Item 1' ",
+      "Reorder: 'value' of 'ReorderItem' must not be duplicated. duplicate 'value' is 'Item 1' ",
     )
     expect(warnSpy).toHaveBeenCalledTimes(1)
   })

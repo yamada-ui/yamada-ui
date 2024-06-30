@@ -5,7 +5,7 @@ import { Carousel, CarouselSlide } from "../src"
 
 const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
 
-describe("<Carousel/>", () => {
+describe("<Carousel />", () => {
   test("should pass a11y test", async () => {
     await a11y(
       <Carousel>

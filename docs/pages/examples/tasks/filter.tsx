@@ -3,7 +3,6 @@ import {
   Divider,
   Grid,
   HStack,
-  Icon,
   Input,
   Menu,
   MenuButton,
@@ -18,12 +17,13 @@ import {
 import type {
   ButtonProps,
   CSSUIProps,
+  Component,
   GridProps,
+  IconProps,
   InputProps,
   MenuProps,
 } from "@yamada-ui/react"
-import { CirclePlus, SlidersHorizontal, X } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import { CirclePlus, SlidersHorizontal, X } from "@yamada-ui/lucide"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import type { FC, MutableRefObject, ReactNode } from "react"
 import { PRIORITY, STATUS, VIEW } from "./data"
@@ -138,7 +138,7 @@ TitleInput.displayName = "TitleInput"
 
 type FilterControlButtonProps<T extends Status | Priority> = MenuProps & {
   label: ReactNode
-  icon?: LucideIcon
+  icon?: Component<"svg", IconProps>
   items: T extends Status ? typeof STATUS : typeof PRIORITY
   buttonProps?: ButtonProps
   passValueRef: MutableRefObject<(value: T[]) => void>
@@ -149,7 +149,7 @@ type FilterControlButtonProps<T extends Status | Priority> = MenuProps & {
 const FilterControlButton = <T extends Status | Priority>({
   buttonProps,
   label,
-  icon = CirclePlus,
+  icon: Icon = CirclePlus,
   items,
   passValueRef,
   passHasRef,
@@ -193,7 +193,7 @@ const FilterControlButton = <T extends Status | Priority>({
     <Menu {...rest}>
       <MenuButton
         as={Button}
-        leftIcon={<Icon as={icon} />}
+        leftIcon={<Icon />}
         variant="outline"
         borderStyle="dashed"
         borderColor={["border", "border"]}
@@ -228,10 +228,10 @@ const FilterControlButton = <T extends Status | Priority>({
 
       <MenuList>
         <MenuOptionGroup<T[]> type="checkbox" value={value} onChange={onChange}>
-          {Object.entries(items).map(([value, { label, icon }]) => (
+          {Object.entries(items).map(([value, { label, icon: Icon }]) => (
             <MenuOptionItem key={value} value={value}>
               <HStack gap="sm">
-                <Icon as={icon} color="muted" />
+                <Icon color="muted" />
 
                 <Text as="span">{label}</Text>
               </HStack>
@@ -304,12 +304,7 @@ const ResetButton: FC<ResetButtonProps> = ({
   })
 
   return isShow ? (
-    <Button
-      variant="ghost"
-      rightIcon={<Icon as={X} />}
-      onClick={onReset}
-      {...rest}
-    >
+    <Button variant="ghost" rightIcon={<X />} onClick={onReset} {...rest}>
       Reset
     </Button>
   ) : null
@@ -331,7 +326,7 @@ const ViewControlButton: FC<ViewControlButtonProps> = ({
     <Menu {...rest}>
       <MenuButton
         as={Button}
-        leftIcon={<Icon as={SlidersHorizontal} />}
+        leftIcon={<SlidersHorizontal />}
         variant="outline"
         borderColor={["border", "border"]}
         {...buttonProps}

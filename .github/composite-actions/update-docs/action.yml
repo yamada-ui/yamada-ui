@@ -4,6 +4,10 @@ description: "Update the documentation sites after the release"
 runs:
   using: composite
   steps:
+    - name: Fetch latest from origin
+      run: git fetch origin
+      shell: bash
+
     - name: Update docs
       run: |
         pnpm gen:docs
@@ -13,6 +17,7 @@ runs:
         pnpm docs:css
         pnpm docs:contributors
         pnpm docs:search
+        pnpm docs:icon
       shell: bash
 
     - name: Create PR
@@ -21,7 +26,7 @@ runs:
         token: ${{ env.GITHUB_TOKEN }}
         base: main
         commit-message: "ci(changesets): version packages"
-        title: "Updated dependencies"
+        title: "Updated documentation"
         branch: changeset-release/docs
         assignees: "hirotomoyamada"
         reviewers: "hirotomoyamada"

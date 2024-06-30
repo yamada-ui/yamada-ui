@@ -278,32 +278,16 @@ To add an icon, set a `ReactElement` to `leftIcon` or `rightIcon`.
 
 ```tsx
 <Wrap gap="md">
-  <Button
-    colorScheme="primary"
-    variant="solid"
-    leftIcon={<FontAwesomeIcon icon={faPlus} />}
-  >
+  <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
     Button
   </Button>
-  <Button
-    colorScheme="secondary"
-    variant="outline"
-    rightIcon={<FontAwesomeIcon icon={faArrowRight} />}
-  >
+  <Button colorScheme="secondary" variant="outline" rightIcon={<ArrowRight />}>
     Button
   </Button>
-  <Button
-    colorScheme="warning"
-    variant="ghost"
-    leftIcon={<FontAwesomeIcon icon={faEnvelope} />}
-  >
+  <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
     Button
   </Button>
-  <Button
-    colorScheme="danger"
-    variant="link"
-    leftIcon={<FontAwesomeIcon icon={faCheck} />}
-  >
+  <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
     Button
   </Button>
 </Wrap>
@@ -355,7 +339,7 @@ To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, 
 <VStack>
   <ButtonGroup isAttached variant="outline">
     <Button>Button</Button>
-    <IconButton icon={<FontAwesomeIcon icon={faPlus} />} />
+    <IconButton icon={<Plus />} />
   </ButtonGroup>
 
   <Wrap gap="md">

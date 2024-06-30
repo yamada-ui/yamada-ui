@@ -88,6 +88,13 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-createprops"
+  name="createProps"
+  type='Omit<AutocompleteCreateProps, "children">'
+  description={"Props for autocomplete create element."}
+/>
+
+<PropsCard
   id="autocomplete-defaultisopen"
   name="defaultIsOpen"
   type="boolean"
@@ -114,6 +121,13 @@ tab: Props
   type="string"
   description={"The message displayed when the search yields no hits."}
   defaultValue={"'No results found'"}
+/>
+
+<PropsCard
+  id="autocomplete-emptyprops"
+  name="emptyProps"
+  type='Omit<AutocompleteEmptyProps, "children">'
+  description={"Props for autocomplete empty element."}
 />
 
 <PropsCard
@@ -186,7 +200,7 @@ tab: Props
 <PropsCard
   id="autocomplete-insertpositionitem"
   name="insertPositionItem"
-  type='Union<"first" | "last"> | [string, "first" | "last"]'
+  type='string | [string, "first" | "last"]'
   description={
     "The position to be inserted when the autocomplete option is created."
   }

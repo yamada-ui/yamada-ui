@@ -183,14 +183,7 @@ const getTooltipProps = (
  */
 export const Tooltip = forwardRef<TooltipProps, "div">(
   (
-    {
-      closeOnPointerDown,
-      z: zProp,
-      zIndex: zIndexProp,
-      portalProps,
-      withPortal = true,
-      ...props
-    },
+    { z: zProp, zIndex: zIndexProp, portalProps, withPortal = true, ...props },
     ref,
   ) => {
     let [{ z, zIndex, ...styles }, mergedProps] = useComponentStyle(
@@ -210,7 +203,8 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       isDisabled,
       closeOnClick,
       closeOnScroll,
-      closeOnMouseDown,
+      closeOnMouseDown = false,
+      closeOnPointerDown = false,
       closeOnEsc = true,
       animation,
       duration,
@@ -221,7 +215,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    closeOnPointerDown = closeOnMouseDown
+    const effectiveCloseOnPointerDown = closeOnPointerDown || closeOnMouseDown
 
     const labelId = useId()
     const { isOpen, onOpen, onClose } = useDisclosure({
@@ -279,8 +273,9 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
     )
 
     const onPointerDown = useCallback(
-      () => (isOpen && closeOnPointerDown ? closeWithDelay() : undefined),
-      [isOpen, closeOnPointerDown, closeWithDelay],
+      () =>
+        isOpen && effectiveCloseOnPointerDown ? closeWithDelay() : undefined,
+      [isOpen, effectiveCloseOnPointerDown, closeWithDelay],
     )
 
     const onKeyDown = useCallback(

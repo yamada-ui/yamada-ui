@@ -118,7 +118,7 @@
       "description": "The height you want the content in its collapsed state."
     },
     "transition": {
-      "type": "Partial<Record<\"enter\" | \"exit\", Transition>>",
+      "type": "Partial<Record<\"enter\" | \"exit\", Transition$1>>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
@@ -134,6 +134,11 @@
     }
   },
   "AccordionLabel": {
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props the container element."
+    },
     "icon": {
       "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
       "required": false,

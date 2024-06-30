@@ -1,8 +1,52 @@
 import { Button } from "@yamada-ui/react"
 import { render, screen, waitFor } from "@yamada-ui/test"
-import { useResizeObserver } from "../src"
+import { useElementSize, useResizeObserver } from "../src"
 
 describe("useResizeObserver", () => {
+  const defaultResizeObserver = global.ResizeObserver
+
+  const ResizeObserverMock = vi.fn((cb) => ({
+    disconnect: vi.fn(),
+    observe: vi.fn().mockImplementation(() => {
+      cb([
+        {
+          contentRect: {
+            height: 320,
+            width: 400,
+          },
+        },
+      ])
+    }),
+    unobserve: vi.fn(),
+  }))
+
+  beforeEach(() => {
+    vi.stubGlobal("ResizeObserver", ResizeObserverMock)
+  })
+
+  afterEach(() => {
+    vi.stubGlobal("ResizeObserver", defaultResizeObserver)
+  })
+
+  const ButtonWithSize = () => {
+    const [ref, rect] = useResizeObserver()
+    return (
+      <Button ref={ref}>
+        {rect.width} x {rect.height}
+      </Button>
+    )
+  }
+
+  test("return contentRect value correctly", async () => {
+    render(<ButtonWithSize />)
+    const button = await screen.findByRole("button")
+
+    await waitFor(() => expect(button.textContent).toBe("400 x 320"))
+    await waitFor(() => expect(ResizeObserverMock).toHaveBeenCalledTimes(1))
+  })
+})
+
+describe("useElementSize", () => {
   const defaultResizeObserver = global.ResizeObserver
 
   beforeAll(() => {
@@ -13,8 +57,8 @@ describe("useResizeObserver", () => {
             [
               {
                 contentRect: {
-                  height: 320,
-                  width: 400,
+                  height: 200,
+                  width: 150,
                 },
               },
             ] as ResizeObserverEntry[],
@@ -33,18 +77,18 @@ describe("useResizeObserver", () => {
   })
 
   const ButtonWithSize = () => {
-    const [ref, rect] = useResizeObserver()
+    const { ref, width, height } = useElementSize()
     return (
       <Button ref={ref}>
-        {rect.width} x {rect.height}
+        {width} x {height}
       </Button>
     )
   }
 
-  test("return contentRect value correctly", async () => {
+  test("returns width and height correctly", async () => {
     render(<ButtonWithSize />)
     const button = await screen.findByRole("button")
 
-    await waitFor(() => expect(button.textContent).toBe("400 x 320"))
+    expect(button.textContent).toBe("150 x 200")
   })
 })

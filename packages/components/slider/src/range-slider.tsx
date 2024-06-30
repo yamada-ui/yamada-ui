@@ -44,6 +44,7 @@ import {
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useId, useRef, useState } from "react"
+import { getThumbSize } from "./slider"
 
 export type UseRangeSliderOptions = {
   /**
@@ -105,6 +106,11 @@ export type UseRangeSliderOptions = {
    */
   betweenThumbs?: number
   /**
+   * The CSS `box-size` property.
+   * Used for calculating the width, height, and percentage of the container element.
+   */
+  thumbSize?: CSSUIProps["boxSize"]
+  /**
    * Function called when the user starts selecting a new value.
    */
   onChangeStart?: (value: [number, number]) => void
@@ -136,6 +142,7 @@ export const useRangeSlider = ({
     step = 1,
     defaultValue,
     orientation = "horizontal",
+    thumbSize: thumbSizeProp,
     isReversed,
     betweenThumbs = 0,
     required,
@@ -414,10 +421,22 @@ export const useRangeSlider = ({
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
-      const z = { width: 0, height: 0 }
-      const p = isVertical ? "height" : "width"
-      const { width: w, height: h } =
-        thumbSizes.reduce((a = z, b = z) => (a[p] > b[p] ? a : b), z) ?? {}
+      let w: string | number = "var(--ui-thumbSize)"
+      let h: string | number = "var(--ui-thumbSize)"
+
+      if (thumbSizes.length) {
+        const p = isVertical ? "height" : "width"
+        const z = { width: 0, height: 0 }
+        const { width, height } =
+          thumbSizes.reduce((a = z, b = z) => (a[p] > b[p] ? a : b), z) ?? {}
+
+        if (width) w = width
+        if (height) h = height
+      }
+
+      const padding = isVertical
+        ? { paddingLeft: `calc(${w} / 2)`, paddingRight: `calc(${w} / 2)` }
+        : { paddingTop: `calc(${h} / 2)`, paddingBottom: `calc(${h} / 2)` }
 
       const style: CSSProperties = {
         ...props.style,
@@ -426,13 +445,7 @@ export const useRangeSlider = ({
         touchAction: "none",
         WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
         outline: 0,
-        ...(isVertical
-          ? w
-            ? { paddingLeft: w / 2, paddingRight: w / 2 }
-            : {}
-          : h
-            ? { paddingTop: h / 2, paddingBottom: h / 2 }
-            : {}),
+        ...padding,
       }
 
       return {
@@ -442,9 +455,17 @@ export const useRangeSlider = ({
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
         style,
+        var: [
+          {
+            __prefix: "ui",
+            name: "thumbSize",
+            token: "sizes",
+            value: thumbSizeProp,
+          },
+        ],
       }
     },
-    [id, isVertical, rest, thumbSizes],
+    [id, isVertical, rest, thumbSizeProp, thumbSizes],
   )
 
   const getInputProps: RequiredUIPropGetter<"input", { index: number }> =
@@ -570,16 +591,23 @@ export const useRangeSlider = ({
     useCallback(
       ({ index: i, ...props }, ref = null) => {
         const n = thumbPercents[i]
-        const { width: w, height: h } = thumbSizes[i] ?? { width: 0, height: 0 }
+        let w: string | number = "var(--ui-thumbSize)"
+        let h: string | number = "var(--ui-thumbSize)"
+
+        if (thumbSizes[i]) {
+          w = `${thumbSizes[i]?.width}px`
+          h = `${thumbSizes[i]?.height}px`
+        }
+
+        const bottom = `calc(${n}% - (${h} / 2))`
+        const left = `calc(${n}% - (${w} / 2))`
 
         const style: CSSProperties = {
           ...props.style,
           position: "absolute",
           userSelect: "none",
           touchAction: "none",
-          ...(isVertical
-            ? { bottom: `calc(${n}% - ${h / 2}px)` }
-            : { left: `calc(${n}% - ${w / 2}px)` }),
+          ...(isVertical ? { bottom } : { left }),
         }
 
         const value = values[i]
@@ -752,7 +780,7 @@ export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
     getFilledTrackProps,
     getMarkProps,
     getThumbProps,
-  } = useRangeSlider(rest)
+  } = useRangeSlider({ ...rest, thumbSize: getThumbSize(thumbSize, styles) })
 
   const css: CSSUIObject = { ...styles.container }
 

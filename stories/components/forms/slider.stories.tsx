@@ -1,6 +1,5 @@
-import { faWaveSquare } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Activity } from "@yamada-ui/lucide"
 import {
   Slider,
   SliderFilledTrack,
@@ -282,13 +281,13 @@ export const customThumb: Story = () => {
         thumbProps={{
           color: "blue.500",
           boxSize: "6",
-          children: <Icon icon={faWaveSquare} />,
+          children: <Activity />,
         }}
       />
 
       <Slider>
         <SliderThumb color="blue.500" boxSize="6">
-          <Icon icon={faWaveSquare} />
+          <Activity />
         </SliderThumb>
       </Slider>
     </>

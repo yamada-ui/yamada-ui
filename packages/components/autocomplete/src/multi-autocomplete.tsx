@@ -11,6 +11,8 @@ import { Portal } from "@yamada-ui/portal"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
 import { cloneElement, useMemo } from "react"
+import type { AutocompleteCreateProps } from "./autocomplete-create"
+import type { AutocompleteEmptyProps } from "./autocomplete-empty"
 import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteClearIcon, AutocompleteIcon } from "./autocomplete-icon"
 import type { AutocompleteListProps } from "./autocomplete-list"
@@ -94,6 +96,14 @@ type MultiAutocompleteOptions = {
    * @default false
    */
   closeOnSelect?: boolean
+  /**
+   * Props for autocomplete create element.
+   */
+  createProps?: Omit<AutocompleteCreateProps, "children">
+  /**
+   * Props for autocomplete empty element.
+   */
+  emptyProps?: Omit<AutocompleteEmptyProps, "children">
 }
 
 export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
@@ -130,6 +140,8 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       iconProps,
       clearIconProps,
       portalProps = { isDisabled: true },
+      createProps,
+      emptyProps,
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
@@ -210,9 +222,9 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                 <Portal {...portalProps}>
                   <AutocompleteList {...listProps}>
                     {allowCreate ? (
-                      <AutocompleteCreate />
+                      <AutocompleteCreate {...createProps} />
                     ) : (
-                      <AutocompleteEmpty />
+                      <AutocompleteEmpty {...emptyProps} />
                     )}
 
                     {children ?? computedChildren}
@@ -222,9 +234,9 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                 <Portal {...portalProps}>
                   <AutocompleteList {...listProps}>
                     {allowCreate && inputValue ? (
-                      <AutocompleteCreate />
+                      <AutocompleteCreate {...createProps} />
                     ) : (
-                      <AutocompleteEmpty />
+                      <AutocompleteEmpty {...emptyProps} />
                     )}
                   </AutocompleteList>
                 </Portal>

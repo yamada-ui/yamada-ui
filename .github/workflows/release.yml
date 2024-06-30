@@ -31,6 +31,17 @@ jobs:
           echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q -e '^\.storybook/' -e '^stories/' && echo true || echo false)" >> $GITHUB_OUTPUT
         shell: bash
 
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
       - name: Install
         uses: ./.github/composite-actions/install
 
@@ -116,4 +127,4 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         uses: ./.github/composite-actions/update-docs
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

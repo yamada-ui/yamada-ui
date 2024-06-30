@@ -1,14 +1,13 @@
-import {
-  faArrowRight,
-  faCheck,
-  faEnvelope,
-  faMinus,
-  faMoon,
-  faPlus,
-  faSun,
-} from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import {
+  Plus,
+  Minus,
+  Check,
+  ArrowRight,
+  Mail,
+  Sun,
+  Moon,
+} from "@yamada-ui/lucide"
 import {
   Wrap,
   Button,
@@ -369,35 +368,23 @@ export const withDisabled: Story = () => {
 export const withIcon: Story = () => {
   return (
     <Wrap gap="md">
-      <Button
-        colorScheme="primary"
-        variant="solid"
-        leftIcon={<Icon icon={faPlus} />}
-      >
+      <Button colorScheme="primary" variant="solid" leftIcon={<Plus />}>
         Button
       </Button>
 
       <Button
         colorScheme="secondary"
         variant="outline"
-        rightIcon={<Icon icon={faArrowRight} />}
+        rightIcon={<ArrowRight />}
       >
         Button
       </Button>
 
-      <Button
-        colorScheme="warning"
-        variant="ghost"
-        leftIcon={<Icon icon={faEnvelope} />}
-      >
+      <Button colorScheme="warning" variant="ghost" leftIcon={<Mail />}>
         Button
       </Button>
 
-      <Button
-        colorScheme="danger"
-        variant="link"
-        leftIcon={<Icon icon={faCheck} />}
-      >
+      <Button colorScheme="danger" variant="link" leftIcon={<Check />}>
         Button
       </Button>
     </Wrap>
@@ -409,27 +396,27 @@ export const iconButton: Story = () => {
     <Wrap gap="md">
       <IconButton
         colorScheme="primary"
-        icon={<Icon icon={faPlus} />}
+        icon={<Plus fontSize="2xl" />}
         aria-label="Plus"
       />
 
       <IconButton
         colorScheme="secondary"
-        icon={<Icon icon={faMinus} />}
+        icon={<Minus fontSize="2xl" />}
         aria-label="Minus"
       />
 
       <IconButton
         colorScheme="warning"
         size="lg"
-        icon={<Icon icon={faSun} />}
+        icon={<Sun fontSize="2xl" />}
         aria-label="Light"
       />
 
       <IconButton
         colorScheme="danger"
         size="lg"
-        icon={<Icon icon={faMoon} />}
+        icon={<Moon fontSize="2xl" />}
         aria-label="Dark"
       />
     </Wrap>
@@ -490,7 +477,7 @@ export const buttonGroup: Story = () => {
     <>
       <ButtonGroup isAttached variant="outline">
         <Button>Button</Button>
-        <IconButton icon={<Icon icon={faPlus} />} aria-label="Add" />
+        <IconButton icon={<Plus />} aria-label="Add" />
       </ButtonGroup>
 
       <ButtonGroup gap="sm">

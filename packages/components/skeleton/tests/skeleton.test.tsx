@@ -38,4 +38,15 @@ describe("<Skeleton />", () => {
     )
     expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
   })
+
+  test("contents are rendered correctly", () => {
+    render(
+      <Skeleton>
+        <span>hoge</span>
+        <p>huga</p>
+      </Skeleton>,
+    )
+    expect(screen.getByText("hoge")).toBeInTheDocument()
+    expect(screen.getByText("huga")).toBeInTheDocument()
+  })
 })

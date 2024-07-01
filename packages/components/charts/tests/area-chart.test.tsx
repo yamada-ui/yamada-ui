@@ -671,7 +671,7 @@ describe("<AreaChart />", () => {
     await expect(screen.findByText(/x line/i)).resolves.toBeInTheDocument()
   })
 
-  test("should be renderd valueFormatter", async () => {
+  test("should be rendered valueFormatter", async () => {
     render(
       <AreaChart
         containerProps={{ width: 400, height: "80%" }}

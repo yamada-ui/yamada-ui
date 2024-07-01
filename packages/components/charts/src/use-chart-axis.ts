@@ -13,6 +13,7 @@ import type {
   YAxisProps,
   ChartPropGetter,
   AreaChartType,
+  LabelProps,
 } from "./chart.types"
 import { xAxisProperties, yAxisProperties } from "./rechart-properties"
 
@@ -66,6 +67,22 @@ export type UseChartAxisOptions = {
    */
   yAxisProps?: YAxisProps
   /**
+   * A label to display below the X axis.
+   */
+  xAxisLabel?: string
+  /**
+   * A label to display below the Y axis.
+   */
+  yAxisLabel?: string
+  /**
+   * Props passed down to recharts 'XAxisLabel' component.
+   */
+  xAxisLabelProps?: LabelProps
+  /**
+   * Props passed down to recharts 'YAxisLabel' component.
+   */
+  yAxisLabelProps?: LabelProps
+  /**
    * Unit displayed next to each tick in y-axis.
    */
   unit?: string
@@ -89,6 +106,10 @@ export const useChartAxis = ({
   withYAxis = true,
   xAxisProps: _xAxisProps = {},
   yAxisProps: _yAxisProps = {},
+  // xAxisLabel,
+  // yAxisLabel,
+  // xAxisLabelProps,
+  // yAxisLabelProps,
   unit,
   valueFormatter,
   styles,
@@ -197,7 +218,37 @@ export const useChartAxis = ({
       yAxisReChartsProps,
     ],
   )
-  return { getXAxisProps, getYAxisProps }
+
+  const getXAxisLabelProps: ChartPropGetter<
+    "div",
+    Partial<Recharts.LabelProps>,
+    Recharts.LabelProps
+  > = useCallback(
+    ({ className, ...props } = {}) => ({
+      className: cx(className),
+      ...props,
+    }),
+    [],
+  )
+
+  const getYAxisLabelProps: ChartPropGetter<
+    "div",
+    Partial<Recharts.LabelProps>,
+    Recharts.LabelProps
+  > = useCallback(
+    ({ className, ...props } = {}) => ({
+      className: cx(className),
+      ...props,
+    }),
+    [],
+  )
+
+  return {
+    getXAxisProps,
+    getYAxisProps,
+    getXAxisLabelProps,
+    getYAxisLabelProps,
+  }
 }
 
 const valueToPercent = (value: number) => {

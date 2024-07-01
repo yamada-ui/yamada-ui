@@ -17,6 +17,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  Label,
 } from "recharts"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
@@ -81,6 +82,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     withYAxis,
     xAxisProps,
     yAxisProps,
+    xAxisLabel,
+    yAxisLabel,
+    xAxisLabelProps,
+    yAxisLabelProps,
     type = "default",
     withTooltip = true,
     withLegend = false,
@@ -137,7 +142,12 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
-  const { getXAxisProps, getYAxisProps } = useChartAxis({
+  const {
+    getXAxisProps,
+    getYAxisProps,
+    getXAxisLabelProps,
+    getYAxisLabelProps,
+  } = useChartAxis({
     dataKey,
     type,
     layoutType,
@@ -147,6 +157,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     withYAxis,
     xAxisProps,
     yAxisProps,
+    xAxisLabel,
+    yAxisLabel,
+    xAxisLabelProps,
+    yAxisLabelProps,
     unit,
     valueFormatter,
     styles,
@@ -224,8 +238,26 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
             <CartesianGrid
               {...getGridProps({ className: "ui-area-chart__grid" })}
             />
-            <XAxis {...getXAxisProps({ className: "ui-area-chart__x-axis" })} />
-            <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })} />
+
+            <XAxis {...getXAxisProps({ className: "ui-area-chart__x-axis" })}>
+              <Label
+                {...getXAxisLabelProps({
+                  className: "ui-area-chart__x-axis-label",
+                })}
+              >
+                {xAxisLabel}
+              </Label>
+            </XAxis>
+
+            <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })}>
+              <Label
+                {...getYAxisLabelProps({
+                  className: "ui-area-chart__y-axis-label",
+                })}
+              >
+                {yAxisLabel}
+              </Label>
+            </YAxis>
 
             {withLegend ? (
               <Legend

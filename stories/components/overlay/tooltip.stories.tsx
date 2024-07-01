@@ -94,7 +94,7 @@ export const withDelay: Story = () => {
       </Tooltip>
 
       <Tooltip label="へっ！きたねぇ花火だ" placement="bottom" closeDelay={500}>
-        <Text>Delay Open 500ms</Text>
+        <Text>Delay Close 500ms</Text>
       </Tooltip>
     </Center>
   )

@@ -114,6 +114,24 @@ describe("<Autocomplete />", () => {
         "true",
       )
     })
+
+    test("with emptyProps icon", async () => {
+      const { user, container } = render(
+        <Autocomplete
+          emptyProps={{ icon: <svg data-testid="icon" /> }}
+          items={ITEMS}
+        />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      await waitFor(() => {
+        expect(screen.getByTestId("icon")).toBeInTheDocument()
+      })
+    })
   })
 
   describe("select options", () => {
@@ -731,6 +749,31 @@ describe("<Autocomplete />", () => {
       expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
 
       expect(items).toStrictEqual(original)
+    })
+
+    test("with createProps icon", async () => {
+      const { user, container } = render(
+        <Autocomplete
+          allowCreate
+          items={items}
+          createProps={{
+            icon: <svg data-testid="icon" />,
+          }}
+        />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const input = screen.getByRole("combobox")
+      await user.type(input, CREATE_OPTION_VALUE)
+      await user.keyboard("{Enter>}")
+
+      await waitFor(() => {
+        expect(screen.getByTestId("icon")).toBeInTheDocument()
+      })
     })
   })
 })

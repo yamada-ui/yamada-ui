@@ -1,5 +1,30 @@
 # @yamada-ui/tooltip
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`158643f`](https://github.com/yamada-ui/yamada-ui/commit/158643f32969d9623a4f7999a0e262c1b8943be6), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/transitions@1.0.31
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/motion@2.0.1
+  - @yamada-ui/use-popper@1.0.30
+
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`28a276f`](https://github.com/yamada-ui/yamada-ui/commit/28a276fc7c11bce28424e763a0f5fba8b5fd8fd0), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+  - @yamada-ui/motion@2.0.0
+  - @yamada-ui/portal@1.0.16
+  - @yamada-ui/transitions@1.0.30
+  - @yamada-ui/use-disclosure@1.0.15
+  - @yamada-ui/use-event-listener@1.0.15
+  - @yamada-ui/use-outside-click@1.0.15
+  - @yamada-ui/use-popper@1.0.29
+
 ## 1.1.1
 
 ### Patch Changes

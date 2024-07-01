@@ -25,6 +25,7 @@ import { DonutChart } from "./donut-chart"
 import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
+import { Fieldset } from "./fieldset"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
@@ -106,6 +107,7 @@ export default {
   Drawer,
   Dropzone,
   Editable,
+  Fieldset,
   FileInput,
   FormControl,
   Heading,

@@ -1,6 +1,13 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, render, screen, waitFor } from "@yamada-ui/test"
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "../src"
+import { a11y, fireEvent, render, screen, waitFor, act } from "@yamada-ui/test"
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ModalCloseButton,
+  ModalOverlay,
+} from "../src"
 
 describe("<Modal />", () => {
   const ModalExample = () => {
@@ -24,6 +31,36 @@ describe("<Modal />", () => {
           <ModalFooter>
             <Button variant="ghost" onClick={onClose}>
               Close Modal
+            </Button>
+            <Button colorScheme="primary">Wikipedia</Button>
+          </ModalFooter>
+        </Modal>
+      </>
+    )
+  }
+
+  const ModalCloseExample = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    return (
+      <>
+        <Button data-testid="OpenModal" onClick={onOpen}>
+          Open Modal
+        </Button>
+        <Modal data-testid="Modal" isOpen={isOpen} onClose={onClose}>
+          <ModalCloseButton data-testid="ModalCloseButton" />
+          <ModalOverlay
+            data-testid="ModalOverlay"
+            bg="blackAlpha.300"
+            backdropFilter="blur(10px)"
+          />
+          <ModalHeader data-testid="ModalHeader">Modal Header</ModalHeader>
+
+          <ModalBody data-testid="ModalBody">This is modal body</ModalBody>
+
+          <ModalFooter data-testid="ModalFooter">
+            <Button data-testid="ModalClose" variant="ghost" onClick={onClose}>
+              Close
             </Button>
             <Button colorScheme="primary">Wikipedia</Button>
           </ModalFooter>
@@ -138,6 +175,48 @@ describe("<Modal />", () => {
       name: /secondary modal/i,
     })
 
-    expect(secondaryModal).toBeVisible()
+    await waitFor(() => expect(secondaryModal).toBeVisible())
+  })
+
+  test("Modal renders correctly when clicking modal close button", async () => {
+    const { findByRole, queryByTestId, findByTestId, user } = render(
+      <ModalCloseExample />,
+    )
+
+    const openButton = await findByRole("button", { name: "Open Modal" })
+    await user.click(openButton)
+    await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
+    const closeButton = await findByTestId("ModalCloseButton")
+    await user.click(closeButton)
+    await waitFor(async () => {
+      expect(queryByTestId("Modal")).toBeNull()
+    })
+  })
+
+  test("Modal renders correctly when clicking overlay", async () => {
+    const { findByRole, queryByTestId, findByTestId, user } = render(
+      <ModalCloseExample />,
+    )
+    const openButton = await findByRole("button", { name: "Open Modal" })
+    await user.click(openButton)
+    await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
+    const ModalOverlay = await findByTestId("ModalOverlay")
+    await user.click(ModalOverlay)
+    await waitFor(async () => {
+      expect(queryByTestId("Modal")).toBeNull()
+    })
+  })
+
+  test("Escape keyDown should work correctly", async () => {
+    const { getByTestId, findByRole, queryByTestId, findByTestId, user } =
+      render(<ModalCloseExample />)
+    const openButton = await findByRole("button", { name: "Open Modal" })
+    await user.click(openButton)
+    const modal = getByTestId("Modal")
+    await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
+    await act(() => fireEvent.keyDown(modal, { key: "Escape" }))
+    await waitFor(async () => {
+      expect(queryByTestId("Modal")).toBeNull()
+    })
   })
 })

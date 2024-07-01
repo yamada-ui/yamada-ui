@@ -110,7 +110,7 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
           tabIndex={0}
           className={cx("ui-infinite-scroll-area", className)}
           role="feed"
-          aria-busy={false}
+          aria-busy="false"
           __css={css}
           {...rest}
         >

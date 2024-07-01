@@ -139,6 +139,8 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     splitColors,
     splitOffset,
     syncId,
+    xAxisLabel,
+    yAxisLabel,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
@@ -244,9 +246,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 {...getXAxisLabelProps({
                   className: "ui-area-chart__x-axis-label",
                 })}
-              >
-                {xAxisLabel}
-              </Label>
+              />
             </XAxis>
 
             <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })}>
@@ -254,9 +254,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                 {...getYAxisLabelProps({
                   className: "ui-area-chart__y-axis-label",
                 })}
-              >
-                {yAxisLabel}
-              </Label>
+              />
             </YAxis>
 
             {withLegend ? (

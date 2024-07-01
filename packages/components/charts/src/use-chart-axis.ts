@@ -106,8 +106,8 @@ export const useChartAxis = ({
   withYAxis = true,
   xAxisProps: _xAxisProps = {},
   yAxisProps: _yAxisProps = {},
-  // xAxisLabel,
-  // yAxisLabel,
+  xAxisLabel,
+  yAxisLabel,
   // xAxisLabelProps,
   // yAxisLabelProps,
   unit,
@@ -226,9 +226,13 @@ export const useChartAxis = ({
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className),
+      value: xAxisLabel,
+      position: "insideBottom",
+      offset: -20,
+      fontSize: 12,
       ...props,
     }),
-    [],
+    [xAxisLabel],
   )
 
   const getYAxisLabelProps: ChartPropGetter<
@@ -238,9 +242,15 @@ export const useChartAxis = ({
   > = useCallback(
     ({ className, ...props } = {}) => ({
       className: cx(className),
+      value: yAxisLabel,
+      position: "insideLeft",
+      angle: -90,
+      textAnchor: "middle",
+      fontSize: 12,
+      offset: -5,
       ...props,
     }),
-    [],
+    [yAxisLabel],
   )
 
   return {

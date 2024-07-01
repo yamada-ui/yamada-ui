@@ -2,7 +2,7 @@ import { a11y, render, screen } from "@yamada-ui/test"
 import { Stepper } from "../src"
 import { mockSteps, mockStepsWithExtraProps } from "./stepper.mocks"
 
-describe("<Stepper/>", () => {
+describe("<Stepper />", () => {
   test("renders with no errors", async () => {
     const { container } = render(<Stepper index={2} steps={mockSteps} />)
 

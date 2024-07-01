@@ -134,6 +134,11 @@
     }
   },
   "AccordionLabel": {
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props the container element."
+    },
     "icon": {
       "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | ((props: { ...; }) => ReactNode)",
       "required": false,

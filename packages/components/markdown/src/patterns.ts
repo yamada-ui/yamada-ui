@@ -4,9 +4,9 @@ type FragmentPosition = "start" | "end"
 
 export const getFragmentPattern = (
   position: FragmentPosition,
-  allowOppositteFragment: boolean,
+  allowOppositeFragment: boolean,
 ) => {
-  return match([position, allowOppositteFragment])
+  return match([position, allowOppositeFragment])
     .with(
       ["start", true],
       () => /^(?<leftFragment>:::\w+(?:\s+\w+=(?<status>\w+))?\s+).*/,
@@ -15,7 +15,7 @@ export const getFragmentPattern = (
       ["start", false],
       () => /^:::\w+(?:\s+\w+=(?<status>\w+))?(?!.*:::$).*/,
     )
-    .with(["end", true], () => /\S*(?<rightFlagment>\s+:::)$/)
+    .with(["end", true], () => /\S*(?<rightFragment>\s+:::)$/)
     .with(["end", false], () => /^:::$/)
     .exhaustive()
 }

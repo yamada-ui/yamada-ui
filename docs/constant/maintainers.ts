@@ -28,34 +28,6 @@ export const MAINTAINERS = [
     discord: { id: "281653488084189184" },
   },
   {
-    name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
-    description: {
-      en: "Web engineer, a university student.",
-      ja: "Webエンジニア。大学生。",
-    },
-    github: {
-      id: "illionillion",
-      icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
-      url: "https://github.com/illionillion",
-    },
-    x: { url: "https://x.com/dimyasvariant" },
-    discord: { id: "1000629510078738432" },
-  },
-  {
-    name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
-    description: {
-      en: "Software engineer based in tokyo.",
-      ja: "東京を拠点に活動するソフトウェアエンジニア。",
-    },
-    github: {
-      id: "nakayan5",
-      icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
-      url: "https://github.com/nakayan5",
-    },
-    x: { url: "https://x.com/nakachan_js" },
-    discord: { id: "770535018040655873" },
-  },
-  {
     name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
     description: {
       en: "Passionate about web development and a student at the University of Auckland.",
@@ -70,6 +42,20 @@ export const MAINTAINERS = [
     discord: { id: "631578250144907269" },
   },
   {
+    name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
+    description: {
+      en: "Web engineer, a university student.",
+      ja: "Webエンジニア。大学生。",
+    },
+    github: {
+      id: "illionillion",
+      icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
+      url: "https://github.com/illionillion",
+    },
+    x: { url: "https://x.com/dimyasvariant" },
+    discord: { id: "1000629510078738432" },
+  },
+  {
     name: { en: "koralle", ja: "koralle" },
     description: {
       en: "Front-end engineer, likes React and Neovim.",
@@ -82,6 +68,33 @@ export const MAINTAINERS = [
     },
     x: { url: "https://x.com/koralle_tech" },
     discord: { id: "702799711404425246" },
+  },
+  {
+    name: { en: "Kazuhiro Kumagai", ja: "Kazuhiro Kumagai" },
+    description: {
+      en: "Self-proclaimed front-end engineer.",
+      ja: "自称フロントエンドエンジニア。",
+    },
+    github: {
+      id: "cidkumagai",
+      icon: "https://avatars.githubusercontent.com/u/78473460?v=4",
+      url: "https://github.com/cidkumagai",
+    },
+    discord: { id: "831092312238719026" },
+  },
+  {
+    name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
+    description: {
+      en: "Software engineer based in tokyo.",
+      ja: "東京を拠点に活動するソフトウェアエンジニア。",
+    },
+    github: {
+      id: "nakayan5",
+      icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
+      url: "https://github.com/nakayan5",
+    },
+    x: { url: "https://x.com/nakachan_js" },
+    discord: { id: "770535018040655873" },
   },
   {
     name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },

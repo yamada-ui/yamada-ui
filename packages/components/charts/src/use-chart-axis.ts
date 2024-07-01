@@ -15,7 +15,11 @@ import type {
   AreaChartType,
   LabelProps,
 } from "./chart.types"
-import { xAxisProperties, yAxisProperties } from "./rechart-properties"
+import {
+  labelProperties,
+  xAxisProperties,
+  yAxisProperties,
+} from "./rechart-properties"
 
 export type UseChartAxisOptions = {
   /**
@@ -104,15 +108,12 @@ export const useChartAxis = ({
   gridAxis = "x",
   withXAxis = true,
   withYAxis = true,
-  xAxisProps: _xAxisProps = {},
-  yAxisProps: _yAxisProps = {},
   xAxisLabel,
   yAxisLabel,
-  // xAxisLabelProps,
-  // yAxisLabelProps,
   unit,
   valueFormatter,
   styles,
+  ...rest
 }: UseChartAxisProps) => {
   const { theme } = useTheme()
   const xAxisKey: Recharts.XAxisProps = useMemo(
@@ -146,14 +147,30 @@ export const useChartAxis = ({
       ? valueToPercent
       : valueFormatter
 
-  const [xAxisReChartsProps, xAxisClassName] = getComponentProps<Dict, string>(
-    [_xAxisProps, xAxisProperties],
+  const [xAxisProps, xAxisClassName] = getComponentProps<Dict, string>(
+    [rest.xAxisProps ?? {}, xAxisProperties],
     styles.xAxis,
   )(theme)
 
-  const [yAxisReChartsProps, yAxisClassName] = getComponentProps<Dict, string>(
-    [_yAxisProps, yAxisProperties],
+  const [yAxisProps, yAxisClassName] = getComponentProps<Dict, string>(
+    [rest.yAxisProps ?? {}, yAxisProperties],
     styles.yAxis,
+  )(theme)
+
+  const [xAxisLabelProps, xAxisLabelClassName] = getComponentProps<
+    Dict,
+    string
+  >(
+    [rest.xAxisLabelProps ?? {}, labelProperties],
+    styles.xAxisLabel,
+  )(theme)
+
+  const [yAxisLabelProps, yAxisLabelClassName] = getComponentProps<
+    Dict,
+    string
+  >(
+    [rest.yAxisLabelProps ?? {}, labelProperties],
+    styles.yAxisLabel,
   )(theme)
 
   const getXAxisProps: ChartPropGetter<
@@ -175,7 +192,7 @@ export const useChartAxis = ({
       minTickGap: 5,
       tickFormatter: xAxisTickFormatter,
       ...props,
-      ...(xAxisReChartsProps as Recharts.XAxisProps),
+      ...(xAxisProps as Recharts.XAxisProps),
     }),
     [
       xAxisClassName,
@@ -183,7 +200,7 @@ export const useChartAxis = ({
       xAxisKey,
       xTickLine,
       xAxisTickFormatter,
-      xAxisReChartsProps,
+      xAxisProps,
     ],
   )
 
@@ -206,7 +223,7 @@ export const useChartAxis = ({
       unit: unit,
       tickFormatter: yAxisTickFormatter,
       ...props,
-      ...(yAxisReChartsProps as Recharts.YAxisProps),
+      ...(yAxisProps as Recharts.YAxisProps),
     }),
     [
       yAxisClassName,
@@ -215,7 +232,7 @@ export const useChartAxis = ({
       yTickLine,
       unit,
       yAxisTickFormatter,
-      yAxisReChartsProps,
+      yAxisProps,
     ],
   )
 
@@ -225,14 +242,14 @@ export const useChartAxis = ({
     Recharts.LabelProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
-      className: cx(className),
+      className: cx(className, xAxisLabelClassName),
       value: xAxisLabel,
       position: "insideBottom",
       offset: -20,
-      fontSize: 12,
       ...props,
+      ...xAxisLabelProps,
     }),
-    [xAxisLabel],
+    [xAxisLabel, xAxisLabelClassName, xAxisLabelProps],
   )
 
   const getYAxisLabelProps: ChartPropGetter<
@@ -241,16 +258,16 @@ export const useChartAxis = ({
     Recharts.LabelProps
   > = useCallback(
     ({ className, ...props } = {}) => ({
-      className: cx(className),
+      className: cx(className, yAxisLabelClassName),
       value: yAxisLabel,
       position: "insideLeft",
       angle: -90,
       textAnchor: "middle",
-      fontSize: 12,
       offset: -5,
       ...props,
+      ...yAxisLabelProps,
     }),
-    [yAxisLabel],
+    [yAxisLabel, yAxisLabelClassName, yAxisLabelProps],
   )
 
   return {

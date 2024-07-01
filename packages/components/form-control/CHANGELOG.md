@@ -1,5 +1,17 @@
 # @yamada-ui/form-control
 
+## 2.0.0
+
+### Major Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `Fieldset` component and enhanced `FormControl` and `Label` accessibility.
+
+### Patch Changes
+
+- Updated dependencies [[`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/visually-hidden@1.0.4
+
 ## 1.1.4
 
 ### Patch Changes

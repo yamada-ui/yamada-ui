@@ -35,7 +35,13 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
         </ui.span>
 
         <ui.ul
-          {...getGroupProps({}, ref)}
+          role="group"
+          {...getGroupProps(
+            {
+              "aria-label": rest["aria-label"],
+            },
+            ref,
+          )}
           className="ui-select__item__group"
           __css={{ h, minH, ...styles.group }}
         >

@@ -39,7 +39,7 @@ import type {
   MouseEvent,
   CSSProperties,
 } from "react"
-import { useCallback, useRef, useState, useEffect } from "react"
+import { useCallback, useRef, useState, useEffect, useId } from "react"
 import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -612,6 +612,7 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
+      role: "combobox",
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
       ...fieldProps,
@@ -620,11 +621,28 @@ export const useSelect = <T extends MaybeValue = string>({
       "data-placeholder": dataAttr(
         !isMulti ? label === undefined : !label?.length,
       ),
-      "aria-expanded": dataAttr(isOpen),
+      "aria-expanded": isOpen,
+      "aria-activedescendant": descendants.enabledValue(focusedIndex)?.node.id,
+      "aria-labelledby": props["aria-labelledby"],
+      "aria-label":
+        props["aria-label"] ??
+        placeholder ??
+        "Please select one from the options.",
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [fieldProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
+    [
+      descendants,
+      fieldProps,
+      focusedIndex,
+      isOpen,
+      isMulti,
+      label,
+      rest,
+      onFocus,
+      onKeyDown,
+      placeholder,
+    ],
   )
 
   return {
@@ -708,7 +726,7 @@ export const useSelectList = () => {
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
-      role: "select",
+      role: "listbox",
       tabIndex: -1,
       ...props,
     }),
@@ -786,6 +804,8 @@ export const useSelectOptionGroup = ({
       ref,
       ...props,
       ...computedRest[1],
+      role: "group",
+      "aria-label": props["aria-label"] ?? label,
       "data-label": label,
     }),
     [computedRest, label],
@@ -846,6 +866,7 @@ export const useSelectOption = (
   } = useSelectContext()
 
   let {
+    id,
     icon: customIcon,
     isDisabled,
     isFocusable,
@@ -854,6 +875,8 @@ export const useSelectOption = (
     value: optionValue,
     ...computedProps
   } = { ...optionProps, ...props }
+
+  id ??= useId()
 
   const trulyDisabled = !!isDisabled && !isFocusable
 
@@ -946,16 +969,18 @@ export const useSelectOption = (
       }
 
       return {
+        id,
         ref: mergeRefs(itemRef, ref, register),
         ...computedProps,
         ...props,
-        role: "select-item",
+        role: "option",
         tabIndex: -1,
         style: omitSelectedValues && isSelected ? style : undefined,
         "data-value": optionValue ?? "",
         "data-focus": dataAttr(isFocused),
         "data-disabled": dataAttr(isDisabled),
-        "aria-checked": ariaAttr(isSelected),
+        "aria-checked": isMulti && !isDisabled ? isSelected : undefined,
+        "aria-selected": isMulti || isDisabled ? undefined : isSelected,
         "aria-disabled": ariaAttr(isDisabled),
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }
@@ -963,8 +988,10 @@ export const useSelectOption = (
     [
       optionValue,
       computedProps,
+      id,
       isDisabled,
       isFocused,
+      isMulti,
       isSelected,
       omitSelectedValues,
       onClick,

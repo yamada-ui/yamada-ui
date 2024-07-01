@@ -108,8 +108,8 @@ export const useChartAxis = ({
   gridAxis = "x",
   withXAxis = true,
   withYAxis = true,
-  xAxisLabel,
-  yAxisLabel,
+  xAxisLabel: xAxisLabelProp,
+  yAxisLabel: yAxisLabelProp,
   unit,
   valueFormatter,
   styles,
@@ -146,6 +146,9 @@ export const useChartAxis = ({
     type === "percent" && layoutType === "vertical"
       ? valueToPercent
       : valueFormatter
+
+  const xAxisLabel = layoutType === "vertical" ? yAxisLabelProp : xAxisLabelProp
+  const yAxisLabel = layoutType === "vertical" ? xAxisLabelProp : yAxisLabelProp
 
   const [xAxisProps, xAxisClassName] = getComponentProps<Dict, string>(
     [rest.xAxisProps ?? {}, xAxisProperties],

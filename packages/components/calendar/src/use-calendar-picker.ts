@@ -209,6 +209,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     ...rest
   } = useFormControlProps(props)
 
+  id ??= useId()
   locale ??= theme.__config?.date?.locale ?? "en"
 
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
@@ -234,7 +235,6 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const calendarId = useId()
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -428,7 +428,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         tabIndex: !allowInput ? 0 : -1,
         role: "combobox",
         "aria-haspopup": "dialog",
-        "aria-controls": calendarId,
+        "aria-controls": id,
         ...props,
         ...formControlProps,
         style,
@@ -442,21 +442,12 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         ),
       }
     },
-    [
-      allowInput,
-      formControlProps,
-      calendarId,
-      isOpen,
-      rest,
-      onFocus,
-      onKeyDown,
-    ],
+    [id, allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
   )
 
   const getCalendarProps = useCallback(
     (props?: CalendarProps): CalendarProps => ({
       ...props,
-      id: calendarId,
       type,
       defaultType,
       onChangeType,
@@ -496,7 +487,6 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       enableRange,
     }),
     [
-      calendarId,
       hiddenOutsideDays,
       maxSelectValues,
       enableMultiple,

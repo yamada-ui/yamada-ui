@@ -4604,6 +4604,97 @@
     }
   },
   {
+    "title": "Fieldset",
+    "type": "page",
+    "description": "`Fieldset`は、フィールドセット要素に、レジェンド、ヘルパーメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。",
+    "slug": "/components/forms/fieldset",
+    "hierarchy": { "lv1": "Fieldset" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#インポート",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#使い方",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "使い方" }
+  },
+  {
+    "title": "ヘルプメッセージを表示する",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#ヘルプメッセージを表示する",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "使い方",
+      "lv3": "ヘルプメッセージを表示する"
+    }
+  },
+  {
+    "title": "エラーメッセージを表示する",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#エラーメッセージを表示する",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "使い方",
+      "lv3": "エラーメッセージを表示する"
+    }
+  },
+  {
+    "title": "ヘルプメッセージとエラーメッセージの置き換える",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#ヘルプメッセージとエラーメッセージの置き換える",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "使い方",
+      "lv3": "ヘルプメッセージとエラーメッセージの置き換える"
+    }
+  },
+  {
+    "title": "必須化する",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#必須化する",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "使い方", "lv3": "必須化する" }
+  },
+  {
+    "title": "無効化する",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#無効化する",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "使い方", "lv3": "無効化する" }
+  },
+  {
+    "title": "読み取り専用にする",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#読み取り専用にする",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "使い方",
+      "lv3": "読み取り専用にする"
+    }
+  },
+  {
+    "title": "必須インジケーターをカスタマイズする",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#必須インジケーターをカスタマイズする",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "使い方",
+      "lv3": "必須インジケーターをカスタマイズする"
+    }
+  },
+  {
+    "title": "オプショナルインジケーターを使う",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#オプショナルインジケーターを使う",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "使い方",
+      "lv3": "オプショナルインジケーターを使う"
+    }
+  },
+  {
     "title": "FileButton",
     "type": "page",
     "description": "`FileButton`は、ユーザーがファイルを選択するために使用されるボタンのコンポーネントです。",

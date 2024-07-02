@@ -492,6 +492,36 @@ export const withUnit: Story = () => {
   )
 }
 
+export const withAxisLabel: Story = () => {
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+    return months.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarProps[] = useMemo(
+    () => [
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return (
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="month"
+      xAxisLabel="date"
+      yAxisLabel="view"
+    />
+  )
+}
+
 export const useMixData: Story = () => {
   const data = useMemo(() => {
     const months = ["January", "February", "March", "April", "May", "June"]

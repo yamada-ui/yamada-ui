@@ -89,6 +89,14 @@ export type UseLineChartOptions = {
    * @default 1
    */
   fillOpacity?: number | [number, number]
+  /**
+   * A label to display below the X axis.
+   */
+  xAxisLabel?: string
+  /**
+   * A label to display below the Y axis.
+   */
+  yAxisLabel?: string
 }
 
 type UseLineChartProps = UseLineChartOptions & {
@@ -107,6 +115,8 @@ export const useLineChart = ({
   referenceLineProps,
   fillOpacity = 1,
   syncId,
+  xAxisLabel,
+  yAxisLabel,
   styles,
   ...rest
 }: UseLineChartProps) => {
@@ -325,10 +335,23 @@ export const useLineChart = ({
       data,
       layout: layoutType,
       syncId,
+      margin: {
+        bottom: xAxisLabel ? 30 : undefined,
+        left: yAxisLabel ? 10 : undefined,
+        right: yAxisLabel ? 5 : undefined,
+      },
       ...props,
       ...chartProps,
     }),
-    [data, layoutType, syncId, lineChartClassName, chartProps],
+    [
+      lineChartClassName,
+      data,
+      layoutType,
+      syncId,
+      xAxisLabel,
+      yAxisLabel,
+      chartProps,
+    ],
   )
 
   const getLineProps: RequiredChartPropGetter<

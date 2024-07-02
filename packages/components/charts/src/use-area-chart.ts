@@ -113,6 +113,14 @@ export type UseAreaChartOptions = {
    * @default 0.4
    */
   fillOpacity?: number | [number, number]
+  /**
+   * A label to display below the X axis.
+   */
+  xAxisLabel?: string
+  /**
+   * A label to display below the Y axis.
+   */
+  yAxisLabel?: string
 }
 
 export type UseAreaChartProps = UseAreaChartOptions & {
@@ -135,6 +143,8 @@ export const useAreaChart = ({
   splitOffset,
   referenceLineProps,
   syncId,
+  xAxisLabel,
+  yAxisLabel,
   styles,
   ...rest
 }: UseAreaChartProps) => {
@@ -392,10 +402,24 @@ export const useAreaChart = ({
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
       syncId,
+      margin: {
+        bottom: xAxisLabel ? 30 : undefined,
+        left: yAxisLabel ? 10 : undefined,
+        right: yAxisLabel ? 5 : undefined,
+      },
       ...props,
       ...chartProps,
     }),
-    [areaChartClassName, data, type, layoutType, syncId, chartProps],
+    [
+      areaChartClassName,
+      data,
+      type,
+      layoutType,
+      syncId,
+      xAxisLabel,
+      yAxisLabel,
+      chartProps,
+    ],
   )
 
   const getAreaSplitProps: ChartPropGetter<

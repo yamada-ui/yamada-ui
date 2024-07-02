@@ -287,7 +287,7 @@ describe("<DonutChart />", () => {
     }
   })
 
-  test("render valueFormatter", async () => {
+  test("should be rendered valueFormatter", async () => {
     const { container } = render(
       <DonutChart
         containerProps={{ width: 400, height: "80%" }}

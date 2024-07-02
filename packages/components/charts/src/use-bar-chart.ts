@@ -64,6 +64,14 @@ export type UseBarChartOptions = {
    * @default 1
    */
   fillOpacity?: number | [number, number]
+  /**
+   * A label to display below the X axis.
+   */
+  xAxisLabel?: string
+  /**
+   * A label to display below the Y axis.
+   */
+  yAxisLabel?: string
 }
 
 export type UseBarChartProps = UseBarChartOptions & {
@@ -78,6 +86,8 @@ export const useBarChart = ({
   referenceLineProps = [],
   fillOpacity = 1,
   syncId,
+  xAxisLabel,
+  yAxisLabel,
   styles,
   ...rest
 }: UseBarChartProps) => {
@@ -279,10 +289,24 @@ export const useBarChart = ({
       stackOffset: type === "percent" ? "expand" : undefined,
       layout: layoutType,
       syncId,
+      margin: {
+        bottom: xAxisLabel ? 30 : undefined,
+        left: yAxisLabel ? 10 : undefined,
+        right: yAxisLabel ? 5 : undefined,
+      },
       ...props,
       ...chartProps,
     }),
-    [barChartClassName, chartProps, data, syncId, layoutType, type],
+    [
+      barChartClassName,
+      data,
+      type,
+      layoutType,
+      syncId,
+      xAxisLabel,
+      yAxisLabel,
+      chartProps,
+    ],
   )
 
   return {

@@ -41,7 +41,7 @@ describe("useResizeObserver", () => {
     render(<ButtonWithSize />)
     const button = await screen.findByRole("button")
 
-    await waitFor(() => expect(button.textContent).toBe("400 x 320"))
+    await waitFor(() => expect(button).toHaveTextContent("400 x 320"))
     await waitFor(() => expect(ResizeObserverMock).toHaveBeenCalledTimes(1))
   })
 })
@@ -89,6 +89,6 @@ describe("useElementSize", () => {
     render(<ButtonWithSize />)
     const button = await screen.findByRole("button")
 
-    expect(button.textContent).toBe("150 x 200")
+    await waitFor(() => expect(button).toHaveTextContent("150 x 200"))
   })
 })

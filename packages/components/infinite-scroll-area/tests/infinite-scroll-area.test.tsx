@@ -27,7 +27,9 @@ describe("<InfiniteScrollArea />", () => {
         {Array(50)
           .fill(0)
           .map((_, index) => (
-            <Fragment key={index}>{index}</Fragment>
+            <div key={index} role="article">
+              {index}
+            </div>
           ))}
       </InfiniteScrollArea>,
     )

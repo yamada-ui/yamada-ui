@@ -447,7 +447,7 @@ describe("<BarChart />", () => {
     expect(unitElements.length).toBeGreaterThan(0)
   })
 
-  test("shoud be rendered reference line", async () => {
+  test("should be rendered reference line", async () => {
     const { container } = render(
       <BarChart
         containerProps={{ width: 400, height: "80%" }}
@@ -473,7 +473,7 @@ describe("<BarChart />", () => {
     await expect(screen.findByText(/x line/i)).resolves.toBeInTheDocument()
   })
 
-  test("render valueFormatter", async () => {
+  test("should be rendered valueFormatter", async () => {
     render(
       <BarChart
         containerProps={{ width: 400, height: "80%" }}
@@ -487,5 +487,21 @@ describe("<BarChart />", () => {
     const formattedElements =
       await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
     expect(formattedElements.length).toBeGreaterThan(0)
+  })
+
+  test("should be rendered axis label", async () => {
+    render(
+      <BarChart
+        containerProps={{ width: 400, height: "80%" }}
+        dataKey="name"
+        data={data}
+        series={series}
+        xAxisLabel="x-axis-label"
+        yAxisLabel="y-axis-label"
+      />,
+    )
+
+    await waitFor(() => expect(screen.getByText("x-axis-label")).toBeVisible())
+    expect(screen.getByText("y-axis-label")).toBeVisible()
   })
 })

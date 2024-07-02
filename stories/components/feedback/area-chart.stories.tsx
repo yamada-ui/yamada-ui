@@ -711,6 +711,40 @@ export const withUnit: Story = () => {
   )
 }
 
+export const withAxisLabel: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaProps[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      xAxisLabel="page"
+      yAxisLabel="view"
+    />
+  )
+}
+
 export const useRangeData: Story = () => {
   const data = useMemo(
     () =>

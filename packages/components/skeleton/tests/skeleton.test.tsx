@@ -3,14 +3,13 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "../src"
 
 describe("<Skeleton />", () => {
   test("Skeleton renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <>
         <Skeleton />
         <SkeletonCircle />
         <SkeletonText />
       </>,
     )
-    await a11y(container)
   })
 
   test("should render with given props", () => {

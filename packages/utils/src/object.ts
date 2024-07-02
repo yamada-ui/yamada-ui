@@ -1,4 +1,10 @@
-import { isObject, isArray, isFunction, isString } from "./assertion"
+import {
+  isObject,
+  isArray,
+  isFunction,
+  isString,
+  isUndefined,
+} from "./assertion"
 import type { Dict, Union } from "./index.types"
 
 const omitObjectHelper = <T extends Dict, K extends keyof T>(
@@ -195,7 +201,7 @@ export const getObject = (
   fallback?: any,
   i?: number,
 ) => {
-  const k = typeof path === "string" ? path.split(".") : [path]
+  const k = isString(path) ? path.split(/\[(.*?)\]|\./).filter(Boolean) : [path]
 
   for (i = 0; i < k.length; i += 1) {
     if (!obj) break
@@ -215,7 +221,7 @@ export const memoizeObject = (func: typeof getObject) => {
     fallback?: any,
     i?: number,
   ): T => {
-    if (typeof obj === "undefined") return func(obj, path, fallback)
+    if (isUndefined(obj)) return func(obj, path, fallback)
 
     if (!cache.has(obj)) cache.set(obj, new Map())
 

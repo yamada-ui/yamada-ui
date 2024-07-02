@@ -5,6 +5,7 @@ export {
   fireEvent,
   screen,
   waitFor,
+  waitForElementToBeRemoved,
   renderHook,
 } from "@testing-library/react"
 export * from "./render"

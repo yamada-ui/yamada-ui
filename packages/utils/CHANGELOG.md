@@ -1,5 +1,15 @@
 # @yamada-ui/utils
 
+## 1.3.1
+
+### Patch Changes
+
+- [#2206](https://github.com/yamada-ui/yamada-ui/pull/2206) [`95ca0f7`](https://github.com/yamada-ui/yamada-ui/commit/95ca0f793140995375bfad6807df834053ae2b7e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the type definition of `StringLiteral`.
+
+- [#2205](https://github.com/yamada-ui/yamada-ui/pull/2205) [`930cd92`](https://github.com/yamada-ui/yamada-ui/commit/930cd9202126e0b7dbfcce8796123c0ac778c1b4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the path specified by `getObject` could not be obtained correctly.
+
+- [#2218](https://github.com/yamada-ui/yamada-ui/pull/2218) [`18074ce`](https://github.com/yamada-ui/yamada-ui/commit/18074cefa19fe9d4bc26455f17fa33412ac1e4d3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expanded unit validation regex in `isUnit`.
+
 ## 1.3.0
 
 ### Minor Changes

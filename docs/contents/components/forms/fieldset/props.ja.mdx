@@ -1,17 +1,18 @@
 ---
-title: FormControl
-description: "`FormControl`は、フォーム要素に、ラベル、ヘルパーメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
+title: Fieldset
+description: "`Fieldset`は、フィールドセット要素に、レジェンド、ヘルパーメッセージ、エラーメッセージなどをグループ化するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/form-control"
+label: New
 with_description: true
 tab: Props
 ---
 
 ## Props
 
-### FormControlProps
+### FieldsetProps
 
 <PropsCard
-  id="formcontrol-errormessage"
+  id="fieldset-errormessage"
   name="errorMessage"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -20,18 +21,18 @@ tab: Props
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
   | ReactPortal"
-  description={"The form control error message to use."}
+  description={"The fieldset error message to use."}
 />
 
 <PropsCard
-  id="formcontrol-errormessageprops"
+  id="fieldset-errormessageprops"
   name="errorMessageProps"
   type="ErrorMessageProps"
   description={"Props the error message component."}
 />
 
 <PropsCard
-  id="formcontrol-helpermessage"
+  id="fieldset-helpermessage"
   name="helperMessage"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -40,42 +41,42 @@ tab: Props
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
   | ReactPortal"
-  description={"The form control helper message to use."}
+  description={"The fieldset helper message to use."}
 />
 
 <PropsCard
-  id="formcontrol-helpermessageprops"
+  id="fieldset-helpermessageprops"
   name="helperMessageProps"
   type="HelperMessageProps"
-  description={"Props the label component."}
+  description={"Props the helper message component."}
 />
 
 <PropsCard
-  id="formcontrol-isdisabled"
+  id="fieldset-isdisabled"
   name="isDisabled"
   type="boolean"
-  description={"If `true`, the form control will be disabled."}
+  description={"If `true`, the fieldset will be disabled."}
   defaultValue={"false"}
 />
 
 <PropsCard
-  id="formcontrol-isinvalid"
+  id="fieldset-isinvalid"
   name="isInvalid"
   type="boolean"
-  description={"If `true`, the form control will be invalid."}
+  description={"If `true`, the fieldset will be invalid."}
   defaultValue={"false"}
 />
 
 <PropsCard
-  id="formcontrol-isreadonly"
+  id="fieldset-isreadonly"
   name="isReadOnly"
   type="boolean"
-  description={"If `true`, the form control will be readonly."}
+  description={"If `true`, the fieldset will be readonly."}
   defaultValue={"false"}
 />
 
 <PropsCard
-  id="formcontrol-isreplace"
+  id="fieldset-isreplace"
   name="isReplace"
   type="boolean"
   description={
@@ -85,16 +86,16 @@ tab: Props
 />
 
 <PropsCard
-  id="formcontrol-isrequired"
+  id="fieldset-isrequired"
   name="isRequired"
   type="boolean"
-  description={"If `true`, the form control will be required."}
+  description={"If `true`, the fieldset will be required."}
   defaultValue={"false"}
 />
 
 <PropsCard
-  id="formcontrol-label"
-  name="label"
+  id="fieldset-legend"
+  name="legend"
   type="type ONLY_FOR_FORMAT =
   | string
   | number
@@ -102,18 +103,18 @@ tab: Props
   | ReactElement<any, string | JSXElementConstructor<any>>
   | Iterable<ReactNode>
   | ReactPortal"
-  description={"The form control label to use."}
+  description={"The fieldset legend to use."}
 />
 
 <PropsCard
-  id="formcontrol-labelprops"
-  name="labelProps"
-  type="LabelProps"
+  id="fieldset-legendprops"
+  name="legendProps"
+  type="LegendProps"
   description={"Props the label component."}
 />
 
 <PropsCard
-  id="formcontrol-optionalindicator"
+  id="fieldset-optionalindicator"
   name="optionalIndicator"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -125,7 +126,7 @@ tab: Props
 />
 
 <PropsCard
-  id="formcontrol-requiredindicator"
+  id="fieldset-requiredindicator"
   name="requiredIndicator"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -136,12 +137,12 @@ tab: Props
   | ReactPortal"
 />
 
-### LabelProps
+### LegendProps
 
-<PropsCard id="label-isrequired" name="isRequired" type="boolean" />
+<PropsCard id="legend-isrequired" name="isRequired" type="boolean" />
 
 <PropsCard
-  id="label-optionalindicator"
+  id="legend-optionalindicator"
   name="optionalIndicator"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -153,7 +154,7 @@ tab: Props
 />
 
 <PropsCard
-  id="label-requiredindicator"
+  id="legend-requiredindicator"
   name="requiredIndicator"
   type="type ONLY_FOR_FORMAT =
   | string
@@ -163,7 +164,3 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
 />
-
-### HelperMessageProps
-
-### ErrorMessageProps

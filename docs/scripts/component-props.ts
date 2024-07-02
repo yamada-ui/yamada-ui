@@ -93,6 +93,16 @@ const OVERRIDE_PATHS: Record<
   ],
   typography: ["heading", "text"],
   transitions: ["collapse", "fade", "scale-fade", "slide-fade", "slide"],
+  "form-control": [
+    {
+      parent: "form-control",
+      children: ["label", "helper-message", "error-message"],
+    },
+    {
+      parent: "fieldset",
+      children: ["legend"],
+    },
+  ],
   progress: ["circle-progress"],
   "color-picker": [
     "color-selector",
@@ -168,9 +178,9 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
               doc = omitObject(doc, [displayName])
             }
           })
+        } else {
+          if (Object.keys(doc).length) docs[name] = doc
         }
-
-        if (Object.keys(doc).length) docs[name] = doc
       } catch (e) {
         notDocsList = [...notDocsList, dirent.name]
       }

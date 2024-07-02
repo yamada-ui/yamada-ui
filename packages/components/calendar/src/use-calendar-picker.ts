@@ -33,7 +33,7 @@ import type {
   KeyboardEventHandler,
   MouseEvent,
 } from "react"
-import { useCallback, useRef } from "react"
+import { useCallback, useId, useRef } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
@@ -234,6 +234,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const calendarId = useId()
 
   const stringToDate = useCallback(
     (value: string): Date | undefined => {
@@ -425,11 +426,14 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       return {
         ref: mergeRefs(inputRef, ref),
         tabIndex: !allowInput ? 0 : -1,
+        role: "combobox",
+        "aria-haspopup": "dialog",
+        "aria-controls": calendarId,
         ...props,
         ...formControlProps,
         style,
         "data-active": dataAttr(isOpen),
-        "aria-expanded": dataAttr(isOpen),
+        "aria-expanded": isOpen,
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(
           props.onKeyDown,
@@ -438,12 +442,21 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         ),
       }
     },
-    [allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
+    [
+      allowInput,
+      formControlProps,
+      calendarId,
+      isOpen,
+      rest,
+      onFocus,
+      onKeyDown,
+    ],
   )
 
   const getCalendarProps = useCallback(
     (props?: CalendarProps): CalendarProps => ({
       ...props,
+      id: calendarId,
       type,
       defaultType,
       onChangeType,
@@ -483,6 +496,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       enableRange,
     }),
     [
+      calendarId,
       hiddenOutsideDays,
       maxSelectValues,
       enableMultiple,

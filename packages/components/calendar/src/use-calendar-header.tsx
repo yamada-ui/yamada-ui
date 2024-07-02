@@ -244,6 +244,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
         ...props,
         onClick: handlerAll(props.onClick, onChangeType),
         tabIndex: !!index ? -1 : 0,
+        "aria-live": "polite",
       }
     },
     [index, onChangeType, type],

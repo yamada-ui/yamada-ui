@@ -612,7 +612,11 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      role: "combobbox",
+      "aria-label":
+        props["aria-label"] ??
+        placeholder ??
+        `Select ${isMulti ? "one or more options." : "an option."}`,
+      role: "combobox",
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
       ...fieldProps,
@@ -634,6 +638,7 @@ export const useSelect = <T extends MaybeValue = string>({
       isOpen,
       isMulti,
       label,
+      placeholder,
       rest,
       onFocus,
       onKeyDown,

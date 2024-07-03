@@ -455,6 +455,7 @@ export const polarAngleAxisProperties: (keyof Recharts.PolarAngleAxisProps)[] =
     "onMouseEnter",
     "onMouseLeave",
   ]
+
 export const polarRadiusAxisProperties: (keyof Recharts.PolarRadiusAxisProps)[] =
   [
     "angle",
@@ -481,3 +482,14 @@ export const polarRadiusAxisProperties: (keyof Recharts.PolarRadiusAxisProps)[] 
     "onMouseEnter",
     "onMouseLeave",
   ]
+
+export const labelProperties: (keyof Recharts.LabelProps)[] = [
+  "viewBox",
+  "formatter",
+  "value",
+  "position",
+  "offset",
+  "children",
+  "content",
+  "id",
+]

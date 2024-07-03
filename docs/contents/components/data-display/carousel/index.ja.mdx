@@ -450,7 +450,7 @@ return (
 
 ```tsx
 <VStack>
-  <Carousel controlProps={{ icon: <FontAwesomeIcon icon={faPoo} /> }}>
+  <Carousel controlProps={{ icon: <Ghost /> }}>
     <CarouselSlide as={Center} bg="primary">
       1
     </CarouselSlide>
@@ -465,7 +465,7 @@ return (
     </CarouselSlide>
   </Carousel>
 
-  <Carousel controlPrevProps={{ icon: <FontAwesomeIcon icon={faArrowLeft} /> }}>
+  <Carousel controlPrevProps={{ icon: <ArrowLeft /> }}>
     <CarouselSlide as={Center} bg="primary">
       1
     </CarouselSlide>
@@ -480,9 +480,7 @@ return (
     </CarouselSlide>
   </Carousel>
 
-  <Carousel
-    controlNextProps={{ icon: <FontAwesomeIcon icon={faArrowRight} /> }}
-  >
+  <Carousel controlNextProps={{ icon: <ArrowRight /> }}>
     <CarouselSlide as={Center} bg="primary">
       1
     </CarouselSlide>
@@ -498,8 +496,8 @@ return (
   </Carousel>
 
   <Carousel>
-    <CarouselControlPrev icon={<FontAwesomeIcon icon={faArrowLeft} />} />
-    <CarouselControlNext icon={<FontAwesomeIcon icon={faArrowRight} />} />
+    <CarouselControlPrev icon={<ArrowLeft />} />
+    <CarouselControlNext icon={<ArrowRight />} />
 
     <CarouselSlide as={Center} bg="primary">
       1
@@ -548,8 +546,7 @@ return (
     indicatorsProps={{
       bottom: "8",
       component: ({ isSelected }) => (
-        <FontAwesomeIcon
-          icon={faPoo}
+        <Ghost
           color={isSelected ? "whiteAlpha.700" : "whiteAlpha.400"}
           cursor="pointer"
         />

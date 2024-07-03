@@ -4035,7 +4035,7 @@
   {
     "title": "Dropzone",
     "type": "page",
-    "description": "Dropzone is a component used for uploading files via drag and drop.",
+    "description": "`Dropzone` is a component used for uploading files via drag and drop.",
     "slug": "/components/forms/dropzone",
     "hierarchy": { "lv1": "Dropzone" }
   },
@@ -4256,6 +4256,101 @@
       "lv1": "Editable",
       "lv2": "Usage",
       "lv3": "Use React Hook Form"
+    }
+  },
+  {
+    "title": "Fieldset",
+    "type": "page",
+    "description": "`Fieldset` is a component used to group elements such as legends, helper messages, and error messages in a fieldset element.",
+    "slug": "/components/forms/fieldset",
+    "hierarchy": { "lv1": "Fieldset" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#import",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#usage",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "Usage" }
+  },
+  {
+    "title": "Displaying a Helper Message",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#displaying-a-helper-message",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Displaying a Helper Message"
+    }
+  },
+  {
+    "title": "Displaying an Error Message",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#displaying-an-error-message",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Displaying an Error Message"
+    }
+  },
+  {
+    "title": "Replacing Helper and Error Messages",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#replacing-helper-and-error-messages",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Replacing Helper and Error Messages"
+    }
+  },
+  {
+    "title": "Making it Required",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#making-it-required",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Making it Required"
+    }
+  },
+  {
+    "title": "Disabling",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#disabling",
+    "hierarchy": { "lv1": "Fieldset", "lv2": "Usage", "lv3": "Disabling" }
+  },
+  {
+    "title": "Making it Read-Only",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#making-it-read-only",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Making it Read-Only"
+    }
+  },
+  {
+    "title": "Customizing the Required Indicator",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#customizing-the-required-indicator",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Customizing the Required Indicator"
+    }
+  },
+  {
+    "title": "Using an Optional Indicator",
+    "type": "fragment",
+    "slug": "/components/forms/fieldset#using-an-optional-indicator",
+    "hierarchy": {
+      "lv1": "Fieldset",
+      "lv2": "Usage",
+      "lv3": "Using an Optional Indicator"
     }
   },
   {
@@ -4525,7 +4620,7 @@
   {
     "title": "FormControl",
     "type": "page",
-    "description": "`FormControl` is a component used to group form elements with labels, help messages, error messages, etc.",
+    "description": "`FormControl` is a component used to group form elements with label, helper message, error message, etc.",
     "slug": "/components/forms/form-control",
     "hierarchy": { "lv1": "FormControl" }
   },
@@ -8575,6 +8670,12 @@
     "type": "fragment",
     "slug": "/components/media-and-icons/icon#use-custom-icons",
     "hierarchy": { "lv1": "Icon", "lv2": "Usage", "lv3": "Use Custom Icons" }
+  },
+  {
+    "title": "Use Lucide",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/icon#use-lucide",
+    "hierarchy": { "lv1": "Icon", "lv2": "Usage", "lv3": "Use Lucide" }
   },
   {
     "title": "Use Font Awesome",

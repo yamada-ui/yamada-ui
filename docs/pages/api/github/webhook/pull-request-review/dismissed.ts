@@ -29,7 +29,7 @@ export const dismissed: APIHandler = async ({ req }) => {
         owner,
         repo,
         issue_number: number,
-        name: "request merge",
+        name: "merge request",
       }),
     )
   } catch {}

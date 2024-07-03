@@ -2,7 +2,7 @@ import { FormControl } from "@yamada-ui/form-control"
 import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Radio, RadioGroup } from "../src"
 
-describe("<Radio/>", () => {
+describe("<Radio />", () => {
   test("should pass a11y test", async () => {
     await a11y(<Radio>Radio button</Radio>)
   })

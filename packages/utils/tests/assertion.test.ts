@@ -148,6 +148,7 @@ describe("Assertion", () => {
     test("Returns true for strings containing units", () => {
       expect(isUnit("100px")).toBeTruthy()
       expect(isUnit("5rem")).toBeTruthy()
+      expect(isUnit("2xl")).toBeFalsy()
     })
 
     test("Returns false for strings without units", () => {

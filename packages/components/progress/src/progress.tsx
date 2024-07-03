@@ -102,9 +102,6 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
     _borderRadius ?? rounded ?? (styles.track?.borderRadius as string | number)
 
   const css: CSSUIObject = {
-    w: "100%",
-    overflow: "hidden",
-    pos: "relative",
     ...styles.track,
   }
 
@@ -189,7 +186,6 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
 
   const __css: CSSUIObject = {
     w: `${percent}%`,
-    h: "100%",
     ...styles.filledTrack,
   }
 

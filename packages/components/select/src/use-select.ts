@@ -958,10 +958,10 @@ export const useSelectOption = (
       }
 
       return {
+        role: "option",
         ref: mergeRefs(itemRef, ref, register),
         ...computedProps,
         ...props,
-        role: "select-item",
         tabIndex: -1,
         style: omitSelectedValues && isSelected ? style : undefined,
         "data-value": optionValue ?? "",

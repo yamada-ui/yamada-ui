@@ -620,7 +620,7 @@ export const useSelect = <T extends MaybeValue = string>({
       "data-placeholder": dataAttr(
         !isMulti ? label === undefined : !label?.length,
       ),
-      "aria-expanded": dataAttr(isOpen),
+      "aria-expanded": isOpen,
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),

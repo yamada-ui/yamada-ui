@@ -2,4 +2,4 @@
 "@yamada-ui/test": patch
 ---
 
-Export `waitForEementToBeRemoved`
+Export `waitForElementToBeRemoved`

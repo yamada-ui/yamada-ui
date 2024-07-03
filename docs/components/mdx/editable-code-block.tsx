@@ -21,6 +21,8 @@ import {
   useUpdateEffect,
   useResizeObserver,
   Skeleton,
+  useColorMode,
+  useTheme,
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
 import {
@@ -268,10 +270,15 @@ export const EditableCodeBlock: FC<EditableCodeBlockProps> = ({
 export default EditableCodeBlock
 
 const createCache = weakMemoize((container: Node) =>
-  createEmotionCache({ container, key: "iframe-css" }),
+  createEmotionCache({
+    container,
+    key: "iframe-css",
+  }),
 )
 
 const Iframe: FC<PropsWithChildren> = ({ children }) => {
+  const { colorMode } = useColorMode()
+  const { themeScheme } = useTheme()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const headRef = useRef<HTMLHeadElement | null>(null)
   const bodyRef = useRef<HTMLElement | null>(null)
@@ -289,6 +296,18 @@ const Iframe: FC<PropsWithChildren> = ({ children }) => {
 
     forceUpdate({})
   }, [])
+
+  useEffect(() => {
+    if (!iframeRef.current) return
+
+    const iframe = iframeRef.current
+
+    if (iframe.contentDocument) {
+      iframe.contentDocument.documentElement.dataset.mode = colorMode
+      iframe.contentDocument.documentElement.dataset.theme = themeScheme
+      iframe.contentDocument.documentElement.style.colorScheme = colorMode
+    }
+  }, [colorMode, themeScheme])
 
   return (
     <ui.iframe

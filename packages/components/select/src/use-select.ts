@@ -621,11 +621,22 @@ export const useSelect = <T extends MaybeValue = string>({
       "data-placeholder": dataAttr(
         !isMulti ? label === undefined : !label?.length,
       ),
+      "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
       "aria-expanded": isOpen,
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [fieldProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
+    [
+      descendants,
+      fieldProps,
+      focusedIndex,
+      isOpen,
+      isMulti,
+      label,
+      rest,
+      onFocus,
+      onKeyDown,
+    ],
   )
 
   return {

@@ -447,33 +447,37 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const validChildren = getValidChildren(children)
 
-  const computedChildren = resolvedItems?.map((item, i) => {
-    if ("value" in item) {
-      const { label, value, ...props } = item
+  const computedChildren = useMemo(
+    () =>
+      resolvedItems?.map((item, i) => {
+        if ("value" in item) {
+          const { label, value, ...props } = item
 
-      return (
-        <AutocompleteOption key={i} value={value} {...props}>
-          {label}
-        </AutocompleteOption>
-      )
-    } else if ("items" in item) {
-      const { label, items = [], ...props } = item
-
-      return (
-        <AutocompleteOptionGroup
-          key={i}
-          label={label as string}
-          {...(props as HTMLUIProps<"ul">)}
-        >
-          {items.map(({ label, value, ...props }, i) => (
+          return (
             <AutocompleteOption key={i} value={value} {...props}>
               {label}
             </AutocompleteOption>
-          ))}
-        </AutocompleteOptionGroup>
-      )
-    }
-  })
+          )
+        } else if ("items" in item) {
+          const { label, items = [], ...props } = item
+
+          return (
+            <AutocompleteOptionGroup
+              key={i}
+              label={label as string}
+              {...(props as HTMLUIProps<"ul">)}
+            >
+              {items.map(({ label, value, ...props }, i) => (
+                <AutocompleteOption key={i} value={value} {...props}>
+                  {label}
+                </AutocompleteOption>
+              ))}
+            </AutocompleteOptionGroup>
+          )
+        }
+      }),
+    [resolvedItems],
+  )
 
   const isEmpty = !validChildren.length && !computedChildren?.length
 
@@ -860,7 +864,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
     let newItems: AutocompleteItem[] = []
 
-    if (resolvedItems) newItems = resolvedItems
+    if (resolvedItems) newItems = [...resolvedItems]
 
     if (firstInsertPositionItem === "first") {
       newItems = [newItem, ...newItems]
@@ -1103,6 +1107,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   useUpdateEffect(() => {
     if (!isHit) setFocusedIndex(-2)
   }, [isHit])
+
+  useUpdateEffect(() => {
+    setResolvedItems(items ? JSON.parse(JSON.stringify(items)) : undefined)
+  }, [items])
 
   useUnmountEffect(() => {
     timeoutIds.current.forEach((id) => clearTimeout(id))

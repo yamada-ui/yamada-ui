@@ -472,7 +472,7 @@ describe("<RadarChart />", () => {
     )
   })
 
-  test("render valueFormatter", async () => {
+  test("should be rendered valueFormatter", async () => {
     const { container } = render(
       <RadarChart
         containerProps={{ width: 400, height: "80%" }}

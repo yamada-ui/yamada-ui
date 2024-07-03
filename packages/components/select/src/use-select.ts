@@ -727,7 +727,7 @@ export const useSelectList = () => {
       id: props.id ?? useId(),
       as: "ul",
       ref: mergeRefs(listRef, ref),
-      role: "select",
+      role: "listbox",
       tabIndex: -1,
       ...props,
     }),

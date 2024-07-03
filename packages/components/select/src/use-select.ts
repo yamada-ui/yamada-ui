@@ -804,6 +804,7 @@ export const useSelectOptionGroup = ({
     (props = {}, ref = null) => ({
       "aria-label": props["aria-label"] ?? label,
       ref,
+      role: "group",
       ...props,
       ...computedRest[1],
       "data-label": label,

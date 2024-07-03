@@ -39,7 +39,7 @@ import type {
   MouseEvent,
   CSSProperties,
 } from "react"
-import { useCallback, useRef, useState, useEffect } from "react"
+import { useCallback, useRef, useState, useEffect, useId } from "react"
 import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -621,6 +621,7 @@ export const useSelect = <T extends MaybeValue = string>({
       "data-placeholder": dataAttr(
         !isMulti ? label === undefined : !label?.length,
       ),
+      "aria-controls": listRef.current?.id,
       "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
       "aria-expanded": isOpen,
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
@@ -718,6 +719,7 @@ export const useSelectList = () => {
 
   const getListProps: MotionUIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
+      id: props.id ?? useId(),
       as: "ul",
       ref: mergeRefs(listRef, ref),
       role: "select",

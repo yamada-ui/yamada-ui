@@ -136,6 +136,10 @@ export const useMultiDatePicker = ({
   })
 
   useUpdateEffect(() => {
+    setValue(valueProp ?? [])
+  }, [valueProp])
+
+  useUpdateEffect(() => {
     if (!closeOnMaxSelect || !isNumber(maxSelectValues)) return
 
     if (maxSelectValues <= value.length) onClose()

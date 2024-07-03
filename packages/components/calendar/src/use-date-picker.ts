@@ -118,6 +118,10 @@ export const useDatePicker = ({
   )
 
   useUpdateEffect(() => {
+    setValue(valueProp)
+  }, [valueProp])
+
+  useUpdateEffect(() => {
     if (inputRef.current && isActiveElement(inputRef.current)) return
 
     const inputValue = dateToString(value)

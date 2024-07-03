@@ -3,9 +3,11 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   getActiveElement,
   handlerAll,
+  isActiveElement,
   isContains,
   isNumber,
   mergeRefs,
+  useUpdateEffect,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
@@ -245,6 +247,22 @@ export const useRangeDatePicker = ({
     },
     [startValue, allowInputBeyond, maxDate, pattern, stringToDate, setValue],
   )
+
+  useUpdateEffect(() => {
+    setValue(valueProp ?? [])
+  }, [valueProp])
+
+  useUpdateEffect(() => {
+    if (startInputRef.current && isActiveElement(startInputRef.current)) return
+
+    setStartInputValue(dateToString(startValue) ?? "")
+  }, [value])
+
+  useUpdateEffect(() => {
+    if (endInputRef.current && isActiveElement(endInputRef.current)) return
+
+    setEndInputValue(dateToString(endValue) ?? "")
+  }, [value])
 
   const getStartInputProps: UIPropGetter = useCallback(
     (props = {}, ref) => {

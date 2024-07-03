@@ -8,6 +8,17 @@ tab: Accessibility
 
 The `Checkbox` follows the[WAI-ARIA - Checkbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox) for accessibility.
 
+The following example is valid for grouping using `Fieldset`.
+
+```tsx live=false
+<Fieldset>
+  <Legend color="primary">好きなキャラクターを全て選んでください。</Legend>S
+  <Checkbox value="孫悟空">孫悟空</Checkbox>
+  <Checkbox value="ベジータ">ベジータ</Checkbox>
+  <Checkbox value="フリーザ">フリーザ></Checkbox>
+</Fieldset>
+```
+
 If not using FormControl, set aria-labelledby on the CheckboxGroup.
 
 ```tsx live=false
@@ -26,10 +37,11 @@ If not using FormControl, set aria-labelledby on the CheckboxGroup.
 
 ## Keyboard Navigation
 
-| Key     | Description                          | State |
-| ------- | ------------------------------------ | ----- |
-| `Tab`   | Moves focus to the enabled checkbox. | -     |
-| `Space` | Checks the focused checkbox.         | -     |
+| Key     | Description                                                                                                                                               | State                    |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `Tab`   | Moves focus to the enabled checkbox.                                                                                                                      | -                        |
+| `Space` | Toggles the focused checkbox between checked and unchecked states.                                                                                        | -                        |
+|         | Toggles the state of the focused checkbox with isIndeterminate={true} and the controlled checkboxes between checked, unchecked, and indeterminate states. | `isIndeterminate={true}` |
 
 ## ARIA Roles and Attributes
 
@@ -37,4 +49,6 @@ If not using FormControl, set aria-labelledby on the CheckboxGroup.
 | --------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `CheckboxGroup` | `role="group"`       | Indicates that it is a group of checkboxes.                                                                                |
 |                 | `aria-labelledby`    | If the CheckboxGroup is within a FormControl and the FormControl has a label or Label, set this to the id of that element. |
-| `Checkbox`      | `aria-checked`       | Set to "true" if the checkbox is checked, and to "false" if it is not checked.                                             |
+| `Checkbox`      | `id`                 | Used to associate with the checkbox that has isIndeterminate={true}.                                                       |
+|                 | `aria-checked`       | Set to "true" if the checkbox is checked, "false" if unchecked, and "mixed" if in an indeterminate state.                  |
+|                 | `aria-controls`      | Sets the id of the checkboxes controlled by the checkbox with isIndeterminate={true}.                                      |

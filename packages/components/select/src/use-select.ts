@@ -802,6 +802,7 @@ export const useSelectOptionGroup = ({
 
   const getGroupProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
+      "aria-label": props["aria-label"] ?? label,
       ref,
       ...props,
       ...computedRest[1],

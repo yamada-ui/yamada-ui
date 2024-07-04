@@ -63,7 +63,7 @@ export const AccordionButton = forwardRef<AccordionButtonProps, "button">(
       <ui.div role="heading" aria-level="3" {...containerProps}>
         <ui.button
           {...getButtonProps(rest, ref)}
-          className={cx("ui-accordion__label", className)}
+          className={cx("ui-accordion__button", className)}
           __css={css}
         >
           {children}

@@ -1,5 +1,17 @@
 # @yamada-ui/test
 
+## 1.3.0
+
+### Minor Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`0020da9`](https://github.com/yamada-ui/yamada-ui/commit/0020da9a5175570a9430fbbc6a3496f635d4f1e0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `filterVisuallyHidden` function.
+
+### Patch Changes
+
+- Updated dependencies [[`b1bfbf2`](https://github.com/yamada-ui/yamada-ui/commit/b1bfbf262cfd4e8df208a887c1481da21f271ced), [`1f52442`](https://github.com/yamada-ui/yamada-ui/commit/1f52442fce7fa1044fb5c4829ac1bfd85cb9ed6e)]:
+  - @yamada-ui/theme@1.11.0
+  - @yamada-ui/providers@1.1.5
+
 ## 1.2.5
 
 ### Patch Changes

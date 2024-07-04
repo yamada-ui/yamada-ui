@@ -4,7 +4,8 @@ import {
   AutocompleteOption,
   AutocompleteOptionGroup,
 } from "@yamada-ui/react"
-import { act, render, screen, waitFor } from "@yamada-ui/test"
+import { act, render, renderHook, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 
 describe("<Autocomplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-autocomplete"
@@ -126,6 +127,36 @@ describe("<Autocomplete />", () => {
 
       await waitFor(() => {
         expect(screen.getByTestId("icon")).toBeInTheDocument()
+      })
+    })
+
+    test("items are updated correctly", async () => {
+      const { result } = renderHook(() => useState(ITEMS))
+
+      const { user, container, rerender } = render(
+        <Autocomplete items={result.current[0]} />,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      await user.click(autocomplete!)
+
+      await waitFor(() => {
+        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+        expect(optionElements).toHaveLength(3)
+      })
+
+      act(() => {
+        result.current[1]((prev) => [
+          ...prev,
+          { label: "option4", value: "option4" },
+        ])
+      })
+
+      rerender(<Autocomplete items={result.current[0]} />)
+
+      await waitFor(() => {
+        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+        expect(optionElements).toHaveLength(4)
       })
     })
   })

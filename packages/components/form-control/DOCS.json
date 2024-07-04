@@ -5,10 +5,20 @@
       "required": false,
       "description": "The form control error message to use."
     },
+    "errorMessageProps": {
+      "type": "ErrorMessageProps",
+      "required": false,
+      "description": "Props the error message component."
+    },
     "helperMessage": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false,
       "description": "The form control helper message to use."
+    },
+    "helperMessageProps": {
+      "type": "HelperMessageProps",
+      "required": false,
+      "description": "Props the label component."
     },
     "isDisabled": {
       "type": "boolean",
@@ -44,6 +54,11 @@
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false,
       "description": "The form control label to use."
+    },
+    "labelProps": {
+      "type": "LabelProps",
+      "required": false,
+      "description": "Props the label component."
     },
     "optionalIndicator": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
@@ -98,5 +113,86 @@
     "onFocus": { "type": "FocusEventHandler<Y>", "required": false },
     "readOnly": { "type": "boolean", "required": false },
     "required": { "type": "boolean", "required": false }
+  },
+  "Fieldset": {
+    "errorMessage": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The fieldset error message to use."
+    },
+    "errorMessageProps": {
+      "type": "ErrorMessageProps",
+      "required": false,
+      "description": "Props the error message component."
+    },
+    "helperMessage": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The fieldset helper message to use."
+    },
+    "helperMessageProps": {
+      "type": "HelperMessageProps",
+      "required": false,
+      "description": "Props the helper message component."
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the fieldset will be disabled."
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the fieldset will be invalid."
+    },
+    "isReadOnly": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the fieldset will be readonly."
+    },
+    "isReplace": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, switch between helper message and error message using isInvalid."
+    },
+    "isRequired": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, the fieldset will be required."
+    },
+    "legend": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false,
+      "description": "The fieldset legend to use."
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "required": false,
+      "description": "Props the label component."
+    },
+    "optionalIndicator": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false
+    },
+    "requiredIndicator": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false
+    }
+  },
+  "Legend": {
+    "isRequired": { "type": "boolean", "required": false },
+    "optionalIndicator": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false
+    },
+    "requiredIndicator": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
+      "required": false
+    }
   }
 }

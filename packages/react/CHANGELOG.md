@@ -1,5 +1,80 @@
 # @yamada-ui/react
 
+## 1.4.3
+
+### Patch Changes
+
+- Updated dependencies [[`b0fbd24`](https://github.com/yamada-ui/yamada-ui/commit/b0fbd24ed0c1bc8434c25aacee149dd64d2ab7cf), [`b1bfbf2`](https://github.com/yamada-ui/yamada-ui/commit/b1bfbf262cfd4e8df208a887c1481da21f271ced), [`fb3b444`](https://github.com/yamada-ui/yamada-ui/commit/fb3b44495b25719422945863076af0bac376a89d), [`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c), [`158643f`](https://github.com/yamada-ui/yamada-ui/commit/158643f32969d9623a4f7999a0e262c1b8943be6), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856), [`cfa72c5`](https://github.com/yamada-ui/yamada-ui/commit/cfa72c533e4a9977818f7c1b6065b36bb0b292e5), [`1f52442`](https://github.com/yamada-ui/yamada-ui/commit/1f52442fce7fa1044fb5c4829ac1bfd85cb9ed6e), [`d772f23`](https://github.com/yamada-ui/yamada-ui/commit/d772f2339b5ff6e5bfc11fb979566cd38a04df37), [`1f52442`](https://github.com/yamada-ui/yamada-ui/commit/1f52442fce7fa1044fb5c4829ac1bfd85cb9ed6e)]:
+  - @yamada-ui/radio@1.2.0
+  - @yamada-ui/theme@1.11.0
+  - @yamada-ui/slider@1.1.2
+  - @yamada-ui/form-control@2.0.0
+  - @yamada-ui/transitions@1.0.31
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/autocomplete@1.2.5
+  - @yamada-ui/accordion@2.0.0
+  - @yamada-ui/checkbox@1.1.0
+  - @yamada-ui/providers@1.1.5
+  - @yamada-ui/theme-tools@1.0.37
+  - @yamada-ui/color-picker@1.2.20
+  - @yamada-ui/editable@1.0.35
+  - @yamada-ui/file-button@1.0.37
+  - @yamada-ui/file-input@1.0.35
+  - @yamada-ui/input@1.0.35
+  - @yamada-ui/native-select@1.0.35
+  - @yamada-ui/number-input@1.1.5
+  - @yamada-ui/pin-input@1.0.34
+  - @yamada-ui/rating@1.0.32
+  - @yamada-ui/select@1.2.17
+  - @yamada-ui/textarea@1.1.22
+  - @yamada-ui/menu@1.3.4
+  - @yamada-ui/modal@1.3.1
+  - @yamada-ui/popover@1.2.4
+  - @yamada-ui/tooltip@1.1.3
+  - @yamada-ui/alert@1.0.31
+  - @yamada-ui/avatar@1.1.30
+  - @yamada-ui/badge@1.0.30
+  - @yamada-ui/breadcrumb@1.3.2
+  - @yamada-ui/button@1.0.33
+  - @yamada-ui/card@1.0.32
+  - @yamada-ui/close-button@1.0.31
+  - @yamada-ui/highlight@1.0.30
+  - @yamada-ui/icon@1.0.30
+  - @yamada-ui/image@1.0.31
+  - @yamada-ui/indicator@1.1.30
+  - @yamada-ui/infinite-scroll-area@1.1.3
+  - @yamada-ui/kbd@1.0.30
+  - @yamada-ui/layouts@1.1.27
+  - @yamada-ui/link@1.0.30
+  - @yamada-ui/list@1.0.30
+  - @yamada-ui/loading@1.1.7
+  - @yamada-ui/motion@2.0.1
+  - @yamada-ui/native-table@1.0.32
+  - @yamada-ui/notice@1.0.31
+  - @yamada-ui/pagination@1.0.31
+  - @yamada-ui/progress@1.0.31
+  - @yamada-ui/reorder@2.0.1
+  - @yamada-ui/resizable@1.1.3
+  - @yamada-ui/ripple@1.0.31
+  - @yamada-ui/scroll-area@1.0.31
+  - @yamada-ui/segmented-control@1.0.33
+  - @yamada-ui/skeleton@1.0.30
+  - @yamada-ui/snacks@1.0.23
+  - @yamada-ui/stat@1.0.28
+  - @yamada-ui/stepper@1.0.31
+  - @yamada-ui/switch@1.1.1
+  - @yamada-ui/tabs@1.0.32
+  - @yamada-ui/tag@1.0.31
+  - @yamada-ui/toggle@1.0.14
+  - @yamada-ui/typography@1.0.30
+  - @yamada-ui/visually-hidden@1.0.4
+  - @yamada-ui/use-animation@1.0.30
+  - @yamada-ui/use-breakpoint@1.4.1
+  - @yamada-ui/use-popper@1.0.30
+  - @yamada-ui/use-token@1.1.18
+  - @yamada-ui/use-value@1.1.18
+  - @yamada-ui/use-media-query@1.0.38
+
 ## 1.4.2
 
 ### Patch Changes

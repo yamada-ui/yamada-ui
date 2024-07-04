@@ -69,7 +69,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
 
               const content = textNode.value
                 .replace(startFragmentCapturedGroups.groups!.leftFragment, "")
-                .replace(endFragmentCapturedGroups.groups!.rightFlagment, "")
+                .replace(endFragmentCapturedGroups.groups!.rightFragment, "")
 
               tree.children.splice(index!, 1, {
                 ...node,

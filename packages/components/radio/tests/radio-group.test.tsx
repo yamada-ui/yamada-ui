@@ -2,7 +2,7 @@ import { a11y, render, screen, renderHook, fireEvent } from "@yamada-ui/test"
 import type { RadioItem } from "../src"
 import { Radio, RadioGroup, useRadioGroup } from "../src"
 
-describe("<RadioGroup/>", () => {
+describe("<RadioGroup />", () => {
   test("should pass a11y test", async () => {
     await a11y(
       <RadioGroup>

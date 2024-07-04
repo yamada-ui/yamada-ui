@@ -1,7 +1,7 @@
 import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Pagination } from "../src"
 
-describe("<Pagination/>", () => {
+describe("<Pagination />", () => {
   test("should pass a11y", async () => await a11y(<Pagination total={10} />))
 
   test("should render edges control button correctly", () => {

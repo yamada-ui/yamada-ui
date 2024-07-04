@@ -50,17 +50,22 @@ export const recursiveOctokit = async <T extends any = void>(
   try {
     return await callback()
   } catch (e) {
-    const isForbidden = (e as RequestError).status === 403
+    const { status, response, message } = e as RequestError
+
+    const isForbidden = status === 403
     const isRateLimitExceeded =
-      (e as RequestError).response?.headers["x-ratelimit-remaining"] === "0"
+      response?.headers["x-ratelimit-remaining"] === "0"
+    const isTimeoutError = status === 500 && message === "Connect Timeout Error"
 
     if (isForbidden && isRateLimitExceeded) {
-      const ratelimitReset =
-        (e as RequestError).response?.headers?.["x-ratelimit-reset"] ?? "0"
+      const ratelimitReset = response?.headers?.["x-ratelimit-reset"] ?? "0"
       const resetTime = parseInt(ratelimitReset) * 1000
       const waitTime = resetTime - Date.now() + 1000
 
       await wait(waitTime)
+      return await recursiveOctokit(callback)
+    } else if (isTimeoutError) {
+      await wait(3000)
       return await recursiveOctokit(callback)
     } else {
       throw e

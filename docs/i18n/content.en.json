@@ -1890,13 +1890,13 @@
     }
   },
   {
-    "title": "Use AccordionLabel",
+    "title": "Use AccordionButton",
     "type": "fragment",
-    "slug": "/components/disclosure/accordion#use-accordionlabel",
+    "slug": "/components/disclosure/accordion#use-accordionbutton",
     "hierarchy": {
       "lv1": "Accordion",
       "lv2": "Usage",
-      "lv3": "Use AccordionLabel"
+      "lv3": "Use AccordionButton"
     }
   },
   {

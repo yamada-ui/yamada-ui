@@ -45,6 +45,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import type { AutocompleteOptionProps } from "./"
 import { AutocompleteOption, AutocompleteOptionGroup } from "./"
 
+type ChangeOptions = {
+  forceUpdate?: boolean
+  runOmit?: boolean
+  runRebirth?: boolean
+}
+
 type AutocompleteBaseItem = Omit<
   AutocompleteOptionProps,
   "value" | "children"
@@ -221,8 +227,8 @@ type AutocompleteContext = Omit<
   isHit: boolean
   isEmpty: boolean
   isAllSelected: boolean
-  onChange: (newValue: string) => void
-  onChangeLabel: (newValue: string, runOmit?: boolean) => void
+  onChange: (newValue: string, options?: ChangeOptions) => void
+  onChangeLabel: (newValue: string, options?: ChangeOptions) => void
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
   inputProps: DOMAttributes
@@ -728,10 +734,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   )
 
   const onChangeLabel = useCallback(
-    (newValue: string, runOmit: boolean = true) => {
+    (newValue: string, { forceUpdate, runOmit = true }: ChangeOptions = {}) => {
       const selectedValues = getSelectedValues(newValue)
 
-      if (!selectedValues.length) return
+      if (!forceUpdate && !selectedValues.length) return
 
       setLabel((prev) => {
         if (!isMulti) {
@@ -760,7 +766,10 @@ export const useAutocomplete = <T extends string | string[] = string>({
   )
 
   const onChange = useCallback(
-    (newValue: string, runRebirth: boolean = true) => {
+    (
+      newValue: string,
+      { forceUpdate, runRebirth = true }: ChangeOptions = {},
+    ) => {
       setValue((prev) => {
         let next: T
 
@@ -787,7 +796,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
             format(node.textContent ?? "").includes(newValue),
           ).length > 0
 
-      onChangeLabel(newValue)
+      onChangeLabel(newValue, { forceUpdate })
 
       if (allowFree || isHit) setInputValue("")
 
@@ -942,7 +951,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
       if (!closeOnBlur && isHit) return
 
-      if (allowFree && !!inputValue) onChange(inputValue, false)
+      if (allowFree && !!inputValue) onChange(inputValue, { runRebirth: false })
 
       setInputValue("")
 
@@ -953,7 +962,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const onDelete = useCallback(() => {
     if (!isMulti) {
-      onChange("")
+      onChange("", { forceUpdate: true })
     } else {
       onChange(value[value.length - 1])
     }
@@ -1093,7 +1102,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     } else {
       if (prevValue.current === value) return
 
-      onChangeLabel(value, false)
+      onChangeLabel(value, { runOmit: false })
     }
   }, [isMulti, value, onChangeLabel, getSelectedValues])
 
@@ -1561,7 +1570,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
   )
 
   useUpdateEffect(() => {
-    if (isSelected) onChangeLabel(optionValue ?? "", false)
+    if (isSelected) onChangeLabel(optionValue ?? "", { runOmit: false })
   }, [optionValue])
 
   const getOptionProps: UIPropGetter<"li"> = useCallback(

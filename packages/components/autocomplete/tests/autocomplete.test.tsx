@@ -71,8 +71,8 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
 
       const groupLabels = await screen.findAllByText(/Group\d/)
-      groupLabels.forEach((g) => {
-        expect(g).toBeVisible()
+      groupLabels.forEach(async (g) => {
+        await waitFor(() => expect(g).toBeVisible())
       })
     })
 
@@ -252,8 +252,8 @@ describe("<Autocomplete />", () => {
       const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await user.click(optionElements[0])
 
-      optionElements.forEach((o) => {
-        expect(o).toBeVisible()
+      optionElements.forEach(async (o) => {
+        await waitFor(() => expect(o).toBeVisible())
       })
     })
 
@@ -275,8 +275,8 @@ describe("<Autocomplete />", () => {
       })
 
       const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-      optionElements.forEach((o) => {
-        expect(o).toBeVisible()
+      optionElements.forEach(async (o) => {
+        await waitFor(() => expect(o).toBeVisible())
       })
     })
   })

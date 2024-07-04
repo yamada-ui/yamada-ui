@@ -40,7 +40,7 @@ export const isFunction = <T extends Function = Function>(
 ): value is T => typeof value === "function"
 
 export const isUnit = (value: any): boolean =>
-  /[0-9].*[em|rem|ex|rex|cap|rcap|ch|rch|ic|ric|lh|rlh|vw|svw|lvw|dvw|vh|svh|lvh|dvh|vi|svi|lvi|dvi|vb|svb|lvb|dvb|vmin|svmin|lvmin|dvmin|vmax|svmax|lvmax|dvmax|cm|mm|Q|in|pc|pt|px|%|cqw|cqh|cqi|cqb|cqmin|cqmax]$/.test(
+  /[0-9].*(em|rem|ex|rex|cap|rcap|ch|rch|ic|ric|lh|rlh|vw|svw|lvw|dvw|vh|svh|lvh|dvh|vi|svi|lvi|dvi|vb|svb|lvb|dvb|vmin|svmin|lvmin|dvmin|vmax|svmax|lvmax|dvmax|cm|mm|Q|in|pc|pt|px|%|cqw|cqh|cqi|cqb|cqmin|cqmax)$/.test(
     value,
   )
 

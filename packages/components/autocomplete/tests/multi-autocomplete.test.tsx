@@ -1,14 +1,29 @@
 import type { AutocompleteItem } from "@yamada-ui/react"
-import { AutocompleteOption, MultiAutocomplete, Tag } from "@yamada-ui/react"
-import { fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { AutocompleteOption, MultiAutocomplete } from "@yamada-ui/react"
+import { render, screen, waitFor } from "@yamada-ui/test"
 
 describe("<MultiAutoComplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-multi-autocomplete"
   const AUTOCOMPLETE_ITEM_ROLE = "autocomplete-item"
 
   describe("renders correctly", () => {
+    const ITEMS: AutocompleteItem[] = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
     test("default", async () => {
-      const { container } = render(
+      const { user, container } = render(
         <MultiAutocomplete placeholder="Select Option">
           <AutocompleteOption value="option1">option1</AutocompleteOption>
           <AutocompleteOption value="option2">option2</AutocompleteOption>
@@ -21,16 +36,13 @@ describe("<MultiAutoComplete />", () => {
         "Select Option",
       )
 
-      const multiAutocomplete = container.querySelector(
-        ".ui-multi-autocomplete",
-      )
+      const multiAutocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       expect(multiAutocomplete).toBeInTheDocument()
 
-      fireEvent.click(multiAutocomplete!)
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole("autocomplete-item")
-        expect(optionElements).toHaveLength(3)
-      })
+      await user.click(multiAutocomplete!)
+
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      expect(optionElements).toHaveLength(3)
     })
 
     test("have default value", () => {
@@ -52,10 +64,8 @@ describe("<MultiAutoComplete />", () => {
       render(
         <MultiAutocomplete
           defaultValue={["option1"]}
-          component={({ label, onRemove }) => (
-            <Tag onClose={onRemove} role="check">
-              {label}
-            </Tag>
+          component={({ label }) => (
+            <div data-testid="label-component">{label}</div>
           )}
         >
           <AutocompleteOption value="option1">option1</AutocompleteOption>
@@ -64,8 +74,32 @@ describe("<MultiAutoComplete />", () => {
         </MultiAutocomplete>,
       )
 
-      // span is used to display the label
-      expect(screen.getByRole("check")).toBeInTheDocument()
+      expect(screen.getByTestId("label-component")).toBeInTheDocument()
+    })
+
+    test("clear button should work correctly", async () => {
+      const { user, container } = render(<MultiAutocomplete items={ITEMS} />)
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      expect(autocomplete).toBeInTheDocument()
+
+      await user.click(autocomplete!)
+
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      expect(optionElements[0]).toHaveAttribute("data-focus")
+
+      await user.keyboard("{Enter}{ArrowDown}{Enter}")
+
+      const option1Span = screen.getByText("option1,")
+      const option2Span = screen.getByText("option2,")
+      expect(option1Span).toBeInTheDocument()
+      expect(option2Span).toBeInTheDocument()
+
+      const clearButton = screen.getByRole("button", { name: "Clear value" })
+      await user.click(clearButton)
+
+      expect(option1Span).not.toBeInTheDocument()
+      expect(option2Span).not.toBeInTheDocument()
     })
   })
 
@@ -100,10 +134,10 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       expect(optionElements).toHaveLength(3)
 
-      await user.keyboard("{Escape>}{ArrowDown>}")
+      await user.keyboard("{Escape}{ArrowDown}")
       await waitFor(() =>
         expect(optionElements[2]).toHaveAttribute("data-focus"),
       )
@@ -124,10 +158,10 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       expect(optionElements).toHaveLength(3)
 
-      await user.keyboard("{Escape>}{ArrowDown>}")
+      await user.keyboard("{Escape}{ArrowDown}")
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
@@ -165,10 +199,10 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       expect(optionElements).toHaveLength(3)
 
-      await user.keyboard("{Escape>}{ArrowUp>}")
+      await user.keyboard("{Escape}{ArrowUp}")
       await waitFor(() =>
         expect(optionElements[1]).toHaveAttribute("data-focus"),
       )
@@ -189,10 +223,10 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       expect(optionElements).toHaveLength(3)
 
-      await user.keyboard("{Escape>}{ArrowUp>}")
+      await user.keyboard("{Escape}{ArrowUp}")
       await waitFor(() =>
         expect(optionElements[2]).toHaveAttribute("data-focus"),
       )
@@ -215,28 +249,6 @@ describe("<MultiAutoComplete />", () => {
       },
     ]
 
-    test("focuses item when the single item is selected", async () => {
-      const { user, container } = render(
-        <MultiAutocomplete
-          placeholder="Select Option"
-          items={ITEMS}
-          defaultValue={["option2"]}
-        />,
-      )
-
-      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      expect(autocomplete).toBeInTheDocument()
-
-      await user.click(autocomplete!)
-
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-      expect(optionElements).toHaveLength(3)
-
-      await user.keyboard("{Escape>}{ArrowUp>}")
-      await waitFor(() =>
-        expect(optionElements[1]).toHaveAttribute("data-focus"),
-      )
-    })
     test("focuses next item when set omitSelectedValues and item selected", async () => {
       const { user, container } = render(
         <MultiAutocomplete
@@ -252,7 +264,7 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await user.click(optionElements[0])
 
       await waitFor(() =>
@@ -286,11 +298,11 @@ describe("<MultiAutoComplete />", () => {
       expect(autocomplete).toBeInTheDocument()
 
       await user.click(autocomplete!)
-      await user.keyboard("{Escape>}{Enter>}")
+      await user.keyboard("{Escape}{Enter}")
 
       const inputText = "test"
       await user.keyboard(inputText)
-      await user.keyboard("{Enter>}")
+      await user.keyboard("{Enter}")
 
       const option1Span = screen.getByText("option1,")
       expect(option1Span).toBeInTheDocument()
@@ -305,23 +317,23 @@ describe("<MultiAutoComplete />", () => {
       expect(autocomplete).toBeInTheDocument()
 
       await user.click(autocomplete!)
-      await user.keyboard("{Escape>}{ArrowDown>}")
+      await user.keyboard("{Escape}{ArrowDown}")
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
 
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
       )
 
       for (let i = 1; i < ITEMS.length; i++) {
-        await user.keyboard("{ArrowDown>}")
+        await user.keyboard("{ArrowDown}")
 
         await waitFor(() =>
           expect(optionElements[i]).toHaveAttribute("data-focus"),
         )
       }
 
-      await user.keyboard("{ArrowDown>}")
+      await user.keyboard("{ArrowDown}")
 
       await waitFor(() =>
         expect(optionElements[0]).toHaveAttribute("data-focus"),
@@ -337,9 +349,9 @@ describe("<MultiAutoComplete />", () => {
       expect(autocomplete).toBeInTheDocument()
 
       await user.click(autocomplete!)
-      await user.keyboard("{Escape>}{ArrowDown>}")
+      await user.keyboard("{Escape}{ArrowDown}")
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[1]).toHaveAttribute("data-focus"),
       )
@@ -352,23 +364,23 @@ describe("<MultiAutoComplete />", () => {
       expect(autocomplete).toBeInTheDocument()
 
       await user.click(autocomplete!)
-      await user.keyboard("{Escape>}{ArrowUp>}")
+      await user.keyboard("{Escape}{ArrowUp}")
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
 
       await waitFor(() =>
         expect(optionElements[ITEMS.length - 1]).toHaveAttribute("data-focus"),
       )
 
       for (let i = ITEMS.length - 2; i >= 0; i--) {
-        await user.keyboard("{ArrowUp>}")
+        await user.keyboard("{ArrowUp}")
 
         await waitFor(() =>
           expect(optionElements[i]).toHaveAttribute("data-focus"),
         )
       }
 
-      await user.keyboard("{ArrowUp>}")
+      await user.keyboard("{ArrowUp}")
 
       await waitFor(() =>
         expect(optionElements[ITEMS.length - 1]).toHaveAttribute("data-focus"),
@@ -384,9 +396,9 @@ describe("<MultiAutoComplete />", () => {
       expect(autocomplete).toBeInTheDocument()
 
       await user.click(autocomplete!)
-      await user.keyboard("{Escape>}{ArrowUp>}")
+      await user.keyboard("{Escape}{ArrowUp}")
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       await waitFor(() =>
         expect(optionElements[1]).toHaveAttribute("data-focus"),
       )
@@ -400,46 +412,20 @@ describe("<MultiAutoComplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-      await waitFor(() =>
-        expect(optionElements[0]).toHaveAttribute("data-focus"),
-      )
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      expect(optionElements[0]).toHaveAttribute("data-focus")
 
-      await user.keyboard("{Enter>}{ArrowDown>}{Enter>}")
+      await user.keyboard("{Enter}{ArrowDown}{Enter}")
       const option1Span = screen.getByText("option1,")
       const option2Span = screen.getByText("option2,")
       expect(option1Span).toBeInTheDocument()
       expect(option2Span).toBeInTheDocument()
 
-      await user.keyboard("{Backspace>}")
+      await user.keyboard("{Backspace}")
       expect(option2Span).not.toBeInTheDocument()
 
-      await user.keyboard("{Backspace>}")
+      await user.keyboard("{Backspace}")
       expect(option1Span).not.toBeInTheDocument()
-    })
-
-    test("tab keyDown should work correctly", async () => {
-      const { user, container } = render(<MultiAutocomplete items={ITEMS} />)
-
-      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
-      expect(autocomplete).toBeInTheDocument()
-
-      await user.click(autocomplete!)
-
-      const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-      await waitFor(() =>
-        expect(optionElements[0]).toHaveAttribute("data-focus"),
-      )
-
-      await user.keyboard("{Enter>}{ArrowDown>}{Enter>}")
-      const option1Span = screen.getByText("option1,")
-      const option2Span = screen.getByText("option2,")
-      expect(option1Span).toBeInTheDocument()
-      expect(option2Span).toBeInTheDocument()
-
-      await user.keyboard("{Tab>}{Enter>}")
-      expect(option1Span).not.toBeInTheDocument()
-      expect(option2Span).not.toBeInTheDocument()
     })
   })
 
@@ -478,12 +464,12 @@ describe("<MultiAutoComplete />", () => {
 
       const input = screen.getByRole("combobox")
       await user.type(input, CREATE_OPTION_VALUE)
-      await user.keyboard("{Enter>}")
+      await user.keyboard("{Enter}")
 
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
-      })
+      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      await waitFor(() =>
+        expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE),
+      )
     })
 
     test("correct warnings should be issued when both `allowCreate` and `children` are present", () => {
@@ -521,12 +507,14 @@ describe("<MultiAutoComplete />", () => {
 
         const input = screen.getByRole("combobox")
         await user.type(input, CREATE_OPTION_VALUE)
-        await user.keyboard("{Enter>}")
+        await user.keyboard("{Enter}")
 
-        await waitFor(() => {
-          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-          expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
-        })
+        const optionElements = await screen.findAllByRole(
+          AUTOCOMPLETE_ITEM_ROLE,
+        )
+        await waitFor(() =>
+          expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE),
+        )
       })
 
       test("last", async () => {
@@ -545,14 +533,16 @@ describe("<MultiAutoComplete />", () => {
 
         const input = screen.getByRole("combobox")
         await user.type(input, CREATE_OPTION_VALUE)
-        await user.keyboard("{Enter>}")
+        await user.keyboard("{Enter}")
 
-        await waitFor(() => {
-          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+        const optionElements = await screen.findAllByRole(
+          AUTOCOMPLETE_ITEM_ROLE,
+        )
+        await waitFor(() =>
           expect(optionElements[optionElements.length - 1]).toHaveTextContent(
             CREATE_OPTION_VALUE,
-          )
-        })
+          ),
+        )
       })
 
       test("group2", async () => {
@@ -571,12 +561,14 @@ describe("<MultiAutoComplete />", () => {
 
         const input = screen.getByRole("combobox")
         await user.type(input, CREATE_OPTION_VALUE)
-        await user.keyboard("{Enter>}")
+        await user.keyboard("{Enter}")
 
-        await waitFor(() => {
-          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-          expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
-        })
+        const optionElements = await screen.findAllByRole(
+          AUTOCOMPLETE_ITEM_ROLE,
+        )
+        await waitFor(() =>
+          expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE),
+        )
       })
 
       test("group2 last", async () => {
@@ -595,12 +587,14 @@ describe("<MultiAutoComplete />", () => {
 
         const input = screen.getByRole("combobox")
         await user.type(input, CREATE_OPTION_VALUE)
-        await user.keyboard("{Enter>}")
+        await user.keyboard("{Enter}")
 
-        await waitFor(() => {
-          const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-          expect(optionElements[2]).toHaveTextContent(CREATE_OPTION_VALUE)
-        })
+        const optionElements = await screen.findAllByRole(
+          AUTOCOMPLETE_ITEM_ROLE,
+        )
+        await waitFor(() =>
+          expect(optionElements[2]).toHaveTextContent(CREATE_OPTION_VALUE),
+        )
       })
 
       test("correct warnings should be  issued when insertPosition does not exist", async () => {
@@ -623,7 +617,7 @@ describe("<MultiAutoComplete />", () => {
 
         const input = screen.getByRole("combobox")
         await user.type(input, CREATE_OPTION_VALUE)
-        await user.keyboard("{Enter>}")
+        await user.keyboard("{Enter}")
 
         await waitFor(() => expect(consoleWarnSpy).toHaveBeenCalledOnce())
 
@@ -669,7 +663,7 @@ describe("<MultiAutoComplete />", () => {
 
       const input = screen.getByRole("combobox")
       await user.type(input, CREATE_OPTION_VALUE)
-      await user.keyboard("{Enter>}")
+      await user.keyboard("{Enter}")
 
       const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
       expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)

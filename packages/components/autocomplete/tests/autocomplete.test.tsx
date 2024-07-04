@@ -552,7 +552,7 @@ describe("<Autocomplete />", () => {
       await waitFor(() => expect(input).toHaveValue("option1"))
 
       await user.keyboard("{Backspace>}")
-      await waitFor(() => expect(input).not.toHaveValue(""))
+      await waitFor(() => expect(input).not.toHaveValue())
     })
   })
 

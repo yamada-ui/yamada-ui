@@ -290,7 +290,7 @@ describe("<PieChart />", () => {
     }
   })
 
-  test("render valueFormatter", async () => {
+  test("should be rendered valueFormatter", async () => {
     const { container } = render(
       <PieChart
         containerProps={{ width: 400, height: "80%" }}

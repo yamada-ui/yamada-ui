@@ -1,8 +1,8 @@
 ---
 title: FormControl
 description: >-
-  `FormControl` is a component used to group form elements with labels, help
-  messages, error messages, etc.
+  `FormControl` is a component used to group form elements with label, helper
+  message, error message, etc.
 package_name: "@yamada-ui/form-control"
 with_description: true
 tab: Theming
@@ -40,11 +40,13 @@ export const FormControl: ComponentMultiStyle = {
       color: ["danger.500", "danger.400"],
     },
     helperMessage: {
+      display: "block",
       mt: "2",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "sm",
     },
     errorMessage: {
+      display: "block",
       mt: "2",
       color: ["danger.500", "danger.400"],
       fontSize: "sm",

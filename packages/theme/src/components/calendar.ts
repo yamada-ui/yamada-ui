@@ -142,13 +142,13 @@ export const Calendar: ComponentMultiStyle = {
           _between: {
             bg: ["initial", "initial"],
           },
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
           _selected: {
             bg: isGray(c)
               ? [`${c}.100`, `${c}.700`]
               : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          },
-          _disabled: {
-            bg: ["initial", "initial"],
           },
         },
         _today: {
@@ -208,14 +208,14 @@ export const Calendar: ComponentMultiStyle = {
           _between: {
             bg: ["initial", "initial"],
           },
+          _disabled: {
+            bg: ["initial", "initial"],
+          },
           _selected: {
             bg: [
               isGray(c) ? `${c}.50` : `${c}.100`,
               shadeColor(`${c}.300`, 58)(t, m),
             ],
-          },
-          _disabled: {
-            bg: ["initial", "initial"],
           },
         },
         _today: {

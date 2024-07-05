@@ -1,5 +1,28 @@
 # @yamada-ui/nextjs
 
+## 6.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`95ca0f7`](https://github.com/yamada-ui/yamada-ui/commit/95ca0f793140995375bfad6807df834053ae2b7e), [`271920d`](https://github.com/yamada-ui/yamada-ui/commit/271920d1ae5fb1a59cdbd643a5dcc39452143363), [`930cd92`](https://github.com/yamada-ui/yamada-ui/commit/930cd9202126e0b7dbfcce8796123c0ac778c1b4), [`18074ce`](https://github.com/yamada-ui/yamada-ui/commit/18074cefa19fe9d4bc26455f17fa33412ac1e4d3)]:
+  - @yamada-ui/utils@1.3.1
+  - @yamada-ui/core@1.9.1
+
+## 6.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/core@1.9.0
+
+## 6.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+
 ## 6.0.3
 
 ### Patch Changes

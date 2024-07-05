@@ -51,6 +51,11 @@
       "required": false,
       "description": "Props for autocomplete container element."
     },
+    "createProps": {
+      "type": "Omit<AutocompleteCreateProps, \"children\">",
+      "required": false,
+      "description": "Props for autocomplete create element."
+    },
     "defaultIsOpen": {
       "type": "boolean",
       "required": false,
@@ -71,6 +76,11 @@
       "defaultValue": "'No results found'",
       "required": false,
       "description": "The message displayed when the search yields no hits."
+    },
+    "emptyProps": {
+      "type": "Omit<AutocompleteEmptyProps, \"children\">",
+      "required": false,
+      "description": "Props for autocomplete empty element."
     },
     "errorBorderColor": {
       "type": "string",
@@ -379,6 +389,11 @@
       "required": false,
       "description": "Props for multi autocomplete container element."
     },
+    "createProps": {
+      "type": "Omit<AutocompleteCreateProps, \"children\">",
+      "required": false,
+      "description": "Props for autocomplete create element."
+    },
     "defaultIsOpen": {
       "type": "boolean",
       "required": false,
@@ -399,6 +414,11 @@
       "defaultValue": "'No results found'",
       "required": false,
       "description": "The message displayed when the search yields no hits."
+    },
+    "emptyProps": {
+      "type": "Omit<AutocompleteEmptyProps, \"children\">",
+      "required": false,
+      "description": "Props for autocomplete empty element."
     },
     "errorBorderColor": {
       "type": "string",

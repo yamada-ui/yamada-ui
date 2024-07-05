@@ -1,5 +1,59 @@
 # @yamada-ui/autocomplete
 
+## 1.2.6
+
+### Patch Changes
+
+- [#2207](https://github.com/yamada-ui/yamada-ui/pull/2207) [`7e8db87`](https://github.com/yamada-ui/yamada-ui/commit/7e8db87f350a5ca4c038fdaefafb5602056a083c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `items` in `Autocomplete` were not
+  updated even if the provided `items` were updated.
+
+- [#2220](https://github.com/yamada-ui/yamada-ui/pull/2220) [`8a87b56`](https://github.com/yamada-ui/yamada-ui/commit/8a87b56dfbb743466cbc51c36eb3de9e3147fe73) Thanks [@Shunii85](https://github.com/Shunii85)! - add if statements for resolving issue2179
+
+- Updated dependencies [[`95ca0f7`](https://github.com/yamada-ui/yamada-ui/commit/95ca0f793140995375bfad6807df834053ae2b7e), [`271920d`](https://github.com/yamada-ui/yamada-ui/commit/271920d1ae5fb1a59cdbd643a5dcc39452143363), [`930cd92`](https://github.com/yamada-ui/yamada-ui/commit/930cd9202126e0b7dbfcce8796123c0ac778c1b4), [`18074ce`](https://github.com/yamada-ui/yamada-ui/commit/18074cefa19fe9d4bc26455f17fa33412ac1e4d3)]:
+  - @yamada-ui/utils@1.3.1
+  - @yamada-ui/form-control@2.0.1
+  - @yamada-ui/icon@1.0.31
+  - @yamada-ui/motion@2.0.2
+  - @yamada-ui/popover@1.2.5
+  - @yamada-ui/portal@1.0.17
+  - @yamada-ui/core@1.9.1
+  - @yamada-ui/use-clickable@1.2.4
+  - @yamada-ui/use-controllable-state@1.0.16
+  - @yamada-ui/use-descendant@1.0.17
+  - @yamada-ui/use-disclosure@1.0.16
+  - @yamada-ui/use-outside-click@1.0.16
+
+## 1.2.5
+
+### Patch Changes
+
+- [#2172](https://github.com/yamada-ui/yamada-ui/pull/2172) [`cfa72c5`](https://github.com/yamada-ui/yamada-ui/commit/cfa72c533e4a9977818f7c1b6065b36bb0b292e5) Thanks [@k-wakamatsu-tms](https://github.com/k-wakamatsu-tms)! - Added `AutocompleteCreateProps` and `AutocompleteEmptyProps`
+
+- Updated dependencies [[`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/form-control@2.0.0
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/popover@1.2.4
+  - @yamada-ui/icon@1.0.30
+  - @yamada-ui/motion@2.0.1
+
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`7327145`](https://github.com/yamada-ui/yamada-ui/commit/73271452091f90c45eabd01424053e811f9cd5ae), [`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`28a276f`](https://github.com/yamada-ui/yamada-ui/commit/28a276fc7c11bce28424e763a0f5fba8b5fd8fd0), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/use-clickable@1.2.3
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+  - @yamada-ui/motion@2.0.0
+  - @yamada-ui/form-control@1.1.4
+  - @yamada-ui/icon@1.0.29
+  - @yamada-ui/popover@1.2.3
+  - @yamada-ui/portal@1.0.16
+  - @yamada-ui/use-controllable-state@1.0.15
+  - @yamada-ui/use-descendant@1.0.16
+  - @yamada-ui/use-disclosure@1.0.15
+  - @yamada-ui/use-outside-click@1.0.15
+
 ## 1.2.3
 
 ### Patch Changes

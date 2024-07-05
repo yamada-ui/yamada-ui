@@ -1,5 +1,42 @@
 # @yamada-ui/radio
 
+## 1.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`95ca0f7`](https://github.com/yamada-ui/yamada-ui/commit/95ca0f793140995375bfad6807df834053ae2b7e), [`271920d`](https://github.com/yamada-ui/yamada-ui/commit/271920d1ae5fb1a59cdbd643a5dcc39452143363), [`930cd92`](https://github.com/yamada-ui/yamada-ui/commit/930cd9202126e0b7dbfcce8796123c0ac778c1b4), [`18074ce`](https://github.com/yamada-ui/yamada-ui/commit/18074cefa19fe9d4bc26455f17fa33412ac1e4d3)]:
+  - @yamada-ui/utils@1.3.1
+  - @yamada-ui/form-control@2.0.1
+  - @yamada-ui/layouts@1.1.28
+  - @yamada-ui/core@1.9.1
+  - @yamada-ui/use-controllable-state@1.0.16
+  - @yamada-ui/use-focus-visible@1.1.3
+
+## 1.2.0
+
+### Minor Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`b0fbd24`](https://github.com/yamada-ui/yamada-ui/commit/b0fbd24ed0c1bc8434c25aacee149dd64d2ab7cf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance `RadioGroup` and `Radio` accessibility.
+
+### Patch Changes
+
+- Updated dependencies [[`48d322e`](https://github.com/yamada-ui/yamada-ui/commit/48d322e1e64b7b385cea01f13bc1a367f6a3df6c), [`98bf410`](https://github.com/yamada-ui/yamada-ui/commit/98bf410695434f9c76da4e9f9635dcbfde5b9856)]:
+  - @yamada-ui/form-control@2.0.0
+  - @yamada-ui/core@1.9.0
+  - @yamada-ui/layouts@1.1.27
+
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`f10ae87`](https://github.com/yamada-ui/yamada-ui/commit/f10ae8763e87a5c45181d9c99c173c399a048a3b), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`851cb33`](https://github.com/yamada-ui/yamada-ui/commit/851cb3313f939b3b2e85edddab60f79bade2e981), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/core@1.8.0
+  - @yamada-ui/form-control@1.1.4
+  - @yamada-ui/layouts@1.1.26
+  - @yamada-ui/use-controllable-state@1.0.15
+  - @yamada-ui/use-focus-visible@1.1.2
+
 ## 1.1.0
 
 ### Minor Changes

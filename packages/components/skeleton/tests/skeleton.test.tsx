@@ -3,14 +3,13 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "../src"
 
 describe("<Skeleton />", () => {
   test("Skeleton renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <>
         <Skeleton />
         <SkeletonCircle />
         <SkeletonText />
       </>,
     )
-    await a11y(container)
   })
 
   test("should render with given props", () => {
@@ -30,5 +29,13 @@ describe("<Skeleton />", () => {
     expect(screen.getByTestId("Skeleton")).toBeInTheDocument()
     expect(screen.getByTestId("SkeletonCircle")).toBeInTheDocument()
     expect(screen.getByTestId("SkeletonText")).toBeInTheDocument()
+  })
+  test("should render with isLoaded", () => {
+    render(
+      <>
+        <Skeleton data-testid="Skeleton" isLoaded />
+      </>,
+    )
+    expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
   })
 })

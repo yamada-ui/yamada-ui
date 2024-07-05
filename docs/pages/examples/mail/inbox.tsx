@@ -1,5 +1,4 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
+import { Search } from "@yamada-ui/lucide"
 import {
   Box,
   Card,
@@ -67,7 +66,7 @@ export const Inbox: FC<Props> = memo(
           <Box p="sm">
             <InputGroup>
               <InputLeftElement>
-                <FontAwesomeIcon icon={faSearch} />
+                <Search />
               </InputLeftElement>
 
               <Input placeholder="Search" />

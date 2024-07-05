@@ -15,7 +15,6 @@ import {
 import type {
   Dispatch,
   FC,
-  FocusEvent,
   KeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
@@ -29,7 +28,7 @@ import { useMenu, useMenuDescendant } from "./menu"
 
 type UpstreamMenuItemContext = {
   onUpstreamRestoreFocus: () => void
-  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLButtonElement>>
+  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLLIElement>>
   setDownstreamOpen: Dispatch<SetStateAction<boolean>>
   hasDownstreamRef: MutableRefObject<boolean>
 }
@@ -43,7 +42,7 @@ export const [UpstreamMenuItemProvider, useUpstreamMenuItem] =
 const isTargetMenuItem = (target: EventTarget | null) => {
   return (
     isHTMLElement(target) &&
-    !!target?.getAttribute("role")?.startsWith("menu-item")
+    !!target?.getAttribute("role")?.startsWith("menuitem")
   )
 }
 
@@ -76,26 +75,18 @@ type MenuItemOptions = {
   command?: string
 }
 
-export type MenuItemProps = HTMLUIProps<"button"> & MenuItemOptions
+export type MenuItemProps = HTMLUIProps<"li"> & MenuItemOptions
 
-export const MenuItem = forwardRef<MenuItemProps, "button">(
+export const MenuItem = forwardRef<MenuItemProps, "li">(
   (
     {
-      as,
       className,
-      type,
       isDisabled,
       isFocusable,
       closeOnSelect: customCloseOnSelect,
       icon,
       command,
       children,
-      onClick: onClickProp,
-      onFocus: onFocusProp,
-      onMouseEnter: onMouseEnterProp,
-      onMouseMove: onMouseMoveProp,
-      onMouseLeave: onMouseLeaveProp,
-      onKeyDown: onKeyDownProp,
       ...props
     },
     ref,
@@ -116,9 +107,9 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
     const trulyDisabled = isDisabled && !isFocusable
 
-    const buttonRef = useRef<HTMLButtonElement>(null)
+    const itemRef = useRef<HTMLLIElement>(null)
     const hasDownstreamRef = useRef<boolean>(false)
-    const onKeyDownRef = useRef<KeyboardEventHandler<HTMLButtonElement>>(
+    const onKeyDownRef = useRef<KeyboardEventHandler<HTMLLIElement>>(
       () => void 0,
     )
     const { index, register } = useMenuDescendant({ disabled: trulyDisabled })
@@ -126,42 +117,20 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
     const isFocused = index === focusedIndex
 
-    const onMouseEnter = useCallback(
-      (event: any) => {
-        onMouseEnterProp?.(event)
+    const onMouseOver = useCallback(() => {
+      if (isDisabled) return
 
-        if (isDisabled) return
+      setFocusedIndex(index)
+    }, [index, isDisabled, setFocusedIndex])
 
-        setFocusedIndex(index)
-      },
-      [setFocusedIndex, index, isDisabled, onMouseEnterProp],
-    )
+    const onMouseLeave = useCallback(() => {
+      if (isDisabled) return
 
-    const onMouseMove = useCallback(
-      (event: any) => {
-        onMouseMoveProp?.(event)
-
-        if (buttonRef.current && !isActiveElement(buttonRef.current))
-          onMouseEnter(event)
-      },
-      [onMouseEnter, onMouseMoveProp],
-    )
-
-    const onMouseLeave = useCallback(
-      (event: any) => {
-        onMouseLeaveProp?.(event)
-
-        if (isDisabled) return
-
-        setFocusedIndex(-1)
-      },
-      [setFocusedIndex, isDisabled, onMouseLeaveProp],
-    )
+      setFocusedIndex(-1)
+    }, [setFocusedIndex, isDisabled])
 
     const onClick = useCallback(
-      (ev: MouseEvent<HTMLButtonElement>) => {
-        onClickProp?.(ev)
-
+      (ev: MouseEvent<HTMLLIElement>) => {
         if (!isTargetMenuItem(ev.currentTarget)) return
 
         const hasDownstream = hasDownstreamRef.current
@@ -171,34 +140,21 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
           onUpstreamClose?.()
         }
       },
-      [
-        onClickProp,
-        customCloseOnSelect,
-        generalCloseOnSelect,
-        onClose,
-        onUpstreamClose,
-      ],
+      [customCloseOnSelect, generalCloseOnSelect, onClose, onUpstreamClose],
     )
 
-    const onFocus = useCallback(
-      (ev: FocusEvent<HTMLButtonElement>) => {
-        onFocusProp?.(ev)
-
-        setFocusedIndex(index)
-      },
-      [onFocusProp, setFocusedIndex, index],
-    )
+    const onFocus = useCallback(() => {
+      setFocusedIndex(index)
+    }, [setFocusedIndex, index])
 
     const onRestoreFocus = useCallback(() => {
-      buttonRef.current?.focus()
+      itemRef.current?.focus()
 
       setFocusedIndex(index)
     }, [setFocusedIndex, index])
 
     const onKeyDown = useCallback(
-      (ev: KeyboardEvent<HTMLButtonElement>) => {
-        onKeyDownProp?.(ev)
-
+      (ev: KeyboardEvent<HTMLLIElement>) => {
         const actions: Record<string, Function | undefined> = {
           ArrowLeft: isNested
             ? funcAll(onUpstreamRestoreFocus, onClose)
@@ -214,19 +170,18 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
         action()
       },
-      [onKeyDownProp, onUpstreamRestoreFocus, onClose, isNested],
+      [onUpstreamRestoreFocus, onClose, isNested],
     )
 
-    const rest = useClickable<HTMLButtonElement>({
+    const rest = useClickable<HTMLLIElement>({
       focusOnClick: false,
       ...props,
-      onClick,
-      onFocus,
-      onMouseEnter,
-      onMouseMove,
-      onMouseLeave,
-      onKeyDown: handlerAll(onKeyDown, onKeyDownRef.current),
-      ref: mergeRefs(register, buttonRef, ref),
+      onClick: handlerAll(props.onClick, onClick),
+      onFocus: handlerAll(props.onFocus, onFocus),
+      onMouseOver: handlerAll(props.onMouseOver, onMouseOver),
+      onMouseLeave: handlerAll(props.onMouseLeave, onMouseLeave),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown, onKeyDownRef.current),
+      ref: mergeRefs(register, itemRef, ref),
       isDisabled,
       isFocusable,
     })
@@ -236,11 +191,11 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
 
       const id = requestAnimationFrameId.current
 
-      if (isFocused && !trulyDisabled && buttonRef.current) {
+      if (isFocused && !trulyDisabled && itemRef.current) {
         if (id) cancelAnimationFrame(id)
 
         requestAnimationFrameId.current = requestAnimationFrame(() => {
-          buttonRef.current?.focus({ preventScroll: true })
+          itemRef.current?.focus({ preventScroll: true })
 
           requestAnimationFrameId.current = null
         })
@@ -252,8 +207,6 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
         if (id) cancelAnimationFrame(id)
       }
     }, [isFocused, trulyDisabled, menuRef, isOpen])
-
-    type = as || type ? type ?? undefined : "button"
 
     children =
       icon || command ? (
@@ -276,9 +229,7 @@ export const MenuItem = forwardRef<MenuItemProps, "button">(
         <ui.li
           {...rest}
           {...(isDownstreamOpen ? { "data-active": "" } : {})}
-          as={as}
-          type={type}
-          role="menu-item"
+          role="menuitem"
           tabIndex={isFocused ? 0 : -1}
           className={cx("ui-menu__item", className)}
           __css={css}

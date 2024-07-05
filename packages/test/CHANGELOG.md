@@ -1,5 +1,37 @@
 # @yamada-ui/test
 
+## 1.3.1
+
+### Patch Changes
+
+- [#2229](https://github.com/yamada-ui/yamada-ui/pull/2229) [`f758b6f`](https://github.com/yamada-ui/yamada-ui/commit/f758b6fe7ae8af633a807604471298ad8f4ff251) Thanks [@koralle](https://github.com/koralle)! - Export `waitForElementToBeRemoved`
+
+- Updated dependencies [[`95ca0f7`](https://github.com/yamada-ui/yamada-ui/commit/95ca0f793140995375bfad6807df834053ae2b7e), [`271920d`](https://github.com/yamada-ui/yamada-ui/commit/271920d1ae5fb1a59cdbd643a5dcc39452143363), [`58011b2`](https://github.com/yamada-ui/yamada-ui/commit/58011b25b01238493e57c04617bd819882362f70), [`4b131a1`](https://github.com/yamada-ui/yamada-ui/commit/4b131a17c4641dc9d28388af9b37ba466773dc62), [`930cd92`](https://github.com/yamada-ui/yamada-ui/commit/930cd9202126e0b7dbfcce8796123c0ac778c1b4), [`18074ce`](https://github.com/yamada-ui/yamada-ui/commit/18074cefa19fe9d4bc26455f17fa33412ac1e4d3)]:
+  - @yamada-ui/utils@1.3.1
+  - @yamada-ui/theme@1.12.0
+  - @yamada-ui/providers@1.1.6
+
+## 1.3.0
+
+### Minor Changes
+
+- [#2152](https://github.com/yamada-ui/yamada-ui/pull/2152) [`0020da9`](https://github.com/yamada-ui/yamada-ui/commit/0020da9a5175570a9430fbbc6a3496f635d4f1e0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `filterVisuallyHidden` function.
+
+### Patch Changes
+
+- Updated dependencies [[`b1bfbf2`](https://github.com/yamada-ui/yamada-ui/commit/b1bfbf262cfd4e8df208a887c1481da21f271ced), [`1f52442`](https://github.com/yamada-ui/yamada-ui/commit/1f52442fce7fa1044fb5c4829ac1bfd85cb9ed6e)]:
+  - @yamada-ui/theme@1.11.0
+  - @yamada-ui/providers@1.1.5
+
+## 1.2.5
+
+### Patch Changes
+
+- Updated dependencies [[`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21), [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b), [`1742e75`](https://github.com/yamada-ui/yamada-ui/commit/1742e7539072e63032744c794ebea17ca5383291), [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053)]:
+  - @yamada-ui/utils@1.3.0
+  - @yamada-ui/theme@1.10.0
+  - @yamada-ui/providers@1.1.4
+
 ## 1.2.4
 
 ### Patch Changes

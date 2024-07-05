@@ -210,10 +210,38 @@ tab: Props
 />
 
 <PropsCard
+  id="barchart-xaxislabel"
+  name="xAxisLabel"
+  type="string"
+  description={"A label to display below the X axis."}
+/>
+
+<PropsCard
+  id="barchart-xaxislabelprops"
+  name="xAxisLabelProps"
+  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  description={"Props passed down to recharts 'XAxisLabel' component."}
+/>
+
+<PropsCard
   id="barchart-xaxisprops"
   name="xAxisProps"
   type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
   description={"Props passed down to recharts 'XAxis' component."}
+/>
+
+<PropsCard
+  id="barchart-yaxislabel"
+  name="yAxisLabel"
+  type="string"
+  description={"A label to display below the Y axis."}
+/>
+
+<PropsCard
+  id="barchart-yaxislabelprops"
+  name="yAxisLabelProps"
+  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  description={"Props passed down to recharts 'YAxisLabel' component."}
 />
 
 <PropsCard
@@ -228,19 +256,19 @@ tab: Props
 <PropsCard
   id="bar-activebar"
   name="activeBar"
-  type='Omit<SVGProps<SVGPathElement>, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | ... 58 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type='Omit<SVGProps<SVGPathElement>, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps'
 />
 
 <PropsCard
   id="bar-background"
   name="background"
-  type='Omit<SVGProps<SVGPathElement>, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | ... 58 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type='Omit<SVGProps<SVGPathElement>, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps'
 />
 
 <PropsCard
   id="bar-color"
   name="color"
-  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
 />
 
 <PropsCard

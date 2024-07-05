@@ -1,6 +1,6 @@
 ---
 title: FormControl
-description: "`FormControl` is a component used to group form elements with labels, help messages, error messages, etc."
+description: "`FormControl` is a component used to group form elements with label, helper message, error message, etc."
 package_name: "@yamada-ui/form-control"
 is_tabs: true
 with_description: true
@@ -18,7 +18,7 @@ import {
 } from "@yamada-ui/react"
 ```
 
-- `FormControl`: A wrapper component that controls child elements (`Label`, `helperMessage`, `ErrorMessage`).
+- `FormControl`: A wrapper component that controls child elements (`Label`, `HelperMessage`, `ErrorMessage`).
 - `Label`: A component for labels used in form sections. `htmlFor` is automatically assigned to child elements.
 - `HelperMessage`: A component that displays a description for a form section.
 - `ErrorMessage`: A component displayed when an error occurs.
@@ -158,7 +158,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
     isRequired
     label="Email address"
     requiredIndicator={
-      <Tag colorScheme="red" ms={1}>
+      <Tag size="sm" colorScheme="red" ms={2}>
         required
       </Tag>
     }
@@ -169,7 +169,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
   <FormControl isRequired>
     <Label
       requiredIndicator={
-        <Tag colorScheme="red" ms={1}>
+        <Tag size="sm" colorScheme="red" ms={2}>
           required
         </Tag>
       }
@@ -190,7 +190,7 @@ To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
   <FormControl
     label="Email address"
     optionalIndicator={
-      <Tag colorScheme="primary" ms={1}>
+      <Tag size="sm" colorScheme="primary" ms={2}>
         optional
       </Tag>
     }
@@ -201,7 +201,7 @@ To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
   <FormControl>
     <Label
       optionalIndicator={
-        <Tag colorScheme="primary" ms={1}>
+        <Tag size="sm" colorScheme="primary" ms={2}>
           optional
         </Tag>
       }

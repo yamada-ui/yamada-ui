@@ -7,6 +7,7 @@ import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import { prettier } from "libs/prettier"
+import { getConstant } from "./utils"
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>
@@ -19,10 +20,21 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 type Contributors =
   RestEndpointMethodTypes["repos"]["listContributors"]["response"]["data"]
 
-const DIST_PATH = path.join("constant", "contributors.ts")
 const REPO_REQUEST_PARAMETERS = {
   owner: "yamada-ui",
   repo: "yamada-ui",
+}
+
+const getTeam: p.RequiredRunner = () => async (_, s) => {
+  s.start(`Getting the Yamada UI team`)
+
+  const constant = await getConstant()
+
+  s.stop(`Got the Yamada UI team`)
+
+  const { maintainers, members } = constant
+
+  return { maintainers, members }
 }
 
 const getContributors: p.RequiredRunner = () => async (_, s) => {
@@ -52,25 +64,47 @@ const getContributors: p.RequiredRunner = () => async (_, s) => {
   return contributors
 }
 
+const writeTeam: p.RequiredRunner =
+  (maintainers: any, members: any) => async (_, s) => {
+    let distPath = path.join("constant", "maintainers.ts")
+
+    s.start(`Writing file "${distPath}"`)
+
+    let data = `export const MAINTAINERS = ${JSON.stringify(maintainers)}`
+
+    data = await prettier(data, { parser: "typescript" })
+
+    await writeFile(distPath, data)
+
+    s.stop(`Wrote file "${distPath}"`)
+
+    distPath = path.join("constant", "members.ts")
+
+    s.start(`Writing file "${distPath}"`)
+
+    data = `export const MEMBERS = ${JSON.stringify(members)}`
+
+    data = await prettier(data, { parser: "typescript" })
+
+    await writeFile(distPath, data)
+
+    s.stop(`Wrote file "${distPath}"`)
+  }
+
 const writeContributors: p.RequiredRunner =
   (contributors: Contributors) => async (_, s) => {
-    s.start(`Writing file "${DIST_PATH}"`)
+    const distPath = path.join("constant", "contributors.ts")
 
-    const team = [
-      ...CONSTANT.TEAM.MAINTAINERS.map(({ id }) => id),
-      ...CONSTANT.TEAM.MEMBERS.map(({ id }) => id),
-    ]
+    s.start(`Writing file "${distPath}"`)
 
-    const resolvedContributors = contributors
-      .filter(
-        ({ login, type }) => type === "User" && login && !team.includes(login),
-      )
-      .map(({ id, login, avatar_url, html_url }) => ({
+    const resolvedContributors = contributors.map(
+      ({ id, login, avatar_url, html_url }) => ({
         id,
         name: login,
         icon: avatar_url,
         url: html_url,
-      }))
+      }),
+    )
 
     let data = `export const CONTRIBUTORS = ${JSON.stringify(
       resolvedContributors,
@@ -78,9 +112,9 @@ const writeContributors: p.RequiredRunner =
 
     data = await prettier(data, { parser: "typescript" })
 
-    await writeFile(DIST_PATH, data)
+    await writeFile(distPath, data)
 
-    s.stop(`Wrote file "${DIST_PATH}"`)
+    s.stop(`Wrote file "${distPath}"`)
   }
 
 const main = async () => {
@@ -91,9 +125,18 @@ const main = async () => {
   try {
     const start = process.hrtime.bigint()
 
-    const contributors = await getContributors()(p, s)
+    const { maintainers, members } = await getTeam()(p, s)
+    const contributors: Contributors = await getContributors()(p, s)
 
-    await writeContributors(contributors)(p, s)
+    const omitIds: string[] = [...maintainers, ...members].map(
+      ({ github }) => github.id,
+    )
+    const omittedContributors = contributors.filter(
+      ({ type, login }) => type === "User" && login && !omitIds.includes(login),
+    )
+
+    await writeTeam(maintainers, members)(p, s)
+    await writeContributors(omittedContributors)(p, s)
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

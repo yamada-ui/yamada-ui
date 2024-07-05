@@ -1,4 +1,9 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  ComponentArgs,
+  HTMLUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { HTMLMotionProps } from "@yamada-ui/motion"
 import { MotionReorder } from "@yamada-ui/motion"
@@ -9,6 +14,7 @@ import {
   handlerAll,
   useUpdateEffect,
 } from "@yamada-ui/utils"
+import type { ForwardedRef } from "react"
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 import { ReorderItem, type ReorderItemProps } from "./reorder-item"
 
@@ -23,9 +29,9 @@ export const [ReorderProvider, useReorderContext] =
     errorMessage: `useReorderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Reorder />"`,
   })
 
-export type ReorderGenerateItem = ReorderItemProps
+export type ReorderGenerateItem<Y extends any = string> = ReorderItemProps<Y>
 
-type ReorderOptions = {
+type ReorderOptions<Y extends any = string> = {
   /**
    * The orientation of the reorder.
    *
@@ -40,22 +46,25 @@ type ReorderOptions = {
   /**
    * The callback invoked when reorder items are moved.
    */
-  onChange?: (labels: (string | number)[]) => void
+  onChange?: (values: Y[]) => void
   /**
    * The callback invoked when the movement of reorder items is completed.
    */
-  onCompleteChange?: (labels: (string | number)[]) => void
+  onCompleteChange?: (values: Y[]) => void
 }
 
-export type ReorderProps = Omit<HTMLUIProps<"ul">, "as" | "onChange"> &
+export type ReorderProps<Y extends any = string> = Omit<
+  HTMLUIProps<"ul">,
+  "as" | "onChange"
+> &
   Omit<HTMLMotionProps<"ul">, "as" | "onChange"> &
   ThemeProps<"Reorder"> &
-  ReorderOptions
+  ReorderOptions<Y>
 
-const omitDuplicated = (values: (string | number)[]): (string | number)[] =>
+const omitDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
   Array.from(new Set(values))
 
-const pickDuplicated = (values: (string | number)[]): (string | number)[] =>
+const pickDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
   values.filter(
     (value, index, self) =>
       self.indexOf(value) === index && index !== self.lastIndexOf(value),
@@ -66,8 +75,11 @@ const pickDuplicated = (values: (string | number)[]): (string | number)[] =>
  *
  * @see Docs https://yamada-ui.com/components/data-display/reorder
  */
-export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
-  (props, ref) => {
+export const Reorder = forwardRef(
+  <Y extends any = string>(
+    props: ReorderProps<Y>,
+    ref: ForwardedRef<HTMLUListElement>,
+  ) => {
     const [styles, mergedProps] = useMultiComponentStyle("Reorder", props)
     const {
       className,
@@ -87,27 +99,27 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
 
     const defaultValues = useMemo(() => {
       const values = hasChildren
-        ? validChildren.map(({ props }) => props.label)
-        : items.map(({ label }) => label)
+        ? validChildren.map(({ props }) => props.value)
+        : items.map(({ value }) => value)
 
       const duplicatedValues = pickDuplicated(values)
 
       if (duplicatedValues.length)
         console.warn(
-          `Reorder: 'label' of 'ReorderItem' must not be duplicated. duplicate 'label' is '${duplicatedValues.join(
+          `Reorder: 'value' of 'ReorderItem' must not be duplicated. duplicate 'value' is '${duplicatedValues.join(
             `', '`,
           )}' `,
         )
 
       return omitDuplicated(values)
     }, [hasChildren, validChildren, items])
-    const prevDefaultValues = useRef<(string | number)[]>(defaultValues)
+    const prevDefaultValues = useRef<Y[]>(defaultValues)
 
-    const [values, setValues] = useState<(string | number)[]>(defaultValues)
-    const prevValues = useRef<(string | number)[]>(defaultValues)
+    const [values, setValues] = useState<Y[]>(defaultValues)
+    const prevValues = useRef<Y[]>(defaultValues)
 
     const onReorder = useCallback(
-      (newValues: (string | number)[]) => {
+      (newValues: Y[]) => {
         setValues(newValues)
 
         onChange?.(newValues)
@@ -143,11 +155,11 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
       () =>
         values.map((value) => {
           if (hasChildren) {
-            return validChildren.find(({ props }) => props.label === value)
+            return validChildren.find(({ props }) => props.value === value)
           } else {
-            const props = items.find(({ label }) => label === value)
+            const props = items.find(({ value }) => value === value)
 
-            return props ? <ReorderItem key={props.label} {...props} /> : null
+            return props ? <ReorderItem key={props.value} {...props} /> : null
           }
         }),
       [values, hasChildren, validChildren, items],
@@ -163,7 +175,7 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
       <ReorderProvider value={{ orientation, styles }}>
         <ui.ul
           ref={ref}
-          as={MotionReorder.Group}
+          as={MotionReorder.Group<Y>}
           className={cx("ui-reorder", className)}
           axis={axis}
           values={values}
@@ -178,6 +190,10 @@ export const Reorder = forwardRef<HTMLUListElement, ReorderProps>(
       </ReorderProvider>
     )
   },
-)
+) as {
+  <Y extends any = string>(
+    props: ReorderProps<Y> & { ref?: ForwardedRef<HTMLUListElement> },
+  ): JSX.Element
+} & ComponentArgs
 
 Reorder.displayName = "Reorder"

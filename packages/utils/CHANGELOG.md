@@ -1,5 +1,27 @@
 # @yamada-ui/utils
 
+## 1.3.1
+
+### Patch Changes
+
+- [#2206](https://github.com/yamada-ui/yamada-ui/pull/2206) [`95ca0f7`](https://github.com/yamada-ui/yamada-ui/commit/95ca0f793140995375bfad6807df834053ae2b7e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the type definition of `StringLiteral`.
+
+- [#2235](https://github.com/yamada-ui/yamada-ui/pull/2235) [`271920d`](https://github.com/yamada-ui/yamada-ui/commit/271920d1ae5fb1a59cdbd643a5dcc39452143363) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `isUnit` was not being determined correctly.
+
+- [#2205](https://github.com/yamada-ui/yamada-ui/pull/2205) [`930cd92`](https://github.com/yamada-ui/yamada-ui/commit/930cd9202126e0b7dbfcce8796123c0ac778c1b4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the path specified by `getObject` could not be obtained correctly.
+
+- [#2218](https://github.com/yamada-ui/yamada-ui/pull/2218) [`18074ce`](https://github.com/yamada-ui/yamada-ui/commit/18074cefa19fe9d4bc26455f17fa33412ac1e4d3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expanded unit validation regex in `isUnit`.
+
+## 1.3.0
+
+### Minor Changes
+
+- [#2126](https://github.com/yamada-ui/yamada-ui/pull/2126) [`76d5a75`](https://github.com/yamada-ui/yamada-ui/commit/76d5a7580de91d9226ea1a41286abc0999278b21) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added type `ObjectLiteral`.
+
+- [#2108](https://github.com/yamada-ui/yamada-ui/pull/2108) [`2a30dae`](https://github.com/yamada-ui/yamada-ui/commit/2a30dae39c2bb257b5f5a3c7f077612388bb972b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `isTouchDevice` function.
+
+- [#2122](https://github.com/yamada-ui/yamada-ui/pull/2122) [`d4833c9`](https://github.com/yamada-ui/yamada-ui/commit/d4833c990016fcb6330ed343b9b464272a1e1053) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `is` function.
+
 ## 1.2.1
 
 ### Patch Changes

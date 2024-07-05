@@ -62,6 +62,7 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
   return (
     <ui.div
       ref={ref}
+      role="group"
       className={cx("ui-avatar-group", className)}
       __css={{
         ...styles.group,

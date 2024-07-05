@@ -159,10 +159,30 @@
       "required": false,
       "description": "If `true`, Y axis is visible."
     },
+    "xAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the X axis."
+    },
+    "xAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'XAxisLabel' component."
+    },
     "xAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the Y axis."
+    },
+    "yAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
@@ -306,10 +326,30 @@
       "required": false,
       "description": "If `true`, Y axis is visible."
     },
+    "xAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the X axis."
+    },
+    "xAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'XAxisLabel' component."
+    },
     "xAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the Y axis."
+    },
+    "yAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
@@ -493,10 +533,30 @@
       "required": false,
       "description": "If `true`, Y axis is visible."
     },
+    "xAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the X axis."
+    },
+    "xAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'XAxisLabel' component."
+    },
     "xAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the Y axis."
+    },
+    "yAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
@@ -541,7 +601,7 @@
       "description": "Props passed down to recharts 'Legend' component."
     },
     "polarAngleAxisProps": {
-      "type": "Omit<Props, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | \"_nativeFocusVisible\" | ... 55 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Props, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | \"_nativeFocusVisible\" | ... 60 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false,
       "description": "Props passed down to recharts `PolarAngleAxis` component."
     },
@@ -905,15 +965,15 @@
   },
   "Bar": {
     "activeBar": {
-      "type": "Omit<SVGProps<SVGPathElement>, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | ... 58 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<SVGProps<SVGPathElement>, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "background": {
-      "type": "Omit<SVGProps<SVGPathElement>, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | ... 58 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<SVGProps<SVGPathElement>, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimBar": {
@@ -923,11 +983,11 @@
   },
   "Area": {
     "activeDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimArea": {
@@ -935,25 +995,25 @@
       "required": false
     },
     "dimDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "dot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     }
   },
   "Line": {
     "activeDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "dimLine": {
@@ -961,21 +1021,21 @@
       "required": false
     },
     "dot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     }
   },
   "Radar": {
     "activeDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
       "required": false
     },
     "dimDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     },
     "dimRadar": {
@@ -983,7 +1043,7 @@
       "required": false
     },
     "dot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
       "required": false
     }
   },

@@ -18,9 +18,12 @@ export const Accordion: ComponentMultiStyle = {
       _focusVisible: {
         boxShadow: "outline",
       },
-      _disabled: {
+      _nativeDisabled: {
         opacity: 0.4,
         cursor: "not-allowed",
+      },
+      "&[aria-disabled=true]": {
+        cursor: "default",
       },
       py: "3",
       px: "4",
@@ -48,11 +51,8 @@ export const Accordion: ComponentMultiStyle = {
         },
       },
       button: {
-        _hover: {
+        "&:hover:not(:disabled):not([aria-disabled=true])": {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
-          _disabled: {
-            bg: "none",
-          },
         },
       },
     },
@@ -70,11 +70,10 @@ export const Accordion: ComponentMultiStyle = {
       },
       button: {
         _hover: {
-          bg: ["blackAlpha.100", "whiteAlpha.100"],
-          _expanded: {
-            bg: "none",
+          "&:hover:not(:disabled):not([aria-disabled=true])": {
+            bg: ["blackAlpha.50", "whiteAlpha.50"],
           },
-          _disabled: {
+          _expanded: {
             bg: "none",
           },
         },

@@ -17,6 +17,7 @@ import {
   YAxis,
   ResponsiveContainer,
   ReferenceLine,
+  Label,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
@@ -81,6 +82,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     barProps,
     xAxisProps,
     yAxisProps,
+    xAxisLabel,
+    yAxisLabel,
+    xAxisLabelProps,
+    yAxisLabelProps,
     type = "default",
     withTooltip = true,
     withLegend = false,
@@ -111,10 +116,17 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       referenceLineProps,
       fillOpacity,
       syncId,
+      xAxisLabel,
+      yAxisLabel,
       styles,
     })
   const { getContainerProps } = useChart({ containerProps })
-  const { getXAxisProps, getYAxisProps } = useChartAxis({
+  const {
+    getXAxisProps,
+    getYAxisProps,
+    getXAxisLabelProps,
+    getYAxisLabelProps,
+  } = useChartAxis({
     dataKey,
     type,
     layoutType,
@@ -124,6 +136,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     withYAxis,
     xAxisProps,
     yAxisProps,
+    xAxisLabel,
+    yAxisLabel,
+    xAxisLabelProps,
+    yAxisLabelProps,
     unit,
     valueFormatter,
     styles,
@@ -193,8 +209,22 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
             <CartesianGrid
               {...getGridProps({ className: "ui-bar-chart__grid" })}
             />
-            <XAxis {...getXAxisProps({ className: "ui-bar-chart__x-axis" })} />
-            <YAxis {...getYAxisProps({ className: "ui-bar-chart__y-axis" })} />
+
+            <XAxis {...getXAxisProps({ className: "ui-bar-chart__x-axis" })}>
+              <Label
+                {...getXAxisLabelProps({
+                  className: "ui-bar-chart__x-axis-label",
+                })}
+              />
+            </XAxis>
+
+            <YAxis {...getYAxisProps({ className: "ui-bar-chart__y-axis" })}>
+              <Label
+                {...getYAxisLabelProps({
+                  className: "ui-bar-chart__y-axis-label",
+                })}
+              />
+            </YAxis>
 
             {withLegend ? (
               <Legend

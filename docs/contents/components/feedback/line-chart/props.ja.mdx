@@ -240,10 +240,38 @@ tab: Props
 />
 
 <PropsCard
+  id="linechart-xaxislabel"
+  name="xAxisLabel"
+  type="string"
+  description={"A label to display below the X axis."}
+/>
+
+<PropsCard
+  id="linechart-xaxislabelprops"
+  name="xAxisLabelProps"
+  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  description={"Props passed down to recharts 'XAxisLabel' component."}
+/>
+
+<PropsCard
   id="linechart-xaxisprops"
   name="xAxisProps"
   type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
   description={"Props passed down to recharts 'XAxis' component."}
+/>
+
+<PropsCard
+  id="linechart-yaxislabel"
+  name="yAxisLabel"
+  type="string"
+  description={"A label to display below the Y axis."}
+/>
+
+<PropsCard
+  id="linechart-yaxislabelprops"
+  name="yAxisLabelProps"
+  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  description={"Props passed down to recharts 'YAxisLabel' component."}
 />
 
 <PropsCard
@@ -258,19 +286,19 @@ tab: Props
 <PropsCard
   id="line-activedot"
   name="activeDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
 />
 
 <PropsCard
   id="line-color"
   name="color"
-  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
 />
 
 <PropsCard
   id="line-dimdot"
   name="dimDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
 />
 
 <PropsCard
@@ -282,7 +310,7 @@ tab: Props
 <PropsCard
   id="line-dot"
   name="dot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 56 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
 />
 
 ### DotProps

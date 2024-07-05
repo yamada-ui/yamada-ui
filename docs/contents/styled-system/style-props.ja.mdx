@@ -558,7 +558,7 @@ with_children_description: false
 | `_fullScreen`          | `&:fullscreen`                                                                           | none             |
 | `_hidden`              | `&[hidden], &[data-hidden]`                                                              | none             |
 | `_holiday`             | `&[data-holiday]`                                                                        | none             |
-| `_horizontal`          | `&:horizontal, &[data-orientation=horizontal]`                                           | none             |
+| `_horizontal`          | `&:horizontal, &[aria-orientation=horizontal], &[data-orientation=horizontal]`           | none             |
 | `_hover`               | `&:hover, &[data-hover]`                                                                 | none             |
 | `_idle`                | `&[data-idle]`                                                                           | none             |
 | `_indeterminate`       | `&:indeterminate, &[aria-checked=mixed], &[data-indeterminate]`                          | none             |
@@ -571,11 +571,16 @@ with_children_description: false
 | `_mediaDark`           | `@media (prefers-color-scheme: dark)`                                                    | none             |
 | `_mediaReduceMotion`   | `@media (prefers-reduced-motion: reduce)`                                                | none             |
 | `_nativeActive`        | `&:active`                                                                               | none             |
+| `_nativeChecked`       | `&:checked`                                                                              | none             |
+| `_nativeDisabled`      | `&:disabled, &[disabled]`                                                                | none             |
 | `_nativeFocus`         | `&:focus`                                                                                | none             |
 | `_nativeFocusVisible`  | `&:focus-visible`                                                                        | none             |
 | `_nativeFocusWithin`   | `&:focus-within`                                                                         | none             |
+| `_nativeHidden`        | `&[hidden]`                                                                              | none             |
 | `_nativeHover`         | `&:hover`                                                                                | none             |
+| `_nativeReadOnly`      | `&[readonly], &[aria-readonly=true]`                                                     | none             |
 | `_nativeTarget`        | `&:target`                                                                               | none             |
+| `_nativeValid`         | `&:valid`                                                                                | none             |
 | `_notFirst`            | `&:not(:first-of-type)`                                                                  | none             |
 | `_notLast`             | `&:not(:last-of-type)`                                                                   | none             |
 | `_notTarget`           | `&:not(:target)`                                                                         | none             |
@@ -598,6 +603,6 @@ with_children_description: false
 | `_target`              | `&:target, &[data-target]`                                                               | none             |
 | `_today`               | `&[data-today]`                                                                          | none             |
 | `_valid`               | `&:valid, &[data-valid], &[data-state=valid]`                                            | none             |
-| `_vertical`            | `&:vertical, &[data-orientation=vertical]`                                               | none             |
+| `_vertical`            | `&:vertical, &[aria-orientation=vertical], &[data-orientation=vertical]`                 | none             |
 | `_visited`             | `&:visited`                                                                              | none             |
 | `_weekend`             | `&:where([data-weekend])`                                                                | none             |

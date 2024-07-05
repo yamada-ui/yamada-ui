@@ -28,6 +28,12 @@ export const LineChart: ComponentMultiStyle = {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontSize: "xs",
     },
+    xAxisLabel: {
+      fontSize: 12,
+    },
+    yAxisLabel: {
+      fontSize: 12,
+    },
     line: {},
     dimLine: {
       fillOpacity: 0,

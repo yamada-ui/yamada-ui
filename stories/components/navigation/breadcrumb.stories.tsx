@@ -1,6 +1,5 @@
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons"
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon } from "@yamada-ui/fontawesome"
+import { ChevronsRight } from "@yamada-ui/lucide"
 import type { BreadcrumbGenerateItem } from "@yamada-ui/react"
 import {
   Breadcrumb,
@@ -142,7 +141,7 @@ export const withSeparator: Story = () => {
 
 export const withCustomSeparator: Story = () => {
   return (
-    <Breadcrumb separator={<Icon icon={faCaretRight} color="gray.300" />}>
+    <Breadcrumb separator={<ChevronsRight color="gray.300" />}>
       <BreadcrumbItem>
         <BreadcrumbLink href="/">サイヤ人編</BreadcrumbLink>
       </BreadcrumbItem>

@@ -299,25 +299,13 @@ To add an icon, set a `ReactElement` to `icon`.
 
 ```tsx
 <Wrap gap="md" alignItems="flex-start">
-  <Tag
-    colorScheme="primary"
-    size="sm"
-    leftIcon={<FontAwesomeIcon icon={faPlus} />}
-  >
+  <Tag colorScheme="primary" size="sm" leftIcon={<Plus />}>
     Small
   </Tag>
-  <Tag
-    colorScheme="secondary"
-    size="md"
-    rightIcon={<FontAwesomeIcon icon={faPlus} />}
-  >
+  <Tag colorScheme="secondary" size="md" rightIcon={<Plus />}>
     Medium
   </Tag>
-  <Tag
-    colorScheme="warning"
-    size="lg"
-    leftIcon={<FontAwesomeIcon icon={faPlus} />}
-  >
+  <Tag colorScheme="warning" size="lg" leftIcon={<Plus />}>
     Large
   </Tag>
 </Wrap>

@@ -10,9 +10,33 @@ import {
   isEmpty,
   isFunction,
   isUnit,
+  is,
 } from "../src"
 
 describe("Assertion", () => {
+  describe("is", () => {
+    test("Returns true for primitive", () => {
+      expect(is(123, 123)).toBeTruthy()
+      expect(is("test", "test")).toBeTruthy()
+    })
+
+    test("Returns true for NaN", () => {
+      expect(is(NaN, NaN)).toBeTruthy()
+    })
+
+    test("Returns true for Infinity", () => {
+      expect(is(Infinity, Infinity)).toBeTruthy()
+    })
+
+    test("Returns false for non-primitive", () => {
+      expect(is(null, undefined)).toBeFalsy()
+    })
+
+    test("Returns false for 0 and -0", () => {
+      expect(is(0, -0)).toBeFalsy()
+    })
+  })
+
   describe("isNumber", () => {
     test("Returns true for numbers", () => {
       expect(isNumber(123)).toBeTruthy()
@@ -124,6 +148,7 @@ describe("Assertion", () => {
     test("Returns true for strings containing units", () => {
       expect(isUnit("100px")).toBeTruthy()
       expect(isUnit("5rem")).toBeTruthy()
+      expect(isUnit("2xl")).toBeFalsy()
     })
 
     test("Returns false for strings without units", () => {

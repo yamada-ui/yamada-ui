@@ -23,13 +23,17 @@ import { matchSorter } from "match-sorter"
 import { NotFound } from "./not-found"
 import { IconDrawer } from "./icon-drawer"
 
-const DATA = Object.entries(icons).map(([name, Icon]) => ({
+const resolvedIcons = Object.entries(icons).filter(
+  ([name]) => !name.endsWith("Icon"),
+)
+
+const DATA = resolvedIcons.map(([name, Icon]) => ({
   name,
   tags: TAGS[name] ?? [],
   Icon,
 }))
 const PER_PAGE = 200
-const TOTAL_COUNT = Object.keys(icons).length
+const TOTAL_COUNT = resolvedIcons.length
 
 export type ListProps = StackProps & {}
 

@@ -136,6 +136,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         className={cx("ui-skeleton", "ui-skeleton--loaded", className)}
         {...rest}
         animation={animation}
+        aria-busy="false"
       >
         {validChildren}
       </ui.div>
@@ -148,6 +149,7 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
         __css={css}
         {...rest}
         animation={animation}
+        aria-busy="true"
       >
         {validChildren}
       </ui.div>

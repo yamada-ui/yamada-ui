@@ -24,7 +24,7 @@ import { PropControl } from "../../components"
 type Story = StoryFn<typeof LineChart>
 
 const meta: Meta<typeof LineChart> = {
-  title: "Components / Feedback / LineChart",
+  title: "Components / Data Display / LineChart",
   component: LineChart,
 }
 

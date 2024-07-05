@@ -30,7 +30,7 @@ import { PropControl } from "../../components"
 type Story = StoryFn<typeof AreaChart>
 
 const meta: Meta<typeof AreaChart> = {
-  title: "Components / Feedback / AreaChart",
+  title: "Components / Data Display / AreaChart",
   component: AreaChart,
 }
 

@@ -1987,13 +1987,13 @@
     }
   },
   {
-    "title": "AccordionLabelを使う",
+    "title": "AccordionButtonを使う",
     "type": "fragment",
-    "slug": "/components/disclosure/accordion#accordionlabelを使う",
+    "slug": "/components/disclosure/accordion#accordionbuttonを使う",
     "hierarchy": {
       "lv1": "Accordion",
       "lv2": "使い方",
-      "lv3": "AccordionLabelを使う"
+      "lv3": "AccordionButtonを使う"
     }
   },
   {

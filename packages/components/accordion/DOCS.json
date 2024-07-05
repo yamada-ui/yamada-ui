@@ -133,7 +133,7 @@
       "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done."
     }
   },
-  "AccordionLabel": {
+  "AccordionButton": {
     "containerProps": {
       "type": "HTMLUIProps<\"div\">",
       "required": false,

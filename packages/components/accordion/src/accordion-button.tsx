@@ -7,7 +7,7 @@ import type { FC, PropsWithChildren, ReactNode } from "react"
 import { useAccordionContext } from "./accordion"
 import { useAccordionItemContext } from "./accordion-item"
 
-type AccordionLabelOptions = {
+type AccordionButtonOptions = {
   /**
    * Props the container element.
    */
@@ -20,15 +20,16 @@ type AccordionLabelOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionLabelProps = HTMLUIProps<"button"> & AccordionLabelOptions
+export type AccordionButtonProps = HTMLUIProps<"button"> &
+  AccordionButtonOptions
 
-export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
+export const AccordionButton = forwardRef<AccordionButtonProps, "button">(
   ({ className, icon: customIcon, containerProps, children, ...rest }, ref) => {
     const {
       isOpen,
       isDisabled = false,
       icon: supplementIcon,
-      getLabelProps,
+      getButtonProps,
     } = useAccordionItemContext()
     const { icon: generalIcon, iconHidden, styles } = useAccordionContext()
 
@@ -61,8 +62,8 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
     return (
       <ui.div role="heading" aria-level="3" {...containerProps}>
         <ui.button
-          {...getLabelProps(rest, ref)}
-          className={cx("ui-accordion__label", className)}
+          {...getButtonProps(rest, ref)}
+          className={cx("ui-accordion__button", className)}
           __css={css}
         >
           {children}

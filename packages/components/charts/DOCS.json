@@ -159,10 +159,30 @@
       "required": false,
       "description": "If `true`, Y axis is visible."
     },
+    "xAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the X axis."
+    },
+    "xAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'XAxisLabel' component."
+    },
     "xAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the Y axis."
+    },
+    "yAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
@@ -306,10 +326,30 @@
       "required": false,
       "description": "If `true`, Y axis is visible."
     },
+    "xAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the X axis."
+    },
+    "xAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'XAxisLabel' component."
+    },
     "xAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the Y axis."
+    },
+    "yAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
@@ -493,10 +533,30 @@
       "required": false,
       "description": "If `true`, Y axis is visible."
     },
+    "xAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the X axis."
+    },
+    "xAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'XAxisLabel' component."
+    },
     "xAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
+    },
+    "yAxisLabel": {
+      "type": "string",
+      "required": false,
+      "description": "A label to display below the Y axis."
+    },
+    "yAxisLabelProps": {
+      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",

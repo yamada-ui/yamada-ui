@@ -217,7 +217,7 @@ tab: Props
 <PropsCard
   id="multiautocomplete-insertpositionitem"
   name="insertPositionItem"
-  type='string | [string, "first" | "last"]'
+  type='Union<"first" | "last"> | [string, "first" | "last"]'
   description={
     "The position to be inserted when the autocomplete option is created."
   }

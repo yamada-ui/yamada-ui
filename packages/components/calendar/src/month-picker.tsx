@@ -95,6 +95,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     getInputProps,
     getIconProps,
     value,
+    id,
   } = useMonthPicker(computedProps)
 
   h ??= height
@@ -141,6 +142,9 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
           <Portal {...portalProps}>
             <PopoverContent
               className="ui-month-picker__popover"
+              id={id}
+              role="dialog"
+              aria-modal="true"
               __css={{ ...styles.list }}
             >
               <Calendar

@@ -5,6 +5,9 @@ import { getColor, isArray } from "@yamada-ui/utils"
 export const Progress: ComponentMultiStyle = {
   baseStyle: {
     track: {
+      w: "100%",
+      overflow: "hidden",
+      pos: "relative",
       bg: "border",
     },
     filledTrack: ({
@@ -46,6 +49,7 @@ export const Progress: ComponentMultiStyle = {
           : undefined
 
       return {
+        h: "100%",
         transitionProperty: "common",
         transitionDuration: "slow",
         bgImage,

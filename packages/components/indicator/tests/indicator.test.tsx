@@ -68,7 +68,7 @@ describe("<Indicator />", () => {
     expect(screen.queryByTestId("Indicator")).toHaveClass("ui-indicator__icon")
     expect(screen.queryByText("new")).toHaveClass("ui-indicator__icon")
     expect(screen.queryByText("new")!.querySelector("div")).toHaveClass(
-      "ui-indicator__icon__ping",
+      "ui-indicator__ping",
     )
   })
 })

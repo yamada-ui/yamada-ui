@@ -57,7 +57,7 @@
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/portal": "workspace:*",
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.11"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

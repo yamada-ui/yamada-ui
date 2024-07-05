@@ -70,9 +70,9 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const groupLabels = await screen.findAllByText(/Group\d/)
-      groupLabels.forEach(async (g) => {
-        await waitFor(() => expect(g).toBeVisible())
+      await waitFor(() => {
+        const groupLabels = screen.getAllByText(/Group\d/)
+        groupLabels.forEach((g) => expect(g).toBeVisible())
       })
     })
 
@@ -140,10 +140,8 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       await user.click(autocomplete!)
 
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements).toHaveLength(3)
-      })
+      let optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      await waitFor(() => expect(optionElements).toHaveLength(3))
 
       act(() => {
         result.current[1]((prev) => [
@@ -154,10 +152,8 @@ describe("<Autocomplete />", () => {
 
       rerender(<Autocomplete items={result.current[0]} />)
 
-      await waitFor(() => {
-        const optionElements = screen.getAllByRole(AUTOCOMPLETE_ITEM_ROLE)
-        expect(optionElements).toHaveLength(4)
-      })
+      optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      await waitFor(() => expect(optionElements).toHaveLength(4))
     })
   })
 

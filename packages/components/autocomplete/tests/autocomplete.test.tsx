@@ -502,7 +502,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const select = await screen.findByRole("select")
+      const select = await screen.findByRole("listbox")
       await waitFor(() => expect(select).toHaveStyle({ visibility: "visible" }))
 
       await user.keyboard("{Escape}")

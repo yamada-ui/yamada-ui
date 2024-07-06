@@ -7,7 +7,7 @@ export const PieChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
     pie: {},
     activeShape: {},
     inactiveShape: {},
-    label: { fillOpacity: 1 },
+    label: { fillOpacity: 1, fill: "currentcolor" },
     labelLine: {},
     cell: {},
   },

@@ -4,7 +4,7 @@ import { cx } from "@yamada-ui/utils"
 const RADIAN = Math.PI / 180
 
 export const pieChartLabel: (props: any) => React.ReactNode = ({
-  className: pieClassName,
+  className: cellClassName,
   cx: cxProp = 0,
   cy: cyProp = 0,
   midAngle,
@@ -12,7 +12,7 @@ export const pieChartLabel: (props: any) => React.ReactNode = ({
   outerRadius,
   percent,
   value,
-  labelOffset = 0,
+  labelOffset,
   isParcent,
   styles,
   //TODO: considar to `labelProps`
@@ -29,7 +29,7 @@ export const pieChartLabel: (props: any) => React.ReactNode = ({
 
   return (
     <ui.text
-      className={cx(pieClassName, "ui-pie-chart__label")}
+      className={cx(cellClassName, "ui-pie-chart__label")}
       x={x}
       y={y}
       textAnchor="middle"

@@ -115,7 +115,7 @@ export const usePieChart = ({
   data,
   withLabels = false,
   withLabelLines = false,
-  labelOffset,
+  labelOffset = 0,
   isParcent = false,
   strokeWidth = 1,
   fillOpacity = 1,
@@ -282,6 +282,7 @@ export const usePieChart = ({
     [chartProps, chartClassName],
   )
 
+  //TODO: delete className
   const getPieProps: RequiredChartPropGetter<
     "div",
     Partial<Recharts.PieProps> & {

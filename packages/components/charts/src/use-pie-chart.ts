@@ -115,7 +115,7 @@ export const usePieChart = ({
   data,
   withLabels = false,
   withLabelLines = false,
-  labelOffset = 0,
+  labelOffset,
   isParcent = false,
   strokeWidth = 1,
   fillOpacity = 1,

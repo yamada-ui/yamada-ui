@@ -122,6 +122,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
           >
             <DatePickerField
               className="ui-year-picker__field"
+              aria-label="YearPicker"
               {...getFieldProps({ h, minH }, ref)}
               inputProps={getInputProps(inputProps)}
             />

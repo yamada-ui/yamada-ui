@@ -428,7 +428,6 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         tabIndex: !allowInput ? 0 : -1,
         role: "combobox",
         "aria-haspopup": "dialog",
-        "aria-label": "Input date value",
         "aria-controls": id,
         ...props,
         ...formControlProps,

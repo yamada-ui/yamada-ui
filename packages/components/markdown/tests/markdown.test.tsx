@@ -50,16 +50,16 @@ describe("<Markdown />", () => {
         {
           content: dedent`
           :::note
-  
+
           Status is nothing.
-  
+
           :::
         `,
         },
         {
           content: dedent`
             :::note
-  
+
             Status is nothing.
             :::
           `,
@@ -68,7 +68,7 @@ describe("<Markdown />", () => {
           content: dedent`
             :::note
             Status is nothing.
-  
+
             :::
           `,
         },
@@ -261,11 +261,11 @@ describe("<Markdown />", () => {
       test("should render two texts and an `Alert` component correctly", async () => {
         const content = dedent`
           This is the first text.
-  
+
           :::note
           This is an Alert component.
           :::
-  
+
           This is the second text.
         `
         render(<Markdown>{content}</Markdown>)

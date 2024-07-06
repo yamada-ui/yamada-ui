@@ -285,7 +285,11 @@ export const useRadarChart = ({
           )(theme)
 
           resolvedActiveDot = {
-            className: cx("ui-radar-chart__active-dot", className),
+            className: cx(
+              "ui-radar-chart__dot",
+              "ui-radar-chart__dot--active",
+              className,
+            ),
             fill: color,
             stroke: color,
             r: 4,

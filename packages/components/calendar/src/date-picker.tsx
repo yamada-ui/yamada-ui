@@ -182,7 +182,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
           <ui.input
             aria-label="Input date value"
             ref={mergeRefs(ref, inputRef)}
-            className="ui-date-picker__field-input"
+            className="ui-date-picker__input"
             display="inline-block"
             w="100%"
             {...computedInputProps}
@@ -239,7 +239,7 @@ export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
 }) => {
   return (
     <Icon
-      className={cx("ui-date-picker__icon-calendar", className)}
+      className={cx("ui-date-picker__calendar-icon", className)}
       viewBox="0 0 24 24"
       {...rest}
     >

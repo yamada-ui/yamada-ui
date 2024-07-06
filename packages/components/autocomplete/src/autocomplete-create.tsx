@@ -35,7 +35,11 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "li">(
 
     return (
       <ui.li
-        className={cx("ui-autocomplete__item--create", className)}
+        className={cx(
+          "ui-autocomplete__item",
+          "ui-autocomplete__item--create",
+          className,
+        )}
         __css={css}
         {...getCreateProps(rest, ref)}
       >

@@ -70,7 +70,7 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
       return (
         <ui.img
           ref={ref}
-          className={cx("ui-image--fallback", className)}
+          className={cx("ui-image", "ui-image--fallback", className)}
           src={fallback as string | undefined}
           __css={css}
           {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}

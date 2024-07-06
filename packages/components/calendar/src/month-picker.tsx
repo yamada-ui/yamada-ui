@@ -126,7 +126,10 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
 
             {isClearable && value ? (
               <DatePickerClearIcon
-                className="ui-month-picker__icon--clear"
+                className={cx(
+                  "ui-month-picker__icon",
+                  "ui-month-picker__icon--clear",
+                )}
                 {...getIconProps({ clear: true, ...clearIconProps })}
               />
             ) : (

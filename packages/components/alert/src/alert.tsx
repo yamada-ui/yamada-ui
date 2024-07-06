@@ -166,7 +166,7 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, "span">(
     return (
       <ui.span
         ref={ref}
-        className={cx("ui-alert__desc", className)}
+        className={cx("ui-alert__description", className)}
         __css={css}
         {...rest}
       />

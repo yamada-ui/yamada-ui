@@ -796,7 +796,11 @@ const NumberIncrementStepper = forwardRef<NumberIncrementStepperProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-number-input__stepper--up", className)}
+        className={cx(
+          "ui-number-input__stepper",
+          "ui-number-input__stepper--up",
+          className,
+        )}
         {...getIncrementProps(rest as DOMAttributes<HTMLElement>, ref)}
         __css={css}
       >
@@ -816,7 +820,11 @@ const NumberDecrementStepper = forwardRef<NumberDecrementStepperProps, "div">(
 
     return (
       <ui.div
-        className={cx("ui-number-input__stepper--down", className)}
+        className={cx(
+          "ui-number-input__stepper",
+          "ui-number-input__stepper--down",
+          className,
+        )}
         {...getDecrementProps(rest as DOMAttributes<HTMLElement>, ref)}
         __css={css}
       >

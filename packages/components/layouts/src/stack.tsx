@@ -354,7 +354,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className={cx("ui-stack--depth", className)}
+        className={cx("ui-stack", "ui-stack--depth", className)}
         __css={css}
         {...rest}
       >

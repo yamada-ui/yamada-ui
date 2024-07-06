@@ -120,7 +120,13 @@ const Code: FC<MarkdownComponentProps<"code"> & MarkdownProps["codeProps"]> = ({
   const language = className.replace(/language-/, "")
 
   return isInline ? (
-    <ui.code className={cx("ui-markdown__code--inline", className)}>
+    <ui.code
+      className={cx(
+        "ui-markdown__code",
+        "ui-markdown__code--inline",
+        className,
+      )}
+    >
       {children}
     </ui.code>
   ) : (

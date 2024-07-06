@@ -211,7 +211,7 @@ const Snack = forwardRef<SnackProps, "div">(
             </AlertTitle>
           ) : null}
           {description ? (
-            <AlertDescription className="ui-snack__desc" lineClamp={3}>
+            <AlertDescription className="ui-snack__description" lineClamp={3}>
               {description}
             </AlertDescription>
           ) : null}

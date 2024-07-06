@@ -362,7 +362,7 @@ const Notice: FC<NoticeProps> = ({
           </AlertTitle>
         ) : null}
         {description ? (
-          <AlertDescription className="ui-notice__desc" lineClamp={3}>
+          <AlertDescription className="ui-notice__description" lineClamp={3}>
             {description}
           </AlertDescription>
         ) : null}

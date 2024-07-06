@@ -337,7 +337,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
 
           <ui.input
             aria-label="Input value"
-            className="ui-multi-autocomplete__field-input"
+            className="ui-multi-autocomplete__input"
             display="inline-block"
             flex="1"
             overflow="hidden"

@@ -51,7 +51,7 @@ const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
     return (
       <ui.div
         ref={ref}
-        className="ui-carousel__slide__inner"
+        className="ui-carousel__slide-inner"
         w="100%"
         h="100%"
         {...rest}

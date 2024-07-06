@@ -337,7 +337,5 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
       : {}),
   }
 
-  return (
-    <ui.div className="ui-carousel__sliders__inner" __css={css} {...rest} />
-  )
+  return <ui.div className="ui-carousel__sliders-inner" __css={css} {...rest} />
 }

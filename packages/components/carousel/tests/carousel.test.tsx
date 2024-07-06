@@ -25,7 +25,7 @@ describe("<Carousel />", () => {
       </Carousel>,
     )
 
-    let sliders = container.querySelector(".ui-carousel__sliders__inner")
+    let sliders = container.querySelector(".ui-carousel__sliders-inner")
     expect(sliders).toBeInTheDocument()
 
     let styles = window.getComputedStyle(sliders!)
@@ -39,7 +39,7 @@ describe("<Carousel />", () => {
       </Carousel>,
     )
 
-    sliders = container.querySelector(".ui-carousel__sliders__inner")
+    sliders = container.querySelector(".ui-carousel__sliders-inner")
     expect(sliders).toBeInTheDocument()
 
     styles = window.getComputedStyle(sliders!)

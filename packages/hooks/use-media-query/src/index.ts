@@ -36,6 +36,8 @@ export const useMediaQuery = (
   useEffect(() => {
     const win = getWindow()
 
+    if (!win) return
+
     setValue(
       queries.map((media) => ({
         media,

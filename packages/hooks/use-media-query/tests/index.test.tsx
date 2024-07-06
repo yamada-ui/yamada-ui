@@ -1,4 +1,4 @@
-import { EnvironmentProvider } from "@yamada-ui/providers"
+import { EnvironmentProvider } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
 import { act, mocks, renderHook } from "@yamada-ui/test"
 import { useMediaQuery } from "../src"

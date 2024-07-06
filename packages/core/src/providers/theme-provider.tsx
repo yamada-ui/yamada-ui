@@ -86,7 +86,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
         ? preventTransition(environment)
         : undefined
 
-      doc.documentElement.dataset.theme = themeScheme
+      if (doc) doc.documentElement.dataset.theme = themeScheme
 
       cleanup?.()
 

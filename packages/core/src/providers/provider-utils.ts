@@ -5,6 +5,8 @@ export const preventTransition = (environment: Environment) => {
   const win = getWindow()
   const doc = getDocument()
 
+  if (!doc) return
+
   const css = doc.createElement("style")
 
   const node = doc.createTextNode(
@@ -16,7 +18,7 @@ export const preventTransition = (environment: Environment) => {
   doc.head.appendChild(css)
 
   return () => {
-    const forceReflow = () => win.getComputedStyle(doc.body)
+    const forceReflow = () => win?.getComputedStyle(doc.body)
 
     forceReflow()
 

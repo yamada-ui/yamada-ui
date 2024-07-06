@@ -3,8 +3,8 @@ import type { FC, ReactNode } from "react"
 import { createContext, useContext, useMemo, useReducer, useRef } from "react"
 
 export type Environment = {
-  getWindow: () => Window
-  getDocument: () => Document
+  getWindow: () => Window | undefined
+  getDocument: () => Document | undefined
 }
 
 const environment: Environment = {

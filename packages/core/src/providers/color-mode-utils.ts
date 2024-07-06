@@ -30,6 +30,8 @@ export const getColorModeUtils = ({
       ? preventTransition(environment)
       : undefined
 
+    if (!doc) return
+
     doc.documentElement.dataset.mode = colorMode
     doc.documentElement.style.colorScheme = colorMode
 
@@ -39,6 +41,8 @@ export const getColorModeUtils = ({
   const setClassName = (isDark: boolean) => {
     const doc = getDocument()
 
+    if (!doc) return
+
     doc.body.classList.add(isDark ? classNames.dark : classNames.light)
     doc.body.classList.remove(isDark ? classNames.light : classNames.dark)
   }
@@ -46,11 +50,14 @@ export const getColorModeUtils = ({
   const query = () => {
     const win = getWindow()
 
+    if (!win) return
+
     return win.matchMedia(queries.dark)
   }
 
   const getSystemColorMode = (fallback?: ColorMode) => {
-    const dark = query().matches ?? fallback === "dark"
+    const mql = query()
+    const dark = mql?.matches ?? fallback === "dark"
 
     return dark ? "dark" : "light"
   }
@@ -62,17 +69,17 @@ export const getColorModeUtils = ({
       func(e.matches ? "dark" : "light")
     }
 
-    if (typeof mql.addListener === "function") {
+    if (typeof mql?.addListener === "function") {
       mql.addListener(listener)
     } else {
-      mql.addEventListener("change", listener)
+      mql?.addEventListener("change", listener)
     }
 
     return () => {
-      if (typeof mql.removeListener === "function") {
+      if (typeof mql?.removeListener === "function") {
         mql.removeListener(listener)
       } else {
-        mql.removeEventListener("change", listener)
+        mql?.removeEventListener("change", listener)
       }
     }
   }

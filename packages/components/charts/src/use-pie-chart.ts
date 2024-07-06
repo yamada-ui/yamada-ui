@@ -11,6 +11,7 @@ import type {
   PieProps,
   RequiredChartPropGetter,
 } from "./chart.types"
+import { pieChartLabel } from "./pie-chart-label"
 import { pieChartProperties, pieProperties } from "./rechart-properties"
 
 export type UsePieChartOptions = {
@@ -42,6 +43,18 @@ export type UsePieChartOptions = {
    * @default false
    */
   withLabelLines?: boolean
+  /**
+   * Distance between chart and label.
+   *
+   * @default 10
+   */
+  labelOffset?: number
+  /**
+   * Determines whether labels should be displayed as percentages.
+   *
+   * @default false
+   */
+  isParcent?: boolean
   /**
    * Controls innerRadius of the chart segments.
    * If it is a number, it is the width of the radius.
@@ -102,6 +115,8 @@ export const usePieChart = ({
   data,
   withLabels = false,
   withLabelLines = false,
+  labelOffset,
+  isParcent = false,
   strokeWidth = 1,
   fillOpacity = 1,
   innerRadius = "0%",
@@ -119,7 +134,7 @@ export const usePieChart = ({
   const {
     activeShape = {},
     inactiveShape = {},
-    label,
+    // label: labelProps,
     labelLine,
     ...computedPieProps
   } = rest.pieProps ?? {}
@@ -196,9 +211,22 @@ export const usePieChart = ({
     [inactiveShape, styles.inactiveShape, theme],
   )
 
-  const labelClassName = useMemo(
-    () => getClassName({ fillOpacity: 1, ...styles.label, ...label })(theme),
-    [label, styles.label, theme],
+  // const labelClassName = useMemo(
+  //   () =>
+  //     getClassName({ fillOpacity: 1, ...styles.label, ...labelProps })(theme),
+  //   [labelProps, styles.label, theme],
+  // )
+
+  const label: Recharts.PieLabel = useCallback(
+    ({ ...props }) => {
+      return pieChartLabel({
+        labelOffset,
+        isParcent,
+        styles: styles.label,
+        ...props,
+      })
+    },
+    [isParcent, labelOffset, styles.label],
   )
 
   const labelLineClassName = useMemo(
@@ -265,7 +293,7 @@ export const usePieChart = ({
     (
       {
         className,
-        labelClassName: labelClassNameProp,
+        // labelClassName: labelClassNameProp,
         labelLineClassName: labelLineClassNameProp,
         ...props
       },
@@ -282,9 +310,10 @@ export const usePieChart = ({
       startAngle,
       endAngle,
       isAnimationActive: false,
-      label: withLabels
-        ? { className: cx(labelClassNameProp, labelClassName) }
-        : false,
+      // label: withLabels
+      //   ? { className: cx(labelClassNameProp, labelClassName) }
+      //   : false,
+      label: withLabels ? label : false,
       labelLine: withLabelLines
         ? { className: cx(labelLineClassNameProp, labelLineClassName) }
         : false,
@@ -302,7 +331,7 @@ export const usePieChart = ({
       startAngle,
       endAngle,
       withLabels,
-      labelClassName,
+      label,
       withLabelLines,
       labelLineClassName,
       activeShapeProps,

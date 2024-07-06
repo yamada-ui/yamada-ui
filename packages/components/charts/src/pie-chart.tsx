@@ -94,6 +94,8 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     endAngle,
     withLabels,
     withLabelLines,
+    labelOffset,
+    isParcent,
     strokeWidth,
     legendProps,
     ...rest
@@ -118,6 +120,8 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     strokeWidth,
     withLabels,
     withLabelLines,
+    labelOffset,
+    isParcent,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

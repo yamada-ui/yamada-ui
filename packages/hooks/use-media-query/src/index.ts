@@ -1,4 +1,4 @@
-import { useEnvironment } from "@yamada-ui/providers"
+import { useEnvironment } from "@yamada-ui/core"
 import { isArray, isFunction } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
 
@@ -35,8 +35,6 @@ export const useMediaQuery = (
 
   useEffect(() => {
     const win = getWindow()
-
-    if (!win) return
 
     setValue(
       queries.map((media) => ({

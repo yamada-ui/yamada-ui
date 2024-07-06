@@ -3140,6 +3140,9 @@ importers:
 
   packages/hooks/use-media-query:
     dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
       '@yamada-ui/providers':
         specifier: workspace:*
         version: link:../../providers

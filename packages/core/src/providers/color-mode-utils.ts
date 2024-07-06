@@ -1,4 +1,6 @@
 import type { ColorMode } from "../css"
+import type { Environment } from "./environment-provider"
+import { preventTransition } from "./provider-utils"
 
 const classNames = {
   light: "ui-light",
@@ -12,26 +14,40 @@ const queries = {
 
 type GetColorModeUtilsProps = {
   isPreventTransition?: boolean
+  environment: Environment
 }
 
 export const getColorModeUtils = ({
   isPreventTransition = true,
+  environment,
 }: GetColorModeUtilsProps) => {
-  const setDataset = (colorMode: ColorMode) => {
-    const cleanup = isPreventTransition ? preventTransition() : undefined
+  const { getWindow, getDocument } = environment
 
-    document.documentElement.dataset.mode = colorMode
-    document.documentElement.style.colorScheme = colorMode
+  const setDataset = (colorMode: ColorMode) => {
+    const doc = getDocument()
+
+    const cleanup = isPreventTransition
+      ? preventTransition(environment)
+      : undefined
+
+    doc.documentElement.dataset.mode = colorMode
+    doc.documentElement.style.colorScheme = colorMode
 
     cleanup?.()
   }
 
   const setClassName = (isDark: boolean) => {
-    document.body.classList.add(isDark ? classNames.dark : classNames.light)
-    document.body.classList.remove(isDark ? classNames.light : classNames.dark)
+    const doc = getDocument()
+
+    doc.body.classList.add(isDark ? classNames.dark : classNames.light)
+    doc.body.classList.remove(isDark ? classNames.light : classNames.dark)
   }
 
-  const query = () => window.matchMedia(queries.dark)
+  const query = () => {
+    const win = getWindow()
+
+    return win.matchMedia(queries.dark)
+  }
 
   const getSystemColorMode = (fallback?: ColorMode) => {
     const dark = query().matches ?? fallback === "dark"
@@ -61,34 +77,11 @@ export const getColorModeUtils = ({
     }
   }
 
-  const preventTransition = () => {
-    const css = document.createElement("style")
-
-    const node = document.createTextNode(
-      `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
-    )
-
-    css.appendChild(node)
-
-    document.head.appendChild(css)
-
-    return () => {
-      ;(() => window.getComputedStyle(document.body))()
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          document.head.removeChild(css)
-        })
-      })
-    }
-  }
-
   return {
     setDataset,
     setClassName,
     query,
     getSystemColorMode,
     addListener,
-    preventTransition,
   }
 }

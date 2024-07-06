@@ -30,6 +30,8 @@ import type {
   UsageTheme,
 } from "../theme.types"
 import { useColorMode } from "./color-mode-provider"
+import { useEnvironment } from "./environment-provider"
+import { preventTransition } from "./provider-utils"
 import type { ThemeSchemeManager } from "./theme-manager"
 import { themeSchemeManager } from "./theme-manager"
 
@@ -70,17 +72,21 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   storageKey,
   children,
 }) => {
+  const environment = useEnvironment()
   const [themeScheme, setThemeScheme] = useState<UITheme["themeSchemes"]>(
     themeSchemeManager.get(config?.initialThemeScheme)(storageKey),
   )
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
     (themeScheme) => {
+      const { getDocument } = environment
+      const doc = getDocument()
+
       const cleanup = config?.disableTransitionOnChange
-        ? preventTransition()
+        ? preventTransition(environment)
         : undefined
 
-      document.documentElement.dataset.theme = themeScheme
+      doc.documentElement.dataset.theme = themeScheme
 
       cleanup?.()
 
@@ -88,7 +94,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
       themeSchemeManager.set(themeScheme)(storageKey)
     },
-    [config, themeSchemeManager, storageKey],
+    [config, environment, themeSchemeManager, storageKey],
   )
 
   const theme = useMemo(
@@ -205,26 +211,4 @@ export const useTheme = <T extends object = Dict>() => {
   )
 
   return value
-}
-
-const preventTransition = () => {
-  const css = document.createElement("style")
-
-  const node = document.createTextNode(
-    `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
-  )
-
-  css.appendChild(node)
-
-  document.head.appendChild(css)
-
-  return () => {
-    ;(() => window.getComputedStyle(document.body))()
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.head.removeChild(css)
-      })
-    })
-  }
 }

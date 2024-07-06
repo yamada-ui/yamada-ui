@@ -21,23 +21,25 @@ export const pieChartLabel: (props: any) => React.ReactNode = ({
   // ...rest
 }) => {
   const labelOffset =
-    labelOffsetProp ?? outerRadius * 0.5 + DEFAULT_LABEL_OFFSET
+    labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5
 
   const x = cxProp + (radius + labelOffset) * Math.cos(-midAngle * RADIAN)
   const y = cyProp + (radius + labelOffset) * Math.sin(-midAngle * RADIAN)
+
   //TODO: considar to `valueFormatter`
   const displayLabel = isParcent
     ? parseFloat((percent * 100).toFixed(0)) > 0 &&
       `${(percent * 100).toFixed(0)}%`
     : value
+  const textAnchor = x > cxProp ? "start" : x < cxProp ? "end" : "middle"
 
   return (
     <ui.text
       className={cx(cellClassName, "ui-pie-chart__label")}
       x={x}
       y={y}
-      textAnchor="middle"
+      textAnchor={textAnchor}
       dominantBaseline="central"
       __css={styles}
       // color="white"

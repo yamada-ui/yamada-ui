@@ -140,7 +140,6 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
               <RangeDatePickerField
                 separator={separator}
                 value={value}
-                aria-label="RangeDatePicker"
                 {...getFieldProps({ h, minH })}
                 startInputProps={getStartInputProps(startInputProps, ref)}
                 endInputProps={getEndInputProps(endInputProps)}

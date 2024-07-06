@@ -19,6 +19,45 @@ describe("Markdown / With Note Components", () => {
       expect(desc).toBeInTheDocument()
     })
 
+    test.each([
+      {
+        content: dedent`
+        :::note
+
+        Status is nothing.
+
+        :::
+      `,
+      },
+      {
+        content: dedent`
+          :::note
+
+          Status is nothing.
+          :::
+        `,
+      },
+      {
+        content: dedent`
+          :::note
+          Status is nothing.
+
+          :::
+        `,
+      },
+    ])(
+      "should render as an `Alert` component. (includes breakline)",
+      async ({ content }) => {
+        render(<Markdown>{content}</Markdown>)
+
+        const note = await screen.findByRole("alert")
+        expect(note).toBeInTheDocument()
+
+        const desc = await screen.findByText(/Status is nothing\./)
+        expect(desc).toBeInTheDocument()
+      },
+    )
+
     test("when written in a single line in Markdown, it also should be rendered as an `Alert` component.", async () => {
       const content = dedent`:::note Status is nothing. :::`
       render(<Markdown>{content}</Markdown>)
@@ -30,11 +69,20 @@ describe("Markdown / With Note Components", () => {
       expect(desc).toBeInTheDocument()
     })
 
-    test("should render as a simple text", async () => {
-      const content = dedent`
-        :::note
-        Status is nothing.
-      `
+    test.each([
+      {
+        content: dedent`
+          :::note
+          Status is nothing.
+        `,
+      },
+      {
+        content: dedent`
+          :::note
+          Status is nothing. :::
+        `,
+      },
+    ])("should render as a simple text", async ({ content }) => {
       render(<Markdown>{content}</Markdown>)
 
       const firstLine = await screen.findByText(/:::note/)
@@ -42,6 +90,20 @@ describe("Markdown / With Note Components", () => {
 
       const secondLine = await screen.findByText(/Status is nothing\./)
       expect(secondLine).toBeInTheDocument()
+    })
+
+    test("Nothing should be rendered.", async () => {
+      const content = dedent`
+        :::note Status is nothing.
+        :::
+      `
+      render(<Markdown>{content}</Markdown>)
+
+      const firstLine = screen.queryByText(/:::note/)
+      expect(firstLine).toBeNull()
+
+      const secondLine = screen.queryByText(/Status is nothing\./)
+      expect(secondLine).toBeNull()
     })
 
     test("when written in a single line in Markdown, should render as a simple text", async () => {
@@ -61,6 +123,7 @@ describe("Markdown / With Note Components", () => {
       ${"success"} | ${"Status is success."}
       ${"error"}   | ${"Status is error."}
       ${"loading"} | ${"Status is loading."}
+      ${"yamada"}  | ${"Status is yamada."}
     `(
       "should render as an `Alert` component with status=`$status`.",
       async ({ status, expected }) => {
@@ -230,13 +293,31 @@ describe("Markdown / With Note Components", () => {
       `
       render(<Markdown>{content}</Markdown>)
 
-      const firstLineText = screen.queryByText(/:::note/)
+      const firstLineText = await screen.findByText(/:::note/)
       expect(firstLineText).toBeInTheDocument()
 
       const noteText = await screen.findByText(/Status is error\./)
       expect(noteText).toBeInTheDocument()
 
-      const thirdLineText = screen.queryByText(/:::/)
+      const thirdLineText = await screen.findByText(/:::/)
+      expect(thirdLineText).toBeInTheDocument()
+    })
+
+    test("if nested, only the outermost one should be converted to an `Alert` component. (included oneline-note)", async () => {
+      const content = dedent`
+        :::note status=error
+        :::note Status is error. :::
+        :::
+      `
+      render(<Markdown>{content}</Markdown>)
+
+      const firstLineText = await screen.findByText(/:::note/)
+      expect(firstLineText).toBeInTheDocument()
+
+      const noteText = await screen.findByText(/Status is error\./)
+      expect(noteText).toBeInTheDocument()
+
+      const thirdLineText = await screen.findByText(/:::/)
       expect(thirdLineText).toBeInTheDocument()
     })
 
@@ -262,7 +343,7 @@ describe("Markdown / With Note Components", () => {
       `
       render(<Markdown>{content}</Markdown>)
 
-      const text = screen.queryByText(/This is a success/)
+      const text = await screen.findByText(/This is a success/)
       expect(text).toBeInTheDocument()
 
       const strong = text!.querySelector("strong")

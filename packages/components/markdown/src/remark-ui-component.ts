@@ -1,7 +1,14 @@
 import type { AlertStatus } from "@yamada-ui/core"
 import { isNull, isUndefined } from "@yamada-ui/utils"
 import type { Parent as HastParent } from "hast"
-import type { Break, Paragraph, PhrasingContent, Root, Strong } from "mdast"
+import type {
+  Break,
+  Paragraph,
+  PhrasingContent,
+  Root,
+  Strong,
+  Text,
+} from "mdast"
 import type { ElementContent } from "react-markdown/lib"
 import { match, P } from "ts-pattern"
 import type { Plugin } from "unified"
@@ -9,7 +16,7 @@ import { remove } from "unist-util-remove"
 import { visit } from "unist-util-visit"
 import { getFragmentPattern } from "./patterns"
 import type { ShouldRemoved } from "./utils"
-import { isBreak, isContainer, shouldRemoved } from "./utils"
+import { shouldRemoved } from "./utils"
 
 const getStatus = (str: string | undefined): AlertStatus => {
   return match(str)
@@ -37,10 +44,77 @@ const getStatus = (str: string | undefined): AlertStatus => {
     .exhaustive()
 }
 
+interface OneLineNote extends Text {
+  readonly content: string
+  readonly status: AlertStatus
+}
+
+const oneLineNoteFactory = (textNode: Text): OneLineNote | null => {
+  const startFragmentCapturedGroups = getFragmentPattern("start", true).exec(
+    textNode.value,
+  )
+
+  const endFragmentCapturedGroups = getFragmentPattern("end", true).exec(
+    textNode.value,
+  )
+
+  const leftFragment = startFragmentCapturedGroups?.groups?.leftFragment
+  const rightFragment = endFragmentCapturedGroups?.groups?.rightFragment
+
+  if (isUndefined(leftFragment) || isUndefined(rightFragment)) {
+    return null
+  }
+
+  return new Proxy(textNode, {
+    get: (
+      target: Text,
+      property: keyof Pick<OneLineNote, "content" | "status">,
+    ) => {
+      switch (property) {
+        case "content":
+          return target.value
+            .replace(leftFragment, "")
+            .replace(rightFragment, "")
+        case "status":
+          return getStatus(startFragmentCapturedGroups?.groups?.status)
+      }
+    },
+  }) as OneLineNote
+}
+
+interface StartFragment extends Text {
+  readonly status: AlertStatus
+}
+
+const startFragmentFactory = (textNode: Text): StartFragment | null => {
+  const capturedGroups = getFragmentPattern("start", false).exec(textNode.value)
+
+  if (isNull(capturedGroups)) return null
+
+  return new Proxy(textNode, {
+    get: (target: Text, property: keyof Pick<StartFragment, "status">) => {
+      switch (property) {
+        case "status":
+          return getStatus(capturedGroups.groups?.status)
+      }
+    },
+  }) as StartFragment
+}
+
+interface EndFragment extends Text {}
+
+const endFragmentFactory = (textNode: Text): EndFragment | null => {
+  const capturedGroups = getFragmentPattern("end", false).exec(textNode.value)
+
+  if (isNull(capturedGroups)) return null
+
+  return new Proxy(textNode, {}) as EndFragment
+}
+
 export const remarkUIComponent: Plugin<[], Root, Root> = () => {
   return (tree) => {
     let nested = 0
-    let isMerging = false
+    let isMergingChildren = false
     let buf: PhrasingContent[] = []
     let paragraph: Paragraph | undefined
     let status: AlertStatus = "info"
@@ -49,27 +123,15 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
       for (const phrasingContent of node.children) {
         match(phrasingContent)
           .with({ type: "text" }, (textNode) => {
-            const startFragmentCapturedGroups = getFragmentPattern(
-              "start",
-              true,
-            ).exec(textNode.value)
-            const endFragmentCapturedGroups = getFragmentPattern(
-              "end",
-              true,
-            ).exec(textNode.value)
+            const oneLineNote = oneLineNoteFactory(textNode)
 
-            if (
-              !isNull(startFragmentCapturedGroups) &&
-              !isNull(endFragmentCapturedGroups)
-            ) {
-              if (isMerging) {
+            if (!isNull(oneLineNote)) {
+              if (isMergingChildren) {
                 buf.push(textNode)
                 return
               }
 
-              const content = textNode.value
-                .replace(startFragmentCapturedGroups.groups!.leftFragment, "")
-                .replace(endFragmentCapturedGroups.groups!.rightFragment, "")
+              const content = oneLineNote.content
 
               tree.children.splice(index!, 1, {
                 ...node,
@@ -83,9 +145,7 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
                     },
                   ],
                   hProperties: {
-                    status: getStatus(
-                      startFragmentCapturedGroups.groups?.status,
-                    ),
+                    status: oneLineNote.status,
                   },
                 },
               })
@@ -93,82 +153,53 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
               return
             }
 
-            const capturedGroups = getFragmentPattern("start", false).exec(
-              textNode.value,
-            )
-            if (!isNull(capturedGroups)) {
-              isMerging = true
+            const startFragment = startFragmentFactory(textNode)
+            if (!isNull(startFragment)) {
+              isMergingChildren = true
 
-              status = getStatus(capturedGroups.groups?.status)
+              status = startFragment.status
 
               if (buf.length > 0) {
                 nested++
               }
             }
 
-            if (!isMerging) {
+            if (!isMergingChildren) {
               return
             }
 
             buf.push(textNode)
 
-            if (getFragmentPattern("end", false).test(textNode.value)) {
+            const endFragment = endFragmentFactory(textNode)
+            if (!isNull(endFragment)) {
               if (nested > 0) {
                 nested--
                 return
               }
 
-              if (isContainer(buf)) {
-                const secondNode = buf.at(1)!
-                const lastButOneNode = buf.at(-2)!
-
-                if (isBreak(secondNode) && isBreak(lastButOneNode)) {
-                  paragraph = {
-                    type: "paragraph",
-                    children: buf.slice(2, -2),
-                  }
-                } else if (isBreak(secondNode)) {
-                  paragraph = {
-                    type: "paragraph",
-                    children: buf.slice(2, -1),
-                  }
-                } else if (isBreak(lastButOneNode)) {
-                  paragraph = {
-                    type: "paragraph",
-                    children: buf.slice(1, -3),
-                  }
-                } else {
-                  paragraph = {
-                    type: "paragraph",
-                    children: buf,
-                  }
-                }
-
-                isMerging = false
-              } else {
-                paragraph = {
-                  type: "paragraph",
-                  children: buf,
-                }
+              isMergingChildren = false
+              paragraph = {
+                type: "paragraph",
+                children: buf.slice(2, -2),
               }
 
-              buf = []
+              buf.length = 0
             }
           })
           .with({ type: "break" }, (breakNode) => {
-            if (isMerging) {
+            if (isMergingChildren) {
               buf.push(breakNode)
             }
           })
           .with({ type: "strong" }, (strongNode) => {
-            if (isMerging) {
+            if (isMergingChildren) {
               buf.push(strongNode)
             }
           })
           .with(P._, () => {})
       }
 
-      if (isMerging) {
+      if (isMergingChildren) {
         const shouldRemovingNode = {
           ...node,
           shouldRemoved: true,
@@ -200,18 +231,18 @@ export const remarkUIComponent: Plugin<[], Root, Root> = () => {
       return shouldRemoved(node)
     })
 
-    if (isMerging) {
+    if (isMergingChildren) {
       tree.children.push({
         type: "paragraph",
         children: buf,
       })
     }
-    isMerging = false
+    isMergingChildren = false
     buf = []
   }
 }
 
-export const rehypeBreakPlugin: Plugin = () => {
+export const rehypePlugin: Plugin = () => {
   return (tree) => {
     visit(tree, "break", (_, index, parent: HastParent) => {
       parent.children.splice(index!, 1, {

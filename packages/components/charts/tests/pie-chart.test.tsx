@@ -290,7 +290,7 @@ describe("<PieChart />", () => {
     }
   })
 
-  test("should be rendered valueFormatter", async () => {
+  test("valueFormatter should function properly in tooltip", async () => {
     const { container } = render(
       <PieChart
         containerProps={{ width: 400, height: "80%" }}
@@ -315,6 +315,37 @@ describe("<PieChart />", () => {
 
     const formattedElements =
       await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements.length).toBeGreaterThan(0)
+    expect(formattedElements).toHaveLength(data.length)
+  })
+
+  test("valueFormatter should function properly in label", async () => {
+    render(
+      <PieChart
+        containerProps={{ width: 400, height: "80%" }}
+        data={data}
+        withLabels
+        withTooltip={false}
+        valueFormatter={(value) => value.toLocaleString()}
+      />,
+    )
+
+    const formattedElements =
+      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
+    expect(formattedElements).toHaveLength(data.length)
+  })
+
+  test("isParcent should work correctly", async () => {
+    render(
+      <PieChart
+        containerProps={{ width: 400, height: "80%" }}
+        data={data}
+        withLabels
+        withTooltip={false}
+        isParcent
+      />,
+    )
+
+    const formattedElements = await screen.findAllByText(/\d+%/i)
+    expect(formattedElements).toHaveLength(data.length)
   })
 })

@@ -312,6 +312,37 @@ describe("<DonutChart />", () => {
 
     const formattedElements =
       await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements.length).toBeGreaterThan(0)
+    expect(formattedElements).toHaveLength(data.length)
+  })
+
+  test("valueFormatter should function properly in label", async () => {
+    render(
+      <DonutChart
+        containerProps={{ width: 400, height: "80%" }}
+        data={data}
+        withLabels
+        withTooltip={false}
+        valueFormatter={(value) => value.toLocaleString()}
+      />,
+    )
+
+    const formattedElements =
+      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
+    expect(formattedElements).toHaveLength(data.length)
+  })
+
+  test("isParcent should work correctly", async () => {
+    render(
+      <DonutChart
+        containerProps={{ width: 400, height: "80%" }}
+        data={data}
+        withLabels
+        withTooltip={false}
+        isParcent
+      />,
+    )
+
+    const formattedElements = await screen.findAllByText(/\d+%/i)
+    expect(formattedElements).toHaveLength(data.length)
   })
 })

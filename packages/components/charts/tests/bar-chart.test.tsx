@@ -77,6 +77,51 @@ describe("<BarChart />", () => {
     },
   ]
 
+  const rangeData = [
+    {
+      name: "Page A",
+      uv: [2000, 4000],
+      pv: [1400, 2400],
+      amt: [1400, 2400],
+    },
+    {
+      name: "Page B",
+      uv: [2000, 3000],
+      pv: [398, 1398],
+      amt: [1210, 2210],
+    },
+    {
+      name: "Page C",
+      uv: [1000, 2000],
+      pv: [8800, 9800],
+      amt: [1290, 2290],
+    },
+    {
+      name: "Page D",
+      uv: [1780, 2780],
+      pv: [2908, 3908],
+      amt: [1000, 2000],
+    },
+    {
+      name: "Page E",
+      uv: [890, 1890],
+      pv: [3800, 4800],
+      amt: [1181, 2181],
+    },
+    {
+      name: "Page F",
+      uv: [1390, 2390],
+      pv: [2800, 3800],
+      amt: [1500, 2500],
+    },
+    {
+      name: "Page G",
+      uv: [2490, 3490],
+      pv: [3300, 4300],
+      amt: [1400, 2400],
+    },
+  ]
+
   const series: BarProps[] = [
     { dataKey: "uv", color: "primary.500" },
     { dataKey: "pv", color: "secondary.500" },
@@ -302,6 +347,35 @@ describe("<BarChart />", () => {
     expect(container.querySelector(".ui-chart__cursor")).not.toBeInTheDocument()
   })
 
+  test("values are displayed correctly in tooltip even for range data", async () => {
+    const { container } = render(
+      <BarChart
+        containerProps={{ width: 400, height: "80%" }}
+        dataKey="name"
+        data={rangeData}
+        series={series}
+      />,
+    )
+
+    await waitFor(() =>
+      expect(
+        container.querySelector(".ui-bar-chart__chart"),
+      ).toBeInTheDocument(),
+    )
+
+    let chartElement = container.querySelector(".ui-bar-chart__chart")
+    assert(chartElement !== null)
+
+    fireEvent.mouseOver(chartElement, {
+      clientX: 200,
+      clientY: 200,
+    })
+
+    await waitFor(() =>
+      expect(screen.getAllByText(/\d+ - \d+/i)).toHaveLength(series.length),
+    )
+  })
+
   test("legend should be rendered according to withLegend", async () => {
     const { rerender, container } = render(
       <BarChart
@@ -473,20 +547,91 @@ describe("<BarChart />", () => {
     await expect(screen.findByText(/x line/i)).resolves.toBeInTheDocument()
   })
 
-  test("should be rendered valueFormatter", async () => {
-    render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        valueFormatter={(value) => value.toLocaleString()}
-      />,
-    )
+  describe("valueFormatter", () => {
+    test("should be rendered valueFormatter in y axis", async () => {
+      render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+          valueFormatter={(value) => value.toLocaleString()}
+        />,
+      )
 
-    const formattedElements =
-      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements.length).toBeGreaterThan(0)
+      const formattedElements =
+        await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
+      expect(formattedElements.length).toBeGreaterThan(1)
+    })
+
+    test("should be rendered valueFormatter in tooltip", async () => {
+      const { container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip
+          withYAxis={false}
+          valueFormatter={(value) => value.toLocaleString()}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      await waitFor(() =>
+        expect(
+          screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i).length,
+        ).toBeGreaterThan(series.length),
+      )
+    })
+
+    test("should be rendered valueFormatter in tooltip with rangeData", async () => {
+      const { container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={rangeData}
+          series={series}
+          withTooltip
+          withYAxis={false}
+          valueFormatter={(value) => value.toLocaleString()}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      await waitFor(() =>
+        expect(
+          screen.getAllByText(/\b\d{1,3}(,\d{3})+ - \d{1,3}(,\d{3})+/i),
+        ).toHaveLength(series.length),
+      )
+    })
   })
 
   test("should be rendered axis label", async () => {

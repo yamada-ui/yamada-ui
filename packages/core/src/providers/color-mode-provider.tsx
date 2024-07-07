@@ -13,6 +13,7 @@ import type { ThemeConfig } from "../theme.types"
 import type { ColorModeManager } from "./color-mode-manager"
 import { colorModeManager } from "./color-mode-manager"
 import { getColorModeUtils } from "./color-mode-utils"
+import { useEnvironment } from "./environment-provider"
 
 const { localStorage } = colorModeManager
 
@@ -63,6 +64,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
   children,
 }) => {
+  const environment = useEnvironment()
   const [colorMode, setColorMode] = useState<ColorMode | "system">(() =>
     getColorMode(colorModeManager, initialColorMode)(storageKey),
   )
@@ -80,8 +82,12 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
       : colorMode
 
   const { getSystemColorMode, setClassName, setDataset, addListener } = useMemo(
-    () => getColorModeUtils({ isPreventTransition: disableTransitionOnChange }),
-    [disableTransitionOnChange],
+    () =>
+      getColorModeUtils({
+        isPreventTransition: disableTransitionOnChange,
+        environment,
+      }),
+    [disableTransitionOnChange, environment],
   )
 
   const changeColorMode = useCallback(

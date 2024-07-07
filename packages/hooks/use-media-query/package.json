@@ -34,6 +34,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/providers": "workspace:*"
   },

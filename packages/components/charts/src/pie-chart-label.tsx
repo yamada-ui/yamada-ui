@@ -59,7 +59,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
 
   return (
     <ui.text
-      className={cx(cellClassName, "ui-pie-chart__label")}
+      className={cx(cellClassName, "ui-chart__label")}
       x={x}
       y={y}
       textAnchor={textAnchor}
@@ -115,7 +115,7 @@ export const pieChartLabelLine: (
 
   return (
     <ui.path
-      className={cx(cellClassName, "ui-pie-chart__label-line")}
+      className={cx(cellClassName, "ui-chart__label-line")}
       d={d}
       __css={styles}
       {...labelLineProps}

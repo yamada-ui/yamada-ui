@@ -61,6 +61,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     endAngle,
     withLabels,
     withLabelLines,
+    labelOffset,
+    isParcent,
     innerRadius = withLabels ? "60%" : "80%",
     outerRadius,
     strokeWidth,
@@ -87,6 +89,8 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     strokeWidth,
     withLabels,
     withLabelLines,
+    labelOffset,
+    isParcent,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
@@ -129,8 +133,6 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
             <Pie
               {...getPieProps({
                 className: "ui-donut-chart__donut",
-                labelClassName: "ui-donut-chart__label",
-                labelLineClassName: "ui-donut-chart__label-line",
               })}
             >
               {cells}

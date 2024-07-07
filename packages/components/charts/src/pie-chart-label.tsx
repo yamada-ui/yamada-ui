@@ -1,4 +1,6 @@
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import { cx, isUndefined } from "@yamada-ui/utils"
 
 const RADIAN = Math.PI / 180
@@ -25,12 +27,12 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
   className: cellClassName,
   cx: cxProp = 0,
   cy: cyProp = 0,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  middleRadius,
-  percent,
-  value,
+  midAngle = 0,
+  innerRadius = 0,
+  outerRadius = 0,
+  middleRadius = 0,
+  percent = 0,
+  value = 0,
   labelOffset: labelOffsetProp,
   isParcent,
   labelProps,
@@ -94,17 +96,15 @@ export const pieChartLabelLine: (
   className: cellClassName,
   cx: cxProp = 0,
   cy: cyProp = 0,
-  innerRadius,
-  midAngle,
-  middleRadius,
-  outerRadius,
-  points = [],
+  innerRadius = 0,
+  midAngle = 0,
+  middleRadius = 0,
+  outerRadius = 0,
+  points = [{ x: 0, y: 0 }],
   labelOffset: labelOffsetProp,
   labelLineProps,
   styles,
 }) => {
-  if (!points || points.length < 1) return null
-
   const labelOffset =
     labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
 

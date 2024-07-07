@@ -228,12 +228,13 @@ export const usePieChart = ({
   const labelLine = useCallback(
     (props: any) => {
       return pieChartLabelLine({
+        labelOffset,
         labelLineProps,
         styles: styles.labelLine,
         ...props,
       })
     },
-    [labelLineProps, styles.labelLine],
+    [labelLineProps, labelOffset, styles.labelLine],
   )
 
   const cellPropList = useMemo(
@@ -302,9 +303,6 @@ export const usePieChart = ({
       endAngle,
       isAnimationActive: false,
       label: withLabels ? label : false,
-      // labelLine: withLabelLines
-      //   ? { className: cx(labelLineClassNameProp, labelLineClassName) }
-      //   : false,
       labelLine: withLabelLines ? labelLine : false,
       activeShape: activeShapeProps,
       inactiveShape: inactiveShapeProps,

@@ -83,8 +83,7 @@ export type PieChartLabelLineProps = {
   middleRadius?: number
   outerRadius?: number
   points?: Array<Point>
-  stroke?: string
-  strokeWidth?: number
+  labelOffset?: number
   labelLineProps?: HTMLUIProps<"path">
   styles: Dict<CSSUIObject>
 }
@@ -93,13 +92,26 @@ export const pieChartLabelLine: (
   props: PieChartLabelLineProps,
 ) => React.ReactElement<SVGElement> = ({
   className: cellClassName,
+  cx: cxProp = 0,
+  cy: cyProp = 0,
+  innerRadius,
+  midAngle,
+  middleRadius,
+  outerRadius,
   points = [],
+  labelOffset: labelOffsetProp,
   labelLineProps,
   styles,
 }) => {
   if (!points || points.length < 1) return null
 
-  const d: string = `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y}`
+  const labelOffset =
+    labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
+
+  const x = cxProp + (middleRadius + labelOffset) * Math.cos(-midAngle * RADIAN)
+  const y = cyProp + (middleRadius + labelOffset) * Math.sin(-midAngle * RADIAN)
+
+  const d: string = `M ${points[0].x} ${points[0].y} L ${x} ${y}`
 
   return (
     <ui.path

@@ -418,6 +418,7 @@ export const useMonth = () => {
         "data-today": dataAttr(isToday),
         "data-value": value ?? "",
         "data-disabled": dataAttr(isTrulyDisabled),
+        "aria-selected": ariaAttr(isTrulySelected),
         "aria-disabled": ariaAttr(isTrulyDisabled),
         onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
         onPointerEnter: handlerAll(

@@ -134,7 +134,7 @@ export const usePieChart = ({
   const {
     activeShape = {},
     inactiveShape = {},
-    // label: labelProps,
+    label: labelProps,
     labelLine,
     ...computedPieProps
   } = rest.pieProps ?? {}
@@ -211,22 +211,17 @@ export const usePieChart = ({
     [inactiveShape, styles.inactiveShape, theme],
   )
 
-  // const labelClassName = useMemo(
-  //   () =>
-  //     getClassName({ fillOpacity: 1, ...styles.label, ...labelProps })(theme),
-  //   [labelProps, styles.label, theme],
-  // )
-
   const label: Recharts.PieLabel = useCallback(
     ({ ...props }) => {
       return pieChartLabel({
         labelOffset,
         isParcent,
+        labelProps,
         styles: styles.label,
         ...props,
       })
     },
-    [isParcent, labelOffset, styles.label],
+    [isParcent, labelOffset, labelProps, styles.label],
   )
 
   const labelLineClassName = useMemo(
@@ -286,18 +281,12 @@ export const usePieChart = ({
   const getPieProps: RequiredChartPropGetter<
     "div",
     Partial<Recharts.PieProps> & {
-      labelClassName: string
       labelLineClassName: string
     },
     Omit<Recharts.PieProps, "ref">
   > = useCallback(
     (
-      {
-        className,
-        // labelClassName: labelClassNameProp,
-        labelLineClassName: labelLineClassNameProp,
-        ...props
-      },
+      { className, labelLineClassName: labelLineClassNameProp, ...props },
       ref = null,
     ) => ({
       ref,
@@ -311,9 +300,6 @@ export const usePieChart = ({
       startAngle,
       endAngle,
       isAnimationActive: false,
-      // label: withLabels
-      //   ? { className: cx(labelClassNameProp, labelClassName) }
-      //   : false,
       label: withLabels ? label : false,
       labelLine: withLabelLines
         ? { className: cx(labelLineClassNameProp, labelLineClassName) }

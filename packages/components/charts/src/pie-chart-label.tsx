@@ -5,7 +5,22 @@ const RADIAN = Math.PI / 180
 //TODO: considar to which distance is this. (center or outerRadius)
 const DEFAULT_LABEL_OFFSET = 22
 
-export const pieChartLabel: (props: any) => React.ReactNode = ({
+export type PieChartLabelProps = {
+  className?: string
+  cx?: number
+  cy?: number
+  midAngle?: number
+  innerRadius?: number
+  outerRadius?: number
+  percent?: number
+  value?: number
+  labelOffset?: number
+  isParcent?: boolean
+  labelProps?: HTMLUIProps<"text">
+  styles: Dict<CSSUIObject>
+}
+
+export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
   className: cellClassName,
   cx: cxProp = 0,
   cy: cyProp = 0,
@@ -16,9 +31,8 @@ export const pieChartLabel: (props: any) => React.ReactNode = ({
   value,
   labelOffset: labelOffsetProp,
   isParcent,
+  labelProps,
   styles,
-  //TODO: considar to `labelProps`
-  // ...rest
 }) => {
   const labelOffset =
     labelOffsetProp ?? (outerRadius - innerRadius) * 0.5 + DEFAULT_LABEL_OFFSET
@@ -42,8 +56,7 @@ export const pieChartLabel: (props: any) => React.ReactNode = ({
       textAnchor={textAnchor}
       dominantBaseline="central"
       __css={styles}
-      // color="white"
-      // {...rest}
+      {...labelProps}
     >
       {displayLabel}
     </ui.text>

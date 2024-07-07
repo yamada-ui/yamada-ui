@@ -91,6 +91,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     withLabelLines,
     labelOffset,
     isParcent,
+    valueFormatter,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

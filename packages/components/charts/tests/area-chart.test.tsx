@@ -156,318 +156,344 @@ describe("<AreaChart />", () => {
     )
   })
 
-  test("dots should be rendered according to withDots", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={false}
-      />,
-    )
+  describe("dot", () => {
+    test("dots should be rendered according to withDots", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__dot"),
+        ).not.toBeInTheDocument(),
+      )
+
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={true}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__dot"),
+        ).toBeInTheDocument(),
+      )
+    })
+
+    test("activeDots should be rendered according to withActiveDots", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={true}
+          withActiveDots={true}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-area-chart__dot"),
-      ).not.toBeInTheDocument(),
-    )
+        container.querySelectorAll(".ui-area-chart__active-dot").length,
+      ).toBeGreaterThan(0)
 
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={true}
-      />,
-    )
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={true}
+          withActiveDots={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-area-chart__dot"),
-      ).toBeInTheDocument(),
-    )
+        container.querySelectorAll(".ui-area-chart__active-dot"),
+      ).toHaveLength(0)
+    })
   })
 
-  test("activeDots should be rendered according to withActiveDots", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={true}
-        withActiveDots={true}
-      />,
-    )
+  describe("axis", () => {
+    test("x axis should be rendered according to withXAxis", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withXAxis={true}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__x-axis"),
+        ).toBeInTheDocument(),
+      )
 
-    let chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
+      for (let { name } of data) {
+        expect(screen.getByText(name)).toBeInTheDocument()
+      }
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withXAxis={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__x-axis"),
+        ).not.toBeInTheDocument(),
+      )
+
+      for (let { name } of data) {
+        expect(screen.queryByText(name)).not.toBeInTheDocument()
+      }
     })
 
-    expect(
-      container.querySelectorAll(".ui-area-chart__active-dot").length,
-    ).toBeGreaterThan(0)
+    test("y axis should be rendered according to withYAxis", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withYAxis={true}
+        />,
+      )
 
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={true}
-        withActiveDots={false}
-      />,
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__y-axis"),
+        ).toBeInTheDocument(),
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withYAxis={false}
+        />,
+      )
 
-    chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__y-axis"),
+        ).not.toBeInTheDocument(),
+      )
     })
 
-    expect(
-      container.querySelectorAll(".ui-area-chart__active-dot"),
-    ).toHaveLength(0)
+    test("should be rendered axis label", async () => {
+      render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          xAxisLabel="x-axis-label"
+          yAxisLabel="y-axis-label"
+        />,
+      )
+
+      await waitFor(() =>
+        expect(screen.getByText("x-axis-label")).toBeVisible(),
+      )
+      expect(screen.getByText("y-axis-label")).toBeVisible()
+    })
   })
 
-  test("x axis should be rendered according to withXAxis", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withXAxis={true}
-      />,
-    )
+  describe("tooltip", () => {
+    test("tooltip should be rendered according to withTooltip", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={true}
+          withXAxis={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+
+      const textElement = await screen.findAllByText(/Page\s+/i)
+      expect(textElement).toHaveLength(1)
+
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+          withXAxis={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-area-chart__x-axis"),
-      ).toBeInTheDocument(),
-    )
-
-    for (let { name } of data) {
-      expect(screen.getByText(name)).toBeInTheDocument()
-    }
-
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withXAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__x-axis"),
-      ).not.toBeInTheDocument(),
-    )
-
-    for (let { name } of data) {
-      expect(screen.queryByText(name)).not.toBeInTheDocument()
-    }
-  })
-
-  test("y axis should be rendered according to withYAxis", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withYAxis={true}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__y-axis"),
-      ).toBeInTheDocument(),
-    )
-
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withYAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__y-axis"),
-      ).not.toBeInTheDocument(),
-    )
-  })
-
-  test("tooltip should be rendered according to withTooltip", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={true}
-        withXAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+        container.querySelector(".ui-chart__tooltip"),
+      ).not.toBeInTheDocument()
     })
 
-    expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+    test("cursor shoud be renderd along with tooltip", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={true}
+        />,
+      )
 
-    const textElement = await screen.findAllByText(/Page\s+/i)
-    expect(textElement).toHaveLength(1)
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={false}
-        withXAxis={false}
-      />,
-    )
+      let chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
 
-    await waitFor(() =>
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
+
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+        container.querySelector(".ui-chart__cursor"),
+      ).not.toBeInTheDocument()
     })
 
-    expect(
-      container.querySelector(".ui-chart__tooltip"),
-    ).not.toBeInTheDocument()
-  })
+    test("values are displayed correctly in tooltip even for range data", async () => {
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={rangeData}
+          series={series}
+        />,
+      )
 
-  test("cursor shoud be renderd along with tooltip", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={true}
-      />,
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      let chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
 
-    let chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      await waitFor(() =>
+        expect(screen.getAllByText(/\d+ - \d+/i)).toHaveLength(series.length),
+      )
     })
-
-    expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
-
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
-    })
-
-    expect(container.querySelector(".ui-chart__cursor")).not.toBeInTheDocument()
-  })
-
-  test("values are displayed correctly in tooltip even for range data", async () => {
-    const { container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={rangeData}
-        series={series}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-area-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
-    })
-
-    await waitFor(() =>
-      expect(screen.getAllByText(/\d+ - \d+/i)).toHaveLength(series.length),
-    )
   })
 
   test("legend should be rendered according to withLegend", async () => {
@@ -510,93 +536,95 @@ describe("<AreaChart />", () => {
     }
   })
 
-  test("tickLine should be rendered according to tickLine prop", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="xy"
-        gridAxis="xy"
-      />,
-    )
+  describe("tickLine & gridAxis", () => {
+    test("tickLine should be rendered according to tickLine prop", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="xy"
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="none"
-        gridAxis="xy"
-      />,
-    )
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="none"
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
 
-  test("if gridAxis is none, tickLine should not be rendered", async () => {
-    const { container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="xy"
-        gridAxis="none"
-      />,
-    )
+    test("if gridAxis is none, tickLine should not be rendered", async () => {
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="xy"
+          gridAxis="none"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
 
-  test("grid should be rendered according to gridAxis", async () => {
-    const { rerender, container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        gridAxis="xy"
-      />,
-    )
+    test("grid should be rendered according to gridAxis", async () => {
+      const { rerender, container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__grid"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__grid"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        gridAxis="none"
-      />,
-    )
+      rerender(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          gridAxis="none"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-area-chart__grid"),
-      ).not.toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-area-chart__grid"),
+        ).not.toBeInTheDocument(),
+      )
+    })
   })
 
   test("unit should be rendered according to unit prop", async () => {
@@ -615,108 +643,110 @@ describe("<AreaChart />", () => {
     expect(unitElements.length).toBeGreaterThan(0)
   })
 
-  test("linearGradient should be rendered according to withGradient false", async () => {
-    const { container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withGradient={false}
-      />,
-    )
+  describe("linearGradient", () => {
+    test("linearGradient should be rendered according to withGradient false", async () => {
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withGradient={false}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+      )
 
-    const gradientElement = container.querySelector("linearGradient")
-    expect(
-      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
-    ).toBeNull()
-  })
+      const gradientElement = container.querySelector("linearGradient")
+      expect(
+        (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+      ).toBeNull()
+    })
 
-  test("linearGradient default splitOffset should be rendered according to type=split", async () => {
-    const { container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        type="split"
-      />,
-    )
+    test("linearGradient default splitOffset should be rendered according to type=split", async () => {
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          type="split"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+      )
 
-    const gradientElement = container.querySelector("linearGradient")
-    expect(
-      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
-    ).toBe("0.5")
-  })
+      const gradientElement = container.querySelector("linearGradient")
+      expect(
+        (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+      ).toBe("0.5")
+    })
 
-  test("linearGradient calculated splitOffset should be rendered according to type=split", async () => {
-    const dataForSplitCalculated = [
-      {
-        name: "Page A",
-        uv: -6000,
-      },
-      {
-        name: "Page B",
-        uv: 3000,
-      },
-      {
-        name: "Page C",
-        uv: 1000,
-      },
-    ]
+    test("linearGradient calculated splitOffset should be rendered according to type=split", async () => {
+      const dataForSplitCalculated = [
+        {
+          name: "Page A",
+          uv: -6000,
+        },
+        {
+          name: "Page B",
+          uv: 3000,
+        },
+        {
+          name: "Page C",
+          uv: 1000,
+        },
+      ]
 
-    const seriesForSplitCalculated: AreaProps[] = [
-      { dataKey: "uv", color: "primary.500" },
-    ]
+      const seriesForSplitCalculated: AreaProps[] = [
+        { dataKey: "uv", color: "primary.500" },
+      ]
 
-    const { container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={dataForSplitCalculated}
-        series={seriesForSplitCalculated}
-        type="split"
-      />,
-    )
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={dataForSplitCalculated}
+          series={seriesForSplitCalculated}
+          type="split"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+      )
 
-    const gradientElement = container.querySelector("linearGradient")
-    expect(
-      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
-    ).toBe("0.3333333333333333")
-  })
+      const gradientElement = container.querySelector("linearGradient")
+      expect(
+        (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+      ).toBe("0.3333333333333333")
+    })
 
-  test("linearGradient should be rendered according to type=split and splitOffset", async () => {
-    const { container } = render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        type="split"
-        splitOffset={0.3}
-      />,
-    )
+    test("linearGradient should be rendered according to type=split and splitOffset", async () => {
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          type="split"
+          splitOffset={0.3}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(container.querySelector("linearGradient")).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(container.querySelector("linearGradient")).toBeInTheDocument(),
+      )
 
-    const gradientElement = container.querySelector("linearGradient")
-    expect(
-      (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
-    ).toBe("0.3")
+      const gradientElement = container.querySelector("linearGradient")
+      expect(
+        (gradientElement?.children[0] as SVGElement).getAttribute("offset"),
+      ).toBe("0.3")
+    })
   })
 
   test("shoud be rendered reference line", async () => {
@@ -830,21 +860,5 @@ describe("<AreaChart />", () => {
         ).toHaveLength(series.length),
       )
     })
-  })
-
-  test("should be rendered axis label", async () => {
-    render(
-      <AreaChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        xAxisLabel="x-axis-label"
-        yAxisLabel="y-axis-label"
-      />,
-    )
-
-    await waitFor(() => expect(screen.getByText("x-axis-label")).toBeVisible())
-    expect(screen.getByText("y-axis-label")).toBeVisible()
   })
 })

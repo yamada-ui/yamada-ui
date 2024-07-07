@@ -156,318 +156,344 @@ describe("<LineChart />", () => {
     )
   })
 
-  test("dots should be rendered according to withDots", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={false}
-      />,
-    )
+  describe("dot", () => {
+    test("dots should be rendered according to withDots", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__dot"),
+        ).not.toBeInTheDocument(),
+      )
+
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={true}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__dot"),
+        ).toBeInTheDocument(),
+      )
+    })
+
+    test("activeDots should be rendered according to withActiveDots", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={true}
+          withActiveDots={true}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-line-chart__dot"),
-      ).not.toBeInTheDocument(),
-    )
+        container.querySelectorAll(".ui-line-chart__active-dot").length,
+      ).toBeGreaterThan(0)
 
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={true}
-      />,
-    )
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withDots={true}
+          withActiveDots={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-line-chart__dot"),
-      ).toBeInTheDocument(),
-    )
+        container.querySelectorAll(".ui-line-chart__active-dot"),
+      ).toHaveLength(0)
+    })
   })
 
-  test("activeDots should be rendered according to withActiveDots", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={true}
-        withActiveDots={true}
-      />,
-    )
+  describe("axis", () => {
+    test("x axis should be rendered according to withXAxis", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withXAxis={true}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__x-axis"),
+        ).toBeInTheDocument(),
+      )
 
-    let chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
+      for (let { name } of data) {
+        expect(screen.getByText(name)).toBeInTheDocument()
+      }
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withXAxis={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__x-axis"),
+        ).not.toBeInTheDocument(),
+      )
+
+      for (let { name } of data) {
+        expect(screen.queryByText(name)).not.toBeInTheDocument()
+      }
     })
 
-    expect(
-      container.querySelectorAll(".ui-line-chart__active-dot").length,
-    ).toBeGreaterThan(0)
+    test("y axis should be rendered according to withYAxis", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withYAxis={true}
+        />,
+      )
 
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withDots={true}
-        withActiveDots={false}
-      />,
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__y-axis"),
+        ).toBeInTheDocument(),
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withYAxis={false}
+        />,
+      )
 
-    chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__y-axis"),
+        ).not.toBeInTheDocument(),
+      )
     })
 
-    expect(
-      container.querySelectorAll(".ui-line-chart__active-dot"),
-    ).toHaveLength(0)
+    test("should be rendered axis label", async () => {
+      render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          xAxisLabel="x-axis-label"
+          yAxisLabel="y-axis-label"
+        />,
+      )
+
+      await waitFor(() =>
+        expect(screen.getByText("x-axis-label")).toBeVisible(),
+      )
+      expect(screen.getByText("y-axis-label")).toBeVisible()
+    })
   })
 
-  test("x axis should be rendered according to withXAxis", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withXAxis={true}
-      />,
-    )
+  describe("tooltip", () => {
+    test("tooltip should be rendered according to withTooltip", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={true}
+          withXAxis={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+
+      const textElement = await screen.findAllByText(/Page\s+/i)
+      expect(textElement).toHaveLength(1)
+
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+          withXAxis={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-line-chart__x-axis"),
-      ).toBeInTheDocument(),
-    )
-
-    for (let { name } of data) {
-      expect(screen.getByText(name)).toBeInTheDocument()
-    }
-
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withXAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__x-axis"),
-      ).not.toBeInTheDocument(),
-    )
-
-    for (let { name } of data) {
-      expect(screen.queryByText(name)).not.toBeInTheDocument()
-    }
-  })
-
-  test("y axis should be rendered according to withYAxis", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withYAxis={true}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__y-axis"),
-      ).toBeInTheDocument(),
-    )
-
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withYAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__y-axis"),
-      ).not.toBeInTheDocument(),
-    )
-  })
-
-  test("tooltip should be rendered according to withTooltip", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={true}
-        withXAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+        container.querySelector(".ui-chart__tooltip"),
+      ).not.toBeInTheDocument()
     })
 
-    expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+    test("cursor shoud be renderd along with tooltip", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={true}
+        />,
+      )
 
-    const textElement = await screen.findAllByText(/Page\s+/i)
-    expect(textElement).toHaveLength(1)
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={false}
-        withXAxis={false}
-      />,
-    )
+      let chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
 
-    await waitFor(() =>
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
+
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+        container.querySelector(".ui-chart__cursor"),
+      ).not.toBeInTheDocument()
     })
 
-    expect(
-      container.querySelector(".ui-chart__tooltip"),
-    ).not.toBeInTheDocument()
-  })
+    test("values are displayed correctly in tooltip even for range data", async () => {
+      const { container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={rangeData}
+          series={series}
+        />,
+      )
 
-  test("cursor shoud be renderd along with tooltip", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={true}
-      />,
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__chart"),
+        ).toBeInTheDocument(),
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      let chartElement = container.querySelector(".ui-line-chart__chart")
+      assert(chartElement !== null)
 
-    let chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      await waitFor(() =>
+        expect(screen.getAllByText(/\d+ - \d+/i)).toHaveLength(series.length),
+      )
     })
-
-    expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
-
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
-    })
-
-    expect(container.querySelector(".ui-chart__cursor")).not.toBeInTheDocument()
-  })
-
-  test("values are displayed correctly in tooltip even for range data", async () => {
-    const { container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={rangeData}
-        series={series}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-line-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
-    })
-
-    await waitFor(() =>
-      expect(screen.getAllByText(/\d+ - \d+/i)).toHaveLength(series.length),
-    )
   })
 
   test("legend should be rendered according to withLegend", async () => {
@@ -512,93 +538,95 @@ describe("<LineChart />", () => {
     }
   })
 
-  test("tickLine should be rendered according to tickLine prop", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="xy"
-        gridAxis="xy"
-      />,
-    )
+  describe("tickLine & gridAxis", () => {
+    test("tickLine should be rendered according to tickLine prop", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="xy"
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="none"
-        gridAxis="xy"
-      />,
-    )
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="none"
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
 
-  test("if gridAxis is none, tickLine should not be rendered", async () => {
-    const { container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="xy"
-        gridAxis="none"
-      />,
-    )
+    test("if gridAxis is none, tickLine should not be rendered", async () => {
+      const { container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="xy"
+          gridAxis="none"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
 
-  test("grid should be rendered according to gridAxis", async () => {
-    const { rerender, container } = render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        gridAxis="xy"
-      />,
-    )
+    test("grid should be rendered according to gridAxis", async () => {
+      const { rerender, container } = render(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__grid"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__grid"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        gridAxis="none"
-      />,
-    )
+      rerender(
+        <LineChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          gridAxis="none"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-line-chart__grid"),
-      ).not.toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-line-chart__grid"),
+        ).not.toBeInTheDocument(),
+      )
+    })
   })
 
   test("unit should be rendered according to unit prop", async () => {
@@ -728,21 +756,5 @@ describe("<LineChart />", () => {
         ).toHaveLength(series.length),
       )
     })
-  })
-
-  test("should be rendered axis label", async () => {
-    render(
-      <LineChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        xAxisLabel="x-axis-label"
-        yAxisLabel="y-axis-label"
-      />,
-    )
-
-    await waitFor(() => expect(screen.getByText("x-axis-label")).toBeVisible())
-    expect(screen.getByText("y-axis-label")).toBeVisible()
   })
 })

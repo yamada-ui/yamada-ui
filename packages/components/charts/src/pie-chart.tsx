@@ -165,7 +165,6 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
             <Pie
               {...getPieProps({
                 className: "ui-pie-chart__pie",
-                labelLineClassName: "ui-pie-chart__label-line",
               })}
             >
               {cells}

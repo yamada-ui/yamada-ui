@@ -72,6 +72,8 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
   )
 }
 
+type Point = { x: number; y: number }
+
 export type PieChartLabelLineProps = {
   className?: string
   cx?: number
@@ -80,13 +82,31 @@ export type PieChartLabelLineProps = {
   midAngle?: number
   middleRadius?: number
   outerRadius?: number
-  points?: Array<{ x: number; y: number }>
+  points?: Array<Point>
   stroke?: string
   strokeWidth?: number
+  labelLineProps?: HTMLUIProps<"path">
+  styles: Dict<CSSUIObject>
 }
 
 export const pieChartLabelLine: (
   props: PieChartLabelLineProps,
-) => React.ReactElement<SVGElement> = ({}) => {
-  return <ui.path />
+) => React.ReactElement<SVGElement> = ({
+  className: cellClassName,
+  points = [],
+  labelLineProps,
+  styles,
+}) => {
+  if (!points || points.length < 1) return null
+
+  const d: string = `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y}`
+
+  return (
+    <ui.path
+      className={cx(cellClassName, "ui-pie-chart__label-line")}
+      d={d}
+      __css={styles}
+      {...labelLineProps}
+    />
+  )
 }

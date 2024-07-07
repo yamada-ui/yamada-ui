@@ -45,8 +45,6 @@ export type UsePieChartOptions = {
   withLabelLines?: boolean
   /**
    * Distance between chart and label.
-   *
-   * @default 10
    */
   labelOffset?: number
   /**

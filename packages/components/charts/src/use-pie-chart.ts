@@ -124,6 +124,7 @@ export const usePieChart = ({
   paddingAngle = 0,
   startAngle = 90,
   endAngle = -270,
+  valueFormatter,
   styles,
   ...rest
 }: UsePieChartProps) => {
@@ -212,16 +213,17 @@ export const usePieChart = ({
   )
 
   const label: Recharts.PieLabel = useCallback(
-    ({ ...props }) => {
+    (props: any) => {
       return pieChartLabel({
         labelOffset,
         isParcent,
         labelProps,
+        valueFormatter,
         styles: styles.label,
         ...props,
       })
     },
-    [isParcent, labelOffset, labelProps, styles.label],
+    [isParcent, labelOffset, labelProps, styles.label, valueFormatter],
   )
 
   const labelLineClassName = useMemo(

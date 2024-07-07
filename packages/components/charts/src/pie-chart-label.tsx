@@ -1,5 +1,5 @@
 import { ui } from "@yamada-ui/core"
-import { cx } from "@yamada-ui/utils"
+import { cx, isUndefined } from "@yamada-ui/utils"
 
 const RADIAN = Math.PI / 180
 //TODO: considar to which distance is this. (center or outerRadius)
@@ -17,6 +17,7 @@ export type PieChartLabelProps = {
   labelOffset?: number
   isParcent?: boolean
   labelProps?: HTMLUIProps<"text">
+  valueFormatter?: (value: number) => string
   styles: Dict<CSSUIObject>
 }
 
@@ -32,6 +33,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
   labelOffset: labelOffsetProp,
   isParcent,
   labelProps,
+  valueFormatter,
   styles,
 }) => {
   const labelOffset =
@@ -41,12 +43,19 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
   const x = cxProp + (radius + labelOffset) * Math.cos(-midAngle * RADIAN)
   const y = cyProp + (radius + labelOffset) * Math.sin(-midAngle * RADIAN)
 
-  //TODO: considar to `valueFormatter`
-  const displayLabel = isParcent
-    ? parseFloat((percent * 100).toFixed(0)) > 0 &&
-      `${(percent * 100).toFixed(0)}%`
-    : value
   const textAnchor = x > cxProp ? "start" : x < cxProp ? "end" : "middle"
+  const displayLabel = () => {
+    if (isParcent) {
+      return (
+        parseFloat((percent * 100).toFixed(0)) > 0 &&
+        `${(percent * 100).toFixed(0)}%`
+      )
+    } else if (!isUndefined(valueFormatter)) {
+      return valueFormatter(value)
+    } else {
+      return value
+    }
+  }
 
   return (
     <ui.text
@@ -58,7 +67,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
       __css={styles}
       {...labelProps}
     >
-      {displayLabel}
+      {displayLabel()}
     </ui.text>
   )
 }

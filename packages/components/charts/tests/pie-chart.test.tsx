@@ -89,33 +89,33 @@ describe("<PieChart />", () => {
   })
 
   test("labels should be rendered according to withLabels", async () => {
-    const { rerender, container } = render(
+    const { rerender } = render(
       <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={true}
+        withTooltip={false}
       />,
     )
 
-    await waitFor(() =>
-      expect(container.querySelectorAll(".ui-pie-chart__label")).toHaveLength(
-        data.length,
-      ),
-    )
+    for (const { value } of data) {
+      await waitFor(() => expect(screen.getByText(`${value}`)).toBeVisible())
+    }
 
     rerender(
       <PieChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={false}
+        withTooltip={false}
       />,
     )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-pie-chart__label"),
-      ).not.toBeInTheDocument(),
-    )
+    for (const { value } of data) {
+      await waitFor(() =>
+        expect(screen.queryByText(`${value}`)).not.toBeInTheDocument(),
+      )
+    }
   })
 
   test("labelLines should be rendered according to withLabelLines", async () => {
@@ -129,9 +129,9 @@ describe("<PieChart />", () => {
     )
 
     await waitFor(() =>
-      expect(
-        container.querySelectorAll(".ui-pie-chart__label-line"),
-      ).toHaveLength(data.length),
+      expect(container.querySelectorAll(".ui-chart__label-line")).toHaveLength(
+        data.length,
+      ),
     )
 
     rerender(
@@ -145,7 +145,7 @@ describe("<PieChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-pie-chart__label-line"),
+        container.querySelector(".ui-chart__label-line"),
       ).not.toBeInTheDocument(),
     )
   })

@@ -1,4 +1,4 @@
-export { UIProvider, useEnvironment } from "@yamada-ui/providers"
+export { UIProvider } from "@yamada-ui/providers"
 export type { UIProviderProps } from "@yamada-ui/providers"
 export * from "@yamada-ui/core"
 export * from "@yamada-ui/utils"

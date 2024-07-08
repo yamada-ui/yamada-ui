@@ -32,13 +32,13 @@ describe("<Box />", () => {
   })
 
   test("as - prop works correctly", () => {
-    const { getByText } = render(
+    render(
       <Box as="a" href="www.google.com">
         Box
       </Box>,
     )
 
-    expect(getByText("Box").nodeName).toBe("A")
+    expect(screen.getByRole("link", { name: /Box/i })).toBeInTheDocument()
   })
 })
 
@@ -48,9 +48,9 @@ describe("<Container />", () => {
   })
 
   test("centerContent - prop works correctly", () => {
-    const { getByText } = render(<Container centerContent>Container</Container>)
+    render(<Container centerContent>Container</Container>)
 
-    expect(getByText("Container")).toHaveStyle({ alignItems: "center" })
+    expect(screen.getByText("Container")).toHaveStyle({ alignItems: "center" })
   })
 })
 
@@ -60,7 +60,7 @@ describe("<Flex />", () => {
   })
 
   test("renders all the allowed shorthand style props", () => {
-    const { getByText } = render(
+    render(
       <Flex
         direction="row"
         justify="start"
@@ -74,7 +74,7 @@ describe("<Flex />", () => {
       </Flex>,
     )
 
-    expect(getByText("Flex")).toHaveStyle({
+    expect(screen.getByText("Flex")).toHaveStyle({
       flexDirection: "row",
       justifyContent: "start",
       alignItems: "stretch",
@@ -92,19 +92,15 @@ describe("<Divider />", () => {
   })
 
   test("overrides the theming props", () => {
-    const { getByTestId } = render(
-      <Divider data-testid="divider" variant="dashed" />,
-    )
+    render(<Divider variant="dashed" />)
 
-    expect(getByTestId("divider")).toHaveStyle({ borderStyle: "dashed" })
+    expect(screen.getByRole("separator")).toHaveStyle({ borderStyle: "dashed" })
   })
 
   test("renders vertically correctly", () => {
-    const { getByTestId } = render(
-      <Divider data-testid="divider" orientation="vertical" />,
-    )
+    render(<Divider orientation="vertical" />)
 
-    expect(getByTestId("divider")).toHaveStyle({
+    expect(screen.getByRole("separator")).toHaveStyle({
       borderLeftWidth: "1px",
       height: "100%",
     })
@@ -117,31 +113,20 @@ describe("<SimpleGrid />", () => {
   })
 
   test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", async () => {
-    const { findByTestId } = render(
-      <SimpleGrid
-        data-testid="simpleGrid"
-        columns={2}
-        minChildWidth={{ base: "4" }}
-      >
+    render(
+      <SimpleGrid columns={2} minChildWidth={{ base: "4" }}>
         SimpleGrid
       </SimpleGrid>,
     )
 
-    const simpleGrid = await findByTestId("simpleGrid")
-
-    expect(simpleGrid).toHaveStyle({
+    expect(screen.getByText("SimpleGrid")).toHaveStyle({
       gridTemplateColumns: "repeat(auto-fit, minmax(1rem, 1fr))",
     })
   })
 
   test("columns - prop works correctly", async () => {
-    const { findByTestId } = render(
-      <SimpleGrid data-testid="simpleGrid" columns={3}>
-        SimpleGrid
-      </SimpleGrid>,
-    )
-    const simpleGrid = await findByTestId("simpleGrid")
-    expect(simpleGrid).toHaveStyle({
+    render(<SimpleGrid columns={3}>SimpleGrid</SimpleGrid>)
+    expect(screen.getByText("SimpleGrid")).toHaveStyle({
       gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
     })
   })
@@ -153,23 +138,21 @@ describe("<Stack />", () => {
   })
 
   test("renders h-stack correctly", () => {
-    const { getByTestId } = render(
-      <HStack data-testid="h-stack">HStack</HStack>,
-    )
+    render(<HStack data-testid="h-stack">HStack</HStack>)
 
-    expect(getByTestId("h-stack")).toHaveStyle({ flexDirection: "row" })
+    expect(screen.getByTestId("h-stack")).toHaveStyle({ flexDirection: "row" })
   })
 
   test("renders v-stack correctly", () => {
-    const { getByTestId } = render(
-      <VStack data-testid="v-stack">VStack</VStack>,
-    )
+    render(<VStack data-testid="v-stack">VStack</VStack>)
 
-    expect(getByTestId("v-stack")).toHaveStyle({ flexDirection: "column" })
+    expect(screen.getByTestId("v-stack")).toHaveStyle({
+      flexDirection: "column",
+    })
   })
 
   test("renders all the allowed shorthand style props", () => {
-    const { getByTestId } = render(
+    render(
       <Stack
         data-testid="stack"
         direction="row"
@@ -181,7 +164,7 @@ describe("<Stack />", () => {
       </Stack>,
     )
 
-    expect(getByTestId("stack")).toHaveStyle({
+    expect(screen.getByTestId("stack")).toHaveStyle({
       flexDirection: "row",
       justifyContent: "start",
       alignItems: "stretch",
@@ -277,17 +260,13 @@ describe("<Grid />", () => {
   })
 
   test("renders all the allowed shorthand style props", () => {
-    const { getByTestId } = render(
-      <Grid
-        data-testid="grid"
-        templateColumns="repeat(2, 1fr)"
-        templateRows="repeat(2, 1fr)"
-      >
+    render(
+      <Grid templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">
         Grid
       </Grid>,
     )
 
-    expect(getByTestId("grid")).toHaveStyle({
+    expect(screen.getByText("Grid")).toHaveStyle({
       gridTemplateColumns: "repeat(2, 1fr)",
       gridTemplateRows: "repeat(2, 1fr)",
     })
@@ -300,13 +279,12 @@ describe("<GridItem />", () => {
   })
 
   test("renders all the allowed shorthand style props", async () => {
-    const { findByTestId } = render(
-      <GridItem rowSpan={2} colSpan={2} data-testid="gridItem">
+    render(
+      <GridItem rowSpan={2} colSpan={2}>
         GridItem
       </GridItem>,
     )
-    const gridItem = await findByTestId("gridItem")
-    expect(gridItem).toHaveStyle({
+    expect(screen.getByText("GridItem")).toHaveStyle({
       gridColumn: "span 2/span 2",
       gridRow: "span 2/span 2",
     })
@@ -319,27 +297,24 @@ describe("<ZStack />", () => {
   })
 
   test("startIndex property works correctly", () => {
-    const { getByTestId } = render(
-      <ZStack data-testid="z-stack" startIndex={10}>
+    render(
+      <ZStack startIndex={10}>
         <Box>ZStack Item</Box>
       </ZStack>,
     )
 
-    const zStackItem = getByTestId("z-stack").firstChild
-    expect(zStackItem).toHaveStyle({ zIndex: 10 })
+    expect(screen.getByText("ZStack Item")).toHaveStyle({ zIndex: 10 })
   })
 
   test("Child elements are correctly overlaid and rendered", () => {
-    const { getByTestId } = render(
-      <ZStack data-testid="z-stack">
-        <Box data-testid="item-1">Item 1</Box>
-        <Box data-testid="item-2">Item 2</Box>
+    render(
+      <ZStack>
+        <Box>Item 1</Box>
+        <Box>Item 2</Box>
       </ZStack>,
     )
 
-    const item1 = getByTestId("item-1")
-    const item2 = getByTestId("item-2")
-    expect(item1).toHaveStyle({ position: "absolute" })
-    expect(item2).toHaveStyle({ position: "absolute" })
+    expect(screen.getByText("Item 1")).toHaveStyle({ position: "absolute" })
+    expect(screen.getByText("Item 2")).toHaveStyle({ position: "absolute" })
   })
 })

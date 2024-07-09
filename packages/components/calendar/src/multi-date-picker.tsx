@@ -133,6 +133,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       value,
       setValue,
       dateToString,
+      id,
     } = useMultiDatePicker(computedProps)
 
     h ??= height
@@ -182,6 +183,10 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                id={id}
+                role="dialog"
+                aria-modal="true"
+                aria-multiselectable="true"
                 className="ui-multi-date-picker__popover"
                 __css={{ ...styles.list }}
               >

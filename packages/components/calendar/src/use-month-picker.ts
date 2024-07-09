@@ -208,6 +208,7 @@ export const useMonthPicker = ({
   )
 
   return {
+    id,
     value,
     getContainerProps,
     getPopoverProps,

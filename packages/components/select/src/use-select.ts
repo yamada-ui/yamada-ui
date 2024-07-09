@@ -340,6 +340,9 @@ export const useSelect = <T extends MaybeValue = string>({
   const onChangeLabel = useCallback(
     (newValue: string, runOmit: boolean = true) => {
       const values = descendants.values()
+
+      if (!values.length) return
+
       const selectedValues = values
         .filter(({ node }) => node.dataset.value === newValue)
         .map(({ node, index }) => {

@@ -203,6 +203,7 @@ export const useMonthList = () => {
           ref: mergeRefs(ref, monthRefs.current.get(value)),
           ...props,
           tabIndex,
+          "aria-selected": ariaAttr(isSelected),
           "data-selected": dataAttr(isSelected),
           "data-disabled": dataAttr(isDisabled),
           "data-value": value ?? "",

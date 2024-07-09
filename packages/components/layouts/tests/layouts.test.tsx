@@ -317,4 +317,26 @@ describe("<ZStack />", () => {
     expect(screen.getByText("Item 1")).toHaveStyle({ position: "absolute" })
     expect(screen.getByText("Item 2")).toHaveStyle({ position: "absolute" })
   })
+
+  test("Whether the direction is working properly", () => {
+    render(
+      <ZStack direction="right">
+        <Box>Item 1</Box>
+        <Box>Item 2</Box>
+      </ZStack>,
+    )
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
+
+  test("Whether the reverse is working properly", () => {
+    render(
+      <ZStack reverse>
+        <Box>Item 1</Box>
+        <Box>Item 2</Box>
+      </ZStack>,
+    )
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
 })

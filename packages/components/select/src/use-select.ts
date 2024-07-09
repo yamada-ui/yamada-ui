@@ -725,16 +725,18 @@ export const useSelectList = () => {
     beforeFocusedIndex.current = selectedValue.index
   }, [listRef, selectedValue])
 
+  const id = useId()
+
   const getListProps: MotionUIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
-      id: props.id ?? useId(),
+      id,
       as: "ul",
       ref: mergeRefs(listRef, ref),
       role: "listbox",
       tabIndex: -1,
       ...props,
     }),
-    [listRef],
+    [id, listRef],
   )
 
   return {

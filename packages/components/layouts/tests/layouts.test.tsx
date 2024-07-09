@@ -325,8 +325,14 @@ describe("<ZStack />", () => {
         <Box>Item 2</Box>
       </ZStack>,
     )
-    expect(screen.getByText("Item 1")).toBeInTheDocument()
-    expect(screen.getByText("Item 2")).toBeInTheDocument()
+    expect(screen.getByText("Item 1")).toHaveStyle({
+      position: "absolute",
+      zIndex: 0,
+    })
+    expect(screen.getByText("Item 2")).toHaveStyle({
+      position: "absolute",
+      zIndex: 1,
+    })
   })
 
   test("Whether the reverse is working properly", () => {
@@ -336,7 +342,13 @@ describe("<ZStack />", () => {
         <Box>Item 2</Box>
       </ZStack>,
     )
-    expect(screen.getByText("Item 1")).toBeInTheDocument()
-    expect(screen.getByText("Item 2")).toBeInTheDocument()
+    expect(screen.getByText("Item 1")).toHaveStyle({
+      position: "absolute",
+      zIndex: 0,
+    })
+    expect(screen.getByText("Item 2")).toHaveStyle({
+      position: "absolute",
+      zIndex: 1,
+    })
   })
 })

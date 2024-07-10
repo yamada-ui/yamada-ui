@@ -78,6 +78,11 @@ describe("<PagingTable />", () => {
       age: 35,
       email: "goku@dbz.com",
     },
+    {
+      Name: "Vegeta",
+      age: 37,
+      email: "vegeta@dbz.com",
+    },
   ]
 
   test("columns property renders correctly", () => {
@@ -92,6 +97,110 @@ describe("<PagingTable />", () => {
     expect(screen.getByText("Goku")).toBeVisible()
     expect(screen.getByText("35")).toBeVisible()
     expect(screen.getByText("goku@dbz.com")).toBeVisible()
+  })
+
+  test("renders custom pagination when children is a function", async () => {
+    const { user, getByTestId } = render(
+      <PagingTable
+        columns={columns}
+        data={data}
+        defaultPageSize={1}
+        defaultPageIndex={0}
+      >
+        {({
+          pageIndex,
+          pageSize,
+          totalPage,
+          getCanNextPage,
+          getCanPreviousPage,
+          setPageIndex,
+          previousPage,
+          nextPage,
+          setPageSize,
+        }) => (
+          <div>
+            <p>Page: {pageIndex + 1}</p>
+            <button
+              onClick={previousPage}
+              disabled={!getCanPreviousPage()}
+              data-testid="previous-button"
+            >
+              Previous
+            </button>
+            <button
+              onClick={nextPage}
+              disabled={!getCanNextPage()}
+              data-testid="next-button"
+            >
+              Next
+            </button>
+            <input
+              type="number"
+              value={pageSize}
+              min={1}
+              max={totalPage}
+              data-testid="page-index-input"
+              onChange={(e) => setPageIndex(parseInt(e.target.value) - 1)}
+            />
+            <select
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+              data-testid="page-size-select"
+            >
+              {[1, 2, 3, 4, 5].map((size) => (
+                <option key={size} value={size}>
+                  {size} items per page
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+      </PagingTable>,
+    )
+    expect(screen.getByText("Name")).toBeVisible()
+    expect(screen.getByText("Age")).toBeVisible()
+    expect(screen.getByText("Email")).toBeVisible()
+
+    expect(screen.getByText("Page: 1")).toBeVisible()
+    expect(screen.getByRole("button", { name: "Previous" })).toBeDisabled()
+    expect(screen.getByRole("button", { name: "Next" })).toBeEnabled()
+
+    expect(screen.getByText("Goku")).toBeVisible()
+    expect(screen.getByText("35")).toBeVisible()
+    expect(screen.getByText("goku@dbz.com")).toBeVisible()
+
+    await user.click(getByTestId("next-button"))
+    expect(screen.getByText("Page: 2")).toBeVisible()
+    expect(screen.getByRole("button", { name: "Previous" })).toBeEnabled()
+    expect(screen.getByRole("button", { name: "Next" })).toBeDisabled()
+
+    expect(screen.getByText("Vegeta")).toBeVisible()
+    expect(screen.getByText("37")).toBeVisible()
+    expect(screen.getByText("vegeta@dbz.com")).toBeVisible()
+
+    await user.click(getByTestId("previous-button"))
+    expect(screen.getByText("Page: 1")).toBeVisible()
+    expect(screen.getByRole("button", { name: "Previous" })).toBeDisabled()
+    expect(screen.getByRole("button", { name: "Next" })).toBeEnabled()
+
+    user.click(getByTestId("page-index-input"))
+    user.keyboard("2")
+    expect(screen.getByText("Page: 1")).toBeVisible()
+    expect(screen.getByRole("button", { name: "Previous" })).toBeDisabled()
+    expect(screen.getByRole("button", { name: "Next" })).toBeEnabled()
+    expect(screen.getByText("Goku")).toBeVisible()
+    expect(screen.getByText("35")).toBeVisible()
+    expect(screen.getByText("goku@dbz.com")).toBeVisible()
+    expect(screen.queryByText("Vegeta")).toBeNull()
+    expect(screen.queryByText("37")).toBeNull()
+    expect(screen.queryByText("vegeta@dbz.com")).toBeNull()
+
+    await user.selectOptions(getByTestId("page-size-select"), "2")
+    expect(screen.getByText("Page: 1")).toBeVisible()
+    expect(screen.getByText("Goku")).toBeVisible()
+    expect(screen.getByText("Vegeta")).toBeVisible()
+    expect(screen.getByRole("button", { name: "Previous" })).toBeDisabled()
+    expect(screen.getByRole("button", { name: "Next" })).toBeDisabled()
   })
 })
 

@@ -186,12 +186,12 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 id={id}
                 role="dialog"
                 aria-modal="true"
-                aria-multiselectable="true"
                 className="ui-multi-date-picker__popover"
                 __css={{ ...styles.list }}
               >
                 <Calendar
                   className="ui-multi-date-picker__calendar"
+                  aria-multiselectable="true"
                   {...getCalendarProps()}
                 />
               </PopoverContent>

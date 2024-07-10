@@ -162,7 +162,7 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
 
         <Spacer display={{ base: "block", sm: "none" }} />
 
-        <Button colorScheme="primary" size="sm" leftIcon={<CirclePlus />}>
+        <Button colorScheme="primary" size="sm" startIcon={<CirclePlus />}>
           Add Music
         </Button>
       </HStack>

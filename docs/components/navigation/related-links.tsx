@@ -29,7 +29,7 @@ export const RelatedLinks = memo(
             href={`${CONSTANT.SNS.GITHUB.UI_EDIT_URL}/${
               isHook ? "hooks" : "components"
             }/${dirName}`}
-            leftIcon={
+            startIcon={
               <Github
                 boxSize="1rem"
                 color={["blackAlpha.700", "whiteAlpha.600"]}
@@ -43,7 +43,7 @@ export const RelatedLinks = memo(
         {package_name ? (
           <DocumentLink
             href={`https://www.npmjs.com/package/${package_name}`}
-            leftIcon={<Npm boxSize="2rem" color="red.500" />}
+            endIcon={<Npm boxSize="2rem" color="red.500" />}
           >
             {package_name}
           </DocumentLink>

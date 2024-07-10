@@ -26,6 +26,7 @@ import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
 import { Fieldset } from "./fieldset"
+import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
@@ -108,6 +109,7 @@ export default {
   Dropzone,
   Editable,
   Fieldset,
+  FileButton,
   FileInput,
   FormControl,
   Heading,

@@ -1,7 +1,12 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { ColorModeToken, CSS } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { ColorModeToken, CSS, ThemeProps } from "@yamada-ui/core"
+import {
+  ui,
+  forwardRef,
+  useMultiComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
@@ -46,6 +51,7 @@ type InputProps = Partial<Pick<HTMLInputElement, "accept" | "multiple">>
 
 export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
   InputProps &
+  ThemeProps<"FileButton"> &
   FileButtonOptions &
   FormControlOptions
 
@@ -54,102 +60,96 @@ export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
  *
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
-export const FileButton = forwardRef<FileButtonProps, "input">(
-  ({ className, resetRef, as: As, children, ...props }, ref) => {
-    const {
-      id,
-      name,
-      accept,
-      multiple,
-      form,
-      "aria-readonly": ariaReadonly,
-      onClick: onClickProp,
-      onChange: onChangeProp,
-      ...rest
-    } = useFormControlProps(props)
+export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
+  const {
+    id,
+    name,
+    accept,
+    multiple,
+    form,
+    "aria-readonly": ariaReadonly,
+    onClick: onClickProp,
+    onChange: onChangeProp,
+    ...rest
+  } = useFormControlProps(props)
 
-    const { disabled, readOnly, required, "aria-invalid": isInvalid } = rest
+  const [styles, mergedProps] = useMultiComponentStyle("FileButton", {
+    ...props,
+  })
 
-    const inputRef = useRef<HTMLInputElement>(null)
+  let { className, resetRef, as: As, children } = omitThemeProps(mergedProps)
 
-    const onClick = useCallback(() => {
-      if (disabled || readOnly) return
+  const { disabled, readOnly, required, "aria-invalid": isInvalid } = rest
 
-      inputRef.current?.click()
-    }, [disabled, readOnly])
+  const inputRef = useRef<HTMLInputElement>(null)
 
-    const onChange = useCallback(
-      (ev: ChangeEvent<HTMLInputElement>) => {
-        const files = !isNull(ev.currentTarget.files)
-          ? Array.from(ev.currentTarget.files)
-          : undefined
+  const onClick = useCallback(() => {
+    if (disabled || readOnly) return
 
-        onChangeProp?.(files)
-      },
-      [onChangeProp],
-    )
+    inputRef.current?.click()
+  }, [disabled, readOnly])
 
-    const onReset = useCallback(() => {
-      if (inputRef.current) inputRef.current.value = ""
-    }, [])
+  const onChange = useCallback(
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      const files = !isNull(ev.currentTarget.files)
+        ? Array.from(ev.currentTarget.files)
+        : undefined
 
-    if (!isFunction(children)) {
-      const Component = As || Button
+      onChangeProp?.(files)
+    },
+    [onChangeProp],
+  )
 
-      children = (
-        <Component
-          className={cx("ui-file-button", className)}
-          {...rest}
-          onClick={handlerAll(onClickProp, onClick)}
-        >
-          {children}
-        </Component>
-      ) as ReactNode
-    }
+  const onReset = useCallback(() => {
+    if (inputRef.current) inputRef.current.value = ""
+  }, [])
 
-    assignRef(resetRef, onReset)
+  if (!isFunction(children)) {
+    const Component = As || Button
 
-    return (
-      <>
-        <ui.input
-          ref={mergeRefs(inputRef, ref)}
-          type="file"
-          aria-hidden
-          tabIndex={-1}
-          id={id}
-          name={name}
-          form={form}
-          accept={accept}
-          multiple={multiple}
-          style={{
-            border: "0px",
-            clip: "rect(0px, 0px, 0px, 0px)",
-            height: "1px",
-            width: "1px",
-            margin: "-1px",
-            padding: "0px",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            position: "absolute",
-          }}
-          onChange={onChange}
-          aria-readonly={ariaReadonly}
-          {...pickObject(rest, formControlProperties)}
-        />
+    children = (
+      <Component
+        className={cx("ui-file-button", className)}
+        {...rest}
+        onClick={handlerAll(onClickProp, onClick)}
+      >
+        {children}
+      </Component>
+    ) as ReactNode
+  }
 
-        {isFunction(children)
-          ? children({
-              onClick,
-              disabled,
-              readOnly,
-              required,
-              isDisabled: disabled,
-              isReadOnly: readOnly,
-              isRequired: required,
-              isInvalid,
-            })
-          : children}
-      </>
-    )
-  },
-)
+  assignRef(resetRef, onReset)
+
+  return (
+    <>
+      <ui.input
+        ref={mergeRefs(inputRef, ref)}
+        type="file"
+        aria-hidden
+        tabIndex={-1}
+        id={id}
+        name={name}
+        form={form}
+        accept={accept}
+        multiple={multiple}
+        style={styles}
+        onChange={onChange}
+        aria-readonly={ariaReadonly}
+        {...pickObject(rest, formControlProperties)}
+      />
+
+      {isFunction(children)
+        ? children({
+            onClick,
+            disabled,
+            readOnly,
+            required,
+            isDisabled: disabled,
+            isReadOnly: readOnly,
+            isRequired: required,
+            isInvalid,
+          })
+        : children}
+    </>
+  )
+})

@@ -202,6 +202,18 @@ describe("<PagingTable />", () => {
     expect(screen.getByRole("button", { name: "Previous" })).toBeDisabled()
     expect(screen.getByRole("button", { name: "Next" })).toBeDisabled()
   })
+
+  test("renders custom pagination when children is not a function", async () => {
+    render(
+      <PagingTable columns={columns} data={data}>
+        <div>customPagination</div>
+      </PagingTable>,
+    )
+    expect(screen.getByText("Name")).toBeVisible()
+    expect(screen.getByText("Age")).toBeVisible()
+    expect(screen.getByText("Email")).toBeVisible()
+    expect(screen.getByText("customPagination")).toBeVisible()
+  })
 })
 
 describe("<Thead />", () => {

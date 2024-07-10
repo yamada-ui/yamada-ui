@@ -47,11 +47,11 @@ type ButtonOptions = {
   /**
    * The icon to display at the left side of the button.
    */
-  leftIcon?: ReactElement
+  startIcon?: ReactElement
   /**
    * The icon to display at the right side of the button.
    */
-  rightIcon?: ReactElement
+  endIcon?: ReactElement
   /**
    * The icon to display when the button is loading.
    */
@@ -98,8 +98,8 @@ export const Button = forwardRef<ButtonProps, "button">(
       isLoading,
       isActive,
       isDisabled = group?.isDisabled,
-      leftIcon,
-      rightIcon,
+      startIcon,
+      endIcon,
       loadingIcon,
       loadingText,
       loadingPlacement = "start",
@@ -131,8 +131,8 @@ export const Button = forwardRef<ButtonProps, "button">(
     }, [styles, __css, group, isRounded])
 
     const contentProps = {
-      leftIcon,
-      rightIcon,
+      startIcon,
+      endIcon,
       children,
     }
 
@@ -207,16 +207,16 @@ const Loading: FC<
   )
 }
 
-const Content: FC<Pick<ButtonProps, "leftIcon" | "rightIcon" | "children">> = ({
-  leftIcon,
-  rightIcon,
+const Content: FC<Pick<ButtonProps, "startIcon" | "endIcon" | "children">> = ({
+  startIcon,
+  endIcon,
   children,
 }) => {
   return (
     <>
-      {leftIcon ? <Icon>{leftIcon}</Icon> : null}
+      {startIcon ? <Icon>{startIcon}</Icon> : null}
       {children}
-      {rightIcon ? <Icon>{rightIcon}</Icon> : null}
+      {endIcon ? <Icon>{endIcon}</Icon> : null}
     </>
   )
 }

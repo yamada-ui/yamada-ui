@@ -23,6 +23,7 @@ import {
   Skeleton,
   useColorMode,
   useTheme,
+  createThemeSchemeManager,
 } from "@yamada-ui/react"
 import * as UIComponents from "@yamada-ui/react"
 import {
@@ -62,7 +63,7 @@ import {
   SmilePlus,
   CircleCheck,
 } from "@yamada-ui/lucide"
-import type { SkeletonProps } from "@yamada-ui/react"
+import type { SkeletonProps, Environment } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts/i18n-context"
@@ -77,22 +78,28 @@ import { theme as defaultTheme, config as defaultConfig } from "theme"
 import { wait } from "utils/async"
 import "dayjs/locale/ja"
 
-const UIProvider: FC<UIComponents.UIProviderProps> = ({
+const UIProvider: FC<
+  UIComponents.UIProviderProps & { environment?: Environment }
+> = ({
   theme = defaultTheme,
   config = defaultConfig,
+  environment,
   children,
+  ...rest
 }) => {
   return (
-    <UIComponents.ThemeProvider theme={theme} config={config}>
-      <UIComponents.LoadingProvider {...config.loading}>
-        <UIComponents.ResetStyle />
-        <UIComponents.GlobalStyle />
+    <UIComponents.EnvironmentProvider environment={environment}>
+      <UIComponents.ThemeProvider theme={theme} config={config} {...rest}>
+        <UIComponents.LoadingProvider {...config.loading}>
+          <UIComponents.ResetStyle />
+          <UIComponents.GlobalStyle />
 
-        {children}
+          {children}
 
-        <UIComponents.NoticeProvider {...config.notice} />
-      </UIComponents.LoadingProvider>
-    </UIComponents.ThemeProvider>
+          <UIComponents.NoticeProvider {...config.notice} />
+        </UIComponents.LoadingProvider>
+      </UIComponents.ThemeProvider>
+    </UIComponents.EnvironmentProvider>
   )
 }
 
@@ -277,6 +284,8 @@ const createCache = weakMemoize((container: Node) =>
 )
 
 const Iframe: FC<PropsWithChildren> = ({ children }) => {
+  const themeSchemeManager = createThemeSchemeManager("cookie")
+
   const { colorMode } = useColorMode()
   const { themeScheme } = useTheme()
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -309,6 +318,11 @@ const Iframe: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [colorMode, themeScheme])
 
+  const environment: Environment = {
+    getDocument: () => iframeRef.current?.contentDocument ?? document,
+    getWindow: () => iframeRef.current?.contentDocument?.defaultView ?? window,
+  }
+
   return (
     <ui.iframe
       title="react-live-iframe"
@@ -322,7 +336,12 @@ const Iframe: FC<PropsWithChildren> = ({ children }) => {
       {head && body
         ? createPortal(
             <CacheProvider value={createCache(head)}>
-              <UIProvider>{children}</UIProvider>
+              <UIProvider
+                themeSchemeManager={themeSchemeManager}
+                environment={environment}
+              >
+                {children}
+              </UIProvider>
             </CacheProvider>,
             body,
           )

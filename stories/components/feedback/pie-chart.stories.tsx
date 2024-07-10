@@ -149,6 +149,18 @@ export const custom: Story = () => {
                   }))
                 },
               },
+              {
+                label: "Label Offset",
+                value: props.labelOffset as number,
+                min: 0,
+                max: 100,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    labelOffset: value,
+                  }))
+                },
+              },
             ]}
           />
 
@@ -210,6 +222,15 @@ export const custom: Story = () => {
                   setProps((prev) => ({
                     ...prev,
                     withLabelLines: !prev.withLabelLines,
+                  })),
+              },
+              {
+                label: "isParcent",
+                isChecked: props.isParcent,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    isParcent: !prev.isParcent,
                   })),
               },
             ]}

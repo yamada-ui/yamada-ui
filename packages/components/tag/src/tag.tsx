@@ -15,11 +15,11 @@ type TagOptions = {
   /**
    * Icon to be displayed to the left of the tag.
    */
-  leftIcon?: ReactElement
+  startIcon?: ReactElement
   /**
    * Icon to be displayed to the right of the tag.
    */
-  rightIcon?: ReactElement
+  endIcon?: ReactElement
   /**
    * Function to be executed when the close button is clicked.
    */
@@ -43,8 +43,8 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("Tag", props)
   const {
     className,
-    leftIcon,
-    rightIcon,
+    startIcon,
+    endIcon,
     onClose,
     isDisabled,
     children,
@@ -62,13 +62,13 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {leftIcon}
+      {startIcon}
 
       <ui.span lineClamp={1} __css={styles.label}>
         {children}
       </ui.span>
 
-      {rightIcon}
+      {endIcon}
 
       {onClose ? (
         <CloseButton isDisabled={isDisabled} onClick={onClose}>

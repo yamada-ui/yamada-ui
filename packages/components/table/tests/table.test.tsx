@@ -214,6 +214,21 @@ describe("<PagingTable />", () => {
     expect(screen.getByText("Email")).toBeVisible()
     expect(screen.getByText("customPagination")).toBeVisible()
   })
+
+  test.each([
+    { size: "xl", expected: "lg" },
+    { size: "lg", expected: "md" },
+    { size: "md", expected: "sm" },
+    { size: "sm", expected: "xs" },
+  ])(
+    "renders Select component with correct size when table size is $size",
+    async ({ size, expected }) => {
+      render(<PagingTable columns={columns} data={data} size={size} />)
+      expect(screen.getByText("Goku")).toHaveStyle(
+        `font-size: var(--ui-fontSizes-${expected})`,
+      )
+    },
+  )
 })
 
 describe("<Thead />", () => {

@@ -313,3 +313,35 @@ describe("<Tbody />", () => {
     })
   })
 })
+
+describe("Sort", () => {
+  const columns = [
+    { header: "Name", accessorKey: "Name" },
+    { header: "Age", accessorKey: "age" },
+    { header: "Email", accessorKey: "email" },
+  ]
+  const data = [
+    {
+      Name: "Goku",
+      age: 35,
+      email: "goku@dbz.com",
+    },
+    {
+      Name: "Vegeta",
+      age: 37,
+      email: "vegeta@dbz.com",
+    },
+  ]
+
+  test("column header click cycles through sort states", async () => {
+    const { user } = render(<Table columns={columns} data={data} />)
+    await waitFor(async () => {
+      const nameHeader = screen.getByText("Name")
+      expect(nameHeader).toHaveAttribute("aria-sort", "none")
+      await user.click(nameHeader)
+      expect(nameHeader).toHaveAttribute("aria-sort", "ascending")
+      await user.click(nameHeader)
+      expect(nameHeader).toHaveAttribute("aria-sort", "descending")
+    })
+  })
+})

@@ -33,18 +33,22 @@ describe("<Collapse />", () => {
     await waitFor(() => expect(collapse).not.toBeVisible())
   })
 
-  test("animationOpacity set to true by default", () => {
+  test("animationOpacity set to true by default", async () => {
     const { getByTestId } = render(<Collapse isOpen data-testid="collapse" />)
 
-    expect(getByTestId("collapse")).toHaveStyle({ opacity: "1" })
+    await waitFor(() =>
+      expect(getByTestId("collapse")).toHaveStyle({ opacity: "1" }),
+    )
   })
 
-  test("no opacity when animationOpacity set to false", () => {
+  test("no opacity when animationOpacity set to false", async () => {
     const { getByTestId } = render(
       <Collapse isOpen animationOpacity={false} data-testid="collapse" />,
     )
 
-    expect(getByTestId("collapse")).not.toHaveStyle({ opacity: "1" })
+    await waitFor(() =>
+      expect(getByTestId("collapse")).not.toHaveStyle({ opacity: "1" }),
+    )
   })
 
   test("height changes correctly after isOpen set to true", async () => {
@@ -67,7 +71,7 @@ describe("<Collapse />", () => {
     const { user } = render(<TestComponent />)
 
     const collapse = screen.getByTestId("collapse")
-    expect(collapse).toHaveStyle({ height: "50px" })
+    await waitFor(() => expect(collapse).toHaveStyle({ height: "50px" }))
 
     const button = await screen.findByRole("button", { name: /button/i })
 

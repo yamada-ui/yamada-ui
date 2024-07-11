@@ -191,7 +191,6 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
               >
                 <Calendar
                   className="ui-multi-date-picker__calendar"
-                  aria-multiselectable="true"
                   {...getCalendarProps()}
                 />
               </PopoverContent>

@@ -1,5 +1,5 @@
 import { AnimatePresence, Button, useBoolean } from "@yamada-ui/react"
-import { render, a11y, screen, fireEvent, waitFor } from "@yamada-ui/test"
+import { render, a11y, screen, waitFor } from "@yamada-ui/test"
 import { Motion } from "../src"
 
 describe("<Motion />", () => {
@@ -20,10 +20,15 @@ describe("<Motion />", () => {
 
   test("Motion renders correctly with initial", async () => {
     render(<Motion initial={{ x: 10, opacity: 0 }}>Motion</Motion>)
-    await waitFor(() =>
-      expect(screen.queryByText("Motion")).toHaveStyle({
-        transform: "translateX(10px) translateZ(0)",
-      }),
+
+    const motion = await screen.findByText("Motion")
+
+    await waitFor(
+      () =>
+        expect(motion).toHaveStyle({
+          transform: "translateX(10px) translateZ(0)",
+        }),
+      { timeout: 500 },
     )
   })
 
@@ -33,11 +38,16 @@ describe("<Motion />", () => {
         Motion
       </Motion>,
     )
-    await waitFor(() => {
-      expect(screen.queryByText("Motion")).toHaveStyle({
-        transform: "translateX(100px) translateZ(0)",
-      })
-    })
+
+    const motion = await screen.findByText("Motion")
+
+    await waitFor(
+      () =>
+        expect(motion).toHaveStyle({
+          transform: "translateX(100px) translateZ(0)",
+        }),
+      { timeout: 500 },
+    )
   })
 
   test("Motion renders correctly with exit and transition", async () => {
@@ -62,19 +72,19 @@ describe("<Motion />", () => {
       )
     }
 
-    render(<MotionExpample />)
+    const { user } = render(<MotionExpample />)
 
-    const toggleButton = screen.getByRole("button")
+    const toggleButton = screen.getByRole("button", { name: /click/i })
 
-    fireEvent.click(toggleButton)
+    await user.click(toggleButton)
     await waitFor(() => {
-      expect(screen.queryByText("Motion")).toHaveStyle("opacity: 1")
+      expect(screen.queryByText("Motion")).toHaveStyle({ opacity: "1" })
     })
 
-    fireEvent.click(toggleButton)
+    await user.click(toggleButton)
     await waitFor(
       () => {
-        expect(screen.queryByText("Motion")).toHaveStyle("opacity: 0")
+        expect(screen.queryByText("Motion")).toHaveStyle({ opacity: "0" })
       },
       { timeout: 300 },
     )

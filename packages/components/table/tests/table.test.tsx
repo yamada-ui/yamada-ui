@@ -1,5 +1,5 @@
 import { PagingTable, Table } from "@yamada-ui/table"
-import { render, screen, a11y } from "@yamada-ui/test"
+import { render, screen, a11y, waitFor } from "@yamada-ui/test"
 
 describe("<Table />", () => {
   const columns = [{ header: "作品名", accessorKey: "name" }]
@@ -259,5 +259,42 @@ describe("<Thead />", () => {
     render(<Table columns={columns} data={data} />)
     expect(screen.getByText("2015年7月5日")).toBeVisible()
     expect(screen.getByText("2018年3月25日")).toBeVisible()
+  })
+})
+
+describe("<Tbody />", () => {
+  const columns = [
+    { header: "Name", accessorKey: "Name" },
+    { header: "Age", accessorKey: "age" },
+    { header: "Email", accessorKey: "email" },
+  ]
+  const data = [
+    {
+      Name: "Goku",
+      age: 35,
+      email: "goku@dbz.com",
+    },
+  ]
+
+  test("checkbox can be clicked and toggled", async () => {
+    const { user } = render(<Table columns={columns} data={data} />)
+    await waitFor(async () => {
+      const checkbox = screen.getByLabelText("Select row")
+      expect(checkbox).not.toBeChecked()
+      await user.click(checkbox)
+      expect(checkbox).toBeChecked()
+    })
+  })
+
+  test("if rowsClickSelect is true, you can select a row by clicking on it", async () => {
+    const { user } = render(
+      <Table columns={columns} data={data} rowsClickSelect={true} />,
+    )
+    await waitFor(async () => {
+      const row = screen.getByRole("row", { name: /Goku/i })
+      expect(row).not.toHaveAttribute("aria-selected")
+      await user.click(row)
+      expect(row).toHaveAttribute("aria-selected", "true")
+    })
   })
 })

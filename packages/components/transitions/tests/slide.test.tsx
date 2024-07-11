@@ -8,60 +8,88 @@ describe("<Slide />", () => {
   })
 
   test("applies default styles correctly", async () => {
-    const { getByTestId } = render(<Slide isOpen data-testid="slide" />)
+    render(<Slide isOpen>Slide</Slide>)
 
-    await waitFor(() =>
-      expect(getByTestId("slide")).toHaveStyle({
-        transform: "translateX(100%) translateY(0px) translateZ(0)",
-      }),
+    const slide = await screen.findByText("Slide")
+
+    await waitFor(
+      () =>
+        expect(slide).toHaveStyle({
+          transform: "translateX(100%) translateY(0px) translateZ(0)",
+        }),
+      { timeout: 300 },
     )
   })
 
   test("applies styles correctly for top placement", async () => {
-    const { getByTestId } = render(
-      <Slide isOpen placement="top" data-testid="slide" />,
+    render(
+      <Slide isOpen placement="top">
+        Slide
+      </Slide>,
     )
 
-    await waitFor(() =>
-      expect(getByTestId("slide")).toHaveStyle({
-        transform: "translateX(0px) translateY(-100%) translateZ(0)",
-      }),
+    const slide = await screen.findByText("Slide")
+
+    await waitFor(
+      () =>
+        expect(slide).toHaveStyle({
+          transform: "translateX(0px) translateY(-100%) translateZ(0)",
+        }),
+      { timeout: 300 },
     )
   })
 
   test("applies styles correctly for left placement", async () => {
-    const { getByTestId } = render(
-      <Slide isOpen placement="left" data-testid="slide" />,
+    render(
+      <Slide isOpen placement="left">
+        Slide
+      </Slide>,
     )
 
-    await waitFor(() =>
-      expect(getByTestId("slide")).toHaveStyle({
-        transform: "translateX(-100%) translateY(0px) translateZ(0)",
-      }),
+    const slide = await screen.findByText("Slide")
+
+    await waitFor(
+      () =>
+        expect(slide).toHaveStyle({
+          transform: "translateX(-100%) translateY(0px) translateZ(0)",
+        }),
+      { timeout: 300 },
     )
   })
 
   test("applies styles correctly for right placement", async () => {
-    const { getByTestId } = render(
-      <Slide isOpen placement="right" data-testid="slide" />,
+    render(
+      <Slide isOpen placement="right">
+        Slide
+      </Slide>,
     )
 
-    await waitFor(() =>
-      expect(getByTestId("slide")).toHaveStyle({
-        transform: "translateX(100%) translateY(0px) translateZ(0)",
-      }),
+    const slide = await screen.findByText("Slide")
+
+    await waitFor(
+      () =>
+        expect(slide).toHaveStyle({
+          transform: "translateX(100%) translateY(0px) translateZ(0)",
+        }),
+      { timeout: 300 },
     )
   })
 
   test("applies styles correctly for bottom placement", async () => {
-    const { getByTestId } = render(
-      <Slide isOpen placement="bottom" data-testid="slide" />,
+    render(
+      <Slide isOpen placement="bottom">
+        Slide
+      </Slide>,
     )
 
-    await waitFor(() =>
-      expect(getByTestId("slide")).toHaveStyle({
-        transform: "translateX(0px) translateY(100%) translateZ(0)",
-      }),
+    const slide = await screen.findByText("Slide")
+
+    await waitFor(
+      () =>
+        expect(slide).toHaveStyle({
+          transform: "translateX(0px) translateY(100%) translateZ(0)",
+        }),
+      { timeout: 300 },
     )
   })
 
@@ -72,21 +100,22 @@ describe("<Slide />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <Slide isOpen={isOpen} unmountOnExit data-testid="slide" />
+          <Slide isOpen={isOpen} unmountOnExit>
+            Slide
+          </Slide>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByTestId("slide")).toBeNull()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    expect(screen.queryByText("Slide")).toBeNull()
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("slide")).toBeVisible())
+    await waitFor(() => expect(screen.getByText("Slide")).toBeVisible())
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("slide")).toBeNull())
+    await waitFor(() => expect(screen.queryByText("Slide")).toBeNull())
   })
 })

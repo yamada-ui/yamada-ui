@@ -14,17 +14,16 @@ describe("<Collapse />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <Collapse isOpen={isOpen} data-testid="collapse" />
+          <Collapse isOpen={isOpen}>Collapse</Collapse>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    const collapse = screen.getByTestId("collapse")
-    expect(collapse).not.toBeVisible()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    const collapse = await screen.findByText("Collapse")
+    expect(collapse).not.toBeVisible()
 
     await user.click(button)
     await waitFor(() => expect(collapse).toBeVisible())
@@ -34,21 +33,23 @@ describe("<Collapse />", () => {
   })
 
   test("animationOpacity set to true by default", async () => {
-    const { getByTestId } = render(<Collapse isOpen data-testid="collapse" />)
+    render(<Collapse isOpen>Collapse</Collapse>)
 
-    await waitFor(() =>
-      expect(getByTestId("collapse")).toHaveStyle({ opacity: "1" }),
-    )
+    const collapse = await screen.findByText("Collapse")
+
+    await waitFor(() => expect(collapse).toHaveStyle({ opacity: "1" }))
   })
 
   test("no opacity when animationOpacity set to false", async () => {
-    const { getByTestId } = render(
-      <Collapse isOpen animationOpacity={false} data-testid="collapse" />,
+    render(
+      <Collapse isOpen animationOpacity={false}>
+        Collapse
+      </Collapse>,
     )
 
-    await waitFor(() =>
-      expect(getByTestId("collapse")).not.toHaveStyle({ opacity: "1" }),
-    )
+    const collapse = await screen.findByText("Collapse")
+
+    await waitFor(() => expect(collapse).not.toHaveStyle({ opacity: "1" }))
   })
 
   test("height changes correctly after isOpen set to true", async () => {
@@ -58,22 +59,18 @@ describe("<Collapse />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <Collapse
-            startingHeight={50}
-            endingHeight={200}
-            isOpen={isOpen}
-            data-testid="collapse"
-          />
+          <Collapse startingHeight={50} endingHeight={200} isOpen={isOpen}>
+            Collapse
+          </Collapse>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    const collapse = screen.getByTestId("collapse")
-    await waitFor(() => expect(collapse).toHaveStyle({ height: "50px" }))
-
     const button = await screen.findByRole("button", { name: /button/i })
+    const collapse = await screen.findByText("Collapse")
+    await waitFor(() => expect(collapse).toHaveStyle({ height: "50px" }))
 
     await user.click(button)
     await waitFor(() => expect(collapse).toHaveStyle({ height: "200px" }))
@@ -86,21 +83,23 @@ describe("<Collapse />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <Collapse isOpen={isOpen} unmountOnExit data-testid="collapse" />
+          <Collapse isOpen={isOpen} unmountOnExit>
+            Collapse
+          </Collapse>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByTestId("collapse")).toBeNull()
+    expect(screen.queryByText("Collapse")).toBeNull()
 
     const button = await screen.findByRole("button", { name: /button/i })
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("collapse")).toBeVisible())
+    await waitFor(() => expect(screen.getByText("Collapse")).toBeVisible())
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("collapse")).toBeNull())
+    await waitFor(() => expect(screen.queryByText("Collapse")).toBeNull())
   })
 })

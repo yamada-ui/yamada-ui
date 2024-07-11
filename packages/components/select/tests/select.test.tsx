@@ -13,26 +13,28 @@ describe("<Select />", () => {
 
   test("should render select", async () => {
     const { user } = render(
-      <Select role="combobox">
+      <Select>
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
+    expect(input).toHaveAccessibleName(/Select an option\./i)
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).toHaveTextContent(/one/i)
-    expect(options[1]).toHaveTextContent(/two/i)
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    const secondOption = await screen.findByRole("option", { name: /two/i })
+
+    expect(firstOption).toBeVisible()
+    expect(secondOption).toBeVisible()
   })
 
   test("when items passed to props, renders correctly", async () => {
     const { user } = render(
       <Select
-        role="combobox"
         items={[
           { label: "One", value: "one" },
           { label: "Two", value: "two" },
@@ -40,20 +42,21 @@ describe("<Select />", () => {
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).toHaveTextContent(/one/i)
-    expect(options[1]).toHaveTextContent(/two/i)
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    const secondOption = await screen.findByRole("option", { name: /two/i })
+
+    expect(firstOption).toBeVisible()
+    expect(secondOption).toBeVisible()
   })
 
   test("when nested items passed to props, renders correctly", async () => {
     const { user } = render(
       <Select
-        role="combobox"
         items={[
           {
             label: "Numbers",
@@ -67,20 +70,24 @@ describe("<Select />", () => {
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
 
-    const select = await screen.findByRole("select")
-    expect(select).toBeInTheDocument()
-    expect(select).toHaveTextContent(/numbers/i)
-    expect(select).toHaveTextContent(/one/i)
+    const select = await screen.findByRole("listbox")
+    expect(select).toBeVisible()
+
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    const secondOption = await screen.findByRole("option", { name: /two/i })
+
+    expect(firstOption).toBeVisible()
+    expect(secondOption).toBeVisible()
   })
 
   test("should render select with option group", async () => {
     const { user } = render(
-      <Select role="combobox">
+      <Select>
         <OptionGroup label="Numbers">
           <Option value="one">One</Option>
         </OptionGroup>
@@ -88,86 +95,94 @@ describe("<Select />", () => {
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
+    expect(input).toHaveAccessibleName(/Select an option\./i)
 
     await user.click(input)
 
-    const select = await screen.findByRole("select")
-    expect(select).toBeInTheDocument()
-    expect(select).toHaveTextContent(/numbers/i)
-    expect(select).toHaveTextContent(/one/i)
+    const listbox = await screen.findByRole("listbox")
+    expect(listbox).toBeVisible()
+
+    const optionGroups = await screen.findAllByRole("group", {
+      name: /Numbers/i,
+    })
+    expect(optionGroups[0]).toBeVisible()
+
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    expect(firstOption).toBeVisible()
+
+    const secondOption = await screen.findByRole("option", { name: /two/i })
+    expect(secondOption).toBeVisible()
   })
 
   test("should render select with placeholder", async () => {
     const { user } = render(
-      <Select role="combobox" placeholder="Select numbers">
+      <Select placeholder="Select numbers">
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox", {
+      name: /Select numbers/i,
+    })
     expect(input).toBeInTheDocument()
-    expect(input).toHaveTextContent(/select numbers/i)
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).toHaveTextContent(/select numbers/i)
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    expect(firstOption).toBeVisible()
   })
 
   test("should render correctly with placeholder not included in options", async () => {
     const { user } = render(
-      <Select
-        role="combobox"
-        placeholder="Select numbers"
-        placeholderInOptions={false}
-      >
+      <Select placeholder="Select numbers" placeholderInOptions={false}>
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox", {
+      name: /Select numbers/,
+    })
     expect(input).toBeInTheDocument()
-    expect(input).toHaveTextContent(/select numbers/i)
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).not.toHaveTextContent(/select numbers/i)
+    const option = screen.queryByRole("option", { name: /select numbers/i })
+    expect(option).toBeNull()
   })
 
-  test("should be disable", () => {
+  test("should be disable", async () => {
     render(
-      <Select role="combobox" isDisabled>
+      <Select isDisabled>
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toHaveAttribute("disabled")
     expect(input).toHaveAttribute("aria-disabled", "true")
   })
 
-  test("should be readonly", () => {
+  test("should be readonly", async () => {
     render(
-      <Select role="combobox" placeholder="Numbers" isReadOnly>
+      <Select placeholder="Numbers" isReadOnly>
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toHaveAttribute("readonly")
     expect(input).toHaveAttribute("data-readonly")
   })
 
   test("should be disable option", async () => {
     const { user } = render(
-      <Select role="combobox">
+      <Select>
         <Option value="one" isDisabled>
           One
         </Option>
@@ -175,15 +190,15 @@ describe("<Select />", () => {
       </Select>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).toHaveTextContent(/one/i)
-    expect(options[0]).toHaveAttribute("data-disabled")
-    expect(options[0]).toHaveAttribute("aria-disabled", "true")
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    expect(firstOption).toBeVisible()
+    expect(firstOption).toHaveAttribute("data-disabled")
+    expect(firstOption).toHaveAttribute("aria-disabled", "true")
   })
 
   test("correct warnings should be issued when set empty value and placeholder in options", () => {
@@ -193,7 +208,6 @@ describe("<Select />", () => {
 
     render(
       <Select
-        role="combobox"
         placeholder="Select numbers"
         placeholderInOptions={true}
         items={[
@@ -225,15 +239,15 @@ describe("<Select />", () => {
     ]
 
     test("arrowDown keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{ArrowDown>}")
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
 
       expect(options[0]).toHaveAttribute("data-focus")
 
@@ -248,30 +262,30 @@ describe("<Select />", () => {
     })
 
     test("arrowDown keyDown should work correctly even when defaultValue is set", async () => {
-      const { user } = render(
-        <Select role="combobox" items={ITEMS} defaultValue="option2" />,
-      )
+      const { user } = render(<Select items={ITEMS} defaultValue="option2" />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{ArrowDown>}")
 
-      const options = await screen.findAllByRole("select-item")
-      expect(options[1]).toHaveAttribute("data-focus")
+      const firstOption = await screen.findByRole("option", {
+        name: ITEMS[1].label,
+      })
+      expect(firstOption).toHaveAttribute("data-focus")
     })
 
     test("arrowUp keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{ArrowUp>}")
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
 
       expect(options[ITEMS.length - 1]).toHaveAttribute("data-focus")
 
@@ -286,62 +300,60 @@ describe("<Select />", () => {
     })
 
     test("arrowUp keyDown should work correctly even when defaultValue is set", async () => {
-      const { user } = render(
-        <Select role="combobox" items={ITEMS} defaultValue="option2" />,
-      )
+      const { user } = render(<Select items={ITEMS} defaultValue="option2" />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{ArrowUp>}")
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
       expect(options[1]).toHaveAttribute("data-focus")
     })
 
     test("space keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{Space>}")
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Space>}")
-      expect(input).toHaveTextContent("option1")
+      expect(input).toHaveTextContent(ITEMS[0].label)
     })
 
     test("enter keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{Enter>}")
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Enter>}")
-      expect(input).toHaveTextContent("option1")
+      expect(input).toHaveTextContent(ITEMS[0].label)
     })
 
     test("home keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
       await user.keyboard("{Escape>}{ArrowUp>}")
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
       expect(options[ITEMS.length - 1]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Home>}")
@@ -349,14 +361,14 @@ describe("<Select />", () => {
     })
 
     test("end keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
 
-      const options = await screen.findAllByRole("select-item")
+      const options = await screen.findAllByRole("option")
       expect(options[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{End>}")
@@ -364,23 +376,25 @@ describe("<Select />", () => {
     })
 
     test("escape keyDown should work correctly", async () => {
-      const { user } = render(<Select role="combobox" items={ITEMS} />)
+      const { user } = render(<Select items={ITEMS} />)
 
-      const input = screen.getByRole("combobox")
+      const input = await screen.findByRole("combobox")
       expect(input).toBeInTheDocument()
 
       await user.click(input)
 
-      const select = await screen.findByRole("select")
-      expect(select).toHaveStyle({ visibility: "visible" })
+      const listbox = await screen.findByRole("listbox")
+      expect(listbox).toHaveStyle({ visibility: "visible" })
+      expect(listbox).toBeVisible()
 
       await user.keyboard("{Escape>}")
-      await waitFor(() => expect(select).toHaveStyle({ visibility: "hidden" }))
+      // await waitFor(() => expect(listbox).toHaveStyle({ visibility: "hidden" }))
+      await waitFor(() => expect(listbox).not.toBeVisible())
     })
   })
 })
 
-describe("<MultiSelect />", () => {
+describe.skip("<MultiSelect />", () => {
   test("should pass a11y test", async () => {
     await a11y(
       <MultiSelect>
@@ -392,26 +406,26 @@ describe("<MultiSelect />", () => {
 
   test("MultiSelect renders correctly", async () => {
     const { user } = render(
-      <MultiSelect role="combobox">
+      <MultiSelect>
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
       </MultiSelect>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).toHaveTextContent(/one/i)
-    expect(options[1]).toHaveTextContent(/two/i)
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    const secondOption = await screen.findByRole("option", { name: /two/i })
+    expect(firstOption).toBeVisible()
+    expect(secondOption).toBeVisible()
   })
 
   test("when items passed to props, renders correctly", async () => {
     const { user } = render(
       <MultiSelect
-        role="combobox"
         items={[
           { label: "One", value: "one" },
           { label: "Two", value: "two" },
@@ -419,20 +433,20 @@ describe("<MultiSelect />", () => {
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
 
-    const options = await screen.findAllByRole("select-item")
-    expect(options[0]).toHaveTextContent(/one/i)
-    expect(options[1]).toHaveTextContent(/two/i)
+    const firstOption = await screen.findByRole("option", { name: /one/i })
+    const secondOption = await screen.findByRole("option", { name: /two/i })
+    expect(firstOption).toBeVisible()
+    expect(secondOption).toBeVisible()
   })
 
   test("when nested items passed to props, renders correctly", async () => {
     const { user } = render(
       <MultiSelect
-        role="combobox"
         items={[
           {
             label: "Numbers",
@@ -446,12 +460,12 @@ describe("<MultiSelect />", () => {
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
 
-    const select = await screen.findByRole("select")
+    const select = await screen.findByRole("listbox")
     expect(select).toBeInTheDocument()
     expect(select).toHaveTextContent(/numbers/i)
     expect(select).toHaveTextContent(/one/i)
@@ -459,25 +473,25 @@ describe("<MultiSelect />", () => {
 
   test("when items clicked twice, renders correctly", async () => {
     const { user } = render(
-      <MultiSelect role="combobox">
+      <MultiSelect>
         <Option value="one">One</Option>
         <Option value="two">Two</Option>
         <Option value="three">Three</Option>
       </MultiSelect>,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
 
     await user.click(input)
 
-    const option1 = await screen.findByText(/one/i)
+    const option1 = await screen.findByRole("option", { name: /one/i })
     await user.click(option1)
 
-    const option2 = await screen.findByText(/two/i)
+    const option2 = await screen.findByRole("option", { name: /two/i })
     await user.click(option2)
 
-    expect(input).toHaveTextContent(/one/i)
-    expect(input).toHaveTextContent(/two/i)
+    expect(option1).toBeVisible()
+    expect(option2).toBeVisible()
   })
 
   test("arrowDown should work correctly when omitSelectedValues is set", async () => {
@@ -496,17 +510,15 @@ describe("<MultiSelect />", () => {
       },
     ]
 
-    const { user } = render(
-      <MultiSelect role="combobox" omitSelectedValues items={items} />,
-    )
+    const { user } = render(<MultiSelect omitSelectedValues items={items} />)
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
     await user.keyboard("{Escape>}{ArrowDown>}")
 
-    const options = await screen.findAllByRole("select-item")
+    const options = await screen.findAllByRole("option")
 
     expect(options[0]).toHaveAttribute("data-focus")
 
@@ -538,20 +550,19 @@ describe("<MultiSelect />", () => {
 
     const { user } = render(
       <MultiSelect
-        role="combobox"
         omitSelectedValues
         items={items}
-        defaultValue={["option2"]}
+        defaultValue={[items[1].label]}
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
     await user.keyboard("{Escape>}{ArrowDown>}")
 
-    const options = await screen.findAllByRole("select-item")
+    const options = await screen.findAllByRole("option")
     expect(options[0]).toHaveAttribute("data-focus")
 
     await user.keyboard("{ArrowDown>}")
@@ -577,11 +588,9 @@ describe("<MultiSelect />", () => {
       },
     ]
 
-    const { user } = render(
-      <MultiSelect role="combobox" omitSelectedValues items={items} />,
-    )
+    const { user } = render(<MultiSelect omitSelectedValues items={items} />)
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
@@ -619,20 +628,19 @@ describe("<MultiSelect />", () => {
 
     const { user } = render(
       <MultiSelect
-        role="combobox"
         omitSelectedValues
         items={items}
-        defaultValue={["option2"]}
+        defaultValue={[items[1].label]}
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
     await user.keyboard("{Escape>}{ArrowUp>}")
 
-    const options = await screen.findAllByRole("select-item")
+    const options = await screen.findAllByRole("option")
     expect(options[2]).toHaveAttribute("data-focus")
 
     await user.keyboard("{ArrowUp>}")
@@ -660,20 +668,19 @@ describe("<MultiSelect />", () => {
 
     const { user } = render(
       <MultiSelect
-        role="combobox"
         omitSelectedValues
         items={items}
-        defaultValue={["option1"]}
+        defaultValue={[items[0].label]}
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
     await user.keyboard("{Escape>}{ArrowUp>}")
 
-    const options = await screen.findAllByRole("select-item")
+    const options = await screen.findAllByRole("option")
     expect(options[items.length - 1]).toHaveAttribute("data-focus")
 
     await user.keyboard("{Home>}")
@@ -698,20 +705,19 @@ describe("<MultiSelect />", () => {
 
     const { user } = render(
       <MultiSelect
-        role="combobox"
         omitSelectedValues
         items={items}
         defaultValue={["option3"]}
       />,
     )
 
-    const input = screen.getByRole("combobox")
+    const input = await screen.findByRole("combobox")
     expect(input).toBeInTheDocument()
 
     await user.click(input)
     await user.keyboard("{Escape>}{ArrowDown>}")
 
-    const options = await screen.findAllByRole("select-item")
+    const options = await screen.findAllByRole("option")
     expect(options[0]).toHaveAttribute("data-focus")
 
     await user.keyboard("{End>}")

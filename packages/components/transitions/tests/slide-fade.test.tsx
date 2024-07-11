@@ -14,17 +14,16 @@ describe("<SlideFade />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <SlideFade isOpen={isOpen} data-testid="slide-fade" />
+          <SlideFade isOpen={isOpen}>SlideFade</SlideFade>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    const slideFade = screen.getByTestId("slide-fade")
-    expect(slideFade).not.toBeVisible()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    const slideFade = await screen.findByText("SlideFade")
+    expect(slideFade).not.toBeVisible()
 
     await user.click(button)
     await waitFor(() => expect(slideFade).toBeVisible())
@@ -40,21 +39,18 @@ describe("<SlideFade />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <SlideFade
-            isOpen={isOpen}
-            initial="initial"
-            data-testid="slide-fade"
-          />
+          <SlideFade isOpen={isOpen} initial="initial">
+            SlideFade
+          </SlideFade>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    const slideFade = screen.getByTestId("slide-fade")
-    expect(slideFade).not.toBeVisible()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    const slideFade = await screen.findByText("SlideFade")
+    expect(slideFade).not.toBeVisible()
 
     await user.click(button)
     await waitFor(() => expect(slideFade).toBeVisible())
@@ -63,30 +59,32 @@ describe("<SlideFade />", () => {
     await waitFor(() => expect(slideFade).not.toBeVisible())
   })
 
-  test("default offset is set correctly", () => {
-    const { getByTestId } = render(<SlideFade data-testid="slide-fade" />)
+  test("default offset is set correctly", async () => {
+    render(<SlideFade>SlideFade</SlideFade>)
 
-    expect(getByTestId("slide-fade")).toHaveStyle({
+    const slideFade = await screen.findByText("SlideFade")
+
+    expect(slideFade).toHaveStyle({
       transform: "translateX(0px) translateY(8px)",
     })
   })
 
-  test("applies offsetX correctly", () => {
-    const { getByTestId } = render(
-      <SlideFade offsetX={10} data-testid="slide-fade" />,
-    )
+  test("applies offsetX correctly", async () => {
+    render(<SlideFade offsetX={10}>SlideFade</SlideFade>)
 
-    expect(getByTestId("slide-fade")).toHaveStyle({
+    const slideFade = await screen.findByText("SlideFade")
+
+    expect(slideFade).toHaveStyle({
       transform: "translateX(10px) translateY(8px)",
     })
   })
 
-  test("applies offsetY correctly", () => {
-    const { getByTestId } = render(
-      <SlideFade offsetY={10} data-testid="slide-fade" />,
-    )
+  test("applies offsetY correctly", async () => {
+    render(<SlideFade offsetY={10}>SlideFade</SlideFade>)
 
-    expect(getByTestId("slide-fade")).toHaveStyle({
+    const slideFade = await screen.findByText("SlideFade")
+
+    expect(slideFade).toHaveStyle({
       transform: "translateX(0px) translateY(10px)",
     })
   })
@@ -98,23 +96,23 @@ describe("<SlideFade />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <SlideFade isOpen={isOpen} unmountOnExit data-testid="slide-fade" />
+          <SlideFade isOpen={isOpen} unmountOnExit>
+            SlideFade
+          </SlideFade>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByTestId("slide-fade")).toBeNull()
-
     const button = await screen.findByRole("button", { name: /button/i })
 
-    await user.click(button)
-    await waitFor(() =>
-      expect(screen.queryByTestId("slide-fade")).toBeVisible(),
-    )
+    expect(screen.queryByText("SlideFade")).toBeNull()
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("slide-fade")).toBeNull())
+    await waitFor(() => expect(screen.getByText("SlideFade")).toBeVisible())
+
+    await user.click(button)
+    await waitFor(() => expect(screen.queryByText("SlideFade")).toBeNull())
   })
 })

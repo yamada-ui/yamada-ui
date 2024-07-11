@@ -436,6 +436,67 @@ return (
 )
 ```
 
+### ラベルを表示する
+
+ラベルを表示する場合は、`xAxisLabel`または`yAxisLabel`に文字列を設定します。
+
+```tsx functional=true
+const data = useMemo(
+  () => [
+    {
+      name: "ゼニガメ",
+      HP: 44,
+      こうげき: 48,
+      ぼうぎょ: 65,
+      とくこう: 50,
+      とくぼう: 64,
+      すばやさ: 43,
+    },
+    {
+      name: "ヒトカゲ",
+      HP: 39,
+      こうげき: 52,
+      ぼうぎょ: 43,
+      とくこう: 60,
+      とくぼう: 50,
+      すばやさ: 65,
+    },
+    {
+      name: "フシギダネ",
+      HP: 45,
+      こうげき: 49,
+      ぼうぎょ: 49,
+      とくこう: 65,
+      とくぼう: 65,
+      すばやさ: 45,
+    },
+  ],
+  [],
+)
+
+const series: AreaProps[] = useMemo(
+  () => [
+    { dataKey: "HP", color: "green.500" },
+    { dataKey: "こうげき", color: "red.500" },
+    { dataKey: "ぼうぎょ", color: "blue.500" },
+    { dataKey: "とくこう", color: "purple.500" },
+    { dataKey: "とくぼう", color: "orange.500" },
+    { dataKey: "すばやさ", color: "cyan.500" },
+  ],
+  [],
+)
+
+return (
+  <AreaChart
+    data={data}
+    series={series}
+    dataKey="name"
+    xAxisLabel="ポケモン"
+    yAxisLabel="ステータス"
+  />
+)
+```
+
 ### 基準線を表示する
 
 基準線を表示する場合は、`referenceLineProps`に`props`を設定します。

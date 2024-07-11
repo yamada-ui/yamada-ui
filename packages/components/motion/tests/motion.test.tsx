@@ -20,8 +20,10 @@ describe("<Motion />", () => {
 
   test("Motion renders correctly with initial", async () => {
     render(<Motion initial={{ x: 10, opacity: 0 }}>Motion</Motion>)
-    expect(screen.queryByText("Motion")).toHaveStyle(
-      "transform: translateX(10px) translateZ(0);",
+    await waitFor(() =>
+      expect(screen.queryByText("Motion")).toHaveStyle(
+        "transform: translateX(10px) translateZ(0);",
+      ),
     )
   })
 

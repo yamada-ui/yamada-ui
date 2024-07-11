@@ -10,14 +10,8 @@ describe("<Slide />", () => {
   test("applies default styles correctly", async () => {
     render(<Slide isOpen>Slide</Slide>)
 
-    const slide = await screen.findByText("Slide")
-
-    await waitFor(
-      () =>
-        expect(slide).toHaveStyle({
-          transform: "translateX(100%) translateY(0px) translateZ(0)",
-        }),
-      { timeout: 300 },
+    expect(getByTestId("slide")).toHaveStyle(
+      "transform: translateX(100%) translateY(0px);",
     )
   })
 
@@ -28,14 +22,8 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    const slide = await screen.findByText("Slide")
-
-    await waitFor(
-      () =>
-        expect(slide).toHaveStyle({
-          transform: "translateX(0px) translateY(-100%) translateZ(0)",
-        }),
-      { timeout: 300 },
+    expect(getByTestId("slide")).toHaveStyle(
+      "transform: translateX(0px) translateY(-100%);",
     )
   })
 
@@ -46,14 +34,8 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    const slide = await screen.findByText("Slide")
-
-    await waitFor(
-      () =>
-        expect(slide).toHaveStyle({
-          transform: "translateX(-100%) translateY(0px) translateZ(0)",
-        }),
-      { timeout: 300 },
+    expect(getByTestId("slide")).toHaveStyle(
+      "transform: translateX(-100%) translateY(0px);",
     )
   })
 
@@ -64,14 +46,8 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    const slide = await screen.findByText("Slide")
-
-    await waitFor(
-      () =>
-        expect(slide).toHaveStyle({
-          transform: "translateX(100%) translateY(0px) translateZ(0)",
-        }),
-      { timeout: 300 },
+    expect(getByTestId("slide")).toHaveStyle(
+      "transform: translateX(100%) translateY(0px);",
     )
   })
 
@@ -82,14 +58,8 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    const slide = await screen.findByText("Slide")
-
-    await waitFor(
-      () =>
-        expect(slide).toHaveStyle({
-          transform: "translateX(0px) translateY(100%) translateZ(0)",
-        }),
-      { timeout: 300 },
+    expect(getByTestId("slide")).toHaveStyle(
+      "transform: translateX(0px) translateY(100%);",
     )
   })
 

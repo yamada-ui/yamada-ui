@@ -20,15 +20,8 @@ describe("<Motion />", () => {
 
   test("Motion renders correctly with initial", async () => {
     render(<Motion initial={{ x: 10, opacity: 0 }}>Motion</Motion>)
-
-    const motion = await screen.findByText("Motion")
-
-    await waitFor(
-      () =>
-        expect(motion).toHaveStyle({
-          transform: "translateX(10px) translateZ(0)",
-        }),
-      { timeout: 500 },
+    expect(screen.queryByText("Motion")).toHaveStyle(
+      "transform: translateX(10px);",
     )
   })
 
@@ -38,16 +31,11 @@ describe("<Motion />", () => {
         Motion
       </Motion>,
     )
-
-    const motion = await screen.findByText("Motion")
-
-    await waitFor(
-      () =>
-        expect(motion).toHaveStyle({
-          transform: "translateX(100px) translateZ(0)",
-        }),
-      { timeout: 500 },
-    )
+    await waitFor(() => {
+      expect(screen.queryByText("Motion")).toHaveStyle(
+        "transform: translateX(100px);",
+      )
+    })
   })
 
   test("Motion renders correctly with exit and transition", async () => {

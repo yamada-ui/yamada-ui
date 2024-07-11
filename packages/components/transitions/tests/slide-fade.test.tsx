@@ -62,43 +62,25 @@ describe("<SlideFade />", () => {
   test("default offset is set correctly", async () => {
     render(<SlideFade>SlideFade</SlideFade>)
 
-    const slideFade = await screen.findByText("SlideFade")
-
-    await waitFor(
-      () =>
-        expect(slideFade).toHaveStyle({
-          transform: "translateX(0px) translateY(8px) translateZ(0)",
-        }),
-      { timeout: 300 },
-    )
+    expect(getByTestId("slide-fade")).toHaveStyle({
+      transform: "translateX(0px) translateY(8px)",
+    })
   })
 
   test("applies offsetX correctly", async () => {
     render(<SlideFade offsetX={10}>SlideFade</SlideFade>)
 
-    const slideFade = await screen.findByText("SlideFade")
-
-    await waitFor(
-      () =>
-        expect(slideFade).toHaveStyle({
-          transform: "translateX(10px) translateY(8px) translateZ(0)",
-        }),
-      { timeout: 300 },
-    )
+    expect(getByTestId("slide-fade")).toHaveStyle({
+      transform: "translateX(10px) translateY(8px)",
+    })
   })
 
   test("applies offsetY correctly", async () => {
     render(<SlideFade offsetY={10}>SlideFade</SlideFade>)
 
-    const slideFade = await screen.findByText("SlideFade")
-
-    await waitFor(
-      () =>
-        expect(slideFade).toHaveStyle({
-          transform: "translateX(0px) translateY(10px) translateZ(0)",
-        }),
-      { timeout: 300 },
-    )
+    expect(getByTestId("slide-fade")).toHaveStyle({
+      transform: "translateX(0px) translateY(10px)",
+    })
   })
 
   test("unmountOnExit works correctly", async () => {

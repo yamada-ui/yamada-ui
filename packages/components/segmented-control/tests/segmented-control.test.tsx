@@ -81,20 +81,16 @@ describe("<SegmentedControl />", () => {
   test("focus moves correctly between buttons", async () => {
     const { user } = render(
       <SegmentedControl>
-        <SegmentedControlButton value="one" data-testid="firstButton">
-          One
-        </SegmentedControlButton>
-        <SegmentedControlButton value="two" data-testid="secondButton" disabled>
+        <SegmentedControlButton value="one">One</SegmentedControlButton>
+        <SegmentedControlButton value="two" disabled>
           Two
         </SegmentedControlButton>
-        <SegmentedControlButton value="three" data-testid="thirdButton">
-          Three
-        </SegmentedControlButton>
+        <SegmentedControlButton value="three">Three</SegmentedControlButton>
       </SegmentedControl>,
     )
-    const firstButton = screen.getByTestId("firstButton")
-    const secondButton = screen.getByTestId("secondButton")
-    const thirdButton = screen.getByTestId("thirdButton")
+    const firstButton = screen.getByRole("radio", { name: /one/i })
+    const secondButton = screen.getByRole("radio", { name: /two/i })
+    const thirdButton = screen.getByRole("radio", { name: /three/i })
 
     expect(firstButton).toHaveAttribute("data-checked")
 
@@ -123,17 +119,15 @@ describe("<SegmentedControl />", () => {
     render(
       <SegmentedControl>
         <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton value="two" data-testid="secondButton" disabled>
+        <SegmentedControlButton value="two" disabled>
           Two
         </SegmentedControlButton>
-        <SegmentedControlButton value="three" data-testid="thirdButton">
-          Three
-        </SegmentedControlButton>
+        <SegmentedControlButton value="three">Three</SegmentedControlButton>
       </SegmentedControl>,
     )
 
-    const secondButton = screen.getByTestId("secondButton")
-    const thirdButton = screen.getByTestId("thirdButton")
+    const secondButton = screen.getByRole("radio", { name: /two/i })
+    const thirdButton = screen.getByRole("radio", { name: /three/i })
 
     fireEvent.focus(secondButton)
 

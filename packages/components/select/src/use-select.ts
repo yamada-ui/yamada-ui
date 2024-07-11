@@ -39,7 +39,7 @@ import type {
   MouseEvent,
   CSSProperties,
 } from "react"
-import { useCallback, useRef, useState, useEffect } from "react"
+import { useCallback, useRef, useState, useEffect, useId } from "react"
 import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
@@ -615,6 +615,11 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getFieldProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
+      "aria-label":
+        props["aria-label"] ??
+        placeholder ??
+        `Select ${isMulti ? "one or more options." : "an option."}`,
+      role: "combobox",
       ref: mergeRefs(fieldRef, ref),
       tabIndex: 0,
       ...fieldProps,
@@ -623,11 +628,24 @@ export const useSelect = <T extends MaybeValue = string>({
       "data-placeholder": dataAttr(
         !isMulti ? label === undefined : !label?.length,
       ),
-      "aria-expanded": dataAttr(isOpen),
+      "aria-controls": listRef.current?.id,
+      "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
+      "aria-expanded": isOpen,
       onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
-    [fieldProps, isOpen, isMulti, label, rest, onFocus, onKeyDown],
+    [
+      descendants,
+      fieldProps,
+      focusedIndex,
+      isOpen,
+      isMulti,
+      label,
+      placeholder,
+      rest,
+      onFocus,
+      onKeyDown,
+    ],
   )
 
   return {
@@ -707,15 +725,18 @@ export const useSelectList = () => {
     beforeFocusedIndex.current = selectedValue.index
   }, [listRef, selectedValue])
 
+  const id = useId()
+
   const getListProps: MotionUIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
+      id,
       as: "ul",
       ref: mergeRefs(listRef, ref),
-      role: "select",
+      role: "listbox",
       tabIndex: -1,
       ...props,
     }),
-    [listRef],
+    [id, listRef],
   )
 
   return {
@@ -786,7 +807,9 @@ export const useSelectOptionGroup = ({
 
   const getGroupProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
+      "aria-label": props["aria-label"] ?? label,
       ref,
+      role: "group",
       ...props,
       ...computedRest[1],
       "data-label": label,
@@ -949,10 +972,10 @@ export const useSelectOption = (
       }
 
       return {
+        role: "option",
         ref: mergeRefs(itemRef, ref, register),
         ...computedProps,
         ...props,
-        role: "select-item",
         tabIndex: -1,
         style: omitSelectedValues && isSelected ? style : undefined,
         "data-value": optionValue ?? "",

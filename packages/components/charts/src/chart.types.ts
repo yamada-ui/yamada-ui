@@ -103,8 +103,8 @@ export type PieProps = Merge<
   {
     activeShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
     inactiveShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
-    label?: CSSUIProps
-    labelLine?: CSSUIProps
+    label?: HTMLUIProps<"text">
+    labelLine?: HTMLUIProps<"path">
   }
 >
 export type CellProps = Merge<

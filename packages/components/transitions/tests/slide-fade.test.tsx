@@ -67,7 +67,7 @@ describe("<SlideFade />", () => {
     const { getByTestId } = render(<SlideFade data-testid="slide-fade" />)
 
     expect(getByTestId("slide-fade")).toHaveStyle({
-      transform: "translateX(0px) translateY(8px) translateZ(0)",
+      transform: "translateX(0px) translateY(8px)",
     })
   })
 
@@ -77,7 +77,7 @@ describe("<SlideFade />", () => {
     )
 
     expect(getByTestId("slide-fade")).toHaveStyle({
-      transform: "translateX(10px) translateY(8px) translateZ(0)",
+      transform: "translateX(10px) translateY(8px)",
     })
   })
 
@@ -87,7 +87,7 @@ describe("<SlideFade />", () => {
     )
 
     expect(getByTestId("slide-fade")).toHaveStyle({
-      transform: "translateX(0px) translateY(10px) translateZ(0)",
+      transform: "translateX(0px) translateY(10px)",
     })
   })
 

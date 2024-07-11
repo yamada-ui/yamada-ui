@@ -11,7 +11,7 @@ describe("<Slide />", () => {
     const { getByTestId } = render(<Slide isOpen data-testid="slide" />)
 
     expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(100%) translateY(0px) translateZ(0);",
+      "transform: translateX(100%) translateY(0px);",
     )
   })
 
@@ -21,7 +21,7 @@ describe("<Slide />", () => {
     )
 
     expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(0px) translateY(-100%) translateZ(0);",
+      "transform: translateX(0px) translateY(-100%);",
     )
   })
 
@@ -31,7 +31,7 @@ describe("<Slide />", () => {
     )
 
     expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(-100%) translateY(0px) translateZ(0);",
+      "transform: translateX(-100%) translateY(0px);",
     )
   })
 
@@ -41,7 +41,7 @@ describe("<Slide />", () => {
     )
 
     expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(100%) translateY(0px) translateZ(0);",
+      "transform: translateX(100%) translateY(0px);",
     )
   })
 
@@ -51,7 +51,7 @@ describe("<Slide />", () => {
     )
 
     expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(0px) translateY(100%) translateZ(0);",
+      "transform: translateX(0px) translateY(100%);",
     )
   })
 

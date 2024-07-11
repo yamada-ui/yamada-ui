@@ -21,9 +21,9 @@ describe("<Motion />", () => {
   test("Motion renders correctly with initial", async () => {
     render(<Motion initial={{ x: 10, opacity: 0 }}>Motion</Motion>)
     await waitFor(() =>
-      expect(screen.queryByText("Motion")).toHaveStyle(
-        "transform: translateX(10px) translateZ(0);",
-      ),
+      expect(screen.queryByText("Motion")).toHaveStyle({
+        transform: "translateX(10px) translateZ(0)",
+      }),
     )
   })
 
@@ -34,9 +34,9 @@ describe("<Motion />", () => {
       </Motion>,
     )
     await waitFor(() => {
-      expect(screen.queryByText("Motion")).toHaveStyle(
-        "transform: translateX(100px) translateZ(0);",
-      )
+      expect(screen.queryByText("Motion")).toHaveStyle({
+        transform: "translateX(100px) translateZ(0)",
+      })
     })
   })
 

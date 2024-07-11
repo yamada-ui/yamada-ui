@@ -10,9 +10,11 @@ describe("<Slide />", () => {
   test("applies default styles correctly", async () => {
     render(<Slide isOpen>Slide</Slide>)
 
-    expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(100%) translateY(0px);",
-    )
+    const slide = await screen.findByText("Slide")
+
+    expect(slide).toHaveStyle({
+      transform: "translateX(100%) translateY(0px)",
+    })
   })
 
   test("applies styles correctly for top placement", async () => {
@@ -22,9 +24,11 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(0px) translateY(-100%);",
-    )
+    const slide = await screen.findByText("Slide")
+
+    expect(slide).toHaveStyle({
+      transform: "translateX(0px) translateY(-100%)",
+    })
   })
 
   test("applies styles correctly for left placement", async () => {
@@ -34,9 +38,11 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(-100%) translateY(0px);",
-    )
+    const slide = await screen.findByText("Slide")
+
+    expect(slide).toHaveStyle({
+      transform: "translateX(-100%) translateY(0px)",
+    })
   })
 
   test("applies styles correctly for right placement", async () => {
@@ -46,9 +52,11 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(100%) translateY(0px);",
-    )
+    const slide = await screen.findByText("Slide")
+
+    expect(slide).toHaveStyle({
+      transform: "translateX(100%) translateY(0px)",
+    })
   })
 
   test("applies styles correctly for bottom placement", async () => {
@@ -58,9 +66,9 @@ describe("<Slide />", () => {
       </Slide>,
     )
 
-    expect(getByTestId("slide")).toHaveStyle(
-      "transform: translateX(0px) translateY(100%);",
-    )
+    const slide = await screen.findByText("Slide")
+
+    expect(slide).toHaveStyle({ transform: "translateX(0px) translateY(100%)" })
   })
 
   test("unmountOnExit works correctly", async () => {

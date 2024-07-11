@@ -62,7 +62,9 @@ describe("<SlideFade />", () => {
   test("default offset is set correctly", async () => {
     render(<SlideFade>SlideFade</SlideFade>)
 
-    expect(getByTestId("slide-fade")).toHaveStyle({
+    const slideFade = await screen.findByText("SlideFade")
+
+    expect(slideFade).toHaveStyle({
       transform: "translateX(0px) translateY(8px)",
     })
   })
@@ -70,7 +72,9 @@ describe("<SlideFade />", () => {
   test("applies offsetX correctly", async () => {
     render(<SlideFade offsetX={10}>SlideFade</SlideFade>)
 
-    expect(getByTestId("slide-fade")).toHaveStyle({
+    const slideFade = await screen.findByText("SlideFade")
+
+    expect(slideFade).toHaveStyle({
       transform: "translateX(10px) translateY(8px)",
     })
   })
@@ -78,7 +82,9 @@ describe("<SlideFade />", () => {
   test("applies offsetY correctly", async () => {
     render(<SlideFade offsetY={10}>SlideFade</SlideFade>)
 
-    expect(getByTestId("slide-fade")).toHaveStyle({
+    const slideFade = await screen.findByText("SlideFade")
+
+    expect(slideFade).toHaveStyle({
       transform: "translateX(0px) translateY(10px)",
     })
   })

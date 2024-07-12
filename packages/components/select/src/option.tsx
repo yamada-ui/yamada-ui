@@ -1,6 +1,7 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import { useId } from "react"
 import type { ReactElement, FC } from "react"
 import type { UseSelectOptionProps } from "./use-select"
 import { useSelectContext, useSelectOption } from "./use-select"
@@ -10,11 +11,12 @@ type OptionOptions = { icon?: ReactElement }
 export type OptionProps = UseSelectOptionProps & OptionOptions
 
 export const Option = forwardRef<OptionProps, "li">(
-  ({ className, icon, ...rest }, ref) => {
+  ({ id, className, icon, ...rest }, ref) => {
     const { styles } = useSelectContext()
     const { isSelected, customIcon, children, getOptionProps } =
       useSelectOption(ref, rest)
 
+    id ??= useId()
     icon ??= customIcon
 
     const css: CSSUIObject = {
@@ -33,6 +35,7 @@ export const Option = forwardRef<OptionProps, "li">(
 
     return (
       <ui.li
+        id={id}
         className={cx("ui-select__item", className)}
         __css={css}
         {...getOptionProps()}

@@ -329,9 +329,10 @@ export const useMonth = () => {
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}) => ({
       ...props,
+      "aria-multiselectable": ariaAttr(isMulti),
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
     }),
-    [onKeyDown],
+    [onKeyDown, isMulti],
   )
 
   const getButtonProps: RequiredUIPropGetter<

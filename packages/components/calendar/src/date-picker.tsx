@@ -102,6 +102,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     getInputProps,
     getIconProps,
     value,
+    id,
   } = useDatePicker(computedProps)
 
   h ??= height
@@ -139,6 +140,9 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
+              id={id}
+              role="dialog"
+              aria-modal="true"
               className="ui-date-picker__popover"
               __css={{ ...styles.list }}
             >

@@ -110,6 +110,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       getEndInputProps,
       getIconProps,
       value,
+      id,
     } = useRangeDatePicker(computedProps)
 
     const [startValue, endValue] = value ?? []
@@ -155,6 +156,9 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                id={id}
+                role="dialog"
+                aria-modal="true"
                 className="ui-range-date-picker__popover"
                 __css={{ ...styles.list }}
               >

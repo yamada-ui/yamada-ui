@@ -2294,6 +2294,16 @@
     }
   },
   {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
     "title": "基準線を表示する",
     "type": "fragment",
     "slug": "/components/feedback/area-chart#基準線を表示する",
@@ -2457,6 +2467,16 @@
     "type": "fragment",
     "slug": "/components/feedback/bar-chart#凡例を表示する",
     "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "凡例を表示する" }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
   },
   {
     "title": "基準線を表示する",
@@ -2691,6 +2711,26 @@
     }
   },
   {
+    "title": "ラベルの表示位置を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#ラベルの表示位置を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ラベルの表示位置を調整する"
+    }
+  },
+  {
+    "title": "ラベルを割合にする",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#ラベルを割合にする",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを割合にする"
+    }
+  },
+  {
     "title": "ツールチップに表示するデータを切り替える",
     "type": "fragment",
     "slug": "/components/feedback/donut-chart#ツールチップに表示するデータを切り替える",
@@ -2794,6 +2834,16 @@
       "lv1": "LineChart",
       "lv2": "使い方",
       "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
     }
   },
   {
@@ -2996,6 +3046,26 @@
       "lv1": "PieChart",
       "lv2": "使い方",
       "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "ラベルの表示位置を調整する",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#ラベルの表示位置を調整する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ラベルの表示位置を調整する"
+    }
+  },
+  {
+    "title": "ラベルを割合にする",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#ラベルを割合にする",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを割合にする"
     }
   },
   {

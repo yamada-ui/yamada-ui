@@ -2,12 +2,14 @@ import type {
   ThemeConfig,
   ColorModeManager,
   ThemeSchemeManager,
+  Environment,
 } from "@yamada-ui/core"
 import {
   ThemeProvider,
   ColorModeProvider,
   ResetStyle,
   GlobalStyle,
+  EnvironmentProvider,
 } from "@yamada-ui/core"
 import { LoadingProvider } from "@yamada-ui/loading"
 import { MotionConfig } from "@yamada-ui/motion"
@@ -15,8 +17,6 @@ import { NoticeProvider } from "@yamada-ui/notice"
 import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 import type { Dict } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
-import type { Environment } from "./environment-provider"
-import { EnvironmentProvider } from "./environment-provider"
 
 export type UIProviderProps = {
   /**
@@ -107,20 +107,20 @@ export const UIProvider: FC<UIProviderProps> = ({
   children,
 }) => {
   return (
-    <ThemeProvider
-      theme={theme}
-      config={config}
-      themeSchemeManager={themeSchemeManager}
-      storageKey={themeSchemeStorageKey}
+    <EnvironmentProvider
+      environment={environment}
+      disabled={disableEnvironment}
     >
-      <ColorModeProvider
-        colorModeManager={colorModeManager}
-        storageKey={colorModeStorageKey}
+      <ThemeProvider
+        theme={theme}
         config={config}
+        themeSchemeManager={themeSchemeManager}
+        storageKey={themeSchemeStorageKey}
       >
-        <EnvironmentProvider
-          environment={environment}
-          disabled={disableEnvironment}
+        <ColorModeProvider
+          colorModeManager={colorModeManager}
+          storageKey={colorModeStorageKey}
+          config={config}
         >
           <MotionConfig {...config.motion?.config}>
             <LoadingProvider {...config.loading}>
@@ -132,8 +132,8 @@ export const UIProvider: FC<UIProviderProps> = ({
               <NoticeProvider {...config.notice} />
             </LoadingProvider>
           </MotionConfig>
-        </EnvironmentProvider>
-      </ColorModeProvider>
-    </ThemeProvider>
+        </ColorModeProvider>
+      </ThemeProvider>
+    </EnvironmentProvider>
   )
 }

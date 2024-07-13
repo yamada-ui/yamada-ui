@@ -66,6 +66,21 @@ tab: Props
 />
 
 <PropsCard
+  id="donutchart-isparcent"
+  name="isParcent"
+  type="boolean"
+  description={"Determines whether labels should be displayed as percentages."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="donutchart-labeloffset"
+  name="labelOffset"
+  type="number"
+  description={"Distance between chart and label."}
+/>
+
+<PropsCard
   id="donutchart-legendprops"
   name="legendProps"
   type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'

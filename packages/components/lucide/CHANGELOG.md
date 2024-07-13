@@ -1,5 +1,17 @@
 # @yamada-ui/lucide
 
+## 1.2.0
+
+### Minor Changes
+
+- [#2244](https://github.com/yamada-ui/yamada-ui/pull/2244) [`3589942`](https://github.com/yamada-ui/yamada-ui/commit/35899427df675b2573a21b076ebbab96f7145183) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added new icons.
+
+### Patch Changes
+
+- Updated dependencies [[`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876)]:
+  - @yamada-ui/core@1.10.0
+  - @yamada-ui/icon@1.0.32
+
 ## 1.1.3
 
 ### Patch Changes

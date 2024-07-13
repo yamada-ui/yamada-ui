@@ -1,5 +1,16 @@
 # @yamada-ui/theme
 
+## 1.13.0
+
+### Minor Changes
+
+- [#2254](https://github.com/yamada-ui/yamada-ui/pull/2254) [`120dc95`](https://github.com/yamada-ui/yamada-ui/commit/120dc955cf23fbd7364254169fdc68a7f34183ad) Thanks [@108yen](https://github.com/108yen)! - Added label display position adjustment function to `PieChart` and `DonutChart`.
+
+### Patch Changes
+
+- Updated dependencies [[`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876)]:
+  - @yamada-ui/core@1.10.0
+
 ## 1.12.0
 
 ### Minor Changes

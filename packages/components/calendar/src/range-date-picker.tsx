@@ -161,7 +161,6 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
                 id={id}
                 role="dialog"
                 aria-modal="true"
-                aria-multiselectable="true"
                 className="ui-range-date-picker__popover"
                 __css={{ ...styles.list }}
               >

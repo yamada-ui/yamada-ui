@@ -1,5 +1,16 @@
 # @yamada-ui/motion
 
+## 2.1.0
+
+### Minor Changes
+
+- [#2268](https://github.com/yamada-ui/yamada-ui/pull/2268) [`43873ba`](https://github.com/yamada-ui/yamada-ui/commit/43873ba096fd59d78f9d27d631a172b19f6568bb) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+### Patch Changes
+
+- Updated dependencies [[`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876)]:
+  - @yamada-ui/core@1.10.0
+
 ## 2.0.2
 
 ### Patch Changes

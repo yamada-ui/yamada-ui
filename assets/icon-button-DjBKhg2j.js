@@ -1,1 +1,0 @@
-import{j as n}from"./emotion-use-insertion-effect-with-fallbacks.browser.esm-CIjPhCfQ.js";import{B as a}from"./button-BD_75t9L.js";import{f as i}from"./forward-ref-BmTAT9U5.js";import{c}from"./factory-BrsV2ztw.js";const x=i(({icon:o,children:r,className:t,...s},m)=>n.jsx(a,{className:c("ui-icon-button",t),ref:m,p:0,...s,children:o||r}));export{x as I};

@@ -5,7 +5,6 @@ import { LineChart } from "./line-chart"
 export const PieChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
   baseStyle: {
     pie: {},
-    cell: {},
     dimCell: {
       fillOpacity: 0.3,
       strokeOpacity: 0,
@@ -14,10 +13,9 @@ export const PieChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
       _focus: { outline: "none" },
     },
     inactiveShape: {},
-    label: {
-      fillOpacity: 1,
-    },
-    labelLine: {},
+    label: { fillOpacity: 1, fill: "currentColor" },
+    labelLine: { stroke: "currentColor" },
+    cell: {},
   },
 
   sizes: {

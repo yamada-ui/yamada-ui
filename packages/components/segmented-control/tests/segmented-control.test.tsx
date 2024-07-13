@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import type { SegmentedControlItem } from "../src"
 import { SegmentedControl, SegmentedControlButton } from "../src"
 
@@ -76,5 +76,61 @@ describe("<SegmentedControl />", () => {
         expect(input).toBeDisabled()
       },
     )
+  })
+
+  test("focus moves correctly between buttons", async () => {
+    const { user } = render(
+      <SegmentedControl>
+        <SegmentedControlButton value="one">One</SegmentedControlButton>
+        <SegmentedControlButton value="two" disabled>
+          Two
+        </SegmentedControlButton>
+        <SegmentedControlButton value="three">Three</SegmentedControlButton>
+      </SegmentedControl>,
+    )
+    const firstButton = screen.getByRole("radio", { name: /one/i })
+    const secondButton = screen.getByRole("radio", { name: /two/i })
+    const thirdButton = screen.getByRole("radio", { name: /three/i })
+
+    expect(firstButton).toHaveAttribute("data-checked")
+
+    await user.click(secondButton)
+
+    expect(secondButton).not.toHaveAttribute("data-checked")
+
+    await user.click(thirdButton)
+
+    expect(thirdButton).toHaveAttribute("data-checked")
+  })
+
+  test("SegmentedControl with non-SegmentedControlButton children renders correctly", async () => {
+    const { container } = render(
+      <SegmentedControl data-testid="SegmentedControl" isDisabled>
+        <option>one</option>
+        <option>two</option>
+        <option>three</option>
+      </SegmentedControl>,
+    )
+
+    await a11y(container)
+  })
+
+  test("focus moves to the next element when the focused element is disabled", async () => {
+    render(
+      <SegmentedControl>
+        <SegmentedControlButton value="one">One</SegmentedControlButton>
+        <SegmentedControlButton value="two" disabled>
+          Two
+        </SegmentedControlButton>
+        <SegmentedControlButton value="three">Three</SegmentedControlButton>
+      </SegmentedControl>,
+    )
+
+    const secondButton = screen.getByRole("radio", { name: /two/i })
+    const thirdButton = screen.getByRole("radio", { name: /three/i })
+
+    fireEvent.focus(secondButton)
+
+    expect(thirdButton).toHaveAttribute("data-focus")
   })
 })

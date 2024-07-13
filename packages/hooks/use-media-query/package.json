@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-media-query",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "Yamada UI useMediaQuery custom hook",
   "keywords": [
     "use-media-query"
@@ -34,6 +34,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/providers": "workspace:*"
   },

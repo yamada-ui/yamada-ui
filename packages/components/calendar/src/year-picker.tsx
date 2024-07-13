@@ -95,6 +95,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     getInputProps,
     getIconProps,
     value,
+    id,
   } = useYearPicker(computedProps)
 
   h ??= height
@@ -135,6 +136,9 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
+              id={id}
+              role="dialog"
+              aria-modal="true"
               className="ui-year-picker__popover"
               __css={{ ...styles.list }}
             >

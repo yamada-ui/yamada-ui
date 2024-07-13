@@ -2173,6 +2173,12 @@
     "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Legend" }
   },
   {
+    "title": "Display Label",
+    "type": "fragment",
+    "slug": "/components/feedback/area-chart#display-label",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Label" }
+  },
+  {
     "title": "Display Reference Line",
     "type": "fragment",
     "slug": "/components/feedback/area-chart#display-reference-line",
@@ -2316,6 +2322,12 @@
     "type": "fragment",
     "slug": "/components/feedback/bar-chart#display-legend",
     "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Label",
+    "type": "fragment",
+    "slug": "/components/feedback/bar-chart#display-label",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Label" }
   },
   {
     "title": "Display Reference Line",
@@ -2530,6 +2542,26 @@
     }
   },
   {
+    "title": "Adjust label position",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#adjust-label-position",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust label position"
+    }
+  },
+  {
+    "title": "Make Proportional",
+    "type": "fragment",
+    "slug": "/components/feedback/donut-chart#make-proportional",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Make Proportional"
+    }
+  },
+  {
     "title": "Switching the data displayed in the tooltip",
     "type": "fragment",
     "slug": "/components/feedback/donut-chart#switching-the-data-displayed-in-the-tooltip",
@@ -2614,6 +2646,12 @@
     "type": "fragment",
     "slug": "/components/feedback/line-chart#display-legend",
     "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Label",
+    "type": "fragment",
+    "slug": "/components/feedback/line-chart#display-label",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Label" }
   },
   {
     "title": "Display Reference Line",
@@ -2776,6 +2814,26 @@
     "type": "fragment",
     "slug": "/components/feedback/pie-chart#display-labels",
     "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Labels" }
+  },
+  {
+    "title": "Adjust label position",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#adjust-label-position",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Adjust label position"
+    }
+  },
+  {
+    "title": "Make Proportional",
+    "type": "fragment",
+    "slug": "/components/feedback/pie-chart#make-proportional",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Make Proportional"
+    }
   },
   {
     "title": "Switching the data displayed in the tooltip",

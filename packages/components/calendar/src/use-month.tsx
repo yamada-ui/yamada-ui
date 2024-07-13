@@ -329,9 +329,10 @@ export const useMonth = () => {
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}) => ({
       ...props,
+      "aria-multiselectable": ariaAttr(isMulti),
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
     }),
-    [onKeyDown],
+    [onKeyDown, isMulti],
   )
 
   const getButtonProps: RequiredUIPropGetter<
@@ -418,6 +419,7 @@ export const useMonth = () => {
         "data-today": dataAttr(isToday),
         "data-value": value ?? "",
         "data-disabled": dataAttr(isTrulyDisabled),
+        "aria-selected": ariaAttr(isTrulySelected),
         "aria-disabled": ariaAttr(isTrulyDisabled),
         onClick: handlerAll((ev) => onClick(ev, value), props.onClick),
         onPointerEnter: handlerAll(

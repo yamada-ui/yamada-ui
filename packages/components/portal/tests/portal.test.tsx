@@ -77,7 +77,6 @@ describe("<Portal />", () => {
 
     expect(order1).toHaveTextContent("order2")
     expect(order1).not.toHaveTextContent("order3")
-    // order3 element is portaling at the end of document.body
     expect(screen.getByText("order3")).toBeInTheDocument()
   })
 

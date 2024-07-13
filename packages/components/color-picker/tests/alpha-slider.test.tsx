@@ -44,7 +44,7 @@ describe("<AlphaSlider />", () => {
     expect(onChange).toHaveBeenCalledWith(0.51)
   })
 
-  test("AlphaSlider disabled behaviour", () => {
+  test("AlphaSlider disabled behavior", () => {
     const onChange = vi.fn()
     const { getByRole } = render(<AlphaSlider onChange={onChange} disabled />)
 

@@ -1,5 +1,5 @@
 import type { CSSUIObject, UIProps, CSSUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { ui, forwardRef, useComponentStyle } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
 import type { FC, SVGAttributes } from "react"
@@ -21,22 +21,15 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
 export const Icon = forwardRef<IconProps, "svg">(
-  (
-    { as: element, viewBox, size: fontSize, className, __css, ...rest },
-    ref,
-  ) => {
+  ({ as: element, viewBox, size: fontSize, ...props }, ref) => {
+    const [styles, { className, ...rest }] = useComponentStyle("Icon", props)
+
     const boxSize = replaceObject(fontSize, (value) =>
       !isUnit(value) ? useToken("fontSizes", value) : value,
     )
 
     const css: CSSUIObject = {
-      w: "1em",
-      h: "1em",
-      display: "inline-block",
-      lineHeight: "1em",
-      flexShrink: 0,
-      color: "currentColor",
-      ...__css,
+      ...styles,
     }
 
     if (element && typeof element !== "string")

@@ -218,7 +218,7 @@ describe("<LineChart />", () => {
       })
 
       expect(
-        container.querySelectorAll(".ui-line-chart__active-dot").length,
+        container.querySelectorAll(".ui-line-chart__dot--active").length,
       ).toBeGreaterThan(0)
 
       rerender(

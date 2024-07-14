@@ -218,7 +218,7 @@ describe("<AreaChart />", () => {
       })
 
       expect(
-        container.querySelectorAll(".ui-area-chart__active-dot").length,
+        container.querySelectorAll(".ui-area-chart__dot--active").length,
       ).toBeGreaterThan(0)
 
       rerender(

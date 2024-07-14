@@ -1,5 +1,20 @@
 # @yamada-ui/providers
 
+## 1.2.0
+
+### Minor Changes
+
+- [#2250](https://github.com/yamada-ui/yamada-ui/pull/2250) [`5f9afbd`](https://github.com/yamada-ui/yamada-ui/commit/5f9afbde732d58b4e76273ee56f0120b8d2f30c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Moved `EnvironmentProvider` and `useEnvironment` to `@yamada-ui/core`.
+
+### Patch Changes
+
+- Updated dependencies [[`43873ba`](https://github.com/yamada-ui/yamada-ui/commit/43873ba096fd59d78f9d27d631a172b19f6568bb), [`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876), [`120dc95`](https://github.com/yamada-ui/yamada-ui/commit/120dc955cf23fbd7364254169fdc68a7f34183ad)]:
+  - @yamada-ui/motion@2.1.0
+  - @yamada-ui/core@1.10.0
+  - @yamada-ui/theme@1.13.0
+  - @yamada-ui/loading@1.1.9
+  - @yamada-ui/notice@1.0.33
+
 ## 1.1.6
 
 ### Patch Changes

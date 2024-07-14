@@ -1,5 +1,32 @@
 # @yamada-ui/calendar
 
+## 1.5.0
+
+### Minor Changes
+
+- [#2261](https://github.com/yamada-ui/yamada-ui/pull/2261) [`0beadb9`](https://github.com/yamada-ui/yamada-ui/commit/0beadb9b48278c57a5654d49a3a7e1200d42d1b5) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Enhance the accessibility of `MultiDatePicker` component
+
+- [#2271](https://github.com/yamada-ui/yamada-ui/pull/2271) [`19be97d`](https://github.com/yamada-ui/yamada-ui/commit/19be97dafe0cd7e022e618117057c8098cec29d1) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Incorrect Placement of aria-multiselectable in `RangeDatePicker` Component
+
+- [#2249](https://github.com/yamada-ui/yamada-ui/pull/2249) [`60f423b`](https://github.com/yamada-ui/yamada-ui/commit/60f423bff861d3d490415b78cd19e2e9a0760b96) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Enhance the accessibility of `YearPicker` component
+
+- [#2276](https://github.com/yamada-ui/yamada-ui/pull/2276) [`1fdca21`](https://github.com/yamada-ui/yamada-ui/commit/1fdca216e4b075a496876897393875eafca75c1b) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Enhance the accessibility of `DatePicker`
+
+- [#2204](https://github.com/yamada-ui/yamada-ui/pull/2204) [`f41a6ca`](https://github.com/yamada-ui/yamada-ui/commit/f41a6cad4c95f693a2224924d55f2eec31390238) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Enhance the accessibility of MonthPicker `@yamada-ui/calendar` component
+
+- [#2252](https://github.com/yamada-ui/yamada-ui/pull/2252) [`35f3bf2`](https://github.com/yamada-ui/yamada-ui/commit/35f3bf2d78ae1d249af59c84115ed197ba3885be) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Enhance the accessibility of `RangeDatePicker`
+
+### Patch Changes
+
+- [#2244](https://github.com/yamada-ui/yamada-ui/pull/2244) [`1c2b496`](https://github.com/yamada-ui/yamada-ui/commit/1c2b4968af3c3ec5de3a4db10068a9708fbc4958) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated package dependencies versions.
+
+- Updated dependencies [[`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876)]:
+  - @yamada-ui/core@1.10.0
+  - @yamada-ui/popover@1.2.6
+  - @yamada-ui/button@1.0.35
+  - @yamada-ui/form-control@2.0.2
+  - @yamada-ui/icon@1.0.32
+
 ## 1.4.1
 
 ### Patch Changes

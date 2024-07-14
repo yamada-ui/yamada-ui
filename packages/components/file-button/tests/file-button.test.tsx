@@ -69,10 +69,10 @@ describe("<FileButton />", () => {
       </FileButton>,
     )
 
-    const fileButtton = await screen.findByRole("button", { name: /Upload/i })
-    expect(fileButtton).toBeDisabled()
+    const fileButton = await screen.findByRole("button", { name: /Upload/i })
+    expect(fileButton).toBeDisabled()
 
-    await user.click(fileButtton)
+    await user.click(fileButton)
     expect(onClickMock).toHaveBeenCalledTimes(0)
   })
 })

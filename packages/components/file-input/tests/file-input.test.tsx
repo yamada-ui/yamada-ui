@@ -30,7 +30,7 @@ describe("<FileInput />", () => {
     )
   })
 
-  test("should render files with provided seperator", () => {
+  test("should render files with provided separator", () => {
     const { container } = render(
       <FileInput data-testid="FileInput" multiple separator=";" />,
     )

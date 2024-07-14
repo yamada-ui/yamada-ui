@@ -410,7 +410,7 @@ describe("<AreaChart />", () => {
       ).not.toBeInTheDocument()
     })
 
-    test("cursor shoud be renderd along with tooltip", async () => {
+    test("cursor should be rendered along with tooltip", async () => {
       const { rerender, container } = render(
         <AreaChart
           containerProps={{ width: 400, height: "80%" }}
@@ -749,7 +749,7 @@ describe("<AreaChart />", () => {
     })
   })
 
-  test("shoud be rendered reference line", async () => {
+  test("should be rendered reference line", async () => {
     const { container } = render(
       <AreaChart
         containerProps={{ width: 400, height: "80%" }}

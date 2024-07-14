@@ -187,6 +187,7 @@ export const useYearList = () => {
         ref: mergeRefs(ref, yearRefs.current.get(index)),
         ...props,
         tabIndex,
+        "aria-selected": ariaAttr(isSelected),
         "data-selected": dataAttr(isSelected),
         "data-value": value ?? "",
         "data-disabled": dataAttr(isDisabled),

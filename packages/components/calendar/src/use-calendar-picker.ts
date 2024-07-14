@@ -33,7 +33,7 @@ import type {
   KeyboardEventHandler,
   MouseEvent,
 } from "react"
-import { useCallback, useRef } from "react"
+import { useCallback, useId, useRef } from "react"
 import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
@@ -209,6 +209,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     ...rest
   } = useFormControlProps(props)
 
+  id ??= useId()
   locale ??= theme.__config?.date?.locale ?? "en"
 
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
@@ -425,11 +426,14 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       return {
         ref: mergeRefs(inputRef, ref),
         tabIndex: !allowInput ? 0 : -1,
+        role: "combobox",
+        "aria-haspopup": "dialog",
+        "aria-controls": id,
         ...props,
         ...formControlProps,
         style,
         "data-active": dataAttr(isOpen),
-        "aria-expanded": dataAttr(isOpen),
+        "aria-expanded": isOpen,
         onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
         onKeyDown: handlerAll(
           props.onKeyDown,
@@ -438,7 +442,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
         ),
       }
     },
-    [allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
+    [id, allowInput, formControlProps, isOpen, rest, onFocus, onKeyDown],
   )
 
   const getCalendarProps = useCallback(

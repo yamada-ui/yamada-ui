@@ -3485,8 +3485,6 @@ export type {
 } from "./highlighter"
 export { History, History as HistoryIcon } from "./history"
 export type { HistoryProps, HistoryProps as HistoryIconProps } from "./history"
-export { Home, Home as HomeIcon } from "./home"
-export type { HomeProps, HomeProps as HomeIconProps } from "./home"
 export { HopOff, HopOff as HopOffIcon } from "./hop-off"
 export type { HopOffProps, HopOffProps as HopOffIconProps } from "./hop-off"
 export { Hop, Hop as HopIcon } from "./hop"
@@ -3503,6 +3501,18 @@ export type {
   HourglassProps,
   HourglassProps as HourglassIconProps,
 } from "./hourglass"
+export { HousePlug, HousePlug as HousePlugIcon } from "./house-plug"
+export type {
+  HousePlugProps,
+  HousePlugProps as HousePlugIconProps,
+} from "./house-plug"
+export { HousePlus, HousePlus as HousePlusIcon } from "./house-plus"
+export type {
+  HousePlusProps,
+  HousePlusProps as HousePlusIconProps,
+} from "./house-plus"
+export { House, House as HouseIcon } from "./house"
+export type { HouseProps, HouseProps as HouseIconProps } from "./house"
 export {
   IceCreamBowl,
   IceCreamBowl as IceCreamBowlIcon,
@@ -3933,6 +3943,8 @@ export { LogIn, LogIn as LogInIcon } from "./log-in"
 export type { LogInProps, LogInProps as LogInIconProps } from "./log-in"
 export { LogOut, LogOut as LogOutIcon } from "./log-out"
 export type { LogOutProps, LogOutProps as LogOutIconProps } from "./log-out"
+export { Logs, Logs as LogsIcon } from "./logs"
+export type { LogsProps, LogsProps as LogsIconProps } from "./logs"
 export { Lollipop, Lollipop as LollipopIcon } from "./lollipop"
 export type {
   LollipopProps,
@@ -5026,6 +5038,11 @@ export type {
   PresentationProps,
   PresentationProps as PresentationIconProps,
 } from "./presentation"
+export { PrinterCheck, PrinterCheck as PrinterCheckIcon } from "./printer-check"
+export type {
+  PrinterCheckProps,
+  PrinterCheckProps as PrinterCheckIconProps,
+} from "./printer-check"
 export { Printer, Printer as PrinterIcon } from "./printer"
 export type { PrinterProps, PrinterProps as PrinterIconProps } from "./printer"
 export { Projector, Projector as ProjectorIcon } from "./projector"
@@ -5336,6 +5353,8 @@ export type {
 } from "./satellite"
 export { SaveAll, SaveAll as SaveAllIcon } from "./save-all"
 export type { SaveAllProps, SaveAllProps as SaveAllIconProps } from "./save-all"
+export { SaveOff, SaveOff as SaveOffIcon } from "./save-off"
+export type { SaveOffProps, SaveOffProps as SaveOffIconProps } from "./save-off"
 export { Save, Save as SaveIcon } from "./save"
 export type { SaveProps, SaveProps as SaveIconProps } from "./save"
 export { Scale3d, Scale3d as Scale3dIcon } from "./scale3d"
@@ -5621,6 +5640,11 @@ export type {
 } from "./signal-zero"
 export { Signal, Signal as SignalIcon } from "./signal"
 export type { SignalProps, SignalProps as SignalIconProps } from "./signal"
+export { Signature, Signature as SignatureIcon } from "./signature"
+export type {
+  SignatureProps,
+  SignatureProps as SignatureIconProps,
+} from "./signature"
 export { SignpostBig, SignpostBig as SignpostBigIcon } from "./signpost-big"
 export type {
   SignpostBigProps,

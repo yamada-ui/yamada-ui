@@ -233,7 +233,7 @@ describe("<MultiAutoComplete />", () => {
     })
   })
 
-  describe("forcus item", () => {
+  describe("focus item", () => {
     const ITEMS: AutocompleteItem[] = [
       {
         label: "option1",
@@ -289,7 +289,7 @@ describe("<MultiAutoComplete />", () => {
       },
     ]
 
-    test("enter keyDown should work correctly even whe alloFree is enable", async () => {
+    test("enter keyDown should work correctly even whe allowFree is enable", async () => {
       const { user, container } = render(
         <MultiAutocomplete items={ITEMS} allowFree />,
       )

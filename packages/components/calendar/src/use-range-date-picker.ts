@@ -365,6 +365,7 @@ export const useRangeDatePicker = ({
   )
 
   return {
+    id,
     value,
     inputValue: [startInputValue, endInputValue],
     dateToString,

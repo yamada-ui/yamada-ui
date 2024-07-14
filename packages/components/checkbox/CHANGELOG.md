@@ -1,5 +1,15 @@
 # @yamada-ui/checkbox
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`43873ba`](https://github.com/yamada-ui/yamada-ui/commit/43873ba096fd59d78f9d27d631a172b19f6568bb), [`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876)]:
+  - @yamada-ui/motion@2.1.0
+  - @yamada-ui/core@1.10.0
+  - @yamada-ui/form-control@2.0.2
+  - @yamada-ui/layouts@1.1.29
+
 ## 1.1.1
 
 ### Patch Changes

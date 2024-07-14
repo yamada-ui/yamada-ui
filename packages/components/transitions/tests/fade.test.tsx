@@ -14,17 +14,16 @@ describe("<Fade />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <Fade isOpen={isOpen} data-testid="fade" />
+          <Fade isOpen={isOpen}>Fade</Fade>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    const collapse = screen.getByTestId("fade")
-    expect(collapse).not.toBeVisible()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    const collapse = await screen.findByText("Fade")
+    expect(collapse).not.toBeVisible()
 
     await user.click(button)
     await waitFor(() => expect(collapse).toBeVisible())
@@ -40,21 +39,22 @@ describe("<Fade />", () => {
       return (
         <>
           <Button onClick={onToggle}>button</Button>
-          <Fade isOpen={isOpen} unmountOnExit data-testid="fade" />
+          <Fade isOpen={isOpen} unmountOnExit>
+            Fade
+          </Fade>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByTestId("fade")).toBeNull()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    expect(screen.queryByText("Fade")).toBeNull()
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("fade")).toBeVisible())
+    await waitFor(() => expect(screen.getByText("Fade")).toBeVisible())
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByTestId("fade")).toBeNull())
+    await waitFor(() => expect(screen.queryByText("Fade")).toBeNull())
   })
 })

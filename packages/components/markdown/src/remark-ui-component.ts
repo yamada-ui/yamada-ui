@@ -58,10 +58,10 @@ const oneLineNoteFactory = (textNode: Text): OneLineNote | null => {
     textNode.value,
   )
 
-  const leftFragment = startFragmentCapturedGroups?.groups?.leftFragment
-  const rightFragment = endFragmentCapturedGroups?.groups?.rightFragment
+  const startFragment = startFragmentCapturedGroups?.groups?.startFragment
+  const endFragment = endFragmentCapturedGroups?.groups?.endFragment
 
-  if (isUndefined(leftFragment) || isUndefined(rightFragment)) {
+  if (isUndefined(startFragment) || isUndefined(endFragment)) {
     return null
   }
 
@@ -73,8 +73,8 @@ const oneLineNoteFactory = (textNode: Text): OneLineNote | null => {
       switch (property) {
         case "content":
           return target.value
-            .replace(leftFragment, "")
-            .replace(rightFragment, "")
+            .replace(startFragment, "")
+            .replace(endFragment, "")
         case "status":
           return getStatus(startFragmentCapturedGroups?.groups?.status)
       }

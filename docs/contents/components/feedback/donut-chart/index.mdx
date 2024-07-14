@@ -400,7 +400,7 @@ return <DonutChart data={mewtwo} withLabels withLabelLines labelOffset={15} />
 
 ### Make Proportional
 
-To display the label as a percentage, set `isParcent` to `true`. The default is `false`.
+To display the label as a percentage, set `isPercent` to `true`. The default is `false`.
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -439,7 +439,7 @@ const mewtwo: CellProps[] = useMemo(
   [],
 )
 
-return <DonutChart data={mewtwo} withLabels isParcent />
+return <DonutChart data={mewtwo} withLabels isPercent />
 ```
 
 ### Switching the data displayed in the tooltip

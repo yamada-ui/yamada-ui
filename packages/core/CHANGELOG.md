@@ -1,5 +1,11 @@
 # @yamada-ui/core
 
+## 1.10.0
+
+### Minor Changes
+
+- [#2250](https://github.com/yamada-ui/yamada-ui/pull/2250) [`7765580`](https://github.com/yamada-ui/yamada-ui/commit/776558080aa0d07bf497c5b24b244e8e28b6b876) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `EnvironmentProvider` and `useEnvironment`.
+
 ## 1.9.1
 
 ### Patch Changes

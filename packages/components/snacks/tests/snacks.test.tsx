@@ -4,7 +4,7 @@ import { useRef } from "react"
 import { useSnacks, Snacks } from "../src"
 
 describe("<Snacks />", () => {
-  const SnackExpample = () => {
+  const SnackExample = () => {
     const { snack, snacks } = useSnacks()
     const ref = useRef<string | number | undefined>(undefined)
 
@@ -51,7 +51,7 @@ describe("<Snacks />", () => {
   }
 
   test("Snacks renders correctly when add and update", async () => {
-    render(<SnackExpample />)
+    render(<SnackExample />)
 
     const addBtn = screen.getByTestId("add-btn")
     const updateBtn = screen.getByTestId("update-btn")
@@ -80,7 +80,7 @@ describe("<Snacks />", () => {
   })
 
   test("Snacks renders correctly when close", async () => {
-    render(<SnackExpample />)
+    render(<SnackExample />)
 
     const addBtn = screen.getByTestId("add-btn")
     const closeBtn = screen.getByTestId("close-btn")
@@ -95,7 +95,7 @@ describe("<Snacks />", () => {
   })
 
   test("Snacks renders correctly when close all", async () => {
-    render(<SnackExpample />)
+    render(<SnackExample />)
 
     const addBtn = screen.getByTestId("add-btn")
     const closeAllBtn = screen.getByTestId("close-all-btn")

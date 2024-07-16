@@ -21,7 +21,7 @@ export const DefaultPortal: FC<
 
     const { ownerDocument } = node
     const host = appendToParentPortal
-      ? parent ?? ownerDocument.body
+      ? (parent ?? ownerDocument.body)
       : ownerDocument.body
 
     if (!host) return

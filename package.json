@@ -27,6 +27,7 @@
     "format:check": "prettier --check packages/**/** stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/** stories/**/** scripts/**/** --cache",
     "typecheck": "tsc --noEmit",
+    "spellcheck": "cspell \"**/*.{js,jsx,mjs,ts,tsx,mts,md,mdx}\" --quiet",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:issue": "tsx scripts/coverage-issues && tsx scripts/a11y-issues",

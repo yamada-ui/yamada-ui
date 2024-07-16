@@ -2,7 +2,7 @@ import type { Meta } from "@storybook/react"
 import { Button, Dialog, useDisclosure, Text } from "@yamada-ui/react"
 
 const meta: Meta = {
-  title: "Hooks / useDiclosure",
+  title: "Hooks / useDisclosure",
 }
 
 export default meta

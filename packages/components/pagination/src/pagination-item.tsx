@@ -18,7 +18,7 @@ type PaginationItemOptions = {
    */
   page: number | "dots" | "prev" | "next" | "first" | "last"
   /**
-   * If `true`, the pagination item will be actived.
+   * If `true`, the pagination item will be activated.
    *
    * @default false
    */

@@ -265,12 +265,12 @@ describe("<Thead />", () => {
     },
   ]
 
-  test("nested header renders collectly", () => {
+  test("nested header renders correctly", () => {
     render(<Table columns={columns} data={data} />)
     expect(screen.getByText("初回放送")).toBeVisible()
     expect(screen.getByText("最終回放送")).toBeVisible()
   })
-  test("data property renders collectly", () => {
+  test("data property renders correctly", () => {
     render(<Table columns={columns} data={data} />)
     expect(screen.getByText("2015年7月5日")).toBeVisible()
     expect(screen.getByText("2018年3月25日")).toBeVisible()

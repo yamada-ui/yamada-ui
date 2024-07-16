@@ -1,0 +1,15 @@
+---
+title: Stat
+description: "`Stat`は、数値やデータをボックス内に表示するために使用されます。"
+package_name: "@yamada-ui/stat"
+with_description: true
+tab: アクセシビリティ
+---
+
+## ARIAロールと属性
+
+| コンポーネント | ロールと属性 | 使い方                                                                                                                 |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `Stat`         | `icon`       | `"increase"`または`"decrease"`が設定されている場合、`StatIcon`に`type`として渡されます。                               |
+| `StatIcon`     | `type`       | `"increase"`または`"decrease"`が設定できます。                                                                         |
+|                | `aria-label` | `type`に`"increase"`が設定されている場合、`"Increased by"`が設定されます。それ以外は、`"Decreased by"`が設定されます。 |

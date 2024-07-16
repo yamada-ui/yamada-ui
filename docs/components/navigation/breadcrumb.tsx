@@ -7,7 +7,7 @@ import {
   forwardRef,
 } from "@yamada-ui/react"
 import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
-import { usePage } from "contexts/page-context"
+import { usePage } from "contexts"
 import Link from "next/link"
 import { memo } from "react"
 

@@ -127,7 +127,7 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
     enabledValues(filter).length
 
   const indexOf = (node: T | null) =>
-    !node ? -1 : descendants.get(node)?.index ?? -1
+    !node ? -1 : (descendants.get(node)?.index ?? -1)
 
   const enabledIndexOf = (node: T | null, filter?: FilterDescendant<T, K>) =>
     node == null

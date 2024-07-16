@@ -2,12 +2,10 @@
   "root": true,
   "extends": ["next/core-web-vitals", "../.eslintrc.base"],
   "plugins": [],
-  "rules": {
-    "import/order": "off"
-  },
+  "rules": {},
   "overrides": [
     {
-      "files": ["scripts/**/*"],
+      "files": ["scripts/**/*", "server.ts"],
       "rules": {
         "no-console": "off"
       }

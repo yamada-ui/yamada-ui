@@ -1,3 +1,4 @@
+import { Bell, EyeOff, User } from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -7,7 +8,6 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { Bell, EyeOff, User } from "@yamada-ui/lucide"
 import { memo } from "react"
 
 export const NotificationsCard = memo(() => {

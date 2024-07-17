@@ -1,3 +1,5 @@
+import { CirclePlus, Podcast } from "@yamada-ui/lucide"
+import { Image, type ImageProps } from "@yamada-ui/nextjs"
 import {
   Box,
   Button,
@@ -19,10 +21,8 @@ import {
   useDisclosure,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { CirclePlus, Podcast } from "@yamada-ui/lucide"
 import { memo, useState } from "react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
-import { Image, type ImageProps } from "@yamada-ui/nextjs"
 
 type CarouselItem = Omit<ImageProps, "alt"> & {
   title: string

@@ -1,10 +1,21 @@
-import * as CalendarComponents from "@yamada-ui/calendar"
-import * as CarouselComponents from "@yamada-ui/carousel"
-import * as ChartComponents from "@yamada-ui/charts"
-import * as UIComponents from "@yamada-ui/react"
-import * as TableComponents from "@yamada-ui/table"
+import {
+  Text,
+  Kbd,
+  Divider,
+  DiscList,
+  DecimalList,
+  ListItem,
+  TableContainer,
+  NativeTable,
+  Th,
+  Td,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  Box,
+} from "@yamada-ui/react"
 import { LinkCard, CardContainer } from "components/navigation"
-import type { MDXComponents as MDXComponentsType } from "mdx/types"
+import type { MDXComponents } from "mdx/types"
 import { Pre } from "./code-block"
 import { ColorModeButton } from "./color-mode-button"
 import {
@@ -15,37 +26,16 @@ import {
 import { Contributors } from "./contributors"
 import { Link } from "./link"
 import { LinkedHeading } from "./linked-heading"
-import { Users } from "./users"
 import { PackageManagers } from "./package-managers"
 import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
+import { Users } from "./users"
 
-const {
-  Text,
-  Kbd,
-  Divider,
-  DiscList,
-  DecimalList,
-  ListItem,
-  Alert,
-  AlertIcon,
-  AlertDescription,
-  TableContainer,
-  NativeTable,
-  Th,
-  Td,
-} = UIComponents
+const uiComponents = { Box }
 
-export const MDXUIComponents = {
-  ...UIComponents,
-  ...CarouselComponents,
-  ...TableComponents,
-  ...CalendarComponents,
-  ...ChartComponents,
-} as unknown as MDXComponentsType
-
-export const MDXBaseComponents: MDXComponentsType = {
+export const components: MDXComponents = {
+  ...uiComponents,
   h1: (props) => <Text as="h1" apply="mdx.h1" {...props} />,
   h2: (props) => <LinkedHeading as="h2" apply="mdx.h2" {...props} />,
   h3: (props) => <LinkedHeading as="h3" apply="mdx.h3" {...props} />,
@@ -81,18 +71,13 @@ export const MDXBaseComponents: MDXComponentsType = {
   PackageManagers,
   SelectPackageManagers,
   ColorModeButton,
-  Users: (props) => <Users {...props} />,
-  Sponsors: (props) => <Sponsors {...props} />,
-  Contributors: (props) => <Contributors {...props} />,
-  ColorPaletterContainer: (props) => <ColorPaletterContainer {...props} />,
-  ColorPaletters: (props) => <ColorPaletters {...props} />,
-  ColorPaletter: (props) => <ColorPaletter {...props} />,
-  CardContainer: (props) => <CardContainer {...props} />,
-  LinkCard: (props) => <LinkCard {...props} />,
-  PropsCard: (props) => <PropsCard {...props} />,
+  Users,
+  Sponsors,
+  Contributors,
+  ColorPaletterContainer,
+  ColorPaletters,
+  ColorPaletter,
+  CardContainer,
+  LinkCard,
+  PropsCard,
 }
-
-export const MDXComponents = {
-  ...MDXUIComponents,
-  ...MDXBaseComponents,
-} as unknown as MDXComponentsType

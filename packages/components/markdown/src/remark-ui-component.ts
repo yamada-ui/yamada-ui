@@ -92,7 +92,7 @@ const startFragmentFactory = (textNode: Text): StartFragment | null => {
   if (isNull(capturedGroups)) return null
 
   return new Proxy(textNode, {
-    get: (target: Text, property: keyof Pick<StartFragment, "status">) => {
+    get: (_target: Text, property: keyof Pick<StartFragment, "status">) => {
       switch (property) {
         case "status":
           return getStatus(capturedGroups.groups?.status)

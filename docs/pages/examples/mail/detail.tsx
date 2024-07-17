@@ -1,4 +1,13 @@
 import {
+  Reply,
+  ReplyAll,
+  Share,
+  Clock,
+  Trash,
+  Archive,
+  EllipsisVertical,
+} from "@yamada-ui/lucide"
+import {
   Avatar,
   Button,
   Divider,
@@ -19,15 +28,6 @@ import type {
   IconProps,
   StackProps,
 } from "@yamada-ui/react"
-import {
-  Reply,
-  ReplyAll,
-  Share,
-  Clock,
-  Trash,
-  Archive,
-  EllipsisVertical,
-} from "@yamada-ui/lucide"
 import { memo, useState } from "react"
 import type { MutableRefObject, FC } from "react"
 import { type MailItem } from "./data"

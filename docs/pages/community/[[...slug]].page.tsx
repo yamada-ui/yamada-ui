@@ -1,23 +1,21 @@
-import { MDXComponents } from "components/mdx"
+import { components } from "components/mdx"
 import { PageProvider } from "contexts/page-context"
 import { DocumentLayout } from "layouts/document-layout"
 import type { NextPage, InferGetStaticPropsType } from "next"
-import { useMDXComponent } from "next-contentlayer/hooks"
+import { MDXRemote } from "next-mdx-remote"
 import { getStaticDocumentPaths, getStaticDocumentProps } from "utils/next"
 
-export const getStaticPaths = getStaticDocumentPaths("Community")
+export const getStaticPaths = getStaticDocumentPaths("community")
 
-export const getStaticProps = getStaticDocumentProps("Community")
+export const getStaticProps = getStaticDocumentProps("community")
 
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>
 
-const Page: NextPage<PageProps> = ({ body, data, ...rest }) => {
-  const Component = useMDXComponent(body.code)
-
+const Page: NextPage<PageProps> = ({ source, ...rest }) => {
   return (
     <PageProvider {...rest}>
-      <DocumentLayout {...{ ...data, ...rest }}>
-        <Component components={MDXComponents} />
+      <DocumentLayout {...rest}>
+        {source ? <MDXRemote {...source} components={components} /> : null}
       </DocumentLayout>
     </PageProvider>
   )

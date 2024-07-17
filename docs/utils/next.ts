@@ -31,11 +31,9 @@ export type APIHandler = ({
 }) => Promise<void>
 
 const getVersion = async () => {
-  // TODO: replace
-  // const packages = await findPackages(
-  //   path.resolve(CONSTANT.PATH.ROOT, "packages", "react"),
-  // )
-  const packages = await findPackages(path.resolve(CONSTANT.PATH.ROOT))
+  const packages = await findPackages(
+    path.resolve(CONSTANT.PATH.ROOT, "packages", "react"),
+  )
 
   const { version } = packages[0].manifest
 

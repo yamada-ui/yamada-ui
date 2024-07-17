@@ -442,7 +442,11 @@ const main = async () => {
         const insights = await getInsights(options)(collaborators)
         const reports = createReports(options)(insights)
 
-        await sendDiscordChannel(options)(reports)
+        if (publish) {
+          await sendDiscordChannel(options)(reports)
+        } else {
+          console.log(reports)
+        }
       },
     )
 

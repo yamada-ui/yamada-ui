@@ -237,67 +237,64 @@ type I18nButtonProps = Omit<IconButtonProps, "aria-label"> & {
   ariaLabel?: string
 }
 
-const I18nButton: FC<I18nButtonProps> = memo(
-  ({ menuProps, ariaLabel = "Open language switching menu", ...rest }) => {
-    const padding = useBreakpointValue({ base: 32, md: 16 })
-    const { locale, changeLocale } = useI18n()
+const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
+  const padding = useBreakpointValue({ base: 32, md: 16 })
+  const { locale, changeLocale } = useI18n()
 
-    return (
-      <Menu
-        placement="bottom"
-        modifiers={[
-          {
-            name: "preventOverflow",
-            options: {
-              padding: {
-                top: padding,
-                bottom: padding,
-                left: padding,
-                right: padding,
-              },
+  return (
+    <Menu
+      placement="bottom"
+      modifiers={[
+        {
+          name: "preventOverflow",
+          options: {
+            padding: {
+              top: padding,
+              bottom: padding,
+              left: padding,
+              right: padding,
             },
           },
-        ]}
-        restoreFocus={false}
-        {...menuProps}
-      >
-        <MenuButton
-          as={IconButton}
-          aria-label={ariaLabel}
-          variant="ghost"
-          color="muted"
-          icon={<Languages fontSize="2xl" />}
-          _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
-          {...rest}
-        />
+        },
+      ]}
+      restoreFocus={false}
+      {...menuProps}
+    >
+      <MenuButton
+        as={IconButton}
+        aria-label="Open language switching menu"
+        variant="ghost"
+        color="muted"
+        icon={<Languages fontSize="2xl" />}
+        _hover={{ bg: [`blackAlpha.100`, `whiteAlpha.50`] }}
+        {...rest}
+      />
 
-        <MenuList>
-          <MenuOptionGroup<string>
-            value={locale}
-            onChange={changeLocale}
-            type="radio"
-          >
-            {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
-              <MenuOptionItem key={value} value={value} closeOnSelect>
-                {label}
-              </MenuOptionItem>
-            ))}
-          </MenuOptionGroup>
-        </MenuList>
-      </Menu>
-    )
-  },
-)
+      <MenuList>
+        <MenuOptionGroup<string>
+          value={locale}
+          onChange={changeLocale}
+          type="radio"
+        >
+          {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
+            <MenuOptionItem key={value} value={value} closeOnSelect>
+              {label}
+            </MenuOptionItem>
+          ))}
+        </MenuOptionGroup>
+      </MenuList>
+    </Menu>
+  )
+})
 
 I18nButton.displayName = "I18nButton"
 
 type ColorModeButtonProps = Omit<IconButtonProps, "aria-label"> & {
   menuProps?: MenuProps
-  ariaLabel?: string
 }
 
 const ColorModeButton: FC<ColorModeButtonProps> = memo(
-  ({ menuProps, ariaLabel = "Open color mode switching menu", ...rest }) => {
+  ({ menuProps, ...rest }) => {
     const padding = useBreakpointValue({ base: 32, md: 16 })
     const { colorMode, internalColorMode, changeColorMode } = useColorMode()
 
@@ -322,7 +319,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
       >
         <MenuButton
           as={IconButton}
-          aria-label={ariaLabel}
+          aria-label="Open color mode switching menu"
           variant="ghost"
           color="muted"
           icon={
@@ -362,11 +359,10 @@ ColorModeButton.displayName = "ColorModeButton"
 
 type ThemeSchemeButtonProps = Omit<IconButtonProps, "aria-label"> & {
   popoverProps?: PopoverProps
-  ariaLabel?: string
 }
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
-  ({ popoverProps, ariaLabel = "Open color mode switching menu", ...rest }) => {
+  ({ popoverProps, ...rest }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { theme, changeThemeScheme } = useTheme()
     const { colorSchemes = [] } = theme
@@ -383,7 +379,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       >
         <PopoverTrigger>
           <IconButton
-            aria-label={ariaLabel}
+            aria-label="Open color mode switching menu"
             variant="ghost"
             color="muted"
             icon={<Palette fontSize="2xl" />}

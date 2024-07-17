@@ -142,9 +142,7 @@ const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
   )
 }
 
-export type CalendarControlProps = Omit<IconButtonProps, "aria-label"> & {
-  ariaLabel?: string
-}
+export type CalendarControlProps = Omit<IconButtonProps, "aria-label">
 
 const CalendarControlPrev: FC<CalendarControlProps> = ({
   className,
@@ -176,7 +174,7 @@ const CalendarControlNext: FC<CalendarControlProps> = ({
 
 const CalendarControl: FC<
   CalendarControlProps & { operation: "prev" | "next" }
-> = ({ className, operation, ariaLabel = `${operation}-button`, ...rest }) => {
+> = ({ className, operation, ...rest }) => {
   const { styles } = useCalendarContext()
 
   const css: CSSUIObject = {
@@ -188,7 +186,7 @@ const CalendarControl: FC<
     <IconButton
       className={cx("ui-calendar__header-control", className)}
       variant="ghost"
-      aria-label={ariaLabel}
+      aria-label={`Go to ${operation} month`}
       __css={css}
       {...rest}
     />

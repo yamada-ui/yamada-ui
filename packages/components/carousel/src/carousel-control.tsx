@@ -6,9 +6,7 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useCarouselContext, useCarouselControl } from "./use-carousel"
 
-export type CarouselControlProps = Omit<IconButtonProps, "aria-label"> & {
-  ariaLabel?: string
-}
+export type CarouselControlProps = Omit<IconButtonProps, "aria-label">
 
 export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
@@ -20,7 +18,6 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
       <CarouselControl
         operation="prev"
         className={cx("ui-carousel__control--prev", className)}
-        ariaLabel="Go to previous slide"
         icon={
           <ChevronIcon
             __css={{
@@ -65,29 +62,24 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
 const CarouselControl = forwardRef<
   CarouselControlProps & { operation: "prev" | "next" },
   "button"
->(
-  (
-    { className, operation, ariaLabel = "carouselControl button", ...rest },
-    ref,
-  ) => {
-    const { styles } = useCarouselContext()
-    const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha")
+>(({ className, operation, ...rest }, ref) => {
+  const { styles } = useCarouselContext()
+  const colorScheme = useColorModeValue("whiteAlpha", "blackAlpha")
 
-    const css: CSSUIObject = {
-      ...styles.control,
-      ...styles[operation],
-    }
+  const css: CSSUIObject = {
+    ...styles.control,
+    ...styles[operation],
+  }
 
-    return (
-      <IconButton
-        ref={ref}
-        className={cx("ui-carousel__control", className)}
-        colorScheme={colorScheme}
-        isRounded
-        aria-label={ariaLabel}
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
+  return (
+    <IconButton
+      ref={ref}
+      className={cx("ui-carousel__control", className)}
+      colorScheme={colorScheme}
+      isRounded
+      aria-label={`Go to ${operation} slide`}
+      __css={css}
+      {...rest}
+    />
+  )
+})

@@ -18,7 +18,7 @@ export type ColorSelectorEyeDropperProps = Omit<
 export const ColorSelectorEyeDropper = forwardRef<
   ColorSelectorEyeDropperProps,
   "button"
->(({ className, ariaLabel = "Pick a color", ...rest }, ref) => {
+>(({ className, ...rest }, ref) => {
   const { getEyeDropperProps, readOnly, size, styles } =
     useColorSelectorContext()
 
@@ -33,7 +33,7 @@ export const ColorSelectorEyeDropper = forwardRef<
       variant="outline"
       size={size}
       __css={css}
-      aria-label={ariaLabel}
+      aria-label="Pick a color"
       {...getEyeDropperProps(rest, ref)}
     >
       <EyeDropperIcon className="ui-color-selector__eye-dropper-icon" />

@@ -34,7 +34,6 @@ cd yamada-ui
 - [Testing Library](https://testing-library.com/) コンポーネントとフックのテスト
 - [Changeset](https://github.com/atlassian/changesets) 変更のドキュメンテーション・ログの生成、リリースの管理
 - [Next.js](https://nextjs.org/) ドキュメントサイトのフレームワーク
-- [Contentlayer](https://contentlayer.dev/) ドキュメントサイトのコンテンツの管理
 
 ### コマンド
 

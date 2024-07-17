@@ -5,7 +5,7 @@ import {
   createColorModeManager,
   createThemeSchemeManager,
 } from "@yamada-ui/react"
-import { I18nProvider } from "contexts/i18n-context"
+import { I18nProvider } from "contexts"
 import type { AppProps } from "next/app"
 import { Inter } from "next/font/google"
 import Head from "next/head"

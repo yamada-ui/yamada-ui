@@ -1,3 +1,4 @@
+import { MenuIcon } from "@yamada-ui/lucide"
 import {
   Autocomplete,
   Avatar,
@@ -16,7 +17,6 @@ import {
 import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
-import { Menu as MenuIcon } from "@yamada-ui/lucide"
 
 const TEAM_ITEMS = [
   {

@@ -1,27 +1,24 @@
 import path from "path"
 import { CONSTANT } from "constant"
-import { type DocumentTypeNames } from "contentlayer/generated"
 import { findPackages } from "find-packages"
+import { documentPaths } from "mdx"
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
   NextApiRequest,
   NextApiResponse,
 } from "next"
-import { toArray } from "./array"
 import {
-  getDocumentBreadcrumbs,
   getDocument,
-  getDocuments,
+  getDocumentBreadcrumbs,
   getDocumentPagination,
+  getDocuments,
   getDocumentTabs,
   getDocumentTree,
   omitDocumentTabs,
-  getActiveDocuments,
-  getDocumentPaths,
-} from "./contentlayer"
-import { toKebabCase } from "./string"
+} from "utils/document"
 import type { Constant } from "./github"
+import { mdx } from "./mdx"
 
 export type APIHandler = ({
   req,
@@ -50,23 +47,49 @@ export const getStaticCommonProps = async ({
   const documents = getDocuments(locale)
   const documentTree = getDocumentTree(omitDocumentTabs(documents))()
 
-  return { props: { currentVersion, documents, documentTree } }
+  return { props: { currentVersion, documentTree } }
 }
 
-export const getStaticDocumentProps =
-  (documentTypeName: DocumentTypeNames) =>
-  async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
-    const currentVersion = await getVersion()
-    const paths = [
-      toKebabCase(documentTypeName),
-      ...toArray(params?.slug ?? []),
-    ]
+export const getStaticDocumentPaths =
+  (name: string) =>
+  async ({ locales = [] }: GetStaticPathsContext) => {
+    const paths = documentPaths
+      .flatMap((path) => {
+        if (!path.startsWith(name)) return
 
+        const slug = path.split("/").slice(1)
+
+        return locales.map((locale) => ({ params: { slug }, locale }))
+      })
+      .filter(Boolean)
+
+    return { paths, fallback: false }
+  }
+
+export const getStaticDocumentProps =
+  (name: string) =>
+  async ({ params, locale, defaultLocale }: GetStaticPropsContext) => {
+    const paths = [name, ...(params?.slug ?? [])]
+    const path = paths.join("/")
+
+    const currentVersion = await getVersion()
     const documents = getDocuments(locale)
     const documentTree = getDocumentTree(omitDocumentTabs(documents))(paths)
-    const document =
-      getDocument(documents, paths, locale) ??
-      getDocument(documents, paths, defaultLocale)
+    const document = getDocument(path, locale, defaultLocale)
+
+    if (!document)
+      return {
+        props: {
+          currentVersion,
+          documentTree,
+          source: null,
+        },
+        notFound: true,
+      }
+
+    const { body, ...rest } = document
+
+    const source = await mdx(body)
 
     const { documentTabs, parentDocument, parentPaths } = getDocumentTabs(
       documents,
@@ -74,7 +97,6 @@ export const getStaticDocumentProps =
     )
     const documentChildrenTree = getDocumentTree(documents, paths)(paths)
     const documentBreadcrumbs = getDocumentBreadcrumbs(
-      documents,
       parentPaths ?? paths,
       locale,
       defaultLocale,
@@ -86,8 +108,9 @@ export const getStaticDocumentProps =
 
     return {
       props: {
+        ...rest,
+        source,
         currentVersion,
-        ...document,
         documentTree,
         documentBreadcrumbs,
         documentChildrenTree,
@@ -95,16 +118,4 @@ export const getStaticDocumentProps =
         documentPagination,
       },
     }
-  }
-
-export const getStaticDocumentPaths =
-  (documentTypeName: DocumentTypeNames) =>
-  async ({ defaultLocale, locales = [] }: GetStaticPathsContext) => {
-    const documents = locales.flatMap(
-      getActiveDocuments({ documentTypeName, defaultLocale }),
-    )
-
-    const paths = getDocumentPaths({ documentTypeName, documents })
-
-    return { paths, fallback: false }
   }

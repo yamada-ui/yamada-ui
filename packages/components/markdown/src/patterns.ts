@@ -9,13 +9,13 @@ export const getFragmentPattern = (
   return match([position, allowOppositeFragment])
     .with(
       ["start", true],
-      () => /^(?<leftFragment>:::\w+(?:\s+\w+=(?<status>\w+))?\s+).*/,
+      () => /^(?<startFragment>:::\w+(?:\s+\w+=(?<status>\w+))?\s+).*/,
     )
     .with(
       ["start", false],
       () => /^:::\w+(?:\s+\w+=(?<status>\w+))?(?!.*:::$).*/,
     )
-    .with(["end", true], () => /\S*(?<rightFragment>\s+:::)$/)
+    .with(["end", true], () => /\S*(?<endFragment>\s+:::)$/)
     .with(["end", false], () => /^:::$/)
     .exhaustive()
 }

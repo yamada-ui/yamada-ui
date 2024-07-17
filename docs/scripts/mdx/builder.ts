@@ -17,6 +17,8 @@ async function builderMDX() {
 
   await Promise.all(
     filePaths.map(async (filePath) => {
+      filePath = filePath.replace(/\\/g, "/")
+
       const locale = getLocale(filePath)
       const slug = getSlug(filePath)
 

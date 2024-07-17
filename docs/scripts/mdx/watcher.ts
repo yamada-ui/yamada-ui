@@ -10,6 +10,8 @@ initMDX()
 export async function watchMDX(eventName: EventName, filePath: string) {
   if (eventName === "addDir" || eventName === "unlinkDir") return
 
+  filePath = filePath.replace(/\\/g, "/")
+
   const locale = getLocale(filePath)
   const slug = getSlug(filePath)
 

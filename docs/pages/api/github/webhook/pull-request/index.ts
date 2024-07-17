@@ -1,7 +1,7 @@
 import type { PullRequestAction } from "utils/github"
+import type { APIHandler } from "utils/next"
 import { opened } from "./opened"
 import { reviewRequestedRemoved } from "./review-request-removed"
-import type { APIHandler } from "utils/next"
 
 export const pullRequest: { [key in PullRequestAction]?: APIHandler } = {
   opened,

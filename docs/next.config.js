@@ -1,5 +1,3 @@
-const { withContentlayer } = require("next-contentlayer")
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   optimizeFonts: true,
@@ -41,4 +39,4 @@ const nextConfig = {
   ],
 }
 
-module.exports = withContentlayer(nextConfig)
+module.exports = nextConfig

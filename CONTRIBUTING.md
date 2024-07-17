@@ -37,7 +37,6 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 - [Changeset](https://github.com/atlassian/changesets) for changes
   documentation, changelog generation, and release management.
 - [Next.js](https://nextjs.org/) Framework for documentation sites.
-- [Contentlayer](https://contentlayer.dev/) Content management for documentation sites.
 
 ### Commands
 

@@ -375,7 +375,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 
 export type UseCarouselSlideReturn = ReturnType<typeof useCarouselSlide>
 
-export type UseCarouselControlProps = IconButtonProps & {
+export type UseCarouselControlProps = Omit<IconButtonProps, "aria-label"> & {
   operation: "prev" | "next"
 }
 

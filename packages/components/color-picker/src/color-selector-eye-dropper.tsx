@@ -8,12 +8,17 @@ import { cx } from "@yamada-ui/utils"
 import type { FC } from "react"
 import { useColorSelectorContext } from "./use-color-selector"
 
-export type ColorSelectorEyeDropperProps = IconButtonProps
+export type ColorSelectorEyeDropperProps = Omit<
+  IconButtonProps,
+  "aria-label"
+> & {
+  ariaLabel?: string
+}
 
 export const ColorSelectorEyeDropper = forwardRef<
   ColorSelectorEyeDropperProps,
   "button"
->(({ className, ...rest }, ref) => {
+>(({ className, ariaLabel = "Pick a color", ...rest }, ref) => {
   const { getEyeDropperProps, readOnly, size, styles } =
     useColorSelectorContext()
 
@@ -28,6 +33,7 @@ export const ColorSelectorEyeDropper = forwardRef<
       variant="outline"
       size={size}
       __css={css}
+      aria-label={ariaLabel}
       {...getEyeDropperProps(rest, ref)}
     >
       <EyeDropperIcon className="ui-color-selector__eye-dropper-icon" />

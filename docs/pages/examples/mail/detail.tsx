@@ -50,8 +50,16 @@ export const Detail: FC<DetailProps> = memo(
       <VStack gap={0} h="full" {...rest}>
         <Header px="sm">
           <HStack gap="xs">
-            <ControlIcon icon={Archive} label="Archive" />
-            <ControlIcon icon={Trash} label="Move to trash" />
+            <ControlIcon
+              icon={Archive}
+              label="Archive"
+              aria-label="archive mail"
+            />
+            <ControlIcon
+              icon={Trash}
+              label="Move to trash"
+              aria-label="Move to trash"
+            />
             <Divider
               orientation="vertical"
               h="6"
@@ -60,6 +68,7 @@ export const Detail: FC<DetailProps> = memo(
             <ControlIcon
               icon={Clock}
               label="Snooze"
+              aria-label="snooze mail"
               display={{ base: "flex", sm: "none" }}
             />
           </HStack>
@@ -67,15 +76,19 @@ export const Detail: FC<DetailProps> = memo(
           <Spacer display={{ base: "block", sm: "none" }} />
 
           <HStack gap="xs">
-            <ControlIcon icon={Reply} label="Reply" />
-            <ControlIcon icon={ReplyAll} label="Reply all" />
-            <ControlIcon icon={Share} label="Forward" />
+            <ControlIcon icon={Reply} label="Reply" aria-label="reply mail" />
+            <ControlIcon
+              icon={ReplyAll}
+              label="Reply all"
+              aria-label="reply all mail"
+            />
+            <ControlIcon icon={Share} label="Forward" aria-label="share mail" />
             <Divider
               orientation="vertical"
               h="6"
               display={{ base: "block", sm: "none" }}
             />
-            <ControlIcon icon={EllipsisVertical} />
+            <ControlIcon icon={EllipsisVertical} aria-label="setting" />
           </HStack>
         </Header>
 

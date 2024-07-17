@@ -21,6 +21,7 @@ export const Footer: FC<FooterProps> = memo(({ ...rest }) => {
         variant="ghost"
         icon={<History fontSize="2xl" color="muted" />}
         size={{ base: "lg" }}
+        aria-label="history"
       />
     </HStack>
   )

@@ -124,6 +124,7 @@ export const SearchButton = memo(
           ref={ref}
           color="muted"
           variant="ghost"
+          aria-label="Search"
           _hover={{ bg: ["blackAlpha.100", "whiteAlpha.50"] }}
           icon={<SearchIcon fontSize="2xl" />}
           {...rest}

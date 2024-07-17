@@ -212,6 +212,7 @@ export const useMultiDatePicker = ({
   )
 
   return {
+    id,
     value,
     setValue,
     isOpen,

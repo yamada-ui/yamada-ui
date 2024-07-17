@@ -305,6 +305,94 @@ const mewtwo: CellProps[] = useMemo(
 return <PieChart data={mewtwo} withLabels withLabelLines />
 ```
 
+### ラベルの表示位置を調整する
+
+ラベルを表示位置を調整する場合は、`labelOffset`に数値を設定します。
+
+```tsx functional=true
+const mewtwo: CellProps[] = useMemo(
+  () => [
+    {
+      name: "HP",
+      value: 106,
+      color: "green.500",
+    },
+    {
+      name: "こうげき",
+      value: 110,
+      color: "red.500",
+    },
+    {
+      name: "ぼうぎょ",
+      value: 90,
+      color: "blue.500",
+    },
+    {
+      name: "とくこう",
+      value: 154,
+      color: "purple.500",
+    },
+    {
+      name: "とくぼう",
+      value: 90,
+      color: "orange.500",
+    },
+    {
+      name: "すばやさ",
+      value: 130,
+      color: "cyan.500",
+    },
+  ],
+  [],
+)
+
+return <PieChart data={mewtwo} withLabels withLabelLines labelOffset={35} />
+```
+
+### ラベルを割合にする
+
+ラベルの表示を割合にする場合は、`isPercent`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx functional=true
+const mewtwo: CellProps[] = useMemo(
+  () => [
+    {
+      name: "HP",
+      value: 106,
+      color: "green.500",
+    },
+    {
+      name: "こうげき",
+      value: 110,
+      color: "red.500",
+    },
+    {
+      name: "ぼうぎょ",
+      value: 90,
+      color: "blue.500",
+    },
+    {
+      name: "とくこう",
+      value: 154,
+      color: "purple.500",
+    },
+    {
+      name: "とくぼう",
+      value: 90,
+      color: "orange.500",
+    },
+    {
+      name: "すばやさ",
+      value: 130,
+      color: "cyan.500",
+    },
+  ],
+  [],
+)
+
+return <PieChart data={mewtwo} withLabels isPercent />
+```
+
 ### ツールチップに表示するデータを切り替える
 
 ツールチップに表示するデータを切り替える場合は、`tooltipDataSource`に`all`または`segment`を設定します。デフォルトは、`all`です。

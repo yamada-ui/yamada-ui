@@ -165,6 +165,7 @@ export const useDatePicker = ({
   )
 
   return {
+    id,
     value,
     getContainerProps,
     getPopoverProps,

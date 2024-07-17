@@ -743,6 +743,17 @@
       "required": false,
       "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
     },
+    "isPercent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether labels should be displayed as percentages."
+    },
+    "labelOffset": {
+      "type": "number",
+      "required": false,
+      "description": "Distance between chart and label."
+    },
     "legendProps": {
       "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
       "required": false,
@@ -871,6 +882,17 @@
       "defaultValue": "'0%'",
       "required": false,
       "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "isPercent": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether labels should be displayed as percentages."
+    },
+    "labelOffset": {
+      "type": "number",
+      "required": false,
+      "description": "Distance between chart and label."
     },
     "legendProps": {
       "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",

@@ -14,74 +14,97 @@ describe("<List />", () => {
     await a11y(container)
   })
 
-  test("should render an unordered list", () => {
+  test("should render an unordered list", async () => {
     render(
-      <DiscList data-testid="DiscList">
+      <DiscList aria-label="DiscList">
         <ListItem>List item</ListItem>
         <ListItem>List item</ListItem>
       </DiscList>,
     )
-    expect(screen.getByTestId("DiscList")).toHaveStyle({
+
+    const list = await screen.findByRole("list", {
+      name: /DiscList/i,
+    })
+    expect(list).toHaveStyle({
       "list-style-type": "disc",
     })
   })
 
-  test("should render an ordered list", () => {
+  test("should render an ordered list", async () => {
     render(
-      <DecimalList data-testid="DecimalList">
+      <DecimalList aria-label="DecimalList">
         <ListItem>One</ListItem>
         <ListItem>Two</ListItem>
       </DecimalList>,
     )
-    expect(screen.getByTestId("DecimalList")).toHaveStyle({
+
+    const list = await screen.findByRole("list", {
+      name: /DecimalList/i,
+    })
+    expect(list).toHaveStyle({
       "list-style-type": "decimal",
     })
   })
 
-  test("should render list with a gap", () => {
+  test("should render list with a gap", async () => {
     render(
-      <List data-testid="List" gap="lg">
+      <List aria-label="List" gap="lg">
         <ListItem>Item one</ListItem>
         <ListItem>Item two</ListItem>
       </List>,
     )
-    expect(screen.getByTestId("List")).toHaveStyle({
+
+    const list = await screen.findByRole("list", {
+      name: /List/i,
+    })
+    expect(list).toHaveStyle({
       gap: "var(--ui-spaces-lg)",
     })
   })
 
-  test("should render list with an icon", () => {
+  test("should render list with an icon", async () => {
     render(
       <List>
         <ListItem>
-          <ListIcon data-testid="react-icon" as={FaCheckCircle} />
+          <ListIcon aria-label="react-icon" as={FaCheckCircle} />
         </ListItem>
-        <ListItem data-testid="font-awesome-icon">
+        <ListItem aria-label="font-awesome-icon">
           <ListIcon as={Icon} icon={faCheck} />
         </ListItem>
       </List>,
     )
 
-    expect(screen.getByTestId("react-icon")).toBeInTheDocument()
-    expect(screen.getByTestId("font-awesome-icon")).toBeInTheDocument()
+    const reactIcon = await screen.findByLabelText(/react-icon/i)
+    const fontAwesomeIcon = await screen.findByLabelText(/font-awesome-icon/i)
+
+    expect(reactIcon).toBeInTheDocument()
+    expect(fontAwesomeIcon).toBeInTheDocument()
   })
 
-  test("should render list with different style types", () => {
+  test("should render list with different style types", async () => {
     render(
       <>
-        <List data-testid="list-square" styleType="square">
+        <List aria-label="list-square" styleType="square">
           <ListItem>Item</ListItem>
         </List>
 
-        <List data-testid="list-circle" styleType="circle">
+        <List aria-label="list-circle" styleType="circle">
           <ListItem>Item</ListItem>
         </List>
       </>,
     )
-    expect(screen.getByTestId("list-square")).toHaveStyle({
+
+    const listSquare = await screen.findByRole("list", {
+      name: /list-square/i,
+    })
+    const listCircle = await screen.findByRole("list", {
+      name: /list-circle/i,
+    })
+
+    expect(listSquare).toHaveStyle({
       "list-style-type": "square",
     })
-    expect(screen.getByTestId("list-circle")).toHaveStyle({
+    expect(listCircle).toHaveStyle({
       "list-style-type": "circle",
     })
   })

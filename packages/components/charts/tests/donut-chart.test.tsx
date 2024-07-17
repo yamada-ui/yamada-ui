@@ -89,33 +89,33 @@ describe("<DonutChart />", () => {
   })
 
   test("labels should be rendered according to withLabels", async () => {
-    const { rerender, container } = render(
+    const { rerender } = render(
       <DonutChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={true}
+        withTooltip={false}
       />,
     )
 
-    await waitFor(() =>
-      expect(container.querySelectorAll(".ui-donut-chart__label")).toHaveLength(
-        data.length,
-      ),
-    )
+    for (const { value } of data) {
+      await waitFor(() => expect(screen.getByText(`${value}`)).toBeVisible())
+    }
 
     rerender(
       <DonutChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels={false}
+        withTooltip={false}
       />,
     )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-donut-chart__label"),
-      ).not.toBeInTheDocument(),
-    )
+    for (const { value } of data) {
+      await waitFor(() =>
+        expect(screen.queryByText(`${value}`)).not.toBeInTheDocument(),
+      )
+    }
   })
 
   test("labelLines should be rendered according to withLabelLines", async () => {
@@ -129,9 +129,9 @@ describe("<DonutChart />", () => {
     )
 
     await waitFor(() =>
-      expect(
-        container.querySelectorAll(".ui-donut-chart__label-line"),
-      ).toHaveLength(data.length),
+      expect(container.querySelectorAll(".ui-chart__label-line")).toHaveLength(
+        data.length,
+      ),
     )
 
     rerender(
@@ -145,7 +145,7 @@ describe("<DonutChart />", () => {
 
     await waitFor(() =>
       expect(
-        container.querySelector(".ui-donut-chart__label-line"),
+        container.querySelector(".ui-chart__label-line"),
       ).not.toBeInTheDocument(),
     )
   })
@@ -312,6 +312,37 @@ describe("<DonutChart />", () => {
 
     const formattedElements =
       await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements.length).toBeGreaterThan(0)
+    expect(formattedElements).toHaveLength(data.length)
+  })
+
+  test("valueFormatter should function properly in label", async () => {
+    render(
+      <DonutChart
+        containerProps={{ width: 400, height: "80%" }}
+        data={data}
+        withLabels
+        withTooltip={false}
+        valueFormatter={(value) => value.toLocaleString()}
+      />,
+    )
+
+    const formattedElements =
+      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
+    expect(formattedElements).toHaveLength(data.length)
+  })
+
+  test("isPercent should work correctly", async () => {
+    render(
+      <DonutChart
+        containerProps={{ width: 400, height: "80%" }}
+        data={data}
+        withLabels
+        withTooltip={false}
+        isPercent
+      />,
+    )
+
+    const formattedElements = await screen.findAllByText(/\d+%/i)
+    expect(formattedElements).toHaveLength(data.length)
   })
 })

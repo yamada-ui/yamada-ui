@@ -122,7 +122,8 @@ export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
 
   const [index, setIndex] = useControllableState({
     value,
-    defaultValue: () => (isMultiple ? defaultValue ?? [] : defaultValue ?? -1),
+    defaultValue: () =>
+      isMultiple ? (defaultValue ?? []) : (defaultValue ?? -1),
     onChange,
   })
 

@@ -19,15 +19,19 @@
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
     "incremental": true,
-    "paths": {
-      "contentlayer/generated": ["./.contentlayer/generated"]
-    }
+    "paths": { "mdx": ["./.mdx"] }
   },
   "include": [
     "next-env.d.ts",
+    "**/*.js",
+    "**/*.jsx",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated"
+    "**/*.mjs",
+    "**/*.mts",
+    "**/*.mdx",
+    "server.ts",
+    "./.mdx"
   ],
   "exclude": ["node_modules"]
 }

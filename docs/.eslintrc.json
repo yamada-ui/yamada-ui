@@ -7,7 +7,7 @@
   },
   "overrides": [
     {
-      "files": ["scripts/**/*"],
+      "files": ["scripts/**/*", "server.ts"],
       "rules": {
         "no-console": "off"
       }

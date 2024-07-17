@@ -77,6 +77,51 @@ describe("<BarChart />", () => {
     },
   ]
 
+  const rangeData = [
+    {
+      name: "Page A",
+      uv: [2000, 4000],
+      pv: [1400, 2400],
+      amt: [1400, 2400],
+    },
+    {
+      name: "Page B",
+      uv: [2000, 3000],
+      pv: [398, 1398],
+      amt: [1210, 2210],
+    },
+    {
+      name: "Page C",
+      uv: [1000, 2000],
+      pv: [8800, 9800],
+      amt: [1290, 2290],
+    },
+    {
+      name: "Page D",
+      uv: [1780, 2780],
+      pv: [2908, 3908],
+      amt: [1000, 2000],
+    },
+    {
+      name: "Page E",
+      uv: [890, 1890],
+      pv: [3800, 4800],
+      amt: [1181, 2181],
+    },
+    {
+      name: "Page F",
+      uv: [1390, 2390],
+      pv: [2800, 3800],
+      amt: [1500, 2500],
+    },
+    {
+      name: "Page G",
+      uv: [2490, 3490],
+      pv: [3300, 4300],
+      amt: [1400, 2400],
+    },
+  ]
+
   const series: BarProps[] = [
     { dataKey: "uv", color: "primary.500" },
     { dataKey: "pv", color: "secondary.500" },
@@ -111,195 +156,248 @@ describe("<BarChart />", () => {
     )
   })
 
-  test("x axis should be rendered according to withXAxis", async () => {
-    const { rerender, container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withXAxis={true}
-      />,
-    )
+  describe("axis", () => {
+    test("x axis should be rendered according to withXAxis", async () => {
+      const { rerender, container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withXAxis={true}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__x-axis"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__x-axis"),
+        ).toBeInTheDocument(),
+      )
 
-    for (let { name } of data) {
-      expect(screen.getByText(name)).toBeInTheDocument()
-    }
+      for (let { name } of data) {
+        expect(screen.getByText(name)).toBeInTheDocument()
+      }
 
-    rerender(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withXAxis={false}
-      />,
-    )
+      rerender(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withXAxis={false}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__x-axis"),
-      ).not.toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__x-axis"),
+        ).not.toBeInTheDocument(),
+      )
 
-    for (let { name } of data) {
-      expect(screen.queryByText(name)).not.toBeInTheDocument()
-    }
+      for (let { name } of data) {
+        expect(screen.queryByText(name)).not.toBeInTheDocument()
+      }
+    })
+
+    test("y axis should be rendered according to withYAxis", async () => {
+      const { rerender, container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withYAxis={true}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__y-axis"),
+        ).toBeInTheDocument(),
+      )
+
+      rerender(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withYAxis={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__y-axis"),
+        ).not.toBeInTheDocument(),
+      )
+    })
+
+    test("should be rendered axis label", async () => {
+      render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          xAxisLabel="x-axis-label"
+          yAxisLabel="y-axis-label"
+        />,
+      )
+
+      await waitFor(() =>
+        expect(screen.getByText("x-axis-label")).toBeVisible(),
+      )
+      expect(screen.getByText("y-axis-label")).toBeVisible()
+    })
   })
 
-  test("y axis should be rendered according to withYAxis", async () => {
-    const { rerender, container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withYAxis={true}
-      />,
-    )
+  describe("tooltip", () => {
+    test("tooltip should be rendered according to withTooltip", async () => {
+      const { rerender, container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={true}
+          withXAxis={false}
+        />,
+      )
 
-    await waitFor(() =>
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+
+      const textElement = await screen.findAllByText(/Page\s+/i)
+      expect(textElement).toHaveLength(1)
+
+      rerender(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+          withXAxis={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-bar-chart__y-axis"),
-      ).toBeInTheDocument(),
-    )
-
-    rerender(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withYAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__y-axis"),
-      ).not.toBeInTheDocument(),
-    )
-  })
-
-  test("tooltip should be rendered according to withTooltip", async () => {
-    const { rerender, container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={true}
-        withXAxis={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-bar-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+        container.querySelector(".ui-chart__tooltip"),
+      ).not.toBeInTheDocument()
     })
 
-    expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+    test("cursor should be rendered along with tooltip", async () => {
+      const { rerender, container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={true}
+        />,
+      )
 
-    const textElement = await screen.findAllByText(/Page\s+/i)
-    expect(textElement).toHaveLength(1)
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={false}
-        withXAxis={false}
-      />,
-    )
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
 
-    await waitFor(() =>
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
+
+      rerender(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
       expect(
-        container.querySelector(".ui-bar-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    chartElement = container.querySelector(".ui-bar-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+        container.querySelector(".ui-chart__cursor"),
+      ).not.toBeInTheDocument()
     })
 
-    expect(
-      container.querySelector(".ui-chart__tooltip"),
-    ).not.toBeInTheDocument()
-  })
+    test("values are displayed correctly in tooltip even for range data", async () => {
+      const { container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={rangeData}
+          series={series}
+        />,
+      )
 
-  test("cursor shoud be renderd along with tooltip", async () => {
-    const { rerender, container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={true}
-      />,
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
 
-    let chartElement = container.querySelector(".ui-bar-chart__chart")
-    assert(chartElement !== null)
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      await waitFor(() =>
+        expect(screen.getAllByText(/\d+ - \d+/i)).toHaveLength(series.length),
+      )
     })
-
-    expect(container.querySelector(".ui-chart__cursor")).toBeInTheDocument()
-
-    rerender(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        withTooltip={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    chartElement = container.querySelector(".ui-bar-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
-    })
-
-    expect(container.querySelector(".ui-chart__cursor")).not.toBeInTheDocument()
   })
 
   test("legend should be rendered according to withLegend", async () => {
@@ -342,93 +440,95 @@ describe("<BarChart />", () => {
     }
   })
 
-  test("tickLine should be rendered according to tickLine prop", async () => {
-    const { rerender, container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="xy"
-        gridAxis="xy"
-      />,
-    )
+  describe("tickLine & gridAxis", () => {
+    test("tickLine should be rendered according to tickLine prop", async () => {
+      const { rerender, container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="xy"
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="none"
-        gridAxis="xy"
-      />,
-    )
+      rerender(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="none"
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
 
-  test("if gridAxis is none, tickLine should not be rendered", async () => {
-    const { container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        tickLine="xy"
-        gridAxis="none"
-      />,
-    )
+    test("if gridAxis is none, tickLine should not be rendered", async () => {
+      const { container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          tickLine="xy"
+          gridAxis="none"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".recharts-cartesian-axis-tick-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
+      await waitFor(() =>
+        expect(
+          container.querySelector(".recharts-cartesian-axis-tick-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
 
-  test("grid should be rendered according to gridAxis", async () => {
-    const { rerender, container } = render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        gridAxis="xy"
-      />,
-    )
+    test("grid should be rendered according to gridAxis", async () => {
+      const { rerender, container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          gridAxis="xy"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__grid"),
-      ).toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__grid"),
+        ).toBeInTheDocument(),
+      )
 
-    rerender(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        gridAxis="none"
-      />,
-    )
+      rerender(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          gridAxis="none"
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-bar-chart__grid"),
-      ).not.toBeInTheDocument(),
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__grid"),
+        ).not.toBeInTheDocument(),
+      )
+    })
   })
 
   test("unit should be rendered according to unit prop", async () => {
@@ -473,35 +573,90 @@ describe("<BarChart />", () => {
     await expect(screen.findByText(/x line/i)).resolves.toBeInTheDocument()
   })
 
-  test("should be rendered valueFormatter", async () => {
-    render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        valueFormatter={(value) => value.toLocaleString()}
-      />,
-    )
+  describe("valueFormatter", () => {
+    test("should be rendered valueFormatter in y axis", async () => {
+      render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+          valueFormatter={(value) => value.toLocaleString()}
+        />,
+      )
 
-    const formattedElements =
-      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements.length).toBeGreaterThan(0)
-  })
+      const formattedElements =
+        await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
+      expect(formattedElements.length).toBeGreaterThan(1)
+    })
 
-  test("should be rendered axis label", async () => {
-    render(
-      <BarChart
-        containerProps={{ width: 400, height: "80%" }}
-        dataKey="name"
-        data={data}
-        series={series}
-        xAxisLabel="x-axis-label"
-        yAxisLabel="y-axis-label"
-      />,
-    )
+    test("should be rendered valueFormatter in tooltip", async () => {
+      const { container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip
+          withYAxis={false}
+          valueFormatter={(value) => value.toLocaleString()}
+        />,
+      )
 
-    await waitFor(() => expect(screen.getByText("x-axis-label")).toBeVisible())
-    expect(screen.getByText("y-axis-label")).toBeVisible()
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      await waitFor(() =>
+        expect(
+          screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i).length,
+        ).toBeGreaterThan(series.length),
+      )
+    })
+
+    test("should be rendered valueFormatter in tooltip with rangeData", async () => {
+      const { container } = render(
+        <BarChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={rangeData}
+          series={series}
+          withTooltip
+          withYAxis={false}
+          valueFormatter={(value) => value.toLocaleString()}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-bar-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-bar-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      await waitFor(() =>
+        expect(
+          screen.getAllByText(/\b\d{1,3}(,\d{3})+ - \d{1,3}(,\d{3})+/i),
+        ).toHaveLength(series.length),
+      )
+    })
   })
 })

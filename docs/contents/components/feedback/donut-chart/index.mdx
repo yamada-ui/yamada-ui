@@ -354,6 +354,94 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} withLabels withLabelLines />
 ```
 
+### Adjust label position
+
+To adjust label position, set `labelOffset` to a number.
+
+```tsx functional=true
+const mewtwo: CellProps[] = useMemo(
+  () => [
+    {
+      name: "HP",
+      value: 106,
+      color: "green.500",
+    },
+    {
+      name: "こうげき",
+      value: 110,
+      color: "red.500",
+    },
+    {
+      name: "ぼうぎょ",
+      value: 90,
+      color: "blue.500",
+    },
+    {
+      name: "とくこう",
+      value: 154,
+      color: "purple.500",
+    },
+    {
+      name: "とくぼう",
+      value: 90,
+      color: "orange.500",
+    },
+    {
+      name: "すばやさ",
+      value: 130,
+      color: "cyan.500",
+    },
+  ],
+  [],
+)
+
+return <DonutChart data={mewtwo} withLabels withLabelLines labelOffset={15} />
+```
+
+### Make Proportional
+
+To display the label as a percentage, set `isPercent` to `true`. The default is `false`.
+
+```tsx functional=true
+const mewtwo: CellProps[] = useMemo(
+  () => [
+    {
+      name: "HP",
+      value: 106,
+      color: "green.500",
+    },
+    {
+      name: "こうげき",
+      value: 110,
+      color: "red.500",
+    },
+    {
+      name: "ぼうぎょ",
+      value: 90,
+      color: "blue.500",
+    },
+    {
+      name: "とくこう",
+      value: 154,
+      color: "purple.500",
+    },
+    {
+      name: "とくぼう",
+      value: 90,
+      color: "orange.500",
+    },
+    {
+      name: "すばやさ",
+      value: 130,
+      color: "cyan.500",
+    },
+  ],
+  [],
+)
+
+return <DonutChart data={mewtwo} withLabels isPercent />
+```
+
 ### Switching the data displayed in the tooltip
 
 To switch the data displayed in the tooltip, set `tooltipDataSource` to `all` or `segment` . The default is `all`.

@@ -25,25 +25,7 @@ cd yamada-ui
 
 3. `pnpm install`を実行して、すべての依存関係とパッケージをセットアップします。このコマンドは、依存関係をインストールします。
 
-4. `pnpm dev`を実行してローカルサーバーを起動します。`Windows`の場合は、`contentlayer`が期待通りに動作しない可能性があります。その場合は、`pnpm docs:dev`の前に`pnpm docs:content`を実行してください。
-
-Yamada UIのドキュメントサイトが800ページを超えているため、開発環境に負荷を感じるかもしれません。
-もし、開発環境に負荷を感じた場合は、以下の手順で開発時に必要なページを選択してください。
-
-5. `contentlayer.config.json`を生成します。
-
-```sh
-# Linux, MacOS
-cp ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
-
-# Windows
-copy ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
-```
-
-6. `contentlayer.config.json`の内容を変更します。
-
-- `contentDirInclude`: 指定されたディレクトリを包含します。
-- `contentDirExclude`: 指定されたディレクトリを除外します。
+4. `pnpm dev`を実行してローカルサーバーを起動します。
 
 ## 開発手段
 
@@ -52,7 +34,6 @@ copy ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
 ### ツール
 
 - [Next.js](https://nextjs.org/) ドキュメントサイトのフレームワーク
-- [Contentlayer](https://contentlayer.dev/) ドキュメントサイトのコンテンツの管理
 
 ### コマンド
 

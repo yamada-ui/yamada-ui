@@ -9,23 +9,6 @@ import * as CarouselComponents from "@yamada-ui/carousel"
 import * as ChartComponents from "@yamada-ui/charts"
 import * as DropzoneComponents from "@yamada-ui/dropzone"
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
-import * as MarkdownComponents from "@yamada-ui/markdown"
-import {
-  ui,
-  Box,
-  Text,
-  ScrollArea,
-  useDisclosure,
-  useBoolean,
-  Button,
-  useUpdateEffect,
-  useResizeObserver,
-  Skeleton,
-  useColorMode,
-  useTheme,
-  createThemeSchemeManager,
-} from "@yamada-ui/react"
-import * as UIComponents from "@yamada-ui/react"
 import {
   Icon as LucideIcon,
   Ghost,
@@ -63,10 +46,27 @@ import {
   SmilePlus,
   CircleCheck,
 } from "@yamada-ui/lucide"
+import * as MarkdownComponents from "@yamada-ui/markdown"
+import * as UIComponents from "@yamada-ui/react"
+import {
+  ui,
+  Box,
+  Text,
+  ScrollArea,
+  useDisclosure,
+  useBoolean,
+  Button,
+  useUpdateEffect,
+  useResizeObserver,
+  Skeleton,
+  useColorMode,
+  useTheme,
+  createThemeSchemeManager,
+} from "@yamada-ui/react"
 import type { SkeletonProps, Environment } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
-import { useI18n } from "contexts/i18n-context"
+import { useI18n } from "contexts"
 import type { PrismTheme } from "prism-react-renderer"
 import React, { useEffect, useRef, useState } from "react"
 import type { FC, PropsWithChildren } from "react"

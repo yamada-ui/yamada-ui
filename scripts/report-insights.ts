@@ -352,8 +352,6 @@ const sendDiscordChannel =
   async (reports: string[]) => {
     const url = process.env.DISCORD_INSIGHTS_WEBHOOK_URL
 
-    if (!url) throw new Error("Missing Discord Webhook URL\n")
-
     for await (const [index, contents] of Object.entries(
       chunkArray(reports, 10),
     )) {
@@ -377,6 +375,8 @@ const sendDiscordChannel =
       const content = chunks.join("\n")
 
       if (publish) {
+        if (!url) throw new Error("Missing Discord Webhook URL\n")
+
         const data = { username: "GitHub", content }
 
         const headers = { "Content-Type": "application/json" }

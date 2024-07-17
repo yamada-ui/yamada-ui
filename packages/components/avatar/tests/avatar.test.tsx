@@ -3,7 +3,7 @@ import { Avatar, AvatarBadge } from "../src"
 
 describe("<Avatar />", () => {
   beforeEach(() => {
-    vi.useFakeTimers()
+    vi.useFakeTimers({ shouldAdvanceTime: true })
   })
 
   afterEach(() => {
@@ -14,15 +14,13 @@ describe("<Avatar />", () => {
   test("renders an image", async () => {
     const mock = mocks.image()
     mock.simulate("loaded")
-    const { getByAltText } = render(
-      <Avatar src="https://bit.ly/dan-abramov" name="Dan Abramov" />,
-    )
+    render(<Avatar src="https://bit.ly/dan-abramov" name="Dan Abramov" />)
 
     act(() => {
       vi.runAllTimers()
     })
 
-    const img = getByAltText("Dan Abramov")
+    const img = await screen.findByAltText("Dan Abramov")
     expect(img).toBeInTheDocument()
   })
 
@@ -42,126 +40,149 @@ describe("<Avatar />", () => {
     expect(onErrorFn).toHaveBeenCalledTimes(1)
   })
 
-  test("renders a name avatar if no src", () => {
-    const { queryByText } = render(<Avatar name="Dan Abramov" />)
-    const initials = queryByText("DA")
+  test("renders a name avatar if no src", async () => {
+    render(<Avatar name="Dan Abramov" />)
+
+    const initials = await screen.findByText("DA")
     expect(initials).toBeInTheDocument()
   })
 
-  test("renders a single character if only one name is passed", () => {
-    const { queryByText } = render(<Avatar name="Dan" />)
-    const initials = queryByText("D")
+  test("renders a single character if only one name is passed", async () => {
+    render(<Avatar name="Dan" />)
+
+    const initials = await screen.findByText("D")
     expect(initials).toBeInTheDocument()
   })
 
-  test("renders the first characters of the first and last name when more than two names are passed", () => {
-    const { queryByText } = render(<Avatar name="Dan React Abramov" />)
-    const initials = queryByText("DA")
+  test("renders the first characters of the first and last name when more than two names are passed", async () => {
+    render(<Avatar name="Dan React Abramov" />)
+
+    const initials = await screen.findByText("DA")
     expect(initials).toBeInTheDocument()
   })
 })
 
 describe("<AvatarBadge />", () => {
-  test("renders at specified placement top-start", () => {
+  test("renders at specified placement top-start", async () => {
     render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
-          data-testid="avatar-badge"
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="top-start"
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
 
-    expect(style["top"]).toBe("0px")
-    expect(style.getPropertyValue("inset-inline-start")).toBe("0px")
-    expect(style["transform"]).toBe("translate(-25%, -25%)")
+    const avatarBadge = await screen.findByLabelText(
+      /This is the avatar badge of Hirotomo Yamada\./i,
+    )
+    expect(avatarBadge).toHaveStyle({
+      top: "0px",
+      "inset-inline-start": "0px",
+      transform: "translate(-25%, -25%)",
+    })
   })
 
-  test("renders at specified placement top-end", () => {
+  test("renders at specified placement top-end", async () => {
     render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
-          data-testid="avatar-badge"
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="top-end"
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
 
-    expect(style["top"]).toBe("0px")
-    expect(style.getPropertyValue("inset-inline-end")).toBe("0px")
-    expect(style["transform"]).toBe("translate(25%, -25%)")
+    const avatarBadge = await screen.findByLabelText(
+      /This is the avatar badge of Hirotomo Yamada\./i,
+    )
+    expect(avatarBadge).toHaveStyle({
+      top: "0px",
+      "inset-inline-end": "0px",
+      transform: "translate(25%, -25%)",
+    })
   })
 
-  test("renders at specified placement bottom-start", () => {
+  test("renders at specified placement bottom-start", async () => {
     render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
-          data-testid="avatar-badge"
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="bottom-start"
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
+    const avatarBadge = await screen.findByLabelText(
+      /This is the avatar badge of Hirotomo Yamada\./i,
+    )
 
-    expect(style["bottom"]).toBe("0px")
-    expect(style.getPropertyValue("inset-inline-start")).toBe("0px")
-    expect(style["transform"]).toBe("translate(-25%, 25%)")
+    expect(avatarBadge).toHaveStyle({
+      bottom: "0px",
+      "inset-inline-start": "0px",
+      transform: "translate(-25%, 25%)",
+    })
   })
 
-  test("renders at specified placement bottom-end", () => {
+  test("renders at specified placement bottom-end", async () => {
     render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
-          data-testid="avatar-badge"
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           placement="bottom-end"
         />
       </Avatar>,
     )
-    const style = window.getComputedStyle(screen.getByTestId("avatar-badge"))
-
-    expect(style["bottom"]).toBe("0px")
-    expect(style.getPropertyValue("inset-inline-end")).toBe("0px")
-    expect(style["transform"]).toBe("translate(25%, 25%)")
+    const avatarBadge = await screen.findByLabelText(
+      /This is the avatar badge of Hirotomo Yamada\./i,
+    )
+    expect(avatarBadge).toHaveStyle({
+      bottom: "0px",
+      "inset-inline-end": "0px",
+      transform: "translate(25%, 25%)",
+    })
   })
 
-  test("renders with ping animation", () => {
+  test("renders with ping animation", async () => {
     render(
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"
       >
         <AvatarBadge
-          data-testid="avatar-badge"
+          aria-label="This is the avatar badge of Hirotomo Yamada."
           bg="primary"
           ping
           pingColor="rgb(255, 0, 0)"
         />
       </Avatar>,
     )
-    const pingEl = screen
-      .getByTestId("avatar-badge")
-      .querySelector(".ui-avatar__badge__ping")
+
+    const badge = await screen.findByLabelText(
+      /This is the avatar badge of Hirotomo Yamada\./i,
+    )
+
+    const pingEl = badge.querySelector(".ui-avatar__badge__ping")
     expect(pingEl).toBeInTheDocument()
+
+    expect(pingEl).toHaveStyle({ background: "rgb(255, 0, 0)" })
+
     const style = window.getComputedStyle(pingEl!)
-    expect(style["background"]).toBe("rgb(255, 0, 0)")
     expect(style["animation"]).toMatch(
       /animation-.* 1.4s cubic-bezier\(0,0,0.2,1\) 0s infinite normal forwards running/,
     )

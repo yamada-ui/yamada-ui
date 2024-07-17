@@ -1,8 +1,8 @@
-import { recursiveOctokit, type Event } from "utils/github"
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
-import { DISCORD_REVIEW_COMMENT } from "./opened"
+import { recursiveOctokit, type Event } from "utils/github"
 import type { APIHandler } from "utils/next"
+import { DISCORD_REVIEW_COMMENT } from "./opened"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 

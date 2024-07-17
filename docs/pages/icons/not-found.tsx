@@ -1,7 +1,7 @@
 import { Bird, Fish, Rabbit, Snail, Squirrel } from "@yamada-ui/lucide"
 import { Button, Center, Text } from "@yamada-ui/react"
 import type { BoxProps } from "@yamada-ui/react"
-import { useI18n } from "contexts/i18n-context"
+import { useI18n } from "contexts"
 import { memo } from "react"
 import type { FC, MutableRefObject } from "react"
 

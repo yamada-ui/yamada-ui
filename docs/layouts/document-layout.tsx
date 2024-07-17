@@ -12,18 +12,16 @@ import {
   TableOfContents,
 } from "components/navigation"
 import { TextWithCodeOrLink } from "components/typography"
-import type { DocumentData, DocumentTypes } from "contentlayer/generated"
-import { usePage } from "contexts/page-context"
+import { usePage } from "contexts"
+import type { Document } from "mdx"
 import type { FC, PropsWithChildren } from "react"
 
-export type DocumentLayoutProps = PropsWithChildren<
-  Partial<DocumentTypes & DocumentData>
->
+export type DocumentLayoutProps = PropsWithChildren<Partial<Document>>
 
 export const DocumentLayout: FC<DocumentLayoutProps> = ({
   title,
   description,
-  editUrl,
+  edit_url,
   with_table_of_contents,
   with_description,
   with_children,
@@ -90,7 +88,7 @@ export const DocumentLayout: FC<DocumentLayoutProps> = ({
                 </>
               ) : null}
 
-              {editUrl ? <EditPageLink href={editUrl} /> : null}
+              {edit_url ? <EditPageLink href={edit_url} /> : null}
 
               <Pagination />
             </Box>

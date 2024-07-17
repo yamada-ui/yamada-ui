@@ -3,7 +3,7 @@ import { memo } from "react"
 import { Editor } from "./editor"
 import { Footer } from "./footer"
 import { Header } from "./header"
-// import { useI18n } from "contexts/i18n-context"
+// import { useI18n } from "contexts"
 
 export const Playground = memo(() => {
   // const { t } = useI18n()

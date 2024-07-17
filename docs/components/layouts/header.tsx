@@ -1,10 +1,4 @@
-import {
-  Languages,
-  Moon,
-  Palette,
-  Sun,
-  Menu as MenuIcon,
-} from "@yamada-ui/lucide"
+import { Languages, Moon, Palette, Sun, MenuIcon } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -54,12 +48,11 @@ import { Search, SearchButton } from "components/forms"
 import { Discord, Github } from "components/media-and-icons"
 import { NextLinkIconButton, Tree } from "components/navigation"
 import { CONSTANT } from "constant"
-import { useI18n } from "contexts/i18n-context"
-import { usePage } from "contexts/page-context"
+import { useI18n, usePage } from "contexts"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { memo, useEffect, useRef, useState } from "react"
 import type { FC } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 
 export type HeaderProps = CenterProps & {}
 

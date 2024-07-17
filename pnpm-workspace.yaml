@@ -3,5 +3,5 @@ packages:
   - "examples/**"
   - "docs/**"
   - "!docs/.next"
-  - "!docs/.contentlayer"
+  - "!docs/.mdx"
   - "!examples/**/.next"

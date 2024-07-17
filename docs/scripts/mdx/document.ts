@@ -5,6 +5,8 @@ import type { Document, FrontMatter } from "mdx"
 import { getSlug, getTableOfContents } from "./utils"
 
 export async function generateMDX(filePath: string): Promise<Document> {
+  filePath = filePath.replace(/\\/g, "/")
+
   const file = await readFile(filePath, "utf-8")
   const slug = getSlug(filePath)
   const paths = slug.split("/")

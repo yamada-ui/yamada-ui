@@ -24,7 +24,7 @@ import { PropControl } from "../../components"
 type Story = StoryFn<typeof BarChart>
 
 const meta: Meta<typeof BarChart> = {
-  title: "Components / Feedback / BarChart",
+  title: "Components / Data Display / BarChart",
   component: BarChart,
 }
 

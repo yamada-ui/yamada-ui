@@ -7,6 +7,7 @@ import {
   ThemeSchemeScript,
   createThemeSchemeManager,
   themeSchemeManager,
+  transformTheme,
   useTheme,
 } from "../src"
 
@@ -183,5 +184,79 @@ describe("ThemeSchemeScript", () => {
     expect(scriptTag?.textContent).toContain(
       `!(function(){try{var a=function(c){var o=document.documentElement;return o.dataset.theme=c,c},h='base',r='ui-theme-scheme',t=document.cookie.match(new RegExp('(^| )'.concat(r,'=([^;]+)'))),c=t?t[2]:null;c?a(c):(document.cookie=''.concat(r,'=').concat(a(h),'; max-age=31536000; path=/'))}catch(a){}})();`,
     )
+  })
+})
+
+describe("transformTheme", () => {
+  const themeWithSchemes = {
+    breakpoints: {
+      sm: "30em",
+      md: "48em",
+      lg: "61em",
+      xl: "80em",
+      "2xl": "90em",
+    },
+    themeSchemes: {
+      dark: {
+        colors: {
+          background: "black",
+          text: "white",
+        },
+      },
+      light: {
+        colors: {
+          background: "white",
+          text: "black",
+        },
+      },
+    },
+  }
+
+  test("applies nested theme schemes correctly", () => {
+    const transformedTheme = transformTheme(themeWithSchemes)
+
+    const expectCssVarsDark =
+      "[data-theme=dark] &:not([data-theme]), &[data-theme=dark]"
+    const expectCssVarsLight =
+      "[data-theme=light] &:not([data-theme]), &[data-theme=light]"
+
+    expect(transformedTheme.__cssVars).toHaveProperty(expectCssVarsDark)
+    expect(transformedTheme.__cssVars[expectCssVarsDark]).toStrictEqual({
+      "--ui-colors-background": "black",
+      "--ui-colors-text": "white",
+    })
+
+    expect(transformedTheme.__cssVars).toHaveProperty(expectCssVarsLight)
+    expect(transformedTheme.__cssVars[expectCssVarsLight]).toStrictEqual({
+      "--ui-colors-background": "white",
+      "--ui-colors-text": "black",
+    })
+  })
+
+  test("provides correct CSS variables for nested themes", () => {
+    const { result } = renderHook(() => useTheme(), {
+      wrapper: ({ children }) => (
+        <ThemeProvider theme={themeWithSchemes}>{children}</ThemeProvider>
+      ),
+    })
+
+    const cssVars = result.current.theme.__cssVars
+
+    const expectCssVarsDark =
+      "[data-theme=dark] &:not([data-theme]), &[data-theme=dark]"
+    const expectCssVarsLight =
+      "[data-theme=light] &:not([data-theme]), &[data-theme=light]"
+
+    expect(cssVars).toHaveProperty(expectCssVarsDark)
+    expect(cssVars[expectCssVarsDark]).toStrictEqual({
+      "--ui-colors-background": "black",
+      "--ui-colors-text": "white",
+    })
+
+    expect(cssVars).toHaveProperty(expectCssVarsLight)
+    expect(cssVars[expectCssVarsLight]).toStrictEqual({
+      "--ui-colors-background": "white",
+      "--ui-colors-text": "black",
+    })
   })
 })

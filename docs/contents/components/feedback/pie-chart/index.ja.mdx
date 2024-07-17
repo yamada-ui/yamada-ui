@@ -351,7 +351,7 @@ return <PieChart data={mewtwo} withLabels withLabelLines labelOffset={35} />
 
 ### ラベルを割合にする
 
-ラベルの表示を割合にする場合は、`isParcent`を`true`に設定します。デフォルトは、`false`です。
+ラベルの表示を割合にする場合は、`isPercent`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -390,7 +390,11 @@ const mewtwo: CellProps[] = useMemo(
   [],
 )
 
+<<<<<<< HEAD
 return <PieChart data={mewtwo} withLabels isParcent />
+=======
+return <PieChart data={mewtwo} withLabels isPercent />
+>>>>>>> origin/main
 ```
 
 ### ツールチップに表示するデータを切り替える

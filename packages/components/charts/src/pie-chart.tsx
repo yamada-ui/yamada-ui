@@ -95,7 +95,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     withLabels,
     withLabelLines,
     labelOffset,
-    isParcent,
+    isPercent,
     strokeWidth,
     legendProps,
     ...rest
@@ -121,7 +121,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     withLabels,
     withLabelLines,
     labelOffset,
-    isParcent,
+    isPercent,
     valueFormatter,
     styles,
   })

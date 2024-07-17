@@ -18,7 +18,7 @@ import remarkBreaks from "remark-breaks"
 import remarkGfm from "remark-gfm"
 import type { CodeThemeNames } from "./code-theme"
 import { codeThemes } from "./code-theme"
-import { rehypeBreakPlugin, remarkUIComponent } from "./remark-ui-component"
+import { rehypePlugin, remarkUIComponent } from "./remark-ui-component"
 
 type UIComponents = {
   note?: FC<MarkdownComponentProps<"div">>
@@ -84,11 +84,7 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
     remarkUIComponent,
     ...filterEmpty(remarkPlugins ?? []),
   ]
-  rehypePlugins = [
-    rehypeBreakPlugin,
-    rehypeRaw,
-    ...filterEmpty(rehypePlugins ?? []),
-  ]
+  rehypePlugins = [rehypePlugin, rehypeRaw, ...filterEmpty(rehypePlugins ?? [])]
   components = {
     ...uiComponents({ codeProps, noteProps }),
     ...components,

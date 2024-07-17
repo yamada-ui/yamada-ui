@@ -331,14 +331,14 @@ describe("<DonutChart />", () => {
     expect(formattedElements).toHaveLength(data.length)
   })
 
-  test("isParcent should work correctly", async () => {
+  test("isPercent should work correctly", async () => {
     render(
       <DonutChart
         containerProps={{ width: 400, height: "80%" }}
         data={data}
         withLabels
         withTooltip={false}
-        isParcent
+        isPercent
       />,
     )
 

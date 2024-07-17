@@ -17,7 +17,7 @@ export type PieChartLabelProps = {
   percent?: number
   value?: number
   labelOffset?: number
-  isParcent?: boolean
+  isPercent?: boolean
   labelProps?: HTMLUIProps<"text">
   valueFormatter?: (value: number) => string
   styles: Dict<CSSUIObject>
@@ -34,7 +34,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
   percent = 0,
   value = 0,
   labelOffset: labelOffsetProp,
-  isParcent,
+  isPercent,
   labelProps,
   valueFormatter,
   styles,
@@ -47,7 +47,7 @@ export const pieChartLabel: (props: PieChartLabelProps) => React.ReactNode = ({
 
   const textAnchor = x > cxProp ? "start" : x < cxProp ? "end" : "middle"
   const displayLabel = () => {
-    if (isParcent) {
+    if (isPercent) {
       return (
         parseFloat((percent * 100).toFixed(0)) > 0 &&
         `${(percent * 100).toFixed(0)}%`

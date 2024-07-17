@@ -25,12 +25,11 @@ import {
 import type { IconProps, ListProps } from "@yamada-ui/react"
 import { Label } from "components/data-display"
 import { CONSTANT } from "constant"
-import type { DocumentTypeTree } from "contentlayer/generated"
-import { useI18n } from "contexts/i18n-context"
-import { usePage } from "contexts/page-context"
+import { useI18n, usePage } from "contexts"
+import type { DocumentTree } from "mdx"
 import Link from "next/link"
-import { memo, useEffect } from "react"
 import type { FC } from "react"
+import { memo, useEffect } from "react"
 
 export type TreeProps = ListProps
 
@@ -59,7 +58,7 @@ export const Tree = memo(
   }),
 )
 
-type RecursiveListItemProps = DocumentTypeTree & { isNested?: boolean }
+type RecursiveListItemProps = DocumentTree & { isNested?: boolean }
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
   ({ menu_icon, title, slug, label, children, isNested, is_expanded }) => {

@@ -1,4 +1,3 @@
-// import * as DropzoneComponents from '@yamada-ui/dropzone'
 import type { BoxProps } from "@yamada-ui/react"
 import { Box, Text } from "@yamada-ui/react"
 import { CopyButton } from "components/forms"

@@ -1,3 +1,4 @@
+import { CreditCard } from "@yamada-ui/lucide"
 import {
   Button,
   Card,
@@ -19,10 +20,9 @@ import {
   AutocompleteOption,
 } from "@yamada-ui/react"
 import type { UseRadioGroupReturn } from "@yamada-ui/react"
-import { CreditCard } from "@yamada-ui/lucide"
+import { Apple, Paypal } from "components/media-and-icons"
 import { memo } from "react"
 import type { FC, ReactNode } from "react"
-import { Apple, Paypal } from "components/media-and-icons"
 
 export const PaymentMethodCard = memo(() => {
   const CustomRadio: FC<

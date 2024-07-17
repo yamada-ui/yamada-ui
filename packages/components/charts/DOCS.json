@@ -743,7 +743,7 @@
       "required": false,
       "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
     },
-    "isParcent": {
+    "isPercent": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,
@@ -883,7 +883,7 @@
       "required": false,
       "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
     },
-    "isParcent": {
+    "isPercent": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,

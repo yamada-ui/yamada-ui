@@ -33,11 +33,11 @@ describe("<SegmentedControl />", () => {
           <SegmentedControlButton value="three">Three</SegmentedControlButton>
         </SegmentedControl>
 
-        <SegmentedControl data-testid="SegementedControlItems" items={items} />
+        <SegmentedControl data-testid="SegmentedControlItems" items={items} />
       </>,
     )
     expect(screen.getByTestId("SegmentedControl")).toBeInTheDocument()
-    expect(screen.getByTestId("SegementedControlItems")).toBeInTheDocument()
+    expect(screen.getByTestId("SegmentedControlItems")).toBeInTheDocument()
   })
 
   test("should render segmented control with default value", () => {

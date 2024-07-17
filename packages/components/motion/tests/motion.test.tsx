@@ -39,7 +39,7 @@ describe("<Motion />", () => {
   })
 
   test("Motion renders correctly with exit and transition", async () => {
-    const MotionExpample = () => {
+    const MotionExample = () => {
       const [isVisible, { toggle }] = useBoolean(false)
       return (
         <>
@@ -60,7 +60,7 @@ describe("<Motion />", () => {
       )
     }
 
-    const { user } = render(<MotionExpample />)
+    const { user } = render(<MotionExample />)
 
     const toggleButton = screen.getByRole("button", { name: /click/i })
 

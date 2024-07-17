@@ -410,7 +410,7 @@ describe("<LineChart />", () => {
       ).not.toBeInTheDocument()
     })
 
-    test("cursor shoud be renderd along with tooltip", async () => {
+    test("cursor should be rendered along with tooltip", async () => {
       const { rerender, container } = render(
         <LineChart
           containerProps={{ width: 400, height: "80%" }}

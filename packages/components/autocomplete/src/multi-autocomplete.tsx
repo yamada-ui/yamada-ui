@@ -343,6 +343,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
             overflow="hidden"
             marginBlockStart="0.125rem"
             marginBlockEnd="0.125rem"
+            aria-multiselectable="true"
             placeholder={
               !label || !label?.length || (keepPlaceholder && isOpen)
                 ? placeholder

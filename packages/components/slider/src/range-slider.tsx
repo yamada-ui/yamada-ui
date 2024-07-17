@@ -155,6 +155,7 @@ export const useRangeSlider = ({
     onFocus,
     onBlur,
     "aria-readonly": ariaReadonly,
+    "aria-valuetext": ariaValueText,
     ...rest
   } = useFormControlProps(props)
 
@@ -633,6 +634,7 @@ export const useRangeSlider = ({
             isDragging && focusThumbOnChange && activeIndex === i,
           ),
           "aria-orientation": orientation,
+          "aria-valuetext": ariaValueText ?? value.toString(),
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
           onFocus: handlerAll(props.onFocus, onFocus, () => {
             setFocused(true)
@@ -660,6 +662,7 @@ export const useRangeSlider = ({
         isDragging,
         activeIndex,
         orientation,
+        ariaValueText,
         onKeyDown,
         onFocus,
         onBlur,

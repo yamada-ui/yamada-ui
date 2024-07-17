@@ -225,12 +225,12 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "isParcent",
-                isChecked: props.isParcent,
+                label: "isPercent",
+                isChecked: props.isPercent,
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
-                    isParcent: !prev.isParcent,
+                    isPercent: !prev.isPercent,
                   })),
               },
             ]}

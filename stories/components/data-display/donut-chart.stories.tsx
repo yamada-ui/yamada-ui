@@ -14,7 +14,7 @@ import { PropControl } from "../../components"
 type Story = StoryFn<typeof DonutChart>
 
 const meta: Meta<typeof DonutChart> = {
-  title: "Components / Feedback / DonutChart",
+  title: "Components / Data Display / DonutChart",
   component: DonutChart,
 }
 

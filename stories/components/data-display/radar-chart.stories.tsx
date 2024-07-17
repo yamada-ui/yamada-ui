@@ -20,7 +20,7 @@ import { PropControl } from "../../components"
 type Story = StoryFn<typeof RadarChart>
 
 const meta: Meta<typeof RadarChart> = {
-  title: "Components / Feedback / RadarChart",
+  title: "Components / Data Display / RadarChart",
   component: RadarChart,
 }
 

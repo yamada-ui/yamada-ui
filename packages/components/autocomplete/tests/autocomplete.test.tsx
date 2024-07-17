@@ -9,7 +9,7 @@ import { useState } from "react"
 
 describe("<Autocomplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-autocomplete"
-  const AUTOCOMPLETE_ITEM_ROLE = "autocomplete-item"
+  const OPTION_ROLE = "option"
 
   describe("renders correctly", () => {
     const ITEMS: AutocompleteItem[] = [
@@ -46,7 +46,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements).toHaveLength(3)
     })
 
@@ -140,7 +140,7 @@ describe("<Autocomplete />", () => {
       const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
       await user.click(autocomplete!)
 
-      let optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      let optionElements = await screen.findAllByRole(OPTION_ROLE)
       await waitFor(() => expect(optionElements).toHaveLength(3))
 
       act(() => {
@@ -152,7 +152,7 @@ describe("<Autocomplete />", () => {
 
       rerender(<Autocomplete items={result.current[0]} />)
 
-      optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      optionElements = await screen.findAllByRole(OPTION_ROLE)
       await waitFor(() => expect(optionElements).toHaveLength(4))
     })
   })
@@ -181,7 +181,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       await user.click(optionElements[0])
 
       await waitFor(() =>
@@ -245,7 +245,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       await user.click(optionElements[0])
 
       optionElements.forEach(async (o) => {
@@ -270,7 +270,7 @@ describe("<Autocomplete />", () => {
         screen.getByPlaceholderText("focus-other").focus()
       })
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       optionElements.forEach(async (o) => {
         await waitFor(() => expect(o).toBeVisible())
       })
@@ -302,7 +302,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{ArrowDown>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
 
       expect(optionElements[0]).toHaveAttribute("data-focus")
 
@@ -332,7 +332,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{ArrowDown>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[1]).toHaveAttribute("data-focus")
     })
 
@@ -345,7 +345,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{ArrowUp>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
 
       expect(optionElements[ITEMS.length - 1]).toHaveAttribute("data-focus")
 
@@ -375,7 +375,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{ArrowUp>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[1]).toHaveAttribute("data-focus")
     })
 
@@ -388,7 +388,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{Space>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Space}")
@@ -411,7 +411,7 @@ describe("<Autocomplete />", () => {
       await user.type(input, "option4")
       await user.keyboard("{Space}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       await waitFor(() =>
         expect(optionElements[0]).toHaveTextContent("option4"),
       )
@@ -426,7 +426,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{Enter>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{Enter}")
@@ -449,7 +449,7 @@ describe("<Autocomplete />", () => {
       await user.type(input, "option4")
       await user.keyboard("{Enter}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       await waitFor(() => {
         expect(optionElements[0]).toHaveTextContent("option4")
       })
@@ -464,7 +464,7 @@ describe("<Autocomplete />", () => {
       await user.click(autocomplete!)
       await user.keyboard("{Escape}{ArrowUp>}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
 
       expect(optionElements[ITEMS.length - 1]).toHaveAttribute("data-focus")
 
@@ -483,7 +483,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[0]).toHaveAttribute("data-focus")
 
       await user.keyboard("{End}")
@@ -502,7 +502,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const select = await screen.findByRole("select")
+      const select = await screen.findByRole("listbox")
       await waitFor(() => expect(select).toHaveStyle({ visibility: "visible" }))
 
       await user.keyboard("{Escape}")
@@ -517,7 +517,7 @@ describe("<Autocomplete />", () => {
 
       await user.click(autocomplete!)
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[0]).toHaveAttribute("data-focus")
 
       const input = screen.getByRole("combobox")
@@ -567,7 +567,7 @@ describe("<Autocomplete />", () => {
       await user.type(input, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
     })
 
@@ -604,9 +604,7 @@ describe("<Autocomplete />", () => {
         await user.type(input, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
-        const optionElements = await screen.findAllByRole(
-          AUTOCOMPLETE_ITEM_ROLE,
-        )
+        const optionElements = await screen.findAllByRole(OPTION_ROLE)
         await waitFor(() => {
           expect(optionElements[0]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
@@ -626,9 +624,7 @@ describe("<Autocomplete />", () => {
         await user.type(input, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
-        const optionElements = await screen.findAllByRole(
-          AUTOCOMPLETE_ITEM_ROLE,
-        )
+        const optionElements = await screen.findAllByRole(OPTION_ROLE)
         await waitFor(() => {
           expect(optionElements[optionElements.length - 1]).toHaveTextContent(
             CREATE_OPTION_VALUE,
@@ -654,9 +650,7 @@ describe("<Autocomplete />", () => {
         await user.type(input, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
-        const optionElements = await screen.findAllByRole(
-          AUTOCOMPLETE_ITEM_ROLE,
-        )
+        const optionElements = await screen.findAllByRole(OPTION_ROLE)
         await waitFor(() => {
           expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
@@ -680,9 +674,7 @@ describe("<Autocomplete />", () => {
         await user.type(input, CREATE_OPTION_VALUE)
         await user.keyboard("{Enter}")
 
-        const optionElements = await screen.findAllByRole(
-          AUTOCOMPLETE_ITEM_ROLE,
-        )
+        const optionElements = await screen.findAllByRole(OPTION_ROLE)
         await waitFor(() => {
           expect(optionElements[2]).toHaveTextContent(CREATE_OPTION_VALUE)
         })
@@ -756,7 +748,7 @@ describe("<Autocomplete />", () => {
       await user.type(input, CREATE_OPTION_VALUE)
       await user.keyboard("{Enter}")
 
-      const optionElements = await screen.findAllByRole(AUTOCOMPLETE_ITEM_ROLE)
+      const optionElements = await screen.findAllByRole(OPTION_ROLE)
       await waitFor(() =>
         expect(optionElements[1]).toHaveTextContent(CREATE_OPTION_VALUE),
       )

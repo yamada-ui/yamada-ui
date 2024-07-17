@@ -52,7 +52,7 @@ export type UsePieChartOptions = {
    *
    * @default false
    */
-  isParcent?: boolean
+  isPercent?: boolean
   /**
    * Controls innerRadius of the chart segments.
    * If it is a number, it is the width of the radius.
@@ -114,7 +114,7 @@ export const usePieChart = ({
   withLabels = false,
   withLabelLines = false,
   labelOffset,
-  isParcent = false,
+  isPercent = false,
   strokeWidth = 1,
   fillOpacity = 1,
   innerRadius = "0%",
@@ -214,13 +214,13 @@ export const usePieChart = ({
     (props: any) =>
       pieChartLabel({
         labelOffset,
-        isParcent,
+        isPercent,
         labelProps,
         valueFormatter,
         styles: styles.label,
         ...props,
       }),
-    [isParcent, labelOffset, labelProps, styles.label, valueFormatter],
+    [isPercent, labelOffset, labelProps, styles.label, valueFormatter],
   )
 
   const labelLine = useCallback(

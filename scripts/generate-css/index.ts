@@ -69,7 +69,7 @@ const getCSSProperties = (doc: Document) => {
     .map(({ textContent, href }) => {
       const prop = textContent?.includes("-")
         ? toCamelCase(textContent ?? "")
-        : textContent ?? ""
+        : (textContent ?? "")
 
       return {
         name: textContent ?? "",

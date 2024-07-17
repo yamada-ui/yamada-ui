@@ -2,7 +2,7 @@ import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
 import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
 import { Github, X } from "components/media-and-icons"
 import { CONSTANT } from "constant"
-import { useI18n } from "contexts/i18n-context"
+import { useI18n } from "contexts"
 import type { FC } from "react"
 
 export type UserProps = StackProps &

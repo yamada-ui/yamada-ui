@@ -1,5 +1,11 @@
 import { Button } from "@yamada-ui/react"
-import { a11y, render, fireEvent, screen, waitFor } from "@yamada-ui/test"
+import {
+  a11y,
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@yamada-ui/test"
 import { useRef, useState } from "react"
 import { useNotice } from "../src"
 
@@ -15,9 +21,7 @@ describe("useNotice()", () => {
 
     return (
       <>
-        <Button data-testid="OpenNotice" onClick={onOpen}>
-          Open Notice
-        </Button>
+        <Button onClick={onOpen}>Open Notice</Button>
       </>
     )
   }
@@ -28,12 +32,18 @@ describe("useNotice()", () => {
   })
 
   test("Should render notice", async () => {
-    render(<NoticeExample />)
-    fireEvent.click(screen.getByTestId("OpenNotice"))
-    await waitFor(() => {
-      expect(screen.getByText("NoticeTitle")).toBeInTheDocument()
+    const { user } = render(<NoticeExample />)
+
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /open notice/i,
     })
-    expect(screen.getByText("NoticeDescription")).toBeInTheDocument()
+    await user.click(openNoticeButton)
+
+    const noticeTitle = await screen.findByText(/NoticeTitle/i)
+    const noticeDescription = await screen.findByText(/NoticeDescription/i)
+
+    expect(noticeTitle).toBeInTheDocument()
+    expect(noticeDescription).toBeInTheDocument()
   })
 
   test("Only the number specified by LIMIT is displayed", async () => {
@@ -48,17 +58,21 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Open Notice
-          </Button>
+          <Button onClick={onOpen}>Open Notice</Button>
         </>
       )
     }
 
-    render(<LimitedNoticeExample />)
+    const { user } = render(<LimitedNoticeExample />)
+
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /open notice/i,
+    })
+
     for (let index = 0; index < 5; index++) {
-      fireEvent.click(screen.getByTestId("OpenNotice"))
+      await user.click(openNoticeButton)
     }
+
     await waitFor(() => {
       expect(screen.getAllByText("NoticeTitle")).toHaveLength(3)
     })
@@ -76,17 +90,21 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Open Notice
-          </Button>
+          <Button onClick={onOpen}>Open Notice</Button>
         </>
       )
     }
 
-    render(<LimitedNoticeExample />)
+    const { user } = render(<LimitedNoticeExample />)
+
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /Open Notice/i,
+    })
+
     for (let index = 0; index < 5; index++) {
-      fireEvent.click(screen.getByTestId("OpenNotice"))
+      await user.click(openNoticeButton)
     }
+
     await waitFor(() => {
       expect(screen.getAllByText("NoticeTitle")).toHaveLength(1)
     })
@@ -104,20 +122,22 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Open Notice
-          </Button>
+          <Button onClick={onOpen}>Open Notice</Button>
         </>
       )
     }
 
-    render(<LimitedNoticeExample />)
-    for (let index = 0; index < 5; index++) {
-      fireEvent.click(screen.getByTestId("OpenNotice"))
-    }
-    await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle")).toHaveLength(5)
+    const { user } = render(<LimitedNoticeExample />)
+
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /open notice/i,
     })
+
+    for (let index = 0; index < 5; index++) {
+      await user.click(openNoticeButton)
+    }
+    const noticeTitles = await screen.findAllByText(/NoticeTitle/i)
+    expect(noticeTitles).toHaveLength(5)
   })
 
   test("Update notice", async () => {
@@ -144,27 +164,38 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Show notification
-          </Button>
-          <Button data-testid="UpdateNotice" onClick={onUpdate}>
-            Update last notification
-          </Button>
+          <Button onClick={onOpen}>Show notification</Button>
+          <Button onClick={onUpdate}>Update last notification</Button>
         </>
       )
     }
 
-    render(<UpdateNoticeExample />)
-    fireEvent.click(screen.getByTestId("OpenNotice"))
-    await waitFor(() => {
-      expect(screen.getByText("Notification")).toBeInTheDocument()
+    const { user } = render(<UpdateNoticeExample />)
+
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /Show notification/i,
     })
-    expect(screen.getByText("This is description.")).toBeInTheDocument()
-    fireEvent.click(screen.getByTestId("UpdateNotice"))
-    await waitFor(() => {
-      expect(screen.getByText("Updated notification")).toBeInTheDocument()
+    await user.click(openNoticeButton)
+
+    const notification = await screen.findByText("Notification")
+    expect(notification).toBeInTheDocument()
+    const notificationDescription = await screen.findByText(
+      "This is description.",
+    )
+    expect(notificationDescription).toBeInTheDocument()
+
+    const updateNoticeButton = await screen.findByRole("button", {
+      name: "Update last notification",
     })
-    expect(screen.getByText("This is updated description.")).toBeInTheDocument()
+    await user.click(updateNoticeButton)
+
+    const updatedNotification = await screen.findByText("Updated notification")
+    expect(updatedNotification).toBeInTheDocument()
+
+    const updatedNotificationDescription = await screen.findByText(
+      "This is updated description.",
+    )
+    expect(updatedNotificationDescription).toBeInTheDocument()
   })
 
   test("Close all notice", async () => {
@@ -182,27 +213,32 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Open Notice
-          </Button>
-          <Button data-testid="CloseAllNotice" onClick={onCloseAll}>
-            Close All Notice
-          </Button>
+          <Button onClick={onOpen}>Open Notice</Button>
+          <Button onClick={onCloseAll}>Close All Notice</Button>
         </>
       )
     }
 
-    render(<CloseNoticeExample />)
+    const { user } = render(<CloseNoticeExample />)
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /open notice/i,
+    })
+
     for (let index = 0; index < 5; index++) {
-      fireEvent.click(screen.getByTestId("OpenNotice"))
+      await user.click(openNoticeButton)
     }
-    await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle")).toHaveLength(5)
+
+    const noticeTitles = await screen.findAllByText(/NoticeTitle/i)
+    expect(noticeTitles).toHaveLength(5)
+
+    const closeAllNoticeButton = await screen.findByRole("button", {
+      name: /close all notice/i,
     })
-    fireEvent.click(screen.getByTestId("CloseAllNotice"))
-    await waitFor(() => {
-      expect(screen.queryByText("NoticeTitle")).not.toBeInTheDocument()
-    })
+    await user.click(closeAllNoticeButton)
+
+    const queryAllNotice = () => screen.queryAllByText(/NoticeTitle/i)
+    await waitForElementToBeRemoved(queryAllNotice())
+    expect(queryAllNotice()).toHaveLength(0)
   })
 
   test("Close notice with using close", async () => {
@@ -224,28 +260,26 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Open Notice
-          </Button>
-          <Button data-testid="CloseNotice" onClick={onClose}>
-            Close Notice
-          </Button>
+          <Button onClick={onOpen}>Open Notice</Button>
+          <Button onClick={onClose}>Close Notice</Button>
         </>
       )
     }
 
-    render(<CloseNoticeExample />)
-    fireEvent.click(screen.getByTestId("OpenNotice"))
+    const { user } = render(<CloseNoticeExample />)
+    await user.click(screen.getByRole("button", { name: /open notice/i }))
 
-    await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle")).toHaveLength(1)
+    const noticeTitle = await screen.findByText(/NoticeTitle/i)
+    expect(noticeTitle).toBeInTheDocument()
+
+    const closeNoticeButton = await screen.findByRole("button", {
+      name: /close notice/i,
     })
+    await user.click(closeNoticeButton)
 
-    fireEvent.click(screen.getByTestId("CloseNotice"))
-
-    await waitFor(() => {
-      expect(screen.queryByText("NoticeTitle")).not.toBeInTheDocument()
-    })
+    const queryNoticeTitle = () => screen.queryByText(/NoticeTitle/i)
+    await waitForElementToBeRemoved(queryNoticeTitle())
+    expect(queryNoticeTitle()).toBeNull()
   })
 
   test("Close notice with using isClosable", async () => {
@@ -261,26 +295,23 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button data-testid="OpenNotice" onClick={onOpen}>
-            Open Notice
-          </Button>
+          <Button onClick={onOpen}>Open Notice</Button>
         </>
       )
     }
 
-    render(<CloseNoticeExample />)
-    fireEvent.click(screen.getByTestId("OpenNotice"))
+    const { user } = render(<CloseNoticeExample />)
+    await user.click(screen.getByRole("button", { name: /open notice/i }))
 
-    await waitFor(() => {
-      expect(screen.getAllByText("NoticeTitle")).toHaveLength(1)
-    })
+    const noticeTitle = await screen.findByText(/NoticeTitle/i)
+    expect(noticeTitle).toBeInTheDocument()
 
-    const closeButton = screen.getByRole("button", { name: /close/i })
+    const closeButton = await screen.findByRole("button", { name: /close/i })
     expect(closeButton).toBeInTheDocument()
 
-    fireEvent.click(closeButton)
-    await waitFor(() => {
-      expect(screen.queryByText("NoticeTitle")).toBeNull()
-    })
+    await user.click(closeButton)
+    const queryNoticeTitle = () => screen.queryByText(/NoticeTitle/i)
+    await waitForElementToBeRemoved(queryNoticeTitle())
+    expect(queryNoticeTitle()).toBeNull()
   })
 })

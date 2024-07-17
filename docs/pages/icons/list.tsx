@@ -1,5 +1,5 @@
 import type { IconNames } from "@yamada-ui/lucide"
-import { icons, Search as SearchIcon } from "@yamada-ui/lucide"
+import { icons, SearchIcon } from "@yamada-ui/lucide"
 import type { InputGroupProps, InputProps, StackProps } from "@yamada-ui/react"
 import {
   AspectRatio,

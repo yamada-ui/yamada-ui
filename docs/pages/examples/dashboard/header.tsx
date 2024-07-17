@@ -1,4 +1,4 @@
-import { Menu as MenuIcon } from "@yamada-ui/lucide"
+import { MenuIcon } from "@yamada-ui/lucide"
 import {
   Autocomplete,
   Avatar,

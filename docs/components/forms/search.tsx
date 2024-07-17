@@ -1,4 +1,4 @@
-import { File, Hash, Search as SearchIcon } from "@yamada-ui/lucide"
+import { File, Hash, SearchIcon } from "@yamada-ui/lucide"
 import {
   ui,
   HStack,

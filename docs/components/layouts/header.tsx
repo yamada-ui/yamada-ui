@@ -1,10 +1,4 @@
-import {
-  Languages,
-  Moon,
-  Palette,
-  Sun,
-  Menu as MenuIcon,
-} from "@yamada-ui/lucide"
+import { Languages, Moon, Palette, Sun, MenuIcon } from "@yamada-ui/lucide"
 import {
   Box,
   Center,

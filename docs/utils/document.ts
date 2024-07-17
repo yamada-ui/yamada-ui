@@ -33,7 +33,7 @@ export const getDocument = (
   defaultLocale: string | undefined = CONSTANT.I18N.DEFAULT_LOCALE,
 ) =>
   locale
-    ? documentMap[locale]?.[path] ?? documentMap[defaultLocale]?.[path]
+    ? (documentMap[locale]?.[path] ?? documentMap[defaultLocale]?.[path])
     : documentMap[defaultLocale]?.[path]
 
 export const getDocumentTree =

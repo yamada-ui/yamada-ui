@@ -1,8 +1,7 @@
 import { readFile } from "fs/promises"
-import { CONSTANT } from "constant"
 import matter from "gray-matter"
 import type { Document, FrontMatter } from "mdx"
-import { getSlug, getTableOfContents } from "./utils"
+import { getEditUrl, getSlug, getTableOfContents } from "./utils"
 
 export async function generateMDX(filePath: string): Promise<Document> {
   filePath = filePath.replace(/\\/g, "/")
@@ -34,7 +33,7 @@ export async function generateMDX(filePath: string): Promise<Document> {
     paths,
     slug: "/" + slug,
     is_expanded: false,
-    edit_url: `${CONSTANT.SNS.GITHUB.DOC_EDIT_URL}/${filePath}`,
+    edit_url: getEditUrl(filePath),
     contents: getTableOfContents(content, table_of_contents_max_lv),
   }
 }

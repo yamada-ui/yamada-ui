@@ -27,6 +27,10 @@ export function getSlug(filePath: string): string {
     .replace(new RegExp(`\(/index\)?\(.${OTHER_LOCALES}\)?.mdx$`), "")
 }
 
+export function getEditUrl(filePath: string): string {
+  return `${CONSTANT.SNS.GITHUB.DOC_EDIT_URL}/${filePath.replace(/^contents\//, "")}`
+}
+
 export function getTableOfContents(
   raw: string,
   maxLv = Infinity,

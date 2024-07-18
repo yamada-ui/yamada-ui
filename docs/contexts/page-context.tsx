@@ -1,17 +1,14 @@
 import type {
-  DocumentTypesPagination,
-  DocumentTypes,
-  DocumentTypesNavigationItem,
-  DocumentTypeTree,
-} from "contentlayer/generated"
+  DocumentPagination,
+  Document,
+  DocumentNavigation,
+  DocumentTree,
+} from "mdx"
 import type { FC, PropsWithChildren } from "react"
 import { createContext, useContext, useMemo } from "react"
 
 type PageContext = Omit<PageProviderProps, "children"> & {
-  documentMap: Pick<
-    DocumentTypeTree,
-    "title" | "description" | "label" | "slug"
-  >[]
+  documentMap: Pick<DocumentTree, "title" | "description" | "label" | "slug">[]
 }
 
 const defaultValue = {
@@ -23,8 +20,8 @@ const defaultValue = {
 export const PageContext = createContext<PageContext>(defaultValue)
 
 const getDocumentMap = (
-  tree: DocumentTypeTree[],
-): Pick<DocumentTypeTree, "title" | "slug" | "label" | "description">[] =>
+  tree: DocumentTree[],
+): Pick<DocumentTree, "title" | "slug" | "label" | "description">[] =>
   tree.flatMap(({ title, slug, label, description, children }) => [
     { title, slug, label, description },
     ...getDocumentMap(children),
@@ -33,16 +30,16 @@ const getDocumentMap = (
 export type PageProviderProps = PropsWithChildren<
   {
     currentVersion: string | undefined | null
-    documentTree: DocumentTypeTree[]
-    documentTabs?: DocumentTypesNavigationItem[]
-    documentBreadcrumbs?: DocumentTypesNavigationItem[]
-    documentChildrenTree?: DocumentTypeTree[]
-    documentPagination?: DocumentTypesPagination
-  } & Partial<Omit<DocumentTypes, "body" | "data">>
+    documentTree: DocumentTree[]
+    documentTabs?: DocumentNavigation[]
+    documentBreadcrumbs?: DocumentNavigation[]
+    documentChildrenTree?: DocumentTree[]
+    documentPagination?: DocumentPagination
+  } & Partial<Omit<Document, "body" | "data">>
 >
 
 export const PageProvider: FC<PageProviderProps> = ({
-  documentTree,
+  documentTree = [],
   children,
   ...rest
 }) => {

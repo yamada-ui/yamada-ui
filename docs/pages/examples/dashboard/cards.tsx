@@ -1,3 +1,4 @@
+import { Users, CreditCard, Activity, DollarSign } from "@yamada-ui/lucide"
 import {
   Card,
   CardBody,
@@ -14,7 +15,6 @@ import type {
   IconProps,
   StatProps,
 } from "@yamada-ui/react"
-import { Users, CreditCard, Activity, DollarSign } from "@yamada-ui/lucide"
 import { memo } from "react"
 import type { FC } from "react"
 

@@ -1,6 +1,6 @@
 ---
-"@yamada-ui/icon": patch
-"@yamada-ui/theme": patch
+"@yamada-ui/icon": minor
+"@yamada-ui/theme": minor
 ---
 
 Thematize `Icon` component

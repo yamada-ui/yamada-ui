@@ -1,3 +1,4 @@
+import { Bookmark } from "@yamada-ui/lucide"
 import {
   Button,
   Card,
@@ -11,7 +12,6 @@ import {
   IconButton,
   Image,
 } from "@yamada-ui/react"
-import { Bookmark } from "@yamada-ui/lucide"
 import { memo } from "react"
 
 export const BookmarkCard = memo(() => {

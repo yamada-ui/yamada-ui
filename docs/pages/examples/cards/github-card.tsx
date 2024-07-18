@@ -1,3 +1,4 @@
+import { Circle, Star } from "@yamada-ui/lucide"
 import {
   Button,
   Card,
@@ -9,7 +10,6 @@ import {
   CardBody,
   Spacer,
 } from "@yamada-ui/react"
-import { Circle, Star } from "@yamada-ui/lucide"
 import { memo } from "react"
 
 export const GitHubCard = memo(() => {

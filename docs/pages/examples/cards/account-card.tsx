@@ -13,8 +13,8 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { memo } from "react"
 import { Github, X } from "components/media-and-icons"
+import { memo } from "react"
 
 export const AccountCard = memo(() => {
   return (

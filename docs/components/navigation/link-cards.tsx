@@ -1,6 +1,6 @@
 import { forwardRef, Grid, GridItem } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
-import { usePage } from "contexts/page-context"
+import { usePage } from "contexts"
 import { memo } from "react"
 import { LinkCard } from "./link-card"
 

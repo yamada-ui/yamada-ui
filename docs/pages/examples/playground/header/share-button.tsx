@@ -1,3 +1,4 @@
+import { Copy } from "@yamada-ui/lucide"
 import {
   Button,
   IconButton,
@@ -16,7 +17,6 @@ import type {
 } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
-import { Copy } from "@yamada-ui/lucide"
 
 export type ShareButtonProps = ButtonProps & {
   popoverProps?: PopoverProps

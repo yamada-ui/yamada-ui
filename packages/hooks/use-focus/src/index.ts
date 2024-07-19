@@ -102,7 +102,9 @@ export const useFocusOnShow = <T extends HTMLElement>(
   }, [visible, preventScroll, element, focusRef])
 
   useUpdateEffect(() => {
-    onFocus()
+    requestAnimationFrame(() => {
+      onFocus()
+    })
   }, [onFocus])
 
   useEventListener(element, "transitionend", onFocus)

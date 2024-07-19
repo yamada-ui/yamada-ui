@@ -1,6 +1,6 @@
 ---
-"@yamada-ui/file-button": major
-"@yamada-ui/theme": major
+"@yamada-ui/file-button": minor
+"@yamada-ui/theme": minor
 ---
 
 The `file-button` component was given a theme.

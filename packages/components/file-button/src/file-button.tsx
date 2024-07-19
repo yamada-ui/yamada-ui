@@ -1,12 +1,7 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
 import type { ColorModeToken, CSS, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
+import { ui, forwardRef, useComponentStyle } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
@@ -61,23 +56,20 @@ export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
-  const {
+  const [styles] = useComponentStyle("FileButton", props)
+
+  let {
+    className,
+    resetRef,
+    as: As,
+    children,
     id,
     name,
-    accept,
-    multiple,
-    form,
     "aria-readonly": ariaReadonly,
     onClick: onClickProp,
     onChange: onChangeProp,
     ...rest
   } = useFormControlProps(props)
-
-  const [styles, mergedProps] = useMultiComponentStyle("FileButton", {
-    ...props,
-  })
-
-  let { className, resetRef, as: As, children } = omitThemeProps(mergedProps)
 
   const { disabled, readOnly, required, "aria-invalid": isInvalid } = rest
 
@@ -110,6 +102,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     children = (
       <Component
         className={cx("ui-file-button", className)}
+        __css={styles}
         {...rest}
         onClick={handlerAll(onClickProp, onClick)}
       >
@@ -129,10 +122,6 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
         tabIndex={-1}
         id={id}
         name={name}
-        form={form}
-        accept={accept}
-        multiple={multiple}
-        style={styles}
         onChange={onChange}
         aria-readonly={ariaReadonly}
         {...pickObject(rest, formControlProperties)}

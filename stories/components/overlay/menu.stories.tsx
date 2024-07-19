@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import {
   ChevronDown,
-  Menu as MenuIcon,
+  MenuIcon,
   Plus,
   SquareArrowOutUpRight,
   SquarePen,

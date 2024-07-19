@@ -1,5 +1,4 @@
-import { useI18n } from "contexts/i18n-context"
-import { PageProvider } from "contexts/page-context"
+import { useI18n, PageProvider } from "contexts"
 import { DocumentLayout } from "layouts/document-layout"
 import type { NextPage, InferGetStaticPropsType } from "next"
 import { getStaticCommonProps } from "utils/next"

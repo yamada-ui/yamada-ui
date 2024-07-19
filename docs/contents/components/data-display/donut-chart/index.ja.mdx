@@ -1,28 +1,28 @@
 ---
 title: DonutChart
-description: "`DonutChart` is a component for drawing donut charts to compare multiple sets of data."
+description: "`DonutChart`は、複数のデータを比較するためのドーナツチャートを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
 is_tabs: true
 with_description: true
-tab: Usage
+tab: 使い方
 ---
 
-## Import
+## インポート
 
 <PackageManagers packageNameOrCommand="@yamada-ui/charts" />
 
 :::note status=warning
-`@yamada-ui/charts` is not included in `@yamada-ui/react`, so it needs to be installed separately.
+`@yamada-ui/charts`は、`@yamada-ui/react`に含まれていないため、別途インストールする必要があります。
 :::
 
 ```ts
 import { DonutChart } from "@yamada-ui/charts"
 ```
 
-## Usage
+## 使い方
 
 :::note
-`DonutChart` internally uses [Recharts](https://recharts.org/en-US/api/PieChart).
+`DonutChart`は、内部的に[Recharts](https://recharts.org/en-US/api/PieChart)を使用しています。
 :::
 
 ```tsx functional=true
@@ -65,7 +65,7 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} />
 ```
 
-### Change Size
+### サイズを変更する
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -113,9 +113,9 @@ return (
 )
 ```
 
-### Display Legend
+### 凡例を表示する
 
-To display the legend, set `withLegend` to `true`. To change the position of the legend, set `legendProps.verticalAlign` to `"bottom"` or similar.
+凡例を表示する場合は、`withLegend`を`true`に設定します。また、凡例の位置を変更する場合は、`legendProps.verticalAlign`に`"bottom"`などを設定します。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -167,9 +167,9 @@ return (
 )
 ```
 
-### Adjust spacing
+### 間隔を調整する
 
-To adjust spacing, set `paddingAngle` to a number.
+間隔を調整する場合は、`paddingAngle`に数値を設定します。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -211,13 +211,13 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} paddingAngle={15} />
 ```
 
-### Adjust inner radius, outer radius
+### 内半径、外半径を調整する
 
-Set a percentage or number to `innerRadius` to adjust inner radius or `outerRadius` to adjust outer radius.
+内半径を調整する場合は`innerRadius`に、外半径を調整する場合は`outerRadius`にパーセンテージまたは数値を設定します。
 
 :::note
-If a percentage is set, it is calculated as a percentage of the chart height.
-If a number is set, it is calculated as `px` of the radius.
+パーセンテージを設定した場合は、チャートの高さに対する割合として計算されます。
+数値を設定した場合は、半径の`px`として計算されます。
 :::
 
 ```tsx functional=true
@@ -260,13 +260,13 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} innerRadius="70%" outerRadius="80%" />
 ```
 
-### Adjust start angle, end angle
+### 開始、終了の角度を調整する
 
-Set an angle to `startAngle` to adjust start angle or `endAngle` to adjust end angle.
+開始の角度を調整する場合は`startAngle`に、終了の角度を調整する場合は`endAngle`に角度を設定します。
 
 :::note
-The direction is anticlockwise with 3 o'clock as 0°. To go clockwise, set a negative value.
-The default values are `90` for `startAngle` and `-270` for `endAngle` to go clockwise from 12 o'clock.
+3時の方向を0度として反時計回りに進みます。時計回りにしたい場合は、マイナスの値を設定してください。
+デフォルト値は12時から時計回りにするため、`startAngle`に`90`、`endAngle`に`-270`を設定しています。
 :::
 
 ```tsx functional=true
@@ -309,10 +309,10 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} startAngle={90} endAngle={225} />
 ```
 
-### Display Labels
+### ラベルを表示する
 
-To display the labels, set `withLabels` to `true`.
-To display guide to labels, set `withLabelLines` to `true`.
+ラベルを表示する場合は、`withLabels`を`true`に設定します。
+また、ラベルまでのガイドを表示する場合は`withLabelLines`を`true`に設定します。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -354,9 +354,9 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} withLabels withLabelLines />
 ```
 
-### Adjust label position
+### ラベルの表示位置を調整する
 
-To adjust label position, set `labelOffset` to a number.
+ラベルを表示位置を調整する場合は、`labelOffset`に数値を設定します。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -398,9 +398,9 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} withLabels withLabelLines labelOffset={15} />
 ```
 
-### Make Proportional
+### ラベルを割合にする
 
-To display the label as a percentage, set `isParcent` to `true`. The default is `false`.
+ラベルの表示を割合にする場合は、`isPercent`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -439,12 +439,12 @@ const mewtwo: CellProps[] = useMemo(
   [],
 )
 
-return <DonutChart data={mewtwo} withLabels isParcent />
+return <DonutChart data={mewtwo} withLabels isPercent />
 ```
 
-### Switching the data displayed in the tooltip
+### ツールチップに表示するデータを切り替える
 
-To switch the data displayed in the tooltip, set `tooltipDataSource` to `all` or `segment` . The default is `all`.
+ツールチップに表示するデータを切り替える場合は、`tooltipDataSource`に`all`または`segment`を設定します。デフォルトは、`all`です。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -486,9 +486,9 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} tooltipDataSource="segment" />
 ```
 
-### Hide Tooltip
+### ツールチップを非表示にする
 
-To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
+ツールチップを非表示にする場合は、`withTooltip`を`false`に設定します。デフォルトは、`true`です。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -530,9 +530,9 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} withTooltip={false} />
 ```
 
-### Format Values
+### 値をフォーマットする
 
-To format values, use `valueFormatter`.
+値をフォーマットする場合は、`valueFormatter`を使います。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -579,9 +579,9 @@ return (
 )
 ```
 
-### Adjust Opacity
+### 透明度を調整する
 
-To adjust opacity, set `fillOpacity` to a number or an array of numbers.
+透明度を調整する場合は、`fillOpacity`に数値または数値の配列を設定します。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(

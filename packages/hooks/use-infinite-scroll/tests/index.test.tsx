@@ -123,7 +123,7 @@ describe("useInfiniteScroll", () => {
     })
   })
 
-  test("should be called onReset reverse scrooll to root", async () => {
+  test("should be called onReset reverse scroll to root", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
         finish()
@@ -162,7 +162,7 @@ describe("useInfiniteScroll", () => {
     })
   })
 
-  test("should be called onReset horizontal reverse scrooll to root", async () => {
+  test("should be called onReset horizontal reverse scroll to root", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
         finish()
@@ -202,7 +202,7 @@ describe("useInfiniteScroll", () => {
     })
   })
 
-  test("should be called onReset horizontal scrooll to body", async () => {
+  test("should be called onReset horizontal scroll to body", async () => {
     const MyComponent = () => {
       const mockOnLoad = vi.fn().mockImplementation(async ({ finish }) => {
         finish()

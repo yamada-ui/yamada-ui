@@ -7,9 +7,8 @@ import {
   forwardRef,
 } from "@yamada-ui/react"
 import type { GridItemProps, GridProps } from "@yamada-ui/react"
-import type { DocumentTypesNavigationItem } from "contentlayer/generated"
-import { useI18n } from "contexts/i18n-context"
-import { usePage } from "contexts/page-context"
+import { useI18n, usePage } from "contexts"
+import type { DocumentNavigation } from "mdx"
 import Link from "next/link"
 import { memo } from "react"
 import type { FC } from "react"
@@ -19,9 +18,9 @@ export type PaginationProps = GridProps
 export const Pagination = memo(
   forwardRef<PaginationProps, "div">(({ ...rest }, ref) => {
     const { documentPagination } = usePage()
-    const { prevDocument, nextDocument } = documentPagination ?? {}
+    const { prev, next } = documentPagination ?? {}
 
-    if (!prevDocument && !nextDocument) return
+    if (!prev && !next) return
 
     return (
       <Grid
@@ -31,20 +30,16 @@ export const Pagination = memo(
         mt="xl"
         {...rest}
       >
-        {prevDocument ? <PaginationItem {...prevDocument} isPrev /> : <Box />}
+        {prev ? <PaginationItem {...prev} isPrev /> : <Box />}
 
-        {nextDocument ? (
-          <PaginationItem {...nextDocument} alignItems="flex-end" />
-        ) : (
-          <Box />
-        )}
+        {next ? <PaginationItem {...next} alignItems="flex-end" /> : <Box />}
       </Grid>
     )
   }),
 )
 
 type PaginationItemProps = GridItemProps &
-  DocumentTypesNavigationItem & {
+  DocumentNavigation & {
     isPrev?: boolean
   }
 

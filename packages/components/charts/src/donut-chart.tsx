@@ -62,7 +62,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     withLabels,
     withLabelLines,
     labelOffset,
-    isParcent,
+    isPercent,
     innerRadius = withLabels ? "60%" : "80%",
     outerRadius,
     strokeWidth,
@@ -90,7 +90,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     withLabels,
     withLabelLines,
     labelOffset,
-    isParcent,
+    isPercent,
     valueFormatter,
     styles,
   })

@@ -25,25 +25,7 @@ cd yamada-ui
 
 3. Setup all the dependencies and packages by running `pnpm install`. This command will install dependencies.
 
-4. Run `pnpm docs:dev` to start the local server. In the case of `Windows`, `contentlayer` may not work as expected. If so, run `pnpm docs:content` before `pnpm dev`.
-
-The Yamada UI documentation site has over 800 pages, so you may feel a load on your development environment.
-If you feel a load on your development environment, please select the necessary pages for development according to the following procedure.
-
-5. Add `contentlayer.config.json`.
-
-```sh
-# Linux, MacOS
-cp ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
-
-# Windows
-copy ./docs/contentlayer.config.example.json ./docs/contentlayer.config.json
-```
-
-6. Change the contents of `contentlayer.config.json`.
-
-- `contentDirInclude`: Include the specified directory.
-- `contentDirExclude`: Exclude the specified directory.
+4. Run `pnpm docs:dev` to start the local server.
 
 ## Development
 
@@ -52,7 +34,6 @@ To improve our development process, we have set up tools and systems.
 ### Tooling
 
 - [Next.js](https://nextjs.org/) Framework for documentation sites.
-- [Contentlayer](https://contentlayer.dev/) Content management for documentation sites.
 
 ### Commands
 

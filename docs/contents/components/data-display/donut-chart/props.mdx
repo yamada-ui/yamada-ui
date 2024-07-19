@@ -1,6 +1,8 @@
 ---
-title: PieChart
-description: "`PieChart`は、複数のデータを比較するためのパイチャートを描画するコンポーネントです。"
+title: DonutChart
+description: >-
+  `DonutChart` is a component for drawing donut charts to compare multiple sets
+  of data.
 package_name: "@yamada-ui/charts"
 with_description: true
 tab: Props
@@ -8,10 +10,10 @@ tab: Props
 
 ## Props
 
-### PieChartProps
+### DonutChartProps
 
 <PropsCard
-  id="piechart-data"
+  id="donutchart-data"
   name="data"
   required
   type='(Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; })[]'
@@ -19,14 +21,14 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-cellprops"
+  id="donutchart-cellprops"
   name="cellProps"
   type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
   description={"Props for the cell."}
 />
 
 <PropsCard
-  id="piechart-chartprops"
+  id="donutchart-chartprops"
   name="chartProps"
   type="Omit<CSSUIProps, keyof CategoricalChartProps> &
   CategoricalChartProps"
@@ -34,21 +36,21 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-colorscheme"
+  id="donutchart-colorscheme"
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
-  id="piechart-containerprops"
+  id="donutchart-containerprops"
   name="containerProps"
   type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
   description={"Props passed down to recharts `ResponsiveContainer` component."}
 />
 
 <PropsCard
-  id="piechart-endangle"
+  id="donutchart-endangle"
   name="endAngle"
   type="number"
   description={"Controls angle at which chart ends."}
@@ -56,7 +58,7 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-innerradius"
+  id="donutchart-innerradius"
   name="innerRadius"
   type="string | number"
   description={
@@ -66,29 +68,29 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-isparcent"
-  name="isParcent"
+  id="donutchart-ispercent"
+  name="isPercent"
   type="boolean"
   description={"Determines whether labels should be displayed as percentages."}
   defaultValue={"false"}
 />
 
 <PropsCard
-  id="piechart-labeloffset"
+  id="donutchart-labeloffset"
   name="labelOffset"
   type="number"
   description={"Distance between chart and label."}
 />
 
 <PropsCard
-  id="piechart-legendprops"
+  id="donutchart-legendprops"
   name="legendProps"
   type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
   description={"Props passed down to recharts 'Legend' component."}
 />
 
 <PropsCard
-  id="piechart-outerradius"
+  id="donutchart-outerradius"
   name="outerRadius"
   type="string | number"
   description={
@@ -98,7 +100,7 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-paddingangle"
+  id="donutchart-paddingangle"
   name="paddingAngle"
   type="number"
   description={"Controls padding between segments."}
@@ -106,22 +108,22 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-pieprops"
+  id="donutchart-pieprops"
   name="pieProps"
   type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 494 more ... | "cornerRadius"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, "label" | ... 2 more ... | "l...'
   description={"Props for the pie."}
 />
 
 <PropsCard
-  id="piechart-size"
+  id="donutchart-size"
   name="size"
   type='"sm" | "md" | "lg"'
-  description={"The size of the PieChart."}
+  description={"The size of the DonutChart."}
   defaultValue={"md"}
 />
 
 <PropsCard
-  id="piechart-startangle"
+  id="donutchart-startangle"
   name="startAngle"
   type="number"
   description={"Controls angle at which chart starts."}
@@ -129,7 +131,7 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-tooltipanimationduration"
+  id="donutchart-tooltipanimationduration"
   name="tooltipAnimationDuration"
   type="number"
   description={
@@ -139,7 +141,7 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-tooltipdatasource"
+  id="donutchart-tooltipdatasource"
   name="tooltipDataSource"
   type="TooltipDataSourceType"
   description={"Determines which data is displayed in the tooltip."}
@@ -147,21 +149,21 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-tooltipprops"
+  id="donutchart-tooltipprops"
   name="tooltipProps"
   type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
   description={"Props passed down to recharts 'Tooltip' component."}
 />
 
 <PropsCard
-  id="piechart-unit"
+  id="donutchart-unit"
   name="unit"
   type="string"
   description={"Unit displayed next to each tick in y-axis."}
 />
 
 <PropsCard
-  id="piechart-valueformatter"
+  id="donutchart-valueformatter"
   name="valueFormatter"
   type="((value: number) => string) & ((value: number) => string)"
   description={
@@ -170,14 +172,14 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-variant"
+  id="donutchart-variant"
   name="variant"
   type="string"
-  description={"The variant of the PieChart."}
+  description={"The variant of the DonutChart."}
 />
 
 <PropsCard
-  id="piechart-withlabellines"
+  id="donutchart-withlabellines"
   name="withLabelLines"
   type="boolean"
   description={
@@ -187,7 +189,7 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-withlabels"
+  id="donutchart-withlabels"
   name="withLabels"
   type="boolean"
   description={"Determines whether each segment should have associated label."}
@@ -195,7 +197,7 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-withlegend"
+  id="donutchart-withlegend"
   name="withLegend"
   type="boolean"
   description={"If `true`, legend is visible."}
@@ -203,21 +205,9 @@ tab: Props
 />
 
 <PropsCard
-  id="piechart-withtooltip"
+  id="donutchart-withtooltip"
   name="withTooltip"
   type="boolean"
   description={"If `true`, tooltip is visible."}
   defaultValue={"true"}
-/>
-
-### CellProps
-
-<PropsCard id="cell-name" name="name" required type="string" />
-
-<PropsCard id="cell-value" name="value" required type="number" />
-
-<PropsCard
-  id="cell-dimcell"
-  name="dimCell"
-  type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
 />

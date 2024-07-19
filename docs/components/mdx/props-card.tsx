@@ -8,7 +8,7 @@ import {
   Text,
 } from "@yamada-ui/react"
 import { TextWithCode } from "components/typography"
-import { useI18n } from "contexts/i18n-context"
+import { useI18n } from "contexts"
 import type { FC } from "react"
 import { Link } from "./link"
 

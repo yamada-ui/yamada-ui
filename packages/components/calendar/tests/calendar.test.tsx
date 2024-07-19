@@ -183,12 +183,12 @@ describe("<Calendar />", () => {
       )
       fireEvent.click(headerLabelBtn!)
 
-      const monthListBtns = container.querySelectorAll(
-        `button.ui-calendar__month-list-button`,
+      const monthListButtons = container.querySelectorAll(
+        `button.ui-calendar__month-list__button`,
       )
-      const targetMonthElem = monthListBtns[7]
-      expect(targetMonthElem).toHaveTextContent("Aug")
-      fireEvent.click(targetMonthElem)
+      const targetMonthEl = monthListButtons[7]
+      expect(targetMonthEl).toHaveTextContent("Aug")
+      fireEvent.click(targetMonthEl)
 
       const headerLabelBtnAfter = container.querySelector(
         `button.ui-calendar__header-label`,

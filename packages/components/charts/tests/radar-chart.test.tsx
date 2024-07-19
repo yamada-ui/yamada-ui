@@ -344,7 +344,7 @@ describe("<RadarChart />", () => {
     ).not.toBeInTheDocument()
   })
 
-  test("cursor shoud be renderd along with tooltip", async () => {
+  test("cursor should be rendered along with tooltip", async () => {
     const { rerender, container } = render(
       <RadarChart
         containerProps={{ width: 400, height: "80%" }}

@@ -41,7 +41,7 @@ import type {
   RefObject,
   SetStateAction,
 } from "react"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import type { AutocompleteOptionProps } from "./"
 import { AutocompleteOption, AutocompleteOptionGroup } from "./"
 
@@ -207,8 +207,7 @@ const flattenItems = (
 }
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) &&
-  !!target?.getAttribute("role")?.startsWith("autocomplete-item")
+  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
 
 export const {
   DescendantsContextProvider: AutocompleteDescendantsContextProvider,
@@ -1235,7 +1234,11 @@ export const useAutocompleteInput = () => {
     formControlProps,
     inputProps,
     isOpen,
+    focusedIndex,
+    listRef,
   } = useAutocompleteContext()
+
+  const { value } = useAutocompleteDescendantsContext()
 
   useUpdateEffect(() => {
     if (isAllSelected && inputRef.current) inputRef.current.blur()
@@ -1249,6 +1252,8 @@ export const useAutocompleteInput = () => {
       "aria-haspopup": "listbox",
       "aria-autocomplete": "list",
       "aria-expanded": isOpen,
+      "aria-activedescendant": value(focusedIndex)?.node.id,
+      "aria-controls": listRef.current?.id,
       autoCapitalize: "none",
       autoComplete: "off",
       spellCheck: "false",
@@ -1272,12 +1277,15 @@ export const useAutocompleteInput = () => {
       ),
     }),
     [
+      listRef,
+      focusedIndex,
       isOpen,
       inputProps,
       inputRef,
       formControlProps,
       id,
       isAllSelected,
+      value,
       onSearch,
       onCompositionStart,
       onCompositionEnd,
@@ -1347,8 +1355,9 @@ export const useAutocompleteList = () => {
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
-      role: "select",
+      role: "listbox",
       tabIndex: -1,
+      id: props.id || useId(),
       ...props,
       onAnimationComplete: handlerAll(
         props.onAnimationComplete,
@@ -1589,9 +1598,10 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       return {
         ref: mergeRefs(itemRef, ref, register),
+        id: useId(),
+        role: "option",
         ...computedProps,
         ...props,
-        role: "autocomplete-item",
         tabIndex: -1,
         style:
           !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
@@ -1599,7 +1609,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
         "data-value": optionValue ?? "",
         "data-focus": dataAttr(isFocused),
         "data-disabled": dataAttr(isDisabled),
-        "aria-checked": ariaAttr(isSelected),
+        "aria-checked": isSelected,
         "aria-disabled": ariaAttr(isDisabled),
         onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
       }

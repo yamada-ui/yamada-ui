@@ -24,7 +24,7 @@ export const useEventListener = <E extends Events>(
   const listener = useCallbackRef(handler)
 
   useEffect(() => {
-    const el = typeof target === "function" ? target() : target ?? document
+    const el = typeof target === "function" ? target() : (target ?? document)
 
     if (!handler || !el) return
 
@@ -44,7 +44,7 @@ export const useEventListener = <E extends Events>(
   }, [event, target, options, listener, handler])
 
   return () => {
-    const el = typeof target === "function" ? target() : target ?? document
+    const el = typeof target === "function" ? target() : (target ?? document)
 
     el?.removeEventListener(
       event,

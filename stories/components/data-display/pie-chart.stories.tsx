@@ -2,20 +2,20 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type {
   CellProps,
   ChartTooltip,
-  DonutChartProps,
+  PieChartProps,
   TooltipDataSourceType,
 } from "@yamada-ui/charts"
-import { DonutChart } from "@yamada-ui/charts"
+import { PieChart } from "@yamada-ui/charts"
 import type { Dict } from "@yamada-ui/react"
 import { Card, CardBody, HStack, VStack, Wrap, Text } from "@yamada-ui/react"
 import { useMemo, useState } from "react"
 import { PropControl } from "../../components"
 
-type Story = StoryFn<typeof DonutChart>
+type Story = StoryFn<typeof PieChart>
 
-const meta: Meta<typeof DonutChart> = {
-  title: "Components / Feedback / DonutChart",
-  component: DonutChart,
+const meta: Meta<typeof PieChart> = {
+  title: "Components / Data Display / PieChart",
+  component: PieChart,
 }
 
 export default meta
@@ -31,7 +31,7 @@ export const basic: Story = () => {
     [],
   )
 
-  return <DonutChart data={data} />
+  return <PieChart data={data} />
 }
 
 export const custom: Story = () => {
@@ -45,7 +45,7 @@ export const custom: Story = () => {
     [],
   )
 
-  const [props, setProps] = useState<DonutChartProps>({
+  const [props, setProps] = useState<PieChartProps>({
     data: data,
     withTooltip: true,
     withLegend: false,
@@ -55,19 +55,14 @@ export const custom: Story = () => {
     endAngle: -270,
     strokeWidth: 1,
     tooltipAnimationDuration: 0,
-    innerRadius: 60,
     outerRadius: 80,
     tooltipDataSource: "all",
   })
-  const { innerRadius, outerRadius, ...rest } = props
+  const { outerRadius, ...rest } = props
 
   return (
     <VStack>
-      <DonutChart
-        innerRadius={`${innerRadius}%`}
-        outerRadius={`${outerRadius}%`}
-        {...rest}
-      />
+      <PieChart outerRadius={`${outerRadius}%`} {...rest} />
 
       <Wrap gap="md" alignItems="flex-start">
         <PropControl
@@ -142,18 +137,6 @@ export const custom: Story = () => {
           <PropControl
             component="Slider"
             items={[
-              {
-                label: "Inner Radius",
-                value: props.innerRadius as number,
-                min: 0,
-                max: 100,
-                onChange: (value) => {
-                  setProps((prev) => ({
-                    ...prev,
-                    innerRadius: value,
-                  }))
-                },
-              },
               {
                 label: "Outer Radius",
                 value: props.outerRadius as number,
@@ -242,12 +225,12 @@ export const custom: Story = () => {
                   })),
               },
               {
-                label: "isParcent",
-                isChecked: props.isParcent,
+                label: "isPercent",
+                isChecked: props.isPercent,
                 onChange: () =>
                   setProps((prev) => ({
                     ...prev,
-                    isParcent: !prev.isParcent,
+                    isPercent: !prev.isPercent,
                   })),
               },
             ]}
@@ -271,9 +254,9 @@ export const withSize: Story = () => {
 
   return (
     <>
-      <DonutChart data={data} size="sm" />
-      <DonutChart data={data} size="md" />
-      <DonutChart data={data} size="lg" />
+      <PieChart data={data} size="sm" />
+      <PieChart data={data} size="md" />
+      <PieChart data={data} size="lg" />
     </>
   )
 }
@@ -289,7 +272,7 @@ export const withLegend: Story = () => {
     [],
   )
 
-  return <DonutChart data={data} withLegend />
+  return <PieChart data={data} withLegend />
 }
 
 export const withValueFormatter: Story = () => {
@@ -304,10 +287,7 @@ export const withValueFormatter: Story = () => {
   )
 
   return (
-    <DonutChart
-      data={data}
-      valueFormatter={(value) => value.toLocaleString()}
-    />
+    <PieChart data={data} valueFormatter={(value) => value.toLocaleString()} />
   )
 }
 
@@ -322,7 +302,7 @@ export const withFillOpacity: Story = () => {
     [],
   )
 
-  return <DonutChart data={data} fillOpacity={[0.8, 0.7]} />
+  return <PieChart data={data} fillOpacity={[0.8, 0.7]} />
 }
 
 export const customActiveShape: Story = () => {
@@ -337,7 +317,7 @@ export const customActiveShape: Story = () => {
   )
 
   return (
-    <DonutChart
+    <PieChart
       data={data}
       pieProps={{
         activeShape: {
@@ -384,7 +364,7 @@ export const customTooltip: Story = () => {
   }
 
   return (
-    <DonutChart
+    <PieChart
       data={data}
       tooltipProps={{
         content: CustomTooltip,
@@ -405,7 +385,7 @@ export const customLegend: Story = () => {
   )
 
   return (
-    <DonutChart
+    <PieChart
       data={data}
       withLegend
       legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}

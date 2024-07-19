@@ -1,5 +1,5 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -31,7 +31,8 @@ type ScaleFadeOptions = {
 export type ScaleFadeProps = WithTransitionProps<
   Omit<MotionProps<"div">, "scale">
 > &
-  ScaleFadeOptions
+  ScaleFadeOptions &
+  ThemeProps<"ScaleFade">
 
 const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
@@ -71,11 +72,12 @@ export const scaleFadeProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/scale-fade
  */
+
 export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
-  (
-    {
+  (props, ref) => {
+    const [style, mergedProps] = useComponentStyle("ScaleFade", props)
+    const {
       unmountOnExit,
-      isOpen,
       scale = 0.95,
       reverse = true,
       transition,
@@ -84,10 +86,8 @@ export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
       duration,
       className,
       ...rest
-    },
-    ref,
-  ) => {
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+    } = omitThemeProps(mergedProps)
+    const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
 
     const custom = {
       scale,
@@ -98,11 +98,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
       duration,
     }
 
-    isOpen = unmountOnExit ? isOpen && unmountOnExit : true
-
-    const css: CSSUIObject = {
-      w: "100%",
-    }
+    const isOpen = unmountOnExit ? rest.isOpen && unmountOnExit : true
 
     return (
       <AnimatePresence custom={custom}>
@@ -113,7 +109,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
             custom={custom}
             {...scaleFadeProps}
             animate={animate}
-            __css={css}
+            __css={style}
             {...rest}
           />
         ) : null}

@@ -1,5 +1,5 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -39,7 +39,9 @@ type CollapseOptions = {
   endingHeight?: number | string
 }
 
-export type CollapseProps = WithTransitionProps<MotionProps> & CollapseOptions
+export type CollapseProps = WithTransitionProps<MotionProps> &
+  CollapseOptions &
+  ThemeProps<"Collapse">
 
 const variants: MotionTransitionVariants = {
   enter: ({
@@ -87,10 +89,10 @@ export const collapseProps = {
  * @see Docs https://yamada-ui.com/components/transitions/collapse
  */
 export const Collapse = forwardRef<CollapseProps, "div", false>(
-  (
-    {
+  (props, ref) => {
+    const [style, mergedProps] = useComponentStyle("Collapse", props)
+    const {
       unmountOnExit,
-      isOpen,
       animationOpacity = true,
       startingHeight = 0,
       endingHeight = "auto",
@@ -99,12 +101,9 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
       delay,
       duration,
       className,
-      style,
       __css,
       ...rest
-    },
-    ref,
-  ) => {
+    } = omitThemeProps(mergedProps)
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
@@ -113,9 +112,9 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
       if (isBrowser) setMounted(true)
     }, [])
 
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+    const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
 
-    isOpen = unmountOnExit ? isOpen : true
+    const isOpen = unmountOnExit ? rest.isOpen : true
 
     const transition = useMemo(() => {
       if (!mounted) {
@@ -159,7 +158,7 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
     }
 
     const css: CSSUIObject = {
-      w: "100%",
+      ...style,
       ...__css,
     }
 
@@ -175,7 +174,7 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
             animate={animate}
             initial={unmountOnExit ? "exit" : false}
             __css={css}
-            style={{ overflow: "hidden", ...style }}
+            style={{ overflow: "hidden" }}
           />
         ) : null}
       </AnimatePresence>

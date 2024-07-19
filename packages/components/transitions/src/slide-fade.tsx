@@ -1,5 +1,5 @@
-import type { CSSUIObject, Token } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { ThemeProps, Token } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -35,7 +35,9 @@ type SlideFadeOptions = {
   reverse?: boolean
 }
 
-export type SlideFadeProps = WithTransitionProps<MotionProps> & SlideFadeOptions
+export type SlideFadeProps = WithTransitionProps<MotionProps> &
+  SlideFadeOptions &
+  ThemeProps<"SlideFade">
 
 const variants: MotionTransitionVariants = {
   initial: ({
@@ -94,10 +96,10 @@ export const slideFadeProps = {
  * @see Docs https://yamada-ui.com/components/transitions/slide-fade
  */
 export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
-  (
-    {
+  (props, ref) => {
+    const [style, mergedProps] = useComponentStyle("Collapse", props)
+    const {
       unmountOnExit,
-      isOpen,
       offsetX: _offsetX = 0,
       offsetY: _offsetY = 8,
       reverse = true,
@@ -107,10 +109,9 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
       duration,
       className,
       ...rest
-    },
-    ref,
-  ) => {
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+    } = omitThemeProps(mergedProps)
+
+    const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
 
     const offsetX = useValue(_offsetX)
     const offsetY = useValue(_offsetY)
@@ -125,11 +126,7 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
       duration,
     }
 
-    isOpen = unmountOnExit ? isOpen && unmountOnExit : true
-
-    const css: CSSUIObject = {
-      w: "100%",
-    }
+    const isOpen = unmountOnExit ? rest.isOpen && unmountOnExit : true
 
     return (
       <AnimatePresence custom={custom}>
@@ -140,7 +137,7 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
             custom={custom}
             {...slideFadeProps}
             animate={animate}
-            __css={css}
+            __css={style}
             {...rest}
           />
         ) : null}

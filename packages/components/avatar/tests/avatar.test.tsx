@@ -177,7 +177,7 @@ describe("<AvatarBadge />", () => {
       /This is the avatar badge of Hirotomo Yamada\./i,
     )
 
-    const pingEl = badge.querySelector(".ui-avatar__badge__ping")
+    const pingEl = badge.querySelector(".ui-avatar__ping")
     expect(pingEl).toBeInTheDocument()
 
     expect(pingEl).toHaveStyle({ background: "rgb(255, 0, 0)" })

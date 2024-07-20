@@ -13,11 +13,11 @@ import { useRef } from "react"
 
 type TagOptions = {
   /**
-   * Icon to be displayed to the left of the tag.
+   * Icon to be displayed to the start of the tag.
    */
   startIcon?: ReactElement
   /**
-   * Icon to be displayed to the right of the tag.
+   * Icon to be displayed to the end of the tag.
    */
   endIcon?: ReactElement
   /**

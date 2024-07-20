@@ -45,11 +45,11 @@ type ButtonOptions = {
    */
   isDisabled?: boolean
   /**
-   * The icon to display at the left side of the button.
+   * The icon to display at the start side of the button.
    */
   startIcon?: ReactElement
   /**
-   * The icon to display at the right side of the button.
+   * The icon to display at the end side of the button.
    */
   endIcon?: ReactElement
   /**

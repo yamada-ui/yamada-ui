@@ -17,9 +17,21 @@ type TagOptions = {
    */
   startIcon?: ReactElement
   /**
+   * Icon to be displayed to the left of the tag.
+   * If specified at the same time as `startIcon`, `startIcon` takes precedence.
+   * @deprecated Use `startIcon` instead.
+   */
+  leftIcon?: ReactElement
+  /**
    * Icon to be displayed to the end of the tag.
    */
   endIcon?: ReactElement
+  /**
+   * Icon to be displayed to the right of the tag.
+   * If specified at the same time as `endIcon`, `endIcon` takes precedence.
+   * @deprecated Use `endIcon` instead.
+   */
+  rightIcon?: ReactElement
   /**
    * Function to be executed when the close button is clicked.
    */
@@ -44,7 +56,9 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   const {
     className,
     startIcon,
+    leftIcon,
     endIcon,
+    rightIcon,
     onClose,
     isDisabled,
     children,
@@ -62,13 +76,13 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {startIcon}
+      {startIcon ?? leftIcon}
 
       <ui.span lineClamp={1} __css={styles.label}>
         {children}
       </ui.span>
 
-      {endIcon}
+      {endIcon ?? rightIcon}
 
       {onClose ? (
         <CloseButton isDisabled={isDisabled} onClick={onClose}>

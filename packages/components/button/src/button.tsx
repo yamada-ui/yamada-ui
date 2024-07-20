@@ -49,9 +49,21 @@ type ButtonOptions = {
    */
   startIcon?: ReactElement
   /**
+   * Icon to be displayed to the left of the tag.
+   * If specified at the same time as `startIcon`, `startIcon` takes precedence.
+   * @deprecated Use `startIcon` instead.
+   */
+  leftIcon?: ReactElement
+  /**
    * The icon to display at the end side of the button.
    */
   endIcon?: ReactElement
+  /**
+   * Icon to be displayed to the right of the tag.
+   * If specified at the same time as `endIcon`, `endIcon` takes precedence.
+   * @deprecated Use `endIcon` instead.
+   */
+  rightIcon?: ReactElement
   /**
    * The icon to display when the button is loading.
    */
@@ -99,7 +111,9 @@ export const Button = forwardRef<ButtonProps, "button">(
       isActive,
       isDisabled = group?.isDisabled,
       startIcon,
+      leftIcon,
       endIcon,
+      rightIcon,
       loadingIcon,
       loadingText,
       loadingPlacement = "start",
@@ -132,7 +146,9 @@ export const Button = forwardRef<ButtonProps, "button">(
 
     const contentProps = {
       startIcon,
+      leftIcon,
       endIcon,
+      rightIcon,
       children,
     }
 
@@ -207,16 +223,17 @@ const Loading: FC<
   )
 }
 
-const Content: FC<Pick<ButtonProps, "startIcon" | "endIcon" | "children">> = ({
-  startIcon,
-  endIcon,
-  children,
-}) => {
+const Content: FC<
+  Pick<
+    ButtonProps,
+    "startIcon" | "leftIcon" | "endIcon" | "rightIcon" | "children"
+  >
+> = ({ startIcon, leftIcon, endIcon, rightIcon, children }) => {
   return (
     <>
-      {startIcon ? <Icon>{startIcon}</Icon> : null}
+      {startIcon || leftIcon ? <Icon>{startIcon ?? leftIcon}</Icon> : null}
       {children}
-      {endIcon ? <Icon>{endIcon}</Icon> : null}
+      {endIcon || rightIcon ? <Icon>{endIcon ?? rightIcon}</Icon> : null}
     </>
   )
 }

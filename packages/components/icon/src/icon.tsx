@@ -22,7 +22,7 @@ type IconOptions = {
 }
 
 export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
-  ThemeProps<"Icon"> &
+  Omit<ThemeProps<"Icon">, "size"> &
   UIProps &
   IconOptions
 

@@ -1,8 +1,7 @@
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
+import { Pencil } from "@yamada-ui/lucide"
 import { HStack, Text } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { useI18n } from "contexts/i18n-context"
+import { useI18n } from "contexts"
 import type { FC } from "react"
 
 export type EditPageLinkProps = StackProps & { href?: string }
@@ -27,7 +26,7 @@ export const EditPageLink: FC<EditPageLinkProps> = ({ href, ...rest }) => {
       transitionDuration="normal"
       {...rest}
     >
-      <Icon icon={faPencilAlt} fontSize="0.8em" />
+      <Pencil />
 
       <Text>{t("component.edit-page.label")}</Text>
     </HStack>

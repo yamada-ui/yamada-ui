@@ -298,11 +298,11 @@ const createReports = (options: Options) => (insights: Insight[]) =>
         issues,
         pullRequests,
       }) => {
-        const commentCount = comments.length + reviews.length
-        const commitCount = commits.length
         const createdIssueCount = issues.created.length
         const createdPRCount = pullRequests.created.length
+        const commentCount = comments.length + reviews.length
         const reviewedPRCount = pullRequests.reviewed.length
+        const commitCount = commits.length
         const totalCount =
           createdIssueCount + createdPRCount + reviewedPRCount + commentCount
 
@@ -313,7 +313,7 @@ const createReports = (options: Options) => (insights: Insight[]) =>
             createReport(options)("Issue", issues.created),
             createReport(options)("PR", pullRequests.created),
             createReport(options)("Review", pullRequests.reviewed),
-            createReport(options)("Comment", comments),
+            createReport(options)("Comment", [...comments, ...reviews]),
             `  - Commit: ${commitCount}`,
           ].join("\n"),
         }
@@ -324,7 +324,7 @@ const createReports = (options: Options) => (insights: Insight[]) =>
 
 const createReport =
   ({ extended }: Options) =>
-  (type: string, list: Review[] | Issue[] | Comment[]) => {
+  (type: string, list: Review[] | Issue[] | (Comment | Review)[]) => {
     const count = list.length
     const isExtended =
       extended === true ||

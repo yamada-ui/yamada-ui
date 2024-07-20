@@ -68,7 +68,9 @@ describe("<Slide />", () => {
 
     const slide = await screen.findByText("Slide")
 
-    expect(slide).toHaveStyle({ transform: "translateX(0px) translateY(100%)" })
+    expect(slide).toHaveStyle({
+      transform: "translateX(0px) translateY(100%)",
+    })
   })
 
   test("unmountOnExit works correctly", async () => {

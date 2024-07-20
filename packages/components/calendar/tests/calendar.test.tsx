@@ -184,7 +184,7 @@ describe("<Calendar />", () => {
       fireEvent.click(headerLabelBtn!)
 
       const monthListButtons = container.querySelectorAll(
-        `button.ui-calendar__month-list__button`,
+        `button.ui-calendar__month-list-button`,
       )
       const targetMonthEl = monthListButtons[7]
       expect(targetMonthEl).toHaveTextContent("Aug")

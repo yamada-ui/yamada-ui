@@ -1,4 +1,4 @@
-import type { ComponentStyle } from "@yamada-ui/core/dist"
+import type { ComponentStyle } from "@yamada-ui/core"
 
 export const Fade: ComponentStyle = {
   defaultProps: {

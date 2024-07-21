@@ -228,15 +228,9 @@ const Content: FC<
     ButtonProps,
     "startIcon" | "leftIcon" | "endIcon" | "rightIcon" | "children"
   >
-> = ({
-  startIcon: _startIcon,
-  leftIcon,
-  endIcon: _endIcon,
-  rightIcon,
-  children,
-}) => {
-  const startIcon = _startIcon ?? leftIcon
-  const endIcon = _endIcon ?? rightIcon
+> = ({ startIcon, leftIcon, endIcon, rightIcon, children }) => {
+  startIcon ??= leftIcon
+  endIcon ??= rightIcon
   return (
     <>
       {startIcon ? <Icon>{startIcon}</Icon> : null}

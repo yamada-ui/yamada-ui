@@ -88,11 +88,11 @@ export const Slide = forwardRef<SlideProps, "div", false>((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Slide", props)
   const {
     unmountOnExit,
-    placement: _placement = "right",
+    placement: _placement,
     transition,
     transitionEnd,
     delay,
-    duration = { enter: 0.4, exit: 0.3 },
+    duration,
     className,
     __css,
     ...rest

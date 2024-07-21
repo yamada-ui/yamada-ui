@@ -91,11 +91,12 @@ export const collapseProps = {
 export const Collapse = forwardRef<CollapseProps, "div", false>(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("Collapse", props)
-    const {
+    let {
       unmountOnExit,
-      animationOpacity = true,
-      startingHeight = 0,
-      endingHeight = "auto",
+      isOpen,
+      animationOpacity,
+      startingHeight,
+      endingHeight,
       transition: transitionProp,
       transitionEnd,
       delay,
@@ -112,9 +113,9 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
       if (isBrowser) setMounted(true)
     }, [])
 
-    const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
+    const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
-    const isOpen = unmountOnExit ? rest.isOpen : true
+    isOpen = unmountOnExit ? isOpen : true
 
     const transition = useMemo(() => {
       if (!mounted) {
@@ -174,7 +175,7 @@ export const Collapse = forwardRef<CollapseProps, "div", false>(
             animate={animate}
             initial={unmountOnExit ? "exit" : false}
             __css={css}
-            style={{ overflow: "hidden" }}
+            style={{ overflow: "hidden", ...rest.style }}
           />
         ) : null}
       </AnimatePresence>

@@ -97,12 +97,12 @@ export const slideFadeProps = {
  */
 export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
   (props, ref) => {
-    const [style, mergedProps] = useComponentStyle("Collapse", props)
+    const [style, mergedProps] = useComponentStyle("SlideFade", props)
     const {
       unmountOnExit,
-      offsetX: _offsetX = 0,
-      offsetY: _offsetY = 8,
-      reverse = true,
+      offsetX: _offsetX,
+      offsetY: _offsetY,
+      reverse,
       transition,
       transitionEnd,
       delay,

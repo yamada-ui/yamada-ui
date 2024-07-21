@@ -44,8 +44,9 @@ export const fadeProps = {
  */
 export const Fade = forwardRef<FadeProps, "div", false>((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Fade", props)
-  const {
+  let {
     unmountOnExit,
+    isOpen,
     transition,
     transitionEnd,
     delay,
@@ -54,11 +55,11 @@ export const Fade = forwardRef<FadeProps, "div", false>((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
+  const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
   const custom = { transition, transitionEnd, delay, duration }
 
-  const isOpen = unmountOnExit ? rest.isOpen && unmountOnExit : true
+  isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
   return (
     <AnimatePresence custom={custom}>

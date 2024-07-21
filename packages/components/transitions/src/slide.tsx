@@ -86,8 +86,9 @@ export const slideProps = {
  */
 export const Slide = forwardRef<SlideProps, "div", false>((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Slide", props)
-  const {
+  let {
     unmountOnExit,
+    isOpen,
     placement: _placement,
     transition,
     transitionEnd,
@@ -98,13 +99,13 @@ export const Slide = forwardRef<SlideProps, "div", false>((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
+  const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
   const placement = useValue(_placement)
 
   const custom = { placement, transition, transitionEnd, delay, duration }
 
-  const isOpen = unmountOnExit ? rest.isOpen && unmountOnExit : true
+  isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
   const { position } = getSlideProps(placement)
 

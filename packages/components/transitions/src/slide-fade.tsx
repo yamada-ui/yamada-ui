@@ -98,8 +98,9 @@ export const slideFadeProps = {
 export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("SlideFade", props)
-    const {
+    let {
       unmountOnExit,
+      isOpen,
       offsetX: _offsetX,
       offsetY: _offsetY,
       reverse,
@@ -111,7 +112,7 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    const animate = rest.isOpen || unmountOnExit ? "enter" : "exit"
+    const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const offsetX = useValue(_offsetX)
     const offsetY = useValue(_offsetY)
@@ -126,7 +127,7 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
       duration,
     }
 
-    const isOpen = unmountOnExit ? rest.isOpen && unmountOnExit : true
+    isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
     return (
       <AnimatePresence custom={custom}>

@@ -49,7 +49,7 @@ type ButtonOptions = {
    */
   startIcon?: ReactElement
   /**
-   * Icon to be displayed to the left of the tag.
+   * The icon to display at the left side of the button.
    * If specified at the same time as `startIcon`, `startIcon` takes precedence.
    * @deprecated Use `startIcon` instead.
    */
@@ -59,7 +59,7 @@ type ButtonOptions = {
    */
   endIcon?: ReactElement
   /**
-   * Icon to be displayed to the right of the tag.
+   * The icon to display at the right side of the button.
    * If specified at the same time as `endIcon`, `endIcon` takes precedence.
    * @deprecated Use `endIcon` instead.
    */

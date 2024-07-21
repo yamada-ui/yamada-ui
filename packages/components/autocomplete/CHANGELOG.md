@@ -1,5 +1,17 @@
 # @yamada-ui/autocomplete
 
+## 1.3.0
+
+### Minor Changes
+
+- [#2248](https://github.com/yamada-ui/yamada-ui/pull/2248) [`9e9945c`](https://github.com/yamada-ui/yamada-ui/commit/9e9945c598d5d2195f2aa777f107f03d811cac72) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Enhance the accessibility of `MultiAutocomplete` component
+
+### Patch Changes
+
+- Updated dependencies [[`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238)]:
+  - @yamada-ui/icon@1.1.0
+  - @yamada-ui/popover@1.2.7
+
 ## 1.2.7
 
 ### Patch Changes

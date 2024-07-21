@@ -1,5 +1,14 @@
 # @yamada-ui/popover
 
+## 1.2.7
+
+### Patch Changes
+
+- Updated dependencies [[`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f), [`1d289a7`](https://github.com/yamada-ui/yamada-ui/commit/1d289a7a12ff701ec9260bba0c08feb8eeec1627)]:
+  - @yamada-ui/transitions@1.1.0
+  - @yamada-ui/use-focus@1.0.17
+  - @yamada-ui/close-button@1.0.34
+
 ## 1.2.6
 
 ### Patch Changes

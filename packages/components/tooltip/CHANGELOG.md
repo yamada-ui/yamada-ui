@@ -1,5 +1,12 @@
 # @yamada-ui/tooltip
 
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies [[`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f)]:
+  - @yamada-ui/transitions@1.1.0
+
 ## 1.1.5
 
 ### Patch Changes

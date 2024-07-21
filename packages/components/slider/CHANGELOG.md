@@ -1,5 +1,11 @@
 # @yamada-ui/slider
 
+## 1.2.0
+
+### Minor Changes
+
+- [#2277](https://github.com/yamada-ui/yamada-ui/pull/2277) [`482f31c`](https://github.com/yamada-ui/yamada-ui/commit/482f31c23ff4b69c50ddfd50478dc34e001cd218) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Update `RangeSlider` accessibility
+
 ## 1.1.4
 
 ### Patch Changes

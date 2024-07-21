@@ -1,5 +1,11 @@
 # @yamada-ui/transitions
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2310](https://github.com/yamada-ui/yamada-ui/pull/2310) [`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Thematize `Transition` component
+
 ## 1.0.33
 
 ### Patch Changes

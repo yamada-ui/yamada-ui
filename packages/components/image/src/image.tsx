@@ -34,9 +34,9 @@ type ImageOptions = {
 }
 
 export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
+  ThemeProps<"Image"> &
   UseImageProps &
-  ImageOptions &
-  ThemeProps<"Image">
+  ImageOptions
 
 /**
  * `Image` is a component that displays images with fallback support.
@@ -57,7 +57,7 @@ export const Image = forwardRef<ImageProps, "img">(
       ignoreFallback,
       crossOrigin,
       className,
-      fallbackStrategy,
+      fallbackStrategy = "beforeLoadOrError",
       onError,
       onLoad,
       referrerPolicy,
@@ -74,7 +74,7 @@ export const Image = forwardRef<ImageProps, "img">(
       [boxSize, objectFit, styles],
     )
 
-    const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy!)
+    const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy)
 
     if (isFallbackImage) {
       if (isValidElement(fallback)) {

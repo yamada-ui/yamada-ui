@@ -7,9 +7,5 @@ export const Slide: ComponentStyle = {
   },
   defaultProps: {
     placement: "right",
-    duration: {
-      enter: 0.4,
-      exit: 0.3,
-    },
   },
 }

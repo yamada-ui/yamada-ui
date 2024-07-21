@@ -93,7 +93,7 @@ export const Slide = forwardRef<SlideProps, "div", false>((props, ref) => {
     transition,
     transitionEnd,
     delay,
-    duration,
+    duration = { enter: 0.4, exit: 0.3 },
     className,
     __css,
     ...rest

@@ -69,10 +69,10 @@ export const Stack = forwardRef<StackProps, "div">(
     const dividerCSS = useMemo(
       () => ({
         w: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? "100%" : "fix-content",
+          isColumn(value) ? "100%" : "fit-content",
         ),
         h: replaceObject(flexDirection, (value) =>
-          isColumn(value) ? "fix-content" : "100%",
+          isColumn(value) ? "fit-content" : "100%",
         ),
         borderLeftWidth: replaceObject(flexDirection, (value) =>
           isColumn(value) ? 0 : "1px",

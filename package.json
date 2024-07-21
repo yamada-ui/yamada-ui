@@ -13,8 +13,7 @@
     "url": "git+https://github.com/yamada-ui/yamada-ui"
   },
   "scripts": {
-    "prepare": "husky install",
-    "postinstall": "cd packages/cli && pnpm build",
+    "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "serve:storybook": "npx http-server ./storybook-static",
     "build:storybook": "storybook build",
@@ -179,7 +178,7 @@
     "storybook": "^8.1.11",
     "storybook-dark-mode": "4.0.1",
     "tslib": "^2.6.3",
-    "tsup": "^8.1.0",
+    "tsup": "8.2.0",
     "tsx": "^4.16.2",
     "turbo": "^2.0.6",
     "typescript": "^5.5.3",

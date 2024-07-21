@@ -1,5 +1,11 @@
 # @yamada-ui/charts
 
+## 1.3.1
+
+### Patch Changes
+
+- [#2279](https://github.com/yamada-ui/yamada-ui/pull/2279) [`5e1be87`](https://github.com/yamada-ui/yamada-ui/commit/5e1be871638cb6fc823494b610bb75f9a21735ba) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Corrected typo in variable name 'isPercent'.
+
 ## 1.3.0
 
 ### Minor Changes

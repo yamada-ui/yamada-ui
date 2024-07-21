@@ -1,5 +1,14 @@
 # @yamada-ui/markdown
 
+## 1.0.37
+
+### Patch Changes
+
+- [#2253](https://github.com/yamada-ui/yamada-ui/pull/2253) [`d5ae7d5`](https://github.com/yamada-ui/yamada-ui/commit/d5ae7d5b9d1bffcec9674e9ceec48636742cae1f) Thanks [@koralle](https://github.com/koralle)! - Refactoring and expanding unit tests
+
+- Updated dependencies []:
+  - @yamada-ui/alert@1.0.34
+
 ## 1.0.36
 
 ### Patch Changes

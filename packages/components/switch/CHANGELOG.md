@@ -1,5 +1,12 @@
 # @yamada-ui/switch
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/checkbox@1.1.3
+
 ## 1.1.3
 
 ### Patch Changes

@@ -23,6 +23,7 @@ export default defineConfig({
         "packages/nextjs",
       ],
     },
+    onConsoleLog: (_log, type) => type !== "stderr",
     setupFiles: ["./scripts/setup-test.ts"],
   },
 })

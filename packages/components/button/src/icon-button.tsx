@@ -13,7 +13,13 @@ type IconButtonOptions = {
 
 export type IconButtonProps = Omit<
   ButtonProps,
-  "startIcon" | "endIcon" | "loadingIcon" | "loadingText" | "loadingPlacement"
+  | "startIcon"
+  | "endIcon"
+  | "leftIcon"
+  | "rightIcon"
+  | "loadingIcon"
+  | "loadingText"
+  | "loadingPlacement"
 > &
   IconButtonOptions
 

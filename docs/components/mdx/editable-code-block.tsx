@@ -62,8 +62,18 @@ import {
   useColorMode,
   useTheme,
   createThemeSchemeManager,
+  EnvironmentProvider,
+  ThemeProvider,
+  LoadingProvider,
+  ResetStyle,
+  GlobalStyle,
+  NoticeProvider,
 } from "@yamada-ui/react"
-import type { SkeletonProps, Environment } from "@yamada-ui/react"
+import type {
+  SkeletonProps,
+  Environment,
+  UIProviderProps,
+} from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
 import { CopyButton } from "components/forms"
 import { useI18n } from "contexts"
@@ -78,9 +88,7 @@ import { theme as defaultTheme, config as defaultConfig } from "theme"
 import { wait } from "utils/async"
 import "dayjs/locale/ja"
 
-const UIProvider: FC<
-  UIComponents.UIProviderProps & { environment?: Environment }
-> = ({
+const UIProvider: FC<UIProviderProps & { environment?: Environment }> = ({
   theme = defaultTheme,
   config = defaultConfig,
   environment,
@@ -88,18 +96,18 @@ const UIProvider: FC<
   ...rest
 }) => {
   return (
-    <UIComponents.EnvironmentProvider environment={environment}>
-      <UIComponents.ThemeProvider theme={theme} config={config} {...rest}>
-        <UIComponents.LoadingProvider {...config.loading}>
-          <UIComponents.ResetStyle />
-          <UIComponents.GlobalStyle />
+    <EnvironmentProvider environment={environment}>
+      <ThemeProvider theme={theme} config={config} {...rest}>
+        <LoadingProvider {...config.loading}>
+          <ResetStyle />
+          <GlobalStyle />
 
           {children}
 
-          <UIComponents.NoticeProvider {...config.notice} />
-        </UIComponents.LoadingProvider>
-      </UIComponents.ThemeProvider>
-    </UIComponents.EnvironmentProvider>
+          <NoticeProvider {...config.notice} />
+        </LoadingProvider>
+      </ThemeProvider>
+    </EnvironmentProvider>
   )
 }
 

@@ -31,6 +31,7 @@ import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
 import { Icon } from "./icon"
+import { Image } from "./image"
 import { Indicator } from "./indicator"
 import { InfiniteScrollArea } from "./infinite-scroll-area"
 import { Input } from "./input"
@@ -114,6 +115,7 @@ export default {
   Heading,
   HueSlider,
   Icon,
+  Image,
   Indicator,
   InfiniteScrollArea,
   Input,

@@ -1,5 +1,10 @@
-import type { HTMLUIProps, CSSUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import {
+  ui,
+  forwardRef,
+  useComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
 import { cx, omitObject } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { isValidElement, useMemo } from "react"
@@ -30,66 +35,75 @@ type ImageOptions = {
 
 export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
   UseImageProps &
-  ImageOptions
+  ImageOptions &
+  ThemeProps<"Image">
 
 /**
  * `Image` is a component that displays images with fallback support.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/image
  */
-export const Image = forwardRef<ImageProps, "img">((props, ref) => {
-  let {
-    fallback,
-    src,
-    srcSet,
-    loading,
-    ignoreFallback,
-    crossOrigin,
-    className,
-    fallbackStrategy = "beforeLoadOrError",
-    onError,
-    onLoad,
-    referrerPolicy,
-    size: boxSize,
-    fit: objectFit,
-    ...rest
-  } = props
+export const Image = forwardRef<ImageProps, "img">(
+  ({ size: boxSize, ...props }, ref) => {
+    const [styles, mergedProps] = useComponentStyle("Image", {
+      size: boxSize,
+      ...props,
+    })
+    let {
+      fallback,
+      src,
+      srcSet,
+      loading,
+      ignoreFallback,
+      crossOrigin,
+      className,
+      fallbackStrategy,
+      onError,
+      onLoad,
+      referrerPolicy,
+      fit: objectFit,
+      ...rest
+    } = omitThemeProps(mergedProps)
 
-  ignoreFallback = loading != null || ignoreFallback || !fallback
+    ignoreFallback = loading != null || ignoreFallback || !fallback
 
-  const status = useImage({ ...props, ignoreFallback })
+    const status = useImage({ ...props, ignoreFallback })
 
-  const css = useMemo(() => ({ boxSize, objectFit }), [boxSize, objectFit])
+    const css = useMemo(
+      () => ({ boxSize, objectFit, ...styles }),
+      [boxSize, objectFit, styles],
+    )
 
-  const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy)
+    const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy!)
 
-  if (isFallbackImage) {
-    if (isValidElement(fallback)) {
-      return fallback
-    } else {
-      return (
-        <ui.img
-          ref={ref}
-          className={cx("ui-image--fallback", className)}
-          src={fallback as string | undefined}
-          __css={css}
-          {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
-        />
-      )
+    if (isFallbackImage) {
+      if (isValidElement(fallback)) {
+        return fallback
+      } else {
+        return (
+          <ui.img
+            ref={ref}
+            className={cx("ui-image--fallback", className)}
+            src={fallback as string | undefined}
+            __css={css}
+            {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
+          />
+        )
+      }
     }
-  }
 
-  return (
-    <ui.img
-      ref={ref}
-      src={src}
-      srcSet={srcSet}
-      crossOrigin={crossOrigin}
-      loading={loading}
-      referrerPolicy={referrerPolicy}
-      className={cx("ui-image", className)}
-      __css={css}
-      {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
-    />
-  )
-})
+    return (
+      <ui.img
+        ref={ref}
+        src={src}
+        srcSet={srcSet}
+        crossOrigin={crossOrigin}
+        loading={loading}
+        referrerPolicy={referrerPolicy}
+        className={cx("ui-image", className)}
+        __css={css}
+        {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
+      />
+    )
+  },
+)

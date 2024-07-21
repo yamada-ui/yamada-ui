@@ -78,7 +78,7 @@ export const Form: FC<FormProps> = memo(({ ...rest }) => {
           variant="outline"
           borderColor="border"
           fontWeight="normal"
-          leftIcon={<Github fontSize="0.875em" />}
+          startIcon={<Github fontSize="0.875em" />}
         >
           GitHub
         </Button>

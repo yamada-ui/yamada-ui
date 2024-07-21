@@ -191,7 +191,7 @@ const SidebarButton: FC<SidebarButtonProps> = memo(
         w="full"
         justifyContent="flex-start"
         fontWeight="normal"
-        leftIcon={icon}
+        startIcon={icon}
         px="3"
         {...rest}
       >

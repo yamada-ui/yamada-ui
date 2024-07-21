@@ -152,7 +152,7 @@ const Page: NextPage<PageProps> = ({
               size="xl"
               colorScheme="primary"
               w={{ base: "auto", md: "full" }}
-              rightIcon={<ArrowRight />}
+              endIcon={<ArrowRight />}
               href="/getting-started"
             >
               {t("examples.hero.started")}
@@ -161,7 +161,7 @@ const Page: NextPage<PageProps> = ({
             <NextLinkButton
               size="xl"
               w={{ base: "auto", md: "full" }}
-              rightIcon={<Blocks />}
+              endIcon={<Blocks />}
               href="/components"
             >
               {t("examples.hero.components")}

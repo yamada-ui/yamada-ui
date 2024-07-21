@@ -134,7 +134,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             w="full"
             variant={isSelected ? "solid" : "ghost"}
             colorScheme={isSelected ? "primary" : "gray"}
-            leftIcon={<Icon color={isSelected ? "white" : "muted"} />}
+            startIcon={<Icon color={isSelected ? "white" : "muted"} />}
             px="3"
             justifyContent="flex-start"
           >

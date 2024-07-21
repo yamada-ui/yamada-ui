@@ -11,7 +11,7 @@ describe("<Tag />", () => {
 
   test("Tag with icon renders correctly", () => {
     const { getByTestId } = render(
-      <Tag leftIcon={<CheckIcon data-testid="icon" />}>Tag</Tag>,
+      <Tag startIcon={<CheckIcon data-testid="icon" />}>Tag</Tag>,
     )
 
     expect(getByTestId("icon")).toBeInTheDocument()
@@ -31,7 +31,7 @@ describe("<Tag />", () => {
 
   test("applies styles `gap` correctly", async () => {
     const { getByTestId } = render(
-      <Tag data-testid="tag" leftIcon={<Icon icon={faPlus} />}>
+      <Tag data-testid="tag" startIcon={<Icon icon={faPlus} />}>
         Gap
       </Tag>,
     )

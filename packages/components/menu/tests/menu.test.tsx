@@ -26,7 +26,7 @@ describe("<Menu />", () => {
       <Menu>
         <MenuButton
           as={Button}
-          rightIcon={<Icon size="xs" icon={faChevronDown} />}
+          endIcon={<Icon size="xs" icon={faChevronDown} />}
         >
           Menu
         </MenuButton>

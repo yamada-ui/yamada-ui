@@ -35,7 +35,7 @@ import {
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -55,7 +55,7 @@ import {
 <Menu>
   {({ isOpen }) => (
     <>
-      <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+      <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
         {isOpen ? "Close" : "Open"} Menu
       </MenuButton>
 
@@ -124,7 +124,7 @@ const ref = useRef<HTMLButtonElement>(null)
 
 return (
   <Menu initialFocusRef={ref}>
-    <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+    <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
       Menu
     </MenuButton>
 
@@ -143,7 +143,7 @@ To change the display position, set `placement` to `top`, `left-start`, etc. By 
 
 ```tsx
 <Menu placement="top">
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -161,7 +161,7 @@ To change the show/hide animation, set `animation` to `top`, `left`, etc. By def
 
 ```tsx
 <Menu animation="top">
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -182,7 +182,7 @@ Depending on the size of the element or the situation, you may want to change th
 ```tsx
 <Wrap gap="md">
   <Menu gutter={32}>
-    <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+    <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
       Menu
     </MenuButton>
 
@@ -194,7 +194,7 @@ Depending on the size of the element or the situation, you may want to change th
   </Menu>
 
   <Menu offset={[16, 16]}>
-    <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+    <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
       Menu
     </MenuButton>
 
@@ -213,7 +213,7 @@ To change the duration, set a numerical value (seconds) to `duration`.
 
 ```tsx
 <Menu duration={0.4}>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -231,7 +231,7 @@ By setting `MenuDivider` between `MenuItem`s, you can add dividers.
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -253,7 +253,7 @@ To group items together, use `MenuGroup`.
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -279,7 +279,7 @@ You can set selectable items like radios or checkboxes by using `MenuOptionGroup
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -306,7 +306,7 @@ To construct nested menus, insert a `Menu` within a `MenuItem`.
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -344,7 +344,7 @@ If you do not want the menu to close when an item is selected, set `closeOnSelec
 
 ```tsx
 <Menu closeOnSelect={false}>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -362,7 +362,7 @@ If you do not want the menu to close when focus is lost, set `closeOnSelect` to 
 
 ```tsx
 <Menu closeOnBlur={false}>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -380,7 +380,7 @@ To disable items, set `isDisabled` to `true`.
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -398,7 +398,7 @@ To allow focus on disabled items, set `isFocusable` to `true`.
 
 ```tsx
 <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -420,7 +420,7 @@ If you want to delay rendering until it becomes active, set `isLazy` to `true`.
 
 ```tsx
 <Menu isLazy>
-  <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+  <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
     Menu
   </MenuButton>
 
@@ -439,7 +439,7 @@ const { isOpen, onOpen, onClose } = useDisclosure()
 
 return (
   <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-    <MenuButton as={Button} rightIcon={<ChevronDown size="xl" />}>
+    <MenuButton as={Button} endIcon={<ChevronDown size="xl" />}>
       Menu
     </MenuButton>
 

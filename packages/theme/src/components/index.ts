@@ -32,6 +32,7 @@ import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
+import { Icon } from "./icon"
 import { Indicator } from "./indicator"
 import { InfiniteScrollArea } from "./infinite-scroll-area"
 import { Input } from "./input"
@@ -119,6 +120,7 @@ export default {
   FormControl,
   Heading,
   HueSlider,
+  Icon,
   Indicator,
   InfiniteScrollArea,
   Input,

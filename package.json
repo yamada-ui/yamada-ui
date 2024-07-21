@@ -14,7 +14,6 @@
   },
   "scripts": {
     "prepare": "husky",
-    "postinstall": "cd packages/cli && pnpm build",
     "storybook": "storybook dev -p 6006",
     "serve:storybook": "npx http-server ./storybook-static",
     "build:storybook": "storybook build",

@@ -1,5 +1,5 @@
-import type { CSSUIObject, Token } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { ThemeProps, Token } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -35,7 +35,9 @@ type SlideFadeOptions = {
   reverse?: boolean
 }
 
-export type SlideFadeProps = WithTransitionProps<MotionProps> & SlideFadeOptions
+export type SlideFadeProps = WithTransitionProps<MotionProps> &
+  SlideFadeOptions &
+  ThemeProps<"SlideFade">
 
 const variants: MotionTransitionVariants = {
   initial: ({
@@ -94,22 +96,22 @@ export const slideFadeProps = {
  * @see Docs https://yamada-ui.com/components/transitions/slide-fade
  */
 export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
-  (
-    {
+  (props, ref) => {
+    const [style, mergedProps] = useComponentStyle("SlideFade", props)
+    let {
       unmountOnExit,
       isOpen,
-      offsetX: _offsetX = 0,
-      offsetY: _offsetY = 8,
-      reverse = true,
+      offsetX: _offsetX,
+      offsetY: _offsetY,
+      reverse,
       transition,
       transitionEnd,
       delay,
       duration,
       className,
       ...rest
-    },
-    ref,
-  ) => {
+    } = omitThemeProps(mergedProps)
+
     const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const offsetX = useValue(_offsetX)
@@ -127,10 +129,6 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
-    const css: CSSUIObject = {
-      w: "100%",
-    }
-
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
@@ -140,7 +138,7 @@ export const SlideFade = forwardRef<SlideFadeProps, "div", false>(
             custom={custom}
             {...slideFadeProps}
             animate={animate}
-            __css={css}
+            __css={style}
             {...rest}
           />
         ) : null}

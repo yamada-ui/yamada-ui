@@ -19,6 +19,7 @@ type TagOptions = {
   /**
    * Icon to be displayed to the left of the tag.
    * If specified at the same time as `startIcon`, `startIcon` takes precedence.
+   *
    * @deprecated Use `startIcon` instead.
    */
   leftIcon?: ReactElement
@@ -29,6 +30,7 @@ type TagOptions = {
   /**
    * Icon to be displayed to the right of the tag.
    * If specified at the same time as `endIcon`, `endIcon` takes precedence.
+   *
    * @deprecated Use `endIcon` instead.
    */
   rightIcon?: ReactElement

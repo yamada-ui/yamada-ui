@@ -6,10 +6,20 @@
       "description": "The icon of the [Font Awesome](https://fontawesome.com).\nCheck the docs to see the icon of possible modifiers you can pass.",
       "see": "https://fontawesome.com/v5/docs/web/use-with/react"
     },
-    "size": {
-      "type": "UIValue<number | (string & {}) | \"small\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
       "required": false,
-      "description": "The CSS `font-size` property."
+      "description": "The visual color appearance of the component."
+    },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Icon."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Icon."
     }
   }
 }

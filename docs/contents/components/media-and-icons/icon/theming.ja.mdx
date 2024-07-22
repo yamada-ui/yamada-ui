@@ -1,0 +1,28 @@
+---
+title: Icon
+description: "`Icon`は、プロジェクトに使用できる一般的なアイコンコンポーネントです。"
+package_name: "@yamada-ui/icon"
+with_description: true
+tab: テーマ
+---
+
+## テーマ
+
+`Icon`は、[単一パーツのコンポーネント](/styled-system/theming/component-styles#単一パーツのコンポーネント)です。
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const Icon: ComponentStyle = {
+  defaultProps: {
+    w: "1em",
+    h: "1em",
+    display: "inline-block",
+    lineHeight: "1em",
+    flexShrink: 0,
+    color: "currentColor",
+  },
+}
+```

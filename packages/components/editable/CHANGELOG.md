@@ -1,5 +1,12 @@
 # @yamada-ui/editable
 
+## 1.0.38
+
+### Patch Changes
+
+- Updated dependencies [[`1d289a7`](https://github.com/yamada-ui/yamada-ui/commit/1d289a7a12ff701ec9260bba0c08feb8eeec1627)]:
+  - @yamada-ui/use-focus@1.0.17
+
 ## 1.0.37
 
 ### Patch Changes

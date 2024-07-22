@@ -1,5 +1,14 @@
 # @yamada-ui/modal
 
+## 1.3.4
+
+### Patch Changes
+
+- Updated dependencies [[`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f)]:
+  - @yamada-ui/transitions@1.1.0
+  - @yamada-ui/button@1.0.36
+  - @yamada-ui/close-button@1.0.34
+
 ## 1.3.3
 
 ### Patch Changes

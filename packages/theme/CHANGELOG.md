@@ -1,5 +1,13 @@
 # @yamada-ui/theme
 
+## 1.14.0
+
+### Minor Changes
+
+- [#2309](https://github.com/yamada-ui/yamada-ui/pull/2309) [`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Thematize `Icon` component
+
+- [#2310](https://github.com/yamada-ui/yamada-ui/pull/2310) [`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Thematize `Transition` component
+
 ## 1.13.0
 
 ### Minor Changes

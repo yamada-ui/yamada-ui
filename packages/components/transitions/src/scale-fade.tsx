@@ -1,5 +1,5 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -31,7 +31,8 @@ type ScaleFadeOptions = {
 export type ScaleFadeProps = WithTransitionProps<
   Omit<MotionProps<"div">, "scale">
 > &
-  ScaleFadeOptions
+  ScaleFadeOptions &
+  ThemeProps<"ScaleFade">
 
 const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
@@ -71,22 +72,22 @@ export const scaleFadeProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/scale-fade
  */
+
 export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
-  (
-    {
+  (props, ref) => {
+    const [style, mergedProps] = useComponentStyle("ScaleFade", props)
+    let {
       unmountOnExit,
       isOpen,
-      scale = 0.95,
-      reverse = true,
+      scale,
+      reverse,
       transition,
       transitionEnd,
       delay,
       duration,
       className,
       ...rest
-    },
-    ref,
-  ) => {
+    } = omitThemeProps(mergedProps)
     const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
     const custom = {
@@ -100,10 +101,6 @@ export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
 
     isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
-    const css: CSSUIObject = {
-      w: "100%",
-    }
-
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
@@ -113,7 +110,7 @@ export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
             custom={custom}
             {...scaleFadeProps}
             animate={animate}
-            __css={css}
+            __css={style}
             {...rest}
           />
         ) : null}

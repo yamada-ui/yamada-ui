@@ -2,9 +2,9 @@
 title: FileButton
 description: "`FileButton`は、ユーザーがファイルを選択するために使用されるボタンのコンポーネントです。"
 package_name: "@yamada-ui/file-button"
-order: 1
 with_description: true
 tab: Props
+order: 1
 ---
 
 ## Props
@@ -22,7 +22,7 @@ tab: Props
 <PropsCard
   id="filebutton-errorbordercolor"
   name="errorBorderColor"
-  type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | ColorModeArray<...>'
+  type='"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | ... 317 more ... | ColorModeArray<...>'
   description={"The border color when the button is invalid."}
 />
 
@@ -97,14 +97,9 @@ tab: Props
   id="filebutton-loadingicon"
   name="loadingIcon"
   type='type ONLY_FOR_FORMAT =
-  | "audio"
-  | "grid"
   | ReactElement<any, string | JSXElementConstructor<any>>
-  | "oval"
-  | "dots"
-  | "puff"
-  | "rings"
-  | "circles"'
+  | (UIValue<string> &
+      ("audio" | "grid" | "oval" | "dots" | "puff" | "rings" | "circles"))'
   description={"The icon to display when the button is loading."}
 />
 

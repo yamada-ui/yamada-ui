@@ -1,20 +1,17 @@
-import { readFile, readdir, writeFile } from "fs/promises"
+import { readFile, readdir } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
-import type { GrayMatterFile } from "gray-matter"
-import matter from "gray-matter"
-import { prettier } from "libs/prettier"
 import { toCamelCase, toKebabCase } from "utils/string"
+import type { Data } from "scripts/utils"
+import { getMDXFileName, writeMDXFile } from "scripts/utils"
+import { locales, type Locale } from "utils/i18n"
+import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Input = string | Buffer
-type Data = GrayMatterFile<Input>["data"]
-type Content = GrayMatterFile<Input>["content"]
-type Locale = (typeof LOCALES)[number]
 type Options = {
   isMulti: boolean
   componentName: string
@@ -32,7 +29,6 @@ const SOURCE_PATH = path.join(
   "components",
 )
 const DIST_PATH = path.join("contents", "components")
-const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {
   en: "Theming",
   ja: "テーマ",
@@ -126,63 +122,26 @@ const getThemes: p.RequiredRunner = () => async (_, s) => {
   return themes
 }
 
-const getDirs = async (path: string) => {
-  let dirents = await readdir(path, { withFileTypes: true })
-
-  dirents = dirents.filter((dirent) => dirent.isDirectory())
-
-  return dirents
-}
-
 const getPaths: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the component theme paths`)
 
-  const categoryDirs = await getDirs(DIST_PATH)
-  const componentDirs = await Promise.all(
-    categoryDirs.map(
-      async ({ name, path }) => await getDirs(`${path}/${name}`),
-    ),
-  )
-
-  const paths = componentDirs
-    .flat()
-    .reduce<Record<string, string>>((prev, { name, path }) => {
-      prev[name] = `${path}/${name}`
-
-      return prev
-    }, {})
+  const paths = getDirectoryPaths(DIST_PATH)
 
   s.stop(`Got the component theme paths`)
 
   return paths
 }
 
-const getMdxFile = async (path: string) => {
-  const file = await readFile(path, "utf8")
-
-  return matter(file)
-}
-
-const generateData = async (path: string, overrideData?: Data) => {
-  let { data } = await getMdxFile(path)
-
-  delete data.is_tabs
-
-  data = { ...data, ...overrideData }
-
-  return data
-}
-
-const getIsMulti = (content: string) => {
+const getIsMulti = (theme: string) => {
   const reg =
     /import[\s\S]*{[\s\S]*(type\s+)?(ComponentMultiStyle)[\s\S]*?}\s*from/g
 
-  return !![...content.matchAll(reg)].length
+  return !![...theme.matchAll(reg)].length
 }
 
-const getBaseComponents = (content: string, paths: Record<string, string>) => {
+const getBaseComponents = (theme: string, paths: Record<string, string>) => {
   const componentNames =
-    content
+    theme
       .match(/(mergeStyle|mergeMultiStyle)\(\s*([^{)]+)/)?.[2]
       .trim()
       .replace(/,$/, "")
@@ -203,25 +162,25 @@ const getBaseComponents = (content: string, paths: Record<string, string>) => {
 
 const generateContent = async ({
   data,
-  content,
+  theme,
   locale,
   paths,
 }: {
   data: Data
-  content: string
+  theme: string
   locale: Locale
   paths: Record<string, string>
 }) => {
   const componentName = data.title
-  const isMulti = getIsMulti(content)
-  const baseComponents = getBaseComponents(content, paths)
+  const isMulti = getIsMulti(theme)
+  const baseComponents = getBaseComponents(theme, paths)
 
-  content = content.replace(
+  theme = theme.replace(
     /import(\s+type)?\s+{[^}]*}\s+from\s+['"][^'"]+['"]\s*/g,
     "",
   )
 
-  content = "```ts\n" + content + "\n```"
+  let content = "```ts\n" + theme + "\n```"
 
   content =
     LOCALE_DESC_MAP[locale]({
@@ -233,21 +192,7 @@ const generateContent = async ({
   return content
 }
 
-const getMdxFileName = (fileName: string, locale: Locale) => {
-  if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
-
-  return fileName + ".mdx"
-}
-
-const writeMdxFile = async (path: string, data: Data, content: Content) => {
-  let file = matter.stringify(content, data)
-
-  file = await prettier(file)
-
-  await writeFile(path, file)
-}
-
-const generateMdxFiles: p.RequiredRunner =
+const generateMDXFiles: p.RequiredRunner =
   (themes: Record<string, string>, paths: Record<string, string>) =>
   async (p, s) => {
     s.start(`Writing files "${DIST_PATH}"`)
@@ -256,7 +201,7 @@ const generateMdxFiles: p.RequiredRunner =
     let wroteList: string[] = []
 
     await Promise.all(
-      Object.entries(themes).map(async ([name, content]) => {
+      Object.entries(themes).map(async ([name, theme]) => {
         const dirPath = paths[name]
 
         if (!dirPath) {
@@ -266,24 +211,27 @@ const generateMdxFiles: p.RequiredRunner =
         }
 
         await Promise.all(
-          LOCALES.map(async (locale) => {
-            const data = await generateData(
-              path.join(dirPath, getMdxFileName("index", locale)),
-              { tab: LOCALE_TAB_MAP[locale] },
+          locales.map(async (locale) => {
+            let data = await generateFrontMatter(
+              path.join(dirPath, getMDXFileName("index", locale)),
+              path.join(dirPath, getMDXFileName("theming", locale)),
             )
-            const resolvedContent = await generateContent({
+
+            data = { ...data, tab: LOCALE_TAB_MAP[locale] }
+
+            const content = await generateContent({
               data,
-              content,
+              theme,
               locale,
               paths,
             })
 
             const outPath = path.join(
               dirPath,
-              getMdxFileName("theming", locale),
+              getMDXFileName("theming", locale),
             )
 
-            await writeMdxFile(outPath, data, resolvedContent)
+            await writeMDXFile(outPath, data, content)
 
             wroteList = [...wroteList, `${toCamelCase(name)} ${outPath}`]
           }),
@@ -323,7 +271,7 @@ const main = async () => {
     const themes = await getThemes()(p, s)
     const paths = await getPaths()(p, s)
 
-    await generateMdxFiles(themes, paths)(p, s)
+    await generateMDXFiles(themes, paths)(p, s)
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

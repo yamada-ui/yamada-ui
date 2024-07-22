@@ -1,5 +1,15 @@
 import { Octokit } from "@octokit/rest"
+import { CONSTANT } from "constant"
 import { config } from "dotenv"
+import { readFile, writeFile } from "fs/promises"
+import matter from "gray-matter"
+import { prettier } from "libs/prettier"
+import type { Locale } from "utils/i18n"
+import type { GrayMatterFile } from "gray-matter"
+
+export type Input = string | Buffer
+export type Data = GrayMatterFile<Input>["data"]
+export type Content = GrayMatterFile<Input>["content"]
 
 const COMMON_PARAMS = {
   owner: "yamada-ui",
@@ -47,4 +57,28 @@ export const getConstant = async (): Promise<Constant> => {
   }
 
   return result
+}
+
+export const getMDXFileName = (fileName: string, locale: Locale) => {
+  if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
+
+  return fileName + ".mdx"
+}
+
+export const getMDXFile = async (path: string) => {
+  const file = await readFile(path, "utf8")
+
+  return matter(file)
+}
+
+export const writeMDXFile = async (
+  path: string,
+  data: Data,
+  content: Content,
+) => {
+  let file = matter.stringify(content, data)
+
+  file = await prettier(file)
+
+  await writeFile(path, file)
 }

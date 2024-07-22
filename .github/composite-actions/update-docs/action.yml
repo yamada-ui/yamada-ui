@@ -14,10 +14,10 @@ runs:
         pnpm docs:theme
         pnpm docs:props
         pnpm docs:changelog
-        pnpm docs:css
+        pnpm docs:styled-system
         pnpm docs:contributors
         pnpm docs:search
-        pnpm docs:icon
+        pnpm docs:icon-tags
       shell: bash
 
     - name: Create PR

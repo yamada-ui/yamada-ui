@@ -7,7 +7,7 @@ import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import { prettier } from "libs/prettier"
-import { getConstant } from "./utils"
+import { getConstant } from "../utils"
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>

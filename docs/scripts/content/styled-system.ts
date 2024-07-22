@@ -1,12 +1,9 @@
-import { readFile, writeFile } from "fs/promises"
+import { readFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
-import matter from "gray-matter"
-import type { GrayMatterFile } from "gray-matter"
-import { prettier } from "libs/prettier"
 import type { JSDoc, SourceFile, TypeAliasDeclaration } from "typescript"
 import {
   ScriptTarget,
@@ -20,13 +17,12 @@ import {
   isVariableStatement,
 } from "typescript"
 import { toKebabCase } from "utils/string"
+import { getMDXFile, writeMDXFile } from "../utils"
+import type { Locale } from "utils/i18n"
+import { locales } from "utils/i18n"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Input = string | Buffer
-type Data = GrayMatterFile<Input>["data"]
-type Content = GrayMatterFile<Input>["content"]
-type Locale = (typeof LOCALES)[number]
 type Type = "style" | "pseudo"
 type Props = Record<
   string,
@@ -55,7 +51,6 @@ const SOURCE_PSEUDO_PROPS_PATH = path.join(
   "pseudos.ts",
 )
 const DIST_PATH = path.join("contents", "styled-system")
-const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const CONTENT_HEADER = {
   en: [
     "`Style props` is a method to change the style of a component just by passing `props` to the component. It also provides many useful shorthands, improving development efficiency.",
@@ -249,20 +244,6 @@ const parseProps: p.RequiredRunner =
     return props
   }
 
-const getMdxFile = async (path: string) => {
-  const data = await readFile(path, "utf8")
-
-  return matter(data)
-}
-
-const writeMdxFile = async (path: string, data: Data, content: Content) => {
-  let file = matter.stringify(content, data)
-
-  file = await prettier(file)
-
-  await writeFile(path, file)
-}
-
 const generateTable = (props: Props) => (locale: Locale) => {
   let table: string[] = []
 
@@ -327,11 +308,11 @@ const generateProps: p.RequiredRunner =
     s.start(`Writing files`)
 
     await Promise.all(
-      LOCALES.map(async (locale) => {
+      locales.map(async (locale) => {
         const fileName = `style-props${locale !== "en" ? `.${locale}` : ""}.mdx`
         const outPath = path.join(DIST_PATH, fileName)
 
-        const { data } = await getMdxFile(outPath)
+        const { data } = await getMDXFile(outPath)
 
         const content: string[] = [
           ...CONTENT_HEADER[locale],
@@ -346,7 +327,7 @@ const generateProps: p.RequiredRunner =
           ...generateTable(pseudoProps)(locale),
         ]
 
-        await writeMdxFile(outPath, data, content.join("\n"))
+        await writeMDXFile(outPath, data, content.join("\n"))
       }),
     )
 

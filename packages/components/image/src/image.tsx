@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { cx, omitObject } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
-import { isValidElement, useMemo } from "react"
+import { isValidElement } from "react"
 import type { UseImageProps } from "./use-image"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
@@ -45,9 +45,9 @@ export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
  */
 export const Image = forwardRef<ImageProps, "img">(
   ({ size: boxSize, fit: objectFit, ...props }, ref) => {
-    const [styles, mergedProps] = useComponentStyle("Image", {
-      size: boxSize,
-      fit: objectFit,
+    const [css, mergedProps] = useComponentStyle("Image", {
+      boxSize,
+      objectFit,
       ...props,
     })
     let {
@@ -68,11 +68,6 @@ export const Image = forwardRef<ImageProps, "img">(
     ignoreFallback = loading != null || ignoreFallback || !fallback
 
     const status = useImage({ ...props, ignoreFallback })
-
-    const css = useMemo(
-      () => ({ boxSize, objectFit, ...styles }),
-      [boxSize, objectFit, styles],
-    )
 
     const isFallbackImage = shouldShowFallbackImage(status, fallbackStrategy)
 

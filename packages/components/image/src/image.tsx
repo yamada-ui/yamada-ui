@@ -44,9 +44,10 @@ export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
  * @see Docs https://yamada-ui.com/components/media-and-icons/image
  */
 export const Image = forwardRef<ImageProps, "img">(
-  ({ size: boxSize, ...props }, ref) => {
+  ({ size: boxSize, fit: objectFit, ...props }, ref) => {
     const [styles, mergedProps] = useComponentStyle("Image", {
       size: boxSize,
+      fit: objectFit,
       ...props,
     })
     let {
@@ -61,7 +62,6 @@ export const Image = forwardRef<ImageProps, "img">(
       onError,
       onLoad,
       referrerPolicy,
-      fit: objectFit,
       ...rest
     } = omitThemeProps(mergedProps)
 

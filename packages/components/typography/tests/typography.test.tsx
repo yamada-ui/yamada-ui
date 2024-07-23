@@ -1,34 +1,38 @@
-import { render } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import { Heading, Text } from "../src"
 
 describe("<Heading />", () => {
-  test("renders heading correctly", () => {
-    render(<Heading>Heading</Heading>)
+  test("renders heading correctly", async () => {
+    await a11y(<Heading>Heading</Heading>)
   })
 
   test("as - prop works correctly", () => {
-    const { getByText } = render(
+    render(
       <Heading as="a" href="www.google.com">
         Heading
       </Heading>,
     )
 
-    expect(getByText("Heading").nodeName).toBe("A")
+    const link = screen.getByRole("link", { name: /Heading/i })
+    expect(link).toBeInTheDocument()
+    expect(link).toHaveAttribute("href", "www.google.com")
   })
 })
 
 describe("<Text />", () => {
-  test("renders text correctly", () => {
-    render(<Text>Text</Text>)
+  test("renders text correctly", async () => {
+    await a11y(<Text>Text</Text>)
   })
 
   test("as - prop works correctly", () => {
-    const { getByText } = render(
+    render(
       <Text as="a" href="www.google.com">
         Text
       </Text>,
     )
 
-    expect(getByText("Text").nodeName).toBe("A")
+    const link = screen.getByRole("link", { name: /Text/i })
+    expect(link).toBeInTheDocument()
+    expect(link).toHaveAttribute("href", "www.google.com")
   })
 })

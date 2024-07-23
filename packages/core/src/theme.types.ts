@@ -561,15 +561,14 @@ export type ComponentBaseStyle = UIStyle
 export type ComponentVariants = Record<string, UIStyle>
 export type ComponentSizes = Record<string, UIStyle>
 export type ComponentDefaultProps<
-  Y extends Dict = Dict,
-  M extends keyof Theme["components"] | unknown = unknown,
-> = Partial<Omit<Y, "variant" | "size" | "colorScheme">> & {
-  variant?: ThemeProps<M>["variant"]
-  size?: ThemeProps<M>["size"]
-  colorScheme?: ThemeProps<M>["colorScheme"]
-}
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = Partial<Omit<M, "variant" | "size" | "colorScheme">> & ThemeProps<Y>
 
-export type ComponentStyle<Y extends Dict = Dict> = {
+export type ComponentStyle<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = {
   /**
    * The base style of the component.
    */
@@ -585,14 +584,17 @@ export type ComponentStyle<Y extends Dict = Dict> = {
   /**
    * The default props of the component.
    */
-  defaultProps?: ComponentDefaultProps<Y>
+  defaultProps?: ComponentDefaultProps<Y, M>
 }
 
 export type ComponentMultiBaseStyle = UIMultiStyle
 export type ComponentMultiVariants = Record<string, UIMultiStyle>
 export type ComponentMultiSizes = Record<string, UIMultiStyle>
 
-export type ComponentMultiStyle<Y extends Dict = Dict> = {
+export type ComponentMultiStyle<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = {
   /**
    * The base style of the component.
    */
@@ -608,7 +610,7 @@ export type ComponentMultiStyle<Y extends Dict = Dict> = {
   /**
    * The default props of the component.
    */
-  defaultProps?: ComponentDefaultProps<Y>
+  defaultProps?: ComponentDefaultProps<Y, M>
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

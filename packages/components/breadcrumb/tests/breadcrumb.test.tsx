@@ -1,4 +1,4 @@
-import { render, screen } from "@yamada-ui/test"
+import { a11y, render, screen } from "@yamada-ui/test"
 import type { BreadcrumbGenerateItem } from "../src"
 import {
   Breadcrumb,
@@ -8,8 +8,8 @@ import {
 } from "../src"
 
 describe("<Breadcrumb />", () => {
-  test("renders breadcrumb correctly", () => {
-    render(
+  test("renders breadcrumb correctly", async () => {
+    await a11y(
       <Breadcrumb>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">1</BreadcrumbLink>
@@ -44,7 +44,7 @@ describe("<Breadcrumb />", () => {
   })
 
   test("isCurrentPage property is being passed accurately", () => {
-    const { container } = render(
+    render(
       <Breadcrumb separator="-">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">1</BreadcrumbLink>
@@ -54,8 +54,9 @@ describe("<Breadcrumb />", () => {
         </BreadcrumbItem>
       </Breadcrumb>,
     )
-    const spanElement = container.querySelector(`[aria-current="page"]`)
+    const spanElement = screen.getByText("2")
     expect(spanElement).toBeInTheDocument()
+    expect(spanElement.nodeName.toLowerCase()).toBe("span")
   })
 
   test("breadcrumb link has its href attribute correctly set", () => {
@@ -69,8 +70,8 @@ describe("<Breadcrumb />", () => {
         </BreadcrumbItem>
       </Breadcrumb>,
     )
-    const breadcrumbLink = screen.getByText("Link 1")
-    expect(breadcrumbLink.getAttribute("href")).toBe("#")
+    const breadcrumbLink = screen.getByRole("link", { name: /Link 1/i })
+    expect(breadcrumbLink).toHaveAttribute("href", "#")
   })
 
   test("current page link doesn't have href attribute set", () => {
@@ -85,7 +86,7 @@ describe("<Breadcrumb />", () => {
       </Breadcrumb>,
     )
     const currentPageLink = screen.getByText("Link 2")
-    expect(currentPageLink.getAttribute("href")).toBeNull()
+    expect(currentPageLink).not.toHaveAttribute("href")
   })
 
   test("renders breadcrumbEllipsis correctly", () => {
@@ -113,9 +114,9 @@ describe("<Breadcrumb />", () => {
       { href: "/", name: "魔人ブウ編", isCurrentPage: true },
     ]
 
-    const { container } = render(<Breadcrumb items={items} />)
+    render(<Breadcrumb items={items} />)
 
-    expect(container.querySelector("ol")?.children).toHaveLength(4)
+    expect(screen.getAllByRole("listitem")).toHaveLength(4)
   })
 
   test("is correctly truncated", () => {
@@ -126,20 +127,18 @@ describe("<Breadcrumb />", () => {
       { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
     ]
 
-    const { container } = render(
-      <Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />,
-    )
+    render(<Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />)
 
-    expect(container.querySelector("ol")?.children).toHaveLength(3)
+    const listItems = screen.getAllByRole("listitem")
+
+    expect(listItems).toHaveLength(3)
+    expect(listItems[0].querySelector("a")).toHaveAttribute("href", "/1")
     expect(
-      container.querySelector("ol")?.firstElementChild?.querySelector("a"),
-    ).toHaveAttribute("href", "/1")
-    expect(
-      container.querySelector("ol")?.lastElementChild?.querySelector("span"),
+      listItems[listItems.length - 1].querySelector("span"),
     ).toHaveAttribute("aria-current", "page")
   })
 
-  test("isEllipsisPageを使用して正しく省略される", () => {
+  test("correctly omitted using isEllipsisPage", () => {
     const items: BreadcrumbGenerateItem[] = [
       { href: "/1", name: "サイヤ人編" },
       { href: "/2", name: "ナメック星編", isEllipsisPage: true },
@@ -147,18 +146,18 @@ describe("<Breadcrumb />", () => {
       { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
     ]
 
-    const { container } = render(<Breadcrumb items={items} />)
+    render(<Breadcrumb items={items} />)
 
-    expect(container.querySelector("ol")?.children).toHaveLength(3)
+    const listItems = screen.getAllByRole("listitem")
+
+    expect(listItems).toHaveLength(3)
+    expect(listItems[0].querySelector("a")).toHaveAttribute("href", "/1")
     expect(
-      container.querySelector("ol")?.firstElementChild?.querySelector("a"),
-    ).toHaveAttribute("href", "/1")
-    expect(
-      container.querySelector("ol")?.lastElementChild?.querySelector("span"),
+      listItems[listItems.length - 1].querySelector("span"),
     ).toHaveAttribute("aria-current", "page")
   })
 
-  test("最後の要素にisEllipsisPageがあった場合、正しくbreadcrumbEllipsisがレンダーされる", () => {
+  test("if the last element has an isEllipsisPage, the breadcrumbEllipsis is rendered correctly.", () => {
     const items: BreadcrumbGenerateItem[] = [
       { href: "/1", name: "サイヤ人編" },
       { href: "/2", name: "ナメック星編", isEllipsisPage: true },
@@ -171,15 +170,18 @@ describe("<Breadcrumb />", () => {
       },
     ]
 
-    const { container } = render(<Breadcrumb items={items} />)
+    render(<Breadcrumb items={items} />)
 
-    expect(container.querySelector("ol")?.children).toHaveLength(4)
-    expect(
-      container.querySelector("ol")?.lastElementChild?.firstElementChild,
-    ).toHaveAttribute("aria-label", "ellipsis")
+    const listItems = screen.getAllByRole("listitem")
+
+    expect(listItems).toHaveLength(4)
+    expect(listItems[listItems.length - 1].firstElementChild).toHaveAttribute(
+      "aria-label",
+      "ellipsis",
+    )
   })
 
-  test("boundariesが0やundefinedだった場合、正しく1が反映される", () => {
+  test("if boundaries is 0 or undefined, 1 is correctly reflected.", () => {
     const items: BreadcrumbGenerateItem[] = [
       { href: "/1", name: "サイヤ人編" },
       { href: "/2", name: "ナメック星編" },
@@ -187,24 +189,39 @@ describe("<Breadcrumb />", () => {
       { href: "/4", name: "魔人ブウ編", isCurrentPage: true },
     ]
 
-    const { container: container1 } = render(
-      <Breadcrumb items={items} startBoundaries={1} />,
+    render(
+      <Breadcrumb
+        data-testid="breadCrumb1"
+        items={items}
+        startBoundaries={1}
+      />,
     )
 
-    const { container: container2 } = render(
-      <Breadcrumb items={items} endBoundaries={1} />,
+    render(
+      <Breadcrumb data-testid="breadCrumb2" items={items} endBoundaries={1} />,
     )
 
-    const { container: container3 } = render(
-      <Breadcrumb items={items} startBoundaries={0} endBoundaries={0} />,
+    render(
+      <Breadcrumb
+        data-testid="breadCrumb3"
+        items={items}
+        startBoundaries={0}
+        endBoundaries={0}
+      />,
     )
 
-    expect(container1.querySelector("ol")?.children).toHaveLength(3)
-    expect(container2.querySelector("ol")?.children).toHaveLength(3)
-    expect(container3.querySelector("ol")?.children).toHaveLength(3)
+    expect(
+      screen.getByTestId("breadCrumb1").querySelectorAll("li"),
+    ).toHaveLength(3)
+    expect(
+      screen.getByTestId("breadCrumb2").querySelectorAll("li"),
+    ).toHaveLength(3)
+    expect(
+      screen.getByTestId("breadCrumb3").querySelectorAll("li"),
+    ).toHaveLength(3)
   })
 
-  test("省略した項目を正しく取得する", () => {
+  test("retrieve omitted items correctly", () => {
     const ellipsis = vi.fn()
 
     const items: BreadcrumbGenerateItem[] = [

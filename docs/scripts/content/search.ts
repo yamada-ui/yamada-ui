@@ -7,7 +7,7 @@ import matter from "gray-matter"
 import { prettier } from "libs/prettier"
 import toc from "markdown-toc"
 import { getResolvedPath } from "utils/path"
-import { otherLocales } from "../utils/i18n"
+import { otherLocales } from "../../utils/i18n"
 
 type Content = {
   title: string

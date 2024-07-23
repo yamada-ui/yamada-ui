@@ -26,7 +26,7 @@
   },
   "AlertIcon": {
     "variant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"audio\"\n  | \"grid\"\n  | \"oval\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
+      "type": "UIValue<string> &\n  (\"audio\" | \"grid\" | \"oval\" | \"dots\" | \"puff\" | \"rings\" | \"circles\")",
       "required": false
     }
   },

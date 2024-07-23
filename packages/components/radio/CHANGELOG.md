@@ -1,5 +1,12 @@
 # @yamada-ui/radio
 
+## 1.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`2292bcd`](https://github.com/yamada-ui/yamada-ui/commit/2292bcd24e4a9f6bb2255f7adaa498d64b15978d)]:
+  - @yamada-ui/layouts@1.1.30
+
 ## 1.2.2
 
 ### Patch Changes

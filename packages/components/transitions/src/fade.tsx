@@ -1,5 +1,5 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -13,7 +13,7 @@ import {
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
-export type FadeProps = WithTransitionProps<MotionProps>
+export type FadeProps = WithTransitionProps<MotionProps> & ThemeProps<"Fade">
 
 const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
@@ -42,44 +42,38 @@ export const fadeProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/fade
  */
-export const Fade = forwardRef<FadeProps, "div", false>(
-  (
-    {
-      unmountOnExit,
-      isOpen,
-      transition,
-      transitionEnd,
-      delay,
-      duration,
-      className,
-      ...rest
-    },
-    ref,
-  ) => {
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+export const Fade = forwardRef<FadeProps, "div", false>((props, ref) => {
+  const [style, mergedProps] = useComponentStyle("Fade", props)
+  let {
+    unmountOnExit,
+    isOpen,
+    transition,
+    transitionEnd,
+    delay,
+    duration,
+    className,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
-    const custom = { transition, transitionEnd, delay, duration }
+  const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
-    isOpen = unmountOnExit ? isOpen && unmountOnExit : true
+  const custom = { transition, transitionEnd, delay, duration }
 
-    const css: CSSUIObject = {
-      w: "100%",
-    }
+  isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
-    return (
-      <AnimatePresence custom={custom}>
-        {isOpen ? (
-          <Motion
-            ref={ref}
-            className={cx("ui-fade", className)}
-            custom={custom}
-            {...fadeProps}
-            animate={animate}
-            __css={css}
-            {...rest}
-          />
-        ) : null}
-      </AnimatePresence>
-    )
-  },
-)
+  return (
+    <AnimatePresence custom={custom}>
+      {isOpen ? (
+        <Motion
+          ref={ref}
+          className={cx("ui-fade", className)}
+          custom={custom}
+          {...fadeProps}
+          animate={animate}
+          __css={style}
+          {...rest}
+        />
+      ) : null}
+    </AnimatePresence>
+  )
+})

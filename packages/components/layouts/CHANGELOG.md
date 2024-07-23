@@ -1,5 +1,11 @@
 # @yamada-ui/layouts
 
+## 1.1.30
+
+### Patch Changes
+
+- [#2314](https://github.com/yamada-ui/yamada-ui/pull/2314) [`2292bcd`](https://github.com/yamada-ui/yamada-ui/commit/2292bcd24e4a9f6bb2255f7adaa498d64b15978d) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Fix typo in `Stack` component
+
 ## 1.1.29
 
 ### Patch Changes

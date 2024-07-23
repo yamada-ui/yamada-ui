@@ -213,7 +213,7 @@
     "component": {
       "type": "FC<{ index: number; isSelected: boolean }>",
       "required": false,
-      "description": "The custom caroucel indicator to use."
+      "description": "The custom carousel indicator to use."
     }
   }
 }

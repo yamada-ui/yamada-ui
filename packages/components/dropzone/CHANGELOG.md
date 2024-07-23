@@ -1,5 +1,13 @@
 # @yamada-ui/dropzone
 
+## 1.0.38
+
+### Patch Changes
+
+- Updated dependencies [[`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f)]:
+  - @yamada-ui/transitions@1.1.0
+  - @yamada-ui/loading@1.1.10
+
 ## 1.0.37
 
 ### Patch Changes

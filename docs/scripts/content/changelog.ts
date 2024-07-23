@@ -1,33 +1,28 @@
-import { readFile, readdir, writeFile } from "fs/promises"
+import { readdir } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
-import type { GrayMatterFile } from "gray-matter"
-import matter from "gray-matter"
-import { prettier } from "libs/prettier"
+import type { Content, Data } from "../utils"
+import { getMDXFile, getMDXFileName, writeMDXFile } from "../utils"
+import { locales } from "utils/i18n"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Input = string | Buffer
-type MdxFile = { name: string; version: number[]; data: Data; content: Content }
-type Data = GrayMatterFile<Input>["data"]
-type Content = GrayMatterFile<Input>["content"]
-type Locale = (typeof LOCALES)[number]
+type MDXFile = { name: string; version: number[]; data: Data; content: Content }
 
 const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, ".changelog")
 const DIST_PATH = path.join("contents", "changelog")
-const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_MENU_MAP = {
   en: "Changelog",
   ja: "変更履歴",
 }
 
-const getMdxFiles: p.RequiredRunner = () => async (_, s) => {
+const getMDXFiles: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the Yamada UI changelogs`)
 
-  const mdxFiles: Omit<MdxFile, "version">[] = []
+  const mdxFiles: Omit<MDXFile, "version">[] = []
 
   const dirents = await readdir(SOURCE_PATH, { withFileTypes: true })
 
@@ -39,9 +34,7 @@ const getMdxFiles: p.RequiredRunner = () => async (_, s) => {
 
       if (name.startsWith("manifest")) return
 
-      const file = await readFile(`${path}/${name}`, "utf-8")
-
-      const { data, content } = matter(file)
+      const { data, content } = await getMDXFile(`${path}/${name}`)
 
       mdxFiles.push({ name, data, content })
 
@@ -49,7 +42,7 @@ const getMdxFiles: p.RequiredRunner = () => async (_, s) => {
     }),
   )
 
-  const resolvedMdxFiles = mdxFiles
+  const resolvedMDXFiles = mdxFiles
     .map((item) => ({
       ...item,
       version: item.name
@@ -70,11 +63,11 @@ const getMdxFiles: p.RequiredRunner = () => async (_, s) => {
 
   s.stop(`got the Yamada UI changelogs`)
 
-  return resolvedMdxFiles
+  return resolvedMDXFiles
 }
 
-const generateMdxFiles: p.RequiredRunner =
-  (mdxFiles: MdxFile[]) => async (p, s) => {
+const generateMDXFiles: p.RequiredRunner =
+  (mdxFiles: MDXFile[]) => async (p, s) => {
     s.start(`Writing files "${DIST_PATH}"`)
 
     let wroteList: string[] = []
@@ -86,13 +79,26 @@ const generateMdxFiles: p.RequiredRunner =
         data.table_of_contents_max_lv = 3
         data.order = index + 1
 
-        await writeMdxFile(outPath, data, content)
+        await writeMDXFile(outPath, data, content)
 
         wroteList = [...wroteList, outPath]
 
         if (index !== 0) return
 
-        await writeMdxIndexFiles(data, content)
+        data.order = 7
+        data.menu_icon = "history"
+
+        await Promise.all(
+          locales.map(async (locale) => {
+            data.menu = LOCALE_MENU_MAP[locale]
+
+            await writeMDXFile(
+              path.join(DIST_PATH, getMDXFileName("index", locale)),
+              data,
+              content,
+            )
+          }),
+        )
       }),
     )
 
@@ -108,37 +114,6 @@ const generateMdxFiles: p.RequiredRunner =
     }
   }
 
-const writeMdxFile = async (path: string, data: Data, content: Content) => {
-  let file = matter.stringify(content, data)
-
-  file = await prettier(file)
-
-  await writeFile(path, file)
-}
-
-const getMdxFileName = (fileName: string, locale: Locale) => {
-  if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
-
-  return fileName + ".mdx"
-}
-
-const writeMdxIndexFiles = async (data: Data, content: Content) => {
-  data.order = 7
-  data.menu_icon = "history"
-
-  await Promise.all(
-    LOCALES.map(async (locale) => {
-      data.menu = LOCALE_MENU_MAP[locale]
-
-      await writeMdxFile(
-        path.join(DIST_PATH, getMdxFileName("index", locale)),
-        data,
-        content,
-      )
-    }),
-  )
-}
-
 const main = async () => {
   p.intro(c.magenta(`Generating Yamada UI document search content`))
 
@@ -147,9 +122,9 @@ const main = async () => {
   try {
     const start = process.hrtime.bigint()
 
-    const mdxFiles = await getMdxFiles()(p, s)
+    const mdxFiles = await getMDXFiles()(p, s)
 
-    await generateMdxFiles(mdxFiles)(p, s)
+    await generateMDXFiles(mdxFiles)(p, s)
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

@@ -13,7 +13,7 @@
     "url": "git+https://github.com/yamada-ui/yamada-ui"
   },
   "scripts": {
-    "prepare": "husky",
+    "prepare": "lefthook install",
     "storybook": "storybook dev -p 6006",
     "serve:storybook": "npx http-server ./storybook-static",
     "build:storybook": "storybook build",

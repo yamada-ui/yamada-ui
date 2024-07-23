@@ -157,7 +157,7 @@ export const Reorder = forwardRef(
           if (hasChildren) {
             return validChildren.find(({ props }) => props.value === value)
           } else {
-            const props = items.find(({ value }) => value === value)
+            const props = items.find((item) => item.value === value)
 
             return props ? <ReorderItem key={props.value} {...props} /> : null
           }

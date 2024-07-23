@@ -28,6 +28,23 @@ describe("useEventListener", () => {
 
     expect(handler).not.toHaveBeenCalled()
   })
+
+  test("Removes event listener using returned cleanup function", () => {
+    const target = document.createElement("div")
+    const handler = vi.fn()
+
+    const { result } = renderHook(() =>
+      useEventListener(target, "click", handler),
+    )
+    const cleanup = result.current
+
+    cleanup()
+
+    const clickEvent = new MouseEvent("click")
+    target.dispatchEvent(clickEvent)
+
+    expect(handler).not.toHaveBeenCalled()
+  })
 })
 
 describe("useEventListeners", () => {

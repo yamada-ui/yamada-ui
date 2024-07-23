@@ -21,9 +21,9 @@ runs:
       shell: bash
 
     - name: Create PR
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v6
       with:
-        token: ${{ env.GITHUB_TOKEN }}
+        token: ${{ env.BOT_TOKEN }}
         base: main
         commit-message: "ci(changesets): version packages"
         title: "Updated documentation"

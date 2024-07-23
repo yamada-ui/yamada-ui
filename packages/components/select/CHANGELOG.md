@@ -1,5 +1,13 @@
 # @yamada-ui/select
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238)]:
+  - @yamada-ui/icon@1.1.0
+  - @yamada-ui/popover@1.2.7
+
 ## 1.3.0
 
 ### Minor Changes

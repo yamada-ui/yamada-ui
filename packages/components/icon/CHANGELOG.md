@@ -1,5 +1,11 @@
 # @yamada-ui/icon
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2309](https://github.com/yamada-ui/yamada-ui/pull/2309) [`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Thematize `Icon` component
+
 ## 1.0.32
 
 ### Patch Changes

@@ -2,9 +2,9 @@
 title: Alert
 description: "`Alert`は、ユーザーに情報を伝達するコンポーネントです。"
 package_name: "@yamada-ui/alert"
-order: 1
 with_description: true
 tab: Props
+order: 1
 ---
 
 ## Props
@@ -47,14 +47,8 @@ tab: Props
 <PropsCard
   id="alerticon-variant"
   name="variant"
-  type='type ONLY_FOR_FORMAT =
-  | "audio"
-  | "grid"
-  | "oval"
-  | "dots"
-  | "puff"
-  | "rings"
-  | "circles"'
+  type='UIValue<string> &
+  ("audio" | "grid" | "oval" | "dots" | "puff" | "rings" | "circles")'
 />
 
 ### AlertTitleProps

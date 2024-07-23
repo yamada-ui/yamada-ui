@@ -1,5 +1,16 @@
 # @yamada-ui/calendar
 
+## 1.5.1
+
+### Patch Changes
+
+- [#2316](https://github.com/yamada-ui/yamada-ui/pull/2316) [`cdaf66c`](https://github.com/yamada-ui/yamada-ui/commit/cdaf66ca8177cf3e83c7d4f6fd3be6331ba6d6a8) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Remove duplicate dates declaration in `getRangeDates` function
+
+- Updated dependencies [[`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238)]:
+  - @yamada-ui/icon@1.1.0
+  - @yamada-ui/button@1.0.36
+  - @yamada-ui/popover@1.2.7
+
 ## 1.5.0
 
 ### Minor Changes

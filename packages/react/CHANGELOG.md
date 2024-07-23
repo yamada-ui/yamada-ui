@@ -1,5 +1,53 @@
 # @yamada-ui/react
 
+## 1.4.6
+
+### Patch Changes
+
+- Updated dependencies [[`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238), [`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f), [`482f31c`](https://github.com/yamada-ui/yamada-ui/commit/482f31c23ff4b69c50ddfd50478dc34e001cd218), [`9e9945c`](https://github.com/yamada-ui/yamada-ui/commit/9e9945c598d5d2195f2aa777f107f03d811cac72), [`2292bcd`](https://github.com/yamada-ui/yamada-ui/commit/2292bcd24e4a9f6bb2255f7adaa498d64b15978d), [`1d289a7`](https://github.com/yamada-ui/yamada-ui/commit/1d289a7a12ff701ec9260bba0c08feb8eeec1627)]:
+  - @yamada-ui/icon@1.1.0
+  - @yamada-ui/theme@1.14.0
+  - @yamada-ui/transitions@1.1.0
+  - @yamada-ui/slider@1.2.0
+  - @yamada-ui/autocomplete@1.3.0
+  - @yamada-ui/layouts@1.1.30
+  - @yamada-ui/use-focus@1.0.17
+  - @yamada-ui/accordion@2.0.3
+  - @yamada-ui/alert@1.0.34
+  - @yamada-ui/avatar@1.2.2
+  - @yamada-ui/breadcrumb@1.3.5
+  - @yamada-ui/button@1.0.36
+  - @yamada-ui/close-button@1.0.34
+  - @yamada-ui/color-picker@1.2.23
+  - @yamada-ui/list@1.0.33
+  - @yamada-ui/loading@1.1.10
+  - @yamada-ui/menu@1.3.7
+  - @yamada-ui/native-select@1.0.38
+  - @yamada-ui/number-input@1.1.8
+  - @yamada-ui/pagination@1.0.34
+  - @yamada-ui/rating@1.0.35
+  - @yamada-ui/reorder@2.0.4
+  - @yamada-ui/resizable@1.1.6
+  - @yamada-ui/select@1.3.1
+  - @yamada-ui/stat@1.0.31
+  - @yamada-ui/stepper@1.0.34
+  - @yamada-ui/tag@1.0.34
+  - @yamada-ui/toggle@1.0.16
+  - @yamada-ui/providers@1.2.1
+  - @yamada-ui/theme-tools@1.0.40
+  - @yamada-ui/modal@1.3.4
+  - @yamada-ui/popover@1.2.7
+  - @yamada-ui/tooltip@1.1.6
+  - @yamada-ui/checkbox@1.1.3
+  - @yamada-ui/radio@1.2.3
+  - @yamada-ui/typography@1.0.32
+  - @yamada-ui/editable@1.0.38
+  - @yamada-ui/notice@1.0.34
+  - @yamada-ui/snacks@1.0.26
+  - @yamada-ui/use-media-query@1.0.41
+  - @yamada-ui/switch@1.1.4
+  - @yamada-ui/file-button@1.0.40
+
 ## 1.4.5
 
 ### Patch Changes

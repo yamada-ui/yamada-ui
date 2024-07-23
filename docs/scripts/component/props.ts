@@ -1,24 +1,17 @@
-import { readdir, readFile, writeFile } from "fs/promises"
+import { readdir, readFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
-import type { GrayMatterFile } from "gray-matter"
-import matter from "gray-matter"
-// import type { ChatCompletionMessageParam } from "openai/resources"
-// import { openai } from "libs/openai"
-import { prettier } from "libs/prettier"
 import { omitObject } from "utils/object"
 import { toCamelCase } from "utils/string"
-// import { wait } from "utils/async"
+import { getMDXFileName, writeMDXFile } from "scripts/utils"
+import { locales, type Locale } from "utils/i18n"
+import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Input = string | Buffer
-type Data = GrayMatterFile<Input>["data"]
-type Content = GrayMatterFile<Input>["content"]
-type Locale = (typeof LOCALES)[number]
 type Doc = Record<string, Record<string, Props>>
 type Props = {
   type?: string
@@ -30,7 +23,6 @@ type Props = {
 
 const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, "packages", "components")
 const DIST_PATH = path.join("contents", "components")
-const LOCALES = CONSTANT.I18N.LOCALES.map(({ value }) => value)
 const LOCALE_TAB_MAP = {
   en: "Props",
   ja: "Props",
@@ -39,10 +31,6 @@ const LOCALE_TITLE_MAP = {
   en: "Props",
   ja: "Props",
 }
-// const LOCALE_MAP = {
-//   ja: "Japanese",
-//   en: "English",
-// }
 const OVERRIDE_PATHS: Record<
   string,
   (string | { parent: string; children: string[] })[]
@@ -201,88 +189,15 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
   return docs
 }
 
-const getDirs = async (path: string) => {
-  let dirents = await readdir(path, { withFileTypes: true })
-
-  dirents = dirents.filter((dirent) => dirent.isDirectory())
-
-  return dirents
-}
-
 const getPaths: p.RequiredRunner = () => async (_, s) => {
   s.start(`Getting the content paths`)
 
-  const categoryDirs = await getDirs(DIST_PATH)
-  const componentDirs = await Promise.all(
-    categoryDirs.map(
-      async ({ name, path }) => await getDirs(`${path}/${name}`),
-    ),
-  )
-
-  const paths = componentDirs
-    .flat()
-    .reduce<Record<string, string>>((prev, { name, path }) => {
-      prev[name] = `${path}/${name}`
-
-      return prev
-    }, {})
+  const paths = getDirectoryPaths(DIST_PATH)
 
   s.stop(`Got the content paths`)
 
   return paths
 }
-
-const getMdxFile = async (path: string) => {
-  const file = await readFile(path, "utf8")
-
-  return matter(file)
-}
-
-const generateData = async (path: string, overrideData?: Data) => {
-  let { data } = await getMdxFile(path)
-
-  delete data.is_tabs
-
-  data = { ...data, ...overrideData }
-
-  return data
-}
-
-// const translateDescription = async (
-//   locale: Locale,
-//   content: string,
-//   retry: number = 1,
-// ) => {
-//   try {
-//     const from = `from ${LOCALE_MAP[locale === "en" ? "ja" : "en"]}`
-//     const to = `to ${LOCALE_MAP[locale]}`
-
-//     const messages: ChatCompletionMessageParam[] = [
-//       {
-//         role: "system",
-//         content: [
-//           `Please translate the text of the a JSDoc description that I will send you ${from} ${to}. Please note the following points:`,
-//           `The text you send will be saved as a JSDoc description. Therefore, please output only the translated text.`,
-//         ].join("\n"),
-//       },
-//       { role: "user", content },
-//     ]
-
-//     const { choices } = await openai.chat.completions.create({
-//       model: "gpt-4-1106-preview",
-//       messages,
-//       temperature: 0,
-//     })
-
-//     return choices[0].message?.content
-//   } catch (e) {
-//     await wait(3000)
-
-//     retry += 1
-
-//     return await translateDescription(locale, content, retry)
-//   }
-// }
 
 const generateContent = async ({
   doc,
@@ -292,22 +207,6 @@ const generateContent = async ({
   locale: Locale
 }) => {
   const content = [`## ${LOCALE_TITLE_MAP[locale]}`]
-
-  // if (locale !== "en") {
-  //   await Promise.all(
-  //     Object.entries(doc).map(async ([title, props]) => {
-  //       await Promise.all(
-  //         Object.entries(props).map(async ([name, { description }]) => {
-  //           if (!description) return
-
-  //           description = await translateDescription(locale, description)
-
-  //           doc[title][name]["description"] = description
-  //         }),
-  //       )
-  //     }),
-  //   )
-  // }
 
   Object.entries(doc).map(([title, props]) => {
     content.push(`\n### ${title}Props\n`)
@@ -357,21 +256,7 @@ const generateContent = async ({
   return content.join("\n")
 }
 
-const getMdxFileName = (fileName: string, locale: Locale) => {
-  if (locale !== CONSTANT.I18N.DEFAULT_LOCALE) fileName += `.${locale}`
-
-  return fileName + ".mdx"
-}
-
-const writeMdxFile = async (path: string, data: Data, content: Content) => {
-  let file = matter.stringify(content, data)
-
-  file = await prettier(file)
-
-  await writeFile(path, file)
-}
-
-const generateMdxFiles: p.RequiredRunner =
+const generateMDXFiles: p.RequiredRunner =
   (docs: Record<string, Doc>, paths: Record<string, string>) =>
   async (p, s) => {
     s.start(`Writing files "${DIST_PATH}"`)
@@ -399,17 +284,19 @@ const generateMdxFiles: p.RequiredRunner =
         }
 
         await Promise.all(
-          LOCALES.map(async (locale) => {
-            const data = await generateData(
-              path.join(dirPath, getMdxFileName("index", locale)),
-              { tab: LOCALE_TAB_MAP[locale] },
+          locales.map(async (locale) => {
+            let data = await generateFrontMatter(
+              path.join(dirPath, getMDXFileName("index", locale)),
+              path.join(dirPath, getMDXFileName("props", locale)),
             )
 
-            const resolvedContent = await generateContent({ doc, locale })
+            data = { ...data, tab: LOCALE_TAB_MAP[locale] }
 
-            const outPath = path.join(dirPath, getMdxFileName("props", locale))
+            const content = await generateContent({ doc, locale })
 
-            await writeMdxFile(outPath, data, resolvedContent)
+            const outPath = path.join(dirPath, getMDXFileName("props", locale))
+
+            await writeMDXFile(outPath, data, content)
 
             wroteList = [...wroteList, `${toCamelCase(name)} ${outPath}`]
           }),
@@ -458,7 +345,7 @@ const main = async () => {
     const docs = await getDocs()(p, s)
     const paths = await getPaths()(p, s)
 
-    await generateMdxFiles(docs, paths)(p, s)
+    await generateMDXFiles(docs, paths)(p, s)
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

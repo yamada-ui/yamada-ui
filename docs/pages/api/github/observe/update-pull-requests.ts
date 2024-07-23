@@ -144,7 +144,13 @@ const remindReviews = async ({
     mergeable_state,
     head,
   } = pullRequest
-  if (head.label === "yamada-ui:changeset-release/main") return
+  if (
+    [
+      "yamada-ui:changeset-release/main",
+      "yamada-ui:changeset-release/docs",
+    ].includes(head.label)
+  )
+    return
 
   if (mergeable_state === "dirty") {
     try {
@@ -237,7 +243,13 @@ const addHelpWanted = async ({
     pullRequest
   if (user.type === "Bot") return
 
-  if (head.label === "yamada-ui:changeset-release/main") return
+  if (
+    [
+      "yamada-ui:changeset-release/main",
+      "yamada-ui:changeset-release/docs",
+    ].includes(head.label)
+  )
+    return
 
   if (labels.some((label) => isObject(label) && "help wanted" === label?.name))
     return

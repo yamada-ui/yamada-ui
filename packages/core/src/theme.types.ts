@@ -560,15 +560,39 @@ export type UsageTheme = BaseTheme & {
 export type ComponentBaseStyle = UIStyle
 export type ComponentVariants = Record<string, UIStyle>
 export type ComponentSizes = Record<string, UIStyle>
-export type ComponentDefaultProps<
+type ComponentProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
 > = Partial<Omit<M, "variant" | "size" | "colorScheme">> & ThemeProps<Y>
+export type ComponentDefaultProps<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = ComponentProps<Y, M>
+export type ComponentOverrideProps<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> =
+  | ComponentProps<Y, M>
+  | ((props: ComponentProps<Y, M>) => ComponentProps<Y, M>)
+
+type ComponentSharedStyle<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = {
+  /**
+   * The default props of the component.
+   */
+  defaultProps?: ComponentDefaultProps<Y, M>
+  /**
+   * The override props of the component.
+   */
+  overrideProps?: ComponentOverrideProps<Y, M>
+}
 
 export type ComponentStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = {
+> = ComponentSharedStyle<Y, M> & {
   /**
    * The base style of the component.
    */
@@ -581,10 +605,6 @@ export type ComponentStyle<
    * The variants of the component.
    */
   variants?: ComponentVariants
-  /**
-   * The default props of the component.
-   */
-  defaultProps?: ComponentDefaultProps<Y, M>
 }
 
 export type ComponentMultiBaseStyle = UIMultiStyle
@@ -594,7 +614,7 @@ export type ComponentMultiSizes = Record<string, UIMultiStyle>
 export type ComponentMultiStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = {
+> = ComponentSharedStyle<Y, M> & {
   /**
    * The base style of the component.
    */
@@ -607,10 +627,6 @@ export type ComponentMultiStyle<
    * The variants of the component.
    */
   variants?: ComponentMultiVariants
-  /**
-   * The default props of the component.
-   */
-  defaultProps?: ComponentDefaultProps<Y, M>
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

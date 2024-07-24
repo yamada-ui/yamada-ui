@@ -34,11 +34,17 @@ export type ThemeProps<
    */
   colorScheme?: Theme["colorSchemes"]
   /**
-   * If `true`, the component's theme will be overridden.
+   * If `true`, skip component theming.
    *
    * @private
    */
-  __overrideTheme?: boolean
+  __isProcessSkip?: boolean
+  /**
+   * The styles used to override component styles when `__isProcessSkip` is true
+   *
+   * @private
+   */
+  __styles?: CSSUIObject | Record<string, CSSUIObject>
 }
 
 export type ColorModeArray<Y> = [Y, Y]

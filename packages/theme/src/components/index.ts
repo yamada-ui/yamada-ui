@@ -28,11 +28,13 @@ import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
 import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
+import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
 import { Icon } from "./icon"
+import { Image } from "./image"
 import { Indicator } from "./indicator"
 import { InfiniteScrollArea } from "./infinite-scroll-area"
 import { Input } from "./input"
@@ -116,11 +118,13 @@ export default {
   Editable,
   Fade,
   Fieldset,
+  FileButton,
   FileInput,
   FormControl,
   Heading,
   HueSlider,
   Icon,
+  Image,
   Indicator,
   InfiniteScrollArea,
   Input,

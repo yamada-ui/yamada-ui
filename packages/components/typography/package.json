@@ -50,9 +50,9 @@
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
+    "@yamada-ui/layouts": "workspace:*",
     "clean-package": "2.2.0",
-    "@yamada-ui/layouts": "workspace:*"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

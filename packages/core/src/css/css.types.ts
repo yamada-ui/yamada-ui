@@ -21,9 +21,24 @@ type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
 export type ThemeProps<
   Y extends keyof Theme["components"] | unknown = unknown,
 > = {
+  /**
+   * The variant of the component.
+   */
   variant?: ThemeVariant<Y>
+  /**
+   * The size of the component.
+   */
   size?: ThemeSize<Y>
+  /**
+   * The color scheme of the component.
+   */
   colorScheme?: Theme["colorSchemes"]
+  /**
+   * If `true`, the component's theme will be overridden.
+   *
+   * @private
+   */
+  __overrideTheme?: boolean
 }
 
 export type ColorModeArray<Y> = [Y, Y]
@@ -32,7 +47,7 @@ export type ResponsiveObject<Y> = Partial<
   Record<Theme["breakpoints"] | "base", Y>
 >
 
-type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
+export type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
 
 export type BaseToken<Y, M = unknown> = M extends keyof Theme ? Y | Theme[M] : Y
 

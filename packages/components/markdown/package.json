@@ -50,25 +50,25 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-markdown": "^9.0.0",
+    "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-raw": "^7.0.0",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.0",
-    "ts-pattern": "^5.0.8",
+    "ts-pattern": "^5.2.0",
     "unist-util-is": "^6.0.0",
-    "unist-util-remove": "^4.0.0"
+    "unist-util-remove": "^4.0.0",
+    "unist-util-visit": "5.0.0"
   },
   "devDependencies": {
     "@types/hast": "^3.0.4",
-    "@types/mdast": "^4.0.3",
-    "@types/react-syntax-highlighter": "^15.5.7",
+    "@types/mdast": "^4.0.4",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "@types/unist": "^3.0.2",
     "clean-package": "2.2.0",
-    "dedent": "^1.5.1",
-    "react": "^18.0.0",
-    "unified": "11.0.4",
-    "unist-util-visit": "5.0.0"
+    "unified": "^11.0.5",
+    "dedent": "^1.5.3",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

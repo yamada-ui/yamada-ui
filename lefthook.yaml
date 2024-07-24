@@ -20,4 +20,4 @@ commit-msg:
   commands:
     "lint the commit message":
       run: |
-        pnpm commitlint --edit {1} --config .commitlintrc
+        pnpm commitlint --edit {1}

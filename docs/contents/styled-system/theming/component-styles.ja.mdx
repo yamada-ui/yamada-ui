@@ -2,6 +2,7 @@
 title: コンポーネントのスタイル
 description: コンポーネントのスタイルの作成やカスタマイズする方法。
 order: 4
+label: Updated
 ---
 
 成長を続けるプロジェクトでコンポーネントのスタイルを柔軟に維持していくのは困難な作業です。
@@ -74,7 +75,7 @@ Yamada UIのコンポーネントは、**単一パーツで構成されるコン
 今回は、`Button`を新しくスタイリングしていきます。
 
 ```ts title=./theme/components/button.ts
-export const Button: ComponentStyle = {
+export const Button: ComponentStyle<"Button", ButtonProps> = {
   // 基本のスタイル
   baseStyle: {
     lineHeight: 1.2,
@@ -127,7 +128,7 @@ export const Button: ComponentStyle = {
 次に、動的な`カラースキーム`に対応していきます。コンポーネントから`カラースキーマ`を受け取るには、関数を使用します。
 
 ```ts title=./theme/components/button.ts highlight={12,13,14,15,16,17,18,19,48}
-export const Button: ComponentStyle = {
+export const Button: ComponentStyle<"Button", ButtonProps> = {
   // 基本のスタイル
   baseStyle: {
     lineHeight: 1.2,
@@ -217,7 +218,7 @@ export default extendTheme(customTheme)({ omit: ["components"] })
 複数パーツのコンポーネントは、各パーツに紐づいている`key`ごとにスタイリングしていきます。
 
 ```ts title=./theme/components/list.ts
-export const List: ComponentMultiStyle = {
+export const List: ComponentMultiStyle<"List", ListProps> = {
   // 基本のスタイル
   baseStyle: {
     container: {},
@@ -270,7 +271,7 @@ export const List: ComponentMultiStyle = {
 次に、動的な`カラースキーム`に対応していきます。コンポーネントから`カラースキーマ`を受け取るには、関数を使用します。
 
 ```ts title=./theme/components/list.ts highlight={18,19,20,21,22,23,47}
-export const List: ComponentMultiStyle = {
+export const List: ComponentMultiStyle<"List", ListProps> = {
   // 基本のスタイル
   baseStyle: {
     container: {},
@@ -345,6 +346,42 @@ const customTheme: UsageTheme = {
 
 export default extendTheme(customTheme)({ omit: ["components"] })
 ```
+
+## アプリケーション全体で共通の`props`を設定する
+
+アプリケーション全体でコンポーネントの共通の`props`を設定したい場合は、`defaultProps`を使用します。`defaultProps`は、コンポーネントが提供する`props`をすべて受け入れます。
+
+```ts highlight={3}
+export const Button: ComponentStyle<"Button", ButtonProps> = {
+  defaultProps: {
+    loadingText: "Loading…",
+  },
+}
+```
+
+上記の設定で、`Button`の`loadingText`は、アプリケーション全体で`"Loading…"`になります。
+
+:::note
+コンポーネントで設定された`props`は、`defaultProps`を上書きします。
+:::
+
+もし、コンポーネントで設定された`props`を基に計算し、コンポーネントの`props`を上書きしたい場合は、`overrideProps`を使用します。
+
+```tsx live=false highlight={4,5,6,7,8,9}
+export const FormControl: ComponentStyle<"FormControl", FormControlProps> = {
+  overrideProps: ({ label, ...rest }) => ({
+    ...rest,
+    label: (
+      <>
+        <PencilIcon me="1" />
+        {label}
+      </>
+    ),
+  }),
+}
+```
+
+上記の設定で、`FormControl`の`label`を設定された`label`に基づいて、新しく`label`を設定しています。
 
 ## 独自のコンポーネントを作成する
 

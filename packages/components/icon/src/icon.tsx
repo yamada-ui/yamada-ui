@@ -17,6 +17,8 @@ import type { FC, SVGAttributes } from "react"
 type IconOptions = {
   /**
    * The CSS `font-size` property.
+   *
+   * @deprecated Use `fontSize` instead.
    */
   size?: CSSUIProps["fontSize"]
 }
@@ -31,50 +33,49 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
-export const Icon = forwardRef<IconProps, "svg">(
-  ({ size: fontSize, ...props }, ref) => {
-    const [styles, mergedProps] = useComponentStyle("Icon", {
-      fontSize,
-      ...props,
-    })
-    const {
-      className,
-      as: element,
-      viewBox,
-      __css,
-      ...rest
-    } = omitThemeProps(mergedProps)
-    const boxSize = replaceObject(fontSize, (value) =>
-      !isUnit(value) ? useToken("fontSizes", value) : value,
-    )
+export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
+  const [styles, { size: fontSize, ...mergedProps }] = useComponentStyle(
+    "Icon",
+    props,
+  )
+  const {
+    className,
+    as: element,
+    viewBox,
+    __css,
+    ...rest
+  } = omitThemeProps(mergedProps)
+  const boxSize = replaceObject(fontSize, (value) =>
+    !isUnit(value) ? useToken("fontSizes", value) : value,
+  )
 
-    const css: CSSUIObject = {
-      ...styles,
-      ...__css,
-    }
+  const css: CSSUIObject = {
+    ...styles,
+    ...__css,
+    boxSize,
+  }
 
-    if (element && typeof element !== "string")
-      return (
-        <ui.svg
-          as={element}
-          className={cx("ui-icon", className)}
-          __css={css}
-          {...{ boxSize, ...rest }}
-        />
-      )
-
+  if (element && typeof element !== "string")
     return (
       <ui.svg
-        ref={ref}
-        verticalAlign="middle"
-        viewBox={viewBox}
+        as={element}
         className={cx("ui-icon", className)}
         __css={css}
-        {...{ boxSize, ...rest }}
+        {...rest}
       />
     )
-  },
-)
+
+  return (
+    <ui.svg
+      ref={ref}
+      verticalAlign="middle"
+      viewBox={viewBox}
+      className={cx("ui-icon", className)}
+      __css={css}
+      {...rest}
+    />
+  )
+})
 
 export const CheckIcon: FC<IconProps> = (props) => {
   return (

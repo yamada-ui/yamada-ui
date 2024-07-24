@@ -1,24 +1,6 @@
 pre-commit:
   piped: true
   commands:
-    format-docs:
-      priority: 1
-      tags: docs
-      root: "docs/"
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      run: |
-        pnpm prettier {staged_files} --write --config .prettierrc.json
-      stage_fixed: true
-
-    lint-docs:
-      priority: 2
-      tags: docs
-      root: "docs/"
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --fix --max-warnings=0 --config .eslintrc.json
-      stage_fixed: true
-
     format-src:
       priority: 3
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"

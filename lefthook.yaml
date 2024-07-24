@@ -8,12 +8,12 @@ pre-commit:
         pnpm prettier {staged_files} --write
       stage_fixed: true
 
-    lint-src:
-      priority: 4
+    lint:
+      priority: 2
       tags: src
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
-        pnpm eslint {staged_files} --fix --max-warnings=0 --config .eslintrc.json
+        pnpm eslint {staged_files} --fix --max-warnings=0
       stage_fixed: true
 
 commit-msg:

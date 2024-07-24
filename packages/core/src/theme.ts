@@ -210,7 +210,14 @@ export const omitThemeProps = <
 >(
   props: T,
   keys: K[] = [],
-) => omitObject(props, ["size", "variant", "colorScheme", ...keys])
+) =>
+  omitObject(props, [
+    "size",
+    "variant",
+    "colorScheme",
+    "__overrideTheme",
+    ...keys,
+  ])
 
 type MergeStyleOptions = Omit<Partial<FilterStyleOptions>, "isMulti">
 

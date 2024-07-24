@@ -4,7 +4,7 @@ import { program } from "commander"
 import type { Dayjs } from "dayjs"
 import dayjs from "dayjs"
 import { config } from "dotenv"
-import { recursiveOctokit } from "./utils"
+import { getConstant, recursiveOctokit } from "./utils"
 
 type Issue = Awaited<
   ReturnType<typeof octokit.search.issuesAndPullRequests>
@@ -41,7 +41,6 @@ const COMMON_PARAMS = {
   owner: "yamada-ui",
   repo: "yamada-ui",
 }
-const OMIT_GITHUB_IDS = ["hajimemat"]
 
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
 const REPORT_FORMAT = "YYYY/MM/DD"
@@ -233,6 +232,7 @@ const getCommits =
 
 const getInsights =
   (options: Options) => async (collaborators: Collaborator[]) => {
+    const constant = await getConstant()
     const allComments = await getComments(options)()
     const allReviews = await getReviews(options)()
     const allCommits = await getCommits(options)()
@@ -240,7 +240,7 @@ const getInsights =
     const insights: Insight[] = []
 
     const omittedCollaborators = collaborators.filter(
-      ({ login }) => !OMIT_GITHUB_IDS.includes(login),
+      ({ login }) => !constant.insights.excludeUsers.includes(login),
     )
 
     for await (const { login, html_url } of omittedCollaborators) {

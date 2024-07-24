@@ -2,7 +2,7 @@ pre-commit:
   piped: true
   commands:
     format:
-      priority: 3
+      priority: 1
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
       run: |
         pnpm prettier {staged_files} --write

@@ -1,13 +1,11 @@
 pre-commit:
   piped: true
   commands:
-    format-src:
+    format:
       priority: 3
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
-      exclude:
-        - docs
       run: |
-        pnpm prettier {staged_files} --write --config .prettierrc.json
+        pnpm prettier {staged_files} --write
       stage_fixed: true
 
     lint-src:

@@ -17,8 +17,10 @@ import type {
   CSSUIObject,
   ColorModeArray,
   ResponsiveObject,
+  ThemeProps,
   UIStyle,
   UIStyleProps,
+  UIValue,
 } from "../css"
 import { useTheme, useColorMode } from "../providers"
 import { pseudos } from "../pseudos"
@@ -29,6 +31,9 @@ import type {
   ComponentStyle,
   ComponentVariants,
 } from "../theme.types"
+import type { UIBaseProps } from "./component.types"
+
+type ComponentProps = ThemeProps & UIBaseProps
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject
@@ -168,12 +173,14 @@ const getResponsiveStyles =
 
 const getModifierStyles =
   <IsMulti extends boolean = false>(
-    value: ResponsiveObject<string> | ColorModeArray<string> | string,
+    value: UIValue<string> | undefined,
     modifierStyles: ModifierStyles,
     props: UIStyleProps,
   ) =>
   ({ isMulti = false }: GetStylesOptions): Styles<IsMulti> => {
     let styles: Styles<IsMulti> = {}
+
+    if (!value) return styles
 
     if (isArray(value)) {
       const [lightStyles, darkStyles] = getColorModeStyles<IsMulti>(
@@ -223,11 +230,18 @@ const getStyles =
     return styles as Styles<IsMulti>
   }
 
-const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
+const setStyles = <
+  Props extends ComponentProps = ComponentProps,
+  IsMulti extends boolean = false,
+>(
   name: string,
   props: Props,
   { isMulti, isProcessSkip, styles }: SetStylesOptions<IsMulti> = {},
 ): [styles: Styles<IsMulti>, props: Props] => {
+  const { __overrideTheme, __css = {}, ...computedProps } = props
+
+  if (__overrideTheme) return [__css as Styles<IsMulti>, computedProps as Props]
+
   const { theme, themeScheme } = useTheme()
   const { colorMode } = useColorMode()
 
@@ -290,6 +304,7 @@ export const useComponentStyle = <Props extends Dict = Dict>(
   props: Props,
   options?: UseComponentStyleOptions,
 ) => setStyles<Props>(name, props, options)
+
 export const useMultiComponentStyle = <Props extends Dict = Dict>(
   name: string,
   props: Props,

@@ -28,6 +28,7 @@ import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
 import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
+import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
@@ -117,6 +118,7 @@ export default {
   Editable,
   Fade,
   Fieldset,
+  FileButton,
   FileInput,
   FormControl,
   Heading,

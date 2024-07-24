@@ -758,6 +758,16 @@ export interface GeneratedTheme extends UITheme {
       sizes: "xs" | "sm" | "md" | "lg" | "full" | (string & {})
       variants: "solid" | "dashed" | "unstyled" | (string & {})
     }
+    FileButton: {
+      sizes: "xs" | "sm" | "md" | "lg" | (string & {})
+      variants:
+        | "solid"
+        | "outline"
+        | "link"
+        | "ghost"
+        | "unstyled"
+        | (string & {})
+    }
     FileInput: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})
       variants: "outline" | "filled" | "flushed" | "unstyled" | (string & {})

@@ -108,8 +108,8 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     children = (
       <Component
         className={cx("ui-file-button", className)}
-        __css={styles}
-        __overrideTheme={!As}
+        __isProcessSkip={!As}
+        __styles={styles}
         {...rest}
         onClick={handlerAll(onClickProp, onClick)}
       >

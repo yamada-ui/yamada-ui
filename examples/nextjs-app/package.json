@@ -6,7 +6,7 @@
     "dev": "next -p 4445",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",

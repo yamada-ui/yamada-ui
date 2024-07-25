@@ -6,7 +6,8 @@
     "dev": "next -p 4445",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:inspect": "pnpm dlx @eslint/config-inspector"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",

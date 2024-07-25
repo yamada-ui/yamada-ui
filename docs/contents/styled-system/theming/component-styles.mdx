@@ -2,6 +2,7 @@
 title: Component Styles
 description: How to create and customize styles for components.
 order: 4
+label: Updated
 ---
 
 Maintaining flexible styles for components in a growing project can be a challenging task.
@@ -74,7 +75,7 @@ Before styling, please check [Theme Operations](/styled-system/theming/customize
 This time, we will style a new `Button`.
 
 ```ts title=./theme/components/button.ts
-export const Button: ComponentStyle = {
+export const Button: ComponentStyle<"Button", ButtonProps> = {
   // Styles for the base style.
   baseStyle: {
     lineHeight: 1.2,
@@ -127,7 +128,7 @@ export const Button: ComponentStyle = {
 Next, we will support dynamic `Color Schemes`. To receive `Color Schemes` from the component, use a function.
 
 ```ts title=./theme/components/button.ts highlight={12,13,14,15,16,17,18,19,48}
-export const Button: ComponentStyle = {
+export const Button: ComponentStyle<"Button", ButtonProps> = {
   // Styles for the base style.
   baseStyle: {
     lineHeight: 1.2,
@@ -204,6 +205,42 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["components"] })
 ```
 
+## Setting Common `props` for the Entire Application
+
+If you want to set common `props` for components across the entire application, use `defaultProps`. `defaultProps` accepts all the `props` provided by the component.
+
+```ts highlight={3}
+export const Button: ComponentStyle<"Button", ButtonProps> = {
+  defaultProps: {
+    loadingText: "Loading…",
+  },
+}
+```
+
+With the above settings, the `loadingText` of the `Button` will be `"Loading…"` throughout the application.
+
+:::note
+Props set in the component will override `defaultProps`.
+:::
+
+If you want to calculate based on the props set in the component and override the component's props, use `overrideProps`.
+
+```tsx live=false highlight={4,5,6,7,8,9}
+export const FormControl: ComponentStyle<"FormControl", FormControlProps> = {
+  overrideProps: ({ label, ...rest }) => ({
+    ...rest,
+    label: (
+      <>
+        <PencilIcon me="1" />
+        {label}
+      </>
+    ),
+  }),
+}
+```
+
+With the above settings, the `label` of the `FormControl` is newly set based on the provided `label`.
+
 ### Styling Multi part components
 
 :::note status=warning
@@ -217,7 +254,7 @@ This time, we will style a new `List`.
 Multi-part components are styled for each part tied to a `key`.
 
 ```ts title=./theme/components/list.ts
-export const List: ComponentMultiStyle = {
+export const List: ComponentMultiStyle<"List", ListProps> = {
   // Styles for the base style.
   baseStyle: {
     container: {},
@@ -270,7 +307,7 @@ export const List: ComponentMultiStyle = {
 Next, we will support dynamic `Color Schemes`. To receive `Color Schemes` from the component, use a function.
 
 ```ts title=./theme/components/list.ts highlight={18,19,20,21,22,23,47}
-export const List: ComponentMultiStyle = {
+export const List: ComponentMultiStyle<"List", ListProps> = {
   // Styles for the base style.
   baseStyle: {
     container: {},
@@ -357,7 +394,7 @@ export const Banner: FC<BannerProps> = (props) => {
 Next, set the `Banner` style in the theme.
 
 ```ts title=./theme/components/banner.ts
-export const Banner: ComponentStyle = {
+export const Banner: ComponentStyle<"Banner", BannerProps> = {
   baseStyle: {
     // Styles for the base style.
   },

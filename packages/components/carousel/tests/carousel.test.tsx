@@ -1,11 +1,27 @@
 import { Button } from "@yamada-ui/button"
-import { a11y, act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import type { FC } from "react"
 import { Carousel, CarouselSlide } from "../src"
 
 const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
 
 describe("<Carousel />", () => {
+  const defaultIntersectionObserver = global.IntersectionObserver
+  const IntersectionObserverMock = vi.fn(() => ({
+    disconnect: vi.fn(),
+    observe: vi.fn(),
+    takeRecords: vi.fn(),
+    unobserve: vi.fn(),
+  }))
+
+  beforeAll(() => {
+    vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
+  })
+
+  afterAll(() => {
+    vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
+  })
+
   test("should pass a11y test", async () => {
     await a11y(
       <Carousel>
@@ -138,24 +154,6 @@ describe("<Carousel />", () => {
     expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
       "data-selected",
     )
-  })
-
-  test.skip("should do not stop autoplay on mouse enter", async () => {
-    render(
-      <Carousel delay={500} autoplay stopMouseEnterAutoplay={false}>
-        {slidesContentArr.map((value) => (
-          <CarouselSlide key={value}>{value}</CarouselSlide>
-        ))}
-      </Carousel>,
-    )
-
-    fireEvent.mouseEnter(screen.getByText("Slide 1"))
-
-    await waitFor(() => {
-      expect(screen.getByText("Slide 2").parentNode).toHaveAttribute(
-        "data-selected",
-      )
-    })
   })
 
   test("should stop autoplay on mouse enter", () => {

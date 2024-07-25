@@ -1,6 +1,6 @@
 import type { ComponentStyle, MarkProps } from "@yamada-ui/react"
 
-export const Mark: ComponentStyle<MarkProps> = {
+export const Mark: ComponentStyle<"Mark", MarkProps> = {
   variants: {
     "text-accent": ({ colorScheme: c = "gray" }) => ({
       color: [`${c}.500`, `${c}.400`],

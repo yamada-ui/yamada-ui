@@ -1,6 +1,6 @@
 import type { ComponentStyle, ButtonProps } from "@yamada-ui/react"
 
-export const Button: ComponentStyle<ButtonProps> = {
+export const Button: ComponentStyle<"Button", ButtonProps> = {
   sizes: {
     xl: {
       h: 16,

@@ -9,16 +9,24 @@ import type {
 import { layoutStyleProperties } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
+  assignRef,
   createContext,
   dataAttr,
   handlerAll,
   splitObject,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { EmblaCarouselType } from "embla-carousel-react"
+import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel"
 import useEmblaCarousel from "embla-carousel-react"
-import type { MouseEvent } from "react"
+import type { MouseEvent, RefObject } from "react"
 import { Children, useCallback, useEffect, useRef, useState } from "react"
+
+export type AlignmentOptionType = EmblaOptionsType["align"]
+export type ScrollContainOptionType = EmblaOptionsType["containScroll"]
+export type SlidesInViewOptionsType = EmblaOptionsType["inViewThreshold"]
+export type DragHandlerOptionType = EmblaOptionsType["watchDrag"]
+export type ResizeHandlerOptionType = EmblaOptionsType["watchResize"]
+export type SlidesHandlerOptionType = EmblaOptionsType["watchSlides"]
 
 type CarouselContext = {
   carousel: EmblaCarouselType | undefined
@@ -67,14 +75,14 @@ export type UseCarouselProps = Omit<
    *
    * @default 'center'
    */
-  align?: "start" | "center" | "end" | number
+  align?: AlignmentOptionType
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
    *
-   * @default ''
+   * @default false
    */
-  containScroll?: "trimSnaps" | "keepSnaps" | ""
+  containScroll?: ScrollContainOptionType
   /**
    * The number of slides that should be scrolled with next or previous buttons.
    *
@@ -98,7 +106,7 @@ export type UseCarouselProps = Omit<
    *
    * @default 0
    */
-  inViewThreshold?: number
+  inViewThreshold?: SlidesInViewOptionsType
   /**
    * If `true`, infinite looping.
    * Automatically falls back to false if slide content isn't enough to loop.
@@ -114,12 +122,13 @@ export type UseCarouselProps = Omit<
    */
   skipSnaps?: boolean
   /**
-   * Adjusts scroll speed when triggered by any of the methods.
-   * Higher numbers enables faster scrolling.
+   * Set scroll duration when triggered by any of the API methods.
+   * Higher numbers enables slower scrolling.
+   * Drag interactions are not affected because duration is then determined by the drag force.
    *
-   * @default 10
+   * @default 25
    */
-  speed?: number
+  duration?: number
   /**
    * The number for the autoplay interval of the carousel.
    *
@@ -160,6 +169,31 @@ export type UseCarouselProps = Omit<
    * A callback that return the current scroll amount when the carousel is scrolled.
    */
   onScrollProgress?: (progress: number) => void
+  /**
+   * Enables for scrolling the carousel with mouse and touch interactions.
+   * Set this to `false` to disable drag events or pass a custom callback to add your own drag logic.
+   *
+   * @default true
+   */
+  watchDrag?: DragHandlerOptionType
+  /**
+   * Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.
+   * Set this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.
+   *
+   * @default true
+   */
+  watchResize?: ResizeHandlerOptionType
+  /**
+   * Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.
+   * Set this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.
+   *
+   * @default true
+   */
+  watchSlides?: SlidesHandlerOptionType
+  /**
+   * Ref of the resizable item callback.
+   */
+  controlRef?: RefObject<EmblaCarouselType | undefined>
 }
 
 export const useCarousel = ({
@@ -171,7 +205,7 @@ export const useCarousel = ({
   autoplay = false,
   stopMouseEnterAutoplay = true,
   loop = true,
-  speed = 10,
+  duration = 25,
   delay = 4000,
   gap = "fallback(4, 1rem)",
   slidesToScroll = 1,
@@ -179,10 +213,14 @@ export const useCarousel = ({
   dragFree = false,
   inViewThreshold = 0,
   skipSnaps = false,
-  containScroll = "",
+  containScroll = false,
   slideSize = "100%",
   includeGapInSize = true,
   onScrollProgress,
+  watchDrag = draggable,
+  watchResize,
+  watchSlides,
+  controlRef,
   children,
   ...rest
 }: UseCarouselProps) => {
@@ -196,19 +234,26 @@ export const useCarousel = ({
 
   const isVertical = orientation === "vertical"
 
-  const [carouselRef, carousel] = useEmblaCarousel({
-    axis: isVertical ? "y" : "x",
-    startIndex: defaultIndex,
-    loop,
-    align,
-    slidesToScroll,
-    draggable,
-    dragFree,
-    speed,
-    inViewThreshold,
-    skipSnaps,
-    containScroll,
-  })
+  const [carouselRef, carousel] = useEmblaCarousel(
+    {
+      axis: isVertical ? "y" : "x",
+      startIndex: defaultIndex,
+      loop,
+      align,
+      slidesToScroll,
+      duration,
+      dragFree,
+      inViewThreshold,
+      skipSnaps,
+      containScroll,
+      watchDrag,
+      watchResize,
+      watchSlides,
+    },
+    [],
+  )
+
+  assignRef(controlRef, carousel)
 
   const [indexes, setIndexes] = useState<number[]>([])
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false)
@@ -274,7 +319,7 @@ export const useCarousel = ({
     align,
     orientation,
     loop,
-    speed,
+    duration,
     gap,
     slidesToScroll,
     draggable,

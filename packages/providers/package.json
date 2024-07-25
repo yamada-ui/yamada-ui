@@ -46,15 +46,15 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/theme": "workspace:*",
-    "@yamada-ui/motion": "workspace:*",
     "@yamada-ui/loading": "workspace:*",
-    "@yamada-ui/notice": "workspace:*"
+    "@yamada-ui/motion": "workspace:*",
+    "@yamada-ui/notice": "workspace:*",
+    "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "@emotion/react": "^11.0.0",

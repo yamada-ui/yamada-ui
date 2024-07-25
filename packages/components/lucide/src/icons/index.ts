@@ -331,11 +331,6 @@ export type {
 } from "./archive-x"
 export { Archive, Archive as ArchiveIcon } from "./archive"
 export type { ArchiveProps, ArchiveProps as ArchiveIconProps } from "./archive"
-export { AreaChart, AreaChart as AreaChartIcon } from "./area-chart"
-export type {
-  AreaChartProps,
-  AreaChartProps as AreaChartIconProps,
-} from "./area-chart"
 export { Armchair, Armchair as ArmchairIcon } from "./armchair"
 export type {
   ArmchairProps,
@@ -780,47 +775,6 @@ export type {
   BanknoteProps,
   BanknoteProps as BanknoteIconProps,
 } from "./banknote"
-export { BarChart2, BarChart2 as BarChart2Icon } from "./bar-chart2"
-export type {
-  BarChart2Props,
-  BarChart2Props as BarChart2IconProps,
-} from "./bar-chart2"
-export { BarChart3, BarChart3 as BarChart3Icon } from "./bar-chart3"
-export type {
-  BarChart3Props,
-  BarChart3Props as BarChart3IconProps,
-} from "./bar-chart3"
-export { BarChart4, BarChart4 as BarChart4Icon } from "./bar-chart4"
-export type {
-  BarChart4Props,
-  BarChart4Props as BarChart4IconProps,
-} from "./bar-chart4"
-export { BarChartBig, BarChartBig as BarChartBigIcon } from "./bar-chart-big"
-export type {
-  BarChartBigProps,
-  BarChartBigProps as BarChartBigIconProps,
-} from "./bar-chart-big"
-export {
-  BarChartHorizontalBig,
-  BarChartHorizontalBig as BarChartHorizontalBigIcon,
-} from "./bar-chart-horizontal-big"
-export type {
-  BarChartHorizontalBigProps,
-  BarChartHorizontalBigProps as BarChartHorizontalBigIconProps,
-} from "./bar-chart-horizontal-big"
-export {
-  BarChartHorizontal,
-  BarChartHorizontal as BarChartHorizontalIcon,
-} from "./bar-chart-horizontal"
-export type {
-  BarChartHorizontalProps,
-  BarChartHorizontalProps as BarChartHorizontalIconProps,
-} from "./bar-chart-horizontal"
-export { BarChart, BarChart as BarChartIcon } from "./bar-chart"
-export type {
-  BarChartProps,
-  BarChartProps as BarChartIconProps,
-} from "./bar-chart"
 export { Barcode, Barcode as BarcodeIcon } from "./barcode"
 export type { BarcodeProps, BarcodeProps as BarcodeIconProps } from "./barcode"
 export { Baseline, Baseline as BaselineIcon } from "./baseline"
@@ -1269,6 +1223,22 @@ export type {
   CalculatorProps as CalculatorIconProps,
 } from "./calculator"
 export {
+  CalendarArrowDown,
+  CalendarArrowDown as CalendarArrowDownIcon,
+} from "./calendar-arrow-down"
+export type {
+  CalendarArrowDownProps,
+  CalendarArrowDownProps as CalendarArrowDownIconProps,
+} from "./calendar-arrow-down"
+export {
+  CalendarArrowUp,
+  CalendarArrowUp as CalendarArrowUpIcon,
+} from "./calendar-arrow-up"
+export type {
+  CalendarArrowUpProps,
+  CalendarArrowUpProps as CalendarArrowUpIconProps,
+} from "./calendar-arrow-up"
+export {
   CalendarCheck2,
   CalendarCheck2 as CalendarCheck2Icon,
 } from "./calendar-check2"
@@ -1387,14 +1357,6 @@ export type {
 } from "./camera-off"
 export { Camera, Camera as CameraIcon } from "./camera"
 export type { CameraProps, CameraProps as CameraIconProps } from "./camera"
-export {
-  CandlestickChart,
-  CandlestickChart as CandlestickChartIcon,
-} from "./candlestick-chart"
-export type {
-  CandlestickChartProps,
-  CandlestickChartProps as CandlestickChartIconProps,
-} from "./candlestick-chart"
 export { CandyCane, CandyCane as CandyCaneIcon } from "./candy-cane"
 export type {
   CandyCaneProps,
@@ -1472,6 +1434,155 @@ export { Cat, Cat as CatIcon } from "./cat"
 export type { CatProps, CatProps as CatIconProps } from "./cat"
 export { Cctv, Cctv as CctvIcon } from "./cctv"
 export type { CctvProps, CctvProps as CctvIconProps } from "./cctv"
+export { ChartArea, ChartArea as ChartAreaIcon } from "./chart-area"
+export type {
+  ChartAreaProps,
+  ChartAreaProps as ChartAreaIconProps,
+} from "./chart-area"
+export { ChartBarBig, ChartBarBig as ChartBarBigIcon } from "./chart-bar-big"
+export type {
+  ChartBarBigProps,
+  ChartBarBigProps as ChartBarBigIconProps,
+} from "./chart-bar-big"
+export {
+  ChartBarDecreasing,
+  ChartBarDecreasing as ChartBarDecreasingIcon,
+} from "./chart-bar-decreasing"
+export type {
+  ChartBarDecreasingProps,
+  ChartBarDecreasingProps as ChartBarDecreasingIconProps,
+} from "./chart-bar-decreasing"
+export {
+  ChartBarIncreasing,
+  ChartBarIncreasing as ChartBarIncreasingIcon,
+} from "./chart-bar-increasing"
+export type {
+  ChartBarIncreasingProps,
+  ChartBarIncreasingProps as ChartBarIncreasingIconProps,
+} from "./chart-bar-increasing"
+export {
+  ChartBarStacked,
+  ChartBarStacked as ChartBarStackedIcon,
+} from "./chart-bar-stacked"
+export type {
+  ChartBarStackedProps,
+  ChartBarStackedProps as ChartBarStackedIconProps,
+} from "./chart-bar-stacked"
+export { ChartBar, ChartBar as ChartBarIcon } from "./chart-bar"
+export type {
+  ChartBarProps,
+  ChartBarProps as ChartBarIconProps,
+} from "./chart-bar"
+export {
+  ChartCandlestick,
+  ChartCandlestick as ChartCandlestickIcon,
+} from "./chart-candlestick"
+export type {
+  ChartCandlestickProps,
+  ChartCandlestickProps as ChartCandlestickIconProps,
+} from "./chart-candlestick"
+export {
+  ChartColumnBig,
+  ChartColumnBig as ChartColumnBigIcon,
+} from "./chart-column-big"
+export type {
+  ChartColumnBigProps,
+  ChartColumnBigProps as ChartColumnBigIconProps,
+} from "./chart-column-big"
+export {
+  ChartColumnDecreasing,
+  ChartColumnDecreasing as ChartColumnDecreasingIcon,
+} from "./chart-column-decreasing"
+export type {
+  ChartColumnDecreasingProps,
+  ChartColumnDecreasingProps as ChartColumnDecreasingIconProps,
+} from "./chart-column-decreasing"
+export {
+  ChartColumnIncreasing,
+  ChartColumnIncreasing as ChartColumnIncreasingIcon,
+} from "./chart-column-increasing"
+export type {
+  ChartColumnIncreasingProps,
+  ChartColumnIncreasingProps as ChartColumnIncreasingIconProps,
+} from "./chart-column-increasing"
+export {
+  ChartColumnStacked,
+  ChartColumnStacked as ChartColumnStackedIcon,
+} from "./chart-column-stacked"
+export type {
+  ChartColumnStackedProps,
+  ChartColumnStackedProps as ChartColumnStackedIconProps,
+} from "./chart-column-stacked"
+export { ChartColumn, ChartColumn as ChartColumnIcon } from "./chart-column"
+export type {
+  ChartColumnProps,
+  ChartColumnProps as ChartColumnIconProps,
+} from "./chart-column"
+export { ChartLine, ChartLine as ChartLineIcon } from "./chart-line"
+export type {
+  ChartLineProps,
+  ChartLineProps as ChartLineIconProps,
+} from "./chart-line"
+export { ChartNetwork, ChartNetwork as ChartNetworkIcon } from "./chart-network"
+export type {
+  ChartNetworkProps,
+  ChartNetworkProps as ChartNetworkIconProps,
+} from "./chart-network"
+export {
+  ChartNoAxesColumnDecreasing,
+  ChartNoAxesColumnDecreasing as ChartNoAxesColumnDecreasingIcon,
+} from "./chart-no-axes-column-decreasing"
+export type {
+  ChartNoAxesColumnDecreasingProps,
+  ChartNoAxesColumnDecreasingProps as ChartNoAxesColumnDecreasingIconProps,
+} from "./chart-no-axes-column-decreasing"
+export {
+  ChartNoAxesColumnIncreasing,
+  ChartNoAxesColumnIncreasing as ChartNoAxesColumnIncreasingIcon,
+} from "./chart-no-axes-column-increasing"
+export type {
+  ChartNoAxesColumnIncreasingProps,
+  ChartNoAxesColumnIncreasingProps as ChartNoAxesColumnIncreasingIconProps,
+} from "./chart-no-axes-column-increasing"
+export {
+  ChartNoAxesColumn,
+  ChartNoAxesColumn as ChartNoAxesColumnIcon,
+} from "./chart-no-axes-column"
+export type {
+  ChartNoAxesColumnProps,
+  ChartNoAxesColumnProps as ChartNoAxesColumnIconProps,
+} from "./chart-no-axes-column"
+export {
+  ChartNoAxesCombined,
+  ChartNoAxesCombined as ChartNoAxesCombinedIcon,
+} from "./chart-no-axes-combined"
+export type {
+  ChartNoAxesCombinedProps,
+  ChartNoAxesCombinedProps as ChartNoAxesCombinedIconProps,
+} from "./chart-no-axes-combined"
+export {
+  ChartNoAxesGantt,
+  ChartNoAxesGantt as ChartNoAxesGanttIcon,
+} from "./chart-no-axes-gantt"
+export type {
+  ChartNoAxesGanttProps,
+  ChartNoAxesGanttProps as ChartNoAxesGanttIconProps,
+} from "./chart-no-axes-gantt"
+export { ChartPie, ChartPie as ChartPieIcon } from "./chart-pie"
+export type {
+  ChartPieProps,
+  ChartPieProps as ChartPieIconProps,
+} from "./chart-pie"
+export { ChartScatter, ChartScatter as ChartScatterIcon } from "./chart-scatter"
+export type {
+  ChartScatterProps,
+  ChartScatterProps as ChartScatterIconProps,
+} from "./chart-scatter"
+export { ChartSpline, ChartSpline as ChartSplineIcon } from "./chart-spline"
+export type {
+  ChartSplineProps,
+  ChartSplineProps as ChartSplineIconProps,
+} from "./chart-spline"
 export { CheckCheck, CheckCheck as CheckCheckIcon } from "./check-check"
 export type {
   CheckCheckProps,
@@ -1959,6 +2070,22 @@ export { Clock8, Clock8 as Clock8Icon } from "./clock8"
 export type { Clock8Props, Clock8Props as Clock8IconProps } from "./clock8"
 export { Clock9, Clock9 as Clock9Icon } from "./clock9"
 export type { Clock9Props, Clock9Props as Clock9IconProps } from "./clock9"
+export {
+  ClockArrowDown,
+  ClockArrowDown as ClockArrowDownIcon,
+} from "./clock-arrow-down"
+export type {
+  ClockArrowDownProps,
+  ClockArrowDownProps as ClockArrowDownIconProps,
+} from "./clock-arrow-down"
+export {
+  ClockArrowUp,
+  ClockArrowUp as ClockArrowUpIcon,
+} from "./clock-arrow-up"
+export type {
+  ClockArrowUpProps,
+  ClockArrowUpProps as ClockArrowUpIconProps,
+} from "./clock-arrow-up"
 export { Clock, Clock as ClockIcon } from "./clock"
 export type { ClockProps, ClockProps as ClockIconProps } from "./clock"
 export { CloudCog, CloudCog as CloudCogIcon } from "./cloud-cog"
@@ -2289,6 +2416,8 @@ export type {
   CylinderProps,
   CylinderProps as CylinderIconProps,
 } from "./cylinder"
+export { Dam, Dam as DamIcon } from "./dam"
+export type { DamProps, DamProps as DamIconProps } from "./dam"
 export {
   DatabaseBackup,
   DatabaseBackup as DatabaseBackupIcon,
@@ -2545,24 +2674,40 @@ export type {
   FileBadgeProps,
   FileBadgeProps as FileBadgeIconProps,
 } from "./file-badge"
-export {
-  FileBarChart2,
-  FileBarChart2 as FileBarChart2Icon,
-} from "./file-bar-chart2"
-export type {
-  FileBarChart2Props,
-  FileBarChart2Props as FileBarChart2IconProps,
-} from "./file-bar-chart2"
-export {
-  FileBarChart,
-  FileBarChart as FileBarChartIcon,
-} from "./file-bar-chart"
-export type {
-  FileBarChartProps,
-  FileBarChartProps as FileBarChartIconProps,
-} from "./file-bar-chart"
 export { FileBox, FileBox as FileBoxIcon } from "./file-box"
 export type { FileBoxProps, FileBoxProps as FileBoxIconProps } from "./file-box"
+export {
+  FileChartColumnIncreasing,
+  FileChartColumnIncreasing as FileChartColumnIncreasingIcon,
+} from "./file-chart-column-increasing"
+export type {
+  FileChartColumnIncreasingProps,
+  FileChartColumnIncreasingProps as FileChartColumnIncreasingIconProps,
+} from "./file-chart-column-increasing"
+export {
+  FileChartColumn,
+  FileChartColumn as FileChartColumnIcon,
+} from "./file-chart-column"
+export type {
+  FileChartColumnProps,
+  FileChartColumnProps as FileChartColumnIconProps,
+} from "./file-chart-column"
+export {
+  FileChartLine,
+  FileChartLine as FileChartLineIcon,
+} from "./file-chart-line"
+export type {
+  FileChartLineProps,
+  FileChartLineProps as FileChartLineIconProps,
+} from "./file-chart-line"
+export {
+  FileChartPie,
+  FileChartPie as FileChartPieIcon,
+} from "./file-chart-pie"
+export type {
+  FileChartPieProps,
+  FileChartPieProps as FileChartPieIconProps,
+} from "./file-chart-pie"
 export { FileCheck2, FileCheck2 as FileCheck2Icon } from "./file-check2"
 export type {
   FileCheck2Props,
@@ -2637,14 +2782,6 @@ export type {
 } from "./file-key2"
 export { FileKey, FileKey as FileKeyIcon } from "./file-key"
 export type { FileKeyProps, FileKeyProps as FileKeyIconProps } from "./file-key"
-export {
-  FileLineChart,
-  FileLineChart as FileLineChartIcon,
-} from "./file-line-chart"
-export type {
-  FileLineChartProps,
-  FileLineChartProps as FileLineChartIconProps,
-} from "./file-line-chart"
 export { FileLock2, FileLock2 as FileLock2Icon } from "./file-lock2"
 export type {
   FileLock2Props,
@@ -2682,14 +2819,6 @@ export type {
 } from "./file-pen-line"
 export { FilePen, FilePen as FilePenIcon } from "./file-pen"
 export type { FilePenProps, FilePenProps as FilePenIconProps } from "./file-pen"
-export {
-  FilePieChart,
-  FilePieChart as FilePieChartIcon,
-} from "./file-pie-chart"
-export type {
-  FilePieChartProps,
-  FilePieChartProps as FilePieChartIconProps,
-} from "./file-pie-chart"
 export { FilePlus2, FilePlus2 as FilePlus2Icon } from "./file-plus2"
 export type {
   FilePlus2Props,
@@ -2958,6 +3087,11 @@ export type {
   FolderClosedProps,
   FolderClosedProps as FolderClosedIconProps,
 } from "./folder-closed"
+export { FolderCode, FolderCode as FolderCodeIcon } from "./folder-code"
+export type {
+  FolderCodeProps,
+  FolderCodeProps as FolderCodeIconProps,
+} from "./folder-code"
 export { FolderCog, FolderCog as FolderCogIcon } from "./folder-cog"
 export type {
   FolderCogProps,
@@ -3160,11 +3294,6 @@ export type {
 } from "./gamepad2"
 export { Gamepad, Gamepad as GamepadIcon } from "./gamepad"
 export type { GamepadProps, GamepadProps as GamepadIconProps } from "./gamepad"
-export { GanttChart, GanttChart as GanttChartIcon } from "./gantt-chart"
-export type {
-  GanttChartProps,
-  GanttChartProps as GanttChartIconProps,
-} from "./gantt-chart"
 export { Gauge, Gauge as GaugeIcon } from "./gauge"
 export type { GaugeProps, GaugeProps as GaugeIconProps } from "./gauge"
 export { Gavel, Gavel as GavelIcon } from "./gavel"
@@ -3780,6 +3909,11 @@ export type {
 } from "./leafy-green"
 export { Lectern, Lectern as LecternIcon } from "./lectern"
 export type { LecternProps, LecternProps as LecternIconProps } from "./lectern"
+export { LetterText, LetterText as LetterTextIcon } from "./letter-text"
+export type {
+  LetterTextProps,
+  LetterTextProps as LetterTextIconProps,
+} from "./letter-text"
 export { LibraryBig, LibraryBig as LibraryBigIcon } from "./library-big"
 export type {
   LibraryBigProps,
@@ -3807,11 +3941,6 @@ export type {
   LightbulbProps,
   LightbulbProps as LightbulbIconProps,
 } from "./lightbulb"
-export { LineChart, LineChart as LineChartIcon } from "./line-chart"
-export type {
-  LineChartProps,
-  LineChartProps as LineChartIconProps,
-} from "./line-chart"
 export { Link2Off, Link2Off as Link2OffIcon } from "./link2-off"
 export type {
   Link2OffProps,
@@ -3826,6 +3955,11 @@ export type {
   LinkedinProps,
   LinkedinProps as LinkedinIconProps,
 } from "./linkedin"
+export { ListCheck, ListCheck as ListCheckIcon } from "./list-check"
+export type {
+  ListCheckProps,
+  ListCheckProps as ListCheckIconProps,
+} from "./list-check"
 export { ListChecks, ListChecks as ListChecksIcon } from "./list-checks"
 export type {
   ListChecksProps,
@@ -4307,6 +4441,11 @@ export type {
   MonitorCheckProps,
   MonitorCheckProps as MonitorCheckIconProps,
 } from "./monitor-check"
+export { MonitorCog, MonitorCog as MonitorCogIcon } from "./monitor-cog"
+export type {
+  MonitorCogProps,
+  MonitorCogProps as MonitorCogIconProps,
+} from "./monitor-cog"
 export { MonitorDot, MonitorDot as MonitorDotIcon } from "./monitor-dot"
 export type {
   MonitorDotProps,
@@ -4868,6 +5007,14 @@ export type {
   PersonStandingProps,
   PersonStandingProps as PersonStandingIconProps,
 } from "./person-standing"
+export {
+  PhilippinePeso,
+  PhilippinePeso as PhilippinePesoIcon,
+} from "./philippine-peso"
+export type {
+  PhilippinePesoProps,
+  PhilippinePesoProps as PhilippinePesoIconProps,
+} from "./philippine-peso"
 export { PhoneCall, PhoneCall as PhoneCallIcon } from "./phone-call"
 export type {
   PhoneCallProps,
@@ -4931,11 +5078,6 @@ export type {
   PictureInPictureProps,
   PictureInPictureProps as PictureInPictureIconProps,
 } from "./picture-in-picture"
-export { PieChart, PieChart as PieChartIcon } from "./pie-chart"
-export type {
-  PieChartProps,
-  PieChartProps as PieChartIconProps,
-} from "./pie-chart"
 export { PiggyBank, PiggyBank as PiggyBankIcon } from "./piggy-bank"
 export type {
   PiggyBankProps,
@@ -4984,11 +5126,6 @@ export { Play, Play as PlayIcon } from "./play"
 export type { PlayProps, PlayProps as PlayIconProps } from "./play"
 export { Plug2, Plug2 as Plug2Icon } from "./plug2"
 export type { Plug2Props, Plug2Props as Plug2IconProps } from "./plug2"
-export { PlugZap2, PlugZap2 as PlugZap2Icon } from "./plug-zap2"
-export type {
-  PlugZap2Props,
-  PlugZap2Props as PlugZap2IconProps,
-} from "./plug-zap2"
 export { PlugZap, PlugZap as PlugZapIcon } from "./plug-zap"
 export type { PlugZapProps, PlugZapProps as PlugZapIconProps } from "./plug-zap"
 export { Plug, Plug as PlugIcon } from "./plug"
@@ -5380,6 +5517,11 @@ export type {
   ScanLineProps,
   ScanLineProps as ScanLineIconProps,
 } from "./scan-line"
+export { ScanQrCode, ScanQrCode as ScanQrCodeIcon } from "./scan-qr-code"
+export type {
+  ScanQrCodeProps,
+  ScanQrCodeProps as ScanQrCodeIconProps,
+} from "./scan-qr-code"
 export { ScanSearch, ScanSearch as ScanSearchIcon } from "./scan-search"
 export type {
   ScanSearchProps,
@@ -5392,11 +5534,6 @@ export type {
 } from "./scan-text"
 export { Scan, Scan as ScanIcon } from "./scan"
 export type { ScanProps, ScanProps as ScanIconProps } from "./scan"
-export { ScatterChart, ScatterChart as ScatterChartIcon } from "./scatter-chart"
-export type {
-  ScatterChartProps,
-  ScatterChartProps as ScatterChartIconProps,
-} from "./scatter-chart"
 export { School, School as SchoolIcon } from "./school"
 export type { SchoolProps, SchoolProps as SchoolIconProps } from "./school"
 export {
@@ -5887,6 +6024,14 @@ export type {
   SquareBottomDashedScissorsProps as SquareBottomDashedScissorsIconProps,
 } from "./square-bottom-dashed-scissors"
 export {
+  SquareChartGantt,
+  SquareChartGantt as SquareChartGanttIcon,
+} from "./square-chart-gantt"
+export type {
+  SquareChartGanttProps,
+  SquareChartGanttProps as SquareChartGanttIconProps,
+} from "./square-chart-gantt"
+export {
   SquareCheckBig,
   SquareCheckBig as SquareCheckBigIcon,
 } from "./square-check-big"
@@ -5991,14 +6136,6 @@ export type {
   SquareFunctionProps,
   SquareFunctionProps as SquareFunctionIconProps,
 } from "./square-function"
-export {
-  SquareGanttChart,
-  SquareGanttChart as SquareGanttChartIcon,
-} from "./square-gantt-chart"
-export type {
-  SquareGanttChartProps,
-  SquareGanttChartProps as SquareGanttChartIconProps,
-} from "./square-gantt-chart"
 export { SquareKanban, SquareKanban as SquareKanbanIcon } from "./square-kanban"
 export type {
   SquareKanbanProps,
@@ -6640,6 +6777,11 @@ export { Twitch, Twitch as TwitchIcon } from "./twitch"
 export type { TwitchProps, TwitchProps as TwitchIconProps } from "./twitch"
 export { Twitter, Twitter as TwitterIcon } from "./twitter"
 export type { TwitterProps, TwitterProps as TwitterIconProps } from "./twitter"
+export { TypeOutline, TypeOutline as TypeOutlineIcon } from "./type-outline"
+export type {
+  TypeOutlineProps,
+  TypeOutlineProps as TypeOutlineIconProps,
+} from "./type-outline"
 export { Type, Type as TypeIcon } from "./type"
 export type { TypeProps, TypeProps as TypeIconProps } from "./type"
 export { UmbrellaOff, UmbrellaOff as UmbrellaOffIcon } from "./umbrella-off"
@@ -6708,6 +6850,8 @@ export type {
   UserMinusProps,
   UserMinusProps as UserMinusIconProps,
 } from "./user-minus"
+export { UserPen, UserPen as UserPenIcon } from "./user-pen"
+export type { UserPenProps, UserPenProps as UserPenIconProps } from "./user-pen"
 export { UserPlus, UserPlus as UserPlusIcon } from "./user-plus"
 export type {
   UserPlusProps,
@@ -6737,6 +6881,14 @@ export type {
   UserRoundMinusProps,
   UserRoundMinusProps as UserRoundMinusIconProps,
 } from "./user-round-minus"
+export {
+  UserRoundPen,
+  UserRoundPen as UserRoundPenIcon,
+} from "./user-round-pen"
+export type {
+  UserRoundPenProps,
+  UserRoundPenProps as UserRoundPenIconProps,
+} from "./user-round-pen"
 export {
   UserRoundPlus,
   UserRoundPlus as UserRoundPlusIcon,
@@ -6919,8 +7071,20 @@ export type {
   WholeWordProps,
   WholeWordProps as WholeWordIconProps,
 } from "./whole-word"
+export { WifiHigh, WifiHigh as WifiHighIcon } from "./wifi-high"
+export type {
+  WifiHighProps,
+  WifiHighProps as WifiHighIconProps,
+} from "./wifi-high"
+export { WifiLow, WifiLow as WifiLowIcon } from "./wifi-low"
+export type { WifiLowProps, WifiLowProps as WifiLowIconProps } from "./wifi-low"
 export { WifiOff, WifiOff as WifiOffIcon } from "./wifi-off"
 export type { WifiOffProps, WifiOffProps as WifiOffIconProps } from "./wifi-off"
+export { WifiZero, WifiZero as WifiZeroIcon } from "./wifi-zero"
+export type {
+  WifiZeroProps,
+  WifiZeroProps as WifiZeroIconProps,
+} from "./wifi-zero"
 export { Wifi, Wifi as WifiIcon } from "./wifi"
 export type { WifiProps, WifiProps as WifiIconProps } from "./wifi"
 export { Wind, Wind as WindIcon } from "./wind"

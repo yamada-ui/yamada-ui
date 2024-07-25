@@ -17,18 +17,25 @@ import type {
   CSSUIObject,
   ColorModeArray,
   ResponsiveObject,
+  ThemeProps,
   UIStyle,
   UIStyleProps,
+  UIValue,
 } from "../css"
 import { useTheme, useColorMode } from "../providers"
 import { pseudos } from "../pseudos"
 import type {
+  ComponentDefaultProps,
   ComponentMultiSizes,
   ComponentMultiVariants,
+  ComponentOverrideProps,
   ComponentSizes,
   ComponentStyle,
   ComponentVariants,
 } from "../theme.types"
+import type { UIBaseProps } from "./component.types"
+
+type ComponentProps = ThemeProps & UIBaseProps
 
 type Styles<isMulti extends boolean = false> = isMulti extends false
   ? CSSUIObject
@@ -168,12 +175,14 @@ const getResponsiveStyles =
 
 const getModifierStyles =
   <IsMulti extends boolean = false>(
-    value: ResponsiveObject<string> | ColorModeArray<string> | string,
+    value: UIValue<string> | undefined,
     modifierStyles: ModifierStyles,
     props: UIStyleProps,
   ) =>
   ({ isMulti = false }: GetStylesOptions): Styles<IsMulti> => {
     let styles: Styles<IsMulti> = {}
+
+    if (!value) return styles
 
     if (isArray(value)) {
       const [lightStyles, darkStyles] = getColorModeStyles<IsMulti>(
@@ -223,16 +232,31 @@ const getStyles =
     return styles as Styles<IsMulti>
   }
 
-const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
+const mergeProps = <Props extends ComponentProps = ComponentProps>(
+  props: Props,
+  defaultProps: ComponentDefaultProps | undefined,
+  overrideProps: ComponentOverrideProps | undefined,
+): Props => {
+  if (defaultProps) props = merge(defaultProps, props)
+
+  if (overrideProps) props = runIfFunc(overrideProps, props) as Props
+
+  return props
+}
+
+const setStyles = <
+  Props extends ComponentProps = ComponentProps,
+  IsMulti extends boolean = false,
+>(
   name: string,
   props: Props,
-  { isMulti, isProcessSkip, styles }: SetStylesOptions<IsMulti> = {},
+  { isMulti, isProcessSkip, styles = {} }: SetStylesOptions<IsMulti> = {},
 ): [styles: Styles<IsMulti>, props: Props] => {
   const { theme, themeScheme } = useTheme()
   const { colorMode } = useColorMode()
 
   const propsRef = useRef<Props>({} as Props)
-  const stylesRef = useRef<Styles<IsMulti>>(styles ?? {})
+  const stylesRef = useRef<Styles<IsMulti>>(isProcessSkip ? styles : {})
 
   if (!isProcessSkip) {
     const componentStyle = get<ComponentStyle | undefined>(
@@ -240,32 +264,49 @@ const setStyles = <Props extends Dict = Dict, IsMulti extends boolean = false>(
       `components.${name}`,
     )
 
-    props = merge(componentStyle?.defaultProps ?? {}, filterUndefined(props))
+    props = filterUndefined(props)
 
     if (componentStyle) {
-      const args = omitObject(props, ["children"])
+      const { defaultProps, overrideProps, baseStyle, variants, sizes } =
+        componentStyle
 
-      let styles = getStyles<IsMulti>(componentStyle.baseStyle ?? {}, {
-        theme,
-        colorMode,
-        themeScheme,
-        ...args,
-      })({ isMulti })
+      props = mergeProps<Props>(props, defaultProps, overrideProps)
 
-      const variantStyles = getModifierStyles<IsMulti>(
-        props.variant,
-        componentStyle.variants ?? {},
-        { theme, colorMode, themeScheme, ...args },
-      )({ isMulti })
+      const { variant, size } = props
+      const resolvedProps = omitObject(props, ["children"])
 
-      const sizeStyles = getModifierStyles<IsMulti>(
-        props.size,
-        componentStyle.sizes ?? {},
-        { theme, colorMode, themeScheme, ...args },
-      )({ isMulti })
+      let styles: Styles<IsMulti> = {}
 
-      styles = merge(styles, sizeStyles)
-      styles = merge(styles, variantStyles)
+      if (baseStyle) {
+        styles = getStyles<IsMulti>(baseStyle, {
+          theme,
+          colorMode,
+          themeScheme,
+          ...resolvedProps,
+        })({ isMulti })
+      }
+
+      if (sizes) {
+        const sizeStyles = getModifierStyles<IsMulti>(size, sizes, {
+          theme,
+          colorMode,
+          themeScheme,
+          ...resolvedProps,
+        })({ isMulti })
+
+        styles = merge(styles, sizeStyles)
+      }
+
+      if (variants) {
+        const variantStyles = getModifierStyles<IsMulti>(variant, variants, {
+          theme,
+          colorMode,
+          themeScheme,
+          ...resolvedProps,
+        })({ isMulti })
+
+        styles = merge(styles, variantStyles)
+      }
 
       const isStylesEqual = isEqual(stylesRef.current, styles)
 
@@ -290,6 +331,7 @@ export const useComponentStyle = <Props extends Dict = Dict>(
   props: Props,
   options?: UseComponentStyleOptions,
 ) => setStyles<Props>(name, props, options)
+
 export const useMultiComponentStyle = <Props extends Dict = Dict>(
   name: string,
   props: Props,

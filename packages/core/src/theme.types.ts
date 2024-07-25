@@ -560,16 +560,39 @@ export type UsageTheme = BaseTheme & {
 export type ComponentBaseStyle = UIStyle
 export type ComponentVariants = Record<string, UIStyle>
 export type ComponentSizes = Record<string, UIStyle>
+type ComponentProps<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = Partial<Omit<M, "variant" | "size" | "colorScheme">> & ThemeProps<Y>
 export type ComponentDefaultProps<
-  Y extends Dict = Dict,
-  M extends keyof Theme["components"] | unknown = unknown,
-> = Partial<Omit<Y, "variant" | "size" | "colorScheme">> & {
-  variant?: ThemeProps<M>["variant"]
-  size?: ThemeProps<M>["size"]
-  colorScheme?: ThemeProps<M>["colorScheme"]
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = ComponentProps<Y, M>
+export type ComponentOverrideProps<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> =
+  | ComponentProps<Y, M>
+  | ((props: ComponentProps<Y, M>) => ComponentProps<Y, M>)
+
+type ComponentSharedStyle<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = {
+  /**
+   * The default props of the component.
+   */
+  defaultProps?: ComponentDefaultProps<Y, M>
+  /**
+   * The override props of the component.
+   */
+  overrideProps?: ComponentOverrideProps<Y, M>
 }
 
-export type ComponentStyle<Y extends Dict = Dict> = {
+export type ComponentStyle<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = ComponentSharedStyle<Y, M> & {
   /**
    * The base style of the component.
    */
@@ -582,17 +605,16 @@ export type ComponentStyle<Y extends Dict = Dict> = {
    * The variants of the component.
    */
   variants?: ComponentVariants
-  /**
-   * The default props of the component.
-   */
-  defaultProps?: ComponentDefaultProps<Y>
 }
 
 export type ComponentMultiBaseStyle = UIMultiStyle
 export type ComponentMultiVariants = Record<string, UIMultiStyle>
 export type ComponentMultiSizes = Record<string, UIMultiStyle>
 
-export type ComponentMultiStyle<Y extends Dict = Dict> = {
+export type ComponentMultiStyle<
+  Y extends keyof Theme["components"] | unknown = unknown,
+  M extends Dict = Dict,
+> = ComponentSharedStyle<Y, M> & {
   /**
    * The base style of the component.
    */
@@ -605,10 +627,6 @@ export type ComponentMultiStyle<Y extends Dict = Dict> = {
    * The variants of the component.
    */
   variants?: ComponentMultiVariants
-  /**
-   * The default props of the component.
-   */
-  defaultProps?: ComponentDefaultProps<Y>
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

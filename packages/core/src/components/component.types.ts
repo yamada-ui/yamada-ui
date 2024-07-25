@@ -1,4 +1,4 @@
-import type { CSSObject, Interpolation } from "@emotion/react"
+import type { Interpolation } from "@emotion/react"
 import type { Merge } from "@yamada-ui/utils"
 import type * as React from "react"
 import type { CSSUIObject, CSSUIProps } from "../css"
@@ -24,25 +24,7 @@ export type UIFactory = {
   ): UIComponent<T, P>
 }
 
-export type StyledResolverProps = CSSUIObject & {
-  theme: PropsTheme
-  /**
-   * Used for internal css management.
-   *
-   * @private
-   */
-  __css?: CSSUIObject
-  /**
-   * The CSS object that depends on the theme.
-   */
-  sx?: CSSUIObject
-  /**
-   * The emotion's css object.
-   */
-  css?: CSSObject
-}
-
-export type UIProps = CSSUIProps & {
+export type UIBaseProps = {
   /**
    * Used for internal css management.
    *
@@ -58,6 +40,13 @@ export type UIProps = CSSUIProps & {
    */
   css?: Interpolation<{}>
 }
+
+export type StyledResolverProps = CSSUIObject &
+  UIBaseProps & {
+    theme: PropsTheme
+  }
+
+export type UIProps = CSSUIProps & UIBaseProps
 
 export type OmitProps<Y, M extends keyof any = never> = Omit<Y, "as" | M>
 

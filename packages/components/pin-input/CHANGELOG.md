@@ -1,5 +1,18 @@
 # @yamada-ui/pin-input
 
+## 1.0.37
+
+### Patch Changes
+
+- [#2348](https://github.com/yamada-ui/yamada-ui/pull/2348) [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`bde9606`](https://github.com/yamada-ui/yamada-ui/commit/bde96064fb6960d07c97024e3f7b2309fbc0a928), [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f), [`b7f22fb`](https://github.com/yamada-ui/yamada-ui/commit/b7f22fbc4d2ee432d67ecfb0731b09c54ae45c67), [`bde9606`](https://github.com/yamada-ui/yamada-ui/commit/bde96064fb6960d07c97024e3f7b2309fbc0a928)]:
+  - @yamada-ui/core@1.11.0
+  - @yamada-ui/use-controllable-state@1.0.17
+  - @yamada-ui/form-control@2.0.3
+  - @yamada-ui/use-descendant@1.0.18
+  - @yamada-ui/utils@1.3.2
+
 ## 1.0.36
 
 ### Patch Changes

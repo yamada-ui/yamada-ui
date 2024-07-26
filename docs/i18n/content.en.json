@@ -877,13 +877,13 @@
     }
   },
   {
-    "title": "Change the speed of slide transition",
+    "title": "Change the duration of slide transition",
     "type": "fragment",
-    "slug": "/components/data-display/carousel#change-the-speed-of-slide-transition",
+    "slug": "/components/data-display/carousel#change-the-duration-of-slide-transition",
     "hierarchy": {
       "lv1": "Carousel",
       "lv2": "Usage",
-      "lv3": "Change the speed of slide transition"
+      "lv3": "Change the duration of slide transition"
     }
   },
   {
@@ -1005,6 +1005,12 @@
       "lv2": "Usage",
       "lv3": "Customize indicators"
     }
+  },
+  {
+    "title": "Handle Events",
+    "type": "fragment",
+    "slug": "/components/data-display/carousel#handle-events",
+    "hierarchy": { "lv1": "Carousel", "lv2": "Usage", "lv3": "Handle Events" }
   },
   {
     "title": "Control",
@@ -13464,12 +13470,21 @@
     }
   },
   {
+    "title": "Setting Common props for the Entire Application",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-styles#setting-common-props-for-the-entire-application",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Setting Common props for the Entire Application"
+    }
+  },
+  {
     "title": "Styling Multi part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single part and multi part components",
+      "lv2": "Setting Common props for the Entire Application",
       "lv3": "Styling Multi part components"
     }
   },

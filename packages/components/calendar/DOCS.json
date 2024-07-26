@@ -25,7 +25,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "dayProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar day button element."
     },
@@ -90,7 +90,7 @@
       "description": "Define holidays."
     },
     "labelProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar label button element."
     },
@@ -129,7 +129,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "monthProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar month button element."
     },
@@ -181,7 +181,7 @@
       "description": "The size of the Calendar."
     },
     "tableProps": {
-      "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }",
+      "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & { ...; }",
       "required": false,
       "description": "Props for calendar month table element."
     },
@@ -220,7 +220,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "weekdayProps": {
-      "type": "Omit<PropsOf<\"div\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }",
+      "type": "Omit<PropsOf<\"div\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & { ...; }",
       "required": false,
       "description": "Props for calendar weekday element."
     },
@@ -262,7 +262,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "yearProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
       "required": false,
       "description": "Props for calendar year button element."
     }

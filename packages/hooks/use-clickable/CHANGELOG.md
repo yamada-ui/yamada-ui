@@ -1,5 +1,15 @@
 # @yamada-ui/use-clickable
 
+## 1.2.5
+
+### Patch Changes
+
+- [#2348](https://github.com/yamada-ui/yamada-ui/pull/2348) [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f)]:
+  - @yamada-ui/use-event-listener@1.0.17
+  - @yamada-ui/utils@1.3.2
+
 ## 1.2.4
 
 ### Patch Changes

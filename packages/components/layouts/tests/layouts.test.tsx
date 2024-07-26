@@ -362,10 +362,12 @@ describe("<ZStack />", () => {
 
     expect(screen.getByText("Box1")).toHaveStyle({
       position: "absolute",
+      left: 0,
       zIndex: 0,
     })
     expect(screen.getByText("Box2")).toHaveStyle({
       position: "absolute",
+      left: 0,
       zIndex: 1,
     })
   })
@@ -380,10 +382,12 @@ describe("<ZStack />", () => {
 
     expect(screen.getByText("Box1")).toHaveStyle({
       position: "absolute",
+      top: 0,
       zIndex: 0,
     })
     expect(screen.getByText("Box2")).toHaveStyle({
       position: "absolute",
+      top: 0,
       zIndex: 1,
     })
   })

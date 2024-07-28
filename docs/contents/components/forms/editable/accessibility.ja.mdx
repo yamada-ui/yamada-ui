@@ -7,6 +7,15 @@ order: 3
 tab: アクセシビリティ
 ---
 
+`Editable`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx live=false
+<Editable defaultValue="オッス！オラ悟空！" aria-label="My Editable">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
 ## ARIAロールと属性
 
 | コンポーネント     | ロールと属性    | 使い方                                                                 |

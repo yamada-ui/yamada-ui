@@ -140,4 +140,4 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         uses: ./.github/composite-actions/update-docs
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}

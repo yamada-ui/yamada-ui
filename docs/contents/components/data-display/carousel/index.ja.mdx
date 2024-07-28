@@ -164,12 +164,12 @@ return (
 </Carousel>
 ```
 
-### スライドが切り替わるスピードを変更する
+### スライドが切り替わる所要時間を変更する
 
-スライドが切り替わるスピードを変更する場合は、`speed`に数値を設定します。デフォルトでは、`10`が設定されています。
+スライドが切り替わる所要時間を変更する場合は、`duration`に数値を設定します。デフォルトでは、`25`が設定されています。
 
 ```tsx
-<Carousel speed={50}>
+<Carousel duration={60}>
   <CarouselSlide as={Center} bg="primary">
     1
   </CarouselSlide>
@@ -593,6 +593,43 @@ return (
     />
   </Carousel>
 </VStack>
+```
+
+### イベントをハンドルする
+
+ユーザーのドラッグなどのイベントをハンドルしたい場合は、`watchDrag`を使用します。
+
+```tsx
+<Carousel
+  watchDrag={(methods, ev) => {
+    console.log("drag", methods, ev)
+
+    return true
+  }}
+  watchResize={(methods, entries) => {
+    console.log("resized", methods, entries)
+
+    return true
+  }}
+  watchSlides={(methods, mutations) => {
+    console.log("slides updated", methods, mutations)
+
+    return true
+  }}
+>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
 ```
 
 ### 制御する

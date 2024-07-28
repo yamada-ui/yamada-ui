@@ -938,13 +938,13 @@
     }
   },
   {
-    "title": "スライドが切り替わるスピードを変更する",
+    "title": "スライドが切り替わる所要時間を変更する",
     "type": "fragment",
-    "slug": "/components/data-display/carousel#スライドが切り替わるスピードを変更する",
+    "slug": "/components/data-display/carousel#スライドが切り替わる所要時間を変更する",
     "hierarchy": {
       "lv1": "Carousel",
       "lv2": "使い方",
-      "lv3": "スライドが切り替わるスピードを変更する"
+      "lv3": "スライドが切り替わる所要時間を変更する"
     }
   },
   {
@@ -1073,6 +1073,16 @@
       "lv1": "Carousel",
       "lv2": "使い方",
       "lv3": "インジケーターをカスタマイズする"
+    }
+  },
+  {
+    "title": "イベントをハンドルする",
+    "type": "fragment",
+    "slug": "/components/data-display/carousel#イベントをハンドルする",
+    "hierarchy": {
+      "lv1": "Carousel",
+      "lv2": "使い方",
+      "lv3": "イベントをハンドルする"
     }
   },
   {
@@ -14242,6 +14252,15 @@
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント",
       "lv3": "複数パーツのコンポーネントのスタイリング"
+    }
+  },
+  {
+    "title": "アプリケーション全体で共通のpropsを設定する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-styles#アプリケーション全体で共通のpropsを設定する",
+    "hierarchy": {
+      "lv1": "コンポーネントのスタイル",
+      "lv2": "アプリケーション全体で共通のpropsを設定する"
     }
   },
   {

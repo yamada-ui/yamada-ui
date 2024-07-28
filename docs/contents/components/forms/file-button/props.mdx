@@ -12,6 +12,14 @@ order: 1
 ### FileButtonProps
 
 <PropsCard
+  id="filebutton-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue={"gray"}
+/>
+
+<PropsCard
   id="filebutton-disableripple"
   name="disableRipple"
   type="boolean"
@@ -141,4 +149,20 @@ order: 1
   name="rightIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the right side of the button."}
+/>
+
+<PropsCard
+  id="filebutton-size"
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the FileButton."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="filebutton-variant"
+  name="variant"
+  type='"solid" | "outline" | "link" | "ghost" | "unstyled"'
+  description={"The variant of the FileButton."}
+  defaultValue={"solid"}
 />

@@ -28,7 +28,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export default function App() {
-  let { cookies } = useLoaderData<{ cookies: string }>()
+  const { cookies } = useLoaderData<{ cookies: string }>()
 
   const colorModeManager = createColorModeManager("ssr", cookies)
   const themeSchemeManager = createThemeSchemeManager("ssr", cookies)

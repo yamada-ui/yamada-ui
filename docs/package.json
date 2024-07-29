@@ -23,6 +23,7 @@
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",
     "lint": "eslint . --max-warnings=0 --cache",
+    "lint:inspect": "pnpm dlx @eslint/config-inspector",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf .mdx .next node_modules"
   },

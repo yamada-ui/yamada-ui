@@ -205,6 +205,38 @@ describe("<Select />", () => {
     })
   })
 
+  describe("click event", () => {
+    const ITEMS = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("click option should work correctly", async () => {
+      const { user } = render(<Select items={ITEMS} />)
+
+      const input = await screen.findByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+
+      const option1 = await screen.findByRole("option", { name: /option1/i })
+      expect(option1).toBeVisible()
+
+      await user.click(option1)
+      expect(input).toHaveTextContent(/option1/i)
+    })
+  })
+
   describe("keyDown event", () => {
     const ITEMS = [
       {
@@ -497,6 +529,38 @@ describe("<MultiSelect />", () => {
 
       expect(option1).toBeVisible()
       expect(option2).toBeVisible()
+    })
+  })
+
+  describe("click event", () => {
+    const ITEMS = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("click option should work correctly", async () => {
+      const { user } = render(<Select items={ITEMS} />)
+
+      const input = await screen.findByRole("combobox")
+      expect(input).toBeInTheDocument()
+
+      await user.click(input)
+
+      const option1 = await screen.findByRole("option", { name: /option1/i })
+      expect(option1).toBeVisible()
+
+      await user.click(option1)
+      expect(input).toHaveTextContent(/option1/i)
     })
   })
 

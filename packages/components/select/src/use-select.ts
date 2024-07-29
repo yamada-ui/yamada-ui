@@ -606,7 +606,6 @@ export const useSelect = <T extends MaybeValue = string>({
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
-
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
     [containerProps, formControlProps, onBlur, onClick, rest],

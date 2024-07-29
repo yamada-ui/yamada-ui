@@ -43,8 +43,7 @@ import { useCallback, useRef, useState, useEffect, useId } from "react"
 import type { OptionProps } from "./"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) &&
-  !!target?.getAttribute("role")?.startsWith("select-item")
+  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
 
 export const {
   DescendantsContextProvider: SelectDescendantsContextProvider,
@@ -607,33 +606,35 @@ export const useSelect = <T extends MaybeValue = string>({
       ...props,
       ...formControlProps,
       onClick: handlerAll(props.onClick, rest.onClick, onClick),
-
       onBlur: handlerAll(props.onBlur, rest.onBlur, onBlur),
     }),
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
   const getFieldProps: UIPropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      "aria-label":
-        props["aria-label"] ??
+    ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
+      ariaLabel ??=
         placeholder ??
-        `Select ${isMulti ? "one or more options." : "an option."}`,
-      role: "combobox",
-      ref: mergeRefs(fieldRef, ref),
-      tabIndex: 0,
-      ...fieldProps,
-      ...props,
-      "data-active": dataAttr(isOpen),
-      "data-placeholder": dataAttr(
-        !isMulti ? label === undefined : !label?.length,
-      ),
-      "aria-controls": listRef.current?.id,
-      "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
-      "aria-expanded": isOpen,
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-    }),
+        `Select ${isMulti ? "one or more options." : "an option."}`
+
+      return {
+        "aria-label": ariaLabel,
+        role: "combobox",
+        ref: mergeRefs(fieldRef, ref),
+        tabIndex: 0,
+        ...fieldProps,
+        ...props,
+        "data-active": dataAttr(isOpen),
+        "data-placeholder": dataAttr(
+          !isMulti ? label === undefined : !label?.length,
+        ),
+        "aria-controls": listRef.current?.id,
+        "aria-activedescendant": descendants.value(focusedIndex)?.node.id,
+        "aria-expanded": isOpen,
+        onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
+        onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+      }
+    },
     [
       descendants,
       fieldProps,
@@ -806,14 +807,18 @@ export const useSelectOptionGroup = ({
   )
 
   const getGroupProps: UIPropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      "aria-label": props["aria-label"] ?? label,
-      ref,
-      role: "group",
-      ...props,
-      ...computedRest[1],
-      "data-label": label,
-    }),
+    ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
+      ariaLabel ??= label
+
+      return {
+        "aria-label": ariaLabel,
+        ref,
+        role: "group",
+        ...props,
+        ...computedRest[1],
+        "data-label": label,
+      }
+    },
     [computedRest, label],
   )
 

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/indicator",
-  "version": "1.1.32",
+  "version": "1.1.33",
   "description": "Yamada UI indicator component",
   "keywords": [
     "yamada",
@@ -47,13 +47,13 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/use-animation": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
-    "@yamada-ui/use-animation": "workspace:*"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

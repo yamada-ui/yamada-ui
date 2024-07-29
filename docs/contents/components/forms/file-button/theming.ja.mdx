@@ -1,0 +1,24 @@
+---
+title: FileButton
+description: "`FileButton`は、ユーザーがファイルを選択するために使用されるボタンのコンポーネントです。"
+package_name: "@yamada-ui/file-button"
+with_description: true
+tab: テーマ
+order: 2
+---
+
+## テーマ
+
+`FileButton`は、[単一パーツのコンポーネント](/styled-system/theming/component-styles#単一パーツのコンポーネント)です。
+
+:::note
+`FileButton`は、[Button](/components/forms/button)のスタイルを継承しています。
+:::
+
+:::note
+コンポーネントのスタイルを変更したい場合は、[こちら](/styled-system/theming/customize-theme#コンポーネントのスタイルを変更する)をご覧ください。
+:::
+
+```ts
+export const FileButton: ComponentStyle = mergeStyle(Button)()
+```

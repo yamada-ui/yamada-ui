@@ -1,5 +1,21 @@
 # @yamada-ui/use-focus
 
+## 1.0.18
+
+### Patch Changes
+
+- [#2348](https://github.com/yamada-ui/yamada-ui/pull/2348) [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f)]:
+  - @yamada-ui/use-event-listener@1.0.17
+  - @yamada-ui/utils@1.3.2
+
+## 1.0.17
+
+### Patch Changes
+
+- [#2308](https://github.com/yamada-ui/yamada-ui/pull/2308) [`1d289a7`](https://github.com/yamada-ui/yamada-ui/commit/1d289a7a12ff701ec9260bba0c08feb8eeec1627) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that when multiple `Popover`s existed and were opened in succession, the previous `Popover` would not close.
+
 ## 1.0.16
 
 ### Patch Changes

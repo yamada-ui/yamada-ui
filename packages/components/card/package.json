@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/card",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "description": "Yamada UI card component",
   "keywords": [
     "yamada",
@@ -50,8 +50,8 @@
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

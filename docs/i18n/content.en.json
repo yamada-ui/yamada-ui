@@ -189,6 +189,163 @@
     "hierarchy": { "lv1": "Team and Contributors", "lv2": "Contributors" }
   },
   {
+    "title": "AreaChart",
+    "type": "page",
+    "description": "`AreaChart` is a component for drawing area charts to compare multiple sets of data.",
+    "slug": "/components/data-display/area-chart",
+    "hierarchy": { "lv1": "AreaChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#import",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#usage",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#change-size",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Stack",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#stack",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Stack" }
+  },
+  {
+    "title": "Make Proportional",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#make-proportional",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Make Proportional"
+    }
+  },
+  {
+    "title": "Change Curve",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#change-curve",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Change Curve" }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#change-direction",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#display-legend",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Label",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#display-label",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Label" }
+  },
+  {
+    "title": "Display Reference Line",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#display-reference-line",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Display Reference Line"
+    }
+  },
+  {
+    "title": "Disable Gradient",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#disable-gradient",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Disable Gradient"
+    }
+  },
+  {
+    "title": "Hide Dots",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#hide-dots",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Dots" }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#hide-tooltip",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#hide-axis",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Change Grid Layout",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#change-grid-layout",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Change Grid Layout"
+    }
+  },
+  {
+    "title": "Mark Ticks",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#mark-ticks",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Mark Ticks" }
+  },
+  {
+    "title": "Synchronize",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#synchronize",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Synchronize" }
+  },
+  {
+    "title": "Add Unit",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#add-unit",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Add Unit" }
+  },
+  {
+    "title": "Format Value",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#format-value",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Format Value" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#adjust-opacity",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "Adjust Dashed Line",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#adjust-dashed-line",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Line"
+    }
+  },
+  {
     "title": "Badge",
     "type": "page",
     "description": "`Badge` is a component that emphasizes the status of an item to make it immediately recognizable.",
@@ -221,6 +378,141 @@
       "lv1": "Badge",
       "lv2": "Usage",
       "lv3": "Change Color Scheme"
+    }
+  },
+  {
+    "title": "BarChart",
+    "type": "page",
+    "description": "`BarChart` is a component for drawing bar charts to compare multiple sets of data.",
+    "slug": "/components/data-display/bar-chart",
+    "hierarchy": { "lv1": "BarChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#import",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#usage",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#change-size",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Stack",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#stack",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Stack" }
+  },
+  {
+    "title": "Convert to Percentage",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#convert-to-percentage",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Convert to Percentage"
+    }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#change-direction",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#display-legend",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Label",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#display-label",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Label" }
+  },
+  {
+    "title": "Display Reference Line",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#display-reference-line",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Display Reference Line"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#hide-tooltip",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#hide-axis",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Change Grid Layout",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#change-grid-layout",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Change Grid Layout"
+    }
+  },
+  {
+    "title": "Mark Ticks",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#mark-ticks",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Mark Ticks" }
+  },
+  {
+    "title": "Synchronize",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#synchronize",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Synchronize" }
+  },
+  {
+    "title": "Add Unit",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#add-unit",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Add Unit" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#format-values",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#adjust-opacity",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "Adjust Dashed Line",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#adjust-dashed-line",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Line"
     }
   },
   {
@@ -585,13 +877,13 @@
     }
   },
   {
-    "title": "Change the speed of slide transition",
+    "title": "Change the duration of slide transition",
     "type": "fragment",
-    "slug": "/components/data-display/carousel#change-the-speed-of-slide-transition",
+    "slug": "/components/data-display/carousel#change-the-duration-of-slide-transition",
     "hierarchy": {
       "lv1": "Carousel",
       "lv2": "Usage",
-      "lv3": "Change the speed of slide transition"
+      "lv3": "Change the duration of slide transition"
     }
   },
   {
@@ -715,6 +1007,12 @@
     }
   },
   {
+    "title": "Handle Events",
+    "type": "fragment",
+    "slug": "/components/data-display/carousel#handle-events",
+    "hierarchy": { "lv1": "Carousel", "lv2": "Usage", "lv3": "Handle Events" }
+  },
+  {
     "title": "Control",
     "type": "fragment",
     "slug": "/components/data-display/carousel#control",
@@ -771,6 +1069,133 @@
     "description": "We are currently considering the development of `Dockable`.",
     "slug": "/components/data-display/dockable",
     "hierarchy": { "lv1": "Dockable" }
+  },
+  {
+    "title": "DonutChart",
+    "type": "page",
+    "description": "`DonutChart` is a component for drawing donut charts to compare multiple sets of data.",
+    "slug": "/components/data-display/donut-chart",
+    "hierarchy": { "lv1": "DonutChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#import",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#usage",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#change-size",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#display-legend",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Display Legend"
+    }
+  },
+  {
+    "title": "Adjust spacing",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#adjust-spacing",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust spacing"
+    }
+  },
+  {
+    "title": "Adjust inner radius, outer radius",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#adjust-inner-radius-outer-radius",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust inner radius, outer radius"
+    }
+  },
+  {
+    "title": "Adjust start angle, end angle",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#adjust-start-angle-end-angle",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust start angle, end angle"
+    }
+  },
+  {
+    "title": "Display Labels",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#display-labels",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Display Labels"
+    }
+  },
+  {
+    "title": "Adjust label position",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#adjust-label-position",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust label position"
+    }
+  },
+  {
+    "title": "Make Proportional",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#make-proportional",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Make Proportional"
+    }
+  },
+  {
+    "title": "Switching the data displayed in the tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#switching-the-data-displayed-in-the-tooltip",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Switching the data displayed in the tooltip"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#hide-tooltip",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#format-values",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#adjust-opacity",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Opacity"
+    }
   },
   {
     "title": "Data Display",
@@ -932,6 +1357,137 @@
     "type": "fragment",
     "slug": "/components/data-display/kbd#usage",
     "hierarchy": { "lv1": "Kbd", "lv2": "Usage" }
+  },
+  {
+    "title": "LineChart",
+    "type": "page",
+    "description": "`LineChart` is a component for drawing line charts to compare multiple sets of data.",
+    "slug": "/components/data-display/line-chart",
+    "hierarchy": { "lv1": "LineChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#import",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#usage",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#change-size",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Change Curve",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#change-curve",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Change Curve" }
+  },
+  {
+    "title": "Change Direction",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#change-direction",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Change Direction"
+    }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#display-legend",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Display Label",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#display-label",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Label" }
+  },
+  {
+    "title": "Display Reference Line",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#display-reference-line",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Display Reference Line"
+    }
+  },
+  {
+    "title": "Hide Dots",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#hide-dots",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Dots" }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#hide-tooltip",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#hide-axis",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Change Grid Layout",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#change-grid-layout",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Change Grid Layout"
+    }
+  },
+  {
+    "title": "Mark Ticks",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#mark-ticks",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Mark Ticks" }
+  },
+  {
+    "title": "Synchronize",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#synchronize",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Synchronize" }
+  },
+  {
+    "title": "Add Unit",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#add-unit",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Add Unit" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#format-values",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#adjust-opacity",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "Adjust Dashed Line",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#adjust-dashed-line",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Line"
+    }
   },
   {
     "title": "List",
@@ -1210,6 +1766,212 @@
     "type": "fragment",
     "slug": "/components/data-display/paging-table#control",
     "hierarchy": { "lv1": "PagingTable", "lv2": "Usage", "lv3": "Control" }
+  },
+  {
+    "title": "PieChart",
+    "type": "page",
+    "description": "`PieChart` is a component for drawing pie charts to compare multiple sets of data.",
+    "slug": "/components/data-display/pie-chart",
+    "hierarchy": { "lv1": "PieChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#import",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#usage",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#change-size",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#display-legend",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Legend" }
+  },
+  {
+    "title": "Adjust spacing",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#adjust-spacing",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Adjust spacing" }
+  },
+  {
+    "title": "Adjust start angle, end angle",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#adjust-start-angle-end-angle",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Adjust start angle, end angle"
+    }
+  },
+  {
+    "title": "Display Labels",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#display-labels",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Labels" }
+  },
+  {
+    "title": "Adjust label position",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#adjust-label-position",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Adjust label position"
+    }
+  },
+  {
+    "title": "Make Proportional",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#make-proportional",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Make Proportional"
+    }
+  },
+  {
+    "title": "Switching the data displayed in the tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#switching-the-data-displayed-in-the-tooltip",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "Usage",
+      "lv3": "Switching the data displayed in the tooltip"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#hide-tooltip",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#format-values",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#adjust-opacity",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
+  },
+  {
+    "title": "RadarChart",
+    "type": "page",
+    "description": "`RadarChart` is a component for drawing radar charts to compare multiple sets of data.",
+    "slug": "/components/data-display/radar-chart",
+    "hierarchy": { "lv1": "RadarChart" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#import",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#usage",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage" }
+  },
+  {
+    "title": "Change Size",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#change-size",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Change Size" }
+  },
+  {
+    "title": "Display Legend",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#display-legend",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Display Legend"
+    }
+  },
+  {
+    "title": "Display Dots",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#display-dots",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Display Dots" }
+  },
+  {
+    "title": "Display Polar Radius Axis",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#display-polar-radius-axis",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Display Polar Radius Axis"
+    }
+  },
+  {
+    "title": "Hide Axis",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#hide-axis",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Axis" }
+  },
+  {
+    "title": "Hide Grid",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#hide-grid",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Grid" }
+  },
+  {
+    "title": "Make Grid Circular",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#make-grid-circular",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Make Grid Circular"
+    }
+  },
+  {
+    "title": "Hide Tooltip",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#hide-tooltip",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
+  },
+  {
+    "title": "Format Values",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#format-values",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Format Values" }
+  },
+  {
+    "title": "Adjust Opacity",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#adjust-opacity",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Opacity"
+    }
+  },
+  {
+    "title": "Adjust Dashed Lines",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#adjust-dashed-lines",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "Usage",
+      "lv3": "Adjust Dashed Lines"
+    }
   },
   {
     "title": "Reorder",
@@ -2110,298 +2872,6 @@
     }
   },
   {
-    "title": "AreaChart",
-    "type": "page",
-    "description": "`AreaChart` is a component for drawing area charts to compare multiple sets of data.",
-    "slug": "/components/feedback/area-chart",
-    "hierarchy": { "lv1": "AreaChart" }
-  },
-  {
-    "title": "Import",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#import",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Import" }
-  },
-  {
-    "title": "Usage",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#usage",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage" }
-  },
-  {
-    "title": "Change Size",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#change-size",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "Stack",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#stack",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Stack" }
-  },
-  {
-    "title": "Make Proportional",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#make-proportional",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "Usage",
-      "lv3": "Make Proportional"
-    }
-  },
-  {
-    "title": "Change Curve",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#change-curve",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Change Curve" }
-  },
-  {
-    "title": "Change Direction",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#change-direction",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "Usage",
-      "lv3": "Change Direction"
-    }
-  },
-  {
-    "title": "Display Legend",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#display-legend",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Legend" }
-  },
-  {
-    "title": "Display Label",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#display-label",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Display Label" }
-  },
-  {
-    "title": "Display Reference Line",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#display-reference-line",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "Usage",
-      "lv3": "Display Reference Line"
-    }
-  },
-  {
-    "title": "Disable Gradient",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#disable-gradient",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "Usage",
-      "lv3": "Disable Gradient"
-    }
-  },
-  {
-    "title": "Hide Dots",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#hide-dots",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Dots" }
-  },
-  {
-    "title": "Hide Tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#hide-tooltip",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
-  },
-  {
-    "title": "Hide Axis",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#hide-axis",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Hide Axis" }
-  },
-  {
-    "title": "Change Grid Layout",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#change-grid-layout",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "Usage",
-      "lv3": "Change Grid Layout"
-    }
-  },
-  {
-    "title": "Mark Ticks",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#mark-ticks",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Mark Ticks" }
-  },
-  {
-    "title": "Synchronize",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#synchronize",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Synchronize" }
-  },
-  {
-    "title": "Add Unit",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#add-unit",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Add Unit" }
-  },
-  {
-    "title": "Format Value",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#format-value",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Format Value" }
-  },
-  {
-    "title": "Adjust Opacity",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#adjust-opacity",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
-  },
-  {
-    "title": "Adjust Dashed Line",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#adjust-dashed-line",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "Usage",
-      "lv3": "Adjust Dashed Line"
-    }
-  },
-  {
-    "title": "BarChart",
-    "type": "page",
-    "description": "`BarChart` is a component for drawing bar charts to compare multiple sets of data.",
-    "slug": "/components/feedback/bar-chart",
-    "hierarchy": { "lv1": "BarChart" }
-  },
-  {
-    "title": "Import",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#import",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Import" }
-  },
-  {
-    "title": "Usage",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#usage",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage" }
-  },
-  {
-    "title": "Change Size",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#change-size",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "Stack",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#stack",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Stack" }
-  },
-  {
-    "title": "Convert to Percentage",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#convert-to-percentage",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "Usage",
-      "lv3": "Convert to Percentage"
-    }
-  },
-  {
-    "title": "Change Direction",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#change-direction",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "Usage",
-      "lv3": "Change Direction"
-    }
-  },
-  {
-    "title": "Display Legend",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#display-legend",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Legend" }
-  },
-  {
-    "title": "Display Label",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#display-label",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Display Label" }
-  },
-  {
-    "title": "Display Reference Line",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#display-reference-line",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "Usage",
-      "lv3": "Display Reference Line"
-    }
-  },
-  {
-    "title": "Hide Tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#hide-tooltip",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
-  },
-  {
-    "title": "Hide Axis",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#hide-axis",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Hide Axis" }
-  },
-  {
-    "title": "Change Grid Layout",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#change-grid-layout",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "Usage",
-      "lv3": "Change Grid Layout"
-    }
-  },
-  {
-    "title": "Mark Ticks",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#mark-ticks",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Mark Ticks" }
-  },
-  {
-    "title": "Synchronize",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#synchronize",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Synchronize" }
-  },
-  {
-    "title": "Add Unit",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#add-unit",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Add Unit" }
-  },
-  {
-    "title": "Format Values",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#format-values",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Format Values" }
-  },
-  {
-    "title": "Adjust Opacity",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#adjust-opacity",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
-  },
-  {
-    "title": "Adjust Dashed Line",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#adjust-dashed-line",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "Usage",
-      "lv3": "Adjust Dashed Line"
-    }
-  },
-  {
     "title": "CircleProgress",
     "type": "page",
     "description": "`CircleProgress` is a component that displays progress in a circular progress bar.",
@@ -2467,269 +2937,11 @@
     }
   },
   {
-    "title": "DonutChart",
-    "type": "page",
-    "description": "`DonutChart` is a component for drawing donut charts to compare multiple sets of data.",
-    "slug": "/components/feedback/donut-chart",
-    "hierarchy": { "lv1": "DonutChart" }
-  },
-  {
-    "title": "Import",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#import",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "Import" }
-  },
-  {
-    "title": "Usage",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#usage",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage" }
-  },
-  {
-    "title": "Change Size",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#change-size",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "Display Legend",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#display-legend",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Display Legend"
-    }
-  },
-  {
-    "title": "Adjust spacing",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#adjust-spacing",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Adjust spacing"
-    }
-  },
-  {
-    "title": "Adjust inner radius, outer radius",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#adjust-inner-radius-outer-radius",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Adjust inner radius, outer radius"
-    }
-  },
-  {
-    "title": "Adjust start angle, end angle",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#adjust-start-angle-end-angle",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Adjust start angle, end angle"
-    }
-  },
-  {
-    "title": "Display Labels",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#display-labels",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Display Labels"
-    }
-  },
-  {
-    "title": "Adjust label position",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#adjust-label-position",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Adjust label position"
-    }
-  },
-  {
-    "title": "Make Proportional",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#make-proportional",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Make Proportional"
-    }
-  },
-  {
-    "title": "Switching the data displayed in the tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#switching-the-data-displayed-in-the-tooltip",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Switching the data displayed in the tooltip"
-    }
-  },
-  {
-    "title": "Hide Tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#hide-tooltip",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
-  },
-  {
-    "title": "Format Values",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#format-values",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Format Values" }
-  },
-  {
-    "title": "Adjust Opacity",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#adjust-opacity",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "Usage",
-      "lv3": "Adjust Opacity"
-    }
-  },
-  {
     "title": "Feedback",
     "type": "page",
     "description": "Components such as `Alert` and `Skeleton` are available for notifying users and prompting them to wait while content is loading.",
     "slug": "/components/feedback",
     "hierarchy": { "lv1": "Feedback" }
-  },
-  {
-    "title": "LineChart",
-    "type": "page",
-    "description": "`LineChart` is a component for drawing line charts to compare multiple sets of data.",
-    "slug": "/components/feedback/line-chart",
-    "hierarchy": { "lv1": "LineChart" }
-  },
-  {
-    "title": "Import",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#import",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Import" }
-  },
-  {
-    "title": "Usage",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#usage",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage" }
-  },
-  {
-    "title": "Change Size",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#change-size",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "Change Curve",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#change-curve",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Change Curve" }
-  },
-  {
-    "title": "Change Direction",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#change-direction",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "Usage",
-      "lv3": "Change Direction"
-    }
-  },
-  {
-    "title": "Display Legend",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#display-legend",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Legend" }
-  },
-  {
-    "title": "Display Label",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#display-label",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Display Label" }
-  },
-  {
-    "title": "Display Reference Line",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#display-reference-line",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "Usage",
-      "lv3": "Display Reference Line"
-    }
-  },
-  {
-    "title": "Hide Dots",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#hide-dots",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Dots" }
-  },
-  {
-    "title": "Hide Tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#hide-tooltip",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
-  },
-  {
-    "title": "Hide Axis",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#hide-axis",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Hide Axis" }
-  },
-  {
-    "title": "Change Grid Layout",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#change-grid-layout",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "Usage",
-      "lv3": "Change Grid Layout"
-    }
-  },
-  {
-    "title": "Mark Ticks",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#mark-ticks",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Mark Ticks" }
-  },
-  {
-    "title": "Synchronize",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#synchronize",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Synchronize" }
-  },
-  {
-    "title": "Add Unit",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#add-unit",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Add Unit" }
-  },
-  {
-    "title": "Format Values",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#format-values",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Format Values" }
-  },
-  {
-    "title": "Adjust Opacity",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#adjust-opacity",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
-  },
-  {
-    "title": "Adjust Dashed Line",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#adjust-dashed-line",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "Usage",
-      "lv3": "Adjust Dashed Line"
-    }
   },
   {
     "title": "Loading",
@@ -2761,107 +2973,6 @@
     "type": "fragment",
     "slug": "/components/feedback/loading#change-size",
     "hierarchy": { "lv1": "Loading", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "PieChart",
-    "type": "page",
-    "description": "`PieChart` is a component for drawing pie charts to compare multiple sets of data.",
-    "slug": "/components/feedback/pie-chart",
-    "hierarchy": { "lv1": "PieChart" }
-  },
-  {
-    "title": "Import",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#import",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Import" }
-  },
-  {
-    "title": "Usage",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#usage",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage" }
-  },
-  {
-    "title": "Change Size",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#change-size",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "Display Legend",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#display-legend",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Legend" }
-  },
-  {
-    "title": "Adjust spacing",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#adjust-spacing",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Adjust spacing" }
-  },
-  {
-    "title": "Adjust start angle, end angle",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#adjust-start-angle-end-angle",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "Usage",
-      "lv3": "Adjust start angle, end angle"
-    }
-  },
-  {
-    "title": "Display Labels",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#display-labels",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Display Labels" }
-  },
-  {
-    "title": "Adjust label position",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#adjust-label-position",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "Usage",
-      "lv3": "Adjust label position"
-    }
-  },
-  {
-    "title": "Make Proportional",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#make-proportional",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "Usage",
-      "lv3": "Make Proportional"
-    }
-  },
-  {
-    "title": "Switching the data displayed in the tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#switching-the-data-displayed-in-the-tooltip",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "Usage",
-      "lv3": "Switching the data displayed in the tooltip"
-    }
-  },
-  {
-    "title": "Hide Tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#hide-tooltip",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
-  },
-  {
-    "title": "Format Values",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#format-values",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Format Values" }
-  },
-  {
-    "title": "Adjust Opacity",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#adjust-opacity",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Adjust Opacity" }
   },
   {
     "title": "Progress",
@@ -2931,111 +3042,6 @@
     "type": "fragment",
     "slug": "/components/feedback/progress#apply-animation",
     "hierarchy": { "lv1": "Progress", "lv2": "Usage", "lv3": "Apply Animation" }
-  },
-  {
-    "title": "RadarChart",
-    "type": "page",
-    "description": "`RadarChart` is a component for drawing radar charts to compare multiple sets of data.",
-    "slug": "/components/feedback/radar-chart",
-    "hierarchy": { "lv1": "RadarChart" }
-  },
-  {
-    "title": "Import",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#import",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Import" }
-  },
-  {
-    "title": "Usage",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#usage",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage" }
-  },
-  {
-    "title": "Change Size",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#change-size",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Change Size" }
-  },
-  {
-    "title": "Display Legend",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#display-legend",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "Usage",
-      "lv3": "Display Legend"
-    }
-  },
-  {
-    "title": "Display Dots",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#display-dots",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Display Dots" }
-  },
-  {
-    "title": "Display Polar Radius Axis",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#display-polar-radius-axis",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "Usage",
-      "lv3": "Display Polar Radius Axis"
-    }
-  },
-  {
-    "title": "Hide Axis",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#hide-axis",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Axis" }
-  },
-  {
-    "title": "Hide Grid",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#hide-grid",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Grid" }
-  },
-  {
-    "title": "Make Grid Circular",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#make-grid-circular",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "Usage",
-      "lv3": "Make Grid Circular"
-    }
-  },
-  {
-    "title": "Hide Tooltip",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#hide-tooltip",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
-  },
-  {
-    "title": "Format Values",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#format-values",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Format Values" }
-  },
-  {
-    "title": "Adjust Opacity",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#adjust-opacity",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "Usage",
-      "lv3": "Adjust Opacity"
-    }
-  },
-  {
-    "title": "Adjust Dashed Lines",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#adjust-dashed-lines",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "Usage",
-      "lv3": "Adjust Dashed Lines"
-    }
   },
   {
     "title": "Skeleton",
@@ -13464,12 +13470,21 @@
     }
   },
   {
+    "title": "Setting Common props for the Entire Application",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-styles#setting-common-props-for-the-entire-application",
+    "hierarchy": {
+      "lv1": "Component Styles",
+      "lv2": "Setting Common props for the Entire Application"
+    }
+  },
+  {
     "title": "Styling Multi part components",
     "type": "fragment",
     "slug": "/styled-system/theming/component-styles#styling-multi-part-components",
     "hierarchy": {
       "lv1": "Component Styles",
-      "lv2": "Single part and multi part components",
+      "lv2": "Setting Common props for the Entire Application",
       "lv3": "Styling Multi part components"
     }
   },

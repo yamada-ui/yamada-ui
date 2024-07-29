@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-media-query",
-  "version": "1.0.40",
+  "version": "1.0.42",
   "description": "Yamada UI useMediaQuery custom hook",
   "keywords": [
     "use-media-query"
@@ -35,12 +35,12 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/providers": "workspace:*"
+    "@yamada-ui/providers": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

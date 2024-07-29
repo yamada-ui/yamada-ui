@@ -1,5 +1,24 @@
 # @yamada-ui/icon
 
+## 1.1.1
+
+### Patch Changes
+
+- [#2334](https://github.com/yamada-ui/yamada-ui/pull/2334) [`616cf4e`](https://github.com/yamada-ui/yamada-ui/commit/616cf4ed89387827c2fbde1d3b86b9e0620d1f09) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `size` was not being passed correctly to the theme callback function.
+
+- [#2348](https://github.com/yamada-ui/yamada-ui/pull/2348) [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`bde9606`](https://github.com/yamada-ui/yamada-ui/commit/bde96064fb6960d07c97024e3f7b2309fbc0a928), [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f), [`b7f22fb`](https://github.com/yamada-ui/yamada-ui/commit/b7f22fbc4d2ee432d67ecfb0731b09c54ae45c67), [`bde9606`](https://github.com/yamada-ui/yamada-ui/commit/bde96064fb6960d07c97024e3f7b2309fbc0a928)]:
+  - @yamada-ui/core@1.11.0
+  - @yamada-ui/use-token@1.1.21
+  - @yamada-ui/utils@1.3.2
+
+## 1.1.0
+
+### Minor Changes
+
+- [#2309](https://github.com/yamada-ui/yamada-ui/pull/2309) [`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Thematize `Icon` component
+
 ## 1.0.32
 
 ### Patch Changes

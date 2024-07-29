@@ -178,6 +178,199 @@
     "hierarchy": { "lv1": "チームと貢献者", "lv2": "貢献者" }
   },
   {
+    "title": "AreaChart",
+    "type": "page",
+    "description": "`AreaChart`は、複数のデータを比較するためのエリアチャートを描画するコンポーネントです。",
+    "slug": "/components/data-display/area-chart",
+    "hierarchy": { "lv1": "AreaChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#インポート",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#使い方",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "積み上げる",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#積み上げる",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "積み上げる" }
+  },
+  {
+    "title": "割合にする",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#割合にする",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "割合にする" }
+  },
+  {
+    "title": "曲線を変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#曲線を変更する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "曲線を変更する"
+    }
+  },
+  {
+    "title": "方向を変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#方向を変更する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "方向を変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#凡例を表示する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "基準線を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#基準線を表示する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "基準線を表示する"
+    }
+  },
+  {
+    "title": "グラデーションを無効にする",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#グラデーションを無効にする",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "グラデーションを無効にする"
+    }
+  },
+  {
+    "title": "点を非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#点を非表示にする",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "点を非表示にする"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "軸を非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#軸を非表示にする",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "軸を非表示にする"
+    }
+  },
+  {
+    "title": "グリッドのレイアウトを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#グリッドのレイアウトを変更する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "グリッドのレイアウトを変更する"
+    }
+  },
+  {
+    "title": "しるしをつける",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#しるしをつける",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "しるしをつける"
+    }
+  },
+  {
+    "title": "同期させる",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#同期させる",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "同期させる" }
+  },
+  {
+    "title": "単位をつける",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#単位をつける",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "単位をつける" }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "破線を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/area-chart#破線を調整する",
+    "hierarchy": {
+      "lv1": "AreaChart",
+      "lv2": "使い方",
+      "lv3": "破線を調整する"
+    }
+  },
+  {
     "title": "Badge",
     "type": "page",
     "description": "`Badge`は、アイテムのステータスを強調表示して、すぐに認識できるようにするコンポーネントです。",
@@ -215,6 +408,153 @@
       "lv2": "使い方",
       "lv3": "カラースキーマを変更する"
     }
+  },
+  {
+    "title": "BarChart",
+    "type": "page",
+    "description": "`BarChart`は、複数のデータを比較するための棒グラフを描画するコンポーネントです。",
+    "slug": "/components/data-display/bar-chart",
+    "hierarchy": { "lv1": "BarChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#インポート",
+    "hierarchy": { "lv1": "BarChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#使い方",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "積み上げる",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#積み上げる",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "積み上げる" }
+  },
+  {
+    "title": "割合にする",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#割合にする",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "割合にする" }
+  },
+  {
+    "title": "方向を変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#方向を変更する",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "方向を変更する" }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#凡例を表示する",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "凡例を表示する" }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "基準線を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#基準線を表示する",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "基準線を表示する"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "軸を非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#軸を非表示にする",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "軸を非表示にする"
+    }
+  },
+  {
+    "title": "グリッドのレイアウトを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#グリッドのレイアウトを変更する",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "グリッドのレイアウトを変更する"
+    }
+  },
+  {
+    "title": "しるしをつける",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#しるしをつける",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "しるしをつける" }
+  },
+  {
+    "title": "同期させる",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#同期させる",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "同期させる" }
+  },
+  {
+    "title": "単位をつける",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#単位をつける",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "単位をつける" }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "BarChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "破線を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/bar-chart#破線を調整する",
+    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "破線を調整する" }
   },
   {
     "title": "Calendar",
@@ -598,13 +938,13 @@
     }
   },
   {
-    "title": "スライドが切り替わるスピードを変更する",
+    "title": "スライドが切り替わる所要時間を変更する",
     "type": "fragment",
-    "slug": "/components/data-display/carousel#スライドが切り替わるスピードを変更する",
+    "slug": "/components/data-display/carousel#スライドが切り替わる所要時間を変更する",
     "hierarchy": {
       "lv1": "Carousel",
       "lv2": "使い方",
-      "lv3": "スライドが切り替わるスピードを変更する"
+      "lv3": "スライドが切り替わる所要時間を変更する"
     }
   },
   {
@@ -736,6 +1076,16 @@
     }
   },
   {
+    "title": "イベントをハンドルする",
+    "type": "fragment",
+    "slug": "/components/data-display/carousel#イベントをハンドルする",
+    "hierarchy": {
+      "lv1": "Carousel",
+      "lv2": "使い方",
+      "lv3": "イベントをハンドルする"
+    }
+  },
+  {
     "title": "制御する",
     "type": "fragment",
     "slug": "/components/data-display/carousel#制御する",
@@ -796,6 +1146,145 @@
     "description": "`Dockable`は、現在作成を検討しています。",
     "slug": "/components/data-display/dockable",
     "hierarchy": { "lv1": "Dockable" }
+  },
+  {
+    "title": "DonutChart",
+    "type": "page",
+    "description": "`DonutChart`は、複数のデータを比較するためのドーナツチャートを描画するコンポーネントです。",
+    "slug": "/components/data-display/donut-chart",
+    "hierarchy": { "lv1": "DonutChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#インポート",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#使い方",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#凡例を表示する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "間隔を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#間隔を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "間隔を調整する"
+    }
+  },
+  {
+    "title": "内半径、外半径を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#内半径外半径を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "内半径、外半径を調整する"
+    }
+  },
+  {
+    "title": "開始、終了の角度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#開始終了の角度を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "開始、終了の角度を調整する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "ラベルの表示位置を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#ラベルの表示位置を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ラベルの表示位置を調整する"
+    }
+  },
+  {
+    "title": "ラベルを割合にする",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#ラベルを割合にする",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを割合にする"
+    }
+  },
+  {
+    "title": "ツールチップに表示するデータを切り替える",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#ツールチップに表示するデータを切り替える",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップに表示するデータを切り替える"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
   },
   {
     "title": "データディスプレイ",
@@ -961,6 +1450,177 @@
     "type": "fragment",
     "slug": "/components/data-display/kbd#使い方",
     "hierarchy": { "lv1": "Kbd", "lv2": "使い方" }
+  },
+  {
+    "title": "LineChart",
+    "type": "page",
+    "description": "`LineChart`は、複数のデータを比較するためのラインチャートを描画するコンポーネントです。",
+    "slug": "/components/data-display/line-chart",
+    "hierarchy": { "lv1": "LineChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#インポート",
+    "hierarchy": { "lv1": "LineChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#使い方",
+    "hierarchy": { "lv1": "LineChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "曲線を変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#曲線を変更する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "曲線を変更する"
+    }
+  },
+  {
+    "title": "方向を変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#方向を変更する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "方向を変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#凡例を表示する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "基準線を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#基準線を表示する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "基準線を表示する"
+    }
+  },
+  {
+    "title": "点を非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#点を非表示にする",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "点を非表示にする"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "軸を非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#軸を非表示にする",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "軸を非表示にする"
+    }
+  },
+  {
+    "title": "グリッドのレイアウトを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#グリッドのレイアウトを変更する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "グリッドのレイアウトを変更する"
+    }
+  },
+  {
+    "title": "しるしをつける",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#しるしをつける",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "しるしをつける"
+    }
+  },
+  {
+    "title": "同期させる",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#同期させる",
+    "hierarchy": { "lv1": "LineChart", "lv2": "使い方", "lv3": "同期させる" }
+  },
+  {
+    "title": "単位をつける",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#単位をつける",
+    "hierarchy": { "lv1": "LineChart", "lv2": "使い方", "lv3": "単位をつける" }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "破線を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/line-chart#破線を調整する",
+    "hierarchy": {
+      "lv1": "LineChart",
+      "lv2": "使い方",
+      "lv3": "破線を調整する"
+    }
   },
   {
     "title": "List",
@@ -1251,6 +1911,252 @@
     "type": "fragment",
     "slug": "/components/data-display/paging-table#制御する",
     "hierarchy": { "lv1": "PagingTable", "lv2": "使い方", "lv3": "制御する" }
+  },
+  {
+    "title": "PieChart",
+    "type": "page",
+    "description": "`PieChart`は、複数のデータを比較するためのパイチャートを描画するコンポーネントです。",
+    "slug": "/components/data-display/pie-chart",
+    "hierarchy": { "lv1": "PieChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#インポート",
+    "hierarchy": { "lv1": "PieChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#使い方",
+    "hierarchy": { "lv1": "PieChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#凡例を表示する",
+    "hierarchy": { "lv1": "PieChart", "lv2": "使い方", "lv3": "凡例を表示する" }
+  },
+  {
+    "title": "間隔を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#間隔を調整する",
+    "hierarchy": { "lv1": "PieChart", "lv2": "使い方", "lv3": "間隔を調整する" }
+  },
+  {
+    "title": "開始、終了の角度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#開始終了の角度を調整する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "開始、終了の角度を調整する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "ラベルの表示位置を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#ラベルの表示位置を調整する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ラベルの表示位置を調整する"
+    }
+  },
+  {
+    "title": "ラベルを割合にする",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#ラベルを割合にする",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを割合にする"
+    }
+  },
+  {
+    "title": "ツールチップに表示するデータを切り替える",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#ツールチップに表示するデータを切り替える",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップに表示するデータを切り替える"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/pie-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "PieChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "RadarChart",
+    "type": "page",
+    "description": "`RadarChart`は、複数のデータを比較するためのレーダーチャートを描画するコンポーネントです。",
+    "slug": "/components/data-display/radar-chart",
+    "hierarchy": { "lv1": "RadarChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#インポート",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#使い方",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#凡例を表示する",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "点を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#点を表示する",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "使い方", "lv3": "点を表示する" }
+  },
+  {
+    "title": "半径軸を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#半径軸を表示する",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "半径軸を表示する"
+    }
+  },
+  {
+    "title": "軸を非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#軸を非表示にする",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "軸を非表示にする"
+    }
+  },
+  {
+    "title": "グリッドを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#グリッドを非表示にする",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "グリッドを非表示にする"
+    }
+  },
+  {
+    "title": "グリッドを丸くする",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#グリッドを丸くする",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "グリッドを丸くする"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "値をフォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#値をフォーマットする",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "値をフォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "破線を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/radar-chart#破線を調整する",
+    "hierarchy": {
+      "lv1": "RadarChart",
+      "lv2": "使い方",
+      "lv3": "破線を調整する"
+    }
   },
   {
     "title": "Reorder",
@@ -2223,346 +3129,6 @@
     }
   },
   {
-    "title": "AreaChart",
-    "type": "page",
-    "description": "`AreaChart`は、複数のデータを比較するためのエリアチャートを描画するコンポーネントです。",
-    "slug": "/components/feedback/area-chart",
-    "hierarchy": { "lv1": "AreaChart" }
-  },
-  {
-    "title": "インポート",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#インポート",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "インポート" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#使い方",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方" }
-  },
-  {
-    "title": "サイズを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#サイズを変更する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "積み上げる",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#積み上げる",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "積み上げる" }
-  },
-  {
-    "title": "割合にする",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#割合にする",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "割合にする" }
-  },
-  {
-    "title": "曲線を変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#曲線を変更する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "曲線を変更する"
-    }
-  },
-  {
-    "title": "方向を変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#方向を変更する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "方向を変更する"
-    }
-  },
-  {
-    "title": "凡例を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#凡例を表示する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "凡例を表示する"
-    }
-  },
-  {
-    "title": "ラベルを表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#ラベルを表示する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを表示する"
-    }
-  },
-  {
-    "title": "基準線を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#基準線を表示する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "基準線を表示する"
-    }
-  },
-  {
-    "title": "グラデーションを無効にする",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#グラデーションを無効にする",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "グラデーションを無効にする"
-    }
-  },
-  {
-    "title": "点を非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#点を非表示にする",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "点を非表示にする"
-    }
-  },
-  {
-    "title": "ツールチップを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#ツールチップを非表示にする",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップを非表示にする"
-    }
-  },
-  {
-    "title": "軸を非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#軸を非表示にする",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "軸を非表示にする"
-    }
-  },
-  {
-    "title": "グリッドのレイアウトを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#グリッドのレイアウトを変更する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "グリッドのレイアウトを変更する"
-    }
-  },
-  {
-    "title": "しるしをつける",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#しるしをつける",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "しるしをつける"
-    }
-  },
-  {
-    "title": "同期させる",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#同期させる",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "同期させる" }
-  },
-  {
-    "title": "単位をつける",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#単位をつける",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "単位をつける" }
-  },
-  {
-    "title": "値をフォーマットする",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#値をフォーマットする",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "値をフォーマットする"
-    }
-  },
-  {
-    "title": "透明度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#透明度を調整する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "透明度を調整する"
-    }
-  },
-  {
-    "title": "破線を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/area-chart#破線を調整する",
-    "hierarchy": {
-      "lv1": "AreaChart",
-      "lv2": "使い方",
-      "lv3": "破線を調整する"
-    }
-  },
-  {
-    "title": "BarChart",
-    "type": "page",
-    "description": "`BarChart`は、複数のデータを比較するための棒グラフを描画するコンポーネントです。",
-    "slug": "/components/feedback/bar-chart",
-    "hierarchy": { "lv1": "BarChart" }
-  },
-  {
-    "title": "インポート",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#インポート",
-    "hierarchy": { "lv1": "BarChart", "lv2": "インポート" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#使い方",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方" }
-  },
-  {
-    "title": "サイズを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#サイズを変更する",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "積み上げる",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#積み上げる",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "積み上げる" }
-  },
-  {
-    "title": "割合にする",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#割合にする",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "割合にする" }
-  },
-  {
-    "title": "方向を変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#方向を変更する",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "方向を変更する" }
-  },
-  {
-    "title": "凡例を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#凡例を表示する",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "凡例を表示する" }
-  },
-  {
-    "title": "ラベルを表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#ラベルを表示する",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを表示する"
-    }
-  },
-  {
-    "title": "基準線を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#基準線を表示する",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "基準線を表示する"
-    }
-  },
-  {
-    "title": "ツールチップを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#ツールチップを非表示にする",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップを非表示にする"
-    }
-  },
-  {
-    "title": "軸を非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#軸を非表示にする",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "軸を非表示にする"
-    }
-  },
-  {
-    "title": "グリッドのレイアウトを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#グリッドのレイアウトを変更する",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "グリッドのレイアウトを変更する"
-    }
-  },
-  {
-    "title": "しるしをつける",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#しるしをつける",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "しるしをつける" }
-  },
-  {
-    "title": "同期させる",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#同期させる",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "同期させる" }
-  },
-  {
-    "title": "単位をつける",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#単位をつける",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "単位をつける" }
-  },
-  {
-    "title": "値をフォーマットする",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#値をフォーマットする",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "値をフォーマットする"
-    }
-  },
-  {
-    "title": "透明度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#透明度を調整する",
-    "hierarchy": {
-      "lv1": "BarChart",
-      "lv2": "使い方",
-      "lv3": "透明度を調整する"
-    }
-  },
-  {
-    "title": "破線を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/bar-chart#破線を調整する",
-    "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "破線を調整する" }
-  },
-  {
     "title": "CircleProgress",
     "type": "page",
     "description": "`CircleProgress`は、進行状況を円形のプログレスバーで表示するコンポーネントです。",
@@ -2632,321 +3198,11 @@
     }
   },
   {
-    "title": "DonutChart",
-    "type": "page",
-    "description": "`DonutChart`は、複数のデータを比較するためのドーナツチャートを描画するコンポーネントです。",
-    "slug": "/components/feedback/donut-chart",
-    "hierarchy": { "lv1": "DonutChart" }
-  },
-  {
-    "title": "インポート",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#インポート",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "インポート" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#使い方",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "使い方" }
-  },
-  {
-    "title": "サイズを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#サイズを変更する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "凡例を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#凡例を表示する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "凡例を表示する"
-    }
-  },
-  {
-    "title": "間隔を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#間隔を調整する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "間隔を調整する"
-    }
-  },
-  {
-    "title": "内半径、外半径を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#内半径外半径を調整する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "内半径、外半径を調整する"
-    }
-  },
-  {
-    "title": "開始、終了の角度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#開始終了の角度を調整する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "開始、終了の角度を調整する"
-    }
-  },
-  {
-    "title": "ラベルを表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#ラベルを表示する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを表示する"
-    }
-  },
-  {
-    "title": "ラベルの表示位置を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#ラベルの表示位置を調整する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "ラベルの表示位置を調整する"
-    }
-  },
-  {
-    "title": "ラベルを割合にする",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#ラベルを割合にする",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを割合にする"
-    }
-  },
-  {
-    "title": "ツールチップに表示するデータを切り替える",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#ツールチップに表示するデータを切り替える",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップに表示するデータを切り替える"
-    }
-  },
-  {
-    "title": "ツールチップを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#ツールチップを非表示にする",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップを非表示にする"
-    }
-  },
-  {
-    "title": "値をフォーマットする",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#値をフォーマットする",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "値をフォーマットする"
-    }
-  },
-  {
-    "title": "透明度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/donut-chart#透明度を調整する",
-    "hierarchy": {
-      "lv1": "DonutChart",
-      "lv2": "使い方",
-      "lv3": "透明度を調整する"
-    }
-  },
-  {
     "title": "フィードバック",
     "type": "page",
     "description": "`Alert`や`Skeleton`など、ユーザーへの通知やコンテンツの読み込み中にユーザーへ待機を促すコンポーネントが用意されています。",
     "slug": "/components/feedback",
     "hierarchy": { "lv1": "フィードバック" }
-  },
-  {
-    "title": "LineChart",
-    "type": "page",
-    "description": "`LineChart`は、複数のデータを比較するためのラインチャートを描画するコンポーネントです。",
-    "slug": "/components/feedback/line-chart",
-    "hierarchy": { "lv1": "LineChart" }
-  },
-  {
-    "title": "インポート",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#インポート",
-    "hierarchy": { "lv1": "LineChart", "lv2": "インポート" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#使い方",
-    "hierarchy": { "lv1": "LineChart", "lv2": "使い方" }
-  },
-  {
-    "title": "サイズを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#サイズを変更する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "曲線を変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#曲線を変更する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "曲線を変更する"
-    }
-  },
-  {
-    "title": "方向を変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#方向を変更する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "方向を変更する"
-    }
-  },
-  {
-    "title": "凡例を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#凡例を表示する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "凡例を表示する"
-    }
-  },
-  {
-    "title": "ラベルを表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#ラベルを表示する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを表示する"
-    }
-  },
-  {
-    "title": "基準線を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#基準線を表示する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "基準線を表示する"
-    }
-  },
-  {
-    "title": "点を非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#点を非表示にする",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "点を非表示にする"
-    }
-  },
-  {
-    "title": "ツールチップを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#ツールチップを非表示にする",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップを非表示にする"
-    }
-  },
-  {
-    "title": "軸を非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#軸を非表示にする",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "軸を非表示にする"
-    }
-  },
-  {
-    "title": "グリッドのレイアウトを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#グリッドのレイアウトを変更する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "グリッドのレイアウトを変更する"
-    }
-  },
-  {
-    "title": "しるしをつける",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#しるしをつける",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "しるしをつける"
-    }
-  },
-  {
-    "title": "同期させる",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#同期させる",
-    "hierarchy": { "lv1": "LineChart", "lv2": "使い方", "lv3": "同期させる" }
-  },
-  {
-    "title": "単位をつける",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#単位をつける",
-    "hierarchy": { "lv1": "LineChart", "lv2": "使い方", "lv3": "単位をつける" }
-  },
-  {
-    "title": "値をフォーマットする",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#値をフォーマットする",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "値をフォーマットする"
-    }
-  },
-  {
-    "title": "透明度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#透明度を調整する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "透明度を調整する"
-    }
-  },
-  {
-    "title": "破線を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/line-chart#破線を調整する",
-    "hierarchy": {
-      "lv1": "LineChart",
-      "lv2": "使い方",
-      "lv3": "破線を調整する"
-    }
   },
   {
     "title": "Loading",
@@ -2985,127 +3241,6 @@
       "lv1": "Loading",
       "lv2": "使い方",
       "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "PieChart",
-    "type": "page",
-    "description": "`PieChart`は、複数のデータを比較するためのパイチャートを描画するコンポーネントです。",
-    "slug": "/components/feedback/pie-chart",
-    "hierarchy": { "lv1": "PieChart" }
-  },
-  {
-    "title": "インポート",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#インポート",
-    "hierarchy": { "lv1": "PieChart", "lv2": "インポート" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#使い方",
-    "hierarchy": { "lv1": "PieChart", "lv2": "使い方" }
-  },
-  {
-    "title": "サイズを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#サイズを変更する",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "凡例を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#凡例を表示する",
-    "hierarchy": { "lv1": "PieChart", "lv2": "使い方", "lv3": "凡例を表示する" }
-  },
-  {
-    "title": "間隔を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#間隔を調整する",
-    "hierarchy": { "lv1": "PieChart", "lv2": "使い方", "lv3": "間隔を調整する" }
-  },
-  {
-    "title": "開始、終了の角度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#開始終了の角度を調整する",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "開始、終了の角度を調整する"
-    }
-  },
-  {
-    "title": "ラベルを表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#ラベルを表示する",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを表示する"
-    }
-  },
-  {
-    "title": "ラベルの表示位置を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#ラベルの表示位置を調整する",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "ラベルの表示位置を調整する"
-    }
-  },
-  {
-    "title": "ラベルを割合にする",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#ラベルを割合にする",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "ラベルを割合にする"
-    }
-  },
-  {
-    "title": "ツールチップに表示するデータを切り替える",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#ツールチップに表示するデータを切り替える",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップに表示するデータを切り替える"
-    }
-  },
-  {
-    "title": "ツールチップを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#ツールチップを非表示にする",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップを非表示にする"
-    }
-  },
-  {
-    "title": "値をフォーマットする",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#値をフォーマットする",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "値をフォーマットする"
-    }
-  },
-  {
-    "title": "透明度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/pie-chart#透明度を調整する",
-    "hierarchy": {
-      "lv1": "PieChart",
-      "lv2": "使い方",
-      "lv3": "透明度を調整する"
     }
   },
   {
@@ -3191,131 +3326,6 @@
       "lv1": "Progress",
       "lv2": "使い方",
       "lv3": "アニメーションを適応する"
-    }
-  },
-  {
-    "title": "RadarChart",
-    "type": "page",
-    "description": "`RadarChart`は、複数のデータを比較するためのレーダーチャートを描画するコンポーネントです。",
-    "slug": "/components/feedback/radar-chart",
-    "hierarchy": { "lv1": "RadarChart" }
-  },
-  {
-    "title": "インポート",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#インポート",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "インポート" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#使い方",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "使い方" }
-  },
-  {
-    "title": "サイズを変更する",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#サイズを変更する",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "サイズを変更する"
-    }
-  },
-  {
-    "title": "凡例を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#凡例を表示する",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "凡例を表示する"
-    }
-  },
-  {
-    "title": "点を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#点を表示する",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "使い方", "lv3": "点を表示する" }
-  },
-  {
-    "title": "半径軸を表示する",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#半径軸を表示する",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "半径軸を表示する"
-    }
-  },
-  {
-    "title": "軸を非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#軸を非表示にする",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "軸を非表示にする"
-    }
-  },
-  {
-    "title": "グリッドを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#グリッドを非表示にする",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "グリッドを非表示にする"
-    }
-  },
-  {
-    "title": "グリッドを丸くする",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#グリッドを丸くする",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "グリッドを丸くする"
-    }
-  },
-  {
-    "title": "ツールチップを非表示にする",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#ツールチップを非表示にする",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "ツールチップを非表示にする"
-    }
-  },
-  {
-    "title": "値をフォーマットする",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#値をフォーマットする",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "値をフォーマットする"
-    }
-  },
-  {
-    "title": "透明度を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#透明度を調整する",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "透明度を調整する"
-    }
-  },
-  {
-    "title": "破線を調整する",
-    "type": "fragment",
-    "slug": "/components/feedback/radar-chart#破線を調整する",
-    "hierarchy": {
-      "lv1": "RadarChart",
-      "lv2": "使い方",
-      "lv3": "破線を調整する"
     }
   },
   {
@@ -14242,6 +14252,15 @@
       "lv1": "コンポーネントのスタイル",
       "lv2": "単一パーツと複数パーツのコンポーネント",
       "lv3": "複数パーツのコンポーネントのスタイリング"
+    }
+  },
+  {
+    "title": "アプリケーション全体で共通のpropsを設定する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/component-styles#アプリケーション全体で共通のpropsを設定する",
+    "hierarchy": {
+      "lv1": "コンポーネントのスタイル",
+      "lv2": "アプリケーション全体で共通のpropsを設定する"
     }
   },
   {

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-hover",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Yamada UI useHover custom hook",
   "keywords": [
     "use-hover"
@@ -37,8 +37,8 @@
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

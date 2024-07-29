@@ -24,7 +24,12 @@ import {
 } from "@yamada-ui/utils"
 import type { FC } from "react"
 import { cloneElement } from "react"
-import type { UseCarouselProps } from "./use-carousel"
+import type {
+  AlignmentOptionType,
+  ScrollContainOptionType,
+  SlidesInViewOptionsType,
+  UseCarouselProps,
+} from "./use-carousel"
 import {
   CarouselProvider,
   useCarousel,
@@ -50,14 +55,14 @@ type CarouselOptions = {
    *
    * @default 'center'
    */
-  align?: Token<"start" | "center" | "end" | number>
+  align?: Token<AlignmentOptionType>
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
    *
    * @default ''
    */
-  containScroll?: Token<"trimSnaps" | "keepSnaps" | "">
+  containScroll?: Token<ScrollContainOptionType>
   /**
    * The number of slides that should be scrolled with next or previous buttons.
    *
@@ -81,7 +86,7 @@ type CarouselOptions = {
    *
    * @default 0
    */
-  inViewThreshold?: Token<number>
+  inViewThreshold?: Token<SlidesInViewOptionsType>
   /**
    * If `true`, infinite looping.
    * Automatically falls back to false if slide content isn't enough to loop.
@@ -97,12 +102,13 @@ type CarouselOptions = {
    */
   skipSnaps?: Token<boolean>
   /**
-   * Adjusts scroll speed when triggered by any of the methods.
-   * Higher numbers enables faster scrolling.
+   * Set scroll duration when triggered by any of the API methods.
+   * Higher numbers enables slower scrolling.
+   * Drag interactions are not affected because duration is then determined by the drag force.
    *
-   * @default 10
+   * @default 25
    */
-  speed?: Token<number>
+  duration?: Token<number>
   /**
    * The number for the autoplay interval of the carousel.
    *
@@ -169,7 +175,14 @@ export type CarouselProps = ThemeProps<"Carousel"> &
   Omit<HTMLUIProps<"div">, "onChange" | "draggable"> &
   Pick<
     UseCarouselProps,
-    "index" | "defaultIndex" | "onChange" | "onScrollProgress"
+    | "index"
+    | "defaultIndex"
+    | "onChange"
+    | "onScrollProgress"
+    | "watchDrag"
+    | "watchResize"
+    | "watchSlides"
+    | "controlRef"
   > &
   CarouselOptions
 
@@ -185,7 +198,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const autoplay = useValue(props.autoplay)
     const stopMouseEnterAutoplay = useValue(props.stopMouseEnterAutoplay)
     const loop = useValue(props.loop)
-    const speed = useValue(props.speed)
+    const duration = useValue(props.duration)
     const delay = useValue(props.delay)
     const slidesToScroll = useValue(props.slidesToScroll)
     const draggable = useValue(props.draggable)
@@ -205,7 +218,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
       autoplay,
       stopMouseEnterAutoplay,
       loop,
-      speed,
+      duration,
       delay,
       slidesToScroll,
       draggable,

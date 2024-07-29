@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-popper",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "Yamada UI usePopper custom hook",
   "keywords": [
     "use-popper"
@@ -34,14 +34,14 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
-    "@popperjs/core": "^2.11.8"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

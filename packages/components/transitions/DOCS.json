@@ -103,6 +103,11 @@
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
@@ -789,6 +794,11 @@
     "rev": { "type": "string", "required": false },
     "role": { "type": "AriaRole", "required": false },
     "security": { "type": "string", "required": false },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Collapse."
+    },
     "slot": { "type": "string", "required": false },
     "spellCheck": { "type": "Booleanish", "required": false },
     "startingHeight": {
@@ -819,6 +829,11 @@
       "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done."
     },
     "unselectable": { "type": "\"on\" | \"off\"", "required": false },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Collapse."
+    },
     "vocab": { "type": "string", "required": false }
   },
   "Fade": {
@@ -1723,6 +1738,11 @@
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
@@ -2415,6 +2435,11 @@
       "description": "The initial scale of the element."
     },
     "security": { "type": "string", "required": false },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the ScaleFade."
+    },
     "slot": { "type": "string", "required": false },
     "spellCheck": { "type": "Booleanish", "required": false },
     "suppressContentEditableWarning": { "type": "boolean", "required": false },
@@ -2439,6 +2464,11 @@
       "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done."
     },
     "unselectable": { "type": "\"on\" | \"off\"", "required": false },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the ScaleFade."
+    },
     "vocab": { "type": "string", "required": false }
   },
   "Slide": {
@@ -2539,6 +2569,11 @@
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
@@ -3225,6 +3260,11 @@
     "rev": { "type": "string", "required": false },
     "role": { "type": "AriaRole", "required": false },
     "security": { "type": "string", "required": false },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the Slide."
+    },
     "slot": { "type": "string", "required": false },
     "spellCheck": { "type": "Booleanish", "required": false },
     "suppressContentEditableWarning": { "type": "boolean", "required": false },
@@ -3249,6 +3289,11 @@
       "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done."
     },
     "unselectable": { "type": "\"on\" | \"off\"", "required": false },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the Slide."
+    },
     "vocab": { "type": "string", "required": false }
   },
   "SlideFade": {
@@ -3349,6 +3394,11 @@
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
     "className": { "type": "string", "required": false },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
     "content": { "type": "string", "required": false },
     "contentEditable": {
       "type": "\"inherit\" | Booleanish | \"plaintext-only\"",
@@ -4047,6 +4097,11 @@
     },
     "role": { "type": "AriaRole", "required": false },
     "security": { "type": "string", "required": false },
+    "size": {
+      "type": "string",
+      "required": false,
+      "description": "The size of the SlideFade."
+    },
     "slot": { "type": "string", "required": false },
     "spellCheck": { "type": "Booleanish", "required": false },
     "suppressContentEditableWarning": { "type": "boolean", "required": false },
@@ -4071,6 +4126,11 @@
       "description": "If `true`, the element will unmount when `isOpen={false}` and animation is done."
     },
     "unselectable": { "type": "\"on\" | \"off\"", "required": false },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the SlideFade."
+    },
     "vocab": { "type": "string", "required": false }
   }
 }

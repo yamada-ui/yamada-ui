@@ -2,14 +2,22 @@
 title: FileButton
 description: "`FileButton`は、ユーザーがファイルを選択するために使用されるボタンのコンポーネントです。"
 package_name: "@yamada-ui/file-button"
-order: 1
 with_description: true
 tab: Props
+order: 1
 ---
 
 ## Props
 
 ### FileButtonProps
+
+<PropsCard
+  id="filebutton-colorscheme"
+  name="colorScheme"
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  description={"The visual color appearance of the component."}
+  defaultValue={"gray"}
+/>
 
 <PropsCard
   id="filebutton-disableripple"
@@ -22,7 +30,7 @@ tab: Props
 <PropsCard
   id="filebutton-errorbordercolor"
   name="errorBorderColor"
-  type='"link" | "border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | ColorModeArray<...>'
+  type='"link" | "border" | "danger" | "warning" | "success" | "primary" | "info" | "secondary" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | ... 317 more ... | ColorModeArray<...>'
   description={"The border color when the button is invalid."}
 />
 
@@ -97,14 +105,9 @@ tab: Props
   id="filebutton-loadingicon"
   name="loadingIcon"
   type='type ONLY_FOR_FORMAT =
-  | "audio"
-  | "grid"
   | ReactElement<any, string | JSXElementConstructor<any>>
-  | "oval"
-  | "dots"
-  | "puff"
-  | "rings"
-  | "circles"'
+  | (UIValue<string> &
+      ("audio" | "grid" | "oval" | "dots" | "puff" | "rings" | "circles"))'
   description={"The icon to display when the button is loading."}
 />
 
@@ -146,4 +149,20 @@ tab: Props
   name="rightIcon"
   type="ReactElement<any, string | JSXElementConstructor<any>>"
   description={"The icon to display at the right side of the button."}
+/>
+
+<PropsCard
+  id="filebutton-size"
+  name="size"
+  type='"xs" | "sm" | "md" | "lg"'
+  description={"The size of the FileButton."}
+  defaultValue={"md"}
+/>
+
+<PropsCard
+  id="filebutton-variant"
+  name="variant"
+  type='"solid" | "outline" | "link" | "ghost" | "unstyled"'
+  description={"The variant of the FileButton."}
+  defaultValue={"solid"}
 />

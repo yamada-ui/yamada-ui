@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/carousel",
-  "version": "1.0.36",
+  "version": "2.0.0",
   "description": "Yamada UI carousel component",
   "keywords": [
     "yamada",
@@ -53,11 +53,13 @@
     "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "embla-carousel-react": "^7.0.0"
+    "embla-carousel-auto-scroll": "^8.1.7",
+    "embla-carousel-react": "^8.1.7"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "embla-carousel": "^8.1.7",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

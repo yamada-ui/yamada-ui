@@ -98,12 +98,16 @@ export type ButtonProps = HTMLUIProps<"button"> &
  * @see Docs https://yamada-ui.com/components/forms/button
  */
 export const Button = forwardRef<ButtonProps, "button">(
-  ({ children, ...props }, ref) => {
+  ({ children, __isProcessSkip, __styles, ...props }, ref) => {
     const group = useButtonGroup()
-    const [styles, mergedProps] = useComponentStyle("Button", {
-      ...group,
-      ...props,
-    })
+    const [styles, mergedProps] = useComponentStyle(
+      "Button",
+      {
+        ...group,
+        ...props,
+      },
+      { isProcessSkip: __isProcessSkip, styles: __styles },
+    )
     const {
       className,
       as,

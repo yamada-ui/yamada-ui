@@ -325,20 +325,20 @@ export const ZStack = forwardRef<ZStackProps, "div">(
         let { offsetParent, offsetWidth, offsetHeight, offsetTop, offsetLeft } =
           ref.current
 
-        if (!offsetParent) continue
+        if (!offsetParent && process.env.NODE_ENV !== "test") continue
 
         if (isNegativeLeft) {
-          offsetLeft =
-            (offsetParent as HTMLDivElement).offsetWidth -
-            offsetLeft -
-            offsetWidth
+          const offsetParentWidth =
+            (offsetParent as HTMLDivElement | null)?.offsetWidth ?? 0
+
+          offsetLeft = offsetParentWidth - offsetLeft - offsetWidth
         }
 
         if (isNegativeTop) {
-          offsetTop =
-            (offsetParent as HTMLDivElement).offsetHeight -
-            offsetTop -
-            offsetHeight
+          const offsetParentHeight =
+            (offsetParent as HTMLDivElement | null)?.offsetHeight ?? 0
+
+          offsetTop = offsetParentHeight - offsetTop - offsetHeight
         }
 
         offsetWidth += offsetLeft

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/resizable",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "description": "Yamada UI resizable component",
   "keywords": [
     "yamada",
@@ -49,11 +49,11 @@
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-resizable-panels": "^2.0.8"
+    "react-resizable-panels": "^2.0.22"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

@@ -1,11 +1,11 @@
-import ReactDOM from "react-dom/client"
-import { App } from "@/app"
-import { theme, config } from "@/theme"
 import {
   UIProvider,
   getColorModeScript,
   getThemeSchemeScript,
 } from "@yamada-ui/react"
+import ReactDOM from "react-dom/client"
+import { App } from "@/app"
+import { theme, config } from "@/theme"
 
 const injectScript = (textContent: string) => {
   const script = document.createElement("script")

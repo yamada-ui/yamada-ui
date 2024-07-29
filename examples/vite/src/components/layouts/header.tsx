@@ -25,11 +25,11 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "@yamada-ui/react"
-import { ColorPalette, Moon, Sun } from "@/components/media-and-icons"
 import { useRef } from "react"
 import { useState } from "react"
 import { memo } from "react"
 import { FC } from "react"
+import { ColorPalette, Moon, Sun } from "@/components/media-and-icons"
 
 export type HeaderProps = CenterProps
 

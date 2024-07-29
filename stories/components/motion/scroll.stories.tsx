@@ -176,92 +176,114 @@ export const customScrollBar: Story = () => {
       />
 
       <Text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac
-        rhoncus quam.
+        The quick brown fox jumps over the lazy dog. Pack my box with five dozen
+        liquor jugs. How vexingly quick daft zebras jump! Bright vixens jump;
+        dozy fowl quack. Sphinx of black quartz, judge my vow. Two driven jocks
+        help fax my big quiz.
       </Text>
 
       <Text>
-        Fringilla quam urna. Cras turpis elit, euismod eget ligula quis,
-        imperdiet sagittis justo. In viverra fermentum ex ac vestibulum. Aliquam
-        eleifend nunc a luctus porta. Mauris laoreet augue ut felis blandit, at
-        iaculis odio ultrices. Nulla facilisi. Vestibulum cursus ipsum tellus,
-        eu tincidunt neque tincidunt a.
+        Waltz, nymph, for quick jigs vex Bud. Quick zephyrs blow, vexing daft
+        Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping
+        zebras vex. The five boxing wizards jump quickly. Jackdaws love my big
+        sphinx of quartz.
       </Text>
 
       <Heading>Sub-header</Heading>
 
       <Text>
-        In eget sodales arcu, consectetur efficitur metus. Duis efficitur
-        tincidunt odio, sit amet laoreet massa fringilla eu.
+        The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight
+        for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard's
+        job is to vex chumps quickly in fog. Watch "Jeopardy!", Alex Jon's fun
+        TV quiz game.
       </Text>
 
       <Text>
-        Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris
-        id mauris vel arcu commodo venenatis. Aliquam eu risus arcu. Proin sit
-        amet lacus mollis, semper massa ut, rutrum mi.
+        Amazingly few discotheques provide jukeboxes. My girl wove six dozen
+        plaid jackets before she quit. Six big devils from Japan quickly forgot
+        how to waltz. Big July earthquakes confound zany experimental vow. Foxy
+        parsons quiz and cajole the lovably dim wiki-girl.
       </Text>
 
       <Text>
-        Sed sem nisi, luctus consequat ligula in, congue sodales nisl.
+        Have a pick: twenty six letters - no forcing a jumbled quiz! Crazy
+        Fredericka bought many very exquisite opal jewels. Sixty zippers were
+        quickly picked from the woven jute bag. A quick movement of the enemy
+        will jeopardize six gunboats.
       </Text>
 
       <Text>
-        Vestibulum bibendum at erat sit amet pulvinar. Pellentesque pharetra leo
-        vitae tristique rutrum. Donec ut volutpat ante, ut suscipit leo.
+        All questions asked by five watch experts amazed the judge. Jack quietly
+        moved up front and seized the big ball of wax. The quick, brown fox
+        jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz
+        graced by fox whelps.
       </Text>
 
       <Heading>Sub-header</Heading>
 
       <Text>
-        Maecenas quis elementum nulla, in lacinia nisl. Ut rutrum fringilla
-        aliquet. Pellentesque auctor vehicula malesuada. Aliquam id feugiat sem,
-        sit amet tempor nulla. Quisque fermentum felis faucibus, vehicula metus
-        ac, interdum nibh. Curabitur vitae convallis ligula. Integer ac enim vel
-        felis pharetra laoreet. Interdum et malesuada fames ac ante ipsum primis
-        in faucibus. Pellentesque hendrerit ac augue quis pretium.
+        Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs
+        vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt
+        fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold
+        Jim. Quick zephyrs blow, vexing daft Jim.
       </Text>
 
       <Text>
-        Morbi ut scelerisque nibh. Integer auctor, massa non dictum tristique,
-        elit metus efficitur elit, ac pretium sapien nisl nec ante. In et ex
-        ultricies, mollis mi in, euismod dolor.
-      </Text>
-
-      <Text>Quisque convallis ligula non magna efficitur tincidunt.</Text>
-
-      <Text>
-        Pellentesque id lacus pulvinar elit pulvinar pretium ac non urna. Mauris
-        id mauris vel arcu commodo venenatis. Aliquam eu risus arcu. Proin sit
-        amet lacus mollis, semper massa ut, rutrum mi.
+        Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax
+        jodhpurs! "Now fax quiz Jack!" my brave ghost pled. Five quacking
+        zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy
+        sphinx waves quart jug of bad milk.
       </Text>
 
       <Text>
-        Sed sem nisi, luctus consequat ligula in, congue sodales nisl.
+        A very bad quack might jinx zippy fowls. Few quips galvanized the mock
+        jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox,
+        zebra, and my wolves quack! Blowzy red vixens fight for a quick jump.
       </Text>
 
       <Text>
-        Vestibulum bibendum at erat sit amet pulvinar. Pellentesque pharetra leo
-        vitae tristique rutrum. Donec ut volutpat ante, ut suscipit leo.
+        The quick brown fox jumps over the lazy dog. Pack my box with five dozen
+        liquor jugs. How vexingly quick daft zebras jump! Bright vixens jump;
+        dozy fowl quack. Sphinx of black quartz, judge my vow. Two driven jocks
+        help fax my big quiz.
+      </Text>
+
+      <Text>
+        Waltz, nymph, for quick jigs vex Bud. Quick zephyrs blow, vexing daft
+        Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping
+        zebras vex. The five boxing wizards jump quickly. Jackdaws love my big
+        sphinx of quartz.
+      </Text>
+
+      <Text>
+        The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight
+        for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard's
+        job is to vex chumps quickly in fog. Watch "Jeopardy!", Alex Jon's fun
+        TV quiz game.
       </Text>
 
       <Heading>Sub-header</Heading>
 
       <Text>
-        Maecenas quis elementum nulla, in lacinia nisl. Ut rutrum fringilla
-        aliquet. Pellentesque auctor vehicula malesuada. Aliquam id feugiat sem,
-        sit amet tempor nulla. Quisque fermentum felis faucibus, vehicula metus
-        ac, interdum nibh. Curabitur vitae convallis ligula. Integer ac enim vel
-        felis pharetra laoreet. Interdum et malesuada fames ac ante ipsum primis
-        in faucibus. Pellentesque hendrerit ac augue quis pretium.
+        Amazingly few discotheques provide jukeboxes. My girl wove six dozen
+        plaid jackets before she quit. Six big devils from Japan quickly forgot
+        how to waltz. Big July earthquakes confound zany experimental vow. Foxy
+        parsons quiz and cajole the lovably dim wiki-girl.
       </Text>
 
       <Text>
-        Morbi ut scelerisque nibh. Integer auctor, massa non dictum tristique,
-        elit metus efficitur elit, ac pretium sapien nisl nec ante. In et ex
-        ultricies, mollis mi in, euismod dolor.
+        Have a pick: twenty six letters - no forcing a jumbled quiz! Crazy
+        Fredericka bought many very exquisite opal jewels. Sixty zippers were
+        quickly picked from the woven jute bag. A quick movement of the enemy
+        will jeopardize six gunboats.
       </Text>
 
-      <Text>Quisque convallis ligula non magna efficitur tincidunt.</Text>
+      <Text>
+        All questions asked by five watch experts amazed the judge. Jack quietly
+        moved up front and seized the big ball of wax. The quick, brown fox
+        jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz
+        graced by fox whelps.
+      </Text>
     </>
   )
 }

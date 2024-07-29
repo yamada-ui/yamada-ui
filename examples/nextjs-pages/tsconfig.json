@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "baseUrl": ".",
     "allowJs": true,
     "esModuleInterop": true,
@@ -20,6 +21,6 @@
     "allowSyntheticDefaultImports": true,
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", "eslint.config.mjs"],
   "exclude": ["node_modules"]
 }

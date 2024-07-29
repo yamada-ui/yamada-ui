@@ -394,7 +394,7 @@ describe("<Select />", () => {
   })
 })
 
-describe.skip("<MultiSelect />", () => {
+describe("<MultiSelect />", () => {
   test("should pass a11y test", async () => {
     await a11y(
       <MultiSelect>
@@ -596,7 +596,7 @@ describe.skip("<MultiSelect />", () => {
     await user.click(input)
     await user.keyboard("{Escape>}{ArrowUp>}")
 
-    const options = await screen.findAllByRole("select-item")
+    const options = await screen.findAllByRole("option")
 
     expect(options[items.length - 1]).toHaveAttribute("data-focus")
 

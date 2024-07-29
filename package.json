@@ -22,6 +22,7 @@
     "build:fast": "turbo run build:fast --filter=./packages/**",
     "dev": "turbo run dev --filter=./packages/**",
     "lint": "eslint . --max-warnings=0 --cache",
+    "lint:inspect": "pnpm dlx @eslint/config-inspector",
     "format": "prettier --write .",
     "format:check": "prettier --check packages/**/** stories/**/** scripts/**/** --cache",
     "format:write": "prettier --write packages/**/** stories/**/** scripts/**/** --cache",

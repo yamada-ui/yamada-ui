@@ -34,17 +34,18 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
 export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
-  const [styles, { size: fontSize, ...mergedProps }] = useComponentStyle(
-    "Icon",
-    props,
-  )
-  const {
+  const [styles, { size, ...mergedProps }] = useComponentStyle("Icon", props)
+  let {
     className,
     as: element,
+    fontSize,
     viewBox,
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
+
+  fontSize ??= size
+
   const boxSize = replaceObject(fontSize, (value) =>
     !isUnit(value) ? useToken("fontSizes", value) : value,
   )

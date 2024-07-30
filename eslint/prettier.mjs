@@ -1,4 +1,3 @@
-import pluginPrettier from "eslint-plugin-prettier"
 import pluginReact from "eslint-plugin-react"
 
 /** @type {Pick<ESLintConfig, "name" | "files" | "plugins" | "rules">} */
@@ -16,11 +15,9 @@ const prettierConfig = {
     "**/*.d.ts",
   ],
   plugins: {
-    prettier: pluginPrettier,
     react: pluginReact,
   },
   rules: {
-    ...pluginPrettier.configs.recommended.rules,
     curly: "off",
     "no-unexpected-multiline": "off",
     "react/jsx-child-element-spacing": "off",

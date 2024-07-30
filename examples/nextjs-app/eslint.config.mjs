@@ -4,7 +4,6 @@ import { fixupPluginRules } from '@eslint/compat'
 import pluginNext from '@next/eslint-plugin-next'
 import pluginImport from 'eslint-plugin-import'
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
-import pluginPrettier from 'eslint-plugin-prettier'
 import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
 import globals from 'globals'
@@ -131,10 +130,8 @@ export default tseslintConfig(
     files,
     plugins: {
       react: pluginReact,
-      prettier: pluginPrettier,
     },
     rules: {
-      ...pluginPrettier.configs.recommended.rules,
       curly: 'off',
       'no-unexpected-multiline': 'off',
       'react/jsx-child-element-spacing': 'off',

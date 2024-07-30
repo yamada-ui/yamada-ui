@@ -1,0 +1,19 @@
+import{j as r}from"./jsx-runtime-Nms4Y4qS.js";import{U as a}from"./ui-provider-vn_aFqYR.js";import{e as u}from"./extend-config-lcOXLh7g.js";import{C as g}from"./center-CBh6L0xH.js";import{I as d}from"./image-DxP_VRiT.js";import"./index-BwDkhjyp.js";import"./_commonjsHelpers-BosuxZz1.js";import"./index-Dzn7FVja.js";import"./theme-provider-CgekAyNK.js";import"./factory-BXeT7qA-.js";import"./extends-CF3RwP-h.js";import"./motion-CcTWI5_V.js";import"./loading-provider-BlDKCDBl.js";import"./index-Dxynqg56.js";import"./Combination-CONbhR2A.js";import"./loading-mQT9J7oF.js";import"./icon-DIrcXz1L.js";import"./index-jt6EZpVS.js";import"./use-component-style-DRlwxZhB.js";import"./forward-ref-BmTAT9U5.js";import"./motion-DhpH0FRI.js";import"./index-UcjmprJc.js";import"./container-portal-D_8J7oaj.js";import"./index-DxjWwZXO.js";import"./notice-C0m_B0AJ.js";import"./alert-Bg8_w__7.js";import"./close-button-DV2TJvIJ.js";import"./use-ripple-2cGyX1K8.js";import"./use-image-3hz8JpDd.js";const K={title:"System / Theme / Configure"},o=()=>{const t=u({});return r.jsx(a,{config:t,children:r.jsx(f,{})})},e=()=>{const t={};return r.jsx(a,{config:t,children:r.jsx(f,{})})},f=()=>r.jsx(g,{w:"calc(100vw - 16px * 2)",h:"calc(100vh - 16px * 2)",children:r.jsx(d,{w:"full",maxW:"xl",src:"https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-colored@2x.png"})});var i,n,m;o.parameters={...o.parameters,docs:{...(i=o.parameters)==null?void 0:i.docs,source:{originalSource:`() => {
+  const config = extendConfig({
+    /**
+     * Define the config you want to customize, merging them with the default config
+     */
+  });
+  return <UIProvider config={config}>
+      <App />
+    </UIProvider>;
+}`,...(m=(n=o.parameters)==null?void 0:n.docs)==null?void 0:m.source}}};var p,s,c;e.parameters={...e.parameters,docs:{...(p=e.parameters)==null?void 0:p.docs,source:{originalSource:`() => {
+  const config = {
+    /**
+     * Define the config you want to customize
+     */
+  };
+  return <UIProvider config={config}>
+      <App />
+    </UIProvider>;
+}`,...(c=(s=e.parameters)==null?void 0:s.docs)==null?void 0:c.source}}};const L=["extendConfigure","overrideConfigure"];export{L as __namedExportsOrder,K as default,o as extendConfigure,e as overrideConfigure};

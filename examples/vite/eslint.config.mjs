@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url"
 import { fixupPluginRules } from "@eslint/compat"
 import eslint from "@eslint/js"
 import pluginImport from "eslint-plugin-import"
-import pluginPrettier from "eslint-plugin-prettier"
 import pluginReact from "eslint-plugin-react"
 import pluginReactHooks from "eslint-plugin-react-hooks"
 import pluginReactRefresh from "eslint-plugin-react-refresh"
@@ -73,11 +72,9 @@ export default tseslintConfig(
   },
   {
     plugins: {
-      prettier: pluginPrettier,
       react: pluginReact,
     },
     rules: {
-      ...pluginPrettier.configs.recommended.rules,
       curly: "off",
       "no-unexpected-multiline": "off",
       "react/jsx-child-element-spacing": "off",

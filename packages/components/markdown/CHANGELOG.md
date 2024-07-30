@@ -1,5 +1,12 @@
 # @yamada-ui/markdown
 
+## 1.0.39
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/alert@1.0.36
+
 ## 1.0.38
 
 ### Patch Changes

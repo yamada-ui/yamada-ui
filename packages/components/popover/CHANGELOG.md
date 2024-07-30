@@ -1,5 +1,12 @@
 # @yamada-ui/popover
 
+## 1.2.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/close-button@1.0.36
+
 ## 1.2.8
 
 ### Patch Changes

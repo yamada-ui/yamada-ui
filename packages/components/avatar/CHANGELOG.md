@@ -1,5 +1,13 @@
 # @yamada-ui/avatar
 
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [[`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/image@1.1.1
+  - @yamada-ui/icon@1.1.2
+
 ## 1.2.3
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @yamada-ui/notice
 
+## 1.0.36
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/alert@1.0.36
+  - @yamada-ui/close-button@1.0.36
+
 ## 1.0.35
 
 ### Patch Changes

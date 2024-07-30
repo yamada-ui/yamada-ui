@@ -6,7 +6,7 @@
     "dev": "next -p 4444",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0 --cache",
     "lint:inspect": "pnpm dlx @eslint/config-inspector"
   },
   "dependencies": {

@@ -161,4 +161,32 @@ export const MEMBERS = [
     },
     discord: { id: "1221042700304912437" },
   },
+  {
+    name: { en: "Hirono Kobari", ja: "Hirono Kobari" },
+    description: {
+      en: "Front-end engineer, interested in typography. ",
+      ja: "フロントエンドエンジニア。タイポグラフィに興味があります。",
+    },
+    github: {
+      id: "hironokobari",
+      icon: "https://avatars.githubusercontent.com/u/129595457?v=4",
+      url: "https://github.com/hironokobari",
+    },
+    x: { url: "https://x.com/unikoroshi0" },
+    discord: { id: "1100994785185103913" },
+  },
+  {
+    name: { en: "Yoko Odenda", ja: "Yoko Odenda" },
+    description: {
+      en: "Former pharmacist turned front-end engineer.",
+      ja: "元薬剤師のフロントエンドエンジニア。",
+    },
+    github: {
+      id: "odendayoko",
+      icon: "https://avatars.githubusercontent.com/u/128268777?v=4",
+      url: "https://github.com/odendayoko",
+    },
+    x: { url: "https://x.com/odendayoko" },
+    discord: { id: "413329189635227650" },
+  },
 ]

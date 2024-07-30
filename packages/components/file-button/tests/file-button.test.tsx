@@ -8,8 +8,7 @@ describe("<FileButton />", () => {
   })
 
   test("FileButton renders correctly", async () => {
-    const { container } = render(<FileButton>Upload</FileButton>)
-    await a11y(container)
+    await a11y(<FileButton>Upload</FileButton>)
   })
 
   test("should render FileButton", async () => {

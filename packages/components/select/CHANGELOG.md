@@ -1,5 +1,15 @@
 # @yamada-ui/select
 
+## 1.3.3
+
+### Patch Changes
+
+- [#2366](https://github.com/yamada-ui/yamada-ui/pull/2366) [`d616b31`](https://github.com/yamada-ui/yamada-ui/commit/d616b31ca31527a35752bce06e36ead5603d0e3c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `Select` and `MultiSelect` items could not be selected.
+
+- Updated dependencies [[`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/icon@1.1.2
+  - @yamada-ui/popover@1.2.9
+
 ## 1.3.2
 
 ### Patch Changes

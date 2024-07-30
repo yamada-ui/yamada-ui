@@ -73,7 +73,7 @@ describe("<Markdown />", () => {
           `,
         },
       ])(
-        "should render as an `Alert` component. (includes breakline)",
+        "should render as an `Alert` component. (includes break line)",
         async ({ content }) => {
           render(<Markdown>{content}</Markdown>)
 
@@ -332,7 +332,7 @@ describe("<Markdown />", () => {
         expect(thirdLineText).toBeInTheDocument()
       })
 
-      test("if nested, only the outermost one should be converted to an `Alert` component. (included oneline-note)", async () => {
+      test("if nested, only the outermost one should be converted to an `Alert` component. (included one line)", async () => {
         const content = dedent`
           :::note status=error
           :::note Status is error. :::

@@ -194,6 +194,8 @@ describe("<Reorder />", () => {
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    })
+    await waitFor(() => {
       expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
     })
   })

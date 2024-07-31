@@ -1,9 +1,9 @@
 import type { RenderOptions } from "@testing-library/react"
 import { isArray, isString } from "@yamada-ui/utils"
-import type { ImpactValue, RunOptions, Spec } from "axe-core"
 import type { ReactElement } from "react"
 import { isValidElement } from "react"
 import { axe } from "vitest-axe"
+import type { AxeCore } from "vitest-axe"
 import type { AxeMatchers } from "vitest-axe/matchers"
 import { render } from "./render"
 
@@ -12,9 +12,9 @@ declare module "vitest" {
   export interface AsymmetricMatchersContaining extends AxeMatchers {}
 }
 
-type A11yConfigureOptions = RunOptions & {
-  globalOptions?: Spec
-  impactLevels?: ImpactValue[]
+type A11yConfigureOptions = AxeCore.RunOptions & {
+  globalOptions?: AxeCore.Spec
+  impactLevels?: AxeCore.ImpactValue[]
 }
 
 export type A11yProps = RenderOptions & { axeOptions?: A11yConfigureOptions }

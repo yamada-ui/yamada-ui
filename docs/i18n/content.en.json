@@ -8945,13 +8945,13 @@
     "hierarchy": { "lv1": "Breadcrumb", "lv2": "Usage", "lv3": "Use Ellipsis" }
   },
   {
-    "title": "Display Ellipsed Items in a Menu",
+    "title": "Display Ellipsis Items in a Menu",
     "type": "fragment",
-    "slug": "/components/navigation/breadcrumb#display-ellipsed-items-in-a-menu",
+    "slug": "/components/navigation/breadcrumb#display-ellipsis-items-in-a-menu",
     "hierarchy": {
       "lv1": "Breadcrumb",
       "lv2": "Usage",
-      "lv3": "Display Ellipsed Items in a Menu"
+      "lv3": "Display Ellipsis Items in a Menu"
     }
   },
   {

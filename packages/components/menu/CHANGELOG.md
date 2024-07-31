@@ -1,5 +1,13 @@
 # @yamada-ui/menu
 
+## 1.3.9
+
+### Patch Changes
+
+- Updated dependencies [[`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/icon@1.1.2
+  - @yamada-ui/popover@1.2.9
+
 ## 1.3.8
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @yamada-ui/snacks
 
+## 1.0.28
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/alert@1.0.36
+  - @yamada-ui/close-button@1.0.36
+
 ## 1.0.27
 
 ### Patch Changes

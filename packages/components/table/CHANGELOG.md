@@ -1,5 +1,14 @@
 # @yamada-ui/table
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`d616b31`](https://github.com/yamada-ui/yamada-ui/commit/d616b31ca31527a35752bce06e36ead5603d0e3c), [`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/select@1.3.3
+  - @yamada-ui/icon@1.1.2
+  - @yamada-ui/pagination@1.0.36
+
 ## 1.1.3
 
 ### Patch Changes

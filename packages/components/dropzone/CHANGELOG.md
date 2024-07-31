@@ -1,5 +1,12 @@
 # @yamada-ui/dropzone
 
+## 1.0.40
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.12
+
 ## 1.0.39
 
 ### Patch Changes

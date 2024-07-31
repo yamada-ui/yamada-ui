@@ -1,5 +1,12 @@
 # @yamada-ui/rating
 
+## 1.0.37
+
+### Patch Changes
+
+- Updated dependencies [[`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/icon@1.1.2
+
 ## 1.0.36
 
 ### Patch Changes

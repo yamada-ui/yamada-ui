@@ -1,7 +1,7 @@
 {
   "Menu": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -187,7 +187,7 @@
     "aria-colspan": { "type": "number", "required": false },
     "aria-controls": { "type": "string", "required": false },
     "aria-current": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"time\"\n  | \"page\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"page\"\n  | \"time\"\n  | \"true\"\n  | \"false\"\n  | \"step\"\n  | \"location\"\n  | \"date\"",
       "required": false
     },
     "aria-describedby": { "type": "string", "required": false },
@@ -203,7 +203,7 @@
     "aria-flowto": { "type": "string", "required": false },
     "aria-grabbed": { "type": "Booleanish", "required": false },
     "aria-haspopup": {
-      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"dialog\"\n  | \"menu\"\n  | \"grid\"\n  | \"true\"\n  | \"false\"\n  | \"listbox\"\n  | \"tree\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | \"grid\"\n  | \"dialog\"\n  | \"menu\"\n  | \"true\"\n  | \"false\"\n  | \"listbox\"\n  | \"tree\"",
       "required": false
     },
     "aria-hidden": { "type": "Booleanish", "required": false },
@@ -235,7 +235,7 @@
     },
     "aria-readonly": { "type": "Booleanish", "required": false },
     "aria-relevant": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"all\"\n  | \"additions\"\n  | \"additions removals\"\n  | \"additions text\"\n  | \"removals\"\n  | \"removals additions\"\n  | \"removals text\"\n  | \"text additions\"\n  | \"text removals\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"all\"\n  | \"text\"\n  | \"additions\"\n  | \"additions removals\"\n  | \"additions text\"\n  | \"removals\"\n  | \"removals additions\"\n  | \"removals text\"\n  | \"text additions\"\n  | \"text removals\"",
       "required": false
     },
     "aria-required": { "type": "Booleanish", "required": false },
@@ -255,7 +255,7 @@
     "aria-valuenow": { "type": "number", "required": false },
     "aria-valuetext": { "type": "string", "required": false },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"base\" | \"link\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | \"audio\" | \"b\" | \"bdi\" | \"bdo\" | \"big\" | \"blockquote\" | \"body\" | \"br\" | \"button\" | ... 149 more ... | \"view\"",
+      "type": "\"symbol\" | \"object\" | \"base\" | \"link\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"small\" | \"sub\" | \"sup\" | \"a\" | \"abbr\" | \"address\" | \"area\" | ... 148 more ... | \"view\"",
       "required": false
     },
     "autoCapitalize": { "type": "string", "required": false },
@@ -285,7 +285,7 @@
     "id": { "type": "string", "required": false },
     "inlist": { "type": "any", "required": false },
     "inputMode": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"search\"\n  | \"text\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"search\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
       "required": false
     },
     "is": { "type": "string", "required": false },
@@ -1046,7 +1046,7 @@
   "MenuDivider": {},
   "ContextMenu": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."

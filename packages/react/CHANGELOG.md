@@ -1,5 +1,42 @@
 # @yamada-ui/react
 
+## 1.4.8
+
+### Patch Changes
+
+- Updated dependencies [[`d616b31`](https://github.com/yamada-ui/yamada-ui/commit/d616b31ca31527a35752bce06e36ead5603d0e3c), [`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/select@1.3.3
+  - @yamada-ui/image@1.1.1
+  - @yamada-ui/icon@1.1.2
+  - @yamada-ui/avatar@1.2.4
+  - @yamada-ui/accordion@2.0.5
+  - @yamada-ui/alert@1.0.36
+  - @yamada-ui/autocomplete@1.3.2
+  - @yamada-ui/breadcrumb@1.3.7
+  - @yamada-ui/button@1.0.38
+  - @yamada-ui/close-button@1.0.36
+  - @yamada-ui/color-picker@1.2.25
+  - @yamada-ui/list@1.0.35
+  - @yamada-ui/loading@1.1.12
+  - @yamada-ui/menu@1.3.9
+  - @yamada-ui/native-select@1.0.40
+  - @yamada-ui/number-input@1.1.10
+  - @yamada-ui/pagination@1.0.36
+  - @yamada-ui/rating@1.0.37
+  - @yamada-ui/reorder@2.0.6
+  - @yamada-ui/resizable@1.1.8
+  - @yamada-ui/stat@1.0.33
+  - @yamada-ui/stepper@1.0.36
+  - @yamada-ui/tag@1.0.36
+  - @yamada-ui/toggle@1.0.17
+  - @yamada-ui/notice@1.0.36
+  - @yamada-ui/snacks@1.0.28
+  - @yamada-ui/modal@1.3.6
+  - @yamada-ui/popover@1.2.9
+  - @yamada-ui/providers@1.2.3
+  - @yamada-ui/file-button@1.1.1
+  - @yamada-ui/use-media-query@1.0.43
+
 ## 1.4.7
 
 ### Patch Changes

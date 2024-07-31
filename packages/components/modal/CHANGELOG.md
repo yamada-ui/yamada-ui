@@ -1,5 +1,13 @@
 # @yamada-ui/modal
 
+## 1.3.6
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.38
+  - @yamada-ui/close-button@1.0.36
+
 ## 1.3.5
 
 ### Patch Changes

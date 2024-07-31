@@ -1,5 +1,11 @@
 # @yamada-ui/image
 
+## 1.1.1
+
+### Patch Changes
+
+- [#2377](https://github.com/yamada-ui/yamada-ui/pull/2377) [`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug that `fontSize` and `boxSize` of `Icon` and `Image` were not set.
+
 ## 1.1.0
 
 ### Minor Changes

@@ -11,6 +11,13 @@ import { Inter } from "next/font/google"
 import Head from "next/head"
 import type { FC } from "react"
 import { theme, config } from "theme"
+import dayjs from "dayjs"
+import timezone from "dayjs/plugin/timezone"
+import utc from "dayjs/plugin/utc"
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault("Asia/Tokyo")
 
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

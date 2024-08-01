@@ -24,7 +24,6 @@ jobs:
 
       - name: Update issues and pull requests
         run: |
-          body='{"repo": "yamada-ui", "owner": "yamada-ui"}'
           curl -X POST \
           -H "Content-Type: application/json" \
           -H "x-signature: sha256=${{ steps.generate_signature.outputs.signature }}" \

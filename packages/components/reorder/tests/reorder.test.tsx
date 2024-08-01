@@ -1,4 +1,4 @@
-import { a11y, act, render, screen } from "@yamada-ui/test"
+import { a11y, act, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import type { ReorderGenerateItem } from "../src"
 import { Reorder, ReorderItem, ReorderTrigger } from "../src"
@@ -192,7 +192,11 @@ describe("<Reorder />", () => {
       },
     ])
 
-    expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
-    expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    })
+    await waitFor(() => {
+      expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    })
   })
 })

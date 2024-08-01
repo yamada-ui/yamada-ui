@@ -548,7 +548,7 @@ export const useColorSelector = ({
       ref,
       color,
       onClick: handlerAll(props.onClick, () => {
-        if (!color) return
+        if (!isString(color)) return
 
         onSwatchClick?.(color)
         onChange(color)

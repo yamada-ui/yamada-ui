@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prepare": "lefthook install",
     "dev": "tsx server",
     "start": "next start",
     "prebuild": "pnpm gen:content",

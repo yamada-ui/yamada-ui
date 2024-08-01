@@ -28,20 +28,6 @@ export const MAINTAINERS = [
     discord: { id: "281653488084189184" },
   },
   {
-    name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
-    description: {
-      en: "Passionate about web development and a student at the University of Auckland.",
-      ja: "ウェブ開発に情熱を持つオークランド大学の学生。",
-    },
-    github: {
-      id: "taroj1205",
-      icon: "https://avatars.githubusercontent.com/u/61367823?v=4",
-      url: "https://github.com/taroj1205",
-    },
-    x: { url: "https://x.com/taroj1205" },
-    discord: { id: "631578250144907269" },
-  },
-  {
     name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
     description: {
       en: "Web engineer, a university student.",
@@ -54,6 +40,20 @@ export const MAINTAINERS = [
     },
     x: { url: "https://x.com/dimyasvariant" },
     discord: { id: "1000629510078738432" },
+  },
+  {
+    name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
+    description: {
+      en: "Passionate about web development and a student at the University of Auckland.",
+      ja: "ウェブ開発に情熱を持つオークランド大学の学生。",
+    },
+    github: {
+      id: "taroj1205",
+      icon: "https://avatars.githubusercontent.com/u/61367823?v=4",
+      url: "https://github.com/taroj1205",
+    },
+    x: { url: "https://x.com/taroj1205" },
+    discord: { id: "631578250144907269" },
   },
   {
     name: { en: "koralle", ja: "koralle" },

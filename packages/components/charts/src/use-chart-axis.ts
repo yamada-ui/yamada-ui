@@ -91,9 +91,13 @@ export type UseChartAxisOptions = {
    */
   unit?: string
   /**
-   * A function to format values on Y axis and inside the tooltip
+   * A function to format Y axis tick.
    */
-  valueFormatter?: (value: number) => string
+  yAxisTickFormatter?: (value: any) => string
+  /**
+   * A function to format X axis tick.
+   */
+  xAxisTickFormatter?: (value: any) => string
 }
 
 export type UseChartAxisProps = UseChartAxisOptions & {
@@ -111,7 +115,12 @@ export const useChartAxis = ({
   xAxisLabel: xAxisLabelProp,
   yAxisLabel: yAxisLabelProp,
   unit,
-  valueFormatter,
+  yAxisTickFormatter = type === "percent" && layoutType !== "vertical"
+    ? valueToPercent
+    : undefined,
+  xAxisTickFormatter = type === "percent" && layoutType !== "vertical"
+    ? valueToPercent
+    : undefined,
   styles,
   ...rest
 }: UseChartAxisProps) => {
@@ -138,14 +147,6 @@ export const useChartAxis = ({
     withTickLine ? { stroke: "currentColor" } : false
   const xTickLine = getTickLine(withXTickLine)
   const yTickLine = getTickLine(withYTickLine)
-  const yAxisTickFormatter =
-    type === "percent" && layoutType !== "vertical"
-      ? valueToPercent
-      : valueFormatter
-  const xAxisTickFormatter =
-    type === "percent" && layoutType === "vertical"
-      ? valueToPercent
-      : valueFormatter
 
   const xAxisLabel = layoutType === "vertical" ? yAxisLabelProp : xAxisLabelProp
   const yAxisLabel = layoutType === "vertical" ? xAxisLabelProp : yAxisLabelProp
@@ -281,6 +282,6 @@ export const useChartAxis = ({
   }
 }
 
-const valueToPercent = (value: number) => {
+const valueToPercent = (value: any) => {
   return `${(value * 100).toFixed(0)}%`
 }

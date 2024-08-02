@@ -46,7 +46,7 @@ type MultiSelectOptions = {
    */
   separator?: string
   /**
-   * If `true`, display the select clear icon.
+   * If `true`, display the multi select clear icon.
    *
    * @default true
    */
@@ -60,19 +60,23 @@ type MultiSelectOptions = {
    */
   errorBorderColor?: string
   /**
-   * Props for select container element.
+   * Props for multi select container element.
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
-   * Props for select list element.
+   * Props for multi select list element.
    */
   listProps?: Omit<SelectListProps, "children">
   /**
-   * Props for select icon element.
+   * Props for multi select field element.
+   */
+  fieldProps?: Omit<MultiSelectFieldProps, "children">
+  /**
+   * Props for multi select icon element.
    */
   iconProps?: SelectIconProps
   /**
-   * Props for select clear icon element.
+   * Props for multi select clear icon element.
    */
   clearIconProps?: SelectIconProps
   /**
@@ -109,6 +113,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     closeOnSelect = false,
     containerProps,
     listProps,
+    fieldProps,
     iconProps,
     clearIconProps,
     portalProps = { isDisabled: true },
@@ -200,7 +205,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
                   separator={separator}
                   h={h}
                   minH={minH}
-                  {...getFieldProps({}, ref)}
+                  {...getFieldProps(fieldProps, ref)}
                 />
               </PopoverTrigger>
 

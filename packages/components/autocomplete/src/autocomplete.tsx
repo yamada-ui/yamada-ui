@@ -43,6 +43,10 @@ type AutocompleteOptions = {
    */
   listProps?: Omit<AutocompleteListProps, "children">
   /**
+   * Props for autocomplete field element.
+   */
+  fieldProps?: Omit<AutocompleteFieldProps, "inputProps" | "children">
+  /**
    * Props for autocomplete input element.
    */
   inputProps?: HTMLUIProps<"input">
@@ -89,6 +93,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
       minHeight,
       containerProps,
       listProps,
+      fieldProps,
       inputProps,
       iconProps,
       portalProps = { isDisabled: true },
@@ -147,7 +152,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
                   h={h}
                   minH={minH}
                   inputProps={inputProps}
-                  {...getFieldProps({}, ref)}
+                  {...getFieldProps(fieldProps, ref)}
                 />
 
                 <AutocompleteIcon {...iconProps} {...formControlProps} />

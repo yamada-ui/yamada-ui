@@ -1,6 +1,7 @@
 import path from "path"
 import type { RequestError } from "@octokit/request-error"
 import { Octokit } from "@octokit/rest"
+import { isArray } from "@yamada-ui/react"
 import { config } from "dotenv"
 import type { Options } from "prettier"
 import { format, resolveConfig } from "prettier"
@@ -80,7 +81,7 @@ export const getConstant = async (): Promise<Constant> => {
 
   const { data } = await octokit.repos.getContent(COMMON_PARAMS)
 
-  if (Array.isArray(data)) {
+  if (isArray(data)) {
     await Promise.all(
       data.map(async ({ name, path }) => {
         try {
@@ -97,7 +98,7 @@ export const getConstant = async (): Promise<Constant> => {
             name = name.replace(".json", "")
             name = toCamelCase(name)
 
-            result[name] = JSON.parse(content)
+            if (content) result[name] = JSON.parse(content)
           }
         } catch {}
       }),

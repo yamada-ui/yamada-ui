@@ -176,4 +176,18 @@ export const MEMBERS = [
     x: { url: "https://x.com/K_K_2306" },
     discord: { id: "1155273789593112616" },
   },
+  {
+    name: { en: "Hinata Ohyama", ja: "Hinata Ohyama" },
+    description: {
+      en: "Developer of Yamada UI. Front-end engineer.",
+      ja: "Yamada UIの開発者。フロントエンドエンジニア。",
+    },
+    github: {
+      id: "hinataOhyama",
+      icon: "https://avatars.githubusercontent.com/u/82660649?v=4",
+      url: "https://github.com/hinataOhyama",
+    },
+    x: { url: "https://x.com/hinata_engin" },
+    discord: { id: "1110399456588869682" },
+  },
 ]

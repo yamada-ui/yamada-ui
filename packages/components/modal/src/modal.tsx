@@ -156,12 +156,7 @@ type ModalOptions = Pick<
   portalProps?: Omit<PortalProps, "children">
 }
 
-export type ModalProps = Omit<
-  MotionProps<"section">,
-  "scrollBehavior" | "animation" | "color" | "transition"
-> &
-  ThemeProps<"Modal"> &
-  ModalOptions
+export type ModalProps = ModalContentProps & ThemeProps<"Modal"> & ModalOptions
 
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
@@ -308,11 +303,6 @@ export const Modal = forwardRef<ModalProps, "section">(
   },
 )
 
-type ModalContentProps = Omit<
-  MotionProps<"section">,
-  "scrollBehavior" | "animation" | "color" | "transition"
->
-
 const getModalContentProps = (
   animation: ModalProps["animation"] = "scale",
   duration?: MotionTransitionProperties["duration"],
@@ -345,6 +335,11 @@ const getModalContentProps = (
       }
   }
 }
+
+type ModalContentProps = Omit<
+  MotionProps<"section">,
+  "scrollBehavior" | "animation" | "children"
+>
 
 const ModalContent = forwardRef<ModalContentProps, "section", false>(
   ({ className, children, __css, ...rest }, ref) => {

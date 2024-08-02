@@ -1,4 +1,4 @@
-import type { HTMLUIProps, OmitProps } from "@yamada-ui/core"
+import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { HTMLMotionProps } from "framer-motion"
@@ -6,18 +6,21 @@ import { motion } from "framer-motion"
 import type { ReactHTML } from "react"
 import type { MotionAs } from "./motion.types"
 
-type UIProps = "children" | "color"
-
 type MotionOptions = {
   as?: MotionAs
 }
 
-export type MotionProps<Y extends keyof ReactHTML = "div"> = OmitProps<
-  HTMLUIProps<Y>,
-  keyof Omit<HTMLMotionProps<Y>, UIProps>
+type BaseMotionProps<Y extends keyof ReactHTML = "div"> = Omit<
+  HTMLMotionProps<Y>,
+  "color"
 > &
-  Omit<HTMLMotionProps<Y>, UIProps> &
   MotionOptions
+
+export type MotionProps<Y extends keyof ReactHTML = "div"> = Omit<
+  HTMLUIProps<Y>,
+  keyof BaseMotionProps<Y>
+> &
+  BaseMotionProps<Y>
 
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.

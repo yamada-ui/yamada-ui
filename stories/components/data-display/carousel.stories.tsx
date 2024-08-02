@@ -189,9 +189,9 @@ export const withGap: Story = () => {
   )
 }
 
-export const withSpeed: Story = () => {
+export const withDuration: Story = () => {
   return (
-    <Carousel speed={50}>
+    <Carousel duration={60}>
       <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>
@@ -207,7 +207,6 @@ export const withSpeed: Story = () => {
     </Carousel>
   )
 }
-
 export const withSlideSize: Story = () => {
   return (
     <Carousel slideSize="50%">
@@ -590,6 +589,41 @@ export const disabledControlButton: Story = () => {
 export const disabledIndicators: Story = () => {
   return (
     <Carousel withIndicators={false}>
+      <CarouselSlide as={Center} bg="primary">
+        1
+      </CarouselSlide>
+      <CarouselSlide as={Center} bg="secondary">
+        2
+      </CarouselSlide>
+      <CarouselSlide as={Center} bg="warning">
+        3
+      </CarouselSlide>
+      <CarouselSlide as={Center} bg="danger">
+        4
+      </CarouselSlide>
+    </Carousel>
+  )
+}
+
+export const useMethods: Story = () => {
+  return (
+    <Carousel
+      watchDrag={(methods, ev) => {
+        console.log("drag", methods, ev)
+
+        return true
+      }}
+      watchResize={(methods, entries) => {
+        console.log("resized", methods, entries)
+
+        return true
+      }}
+      watchSlides={(methods, mutations) => {
+        console.log("slides updated", methods, mutations)
+
+        return true
+      }}
+    >
       <CarouselSlide as={Center} bg="primary">
         1
       </CarouselSlide>

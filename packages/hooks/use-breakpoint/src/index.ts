@@ -14,11 +14,6 @@ export const useBreakpoint = () => {
   const animationFrameId = useRef(0)
   const { theme } = useTheme()
 
-  if (!theme)
-    throw Error(
-      "useBreakpoint: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
-    )
-
   const breakpoints = theme.__breakpoints
   const {
     containerRef,
@@ -104,7 +99,8 @@ export const useBreakpoint = () => {
     return () => {
       observer.disconnect()
 
-      cancelAnimationFrame(animationFrameId.current)
+      if (process.env.NODE_ENV !== "test")
+        cancelAnimationFrame(animationFrameId.current)
     }
   }, [hasContainer, containerRef, getBreakpoint])
 
@@ -153,17 +149,12 @@ export const useBreakpointValue = <T extends any>(
 export const getBreakpointValue =
   <T extends any>(values: ResponsiveObject<T> = {}) =>
   (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
-    if (!theme)
-      throw Error(
-        "useBreakpoint: `theme` is undefined. Seems you forgot to wrap your app in `<UIProvider />`",
-      )
+    if (!theme) throw Error("getBreakpointValue: `theme` is undefined.")
 
     const breakpoints = theme.__breakpoints?.keys
 
     if (!breakpoints)
-      throw Error(
-        "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
-      )
+      throw Error("getBreakpointValue: `breakpoints` is undefined.")
 
     const currentIndex = breakpoints.indexOf(breakpoint)
 

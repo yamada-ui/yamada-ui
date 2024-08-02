@@ -1,3 +1,4 @@
+import { Icon } from "@yamada-ui/icon"
 import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
 import { Calendar } from "../src"
 
@@ -17,7 +18,9 @@ describe("<Calendar />", () => {
 
     test("should render days", () => {
       const defaultDate = new Date("2024-06-10")
-      render(<Calendar defaultValue={defaultDate} />)
+      render(
+        <Calendar defaultValue={defaultDate} labelProps={{ icon: <Icon /> }} />,
+      )
 
       const button = screen.getByRole("button", {
         name: "June 2024",

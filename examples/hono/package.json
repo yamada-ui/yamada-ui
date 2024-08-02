@@ -9,28 +9,28 @@
     "build": "vite build --mode client && vite build"
   },
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-regular-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
-    "@yamada-ui/dropzone": "workspace:*",
     "@yamada-ui/charts": "workspace:*",
-    "@yamada-ui/lucide": "workspace:*",
+    "@yamada-ui/dropzone": "workspace:*",
     "@yamada-ui/fontawesome": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
     "@yamada-ui/markdown": "workspace:*",
     "@yamada-ui/react": "workspace:*",
     "@yamada-ui/table": "workspace:*",
-    "hono": "^4.2.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "hono": "^4.5.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@hono/vite-dev-server": "^0.12.1",
-    "@types/node": "^20.12.13",
-    "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.24",
-    "vite": "^5.2.8"
+    "@hono/vite-dev-server": "^0.13.1",
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "vite": "^5.3.4"
   },
   "engines": {
     "node": ">=20.0.0"

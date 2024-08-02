@@ -351,4 +351,44 @@ describe("<ZStack />", () => {
       zIndex: 1,
     })
   })
+
+  test("applies correct styles with direction set to top", () => {
+    render(
+      <ZStack direction="top">
+        <Box>Box1</Box>
+        <Box>Box2</Box>
+      </ZStack>,
+    )
+
+    expect(screen.getByText("Box1")).toHaveStyle({
+      position: "absolute",
+      left: 0,
+      zIndex: 0,
+    })
+    expect(screen.getByText("Box2")).toHaveStyle({
+      position: "absolute",
+      left: 0,
+      zIndex: 1,
+    })
+  })
+
+  test("applies correct styles with direction set to left", () => {
+    render(
+      <ZStack direction="left">
+        <Box>Box1</Box>
+        <Box>Box2</Box>
+      </ZStack>,
+    )
+
+    expect(screen.getByText("Box1")).toHaveStyle({
+      position: "absolute",
+      top: 0,
+      zIndex: 0,
+    })
+    expect(screen.getByText("Box2")).toHaveStyle({
+      position: "absolute",
+      top: 0,
+      zIndex: 1,
+    })
+  })
 })

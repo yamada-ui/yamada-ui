@@ -1,7 +1,37 @@
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, act, render, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
+import type { ReorderGenerateItem } from "../src"
 import { Reorder, ReorderItem, ReorderTrigger } from "../src"
 
 describe("<Reorder />", () => {
+  beforeAll(() => {
+    Object.defineProperties(MouseEvent.prototype, {
+      pageX: {
+        get() {
+          return this.clientX
+        },
+        configurable: true,
+      },
+      pageY: {
+        get() {
+          return this.clientY
+        },
+        configurable: true,
+      },
+    })
+  })
+
+  afterAll(() => {
+    Object.defineProperty(MouseEvent.prototype, "pageX", {
+      value: undefined,
+      configurable: true,
+    })
+    Object.defineProperty(MouseEvent.prototype, "pageY", {
+      value: undefined,
+      configurable: true,
+    })
+  })
+
   test("renders with no errors", async () => {
     await a11y(
       <Reorder>
@@ -18,6 +48,18 @@ describe("<Reorder />", () => {
         <ReorderItem value="Item 2">Item 2</ReorderItem>
       </Reorder>,
     )
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+  })
+
+  test("render items of props correctly", () => {
+    const items: ReorderGenerateItem[] = [
+      { label: "Item 1", value: "Item 1" },
+      { label: "Item 2", value: "Item 2" },
+    ]
+
+    render(<Reorder items={items} />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
@@ -75,5 +117,86 @@ describe("<Reorder />", () => {
       "Reorder: 'value' of 'ReorderItem' must not be duplicated. duplicate 'value' is 'Item 1' ",
     )
     expect(warnSpy).toHaveBeenCalledTimes(1)
+  })
+
+  test("updates items correctly when props change", () => {
+    const initialItems: ReorderGenerateItem[] = [
+      { label: "Item 1", value: "Item 1" },
+      { label: "Item 2", value: "Item 2" },
+    ]
+
+    const updatedItems: ReorderGenerateItem[] = [
+      { label: "Item 3", value: "Item 3" },
+      { label: "Item 4", value: "Item 4" },
+    ]
+
+    const Component = () => {
+      const [items, setItems] = useState(initialItems)
+
+      return (
+        <>
+          <button onClick={() => setItems(updatedItems)}>Update Items</button>
+
+          <Reorder items={items} />
+        </>
+      )
+    }
+
+    render(<Component />)
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+
+    act(() => {
+      screen.getByText("Update Items").click()
+    })
+
+    expect(screen.getByText("Item 3")).toBeInTheDocument()
+    expect(screen.getByText("Item 4")).toBeInTheDocument()
+    expect(screen.queryByText("Item 1")).not.toBeInTheDocument()
+    expect(screen.queryByText("Item 2")).not.toBeInTheDocument()
+  })
+
+  test("calls onChange and onCompleteChange correctly", async () => {
+    const onChange = vi.fn()
+    const onCompleteChange = vi.fn()
+
+    const items: ReorderGenerateItem[] = [
+      { label: "Item 1", value: "Item 1" },
+      { label: "Item 2", value: "Item 2" },
+    ]
+
+    const { user } = render(
+      <Reorder
+        items={items}
+        onChange={onChange}
+        onCompleteChange={onCompleteChange}
+      />,
+    )
+
+    const el = screen.getByText("Item 1")
+
+    await user.pointer([
+      {
+        target: el,
+        keys: "[MouseLeft>]",
+        coords: { x: 0, y: 0 },
+      },
+      ...Array(10)
+        .fill(0)
+        .map((_, i) => ({
+          coords: { x: 0, y: (i + 1) * 100 },
+        })),
+      {
+        keys: "[/MouseLeft]",
+      },
+    ])
+
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    })
+    await waitFor(() => {
+      expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    })
   })
 })

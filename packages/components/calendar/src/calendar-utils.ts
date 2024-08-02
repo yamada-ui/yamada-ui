@@ -153,8 +153,6 @@ export const getRangeDates = (
     const resolvedStartDate = dayjs(startDate).startOf("day")
     const resolvedEndDate = dayjs(endDate).startOf("day")
 
-    const dates: Date[] = []
-
     const n = Math.abs(resolvedStartDate.diff(resolvedEndDate, "day"))
 
     let date = resolvedStartDate

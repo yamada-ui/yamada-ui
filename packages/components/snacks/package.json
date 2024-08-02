@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/snacks",
-  "version": "1.0.25",
+  "version": "1.0.28",
   "description": "Yamada UI snacks component",
   "keywords": [
     "yamada",
@@ -49,14 +49,14 @@
     "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/motion": "workspace:*",
-    "@yamada-ui/use-value": "workspace:*",
-    "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",
+    "@yamada-ui/use-token": "workspace:*",
+    "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

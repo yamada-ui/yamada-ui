@@ -1,0 +1,23 @@
+pre-commit:
+  piped: true
+  commands:
+    format:
+      priority: 1
+      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css}"
+      run: |
+        pnpm prettier {staged_files} --write
+      stage_fixed: true
+
+    lint:
+      priority: 2
+      tags: src
+      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+      run: |
+        pnpm eslint {staged_files} --fix --max-warnings=0
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    "lint the commit message":
+      run: |
+        pnpm commitlint --edit {1}

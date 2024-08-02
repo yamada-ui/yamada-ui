@@ -1,7 +1,7 @@
 {
   "Carousel": {
     "align": {
-      "type": "UIValue<number | \"center\" | \"start\" | \"end\">",
+      "type": "AlignmentOptionType | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", AlignmentOptionType | undefined>> | ColorModeArray<...>",
       "defaultValue": "'center'",
       "required": false,
       "description": "The alignment of the carousel."
@@ -18,7 +18,7 @@
       "description": "The visual color appearance of the component."
     },
     "containScroll": {
-      "type": "UIValue<\"\" | \"trimSnaps\" | \"keepSnaps\">",
+      "type": "ScrollContainOptionType | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", ScrollContainOptionType | undefined>> | ColorModeArray<...>",
       "defaultValue": "''",
       "required": false,
       "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
@@ -37,6 +37,11 @@
       "type": "IconButtonProps",
       "required": false,
       "description": "Props for carousel control element."
+    },
+    "controlRef": {
+      "type": "RefObject<EmblaCarouselType | undefined>",
+      "required": false,
+      "description": "Ref of the resizable item callback."
     },
     "defaultIndex": {
       "type": "number",
@@ -62,6 +67,12 @@
       "required": false,
       "description": "If `true`, carousel can be scrolled with mouse and touch interactions."
     },
+    "duration": {
+      "type": "UIValue<number>",
+      "defaultValue": "25",
+      "required": false,
+      "description": "Set scroll duration when triggered by any of the API methods.\nHigher numbers enables slower scrolling.\nDrag interactions are not affected because duration is then determined by the drag force."
+    },
     "includeGapInSize": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
@@ -84,7 +95,7 @@
       "description": "Props for carousel inner element."
     },
     "inViewThreshold": {
-      "type": "UIValue<number>",
+      "type": "type ONLY_FOR_FORMAT =\n  | number\n  | number[]\n  | Partial<\n      Record<\n        \"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\",\n        number | number[] | undefined\n      >\n    >\n  | ColorModeArray<number | number[] | undefined>",
       "defaultValue": "0",
       "required": false,
       "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
@@ -134,12 +145,6 @@
       "required": false,
       "description": "The number of slides that should be scrolled with next or previous buttons."
     },
-    "speed": {
-      "type": "UIValue<number>",
-      "defaultValue": "10",
-      "required": false,
-      "description": "Adjusts scroll speed when triggered by any of the methods.\nHigher numbers enables faster scrolling."
-    },
     "stopMouseEnterAutoplay": {
       "type": "UIValue<boolean>",
       "defaultValue": true,
@@ -150,6 +155,24 @@
       "type": "string",
       "required": false,
       "description": "The variant of the Carousel."
+    },
+    "watchDrag": {
+      "type": "DragHandlerOptionType",
+      "defaultValue": true,
+      "required": false,
+      "description": "Enables for scrolling the carousel with mouse and touch interactions.\nSet this to `false` to disable drag events or pass a custom callback to add your own drag logic."
+    },
+    "watchResize": {
+      "type": "ResizeHandlerOptionType",
+      "defaultValue": true,
+      "required": false,
+      "description": "Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own resize logic."
+    },
+    "watchSlides": {
+      "type": "SlidesHandlerOptionType",
+      "defaultValue": true,
+      "required": false,
+      "description": "Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic."
     },
     "withControls": {
       "type": "UIValue<boolean>",
@@ -213,7 +236,7 @@
     "component": {
       "type": "FC<{ index: number; isSelected: boolean }>",
       "required": false,
-      "description": "The custom caroucel indicator to use."
+      "description": "The custom carousel indicator to use."
     }
   }
 }

@@ -13,6 +13,7 @@ import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
 import { CloseButton } from "./close-button"
+import { Collapse } from "./collapse"
 import { ColorPicker } from "./color-picker"
 import { ColorSelector } from "./color-selector"
 import { ColorSwatch } from "./color-swatch"
@@ -25,11 +26,15 @@ import { DonutChart } from "./donut-chart"
 import { Drawer } from "./drawer"
 import { Dropzone } from "./dropzone"
 import { Editable } from "./editable"
+import { Fade } from "./fade"
 import { Fieldset } from "./fieldset"
+import { FileButton } from "./file-button"
 import { FileInput } from "./file-input"
 import { FormControl } from "./form-control"
 import { Heading } from "./heading"
 import { HueSlider } from "./hue-slider"
+import { Icon } from "./icon"
+import { Image } from "./image"
 import { Indicator } from "./indicator"
 import { InfiniteScrollArea } from "./infinite-scroll-area"
 import { Input } from "./input"
@@ -63,10 +68,13 @@ import { Rating } from "./rating"
 import { Reorder } from "./reorder"
 import { Resizable } from "./resizable"
 import { SaturationSlider } from "./saturation-slider"
+import { ScaleFade } from "./scale-fade"
 import { ScrollArea } from "./scroll-area"
 import { SegmentedControl } from "./segmented-control"
 import { Select } from "./select"
 import { Skeleton } from "./skeleton"
+import { Slide } from "./slide"
+import { SlideFade } from "./slide-fade"
 import { Slider } from "./slider"
 import { Stat } from "./stat"
 import { Stepper } from "./stepper"
@@ -95,6 +103,7 @@ export default {
   Carousel,
   Checkbox,
   CloseButton,
+  Collapse,
   ColorPicker,
   ColorSelector,
   ColorSwatch,
@@ -107,11 +116,15 @@ export default {
   Drawer,
   Dropzone,
   Editable,
+  Fade,
   Fieldset,
+  FileButton,
   FileInput,
   FormControl,
   Heading,
   HueSlider,
+  Icon,
+  Image,
   Indicator,
   InfiniteScrollArea,
   Input,
@@ -144,11 +157,14 @@ export default {
   Reorder,
   Resizable,
   SaturationSlider,
+  ScaleFade,
   ScrollArea,
   SegmentedControl,
   Select,
   NativeTable,
   Skeleton,
+  Slide,
+  SlideFade,
   Slider,
   Stat,
   Stepper,

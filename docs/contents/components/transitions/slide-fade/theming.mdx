@@ -1,0 +1,30 @@
+---
+title: SlideFade
+description: >-
+  `SlideFade` is a component that gradually shows or hides an element while
+  moving it from a specified position.
+package_name: "@yamada-ui/transitions"
+with_description: true
+tab: Theming
+---
+
+## Theming
+
+The `SlideFade` is a [single part component](/styled-system/theming/component-styles#single-part-components).
+
+:::note
+If you want to change the style of the component, please check [here](/styled-system/theming/customize-theme#changing-the-style-of-components).
+:::
+
+```ts
+export const SlideFade: ComponentStyle = {
+  baseStyle: {
+    w: "100%",
+  },
+  defaultProps: {
+    offsetX: 0,
+    offsetY: 8,
+    reverse: true,
+  },
+}
+```

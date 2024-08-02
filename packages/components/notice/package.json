@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/notice",
-  "version": "1.0.33",
+  "version": "1.0.36",
   "description": "Yamada UI notice component",
   "keywords": [
     "yamada",
@@ -46,17 +46,17 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/close-button": "workspace:*",
     "@yamada-ui/alert": "workspace:*",
-    "@yamada-ui/portal": "workspace:*",
+    "@yamada-ui/close-button": "workspace:*",
+    "@yamada-ui/core": "workspace:*",
     "@yamada-ui/motion": "workspace:*",
+    "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

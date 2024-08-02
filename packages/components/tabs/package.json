@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/tabs",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "description": "Yamada UI tabs component",
   "keywords": [
     "yamada",
@@ -47,16 +47,16 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/ripple": "workspace:*",
-    "@yamada-ui/use-disclosure": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
-    "@yamada-ui/use-descendant": "workspace:*"
+    "@yamada-ui/use-descendant": "workspace:*",
+    "@yamada-ui/use-disclosure": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

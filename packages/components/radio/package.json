@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/radio",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "Yamada UI radio component",
   "keywords": [
     "yamada",
@@ -47,15 +47,15 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/form-control": "workspace:*",
     "@yamada-ui/layouts": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
-    "@yamada-ui/use-focus-visible": "workspace:*"
+    "@yamada-ui/use-focus-visible": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

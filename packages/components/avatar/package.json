@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/avatar",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "description": "Yamada UI avatar component",
   "keywords": [
     "yamada",
@@ -47,14 +47,14 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@yamada-ui/image": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
-    "@yamada-ui/use-animation": "workspace:*"
+    "@yamada-ui/image": "workspace:*",
+    "@yamada-ui/use-animation": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "clean-package": "2.2.0"
+    "clean-package": "2.2.0",
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

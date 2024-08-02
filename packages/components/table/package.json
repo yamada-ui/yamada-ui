@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "Yamada UI table component",
   "keywords": [
     "yamada",
@@ -47,6 +47,7 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.19.3",
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
@@ -54,12 +55,11 @@
     "@yamada-ui/pagination": "workspace:*",
     "@yamada-ui/select": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
-    "@tanstack/react-table": "^8.9.1"
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

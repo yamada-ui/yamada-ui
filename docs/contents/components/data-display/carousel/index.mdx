@@ -164,12 +164,12 @@ To adjust the space between slides, set `gap` to a string or a number. By defaul
 </Carousel>
 ```
 
-### Change the speed of slide transition
+### Change the duration of slide transition
 
-To change the speed of slide transition, set `speed` to a number. By default, `10` is set.
+To change the duration of slide transition, set `duration` to a number. By default, `25` is set.
 
 ```tsx
-<Carousel speed={50}>
+<Carousel duration={60}>
   <CarouselSlide as={Center} bg="primary">
     1
   </CarouselSlide>
@@ -593,6 +593,43 @@ To customize indicators, set `props` to `indicatorsProps`, or use `CarouselIndic
     />
   </Carousel>
 </VStack>
+```
+
+### Handle Events
+
+If you want to handle events such as user drag, use `watchDrag`.
+
+```tsx
+<Carousel
+  watchDrag={(methods, ev) => {
+    console.log("drag", methods, ev)
+
+    return true
+  }}
+  watchResize={(methods, entries) => {
+    console.log("resized", methods, entries)
+
+    return true
+  }}
+  watchSlides={(methods, mutations) => {
+    console.log("slides updated", methods, mutations)
+
+    return true
+  }}
+>
+  <CarouselSlide as={Center} bg="primary">
+    1
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="secondary">
+    2
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="warning">
+    3
+  </CarouselSlide>
+  <CarouselSlide as={Center} bg="danger">
+    4
+  </CarouselSlide>
+</Carousel>
 ```
 
 ### Control

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/button",
-  "version": "1.0.35",
+  "version": "1.0.38",
   "description": "Yamada UI button components",
   "keywords": [
     "yamada",
@@ -49,14 +49,14 @@
   },
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
-    "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/loading": "workspace:*",
-    "@yamada-ui/ripple": "workspace:*"
+    "@yamada-ui/ripple": "workspace:*",
+    "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "react": "^18.0.0",
+    "@yamada-ui/icon": "workspace:*",
     "clean-package": "2.2.0",
-    "@yamada-ui/icon": "workspace:*"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
     "react": ">=18"

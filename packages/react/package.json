@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/react",
-  "version": "1.4.5",
+  "version": "1.4.8",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -145,12 +145,12 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.0.0"
+    "react": "^18.3.1"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.0.0",
-    "@emotion/styled": "^11.0.0",
-    "framer-motion": ">=9.0.0",
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "framer-motion": ">=11",
     "react": ">=18",
     "react-dom": ">=18"
   },

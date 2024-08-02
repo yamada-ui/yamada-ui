@@ -1,5 +1,5 @@
-import type { CSSUIObject, Token } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps, Token } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -39,7 +39,9 @@ type SlideOptions = {
   placement?: Token<"top" | "left" | "bottom" | "right">
 }
 
-export type SlideProps = WithTransitionProps<MotionProps> & SlideOptions
+export type SlideProps = WithTransitionProps<MotionProps> &
+  SlideOptions &
+  ThemeProps<"Slide">
 
 const variants: MotionTransitionVariants = {
   enter: ({
@@ -82,53 +84,50 @@ export const slideProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/slide
  */
-export const Slide = forwardRef<SlideProps, "div", false>(
-  (
-    {
-      unmountOnExit,
-      isOpen,
-      placement: _placement = "right",
-      transition,
-      transitionEnd,
-      delay,
-      duration = { enter: 0.4, exit: 0.3 },
-      className,
-      __css,
-      ...rest
-    },
-    ref,
-  ) => {
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+export const Slide = forwardRef<SlideProps, "div", false>((props, ref) => {
+  const [style, mergedProps] = useComponentStyle("Slide", props)
+  let {
+    unmountOnExit,
+    isOpen,
+    placement: _placement,
+    transition,
+    transitionEnd,
+    delay,
+    duration = { enter: 0.4, exit: 0.3 },
+    className,
+    __css,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
-    const placement = useValue(_placement)
+  const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
-    const custom = { placement, transition, transitionEnd, delay, duration }
+  const placement = useValue(_placement)
 
-    isOpen = unmountOnExit ? isOpen && unmountOnExit : true
+  const custom = { placement, transition, transitionEnd, delay, duration }
 
-    const { position } = getSlideProps(placement)
+  isOpen = unmountOnExit ? isOpen && unmountOnExit : true
 
-    const css: CSSUIObject = {
-      position: "fixed",
-      zIndex: "fallback(jeice, 110)",
-      ...__css,
-      ...position,
-    }
+  const { position } = getSlideProps(placement)
 
-    return (
-      <AnimatePresence custom={custom}>
-        {isOpen ? (
-          <Motion
-            ref={ref}
-            className={cx("ui-slide", className)}
-            custom={custom}
-            {...slideProps}
-            animate={animate}
-            __css={css}
-            {...rest}
-          />
-        ) : null}
-      </AnimatePresence>
-    )
-  },
-)
+  const css: CSSUIObject = {
+    ...style,
+    ...__css,
+    ...position,
+  }
+
+  return (
+    <AnimatePresence custom={custom}>
+      {isOpen ? (
+        <Motion
+          ref={ref}
+          className={cx("ui-slide", className)}
+          custom={custom}
+          {...slideProps}
+          animate={animate}
+          __css={css}
+          {...rest}
+        />
+      ) : null}
+    </AnimatePresence>
+  )
+})

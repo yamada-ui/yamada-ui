@@ -123,8 +123,21 @@ jobs:
               ref: 'main'
             })
 
+      - name: Sync Theme
+        if: steps.changesets.outputs.published == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAT_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'yamada-ui',
+              repo: 'yamada-theme',
+              workflow_id: 'sync.yml',
+              ref: 'main'
+            })
+
       - name: Sync Docs
         if: steps.changesets.outputs.published == 'true'
         uses: ./.github/composite-actions/update-docs
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}

@@ -1,5 +1,35 @@
 # @yamada-ui/accordion
 
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/icon@1.1.2
+
+## 2.0.4
+
+### Patch Changes
+
+- [#2348](https://github.com/yamada-ui/yamada-ui/pull/2348) [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`bde9606`](https://github.com/yamada-ui/yamada-ui/commit/bde96064fb6960d07c97024e3f7b2309fbc0a928), [`616cf4e`](https://github.com/yamada-ui/yamada-ui/commit/616cf4ed89387827c2fbde1d3b86b9e0620d1f09), [`7a02db4`](https://github.com/yamada-ui/yamada-ui/commit/7a02db4385a64fdc3ea2e00b6addc4e76c97347f), [`b7f22fb`](https://github.com/yamada-ui/yamada-ui/commit/b7f22fbc4d2ee432d67ecfb0731b09c54ae45c67), [`bde9606`](https://github.com/yamada-ui/yamada-ui/commit/bde96064fb6960d07c97024e3f7b2309fbc0a928)]:
+  - @yamada-ui/core@1.11.0
+  - @yamada-ui/icon@1.1.1
+  - @yamada-ui/use-controllable-state@1.0.17
+  - @yamada-ui/transitions@1.1.1
+  - @yamada-ui/use-descendant@1.0.18
+  - @yamada-ui/motion@2.1.1
+  - @yamada-ui/utils@1.3.2
+
+## 2.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`43b25e1`](https://github.com/yamada-ui/yamada-ui/commit/43b25e1bd468f1c9c3f64daab15ab48b0eb05238), [`beadfe1`](https://github.com/yamada-ui/yamada-ui/commit/beadfe190772b8d34cf61f47a736d27377eaf06f)]:
+  - @yamada-ui/icon@1.1.0
+  - @yamada-ui/transitions@1.1.0
+
 ## 2.0.2
 
 ### Patch Changes

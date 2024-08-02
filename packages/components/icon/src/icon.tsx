@@ -1,5 +1,15 @@
-import type { CSSUIObject, UIProps, CSSUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  UIProps,
+  CSSUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
+import {
+  ui,
+  forwardRef,
+  useComponentStyle,
+  omitThemeProps,
+} from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
 import type { FC, SVGAttributes } from "react"
@@ -7,11 +17,14 @@ import type { FC, SVGAttributes } from "react"
 type IconOptions = {
   /**
    * The CSS `font-size` property.
+   *
+   * @deprecated Use `fontSize` instead.
    */
   size?: CSSUIProps["fontSize"]
 }
 
 export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
+  Omit<ThemeProps<"Icon">, "size"> &
   UIProps &
   IconOptions
 
@@ -20,47 +33,50 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
-export const Icon = forwardRef<IconProps, "svg">(
-  (
-    { as: element, viewBox, size: fontSize, className, __css, ...rest },
-    ref,
-  ) => {
-    const boxSize = replaceObject(fontSize, (value) =>
-      !isUnit(value) ? useToken("fontSizes", value) : value,
-    )
+export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
+  const [styles, { size, ...mergedProps }] = useComponentStyle("Icon", props)
+  let {
+    className,
+    as: element,
+    fontSize,
+    viewBox,
+    __css,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
-    const css: CSSUIObject = {
-      w: "1em",
-      h: "1em",
-      display: "inline-block",
-      lineHeight: "1em",
-      flexShrink: 0,
-      color: "currentColor",
-      ...__css,
-    }
+  fontSize ??= size
 
-    if (element && typeof element !== "string")
-      return (
-        <ui.svg
-          as={element}
-          className={cx("ui-icon", className)}
-          __css={css}
-          {...{ boxSize, ...rest }}
-        />
-      )
+  const boxSize = replaceObject(fontSize, (value) =>
+    !isUnit(value) ? useToken("fontSizes", value) : value,
+  )
 
+  const css: CSSUIObject = {
+    ...styles,
+    ...__css,
+    boxSize,
+  }
+
+  if (element && typeof element !== "string")
     return (
       <ui.svg
-        ref={ref}
-        verticalAlign="middle"
-        viewBox={viewBox}
+        as={element}
         className={cx("ui-icon", className)}
         __css={css}
-        {...{ boxSize, ...rest }}
+        {...rest}
       />
     )
-  },
-)
+
+  return (
+    <ui.svg
+      ref={ref}
+      verticalAlign="middle"
+      viewBox={viewBox}
+      className={cx("ui-icon", className)}
+      __css={css}
+      {...rest}
+    />
+  )
+})
 
 export const CheckIcon: FC<IconProps> = (props) => {
   return (

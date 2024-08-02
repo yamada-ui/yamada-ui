@@ -13,7 +13,7 @@ tab: Props
 <PropsCard
   id="carousel-align"
   name="align"
-  type='UIValue<number | "center" | "start" | "end">'
+  type='AlignmentOptionType | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", AlignmentOptionType | undefined>> | ColorModeArray<...>'
   description={"The alignment of the carousel."}
   defaultValue={"'center'"}
 />
@@ -36,7 +36,7 @@ tab: Props
 <PropsCard
   id="carousel-containscroll"
   name="containScroll"
-  type='UIValue<"" | "trimSnaps" | "keepSnaps">'
+  type='ScrollContainOptionType | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", ScrollContainOptionType | undefined>> | ColorModeArray<...>'
   description={
     "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
   }
@@ -62,6 +62,13 @@ tab: Props
   name="controlProps"
   type="IconButtonProps"
   description={"Props for carousel control element."}
+/>
+
+<PropsCard
+  id="carousel-controlref"
+  name="controlRef"
+  type="RefObject<EmblaCarouselType | undefined>"
+  description={"Ref of the resizable item callback."}
 />
 
 <PropsCard
@@ -99,6 +106,16 @@ tab: Props
 />
 
 <PropsCard
+  id="carousel-duration"
+  name="duration"
+  type="UIValue<number>"
+  description={
+    "Set scroll duration when triggered by any of the API methods.\nHigher numbers enables slower scrolling.\nDrag interactions are not affected because duration is then determined by the drag force."
+  }
+  defaultValue={"25"}
+/>
+
+<PropsCard
   id="carousel-includegapinsize"
   name="includeGapInSize"
   type="UIValue<boolean>"
@@ -132,7 +149,12 @@ tab: Props
 <PropsCard
   id="carousel-inviewthreshold"
   name="inViewThreshold"
-  type="UIValue<number>"
+  type='type ONLY_FOR_FORMAT =
+  | number
+  | number[]
+  | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl",
+        number | number[] | undefined>>
+  | ColorModeArray<number | number[] | undefined>'
   description={
     "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
   }
@@ -209,16 +231,6 @@ tab: Props
 />
 
 <PropsCard
-  id="carousel-speed"
-  name="speed"
-  type="UIValue<number>"
-  description={
-    "Adjusts scroll speed when triggered by any of the methods.\nHigher numbers enables faster scrolling."
-  }
-  defaultValue={"10"}
-/>
-
-<PropsCard
   id="carousel-stopmouseenterautoplay"
   name="stopMouseEnterAutoplay"
   type="UIValue<boolean>"
@@ -231,6 +243,36 @@ tab: Props
   name="variant"
   type="string"
   description={"The variant of the Carousel."}
+/>
+
+<PropsCard
+  id="carousel-watchdrag"
+  name="watchDrag"
+  type="DragHandlerOptionType"
+  description={
+    "Enables for scrolling the carousel with mouse and touch interactions.\nSet this to `false` to disable drag events or pass a custom callback to add your own drag logic."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="carousel-watchresize"
+  name="watchResize"
+  type="ResizeHandlerOptionType"
+  description={
+    "Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own resize logic."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="carousel-watchslides"
+  name="watchSlides"
+  type="SlidesHandlerOptionType"
+  description={
+    "Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic."
+  }
+  defaultValue={"true"}
 />
 
 <PropsCard
@@ -317,5 +359,5 @@ tab: Props
   id="carouselindicators-component"
   name="component"
   type="FC<{ index: number; isSelected: boolean }>"
-  description={"The custom caroucel indicator to use."}
+  description={"The custom carousel indicator to use."}
 />

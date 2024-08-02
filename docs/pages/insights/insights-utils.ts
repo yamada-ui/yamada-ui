@@ -1,57 +1,13 @@
 import { CONSTANT } from "constant"
 import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
-import data from "./data.json"
-import { isInRange } from "@yamada-ui/calendar"
 import type { UIProps } from "@yamada-ui/react"
-
-type InsightComment = {
-  html_url: string
-  issue_url: string
-  created_at: string
-}
-
-type InsightReview = {
-  html_url: string
-  pull_request_url: string
-  submitted_at: string | undefined
-}
-
-type InsightIssue = {
-  number: number
-  title: string
-  html_url: string
-  created_at: string
-  closed_at: string | null
-}
-
-type InsightPullRequest = {
-  number: number
-  title: string
-  html_url: string
-  created_at: string
-  closed_at: string | null
-}
-
-export type UserInsight = {
-  comments?: InsightComment[]
-  reviews?: InsightReview[]
-  issues?: InsightIssue[]
-  pullRequests?: InsightPullRequest[]
-  approved?: InsightReview[]
-}
-
-export type UserInsightScore = {
-  comments: number
-  issues: number
-  pullRequests: number
-  approved: number
-  total: number
-}
-
-export type UserInsights = Record<string, UserInsight | null>
-
-export type Insights = Record<string, UserInsights>
+import type {
+  InsightPeriod,
+  Insights,
+  UserInsight,
+  UserInsightScore,
+} from "insights"
 
 export const INSIGHT_USERS = Object.fromEntries(
   [...CONSTANT.MAINTAINERS, ...CONSTANT.MEMBERS].map((data) => [
@@ -83,11 +39,6 @@ export type InsightPeriodSuggest = (typeof INSIGHT_PERIOD_SUGGEST)[number]
 
 export type InsightUser = (typeof INSIGHT_USERS)[number]
 
-export type InsightPeriod = {
-  start: string | undefined
-  end: string | undefined
-}
-
 export const getMinMaxDate = (value: string, unit: string) => {
   const maxDate = new Date(dayjs().tz().format("YYYY-MM-DD"))
   const minDate = new Date(
@@ -111,55 +62,9 @@ export const getSummarize = (minDate: Date, maxDate: Date) => {
   }
 }
 
-export type InsightSummarize = ReturnType<typeof getSummarize>
-
-const getSummarizeRangeDates = (
-  minDate: Date,
-  maxDate: Date,
-  summarize: InsightSummarize,
-) => {
-  const rangeDates: [Date, Date][] = []
-
-  let currentDate = dayjs(minDate)
-  const endDate = dayjs(maxDate)
-
-  while (
-    currentDate.isBefore(endDate) ||
-    currentDate.isSame(endDate, summarize)
-  ) {
-    switch (summarize) {
-      case "week": {
-        const start = currentDate.startOf("week").add(1, "d").toDate()
-        const end = currentDate.endOf("week").add(1, "d").toDate()
-
-        currentDate = currentDate.add(1, "week")
-        rangeDates.push([start, end])
-
-        break
-      }
-
-      case "month": {
-        const start = currentDate.startOf("month").toDate()
-        const end = currentDate.endOf("month").toDate()
-
-        currentDate = currentDate.add(1, "month")
-        rangeDates.push([start, end])
-
-        break
-      }
-    }
-  }
-
-  rangeDates[0][0] = minDate
-  rangeDates[rangeDates.length - 1][1] = maxDate
-
-  return rangeDates
-}
-
 export const labelFormatter = (
   value: string,
-  summarize: InsightSummarize,
-  { end }: InsightPeriod,
+  { summarize, end }: InsightPeriod,
 ) => {
   switch (summarize) {
     case "day":
@@ -178,7 +83,7 @@ export const labelFormatter = (
 
 export const xAxisTickFormatter = (
   period: string,
-  summarize: InsightSummarize = "day",
+  { summarize }: InsightPeriod,
 ) => {
   let template: string
 
@@ -197,81 +102,6 @@ export const xAxisTickFormatter = (
   }
 
   return dayjs(period).format(template)
-}
-
-export const getInsights = (
-  minDate: Date,
-  maxDate: Date,
-  summarize: InsightSummarize = "day",
-) => {
-  let insights: Insights = Object.fromEntries(
-    Object.entries(data as unknown as Insights).filter(([date]) =>
-      isInRange(new Date(date), minDate, maxDate),
-    ),
-  )
-
-  if (summarize === "day") return insights
-
-  const rangeDates = getSummarizeRangeDates(minDate, maxDate, summarize)
-
-  const summarizedInsights: Insights = Object.fromEntries(
-    rangeDates.map(([startDate, endDate]) => {
-      const summarizedInsights: UserInsights = {}
-
-      Object.entries(insights).forEach(([date, users]) => {
-        if (!isInRange(new Date(date), startDate, endDate)) return
-
-        Object.entries(users).forEach(([user, data]) => {
-          if (!data) {
-            if (!summarizedInsights[user]) summarizedInsights[user] = null
-          } else {
-            if (!summarizedInsights[user]) summarizedInsights[user] = {}
-
-            const { comments, reviews, issues, pullRequests, approved } = data
-
-            if (comments) {
-              summarizedInsights[user].comments = [
-                ...(summarizedInsights[user].comments ?? []),
-                ...comments,
-              ]
-            }
-
-            if (reviews) {
-              summarizedInsights[user].reviews = [
-                ...(summarizedInsights[user].reviews ?? []),
-                ...reviews,
-              ]
-            }
-
-            if (issues) {
-              summarizedInsights[user].issues = [
-                ...(summarizedInsights[user].issues ?? []),
-                ...issues,
-              ]
-            }
-
-            if (pullRequests) {
-              summarizedInsights[user].pullRequests = [
-                ...(summarizedInsights[user].pullRequests ?? []),
-                ...pullRequests,
-              ]
-            }
-
-            if (approved) {
-              summarizedInsights[user].approved = [
-                ...(summarizedInsights[user].approved ?? []),
-                ...approved,
-              ]
-            }
-          }
-        })
-      })
-
-      return [dayjs(startDate).format("YYYY-MM-DD"), summarizedInsights]
-    }),
-  )
-
-  return summarizedInsights
 }
 
 export const DEFAULT_SCORE: UserInsightScore = {

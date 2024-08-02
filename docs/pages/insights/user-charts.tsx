@@ -3,13 +3,15 @@ import type { GridProps } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 import { UserChart } from "./user-chart"
 import { useInsights } from "./insights-provider"
-import type { UserInsights, UserInsightScore } from "./insights-utils"
+import type { UserInsights, UserInsightScore } from "insights"
 import { DEFAULT_SCORE, getInsightScore } from "./insights-utils"
 
-export type UserChartsProps = GridProps & {}
+export type UserChartsProps = GridProps & {
+  isLoading: boolean
+}
 
 export const UserCharts = memo(
-  forwardRef<UserChartsProps, "div">(({ ...rest }, ref) => {
+  forwardRef<UserChartsProps, "div">(({ isLoading, ...rest }, ref) => {
     const { users, insights } = useInsights()
 
     const computedUsers = useMemo(() => {
@@ -65,7 +67,13 @@ export const UserCharts = memo(
         {...rest}
       >
         {computedUsers.map(([id, { score, timeline }]) => (
-          <UserChart key={id} id={id} score={score} timeline={timeline} />
+          <UserChart
+            key={id}
+            id={id}
+            score={score}
+            timeline={timeline}
+            isLoading={isLoading}
+          />
         ))}
       </Grid>
     )

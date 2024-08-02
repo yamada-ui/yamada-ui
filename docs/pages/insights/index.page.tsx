@@ -11,29 +11,30 @@ import { TotalChart } from "./total-chart"
 import { UserCharts } from "./user-charts"
 import type { InsightsContext } from "./insights-provider"
 import { InsightsProvider } from "./insights-provider"
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { InsightsHeader } from "./insights-header"
-import { VStack } from "@yamada-ui/react"
-import type {
-  InsightPeriod,
-  Insights,
-  InsightSummarize,
-} from "./insights-utils"
-import { getInsights, getSummarize, INSIGHT_USER_IDS } from "./insights-utils"
+import { isString, useLoading, VStack } from "@yamada-ui/react"
+import type { InsightPeriod } from "insights"
+import { getSummarize, INSIGHT_USER_IDS } from "./insights-utils"
 import dayjs from "dayjs"
+import { useRouter } from "next/router"
+import { useQuery } from "@tanstack/react-query"
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ) => {
   const { props } = await getStaticCommonProps(context)
-  const start = (context.query.start ||
-    dayjs().tz().subtract(7, "d").format("YYYY-MM-DD")) as string
-  const end = (context.query.end || dayjs().tz().format("YYYY-MM-DD")) as string
-  const users = ((context.query.users as string | undefined)?.split(",") ||
-    INSIGHT_USER_IDS) as string[]
-  const period = { start, end }
+  const { query } = context
+  const start =
+    isString(query.start) && dayjs(query.start).isValid()
+      ? query.start
+      : dayjs().tz().subtract(7, "d").format("YYYY-MM-DD")
+  const end =
+    isString(query.end) && dayjs(query.end).isValid()
+      ? query.end
+      : dayjs().tz().format("YYYY-MM-DD")
 
-  return { props: { ...props, users, period } }
+  return { props: { ...props, start, end } }
 }
 
 type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -41,46 +42,74 @@ type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>
 const Page: NextPage<PageProps> = ({
   currentVersion,
   documentTree,
-  period: periodProp,
-  users: usersProp,
+  start: startProp,
+  end: endProp,
 }) => {
+  const { background } = useLoading()
+  const router = useRouter()
+  const { query } = router
   const { t } = useI18n()
-  const [insights, setInsights] = useState<Insights | undefined>(undefined)
-  const [users, setUsers] = useState<string[]>(usersProp)
-  const [period, setPeriod] = useState<InsightPeriod>(periodProp)
-  const [summarize, setSummarize] = useState<InsightSummarize>(() => {
-    const { start, end } = period
-    const startDate = new Date(start!)
-    const endDate = new Date(end!)
-
-    return getSummarize(startDate, endDate)
-  })
-
-  useEffect(() => {
-    let { start, end } = period
-
-    if (!start) {
-      setSummarize("day")
-      setInsights(undefined)
-
-      return
+  const [users, setUsers] = useState<string[]>(() => {
+    if (isString(query.users)) {
+      return query.users.split(",")
+    } else {
+      return INSIGHT_USER_IDS
     }
-
-    end ??= dayjs().tz().format("YYYY-MM-DD")
-
-    const startDate = new Date(start)
-    const endDate = new Date(end)
+  })
+  const [period, setPeriod] = useState<InsightPeriod>(() => {
+    const startDate = new Date(startProp)
+    const endDate = new Date(endProp)
 
     const summarize = getSummarize(startDate, endDate)
-    const insights = getInsights(startDate, endDate, summarize)
 
-    setInsights(insights)
-    setSummarize(summarize)
-  }, [period, summarize])
+    return { start: startProp, end: endProp, summarize }
+  })
+  const { start, end, summarize } = period
+  const { data, isLoading } = useQuery({
+    queryKey: ["get-insights", start, end],
+    queryFn: async () => {
+      try {
+        background.start()
+
+        if (!start) return undefined
+
+        const resolveEnd = end ?? dayjs().tz().format("YYYY-MM-DD")
+
+        const params = new URLSearchParams({
+          start,
+          end: resolveEnd,
+          summarize,
+        })
+        const res = await fetch(`/api/insights?${params}`)
+        const { data } = await res.json()
+
+        return data
+      } catch {
+      } finally {
+        background.finish()
+      }
+    },
+  })
+
+  const onChangePeriod = useCallback(
+    (start: string | undefined, end: string | undefined) => {
+      if (!start) {
+        return setPeriod({ start: undefined, end: undefined, summarize: "day" })
+      } else {
+        const startDate = new Date(start)
+        const endDate = end ? new Date(end) : dayjs().tz().toDate()
+
+        const summarize = getSummarize(startDate, endDate)
+
+        setPeriod({ start, end, summarize })
+      }
+    },
+    [],
+  )
 
   const value: InsightsContext = useMemo(
-    () => ({ insights, period, summarize, setPeriod, users, setUsers }),
-    [insights, period, users, summarize],
+    () => ({ insights: data, period, onChangePeriod, users, setUsers }),
+    [data, period, users, onChangePeriod],
   )
 
   return (
@@ -97,8 +126,8 @@ const Page: NextPage<PageProps> = ({
             <InsightsHeader />
 
             <VStack gap={{ base: "xl", md: "md" }}>
-              <TotalChart />
-              <UserCharts />
+              <TotalChart isLoading={isLoading} />
+              <UserCharts isLoading={isLoading} />
             </VStack>
           </VStack>
         </TopLayout>

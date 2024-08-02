@@ -1,12 +1,10 @@
 import {
-  Center,
   forwardRef,
   Heading,
   HStack,
   MultiAutocomplete,
   Text,
   useDisclosure,
-  VStack,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
@@ -14,10 +12,8 @@ import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { useInsights } from "./insights-provider"
 import { useI18n } from "contexts"
 import { useRouter } from "next/router"
-import type { InsightPeriod, InsightPeriodSuggest } from "./insights-utils"
-import { INSIGHT_PERIOD_SUGGEST, INSIGHT_USER_IDS } from "./insights-utils"
+import { INSIGHT_USER_IDS } from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
-import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
 import "dayjs/locale/ja"
 
@@ -129,9 +125,12 @@ UserSelect.displayName = "UserSelect"
 type PeriodSelectProps = {}
 
 const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
-  const { t, locale } = useI18n()
+  const {
+    // t,
+    locale,
+  } = useI18n()
   const router = useRouter()
-  const { period, setPeriod } = useInsights()
+  const { period, onChangePeriod } = useInsights()
   const defaultValue: [(Date | undefined)?, (Date | undefined)?] = [
     dayjs(period.start).toDate(),
     dayjs(period.end).toDate(),
@@ -149,7 +148,8 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       const { query } = router
       const params = new URLSearchParams(query as Record<string, string>)
 
-      const period: InsightPeriod = { start: undefined, end: undefined }
+      let start: string | undefined
+      let end: string | undefined
 
       const currentDate = dayjs().format("YYYY-MM-DD")
       const startDate = dayjs(value[0]).format("YYYY-MM-DD")
@@ -159,14 +159,14 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
 
       if (value[0] && !isReset) {
         params.set("start", startDate)
-        period.start = startDate
+        start = startDate
       } else {
         params.delete("start")
       }
 
       if (value[1] && !isReset) {
         params.set("end", endDate)
-        period.end = endDate
+        end = endDate
       } else {
         params.delete("end")
       }
@@ -177,27 +177,27 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
 
       if (isReset) onChange([undefined, undefined])
 
-      setPeriod(period)
+      onChangePeriod(start, end)
     },
-    [router, setPeriod],
+    [router, onChangePeriod],
   )
 
-  const onSuggestChange = useCallback(
-    (type: InsightPeriodSuggest) => {
-      const [, count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
-      const value: [Date, Date] = [
-        dayjs()
-          .subtract(parseInt(count), unit as ManipulateType)
-          .toDate(),
-        dayjs().tz().toDate(),
-      ]
+  // const onSuggestChange = useCallback(
+  //   (type: InsightPeriodSuggest) => {
+  //     const [, count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
+  //     const value: [Date, Date] = [
+  //       dayjs()
+  //         .subtract(parseInt(count), unit as ManipulateType)
+  //         .toDate(),
+  //       dayjs().tz().toDate(),
+  //     ]
 
-      valueRef.current = value
-      onChange(value)
-      onClose()
-    },
-    [onChange, onClose],
-  )
+  //     valueRef.current = value
+  //     onChange(value)
+  //     onClose()
+  //   },
+  //   [onChange, onClose],
+  // )
 
   return (
     <RangeDatePicker
@@ -217,7 +217,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       onOpen={onOpen}
       onClose={onClose}
     >
-      <VStack mt="sm" gap="sm">
+      {/* <VStack mt="sm" gap="sm">
         {INSIGHT_PERIOD_SUGGEST.map((value) => {
           return (
             <Center
@@ -240,7 +240,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
             </Center>
           )
         })}
-      </VStack>
+      </VStack> */}
     </RangeDatePicker>
   )
 })

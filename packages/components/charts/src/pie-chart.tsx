@@ -82,7 +82,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     tooltipDataSource = "all",
     valueFormatter,
-    labelFormatter = valueFormatter,
+    labelFormatter,
     unit,
     innerRadius,
     outerRadius,

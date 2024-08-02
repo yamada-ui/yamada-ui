@@ -55,7 +55,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     tooltipDataSource = "all",
     valueFormatter,
-    labelFormatter = valueFormatter,
+    labelFormatter,
     unit,
     paddingAngle,
     startAngle,

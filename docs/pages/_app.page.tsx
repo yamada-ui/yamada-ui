@@ -14,10 +14,20 @@ import { theme, config } from "theme"
 import dayjs from "dayjs"
 import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault("Asia/Tokyo")
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -40,16 +50,18 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <UIProvider
-        theme={theme}
-        config={config}
-        colorModeManager={colorModeManager}
-        themeSchemeManager={themeSchemeManager}
-      >
-        <I18nProvider>
-          <Component {...{ ...pageProps, inter }} />
-        </I18nProvider>
-      </UIProvider>
+      <QueryClientProvider client={queryClient}>
+        <UIProvider
+          theme={theme}
+          config={config}
+          colorModeManager={colorModeManager}
+          themeSchemeManager={themeSchemeManager}
+        >
+          <I18nProvider>
+            <Component {...{ ...pageProps, inter }} />
+          </I18nProvider>
+        </UIProvider>
+      </QueryClientProvider>
 
       <SpeedInsights />
       <Analytics />

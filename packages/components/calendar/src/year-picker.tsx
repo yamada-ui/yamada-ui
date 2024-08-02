@@ -8,7 +8,8 @@ import {
 import { Popover, PopoverContent } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { cx } from "@yamada-ui/utils"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import type { FC, ReactNode } from "react"
 import { Calendar } from "./calendar"
 import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
 import {
@@ -58,6 +59,7 @@ type YearPickerOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
 export type YearPickerProps = ThemeProps<"DatePicker"> &
@@ -73,6 +75,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("YearPicker", props)
   let {
     className,
+    children,
     isClearable = true,
     color,
     h,
@@ -94,6 +97,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     getFieldProps,
     getInputProps,
     getIconProps,
+    onClose,
     value,
     id,
   } = useYearPicker(computedProps)
@@ -151,6 +155,8 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
                 className="ui-year-picker__calendar"
                 {...getCalendarProps()}
               />
+
+              {runIfFunc(children, { value, onClose })}
             </PopoverContent>
           </Portal>
         </ui.div>

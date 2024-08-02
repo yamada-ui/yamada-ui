@@ -1,16 +1,15 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { motion } from "@yamada-ui/motion"
+import { Motion } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
-import type { DOMAttributes } from "@yamada-ui/utils"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
-import type { ReactNode, RefAttributes } from "react"
+import type { ReactNode } from "react"
 import { usePopover } from "./popover"
 import type { PopoverProps } from "."
 import { PopoverCloseButton } from "."
 
-export type PopoverContentProps = MotionProps<"section">
+export type PopoverContentProps = Omit<MotionProps<"section">, "children">
 
 const getPopoverContentProps = (
   animation: PopoverProps["animation"] = "scale",
@@ -55,16 +54,15 @@ const getPopoverContentProps = (
 export const PopoverContent = forwardRef<PopoverContentProps, "section">(
   (
     {
-      as = "section",
       className,
       children,
       w,
       width,
       minW,
       minWidth,
-      z: zProp,
-      zIndex: zIndexProp,
-      __css: __cssProp,
+      z,
+      zIndex,
+      __css,
       ...rest
     },
     ref,
@@ -81,6 +79,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
     } = usePopover()
 
     const validChildren = getValidChildren(children)
+
     const [customPopoverCloseButton, ...cloneChildren] = findChildren(
       validChildren,
       PopoverCloseButton,
@@ -97,30 +96,26 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
       )
     }
 
-    const { z, zIndex, ...__css } = __cssProp ?? styles.container ?? {}
-    const css: CSSUIObject = {
+    const popoverProps = { ...rest, children: resolvedChildren() }
+
+    const css = __css ?? styles.container ?? {}
+
+    const computedCSS: CSSUIObject = {
       position: "relative",
       w: "100%",
       display: "flex",
       flexDirection: "column",
       outline: 0,
-      ...__css,
+      ...css,
     }
 
-    w =
-      w ??
-      width ??
-      ((styles.container?.w ?? styles.container?.width) as CSSUIProps["w"])
-    minW =
-      minW ??
-      minWidth ??
-      ((styles.container?.minW ??
-        styles.container?.minWidth) as CSSUIProps["minW"])
+    width ??= w
+    width ??= (css?.width ?? css?.w) as CSSUIProps["width"]
+    minWidth ??= minW
+    minWidth ??= (css?.minWidth ?? css?.minW) as CSSUIProps["minWidth"]
 
-    const resolvedZIndex = (zIndexProp ??
-      zProp ??
-      zIndex ??
-      z) as CSSUIProps["zIndex"]
+    zIndex ??= z
+    zIndex ??= (css?.zIndex ?? css?.z) as CSSUIProps["zIndex"]
 
     return (
       <ui.div
@@ -128,23 +123,17 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
           style: { visibility: isOpen ? "visible" : "hidden" },
         })}
         className="ui-popover"
-        w={w}
-        minW={minW}
-        zIndex={resolvedZIndex}
+        width={width}
+        minWidth={minWidth}
+        zIndex={zIndex}
       >
-        <ui.section
-          as={motion[as as keyof typeof motion]}
+        <Motion
+          as="section"
           className={cx("ui-popover__content", className)}
           {...(animation !== "none"
             ? getPopoverContentProps(animation, duration)
             : {})}
-          {...(getPopoverProps(
-            {
-              ...rest,
-              children: resolvedChildren(),
-            },
-            ref,
-          ) as Omit<DOMAttributes & RefAttributes<any>, "onDrag">)}
+          {...getPopoverProps(popoverProps, ref)}
           initial="exit"
           animate={isOpen ? "enter" : "exit"}
           exit="exit"
@@ -152,7 +141,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
             onAnimationComplete,
             rest.onAnimationComplete,
           )}
-          __css={css}
+          __css={computedCSS}
         />
       </ui.div>
     )

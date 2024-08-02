@@ -72,6 +72,13 @@ type MultiAutocompleteOptions = {
    */
   listProps?: Omit<AutocompleteListProps, "children">
   /**
+   * Props for multi autocomplete field element.
+   */
+  fieldProps?: Omit<
+    MultiAutocompleteFieldProps,
+    "component" | "separator" | "keepPlaceholder" | "inputProps" | "children"
+  >
+  /**
    * Props for multi autocomplete input element.
    */
   inputProps?: HTMLUIProps<"input">
@@ -136,6 +143,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       keepPlaceholder = false,
       containerProps,
       listProps,
+      fieldProps,
       inputProps,
       iconProps,
       clearIconProps,
@@ -206,7 +214,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                   h={h}
                   minH={minH}
                   inputProps={inputProps}
-                  {...getFieldProps({}, ref)}
+                  {...getFieldProps(fieldProps, ref)}
                 />
 
                 {isClearable && value.length ? (
@@ -347,6 +355,7 @@ const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
             className="ui-multi-autocomplete__field__input"
             display="inline-block"
             flex="1"
+            minW="0px"
             overflow="hidden"
             marginBlockStart="0.125rem"
             marginBlockEnd="0.125rem"

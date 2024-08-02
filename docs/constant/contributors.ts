@@ -48,6 +48,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/komura-c",
   },
   {
+    id: 157810570,
+    name: "kaitobq",
+    icon: "https://avatars.githubusercontent.com/u/157810570?v=4",
+    url: "https://github.com/kaitobq",
+  },
+  {
     id: 93440667,
     name: "GensIto",
     icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
@@ -258,6 +264,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/y-hsgw",
   },
   {
+    id: 55341866,
+    name: "mokun632",
+    icon: "https://avatars.githubusercontent.com/u/55341866?v=4",
+    url: "https://github.com/mokun632",
+  },
+  {
     id: 50891407,
     name: "Alesion30",
     icon: "https://avatars.githubusercontent.com/u/50891407?v=4",
@@ -460,12 +472,6 @@ export const CONTRIBUTORS = [
     name: "daichi000",
     icon: "https://avatars.githubusercontent.com/u/35623457?v=4",
     url: "https://github.com/daichi000",
-  },
-  {
-    id: 89678674,
-    name: "bearone236",
-    icon: "https://avatars.githubusercontent.com/u/89678674?v=4",
-    url: "https://github.com/bearone236",
   },
   {
     id: 88963450,

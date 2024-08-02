@@ -5,6 +5,7 @@ import { useSizes, useSize } from "../src"
 
 describe("useSizes", () => {
   const defaultResizeObserver = global.ResizeObserver
+  const defaultMutationObserver = global.MutationObserver
   const defaultOffsetWidth = Object.getOwnPropertyDescriptor(
     HTMLElement.prototype,
     "offsetWidth",
@@ -31,9 +32,22 @@ describe("useSizes", () => {
           this,
         )
       }
+
       observe = vi.fn()
       unobserve = vi.fn()
       disconnect = vi.fn()
+    }
+
+    global.MutationObserver = class MutationObserver {
+      constructor(cb: MutationCallback) {
+        setTimeout(() => {
+          cb([], this)
+        })
+      }
+
+      observe = vi.fn()
+      disconnect = vi.fn()
+      takeRecords = vi.fn()
     }
 
     Object.defineProperties(HTMLElement.prototype, {
@@ -52,6 +66,7 @@ describe("useSizes", () => {
 
   afterAll(() => {
     global.ResizeObserver = defaultResizeObserver
+    global.MutationObserver = defaultMutationObserver
 
     Object.defineProperty(
       HTMLElement.prototype,

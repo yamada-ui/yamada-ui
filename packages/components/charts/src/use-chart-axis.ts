@@ -118,7 +118,7 @@ export const useChartAxis = ({
   yAxisTickFormatter = type === "percent" && layoutType !== "vertical"
     ? valueToPercent
     : undefined,
-  xAxisTickFormatter = type === "percent" && layoutType !== "vertical"
+  xAxisTickFormatter = type === "percent" && layoutType === "vertical"
     ? valueToPercent
     : undefined,
   styles,

@@ -17,14 +17,13 @@ jobs:
       - name: Generate signature
         id: generate_signature
         run: |
-          body='{"repo":"yamada-ui","owner":"yamada-ui"}'
+          body='{"owner":"yamada-ui","repo":"yamada-ui"}'
           echo "::set-output name=body::$body"
           signature=$(echo -n $body | openssl dgst -sha256 -hmac "${{ secrets.API_SECRET }}" | sed 's/^.* //')
           echo "::set-output name=signature::$signature"
 
       - name: Update issues and pull requests
         run: |
-          body='{"repo": "yamada-ui", "owner": "yamada-ui"}'
           curl -X POST \
           -H "Content-Type: application/json" \
           -H "x-signature: sha256=${{ steps.generate_signature.outputs.signature }}" \

@@ -460,6 +460,7 @@ export const useColorPicker = ({
     value,
     eyeDropperSupported,
     allowInput,
+    onClose,
     getPopoverProps,
     getContainerProps,
     getFieldProps,

@@ -5,12 +5,24 @@ import { useTooltip } from "./use-chart"
 export type ChartTooltipProps = {
   label: string | undefined
   payload: Dict[] | undefined
-  valueFormatter?: (value: number) => string
+  valueFormatter?: (value: any) => string
+  labelFormatter?: (label: string) => string
   unit?: string
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
-  ({ label, className, payload = [], valueFormatter, unit, ...rest }, ref) => {
+  (
+    {
+      label,
+      className,
+      payload = [],
+      valueFormatter,
+      labelFormatter,
+      unit,
+      ...rest
+    },
+    ref,
+  ) => {
     const { styles } = useTooltip()
 
     const items = payload.map(
@@ -68,7 +80,7 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
       >
         {label ? (
           <ui.p className="ui-chart__tooltip-title" __css={styles.tooltipTitle}>
-            {label}
+            {labelFormatter?.(label) ?? label}
           </ui.p>
         ) : null}
 

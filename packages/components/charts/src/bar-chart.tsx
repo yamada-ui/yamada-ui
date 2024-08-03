@@ -91,7 +91,10 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     withLegend = false,
     containerProps,
     unit,
+    yAxisTickFormatter,
+    xAxisTickFormatter,
     valueFormatter,
+    labelFormatter,
     tooltipProps,
     tooltipAnimationDuration,
     legendProps,
@@ -141,7 +144,8 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     xAxisLabelProps,
     yAxisLabelProps,
     unit,
-    valueFormatter,
+    yAxisTickFormatter,
+    xAxisTickFormatter,
     styles,
   })
   const { getReferenceLineProps } = useChartReferenceLine({
@@ -248,6 +252,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    labelFormatter={labelFormatter}
                     unit={unit}
                     {...computedTooltipProps}
                   />

@@ -5,6 +5,7 @@ import {
   type AreaProps,
 } from "@yamada-ui/charts"
 import {
+  Box,
   Center,
   forwardRef,
   HStack,
@@ -16,7 +17,7 @@ import {
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
-import { memo, useMemo } from "react"
+import { memo, useEffect, useMemo } from "react"
 import { useInsights } from "./insights-provider"
 import {
   getInsightScore,
@@ -32,20 +33,27 @@ import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
 import { colorSchemes } from "theme"
 import { CountUp } from "components/transitions"
 
-export type TotalChartProps = StackProps & {}
+export type TotalChartProps = StackProps & {
+  isLoading: boolean
+}
 
 export const TotalChart = memo(
-  forwardRef<TotalChartProps, "div">(({ ...rest }, ref) => {
+  forwardRef<TotalChartProps, "div">(({ isLoading, ...rest }, ref) => {
     const { t } = useI18n()
     const { insights, users, period } = useInsights()
-    const isEmpty = !users.length || (!period.start && !period.end)
-    const [isAreaChart, { toggle }] = useBoolean(true)
-    const isLoaded = !!insights
+    const isEmpty = !isLoading && !Object.keys(insights ?? {}).length
+    const isInvalid = !users.length || (!period.start && !period.end)
+    const isSingle = Object.keys(insights ?? {}).length <= 1
+    const [isAreaChart, { toggle, off }] = useBoolean(true)
 
     const score = useMemo(
       () => getInsightTotalScore(insights, users),
       [insights, users],
     )
+
+    useEffect(() => {
+      if (!isLoading && isSingle) off()
+    }, [off, isLoading, isSingle])
 
     return (
       <VStack
@@ -66,11 +74,11 @@ export const TotalChart = memo(
           bg={["whiteAlpha.500", "blackAlpha.300"]}
         >
           <Center>
-            <Skeleton isLoaded={isLoaded} minW="6ch" rounded="md">
+            <Skeleton isLoaded={!isLoading} minW="6ch" rounded="md">
               <CountUp
                 fontSize="3xl"
                 fontWeight="semibold"
-                count={isLoaded ? score.total : null}
+                count={!isLoading ? score.total : null}
               />
             </Skeleton>
           </Center>
@@ -78,6 +86,7 @@ export const TotalChart = memo(
           <HStack>
             <IconButton
               variant="ghost"
+              isDisabled={isEmpty || isInvalid || isSingle}
               icon={
                 isAreaChart ? (
                   <ChartColumn fontSize="1.5em" />
@@ -90,16 +99,16 @@ export const TotalChart = memo(
           </HStack>
         </HStack>
 
-        <Center ps={isLoaded ? "0" : "6"} pe="6" py={{ base: "lg" }}>
-          {isEmpty ? (
+        <Center px="6" py={{ base: "lg" }}>
+          {isEmpty || isInvalid ? (
             <Center h="md">
               <Text color="muted" fontSize="2xl">
                 {t("insights.notFound")}
               </Text>
             </Center>
           ) : (
-            <Skeleton isLoaded={isLoaded} w="full" h="md" rounded="md">
-              {isAreaChart ? <AreaChart /> : <BarChart />}
+            <Skeleton isLoaded={!isLoading} w="full" h="md" rounded="md">
+              <Box ms="-6">{isAreaChart ? <AreaChart /> : <BarChart />}</Box>
             </Skeleton>
           )}
         </Center>
@@ -113,7 +122,7 @@ TotalChart.displayName = "TotalChart"
 type AreaChartProps = {}
 
 const AreaChart: FC<AreaChartProps> = memo(() => {
-  const { insights, users, summarize, period } = useInsights()
+  const { insights, users, period } = useInsights()
 
   const data = useMemo(
     () =>
@@ -149,8 +158,8 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
       series={series}
       dataKey="period"
       curveType="linear"
-      labelFormatter={(label) => labelFormatter(label, summarize, period)}
-      xAxisTickFormatter={(value) => xAxisTickFormatter(value, summarize)}
+      labelFormatter={(label) => labelFormatter(label, period)}
+      xAxisTickFormatter={(value) => xAxisTickFormatter(value, period)}
       fillOpacity={[0.8, 0.7]}
       withDots={false}
       withActiveDots={false}

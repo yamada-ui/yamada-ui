@@ -100,9 +100,9 @@ export type UsePieChartOptions = {
    */
   fillOpacity?: number | [number, number]
   /**
-   * A function to format values inside the tooltip.
+   * A function to format labels.
    */
-  valueFormatter?: (value: number) => string
+  labelFormatter?: (value: number) => string
 }
 
 type UsePieChartProps = UsePieChartOptions & {
@@ -122,7 +122,7 @@ export const usePieChart = ({
   paddingAngle = 0,
   startAngle = 90,
   endAngle = -270,
-  valueFormatter,
+  labelFormatter,
   styles,
   ...rest
 }: UsePieChartProps) => {
@@ -216,11 +216,11 @@ export const usePieChart = ({
         labelOffset,
         isPercent,
         labelProps,
-        valueFormatter,
+        labelFormatter,
         styles: styles.label,
         ...props,
       }),
-    [isPercent, labelOffset, labelProps, styles.label, valueFormatter],
+    [isPercent, labelOffset, labelProps, styles.label, labelFormatter],
   )
 
   const labelLine = useCallback(

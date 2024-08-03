@@ -49,10 +49,6 @@ type PieChartOptions = {
    */
   tooltipDataSource?: TooltipDataSourceType
   /**
-   * A function to format values inside the tooltip
-   */
-  valueFormatter?: (value: number) => string
-  /**
    * Unit displayed next to each tick in y-axis.
    */
   unit?: string
@@ -62,7 +58,7 @@ export type PieChartProps = HTMLUIProps<"div"> &
   ThemeProps<"pieChart"> &
   PieChartOptions &
   UsePieChartOptions &
-  UseChartTooltipOptions &
+  Omit<UseChartTooltipOptions, "labelFormatter"> &
   UseChartLegendProps &
   UseChartProps
 
@@ -86,6 +82,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     tooltipDataSource = "all",
     valueFormatter,
+    labelFormatter,
     unit,
     innerRadius,
     outerRadius,
@@ -122,7 +119,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
     withLabelLines,
     labelOffset,
     isPercent,
-    valueFormatter,
+    labelFormatter,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })

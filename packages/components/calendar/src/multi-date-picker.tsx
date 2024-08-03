@@ -68,6 +68,10 @@ type MultiDatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
    * Props for date picker input element.
    */
   inputProps?: HTMLUIProps<"input">
@@ -115,6 +119,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       minH,
       minHeight,
       containerProps,
+      fieldProps,
       inputProps,
       iconProps,
       clearIconProps,
@@ -166,7 +171,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 value={value}
                 setValue={setValue}
                 dateToString={dateToString}
-                {...getFieldProps({ h, minH }, ref)}
+                {...getFieldProps({ h, minH, ...fieldProps }, ref)}
                 inputProps={getInputProps(inputProps)}
               />
 

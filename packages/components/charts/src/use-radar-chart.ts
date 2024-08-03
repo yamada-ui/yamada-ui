@@ -89,9 +89,13 @@ export type UseRadarChartOptions = {
    */
   fillOpacity?: number | [number, number]
   /**
-   * A function to format values on Y axis and inside the tooltip.
+   * A function to format Y axis tick.
    */
-  valueFormatter?: (value: number) => string
+  polarAngleAxisTickFormatter?: (value: number) => string
+  /**
+   * A function to format X axis tick.
+   */
+  polarRadiusAxisTickFormatter?: (value: number) => string
   /**
    * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
    */
@@ -110,7 +114,8 @@ export const useRadarChart = ({
   withActiveDots = false,
   strokeWidth = 2,
   fillOpacity = 0.4,
-  valueFormatter,
+  polarAngleAxisTickFormatter,
+  polarRadiusAxisTickFormatter,
   strokeDasharray,
   styles,
   ...rest
@@ -425,7 +430,7 @@ export const useRadarChart = ({
           polarAngleAxisTickClassName,
         ),
       },
-      tickFormatter: valueFormatter,
+      tickFormatter: polarAngleAxisTickFormatter,
       tickSize: 16,
       ...props,
       ...polarAngleAxisProps,
@@ -435,7 +440,7 @@ export const useRadarChart = ({
       polarAngleAxisClassName,
       polarAngleAxisProps,
       polarAngleAxisTickClassName,
-      valueFormatter,
+      polarAngleAxisTickFormatter,
     ],
   )
 
@@ -453,7 +458,7 @@ export const useRadarChart = ({
           polarRadiusAxisTickClassName,
         ),
       },
-      tickFormatter: valueFormatter,
+      tickFormatter: polarRadiusAxisTickFormatter,
       ...props,
       ...polarRadiusAxisProps,
     }),
@@ -461,7 +466,7 @@ export const useRadarChart = ({
       polarRadiusAxisClassName,
       polarRadiusAxisProps,
       polarRadiusAxisTickClassName,
-      valueFormatter,
+      polarRadiusAxisTickFormatter,
     ],
   )
 

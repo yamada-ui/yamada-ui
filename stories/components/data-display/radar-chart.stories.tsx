@@ -348,6 +348,78 @@ export const withValueFormatter: Story = () => {
   )
 }
 
+export const withPolarAngleAxisTickFormatter: Story = () => {
+  const data = useMemo(() => {
+    const fruit = [
+      "Apples",
+      "Oranges",
+      "Tomatoes",
+      "Grapes",
+      "Bananas",
+      "Lemons",
+    ]
+    return fruit.map((fruit) => ({
+      fruit,
+      sales_january: randomValue(),
+      sales_february: randomValue(),
+    }))
+  }, [])
+
+  const series: RadarProps[] = useMemo(
+    () => [
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="fruit"
+      withPolarRadiusAxis
+      polarAngleAxisTickFormatter={(value) => String(value).toUpperCase()}
+    />
+  )
+}
+
+export const withPolarRadiusAxisTickFormatter: Story = () => {
+  const data = useMemo(() => {
+    const fruit = [
+      "Apples",
+      "Oranges",
+      "Tomatoes",
+      "Grapes",
+      "Bananas",
+      "Lemons",
+    ]
+    return fruit.map((fruit) => ({
+      fruit,
+      sales_january: randomValue(),
+      sales_february: randomValue(),
+    }))
+  }, [])
+
+  const series: RadarProps[] = useMemo(
+    () => [
+      { dataKey: "sales_january", color: ["primary.500", "primary.400"] },
+      { dataKey: "sales_february", color: ["secondary.500", "secondary.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="fruit"
+      withPolarRadiusAxis
+      polarRadiusAxisTickFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
 export const withStrokeDasharray: Story = () => {
   const data = useMemo(() => {
     const fruit = [
@@ -634,10 +706,8 @@ export const customPolarRadiusAxis: Story = () => {
       series={series}
       dataKey="fruit"
       withPolarRadiusAxis
-      polarRadiusAxisProps={{
-        angle: 30,
-        tickFormatter: (value) => `${value}yen`,
-      }}
+      polarRadiusAxisTickFormatter={(value) => `${value}yen`}
+      polarRadiusAxisProps={{ angle: 30 }}
     />
   )
 }

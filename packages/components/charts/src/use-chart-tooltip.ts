@@ -17,6 +17,14 @@ export type UseChartTooltipOptions = {
    * @default 0
    */
   tooltipAnimationDuration?: number
+  /**
+   * A function to format values on inside the tooltip.
+   */
+  valueFormatter?: (value: any) => string
+  /**
+   * A function to format labels on inside the tooltip.
+   */
+  labelFormatter?: (label: string) => string
 }
 
 type UseChartTooltipProps = UseChartTooltipOptions & {

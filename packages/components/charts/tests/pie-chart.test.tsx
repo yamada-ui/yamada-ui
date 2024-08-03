@@ -318,22 +318,6 @@ describe("<PieChart />", () => {
     expect(formattedElements).toHaveLength(data.length)
   })
 
-  test("valueFormatter should function properly in label", async () => {
-    render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels
-        withTooltip={false}
-        valueFormatter={(value) => value.toLocaleString()}
-      />,
-    )
-
-    const formattedElements =
-      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements).toHaveLength(data.length)
-  })
-
   test("isPercent should work correctly", async () => {
     render(
       <PieChart

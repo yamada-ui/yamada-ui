@@ -672,23 +672,6 @@ describe("<LineChart />", () => {
   })
 
   describe("valueFormatter", () => {
-    test("should be rendered valueFormatter in y axis", async () => {
-      render(
-        <LineChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
-          data={data}
-          series={series}
-          withTooltip={false}
-          valueFormatter={(value) => value.toLocaleString()}
-        />,
-      )
-
-      const formattedElements =
-        await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-      expect(formattedElements.length).toBeGreaterThan(1)
-    })
-
     test("should be rendered valueFormatter in tooltip", async () => {
       const { container } = render(
         <LineChart
@@ -717,9 +700,9 @@ describe("<LineChart />", () => {
       })
 
       await waitFor(() =>
-        expect(
-          screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i).length,
-        ).toBeGreaterThan(series.length),
+        expect(screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i)).toHaveLength(
+          series.length,
+        ),
       )
     })
 

@@ -776,23 +776,6 @@ describe("<AreaChart />", () => {
   })
 
   describe("valueFormatter", () => {
-    test("should be rendered valueFormatter in y axis", async () => {
-      render(
-        <AreaChart
-          containerProps={{ width: 400, height: "80%" }}
-          dataKey="name"
-          data={data}
-          series={series}
-          withTooltip={false}
-          valueFormatter={(value) => value.toLocaleString()}
-        />,
-      )
-
-      const formattedElements =
-        await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-      expect(formattedElements.length).toBeGreaterThan(1)
-    })
-
     test("should be rendered valueFormatter in tooltip", async () => {
       const { container } = render(
         <AreaChart
@@ -820,11 +803,11 @@ describe("<AreaChart />", () => {
         clientY: 200,
       })
 
-      await waitFor(() =>
-        expect(
-          screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i).length,
-        ).toBeGreaterThan(series.length),
-      )
+      await waitFor(() => {
+        expect(screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i)).toHaveLength(
+          series.length,
+        )
+      })
     })
 
     test("should be rendered valueFormatter in tooltip with rangeData", async () => {

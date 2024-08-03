@@ -12,6 +12,7 @@ import { Calendar } from "./calendar"
 import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
+import { CircleProgress } from "./circle-progress"
 import { CloseButton } from "./close-button"
 import { Collapse } from "./collapse"
 import { ColorPicker } from "./color-picker"
@@ -102,6 +103,7 @@ export default {
   Card,
   Carousel,
   Checkbox,
+  CircleProgress,
   CloseButton,
   Collapse,
   ColorPicker,

@@ -54,14 +54,11 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
   const { t } = useI18n()
   const router = useRouter()
   const { users, setUsers } = useInsights()
-  const [value, onChange] = useState<string[]>(users)
-  const { isOpen, onOpen, onClose } = useDisclosure({
-    onClose: () => onChangeQuery(value),
-  })
-  const count = value.length
-  const isExceeded = count > 2
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const count = users.length
+  const isExceeded = count > 1
 
-  const onChangeQuery = useCallback(
+  const onChange = useCallback(
     (value: string[]) => {
       const { query } = router
       const params = new URLSearchParams(query as Record<string, string>)
@@ -90,16 +87,12 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
 
   return (
     <MultiAutocomplete
-      w={
-        isExceeded
-          ? { base: "64", md: "full" }
-          : { base: "96", lg: "64", md: "full" }
-      }
+      w={{ base: "64", md: "full" }}
       items={items}
-      value={value}
+      value={users}
       onChange={onChange}
       clearIconProps={{
-        onClick: () => onChangeQuery([]),
+        onClick: () => onChange([]),
       }}
       isOpen={isOpen}
       onOpen={onOpen}

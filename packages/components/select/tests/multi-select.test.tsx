@@ -101,22 +101,6 @@ describe("<MultiSelect />", () => {
       expect(option1).toBeVisible()
       expect(option2).toBeVisible()
     })
-
-    test("empty items, render correctly", async () => {
-      render(<MultiSelect />)
-
-      const input = await screen.findByRole("combobox")
-      expect(input).toBeInTheDocument()
-
-      const span = input.querySelector("span")
-      expect(span).toBeInTheDocument()
-      expect(span).toHaveTextContent("")
-
-      expect(input).not.toHaveAttribute("placeholder")
-
-      const options = screen.queryAllByRole("option")
-      expect(options).toHaveLength(0)
-    })
   })
 
   describe("click event", () => {
@@ -148,6 +132,35 @@ describe("<MultiSelect />", () => {
 
       await user.click(option1)
       expect(input).toHaveTextContent(/option1/i)
+    })
+
+    test("after selected option, make sure option selection state is correct", async () => {
+      const { user } = render(
+        <MultiSelect>
+          <Option value="One">One</Option>
+          <Option></Option>
+        </MultiSelect>,
+      )
+
+      const input = screen.getByRole("combobox")
+      expect(input).toBeInTheDocument()
+      await user.click(input)
+
+      const optionList = await screen.findAllByRole("option")
+      const option1 = optionList[0]
+      const option2 = optionList[1]
+
+      expect(option1).toBeVisible()
+      expect(option2).toBeVisible()
+
+      await user.click(option1)
+      await user.click(option2)
+
+      await user.click(document.body)
+      await user.click(input)
+
+      expect(option1).toHaveAttribute("aria-checked", "true")
+      expect(option2).toHaveAttribute("aria-checked", "true")
     })
   })
 

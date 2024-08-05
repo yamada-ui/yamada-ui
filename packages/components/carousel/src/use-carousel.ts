@@ -27,6 +27,7 @@ export type SlidesInViewOptionsType = EmblaOptionsType["inViewThreshold"]
 export type DragHandlerOptionType = EmblaOptionsType["watchDrag"]
 export type ResizeHandlerOptionType = EmblaOptionsType["watchResize"]
 export type SlidesHandlerOptionType = EmblaOptionsType["watchSlides"]
+export type CarouselControlRefType = EmblaCarouselType
 
 type CarouselContext = {
   carousel: EmblaCarouselType | undefined

@@ -125,6 +125,7 @@ type UseCalendarPickerBaseProps<
   | "restoreFocus"
   | "openDelay"
   | "closeDelay"
+  | "children"
 > &
   FormControlOptions &
   T &
@@ -142,6 +143,7 @@ export type UseCalendarPickerProps<
   | "type"
   | "defaultValue"
   | "onChange"
+  | "children"
 > &
   UseCalendarPickerBaseProps<T>
 

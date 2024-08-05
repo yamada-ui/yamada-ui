@@ -179,6 +179,7 @@ export const useYearPicker = ({
   return {
     id,
     value,
+    onClose,
     getContainerProps,
     getPopoverProps,
     getFieldProps,

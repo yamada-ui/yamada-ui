@@ -100,13 +100,13 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       className,
       children,
       thickness = "0.625rem",
-      color,
-      trackColor = "primary",
+      color = "primary",
+      trackColor = "border",
       value = 0,
       min = 0,
       max = 100,
       isAnimation = false,
-      isRounded = false,
+      isRounded,
       speed = ["1.4s", "2s"],
       ...rest
     } = omitThemeProps(mergedProps)

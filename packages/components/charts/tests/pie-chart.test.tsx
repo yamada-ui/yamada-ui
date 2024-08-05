@@ -70,266 +70,290 @@ describe("<PieChart />", () => {
     },
   ]
 
-  test("should pass a11y test", async () => {
-    await a11y(
-      <PieChart containerProps={{ width: 400, height: "80%" }} data={data} />,
-    )
-  })
-
-  test("cells should be rendered", async () => {
-    const { container } = render(
-      <PieChart containerProps={{ width: 400, height: "80%" }} data={data} />,
-    )
-
-    await waitFor(() =>
-      expect(container.querySelectorAll(".ui-pie-chart__cell")).toHaveLength(
-        data.length,
-      ),
-    )
-  })
-
-  test("labels should be rendered according to withLabels", async () => {
-    const { rerender } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels={true}
-        withTooltip={false}
-      />,
-    )
-
-    for (const { value } of data) {
-      await waitFor(() => expect(screen.getByText(`${value}`)).toBeVisible())
-    }
-
-    rerender(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels={false}
-        withTooltip={false}
-      />,
-    )
-
-    for (const { value } of data) {
-      await waitFor(() =>
-        expect(screen.queryByText(`${value}`)).not.toBeInTheDocument(),
+  describe("render", () => {
+    test("should pass a11y test", async () => {
+      await a11y(
+        <PieChart containerProps={{ width: 400, height: "80%" }} data={data} />,
       )
-    }
-  })
-
-  test("labelLines should be rendered according to withLabelLines", async () => {
-    const { rerender, container } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels={true}
-        withLabelLines={true}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(container.querySelectorAll(".ui-chart__label-line")).toHaveLength(
-        data.length,
-      ),
-    )
-
-    rerender(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels={true}
-        withLabelLines={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-chart__label-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
-
-  test("if withLabels is false, labelLines should not be rendered", async () => {
-    const { container } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels={false}
-        withLabelLines={true}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-pie-chart__label-line"),
-      ).not.toBeInTheDocument(),
-    )
-  })
-
-  test("tooltip should be rendered according to withTooltip", async () => {
-    const { rerender, container } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withTooltip={true}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-pie-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-pie-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
     })
 
-    expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+    test("cells should be rendered", async () => {
+      const { container } = render(
+        <PieChart containerProps={{ width: 400, height: "80%" }} data={data} />,
+      )
 
-    for (const { name } of data) {
-      const textElement = await screen.findAllByText(name)
-      expect(textElement).toHaveLength(1)
-    }
+      await waitFor(() =>
+        expect(container.querySelectorAll(".ui-pie-chart__cell")).toHaveLength(
+          data.length,
+        ),
+      )
+    })
+  })
 
-    rerender(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withTooltip={false}
-      />,
-    )
+  describe("label", () => {
+    test("labels should be rendered according to withLabels", async () => {
+      const { rerender } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels={true}
+          withTooltip={false}
+        />,
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-pie-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      for (const { value } of data) {
+        await waitFor(() => expect(screen.getByText(`${value}`)).toBeVisible())
+      }
 
-    chartElement = container.querySelector(".ui-pie-chart__chart")
-    assert(chartElement !== null)
+      rerender(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels={false}
+          withTooltip={false}
+        />,
+      )
 
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      for (const { value } of data) {
+        await waitFor(() =>
+          expect(screen.queryByText(`${value}`)).not.toBeInTheDocument(),
+        )
+      }
     })
 
-    expect(
-      container.querySelector(".ui-chart__tooltip"),
-    ).not.toBeInTheDocument()
-  })
+    test("labelLines should be rendered according to withLabelLines", async () => {
+      const { rerender, container } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels={true}
+          withLabelLines={true}
+        />,
+      )
 
-  test("if tooltip data source is segment, the data displayed in the tooltip is segmented", async () => {
-    const { container, user } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withTooltip={true}
-        tooltipDataSource="segment"
-        h="md"
-        w="full"
-        outerRadius="100%"
-      />,
-    )
+      await waitFor(() =>
+        expect(
+          container.querySelectorAll(".ui-chart__label-line"),
+        ).toHaveLength(data.length),
+      )
 
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-pie-chart__chart"),
-      ).toBeInTheDocument(),
-    )
+      rerender(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels={true}
+          withLabelLines={false}
+        />,
+      )
 
-    let cellElement = container.querySelector(".ui-pie-chart__cell")
-    assert(cellElement !== null)
-
-    await user.hover(cellElement)
-
-    const textElement = await screen.findByText(/Page\s+/)
-    expect(textElement).toBeInTheDocument()
-  })
-
-  test("legend should be rendered according to withLegend", async () => {
-    const { rerender, container } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLegend={true}
-        withTooltip={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(container.querySelector(".ui-chart__legend")).toBeInTheDocument(),
-    )
-
-    for (const { name } of data) {
-      expect(screen.getByText(name)).toBeInTheDocument()
-    }
-
-    rerender(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLegend={false}
-        withTooltip={false}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-chart__legend"),
-      ).not.toBeInTheDocument(),
-    )
-
-    for (const { name } of data) {
-      expect(screen.queryByText(name)).not.toBeInTheDocument()
-    }
-  })
-
-  test("valueFormatter should function properly in tooltip", async () => {
-    const { container } = render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        valueFormatter={(value) => value.toLocaleString()}
-      />,
-    )
-
-    await waitFor(() =>
-      expect(
-        container.querySelector(".ui-pie-chart__chart"),
-      ).toBeInTheDocument(),
-    )
-
-    let chartElement = container.querySelector(".ui-pie-chart__chart")
-    assert(chartElement !== null)
-
-    fireEvent.mouseOver(chartElement, {
-      clientX: 200,
-      clientY: 200,
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-chart__label-line"),
+        ).not.toBeInTheDocument(),
+      )
     })
 
-    const formattedElements =
-      await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
-    expect(formattedElements).toHaveLength(data.length)
+    test("if withLabels is false, labelLines should not be rendered", async () => {
+      const { container } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels={false}
+          withLabelLines={true}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-pie-chart__label-line"),
+        ).not.toBeInTheDocument(),
+      )
+    })
+
+    test("isPercent should work correctly", async () => {
+      render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels
+          withTooltip={false}
+          isPercent
+        />,
+      )
+
+      const formattedElements = await screen.findAllByText(/\d+%/i)
+      expect(formattedElements).toHaveLength(data.length)
+    })
   })
 
-  test("isPercent should work correctly", async () => {
-    render(
-      <PieChart
-        containerProps={{ width: 400, height: "80%" }}
-        data={data}
-        withLabels
-        withTooltip={false}
-        isPercent
-      />,
-    )
+  describe("tooltip & legend", () => {
+    test("should be rendered according to withTooltip", async () => {
+      const { rerender, container } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withTooltip={true}
+        />,
+      )
 
-    const formattedElements = await screen.findAllByText(/\d+%/i)
-    expect(formattedElements).toHaveLength(data.length)
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-pie-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-pie-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(container.querySelector(".ui-chart__tooltip")).toBeInTheDocument()
+
+      for (const { name } of data) {
+        const textElement = await screen.findAllByText(name)
+        expect(textElement).toHaveLength(1)
+      }
+
+      rerender(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withTooltip={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-pie-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      chartElement = container.querySelector(".ui-pie-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      expect(
+        container.querySelector(".ui-chart__tooltip"),
+      ).not.toBeInTheDocument()
+    })
+
+    test("if tooltip data source is segment, the data displayed in the tooltip is segmented", async () => {
+      const { container, user } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withTooltip={true}
+          tooltipDataSource="segment"
+          h="md"
+          w="full"
+          outerRadius="100%"
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-pie-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let cellElement = container.querySelector(".ui-pie-chart__cell")
+      assert(cellElement !== null)
+
+      await user.hover(cellElement)
+
+      const textElement = await screen.findByText(/Page\s+/)
+      expect(textElement).toBeInTheDocument()
+    })
+
+    test("legend should be rendered according to withLegend", async () => {
+      const { rerender, container } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLegend={true}
+          withTooltip={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-chart__legend"),
+        ).toBeInTheDocument(),
+      )
+
+      for (const { name } of data) {
+        expect(screen.getByText(name)).toBeInTheDocument()
+      }
+
+      rerender(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLegend={false}
+          withTooltip={false}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-chart__legend"),
+        ).not.toBeInTheDocument(),
+      )
+
+      for (const { name } of data) {
+        expect(screen.queryByText(name)).not.toBeInTheDocument()
+      }
+    })
+  })
+
+  describe("valueFormatter", () => {
+    test("valueFormatter should function properly in tooltip", async () => {
+      const { container } = render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          valueFormatter={(value) => `${value} views`}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-pie-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-pie-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      const formattedElements = await screen.findAllByText(/\d{4} views/i)
+      expect(formattedElements).toHaveLength(data.length)
+    })
+
+    test("valueFormatter should function properly in label", async () => {
+      render(
+        <PieChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withLabels
+          withTooltip={false}
+          labelFormatter={(value) => `${value} views`}
+        />,
+      )
+
+      const formattedElements = await screen.findAllByText(/\d{4} views/i)
+      expect(formattedElements).toHaveLength(data.length)
+    })
   })
 })

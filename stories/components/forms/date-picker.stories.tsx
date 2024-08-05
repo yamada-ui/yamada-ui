@@ -3,6 +3,7 @@ import type { DatePickerProps } from "@yamada-ui/calendar"
 import { DatePicker } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
+import dayjs from "dayjs"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
@@ -20,6 +21,28 @@ export default meta
 
 export const basic: Story = () => {
   return <DatePicker placeholder="basic" />
+}
+
+export const withChildren: Story = () => {
+  return (
+    <>
+      <DatePicker placeholder="YYYY/MM/DD">
+        <VStack mt="sm">
+          <Button>Submit</Button>
+        </VStack>
+      </DatePicker>
+
+      <DatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+        {({ value, onClose }) => (
+          <VStack mt="sm">
+            <Button isDisabled={!value} onClick={onClose}>
+              Submit{value ? ` ${dayjs(value).format("YYYY/MM/DD")}` : ""}
+            </Button>
+          </VStack>
+        )}
+      </DatePicker>
+    </>
+  )
 }
 
 export const withSize: Story = () => {

@@ -17,7 +17,7 @@ jobs:
       - name: Create insight report
         run: |
           weekend=$(date -d '+9 hours -1 day' '+%Y-%m-%d')
-          weekstart=$(date -d '+9 hours -7 day' '+%Y-%m-%d')
+          weekstart=$(date -d '+9 hours -6 day' '+%Y-%m-%d')
           pnpm report:insights -s $weekstart -e $weekend --publish --upload
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}

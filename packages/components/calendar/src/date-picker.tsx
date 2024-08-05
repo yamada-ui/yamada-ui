@@ -48,6 +48,10 @@ type DatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<DatePickerFieldProps, "inputProps" | "children">
+  /**
    * Props for date picker input element.
    */
   inputProps?: DatePickerFieldProps["inputProps"]
@@ -90,6 +94,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    fieldProps,
     inputProps,
     iconProps,
     clearIconProps,
@@ -132,7 +137,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
             __css={{ position: "relative", ...styles.inner }}
           >
             <DatePickerField
-              {...getFieldProps({ h, minH }, ref)}
+              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 

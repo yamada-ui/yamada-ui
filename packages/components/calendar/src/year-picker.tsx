@@ -41,6 +41,10 @@ type YearPickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for year picker field element.
+   */
+  fieldProps?: Omit<DatePickerFieldProps, "inputProps" | "children">
+  /**
    * Props for year picker input element.
    */
   inputProps?: DatePickerFieldProps["inputProps"]
@@ -83,6 +87,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    fieldProps,
     inputProps,
     iconProps,
     clearIconProps,
@@ -126,7 +131,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
           >
             <DatePickerField
               className="ui-year-picker__field"
-              {...getFieldProps({ h, minH }, ref)}
+              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 

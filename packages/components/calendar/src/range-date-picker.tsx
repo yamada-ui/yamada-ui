@@ -50,6 +50,10 @@ type RangeDatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
    * Props for date picker start input element.
    */
   startInputProps?: HTMLUIProps<"input">
@@ -101,6 +105,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       minH,
       minHeight,
       containerProps,
+      fieldProps,
       startInputProps,
       endInputProps,
       iconProps,
@@ -149,7 +154,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
               <RangeDatePickerField
                 separator={separator}
                 value={value}
-                {...getFieldProps({ h, minH })}
+                {...getFieldProps({ h, minH, ...fieldProps })}
                 startInputProps={getStartInputProps(startInputProps, ref)}
                 endInputProps={getEndInputProps(endInputProps)}
               />

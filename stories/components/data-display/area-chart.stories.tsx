@@ -610,6 +610,105 @@ export const withValueFormatter: Story = () => {
   )
 }
 
+export const withXAxisTickFormatter: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaProps[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      xAxisTickFormatter={(value) => value.replace("Page", "Page:")}
+    />
+  )
+}
+
+export const withYAxisTickFormatter: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaProps[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      yAxisTickFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
+export const withLabelFormatter: Story = () => {
+  const data = useMemo(
+    () =>
+      Array(7)
+        .fill(0)
+        .map((_, index) => ({
+          name: `Page ${index}`,
+          uv: randomValue(),
+          pv: randomValue(),
+          amt: randomValue(),
+        })),
+    [],
+  )
+
+  const series: AreaProps[] = useMemo(
+    () => [
+      { dataKey: "uv", color: ["primary.500", "primary.400"] },
+      { dataKey: "pv", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "amt", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+
+  return (
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      labelFormatter={(value) => value.replace("Page", "Page:")}
+    />
+  )
+}
+
 export const withStrokeDasharray: Story = () => {
   const data = useMemo(
     () =>

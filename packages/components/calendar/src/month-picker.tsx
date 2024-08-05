@@ -41,6 +41,10 @@ type MonthPickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for month picker field element.
+   */
+  fieldProps?: Omit<DatePickerFieldProps, "inputProps" | "children">
+  /**
    * Props for month picker input element.
    */
   inputProps?: DatePickerFieldProps["inputProps"]
@@ -83,6 +87,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    fieldProps,
     inputProps,
     iconProps,
     clearIconProps,
@@ -126,7 +131,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
           >
             <DatePickerField
               className="ui-month-picker__field"
-              {...getFieldProps({ h, minH }, ref)}
+              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 

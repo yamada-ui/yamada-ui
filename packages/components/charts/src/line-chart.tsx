@@ -90,7 +90,10 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     xAxisLabelProps,
     yAxisLabelProps,
     unit,
+    yAxisTickFormatter,
+    xAxisTickFormatter,
     valueFormatter,
+    labelFormatter,
     referenceLineProps,
     tooltipProps,
     tooltipAnimationDuration,
@@ -151,7 +154,8 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
     xAxisLabelProps,
     yAxisLabelProps,
     unit,
-    valueFormatter,
+    yAxisTickFormatter,
+    xAxisTickFormatter,
     styles,
   })
   const { getReferenceLineProps } = useChartReferenceLine({
@@ -256,6 +260,7 @@ export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    labelFormatter={labelFormatter}
                     unit={unit}
                     {...computedTooltipProps}
                   />

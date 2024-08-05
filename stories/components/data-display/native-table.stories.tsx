@@ -13,6 +13,7 @@ import {
   Box,
   defaultTheme,
   TableContainer,
+  isString,
 } from "@yamada-ui/react"
 import type { FC } from "react"
 import { useState } from "react"
@@ -634,6 +635,8 @@ export const withStickyHeader: Story = () => {
               .filter(([key]) => !isNaN(Number(key)))
               .sort(([a], [b]) => Number(a) - Number(b))
               .map(([key, value]) => {
+                if (!isString(value)) return null
+
                 return (
                   <Tr key={key}>
                     <Td>{key}</Td>

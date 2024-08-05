@@ -1,5 +1,3 @@
-export type Radii = typeof radii
-
 export const radii = {
   none: "0",
   sm: "0.125rem",

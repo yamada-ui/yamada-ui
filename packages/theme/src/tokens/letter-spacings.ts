@@ -1,5 +1,3 @@
-export type LetterSpacings = typeof letterSpacings
-
 export const letterSpacings = {
   tighter: "-0.05em",
   tight: "-0.025em",

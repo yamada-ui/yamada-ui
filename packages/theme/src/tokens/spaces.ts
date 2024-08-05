@@ -1,5 +1,3 @@
-export type Spaces = typeof spaces
-
 export const spaces = {
   px: "1px",
   0.5: "0.125rem",

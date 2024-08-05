@@ -1,5 +1,3 @@
-export type FontWeights = typeof fontWeights
-
 export const fontWeights = {
   hairline: 100,
   thin: 200,

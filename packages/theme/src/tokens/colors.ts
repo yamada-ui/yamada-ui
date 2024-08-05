@@ -1,5 +1,3 @@
-export type Colors = typeof colors
-
 export const colors = {
   transparent: "transparent",
   current: "currentColor",

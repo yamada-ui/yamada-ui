@@ -1,5 +1,3 @@
-export type Breakpoints = typeof breakpoints
-
 export const breakpoints = {
   sm: "30em",
   md: "48em",

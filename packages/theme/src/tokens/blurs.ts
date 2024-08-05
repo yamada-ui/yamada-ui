@@ -1,5 +1,3 @@
-export type Blurs = typeof blurs
-
 export const blurs = {
   sm: "4px",
   md: "8px",

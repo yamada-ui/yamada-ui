@@ -1,5 +1,3 @@
-export type Transitions = typeof transitions
-
 export const transitions = {
   property: {
     common:

@@ -1,5 +1,3 @@
-export type LineHeights = typeof lineHeights
-
 export const lineHeights = {
   normal: "normal",
   none: 1,

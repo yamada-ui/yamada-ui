@@ -1,5 +1,3 @@
-export type ZIndices = typeof zIndices
-
 export const zIndices = {
   yamcha: 1,
   kurillin: 9,

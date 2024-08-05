@@ -1,5 +1,3 @@
-export type FontSizes = typeof fontSizes
-
 export const fontSizes = {
   "2xs": "0.625rem",
   xs: "0.75rem",

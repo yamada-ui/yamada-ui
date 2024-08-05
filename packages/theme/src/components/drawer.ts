@@ -1,8 +1,9 @@
-import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mergeMultiStyle } from "@yamada-ui/core"
 import { antonym, toCamelCase } from "@yamada-ui/utils"
 import { Modal } from "./modal"
 
-export const Drawer: ComponentMultiStyle = mergeMultiStyle(Modal, {
+export const Drawer: ComponentMultiStyle<"Drawer"> = mergeMultiStyle(Modal, {
   baseStyle: {
     container: ({ isFullHeight, placement }) => ({
       ...(isFullHeight ? { height: "100dvh", rounded: 0 } : {}),

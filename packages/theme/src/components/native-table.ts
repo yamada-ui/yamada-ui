@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle, UIMultiStyle } from "@yamada-ui/core"
 import { transparentizeColor, isGray, tintColor } from "@yamada-ui/utils"
 
-export const NativeTable: ComponentMultiStyle = {
+export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
   baseStyle: {
     container: {
       w: "100%",

@@ -1,4 +1,6 @@
-export const transitions = {
+import type { ThemeTransitionTokens } from "@yamada-ui/core"
+
+export const transitions: ThemeTransitionTokens = {
   property: {
     common:
       "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",

@@ -2,7 +2,7 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { mode } from "@yamada-ui/core"
 import { getColor, isArray } from "@yamada-ui/utils"
 
-export const Input: ComponentMultiStyle = {
+export const Input: ComponentMultiStyle<"Input"> = {
   baseStyle: {
     container: {},
     field: {

@@ -1,4 +1,6 @@
-export const colors = {
+import type { ThemeTokens } from "@yamada-ui/core"
+
+export const colors: ThemeTokens = {
   transparent: "transparent",
   current: "currentColor",
   black: "#141414",

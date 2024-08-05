@@ -1,4 +1,6 @@
-export const fontWeights = {
+import type { ThemeTokens } from "@yamada-ui/core"
+
+export const fontWeights: ThemeTokens = {
   hairline: 100,
   thin: 200,
   light: 300,

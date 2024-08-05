@@ -1,6 +1,7 @@
+import type { ThemeTokens } from "@yamada-ui/core"
 import { spaces } from "./spaces"
 
-export const sizes = {
+export const sizes: ThemeTokens = {
   ...spaces,
   max: "max-content",
   min: "min-content",

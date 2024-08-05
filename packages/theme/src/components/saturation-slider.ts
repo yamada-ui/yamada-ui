@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const SaturationSlider: ComponentMultiStyle = {
+export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
   baseStyle: {
     container: {
       w: "full",

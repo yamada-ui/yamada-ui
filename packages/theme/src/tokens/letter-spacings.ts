@@ -1,4 +1,6 @@
-export const letterSpacings = {
+import type { ThemeTokens } from "@yamada-ui/core"
+
+export const letterSpacings: ThemeTokens = {
   tighter: "-0.05em",
   tight: "-0.025em",
   normal: "0",

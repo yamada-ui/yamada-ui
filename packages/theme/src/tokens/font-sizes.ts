@@ -1,4 +1,6 @@
-export const fontSizes = {
+import type { ThemeTokens } from "@yamada-ui/core"
+
+export const fontSizes: ThemeTokens = {
   "2xs": "0.625rem",
   xs: "0.75rem",
   sm: "0.875rem",

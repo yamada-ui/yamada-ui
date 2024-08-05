@@ -1,4 +1,6 @@
-export const zIndices = {
+import type { ThemeTokens } from "@yamada-ui/core"
+
+export const zIndices: ThemeTokens = {
   yamcha: 1,
   kurillin: 9,
   nappa: 99,

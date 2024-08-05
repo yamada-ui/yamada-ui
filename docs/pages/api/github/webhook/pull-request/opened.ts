@@ -25,12 +25,11 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
   const omittedRequestReviewers = requested_reviewers?.filter(
     ({ login }) => !constant.pullRequest.excludeReviewers.includes(login),
   )
-  const count = omittedRequestReviewers?.length ?? 0
   const collaborators = [...constant.maintainers, ...constant.members]
   const omittedCollaborators = collaborators.filter(
     ({ github }) =>
       !constant.pullRequest.excludeReviewers.includes(github.id) &&
-      user?.login !== github.id,
+      user.login !== github.id,
   )
 
   await recursiveOctokit(() =>
@@ -42,7 +41,8 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
     }),
   )
 
-  let selectedReviewers: string[]
+  let count = omittedRequestReviewers?.length ?? 0
+  let selectedReviewers: string[] = []
 
   if (
     [
@@ -63,14 +63,25 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
       }),
     )
   } else {
-    if (count >= constant.pullRequest.assignReviewerCount) return
+    if (constant.pullRequest.preferredReviewers[user.login]) {
+      selectedReviewers = constant.pullRequest.preferredReviewers[user.login]
+
+      count += selectedReviewers.length
+    } else {
+      if (count >= constant.pullRequest.assignReviewerCount) return
+    }
 
     const assignCount = constant.pullRequest.assignReviewerCount - count
 
-    selectedReviewers = omittedCollaborators
-      .sort(() => 0.5 - Math.random())
-      .slice(0, assignCount)
-      .map(({ github }) => github.id)
+    if (assignCount > 0) {
+      selectedReviewers = [
+        ...selectedReviewers,
+        ...omittedCollaborators
+          .sort(() => 0.5 - Math.random())
+          .slice(0, assignCount)
+          .map(({ github }) => github.id),
+      ]
+    }
 
     await recursiveOctokit(() =>
       octokit.pulls.requestReviewers({

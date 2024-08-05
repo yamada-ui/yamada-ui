@@ -368,6 +368,7 @@ export const useRangeDatePicker = ({
     id,
     value,
     inputValue: [startInputValue, endInputValue],
+    onClose,
     dateToString,
     getContainerProps,
     getPopoverProps,

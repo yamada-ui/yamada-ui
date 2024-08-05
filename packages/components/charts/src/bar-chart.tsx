@@ -10,7 +10,6 @@ import { useMemo } from "react"
 import {
   Legend,
   BarChart as ReChartsBarChart,
-  Bar,
   CartesianGrid,
   Tooltip,
   XAxis,
@@ -105,24 +104,25 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
     fillOpacity,
     chartProps,
     syncId,
+    cell,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getBarChartProps, getBarProps, barVars, setHighlightedArea } =
-    useBarChart({
-      data,
-      series,
-      type,
-      layoutType,
-      chartProps,
-      barProps,
-      referenceLineProps,
-      fillOpacity,
-      syncId,
-      xAxisLabel,
-      yAxisLabel,
-      styles,
-    })
+  const { bars, barVars, getBarChartProps, setHighlightedArea } = useBarChart({
+    data,
+    series,
+    cell,
+    type,
+    layoutType,
+    chartProps,
+    barProps,
+    referenceLineProps,
+    fillOpacity,
+    syncId,
+    xAxisLabel,
+    yAxisLabel,
+    styles,
+  })
   const { getContainerProps } = useChart({ containerProps })
   const {
     getXAxisProps,
@@ -167,19 +167,6 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
-
-  const bars = useMemo(
-    () =>
-      series.map(({ dataKey }, index) => {
-        return (
-          <Bar
-            key={`bar-${dataKey}`}
-            {...getBarProps({ index, className: "ui-bar-chart__bar" })}
-          />
-        )
-      }),
-    [getBarProps, series],
-  )
 
   const referenceLinesItems = useMemo(
     () =>

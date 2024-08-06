@@ -13,7 +13,7 @@ import {
 } from "./styles"
 import { tokens } from "./tokens"
 
-const colorSchemes = [
+export const colorSchemes = [
   "gray",
   "neutral",
   "red",

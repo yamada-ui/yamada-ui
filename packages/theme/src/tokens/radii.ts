@@ -1,6 +1,6 @@
-export type Radii = typeof radii
+import type { ThemeTokens } from "@yamada-ui/core"
 
-export const radii = {
+export const radii: ThemeTokens = {
   none: "0",
   sm: "0.125rem",
   base: "0.25rem",

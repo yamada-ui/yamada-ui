@@ -8,7 +8,7 @@ import {
   shadeColor,
 } from "@yamada-ui/utils"
 
-export const Badge: ComponentStyle = {
+export const Badge: ComponentStyle<"Badge"> = {
   baseStyle: {
     px: 1,
     textTransform: "uppercase",

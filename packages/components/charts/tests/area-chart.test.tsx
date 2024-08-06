@@ -776,7 +776,7 @@ describe("<AreaChart />", () => {
   })
 
   describe("valueFormatter", () => {
-    test("should be rendered valueFormatter in y axis", async () => {
+    test("should be rendered xAxisTickFormatter in x axis", async () => {
       render(
         <AreaChart
           containerProps={{ width: 400, height: "80%" }}
@@ -784,12 +784,27 @@ describe("<AreaChart />", () => {
           data={data}
           series={series}
           withTooltip={false}
-          valueFormatter={(value) => value.toLocaleString()}
+          xAxisTickFormatter={(value) => value.replace("Page", "Page:")}
         />,
       )
 
-      const formattedElements =
-        await screen.findAllByText(/\b\d{1,3}(,\d{3})+\b/i)
+      const formattedElements = await screen.findAllByText(/page:\s[a-g]/i)
+      expect(formattedElements.length).toBeGreaterThan(1)
+    })
+
+    test("should be rendered yAxisTickFormatter in y axis", async () => {
+      render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip={false}
+          yAxisTickFormatter={(value) => `${value} views`}
+        />,
+      )
+
+      const formattedElements = await screen.findAllByText(/\b\d{4}\b views/i)
       expect(formattedElements.length).toBeGreaterThan(1)
     })
 
@@ -802,7 +817,8 @@ describe("<AreaChart />", () => {
           series={series}
           withTooltip
           withYAxis={false}
-          valueFormatter={(value) => value.toLocaleString()}
+          withXAxis={false}
+          valueFormatter={(value) => `${value} views`}
         />,
       )
 
@@ -821,9 +837,42 @@ describe("<AreaChart />", () => {
       })
 
       await waitFor(() =>
+        expect(screen.getAllByText(/\b\d{4}\b views/i)).toHaveLength(
+          series.length,
+        ),
+      )
+    })
+
+    test("should be rendered labelFormatter in tooltip", async () => {
+      const { container } = render(
+        <AreaChart
+          containerProps={{ width: 400, height: "80%" }}
+          dataKey="name"
+          data={data}
+          series={series}
+          withTooltip
+          withYAxis={false}
+          withXAxis={false}
+          labelFormatter={(value) => value.replace("Page", "Page:")}
+        />,
+      )
+
+      await waitFor(() =>
         expect(
-          screen.getAllByText(/\b\d{1,3}(,\d{3})+\b/i).length,
-        ).toBeGreaterThan(series.length),
+          container.querySelector(".ui-area-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-area-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      await waitFor(() =>
+        expect(screen.getAllByText(/page:\s[a-g]/i)).toHaveLength(1),
       )
     })
 
@@ -836,7 +885,7 @@ describe("<AreaChart />", () => {
           series={series}
           withTooltip
           withYAxis={false}
-          valueFormatter={(value) => value.toLocaleString()}
+          valueFormatter={(value) => `${value} views`}
         />,
       )
 
@@ -856,7 +905,7 @@ describe("<AreaChart />", () => {
 
       await waitFor(() =>
         expect(
-          screen.getAllByText(/\b\d{1,3}(,\d{3})+ - \d{1,3}(,\d{3})+/i),
+          screen.getAllByText(/\b\d{4}\b views - \b\d{4}\b views/i),
         ).toHaveLength(series.length),
       )
     })

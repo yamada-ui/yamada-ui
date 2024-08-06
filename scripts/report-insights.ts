@@ -1,10 +1,18 @@
 import { Octokit } from "@octokit/rest"
+import { getRangeDates } from "@yamada-ui/calendar"
+import type { Dict } from "@yamada-ui/react"
 import { isArray } from "@yamada-ui/react"
 import { program } from "commander"
 import type { Dayjs } from "dayjs"
 import dayjs from "dayjs"
+import timezone from "dayjs/plugin/timezone"
+import utc from "dayjs/plugin/utc"
 import { config } from "dotenv"
 import { getConstant, recursiveOctokit } from "./utils"
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault("Asia/Tokyo")
 
 type Issue = Awaited<
   ReturnType<typeof octokit.search.issuesAndPullRequests>
@@ -28,13 +36,9 @@ type Insight = {
   commits: Commit[]
   comments: Comment[]
   reviews: Review[]
-  issues: {
-    created: Issue[]
-  }
-  pullRequests: {
-    created: Issue[]
-    reviewed: Review[]
-  }
+  issues: Issue[]
+  pullRequests: Issue[]
+  approved: Review[]
 }
 
 const COMMON_PARAMS = {
@@ -44,6 +48,7 @@ const COMMON_PARAMS = {
 
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
 const REPORT_FORMAT = "YYYY/MM/DD"
+const DATA_FORMAT = "YYYY-MM-DD"
 
 config()
 
@@ -252,18 +257,18 @@ const getInsights =
       const reviews = allReviews.filter(
         ({ user, state }) => user?.login === login && state !== "APPROVED",
       )
-      const reviewedPullRequest = allReviews.filter(
+      const approved = allReviews.filter(
         ({ user, state }) => user?.login === login && state === "APPROVED",
       )
       const commits = allCommits.filter(({ author }) => author?.login === login)
-      const createdIssues: Issue[] = []
-      const createdPullRequests: Issue[] = []
+      const issues: Issue[] = []
+      const pullRequests: Issue[] = []
 
       issuesAndPullRequests.forEach((issueAndPullRequest) => {
         if (issueAndPullRequest.pull_request) {
-          createdPullRequests.push(issueAndPullRequest)
+          pullRequests.push(issueAndPullRequest)
         } else {
-          createdIssues.push(issueAndPullRequest)
+          issues.push(issueAndPullRequest)
         }
       })
 
@@ -273,13 +278,9 @@ const getInsights =
         commits,
         comments,
         reviews,
-        issues: {
-          created: createdIssues,
-        },
-        pullRequests: {
-          created: createdPullRequests,
-          reviewed: reviewedPullRequest,
-        },
+        issues,
+        pullRequests,
+        approved,
       })
     }
 
@@ -297,22 +298,23 @@ const createReports = (options: Options) => (insights: Insight[]) =>
         commits,
         issues,
         pullRequests,
+        approved,
       }) => {
-        const createdIssueCount = issues.created.length
-        const createdPRCount = pullRequests.created.length
+        const issueCount = issues.length
+        const pullRequestCount = pullRequests.length
         const commentCount = comments.length + reviews.length
-        const reviewedPRCount = pullRequests.reviewed.length
+        const approvedCount = approved.length
         const commitCount = commits.length
         const totalCount =
-          createdIssueCount + createdPRCount + reviewedPRCount + commentCount
+          issueCount + pullRequestCount + approvedCount + commentCount
 
         return {
           total: totalCount,
           content: [
             `- [${login}](${html_url}): ${totalCount}`,
-            createReport(options)("Issue", issues.created),
-            createReport(options)("PR", pullRequests.created),
-            createReport(options)("Review", pullRequests.reviewed),
+            createReport(options)("Issue", issues),
+            createReport(options)("PR", pullRequests),
+            createReport(options)("Review", approved),
             createReport(options)("Comment", [...comments, ...reviews]),
             `  - Commit: ${commitCount}`,
           ].join("\n"),
@@ -391,12 +393,149 @@ const sendDiscordChannel =
     }
   }
 
+const getSomeDates = <T extends Review | Issue | Comment | Review>(
+  date: string,
+  list: T[],
+) =>
+  list.filter((item) =>
+    dayjs("created_at" in item ? item.created_at : item.submitted_at)
+      .tz()
+      .isSame(date, "day"),
+  )
+
+const uploadData =
+  ({ startDate, endDate }: Options) =>
+  async (insights: Insight[]) => {
+    const rangeDates = getRangeDates(
+      startDate.add(9, "hour").toDate(),
+      endDate.add(9, "hour").toDate(),
+    )
+    const rangeDatesFormatted = rangeDates.map((date) =>
+      dayjs(date).format(DATA_FORMAT),
+    )
+
+    const nextActivity = Object.fromEntries(
+      rangeDatesFormatted.map((date) => [
+        date,
+        Object.fromEntries(
+          insights.map(({ login, ...rest }) => {
+            const comments = getSomeDates(date, rest.comments).map(
+              ({ html_url, issue_url, created_at }) => ({
+                html_url,
+                issue_url,
+                created_at,
+              }),
+            )
+
+            const reviews = getSomeDates(date, rest.reviews).map(
+              ({ html_url, pull_request_url, submitted_at }) => ({
+                html_url,
+                pull_request_url,
+                submitted_at,
+              }),
+            )
+
+            const issues = getSomeDates(date, rest.issues).map(
+              ({ html_url, title, number, created_at, closed_at }) => ({
+                number,
+                title,
+                html_url,
+                created_at,
+                closed_at,
+              }),
+            )
+
+            const pullRequests = getSomeDates(date, rest.pullRequests).map(
+              ({ html_url, title, number, created_at, closed_at }) => ({
+                number,
+                title,
+                html_url,
+                created_at,
+                closed_at,
+              }),
+            )
+
+            const approved = getSomeDates(date, rest.approved).map(
+              ({ html_url, pull_request_url, submitted_at }) => ({
+                html_url,
+                pull_request_url,
+                submitted_at,
+              }),
+            )
+
+            if (
+              !comments.length &&
+              !reviews.length &&
+              !issues.length &&
+              !pullRequests.length &&
+              !approved.length
+            ) {
+              return [login, null]
+            }
+
+            const data: Dict = {}
+
+            if (comments.length) data.comments = comments
+            if (reviews.length) data.reviews = reviews
+            if (issues.length) data.issues = issues
+            if (pullRequests.length) data.pullRequests = pullRequests
+            if (approved.length) data.approved = approved
+
+            return [login, data]
+          }),
+        ),
+      ]),
+    )
+
+    try {
+      const { data } = await octokit.repos.getContent({
+        ...COMMON_PARAMS,
+        repo: "yamada-data",
+        path: "activity.json",
+      })
+
+      const sha = isArray(data) ? data[0].sha : data.sha
+      const downloadUrl = isArray(data)
+        ? data[0].download_url
+        : data.download_url
+
+      const res = await fetch(downloadUrl!)
+
+      if (!res.ok) throw new Error("Failed to fetch activity data")
+
+      const prevActivity = await res.json()
+
+      let activity = { ...prevActivity, ...nextActivity }
+
+      activity = Object.fromEntries(
+        Object.entries(activity).sort(
+          (a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime(),
+        ),
+      )
+
+      const content = Buffer.from(JSON.stringify(activity, null, 2)).toString(
+        "base64",
+      )
+
+      await octokit.repos.createOrUpdateFileContents({
+        ...COMMON_PARAMS,
+        repo: "yamada-data",
+        path: "activity.json",
+        message: "build: updated activity",
+        content,
+        sha,
+        branch: "main",
+      })
+    } catch {}
+  }
+
 type CommandOptions = {
   start: string | undefined
   end: string | undefined
   user: string[] | undefined
   extended: boolean | string[] | undefined
   publish: boolean | undefined
+  upload: boolean | undefined
 }
 type Options = {
   startDate: Dayjs
@@ -413,6 +552,7 @@ const main = async () => {
     .option("-u, --user <user...>")
     .option("-x, --extended [content...]")
     .option("-p, --publish")
+    .option("--upload")
     .action(
       async ({
         start,
@@ -420,26 +560,38 @@ const main = async () => {
         user = [],
         extended = false,
         publish = false,
+        upload = false,
       }: CommandOptions) => {
         let startDate: Dayjs
         let endDate: Dayjs
 
         if (start) {
-          startDate = dayjs(start).hour(0).minute(0).second(0)
+          startDate = dayjs(start)
+            .hour(0)
+            .minute(0)
+            .second(0)
+            .subtract(9, "hour")
         } else {
-          startDate = dayjs().subtract(7, "days").hour(18).minute(0).second(0)
+          startDate = dayjs().hour(0).minute(0).second(0).subtract(9, "hour")
         }
 
         if (end) {
-          endDate = dayjs(end).hour(23).minute(59).second(59)
+          endDate = dayjs(end)
+            .hour(23)
+            .minute(59)
+            .second(59)
+            .subtract(9, "hour")
         } else {
-          endDate = dayjs().hour(18).minute(0).second(0)
+          endDate = dayjs().hour(23).minute(59).second(59).subtract(9, "hour")
         }
 
         const options: Options = { startDate, endDate, user, extended, publish }
 
         const collaborators = await getCollaborators(options)()
         const insights = await getInsights(options)(collaborators)
+
+        if (upload) await uploadData(options)(insights)
+
         const reports = createReports(options)(insights)
 
         await sendDiscordChannel(options)(reports)

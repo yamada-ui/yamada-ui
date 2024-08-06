@@ -6,7 +6,7 @@ import {
   transparentizeColor,
 } from "@yamada-ui/utils"
 
-export const Calendar: ComponentMultiStyle = {
+export const Calendar: ComponentMultiStyle<"Calendar"> = {
   baseStyle: {
     container: {
       gap: "md",

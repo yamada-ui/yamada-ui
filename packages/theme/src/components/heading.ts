@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Heading: ComponentStyle = {
+export const Heading: ComponentStyle<"Heading"> = {
   baseStyle: {
     fontFamily: "heading",
     fontWeight: "bold",

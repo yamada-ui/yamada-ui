@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Tooltip: ComponentStyle = {
+export const Tooltip: ComponentStyle<"Tooltip"> = {
   baseStyle: {
     rounded: "md",
     bg: ["white", "black"],

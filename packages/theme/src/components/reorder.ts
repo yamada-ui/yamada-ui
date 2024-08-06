@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Reorder: ComponentMultiStyle = {
+export const Reorder: ComponentMultiStyle<"Reorder"> = {
   baseStyle: {
     container: {
       w: "100%",

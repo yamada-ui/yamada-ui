@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const ColorSwatch: ComponentMultiStyle = {
+export const ColorSwatch: ComponentMultiStyle<"ColorSwatch"> = {
   baseStyle: {
     container: {},
     overlay: { boxSize: "full" },

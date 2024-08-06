@@ -1,23 +1,6 @@
 import { a11y, render, screen } from "@yamada-ui/test"
 import { Select, Option, MultiSelect } from "../src"
 
-const setupMultiSelect = async (props = {}) => {
-  const { user } = render(
-    <MultiSelect {...props}>
-      <Option value="One">One</Option>
-      <Option value="Two">Two</Option>
-      <Option value="Three">Three</Option>
-    </MultiSelect>,
-  )
-
-  const input = screen.getByRole("combobox")
-  await user.click(input)
-
-  return { user, input }
-}
-
-const getOptions = () => screen.findAllByRole("option")
-
 describe("<MultiSelect />", () => {
   describe("rendered correctly", () => {
     test("should pass a11y test", async () => {
@@ -163,35 +146,58 @@ describe("<MultiSelect />", () => {
           {label}
         </div>
       )
-      const { user } = await setupMultiSelect({
-        component: CustomComponent,
-      })
 
-      const options = await getOptions()
-      const option1 = options[0]
+      const { user } = render(
+        <MultiSelect component={CustomComponent}>
+          <Option value="One">One</Option>
+          <Option value="Two">Two</Option>
+          <Option value="Three">Three</Option>
+        </MultiSelect>,
+      )
+
+      const input = screen.getByRole("combobox")
+      await user.click(input)
+
+      const option1 = await screen.findByRole("option", { name: /one/i })
       await user.click(option1)
 
       const customOption = await screen.findByTestId("custom-option")
-      expect(customOption.tagName).toBe("DIV")
+      expect(customOption).toBeInTheDocument()
 
       await user.click(customOption)
-      expect(customOption).toBeValid()
+      expect(customOption).not.toBeInTheDocument()
     })
 
     test("closeOnSelect should work correctly", async () => {
-      const { user, input } = await setupMultiSelect({ closeOnSelect: true })
+      const { user } = render(
+        <MultiSelect closeOnSelect>
+          <Option value="One">One</Option>
+          <Option value="Two">Two</Option>
+          <Option value="Three">Three</Option>
+        </MultiSelect>,
+      )
 
-      const options = await getOptions()
-      const option1 = options[0]
+      const input = screen.getByRole("combobox")
+      await user.click(input)
+
+      const option1 = await screen.findByRole("option", { name: /one/i })
       await user.click(option1)
       expect(input).toHaveAttribute("aria-expanded", "false")
     })
 
     test("maxSelectValues should work correctly", async () => {
-      const { user, input } = await setupMultiSelect({ maxSelectValues: 3 })
+      const { user } = render(
+        <MultiSelect maxSelectValues={3}>
+          <Option value="One">One</Option>
+          <Option value="Two">Two</Option>
+          <Option value="Three">Three</Option>
+        </MultiSelect>,
+      )
 
-      const options = await getOptions()
+      const input = screen.getByRole("combobox")
+      await user.click(input)
 
+      const options = await screen.findAllByRole("option")
       for (const option of options) {
         await user.click(option)
       }

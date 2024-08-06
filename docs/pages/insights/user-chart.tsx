@@ -45,7 +45,7 @@ export type UserChartProps = Omit<StackProps, "id"> & {
 export const UserChart = memo(
   forwardRef<UserChartProps, "div">(
     ({ id, score, timeline, isLoading, ...rest }, ref) => {
-      const { t } = useI18n()
+      const { t, locale } = useI18n()
       const { period } = useInsights()
       const isEmpty = !period.start && !period.end
 
@@ -117,7 +117,7 @@ export const UserChart = memo(
 
               <VStack gap="xs">
                 <Heading as="h3" size="sm" lineClamp={1}>
-                  {user.name.en}
+                  {user.name[locale]}
                 </Heading>
 
                 <Link
@@ -133,6 +133,7 @@ export const UserChart = memo(
 
             <HStack gap="6">
               <Grid
+                display={{ base: "grid", sm: "none" }}
                 templateColumns={{ base: "repeat(2, 1fr)" }}
                 gapX="md"
                 gapY="xs"

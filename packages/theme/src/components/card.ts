@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { shadeColor, tintColor } from "@yamada-ui/utils"
 
-export const Card: ComponentMultiStyle = {
+export const Card: ComponentMultiStyle<"Card"> = {
   baseStyle: {
     container: {},
     header: {},

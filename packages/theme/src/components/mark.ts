@@ -2,7 +2,7 @@ import type { ComponentStyle } from "@yamada-ui/core"
 import { mode } from "@yamada-ui/core"
 import { getColor, isGray, shadeColor, tintColor } from "@yamada-ui/utils"
 
-export const Mark: ComponentStyle = {
+export const Mark: ComponentStyle<"Mark"> = {
   baseStyle: {
     px: "1",
     py: "1",

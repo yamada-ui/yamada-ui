@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const ColorSelector: ComponentMultiStyle = {
+export const ColorSelector: ComponentMultiStyle<"ColorSelector"> = {
   baseStyle: {
     container: { w: "full" },
     saturationSlider: { maxW: "full" },

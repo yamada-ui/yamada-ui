@@ -216,6 +216,7 @@ export const useMultiDatePicker = ({
     value,
     setValue,
     isOpen,
+    onClose,
     dateToString,
     getContainerProps,
     getPopoverProps,

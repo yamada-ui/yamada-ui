@@ -29,6 +29,28 @@ export const basic: Story = () => {
   return <MultiDatePicker placeholder="basic" />
 }
 
+export const withChildren: Story = () => {
+  return (
+    <>
+      <MultiDatePicker placeholder="YYYY/MM/DD">
+        <VStack mt="sm">
+          <Button>Submit</Button>
+        </VStack>
+      </MultiDatePicker>
+
+      <MultiDatePicker placeholder="YYYY/MM/DD">
+        {({ value, onClose }) => (
+          <VStack mt="sm">
+            <Button isDisabled={!value} onClick={onClose}>
+              Submit{value ? ` ${value.length} dates` : ""}
+            </Button>
+          </VStack>
+        )}
+      </MultiDatePicker>
+    </>
+  )
+}
+
 export const withSize: Story = () => {
   return (
     <>

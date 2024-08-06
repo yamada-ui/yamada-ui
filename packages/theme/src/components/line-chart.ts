@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { getMemoizedObject as get } from "@yamada-ui/utils"
 
-export const LineChart: ComponentMultiStyle = {
+export const LineChart: ComponentMultiStyle<"LineChart"> = {
   baseStyle: {
     container: {},
     chart: {},

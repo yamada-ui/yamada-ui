@@ -1,6 +1,23 @@
 import { a11y, render, screen } from "@yamada-ui/test"
 import { Select, Option, MultiSelect } from "../src"
 
+const setupMultiSelect = async (props = {}) => {
+  const { user } = render(
+    <MultiSelect {...props}>
+      <Option value="One">One</Option>
+      <Option value="Two">Two</Option>
+      <Option value="Three">Three</Option>
+    </MultiSelect>,
+  )
+
+  const input = screen.getByRole("combobox")
+  await user.click(input)
+
+  return { user, input }
+}
+
+const getOptions = () => screen.findAllByRole("option")
+
 describe("<MultiSelect />", () => {
   describe("rendered correctly", () => {
     test("should pass a11y test", async () => {
@@ -134,33 +151,55 @@ describe("<MultiSelect />", () => {
       expect(input).toHaveTextContent(/option1/i)
     })
 
-    test("after selected option, make sure option selection state is correct", async () => {
-      const { user } = render(
-        <MultiSelect>
-          <Option value="One">One</Option>
-          <Option></Option>
-        </MultiSelect>,
+    test("customComponent should work correctly", async () => {
+      const CustomComponent = ({
+        label,
+        onRemove,
+      }: {
+        label: string
+        onRemove: React.MouseEventHandler<HTMLElement>
+      }) => (
+        <div onClick={onRemove} data-testid="custom-option">
+          {label}
+        </div>
       )
+      const { user } = await setupMultiSelect({
+        component: CustomComponent,
+      })
 
-      const input = screen.getByRole("combobox")
-      expect(input).toBeInTheDocument()
-      await user.click(input)
-
-      const optionList = await screen.findAllByRole("option")
-      const option1 = optionList[0]
-      const option2 = optionList[1]
-
-      expect(option1).toBeVisible()
-      expect(option2).toBeVisible()
-
+      const options = await getOptions()
+      const option1 = options[0]
       await user.click(option1)
-      await user.click(option2)
 
-      await user.click(document.body)
+      const customOption = await screen.findByTestId("custom-option")
+      expect(customOption.tagName).toBe("DIV")
+
+      await user.click(customOption)
+      expect(customOption).toBeValid()
+    })
+
+    test("closeOnSelect should work correctly", async () => {
+      const { user, input } = await setupMultiSelect({ closeOnSelect: true })
+
+      const options = await getOptions()
+      const option1 = options[0]
+      await user.click(option1)
+      expect(input).toHaveAttribute("aria-expanded", "false")
+    })
+
+    test("maxSelectValues should work correctly", async () => {
+      const { user, input } = await setupMultiSelect({ maxSelectValues: 3 })
+
+      const options = await getOptions()
+
+      for (const option of options) {
+        await user.click(option)
+      }
+
+      expect(input).toHaveAttribute("aria-expanded", "false")
+
       await user.click(input)
-
-      expect(option1).toHaveAttribute("aria-checked", "true")
-      expect(option2).toHaveAttribute("aria-checked", "true")
+      expect(input).toHaveAttribute("aria-expanded", "false")
     })
   })
 

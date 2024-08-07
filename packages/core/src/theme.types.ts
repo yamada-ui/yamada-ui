@@ -1,7 +1,12 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
-import type { MotionConfigProps, Variants } from "framer-motion"
+import type {
+  MotionConfigProps,
+  Variants,
+  HTMLMotionProps,
+} from "framer-motion"
 import type { FC, ReactNode, RefObject } from "react"
+import type { HTMLUIProps } from "./components"
 import type {
   UIStyle,
   AnimationStyle,
@@ -411,6 +416,14 @@ export type ThemeConfig = {
      * The `ref` to the component where the portal will be attached to.
      */
     containerRef?: PortalProps["containerRef"]
+    /**
+     * Props for notice list element.
+     */
+    listProps?: HTMLUIProps<"ul">
+    /**
+     * Props for notice item element.
+     */
+    itemProps?: HTMLMotionProps<"li">
   }
   /**
    * The config of the snacks.

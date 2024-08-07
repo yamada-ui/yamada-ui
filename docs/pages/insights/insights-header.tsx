@@ -15,7 +15,11 @@ import { useInsights } from "./insights-provider"
 import { useI18n } from "contexts"
 import { useRouter } from "next/router"
 import type { InsightPeriodSuggest } from "./insights-utils"
-import { INSIGHT_PERIOD_SUGGEST, INSIGHT_USER_IDS } from "./insights-utils"
+import {
+  INSIGHT_PERIOD_SUGGEST,
+  INSIGHT_USER_IDS,
+  INSIGHT_MIN_DATE,
+} from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
@@ -186,10 +190,16 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
 
       const value: [Date, Date] = [
         dayjs()
+          .tz()
           .subtract(count, unit as ManipulateType)
+          .add(unit !== "d" ? 1 : 0, "d")
           .toDate(),
         dayjs().tz().toDate(),
       ]
+
+      if (dayjs(value[0]).isBefore(INSIGHT_MIN_DATE)) {
+        value[0] = INSIGHT_MIN_DATE
+      }
 
       valueRef.current = value
       onChange(value)
@@ -209,7 +219,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       locale={locale}
       dateFormat={locale === "ja" ? "YYYY年 MMMM" : undefined}
       yearFormat={locale === "ja" ? "YYYY年" : undefined}
-      minDate={new Date("2024-01-01")}
+      minDate={INSIGHT_MIN_DATE}
       maxDate={new Date()}
       isClearable={false}
       isOpen={isOpen}

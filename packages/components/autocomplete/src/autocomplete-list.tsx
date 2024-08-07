@@ -20,7 +20,7 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
     minWidth ??= (styles.list?.minWidth ??
       styles.list?.minW) as CSSUIProps["minWidth"]
 
-    const css: CSSUIObject = { ...styles.list }
+    const css: CSSUIObject = { ...styles.list, width, minWidth }
 
     return (
       <PopoverContent

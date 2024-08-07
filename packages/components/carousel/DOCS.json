@@ -39,7 +39,7 @@
       "description": "Props for carousel control element."
     },
     "controlRef": {
-      "type": "RefObject<EmblaCarouselType | undefined>",
+      "type": "RefObject<CarouselControl | undefined>",
       "required": false,
       "description": "Ref of the resizable item callback."
     },

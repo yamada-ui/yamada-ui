@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Accordion: ComponentMultiStyle = {
+export const Accordion: ComponentMultiStyle<"Accordion"> = {
   baseStyle: {
     container: {},
     item: {},

@@ -1,6 +1,6 @@
-export type Spaces = typeof spaces
+import type { ThemeTokens } from "@yamada-ui/core"
 
-export const spaces = {
+export const spaces: ThemeTokens = {
   px: "1px",
   0.5: "0.125rem",
   1: "0.25rem",

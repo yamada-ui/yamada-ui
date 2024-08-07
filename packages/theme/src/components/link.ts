@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Link: ComponentStyle = {
+export const Link: ComponentStyle<"Link"> = {
   baseStyle: {
     transitionProperty: "common",
     transitionDuration: "fast",

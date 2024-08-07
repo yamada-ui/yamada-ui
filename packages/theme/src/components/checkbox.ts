@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Checkbox: ComponentMultiStyle = {
+export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
   baseStyle: {
     container: {
       _readOnly: { cursor: "auto" },

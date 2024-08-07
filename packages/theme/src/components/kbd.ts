@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Kbd: ComponentStyle = {
+export const Kbd: ComponentStyle<"Kbd"> = {
   baseStyle: {
     fontFamily: "mono",
     bg: ["blackAlpha.50", "whiteAlpha.50"],

@@ -60,11 +60,11 @@ type Options = {
 }
 
 export const actionTokens = async (
-  themeFile: string,
+  themePath: string,
   { out: outFile, watch: watchFile }: Options,
 ) => {
   const readFile = async () => {
-    const filePath = path.resolve(themeFile)
+    const filePath = path.resolve(themePath)
     const { mod: theme, dependencies } = await bundleNRequire(filePath)
 
     return { theme, dependencies }

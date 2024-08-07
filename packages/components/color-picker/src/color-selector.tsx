@@ -6,7 +6,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx, runIfFunc } from "@yamada-ui/utils"
-import type { ForwardedRef, ReactNode } from "react"
+import type { FC, ForwardedRef, ReactNode } from "react"
 import type { ColorSelectorBodyProps } from "./color-selector-body"
 import { ColorSelectorBody } from "./color-selector-body"
 import type { ColorSelectorChannelsProps } from "./color-selector-channels"
@@ -51,7 +51,7 @@ type ColorSelectorOptions = {
    * Props for the channels component.
    */
   channelsProps?: ColorSelectorChannelsProps
-  children?: ReactNode | ((props: { value: string }) => ReactNode)
+  children?: ReactNode | FC<{ value: string }>
 }
 
 export type ColorSelectorProps = ThemeProps<"ColorSelector"> &

@@ -19,4 +19,15 @@ export const semantics: ThemeSemantics = {
     danger: "red",
     link: "blue",
   },
+  spaces: {
+    xs: "1",
+    sm: "2",
+    md: "4",
+    normal: "6",
+    lg: "8",
+    xl: "12",
+    "2xl": "16",
+    "3xl": "24",
+    "4xl": "32",
+  },
 }

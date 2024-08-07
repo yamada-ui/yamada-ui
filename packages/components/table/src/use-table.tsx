@@ -209,6 +209,10 @@ export type UseTableProps<Y extends RowData> = TableProps &
      */
     onClickRow?: (row: Row<Y>) => void
     /**
+     * The callback invoked when a row is double clicked.
+     */
+    onDoubleClickRow?: (row: Row<Y>) => void
+    /**
      * If `true`, display the checkbox in table footer.
      *
      * @default false
@@ -309,6 +313,7 @@ export const useTable = <Y extends RowData>({
   onChangePageSize,
   rowsClickSelect,
   onClickRow,
+  onDoubleClickRow,
   withFooterSelect,
   pageSizeList = [20, 50, 100],
   checkboxProps,
@@ -512,6 +517,7 @@ export const useTable = <Y extends RowData>({
     enableRowSelection,
     rowsClickSelect,
     onClickRow,
+    onDoubleClickRow,
     setPageIndex,
     previousPage,
     nextPage,

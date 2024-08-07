@@ -117,7 +117,7 @@ export {
   warning,
   wrap,
 } from "framer-motion"
+export * from "./motion-forward-ref"
 export { Motion } from "./motion"
-export type { MotionProps } from "./motion"
 export * from "./motion.types"
 export * from "./utils"

@@ -207,6 +207,12 @@ export type SnackConfigOptions = ThemeProps<"Alert"> & {
    */
   isClosable?: boolean
   /**
+   * The strategy to remove the snack when `isClosable` is set to `true`
+   *
+   * @default 'button'
+   */
+  closeStrategy?: "element" | "button" | "both"
+  /**
    * The CSS `box-shadow` property.
    *
    * @default '["base", "dark-sm"]'

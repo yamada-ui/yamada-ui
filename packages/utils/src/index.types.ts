@@ -27,4 +27,6 @@ export type Union<T> = T | StringLiteral
 
 export type Length = string | 0 | number
 
-export type Merge<Y, M> = M extends undefined ? Y : Omit<Y, keyof M> & M
+export type Merge<Y, M> = Omit<Y, keyof M> & M
+
+export type MergeIfDefined<Y, M> = M extends undefined ? Y : Merge<Y, M>

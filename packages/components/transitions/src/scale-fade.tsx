@@ -1,5 +1,5 @@
 import type { ThemeProps } from "@yamada-ui/core"
-import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -10,6 +10,7 @@ import {
   transitionEnter,
   transitionExit,
   Motion,
+  motionForwardRef,
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
@@ -73,7 +74,7 @@ export const scaleFadeProps = {
  * @see Docs https://yamada-ui.com/components/transitions/scale-fade
  */
 
-export const ScaleFade = forwardRef<ScaleFadeProps, "div", false>(
+export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("ScaleFade", props)
     let {

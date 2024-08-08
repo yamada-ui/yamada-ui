@@ -130,6 +130,12 @@ export type NoticeConfigOptions = ThemeProps<"Alert"> & {
    */
   isClosable?: boolean
   /**
+   * The strategy to remove the notice when `isClosable` is set to `true`
+   *
+   * @default 'button'
+   */
+  closeStrategy?: "element" | "button" | "both"
+  /**
    * The custom style to use.
    */
   style?: CSSUIObject
@@ -205,6 +211,12 @@ export type SnackConfigOptions = ThemeProps<"Alert"> & {
    * @default true
    */
   isClosable?: boolean
+  /**
+   * The strategy to remove the snack when `isClosable` is set to `true`
+   *
+   * @default 'button'
+   */
+  closeStrategy?: "element" | "button" | "both"
   /**
    * The CSS `box-shadow` property.
    *

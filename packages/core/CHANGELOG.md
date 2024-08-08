@@ -1,5 +1,17 @@
 # @yamada-ui/core
 
+## 1.12.0
+
+### Minor Changes
+
+- [#2447](https://github.com/yamada-ui/yamada-ui/pull/2447) [`0d05ec4`](https://github.com/yamada-ui/yamada-ui/commit/0d05ec40404d5ef661ec8d80d38bef0ed36910e0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `closeStrategy` to snacks in options.
+
+### Patch Changes
+
+- [#2419](https://github.com/yamada-ui/yamada-ui/pull/2419) [`6390a78`](https://github.com/yamada-ui/yamada-ui/commit/6390a78330ff35419720507ca8b6e537fca190e6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Reorder theme size and spacing identifiers.
+
+- [#2447](https://github.com/yamada-ui/yamada-ui/pull/2447) [`cb7eece`](https://github.com/yamada-ui/yamada-ui/commit/cb7eece896497fafa11b9c56d2240c769ddf1aed) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `closeStrategy` to notice in options.
+
 ## 1.11.0
 
 ### Minor Changes

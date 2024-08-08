@@ -1,5 +1,14 @@
 # @yamada-ui/motion
 
+## 2.1.2
+
+### Patch Changes
+
+- [#2397](https://github.com/yamada-ui/yamada-ui/pull/2397) [`8640407`](https://github.com/yamada-ui/yamada-ui/commit/8640407a72480dcbcbd62a75455ded0548696b9e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the type definition of `MotionProps`'s `children` was incorrect.
+
+- Updated dependencies [[`6390a78`](https://github.com/yamada-ui/yamada-ui/commit/6390a78330ff35419720507ca8b6e537fca190e6), [`0d05ec4`](https://github.com/yamada-ui/yamada-ui/commit/0d05ec40404d5ef661ec8d80d38bef0ed36910e0), [`cb7eece`](https://github.com/yamada-ui/yamada-ui/commit/cb7eece896497fafa11b9c56d2240c769ddf1aed)]:
+  - @yamada-ui/core@1.12.0
+
 ## 2.1.1
 
 ### Patch Changes

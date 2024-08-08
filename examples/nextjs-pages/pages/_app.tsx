@@ -1,5 +1,5 @@
-import type { AppProps } from 'next/app'
 import { UIProvider, createColorModeManager, createThemeSchemeManager } from '@yamada-ui/react'
+import type { AppProps } from 'next/app'
 import { theme, config } from 'theme'
 
 const App = ({ Component, pageProps }: AppProps) => {

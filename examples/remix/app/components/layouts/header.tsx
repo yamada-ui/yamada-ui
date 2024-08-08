@@ -26,10 +26,7 @@ import {
   useMotionValueEvent,
 } from "@yamada-ui/react"
 import { ColorPalette, Moon, Sun } from "~/components/media-and-icons"
-import { useRef } from "react"
-import { useState } from "react"
-import { memo } from "react"
-import { FC } from "react"
+import { useRef, useState, memo, FC } from "react"
 import { Link } from "@remix-run/react"
 
 export type HeaderProps = CenterProps

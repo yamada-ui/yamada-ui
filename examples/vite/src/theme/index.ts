@@ -1,8 +1,8 @@
 import { ThemeSchemes, extendConfig, extendTheme } from "@yamada-ui/react"
 import components from "./components"
+import { customConfig } from "./config"
 import { globalStyle, resetStyle, layerStyles, textStyles } from "./styles"
 import tokens from "./tokens"
-import { customConfig } from "./config"
 
 const colorSchemes = [
   "gray",

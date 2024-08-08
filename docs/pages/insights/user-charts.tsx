@@ -12,48 +12,78 @@ export type UserChartsProps = GridProps & {
 
 export const UserCharts = memo(
   forwardRef<UserChartsProps, "div">(({ isLoading, ...rest }, ref) => {
-    const { users, insights } = useInsights()
+    const { users, currentInsights, prevInsights } = useInsights()
 
     const computedUsers = useMemo(() => {
       type Data = {
-        score: UserInsightScore
+        currentScore: UserInsightScore
+        prevScore: UserInsightScore
         timeline?: UserInsights
       }
 
-      if (insights) {
+      if (currentInsights) {
         type Result = Record<string, Data>
 
         const result: Result = {}
 
-        Object.entries(insights).forEach(([period, data]) => {
+        Object.entries(currentInsights).forEach(([period, data]) => {
           Object.entries(data).forEach(([user, data]) => {
             if (!users.includes(user)) return
 
-            if (!result[user]) result[user] = { score: getInsightScore(null) }
+            if (!result[user]) {
+              result[user] = {
+                currentScore: getInsightScore(null),
+                prevScore: getInsightScore(null),
+              }
+            }
 
-            const score = getInsightScore(data)
+            const currentScore = getInsightScore(data)
 
-            const { comments, issues, pullRequests, approved, total } = score
+            const { comments, issues, pullRequests, approved, total } =
+              currentScore
 
-            result[user].score.total += total
-            result[user].score.comments += comments
-            result[user].score.issues += issues
-            result[user].score.pullRequests += pullRequests
-            result[user].score.approved += approved
+            result[user].currentScore.total += total
+            result[user].currentScore.comments += comments
+            result[user].currentScore.issues += issues
+            result[user].currentScore.pullRequests += pullRequests
+            result[user].currentScore.approved += approved
+
+            result[user].timeline = { ...result[user].timeline, [period]: data }
+          })
+        })
+
+        Object.entries(prevInsights ?? {}).forEach(([period, data]) => {
+          Object.entries(data).forEach(([user, data]) => {
+            if (!users.includes(user)) return
+
+            const prevScore = getInsightScore(data)
+
+            const { comments, issues, pullRequests, approved, total } =
+              prevScore
+
+            result[user].prevScore.total += total
+            result[user].prevScore.comments += comments
+            result[user].prevScore.issues += issues
+            result[user].prevScore.pullRequests += pullRequests
+            result[user].prevScore.approved += approved
 
             result[user].timeline = { ...result[user].timeline, [period]: data }
           })
         })
 
         return Object.entries(result).sort(
-          (a, b) => b[1].score.total - a[1].score.total,
+          (a, b) => b[1].currentScore.total - a[1].currentScore.total,
         )
       } else {
         return users.map(
-          (user) => [user, { score: DEFAULT_SCORE }] as [string, Data],
+          (user) =>
+            [
+              user,
+              { currentScore: DEFAULT_SCORE, prevScore: DEFAULT_SCORE },
+            ] as [string, Data],
         )
       }
-    }, [users, insights])
+    }, [users, currentInsights, prevInsights])
 
     return (
       <Grid
@@ -66,11 +96,12 @@ export const UserCharts = memo(
         gap={{ base: "lg", md: "md" }}
         {...rest}
       >
-        {computedUsers.map(([id, { score, timeline }]) => (
+        {computedUsers.map(([id, { currentScore, prevScore, timeline }]) => (
           <UserChart
             key={id}
             id={id}
-            score={score}
+            currentScore={currentScore}
+            prevScore={prevScore}
             timeline={timeline}
             isLoading={isLoading}
           />

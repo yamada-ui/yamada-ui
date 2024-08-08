@@ -14,7 +14,7 @@ import { InsightsProvider } from "./insights-provider"
 import { useCallback, useMemo, useState } from "react"
 import { InsightsHeader } from "./insights-header"
 import { isString, useLoading, VStack } from "@yamada-ui/react"
-import type { InsightPeriod } from "insights"
+import type { InsightPeriod, Insights } from "insights"
 import { getSummarize, INSIGHT_USER_IDS } from "./insights-utils"
 import dayjs from "dayjs"
 import { useRouter } from "next/router"
@@ -71,7 +71,7 @@ const Page: NextPage<PageProps> = ({
       try {
         background.start()
 
-        if (!start) return undefined
+        if (!start) return
 
         const resolveEnd = end ?? dayjs().tz().format("YYYY-MM-DD")
 
@@ -81,9 +81,12 @@ const Page: NextPage<PageProps> = ({
           summarize,
         })
         const res = await fetch(`/api/insights?${params}`)
-        const { data } = await res.json()
+        const { data } = (await res.json()) as {
+          data?: { currentInsights: Insights; prevInsights: Insights }
+        }
+        const { currentInsights, prevInsights } = data ?? {}
 
-        return data
+        return { currentInsights, prevInsights }
       } catch {
       } finally {
         background.finish()
@@ -108,7 +111,13 @@ const Page: NextPage<PageProps> = ({
   )
 
   const value: InsightsContext = useMemo(
-    () => ({ insights: data, period, onChangePeriod, users, setUsers }),
+    () => ({
+      ...data,
+      period,
+      onChangePeriod,
+      users,
+      setUsers,
+    }),
     [data, period, users, onChangePeriod],
   )
 

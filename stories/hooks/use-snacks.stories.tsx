@@ -473,6 +473,37 @@ export const withColorScheme = () => {
   )
 }
 
+export const withCloseStrategy = () => {
+  const { snack, snacks } = useSnacks()
+
+  return (
+    <>
+      <Wrap gap="md">
+        <Button
+          colorScheme="primary"
+          onClick={() => {
+            snack({
+              title: "孫悟空",
+              description: "オッス！オラ悟空！",
+              closeStrategy: "element",
+            })
+          }}
+        >
+          Add Snack
+        </Button>
+
+        <Button colorScheme="danger" onClick={snack.closeAll}>
+          Close all Snack
+        </Button>
+      </Wrap>
+
+      <Snacks snacks={snacks} gutter={[0, "md"]} />
+
+      <Input placeholder="Input" />
+    </>
+  )
+}
+
 export const useClose = () => {
   const { snack, snacks } = useSnacks()
   const ref = useRef<string | number | undefined>(undefined)

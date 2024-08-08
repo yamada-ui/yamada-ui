@@ -1,3 +1,3 @@
-export type Gradients = typeof gradients
+import type { ThemeTokens } from "@yamada-ui/core"
 
-export const gradients = {}
+export const gradients: ThemeTokens = {}

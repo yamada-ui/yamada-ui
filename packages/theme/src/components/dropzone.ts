@@ -2,7 +2,7 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { mode } from "@yamada-ui/core"
 import { getColor, isArray, transparentizeColor } from "@yamada-ui/utils"
 
-export const Dropzone: ComponentMultiStyle = {
+export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
   baseStyle: ({ theme: t, colorMode: m }) => ({
     container: {
       color: ["blackAlpha.700", "whiteAlpha.600"],

@@ -27,9 +27,10 @@ export type SlidesInViewOptionsType = EmblaOptionsType["inViewThreshold"]
 export type DragHandlerOptionType = EmblaOptionsType["watchDrag"]
 export type ResizeHandlerOptionType = EmblaOptionsType["watchResize"]
 export type SlidesHandlerOptionType = EmblaOptionsType["watchSlides"]
+export type CarouselControl = EmblaCarouselType
 
 type CarouselContext = {
-  carousel: EmblaCarouselType | undefined
+  carousel: CarouselControl | undefined
   indexes: number[]
   selectedIndex: number
   orientation: "vertical" | "horizontal"
@@ -193,7 +194,7 @@ export type UseCarouselProps = Omit<
   /**
    * Ref of the resizable item callback.
    */
-  controlRef?: RefObject<EmblaCarouselType | undefined>
+  controlRef?: RefObject<CarouselControl | undefined>
 }
 
 export const useCarousel = ({

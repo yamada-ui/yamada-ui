@@ -19,7 +19,6 @@ export type RequiredChartPropGetter<
   M = undefined,
   D = undefined,
 > = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
-
 export type ChartLayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
 export type BarChartType = Exclude<AreaChartType, "split">
@@ -144,7 +143,6 @@ export type PolarRadiusAxisProps = Merge<
   Recharts.PolarRadiusAxisProps
 >
 export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
-
 export type ChartTooltip =
   | ReactElement
   | ((

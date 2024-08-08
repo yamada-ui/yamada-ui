@@ -1,3 +1,3 @@
-export type Borders = typeof borders
+import type { ThemeTokens } from "@yamada-ui/core"
 
-export const borders = {}
+export const borders: ThemeTokens = {}

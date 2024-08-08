@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Skeleton: ComponentStyle = {
+export const Skeleton: ComponentStyle<"Skeleton"> = {
   baseStyle: {
     background: ["blackAlpha.300", "whiteAlpha.300"],
     borderColor: ["blackAlpha.400", "whiteAlpha.400"],

@@ -1,10 +1,12 @@
 import {
+  Center,
   forwardRef,
   Heading,
   HStack,
   MultiAutocomplete,
   Text,
   useDisclosure,
+  VStack,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
@@ -12,8 +14,14 @@ import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { useInsights } from "./insights-provider"
 import { useI18n } from "contexts"
 import { useRouter } from "next/router"
-import { INSIGHT_USER_IDS } from "./insights-utils"
+import type { InsightPeriodSuggest } from "./insights-utils"
+import {
+  INSIGHT_PERIOD_SUGGEST,
+  INSIGHT_USER_IDS,
+  INSIGHT_MIN_DATE,
+} from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
+import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
 import "dayjs/locale/ja"
 
@@ -118,10 +126,7 @@ UserSelect.displayName = "UserSelect"
 type PeriodSelectProps = {}
 
 const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
-  const {
-    // t,
-    locale,
-  } = useI18n()
+  const { t, locale } = useI18n()
   const router = useRouter()
   const { period, onChangePeriod } = useInsights()
   const defaultValue: [(Date | undefined)?, (Date | undefined)?] = [
@@ -175,22 +180,33 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
     [router, onChangePeriod],
   )
 
-  // const onSuggestChange = useCallback(
-  //   (type: InsightPeriodSuggest) => {
-  //     const [, count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
-  //     const value: [Date, Date] = [
-  //       dayjs()
-  //         .subtract(parseInt(count), unit as ManipulateType)
-  //         .toDate(),
-  //       dayjs().tz().toDate(),
-  //     ]
+  const onSuggestChange = useCallback(
+    (type: InsightPeriodSuggest) => {
+      const [, _count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
+      const isDay = unit === "d"
+      let count = parseInt(_count)
 
-  //     valueRef.current = value
-  //     onChange(value)
-  //     onClose()
-  //   },
-  //   [onChange, onClose],
-  // )
+      if (isDay) count -= 1
+
+      const value: [Date, Date] = [
+        dayjs()
+          .tz()
+          .subtract(count, unit as ManipulateType)
+          .add(unit !== "d" ? 1 : 0, "d")
+          .toDate(),
+        dayjs().tz().toDate(),
+      ]
+
+      if (dayjs(value[0]).isBefore(INSIGHT_MIN_DATE)) {
+        value[0] = INSIGHT_MIN_DATE
+      }
+
+      valueRef.current = value
+      onChange(value)
+      onClose()
+    },
+    [onChange, onClose],
+  )
 
   return (
     <RangeDatePicker
@@ -203,14 +219,14 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       locale={locale}
       dateFormat={locale === "ja" ? "YYYY年 MMMM" : undefined}
       yearFormat={locale === "ja" ? "YYYY年" : undefined}
-      minDate={new Date("2024-01-01")}
+      minDate={INSIGHT_MIN_DATE}
       maxDate={new Date()}
       isClearable={false}
       isOpen={isOpen}
       onOpen={onOpen}
       onClose={onClose}
     >
-      {/* <VStack mt="sm" gap="sm">
+      <VStack mt="sm" gap="sm">
         {INSIGHT_PERIOD_SUGGEST.map((value) => {
           return (
             <Center
@@ -233,7 +249,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
             </Center>
           )
         })}
-      </VStack> */}
+      </VStack>
     </RangeDatePicker>
   )
 })

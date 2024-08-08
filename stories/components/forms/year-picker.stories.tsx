@@ -2,6 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react"
 import { YearPicker } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
+import dayjs from "dayjs"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
@@ -19,6 +20,28 @@ export default meta
 
 export const basic: Story = () => {
   return <YearPicker placeholder="basic" />
+}
+
+export const withChildren: Story = () => {
+  return (
+    <>
+      <YearPicker placeholder="YYYY">
+        <VStack mt="sm">
+          <Button>Submit</Button>
+        </VStack>
+      </YearPicker>
+
+      <YearPicker placeholder="YYYY" closeOnSelect={false}>
+        {({ value, onClose }) => (
+          <VStack mt="sm">
+            <Button isDisabled={!value} onClick={onClose}>
+              Submit{value ? ` ${dayjs(value).format("YYYY")}` : ""}
+            </Button>
+          </VStack>
+        )}
+      </YearPicker>
+    </>
+  )
 }
 
 export const withSize: Story = () => {

@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Icon: ComponentStyle = {
+export const Icon: ComponentStyle<"Icon"> = {
   baseStyle: {
     w: "1em",
     h: "1em",

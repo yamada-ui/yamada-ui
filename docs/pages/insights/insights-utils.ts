@@ -171,3 +171,11 @@ export const randomIndex = (value: string, max: number) => {
 
   return result
 }
+
+export const getTrend = (currentTotal: number, prevTotal: number) => {
+  if (currentTotal === prevTotal) return 0
+
+  if (prevTotal === 0) return undefined
+
+  return Math.round((currentTotal / prevTotal) * 100 - 100)
+}

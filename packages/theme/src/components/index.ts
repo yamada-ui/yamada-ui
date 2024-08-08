@@ -88,7 +88,7 @@ import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
 import { YearPicker } from "./year-picker"
 
-export default {
+export const components = {
   Accordion,
   Alert,
   AlphaSlider,

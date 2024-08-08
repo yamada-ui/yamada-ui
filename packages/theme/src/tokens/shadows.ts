@@ -1,6 +1,6 @@
-export type Shadows = typeof shadows
+import type { ThemeTokens } from "@yamada-ui/core"
 
-export const shadows = {
+export const shadows: ThemeTokens = {
   xs: "0 0 0 1px rgba(0, 0, 0, 0.05)",
   sm: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
   base: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",

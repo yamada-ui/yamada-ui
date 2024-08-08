@@ -2,7 +2,7 @@ import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { mode } from "@yamada-ui/core"
 import { getColor, isArray } from "@yamada-ui/utils"
 
-export const Editable: ComponentMultiStyle = {
+export const Editable: ComponentMultiStyle<"Editable"> = {
   baseStyle: {
     container: {
       w: "full",

@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Divider: ComponentStyle = {
+export const Divider: ComponentStyle<"Divider"> = {
   baseStyle: {
     borderColor: "border",
   },

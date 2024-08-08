@@ -1,4 +1,4 @@
-/** @type {Pick<ESLintConfig, "files" | "plugins" | "rules">} */
+/** @type {Pick<ESLintConfig, "name" | "files" | "rules">} */
 const baseConfig = {
   name: "@yamada-ui/eslint/base",
   files: [

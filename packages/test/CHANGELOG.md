@@ -1,5 +1,15 @@
 # @yamada-ui/test
 
+## 1.3.6
+
+### Patch Changes
+
+- [#2383](https://github.com/yamada-ui/yamada-ui/pull/2383) [`0804279`](https://github.com/yamada-ui/yamada-ui/commit/08042796fb8fe05b59a03136e32da6c5890be6ca) Thanks [@koralle](https://github.com/koralle)! - Remove `axe-core`
+
+- Updated dependencies [[`86b4b20`](https://github.com/yamada-ui/yamada-ui/commit/86b4b202bebb371074e1d3a9ba7b6cce73c78152), [`ec88127`](https://github.com/yamada-ui/yamada-ui/commit/ec88127c59b4dfe43ae8f2245730534c6ba36d02), [`93d7e63`](https://github.com/yamada-ui/yamada-ui/commit/93d7e630c2c0939284143f41e5df594ef46aae2f), [`3e063f6`](https://github.com/yamada-ui/yamada-ui/commit/3e063f65ce2b8de593127db504e72236df00bb8f), [`40c79b5`](https://github.com/yamada-ui/yamada-ui/commit/40c79b5989015e60340260874ef13666148be795)]:
+  - @yamada-ui/theme@1.16.0
+  - @yamada-ui/providers@1.2.4
+
 ## 1.3.5
 
 ### Patch Changes

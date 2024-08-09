@@ -1,6 +1,6 @@
 import { isNumber } from "@yamada-ui/utils"
 import type { Transition } from "framer-motion"
-import type { MotionTransitionProperties } from "./motion.types"
+import type { MotionTransitionProps } from "./motion.types"
 
 export const MOTION_TRANSITION_EASINGS = {
   ease: [0.25, 0.1, 0.25, 1],
@@ -70,8 +70,8 @@ export const MOTION_TRANSITION_DEFAULTS = {
 export const transitionEnter =
   (transition?: Transition) =>
   (
-    delay?: MotionTransitionProperties["delay"],
-    duration?: MotionTransitionProperties["duration"],
+    delay?: MotionTransitionProps["delay"],
+    duration?: MotionTransitionProps["duration"],
   ): Transition => ({
     ...(transition ?? MOTION_TRANSITION_DEFAULTS.enter),
     ...(duration
@@ -83,8 +83,8 @@ export const transitionEnter =
 export const transitionExit =
   (transition?: Transition) =>
   (
-    delay?: MotionTransitionProperties["delay"],
-    duration?: MotionTransitionProperties["duration"],
+    delay?: MotionTransitionProps["delay"],
+    duration?: MotionTransitionProps["duration"],
   ): Transition => ({
     ...(transition ?? MOTION_TRANSITION_DEFAULTS.exit),
     ...(duration

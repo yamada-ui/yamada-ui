@@ -13915,10 +13915,10 @@
     "hierarchy": { "lv1": "Default Theme", "lv2": "Sizes" }
   },
   {
-    "title": "タイポグラフィ",
+    "title": "Typography",
     "type": "fragment",
-    "slug": "/styled-system/theming/default-theme#タイポグラフィ",
-    "hierarchy": { "lv1": "Default Theme", "lv2": "タイポグラフィ" }
+    "slug": "/styled-system/theming/default-theme#typography",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Typography" }
   },
   {
     "title": "Fonts (Font families)",
@@ -13926,7 +13926,7 @@
     "slug": "/styled-system/theming/default-theme#fonts-font-families",
     "hierarchy": {
       "lv1": "Default Theme",
-      "lv2": "タイポグラフィ",
+      "lv2": "Typography",
       "lv3": "Fonts (Font families)"
     }
   },
@@ -13936,7 +13936,7 @@
     "slug": "/styled-system/theming/default-theme#fontsizes",
     "hierarchy": {
       "lv1": "Default Theme",
-      "lv2": "タイポグラフィ",
+      "lv2": "Typography",
       "lv3": "FontSizes"
     }
   },
@@ -13946,7 +13946,7 @@
     "slug": "/styled-system/theming/default-theme#fontweights",
     "hierarchy": {
       "lv1": "Default Theme",
-      "lv2": "タイポグラフィ",
+      "lv2": "Typography",
       "lv3": "FontWeights"
     }
   },
@@ -13956,7 +13956,7 @@
     "slug": "/styled-system/theming/default-theme#lineheights",
     "hierarchy": {
       "lv1": "Default Theme",
-      "lv2": "タイポグラフィ",
+      "lv2": "Typography",
       "lv3": "LineHeights"
     }
   },
@@ -13966,7 +13966,7 @@
     "slug": "/styled-system/theming/default-theme#letterspacings",
     "hierarchy": {
       "lv1": "Default Theme",
-      "lv2": "タイポグラフィ",
+      "lv2": "Typography",
       "lv3": "LetterSpacings"
     }
   },

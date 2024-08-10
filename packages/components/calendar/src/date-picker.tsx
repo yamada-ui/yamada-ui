@@ -16,8 +16,9 @@ import {
   getValidChildren,
   isValidElement,
   mergeRefs,
+  runIfFunc,
 } from "@yamada-ui/utils"
-import type { FC, HTMLAttributes, RefAttributes } from "react"
+import type { FC, HTMLAttributes, ReactNode, RefAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { Calendar } from "./calendar"
 import type { UseDatePickerProps } from "./use-date-picker"
@@ -47,6 +48,10 @@ type DatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<DatePickerFieldProps, "inputProps" | "children">
+  /**
    * Props for date picker input element.
    */
   inputProps?: DatePickerFieldProps["inputProps"]
@@ -65,6 +70,7 @@ type DatePickerOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
 export type DatePickerProps = ThemeProps<"DatePicker"> &
@@ -80,6 +86,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("DatePicker", props)
   let {
     className,
+    children,
     isClearable = true,
     color,
     h,
@@ -87,6 +94,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    fieldProps,
     inputProps,
     iconProps,
     clearIconProps,
@@ -101,6 +109,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     getFieldProps,
     getInputProps,
     getIconProps,
+    onClose,
     value,
     id,
   } = useDatePicker(computedProps)
@@ -128,7 +137,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
             __css={{ position: "relative", ...styles.inner }}
           >
             <DatePickerField
-              {...getFieldProps({ h, minH }, ref)}
+              {...getFieldProps({ h, minH, ...fieldProps }, ref)}
               inputProps={getInputProps(inputProps)}
             />
 
@@ -155,6 +164,8 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
                 className="ui-date-picker__calendar"
                 {...getCalendarProps()}
               />
+
+              {runIfFunc(children, { value, onClose })}
             </PopoverContent>
           </Portal>
         </ui.div>

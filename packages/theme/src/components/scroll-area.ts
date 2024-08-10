@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const ScrollArea: ComponentStyle = {
+export const ScrollArea: ComponentStyle<"ScrollArea"> = {
   baseStyle: {
     outline: 0,
     _focusVisible: {

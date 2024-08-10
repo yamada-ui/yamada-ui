@@ -1,3 +1,3 @@
-export type Animations = typeof animations
+import type { ThemeAnimationTokens } from "@yamada-ui/core"
 
-export const animations = {}
+export const animations: ThemeAnimationTokens = {}

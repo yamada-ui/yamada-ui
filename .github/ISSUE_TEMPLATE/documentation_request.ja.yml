@@ -1,6 +1,6 @@
 name: "Documentation Request (日本語)"
 description: "新しいドキュメントのリクエストや改善を提案します。"
-labels: ["documentation", "enhancement"]
+labels: ["triage", "documentation", "enhancement"]
 body:
   - type: markdown
     attributes:

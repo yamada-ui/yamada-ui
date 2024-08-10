@@ -8,7 +8,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { cx, mergeRefs } from "@yamada-ui/utils"
+import { cx, mergeRefs, runIfFunc } from "@yamada-ui/utils"
 import { cloneElement, useMemo, useRef } from "react"
 import type {
   CSSProperties,
@@ -18,6 +18,7 @@ import type {
   Dispatch,
   SetStateAction,
   RefAttributes,
+  ReactNode,
 } from "react"
 import { Calendar } from "./calendar"
 import { isSameDate } from "./calendar-utils"
@@ -68,6 +69,10 @@ type MultiDatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
    * Props for date picker input element.
    */
   inputProps?: HTMLUIProps<"input">
@@ -86,6 +91,7 @@ type MultiDatePickerOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  children?: ReactNode | FC<{ value: Date[]; onClose: () => void }>
 }
 
 export type MultiDatePickerProps = ThemeProps<"DatePicker"> &
@@ -105,6 +111,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
     )
     let {
       className,
+      children,
       component,
       separator,
       isClearable = true,
@@ -115,6 +122,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       minH,
       minHeight,
       containerProps,
+      fieldProps,
       inputProps,
       iconProps,
       clearIconProps,
@@ -129,6 +137,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       getFieldProps,
       getInputProps,
       getIconProps,
+      onClose,
       isOpen,
       value,
       setValue,
@@ -166,7 +175,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                 value={value}
                 setValue={setValue}
                 dateToString={dateToString}
-                {...getFieldProps({ h, minH }, ref)}
+                {...getFieldProps({ h, minH, ...fieldProps }, ref)}
                 inputProps={getInputProps(inputProps)}
               />
 
@@ -193,6 +202,8 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
                   className="ui-multi-date-picker__calendar"
                   {...getCalendarProps()}
                 />
+
+                {runIfFunc(children, { value, onClose })}
               </PopoverContent>
             </Portal>
           </ui.div>

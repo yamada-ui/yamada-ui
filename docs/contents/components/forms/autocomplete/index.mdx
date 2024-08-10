@@ -349,13 +349,13 @@ Depending on the size of the element or the situation, you may want to adjust th
 
 ```tsx
 <VStack>
-  <Autocomplete placeholder="キャラクターを選択" duration={0.4}>
+  <Autocomplete placeholder="キャラクターを選択" gutter={32}>
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
   </Autocomplete>
 
-  <Autocomplete placeholder="キャラクターを選択" gutter={32}>
+  <Autocomplete placeholder="キャラクターを選択" offset={[16, 16]}>
     <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
     <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
     <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>

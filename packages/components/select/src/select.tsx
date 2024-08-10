@@ -62,6 +62,10 @@ type SelectOptions = {
    */
   listProps?: Omit<SelectListProps, "children">
   /**
+   * Props for select field element.
+   */
+  fieldProps?: Omit<SelectFieldProps, "children">
+  /**
    * Props for select icon element.
    */
   iconProps?: SelectIconProps
@@ -100,6 +104,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     minHeight,
     containerProps,
     listProps,
+    fieldProps,
     iconProps,
     portalProps = { isDisabled: true },
     children,
@@ -187,7 +192,11 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
               __css={{ position: "relative", ...styles.inner }}
             >
               <PopoverTrigger>
-                <SelectField h={h} minH={minH} {...getFieldProps({}, ref)} />
+                <SelectField
+                  h={h}
+                  minH={minH}
+                  {...getFieldProps(fieldProps, ref)}
+                />
               </PopoverTrigger>
 
               <SelectIcon {...iconProps} {...formControlProps} />

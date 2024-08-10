@@ -311,6 +311,25 @@ export const withValueFormatter: Story = () => {
   )
 }
 
+export const withLabelFormatter: Story = () => {
+  const data: CellProps[] = useMemo(
+    () => [
+      { name: "USA", value: 400, color: "red.500" },
+      { name: "India", value: 300, color: "orange.500" },
+      { name: "Japan", value: 100, color: "blue.500" },
+      { name: "Other", value: 200, color: "gray.500" },
+    ],
+    [],
+  )
+
+  return (
+    <DonutChart
+      data={data}
+      labelFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
 export const withFillOpacity: Story = () => {
   const data: CellProps[] = useMemo(
     () => [

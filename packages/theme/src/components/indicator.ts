@@ -1,7 +1,7 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 import { isGray, shadeColor } from "@yamada-ui/utils"
 
-export const Indicator: ComponentStyle = {
+export const Indicator: ComponentStyle<"Indicator"> = {
   baseStyle: ({ withBorder }) => ({
     zIndex: "kurillin",
     rounded: "full",

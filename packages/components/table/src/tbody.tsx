@@ -13,6 +13,7 @@ export const Tbody = ({ ...rest }: TableBodyProps) => {
     enableRowSelection,
     rowsClickSelect,
     onClickRow,
+    onDoubleClickRow,
   } = useTableContext()
 
   return (
@@ -43,6 +44,9 @@ export const Tbody = ({ ...rest }: TableBodyProps) => {
 
               toggleSelected(!isSelected)
             },
+          ),
+          onDoubleClick: handlerAll(props.onDoubleClick, () =>
+            !isDisabled ? onDoubleClickRow?.(row) : {},
           ),
         }
 

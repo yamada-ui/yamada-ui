@@ -3,6 +3,7 @@ import type { RangeDatePickerProps } from "@yamada-ui/calendar"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import { Ghost } from "@yamada-ui/lucide"
 import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
+import dayjs from "dayjs"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
@@ -20,6 +21,30 @@ export default meta
 
 export const basic: Story = () => {
   return <RangeDatePicker placeholder="YYYY/MM/DD" />
+}
+
+export const withChildren: Story = () => {
+  return (
+    <>
+      <RangeDatePicker placeholder="YYYY/MM/DD">
+        <VStack mt="sm">
+          <Button>Submit</Button>
+        </VStack>
+      </RangeDatePicker>
+
+      <RangeDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+        {({ value, onClose }) => (
+          <VStack mt="sm">
+            <Button isDisabled={!value} onClick={onClose}>
+              Submit
+              {value[0] ? ` ${dayjs(value[0]).format("MM/DD")} -` : ""}
+              {value[1] ? ` ${dayjs(value[1]).format("MM/DD")}` : ""}
+            </Button>
+          </VStack>
+        )}
+      </RangeDatePicker>
+    </>
+  )
 }
 
 export const withSize: Story = () => {

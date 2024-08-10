@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const Markdown: ComponentStyle = {
+export const Markdown: ComponentStyle<"Markdown"> = {
   baseStyle: {
     w: "full",
     "*:first-of-type": {

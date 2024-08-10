@@ -1,6 +1,6 @@
 import type { ComponentStyle } from "@yamada-ui/core"
 
-export const SlideFade: ComponentStyle = {
+export const SlideFade: ComponentStyle<"SlideFade"> = {
   baseStyle: {
     w: "100%",
   },

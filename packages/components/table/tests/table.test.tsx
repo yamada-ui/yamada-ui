@@ -312,6 +312,20 @@ describe("<Tbody />", () => {
       expect(row).toHaveAttribute("aria-selected", "true")
     })
   })
+
+  test("When double-clicked, the handler receives information about the clicked row", async () => {
+    const handler = vi.fn()
+    const { user } = render(
+      <Table columns={columns} data={data} onDoubleClickRow={handler} />,
+    )
+
+    const row = await screen.findByRole("row", { name: /Goku/i })
+    await user.dblClick(row)
+
+    expect(handler).toHaveBeenCalledWith(
+      expect.objectContaining({ original: data[0] }),
+    )
+  })
 })
 
 describe("Sort", () => {

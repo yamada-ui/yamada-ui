@@ -1,8 +1,8 @@
-name: Insights Report
+name: Insights Upload
 
 on:
   schedule:
-    - cron: "0 9 * * 5"
+    - cron: "0 15 * * *"
 
 jobs:
   insight:
@@ -15,7 +15,9 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Create insight report
-        run: pnpm report:insights --publish
+        run: |
+          yesterday=$(date -d '+9 hours -1 day' '+%Y-%m-%d')
+          pnpm report:insights -s $yesterday -e $yesterday --upload
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           DISCORD_INSIGHTS_WEBHOOK_URL: ${{ secrets.DISCORD_INSIGHTS_WEBHOOK_URL }}

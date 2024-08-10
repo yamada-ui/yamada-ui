@@ -12,8 +12,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const constant = await getConstant()
 
-  await updateIssues({ req, res, constant })
-  await updatePullRequests({ req, res, constant })
+  const { issue = true, pullRequest = true } = req.body
+
+  if (issue) await updateIssues({ req, res, constant })
+  if (pullRequest) await updatePullRequests({ req, res, constant })
+
+  res.status(200).end()
 
   res.status(200).end()
 }

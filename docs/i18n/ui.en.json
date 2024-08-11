@@ -65,6 +65,21 @@
     "not-found": "Icon not found.",
     "reset": "Clear your search and try again"
   },
+  "insights": {
+    "title": "Insights",
+    "description": "Quantified activities of Yamada UI maintainers and members.",
+    "user-exceeded": "{label} users selected",
+    "period": {
+      "7d": "Last 7 days",
+      "14d": "Last 14 days",
+      "1M": "Last 1 month",
+      "2M": "Last 2 months",
+      "3M": "Last 3 months",
+      "6M": "Last 6 months",
+      "1y": "Last 1 year"
+    },
+    "notFound": "Data no found."
+  },
   "not-found": {
     "title": "404: Not found",
     "description": "Page not found",

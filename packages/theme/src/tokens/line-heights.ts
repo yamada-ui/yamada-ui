@@ -1,6 +1,6 @@
-export type LineHeights = typeof lineHeights
+import type { ThemeTokens } from "@yamada-ui/core"
 
-export const lineHeights = {
+export const lineHeights: ThemeTokens = {
   normal: "normal",
   none: 1,
   shorter: 1.25,

@@ -1,6 +1,6 @@
 name: "Documentation Report (日本語)"
 description: "ドキュメントサイトの間違いや不適切な表現などの報告を作成します。"
-labels: ["documentation"]
+labels: ["triage", "documentation"]
 body:
   - type: markdown
     attributes:

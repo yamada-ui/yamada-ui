@@ -19,7 +19,7 @@ tab: テーマ
 :::
 
 ```ts
-export const Drawer: ComponentMultiStyle = mergeMultiStyle(Modal, {
+export const Drawer: ComponentMultiStyle<"Drawer"> = mergeMultiStyle(Modal, {
   baseStyle: {
     container: ({ isFullHeight, placement }) => ({
       ...(isFullHeight ? { height: "100dvh", rounded: 0 } : {}),

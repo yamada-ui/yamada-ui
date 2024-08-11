@@ -1,28 +1,28 @@
 import * as path from "path"
 import { program } from "commander"
-import { actionColors } from "./command/colors"
-import { actionTokens, themePath } from "./command/tokens"
+import { actionTheme, actionTokens, themePath } from "./command"
 import { initCLI } from "./utils"
 
 export const run = async () => {
   await initCLI()
 
   program
-    .command("tokens <source>")
+    .command("tokens <path>")
     .option("-o, --out <path>", `Output file to ${path.join(...themePath)}`)
     .option("-w, --watch [path]", "Watch directory for changes and rebuild")
     .action(actionTokens)
 
   program
-    .command("colors <color>")
-    .option("-n, --name <name>", "Token name of hue object to output")
-    .option("-o, --out", "Out color json data")
-    .action(actionColors)
+    .command("theme <path>")
+    .option("-b, --branch <branch>", "Branch to download")
+    .option("--cwd <path>", "Current working directory")
+    .option("-r, --replace", "Force replace the theme")
+    .action(actionTheme)
 
   program.on("-h, --help", () => {
     console.info(`\nExample call:\n`)
     console.info(`$ yamada-cli tokens theme.ts\n`)
-    console.info(`$ yamada-cli colors #4285f4\n`)
+    console.info(`$ yamada-cli theme ./theme\n`)
   })
 
   program.parse()

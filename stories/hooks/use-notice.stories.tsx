@@ -440,6 +440,27 @@ export const withIsClosable = () => {
   )
 }
 
+export const withCloseStrategy = () => {
+  const notice = useNotice()
+
+  return (
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+      <Button
+        onClick={() =>
+          notice({
+            title: "孫悟空",
+            description: "オッス！オラ悟空！",
+            isClosable: true,
+            closeStrategy: "element",
+          })
+        }
+      >
+        Show Notice
+      </Button>
+    </Center>
+  )
+}
+
 export const useClose = () => {
   const notice = useNotice()
   const ref = useRef<string | number | undefined>(undefined)

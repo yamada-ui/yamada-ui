@@ -18,7 +18,7 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const Avatar: ComponentMultiStyle = {
+export const Avatar: ComponentMultiStyle<"Avatar"> = {
   baseStyle: {
     group: {},
     container: ({ theme: t, colorMode: m, name: string }) => {

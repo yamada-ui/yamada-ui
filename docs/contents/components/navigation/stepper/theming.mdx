@@ -15,7 +15,7 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const Stepper: ComponentMultiStyle = {
+export const Stepper: ComponentMultiStyle<"Stepper"> = {
   baseStyle: ({ colorScheme: c = "primary" }) => ({
     stepper: {
       w: "100%",

@@ -19,5 +19,6 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const MonthPicker: ComponentMultiStyle = mergeMultiStyle(DatePicker)()
+export const MonthPicker: ComponentMultiStyle<"MonthPicker"> =
+  mergeMultiStyle(DatePicker)()
 ```

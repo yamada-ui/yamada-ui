@@ -15,7 +15,7 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const Dropzone: ComponentMultiStyle = {
+export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
   baseStyle: ({ theme: t, colorMode: m }) => ({
     container: {
       color: ["blackAlpha.700", "whiteAlpha.600"],

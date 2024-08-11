@@ -1,5 +1,6 @@
 import crypto from "crypto"
 import type { RequestError } from "@octokit/request-error"
+import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
 import type {
   EmitterWebhookEvent,
@@ -24,17 +25,24 @@ export type PullRequestAction = Event<"pull_request">["action"]
 
 export type PullRequestReviewAction = Event<"pull_request_review">["action"]
 
+export const generateSignature = (body: any) => {
+  const hmac = crypto.createHmac(
+    "sha256",
+    process.env.GITHUB_API_SECRET as string,
+  )
+
+  const digest = "sha256=" + hmac.update(JSON.stringify(body)).digest("hex")
+
+  return digest
+}
+
 export const verifySignature = async ({ headers, body }: NextApiRequest) => {
   const signature = (headers["x-hub-signature-256"] ??
     headers["x-signature"]) as string | undefined
 
   if (!signature) throw new Error("Invalid signature")
 
-  const hmac = crypto.createHmac(
-    "sha256",
-    process.env.GITHUB_API_SECRET as string,
-  )
-  const digest = "sha256=" + hmac.update(JSON.stringify(body)).digest("hex")
+  const digest = generateSignature(body)
 
   if (signature !== digest) throw new Error("Invalid signature")
 }
@@ -98,4 +106,82 @@ export const recursiveOctokit = async <T extends any = void>(
       throw e
     }
   }
+}
+
+export type Issue = Awaited<
+  ReturnType<typeof octokit.issues.listForRepo>
+>["data"][number]
+export type ListEvent = Awaited<
+  ReturnType<typeof octokit.issues.listEventsForTimeline>
+>["data"][number] & { created_at: number }
+
+const pagingOctokit = async <Y extends any>(
+  func: ({
+    page,
+    per_page,
+  }: {
+    page: number
+    per_page: number
+  }) => Promise<{ data: Y[] }>,
+) => {
+  let items: Y[] = []
+  let page = 1
+  let count = 0
+  const per_page = 100
+
+  const cb = async () => {
+    const { data } = await func({ page, per_page })
+
+    items.push(...data)
+
+    count = data.length
+
+    if (count === per_page) {
+      page++
+
+      await recursiveOctokit(cb)
+    }
+  }
+
+  await recursiveOctokit(cb)
+
+  return items
+}
+
+type ListForRepoParams =
+  RestEndpointMethodTypes["issues"]["listForRepo"]["parameters"]
+
+const getListForRepo = async (params: ListForRepoParams) =>
+  pagingOctokit(async ({ page, per_page }) =>
+    octokit.issues.listForRepo({
+      ...params,
+      page,
+      per_page,
+    }),
+  )
+
+type ListEventsForTimelineParams =
+  RestEndpointMethodTypes["issues"]["listEventsForTimeline"]["parameters"]
+
+export const getListEventsForTimeline = async (
+  params: ListEventsForTimelineParams,
+) =>
+  pagingOctokit(async ({ page, per_page }) =>
+    octokit.issues.listEventsForTimeline({
+      ...params,
+      page,
+      per_page,
+    }),
+  )
+
+export const getIssues = async (params: ListForRepoParams) => {
+  const issues = await getListForRepo(params)
+
+  return issues.filter(({ pull_request }) => !pull_request)
+}
+
+export const getPullRequests = async (params: ListForRepoParams) => {
+  const pullRequests = await getListForRepo(params)
+
+  return pullRequests.filter(({ pull_request }) => pull_request)
 }

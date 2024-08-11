@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const HueSlider: ComponentMultiStyle = {
+export const HueSlider: ComponentMultiStyle<"HueSlider"> = {
   baseStyle: {
     container: {
       w: "100%",

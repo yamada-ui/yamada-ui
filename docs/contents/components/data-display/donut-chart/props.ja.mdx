@@ -74,6 +74,13 @@ tab: Props
 />
 
 <PropsCard
+  id="donutchart-labelformatter"
+  name="labelFormatter"
+  type="(value: number) => string"
+  description={"A function to format labels."}
+/>
+
+<PropsCard
   id="donutchart-labeloffset"
   name="labelOffset"
   type="number"
@@ -163,10 +170,8 @@ tab: Props
 <PropsCard
   id="donutchart-valueformatter"
   name="valueFormatter"
-  type="((value: number) => string) & ((value: number) => string)"
-  description={
-    "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
-  }
+  type="(value: any) => string"
+  description={"A function to format values on inside the tooltip."}
 />
 
 <PropsCard

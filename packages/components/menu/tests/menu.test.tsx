@@ -445,3 +445,50 @@ describe("<Menu />", () => {
     expect(menuList).not.toBeVisible()
   })
 })
+describe("<ContextMenu />", () => {
+  test("context menu should maintain position on scroll", async () => {
+    // スクロール可能なコンテナを作成
+    const { container } = render(
+      <div style={{ height: "200vh", overflow: "auto" }}>
+        <ContextMenu>
+          <ContextMenuTrigger
+            as={Center}
+            w="full"
+            h="xs"
+            borderWidth="1px"
+            borderStyle="dashed"
+            p="md"
+            rounded="md"
+          >
+            Right click here
+          </ContextMenuTrigger>
+          <MenuList data-testid="context-menu-list">
+            <MenuItem>Undo</MenuItem>
+            <MenuItem>Redo</MenuItem>
+          </MenuList>
+        </ContextMenu>
+      </div>,
+    )
+
+    // コンテキストメニューを開く
+    const trigger = screen.getByText("Right click here")
+    await act(() => fireEvent.contextMenu(trigger))
+
+    // メニューの初期位置を取得
+    const menuList = screen.getByTestId("context-menu-list")
+    const initialRect = menuList.getBoundingClientRect()
+
+    // スクロールをシミュレート
+    await act(() => {
+      container.scrollTop = 100
+      fireEvent.scroll(container)
+    })
+
+    // スクロール後のメニュー位置を取得
+    const afterScrollRect = menuList.getBoundingClientRect()
+
+    // 位置が変わっていないことを確認
+    expect(afterScrollRect.top).toBe(initialRect.top)
+    expect(afterScrollRect.left).toBe(initialRect.left)
+  })
+})

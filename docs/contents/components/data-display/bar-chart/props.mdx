@@ -46,6 +46,15 @@ tab: Props
 />
 
 <PropsCard
+  id="barchart-cell"
+  name="cell"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={
+    "A function that returns a component that renders the bar cells."
+  }
+/>
+
+<PropsCard
   id="barchart-chartprops"
   name="chartProps"
   type="Omit<CSSUIProps, keyof CategoricalChartProps> &
@@ -80,6 +89,13 @@ tab: Props
   name="gridProps"
   type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
   description={"Props passed down to recharts 'CartesianGrid' component."}
+/>
+
+<PropsCard
+  id="barchart-labelformatter"
+  name="labelFormatter"
+  type="(label: string) => string"
+  description={"A function to format labels on inside the tooltip."}
 />
 
 <PropsCard
@@ -166,8 +182,8 @@ tab: Props
 <PropsCard
   id="barchart-valueformatter"
   name="valueFormatter"
-  type="(value: number) => string"
-  description={"A function to format values on Y axis and inside the tooltip"}
+  type="(value: any) => string"
+  description={"A function to format values on inside the tooltip."}
 />
 
 <PropsCard
@@ -231,6 +247,13 @@ tab: Props
 />
 
 <PropsCard
+  id="barchart-xaxistickformatter"
+  name="xAxisTickFormatter"
+  type="(value: any) => string"
+  description={"A function to format X axis tick."}
+/>
+
+<PropsCard
   id="barchart-yaxislabel"
   name="yAxisLabel"
   type="string"
@@ -249,6 +272,13 @@ tab: Props
   name="yAxisProps"
   type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
+/>
+
+<PropsCard
+  id="barchart-yaxistickformatter"
+  name="yAxisTickFormatter"
+  type="(value: any) => string"
+  description={"A function to format Y axis tick."}
 />
 
 ### BarProps

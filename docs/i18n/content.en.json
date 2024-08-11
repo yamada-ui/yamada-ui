@@ -9268,13 +9268,13 @@
     }
   },
   {
-    "title": "Usage of useMotionAnimationFrame",
+    "title": "Usage of useAnimationFrame",
     "type": "fragment",
-    "slug": "/components/other/motion#usage-of-usemotionanimationframe",
+    "slug": "/components/other/motion#usage-of-useanimationframe",
     "hierarchy": {
       "lv1": "Motion",
       "lv2": "Usage",
-      "lv3": "Usage of useMotionAnimationFrame"
+      "lv3": "Usage of useAnimationFrame"
     }
   },
   {
@@ -12618,14 +12618,14 @@
     }
   },
   {
-    "title": "Usage of useMotionAnimationFrame",
+    "title": "Usage of useAnimationFrame",
     "type": "fragment",
-    "slug": "/styled-system/animation#usage-of-usemotionanimationframe",
+    "slug": "/styled-system/animation#usage-of-useanimationframe",
     "hierarchy": {
       "lv1": "Animation",
       "lv2": "Motion",
       "lv3": "Animation",
-      "lv4": "Usage of useMotionAnimationFrame"
+      "lv4": "Usage of useAnimationFrame"
     }
   },
   {

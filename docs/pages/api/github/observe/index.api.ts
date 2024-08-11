@@ -18,8 +18,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (pullRequest) await updatePullRequests({ req, res, constant })
 
   res.status(200).end()
-
-  res.status(200).end()
 }
 
 export default handler

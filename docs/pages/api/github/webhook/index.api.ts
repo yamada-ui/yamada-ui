@@ -11,7 +11,7 @@ const actions = {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await verifySignature(req)
-  } catch (e) {
+  } catch {
     return res.status(400).send({ status: 400, message: "Invalid signature" })
   }
 

@@ -1,7 +1,4 @@
 import { ThemeSchemes, extendConfig, extendTheme } from "@yamada-ui/react"
-import components from "./components"
-import { globalStyle, resetStyle, layerStyles, textStyles } from "./styles"
-import tokens from "./tokens"
 import { customConfig } from "./config"
 
 const colorSchemes = [
@@ -28,8 +25,6 @@ const colorSchemes = [
 ]
 
 export const customTheme = {
-  styles: { globalStyle, resetStyle, layerStyles, textStyles },
-  components,
   themeSchemes: colorSchemes.reduce(
     (prev, colorScheme) => ({
       ...prev,
@@ -43,7 +38,6 @@ export const customTheme = {
     {} as ThemeSchemes,
   ),
   colorSchemes,
-  ...tokens,
 }
 
 export const theme = extendTheme(customTheme)()

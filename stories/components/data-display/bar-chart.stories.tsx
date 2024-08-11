@@ -403,6 +403,93 @@ export const withValueFormatter: Story = () => {
   )
 }
 
+export const withXAxisTickFormatter: Story = () => {
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+    return months.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarProps[] = useMemo(
+    () => [
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return (
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="month"
+      xAxisTickFormatter={(value) => value.toUpperCase()}
+    />
+  )
+}
+
+export const withYAxisTickFormatter: Story = () => {
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+    return months.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarProps[] = useMemo(
+    () => [
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return (
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="month"
+      yAxisTickFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
+export const withLabelFormatter: Story = () => {
+  const data = useMemo(() => {
+    const months = ["January", "February", "March", "April", "May", "June"]
+    return months.map((month) => ({
+      month,
+      Smartphones: randomValue(),
+      Laptops: randomValue(),
+      Tablets: randomValue(),
+    }))
+  }, [])
+
+  const series: BarProps[] = useMemo(
+    () => [
+      { dataKey: "Smartphones", color: ["primary.500", "primary.400"] },
+      { dataKey: "Laptops", color: ["secondary.500", "secondary.400"] },
+      { dataKey: "Tablets", color: ["warning.500", "warning.400"] },
+    ],
+    [],
+  )
+  return (
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="month"
+      labelFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
 export const withStrokeDasharray: Story = () => {
   const data = useMemo(() => {
     const months = ["January", "February", "March", "April", "May", "June"]

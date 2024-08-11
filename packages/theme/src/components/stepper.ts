@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { getMemoizedObject as get } from "@yamada-ui/utils"
 
-export const Stepper: ComponentMultiStyle = {
+export const Stepper: ComponentMultiStyle<"Stepper"> = {
   baseStyle: ({ colorScheme: c = "primary" }) => ({
     stepper: {
       w: "100%",

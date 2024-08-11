@@ -46,7 +46,9 @@ export const withChildren: Story = () => {
       </ColorPicker>
 
       <ColorPicker placeholder={defaultPlaceholder}>
-        {({ value }) => <Button>Submit {value}</Button>}
+        {({ value, onClose }) => (
+          <Button onClick={onClose}>Submit {value}</Button>
+        )}
       </ColorPicker>
     </>
   )

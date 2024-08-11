@@ -93,6 +93,11 @@
       "required": false,
       "description": "The callback invoked when a row is clicked."
     },
+    "onDoubleClickRow": {
+      "type": "(row: Row<Y>) => void",
+      "required": false,
+      "description": "The callback invoked when a row is double clicked."
+    },
     "rowId": {
       "type": "keyof Y",
       "required": false,
@@ -306,6 +311,11 @@
       "type": "(row: Row<Y>) => void",
       "required": false,
       "description": "The callback invoked when a row is clicked."
+    },
+    "onDoubleClickRow": {
+      "type": "(row: Row<Y>) => void",
+      "required": false,
+      "description": "The callback invoked when a row is double clicked."
     },
     "pageIndex": {
       "type": "number",

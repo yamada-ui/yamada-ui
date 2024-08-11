@@ -19,5 +19,6 @@ tab: テーマ
 :::
 
 ```ts
-export const Autocomplete: ComponentMultiStyle = mergeMultiStyle(Select)()
+export const Autocomplete: ComponentMultiStyle<"Autocomplete"> =
+  mergeMultiStyle(Select)()
 ```

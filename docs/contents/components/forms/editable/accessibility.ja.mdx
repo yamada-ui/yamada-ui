@@ -1,0 +1,30 @@
+---
+title: Editable
+description: "`Editable`は、インラインで編集可能なテキスト入力を取得するために使用されるコンポーネントです。"
+package_name: "@yamada-ui/editable"
+with_description: true
+order: 3
+tab: アクセシビリティ
+---
+
+`Editable`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx live=false
+<Editable defaultValue="オッス！オラ悟空！" aria-label="My Editable">
+  <EditablePreview />
+  <EditableInput />
+</Editable>
+```
+
+## ARIAロールと属性
+
+| コンポーネント     | ロールと属性    | 使い方                                                                 |
+| ------------------ | --------------- | ---------------------------------------------------------------------- |
+| `EditableInput`    | `aria-invalid`  | `"Editable"`に`isInvalid`が設定されている場合は`"true"`を設定します。  |
+|                    | `aria-disabled` | `"Editable"`に`isDisabled`が設定されている場合は`"true"`を設定します。 |
+|                    | `aria-readonly` | `"Editable"`に`isReadOnly`が設定されている場合は`"true"`を設定します。 |
+|                    | `aria-required` | `"Editable"`に`isRequired`が設定されている場合は`"true"`を設定します。 |
+| `EditableTextarea` | `aria-invalid`  | `"Editable"`に`isInvalid`が設定されている場合は`"true"`を設定します。  |
+|                    | `aria-disabled` | `"Editable"`に`isDisabled`が設定されている場合は`"true"`を設定します。 |
+|                    | `aria-readonly` | `"Editable"`に`isReadOnly`が設定されている場合は`"true"`を設定します。 |
+|                    | `aria-required` | `"Editable"`に`isRequired`が設定されている場合は`"true"`を設定します。 |

@@ -17,7 +17,7 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const Slider: ComponentMultiStyle = {
+export const Slider: ComponentMultiStyle<"Slider"> = {
   baseStyle: {
     container: ({ orientation: o }) => ({
       display: "inline-block",

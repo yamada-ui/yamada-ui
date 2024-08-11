@@ -1,6 +1,6 @@
 name: "Documentation Request"
 description: "Propose new documentation requests or improvements."
-labels: ["documentation", "enhancement"]
+labels: ["triage", "documentation", "enhancement"]
 body:
   - type: markdown
     attributes:

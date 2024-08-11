@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const FormControl: ComponentMultiStyle = {
+export const FormControl: ComponentMultiStyle<"FormControl"> = {
   baseStyle: {
     container: {
       w: "100%",

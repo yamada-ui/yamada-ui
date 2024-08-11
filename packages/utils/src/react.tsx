@@ -1,6 +1,6 @@
 import * as React from "react"
 import { isNumber, isObject, isString } from "./assertion"
-import type { Merge } from "./index.types"
+import type { MergeIfDefined } from "./index.types"
 
 type DOMElement = Element & HTMLOrSVGElement
 
@@ -14,12 +14,12 @@ export type DOMAttributes<Y = DOMElement> = React.HTMLAttributes<Y> &
   }
 
 export type PropGetter<Y = undefined, M = DOMAttributes> = (
-  props?: Merge<DOMAttributes, Y>,
+  props?: MergeIfDefined<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 
 export type RequiredPropGetter<Y = undefined, M = DOMAttributes> = (
-  props: Merge<DOMAttributes, Y>,
+  props: MergeIfDefined<DOMAttributes, Y>,
   ref?: React.Ref<any>,
 ) => M & React.RefAttributes<any>
 

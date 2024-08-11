@@ -1,14 +1,14 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
+import { motionForwardRef } from "@yamada-ui/motion"
 import type { PopoverContentProps } from "@yamada-ui/popover"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
 import { useSelectContext, useSelectList } from "./use-select"
 
-export type SelectListProps = Omit<MotionProps<"ul">, "children">
+export type SelectListProps = MotionPropsWithoutChildren<"ul">
 
-export const SelectList = forwardRef<SelectListProps, "ul">(
+export const SelectList = motionForwardRef<SelectListProps, "ul">(
   ({ className, w, width, minW, minWidth, ...rest }, ref) => {
     const { styles } = useSelectContext()
 

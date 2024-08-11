@@ -1,14 +1,14 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { forwardRef } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
+import { motionForwardRef } from "@yamada-ui/motion"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import type { PopoverContentProps } from "@yamada-ui/popover"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
 import { useAutocompleteContext, useAutocompleteList } from "./use-autocomplete"
 
-export type AutocompleteListProps = Omit<MotionProps<"ul">, "children">
+export type AutocompleteListProps = MotionPropsWithoutChildren<"ul">
 
-export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
+export const AutocompleteList = motionForwardRef<AutocompleteListProps, "ul">(
   ({ className, w, width, minW, minWidth, ...rest }, ref) => {
     const { styles } = useAutocompleteContext()
 

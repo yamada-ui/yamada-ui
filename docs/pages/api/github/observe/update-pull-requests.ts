@@ -1,12 +1,14 @@
 import { Octokit } from "@octokit/rest"
 import { isObject } from "@yamada-ui/react"
 import { sendDiscord } from "utils/discord"
-import { recursiveOctokit, type Constant } from "utils/github"
+import {
+  recursiveOctokit,
+  type Constant,
+  getPullRequests as _getPullRequests,
+  getListEventsForTimeline,
+} from "utils/github"
 import type { APIHandler } from "utils/next"
 
-type Issue = Awaited<
-  ReturnType<typeof octokit.issues.listForRepo>
->["data"][number]
 type PullRequest = Awaited<ReturnType<typeof getPullRequest>>
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
@@ -75,34 +77,7 @@ const getPullRequests = async ({
   owner: string
   repo: string
 }) => {
-  let _pullRequests: Issue[] = []
-  let page = 1
-  let count = 0
-  const perPage = 100
-
-  const listForRepo = async () => {
-    const { data } = await octokit.issues.listForRepo({
-      owner,
-      repo,
-      state: "open",
-      per_page: perPage,
-      page,
-    })
-
-    _pullRequests.push(...data)
-
-    count = data.length
-
-    if (count === perPage) {
-      page++
-
-      await recursiveOctokit(listForRepo)
-    }
-  }
-
-  await recursiveOctokit(listForRepo)
-
-  _pullRequests = _pullRequests.filter(({ pull_request }) => pull_request)
+  let _pullRequests = await _getPullRequests({ owner, repo, state: "open" })
 
   const pullRequests: PullRequest[] = []
 
@@ -128,11 +103,15 @@ const remindReviews = async ({
   repo,
   pullRequest,
   constant,
+  publish,
+  runOctokit,
 }: {
   owner: string
   repo: string
   pullRequest: PullRequest
   constant: Constant
+  publish: boolean
+  runOctokit: boolean
 }) => {
   const {
     number,
@@ -141,7 +120,6 @@ const remindReviews = async ({
     created_at,
     html_url,
     requested_reviewers,
-    mergeable_state,
     head,
   } = pullRequest
   if (
@@ -152,16 +130,39 @@ const remindReviews = async ({
   )
     return
 
-  if (mergeable_state === "dirty") {
+  const timeline = await getListEventsForTimeline({
+    owner,
+    repo,
+    issue_number: number,
+  })
+
+  const commitIndex = timeline.findLastIndex(
+    (item) =>
+      item.event === "committed" &&
+      "parents" in item &&
+      item.parents.length === 1,
+  )
+
+  const omittedTimeline = timeline.slice(commitIndex + 1)
+
+  const hasReviewed = omittedTimeline.some(
+    (event) => event.event === "reviewed",
+  )
+
+  if (hasReviewed) {
     try {
-      await recursiveOctokit(() =>
-        octokit.issues.removeLabel({
-          owner,
-          repo,
-          issue_number: number,
-          name: "review wanted",
-        }),
-      )
+      if (runOctokit) {
+        await recursiveOctokit(() =>
+          octokit.issues.removeLabel({
+            owner,
+            repo,
+            issue_number: number,
+            name: "review wanted",
+          }),
+        )
+      } else {
+        console.log("octokit.issues.removeLabel", number, "review wanted")
+      }
     } catch {}
 
     return
@@ -188,7 +189,7 @@ const remindReviews = async ({
       )
       .filter(Boolean)
 
-    if (requestedReviewerIds.length) {
+    if (publish && requestedReviewerIds.length) {
       const content = DISCORD_REMIND_REVIEW_COMMENT(constant)(
         requestedReviewerIds,
         number,
@@ -206,22 +207,28 @@ const remindReviews = async ({
     )
 
     if (!hasReviewWanted) {
-      await recursiveOctokit(() =>
-        octokit.issues.addLabels({
-          owner,
-          repo,
-          issue_number: number,
-          labels: ["review wanted"],
-        }),
-      )
+      if (runOctokit) {
+        await recursiveOctokit(() =>
+          octokit.issues.addLabels({
+            owner,
+            repo,
+            issue_number: number,
+            labels: ["review wanted"],
+          }),
+        )
+      } else {
+        console.log("octokit.issues.addLabels", number, "review wanted")
+      }
 
-      const content = DISCORD_REVIEW_WANTED_COMMENT(constant)(
-        number,
-        title,
-        html_url,
-      )
+      if (publish) {
+        const content = DISCORD_REVIEW_WANTED_COMMENT(constant)(
+          number,
+          title,
+          html_url,
+        )
 
-      await sendDiscord(process.env.DISCORD_HELP_WANTED_WEBHOOK_URL, content)
+        await sendDiscord(process.env.DISCORD_HELP_WANTED_WEBHOOK_URL, content)
+      }
     }
   }
 }
@@ -232,12 +239,16 @@ const addHelpWanted = async ({
   pullRequest,
   collaboratorIds,
   constant,
+  publish,
+  runOctokit,
 }: {
   owner: string
   repo: string
   pullRequest: PullRequest
   collaboratorIds: string[]
   constant: Constant
+  publish: boolean
+  runOctokit: boolean
 }) => {
   const { number, title, user, labels, created_at, html_url, head } =
     pullRequest
@@ -263,27 +274,41 @@ const addHelpWanted = async ({
 
   if (createdTimestamp > limitTimestamp) return
 
-  await recursiveOctokit(() =>
-    octokit.issues.createComment({
-      owner,
-      repo,
-      issue_number: number,
-      body: GITHUB_JOINING_COMMENT(constant)(user.login),
-    }),
-  )
+  if (runOctokit) {
+    await recursiveOctokit(() =>
+      octokit.issues.createComment({
+        owner,
+        repo,
+        issue_number: number,
+        body: GITHUB_JOINING_COMMENT(constant)(user.login),
+      }),
+    )
+  } else {
+    console.log("octokit.issues.createComment", number, user.login)
+  }
 
-  await recursiveOctokit(() =>
-    octokit.issues.addLabels({
-      owner,
-      repo,
-      issue_number: number,
-      labels: ["help wanted"],
-    }),
-  )
+  if (runOctokit) {
+    await recursiveOctokit(() =>
+      octokit.issues.addLabels({
+        owner,
+        repo,
+        issue_number: number,
+        labels: ["help wanted"],
+      }),
+    )
+  } else {
+    console.log("octokit.issues.addLabels", number, "help wanted")
+  }
 
-  const content = DISCORD_HELP_WANTED_COMMENT(constant)(number, title, html_url)
+  if (publish) {
+    const content = DISCORD_HELP_WANTED_COMMENT(constant)(
+      number,
+      title,
+      html_url,
+    )
 
-  await sendDiscord(process.env.DISCORD_HELP_WANTED_WEBHOOK_URL, content)
+    await sendDiscord(process.env.DISCORD_HELP_WANTED_WEBHOOK_URL, content)
+  }
 }
 
 export const updatePullRequests: APIHandler = async ({
@@ -291,7 +316,7 @@ export const updatePullRequests: APIHandler = async ({
   res,
   constant,
 }) => {
-  const { owner, repo } = req.body
+  const { owner, repo, publish = true, octokit: runOctokit = true } = req.body
 
   if (!owner)
     return res.status(400).send({ status: 400, message: "Invalid owner" })
@@ -316,8 +341,23 @@ export const updatePullRequests: APIHandler = async ({
 
     if (count >= constant.pullRequest.requireApprovalCount) continue
 
-    await remindReviews({ owner, repo, pullRequest, constant })
+    await remindReviews({
+      owner,
+      repo,
+      pullRequest,
+      constant,
+      publish,
+      runOctokit,
+    })
 
-    await addHelpWanted({ owner, repo, pullRequest, collaboratorIds, constant })
+    await addHelpWanted({
+      owner,
+      repo,
+      pullRequest,
+      collaboratorIds,
+      constant,
+      publish,
+      runOctokit,
+    })
   }
 }

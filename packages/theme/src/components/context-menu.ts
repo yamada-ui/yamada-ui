@@ -6,6 +6,9 @@ export const ContextMenu: ComponentMultiStyle<"ContextMenu"> = mergeMultiStyle(
   Menu,
   {
     baseStyle: {
+      list: {
+        position: "fixed",
+      },
       trigger: {},
     },
   },

@@ -21,7 +21,7 @@ export const basic: Story = () => {
 export const withSize: Story = () => {
   return (
     <>
-      <CircleProgress value={18} size={32} />
+      <CircleProgress value={18} boxSize={32} />
     </>
   )
 }
@@ -38,7 +38,7 @@ export const withLabel: Story = () => {
   return (
     <>
       <CircleProgress
-        size="120px"
+        boxSize="120px"
         min={0}
         max={1000}
         value={444}

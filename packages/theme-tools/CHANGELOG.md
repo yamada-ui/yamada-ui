@@ -1,5 +1,17 @@
 # @yamada-ui/theme-tools
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2460](https://github.com/yamada-ui/yamada-ui/pull/2460) [`da7f7f8`](https://github.com/yamada-ui/yamada-ui/commit/da7f7f84a423c68f6cf02a020410da06963e1d08) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `generate` function.
+
+### Patch Changes
+
+- Updated dependencies [[`6390a78`](https://github.com/yamada-ui/yamada-ui/commit/6390a78330ff35419720507ca8b6e537fca190e6), [`86b4b20`](https://github.com/yamada-ui/yamada-ui/commit/86b4b202bebb371074e1d3a9ba7b6cce73c78152), [`ec88127`](https://github.com/yamada-ui/yamada-ui/commit/ec88127c59b4dfe43ae8f2245730534c6ba36d02), [`93d7e63`](https://github.com/yamada-ui/yamada-ui/commit/93d7e630c2c0939284143f41e5df594ef46aae2f), [`a1beb62`](https://github.com/yamada-ui/yamada-ui/commit/a1beb62b13ab70296d4fc820efb006df78fc2d43), [`2e58d32`](https://github.com/yamada-ui/yamada-ui/commit/2e58d3242d406afea151a43d1010b3084c211034), [`3e063f6`](https://github.com/yamada-ui/yamada-ui/commit/3e063f65ce2b8de593127db504e72236df00bb8f), [`0d05ec4`](https://github.com/yamada-ui/yamada-ui/commit/0d05ec40404d5ef661ec8d80d38bef0ed36910e0), [`cb7eece`](https://github.com/yamada-ui/yamada-ui/commit/cb7eece896497fafa11b9c56d2240c769ddf1aed), [`40c79b5`](https://github.com/yamada-ui/yamada-ui/commit/40c79b5989015e60340260874ef13666148be795)]:
+  - @yamada-ui/core@1.12.0
+  - @yamada-ui/theme@1.16.0
+
 ## 1.0.41
 
 ### Patch Changes

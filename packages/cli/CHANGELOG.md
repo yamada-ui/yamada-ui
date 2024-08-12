@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.1.0
+
+### Minor Changes
+
+- [#2432](https://github.com/yamada-ui/yamada-ui/pull/2432) [`9327047`](https://github.com/yamada-ui/yamada-ui/commit/9327047d65e9bcb9c28dd723c0ab7c7862055f21) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added a feature to generate a default theme for the project.
+
 ## 1.0.6
 
 ### Patch Changes

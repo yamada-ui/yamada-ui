@@ -20,9 +20,12 @@ tab: テーマ
 :::
 
 ```ts
-export const ContextMenu: ComponentMultiStyle = mergeMultiStyle(Menu, {
-  baseStyle: {
-    trigger: {},
+export const ContextMenu: ComponentMultiStyle<"ContextMenu"> = mergeMultiStyle(
+  Menu,
+  {
+    baseStyle: {
+      trigger: {},
+    },
   },
-})()
+)()
 ```

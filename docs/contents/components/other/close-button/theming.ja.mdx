@@ -20,7 +20,7 @@ order: 2
 :::
 
 ```ts
-export const CloseButton: ComponentStyle = mergeStyle(Button, {
+export const CloseButton: ComponentStyle<"CloseButton"> = mergeStyle(Button, {
   baseStyle: {
     _hover: {
       bg: ["blackAlpha.100", "whiteAlpha.100"],

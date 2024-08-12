@@ -92,6 +92,13 @@ tab: Props
 />
 
 <PropsCard
+  id="linechart-labelformatter"
+  name="labelFormatter"
+  type="(label: string) => string"
+  description={"A function to format labels on inside the tooltip."}
+/>
+
+<PropsCard
   id="linechart-layouttype"
   name="layoutType"
   type="ChartLayoutType"
@@ -180,8 +187,8 @@ tab: Props
 <PropsCard
   id="linechart-valueformatter"
   name="valueFormatter"
-  type="(value: number) => string"
-  description={"A function to format values on Y axis and inside the tooltip"}
+  type="(value: any) => string"
+  description={"A function to format values on inside the tooltip."}
 />
 
 <PropsCard
@@ -261,6 +268,13 @@ tab: Props
 />
 
 <PropsCard
+  id="linechart-xaxistickformatter"
+  name="xAxisTickFormatter"
+  type="(value: any) => string"
+  description={"A function to format X axis tick."}
+/>
+
+<PropsCard
   id="linechart-yaxislabel"
   name="yAxisLabel"
   type="string"
@@ -279,6 +293,13 @@ tab: Props
   name="yAxisProps"
   type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
+/>
+
+<PropsCard
+  id="linechart-yaxistickformatter"
+  name="yAxisTickFormatter"
+  type="(value: any) => string"
+  description={"A function to format Y axis tick."}
 />
 
 ### LineProps

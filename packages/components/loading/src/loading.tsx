@@ -53,7 +53,7 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       color,
       secondaryColor,
       colorScheme = "primary",
-      size = "1em",
+      fontSize = "1em",
       dur,
       duration,
       ...rest
@@ -63,7 +63,7 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const computedProps = useMemo<ComponentProps>(
     () => ({
       className: cx("ui-loading", className),
-      size,
+      fontSize,
       var: [
         {
           __prefix: "ui",
@@ -91,7 +91,7 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       color,
       secondaryColor,
       colorScheme,
-      size,
+      fontSize,
       duration,
       dur,
       rest,

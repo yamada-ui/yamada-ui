@@ -12,8 +12,7 @@ import {
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { useToken } from "@yamada-ui/use-token"
-import { useValue } from "@yamada-ui/use-value"
-import { cx, valueToPercent } from "@yamada-ui/utils"
+import { cx, isUnit, replaceObject, valueToPercent } from "@yamada-ui/utils"
 import type { FC } from "react"
 
 type CircleProgressOptions = {
@@ -90,15 +89,15 @@ export type CircleProgressProps = Omit<HTMLUIProps<"div">, "color"> &
  * @see Docs https://yamada-ui.com/components/feedback/circle-progress
  */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
-  ({ size: boxSize = "6rem", ...props }, ref) => {
-    const [styles, mergedProps] = useComponentStyle("CircleProgress", {
-      boxSize,
-      ...props,
-    })
-
+  (props, ref) => {
+    const [styles, { size = "6em", ...mergedProps }] = useComponentStyle(
+      "CircleProgress",
+      props,
+    )
     let {
       className,
       children,
+      boxSize,
       thickness = "0.625rem",
       color = "primary",
       trackColor = "border",
@@ -111,12 +110,12 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    boxSize = (useToken("sizes", useValue(boxSize)) ?? boxSize) as
-      | string
-      | number
-    thickness = (useToken("sizes", useValue(thickness)) ?? thickness) as
-      | string
-      | number
+    boxSize ??= replaceObject(size, (value) =>
+      !isUnit(value) ? useToken("sizes", value) : value,
+    )
+    thickness = replaceObject(thickness, (value) =>
+      !isUnit(value) ? useToken("sizes", value) : value,
+    )
 
     const isTransparent = value === 0 && !isAnimation
     const percent = valueToPercent(value, min, max)
@@ -145,10 +144,10 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
 
     const css: CSSUIObject = {
       ...styles,
-      boxSize,
+      fontSize: boxSize,
     }
 
-    const restProps: CircleProps = isAnimation
+    const circleProps: CircleProps = isAnimation
       ? {
           animation,
         }
@@ -168,14 +167,14 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
         __css={css}
         {...rest}
       >
-        <Shape size={boxSize} isAnimation={isAnimation} speed={speed}>
+        <Shape boxSize={boxSize} isAnimation={isAnimation} speed={speed}>
           <Circle stroke={trackColor} strokeWidth={thickness} />
           <Circle
             stroke={color}
             strokeWidth={thickness}
             strokeLinecap={isRounded ? "round" : undefined}
             opacity={isTransparent ? 0 : undefined}
-            {...restProps}
+            {...circleProps}
           />
         </Shape>
         {children}
@@ -191,12 +190,9 @@ const Circle: FC<CircleProps> = ({ ...rest }) => (
 )
 
 type ShapeProps = Omit<HTMLUIProps<"svg">, "speed"> &
-  Pick<
-    Required<CircleProgressProps>,
-    "children" | "size" | "isAnimation" | "speed"
-  >
+  Pick<Required<CircleProgressProps>, "children" | "isAnimation" | "speed">
 
-const Shape: FC<ShapeProps> = ({ size, isAnimation, speed, ...rest }) => {
+const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
   const animation = useAnimation({
     keyframes: {
       "0%": {
@@ -213,7 +209,7 @@ const Shape: FC<ShapeProps> = ({ size, isAnimation, speed, ...rest }) => {
 
   const css: CSSUIObject = {
     display: "block",
-    boxSize: size,
+    boxSize,
     ...(isAnimation ? { animation } : {}),
   }
 

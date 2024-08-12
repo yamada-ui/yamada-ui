@@ -69,7 +69,7 @@ export type RadarChartProps = HTMLUIProps<"div"> &
   ThemeProps<"RadarChart"> &
   RadarChartOptions &
   UseChartProps &
-  UseChartTooltipOptions &
+  Omit<UseChartTooltipOptions, "labelFormatter"> &
   UseChartLegendProps &
   UseRadarChartOptions
 
@@ -98,6 +98,8 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     unit,
     valueFormatter,
+    polarAngleAxisTickFormatter,
+    polarRadiusAxisTickFormatter,
     strokeDasharray,
     withDots,
     withActiveDots,
@@ -134,7 +136,8 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     withActiveDots,
     strokeWidth,
     fillOpacity,
-    valueFormatter,
+    polarAngleAxisTickFormatter,
+    polarRadiusAxisTickFormatter,
     strokeDasharray,
     styles,
   })

@@ -16,7 +16,7 @@ import { spaces } from "./spaces"
 import { transitions } from "./transitions"
 import { zIndices } from "./z-indices"
 
-export default {
+export const tokens = {
   animations,
   blurs,
   borders,

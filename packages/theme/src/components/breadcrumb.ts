@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Breadcrumb: ComponentMultiStyle = {
+export const Breadcrumb: ComponentMultiStyle<"Breadcrumb"> = {
   baseStyle: {
     container: {
       display: "flex",

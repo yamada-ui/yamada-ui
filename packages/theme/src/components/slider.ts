@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { shadeColor, tintColor } from "@yamada-ui/utils"
 
-export const Slider: ComponentMultiStyle = {
+export const Slider: ComponentMultiStyle<"Slider"> = {
   baseStyle: {
     container: ({ orientation: o }) => ({
       display: "inline-block",

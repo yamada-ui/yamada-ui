@@ -1,13 +1,11 @@
-import { type CSSUIObject, useTheme, type CSSUIProps } from "@yamada-ui/core"
-import { type Dict, cx } from "@yamada-ui/utils"
-import {
-  type ComponentPropsWithoutRef,
-  useCallback,
-  useState,
-  useId,
-  useMemo,
-} from "react"
+import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import { useTheme } from "@yamada-ui/core"
+import { cx, runIfFunc } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
+import type { FC, ComponentPropsWithoutRef, ReactNode } from "react"
+import { useCallback, useState, useId, useMemo } from "react"
 import type * as Recharts from "recharts"
+import { Bar, Cell } from "recharts"
 import { getComponentProps } from "./chart-utils"
 import type {
   BarProps,
@@ -72,6 +70,10 @@ export type UseBarChartOptions = {
    * A label to display below the Y axis.
    */
   yAxisLabel?: string
+  /**
+   * A function that returns a component that renders the bar cells.
+   */
+  cell?: ReactNode | FC<BarCellProps>
 }
 
 export type UseBarChartProps = UseBarChartOptions & {
@@ -89,6 +91,7 @@ export const useBarChart = ({
   xAxisLabel,
   yAxisLabel,
   styles,
+  cell = defaultBarCell,
   ...rest
 }: UseBarChartProps) => {
   const uuid = useId()
@@ -277,6 +280,25 @@ export const useBarChart = ({
     [barPropsList, stacked],
   )
 
+  const bars = useMemo(() => {
+    const hasStack = series.some((entry) => entry.stackId)
+
+    return series.map((series, index) => {
+      const { dataKey } = series
+
+      return (
+        <Bar
+          key={`bar-${dataKey}`}
+          {...getBarProps({ index, className: "ui-bar-chart__bar" })}
+        >
+          {data.map((data, index) =>
+            runIfFunc(cell, { series, data, index, hasStack }),
+          )}
+        </Bar>
+      )
+    })
+  }, [series, getBarProps, cell, data])
+
   const getBarChartProps: ChartPropGetter<
     "div",
     ComponentPropsWithoutRef<typeof Recharts.BarChart>,
@@ -310,6 +332,7 @@ export const useBarChart = ({
   )
 
   return {
+    bars,
     barVars,
     getBarProps,
     getBarChartProps,
@@ -318,3 +341,32 @@ export const useBarChart = ({
 }
 
 export type UseBarChartReturn = ReturnType<typeof useBarChart>
+
+export type BarCellProps = {
+  hasStack: boolean
+  series: BarProps
+  data: Dict
+  index: number
+}
+
+const defaultBarCell: FC<BarCellProps> = ({
+  hasStack,
+  series,
+  data,
+  index,
+}) => {
+  const { dataKey } = series
+  const key = `cell-${dataKey}-${index}`
+
+  if (!hasStack) return <Cell key={key} />
+
+  const keys = Object.keys(data)
+  const values = Object.values(data)
+
+  const currentIndex = keys.findIndex((key) => key === dataKey)
+  const lastIndex = values.findLastIndex((value) => value !== 0)
+
+  if (currentIndex === lastIndex) return <Cell key={key} />
+
+  return <Cell key={key} radius={0} />
+}

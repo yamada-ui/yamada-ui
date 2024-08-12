@@ -291,6 +291,27 @@ export const withValueFormatter: Story = () => {
   )
 }
 
+export const withLabelFormatter: Story = () => {
+  const data: CellProps[] = useMemo(
+    () => [
+      { name: "USA", value: 4000, color: "red.500" },
+      { name: "India", value: 3000, color: "orange.500" },
+      { name: "Japan", value: 1000, color: "blue.500" },
+      { name: "Other", value: 2000, color: "gray.500" },
+    ],
+    [],
+  )
+
+  return (
+    <PieChart
+      size="lg"
+      data={data}
+      withLabels
+      labelFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
 export const withFillOpacity: Story = () => {
   const data: CellProps[] = useMemo(
     () => [

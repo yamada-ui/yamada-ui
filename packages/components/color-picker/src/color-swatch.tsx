@@ -4,11 +4,16 @@ import {
   omitThemeProps,
   useMultiComponentStyle,
 } from "@yamada-ui/core"
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  HTMLUIProps,
+  ThemeProps,
+} from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
 const defaultOverlays = (
-  background: string,
+  background: CSSUIProps["color"],
   withShadow: boolean,
 ): HTMLUIProps<"div">[] => {
   let overlays: HTMLUIProps<"div">[] = [
@@ -52,7 +57,7 @@ type ColorSwatchOptions = {
    *
    * @default "#ffffff00"
    */
-  color?: string
+  color?: CSSUIProps["color"]
   /**
    * The overlay used for the swatch element.
    */

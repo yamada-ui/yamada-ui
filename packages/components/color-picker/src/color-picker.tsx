@@ -7,7 +7,13 @@ import {
 } from "@yamada-ui/core"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import { Portal, type PortalProps } from "@yamada-ui/portal"
-import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
+import {
+  cx,
+  getValidChildren,
+  isValidElement,
+  runIfFunc,
+} from "@yamada-ui/utils"
+import type { FC, ReactNode } from "react"
 import { cloneElement } from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import { ColorSelector } from "./color-selector"
@@ -64,6 +70,7 @@ type ColorPickerOptions = {
    * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
+  children?: ReactNode | FC<{ value: string; onClose: () => void }>
 }
 
 export type ColorPickerProps = ThemeProps<"ColorPicker"> &
@@ -80,7 +87,6 @@ export type ColorPickerProps = ThemeProps<"ColorPicker"> &
     | "alphaSliderProps"
     | "channelsProps"
     | "channelProps"
-    | "children"
   >
 
 /**
@@ -120,6 +126,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       ...computedProps
     } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
+      value,
       allowInput,
       eyeDropperSupported,
       getPopoverProps,
@@ -127,6 +134,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       getFieldProps,
       getSelectorProps,
       getEyeDropperProps,
+      onClose,
       ...rest
     } = useColorPicker(computedProps)
 
@@ -139,7 +147,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     }
 
     return (
-      <ColorPickerProvider value={{ styles, ...rest }}>
+      <ColorPickerProvider value={{ styles, value, ...rest }}>
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-color-picker", className)}
@@ -189,7 +197,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
                     channelProps,
                   })}
                 >
-                  {children}
+                  {runIfFunc(children, { value, onClose })}
                 </ColorSelector>
               </PopoverContent>
             </Portal>

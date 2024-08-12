@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Rating: ComponentMultiStyle = {
+export const Rating: ComponentMultiStyle<"Rating"> = {
   baseStyle: ({ colorScheme: c = "yellow" }) => ({
     container: {
       display: "flex",

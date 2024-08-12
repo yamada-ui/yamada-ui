@@ -2,9 +2,13 @@
 
 ## Latest Release
 
-### July 26, 2024: [v1.4.7](/.changelog/v1.4.7.mdx)
+### August 11, 2024: [v1.4.9](/.changelog/v1.4.9.mdx)
 
 ## Previous Releases
+
+### July 30, 2024: [v1.4.8](/.changelog/v1.4.8.mdx)
+
+### July 26, 2024: [v1.4.7](/.changelog/v1.4.7.mdx)
 
 ### July 21, 2024: [v1.4.6](/.changelog/v1.4.6.mdx)
 

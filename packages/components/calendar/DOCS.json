@@ -406,6 +406,11 @@
       "required": false,
       "description": "Callback function to determine whether the day should be disabled."
     },
+    "fieldProps": {
+      "type": "Omit<DatePickerFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for date picker field element."
+    },
     "firstDayOfWeek": {
       "type": "\"sunday\" | \"monday\"",
       "defaultValue": "'monday'",
@@ -847,6 +852,11 @@
       "type": "(date: Date) => boolean",
       "required": false,
       "description": "Callback function to determine whether the day should be disabled."
+    },
+    "fieldProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for date picker field element."
     },
     "firstDayOfWeek": {
       "type": "\"sunday\" | \"monday\"",
@@ -1301,6 +1311,11 @@
       "required": false,
       "description": "Callback function to determine whether the day should be disabled."
     },
+    "fieldProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for date picker field element."
+    },
     "firstDayOfWeek": {
       "type": "\"sunday\" | \"monday\"",
       "defaultValue": "'monday'",
@@ -1720,6 +1735,11 @@
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
     },
+    "fieldProps": {
+      "type": "Omit<DatePickerFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for month picker field element."
+    },
     "flip": {
       "type": "boolean",
       "defaultValue": true,
@@ -2063,6 +2083,11 @@
       "defaultValue": true,
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+    },
+    "fieldProps": {
+      "type": "Omit<DatePickerFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for year picker field element."
     },
     "flip": {
       "type": "boolean",

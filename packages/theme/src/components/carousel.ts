@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Carousel: ComponentMultiStyle = {
+export const Carousel: ComponentMultiStyle<"Carousel"> = {
   baseStyle: {
     container: {
       position: "relative",

@@ -19,6 +19,8 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
   gap = "fallback(4, 1rem)",
   appendToParentPortal,
+  listProps,
+  itemProps,
   containerRef,
 }) => {
   const state = useSyncExternalStore(
@@ -60,10 +62,16 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
         key={placement}
         className={cx("ui-notice__list", `ui-notice__list--${placement}`)}
         __css={css}
+        {...listProps}
       >
         <AnimatePresence initial={false}>
           {notices.map((notice) => (
-            <NoticeComponent key={notice.id} variants={variants} {...notice} />
+            <NoticeComponent
+              key={notice.id}
+              variants={variants}
+              itemProps={itemProps}
+              {...notice}
+            />
           ))}
         </AnimatePresence>
       </ui.ul>
@@ -107,11 +115,12 @@ const defaultVariants: MotionVariants = {
 }
 
 type NoticeComponentProps = NoticeOptions &
-  Pick<NoticeProviderProps, "variants">
+  Pick<NoticeProviderProps, "variants" | "itemProps">
 
 const NoticeComponent = memo(
   ({
     variants = defaultVariants,
+    itemProps,
     placement,
     duration = 5000,
     message,
@@ -172,6 +181,7 @@ const NoticeComponent = memo(
                 : "center",
           } as MotionStyle
         }
+        {...itemProps}
       >
         <ui.div className="ui-notice__item-inner" __css={css}>
           {runIfFunc(message, { onClose })}

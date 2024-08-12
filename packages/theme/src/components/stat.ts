@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Stat: ComponentMultiStyle = {
+export const Stat: ComponentMultiStyle<"Stat"> = {
   baseStyle: {
     container: {
       display: "flex",

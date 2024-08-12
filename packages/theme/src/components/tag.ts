@@ -8,7 +8,7 @@ import {
   tintColor,
 } from "@yamada-ui/utils"
 
-export const Tag: ComponentMultiStyle = {
+export const Tag: ComponentMultiStyle<"Tag"> = {
   baseStyle: {
     container: {
       maxW: "100%",

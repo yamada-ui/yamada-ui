@@ -1,5 +1,36 @@
 # @yamada-ui/color-picker
 
+## 1.3.0
+
+### Minor Changes
+
+- [#2404](https://github.com/yamada-ui/yamada-ui/pull/2404) [`dae6a0d`](https://github.com/yamada-ui/yamada-ui/commit/dae6a0d958226f715efdab7422e6e5792b1c73ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Provided `onClose` to `children` of `ColorPicker`.
+
+### Patch Changes
+
+- [#2401](https://github.com/yamada-ui/yamada-ui/pull/2401) [`16f7510`](https://github.com/yamada-ui/yamada-ui/commit/16f75107d8323495f27b39745f7dfe998ea73ee2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `ColorPicker` and `ColorSelector`'s `children`.
+
+- [#2392](https://github.com/yamada-ui/yamada-ui/pull/2392) [`6be9ded`](https://github.com/yamada-ui/yamada-ui/commit/6be9dedd223cf1cf6196520914f25551fe760186) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the type definition of `ColorSwatch`'s `color`.
+
+- [#2404](https://github.com/yamada-ui/yamada-ui/pull/2404) [`dae6a0d`](https://github.com/yamada-ui/yamada-ui/commit/dae6a0d958226f715efdab7422e6e5792b1c73ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `ColorPicer`'s `children` were provided even though the value was not set.
+
+- Updated dependencies [[`6390a78`](https://github.com/yamada-ui/yamada-ui/commit/6390a78330ff35419720507ca8b6e537fca190e6), [`8640407`](https://github.com/yamada-ui/yamada-ui/commit/8640407a72480dcbcbd62a75455ded0548696b9e), [`a1beb62`](https://github.com/yamada-ui/yamada-ui/commit/a1beb62b13ab70296d4fc820efb006df78fc2d43), [`2e58d32`](https://github.com/yamada-ui/yamada-ui/commit/2e58d3242d406afea151a43d1010b3084c211034), [`0d05ec4`](https://github.com/yamada-ui/yamada-ui/commit/0d05ec40404d5ef661ec8d80d38bef0ed36910e0), [`cb7eece`](https://github.com/yamada-ui/yamada-ui/commit/cb7eece896497fafa11b9c56d2240c769ddf1aed)]:
+  - @yamada-ui/core@1.12.0
+  - @yamada-ui/popover@1.2.10
+  - @yamada-ui/button@1.0.39
+  - @yamada-ui/form-control@2.0.4
+  - @yamada-ui/icon@1.1.3
+  - @yamada-ui/input@1.0.39
+
+## 1.2.25
+
+### Patch Changes
+
+- Updated dependencies [[`0aa9f91`](https://github.com/yamada-ui/yamada-ui/commit/0aa9f918ddb8790bd11313f62ca10fe0e4b35a76)]:
+  - @yamada-ui/icon@1.1.2
+  - @yamada-ui/button@1.0.38
+  - @yamada-ui/popover@1.2.9
+
 ## 1.2.24
 
 ### Patch Changes

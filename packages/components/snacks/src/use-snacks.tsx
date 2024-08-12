@@ -178,6 +178,7 @@ const Snack = forwardRef<SnackProps, "div">(
       title,
       description,
       isClosable = true,
+      closeStrategy = "button",
       boxShadow = defaultBoxShadow,
       className,
       index,
@@ -185,6 +186,11 @@ const Snack = forwardRef<SnackProps, "div">(
     },
     ref,
   ) => {
+    const isButtonClosable =
+      isClosable && (closeStrategy === "button" || closeStrategy === "both")
+    const isElementClosable =
+      isClosable && (closeStrategy === "element" || closeStrategy === "both")
+
     return (
       <Alert
         ref={ref}
@@ -194,7 +200,8 @@ const Snack = forwardRef<SnackProps, "div">(
         colorScheme={colorScheme}
         alignItems="start"
         boxShadow={index ? boxShadow : undefined}
-        pe={isClosable ? 8 : undefined}
+        pe={isButtonClosable ? 8 : undefined}
+        onClick={isElementClosable ? onClose : undefined}
       >
         <AlertIcon
           variant={icon?.variant}
@@ -217,11 +224,15 @@ const Snack = forwardRef<SnackProps, "div">(
           ) : null}
         </ui.div>
 
-        {isClosable ? (
+        {isButtonClosable ? (
           <CloseButton
             className="ui-snack__close-button"
             size="sm"
-            onClick={onClose}
+            onClick={(ev) => {
+              ev.stopPropagation()
+
+              onClose?.()
+            }}
             position="absolute"
             top={2}
             right={2}

@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { isGray, transparentizeColor } from "@yamada-ui/utils"
 
-export const Resizable: ComponentMultiStyle = {
+export const Resizable: ComponentMultiStyle<"Resizable"> = {
   baseStyle: ({ direction: d }) => ({
     container: {
       w: "100%",

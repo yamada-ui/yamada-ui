@@ -94,7 +94,10 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     unit,
     gridProps,
     strokeDasharray,
+    yAxisTickFormatter,
+    xAxisTickFormatter,
     valueFormatter,
+    labelFormatter,
     tooltipProps,
     tooltipAnimationDuration,
     legendProps,
@@ -164,7 +167,8 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
     xAxisLabelProps,
     yAxisLabelProps,
     unit,
-    valueFormatter,
+    yAxisTickFormatter,
+    xAxisTickFormatter,
     styles,
   })
   const { getReferenceLineProps } = useChartReferenceLine({
@@ -279,6 +283,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
                     label={label}
                     payload={payload}
                     valueFormatter={valueFormatter}
+                    labelFormatter={labelFormatter}
                     unit={unit}
                     {...computedTooltipProps}
                   />

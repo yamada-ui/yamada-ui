@@ -1,57 +1,74 @@
-import { mergeMultiStyle, type ComponentMultiStyle } from "@yamada-ui/core"
+import type { ComponentMultiStyle } from "@yamada-ui/core"
+import { mergeMultiStyle } from "@yamada-ui/core"
 import { LineChart } from "./line-chart"
 
-export const RadarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
-  baseStyle: {
-    radar: {},
-    dimRadar: {
-      fillOpacity: 0.3,
-      strokeOpacity: 0.3,
-    },
-    polarGrid: {
-      stroke: ["blackAlpha.400", "whiteAlpha.400"],
-      strokeWidth: 1,
-    },
-    polarAngleAxis: {},
-    polarAngleAxisTick: {
-      "& > text": {
-        fill: ["blackAlpha.700", "whiteAlpha.600"],
-        fontSize: "xs",
+export const RadarChart: ComponentMultiStyle<"RadarChart"> = mergeMultiStyle(
+  LineChart,
+  {
+    baseStyle: {
+      radar: {},
+      dimRadar: {
+        fillOpacity: 0.3,
+        strokeOpacity: 0.3,
       },
-    },
-    polarRadiusAxis: {
-      "& > line": {
+      polarGrid: {
         stroke: ["blackAlpha.400", "whiteAlpha.400"],
+        strokeWidth: 1,
       },
-    },
-    polarRadiusAxisTick: {
-      "& > text": {
-        fill: ["blackAlpha.700", "whiteAlpha.600"],
-        fontSize: "xs",
+      polarAngleAxis: {},
+      polarAngleAxisTick: {
+        "& > text": {
+          fill: ["blackAlpha.700", "whiteAlpha.600"],
+          fontSize: "xs",
+        },
       },
-    },
-  },
+      polarRadiusAxis: {
+        "& > line": {
+          stroke: ["blackAlpha.400", "whiteAlpha.400"],
+          strokeWidth: 1,
+        },
+        polarAngleAxis: {},
+        polarAngleAxisTick: {
+          "& > text": {
+            fill: ["blackAlpha.700", "whiteAlpha.600"],
+            fontSize: "xs",
+          },
+        },
+        polarRadiusAxis: {
+          "& > line": {
+            stroke: ["blackAlpha.400", "whiteAlpha.400"],
+          },
+        },
+        polarRadiusAxisTick: {
+          "& > text": {
+            fill: ["blackAlpha.700", "whiteAlpha.600"],
+            fontSize: "xs",
+          },
+        },
+      },
 
-  sizes: {
-    sm: {
-      container: {
-        w: "full",
-      },
-    },
-    md: {
-      container: {
-        w: "full",
-      },
-    },
-    lg: {
-      container: {
-        w: "full",
-      },
-    },
-    full: {
-      container: {
-        w: "full",
+      sizes: {
+        sm: {
+          container: {
+            w: "full",
+          },
+        },
+        md: {
+          container: {
+            w: "full",
+          },
+        },
+        lg: {
+          container: {
+            w: "full",
+          },
+        },
+        full: {
+          container: {
+            w: "full",
+          },
+        },
       },
     },
   },
-})({ omit: ["line", "grid"] })
+)({ omit: ["line", "grid"] })

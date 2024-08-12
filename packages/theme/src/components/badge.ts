@@ -8,7 +8,7 @@ import {
   shadeColor,
 } from "@yamada-ui/utils"
 
-export const Badge: ComponentStyle = {
+export const Badge: ComponentStyle<"Badge"> = {
   baseStyle: {
     display: "inline-block",
     whiteSpace: "nowrap",

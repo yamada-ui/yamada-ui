@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { isGray, shadeColor } from "@yamada-ui/utils"
 
-export const Switch: ComponentMultiStyle = {
+export const Switch: ComponentMultiStyle<"Switch"> = {
   baseStyle: {
     container: {
       cursor: "pointer",

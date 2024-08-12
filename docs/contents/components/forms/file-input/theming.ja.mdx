@@ -19,5 +19,6 @@ tab: テーマ
 :::
 
 ```ts
-export const FileInput: ComponentMultiStyle = mergeMultiStyle(Input)()
+export const FileInput: ComponentMultiStyle<"FileInput"> =
+  mergeMultiStyle(Input)()
 ```

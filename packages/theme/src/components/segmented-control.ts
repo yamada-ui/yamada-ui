@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { isAccessible, isGray } from "@yamada-ui/utils"
 
-export const SegmentedControl: ComponentMultiStyle = {
+export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
   baseStyle: {
     container: {
       display: "inline-flex",

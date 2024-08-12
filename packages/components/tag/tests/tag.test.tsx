@@ -1,6 +1,5 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
 import { CheckIcon } from "@yamada-ui/icon"
+import { Plus } from "@yamada-ui/lucide"
 import { render, a11y } from "@yamada-ui/test"
 import { Tag } from "../src"
 
@@ -31,7 +30,7 @@ describe("<Tag />", () => {
 
   test("applies styles `gap` correctly", async () => {
     const { getByTestId } = render(
-      <Tag data-testid="tag" startIcon={<Icon icon={faPlus} />}>
+      <Tag data-testid="tag" startIcon={<Plus />}>
         Gap
       </Tag>,
     )

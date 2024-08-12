@@ -98,14 +98,14 @@ return (
 )
 ```
 
-### `useMotionAnimationFrame`を使う
+### `useAnimationFrame`を使う
 
-`useMotionAnimationFrame`は、要素のアニメーションフレームごとに1回コールバックを実行します。コールバックは、**コールバックが最初に呼び出されてからの合計時間**と**最後のアニメーションフレームからの合計時間**を取得することができます。
+`useAnimationFrame`は、要素のアニメーションフレームごとに1回コールバックを実行します。コールバックは、**コールバックが最初に呼び出されてからの合計時間**と**最後のアニメーションフレームからの合計時間**を取得することができます。
 
 ```tsx functional=true
 const containerRef = useRef<HTMLDivElement>(null)
 
-useMotionAnimationFrame((time, delta) => {
+useAnimationFrame((time, delta) => {
   const rotate = Math.sin(time / 10000) * 200
   const y = (1 + Math.sin(time / 1000)) * -50
 
@@ -466,7 +466,7 @@ return (
           bg="primary"
           color="white"
         >
-          Abled to meet me!
+          You found me!
         </Motion>
 
         <Motion

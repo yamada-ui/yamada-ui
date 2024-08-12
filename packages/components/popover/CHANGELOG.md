@@ -1,5 +1,26 @@
 # @yamada-ui/popover
 
+## 1.2.10
+
+### Patch Changes
+
+- [#2397](https://github.com/yamada-ui/yamada-ui/pull/2397) [`8640407`](https://github.com/yamada-ui/yamada-ui/commit/8640407a72480dcbcbd62a75455ded0548696b9e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the type definition of `MotionProps`'s `children` was incorrect.
+
+- Updated dependencies [[`6390a78`](https://github.com/yamada-ui/yamada-ui/commit/6390a78330ff35419720507ca8b6e537fca190e6), [`8640407`](https://github.com/yamada-ui/yamada-ui/commit/8640407a72480dcbcbd62a75455ded0548696b9e), [`a1beb62`](https://github.com/yamada-ui/yamada-ui/commit/a1beb62b13ab70296d4fc820efb006df78fc2d43), [`2e58d32`](https://github.com/yamada-ui/yamada-ui/commit/2e58d3242d406afea151a43d1010b3084c211034), [`0d05ec4`](https://github.com/yamada-ui/yamada-ui/commit/0d05ec40404d5ef661ec8d80d38bef0ed36910e0), [`cb7eece`](https://github.com/yamada-ui/yamada-ui/commit/cb7eece896497fafa11b9c56d2240c769ddf1aed)]:
+  - @yamada-ui/core@1.12.0
+  - @yamada-ui/motion@2.1.2
+  - @yamada-ui/close-button@1.0.37
+  - @yamada-ui/transitions@1.1.2
+  - @yamada-ui/use-animation@1.0.34
+  - @yamada-ui/use-popper@1.0.34
+
+## 1.2.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/close-button@1.0.36
+
 ## 1.2.8
 
 ### Patch Changes

@@ -4,6 +4,7 @@ description: "`Editable`は、インラインで編集可能なテキスト入�
 package_name: "@yamada-ui/editable"
 with_description: true
 tab: テーマ
+order: 2
 ---
 
 ## テーマ
@@ -15,7 +16,7 @@ tab: テーマ
 :::
 
 ```ts
-export const Editable: ComponentMultiStyle = {
+export const Editable: ComponentMultiStyle<"Editable"> = {
   baseStyle: {
     container: {
       w: "full",

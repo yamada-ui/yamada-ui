@@ -4,6 +4,7 @@ description: "`Editable` is a component used to obtain inline editable text inpu
 package_name: "@yamada-ui/editable"
 with_description: true
 tab: Theming
+order: 2
 ---
 
 ## Theming
@@ -15,7 +16,7 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const Editable: ComponentMultiStyle = {
+export const Editable: ComponentMultiStyle<"Editable"> = {
   baseStyle: {
     container: {
       w: "full",

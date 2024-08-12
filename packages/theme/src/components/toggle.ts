@@ -7,7 +7,7 @@ import {
   transparentizeColor,
 } from "@yamada-ui/utils"
 
-export const Toggle: ComponentStyle = {
+export const Toggle: ComponentStyle<"Toggle"> = {
   baseStyle: {
     display: "inline-flex",
     alignItems: "center",

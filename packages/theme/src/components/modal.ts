@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Modal: ComponentMultiStyle = {
+export const Modal: ComponentMultiStyle<"Modal"> = {
   baseStyle: {
     container: {
       position: "relative",

@@ -98,14 +98,14 @@ return (
 )
 ```
 
-### Usage of `useMotionAnimationFrame`
+### Usage of `useAnimationFrame`
 
-`useMotionAnimationFrame` executes a callback once for each animation frame of the element. The callback can get the **total time since the callback was first called** and the **total time from the last animation frame**.
+`useAnimationFrame` executes a callback once for each animation frame of the element. The callback can get the **total time since the callback was first called** and the **total time from the last animation frame**.
 
 ```tsx functional=true
 const containerRef = useRef<HTMLDivElement>(null)
 
-useMotionAnimationFrame((time, delta) => {
+useAnimationFrame((time, delta) => {
   const rotate = Math.sin(time / 10000) * 200
   const y = (1 + Math.sin(time / 1000)) * -50
 
@@ -466,7 +466,7 @@ return (
           bg="primary"
           color="white"
         >
-          Abled to meet me!
+          You found me!
         </Motion>
 
         <Motion

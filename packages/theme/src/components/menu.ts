@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Menu: ComponentMultiStyle = {
+export const Menu: ComponentMultiStyle<"Menu"> = {
   baseStyle: {
     button: {
       display: "inline-flex",

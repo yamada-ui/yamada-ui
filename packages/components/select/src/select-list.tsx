@@ -1,11 +1,12 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { forwardRef } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
+import type { PopoverContentProps } from "@yamada-ui/popover"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
 import { useSelectContext, useSelectList } from "./use-select"
 
-export type SelectListProps = MotionProps<"ul">
+export type SelectListProps = Omit<MotionProps<"ul">, "children">
 
 export const SelectList = forwardRef<SelectListProps, "ul">(
   ({ className, w, width, minW, minWidth, ...rest }, ref) => {
@@ -13,22 +14,21 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
 
     const { getListProps } = useSelectList()
 
-    w =
-      w ?? width ?? ((styles.list?.w ?? styles.list?.width) as CSSUIProps["w"])
-    minW =
-      minW ??
-      minWidth ??
-      ((styles.list?.minW ?? styles.list?.minWidth) as CSSUIProps["minW"])
+    width ??= w
+    width ??= (styles.list?.width ?? styles.list?.w) as CSSUIProps["width"]
+    minWidth ??= minW
+    minWidth ??= (styles.list?.minWidth ??
+      styles.list?.minW) as CSSUIProps["minWidth"]
 
-    const css: CSSUIObject = { ...styles.list }
+    const css: CSSUIObject = { ...styles.list, width, minWidth }
 
     return (
       <PopoverContent
         className={cx("ui-select__list", className)}
-        w={w}
-        minW={minW}
+        width={width}
+        minWidth={minWidth}
         __css={css}
-        {...getListProps(rest, ref)}
+        {...(getListProps(rest, ref) as PopoverContentProps)}
       />
     )
   },

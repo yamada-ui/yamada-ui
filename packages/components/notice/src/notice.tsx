@@ -334,9 +334,15 @@ const Notice: FC<NoticeProps> = ({
   title,
   description,
   isClosable,
+  closeStrategy = "button",
   className,
   onClose,
 }) => {
+  const isButtonClosable =
+    isClosable && (closeStrategy === "button" || closeStrategy === "both")
+  const isElementClosable =
+    isClosable && (closeStrategy === "element" || closeStrategy === "both")
+
   return (
     <Alert
       status={status}
@@ -345,7 +351,8 @@ const Notice: FC<NoticeProps> = ({
       alignItems="start"
       boxShadow="fallback(lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05))"
       className={cx("ui-notice", className)}
-      pe={isClosable ? 8 : undefined}
+      pe={isButtonClosable ? 8 : undefined}
+      onClick={isElementClosable ? onClose : undefined}
     >
       <AlertIcon
         variant={icon?.variant}
@@ -368,11 +375,15 @@ const Notice: FC<NoticeProps> = ({
         ) : null}
       </ui.div>
 
-      {isClosable ? (
+      {isButtonClosable ? (
         <CloseButton
           className="ui-notice__close-button"
           size="sm"
-          onClick={onClose}
+          onClick={(ev) => {
+            ev.stopPropagation()
+
+            onClose?.()
+          }}
           position="absolute"
           top={2}
           right={2}

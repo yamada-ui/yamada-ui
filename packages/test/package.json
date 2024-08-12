@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/test",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "description": "Yamada UI test",
   "keywords": [],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
@@ -21,7 +21,6 @@
     "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "axe-core": "^4.9.1",
     "vitest-matchmedia-mock": "^1.0.6"
   },
   "devDependencies": {

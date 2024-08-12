@@ -1,7 +1,8 @@
-import { mergeStyle, type ComponentStyle } from "@yamada-ui/core"
+import type { ComponentStyle } from "@yamada-ui/core"
+import { mergeStyle } from "@yamada-ui/core"
 import { Button } from "./button"
 
-export const CloseButton: ComponentStyle = mergeStyle(Button, {
+export const CloseButton: ComponentStyle<"CloseButton"> = mergeStyle(Button, {
   baseStyle: {
     position: "relative",
     overflow: "hidden",

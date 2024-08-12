@@ -9,7 +9,7 @@ import {
   isAccessible,
 } from "@yamada-ui/utils"
 
-export const Button: ComponentStyle = {
+export const Button: ComponentStyle<"Button"> = {
   baseStyle: {
     display: "inline-flex",
     alignItems: "center",

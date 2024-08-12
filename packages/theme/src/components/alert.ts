@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { shadeColor, tintColor } from "@yamada-ui/utils"
 
-export const Alert: ComponentMultiStyle = {
+export const Alert: ComponentMultiStyle<"Alert"> = {
   baseStyle: {
     container: {
       w: "100%",

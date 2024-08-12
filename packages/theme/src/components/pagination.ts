@@ -1,7 +1,7 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 import { transparentizeColor, isGray, isAccessible } from "@yamada-ui/utils"
 
-export const Pagination: ComponentMultiStyle = {
+export const Pagination: ComponentMultiStyle<"Pagination"> = {
   baseStyle: {
     container: {
       display: "flex",

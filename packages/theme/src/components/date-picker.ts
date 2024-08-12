@@ -3,7 +3,7 @@ import { mergeMultiStyle } from "@yamada-ui/core"
 import { Input } from "./input"
 import { MultiSelect } from "./multi-select"
 
-export const DatePicker: ComponentMultiStyle = mergeMultiStyle(
+export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
   Input,
   MultiSelect,
   {

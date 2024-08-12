@@ -9,8 +9,14 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { cx, dataAttr, mergeRefs, splitObject } from "@yamada-ui/utils"
-import type { RefAttributes } from "react"
+import {
+  cx,
+  dataAttr,
+  mergeRefs,
+  runIfFunc,
+  splitObject,
+} from "@yamada-ui/utils"
+import type { FC, ReactNode, RefAttributes } from "react"
 import { Calendar } from "./calendar"
 import type { DatePickerIconProps } from "./date-picker"
 import { DatePickerClearIcon, DatePickerIcon } from "./date-picker"
@@ -44,6 +50,10 @@ type RangeDatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker field element.
+   */
+  fieldProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
    * Props for date picker start input element.
    */
   startInputProps?: HTMLUIProps<"input">
@@ -66,6 +76,7 @@ type RangeDatePickerOptions = {
    *
    */
   portalProps?: Omit<PortalProps, "children">
+  children?: ReactNode | FC<{ value: [Date?, Date?]; onClose: () => void }>
 }
 
 export type RangeDatePickerProps = ThemeProps<"DatePicker"> &
@@ -85,6 +96,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
     )
     let {
       className,
+      children,
       isClearable = true,
       separator,
       color,
@@ -93,6 +105,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       minH,
       minHeight,
       containerProps,
+      fieldProps,
       startInputProps,
       endInputProps,
       iconProps,
@@ -109,6 +122,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       getStartInputProps,
       getEndInputProps,
       getIconProps,
+      onClose,
       value,
       id,
     } = useRangeDatePicker(computedProps)
@@ -138,7 +152,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
               <RangeDatePickerField
                 separator={separator}
                 value={value}
-                {...getFieldProps({ h, minH })}
+                {...getFieldProps({ h, minH, ...fieldProps })}
                 startInputProps={getStartInputProps(startInputProps, ref)}
                 endInputProps={getEndInputProps(endInputProps)}
               />
@@ -166,6 +180,8 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
                   className="ui-range-date-picker__calendar"
                   {...getCalendarProps()}
                 />
+
+                {runIfFunc(children, { value, onClose })}
               </PopoverContent>
             </Portal>
           </ui.div>

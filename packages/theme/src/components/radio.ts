@@ -1,6 +1,6 @@
 import type { ComponentMultiStyle } from "@yamada-ui/core"
 
-export const Radio: ComponentMultiStyle = {
+export const Radio: ComponentMultiStyle<"Radio"> = {
   baseStyle: {
     container: {
       cursor: "pointer",

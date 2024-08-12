@@ -5,7 +5,7 @@
   "engines": {
     "node": "20"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.6.0+sha256.dae0f7e822c56b20979bb5965e3b73b8bdabb6b8b8ef121da6d857508599ca35",
   "license": "MIT",
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
@@ -57,6 +57,7 @@
     "docs:format": "pnpm --prefix docs format",
     "docs:format:check": "pnpm --prefix docs format:check",
     "docs:typecheck": "pnpm --prefix docs typecheck",
+    "docs:test": "pnpm --prefix docs test",
     "docs:content": "pnpm --prefix docs gen:content",
     "docs:changelog": "pnpm --prefix docs gen:changelog",
     "docs:theme": "pnpm --prefix docs gen:theme",

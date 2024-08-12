@@ -33,7 +33,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <Bell size="2xl" />
+            <Bell fontSize="2xl" />
 
             <VStack gap="xs">
               <Text>Everything</Text>
@@ -48,7 +48,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <User size="2xl" />
+            <User fontSize="2xl" />
 
             <VStack gap="xs">
               <Text>Available</Text>
@@ -63,7 +63,7 @@ export const NotificationsCard = memo(() => {
             rounded="md"
             p="md"
           >
-            <EyeOff size="2xl" />
+            <EyeOff fontSize="2xl" />
 
             <VStack gap="xs">
               <Text>Ignoring</Text>

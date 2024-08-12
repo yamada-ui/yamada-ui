@@ -1,5 +1,6 @@
-import { Link } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { Link, Button, VStack, HStack, Text } from "@yamada-ui/react"
+import { a11y, render, screen, fireEvent, waitFor } from "@yamada-ui/test"
+import { useState, useRef } from "react"
 import { FileButton } from "../src"
 
 describe("<FileButton />", () => {
@@ -59,7 +60,7 @@ describe("<FileButton />", () => {
     expect(onClickMock).toHaveBeenCalledTimes(1)
   })
 
-  test("should not call onClick", async () => {
+  test("should not call onClick when disabled", async () => {
     const onClickMock = vi.fn()
 
     const { user } = render(
@@ -73,5 +74,115 @@ describe("<FileButton />", () => {
 
     await user.click(fileButton)
     expect(onClickMock).toHaveBeenCalledTimes(0)
+  })
+
+  test("should handle file selection correctly", async () => {
+    const handleFileChangeMock = vi.fn()
+
+    const TestComponent = () => {
+      const [files, setFiles] = useState<File[] | null>(null)
+
+      const handleFileChange = (newFiles: File[] | undefined) => {
+        setFiles(newFiles || null)
+        handleFileChangeMock(newFiles)
+      }
+
+      return (
+        <VStack>
+          <Text data-testid="file-count">
+            files: {files ? files.length : 0}
+          </Text>
+          <FileButton onChange={handleFileChange} multiple>
+            Upload
+          </FileButton>
+        </VStack>
+      )
+    }
+
+    render(<TestComponent />)
+
+    const uploadButton = await screen.findByRole("button", { name: /Upload/i })
+    const fileCount = screen.getByTestId("file-count")
+    const fileInput = uploadButton.previousSibling as HTMLInputElement
+
+    expect(fileCount).toHaveTextContent("files: 0")
+    expect(handleFileChangeMock).not.toHaveBeenCalled()
+
+    const file1 = new File(["test1"], "test1.txt", { type: "text/plain" })
+    fireEvent.change(fileInput, { target: { files: [file1] } })
+
+    await waitFor(() => {
+      expect(fileCount).toHaveTextContent("files: 1")
+      expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
+    })
+
+    const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
+    fireEvent.change(fileInput, { target: { files: [file1, file2] } })
+
+    await waitFor(() => {
+      expect(fileCount).toHaveTextContent("files: 2")
+      expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
+    })
+
+    fireEvent.change(fileInput, { target: { files: [] } })
+
+    await waitFor(() => {
+      expect(fileCount).toHaveTextContent("files: 0")
+      expect(handleFileChangeMock).toHaveBeenCalledWith([])
+    })
+
+    expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
+  })
+
+  test("should handle reset correctly", async () => {
+    const TestComponent = () => {
+      const [files, setFiles] = useState<File[] | null>(null)
+      const resetRef = useRef<() => void>(null)
+
+      const onReset = () => {
+        setFiles(null)
+        resetRef.current?.()
+      }
+
+      const handleFileChange = (newFiles: File[] | undefined) => {
+        setFiles(newFiles || null)
+      }
+
+      return (
+        <VStack>
+          <Text data-testid="file-count">
+            files: {files ? files.length : 0}
+          </Text>
+          <HStack>
+            <FileButton resetRef={resetRef} onChange={handleFileChange}>
+              Upload
+            </FileButton>
+            <Button onClick={onReset}>Reset</Button>
+          </HStack>
+        </VStack>
+      )
+    }
+
+    render(<TestComponent />)
+
+    const uploadButton = await screen.findByRole("button", { name: /Upload/i })
+    const resetButton = await screen.findByRole("button", { name: /Reset/i })
+    const fileCount = screen.getByTestId("file-count")
+
+    expect(fileCount).toHaveTextContent("files: 0")
+
+    const file = new File(["test"], "test.txt", { type: "text/plain" })
+    const fileInput = uploadButton.previousSibling as HTMLInputElement
+    fireEvent.change(fileInput, { target: { files: [file] } })
+
+    await waitFor(() => {
+      expect(fileCount).toHaveTextContent("files: 1")
+    })
+
+    await fireEvent.click(resetButton)
+
+    await waitFor(() => {
+      expect(fileCount).toHaveTextContent("files: 0")
+    })
   })
 })

@@ -1,4 +1,4 @@
-import { a11y, act, render, screen, waitFor } from "@yamada-ui/test"
+import { a11y, act, drag, render, screen, waitFor } from "@yamada-ui/test"
 import { useState } from "react"
 import type { ReorderGenerateItem } from "../src"
 import { Reorder, ReorderItem, ReorderTrigger } from "../src"
@@ -176,21 +176,7 @@ describe("<Reorder />", () => {
 
     const el = screen.getByText("Item 1")
 
-    await user.pointer([
-      {
-        target: el,
-        keys: "[MouseLeft>]",
-        coords: { x: 0, y: 0 },
-      },
-      ...Array(10)
-        .fill(0)
-        .map((_, i) => ({
-          coords: { x: 0, y: (i + 1) * 100 },
-        })),
-      {
-        keys: "[/MouseLeft]",
-      },
-    ])
+    await drag(user)({ target: el, coords: (i) => ({ x: 0, y: i * 100 }) })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])

@@ -123,7 +123,7 @@ const translateContent = async (
       codeBlocks,
       placeholders,
     )
-  } catch (e) {
+  } catch {
     await wait(3000)
 
     retry += 1

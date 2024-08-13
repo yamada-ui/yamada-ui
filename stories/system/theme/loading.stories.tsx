@@ -170,7 +170,7 @@ export const useCustomLoading = () => {
                   boxShadow: ["lg", "dark-lg"],
                 }}
               >
-                <Loading variant="dots" size="6xl" />
+                <Loading variant="dots" fontSize="6xl" />
 
                 <VStack align="center" mb="md" gap="sm">
                   <Text>Downloading files…</Text>

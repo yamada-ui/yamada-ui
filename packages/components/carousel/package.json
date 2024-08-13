@@ -53,12 +53,11 @@
     "@yamada-ui/use-token": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "embla-carousel-auto-scroll": "^8.1.7",
-    "embla-carousel-react": "^8.1.7"
+    "embla-carousel-react": "^8.1.8"
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "embla-carousel": "^8.1.7",
+    "embla-carousel": "^8.1.8",
     "react": "^18.3.1"
   },
   "peerDependencies": {

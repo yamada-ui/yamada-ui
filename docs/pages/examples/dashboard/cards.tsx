@@ -101,7 +101,7 @@ const Item: FC<ItemProps> = memo(
 
           <Spacer />
 
-          <Icon color="muted" size="2xl" {...iconProps} />
+          <Icon color="muted" fontSize="2xl" {...iconProps} />
         </CardHeader>
 
         <CardBody pt={{ base: "sm", sm: "xs" }}>

@@ -19,5 +19,6 @@ tab: テーマ
 :::
 
 ```ts
-export const MonthPicker: ComponentMultiStyle = mergeMultiStyle(DatePicker)()
+export const MonthPicker: ComponentMultiStyle<"MonthPicker"> =
+  mergeMultiStyle(DatePicker)()
 ```

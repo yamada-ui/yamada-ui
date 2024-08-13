@@ -1,6 +1,10 @@
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
-import { recursiveOctokit, type Event } from "utils/github"
+import {
+  getListEventsForTimeline,
+  recursiveOctokit,
+  type Event,
+} from "utils/github"
 import type { APIHandler } from "utils/next"
 import { DISCORD_REVIEW_COMMENT } from "./opened"
 
@@ -32,15 +36,13 @@ export const reviewRequestedRemoved: APIHandler = async ({
   if (!login)
     return res.status(400).send({ status: 400, message: "Invalid github id" })
 
-  const { data } = await recursiveOctokit(() =>
-    octokit.issues.listEventsForTimeline({
-      owner,
-      repo,
-      issue_number: number,
-    }),
-  )
+  const timeline = await getListEventsForTimeline({
+    owner,
+    repo,
+    issue_number: number,
+  })
 
-  const previousReviewers = data
+  const previousReviewers = timeline
     .map((timeline) => {
       if (timeline.event !== "review_requested") return
 

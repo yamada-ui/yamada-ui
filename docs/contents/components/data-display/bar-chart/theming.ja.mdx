@@ -19,12 +19,15 @@ tab: テーマ
 :::
 
 ```ts
-export const BarChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
-  baseStyle: {
-    bar: {},
-    activeBar: {},
-    background: { fill: "transparent" },
-    cursor: { strokeDasharray: "5 5" },
+export const BarChart: ComponentMultiStyle<"BarChart"> = mergeMultiStyle(
+  LineChart,
+  {
+    baseStyle: {
+      bar: {},
+      activeBar: {},
+      background: { fill: "transparent" },
+      cursor: { strokeDasharray: "5 5" },
+    },
   },
-})({ omit: ["dot", "activeDot"] })
+)({ omit: ["dot", "activeDot"] })
 ```

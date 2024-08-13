@@ -26,7 +26,7 @@ const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
           | null
 
         return themeScheme || initThemeScheme
-      } catch (e) {
+      } catch {
         return initThemeScheme
       }
     },
@@ -36,7 +36,7 @@ const createLocalStorage = (defaultStorageKey: string): ThemeSchemeManager => ({
     (storageKey = defaultStorageKey) => {
       try {
         localStorage.setItem(storageKey, String(themeScheme))
-      } catch (e) {}
+      } catch {}
     },
 })
 

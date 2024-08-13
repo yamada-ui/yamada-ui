@@ -5,6 +5,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
@@ -69,6 +70,10 @@ type MultiDatePickerOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for date picker container element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
+  /**
    * Props for date picker field element.
    */
   fieldProps?: Omit<HTMLUIProps<"div">, "children">
@@ -122,6 +127,7 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
       minH,
       minHeight,
       containerProps,
+      contentProps,
       fieldProps,
       inputProps,
       iconProps,
@@ -192,11 +198,13 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                as="div"
                 id={id}
                 role="dialog"
                 aria-modal="true"
-                className="ui-multi-date-picker__popover"
-                __css={{ ...styles.list }}
+                className="ui-multi-date-picker__content"
+                __css={{ ...styles.content }}
+                {...contentProps}
               >
                 <Calendar
                   className="ui-multi-date-picker__calendar"

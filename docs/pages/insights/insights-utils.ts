@@ -8,6 +8,7 @@ import type {
   UserInsight,
   UserInsightScore,
 } from "insights"
+import type { Locale } from "utils/i18n"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")
 
@@ -64,47 +65,48 @@ export const getSummarize = (minDate: Date, maxDate: Date) => {
   }
 }
 
-export const labelFormatter = (
-  value: string,
-  { summarize, end }: InsightPeriod,
-) => {
-  switch (summarize) {
-    case "day":
-      return dayjs(value).format("DD")
+export const labelFormatter =
+  (value: string, { summarize, end }: InsightPeriod) =>
+  (locale: Locale) => {
+    const date = dayjs(value)
 
-    case "week":
-      const weekEnd = dayjs(value).endOf("week").add(1, "d")
-      const isAfter = dayjs(weekEnd).isAfter(end)
+    switch (summarize) {
+      case "day":
+        return date.format(locale === "ja" ? "M月D日" : "MMMM D")
 
-      return `${dayjs(value).format("MM/DD")} - ${isAfter ? dayjs(end).format("MM/DD") : weekEnd.format("MM/DD")}`
+      case "week":
+        const weekEnd = date.endOf("week").add(1, "d")
+        const isAfter = dayjs(weekEnd).isAfter(end)
+        const template = locale === "ja" ? "M月D日" : "MMM D"
 
-    case "month":
-      return dayjs(value).format("MM")
-  }
-}
+        return `${date.format(template)} - ${isAfter ? dayjs(end).format(template) : weekEnd.format(template)}`
 
-export const xAxisTickFormatter = (
-  period: string,
-  { summarize }: InsightPeriod,
-) => {
-  let template: string
-
-  switch (summarize) {
-    case "day":
-      template = "DD"
-      break
-
-    case "week":
-      template = "MM/DD"
-      break
-
-    case "month":
-      template = "MM"
-      break
+      case "month":
+        return date.format(locale === "ja" ? "M月" : "MMMM")
+    }
   }
 
-  return dayjs(period).format(template)
-}
+export const xAxisTickFormatter =
+  (period: string, { summarize }: InsightPeriod) =>
+  (locale: Locale) => {
+    let template: string
+
+    switch (summarize) {
+      case "day":
+        template = "D"
+        break
+
+      case "week":
+        template = locale == "ja" ? "M月D日" : "MMM D"
+        break
+
+      case "month":
+        template = locale == "ja" ? "M" : "MMM"
+        break
+    }
+
+    return dayjs(period).format(template)
+  }
 
 export const DEFAULT_SCORE: UserInsightScore = {
   comments: 0,

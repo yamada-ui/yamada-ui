@@ -1,4 +1,5 @@
 import {
+  Box,
   Center,
   forwardRef,
   Heading,
@@ -14,11 +15,14 @@ import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { useInsights } from "./insights-provider"
 import { useI18n } from "contexts"
 import { useRouter } from "next/router"
-import type { InsightPeriodSuggest } from "./insights-utils"
+import type { InsightPeriodSuggest, InsightUserSuggest } from "./insights-utils"
 import {
   INSIGHT_PERIOD_SUGGEST,
   INSIGHT_USER_IDS,
   INSIGHT_MIN_DATE,
+  INSIGHT_USER_SUGGEST,
+  INSIGHT_MEMBERS_IDS,
+  INSIGHT_MAINTAINERS_IDS,
 } from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import type { ManipulateType } from "dayjs"
@@ -88,6 +92,20 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
     [router, setUsers],
   )
 
+  const onSuggestChange = useCallback(
+    (type: InsightUserSuggest) => {
+      if (type === "all") {
+        onChange(INSIGHT_USER_IDS)
+      } else if (type === "maintainers") {
+        onChange(INSIGHT_MAINTAINERS_IDS)
+      } else if (type === "members") {
+        onChange(INSIGHT_MEMBERS_IDS)
+      }
+      onClose()
+    },
+    [onChange, onClose],
+  )
+
   const items = useMemo(
     () => INSIGHT_USER_IDS.map((value) => ({ label: value, value })),
     [],
@@ -117,6 +135,39 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
           </Text>
         )
       }}
+      footer={
+        <Box px="sm">
+          <VStack
+            py="sm"
+            gap="sm"
+            borderTopWidth="1px"
+            borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          >
+            {INSIGHT_USER_SUGGEST.map((value) => {
+              return (
+                <Center
+                  key={value}
+                  as="button"
+                  type="button"
+                  w="full"
+                  h="8"
+                  fontSize="sm"
+                  bg={["blackAlpha.100", "whiteAlpha.100"]}
+                  _hover={{
+                    bg: ["blackAlpha.200", "whiteAlpha.200"],
+                  }}
+                  rounded="md"
+                  transitionProperty="background"
+                  transitionDuration="slower"
+                  onClick={() => onSuggestChange(value)}
+                >
+                  {t(`insights.user.${value}`)}
+                </Center>
+              )
+            })}
+          </VStack>
+        </Box>
+      }
     />
   )
 })
@@ -226,7 +277,12 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       onOpen={onOpen}
       onClose={onClose}
     >
-      <VStack mt="sm" gap="sm">
+      <VStack
+        pt="sm"
+        gap="sm"
+        borderTopWidth="1px"
+        borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+      >
         {INSIGHT_PERIOD_SUGGEST.map((value) => {
           return (
             <Center

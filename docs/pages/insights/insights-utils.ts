@@ -19,6 +19,12 @@ export const INSIGHT_USERS = Object.fromEntries(
 )
 
 export const INSIGHT_USER_IDS = Object.keys(INSIGHT_USERS)
+export const INSIGHT_MAINTAINERS_IDS = CONSTANT.MAINTAINERS.map(
+  ({ github }) => github.id,
+)
+export const INSIGHT_MEMBERS_IDS = CONSTANT.MEMBERS.map(
+  ({ github }) => github.id,
+)
 
 export const INSIGHT_PERIOD_SUGGEST = [
   "7d",
@@ -29,6 +35,7 @@ export const INSIGHT_PERIOD_SUGGEST = [
   "6M",
   "1y",
 ] as const
+export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
 export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
   pullRequests: [`blue.500`, `blue.400`],
@@ -38,6 +45,7 @@ export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
 }
 
 export type InsightPeriodSuggest = (typeof INSIGHT_PERIOD_SUGGEST)[number]
+export type InsightUserSuggest = (typeof INSIGHT_USER_SUGGEST)[number]
 
 export type InsightUser = (typeof INSIGHT_USERS)[number]
 

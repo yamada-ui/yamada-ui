@@ -143,11 +143,10 @@ export type PolarRadiusAxisProps = Merge<
   Recharts.PolarRadiusAxisProps
 >
 export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
+export type ChartTooltipProps = Recharts.TooltipProps<
+  number | string | Array<number | string>,
+  number | string
+>
 export type ChartTooltip =
   | ReactElement
-  | ((
-      props: Recharts.TooltipProps<
-        number | string | Array<number | string>,
-        number | string
-      >,
-    ) => ReactNode)
+  | ((props: ChartTooltipProps) => ReactNode)

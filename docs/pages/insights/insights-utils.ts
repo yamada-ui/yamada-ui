@@ -173,9 +173,25 @@ export const randomIndex = (value: string, max: number) => {
 }
 
 export const getTrend = (currentTotal: number, prevTotal: number) => {
-  if (currentTotal === prevTotal) return 0
+  if (currentTotal === prevTotal) return { value: "0", colorScheme: "neutral" }
 
   if (prevTotal === 0) return undefined
 
-  return Math.round((currentTotal / prevTotal) * 100 - 100)
+  let trend = Math.round((currentTotal / prevTotal) * 100 - 100)
+
+  if (trend >= 1000) {
+    trend /= 1000
+
+    if (trend >= 0) {
+      return { value: `+${trend}K`, colorScheme: "success" }
+    } else {
+      return { value: `${trend}K`, colorScheme: "danger" }
+    }
+  } else {
+    if (trend >= 0) {
+      return { value: `+${trend}`, colorScheme: "success" }
+    } else {
+      return { value: `${trend}`, colorScheme: "danger" }
+    }
+  }
 }

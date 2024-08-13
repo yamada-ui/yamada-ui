@@ -6,7 +6,7 @@ import {
   Grid,
   Heading,
   HStack,
-  isNumber,
+  isUndefined,
   Link,
   Skeleton,
   Tag,
@@ -144,18 +144,9 @@ export const UserChart = memo(
                     count={!isLoading ? currentScore.total : null}
                   />
 
-                  {isNumber(trend) ? (
-                    <Tag
-                      size="sm"
-                      colorScheme={
-                        trend === 0
-                          ? "neutral"
-                          : trend < 0
-                            ? "danger"
-                            : "success"
-                      }
-                    >
-                      {trend}%
+                  {!isUndefined(trend) ? (
+                    <Tag size="sm" colorScheme={trend.colorScheme}>
+                      {trend.value}%
                     </Tag>
                   ) : null}
                 </HStack>

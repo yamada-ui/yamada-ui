@@ -52,7 +52,7 @@ export const UserCharts = memo(
           })
         })
 
-        Object.entries(prevInsights ?? {}).forEach(([period, data]) => {
+        Object.entries(prevInsights ?? {}).forEach(([, data]) => {
           Object.entries(data).forEach(([user, data]) => {
             if (!users.includes(user)) return
 
@@ -66,8 +66,6 @@ export const UserCharts = memo(
             result[user].prevScore.issues += issues
             result[user].prevScore.pullRequests += pullRequests
             result[user].prevScore.approved += approved
-
-            result[user].timeline = { ...result[user].timeline, [period]: data }
           })
         })
 

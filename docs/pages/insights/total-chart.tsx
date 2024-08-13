@@ -10,7 +10,7 @@ import {
   Grid,
   HStack,
   IconButton,
-  isNumber,
+  isUndefined,
   Skeleton,
   Tag,
   Text,
@@ -97,14 +97,8 @@ export const TotalChart = memo(
                 count={!isLoading ? currentScore.total : null}
               />
 
-              {isNumber(trend) ? (
-                <Tag
-                  colorScheme={
-                    trend === 0 ? "neutral" : trend < 0 ? "danger" : "success"
-                  }
-                >
-                  {trend}%
-                </Tag>
+              {!isUndefined(trend) ? (
+                <Tag colorScheme={trend.colorScheme}>{trend.value}%</Tag>
               ) : null}
             </HStack>
           </Skeleton>
@@ -112,7 +106,7 @@ export const TotalChart = memo(
           <HStack>
             <Grid
               display={{ base: "grid", sm: "none" }}
-              templateColumns={{ base: "repeat(4, 1fr)" }}
+              templateColumns="repeat(4, 1fr)"
               gapX="md"
               gapY="xs"
             >

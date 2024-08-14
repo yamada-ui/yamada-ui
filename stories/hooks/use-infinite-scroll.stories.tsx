@@ -38,7 +38,7 @@ export const basic = () => {
         .map((_, index) => (
           <Card key={index}>
             <CardHeader>
-              <Heading fontSize="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
             </CardHeader>
 
             <CardBody>
@@ -90,7 +90,7 @@ export const withRoot = () => {
           .map((_, index) => (
             <Card key={index}>
               <CardHeader>
-                <Heading fontSize="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+                <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
               </CardHeader>
 
               <CardBody>
@@ -134,7 +134,7 @@ export const withRootMargin = () => {
         .map((_, index) => (
           <Card key={index}>
             <CardHeader>
-              <Heading fontSize="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
             </CardHeader>
 
             <CardBody>
@@ -175,7 +175,7 @@ export const withThreshold = () => {
         .map((_, index) => (
           <Card key={index}>
             <CardHeader>
-              <Heading fontSize="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
             </CardHeader>
 
             <CardBody>
@@ -216,7 +216,7 @@ export const withInitialLoad = () => {
         .map((_, index) => (
           <Card key={index}>
             <CardHeader>
-              <Heading fontSize="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
             </CardHeader>
 
             <CardBody>
@@ -263,7 +263,7 @@ export const isReverse = () => {
         .map((_, index) => (
           <Card key={index}>
             <CardHeader>
-              <Heading fontSize="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
             </CardHeader>
 
             <CardBody>

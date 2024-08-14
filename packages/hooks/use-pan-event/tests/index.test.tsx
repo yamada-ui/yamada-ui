@@ -1,4 +1,4 @@
-import { render, waitFor } from "@yamada-ui/test"
+import { drag, render, waitFor } from "@yamada-ui/test"
 import type { FC } from "react"
 import { useRef } from "react"
 import type { UsePanEventProps } from "../src"
@@ -40,22 +40,6 @@ describe("usePanEvent", () => {
     return <div ref={ref} data-testid="el" />
   }
 
-  const pointerInput = (target: HTMLElement) => [
-    {
-      target,
-      keys: "[MouseLeft>]",
-      coords: { x: 0, y: 0 },
-    },
-    ...Array(10)
-      .fill(0)
-      .map((_, i) => ({
-        coords: { x: (i + 1) * 10, y: (i + 1) * 10 },
-      })),
-    {
-      keys: "[/MouseLeft]",
-    },
-  ]
-
   test("should start pan session on pointerdown", async () => {
     const onSessionStart = vi.fn()
 
@@ -90,7 +74,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await user.pointer(pointerInput(el))
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onStart).toHaveBeenCalledWith(
@@ -112,7 +96,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await user.pointer(pointerInput(el))
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onMove).toHaveBeenCalledWith(
@@ -134,7 +118,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await user.pointer(pointerInput(el))
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onEnd).toHaveBeenCalledWith(
@@ -154,7 +138,7 @@ describe("usePanEvent", () => {
 
     const el = getByTestId("el")
 
-    await user.pointer(pointerInput(el))
+    await drag(user)({ target: el, coords: (i) => ({ x: i * 10, y: i * 10 }) })
 
     await waitFor(() =>
       expect(onSessionEnd).toHaveBeenCalledWith(

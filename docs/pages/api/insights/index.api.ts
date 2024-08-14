@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { isInRange } from "@yamada-ui/calendar"
 import dayjs from "dayjs"
 import type { Insights, UserInsights, InsightSummarize } from "insights"
+import { CONSTANT } from "constant"
 
 const getData = async (): Promise<Insights> => {
   const res = await fetch(
@@ -12,6 +13,10 @@ const getData = async (): Promise<Insights> => {
 
   return res.json()
 }
+
+const collaboratorIds = [...CONSTANT.MAINTAINERS, ...CONSTANT.MEMBERS].map(
+  ({ github }) => github.id,
+)
 
 const getSummarizeRangeDates = (
   minDate: Date,
@@ -76,45 +81,47 @@ const getSummarizeInsights = (
       Object.entries(data).forEach(([date, users]) => {
         if (!isInRange(new Date(date), startDate, endDate)) return
 
-        Object.entries(users).forEach(([user, data]) => {
+        collaboratorIds.forEach((id) => {
+          const data = users[id]
+
           if (!data) {
-            if (!summarizedInsights[user]) summarizedInsights[user] = null
+            if (!summarizedInsights[id]) summarizedInsights[id] = null
           } else {
-            if (!summarizedInsights[user]) summarizedInsights[user] = {}
+            if (!summarizedInsights[id]) summarizedInsights[id] = {}
 
             const { comments, reviews, issues, pullRequests, approved } = data
 
             if (comments) {
-              summarizedInsights[user].comments = [
-                ...(summarizedInsights[user].comments ?? []),
+              summarizedInsights[id].comments = [
+                ...(summarizedInsights[id].comments ?? []),
                 ...comments,
               ]
             }
 
             if (reviews) {
-              summarizedInsights[user].reviews = [
-                ...(summarizedInsights[user].reviews ?? []),
+              summarizedInsights[id].reviews = [
+                ...(summarizedInsights[id].reviews ?? []),
                 ...reviews,
               ]
             }
 
             if (issues) {
-              summarizedInsights[user].issues = [
-                ...(summarizedInsights[user].issues ?? []),
+              summarizedInsights[id].issues = [
+                ...(summarizedInsights[id].issues ?? []),
                 ...issues,
               ]
             }
 
             if (pullRequests) {
-              summarizedInsights[user].pullRequests = [
-                ...(summarizedInsights[user].pullRequests ?? []),
+              summarizedInsights[id].pullRequests = [
+                ...(summarizedInsights[id].pullRequests ?? []),
                 ...pullRequests,
               ]
             }
 
             if (approved) {
-              summarizedInsights[user].approved = [
-                ...(summarizedInsights[user].approved ?? []),
+              summarizedInsights[id].approved = [
+                ...(summarizedInsights[id].approved ?? []),
                 ...approved,
               ]
             }
@@ -129,13 +136,10 @@ const getSummarizeInsights = (
 
 const getInsights = (
   data: Insights,
-  start: string,
-  end: string,
+  minDate: Date,
+  maxDate: Date,
   summarize: InsightSummarize = "day",
 ) => {
-  const minDate = new Date(start)
-  const maxDate = new Date(end)
-
   const insights: Insights = Object.fromEntries(
     Object.entries(data).filter(([date]) =>
       isInRange(new Date(date), minDate, maxDate),
@@ -163,7 +167,7 @@ type RequestQuery = {
 type ResponseData = {
   status: number
   message?: string
-  data?: Insights
+  data?: { currentInsights: Insights; prevInsights: Insights }
 }
 
 const handler = async (
@@ -180,9 +184,19 @@ const handler = async (
 
     const data = await getData()
 
-    const insights = getInsights(data, start, end, summarize)
+    const minDate = new Date(start)
+    const maxDate = new Date(end)
+    const diff = dayjs(maxDate).diff(minDate, "day") + 1
 
-    res.status(200).json({ status: 200, data: insights })
+    const prevMinDate = dayjs(minDate).subtract(diff, "day").toDate()
+    const prevMaxDate = dayjs(maxDate).subtract(diff, "day").toDate()
+
+    const currentInsights = getInsights(data, minDate, maxDate, summarize)
+    const prevInsights = getInsights(data, prevMinDate, prevMaxDate, summarize)
+
+    res
+      .status(200)
+      .json({ status: 200, data: { currentInsights, prevInsights } })
   } catch (e) {
     if (e instanceof Error) {
       return res.status(400).send({ status: 400, message: e.message })

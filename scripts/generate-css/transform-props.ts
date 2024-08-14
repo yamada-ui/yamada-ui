@@ -153,7 +153,12 @@ export const transformProps: TransformProps = {
   ],
   content: ["&::before", "&::after"],
   bgClip: ["backgroundClip"],
-  gradient: ["backgroundImage"],
+  gradient: [
+    "backgroundImage",
+    "borderImageSource",
+    "listStyleImage",
+    "maskImage",
+  ],
   animation: ["animation"],
   transform: ["transform"],
   deg: ["rotate", "skewX", "skewY"],

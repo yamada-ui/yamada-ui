@@ -19,9 +19,12 @@ tab: テーマ
 :::
 
 ```ts
-export const AreaChart: ComponentMultiStyle = mergeMultiStyle(LineChart, {
-  baseStyle: {
-    area: {},
+export const AreaChart: ComponentMultiStyle<"AreaChart"> = mergeMultiStyle(
+  LineChart,
+  {
+    baseStyle: {
+      area: {},
+    },
   },
-})({ omit: ["line"] })
+)({ omit: ["line"] })
 ```

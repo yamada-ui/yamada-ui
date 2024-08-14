@@ -179,7 +179,10 @@ export const standardStyles: Configs = {
   borderImageOutset: true,
   borderImageRepeat: true,
   borderImageSlice: true,
-  borderImageSource: true,
+  borderImageSource: {
+    properties: "borderImageSource",
+    transform: transforms.gradient,
+  },
   borderImageWidth: {
     properties: "borderImageWidth",
     transform: transforms.px,
@@ -528,7 +531,10 @@ export const standardStyles: Configs = {
   },
   lineHeightStep: true,
   listStyle: true,
-  listStyleImage: true,
+  listStyleImage: {
+    properties: "listStyleImage",
+    transform: transforms.gradient,
+  },
   listStylePosition: true,
   listStyleType: true,
   margin: {
@@ -597,7 +603,7 @@ export const standardStyles: Configs = {
   maskBorderWidth: { properties: "maskBorderWidth", transform: transforms.px },
   maskClip: true,
   maskComposite: true,
-  maskImage: true,
+  maskImage: { properties: "maskImage", transform: transforms.gradient },
   maskMode: true,
   maskOrigin: true,
   maskPosition: true,
@@ -1249,7 +1255,7 @@ export const shorthandStyles: Configs = {
   insetStart: standardStyles.insetInlineStart,
   tracking: standardStyles.letterSpacing,
   leading: standardStyles.lineHeight,
-  listStyleImg: { properties: "listStyleImage" },
+  listStyleImg: standardStyles.listStyleImage,
   listStylePos: { properties: "listStylePosition" },
   m: standardStyles.margin,
   mb: standardStyles.marginBottom,

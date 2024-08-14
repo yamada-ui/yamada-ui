@@ -46,9 +46,8 @@ const customTheme = extendTheme({
     xs: "1rem",
     sm: "1.25rem",
     md: "1.5rem",
-    normal: "2rem",
-    lg: "2.5rem",
-    xl: "3rem",
+    lg: "1.75rem",
+    xl: "2rem",
   },
 })()
 
@@ -61,7 +60,7 @@ const App = () => {
 }
 ```
 
-This has changed the margins throughout the application.
+This has changed the font sizes throughout the application.
 
 :::note status=warning
 `extendTheme` creates a theme that inherits the [Default Theme](/styled-system/theming/default-theme). If you do not use `extendTheme`, it will become a completely new theme without inheriting the [Default Theme](/styled-system/theming/default-theme).
@@ -100,6 +99,17 @@ export const semantics: ThemeSemantics = {
     warning: "orange",
     danger: "red",
     link: "blue",
+  },
+  spaces: {
+    xs: "1",
+    sm: "2",
+    md: "4",
+    normal: "6",
+    lg: "8",
+    xl: "12",
+    "2xl": "16",
+    "3xl": "24",
+    "4xl": "32",
   },
 }
 ```

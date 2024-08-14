@@ -150,6 +150,9 @@ importers:
       '@yamada-ui/cli':
         specifier: workspace:*
         version: link:packages/cli
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:packages/core
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:packages/components/dropzone

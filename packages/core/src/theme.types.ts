@@ -665,14 +665,14 @@ export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 export type PropsTheme<T extends object = Dict> = T & {
   themeScheme: Theme["themeSchemes"]
   changeThemeScheme: ChangeThemeScheme
-  __config: ThemeConfig
+  __config: ThemeConfig | undefined
   __cssVars: Dict
   __cssMap: CSSMap
   __breakpoints: AnalyzeBreakpointsReturn
 }
 
 export type StyledTheme<T extends object = Dict> = T & {
-  __config: ThemeConfig
+  __config: ThemeConfig | undefined
   __cssVars: Dict
   __cssMap: CSSMap
   __breakpoints: AnalyzeBreakpointsReturn

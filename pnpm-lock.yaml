@@ -177,6 +177,9 @@ importers:
       '@yamada-ui/theme':
         specifier: workspace:*
         version: link:packages/theme
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:packages/utils
       axe-playwright:
         specifier: ^2.0.1
         version: 2.0.1(playwright@1.46.0)

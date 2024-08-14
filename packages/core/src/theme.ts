@@ -4,7 +4,7 @@ import {
   objectFromEntries,
   pickObject,
   omitObject,
-  tones,
+  TONES,
   isObject,
   runIfFunc,
   isFunction,
@@ -153,7 +153,7 @@ const createTokens = (
       if (token.startsWith("colorSchemes.")) {
         const [, semanticToken] = token.split(".")
 
-        tones.forEach((tone) => {
+        TONES.forEach((tone) => {
           const enhancedToken = { isSemantic: true, value: `${value}.${tone}` }
 
           prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])

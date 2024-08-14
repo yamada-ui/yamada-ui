@@ -2,6 +2,7 @@ import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import { type ThemeComponents } from "@yamada-ui/react"
 import { defaultTheme } from "@yamada-ui/theme"
+import { TONES } from "@yamada-ui/utils"
 import { format, resolveConfig } from "prettier"
 import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
@@ -107,21 +108,8 @@ const defaultColors = [
   "link",
 ]
 
-const tones = [
-  "50",
-  "100",
-  "200",
-  "300",
-  "400",
-  "500",
-  "600",
-  "700",
-  "800",
-  "900",
-]
-
 const isTone = (value: unknown): value is Record<string, string> =>
-  isObject(value) && tones.every((k) => isString(value[k]))
+  isObject(value) && TONES.every((k) => isString(value[k]))
 
 const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
 

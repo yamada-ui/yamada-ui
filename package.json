@@ -141,6 +141,7 @@
     "@yamada-ui/table": "workspace:*",
     "@yamada-ui/test": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
     "axe-playwright": "^2.0.1",
     "axios": "^1.7.3",
     "chalk": "^5.3.0",

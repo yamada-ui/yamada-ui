@@ -9941,13 +9941,13 @@
     }
   },
   {
-    "title": "useMotionAnimationFrameを使う",
+    "title": "useAnimationFrameを使う",
     "type": "fragment",
-    "slug": "/components/other/motion#usemotionanimationframeを使う",
+    "slug": "/components/other/motion#useanimationframeを使う",
     "hierarchy": {
       "lv1": "Motion",
       "lv2": "使い方",
-      "lv3": "useMotionAnimationFrameを使う"
+      "lv3": "useAnimationFrameを使う"
     }
   },
   {
@@ -13342,14 +13342,14 @@
     }
   },
   {
-    "title": "useMotionAnimationFrameを使う",
+    "title": "useAnimationFrameを使う",
     "type": "fragment",
-    "slug": "/styled-system/animation#usemotionanimationframeを使う",
+    "slug": "/styled-system/animation#useanimationframeを使う",
     "hierarchy": {
       "lv1": "アニメーション",
       "lv2": "Motion",
       "lv3": "アニメーション",
-      "lv4": "useMotionAnimationFrameを使う"
+      "lv4": "useAnimationFrameを使う"
     }
   },
   {

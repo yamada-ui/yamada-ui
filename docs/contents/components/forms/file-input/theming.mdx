@@ -19,5 +19,6 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const FileInput: ComponentMultiStyle = mergeMultiStyle(Input)()
+export const FileInput: ComponentMultiStyle<"FileInput"> =
+  mergeMultiStyle(Input)()
 ```

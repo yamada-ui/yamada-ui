@@ -65,7 +65,7 @@ describe("<SlideFade />", () => {
     const slideFade = await screen.findByText("SlideFade")
 
     expect(slideFade).toHaveStyle({
-      transform: "translateX(0px) translateY(8px)",
+      transform: "translateY(8px)",
     })
   })
 
@@ -85,7 +85,7 @@ describe("<SlideFade />", () => {
     const slideFade = await screen.findByText("SlideFade")
 
     expect(slideFade).toHaveStyle({
-      transform: "translateX(0px) translateY(10px)",
+      transform: "translateY(10px)",
     })
   })
 

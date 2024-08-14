@@ -60,6 +60,11 @@
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
     },
+    "fieldProps": {
+      "type": "Omit<SelectFieldProps, \"children\">",
+      "required": false,
+      "description": "Props for select field element."
+    },
     "flip": {
       "type": "boolean",
       "defaultValue": true,
@@ -244,7 +249,7 @@
     "clearIconProps": {
       "type": "SelectIconProps",
       "required": false,
-      "description": "Props for select clear icon element."
+      "description": "Props for multi select clear icon element."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -277,7 +282,7 @@
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
       "required": false,
-      "description": "Props for select container element."
+      "description": "Props for multi select container element."
     },
     "defaultIsOpen": {
       "type": "boolean",
@@ -305,6 +310,11 @@
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
     },
+    "fieldProps": {
+      "type": "Omit<MultiSelectFieldProps, \"children\">",
+      "required": false,
+      "description": "Props for multi select field element."
+    },
     "flip": {
       "type": "boolean",
       "defaultValue": true,
@@ -325,13 +335,13 @@
     "iconProps": {
       "type": "SelectIconProps",
       "required": false,
-      "description": "Props for select icon element."
+      "description": "Props for multi select icon element."
     },
     "isClearable": {
       "type": "boolean",
       "defaultValue": true,
       "required": false,
-      "description": "If `true`, display the select clear icon."
+      "description": "If `true`, display the multi select clear icon."
     },
     "isDisabled": {
       "type": "boolean",
@@ -382,7 +392,7 @@
     "listProps": {
       "type": "Omit<SelectListProps, \"children\">",
       "required": false,
-      "description": "Props for select list element."
+      "description": "Props for multi select list element."
     },
     "matchWidth": {
       "type": "boolean",

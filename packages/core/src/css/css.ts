@@ -1,6 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
-import { isArray, isObject, merge, runIfFunc } from "@yamada-ui/utils"
+import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
 import type { ConfigProps } from "../config"
+import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import { processSkipProperties, styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
@@ -69,6 +70,24 @@ const expandCSS =
     return computedCSS
   }
 
+const parseVar = (value: any, theme: StyledTheme) => {
+  if (isArray(value) || isObject(value)) {
+    return value
+  } else if (isString(value)) {
+    const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
+
+    return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
+      if (isObject(theme.__cssMap) && value in theme.__cssMap) {
+        return theme.__cssMap[value].ref
+      } else {
+        return `var(--${prefix}-${value})`
+      }
+    })
+  } else {
+    return value
+  }
+}
+
 const getCSS = ({
   theme,
   styles = {},
@@ -93,6 +112,7 @@ const getCSS = ({
       if (disableStyleProp?.(prop)) continue
 
       value = runIfFunc(value, theme)
+      value = parseVar(value, theme)
 
       if (value == null) continue
 
@@ -103,6 +123,8 @@ const getCSS = ({
       if (style === true) style = { properties: prop }
 
       if (isObject(value) && !style?.isProcessSkip) {
+        value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
+
         resolvedCSS[prop] = resolvedCSS[prop] ?? {}
         resolvedCSS[prop] = merge(resolvedCSS[prop], createCSS(value, true))
 

@@ -1303,6 +1303,11 @@ export const shorthandStyles: Configs = {
   roundedEnd: standardStyles.borderInlineEndRadius,
 }
 
+export const pseudoStyles: Configs = {
+  "&::before": { properties: "&::before", transform: transforms.content },
+  "&::after": { properties: "&::after", transform: transforms.content },
+}
+
 export const atRuleStyles: Configs = {
   _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
   _container: {
@@ -1320,6 +1325,7 @@ export const atRuleStyles: Configs = {
 export const styles: Configs = {
   ...standardStyles,
   ...shorthandStyles,
+  ...pseudoStyles,
   ...atRuleStyles,
 }
 

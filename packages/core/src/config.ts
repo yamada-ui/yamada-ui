@@ -426,6 +426,13 @@ export const transforms = {
 
       return value
     },
+  content: (value: any) => {
+    if (isObject(value)) {
+      return { content: "''", ...value }
+    } else {
+      return value
+    }
+  },
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {

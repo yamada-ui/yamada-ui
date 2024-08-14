@@ -123,6 +123,8 @@ const getCSS = ({
       if (style === true) style = { properties: prop }
 
       if (isObject(value) && !style?.isProcessSkip) {
+        value = style?.transform?.(value, theme, css, resolvedCSS) ?? value
+
         resolvedCSS[prop] = resolvedCSS[prop] ?? {}
         resolvedCSS[prop] = merge(resolvedCSS[prop], createCSS(value, true))
 

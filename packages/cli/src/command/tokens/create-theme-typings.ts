@@ -107,7 +107,7 @@ export const extractColorSchemes = (theme: any) => {
   Object.entries(semantics.colorSchemes).forEach(([key, value]) => {
     if (isTone(value)) {
       results.colorSchemes.push(key)
-      results.colorSchemeColors.push(...tones.map((tone) => `${key}.${tone}`))
+      results.colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
     } else {
       const hasColorScheme = isArray(value)
         ? value.every(
@@ -118,7 +118,7 @@ export const extractColorSchemes = (theme: any) => {
       if (!hasColorScheme) return
 
       results.colorSchemes.push(key)
-      results.colorSchemeColors.push(...tones.map((tone) => `${key}.${tone}`))
+      results.colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
     }
   })
 

@@ -83,6 +83,8 @@ export const useMonthPicker = ({
     defaultValue: defaultType,
     onChange: onChangeTypeProp,
   })
+  const [isClickOnYearListAlready, setIsClickOnYearListAlready] =
+    useState<boolean>(false)
 
   const {
     inputRef,
@@ -111,11 +113,26 @@ export const useMonthPicker = ({
     onChangeType: (type, year, month) => {
       if (type !== "date") {
         setType(type)
+
+        if (year) {
+          setIsClickOnYearListAlready(true)
+
+          if (isClickOnYearListAlready) {
+            const prevMonth = value?.getMonth()
+
+            const currentValue: Date = new Date(year, prevMonth || 0)
+            const inputValue = dateToString(currentValue)
+
+            setValue(currentValue)
+            setInputValue(inputValue)
+          }
+        }
       } else {
         let value: Date | undefined = undefined
 
-        if (typeof year === "number" && typeof month === "number")
+        if (typeof year === "number" && typeof month === "number") {
           value = new Date(year, month)
+        }
 
         const inputValue = dateToString(value)
 

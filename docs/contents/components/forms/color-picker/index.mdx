@@ -274,6 +274,22 @@ To make read-only, set `isReadOnly` to `true`.
 <ColorPicker placeholder="#000000" withResult />
 ```
 
+### Adding Children
+
+To add custom content, insert children elements into the `ColorPicker` component.
+
+```tsx
+<VStack>
+  <ColorPicker placeholder="#4387f4">
+    <Button>Submit</Button>
+  </ColorPicker>
+
+  <ColorPicker placeholder="#4387f4">
+    {({ value, onClose }) => <Button onClick={onClose}>Submit {value}</Button>}
+  </ColorPicker>
+</VStack>
+```
+
 ### Control
 
 ```tsx functional=true

@@ -1,6 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
 import { generateAnimation, generateGradient } from "../config"
+import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import type { VarTokens } from "../theme"
 import type { CSSMap, StyledTheme } from "../theme.types"
@@ -25,7 +26,7 @@ const tokenToVar = (token: string, prefix: string): Var => {
 }
 
 export const createVars =
-  (tokens: VarTokens, prefix: string = "ui") =>
+  (tokens: VarTokens, prefix: string = DEFAULT_VAR_PREFIX) =>
   ({
     baseTokens,
     cssMap = {},

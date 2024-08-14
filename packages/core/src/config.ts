@@ -13,6 +13,7 @@ import {
   filterUndefined,
 } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import { DEFAULT_VAR_PREFIX } from "./constant"
 import type { CSSObjectOrFunc, CSSUIObject, ColorMode } from "./css"
 import type { ThemeToken } from "./theme"
 import type { StyledTheme } from "./theme.types"
@@ -345,7 +346,8 @@ export type Transforms = keyof typeof transforms
 export const transforms = {
   var: (values: any[], theme: StyledTheme) =>
     values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
-      const prefix = __prefix ?? theme.__config.var?.prefix ?? "ui"
+      const prefix =
+        __prefix ?? theme.__config.var?.prefix ?? DEFAULT_VAR_PREFIX
 
       name = `--${prefix}-${name}`
 
@@ -424,6 +426,13 @@ export const transforms = {
 
       return value
     },
+  content: (value: any) => {
+    if (isObject(value)) {
+      return { content: "''", ...value }
+    } else {
+      return value
+    }
+  },
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {

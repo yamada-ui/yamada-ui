@@ -1,0 +1,1 @@
+import{j as n}from"./jsx-runtime-Nms4Y4qS.js";import{B as a}from"./button-BCJOWwwX.js";import{f as i}from"./forward-ref-BmTAT9U5.js";import{c}from"./factory-CZghEhwx.js";const x=i(({icon:o,children:r,className:t,...s},m)=>n.jsx(a,{className:c("ui-icon-button",t),ref:m,p:0,...s,children:o||r}));export{x as I};

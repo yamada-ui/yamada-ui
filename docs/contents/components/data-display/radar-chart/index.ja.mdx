@@ -541,9 +541,11 @@ return (
 )
 ```
 
-### 値をフォーマットする
+### フォーマットする
 
-値をフォーマットする場合は、`valueFormatter`を使います。
+ツールチップの値をフォーマットする場合は、`valueFormatter`を使います。
+軸のラベルをフォーマットする場合は、`polarAngleAxisTickFormatter`を使います。
+半径軸の値をフォーマットする場合は、`polarRadiusAxisTickFormatter`を使います。
 
 ```tsx functional=true
 const data = useMemo(
@@ -591,12 +593,27 @@ const series: RadarProps[] = useMemo(
 )
 
 return (
-  <RadarChart
-    data={data}
-    series={series}
-    dataKey="name"
-    valueFormatter={(value) => value.toLocaleString()}
-  />
+  <VStack>
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      valueFormatter={(value) => `${value}P`}
+    />
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      polarAngleAxisTickFormatter={(value) => `-${value}-`}
+    />
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      withPolarRadiusAxis
+      polarRadiusAxisTickFormatter={(value) => `${value}P`}
+    />
+  </VStack>
 )
 ```
 

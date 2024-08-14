@@ -5,6 +5,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverContent } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
@@ -40,6 +41,10 @@ type MonthPickerOptions = {
    * Props for month picker container element.
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
+   * Props for month picker container element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
   /**
    * Props for month picker field element.
    */
@@ -87,6 +92,7 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    contentProps,
     fieldProps,
     inputProps,
     iconProps,
@@ -150,11 +156,13 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
-              className="ui-month-picker__popover"
+              as="div"
+              className="ui-month-picker__content"
               id={id}
               role="dialog"
               aria-modal="true"
-              __css={{ ...styles.list }}
+              __css={{ ...styles.content }}
+              {...contentProps}
             >
               <Calendar
                 className="ui-month-picker__calendar"

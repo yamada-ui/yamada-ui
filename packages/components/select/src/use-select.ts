@@ -5,7 +5,6 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import type { PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
@@ -728,13 +727,13 @@ export const useSelectList = () => {
 
   const id = useId()
 
-  const getListProps: MotionUIPropGetter<"ul"> = useCallback(
+  const getListProps: UIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       id,
-      as: "ul",
       ref: mergeRefs(listRef, ref),
       role: "listbox",
       tabIndex: -1,
+      position: "relative",
       ...props,
     }),
     [id, listRef],

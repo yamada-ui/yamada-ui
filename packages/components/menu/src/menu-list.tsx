@@ -1,16 +1,18 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
-import { motionForwardRef } from "@yamada-ui/motion"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu"
 
-export type MenuListProps = MotionPropsWithoutChildren<"ul">
+export type MenuListProps = HTMLUIProps<"ul"> & {
+  contentProps?: MotionPropsWithoutChildren
+}
 
-export const MenuList = motionForwardRef<MenuListProps, "ul">(
-  ({ className, ...rest }, ref) => {
+export const MenuList = forwardRef<MenuListProps, "ul">(
+  ({ className, contentProps, children, ...rest }, ref) => {
     const { menuRef, focusedIndex, setFocusedIndex, onClose, styles } =
       useMenu()
 
@@ -61,19 +63,25 @@ export const MenuList = motionForwardRef<MenuListProps, "ul">(
       [focusedIndex, onClose, onFirst, onLast, onNext, onPrev],
     )
 
-    const css: CSSUIObject = { ...styles.list }
-
     return (
       <PopoverContent
-        as="ul"
-        ref={mergeRefs(menuRef, ref)}
-        className={cx("ui-menu__list", className)}
-        role="menu"
-        tabIndex={-1}
-        __css={css}
-        {...rest}
-        onKeyDown={handlerAll(rest.onKeyDown, onKeyDown)}
-      />
+        as="div"
+        className="ui-menu__content"
+        __css={{ ...styles.content }}
+        {...contentProps}
+        onKeyDown={handlerAll(contentProps?.onKeyDown, onKeyDown)}
+      >
+        <ui.ul
+          ref={mergeRefs(menuRef, ref)}
+          role="menu"
+          className={cx("ui-menu__list", className)}
+          tabIndex={-1}
+          __css={{ ...styles.list }}
+          {...rest}
+        >
+          {children}
+        </ui.ul>
+      </PopoverContent>
     )
   },
 )

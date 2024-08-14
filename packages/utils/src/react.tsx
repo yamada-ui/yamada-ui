@@ -199,7 +199,7 @@ export const assignRef = <T extends any = any>(
   try {
     // @ts-ignore
     ref.current = value
-  } catch (error) {
+  } catch {
     throw new Error(`Cannot assign value '${value}' to ref '${ref}'`)
   }
 }

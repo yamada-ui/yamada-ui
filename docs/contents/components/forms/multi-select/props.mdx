@@ -26,7 +26,7 @@ tab: Props
   id="multiselect-cleariconprops"
   name="clearIconProps"
   type="SelectIconProps"
-  description={"Props for select clear icon element."}
+  description={"Props for multi select clear icon element."}
 />
 
 <PropsCard
@@ -60,7 +60,7 @@ tab: Props
 <PropsCard
   id="multiselect-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
@@ -80,7 +80,7 @@ tab: Props
   id="multiselect-containerprops"
   name="containerProps"
   type='Omit<HTMLUIProps<"div">, "children">'
-  description={"Props for select container element."}
+  description={"Props for multi select container element."}
 />
 
 <PropsCard
@@ -124,6 +124,13 @@ tab: Props
 />
 
 <PropsCard
+  id="multiselect-fieldprops"
+  name="fieldProps"
+  type='Omit<MultiSelectFieldProps, "children">'
+  description={"Props for multi select field element."}
+/>
+
+<PropsCard
   id="multiselect-flip"
   name="flip"
   type="boolean"
@@ -141,6 +148,13 @@ tab: Props
 />
 
 <PropsCard
+  id="multiselect-footer"
+  name="footer"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The footer of the multi select content element."}
+/>
+
+<PropsCard
   id="multiselect-gutter"
   name="gutter"
   type="UIValue<number>"
@@ -151,17 +165,24 @@ tab: Props
 />
 
 <PropsCard
+  id="multiselect-header"
+  name="header"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The header of the multi select content element."}
+/>
+
+<PropsCard
   id="multiselect-iconprops"
   name="iconProps"
   type="SelectIconProps"
-  description={"Props for select icon element."}
+  description={"Props for multi select icon element."}
 />
 
 <PropsCard
   id="multiselect-isclearable"
   name="isClearable"
   type="boolean"
-  description={"If `true`, display the select clear icon."}
+  description={"If `true`, display the multi select clear icon."}
   defaultValue={"true"}
 />
 
@@ -235,7 +256,7 @@ tab: Props
   id="multiselect-listprops"
   name="listProps"
   type='Omit<SelectListProps, "children">'
-  description={"Props for select list element."}
+  description={"Props for multi select list element."}
 />
 
 <PropsCard

@@ -61,11 +61,18 @@ export const antonym = (value: string): string => {
 export const toCamelCase = (value: StringLiteral): string =>
   value
     .toLowerCase()
-    .replace(/[_-](.)/g, (_, group1) => group1.toUpperCase())
-    .replace(/^(.)/, (_, group1) => group1.toUpperCase())
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toUpperCase())
 
 export const toKebabCase = (value: StringLiteral): string =>
   value
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
     .toLowerCase()
     .replace(/^-/, "")
+
+export const toTitleCase = (value: StringLiteral): string =>
+  value
+    .replace(/([A-Z])/g, " $1")
+    .replace(/[_-](.)/g, (_, val) => ` ${val.toUpperCase()}`)
+    .replace(/^./, (str) => str.toUpperCase())
+    .trim()

@@ -36,7 +36,7 @@ const remarkUIComponent: Plugin = () => (tree) => {
         default:
           break
       }
-    } catch (e) {}
+    } catch {}
   })
 }
 

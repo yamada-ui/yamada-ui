@@ -5,7 +5,6 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { MotionUIPropGetter } from "@yamada-ui/motion"
 import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
@@ -1351,23 +1350,21 @@ export const useAutocompleteList = () => {
     if (!isOpen) beforeFocusedIndex.current = -1
   }, [isOpen])
 
-  const getListProps: MotionUIPropGetter<"ul"> = useCallback(
+  const getListProps: UIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       as: "ul",
       ref: mergeRefs(listRef, ref),
       role: "listbox",
       tabIndex: -1,
+      position: "relative",
       id: props.id || useId(),
       ...props,
-      onAnimationComplete: handlerAll(
-        props.onAnimationComplete,
-        onAnimationComplete,
-      ),
     }),
-    [listRef, onAnimationComplete],
+    [listRef],
   )
 
   return {
+    onAnimationComplete,
     getListProps,
   }
 }

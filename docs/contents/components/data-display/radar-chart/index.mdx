@@ -541,9 +541,11 @@ return (
 )
 ```
 
-### Format Values
+### Format
 
-To format values, use `valueFormatter`.
+To format tooltip values, use `valueFormatter`.
+To format axis labels, use `polarAngleAxisTickFormatter`.
+To format values on the radius axis, use `polarRadiusAxisTickFormatter`.
 
 ```tsx functional=true
 const data = useMemo(
@@ -591,12 +593,27 @@ const series: RadarProps[] = useMemo(
 )
 
 return (
-  <RadarChart
-    data={data}
-    series={series}
-    dataKey="name"
-    valueFormatter={(value) => value.toLocaleString()}
-  />
+  <VStack>
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      valueFormatter={(value) => `${value}P`}
+    />
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      polarAngleAxisTickFormatter={(value) => `-${value}-`}
+    />
+    <RadarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      withPolarRadiusAxis
+      polarRadiusAxisTickFormatter={(value) => `${value}P`}
+    />
+  </VStack>
 )
 ```
 

@@ -22,12 +22,21 @@ export const getColor =
   (theme: Dict = {}, colorMode?: ColorMode) => {
     const [token, hue] = color.split(".")
 
-    const [, relatedToken] =
-      Object.entries<string>(theme.semantics?.colorSchemes ?? {}).find(
-        ([semanticToken]) => token === semanticToken,
-      ) ?? []
+    if (hue) {
+      const [, relatedToken] =
+        Object.entries<string>(theme.semantics?.colorSchemes ?? {}).find(
+          ([semanticToken]) => token === semanticToken,
+        ) ?? []
 
-    if (relatedToken) color = `${relatedToken}.${hue}`
+      if (relatedToken) color = `${relatedToken}.${hue}`
+    } else {
+      const [, relatedColor] =
+        Object.entries<string>(theme.semantics?.colors ?? {}).find(
+          ([semanticToken]) => token === semanticToken,
+        ) ?? []
+
+      if (relatedColor) color = relatedColor
+    }
 
     const hex = get<
       string | number | [string | number, string | number] | undefined

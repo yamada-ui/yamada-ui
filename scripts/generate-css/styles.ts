@@ -1,5 +1,5 @@
 import { writeFile } from "fs/promises"
-import type { ThemeToken } from "@yamada-ui/react"
+import { pseudosSelectors, type ThemeToken } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
 import { getConfig } from "./config"
@@ -120,12 +120,23 @@ export const generateStyles = async (
 ) => {
   let standardStyles: string[] = []
   let shorthandStyles: string[] = []
+  let pseudoStyles: string[] = []
   let atRuleStyles: string[] = []
   let styleProps: string[] = []
   let processSkipProperties: string[] = []
   let pickedStyles: (CSSProperty & { type: string })[] = []
 
   checkProps(styles)
+
+  pseudosSelectors.forEach((selector) => {
+    const transform = transformMap[selector]
+
+    if (!transform) return
+
+    const config = getConfig({ properties: selector, transform })()
+
+    pseudoStyles = [...pseudoStyles, `"${selector}": ${config}`]
+  })
 
   styles = styles.filter((style) => {
     const isExists = Object.keys(uiProps).includes(style.prop)
@@ -245,11 +256,15 @@ export const generateStyles = async (
       ${shorthandStyles.join(",\n")}
     }
 
+    export const pseudoStyles: Configs = {
+      ${pseudoStyles.join(",\n")}
+    }
+
     export const atRuleStyles: Configs = {
       ${atRuleStyles.join(",\n")}
     }
 
-    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...atRuleStyles }
+    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...atRuleStyles }
 
     export const processSkipProperties: string[] = [${processSkipProperties.map(
       (property) => `"${property}"`,

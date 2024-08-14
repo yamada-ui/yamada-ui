@@ -168,6 +168,13 @@ export const transforms = {
 
       return `${func}(${value})`
     },
+  content: (value: any) => {
+    if (isObject(value)) {
+      return { content: "''", ...value }
+    } else {
+      return value
+    }
+  },
   colorMix: generateColorMix,
   gradient: generateGradient,
   animation: generateAnimation,

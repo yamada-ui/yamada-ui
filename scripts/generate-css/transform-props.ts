@@ -1,4 +1,4 @@
-import type { Transforms, Union } from "@yamada-ui/react"
+import type { PseudoSelectors, Transforms, Union } from "@yamada-ui/react"
 import type { CSSProperties, UIProperties } from "."
 
 export type TransformOptions =
@@ -15,7 +15,10 @@ type TransformProp = {
 }
 
 type TransformProps = Partial<
-  Record<Transforms, (CSSProperties | UIProperties | TransformProp)[]>
+  Record<
+    Transforms,
+    (CSSProperties | UIProperties | TransformProp | PseudoSelectors)[]
+  >
 >
 
 export const transformProps: TransformProps = {
@@ -148,6 +151,7 @@ export const transformProps: TransformProps = {
     { properties: "minBoxSize", transform: "px" },
     { properties: "maxBoxSize", transform: "px" },
   ],
+  content: ["&::before", "&::after"],
   bgClip: ["backgroundClip"],
   colorMix: [
     "color",
@@ -177,7 +181,12 @@ export const transformProps: TransformProps = {
     "borderBlockEndColor",
     "columnRuleColor",
   ],
-  gradient: ["backgroundImage"],
+  gradient: [
+    "backgroundImage",
+    "borderImageSource",
+    "listStyleImage",
+    "maskImage",
+  ],
   animation: ["animation"],
   transform: ["transform"],
   deg: ["rotate", "skewX", "skewY"],
@@ -199,5 +208,8 @@ export const transformMap = Object.entries(transformProps).reduce(
 
     return prev
   },
-  {} as Record<CSSProperties | UIProperties, TransformOptions>,
+  {} as Record<
+    CSSProperties | UIProperties | PseudoSelectors,
+    TransformOptions
+  >,
 )

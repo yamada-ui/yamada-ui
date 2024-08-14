@@ -1,4 +1,5 @@
 export type { Interpolation, Keyframes, CSSObject } from "@emotion/react"
+export * from "./pseudos"
 export * from "./config"
 export * from "./components"
 export * from "./styles"

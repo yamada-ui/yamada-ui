@@ -6,6 +6,7 @@ import {
   omitThemeProps,
   layoutStyleProperties,
 } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
@@ -49,6 +50,10 @@ type RangeDatePickerOptions = {
    * Props for date picker container element.
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
+   * Props for date picker container element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
   /**
    * Props for date picker field element.
    */
@@ -105,6 +110,7 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
       minH,
       minHeight,
       containerProps,
+      contentProps,
       fieldProps,
       startInputProps,
       endInputProps,
@@ -172,11 +178,13 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                as="div"
                 id={id}
                 role="dialog"
                 aria-modal="true"
-                className="ui-range-date-picker__popover"
-                __css={{ ...styles.list }}
+                className="ui-range-date-picker__content"
+                __css={{ ...styles.content }}
+                {...contentProps}
               >
                 <Calendar
                   className="ui-range-date-picker__calendar"

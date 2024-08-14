@@ -10,6 +10,7 @@ import type {
 } from "insights"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")
+export const INSIGHT_MAX_DATE = dayjs().tz().subtract(1, "d").toDate()
 
 export const INSIGHT_USERS = Object.fromEntries(
   [...CONSTANT.MAINTAINERS, ...CONSTANT.MEMBERS].map((data) => [

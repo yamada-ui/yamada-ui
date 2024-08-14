@@ -1261,6 +1261,9 @@ importers:
         specifier: ^1.11.12
         version: 1.11.12
     devDependencies:
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

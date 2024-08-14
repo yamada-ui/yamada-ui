@@ -1,11 +1,11 @@
 import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import type { Configs } from "./config"
+import type { StyleConfigs } from "./config"
 import { transforms } from "./config"
 import type { CSSUIObject, Token } from "./css"
 import type { Theme } from "./theme.types"
 
-export const standardStyles: Configs = {
+export const standardStyles: StyleConfigs = {
   accentColor: {
     properties: "accentColor",
     token: "colors",
@@ -1208,7 +1208,7 @@ export const standardStyles: Configs = {
   var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
 }
 
-export const shorthandStyles: Configs = {
+export const shorthandStyles: StyleConfigs = {
   accent: standardStyles.accentColor,
   bg: standardStyles.background,
   bgAttachment: { properties: "backgroundAttachment" },
@@ -1308,12 +1308,12 @@ export const shorthandStyles: Configs = {
   roundedEnd: standardStyles.borderInlineEndRadius,
 }
 
-export const pseudoStyles: Configs = {
+export const pseudoStyles: StyleConfigs = {
   "&::before": { properties: "&::before", transform: transforms.content },
   "&::after": { properties: "&::after", transform: transforms.content },
 }
 
-export const atRuleStyles: Configs = {
+export const atRuleStyles: StyleConfigs = {
   _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
   _container: {
     isProcessSkip: true,
@@ -1327,7 +1327,7 @@ export const atRuleStyles: Configs = {
   },
 }
 
-export const styles: Configs = {
+export const styles: StyleConfigs = {
   ...standardStyles,
   ...shorthandStyles,
   ...pseudoStyles,

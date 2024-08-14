@@ -1,6 +1,6 @@
 import type { Dict } from "@yamada-ui/utils"
 import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
-import type { ConfigProps } from "../config"
+import type { StyleConfig } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import { processSkipProperties, styles } from "../styles"
@@ -118,7 +118,7 @@ const getCSS = ({
 
       if (prop in pseudos) prop = pseudos[prop]
 
-      let style: ConfigProps | undefined | true = styles[prop]
+      let style: StyleConfig | undefined | true = styles[prop]
 
       if (style === true) style = { properties: prop }
 

@@ -243,28 +243,28 @@ export const generateStyles = async (
   const content = `
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
-    import type { Configs } from "./config"
+    import type { StyleConfigs } from "./config"
     import { transforms } from "./config"
     import type { CSSUIObject, Token } from "./css"
     import type { Theme } from "./theme.types"
 
-    export const standardStyles: Configs = {
+    export const standardStyles: StyleConfigs = {
       ${standardStyles.join(",\n")}
     }
 
-    export const shorthandStyles: Configs = {
+    export const shorthandStyles: StyleConfigs = {
       ${shorthandStyles.join(",\n")}
     }
 
-    export const pseudoStyles: Configs = {
+    export const pseudoStyles: StyleConfigs = {
       ${pseudoStyles.join(",\n")}
     }
 
-    export const atRuleStyles: Configs = {
+    export const atRuleStyles: StyleConfigs = {
       ${atRuleStyles.join(",\n")}
     }
 
-    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...atRuleStyles }
+    export const styles: StyleConfigs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...atRuleStyles }
 
     export const processSkipProperties: string[] = [${processSkipProperties.map(
       (property) => `"${property}"`,

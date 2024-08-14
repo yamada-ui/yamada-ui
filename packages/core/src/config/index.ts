@@ -42,7 +42,7 @@ type CSSProperties = Union<
   | keyof CSS.ObsoleteProperties
 >
 
-export type ConfigProps = {
+export type StyleConfig = {
   static?: CSSObject
   isProcessResult?: boolean
   isProcessSkip?: boolean
@@ -60,7 +60,7 @@ export type ConfigProps = {
   isSkip?: boolean
 }
 
-export type Configs = Record<string, ConfigProps | true>
+export type StyleConfigs = Record<string, StyleConfig | true>
 
 export const transforms = {
   var: (values: any[], theme: StyledTheme) =>

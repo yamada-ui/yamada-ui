@@ -19,7 +19,8 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
 export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
-  const [styles, { ...mergedProps }] = useComponentStyle("Icon", props)
+  const [styles, mergedProps] = useComponentStyle("Icon", props)
+
   let {
     className,
     as: element,

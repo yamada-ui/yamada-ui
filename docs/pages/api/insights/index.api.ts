@@ -136,13 +136,10 @@ const getSummarizeInsights = (
 
 const getInsights = (
   data: Insights,
-  start: string,
-  end: string,
+  minDate: Date,
+  maxDate: Date,
   summarize: InsightSummarize = "day",
 ) => {
-  const minDate = new Date(start)
-  const maxDate = new Date(end)
-
   const insights: Insights = Object.fromEntries(
     Object.entries(data).filter(([date]) =>
       isInRange(new Date(date), minDate, maxDate),
@@ -170,7 +167,7 @@ type RequestQuery = {
 type ResponseData = {
   status: number
   message?: string
-  data?: Insights
+  data?: { currentInsights: Insights; prevInsights: Insights }
 }
 
 const handler = async (
@@ -187,9 +184,19 @@ const handler = async (
 
     const data = await getData()
 
-    const insights = getInsights(data, start, end, summarize)
+    const minDate = new Date(start)
+    const maxDate = new Date(end)
+    const diff = dayjs(maxDate).diff(minDate, "day") + 1
 
-    res.status(200).json({ status: 200, data: insights })
+    const prevMinDate = dayjs(minDate).subtract(diff, "day").toDate()
+    const prevMaxDate = dayjs(maxDate).subtract(diff, "day").toDate()
+
+    const currentInsights = getInsights(data, minDate, maxDate, summarize)
+    const prevInsights = getInsights(data, prevMinDate, prevMaxDate, summarize)
+
+    res
+      .status(200)
+      .json({ status: 200, data: { currentInsights, prevInsights } })
   } catch (e) {
     if (e instanceof Error) {
       return res.status(400).send({ status: 400, message: e.message })

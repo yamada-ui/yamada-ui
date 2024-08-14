@@ -1,4 +1,4 @@
-import { isArray, isObject, omitObject, prettier } from "../../utils"
+import { isArray, isObject, isString, omitObject, prettier } from "../../utils"
 import { config } from "./config"
 
 type Component = {
@@ -100,22 +100,26 @@ export const extractColorSchemes = (theme: any) => {
     if (!isTone(value)) return
 
     results.colorSchemes.push(key)
+  })
 
-    const semanticKeys =
-      Object.entries(semantics?.colorSchemes ?? {})
-        .filter(([, relatedKey]) => key === relatedKey)
-        .map(([key]) => key) ?? []
+  if (!isObject(semantics?.colorSchemes)) return results
 
-    if (!semanticKeys.length) return
+  Object.entries(semantics.colorSchemes).forEach(([key, value]) => {
+    if (isTone(value)) {
+      results.colorSchemes.push(key)
+      results.colorSchemeColors.push(...tones.map((tone) => `${key}.${tone}`))
+    } else {
+      const hasColorScheme = isArray(value)
+        ? value.every(
+            (key) => isString(key) && Object.keys(colors).includes(key),
+          )
+        : Object.keys(colors).some((key) => key === value)
 
-    results.colorSchemes.push(...semanticKeys)
-    results.colorSchemeColors.push(
-      ...semanticKeys
-        .map((semanticKey) =>
-          Object.keys(value).map((hue) => `${semanticKey}.${hue}`),
-        )
-        .flat(),
-    )
+      if (!hasColorScheme) return
+
+      results.colorSchemes.push(key)
+      results.colorSchemeColors.push(...tones.map((tone) => `${key}.${tone}`))
+    }
   })
 
   return results

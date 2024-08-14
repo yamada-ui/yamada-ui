@@ -1,7 +1,8 @@
 import { readFile, writeFile } from "fs/promises"
 import path from "path"
-import { type ThemeComponents } from "@yamada-ui/react"
+import type { UsageTheme } from "@yamada-ui/core"
 import { defaultTheme } from "@yamada-ui/theme"
+import { tones } from "@yamada-ui/utils"
 import { format, resolveConfig } from "prettier"
 import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
@@ -12,11 +13,6 @@ import {
   createProgram,
   sys,
 } from "typescript"
-
-type Theme = {
-  colors?: Record<string, unknown>
-  components?: ThemeComponents
-}
 
 type ComponentTypeInfo = {
   type: string
@@ -98,55 +94,39 @@ const merge = <T extends Record<string, any>>(
   return result as T
 }
 
-const defaultColors = [
-  "brand",
-  "primary",
-  "secondary",
-  "warning",
-  "danger",
-  "link",
-]
-
-const tones = [
-  "50",
-  "100",
-  "200",
-  "300",
-  "400",
-  "500",
-  "600",
-  "700",
-  "800",
-  "900",
-]
-
 const isTone = (value: unknown): value is Record<string, string> =>
   isObject(value) && tones.every((k) => isString(value[k]))
 
-const isDefaultColor = (key: string): boolean => defaultColors.includes(key)
-
-const extractColorScheme = (
-  colors: Record<string, unknown> | undefined,
-): string => {
+const extractColorScheme = ({ colors, semantics = {} }: UsageTheme): string => {
   if (!colors) return "string"
 
-  const validColors = Object.entries(colors)
-    .filter(([key, values]) => isTone(values) || isDefaultColor(key))
-    .map(([name]) => name)
+  const validColors: string[] = []
+
+  Object.entries(colors).forEach(([key, value]) => {
+    if (!isTone(value)) return
+
+    validColors.push(key)
+
+    const semanticKeys =
+      Object.entries(semantics.colorSchemes ?? {})
+        .filter(([, relatedKey]) => key === relatedKey)
+        .map(([key]) => key) ?? []
+
+    if (!semanticKeys.length) return
+
+    validColors.push(...semanticKeys)
+  })
 
   return toLiteralStringType(validColors)
 }
 
-const extractThemeProps = ({
-  colors,
-  components = {},
-}: Theme): Record<string, PropertyInfo> => {
+const extractThemeProps = (theme: UsageTheme): Record<string, PropertyInfo> => {
   const result: Record<string, PropertyInfo> = {}
 
-  const colorSchemeType = extractColorScheme(colors)
+  const colorSchemeType = extractColorScheme(theme)
 
   for (const [name, { defaultProps, variants, sizes }] of Object.entries(
-    components,
+    theme.components ?? {},
   )) {
     if (!defaultProps) continue
 

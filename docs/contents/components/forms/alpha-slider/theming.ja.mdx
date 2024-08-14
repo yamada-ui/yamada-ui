@@ -19,5 +19,6 @@ tab: テーマ
 :::
 
 ```ts
-export const AlphaSlider: ComponentMultiStyle = mergeMultiStyle(HueSlider)()
+export const AlphaSlider: ComponentMultiStyle<"AlphaSlider"> =
+  mergeMultiStyle(HueSlider)()
 ```

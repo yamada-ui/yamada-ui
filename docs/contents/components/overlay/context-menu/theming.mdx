@@ -22,9 +22,12 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const ContextMenu: ComponentMultiStyle = mergeMultiStyle(Menu, {
-  baseStyle: {
-    trigger: {},
+export const ContextMenu: ComponentMultiStyle<"ContextMenu"> = mergeMultiStyle(
+  Menu,
+  {
+    baseStyle: {
+      trigger: {},
+    },
   },
-})()
+)()
 ```

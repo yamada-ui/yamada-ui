@@ -98,6 +98,40 @@ export const withVariant: Story = () => {
   )
 }
 
+export const withFooter: Story = () => {
+  const [value, onChange] = useState<string | undefined>(undefined)
+  const items: SelectItem[] = [
+    { label: "孫悟空", value: "孫悟空" },
+    { label: "孫悟飯", value: "孫悟飯" },
+    { label: "クリリン", value: "クリリン" },
+  ]
+
+  return (
+    <Select
+      value={value}
+      onChange={onChange}
+      placeholder="キャラクターを選択"
+      footer={({ onClose }) => (
+        <VStack
+          borderTopWidth="1px"
+          borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          p="2"
+        >
+          <Button
+            onClick={() => {
+              onChange("孫悟空")
+              onClose()
+            }}
+          >
+            Set "孫悟空"
+          </Button>
+        </VStack>
+      )}
+      items={items}
+    />
+  )
+}
+
 export const withDefaultValue: Story = () => {
   return (
     <Select placeholder="キャラクターを選択" defaultValue="ベジータ">

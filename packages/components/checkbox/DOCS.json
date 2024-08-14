@@ -234,7 +234,7 @@
       "description": "The CSS `align-items` property."
     },
     "basis": {
-      "type": "number | \"content\" | \"px\" | (string & {}) | \"max\" | \"min\" | \"initial\" | \"inherit\" | \"auto\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | ... 61 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | \"content\" | \"px\" | (string & {}) | \"max\" | \"min\" | \"initial\" | \"inherit\" | \"auto\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | ... 72 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-basis` property."
     },

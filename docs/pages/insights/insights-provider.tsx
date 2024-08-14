@@ -3,7 +3,8 @@ import type { Dispatch, SetStateAction } from "react"
 import type { Insights, InsightPeriod } from "insights"
 
 export type InsightsContext = {
-  insights: Insights | undefined
+  currentInsights?: Insights
+  prevInsights?: Insights
   period: InsightPeriod
   onChangePeriod: (start: string | undefined, end: string | undefined) => void
   users: string[]

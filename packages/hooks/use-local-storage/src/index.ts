@@ -15,7 +15,7 @@ export type StorageProps<T> = {
 const serializeJSON = <T>(value: T, name: string) => {
   try {
     return JSON.stringify(value)
-  } catch (error) {
+  } catch {
     throw new Error(`useLocalStorage ${name}: Failed to serialize the value`)
   }
 }

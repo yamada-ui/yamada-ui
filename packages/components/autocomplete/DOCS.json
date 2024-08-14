@@ -93,6 +93,11 @@
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
     },
+    "fieldProps": {
+      "type": "Omit<AutocompleteFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for autocomplete field element."
+    },
     "flip": {
       "type": "boolean",
       "defaultValue": true,
@@ -430,6 +435,11 @@
       "defaultValue": true,
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+    },
+    "fieldProps": {
+      "type": "Omit<\n  MultiAutocompleteFieldProps,\n  \"children\" | \"separator\" | \"inputProps\" | \"component\" | \"keepPlaceholder\"\n>",
+      "required": false,
+      "description": "Props for multi autocomplete field element."
     },
     "flip": {
       "type": "boolean",

@@ -24,7 +24,7 @@ runs:
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ env.GITHUB_TOKEN }}
-        base: docs
+        base: documentation
         commit-message: "ci(changesets): sync documentation"
         title: "Sync documentation"
         branch: changeset-release/docs

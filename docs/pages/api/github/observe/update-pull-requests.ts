@@ -126,7 +126,7 @@ const remindReviews = async ({
     [
       "yamada-ui:changeset-release/main",
       "yamada-ui:changeset-release/docs",
-      "yamada-ui:docs",
+      "yamada-ui:documentation",
     ].includes(head.label)
   )
     return
@@ -259,7 +259,7 @@ const addHelpWanted = async ({
     [
       "yamada-ui:changeset-release/main",
       "yamada-ui:changeset-release/docs",
-      "yamada-ui:docs",
+      "yamada-ui:documentation",
     ].includes(head.label)
   )
     return

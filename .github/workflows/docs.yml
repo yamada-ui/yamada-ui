@@ -22,7 +22,7 @@ jobs:
       - name: Check for existing PR
         id: check_pr
         run: |
-          pr_exists=$(gh pr list --base main --head docs --json number --jq 'length')
+          pr_exists=$(gh pr list --base main --head documentation --json number --jq 'length')
           echo "pr_exists=$pr_exists" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,6 +30,6 @@ jobs:
       - name: Create PR
         if: steps.check_pr.outputs.pr_exists == '0'
         run: |
-          gh pr create --base main --head docs --title "Updated documentation" --body "Automated changes by GitHub action" --reviewer hirotomoyamada --assignee hirotomoyamada
+          gh pr create --base main --head documentation --title "Updated documentation" --body "Automated changes by GitHub action" --reviewer hirotomoyamada --assignee hirotomoyamada
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

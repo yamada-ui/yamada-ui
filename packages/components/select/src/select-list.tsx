@@ -1,13 +1,13 @@
 import type { CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useSelectContext, useSelectList } from "./use-select"
 
 export type SelectListProps = HTMLUIProps<"ul"> & {
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: MotionPropsWithoutChildren
   header?: ReactNode
   footer?: ReactNode
 }

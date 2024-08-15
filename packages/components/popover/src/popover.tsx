@@ -3,7 +3,7 @@ import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type {
   MotionUIPropGetter,
   MotionProps,
-  MotionTransitionProperties,
+  MotionTransitionProps,
 } from "@yamada-ui/motion"
 import { useAnimationObserver } from "@yamada-ui/use-animation"
 import type { LazyMode } from "@yamada-ui/use-disclosure"
@@ -149,7 +149,7 @@ type PopoverOptions = {
   /**
    * The animation duration.
    */
-  duration?: MotionTransitionProperties["duration"]
+  duration?: MotionTransitionProps["duration"]
 }
 
 export type PopoverProps = ThemeProps<"Popover"> &

@@ -534,7 +534,14 @@ export type ThemeSemantics = Omit<
   | "breakpoints"
   | "animations"
 > & {
-  colorSchemes?: Partial<Record<string, Theme["colorSchemes"]>>
+  colorSchemes?: Partial<
+    Record<
+      string,
+      | Theme["colorSchemes"]
+      | [Theme["colorSchemes"], Theme["colorSchemes"]]
+      | ThemeTokens
+    >
+  >
   animations?: ThemeAnimationTokens<AnimationStyle | string>
 }
 export type ThemeSchemes = Partial<

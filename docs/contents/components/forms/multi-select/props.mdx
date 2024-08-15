@@ -60,7 +60,7 @@ tab: Props
 <PropsCard
   id="multiselect-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
@@ -148,6 +148,13 @@ tab: Props
 />
 
 <PropsCard
+  id="multiselect-footer"
+  name="footer"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The footer of the multi select content element."}
+/>
+
+<PropsCard
   id="multiselect-gutter"
   name="gutter"
   type="UIValue<number>"
@@ -155,6 +162,13 @@ tab: Props
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
   defaultValue={"8"}
+/>
+
+<PropsCard
+  id="multiselect-header"
+  name="header"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The header of the multi select content element."}
 />
 
 <PropsCard

@@ -81,7 +81,7 @@ tab: Props
 <PropsCard
   id="multiautocomplete-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
@@ -102,6 +102,13 @@ tab: Props
   name="containerProps"
   type='Omit<HTMLUIProps<"div">, "children">'
   description={"Props for multi autocomplete container element."}
+/>
+
+<PropsCard
+  id="multiautocomplete-contentprops"
+  name="contentProps"
+  type='Omit<MotionProps<"div">, "children">'
+  description={"Props for multi autocomplete content element."}
 />
 
 <PropsCard
@@ -192,6 +199,13 @@ tab: Props
 />
 
 <PropsCard
+  id="multiautocomplete-footer"
+  name="footer"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The footer of the autocomplete content element."}
+/>
+
+<PropsCard
   id="multiautocomplete-format"
   name="format"
   type="(value: string) => string"
@@ -206,6 +220,13 @@ tab: Props
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
   defaultValue={"8"}
+/>
+
+<PropsCard
+  id="multiautocomplete-header"
+  name="header"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The header of the autocomplete content element."}
 />
 
 <PropsCard

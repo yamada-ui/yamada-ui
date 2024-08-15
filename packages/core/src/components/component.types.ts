@@ -1,8 +1,7 @@
 import type { Interpolation } from "@emotion/react"
-import type { Merge } from "@yamada-ui/utils"
+import type { Merge, MergeIfDefined } from "@yamada-ui/utils"
 import type * as React from "react"
 import type { CSSUIObject, CSSUIProps } from "../css"
-import type { StyleProps } from "../styles"
 import type { PropsTheme } from "../theme.types"
 import type { DOMElements } from "./element.types"
 
@@ -48,23 +47,14 @@ export type StyledResolverProps = CSSUIObject &
 
 export type UIProps = CSSUIProps & UIBaseProps
 
-export type OmitProps<Y, M extends keyof any = never> = Omit<Y, "as" | M>
-
-export type IntersectionProps<
-  Y extends object = {},
-  M extends object = {},
-> = OmitProps<Y, keyof M> & M
-
-export type PropsOf<T extends As> = React.ComponentPropsWithoutRef<T> & {
-  as?: As
-}
+export type WithoutAs<T extends object> = Omit<T, "as">
 
 export type ComponentProps<
   Y extends object,
   M extends object,
-  D extends object = {},
-  H extends As = As,
-> = (IntersectionProps<Y, D> | IntersectionProps<M, D>) & {
+  D extends object,
+  H extends As,
+> = (Merge<Y, WithoutAs<D>> | Merge<M, WithoutAs<D>>) & {
   as?: H
 }
 
@@ -93,31 +83,34 @@ export type HTMLUIComponents = {
   [Y in DOMElements]: UIComponent<Y, {}>
 }
 
-type Assign<T, U> = Omit<T, keyof U> & U
-
 export type UIComponent<Y extends As, M extends object = {}> = Component<
   Y,
-  Assign<UIProps, M>
+  Merge<UIProps, M>
 >
 
-export type HTMLUIProps<Y extends As> = Omit<
-  PropsOf<Y>,
-  Y extends "svg"
-    ? "ref" | "children" | keyof StyleProps
-    : "ref" | keyof StyleProps
-> &
+export type HTMLUIProps<Y extends As = "div"> = Merge<
+  React.ComponentPropsWithoutRef<Y>,
   UIProps & { as?: As }
+>
+
+export type HTMLUIPropsWithoutAs<Y extends As = "div"> = Omit<
+  HTMLUIProps<Y>,
+  "as"
+>
+
+type HTMLUIPropsWithRef<Y extends As = "div"> = HTMLUIProps<Y> &
+  React.RefAttributes<any>
 
 export type UIPropGetter<Y extends As = "div", M = undefined, D = undefined> = (
-  props?: Merge<HTMLUIProps<Y>, M>,
+  props?: MergeIfDefined<HTMLUIProps<Y>, M>,
   ref?: React.Ref<any>,
-) => Merge<HTMLUIProps<Y> & React.RefAttributes<any>, D>
+) => MergeIfDefined<HTMLUIPropsWithRef<Y>, D>
 
 export type RequiredUIPropGetter<
   Y extends As = "div",
   M = undefined,
   D = undefined,
 > = (
-  props: Merge<HTMLUIProps<Y>, M>,
+  props: MergeIfDefined<HTMLUIProps<Y>, M>,
   ref?: React.Ref<any>,
-) => Merge<HTMLUIProps<Y> & React.RefAttributes<any>, D>
+) => MergeIfDefined<HTMLUIPropsWithRef<Y>, D>

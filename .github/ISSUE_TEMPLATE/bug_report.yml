@@ -29,6 +29,7 @@ body:
         - "@yamada-ui/fontawesome"
         - "@yamada-ui/nextjs"
         - "@yamada-ui/cli"
+        - "@yamada-ui/core"
     validations:
       required: true
   - type: input

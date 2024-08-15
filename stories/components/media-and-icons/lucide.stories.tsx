@@ -18,17 +18,17 @@ export default meta
 export const basic: Story = () => {
   return (
     <HStack alignItems="flex-end">
-      <Ghost size="6xl" />
+      <Ghost />
 
-      <Ghost size="5xl" />
+      <Ghost />
 
-      <Ghost size="4xl" />
+      <Ghost />
 
-      <Ghost size="3xl" />
+      <Ghost />
 
-      <Ghost size="2xl" />
+      <Ghost />
 
-      <Ghost size="xl" />
+      <Ghost />
     </HStack>
   )
 }
@@ -44,5 +44,5 @@ export const oneGenericIcon: Story = () => {
     return <Icon {...rest} />
   }
 
-  return <Icon name="Ghost" size="4xl" />
+  return <Icon name="Ghost" />
 }

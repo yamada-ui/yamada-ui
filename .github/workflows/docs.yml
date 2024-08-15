@@ -3,7 +3,7 @@ name: Create PR for docs
 on:
   push:
     branches:
-      - docs
+      - documentation
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

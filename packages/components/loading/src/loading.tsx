@@ -33,6 +33,8 @@ type LoadingOptions = {
    * The CSS `dur` property.
    */
   duration?: IconProps["dur"]
+
+  size?: CSSUIProps["fontSize"]
 }
 
 export type LoadingProps = IconProps &
@@ -91,11 +93,11 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       color,
       secondaryColor,
       colorScheme,
-      size,
       duration,
       dur,
       rest,
       styles,
+      size,
     ],
   )
 

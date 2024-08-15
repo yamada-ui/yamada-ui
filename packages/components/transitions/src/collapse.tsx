@@ -1,5 +1,5 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type {
   WithTransitionProps,
   MotionTransitionVariants,
@@ -11,6 +11,7 @@ import {
   transitionExit,
   MOTION_TRANSITION_EASINGS,
   Motion,
+  motionForwardRef,
 } from "@yamada-ui/motion"
 import { createdDom, cx } from "@yamada-ui/utils"
 import { useEffect, useMemo, useState } from "react"
@@ -88,97 +89,95 @@ export const collapseProps = {
  *
  * @see Docs https://yamada-ui.com/components/transitions/collapse
  */
-export const Collapse = forwardRef<CollapseProps, "div", false>(
-  (props, ref) => {
-    const [style, mergedProps] = useComponentStyle("Collapse", props)
-    let {
-      unmountOnExit,
-      isOpen,
-      animationOpacity,
-      startingHeight,
-      endingHeight,
-      transition: transitionProp,
-      transitionEnd,
-      delay,
-      duration,
-      className,
-      __css,
-      ...rest
-    } = omitThemeProps(mergedProps)
-    const [mounted, setMounted] = useState(false)
+export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
+  const [style, mergedProps] = useComponentStyle("Collapse", props)
+  let {
+    unmountOnExit,
+    isOpen,
+    animationOpacity,
+    startingHeight,
+    endingHeight,
+    transition: transitionProp,
+    transitionEnd,
+    delay,
+    duration,
+    className,
+    __css,
+    ...rest
+  } = omitThemeProps(mergedProps)
+  const [mounted, setMounted] = useState(false)
 
-    useEffect(() => {
-      const isBrowser = createdDom()
+  useEffect(() => {
+    const isBrowser = createdDom()
 
-      if (isBrowser) setMounted(true)
-    }, [])
+    if (isBrowser) setMounted(true)
+  }, [])
 
-    const animate = isOpen || unmountOnExit ? "enter" : "exit"
+  const animate = isOpen || unmountOnExit ? "enter" : "exit"
 
-    isOpen = unmountOnExit ? isOpen : true
+  isOpen = unmountOnExit ? isOpen : true
 
-    const transition = useMemo(() => {
-      if (!mounted) {
-        return { enter: { duration: 0 } }
-      } else if (transitionProp) {
-        return transitionProp
-      } else {
-        return {
-          enter: {
-            height: {
-              duration: duration ?? 0.3,
-              ease: MOTION_TRANSITION_EASINGS.ease,
-            },
-            opacity: {
-              duration: duration ?? 0.4,
-              ease: MOTION_TRANSITION_EASINGS.ease,
-            },
+  const transition = useMemo(() => {
+    if (!mounted) {
+      return { enter: { duration: 0 } }
+    } else if (transitionProp) {
+      return transitionProp
+    } else {
+      return {
+        enter: {
+          height: {
+            duration: duration ?? 0.3,
+            ease: MOTION_TRANSITION_EASINGS.ease,
           },
-          exit: {
-            height: {
-              duration: duration ?? 0.3,
-              ease: MOTION_TRANSITION_EASINGS.ease,
-            },
-            opacity: {
-              duration: duration ?? 0.4,
-              ease: MOTION_TRANSITION_EASINGS.ease,
-            },
+          opacity: {
+            duration: duration ?? 0.4,
+            ease: MOTION_TRANSITION_EASINGS.ease,
           },
-        }
+        },
+        exit: {
+          height: {
+            duration: duration ?? 0.3,
+            ease: MOTION_TRANSITION_EASINGS.ease,
+          },
+          opacity: {
+            duration: duration ?? 0.4,
+            ease: MOTION_TRANSITION_EASINGS.ease,
+          },
+        },
       }
-    }, [mounted, duration, transitionProp])
-
-    const custom = {
-      animationOpacity,
-      startingHeight,
-      endingHeight,
-      transition,
-      transitionEnd,
-      delay,
-      duration,
     }
+  }, [mounted, duration, transitionProp])
 
-    const css: CSSUIObject = {
-      ...style,
-      ...__css,
-    }
+  const custom = {
+    animationOpacity,
+    startingHeight,
+    endingHeight,
+    transition,
+    transitionEnd,
+    delay,
+    duration,
+  }
 
-    return (
-      <AnimatePresence initial={false} custom={custom}>
-        {isOpen ? (
-          <Motion
-            ref={ref}
-            className={cx("ui-collapse", className)}
-            {...rest}
-            {...collapseProps}
-            custom={custom}
-            animate={animate}
-            initial={unmountOnExit ? "exit" : false}
-            __css={css}
-            style={{ overflow: "hidden", ...rest.style }}
-          />
-        ) : null}
-      </AnimatePresence>
-    )
-  },
-)
+  const css: CSSUIObject = {
+    ...style,
+    ...__css,
+  }
+
+  return (
+    <AnimatePresence initial={false} custom={custom}>
+      {isOpen ? (
+        <Motion
+          ref={ref}
+          className={cx("ui-collapse", className)}
+          {...rest}
+          {...collapseProps}
+          custom={custom}
+          animate={animate}
+          initial={unmountOnExit ? "exit" : false}
+          __css={css}
+          style={{ overflow: "hidden", ...rest.style }}
+        />
+      ) : null}
+    </AnimatePresence>
+  )
+})

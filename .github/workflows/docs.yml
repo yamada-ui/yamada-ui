@@ -30,6 +30,6 @@ jobs:
       - name: Create PR
         if: steps.check_pr.outputs.pr_exists == '0'
         run: |
-          gh pr create --base main --head docs --title "Updated documentation" --body "Automated changes by GitHub action"
+          gh pr create --base main --head docs --title "Updated documentation" --body "Automated changes by GitHub action" --reviewer hirotomoyamada --assignee hirotomoyamada
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

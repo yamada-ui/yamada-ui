@@ -4,16 +4,11 @@ import type {
   CSSUIProps,
   Token,
 } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useMultiComponentStyle,
-} from "@yamada-ui/core"
+import { ui, omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
 import { FocusLock } from "@yamada-ui/focus-lock"
-import type { MotionProps, MotionTransitionProperties } from "@yamada-ui/motion"
-import { AnimatePresence, Motion } from "@yamada-ui/motion"
+import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
+import { AnimatePresence, Motion, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
@@ -149,7 +144,7 @@ type ModalOptions = Pick<
   /**
    * The animation duration.
    */
-  duration?: MotionTransitionProperties["duration"]
+  duration?: MotionTransitionProps["duration"]
   /**
    * Props to be forwarded to the portal component.
    */
@@ -163,7 +158,7 @@ export type ModalProps = ModalContentProps & ThemeProps<"Modal"> & ModalOptions
  *
  * @see Docs https://yamada-ui.com/components/overlay/modal
  */
-export const Modal = forwardRef<ModalProps, "section">(
+export const Modal = motionForwardRef<ModalProps, "section">(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Modal", {
       size,
@@ -305,7 +300,7 @@ export const Modal = forwardRef<ModalProps, "section">(
 
 const getModalContentProps = (
   animation: ModalProps["animation"] = "scale",
-  duration?: MotionTransitionProperties["duration"],
+  duration?: MotionTransitionProps["duration"],
 ) => {
   switch (animation) {
     case "scale":
@@ -338,10 +333,10 @@ const getModalContentProps = (
 
 type ModalContentProps = Omit<
   MotionProps<"section">,
-  "scrollBehavior" | "animation" | "children"
+  "color" | "scrollBehavior" | "animation" | "children"
 >
 
-const ModalContent = forwardRef<ModalContentProps, "section", false>(
+const ModalContent = motionForwardRef<ModalContentProps, "section">(
   ({ className, children, __css, ...rest }, ref) => {
     const {
       styles,

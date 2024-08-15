@@ -1,4 +1,4 @@
-import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import { Motion } from "@yamada-ui/motion"
@@ -9,7 +9,12 @@ import { usePopover } from "./popover"
 import type { PopoverProps } from "."
 import { PopoverCloseButton } from "."
 
-export type PopoverContentProps = Omit<MotionProps<"section">, "children">
+export type PopoverContentProps = Omit<MotionProps<"section">, "children"> & {
+  /**
+   * The props of the container element.
+   */
+  containerProps?: Omit<HTMLUIProps<"div">, "children">
+}
 
 const getPopoverContentProps = (
   animation: PopoverProps["animation"] = "scale",
@@ -55,6 +60,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
   (
     {
       className,
+      containerProps,
       children,
       w,
       width,
@@ -126,6 +132,7 @@ export const PopoverContent = forwardRef<PopoverContentProps, "section">(
         width={width}
         minWidth={minWidth}
         zIndex={zIndex}
+        {...containerProps}
       >
         <Motion
           as="section"

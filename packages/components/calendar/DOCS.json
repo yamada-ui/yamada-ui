@@ -8,7 +8,7 @@
     },
     "colorScheme": {
       "defaultValue": "primary",
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -342,7 +342,7 @@
       "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -350,6 +350,11 @@
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for date picker container element."
+    },
+    "contentProps": {
+      "type": "Omit<MotionProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for month picker container element."
     },
     "dateFormat": {
       "type": "string",
@@ -405,6 +410,11 @@
       "type": "(date: Date) => boolean",
       "required": false,
       "description": "Callback function to determine whether the day should be disabled."
+    },
+    "fieldProps": {
+      "type": "Omit<DatePickerFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for date picker field element."
     },
     "firstDayOfWeek": {
       "type": "\"sunday\" | \"monday\"",
@@ -779,7 +789,7 @@
       "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -790,6 +800,11 @@
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for date picker container element."
+    },
+    "contentProps": {
+      "type": "Omit<MotionProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for date picker container element."
     },
@@ -847,6 +862,11 @@
       "type": "(date: Date) => boolean",
       "required": false,
       "description": "Callback function to determine whether the day should be disabled."
+    },
+    "fieldProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for date picker field element."
     },
     "firstDayOfWeek": {
       "type": "\"sunday\" | \"monday\"",
@@ -1227,12 +1247,17 @@
       "description": "If `true`, the list element will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for date picker container element."
+    },
+    "contentProps": {
+      "type": "Omit<MotionProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for date picker container element."
     },
@@ -1300,6 +1325,11 @@
       "type": "(date: Date) => boolean",
       "required": false,
       "description": "Callback function to determine whether the day should be disabled."
+    },
+    "fieldProps": {
+      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for date picker field element."
     },
     "firstDayOfWeek": {
       "type": "\"sunday\" | \"monday\"",
@@ -1673,12 +1703,17 @@
       "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for month picker container element."
+    },
+    "contentProps": {
+      "type": "Omit<MotionProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for month picker container element."
     },
@@ -1719,6 +1754,11 @@
       "defaultValue": true,
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+    },
+    "fieldProps": {
+      "type": "Omit<DatePickerFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for month picker field element."
     },
     "flip": {
       "type": "boolean",
@@ -2029,12 +2069,17 @@
       "description": "If `true`, the calendar component will be closed when value is selected."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
       "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "required": false,
+      "description": "Props for year picker container element."
+    },
+    "contentProps": {
+      "type": "Omit<MotionProps<\"div\">, \"children\">",
       "required": false,
       "description": "Props for year picker container element."
     },
@@ -2063,6 +2108,11 @@
       "defaultValue": true,
       "required": false,
       "description": "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+    },
+    "fieldProps": {
+      "type": "Omit<DatePickerFieldProps, \"children\" | \"inputProps\">",
+      "required": false,
+      "description": "Props for year picker field element."
     },
     "flip": {
       "type": "boolean",

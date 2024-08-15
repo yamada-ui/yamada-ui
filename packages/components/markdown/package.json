@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/markdown",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "Yamada UI markdown component",
   "keywords": [
     "yamada",
@@ -55,7 +55,7 @@
     "rehype-raw": "^7.0.0",
     "remark-breaks": "^4.0.0",
     "remark-gfm": "^4.0.0",
-    "ts-pattern": "^5.2.0",
+    "ts-pattern": "^5.3.1",
     "unist-util-is": "^6.0.0",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "5.0.0"
@@ -66,9 +66,9 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/unist": "^3.0.2",
     "clean-package": "2.2.0",
-    "unified": "^11.0.5",
     "dedent": "^1.5.3",
-    "react": "^18.3.1"
+    "react": "^18.3.1",
+    "unified": "^11.0.5"
   },
   "peerDependencies": {
     "react": ">=18"

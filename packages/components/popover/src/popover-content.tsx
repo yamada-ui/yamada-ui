@@ -1,7 +1,7 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
-import { Motion } from "@yamada-ui/motion"
+import { ui } from "@yamada-ui/core"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
+import { Motion, motionForwardRef } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
@@ -9,7 +9,7 @@ import { usePopover } from "./popover"
 import type { PopoverProps } from "."
 import { PopoverCloseButton } from "."
 
-export type PopoverContentProps = Omit<MotionProps<"section">, "children">
+export type PopoverContentProps = MotionPropsWithoutChildren<"section">
 
 const getPopoverContentProps = (
   animation: PopoverProps["animation"] = "scale",
@@ -51,7 +51,7 @@ const getPopoverContentProps = (
   }
 }
 
-export const PopoverContent = forwardRef<PopoverContentProps, "section">(
+export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
   (
     {
       className,

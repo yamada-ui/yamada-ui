@@ -38,7 +38,7 @@ tab: Props
 <PropsCard
   id="donutchart-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
@@ -73,6 +73,13 @@ tab: Props
   type="boolean"
   description={"Determines whether labels should be displayed as percentages."}
   defaultValue={"false"}
+/>
+
+<PropsCard
+  id="donutchart-labelformatter"
+  name="labelFormatter"
+  type="(value: number) => string"
+  description={"A function to format labels."}
 />
 
 <PropsCard
@@ -165,10 +172,8 @@ tab: Props
 <PropsCard
   id="donutchart-valueformatter"
   name="valueFormatter"
-  type="((value: number) => string) & ((value: number) => string)"
-  description={
-    "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
-  }
+  type="(value: any) => string"
+  description={"A function to format values on inside the tooltip."}
 />
 
 <PropsCard

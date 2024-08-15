@@ -1,5 +1,80 @@
 # @yamada-ui/react
 
+## 1.4.9
+
+### Patch Changes
+
+- Updated dependencies [[`6390a78`](https://github.com/yamada-ui/yamada-ui/commit/6390a78330ff35419720507ca8b6e537fca190e6), [`8640407`](https://github.com/yamada-ui/yamada-ui/commit/8640407a72480dcbcbd62a75455ded0548696b9e), [`3349420`](https://github.com/yamada-ui/yamada-ui/commit/334942088754f477f0959ed88b29457759970eec), [`86b4b20`](https://github.com/yamada-ui/yamada-ui/commit/86b4b202bebb371074e1d3a9ba7b6cce73c78152), [`ec88127`](https://github.com/yamada-ui/yamada-ui/commit/ec88127c59b4dfe43ae8f2245730534c6ba36d02), [`3822a8e`](https://github.com/yamada-ui/yamada-ui/commit/3822a8efaf66363c904a6512897ef4bda41ea939), [`93d7e63`](https://github.com/yamada-ui/yamada-ui/commit/93d7e630c2c0939284143f41e5df594ef46aae2f), [`a1beb62`](https://github.com/yamada-ui/yamada-ui/commit/a1beb62b13ab70296d4fc820efb006df78fc2d43), [`dae6a0d`](https://github.com/yamada-ui/yamada-ui/commit/dae6a0d958226f715efdab7422e6e5792b1c73ac), [`2e58d32`](https://github.com/yamada-ui/yamada-ui/commit/2e58d3242d406afea151a43d1010b3084c211034), [`3e063f6`](https://github.com/yamada-ui/yamada-ui/commit/3e063f65ce2b8de593127db504e72236df00bb8f), [`16f7510`](https://github.com/yamada-ui/yamada-ui/commit/16f75107d8323495f27b39745f7dfe998ea73ee2), [`6be9ded`](https://github.com/yamada-ui/yamada-ui/commit/6be9dedd223cf1cf6196520914f25551fe760186), [`0d05ec4`](https://github.com/yamada-ui/yamada-ui/commit/0d05ec40404d5ef661ec8d80d38bef0ed36910e0), [`cb7eece`](https://github.com/yamada-ui/yamada-ui/commit/cb7eece896497fafa11b9c56d2240c769ddf1aed), [`40c79b5`](https://github.com/yamada-ui/yamada-ui/commit/40c79b5989015e60340260874ef13666148be795), [`a8602ec`](https://github.com/yamada-ui/yamada-ui/commit/a8602ec15225ed3e1e9ce695b1a1b237b07771d1), [`da7f7f8`](https://github.com/yamada-ui/yamada-ui/commit/da7f7f84a423c68f6cf02a020410da06963e1d08), [`dae6a0d`](https://github.com/yamada-ui/yamada-ui/commit/dae6a0d958226f715efdab7422e6e5792b1c73ac)]:
+  - @yamada-ui/core@1.12.0
+  - @yamada-ui/popover@1.2.10
+  - @yamada-ui/motion@2.1.2
+  - @yamada-ui/modal@1.3.7
+  - @yamada-ui/select@1.4.0
+  - @yamada-ui/autocomplete@1.4.0
+  - @yamada-ui/theme@1.16.0
+  - @yamada-ui/notice@1.1.0
+  - @yamada-ui/color-picker@1.3.0
+  - @yamada-ui/snacks@1.1.0
+  - @yamada-ui/theme-tools@1.1.0
+  - @yamada-ui/accordion@2.0.6
+  - @yamada-ui/alert@1.0.37
+  - @yamada-ui/avatar@1.2.5
+  - @yamada-ui/badge@1.0.34
+  - @yamada-ui/breadcrumb@1.3.8
+  - @yamada-ui/button@1.0.39
+  - @yamada-ui/card@1.0.36
+  - @yamada-ui/checkbox@1.1.5
+  - @yamada-ui/close-button@1.0.37
+  - @yamada-ui/editable@1.0.40
+  - @yamada-ui/file-button@1.1.2
+  - @yamada-ui/file-input@1.0.39
+  - @yamada-ui/form-control@2.0.4
+  - @yamada-ui/highlight@1.0.34
+  - @yamada-ui/icon@1.1.3
+  - @yamada-ui/image@1.1.2
+  - @yamada-ui/indicator@1.1.34
+  - @yamada-ui/infinite-scroll-area@1.2.3
+  - @yamada-ui/input@1.0.39
+  - @yamada-ui/kbd@1.0.34
+  - @yamada-ui/layouts@1.1.32
+  - @yamada-ui/link@1.0.34
+  - @yamada-ui/list@1.0.36
+  - @yamada-ui/loading@1.1.13
+  - @yamada-ui/menu@1.3.10
+  - @yamada-ui/native-select@1.0.41
+  - @yamada-ui/native-table@1.0.36
+  - @yamada-ui/number-input@1.1.11
+  - @yamada-ui/pagination@1.0.37
+  - @yamada-ui/pin-input@1.0.38
+  - @yamada-ui/progress@1.0.35
+  - @yamada-ui/radio@1.2.5
+  - @yamada-ui/rating@1.0.38
+  - @yamada-ui/reorder@2.0.7
+  - @yamada-ui/resizable@1.1.9
+  - @yamada-ui/ripple@1.0.35
+  - @yamada-ui/scroll-area@1.0.35
+  - @yamada-ui/segmented-control@1.0.37
+  - @yamada-ui/skeleton@1.1.2
+  - @yamada-ui/slider@1.2.2
+  - @yamada-ui/stat@1.0.34
+  - @yamada-ui/stepper@1.0.37
+  - @yamada-ui/switch@1.1.6
+  - @yamada-ui/tabs@1.0.36
+  - @yamada-ui/tag@1.0.37
+  - @yamada-ui/textarea@1.1.26
+  - @yamada-ui/toggle@1.0.18
+  - @yamada-ui/tooltip@1.1.8
+  - @yamada-ui/transitions@1.1.2
+  - @yamada-ui/typography@1.0.34
+  - @yamada-ui/visually-hidden@1.0.8
+  - @yamada-ui/use-animation@1.0.34
+  - @yamada-ui/use-breakpoint@1.4.5
+  - @yamada-ui/use-media-query@1.0.44
+  - @yamada-ui/use-popper@1.0.34
+  - @yamada-ui/use-token@1.1.22
+  - @yamada-ui/use-value@1.1.22
+  - @yamada-ui/providers@1.2.4
+
 ## 1.4.8
 
 ### Patch Changes

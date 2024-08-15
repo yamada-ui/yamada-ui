@@ -1,13 +1,13 @@
 name: "Documentation Request"
 description: "Propose new documentation requests or improvements."
-labels: ["documentation", "enhancement"]
+labels: ["triage", "documentation", "enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
         Thank you for creating a documentation request 😎!
 
-        If you have an idea for a new documentation topic, noticed that something is not properly documented, or feel that something is incorrect with the current documentation, you're in the right place!
+        If you have an idea for a new documentation topic or noticed that something is not properly documented, you're in the right place!
   - type: input
     id: subject
     attributes:

@@ -21,7 +21,7 @@
       "description": "Props passed down to recharts `LineChart` component."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -52,6 +52,11 @@
       "type": "Omit<CSSUIProps, \"string\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps",
       "required": false,
       "description": "Props passed down to recharts 'CartesianGrid' component."
+    },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "required": false,
+      "description": "A function to format labels on inside the tooltip."
     },
     "layoutType": {
       "type": "ChartLayoutType",
@@ -114,9 +119,9 @@
       "description": "Unit displayed next to each tick in y-axis."
     },
     "valueFormatter": {
-      "type": "(value: number) => string",
+      "type": "(value: any) => string",
       "required": false,
-      "description": "A function to format values on Y axis and inside the tooltip"
+      "description": "A function to format values on inside the tooltip."
     },
     "variant": {
       "type": "string",
@@ -174,6 +179,11 @@
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
     },
+    "xAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format X axis tick."
+    },
     "yAxisLabel": {
       "type": "string",
       "required": false,
@@ -188,6 +198,11 @@
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'YAxis' component."
+    },
+    "yAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format Y axis tick."
     }
   },
   "BarChart": {
@@ -211,13 +226,18 @@
       "required": false,
       "description": "Props for the bars."
     },
+    "cell": {
+      "type": "string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>",
+      "required": false,
+      "description": "A function that returns a component that renders the bar cells."
+    },
     "chartProps": {
       "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
       "required": false,
       "description": "Props passed down to recharts `BarChart` component."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -236,6 +256,11 @@
       "type": "Omit<CSSUIProps, \"string\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps",
       "required": false,
       "description": "Props passed down to recharts 'CartesianGrid' component."
+    },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "required": false,
+      "description": "A function to format labels on inside the tooltip."
     },
     "layoutType": {
       "type": "ChartLayoutType",
@@ -293,9 +318,9 @@
       "description": "Unit displayed next to each tick in y-axis."
     },
     "valueFormatter": {
-      "type": "(value: number) => string",
+      "type": "(value: any) => string",
       "required": false,
-      "description": "A function to format values on Y axis and inside the tooltip"
+      "description": "A function to format values on inside the tooltip."
     },
     "variant": {
       "type": "string",
@@ -341,6 +366,11 @@
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
     },
+    "xAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format X axis tick."
+    },
     "yAxisLabel": {
       "type": "string",
       "required": false,
@@ -355,6 +385,20 @@
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'YAxis' component."
+    },
+    "yAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format Y axis tick."
+    }
+  },
+  "BarCell": {
+    "data": { "type": "Dict", "required": true },
+    "hasStack": { "type": "boolean", "required": true },
+    "index": { "type": "number", "required": true },
+    "series": {
+      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"barSize\" | \"maxBarSize\" | \"style\" | \"className\" | ... 494 more ... | \"animationId\"> & Omit<...> & BarProps, \"color\" | ... 2 more ... | \"dimBar\"> & { ...; }",
+      "required": true
     }
   },
   "AreaChart": {
@@ -384,7 +428,7 @@
       "description": "Props passed down to recharts `AreaChart` component."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -415,6 +459,11 @@
       "type": "Omit<CSSUIProps, \"string\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps",
       "required": false,
       "description": "Props passed down to recharts 'CartesianGrid' component."
+    },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "required": false,
+      "description": "A function to format labels on inside the tooltip."
     },
     "layoutType": {
       "type": "ChartLayoutType",
@@ -483,9 +532,9 @@
       "description": "Unit displayed next to each tick in y-axis."
     },
     "valueFormatter": {
-      "type": "(value: number) => string",
+      "type": "(value: any) => string",
       "required": false,
-      "description": "A function to format values on Y axis and inside the tooltip"
+      "description": "A function to format values on inside the tooltip."
     },
     "variant": {
       "type": "string",
@@ -548,6 +597,11 @@
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
     },
+    "xAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format X axis tick."
+    },
     "yAxisLabel": {
       "type": "string",
       "required": false,
@@ -562,6 +616,11 @@
       "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
       "required": false,
       "description": "Props passed down to recharts 'YAxis' component."
+    },
+    "yAxisTickFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format Y axis tick."
     }
   },
   "RadarChart": {
@@ -586,7 +645,7 @@
       "description": "Props passed down to recharts `RadarChart` component."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -605,6 +664,11 @@
       "required": false,
       "description": "Props passed down to recharts `PolarAngleAxis` component."
     },
+    "polarAngleAxisTickFormatter": {
+      "type": "(value: number) => string",
+      "required": false,
+      "description": "A function to format Y axis tick."
+    },
     "polarAngleAxisTickProps": {
       "type": "CSSUIProps",
       "required": false,
@@ -619,6 +683,11 @@
       "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"id\" | \"role\" | \"tabIndex\" | \"ref\" | \"clipPath\" | \"color\" | \"cursor\" | \"direction\" | \"display\" | ... 245 more ... | keyof PolarRadiusAxisProps> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PolarRadiusAxisProps",
       "required": false,
       "description": "Props passed down to recharts `PolarRadiusAxis` component."
+    },
+    "polarRadiusAxisTickFormatter": {
+      "type": "(value: number) => string",
+      "required": false,
+      "description": "A function to format X axis tick."
     },
     "polarRadiusAxisTickProps": {
       "type": "CSSUIProps",
@@ -653,9 +722,9 @@
       "description": "Unit displayed next to each tick in y-axis."
     },
     "valueFormatter": {
-      "type": "(value: number) => string",
+      "type": "(value: any) => string",
       "required": false,
-      "description": "A function to format values on Y axis and inside the tooltip."
+      "description": "A function to format values on inside the tooltip."
     },
     "variant": {
       "type": "string",
@@ -722,7 +791,7 @@
       "description": "Props passed down to recharts `PieChart` component."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -748,6 +817,11 @@
       "defaultValue": false,
       "required": false,
       "description": "Determines whether labels should be displayed as percentages."
+    },
+    "labelFormatter": {
+      "type": "(value: number) => string",
+      "required": false,
+      "description": "A function to format labels."
     },
     "labelOffset": {
       "type": "number",
@@ -811,9 +885,9 @@
       "description": "Unit displayed next to each tick in y-axis."
     },
     "valueFormatter": {
-      "type": "((value: number) => string) & ((value: number) => string)",
+      "type": "(value: any) => string",
       "required": false,
-      "description": "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
+      "description": "A function to format values on inside the tooltip."
     },
     "variant": {
       "type": "string",
@@ -862,7 +936,7 @@
       "description": "Props passed down to recharts `PieChart` component."
     },
     "colorScheme": {
-      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\"",
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
     },
@@ -888,6 +962,11 @@
       "defaultValue": false,
       "required": false,
       "description": "Determines whether labels should be displayed as percentages."
+    },
+    "labelFormatter": {
+      "type": "(value: number) => string",
+      "required": false,
+      "description": "A function to format labels."
     },
     "labelOffset": {
       "type": "number",
@@ -951,9 +1030,9 @@
       "description": "Unit displayed next to each tick in y-axis."
     },
     "valueFormatter": {
-      "type": "((value: number) => string) & ((value: number) => string)",
+      "type": "(value: any) => string",
       "required": false,
-      "description": "A function to format values inside the tooltip\n\n\nA function to format values inside the tooltip."
+      "description": "A function to format values on inside the tooltip."
     },
     "variant": {
       "type": "string",

@@ -20,7 +20,7 @@ export const Company: FC<CompanyProps> = memo(({ ...rest }) => {
       {...rest}
     >
       <HStack as="header" alignItems="flex-end" gap="sm">
-        <Mountain size="3xl" />
+        <Mountain fontSize="3xl" />
 
         <Heading as="h2" size="md" lineHeight={1.125} fontWeight="normal">
           Yamada Inc

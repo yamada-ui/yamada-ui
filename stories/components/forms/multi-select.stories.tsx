@@ -10,7 +10,7 @@ import {
   VStack,
   Button,
 } from "@yamada-ui/react"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 
@@ -96,6 +96,50 @@ export const withVariant: Story = () => {
       <MultiSelect variant="flushed" placeholder="flushed" />
       <MultiSelect variant="unstyled" placeholder="unstyled" />
     </>
+  )
+}
+
+export const withFooter: Story = () => {
+  const [value, onChange] = useState<string[]>([])
+  const items: SelectItem[] = useMemo(
+    () => [
+      { label: "孫悟空", value: "孫悟空" },
+      { label: "孫悟飯", value: "孫悟飯" },
+      { label: "クリリン", value: "クリリン" },
+    ],
+    [],
+  )
+  const allValues = useMemo(
+    () =>
+      items
+        .map((item) => ("value" in item ? item.value : undefined))
+        .filter((value) => value !== undefined),
+    [items],
+  )
+
+  return (
+    <MultiSelect
+      value={value}
+      onChange={onChange}
+      placeholder="キャラクターを選択"
+      footer={({ onClose }) => (
+        <VStack
+          borderTopWidth="1px"
+          borderColor={["blackAlpha.200", "whiteAlpha.100"]}
+          p="2"
+        >
+          <Button
+            onClick={() => {
+              onChange(allValues)
+              onClose()
+            }}
+          >
+            Set all values
+          </Button>
+        </VStack>
+      )}
+      items={items}
+    />
   )
 }
 

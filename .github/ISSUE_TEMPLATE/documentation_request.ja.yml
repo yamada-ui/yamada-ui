@@ -1,13 +1,13 @@
 name: "Documentation Request (日本語)"
 description: "新しいドキュメントのリクエストや改善を提案します。"
-labels: ["documentation", "enhancement"]
+labels: ["triage", "documentation", "enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
         ドキュメントリクエストを作成していただきありがとうございます！ 😎
 
-        新しいドキュメントのトピックについてのアイデアがある、何かが適切にドキュメントされていないと気づいた、または現在のドキュメントに何か誤りがあると感じた場合は、ここが正解です！
+        新しいドキュメントのトピックについてのアイデアがある、何かが適切にドキュメントされていないと気づいた場合は、ここが正解です！
   - type: input
     id: subject
     attributes:

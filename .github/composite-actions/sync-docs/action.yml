@@ -1,5 +1,5 @@
-name: "Update docs"
-description: "Update the documentation sites after the release"
+name: "Sync docs"
+description: "Sync the documentation sites after the release"
 
 runs:
   using: composite
@@ -8,7 +8,7 @@ runs:
       run: git fetch origin
       shell: bash
 
-    - name: Update docs
+    - name: Sync docs
       run: |
         pnpm gen:docs
         pnpm docs:theme
@@ -24,9 +24,9 @@ runs:
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ env.GITHUB_TOKEN }}
-        base: main
-        commit-message: "ci(changesets): version packages"
-        title: "Updated documentation"
+        base: docs
+        commit-message: "ci(changesets): sync documentation"
+        title: "Sync documentation"
         branch: changeset-release/docs
         assignees: "hirotomoyamada"
         reviewers: "hirotomoyamada"

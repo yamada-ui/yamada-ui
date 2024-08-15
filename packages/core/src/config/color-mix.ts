@@ -17,7 +17,9 @@ const methods: Record<string, string> = {
   "xyz-d65": "in xyz-d65",
 }
 
-const getColor = (value: string, theme: StyledTheme) => {
+const getColor = (value: string | undefined, theme: StyledTheme) => {
+  if (!value) return ""
+
   let [color, ratio] = value.split(" ")
 
   const token = `colors.${color}`
@@ -58,5 +60,10 @@ export const generateColorMix: Transform = (value, theme) => {
   color1 = getColor(color1, theme)
   color2 = getColor(color2, theme)
 
-  return `${type}(${method}, ${color1}, ${color2})`
+  return (
+    `${type}(${method}` +
+    (color1 ? `, ${color1}` : "") +
+    (color2 ? `, ${color2}` : "") +
+    ")"
+  )
 }

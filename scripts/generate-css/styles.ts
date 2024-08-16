@@ -260,15 +260,15 @@ export const generateStyles = async (
       ${pseudoStyles.join(",\n")}
     }
 
-    export const uiStyles: Configs = {
+    export const uiStyles: StyleConfigs = {
       ${uiStyles.join(",\n")}
     }
 
-    export const atRuleStyles: Configs = {
+    export const atRuleStyles: StyleConfigs = {
       ${atRuleStyles.join(",\n")}
     }
 
-    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles }
+    export const styles: StyleConfigs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles }
 
     export const processSkipProperties: string[] = [${processSkipProperties.map(
       (property) => `"${property}"`,

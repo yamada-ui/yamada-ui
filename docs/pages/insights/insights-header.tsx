@@ -23,6 +23,7 @@ import {
   INSIGHT_USER_SUGGEST,
   INSIGHT_MEMBERS_IDS,
   INSIGHT_MAINTAINERS_IDS,
+  INSIGHT_MAX_DATE,
 } from "./insights-utils"
 import { RangeDatePicker } from "@yamada-ui/calendar"
 import type { ManipulateType } from "dayjs"
@@ -271,7 +272,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
       dateFormat={locale === "ja" ? "YYYY年 MMMM" : undefined}
       yearFormat={locale === "ja" ? "YYYY年" : undefined}
       minDate={INSIGHT_MIN_DATE}
-      maxDate={new Date()}
+      maxDate={INSIGHT_MAX_DATE}
       isClearable={false}
       isOpen={isOpen}
       onOpen={onOpen}

@@ -481,9 +481,10 @@ const mewtwo: CellProps[] = useMemo(
 return <PieChart data={mewtwo} withTooltip={false} />
 ```
 
-### Format Values
+### Format
 
-To format values, use `valueFormatter`.
+To format tooltip values, use `valueFormatter`.
+To format label values, use `labelFormatter`.
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -523,7 +524,14 @@ const mewtwo: CellProps[] = useMemo(
 )
 
 return (
-  <PieChart data={mewtwo} valueFormatter={(value) => value.toLocaleString()} />
+  <VStack>
+    <PieChart data={mewtwo} valueFormatter={(value) => `${value}P`} />
+    <PieChart
+      data={mewtwo}
+      withLabels
+      labelFormatter={(value) => `${value}P`}
+    />
+  </VStack>
 )
 ```
 

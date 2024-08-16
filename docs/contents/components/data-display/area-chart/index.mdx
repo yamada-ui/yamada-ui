@@ -1017,9 +1017,10 @@ const series: AreaProps[] = useMemo(
 return <AreaChart data={data} series={series} dataKey="name" unit="P" />
 ```
 
-### Format Value
+### Format
 
-To format values, use `valueFormatter`.
+To format tooltip labels, use `labelFormatter`, and to format values, use `valueFormatter`.
+To format axis labels, use `xAxisTickFormatter` or `yAxisTickFormatter`.
 
 ```tsx functional=true
 const data = useMemo(
@@ -1068,12 +1069,22 @@ const series: AreaProps[] = useMemo(
 )
 
 return (
-  <AreaChart
-    data={data}
-    series={series}
-    dataKey="name"
-    valueFormatter={(value) => value.toLocaleString()}
-  />
+  <VStack>
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      labelFormatter={(value) => `ポケモン: ${value}`}
+      valueFormatter={(value) => `${value}P`}
+    />
+    <AreaChart
+      data={data}
+      series={series}
+      dataKey="name"
+      xAxisTickFormatter={(value) => `ポケモン: ${value}`}
+      yAxisTickFormatter={(value) => `${value}P`}
+    />
+  </VStack>
 )
 ```
 

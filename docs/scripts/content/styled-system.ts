@@ -15,6 +15,7 @@ import {
   isTypeAliasDeclaration,
   isTypeLiteralNode,
   isVariableStatement,
+  isExpression,
 } from "typescript"
 import { toKebabCase } from "utils/string"
 import { getMDXFile, writeMDXFile } from "../utils"
@@ -191,9 +192,13 @@ const parseProps: p.RequiredRunner =
 
           if (!targetStatements.includes(name.text)) continue
 
+          if (!initializer) continue
+
           const isShorthand = name.text === "shorthandStyles"
 
-          if (initializer && isObjectLiteralExpression(initializer)) {
+          if (!isExpression(initializer)) continue
+
+          if (isObjectLiteralExpression(initializer)) {
             initializer.properties.forEach((property) => {
               if (!isPropertyAssignment(property)) return
 
@@ -202,30 +207,39 @@ const parseProps: p.RequiredRunner =
               const prop = name.getText(sourceFile)
               let value = initializer.getText(sourceFile)
 
-              if (type === "style") {
-                value = value.replace(/(\w+):/g, '"$1":')
+              value = value.replace(/(\w+):/g, '"$1":')
 
-                if (!isShorthand) {
-                  const data = getData(prop, value)
+              if (!isShorthand) {
+                const data = getData(prop, value)
 
-                  if (data) props[prop] = { ...props[prop], ...data }
-                } else {
-                  if (isStringObject(value)) {
-                    value = JSON.parse(value).properties
-                  } else {
-                    value = value.split(".")[1]
-                  }
-
-                  props[value] = {
-                    ...(props[value] ?? {}),
-                    shorthands: [...(props[value].shorthands ?? []), prop],
-                  }
-                }
+                if (data) props[prop] = { ...props[prop], ...data }
               } else {
+                if (isStringObject(value)) {
+                  value = JSON.parse(value).properties
+                } else {
+                  value = value.split(".")[1]
+                }
+
+                props[value] = {
+                  ...(props[value] ?? {}),
+                  shorthands: [...(props[value].shorthands ?? []), prop],
+                }
+              }
+            })
+          } else {
+            initializer.forEachChild((node) => {
+              node.forEachChild((node) => {
+                if (!isPropertyAssignment(node)) return
+
+                const { name, initializer } = node
+
+                const prop = name.getText(sourceFile)
+                let value = initializer.getText(sourceFile)
+
                 value = value.replace(/^"|"$/g, "")
 
                 props[prop] = { properties: [value] }
-              }
+              })
             })
           }
         }

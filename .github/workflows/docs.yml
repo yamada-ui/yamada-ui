@@ -1,0 +1,35 @@
+name: Create PR for docs
+
+on:
+  push:
+    branches:
+      - documentation
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  create:
+    name: Create PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for existing PR
+        id: check_pr
+        run: |
+          pr_exists=$(gh pr list --base main --head documentation --json number --jq 'length')
+          echo "pr_exists=$pr_exists" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create PR
+        if: steps.check_pr.outputs.pr_exists == '0'
+        run: |
+          gh pr create --base main --head documentation --title "Updated documentation" --body "Automated changes by GitHub action" --reviewer hirotomoyamada --assignee hirotomoyamada
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

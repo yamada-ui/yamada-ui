@@ -14,7 +14,6 @@ export const standardStyles: Configs = {
   alignContent: true,
   alignItems: true,
   alignSelf: true,
-  alignTracks: true,
   all: true,
   animation: {
     properties: "animation",
@@ -180,7 +179,10 @@ export const standardStyles: Configs = {
   borderImageOutset: true,
   borderImageRepeat: true,
   borderImageSlice: true,
-  borderImageSource: true,
+  borderImageSource: {
+    properties: "borderImageSource",
+    transform: transforms.gradient,
+  },
   borderImageWidth: {
     properties: "borderImageWidth",
     transform: transforms.px,
@@ -329,6 +331,7 @@ export const standardStyles: Configs = {
   clear: true,
   clip: true,
   clipPath: true,
+  clipRule: true,
   color: {
     properties: "color",
     token: "colors",
@@ -374,6 +377,13 @@ export const standardStyles: Configs = {
   direction: true,
   display: true,
   emptyCells: true,
+  fill: {
+    properties: "fill",
+    token: "colors",
+    transform: transforms.token("colors"),
+  },
+  fillOpacity: true,
+  fillRule: true,
   flex: true,
   flexBasis: {
     properties: "flexBasis",
@@ -503,7 +513,6 @@ export const standardStyles: Configs = {
   justifyContent: true,
   justifyItems: true,
   justifySelf: true,
-  justifyTracks: true,
   left: {
     properties: "left",
     token: "spaces",
@@ -522,7 +531,10 @@ export const standardStyles: Configs = {
   },
   lineHeightStep: true,
   listStyle: true,
-  listStyleImage: true,
+  listStyleImage: {
+    properties: "listStyleImage",
+    transform: transforms.gradient,
+  },
   listStylePosition: true,
   listStyleType: true,
   margin: {
@@ -591,7 +603,7 @@ export const standardStyles: Configs = {
   maskBorderWidth: { properties: "maskBorderWidth", transform: transforms.px },
   maskClip: true,
   maskComposite: true,
-  maskImage: true,
+  maskImage: { properties: "maskImage", transform: transforms.gradient },
   maskMode: true,
   maskOrigin: true,
   maskPosition: true,
@@ -834,10 +846,14 @@ export const standardStyles: Configs = {
   shapeImageThreshold: true,
   shapeMargin: true,
   shapeOutside: true,
+  shapeRendering: true,
+  stopColor: true,
+  stopOpacity: true,
   tabSize: true,
   tableLayout: true,
   textAlign: true,
   textAlignLast: true,
+  textAnchor: true,
   textCombineUpright: true,
   textDecoration: true,
   textDecorationColor: {
@@ -932,15 +948,7 @@ export const standardStyles: Configs = {
   alignmentBaseline: true,
   azimuth: true,
   baselineShift: true,
-  clipRule: true,
   dominantBaseline: true,
-  fill: {
-    properties: "fill",
-    token: "colors",
-    transform: transforms.token("colors"),
-  },
-  fillOpacity: true,
-  fillRule: true,
   floodColor: {
     properties: "floodColor",
     token: "colors",
@@ -956,9 +964,6 @@ export const standardStyles: Configs = {
   markerEnd: true,
   markerMid: true,
   markerStart: true,
-  shapeRendering: true,
-  stopColor: true,
-  stopOpacity: true,
   stroke: {
     properties: "stroke",
     token: "colors",
@@ -971,7 +976,6 @@ export const standardStyles: Configs = {
   strokeMiterlimit: true,
   strokeOpacity: true,
   strokeWidth: { properties: "strokeWidth", transform: transforms.px },
-  textAnchor: true,
   vectorEffect: true,
   marginX: {
     properties: ["marginInlineStart", "marginInlineEnd"],
@@ -1251,7 +1255,7 @@ export const shorthandStyles: Configs = {
   insetStart: standardStyles.insetInlineStart,
   tracking: standardStyles.letterSpacing,
   leading: standardStyles.lineHeight,
-  listStyleImg: { properties: "listStyleImage" },
+  listStyleImg: standardStyles.listStyleImage,
   listStylePos: { properties: "listStylePosition" },
   m: standardStyles.margin,
   mb: standardStyles.marginBottom,
@@ -1299,6 +1303,11 @@ export const shorthandStyles: Configs = {
   roundedEnd: standardStyles.borderInlineEndRadius,
 }
 
+export const pseudoStyles: Configs = {
+  "&::before": { properties: "&::before", transform: transforms.content },
+  "&::after": { properties: "&::after", transform: transforms.content },
+}
+
 export const atRuleStyles: Configs = {
   _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
   _container: {
@@ -1316,6 +1325,7 @@ export const atRuleStyles: Configs = {
 export const styles: Configs = {
   ...standardStyles,
   ...shorthandStyles,
+  ...pseudoStyles,
   ...atRuleStyles,
 }
 
@@ -1503,12 +1513,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
    */
   alignSelf?: Token<CSS.Property.AlignSelf>
-  /**
-   * The CSS `align-tracks` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-tracks
-   */
-  alignTracks?: Token<CSS.Property.AlignTracks>
   /**
    * The CSS `all` property.
    *
@@ -2480,6 +2484,12 @@ export type StyleProps = {
    */
   clipPath?: Token<CSS.Property.ClipPath>
   /**
+   * The CSS `clip-rule` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-rule
+   */
+  clipRule?: Token<CSS.Property.ClipRule>
+  /**
    * The CSS `color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
@@ -2677,6 +2687,24 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
    */
   emptyCells?: Token<CSS.Property.EmptyCells>
+  /**
+   * The CSS `fill` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill
+   */
+  fill?: Token<CSS.Property.Fill, "colors">
+  /**
+   * The CSS `fill-opacity` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-opacity
+   */
+  fillOpacity?: Token<CSS.Property.FillOpacity>
+  /**
+   * The CSS `fill-rule` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-rule
+   */
+  fillRule?: Token<CSS.Property.FillRule>
   /**
    * The CSS `flex` property.
    *
@@ -3151,12 +3179,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
    */
   justifySelf?: Token<CSS.Property.JustifySelf>
-  /**
-   * The CSS `justify-tracks` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-tracks
-   */
-  justifyTracks?: Token<CSS.Property.JustifyTracks>
   /**
    * The CSS `left` property.
    *
@@ -4235,6 +4257,24 @@ export type StyleProps = {
    */
   shapeOutside?: Token<CSS.Property.ShapeOutside>
   /**
+   * The CSS `shape-rendering` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-rendering
+   */
+  shapeRendering?: Token<CSS.Property.ShapeRendering>
+  /**
+   * The CSS `stop-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-color
+   */
+  stopColor?: Token<CSS.Property.StopColor>
+  /**
+   * The CSS `stop-opacity` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-opacity
+   */
+  stopOpacity?: Token<CSS.Property.StopOpacity>
+  /**
    * The CSS `tab-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
@@ -4258,6 +4298,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
    */
   textAlignLast?: Token<CSS.Property.TextAlignLast>
+  /**
+   * The CSS `text-anchor` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-anchor
+   */
+  textAnchor?: Token<CSS.Property.TextAnchor>
   /**
    * The CSS `text-combine-upright` property.
    *
@@ -4636,35 +4682,11 @@ export type StyleProps = {
    */
   baselineShift?: Token<CSS.Property.BaselineShift>
   /**
-   * The CSS `clip-rule` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/clip-rule
-   */
-  clipRule?: Token<CSS.Property.ClipRule>
-  /**
    * The CSS `dominant-baseline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline
    */
   dominantBaseline?: Token<CSS.Property.DominantBaseline>
-  /**
-   * The CSS `fill` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill
-   */
-  fill?: Token<CSS.Property.Fill, "colors">
-  /**
-   * The CSS `fill-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity
-   */
-  fillOpacity?: Token<CSS.Property.FillOpacity>
-  /**
-   * The CSS `fill-rule` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule
-   */
-  fillRule?: Token<CSS.Property.FillRule>
   /**
    * The CSS `flood-color` property.
    *
@@ -4707,24 +4729,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-start
    */
   markerStart?: Token<CSS.Property.MarkerStart>
-  /**
-   * The CSS `shape-rendering` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
-   */
-  shapeRendering?: Token<CSS.Property.ShapeRendering>
-  /**
-   * The CSS `stop-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-color
-   */
-  stopColor?: Token<CSS.Property.StopColor>
-  /**
-   * The CSS `stop-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-opacity
-   */
-  stopOpacity?: Token<CSS.Property.StopOpacity>
   /**
    * The CSS `stroke` property.
    *
@@ -4773,12 +4777,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
    */
   strokeWidth?: Token<CSS.Property.StrokeWidth | number>
-  /**
-   * The CSS `text-anchor` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor
-   */
-  textAnchor?: Token<CSS.Property.TextAnchor>
   /**
    * The CSS `vector-effect` property.
    *

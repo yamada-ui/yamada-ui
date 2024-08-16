@@ -53,6 +53,10 @@ export type PieChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.PieChart>
 >
+export type RadialChartProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>
+>
 export type ReferenceLineProps = Merge<CSSUIProps, Recharts.ReferenceLineProps>
 export type ResponsiveContainerProps = Merge<
   CSSUIProps,

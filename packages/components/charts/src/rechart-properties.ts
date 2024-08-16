@@ -77,6 +77,27 @@ export const pieChartProperties: (keyof ComponentPropsWithoutRef<
   typeof Recharts.PieChart
 >)[] = ["width", "height", "margin", "onClick", "onMouseEnter", "onMouseLeave"]
 
+export const radialChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof Recharts.RadialBarChart
+>)[] = [
+  "width",
+  "height",
+  "data",
+  "margin",
+  "barCategoryGap",
+  "barGap",
+  "cx",
+  "cy",
+  "startAngle",
+  "endAngle",
+  "innerRadius",
+  "outerRadius",
+  "barSize",
+  "onMouseEnter",
+  "onMouseLeave",
+  "onClick",
+]
+
 export const referenceLineProperties: (keyof Recharts.ReferenceLineProps)[] = [
   "xAxisId",
   "yAxisId",

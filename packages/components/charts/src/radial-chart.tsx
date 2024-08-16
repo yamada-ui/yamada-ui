@@ -24,7 +24,7 @@ import {
   useChartTooltip,
   type UseChartTooltipOptions,
 } from "./use-chart-tooltip"
-import type { UseRadialChartOptions } from "./use-radial-chart"
+import { useRadialChart, type UseRadialChartOptions } from "./use-radial-chart"
 
 type RadialChartOptions = {
   /**
@@ -76,6 +76,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
+  const { getRadialChartProps } = useRadialChart({ data, styles })
   const { getContainerProps } = useChart({ containerProps })
   const { tooltipProps: computedTooltipProps, getTooltipProps } =
     useChartTooltip({
@@ -100,12 +101,9 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
           {...getContainerProps({ className: "ui-radial-chart__container" })}
         >
           <RechartsRadialChart
-            cx="50%"
-            cy="50%"
-            innerRadius="10%"
-            outerRadius="80%"
-            barSize={10}
-            data={data}
+            {...getRadialChartProps({
+              className: "ui-radial-chart__chart",
+            })}
           >
             <RadialBar
               label={{ position: "insideStart", fill: "#fff" }}

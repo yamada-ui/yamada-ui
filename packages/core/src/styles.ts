@@ -593,6 +593,10 @@ export const standardStyles: Configs = {
     transform: transforms.token("spaces", transforms.px),
   },
   marginTrim: true,
+  marker: true,
+  markerEnd: true,
+  markerMid: true,
+  markerStart: true,
   mask: true,
   maskBorder: true,
   maskBorderMode: true,
@@ -849,6 +853,11 @@ export const standardStyles: Configs = {
   shapeRendering: true,
   stopColor: true,
   stopOpacity: true,
+  stroke: {
+    properties: "stroke",
+    token: "colors",
+    transform: transforms.token("colors"),
+  },
   tabSize: true,
   tableLayout: true,
   textAlign: true,
@@ -920,6 +929,7 @@ export const standardStyles: Configs = {
   translate: true,
   unicodeBidi: true,
   userSelect: true,
+  vectorEffect: true,
   verticalAlign: true,
   viewTimeline: true,
   viewTimelineAxis: true,
@@ -961,14 +971,6 @@ export const standardStyles: Configs = {
     token: "colors",
     transform: transforms.token("colors"),
   },
-  markerEnd: true,
-  markerMid: true,
-  markerStart: true,
-  stroke: {
-    properties: "stroke",
-    token: "colors",
-    transform: transforms.token("colors"),
-  },
   strokeDasharray: true,
   strokeDashoffset: true,
   strokeLinecap: true,
@@ -976,7 +978,6 @@ export const standardStyles: Configs = {
   strokeMiterlimit: true,
   strokeOpacity: true,
   strokeWidth: { properties: "strokeWidth", transform: transforms.px },
-  vectorEffect: true,
   marginX: {
     properties: ["marginInlineStart", "marginInlineEnd"],
     token: "spaces",
@@ -1173,34 +1174,6 @@ export const standardStyles: Configs = {
     transform: transforms.function("sepia"),
   },
   colorMode: { properties: "colorScheme" },
-  lineClamp: {
-    properties: "--ui-line-clamp",
-    isSkip: true,
-    static: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      display: "-webkit-box",
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
-    },
-  },
-  isTruncated: { isSkip: true, transform: transforms.isTruncated },
-  layerStyle: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles("layerStyles"),
-  },
-  textStyle: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles("textStyles"),
-  },
-  apply: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles(),
-  },
-  var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
 }
 
 export const shorthandStyles: Configs = {
@@ -1308,24 +1281,41 @@ export const pseudoStyles: Configs = {
   "&::after": { properties: "&::after", transform: transforms.content },
 }
 
+export const uiStyles: Configs = {
+  lineClamp: {
+    properties: "--ui-line-clamp",
+    static: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
+    },
+  },
+  isTruncated: { transform: transforms.isTruncated },
+  layerStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("layerStyles"),
+  },
+  textStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("textStyles"),
+  },
+  apply: { isProcessResult: true, transform: transforms.styles() },
+  var: { isProcessSkip: true, transform: transforms.var },
+}
+
 export const atRuleStyles: Configs = {
-  _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
-  _container: {
-    isProcessSkip: true,
-    isSkip: true,
-    transform: transforms.container,
-  },
-  _supports: {
-    isProcessSkip: true,
-    isSkip: true,
-    transform: transforms.supports,
-  },
+  _media: { isProcessSkip: true, transform: transforms.media },
+  _container: { isProcessSkip: true, transform: transforms.container },
+  _supports: { isProcessSkip: true, transform: transforms.supports },
 }
 
 export const styles: Configs = {
   ...standardStyles,
   ...shorthandStyles,
   ...pseudoStyles,
+  ...uiStyles,
   ...atRuleStyles,
 }
 
@@ -3384,6 +3374,30 @@ export type StyleProps = {
    */
   marginTrim?: Token<CSS.Property.MarginTrim>
   /**
+   * The CSS `marker` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker
+   */
+  marker?: Token<CSS.Property.Marker>
+  /**
+   * The CSS `marker-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-end
+   */
+  markerEnd?: Token<CSS.Property.MarkerEnd>
+  /**
+   * The CSS `marker-mid` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-mid
+   */
+  markerMid?: Token<CSS.Property.MarkerMid>
+  /**
+   * The CSS `marker-start` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-start
+   */
+  markerStart?: Token<CSS.Property.MarkerStart>
+  /**
    * The CSS `mask` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask
@@ -4275,6 +4289,12 @@ export type StyleProps = {
    */
   stopOpacity?: Token<CSS.Property.StopOpacity>
   /**
+   * The CSS `stroke` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke
+   */
+  stroke?: Token<CSS.Property.Stroke, "colors">
+  /**
    * The CSS `tab-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
@@ -4548,6 +4568,12 @@ export type StyleProps = {
    */
   userSelect?: Token<CSS.Property.UserSelect>
   /**
+   * The CSS `vector-effect` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vector-effect
+   */
+  vectorEffect?: Token<CSS.Property.VectorEffect>
+  /**
    * The CSS `vertical-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
@@ -4712,30 +4738,6 @@ export type StyleProps = {
    */
   lightingColor?: Token<CSS.Property.LightingColor, "colors">
   /**
-   * The CSS `marker-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-end
-   */
-  markerEnd?: Token<CSS.Property.MarkerEnd>
-  /**
-   * The CSS `marker-mid` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-mid
-   */
-  markerMid?: Token<CSS.Property.MarkerMid>
-  /**
-   * The CSS `marker-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-start
-   */
-  markerStart?: Token<CSS.Property.MarkerStart>
-  /**
-   * The CSS `stroke` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke
-   */
-  stroke?: Token<CSS.Property.Stroke, "colors">
-  /**
    * The CSS `stroke-dasharray` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
@@ -4777,12 +4779,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
    */
   strokeWidth?: Token<CSS.Property.StrokeWidth | number>
-  /**
-   * The CSS `vector-effect` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/vector-effect
-   */
-  vectorEffect?: Token<CSS.Property.VectorEffect>
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *

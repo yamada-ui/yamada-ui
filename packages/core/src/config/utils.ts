@@ -27,6 +27,51 @@ export const globalValues = new Set([
 export const isCSSFunction = (value: any) =>
   isString(value) && value.includes("(") && value.includes(")")
 
+export const getCSSFunction = (value: any) => {
+  const regex = /(^[a-z-A-Z]+)\((.*)\)/g
+  const [, type, values] = regex.exec(value) ?? []
+
+  return { type, values }
+}
+
+export const splitValues = (
+  values: string,
+  cb: (
+    current: string,
+    prev: string | undefined,
+    next: string | undefined,
+  ) => boolean = (current) => current === ",",
+  addSeparator = false,
+) => {
+  const result = []
+
+  let value = ""
+  let depth = 0
+
+  for (let i = 0; i < values.length; i++) {
+    const current = values[i]
+    const prev = values[i - 1]
+    const next = values[i + 1]
+
+    if (current === "(") depth++
+    if (current === ")") depth--
+
+    if (cb(current, prev, next) && depth === 0) {
+      if (value) result.push(value.trim())
+
+      if (addSeparator) result.push(current)
+
+      value = ""
+    } else {
+      value += current
+    }
+  }
+
+  if (value) result.push(value.trim())
+
+  return result.filter(Boolean)
+}
+
 export const isCSSVar = (value: string) => /^var\(--.+\)$/.test(value)
 
 export const analyzeCSSValue = (value: any) => {
@@ -62,3 +107,11 @@ export const mode =
 
 export const keyframes = (...arg: CSSObject[]): Keyframes =>
   emotionKeyframes(...arg)
+
+const combineFunctions =
+  (a: Transform, b: Transform): Transform =>
+  (value, ...args) =>
+    b(a(value, ...args), ...args)
+
+export const pipe = (...transformers: Transform[]) =>
+  transformers.reduce(combineFunctions)

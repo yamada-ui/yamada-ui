@@ -32,7 +32,6 @@ export const tokens: Tokens = {
     "backgroundColor",
     "caretColor",
     "accentColor",
-    "outlineColor",
     "textDecorationColor",
     "textEmphasisColor",
     "outlineColor",
@@ -53,7 +52,12 @@ export const tokens: Tokens = {
   fontSizes: ["fontSize"],
   fontWeights: ["fontWeight"],
   fonts: ["fontFamily"],
-  gradients: ["backgroundImage"],
+  gradients: [
+    "backgroundImage",
+    "borderImageSource",
+    "listStyleImage",
+    "maskImage",
+  ],
   letterSpacings: ["letterSpacing"],
   lineHeights: ["lineHeight"],
   radii: [
@@ -90,8 +94,10 @@ export const tokens: Tokens = {
     "maxBlockSize",
     "boxSize",
     "minBoxSize",
-    "minBoxSize",
+    "maxBoxSize",
     "flexBasis",
+    "columnWidth",
+    "containIntrinsicWidth",
   ],
   spaces: [
     "margin",

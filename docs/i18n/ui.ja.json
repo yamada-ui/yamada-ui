@@ -137,6 +137,7 @@
     },
     "props-card": {
       "required": "必須",
+      "deprecated": "非推奨",
       "description": "説明",
       "type": "タイプ",
       "default": "デフォルト",

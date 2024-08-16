@@ -19,6 +19,7 @@ type ComponentTypeInfo = {
   defaultValue?: string | boolean | null
   required: boolean
   description?: string
+  deprecated?: string
   see?: string
 }
 
@@ -221,6 +222,10 @@ const extractPropertiesOfTypeName = async (
       const docTags = property.getJsDocTags()
 
       const isPrivate = !!docTags.find(({ name }) => name === "private")
+      const deprecated = docTags
+        .find(({ name }) => name === "deprecated")
+        ?.text?.map(({ text }) => text)
+        .join("\n")
 
       if (isPrivate) continue
 
@@ -242,6 +247,7 @@ const extractPropertiesOfTypeName = async (
         type: prettyType,
         defaultValue: formatValue(defaultValue),
         required,
+        deprecated,
         description:
           property
             .getDocumentationComment(typeChecker)

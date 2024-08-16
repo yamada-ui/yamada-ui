@@ -5,7 +5,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import type { MotionPanInfo } from "@yamada-ui/motion"
+import { motionForwardRef, type MotionPanInfo } from "@yamada-ui/motion"
 import type { SlideProps } from "@yamada-ui/transitions"
 import { Slide } from "@yamada-ui/transitions"
 import { useValue } from "@yamada-ui/use-value"
@@ -114,7 +114,7 @@ const [DrawerProvider, useDrawer] = createContext<DrawerContext>({
  *
  * @see Docs https://yamada-ui.com/components/overlay/drawer
  */
-export const Drawer = forwardRef<DrawerProps, "div">(
+export const Drawer = motionForwardRef<DrawerProps, "div">(
   ({ size, placement = "right", closeOnDrag = false, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Drawer", {
       size,
@@ -222,7 +222,7 @@ type DrawerContentProps = Omit<
     >
   >
 
-export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
+export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
   (
     {
       className,
@@ -418,7 +418,7 @@ export const DrawerContent = forwardRef<DrawerContentProps, "div", false>(
 
 export type DrawerOverlayProps = ModalOverlayProps
 
-export const DrawerOverlay = forwardRef<DrawerOverlayProps, "div">(
+export const DrawerOverlay = motionForwardRef<DrawerOverlayProps, "div">(
   ({ className, ...rest }, ref) => {
     const styles = useDrawer()
 

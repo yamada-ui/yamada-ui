@@ -1,7 +1,6 @@
-import { forwardRef } from "@yamada-ui/core"
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Motion } from "@yamada-ui/motion"
+import { Motion, motionForwardRef } from "@yamada-ui/motion"
 import { cx, runIfFunc } from "@yamada-ui/utils"
 import { RatingItem } from "./rating-item"
 import { getRoundedValue, useRatingContext } from "./use-rating"
@@ -13,7 +12,7 @@ type RatingGroupOptions = {
 
 export type RatingGroupProps = MotionProps<"div"> & RatingGroupOptions
 
-export const RatingGroup = forwardRef<RatingGroupProps, "div">(
+export const RatingGroup = motionForwardRef<RatingGroupProps, "div">(
   ({ className, value: groupValue, items, color, ...rest }, ref) => {
     const { styles, decimal, groupProps, getGroupProps } = useRatingContext()
 

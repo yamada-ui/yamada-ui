@@ -12,7 +12,7 @@ import {
 import { toCamelCase } from "../utils"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
-import type { uiProps } from "./ui-props"
+import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
 
 const SOURCE_URL = "https://developer.mozilla.org"
 export const OUT_PATH = "packages/core/src/styles.ts"
@@ -22,7 +22,10 @@ export type CSSProperties =
   | keyof CSS.StandardProperties
   | keyof CSS.SvgProperties
   | keyof CSS.ObsoleteProperties
-export type UIProperties = keyof typeof uiProps
+export type UIProperties =
+  | keyof typeof additionalProps
+  | keyof typeof uiProps
+  | keyof typeof atRuleProps
 
 const omittedList = new ListIt({
   headerColor: "gray",

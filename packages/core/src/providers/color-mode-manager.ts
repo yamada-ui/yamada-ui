@@ -24,7 +24,7 @@ const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({
         const colorMode = localStorage.getItem(storageKey) as ColorMode | null
 
         return colorMode || initColorMode
-      } catch (e) {
+      } catch {
         return initColorMode
       }
     },
@@ -34,7 +34,7 @@ const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({
     (storageKey = defaultStorageKey) => {
       try {
         localStorage.setItem(storageKey, colorMode)
-      } catch (e) {}
+      } catch {}
     },
 })
 

@@ -1,20 +1,19 @@
 import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import type { Configs } from "./config"
+import type { StyleConfigs } from "./config"
 import { transforms } from "./config"
 import type { CSSUIObject, Token } from "./css"
 import type { Theme } from "./theme.types"
 
-export const standardStyles: Configs = {
+export const standardStyles: StyleConfigs = {
   accentColor: {
     properties: "accentColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   alignContent: true,
   alignItems: true,
   alignSelf: true,
-  alignTracks: true,
   all: true,
   animation: {
     properties: "animation",
@@ -52,7 +51,7 @@ export const standardStyles: Configs = {
   background: {
     properties: "background",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   backgroundAttachment: true,
   backgroundBlendMode: true,
@@ -63,7 +62,7 @@ export const standardStyles: Configs = {
   backgroundColor: {
     properties: "backgroundColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   backgroundImage: {
     properties: "backgroundImage",
@@ -94,7 +93,7 @@ export const standardStyles: Configs = {
   borderBlockColor: {
     properties: "borderBlockColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBlockEnd: {
     properties: "borderBlockEnd",
@@ -104,7 +103,7 @@ export const standardStyles: Configs = {
   borderBlockEndColor: {
     properties: "borderBlockEndColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBlockEndStyle: true,
   borderBlockEndWidth: {
@@ -119,7 +118,7 @@ export const standardStyles: Configs = {
   borderBlockStartColor: {
     properties: "borderBlockStartColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBlockStartStyle: true,
   borderBlockStartWidth: {
@@ -139,7 +138,7 @@ export const standardStyles: Configs = {
   borderBottomColor: {
     properties: "borderBottomColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBottomLeftRadius: {
     properties: "borderBottomLeftRadius",
@@ -160,7 +159,7 @@ export const standardStyles: Configs = {
   borderColor: {
     properties: "borderColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderEndEndRadius: {
     properties: "borderEndEndRadius",
@@ -180,7 +179,10 @@ export const standardStyles: Configs = {
   borderImageOutset: true,
   borderImageRepeat: true,
   borderImageSlice: true,
-  borderImageSource: true,
+  borderImageSource: {
+    properties: "borderImageSource",
+    transform: transforms.gradient,
+  },
   borderImageWidth: {
     properties: "borderImageWidth",
     transform: transforms.px,
@@ -193,7 +195,7 @@ export const standardStyles: Configs = {
   borderInlineColor: {
     properties: "borderInlineColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderInlineEnd: {
     properties: "borderInlineEnd",
@@ -203,7 +205,7 @@ export const standardStyles: Configs = {
   borderInlineEndColor: {
     properties: "borderInlineEndColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderInlineEndStyle: true,
   borderInlineEndWidth: {
@@ -218,7 +220,7 @@ export const standardStyles: Configs = {
   borderInlineStartColor: {
     properties: "borderInlineStartColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderInlineStartStyle: true,
   borderInlineStartWidth: {
@@ -238,7 +240,7 @@ export const standardStyles: Configs = {
   borderLeftColor: {
     properties: "borderLeftColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderLeftStyle: true,
   borderLeftWidth: { properties: "borderLeftWidth", transform: transforms.px },
@@ -255,7 +257,7 @@ export const standardStyles: Configs = {
   borderRightColor: {
     properties: "borderRightColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderRightStyle: true,
   borderRightWidth: {
@@ -282,7 +284,7 @@ export const standardStyles: Configs = {
   borderTopColor: {
     properties: "borderTopColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderTopLeftRadius: {
     properties: "borderTopLeftRadius",
@@ -324,15 +326,16 @@ export const standardStyles: Configs = {
   caretColor: {
     properties: "caretColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   clear: true,
   clip: true,
   clipPath: true,
+  clipRule: true,
   color: {
     properties: "color",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   colorInterpolation: true,
   columnCount: true,
@@ -346,7 +349,7 @@ export const standardStyles: Configs = {
   columnRuleColor: {
     properties: "columnRuleColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   columnRuleStyle: true,
   columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
@@ -374,6 +377,13 @@ export const standardStyles: Configs = {
   direction: true,
   display: true,
   emptyCells: true,
+  fill: {
+    properties: "fill",
+    token: "colors",
+    transform: transforms.token("colors", transforms.colorMix),
+  },
+  fillOpacity: true,
+  fillRule: true,
   flex: true,
   flexBasis: {
     properties: "flexBasis",
@@ -503,7 +513,6 @@ export const standardStyles: Configs = {
   justifyContent: true,
   justifyItems: true,
   justifySelf: true,
-  justifyTracks: true,
   left: {
     properties: "left",
     token: "spaces",
@@ -522,7 +531,10 @@ export const standardStyles: Configs = {
   },
   lineHeightStep: true,
   listStyle: true,
-  listStyleImage: true,
+  listStyleImage: {
+    properties: "listStyleImage",
+    transform: transforms.gradient,
+  },
   listStylePosition: true,
   listStyleType: true,
   margin: {
@@ -581,6 +593,10 @@ export const standardStyles: Configs = {
     transform: transforms.token("spaces", transforms.px),
   },
   marginTrim: true,
+  marker: true,
+  markerEnd: true,
+  markerMid: true,
+  markerStart: true,
   mask: true,
   maskBorder: true,
   maskBorderMode: true,
@@ -591,7 +607,7 @@ export const standardStyles: Configs = {
   maskBorderWidth: { properties: "maskBorderWidth", transform: transforms.px },
   maskClip: true,
   maskComposite: true,
-  maskImage: true,
+  maskImage: { properties: "maskImage", transform: transforms.gradient },
   maskMode: true,
   maskOrigin: true,
   maskPosition: true,
@@ -658,7 +674,7 @@ export const standardStyles: Configs = {
   outlineColor: {
     properties: "outlineColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   outlineOffset: true,
   outlineStyle: true,
@@ -828,22 +844,35 @@ export const standardStyles: Configs = {
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
-  scrollbarColor: true,
+  scrollbarColor: {
+    properties: "scrollbarColor",
+    token: "colors",
+    transform: transforms.token("colors", transforms.colorMix),
+  },
   scrollbarGutter: true,
   scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
   shapeImageThreshold: true,
   shapeMargin: true,
   shapeOutside: true,
+  shapeRendering: true,
+  stopColor: true,
+  stopOpacity: true,
+  stroke: {
+    properties: "stroke",
+    token: "colors",
+    transform: transforms.token("colors", transforms.colorMix),
+  },
   tabSize: true,
   tableLayout: true,
   textAlign: true,
   textAlignLast: true,
+  textAnchor: true,
   textCombineUpright: true,
   textDecoration: true,
   textDecorationColor: {
     properties: "textDecorationColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   textDecorationLine: true,
   textDecorationSkip: true,
@@ -854,7 +883,7 @@ export const standardStyles: Configs = {
   textEmphasisColor: {
     properties: "textEmphasisColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   textEmphasisPosition: true,
   textEmphasisStyle: true,
@@ -904,6 +933,7 @@ export const standardStyles: Configs = {
   translate: true,
   unicodeBidi: true,
   userSelect: true,
+  vectorEffect: true,
   verticalAlign: true,
   viewTimeline: true,
   viewTimelineAxis: true,
@@ -932,37 +962,18 @@ export const standardStyles: Configs = {
   alignmentBaseline: true,
   azimuth: true,
   baselineShift: true,
-  clipRule: true,
   dominantBaseline: true,
-  fill: {
-    properties: "fill",
-    token: "colors",
-    transform: transforms.token("colors"),
-  },
-  fillOpacity: true,
-  fillRule: true,
   floodColor: {
     properties: "floodColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   floodOpacity: true,
   glyphOrientationVertical: true,
   lightingColor: {
     properties: "lightingColor",
     token: "colors",
-    transform: transforms.token("colors"),
-  },
-  markerEnd: true,
-  markerMid: true,
-  markerStart: true,
-  shapeRendering: true,
-  stopColor: true,
-  stopOpacity: true,
-  stroke: {
-    properties: "stroke",
-    token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   strokeDasharray: true,
   strokeDashoffset: true,
@@ -971,8 +982,6 @@ export const standardStyles: Configs = {
   strokeMiterlimit: true,
   strokeOpacity: true,
   strokeWidth: { properties: "strokeWidth", transform: transforms.px },
-  textAnchor: true,
-  vectorEffect: true,
   marginX: {
     properties: ["marginInlineStart", "marginInlineEnd"],
     token: "spaces",
@@ -1169,37 +1178,9 @@ export const standardStyles: Configs = {
     transform: transforms.function("sepia"),
   },
   colorMode: { properties: "colorScheme" },
-  lineClamp: {
-    properties: "--ui-line-clamp",
-    isSkip: true,
-    static: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      display: "-webkit-box",
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
-    },
-  },
-  isTruncated: { isSkip: true, transform: transforms.isTruncated },
-  layerStyle: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles("layerStyles"),
-  },
-  textStyle: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles("textStyles"),
-  },
-  apply: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles(),
-  },
-  var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
 }
 
-export const shorthandStyles: Configs = {
+export const shorthandStyles: StyleConfigs = {
   accent: standardStyles.accentColor,
   bg: standardStyles.background,
   bgAttachment: { properties: "backgroundAttachment" },
@@ -1251,7 +1232,7 @@ export const shorthandStyles: Configs = {
   insetStart: standardStyles.insetInlineStart,
   tracking: standardStyles.letterSpacing,
   leading: standardStyles.lineHeight,
-  listStyleImg: { properties: "listStyleImage" },
+  listStyleImg: standardStyles.listStyleImage,
   listStylePos: { properties: "listStylePosition" },
   m: standardStyles.margin,
   mb: standardStyles.marginBottom,
@@ -1299,23 +1280,46 @@ export const shorthandStyles: Configs = {
   roundedEnd: standardStyles.borderInlineEndRadius,
 }
 
-export const atRuleStyles: Configs = {
-  _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
-  _container: {
-    isProcessSkip: true,
-    isSkip: true,
-    transform: transforms.container,
-  },
-  _supports: {
-    isProcessSkip: true,
-    isSkip: true,
-    transform: transforms.supports,
-  },
+export const pseudoStyles: StyleConfigs = {
+  "&::before": { properties: "&::before", transform: transforms.content },
+  "&::after": { properties: "&::after", transform: transforms.content },
 }
 
-export const styles: Configs = {
+export const uiStyles: StyleConfigs = {
+  lineClamp: {
+    properties: "--ui-line-clamp",
+    static: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
+    },
+  },
+  isTruncated: { transform: transforms.isTruncated },
+  layerStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("layerStyles"),
+  },
+  textStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("textStyles"),
+  },
+  apply: { isProcessResult: true, transform: transforms.styles() },
+  var: { isProcessSkip: true, transform: transforms.var },
+}
+
+export const atRuleStyles: StyleConfigs = {
+  _media: { isProcessSkip: true, transform: transforms.media },
+  _container: { isProcessSkip: true, transform: transforms.container },
+  _supports: { isProcessSkip: true, transform: transforms.supports },
+}
+
+export const styles: StyleConfigs = {
   ...standardStyles,
   ...shorthandStyles,
+  ...pseudoStyles,
+  ...uiStyles,
   ...atRuleStyles,
 }
 
@@ -1503,12 +1507,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
    */
   alignSelf?: Token<CSS.Property.AlignSelf>
-  /**
-   * The CSS `align-tracks` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-tracks
-   */
-  alignTracks?: Token<CSS.Property.AlignTracks>
   /**
    * The CSS `all` property.
    *
@@ -2480,6 +2478,12 @@ export type StyleProps = {
    */
   clipPath?: Token<CSS.Property.ClipPath>
   /**
+   * The CSS `clip-rule` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-rule
+   */
+  clipRule?: Token<CSS.Property.ClipRule>
+  /**
    * The CSS `color` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
@@ -2677,6 +2681,24 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
    */
   emptyCells?: Token<CSS.Property.EmptyCells>
+  /**
+   * The CSS `fill` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill
+   */
+  fill?: Token<CSS.Property.Fill, "colors">
+  /**
+   * The CSS `fill-opacity` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-opacity
+   */
+  fillOpacity?: Token<CSS.Property.FillOpacity>
+  /**
+   * The CSS `fill-rule` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-rule
+   */
+  fillRule?: Token<CSS.Property.FillRule>
   /**
    * The CSS `flex` property.
    *
@@ -3152,12 +3174,6 @@ export type StyleProps = {
    */
   justifySelf?: Token<CSS.Property.JustifySelf>
   /**
-   * The CSS `justify-tracks` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-tracks
-   */
-  justifyTracks?: Token<CSS.Property.JustifyTracks>
-  /**
    * The CSS `left` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
@@ -3361,6 +3377,30 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-trim
    */
   marginTrim?: Token<CSS.Property.MarginTrim>
+  /**
+   * The CSS `marker` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker
+   */
+  marker?: Token<CSS.Property.Marker>
+  /**
+   * The CSS `marker-end` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-end
+   */
+  markerEnd?: Token<CSS.Property.MarkerEnd>
+  /**
+   * The CSS `marker-mid` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-mid
+   */
+  markerMid?: Token<CSS.Property.MarkerMid>
+  /**
+   * The CSS `marker-start` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-start
+   */
+  markerStart?: Token<CSS.Property.MarkerStart>
   /**
    * The CSS `mask` property.
    *
@@ -4203,7 +4243,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
    */
-  scrollbarColor?: Token<CSS.Property.ScrollbarColor>
+  scrollbarColor?: Token<CSS.Property.ScrollbarColor, "colors">
   /**
    * The CSS `scrollbar-gutter` property.
    *
@@ -4235,6 +4275,30 @@ export type StyleProps = {
    */
   shapeOutside?: Token<CSS.Property.ShapeOutside>
   /**
+   * The CSS `shape-rendering` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-rendering
+   */
+  shapeRendering?: Token<CSS.Property.ShapeRendering>
+  /**
+   * The CSS `stop-color` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-color
+   */
+  stopColor?: Token<CSS.Property.StopColor>
+  /**
+   * The CSS `stop-opacity` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-opacity
+   */
+  stopOpacity?: Token<CSS.Property.StopOpacity>
+  /**
+   * The CSS `stroke` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke
+   */
+  stroke?: Token<CSS.Property.Stroke, "colors">
+  /**
    * The CSS `tab-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
@@ -4258,6 +4322,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
    */
   textAlignLast?: Token<CSS.Property.TextAlignLast>
+  /**
+   * The CSS `text-anchor` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-anchor
+   */
+  textAnchor?: Token<CSS.Property.TextAnchor>
   /**
    * The CSS `text-combine-upright` property.
    *
@@ -4502,6 +4572,12 @@ export type StyleProps = {
    */
   userSelect?: Token<CSS.Property.UserSelect>
   /**
+   * The CSS `vector-effect` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vector-effect
+   */
+  vectorEffect?: Token<CSS.Property.VectorEffect>
+  /**
    * The CSS `vertical-align` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
@@ -4636,35 +4712,11 @@ export type StyleProps = {
    */
   baselineShift?: Token<CSS.Property.BaselineShift>
   /**
-   * The CSS `clip-rule` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/clip-rule
-   */
-  clipRule?: Token<CSS.Property.ClipRule>
-  /**
    * The CSS `dominant-baseline` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline
    */
   dominantBaseline?: Token<CSS.Property.DominantBaseline>
-  /**
-   * The CSS `fill` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill
-   */
-  fill?: Token<CSS.Property.Fill, "colors">
-  /**
-   * The CSS `fill-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity
-   */
-  fillOpacity?: Token<CSS.Property.FillOpacity>
-  /**
-   * The CSS `fill-rule` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule
-   */
-  fillRule?: Token<CSS.Property.FillRule>
   /**
    * The CSS `flood-color` property.
    *
@@ -4689,48 +4741,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
    */
   lightingColor?: Token<CSS.Property.LightingColor, "colors">
-  /**
-   * The CSS `marker-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-end
-   */
-  markerEnd?: Token<CSS.Property.MarkerEnd>
-  /**
-   * The CSS `marker-mid` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-mid
-   */
-  markerMid?: Token<CSS.Property.MarkerMid>
-  /**
-   * The CSS `marker-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-start
-   */
-  markerStart?: Token<CSS.Property.MarkerStart>
-  /**
-   * The CSS `shape-rendering` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
-   */
-  shapeRendering?: Token<CSS.Property.ShapeRendering>
-  /**
-   * The CSS `stop-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-color
-   */
-  stopColor?: Token<CSS.Property.StopColor>
-  /**
-   * The CSS `stop-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stop-opacity
-   */
-  stopOpacity?: Token<CSS.Property.StopOpacity>
-  /**
-   * The CSS `stroke` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke
-   */
-  stroke?: Token<CSS.Property.Stroke, "colors">
   /**
    * The CSS `stroke-dasharray` property.
    *
@@ -4773,18 +4783,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
    */
   strokeWidth?: Token<CSS.Property.StrokeWidth | number>
-  /**
-   * The CSS `text-anchor` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/text-anchor
-   */
-  textAnchor?: Token<CSS.Property.TextAnchor>
-  /**
-   * The CSS `vector-effect` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/vector-effect
-   */
-  vectorEffect?: Token<CSS.Property.VectorEffect>
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *

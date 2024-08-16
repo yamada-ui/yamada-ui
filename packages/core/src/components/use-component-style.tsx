@@ -17,7 +17,6 @@ import type {
   CSSUIObject,
   ColorModeArray,
   ResponsiveObject,
-  ThemeProps,
   UIStyle,
   UIStyleProps,
   UIValue,
@@ -33,11 +32,8 @@ import type {
   ComponentStyle,
   ComponentVariants,
 } from "../theme.types"
-import type { UIBaseProps } from "./component.types"
 
-type ComponentProps = ThemeProps & UIBaseProps
-
-type Styles<isMulti extends boolean = false> = isMulti extends false
+type Styles<Y extends boolean = false> = Y extends false
   ? CSSUIObject
   : Record<string, CSSUIObject>
 
@@ -49,27 +45,27 @@ type ModifierStyles =
 
 type GetStylesOptions = { isMulti?: boolean; query?: string }
 
-export type SetStylesOptions<IsMulti extends boolean = false> = {
-  isMulti?: IsMulti
+export type SetStylesOptions<Y extends boolean = false> = {
+  isMulti?: Y
   isProcessSkip?: boolean
-  styles?: Styles<IsMulti>
+  styles?: Styles<Y>
 }
 
 const getColorModeStyles =
-  <IsMulti extends boolean = false>(
+  <Y extends Dict = Dict, M extends boolean = false>(
     value: ColorModeArray<string>,
     modifierStyles: ModifierStyles,
-    props: UIStyleProps,
+    props: UIStyleProps<Y>,
   ) =>
   ({ isMulti = false }: GetStylesOptions) => {
     const [lightValue, darkValue] = value
 
-    const lightStyles = getStyles<IsMulti>(
+    const lightStyles = getStyles<Y, M>(
       modifierStyles[lightValue],
       props,
     )({ isMulti, query: pseudos._light })
 
-    const darkStyles = getStyles<IsMulti>(
+    const darkStyles = getStyles<Y, M>(
       modifierStyles[darkValue],
       props,
     )({ isMulti, query: pseudos._dark })
@@ -78,16 +74,16 @@ const getColorModeStyles =
   }
 
 const getResponsiveStyles =
-  <IsMulti extends boolean = false>(
+  <Y extends Dict = Dict, M extends boolean = false>(
     value: ResponsiveObject<string>,
     modifierStyles: ModifierStyles,
-    props: UIStyleProps,
+    props: UIStyleProps<Y>,
   ) =>
   ({ isMulti = false }: GetStylesOptions) => {
     const providedKeys = keysFormObject(value)
 
     if (providedKeys.length === 1 && "base" in value) {
-      return getStyles<IsMulti>(
+      return getStyles<Y, M>(
         modifierStyles[value.base as string],
         props,
       )({ isMulti })
@@ -110,7 +106,7 @@ const getResponsiveStyles =
 
       let hasBaseStyles = false
 
-      return queries.reduce<Styles<IsMulti>>(
+      return queries.reduce<Styles<M>>(
         (prev, { breakpoint, minW, maxW, maxWQuery, minWQuery }, index) => {
           const modifier = value[breakpoint]
           const isFinal = breakpoint === finalQuery.breakpoint
@@ -123,7 +119,7 @@ const getResponsiveStyles =
             const prevQuery = queries[index - 1]
             const query = prevQuery?.[isDown ? "minWQuery" : "maxWQuery"]
 
-            const baseStyles = getStyles<IsMulti>(
+            const baseStyles = getStyles<Y, M>(
               baseModifier ? modifierStyles[baseModifier] : {},
               props,
             )({ isMulti, query })
@@ -159,7 +155,7 @@ const getResponsiveStyles =
             query = createQuery(minW, maxW, identifier)
           }
 
-          const queryStyles = getStyles<IsMulti>(
+          const queryStyles = getStyles<Y, M>(
             modifierStyles[modifier],
             props,
           )({ isMulti, query })
@@ -174,18 +170,18 @@ const getResponsiveStyles =
   }
 
 const getModifierStyles =
-  <IsMulti extends boolean = false>(
+  <Y extends Dict = Dict, M extends boolean = false>(
     value: UIValue<string> | undefined,
     modifierStyles: ModifierStyles,
-    props: UIStyleProps,
+    props: UIStyleProps<Y>,
   ) =>
-  ({ isMulti = false }: GetStylesOptions): Styles<IsMulti> => {
-    let styles: Styles<IsMulti> = {}
+  ({ isMulti = false }: GetStylesOptions): Styles<M> => {
+    let styles: Styles<M> = {}
 
     if (!value) return styles
 
     if (isArray(value)) {
-      const [lightStyles, darkStyles] = getColorModeStyles<IsMulti>(
+      const [lightStyles, darkStyles] = getColorModeStyles<Y, M>(
         value,
         modifierStyles,
         props,
@@ -193,24 +189,24 @@ const getModifierStyles =
 
       styles = merge(lightStyles, darkStyles)
     } else if (isObject(value)) {
-      styles = getResponsiveStyles<IsMulti>(
+      styles = getResponsiveStyles<Y, M>(
         value,
         modifierStyles,
         props,
       )({ isMulti })
     } else {
-      styles = getStyles<IsMulti>(modifierStyles[value], props)({ isMulti })
+      styles = getStyles<Y, M>(modifierStyles[value], props)({ isMulti })
     }
 
-    return styles as Styles<IsMulti>
+    return styles as Styles<M>
   }
 
 const getStyles =
-  <IsMulti extends boolean = false>(
-    stylesOrFunc: UIStyle | Record<string, UIStyle>,
-    props: UIStyleProps,
+  <Y extends Dict = Dict, M extends boolean = false>(
+    stylesOrFunc: UIStyle<Y> | Record<string, UIStyle<Y>>,
+    props: UIStyleProps<Y>,
   ) =>
-  ({ isMulti = false, query }: GetStylesOptions): Styles<IsMulti> => {
+  ({ isMulti = false, query }: GetStylesOptions): Styles<M> => {
     let styles = runIfFunc(stylesOrFunc, props)
 
     if (isMulti) {
@@ -226,37 +222,34 @@ const getStyles =
         }
       }
     } else if (query) {
-      return { [query]: styles } as Styles<IsMulti>
+      return { [query]: styles } as Styles<M>
     }
 
-    return styles as Styles<IsMulti>
+    return styles as Styles<M>
   }
 
-const mergeProps = <Props extends ComponentProps = ComponentProps>(
-  props: Props,
+const mergeProps = <Y extends Dict = Dict>(
+  props: Y,
   defaultProps: ComponentDefaultProps | undefined,
   overrideProps: ComponentOverrideProps | undefined,
-): Props => {
+): Y => {
   if (defaultProps) props = merge(defaultProps, props)
 
-  if (overrideProps) props = runIfFunc(overrideProps, props) as Props
+  if (overrideProps) props = runIfFunc(overrideProps, props) as Y
 
   return props
 }
 
-const setStyles = <
-  Props extends ComponentProps = ComponentProps,
-  IsMulti extends boolean = false,
->(
+const setStyles = <Y extends Dict = Dict, M extends boolean = false>(
   name: string,
-  props: Props,
-  { isMulti, isProcessSkip, styles = {} }: SetStylesOptions<IsMulti> = {},
-): [styles: Styles<IsMulti>, props: Props] => {
+  props: Y,
+  { isMulti, isProcessSkip, styles = {} }: SetStylesOptions<M> = {},
+): [styles: Styles<M>, props: Y] => {
   const { theme, themeScheme } = useTheme()
   const { colorMode } = useColorMode()
 
-  const propsRef = useRef<Props>({} as Props)
-  const stylesRef = useRef<Styles<IsMulti>>(isProcessSkip ? styles : {})
+  const propsRef = useRef<Y>({} as Y)
+  const stylesRef = useRef<Styles<M>>(isProcessSkip ? styles : {})
 
   if (!isProcessSkip) {
     const componentStyle = get<ComponentStyle | undefined>(
@@ -270,15 +263,15 @@ const setStyles = <
       const { defaultProps, overrideProps, baseStyle, variants, sizes } =
         componentStyle
 
-      props = mergeProps<Props>(props, defaultProps, overrideProps)
+      props = mergeProps<Y>(props, defaultProps, overrideProps)
 
       const { variant, size } = props
-      const resolvedProps = omitObject(props, ["children"])
+      const resolvedProps = omitObject(props, ["children"]) as Y
 
-      let styles: Styles<IsMulti> = {}
+      let styles: Styles<M> = {}
 
       if (baseStyle) {
-        styles = getStyles<IsMulti>(baseStyle, {
+        styles = getStyles<Y, M>(baseStyle, {
           theme,
           colorMode,
           themeScheme,
@@ -287,7 +280,7 @@ const setStyles = <
       }
 
       if (sizes) {
-        const sizeStyles = getModifierStyles<IsMulti>(size, sizes, {
+        const sizeStyles = getModifierStyles<Y, M>(size, sizes, {
           theme,
           colorMode,
           themeScheme,
@@ -298,7 +291,7 @@ const setStyles = <
       }
 
       if (variants) {
-        const variantStyles = getModifierStyles<IsMulti>(variant, variants, {
+        const variantStyles = getModifierStyles<Y, M>(variant, variants, {
           theme,
           colorMode,
           themeScheme,
@@ -321,21 +314,21 @@ const setStyles = <
   return [stylesRef.current, propsRef.current]
 }
 
-export type UseComponentStyleOptions<IsMulti extends boolean = false> = Omit<
-  SetStylesOptions<IsMulti>,
+export type UseComponentStyleOptions<Y extends boolean = false> = Omit<
+  SetStylesOptions<Y>,
   "isMulti"
 >
 
-export const useComponentStyle = <Props extends Dict = Dict>(
+export const useComponentStyle = <Y extends Dict = Dict>(
   name: string,
-  props: Props,
+  props: Y,
   options?: UseComponentStyleOptions,
-) => setStyles<Props>(name, props, options)
+) => setStyles<Y>(name, props, options)
 
-export const useMultiComponentStyle = <Props extends Dict = Dict>(
+export const useMultiComponentStyle = <Y extends Dict = Dict>(
   name: string,
-  props: Props,
+  props: Y,
   options?: UseComponentStyleOptions<true>,
 ) => {
-  return setStyles<Props, true>(name, props, { isMulti: true, ...options })
+  return setStyles<Y, true>(name, props, { isMulti: true, ...options })
 }

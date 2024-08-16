@@ -530,9 +530,10 @@ const mewtwo: CellProps[] = useMemo(
 return <DonutChart data={mewtwo} withTooltip={false} />
 ```
 
-### 値をフォーマットする
+### フォーマットする
 
-値をフォーマットする場合は、`valueFormatter`を使います。
+ツールチップの値をフォーマットする場合は、`valueFormatter`を使います。
+ラベルの値をフォーマットする場合は、`labelFormatter`を使います。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -572,10 +573,14 @@ const mewtwo: CellProps[] = useMemo(
 )
 
 return (
-  <DonutChart
-    data={mewtwo}
-    valueFormatter={(value) => value.toLocaleString()}
-  />
+  <VStack>
+    <DonutChart data={mewtwo} valueFormatter={(value) => `${value}P`} />
+    <DonutChart
+      data={mewtwo}
+      withLabels
+      labelFormatter={(value) => `${value}P`}
+    />
+  </VStack>
 )
 ```
 

@@ -170,7 +170,7 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
         } else {
           if (Object.keys(doc).length) docs[name] = doc
         }
-      } catch (e) {
+      } catch {
         notDocsList = [...notDocsList, dirent.name]
       }
     }),

@@ -136,7 +136,8 @@
       "dark": "Toggle Light"
     },
     "props-card": {
-      "required": "required",
+      "required": "Required",
+      "deprecated": "Deprecated",
       "description": "Description",
       "type": "Type",
       "default": "Default",

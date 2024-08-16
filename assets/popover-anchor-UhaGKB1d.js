@@ -1,1 +1,0 @@
-import{r}from"./index-BwDkhjyp.js";import{u as n}from"./popover-content-klP1mv0Q.js";const c=({children:e})=>{const o=r.Children.only(e),{getAnchorProps:t}=n();return r.cloneElement(o,t(o.props,o.ref))};export{c as P};

@@ -1,4 +1,4 @@
-import type { ObjectLiteral, StringLiteral } from "@yamada-ui/utils"
+import type { Dict, ObjectLiteral, StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
@@ -94,18 +94,19 @@ export type CSSUIObject = UIStyles & RecursiveStyles<UIStyles>
 
 export type CSSUIProps = StyleProps & PseudoProps
 
-export type UIStyleProps = {
+export type UIStyleProps<Y extends Dict = Dict> = {
   theme: StyledTheme
   colorMode?: ColorMode
   colorScheme?: Theme["colorSchemes"]
   themeScheme?: Theme["themeSchemes"]
-  [key: string]: any
-}
+} & Y
 
-export type UIStyle = CSSUIObject | ((props: UIStyleProps) => CSSUIObject)
-export type UIMultiStyle =
-  | Record<string, UIStyle>
-  | ((props: UIStyleProps) => Record<string, UIStyle>)
+export type UIStyle<Y extends Dict = Dict> =
+  | CSSUIObject
+  | ((props: UIStyleProps<Y>) => CSSUIObject)
+export type UIMultiStyle<Y extends Dict = Dict> =
+  | Record<string, UIStyle<Y>>
+  | ((props: UIStyleProps<Y>) => Record<string, UIStyle<Y>>)
 
 export type AnimationStyle = {
   keyframes: Record<string, UIStyles>

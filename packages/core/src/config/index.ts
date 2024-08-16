@@ -10,13 +10,13 @@ import type * as CSS from "csstype"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
-import { generateAnimation } from "./animation"
+import { animation } from "./animation"
 import { generateAtRule } from "./at-rule"
 import { generateCalc } from "./calc"
-import { generateColorMix } from "./color-mix"
+import { colorMix } from "./color-mix"
 import { generateFilter } from "./filter"
-import { generateGradient } from "./gradient"
-import { generateTransform } from "./transform"
+import { gradient } from "./gradient"
+import { transform } from "./transform"
 import type { Transform } from "./utils"
 import {
   mode,
@@ -26,16 +26,7 @@ import {
   tokenToCSSVar,
 } from "./utils"
 
-export {
-  mode,
-  keyframes,
-  generateGradient,
-  generateAnimation,
-  generateAtRule,
-  generateColorMix,
-  generateTransform,
-  generateFilter,
-}
+export { mode, keyframes, gradient, animation }
 
 type CSSProperties = Union<
   | keyof CSS.StandardProperties
@@ -53,12 +44,6 @@ export type StyleConfig = {
     | ((theme: StyledTheme) => CSSProperties)
   token?: ThemeToken
   transform?: Transform
-  /**
-   * This is a property for documentation sites.
-   *
-   * @deprecated
-   */
-  isSkip?: boolean
 }
 
 export type StyleConfigs = Record<string, StyleConfig | true>
@@ -157,11 +142,11 @@ export const transforms = {
       return value
     }
   },
+  colorMix,
+  gradient,
+  animation,
+  transform,
   calc: generateCalc,
-  colorMix: generateColorMix,
-  gradient: generateGradient,
-  animation: generateAnimation,
-  transform: generateTransform,
   filter: generateFilter,
   media: generateAtRule("media"),
   container: generateAtRule("container"),

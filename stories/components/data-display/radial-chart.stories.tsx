@@ -56,5 +56,19 @@ export const basic: Story = () => {
     },
   ]
 
-  return <RadialChart data={data} />
+  return (
+    <RadialChart
+      data={data}
+      dataKey="uv"
+      chartProps={{
+        innerRadius: "10%",
+        outerRadius: "80%",
+        barSize: 10,
+      }}
+      radialBarProps={{
+        label: { position: "insideStart", fill: "#fff" },
+        background: true,
+      }}
+    />
+  )
 }

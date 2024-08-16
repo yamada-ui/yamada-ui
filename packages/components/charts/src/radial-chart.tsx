@@ -65,6 +65,9 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
   const {
     className,
     data,
+    dataKey,
+    chartProps,
+    radialBarProps,
     containerProps,
     withTooltip = true,
     withLegend = false,
@@ -76,7 +79,13 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getRadialChartProps } = useRadialChart({ data, styles })
+  const { getRadialChartProps, getRadialBarProps } = useRadialChart({
+    data,
+    dataKey,
+    styles,
+    chartProps,
+    radialBarProps,
+  })
   const { getContainerProps } = useChart({ containerProps })
   const { tooltipProps: computedTooltipProps, getTooltipProps } =
     useChartTooltip({
@@ -106,9 +115,9 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
             })}
           >
             <RadialBar
-              label={{ position: "insideStart", fill: "#fff" }}
-              background
-              dataKey="uv"
+              {...getRadialBarProps({
+                className: "ui-radial-chart__radial-bar",
+              })}
             />
 
             {withLegend ? (

@@ -427,6 +427,31 @@ export const pieProperties: (keyof Omit<Recharts.PieProps, "ref">)[] = [
   "onMouseLeave",
 ]
 
+export const radialBarProperties: (keyof Omit<
+  Recharts.RadialBarProps,
+  "ref"
+>)[] = [
+  "legendType",
+  "label",
+  "background",
+  "data",
+  "dataKey",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+]
+
 export const dotProperties: (keyof Omit<Recharts.DotProps, "ref">)[] = [
   "cx",
   "cy",

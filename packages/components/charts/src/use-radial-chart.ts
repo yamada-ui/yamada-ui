@@ -3,8 +3,16 @@ import { cx, type Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo, type ComponentPropsWithRef } from "react"
 import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ChartPropGetter, RadialChartProps } from "./chart.types"
-import { radialChartProperties } from "./rechart-properties"
+import type {
+  ChartPropGetter,
+  RadialBarProps,
+  RadialChartProps,
+  RequiredChartPropGetter,
+} from "./chart.types"
+import {
+  radialBarProperties,
+  radialChartProperties,
+} from "./rechart-properties"
 
 export type UseRadialChartOptions = {
   /**
@@ -12,9 +20,17 @@ export type UseRadialChartOptions = {
    */
   data: Dict[]
   /**
+   * The key of a group of data which should be unique in an chart.
+   */
+  dataKey: string
+  /**
    * Props passed down to recharts `RadialBarChart` component.
    */
   chartProps?: RadialChartProps
+  /**
+   * Props for the radialBar.
+   */
+  radialBarProps?: Partial<RadialBarProps>
 }
 
 type UseRadialChartProps = UseRadialChartOptions & {
@@ -23,6 +39,7 @@ type UseRadialChartProps = UseRadialChartOptions & {
 
 export const useRadialChart = ({
   data,
+  dataKey,
   styles,
   ...rest
 }: UseRadialChartProps) => {
@@ -37,6 +54,16 @@ export const useRadialChart = ({
     [rest.chartProps, styles.chart, theme],
   )
 
+  const [radialBarProps, radialBarClassName] = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [rest.radialBarProps ?? {}, radialBarProperties],
+        styles.radialBar,
+      )(theme),
+    [rest.radialBarProps, styles.radialBar, theme],
+  )
+
+  //TODO: 色の指定、データの入れ方
   const getRadialChartProps: ChartPropGetter<
     "div",
     ComponentPropsWithRef<typeof Recharts.RadialBarChart>,
@@ -45,11 +72,6 @@ export const useRadialChart = ({
     ({ className, ...props } = {}, ref = null) => ({
       ref,
       className: cx(className, chartClassName),
-      // cx: "50%",
-      // cy: "50%",
-      // innerRadius: "10%",
-      // outerRadius: "80%",
-      // barSize: 10,
       data,
       ...chartProps,
       ...props,
@@ -57,7 +79,23 @@ export const useRadialChart = ({
     [chartClassName, chartProps, data],
   )
 
-  return { getRadialChartProps }
+  //TODO: labelとbackgroundの分離　色の指定
+  const getRadialBarProps: RequiredChartPropGetter<
+    "div",
+    Partial<Recharts.RadialBarProps>,
+    Omit<Recharts.RadialBarProps, "ref">
+  > = useCallback(
+    ({ className, ...props }, ref = null) => ({
+      ref,
+      className: cx(className, radialBarClassName),
+      dataKey,
+      ...radialBarProps,
+      ...props,
+    }),
+    [dataKey, radialBarClassName, radialBarProps],
+  )
+
+  return { getRadialChartProps, getRadialBarProps }
 }
 
 export type UseRadialChartReturn = ReturnType<typeof useRadialChart>

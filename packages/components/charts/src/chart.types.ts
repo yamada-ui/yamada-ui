@@ -118,6 +118,8 @@ export type CellProps = Merge<
     dimCell?: Partial<CellProps>
   }
 >
+// TODO:labelとかbackgroundとかの型考える
+export type RadialBarProps = Merge<CSSUIProps, Recharts.RadialBarProps>
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>
 export type XAxisProps = Merge<
   Merge<CSSUIProps, Recharts.XAxisProps>,

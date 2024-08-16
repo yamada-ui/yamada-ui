@@ -7,6 +7,7 @@ on:
       - ".changeset/**"
       - "packages/**"
       - "!packages/**/tests/**"
+      - "!packages/**/scripts/**"
       - "stories/**"
     branches:
       - main
@@ -53,7 +54,8 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm release
-          commit: "ci(changesets): version packages"
+          title: "Updated packages"
+          commit: "ci(changesets): updated packages"
           setupGitUser: false
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -138,6 +140,6 @@ jobs:
 
       - name: Sync Docs
         if: steps.changesets.outputs.published == 'true'
-        uses: ./.github/composite-actions/update-docs
+        uses: ./.github/composite-actions/sync-docs
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}

@@ -1,13 +1,52 @@
 import * as c from "color2k"
 import { isArray, isNumber } from "./assertion"
-import type { Dict } from "./index.types"
+import type { Dict, StringLiteral } from "./index.types"
 import { getMemoizedObject as get } from "./object"
 
 type ColorMode = "light" | "dark"
 
 export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
 
-export const tones = [
+export const SEMANTIC_COLOR_SCHEMES = [
+  "mono",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "link",
+] as const
+
+export const COLOR_SCHEMES = [
+  "gray",
+  "neutral",
+  "red",
+  "rose",
+  "pink",
+  "flashy",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+] as const
+
+export type SemanticColorScheme =
+  | (typeof SEMANTIC_COLOR_SCHEMES)[number]
+  | StringLiteral
+export type ColorScheme = (typeof COLOR_SCHEMES)[number] | StringLiteral
+
+export const TONES = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 

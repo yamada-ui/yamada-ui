@@ -52,7 +52,7 @@ export const basic = () => {
 
       {!isFinish ? (
         <Center ref={ref} w="full">
-          <Loading size="2xl" />
+          <Loading fontSize="2xl" />
         </Center>
       ) : null}
     </>
@@ -104,7 +104,7 @@ export const withRoot = () => {
 
         {!isFinish ? (
           <Center ref={ref} w="full">
-            <Loading size="2xl" />
+            <Loading fontSize="2xl" />
           </Center>
         ) : null}
       </Container>
@@ -148,7 +148,7 @@ export const withRootMargin = () => {
 
       {!isFinish ? (
         <Center ref={ref} w="full">
-          <Loading size="2xl" />
+          <Loading fontSize="2xl" />
         </Center>
       ) : null}
     </>
@@ -189,7 +189,7 @@ export const withThreshold = () => {
 
       {!isFinish ? (
         <Center ref={ref} w="full">
-          <Loading size="2xl" />
+          <Loading fontSize="2xl" />
         </Center>
       ) : null}
     </>
@@ -230,7 +230,7 @@ export const withInitialLoad = () => {
 
       {!isFinish ? (
         <Center ref={ref} w="full">
-          <Loading size="2xl" />
+          <Loading fontSize="2xl" />
         </Center>
       ) : null}
     </>
@@ -254,7 +254,7 @@ export const isReverse = () => {
     <>
       {!isFinish ? (
         <Center ref={ref} w="full">
-          <Loading size="2xl" />
+          <Loading fontSize="2xl" />
         </Center>
       ) : null}
 

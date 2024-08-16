@@ -69,6 +69,11 @@
     "title": "Insights",
     "description": "Quantified activities of Yamada UI maintainers and members.",
     "user-exceeded": "{label} users selected",
+    "user": {
+      "all": "All users",
+      "maintainers": "All maintainers",
+      "members": "All members"
+    },
     "period": {
       "7d": "Last 7 days",
       "14d": "Last 14 days",

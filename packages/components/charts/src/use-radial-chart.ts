@@ -78,6 +78,7 @@ export const useRadialChart = ({
       dataProp.map((prev, index) => ({
         ...prev,
         fill: `var(--ui-radial-bar-${index})`,
+        fillOpacity: "var(--ui-fill-opacity)",
       })),
     [dataProp],
   )

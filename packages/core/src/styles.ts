@@ -1,15 +1,15 @@
 import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import type { Configs } from "./config"
+import type { StyleConfigs } from "./config"
 import { transforms } from "./config"
 import type { CSSUIObject, Token } from "./css"
 import type { Theme } from "./theme.types"
 
-export const standardStyles: Configs = {
+export const standardStyles: StyleConfigs = {
   accentColor: {
     properties: "accentColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   alignContent: true,
   alignItems: true,
@@ -51,7 +51,7 @@ export const standardStyles: Configs = {
   background: {
     properties: "background",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   backgroundAttachment: true,
   backgroundBlendMode: true,
@@ -62,7 +62,7 @@ export const standardStyles: Configs = {
   backgroundColor: {
     properties: "backgroundColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   backgroundImage: {
     properties: "backgroundImage",
@@ -93,7 +93,7 @@ export const standardStyles: Configs = {
   borderBlockColor: {
     properties: "borderBlockColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBlockEnd: {
     properties: "borderBlockEnd",
@@ -103,7 +103,7 @@ export const standardStyles: Configs = {
   borderBlockEndColor: {
     properties: "borderBlockEndColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBlockEndStyle: true,
   borderBlockEndWidth: {
@@ -118,7 +118,7 @@ export const standardStyles: Configs = {
   borderBlockStartColor: {
     properties: "borderBlockStartColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBlockStartStyle: true,
   borderBlockStartWidth: {
@@ -138,7 +138,7 @@ export const standardStyles: Configs = {
   borderBottomColor: {
     properties: "borderBottomColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderBottomLeftRadius: {
     properties: "borderBottomLeftRadius",
@@ -159,7 +159,7 @@ export const standardStyles: Configs = {
   borderColor: {
     properties: "borderColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderEndEndRadius: {
     properties: "borderEndEndRadius",
@@ -195,7 +195,7 @@ export const standardStyles: Configs = {
   borderInlineColor: {
     properties: "borderInlineColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderInlineEnd: {
     properties: "borderInlineEnd",
@@ -205,7 +205,7 @@ export const standardStyles: Configs = {
   borderInlineEndColor: {
     properties: "borderInlineEndColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderInlineEndStyle: true,
   borderInlineEndWidth: {
@@ -220,7 +220,7 @@ export const standardStyles: Configs = {
   borderInlineStartColor: {
     properties: "borderInlineStartColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderInlineStartStyle: true,
   borderInlineStartWidth: {
@@ -240,7 +240,7 @@ export const standardStyles: Configs = {
   borderLeftColor: {
     properties: "borderLeftColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderLeftStyle: true,
   borderLeftWidth: { properties: "borderLeftWidth", transform: transforms.px },
@@ -257,7 +257,7 @@ export const standardStyles: Configs = {
   borderRightColor: {
     properties: "borderRightColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderRightStyle: true,
   borderRightWidth: {
@@ -284,7 +284,7 @@ export const standardStyles: Configs = {
   borderTopColor: {
     properties: "borderTopColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   borderTopLeftRadius: {
     properties: "borderTopLeftRadius",
@@ -326,7 +326,7 @@ export const standardStyles: Configs = {
   caretColor: {
     properties: "caretColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   clear: true,
   clip: true,
@@ -335,7 +335,7 @@ export const standardStyles: Configs = {
   color: {
     properties: "color",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   colorInterpolation: true,
   columnCount: true,
@@ -349,7 +349,7 @@ export const standardStyles: Configs = {
   columnRuleColor: {
     properties: "columnRuleColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   columnRuleStyle: true,
   columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
@@ -380,7 +380,7 @@ export const standardStyles: Configs = {
   fill: {
     properties: "fill",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   fillOpacity: true,
   fillRule: true,
@@ -674,7 +674,7 @@ export const standardStyles: Configs = {
   outlineColor: {
     properties: "outlineColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   outlineOffset: true,
   outlineStyle: true,
@@ -844,7 +844,11 @@ export const standardStyles: Configs = {
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
-  scrollbarColor: true,
+  scrollbarColor: {
+    properties: "scrollbarColor",
+    token: "colors",
+    transform: transforms.token("colors", transforms.colorMix),
+  },
   scrollbarGutter: true,
   scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
   shapeImageThreshold: true,
@@ -856,7 +860,7 @@ export const standardStyles: Configs = {
   stroke: {
     properties: "stroke",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   tabSize: true,
   tableLayout: true,
@@ -868,7 +872,7 @@ export const standardStyles: Configs = {
   textDecorationColor: {
     properties: "textDecorationColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   textDecorationLine: true,
   textDecorationSkip: true,
@@ -879,7 +883,7 @@ export const standardStyles: Configs = {
   textEmphasisColor: {
     properties: "textEmphasisColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   textEmphasisPosition: true,
   textEmphasisStyle: true,
@@ -962,14 +966,14 @@ export const standardStyles: Configs = {
   floodColor: {
     properties: "floodColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   floodOpacity: true,
   glyphOrientationVertical: true,
   lightingColor: {
     properties: "lightingColor",
     token: "colors",
-    transform: transforms.token("colors"),
+    transform: transforms.token("colors", transforms.colorMix),
   },
   strokeDasharray: true,
   strokeDashoffset: true,
@@ -1176,7 +1180,7 @@ export const standardStyles: Configs = {
   colorMode: { properties: "colorScheme" },
 }
 
-export const shorthandStyles: Configs = {
+export const shorthandStyles: StyleConfigs = {
   accent: standardStyles.accentColor,
   bg: standardStyles.background,
   bgAttachment: { properties: "backgroundAttachment" },
@@ -1276,12 +1280,12 @@ export const shorthandStyles: Configs = {
   roundedEnd: standardStyles.borderInlineEndRadius,
 }
 
-export const pseudoStyles: Configs = {
+export const pseudoStyles: StyleConfigs = {
   "&::before": { properties: "&::before", transform: transforms.content },
   "&::after": { properties: "&::after", transform: transforms.content },
 }
 
-export const uiStyles: Configs = {
+export const uiStyles: StyleConfigs = {
   lineClamp: {
     properties: "--ui-line-clamp",
     static: {
@@ -1305,13 +1309,13 @@ export const uiStyles: Configs = {
   var: { isProcessSkip: true, transform: transforms.var },
 }
 
-export const atRuleStyles: Configs = {
+export const atRuleStyles: StyleConfigs = {
   _media: { isProcessSkip: true, transform: transforms.media },
   _container: { isProcessSkip: true, transform: transforms.container },
   _supports: { isProcessSkip: true, transform: transforms.supports },
 }
 
-export const styles: Configs = {
+export const styles: StyleConfigs = {
   ...standardStyles,
   ...shorthandStyles,
   ...pseudoStyles,
@@ -4239,7 +4243,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
    */
-  scrollbarColor?: Token<CSS.Property.ScrollbarColor>
+  scrollbarColor?: Token<CSS.Property.ScrollbarColor, "colors">
   /**
    * The CSS `scrollbar-gutter` property.
    *

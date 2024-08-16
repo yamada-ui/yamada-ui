@@ -16,6 +16,7 @@ import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { generateFilter } from "./filter"
 import { gradient } from "./gradient"
+import { grid } from "./grid"
 import { transform } from "./transform"
 import type { Transform } from "./utils"
 import {
@@ -142,6 +143,7 @@ export const transforms = {
       return value
     }
   },
+  grid,
   colorMix,
   gradient,
   animation,

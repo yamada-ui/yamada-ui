@@ -2,6 +2,7 @@ import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { StyleConfigs } from "./config"
 import { transforms } from "./config"
+import { pipe } from "./config/utils"
 import type { CSSUIObject, Token } from "./css"
 import type { Theme } from "./theme.types"
 
@@ -9,7 +10,7 @@ export const standardStyles: StyleConfigs = {
   accentColor: {
     properties: "accentColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   alignContent: true,
   alignItems: true,
@@ -18,7 +19,7 @@ export const standardStyles: StyleConfigs = {
   animation: {
     properties: "animation",
     token: "animations",
-    transform: transforms.token("animations", transforms.animation),
+    transform: pipe(transforms.token("animations"), transforms.animation),
   },
   animationComposition: true,
   animationDelay: true,
@@ -46,12 +47,16 @@ export const standardStyles: StyleConfigs = {
   backfaceVisibility: {
     properties: "backfaceVisibility",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   background: {
     properties: "background",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   backgroundAttachment: true,
   backgroundBlendMode: true,
@@ -62,12 +67,12 @@ export const standardStyles: StyleConfigs = {
   backgroundColor: {
     properties: "backgroundColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   backgroundImage: {
     properties: "backgroundImage",
     token: "gradients",
-    transform: transforms.token("gradients", transforms.gradient),
+    transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   backgroundOrigin: true,
   backgroundPosition: true,
@@ -78,32 +83,36 @@ export const standardStyles: StyleConfigs = {
   blockSize: {
     properties: "blockSize",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   border: {
     properties: "border",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlock: {
     properties: "borderBlock",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockColor: {
     properties: "borderBlockColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockEnd: {
     properties: "borderBlockEnd",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockEndColor: {
     properties: "borderBlockEndColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockEndStyle: true,
   borderBlockEndWidth: {
@@ -113,12 +122,12 @@ export const standardStyles: StyleConfigs = {
   borderBlockStart: {
     properties: "borderBlockStart",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockStartColor: {
     properties: "borderBlockStartColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockStartStyle: true,
   borderBlockStartWidth: {
@@ -133,22 +142,22 @@ export const standardStyles: StyleConfigs = {
   borderBottom: {
     properties: "borderBottom",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBottomColor: {
     properties: "borderBottomColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBottomLeftRadius: {
     properties: "borderBottomLeftRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderBottomRightRadius: {
     properties: "borderBottomRightRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderBottomStyle: true,
   borderBottomWidth: {
@@ -159,22 +168,22 @@ export const standardStyles: StyleConfigs = {
   borderColor: {
     properties: "borderColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderEndEndRadius: {
     properties: "borderEndEndRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderEndStartRadius: {
     properties: "borderEndStartRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderImage: {
     properties: "borderImage",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderImageOutset: true,
   borderImageRepeat: true,
@@ -182,7 +191,7 @@ export const standardStyles: StyleConfigs = {
   borderImageSource: {
     properties: "borderImageSource",
     token: "gradients",
-    transform: transforms.token("gradients", transforms.gradient),
+    transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   borderImageWidth: {
     properties: "borderImageWidth",
@@ -191,22 +200,22 @@ export const standardStyles: StyleConfigs = {
   borderInline: {
     properties: "borderInline",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineColor: {
     properties: "borderInlineColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderInlineEnd: {
     properties: "borderInlineEnd",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineEndColor: {
     properties: "borderInlineEndColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderInlineEndStyle: true,
   borderInlineEndWidth: {
@@ -216,12 +225,12 @@ export const standardStyles: StyleConfigs = {
   borderInlineStart: {
     properties: "borderInlineStart",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineStartColor: {
     properties: "borderInlineStartColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderInlineStartStyle: true,
   borderInlineStartWidth: {
@@ -236,29 +245,29 @@ export const standardStyles: StyleConfigs = {
   borderLeft: {
     properties: "borderLeft",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderLeftColor: {
     properties: "borderLeftColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderLeftStyle: true,
   borderLeftWidth: { properties: "borderLeftWidth", transform: transforms.px },
   borderRadius: {
     properties: "borderRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderRight: {
     properties: "borderRight",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderRightColor: {
     properties: "borderRightColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderRightStyle: true,
   borderRightWidth: {
@@ -269,33 +278,33 @@ export const standardStyles: StyleConfigs = {
   borderStartEndRadius: {
     properties: "borderStartEndRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderStartStartRadius: {
     properties: "borderStartStartRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderStyle: true,
   borderTop: {
     properties: "borderTop",
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderTopColor: {
     properties: "borderTopColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderTopLeftRadius: {
     properties: "borderTopLeftRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderTopRightRadius: {
     properties: "borderTopRightRadius",
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderTopStyle: true,
   borderTopWidth: { properties: "borderTopWidth", transform: transforms.px },
@@ -303,7 +312,7 @@ export const standardStyles: StyleConfigs = {
   bottom: {
     properties: "bottom",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   boxAlign: true,
   boxDecorationBreak: true,
@@ -327,7 +336,7 @@ export const standardStyles: StyleConfigs = {
   caretColor: {
     properties: "caretColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   clear: true,
   clip: true,
@@ -336,7 +345,7 @@ export const standardStyles: StyleConfigs = {
   color: {
     properties: "color",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   colorInterpolation: true,
   columnCount: true,
@@ -344,13 +353,13 @@ export const standardStyles: StyleConfigs = {
   columnGap: {
     properties: "columnGap",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   columnRule: { properties: "columnRule", transform: transforms.px },
   columnRuleColor: {
     properties: "columnRuleColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   columnRuleStyle: true,
   columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
@@ -358,7 +367,11 @@ export const standardStyles: StyleConfigs = {
   columnWidth: {
     properties: "columnWidth",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   columns: true,
   contain: true,
@@ -369,7 +382,11 @@ export const standardStyles: StyleConfigs = {
   containIntrinsicWidth: {
     properties: "containIntrinsicWidth",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   container: true,
   containerName: true,
@@ -386,7 +403,7 @@ export const standardStyles: StyleConfigs = {
   fill: {
     properties: "fill",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   fillOpacity: true,
   fillRule: true,
@@ -394,7 +411,11 @@ export const standardStyles: StyleConfigs = {
   flexBasis: {
     properties: "flexBasis",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   flexDirection: true,
   flexFlow: true,
@@ -416,7 +437,7 @@ export const standardStyles: StyleConfigs = {
   fontSize: {
     properties: "fontSize",
     token: "fontSizes",
-    transform: transforms.token("fontSizes", transforms.px),
+    transform: pipe(transforms.token("fontSizes"), transforms.px),
   },
   fontSizeAdjust: true,
   fontSmooth: true,
@@ -445,7 +466,7 @@ export const standardStyles: StyleConfigs = {
   gap: {
     properties: "gap",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   grid: true,
   gridArea: true,
@@ -466,7 +487,11 @@ export const standardStyles: StyleConfigs = {
   height: {
     properties: "height",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   hyphenateCharacter: true,
   hyphenateLimitChars: true,
@@ -478,42 +503,46 @@ export const standardStyles: StyleConfigs = {
   inlineSize: {
     properties: "inlineSize",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   inset: {
     properties: "inset",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetBlock: {
     properties: "insetBlock",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetBlockEnd: {
     properties: "insetBlockEnd",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetBlockStart: {
     properties: "insetBlockStart",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetInline: {
     properties: "insetInline",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetInlineEnd: {
     properties: "insetInlineEnd",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetInlineStart: {
     properties: "insetInlineStart",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   isolation: true,
   justifyContent: true,
@@ -522,7 +551,7 @@ export const standardStyles: StyleConfigs = {
   left: {
     properties: "left",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   letterSpacing: {
     properties: "letterSpacing",
@@ -540,64 +569,64 @@ export const standardStyles: StyleConfigs = {
   listStyleImage: {
     properties: "listStyleImage",
     token: "gradients",
-    transform: transforms.token("gradients", transforms.gradient),
+    transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   listStylePosition: true,
   listStyleType: true,
   margin: {
     properties: "margin",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginBlock: {
     properties: "marginBlock",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginBlockEnd: {
     properties: "marginBlockEnd",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginBlockStart: {
     properties: "marginBlockStart",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginBottom: {
     properties: "marginBottom",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginInline: {
     properties: "marginInline",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginInlineEnd: {
     properties: "marginInlineEnd",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginInlineStart: {
     properties: "marginInlineStart",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginLeft: {
     properties: "marginLeft",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginRight: {
     properties: "marginRight",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginTop: {
     properties: "marginTop",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginTrim: true,
   marker: true,
@@ -617,7 +646,7 @@ export const standardStyles: StyleConfigs = {
   maskImage: {
     properties: "maskImage",
     token: "gradients",
-    transform: transforms.token("gradients", transforms.gradient),
+    transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   maskMode: true,
   maskOrigin: true,
@@ -632,42 +661,74 @@ export const standardStyles: StyleConfigs = {
   maxBlockSize: {
     properties: "maxBlockSize",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   maxHeight: {
     properties: "maxHeight",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   maxInlineSize: {
     properties: "maxInlineSize",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   maxWidth: {
     properties: "maxWidth",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   minBlockSize: {
     properties: "minBlockSize",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   minHeight: {
     properties: "minHeight",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   minInlineSize: {
     properties: "minInlineSize",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   minWidth: {
     properties: "minWidth",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   mixBlendMode: true,
   objectFit: true,
@@ -685,7 +746,7 @@ export const standardStyles: StyleConfigs = {
   outlineColor: {
     properties: "outlineColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   outlineOffset: true,
   outlineStyle: true,
@@ -707,57 +768,57 @@ export const standardStyles: StyleConfigs = {
   padding: {
     properties: "padding",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingBlock: {
     properties: "paddingBlock",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingBlockEnd: {
     properties: "paddingBlockEnd",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingBlockStart: {
     properties: "paddingBlockStart",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingBottom: {
     properties: "paddingBottom",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingInline: {
     properties: "paddingInline",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingInlineEnd: {
     properties: "paddingInlineEnd",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingInlineStart: {
     properties: "paddingInlineStart",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingLeft: {
     properties: "paddingLeft",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingRight: {
     properties: "paddingRight",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingTop: {
     properties: "paddingTop",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   page: true,
   pageBreakAfter: true,
@@ -777,12 +838,12 @@ export const standardStyles: StyleConfigs = {
   right: {
     properties: "right",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   rowGap: {
     properties: "rowGap",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   rubyAlign: true,
   rubyPosition: true,
@@ -790,7 +851,7 @@ export const standardStyles: StyleConfigs = {
   scrollMargin: {
     properties: "scrollMargin",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollMarginBlock: true,
   scrollMarginBlockEnd: true,
@@ -798,7 +859,7 @@ export const standardStyles: StyleConfigs = {
   scrollMarginBottom: {
     properties: "scrollMarginBottom",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollMarginInline: true,
   scrollMarginInlineEnd: true,
@@ -806,22 +867,22 @@ export const standardStyles: StyleConfigs = {
   scrollMarginLeft: {
     properties: "scrollMarginLeft",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollMarginRight: {
     properties: "scrollMarginRight",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollMarginTop: {
     properties: "scrollMarginTop",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPadding: {
     properties: "scrollPadding",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPaddingBlock: true,
   scrollPaddingBlockEnd: true,
@@ -829,7 +890,7 @@ export const standardStyles: StyleConfigs = {
   scrollPaddingBottom: {
     properties: "scrollPaddingBottom",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPaddingInline: true,
   scrollPaddingInlineEnd: true,
@@ -837,17 +898,17 @@ export const standardStyles: StyleConfigs = {
   scrollPaddingLeft: {
     properties: "scrollPaddingLeft",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPaddingRight: {
     properties: "scrollPaddingRight",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPaddingTop: {
     properties: "scrollPaddingTop",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollSnapAlign: true,
   scrollSnapStop: true,
@@ -858,7 +919,7 @@ export const standardStyles: StyleConfigs = {
   scrollbarColor: {
     properties: "scrollbarColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   scrollbarGutter: true,
   scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
@@ -871,7 +932,7 @@ export const standardStyles: StyleConfigs = {
   stroke: {
     properties: "stroke",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   tabSize: true,
   tableLayout: true,
@@ -883,7 +944,7 @@ export const standardStyles: StyleConfigs = {
   textDecorationColor: {
     properties: "textDecorationColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   textDecorationLine: true,
   textDecorationSkip: true,
@@ -894,7 +955,7 @@ export const standardStyles: StyleConfigs = {
   textEmphasisColor: {
     properties: "textEmphasisColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   textEmphasisPosition: true,
   textEmphasisStyle: true,
@@ -917,7 +978,7 @@ export const standardStyles: StyleConfigs = {
   top: {
     properties: "top",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   touchAction: true,
   transform: { properties: "transform", transform: transforms.transform },
@@ -958,7 +1019,11 @@ export const standardStyles: StyleConfigs = {
   width: {
     properties: "width",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   willChange: true,
   wordBreak: true,
@@ -977,14 +1042,14 @@ export const standardStyles: StyleConfigs = {
   floodColor: {
     properties: "floodColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
   glyphOrientationVertical: true,
   lightingColor: {
     properties: "lightingColor",
     token: "colors",
-    transform: transforms.token("colors", transforms.colorMix),
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   strokeDasharray: true,
   strokeDashoffset: true,
@@ -996,113 +1061,129 @@ export const standardStyles: StyleConfigs = {
   marginX: {
     properties: ["marginInlineStart", "marginInlineEnd"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   marginY: {
     properties: ["marginTop", "marginBottom"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingX: {
     properties: ["paddingInlineStart", "paddingInlineEnd"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   paddingY: {
     properties: ["paddingTop", "paddingBottom"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollMarginX: {
     properties: ["scrollMarginLeft", "scrollMarginRight"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollMarginY: {
     properties: ["scrollMarginTop", "scrollMarginBottom"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPaddingX: {
     properties: ["scrollPaddingLeft", "scrollPaddingRight"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scrollPaddingY: {
     properties: ["scrollPaddingTop", "scrollPaddingBottom"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetX: {
     properties: ["left", "right"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   insetY: {
     properties: ["top", "bottom"],
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   borderY: {
     properties: ["borderTop", "borderBottom"],
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderX: {
     properties: ["borderLeft", "borderRight"],
     token: "borders",
-    transform: transforms.token("borders", transforms.px),
+    transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderTopRadius: {
     properties: ["borderTopLeftRadius", "borderTopRightRadius"],
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderBottomRadius: {
     properties: ["borderBottomLeftRadius", "borderBottomRightRadius"],
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderRightRadius: {
     properties: ["borderTopRightRadius", "borderBottomRightRadius"],
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderLeftRadius: {
     properties: ["borderTopLeftRadius", "borderBottomLeftRadius"],
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderInlineStartRadius: {
     properties: ["borderStartStartRadius", "borderStartEndRadius"],
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   borderInlineEndRadius: {
     properties: ["borderEndStartRadius", "borderEndEndRadius"],
     token: "radii",
-    transform: transforms.token("radii", transforms.px),
+    transform: pipe(transforms.token("radii"), transforms.px),
   },
   boxSize: {
     properties: ["width", "height"],
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
   minBoxSize: {
     properties: ["minWidth", "minHeight"],
     token: "sizes",
-    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
   },
-  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
+  maxBoxSize: {
+    properties: ["maxWidth", "maxHeight"],
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+    ),
+  },
   translateX: {
     properties: "--ui-translate-x",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   translateY: {
     properties: "--ui-translate-y",
     token: "spaces",
-    transform: transforms.token("spaces", transforms.px),
+    transform: pipe(transforms.token("spaces"), transforms.px),
   },
   scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
   scaleX: { properties: "--ui-scale-x" },
@@ -1114,7 +1195,7 @@ export const standardStyles: StyleConfigs = {
   blur: {
     properties: "--ui-blur",
     token: "blurs",
-    transform: transforms.token("blurs", transforms.function("blur")),
+    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
   },
   brightness: {
     properties: "--ui-brightness",
@@ -1127,7 +1208,10 @@ export const standardStyles: StyleConfigs = {
   dropShadow: {
     properties: "--ui-drop-shadow",
     token: "shadows",
-    transform: transforms.token("shadows", transforms.function("drop-shadow")),
+    transform: pipe(
+      transforms.token("shadows"),
+      transforms.function("drop-shadow"),
+    ),
   },
   grayscale: {
     properties: "--ui-grayscale",
@@ -1135,7 +1219,7 @@ export const standardStyles: StyleConfigs = {
   },
   hueRotate: {
     properties: "--ui-hue-rotate",
-    transform: transforms.function("hue-rotate", transforms.deg),
+    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
   },
   invert: {
     properties: "--ui-invert",
@@ -1146,11 +1230,11 @@ export const standardStyles: StyleConfigs = {
     transform: transforms.function("saturate"),
   },
   sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
-  backdropFilter: { transform: transforms.filter("backdrop") },
+  backdropFilter: { transform: transforms.function("backdrop") },
   backdropBlur: {
     properties: "--ui-backdrop-blur",
     token: "blurs",
-    transform: transforms.token("blurs", transforms.function("blur")),
+    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
   },
   backdropBrightness: {
     properties: "--ui-backdrop-brightness",
@@ -1163,7 +1247,10 @@ export const standardStyles: StyleConfigs = {
   backdropDropShadow: {
     properties: "--ui-backdrop-drop-shadow",
     token: "shadows",
-    transform: transforms.token("shadows", transforms.function("drop-shadow")),
+    transform: pipe(
+      transforms.token("shadows"),
+      transforms.function("drop-shadow"),
+    ),
   },
   backdropGrayscale: {
     properties: "--ui-backdrop-grayscale",
@@ -1171,7 +1258,7 @@ export const standardStyles: StyleConfigs = {
   },
   backdropHueRotate: {
     properties: "--ui-backdrop-hue-rotate",
-    transform: transforms.function("hue-rotate", transforms.deg),
+    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
   },
   backdropInvert: {
     properties: "--ui-backdrop-invert",
@@ -5139,7 +5226,10 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth>
+  maxBoxSize?: Token<
+    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
+    "sizes"
+  >
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */

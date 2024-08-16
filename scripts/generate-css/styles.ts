@@ -1,10 +1,11 @@
 import { writeFile } from "fs/promises"
-import { pseudosSelectors, type ThemeToken } from "@yamada-ui/react"
+import type { Transforms, ThemeToken } from "@yamada-ui/react"
+import { pseudosSelectors } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
-import { getConfig } from "./config"
+import { generateConfig } from "./config"
 import { layoutStyleProperties } from "./layout-props"
-import { resolveTypes } from "./resolve-types"
+import { overrideTypes } from "./override-types"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap } from "./tokens"
 import type { TransformOptions } from "./transform-props"
@@ -12,41 +13,38 @@ import { transformMap } from "./transform-props"
 import type { UIOptions } from "./ui-props"
 import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import { OUT_PATH } from "."
-import type { CSSProperties, CSSProperty, UIProperties } from "."
+import type { CSSProperty, Properties } from "."
+
+const hasTransform = (
+  targetTransform: Transforms,
+  transforms: TransformOptions[] | undefined,
+) => !!transforms?.some(({ transform }) => transform === targetTransform)
 
 const addType = (result: string, value: string) =>
   />$/.test(result) ? result.replace(/>$/, `${value}>`) : result + value
 
-const computedType = ({
+const generateType = ({
   type,
-  hasToken = true,
+  isProcessSkip = false,
   token,
-  transform,
+  transforms,
   prop,
 }: {
   type: string | string[]
-  hasToken?: boolean
+  isProcessSkip?: boolean
   token?: ThemeToken
-  transform?: TransformOptions
-  prop?: CSSProperties
+  transforms?: TransformOptions[]
+  prop?: Properties
 }) => {
-  const resolveType = prop ? resolveTypes[prop] : undefined
+  const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = hasToken ? "Token<>" : ""
+  let result = !isProcessSkip ? "Token<>" : ""
 
-  if (resolveType) {
-    result = addType(result, resolveType)
+  if (overrideType) {
+    result = addType(result, overrideType)
   } else {
-    const isPx =
-      transform === "px" ||
-      (typeof transform !== "string" &&
-        (transform?.transform === "px" ||
-          transform?.additionalTransform === "px"))
-    const isFraction =
-      transform === "fraction" ||
-      (typeof transform !== "string" &&
-        (transform?.transform === "fraction" ||
-          transform?.additionalTransform === "fraction"))
+    const isPx = hasTransform("px", transforms)
+    const isFraction = hasTransform("fraction", transforms)
     const isNumber = isPx || isFraction
 
     if (typeof type === "string") {
@@ -130,11 +128,11 @@ export const generateStyles = async (
   checkProps(styles)
 
   pseudosSelectors.forEach((selector) => {
-    const transform = transformMap[selector]
+    const transforms = transformMap[selector]
 
-    if (!transform) return
+    if (!transforms) return
 
-    const config = getConfig({ properties: selector, transform })()
+    const config = generateConfig({ properties: selector, transforms })()
 
     pseudoStyles.push(`"${selector}": ${config}`)
   })
@@ -154,11 +152,11 @@ export const generateStyles = async (
   styles.forEach(({ name, prop, url, type, deprecated }) => {
     const token: ThemeToken | undefined = tokenMap[prop]
     const shorthands = shorthandProps[prop]
-    const transform = transformMap[prop]
-    const config = getConfig({ properties: prop, token, transform })()
+    const transforms = transformMap[prop]
+    const config = generateConfig({ properties: prop, token, transforms })()
     const docs = generateDocs({ properties: name, urls: [url], deprecated })
 
-    type = computedType({ type, token, transform, prop })
+    type = generateType({ type, token, transforms, prop })
     standardStyles.push(`${prop}: ${config}`)
     styleProps.push(...[docs, `${prop}?: ${type}`])
 
@@ -178,10 +176,8 @@ export const generateStyles = async (
       prop,
       {
         properties,
-        transform,
         static: css,
         type,
-        hasToken,
         isProcessResult,
         isProcessSkip,
         description,
@@ -199,16 +195,21 @@ export const generateStyles = async (
     const deprecated = relatedStyles.some(({ deprecated }) => deprecated)
     const urls = relatedStyles.map(({ url }) => url)
     const types = relatedStyles.map(({ type }) => type)
-    const token = tokenMap[prop as UIProperties]
-    const shorthands = shorthandProps[prop as UIProperties]
+    const token = tokenMap[prop as Properties]
+    const shorthands = shorthandProps[prop as Properties]
+    const transforms = transformMap[prop as Properties]
 
-    transform ??= transformMap[prop as UIProperties]
-    type = computedType({ type: type ?? types, hasToken, token, transform })
+    type = generateType({
+      type: type ?? types,
+      token,
+      isProcessSkip,
+      transforms,
+    })
 
-    const config = getConfig({
+    const config = generateConfig({
       properties,
       token,
-      transform,
+      transforms,
       isProcessResult,
       isProcessSkip,
       css,
@@ -245,6 +246,7 @@ export const generateStyles = async (
     import type * as CSS from "csstype"
     import type { StyleConfigs } from "./config"
     import { transforms } from "./config"
+    import { pipe } from "./config/utils"
     import type { CSSUIObject, Token } from "./css"
     import type { Theme } from "./theme.types"
 
@@ -260,15 +262,15 @@ export const generateStyles = async (
       ${pseudoStyles.join(",\n")}
     }
 
-    export const uiStyles: Configs = {
+    export const uiStyles: StyleConfigs = {
       ${uiStyles.join(",\n")}
     }
 
-    export const atRuleStyles: Configs = {
+    export const atRuleStyles: StyleConfigs = {
       ${atRuleStyles.join(",\n")}
     }
 
-    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles }
+    export const styles: StyleConfigs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles }
 
     export const processSkipProperties: string[] = [${processSkipProperties.map(
       (property) => `"${property}"`,

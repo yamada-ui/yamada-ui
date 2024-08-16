@@ -27,6 +27,19 @@ export const globalValues = new Set([
 export const isCSSFunction = (value: any) =>
   isString(value) && value.includes("(") && value.includes(")")
 
+export const getCSSFunction = (value: any) => {
+  const regex = /(^[a-z-A-Z]+)\((.*)\)/g
+  const [, type, values] = regex.exec(value) ?? []
+
+  return { type, values }
+}
+
+export const splitValues = (values: string) =>
+  values
+    .split(",")
+    .map((arg) => arg.trim())
+    .filter(Boolean)
+
 export const isCSSVar = (value: string) => /^var\(--.+\)$/.test(value)
 
 export const analyzeCSSValue = (value: any) => {
@@ -62,3 +75,11 @@ export const mode =
 
 export const keyframes = (...arg: CSSObject[]): Keyframes =>
   emotionKeyframes(...arg)
+
+const combineFunctions =
+  (a: Transform, b: Transform): Transform =>
+  (value, ...args) =>
+    b(a(value, ...args), ...args)
+
+export const pipe = (...transformers: Transform[]) =>
+  transformers.reduce(combineFunctions)

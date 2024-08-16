@@ -1,6 +1,11 @@
 import { isArray } from "@yamada-ui/utils"
 import type { Transform } from "./utils"
-import { globalValues, isCSSFunction } from "./utils"
+import {
+  getCSSFunction,
+  globalValues,
+  isCSSFunction,
+  splitValues,
+} from "./utils"
 
 const directions: Record<string, string> = {
   "to-t": "to top",
@@ -22,17 +27,13 @@ export const generateGradient: Transform = (value, theme) => {
 
   if (!prevent) return `url('${value}')`
 
-  const regex = /(^[a-z-A-Z]+)\((.*)\)/g
-  const [, _type, _values] = regex.exec(value) ?? []
+  let { type, values } = getCSSFunction(value)
 
-  if (!_type || !_values) return value
+  if (!type || !values) return value
 
-  const type = _type.includes("-gradient") ? _type : `${_type}-gradient`
+  type = type.includes("-gradient") ? type : `${type}-gradient`
 
-  const [maybeDirection, ...colors] = _values
-    .split(",")
-    .map((value) => value.trim())
-    .filter(Boolean)
+  const [maybeDirection, ...colors] = splitValues(values)
 
   if (!colors.length) return value
 
@@ -41,7 +42,7 @@ export const generateGradient: Transform = (value, theme) => {
 
   colors.unshift(direction)
 
-  const values = colors.map((_color) => {
+  const computedValues = colors.map((_color) => {
     if (directionValues.has(_color)) return _color
 
     const i = _color.indexOf(" ")
@@ -62,5 +63,5 @@ export const generateGradient: Transform = (value, theme) => {
     }
   })
 
-  return `${type}(${values.join(", ")})`
+  return `${type}(${computedValues.join(", ")})`
 }

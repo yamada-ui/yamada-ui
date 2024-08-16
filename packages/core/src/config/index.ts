@@ -87,20 +87,9 @@ export const transforms = {
       return prev
     }, {}),
   token:
-    (
-      token: ThemeToken,
-      transform?: Transform,
-      compose?: Transform,
-    ): Transform =>
-    (value, theme, css) => {
-      value = tokenToCSSVar(token, value)(theme)
-
-      let result = transform?.(value, theme, css) ?? value
-
-      if (compose) result = compose(result, theme, css)
-
-      return result
-    },
+    (token: ThemeToken): Transform =>
+    (value, theme) =>
+      tokenToCSSVar(token, value)(theme),
   styles:
     (prefix?: string): Transform =>
     (value, theme, _css, prev = {}) => {
@@ -134,17 +123,11 @@ export const transforms = {
 
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
-  fraction:
-    (transform?: Transform): Transform =>
-    (value: any, ...rest) => {
-      if (isNumber(value) && value <= 1) {
-        value = `${value * 100}%`
-      }
+  fraction: (value: any) => {
+    if (isNumber(value) && value <= 1) value = `${value * 100}%`
 
-      if (transform) value = transform(value, ...rest)
-
-      return value
-    },
+    return value
+  },
   isTruncated: (value: boolean) => {
     if (value === true) {
       return {
@@ -162,10 +145,8 @@ export const transforms = {
     }
   },
   function:
-    (func: string, transform?: Transform): Transform =>
-    (value: any, ...rest) => {
-      if (transform) value = transform(value, ...rest)
-
+    (func: string): Transform =>
+    (value: any) => {
       return `${func}(${value})`
     },
   content: (value: any) => {

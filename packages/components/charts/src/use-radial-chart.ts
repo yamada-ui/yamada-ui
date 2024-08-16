@@ -1,4 +1,5 @@
-import { useTheme, type CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
+import { useTheme } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo, type ComponentPropsWithRef } from "react"
 import type * as Recharts from "recharts"
@@ -31,6 +32,12 @@ export type UseRadialChartOptions = {
    * Props for the radialBar.
    */
   radialBarProps?: Partial<RadialBarProps>
+  /**
+   * Controls fill opacity of all pies.
+   *
+   * @default 1
+   */
+  fillOpacity?: number | [number, number]
 }
 
 type UseRadialChartProps = UseRadialChartOptions & {
@@ -38,12 +45,42 @@ type UseRadialChartProps = UseRadialChartOptions & {
 }
 
 export const useRadialChart = ({
-  data,
+  data: dataProp,
   dataKey,
+  fillOpacity,
   styles,
   ...rest
 }: UseRadialChartProps) => {
   const { theme } = useTheme()
+
+  const radialBarColors: CSSUIProps["var"] = useMemo(
+    () =>
+      dataProp.map(({ color }, index) => ({
+        __prefix: "ui",
+        name: `radial-bar-${index}`,
+        token: "colors",
+        value: color ?? "transparent",
+      })),
+    [dataProp],
+  )
+
+  const radialVars: CSSUIProps["var"] = useMemo(
+    () =>
+      [
+        ...radialBarColors,
+        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+      ] as Required<CSSUIProps>["var"],
+    [radialBarColors, fillOpacity],
+  )
+
+  const data = useMemo(
+    () =>
+      dataProp.map((prev, index) => ({
+        ...prev,
+        fill: `var(--ui-radial-bar-${index})`,
+      })),
+    [dataProp],
+  )
 
   const [chartProps, chartClassName] = useMemo(
     () =>
@@ -63,7 +100,6 @@ export const useRadialChart = ({
     [rest.radialBarProps, styles.radialBar, theme],
   )
 
-  //TODO: 色の指定、データの入れ方
   const getRadialChartProps: ChartPropGetter<
     "div",
     ComponentPropsWithRef<typeof Recharts.RadialBarChart>,
@@ -95,7 +131,7 @@ export const useRadialChart = ({
     [dataKey, radialBarClassName, radialBarProps],
   )
 
-  return { getRadialChartProps, getRadialBarProps }
+  return { getRadialChartProps, getRadialBarProps, radialVars }
 }
 
 export type UseRadialChartReturn = ReturnType<typeof useRadialChart>

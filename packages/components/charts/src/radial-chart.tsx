@@ -76,16 +76,20 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     tooltipDataSource = "all",
     valueFormatter,
     legendProps,
+    fillOpacity,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getRadialChartProps, getRadialBarProps } = useRadialChart({
-    data,
-    dataKey,
-    styles,
-    chartProps,
-    radialBarProps,
-  })
+  const { getRadialChartProps, getRadialBarProps, radialVars } = useRadialChart(
+    {
+      data,
+      dataKey,
+      styles,
+      chartProps,
+      radialBarProps,
+      fillOpacity,
+    },
+  )
   const { getContainerProps } = useChart({ containerProps })
   const { tooltipProps: computedTooltipProps, getTooltipProps } =
     useChartTooltip({
@@ -102,7 +106,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-radial-chart", className)}
-        // var={pieVars}
+        var={radialVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >

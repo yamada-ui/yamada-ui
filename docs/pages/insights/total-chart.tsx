@@ -15,6 +15,7 @@ import {
   Tag,
   Text,
   useBoolean,
+  useTheme,
   VStack,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
@@ -33,7 +34,6 @@ import {
 } from "./insights-utils"
 import { useI18n } from "contexts"
 import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
-import { colorSchemes } from "theme"
 import { CountUp } from "components/transitions"
 import { ScoreLegend } from "./score-legend"
 
@@ -179,6 +179,8 @@ type AreaChartProps = {}
 
 const AreaChart: FC<AreaChartProps> = memo(() => {
   const { currentInsights, users, period } = useInsights()
+  const { theme } = useTheme()
+  const { colorSchemes = [] } = theme
 
   const data = useMemo(
     () =>
@@ -205,7 +207,7 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
           color: `${c}.500`,
         }
       }),
-    [users],
+    [users, colorSchemes],
   )
 
   return (

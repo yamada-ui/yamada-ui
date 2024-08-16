@@ -1,0 +1,4 @@
+import{j as t}from"./jsx-runtime-Nms4Y4qS.js";import{useMDXComponents as n}from"./index-DlpNa54Y.js";import{ae as m}from"./index-CQMvIXdm.js";import"./index-BwDkhjyp.js";import"./_commonjsHelpers-BosuxZz1.js";import"./iframe-B4_Ggn7q.js";import"../sb-preview/runtime.js";import"./index-8jxD160K.js";import"./index-DxjWwZXO.js";import"./extends-CF3RwP-h.js";import"./inheritsLoose-DR8r8Ogv.js";import"./_baseAssignValue-qKg1-Mlh.js";import"./_getPrototype-CVMNbDHg.js";import"./index-CFFTH5x_.js";import"./index-DrFu-skq.js";function r(e){const o={code:"code",h1:"h1",pre:"pre",...n(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(m,{title:"Documents / Theme / Borders"}),`
+`,t.jsx(o.h1,{id:"borders",children:"Borders"}),`
+`,t.jsx(o.pre,{children:t.jsx(o.code,{className:"language-ts",children:`Not defined
+`})})]})}function C(e={}){const{wrapper:o}={...n(),...e.components};return o?t.jsx(o,{...e,children:t.jsx(r,{...e})}):r(e)}export{C as default};

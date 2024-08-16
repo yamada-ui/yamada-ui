@@ -1,12 +1,7 @@
-import type { Dict, Merge } from "@yamada-ui/utils"
-import type {
-  Target,
-  TargetAndTransition,
-  Transition,
-  motion,
-} from "framer-motion"
-import type { Ref, RefAttributes, ReactHTML } from "react"
-import type { MotionProps } from "./motion"
+import type { ComponentArgs, UIProps, WithoutAs } from "@yamada-ui/core"
+import type { Dict, Merge, MergeIfDefined } from "@yamada-ui/utils"
+import type * as Motion from "framer-motion"
+import type * as React from "react"
 
 export type {
   MotionValue,
@@ -61,10 +56,10 @@ export type {
   FeaturePackage as MotionFeaturePackage,
   FeaturePackages as MotionFeaturePackages,
   FocusHandlers as MotionFocusHandlers,
-  HTMLMotionProps,
   HoverHandlers as MotionHoverHandlers,
   HydratedFeatureDefinition as MotionHydratedFeatureDefinition,
   HydratedFeatureDefinitions as MotionHydratedFeatureDefinitions,
+  HTMLMotionProps,
   IProjectionNode as MotionIProjectionNode,
   Inertia as MotionInertia,
   InertiaOptions as MotionInertiaOptions,
@@ -145,13 +140,67 @@ export type {
   VisualState as MotionVisualState,
 } from "framer-motion"
 
-export type MotionAs = keyof typeof motion
+export type MotionAs = keyof Motion.DOMMotionComponents
+
+type UIMotionProps = Merge<UIProps, Motion.MotionProps>
+
+type FactoryAttributes<Y> =
+  Y extends React.DetailedHTMLFactory<infer M, any>
+    ? M
+    : Y extends React.SVGFactory
+      ? React.SVGAttributes<SVGElement>
+      : never
+type FactoryElement<Y> =
+  Y extends React.DetailedHTMLFactory<any, infer M>
+    ? M
+    : Y extends React.SVGFactory
+      ? SVGElement
+      : never
+type DOMAttributes<
+  Y extends React.HTMLAttributes<M> | React.SVGAttributes<SVGElement>,
+  M extends HTMLElement | SVGElement,
+> = Y
+
+export type MotionProps<Y extends MotionAs = "div"> = Merge<
+  DOMAttributes<
+    FactoryAttributes<React.ReactDOM[Y]>,
+    FactoryElement<React.ReactDOM[Y]>
+  >,
+  UIMotionProps
+> & {
+  as?: MotionAs
+}
+
+export type MotionPropsWithoutChildren<Y extends MotionAs = "div"> = Omit<
+  MotionProps<Y>,
+  "children"
+>
+
+type ComponentProps<
+  Y extends object,
+  M extends object,
+  D extends object = {},
+  H extends MotionAs = "div",
+> = (Merge<Y, WithoutAs<D>> | Merge<M, WithoutAs<D>>) & {
+  as?: H
+}
+
+export type MotionComponent<Y extends MotionAs, M extends object = {}> = {
+  <D extends MotionAs = Y>(
+    props: ComponentProps<
+      React.ComponentProps<Y>,
+      React.ComponentProps<D>,
+      M,
+      D
+    >,
+  ): JSX.Element
+} & ComponentArgs
 
 type TargetResolver<Y = Dict> = (
-  props: Y & MotionTransitionProperties,
-) => TargetAndTransition
+  props: Y & MotionTransitionProps,
+) => Motion.TargetAndTransition
 
-type Variant<Y = Dict> = TargetAndTransition | TargetResolver<Y>
+type Variant<Y = Dict> = Motion.TargetAndTransition | TargetResolver<Y>
 
 export type MotionTransitionVariants<Y = Dict> = {
   enter: Variant<Y>
@@ -159,23 +208,25 @@ export type MotionTransitionVariants<Y = Dict> = {
   initial?: Variant<Y>
 }
 
-export type MotionTransitionProperties = {
+type MotionLifecycleProps<Y> = Partial<Record<"enter" | "exit", Y>>
+
+export type MotionTransitionProps = {
   /**
    * Custom `transition` definition for `enter` and `exit`.
    */
-  transition?: MotionTransitionProps
+  transition?: MotionLifecycleProps<Motion.Transition>
   /**
    * Custom `transitionEnd` definition for `enter` and `exit`.
    */
-  transitionEnd?: MotionTransitionEndProps
+  transitionEnd?: MotionLifecycleProps<Motion.Target>
   /**
    * Custom `delay` definition for `enter` and `exit`.
    */
-  delay?: number | MotionDelayProps
+  delay?: number | MotionLifecycleProps<number>
   /**
    * Custom `duration` definition for `enter` and `exit`.
    */
-  duration?: number | MotionDurationProps
+  duration?: number | MotionLifecycleProps<number>
   /**
    * Custom `enter`.
    */
@@ -190,18 +241,8 @@ export type MotionTransitionProperties = {
   initial?: any
 }
 
-type WithMotionProps<Y> = Partial<Record<"enter" | "exit", Y>>
-
-export type MotionTransitionProps = WithMotionProps<Transition>
-
-export type MotionTransitionEndProps = WithMotionProps<Target>
-
-export type MotionDelayProps = WithMotionProps<number>
-
-export type MotionDurationProps = WithMotionProps<number>
-
 export type WithTransitionProps<Y extends object> = Omit<Y, "transition"> &
-  MotionTransitionProperties & {
+  MotionTransitionProps & {
     /**
      * If `true`, the element will unmount when `isOpen={false}` and animation is done.
      */
@@ -212,18 +253,15 @@ export type WithTransitionProps<Y extends object> = Omit<Y, "transition"> &
     isOpen?: boolean
   }
 
-export type MotionUIPropGetter<
-  Y extends keyof ReactHTML = "div",
-  M = undefined,
-> = (
-  props?: Merge<MotionProps<Y>, M>,
-  ref?: Ref<any>,
-) => MotionProps<Y> & RefAttributes<any>
+export type MotionUIPropGetter<Y extends MotionAs = "div", M = undefined> = (
+  props?: MergeIfDefined<MotionProps<Y>, M>,
+  ref?: React.Ref<any>,
+) => MotionProps<Y> & React.RefAttributes<any>
 
 export type RequiredMotionUIPropGetter<
-  Y extends keyof ReactHTML = "div",
+  Y extends MotionAs = "div",
   M = undefined,
 > = (
-  props: Merge<MotionProps<Y>, M>,
-  ref?: Ref<any>,
-) => MotionProps<Y> & RefAttributes<any>
+  props: MergeIfDefined<MotionProps<Y>, M>,
+  ref?: React.Ref<any>,
+) => MotionProps<Y> & React.RefAttributes<any>

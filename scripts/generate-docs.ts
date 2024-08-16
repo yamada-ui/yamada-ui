@@ -2,7 +2,7 @@ import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import type { UsageTheme } from "@yamada-ui/core"
 import { defaultTheme } from "@yamada-ui/theme"
-import { tones } from "@yamada-ui/utils"
+import { TONES } from "@yamada-ui/utils"
 import { format, resolveConfig } from "prettier"
 import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
@@ -95,7 +95,7 @@ const merge = <T extends Record<string, any>>(
 }
 
 const isTone = (value: unknown): value is Record<string, string> =>
-  isObject(value) && tones.every((k) => isString(value[k]))
+  isObject(value) && TONES.every((k) => isString(value[k]))
 
 const extractColorScheme = ({ colors, semantics = {} }: UsageTheme): string => {
   if (!colors) return "string"

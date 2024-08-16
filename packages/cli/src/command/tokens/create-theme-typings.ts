@@ -1,12 +1,12 @@
 import { isArray, isObject, isString, omitObject, prettier } from "../../utils"
 import { config } from "./config"
 
+const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+
 type Component = {
   sizes: string[]
   variants: string[]
 }
-
-const tones = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
 export const printComponent = (components: Record<string, Component>) =>
   `components: { ${Object.entries(components)
@@ -84,7 +84,7 @@ const isTone = (value: any) => {
 
   const keys = Object.keys(value)
 
-  return tones.every((key) => keys.includes(key.toString()))
+  return TONES.every((key) => keys.includes(key.toString()))
 }
 
 export const extractColorSchemes = (theme: any) => {
@@ -107,7 +107,7 @@ export const extractColorSchemes = (theme: any) => {
   Object.entries(semantics.colorSchemes).forEach(([key, value]) => {
     if (isTone(value)) {
       results.colorSchemes.push(key)
-      results.colorSchemeColors.push(...tones.map((tone) => `${key}.${tone}`))
+      results.colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
     } else {
       const hasColorScheme = isArray(value)
         ? value.every(
@@ -118,7 +118,7 @@ export const extractColorSchemes = (theme: any) => {
       if (!hasColorScheme) return
 
       results.colorSchemes.push(key)
-      results.colorSchemeColors.push(...tones.map((tone) => `${key}.${tone}`))
+      results.colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
     }
   })
 

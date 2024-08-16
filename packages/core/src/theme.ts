@@ -4,12 +4,12 @@ import {
   objectFromEntries,
   pickObject,
   omitObject,
+  TONES,
   isObject,
   runIfFunc,
   isFunction,
   merge,
   isArray,
-  tones,
 } from "@yamada-ui/utils"
 import type { CSSUIObject, ThemeProps, UIStyle, UIStyleProps } from "./css"
 import { analyzeBreakpoints, createVars } from "./css"
@@ -159,7 +159,7 @@ const createTokens = (
 
           prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
         } else {
-          tones.forEach((tone) => {
+          TONES.forEach((tone) => {
             const enhancedToken: VarToken = {
               isSemantic: true,
               value: isArray(value)

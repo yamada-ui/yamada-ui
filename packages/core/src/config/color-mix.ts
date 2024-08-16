@@ -20,7 +20,9 @@ const methods: Record<string, string> = {
 const getColor = (value: string | undefined, theme: StyledTheme) => {
   if (!value) return ""
 
-  let [color, ratio] = value.split(" ")
+  let [color, ratio, ...rest] = value.split(" ").filter(Boolean)
+
+  if (rest.length) return value
 
   const token = `colors.${color}`
 

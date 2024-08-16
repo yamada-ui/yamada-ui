@@ -26,7 +26,7 @@ const methods: Record<string, string> = {
 const getColor = (value: string | undefined, theme: StyledTheme) => {
   if (!value) return ""
 
-  let [color, ratio, ...rest] = value.split(" ").filter(Boolean)
+  let [color, percent, ...rest] = value.split(" ").filter(Boolean)
 
   if (rest.length) return value
 
@@ -34,9 +34,9 @@ const getColor = (value: string | undefined, theme: StyledTheme) => {
 
   color = token in theme.__cssMap ? theme.__cssMap[token].ref : color
 
-  if (ratio && !ratio.endsWith("%")) ratio = `${ratio}%`
+  if (percent && !percent.endsWith("%")) percent = `${percent}%`
 
-  return !ratio ? color : `${color} ${ratio}`
+  return !percent ? color : `${color} ${percent}`
 }
 
 export const generateColorMix: Transform = (value, theme) => {
@@ -46,27 +46,69 @@ export const generateColorMix: Transform = (value, theme) => {
 
   if (!prevent) return value
 
-  let { type, values } = getCSSFunction(value)
+  const { type, values } = getCSSFunction(value)
 
-  if ((type !== "mix" && type !== "color-mix") || !values) return value
+  if (!values) return value
 
-  type = type.startsWith("color-") ? type : `color-${type}`
+  switch (type) {
+    case "mix":
+    case "color-mix": {
+      let [color2, color1, method] = splitValues(values).reverse()
 
-  let [color2, color1, method] = splitValues(values).reverse()
+      if (method) {
+        method = method in methods ? methods[method] : method
+      } else {
+        method = DEFAULT_METHOD
+      }
 
-  if (method) {
-    method = method in methods ? methods[method] : method
-  } else {
-    method = DEFAULT_METHOD
+      color1 = getColor(color1, theme)
+      color2 = getColor(color2, theme)
+
+      return (
+        `color-mix(${method}` +
+        (color1 ? `, ${color1}` : "") +
+        (color2 ? `, ${color2}` : "") +
+        ")"
+      )
+    }
+
+    case "tint":
+    case "shade":
+    case "transparentize": {
+      const [color, percent] = splitValues(values)
+
+      const color1 = getColor(`${color} ${percent}`, theme)
+      const color2 =
+        type === "transparentize"
+          ? "transparent"
+          : type === "tint"
+            ? "#fff"
+            : "#000"
+
+      return `color-mix(${DEFAULT_METHOD}, ${color1}, ${color2})`
+    }
+
+    case "tone": {
+      const [color, tone] = splitValues(values)
+
+      const color1 = getColor(color, theme)
+
+      if (!tone) return color1
+
+      let ratio = parseInt(tone) || 500
+
+      if (ratio < 50 && 950 < ratio) ratio = 500
+
+      if (ratio === 500) return color1
+
+      const color2 = ratio < 500 ? "#fff" : "#000"
+
+      const percent = `${100 - (Math.abs(ratio - 500) * 2) / 10}%`
+
+      return `color-mix(${DEFAULT_METHOD}, ${color1} ${percent}, ${color2})`
+    }
+
+    default:
+      return value
   }
-
-  color1 = getColor(color1, theme)
-  color2 = getColor(color2, theme)
-
-  return (
-    `${type}(${method}` +
-    (color1 ? `, ${color1}` : "") +
-    (color2 ? `, ${color2}` : "") +
-    ")"
-  )
 }

@@ -181,7 +181,8 @@ export const standardStyles: StyleConfigs = {
   borderImageSlice: true,
   borderImageSource: {
     properties: "borderImageSource",
-    transform: transforms.gradient,
+    token: "gradients",
+    transform: transforms.token("gradients", transforms.gradient),
   },
   borderImageWidth: {
     properties: "borderImageWidth",
@@ -354,7 +355,11 @@ export const standardStyles: StyleConfigs = {
   columnRuleStyle: true,
   columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
   columnSpan: true,
-  columnWidth: { properties: "columnWidth", transform: transforms.px },
+  columnWidth: {
+    properties: "columnWidth",
+    token: "sizes",
+    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
+  },
   columns: true,
   contain: true,
   containIntrinsicBlockSize: true,
@@ -363,7 +368,8 @@ export const standardStyles: StyleConfigs = {
   containIntrinsicSize: true,
   containIntrinsicWidth: {
     properties: "containIntrinsicWidth",
-    transform: transforms.px,
+    token: "sizes",
+    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
   },
   container: true,
   containerName: true,
@@ -388,7 +394,7 @@ export const standardStyles: StyleConfigs = {
   flexBasis: {
     properties: "flexBasis",
     token: "sizes",
-    transform: transforms.token("sizes", transforms.px),
+    transform: transforms.token("sizes", transforms.fraction(transforms.px)),
   },
   flexDirection: true,
   flexFlow: true,
@@ -533,7 +539,8 @@ export const standardStyles: StyleConfigs = {
   listStyle: true,
   listStyleImage: {
     properties: "listStyleImage",
-    transform: transforms.gradient,
+    token: "gradients",
+    transform: transforms.token("gradients", transforms.gradient),
   },
   listStylePosition: true,
   listStyleType: true,
@@ -607,7 +614,11 @@ export const standardStyles: StyleConfigs = {
   maskBorderWidth: { properties: "maskBorderWidth", transform: transforms.px },
   maskClip: true,
   maskComposite: true,
-  maskImage: { properties: "maskImage", transform: transforms.gradient },
+  maskImage: {
+    properties: "maskImage",
+    token: "gradients",
+    transform: transforms.token("gradients", transforms.gradient),
+  },
   maskMode: true,
   maskOrigin: true,
   maskPosition: true,
@@ -1035,12 +1046,12 @@ export const standardStyles: StyleConfigs = {
   borderY: {
     properties: ["borderTop", "borderBottom"],
     token: "borders",
-    transform: transforms.token("borders"),
+    transform: transforms.token("borders", transforms.px),
   },
   borderX: {
     properties: ["borderLeft", "borderRight"],
     token: "borders",
-    transform: transforms.token("borders"),
+    transform: transforms.token("borders", transforms.px),
   },
   borderTopRadius: {
     properties: ["borderTopLeftRadius", "borderTopRightRadius"],
@@ -1082,10 +1093,7 @@ export const standardStyles: StyleConfigs = {
     token: "sizes",
     transform: transforms.token("sizes", transforms.fraction(transforms.px)),
   },
-  maxBoxSize: {
-    properties: ["maxWidth", "maxHeight"],
-    transform: transforms.fraction(transforms.px),
-  },
+  maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   translateX: {
     properties: "--ui-translate-x",
     token: "spaces",
@@ -2033,7 +2041,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
    */
-  borderImageSource?: Token<CSS.Property.BorderImageSource>
+  borderImageSource?: Token<CSS.Property.BorderImageSource, "gradients">
   /**
    * The CSS `border-image-width` property.
    *
@@ -2577,7 +2585,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
    */
-  columnWidth?: Token<CSS.Property.ColumnWidth | number>
+  columnWidth?: Token<CSS.Property.ColumnWidth | number, "sizes">
   /**
    * The CSS `columns` property.
    *
@@ -2619,7 +2627,10 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-width
    */
-  containIntrinsicWidth?: Token<CSS.Property.ContainIntrinsicWidth | number>
+  containIntrinsicWidth?: Token<
+    CSS.Property.ContainIntrinsicWidth | number,
+    "sizes"
+  >
   /**
    * The CSS `container` property.
    *
@@ -3237,13 +3248,13 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
    */
-  listStyleImage?: Token<CSS.Property.ListStyleImage>
+  listStyleImage?: Token<CSS.Property.ListStyleImage, "gradients">
   /**
    * The CSS `list-style-image` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
    */
-  listStyleImg?: Token<CSS.Property.ListStyleImage>
+  listStyleImg?: Token<CSS.Property.ListStyleImage, "gradients">
   /**
    * The CSS `list-style-position` property.
    *
@@ -3477,7 +3488,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
    */
-  maskImage?: Token<CSS.Property.MaskImage>
+  maskImage?: Token<CSS.Property.MaskImage, "gradients">
   /**
    * The CSS `mask-mode` property.
    *
@@ -4934,14 +4945,20 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
    */
-  borderY?: Token<CSS.Property.BorderBottom | CSS.Property.BorderTop, "borders">
+  borderY?: Token<
+    CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
+    "borders"
+  >
   /**
    * The CSS `border-left` and `border-right` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
    */
-  borderX?: Token<CSS.Property.BorderLeft | CSS.Property.BorderRight, "borders">
+  borderX?: Token<
+    CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
+    "borders"
+  >
   /**
    * The CSS `border-top-left-radius` and `border-top-right-radius` property.
    *
@@ -5133,7 +5150,7 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
    */
-  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth | number>
+  maxBoxSize?: Token<CSS.Property.MaxHeight | CSS.Property.MaxWidth>
   /**
    * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
    */

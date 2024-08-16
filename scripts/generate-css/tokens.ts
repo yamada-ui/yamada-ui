@@ -53,7 +53,12 @@ export const tokens: Tokens = {
   fontSizes: ["fontSize"],
   fontWeights: ["fontWeight"],
   fonts: ["fontFamily"],
-  gradients: ["backgroundImage"],
+  gradients: [
+    "backgroundImage",
+    "borderImageSource",
+    "listStyleImage",
+    "maskImage",
+  ],
   letterSpacings: ["letterSpacing"],
   lineHeights: ["lineHeight"],
   radii: [
@@ -92,6 +97,8 @@ export const tokens: Tokens = {
     "minBoxSize",
     "minBoxSize",
     "flexBasis",
+    "columnWidth",
+    "containIntrinsicWidth",
   ],
   spaces: [
     "margin",

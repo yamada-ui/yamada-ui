@@ -84,6 +84,20 @@ export const transformProps: TransformProps = {
     { properties: "backdropSaturate", args: ["saturate"] },
     { properties: "backdropSepia", args: ["sepia"] },
   ],
+  calc: [
+    ...(tokens.sizes?.map((properties) => ({ properties, args: ["sizes"] })) ??
+      []),
+    ...(tokens.spaces?.map((properties) => ({
+      properties,
+      args: ["spaces"],
+    })) ?? []),
+    ...(tokens.radii?.map((properties) => ({ properties, args: ["radii"] })) ??
+      []),
+    ...(tokens.fontSizes?.map((properties) => ({
+      properties,
+      args: ["fontSizes"],
+    })) ?? []),
+  ],
 }
 
 export const transformMap = Object.entries(transformProps).reduce(

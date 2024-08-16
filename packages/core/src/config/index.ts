@@ -12,6 +12,7 @@ import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 import { generateAnimation } from "./animation"
 import { generateAtRule } from "./at-rule"
+import { generateCalc } from "./calc"
 import { generateColorMix } from "./color-mix"
 import { generateFilter } from "./filter"
 import { generateGradient } from "./gradient"
@@ -156,6 +157,7 @@ export const transforms = {
       return value
     }
   },
+  calc: generateCalc,
   colorMix: generateColorMix,
   gradient: generateGradient,
   animation: generateAnimation,

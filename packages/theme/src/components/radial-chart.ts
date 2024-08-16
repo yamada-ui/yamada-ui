@@ -4,5 +4,9 @@ import { LineChart } from "./line-chart"
 
 export const RadialChart: ComponentMultiStyle<"RadialChart"> = mergeMultiStyle(
   LineChart,
-  {},
-)({ omit: ["line", "grid", "sizes.full"] })
+  {
+    baseStyle: {},
+
+    sizes: {},
+  },
+)({ omit: ["line", "grid"] })

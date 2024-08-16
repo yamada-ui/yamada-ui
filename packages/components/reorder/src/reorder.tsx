@@ -7,6 +7,7 @@ import type {
 import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type { HTMLMotionProps } from "@yamada-ui/motion"
 import { MotionReorder } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
@@ -14,7 +15,7 @@ import {
   handlerAll,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef } from "react"
+import type { ForwardedRef, PropsWithChildren } from "react"
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
 import { ReorderItem, type ReorderItemProps } from "./reorder-item"
 
@@ -54,10 +55,10 @@ type ReorderOptions<Y extends any = string> = {
 }
 
 export type ReorderProps<Y extends any = string> = Omit<
-  HTMLUIProps<"ul">,
-  "as" | "onChange"
+  Merge<HTMLUIProps<"ul">, HTMLMotionProps<"ul">>,
+  "onChange" | "children"
 > &
-  Omit<HTMLMotionProps<"ul">, "as" | "onChange"> &
+  PropsWithChildren &
   ThemeProps<"Reorder"> &
   ReorderOptions<Y>
 

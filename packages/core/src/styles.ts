@@ -1178,34 +1178,6 @@ export const standardStyles: StyleConfigs = {
     transform: transforms.function("sepia"),
   },
   colorMode: { properties: "colorScheme" },
-  lineClamp: {
-    properties: "--ui-line-clamp",
-    isSkip: true,
-    static: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      display: "-webkit-box",
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
-    },
-  },
-  isTruncated: { isSkip: true, transform: transforms.isTruncated },
-  layerStyle: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles("layerStyles"),
-  },
-  textStyle: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles("textStyles"),
-  },
-  apply: {
-    isProcessResult: true,
-    isSkip: true,
-    transform: transforms.styles(),
-  },
-  var: { isProcessSkip: true, isSkip: true, transform: transforms.var },
 }
 
 export const shorthandStyles: StyleConfigs = {
@@ -1313,24 +1285,41 @@ export const pseudoStyles: StyleConfigs = {
   "&::after": { properties: "&::after", transform: transforms.content },
 }
 
+export const uiStyles: StyleConfigs = {
+  lineClamp: {
+    properties: "--ui-line-clamp",
+    static: {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitBoxOrient: "vertical",
+      WebkitLineClamp: "var(--ui-line-clamp)",
+    },
+  },
+  isTruncated: { transform: transforms.isTruncated },
+  layerStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("layerStyles"),
+  },
+  textStyle: {
+    isProcessResult: true,
+    transform: transforms.styles("textStyles"),
+  },
+  apply: { isProcessResult: true, transform: transforms.styles() },
+  var: { isProcessSkip: true, transform: transforms.var },
+}
+
 export const atRuleStyles: StyleConfigs = {
-  _media: { isProcessSkip: true, isSkip: true, transform: transforms.media },
-  _container: {
-    isProcessSkip: true,
-    isSkip: true,
-    transform: transforms.container,
-  },
-  _supports: {
-    isProcessSkip: true,
-    isSkip: true,
-    transform: transforms.supports,
-  },
+  _media: { isProcessSkip: true, transform: transforms.media },
+  _container: { isProcessSkip: true, transform: transforms.container },
+  _supports: { isProcessSkip: true, transform: transforms.supports },
 }
 
 export const styles: StyleConfigs = {
   ...standardStyles,
   ...shorthandStyles,
   ...pseudoStyles,
+  ...uiStyles,
   ...atRuleStyles,
 }
 

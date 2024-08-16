@@ -6,6 +6,7 @@ import {
   type CardProps,
   Tag,
   Text,
+  isUndefined,
 } from "@yamada-ui/react"
 import { TextWithCode } from "components/typography"
 import { useI18n } from "contexts"
@@ -18,6 +19,7 @@ export type PropsCardProps = CardProps & {
   type?: string
   required?: boolean
   description?: string
+  deprecated?: string
   defaultValue?: string
   docs?: string
 }
@@ -28,6 +30,7 @@ export const PropsCard: FC<PropsCardProps> = ({
   type,
   required,
   description,
+  deprecated,
   defaultValue,
   docs,
 }) => {
@@ -60,6 +63,12 @@ export const PropsCard: FC<PropsCardProps> = ({
             {t("component.props-card.required")}
           </Tag>
         ) : null}
+
+        {!isUndefined(deprecated) ? (
+          <Tag colorScheme="neutral" size="sm">
+            {t("component.props-card.deprecated")}
+          </Tag>
+        ) : null}
       </CardHeader>
 
       <CardBody
@@ -69,7 +78,7 @@ export const PropsCard: FC<PropsCardProps> = ({
         rowGap="4"
         columnGap="6"
       >
-        {typeof description !== "undefined" ? (
+        {!isUndefined(description) ? (
           <>
             <Text
               lineHeight="1.5rem"
@@ -84,7 +93,22 @@ export const PropsCard: FC<PropsCardProps> = ({
           </>
         ) : null}
 
-        {typeof type !== "undefined" ? (
+        {!isUndefined(deprecated) ? (
+          <>
+            <Text
+              lineHeight="1.5rem"
+              color="muted"
+              fontWeight="medium"
+              fontSize="sm"
+            >
+              {t("component.props-card.deprecated")}
+            </Text>
+
+            <TextWithCode whiteSpace="pre-line">{deprecated}</TextWithCode>
+          </>
+        ) : null}
+
+        {!isUndefined(type) ? (
           <>
             <Text
               lineHeight="1.5rem"
@@ -101,7 +125,7 @@ export const PropsCard: FC<PropsCardProps> = ({
           </>
         ) : null}
 
-        {typeof defaultValue !== "undefined" ? (
+        {!isUndefined(defaultValue) ? (
           <>
             <Text
               lineHeight="1.5rem"
@@ -118,7 +142,7 @@ export const PropsCard: FC<PropsCardProps> = ({
           </>
         ) : null}
 
-        {typeof docs !== "undefined" ? (
+        {!isUndefined(docs) ? (
           <>
             <Text
               lineHeight="1.5rem"

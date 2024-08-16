@@ -589,9 +589,12 @@ export type UsageTheme = BaseTheme & {
   [key: string]: any
 }
 
-export type ComponentBaseStyle = UIStyle
-export type ComponentVariants = Record<string, UIStyle>
-export type ComponentSizes = Record<string, UIStyle>
+export type ComponentBaseStyle<Y extends Dict = Dict> = UIStyle<Y>
+export type ComponentVariants<Y extends Dict = Dict> = Record<
+  string,
+  UIStyle<Y>
+>
+export type ComponentSizes<Y extends Dict = Dict> = Record<string, UIStyle<Y>>
 type ComponentProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
@@ -628,20 +631,26 @@ export type ComponentStyle<
   /**
    * The base style of the component.
    */
-  baseStyle?: ComponentBaseStyle
+  baseStyle?: ComponentBaseStyle<M>
   /**
    * The sizes of the component.
    */
-  sizes?: ComponentSizes
+  sizes?: ComponentSizes<M>
   /**
    * The variants of the component.
    */
-  variants?: ComponentVariants
+  variants?: ComponentVariants<M>
 }
 
-export type ComponentMultiBaseStyle = UIMultiStyle
-export type ComponentMultiVariants = Record<string, UIMultiStyle>
-export type ComponentMultiSizes = Record<string, UIMultiStyle>
+export type ComponentMultiBaseStyle<Y extends Dict = Dict> = UIMultiStyle<Y>
+export type ComponentMultiVariants<Y extends Dict = Dict> = Record<
+  string,
+  UIMultiStyle<Y>
+>
+export type ComponentMultiSizes<Y extends Dict = Dict> = Record<
+  string,
+  UIMultiStyle<Y>
+>
 
 export type ComponentMultiStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
@@ -650,15 +659,15 @@ export type ComponentMultiStyle<
   /**
    * The base style of the component.
    */
-  baseStyle?: ComponentMultiBaseStyle
+  baseStyle?: ComponentMultiBaseStyle<M>
   /**
    * The sizes of the component.
    */
-  sizes?: ComponentMultiSizes
+  sizes?: ComponentMultiSizes<M>
   /**
    * The variants of the component.
    */
-  variants?: ComponentMultiVariants
+  variants?: ComponentMultiVariants<M>
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>

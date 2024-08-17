@@ -1,12 +1,6 @@
 import type { ThemeTokens } from "@yamada-ui/core"
 import { defaultTheme } from "@yamada-ui/theme"
-import {
-  hslaTo,
-  isArray,
-  isString,
-  parseToHsla,
-  tones as toneMap,
-} from "@yamada-ui/utils"
+import { hslaTo, isArray, isString, parseToHsla, TONES } from "@yamada-ui/utils"
 
 const analyzeValue = (value: any) => {
   const n = parseFloat(value.toString())
@@ -63,7 +57,7 @@ const tones = (hex: string) => {
   const x = ((v ? 1 : 0.95) - l) / 5
   const y = (l - (!v ? 0.05 : 0.15)) / 5
 
-  const tokens = toneMap.reduce((prev, tone) => {
+  const tokens = TONES.reduce((prev, tone) => {
     if (tone === 500) {
       prev[tone] = hex
     } else {

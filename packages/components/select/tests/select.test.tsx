@@ -428,4 +428,49 @@ describe("<Select />", () => {
 
     consoleWarnSpy.mockRestore()
   })
+
+  describe("header rendering", () => {
+    test("should be displayed properly when present.", () => {
+      const HEADER_TEXT = "Header"
+      const HEADER_STYLE = { background: "green" }
+
+      const renderHeader = () => {
+        return <header style={HEADER_STYLE}>{HEADER_TEXT}</header>
+      }
+
+      render(
+        <Select
+          header={renderHeader()}
+          placeholder="Select numbers"
+          placeholderInOptions={true}
+          items={[
+            { label: "One", value: "" },
+            { label: "Two", value: "" },
+          ]}
+        />,
+      )
+
+      const headerElement = screen.getByText(HEADER_TEXT)
+
+      expect(headerElement).toBeInTheDocument()
+      expect(headerElement).toHaveStyle(HEADER_STYLE)
+      expect(headerElement.parentElement).toHaveClass("ui-select__header")
+    })
+  })
+
+  test("should be displayed properly when NOT present", () => {
+    const { container } = render(
+      <Select
+        placeholder="Select numbers"
+        placeholderInOptions={true}
+        items={[
+          { label: "One", value: "" },
+          { label: "Two", value: "" },
+        ]}
+      />,
+    )
+
+    const headerElement = container.querySelector(".ui-select__header")
+    expect(headerElement).toBeNull()
+  })
 })

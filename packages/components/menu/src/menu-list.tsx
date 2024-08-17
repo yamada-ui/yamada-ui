@@ -1,6 +1,6 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
+import { forwardRef, ui } from "@yamada-ui/core"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
@@ -8,7 +8,7 @@ import { useCallback } from "react"
 import { useMenu, useMenuDescendantsContext } from "./menu"
 
 export type MenuListProps = HTMLUIProps<"ul"> & {
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: MotionPropsWithoutChildren
 }
 
 export const MenuList = forwardRef<MenuListProps, "ul">(

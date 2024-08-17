@@ -30,6 +30,17 @@ const insertTransform = (
   return config
 }
 
+type GetConfigOptions = {
+  properties?:
+    | Union<CSSProperties | UIProperties>
+    | Union<CSSProperties | UIProperties>[]
+  token?: ThemeToken
+  transform?: TransformOptions
+  css?: CSSObject
+  isProcessResult?: boolean
+  isProcessSkip?: boolean
+}
+
 export const getConfig =
   ({
     properties,
@@ -38,18 +49,7 @@ export const getConfig =
     css,
     isProcessResult,
     isProcessSkip,
-    isSkip,
-  }: {
-    properties?:
-      | Union<CSSProperties | UIProperties>
-      | Union<CSSProperties | UIProperties>[]
-    token?: ThemeToken
-    transform?: TransformOptions
-    css?: CSSObject
-    isProcessResult?: boolean
-    isProcessSkip?: boolean
-    isSkip?: boolean
-  }) =>
+  }: GetConfigOptions) =>
   (isConfig?: boolean) => {
     if (!isConfig && !token && !transform && !css) return true
 
@@ -70,7 +70,6 @@ export const getConfig =
     if (token) config = [...config, `token: "${token}"`]
     if (isProcessResult) config = [...config, `isProcessResult: true`]
     if (isProcessSkip) config = [...config, `isProcessSkip: true`]
-    if (isSkip) config = [...config, `isSkip: true`]
     if (css) config = [...config, `static: ${JSON.stringify(css)}`]
     if (transform || token) config = insertTransform(config, token, transform)
 

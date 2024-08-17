@@ -62,7 +62,7 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
   const { theme } = useTheme()
 
   const themeOptions = useMemo(
-    () => theme.__config.snacks?.options ?? {},
+    () => theme.__config?.snacks?.options ?? {},
     [theme],
   )
 

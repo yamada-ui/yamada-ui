@@ -1,3 +1,4 @@
+import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import type * as Recharts from "recharts"
 
@@ -538,4 +539,17 @@ export const labelProperties: (keyof Recharts.LabelProps)[] = [
   "children",
   "content",
   "id",
+]
+
+export const labelListProperties: (keyof Recharts.LabelListProps<Dict>)[] = [
+  "dataKey",
+  "valueAccessor",
+  "content",
+  "position",
+  "offset",
+  "formatter",
+  "data",
+  "clockWise",
+  "id",
+  "position",
 ]

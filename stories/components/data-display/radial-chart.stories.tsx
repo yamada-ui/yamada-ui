@@ -34,3 +34,27 @@ export const basic: Story = () => {
     />
   )
 }
+
+export const withLabelLists: Story = () => {
+  const data = [
+    { browser: "chrome", visitors: 275, color: "blue.500" },
+    { browser: "safari", visitors: 200, color: "red.500" },
+    { browser: "firefox", visitors: 187, color: "orange.500" },
+    { browser: "edge", visitors: 173, color: "violet.500" },
+    { browser: "other", visitors: 90, color: "green.500" },
+  ]
+
+  return (
+    <RadialChart
+      data={data}
+      dataKey="visitors"
+      labelListProps={[
+        {
+          position: "insideStart",
+          dataKey: "browser",
+          // fill: ["white", "white"],
+        },
+      ]}
+    />
+  )
+}

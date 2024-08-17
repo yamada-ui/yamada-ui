@@ -7,18 +7,24 @@ import {
   type ThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import { useMemo } from "react"
 import {
   ResponsiveContainer,
   RadialBarChart as RechartsRadialChart,
   Legend,
   Tooltip,
   RadialBar,
+  LabelList,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import type { TooltipDataSourceType } from "./chart.types"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
+import {
+  useChartLabelList,
+  type UseChartLabelListOptions,
+} from "./use-chart-label-list"
 import { useChartLegend, type UseChartLegendProps } from "./use-chart-legend"
 import {
   useChartTooltip,
@@ -53,6 +59,7 @@ export type RadialChartProps = HTMLUIProps<"div"> &
   UseRadialChartOptions &
   UseChartTooltipOptions &
   UseChartLegendProps &
+  UseChartLabelListOptions &
   UseChartProps
 
 /**
@@ -77,6 +84,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     valueFormatter,
     legendProps,
     fillOpacity,
+    labelListProps = [],
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -100,6 +108,21 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
+  const { getLabelLineProps } = useChartLabelList({ labelListProps, styles })
+
+  const labelLists = useMemo(
+    () =>
+      labelListProps.map((_, index) => (
+        <LabelList
+          key={`labelList-${index}`}
+          {...getLabelLineProps({
+            index,
+            className: "ui-radial-chart__label-list",
+          })}
+        />
+      )),
+    [getLabelLineProps, labelListProps],
+  )
 
   return (
     <ChartProvider value={{ styles }}>
@@ -122,7 +145,9 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
               {...getRadialBarProps({
                 className: "ui-radial-chart__radial-bar",
               })}
-            />
+            >
+              {labelLists}
+            </RadialBar>
 
             {withLegend ? (
               <Legend

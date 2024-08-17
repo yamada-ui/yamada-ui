@@ -1,5 +1,5 @@
 import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
-import type { Merge } from "@yamada-ui/utils"
+import type { Dict, Merge } from "@yamada-ui/utils"
 import type {
   ComponentPropsWithoutRef,
   ReactElement,
@@ -7,7 +7,10 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
-import type { radialBarProperties } from "./rechart-properties"
+import type {
+  labelListProperties,
+  radialBarProperties,
+} from "./rechart-properties"
 
 export type ChartPropGetter<
   Y extends As = "div",
@@ -122,8 +125,8 @@ export type CellProps = Merge<
 // TODO:labelの型考える
 export type RadialBarProps = Merge<
   Merge<
-    Pick<Recharts.RadialBarProps, (typeof radialBarProperties)[number]>,
-    CSSUIProps
+    CSSUIProps,
+    Pick<Recharts.RadialBarProps, (typeof radialBarProperties)[number]>
   >,
   {
     background?: Partial<RadialBarProps>
@@ -158,6 +161,10 @@ export type PolarRadiusAxisProps = Merge<
   Recharts.PolarRadiusAxisProps
 >
 export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
+export type LabelListProps = Merge<
+  CSSUIProps,
+  Pick<Recharts.LabelListProps<Dict>, (typeof labelListProperties)[number]>
+>
 export type ChartTooltip =
   | ReactElement
   | ((

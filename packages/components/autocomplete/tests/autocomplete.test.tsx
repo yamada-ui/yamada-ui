@@ -823,5 +823,44 @@ describe("<Autocomplete />", () => {
     })
   })
 
-  
+  describe("footer rendering", () => {
+    const ITEMS: AutocompleteItem[] = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("should be displayed properly when present.", () => {
+      const FOOTER_TEXT = "Footer"
+      const FOOTER_STYLE = { background: "green" }
+
+      const renderFooter = () => {
+        return <footer style={FOOTER_STYLE}>{FOOTER_TEXT}</footer>
+      }
+
+      render(<Autocomplete footer={renderFooter()} items={ITEMS} />)
+
+      const footerElement = screen.getByText(FOOTER_TEXT)
+
+      expect(footerElement).toBeInTheDocument()
+      expect(footerElement).toHaveStyle(FOOTER_STYLE)
+      expect(footerElement.parentElement).toHaveClass("ui-autocomplete__footer")
+    })
+
+    test("should be displayed properly when NOT present", () => {
+      const { container } = render(<Autocomplete items={ITEMS} />)
+
+      const footerElement = container.querySelector(".ui-autocomplete__footer")
+      expect(footerElement).toBeNull()
+    })
+  })
 })

@@ -5,7 +5,11 @@ import { LineChart } from "./line-chart"
 export const RadialChart: ComponentMultiStyle<"RadialChart"> = mergeMultiStyle(
   LineChart,
   {
-    baseStyle: {},
+    baseStyle: {
+      background: {
+        fill: "transparent",
+      },
+    },
 
     sizes: {},
   },

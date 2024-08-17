@@ -52,6 +52,8 @@ export const useRadialChart = ({
   ...rest
 }: UseRadialChartProps) => {
   const { theme } = useTheme()
+  const { background: backgroundProps = {}, ...computedRadialBarProps } =
+    rest.radialBarProps ?? {}
 
   const radialBarColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -92,13 +94,22 @@ export const useRadialChart = ({
     [rest.chartProps, styles.chart, theme],
   )
 
+  const background = useMemo(
+    () =>
+      getComponentProps<Dict, string>(
+        [backgroundProps, radialBarProperties],
+        styles.background,
+      )(theme, true),
+    [backgroundProps, styles.background, theme],
+  )
+
   const [radialBarProps, radialBarClassName] = useMemo(
     () =>
       getComponentProps<Dict, string>(
-        [rest.radialBarProps ?? {}, radialBarProperties],
+        [computedRadialBarProps ?? {}, radialBarProperties],
         styles.radialBar,
       )(theme),
-    [rest.radialBarProps, styles.radialBar, theme],
+    [computedRadialBarProps, styles.radialBar, theme],
   )
 
   const getRadialChartProps: ChartPropGetter<
@@ -116,7 +127,7 @@ export const useRadialChart = ({
     [chartClassName, chartProps, data],
   )
 
-  //TODO: labelとbackgroundの分離　色の指定
+  //TODO: labelの分離　色の指定
   const getRadialBarProps: RequiredChartPropGetter<
     "div",
     Partial<Recharts.RadialBarProps>,
@@ -126,10 +137,12 @@ export const useRadialChart = ({
       ref,
       className: cx(className, radialBarClassName),
       dataKey,
+      isAnimationActive: false,
+      background,
       ...radialBarProps,
       ...props,
     }),
-    [dataKey, radialBarClassName, radialBarProps],
+    [background, dataKey, radialBarClassName, radialBarProps],
   )
 
   return { getRadialChartProps, getRadialBarProps, radialVars }

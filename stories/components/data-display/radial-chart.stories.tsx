@@ -29,7 +29,7 @@ export const basic: Story = () => {
       }}
       radialBarProps={{
         label: { position: "insideStart", fill: "#fff" },
-        background: true,
+        background: { fill: ["blue.100", "red.200"] },
       }}
     />
   )

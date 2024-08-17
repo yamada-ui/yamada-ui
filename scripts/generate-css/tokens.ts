@@ -35,6 +35,8 @@ export const tokens: Tokens = {
     "outlineColor",
     "textDecorationColor",
     "textEmphasisColor",
+    "outlineColor",
+    "scrollbarColor",
     "borderColor",
     "borderTopColor",
     "borderLeftColor",

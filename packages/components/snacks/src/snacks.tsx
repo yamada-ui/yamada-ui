@@ -89,7 +89,7 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
       negateMargin = true,
       ...rest
     } = useMemo(
-      () => ({ ...computedSnacks, ...theme.__config.snacks, ...props }),
+      () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
     const top = useToken<string | number>("spaces", useValue(gutter[0])) ?? 0

@@ -1,9 +1,13 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  HTMLUIPropsWithoutAs,
+} from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import { forwardRef, type FC, type ReactElement } from "react"
 import { PanelResizeHandle } from "react-resizable-panels"
 import type { UseResizableTriggerProps } from "./use-resizable"
 import { useResizableContext, useResizableTrigger } from "./use-resizable"
@@ -19,11 +23,11 @@ type ResizableTriggerOptions = {
   iconProps?: HTMLUIProps<"div">
 }
 
-export type ResizableTriggerProps = Omit<HTMLUIProps<"div">, "as"> &
+export type ResizableTriggerProps = HTMLUIPropsWithoutAs &
   Omit<UseResizableTriggerProps, "ref"> &
   ResizableTriggerOptions
 
-export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
+export const ResizableTrigger = forwardRef<HTMLElement, ResizableTriggerProps>(
   ({ className, icon, children, iconProps, ...rest }, ref) => {
     const { styles } = useResizableContext()
     const { getTriggerProps, getIconProps } = useResizableTrigger({
@@ -66,6 +70,8 @@ export const ResizableTrigger = forwardRef<ResizableTriggerProps, "div", false>(
     )
   },
 )
+
+ResizableTrigger.displayName = "ResizableTrigger"
 
 export type ResizableTriggerIconProps = IconProps
 

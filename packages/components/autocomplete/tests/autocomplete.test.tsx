@@ -781,4 +781,47 @@ describe("<Autocomplete />", () => {
       })
     })
   })
+
+  describe("header rendering", () => {
+    const ITEMS: AutocompleteItem[] = [
+      {
+        label: "option1",
+        value: "option1",
+      },
+      {
+        label: "option2",
+        value: "option2",
+      },
+      {
+        label: "option3",
+        value: "option3",
+      },
+    ]
+
+    test("should be displayed properly when present.", () => {
+      const HEADER_TEXT = "Header"
+      const HEADER_STYLE = { background: "green" }
+
+      const renderHeader = () => {
+        return <header style={HEADER_STYLE}>{HEADER_TEXT}</header>
+      }
+
+      render(<Autocomplete header={renderHeader()} items={ITEMS} />)
+
+      const headerElement = screen.getByText(HEADER_TEXT)
+
+      expect(headerElement).toBeInTheDocument()
+      expect(headerElement).toHaveStyle(HEADER_STYLE)
+      expect(headerElement.parentElement).toHaveClass("ui-autocomplete__header")
+    })
+
+    test("should be displayed properly when NOT present", () => {
+      const { container } = render(<Autocomplete items={ITEMS} />)
+
+      const headerElement = container.querySelector(".ui-autocomplete__header")
+      expect(headerElement).toBeNull()
+    })
+  })
+
+  
 })

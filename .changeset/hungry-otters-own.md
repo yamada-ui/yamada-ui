@@ -1,6 +1,5 @@
 ---
-"@yamada-ui/menu": major
-"@yamada-ui/theme": major
+"@yamada-ui/menu": patch
 ---
 
 resolve scroll following issue with position fixed

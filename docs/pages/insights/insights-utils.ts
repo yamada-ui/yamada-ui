@@ -10,6 +10,7 @@ import type {
 } from "insights"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")
+export const INSIGHT_MAX_DATE = dayjs().tz().subtract(1, "d").toDate()
 
 export const INSIGHT_USERS = Object.fromEntries(
   [...CONSTANT.MAINTAINERS, ...CONSTANT.MEMBERS].map((data) => [
@@ -19,6 +20,12 @@ export const INSIGHT_USERS = Object.fromEntries(
 )
 
 export const INSIGHT_USER_IDS = Object.keys(INSIGHT_USERS)
+export const INSIGHT_MAINTAINERS_IDS = CONSTANT.MAINTAINERS.map(
+  ({ github }) => github.id,
+)
+export const INSIGHT_MEMBERS_IDS = CONSTANT.MEMBERS.map(
+  ({ github }) => github.id,
+)
 
 export const INSIGHT_PERIOD_SUGGEST = [
   "7d",
@@ -29,6 +36,7 @@ export const INSIGHT_PERIOD_SUGGEST = [
   "6M",
   "1y",
 ] as const
+export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
 export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
   pullRequests: [`blue.500`, `blue.400`],
@@ -38,6 +46,7 @@ export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
 }
 
 export type InsightPeriodSuggest = (typeof INSIGHT_PERIOD_SUGGEST)[number]
+export type InsightUserSuggest = (typeof INSIGHT_USER_SUGGEST)[number]
 
 export type InsightUser = (typeof INSIGHT_USERS)[number]
 
@@ -170,4 +179,28 @@ export const randomIndex = (value: string, max: number) => {
   const result = Math.abs(hash) % max
 
   return result
+}
+
+export const getTrend = (currentTotal: number, prevTotal: number) => {
+  if (currentTotal === prevTotal) return { value: "0", colorScheme: "neutral" }
+
+  if (prevTotal === 0) return undefined
+
+  let trend = Math.round((currentTotal / prevTotal) * 100 - 100)
+
+  if (trend >= 1000) {
+    trend /= 1000
+
+    if (trend >= 0) {
+      return { value: `+${trend}K`, colorScheme: "success" }
+    } else {
+      return { value: `${trend}K`, colorScheme: "danger" }
+    }
+  } else {
+    if (trend >= 0) {
+      return { value: `+${trend}`, colorScheme: "success" }
+    } else {
+      return { value: `${trend}`, colorScheme: "danger" }
+    }
+  }
 }

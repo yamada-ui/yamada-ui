@@ -47,7 +47,7 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.19.3",
+    "@tanstack/react-table": "^8.20.1",
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",

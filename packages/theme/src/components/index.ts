@@ -12,6 +12,7 @@ import { Calendar } from "./calendar"
 import { Card } from "./card"
 import { Carousel } from "./carousel"
 import { Checkbox } from "./checkbox"
+import { CircleProgress } from "./circle-progress"
 import { CloseButton } from "./close-button"
 import { Collapse } from "./collapse"
 import { ColorPicker } from "./color-picker"
@@ -82,6 +83,7 @@ import { Switch } from "./switch"
 import { Table } from "./table"
 import { Tabs } from "./tabs"
 import { Tag } from "./tag"
+import { Text } from "./text"
 import { Textarea } from "./textarea"
 import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
@@ -102,6 +104,7 @@ export const components = {
   Card,
   Carousel,
   Checkbox,
+  CircleProgress,
   CloseButton,
   Collapse,
   ColorPicker,
@@ -172,6 +175,7 @@ export const components = {
   Table,
   Tabs,
   Tag,
+  Text,
   Textarea,
   Toggle,
   Tooltip,

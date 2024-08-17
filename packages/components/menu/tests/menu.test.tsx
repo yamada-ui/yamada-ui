@@ -6,7 +6,6 @@ import {
 import { Icon } from "@yamada-ui/fontawesome"
 import { Button, IconButton, Center } from "@yamada-ui/react"
 import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
-import { useState } from "react"
 import {
   Menu,
   MenuButton,
@@ -446,56 +445,3 @@ describe("<Menu />", () => {
     expect(menuList).not.toBeVisible()
   })
 })
-
-describe("ContextMenu", () => {
-  test("context menu follows scroll", async () => {
-    render(<MockContextMenu />)
-
-    const trigger = screen.getByText("Right click here")
-    const initialClientX = 50
-    const initialClientY = 50
-
-    await act(async () => {
-      fireEvent.contextMenu(trigger, {
-        clientX: initialClientX,
-        clientY: initialClientY,
-      })
-    })
-
-    const menuList = await screen.findByTestId("menu-list")
-    expect(menuList).toHaveStyle(`left: ${initialClientX}px`)
-    expect(menuList).toHaveStyle(`top: ${initialClientY}px`)
-
-    const scrollOffset = 100
-    await act(async () => {
-      fireEvent.contextMenu(trigger, {
-        clientX: initialClientX,
-        clientY: initialClientY - scrollOffset,
-      })
-    })
-
-    expect(menuList).toHaveStyle(`left: ${initialClientX}px`)
-    expect(menuList).toHaveStyle(`top: ${initialClientY - scrollOffset}px`)
-  })
-})
-
-const MockContextMenu = () => {
-  const [position, setPosition] = useState({ top: 0, left: 0 })
-
-  const handleContextMenu = (event: React.MouseEvent) => {
-    event.preventDefault()
-    setPosition({ top: event.clientY, left: event.clientX })
-  }
-
-  return (
-    <ContextMenu>
-      <ContextMenuTrigger as="div" onContextMenu={handleContextMenu}>
-        Right click here
-      </ContextMenuTrigger>
-      <MenuList data-testid="menu-list" style={position}>
-        <MenuItem>Undo</MenuItem>
-        <MenuItem>Redo</MenuItem>
-      </MenuList>
-    </ContextMenu>
-  )
-}

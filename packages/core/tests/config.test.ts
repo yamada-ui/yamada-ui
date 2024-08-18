@@ -8,6 +8,7 @@ import {
   keyframes,
   css,
 } from "../src"
+import { pipe } from "../src/config/utils"
 
 const theme = transformTheme(
   {
@@ -266,7 +267,7 @@ describe("transforms", () => {
   })
 
   test("fraction transform", () => {
-    const result = transforms.fraction()(0.5, theme, css)
+    const result = transforms.fraction(0.5)
     expect(result).toBe("50%")
   })
 
@@ -293,7 +294,7 @@ describe("transforms", () => {
 
   test("function transform", () => {
     const result1 = transforms.function("translateX")("100px", theme, css)
-    const result2 = transforms.function("translateX", transforms.px)(
+    const result2 = pipe(transforms.px, transforms.function("translateX"))(
       100,
       theme,
       css,

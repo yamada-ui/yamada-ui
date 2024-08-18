@@ -18,6 +18,7 @@ const SOURCE_URL = "https://developer.mozilla.org"
 export const OUT_PATH = "packages/core/src/styles.ts"
 
 export type CSSProperty = ReturnType<typeof getCSSProperties>[number]
+export type Properties = CSSProperties | UIProperties
 export type CSSProperties =
   | keyof CSS.StandardProperties
   | keyof CSS.SvgProperties

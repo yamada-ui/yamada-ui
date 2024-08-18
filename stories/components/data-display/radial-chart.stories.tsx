@@ -16,17 +16,17 @@ export default meta
 
 export const basic: Story = () => {
   const data = [
-    { name: "chrome", visitors: 275, color: "blue.500" },
-    { name: "safari", visitors: 200, color: "red.500" },
-    { name: "firefox", visitors: 187, color: "orange.500" },
-    { name: "edge", visitors: 173, color: "violet.500" },
-    { name: "other", visitors: 90, color: "green.500" },
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
   ]
 
   return (
     <RadialChart
       data={data}
-      dataKey="visitors"
+      dataKey="value"
       chartProps={{
         innerRadius: 30,
       }}
@@ -36,16 +36,16 @@ export const basic: Story = () => {
 
 export const custom: Story = () => {
   const data = [
-    { name: "chrome", visitors: 275, color: "blue.500" },
-    { name: "safari", visitors: 200, color: "red.500" },
-    { name: "firefox", visitors: 187, color: "orange.500" },
-    { name: "edge", visitors: 173, color: "violet.500" },
-    { name: "other", visitors: 90, color: "green.500" },
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
   ]
 
   const [props, setProps] = useState<RadialChartProps>({
     data,
-    dataKey: "visitors",
+    dataKey: "value",
     startAngle: 180,
     endAngle: 0,
     fillOpacity: 1,
@@ -194,17 +194,17 @@ export const custom: Story = () => {
 
 export const withLabelLists: Story = () => {
   const data = [
-    { name: "chrome", visitors: 275, color: "blue.500" },
-    { name: "safari", visitors: 200, color: "red.500" },
-    { name: "firefox", visitors: 187, color: "orange.500" },
-    { name: "edge", visitors: 173, color: "violet.500" },
-    { name: "other", visitors: 90, color: "green.500" },
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
   ]
 
   return (
     <RadialChart
       data={data}
-      dataKey="visitors"
+      dataKey="value"
       chartProps={{
         innerRadius: 30,
       }}
@@ -220,11 +220,11 @@ export const withLabelLists: Story = () => {
 
 export const withGap: Story = () => {
   const data = [
-    { name: "chrome", visitors: 275, color: "blue.500" },
-    { name: "safari", visitors: 200, color: "red.500" },
-    { name: "firefox", visitors: 187, color: "orange.500" },
-    { name: "edge", visitors: 173, color: "violet.500" },
-    { name: "other", visitors: 90, color: "green.500" },
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
   ]
 
   const [barCategoryGap, setBarCategoryGap] = useState<number>(10)
@@ -233,7 +233,7 @@ export const withGap: Story = () => {
     <Wrap gap="md" alignItems="flex-start">
       <RadialChart
         data={data}
-        dataKey="visitors"
+        dataKey="value"
         chartProps={{
           innerRadius: 30,
           barCategoryGap: `${barCategoryGap}%`,

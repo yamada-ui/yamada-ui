@@ -172,13 +172,14 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
               />
             ) : null}
 
-            {/* TODO: tooltip専用のものを作るひつようがあるかも */}
             {withTooltip ? (
               <Tooltip
-                content={({ label, payload }) => (
+                content={({ payload }) => (
                   <ChartTooltip
                     className="ui-pie-chart__tooltip"
-                    label={label}
+                    isRadialChart={
+                      tooltipDataSource === "segment" ? true : false
+                    }
                     payload={tooltipDataSource === "segment" ? payload : data}
                     valueFormatter={valueFormatter}
                     // unit={unit}

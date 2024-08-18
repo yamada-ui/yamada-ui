@@ -3,6 +3,7 @@
     "size": {
       "type": "UIValue<number | (string & {}) | \"small\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"large\" | \"medium\" | \"x-large\" | \"x-small\" | \"xx-large\" | \"xx-small\" | ... 16 more ... | \"9xl\">",
       "required": false,
+      "deprecated": "Use `fontSize` instead.",
       "description": "The CSS `font-size` property."
     }
   }

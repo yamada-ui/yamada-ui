@@ -2,7 +2,7 @@ import { readFile, writeFile } from "fs/promises"
 import path from "path"
 import type { UsageTheme } from "@yamada-ui/core"
 import { defaultTheme } from "@yamada-ui/theme"
-import { tones } from "@yamada-ui/utils"
+import { TONES } from "@yamada-ui/utils"
 import { format, resolveConfig } from "prettier"
 import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
@@ -19,6 +19,7 @@ type ComponentTypeInfo = {
   defaultValue?: string | boolean | null
   required: boolean
   description?: string
+  deprecated?: string
   see?: string
 }
 
@@ -95,7 +96,7 @@ const merge = <T extends Record<string, any>>(
 }
 
 const isTone = (value: unknown): value is Record<string, string> =>
-  isObject(value) && tones.every((k) => isString(value[k]))
+  isObject(value) && TONES.every((k) => isString(value[k]))
 
 const extractColorScheme = ({ colors, semantics = {} }: UsageTheme): string => {
   if (!colors) return "string"
@@ -221,6 +222,10 @@ const extractPropertiesOfTypeName = async (
       const docTags = property.getJsDocTags()
 
       const isPrivate = !!docTags.find(({ name }) => name === "private")
+      const deprecated = docTags
+        .find(({ name }) => name === "deprecated")
+        ?.text?.map(({ text }) => text)
+        .join("\n")
 
       if (isPrivate) continue
 
@@ -242,6 +247,7 @@ const extractPropertiesOfTypeName = async (
         type: prettyType,
         defaultValue: formatValue(defaultValue),
         required,
+        deprecated,
         description:
           property
             .getDocumentationComment(typeChecker)

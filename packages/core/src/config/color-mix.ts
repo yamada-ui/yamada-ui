@@ -1,5 +1,11 @@
 import type { StyledTheme } from "../theme.types"
-import { globalValues, isCSSFunction, type Transform } from "./utils"
+import {
+  getCSSFunction,
+  globalValues,
+  isCSSFunction,
+  splitValues,
+  type Transform,
+} from "./utils"
 
 const DEFAULT_METHOD = "in srgb"
 
@@ -20,7 +26,9 @@ const methods: Record<string, string> = {
 const getColor = (value: string | undefined, theme: StyledTheme) => {
   if (!value) return ""
 
-  let [color, ratio] = value.split(" ")
+  let [color, ratio, ...rest] = value.split(" ").filter(Boolean)
+
+  if (rest.length) return value
 
   const token = `colors.${color}`
 
@@ -38,18 +46,13 @@ export const generateColorMix: Transform = (value, theme) => {
 
   if (!prevent) return value
 
-  const regex = /(^[a-z-A-Z]+)\((.*)\)/g
-  const [, _type, values] = regex.exec(value) ?? []
+  let { type, values } = getCSSFunction(value)
 
-  if ((_type !== "mix" && _type !== "color-mix") || !values) return value
+  if ((type !== "mix" && type !== "color-mix") || !values) return value
 
-  const type = _type.startsWith("color-") ? _type : `color-${_type}`
+  type = type.startsWith("color-") ? type : `color-${type}`
 
-  let [color2, color1, method] = values
-    .split(",")
-    .map((arg) => arg.trim())
-    .filter(Boolean)
-    .reverse()
+  let [color2, color1, method] = splitValues(values).reverse()
 
   if (method) {
     method = method in methods ? methods[method] : method

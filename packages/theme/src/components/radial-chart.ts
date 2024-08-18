@@ -12,6 +12,9 @@ export const RadialChart: ComponentMultiStyle<"RadialChart"> = mergeMultiStyle(
       labelList: {
         fill: "white",
       },
+      cursor: {
+        stroke: "none",
+      },
     },
 
     sizes: {},

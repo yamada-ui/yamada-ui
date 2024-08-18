@@ -28,15 +28,7 @@ export const basic: Story = () => {
     { name: "other", value: 90, color: "green.500" },
   ]
 
-  return (
-    <RadialChart
-      data={data}
-      dataKey="value"
-      chartProps={{
-        innerRadius: 30,
-      }}
-    />
-  )
+  return <RadialChart data={data} dataKey="value" innerRadius={30} />
 }
 
 export const custom: Story = () => {
@@ -57,6 +49,7 @@ export const custom: Story = () => {
     innerRadius: 0,
     outerRadius: 80,
     tooltipAnimationDuration: 0,
+    withPolarGrid: false,
     withTooltip: true,
     withLegend: false,
     tooltipDataSource: "all",
@@ -89,7 +82,7 @@ export const custom: Story = () => {
             {
               label: "End angle",
               value: props.endAngle,
-              min: 0,
+              min: -360,
               max: 360,
               step: 1,
               onChange: (value) => {
@@ -151,6 +144,15 @@ export const custom: Story = () => {
             component="Switch"
             items={[
               {
+                label: "polar grid",
+                isChecked: props.withPolarGrid,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withPolarGrid: !prev.withPolarGrid,
+                  })),
+              },
+              {
                 label: "tooltip",
                 isChecked: props.withTooltip,
                 onChange: () =>
@@ -210,9 +212,7 @@ export const withLabelLists: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      chartProps={{
-        innerRadius: 30,
-      }}
+      innerRadius={30}
       labelListProps={[
         {
           position: "insideStart",
@@ -278,10 +278,29 @@ export const withFillOpacity: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      chartProps={{
-        innerRadius: 30,
-      }}
+      innerRadius={30}
       fillOpacity={[0.8, 0.7]}
+    />
+  )
+}
+
+export const useCircleGrid: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return (
+    <RadialChart
+      data={data}
+      dataKey="value"
+      innerRadius={30}
+      endAngle={-180}
+      withPolarGrid
+      polarGridProps={{ gridType: "circle" }}
     />
   )
 }
@@ -299,9 +318,7 @@ export const customBackground: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      chartProps={{
-        innerRadius: 30,
-      }}
+      innerRadius={30}
       radialBarProps={{
         background: {
           fill: ["blackAlpha.200", "whiteAlpha.200"],
@@ -346,9 +363,7 @@ export const customTooltip: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      chartProps={{
-        innerRadius: 30,
-      }}
+      innerRadius={30}
       tooltipProps={{
         content: CustomTooltip,
       }}
@@ -369,9 +384,7 @@ export const customLegend: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      chartProps={{
-        innerRadius: 30,
-      }}
+      innerRadius={30}
       withLegend
       legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
     />

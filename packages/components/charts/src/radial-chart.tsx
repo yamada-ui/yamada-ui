@@ -15,6 +15,7 @@ import {
   Tooltip,
   RadialBar,
   LabelList,
+  PolarGrid,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
@@ -30,6 +31,8 @@ import {
   useChartTooltip,
   type UseChartTooltipOptions,
 } from "./use-chart-tooltip"
+import type { UsePolarGridOptions } from "./use-polar-grid"
+import { usePolarGrid } from "./use-polar-grid"
 import { useRadialChart, type UseRadialChartOptions } from "./use-radial-chart"
 
 type RadialChartOptions = {
@@ -46,6 +49,12 @@ type RadialChartOptions = {
    */
   withLegend?: boolean
   /**
+   * Determines whether polarGrid should be displayed.
+   *
+   * @default false
+   */
+  withPolarGrid?: boolean
+  /**
    * Determines which data is displayed in the tooltip.
    *
    * @default 'all'
@@ -60,6 +69,7 @@ export type RadialChartProps = HTMLUIProps<"div"> &
   UseChartTooltipOptions &
   UseChartLegendProps &
   UseChartLabelListOptions &
+  UsePolarGridOptions &
   UseChartProps
 
 /**
@@ -76,6 +86,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     chartProps,
     radialBarProps,
     containerProps,
+    withPolarGrid = false,
     withTooltip = true,
     withLegend = false,
     tooltipProps,
@@ -89,6 +100,8 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     endAngle,
     fillOpacity,
     labelListProps = [],
+    polarGridProps,
+    strokeDasharray,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -117,6 +130,11 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     legendProps,
   })
   const { getLabelLineProps } = useChartLabelList({ labelListProps, styles })
+  const { getPolarGridProps } = usePolarGrid({
+    polarGridProps,
+    strokeDasharray,
+    styles,
+  })
 
   const labelLists = useMemo(
     () =>
@@ -132,7 +150,6 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     [getLabelLineProps, labelListProps],
   )
 
-  //TODO: gird
   //TODO: textを入れれる機能
   //TODO: legendホバー時の機能
   return (
@@ -152,6 +169,14 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
               className: "ui-radial-chart__chart",
             })}
           >
+            {withPolarGrid ? (
+              <PolarGrid
+                {...getPolarGridProps({
+                  className: "ui-radial-chart__polar-grid",
+                })}
+              />
+            ) : null}
+
             <RadialBar
               {...getRadialBarProps({
                 className: "ui-radial-chart__radial-bar",

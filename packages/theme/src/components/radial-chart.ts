@@ -15,6 +15,10 @@ export const RadialChart: ComponentMultiStyle<"RadialChart"> = mergeMultiStyle(
       cursor: {
         stroke: "none",
       },
+      polarGrid: {
+        stroke: ["blackAlpha.400", "whiteAlpha.400"],
+        strokeWidth: 1,
+      },
     },
 
     sizes: {},

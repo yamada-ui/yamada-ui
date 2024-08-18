@@ -46,8 +46,8 @@ export const custom: Story = () => {
   const [props, setProps] = useState<RadialChartProps>({
     data,
     dataKey: "visitors",
-    startAngle: 90,
-    endAngle: -270,
+    startAngle: 0,
+    endAngle: 180,
     fillOpacity: 1,
     innerRadius: 0,
     outerRadius: 80,
@@ -70,7 +70,7 @@ export const custom: Story = () => {
             {
               label: "Start angle",
               value: props.startAngle,
-              min: 0,
+              min: -180,
               max: 180,
               step: 1,
               onChange: (value) => {
@@ -80,7 +80,7 @@ export const custom: Story = () => {
             {
               label: "End angle",
               value: props.endAngle,
-              min: -270,
+              min: 0,
               max: 360,
               step: 1,
               onChange: (value) => {

@@ -51,13 +51,13 @@ export type UseRadialChartOptions = {
   /**
    * Controls angle at which chart starts.
    *
-   * @default 0
+   * @default 180
    */
   startAngle?: number
   /**
    * Controls angle at which chart ends.
    *
-   * @default 180
+   * @default 0
    */
   endAngle?: number
   /**
@@ -77,8 +77,8 @@ export const useRadialChart = ({
   dataKey,
   innerRadius = "0%",
   outerRadius = "80%",
-  startAngle = 0,
-  endAngle = 180,
+  startAngle = 180,
+  endAngle = 0,
   fillOpacity = 1,
   styles,
   ...rest

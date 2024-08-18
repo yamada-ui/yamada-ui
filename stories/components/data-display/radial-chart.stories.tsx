@@ -46,8 +46,8 @@ export const custom: Story = () => {
   const [props, setProps] = useState<RadialChartProps>({
     data,
     dataKey: "visitors",
-    startAngle: 0,
-    endAngle: 180,
+    startAngle: 180,
+    endAngle: 0,
     fillOpacity: 1,
     innerRadius: 0,
     outerRadius: 80,

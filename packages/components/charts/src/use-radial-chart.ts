@@ -47,7 +47,7 @@ type UseRadialChartProps = UseRadialChartOptions & {
 export const useRadialChart = ({
   data: dataProp,
   dataKey,
-  fillOpacity,
+  fillOpacity = 1,
   styles,
   ...rest
 }: UseRadialChartProps) => {

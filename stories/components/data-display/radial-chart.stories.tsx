@@ -52,7 +52,7 @@ export const withLabelLists: Story = () => {
         {
           position: "insideStart",
           dataKey: "browser",
-          // fill: ["white", "white"],
+          fill: ["white", "white"],
         },
       ]}
     />

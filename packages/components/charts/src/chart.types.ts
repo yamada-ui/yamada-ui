@@ -7,10 +7,6 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
-import type {
-  labelListProperties,
-  radialBarProperties,
-} from "./rechart-properties"
 
 export type ChartPropGetter<
   Y extends As = "div",
@@ -122,12 +118,8 @@ export type CellProps = Merge<
     dimCell?: Partial<CellProps>
   }
 >
-// TODO:labelの型考える
 export type RadialBarProps = Merge<
-  Merge<
-    CSSUIProps,
-    Pick<Recharts.RadialBarProps, (typeof radialBarProperties)[number]>
-  >,
+  Merge<Recharts.RadialBarProps, CSSUIProps>,
   {
     background?: Partial<RadialBarProps>
   }
@@ -162,8 +154,8 @@ export type PolarRadiusAxisProps = Merge<
 >
 export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
 export type LabelListProps = Merge<
-  CSSUIProps,
-  Pick<Recharts.LabelListProps<Dict>, (typeof labelListProperties)[number]>
+  Recharts.LabelListProps<Dict>,
+  Omit<CSSUIProps, "position">
 >
 export type ChartTooltip =
   | ReactElement

@@ -1,13 +1,17 @@
 import { shorthandProps } from "./shorthand-props"
 import { tokens } from "./tokens"
-import { uiProps } from "./ui-props"
+import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import type { CSSProperty } from "."
 
 export const checkProps = (
   styles: (CSSProperty & { type: string; deprecated: boolean })[],
 ) => {
   const propMap = styles.map(({ prop }) => prop) as string[]
-  const uiPropMap = Object.keys(uiProps) as string[]
+  const uiPropMap = [
+    ...Object.keys(additionalProps),
+    ...Object.keys(uiProps),
+    ...Object.keys(atRuleProps),
+  ] as string[]
 
   Object.entries(tokens).reduce<string[]>((prev, [token, properties]) => {
     properties.forEach((property) => {

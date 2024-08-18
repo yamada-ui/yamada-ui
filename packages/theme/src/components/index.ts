@@ -83,6 +83,7 @@ import { Switch } from "./switch"
 import { Table } from "./table"
 import { Tabs } from "./tabs"
 import { Tag } from "./tag"
+import { Text } from "./text"
 import { Textarea } from "./textarea"
 import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
@@ -174,6 +175,7 @@ export const components = {
   Table,
   Tabs,
   Tag,
+  Text,
   Textarea,
   Toggle,
   Tooltip,

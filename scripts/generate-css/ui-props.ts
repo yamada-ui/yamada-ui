@@ -2,24 +2,18 @@ import type { CSSObject, Union } from "@yamada-ui/react"
 import type { TransformOptions } from "./transform-props"
 import type { CSSProperties } from "."
 
-type UIProps = Partial<Record<string, UIOptions>>
-
 export type UIOptions = {
   static?: CSSObject
-  isAtRule?: boolean
   isProcessResult?: boolean
   isProcessSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
   transform?: TransformOptions
   type?: string
   description?: string[]
-  isSkip?: boolean
   hasToken?: boolean
 }
 
-const createUIProps = <T extends UIProps>(props: T) => props
-
-export const uiProps = createUIProps({
+export const additionalProps = {
   marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
   marginY: { properties: ["marginTop", "marginBottom"] },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
@@ -236,6 +230,9 @@ export const uiProps = createUIProps({
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
     ],
   },
+} as const satisfies Record<string, UIOptions>
+
+export const uiProps = {
   lineClamp: {
     static: {
       overflow: "hidden",
@@ -247,27 +244,23 @@ export const uiProps = createUIProps({
     properties: "--ui-line-clamp",
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
-    isSkip: true,
   },
   isTruncated: {
     transform: "isTruncated",
     type: "boolean",
     description: ["If `true`, it clamps truncate a text after one line."],
-    isSkip: true,
   },
   layerStyle: {
     isProcessResult: true,
     transform: { transform: "styles", args: `"layerStyles"` },
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
-    isSkip: true,
   },
   textStyle: {
     isProcessResult: true,
     transform: { transform: "styles", args: `"textStyles"` },
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
-    isSkip: true,
   },
   apply: {
     isProcessResult: true,
@@ -282,7 +275,6 @@ export const uiProps = createUIProps({
       "",
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
-    isSkip: true,
   },
   var: {
     isProcessSkip: true,
@@ -303,10 +295,11 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
+} as const satisfies Record<string, UIOptions>
+
+export const atRuleProps = {
   _media: {
-    isAtRule: true,
     isProcessSkip: true,
     transform: "media",
     type: `{ ${[
@@ -383,10 +376,8 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
   _container: {
-    isAtRule: true,
     isProcessSkip: true,
     transform: "container",
     type: `{ ${[
@@ -431,10 +422,8 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
   _supports: {
-    isAtRule: true,
     isProcessSkip: true,
     transform: "supports",
     type: `{${["query?: StringLiteral", "css?: CSSUIObject"].join(";")}}[]`,
@@ -452,6 +441,5 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
-})
+} as const satisfies Record<string, UIOptions>

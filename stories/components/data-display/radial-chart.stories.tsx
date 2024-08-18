@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { RadialChartProps } from "@yamada-ui/charts"
+import type { RadialChartProps, TooltipDataSourceType } from "@yamada-ui/charts"
 import { RadialChart } from "@yamada-ui/charts"
-import { Wrap } from "@yamada-ui/react"
+import { VStack, Wrap } from "@yamada-ui/react"
 import { useState } from "react"
 import { PropControl } from "../../components"
 
@@ -16,11 +16,11 @@ export default meta
 
 export const basic: Story = () => {
   const data = [
-    { visitors: 275, color: "blue.500" },
-    { visitors: 200, color: "red.500" },
-    { visitors: 187, color: "orange.500" },
-    { visitors: 173, color: "violet.500" },
-    { visitors: 90, color: "green.500" },
+    { name: "chrome", visitors: 275, color: "blue.500" },
+    { name: "safari", visitors: 200, color: "red.500" },
+    { name: "firefox", visitors: 187, color: "orange.500" },
+    { name: "edge", visitors: 173, color: "violet.500" },
+    { name: "other", visitors: 90, color: "green.500" },
   ]
 
   return (
@@ -36,11 +36,11 @@ export const basic: Story = () => {
 
 export const custom: Story = () => {
   const data = [
-    { visitors: 275, color: "blue.500" },
-    { visitors: 200, color: "red.500" },
-    { visitors: 187, color: "orange.500" },
-    { visitors: 173, color: "violet.500" },
-    { visitors: 90, color: "green.500" },
+    { name: "chrome", visitors: 275, color: "blue.500" },
+    { name: "safari", visitors: 200, color: "red.500" },
+    { name: "firefox", visitors: 187, color: "orange.500" },
+    { name: "edge", visitors: 173, color: "violet.500" },
+    { name: "other", visitors: 90, color: "green.500" },
   ]
 
   const [props, setProps] = useState<RadialChartProps>({
@@ -51,6 +51,10 @@ export const custom: Story = () => {
     fillOpacity: 1,
     innerRadius: 0,
     outerRadius: 80,
+    tooltipAnimationDuration: 0,
+    withTooltip: true,
+    withLegend: false,
+    tooltipDataSource: "all",
   })
   const { innerRadius, outerRadius, ...rest } = props
 
@@ -121,8 +125,68 @@ export const custom: Story = () => {
                 setProps((prev) => ({ ...prev, fillOpacity: value }))
               },
             },
+            {
+              label: "Tooltip animation duration",
+              value: props.tooltipAnimationDuration,
+              min: 0,
+              max: 2000,
+              onChange: (value) => {
+                setProps((prev) => ({
+                  ...prev,
+                  tooltipAnimationDuration: value,
+                }))
+              },
+            },
           ]}
         />
+
+        <VStack w="auto">
+          <PropControl
+            minW="xs"
+            component="Switch"
+            items={[
+              {
+                label: "tooltip",
+                isChecked: props.withTooltip,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withTooltip: !prev.withTooltip,
+                  })),
+              },
+              {
+                label: "legend",
+                isChecked: props.withLegend,
+                onChange: () =>
+                  setProps((prev) => ({
+                    ...prev,
+                    withLegend: !prev.withLegend,
+                  })),
+              },
+            ]}
+          />
+
+          <PropControl
+            component="Select"
+            items={[
+              {
+                label: "Tooltip data source",
+                defaultValue: "all",
+                items: [
+                  { label: "all", value: "all" },
+                  { label: "segment", value: "segment" },
+                ],
+                value: props.tooltipDataSource,
+                onChange: (value) => {
+                  setProps((prev) => ({
+                    ...prev,
+                    tooltipDataSource: value as TooltipDataSourceType,
+                  }))
+                },
+              },
+            ]}
+          />
+        </VStack>
       </Wrap>
     </Wrap>
   )
@@ -130,11 +194,11 @@ export const custom: Story = () => {
 
 export const withLabelLists: Story = () => {
   const data = [
-    { browser: "chrome", visitors: 275, color: "blue.500" },
-    { browser: "safari", visitors: 200, color: "red.500" },
-    { browser: "firefox", visitors: 187, color: "orange.500" },
-    { browser: "edge", visitors: 173, color: "violet.500" },
-    { browser: "other", visitors: 90, color: "green.500" },
+    { name: "chrome", visitors: 275, color: "blue.500" },
+    { name: "safari", visitors: 200, color: "red.500" },
+    { name: "firefox", visitors: 187, color: "orange.500" },
+    { name: "edge", visitors: 173, color: "violet.500" },
+    { name: "other", visitors: 90, color: "green.500" },
   ]
 
   return (
@@ -147,7 +211,7 @@ export const withLabelLists: Story = () => {
       labelListProps={[
         {
           position: "insideStart",
-          dataKey: "browser",
+          dataKey: "name",
         },
       ]}
     />
@@ -156,11 +220,11 @@ export const withLabelLists: Story = () => {
 
 export const withGap: Story = () => {
   const data = [
-    { visitors: 275, color: "blue.500" },
-    { visitors: 200, color: "red.500" },
-    { visitors: 187, color: "orange.500" },
-    { visitors: 173, color: "violet.500" },
-    { visitors: 90, color: "green.500" },
+    { name: "chrome", visitors: 275, color: "blue.500" },
+    { name: "safari", visitors: 200, color: "red.500" },
+    { name: "firefox", visitors: 187, color: "orange.500" },
+    { name: "edge", visitors: 173, color: "violet.500" },
+    { name: "other", visitors: 90, color: "green.500" },
   ]
 
   const [barCategoryGap, setBarCategoryGap] = useState<number>(10)

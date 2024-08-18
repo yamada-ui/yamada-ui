@@ -172,6 +172,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
               />
             ) : null}
 
+            {/* TODO: tooltip専用のものを作るひつようがあるかも */}
             {withTooltip ? (
               <Tooltip
                 content={({ label, payload }) => (

@@ -26,7 +26,7 @@ export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
         <PopoverAnchor>
           <ui.div
             className="ui-context-menu__anchor"
-            style={{ position: "fixed", ...position }}
+            style={{ position: "absolute", ...position }}
           />
         </PopoverAnchor>
 

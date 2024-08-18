@@ -83,6 +83,10 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     tooltipDataSource = "all",
     valueFormatter,
     legendProps,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
     fillOpacity,
     labelListProps = [],
     ...rest
@@ -95,6 +99,10 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
       styles,
       chartProps,
       radialBarProps,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle,
       fillOpacity,
     },
   )

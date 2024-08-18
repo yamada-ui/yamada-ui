@@ -33,6 +33,34 @@ export type UseRadialChartOptions = {
    */
   radialBarProps?: Partial<RadialBarProps>
   /**
+   * Controls innerRadius of the chart segments.
+   * If it is a number, it is the width of the radius.
+   * For example, `60` means the radius is `60px` and the diameter is `120px`.
+   *
+   * @default '0%'
+   */
+  innerRadius?: number | string
+  /**
+   * Controls thickness of the chart segments. If it is a number, it is calculated as px.
+   * If it is a number, it is the width of the radius.
+   * For example, `60` means the radius is `60px` and the diameter is `120px`.
+   *
+   * @default '80%'
+   */
+  outerRadius?: number | string
+  /**
+   * Controls angle at which chart starts.
+   *
+   * @default 90
+   */
+  startAngle?: number
+  /**
+   * Controls angle at which chart ends.
+   *
+   * @default -270
+   */
+  endAngle?: number
+  /**
    * Controls fill opacity of all pies.
    *
    * @default 1
@@ -47,6 +75,10 @@ type UseRadialChartProps = UseRadialChartOptions & {
 export const useRadialChart = ({
   data: dataProp,
   dataKey,
+  innerRadius = "0%",
+  outerRadius = "80%",
+  startAngle = 90,
+  endAngle = -270,
   fillOpacity = 1,
   styles,
   ...rest
@@ -121,13 +153,24 @@ export const useRadialChart = ({
       ref,
       className: cx(className, chartClassName),
       data,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle,
       ...chartProps,
       ...props,
     }),
-    [chartClassName, chartProps, data],
+    [
+      chartClassName,
+      chartProps,
+      data,
+      endAngle,
+      innerRadius,
+      outerRadius,
+      startAngle,
+    ],
   )
 
-  //TODO: labelの分離　色の指定
   const getRadialBarProps: RequiredChartPropGetter<
     "div",
     Partial<Recharts.RadialBarProps>,

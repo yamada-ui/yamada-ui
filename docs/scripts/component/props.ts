@@ -17,6 +17,7 @@ type Props = {
   type?: string
   required?: boolean
   description?: string
+  deprecated?: string
   defaultValue?: string
   see?: string
 }
@@ -212,7 +213,10 @@ const generateContent = async ({
     content.push(`\n### ${title}Props\n`)
 
     Object.entries(props).map(
-      async ([name, { type, required, description, defaultValue, see }]) => {
+      async ([
+        name,
+        { type, required, description, deprecated, defaultValue, see },
+      ]) => {
         if (typeof type === "string") {
           type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
         }
@@ -237,6 +241,15 @@ const generateContent = async ({
           }
 
           props.push(`description={"${description}"}`)
+        }
+
+        if (deprecated !== undefined) {
+          if (typeof deprecated === "string") {
+            deprecated = deprecated.replace(/\n/g, "\\n")
+            deprecated = deprecated.replace(/"/g, '\\"')
+          }
+
+          props.push(`deprecated={"${deprecated}"}`)
         }
 
         if (defaultValue !== undefined) {

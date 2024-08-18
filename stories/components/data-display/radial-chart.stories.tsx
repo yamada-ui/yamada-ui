@@ -1,7 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { RadialChartProps, TooltipDataSourceType } from "@yamada-ui/charts"
+import type {
+  ChartTooltip,
+  RadialChartProps,
+  TooltipDataSourceType,
+} from "@yamada-ui/charts"
 import { RadialChart } from "@yamada-ui/charts"
-import { VStack, Wrap } from "@yamada-ui/react"
+import type { Dict } from "@yamada-ui/react"
+import { Card, CardBody, HStack, VStack, Wrap, Text } from "@yamada-ui/react"
 import { useState } from "react"
 import { PropControl } from "../../components"
 
@@ -257,5 +262,118 @@ export const withGap: Story = () => {
         ]}
       />
     </Wrap>
+  )
+}
+
+export const withFillOpacity: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return (
+    <RadialChart
+      data={data}
+      dataKey="value"
+      chartProps={{
+        innerRadius: 30,
+      }}
+      fillOpacity={[0.8, 0.7]}
+    />
+  )
+}
+
+export const customBackground: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return (
+    <RadialChart
+      data={data}
+      dataKey="value"
+      chartProps={{
+        innerRadius: 30,
+      }}
+      radialBarProps={{
+        background: {
+          fill: ["blackAlpha.200", "whiteAlpha.200"],
+        },
+      }}
+    />
+  )
+}
+
+export const customTooltip: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  const CustomTooltip: ChartTooltip = (props: { payload?: Dict[] }) => {
+    const { payload } = props
+    if (!payload) return null
+
+    return (
+      <Card variant="subtle" colorScheme="gray">
+        <CardBody gap="sm">
+          {payload.map((value, index) => (
+            <HStack
+              key={`payload-${index}`}
+              w="full"
+              justifyContent="space-between"
+            >
+              <Text>{value?.payload.name}</Text>
+              <Text color={value?.payload?.color}>{value?.value}</Text>
+            </HStack>
+          ))}
+        </CardBody>
+      </Card>
+    )
+  }
+
+  return (
+    <RadialChart
+      data={data}
+      dataKey="value"
+      chartProps={{
+        innerRadius: 30,
+      }}
+      tooltipProps={{
+        content: CustomTooltip,
+      }}
+    />
+  )
+}
+
+export const customLegend: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return (
+    <RadialChart
+      data={data}
+      dataKey="value"
+      chartProps={{
+        innerRadius: 30,
+      }}
+      withLegend
+      legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
+    />
   )
 }

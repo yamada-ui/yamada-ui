@@ -132,6 +132,9 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     [getLabelLineProps, labelListProps],
   )
 
+  //TODO: gird
+  //TODO: textを入れれる機能
+  //TODO: legendホバー時の機能
   return (
     <ChartProvider value={{ styles }}>
       <ui.div

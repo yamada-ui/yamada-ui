@@ -7,7 +7,6 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
-import type { pieProperties } from "./rechart-properties"
 
 export type ChartPropGetter<
   Y extends As = "div",
@@ -103,7 +102,7 @@ export type RadarProps = Merge<
   }
 >
 export type PieProps = Merge<
-  Merge<Pick<Recharts.PieProps, (typeof pieProperties)[number]>, CSSUIProps>,
+  Merge<Recharts.PieProps, CSSUIProps>,
   {
     activeShape?: Partial<PieProps>
     inactiveShape?: Partial<PieProps>

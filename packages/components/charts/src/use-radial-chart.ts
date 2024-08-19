@@ -24,8 +24,10 @@ export type UseRadialChartOptions = {
   data: Dict[]
   /**
    * The key of a group of data which should be unique in an chart.
+   *
+   * @default 'value'
    */
-  dataKey: string
+  dataKey?: string
   /**
    * Props passed down to recharts `RadialBarChart` component.
    */
@@ -76,7 +78,7 @@ type UseRadialChartProps = UseRadialChartOptions & {
 
 export const useRadialChart = ({
   data: dataProp,
-  dataKey,
+  dataKey = "value",
   innerRadius = "10%",
   outerRadius = "80%",
   startAngle = 180,

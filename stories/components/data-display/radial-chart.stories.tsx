@@ -28,7 +28,7 @@ export const basic: Story = () => {
     { name: "other", value: 90, color: "green.500" },
   ]
 
-  return <RadialChart data={data} dataKey="value" />
+  return <RadialChart data={data} />
 }
 
 export const custom: Story = () => {
@@ -211,7 +211,6 @@ export const withLabelLists: Story = () => {
   return (
     <RadialChart
       data={data}
-      dataKey="value"
       labelListProps={[
         {
           position: "insideStart",
@@ -237,7 +236,6 @@ export const withGap: Story = () => {
     <Wrap gap="md" alignItems="flex-start">
       <RadialChart
         data={data}
-        dataKey="value"
         chartProps={{
           innerRadius: 30,
           barCategoryGap: `${barCategoryGap}%`,
@@ -273,7 +271,7 @@ export const withFillOpacity: Story = () => {
     { name: "other", value: 90, color: "green.500" },
   ]
 
-  return <RadialChart data={data} dataKey="value" fillOpacity={[0.8, 0.7]} />
+  return <RadialChart data={data} fillOpacity={[0.8, 0.7]} />
 }
 
 export const useCircleGrid: Story = () => {
@@ -288,7 +286,6 @@ export const useCircleGrid: Story = () => {
   return (
     <RadialChart
       data={data}
-      dataKey="value"
       endAngle={-180}
       withPolarGrid
       polarGridProps={{ gridType: "circle" }}
@@ -308,7 +305,7 @@ export const customBackground: Story = () => {
   return (
     <RadialChart
       data={data}
-      dataKey="value"
+      endAngle={-180}
       radialBarProps={{
         background: {
           fill: ["blackAlpha.200", "whiteAlpha.200"],
@@ -352,7 +349,6 @@ export const customTooltip: Story = () => {
   return (
     <RadialChart
       data={data}
-      dataKey="value"
       tooltipProps={{
         content: CustomTooltip,
       }}
@@ -372,7 +368,6 @@ export const customLegend: Story = () => {
   return (
     <RadialChart
       data={data}
-      dataKey="value"
       withLegend
       legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
     />

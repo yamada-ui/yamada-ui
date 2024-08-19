@@ -1,52 +1,50 @@
 import { writeFile } from "fs/promises"
-import type { ThemeToken } from "@yamada-ui/react"
+import type { Transforms, ThemeToken } from "@yamada-ui/react"
+import { pseudosSelectors } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
-import { getConfig } from "./config"
+import { generateConfig } from "./config"
 import { layoutStyleProperties } from "./layout-props"
-import { resolveTypes } from "./resolve-types"
+import { overrideTypes } from "./override-types"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap } from "./tokens"
 import type { TransformOptions } from "./transform-props"
 import { transformMap } from "./transform-props"
 import type { UIOptions } from "./ui-props"
-import { uiProps } from "./ui-props"
+import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import { OUT_PATH } from "."
-import type { CSSProperties, CSSProperty, UIProperties } from "."
+import type { CSSProperty, Properties } from "."
+
+const hasTransform = (
+  targetTransform: Transforms,
+  transforms: TransformOptions[] | undefined,
+) => !!transforms?.some(({ transform }) => transform === targetTransform)
 
 const addType = (result: string, value: string) =>
   />$/.test(result) ? result.replace(/>$/, `${value}>`) : result + value
 
-const computedType = ({
+const generateType = ({
   type,
-  hasToken = true,
+  isProcessSkip = false,
   token,
-  transform,
+  transforms,
   prop,
 }: {
   type: string | string[]
-  hasToken?: boolean
+  isProcessSkip?: boolean
   token?: ThemeToken
-  transform?: TransformOptions
-  prop?: CSSProperties
+  transforms?: TransformOptions[]
+  prop?: Properties
 }) => {
-  const resolveType = prop ? resolveTypes[prop] : undefined
+  const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = hasToken ? "Token<>" : ""
+  let result = !isProcessSkip ? "Token<>" : ""
 
-  if (resolveType) {
-    result = addType(result, resolveType)
+  if (overrideType) {
+    result = addType(result, overrideType)
   } else {
-    const isPx =
-      transform === "px" ||
-      (typeof transform !== "string" &&
-        (transform?.transform === "px" ||
-          transform?.additionalTransform === "px"))
-    const isFraction =
-      transform === "fraction" ||
-      (typeof transform !== "string" &&
-        (transform?.transform === "fraction" ||
-          transform?.additionalTransform === "fraction"))
+    const isPx = hasTransform("px", transforms)
+    const isFraction = hasTransform("fraction", transforms)
     const isNumber = isPx || isFraction
 
     if (typeof type === "string") {
@@ -118,19 +116,35 @@ const generateDocs = ({
 export const generateStyles = async (
   styles: (CSSProperty & { type: string; deprecated: boolean })[],
 ) => {
-  let standardStyles: string[] = []
-  let shorthandStyles: string[] = []
-  let atRuleStyles: string[] = []
-  let styleProps: string[] = []
-  let processSkipProperties: string[] = []
-  let pickedStyles: (CSSProperty & { type: string })[] = []
+  const standardStyles: string[] = []
+  const shorthandStyles: string[] = []
+  const pseudoStyles: string[] = []
+  const uiStyles: string[] = []
+  const atRuleStyles: string[] = []
+  const styleProps: string[] = []
+  const processSkipProperties: string[] = []
+  const pickedStyles: (CSSProperty & { type: string })[] = []
 
   checkProps(styles)
 
-  styles = styles.filter((style) => {
-    const isExists = Object.keys(uiProps).includes(style.prop)
+  pseudosSelectors.forEach((selector) => {
+    const transforms = transformMap[selector]
 
-    if (isExists) pickedStyles = [...pickedStyles, style]
+    if (!transforms) return
+
+    const config = generateConfig({ properties: selector, transforms })()
+
+    pseudoStyles.push(`"${selector}": ${config}`)
+  })
+
+  styles = styles.filter((style) => {
+    const isExists = [
+      ...Object.keys(additionalProps),
+      ...Object.keys(uiProps),
+      ...Object.keys(atRuleProps),
+    ].includes(style.prop)
+
+    if (isExists) pickedStyles.push(style)
 
     return !isExists
   })
@@ -138,118 +152,125 @@ export const generateStyles = async (
   styles.forEach(({ name, prop, url, type, deprecated }) => {
     const token: ThemeToken | undefined = tokenMap[prop]
     const shorthands = shorthandProps[prop]
-    const transform = transformMap[prop]
-    const config = getConfig({ properties: prop, token, transform })()
+    const transforms = transformMap[prop]
+    const config = generateConfig({ properties: prop, token, transforms })()
     const docs = generateDocs({ properties: name, urls: [url], deprecated })
 
-    type = computedType({ type, token, transform, prop })
-    standardStyles = [...standardStyles, `${prop}: ${config}`]
-    styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
+    type = generateType({ type, token, transforms, prop })
+    standardStyles.push(`${prop}: ${config}`)
+    styleProps.push(...[docs, `${prop}?: ${type}`])
 
     if (shorthands) {
       const shorthandStyle =
         config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
-        shorthandStyles = [
-          ...shorthandStyles,
-          `${shorthandProp}: ${shorthandStyle}`,
-        ]
-        styleProps = [...styleProps, ...[docs, `${shorthandProp}?: ${type}`]]
+        shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
+        styleProps.push(docs, `${shorthandProp}?: ${type}`)
       })
     }
   })
 
-  Object.entries<UIOptions>(uiProps).forEach(
-    ([
+  const addStyles = (
+    [
       prop,
       {
         properties,
-        transform,
         static: css,
         type,
-        hasToken,
-        isAtRule,
         isProcessResult,
         isProcessSkip,
-        isSkip,
         description,
       },
-    ]) => {
-      if (isProcessSkip)
-        processSkipProperties = [...processSkipProperties, prop]
+    ]: [string, UIOptions],
+    targetStyles: string[],
+  ) => {
+    if (isProcessSkip) processSkipProperties.push(prop)
 
-      const relatedStyles = styles.filter(({ prop }) =>
-        typeof properties === "string"
-          ? prop === properties
-          : properties?.includes(prop),
-      )
-      const deprecated = relatedStyles.some(({ deprecated }) => deprecated)
-      const urls = relatedStyles.map(({ url }) => url)
-      const types = relatedStyles.map(({ type }) => type)
-      const token = tokenMap[prop as UIProperties]
-      const shorthands = shorthandProps[prop as UIProperties]
+    const relatedStyles = styles.filter(({ prop }) =>
+      typeof properties === "string"
+        ? prop === properties
+        : properties?.includes(prop),
+    )
+    const deprecated = relatedStyles.some(({ deprecated }) => deprecated)
+    const urls = relatedStyles.map(({ url }) => url)
+    const types = relatedStyles.map(({ type }) => type)
+    const token = tokenMap[prop as Properties]
+    const shorthands = shorthandProps[prop as Properties]
+    const transforms = transformMap[prop as Properties]
 
-      transform ??= transformMap[prop as UIProperties]
-      type = computedType({ type: type ?? types, hasToken, token, transform })
+    type = generateType({
+      type: type ?? types,
+      token,
+      isProcessSkip,
+      transforms,
+    })
 
-      const config = getConfig({
-        properties,
-        token,
-        transform,
-        isProcessResult,
-        isProcessSkip,
-        isSkip,
-        css,
-      })(true)
+    const config = generateConfig({
+      properties,
+      token,
+      transforms,
+      isProcessResult,
+      isProcessSkip,
+      css,
+    })(true)
 
-      const docs = generateDocs({ properties, description, urls, deprecated })
+    const docs = generateDocs({ properties, description, urls, deprecated })
 
-      if (isAtRule) {
-        atRuleStyles = [...atRuleStyles, `${prop}: ${config}`]
-      } else {
-        standardStyles = [...standardStyles, `${prop}: ${config}`]
-      }
-      styleProps = [...styleProps, ...[docs, `${prop}?: ${type}`]]
+    targetStyles.push(`${prop}: ${config}`)
+    styleProps.push(...[docs, `${prop}?: ${type}`])
 
-      if (shorthands) {
-        const shorthandStyle =
-          config === true
-            ? `{ properties: "${prop}" }`
-            : `standardStyles.${prop}`
+    if (shorthands) {
+      const shorthandStyle =
+        config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
 
-        shorthands.forEach((shorthandProp) => {
-          shorthandStyles = [
-            ...shorthandStyles,
-            `${shorthandProp}: ${shorthandStyle}`,
-          ]
-          styleProps = [...styleProps, ...[docs, `${shorthandProp}?: ${type}`]]
-        })
-      }
-    },
+      shorthands.forEach((shorthandProp) => {
+        shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
+        styleProps.push(docs, `${shorthandProp}?: ${type}`)
+      })
+    }
+  }
+
+  Object.entries<UIOptions>(additionalProps).forEach((entry) =>
+    addStyles(entry, standardStyles),
+  )
+  Object.entries<UIOptions>(uiProps).forEach((entry) =>
+    addStyles(entry, uiStyles),
+  )
+  Object.entries<UIOptions>(atRuleProps).forEach((entry) =>
+    addStyles(entry, atRuleStyles),
   )
 
   const content = `
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
-    import type { Configs } from "./config"
+    import type { StyleConfigs } from "./config"
     import { transforms } from "./config"
+    import { pipe } from "./config/utils"
     import type { CSSUIObject, Token } from "./css"
     import type { Theme } from "./theme.types"
 
-    export const standardStyles: Configs = {
+    export const standardStyles: StyleConfigs = {
       ${standardStyles.join(",\n")}
     }
 
-    export const shorthandStyles: Configs = {
+    export const shorthandStyles: StyleConfigs = {
       ${shorthandStyles.join(",\n")}
     }
 
-    export const atRuleStyles: Configs = {
+    export const pseudoStyles: StyleConfigs = {
+      ${pseudoStyles.join(",\n")}
+    }
+
+    export const uiStyles: StyleConfigs = {
+      ${uiStyles.join(",\n")}
+    }
+
+    export const atRuleStyles: StyleConfigs = {
       ${atRuleStyles.join(",\n")}
     }
 
-    export const styles: Configs = { ...standardStyles, ...shorthandStyles, ...atRuleStyles }
+    export const styles: StyleConfigs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles }
 
     export const processSkipProperties: string[] = [${processSkipProperties.map(
       (property) => `"${property}"`,

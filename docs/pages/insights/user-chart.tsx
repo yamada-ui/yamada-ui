@@ -2,27 +2,23 @@ import {
   Avatar,
   Box,
   Center,
-  ColorSwatch,
   forwardRef,
   Grid,
   Heading,
   HStack,
+  isUndefined,
   Link,
   Skeleton,
+  Tag,
   Text,
   VStack,
-  Tooltip,
 } from "@yamada-ui/react"
-import type {
-  ColorSwatchProps,
-  SkeletonProps,
-  StackProps,
-} from "@yamada-ui/react"
-import type { FC } from "react"
+import type { StackProps } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 import type { UserInsights, UserInsightScore } from "insights"
 import {
   getInsightScore,
+  getTrend,
   INSIGHT_SCORE_COLORS,
   INSIGHT_USERS,
   xAxisTickFormatter,
@@ -31,20 +27,21 @@ import { useInsights } from "./insights-provider"
 import type { BarProps } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
 import { useI18n } from "contexts"
-import type { CountUpProps } from "components/transitions"
 import { CountUp } from "components/transitions"
 import { ChartTooltip } from "./chart-tooltip"
+import { ScoreLegend } from "./score-legend"
 
 export type UserChartProps = Omit<StackProps, "id"> & {
   id: string
-  score: UserInsightScore
+  currentScore: UserInsightScore
+  prevScore: UserInsightScore
   timeline: UserInsights | undefined
   isLoading: boolean
 }
 
 export const UserChart = memo(
   forwardRef<UserChartProps, "div">(
-    ({ id, score, timeline, isLoading, ...rest }, ref) => {
+    ({ id, currentScore, prevScore, timeline, isLoading, ...rest }, ref) => {
       const { t, locale } = useI18n()
       const { period } = useInsights()
       const isEmpty = !period.start && !period.end
@@ -96,6 +93,11 @@ export const UserChart = memo(
         [],
       )
 
+      const trend = useMemo(
+        () => getTrend(currentScore.total, prevScore.total),
+        [currentScore.total, prevScore.total],
+      )
+
       return (
         <VStack ref={ref} borderWidth="1px" rounded="md" {...rest}>
           <HStack
@@ -116,7 +118,7 @@ export const UserChart = memo(
               </Box>
 
               <VStack gap="xs">
-                <Heading as="h3" size="sm" lineClamp={1}>
+                <Heading as="h3" size="md" lineClamp={1}>
                   {user.name[locale]}
                 </Heading>
 
@@ -131,10 +133,28 @@ export const UserChart = memo(
               </VStack>
             </HStack>
 
-            <HStack gap="6">
+            <VStack w="auto" alignItems="flex-end" gap="sm">
+              <Skeleton isLoaded={!isLoading} textAlign="right" rounded="md">
+                <HStack gap="sm">
+                  <CountUp
+                    minW="2.5ch"
+                    fontSize="3xl"
+                    lineHeight="1"
+                    fontWeight="semibold"
+                    count={!isLoading ? currentScore.total : null}
+                  />
+
+                  {!isUndefined(trend) ? (
+                    <Tag size="sm" colorScheme={trend.colorScheme}>
+                      {trend.value}%
+                    </Tag>
+                  ) : null}
+                </HStack>
+              </Skeleton>
+
               <Grid
                 display={{ base: "grid", sm: "none" }}
-                templateColumns={{ base: "repeat(2, 1fr)" }}
+                templateColumns={{ base: "repeat(4, 1fr)" }}
                 gapX="md"
                 gapY="xs"
               >
@@ -142,41 +162,28 @@ export const UserChart = memo(
                   isLoaded={!isLoading}
                   label="Pull Requests"
                   color={INSIGHT_SCORE_COLORS.pullRequests}
-                  count={!isLoading ? score.pullRequests : null}
+                  count={!isLoading ? currentScore.pullRequests : null}
                 />
                 <ScoreLegend
                   isLoaded={!isLoading}
                   label="Issues"
                   color={INSIGHT_SCORE_COLORS.issues}
-                  count={!isLoading ? score.issues : null}
+                  count={!isLoading ? currentScore.issues : null}
                 />
                 <ScoreLegend
                   isLoaded={!isLoading}
                   label="Approved"
                   color={INSIGHT_SCORE_COLORS.approved}
-                  count={!isLoading ? score.approved : null}
+                  count={!isLoading ? currentScore.approved : null}
                 />
                 <ScoreLegend
                   isLoaded={!isLoading}
                   label="Comments"
                   color={INSIGHT_SCORE_COLORS.comments}
-                  count={!isLoading ? score.comments : null}
+                  count={!isLoading ? currentScore.comments : null}
                 />
               </Grid>
-
-              <Skeleton
-                isLoaded={!isLoading}
-                minW="4ch"
-                textAlign="right"
-                rounded="md"
-              >
-                <CountUp
-                  fontSize="2xl"
-                  fontWeight="semibold"
-                  count={!isLoading ? score.total : null}
-                />
-              </Skeleton>
-            </HStack>
+            </VStack>
           </HStack>
 
           <Center px="6" py="lg">
@@ -211,34 +218,3 @@ export const UserChart = memo(
 )
 
 UserChart.displayName = "UserChart"
-
-type ScoreLegendProps = {
-  label?: string
-  color?: ColorSwatchProps["color"]
-  isLoaded?: SkeletonProps["isLoaded"]
-  containerProps?: SkeletonProps
-} & Omit<CountUpProps, "color">
-
-const ScoreLegend: FC<ScoreLegendProps> = memo(
-  ({ label, color, isLoaded, containerProps, ...rest }) => {
-    return (
-      <Tooltip label={label}>
-        <HStack gap="sm">
-          <ColorSwatch color={color} boxSize="3" isRounded />
-
-          <Skeleton
-            isLoaded={isLoaded}
-            minW="2.5ch"
-            textAlign="right"
-            rounded="md"
-            {...containerProps}
-          >
-            <CountUp fontSize="sm" {...rest} />
-          </Skeleton>
-        </HStack>
-      </Tooltip>
-    )
-  },
-)
-
-ScoreLegend.displayName = "ScoreLegend"

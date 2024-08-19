@@ -874,9 +874,10 @@ const series: BarProps[] = useMemo(
 return <BarChart data={data} series={series} dataKey="name" unit="P" />
 ```
 
-### 値をフォーマットする
+### フォーマットする
 
-値をフォーマットする場合は、`valueFormatter`を使います。
+ツールチップのラベルをフォーマットする場合は`labelFormatter`を、値をフォーマットする場合は、`valueFormatter`を使います。
+軸のラベルをフォーマットする場合は、`xAxisTickFormatter`または`yAxisTickFormatter`を使います。
 
 ```tsx functional=true
 const data = useMemo(
@@ -925,12 +926,22 @@ const series: BarProps[] = useMemo(
 )
 
 return (
-  <BarChart
-    data={data}
-    series={series}
-    dataKey="name"
-    valueFormatter={(value) => value.toLocaleString()}
-  />
+  <VStack>
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      labelFormatter={(value) => `ポケモン: ${value}`}
+      valueFormatter={(value) => `${value}P`}
+    />
+    <BarChart
+      data={data}
+      series={series}
+      dataKey="name"
+      xAxisTickFormatter={(value) => `ポケモン: ${value}`}
+      yAxisTickFormatter={(value) => `${value}P`}
+    />
+  </VStack>
 )
 ```
 

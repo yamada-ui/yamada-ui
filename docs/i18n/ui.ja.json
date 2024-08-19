@@ -69,6 +69,11 @@
     "title": "インサイト",
     "description": "Yamada UIのメンテナーやメンバーの活動を数値化したものです。",
     "user-exceeded": "{label} ユーザー選択中",
+    "user": {
+      "all": "すべてのユーザー",
+      "maintainers": "すべてのメンテナー",
+      "members": "すべてのメンバー"
+    },
     "period": {
       "7d": "過去7日",
       "14d": "過去14日",
@@ -137,6 +142,7 @@
     },
     "props-card": {
       "required": "必須",
+      "deprecated": "非推奨",
       "description": "説明",
       "type": "タイプ",
       "default": "デフォルト",

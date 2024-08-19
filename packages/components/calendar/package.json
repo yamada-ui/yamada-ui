@@ -60,6 +60,7 @@
     "dayjs": "^1.11.12"
   },
   "devDependencies": {
+    "@yamada-ui/motion": "workspace:*",
     "clean-package": "2.2.0",
     "react": "^18.3.1"
   },

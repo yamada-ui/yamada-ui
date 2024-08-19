@@ -1,43 +1,26 @@
-import { ThemeSchemes, extendConfig, extendTheme } from '@yamada-ui/react'
+import { COLOR_SCHEMES, ThemeSchemes, extendConfig, extendTheme } from '@yamada-ui/react'
 import { customConfig } from './config'
 
-const colorSchemes = [
-  'gray',
-  'neutral',
-  'red',
-  'rose',
-  'pink',
-  'flashy',
-  'fuchsia',
-  'purple',
-  'violet',
-  'indigo',
-  'blue',
-  'sky',
-  'cyan',
-  'teal',
-  'emerald',
-  'green',
-  'lime',
-  'yellow',
-  'amber',
-  'orange',
-]
-
 export const customTheme = {
-  themeSchemes: colorSchemes.reduce(
+  themeSchemes: COLOR_SCHEMES.reduce(
     (prev, colorScheme) => ({
       ...prev,
       [colorScheme]: {
         semantics: {
-          colors: { primary: `${colorScheme}.500` },
-          colorSchemes: { primary: colorScheme },
+          colors: {
+            primary: `${colorScheme}.500`,
+            ...(colorScheme === 'violet' ? { secondary: 'fuchsia.500' } : {}),
+          },
+          colorSchemes: {
+            primary: colorScheme,
+            ...(colorScheme === 'violet' ? { secondary: 'fuchsia' } : {}),
+          },
         },
       },
     }),
     {} as ThemeSchemes,
   ),
-  colorSchemes,
+  colorSchemes: COLOR_SCHEMES,
 }
 
 export const theme = extendTheme(customTheme)()

@@ -150,6 +150,9 @@ importers:
       '@yamada-ui/cli':
         specifier: workspace:*
         version: link:packages/cli
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:packages/core
       '@yamada-ui/dropzone':
         specifier: workspace:*
         version: link:packages/components/dropzone
@@ -177,6 +180,9 @@ importers:
       '@yamada-ui/theme':
         specifier: workspace:*
         version: link:packages/theme
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:packages/utils
       axe-playwright:
         specifier: ^2.0.1
         version: 2.0.1(playwright@1.46.0)
@@ -1261,6 +1267,9 @@ importers:
         specifier: ^1.11.12
         version: 1.11.12
     devDependencies:
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
       clean-package:
         specifier: 2.2.0
         version: 2.2.0

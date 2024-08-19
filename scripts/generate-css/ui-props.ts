@@ -1,25 +1,16 @@
 import type { CSSObject, Union } from "@yamada-ui/react"
-import type { TransformOptions } from "./transform-props"
 import type { CSSProperties } from "."
-
-type UIProps = Partial<Record<string, UIOptions>>
 
 export type UIOptions = {
   static?: CSSObject
-  isAtRule?: boolean
   isProcessResult?: boolean
   isProcessSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
-  transform?: TransformOptions
   type?: string
   description?: string[]
-  isSkip?: boolean
-  hasToken?: boolean
 }
 
-const createUIProps = <T extends UIProps>(props: T) => props
-
-export const uiProps = createUIProps({
+export const additionalProps = {
   marginX: { properties: ["marginInlineStart", "marginInlineEnd"] },
   marginY: { properties: ["marginTop", "marginBottom"] },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
@@ -102,7 +93,6 @@ export const uiProps = createUIProps({
     ],
   },
   filter: {
-    transform: { transform: "filter" },
     type: `CSS.Property.Filter | "auto"`,
     description: [
       "The CSS `filter` property.",
@@ -112,51 +102,41 @@ export const uiProps = createUIProps({
   },
   blur: {
     properties: "--ui-blur",
-    transform: { transform: "function", args: `"blur"` },
     description: ["If `filter=auto`, sets the value of `--ui-blur`."],
   },
   brightness: {
     properties: "--ui-brightness",
-    transform: { transform: "function", args: `"brightness"` },
     description: ["If `filter=auto`, sets the value of `--ui-brightness`."],
   },
   contrast: {
     properties: "--ui-contrast",
-    transform: { transform: "function", args: `"contrast"` },
     description: ["If `filter=auto`, sets the value of `--ui-contrast`."],
   },
   dropShadow: {
     properties: "--ui-drop-shadow",
-    transform: { transform: "function", args: `"drop-shadow"` },
     description: ["If `filter=auto`, sets the value of `--ui-drop-shadow`."],
   },
   grayscale: {
     properties: "--ui-grayscale",
-    transform: { transform: "function", args: `"grayscale"` },
     description: ["If `filter=auto`, sets the value of `--ui-grayscale`."],
   },
   hueRotate: {
     properties: "--ui-hue-rotate",
-    transform: { transform: "function", args: `"hue-rotate", transforms.deg` },
     description: ["If `filter=auto`, sets the value of `--ui-hue-rotate`."],
   },
   invert: {
     properties: "--ui-invert",
-    transform: { transform: "function", args: `"invert"` },
     description: ["If `filter=auto`, sets the value of `--ui-invert`."],
   },
   saturate: {
     properties: "--ui-saturate",
-    transform: { transform: "function", args: `"saturate"` },
     description: ["If `filter=auto`, sets the value of `--ui-saturate`."],
   },
   sepia: {
     properties: "--ui-sepia",
-    transform: { transform: "function", args: `"sepia"` },
     description: ["If `filter=auto`, sets the value of `--ui-sepia`."],
   },
   backdropFilter: {
-    transform: { transform: "filter", args: `"backdrop"` },
     type: `CSS.Property.BackdropFilter | "auto"`,
     description: [
       "The CSS `backdrop-filter` property.",
@@ -166,63 +146,54 @@ export const uiProps = createUIProps({
   },
   backdropBlur: {
     properties: "--ui-backdrop-blur",
-    transform: { transform: "function", args: `"blur"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.",
     ],
   },
   backdropBrightness: {
     properties: "--ui-backdrop-brightness",
-    transform: { transform: "function", args: `"brightness"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.",
     ],
   },
   backdropContrast: {
     properties: "--ui-backdrop-contrast",
-    transform: { transform: "function", args: `"contrast"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.",
     ],
   },
   backdropDropShadow: {
     properties: "--ui-backdrop-drop-shadow",
-    transform: { transform: "function", args: `"drop-shadow"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.",
     ],
   },
   backdropGrayscale: {
     properties: "--ui-backdrop-grayscale",
-    transform: { transform: "function", args: `"grayscale"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.",
     ],
   },
   backdropHueRotate: {
     properties: "--ui-backdrop-hue-rotate",
-    transform: { transform: "function", args: `"hue-rotate", transforms.deg` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.",
     ],
   },
   backdropInvert: {
     properties: "--ui-backdrop-invert",
-    transform: { transform: "function", args: `"invert"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.",
     ],
   },
   backdropSaturate: {
     properties: "--ui-backdrop-saturate",
-    transform: { transform: "function", args: `"saturate"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.",
     ],
   },
   backdropSepia: {
     properties: "--ui-backdrop-sepia",
-    transform: { transform: "function", args: `"sepia"` },
     description: [
       "If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.",
     ],
@@ -236,6 +207,9 @@ export const uiProps = createUIProps({
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
     ],
   },
+} as const satisfies Record<string, UIOptions>
+
+export const uiProps = {
   lineClamp: {
     static: {
       overflow: "hidden",
@@ -247,31 +221,23 @@ export const uiProps = createUIProps({
     properties: "--ui-line-clamp",
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
-    isSkip: true,
   },
   isTruncated: {
-    transform: "isTruncated",
     type: "boolean",
     description: ["If `true`, it clamps truncate a text after one line."],
-    isSkip: true,
   },
   layerStyle: {
     isProcessResult: true,
-    transform: { transform: "styles", args: `"layerStyles"` },
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
-    isSkip: true,
   },
   textStyle: {
     isProcessResult: true,
-    transform: { transform: "styles", args: `"textStyles"` },
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
-    isSkip: true,
   },
   apply: {
     isProcessResult: true,
-    transform: { transform: "styles" },
     description: [
       "Apply other styles defined in `theme.styles`.",
       "",
@@ -282,13 +248,10 @@ export const uiProps = createUIProps({
       "",
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
-    isSkip: true,
   },
   var: {
     isProcessSkip: true,
-    transform: "var",
     type: '{ __prefix?: string; name: string; token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">, value?: Token<number | StringLiteral> }[]',
-    hasToken: false,
     description: [
       "Set CSS variables.",
       "@experimental",
@@ -303,12 +266,12 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
+} as const satisfies Record<string, UIOptions>
+
+export const atRuleProps = {
   _media: {
-    isAtRule: true,
     isProcessSkip: true,
-    transform: "media",
     type: `{ ${[
       'type?: "all" | "print" | "screen" | "speech" | StringLiteral',
       "query?: StringLiteral",
@@ -369,7 +332,6 @@ export const uiProps = createUIProps({
       "css?: CSSUIObject",
       "[key: string]: any",
     ].join(";")} }[]`,
-    hasToken: false,
     description: [
       "The `@media` of CSS at-rule.",
       "@experimental",
@@ -383,12 +345,9 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
   _container: {
-    isAtRule: true,
     isProcessSkip: true,
-    transform: "container",
     type: `{ ${[
       "name?: StringLiteral",
       "query?: StringLiteral",
@@ -417,7 +376,6 @@ export const uiProps = createUIProps({
       "css?: CSSUIObject",
       "[key: string]: any",
     ].join(";")}}[]`,
-    hasToken: false,
     description: [
       "The `@container` of CSS at-rule.",
       "@experimental",
@@ -431,14 +389,10 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
   _supports: {
-    isAtRule: true,
     isProcessSkip: true,
-    transform: "supports",
     type: `{${["query?: StringLiteral", "css?: CSSUIObject"].join(";")}}[]`,
-    hasToken: false,
     description: [
       "The `@supports` of CSS at-rule.",
       "@experimental",
@@ -452,6 +406,5 @@ export const uiProps = createUIProps({
       "</Box>",
       "```",
     ],
-    isSkip: true,
   },
-})
+} as const satisfies Record<string, UIOptions>

@@ -1,12 +1,9 @@
 import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
-import {
-  useCallback,
-  useMemo,
-  useState,
-  type ComponentPropsWithRef,
-} from "react"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
+import { useCallback, useMemo, useState } from "react"
+import type { ComponentPropsWithRef } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
 import type {
@@ -197,8 +194,8 @@ export const useRadialChart = ({
       outerRadius,
       startAngle,
       endAngle,
-      ...chartProps,
       ...props,
+      ...chartProps,
     }),
     [
       chartClassName,
@@ -222,17 +219,17 @@ export const useRadialChart = ({
       dataKey,
       isAnimationActive: false,
       background,
-      ...radialBarProps,
       ...props,
+      ...radialBarProps,
     }),
     [background, dataKey, radialBarClassName, radialBarProps],
   )
 
   return {
     radialVars,
+    setHighlightedArea,
     getRadialChartProps,
     getRadialBarProps,
-    setHighlightedArea,
   }
 }
 

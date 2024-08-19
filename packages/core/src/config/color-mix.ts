@@ -39,7 +39,7 @@ const getColor = (value: string | undefined, theme: StyledTheme) => {
   return !ratio ? color : `${color} ${ratio}`
 }
 
-export const generateColorMix: Transform = (value, theme) => {
+export const colorMix: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)

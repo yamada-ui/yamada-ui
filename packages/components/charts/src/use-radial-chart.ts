@@ -188,7 +188,11 @@ export const useRadialChart = ({
     [background, dataKey, radialBarClassName, radialBarProps],
   )
 
-  return { getRadialChartProps, getRadialBarProps, radialVars }
+  return {
+    radialVars,
+    getRadialChartProps,
+    getRadialBarProps,
+  }
 }
 
 export type UseRadialChartReturn = ReturnType<typeof useRadialChart>

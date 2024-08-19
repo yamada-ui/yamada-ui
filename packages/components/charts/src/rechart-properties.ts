@@ -451,6 +451,7 @@ export const radialBarProperties: (keyof Omit<
   "onMouseOut",
   "onMouseEnter",
   "onMouseLeave",
+  "cornerRadius",
 ]
 
 export const dotProperties: (keyof Omit<Recharts.DotProps, "ref">)[] = [
@@ -475,6 +476,7 @@ export const polarGridProperties: (keyof Recharts.PolarGridProps)[] = [
   "polarAngles",
   "polarRadius",
   "gridType",
+  "radialLines",
 ]
 
 export const polarAngleAxisProperties: (keyof Recharts.PolarAngleAxisProps)[] =

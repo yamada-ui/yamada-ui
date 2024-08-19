@@ -102,7 +102,7 @@ describe("<PieChart />", () => {
       )
 
       for (const { value } of data) {
-        await waitFor(() => expect(screen.getByText(`${value}`)).toBeVisible())
+        await waitFor(() => expect(screen.getByText(value)).toBeVisible())
       }
 
       rerender(
@@ -116,7 +116,7 @@ describe("<PieChart />", () => {
 
       for (const { value } of data) {
         await waitFor(() =>
-          expect(screen.queryByText(`${value}`)).not.toBeInTheDocument(),
+          expect(screen.queryByText(value)).not.toBeInTheDocument(),
         )
       }
     })

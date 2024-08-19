@@ -158,11 +158,10 @@ export type LabelListProps = Merge<
   Recharts.LabelListProps<Dict>,
   Omit<CSSUIProps, "position">
 >
+export type ChartTooltipProps = Recharts.TooltipProps<
+  number | string | Array<number | string>,
+  number | string
+>
 export type ChartTooltip =
   | ReactElement
-  | ((
-      props: Recharts.TooltipProps<
-        number | string | Array<number | string>,
-        number | string
-      >,
-    ) => ReactNode)
+  | ((props: ChartTooltipProps) => ReactNode)

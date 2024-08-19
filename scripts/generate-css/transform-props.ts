@@ -84,9 +84,24 @@ export const transformProps: TransformProps = {
     { properties: "backdropSaturate", args: ["saturate"] },
     { properties: "backdropSepia", args: ["sepia"] },
   ],
+  grid: [
+    "gridTemplateColumns",
+    "gridTemplateRows",
+    "gridAutoColumns",
+    "gridAutoRows",
+  ],
   calc: [
-    ...(tokens.sizes?.map((properties) => ({ properties, args: ["sizes"] })) ??
-      []),
+    ...(tokens.sizes
+      ?.filter(
+        (properties) =>
+          ![
+            "gridTemplateColumns",
+            "gridTemplateRows",
+            "gridAutoColumns",
+            "gridAutoRows",
+          ].includes(properties),
+      )
+      .map((properties) => ({ properties, args: ["sizes"] })) ?? []),
     ...(tokens.spaces?.map((properties) => ({
       properties,
       args: ["spaces"],

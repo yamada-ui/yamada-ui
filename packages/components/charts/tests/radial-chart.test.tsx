@@ -224,4 +224,33 @@ describe("<RadialChart />", () => {
       }
     })
   })
+
+  describe("valueFormatter", () => {
+    test("valueFormatter should function properly in tooltip", async () => {
+      const { container } = render(
+        <RadialChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          valueFormatter={(value) => `${value} views`}
+        />,
+      )
+
+      await waitFor(() =>
+        expect(
+          container.querySelector(".ui-radial-chart__chart"),
+        ).toBeInTheDocument(),
+      )
+
+      let chartElement = container.querySelector(".ui-radial-chart__chart")
+      assert(chartElement !== null)
+
+      fireEvent.mouseOver(chartElement, {
+        clientX: 200,
+        clientY: 200,
+      })
+
+      const formattedElements = await screen.findAllByText(/\d views/i)
+      expect(formattedElements).toHaveLength(data.length)
+    })
+  })
 })

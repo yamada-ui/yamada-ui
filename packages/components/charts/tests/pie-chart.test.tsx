@@ -341,7 +341,7 @@ describe("<PieChart />", () => {
       expect(formattedElements).toHaveLength(data.length)
     })
 
-    test("valueFormatter should function properly in label", async () => {
+    test("labelFormatter should function properly in label", async () => {
       render(
         <PieChart
           containerProps={{ width: 400, height: "80%" }}

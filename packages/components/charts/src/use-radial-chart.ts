@@ -37,7 +37,7 @@ export type UseRadialChartOptions = {
    * If it is a number, it is the width of the radius.
    * For example, `60` means the radius is `60px` and the diameter is `120px`.
    *
-   * @default '0%'
+   * @default '10%'
    */
   innerRadius?: number | string
   /**
@@ -75,7 +75,7 @@ type UseRadialChartProps = UseRadialChartOptions & {
 export const useRadialChart = ({
   data: dataProp,
   dataKey,
-  innerRadius = "0%",
+  innerRadius = "10%",
   outerRadius = "80%",
   startAngle = 180,
   endAngle = 0,

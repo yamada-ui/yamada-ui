@@ -28,7 +28,7 @@ export const basic: Story = () => {
     { name: "other", value: 90, color: "green.500" },
   ]
 
-  return <RadialChart data={data} dataKey="value" innerRadius={30} />
+  return <RadialChart data={data} dataKey="value" />
 }
 
 export const custom: Story = () => {
@@ -46,7 +46,7 @@ export const custom: Story = () => {
     startAngle: 180,
     endAngle: 0,
     fillOpacity: 1,
-    innerRadius: 0,
+    innerRadius: 10,
     outerRadius: 80,
     tooltipAnimationDuration: 0,
     withPolarGrid: false,
@@ -212,7 +212,6 @@ export const withLabelLists: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      innerRadius={30}
       labelListProps={[
         {
           position: "insideStart",
@@ -274,14 +273,7 @@ export const withFillOpacity: Story = () => {
     { name: "other", value: 90, color: "green.500" },
   ]
 
-  return (
-    <RadialChart
-      data={data}
-      dataKey="value"
-      innerRadius={30}
-      fillOpacity={[0.8, 0.7]}
-    />
-  )
+  return <RadialChart data={data} dataKey="value" fillOpacity={[0.8, 0.7]} />
 }
 
 export const useCircleGrid: Story = () => {
@@ -297,7 +289,6 @@ export const useCircleGrid: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      innerRadius={30}
       endAngle={-180}
       withPolarGrid
       polarGridProps={{ gridType: "circle" }}
@@ -318,7 +309,6 @@ export const customBackground: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      innerRadius={30}
       radialBarProps={{
         background: {
           fill: ["blackAlpha.200", "whiteAlpha.200"],
@@ -363,7 +353,6 @@ export const customTooltip: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      innerRadius={30}
       tooltipProps={{
         content: CustomTooltip,
       }}
@@ -384,7 +373,6 @@ export const customLegend: Story = () => {
     <RadialChart
       data={data}
       dataKey="value"
-      innerRadius={30}
       withLegend
       legendProps={{ verticalAlign: "bottom", mb: "0", mt: "4" }}
     />

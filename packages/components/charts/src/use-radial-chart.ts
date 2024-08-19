@@ -1,9 +1,14 @@
 import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
-import { useCallback, useMemo, type ComponentPropsWithRef } from "react"
+import {
+  useCallback,
+  useMemo,
+  useState,
+  type ComponentPropsWithRef,
+} from "react"
 import type * as Recharts from "recharts"
-import { getComponentProps } from "./chart-utils"
+import { getClassName, getComponentProps } from "./chart-utils"
 import type {
   ChartPropGetter,
   RadialBarProps,
@@ -84,8 +89,13 @@ export const useRadialChart = ({
   ...rest
 }: UseRadialChartProps) => {
   const { theme } = useTheme()
-  const { background: backgroundProps = {}, ...computedRadialBarProps } =
-    rest.radialBarProps ?? {}
+  const [highlightedArea, setHighlightedArea] = useState<string | null>(null)
+  const shouldHighlight = highlightedArea !== null
+  const {
+    background: backgroundProps = {},
+    dimRadialBar: dimRadialBarProps = {},
+    ...computedRadialBarProps
+  } = rest.radialBarProps ?? {}
 
   const radialBarColors: CSSUIProps["var"] = useMemo(
     () =>
@@ -107,15 +117,15 @@ export const useRadialChart = ({
     [radialBarColors, fillOpacity],
   )
 
-  const data = useMemo(
-    () =>
-      dataProp.map((prev, index) => ({
-        ...prev,
-        fill: `var(--ui-radial-bar-${index})`,
-        fillOpacity: "var(--ui-fill-opacity)",
-      })),
-    [dataProp],
-  )
+  const dimRadialBarClassName = useMemo(() => {
+    const resolvedDimRadialBar = {
+      fillOpacity: 0.3,
+      strokeOpacity: 0,
+      ...dimRadialBarProps,
+    }
+
+    return getClassName(resolvedDimRadialBar)(theme)
+  }, [dimRadialBarProps, theme])
 
   const [chartProps, chartClassName] = useMemo(
     () =>
@@ -142,6 +152,32 @@ export const useRadialChart = ({
         styles.radialBar,
       )(theme),
     [computedRadialBarProps, styles.radialBar, theme],
+  )
+
+  const data = useMemo(
+    () =>
+      dataProp.map((props, index) => {
+        const { name, value, dimRadialBar = {}, ...computedProps } = props
+        const dimmed = shouldHighlight && highlightedArea !== name
+        const resolvedProps = {
+          ...computedProps,
+          ...(dimmed ? dimRadialBar : {}),
+        }
+
+        const className = getClassName(
+          resolvedProps,
+          dimmed ? dimRadialBarClassName : undefined,
+        )(theme)
+
+        return {
+          className,
+          fill: `var(--ui-radial-bar-${index})`,
+          fillOpacity: "var(--ui-fill-opacity)",
+          name,
+          value,
+        }
+      }),
+    [dataProp, dimRadialBarClassName, highlightedArea, shouldHighlight, theme],
   )
 
   const getRadialChartProps: ChartPropGetter<
@@ -192,6 +228,7 @@ export const useRadialChart = ({
     radialVars,
     getRadialChartProps,
     getRadialBarProps,
+    setHighlightedArea,
   }
 }
 

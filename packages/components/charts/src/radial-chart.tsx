@@ -105,20 +105,23 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const { getRadialChartProps, getRadialBarProps, radialVars } = useRadialChart(
-    {
-      data,
-      dataKey,
-      styles,
-      chartProps,
-      radialBarProps,
-      innerRadius,
-      outerRadius,
-      startAngle,
-      endAngle,
-      fillOpacity,
-    },
-  )
+  const {
+    getRadialChartProps,
+    getRadialBarProps,
+    radialVars,
+    setHighlightedArea,
+  } = useRadialChart({
+    data,
+    dataKey,
+    styles,
+    chartProps,
+    radialBarProps,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
+    fillOpacity,
+  })
   const { getContainerProps } = useChart({ containerProps })
   const { tooltipProps: computedTooltipProps, getTooltipProps } =
     useChartTooltip({
@@ -150,7 +153,6 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     [getLabelLineProps, labelListProps],
   )
 
-  //TODO: legendホバー時の機能
   return (
     <ChartProvider value={{ styles }}>
       <ui.div
@@ -190,8 +192,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
                   <ChartLegend
                     className="ui-pie-chart__legend"
                     payload={payload}
-                    // onHighlight={setHighlightedArea}
-                    onHighlight={() => {}}
+                    onHighlight={setHighlightedArea}
                     {...computedLegendProps}
                   />
                 )}

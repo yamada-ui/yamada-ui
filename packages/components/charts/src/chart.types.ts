@@ -122,6 +122,7 @@ export type RadialBarProps = Merge<
   Merge<Recharts.RadialBarProps, CSSUIProps>,
   {
     background?: Partial<RadialBarProps>
+    dimRadialBar?: CSSUIProps
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>

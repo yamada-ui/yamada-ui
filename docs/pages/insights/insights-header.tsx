@@ -263,6 +263,8 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   return (
     <RangeDatePicker
       w={{ base: "64", md: "full" }}
+      startInputProps={{ overflowX: "hidden" }}
+      endInputProps={{ overflowX: "hidden" }}
       value={value}
       onChange={(value) => {
         valueRef.current = value

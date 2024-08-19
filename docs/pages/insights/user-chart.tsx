@@ -21,7 +21,6 @@ import {
   getTrend,
   INSIGHT_SCORE_COLORS,
   INSIGHT_USERS,
-  labelFormatter,
   xAxisTickFormatter,
 } from "./insights-utils"
 import { useInsights } from "./insights-provider"
@@ -29,6 +28,7 @@ import type { BarProps } from "@yamada-ui/charts"
 import { BarChart } from "@yamada-ui/charts"
 import { useI18n } from "contexts"
 import { CountUp } from "components/transitions"
+import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
 
 export type UserChartProps = Omit<StackProps, "id"> & {
@@ -200,10 +200,12 @@ export const UserChart = memo(
                     data={data}
                     series={series}
                     dataKey="period"
-                    labelFormatter={(label) => labelFormatter(label, period)}
                     xAxisTickFormatter={(value) =>
-                      xAxisTickFormatter(value, period)
+                      xAxisTickFormatter(value, period)(locale)
                     }
+                    tooltipProps={{
+                      content: ChartTooltip,
+                    }}
                   />
                 </Box>
               </Skeleton>

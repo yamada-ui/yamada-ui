@@ -123,7 +123,7 @@ export const useYearList = () => {
 
   const getIsSelected = useCallback(
     (value: number) => {
-      if (__selectType === "date" || __selectType === "year") {
+      if (__selectType === "date" || __selectType === "month") {
         return year === value
       } else {
         const year = !isMulti

@@ -83,7 +83,12 @@
       "6M": "Last 6 months",
       "1y": "Last 1 year"
     },
-    "notFound": "Data no found."
+    "notFound": "Data no found.",
+    "chart": {
+      "tooltip": {
+        "total": "Total"
+      }
+    }
   },
   "not-found": {
     "title": "404: Not found",

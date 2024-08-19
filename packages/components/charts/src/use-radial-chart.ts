@@ -97,7 +97,7 @@ export const useRadialChart = ({
     ...computedRadialBarProps
   } = rest.radialBarProps ?? {}
 
-  const radialBarColors: CSSUIProps["var"] = useMemo(
+  const radialVars: CSSUIProps["var"] = useMemo(
     () =>
       dataProp.map(({ color }, index) => ({
         __prefix: "ui",
@@ -106,15 +106,6 @@ export const useRadialChart = ({
         value: color ?? "transparent",
       })),
     [dataProp],
-  )
-
-  const radialVars: CSSUIProps["var"] = useMemo(
-    () =>
-      [
-        ...radialBarColors,
-        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
-      ] as Required<CSSUIProps>["var"],
-    [radialBarColors, fillOpacity],
   )
 
   const dimRadialBarClassName = useMemo(() => {
@@ -161,7 +152,7 @@ export const useRadialChart = ({
         const dimmed = shouldHighlight && highlightedArea !== name
         const resolvedProps = {
           ...computedProps,
-          ...(dimmed ? dimRadialBar : {}),
+          ...(dimmed ? dimRadialBar : { fillOpacity }),
         }
 
         const className = getClassName(
@@ -172,12 +163,18 @@ export const useRadialChart = ({
         return {
           className,
           fill: `var(--ui-radial-bar-${index})`,
-          fillOpacity: "var(--ui-fill-opacity)",
           name,
           value,
         }
       }),
-    [dataProp, dimRadialBarClassName, highlightedArea, shouldHighlight, theme],
+    [
+      dataProp,
+      dimRadialBarClassName,
+      fillOpacity,
+      highlightedArea,
+      shouldHighlight,
+      theme,
+    ],
   )
 
   const getRadialChartProps: ChartPropGetter<

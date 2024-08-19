@@ -252,10 +252,17 @@ export const withLabelLists: Story = () => {
   return (
     <RadialChart
       data={data}
+      innerRadius={50}
+      startAngle={90}
+      endAngle={-230}
       labelListProps={[
         {
           position: "insideStart",
           dataKey: "name",
+        },
+        {
+          position: "insideEnd",
+          dataKey: "value",
         },
       ]}
     />

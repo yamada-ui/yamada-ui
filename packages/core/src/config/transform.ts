@@ -8,7 +8,7 @@ const transformValues = [
   "skewY(var(--ui-skew-y, 0))",
 ]
 
-export const generateTransform: Transform = (value) => {
+export const transform: Transform = (value) => {
   if (value === "auto")
     return [
       "translateX(var(--ui-translate-x, 0))",

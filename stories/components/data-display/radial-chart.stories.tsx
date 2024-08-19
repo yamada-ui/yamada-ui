@@ -40,7 +40,14 @@ export const withSize: Story = () => {
     { name: "other", value: 90, color: "green.500" },
   ]
 
-  return <RadialChart data={data} />
+  return (
+    <>
+      <RadialChart data={data} size="sm" />
+      <RadialChart data={data} size="md" />
+      <RadialChart data={data} size="lg" />
+      <RadialChart data={data} size="full" />
+    </>
+  )
 }
 
 export const withLegend: Story = () => {

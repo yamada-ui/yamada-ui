@@ -1,5 +1,5 @@
 import { FormControl } from "@yamada-ui/form-control"
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import { Radio, RadioGroup } from "../src"
 
 describe("<Radio />", () => {
@@ -94,5 +94,39 @@ describe("<Radio />", () => {
     })
 
     expect(firstRadioButton.id).not.toBe(secondRadioButton.id)
+  })
+
+  test("should call onKeyDown when key is pressed", async () => {
+    const onKeyDownMock = vi.fn()
+    render(<Radio onKeyDown={onKeyDownMock}>Radio button</Radio>)
+
+    const radio = await screen.findByRole("radio", { name: "Radio button" })
+    await act(async () => {
+      fireEvent.focus(radio)
+      fireEvent.keyDown(radio, { key: "Enter" })
+    })
+
+    expect(onKeyDownMock).toHaveBeenCalledTimes(1)
+    expect(onKeyDownMock.mock.calls[0][0]).toMatchObject({
+      key: "Enter",
+      type: "keydown",
+    })
+  })
+
+  test("should call onKeyUp when key is released", async () => {
+    const onKeyUpMock = vi.fn()
+    render(<Radio onKeyUp={onKeyUpMock}>Radio button</Radio>)
+
+    const radio = await screen.findByRole("radio", { name: "Radio button" })
+    await act(async () => {
+      fireEvent.focus(radio)
+      fireEvent.keyUp(radio, { key: "Enter" })
+    })
+
+    expect(onKeyUpMock).toHaveBeenCalledTimes(1)
+    expect(onKeyUpMock.mock.calls[0][0]).toMatchObject({
+      key: "Enter",
+      type: "keyup",
+    })
   })
 })

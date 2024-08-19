@@ -299,6 +299,37 @@ import "dayjs/locale/ja"
 </VStack>
 ```
 
+### 子要素の追加
+
+独自の要素を追加するには、`MonthPicker`コンポーネントに子要素を挿入してください。
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="MMM YYYY">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </MonthPicker>
+
+  <MonthPicker placeholder="MMM YYYY" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit
+          {value
+            ? ` ${
+                value.getFullYear() +
+                "/" +
+                String(value.getMonth() + 1).padStart(2, "0")
+              }`
+            : ""}
+        </Button>
+      </VStack>
+    )}
+  </MonthPicker>
+</VStack>
+```
+
 ### 制御する
 
 ```tsx functional=true

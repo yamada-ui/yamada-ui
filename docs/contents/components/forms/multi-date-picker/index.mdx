@@ -513,6 +513,30 @@ To customize the icon, set `props` to `iconProps`.
 </VStack>
 ```
 
+### Add Children
+
+To add custom content, insert children elements into the `MultiDatePicker` component.
+
+```tsx
+<VStack>
+  <MultiDatePicker placeholder="YYYY/MM/DD">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </MultiDatePicker>
+
+  <MultiDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit{value ? ` ${value.length} dates` : ""}
+        </Button>
+      </VStack>
+    )}
+  </MultiDatePicker>
+</VStack>
+```
+
 ### Control
 
 ```tsx functional=true

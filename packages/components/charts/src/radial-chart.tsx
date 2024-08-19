@@ -60,6 +60,10 @@ type RadialChartOptions = {
    * @default 'all'
    */
   tooltipDataSource?: TooltipDataSourceType
+  /**
+   * Unit displayed next to each value in tooltip.
+   */
+  unit?: string
 }
 
 export type RadialChartProps = HTMLUIProps<"div"> &
@@ -93,6 +97,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
     tooltipAnimationDuration,
     tooltipDataSource = "all",
     valueFormatter,
+    unit,
     legendProps,
     innerRadius,
     outerRadius,
@@ -210,7 +215,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
                     }
                     payload={tooltipDataSource === "segment" ? payload : data}
                     valueFormatter={valueFormatter}
-                    // unit={unit}
+                    unit={unit}
                     {...computedTooltipProps}
                   />
                 )}

@@ -31,6 +31,47 @@ export const basic: Story = () => {
   return <RadialChart data={data} />
 }
 
+export const withSize: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return <RadialChart data={data} />
+}
+
+export const withLegend: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return <RadialChart data={data} withLegend />
+}
+
+export const withValueFormatter: Story = () => {
+  const data = [
+    { name: "chrome", value: 275, color: "blue.500" },
+    { name: "safari", value: 200, color: "red.500" },
+    { name: "firefox", value: 187, color: "orange.500" },
+    { name: "edge", value: 173, color: "violet.500" },
+    { name: "other", value: 90, color: "green.500" },
+  ]
+
+  return (
+    <RadialChart
+      data={data}
+      valueFormatter={(value) => value.toLocaleString()}
+    />
+  )
+}
+
 export const custom: Story = () => {
   const data = [
     { name: "chrome", value: 275, color: "blue.500" },

@@ -148,7 +148,13 @@ export const useRadialChart = ({
   const data = useMemo(
     () =>
       dataProp.map((props, index) => {
-        const { name, value, dimRadialBar = {}, ...computedProps } = props
+        const {
+          name,
+          value,
+          color,
+          dimRadialBar = {},
+          ...computedProps
+        } = props
         const dimmed = shouldHighlight && highlightedArea !== name
         const resolvedProps = {
           ...computedProps,
@@ -165,6 +171,7 @@ export const useRadialChart = ({
           fill: `var(--ui-radial-bar-${index})`,
           name,
           value,
+          color,
         }
       }),
     [

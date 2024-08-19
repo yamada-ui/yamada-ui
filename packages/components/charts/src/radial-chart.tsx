@@ -190,7 +190,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
               <Legend
                 content={({ payload }) => (
                   <ChartLegend
-                    className="ui-pie-chart__legend"
+                    className="ui-radial-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
                     {...computedLegendProps}
@@ -204,7 +204,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
               <Tooltip
                 content={({ payload }) => (
                   <ChartTooltip
-                    className="ui-pie-chart__tooltip"
+                    className="ui-radial-chart__tooltip"
                     isRadialChart={
                       tooltipDataSource === "segment" ? true : false
                     }

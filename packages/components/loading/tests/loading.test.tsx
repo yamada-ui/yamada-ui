@@ -16,7 +16,7 @@ describe("<Loading />", () => {
       <Loading
         data-testid="loading"
         variant="oval"
-        size="6xl"
+        fontSize="6xl"
         color="red.500"
         secondaryColor="blue.500"
       />,

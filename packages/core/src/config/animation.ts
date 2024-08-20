@@ -22,7 +22,7 @@ const transformAnimationValue = (value: Dict) =>
     return prev
   }, {} as Dict)
 
-export const generateAnimation: Transform = (value, theme, css) => {
+export const animation: Transform = (value, theme, css) => {
   if (value == null || globalValues.has(value)) return value
 
   if (isObject(value)) {

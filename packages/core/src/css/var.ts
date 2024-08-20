@@ -1,6 +1,6 @@
 import type { Dict } from "@yamada-ui/utils"
 import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
-import { generateAnimation, generateGradient } from "../config"
+import { animation, gradient } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
 import type { VarTokens } from "../theme"
@@ -63,10 +63,10 @@ export const createVars =
       if (token.startsWith("animations.")) {
         if (isArray(value)) {
           resolvedLightValue = value
-            .map((value) => generateAnimation(value, theme, css))
+            .map((value) => animation(value, theme, css))
             .join(",")
         } else {
-          resolvedLightValue = generateAnimation(value, theme, css)
+          resolvedLightValue = animation(value, theme, css)
         }
       } else {
         let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
@@ -78,7 +78,7 @@ export const createVars =
           if (lightParentVar) {
             resolvedLightValue = lightParentRef
           } else {
-            resolvedLightValue = generateGradient(
+            resolvedLightValue = gradient(
               fetchParent(lightValue)[1],
               theme,
               css,
@@ -88,7 +88,7 @@ export const createVars =
           if (darkParentVar) {
             resolvedDarkValue = darkParentRef
           } else {
-            resolvedDarkValue = generateGradient(darkValue, theme, css)
+            resolvedDarkValue = gradient(darkValue, theme, css)
           }
         } else {
           resolvedLightValue = lightValue

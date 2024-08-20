@@ -21,17 +21,18 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({
       .filter(({ isDefaultCheck }) => isDefaultCheck)
       .map(({ name }) => name),
   )
+  const hasDescription = packages.some(({ description }) => description)
 
   const columns = useMemo<Column<Package>[]>(() => {
     const columns: Column<Package>[] = [
       {
         header: t("component.select-package-managers.name"),
         accessorKey: "name",
-        css: { w: "12.5rem" },
+        css: hasDescription ? { w: "12.5rem" } : {},
       },
     ]
 
-    if (breakpoint !== "sm") {
+    if (breakpoint !== "sm" && hasDescription) {
       columns.push({
         header: t("component.select-package-managers.description"),
         accessorKey: "description",
@@ -44,7 +45,7 @@ export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({
     }
 
     return columns
-  }, [t, breakpoint])
+  }, [t, breakpoint, hasDescription])
 
   return (
     <>

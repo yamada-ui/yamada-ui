@@ -1,7 +1,12 @@
 import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
 import { ui, forwardRef, useTheme } from "@yamada-ui/core"
 import type { MotionProps, MotionVariants } from "@yamada-ui/motion"
-import { AnimatePresence, Motion, useIsPresent } from "@yamada-ui/motion"
+import {
+  AnimatePresence,
+  Motion,
+  motionForwardRef,
+  useIsPresent,
+} from "@yamada-ui/motion"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
@@ -56,7 +61,7 @@ export type SnacksProps = Omit<MotionProps<"div">, "direction"> &
   Pick<UseSnacksOptions, "direction" | "startIndex"> &
   Pick<Required<ThemeConfig>["snacks"], "variants" | "gutter" | "negateMargin">
 
-export const Snacks = forwardRef<SnacksProps, "div">(
+export const Snacks = motionForwardRef<SnacksProps, "div">(
   (
     {
       className,
@@ -84,7 +89,7 @@ export const Snacks = forwardRef<SnacksProps, "div">(
       negateMargin = true,
       ...rest
     } = useMemo(
-      () => ({ ...computedSnacks, ...theme.__config.snacks, ...props }),
+      () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
     const top = useToken<string | number>("spaces", useValue(gutter[0])) ?? 0

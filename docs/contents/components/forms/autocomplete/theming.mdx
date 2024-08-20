@@ -21,5 +21,6 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const Autocomplete: ComponentMultiStyle = mergeMultiStyle(Select)()
+export const Autocomplete: ComponentMultiStyle<"Autocomplete"> =
+  mergeMultiStyle(Select)()
 ```

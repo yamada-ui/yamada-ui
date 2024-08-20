@@ -1,7 +1,12 @@
 import type { PortalProps } from "@yamada-ui/portal"
 import type { Dict, StringLiteral } from "@yamada-ui/utils"
-import type { MotionConfigProps, Variants } from "framer-motion"
+import type {
+  MotionConfigProps,
+  Variants,
+  HTMLMotionProps,
+} from "framer-motion"
 import type { FC, ReactNode, RefObject } from "react"
+import type { HTMLUIProps } from "./components"
 import type {
   UIStyle,
   AnimationStyle,
@@ -423,6 +428,14 @@ export type ThemeConfig = {
      * The `ref` to the component where the portal will be attached to.
      */
     containerRef?: PortalProps["containerRef"]
+    /**
+     * Props for notice list element.
+     */
+    listProps?: HTMLUIProps<"ul">
+    /**
+     * Props for notice item element.
+     */
+    itemProps?: HTMLMotionProps<"li">
   }
   /**
    * The config of the snacks.
@@ -521,7 +534,14 @@ export type ThemeSemantics = Omit<
   | "breakpoints"
   | "animations"
 > & {
-  colorSchemes?: Partial<Record<string, Theme["colorSchemes"]>>
+  colorSchemes?: Partial<
+    Record<
+      string,
+      | Theme["colorSchemes"]
+      | [Theme["colorSchemes"], Theme["colorSchemes"]]
+      | ThemeTokens
+    >
+  >
   animations?: ThemeAnimationTokens<AnimationStyle | string>
 }
 export type ThemeSchemes = Partial<
@@ -569,9 +589,12 @@ export type UsageTheme = BaseTheme & {
   [key: string]: any
 }
 
-export type ComponentBaseStyle = UIStyle
-export type ComponentVariants = Record<string, UIStyle>
-export type ComponentSizes = Record<string, UIStyle>
+export type ComponentBaseStyle<Y extends Dict = Dict> = UIStyle<Y>
+export type ComponentVariants<Y extends Dict = Dict> = Record<
+  string,
+  UIStyle<Y>
+>
+export type ComponentSizes<Y extends Dict = Dict> = Record<string, UIStyle<Y>>
 type ComponentProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
@@ -608,20 +631,26 @@ export type ComponentStyle<
   /**
    * The base style of the component.
    */
-  baseStyle?: ComponentBaseStyle
+  baseStyle?: ComponentBaseStyle<M>
   /**
    * The sizes of the component.
    */
-  sizes?: ComponentSizes
+  sizes?: ComponentSizes<M>
   /**
    * The variants of the component.
    */
-  variants?: ComponentVariants
+  variants?: ComponentVariants<M>
 }
 
-export type ComponentMultiBaseStyle = UIMultiStyle
-export type ComponentMultiVariants = Record<string, UIMultiStyle>
-export type ComponentMultiSizes = Record<string, UIMultiStyle>
+export type ComponentMultiBaseStyle<Y extends Dict = Dict> = UIMultiStyle<Y>
+export type ComponentMultiVariants<Y extends Dict = Dict> = Record<
+  string,
+  UIMultiStyle<Y>
+>
+export type ComponentMultiSizes<Y extends Dict = Dict> = Record<
+  string,
+  UIMultiStyle<Y>
+>
 
 export type ComponentMultiStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
@@ -630,15 +659,15 @@ export type ComponentMultiStyle<
   /**
    * The base style of the component.
    */
-  baseStyle?: ComponentMultiBaseStyle
+  baseStyle?: ComponentMultiBaseStyle<M>
   /**
    * The sizes of the component.
    */
-  sizes?: ComponentMultiSizes
+  sizes?: ComponentMultiSizes<M>
   /**
    * The variants of the component.
    */
-  variants?: ComponentMultiVariants
+  variants?: ComponentMultiVariants<M>
 }
 
 export type CSSMap = Dict<{ value: any; var: string; ref: string }>
@@ -652,14 +681,14 @@ export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 export type PropsTheme<T extends object = Dict> = T & {
   themeScheme: Theme["themeSchemes"]
   changeThemeScheme: ChangeThemeScheme
-  __config: ThemeConfig
+  __config: ThemeConfig | undefined
   __cssVars: Dict
   __cssMap: CSSMap
   __breakpoints: AnalyzeBreakpointsReturn
 }
 
 export type StyledTheme<T extends object = Dict> = T & {
-  __config: ThemeConfig
+  __config: ThemeConfig | undefined
   __cssVars: Dict
   __cssMap: CSSMap
   __breakpoints: AnalyzeBreakpointsReturn

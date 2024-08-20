@@ -1,13 +1,14 @@
 import type { StyledTheme } from "../src"
 import {
   transformTheme,
-  generateAnimation,
-  generateGradient,
+  animation,
+  gradient,
   transforms,
   mode,
   keyframes,
   css,
 } from "../src"
+import { pipe } from "../src/config/utils"
 
 const theme = transformTheme(
   {
@@ -266,7 +267,7 @@ describe("transforms", () => {
   })
 
   test("fraction transform", () => {
-    const result = transforms.fraction()(0.5, theme, css)
+    const result = transforms.fraction(0.5)
     expect(result).toBe("50%")
   })
 
@@ -293,7 +294,7 @@ describe("transforms", () => {
 
   test("function transform", () => {
     const result1 = transforms.function("translateX")("100px", theme, css)
-    const result2 = transforms.function("translateX", transforms.px)(
+    const result2 = pipe(transforms.px, transforms.function("translateX"))(
       100,
       theme,
       css,
@@ -394,19 +395,11 @@ describe("utils", () => {
   })
 })
 
-describe("generateGradient", () => {
+describe("gradient", () => {
   test("returns linear gradient CSS string", () => {
-    const result1 = generateGradient(
-      "linear(to-r, #7928CA, #FF0080)",
-      theme,
-      css,
-    )
-    const result2 = generateGradient(
-      "linear(to-r, #7928CA 30%, #FF0080)",
-      theme,
-      css,
-    )
-    const result3 = generateGradient(
+    const result1 = gradient("linear(to-r, #7928CA, #FF0080)", theme, css)
+    const result2 = gradient("linear(to-r, #7928CA 30%, #FF0080)", theme, css)
+    const result3 = gradient(
       "linear(to-r, #7928CA calc(30% - 10px), #FF0080)",
       theme,
       css,
@@ -419,51 +412,47 @@ describe("generateGradient", () => {
   })
 
   test("returns radial gradient CSS string", () => {
-    const result = generateGradient(
-      "radial(circle, #7928CA, #FF0080)",
-      theme,
-      css,
-    )
+    const result = gradient("radial(circle, #7928CA, #FF0080)", theme, css)
     expect(result).toBe("radial-gradient(circle, #7928CA, #FF0080)")
   })
 
   test("returns original value if not a gradient", () => {
-    expect(generateGradient("path/to/image.png", theme, css)).toBe(
+    expect(gradient("path/to/image.png", theme, css)).toBe(
       "url('path/to/image.png')",
     )
   })
 
   test("handles global and null values", () => {
-    expect(generateGradient(null, theme, css)).toBeNull()
-    expect(generateGradient("()", theme, css)).toBe("()")
-    expect(generateGradient("inherit", theme, css)).toBe("inherit")
+    expect(gradient(null, theme, css)).toBeNull()
+    expect(gradient("()", theme, css)).toBe("()")
+    expect(gradient("inherit", theme, css)).toBe("inherit")
   })
 
   test("returns the value as is if the color is empty", () => {
-    expect(generateGradient("linear()", theme, css)).toBe("linear()")
+    expect(gradient("linear()", theme, css)).toBe("linear()")
   })
 
   test("returns the value as is", () => {
     expect(
-      generateGradient("radial-gradient(circle, #7928CA, #FF0080)", theme, css),
+      gradient("radial-gradient(circle, #7928CA, #FF0080)", theme, css),
     ).toBe("radial-gradient(circle, #7928CA, #FF0080)")
   })
 
   test("If the value is incorrect, return the value as is.", () => {
-    expect(generateGradient("()", theme, css)).toBe("()")
-    expect(generateGradient("linear(to-r)", theme, css)).toBe("linear(to-r)")
+    expect(gradient("()", theme, css)).toBe("()")
+    expect(gradient("linear(to-r)", theme, css)).toBe("linear(to-r)")
   })
 
   test("returns the value as is the theme token", () => {
-    expect(generateGradient("var(--ui-gradients-primary)", theme, css)).toBe(
+    expect(gradient("var(--ui-gradients-primary)", theme, css)).toBe(
       "var(--ui-gradients-primary)",
     )
   })
 })
 
-describe("generateAnimation", () => {
+describe("animation", () => {
   test("returns animation CSS string for object notation", () => {
-    const result = generateAnimation(
+    const result = animation(
       {
         keyframes: {
           "0%": {
@@ -486,24 +475,24 @@ describe("generateAnimation", () => {
   })
 
   test("returns animation CSS string for string notation", () => {
-    const result = generateAnimation("gradient1", theme, css)
+    const result = animation("gradient1", theme, css)
     expect(result).toBe("var(--ui-animations-gradient1)")
   })
 
   test("returns animation CSS multi string for string notation", () => {
-    const result = generateAnimation("gradient1, gradient2", theme, css)
+    const result = animation("gradient1, gradient2", theme, css)
     expect(result).toBe(
       "var(--ui-animations-gradient1),var(--ui-animations-gradient2)",
     )
   })
 
   test("handles global values", () => {
-    const result = generateAnimation("inherit", theme, css)
+    const result = animation("inherit", theme, css)
     expect(result).toBe("inherit")
   })
 
   test("returns original value if not an animation", () => {
-    const result = generateAnimation("none", theme, css)
+    const result = animation("none", theme, css)
     expect(result).toBe("none")
   })
 })

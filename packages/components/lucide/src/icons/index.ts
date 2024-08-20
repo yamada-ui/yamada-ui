@@ -286,6 +286,8 @@ export type {
   AmpersandsProps,
   AmpersandsProps as AmpersandsIconProps,
 } from "./ampersands"
+export { Amphora, Amphora as AmphoraIcon } from "./amphora"
+export type { AmphoraProps, AmphoraProps as AmphoraIconProps } from "./amphora"
 export { Anchor, Anchor as AnchorIcon } from "./anchor"
 export type { AnchorProps, AnchorProps as AnchorIconProps } from "./anchor"
 export { Angry, Angry as AngryIcon } from "./angry"
@@ -770,6 +772,8 @@ export { Ban, Ban as BanIcon } from "./ban"
 export type { BanProps, BanProps as BanIconProps } from "./ban"
 export { Banana, Banana as BananaIcon } from "./banana"
 export type { BananaProps, BananaProps as BananaIconProps } from "./banana"
+export { Bandage, Bandage as BandageIcon } from "./bandage"
+export type { BandageProps, BandageProps as BandageIconProps } from "./bandage"
 export { Banknote, Banknote as BanknoteIcon } from "./banknote"
 export type {
   BanknoteProps,
@@ -911,6 +915,11 @@ export { Bike, Bike as BikeIcon } from "./bike"
 export type { BikeProps, BikeProps as BikeIconProps } from "./bike"
 export { Binary, Binary as BinaryIcon } from "./binary"
 export type { BinaryProps, BinaryProps as BinaryIconProps } from "./binary"
+export { Binoculars, Binoculars as BinocularsIcon } from "./binoculars"
+export type {
+  BinocularsProps,
+  BinocularsProps as BinocularsIconProps,
+} from "./binoculars"
 export { Biohazard, Biohazard as BiohazardIcon } from "./biohazard"
 export type {
   BiohazardProps,
@@ -1638,6 +1647,14 @@ export type {
   ChevronsDownProps as ChevronsDownIconProps,
 } from "./chevrons-down"
 export {
+  ChevronsLeftRightEllipsis,
+  ChevronsLeftRightEllipsis as ChevronsLeftRightEllipsisIcon,
+} from "./chevrons-left-right-ellipsis"
+export type {
+  ChevronsLeftRightEllipsisProps,
+  ChevronsLeftRightEllipsisProps as ChevronsLeftRightEllipsisIconProps,
+} from "./chevrons-left-right-ellipsis"
+export {
   ChevronsLeftRight,
   ChevronsLeftRight as ChevronsLeftRightIcon,
 } from "./chevrons-left-right"
@@ -1851,6 +1868,14 @@ export type {
   CircleEqualProps,
   CircleEqualProps as CircleEqualIconProps,
 } from "./circle-equal"
+export {
+  CircleFadingArrowUp,
+  CircleFadingArrowUp as CircleFadingArrowUpIcon,
+} from "./circle-fading-arrow-up"
+export type {
+  CircleFadingArrowUpProps,
+  CircleFadingArrowUpProps as CircleFadingArrowUpIconProps,
+} from "./circle-fading-arrow-up"
 export {
   CircleFadingPlus,
   CircleFadingPlus as CircleFadingPlusIcon,
@@ -2606,6 +2631,11 @@ export { Equal, Equal as EqualIcon } from "./equal"
 export type { EqualProps, EqualProps as EqualIconProps } from "./equal"
 export { Eraser, Eraser as EraserIcon } from "./eraser"
 export type { EraserProps, EraserProps as EraserIconProps } from "./eraser"
+export { EthernetPort, EthernetPort as EthernetPortIcon } from "./ethernet-port"
+export type {
+  EthernetPortProps,
+  EthernetPortProps as EthernetPortIconProps,
+} from "./ethernet-port"
 export { Euro, Euro as EuroIcon } from "./euro"
 export type { EuroProps, EuroProps as EuroIconProps } from "./euro"
 export { Expand, Expand as ExpandIcon } from "./expand"
@@ -3658,6 +3688,8 @@ export type {
   IceCreamConeProps,
   IceCreamConeProps as IceCreamConeIconProps,
 } from "./ice-cream-cone"
+export { IdCard, IdCard as IdCardIcon } from "./id-card"
+export type { IdCardProps, IdCardProps as IdCardIconProps } from "./id-card"
 export { ImageDown, ImageDown as ImageDownIcon } from "./image-down"
 export type {
   ImageDownProps,
@@ -4131,11 +4163,68 @@ export { Mailbox, Mailbox as MailboxIcon } from "./mailbox"
 export type { MailboxProps, MailboxProps as MailboxIconProps } from "./mailbox"
 export { Mails, Mails as MailsIcon } from "./mails"
 export type { MailsProps, MailsProps as MailsIconProps } from "./mails"
+export {
+  MapPinCheckInside,
+  MapPinCheckInside as MapPinCheckInsideIcon,
+} from "./map-pin-check-inside"
+export type {
+  MapPinCheckInsideProps,
+  MapPinCheckInsideProps as MapPinCheckInsideIconProps,
+} from "./map-pin-check-inside"
+export { MapPinCheck, MapPinCheck as MapPinCheckIcon } from "./map-pin-check"
+export type {
+  MapPinCheckProps,
+  MapPinCheckProps as MapPinCheckIconProps,
+} from "./map-pin-check"
+export { MapPinHouse, MapPinHouse as MapPinHouseIcon } from "./map-pin-house"
+export type {
+  MapPinHouseProps,
+  MapPinHouseProps as MapPinHouseIconProps,
+} from "./map-pin-house"
+export {
+  MapPinMinusInside,
+  MapPinMinusInside as MapPinMinusInsideIcon,
+} from "./map-pin-minus-inside"
+export type {
+  MapPinMinusInsideProps,
+  MapPinMinusInsideProps as MapPinMinusInsideIconProps,
+} from "./map-pin-minus-inside"
+export { MapPinMinus, MapPinMinus as MapPinMinusIcon } from "./map-pin-minus"
+export type {
+  MapPinMinusProps,
+  MapPinMinusProps as MapPinMinusIconProps,
+} from "./map-pin-minus"
 export { MapPinOff, MapPinOff as MapPinOffIcon } from "./map-pin-off"
 export type {
   MapPinOffProps,
   MapPinOffProps as MapPinOffIconProps,
 } from "./map-pin-off"
+export {
+  MapPinPlusInside,
+  MapPinPlusInside as MapPinPlusInsideIcon,
+} from "./map-pin-plus-inside"
+export type {
+  MapPinPlusInsideProps,
+  MapPinPlusInsideProps as MapPinPlusInsideIconProps,
+} from "./map-pin-plus-inside"
+export { MapPinPlus, MapPinPlus as MapPinPlusIcon } from "./map-pin-plus"
+export type {
+  MapPinPlusProps,
+  MapPinPlusProps as MapPinPlusIconProps,
+} from "./map-pin-plus"
+export {
+  MapPinXInside,
+  MapPinXInside as MapPinXInsideIcon,
+} from "./map-pin-x-inside"
+export type {
+  MapPinXInsideProps,
+  MapPinXInsideProps as MapPinXInsideIconProps,
+} from "./map-pin-x-inside"
+export { MapPinX, MapPinX as MapPinXIcon } from "./map-pin-x"
+export type {
+  MapPinXProps,
+  MapPinXProps as MapPinXIconProps,
+} from "./map-pin-x"
 export { MapPin, MapPin as MapPinIcon } from "./map-pin"
 export type { MapPinProps, MapPinProps as MapPinIconProps } from "./map-pin"
 export { MapPinned, MapPinned as MapPinnedIcon } from "./map-pinned"
@@ -4405,6 +4494,11 @@ export type {
 } from "./mic-vocal"
 export { Mic, Mic as MicIcon } from "./mic"
 export type { MicProps, MicProps as MicIconProps } from "./mic"
+export { Microchip, Microchip as MicrochipIcon } from "./microchip"
+export type {
+  MicrochipProps,
+  MicrochipProps as MicrochipIconProps,
+} from "./microchip"
 export { Microscope, Microscope as MicroscopeIcon } from "./microscope"
 export type {
   MicroscopeProps,
@@ -4727,6 +4821,8 @@ export type {
 } from "./octagon-x"
 export { Octagon, Octagon as OctagonIcon } from "./octagon"
 export type { OctagonProps, OctagonProps as OctagonIconProps } from "./octagon"
+export { Omega, Omega as OmegaIcon } from "./omega"
+export type { OmegaProps, OmegaProps as OmegaIconProps } from "./omega"
 export { Option, Option as OptionIcon } from "./option"
 export type { OptionProps, OptionProps as OptionIconProps } from "./option"
 export { Orbit, Orbit as OrbitIcon } from "./orbit"
@@ -6268,6 +6364,11 @@ export type {
   SquareSplitVerticalProps,
   SquareSplitVerticalProps as SquareSplitVerticalIconProps,
 } from "./square-split-vertical"
+export { SquareSquare, SquareSquare as SquareSquareIcon } from "./square-square"
+export type {
+  SquareSquareProps,
+  SquareSquareProps as SquareSquareIconProps,
+} from "./square-square"
 export { SquareStack, SquareStack as SquareStackIcon } from "./square-stack"
 export type {
   SquareStackProps,
@@ -6441,6 +6542,14 @@ export type {
   TableColumnsSplitProps,
   TableColumnsSplitProps as TableColumnsSplitIconProps,
 } from "./table-columns-split"
+export {
+  TableOfContents,
+  TableOfContents as TableOfContentsIcon,
+} from "./table-of-contents"
+export type {
+  TableOfContentsProps,
+  TableOfContentsProps as TableOfContentsIconProps,
+} from "./table-of-contents"
 export {
   TableProperties,
   TableProperties as TablePropertiesIcon,
@@ -6619,6 +6728,8 @@ export { TicketX, TicketX as TicketXIcon } from "./ticket-x"
 export type { TicketXProps, TicketXProps as TicketXIconProps } from "./ticket-x"
 export { Ticket, Ticket as TicketIcon } from "./ticket"
 export type { TicketProps, TicketProps as TicketIconProps } from "./ticket"
+export { Tickets, Tickets as TicketsIcon } from "./tickets"
+export type { TicketsProps, TicketsProps as TicketsIconProps } from "./tickets"
 export { TimerOff, TimerOff as TimerOffIcon } from "./timer-off"
 export type {
   TimerOffProps,

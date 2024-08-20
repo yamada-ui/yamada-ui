@@ -15,7 +15,7 @@ tab: テーマ
 :::
 
 ```ts
-export const Rating: ComponentMultiStyle = {
+export const Rating: ComponentMultiStyle<"Rating"> = {
   baseStyle: ({ colorScheme: c = "yellow" }) => ({
     container: {
       w: "max-content",

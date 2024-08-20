@@ -159,7 +159,7 @@ const ControlIcon: FC<ControlIconProps> = memo(
     return (
       <Tooltip label={label} placement="top">
         <IconButton
-          icon={<Icon size="md" color="muted" />}
+          icon={<Icon fontSize="md" color="muted" />}
           variant="ghost"
           {...rest}
         />

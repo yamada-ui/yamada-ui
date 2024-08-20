@@ -56,7 +56,7 @@ tab: Props
 <PropsCard
   id="areachart-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
@@ -98,6 +98,13 @@ tab: Props
   name="gridProps"
   type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
   description={"Props passed down to recharts 'CartesianGrid' component."}
+/>
+
+<PropsCard
+  id="areachart-labelformatter"
+  name="labelFormatter"
+  type="(label: string) => string"
+  description={"A function to format labels on inside the tooltip."}
 />
 
 <PropsCard
@@ -203,8 +210,8 @@ tab: Props
 <PropsCard
   id="areachart-valueformatter"
   name="valueFormatter"
-  type="(value: number) => string"
-  description={"A function to format values on Y axis and inside the tooltip"}
+  type="(value: any) => string"
+  description={"A function to format values on inside the tooltip."}
 />
 
 <PropsCard
@@ -293,6 +300,13 @@ tab: Props
 />
 
 <PropsCard
+  id="areachart-xaxistickformatter"
+  name="xAxisTickFormatter"
+  type="(value: any) => string"
+  description={"A function to format X axis tick."}
+/>
+
+<PropsCard
   id="areachart-yaxislabel"
   name="yAxisLabel"
   type="string"
@@ -311,6 +325,13 @@ tab: Props
   name="yAxisProps"
   type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
   description={"Props passed down to recharts 'YAxis' component."}
+/>
+
+<PropsCard
+  id="areachart-yaxistickformatter"
+  name="yAxisTickFormatter"
+  type="(value: any) => string"
+  description={"A function to format Y axis tick."}
 />
 
 ### AreaProps

@@ -49,7 +49,7 @@ tab: Props
 <PropsCard
   id="radarchart-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
@@ -75,6 +75,13 @@ tab: Props
 />
 
 <PropsCard
+  id="radarchart-polarangleaxistickformatter"
+  name="polarAngleAxisTickFormatter"
+  type="(value: number) => string"
+  description={"A function to format Y axis tick."}
+/>
+
+<PropsCard
   id="radarchart-polarangleaxistickprops"
   name="polarAngleAxisTickProps"
   type="CSSUIProps"
@@ -95,6 +102,13 @@ tab: Props
   name="polarRadiusAxisProps"
   type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "id" | "role" | "tabIndex" | "ref" | "clipPath" | "color" | "cursor" | "direction" | "display" | ... 245 more ... | keyof PolarRadiusAxisProps> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PolarRadiusAxisProps'
   description={"Props passed down to recharts `PolarRadiusAxis` component."}
+/>
+
+<PropsCard
+  id="radarchart-polarradiusaxistickformatter"
+  name="polarRadiusAxisTickFormatter"
+  type="(value: number) => string"
+  description={"A function to format X axis tick."}
 />
 
 <PropsCard
@@ -148,8 +162,8 @@ tab: Props
 <PropsCard
   id="radarchart-valueformatter"
   name="valueFormatter"
-  type="(value: number) => string"
-  description={"A function to format values on Y axis and inside the tooltip."}
+  type="(value: any) => string"
+  description={"A function to format values on inside the tooltip."}
 />
 
 <PropsCard

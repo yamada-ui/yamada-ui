@@ -19,5 +19,6 @@ tab: テーマ
 :::
 
 ```ts
-export const RangeSlider: ComponentMultiStyle = mergeMultiStyle(Slider)()
+export const RangeSlider: ComponentMultiStyle<"RangeSlider"> =
+  mergeMultiStyle(Slider)()
 ```

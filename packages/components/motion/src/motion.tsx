@@ -1,37 +1,19 @@
-import type { HTMLUIProps } from "@yamada-ui/core"
-import { ui, forwardRef } from "@yamada-ui/core"
+import { ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { HTMLMotionProps } from "framer-motion"
 import { motion } from "framer-motion"
-import type { ReactHTML } from "react"
-import type { MotionAs } from "./motion.types"
-
-type MotionOptions = {
-  as?: MotionAs
-}
-
-type BaseMotionProps<Y extends keyof ReactHTML = "div"> = Omit<
-  HTMLMotionProps<Y>,
-  "color"
-> &
-  MotionOptions
-
-export type MotionProps<Y extends keyof ReactHTML = "div"> = Omit<
-  HTMLUIProps<Y>,
-  keyof BaseMotionProps<Y>
-> &
-  BaseMotionProps<Y>
+import { motionForwardRef } from "./motion-forward-ref"
+import type { MotionProps } from "./motion.types"
 
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
  * @see Docs https://yamada-ui.com/components/other/motion
  */
-export const Motion = forwardRef<MotionProps, "div", false>(
-  ({ as = "div", className, ...rest }, ref) => {
+export const Motion = motionForwardRef<MotionProps, "div">(
+  ({ as, className, ...rest }, ref) => {
     return (
       <ui.div
-        as={motion[as]}
+        as={motion[as ?? "div"]}
         ref={ref}
         className={cx("ui-motion", className)}
         {...rest}
@@ -39,3 +21,5 @@ export const Motion = forwardRef<MotionProps, "div", false>(
     )
   },
 )
+
+Motion.displayName = "Motion"

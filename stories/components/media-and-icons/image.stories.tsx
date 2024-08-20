@@ -14,7 +14,7 @@ export const basic: Story = () => {
   return (
     <Image
       src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
-      size="xl"
+      boxSize="xl"
       alt="ドラゴンボール"
     />
   )
@@ -25,7 +25,7 @@ export const withFallback: Story = () => {
     <Image
       src="https://not-found.com/not-found.png"
       fallback="https://via.placeholder.com/512"
-      size="xl"
+      boxSize="xl"
       alt="Not found"
     />
   )

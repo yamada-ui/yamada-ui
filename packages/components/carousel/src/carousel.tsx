@@ -14,7 +14,6 @@ import {
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
 import {
-  calc,
   cx,
   filterUndefined,
   findChildren,
@@ -343,9 +342,8 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     ...styles.inner,
     ...(includeGapInSize
       ? {
-          var: [{ __prefix: "ui", name: "gap", token: "spaces", value: gap }],
-          [orientation === "vertical" ? "mb" : "mr"]:
-            calc.negate("var(--ui-gap)"),
+          var: [{ name: "gap", token: "spaces", value: gap }],
+          [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * !-1)",
         }
       : {}),
   }

@@ -7,7 +7,8 @@ import {
   useDragControls,
 } from "@yamada-ui/motion"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
-import type { ForwardedRef, ReactNode } from "react"
+import type { Merge } from "@yamada-ui/utils"
+import type { ForwardedRef, PropsWithChildren, ReactNode } from "react"
 import { forwardRef, useCallback, useEffect, useState } from "react"
 import { useReorderContext } from "./reorder"
 
@@ -35,10 +36,10 @@ type ReorderItemOptions<Y extends any = string> = {
 }
 
 export type ReorderItemProps<Y extends any = string> = Omit<
-  HTMLUIProps<"li">,
-  "as" | "value"
+  Merge<HTMLUIProps<"li">, HTMLMotionProps<"li">>,
+  "value" | "children"
 > &
-  Omit<HTMLMotionProps<"li">, "as" | "layout" | "value"> &
+  PropsWithChildren &
   ReorderItemOptions<Y>
 
 export const ReorderItem = forwardRef(

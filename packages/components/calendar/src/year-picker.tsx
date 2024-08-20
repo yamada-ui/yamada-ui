@@ -5,6 +5,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverContent } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
@@ -40,6 +41,10 @@ type YearPickerOptions = {
    * Props for year picker container element.
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
+   * Props for year picker container element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
   /**
    * Props for year picker field element.
    */
@@ -87,6 +92,7 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    contentProps,
     fieldProps,
     inputProps,
     iconProps,
@@ -145,11 +151,13 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
+              as="div"
               id={id}
               role="dialog"
               aria-modal="true"
-              className="ui-year-picker__popover"
-              __css={{ ...styles.list }}
+              className="ui-year-picker__content"
+              __css={{ ...styles.content }}
+              {...contentProps}
             >
               <Calendar
                 className="ui-year-picker__calendar"

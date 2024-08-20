@@ -38,7 +38,7 @@ export const basic: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -85,7 +85,7 @@ export const withRoot: Story = () => {
 
             if (index >= 5) finish()
           }}
-          loading={<Loading size="2xl" />}
+          loading={<Loading fontSize="2xl" />}
         >
           {Array(count)
             .fill(0)
@@ -123,7 +123,7 @@ export const withRootMargin: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
       rootMargin="300px 0px 0px 0px"
     >
       {Array(count)
@@ -158,7 +158,7 @@ export const withThreshold: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
       threshold={1}
     >
       {Array(count)
@@ -196,7 +196,7 @@ export const withInitialLoad: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -233,7 +233,7 @@ export const withOverflow: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -270,7 +270,7 @@ export const withOrientation: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
     >
       {Array(count)
         .fill(0)
@@ -304,7 +304,7 @@ export const withStartIndex: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
       startIndex={3}
     >
       {Array(count)
@@ -339,7 +339,7 @@ export const withFinish: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
       finish={<>Finished</>}
     >
       {Array(count)
@@ -374,7 +374,7 @@ export const isReverse: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
       isReverse
     >
       {Array(count)
@@ -416,7 +416,7 @@ export const isDisabled: Story = () => {
 
           if (index >= 5) finish()
         }}
-        loading={<Loading size="2xl" />}
+        loading={<Loading fontSize="2xl" />}
         isDisabled={isDisabled}
       >
         {Array(count)
@@ -466,7 +466,7 @@ export const useReset: Story = () => {
 
           if (index >= 5) finish()
         }}
-        loading={<Loading size="2xl" />}
+        loading={<Loading fontSize="2xl" />}
         resetRef={resetRef}
       >
         {Array(count)
@@ -506,7 +506,7 @@ export const customTrigger: Story = () => {
 
         if (index >= 5) finish()
       }}
-      loading={<Loading size="2xl" />}
+      loading={<Loading fontSize="2xl" />}
       triggerProps={{ bg: "primary.50", p: "md", rounded: "md" }}
     >
       {Array(count)

@@ -1,21 +1,12 @@
+import type { Merge } from "@yamada-ui/utils"
 import * as React from "react"
-import type {
-  As,
-  Component,
-  IntersectionProps,
-  PropsOf,
-} from "./component.types"
+import type { As, Component, WithoutAs } from "./component.types"
 
-export const forwardRef = <
-  Props extends object,
-  Element extends As,
-  withAs extends boolean = true,
->(
+export const forwardRef = <Y extends object, M extends As>(
   component: React.ForwardRefRenderFunction<
     any,
-    IntersectionProps<PropsOf<Element>, Props> &
-      (withAs extends true ? { as?: As } : {})
+    Merge<React.ComponentPropsWithoutRef<M>, WithoutAs<Y>> & { as?: As }
   >,
 ) => {
-  return React.forwardRef(component) as unknown as Component<Element, Props>
+  return React.forwardRef(component) as unknown as Component<M, Y>
 }

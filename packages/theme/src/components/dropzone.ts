@@ -12,6 +12,7 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       rounded: "md",
       w: "100%",
+      p: "md",
       bg: ["blackAlpha.50", "whiteAlpha.50"],
       outline: 0,
       overflow: "hidden",
@@ -38,7 +39,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
         borderColor: ["danger.500", "danger.400"],
       },
     },
-
     overlay: {
       bg: ["whiteAlpha.600", "blackAlpha.600"],
       zIndex: "kurillin",

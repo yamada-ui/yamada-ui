@@ -15,8 +15,11 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
       inner: {
         position: "relative",
       },
-      list: {
+      header: {},
+      content: {
         w: "100%",
+      },
+      list: {
         maxH: "xs",
         overflowY: "auto",
       },
@@ -30,6 +33,7 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
         pointerEvents: "none",
         cursor: "pointer",
       },
+      footer: {},
       item: {
         textDecoration: "none",
         color: "inherit",

@@ -5,11 +5,18 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { cx, handlerAll } from "@yamada-ui/utils"
-import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
+import { cx, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import type {
+  CSSProperties,
+  FC,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+} from "react"
 import { cloneElement, useMemo } from "react"
 import type { AutocompleteCreateProps } from "./autocomplete-create"
 import type { AutocompleteEmptyProps } from "./autocomplete-empty"
@@ -68,6 +75,10 @@ type MultiAutocompleteOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for multi autocomplete content element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
+  /**
    * Props for multi autocomplete list element.
    */
   listProps?: Omit<AutocompleteListProps, "children">
@@ -111,6 +122,14 @@ type MultiAutocompleteOptions = {
    * Props for autocomplete empty element.
    */
   emptyProps?: Omit<AutocompleteEmptyProps, "children">
+  /**
+   * The header of the autocomplete content element.
+   */
+  header?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
+  /**
+   * The footer of the autocomplete content element.
+   */
+  footer?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
 }
 
 export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
@@ -142,6 +161,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       closeOnSelect = false,
       keepPlaceholder = false,
       containerProps,
+      contentProps,
       listProps,
       fieldProps,
       inputProps,
@@ -150,12 +170,15 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
       portalProps = { isDisabled: true },
       createProps,
       emptyProps,
+      header,
+      footer,
       children,
       ...computedProps
     } = omitThemeProps(mergedProps)
 
     const {
       value,
+      onClose,
       descendants,
       formControlProps,
       getPopoverProps,
@@ -188,6 +211,7 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
           value={{
             ...rest,
             value,
+            onClose,
             formControlProps,
             inputValue,
             allowCreate,
@@ -228,7 +252,12 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
 
               {!isEmpty ? (
                 <Portal {...portalProps}>
-                  <AutocompleteList {...listProps}>
+                  <AutocompleteList
+                    header={runIfFunc(header, { value, onClose })}
+                    footer={runIfFunc(footer, { value, onClose })}
+                    contentProps={contentProps}
+                    {...listProps}
+                  >
                     {allowCreate ? (
                       <AutocompleteCreate {...createProps} />
                     ) : (
@@ -240,7 +269,12 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
                 </Portal>
               ) : (
                 <Portal {...portalProps}>
-                  <AutocompleteList {...listProps}>
+                  <AutocompleteList
+                    header={runIfFunc(header, { value, onClose })}
+                    footer={runIfFunc(footer, { value, onClose })}
+                    contentProps={contentProps}
+                    {...listProps}
+                  >
                     {allowCreate && inputValue ? (
                       <AutocompleteCreate {...createProps} />
                     ) : (

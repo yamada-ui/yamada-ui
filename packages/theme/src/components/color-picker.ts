@@ -63,11 +63,9 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
           boxShadow: "outline",
         },
       },
-      list: {
+      content: {
         w: "auto",
         minW: "auto",
-        maxH: "inherit",
-        overflowY: "inherit",
         p: "2",
       },
     },
@@ -128,6 +126,7 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
     "addon",
     "element",
     "button",
+    "list",
     "item",
     "command",
     "icon",

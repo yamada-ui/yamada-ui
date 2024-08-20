@@ -10,10 +10,7 @@ import {
   omitThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
-import type {
-  HTMLMotionProps,
-  MotionTransitionProperties,
-} from "@yamada-ui/motion"
+import type { HTMLMotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import { motion, AnimatePresence } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
@@ -119,7 +116,7 @@ type TooltipOptions = {
   /**
    * The animation duration.
    */
-  duration?: MotionTransitionProperties["duration"]
+  duration?: MotionTransitionProps["duration"]
   /**
    * Props for portal component.
    */

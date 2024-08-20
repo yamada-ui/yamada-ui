@@ -7,6 +7,7 @@ import {
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon, CloseIcon } from "@yamada-ui/icon"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
@@ -47,6 +48,10 @@ type DatePickerOptions = {
    * Props for date picker container element.
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
+  /**
+   * Props for month picker container element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
   /**
    * Props for date picker field element.
    */
@@ -94,6 +99,7 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    contentProps,
     fieldProps,
     inputProps,
     iconProps,
@@ -149,11 +155,13 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
 
           <Portal {...portalProps}>
             <PopoverContent
+              as="div"
               id={id}
               role="dialog"
               aria-modal="true"
-              className="ui-date-picker__popover"
-              __css={{ ...styles.list }}
+              className="ui-date-picker__content"
+              __css={{ ...styles.content }}
+              {...contentProps}
             >
               <Calendar
                 className="ui-date-picker__calendar"

@@ -226,7 +226,7 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
     >
       <Loading
         className="ui-dropzone__overlay__loading"
-        size="4xl"
+        fontSize="4xl"
         {...loadingProps}
       />
     </Fade>

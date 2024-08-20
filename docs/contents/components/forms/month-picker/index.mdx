@@ -299,9 +299,10 @@ To customize the icon, set `props` to `iconProps`.
 </VStack>
 ```
 
-### Add Children
+### Add elements to a dropdown
 
-To add custom content, insert children elements into the `MonthPicker` component.
+To add elements to a dropdown, set the elements to the `children` property.
+The `children` are provided with `value` and `onClose` methods, which can be used to access the internal state.
 
 ```tsx
 <VStack>

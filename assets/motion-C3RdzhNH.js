@@ -1,0 +1,1 @@
+import{j as m}from"./jsx-runtime-Nms4Y4qS.js";import{r as a}from"./index-BwDkhjyp.js";import{m as i}from"./motion-Bd6WkMzw.js";import{b as n,c as e}from"./factory-CUXX-tpD.js";const p=o=>a.forwardRef(o),f=p(({as:o,className:r,...t},s)=>m.jsx(n.div,{as:i[o??"div"],ref:s,className:e("ui-motion",r),...t}));f.displayName="Motion";export{f as M,p as m};

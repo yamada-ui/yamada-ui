@@ -7,7 +7,7 @@ export default {
 export const basic = () => {
   return (
     <Center
-      w="calc(lg - sm)"
+      w="calc(lg / 2)"
       bg="primary"
       p="calc(md + md)"
       rounded="md"
@@ -21,7 +21,7 @@ export const basic = () => {
 export const nested = () => {
   return (
     <Center
-      w="calc(lg - calc(2xs + 2xs))"
+      w="calc(lg - calc(2xs * 2))"
       bg="primary"
       p="calc(md + md)"
       rounded="md"
@@ -32,16 +32,16 @@ export const nested = () => {
   )
 }
 
-export const notUseToken = () => {
+export const useNumericToken = () => {
   return (
     <Center
-      w="calc(100% / !2)"
+      w="calc(100% / $spaces.2)"
       bg="primary"
       p="calc(md + md)"
       rounded="md"
       color="white"
     >
-      Use "!"
+      Use "$"
     </Center>
   )
 }

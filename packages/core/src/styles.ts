@@ -527,9 +527,27 @@ export const standardStyles: StyleConfigs = {
   },
   grid: true,
   gridArea: true,
-  gridAutoColumns: true,
+  gridAutoColumns: {
+    properties: "gridAutoColumns",
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.grid,
+    ),
+  },
   gridAutoFlow: true,
-  gridAutoRows: true,
+  gridAutoRows: {
+    properties: "gridAutoRows",
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.grid,
+    ),
+  },
   gridColumn: true,
   gridColumnEnd: true,
   gridColumnStart: true,
@@ -538,8 +556,26 @@ export const standardStyles: StyleConfigs = {
   gridRowStart: true,
   gridTemplate: true,
   gridTemplateAreas: true,
-  gridTemplateColumns: true,
-  gridTemplateRows: true,
+  gridTemplateColumns: {
+    properties: "gridTemplateColumns",
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.grid,
+    ),
+  },
+  gridTemplateRows: {
+    properties: "gridTemplateRows",
+    token: "sizes",
+    transform: pipe(
+      transforms.token("sizes"),
+      transforms.fraction,
+      transforms.px,
+      transforms.grid,
+    ),
+  },
   hangingPunctuation: true,
   height: {
     properties: "height",
@@ -1545,7 +1581,7 @@ export const standardStyles: StyleConfigs = {
     transform: transforms.function("saturate"),
   },
   sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
-  backdropFilter: { transform: transforms.function("backdrop") },
+  backdropFilter: { transform: transforms.filter("backdrop") },
   backdropBlur: {
     properties: "--ui-backdrop-blur",
     token: "blurs",
@@ -3369,7 +3405,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
    */
-  gridAutoColumns?: Token<CSS.Property.GridAutoColumns>
+  gridAutoColumns?: Token<CSS.Property.GridAutoColumns | number, "sizes">
   /**
    * The CSS `grid-auto-flow` property.
    *
@@ -3381,7 +3417,7 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
    */
-  gridAutoRows?: Token<CSS.Property.GridAutoRows>
+  gridAutoRows?: Token<CSS.Property.GridAutoRows | number, "sizes">
   /**
    * The CSS `grid-column` property.
    *
@@ -3435,13 +3471,16 @@ export type StyleProps = {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
    */
-  gridTemplateColumns?: Token<CSS.Property.GridTemplateColumns>
+  gridTemplateColumns?: Token<
+    CSS.Property.GridTemplateColumns | number,
+    "sizes"
+  >
   /**
    * The CSS `grid-template-rows` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
    */
-  gridTemplateRows?: Token<CSS.Property.GridTemplateRows>
+  gridTemplateRows?: Token<CSS.Property.GridTemplateRows | number, "sizes">
   /**
    * The CSS `hanging-punctuation` property.
    *

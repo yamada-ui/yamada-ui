@@ -15,6 +15,25 @@ tab: Usage
 `@yamada-ui/fontawesome` is not included in `@yamada-ui/react`, so it needs to be installed separately.
 :::
 
+Import the necessary packages from [Font Awesome](https://fontawesome.com).
+
+<SelectPackageManagers
+  packages={[
+    {
+      name: "@fortawesome/free-solid-svg-icons",
+      isDefaultCheck: true,
+    },
+    {
+      name: "@fortawesome/free-regular-svg-icons",
+      isDefaultCheck: true,
+    },
+    {
+      name: "@fortawesome/free-brands-svg-icons",
+      isDefaultCheck: true,
+    },
+  ]}
+/>
+
 ```ts
 import { Icon as FontAwesomeIcon } from "@yamada-ui/fontawesome"
 ```

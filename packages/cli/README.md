@@ -1,7 +1,5 @@
 # @yamada-ui/cli
 
-Generate TypeScript types to provide autocomplete for your custom theme.
-
 ## Installation
 
 ```sh
@@ -19,18 +17,6 @@ or
 ```sh
 $ npm install @yamada-ui/cli
 ```
-
-## Usage
-
-```sh
-pnpm yamada-cli token <path/to/your/theme.(js|ts)>
-```
-
-### Options
-
-- `--out <path>` output file to node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts
-- `--watch [path]` Watch directory for changes and rebuild
-- `--help` display help for command
 
 ## Contribution
 

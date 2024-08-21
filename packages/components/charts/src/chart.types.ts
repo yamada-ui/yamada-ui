@@ -151,3 +151,7 @@ export type ChartTooltipProps = Recharts.TooltipProps<
 export type ChartTooltip =
   | ReactElement
   | ((props: ChartTooltipProps) => ReactNode)
+
+export type ChartLabelProps = Omit<React.SVGProps<SVGTextElement>, "viewBox"> &
+  LabelProps
+export type ChartLabel = ReactElement | ((props: ChartLabelProps) => ReactNode)

@@ -446,7 +446,13 @@ export const customLabel: Story = () => {
   return (
     <DonutChart
       data={data}
-      labelProps={{ value: "DonutChart", position: "center" }}
+      labelProps={{
+        value: "DonutChart",
+        position: "center",
+        fill: ["black", "white"],
+        fontSize: "md",
+        fontWeight: "bold",
+      }}
     />
   )
 }

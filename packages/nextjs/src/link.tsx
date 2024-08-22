@@ -5,17 +5,13 @@ import {
   omitThemeProps,
   useComponentStyle,
 } from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import type { LinkProps as NextLinkProps } from "next/link"
 import NextLink from "next/link"
 
-type LegacyProps = "as" | "legacyBehavior" | "passHref"
-
-export type LinkProps = Omit<
-  HTMLUIProps<"a"> & ThemeProps<"Link">,
-  keyof Omit<NextLinkProps, LegacyProps>
-> &
-  Omit<NextLinkProps, LegacyProps>
+export type LinkProps = Merge<HTMLUIProps<"a">, Omit<NextLinkProps, "as">> &
+  ThemeProps<"Link">
 
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)
@@ -24,11 +20,11 @@ export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   return (
     <ui.a
       ref={ref}
+      as={NextLink}
       className={cx("ui-link", className)}
-      href={href as any}
+      href={href}
       __css={css}
       {...rest}
-      as={NextLink}
     />
   )
 })

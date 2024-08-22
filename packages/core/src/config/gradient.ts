@@ -20,7 +20,7 @@ const directions: Record<string, string> = {
 
 const directionValues = new Set(Object.values(directions))
 
-export const generateGradient: Transform = (value, theme) => {
+export const gradient: Transform = (value, theme) => {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)

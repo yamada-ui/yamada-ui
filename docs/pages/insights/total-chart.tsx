@@ -28,13 +28,13 @@ import {
   getTrend,
   INSIGHT_SCORE_COLORS,
   INSIGHT_USER_IDS,
-  labelFormatter,
   randomIndex,
   xAxisTickFormatter,
 } from "./insights-utils"
 import { useI18n } from "contexts"
 import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
 import { CountUp } from "components/transitions"
+import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
 
 export type TotalChartProps = StackProps & {
@@ -178,6 +178,7 @@ TotalChart.displayName = "TotalChart"
 type AreaChartProps = {}
 
 const AreaChart: FC<AreaChartProps> = memo(() => {
+  const { locale } = useI18n()
   const { currentInsights, users, period } = useInsights()
   const { theme } = useTheme()
   const { colorSchemes = [] } = theme
@@ -216,11 +217,13 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
       series={series}
       dataKey="period"
       curveType="linear"
-      labelFormatter={(label) => labelFormatter(label, period)}
-      xAxisTickFormatter={(value) => xAxisTickFormatter(value, period)}
+      xAxisTickFormatter={(value) => xAxisTickFormatter(value, period)(locale)}
       fillOpacity={[0.8, 0.7]}
       withDots={false}
-      withActiveDots={false}
+      withActiveDots={true}
+      tooltipProps={{
+        content: ChartTooltip,
+      }}
     />
   )
 })
@@ -293,7 +296,16 @@ const BarChart: FC<BarChartProps> = memo(() => {
     [],
   )
 
-  return <UIBarChart data={data} series={series} dataKey="user" />
+  return (
+    <UIBarChart
+      data={data}
+      series={series}
+      dataKey="user"
+      tooltipProps={{
+        content: ChartTooltip,
+      }}
+    />
+  )
 })
 
 BarChart.displayName = "BarChart"

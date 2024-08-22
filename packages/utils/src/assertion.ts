@@ -10,8 +10,9 @@ export const isNotNumber = (value: any): boolean =>
   typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
 
 export const isNumeric = (value: any): boolean =>
-  value != null &&
-  parseFloat(value.toString()) - parseFloat(value.toString()) + 1 >= 0
+  !isNaN(parseFloat(String(value))) &&
+  isFinite(Number(value)) &&
+  /^-?\d*\.?\d+$/.test(String(value))
 
 export const isString = (value: any): value is string =>
   Object.prototype.toString.call(value) === "[object String]"

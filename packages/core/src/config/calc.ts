@@ -1,3 +1,4 @@
+import { isNumeric } from "@yamada-ui/utils"
 import type { ThemeToken } from "../theme"
 import {
   getCSSFunction,
@@ -10,7 +11,7 @@ import {
 const OPERATORS = ["+", "-", "*", "/"]
 
 const getValue =
-  (value: string | undefined, fallbackValue: string = "100%"): Transform =>
+  (value: string | undefined, fallbackValue: string = ""): Transform =>
   (token, theme, ...rest) => {
     if (!value) return fallbackValue
 
@@ -19,7 +20,7 @@ const getValue =
     if (prevent) {
       return generateCalc(token)(value, theme, ...rest)
     } else {
-      if (value.startsWith("!")) return value.slice(1)
+      if (isNumeric(value)) return value
 
       const resolvedToken = `${token}.${value}`
 
@@ -64,8 +65,8 @@ export const generateCalc =
       case "max": {
         let [firstValue, secondValue, ...otherValues] = splitValues(values)
 
-        firstValue = getValue(firstValue)(token, theme, ...rest)
-        secondValue = getValue(secondValue)(token, theme, ...rest)
+        firstValue = getValue(firstValue, "100%")(token, theme, ...rest)
+        secondValue = getValue(secondValue, "100%")(token, theme, ...rest)
         otherValues = otherValues.map((value) =>
           getValue(value)(token, theme, ...rest),
         )
@@ -87,10 +88,27 @@ export const generateCalc =
         }
 
         min = getValue(min)(token, theme, ...rest)
-        preferred = getValue(preferred)(token, theme, ...rest)
+        preferred = getValue(preferred, "100%")(token, theme, ...rest)
         max = getValue(max)(token, theme, ...rest)
 
         return `clamp(${min}, ${preferred}, ${max})`
+      }
+
+      case "minmax": {
+        let [min, max] = splitValues(values)
+
+        min = getValue(min)(token, theme, ...rest)
+        max = getValue(max)(token, theme, ...rest)
+
+        return `minmax(${min}, ${max})`
+      }
+
+      case "fit-content": {
+        let [value] = splitValues(values)
+
+        value = getValue(value)(token, theme, ...rest)
+
+        return `fit-content(${value})`
       }
 
       default:

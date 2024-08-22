@@ -98,6 +98,10 @@ export const tokens: Tokens = {
     "flexBasis",
     "columnWidth",
     "containIntrinsicWidth",
+    "gridTemplateColumns",
+    "gridTemplateRows",
+    "gridAutoColumns",
+    "gridAutoRows",
   ],
   spaces: [
     "margin",

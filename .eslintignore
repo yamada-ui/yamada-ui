@@ -7,3 +7,4 @@ pnpm-lock.yaml
 /examples
 coverage
 storybook-static
+/packages/create-yamada-app/src/templates

@@ -13,6 +13,7 @@ pre-commit:
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"
       exclude:
         - examples/**
+        - packages/create-yamada-app/src/templates/**
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache
       stage_fixed: true

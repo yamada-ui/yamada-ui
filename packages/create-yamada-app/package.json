@@ -51,7 +51,10 @@
     "typecheck": "tsc --noEmit",
     "next-pages:dev": "pnpm --prefix src/templates/next/pages dev",
     "next-app:dev": "pnpm --prefix src/templates/next/app dev",
-    "vite:dev": "pnpm --prefix src/templates/vite dev"
+    "vite:dev": "pnpm --prefix src/templates/vite dev",
+    "remix:dev": "pnpm --prefix src/templates/remix dev",
+    "gatsby:dev": "pnpm --prefix src/templates/gatsby develop",
+    "hono:dev": "pnpm --prefix src/templates/hono dev"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",

@@ -1,29 +1,32 @@
-import type { UIComponent, HTMLUIProps } from "@yamada-ui/core"
-import { ui } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps, UIComponent } from "@yamada-ui/core"
+import {
+  forwardRef,
+  omitThemeProps,
+  ui,
+  useComponentStyle,
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
 import type { Merge } from "@yamada-ui/utils"
 import type { ImageProps as NextImageProps } from "next/image"
 import NextImage from "next/image"
 
-type OmittedNextImageProps = Omit<NextImageProps, "objectFit">
+export type ImageProps = Merge<HTMLUIProps<"img">, NextImageProps> &
+  ThemeProps<"Image">
 
-export type ImageProps = Merge<HTMLUIProps<"img">, OmittedNextImageProps>
+const Component: UIComponent<"img", ImageProps> = ui(NextImage, {
+  disableStyleProp: (prop) => ["width", "height", "fill"].includes(prop),
+})
 
-export const Image: UIComponent<"img", ImageProps> = ui(NextImage, {
-  shouldForwardProp: (prop) =>
-    [
-      "src",
-      "alt",
-      "width",
-      "height",
-      "fill",
-      "loader",
-      "quality",
-      "priority",
-      "loading",
-      "placeholder",
-      "blurDataURL",
-      "unoptimized",
-      "overrideSrc",
-      "sizes",
-    ].includes(prop),
+export const Image = forwardRef<ImageProps, "img">((props, ref) => {
+  const [css, mergedProps] = useComponentStyle("Image", props)
+  const { className, ...rest } = omitThemeProps(mergedProps)
+
+  return (
+    <Component
+      ref={ref}
+      className={cx("ui-image", className)}
+      __css={css}
+      {...rest}
+    />
+  )
 })

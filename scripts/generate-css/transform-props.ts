@@ -24,7 +24,10 @@ export const transformProps: TransformProps = {
   animation: tokens.animations,
   bgClip: ["backgroundClip"],
   transform: ["transform"],
-  filter: [{ properties: "filter", args: [] }],
+  filter: [
+    { properties: "filter", args: [] },
+    { properties: "backdropFilter", args: ["backdrop"] },
+  ],
   content: ["&::before", "&::after"],
   styles: [
     { properties: "apply", args: [] },
@@ -73,7 +76,6 @@ export const transformProps: TransformProps = {
     { properties: "invert", args: ["invert"] },
     { properties: "saturate", args: ["saturate"] },
     { properties: "sepia", args: ["sepia"] },
-    { properties: "backdropFilter", args: ["backdrop"] },
     { properties: "backdropBlur", args: ["blur"] },
     { properties: "backdropBrightness", args: ["brightness"] },
     { properties: "backdropContrast", args: ["contrast"] },

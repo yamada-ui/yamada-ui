@@ -64,12 +64,17 @@ describe("Assertion", () => {
   describe("isNumeric", () => {
     test("Returns true if convertible to a number", () => {
       expect(isNumeric("123")).toBeTruthy()
+      expect(isNumeric("-123")).toBeTruthy()
       expect(isNumeric(123)).toBeTruthy()
+      expect(isNumeric(-123)).toBeTruthy()
     })
 
     test("Returns false if not convertible to a number", () => {
       expect(isNumeric("string")).toBeFalsy()
+      expect(isNumeric("2xs")).toBeFalsy()
       expect(isNumeric(null)).toBeFalsy()
+      expect(isNumeric(undefined)).toBeFalsy()
+      expect(isNumeric(Infinity)).toBeFalsy()
     })
   })
 

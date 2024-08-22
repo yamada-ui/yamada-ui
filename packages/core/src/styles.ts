@@ -1581,7 +1581,7 @@ export const standardStyles: StyleConfigs = {
     transform: transforms.function("saturate"),
   },
   sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
-  backdropFilter: { transform: transforms.function("backdrop") },
+  backdropFilter: { transform: transforms.filter("backdrop") },
   backdropBlur: {
     properties: "--ui-backdrop-blur",
     token: "blurs",

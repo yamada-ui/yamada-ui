@@ -1000,9 +1000,6 @@ importers:
       bundle-n-require:
         specifier: ^1.1.1
         version: 1.1.1
-      chalk:
-        specifier: ^5.3.0
-        version: 5.3.0
       chokidar:
         specifier: ^3.6.0
         version: 3.6.0
@@ -1030,13 +1027,19 @@ importers:
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
-      update-notifier:
-        specifier: ^7.2.0
-        version: 7.2.0
     devDependencies:
+      '@types/cli-welcome':
+        specifier: ^2.2.2
+        version: 2.2.2
       '@types/update-notifier':
         specifier: 6.0.8
         version: 6.0.8
+      chalk:
+        specifier: ^5.3.0
+        version: 5.3.0
+      update-notifier:
+        specifier: ^7.2.0
+        version: 7.2.0
 
   packages/components/accordion:
     dependencies:
@@ -6838,6 +6841,9 @@ packages:
 
   '@types/bonjour@3.5.13':
     resolution: {integrity: sha512-z9fJ5Im06zvUL548KvYNecEVlA7cVDkGUi6kZusb04mpyEFKCIZJvloCcmpmLaIahDpOQGHaHmG6imtPMmPXGQ==, tarball: https://registry.npmjs.org/@types/bonjour/-/bonjour-3.5.13.tgz}
+
+  '@types/cli-welcome@2.2.2':
+    resolution: {integrity: sha512-GMY5tkglyR05FJ4moqZ0V+HRaENs5bRqnUxri7oXkrubz4Az26ybPoft3ZayvR25Aig5RFc5mI0BXwtT6njiSg==, tarball: https://registry.npmjs.org/@types/cli-welcome/-/cli-welcome-2.2.2.tgz}
 
   '@types/configstore@6.0.2':
     resolution: {integrity: sha512-OS//b51j9uyR3zvwD04Kfs5kHpve2qalQ18JhY/ho3voGYUTPLEG90/ocfKPI48hyHH8T04f7KEEbK6Ue60oZQ==, tarball: https://registry.npmjs.org/@types/configstore/-/configstore-6.0.2.tgz}
@@ -19619,6 +19625,8 @@ snapshots:
   '@types/bonjour@3.5.13':
     dependencies:
       '@types/node': 22.2.0
+
+  '@types/cli-welcome@2.2.2': {}
 
   '@types/configstore@6.0.2': {}
 

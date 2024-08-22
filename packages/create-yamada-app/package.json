@@ -51,7 +51,7 @@
     "typecheck": "tsc --noEmit",
     "next-pages:dev": "pnpm --prefix src/templates/next/pages dev",
     "next-app:dev": "pnpm --prefix src/templates/next/app dev",
-    "vite:dev": "pnpm --prefix src/templates/next/vite dev"
+    "vite:dev": "pnpm --prefix src/templates/vite dev"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",

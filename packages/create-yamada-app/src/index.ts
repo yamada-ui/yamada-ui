@@ -25,6 +25,7 @@ export type Options = {
   useYarn?: boolean
   useBun?: boolean
   skipInstall?: boolean
+  initGit?: boolean
 }
 
 const getProjectPath = async (_projectPath: string | undefined) => {
@@ -76,7 +77,7 @@ const getTemplate = async ({ template }: Options): Promise<Template> => {
 }
 
 const action = async (_projectPath: string | undefined, options: Options) => {
-  let { skipInstall, javascript } = options
+  let { skipInstall, initGit, javascript } = options
 
   p.intro(c.magenta(`Generating Yamada UI theme typings`))
 
@@ -107,6 +108,15 @@ const action = async (_projectPath: string | undefined, options: Options) => {
       skipInstall = !runInstall
     }
 
+    if (!initGit) {
+      const runInit = await p.confirm({
+        message: `Initialize a new git repository?`,
+        initialValue: true,
+      })
+
+      initGit = !!runInit
+    }
+
     await createProject(
       projectPath,
       projectName,
@@ -114,6 +124,7 @@ const action = async (_projectPath: string | undefined, options: Options) => {
       !javascript,
       pkgManager,
       skipInstall,
+      initGit,
     )
 
     p.outro(`${c.green(`Created`)} "${projectName}" at ${c.dim(projectPath)}\n`)
@@ -150,6 +161,7 @@ const run = async () => {
       "--use-bun",
       `Explicitly tell the CLI to bootstrap the application using Bun`,
     )
+    .option("--init-git", `Explicitly tell the CLI to initialize git`)
     .option(
       "--skip-install",
       `Explicitly tell the CLI to skip installing packages`,

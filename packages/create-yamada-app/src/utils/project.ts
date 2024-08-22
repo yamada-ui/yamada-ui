@@ -20,6 +20,7 @@ export const createProject = async <Y extends Template>(
   typescript: boolean,
   pkgManager: PackageManager,
   skipInstall: boolean,
+  runInitGit: boolean,
 ) => {
   const s = p.spinner()
 
@@ -47,11 +48,13 @@ export const createProject = async <Y extends Template>(
       s.stop(`Installed dependencies with ${pkgManager}`)
     }
 
-    s.start(`Initializing git`)
+    if (runInitGit) {
+      s.start(`Initializing git`)
 
-    const isInit = initGit(projectPath)
+      const isInit = initGit(projectPath)
 
-    s.stop(isInit ? `Initialized git` : `Failed to initialize git`)
+      s.stop(isInit ? `Initialized git` : `Failed to initialize git`)
+    }
 
     const changeDirPath = getChangeDirPath(projectPath, projectName)
 

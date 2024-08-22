@@ -53,7 +53,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
           isCollapse ? "center" : { base: "flex-start", xl: "center" }
         }
       >
-        <Cloud size="xl" />
+        <Cloud fontSize="xl" />
 
         {!isCollapse ? (
           <Heading as="h3" size="md" display={{ base: "inline", xl: "none" }}>

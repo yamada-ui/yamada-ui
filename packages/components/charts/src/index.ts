@@ -24,6 +24,8 @@ export type {
   ChartAxisType,
   ChartTooltip,
   ChartTooltipProps,
+  ChartLabel,
+  ChartLabelProps,
   TooltipDataSourceType,
   AreaChartType,
   BarChartType,

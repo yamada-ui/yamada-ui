@@ -234,19 +234,14 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
 
   const onSuggestChange = useCallback(
     (type: InsightPeriodSuggest) => {
-      const [, _count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
-      const isDay = unit === "d"
-      let count = parseInt(_count)
-
-      if (isDay) count -= 1
+      const [, count, unit] = type.match(/^(\d+)([dMy])$/) ?? []
 
       const value: [Date, Date] = [
         dayjs()
           .tz()
-          .subtract(count, unit as ManipulateType)
-          .add(unit !== "d" ? 1 : 0, "d")
+          .subtract(parseInt(count), unit as ManipulateType)
           .toDate(),
-        dayjs().tz().toDate(),
+        dayjs().tz().subtract(1, "d").toDate(),
       ]
 
       if (dayjs(value[0]).isBefore(INSIGHT_MIN_DATE)) {

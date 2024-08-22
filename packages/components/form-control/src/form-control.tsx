@@ -16,7 +16,7 @@ import {
   ariaAttr,
 } from "@yamada-ui/utils"
 import type { ReactNode, FocusEventHandler } from "react"
-import { useState, useId } from "react"
+import { useState, useId, isValidElement } from "react"
 
 export type FormControlOptions = {
   /**
@@ -418,7 +418,7 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
 
     const css: CSSUIObject = { ...styles.requiredIndicator }
 
-    return typeof children !== "object" ? (
+    return !isValidElement(children) ? (
       <ui.span
         ref={ref}
         className={cx("ui-form__required-indicator", className)}
@@ -427,7 +427,7 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
         __css={css}
         {...rest}
       >
-        {children ? children : <>*</>}
+        {children ?? <>*</>}
       </ui.span>
     ) : (
       children

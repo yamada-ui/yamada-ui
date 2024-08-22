@@ -190,6 +190,20 @@ describe("<DonutChart />", () => {
       const formattedElements = await screen.findAllByText(/\d+%/i)
       expect(formattedElements).toHaveLength(data.length)
     })
+
+    test("label text should be rendered according to labelProps", async () => {
+      render(
+        <DonutChart
+          containerProps={{ width: 400, height: "80%" }}
+          data={data}
+          withTooltip={false}
+          labelProps={{ value: "DonutChart" }}
+        />,
+      )
+
+      const text = await screen.findByText("DonutChart")
+      expect(text).toBeInTheDocument()
+    })
   })
 
   describe("tooltip & legend", () => {

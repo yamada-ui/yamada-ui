@@ -1,3 +1,4 @@
+import { isNumeric } from "@yamada-ui/utils"
 import type { ThemeToken } from "../theme"
 import {
   getCSSFunction,
@@ -19,7 +20,7 @@ const getValue =
     if (prevent) {
       return generateCalc(token)(value, theme, ...rest)
     } else {
-      if (value.startsWith("!")) return value.slice(1)
+      if (isNumeric(value)) return value
 
       const resolvedToken = `${token}.${value}`
 

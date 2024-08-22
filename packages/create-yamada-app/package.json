@@ -1,0 +1,72 @@
+{
+  "name": "create-yamada-app",
+  "version": "0.1.0",
+  "description": "Create Yamada UI-powered React apps with one command",
+  "keywords": [
+    "yamada",
+    "yamada-ui",
+    "react",
+    "ui",
+    "design-system",
+    "react-components",
+    "uikit",
+    "accessible",
+    "components",
+    "emotion",
+    "library",
+    "design-system",
+    "next",
+    "next.js",
+    "remix"
+  ],
+  "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://yamada-ui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "directory": "packages/create-yamada-app"
+  },
+  "bugs": {
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
+  },
+  "bin": {
+    "create-yamada-app": "dist/index.mjs"
+  },
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "build": "tsup src/index.ts --format esm --clean --shims --onSuccess \"rsync -av --exclude='node_modules' src/templates dist/templates\"",
+    "dev": "tsx src/index.ts temp && rm -rf temp",
+    "dev:npm": "tsx src/index.ts temp --use-npm && rm -rf temp",
+    "dev:yarn": "tsx src/index.ts temp --use-yarn && rm -rf temp",
+    "dev:pnpm": "tsx src/index.ts temp --use-pnpm && rm -rf temp",
+    "dev:bun": "tsx src/index.ts temp --use-bun && rm -rf temp",
+    "typecheck": "tsc --noEmit",
+    "next-pages:dev": "pnpm --prefix src/templates/next/pages dev",
+    "next-app:dev": "pnpm --prefix src/templates/next/app dev",
+    "vite:dev": "pnpm --prefix src/templates/next/vite dev"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "async-sema": "^3.1.1",
+    "chalk": "^5.3.0",
+    "cli-check-node": "^1.3.4",
+    "cli-handle-unhandled": "^1.1.1",
+    "commander": "^12.1.0",
+    "cross-spawn": "^7.0.3",
+    "glob": "^11.0.0",
+    "validate-npm-package-name": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.6",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "tsx": "^4.17.0"
+  }
+}

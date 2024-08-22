@@ -24,7 +24,12 @@
       }
     },
     {
-      "files": ["scripts/**/*", "packages/cli/**/*", "stories/**/*"],
+      "files": [
+        "scripts/**/*",
+        "packages/cli/**/*",
+        "packages/create-yamada-app/**/*",
+        "stories/**/*"
+      ],
       "rules": {
         "no-console": "off"
       }

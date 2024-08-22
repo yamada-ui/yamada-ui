@@ -278,6 +278,23 @@ import { ColorPicker } from "@yamada-ui/react"
 <ColorPicker placeholder="#000000" withResult />
 ```
 
+### ドロップダウンに要素を追加する
+
+ドロップダウンに要素を追加する場合は、`children`に要素を設定します。  
+`children`には、`value`と`onClose`のメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+
+```tsx
+<VStack>
+  <ColorPicker placeholder="#4387f4">
+    <Button>Submit</Button>
+  </ColorPicker>
+
+  <ColorPicker placeholder="#4387f4">
+    {({ value, onClose }) => <Button onClick={onClose}>Submit {value}</Button>}
+  </ColorPicker>
+</VStack>
+```
+
 ### 制御する
 
 ```tsx functional=true

@@ -274,6 +274,23 @@ To make read-only, set `isReadOnly` to `true`.
 <ColorPicker placeholder="#000000" withResult />
 ```
 
+### Add elements to a dropdown
+
+To add elements to a dropdown, set the elements to the `children` property.
+The `children` are provided with `value` and `onClose` methods, which can be used to access the internal state.
+
+```tsx
+<VStack>
+  <ColorPicker placeholder="#4387f4">
+    <Button>Submit</Button>
+  </ColorPicker>
+
+  <ColorPicker placeholder="#4387f4">
+    {({ value, onClose }) => <Button onClick={onClose}>Submit {value}</Button>}
+  </ColorPicker>
+</VStack>
+```
+
 ### Control
 
 ```tsx functional=true

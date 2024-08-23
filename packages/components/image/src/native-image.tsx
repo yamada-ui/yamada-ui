@@ -6,7 +6,7 @@ export type NativeImageProps = Omit<HTMLUIProps<"img">, "width" | "height"> &
   Pick<ComponentProps<"img">, "width" | "height">
 
 /**
- * `NativeImage` it renders a `img` element.
+ * `NativeImage` is renders a `img` element.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/native-image
  */

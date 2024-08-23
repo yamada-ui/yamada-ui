@@ -60,24 +60,24 @@ type ColorPalletsProps = {
 }
 
 export const ColorPallets: FC<ColorPalletsProps> = ({ name, colors }) => {
-  return Object.entries(colors[name]).map(([hue, value]) => (
-    <ColorPallet key={hue} {...{ name, hue, value }} />
+  return Object.entries(colors[name]).map(([tone, value]) => (
+    <ColorPallet key={tone} {...{ name, tone, value }} />
   ))
 }
 
 type ColorPalletProps = {
   name: string
   value: string
-  hue?: string
+  tone?: string
 }
 
-export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
+export const ColorPallet: FC<ColorPalletProps> = ({ name, tone, value }) => {
   const colorMode = useDarkMode() ? "dark" : "light"
 
   return (
-    <HStack key={hue}>
+    <HStack key={tone}>
       <Box
-        bg={hue ? `${name}.${hue}` : name}
+        bg={tone ? `${name}.${tone}` : name}
         minW="12"
         minH="12"
         rounded="md"
@@ -85,7 +85,7 @@ export const ColorPallet: FC<ColorPalletProps> = ({ name, hue, value }) => {
       />
       <VStack gap="1">
         <Text m="0" fontWeight="semibold" lineClamp={1}>
-          {name.charAt(0).toUpperCase() + name.slice(1)} {hue}
+          {name.charAt(0).toUpperCase() + name.slice(1)} {tone}
         </Text>
         <Text m="0" lineClamp={1}>
           {!isArray(value)

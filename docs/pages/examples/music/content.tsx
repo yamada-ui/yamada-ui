@@ -24,7 +24,7 @@ import type { StackProps } from "@yamada-ui/react"
 import { memo, useState } from "react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
 
-type CarouselItem = Omit<ImageProps, "alt"> & {
+type CarouselItem = Omit<ImageProps, "alt" | "size"> & {
   title: string
   description: string
 }

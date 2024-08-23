@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-focus-visible
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-focus-visible
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-focus-visible
+pnpm add @yamada-ui/use-focus-visible
+# or
+yarn add @yamada-ui/use-focus-visible
+# or
+npm install @yamada-ui/use-focus-visible
+# or
+bun add @yamada-ui/use-focus-visible
 ```
 
 ## Contribution

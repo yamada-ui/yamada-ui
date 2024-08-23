@@ -5,19 +5,13 @@ Yamada UI Integrations for Next.js 14
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/nextjs
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/nextjs
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/nextjs
+pnpm add @yamada-ui/nextjs
+# or
+yarn add @yamada-ui/nextjs
+# or
+npm install @yamada-ui/nextjs
+# or
+bun add @yamada-ui/nextjs
 ```
 
 ## Contribution

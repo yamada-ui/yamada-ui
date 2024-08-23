@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-outside-click
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-outside-click
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-outside-click
+pnpm add @yamada-ui/use-outside-click
+# or
+yarn add @yamada-ui/use-outside-click
+# or
+npm install @yamada-ui/use-outside-click
+# or
+bun add @yamada-ui/use-outside-click
 ```
 
 ## Contribution

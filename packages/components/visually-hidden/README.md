@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/visually-hidden
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/visually-hidden
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/visually-hidden
+pnpm add @yamada-ui/visually-hidden
+# or
+yarn add @yamada-ui/visually-hidden
+# or
+npm install @yamada-ui/visually-hidden
+# or
+bun add @yamada-ui/visually-hidden
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/fontawesome
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/fontawesome
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/fontawesome
+pnpm add @yamada-ui/fontawesome
+# or
+yarn add @yamada-ui/fontawesome
+# or
+npm install @yamada-ui/fontawesome
+# or
+bun add @yamada-ui/fontawesome
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/avatar
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/avatar
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/avatar
+pnpm add @yamada-ui/avatar
+# or
+yarn add @yamada-ui/avatar
+# or
+npm install @yamada-ui/avatar
+# or
+bun add @yamada-ui/avatar
 ```
 
 ## Contribution

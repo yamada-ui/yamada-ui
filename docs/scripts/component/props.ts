@@ -101,6 +101,7 @@ const OVERRIDE_PATHS: Record<
     "color-swatch",
   ],
   button: ["icon-button"],
+  image: ["image", "native-image"],
   link: [{ parent: "link-box", children: ["link-overlay"] }],
   charts: [
     { parent: "bar-chart", children: ["bar"] },

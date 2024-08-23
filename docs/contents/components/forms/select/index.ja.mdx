@@ -86,6 +86,19 @@ return <Select placeholder="キャラクターを選択" items={items} />
 </Select>
 ```
 
+### フッターを追加する
+
+```tsx
+<Select
+  placeholder="キャラクターを選択"
+  footer={<footer>ここにフッターが追加されます</footer>}
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
 ### グループ化する
 
 グループ化する場合は、`OptionGroup`を使用します。

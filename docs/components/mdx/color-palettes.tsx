@@ -54,11 +54,11 @@ export const ColorPaletters: FC<ColorPalettersProps> = ({
 
   return (
     <ColorPaletterContainer {...rest}>
-      {Object.keys(theme.colors[colorScheme] ?? {}).map((hue) => (
+      {Object.keys(theme.colors[colorScheme] ?? {}).map((tone) => (
         <ColorPaletter
-          key={`${colorScheme}.${hue}`}
-          label={`${colorScheme} ${hue}`}
-          color={`${colorScheme}.${hue}`}
+          key={`${colorScheme}.${tone}`}
+          label={`${colorScheme} ${tone}`}
+          color={`${colorScheme}.${tone}`}
         />
       ))}
     </ColorPaletterContainer>

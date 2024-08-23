@@ -194,7 +194,7 @@ export const Legend = forwardRef<LegendProps, "legend">(
     {
       className,
       isRequired: isRequiredProp,
-      requiredIndicator = <RequiredIndicator />,
+      requiredIndicator = null,
       optionalIndicator = null,
       children,
       ...rest
@@ -221,7 +221,15 @@ export const Legend = forwardRef<LegendProps, "legend">(
         {...rest}
       >
         {children}
-        {isRequiredProp ? requiredIndicator : optionalIndicator}
+        {isRequiredProp ? (
+          requiredIndicator ? (
+            <RequiredIndicator>{requiredIndicator}</RequiredIndicator>
+          ) : (
+            <RequiredIndicator />
+          )
+        ) : (
+          optionalIndicator
+        )}
       </ui.legend>
     )
   },

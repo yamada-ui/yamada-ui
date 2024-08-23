@@ -4,7 +4,7 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import { PopoverTrigger } from "@yamada-ui/popover"
 import { assignRef, cx, dataAttr, funcAll, handlerAll } from "@yamada-ui/utils"
 import type { KeyboardEvent, ReactNode } from "react"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import { useMenu } from "./menu"
 import type { MenuIconProps } from "./menu-item"
 import { MenuIcon, useUpstreamMenuItem } from "./menu-item"
@@ -58,7 +58,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
     assignRef(onKeyDownRef, onItemKeyDown)
 
-    const Component = As ? ui(As) : Button
+    const Component = useMemo(() => (As ? ui(As) : Button), [As])
 
     return (
       <PopoverTrigger>

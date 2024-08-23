@@ -102,17 +102,35 @@ describe("<FormControl />", () => {
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("should render custom indicator", () => {
+  test("should render custom indicator *", () => {
     render(
-      <FormControl
-        isRequired
-        label="Email"
-        requiredIndicator={<div>required</div>}
-      >
+      <FormControl isRequired label="Email">
+        <Input type="email" />
+      </FormControl>,
+    )
+    expect(screen.getByText("*")).toBeInTheDocument()
+  })
+
+  test("should render custom indicator text", () => {
+    render(
+      <FormControl isRequired label="Email" requiredIndicator="required">
         <Input type="email" />
       </FormControl>,
     )
     expect(screen.getByText("required")).toBeInTheDocument()
+  })
+
+  test("should render custom indicator jsx", () => {
+    render(
+      <FormControl
+        isRequired
+        label="Email"
+        requiredIndicator={<div data-testid="required">required</div>}
+      >
+        <Input type="email" />
+      </FormControl>,
+    )
+    expect(screen.getByTestId("required")).toHaveTextContent("required")
   })
 
   test("should render custom optional indicator", () => {

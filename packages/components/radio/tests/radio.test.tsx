@@ -95,4 +95,26 @@ describe("<Radio />", () => {
 
     expect(firstRadioButton.id).not.toBe(secondRadioButton.id)
   })
+
+  test("should add data-active attribute on Space key press", () => {
+    render(<Radio>Radio button</Radio>)
+    const radio = screen.getByRole("radio", { name: "Radio button" })
+
+    fireEvent.keyDown(radio, { key: " " })
+
+    const iconElement = document.querySelector(".ui-radio__icon")
+    expect(iconElement).toBeInTheDocument()
+    expect(iconElement).toHaveAttribute("data-active")
+  })
+
+  test("should remove data-active attribute on Space key release", () => {
+    render(<Radio>Radio button</Radio>)
+    const radio = screen.getByRole("radio", { name: "Radio button" })
+
+    fireEvent.keyUp(radio, { key: " " })
+
+    const iconElement = document.querySelector(".ui-radio__icon")
+    expect(iconElement).toBeInTheDocument()
+    expect(iconElement).not.toHaveAttribute("data-active")
+  })
 })

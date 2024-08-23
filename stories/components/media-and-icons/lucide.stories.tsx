@@ -29,6 +29,7 @@ export const basic: Story = () => {
       <Ghost />
 
       <Ghost />
+
     </HStack>
   )
 }

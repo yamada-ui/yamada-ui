@@ -8,8 +8,14 @@ import {
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { cx, getValidChildren, handlerAll } from "@yamada-ui/utils"
-import type { CSSProperties, FC, MouseEventHandler, ReactElement } from "react"
+import { cx, getValidChildren, handlerAll, runIfFunc } from "@yamada-ui/utils"
+import type {
+  CSSProperties,
+  FC,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+} from "react"
 import { cloneElement, useMemo } from "react"
 import type { SelectIconProps } from "./select-icon"
 import { SelectIcon, SelectClearIcon } from "./select-icon"
@@ -85,6 +91,14 @@ type MultiSelectOptions = {
    * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * The header of the multi select content element.
+   */
+  header?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
+  /**
+   * The footer of the multi select content element.
+   */
+  footer?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
 }
 
 export type MultiSelectProps = ThemeProps<"MultiSelect"> &
@@ -117,6 +131,8 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
     iconProps,
     clearIconProps,
     portalProps = { isDisabled: true },
+    header,
+    footer,
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -160,6 +176,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
 
   const {
     value,
+    onClose,
     descendants,
     formControlProps,
     getPopoverProps,
@@ -186,7 +203,7 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
 
   return (
     <SelectDescendantsContextProvider value={descendants}>
-      <SelectProvider value={{ ...rest, value, placeholder, styles }}>
+      <SelectProvider value={{ ...rest, value, onClose, placeholder, styles }}>
         <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-multi-select", className)}
@@ -220,7 +237,11 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
 
             {!isEmpty ? (
               <Portal {...portalProps}>
-                <SelectList {...listProps}>
+                <SelectList
+                  header={runIfFunc(header, { value, onClose })}
+                  footer={runIfFunc(footer, { value, onClose })}
+                  {...listProps}
+                >
                   {children ?? computedChildren}
                 </SelectList>
               </Portal>

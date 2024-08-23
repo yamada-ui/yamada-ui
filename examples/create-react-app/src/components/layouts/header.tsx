@@ -1,3 +1,4 @@
+import { Moon, Palette, Sun } from "@yamada-ui/lucide"
 import {
   HStack,
   Spacer,
@@ -19,13 +20,12 @@ import {
   PopoverBody,
   Box,
   PopoverProps,
-  Text,
   Center,
   CenterProps,
   useScroll,
   useMotionValueEvent,
+  Image,
 } from "@yamada-ui/react"
-import { ColorPalette, Moon, Sun } from "components/media-and-icons"
 import { useRef } from "react"
 import { useState } from "react"
 import { memo } from "react"
@@ -66,18 +66,28 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
         <Box
           as="a"
           href="/"
+          aria-label="Yamada UI"
+          _hover={{ opacity: 0.7 }}
+          transitionProperty="opacity"
+          transitionDuration="slower"
           _focus={{ outline: "none" }}
           _focusVisible={{ boxShadow: "outline" }}
           rounded="md"
         >
-          <Text
-            as="h1"
-            fontSize="2xl"
-            fontWeight="semibold"
-            whiteSpace="nowrap"
-          >
-            Yamada UI
-          </Text>
+          <Image
+            src="/logo-black.png"
+            alt="Yamada UI"
+            w="auto"
+            h={{ base: "10", sm: "8" }}
+            _dark={{ display: "none" }}
+          />
+          <Image
+            src="/logo-white.png"
+            alt="Yamada UI"
+            w="auto"
+            h={{ base: "10", sm: "8" }}
+            _light={{ display: "none" }}
+          />
         </Box>
 
         <Spacer />
@@ -123,7 +133,13 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
           variant="ghost"
           colorScheme="gray"
           color="muted"
-          icon={colorMode === "dark" ? <Sun /> : <Moon />}
+          icon={
+            colorMode === "dark" ? (
+              <Sun fontSize="2xl" />
+            ) : (
+              <Moon fontSize="2xl" />
+            )
+          }
           {...rest}
         />
 
@@ -189,7 +205,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             variant="ghost"
             colorScheme="gray"
             color="muted"
-            icon={<ColorPalette />}
+            icon={<Palette fontSize="2xl" />}
             {...rest}
           />
         </PopoverTrigger>

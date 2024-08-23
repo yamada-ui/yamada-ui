@@ -5,11 +5,12 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import type { MotionProps } from "@yamada-ui/motion"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { cx, getValidChildren } from "@yamada-ui/utils"
-import type { ReactElement, ReactNode } from "react"
+import { cx, getValidChildren, runIfFunc } from "@yamada-ui/utils"
+import type { FC, ReactElement, ReactNode } from "react"
 import type { SelectIconProps } from "./select-icon"
 import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -58,6 +59,10 @@ type SelectOptions = {
    */
   containerProps?: Omit<HTMLUIProps<"div">, "children">
   /**
+   * Props for select content element.
+   */
+  contentProps?: Omit<MotionProps<"div">, "children">
+  /**
    * Props for select list element.
    */
   listProps?: Omit<SelectListProps, "children">
@@ -75,6 +80,14 @@ type SelectOptions = {
    * @default '{ isDisabled: true }'
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * The header of the select content element.
+   */
+  header?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
+  /**
+   * The footer of the select content element.
+   */
+  footer?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
 }
 
 export type SelectProps = ThemeProps<"Select"> &
@@ -103,10 +116,13 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     minH,
     minHeight,
     containerProps,
+    contentProps,
     listProps,
     fieldProps,
     iconProps,
     portalProps = { isDisabled: true },
+    header,
+    footer,
     children,
     ...computedProps
   } = omitThemeProps(mergedProps)
@@ -152,6 +168,8 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
     !(!!placeholder && placeholderInOptions)
 
   const {
+    value,
+    onClose,
     descendants,
     formControlProps,
     getPopoverProps,
@@ -177,7 +195,14 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   return (
     <SelectDescendantsContextProvider value={descendants}>
       <SelectProvider
-        value={{ ...rest, placeholder, placeholderInOptions, styles }}
+        value={{
+          ...rest,
+          value,
+          onClose,
+          placeholder,
+          placeholderInOptions,
+          styles,
+        }}
       >
         <Popover {...getPopoverProps()}>
           <ui.div
@@ -199,7 +224,12 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
 
             {!isEmpty ? (
               <Portal {...portalProps}>
-                <SelectList {...listProps}>
+                <SelectList
+                  header={runIfFunc(header, { value, onClose })}
+                  footer={runIfFunc(footer, { value, onClose })}
+                  contentProps={contentProps}
+                  {...listProps}
+                >
                   {!!placeholder && placeholderInOptions ? (
                     <Option>{placeholder}</Option>
                   ) : null}

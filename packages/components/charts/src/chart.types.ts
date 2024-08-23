@@ -7,6 +7,7 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
+import type { pieProperties } from "./rechart-properties"
 
 export type ChartPropGetter<
   Y extends As = "div",
@@ -98,10 +99,10 @@ export type RadarProps = Merge<
   }
 >
 export type PieProps = Merge<
-  Merge<CSSUIProps, Recharts.PieProps>,
+  Merge<Pick<Recharts.PieProps, (typeof pieProperties)[number]>, CSSUIProps>,
   {
-    activeShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
-    inactiveShape?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+    activeShape?: Partial<PieProps>
+    inactiveShape?: Partial<PieProps>
     label?: HTMLUIProps<"text">
     labelLine?: HTMLUIProps<"path">
   }
@@ -143,11 +144,10 @@ export type PolarRadiusAxisProps = Merge<
   Recharts.PolarRadiusAxisProps
 >
 export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
+export type ChartTooltipProps = Recharts.TooltipProps<
+  number | string | Array<number | string>,
+  number | string
+>
 export type ChartTooltip =
   | ReactElement
-  | ((
-      props: Recharts.TooltipProps<
-        number | string | Array<number | string>,
-        number | string
-      >,
-    ) => ReactNode)
+  | ((props: ChartTooltipProps) => ReactNode)

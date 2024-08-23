@@ -8,8 +8,10 @@ import type {
   UserInsight,
   UserInsightScore,
 } from "insights"
+import type { Locale } from "utils/i18n"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")
+export const INSIGHT_MAX_DATE = dayjs().tz().subtract(1, "d").toDate()
 
 export const INSIGHT_USERS = Object.fromEntries(
   [...CONSTANT.MAINTAINERS, ...CONSTANT.MEMBERS].map((data) => [
@@ -19,6 +21,12 @@ export const INSIGHT_USERS = Object.fromEntries(
 )
 
 export const INSIGHT_USER_IDS = Object.keys(INSIGHT_USERS)
+export const INSIGHT_MAINTAINERS_IDS = CONSTANT.MAINTAINERS.map(
+  ({ github }) => github.id,
+)
+export const INSIGHT_MEMBERS_IDS = CONSTANT.MEMBERS.map(
+  ({ github }) => github.id,
+)
 
 export const INSIGHT_PERIOD_SUGGEST = [
   "7d",
@@ -29,6 +37,7 @@ export const INSIGHT_PERIOD_SUGGEST = [
   "6M",
   "1y",
 ] as const
+export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
 export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
   pullRequests: [`blue.500`, `blue.400`],
@@ -38,6 +47,7 @@ export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
 }
 
 export type InsightPeriodSuggest = (typeof INSIGHT_PERIOD_SUGGEST)[number]
+export type InsightUserSuggest = (typeof INSIGHT_USER_SUGGEST)[number]
 
 export type InsightUser = (typeof INSIGHT_USERS)[number]
 
@@ -64,47 +74,48 @@ export const getSummarize = (minDate: Date, maxDate: Date) => {
   }
 }
 
-export const labelFormatter = (
-  value: string,
-  { summarize, end }: InsightPeriod,
-) => {
-  switch (summarize) {
-    case "day":
-      return dayjs(value).format("DD")
+export const labelFormatter =
+  (value: string, { summarize, end }: InsightPeriod) =>
+  (locale: Locale) => {
+    const date = dayjs(value)
 
-    case "week":
-      const weekEnd = dayjs(value).endOf("week").add(1, "d")
-      const isAfter = dayjs(weekEnd).isAfter(end)
+    switch (summarize) {
+      case "day":
+        return date.format(locale === "ja" ? "M月D日" : "MMMM D")
 
-      return `${dayjs(value).format("MM/DD")} - ${isAfter ? dayjs(end).format("MM/DD") : weekEnd.format("MM/DD")}`
+      case "week":
+        const weekEnd = date.endOf("week").add(1, "d")
+        const isAfter = dayjs(weekEnd).isAfter(end)
+        const template = locale === "ja" ? "M月D日" : "MMM D"
 
-    case "month":
-      return dayjs(value).format("MM")
-  }
-}
+        return `${date.format(template)} - ${isAfter ? dayjs(end).format(template) : weekEnd.format(template)}`
 
-export const xAxisTickFormatter = (
-  period: string,
-  { summarize }: InsightPeriod,
-) => {
-  let template: string
-
-  switch (summarize) {
-    case "day":
-      template = "DD"
-      break
-
-    case "week":
-      template = "MM/DD"
-      break
-
-    case "month":
-      template = "MM"
-      break
+      case "month":
+        return date.format(locale === "ja" ? "M月" : "MMMM")
+    }
   }
 
-  return dayjs(period).format(template)
-}
+export const xAxisTickFormatter =
+  (period: string, { summarize }: InsightPeriod) =>
+  (locale: Locale) => {
+    let template: string
+
+    switch (summarize) {
+      case "day":
+        template = "D"
+        break
+
+      case "week":
+        template = locale == "ja" ? "M月D日" : "MMM D"
+        break
+
+      case "month":
+        template = locale == "ja" ? "M" : "MMM"
+        break
+    }
+
+    return dayjs(period).format(template)
+  }
 
 export const DEFAULT_SCORE: UserInsightScore = {
   comments: 0,
@@ -170,4 +181,28 @@ export const randomIndex = (value: string, max: number) => {
   const result = Math.abs(hash) % max
 
   return result
+}
+
+export const getTrend = (currentTotal: number, prevTotal: number) => {
+  if (currentTotal === prevTotal) return { value: "0", colorScheme: "neutral" }
+
+  if (prevTotal === 0) return undefined
+
+  let trend = Math.round((currentTotal / prevTotal) * 100 - 100)
+
+  if (trend >= 1000) {
+    trend /= 1000
+
+    if (trend >= 0) {
+      return { value: `+${trend}K`, colorScheme: "success" }
+    } else {
+      return { value: `${trend}K`, colorScheme: "danger" }
+    }
+  } else {
+    if (trend >= 0) {
+      return { value: `+${trend}`, colorScheme: "success" }
+    } else {
+      return { value: `${trend}`, colorScheme: "danger" }
+    }
+  }
 }

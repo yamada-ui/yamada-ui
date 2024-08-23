@@ -15,6 +15,7 @@ import {
   isTypeAliasDeclaration,
   isTypeLiteralNode,
   isVariableStatement,
+  isExpression,
 } from "typescript"
 import { toKebabCase } from "utils/string"
 import { getMDXFile, writeMDXFile } from "../utils"
@@ -24,17 +25,22 @@ import { locales } from "utils/i18n"
 config({ path: CONSTANT.PATH.ENV })
 
 type Type = "style" | "pseudo"
+type TableType = "property" | "description"
 type Props = Record<
   string,
   {
     shorthands?: string[]
     properties: string[]
     token?: string
+    description?: string
     urls?: string[]
     deprecated?: boolean
   }
 >
-type JSDocs = Record<string, { urls?: string[]; deprecated?: boolean }>
+type JSDocs = Record<
+  string,
+  { description?: string; urls?: string[]; deprecated?: boolean }
+>
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
   CONSTANT.PATH.ROOT,
@@ -126,14 +132,17 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
 
     if (!hasJSDoc(member)) return
 
-    member.jsDoc.forEach(({ tags }) =>
+    member.jsDoc.forEach(({ tags, comment }) => {
+      data.description =
+        typeof comment === "string" ? comment : comment?.join("\n")
+
       tags?.forEach(({ tagName, comment }) => {
         const tag = tagName.getText(sourceFile)
 
         if (tag === "deprecated") data.deprecated = true
         if (tag === "see") data.urls = [...(data.urls ?? []), comment as string]
-      }),
-    )
+      })
+    })
 
     props[prop] = data
   })
@@ -148,9 +157,7 @@ const getData = (prop: string, value: string) => {
 
     const data = JSON.parse(value)
 
-    let { properties, token, isSkip } = data
-
-    if (isSkip) return
+    let { properties, token } = data
 
     if (properties) {
       if (Array.isArray(properties)) {
@@ -169,10 +176,9 @@ const getData = (prop: string, value: string) => {
 }
 
 const parseProps: p.RequiredRunner =
-  (type: Type, source: string) => async (_, s) => {
+  (type: Type, source: string, targetStatements: string[]) => async (_, s) => {
     s.start(`Parsing the ${type} props`)
 
-    const targetStatements = ["standardStyles", "shorthandStyles", "pseudos"]
     const sourceFile = createSourceFile("props.ts", source, ScriptTarget.Latest)
 
     const props: Props = {}
@@ -191,9 +197,13 @@ const parseProps: p.RequiredRunner =
 
           if (!targetStatements.includes(name.text)) continue
 
+          if (!initializer) continue
+
           const isShorthand = name.text === "shorthandStyles"
 
-          if (initializer && isObjectLiteralExpression(initializer)) {
+          if (!isExpression(initializer)) continue
+
+          if (isObjectLiteralExpression(initializer)) {
             initializer.properties.forEach((property) => {
               if (!isPropertyAssignment(property)) return
 
@@ -202,109 +212,150 @@ const parseProps: p.RequiredRunner =
               const prop = name.getText(sourceFile)
               let value = initializer.getText(sourceFile)
 
-              if (type === "style") {
-                value = value.replace(/(\w+):/g, '"$1":')
+              value = value.replace(/(\w+):/g, '"$1":')
 
-                if (!isShorthand) {
-                  const data = getData(prop, value)
+              if (!isShorthand) {
+                const data = getData(prop, value)
 
-                  if (data) props[prop] = { ...props[prop], ...data }
-                } else {
-                  if (isStringObject(value)) {
-                    value = JSON.parse(value).properties
-                  } else {
-                    value = value.split(".")[1]
-                  }
-
-                  props[value] = {
-                    ...(props[value] ?? {}),
-                    shorthands: [...(props[value].shorthands ?? []), prop],
-                  }
-                }
+                if (data) props[prop] = { ...props[prop], ...data }
               } else {
+                if (isStringObject(value)) {
+                  value = JSON.parse(value).properties
+                } else {
+                  value = value.split(".")[1]
+                }
+
+                props[value] = {
+                  ...(props[value] ?? {}),
+                  shorthands: [...(props[value].shorthands ?? []), prop],
+                }
+              }
+            })
+          } else {
+            initializer.forEachChild((node) => {
+              node.forEachChild((node) => {
+                if (!isPropertyAssignment(node)) return
+
+                const { name, initializer } = node
+
+                const prop = name.getText(sourceFile)
+                let value = initializer.getText(sourceFile)
+
                 value = value.replace(/^"|"$/g, "")
 
                 props[prop] = { properties: [value] }
-              }
+              })
             })
           }
         }
       }
     })
 
-    Object.entries(jsDocs).forEach(([prop, { urls, deprecated }]) => {
-      if (!props[prop]) return
+    Object.entries(jsDocs).forEach(
+      ([prop, { description, urls, deprecated }]) => {
+        if (!props[prop]) return
 
-      props[prop].urls = urls
-      props[prop].deprecated = deprecated
-    })
+        props[prop].description = description
+        props[prop].urls = urls
+        props[prop].deprecated = deprecated
+      },
+    )
 
     s.stop(`Parsing the ${type} props`)
 
     return props
   }
 
-const generateTable = (props: Props) => (locale: Locale) => {
-  let table: string[] = []
-
+const generateTableHeader = (type: TableType) => (locale: Locale) => {
   if (locale === "ja") {
-    table = [
-      ...table,
-      "| Prop | CSSプロパティ | テーマのトークン |",
-      "| ---- | ----------  | ------------ |",
-    ]
+    return type === "property"
+      ? [
+          "| Prop | CSSプロパティ | テーマのトークン |",
+          "| ---- | ----------- | ------------ |",
+        ]
+      : ["| Prop | 説明 |", "| ---- | --- |"]
   } else {
-    table = [
-      ...table,
-      "| Prop | CSS Property | Theme Tokens |",
-      "| ---- | ------------ | ------------ |",
-    ]
+    return type === "property"
+      ? [
+          "| Prop | CSS Property | Theme Tokens |",
+          "| ---- | ------------ | ------------ |",
+        ]
+      : ["| Prop | Description |", "| ---- | ----------- |"]
   }
+}
+
+const generateTable = (props: Props, type: TableType) => (locale: Locale) => {
+  const table: string[] = generateTableHeader(type)(locale)
 
   props = sortObject(props)
 
   const rows = Object.entries(props).map(
-    ([prop, { properties, shorthands, token, urls }]) => {
-      let columns: string[] = []
+    ([prop, { description, properties, shorthands, token, urls }]) => {
+      console.log(prop, description)
+
+      const columns: string[] = []
 
       const props = [prop, ...(shorthands ?? [])]
 
-      columns = [
-        ...columns,
-        props.map((property) => `\`${property}\``).join(", "),
-      ]
+      columns.push(props.map((property) => `\`${property}\``).join(", "))
 
-      columns = [
-        ...columns,
-        properties
-          .map((property) => {
-            const url = urls?.find((url) => url.endsWith(property))
+      if (type === "property") {
+        columns.push(
+          properties
+            .map((property) => {
+              const url = urls?.find((url) => url.endsWith(property))
 
-            return !url ? `\`${property}\`` : `[${property}](${url})`
-          })
-          .join(" + "),
-      ]
+              return !url ? `\`${property}\`` : `[${property}](${url})`
+            })
+            .join(" + "),
+        )
 
-      columns = [
-        ...columns,
-        token
-          ? `[${token}](/styled-system/theming/default-theme#${
-              token.split(".")[0]
-            })`
-          : "none",
-      ]
+        columns.push(
+          token
+            ? `[${token}](/styled-system/theming/default-theme#${
+                token.split(".")[0]
+              })`
+            : "none",
+        )
+      } else {
+        columns.push(description ?? "")
+      }
 
       return `| ${columns.join(" | ")} |`
     },
   )
 
-  table = [...table, ...rows]
+  table.push(...rows)
 
   return table
 }
 
-const generateProps: p.RequiredRunner =
-  (styleProps: Props, pseudoProps: Props) => async (_, s) => {
+const main = async () => {
+  p.intro(c.magenta(`Generating Yamada UI style props`))
+
+  const s = p.spinner()
+
+  try {
+    const start = process.hrtime.bigint()
+
+    const _styleProps = await getProps("style")(p, s)
+    const _pseudoProps = await getProps("pseudo")(p, s)
+
+    const styleProps = await parseProps("style", _styleProps, [
+      "standardStyles",
+      "shorthandStyles",
+    ])(p, s)
+
+    const atRuleProps = await parseProps("at-rule", _styleProps, [
+      "atRuleStyles",
+    ])(p, s)
+
+    const aiProps = await parseProps("ui", _styleProps, ["uiStyles"])(p, s)
+    const pseudoProps = await parseProps("pseudo", _pseudoProps, ["pseudos"])(
+      p,
+      s,
+    )
+
     s.start(`Writing files`)
 
     await Promise.all(
@@ -319,12 +370,16 @@ const generateProps: p.RequiredRunner =
           "```tsx",
           `<Box w="full" p="md" bg="warning" color="white">This is Box</Box>`,
           "```",
-          ...generateTable(styleProps)(locale),
+          ...generateTable(styleProps, "property")(locale),
           ...CONTENT_FOOTER[locale],
           locale === "ja"
             ? "## 擬似要素とセレクター"
             : "## Pseudo Elements and Selectors",
-          ...generateTable(pseudoProps)(locale),
+          ...generateTable(pseudoProps, "property")(locale),
+          locale === "ja" ? "## アットルール" : "## At-Rules",
+          ...generateTable(atRuleProps, "description")(locale),
+          locale === "ja" ? "## その他のProps" : "## Other Props",
+          ...generateTable(aiProps, "description")(locale),
         ]
 
         await writeMDXFile(outPath, data, content.join("\n"))
@@ -332,23 +387,6 @@ const generateProps: p.RequiredRunner =
     )
 
     s.stop(`Wrote files`)
-  }
-
-const main = async () => {
-  p.intro(c.magenta(`Generating Yamada UI style props`))
-
-  const s = p.spinner()
-
-  try {
-    const start = process.hrtime.bigint()
-
-    const styleProps = await getProps("style")(p, s)
-    const pseudoProps = await getProps("pseudo")(p, s)
-
-    const resolvedStyleProps = await parseProps("style", styleProps)(p, s)
-    const resolvedPseudoProps = await parseProps("pseudo", pseudoProps)(p, s)
-
-    await generateProps(resolvedStyleProps, resolvedPseudoProps)(p, s)
 
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)

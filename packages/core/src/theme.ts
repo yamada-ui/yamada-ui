@@ -4,11 +4,12 @@ import {
   objectFromEntries,
   pickObject,
   omitObject,
-  tones,
+  TONES,
   isObject,
   runIfFunc,
   isFunction,
   merge,
+  isArray,
 } from "@yamada-ui/utils"
 import type { CSSUIObject, ThemeProps, UIStyle, UIStyleProps } from "./css"
 import { analyzeBreakpoints, createVars } from "./css"
@@ -142,7 +143,7 @@ const createTokens = (
   const defaultTokenEntries: [string, VarToken][] = Object.entries(
     flattenObject(defaultTokenMap, Infinity, omitKeys),
   ).map(([token, value]) => {
-    const enhancedToken = { isSemantic: false, value }
+    const enhancedToken: VarToken = { isSemantic: false, value }
 
     return [token, enhancedToken]
   })
@@ -151,15 +152,26 @@ const createTokens = (
   ).reduce(
     (prev, [token, value]) => {
       if (token.startsWith("colorSchemes.")) {
-        const [, semanticToken] = token.split(".")
+        const [, semanticToken, tone] = token.split(".")
 
-        tones.forEach((tone) => {
-          const enhancedToken = { isSemantic: true, value: `${value}.${tone}` }
+        if (tone) {
+          const enhancedToken = { isSemantic: false, value }
 
           prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-        })
+        } else {
+          TONES.forEach((tone) => {
+            const enhancedToken: VarToken = {
+              isSemantic: true,
+              value: isArray(value)
+                ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
+                : `${value}.${tone}`,
+            }
+
+            prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
+          })
+        }
       } else {
-        const enhancedToken = { isSemantic: true, value }
+        const enhancedToken: VarToken = { isSemantic: true, value }
 
         prev.push([token, enhancedToken])
       }

@@ -117,7 +117,7 @@ const createNoticeFunc = (
   defaultOptions: UseNoticeOptions,
   theme: StyledTheme,
 ) => {
-  const themeOptions = theme.__config.notice?.options ?? {}
+  const themeOptions = theme.__config?.notice?.options ?? {}
 
   const computedOptions = (options: UseNoticeOptions) =>
     merge(themeOptions, merge(defaultOptions, options))

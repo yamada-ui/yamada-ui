@@ -52,7 +52,6 @@ export const IconDrawer: FC<IconDrawerProps> = memo(({ openRef }) => {
           rounded="xl"
         >
           <Icon zIndex="1" />
-
           <IconGrid position="absolute" top="0" left="0" />
         </Center>
 

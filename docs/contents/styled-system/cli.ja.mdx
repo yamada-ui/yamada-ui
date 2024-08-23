@@ -6,8 +6,6 @@ order: 16
 
 Yamada CLIを使用して、カラーやフォントサイズなどのカスタマイズしたテーマのトークンの型を生成できます。
 
-CLIは、カスタマイズしたテーマを読み取り、`node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts`にトークンの型を生成します。
-
 ## インストール
 
 ターミナルで次のコマンドのいずれかを実行します。
@@ -21,6 +19,12 @@ CLIは、カスタマイズしたテーマを読み取り、`node_modules/@yamad
   }}
 />
 
+## 使い方
+
+### 型定義を更新する
+
+CLIを使用することで、[Style Props](/styled-system/style-props)が参照するテーマのトークンの型補完を更新することができます。
+
 `package.json`にスクリプトを追加し、スクリプト内でカスタマイズしたテーマの場所を指定します。
 
 ```json title=package.json
@@ -29,7 +33,6 @@ CLIは、カスタマイズしたテーマを読み取り、`node_modules/@yamad
   "scripts" : {
     ...
     "theme" : "yamada-cli tokens path/to/theme.ts",
-    "theme:watch" : "yamada-cli tokens path/to/theme.ts --watch",
   } 、
   ...
 }
@@ -40,12 +43,10 @@ CLIは、カスタマイズしたテーマを読み取り、`node_modules/@yamad
 :::
 
 :::note status=warning
-`pnpm`など一部のパッケージマネージャーは、シンボリックリンクなどで出力先が見つからない場合があります。その場合は、CLIのオプションの`--out`を使用して、出力先を指定してください。
+更新した型定義は、インストールされる度に上書きされるため、インストールごとに再度実行する必要があります。
 :::
 
-## 使い方
-
-テーマの型を生成するには、次のスクリプトのいずれかを実行します。
+先ほど、追加したスクリプトを実行します。
 
 <PackageManagers
   packageNameOrCommand={{
@@ -56,13 +57,15 @@ CLIは、カスタマイズしたテーマを読み取り、`node_modules/@yamad
   }}
 />
 
-テーマのカスタマイズ中に型を継続的に生成したい場合は、次のスクリプトのいずれかを実行します。
+### テーマを生成する
+
+CLIを使用することで、デフォルトのテーマをローカルに生成することができます。
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: "pnpm theme:watch",
-    npm: "npm run theme:watch",
-    yarn: "yarn theme:watch",
-    bun: "bun run theme:watch",
+    pnpm: "pnpm yamada-cli theme ./theme",
+    npm: "npm run yamada-cli theme ./theme",
+    yarn: "yarn yamada-cli theme ./theme",
+    bun: "bun run yamada-cli theme ./theme",
   }}
 />

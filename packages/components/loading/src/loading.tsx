@@ -33,14 +33,11 @@ type LoadingOptions = {
    * The CSS `dur` property.
    */
   duration?: IconProps["dur"]
-
-  size?: CSSUIProps["fontSize"]
 }
 
 export type LoadingProps = IconProps &
-  Pick<ThemeProps<"Loading">, "colorScheme"> &
+  Pick<ThemeProps<"Loading">, "size" | "colorScheme"> &
   LoadingOptions
-
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
@@ -55,7 +52,6 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       color,
       secondaryColor,
       colorScheme = "primary",
-      size = "1em",
       dur,
       duration,
       ...rest
@@ -65,7 +61,6 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const computedProps = useMemo<ComponentProps>(
     () => ({
       className: cx("ui-loading", className),
-      size,
       var: [
         {
           __prefix: "ui",
@@ -97,7 +92,6 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       dur,
       rest,
       styles,
-      size,
     ],
   )
 

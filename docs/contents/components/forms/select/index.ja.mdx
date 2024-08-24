@@ -73,12 +73,16 @@ return <Select placeholder="キャラクターを選択" items={items} />
 </Select>
 ```
 
-### ヘッダーを追加する
+### ドロップダウンにヘッダーを追加する
 
 ```tsx
 <Select
   placeholder="キャラクターを選択"
-  header={<header>ここにヘッダーが追加されます</header>}
+  header={
+    <Center pt="2" px="3">
+      ここにヘッダーが追加されます
+    </Center>
+  }
 >
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
@@ -86,12 +90,16 @@ return <Select placeholder="キャラクターを選択" items={items} />
 </Select>
 ```
 
-### フッターを追加する
+### ドロップダウンにフッターを追加する
 
 ```tsx
 <Select
   placeholder="キャラクターを選択"
-  footer={<footer>ここにフッターが追加されます</footer>}
+  footer={
+    <Center pb="2" px="3">
+      ここにフッターが追加されます
+    </Center>
+  }
 >
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>

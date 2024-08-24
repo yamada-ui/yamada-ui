@@ -21,7 +21,7 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
 export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Icon", props)
 
-  let {
+  const {
     className,
     as: element,
     fontSize,

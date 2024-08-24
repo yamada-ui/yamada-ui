@@ -73,12 +73,16 @@ To set a default value, set a string to `defaultValue`.
 </Select>
 ```
 
-### Header
+### Add header to a dropdown
 
 ```tsx
 <Select
   placeholder="キャラクターを選択"
-  header={<header>Header added here</header>}
+  header={
+    <Center pt="2" px="3">
+      Header added here
+    </Center>
+  }
 >
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
@@ -86,12 +90,16 @@ To set a default value, set a string to `defaultValue`.
 </Select>
 ```
 
-### Footer
+### Add footer to a dropdown
 
 ```tsx
 <Select
   placeholder="キャラクターを選択"
-  footer={<footer>Footer added here</footer>}
+  footer={
+    <Center pb="2" px="3">
+      Footer added here
+    </Center>
+  }
 >
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>

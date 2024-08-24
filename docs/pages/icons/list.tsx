@@ -111,7 +111,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
                       _focusVisible={{ boxShadow: "outline" }}
                       onClick={() => openRef.current(name as IconNames)}
                     >
-                      <Icon />
+                      <Icon fontSize="2xl" />
                     </Center>
                   </AspectRatio>
                 </Tooltip>
@@ -149,7 +149,10 @@ const Search: FC<SearchProps> = memo(
     return (
       <InputGroup {...containerProps}>
         <InputLeftElement>
-          <SearchIcon color={["blackAlpha.700", "whiteAlpha.600"]} />
+          <SearchIcon
+            color={["blackAlpha.700", "whiteAlpha.600"]}
+            fontSize="xl"
+          />
         </InputLeftElement>
 
         <Input

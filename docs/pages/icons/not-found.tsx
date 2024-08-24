@@ -21,6 +21,7 @@ export const NotFound: FC<NotFoundProps> = memo(
       <Center flexDirection="column" gap="lg" {...rest}>
         <Icon
           color={["#5b5b5b", "#cccccc"]}
+          fontSize="12rem"
           strokeWidth="1"
           _hover={{ transform: "scaleX(-1)" }}
         />

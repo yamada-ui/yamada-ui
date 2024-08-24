@@ -24,7 +24,10 @@ describe("<Menu />", () => {
   test("Menu renders correctly", async () => {
     await a11y(
       <Menu>
-        <MenuButton as={Button} endIcon={<Icon icon={faChevronDown} />}>
+        <MenuButton
+          as={Button}
+          rightIcon={<Icon fontSize="xs" icon={faChevronDown} />}
+        >
           Menu
         </MenuButton>
         <MenuList>

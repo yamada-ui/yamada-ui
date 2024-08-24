@@ -694,3 +694,35 @@ export default extendTheme(
   }),
 )()
 ```
+
+### Using `generate`
+
+`generate` is a useful utility for customizing or generating theme tokens.
+
+#### Customizing spacing
+
+It generates new `spaces` by multiplying the specified number with the `spaces` in the default theme.
+
+```ts title=./theme/index.ts
+import { extendTheme, withDefaultProps, generate } from "@yamada-ui/react"
+
+export default extendTheme({
+  spaces: generate.spaces(2),
+})()
+```
+
+This makes the spacing of the entire application twice as large.
+
+#### Generating color tones
+
+It generates `tones` (50 to 950) used in `colorScheme`.
+
+```ts title=./theme/index.ts
+import { extendTheme, withDefaultProps, generate } from "@yamada-ui/react"
+
+export default extendTheme({
+  colors: {
+    red: generate.tones("#e82e34"),
+  },
+})()
+```

@@ -27,16 +27,15 @@ export type IconProps = UIIconProps & IconOptions
  * @see Docs https://yamada-ui.com/components/media-and-icons/fontawesome
  */
 export const Icon = forwardRef<IconProps, "svg">(
-  ({ className, icon, fontSize, __css, ...rest }, ref) => {
+  ({ className, icon, __css, ...rest }, ref) => {
     const css = useMemo(
       () => ({
         display: "inline-block",
         flexShrink: 0,
-        fontSize,
         color: "currentcolor",
         ...__css,
       }),
-      [__css, fontSize],
+      [__css],
     )
 
     return (

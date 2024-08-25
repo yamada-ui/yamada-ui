@@ -79,7 +79,7 @@ const getTemplate = async ({ template }: Options): Promise<Template> => {
 const action = async (_projectPath: string | undefined, options: Options) => {
   let { skipInstall, initGit, javascript } = options
 
-  p.intro(c.magenta(`Generating Yamada UI theme typings`))
+  p.intro(c.magenta(`Generating application with Yamada UI`))
 
   try {
     const pkgManager = getPackageManager(options)

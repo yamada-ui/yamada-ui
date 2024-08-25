@@ -13,7 +13,7 @@
       "description": "If `true`, highlight the row when the table row is hovered."
     },
     "layout": {
-      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", TableLayout>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"fixed\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", TableLayout>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `table-layout` property."
     },

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/visually-hidden",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Yamada UI visually hidden component",
   "keywords": [
     "yamada",
@@ -28,7 +28,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/visually-hidden"
   },
   "bugs": {

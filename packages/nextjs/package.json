@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/nextjs",
-  "version": "6.0.9",
+  "version": "6.1.0",
   "description": "Yamada UI Integrations for Next.js 14",
   "keywords": [
     "yamada",
@@ -21,7 +21,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/nextjs"
   },
   "bugs": {

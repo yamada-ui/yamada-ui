@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-token
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-token
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-token
+pnpm add @yamada-ui/use-token
+# or
+yarn add @yamada-ui/use-token
+# or
+npm install @yamada-ui/use-token
+# or
+bun add @yamada-ui/use-token
 ```
 
 ## Contribution

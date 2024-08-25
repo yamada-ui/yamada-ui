@@ -2,37 +2,37 @@
   "Box": {},
   "Flex": {
     "align": {
-      "type": "\"center\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"center\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `align-items` property."
     },
     "basis": {
-      "type": "number | \"content\" | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | ... 73 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | (string & {}) | \"content\" | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | ... 73 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-basis` property."
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
     "grow": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-grow` property."
     },
     "justify": {
-      "type": "\"center\" | \"left\" | \"right\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"left\" | \"right\" | \"center\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `justify-content` property."
     },
     "shrink": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-shrink` property."
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }
@@ -40,111 +40,111 @@
   "Center": {},
   "Grid": {
     "area": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-area` property."
     },
     "autoColumns": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoColumns<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledThe...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-columns` property."
     },
     "autoFlow": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-flow` property."
     },
     "autoRows": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoRows<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme)...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-rows` property."
     },
     "column": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column` property."
     },
     "row": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row` property."
     },
     "templateAreas": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-areas` property."
     },
     "templateColumns": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | Partial<Record<\"base\" | ... 5 more ... | \"2xl\", GridTemplateColumns<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-columns` property."
     },
     "templateRows": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | Partial<Record<\"base\" | ... 5 more ... | \"2xl\", GridTemplateRows<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) =...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-rows` property."
     }
   },
   "SimpleGrid": {
     "area": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-area` property."
     },
     "autoColumns": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoColumns<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledThe...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-columns` property."
     },
     "autoFlow": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-flow` property."
     },
     "autoRows": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoRows<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme)...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 67 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-rows` property."
     },
     "column": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column` property."
     },
     "minChildWidth": {
-      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 72 more ... | \"min-intrinsic\">",
+      "type": "UIValue<number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 72 more ... | \"min-intrinsic\">",
       "required": false,
       "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length."
     },
     "row": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row` property."
     },
     "templateAreas": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-areas` property."
     },
     "templateColumns": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | Partial<Record<\"base\" | ... 5 more ... | \"2xl\", GridTemplateColumns<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-columns` property."
     },
     "templateRows": {
-      "type": "0 | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | \"none\" | \"subgrid\" | Partial<Record<\"base\" | ... 5 more ... | \"2xl\", GridTemplateRows<...>>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) =...",
+      "type": "number | (string & {}) | \"px\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"max-content\" | \"min-content\" | ... 69 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-rows` property."
     }
   },
   "GridItem": {
     "area": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-area` property."
     },
     "colEnd": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumnEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumnEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column-end` property."
     },
@@ -154,12 +154,12 @@
       "description": "The number of columns the grid item should `span`."
     },
     "colStart": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumnStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumnStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column-start` property."
     },
     "rowEnd": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRowEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRowEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row-end` property."
     },
@@ -169,7 +169,7 @@
       "description": "The number of rows the grid item should `span`."
     },
     "rowStart": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRowStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRowStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row-start` property."
     }
@@ -184,12 +184,12 @@
   },
   "Stack": {
     "align": {
-      "type": "\"center\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"center\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"normal\" | \"self-end\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `align-items` property."
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
@@ -199,12 +199,12 @@
       "description": "If `true`, each stack item will show a divider."
     },
     "justify": {
-      "type": "\"center\" | \"left\" | \"right\" | (string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"left\" | \"right\" | \"center\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `justify-content` property."
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<\"base\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }

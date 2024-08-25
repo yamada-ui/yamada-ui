@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-eye-dropper",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Yamada UI useEyeDropper custom hook",
   "keywords": [
     "use-eye-dropper"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-eye-dropper"
   },
   "bugs": {

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/fontawesome",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "Yamada UI fontawesome components",
   "keywords": [
     "yamada",
@@ -30,7 +30,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/fontawesome"
   },
   "bugs": {

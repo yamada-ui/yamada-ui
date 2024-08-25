@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/progress",
-  "version": "1.0.35",
+  "version": "1.1.0",
   "description": "Yamada UI progress components",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/progress"
   },
   "bugs": {

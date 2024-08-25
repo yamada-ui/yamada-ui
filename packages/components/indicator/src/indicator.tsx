@@ -176,7 +176,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     isDisabled,
     containerProps,
     ping,
-    pingColor = "var(--ui-ping)",
+    pingColor = "$ping",
     pingDuration = "1.4s",
     pingCount = "infinite",
     pingScale = 1.8,

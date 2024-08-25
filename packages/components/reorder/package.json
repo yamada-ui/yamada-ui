@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/reorder",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Yamada UI reorder component",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/reorder"
   },
   "bugs": {

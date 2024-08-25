@@ -29,7 +29,6 @@ export const Indicator: ComponentStyle<"Indicator"> = {
       color: `white`,
       var: [
         {
-          __prefix: "ui",
           name: "ping",
           token: "colors",
           value: [`${c}.300`, `${c}.400`],
@@ -44,7 +43,6 @@ export const Indicator: ComponentStyle<"Indicator"> = {
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
       var: [
         {
-          __prefix: "ui",
           name: "ping",
           token: "colors",
           value: ["blackAlpha.400", "whiteAlpha.500"],

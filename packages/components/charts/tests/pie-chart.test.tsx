@@ -102,7 +102,7 @@ describe("<PieChart />", () => {
       )
 
       for (const { value } of data) {
-        await waitFor(() => expect(screen.getByText(`${value}`)).toBeVisible())
+        await waitFor(() => expect(screen.getByText(value)).toBeVisible())
       }
 
       rerender(
@@ -116,7 +116,7 @@ describe("<PieChart />", () => {
 
       for (const { value } of data) {
         await waitFor(() =>
-          expect(screen.queryByText(`${value}`)).not.toBeInTheDocument(),
+          expect(screen.queryByText(value)).not.toBeInTheDocument(),
         )
       }
     })
@@ -341,7 +341,7 @@ describe("<PieChart />", () => {
       expect(formattedElements).toHaveLength(data.length)
     })
 
-    test("valueFormatter should function properly in label", async () => {
+    test("labelFormatter should function properly in label", async () => {
       render(
         <PieChart
           containerProps={{ width: 400, height: "80%" }}

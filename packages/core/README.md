@@ -5,19 +5,13 @@ Styled API for creating atomic, theme-aware component styling.
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/core
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/core
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/core
+pnpm add @yamada-ui/core
+# or
+yarn add @yamada-ui/core
+# or
+npm install @yamada-ui/core
+# or
+bun add @yamada-ui/core
 ```
 
 ## Problem

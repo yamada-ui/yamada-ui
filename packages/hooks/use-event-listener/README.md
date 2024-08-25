@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-event-listener
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-event-listener
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-event-listener
+pnpm add @yamada-ui/use-event-listener
+# or
+yarn add @yamada-ui/use-event-listener
+# or
+npm install @yamada-ui/use-event-listener
+# or
+bun add @yamada-ui/use-event-listener
 ```
 
 ## Contribution

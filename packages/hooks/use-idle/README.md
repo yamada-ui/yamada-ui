@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-idle
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-idle
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-idle
+pnpm add @yamada-ui/use-idle
+# or
+yarn add @yamada-ui/use-idle
+# or
+npm install @yamada-ui/use-idle
+# or
+bun add @yamada-ui/use-idle
 ```
 
 ## Contribution

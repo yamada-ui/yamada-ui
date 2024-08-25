@@ -127,15 +127,13 @@ To use Yamada UI components, all you need to install the
 \`@yamada-ui/react\` package.
 
 \`\`\`sh
-$ pnpm add @yamada-ui/react
-
+pnpm add @yamada-ui/react
 # or
-
-$ yarn add @yamada-ui/react
-
+yarn add @yamada-ui/react
 # or
-
-$ npm install @yamada-ui/react
+npm install @yamada-ui/react
+# or
+bun add @yamada-ui/react
 \`\`\`
 
 \`@yamada-ui/table\` and \`@yamada-ui/calendar\`, among others,
@@ -144,25 +142,25 @@ You will need to install them separately.
 
 \`\`\`sh
 # Provide a convenient Table component using \`@tanstack/react-table\`.
-$ pnpm add @yamada-ui/table
+pnpm add @yamada-ui/table
 
 # Provide a convenient Calendar and datePicker, MonthPicker component
-$ pnpm add @yamada-ui/calendar
+pnpm add @yamada-ui/calendar
 
 # Provide a convenient Carousel component using \`embla-carousel-react\`.
-$ pnpm add @yamada-ui/carousel
+pnpm add @yamada-ui/carousel
 
 # Provide a convenient Dropzone component using \`react-dropzone\`.
-$ pnpm add @yamada-ui/dropzone
+pnpm add @yamada-ui/dropzone
 
 # Provide a convenient Markdown component using \`react-markdown\` and \`react-syntax-highlighter\`.
-$ pnpm add @yamada-ui/markdown
+pnpm add @yamada-ui/markdown
 
 # Provide a convenient Icon component using \`Lucide\`.
-$ pnpm add @yamada-ui/lucide
+pnpm add @yamada-ui/lucide
 
 # a package for conveniently using \`Font Awesome\`.
-$ pnpm add @yamada-ui/fontawesome
+pnpm add @yamada-ui/fontawesome
 \`\`\`
 
 ## Usage

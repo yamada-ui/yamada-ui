@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/slider
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/slider
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/slider
+pnpm add @yamada-ui/slider
+# or
+yarn add @yamada-ui/slider
+# or
+npm install @yamada-ui/slider
+# or
+bun add @yamada-ui/slider
 ```
 
 ## Contribution

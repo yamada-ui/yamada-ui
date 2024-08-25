@@ -503,6 +503,37 @@ To customize icons, set `props` to `iconProps`.
 </VStack>
 ```
 
+### Add elements to a dropdown
+
+To add elements to a dropdown, set the elements to the `children` property.
+The `children` are provided with `value` and `onClose` methods, which can be used to access the internal state.
+
+```tsx
+<VStack>
+  <RangeDatePicker placeholder="YYYY/MM/DD">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </RangeDatePicker>
+
+  <RangeDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit
+          {value[0]
+            ? ` ${String(value[0].getMonth() + 1).padStart(2, "0")}/${String(value[0].getDate()).padStart(2, "0")} -`
+            : ""}
+          {value[1]
+            ? ` ${String(value[1].getMonth() + 1).padStart(2, "0")}/${String(value[1].getDate()).padStart(2, "0")}`
+            : ""}
+        </Button>
+      </VStack>
+    )}
+  </RangeDatePicker>
+</VStack>
+```
+
 ### Control
 
 ```tsx functional=true

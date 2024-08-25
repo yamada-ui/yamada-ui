@@ -1,4 +1,4 @@
-import { escape, antonym, toCamelCase, toKebabCase } from "../src"
+import { escape, antonym, toCamelCase, toKebabCase, toTitleCase } from "../src"
 
 describe("String", () => {
   describe("escape", () => {
@@ -51,5 +51,29 @@ describe("String", () => {
       expect(toKebabCase("HelloWorld")).toBe("hello-world")
       expect(toKebabCase("AnotherExample")).toBe("another-example")
     })
+  })
+})
+
+describe("toTitleCase", () => {
+  const expected = "Test Variable Name"
+
+  test("should convert kebab-case", () => {
+    const input = "test-variable-name"
+    expect(toTitleCase(input)).toBe(expected)
+  })
+
+  test("should convert snake_case", () => {
+    const input = "test_variable_name"
+    expect(toTitleCase(input)).toBe(expected)
+  })
+
+  test("should convert camelCase", () => {
+    const input = "testVariableName"
+    expect(toTitleCase(input)).toBe(expected)
+  })
+
+  test("should trim space", () => {
+    const input = "testVariableName "
+    expect(toTitleCase(input)).toBe(expected)
   })
 })

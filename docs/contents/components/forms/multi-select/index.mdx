@@ -74,6 +74,40 @@ To set default values, set a string to `defaultValue`.
 </MultiSelect>
 ```
 
+### Add header to a dropdown
+
+```tsx
+<MultiSelect
+  placeholder="キャラクターを選択"
+  header={
+    <Center pt="2" px="3">
+      Header added here
+    </Center>
+  }
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### Add footer to a dropdown
+
+```tsx
+<MultiSelect
+  placeholder="キャラクターを選択"
+  footer={
+    <Center pb="2" px="3">
+      Footer added here
+    </Center>
+  }
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
 ### Grouping
 
 To group options, use `OptionGroup`.

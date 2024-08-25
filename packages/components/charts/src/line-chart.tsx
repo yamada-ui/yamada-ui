@@ -67,7 +67,7 @@ export type LineChartProps = HTMLUIProps<"div"> &
 /**
  * `LineChart` is a component for drawing line charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/line-chart
+ * @see Docs https://yamada-ui.com/components/data-display/line-chart
  */
 export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("LineChart", props)

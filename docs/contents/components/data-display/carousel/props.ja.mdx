@@ -13,7 +13,7 @@ tab: Props
 <PropsCard
   id="carousel-align"
   name="align"
-  type='AlignmentOptionType | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", AlignmentOptionType | undefined>> | ColorModeArray<...>'
+  type='AlignmentOptionType | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", AlignmentOptionType | undefined>> | ColorModeArray<...>'
   description={"The alignment of the carousel."}
   defaultValue={"'center'"}
 />
@@ -36,7 +36,7 @@ tab: Props
 <PropsCard
   id="carousel-containscroll"
   name="containScroll"
-  type='ScrollContainOptionType | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", ScrollContainOptionType | undefined>> | ColorModeArray<...>'
+  type='ScrollContainOptionType | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", ScrollContainOptionType | undefined>> | ColorModeArray<...>'
   description={
     "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
   }
@@ -152,7 +152,7 @@ tab: Props
   type='type ONLY_FOR_FORMAT =
   | number
   | number[]
-  | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl",
+  | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl",
         number | number[] | undefined>>
   | ColorModeArray<number | number[] | undefined>'
   description={
@@ -216,7 +216,7 @@ tab: Props
 <PropsCard
   id="carousel-slidesize"
   name="slideSize"
-  type='UIValue<number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 71 more ... | "9xl">'
+  type='UIValue<number | (string & {}) | "px" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 71 more ... | "9xl">'
   description={"The CSS `width` property."}
 />
 
@@ -298,7 +298,7 @@ tab: Props
 <PropsCard
   id="carouselslide-size"
   name="size"
-  type='number | "px" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 76 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='number | (string & {}) | "px" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-fit-content" | "-moz-max-content" | ... 76 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `width` property."}
 />
 

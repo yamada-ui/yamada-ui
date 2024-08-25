@@ -108,3 +108,70 @@ tab: Props
   type="string"
   description={"The image `srcset` attribute."}
 />
+
+### NativeImageProps
+
+### UseImageProps
+
+<PropsCard
+  id="useimage-crossorigin"
+  name="crossOrigin"
+  type='"" | "anonymous" | "use-credentials"'
+  description={
+    "The key used to set the crossOrigin on the HTMLImageElement into which the image will be loaded.\nThis tells the browser to request cross-origin access when trying to download the image data."
+  }
+/>
+
+<PropsCard
+  id="useimage-ignorefallback"
+  name="ignoreFallback"
+  type="boolean"
+  description={
+    "If `true`, opt out of the `fallbackSrc` logic and use as `img`."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="useimage-loading"
+  name="loading"
+  type='"eager" | "lazy"'
+  description={"The image `loading` attribute."}
+/>
+
+<PropsCard
+  id="useimage-onerror"
+  name="onError"
+  type="ReactEventHandler<HTMLImageElement>"
+  description={
+    "A callback for when there was an error loading the image `src`."
+  }
+/>
+
+<PropsCard
+  id="useimage-onload"
+  name="onLoad"
+  type="ReactEventHandler<HTMLImageElement>"
+  description={"A callback for when the image `src` has been loaded."}
+/>
+
+<PropsCard
+  id="useimage-sizes"
+  name="sizes"
+  type="string"
+  description={"The image `sizes` attribute."}
+/>
+
+<PropsCard
+  id="useimage-src"
+  name="src"
+  type="string"
+  description={"The image `src` attribute."}
+/>
+
+<PropsCard
+  id="useimage-srcset"
+  name="srcSet"
+  type="string"
+  description={"The image `srcset` attribute."}
+/>

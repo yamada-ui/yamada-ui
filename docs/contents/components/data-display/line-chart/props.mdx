@@ -33,7 +33,7 @@ tab: Props
   id="linechart-series"
   name="series"
   required
-  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; })[]'
+  type="LineProps[]"
   description={
     "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
   }
@@ -42,8 +42,7 @@ tab: Props
 <PropsCard
   id="linechart-chartprops"
   name="chartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
+  type="LineChartProps"
   description={"Props passed down to recharts `LineChart` component."}
 />
 
@@ -67,7 +66,7 @@ tab: Props
 <PropsCard
   id="linechart-containerprops"
   name="containerProps"
-  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  type="ResponsiveContainerProps"
   description={"Props passed down to recharts `ResponsiveContainer` component."}
 />
 
@@ -90,7 +89,7 @@ tab: Props
 <PropsCard
   id="linechart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type="GridProps"
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -112,21 +111,21 @@ tab: Props
 <PropsCard
   id="linechart-legendprops"
   name="legendProps"
-  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  type="LegendProps"
   description={"Props passed down to recharts 'Legend' component."}
 />
 
 <PropsCard
   id="linechart-lineprops"
   name="lineProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
+  type="Partial<LineProps>"
   description={"Props for the lines."}
 />
 
 <PropsCard
   id="linechart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type="ReferenceLineProps[]"
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -168,7 +167,7 @@ tab: Props
 <PropsCard
   id="linechart-tooltipprops"
   name="tooltipProps"
-  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  type="TooltipProps"
   description={"Props passed down to recharts 'Tooltip' component."}
 />
 
@@ -259,14 +258,14 @@ tab: Props
 <PropsCard
   id="linechart-xaxislabelprops"
   name="xAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'XAxisLabel' component."}
 />
 
 <PropsCard
   id="linechart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type="XAxisProps"
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
@@ -287,14 +286,14 @@ tab: Props
 <PropsCard
   id="linechart-yaxislabelprops"
   name="yAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'YAxisLabel' component."}
 />
 
 <PropsCard
   id="linechart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type="YAxisProps"
   description={"Props passed down to recharts 'YAxis' component."}
 />
 
@@ -307,34 +306,18 @@ tab: Props
 
 ### LineProps
 
-<PropsCard
-  id="line-activedot"
-  name="activeDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="line-activedot" name="activeDot" type="DotProps" />
 
 <PropsCard
   id="line-color"
   name="color"
-  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "link.950">'
 />
 
-<PropsCard
-  id="line-dimdot"
-  name="dimDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="line-dimdot" name="dimDot" type="DotProps" />
 
-<PropsCard
-  id="line-dimline"
-  name="dimLine"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
-/>
+<PropsCard id="line-dimline" name="dimLine" type="Partial<LineProps>" />
 
-<PropsCard
-  id="line-dot"
-  name="dot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="line-dot" name="dot" type="DotProps" />
 
 ### DotProps

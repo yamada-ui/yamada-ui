@@ -2475,6 +2475,16 @@
     }
   },
   {
+    "title": "Handle Row Double Click Events",
+    "type": "fragment",
+    "slug": "/components/data-display/table#handle-row-double-click-events",
+    "hierarchy": {
+      "lv1": "Table",
+      "lv2": "Usage",
+      "lv3": "Handle Row Double Click Events"
+    }
+  },
+  {
     "title": "Customize Checkbox (Column) Styling",
     "type": "fragment",
     "slug": "/components/data-display/table#customize-checkbox-column-styling",
@@ -3240,6 +3250,26 @@
       "lv1": "Autocomplete",
       "lv2": "Usage",
       "lv3": "Set Default Value"
+    }
+  },
+  {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
     }
   },
   {
@@ -5947,6 +5977,26 @@
     }
   },
   {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
+    }
+  },
+  {
     "title": "Grouping",
     "type": "fragment",
     "slug": "/components/forms/multi-select#grouping",
@@ -7536,6 +7586,26 @@
     "type": "fragment",
     "slug": "/components/forms/select#set-default-value",
     "hierarchy": { "lv1": "Select", "lv2": "Usage", "lv3": "Set Default Value" }
+  },
+  {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/select#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/select#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
+    }
   },
   {
     "title": "Grouping",
@@ -12143,6 +12213,16 @@
     }
   },
   {
+    "title": "Customize the Close Event",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#customize-the-close-event",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize the Close Event"
+    }
+  },
+  {
     "title": "Customize the Component",
     "type": "fragment",
     "slug": "/hooks/use-notice#customize-the-component",
@@ -12371,6 +12451,16 @@
       "lv1": "useSnacks",
       "lv2": "Customize Notifications",
       "lv3": "Close Notifications"
+    }
+  },
+  {
+    "title": "Customize Close Event",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#customize-close-event",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize Close Event"
     }
   },
   {
@@ -12826,7 +12916,7 @@
   {
     "title": "CLI",
     "type": "page",
-    "description": "Generate types of customized themes using CLI commands.",
+    "description": "Use CLI commands to generate types for your customized theme, such as colors and font sizes.",
     "slug": "/styled-system/cli",
     "hierarchy": { "lv1": "CLI" }
   },
@@ -12841,6 +12931,22 @@
     "type": "fragment",
     "slug": "/styled-system/cli#usage",
     "hierarchy": { "lv1": "CLI", "lv2": "Usage" }
+  },
+  {
+    "title": "Update Type Definitions",
+    "type": "fragment",
+    "slug": "/styled-system/cli#update-type-definitions",
+    "hierarchy": {
+      "lv1": "CLI",
+      "lv2": "Usage",
+      "lv3": "Update Type Definitions"
+    }
+  },
+  {
+    "title": "Generate Theme",
+    "type": "fragment",
+    "slug": "/styled-system/cli#generate-theme",
+    "hierarchy": { "lv1": "CLI", "lv2": "Usage", "lv3": "Generate Theme" }
   },
   {
     "title": "Color Mode",
@@ -13282,6 +13388,16 @@
       "lv1": "Notification",
       "lv2": "Customize Notifications",
       "lv3": "Close Notification"
+    }
+  },
+  {
+    "title": "Customize the Close Event",
+    "type": "fragment",
+    "slug": "/styled-system/notification#customize-the-close-event",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize the Close Event"
     }
   },
   {
@@ -13782,6 +13898,38 @@
       "lv1": "Customize Theme",
       "lv2": "Utility",
       "lv3": "Usage of withDefaultProps"
+    }
+  },
+  {
+    "title": "Using generate",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-generate",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Utility",
+      "lv3": "Using generate"
+    }
+  },
+  {
+    "title": "Customizing spacing",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#customizing-spacing",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Utility",
+      "lv3": "Using generate",
+      "lv4": "Customizing spacing"
+    }
+  },
+  {
+    "title": "Generating color tones",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#generating-color-tones",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Utility",
+      "lv3": "Using generate",
+      "lv4": "Generating color tones"
     }
   },
   {

@@ -2700,6 +2700,16 @@
     }
   },
   {
+    "title": "行のダブルクリックイベントをハンドルする",
+    "type": "fragment",
+    "slug": "/components/data-display/table#行のダブルクリックイベントをハンドルする",
+    "hierarchy": {
+      "lv1": "Table",
+      "lv2": "使い方",
+      "lv3": "行のダブルクリックイベントをハンドルする"
+    }
+  },
+  {
     "title": "チェックボックス(列)のスタイリングをカスタマイズする",
     "type": "fragment",
     "slug": "/components/data-display/table#チェックボックス列のスタイリングをカスタマイズする",
@@ -3545,6 +3555,26 @@
       "lv1": "Autocomplete",
       "lv2": "使い方",
       "lv3": "デフォルトの値を設定する"
+    }
+  },
+  {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
     }
   },
   {
@@ -6388,6 +6418,26 @@
     }
   },
   {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
+    }
+  },
+  {
     "title": "グループ化する",
     "type": "fragment",
     "slug": "/components/forms/multi-select#グループ化する",
@@ -8056,6 +8106,26 @@
       "lv1": "Select",
       "lv2": "使い方",
       "lv3": "デフォルトの値を設定する"
+    }
+  },
+  {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/select#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/select#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
     }
   },
   {
@@ -12863,6 +12933,16 @@
     }
   },
   {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
+    }
+  },
+  {
     "title": "コンポーネントをカスタマイズする",
     "type": "fragment",
     "slug": "/hooks/use-notice#コンポーネントをカスタマイズする",
@@ -13091,6 +13171,16 @@
       "lv1": "useSnacks",
       "lv2": "通知をカスタマイズする",
       "lv3": "通知を閉じる"
+    }
+  },
+  {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
     }
   },
   {
@@ -13575,6 +13665,18 @@
     "hierarchy": { "lv1": "CLI", "lv2": "使い方" }
   },
   {
+    "title": "型定義を更新する",
+    "type": "fragment",
+    "slug": "/styled-system/cli#型定義を更新する",
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": "型定義を更新する" }
+  },
+  {
+    "title": "テーマを生成する",
+    "type": "fragment",
+    "slug": "/styled-system/cli#テーマを生成する",
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": "テーマを生成する" }
+  },
+  {
     "title": "カラーモード",
     "type": "page",
     "description": "Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。",
@@ -14039,6 +14141,16 @@
       "lv1": "通知",
       "lv2": "通知をカスタマイズする",
       "lv3": "通知を閉じる"
+    }
+  },
+  {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/styled-system/notification#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "通知",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
     }
   },
   {
@@ -14566,6 +14678,38 @@
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
       "lv3": "withDefaultPropsを使う"
+    }
+  },
+  {
+    "title": "generateを使う",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#generateを使う",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う"
+    }
+  },
+  {
+    "title": "余白をカスタマイズする",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#余白をカスタマイズする",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う",
+      "lv4": "余白をカスタマイズする"
+    }
+  },
+  {
+    "title": "カラーのトーンを生成する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#カラーのトーンを生成する",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う",
+      "lv4": "カラーのトーンを生成する"
     }
   },
   {

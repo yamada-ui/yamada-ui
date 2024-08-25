@@ -1095,7 +1095,7 @@
     },
     "endAngle": {
       "type": "number",
-      "defaultValue": "0",
+      "defaultValue": "-180",
       "required": false,
       "description": "Controls angle at which chart ends."
     },
@@ -1144,7 +1144,7 @@
     },
     "startAngle": {
       "type": "number",
-      "defaultValue": "180",
+      "defaultValue": "90",
       "required": false,
       "description": "Controls angle at which chart starts."
     },

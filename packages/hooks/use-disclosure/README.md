@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-disclosure
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-disclosure
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-disclosure
+pnpm add @yamada-ui/use-disclosure
+# or
+yarn add @yamada-ui/use-disclosure
+# or
+npm install @yamada-ui/use-disclosure
+# or
+bun add @yamada-ui/use-disclosure
 ```
 
 ## Contribution

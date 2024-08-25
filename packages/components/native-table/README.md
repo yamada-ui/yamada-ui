@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/native-table
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/native-table
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/native-table
+pnpm add @yamada-ui/native-table
+# or
+yarn add @yamada-ui/native-table
+# or
+npm install @yamada-ui/native-table
+# or
+bun add @yamada-ui/native-table
 ```
 
 ## Contribution

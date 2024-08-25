@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/breadcrumb
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/breadcrumb
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/breadcrumb
+pnpm add @yamada-ui/breadcrumb
+# or
+yarn add @yamada-ui/breadcrumb
+# or
+npm install @yamada-ui/breadcrumb
+# or
+bun add @yamada-ui/breadcrumb
 ```
 
 ## Contribution

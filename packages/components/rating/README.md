@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/rating
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/rating
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/rating
+pnpm add @yamada-ui/rating
+# or
+yarn add @yamada-ui/rating
+# or
+npm install @yamada-ui/rating
+# or
+bun add @yamada-ui/rating
 ```
 
 ## Contribution

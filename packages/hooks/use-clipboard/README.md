@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-clipboard
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-clipboard
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-clipboard
+pnpm add @yamada-ui/use-clipboard
+# or
+yarn add @yamada-ui/use-clipboard
+# or
+npm install @yamada-ui/use-clipboard
+# or
+bun add @yamada-ui/use-clipboard
 ```
 
 ## Contribution

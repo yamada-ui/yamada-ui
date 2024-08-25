@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-controllable-state
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-controllable-state
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-controllable-state
+pnpm add @yamada-ui/use-controllable-state
+# or
+yarn add @yamada-ui/use-controllable-state
+# or
+npm install @yamada-ui/use-controllable-state
+# or
+bun add @yamada-ui/use-controllable-state
 ```
 
 ## Contribution

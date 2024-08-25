@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-eye-dropper
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-eye-dropper
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-eye-dropper
+pnpm add @yamada-ui/use-eye-dropper
+# or
+yarn add @yamada-ui/use-eye-dropper
+# or
+npm install @yamada-ui/use-eye-dropper
+# or
+bun add @yamada-ui/use-eye-dropper
 ```
 
 ## Contribution

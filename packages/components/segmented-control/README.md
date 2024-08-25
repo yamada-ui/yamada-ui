@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/segmented-control
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/segmented-control
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/segmented-control
+pnpm add @yamada-ui/segmented-control
+# or
+yarn add @yamada-ui/segmented-control
+# or
+npm install @yamada-ui/segmented-control
+# or
+bun add @yamada-ui/segmented-control
 ```
 
 ## Contribution

@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-infinite-scroll
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-infinite-scroll
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-infinite-scroll
+pnpm add @yamada-ui/use-infinite-scroll
+# or
+yarn add @yamada-ui/use-infinite-scroll
+# or
+npm install @yamada-ui/use-infinite-scroll
+# or
+bun add @yamada-ui/use-infinite-scroll
 ```
 
 ## Contribution

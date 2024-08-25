@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/autocomplete
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/autocomplete
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/autocomplete
+pnpm add @yamada-ui/autocomplete
+# or
+yarn add @yamada-ui/autocomplete
+# or
+npm install @yamada-ui/autocomplete
+# or
+bun add @yamada-ui/autocomplete
 ```
 
 ## Contribution

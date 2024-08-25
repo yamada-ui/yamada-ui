@@ -1,4 +1,4 @@
-import { useTheme } from "@yamada-ui/core"
+import { getVar, useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
@@ -123,7 +123,6 @@ export const useRadarChart = ({
   const radarColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `radar-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -135,7 +134,7 @@ export const useRadarChart = ({
     () =>
       [
         ...radarColors,
-        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+        { name: "fill-opacity", value: fillOpacity },
       ] as Required<CSSUIProps>["var"],
     [fillOpacity, radarColors],
   )
@@ -187,7 +186,7 @@ export const useRadarChart = ({
 
   const [radarProps, radarClassName] = useMemo(() => {
     const resolvedRadarProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: "$fill-opacity",
       ...computedRadarProps,
     }
 
@@ -245,7 +244,7 @@ export const useRadarChart = ({
           dimRadar = {},
           ...computedProps
         } = props
-        const color = `var(--ui-radar-${index})`
+        const color = getVar(`radar-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimRadar = { ...dimRadarProps, ...dimRadar }
 

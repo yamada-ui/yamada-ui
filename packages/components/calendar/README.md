@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/calendar
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/calendar
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/calendar
+pnpm add @yamada-ui/calendar
+# or
+yarn add @yamada-ui/calendar
+# or
+npm install @yamada-ui/calendar
+# or
+bun add @yamada-ui/calendar
 ```
 
 ## Contribution

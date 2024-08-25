@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-size
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-size
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-size
+pnpm add @yamada-ui/use-size
+# or
+yarn add @yamada-ui/use-size
+# or
+npm install @yamada-ui/use-size
+# or
+bun add @yamada-ui/use-size
 ```
 
 ## Contribution

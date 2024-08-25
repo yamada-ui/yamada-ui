@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/ripple
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/ripple
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/ripple
+pnpm add @yamada-ui/ripple
+# or
+yarn add @yamada-ui/ripple
+# or
+npm install @yamada-ui/ripple
+# or
+bun add @yamada-ui/ripple
 ```
 
 ## Contribution

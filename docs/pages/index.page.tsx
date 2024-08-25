@@ -194,13 +194,13 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                           href={href}
                           target="_blank"
                           flexBasis={{
-                            base: "calc((100% - var(--ui-space) * 2) / 3)",
-                            md: "calc((100% - var(--ui-space) * 1) / 2)",
+                            base: "calc((100% - $space * 2) / 3)",
+                            md: "calc((100% - $space * 1) / 2)",
                             sm: "100%",
                           }}
                           maxW={{
-                            base: "calc((100% - var(--ui-space) * 2) / 3)",
-                            md: "calc((100% - var(--ui-space) * 1) / 2)",
+                            base: "calc((100% - $space * 2) / 3)",
+                            md: "calc((100% - $space * 1) / 2)",
                             sm: "100%",
                           }}
                           bg="white"
@@ -248,14 +248,14 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                           href={href}
                           target="_blank"
                           flexBasis={{
-                            base: "calc((100% - var(--ui-space) * 3) / 4)",
-                            md: "calc((100% - var(--ui-space) * 2) / 3)",
-                            sm: "calc((100% - var(--ui-space) * 1) / 2)",
+                            base: "calc((100% - $space * 3) / 4)",
+                            md: "calc((100% - $space * 2) / 3)",
+                            sm: "calc((100% - $space * 1) / 2)",
                           }}
                           maxW={{
-                            base: "calc((100% - var(--ui-space) * 3) / 4)",
-                            md: "calc((100% - var(--ui-space) * 2) / 3)",
-                            sm: "calc((100% - var(--ui-space) * 1) / 2)",
+                            base: "calc((100% - $space * 3) / 4)",
+                            md: "calc((100% - $space * 2) / 3)",
+                            sm: "calc((100% - $space * 1) / 2)",
                           }}
                           bg="white"
                           rounded="md"

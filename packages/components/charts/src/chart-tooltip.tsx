@@ -3,22 +3,26 @@ import { cx, isArray, type Dict } from "@yamada-ui/utils"
 import { useTooltip } from "./use-chart"
 
 export type ChartTooltipProps = {
-  label: string | undefined
+  label?: string
+  dataKey?: string
   payload: Dict[] | undefined
   valueFormatter?: (value: any) => string
   labelFormatter?: (label: string) => string
   unit?: string
+  isRadialChart?: boolean
 }
 
 export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
   (
     {
       label,
+      dataKey = "value",
       className,
       payload = [],
       valueFormatter,
       labelFormatter,
       unit,
+      isRadialChart,
       ...rest
     },
     ref,
@@ -26,7 +30,16 @@ export const ChartTooltip = forwardRef<ChartTooltipProps, "div">(
     const { styles } = useTooltip()
 
     const items = payload.map(
-      ({ color: colorProp, name, value: valueProp, payload } = {}, index) => {
+      (
+        {
+          color: colorProp,
+          name: nameProp,
+          [dataKey]: valueProp,
+          payload,
+        } = {},
+        index,
+      ) => {
+        const name = isRadialChart ? payload?.name : nameProp
         const color = colorProp ?? payload?.color
         let value: string
 

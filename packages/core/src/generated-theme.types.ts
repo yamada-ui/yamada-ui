@@ -910,6 +910,10 @@ export interface GeneratedTheme extends UITheme {
       sizes: "sm" | "md" | "lg" | "full" | (string & {})
       variants: string & {}
     }
+    RadialChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
     Radio: { sizes: "sm" | "md" | "lg" | (string & {}); variants: string & {} }
     RangeDatePicker: {
       sizes: "xs" | "sm" | "md" | "lg" | (string & {})

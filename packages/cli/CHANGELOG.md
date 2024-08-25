@@ -1,5 +1,19 @@
 # @yamada-ui/cli
 
+## 1.1.1
+
+### Patch Changes
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`3ba3f58`](https://github.com/yamada-ui/yamada-ui/commit/3ba3f58686fe436fdbfb2253f5730bb52f67bfd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the git repository URL.
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`74045d7`](https://github.com/yamada-ui/yamada-ui/commit/74045d7c4db435d5aca9f62d17a9b34485ea37ef) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added instructions for installation using [bun](https://bun.sh/) to `README.md`.
+
+- [#2554](https://github.com/yamada-ui/yamada-ui/pull/2554) [`bb96e05`](https://github.com/yamada-ui/yamada-ui/commit/bb96e058136c056c3d4655b0022d0203947582f7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the semantic color schema type definition could not be generated correctly.
+
+- [#2503](https://github.com/yamada-ui/yamada-ui/pull/2503) [`5b274bb`](https://github.com/yamada-ui/yamada-ui/commit/5b274bb002f069f7a0ea6ab811ad1035e4c02e72) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#2627](https://github.com/yamada-ui/yamada-ui/pull/2627) [`29de69b`](https://github.com/yamada-ui/yamada-ui/commit/29de69b1233aa1b73302f821b228f75cbe86fe73) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Adjusted the styling.
+
 ## 1.1.0
 
 ### Minor Changes

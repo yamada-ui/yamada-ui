@@ -324,10 +324,10 @@
     "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Add Unit" }
   },
   {
-    "title": "Format Value",
+    "title": "Format",
     "type": "fragment",
-    "slug": "/components/data-display/area-chart#format-value",
-    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Format Value" }
+    "slug": "/components/data-display/area-chart#format",
+    "hierarchy": { "lv1": "AreaChart", "lv2": "Usage", "lv3": "Format" }
   },
   {
     "title": "Adjust Opacity",
@@ -494,10 +494,10 @@
     "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Add Unit" }
   },
   {
-    "title": "Format Values",
+    "title": "Format",
     "type": "fragment",
-    "slug": "/components/data-display/bar-chart#format-values",
-    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Format Values" }
+    "slug": "/components/data-display/bar-chart#format",
+    "hierarchy": { "lv1": "BarChart", "lv2": "Usage", "lv3": "Format" }
   },
   {
     "title": "Adjust Opacity",
@@ -1182,10 +1182,10 @@
     "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
   },
   {
-    "title": "Format Values",
+    "title": "Format",
     "type": "fragment",
-    "slug": "/components/data-display/donut-chart#format-values",
-    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Format Values" }
+    "slug": "/components/data-display/donut-chart#format",
+    "hierarchy": { "lv1": "DonutChart", "lv2": "Usage", "lv3": "Format" }
   },
   {
     "title": "Adjust Opacity",
@@ -1468,10 +1468,10 @@
     "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Add Unit" }
   },
   {
-    "title": "Format Values",
+    "title": "Format",
     "type": "fragment",
-    "slug": "/components/data-display/line-chart#format-values",
-    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Format Values" }
+    "slug": "/components/data-display/line-chart#format",
+    "hierarchy": { "lv1": "LineChart", "lv2": "Usage", "lv3": "Format" }
   },
   {
     "title": "Adjust Opacity",
@@ -1857,10 +1857,10 @@
     "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
   },
   {
-    "title": "Format Values",
+    "title": "Format",
     "type": "fragment",
-    "slug": "/components/data-display/pie-chart#format-values",
-    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Format Values" }
+    "slug": "/components/data-display/pie-chart#format",
+    "hierarchy": { "lv1": "PieChart", "lv2": "Usage", "lv3": "Format" }
   },
   {
     "title": "Adjust Opacity",
@@ -1948,10 +1948,10 @@
     "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Hide Tooltip" }
   },
   {
-    "title": "Format Values",
+    "title": "Format",
     "type": "fragment",
-    "slug": "/components/data-display/radar-chart#format-values",
-    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Format Values" }
+    "slug": "/components/data-display/radar-chart#format",
+    "hierarchy": { "lv1": "RadarChart", "lv2": "Usage", "lv3": "Format" }
   },
   {
     "title": "Adjust Opacity",
@@ -2472,6 +2472,16 @@
       "lv1": "Table",
       "lv2": "Usage",
       "lv3": "Handle Row Click Events"
+    }
+  },
+  {
+    "title": "Handle Row Double Click Events",
+    "type": "fragment",
+    "slug": "/components/data-display/table#handle-row-double-click-events",
+    "hierarchy": {
+      "lv1": "Table",
+      "lv2": "Usage",
+      "lv3": "Handle Row Double Click Events"
     }
   },
   {
@@ -3243,6 +3253,26 @@
     }
   },
   {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
+    }
+  },
+  {
     "title": "Grouping",
     "type": "fragment",
     "slug": "/components/forms/autocomplete#grouping",
@@ -3747,6 +3777,16 @@
       "lv1": "ColorPicker",
       "lv2": "Usage",
       "lv3": "Customize Layout"
+    }
+  },
+  {
+    "title": "Add elements to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#add-elements-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "Usage",
+      "lv3": "Add elements to a dropdown"
     }
   },
   {
@@ -5937,6 +5977,26 @@
     }
   },
   {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
+    }
+  },
+  {
     "title": "Grouping",
     "type": "fragment",
     "slug": "/components/forms/multi-select#grouping",
@@ -7528,6 +7588,26 @@
     "hierarchy": { "lv1": "Select", "lv2": "Usage", "lv3": "Set Default Value" }
   },
   {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/select#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/select#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
+    }
+  },
+  {
     "title": "Grouping",
     "type": "fragment",
     "slug": "/components/forms/select#grouping",
@@ -8724,10 +8804,10 @@
     "hierarchy": { "lv1": "Icon", "lv2": "Usage" }
   },
   {
-    "title": "Change Size",
+    "title": "Change fontSize",
     "type": "fragment",
-    "slug": "/components/media-and-icons/icon#change-size",
-    "hierarchy": { "lv1": "Icon", "lv2": "Usage", "lv3": "Change Size" }
+    "slug": "/components/media-and-icons/icon#change-fontsize",
+    "hierarchy": { "lv1": "Icon", "lv2": "Usage", "lv3": "Change fontSize" }
   },
   {
     "title": "Use Custom Icons",
@@ -8898,6 +8978,25 @@
       "lv2": "Usage",
       "lv3": "Creating a single generic component"
     }
+  },
+  {
+    "title": "NativeImage",
+    "type": "page",
+    "description": "`NativeImage` is renders a `img` element.",
+    "slug": "/components/media-and-icons/native-image",
+    "hierarchy": { "lv1": "NativeImage" }
+  },
+  {
+    "title": "Import",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/native-image#import",
+    "hierarchy": { "lv1": "NativeImage", "lv2": "Import" }
+  },
+  {
+    "title": "Usage",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/native-image#usage",
+    "hierarchy": { "lv1": "NativeImage", "lv2": "Usage" }
   },
   {
     "title": "Breadcrumb",
@@ -12114,6 +12213,16 @@
     }
   },
   {
+    "title": "Customize the Close Event",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#customize-the-close-event",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize the Close Event"
+    }
+  },
+  {
     "title": "Customize the Component",
     "type": "fragment",
     "slug": "/hooks/use-notice#customize-the-component",
@@ -12342,6 +12451,16 @@
       "lv1": "useSnacks",
       "lv2": "Customize Notifications",
       "lv3": "Close Notifications"
+    }
+  },
+  {
+    "title": "Customize Close Event",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#customize-close-event",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize Close Event"
     }
   },
   {
@@ -12797,7 +12916,7 @@
   {
     "title": "CLI",
     "type": "page",
-    "description": "Generate types of customized themes using CLI commands.",
+    "description": "Use CLI commands to generate types for your customized theme, such as colors and font sizes.",
     "slug": "/styled-system/cli",
     "hierarchy": { "lv1": "CLI" }
   },
@@ -12812,6 +12931,22 @@
     "type": "fragment",
     "slug": "/styled-system/cli#usage",
     "hierarchy": { "lv1": "CLI", "lv2": "Usage" }
+  },
+  {
+    "title": "Update Type Definitions",
+    "type": "fragment",
+    "slug": "/styled-system/cli#update-type-definitions",
+    "hierarchy": {
+      "lv1": "CLI",
+      "lv2": "Usage",
+      "lv3": "Update Type Definitions"
+    }
+  },
+  {
+    "title": "Generate Theme",
+    "type": "fragment",
+    "slug": "/styled-system/cli#generate-theme",
+    "hierarchy": { "lv1": "CLI", "lv2": "Usage", "lv3": "Generate Theme" }
   },
   {
     "title": "Color Mode",
@@ -13256,6 +13391,16 @@
     }
   },
   {
+    "title": "Customize the Close Event",
+    "type": "fragment",
+    "slug": "/styled-system/notification#customize-the-close-event",
+    "hierarchy": {
+      "lv1": "Notification",
+      "lv2": "Customize Notifications",
+      "lv3": "Customize the Close Event"
+    }
+  },
+  {
     "title": "Customizing Components",
     "type": "fragment",
     "slug": "/styled-system/notification#customizing-components",
@@ -13379,6 +13524,18 @@
       "lv1": "Style Props",
       "lv2": "Pseudo Elements and Selectors"
     }
+  },
+  {
+    "title": "At-Rules",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#at-rules",
+    "hierarchy": { "lv1": "Style Props", "lv2": "At-Rules" }
+  },
+  {
+    "title": "Other Props",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#other-props",
+    "hierarchy": { "lv1": "Style Props", "lv2": "Other Props" }
   },
   {
     "title": "Text and Layer Styles",
@@ -13744,6 +13901,38 @@
     }
   },
   {
+    "title": "Using generate",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#using-generate",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Utility",
+      "lv3": "Using generate"
+    }
+  },
+  {
+    "title": "Customizing spacing",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#customizing-spacing",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Utility",
+      "lv3": "Using generate",
+      "lv4": "Customizing spacing"
+    }
+  },
+  {
+    "title": "Generating color tones",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#generating-color-tones",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Utility",
+      "lv3": "Using generate",
+      "lv4": "Generating color tones"
+    }
+  },
+  {
     "title": "Default Theme",
     "type": "page",
     "description": "The default theme of Yamada UI.",
@@ -13907,6 +14096,12 @@
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#spaces",
     "hierarchy": { "lv1": "Default Theme", "lv2": "Spaces" }
+  },
+  {
+    "title": "Semantics",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#semantics-1",
+    "hierarchy": { "lv1": "Default Theme", "lv2": "Spaces", "lv3": "Semantics" }
   },
   {
     "title": "Sizes",

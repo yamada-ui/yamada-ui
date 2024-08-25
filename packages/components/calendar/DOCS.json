@@ -25,7 +25,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "dayProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar day button element."
     },
@@ -90,7 +90,7 @@
       "description": "Define holidays."
     },
     "labelProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar label button element."
     },
@@ -129,7 +129,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "monthProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar month button element."
     },
@@ -181,7 +181,7 @@
       "description": "The size of the Calendar."
     },
     "tableProps": {
-      "type": "Omit<PropsOf<\"table\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 4 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar month table element."
     },
@@ -220,7 +220,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "weekdayProps": {
-      "type": "Omit<PropsOf<\"div\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 4 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar weekday element."
     },
@@ -262,7 +262,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "yearProps": {
-      "type": "Omit<PropsOf<\"button\">, \"ref\" | keyof StyleProps> & StyleProps & PseudoProps & UIBaseProps & { as?: As | undefined; } & ThemeProps<...> & ButtonOptions & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar year button element."
     }
@@ -287,7 +287,7 @@
       "description": "The number of months to display."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -299,7 +299,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the calendar component."
     },
@@ -728,7 +728,7 @@
       "description": "The number of months to display."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -740,7 +740,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the calendar component."
     },
@@ -1192,7 +1192,7 @@
       "description": "The number of months to display."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -1204,7 +1204,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the calendar component."
     },
@@ -1648,7 +1648,7 @@
       "description": "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -1660,7 +1660,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the calendar component."
     },
@@ -2014,7 +2014,7 @@
       "description": "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -2026,7 +2026,7 @@
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
     "calendarColorScheme": {
-      "type": "\"link\" | (string & {}) | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
+      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the calendar component."
     },

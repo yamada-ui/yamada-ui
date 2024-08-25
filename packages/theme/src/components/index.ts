@@ -62,6 +62,7 @@ import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
 import { Progress } from "./progress"
 import { RadarChart } from "./radar-chart"
+import { RadialChart } from "./radial-chart"
 import { Radio } from "./radio"
 import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
@@ -153,6 +154,7 @@ export const components = {
   Popover,
   Progress,
   RadarChart,
+  RadialChart,
   Radio,
   RangeDatePicker,
   RangeSlider,

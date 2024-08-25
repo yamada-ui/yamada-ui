@@ -21,16 +21,18 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       transitionProperty: "common",
       transitionDuration: "normal",
     },
-    list: {
+    content: {
       rounded: "md",
       minW: "xs",
-      py: "2",
       bg: ["white", "black"],
       border: "1px solid",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       color: "inherit",
       boxShadow: ["lg", "dark-lg"],
       zIndex: "guldo",
+    },
+    list: {
+      py: "2",
     },
     item: {
       cursor: "pointer",

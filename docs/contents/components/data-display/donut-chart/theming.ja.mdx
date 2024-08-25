@@ -2,6 +2,7 @@
 title: DonutChart
 description: "`DonutChart`は、複数のデータを比較するためのドーナツチャートを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
+label: Updated
 with_description: true
 tab: テーマ
 ---
@@ -19,6 +20,12 @@ tab: テーマ
 :::
 
 ```ts
-export const DonutChart: ComponentMultiStyle<"DonutChart"> =
-  mergeMultiStyle(PieChart)()
+export const DonutChart: ComponentMultiStyle<"DonutChart"> = mergeMultiStyle(
+  PieChart,
+  {
+    baseStyle: {
+      label: {},
+    },
+  },
+)()
 ```

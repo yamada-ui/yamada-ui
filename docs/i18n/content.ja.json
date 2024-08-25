@@ -341,13 +341,13 @@
     "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "単位をつける" }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/area-chart#値をフォーマットする",
+    "slug": "/components/data-display/area-chart#フォーマットする",
     "hierarchy": {
       "lv1": "AreaChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -531,13 +531,13 @@
     "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "単位をつける" }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/bar-chart#値をフォーマットする",
+    "slug": "/components/data-display/bar-chart#フォーマットする",
     "hierarchy": {
       "lv1": "BarChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -1267,13 +1267,13 @@
     }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/donut-chart#値をフォーマットする",
+    "slug": "/components/data-display/donut-chart#フォーマットする",
     "hierarchy": {
       "lv1": "DonutChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -1593,13 +1593,13 @@
     "hierarchy": { "lv1": "LineChart", "lv2": "使い方", "lv3": "単位をつける" }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/line-chart#値をフォーマットする",
+    "slug": "/components/data-display/line-chart#フォーマットする",
     "hierarchy": {
       "lv1": "LineChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -2014,13 +2014,13 @@
     }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/pie-chart#値をフォーマットする",
+    "slug": "/components/data-display/pie-chart#フォーマットする",
     "hierarchy": {
       "lv1": "PieChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -2129,13 +2129,13 @@
     }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/radar-chart#値をフォーマットする",
+    "slug": "/components/data-display/radar-chart#フォーマットする",
     "hierarchy": {
       "lv1": "RadarChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -2697,6 +2697,16 @@
       "lv1": "Table",
       "lv2": "使い方",
       "lv3": "行のクリックイベントをハンドルする"
+    }
+  },
+  {
+    "title": "行のダブルクリックイベントをハンドルする",
+    "type": "fragment",
+    "slug": "/components/data-display/table#行のダブルクリックイベントをハンドルする",
+    "hierarchy": {
+      "lv1": "Table",
+      "lv2": "使い方",
+      "lv3": "行のダブルクリックイベントをハンドルする"
     }
   },
   {
@@ -3548,6 +3558,26 @@
     }
   },
   {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
+    }
+  },
+  {
     "title": "グループ化する",
     "type": "fragment",
     "slug": "/components/forms/autocomplete#グループ化する",
@@ -4072,6 +4102,16 @@
       "lv1": "ColorPicker",
       "lv2": "使い方",
       "lv3": "レイアウトをカスタマイズする"
+    }
+  },
+  {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
     }
   },
   {
@@ -6378,6 +6418,26 @@
     }
   },
   {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
+    }
+  },
+  {
     "title": "グループ化する",
     "type": "fragment",
     "slug": "/components/forms/multi-select#グループ化する",
@@ -8049,6 +8109,26 @@
     }
   },
   {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/select#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/select#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
+    }
+  },
+  {
     "title": "グループ化する",
     "type": "fragment",
     "slug": "/components/forms/select#グループ化する",
@@ -9555,6 +9635,25 @@
       "lv2": "使い方",
       "lv3": "1つの汎用コンポーネント"
     }
+  },
+  {
+    "title": "NativeImage",
+    "type": "page",
+    "description": "`NativeImage`は、`img`要素をレンダリングします。",
+    "slug": "/components/media-and-icons/native-image",
+    "hierarchy": { "lv1": "NativeImage" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/native-image#インポート",
+    "hierarchy": { "lv1": "NativeImage", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/native-image#使い方",
+    "hierarchy": { "lv1": "NativeImage", "lv2": "使い方" }
   },
   {
     "title": "Breadcrumb",
@@ -12834,6 +12933,16 @@
     }
   },
   {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
+    }
+  },
+  {
     "title": "コンポーネントをカスタマイズする",
     "type": "fragment",
     "slug": "/hooks/use-notice#コンポーネントをカスタマイズする",
@@ -13062,6 +13171,16 @@
       "lv1": "useSnacks",
       "lv2": "通知をカスタマイズする",
       "lv3": "通知を閉じる"
+    }
+  },
+  {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
     }
   },
   {
@@ -13546,6 +13665,18 @@
     "hierarchy": { "lv1": "CLI", "lv2": "使い方" }
   },
   {
+    "title": "型定義を更新する",
+    "type": "fragment",
+    "slug": "/styled-system/cli#型定義を更新する",
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": "型定義を更新する" }
+  },
+  {
+    "title": "テーマを生成する",
+    "type": "fragment",
+    "slug": "/styled-system/cli#テーマを生成する",
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": "テーマを生成する" }
+  },
+  {
     "title": "カラーモード",
     "type": "page",
     "description": "Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。",
@@ -14013,6 +14144,16 @@
     }
   },
   {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/styled-system/notification#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "通知",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
+    }
+  },
+  {
     "title": "コンポーネントをカスタマイズする",
     "type": "fragment",
     "slug": "/styled-system/notification#コンポーネントをカスタマイズする",
@@ -14145,6 +14286,18 @@
     "type": "fragment",
     "slug": "/styled-system/style-props#擬似要素とセレクター",
     "hierarchy": { "lv1": "Style Props", "lv2": "擬似要素とセレクター" }
+  },
+  {
+    "title": "アットルール",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#アットルール",
+    "hierarchy": { "lv1": "Style Props", "lv2": "アットルール" }
+  },
+  {
+    "title": "その他のProps",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#その他のprops",
+    "hierarchy": { "lv1": "Style Props", "lv2": "その他のProps" }
   },
   {
     "title": "テキストとレイヤースタイル",
@@ -14528,6 +14681,38 @@
     }
   },
   {
+    "title": "generateを使う",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#generateを使う",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う"
+    }
+  },
+  {
+    "title": "余白をカスタマイズする",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#余白をカスタマイズする",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う",
+      "lv4": "余白をカスタマイズする"
+    }
+  },
+  {
+    "title": "カラーのトーンを生成する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#カラーのトーンを生成する",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う",
+      "lv4": "カラーのトーンを生成する"
+    }
+  },
+  {
     "title": "デフォルトのテーマ",
     "type": "page",
     "description": "Yamada UIのデフォルトのテーマ。",
@@ -14755,6 +14940,16 @@
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#spaces",
     "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Spaces" }
+  },
+  {
+    "title": "Semantics",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#semantics-1",
+    "hierarchy": {
+      "lv1": "デフォルトのテーマ",
+      "lv2": "Spaces",
+      "lv3": "Semantics"
+    }
   },
   {
     "title": "Sizes",

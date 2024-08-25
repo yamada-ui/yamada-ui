@@ -1009,9 +1009,6 @@ importers:
       cli-handle-unhandled:
         specifier: ^1.1.1
         version: 1.1.1
-      cli-welcome:
-        specifier: ^2.2.3
-        version: 2.2.3
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -1028,9 +1025,6 @@ importers:
         specifier: ^5.5.4
         version: 5.5.4
     devDependencies:
-      '@types/cli-welcome':
-        specifier: ^2.2.2
-        version: 2.2.2
       '@types/update-notifier':
         specifier: 6.0.8
         version: 6.0.8
@@ -7404,9 +7398,6 @@ packages:
   '@types/cacheable-request@6.0.3':
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==, tarball: https://registry.npmjs.org/@types/cacheable-request/-/cacheable-request-6.0.3.tgz}
 
-  '@types/cli-welcome@2.2.2':
-    resolution: {integrity: sha512-GMY5tkglyR05FJ4moqZ0V+HRaENs5bRqnUxri7oXkrubz4Az26ybPoft3ZayvR25Aig5RFc5mI0BXwtT6njiSg==, tarball: https://registry.npmjs.org/@types/cli-welcome/-/cli-welcome-2.2.2.tgz}
-
   '@types/common-tags@1.8.4':
     resolution: {integrity: sha512-S+1hLDJPjWNDhcGxsxEbepzaxWqURP/o+3cP4aa2w7yBXgdcmKGQtZzP8JbyfOd0m+33nh+8+kvxYE2UJtBDkg==, tarball: https://registry.npmjs.org/@types/common-tags/-/common-tags-1.8.4.tgz}
 
@@ -9415,9 +9406,6 @@ packages:
     resolution: {integrity: sha512-LYv6XPxoyODi36Dp976riBtSY27VmFo+MKqEU9QCCWyTrdEPDog+RWA7xQWHi6Vbp61j5c4cdzzX1NidnwtUWg==, tarball: https://registry.npmjs.org/clean-stack/-/clean-stack-4.2.0.tgz}
     engines: {node: '>=12'}
 
-  clear-any-console@1.16.2:
-    resolution: {integrity: sha512-OL/7wZpNy9x0GBSzz3poWja84Nr7iaH8aYNsJ5Uet2BVLj6Lm1zvWpZN/yH46Vv3ae7YfHmLLMmfHj911fshJg==, tarball: https://registry.npmjs.org/clear-any-console/-/clear-any-console-1.16.2.tgz}
-
   cli-boxes@2.2.1:
     resolution: {integrity: sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==, tarball: https://registry.npmjs.org/cli-boxes/-/cli-boxes-2.2.1.tgz}
     engines: {node: '>=6'}
@@ -9446,9 +9434,6 @@ packages:
   cli-spinners@2.9.2:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==, tarball: https://registry.npmjs.org/cli-spinners/-/cli-spinners-2.9.2.tgz}
     engines: {node: '>=6'}
-
-  cli-welcome@2.2.3:
-    resolution: {integrity: sha512-hxaOpahLk5PAYJj4tOcv8vaNMaBQHeMzeLQTAHq2EoGGTKVYV/MPCSlg5EEsKZ7y8WDGS2ScQtnITw02ZNukMQ==, tarball: https://registry.npmjs.org/cli-welcome/-/cli-welcome-2.2.3.tgz}
 
   cli-width@3.0.0:
     resolution: {integrity: sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==, tarball: https://registry.npmjs.org/cli-width/-/cli-width-3.0.0.tgz}
@@ -22069,8 +22054,6 @@ snapshots:
       '@types/node': 20.16.1
       '@types/responselike': 1.0.3
 
-  '@types/cli-welcome@2.2.2': {}
-
   '@types/common-tags@1.8.4': {}
 
   '@types/configstore@2.1.1': {}
@@ -25283,8 +25266,6 @@ snapshots:
     dependencies:
       escape-string-regexp: 5.0.0
 
-  clear-any-console@1.16.2: {}
-
   cli-boxes@2.2.1: {}
 
   cli-boxes@3.0.0: {}
@@ -25312,11 +25293,6 @@ snapshots:
       cli-handle-error: 4.4.0
 
   cli-spinners@2.9.2: {}
-
-  cli-welcome@2.2.3:
-    dependencies:
-      chalk: 2.4.2
-      clear-any-console: 1.16.2
 
   cli-width@3.0.0: {}
 

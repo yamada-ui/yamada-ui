@@ -161,7 +161,7 @@ To adjust the start angle, set `startAngle`, and for the end angle, set `endAngl
 
 :::note
 The direction of 3 o'clock is considered 0 degrees, and it progresses counterclockwise. If you want to go clockwise, set a negative value.
-The default values are set to go clockwise from 9 o'clock, so `startAngle` is set to `180` and `endAngle` to `0`.
+The default values are set to go clockwise from 9 o'clock, so `startAngle` is set to `90` and `endAngle` to `-180`.
 :::
 
 ```tsx functional=true
@@ -177,7 +177,7 @@ const data = useMemo(
   [],
 )
 
-return <RadialChart data={data} startAngle={90} endAngle={225} />
+return <RadialChart data={data} startAngle={180} endAngle={0} />
 ```
 
 ### Display Labels
@@ -201,8 +201,7 @@ return (
   <RadialChart
     data={data}
     innerRadius={50}
-    startAngle={90}
-    endAngle={-230}
+    endAngle={-225}
     labelListProps={[
       {
         position: "insideStart",

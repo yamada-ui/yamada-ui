@@ -161,7 +161,7 @@ return (
 
 :::note
 3時の方向を0度として反時計回りに進みます。時計回りにしたい場合は、マイナスの値を設定してください。
-デフォルト値は21時から時計回りにするため、`startAngle`に`180`、`endAngle`に`0`を設定しています。
+デフォルト値は12時から時計回りにするため、`startAngle`に`90`、`endAngle`に`-180`を設定しています。
 :::
 
 ```tsx functional=true
@@ -177,7 +177,7 @@ const data = useMemo(
   [],
 )
 
-return <RadialChart data={data} startAngle={90} endAngle={225} />
+return <RadialChart data={data} startAngle={180} endAngle={0} />
 ```
 
 ### ラベルを表示する
@@ -201,8 +201,7 @@ return (
   <RadialChart
     data={data}
     innerRadius={50}
-    startAngle={90}
-    endAngle={-230}
+    endAngle={-225}
     labelListProps={[
       {
         position: "insideStart",

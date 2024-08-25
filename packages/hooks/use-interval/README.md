@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-interval
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-interval
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-interval
+pnpm add @yamada-ui/use-interval
+# or
+yarn add @yamada-ui/use-interval
+# or
+npm install @yamada-ui/use-interval
+# or
+bun add @yamada-ui/use-interval
 ```
 
 ## Contribution

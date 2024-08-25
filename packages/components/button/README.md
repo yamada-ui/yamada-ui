@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/button
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/button
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/button
+pnpm add @yamada-ui/button
+# or
+yarn add @yamada-ui/button
+# or
+npm install @yamada-ui/button
+# or
+bun add @yamada-ui/button
 ```
 
 ## Contribution

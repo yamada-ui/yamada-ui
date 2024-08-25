@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/color-picker
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/color-picker
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/color-picker
+pnpm add @yamada-ui/color-picker
+# or
+yarn add @yamada-ui/color-picker
+# or
+npm install @yamada-ui/color-picker
+# or
+bun add @yamada-ui/color-picker
 ```
 
 ## Contribution

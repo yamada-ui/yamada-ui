@@ -1,10 +1,18 @@
-import * as path from "path"
-import { program } from "commander"
+import path from "path"
+import c from "chalk"
+import { Command } from "commander"
+import pkg from "../package.json"
 import { actionTheme, actionTokens, themePath } from "./command"
 import { initCLI } from "./utils"
 
 export const run = async () => {
   await initCLI()
+
+  const program = new Command(pkg.name)
+    .name("yamada-cli")
+    .description(pkg.description)
+    .version(pkg.version)
+    .usage(`${c.green("<command>")} [options]`)
 
   program
     .command("tokens <path>")
@@ -18,12 +26,6 @@ export const run = async () => {
     .option("--cwd <path>", "Current working directory")
     .option("-r, --replace", "Force replace the theme")
     .action(actionTheme)
-
-  program.on("-h, --help", () => {
-    console.info(`\nExample call:\n`)
-    console.info(`$ yamada-cli tokens theme.ts\n`)
-    console.info(`$ yamada-cli theme ./theme\n`)
-  })
 
   program.parse()
 }

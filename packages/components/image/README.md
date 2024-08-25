@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/image
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/image
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/image
+pnpm add @yamada-ui/image
+# or
+yarn add @yamada-ui/image
+# or
+npm install @yamada-ui/image
+# or
+bun add @yamada-ui/image
 ```
 
 ## Contribution

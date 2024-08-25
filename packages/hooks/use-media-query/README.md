@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-media-query
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-media-query
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-media-query
+pnpm add @yamada-ui/use-media-query
+# or
+yarn add @yamada-ui/use-media-query
+# or
+npm install @yamada-ui/use-media-query
+# or
+bun add @yamada-ui/use-media-query
 ```
 
 ## Contribution

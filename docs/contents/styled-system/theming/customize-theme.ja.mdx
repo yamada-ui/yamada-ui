@@ -694,3 +694,35 @@ export default extendTheme(
   }),
 )()
 ```
+
+### `generate`を使う
+
+`generate`は、テーマのトークンをカスタマイズしたり、生成する便利なユーティリティです。
+
+#### 余白をカスタマイズする
+
+デフォルトのテーマの`spaces`に指定された数値を乗算して、新しい`spaces`を生成します。
+
+```ts title=./theme/index.ts
+import { extendTheme, withDefaultProps, generate } from "@yamada-ui/react"
+
+export default extendTheme({
+  spaces: generate.spaces(2),
+})()
+```
+
+これで、アプリケーション全体の余白が2倍になりました。
+
+#### カラーのトーンを生成する
+
+`colorScheme`に使用する`トーン(50から950)`を生成されます。
+
+```ts title=./theme/index.ts
+import { extendTheme, withDefaultProps, generate } from "@yamada-ui/react"
+
+export default extendTheme({
+  colors: {
+    red: generate.tones("#e82e34"),
+  },
+})()
+```

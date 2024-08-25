@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-descendant
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-descendant
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-descendant
+pnpm add @yamada-ui/use-descendant
+# or
+yarn add @yamada-ui/use-descendant
+# or
+npm install @yamada-ui/use-descendant
+# or
+bun add @yamada-ui/use-descendant
 ```
 
 ## Contribution

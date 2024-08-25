@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-latest-ref
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-latest-ref
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-latest-ref
+pnpm add @yamada-ui/use-latest-ref
+# or
+yarn add @yamada-ui/use-latest-ref
+# or
+npm install @yamada-ui/use-latest-ref
+# or
+bun add @yamada-ui/use-latest-ref
 ```
 
 ## Contribution

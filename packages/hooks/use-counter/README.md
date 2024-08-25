@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-counter
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-counter
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-counter
+pnpm add @yamada-ui/use-counter
+# or
+yarn add @yamada-ui/use-counter
+# or
+npm install @yamada-ui/use-counter
+# or
+bun add @yamada-ui/use-counter
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/close-button
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/close-button
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/close-button
+pnpm add @yamada-ui/close-button
+# or
+yarn add @yamada-ui/close-button
+# or
+npm install @yamada-ui/close-button
+# or
+bun add @yamada-ui/close-button
 ```
 
 ## Contribution

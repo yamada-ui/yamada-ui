@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-popper
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-popper
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-popper
+pnpm add @yamada-ui/use-popper
+# or
+yarn add @yamada-ui/use-popper
+# or
+npm install @yamada-ui/use-popper
+# or
+bun add @yamada-ui/use-popper
 ```
 
 ## Contribution

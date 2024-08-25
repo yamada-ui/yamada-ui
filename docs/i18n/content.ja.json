@@ -341,13 +341,13 @@
     "hierarchy": { "lv1": "AreaChart", "lv2": "使い方", "lv3": "単位をつける" }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/area-chart#値をフォーマットする",
+    "slug": "/components/data-display/area-chart#フォーマットする",
     "hierarchy": {
       "lv1": "AreaChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -531,13 +531,13 @@
     "hierarchy": { "lv1": "BarChart", "lv2": "使い方", "lv3": "単位をつける" }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/bar-chart#値をフォーマットする",
+    "slug": "/components/data-display/bar-chart#フォーマットする",
     "hierarchy": {
       "lv1": "BarChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -1267,13 +1267,13 @@
     }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/donut-chart#値をフォーマットする",
+    "slug": "/components/data-display/donut-chart#フォーマットする",
     "hierarchy": {
       "lv1": "DonutChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -1593,13 +1593,13 @@
     "hierarchy": { "lv1": "LineChart", "lv2": "使い方", "lv3": "単位をつける" }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/line-chart#値をフォーマットする",
+    "slug": "/components/data-display/line-chart#フォーマットする",
     "hierarchy": {
       "lv1": "LineChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -2014,13 +2014,13 @@
     }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/pie-chart#値をフォーマットする",
+    "slug": "/components/data-display/pie-chart#フォーマットする",
     "hierarchy": {
       "lv1": "PieChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -2129,13 +2129,13 @@
     }
   },
   {
-    "title": "値をフォーマットする",
+    "title": "フォーマットする",
     "type": "fragment",
-    "slug": "/components/data-display/radar-chart#値をフォーマットする",
+    "slug": "/components/data-display/radar-chart#フォーマットする",
     "hierarchy": {
       "lv1": "RadarChart",
       "lv2": "使い方",
-      "lv3": "値をフォーマットする"
+      "lv3": "フォーマットする"
     }
   },
   {
@@ -4072,6 +4072,16 @@
       "lv1": "ColorPicker",
       "lv2": "使い方",
       "lv3": "レイアウトをカスタマイズする"
+    }
+  },
+  {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/color-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "ColorPicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
     }
   },
   {
@@ -9557,6 +9567,25 @@
     }
   },
   {
+    "title": "NativeImage",
+    "type": "page",
+    "description": "`NativeImage`は、`img`要素をレンダリングします。",
+    "slug": "/components/media-and-icons/native-image",
+    "hierarchy": { "lv1": "NativeImage" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/native-image#インポート",
+    "hierarchy": { "lv1": "NativeImage", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/media-and-icons/native-image#使い方",
+    "hierarchy": { "lv1": "NativeImage", "lv2": "使い方" }
+  },
+  {
     "title": "Breadcrumb",
     "type": "page",
     "description": "`Breadcrumb`は、ユーザーがウェブサイトの階層を理解するのに役立つコンポーネントです。",
@@ -14147,6 +14176,18 @@
     "hierarchy": { "lv1": "Style Props", "lv2": "擬似要素とセレクター" }
   },
   {
+    "title": "アットルール",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#アットルール",
+    "hierarchy": { "lv1": "Style Props", "lv2": "アットルール" }
+  },
+  {
+    "title": "その他のProps",
+    "type": "fragment",
+    "slug": "/styled-system/style-props#その他のprops",
+    "hierarchy": { "lv1": "Style Props", "lv2": "その他のProps" }
+  },
+  {
     "title": "テキストとレイヤースタイル",
     "type": "page",
     "description": "テキストとレイヤースタイルを使用する方法。",
@@ -14755,6 +14796,16 @@
     "type": "fragment",
     "slug": "/styled-system/theming/default-theme#spaces",
     "hierarchy": { "lv1": "デフォルトのテーマ", "lv2": "Spaces" }
+  },
+  {
+    "title": "Semantics",
+    "type": "fragment",
+    "slug": "/styled-system/theming/default-theme#semantics-1",
+    "hierarchy": {
+      "lv1": "デフォルトのテーマ",
+      "lv2": "Spaces",
+      "lv3": "Semantics"
+    }
   },
   {
     "title": "Sizes",

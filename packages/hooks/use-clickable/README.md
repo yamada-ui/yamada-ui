@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-clickable
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-clickable
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-clickable
+pnpm add @yamada-ui/use-clickable
+# or
+yarn add @yamada-ui/use-clickable
+# or
+npm install @yamada-ui/use-clickable
+# or
+bun add @yamada-ui/use-clickable
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/transitions
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/transitions
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/transitions
+pnpm add @yamada-ui/transitions
+# or
+yarn add @yamada-ui/transitions
+# or
+npm install @yamada-ui/transitions
+# or
+bun add @yamada-ui/transitions
 ```
 
 ## Contribution

@@ -61,43 +61,41 @@ Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[MUI](https
 Yamada UIのコンポーネントを使用するためには、`@yamada-ui/react`をインストールするだけで十分です。
 
 ```sh
-$ pnpm add @yamada-ui/react
-
+pnpm add @yamada-ui/react
 # または
-
-$ yarn add @yamada-ui/react
-
+yarn add @yamada-ui/react
 # または
-
-$ npm install @yamada-ui/react
+npm install @yamada-ui/react
+# または
+bun add @yamada-ui/react
 ```
 
 ただし、`@yamada-ui/table`や`@yamada-ui/calendar`などは、`@yamada-ui/react`には含まれていません。これらは別途インストールする必要があります。
 
 ```sh
 # `@tanstack/react-table`を使用した、便利なテーブルコンポーネントを提供します。
-$ pnpm add @yamada-ui/table
+pnpm add @yamada-ui/table
 
 # 便利なカレンダーとデイトピッカーコンポーネントを提供します。
-$ pnpm add @yamada-ui/calendar
+pnpm add @yamada-ui/calendar
 
 # `embla-carousel-react`を使用した、便利なカルーセルコンポーネントを提供します。
-$ pnpm add @yamada-ui/carousel
+pnpm add @yamada-ui/carousel
 
 # `react-dropzone`を使用した、便利なドロップゾーンコンポーネントを提供します。
-$ pnpm add @yamada-ui/dropzone
+pnpm add @yamada-ui/dropzone
 
 # `recharts`を使用した、便利なチャートコンポーネントを提供します。
-$ pnpm add @yamada-ui/charts
+pnpm add @yamada-ui/charts
 
 # `react-markdown`と`react-syntax-highlighter`を使用した、便利なマークダウンコンポーネントを提供します。
-$ pnpm add @yamada-ui/markdown
+pnpm add @yamada-ui/markdown
 
 # `Lucide`を使用した、便利なアイコンコンポーネントを提供します。
-$ pnpm add @yamada-ui/lucide
+pnpm add @yamada-ui/lucide
 
 # `Font Awesome`を便利に使用するためのコンポーネントを提供します。
-$ pnpm add @yamada-ui/fontawesome
+pnpm add @yamada-ui/fontawesome
 ```
 
 ## 使い方

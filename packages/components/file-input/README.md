@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/file-input
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/file-input
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/file-input
+pnpm add @yamada-ui/file-input
+# or
+yarn add @yamada-ui/file-input
+# or
+npm install @yamada-ui/file-input
+# or
+bun add @yamada-ui/file-input
 ```
 
 ## Contribution

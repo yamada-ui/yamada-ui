@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-window-event
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-window-event
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-window-event
+pnpm add @yamada-ui/use-window-event
+# or
+yarn add @yamada-ui/use-window-event
+# or
+npm install @yamada-ui/use-window-event
+# or
+bun add @yamada-ui/use-window-event
 ```
 
 ## Contribution

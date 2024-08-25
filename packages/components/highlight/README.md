@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/highlight
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/highlight
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/highlight
+pnpm add @yamada-ui/highlight
+# or
+yarn add @yamada-ui/highlight
+# or
+npm install @yamada-ui/highlight
+# or
+bun add @yamada-ui/highlight
 ```
 
 ## Contribution

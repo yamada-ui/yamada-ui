@@ -19,18 +19,16 @@ const defaultOverlays = (
   let overlays: HTMLUIProps<"div">[] = [
     {
       bgImage:
-        "linear-gradient(45deg, var(--ui-checkers) 25%, transparent 25%), linear-gradient(-45deg, var(--ui-checkers) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--ui-checkers) 75%), linear-gradient(-45deg, var(--ui-body) 75%, var(--ui-checkers) 75%)",
+        "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
       bgSize: `8px 8px`,
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
       var: [
         {
-          __prefix: "ui",
           name: "checkers",
           token: "colors",
           value: ["blackAlpha.300", "whiteAlpha.300"],
         },
         {
-          __prefix: "ui",
           name: "body",
           token: "colors",
           value: ["whiteAlpha.500", "blackAlpha.500"],

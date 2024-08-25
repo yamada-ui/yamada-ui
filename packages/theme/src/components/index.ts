@@ -62,6 +62,7 @@ import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
 import { Progress } from "./progress"
 import { RadarChart } from "./radar-chart"
+import { RadialChart } from "./radial-chart"
 import { Radio } from "./radio"
 import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
@@ -83,6 +84,7 @@ import { Switch } from "./switch"
 import { Table } from "./table"
 import { Tabs } from "./tabs"
 import { Tag } from "./tag"
+import { Text } from "./text"
 import { Textarea } from "./textarea"
 import { Toggle } from "./toggle"
 import { Tooltip } from "./tooltip"
@@ -152,6 +154,7 @@ export const components = {
   Popover,
   Progress,
   RadarChart,
+  RadialChart,
   Radio,
   RangeDatePicker,
   RangeSlider,
@@ -174,6 +177,7 @@ export const components = {
   Table,
   Tabs,
   Tag,
+  Text,
   Textarea,
   Toggle,
   Tooltip,

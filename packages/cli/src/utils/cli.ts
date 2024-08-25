@@ -1,26 +1,21 @@
+import c from "chalk"
 import checkNode from "cli-check-node"
 import unhandledError from "cli-handle-unhandled"
-import welcome from "cli-welcome"
 import updateNotifier from "update-notifier"
-import JSON from "../../package.json"
+import pkg from "../../package.json"
 
 export const initCLI = async () => {
   checkNode("12")
 
   await unhandledError()
 
-  welcome({
-    title: "Yamada UI CLI",
-    tagLine: `by Yamada UI\n${JSON.description}`,
-    bgColor: `#3cc360`,
-    color: `#FFFFFF`,
-    bold: true,
-    clear: false,
-    version: JSON.version,
-  })
+  console.log(
+    `\n${c.bold.green("Yamada UI CLI")} v${pkg.version} ${c.dim("by Yamada UI")}`,
+  )
+  console.log(`${c.dim(pkg.description)}\n`)
 
   updateNotifier({
-    pkg: JSON,
+    pkg,
     shouldNotifyInNpmScript: true,
     updateCheckInterval: 1000 * 60 * 60 * 24 * 3,
   }).notify({ isGlobal: true })

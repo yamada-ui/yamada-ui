@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/accordion
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/accordion
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/accordion
+pnpm add @yamada-ui/accordion
+# or
+yarn add @yamada-ui/accordion
+# or
+npm install @yamada-ui/accordion
+# or
+bun add @yamada-ui/accordion
 ```
 
 ## Contribution

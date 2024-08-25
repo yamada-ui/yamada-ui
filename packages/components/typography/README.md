@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/typography
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/typography
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/typography
+pnpm add @yamada-ui/typography
+# or
+yarn add @yamada-ui/typography
+# or
+npm install @yamada-ui/typography
+# or
+bun add @yamada-ui/typography
 ```
 
 ## Contribution

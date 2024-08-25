@@ -2,77 +2,71 @@ import type { CSSObject, ThemeToken, Union } from "@yamada-ui/react"
 import type { TransformOptions } from "./transform-props"
 import type { CSSProperties, UIProperties } from "."
 
-const insertTransform = (
-  config: string[],
-  token: ThemeToken | undefined,
-  transform?: Union<TransformOptions>,
-) => {
-  if (transform) {
-    let result = transform
+const generateTransform = (...transforms: TransformOptions[]) => {
+  let transform = transforms
+    .map(({ transform, args }) => {
+      let func = `transforms.${transform}`
 
-    if (typeof result !== "string") {
-      let { transform, additionalTransform, args = "" } = result
+      if (args) func += `(${args.map((arg) => `"${arg}"`).join(", ")})`
 
-      if (additionalTransform) args = `transforms.${additionalTransform}`
+      return func
+    })
+    .join(", ")
 
-      result = `${transform}(${args})`
-    }
+  transform = transforms.length > 1 ? `pipe(${transform})` : transform
 
-    if (token) result = `token("${token}", transforms.${result})`
-
-    config = [...config, `transform: transforms.${result}`]
-  } else if (token) {
-    const result = `token("${token}")`
-
-    config = [...config, `transform: transforms.${result}`]
-  }
-
-  return config
+  return `transform: ${transform}`
 }
 
-export const getConfig =
+type GetConfigOptions = {
+  properties?:
+    | Union<CSSProperties | UIProperties>
+    | Union<CSSProperties | UIProperties>[]
+  token?: ThemeToken
+  transforms?: TransformOptions[]
+  css?: CSSObject
+  isProcessResult?: boolean
+  isProcessSkip?: boolean
+}
+
+export const generateConfig =
   ({
     properties,
     token,
-    transform,
+    transforms,
     css,
     isProcessResult,
     isProcessSkip,
-    isSkip,
-  }: {
-    properties?:
-      | Union<CSSProperties | UIProperties>
-      | Union<CSSProperties | UIProperties>[]
-    token?: ThemeToken
-    transform?: TransformOptions
-    css?: CSSObject
-    isProcessResult?: boolean
-    isProcessSkip?: boolean
-    isSkip?: boolean
-  }) =>
+  }: GetConfigOptions) =>
   (isConfig?: boolean) => {
-    if (!isConfig && !token && !transform && !css) return true
+    if (!isConfig && !token && !transforms && !css) return true
 
-    let config: string[] = []
+    const config: string[] = []
 
     if (properties) {
       if (typeof properties === "string") {
         const value = `"${properties}"`
 
-        config = [...config, `properties: ${value}`]
+        config.push(`properties: ${value}`)
       } else {
         const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
 
-        config = [...config, `properties: ${value}`]
+        config.push(`properties: ${value}`)
       }
     }
 
-    if (token) config = [...config, `token: "${token}"`]
-    if (isProcessResult) config = [...config, `isProcessResult: true`]
-    if (isProcessSkip) config = [...config, `isProcessSkip: true`]
-    if (isSkip) config = [...config, `isSkip: true`]
-    if (css) config = [...config, `static: ${JSON.stringify(css)}`]
-    if (transform || token) config = insertTransform(config, token, transform)
+    if (token) config.push(`token: "${token}"`)
+    if (isProcessResult) config.push(`isProcessResult: true`)
+    if (isProcessSkip) config.push(`isProcessSkip: true`)
+    if (css) config.push(`static: ${JSON.stringify(css)}`)
+
+    if (transforms || token) {
+      transforms ??= []
+
+      if (token) transforms.unshift({ transform: "token", args: [token] })
+
+      config.push(generateTransform(...transforms))
+    }
 
     return `{ ${config.join(", ")} }`
   }

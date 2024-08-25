@@ -1,7 +1,12 @@
 import type { CSSUIObject, ThemeConfig } from "@yamada-ui/core"
 import { ui, forwardRef, useTheme } from "@yamada-ui/core"
 import type { MotionProps, MotionVariants } from "@yamada-ui/motion"
-import { AnimatePresence, Motion, useIsPresent } from "@yamada-ui/motion"
+import {
+  AnimatePresence,
+  Motion,
+  motionForwardRef,
+  useIsPresent,
+} from "@yamada-ui/motion"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import { useToken } from "@yamada-ui/use-token"
 import { useValue } from "@yamada-ui/use-value"
@@ -56,7 +61,7 @@ export type SnacksProps = Omit<MotionProps<"div">, "direction"> &
   Pick<UseSnacksOptions, "direction" | "startIndex"> &
   Pick<Required<ThemeConfig>["snacks"], "variants" | "gutter" | "negateMargin">
 
-export const Snacks = forwardRef<SnacksProps, "div">(
+export const Snacks = motionForwardRef<SnacksProps, "div">(
   (
     {
       className,
@@ -84,7 +89,7 @@ export const Snacks = forwardRef<SnacksProps, "div">(
       negateMargin = true,
       ...rest
     } = useMemo(
-      () => ({ ...computedSnacks, ...theme.__config.snacks, ...props }),
+      () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
     const top = useToken<string | number>("spaces", useValue(gutter[0])) ?? 0
@@ -95,7 +100,7 @@ export const Snacks = forwardRef<SnacksProps, "div">(
 
     const css: CSSUIObject = {
       w: "100%",
-      var: [{ __prefix: "ui", name: "space", token: "spaces", value: gap }],
+      var: [{ name: "space", token: "spaces", value: gap }],
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
     }
 
@@ -241,9 +246,7 @@ const SnackComponent = memo(
       const onMouseLeave = () => setDelay(duration)
 
       const zIndex = startIndex + index
-      const space = `calc(var(--ui-space) * ${
-        direction === "top" ? lastIndex : index
-      })`
+      const space = `calc($space * ${direction === "top" ? lastIndex : index})`
 
       const css: CSSUIObject = {
         position: "absolute",

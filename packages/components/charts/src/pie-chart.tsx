@@ -49,7 +49,7 @@ type PieChartOptions = {
    */
   tooltipDataSource?: TooltipDataSourceType
   /**
-   * Unit displayed next to each tick in y-axis.
+   * Unit displayed next to each value in tooltip.
    */
   unit?: string
 }

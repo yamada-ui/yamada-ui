@@ -32,7 +32,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/core"
   },
   "bugs": {
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "framer-motion": "^11.3.24",
+    "framer-motion": "11.3.24",
     "react": "^18.3.1"
   },
   "peerDependencies": {

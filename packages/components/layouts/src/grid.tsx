@@ -132,7 +132,7 @@ export type SimpleGridProps = GridProps & SimpleGridOptions
 export const SimpleGrid = forwardRef<SimpleGridProps, "div">(
   ({ minChildWidth, columns, ...rest }, ref) => {
     const { theme } = useTheme()
-    let templateColumns = transformColumns(columns, minChildWidth)(theme)
+    const templateColumns = transformColumns(columns, minChildWidth)(theme)
 
     return <Grid ref={ref} templateColumns={templateColumns} {...rest} />
   },

@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-animation
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-animation
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-animation
+pnpm add @yamada-ui/use-animation
+# or
+yarn add @yamada-ui/use-animation
+# or
+npm install @yamada-ui/use-animation
+# or
+bun add @yamada-ui/use-animation
 ```
 
 ## Contribution

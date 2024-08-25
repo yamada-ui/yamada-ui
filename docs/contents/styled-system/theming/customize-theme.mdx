@@ -194,6 +194,17 @@ export const semantics: ThemeSemantics = {
     danger: "red",
     link: "blue",
   },
+  spaces: {
+    xs: "1",
+    sm: "2",
+    md: "4",
+    normal: "6",
+    lg: "8",
+    xl: "12",
+    "2xl": "16",
+    "3xl": "24",
+    "4xl": "32",
+  },
 }
 ```
 
@@ -682,4 +693,36 @@ export default extendTheme(
     components: ["Badge", "Tag", "Button"], // If you pass an empty array, it will be set for all components.
   }),
 )()
+```
+
+### Using `generate`
+
+`generate` is a useful utility for customizing or generating theme tokens.
+
+#### Customizing spacing
+
+It generates new `spaces` by multiplying the specified number with the `spaces` in the default theme.
+
+```ts title=./theme/index.ts
+import { extendTheme, withDefaultProps, generate } from "@yamada-ui/react"
+
+export default extendTheme({
+  spaces: generate.spaces(2),
+})()
+```
+
+This makes the spacing of the entire application twice as large.
+
+#### Generating color tones
+
+It generates `tones` (50 to 950) used in `colorScheme`.
+
+```ts title=./theme/index.ts
+import { extendTheme, withDefaultProps, generate } from "@yamada-ui/react"
+
+export default extendTheme({
+  colors: {
+    red: generate.tones("#e82e34"),
+  },
+})()
 ```

@@ -1,4 +1,4 @@
-import type { CSSUIProps, ThemeProps, UIProps } from "@yamada-ui/core"
+import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
 import { forwardRef, useComponentStyle } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
@@ -11,7 +11,7 @@ import { Oval } from "./oval"
 import { Puff } from "./puff"
 import { Rings } from "./rings"
 
-type ComponentProps = Omit<UIProps, "color"> & {
+type ComponentProps = Omit<IconProps, "color"> & {
   color: string
   secondaryColor?: string
 }

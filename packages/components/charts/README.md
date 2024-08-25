@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/charts
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/charts
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/charts
+pnpm add @yamada-ui/charts
+# or
+yarn add @yamada-ui/charts
+# or
+npm install @yamada-ui/charts
+# or
+bun add @yamada-ui/charts
 ```
 
 ## Contribution

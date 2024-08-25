@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/textarea
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/textarea
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/textarea
+pnpm add @yamada-ui/textarea
+# or
+yarn add @yamada-ui/textarea
+# or
+npm install @yamada-ui/textarea
+# or
+bun add @yamada-ui/textarea
 ```
 
 ## Contribution

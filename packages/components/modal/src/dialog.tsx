@@ -7,6 +7,7 @@ import {
   useMultiComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
+import { motionForwardRef } from "@yamada-ui/motion"
 import {
   createContext,
   getValidChildren,
@@ -84,7 +85,7 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
  *
  * @see Docs https://yamada-ui.com/components/overlay/dialog
  */
-export const Dialog = forwardRef<DialogProps, "section", false>(
+export const Dialog = motionForwardRef<DialogProps, "section">(
   ({ size, ...props }, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("Dialog", {
       size,
@@ -208,7 +209,7 @@ export const Dialog = forwardRef<DialogProps, "section", false>(
 
 export type DialogOverlayProps = ModalOverlayProps
 
-export const DialogOverlay = forwardRef<DialogOverlayProps, "div">(
+export const DialogOverlay = motionForwardRef<DialogOverlayProps, "div">(
   ({ className, ...rest }, ref) => {
     const styles = useDialog()
 

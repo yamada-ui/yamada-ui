@@ -147,6 +147,27 @@ describe("generate", () => {
         "The multiplier must be a number.",
       )
     })
+
+    test("should handle array values in defaultTheme", async () => {
+      vi.doMock("@yamada-ui/theme", () => ({
+        baseTheme: {},
+        defaultTheme: {
+          spaces: {
+            4: ["1rem", "-1rem"],
+          },
+        },
+      }))
+
+      vi.resetModules()
+
+      const { generate } = await import("../src")
+
+      const spaces = generate.spaces(2)
+
+      expect(spaces[4]).toStrictEqual(["2rem", "-2rem"])
+
+      vi.doUnmock("@yamada-ui/theme")
+    })
   })
 
   describe("tones", () => {

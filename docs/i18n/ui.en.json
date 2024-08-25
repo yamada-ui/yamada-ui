@@ -69,6 +69,11 @@
     "title": "Insights",
     "description": "Quantified activities of Yamada UI maintainers and members.",
     "user-exceeded": "{label} users selected",
+    "user": {
+      "all": "All users",
+      "maintainers": "All maintainers",
+      "members": "All members"
+    },
     "period": {
       "7d": "Last 7 days",
       "14d": "Last 14 days",
@@ -78,7 +83,12 @@
       "6M": "Last 6 months",
       "1y": "Last 1 year"
     },
-    "notFound": "Data no found."
+    "notFound": "Data not found.",
+    "chart": {
+      "tooltip": {
+        "total": "Total"
+      }
+    }
   },
   "not-found": {
     "title": "404: Not found",
@@ -131,7 +141,8 @@
       "dark": "Toggle Light"
     },
     "props-card": {
-      "required": "required",
+      "required": "Required",
+      "deprecated": "Deprecated",
       "description": "Description",
       "type": "Type",
       "default": "Default",

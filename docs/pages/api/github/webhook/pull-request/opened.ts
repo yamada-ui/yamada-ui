@@ -48,6 +48,7 @@ export const opened: APIHandler = async ({ req, res, constant }) => {
     [
       "yamada-ui:changeset-release/main",
       "yamada-ui:changeset-release/docs",
+      "yamada-ui:documentation",
     ].includes(head.label)
   ) {
     if (count >= 1) return

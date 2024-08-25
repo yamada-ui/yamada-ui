@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/scroll-area
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/scroll-area
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/scroll-area
+pnpm add @yamada-ui/scroll-area
+# or
+yarn add @yamada-ui/scroll-area
+# or
+npm install @yamada-ui/scroll-area
+# or
+bun add @yamada-ui/scroll-area
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/tag
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/tag
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/tag
+pnpm add @yamada-ui/tag
+# or
+yarn add @yamada-ui/tag
+# or
+npm install @yamada-ui/tag
+# or
+bun add @yamada-ui/tag
 ```
 
 ## Contribution

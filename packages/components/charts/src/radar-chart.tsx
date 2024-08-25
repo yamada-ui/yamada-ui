@@ -25,6 +25,7 @@ import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
+import { usePolarGrid, type UsePolarGridOptions } from "./use-polar-grid"
 import type { UseRadarChartOptions } from "./use-radar-chart"
 import { useRadarChart } from "./use-radar-chart"
 
@@ -71,6 +72,7 @@ export type RadarChartProps = HTMLUIProps<"div"> &
   UseChartProps &
   Omit<UseChartTooltipOptions, "labelFormatter"> &
   UseChartLegendProps &
+  UsePolarGridOptions &
   UseRadarChartOptions
 
 /**
@@ -116,7 +118,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const {
     getRadarProps,
     getRadarChartProps,
-    getPolarGridProps,
     getPolarAngleAxisProps,
     getPolarRadiusAxisProps,
     radarVars,
@@ -127,7 +128,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     dataKey,
     radarProps,
     chartProps,
-    polarGridProps,
     polarAngleAxisProps,
     polarAngleAxisTickProps,
     polarRadiusAxisProps,
@@ -138,7 +138,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     fillOpacity,
     polarAngleAxisTickFormatter,
     polarRadiusAxisTickFormatter,
-    strokeDasharray,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
@@ -150,6 +149,11 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
+  })
+  const { getPolarGridProps } = usePolarGrid({
+    polarGridProps,
+    strokeDasharray,
+    styles,
   })
 
   const radars = useMemo(

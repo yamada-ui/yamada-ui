@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/toggle
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/toggle
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/toggle
+pnpm add @yamada-ui/toggle
+# or
+yarn add @yamada-ui/toggle
+# or
+npm install @yamada-ui/toggle
+# or
+bun add @yamada-ui/toggle
 ```
 
 ## Contribution

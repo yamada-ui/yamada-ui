@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-hover
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-hover
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-hover
+pnpm add @yamada-ui/use-hover
+# or
+yarn add @yamada-ui/use-hover
+# or
+npm install @yamada-ui/use-hover
+# or
+bun add @yamada-ui/use-hover
 ```
 
 ## Contribution

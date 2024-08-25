@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/focus-lock
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/focus-lock
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/focus-lock
+pnpm add @yamada-ui/focus-lock
+# or
+yarn add @yamada-ui/focus-lock
+# or
+npm install @yamada-ui/focus-lock
+# or
+bun add @yamada-ui/focus-lock
 ```
 
 ## Contribution

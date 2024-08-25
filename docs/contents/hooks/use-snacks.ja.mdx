@@ -475,6 +475,50 @@ return (
 )
 ```
 
+### 閉じるイベントをカスタマイズする
+
+閉じるイベントをカスタマイズする場合は、`closeStrategy`に`"element"`, `"button"`, `"both"`を設定します。デフォルトは、`"button"`です。
+
+- `"element"`: 要素をクリックして閉じる。
+- `"button"`: 閉じるボタンをクリックして閉じる。
+- `"both"`: 要素と閉じるボタンをクリックして閉じる。
+
+```tsx functional=true
+const { snack, snacks } = useSnacks({ closeStrategy: "element" })
+const ref = useRef<string | number | undefined>(undefined)
+
+const onCloseAll = () => {
+  snack.closeAll()
+}
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        colorScheme="primary"
+        onClick={() => {
+          snack({
+            title: "孫悟空",
+            description: "オッス！オラ悟空！",
+            closeStrategy: "element",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} gutter={[0, "md"]} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
 ### コンポーネントをカスタマイズする
 
 描写するコンポーネントをカスタマイズする場合は、`component`を使用します。

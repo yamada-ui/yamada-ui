@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/indicator
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/indicator
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/indicator
+pnpm add @yamada-ui/indicator
+# or
+yarn add @yamada-ui/indicator
+# or
+npm install @yamada-ui/indicator
+# or
+bun add @yamada-ui/indicator
 ```
 
 ## Contribution

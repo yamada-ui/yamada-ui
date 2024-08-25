@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-value
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-value
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-value
+pnpm add @yamada-ui/use-value
+# or
+yarn add @yamada-ui/use-value
+# or
+npm install @yamada-ui/use-value
+# or
+bun add @yamada-ui/use-value
 ```
 
 ## Contribution

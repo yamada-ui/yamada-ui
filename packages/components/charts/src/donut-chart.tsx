@@ -8,6 +8,7 @@ import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
   Cell,
+  Label,
   Legend,
   Pie,
   PieChart as RechartsPieChart,
@@ -18,6 +19,7 @@ import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import type { PieChartProps } from "./pie-chart"
 import { ChartProvider, useChart } from "./use-chart"
+import { useChartLabel, type UseChartLabelOptions } from "./use-chart-label"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartTooltip } from "./use-chart-tooltip"
 import { usePieChart } from "./use-pie-chart"
@@ -33,12 +35,14 @@ type DonutChartOptions = {
   innerRadius?: number | string
 }
 
-export type DonutChartProps = PieChartProps & DonutChartOptions
+export type DonutChartProps = PieChartProps &
+  DonutChartOptions &
+  UseChartLabelOptions
 
 /**
  * `DonutChart` is a component for drawing donut charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/donut-chart
+ * @see Docs https://yamada-ui.com/components/data-display/donut-chart
  */
 export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("DonutChart", props)
@@ -68,6 +72,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
     outerRadius,
     strokeWidth,
     legendProps,
+    labelProps,
     ...rest
   } = omitThemeProps(mergedProps)
 
@@ -105,6 +110,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
+  const { getLabelProps } = useChartLabel({ labelProps, styles })
 
   const cells = useMemo(
     () =>
@@ -138,6 +144,9 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
               })}
             >
               {cells}
+              <Label
+                {...getLabelProps({ className: "ui-donut-chart__label" })}
+              />
             </Pie>
 
             {withLegend ? (

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-focus",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Yamada UI useFocus custom hook",
   "keywords": [
     "use-focus"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-focus"
   },
   "bugs": {

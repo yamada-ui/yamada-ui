@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/loading
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/loading
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/loading
+pnpm add @yamada-ui/loading
+# or
+yarn add @yamada-ui/loading
+# or
+npm install @yamada-ui/loading
+# or
+bun add @yamada-ui/loading
 ```
 
 ## Contribution

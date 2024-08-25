@@ -1,4 +1,9 @@
-import { useTheme, type CSSUIObject, type CSSUIProps } from "@yamada-ui/core"
+import {
+  getVar,
+  useTheme,
+  type CSSUIObject,
+  type CSSUIProps,
+} from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
@@ -141,7 +146,6 @@ export const usePieChart = ({
   const cellColors: CSSUIProps["var"] = useMemo(
     () =>
       data.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `cell-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -153,7 +157,7 @@ export const usePieChart = ({
     () =>
       [
         ...cellColors,
-        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+        { name: "fill-opacity", value: fillOpacity },
       ] as Required<CSSUIProps>["var"],
     [fillOpacity, cellColors],
   )
@@ -178,7 +182,7 @@ export const usePieChart = ({
 
   const cellClassName = useMemo(() => {
     const resolvedCellProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: "$fill-opacity",
       ...styles.cell,
       ...computedCellProps,
     }
@@ -239,7 +243,7 @@ export const usePieChart = ({
     () =>
       data.map((props, index) => {
         const { name, dimCell = {}, ...computedProps } = props
-        const color = `var(--ui-cell-${index})`
+        const color = getVar(`cell-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== name
         const resolvedProps = {
           ...computedProps,

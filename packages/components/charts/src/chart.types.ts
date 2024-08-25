@@ -1,5 +1,5 @@
 import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
-import type { Merge } from "@yamada-ui/utils"
+import type { Dict, Merge } from "@yamada-ui/utils"
 import type {
   ComponentPropsWithoutRef,
   ReactElement,
@@ -7,7 +7,6 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
-import type { pieProperties } from "./rechart-properties"
 
 export type ChartPropGetter<
   Y extends As = "div",
@@ -54,6 +53,10 @@ export type PieChartProps = Merge<
   CSSUIProps,
   ComponentPropsWithoutRef<typeof Recharts.PieChart>
 >
+export type RadialChartProps = Merge<
+  CSSUIProps,
+  ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>
+>
 export type ReferenceLineProps = Merge<CSSUIProps, Recharts.ReferenceLineProps>
 export type ResponsiveContainerProps = Merge<
   CSSUIProps,
@@ -99,7 +102,7 @@ export type RadarProps = Merge<
   }
 >
 export type PieProps = Merge<
-  Merge<Pick<Recharts.PieProps, (typeof pieProperties)[number]>, CSSUIProps>,
+  Merge<Recharts.PieProps, CSSUIProps>,
   {
     activeShape?: Partial<PieProps>
     inactiveShape?: Partial<PieProps>
@@ -113,6 +116,13 @@ export type CellProps = Merge<
     name: string
     value: number
     dimCell?: Partial<CellProps>
+  }
+>
+export type RadialBarProps = Merge<
+  Merge<Recharts.RadialBarProps, CSSUIProps>,
+  {
+    background?: Partial<RadialBarProps>
+    dimRadialBar?: CSSUIProps
   }
 >
 export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>
@@ -143,7 +153,11 @@ export type PolarRadiusAxisProps = Merge<
   CSSUIProps,
   Recharts.PolarRadiusAxisProps
 >
-export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
+export type LabelProps = Merge<CSSUIProps, Omit<Recharts.LabelProps, "fill">>
+export type LabelListProps = Merge<
+  Recharts.LabelListProps<Dict>,
+  Omit<CSSUIProps, "position">
+>
 export type ChartTooltipProps = Recharts.TooltipProps<
   number | string | Array<number | string>,
   number | string
@@ -151,3 +165,7 @@ export type ChartTooltipProps = Recharts.TooltipProps<
 export type ChartTooltip =
   | ReactElement
   | ((props: ChartTooltipProps) => ReactNode)
+
+export type ChartLabelProps = Omit<React.SVGProps<SVGTextElement>, "viewBox"> &
+  LabelProps
+export type ChartLabel = ReactElement | ((props: ChartLabelProps) => ReactNode)

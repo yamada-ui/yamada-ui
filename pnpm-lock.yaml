@@ -1009,9 +1009,6 @@ importers:
       cli-handle-unhandled:
         specifier: ^1.1.1
         version: 1.1.1
-      cli-welcome:
-        specifier: ^2.2.3
-        version: 2.2.3
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -1028,9 +1025,6 @@ importers:
         specifier: ^5.5.4
         version: 5.5.4
     devDependencies:
-      '@types/cli-welcome':
-        specifier: ^2.2.2
-        version: 2.2.2
       '@types/update-notifier':
         specifier: 6.0.8
         version: 6.0.8
@@ -2028,8 +2022,8 @@ importers:
         specifier: workspace:*
         version: link:../../utils
       framer-motion:
-        specifier: ^11.3.24
-        version: 11.3.28(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 11.3.24
+        version: 11.3.24(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       clean-package:
         specifier: 2.2.0
@@ -2893,60 +2887,11 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       framer-motion:
-        specifier: ^11.3.24
-        version: 11.3.28(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 11.3.24
+        version: 11.3.24(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
-
-  packages/create-yamada-app:
-    dependencies:
-      '@clack/prompts':
-        specifier: ^0.7.0
-        version: 0.7.0
-      bundle-n-require:
-        specifier: ^1.1.1
-        version: 1.1.1
-      chokidar:
-        specifier: ^3.6.0
-        version: 3.6.0
-      cli-check-node:
-        specifier: ^1.3.4
-        version: 1.3.4
-      cli-handle-unhandled:
-        specifier: ^1.1.1
-        version: 1.1.1
-      cli-welcome:
-        specifier: ^2.2.3
-        version: 2.2.3
-      commander:
-        specifier: ^12.1.0
-        version: 12.1.0
-      glob:
-        specifier: ^11.0.0
-        version: 11.0.0
-      prettier:
-        specifier: ^3.3.3
-        version: 3.3.3
-      tar:
-        specifier: ^7.4.3
-        version: 7.4.3
-      typescript:
-        specifier: ^5.5.4
-        version: 5.5.4
-    devDependencies:
-      '@types/cli-welcome':
-        specifier: ^2.2.2
-        version: 2.2.2
-      '@types/update-notifier':
-        specifier: 6.0.8
-        version: 6.0.8
-      chalk:
-        specifier: ^5.3.0
-        version: 5.3.0
-      update-notifier:
-        specifier: ^7.2.0
-        version: 7.2.0
 
   packages/hooks/use-animation:
     dependencies:
@@ -7267,9 +7212,6 @@ packages:
   '@types/bonjour@3.5.13':
     resolution: {integrity: sha512-z9fJ5Im06zvUL548KvYNecEVlA7cVDkGUi6kZusb04mpyEFKCIZJvloCcmpmLaIahDpOQGHaHmG6imtPMmPXGQ==}
 
-  '@types/cli-welcome@2.2.2':
-    resolution: {integrity: sha512-GMY5tkglyR05FJ4moqZ0V+HRaENs5bRqnUxri7oXkrubz4Az26ybPoft3ZayvR25Aig5RFc5mI0BXwtT6njiSg==}
-
   '@types/configstore@6.0.2':
     resolution: {integrity: sha512-OS//b51j9uyR3zvwD04Kfs5kHpve2qalQ18JhY/ho3voGYUTPLEG90/ocfKPI48hyHH8T04f7KEEbK6Ue60oZQ==}
 
@@ -9055,9 +8997,6 @@ packages:
     resolution: {integrity: sha512-LYv6XPxoyODi36Dp976riBtSY27VmFo+MKqEU9QCCWyTrdEPDog+RWA7xQWHi6Vbp61j5c4cdzzX1NidnwtUWg==, tarball: https://registry.npmjs.org/clean-stack/-/clean-stack-4.2.0.tgz}
     engines: {node: '>=12'}
 
-  clear-any-console@1.16.2:
-    resolution: {integrity: sha512-OL/7wZpNy9x0GBSzz3poWja84Nr7iaH8aYNsJ5Uet2BVLj6Lm1zvWpZN/yH46Vv3ae7YfHmLLMmfHj911fshJg==, tarball: https://registry.npmjs.org/clear-any-console/-/clear-any-console-1.16.2.tgz}
-
   cli-boxes@3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}
     engines: {node: '>=10'}
@@ -9086,9 +9025,6 @@ packages:
   cli-spinners@2.9.2:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
-
-  cli-welcome@2.2.3:
-    resolution: {integrity: sha512-hxaOpahLk5PAYJj4tOcv8vaNMaBQHeMzeLQTAHq2EoGGTKVYV/MPCSlg5EEsKZ7y8WDGS2ScQtnITw02ZNukMQ==, tarball: https://registry.npmjs.org/cli-welcome/-/cli-welcome-2.2.3.tgz}
 
   cli-width@4.1.0:
     resolution: {integrity: sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ==}
@@ -10708,6 +10644,20 @@ packages:
 
   framer-motion@11.3.19:
     resolution: {integrity: sha512-+luuQdx4AsamyMcvzW7jUAJYIKvQs1KE7oHvKkW3eNzmo0S+3PSDWjBuQkuIP9WyneGnKGMLUSuHs8OP7jKpQg==, tarball: https://registry.npmjs.org/framer-motion/-/framer-motion-11.3.19.tgz}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
+  framer-motion@11.3.24:
+    resolution: {integrity: sha512-kl0YI7HwAtyV0VOAWuU/rXoOS8+z5qSkMN6rZS+a9oe6fIha6SC3vjJN6u/hBpvjrg5MQNdSnqnjYxm0WYTX9g==, tarball: https://registry.npmjs.org/framer-motion/-/framer-motion-11.3.24.tgz}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.2.0
@@ -20476,8 +20426,6 @@ snapshots:
     dependencies:
       '@types/node': 22.4.1
 
-  '@types/cli-welcome@2.2.2': {}
-
   '@types/configstore@6.0.2': {}
 
   '@types/connect-history-api-fallback@1.5.4':
@@ -23145,8 +23093,6 @@ snapshots:
     dependencies:
       escape-string-regexp: 5.0.0
 
-  clear-any-console@1.16.2: {}
-
   cli-boxes@3.0.0: {}
 
   cli-boxes@4.0.0: {}
@@ -23174,11 +23120,6 @@ snapshots:
       cli-handle-error: 4.4.0
 
   cli-spinners@2.9.2: {}
-
-  cli-welcome@2.2.3:
-    dependencies:
-      chalk: 2.4.2
-      clear-any-console: 1.16.2
 
   cli-width@4.1.0: {}
 
@@ -25228,6 +25169,14 @@ snapshots:
   fraction.js@4.3.7: {}
 
   framer-motion@11.3.19(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      tslib: 2.6.3
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.2.2
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  framer-motion@11.3.24(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.6.3
     optionalDependencies:

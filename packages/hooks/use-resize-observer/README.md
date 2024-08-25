@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-resize-observer
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-resize-observer
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-resize-observer
+pnpm add @yamada-ui/use-resize-observer
+# or
+yarn add @yamada-ui/use-resize-observer
+# or
+npm install @yamada-ui/use-resize-observer
+# or
+bun add @yamada-ui/use-resize-observer
 ```
 
 ## Contribution

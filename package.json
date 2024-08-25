@@ -10,7 +10,7 @@
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui"
+    "url": "https://github.com/yamada-ui/yamada-ui"
   },
   "scripts": {
     "prepare": "lefthook install",
@@ -68,6 +68,7 @@
     "docs:contributors": "pnpm --prefix docs gen:contributors",
     "docs:translate": "pnpm --prefix docs gen:translate",
     "docs:tokens": "pnpm --prefix docs gen:tokens",
+    "docs:label": "pnpm --prefix docs gen:label",
     "react:start": "pnpm --prefix examples/create-react-app start",
     "react:build": "pnpm --prefix examples/create-react-app build",
     "next-pages:dev": "pnpm --prefix examples/nextjs-pages dev",

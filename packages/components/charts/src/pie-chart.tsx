@@ -49,7 +49,7 @@ type PieChartOptions = {
    */
   tooltipDataSource?: TooltipDataSourceType
   /**
-   * Unit displayed next to each tick in y-axis.
+   * Unit displayed next to each value in tooltip.
    */
   unit?: string
 }
@@ -65,7 +65,7 @@ export type PieChartProps = HTMLUIProps<"div"> &
 /**
  * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/pie-chart
+ * @see Docs https://yamada-ui.com/components/data-display/pie-chart
  */
 export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("PieChart", props)

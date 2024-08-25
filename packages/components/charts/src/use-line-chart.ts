@@ -1,4 +1,4 @@
-import { useTheme } from "@yamada-ui/core"
+import { getVar, useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
@@ -134,7 +134,6 @@ export const useLineChart = ({
   const lineColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `line-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -146,7 +145,6 @@ export const useLineChart = ({
     () =>
       referenceLineProps
         ? referenceLineProps.map(({ color }, index) => ({
-            __prefix: "ui",
             name: `reference-line-${index}`,
             token: "colors",
             value: color ?? "transparent",
@@ -159,7 +157,7 @@ export const useLineChart = ({
     () => [
       ...lineColors,
       ...referenceLineColors,
-      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+      { name: "fill-opacity", value: fillOpacity },
     ],
     [fillOpacity, lineColors, referenceLineColors],
   )
@@ -175,8 +173,8 @@ export const useLineChart = ({
 
   const [lineProps, lineClassName] = useMemo(() => {
     const resolvedLineProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
-      strokeOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: "$fill-opacity",
+      strokeOpacity: "$fill-opacity",
       ...computedLineProps,
     }
 
@@ -230,7 +228,7 @@ export const useLineChart = ({
           dimLine = {},
           ...computedProps
         } = props
-        const color = `var(--ui-line-${index})`
+        const color = getVar(`line-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimLine = { ...dimLineProps, ...dimLine }
         const resolvedProps = {

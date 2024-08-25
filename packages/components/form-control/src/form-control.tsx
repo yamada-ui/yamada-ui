@@ -16,7 +16,7 @@ import {
   ariaAttr,
 } from "@yamada-ui/utils"
 import type { ReactNode, FocusEventHandler } from "react"
-import { useState, useId } from "react"
+import { useState, useId, isValidElement } from "react"
 
 export type FormControlOptions = {
   /**
@@ -188,12 +188,6 @@ export const FormControl = forwardRef<FormControlProps, "div">(
                 {...labelProps}
               >
                 {label}
-                {/* {(!isReplace || !isInvalid) && helperMessage ? (
-                  <VisuallyHidden>{helperMessage}</VisuallyHidden>
-                ) : null}
-                {isInvalid && errorMessage ? (
-                  <VisuallyHidden>{errorMessage}</VisuallyHidden>
-                ) : null} */}
               </Label>
             ) : null}
             {children}
@@ -360,7 +354,7 @@ export const Label = forwardRef<LabelProps, "label">(
       className,
       htmlFor,
       isRequired: isRequiredProp,
-      requiredIndicator = <RequiredIndicator />,
+      requiredIndicator = null,
       optionalIndicator = null,
       children,
       ...rest
@@ -401,7 +395,15 @@ export const Label = forwardRef<LabelProps, "label">(
         {...rest}
       >
         {children}
-        {isRequiredProp ? requiredIndicator : optionalIndicator}
+        {isRequiredProp ? (
+          requiredIndicator ? (
+            <RequiredIndicator>{requiredIndicator}</RequiredIndicator>
+          ) : (
+            <RequiredIndicator />
+          )
+        ) : (
+          optionalIndicator
+        )}
       </ui.label>
     )
   },
@@ -410,12 +412,12 @@ export const Label = forwardRef<LabelProps, "label">(
 export type RequiredIndicatorProps = HTMLUIProps<"span">
 
 export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
-  ({ className, ...rest }, ref) => {
+  ({ className, children, ...rest }, ref) => {
     const styles = useFormControlStyles() ?? {}
 
     const css: CSSUIObject = { ...styles.requiredIndicator }
 
-    return (
+    return !isValidElement(children) ? (
       <ui.span
         ref={ref}
         className={cx("ui-form__required-indicator", className)}
@@ -424,8 +426,10 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
         __css={css}
         {...rest}
       >
-        *
+        {children ?? <>*</>}
       </ui.span>
+    ) : (
+      children
     )
   },
 )

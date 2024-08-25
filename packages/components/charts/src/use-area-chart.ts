@@ -1,5 +1,5 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { useTheme } from "@yamada-ui/core"
+import { getVar, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
@@ -169,7 +169,6 @@ export const useAreaChart = ({
   const areaColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `area-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -180,7 +179,6 @@ export const useAreaChart = ({
   const areaSplitColors: CSSUIProps["var"] = useMemo(
     () =>
       splitColors.map((color, index) => ({
-        __prefix: "ui",
         name: `area-split-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -192,7 +190,6 @@ export const useAreaChart = ({
     () =>
       referenceLineProps
         ? referenceLineProps.map(({ color }, index) => ({
-            __prefix: "ui",
             name: `reference-line-${index}`,
             token: "colors",
             value: color ?? "transparent",
@@ -206,9 +203,10 @@ export const useAreaChart = ({
       ...areaColors,
       ...areaSplitColors,
       ...referenceLineColors,
-      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+      { name: "fill-opacity", value: fillOpacity },
     ]
   }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
+  const fillOpacityVar = useMemo(() => getVar("fill-opacity")(theme), [theme])
 
   const [chartProps, areaChartClassName] = useMemo(
     () =>
@@ -292,7 +290,7 @@ export const useAreaChart = ({
           ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
-        const color = `var(--ui-area-${index})`
+        const color = getVar(`area-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimArea = { ...dimAreaProps, ...dimArea }
 
@@ -428,10 +426,10 @@ export const useAreaChart = ({
     (props = {}) => ({
       id: splitId,
       offset: splitOffset ?? defaultSplitOffset,
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: fillOpacityVar,
       ...props,
     }),
-    [defaultSplitOffset, splitId, splitOffset],
+    [defaultSplitOffset, splitId, splitOffset, fillOpacityVar],
   )
 
   const getAreaProps: RequiredChartPropGetter<
@@ -491,10 +489,10 @@ export const useAreaChart = ({
   > = useCallback(
     (props = {}) => ({
       withGradient,
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: fillOpacityVar,
       ...props,
     }),
-    [withGradient],
+    [withGradient, fillOpacityVar],
   )
 
   return {

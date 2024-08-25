@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/carousel
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/carousel
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/carousel
+pnpm add @yamada-ui/carousel
+# or
+yarn add @yamada-ui/carousel
+# or
+npm install @yamada-ui/carousel
+# or
+bun add @yamada-ui/carousel
 ```
 
 ## Contribution

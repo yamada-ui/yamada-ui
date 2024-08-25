@@ -65,7 +65,7 @@ export type BarChartProps = HTMLUIProps<"div"> &
 /**
  * `BarChart` is a component for drawing bar charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/bar-chart
+ * @see Docs https://yamada-ui.com/components/data-display/bar-chart
  */
 export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("BarChart", props)

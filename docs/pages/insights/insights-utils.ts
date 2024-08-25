@@ -188,7 +188,7 @@ export const getTrend = (currentTotal: number, prevTotal: number) => {
 
   if (prevTotal === 0) return undefined
 
-  let trend = Math.round((currentTotal / prevTotal) * 100 - 100)
+  let trend = Math.round(((currentTotal - prevTotal) / prevTotal) * 100)
 
   if (trend >= 1000) {
     trend /= 1000

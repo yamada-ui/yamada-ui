@@ -2,6 +2,7 @@
 title: MultiAutocomplete
 description: "`MultiAutocomplete`は、ユーザーのテキスト入力に応じて候補を表示し、複数の値を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/autocomplete"
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -71,6 +72,40 @@ return <MultiAutocomplete placeholder="キャラクターを選択" items={items
 
 ```tsx
 <MultiAutocomplete placeholder="キャラクターを選択" defaultValue={["ベジータ"]}>
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</MultiAutocomplete>
+```
+
+### ドロップダウンにヘッダーを追加する
+
+```tsx
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  header={
+    <Center pt="2" px="3">
+      ここにヘッダーが追加されます
+    </Center>
+  }
+>
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</MultiAutocomplete>
+```
+
+### ドロップダウンにフッターを追加する
+
+```tsx
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  footer={
+    <Center pb="2" px="3">
+      ここにフッターが追加されます
+    </Center>
+  }
+>
   <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
   <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
   <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/dropzone",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "description": "Yamada UI dropzone component",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/dropzone"
   },
   "bugs": {

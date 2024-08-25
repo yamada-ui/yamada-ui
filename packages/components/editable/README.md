@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/editable
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/editable
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/editable
+pnpm add @yamada-ui/editable
+# or
+yarn add @yamada-ui/editable
+# or
+npm install @yamada-ui/editable
+# or
+bun add @yamada-ui/editable
 ```
 
 ## Contribution

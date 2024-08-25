@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/modal
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/modal
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/modal
+pnpm add @yamada-ui/modal
+# or
+yarn add @yamada-ui/modal
+# or
+npm install @yamada-ui/modal
+# or
+bun add @yamada-ui/modal
 ```
 
 ## Contribution

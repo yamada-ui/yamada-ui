@@ -166,10 +166,7 @@
     "innerProps": { "type": "HTMLUIProps<\"span\">", "required": false }
   },
   "MenuList": {
-    "contentProps": {
-      "type": "Omit<MotionProps<\"div\">, \"children\">",
-      "required": false
-    }
+    "contentProps": { "type": "MotionPropsWithoutChildren", "required": false }
   },
   "MenuItem": {
     "closeOnSelect": {

@@ -11,6 +11,8 @@ export { DonutChart } from "./donut-chart"
 export type { DonutChartProps } from "./donut-chart"
 export { PieChart } from "./pie-chart"
 export type { PieChartProps } from "./pie-chart"
+export { RadialChart } from "./radial-chart"
+export type { RadialChartProps } from "./radial-chart"
 export { Cell as ChartCell } from "recharts"
 export type {
   BarProps,
@@ -24,6 +26,8 @@ export type {
   ChartAxisType,
   ChartTooltip,
   ChartTooltipProps,
+  ChartLabel,
+  ChartLabelProps,
   TooltipDataSourceType,
   AreaChartType,
   BarChartType,

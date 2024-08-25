@@ -2,6 +2,7 @@
 title: Select
 description: "`Select`は、ユーザーがオプションのリストから1つを選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/select"
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -67,6 +68,40 @@ return <Select placeholder="キャラクターを選択" items={items} />
 
 ```tsx
 <Select placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### ドロップダウンにヘッダーを追加する
+
+```tsx
+<Select
+  placeholder="キャラクターを選択"
+  header={
+    <Center pt="2" px="3">
+      ここにヘッダーが追加されます
+    </Center>
+  }
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### ドロップダウンにフッターを追加する
+
+```tsx
+<Select
+  placeholder="キャラクターを選択"
+  footer={
+    <Center pb="2" px="3">
+      ここにフッターが追加されます
+    </Center>
+  }
+>
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
   <Option value="フリーザ">フリーザ</Option>

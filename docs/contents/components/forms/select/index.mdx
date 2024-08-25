@@ -2,6 +2,7 @@
 title: Select
 description: "`Select` is a component used for allowing a user to choose one option from a list."
 package_name: "@yamada-ui/select"
+label: Updated
 is_tabs: true
 with_description: true
 tab: Usage
@@ -67,6 +68,40 @@ To set a default value, set a string to `defaultValue`.
 
 ```tsx
 <Select placeholder="キャラクターを選択" defaultValue="ベジータ">
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Add header to a dropdown
+
+```tsx
+<Select
+  placeholder="キャラクターを選択"
+  header={
+    <Center pt="2" px="3">
+      Header added here
+    </Center>
+  }
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</Select>
+```
+
+### Add footer to a dropdown
+
+```tsx
+<Select
+  placeholder="キャラクターを選択"
+  footer={
+    <Center pb="2" px="3">
+      Footer added here
+    </Center>
+  }
+>
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
   <Option value="フリーザ">フリーザ</Option>

@@ -1,4 +1,4 @@
-import { useTheme } from "@yamada-ui/core"
+import { getVar, useTheme } from "@yamada-ui/core"
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { cx, type Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
@@ -8,7 +8,6 @@ import { getClassName, getComponentProps } from "./chart-utils"
 import type {
   ChartPropGetter,
   PolarAngleAxisProps,
-  PolarGridProps,
   PolarRadiusAxisProps,
   RadarChartProps,
   RadarProps,
@@ -17,7 +16,6 @@ import type {
 import {
   dotProperties,
   polarAngleAxisProperties,
-  polarGridProperties,
   polarRadiusAxisProperties,
   radarChartProperties,
   radarProperties,
@@ -44,10 +42,6 @@ export type UseRadarChartOptions = {
    * Props passed down to recharts `RadarChart` component.
    */
   chartProps?: RadarChartProps
-  /**
-   * Props passed down to recharts `PolarGrid` component.
-   */
-  polarGridProps?: PolarGridProps
   /**
    * Props passed down to recharts `PolarAngleAxis` component.
    */
@@ -96,10 +90,6 @@ export type UseRadarChartOptions = {
    * A function to format X axis tick.
    */
   polarRadiusAxisTickFormatter?: (value: number) => string
-  /**
-   * Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval.
-   */
-  strokeDasharray?: string | number
 }
 
 type UseRadarChartProps = UseRadarChartOptions & {
@@ -116,7 +106,6 @@ export const useRadarChart = ({
   fillOpacity = 0.4,
   polarAngleAxisTickFormatter,
   polarRadiusAxisTickFormatter,
-  strokeDasharray,
   styles,
   ...rest
 }: UseRadarChartProps) => {
@@ -134,7 +123,6 @@ export const useRadarChart = ({
   const radarColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `radar-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -146,7 +134,7 @@ export const useRadarChart = ({
     () =>
       [
         ...radarColors,
-        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+        { name: "fill-opacity", value: fillOpacity },
       ] as Required<CSSUIProps>["var"],
     [fillOpacity, radarColors],
   )
@@ -158,15 +146,6 @@ export const useRadarChart = ({
         styles.chart,
       )(theme),
     [rest.chartProps, styles.chart, theme],
-  )
-
-  const [polarGridProps, polarGridClassName] = useMemo(
-    () =>
-      getComponentProps<Dict, string>(
-        [rest.polarGridProps ?? {}, polarGridProperties],
-        styles.polarGrid,
-      )(theme),
-    [rest.polarGridProps, styles.polarGrid, theme],
   )
 
   const [polarAngleAxisProps, polarAngleAxisClassName] = useMemo(
@@ -207,7 +186,7 @@ export const useRadarChart = ({
 
   const [radarProps, radarClassName] = useMemo(() => {
     const resolvedRadarProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: "$fill-opacity",
       ...computedRadarProps,
     }
 
@@ -261,7 +240,7 @@ export const useRadarChart = ({
           dimRadar = {},
           ...computedProps
         } = props
-        const color = `var(--ui-radar-${index})`
+        const color = getVar(`radar-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimRadar = { ...dimRadarProps, ...dimRadar }
 
@@ -400,21 +379,6 @@ export const useRadarChart = ({
     [radarPropList, strokeWidth],
   )
 
-  const getPolarGridProps: ChartPropGetter<
-    "div",
-    Recharts.PolarGridProps,
-    Recharts.PolarGridProps
-  > = useCallback(
-    ({ className, ...props } = {}, ref = null) => ({
-      ref,
-      className: cx(className, polarGridClassName),
-      strokeDasharray,
-      ...props,
-      ...polarGridProps,
-    }),
-    [polarGridClassName, polarGridProps, strokeDasharray],
-  )
-
   const getPolarAngleAxisProps: ChartPropGetter<
     "div",
     Recharts.PolarAngleAxisProps,
@@ -474,7 +438,6 @@ export const useRadarChart = ({
     radarVars,
     getRadarChartProps,
     getRadarProps,
-    getPolarGridProps,
     getPolarAngleAxisProps,
     getPolarRadiusAxisProps,
     setHighlightedArea,

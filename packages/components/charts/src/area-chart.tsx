@@ -67,7 +67,7 @@ export type AreaChartProps = HTMLUIProps<"div"> &
 /**
  * `AreaChart` is a component for drawing area charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/area-chart
+ * @see Docs https://yamada-ui.com/components/data-display/area-chart
  */
 export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)

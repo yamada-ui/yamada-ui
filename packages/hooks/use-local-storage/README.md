@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-local-storage
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-local-storage
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-local-storage
+pnpm add @yamada-ui/use-local-storage
+# or
+yarn add @yamada-ui/use-local-storage
+# or
+npm install @yamada-ui/use-local-storage
+# or
+bun add @yamada-ui/use-local-storage
 ```
 
 ## Contribution

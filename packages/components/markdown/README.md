@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/markdown
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/markdown
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/markdown
+pnpm add @yamada-ui/markdown
+# or
+yarn add @yamada-ui/markdown
+# or
+npm install @yamada-ui/markdown
+# or
+bun add @yamada-ui/markdown
 ```
 
 ## Contribution

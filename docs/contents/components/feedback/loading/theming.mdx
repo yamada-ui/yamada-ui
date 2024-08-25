@@ -18,7 +18,9 @@ If you want to change the style of the component, please check [here](/styled-sy
 
 ```ts
 export const Loading: ComponentStyle<"Loading"> = {
-  baseStyle: {},
+  baseStyle: ({ colorScheme: c }) => ({
+    color: `${c}.500`,
+  }),
 
   defaultProps: {
     variant: "oval",

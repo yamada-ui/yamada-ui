@@ -109,6 +109,7 @@ const OVERRIDE_PATHS: Record<
     { parent: "line-chart", children: ["line", "dot"] },
     { parent: "radar-chart", children: ["radar"] },
     { parent: "pie-chart", children: ["cell"] },
+    { parent: "radial-chart", children: ["chart-label"] },
     "donut-chart",
   ],
 }

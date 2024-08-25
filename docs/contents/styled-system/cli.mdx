@@ -1,16 +1,15 @@
 ---
 title: CLI
 description: Generate types of customized themes using CLI commands.
+label: Updated
 order: 16
 ---
 
-You can generate types of tokens for customized themes such as colors and font sizes using Yamada CLI.
-
-The CLI reads the customized theme and generates token types in `node_modules/@yamada-ui/core/dist/generated-theme.types.d.ts`.
+You can use the Yamada CLI to generate types for tokens of your customized theme, such as colors and font sizes.
 
 ## Installation
 
-Run either of the following commands in the terminal.
+Execute one of the following commands in your terminal.
 
 <PackageManagers
   packageNameOrCommand={{
@@ -21,7 +20,13 @@ Run either of the following commands in the terminal.
   }}
 />
 
-Add a script to `package.json` and specify the location of the customized theme in the script.
+## Usage
+
+### Update Type Definitions
+
+By using the CLI, you can update the type completions for the theme tokens that [Style Props](/styled-system/style-props) refer to.
+
+Add a script to your `package.json` and specify the location of your customized theme within the script.
 
 ```json title=package.json
 {
@@ -29,7 +34,6 @@ Add a script to `package.json` and specify the location of the customized theme 
   "scripts" : {
     ...
     "theme" : "yamada-cli tokens path/to/theme.ts",
-    "theme:watch" : "yamada-cli tokens path/to/theme.ts --watch",
   } 、
   ...
 }
@@ -40,12 +44,10 @@ Don't forget to replace `path/to/theme.ts`.
 :::
 
 :::note status=warning
-Some package managers like `pnpm` may not find the output destination due to symbolic links, etc. In that case, use the `--out` option of the CLI to specify the output destination.
+The updated type definitions will be overwritten each time they are installed, so you need to run it again after each installation.
 :::
 
-## Usage
-
-To generate the type of theme, execute any of the following scripts.
+Now, execute the script you just added.
 
 <PackageManagers
   packageNameOrCommand={{
@@ -56,13 +58,15 @@ To generate the type of theme, execute any of the following scripts.
   }}
 />
 
-If you want to continuously generate types while customizing the theme, execute any of the following scripts.
+### Generate Theme
+
+You can use the CLI to generate the default theme locally.
 
 <PackageManagers
   packageNameOrCommand={{
-    pnpm: "pnpm theme:watch",
-    npm: "npm run theme:watch",
-    yarn: "yarn theme:watch",
-    bun: "bun run theme:watch",
+    pnpm: "pnpm yamada-cli theme ./theme",
+    npm: "npm run yamada-cli theme ./theme",
+    yarn: "yarn yamada-cli theme ./theme",
+    bun: "bun run yamada-cli theme ./theme",
   }}
 />

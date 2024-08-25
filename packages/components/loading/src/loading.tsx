@@ -1,5 +1,5 @@
 import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
-import { forwardRef, useComponentStyle } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -46,19 +46,17 @@ export type LoadingProps = IconProps &
  */
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
-    styles,
-    {
-      className,
-      variant = "oval",
-      color,
-      secondaryColor,
-      colorScheme = "primary",
-      size = "1em",
-      dur,
-      duration,
-      ...rest
-    },
+    { color, ...styles },
+    { variant = "oval", size = "1em", ...mergedProps },
   ] = useComponentStyle("Loading", props)
+  const {
+    className,
+    color: colorProp,
+    secondaryColor,
+    dur,
+    duration,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   const computedProps = useMemo<ComponentProps>(
     () => ({
@@ -66,36 +64,32 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       size,
       var: [
         {
-          __prefix: "ui",
           name: "color",
           token: "colors",
-          value: color ?? colorScheme,
+          value: colorProp ?? (color as CSSUIProps["color"]),
         },
         {
-          __prefix: "ui",
           name: "secondary-color",
           token: "colors",
           value: secondaryColor,
         },
       ],
-      color: "var(--ui-color)",
-      ...(secondaryColor
-        ? { secondaryColor: "var(--ui-secondary-color)" }
-        : {}),
+      color: "$color",
+      ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
       __css: { ...styles },
       ...rest,
     }),
     [
       className,
+      size,
+      colorProp,
       color,
       secondaryColor,
-      colorScheme,
-      size,
       duration,
       dur,
-      rest,
       styles,
+      rest,
     ],
   )
 

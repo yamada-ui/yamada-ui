@@ -1,5 +1,14 @@
 # @yamada-ui/react
 
+## 1.5.0
+
+### Minor Changes
+
+- [`27464db`](https://github.com/yamada-ui/yamada-ui/commit/27464db9426b34561ef3658e606e99ee66208377) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - - Added `RadialChart` and `Fieldset` component.
+  - Added `calc`, `min`, `max`, `clamp` utility functions.
+  - Added `mix` utility function.
+  - Added `# @yamada-ui/react to refer to theme token.
+
 ## 1.4.10
 
 ### Patch Changes

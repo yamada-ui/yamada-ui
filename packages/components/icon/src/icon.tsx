@@ -10,7 +10,7 @@ import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
 import type { FC, SVGAttributes } from "react"
 
 export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
-  Omit<ThemeProps<"Icon">, "size"> &
+  ThemeProps<"Icon"> &
   UIProps
 
 /**

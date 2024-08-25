@@ -2,6 +2,7 @@
 title: PieChart
 description: "`PieChart`は、複数のデータを比較するためのパイチャートを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
+label: Updated
 with_description: true
 tab: Props
 ---
@@ -14,22 +15,21 @@ tab: Props
   id="piechart-data"
   name="data"
   required
-  type='(Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; })[]'
+  type="CellProps[]"
   description={"Chart data."}
 />
 
 <PropsCard
   id="piechart-cellprops"
   name="cellProps"
-  type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
+  type="Partial<CellProps>"
   description={"Props for the cell."}
 />
 
 <PropsCard
   id="piechart-chartprops"
   name="chartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
+  type="PieChartProps"
   description={"Props passed down to recharts `PieChart` component."}
 />
 
@@ -43,7 +43,7 @@ tab: Props
 <PropsCard
   id="piechart-containerprops"
   name="containerProps"
-  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  type="ResponsiveContainerProps"
   description={"Props passed down to recharts `ResponsiveContainer` component."}
 />
 
@@ -90,7 +90,7 @@ tab: Props
 <PropsCard
   id="piechart-legendprops"
   name="legendProps"
-  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  type="LegendProps"
   description={"Props passed down to recharts 'Legend' component."}
 />
 
@@ -115,7 +115,7 @@ tab: Props
 <PropsCard
   id="piechart-pieprops"
   name="pieProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 494 more ... | "cornerRadius"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, "label" | ... 2 more ... | "l...'
+  type="Partial<PieProps>"
   description={"Props for the pie."}
 />
 
@@ -156,7 +156,7 @@ tab: Props
 <PropsCard
   id="piechart-tooltipprops"
   name="tooltipProps"
-  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  type="TooltipProps"
   description={"Props passed down to recharts 'Tooltip' component."}
 />
 
@@ -164,7 +164,7 @@ tab: Props
   id="piechart-unit"
   name="unit"
   type="string"
-  description={"Unit displayed next to each tick in y-axis."}
+  description={"Unit displayed next to each value in tooltip."}
 />
 
 <PropsCard
@@ -221,8 +221,4 @@ tab: Props
 
 <PropsCard id="cell-value" name="value" required type="number" />
 
-<PropsCard
-  id="cell-dimcell"
-  name="dimCell"
-  type='Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, "name" | "value" | "dimCell"> & ...> | undefined; }>'
-/>
+<PropsCard id="cell-dimcell" name="dimCell" type="Partial<CellProps>" />

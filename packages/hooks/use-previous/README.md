@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-previous
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-previous
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-previous
+pnpm add @yamada-ui/use-previous
+# or
+yarn add @yamada-ui/use-previous
+# or
+npm install @yamada-ui/use-previous
+# or
+bun add @yamada-ui/use-previous
 ```
 
 ## Contribution

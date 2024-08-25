@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/motion
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/motion
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/motion
+pnpm add @yamada-ui/motion
+# or
+yarn add @yamada-ui/motion
+# or
+npm install @yamada-ui/motion
+# or
+bun add @yamada-ui/motion
 ```
 
 ## Contribution

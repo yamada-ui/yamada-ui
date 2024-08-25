@@ -59,15 +59,15 @@ export const isAccessible = (colorScheme: string) =>
 export const getColor =
   (color: string, fallback: string = "#000000") =>
   (theme: Dict = {}, colorMode?: ColorMode) => {
-    const [token, hue] = color.split(".")
+    const [token, tone] = color.split(".")
 
-    if (hue) {
+    if (tone) {
       const [, relatedToken] =
         Object.entries<string>(theme.semantics?.colorSchemes ?? {}).find(
           ([semanticToken]) => token === semanticToken,
         ) ?? []
 
-      if (relatedToken) color = `${relatedToken}.${hue}`
+      if (relatedToken) color = `${relatedToken}.${tone}`
     } else {
       const [, relatedColor] =
         Object.entries<string>(theme.semantics?.colors ?? {}).find(

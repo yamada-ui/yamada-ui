@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/radio
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/radio
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/radio
+pnpm add @yamada-ui/radio
+# or
+yarn add @yamada-ui/radio
+# or
+npm install @yamada-ui/radio
+# or
+bun add @yamada-ui/radio
 ```
 
 ## Contribution

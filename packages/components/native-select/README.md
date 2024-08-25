@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/native-select
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/native-select
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/native-select
+pnpm add @yamada-ui/native-select
+# or
+yarn add @yamada-ui/native-select
+# or
+npm install @yamada-ui/native-select
+# or
+bun add @yamada-ui/native-select
 ```
 
 ## Contribution

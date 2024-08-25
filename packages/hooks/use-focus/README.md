@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-focus
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-focus
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-focus
+pnpm add @yamada-ui/use-focus
+# or
+yarn add @yamada-ui/use-focus
+# or
+npm install @yamada-ui/use-focus
+# or
+bun add @yamada-ui/use-focus
 ```
 
 ## Contribution

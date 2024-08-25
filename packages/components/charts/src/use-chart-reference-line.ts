@@ -1,4 +1,4 @@
-import { getCSS, useTheme } from "@yamada-ui/core"
+import { getCSS, getVar, useTheme } from "@yamada-ui/core"
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { isObject, cx } from "@yamada-ui/utils"
@@ -34,7 +34,7 @@ export const useChartReferenceLine = ({
             styleClassName,
           )(theme)
 
-        const color = `var(--ui-reference-line-${index})`
+        const color = getVar(`reference-line-${index}`)(theme)
         const label: Recharts.ReferenceLineProps["label"] = {
           value: labelProp as string,
           fill: color,

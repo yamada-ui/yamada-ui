@@ -3,7 +3,7 @@ import { useTheme } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo, useState } from "react"
-import type { ComponentPropsWithRef } from "react"
+import type { ComponentPropsWithoutRef } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
 import type {
@@ -185,8 +185,8 @@ export const useRadialChart = ({
 
   const getRadialChartProps: ChartPropGetter<
     "div",
-    ComponentPropsWithRef<typeof Recharts.RadialBarChart>,
-    ComponentPropsWithRef<typeof Recharts.RadialBarChart>
+    ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>,
+    ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>
   > = useCallback(
     ({ className, ...props } = {}, ref = null) => ({
       ref,

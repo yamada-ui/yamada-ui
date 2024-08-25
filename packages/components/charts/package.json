@@ -46,7 +46,6 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@types/lodash": "^4.17.7",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "recharts": "^2.12.7"

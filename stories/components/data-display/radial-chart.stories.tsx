@@ -91,8 +91,8 @@ export const custom: Story = () => {
   const [props, setProps] = useState<RadialChartProps>({
     data,
     dataKey: "value",
-    startAngle: 180,
-    endAngle: 0,
+    startAngle: 90,
+    endAngle: -180,
     fillOpacity: 1,
     innerRadius: 10,
     outerRadius: 80,
@@ -260,8 +260,7 @@ export const withLabelLists: Story = () => {
     <RadialChart
       data={data}
       innerRadius={50}
-      startAngle={90}
-      endAngle={-230}
+      endAngle={-225}
       labelListProps={[
         {
           position: "insideStart",
@@ -341,7 +340,7 @@ export const useCircleGrid: Story = () => {
   return (
     <RadialChart
       data={data}
-      endAngle={-180}
+      endAngle={-270}
       withPolarGrid
       polarGridProps={{ gridType: "circle" }}
     />

@@ -4,6 +4,7 @@ description: >-
   `DonutChart` is a component for drawing donut charts to compare multiple sets
   of data.
 package_name: "@yamada-ui/charts"
+label: Updated
 with_description: true
 tab: Theming
 ---
@@ -21,6 +22,12 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const DonutChart: ComponentMultiStyle<"DonutChart"> =
-  mergeMultiStyle(PieChart)()
+export const DonutChart: ComponentMultiStyle<"DonutChart"> = mergeMultiStyle(
+  PieChart,
+  {
+    baseStyle: {
+      label: {},
+    },
+  },
+)()
 ```

@@ -78,7 +78,7 @@ export type RadarChartProps = HTMLUIProps<"div"> &
 /**
  * `RadarChart` is a component for drawing radar charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/radar-chart
+ * @see Docs https://yamada-ui.com/components/data-display/radar-chart
  */
 export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("RadarChart", props)

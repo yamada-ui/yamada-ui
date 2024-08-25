@@ -11,12 +11,12 @@
       "description": "The key of a group of data which should be unique in an chart."
     },
     "series": {
-      "type": "(Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 490 more ... | \"baseLine\"> & Omit<...> & LineProps, \"color\" | ... 3 more ... | \"dimLine\"> & { ...; })[]",
+      "type": "LineProps[]",
       "required": true,
       "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
     },
     "chartProps": {
-      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "type": "LineChartProps",
       "required": false,
       "description": "Props passed down to recharts `LineChart` component."
     },
@@ -32,7 +32,7 @@
       "description": "Determines whether points with `null` values should be connected."
     },
     "containerProps": {
-      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
     },
@@ -49,7 +49,7 @@
       "description": "Specifies which lines should be displayed in the grid."
     },
     "gridProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps",
+      "type": "GridProps",
       "required": false,
       "description": "Props passed down to recharts 'CartesianGrid' component."
     },
@@ -65,17 +65,17 @@
       "description": "Chart orientation."
     },
     "legendProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "type": "LegendProps",
       "required": false,
       "description": "Props passed down to recharts 'Legend' component."
     },
     "lineProps": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 490 more ... | \"baseLine\"> & Omit<...> & LineProps, \"color\" | ... 3 more ... | \"dimLine\"> & { ...; }>",
+      "type": "Partial<LineProps>",
       "required": false,
       "description": "Props for the lines."
     },
     "referenceLineProps": {
-      "type": "(Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]",
+      "type": "ReferenceLineProps[]",
       "required": false,
       "description": "Reference lines that should be displayed on the chart."
     },
@@ -103,7 +103,7 @@
       "description": "Specifies the duration of animation, the unit of this option is ms."
     },
     "tooltipProps": {
-      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "type": "TooltipProps",
       "required": false,
       "description": "Props passed down to recharts 'Tooltip' component."
     },
@@ -170,12 +170,12 @@
       "description": "A label to display below the X axis."
     },
     "xAxisLabelProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "type": "LabelProps",
       "required": false,
       "description": "Props passed down to recharts 'XAxisLabel' component."
     },
     "xAxisProps": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
+      "type": "XAxisProps",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
     },
@@ -190,12 +190,12 @@
       "description": "A label to display below the Y axis."
     },
     "yAxisLabelProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "type": "LabelProps",
       "required": false,
       "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
+      "type": "YAxisProps",
       "required": false,
       "description": "Props passed down to recharts 'YAxis' component."
     },
@@ -217,12 +217,12 @@
       "description": "The key of a group of data which should be unique in an chart."
     },
     "series": {
-      "type": "(Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"barSize\" | \"maxBarSize\" | \"style\" | \"className\" | ... 494 more ... | \"animationId\"> & Omit<...> & BarProps, \"color\" | ... 2 more ... | \"dimBar\"> & { ...; })[]",
+      "type": "BarProps[]",
       "required": true,
       "description": "An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array."
     },
     "barProps": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"barSize\" | \"maxBarSize\" | \"style\" | \"className\" | ... 494 more ... | \"animationId\"> & Omit<...> & BarProps, \"color\" | ... 2 more ... | \"dimBar\"> & { ...; }>",
+      "type": "Partial<BarProps>",
       "required": false,
       "description": "Props for the bars."
     },
@@ -232,7 +232,7 @@
       "description": "A function that returns a component that renders the bar cells."
     },
     "chartProps": {
-      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "type": "BarChartProps",
       "required": false,
       "description": "Props passed down to recharts `BarChart` component."
     },
@@ -242,7 +242,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
     },
@@ -253,7 +253,7 @@
       "description": "Specifies which lines should be displayed in the grid."
     },
     "gridProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps",
+      "type": "GridProps",
       "required": false,
       "description": "Props passed down to recharts 'CartesianGrid' component."
     },
@@ -269,12 +269,12 @@
       "description": "Chart orientation."
     },
     "legendProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "type": "LegendProps",
       "required": false,
       "description": "Props passed down to recharts 'Legend' component."
     },
     "referenceLineProps": {
-      "type": "(Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]",
+      "type": "ReferenceLineProps[]",
       "required": false,
       "description": "Reference lines that should be displayed on the chart."
     },
@@ -302,7 +302,7 @@
       "description": "Specifies the duration of animation, the unit of this option is ms."
     },
     "tooltipProps": {
-      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "type": "TooltipProps",
       "required": false,
       "description": "Props passed down to recharts 'Tooltip' component."
     },
@@ -357,12 +357,12 @@
       "description": "A label to display below the X axis."
     },
     "xAxisLabelProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "type": "LabelProps",
       "required": false,
       "description": "Props passed down to recharts 'XAxisLabel' component."
     },
     "xAxisProps": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
+      "type": "XAxisProps",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
     },
@@ -377,12 +377,12 @@
       "description": "A label to display below the Y axis."
     },
     "yAxisLabelProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "type": "LabelProps",
       "required": false,
       "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
+      "type": "YAxisProps",
       "required": false,
       "description": "Props passed down to recharts 'YAxis' component."
     },
@@ -396,10 +396,7 @@
     "data": { "type": "Dict", "required": true },
     "hasStack": { "type": "boolean", "required": true },
     "index": { "type": "number", "required": true },
-    "series": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"barSize\" | \"maxBarSize\" | \"style\" | \"className\" | ... 494 more ... | \"animationId\"> & Omit<...> & BarProps, \"color\" | ... 2 more ... | \"dimBar\"> & { ...; }",
-      "required": true
-    }
+    "series": { "type": "BarProps", "required": true }
   },
   "AreaChart": {
     "data": {
@@ -413,17 +410,17 @@
       "description": "The key of a group of data which should be unique in an chart."
     },
     "series": {
-      "type": "(Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"cx\" | ... 457 more ... | keyof AreaProps> & Omit<...> & AreaProps, \"color\" | ... 3 more ... | \"dimArea\"> & { ...; })[]",
+      "type": "AreaProps[]",
       "required": true,
       "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
     },
     "areaProps": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | ... 458 more ... | keyof AreaProps> & Omit<...> & AreaProps, \"color\" | ... 3 more ... | \"dimArea\"> & { ...; }>",
+      "type": "Partial<AreaProps>",
       "required": false,
       "description": "Props for the areas."
     },
     "chartProps": {
-      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "type": "AreaChartProps",
       "required": false,
       "description": "Props passed down to recharts `AreaChart` component."
     },
@@ -439,7 +436,7 @@
       "description": "Determines whether points with `null` values should be connected."
     },
     "containerProps": {
-      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
     },
@@ -456,7 +453,7 @@
       "description": "Specifies which lines should be displayed in the grid."
     },
     "gridProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps",
+      "type": "GridProps",
       "required": false,
       "description": "Props passed down to recharts 'CartesianGrid' component."
     },
@@ -472,12 +469,12 @@
       "description": "Chart orientation."
     },
     "legendProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "type": "LegendProps",
       "required": false,
       "description": "Props passed down to recharts 'Legend' component."
     },
     "referenceLineProps": {
-      "type": "(Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]",
+      "type": "ReferenceLineProps[]",
       "required": false,
       "description": "Reference lines that should be displayed on the chart."
     },
@@ -516,7 +513,7 @@
       "description": "Specifies the duration of animation, the unit of this option is ms."
     },
     "tooltipProps": {
-      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "type": "TooltipProps",
       "required": false,
       "description": "Props passed down to recharts 'Tooltip' component."
     },
@@ -588,12 +585,12 @@
       "description": "A label to display below the X axis."
     },
     "xAxisLabelProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "type": "LabelProps",
       "required": false,
       "description": "Props passed down to recharts 'XAxisLabel' component."
     },
     "xAxisProps": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, \"color\" | ... 1 more ... | \"stroke\"> & { ...; }",
+      "type": "XAxisProps",
       "required": false,
       "description": "Props passed down to recharts 'XAxis' component."
     },
@@ -608,12 +605,12 @@
       "description": "A label to display below the Y axis."
     },
     "yAxisLabelProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"width\" | \"height\" | \"style\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps",
+      "type": "LabelProps",
       "required": false,
       "description": "Props passed down to recharts 'YAxisLabel' component."
     },
     "yAxisProps": {
-      "type": "Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, \"color\"> & { ...; }",
+      "type": "YAxisProps",
       "required": false,
       "description": "Props passed down to recharts 'YAxis' component."
     },
@@ -635,12 +632,12 @@
       "description": "The key of a group of data which should be unique in an chart."
     },
     "series": {
-      "type": "(Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | \"cy\" | ... 458 more ... | keyof RadarProps> & Omit<...> & RadarProps, \"color\" | ... 3 more ... | \"dimRadar\"> & { ...; })[]",
+      "type": "RadarProps[]",
       "required": true,
       "description": "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
     },
     "chartProps": {
-      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "type": "RadarChartProps",
       "required": false,
       "description": "Props passed down to recharts `RadarChart` component."
     },
@@ -650,17 +647,17 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
     },
     "legendProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "type": "LegendProps",
       "required": false,
       "description": "Props passed down to recharts 'Legend' component."
     },
     "polarAngleAxisProps": {
-      "type": "Omit<Props, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | \"_nativeFocusVisible\" | ... 60 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "PolarAngleAxisProps",
       "required": false,
       "description": "Props passed down to recharts `PolarAngleAxis` component."
     },
@@ -675,12 +672,12 @@
       "description": "Props passed down to recharts `tick` of `PolarAngleAxis` component."
     },
     "polarGridProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | ... 470 more ... | \"radialLines\"> & SVGProps<...> & PolarGridProps",
+      "type": "PolarGridProps",
       "required": false,
       "description": "Props passed down to recharts `PolarGrid` component."
     },
     "polarRadiusAxisProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"id\" | \"role\" | \"tabIndex\" | \"ref\" | \"clipPath\" | \"color\" | \"cursor\" | \"direction\" | \"display\" | ... 245 more ... | keyof PolarRadiusAxisProps> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PolarRadiusAxisProps",
+      "type": "PolarRadiusAxisProps",
       "required": false,
       "description": "Props passed down to recharts `PolarRadiusAxis` component."
     },
@@ -695,7 +692,7 @@
       "description": "Props passed down to recharts `tick` of `PolarRadiusAxis` component."
     },
     "radarProps": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | \"cy\" | ... 458 more ... | keyof RadarProps> & Omit<...> & RadarProps, \"color\" | ... 3 more ... | \"dimRadar\"> & { ...; }>",
+      "type": "Partial<RadarProps>",
       "required": false,
       "description": "Props for the radar."
     },
@@ -712,7 +709,7 @@
       "description": "Specifies the duration of animation, the unit of this option is ms."
     },
     "tooltipProps": {
-      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "type": "TooltipProps",
       "required": false,
       "description": "Props passed down to recharts 'Tooltip' component."
     },
@@ -776,17 +773,17 @@
   },
   "DonutChart": {
     "data": {
-      "type": "(Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; })[]",
+      "type": "CellProps[]",
       "required": true,
       "description": "Chart data."
     },
     "cellProps": {
-      "type": "Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; }>",
+      "type": "Partial<CellProps>",
       "required": false,
       "description": "Props for the cell."
     },
     "chartProps": {
-      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "type": "PieChartProps",
       "required": false,
       "description": "Props passed down to recharts `PieChart` component."
     },
@@ -796,7 +793,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
     },
@@ -828,8 +825,13 @@
       "required": false,
       "description": "Distance between chart and label."
     },
+    "labelProps": {
+      "type": "LabelProps",
+      "required": false,
+      "description": "Props passed down to recharts 'Label' component."
+    },
     "legendProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "type": "LegendProps",
       "required": false,
       "description": "Props passed down to recharts 'Legend' component."
     },
@@ -846,7 +848,7 @@
       "description": "Controls padding between segments."
     },
     "pieProps": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 494 more ... | \"cornerRadius\"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, \"label\" | ... 2 more ... | \"l...",
+      "type": "Partial<PieProps>",
       "required": false,
       "description": "Props for the pie."
     },
@@ -875,14 +877,14 @@
       "description": "Determines which data is displayed in the tooltip."
     },
     "tooltipProps": {
-      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "type": "TooltipProps",
       "required": false,
       "description": "Props passed down to recharts 'Tooltip' component."
     },
     "unit": {
       "type": "string",
       "required": false,
-      "description": "Unit displayed next to each tick in y-axis."
+      "description": "Unit displayed next to each value in tooltip."
     },
     "valueFormatter": {
       "type": "(value: any) => string",
@@ -921,17 +923,17 @@
   },
   "PieChart": {
     "data": {
-      "type": "(Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; })[]",
+      "type": "CellProps[]",
       "required": true,
       "description": "Chart data."
     },
     "cellProps": {
-      "type": "Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; }>",
+      "type": "Partial<CellProps>",
       "required": false,
       "description": "Props for the cell."
     },
     "chartProps": {
-      "type": "Omit<CSSUIProps, keyof CategoricalChartProps> &\n  CategoricalChartProps",
+      "type": "PieChartProps",
       "required": false,
       "description": "Props passed down to recharts `PieChart` component."
     },
@@ -941,7 +943,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<CSSUIProps, \"width\" | \"height\" | \"style\" | \"className\" | \"id\" | \"maxHeight\" | \"minHeight\" | \"minWidth\" | \"onResize\" | \"aspect\" | \"initialDimension\" | \"debounce\"> & Omit<...>",
+      "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
     },
@@ -974,7 +976,7 @@
       "description": "Distance between chart and label."
     },
     "legendProps": {
-      "type": "Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"margin\" | \"style\" | \"className\" | \"children\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | ... 416 more ... | \"onBBoxUpdate\"> & Omit<...>",
+      "type": "LegendProps",
       "required": false,
       "description": "Props passed down to recharts 'Legend' component."
     },
@@ -991,7 +993,7 @@
       "description": "Controls padding between segments."
     },
     "pieProps": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 494 more ... | \"cornerRadius\"> & AriaAttributes & DOMAttributesAdaptChildEvent<...> & Omit<...> & PieProps, \"label\" | ... 2 more ... | \"l...",
+      "type": "Partial<PieProps>",
       "required": false,
       "description": "Props for the pie."
     },
@@ -1020,14 +1022,14 @@
       "description": "Determines which data is displayed in the tooltip."
     },
     "tooltipProps": {
-      "type": "Omit<Omit<CSSUIProps, \"offset\" | \"animationDuration\" | \"content\" | \"cursor\" | \"position\" | \"viewBox\" | \"isAnimationActive\" | \"animationEasing\" | keyof Props<any, any> | ... 11 more ... | \"wrapperStyle\"> & Omit<...>, \"cursor\"> & { ...; }",
+      "type": "TooltipProps",
       "required": false,
       "description": "Props passed down to recharts 'Tooltip' component."
     },
     "unit": {
       "type": "string",
       "required": false,
-      "description": "Unit displayed next to each tick in y-axis."
+      "description": "Unit displayed next to each value in tooltip."
     },
     "valueFormatter": {
       "type": "(value: any) => string",
@@ -1064,97 +1066,201 @@
       "description": "If `true`, tooltip is visible."
     }
   },
+  "RadialChart": {
+    "data": {
+      "type": "Dict[]",
+      "required": true,
+      "description": "Chart data."
+    },
+    "chartProps": {
+      "type": "RadialChartProps",
+      "required": false,
+      "description": "Props passed down to recharts `RadialBarChart` component."
+    },
+    "colorScheme": {
+      "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
+      "required": false,
+      "description": "The visual color appearance of the component."
+    },
+    "containerProps": {
+      "type": "ResponsiveContainerProps",
+      "required": false,
+      "description": "Props passed down to recharts `ResponsiveContainer` component."
+    },
+    "dataKey": {
+      "type": "string",
+      "defaultValue": "'value'",
+      "required": false,
+      "description": "The key of a group of data which should be unique in an chart."
+    },
+    "endAngle": {
+      "type": "number",
+      "defaultValue": "-180",
+      "required": false,
+      "description": "Controls angle at which chart ends."
+    },
+    "innerRadius": {
+      "type": "string | number",
+      "defaultValue": "'10%'",
+      "required": false,
+      "description": "Controls innerRadius of the chart segments.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "required": false,
+      "description": "A function to format labels on inside the tooltip."
+    },
+    "labelListProps": {
+      "type": "LabelListProps[]",
+      "required": false,
+      "description": "Props passed down to recharts `LabelList` components."
+    },
+    "legendProps": {
+      "type": "LegendProps",
+      "required": false,
+      "description": "Props passed down to recharts 'Legend' component."
+    },
+    "outerRadius": {
+      "type": "string | number",
+      "defaultValue": "'80%'",
+      "required": false,
+      "description": "Controls thickness of the chart segments. If it is a number, it is calculated as px.\nIf it is a number, it is the width of the radius.\nFor example, `60` means the radius is `60px` and the diameter is `120px`."
+    },
+    "polarGridProps": {
+      "type": "PolarGridProps",
+      "required": false,
+      "description": "Props passed down to recharts `PolarGrid` component."
+    },
+    "radialBarProps": {
+      "type": "Partial<RadialBarProps>",
+      "required": false,
+      "description": "Props for the radialBar."
+    },
+    "size": {
+      "defaultValue": "full",
+      "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
+      "required": false,
+      "description": "The size of the RadialChart."
+    },
+    "startAngle": {
+      "type": "number",
+      "defaultValue": "90",
+      "required": false,
+      "description": "Controls angle at which chart starts."
+    },
+    "tooltipAnimationDuration": {
+      "type": "number",
+      "defaultValue": "0",
+      "required": false,
+      "description": "Specifies the duration of animation, the unit of this option is ms."
+    },
+    "tooltipDataSource": {
+      "type": "TooltipDataSourceType",
+      "defaultValue": "'all'",
+      "required": false,
+      "description": "Determines which data is displayed in the tooltip."
+    },
+    "tooltipProps": {
+      "type": "TooltipProps",
+      "required": false,
+      "description": "Props passed down to recharts 'Tooltip' component."
+    },
+    "unit": {
+      "type": "string",
+      "required": false,
+      "description": "Unit displayed next to each value in tooltip."
+    },
+    "valueFormatter": {
+      "type": "(value: any) => string",
+      "required": false,
+      "description": "A function to format values on inside the tooltip."
+    },
+    "variant": {
+      "type": "string",
+      "required": false,
+      "description": "The variant of the RadialChart."
+    },
+    "withLegend": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "If `true`, legend is visible."
+    },
+    "withPolarGrid": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "description": "Determines whether polarGrid should be displayed."
+    },
+    "withTooltip": {
+      "type": "boolean",
+      "defaultValue": true,
+      "required": false,
+      "description": "If `true`, tooltip is visible."
+    }
+  },
   "Bar": {
     "activeBar": {
-      "type": "Omit<SVGProps<SVGPathElement>, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Merge<SVGProps<SVGPathElement>, CSSUIProps>",
       "required": false
     },
     "background": {
-      "type": "Omit<SVGProps<SVGPathElement>, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps",
+      "type": "Merge<SVGProps<SVGPathElement>, CSSUIProps>",
       "required": false
     },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
       "required": false
     },
-    "dimBar": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"activeIndex\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"barSize\" | \"maxBarSize\" | \"style\" | \"className\" | ... 494 more ... | \"animationId\"> & Omit<...> & BarProps, \"color\" | ... 2 more ... | \"dimBar\"> & { ...; }>",
-      "required": false
-    }
+    "dimBar": { "type": "Partial<BarProps>", "required": false }
   },
   "Area": {
-    "activeDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    },
+    "activeDot": { "type": "DotProps", "required": false },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
       "required": false
     },
-    "dimArea": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"style\" | \"children\" | \"onClick\" | \"onMouseLeave\" | \"onMouseEnter\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | ... 458 more ... | keyof AreaProps> & Omit<...> & AreaProps, \"color\" | ... 3 more ... | \"dimArea\"> & { ...; }>",
-      "required": false
-    },
-    "dimDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    },
-    "dot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    }
+    "dimArea": { "type": "Partial<AreaProps>", "required": false },
+    "dimDot": { "type": "DotProps", "required": false },
+    "dot": { "type": "DotProps", "required": false }
   },
   "Line": {
-    "activeDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    },
+    "activeDot": { "type": "DotProps", "required": false },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
       "required": false
     },
-    "dimDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    },
-    "dimLine": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"dataKey\" | \"data\" | \"layout\" | \"style\" | \"className\" | \"children\" | \"onClick\" | \"onMouseLeave\" | ... 490 more ... | \"baseLine\"> & Omit<...> & LineProps, \"color\" | ... 3 more ... | \"dimLine\"> & { ...; }>",
-      "required": false
-    },
-    "dot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    }
+    "dimDot": { "type": "DotProps", "required": false },
+    "dimLine": { "type": "Partial<LineProps>", "required": false },
+    "dot": { "type": "DotProps", "required": false }
   },
   "Radar": {
-    "activeDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    },
+    "activeDot": { "type": "DotProps", "required": false },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
       "required": false
     },
-    "dimDot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    },
-    "dimRadar": {
-      "type": "Partial<Omit<Omit<CSSUIProps, \"string\" | \"offset\" | \"width\" | \"height\" | \"style\" | \"children\" | \"onClick\" | \"onMouseMove\" | \"onMouseDown\" | \"onMouseUp\" | \"id\" | \"cx\" | \"cy\" | ... 458 more ... | keyof RadarProps> & Omit<...> & RadarProps, \"color\" | ... 3 more ... | \"dimRadar\"> & { ...; }>",
-      "required": false
-    },
-    "dot": {
-      "type": "Omit<Omit<Props, \"ref\">, \"_hover\" | \"_nativeHover\" | \"_active\" | \"_nativeActive\" | \"_target\" | \"_notTarget\" | \"_nativeTarget\" | \"_focus\" | \"_nativeFocus\" | \"_focusVisible\" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps",
-      "required": false
-    }
+    "dimDot": { "type": "DotProps", "required": false },
+    "dimRadar": { "type": "Partial<RadarProps>", "required": false },
+    "dot": { "type": "DotProps", "required": false }
   },
   "Cell": {
     "name": { "type": "string", "required": true },
     "value": { "type": "number", "required": true },
-    "dimCell": {
-      "type": "Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & { name: string; value: number; dimCell?: Partial<Omit<CSSUIProps, \"name\" | \"value\" | \"dimCell\"> & ...> | undefined; }>",
-      "required": false
-    }
+    "dimCell": { "type": "Partial<CellProps>", "required": false }
   },
-  "Dot": {}
+  "Dot": {},
+  "ChartTooltip": {
+    "dataKey": { "type": "string", "required": false },
+    "isRadialChart": { "type": "boolean", "required": false },
+    "label": { "type": "string", "required": false },
+    "labelFormatter": {
+      "type": "(label: string) => string",
+      "required": false
+    },
+    "payload": { "type": "Dict[]", "required": false },
+    "unit": { "type": "string", "required": false },
+    "valueFormatter": { "type": "(value: any) => string", "required": false }
+  },
+  "ChartLabel": {}
 }

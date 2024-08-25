@@ -101,6 +101,7 @@ const OVERRIDE_PATHS: Record<
     "color-swatch",
   ],
   button: ["icon-button"],
+  image: ["image", "native-image"],
   link: [{ parent: "link-box", children: ["link-overlay"] }],
   charts: [
     { parent: "bar-chart", children: ["bar"] },
@@ -108,6 +109,7 @@ const OVERRIDE_PATHS: Record<
     { parent: "line-chart", children: ["line", "dot"] },
     { parent: "radar-chart", children: ["radar"] },
     { parent: "pie-chart", children: ["cell"] },
+    { parent: "radial-chart", children: ["chart-label"] },
     "donut-chart",
   ],
 }

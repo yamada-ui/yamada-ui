@@ -1,8 +1,8 @@
 import type {
   CSSUIObject,
-  UIProps,
   CSSUIProps,
   ThemeProps,
+  HTMLUIProps,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -12,7 +12,7 @@ import {
 } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
-import type { FC, SVGAttributes } from "react"
+import type { FC } from "react"
 
 type IconOptions = {
   /**
@@ -23,9 +23,8 @@ type IconOptions = {
   size?: CSSUIProps["fontSize"]
 }
 
-export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
+export type IconProps = HTMLUIProps<"svg"> &
   Omit<ThemeProps<"Icon">, "size"> &
-  UIProps &
   IconOptions
 
 /**

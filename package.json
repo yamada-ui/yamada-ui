@@ -10,7 +10,7 @@
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui"
+    "url": "https://github.com/yamada-ui/yamada-ui"
   },
   "scripts": {
     "prepare": "lefthook install",

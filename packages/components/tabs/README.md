@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/tabs
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/tabs
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/tabs
+pnpm add @yamada-ui/tabs
+# or
+yarn add @yamada-ui/tabs
+# or
+npm install @yamada-ui/tabs
+# or
+bun add @yamada-ui/tabs
 ```
 
 ## Contribution

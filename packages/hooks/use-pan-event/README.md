@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-pan-event
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-pan-event
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-pan-event
+pnpm add @yamada-ui/use-pan-event
+# or
+yarn add @yamada-ui/use-pan-event
+# or
+npm install @yamada-ui/use-pan-event
+# or
+bun add @yamada-ui/use-pan-event
 ```
 
 ## Contribution

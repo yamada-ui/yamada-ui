@@ -54,7 +54,7 @@ export const Prompt: FC<PromptProps> = memo(({ onChangeModeRef, ...rest }) => {
           bg={["blackAlpha.50", "whiteAlpha.50"]}
           var={[{ name: "space-top", token: "spaces", value: "lg" }]}
           minH={{
-            base: isEdit ? "calc(100% - var(--ui-space-top))" : "4xl",
+            base: isEdit ? "calc(100% - $space-top)" : "4xl",
             xl: "md",
           }}
           gridColumn={isEdit ? { base: "2 / 3", xl: "inherit" } : undefined}

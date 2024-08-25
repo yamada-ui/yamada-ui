@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/lucide
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/lucide
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/lucide
+pnpm add @yamada-ui/lucide
+# or
+yarn add @yamada-ui/lucide
+# or
+npm install @yamada-ui/lucide
+# or
+bun add @yamada-ui/lucide
 ```
 
 ## Contribution

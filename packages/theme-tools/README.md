@@ -5,19 +5,13 @@ Yamada UI Theme Utilities.
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/theme-tools
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/theme-tools
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/theme-tools
+pnpm add @yamada-ui/theme-tools
+# or
+yarn add @yamada-ui/theme-tools
+# or
+npm install @yamada-ui/theme-tools
+# or
+bun add @yamada-ui/theme-tools
 ```
 
 ## Contribution

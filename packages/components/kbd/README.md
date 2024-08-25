@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/kbd
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/kbd
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/kbd
+pnpm add @yamada-ui/kbd
+# or
+yarn add @yamada-ui/kbd
+# or
+npm install @yamada-ui/kbd
+# or
+bun add @yamada-ui/kbd
 ```
 
 ## Contribution

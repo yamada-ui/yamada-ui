@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/popover
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/popover
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/popover
+pnpm add @yamada-ui/popover
+# or
+yarn add @yamada-ui/popover
+# or
+npm install @yamada-ui/popover
+# or
+bun add @yamada-ui/popover
 ```
 
 ## Contribution

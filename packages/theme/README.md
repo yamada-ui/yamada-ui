@@ -5,19 +5,13 @@ The default theme package for Yamada UI components.
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/theme
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/theme
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/theme
+pnpm add @yamada-ui/theme
+# or
+yarn add @yamada-ui/theme
+# or
+npm install @yamada-ui/theme
+# or
+bun add @yamada-ui/theme
 ```
 
 ## Contribution

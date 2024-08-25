@@ -18,6 +18,7 @@
     "gen:icon-tags": "tsx scripts/generate-icon-tags",
     "gen:contributors": "tsx scripts/content/contributors",
     "gen:translate": "tsx scripts/content/translate",
+    "gen:label": "tsx scripts/content/label",
     "format": "prettier --write .",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",

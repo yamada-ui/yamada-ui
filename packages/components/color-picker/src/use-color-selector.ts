@@ -171,7 +171,7 @@ export const useColorSelector = ({
     onChange: onChangeProp,
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
-    format,
+    format: formatProp,
     required,
     disabled,
     readOnly,
@@ -187,15 +187,18 @@ export const useColorSelector = ({
     defaultValue: defaultValue ?? fallbackValue,
     onChange: onChangeProp,
   })
-  const resolvedValue = value ?? "#ffffff"
+  const format = useMemo(
+    () => formatProp ?? calcFormat(value ?? "#ffffff"),
+    [value, formatProp],
+  )
+  const resolvedValue = convertColor(value, "#ffffff")(format) as string
   const timeoutId = useRef<any>(undefined)
-  const formatRef = useRef<ColorFormat>(format ?? calcFormat(resolvedValue))
   const isDraggingRef = useRef<boolean>(false)
   const [parsedValue, setParsedValue] = useState<Hsva>(
     convertHsva(resolvedValue, fallbackValue),
   )
   const { h, s, v, a } = parsedValue
-  const withAlpha = formatRef.current.endsWith("a")
+  const withAlpha = format.endsWith("a")
   const isInteractive = !(disabled || readOnly)
 
   const channels: Channel[] = useMemo(() => {
@@ -279,11 +282,11 @@ export const useColorSelector = ({
 
       const { h, s, v, a } = { ...parsedValue, ...value }
 
-      const nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+      const nextValue = hsvTo([h, s, v, a], fallbackValue)(format)
 
       if (nextValue) onChangeStartRef(nextValue)
     },
-    [formatRef, onChangeStartRef, fallbackValue, parsedValue],
+    [onChangeStartRef, fallbackValue, parsedValue, format],
   )
 
   const onChangeEnd = useCallback(
@@ -297,16 +300,16 @@ export const useColorSelector = ({
       let nextValue: string | undefined
 
       if (isString(value)) {
-        nextValue = convertColor(value, fallbackValue)(formatRef.current)
+        nextValue = convertColor(value, fallbackValue)(format)
       } else {
         const { h, s, v, a } = { ...parsedValue, ...value }
 
-        nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+        nextValue = hsvTo([h, s, v, a], fallbackValue)(format)
       }
 
       if (nextValue) onChangeEndRef(nextValue)
     },
-    [formatRef, onChangeEndRef, fallbackValue, parsedValue],
+    [onChangeEndRef, fallbackValue, parsedValue, format],
   )
 
   const onChannelChange = useCallback(
@@ -325,14 +328,14 @@ export const useColorSelector = ({
           { [space]: n },
         )
 
-        nextValue = hslaTo([h, s, l, a], fallbackValue)(formatRef.current)
+        nextValue = hslaTo([h, s, l, a], fallbackValue)(format)
       } else {
         const { r, g, b, a } = Object.assign(
           convertRgba(resolvedValue, fallbackValue),
           { [space]: n },
         )
 
-        nextValue = rgbaTo([r, g, b, a], fallbackValue)(formatRef.current)
+        nextValue = rgbaTo([r, g, b, a], fallbackValue)(format)
       }
 
       if (!nextValue) return
@@ -340,7 +343,7 @@ export const useColorSelector = ({
       onChange(nextValue)
       onChangeEnd(nextValue)
     },
-    [resolvedValue, onChange, onChangeEnd, formatRef, fallbackValue],
+    [resolvedValue, onChange, onChangeEnd, fallbackValue, format],
   )
 
   const onEyeDropperClick = useCallback(async () => {
@@ -355,7 +358,7 @@ export const useColorSelector = ({
   }, [onOpen, onChange, onChangeEnd])
 
   useUpdateEffect(() => {
-    const nextValue = hsvTo([h, s, v, a], fallbackValue)(formatRef.current)
+    const nextValue = hsvTo([h, s, v, a], fallbackValue)(format)
 
     if (nextValue) setValue(nextValue)
   }, [h, s, v, a])
@@ -368,8 +371,6 @@ export const useColorSelector = ({
 
   useUpdateEffect(() => {
     if (!format || !value) return
-
-    formatRef.current = format
 
     const nextValue = convertColor(value, fallbackValue)(format)
 
@@ -477,7 +478,7 @@ export const useColorSelector = ({
       ...props,
       ref,
       value: a,
-      color: hsvTo([h, s, v, a], fallbackValue)(formatRef.current),
+      color: hsvTo([h, s, v, a], fallbackValue)(format),
       onChange: handlerAll(props.onChange, (a) => onChange({ a })),
       onChangeStart: handlerAll(props.onChangeStart, (a) =>
         onChangeStart({ a }),
@@ -490,7 +491,7 @@ export const useColorSelector = ({
       disabled,
       readOnly,
       isInvalid,
-      formatRef,
+      format,
       h,
       s,
       v,

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/progress
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/progress
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/progress
+pnpm add @yamada-ui/progress
+# or
+yarn add @yamada-ui/progress
+# or
+npm install @yamada-ui/progress
+# or
+bun add @yamada-ui/progress
 ```
 
 ## Contribution

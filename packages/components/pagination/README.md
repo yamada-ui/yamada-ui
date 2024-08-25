@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/pagination
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/pagination
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/pagination
+pnpm add @yamada-ui/pagination
+# or
+yarn add @yamada-ui/pagination
+# or
+npm install @yamada-ui/pagination
+# or
+bun add @yamada-ui/pagination
 ```
 
 ## Contribution

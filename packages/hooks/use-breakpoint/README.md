@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-breakpoint
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-breakpoint
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-breakpoint
+pnpm add @yamada-ui/use-breakpoint
+# or
+yarn add @yamada-ui/use-breakpoint
+# or
+npm install @yamada-ui/use-breakpoint
+# or
+bun add @yamada-ui/use-breakpoint
 ```
 
 ## Contribution

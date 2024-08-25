@@ -295,7 +295,7 @@ const ControlMenuButton: FC<ControlMenuButtonProps> = memo(
               ],
             },
           ]}
-          bg={isOpen ? "var(--ui-bg)" : "transparent"}
+          bg={isOpen ? "$bg" : "transparent"}
           variant="ghost"
           size="sm"
           disableRipple

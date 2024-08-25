@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/card
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/card
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/card
+pnpm add @yamada-ui/card
+# or
+yarn add @yamada-ui/card
+# or
+npm install @yamada-ui/card
+# or
+bun add @yamada-ui/card
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/alert
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/alert
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/alert
+pnpm add @yamada-ui/alert
+# or
+yarn add @yamada-ui/alert
+# or
+npm install @yamada-ui/alert
+# or
+bun add @yamada-ui/alert
 ```
 
 ## Contribution

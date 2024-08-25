@@ -100,7 +100,7 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
 
     const css: CSSUIObject = {
       w: "100%",
-      var: [{ __prefix: "ui", name: "space", token: "spaces", value: gap }],
+      var: [{ name: "space", token: "spaces", value: gap }],
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
     }
 
@@ -246,9 +246,7 @@ const SnackComponent = memo(
       const onMouseLeave = () => setDelay(duration)
 
       const zIndex = startIndex + index
-      const space = `calc(var(--ui-space) * ${
-        direction === "top" ? lastIndex : index
-      })`
+      const space = `calc($space * ${direction === "top" ? lastIndex : index})`
 
       const css: CSSUIObject = {
         position: "absolute",

@@ -26,11 +26,15 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
   {
     baseStyle: {
       inner: {},
-      list: {
+      header: {},
+      content: {
         w: "100%",
+      },
+      list: {
         maxH: "xs",
         overflowY: "auto",
       },
+      footer: {},
       item: {
         _hover: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/resizable
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/resizable
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/resizable
+pnpm add @yamada-ui/resizable
+# or
+yarn add @yamada-ui/resizable
+# or
+npm install @yamada-ui/resizable
+# or
+bun add @yamada-ui/resizable
 ```
 
 ## Contribution

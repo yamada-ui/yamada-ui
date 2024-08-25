@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-boolean
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-boolean
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-boolean
+pnpm add @yamada-ui/use-boolean
+# or
+yarn add @yamada-ui/use-boolean
+# or
+npm install @yamada-ui/use-boolean
+# or
+bun add @yamada-ui/use-boolean
 ```
 
 ## Contribution

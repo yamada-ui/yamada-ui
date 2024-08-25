@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/icon
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/icon
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/icon
+pnpm add @yamada-ui/icon
+# or
+yarn add @yamada-ui/icon
+# or
+npm install @yamada-ui/icon
+# or
+bun add @yamada-ui/icon
 ```
 
 ## Contribution

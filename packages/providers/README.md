@@ -11,19 +11,13 @@ using it, please use `@yamada-ui/react` instead;
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/providers
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/providers
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/providers
+pnpm add @yamada-ui/providers
+# or
+yarn add @yamada-ui/providers
+# or
+npm install @yamada-ui/providers
+# or
+bun add @yamada-ui/providers
 ```
 
 ## Usage
@@ -32,7 +26,7 @@ As the default theme and config is not included, you will need a theme object
 following the Yamada UI, augmented
 with the following configuration properties.
 
-```
+```jsx
 import * as React from "react"
 
 // 1. import `UIProvider` component

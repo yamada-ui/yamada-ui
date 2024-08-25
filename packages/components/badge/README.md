@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/badge
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/badge
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/badge
+pnpm add @yamada-ui/badge
+# or
+yarn add @yamada-ui/badge
+# or
+npm install @yamada-ui/badge
+# or
+bun add @yamada-ui/badge
 ```
 
 ## Contribution

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/pin-input
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/pin-input
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/pin-input
+pnpm add @yamada-ui/pin-input
+# or
+yarn add @yamada-ui/pin-input
+# or
+npm install @yamada-ui/pin-input
+# or
+bun add @yamada-ui/pin-input
 ```
 
 ## Contribution

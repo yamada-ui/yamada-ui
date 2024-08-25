@@ -1,35 +1,41 @@
-import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
   ui,
   useMultiComponentStyle,
+  type HTMLUIProps,
+  type ThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart as RechartsPieChart,
   ResponsiveContainer,
+  RadialBarChart as RechartsRadialChart,
+  Legend,
   Tooltip,
+  RadialBar,
+  LabelList,
+  PolarGrid,
 } from "recharts"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import type { TooltipDataSourceType } from "./chart.types"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import type { UseChartLegendProps } from "./use-chart-legend"
-import { useChartLegend } from "./use-chart-legend"
+import {
+  useChartLabelList,
+  type UseChartLabelListOptions,
+} from "./use-chart-label-list"
+import { useChartLegend, type UseChartLegendProps } from "./use-chart-legend"
 import {
   useChartTooltip,
   type UseChartTooltipOptions,
 } from "./use-chart-tooltip"
-import type { UsePieChartOptions } from "./use-pie-chart"
-import { usePieChart } from "./use-pie-chart"
+import type { UsePolarGridOptions } from "./use-polar-grid"
+import { usePolarGrid } from "./use-polar-grid"
+import { useRadialChart, type UseRadialChartOptions } from "./use-radial-chart"
 
-type PieChartOptions = {
+type RadialChartOptions = {
   /**
    * If `true`, tooltip is visible.
    *
@@ -43,6 +49,12 @@ type PieChartOptions = {
    */
   withLegend?: boolean
   /**
+   * Determines whether polarGrid should be displayed.
+   *
+   * @default false
+   */
+  withPolarGrid?: boolean
+  /**
    * Determines which data is displayed in the tooltip.
    *
    * @default 'all'
@@ -54,73 +66,66 @@ type PieChartOptions = {
   unit?: string
 }
 
-export type PieChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"pieChart"> &
-  PieChartOptions &
-  UsePieChartOptions &
-  Omit<UseChartTooltipOptions, "labelFormatter"> &
+export type RadialChartProps = HTMLUIProps<"div"> &
+  ThemeProps<"radialChart"> &
+  RadialChartOptions &
+  UseRadialChartOptions &
+  UseChartTooltipOptions &
   UseChartLegendProps &
+  UseChartLabelListOptions &
+  UsePolarGridOptions &
   UseChartProps
 
 /**
- * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
+ * `RadialChart` is a component for drawing radial charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/pie-chart
+ * @see Docs https://yamada-ui.com/components/feedback/radial-chart
  */
-export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("PieChart", props)
+export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useMultiComponentStyle("RadialChart", props)
   const {
     className,
     data,
-    pieProps,
+    dataKey,
     chartProps,
-    cellProps,
+    radialBarProps,
     containerProps,
+    withPolarGrid = false,
     withTooltip = true,
     withLegend = false,
     tooltipProps,
     tooltipAnimationDuration,
     tooltipDataSource = "all",
     valueFormatter,
-    labelFormatter,
     unit,
+    legendProps,
     innerRadius,
     outerRadius,
-    paddingAngle,
     startAngle,
     endAngle,
-    withLabels,
-    withLabelLines,
-    labelOffset,
-    isPercent,
-    strokeWidth,
-    legendProps,
+    fillOpacity,
+    labelListProps = [],
+    polarGridProps,
+    strokeDasharray,
     ...rest
   } = omitThemeProps(mergedProps)
 
   const {
-    pieVars,
-    getPieProps,
-    getPieChartProps,
-    getCellProps,
+    getRadialChartProps,
+    getRadialBarProps,
+    radialVars,
     setHighlightedArea,
-  } = usePieChart({
+  } = useRadialChart({
     data,
-    pieProps,
+    dataKey,
+    styles,
     chartProps,
-    cellProps,
+    radialBarProps,
     innerRadius,
     outerRadius,
-    paddingAngle,
     startAngle,
     endAngle,
-    strokeWidth,
-    withLabels,
-    withLabelLines,
-    labelOffset,
-    isPercent,
-    labelFormatter,
-    styles,
+    fillOpacity,
   })
   const { getContainerProps } = useChart({ containerProps })
   const { tooltipProps: computedTooltipProps, getTooltipProps } =
@@ -132,46 +137,65 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
   })
+  const { getLabelLineProps } = useChartLabelList({ labelListProps, styles })
+  const { getPolarGridProps } = usePolarGrid({
+    polarGridProps,
+    strokeDasharray,
+    styles,
+  })
 
-  const cells = useMemo(
+  const labelLists = useMemo(
     () =>
-      data.map(({ name }, index) => (
-        <Cell
-          key={`pie-cell-${name}`}
-          {...getCellProps({ index, className: "ui-pie-chart__cell" })}
+      labelListProps.map((_, index) => (
+        <LabelList
+          key={`labelList-${index}`}
+          {...getLabelLineProps({
+            index,
+            className: "ui-radial-chart__label-list",
+          })}
         />
       )),
-    [data, getCellProps],
+    [getLabelLineProps, labelListProps],
   )
 
   return (
     <ChartProvider value={{ styles }}>
       <ui.div
         ref={ref}
-        className={cx("ui-pie-chart", className)}
-        var={pieVars}
+        className={cx("ui-radial-chart", className)}
+        var={radialVars}
         __css={{ maxW: "full", ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer
-          {...getContainerProps({ className: "ui-pie-chart__container" })}
+          {...getContainerProps({ className: "ui-radial-chart__container" })}
         >
-          <RechartsPieChart
-            {...getPieChartProps({ className: "ui-pie-chart__chart" })}
+          <RechartsRadialChart
+            {...getRadialChartProps({
+              className: "ui-radial-chart__chart",
+            })}
           >
-            <Pie
-              {...getPieProps({
-                className: "ui-pie-chart__pie",
+            {withPolarGrid ? (
+              <PolarGrid
+                {...getPolarGridProps({
+                  className: "ui-radial-chart__polar-grid",
+                })}
+              />
+            ) : null}
+
+            <RadialBar
+              {...getRadialBarProps({
+                className: "ui-radial-chart__radial-bar",
               })}
             >
-              {cells}
-            </Pie>
+              {labelLists}
+            </RadialBar>
 
             {withLegend ? (
               <Legend
                 content={({ payload }) => (
                   <ChartLegend
-                    className="ui-pie-chart__legend"
+                    className="ui-radial-chart__legend"
                     payload={payload}
                     onHighlight={setHighlightedArea}
                     {...computedLegendProps}
@@ -183,10 +207,12 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
 
             {withTooltip ? (
               <Tooltip
-                content={({ label, payload }) => (
+                content={({ payload }) => (
                   <ChartTooltip
-                    className="ui-pie-chart__tooltip"
-                    label={label}
+                    className="ui-radial-chart__tooltip"
+                    isRadialChart={
+                      tooltipDataSource === "segment" ? true : false
+                    }
                     payload={tooltipDataSource === "segment" ? payload : data}
                     valueFormatter={valueFormatter}
                     unit={unit}
@@ -196,7 +222,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
                 {...getTooltipProps()}
               />
             ) : null}
-          </RechartsPieChart>
+          </RechartsRadialChart>
         </ResponsiveContainer>
       </ui.div>
     </ChartProvider>

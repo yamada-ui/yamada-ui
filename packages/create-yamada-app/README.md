@@ -3,15 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm create yamada-app
-
+pnpm create yamada-app
 # or
-
-$ yarn create yamada-app
-
+yarn create yamada-app
 # or
-
-$ npx create-yamada-app@latest
+npx create-yamada-app
+# or
+bunx create-yamada-app
 ```
 
 ## Contribution

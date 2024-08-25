@@ -1,5 +1,5 @@
 import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
-import { useTheme } from "@yamada-ui/core"
+import { getVar, useTheme } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo, useState } from "react"
@@ -99,7 +99,6 @@ export const useRadialChart = ({
   const radialVars: CSSUIProps["var"] = useMemo(
     () =>
       dataProp.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `radial-bar-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -167,7 +166,7 @@ export const useRadialChart = ({
 
         return {
           className,
-          fill: `var(--ui-radial-bar-${index})`,
+          fill: getVar(`radial-bar-${index}`)(theme),
           name,
           value,
           color,

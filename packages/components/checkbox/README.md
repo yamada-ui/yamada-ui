@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/checkbox
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/checkbox
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/checkbox
+pnpm add @yamada-ui/checkbox
+# or
+yarn add @yamada-ui/checkbox
+# or
+npm install @yamada-ui/checkbox
+# or
+bun add @yamada-ui/checkbox
 ```
 
 ## Contribution

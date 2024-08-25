@@ -310,6 +310,33 @@ return (
 )
 ```
 
+### Customize the Close Event
+
+To customize the close event, set `closeStrategy` to `"element"`, `"button"`, or `"both"`. The default is `"button"`.
+
+- `"element"`: Close by clicking the element.
+- `"button"`: Close by clicking the close button.
+- `"both"`: Close by clicking either the element or the close button.
+
+```tsx functional=true
+const notice = useNotice({ isClosable: true, closeStrategy: "element" })
+
+return (
+  <Button
+    onClick={() =>
+      notice({
+        title: "Notification",
+        description: "This is description.",
+        isClosable: true,
+        closeStrategy: "element",
+      })
+    }
+  >
+    Show notification
+  </Button>
+)
+```
+
 ### Customizing Components
 
 To customize the component to be rendered, use `component`.

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/tooltip
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/tooltip
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/tooltip
+pnpm add @yamada-ui/tooltip
+# or
+yarn add @yamada-ui/tooltip
+# or
+npm install @yamada-ui/tooltip
+# or
+bun add @yamada-ui/tooltip
 ```
 
 ## Contribution

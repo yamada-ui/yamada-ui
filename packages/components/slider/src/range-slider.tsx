@@ -422,8 +422,8 @@ export const useRangeSlider = ({
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
-      let w: string | number = "var(--ui-thumbSize)"
-      let h: string | number = "var(--ui-thumbSize)"
+      let w: string | number = "$thumbSize"
+      let h: string | number = "$thumbSize"
 
       if (thumbSizes.length) {
         const p = isVertical ? "height" : "width"
@@ -458,7 +458,6 @@ export const useRangeSlider = ({
         style,
         var: [
           {
-            __prefix: "ui",
             name: "thumbSize",
             token: "sizes",
             value: thumbSizeProp,
@@ -592,8 +591,8 @@ export const useRangeSlider = ({
     useCallback(
       ({ index: i, ...props }, ref = null) => {
         const n = thumbPercents[i]
-        let w: string | number = "var(--ui-thumbSize)"
-        let h: string | number = "var(--ui-thumbSize)"
+        let w: string | number = "$thumbSize"
+        let h: string | number = "$thumbSize"
 
         if (thumbSizes[i]) {
           w = `${thumbSizes[i]?.width}px`

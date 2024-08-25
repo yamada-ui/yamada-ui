@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/dropzone
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/dropzone
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/dropzone
+pnpm add @yamada-ui/dropzone
+# or
+yarn add @yamada-ui/dropzone
+# or
+npm install @yamada-ui/dropzone
+# or
+bun add @yamada-ui/dropzone
 ```
 
 ## Contribution

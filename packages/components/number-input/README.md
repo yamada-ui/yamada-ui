@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/number-input
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/number-input
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/number-input
+pnpm add @yamada-ui/number-input
+# or
+yarn add @yamada-ui/number-input
+# or
+npm install @yamada-ui/number-input
+# or
+bun add @yamada-ui/number-input
 ```
 
 ## Contribution

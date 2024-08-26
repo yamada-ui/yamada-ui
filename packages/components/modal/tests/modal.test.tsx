@@ -1,16 +1,21 @@
 import { Button, useDisclosure } from "@yamada-ui/react"
-import { a11y, fireEvent, render, screen, waitFor, act } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import type { ModalProps } from "../src"
 import {
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalFooter,
   ModalHeader,
-  ModalCloseButton,
   ModalOverlay,
 } from "../src"
 
+type Props = {
+  placement?: ModalProps["placement"]
+}
+
 describe("<Modal />", () => {
-  const ModalExample = () => {
+  const ModalExample = ({ placement }: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const modalHeaderId = "modal-header-id"
@@ -21,6 +26,7 @@ describe("<Modal />", () => {
 
         <Modal
           isOpen={isOpen}
+          placement={placement}
           onClose={onClose}
           aria-labelledby={modalHeaderId}
         >
@@ -217,6 +223,86 @@ describe("<Modal />", () => {
     await act(() => fireEvent.keyDown(modal, { key: "Escape" }))
     await waitFor(async () => {
       expect(queryByTestId("Modal")).toBeNull()
+    })
+  })
+
+  test("should display modal to the left when placement is set to 'left'", async () => {
+    const { user } = render(<ModalExample placement="left" />)
+
+    const openModalButton = await screen.findByRole("button", {
+      name: /open modal/i,
+    })
+    await user.click(openModalButton)
+
+    const modal = await screen.findByRole("dialog", { name: /modal header/i })
+
+    await waitFor(() => {
+      expect(modal).toBeVisible()
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "justify-content": "flex-start",
+      "align-items": "center",
+    })
+  })
+
+  test("should display modal to the right when placement is set to 'right'", async () => {
+    const { user } = render(<ModalExample placement="right" />)
+
+    const openModalButton = await screen.findByRole("button", {
+      name: /open modal/i,
+    })
+    await user.click(openModalButton)
+
+    const modal = await screen.findByRole("dialog", { name: /modal header/i })
+
+    await waitFor(() => {
+      expect(modal).toBeVisible()
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "justify-content": "flex-end",
+      "align-items": "center",
+    })
+  })
+
+  test("should display modal to the top when placement is set to 'top'", async () => {
+    const { user } = render(<ModalExample placement="top" />)
+
+    const openModalButton = await screen.findByRole("button", {
+      name: /open modal/i,
+    })
+    await user.click(openModalButton)
+
+    const modal = await screen.findByRole("dialog", { name: /modal header/i })
+
+    await waitFor(() => {
+      expect(modal).toBeVisible()
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "align-items": "flex-start",
+      "justify-content": "center",
+    })
+  })
+
+  test("should display modal to the bottom when placement is set to 'bottom'", async () => {
+    const { user } = render(<ModalExample placement="bottom" />)
+
+    const openModalButton = await screen.findByRole("button", {
+      name: /open modal/i,
+    })
+    await user.click(openModalButton)
+
+    const modal = await screen.findByRole("dialog", { name: /modal header/i })
+
+    await waitFor(() => {
+      expect(modal).toBeVisible()
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "align-items": "flex-end",
+      "justify-content": "center",
     })
   })
 })

@@ -3,6 +3,7 @@ import type {
   CSSUIObject,
   CSSUIProps,
   Token,
+  HTMLUIProps,
 } from "@yamada-ui/core"
 import { ui, omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
@@ -149,6 +150,10 @@ type ModalOptions = Pick<
    * Props to be forwarded to the portal component.
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * Apply styles to ModalContent wrapper elements.
+   */
+  containerProps?: HTMLUIProps<"div">
 }
 
 export type ModalProps = ModalContentProps & ThemeProps<"Modal"> & ModalOptions
@@ -189,6 +194,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       animation = "scale",
       duration,
       portalProps,
+      containerProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -271,7 +277,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
                   enabled={blockScrollOnMount}
                   forwardProps
                 >
-                  <ui.div __css={css}>
+                  <ui.div __css={css} {...containerProps}>
                     {customModalOverlay ??
                       (withOverlay && size !== "full" ? (
                         <ModalOverlay />

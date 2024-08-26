@@ -78,6 +78,40 @@ To set default values, set an array of strings to `defaultValue`.
 </MultiAutocomplete>
 ```
 
+### Add header to a dropdown
+
+```tsx
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  header={
+    <Center pt="2" px="3">
+      Header added here
+    </Center>
+  }
+>
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</MultiAutocomplete>
+```
+
+### Add footer to a dropdown
+
+```tsx
+<MultiAutocomplete
+  placeholder="キャラクターを選択"
+  footer={
+    <Center pb="2" px="3">
+      Footer added here
+    </Center>
+  }
+>
+  <AutocompleteOption value="孫悟空">孫悟空</AutocompleteOption>
+  <AutocompleteOption value="ベジータ">ベジータ</AutocompleteOption>
+  <AutocompleteOption value="フリーザ">フリーザ</AutocompleteOption>
+</MultiAutocomplete>
+```
+
 ### Set Empty Message
 
 To set a message to display when there are no items, use the `emptyMessage` property.

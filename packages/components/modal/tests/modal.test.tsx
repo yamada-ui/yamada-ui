@@ -238,12 +238,11 @@ describe("<Modal />", () => {
 
     await waitFor(() => {
       expect(modal).toBeVisible()
-
-      const modalContainer = modal.parentElement
-      expect(modalContainer).toHaveStyle({
-        "justify-content": "flex-start",
-        "align-items": "center",
-      })
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "justify-content": "flex-start",
+      "align-items": "center",
     })
   })
 
@@ -259,12 +258,11 @@ describe("<Modal />", () => {
 
     await waitFor(() => {
       expect(modal).toBeVisible()
-
-      const modalContainer = modal.parentElement
-      expect(modalContainer).toHaveStyle({
-        "justify-content": "flex-end",
-        "align-items": "center",
-      })
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "justify-content": "flex-end",
+      "align-items": "center",
     })
   })
 
@@ -280,12 +278,11 @@ describe("<Modal />", () => {
 
     await waitFor(() => {
       expect(modal).toBeVisible()
-
-      const modalContainer = modal.parentElement
-      expect(modalContainer).toHaveStyle({
-        "align-items": "flex-start",
-        "justify-content": "center",
-      })
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "align-items": "flex-start",
+      "justify-content": "center",
     })
   })
 
@@ -301,12 +298,11 @@ describe("<Modal />", () => {
 
     await waitFor(() => {
       expect(modal).toBeVisible()
-
-      const modalContainer = modal.parentElement
-      expect(modalContainer).toHaveStyle({
-        "align-items": "flex-end",
-        "justify-content": "center",
-      })
+    })
+    const modalContainer = modal.parentElement
+    expect(modalContainer).toHaveStyle({
+      "align-items": "flex-end",
+      "justify-content": "center",
     })
   })
 })

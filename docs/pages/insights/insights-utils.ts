@@ -77,6 +77,8 @@ export const getSummarize = (minDate: Date, maxDate: Date) => {
 export const labelFormatter =
   (value: string, { summarize, end }: InsightPeriod) =>
   (locale: Locale) => {
+    if (!dayjs(value).isValid()) return value
+
     const date = dayjs(value)
 
     switch (summarize) {

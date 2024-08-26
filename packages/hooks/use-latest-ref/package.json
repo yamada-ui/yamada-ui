@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-latest-ref",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Yamada UI useLatestRef custom hook",
   "keywords": [
     "use-latest-ref"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-latest-ref"
   },
   "bugs": {

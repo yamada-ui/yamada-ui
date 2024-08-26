@@ -2,7 +2,7 @@
 title: YearPicker
 description: "`YearPicker`は、ユーザーが年を選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/calendar"
-label: New
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -261,6 +261,32 @@ import "dayjs/locale/ja"
 <VStack>
   <YearPicker placeholder="YYYY" iconProps={{ color: "primary" }} />
   <YearPicker placeholder="YYYY" iconProps={{ children: <Ghost /> }} />
+</VStack>
+```
+
+### ドロップダウンに要素を追加する
+
+ドロップダウンに要素を追加する場合は、`children`に要素を設定します。
+`children`には、`value`と`onClose`のメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+
+```tsx
+<VStack>
+  <YearPicker placeholder="YYYY">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </YearPicker>
+
+  <YearPicker placeholder="YYYY" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit
+          {value ? ` ${value.getFullYear()}` : ""}
+        </Button>
+      </VStack>
+    )}
+  </YearPicker>
 </VStack>
 ```
 

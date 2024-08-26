@@ -1,3 +1,4 @@
+import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import type * as Recharts from "recharts"
 
@@ -76,6 +77,27 @@ export const radarChartProperties: (keyof ComponentPropsWithoutRef<
 export const pieChartProperties: (keyof ComponentPropsWithoutRef<
   typeof Recharts.PieChart
 >)[] = ["width", "height", "margin", "onClick", "onMouseEnter", "onMouseLeave"]
+
+export const radialChartProperties: (keyof ComponentPropsWithoutRef<
+  typeof Recharts.RadialBarChart
+>)[] = [
+  "width",
+  "height",
+  "data",
+  "margin",
+  "barCategoryGap",
+  "barGap",
+  "cx",
+  "cy",
+  "startAngle",
+  "endAngle",
+  "innerRadius",
+  "outerRadius",
+  "barSize",
+  "onMouseEnter",
+  "onMouseLeave",
+  "onClick",
+]
 
 export const referenceLineProperties: (keyof Recharts.ReferenceLineProps)[] = [
   "xAxisId",
@@ -406,6 +428,32 @@ export const pieProperties: (keyof Omit<Recharts.PieProps, "ref">)[] = [
   "onMouseLeave",
 ]
 
+export const radialBarProperties: (keyof Omit<
+  Recharts.RadialBarProps,
+  "ref"
+>)[] = [
+  "legendType",
+  "label",
+  "background",
+  "data",
+  "dataKey",
+  "isAnimationActive",
+  "animationBegin",
+  "animationDuration",
+  "animationEasing",
+  "onAnimationStart",
+  "onAnimationEnd",
+  "onClick",
+  "onMouseDown",
+  "onMouseUp",
+  "onMouseMove",
+  "onMouseOver",
+  "onMouseOut",
+  "onMouseEnter",
+  "onMouseLeave",
+  "cornerRadius",
+]
+
 export const dotProperties: (keyof Omit<Recharts.DotProps, "ref">)[] = [
   "cx",
   "cy",
@@ -428,6 +476,7 @@ export const polarGridProperties: (keyof Recharts.PolarGridProps)[] = [
   "polarAngles",
   "polarRadius",
   "gridType",
+  "radialLines",
 ]
 
 export const polarAngleAxisProperties: (keyof Recharts.PolarAngleAxisProps)[] =
@@ -492,4 +541,17 @@ export const labelProperties: (keyof Recharts.LabelProps)[] = [
   "children",
   "content",
   "id",
+]
+
+export const labelListProperties: (keyof Recharts.LabelListProps<Dict>)[] = [
+  "dataKey",
+  "valueAccessor",
+  "content",
+  "position",
+  "offset",
+  "formatter",
+  "data",
+  "clockWise",
+  "id",
+  "position",
 ]

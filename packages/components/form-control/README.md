@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/form-control
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/form-control
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/form-control
+pnpm add @yamada-ui/form-control
+# or
+yarn add @yamada-ui/form-control
+# or
+npm install @yamada-ui/form-control
+# or
+bun add @yamada-ui/form-control
 ```
 
 ## Contribution

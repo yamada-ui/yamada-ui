@@ -1,7 +1,7 @@
 {
   "Rating": {
     "color": {
-      "type": "UIValue<\"link\" | \"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"secondary.950\"> | ((value: number) => UIValue<...> | undefined)",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\"> | ((value: number) => UIValue<...> | undefined)",
       "required": false,
       "description": "The color of the filled icons."
     },

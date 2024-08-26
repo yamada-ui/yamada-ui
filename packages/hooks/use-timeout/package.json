@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-timeout",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Yamada UI useTimeout custom hook",
   "keywords": [
     "use-timeout"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-timeout"
   },
   "bugs": {

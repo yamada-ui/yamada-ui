@@ -354,8 +354,8 @@ export const useSlider = ({
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const { width: w, height: h } = thumbSize ?? {
-        width: "var(--ui-thumbSize)",
-        height: "var(--ui-thumbSize)",
+        width: "$thumbSize",
+        height: "$thumbSize",
       }
 
       const padding = isVertical
@@ -380,7 +380,6 @@ export const useSlider = ({
         style,
         var: [
           {
-            __prefix: "ui",
             name: "thumbSize",
             token: "sizes",
             value: thumbSizeProp,
@@ -506,8 +505,8 @@ export const useSlider = ({
   const getThumbProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
-      let w: string | number = "var(--ui-thumbSize)"
-      let h: string | number = "var(--ui-thumbSize)"
+      let w: string | number = "$thumbSize"
+      let h: string | number = "$thumbSize"
 
       if (thumbSize) {
         w = `${thumbSize.width}px`

@@ -1,5 +1,25 @@
 # @yamada-ui/utils
 
+## 1.4.0
+
+### Minor Changes
+
+- [#2441](https://github.com/yamada-ui/yamada-ui/pull/2441) [`613ed7d`](https://github.com/yamada-ui/yamada-ui/commit/613ed7d95268fa48c208e2efdadbd9822884ece1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `MergeIfDefined` type.
+
+- [#2542](https://github.com/yamada-ui/yamada-ui/pull/2542) [`d240135`](https://github.com/yamada-ui/yamada-ui/commit/d240135c624336f0ff17c4ef4ea59427320b9221) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `toTitleCase` function.
+
+- [#2545](https://github.com/yamada-ui/yamada-ui/pull/2545) [`1a81894`](https://github.com/yamada-ui/yamada-ui/commit/1a81894b09df4ca87a7c43009486c7dc04531b57) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `TONES`, `SEMANTIC_COLOR_SCHEMES` and `COLOR_SCHEMES`.
+
+### Patch Changes
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`3ba3f58`](https://github.com/yamada-ui/yamada-ui/commit/3ba3f58686fe436fdbfb2253f5730bb52f67bfd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the git repository URL.
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`74045d7`](https://github.com/yamada-ui/yamada-ui/commit/74045d7c4db435d5aca9f62d17a9b34485ea37ef) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added instructions for installation using [bun](https://bun.sh/) to `README.md`.
+
+- [#2622](https://github.com/yamada-ui/yamada-ui/pull/2622) [`88d682d`](https://github.com/yamada-ui/yamada-ui/commit/88d682da2e3a8fd49ad7eced29ec3609ada9c282) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `isNumeric` was not correctly determining the numerical value.
+
+- [#2546](https://github.com/yamada-ui/yamada-ui/pull/2546) [`934242e`](https://github.com/yamada-ui/yamada-ui/commit/934242e6dcfa5945bb5bb331c0e6e9c8f680fe25) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where `getColor` was not referring to the theme's `semantics.colors` value.
+
 ## 1.3.2
 
 ### Patch Changes

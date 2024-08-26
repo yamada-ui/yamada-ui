@@ -1,5 +1,5 @@
 import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { useTheme } from "@yamada-ui/core"
+import { getVar, useTheme } from "@yamada-ui/core"
 import { cx, runIfFunc } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { FC, ComponentPropsWithoutRef, ReactNode } from "react"
@@ -109,7 +109,6 @@ export const useBarChart = ({
   const barColors: CSSUIProps["var"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `bar-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -120,7 +119,6 @@ export const useBarChart = ({
   const referenceLineColors: CSSUIProps["var"] = useMemo(
     () =>
       referenceLineProps.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `reference-line-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -132,7 +130,7 @@ export const useBarChart = ({
     return [
       ...barColors,
       ...referenceLineColors,
-      { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
+      { name: "fill-opacity", value: fillOpacity },
     ]
   }, [barColors, fillOpacity, referenceLineColors])
 
@@ -147,7 +145,7 @@ export const useBarChart = ({
 
   const [barProps, barClassName] = useMemo(() => {
     const resolvedBarProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: "$fill-opacity",
       strokeOpacity: 1,
       ...computedBarProps,
     }
@@ -195,7 +193,7 @@ export const useBarChart = ({
           ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
-        const color = `var(--ui-bar-${index})`
+        const color = getVar(`bar-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimBar = { ...dimBarProps, ...dimBar }
         const resolvedProps = {

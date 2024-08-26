@@ -2,6 +2,7 @@
 title: MultiDatePicker
 description: "`MultiDatePicker`は、ユーザーが日付を複数選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/calendar"
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -510,6 +511,31 @@ import "dayjs/locale/ja"
     placeholder="YYYY/MM/DD"
     iconProps={{ children: <Ghost /> }}
   />
+</VStack>
+```
+
+### ドロップダウンに要素を追加する
+
+ドロップダウンに要素を追加する場合は、`children`に要素を設定します。
+`children`には、`value`と`onClose`のメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+
+```tsx
+<VStack>
+  <MultiDatePicker placeholder="YYYY/MM/DD">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </MultiDatePicker>
+
+  <MultiDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit{value ? ` ${value.length} dates` : ""}
+        </Button>
+      </VStack>
+    )}
+  </MultiDatePicker>
 </VStack>
 ```
 

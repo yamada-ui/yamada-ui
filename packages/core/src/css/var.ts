@@ -12,6 +12,12 @@ type Var = {
   reference: string
 }
 
+export const getVar = (token: string) => (theme: StyledTheme) => {
+  const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
+
+  return `var(--${prefix}-${token})`
+}
+
 const createVar = (token: string, prefix: string): Var => {
   const variable = `--${[prefix, escape(token, "-")].filter(Boolean).join("-")}`
   const reference = `var(${variable})`

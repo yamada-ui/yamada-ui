@@ -5,19 +5,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/use-timeout
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/use-timeout
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/use-timeout
+pnpm add @yamada-ui/use-timeout
+# or
+yarn add @yamada-ui/use-timeout
+# or
+npm install @yamada-ui/use-timeout
+# or
+bun add @yamada-ui/use-timeout
 ```
 
 ## Contribution

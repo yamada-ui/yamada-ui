@@ -64,7 +64,7 @@
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "@types/unist": "^3.0.2",
+    "@types/unist": "^3.0.3",
     "clean-package": "2.2.0",
     "dedent": "^1.5.3",
     "react": "^18.3.1",

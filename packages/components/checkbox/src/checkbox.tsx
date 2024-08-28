@@ -11,7 +11,7 @@ import {
   useFormControlProps,
   formControlProperties,
 } from "@yamada-ui/form-control"
-import type { SVGMotionProps } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
 import type { Dict, Merge, PropGetter } from "@yamada-ui/utils"
@@ -484,8 +484,7 @@ export const Checkbox = forwardRef(
 
 Checkbox.displayName = "Checkbox"
 
-export type CheckboxIconProps = HTMLUIProps<"svg"> &
-  SVGMotionProps<SVGSVGElement> &
+export type CheckboxIconProps = MotionProps<"svg"> &
   FormControlOptions & {
     /**
      * If `true`, the icon will be indeterminate.
@@ -521,8 +520,7 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
             transform: "translate(-50%, -50%)",
           }}
         >
-          <ui.div
-            as={motion.div}
+          <motion.div
             variants={{
               unchecked: { scale: 0.5 },
               checked: { scale: 1 },
@@ -543,19 +541,16 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
             ) : (
               <CheckIcon {...rest} />
             )}
-          </ui.div>
+          </motion.div>
         </ui.div>
       ) : null}
     </AnimatePresence>
   )
 }
 
-const CheckIcon: FC<HTMLUIProps<"svg"> & SVGMotionProps<SVGSVGElement>> = (
-  props,
-) => {
+const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   return (
-    <ui.svg
-      as={motion.svg}
+    <motion.svg
       width="1.2em"
       viewBox="0 0 12 10"
       variants={{
@@ -578,16 +573,13 @@ const CheckIcon: FC<HTMLUIProps<"svg"> & SVGMotionProps<SVGSVGElement>> = (
       {...props}
     >
       <polyline points="1.5 6 4.5 9 10.5 1" />
-    </ui.svg>
+    </motion.svg>
   )
 }
 
-const IndeterminateIcon: FC<
-  HTMLUIProps<"svg"> & SVGMotionProps<SVGSVGElement>
-> = (props) => {
+const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
   return (
-    <ui.svg
-      as={motion.svg}
+    <motion.svg
       width="1.2em"
       viewBox="0 0 24 24"
       variants={{
@@ -608,6 +600,6 @@ const IndeterminateIcon: FC<
       {...props}
     >
       <line x1="21" x2="3" y1="12" y2="12" />
-    </ui.svg>
+    </motion.svg>
   )
 }

@@ -447,6 +447,7 @@ export const standardStyles: StyleConfigs = {
   cursor: true,
   direction: true,
   display: true,
+  dominantBaseline: true,
   emptyCells: true,
   fill: {
     properties: "fill",
@@ -1260,6 +1261,7 @@ export const standardStyles: StyleConfigs = {
   transformBox: true,
   transformOrigin: true,
   transformStyle: true,
+  transition: true,
   transitionBehavior: true,
   transitionDelay: true,
   transitionDuration: {
@@ -1314,7 +1316,6 @@ export const standardStyles: StyleConfigs = {
   alignmentBaseline: true,
   azimuth: true,
   baselineShift: true,
-  dominantBaseline: true,
   floodColor: {
     properties: "floodColor",
     token: "colors",
@@ -3124,6 +3125,12 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/display
    */
   display?: Token<CSS.Property.Display>
+  /**
+   * The CSS `dominant-baseline` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/dominant-baseline
+   */
+  dominantBaseline?: Token<CSS.Property.DominantBaseline>
   /**
    * The CSS `empty-cells` property.
    *
@@ -4967,6 +4974,12 @@ export type StyleProps = {
    */
   transformStyle?: Token<CSS.Property.TransformStyle>
   /**
+   * The CSS `transition` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+   */
+  transition?: Token<CSS.Property.Transition>
+  /**
    * The CSS `transition-behavior` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior
@@ -5163,12 +5176,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
    */
   baselineShift?: Token<CSS.Property.BaselineShift>
-  /**
-   * The CSS `dominant-baseline` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline
-   */
-  dominantBaseline?: Token<CSS.Property.DominantBaseline>
   /**
    * The CSS `flood-color` property.
    *

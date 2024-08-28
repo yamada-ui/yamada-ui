@@ -207,10 +207,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
   },
 )
 
-type DrawerContentProps = Omit<
-  DrawerProps,
-  "color" | "transition" | "isOpen" | keyof ThemeProps
-> &
+type DrawerContentProps = Omit<DrawerProps, "isOpen" | keyof ThemeProps> &
   Required<
     Pick<
       DrawerProps,

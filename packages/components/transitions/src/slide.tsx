@@ -10,7 +10,7 @@ import {
   transitionEnter,
   transitionExit,
   MOTION_TRANSITION_VARIANTS,
-  Motion,
+  motion,
   motionForwardRef,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"
@@ -119,7 +119,7 @@ export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
   return (
     <AnimatePresence custom={custom}>
       {isOpen ? (
-        <Motion
+        <motion.div
           ref={ref}
           className={cx("ui-slide", className)}
           custom={custom}

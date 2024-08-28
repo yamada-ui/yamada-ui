@@ -1,4 +1,9 @@
-import type { ComponentArgs, UIProps, WithoutAs } from "@yamada-ui/core"
+import type {
+  ComponentArgs,
+  ComponentMergeProps,
+  StyledOptions,
+  UIProps,
+} from "@yamada-ui/core"
 import type { Dict, Merge, MergeIfDefined } from "@yamada-ui/utils"
 import type * as Motion from "framer-motion"
 import type * as React from "react"
@@ -140,7 +145,43 @@ export type {
   VisualState as MotionVisualState,
 } from "framer-motion"
 
+export type MotionFactory = {
+  <T extends MotionAs = MotionAs, M extends object = {}>(
+    el: T,
+    options?: StyledOptions,
+  ): UIMotionComponent<T, M>
+}
+
+type ComponentProps<
+  Y extends object,
+  M extends object,
+  D extends object,
+  H extends MotionAs,
+> = ComponentMergeProps<Y, M, D> & {
+  as?: H
+}
+
+export type MotionComponent<Y extends MotionAs, M extends object = {}> = {
+  <D extends MotionAs = Y>(
+    props: ComponentProps<
+      React.ComponentProps<Y>,
+      React.ComponentProps<D>,
+      M,
+      D
+    >,
+  ): JSX.Element
+} & ComponentArgs
+
 export type MotionAs = keyof Motion.DOMMotionComponents
+
+export type MotionComponents = {
+  [Y in MotionAs]: MotionComponent<Y, MotionProps<Y>>
+}
+
+export type UIMotionComponent<
+  Y extends MotionAs,
+  M extends object = {},
+> = MotionComponent<Y, Merge<UIMotionProps, M>>
 
 type UIMotionProps = Merge<UIProps, Motion.MotionProps>
 
@@ -175,26 +216,6 @@ export type MotionPropsWithoutChildren<Y extends MotionAs = "div"> = Omit<
   MotionProps<Y>,
   "children"
 >
-
-type ComponentProps<
-  Y extends object,
-  M extends object,
-  D extends object = {},
-  H extends MotionAs = "div",
-> = (Merge<Y, WithoutAs<D>> | Merge<M, WithoutAs<D>>) & {
-  as?: H
-}
-
-export type MotionComponent<Y extends MotionAs, M extends object = {}> = {
-  <D extends MotionAs = Y>(
-    props: ComponentProps<
-      React.ComponentProps<Y>,
-      React.ComponentProps<D>,
-      M,
-      D
-    >,
-  ): JSX.Element
-} & ComponentArgs
 
 type TargetResolver<Y = Dict> = (
   props: Y & MotionTransitionProps,

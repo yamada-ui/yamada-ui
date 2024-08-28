@@ -8,7 +8,7 @@ import { ui, omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
 import { FocusLock } from "@yamada-ui/focus-lock"
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import { AnimatePresence, Motion, motionForwardRef } from "@yamada-ui/motion"
+import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
@@ -19,7 +19,7 @@ import {
   getValidChildren,
   findChildren,
 } from "@yamada-ui/utils"
-import type { KeyboardEvent } from "react"
+import type { KeyboardEvent, PropsWithChildren } from "react"
 import { cloneElement, useCallback } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { DrawerContent } from "./drawer"
@@ -333,8 +333,9 @@ const getModalContentProps = (
 
 type ModalContentProps = Omit<
   MotionProps<"section">,
-  "color" | "scrollBehavior" | "animation" | "children"
->
+  "transition" | "scrollBehavior" | "animation" | "children"
+> &
+  PropsWithChildren
 
 const ModalContent = motionForwardRef<ModalContentProps, "section">(
   ({ className, children, __css, ...rest }, ref) => {
@@ -369,8 +370,7 @@ const ModalContent = motionForwardRef<ModalContentProps, "section">(
     }
 
     return (
-      <Motion
-        as="section"
+      <motion.section
         role="dialog"
         aria-modal="true"
         ref={ref}
@@ -384,7 +384,7 @@ const ModalContent = motionForwardRef<ModalContentProps, "section">(
           (withCloseButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
-      </Motion>
+      </motion.section>
     )
   },
 )

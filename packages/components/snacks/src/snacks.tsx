@@ -3,7 +3,7 @@ import { ui, forwardRef, useTheme } from "@yamada-ui/core"
 import type { MotionProps, MotionVariants } from "@yamada-ui/motion"
 import {
   AnimatePresence,
-  Motion,
+  motion,
   motionForwardRef,
   useIsPresent,
 } from "@yamada-ui/motion"
@@ -53,7 +53,7 @@ type SnacksOptions = {
   /**
    * Props for the snacks list element.
    */
-  listProps?: MotionProps
+  listProps?: MotionProps<"ul">
 }
 
 export type SnacksProps = Omit<MotionProps<"div">, "direction"> &
@@ -131,7 +131,7 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
     return (
       <AnimatePresence initial={false}>
         {isShow ? (
-          <Motion
+          <motion.div
             ref={ref}
             className={cx("ui-snacks", className)}
             __css={css}
@@ -142,8 +142,7 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
             exit="exit"
             {...rest}
           >
-            <Motion
-              as="ul"
+            <motion.ul
               className="ui-snacks__list"
               variants={listVariants}
               custom={{ height }}
@@ -180,8 +179,8 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
                   )
                 })}
               </AnimatePresence>
-            </Motion>
-          </Motion>
+            </motion.ul>
+          </motion.div>
         ) : null}
       </AnimatePresence>
     )
@@ -271,7 +270,7 @@ const SnackComponent = memo(
 
       return (
         <ui.li ref={ref} className="ui-snacks__item" __css={css}>
-          <Motion
+          <motion.div
             className="ui-snacks__item-inner"
             layout
             variants={variants}
@@ -283,7 +282,7 @@ const SnackComponent = memo(
             onHoverEnd={onMouseLeave}
           >
             {runIfFunc(message, { index, onClose })}
-          </Motion>
+          </motion.div>
         </ui.li>
       )
     },

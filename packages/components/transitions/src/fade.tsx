@@ -9,7 +9,7 @@ import {
   AnimatePresence,
   transitionEnter,
   transitionExit,
-  Motion,
+  motion,
   motionForwardRef,
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
@@ -65,7 +65,7 @@ export const Fade = motionForwardRef<FadeProps, "div">((props, ref) => {
   return (
     <AnimatePresence custom={custom}>
       {isOpen ? (
-        <Motion
+        <motion.div
           ref={ref}
           className={cx("ui-fade", className)}
           custom={custom}

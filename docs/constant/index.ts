@@ -1,4 +1,5 @@
 import { CONTRIBUTORS } from "./contributors"
+import { EMERITI } from "./emeriti"
 import { I18N } from "./i18n"
 import { MAINTAINERS } from "./maintainers"
 import { MEMBERS } from "./members"
@@ -14,6 +15,7 @@ export const CONSTANT = {
   I18N,
   MAINTAINERS,
   MEMBERS,
+  EMERITI,
   CONTRIBUTORS,
   SPONSORS,
   MENU,

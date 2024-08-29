@@ -151,7 +151,7 @@ type ModalOptions = Pick<
    */
   portalProps?: Omit<PortalProps, "children">
   /**
-   * Apply styles to ModalContent wrapper elements.
+   * Props for modal container element.
    */
   containerProps?: HTMLUIProps<"div">
 }

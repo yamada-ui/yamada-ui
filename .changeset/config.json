@@ -19,8 +19,8 @@
   },
   "ignore": [
     "create-react-app",
-    "nextjs-app",
-    "nextjs-pages",
+    "next-app",
+    "next-pages",
     "vite-react",
     "hono-react",
     "remix"

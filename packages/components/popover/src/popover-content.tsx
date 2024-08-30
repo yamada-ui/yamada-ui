@@ -1,20 +1,25 @@
 import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
-import { Motion, motionForwardRef } from "@yamada-ui/motion"
-import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
+import { motion, motionForwardRef } from "@yamada-ui/motion"
+import type {
+  UIMotionComponent,
+  MotionPropsWithoutChildren,
+} from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
-import type { ReactNode } from "react"
+import { useMemo } from "react"
+import type { PropsWithChildren } from "react"
 import { usePopover } from "./popover"
 import type { PopoverProps } from "."
 import { PopoverCloseButton } from "."
 
-export type PopoverContentProps = MotionPropsWithoutChildren<"section"> & {
-  /**
-   * The props of the container element.
-   */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
-}
+export type PopoverContentProps = MotionPropsWithoutChildren<"section"> &
+  PropsWithChildren & {
+    /**
+     * The props of the container element.
+     */
+    containerProps?: Omit<HTMLUIProps<"div">, "children">
+  }
 
 const getPopoverContentProps = (
   animation: PopoverProps["animation"] = "scale",
@@ -59,6 +64,7 @@ const getPopoverContentProps = (
 export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
   (
     {
+      as = "section",
       className,
       containerProps,
       children,
@@ -85,24 +91,15 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     } = usePopover()
 
     const validChildren = getValidChildren(children)
-
     const [customPopoverCloseButton, ...cloneChildren] = findChildren(
       validChildren,
       PopoverCloseButton,
     )
 
-    const resolvedChildren = (): ReactNode => {
-      return (
-        <>
-          {customPopoverCloseButton ??
-            (closeOnButton ? <PopoverCloseButton /> : null)}
-
-          {cloneChildren}
-        </>
-      )
-    }
-
-    const popoverProps = { ...rest, children: resolvedChildren() }
+    const Component = useMemo(
+      () => motion(as) as unknown as UIMotionComponent<"section">,
+      [as],
+    )
 
     const css = __css ?? styles.container ?? {}
 
@@ -134,13 +131,12 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
         zIndex={zIndex}
         {...containerProps}
       >
-        <Motion
-          as="section"
+        <Component
           className={cx("ui-popover__content", className)}
           {...(animation !== "none"
             ? getPopoverContentProps(animation, duration)
             : {})}
-          {...getPopoverProps(popoverProps, ref)}
+          {...getPopoverProps(rest, ref)}
           initial="exit"
           animate={isOpen ? "enter" : "exit"}
           exit="exit"
@@ -149,7 +145,12 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
             rest.onAnimationComplete,
           )}
           __css={computedCSS}
-        />
+        >
+          {customPopoverCloseButton ??
+            (closeOnButton ? <PopoverCloseButton /> : null)}
+
+          {cloneChildren}
+        </Component>
       </ui.div>
     )
   },

@@ -6,7 +6,7 @@ import { useCallback, useState } from "react"
 
 export type UseClickableProps<
   Y extends HTMLElement = HTMLElement,
-  M extends HTMLAttributes<Y> = Dict,
+  M extends HTMLAttributes<Y> = HTMLAttributes<Y>,
 > = M & {
   /**
    * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.

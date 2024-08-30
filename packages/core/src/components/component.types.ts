@@ -17,10 +17,10 @@ export type StyledOptions = {
 }
 
 export type UIFactory = {
-  <T extends As, P extends object = {}>(
-    component: T,
+  <Y extends As, M extends object = {}>(
+    el: Y,
     options?: StyledOptions,
-  ): UIComponent<T, P>
+  ): UIComponent<Y, M>
 }
 
 export type UIBaseProps = {
@@ -47,14 +47,22 @@ export type StyledResolverProps = CSSUIObject &
 
 export type UIProps = CSSUIProps & UIBaseProps
 
-export type WithoutAs<T extends object> = Omit<T, "as">
+export type WithoutAs<Y extends object> = Omit<Y, "as">
+
+export type ComponentMergeProps<
+  Y extends object,
+  M extends object,
+  D extends object,
+> = Y extends M
+  ? Merge<Y, WithoutAs<D>> | Merge<M, WithoutAs<D>>
+  : Merge<Merge<Y, WithoutAs<D>>, Merge<M, WithoutAs<D>>>
 
 export type ComponentProps<
   Y extends object,
   M extends object,
   D extends object,
   H extends As,
-> = (Merge<Y, WithoutAs<D>> | Merge<M, WithoutAs<D>>) & {
+> = ComponentMergeProps<Y, M, D> & {
   as?: H
 }
 
@@ -80,10 +88,10 @@ export type Component<Y extends As, M extends object = {}> = {
 export type As = React.ElementType
 
 export type HTMLUIComponents = {
-  [Y in DOMElements]: UIComponent<Y, {}>
+  [Y in DOMElements]: UIComponent<Y>
 }
 
-export type UIComponent<Y extends As, M extends object = {}> = Component<
+export type UIComponent<Y extends As = As, M extends object = {}> = Component<
   Y,
   Merge<UIProps, M>
 >

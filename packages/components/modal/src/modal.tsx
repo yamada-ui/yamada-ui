@@ -3,12 +3,13 @@ import type {
   CSSUIObject,
   CSSUIProps,
   Token,
+  HTMLUIProps,
 } from "@yamada-ui/core"
 import { ui, omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
 import { FocusLock } from "@yamada-ui/focus-lock"
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import { AnimatePresence, Motion, motionForwardRef } from "@yamada-ui/motion"
+import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
@@ -19,7 +20,7 @@ import {
   getValidChildren,
   findChildren,
 } from "@yamada-ui/utils"
-import type { KeyboardEvent } from "react"
+import type { KeyboardEvent, PropsWithChildren } from "react"
 import { cloneElement, useCallback } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { DrawerContent } from "./drawer"
@@ -149,6 +150,10 @@ type ModalOptions = Pick<
    * Props to be forwarded to the portal component.
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * Props for modal container element.
+   */
+  containerProps?: HTMLUIProps<"div">
 }
 
 export type ModalProps = ModalContentProps & ThemeProps<"Modal"> & ModalOptions
@@ -189,6 +194,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       animation = "scale",
       duration,
       portalProps,
+      containerProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -271,7 +277,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
                   enabled={blockScrollOnMount}
                   forwardProps
                 >
-                  <ui.div __css={css}>
+                  <ui.div __css={css} {...containerProps}>
                     {customModalOverlay ??
                       (withOverlay && size !== "full" ? (
                         <ModalOverlay />
@@ -333,8 +339,9 @@ const getModalContentProps = (
 
 type ModalContentProps = Omit<
   MotionProps<"section">,
-  "color" | "scrollBehavior" | "animation" | "children"
->
+  "transition" | "scrollBehavior" | "animation" | "children"
+> &
+  PropsWithChildren
 
 const ModalContent = motionForwardRef<ModalContentProps, "section">(
   ({ className, children, __css, ...rest }, ref) => {
@@ -364,8 +371,7 @@ const ModalContent = motionForwardRef<ModalContentProps, "section">(
     }
 
     return (
-      <Motion
-        as="section"
+      <motion.section
         role="dialog"
         aria-modal="true"
         ref={ref}
@@ -379,7 +385,7 @@ const ModalContent = motionForwardRef<ModalContentProps, "section">(
           (withCloseButton && onClose ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
-      </Motion>
+      </motion.section>
     )
   },
 )

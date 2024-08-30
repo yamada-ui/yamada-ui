@@ -105,6 +105,7 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
       onCancel,
       onOther,
       onSuccess,
+      containerProps,
       ...rest
     } = omitThemeProps(mergedProps)
 
@@ -159,6 +160,7 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
             onClose,
             withOverlay: false,
             withCloseButton: false,
+            containerProps,
             ...rest,
             size,
           }}

@@ -12,7 +12,7 @@ import { MenuIcon, useUpstreamMenuItem } from "./menu-item"
 export type MenuButtonProps = HTMLUIProps<"button">
 
 export const MenuButton = forwardRef<MenuButtonProps, "button">(
-  ({ className, children, as: As, ...rest }, ref) => {
+  ({ className, children, as, ...rest }, ref) => {
     const { onKeyDownRef, onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
     const { isOpen, onOpen, onClose, onFocusFirstItem, onFocusLastItem } =
       useMenu()
@@ -58,7 +58,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
     assignRef(onKeyDownRef, onItemKeyDown)
 
-    const Component = useMemo(() => (As ? ui(As) : Button), [As])
+    const Component = useMemo(() => (as ? ui(as) : Button), [as])
 
     return (
       <PopoverTrigger>

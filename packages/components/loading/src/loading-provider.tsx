@@ -7,7 +7,7 @@ import type {
 } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { MotionVariants } from "@yamada-ui/motion"
-import { AnimatePresence, Motion, motion } from "@yamada-ui/motion"
+import { AnimatePresence, motion } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
 import { useTimeout } from "@yamada-ui/use-timeout"
 import {
@@ -381,15 +381,8 @@ const getMotionProps = (
   variants: getVariants(type),
 })
 
-const ScreenComponent = memo(
-  ({
-    initialState,
-    icon,
-    text,
-    message,
-    duration,
-    onFinish,
-  }: LoadingComponentProps) => {
+const ScreenComponent: FC<LoadingComponentProps> = memo(
+  ({ initialState, icon, text, message, duration, onFinish }) => {
     const css: CSSUIObject = {
       maxW: "24rem",
       display: "flex",
@@ -402,7 +395,7 @@ const ScreenComponent = memo(
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         className="ui-loading-screen"
         {...getMotionProps(initialState)}
         __css={getOverlayStyle()}
@@ -411,22 +404,15 @@ const ScreenComponent = memo(
           <Loading size="6xl" {...icon} />
           <Message message={message} lineClamp={3} {...text} />
         </ui.div>
-      </Motion>
+      </motion.div>
     )
   },
 )
 
 ScreenComponent.displayName = "ScreenComponent"
 
-const PageComponent = memo(
-  ({
-    initialState,
-    icon,
-    text,
-    message,
-    duration,
-    onFinish,
-  }: LoadingComponentProps) => {
+const PageComponent: FC<LoadingComponentProps> = memo(
+  ({ initialState, icon, text, message, duration, onFinish }) => {
     const css: CSSUIObject = {
       bg: ["fallback(white, #fbfbfb)", "fallback(black, #141414)"],
       maxW: "24rem",
@@ -446,36 +432,28 @@ const PageComponent = memo(
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         className="ui-loading-page"
         {...getMotionProps(initialState)}
         __css={getOverlayStyle("transparent")}
       >
-        <ui.div
-          as={motion.div}
+        <motion.div
           className="ui-loading-page__inner"
           {...getMotionProps(initialState, "scaleFade")}
           __css={css}
         >
           <Loading size="6xl" {...icon} />
           <Message message={message} lineClamp={3} {...text} />
-        </ui.div>
-      </Motion>
+        </motion.div>
+      </motion.div>
     )
   },
 )
 
 PageComponent.displayName = "PageComponent"
 
-const BackgroundComponent = memo(
-  ({
-    initialState,
-    icon,
-    text,
-    message,
-    duration,
-    onFinish,
-  }: LoadingComponentProps) => {
+const BackgroundComponent: FC<LoadingComponentProps> = memo(
+  ({ initialState, icon, text, message, duration, onFinish }) => {
     const css: CSSUIObject = {
       position: "fixed",
       right: "fallback(4, 1rem)",
@@ -498,14 +476,14 @@ const BackgroundComponent = memo(
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         className="ui-loading-background"
         {...getMotionProps(initialState, "scaleFade")}
         __css={css}
       >
         <Loading size="xl" {...icon} />
         <Message message={message} fontSize="sm" lineClamp={1} {...text} />
-      </Motion>
+      </motion.div>
     )
   },
 )

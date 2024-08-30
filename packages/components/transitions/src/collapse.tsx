@@ -10,7 +10,7 @@ import {
   transitionEnter,
   transitionExit,
   MOTION_TRANSITION_EASINGS,
-  Motion,
+  motion,
   motionForwardRef,
 } from "@yamada-ui/motion"
 import { createdDom, cx } from "@yamada-ui/utils"
@@ -166,7 +166,7 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
   return (
     <AnimatePresence initial={false} custom={custom}>
       {isOpen ? (
-        <Motion
+        <motion.div
           ref={ref}
           className={cx("ui-collapse", className)}
           {...rest}

@@ -1,14 +1,14 @@
+import type { ComponentType } from "react"
 import type {
   UIFactory,
   DOMElements,
   StyledOptions,
   HTMLUIComponents,
-  UIComponent,
 } from "./components"
 import { styled } from "./styled"
 
 const factory = () => {
-  const cache = new Map<DOMElements, UIComponent<DOMElements>>()
+  const cache = new Map<DOMElements, ComponentType>()
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [DOMElements, StyledOptions]) => {

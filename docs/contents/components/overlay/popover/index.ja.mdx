@@ -62,7 +62,7 @@ import {
 `children`には、`isOpen`や`onClose`などのメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
 
 ```tsx
-<Menu>
+<Popover>
   {({ isOpen }) => (
     <>
       <PopoverTrigger>
@@ -76,7 +76,7 @@ import {
       </PopoverContent>
     </>
   )}
-</Menu>
+</Popover>
 ```
 
 ### 別の要素を参照して表示する

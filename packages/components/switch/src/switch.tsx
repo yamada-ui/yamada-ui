@@ -135,8 +135,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
           }}
           {...getIconProps()}
         >
-          <ui.span
-            as={motion.span}
+          <motion.span
             className={cx("ui-switch__thumb", className)}
             data-checked={dataAttr(isChecked)}
             layout

@@ -148,6 +148,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
       dragVelocity = 100,
       blankForDragProps,
       portalProps,
+      containerProps,
       ...rest
     } = omitThemeProps(mergedProps, ["isFullHeight"])
 
@@ -181,6 +182,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
             lockFocusAcrossFrames,
             duration,
             portalProps,
+            containerProps,
           }}
         >
           {customDrawerOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
@@ -207,10 +209,7 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
   },
 )
 
-type DrawerContentProps = Omit<
-  DrawerProps,
-  "color" | "transition" | "isOpen" | keyof ThemeProps
-> &
+type DrawerContentProps = Omit<DrawerProps, "isOpen" | keyof ThemeProps> &
   Required<
     Pick<
       DrawerProps,

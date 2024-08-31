@@ -7,7 +7,7 @@ import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import { useTabsContext, useTabsDescendant } from "./tabs"
 
 export type TabProps = HTMLUIProps<"button"> &
-  Omit<UseClickableProps, "ref" | "color">
+  Omit<UseClickableProps<HTMLButtonElement>, "ref" | "color">
 
 export const Tab = forwardRef<TabProps, "button">(
   (

@@ -51,7 +51,7 @@ export const toCSSObject: ToCSSObject =
   }
 
 export const styled = <T extends As, P extends object = {}>(
-  element: T,
+  el: T,
   { baseStyle, disableStyleProp, ...styledOptions }: StyledOptions = {},
 ) => {
   if (!styledOptions.shouldForwardProp)
@@ -59,12 +59,9 @@ export const styled = <T extends As, P extends object = {}>(
 
   const CSSObject = toCSSObject({ baseStyle, disableStyleProp })
 
-  const Component = emotionStyled(
-    element as ComponentType<any>,
-    styledOptions,
-  )(CSSObject)
+  const Component = emotionStyled(el as ComponentType, styledOptions)(CSSObject)
 
-  const UIComponent = forwardRef((props, ref) => {
+  const UIComponent = forwardRef<HTMLElement, any>((props, ref) => {
     const { colorMode, forced } = useColorMode()
 
     return createElement(Component, {

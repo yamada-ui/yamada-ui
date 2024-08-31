@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps, UIComponent } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   forwardRef,
   omitThemeProps,
@@ -13,7 +13,7 @@ import NextImage from "next/image"
 export type ImageProps = Merge<HTMLUIProps<"img">, NextImageProps> &
   ThemeProps<"Image">
 
-const Component: UIComponent<"img", ImageProps> = ui(NextImage, {
+const Component = ui<typeof NextImage, ImageProps>(NextImage, {
   disableStyleProp: (prop) => ["width", "height", "fill"].includes(prop),
 })
 

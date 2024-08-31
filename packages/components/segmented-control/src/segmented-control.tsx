@@ -12,7 +12,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { LayoutGroup, Motion } from "@yamada-ui/motion"
+import { LayoutGroup, motion } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
@@ -475,7 +475,7 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
   }
 
   return (
-    <Motion
+    <motion.div
       className={cx("ui-segmented-control__cursor", className)}
       layoutDependency={false}
       layoutId="cursor"

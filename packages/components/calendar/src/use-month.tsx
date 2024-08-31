@@ -50,6 +50,7 @@ export const useMonth = () => {
     prevMonth,
     nextMonth,
     maxSelectValues,
+    minSelectValues,
     enableRange,
     hoveredValue,
     setHoveredValue,
@@ -75,23 +76,37 @@ export const useMonth = () => {
   const isShouldBetween = rangeSelectedValue.length >= 1 && !!maybeEndDate
   const isShouldHovered = rangeSelectedValue.length === 1
   const hasAmountOfMonths = amountOfMonths >= 2
-  const minBetweenDate = isNumber(maxSelectValues)
+  const minSelectEndDate = isNumber(maxSelectValues)
     ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
         .subtract(maxSelectValues - 1, "day")
         .toDate()
     : undefined
-  const maxBetweenDate = isNumber(maxSelectValues)
+  const maxSelectEndDate = isNumber(maxSelectValues)
     ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
         .add(maxSelectValues - 1, "day")
+        .toDate()
+    : undefined
+  const minSelectStartDate = isNumber(minSelectValues)
+    ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+        .subtract(minSelectValues - 1, "day")
+        .toDate()
+    : undefined
+  const maxSelectStartDate = isNumber(minSelectValues)
+    ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+        .add(minSelectValues - 1, "day")
         .toDate()
     : undefined
   const isInValidRangeDates =
     isNumber(maxSelectValues) &&
     Math.abs(dayjs(startDate).diff(endDate, "day")) >= maxSelectValues
-  const minTrulyBetweenDate =
-    isShouldHovered || isInValidRangeDates ? minBetweenDate : undefined
-  const maxTrulyBetweenDate =
-    isShouldHovered || isInValidRangeDates ? maxBetweenDate : undefined
+  const minTrulySelectEndDate =
+    isShouldHovered || isInValidRangeDates ? minSelectEndDate : undefined
+  const maxTrulySelectEndDate =
+    isShouldHovered || isInValidRangeDates ? maxSelectEndDate : undefined
+  const minTrulySelectStartDate =
+    isShouldHovered || isInValidRangeDates ? minSelectStartDate : undefined
+  const maxTrulySelectStartDate =
+    isShouldHovered || isInValidRangeDates ? maxSelectStartDate : undefined
 
   const onFocusPrev = useCallback(
     (targetIndex: number, targetMonth: number, targetDay: number) => {
@@ -368,8 +383,14 @@ export const useMonth = () => {
       const isToday = today && isSameDate(new Date(), value)
       const isDisabled = isDisabledDate({
         value,
-        minDate: minTrulyBetweenDate ?? minDate,
-        maxDate: maxTrulyBetweenDate ?? maxDate,
+        minDate: minTrulySelectEndDate ?? minDate,
+        maxDate: maxTrulySelectEndDate ?? maxDate,
+        minTrulySelectStartDate,
+        maxTrulySelectStartDate,
+        maybeStartDate,
+        maybeEndDate,
+        startDate,
+        endDate,
         isOutside,
         excludeDate,
         disableOutsideDays,
@@ -436,10 +457,14 @@ export const useMonth = () => {
       selectedValue,
       hasAmountOfMonths,
       today,
-      minTrulyBetweenDate,
       minDate,
-      maxTrulyBetweenDate,
       maxDate,
+      minTrulySelectEndDate,
+      maxTrulySelectEndDate,
+      minTrulySelectStartDate,
+      maxTrulySelectStartDate,
+      startDate,
+      endDate,
       excludeDate,
       disableOutsideDays,
       isMax,

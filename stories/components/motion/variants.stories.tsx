@@ -61,7 +61,6 @@ export const usePropagation: Story = () => {
         animate="visible"
         variants={list}
         w="2xs"
-        h="2xs"
         p="md"
         bg="primary"
         overflow="hidden"

@@ -32,9 +32,9 @@ const getTeam: p.RequiredRunner = () => async (_, s) => {
 
   s.stop(`Got the Yamada UI team`)
 
-  const { maintainers, members } = constant
+  const { maintainers, members, emeriti } = constant
 
-  return { maintainers, members }
+  return { maintainers, members, emeriti }
 }
 
 const getContributors: p.RequiredRunner = () => async (_, s) => {
@@ -65,7 +65,7 @@ const getContributors: p.RequiredRunner = () => async (_, s) => {
 }
 
 const writeTeam: p.RequiredRunner =
-  (maintainers: any, members: any) => async (_, s) => {
+  (maintainers: any, members: any, emeriti: any) => async (_, s) => {
     let distPath = path.join("constant", "maintainers.ts")
 
     s.start(`Writing file "${distPath}"`)
@@ -83,6 +83,18 @@ const writeTeam: p.RequiredRunner =
     s.start(`Writing file "${distPath}"`)
 
     data = `export const MEMBERS = ${JSON.stringify(members)}`
+
+    data = await prettier(data, { parser: "typescript" })
+
+    await writeFile(distPath, data)
+
+    s.stop(`Wrote file "${distPath}"`)
+
+    distPath = path.join("constant", "emeriti.ts")
+
+    s.start(`Writing file "${distPath}"`)
+
+    data = `export const EMERITI = ${JSON.stringify(emeriti)}`
 
     data = await prettier(data, { parser: "typescript" })
 
@@ -125,17 +137,17 @@ const main = async () => {
   try {
     const start = process.hrtime.bigint()
 
-    const { maintainers, members } = await getTeam()(p, s)
+    const { maintainers, members, emeriti } = await getTeam()(p, s)
     const contributors: Contributors = await getContributors()(p, s)
 
-    const omitIds: string[] = [...maintainers, ...members].map(
+    const omitIds: string[] = [...maintainers, ...members, ...emeriti].map(
       ({ github }) => github.id,
     )
     const omittedContributors = contributors.filter(
       ({ type, login }) => type === "User" && login && !omitIds.includes(login),
     )
 
-    await writeTeam(maintainers, members)(p, s)
+    await writeTeam(maintainers, members, emeriti)(p, s)
     await writeContributors(omittedContributors)(p, s)
 
     const end = process.hrtime.bigint()

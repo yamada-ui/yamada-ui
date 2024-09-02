@@ -77,7 +77,6 @@
     "chokidar": "^3.6.0",
     "dotenv": "^16.4.5",
     "eslint": "^9.9.1",
-    "eslint-config-next": "^14.2.6",
     "execa": "^9.3.1",
     "find-packages": "^10.0.4",
     "github-slugger": "^2.0.0",

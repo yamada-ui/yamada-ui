@@ -62,7 +62,7 @@ If the `children` of `PopoverTrigger` or `PopoverAnchor` are function components
 The `children` are provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
 
 ```tsx
-<Menu>
+<Popover>
   {({ isOpen }) => (
     <>
       <PopoverTrigger>
@@ -76,7 +76,7 @@ The `children` are provided with methods such as `isOpen` and `onClose`. You can
       </PopoverContent>
     </>
   )}
-</Menu>
+</Popover>
 ```
 
 ### Displaying Based on a Different Element

@@ -6,7 +6,7 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useCarouselContext, useCarouselControl } from "./use-carousel"
 
-export type CarouselControlProps = IconButtonProps
+export type CarouselControlProps = Omit<IconButtonProps, "aria-label">
 
 export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
@@ -78,6 +78,7 @@ const CarouselControl = forwardRef<
       className={cx("ui-carousel__control", className)}
       colorScheme={colorScheme}
       isRounded
+      aria-label={`Go to ${operation === "prev" ? "previous" : "next"} slide`}
       __css={css}
       {...rest}
     />

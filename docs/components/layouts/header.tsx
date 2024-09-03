@@ -225,7 +225,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
 
 ButtonGroup.displayName = "ButtonGroup"
 
-type I18nButtonProps = IconButtonProps & {
+type I18nButtonProps = Omit<IconButtonProps, "aria-label"> & {
   menuProps?: MenuProps
 }
 
@@ -281,7 +281,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
 
 I18nButton.displayName = "I18nButton"
 
-type ColorModeButtonProps = IconButtonProps & {
+type ColorModeButtonProps = Omit<IconButtonProps, "aria-label"> & {
   menuProps?: MenuProps
 }
 
@@ -349,7 +349,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
 
 ColorModeButton.displayName = "ColorModeButton"
 
-type ThemeSchemeButtonProps = IconButtonProps & {
+type ThemeSchemeButtonProps = Omit<IconButtonProps, "aria-label"> & {
   popoverProps?: PopoverProps
 }
 

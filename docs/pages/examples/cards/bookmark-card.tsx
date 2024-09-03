@@ -31,7 +31,11 @@ export const BookmarkCard = memo(() => {
           <Text color="muted">Tokyo, Japan</Text>
         </VStack>
 
-        <IconButton variant="ghost" icon={<Bookmark fontSize="2xl" />} />
+        <IconButton
+          variant="ghost"
+          icon={<Bookmark fontSize="2xl" />}
+          aria-label="Add Tokyo to Bookmark"
+        />
       </CardHeader>
 
       <CardBody>

@@ -14,15 +14,15 @@ type CalendarHeaderOptions = {
   /**
    * Props for calendar control button element.
    */
-  controlProps?: CalendarControlProps
+  controlProps?: Omit<CalendarControlProps, "aria-label">
   /**
    * Props for calendar previous control button element.
    */
-  prevProps?: CalendarControlProps
+  prevProps?: Omit<CalendarControlProps, "aria-label">
   /**
    * Props for calendar next control button element.
    */
-  nextProps?: CalendarControlProps
+  nextProps?: Omit<CalendarControlProps, "aria-label">
   /**
    * Props for calendar label button element.
    */

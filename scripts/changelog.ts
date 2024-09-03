@@ -46,7 +46,7 @@ const manifest = {
   async read(): Promise<PullRequestData[]> {
     try {
       return JSON.parse(await readFile(this.path, "utf8"))
-    } catch (error) {
+    } catch {
       return []
     }
   },

@@ -22,7 +22,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check --cache .",
     "format:write": "prettier --write --cache .",
-    "lint": "next lint",
+    "lint": "eslint . --max-warnings=0 --cache",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:watch": "vitest --watch",

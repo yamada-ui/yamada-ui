@@ -256,4 +256,18 @@ export const MEMBERS = [
     },
     discord: { id: "857882104339628063" },
   },
+  {
+    name: { en: "Taiki Nakamura", ja: "Nakamura Taiki" },
+    description: {
+      en: "Junior Blockchain & Frontend Engineer.",
+      ja: "ブロックチェーンとフロントエンドエンジニア初心者大学生。",
+    },
+    github: {
+      id: "0xtkey256",
+      icon: "https://avatars.githubusercontent.com/u/94577768?v=4",
+      url: "https://github.com/0xtkey256",
+    },
+    x: { url: "https://x.com/calcat256" },
+    discord: { id: "554506041409142784" },
+  },
 ]

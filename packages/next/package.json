@@ -1,6 +1,6 @@
 {
-  "name": "@yamada-ui/nextjs",
-  "version": "6.1.0",
+  "name": "@yamada-ui/next",
+  "version": "1.0.0",
   "description": "Yamada UI Integrations for Next.js 14",
   "keywords": [
     "yamada",
@@ -22,7 +22,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/yamada-ui/yamada-ui",
-    "directory": "packages/nextjs"
+    "directory": "packages/next"
   },
   "bugs": {
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "next": "^14.2.5",
+    "next": "^14.2.6",
     "react": "^18.3.1"
   },
   "peerDependencies": {

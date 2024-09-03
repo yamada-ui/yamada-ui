@@ -37,7 +37,7 @@ type ReorderItemOptions<Y extends any = string> = {
 
 export type ReorderItemProps<Y extends any = string> = Omit<
   Merge<HTMLUIProps<"li">, HTMLMotionProps<"li">>,
-  "value" | "children"
+  "value" | "transition" | "children"
 > &
   PropsWithChildren &
   ReorderItemOptions<Y>

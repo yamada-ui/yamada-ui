@@ -1,5 +1,5 @@
 import { CirclePlus, Podcast } from "@yamada-ui/lucide"
-import { Image, type ImageProps } from "@yamada-ui/nextjs"
+import { Image, type ImageProps } from "@yamada-ui/next"
 import {
   Box,
   Button,

@@ -66,7 +66,6 @@ export {
   makeUseVisualState,
   mirrorEasing,
   mix,
-  motion,
   motionValue,
   optimizedAppearDataAttribute,
   pipe,
@@ -121,3 +120,4 @@ export * from "./motion-forward-ref"
 export { Motion } from "./motion"
 export * from "./motion.types"
 export * from "./utils"
+export * from "./factory"

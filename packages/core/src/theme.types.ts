@@ -295,7 +295,7 @@ export type LoadingConfigOptions = {
   /**
    * The number of `ms` the loading will continue to be displayed.
    *
-   * If `null`, the notice will continue to display.
+   * If `null`, the loading will continue to display.
    *
    * @default null
    */

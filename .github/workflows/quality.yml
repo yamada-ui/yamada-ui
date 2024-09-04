@@ -83,13 +83,13 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,.eslintrc.json,.eslintrc.base.json,.eslintignore,tsconfig.json"
+          file_patterns: "packages/,eslint/,eslint.config.mjs,tsconfig.json"
 
       - name: Check docs modified files
         id: check-docs-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "docs/,.eslintrc.base.json"
+          file_patterns: "docs/,eslint/,eslint.config.mjs"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'

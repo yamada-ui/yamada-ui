@@ -99,6 +99,7 @@
     "@yamada-ui/snacks": "workspace:*",
     "@yamada-ui/stat": "workspace:*",
     "@yamada-ui/stepper": "workspace:*",
+    "@yamada-ui/swap": "workspace:*",
     "@yamada-ui/switch": "workspace:*",
     "@yamada-ui/tabs": "workspace:*",
     "@yamada-ui/tag": "workspace:*",

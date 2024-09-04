@@ -1,4 +1,4 @@
-export type MixedArray = string | (string | string)[]
+export type MixedArray = string | string[] | undefined
 
 export const toArray = (mixedArray: MixedArray) =>
   (Array.isArray(mixedArray) ? mixedArray.flat() : [mixedArray]).filter(Boolean)

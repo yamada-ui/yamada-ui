@@ -129,7 +129,6 @@ export const TableOfContents = memo(
                     }}
                     transitionProperty="colors"
                     transitionDuration="normal"
-                    pointerEvents="none"
                   >
                     <Box
                       data-selected={dataAttr(isSelected)}

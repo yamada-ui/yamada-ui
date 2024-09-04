@@ -7,6 +7,7 @@ import type { Theme, StyledTheme } from "../theme.types"
 export type { CSS }
 
 export type ColorMode = "light" | "dark"
+export type ColorModeWithSystem = ColorMode | "system"
 
 type ThemeVariant<Y extends keyof Theme["components"] | unknown = unknown> =
   Y extends keyof Theme["components"]

@@ -2935,6 +2935,9 @@ importers:
 
   packages/create-yamada-app/src/templates/gatsby:
     dependencies:
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../../../react
       gatsby:
         specifier: ^5.13.5
         version: 5.13.7(@swc/core@1.7.14(@swc/helpers@0.5.5))(babel-eslint@10.1.0(eslint@7.32.0))(esbuild@0.23.1)(eslint-plugin-testing-library@6.3.0(eslint@8.57.0)(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.25.0)(typescript@5.5.4)(webpack-dev-server@4.15.2(webpack@5.94.0(@swc/core@1.7.14(@swc/helpers@0.5.5))(esbuild@0.23.1)))
@@ -2954,12 +2957,18 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.19
         version: 18.3.0
+      '@yamada-ui/cli':
+        specifier: workspace:*
+        version: link:../../../../cli
       typescript:
         specifier: ^5.3.3
         version: 5.5.4
 
   packages/create-yamada-app/src/templates/hono:
     dependencies:
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../../../react
       hono:
         specifier: ^4.5.8
         version: 4.5.8
@@ -2982,12 +2991,18 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
+      '@yamada-ui/cli':
+        specifier: workspace:*
+        version: link:../../../../cli
       vite:
         specifier: ^5.4.2
         version: 5.4.2(@types/node@22.5.0)(terser@5.31.6)
 
   packages/create-yamada-app/src/templates/next/app:
     dependencies:
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../../../../react
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.25.2)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3007,6 +3022,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
+      '@yamada-ui/cli':
+        specifier: workspace:*
+        version: link:../../../../../cli
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -3019,6 +3037,9 @@ importers:
 
   packages/create-yamada-app/src/templates/next/pages:
     dependencies:
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../../../../react
       next:
         specifier: 14.2.5
         version: 14.2.5(@babel/core@7.25.2)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3038,6 +3059,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.0
+      '@yamada-ui/cli':
+        specifier: workspace:*
+        version: link:../../../../../cli
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -3059,6 +3083,9 @@ importers:
       '@remix-run/serve':
         specifier: ^2.11.2
         version: 2.11.2(typescript@5.5.4)
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../../../react
       isbot:
         specifier: ^4.1.0
         version: 4.4.0
@@ -3084,6 +3111,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.7.4
         version: 6.21.0(eslint@8.57.0)(typescript@5.5.4)
+      '@yamada-ui/cli':
+        specifier: workspace:*
+        version: link:../../../../cli
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.20(postcss@8.4.41)
@@ -3123,6 +3153,9 @@ importers:
 
   packages/create-yamada-app/src/templates/vite:
     dependencies:
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../../../react
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -3142,6 +3175,9 @@ importers:
       '@vitejs/plugin-react-swc':
         specifier: ^3.5.0
         version: 3.7.0(@swc/helpers@0.5.5)(vite@5.4.2(@types/node@22.5.0)(terser@5.31.6))
+      '@yamada-ui/cli':
+        specifier: workspace:*
+        version: link:../../../../cli
       eslint:
         specifier: ^9.9.0
         version: 9.9.0(jiti@1.21.6)
@@ -22051,7 +22087,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
       '@types/responselike': 1.0.3
 
   '@types/common-tags@1.8.4': {}
@@ -22079,7 +22115,7 @@ snapshots:
 
   '@types/cors@2.8.17':
     dependencies:
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/cross-spawn@6.0.6':
     dependencies:
@@ -22164,7 +22200,7 @@ snapshots:
   '@types/glob@5.0.38':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/glob@7.2.0':
     dependencies:
@@ -22191,7 +22227,7 @@ snapshots:
 
   '@types/http-proxy@1.17.15':
     dependencies:
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/inquirer@9.0.7':
     dependencies:
@@ -22227,7 +22263,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/liftoff@4.0.3':
     dependencies:
@@ -22252,7 +22288,7 @@ snapshots:
 
   '@types/mkdirp@0.5.2':
     dependencies:
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/ms@0.7.34': {}
 
@@ -22320,14 +22356,14 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/retry@0.12.0': {}
 
   '@types/rimraf@2.0.5':
     dependencies:
       '@types/glob': 5.0.38
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
 
   '@types/semver@7.5.8': {}
 
@@ -26259,7 +26295,7 @@ snapshots:
     dependencies:
       '@types/cookie': 0.4.1
       '@types/cors': 2.8.17
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.4.2
@@ -30253,7 +30289,7 @@ snapshots:
 
   jest-worker@26.6.2:
     dependencies:
-      '@types/node': 20.16.1
+      '@types/node': 22.5.0
       merge-stream: 2.0.0
       supports-color: 7.2.0
 

@@ -1527,6 +1527,11 @@ export type {
   ChartColumnProps,
   ChartColumnProps as ChartColumnIconProps,
 } from "./chart-column"
+export { ChartGantt, ChartGantt as ChartGanttIcon } from "./chart-gantt"
+export type {
+  ChartGanttProps,
+  ChartGanttProps as ChartGanttIconProps,
+} from "./chart-gantt"
 export { ChartLine, ChartLine as ChartLineIcon } from "./chart-line"
 export type {
   ChartLineProps,
@@ -6728,6 +6733,11 @@ export { TicketX, TicketX as TicketXIcon } from "./ticket-x"
 export type { TicketXProps, TicketXProps as TicketXIconProps } from "./ticket-x"
 export { Ticket, Ticket as TicketIcon } from "./ticket"
 export type { TicketProps, TicketProps as TicketIconProps } from "./ticket"
+export { TicketsPlane, TicketsPlane as TicketsPlaneIcon } from "./tickets-plane"
+export type {
+  TicketsPlaneProps,
+  TicketsPlaneProps as TicketsPlaneIconProps,
+} from "./tickets-plane"
 export { Tickets, Tickets as TicketsIcon } from "./tickets"
 export type { TicketsProps, TicketsProps as TicketsIconProps } from "./tickets"
 export { TimerOff, TimerOff as TimerOffIcon } from "./timer-off"
@@ -6837,6 +6847,14 @@ export type {
   TrendingDownProps,
   TrendingDownProps as TrendingDownIconProps,
 } from "./trending-down"
+export {
+  TrendingUpDown,
+  TrendingUpDown as TrendingUpDownIcon,
+} from "./trending-up-down"
+export type {
+  TrendingUpDownProps,
+  TrendingUpDownProps as TrendingUpDownIconProps,
+} from "./trending-up-down"
 export { TrendingUp, TrendingUp as TrendingUpIcon } from "./trending-up"
 export type {
   TrendingUpProps,
@@ -7104,6 +7122,11 @@ export { Volume1, Volume1 as Volume1Icon } from "./volume1"
 export type { Volume1Props, Volume1Props as Volume1IconProps } from "./volume1"
 export { Volume2, Volume2 as Volume2Icon } from "./volume2"
 export type { Volume2Props, Volume2Props as Volume2IconProps } from "./volume2"
+export { VolumeOff, VolumeOff as VolumeOffIcon } from "./volume-off"
+export type {
+  VolumeOffProps,
+  VolumeOffProps as VolumeOffIconProps,
+} from "./volume-off"
 export { VolumeX, VolumeX as VolumeXIcon } from "./volume-x"
 export type { VolumeXProps, VolumeXProps as VolumeXIconProps } from "./volume-x"
 export { Volume, Volume as VolumeIcon } from "./volume"

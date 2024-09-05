@@ -2,7 +2,6 @@ import {
   HStack,
   Spacer,
   useColorMode,
-  ColorMode,
   MenuButton,
   IconButton,
   Menu,
@@ -24,6 +23,7 @@ import {
   useScroll,
   useMotionValueEvent,
   Image,
+  ColorModeWithSystem,
 } from "@yamada-ui/react"
 import { Moon, Palette, Sun } from "@yamada-ui/lucide"
 import { useRef } from "react"
@@ -144,7 +144,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
         />
 
         <MenuList>
-          <MenuOptionGroup<ColorMode | "system">
+          <MenuOptionGroup<ColorModeWithSystem>
             value={internalColorMode}
             onChange={changeColorMode}
             type="radio"

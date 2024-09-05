@@ -20,7 +20,7 @@ export default defineConfig({
         "packages/**/tests",
         "packages/**/scripts",
         "packages/test",
-        "packages/nextjs",
+        "packages/next",
       ],
     },
     onConsoleLog: (_log, type) => type !== "stderr",

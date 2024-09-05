@@ -1,4 +1,4 @@
-import type { ColorMode } from "../css"
+import type { ColorMode, ColorModeWithSystem } from "../css"
 import { COLOR_MODE_STORAGE_KEY } from "./color-mode-script"
 
 const hasSupport = !!globalThis?.document
@@ -7,9 +7,9 @@ export type ColorModeManager = {
   type: "cookie" | "localStorage"
   ssr?: boolean
   get: (
-    initColorMode?: ColorMode | "system",
-  ) => (storageKey?: string) => ColorMode | "system"
-  set: (colorMode: ColorMode | "system") => (storageKey?: string) => void
+    initColorMode?: ColorModeWithSystem,
+  ) => (storageKey?: string) => ColorModeWithSystem
+  set: (colorMode: ColorModeWithSystem) => (storageKey?: string) => void
 }
 
 const createLocalStorage = (defaultStorageKey: string): ColorModeManager => ({

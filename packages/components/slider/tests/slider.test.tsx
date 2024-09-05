@@ -1,11 +1,5 @@
-import {
-  a11y,
-  act,
-  fireEvent,
-  render,
-  renderHook,
-  screen,
-} from "@yamada-ui/test"
+import { userEvent } from "@testing-library/user-event"
+import { a11y, act, render, renderHook, screen } from "@yamada-ui/test"
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "../src"
 import { useSlider } from "../src/slider"
 
@@ -113,8 +107,8 @@ describe("<Slider />", () => {
     const slider = screen.getByRole("slider")
     const sliderInput = container.getElementsByTagName("input")[0]
 
-    await act(() => fireEvent.keyDown(slider, { key: "ArrowRight" }))
-
+    slider.focus()
+    await userEvent.keyboard("{ArrowRight")
     expect(Number(sliderInput.value)).toBe(defaultValue + step)
   })
 
@@ -142,27 +136,26 @@ describe("<Slider />", () => {
       <Slider min={min} max={max} step={10} defaultValue={0} />,
     )
 
-    const slider = screen.getByRole("slider")
     const sliderInput = container.getElementsByTagName("input")[0]
 
-    await act(() => fireEvent.keyDown(slider, { key: "ArrowRight" }))
+    await userEvent.keyboard("{ArrowRight}")
     expect(Number(sliderInput.value)).toBe(10)
-    await act(() => fireEvent.keyDown(slider, { key: "ArrowLeft" }))
+    await userEvent.keyboard("{ArrowLeft }")
     expect(Number(sliderInput.value)).toBe(0)
 
-    await act(() => fireEvent.keyDown(slider, { key: "ArrowUp" }))
+    await userEvent.keyboard("{ ArrowUp }")
     expect(Number(sliderInput.value)).toBe(10)
-    await act(() => fireEvent.keyDown(slider, { key: "ArrowDown" }))
+    await userEvent.keyboard("{ ArrowDown }")
     expect(Number(sliderInput.value)).toBe(0)
 
-    await act(() => fireEvent.keyDown(slider, { key: "PageUp" }))
+    await userEvent.keyboard("{ PageUp }")
     expect(Number(sliderInput.value)).toBe(0 + tenStep)
-    await act(() => fireEvent.keyDown(slider, { key: "PageDown" }))
+    await userEvent.keyboard("{ PageDown }")
     expect(Number(sliderInput.value)).toBe(0)
 
-    await act(() => fireEvent.keyDown(slider, { key: "Home" }))
+    await userEvent.keyboard("{ Home }")
     expect(Number(sliderInput.value)).toBe(min)
-    await act(() => fireEvent.keyDown(slider, { key: "End" }))
+    await userEvent.keyboard("{ End }")
     expect(Number(sliderInput.value)).toBe(max)
   })
 
@@ -214,8 +207,8 @@ describe("<Slider />", () => {
     const sliderThumb = screen.getByRole("slider")
     const sliderInput = container.getElementsByTagName("input")[0]
 
-    await act(() => fireEvent.focus(sliderThumb))
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "Enter" }))
+    sliderThumb.focus()
+    await userEvent.keyboard("{ Enter }")
     expect(Number(sliderInput.value)).toBe(0)
   })
 
@@ -268,7 +261,7 @@ describe("<Slider />", () => {
     expect(onChange).toHaveBeenCalledWith(75)
   })
 
-  test("Slider component with pointer events", () => {
+  test("Slider component with pointer events", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
     const onChange = vi.fn()
@@ -291,10 +284,7 @@ describe("<Slider />", () => {
 
     const slider = getByRole("slider")
 
-    act(() => {
-      fireEvent.pointerDown(slider)
-      fireEvent.pointerUp(slider)
-    })
+    await userEvent.click(slider)
 
     expect(onChangeStart).toHaveBeenCalledWith(50)
     expect(onChange).toHaveBeenCalledWith(0)

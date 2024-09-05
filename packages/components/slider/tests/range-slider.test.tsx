@@ -1,11 +1,5 @@
-import {
-  render,
-  screen,
-  a11y,
-  act,
-  fireEvent,
-  renderHook,
-} from "@yamada-ui/test"
+import { userEvent } from "@testing-library/user-event"
+import { render, screen, a11y, act, renderHook } from "@yamada-ui/test"
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "../src"
 import { useRangeSlider } from "../src/range-slider"
 
@@ -183,48 +177,48 @@ describe("<RangeSlider />", () => {
 
     let sliderThumb = sliderThumbs[1]
 
-    await act(() => fireEvent.focus(sliderThumb))
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowRight" }))
+    sliderThumb.focus()
+    await userEvent.keyboard("{ ArrowRight }")
     expect(Number(sliderInputs[1].value)).toBe(60)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowLeft" }))
+    await userEvent.keyboard("{ ArrowLeft }")
     expect(Number(sliderInputs[1].value)).toBe(50)
 
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowUp" }))
+    await userEvent.keyboard("{ ArrowUp }")
     expect(Number(sliderInputs[1].value)).toBe(60)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowDown" }))
+    await userEvent.keyboard("{ ArrowDown }")
     expect(Number(sliderInputs[1].value)).toBe(50)
 
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "PageUp" }))
+    await userEvent.keyboard("{ PageUp }")
     expect(Number(sliderInputs[1].value)).toBe(50 + tenStep)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "PageDown" }))
+    await userEvent.keyboard("{ PageDown }")
     expect(Number(sliderInputs[1].value)).toBe(50)
 
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "Home" }))
+    await userEvent.keyboard("{ Home }")
     expect(Number(sliderInputs[1].value)).toBe(Number(sliderInputs[0].value))
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "End" }))
+    await userEvent.keyboard("{ End }")
     expect(Number(sliderInputs[1].value)).toBe(max)
 
     sliderThumb = sliderThumbs[0]
 
-    await act(() => fireEvent.focus(sliderThumb))
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowRight" }))
+    sliderThumb.focus()
+    await userEvent.keyboard("{ ArrowRight }")
     expect(Number(sliderInputs[0].value)).toBe(10)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowLeft" }))
+    await userEvent.keyboard("{ArrowLeft }")
     expect(Number(sliderInputs[0].value)).toBe(0)
 
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowUp" }))
+    await userEvent.keyboard("{ ArrowUp }")
     expect(Number(sliderInputs[0].value)).toBe(10)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "ArrowDown" }))
+    await userEvent.keyboard("{ ArrowDown }")
     expect(Number(sliderInputs[0].value)).toBe(0)
 
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "PageUp" }))
+    await userEvent.keyboard("{ PageUp }")
     expect(Number(sliderInputs[0].value)).toBe(0 + tenStep)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "PageDown" }))
+    await userEvent.keyboard("{ PageDown }")
     expect(Number(sliderInputs[0].value)).toBe(0)
 
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "Home" }))
+    await userEvent.keyboard("{ Home }")
     expect(Number(sliderInputs[0].value)).toBe(min)
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "End" }))
+    await userEvent.keyboard("{ End }")
     expect(Number(sliderInputs[0].value)).toBe(Number(sliderInputs[1].value))
   })
 
@@ -238,8 +232,8 @@ describe("<RangeSlider />", () => {
     const sliderThumb = screen.getAllByRole("slider")[0]
     const sliderInput = container.getElementsByTagName("input")[0]
 
-    await act(() => fireEvent.focus(sliderThumb))
-    await act(() => fireEvent.keyDown(sliderThumb, { key: "Enter" }))
+    sliderThumb.focus()
+    await userEvent.keyboard("{ Enter }")
     expect(Number(sliderInput.value)).toBe(0)
   })
 
@@ -310,7 +304,7 @@ describe("<RangeSlider />", () => {
     expect(onChange).toHaveBeenCalledWith([25, 75])
   })
 
-  test("RangeSlider component with pointer events", () => {
+  test("RangeSlider component with pointer events", async () => {
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
     const onChange = vi.fn()
@@ -334,21 +328,13 @@ describe("<RangeSlider />", () => {
     const sliderStartThumb = getAllByRole("slider")[0]
     const sliderEndThumb = getAllByRole("slider")[1]
 
-    act(() => {
-      fireEvent.focus(sliderStartThumb)
-      fireEvent.pointerDown(sliderStartThumb)
-      fireEvent.pointerUp(sliderStartThumb)
-    })
+    await userEvent.click(sliderStartThumb)
 
     expect(onChangeStart).toHaveBeenCalledWith([25, 75])
     expect(onChange).toHaveBeenCalledWith([0, 75])
     expect(onChangeEnd).toHaveBeenCalledWith([25, 75])
 
-    act(() => {
-      fireEvent.focus(sliderEndThumb)
-      fireEvent.pointerDown(sliderEndThumb)
-      fireEvent.pointerUp(sliderEndThumb)
-    })
+    await userEvent.click(sliderEndThumb)
 
     expect(onChangeStart).toHaveBeenCalledWith([25, 75])
     expect(onChange).toHaveBeenCalledWith([0, 75])

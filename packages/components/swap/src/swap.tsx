@@ -6,8 +6,16 @@ import {
   useComponentStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import type { ReactElement } from "react"
+import { Flip } from "./flip"
 
-type SwapOptions = {}
+type AnimationType = "horizontalFlip" | "verticalFlip"
+
+type SwapOptions = {
+  from: ReactElement
+  to: ReactElement
+  animation: AnimationType
+}
 
 export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
 
@@ -24,12 +32,21 @@ export const Swap = forwardRef<SwapProps, "div">((props, ref) => {
     ...styles,
   }
 
+  const { from, to, animation } = props
+
   return (
     <ui.div
       ref={ref}
       className={cx("ui-swap", className)}
       __css={css}
       {...rest}
-    />
+    >
+      {animation === "horizontalFlip" && (
+        <Flip from={from} to={to} direction="horizontal" />
+      )}
+      {animation === "verticalFlip" && (
+        <Flip from={from} to={to} direction="vertical" />
+      )}
+    </ui.div>
   )
 })

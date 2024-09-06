@@ -84,7 +84,7 @@ export default tseslintConfig(
       "layouts/**/*.tsx",
       "pages/**/*.ts",
       "pages/**/*.tsx",
-    ]
+    ],
   },
   {
     ...reactHooksConfig,
@@ -99,7 +99,7 @@ export default tseslintConfig(
       "layouts/**/*.tsx",
       "pages/**/*.ts",
       "pages/**/*.tsx",
-    ]
+    ],
   },
   {
     name: "@yamada-ui/docs/next",
@@ -158,5 +158,5 @@ export default tseslintConfig(
       "jsx-a11y/role-has-required-aria-props": "warn",
       "jsx-a11y/role-supports-aria-props": "warn",
     },
-  }
+  },
 )

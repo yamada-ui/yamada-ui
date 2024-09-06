@@ -8,10 +8,14 @@ export type MenuGroupProps = HTMLUIProps<"div"> & {
    * The label of the group.
    */
   label?: string
+  /**
+   * The label of the group style.
+   */
+  labelStyle?: HTMLUIProps<"span">
 }
 
 export const MenuGroup = forwardRef<MenuGroupProps, "div">(
-  ({ className, label, children, ...rest }, ref) => {
+  ({ className, label, children, labelStyle, ...rest }, ref) => {
     const { styles } = useMenu()
 
     const css: CSSUIObject = { ...styles.group }
@@ -28,6 +32,7 @@ export const MenuGroup = forwardRef<MenuGroupProps, "div">(
           <ui.span
             className={cx("ui-menu__item--group-label")}
             __css={styles.groupLabel}
+            {...labelStyle}
           >
             {label}
           </ui.span>

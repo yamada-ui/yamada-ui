@@ -12,6 +12,10 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
    */
   label?: string
   /**
+   * The label of the group style.
+   */
+  labelStyle?: HTMLUIProps<"span">
+  /**
    * The value of the menu item group.
    */
   value?: Y

@@ -59,7 +59,10 @@ export const styled = <T extends As, P extends object = {}>(
 
   const CSSObject = toCSSObject({ baseStyle, disableStyleProp })
 
-  const Component = emotionStyled(el as ComponentType, styledOptions)(CSSObject)
+  const Component = emotionStyled(
+    el as ComponentType<any>,
+    styledOptions,
+  )(CSSObject)
 
   const UIComponent = forwardRef<HTMLElement, any>((props, ref) => {
     const { colorMode, forced } = useColorMode()

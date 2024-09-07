@@ -31,13 +31,12 @@ export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
  */
 export const Swap = forwardRef<SwapProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Swap", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
+  const { className, from, to, animation, ...rest } =
+    omitThemeProps(mergedProps)
 
   const css: CSSUIObject = {
     ...styles,
   }
-
-  const { from, to, animation } = props
 
   return (
     <ui.div

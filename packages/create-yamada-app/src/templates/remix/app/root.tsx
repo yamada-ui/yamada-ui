@@ -5,7 +5,18 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react"
-import "./tailwind.css"
+import type { LinksFunction } from "@remix-run/node"
+import { UIProvider } from "@yamada-ui/react"
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "icon",
+      href: "/favicon.svg",
+      type: "image/svg+xml",
+    },
+  ]
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +28,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <UIProvider>{children}</UIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

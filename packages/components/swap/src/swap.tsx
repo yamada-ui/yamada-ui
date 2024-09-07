@@ -13,11 +13,14 @@ import { Rotate } from "./rotate"
 
 type AnimationType = "airy" | "rotate" | "horizontalFlip" | "verticalFlip"
 
-type SwapOptions = {
+export type SwapElements = {
   from: ReactElement
   to: ReactElement
-  animation: AnimationType
 }
+
+type SwapOptions = {
+  animation: AnimationType
+} & SwapElements
 
 export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
 

@@ -7,7 +7,9 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
+import { Airy } from "./airy"
 import { Flip } from "./flip"
+import { Rotate } from "./rotate"
 
 type AnimationType = "airy" | "rotate" | "horizontalFlip" | "verticalFlip"
 
@@ -41,12 +43,15 @@ export const Swap = forwardRef<SwapProps, "div">((props, ref) => {
       __css={css}
       {...rest}
     >
-      {animation === "horizontalFlip" && (
+      {animation === "airy" ? (
+        <Airy from={from} to={to} />
+      ) : animation === "rotate" ? (
+        <Rotate from={from} to={to} />
+      ) : animation === "horizontalFlip" ? (
         <Flip from={from} to={to} direction="horizontal" />
-      )}
-      {animation === "verticalFlip" && (
+      ) : animation === "verticalFlip" ? (
         <Flip from={from} to={to} direction="vertical" />
-      )}
+      ) : null}
     </ui.div>
   )
 })

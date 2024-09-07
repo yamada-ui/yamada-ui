@@ -1,10 +1,10 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentStyle,
-} from "@yamada-ui/core"
+  motionForwardRef,
+  type MotionProps,
+  type WithTransitionProps,
+} from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { Airy } from "./airy"
@@ -18,7 +18,7 @@ export type SwapElements = {
   to: ReactElement
 }
 
-type SwapOptions = {
+type SwapOptions = WithTransitionProps<MotionProps> & {
   animation: AnimationType
 } & SwapElements
 
@@ -29,31 +29,52 @@ export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
  *
  * @see Docs https://yamada-ui.com/components/motion/swap
  */
-export const Swap = forwardRef<SwapProps, "div">((props, ref) => {
+export const Swap = motionForwardRef<SwapProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Swap", props)
   const { className, from, to, animation, ...rest } =
     omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {
-    ...styles,
-  }
-
   return (
-    <ui.div
-      ref={ref}
-      className={cx("ui-swap", className)}
-      __css={css}
-      {...rest}
-    >
+    <>
       {animation === "airy" ? (
-        <Airy from={from} to={to} />
+        <Airy
+          ref={ref}
+          from={from}
+          to={to}
+          __css={styles}
+          className={cx("ui-swap__airy", className)}
+          {...rest}
+        />
       ) : animation === "rotate" ? (
-        <Rotate from={from} to={to} />
+        <Rotate
+          ref={ref}
+          from={from}
+          to={to}
+          __css={styles}
+          className={cx("ui-swap__rotate", className)}
+          {...rest}
+        />
       ) : animation === "horizontalFlip" ? (
-        <Flip from={from} to={to} direction="horizontal" />
+        <Flip
+          ref={ref}
+          from={from}
+          to={to}
+          __css={styles}
+          className={cx("ui-swap__horizontal-flip", className)}
+          flipDirection="horizontal"
+          {...rest}
+        />
       ) : animation === "verticalFlip" ? (
-        <Flip from={from} to={to} direction="vertical" />
+        <Flip
+          ref={ref}
+          from={from}
+          to={to}
+          __css={styles}
+          className={cx("ui-swap__vertical-flip", className)}
+          flipDirection="vertical"
+          {...rest}
+        />
       ) : null}
-    </ui.div>
+    </>
   )
 })

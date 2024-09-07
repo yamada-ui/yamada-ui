@@ -173,7 +173,7 @@ describe("<RadarChart />", () => {
       })
 
       expect(
-        container.querySelectorAll(".ui-radar-chart__active-dot").length,
+        container.querySelectorAll(".recharts-active-dot").length,
       ).toBeGreaterThan(0)
 
       rerender(

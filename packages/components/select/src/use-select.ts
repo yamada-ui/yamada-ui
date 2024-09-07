@@ -5,7 +5,7 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { PopoverProps } from "@yamada-ui/popover"
+import type { PopoverProps, ComboBoxProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
@@ -85,16 +85,7 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
   HTMLUIProps<"div">,
   "defaultValue" | "onChange" | "offset"
 > &
-  Omit<
-    PopoverProps,
-    | "initialFocusRef"
-    | "closeOnButton"
-    | "trigger"
-    | "autoFocus"
-    | "restoreFocus"
-    | "openDelay"
-    | "closeDelay"
-  > &
+  ComboBoxProps &
   FormControlOptions & {
     /**
      * The HTML `name` attribute used for forms.
@@ -145,32 +136,50 @@ export type UseSelectProps<T extends MaybeValue = string> = Omit<
     optionProps?: Omit<OptionProps, "value" | "children">
   }
 
-export const useSelect = <T extends MaybeValue = string>({
-  placeholder,
-  closeOnBlur = true,
-  closeOnEsc = true,
-  closeOnSelect = true,
-  placeholderInOptions = true,
-  omitSelectedValues = false,
-  maxSelectValues,
-  isEmpty,
-  placement = "bottom-start",
-  duration = 0.2,
-  isOpen: isOpenProp,
-  defaultIsOpen,
-  onOpen: onOpenProp,
-  onClose: onCloseProp,
-  optionProps,
-  ...rest
-}: UseSelectProps<T>) => {
-  rest = useFormControlProps(rest)
-
+export const useSelect = <T extends MaybeValue = string>(
+  props: UseSelectProps<T>,
+) => {
+  const {
+    placeholder,
+    closeOnSelect = true,
+    placeholderInOptions = true,
+    omitSelectedValues = false,
+    maxSelectValues,
+    isEmpty,
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+    optionProps,
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+    closeOnBlur = true,
+    closeOnEsc = true,
+    openDelay,
+    closeDelay,
+    isLazy,
+    lazyBehavior,
+    animation,
+    duration = 0.2,
+    offset,
+    gutter,
+    preventOverflow,
+    flip,
+    matchWidth = true,
+    boundary,
+    eventListeners,
+    strategy,
+    placement = "bottom-start",
+    modifiers,
+    ...rest
+  } = useFormControlProps(props)
   const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
     rest,
     formControlProperties,
   )
   const [containerProps, fieldProps] = splitObject(
-    omitObject(rest, ["value", "defaultValue", "onChange", "aria-readonly"]),
+    omitObject(rest, ["aria-readonly"]),
     layoutStyleProperties,
   )
 
@@ -185,9 +194,9 @@ export const useSelect = <T extends MaybeValue = string>({
   const timeoutIds = useRef<Set<any>>(new Set([]))
 
   const [value, setValue] = useControllableState({
-    value: rest.value,
-    defaultValue: rest.defaultValue,
-    onChange: rest.onChange,
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
   })
   const [label, setLabel] = useState<T | undefined>(undefined)
 
@@ -583,19 +592,52 @@ export const useSelect = <T extends MaybeValue = string>({
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
-      matchWidth: true,
-      ...rest,
+      closeOnBlur,
+      openDelay,
+      closeDelay,
+      isLazy,
+      lazyBehavior,
+      animation,
+      duration,
+      offset,
+      gutter,
+      preventOverflow,
+      flip,
+      matchWidth,
+      boundary,
+      eventListeners,
+      strategy,
+      placement,
+      modifiers,
       ...props,
+      trigger: "never",
+      closeOnButton: false,
       isOpen,
       onOpen,
       onClose,
-      placement,
-      duration,
-      trigger: "never",
-      closeOnButton: false,
-      closeOnBlur,
     }),
-    [duration, closeOnBlur, onClose, onOpen, placement, rest, isOpen],
+    [
+      closeOnBlur,
+      openDelay,
+      closeDelay,
+      isLazy,
+      lazyBehavior,
+      animation,
+      duration,
+      offset,
+      gutter,
+      preventOverflow,
+      flip,
+      matchWidth,
+      boundary,
+      eventListeners,
+      strategy,
+      placement,
+      modifiers,
+      isOpen,
+      onOpen,
+      onClose,
+    ],
   )
 
   const getContainerProps: UIPropGetter = useCallback(
@@ -779,7 +821,7 @@ export const useSelectOptionGroup = ({
 
   const isEmpty = !childValues.length
 
-  const computedRest = splitObject(rest, layoutStyleProperties)
+  const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
@@ -798,14 +840,14 @@ export const useSelectOptionGroup = ({
       return {
         ref,
         ...props,
-        ...computedRest[0],
+        ...containerProps,
         style: isEmpty ? style : undefined,
       }
     },
-    [computedRest, isEmpty],
+    [containerProps, isEmpty],
   )
 
-  const getGroupProps: UIPropGetter = useCallback(
+  const getGroupProps: UIPropGetter<"ul"> = useCallback(
     ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
       ariaLabel ??= label
 
@@ -814,11 +856,11 @@ export const useSelectOptionGroup = ({
         ref,
         role: "group",
         ...props,
-        ...computedRest[1],
+        ...groupProps,
         "data-label": label,
       }
     },
-    [computedRest, label],
+    [groupProps, label],
   )
 
   return {

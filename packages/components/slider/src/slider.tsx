@@ -153,21 +153,22 @@ export const useSlider = ({
     orientation = "horizontal",
     thumbSize: thumbSizeProp,
     isReversed,
-    required,
-    disabled,
-    readOnly,
     value: valueProp,
     onChange,
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
-    onFocus,
-    onBlur,
-    "aria-readonly": ariaReadonly,
     "aria-valuetext": ariaValueText,
     ...rest
   } = useFormControlProps(props)
-
-  const formControlProps = pickObject(rest, formControlProperties)
+  const {
+    required,
+    disabled,
+    readOnly,
+    onFocus,
+    onBlur,
+    "aria-readonly": ariaReadonly,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
 
   if (max < min)
     throw new Error("Do not assign a number less than 'min' to 'max'")
@@ -378,7 +379,7 @@ export const useSlider = ({
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
         style,
-        var: [
+        vars: [
           {
             name: "thumbSize",
             token: "sizes",

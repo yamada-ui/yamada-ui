@@ -104,32 +104,25 @@ export type NativeSelectProps = Omit<HTMLUIProps<"select">, "size"> &
 export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   (props, ref) => {
     const [styles, mergedProps] = useMultiComponentStyle("NativeSelect", props)
-    let {
+    const {
       className,
       children,
       placeholderInOptions = true,
       color,
-      h,
-      height,
-      minH,
-      minHeight,
       items = [],
       placeholder,
       containerProps,
       iconProps,
       ...rest
-    } = omitThemeProps(mergedProps)
-
-    rest = useFormControlProps(rest)
-
-    const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
-      rest,
-      formControlProperties,
-    )
-    const [layoutProps, selectProps] = splitObject(
-      omitObject(rest, ["aria-readonly"]),
-      layoutStyleProperties,
-    )
+    } = useFormControlProps(omitThemeProps(mergedProps))
+    const {
+      "aria-readonly": _ariaReadonly,
+      onFocus: _onFocus,
+      onBlur: _onBlur,
+      ...formControlProps
+    } = pickObject(rest, formControlProperties)
+    const [{ h, height, minH, minHeight, ...layoutProps }, selectProps] =
+      splitObject(omitObject(rest, ["aria-readonly"]), layoutStyleProperties)
 
     let computedChildren: ReactElement[] = []
 

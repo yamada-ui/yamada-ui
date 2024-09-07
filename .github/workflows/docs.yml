@@ -23,12 +23,26 @@ jobs:
         id: check_pr
         run: |
           pr_exists=$(gh pr list --base main --head documentation --json number --jq 'length')
-          echo "pr_exists=$pr_exists" >> $GITHUB_OUTPUT
+          if [ "$pr_exists" -eq 0 ]; then
+            echo "pr_exists=false" >> $GITHUB_OUTPUT
+          else
+            echo "pr_exists=true" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check for commits
+        id: check_commits
+        run: |
+          commits=$(git log main..documentation --oneline)
+          if [ -z "$commits" ]; then
+            echo "commits_exist=false" >> $GITHUB_OUTPUT
+          else
+            echo "commits_exist=true" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
       - name: Create PR
-        if: steps.check_pr.outputs.pr_exists == '0'
+        if: steps.check_pr.outputs.pr_exists == 'false' && steps.check_commits.outputs.commits_exist == 'true'
         run: |
           gh pr create --base main --head documentation --title "Updated documentation" --body "Automated changes by GitHub action" --reviewer hirotomoyamada --assignee hirotomoyamada
         env:

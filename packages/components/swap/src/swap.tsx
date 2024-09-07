@@ -9,7 +9,7 @@ import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { Flip } from "./flip"
 
-type AnimationType = "horizontalFlip" | "verticalFlip"
+type AnimationType = "airy" | "rotate" | "horizontalFlip" | "verticalFlip"
 
 type SwapOptions = {
   from: ReactElement

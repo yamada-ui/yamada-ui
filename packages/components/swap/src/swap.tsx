@@ -25,7 +25,7 @@ type SwapOptions = WithTransitionProps<MotionProps> & {
 export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
 
 /**
- * `Swap` is component.
+ * `Swap` is an animation component that swaps two elements.
  *
  * @see Docs https://yamada-ui.com/components/motion/swap
  */

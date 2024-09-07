@@ -1,88 +1,113 @@
-import { motion } from "@yamada-ui/motion"
+import type { ThemeProps } from "@yamada-ui/core"
+import { useComponentStyle } from "@yamada-ui/core"
+import type { MotionProps, WithTransitionProps } from "@yamada-ui/motion"
+import { motionForwardRef, motion } from "@yamada-ui/motion"
+import { cx } from "@yamada-ui/utils"
 import { useState } from "react"
-import type { CSSProperties, ReactElement, FC } from "react"
+import type { SwapElements } from "./swap"
 
-type VerticalFlipProps = {
-  from: ReactElement
-  to: ReactElement
-  direction: "horizontal" | "vertical"
+type FlipDirection = "horizontal" | "vertical"
+
+type FlipProps = {
+  flipDirection: FlipDirection
+} & WithTransitionProps<MotionProps> &
+  ThemeProps<"Flip"> &
+  SwapElements
+
+type Rotate = {
+  rotateY?: number
+  rotateX?: number
 }
 
-const swapStyle: CSSProperties = {
-  position: "absolute",
-  top: 0,
-  backfaceVisibility: "hidden",
+type MotionState = {
+  initial: Rotate
+  animate: (isVisible: boolean) => Rotate
 }
 
-const DURATION = 0.5
+type FlipMotion = {
+  [key in FlipDirection]: {
+    from: MotionState
+    to: MotionState
+  }
+}
 
-export const Flip: FC<VerticalFlipProps> = ({ from, to, direction }) => {
+const flipMotion: FlipMotion = {
+  horizontal: {
+    from: {
+      initial: { rotateY: 0 },
+      animate: (isVisible: boolean) => ({ rotateY: isVisible ? 180 : 0 }),
+    },
+    to: {
+      initial: { rotateY: 180 },
+      animate: (isVisible: boolean) => ({ rotateY: isVisible ? 0 : 180 }),
+    },
+  },
+  vertical: {
+    from: {
+      initial: { rotateX: 0 },
+      animate: (isVisible: boolean) => ({ rotateX: isVisible ? 180 : 0 }),
+    },
+    to: {
+      initial: { rotateX: 180 },
+      animate: (isVisible: boolean) => ({ rotateX: isVisible ? 0 : 180 }),
+    },
+  },
+}
+
+export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
+  const [style, mergedProps] = useComponentStyle("Flip", props)
   const [isVisible, setIsVisible] = useState(false)
 
-  const switchVisibility = () => {
-    setIsVisible(!isVisible)
-  }
+  const { from, to, flipDirection, className, ...rest } = mergedProps
 
-  const flipMotion = {
-    horizontal: {
-      from: {
-        initial: {
-          rotateY: 0,
-        },
-        animate: {
-          rotateY: isVisible ? 180 : 0,
-        },
-      },
-      to: {
-        initial: {
-          rotateY: 180,
-        },
-        animate: {
-          rotateY: isVisible ? 0 : 180,
-        },
-      },
-    },
-    vertical: {
-      from: {
-        initial: {
-          rotateX: 0,
-        },
-        animate: {
-          rotateX: isVisible ? 180 : 0,
-        },
-      },
-      to: {
-        initial: {
-          rotateX: 180,
-        },
-        animate: {
-          rotateX: isVisible ? 0 : 180,
-        },
-      },
-    },
+  const switchVisibility = () => {
+    setIsVisible((prev) => !prev)
   }
 
   return (
-    <>
+    <motion.div
+      ref={ref}
+      style={{
+        position: "relative",
+
+        perspective: 1000, // 원근감을 주기 위한 설정
+      }}
+    >
       <motion.div
+        custom={isVisible}
+        className="ui-swap__from"
         onClick={switchVisibility}
-        initial={flipMotion[direction].from.initial}
-        animate={flipMotion[direction].from.animate}
-        transition={{ duration: DURATION }}
-        style={swapStyle}
+        variants={flipMotion[flipDirection].from}
+        initial="initial"
+        animate="animate"
+        __css={style}
+        style={{
+          position: "absolute",
+          top: 0,
+          backfaceVisibility: "hidden",
+        }}
+        {...rest}
       >
         {from}
       </motion.div>
 
       <motion.div
+        custom={isVisible}
+        className={cx(`ui-flip__to`, className)}
         onClick={switchVisibility}
-        initial={flipMotion[direction].to.initial}
-        animate={flipMotion[direction].to.animate}
-        transition={{ duration: DURATION }}
-        style={swapStyle}
+        variants={flipMotion[flipDirection].to}
+        initial="initial"
+        animate="animate"
+        __css={style}
+        style={{
+          position: "absolute",
+          top: 0,
+          backfaceVisibility: "hidden",
+        }}
+        {...rest}
       >
         {to}
       </motion.div>
-    </>
+    </motion.div>
   )
-}
+})

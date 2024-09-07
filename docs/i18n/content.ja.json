@@ -2159,6 +2159,145 @@
     }
   },
   {
+    "title": "RadialChart",
+    "type": "page",
+    "description": "`RadialChart`は、複数のデータを比較するための放射状チャートを描画するコンポーネントです。",
+    "slug": "/components/data-display/radial-chart",
+    "hierarchy": { "lv1": "RadialChart" }
+  },
+  {
+    "title": "インポート",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#インポート",
+    "hierarchy": { "lv1": "RadialChart", "lv2": "インポート" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#使い方",
+    "hierarchy": { "lv1": "RadialChart", "lv2": "使い方" }
+  },
+  {
+    "title": "サイズを変更する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#サイズを変更する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "サイズを変更する"
+    }
+  },
+  {
+    "title": "凡例を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#凡例を表示する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "凡例を表示する"
+    }
+  },
+  {
+    "title": "間隔を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#間隔を調整する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "間隔を調整する"
+    }
+  },
+  {
+    "title": "内半径、外半径を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#内半径外半径を調整する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "内半径、外半径を調整する"
+    }
+  },
+  {
+    "title": "開始、終了の角度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#開始終了の角度を調整する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "開始、終了の角度を調整する"
+    }
+  },
+  {
+    "title": "ラベルを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#ラベルを表示する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "ラベルを表示する"
+    }
+  },
+  {
+    "title": "ツールチップに表示するデータを切り替える",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#ツールチップに表示するデータを切り替える",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップに表示するデータを切り替える"
+    }
+  },
+  {
+    "title": "ツールチップを非表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#ツールチップを非表示にする",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "ツールチップを非表示にする"
+    }
+  },
+  {
+    "title": "フォーマットする",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#フォーマットする",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "フォーマットする"
+    }
+  },
+  {
+    "title": "透明度を調整する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#透明度を調整する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "グリッドを表示にする",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#グリッドを表示にする",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "グリッドを表示にする"
+    }
+  },
+  {
+    "title": "背景を表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/radial-chart#背景を表示する",
+    "hierarchy": {
+      "lv1": "RadialChart",
+      "lv2": "使い方",
+      "lv3": "背景を表示する"
+    }
+  },
+  {
     "title": "Reorder",
     "type": "page",
     "description": "`Reorder`は、項目の順序をドラッグアンドドロップで変更できるコンポーネントです。",
@@ -2697,6 +2836,16 @@
       "lv1": "Table",
       "lv2": "使い方",
       "lv3": "行のクリックイベントをハンドルする"
+    }
+  },
+  {
+    "title": "行のダブルクリックイベントをハンドルする",
+    "type": "fragment",
+    "slug": "/components/data-display/table#行のダブルクリックイベントをハンドルする",
+    "hierarchy": {
+      "lv1": "Table",
+      "lv2": "使い方",
+      "lv3": "行のダブルクリックイベントをハンドルする"
     }
   },
   {
@@ -3545,6 +3694,26 @@
       "lv1": "Autocomplete",
       "lv2": "使い方",
       "lv3": "デフォルトの値を設定する"
+    }
+  },
+  {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/autocomplete#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "Autocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
     }
   },
   {
@@ -6388,6 +6557,26 @@
     }
   },
   {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-select#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "MultiSelect",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
+    }
+  },
+  {
     "title": "グループ化する",
     "type": "fragment",
     "slug": "/components/forms/multi-select#グループ化する",
@@ -8056,6 +8245,26 @@
       "lv1": "Select",
       "lv2": "使い方",
       "lv3": "デフォルトの値を設定する"
+    }
+  },
+  {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/select#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/select#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "Select",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
     }
   },
   {
@@ -12863,6 +13072,16 @@
     }
   },
   {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/hooks/use-notice#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "useNotice",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
+    }
+  },
+  {
     "title": "コンポーネントをカスタマイズする",
     "type": "fragment",
     "slug": "/hooks/use-notice#コンポーネントをカスタマイズする",
@@ -13091,6 +13310,16 @@
       "lv1": "useSnacks",
       "lv2": "通知をカスタマイズする",
       "lv3": "通知を閉じる"
+    }
+  },
+  {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/hooks/use-snacks#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "useSnacks",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
     }
   },
   {
@@ -13575,6 +13804,18 @@
     "hierarchy": { "lv1": "CLI", "lv2": "使い方" }
   },
   {
+    "title": "型定義を更新する",
+    "type": "fragment",
+    "slug": "/styled-system/cli#型定義を更新する",
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": "型定義を更新する" }
+  },
+  {
+    "title": "テーマを生成する",
+    "type": "fragment",
+    "slug": "/styled-system/cli#テーマを生成する",
+    "hierarchy": { "lv1": "CLI", "lv2": "使い方", "lv3": "テーマを生成する" }
+  },
+  {
     "title": "カラーモード",
     "type": "page",
     "description": "Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。",
@@ -13762,6 +14003,142 @@
     "hierarchy": { "lv1": "コンフィグ" }
   },
   {
+    "title": "CSSカスタムプロパティ(変数)",
+    "type": "page",
+    "description": "Yamada UIでCSSカスタムプロパティ(変数)を作成・参照する方法。",
+    "slug": "/styled-system/css-custom-properties",
+    "hierarchy": { "lv1": "CSSカスタムプロパティ(変数)" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/styled-system/css-custom-properties#使い方",
+    "hierarchy": { "lv1": "CSSカスタムプロパティ(変数)", "lv2": "使い方" }
+  },
+  {
+    "title": "CSS値関数",
+    "type": "page",
+    "description": "Yamada UIは、CSS値関数をより便利にした様々な関数を提供しています。",
+    "slug": "/styled-system/css-value-functions",
+    "hierarchy": { "lv1": "CSS値関数" }
+  },
+  {
+    "title": "計算・比較",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#計算・比較",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "計算・比較" }
+  },
+  {
+    "title": "calc",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#calc",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "計算・比較", "lv3": "calc" }
+  },
+  {
+    "title": "min",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#min",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "計算・比較", "lv3": "min" }
+  },
+  {
+    "title": "max",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#max",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "計算・比較", "lv3": "max" }
+  },
+  {
+    "title": "clamp",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#clamp",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "計算・比較", "lv3": "clamp" }
+  },
+  {
+    "title": "カラー",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#カラー",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "カラー" }
+  },
+  {
+    "title": "mix",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#mix",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "カラー", "lv3": "mix" }
+  },
+  {
+    "title": "tint",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#tint",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "カラー", "lv3": "tint" }
+  },
+  {
+    "title": "shade",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#shade",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "カラー", "lv3": "shade" }
+  },
+  {
+    "title": "transparentize",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#transparentize",
+    "hierarchy": {
+      "lv1": "CSS値関数",
+      "lv2": "カラー",
+      "lv3": "transparentize"
+    }
+  },
+  {
+    "title": "tone",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#tone",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "カラー", "lv3": "tone" }
+  },
+  {
+    "title": "グラデーション",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#グラデーション",
+    "hierarchy": { "lv1": "CSS値関数", "lv2": "グラデーション" }
+  },
+  {
+    "title": "色のカスタマイズ",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#色のカスタマイズ",
+    "hierarchy": {
+      "lv1": "CSS値関数",
+      "lv2": "グラデーション",
+      "lv3": "色のカスタマイズ"
+    }
+  },
+  {
+    "title": "グラデーションのトークン",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#グラデーションのトークン",
+    "hierarchy": {
+      "lv1": "CSS値関数",
+      "lv2": "グラデーション",
+      "lv3": "グラデーションのトークン"
+    }
+  },
+  {
+    "title": "テキストのグラデーション",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#テキストのグラデーション",
+    "hierarchy": {
+      "lv1": "CSS値関数",
+      "lv2": "グラデーション",
+      "lv3": "テキストのグラデーション"
+    }
+  },
+  {
+    "title": "レスポンシブなグラデーション",
+    "type": "fragment",
+    "slug": "/styled-system/css-value-functions#レスポンシブなグラデーション",
+    "hierarchy": {
+      "lv1": "CSS値関数",
+      "lv2": "グラデーション",
+      "lv3": "レスポンシブなグラデーション"
+    }
+  },
+  {
     "title": "グローバルスタイル",
     "type": "page",
     "description": "グローバルスタイルのカスタマイズおよび追加する方法。",
@@ -13787,59 +14164,33 @@
     }
   },
   {
-    "title": "グラデーション",
-    "type": "page",
-    "description": "Yamada UIは、すぐに使えるグラデーションをサポートしています。",
-    "slug": "/styled-system/gradient",
-    "hierarchy": { "lv1": "グラデーション" }
-  },
-  {
-    "title": "使い方",
-    "type": "fragment",
-    "slug": "/styled-system/gradient#使い方",
-    "hierarchy": { "lv1": "グラデーション", "lv2": "使い方" }
-  },
-  {
-    "title": "色のカスタマイズ",
-    "type": "fragment",
-    "slug": "/styled-system/gradient#色のカスタマイズ",
-    "hierarchy": {
-      "lv1": "グラデーション",
-      "lv2": "使い方",
-      "lv3": "色のカスタマイズ"
-    }
-  },
-  {
-    "title": "グラデーションのトークン",
-    "type": "fragment",
-    "slug": "/styled-system/gradient#グラデーションのトークン",
-    "hierarchy": {
-      "lv1": "グラデーション",
-      "lv2": "使い方",
-      "lv3": "グラデーションのトークン"
-    }
-  },
-  {
-    "title": "テキストのグラデーション",
-    "type": "fragment",
-    "slug": "/styled-system/gradient#テキストのグラデーション",
-    "hierarchy": { "lv1": "グラデーション", "lv2": "テキストのグラデーション" }
-  },
-  {
-    "title": "レスポンシブなグラデーション",
-    "type": "fragment",
-    "slug": "/styled-system/gradient#レスポンシブなグラデーション",
-    "hierarchy": {
-      "lv1": "グラデーション",
-      "lv2": "レスポンシブなグラデーション"
-    }
-  },
-  {
     "title": "スタイルシステム",
     "type": "page",
     "description": "Yamada UIのStyle propsやテーマについて学ぶ。Style propsは、コンポーネントにpropsを渡すだけでコンポーネントのスタイルを変更する方法です。",
     "slug": "/styled-system",
     "hierarchy": { "lv1": "スタイルシステム" }
+  },
+  {
+    "title": "インターポレーション",
+    "type": "page",
+    "description": "Yamada UIでCSSカスタムプロパティ(変数)に簡単にアクセスできる方法。",
+    "slug": "/styled-system/interpolation",
+    "hierarchy": { "lv1": "インターポレーション" }
+  },
+  {
+    "title": "使い方",
+    "type": "fragment",
+    "slug": "/styled-system/interpolation#使い方",
+    "hierarchy": { "lv1": "インターポレーション", "lv2": "使い方" }
+  },
+  {
+    "title": "テーマのトークンを参照する",
+    "type": "fragment",
+    "slug": "/styled-system/interpolation#テーマのトークンを参照する",
+    "hierarchy": {
+      "lv1": "インターポレーション",
+      "lv2": "テーマのトークンを参照する"
+    }
   },
   {
     "title": "ローディング",
@@ -14039,6 +14390,16 @@
       "lv1": "通知",
       "lv2": "通知をカスタマイズする",
       "lv3": "通知を閉じる"
+    }
+  },
+  {
+    "title": "閉じるイベントをカスタマイズする",
+    "type": "fragment",
+    "slug": "/styled-system/notification#閉じるイベントをカスタマイズする",
+    "hierarchy": {
+      "lv1": "通知",
+      "lv2": "通知をカスタマイズする",
+      "lv3": "閉じるイベントをカスタマイズする"
     }
   },
   {
@@ -14566,6 +14927,38 @@
       "lv1": "テーマをカスタマイズする",
       "lv2": "ユーティリティ",
       "lv3": "withDefaultPropsを使う"
+    }
+  },
+  {
+    "title": "generateを使う",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#generateを使う",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う"
+    }
+  },
+  {
+    "title": "余白をカスタマイズする",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#余白をカスタマイズする",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う",
+      "lv4": "余白をカスタマイズする"
+    }
+  },
+  {
+    "title": "カラーのトーンを生成する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#カラーのトーンを生成する",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "ユーティリティ",
+      "lv3": "generateを使う",
+      "lv4": "カラーのトーンを生成する"
     }
   },
   {

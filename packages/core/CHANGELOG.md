@@ -1,5 +1,63 @@
 # @yamada-ui/core
 
+## 1.13.0
+
+### Minor Changes
+
+- [#2585](https://github.com/yamada-ui/yamada-ui/pull/2585) [`f4b5abe`](https://github.com/yamada-ui/yamada-ui/commit/f4b5abe6b5afb01e034f9d039bf2607ec9919ed2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add grid handling and update transforms.
+
+- [#2551](https://github.com/yamada-ui/yamada-ui/pull/2551) [`3aa0d33`](https://github.com/yamada-ui/yamada-ui/commit/3aa0d33a62f968ea5de9c760502170ea32f4b197) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `color-mix` util function.
+
+- [#2577](https://github.com/yamada-ui/yamada-ui/pull/2577) [`4ea6ad1`](https://github.com/yamada-ui/yamada-ui/commit/4ea6ad199ba86b60bb58f747efc1b7e27c133bf2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add calc utility for dynamic styles across system.
+
+- [#2588](https://github.com/yamada-ui/yamada-ui/pull/2588) [`3802f36`](https://github.com/yamada-ui/yamada-ui/commit/3802f36ec21686b760241d9883e0b6fbd648d080) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `tint`, `shade`, `transparentize` and `tone` CSS value functions.
+
+- [#2549](https://github.com/yamada-ui/yamada-ui/pull/2549) [`bf07a0d`](https://github.com/yamada-ui/yamada-ui/commit/bf07a0da61055bc97f548bfbc4a472aa42eccb9d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enabled access to CSS variables from CSS string values using the `# @yamada-ui/core symbol.
+
+### Patch Changes
+
+- [#2476](https://github.com/yamada-ui/yamada-ui/pull/2476) [`17ecc9e`](https://github.com/yamada-ui/yamada-ui/commit/17ecc9e18f7e17abc4730879225dacd7890b2a33) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - `content: ''` is set by default for CSS pseudo-elements `:before` and `:after`.
+
+- [#2577](https://github.com/yamada-ui/yamada-ui/pull/2577) [`2017786`](https://github.com/yamada-ui/yamada-ui/commit/2017786ad5dee86db1a8b6987b531a02677ecf95) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update token handling in styles and props.
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`3ba3f58`](https://github.com/yamada-ui/yamada-ui/commit/3ba3f58686fe436fdbfb2253f5730bb52f67bfd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the git repository URL.
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`74045d7`](https://github.com/yamada-ui/yamada-ui/commit/74045d7c4db435d5aca9f62d17a9b34485ea37ef) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added instructions for installation using [bun](https://bun.sh/) to `README.md`.
+
+- [#2554](https://github.com/yamada-ui/yamada-ui/pull/2554) [`bb96e05`](https://github.com/yamada-ui/yamada-ui/commit/bb96e058136c056c3d4655b0022d0203947582f7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the semantic color schema was not generated correctly.
+
+- [#2622](https://github.com/yamada-ui/yamada-ui/pull/2622) [`61b6b5a`](https://github.com/yamada-ui/yamada-ui/commit/61b6b5a0935e826a20c7b594b57cd724b2d96330) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update value check to use `isNumeric` function.
+
+- [#2612](https://github.com/yamada-ui/yamada-ui/pull/2612) [`d5b6191`](https://github.com/yamada-ui/yamada-ui/commit/d5b6191963987454e37706ee245ad883e0dbdfa1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify `shouldForwardProp` logic.
+
+- [#2441](https://github.com/yamada-ui/yamada-ui/pull/2441) [`a5b713f`](https://github.com/yamada-ui/yamada-ui/commit/a5b713fac10d3f572fdc8f2be26f544a8fdb03d3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `HTMLUIPropsWithoutAs` and `HTMLUIPropsWithRef` types.
+
+- [#2476](https://github.com/yamada-ui/yamada-ui/pull/2476) [`8f93e4e`](https://github.com/yamada-ui/yamada-ui/commit/8f93e4e30c42ee04c9ed55fa72857ab79e2a2146) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - exported `pseudosSelectors` and `PseudoSelectors` type.
+
+- [#2577](https://github.com/yamada-ui/yamada-ui/pull/2577) [`05e2c92`](https://github.com/yamada-ui/yamada-ui/commit/05e2c92b655792a32f2013b5b00343a66e63167a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor and optimize transformation utils.
+
+- [#2473](https://github.com/yamada-ui/yamada-ui/pull/2473) [`4133548`](https://github.com/yamada-ui/yamada-ui/commit/4133548d89e76d676afa6233c9bd7e745b073dbf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added gradient functionality to `borderImageSource`, `listStyleImage` and `maskImage`.
+
+- [#2503](https://github.com/yamada-ui/yamada-ui/pull/2503) [`5b274bb`](https://github.com/yamada-ui/yamada-ui/commit/5b274bb002f069f7a0ea6ab811ad1035e4c02e72) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#2585](https://github.com/yamada-ui/yamada-ui/pull/2585) [`df1cdcc`](https://github.com/yamada-ui/yamada-ui/commit/df1cdcceeb042571ebf9e39c77feb7b4ec1c0eda) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Rename and simplify export statements.
+
+- [#2609](https://github.com/yamada-ui/yamada-ui/pull/2609) [`167ddb2`](https://github.com/yamada-ui/yamada-ui/commit/167ddb28c0225236e868739b575176c26f0f384c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update filter handling in styles and props.
+
+- [#2648](https://github.com/yamada-ui/yamada-ui/pull/2648) [`347921a`](https://github.com/yamada-ui/yamada-ui/commit/347921af320b44b7002ca161a1d05ed65934fe88) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `getVar` function.
+
+- [#2539](https://github.com/yamada-ui/yamada-ui/pull/2539) [`ee3e0a7`](https://github.com/yamada-ui/yamada-ui/commit/ee3e0a78e9b04ed59f7747fcab386bfc33c06985) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `undefined` type to `theme.__config`.
+
+- [#2582](https://github.com/yamada-ui/yamada-ui/pull/2582) [`9b2b246`](https://github.com/yamada-ui/yamada-ui/commit/9b2b24648a7ad8364f78974e71a5e9e592581b44) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the style would break when `color-mix` encountered values like `hsl(200deg 50% 80%)`.
+
+- [#2569](https://github.com/yamada-ui/yamada-ui/pull/2569) [`78ca0a4`](https://github.com/yamada-ui/yamada-ui/commit/78ca0a4867080eb62a3f4808401d04cbb687635e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update type definitions and logic.
+
+- [#2536](https://github.com/yamada-ui/yamada-ui/pull/2536) [`33fe193`](https://github.com/yamada-ui/yamada-ui/commit/33fe193fb4ebf2c57555030dc9132a118920c88f) Thanks [@manasan-iTL](https://github.com/manasan-iTL)! - add Text component to the default theme
+
+- Updated dependencies [[`613ed7d`](https://github.com/yamada-ui/yamada-ui/commit/613ed7d95268fa48c208e2efdadbd9822884ece1), [`3ba3f58`](https://github.com/yamada-ui/yamada-ui/commit/3ba3f58686fe436fdbfb2253f5730bb52f67bfd6), [`74045d7`](https://github.com/yamada-ui/yamada-ui/commit/74045d7c4db435d5aca9f62d17a9b34485ea37ef), [`88d682d`](https://github.com/yamada-ui/yamada-ui/commit/88d682da2e3a8fd49ad7eced29ec3609ada9c282), [`d240135`](https://github.com/yamada-ui/yamada-ui/commit/d240135c624336f0ff17c4ef4ea59427320b9221), [`1a81894`](https://github.com/yamada-ui/yamada-ui/commit/1a81894b09df4ca87a7c43009486c7dc04531b57), [`934242e`](https://github.com/yamada-ui/yamada-ui/commit/934242e6dcfa5945bb5bb331c0e6e9c8f680fe25)]:
+  - @yamada-ui/utils@1.4.0
+  - @yamada-ui/portal@1.0.19
+
 ## 1.12.0
 
 ### Minor Changes

@@ -40,7 +40,7 @@ describe("<MonthPicker />", () => {
       const { container } = render(<MonthPicker placeholder="basic" />)
 
       const headerLabelBtn = container.querySelector(
-        `button.ui-calendar__header__label`,
+        `button.ui-calendar__header-label`,
       )
       fireEvent.click(headerLabelBtn!)
 

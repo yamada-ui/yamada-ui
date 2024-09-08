@@ -6,13 +6,18 @@ import {
   isArray,
   isUndefined,
   isString,
+  isObject,
 } from "@yamada-ui/utils"
+import type { StyleConfig } from "../config"
 import { animation, gradient } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
+import type { StyleProperty } from "../styles"
+import { styles } from "../styles"
 import type { VariableTokens } from "../theme"
 import type { CSSMap, StyledTheme } from "../theme.types"
 import { css } from "./css"
+import type { CSSUIProps } from "./css.types"
 
 type ParsedValue = string | number | undefined
 
@@ -88,7 +93,30 @@ const getRelatedVar =
     return [variable, reference]
   }
 
-export const createVars =
+export const createVars = <Y extends Dict, M extends keyof Y = keyof Y>(
+  entryProps: Y,
+  keys: M[] | readonly M[],
+  format: (name: string) => string = (name) => name,
+): [Required<CSSUIProps>["vars"], { [key in M]?: string }] => {
+  const variables: CSSUIProps["vars"] = []
+  const props: { [key in M]?: string } = {}
+
+  Object.entries(entryProps).forEach(([name, value]) => {
+    if (!keys.includes(name as M)) return
+
+    const style: StyleConfig | true | undefined = styles[name as StyleProperty]
+
+    const token = isObject(style) ? style.token : undefined
+
+    variables.push({ name: format(name), token, value })
+
+    props[name as M] = `$${format(name)}`
+  })
+
+  return [variables, props]
+}
+
+export const createThemeVars =
   (tokens: VariableTokens, prefix: string = DEFAULT_VAR_PREFIX) =>
   ({
     prevTokens,
@@ -201,4 +229,4 @@ export const createVars =
     return { cssMap, cssVars }
   }
 
-export type CreateVars = ReturnType<typeof createVars>
+export type CreateThemeVars = ReturnType<typeof createThemeVars>

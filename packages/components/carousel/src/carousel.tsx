@@ -345,7 +345,7 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     ...styles.inner,
     ...(includeGapInSize
       ? {
-          var: [{ name: "gap", token: "spaces", value: gap }],
+          vars: [{ name: "gap", token: "spaces", value: gap }],
           [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * -1)",
         }
       : {}),

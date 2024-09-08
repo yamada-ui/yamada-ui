@@ -100,8 +100,8 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
 
     const css: CSSUIObject = {
       w: "100%",
-      var: [{ name: "space", token: "spaces", value: gap }],
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
+      vars: [{ name: "space", token: "spaces", value: gap }],
     }
 
     useEffect(() => {

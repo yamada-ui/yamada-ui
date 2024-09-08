@@ -178,7 +178,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                     maxW="6xl"
                     justifyContent="center"
                     gap={{ base: "lg", md: "md" }}
-                    var={[
+                    vars={[
                       {
                         name: "space",
                         token: "spaces",
@@ -232,7 +232,7 @@ const Page: NextPage<PageProps> = ({ currentVersion, documentTree }) => {
                     maxW="6xl"
                     justifyContent="center"
                     gap={{ base: "lg", md: "md" }}
-                    var={[
+                    vars={[
                       {
                         name: "space",
                         token: "spaces",

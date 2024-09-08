@@ -278,7 +278,7 @@ describe("CSS", () => {
 
   test("returns css var", () => {
     const result = css({
-      var: [{ name: "space", token: "spaces", value: "4" }],
+      vars: [{ name: "space", token: "spaces", value: "4" }],
     })(theme)
 
     expect(result).toStrictEqual({

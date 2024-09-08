@@ -5,7 +5,6 @@ import {
   type MotionProps,
   type WithTransitionProps,
 } from "@yamada-ui/motion"
-import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { Airy } from "./airy"
 import { Flip } from "./flip"
@@ -31,33 +30,19 @@ export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
  */
 export const Swap = motionForwardRef<SwapProps, "div">((props, ref) => {
   const [, mergedProps] = useComponentStyle("Swap", props)
-  const { className, from, to, animation, ...rest } =
-    omitThemeProps(mergedProps)
+  const { from, to, animation, ...rest } = omitThemeProps(mergedProps)
 
   return (
     <>
       {animation === "airy" ? (
-        <Airy
-          ref={ref}
-          from={from}
-          to={to}
-          className={cx("ui-swap__airy", className)}
-          {...rest}
-        />
+        <Airy ref={ref} from={from} to={to} {...rest} />
       ) : animation === "rotate" ? (
-        <Rotate
-          ref={ref}
-          from={from}
-          to={to}
-          className={cx("ui-swap__rotate", className)}
-          {...rest}
-        />
+        <Rotate ref={ref} from={from} to={to} {...rest} />
       ) : animation === "horizontalFlip" ? (
         <Flip
           ref={ref}
           from={from}
           to={to}
-          className={cx("ui-swap__horizontal-flip", className)}
           flipDirection="horizontal"
           {...rest}
         />
@@ -66,7 +51,6 @@ export const Swap = motionForwardRef<SwapProps, "div">((props, ref) => {
           ref={ref}
           from={from}
           to={to}
-          className={cx("ui-swap__vertical-flip", className)}
           flipDirection="vertical"
           {...rest}
         />

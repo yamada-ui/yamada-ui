@@ -33,8 +33,8 @@ export const airy: Story = () => {
       />
 
       <Swap
-        from={<Menu fontSize="50px" />}
-        to={<X fontSize="50px" />}
+        from={<Menu fontSize="6xl" />}
+        to={<X fontSize="6xl" />}
         animation="airy"
       />
     </Center>
@@ -63,8 +63,8 @@ export const rotate: Story = () => {
       />
 
       <Swap
-        from={<Apple fontSize="50px" />}
-        to={<Cherry fontSize="50px" />}
+        from={<Apple fontSize="6xl" />}
+        to={<Cherry fontSize="6xl" />}
         animation="rotate"
         rotate="360deg"
         style={{
@@ -135,8 +135,8 @@ export const horizontalFlip: Story = () => {
       />
 
       <Swap
-        from={<Apple fontSize="50px" />}
-        to={<Cherry fontSize="50px" />}
+        from={<Apple fontSize="6xl" />}
+        to={<Cherry fontSize="6xl" />}
         animation="horizontalFlip"
         style={{
           cursor: "pointer",
@@ -161,8 +161,8 @@ export const verticalFlip: Story = () => {
       />
 
       <Swap
-        from={<Apple fontSize="50px" />}
-        to={<Cherry fontSize="50px" />}
+        from={<Apple fontSize="6xl" />}
+        to={<Cherry fontSize="6xl" />}
         animation="verticalFlip"
       />
     </Center>

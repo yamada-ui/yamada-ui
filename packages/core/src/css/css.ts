@@ -172,3 +172,5 @@ export const css =
 
     return createCSS(cssOrFunc)
   }
+
+export type CSSFunction = typeof css

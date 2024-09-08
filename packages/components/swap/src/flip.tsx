@@ -1,6 +1,10 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, WithTransitionProps } from "@yamada-ui/motion"
+import type {
+  MotionProps,
+  MotionTransition,
+  WithTransitionProps,
+} from "@yamada-ui/motion"
 import { motionForwardRef, motion } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 import { useLayoutEffect, useRef, useState } from "react"
@@ -10,6 +14,7 @@ type FlipDirection = "horizontal" | "vertical"
 
 type FlipProps = {
   flipDirection: FlipDirection
+  motionTransition?: MotionTransition
 } & WithTransitionProps<MotionProps> &
   ThemeProps<"Flip"> &
   SwapElements
@@ -70,7 +75,18 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   const fromRef = useRef<HTMLDivElement | null>(null)
   const toRef = useRef<HTMLDivElement | null>(null)
 
-  const { from, to, flipDirection, className, ...rest } = mergedProps
+  const {
+    from,
+    to,
+    flipDirection,
+    motionTransition = {
+      type: "spring",
+      stiffness: 80,
+      damping: 10,
+    },
+    className,
+    ...rest
+  } = mergedProps
 
   const switchVisibility = () => {
     setIsVisible((prev) => !prev)
@@ -111,17 +127,18 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         h: dimensions.height ? `${dimensions.height}px` : "auto",
         ...style,
       }}
+      onClick={switchVisibility}
       {...rest}
     >
       <motion.div
         ref={fromRef}
         custom={isVisible}
         className={cx(`ui-swap__${flipDirection}-flip-from`, className)}
-        onClick={switchVisibility}
         variants={flipMotion[flipDirection].from}
         initial="initial"
         animate="animate"
         __css={flipStyle}
+        transition={motionTransition}
       >
         {from}
       </motion.div>
@@ -130,11 +147,11 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         ref={toRef}
         custom={isVisible}
         className={cx(`ui-swap__${flipDirection}-flip-to`, className)}
-        onClick={switchVisibility}
         variants={flipMotion[flipDirection].to}
         initial="initial"
         animate="animate"
         __css={flipStyle}
+        transition={motionTransition}
       >
         {to}
       </motion.div>

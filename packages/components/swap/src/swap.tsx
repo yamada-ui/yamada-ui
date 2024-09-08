@@ -1,9 +1,10 @@
 import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import {
-  motionForwardRef,
-  type MotionProps,
-  type WithTransitionProps,
+import { motionForwardRef } from "@yamada-ui/motion"
+import type {
+  WithTransitionProps,
+  MotionProps,
+  MotionTransition,
 } from "@yamada-ui/motion"
 import type { ReactElement } from "react"
 import { Airy } from "./airy"
@@ -17,9 +18,15 @@ export type SwapElements = {
   to: ReactElement
 }
 
-type SwapOptions = WithTransitionProps<MotionProps> & {
+type SwapOptions = {
+  /**
+   * Motion transition settings.
+   */
+  motionTransition?: MotionTransition
+
   animation: AnimationType
-} & SwapElements
+} & WithTransitionProps<MotionProps> &
+  SwapElements
 
 export type SwapProps = HTMLUIProps<"div"> & ThemeProps<"Swap"> & SwapOptions
 

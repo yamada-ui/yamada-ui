@@ -2,16 +2,14 @@ import type { CSSObject, Keyframes } from "@emotion/react"
 import { keyframes as emotionKeyframes } from "@emotion/react"
 import type { Dict } from "@yamada-ui/utils"
 import { isObject, isString } from "@yamada-ui/utils"
-import type { ColorMode, CSSObjectOrFunc, CSSUIObject } from "../css"
+import type { ColorMode, CSSFunction } from "../css"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 
 export type Transform = (
   value: any,
   theme: StyledTheme,
-  css: (
-    cssObject: CSSObjectOrFunc | CSSUIObject,
-  ) => (theme: StyledTheme) => Dict,
+  css: CSSFunction,
   prev?: Dict,
 ) => any
 
@@ -81,7 +79,7 @@ export const analyzeCSSValue = (value: any) => {
   return { isUnitless: !unit, value, unit }
 }
 
-export const tokenToCSSVar =
+export const tokenToVar =
   (token: ThemeToken, value: any) => (theme: StyledTheme) => {
     const match = isString(value)
       ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)

@@ -44,8 +44,8 @@ export const MAINTAINERS = [
   {
     name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
     description: {
-      en: "Passionate about web development and a student at the University of Auckland.",
-      ja: "ウェブ開発に情熱を持つオークランド大学の学生。",
+      en: "Developer from New Zealand and a university student.",
+      ja: "ニュージーランドのエンジニア。大学生。",
     },
     github: {
       id: "taroj1205",

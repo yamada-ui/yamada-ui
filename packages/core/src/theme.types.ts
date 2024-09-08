@@ -670,7 +670,11 @@ export type ComponentMultiStyle<
   variants?: ComponentMultiVariants<M>
 }
 
-export type CSSMap = Dict<{ value: any; var: string; ref: string }>
+export type CSSMap = Dict<{
+  value: string | number | undefined
+  var: string
+  ref: string
+}>
 
 export type CustomTheme = {}
 

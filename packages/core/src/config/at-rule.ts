@@ -1,7 +1,7 @@
 import { filterUndefined, toKebabCase, type Dict } from "@yamada-ui/utils"
 import type { StyledTheme } from "../theme.types"
 import type { Transform } from "./utils"
-import { tokenToCSSVar } from "./utils"
+import { tokenToVar } from "./utils"
 
 export const generateAtRule =
   (identifier: string): Transform =>
@@ -49,7 +49,7 @@ export const generateAtRule =
 
           query = Object.entries(resolvedRest)
             .map(([key, value]) => {
-              value = tokenToCSSVar("sizes", value)(theme)
+              value = tokenToVar("sizes", value)(theme)
 
               return `(${toKebabCase(key)}: ${value})`
             })

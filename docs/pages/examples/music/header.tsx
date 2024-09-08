@@ -285,7 +285,7 @@ const ControlMenuButton: FC<ControlMenuButtonProps> = memo(
       return (
         <MenuButton
           as={Button}
-          var={[
+          vars={[
             {
               name: "bg",
               token: "colors",

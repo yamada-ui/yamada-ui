@@ -19,6 +19,7 @@ export const CopyButton = memo(
           h="8"
           display="inline-flex"
           alignItems="center"
+          zIndex="auto"
         >
           <IconButton
             ref={ref}

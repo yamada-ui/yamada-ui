@@ -143,7 +143,7 @@ export const usePieChart = ({
     ...computedPieProps
   } = rest.pieProps ?? {}
 
-  const cellColors: CSSUIProps["var"] = useMemo(
+  const cellColors: CSSUIProps["vars"] = useMemo(
     () =>
       data.map(({ color }, index) => ({
         name: `cell-${index}`,
@@ -153,12 +153,12 @@ export const usePieChart = ({
     [data],
   )
 
-  const pieVars: CSSUIProps["var"] = useMemo(
+  const pieVars: CSSUIProps["vars"] = useMemo(
     () =>
       [
         ...cellColors,
         { name: "fill-opacity", value: fillOpacity },
-      ] as Required<CSSUIProps>["var"],
+      ] as Required<CSSUIProps>["vars"],
     [fillOpacity, cellColors],
   )
 

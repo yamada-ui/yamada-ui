@@ -166,7 +166,7 @@ export const useAreaChart = ({
     ...computedAreaProps
   } = rest.areaProps ?? {}
 
-  const areaColors: CSSUIProps["var"] = useMemo(
+  const areaColors: CSSUIProps["vars"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
         name: `area-${index}`,
@@ -176,7 +176,7 @@ export const useAreaChart = ({
     [series],
   )
 
-  const areaSplitColors: CSSUIProps["var"] = useMemo(
+  const areaSplitColors: CSSUIProps["vars"] = useMemo(
     () =>
       splitColors.map((color, index) => ({
         name: `area-split-${index}`,
@@ -186,7 +186,7 @@ export const useAreaChart = ({
     [splitColors],
   )
 
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
+  const referenceLineColors: CSSUIProps["vars"] = useMemo(
     () =>
       referenceLineProps
         ? referenceLineProps.map(({ color }, index) => ({
@@ -198,7 +198,7 @@ export const useAreaChart = ({
     [referenceLineProps],
   )
 
-  const areaVars: CSSUIProps["var"] = useMemo(() => {
+  const areaVars: CSSUIProps["vars"] = useMemo(() => {
     return [
       ...areaColors,
       ...areaSplitColors,

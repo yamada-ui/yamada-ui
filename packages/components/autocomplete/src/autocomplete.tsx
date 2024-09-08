@@ -64,7 +64,6 @@ type AutocompleteOptions = {
    * Props to be forwarded to the portal component.
    *
    * @default '{ isDisabled: true }'
-   *
    */
   portalProps?: Omit<PortalProps, "children">
   /**

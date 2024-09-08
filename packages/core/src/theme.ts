@@ -12,7 +12,7 @@ import {
   isArray,
 } from "@yamada-ui/utils"
 import type { CSSUIObject, ThemeProps, UIStyle, UIStyleProps } from "./css"
-import { analyzeBreakpoints, createVars } from "./css"
+import { analyzeBreakpoints, createThemeVars } from "./css"
 import type {
   CSSMap,
   ComponentMultiSizes,
@@ -66,9 +66,9 @@ export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
   const animationTokens = createTokens(theme, "animation")
 
   let { cssMap, cssVars } = mergeVars(
-    createVars(primaryTokens, prefix),
-    createVars(secondaryTokens, prefix),
-    createVars(animationTokens, prefix),
+    createThemeVars(primaryTokens, prefix),
+    createThemeVars(secondaryTokens, prefix),
+    createThemeVars(animationTokens, prefix),
   )()
 
   if (themeSchemes) {
@@ -80,9 +80,9 @@ export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
       const nestedAnimationTokens = createTokens(nestedTheme, "animation")
 
       let { cssVars: nestedCSSVars } = mergeVars(
-        createVars(nestedPrimaryTokens, prefix),
-        createVars(nestedSecondaryTokens, prefix),
-        createVars(nestedAnimationTokens, prefix),
+        createThemeVars(nestedPrimaryTokens, prefix),
+        createThemeVars(nestedSecondaryTokens, prefix),
+        createThemeVars(nestedAnimationTokens, prefix),
       )({ ...primaryTokens, ...secondaryTokens, ...animationTokens })
 
       cssVars = {

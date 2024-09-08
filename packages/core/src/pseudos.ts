@@ -2,7 +2,9 @@ import type { CSSUIObject } from "./css"
 
 export type Pseudos = typeof pseudos
 
-export type PseudoSelectors = Pseudos[keyof Pseudos]
+export type PseudosProperty = keyof Pseudos
+
+export type PseudoSelector = Pseudos[PseudosProperty]
 
 export const pseudos = {
   /**
@@ -256,7 +258,7 @@ export const pseudos = {
     ".ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
 } as const
 
-export const pseudosProperties = Object.keys(pseudos) as (keyof Pseudos)[]
+export const pseudosProperties = Object.keys(pseudos) as PseudosProperty[]
 
 export const pseudosSelectors = Object.values(pseudos)
 

@@ -159,6 +159,7 @@ export const Button = forwardRef<ButtonProps, "button">(
     return (
       <ui.button
         ref={mergeRefs(ref, buttonRef)}
+        aria-disabled={isDisabled ? true : undefined}
         as={as}
         className={cx("ui-button", className)}
         type={type ?? defaultType}

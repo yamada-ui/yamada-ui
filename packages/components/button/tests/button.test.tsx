@@ -122,5 +122,6 @@ describe("<Button />", () => {
 
     const buttonAsDiv = getByTestId("btn")
     expect(buttonAsDiv).toHaveAttribute("disabled")
+    expect(buttonAsDiv).toHaveAttribute("aria-disabled")
   })
 })

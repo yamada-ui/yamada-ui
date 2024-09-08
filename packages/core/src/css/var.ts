@@ -1,11 +1,22 @@
 import type { Dict } from "@yamada-ui/utils"
-import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
+import {
+  escape,
+  merge,
+  calc,
+  isArray,
+  isUndefined,
+  isObject,
+} from "@yamada-ui/utils"
+import type { StyleConfig } from "../config"
 import { animation, gradient } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
+import type { StyleProperty } from "../styles"
+import { styles } from "../styles"
 import type { VarTokens } from "../theme"
 import type { CSSMap, StyledTheme } from "../theme.types"
 import { css } from "./css"
+import type { CSSUIProps } from "./css.types"
 
 type Var = {
   variable: string
@@ -31,7 +42,30 @@ const tokenToVar = (token: string, prefix: string): Var => {
   return createVar(token, prefix)
 }
 
-export const createVars =
+export const createVars = <Y extends Dict, M extends keyof Y = keyof Y>(
+  entryProps: Y,
+  keys: M[] | readonly M[],
+  format: (name: string) => string = (name) => name,
+): [Required<CSSUIProps>["vars"], { [key in M]?: string }] => {
+  const variables: CSSUIProps["vars"] = []
+  const props: { [key in M]?: string } = {}
+
+  Object.entries(entryProps).forEach(([name, value]) => {
+    if (!keys.includes(name as M)) return
+
+    const style: StyleConfig | true | undefined = styles[name as StyleProperty]
+
+    const token = isObject(style) ? style.token : undefined
+
+    variables.push({ name: format(name), token, value })
+
+    props[name as M] = `$${format(name)}`
+  })
+
+  return [variables, props]
+}
+
+export const createThemeVars =
   (tokens: VarTokens, prefix: string = DEFAULT_VAR_PREFIX) =>
   ({
     baseTokens,

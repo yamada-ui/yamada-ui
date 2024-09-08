@@ -128,8 +128,7 @@ export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-donut-chart", className)}
-        var={pieVars}
-        __css={{ maxW: "full", ...styles.container }}
+        __css={{ maxW: "full", vars: pieVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

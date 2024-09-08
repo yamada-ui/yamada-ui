@@ -11,7 +11,13 @@ import {
   merge,
   isArray,
 } from "@yamada-ui/utils"
-import type { CSSUIObject, ThemeProps, UIStyle, UIStyleProps } from "./css"
+import type {
+  CreateVars,
+  CSSUIObject,
+  ThemeProps,
+  UIStyle,
+  UIStyleProps,
+} from "./css"
 import { analyzeBreakpoints, createVars } from "./css"
 import type {
   CSSMap,
@@ -22,12 +28,12 @@ import type {
   ThemeConfig,
 } from "./theme.types"
 
-type VarToken = {
+type VariableToken = {
   isSemantic: boolean
   value: string | number | [string | number, string | number]
 }
 
-export type VarTokens = Record<string, VarToken>
+export type VariableTokens = Record<string, VariableToken>
 
 const primaryTokens = [
   "blurs",
@@ -108,7 +114,7 @@ export const transformTheme = (theme: Dict, config?: ThemeConfig): Dict => {
 const createTokens = (
   theme: Dict,
   target: "primary" | "secondary" | "animation" = "primary",
-): VarTokens => {
+): VariableTokens => {
   let defaultTokens: string[] = []
   let semanticTokens: string[] = []
   let omitKeys: string[] = []
@@ -140,14 +146,14 @@ const createTokens = (
   const defaultTokenMap = pickObject(theme, defaultTokens)
   const semanticTokenMap = pickObject(theme.semantics ?? {}, semanticTokens)
 
-  const defaultTokenEntries: [string, VarToken][] = Object.entries(
+  const defaultTokenEntries: [string, VariableToken][] = Object.entries(
     flattenObject(defaultTokenMap, Infinity, omitKeys),
   ).map(([token, value]) => {
-    const enhancedToken: VarToken = { isSemantic: false, value }
+    const enhancedToken: VariableToken = { isSemantic: false, value }
 
     return [token, enhancedToken]
   })
-  const semanticTokenEntries: [string, VarToken][] = Object.entries(
+  const semanticTokenEntries: [string, VariableToken][] = Object.entries(
     flattenObject(semanticTokenMap, Infinity, omitKeys),
   ).reduce(
     (prev, [token, value]) => {
@@ -160,7 +166,7 @@ const createTokens = (
           prev.push([`colors.${semanticToken}.${tone}`, enhancedToken])
         } else {
           TONES.forEach((tone) => {
-            const enhancedToken: VarToken = {
+            const enhancedToken: VariableToken = {
               isSemantic: true,
               value: isArray(value)
                 ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
@@ -171,37 +177,31 @@ const createTokens = (
           })
         }
       } else {
-        const enhancedToken: VarToken = { isSemantic: true, value }
+        const enhancedToken: VariableToken = { isSemantic: true, value }
 
         prev.push([token, enhancedToken])
       }
 
       return prev
     },
-    [] as [string, VarToken][],
+    [] as [string, VariableToken][],
   )
 
-  return objectFromEntries<VarTokens>([
+  return objectFromEntries<VariableTokens>([
     ...defaultTokenEntries,
     ...semanticTokenEntries,
   ])
 }
 
 const mergeVars =
-  (
-    ...funcs: ((arg: {
-      baseTokens?: VarTokens
-      cssMap?: CSSMap
-      cssVars?: Dict
-    }) => { cssMap: CSSMap; cssVars: Dict })[]
-  ) =>
-  (baseTokens?: VarTokens) => {
+  (...funcs: CreateVars[]) =>
+  (prevTokens?: VariableTokens) => {
     let resolvedCSSMap: CSSMap = {}
     let resolvedCSSVars: Dict = {}
 
     for (const func of funcs) {
       const { cssMap, cssVars } = func({
-        baseTokens,
+        prevTokens,
         cssMap: resolvedCSSMap,
         cssVars: resolvedCSSVars,
       })

@@ -186,3 +186,5 @@ export const css =
       pseudos,
       disableStyleProp,
     })(cssOrFunc)
+
+export type CSSFunction = typeof css

@@ -212,15 +212,15 @@ const theme = transformTheme(
 
 describe("transforms", () => {
   test("var transform", () => {
-    const result1 = transforms.var(
+    const result1 = transforms.vars(
       [{ name: "space", token: "spaces", value: "4" }],
       theme,
     )
-    const result2 = transforms.var(
+    const result2 = transforms.vars(
       [{ name: "space", token: "spaces", value: { base: "4", md: "2" } }],
       theme,
     )
-    const result3 = transforms.var(
+    const result3 = transforms.vars(
       [{ name: "color", token: "colors", value: ["gray.500", "gray.300"] }],
       theme,
     )

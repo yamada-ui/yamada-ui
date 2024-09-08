@@ -305,7 +305,7 @@ const generateMDXFiles: p.RequiredRunner =
               path.join(dirPath, getMDXFileName("props", locale)),
             )
 
-            data = { ...data, tab: LOCALE_TAB_MAP[locale] }
+            data = { ...data, order: 1, tab: LOCALE_TAB_MAP[locale] }
 
             const content = await generateContent({ doc, locale })
 

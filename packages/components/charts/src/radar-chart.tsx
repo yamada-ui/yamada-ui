@@ -172,8 +172,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-radar-chart", className)}
-        var={radarVars}
-        __css={{ maxW: "full", ...styles.container }}
+        __css={{ maxW: "full", vars: radarVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

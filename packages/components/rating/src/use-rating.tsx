@@ -180,7 +180,7 @@ export const useRating = ({
   filledIcon,
   ...props
 }: UseRatingProps) => {
-  let { id, "aria-readonly": _isReadOnly, ...rest } = useFormControlProps(props)
+  let { id, ...rest } = useFormControlProps(props)
   const { disabled, readOnly } = rest
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -195,7 +195,10 @@ export const useRating = ({
   id ??= useId()
   name ??= `rating-${id}`
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const { "aria-readonly": _isReadOnly, ...formControlProps } = pickObject(
+    rest,
+    formControlProperties,
+  )
 
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)

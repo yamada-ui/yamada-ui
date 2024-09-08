@@ -20,6 +20,8 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
       width,
       minW,
       minWidth,
+      maxW,
+      maxWidth,
       contentProps,
       header,
       footer,
@@ -29,7 +31,6 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
     ref,
   ) => {
     const { styles } = useAutocompleteContext()
-
     const { onAnimationComplete, getListProps } = useAutocompleteList()
 
     width ??= w
@@ -37,6 +38,9 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
     minWidth ??= minW
     minWidth ??= (styles.list?.minWidth ??
       styles.list?.minW) as CSSUIProps["minWidth"]
+    maxWidth ??= maxW
+    maxWidth ??= (styles.list?.maxWidth ??
+      styles.list?.maxW) as CSSUIProps["maxWidth"]
 
     return (
       <PopoverContent
@@ -44,7 +48,8 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
         className="ui-autocomplete__popover"
         width={width}
         minWidth={minWidth}
-        __css={{ ...styles.content, width, minWidth }}
+        maxWidth={maxWidth}
+        __css={{ ...styles.content, width, minWidth, maxWidth }}
         {...contentProps}
         onAnimationComplete={handlerAll(
           contentProps?.onAnimationComplete,

@@ -19,13 +19,7 @@ import { gradient } from "./gradient"
 import { grid } from "./grid"
 import { transform } from "./transform"
 import type { Transform } from "./utils"
-import {
-  mode,
-  keyframes,
-  analyzeCSSValue,
-  isCSSVar,
-  tokenToCSSVar,
-} from "./utils"
+import { mode, keyframes, analyzeCSSValue, isCSSVar, tokenToVar } from "./utils"
 
 export { mode, keyframes, gradient, animation }
 
@@ -50,7 +44,7 @@ export type StyleConfig = {
 export type StyleConfigs = Record<string, StyleConfig | true>
 
 export const transforms = {
-  var: (values: any[], theme: StyledTheme) =>
+  vars: (values: any[], theme: StyledTheme) =>
     values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
       const prefix =
         __prefix ?? theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
@@ -59,14 +53,14 @@ export const transforms = {
 
       if (isObject(value)) {
         value = Object.entries(value).reduce<Dict>((prev, [key, value]) => {
-          prev[key] = tokenToCSSVar(token, value)(theme)
+          prev[key] = tokenToVar(token, value)(theme)
 
           return prev
         }, {})
       } else if (isArray(value)) {
-        value = value.map((value) => tokenToCSSVar(token, value)(theme))
+        value = value.map((value) => tokenToVar(token, value)(theme))
       } else {
-        value = tokenToCSSVar(token, value)(theme)
+        value = tokenToVar(token, value)(theme)
       }
 
       prev[name] = value
@@ -76,7 +70,7 @@ export const transforms = {
   token:
     (token: ThemeToken): Transform =>
     (value, theme) =>
-      tokenToCSSVar(token, value)(theme),
+      tokenToVar(token, value)(theme),
   styles:
     (prefix?: string): Transform =>
     (value, theme, _css, prev = {}) => {

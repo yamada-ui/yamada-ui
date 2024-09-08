@@ -78,6 +78,7 @@ export const labelFormatter =
   (value: string, { summarize, end }: InsightPeriod) =>
   (locale: Locale) => {
     if (!dayjs(value).isValid()) return value
+    if (INSIGHT_USER_IDS.includes(value)) return value
 
     const date = dayjs(value)
 

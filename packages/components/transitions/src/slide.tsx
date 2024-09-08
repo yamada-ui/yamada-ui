@@ -31,19 +31,6 @@ export const getSlideProps = (
   }
 }
 
-type SlideOptions = {
-  /**
-   * The placement of the slide.
-   *
-   * @default 'right'
-   */
-  placement?: Token<"top" | "left" | "bottom" | "right">
-}
-
-export type SlideProps = WithTransitionProps<MotionProps> &
-  SlideOptions &
-  ThemeProps<"Slide">
-
 const variants: MotionTransitionVariants = {
   enter: ({
     placement,
@@ -79,6 +66,19 @@ export const slideProps = {
   exit: "exit",
   variants,
 }
+
+type SlideOptions = {
+  /**
+   * The placement of the slide.
+   *
+   * @default 'right'
+   */
+  placement?: Token<"top" | "left" | "bottom" | "right">
+}
+
+export type SlideProps = WithTransitionProps<MotionProps> &
+  SlideOptions &
+  ThemeProps<"Slide">
 
 /**
  * `Slide` is a component that shows or hides an element from the corners of the page.

@@ -69,13 +69,12 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       ref={ref}
       style={{
         position: "relative",
-
         perspective: 1000, // 원근감을 주기 위한 설정
       }}
     >
       <motion.div
         custom={isVisible}
-        className="ui-swap__from"
+        className={cx(`ui-swap__${flipDirection}-flip-from`, className)}
         onClick={switchVisibility}
         variants={flipMotion[flipDirection].from}
         initial="initial"
@@ -93,7 +92,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
 
       <motion.div
         custom={isVisible}
-        className={cx(`ui-flip__to`, className)}
+        className={cx(`ui-swap__${flipDirection}-flip-to`, className)}
         onClick={switchVisibility}
         variants={flipMotion[flipDirection].to}
         initial="initial"

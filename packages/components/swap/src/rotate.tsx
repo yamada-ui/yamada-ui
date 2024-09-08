@@ -22,6 +22,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const onClick = async () => {
     await controls.start({
       opacity: 0,
+      //TODO: デフォルトはどうするか　（360度, 45度, 90度）
       rotate: typeof rotate === "string" ? rotate : "360deg",
     })
     setCurrentElement(currentElement === "from" ? "to" : "from")
@@ -32,7 +33,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     <motion.div
       ref={ref}
       custom={rotate}
-      className={cx(`ui-airy__${currentElement}`, className)}
+      className={cx(`ui-swap__rotate-${currentElement}`, className)}
       onClick={onClick}
       animate={controls}
       initial={{ opacity: 1, rotate: "0deg" }}

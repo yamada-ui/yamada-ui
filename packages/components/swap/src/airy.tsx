@@ -28,7 +28,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   return (
     <motion.div
       ref={ref}
-      className={cx(`ui-airy__${currentElement}`, className)}
+      className={cx(`ui-swap__airy-${currentElement}`, className)}
       onClick={onClick}
       animate={controls}
       initial={{ opacity: 1 }}

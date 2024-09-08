@@ -1,0 +1,6 @@
+import{j as r}from"./jsx-runtime-Nms4Y4qS.js";import{T as u}from"./text-C6Eawobj.js";import{T as p}from"./tag-Cdle5sNY.js";import"./index-BwDkhjyp.js";import"./_commonjsHelpers-BosuxZz1.js";import"./forward-ref-DKTvpK5d.js";import"./use-component-style-DIJQBRrz.js";import"./factory-CKqVSKj1.js";import"./extends-CF3RwP-h.js";import"./theme-provider-BTK0d_tQ.js";import"./index-BtctO16n.js";import"./index-DiSv92ZG.js";import"./icon-Bq_LsFku.js";import"./index-CQttdDYc.js";const f=()=>{const{userAgent:t}=window.navigator,e=/(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i,a=/(Win32)|(Win64)|(Windows)|(WinCE)/i,c=/(iPhone)|(iPad)|(iPod)/i,m=/Android/i,d=/Linux/i;return e.test(t)?"macos":c.test(t)?"ios":a.test(t)?"windows":m.test(t)?"android":d.test(t)?"linux":"undetermined"},x=()=>typeof window<"u"?f():"undetermined",C={title:"Hooks / useOS"},o=()=>{const t=x();return r.jsxs(u,{children:["Your os is ",r.jsx(p,{children:t})]})};var i,s,n;o.parameters={...o.parameters,docs:{...(i=o.parameters)==null?void 0:i.docs,source:{originalSource:`() => {
+  const os = useOS();
+  return <Text>
+      Your os is <Tag>{os}</Tag>
+    </Text>;
+}`,...(n=(s=o.parameters)==null?void 0:s.docs)==null?void 0:n.source}}};const Y=["basic"];export{Y as __namedExportsOrder,o as basic,C as default};

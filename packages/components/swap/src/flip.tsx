@@ -103,8 +103,10 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
     const toWidth = toElement.offsetWidth
     const toHeight = toElement.offsetHeight
 
-    // to element, from elementのwidth, heightが同じでないとアニメーションの挙動をおかしくあるから
-    // 下記のエラー処理を追加しました
+    /**
+     * Since the width and height of the 'to' element and 'from' element must be the same for the animation to behave correctly,
+     * I have added the following error handling.
+     */
     if (fromWidth !== toWidth || fromHeight !== toHeight) {
       throw new Error(
         `Dimensions do not match: 

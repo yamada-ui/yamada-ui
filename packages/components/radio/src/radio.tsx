@@ -80,16 +80,21 @@ export const useRadio = <
     value,
     isChecked: isCheckedProp,
     defaultIsChecked,
-    required,
-    disabled,
-    readOnly,
     onChange: onChangeProp,
-    onFocus: onFocusProp,
-    onBlur: onBlurProp,
     ...computedProps
   } = useFormControlProps({ id, ...props })
-  const [{ "aria-readonly": _ariaReadonly, ...formControlProps }, rest] =
-    splitObject(computedProps, formControlProperties)
+  const [
+    {
+      "aria-readonly": _ariaReadonly,
+      required,
+      disabled,
+      readOnly,
+      onFocus: onFocusProp,
+      onBlur: onBlurProp,
+      ...formControlProps
+    },
+    rest,
+  ] = splitObject(computedProps, formControlProperties)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)
@@ -136,7 +141,7 @@ export const useRadio = <
     [setActive],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: UIPropGetter<"label"> = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,

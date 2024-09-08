@@ -163,8 +163,7 @@ export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-radial-chart", className)}
-        var={radialVars}
-        __css={{ maxW: "full", ...styles.container }}
+        __css={{ maxW: "full", vars: radialVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

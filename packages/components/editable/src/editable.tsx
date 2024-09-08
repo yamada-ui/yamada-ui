@@ -100,9 +100,6 @@ export const useEditable = (props: UseEditableProps) => {
     onSubmit: onSubmitProp,
     onEdit: onEditProp,
     defaultValue,
-    required,
-    disabled,
-    readOnly,
     startWithEditView,
     isPreviewFocusable = true,
     submitOnBlur = true,
@@ -110,7 +107,10 @@ export const useEditable = (props: UseEditableProps) => {
     ...rest
   } = useFormControlProps(props)
   const onEditRef = useCallbackRef(onEditProp)
-  const formControlProps = pickObject(rest, formControlProperties)
+  const { required, disabled, readOnly, ...formControlProps } = pickObject(
+    rest,
+    formControlProperties,
+  )
 
   const [isEditing, setIsEditing] = useState<boolean>(
     !!startWithEditView && !disabled,

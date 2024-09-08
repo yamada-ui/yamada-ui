@@ -236,7 +236,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     const css: CSSUIObject = {
       position: "relative",
       overflow: "hidden",
-      var: [{ name: "space", token: "spaces", value: gap }],
+      vars: [{ name: "space", token: "spaces", value: gap }],
       ...(fit ? boxSize : {}),
     }
 

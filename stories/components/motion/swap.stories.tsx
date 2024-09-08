@@ -54,7 +54,9 @@ export const rotate: Story = () => {
         to={<Moon fontSize="50px" />}
         animation="rotate"
         rotate="45deg"
-        duration={0.1}
+        motionTransition={{
+          duration: 0.1,
+        }}
         style={{
           cursor: "pointer",
         }}
@@ -125,6 +127,11 @@ export const horizontalFlip: Story = () => {
         from={<BackOfCard />}
         to={<FrontOfCard />}
         animation="horizontalFlip"
+        motionTransition={{
+          type: "spring",
+          stiffness: 20,
+          damping: 10,
+        }}
       />
 
       <Swap

@@ -24,7 +24,9 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
   const controls = useMotionAnimation()
 
-  let {
+  const {
+    from,
+    to,
     className,
     motionTransition = {
       duration: 0.1,
@@ -32,8 +34,6 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
     },
     ...rest
   } = omitThemeProps(mergedProps)
-
-  const { from, to } = mergedProps
 
   const onClick = async () => {
     await controls.start({ opacity: 0 })

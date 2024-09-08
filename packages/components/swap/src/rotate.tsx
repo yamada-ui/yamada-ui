@@ -1,23 +1,39 @@
 import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, WithTransitionProps } from "@yamada-ui/motion"
+import type {
+  MotionProps,
+  MotionTransition,
+  WithTransitionProps,
+} from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 import { useState } from "react"
 import type { SwapElements } from "./swap"
 
+type RotateOptions = {
+  motionTransition?: MotionTransition
+}
+
 type RotateProps = WithTransitionProps<MotionProps> &
   ThemeProps<"Rotate"> &
-  SwapElements
+  SwapElements &
+  RotateOptions
 
 export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Rotate", props)
   const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
   const controls = useMotionAnimation()
 
-  let { rotate, duration, className, ...rest } = omitThemeProps(mergedProps)
-
-  const { from, to } = mergedProps
+  const {
+    from,
+    to,
+    rotate,
+    motionTransition = {
+      duration: 0.3,
+    },
+    className,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   const onClick = async () => {
     await controls.start({
@@ -37,9 +53,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       onClick={onClick}
       animate={controls}
       initial={{ opacity: 1, rotate: "0deg" }}
-      transition={{
-        duration: duration ? duration : 0.3,
-      }}
+      transition={motionTransition}
       __css={style}
       {...rest}
     >

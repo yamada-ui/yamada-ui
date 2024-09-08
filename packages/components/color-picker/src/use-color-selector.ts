@@ -24,12 +24,11 @@ import {
   parseToHsv,
   useCallbackRef,
   useUpdateEffect,
-  omitObject,
   parseToRgba,
   parseToHsla,
   rgbaTo,
   hslaTo,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import type { ChangeEvent } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
@@ -162,7 +161,7 @@ export const useColorSelector = ({
   isInvalid,
   ...props
 }: UseColorSelectorProps) => {
-  let {
+  const {
     id,
     name,
     value: valueProp,
@@ -172,12 +171,19 @@ export const useColorSelector = ({
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
     format: formatProp,
-    required,
-    disabled,
-    readOnly,
     onSwatchClick,
     ...rest
   } = useFormControlProps({ isInvalid, ...props })
+  const [
+    {
+      "aria-readonly": ariaReadonly,
+      required,
+      disabled,
+      readOnly,
+      ...formControlProps
+    },
+    containerProps,
+  ] = splitObject(rest, formControlProperties)
 
   const onChangeStartRef = useCallbackRef(onChangeStartProp)
   const onChangeEndRef = useCallbackRef(onChangeEndProp)
@@ -377,15 +383,20 @@ export const useColorSelector = ({
     if (nextValue) setValue(nextValue)
   }, [format])
 
-  const getContainerProps: UIPropGetter = (props = {}, ref = null) => ({
-    ...props,
-    ref,
-    ...omitObject(rest, ["aria-readonly"]),
-  })
+  const getContainerProps: UIPropGetter = useCallback(
+    (props = {}, ref = null) => ({
+      ...props,
+      ref,
+      ...formControlProps,
+      ...containerProps,
+    }),
+    [containerProps, formControlProps],
+  )
 
   const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
+      "aria-readonly": ariaReadonly,
       ...props,
       id,
       ref,
@@ -396,7 +407,16 @@ export const useColorSelector = ({
       disabled,
       readOnly,
     }),
-    [disabled, id, name, readOnly, required, rest, resolvedValue],
+    [
+      formControlProps,
+      ariaReadonly,
+      id,
+      name,
+      resolvedValue,
+      required,
+      disabled,
+      readOnly,
+    ],
   )
 
   const getSaturationSliderProps: UIPropGetter<

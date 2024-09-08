@@ -50,7 +50,7 @@ export type StyleConfig = {
 export type StyleConfigs = Record<string, StyleConfig | true>
 
 export const transforms = {
-  var: (values: any[], theme: StyledTheme) =>
+  vars: (values: any[], theme: StyledTheme) =>
     values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
       const prefix =
         __prefix ?? theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX

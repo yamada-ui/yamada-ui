@@ -26,7 +26,7 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
       w: "3.5",
       h: "3.5",
       verticalAlign: "middle",
-      var: [
+      vars: [
         {
           name: "increase",
           token: "colors",

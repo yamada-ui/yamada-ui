@@ -226,7 +226,6 @@ type AutocompleteFieldProps = HTMLUIProps<"div"> &
 const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
   ({ className, h, minH, placeholder, inputProps, ...rest }, ref) => {
     const { label, inputValue, styles } = useAutocompleteContext()
-
     const { getInputProps } = useAutocompleteInput()
 
     const css: CSSUIObject = {

@@ -29,7 +29,11 @@ describe("<LinkOverlay />", () => {
   test("renders correctly", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
-    render(<LinkOverlay href={url}>Welcome page</LinkOverlay>)
+    render(
+      <LinkBox>
+        <LinkOverlay href={url}>Welcome page</LinkOverlay>
+      </LinkBox>,
+    )
     const link = screen.getByRole("link")
 
     expect(link).toBeInTheDocument()
@@ -41,9 +45,11 @@ describe("<LinkOverlay />", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
-      <LinkOverlay href={url} isExternal>
-        Welcome page
-      </LinkOverlay>,
+      <LinkBox>
+        <LinkOverlay href={url} isExternal>
+          Welcome page
+        </LinkOverlay>
+      </LinkBox>,
     )
     const link = screen.getByRole("link")
 
@@ -55,9 +61,11 @@ describe("<LinkOverlay />", () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     render(
-      <LinkOverlay href={url} className="custom-class">
-        Welcome page
-      </LinkOverlay>,
+      <LinkBox>
+        <LinkOverlay href={url} className="custom-class">
+          Welcome page
+        </LinkOverlay>
+      </LinkBox>,
     )
     const link = screen.getByRole("link")
 

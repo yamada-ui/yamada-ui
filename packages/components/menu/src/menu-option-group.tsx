@@ -3,6 +3,7 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
 import type { ForwardedRef, Ref } from "react"
 import { cloneElement, forwardRef, useCallback } from "react"
+import type { MenuGroupProps } from "./menu-group";
 import { MenuGroup } from "./menu-group"
 import { MenuOptionItem } from "./menu-item"
 
@@ -14,7 +15,7 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
   /**
    * The label of the group style.
    */
-  labelStyle?: HTMLUIProps<"span">
+  labelProps?: MenuGroupProps["labelProps"]
   /**
    * The value of the menu item group.
    */

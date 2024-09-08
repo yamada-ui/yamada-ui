@@ -144,7 +144,7 @@ describe("<Menu />", () => {
       <Menu placement="right-start">
         <MenuButton as={Button}>Menu</MenuButton>
         <MenuList>
-          <MenuGroup label="group-label" labelStyle={{ fontSize: "12px" }}>
+          <MenuGroup label="group-label" labelProps={{ fontSize: "12px" }}>
             <MenuItem>Add item</MenuItem>
             <MenuItem>Edit item</MenuItem>
           </MenuGroup>

@@ -476,6 +476,22 @@ describe("<Select />", () => {
       expect(headerElement).toHaveStyle(HEADER_STYLE)
       expect(headerElement.parentElement).toHaveClass("ui-select__header")
     })
+
+    test("should be displayed properly when NOT present", () => {
+      const { container } = render(
+        <Select
+          placeholder="Select numbers"
+          placeholderInOptions={true}
+          items={[
+            { label: "One", value: "" },
+            { label: "Two", value: "" },
+          ]}
+        />,
+      )
+
+      const headerElement = container.querySelector(".ui-select__header")
+      expect(headerElement).toBeNull()
+    })
   })
 
   test("should be displayed properly when NOT present", () => {

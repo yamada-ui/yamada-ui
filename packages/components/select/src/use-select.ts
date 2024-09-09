@@ -801,7 +801,6 @@ export type UseSelectOptionGroupProps = HTMLUIProps<"ul"> & {
 
 export const useSelectOptionGroup = ({
   label,
-  labelProps,
   ...rest
 }: UseSelectOptionGroupProps) => {
   const { value, omitSelectedValues } = useSelectContext()
@@ -870,7 +869,6 @@ export const useSelectOptionGroup = ({
 
   return {
     label,
-    labelProps,
     getContainerProps,
     getGroupProps,
   }

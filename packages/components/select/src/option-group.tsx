@@ -10,11 +10,21 @@ export type OptionGroupProps = HTMLUIProps<"ul"> & OptionGroupOptions
 
 export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
   (
-    { className, color, h, height, minH, minHeight, children, ...rest },
+    {
+      className,
+      color,
+      h,
+      height,
+      minH,
+      minHeight,
+      children,
+      labelProps,
+      ...rest
+    },
     ref,
   ) => {
     const { styles } = useSelectContext()
-    const { label, labelProps, getContainerProps, getGroupProps } =
+    const { label, getContainerProps, getGroupProps } =
       useSelectOptionGroup(rest)
 
     h ??= height

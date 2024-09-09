@@ -1,13 +1,7 @@
 import type { CSSObject } from "@emotion/react"
-import {
-  isObject,
-  isArray,
-  isNumber,
-  getMemoizedObject as get,
-} from "@yamada-ui/utils"
-import type { Union, Dict } from "@yamada-ui/utils"
+import { isObject, isNumber } from "@yamada-ui/utils"
+import type { Union } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import { DEFAULT_VAR_PREFIX } from "../constant"
 import type { ThemeToken } from "../theme"
 import type { StyledTheme } from "../theme.types"
 import { animation } from "./animation"
@@ -15,11 +9,15 @@ import { generateAtRule } from "./at-rule"
 import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { generateFilter } from "./filter"
+import { generateFunction } from "./function"
 import { gradient } from "./gradient"
 import { grid } from "./grid"
+import { generateStyles } from "./styles"
+import { generateToken } from "./token"
 import { transform } from "./transform"
 import type { Transform } from "./utils"
-import { mode, keyframes, analyzeCSSValue, isCSSVar, tokenToVar } from "./utils"
+import { mode, keyframes, analyzeCSSValue, isCSSVar } from "./utils"
+import { vars } from "./vars"
 
 export { mode, keyframes, gradient, animation }
 
@@ -44,52 +42,6 @@ export type StyleConfig = {
 export type StyleConfigs = Record<string, StyleConfig | true>
 
 export const transforms = {
-  vars: (values: any[], theme: StyledTheme) =>
-    values.reduce<Dict>((prev, { __prefix, name, token, value }) => {
-      const prefix =
-        __prefix ?? theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
-
-      name = `--${prefix}-${name}`
-
-      if (isObject(value)) {
-        value = Object.entries(value).reduce<Dict>((prev, [key, value]) => {
-          prev[key] = tokenToVar(token, value)(theme)
-
-          return prev
-        }, {})
-      } else if (isArray(value)) {
-        value = value.map((value) => tokenToVar(token, value)(theme))
-      } else {
-        value = tokenToVar(token, value)(theme)
-      }
-
-      prev[name] = value
-
-      return prev
-    }, {}),
-  token:
-    (token: ThemeToken): Transform =>
-    (value, theme) =>
-      tokenToVar(token, value)(theme),
-  styles:
-    (prefix?: string): Transform =>
-    (value, theme, _css, prev = {}) => {
-      const resolvedCSS: Dict = {}
-
-      const style = get<Dict>(
-        theme,
-        prefix ? `styles.${prefix}.${value}` : `styles.${value}`,
-        {},
-      )
-
-      for (const prop in style) {
-        const done = prop in prev && prev[prop] != null
-
-        if (!done) resolvedCSS[prop] = style[prop]
-      }
-
-      return resolvedCSS
-    },
   px: (value: any) => {
     if (value == null) return value
 
@@ -125,11 +77,6 @@ export const transforms = {
       return { backgroundClip: value }
     }
   },
-  function:
-    (func: string): Transform =>
-    (value: any) => {
-      return `${func}(${value})`
-    },
   content: (value: any) => {
     if (isObject(value)) {
       return { content: "''", ...value }
@@ -137,13 +84,17 @@ export const transforms = {
       return value
     }
   },
+  vars,
   grid,
   colorMix,
   gradient,
   animation,
   transform,
+  token: generateToken,
+  styles: generateStyles,
   calc: generateCalc,
   filter: generateFilter,
+  function: generateFunction,
   media: generateAtRule("media"),
   container: generateAtRule("container"),
   supports: generateAtRule("supports"),

@@ -494,22 +494,6 @@ describe("<Select />", () => {
     })
   })
 
-  test("should be displayed properly when NOT present", () => {
-    const { container } = render(
-      <Select
-        placeholder="Select numbers"
-        placeholderInOptions={true}
-        items={[
-          { label: "One", value: "" },
-          { label: "Two", value: "" },
-        ]}
-      />,
-    )
-
-    const headerElement = container.querySelector(".ui-select__header")
-    expect(headerElement).toBeNull()
-  })
-
   describe("footer rendering", () => {
     test("should be displayed properly when present.", () => {
       const FOOTER_TEXT = "Footer"

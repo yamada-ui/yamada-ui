@@ -1,16 +1,13 @@
-import type { ComponentArgs, HTMLUIProps } from "@yamada-ui/core"
+import type { ComponentArgs } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
 import type { ForwardedRef, Ref } from "react"
 import { cloneElement, forwardRef, useCallback } from "react"
+import type { MenuGroupProps } from "./menu-group"
 import { MenuGroup } from "./menu-group"
 import { MenuOptionItem } from "./menu-item"
 
 type MenuOptionGroupOptions<Y extends string | string[] = string> = {
-  /**
-   * The label of the option group.
-   */
-  label?: string
   /**
    * The value of the menu item group.
    */
@@ -32,7 +29,7 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
 }
 
 export type MenuOptionGroupProps<Y extends string | string[] = string> = Omit<
-  HTMLUIProps<"div">,
+  MenuGroupProps,
   keyof MenuOptionGroupOptions
 > &
   MenuOptionGroupOptions<Y>

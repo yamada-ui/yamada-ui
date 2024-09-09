@@ -124,6 +124,37 @@ describe("<Menu />", () => {
     expect(screen.getByTestId("MenuGroup")).toBeInTheDocument()
   })
 
+  test("should render the menu with menu group label", () => {
+    render(
+      <Menu placement="right-start">
+        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuList>
+          <MenuGroup label="group-label">
+            <MenuItem>Add item</MenuItem>
+            <MenuItem>Edit item</MenuItem>
+          </MenuGroup>
+        </MenuList>
+      </Menu>,
+    )
+    expect(screen.getByText("group-label")).toBeInTheDocument()
+  })
+
+  test("should render the menu with menu group label style", () => {
+    render(
+      <Menu placement="right-start">
+        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuList>
+          <MenuGroup label="group-label" labelProps={{ fontSize: "12px" }}>
+            <MenuItem>Add item</MenuItem>
+            <MenuItem>Edit item</MenuItem>
+          </MenuGroup>
+        </MenuList>
+      </Menu>,
+    )
+    expect(screen.getByText("group-label")).toBeInTheDocument()
+    expect(screen.getByText("group-label")).toHaveStyle({ fontSize: "12px" })
+  })
+
   test("should render the menu with menu option group", () => {
     render(
       <Menu placement="right-start">
@@ -231,6 +262,38 @@ describe("<Menu />", () => {
       "aria-disabled",
       "true",
     )
+  })
+
+  test("should update value with menu option group label", () => {
+    render(
+      <Menu placement="right-start">
+        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuList>
+          <MenuOptionGroup
+            data-testid="MenuOptionGroup-a"
+            label="option-group-label"
+            type="radio"
+          >
+            <MenuOptionItem data-testid="MenuOptionItemRadio">
+              Add item
+            </MenuOptionItem>
+            <MenuOptionItem>Edit item</MenuOptionItem>
+          </MenuOptionGroup>
+
+          <MenuOptionGroup
+            data-testid="MenuOptionGroup-b"
+            label="order"
+            type="checkbox"
+          >
+            <MenuOptionItem data-testid="MenuOptionItemCheckbox" value="asc">
+              Ascending
+            </MenuOptionItem>
+            <MenuOptionItem value="desc">Descending</MenuOptionItem>
+          </MenuOptionGroup>
+        </MenuList>
+      </Menu>,
+    )
+    expect(screen.getByText("option-group-label")).toBeInTheDocument()
   })
 
   test("keydown events for ArrowDown", async () => {

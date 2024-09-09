@@ -1,7 +1,7 @@
 export const MEMBERS = [
   {
     name: { en: "Haruki Maeda", ja: "Haruki Maeda" },
-    description: { en: "Engineer based in tokyo.", ja: "東京のエンジニア。" },
+    description: { en: "Engineer based in Tokyo.", ja: "東京のエンジニア。" },
     github: {
       id: "Haru-0001",
       icon: "https://avatars.githubusercontent.com/u/166319111?v=4",
@@ -82,7 +82,7 @@ export const MEMBERS = [
   {
     name: { en: "Haru", ja: "Haru" },
     description: {
-      en: "University students studying programming and design.",
+      en: "University student studying programming and design.",
       ja: "プログラミングとデザインを学んでいる大学生。",
     },
     github: {
@@ -166,7 +166,7 @@ export const MEMBERS = [
   {
     name: { en: "ShiroHat", ja: "白帽子" },
     description: {
-      en: "I'm a student who’s into front-end development and UI design as a hobby.",
+      en: "I'm a student interested in front-end development and UI design as a hobby.",
       ja: "フロントエンド開発とUIデザインを趣味として取り組んでいる学生。",
     },
     github: {
@@ -198,7 +198,7 @@ export const MEMBERS = [
       ja: "フロントエンドエンジニア。Webアプリケーションの開発を行っています。",
     },
     github: {
-      id: "takaakichida",
+      id: "chida09",
       icon: "https://avatars.githubusercontent.com/u/49680717?v=4",
       url: "https://github.com/chida09",
     },
@@ -208,7 +208,7 @@ export const MEMBERS = [
   {
     name: { en: "Aose Yuu", ja: "Aose Yuu" },
     description: {
-      en: "Front-end engineer. vimmer who likes Vue and CLI.",
+      en: "Front-end engineer. Vimmer who likes Vue and CLI.",
       ja: "フロントエンドエンジニア。VueとCLIが好きなVimmer。",
     },
     github: {
@@ -235,7 +235,7 @@ export const MEMBERS = [
   },
   {
     name: { en: "Haruki Saito", ja: "Haruki Saito" },
-    description: { en: "web engineer", ja: "Webエンジニア" },
+    description: { en: "Web engineer.", ja: "Webエンジニア。" },
     github: {
       id: "Haruki0261",
       icon: "https://avatars.githubusercontent.com/u/127657966?v=4",

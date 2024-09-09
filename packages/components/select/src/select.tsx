@@ -15,7 +15,7 @@ import type { SelectIconProps } from "./select-icon"
 import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
 import { SelectList } from "./select-list"
-import type { UseSelectProps } from "./use-select"
+import type { UseSelectOptionGroupProps, UseSelectProps } from "./use-select"
 import {
   useSelect,
   SelectDescendantsContextProvider,
@@ -35,7 +35,7 @@ type SelectItemWithValue = SelectBaseItem & {
 type SelectItemWithItems = SelectBaseItem & {
   label?: string
   items?: SelectItemWithValue[]
-}
+} & UseSelectOptionGroupProps
 
 export type SelectItem = SelectItemWithValue | SelectItemWithItems
 
@@ -145,11 +145,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
           const { label, items = [], ...props } = item
 
           return (
-            <OptionGroup
-              key={i}
-              label={label ?? ""}
-              {...(props as HTMLUIProps<"ul">)}
-            >
+            <OptionGroup key={i} label={label ?? ""} {...props}>
               {items.map(({ label, value, ...props }, i) => (
                 <Option key={i} value={value} {...props}>
                   {label}

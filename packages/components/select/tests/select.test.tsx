@@ -89,7 +89,7 @@ describe("<Select />", () => {
     test("should render select with option group", async () => {
       const { user } = render(
         <Select>
-          <OptionGroup label="Numbers">
+          <OptionGroup label="Numbers" labelProps={{ fontSize: "12px" }}>
             <Option value="one">One</Option>
           </OptionGroup>
           <Option value="two">Two</Option>
@@ -109,6 +109,9 @@ describe("<Select />", () => {
         name: /Numbers/i,
       })
       expect(optionGroups[0]).toBeVisible()
+      await expect(screen.findByText("Numbers")).resolves.toHaveStyle({
+        fontSize: "12px",
+      })
 
       const firstOption = await screen.findByRole("option", { name: /one/i })
       expect(firstOption).toBeVisible()

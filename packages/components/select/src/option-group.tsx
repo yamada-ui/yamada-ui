@@ -14,7 +14,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
     ref,
   ) => {
     const { styles } = useSelectContext()
-    const { label, getContainerProps, getGroupProps } =
+    const { label, labelProps, getContainerProps, getGroupProps } =
       useSelectOptionGroup(rest)
 
     h ??= height
@@ -30,6 +30,7 @@ export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
           className="ui-select__item__group-label"
           __css={styles.groupLabel}
           lineClamp={1}
+          {...labelProps}
         >
           {label}
         </ui.span>

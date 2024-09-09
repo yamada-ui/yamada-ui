@@ -147,14 +147,14 @@ const createTokens = (
   const semanticTokenMap = pickObject(theme.semantics ?? {}, semanticTokens)
 
   const defaultTokenEntries: [string, VariableToken][] = Object.entries(
-    flattenObject(defaultTokenMap, Infinity, omitKeys),
+    flattenObject(defaultTokenMap, { omitKeys }),
   ).map(([token, value]) => {
     const enhancedToken: VariableToken = { isSemantic: false, value }
 
     return [token, enhancedToken]
   })
   const semanticTokenEntries: [string, VariableToken][] = Object.entries(
-    flattenObject(semanticTokenMap, Infinity, omitKeys),
+    flattenObject(semanticTokenMap, { omitKeys }),
   ).reduce(
     (prev, [token, value]) => {
       if (token.startsWith("colorSchemes.")) {

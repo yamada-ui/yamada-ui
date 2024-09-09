@@ -1,7 +1,35 @@
-import { fireEvent, render, screen } from "@yamada-ui/test"
+import { drag, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { AlphaSlider } from "../src"
 
 describe("<AlphaSlider />", () => {
+  beforeAll(() => {
+    Object.defineProperties(MouseEvent.prototype, {
+      pageX: {
+        get() {
+          return this.clientX
+        },
+        configurable: true,
+      },
+      pageY: {
+        get() {
+          return this.clientY
+        },
+        configurable: true,
+      },
+    })
+  })
+
+  afterAll(() => {
+    Object.defineProperty(MouseEvent.prototype, "pageX", {
+      value: undefined,
+      configurable: true,
+    })
+    Object.defineProperty(MouseEvent.prototype, "pageY", {
+      value: undefined,
+      configurable: true,
+    })
+  })
+
   test("AlphaSlider renders correctly", async () => {
     render(<AlphaSlider data-testid="alphaSlider" />)
 
@@ -54,7 +82,7 @@ describe("<AlphaSlider />", () => {
     expect(onChange).not.toHaveBeenCalled()
   })
 
-  test("AlphaSlider component with pointer events", async () => {
+  test("AlphaSlider calls onChangeStart, onChange and onChangeEnd on thumb move", async () => {
     const onChange = vi.fn()
     const onChangeStart = vi.fn()
     const onChangeEnd = vi.fn()
@@ -74,12 +102,19 @@ describe("<AlphaSlider />", () => {
 
     const sliderThumb = screen.getByRole("slider")
 
-    await user.tab()
-    await user.pointer({ keys: "[MouseLeft>]", target: sliderThumb })
-    await user.pointer({ keys: "[/MouseLeft]", target: sliderThumb })
+    await drag(user)({
+      target: sliderThumb,
+      coords: (i) => ({ x: i * 100, y: 0 }),
+    })
 
-    expect(onChangeStart).toHaveBeenCalledWith(0.5)
-    expect(onChange).toHaveBeenCalledWith(0)
-    expect(onChangeEnd).toHaveBeenCalledWith(0)
+    await waitFor(() => {
+      expect(onChangeStart).toHaveBeenCalledWith(0.5)
+    })
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith(0)
+    })
+    await waitFor(() => {
+      expect(onChangeEnd).toHaveBeenCalledWith(1)
+    })
   })
 })

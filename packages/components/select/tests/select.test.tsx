@@ -131,7 +131,8 @@ describe("<Select />", () => {
 
       await user.click(input)
 
-      await expect(screen.findByText("Numbers")).resolves.toHaveStyle({
+      const group = await screen.findByText("Numbers")
+      expect(group).toHaveStyle({
         fontSize: "12px",
       })
     })

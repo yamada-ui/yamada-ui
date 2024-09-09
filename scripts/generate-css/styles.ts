@@ -1,6 +1,6 @@
 import { writeFile } from "fs/promises"
 import type { Transforms, ThemeToken } from "@yamada-ui/react"
-import { pseudosSelectors } from "@yamada-ui/react"
+import { pseudoSelectors } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
@@ -128,7 +128,7 @@ export const generateStyles = async (
 
   checkProps(styles)
 
-  pseudosSelectors.forEach((selector) => {
+  pseudoSelectors.forEach((selector) => {
     const transforms = transformMap[selector]
 
     if (!transforms) return

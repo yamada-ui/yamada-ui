@@ -2,7 +2,7 @@ import type { Dict } from "@yamada-ui/utils"
 import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
 import type { StyleConfig } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
-import type { PseudosProperty } from "../pseudos"
+import type { PseudoProperty } from "../pseudos"
 import { pseudos } from "../pseudos"
 import type { ProcessSkipProperty, StyleProperty } from "../styles"
 import { processSkipProperties, styles } from "../styles"
@@ -111,7 +111,7 @@ export const css =
 
         if (value == null) continue
 
-        if (prop in pseudos) prop = pseudos[prop as PseudosProperty]
+        if (prop in pseudos) prop = pseudos[prop as PseudoProperty]
 
         let style: StyleConfig | true | undefined =
           styles[prop as StyleProperty]

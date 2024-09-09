@@ -89,7 +89,7 @@ describe("<Select />", () => {
     test("should render select with option group", async () => {
       const { user } = render(
         <Select>
-          <OptionGroup label="Numbers" labelProps={{ fontSize: "12px" }}>
+          <OptionGroup label="Numbers">
             <Option value="one">One</Option>
           </OptionGroup>
           <Option value="two">Two</Option>
@@ -109,15 +109,31 @@ describe("<Select />", () => {
         name: /Numbers/i,
       })
       expect(optionGroups[0]).toBeVisible()
-      await expect(screen.findByText("Numbers")).resolves.toHaveStyle({
-        fontSize: "12px",
-      })
 
       const firstOption = await screen.findByRole("option", { name: /one/i })
       expect(firstOption).toBeVisible()
 
       const secondOption = await screen.findByRole("option", { name: /two/i })
       expect(secondOption).toBeVisible()
+    })
+
+    test("should render select with option group labelProps", async () => {
+      const { user } = render(
+        <Select>
+          <OptionGroup label="Numbers" labelProps={{ fontSize: "12px" }}>
+            <Option value="one">One</Option>
+          </OptionGroup>
+          <Option value="two">Two</Option>
+        </Select>,
+      )
+
+      const input = await screen.findByRole("combobox")
+
+      await user.click(input)
+
+      await expect(screen.findByText("Numbers")).resolves.toHaveStyle({
+        fontSize: "12px",
+      })
     })
 
     test("should render select with placeholder", async () => {

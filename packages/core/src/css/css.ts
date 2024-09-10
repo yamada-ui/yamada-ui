@@ -38,7 +38,7 @@ const expandResponsive = (
   }, {} as Dict)
 
 const expandCSS =
-  (css: Dict, isNested: boolean) =>
+  (css: Dict) =>
   (theme: StyledTheme): Dict => {
     if (!theme.__breakpoints) return css
 
@@ -51,17 +51,13 @@ const expandCSS =
 
       if (value == null) continue
 
-      if (isArray(value) && !(isProcessSkip(key) && !isNested)) {
+      if (isArray(value) && !isProcessSkip(key)) {
         computedCSS = merge(computedCSS, expandColorMode(key, value))
 
         continue
       }
 
-      if (
-        isObject(value) &&
-        isResponsive(value) &&
-        !(isProcessSkip(key) && !isNested)
-      ) {
+      if (isObject(value) && isResponsive(value) && !isProcessSkip(key)) {
         computedCSS = merge(computedCSS, expandResponsive(key, value, queries))
 
         continue
@@ -98,8 +94,8 @@ export const css =
       cssOrFunc: CSSObjectOrFunc | CSSUIObject,
       isNested: boolean = false,
     ): Dict => {
-      const cssObject = runIfFunc(cssOrFunc, theme)
-      const computedCSS = expandCSS(cssObject, isNested)(theme)
+      const cssObj = runIfFunc(cssOrFunc, theme)
+      const computedCSS = expandCSS(cssObj)(theme)
 
       let resolvedCSS: Dict = {}
 

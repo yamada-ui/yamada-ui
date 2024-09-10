@@ -8,6 +8,7 @@ export type { CSS }
 
 export type ColorMode = "light" | "dark"
 export type ColorModeWithSystem = ColorMode | "system"
+export type Breakpoint = Theme["breakpoints"] | "base"
 
 type ThemeVariant<Y extends keyof Theme["components"] | unknown = unknown> =
   Y extends keyof Theme["components"]
@@ -48,11 +49,13 @@ export type ThemeProps<
   __styles?: CSSUIObject | Record<string, CSSUIObject>
 }
 
-export type ColorModeArray<Y> = [Y, Y]
+export type ColorModeArray<Y, M extends boolean = true> = M extends true
+  ? [Y | ResponsiveObject<Y, false>, Y | ResponsiveObject<Y, false>]
+  : [Y, Y]
 
-export type ResponsiveObject<Y> = Partial<
-  Record<Theme["breakpoints"] | "base", Y>
->
+export type ResponsiveObject<Y, M extends boolean = true> = M extends true
+  ? Partial<Record<Breakpoint, Y | ColorModeArray<Y, false>>>
+  : Partial<Record<Breakpoint, Y>>
 
 export type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
 
@@ -98,6 +101,7 @@ export type CSSUIProps = StyleProps & PseudoProps
 export type UIStyleProps<Y extends Dict = Dict> = {
   theme: StyledTheme
   colorMode?: ColorMode
+  breakpoint?: Breakpoint
   colorScheme?: Theme["colorSchemes"]
   themeScheme?: Theme["themeSchemes"]
 } & Y

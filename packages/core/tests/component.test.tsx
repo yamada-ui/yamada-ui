@@ -1,95 +1,55 @@
 import { renderHook } from "@yamada-ui/test"
 import {
+  pseudos,
   ThemeProvider,
   useComponentStyle,
   useMultiComponentStyle,
 } from "../src"
 
-const theme1 = {
-  breakpoints: {
-    sm: "30em",
-    md: "48em",
-    lg: "61em",
-    xl: "80em",
-    "2xl": "90em",
-  },
-  components: {
-    Button: {
-      baseStyle: {
-        padding: "8px 12px",
-        borderRadius: "4px",
-      },
-      variants: {
-        solid: {
-          bg: "blue.500",
-          color: "white",
-        },
-        outline: {
-          border: "1px solid",
-          borderColor: "blue.500",
-          color: "blue.500",
-        },
-      },
-      sizes: {
-        sm: {
-          fontSize: "sm",
-          padding: "4px 8px",
-        },
-        md: {
-          fontSize: "md",
-          padding: "8px 12px",
-        },
-      },
-      defaultProps: {
-        size: "md",
-        variant: "solid",
-      },
+describe("useComponentStyle", () => {
+  const theme = {
+    breakpoints: {
+      sm: "30em",
+      md: "48em",
+      lg: "61em",
+      xl: "80em",
+      "2xl": "90em",
     },
-  },
-}
-
-const theme2 = {
-  breakpoints: {
-    sm: "30em",
-    md: "48em",
-    lg: "61em",
-    xl: "80em",
-    "2xl": "90em",
-  },
-  components: {
-    Button: {
-      baseStyle: {
-        container: { padding: "8px 12px", borderRadius: "4px" },
-      },
-      variants: {
-        solid: {
-          container: { bg: "blue.500", color: "white" },
+    components: {
+      Button: {
+        baseStyle: {
+          padding: "8px 12px",
+          borderRadius: "4px",
         },
-        outline: {
-          container: {
+        variants: {
+          solid: {
+            bg: "blue.500",
+            color: "white",
+          },
+          outline: {
             border: "1px solid",
             borderColor: "blue.500",
             color: "blue.500",
           },
         },
-      },
-      sizes: {
-        sm: {
-          container: { fontSize: "sm", padding: "4px 8px" },
+        sizes: {
+          sm: {
+            fontSize: "sm",
+            padding: "4px 8px",
+          },
+          md: {
+            fontSize: "md",
+            padding: "8px 12px",
+          },
         },
-        md: {
-          container: { fontSize: "md", padding: "8px 12px" },
+        defaultProps: {
+          size: "md",
+          variant: "solid",
         },
-      },
-      defaultProps: {
-        size: "md",
-        variant: "solid",
       },
     },
-  },
-}
+  }
 
-describe("useComponentStyle", () => {
   beforeAll(() => {
     vi.spyOn(window, "getComputedStyle").mockImplementation(
       () =>
@@ -106,7 +66,7 @@ describe("useComponentStyle", () => {
   test("returns the correct styles for a component", () => {
     const { result } = renderHook(() => useComponentStyle("Button", {}), {
       wrapper: ({ children }) => (
-        <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
       ),
     })
 
@@ -124,7 +84,7 @@ describe("useComponentStyle", () => {
       () => useComponentStyle("Button", { variant: "outline", size: "sm" }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -148,7 +108,7 @@ describe("useComponentStyle", () => {
         }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -157,8 +117,7 @@ describe("useComponentStyle", () => {
       padding: "4px 8px",
       borderRadius: "4px",
       fontSize: "sm",
-      ".ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]":
-        { bg: "blue.500", color: "white" },
+      [pseudos._light]: { bg: "blue.500", color: "white" },
       ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]":
         { border: "1px solid", borderColor: "blue.500", color: "blue.500" },
     })
@@ -173,7 +132,7 @@ describe("useComponentStyle", () => {
         }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -203,7 +162,7 @@ describe("useComponentStyle", () => {
         }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -222,7 +181,7 @@ describe("useComponentStyle", () => {
       () => useComponentStyle("Button", { size: "sm" }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -245,7 +204,7 @@ describe("useComponentStyle", () => {
         }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -253,7 +212,6 @@ describe("useComponentStyle", () => {
     expect(result.current[0]).toStrictEqual({
       padding: "8px 12px",
       borderRadius: "4px",
-      "@media screen and (min-width: 977px)": {},
       "@media screen and (min-width: 769px) and (max-width: 976px)": {
         bg: "blue.500",
         color: "white",
@@ -278,13 +236,12 @@ describe("useComponentStyle", () => {
     const { result } = renderHook(
       () =>
         useComponentStyle("Button", {
-          colorMode: "dark",
-          variant: "solid",
+          variant: ["solid", "outline"],
           size: "md",
         }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme1}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )
@@ -292,20 +249,121 @@ describe("useComponentStyle", () => {
     expect(result.current[0]).toStrictEqual({
       padding: "8px 12px",
       borderRadius: "4px",
-      bg: "blue.500",
       fontSize: "md",
-      color: "white",
+      [pseudos._dark]: {
+        border: "1px solid",
+        borderColor: "blue.500",
+        color: "blue.500",
+      },
+      [pseudos._light]: {
+        bg: "blue.500",
+        color: "white",
+      },
+    })
+  })
+
+  test("returns correct styles for color modes and breakpoints", () => {
+    const { result } = renderHook(
+      () =>
+        useComponentStyle("Button", {
+          variant: [
+            { base: "solid", md: "outline" },
+            { base: "outline", md: "solid" },
+          ],
+          size: { base: ["md", "sm"], md: ["sm", "md"] },
+        }),
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        ),
+      },
+    )
+
+    expect(result.current[0]).toStrictEqual({
+      padding: "8px 12px",
+      borderRadius: "4px",
+      "@media screen and (min-width: 769px)": {
+        [pseudos._light]: { fontSize: "md", padding: "8px 12px" },
+        [pseudos._dark]: { fontSize: "sm", padding: "4px 8px" },
+      },
+      "@media screen and (max-width: 768px)": {
+        [pseudos._light]: { fontSize: "sm", padding: "4px 8px" },
+        [pseudos._dark]: { fontSize: "md", padding: "8px 12px" },
+      },
+      [pseudos._light]: {
+        "@media screen and (min-width: 769px)": {
+          bg: "blue.500",
+          color: "white",
+        },
+        "@media screen and (max-width: 768px)": {
+          border: "1px solid",
+          borderColor: "blue.500",
+          color: "blue.500",
+        },
+      },
+      [pseudos._dark]: {
+        "@media screen and (min-width: 769px)": {
+          border: "1px solid",
+          borderColor: "blue.500",
+          color: "blue.500",
+        },
+        "@media screen and (max-width: 768px)": {
+          bg: "blue.500",
+          color: "white",
+        },
+      },
     })
   })
 })
 
 describe("useMultiComponentStyle", () => {
+  const theme = {
+    breakpoints: {
+      sm: "30em",
+      md: "48em",
+      lg: "61em",
+      xl: "80em",
+      "2xl": "90em",
+    },
+    components: {
+      Button: {
+        baseStyle: {
+          container: { padding: "8px 12px", borderRadius: "4px" },
+        },
+        variants: {
+          solid: {
+            container: { bg: "blue.500", color: "white" },
+          },
+          outline: {
+            container: {
+              border: "1px solid",
+              borderColor: "blue.500",
+              color: "blue.500",
+            },
+          },
+        },
+        sizes: {
+          sm: {
+            container: { fontSize: "sm", padding: "4px 8px" },
+          },
+          md: {
+            container: { fontSize: "md", padding: "8px 12px" },
+          },
+        },
+        defaultProps: {
+          size: "md",
+          variant: "solid",
+        },
+      },
+    },
+  }
+
   test("returns the correct styles for multi-variant components", () => {
     const { result } = renderHook(
       () => useMultiComponentStyle("Button", { variant: "solid", size: "sm" }),
       {
         wrapper: ({ children }) => (
-          <ThemeProvider theme={theme2}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         ),
       },
     )

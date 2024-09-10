@@ -298,7 +298,9 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   }
 }
 
-export const formControlBaseProperties = [
+export type FormControlProperty = (typeof formControlProperties)[number]
+
+export const formControlProperties = [
   "disabled",
   "required",
   "readOnly",
@@ -316,17 +318,14 @@ export const formControlBaseProperties = [
   "_focusVisible",
 ] as const
 
-export const formControlProperties =
-  formControlBaseProperties as unknown as any[]
-
 export const getFormControlProperties = ({
   omit = [],
   pick = [],
 }: {
-  omit?: (typeof formControlBaseProperties)[number][]
-  pick?: (typeof formControlBaseProperties)[number][]
+  omit?: FormControlProperty[]
+  pick?: FormControlProperty[]
 } = {}) => {
-  let result = formControlProperties
+  let result = [...formControlProperties]
 
   if (pick.length) {
     result = result.filter((property) => pick.includes(property))

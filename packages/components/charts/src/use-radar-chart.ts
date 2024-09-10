@@ -120,7 +120,7 @@ export const useRadarChart = ({
     ...computedRadarProps
   } = rest.radarProps ?? {}
 
-  const radarColors: CSSUIProps["var"] = useMemo(
+  const radarColors: CSSUIProps["vars"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
         name: `radar-${index}`,
@@ -130,12 +130,12 @@ export const useRadarChart = ({
     [series],
   )
 
-  const radarVars: CSSUIProps["var"] = useMemo(
+  const radarVars: CSSUIProps["vars"] = useMemo(
     () =>
       [
         ...radarColors,
         { name: "fill-opacity", value: fillOpacity },
-      ] as Required<CSSUIProps>["var"],
+      ] as Required<CSSUIProps>["vars"],
     [fillOpacity, radarColors],
   )
 

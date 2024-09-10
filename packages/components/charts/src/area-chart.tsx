@@ -231,8 +231,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-area-chart", className)}
-        var={areaVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", vars: areaVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

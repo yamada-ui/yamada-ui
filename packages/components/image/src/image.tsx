@@ -5,7 +5,7 @@ import {
   useComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { cx, omitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { isValidElement, useMemo } from "react"
 import type { UseImageProps } from "./use-image"
@@ -91,7 +91,7 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
       referrerPolicy={referrerPolicy}
       className={cx("ui-image", className)}
       __css={css}
-      {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
+      {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
     />
   )
 })

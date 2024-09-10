@@ -96,7 +96,7 @@ export const useRadialChart = ({
     ...computedRadialBarProps
   } = rest.radialBarProps ?? {}
 
-  const radialVars: CSSUIProps["var"] = useMemo(
+  const radialVars: CSSUIProps["vars"] = useMemo(
     () =>
       dataProp.map(({ color }, index) => ({
         name: `radial-bar-${index}`,

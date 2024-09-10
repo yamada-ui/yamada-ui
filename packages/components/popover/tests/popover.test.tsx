@@ -155,4 +155,50 @@ describe("<Popover />", () => {
     await waitFor(() => expect(closeButton).not.toBeVisible())
     await waitFor(() => expect(body).not.toBeVisible())
   })
+
+  test.each<{
+    animation: "scale" | "top" | "left" | "bottom" | "right"
+    transform: string
+  }>([
+    {
+      animation: "scale",
+      transform: "scale(0.95)",
+    },
+    {
+      animation: "top",
+      transform: "translateY(-16px)",
+    },
+    {
+      animation: "left",
+      transform: "translateX(-16px)",
+    },
+    {
+      animation: "bottom",
+      transform: "translateY(16px)",
+    },
+    {
+      animation: "right",
+      transform: "translateX(16px)",
+    },
+  ])(
+    "when animation is %s, the popover should be displayed",
+    async ({ animation, transform }) => {
+      const { user, container } = render(
+        <PopoverExample animation={animation} />,
+      )
+
+      const popoverContent = container.querySelector(".ui-popover__content")
+      expect(popoverContent).toHaveStyle({
+        transform,
+        visibility: "hidden",
+      })
+
+      const triggerButton = await screen.findByRole("button", {
+        name: "Open Popover",
+      })
+      await user.click(triggerButton)
+
+      await waitFor(() => expect(popoverContent).toBeVisible())
+    },
+  )
 })

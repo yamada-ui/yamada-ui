@@ -28,7 +28,7 @@ import {
   getValidChildren,
 } from "@yamada-ui/utils"
 import type { ChangeEvent, KeyboardEvent, Ref } from "react"
-import { useCallback, useEffect, useId, useMemo, useState } from "react"
+import { useCallback, useEffect, useId, useState } from "react"
 
 const toArray = (value?: string) => value?.split("")
 
@@ -157,22 +157,17 @@ export const PinInput = forwardRef<PinInputProps, "div">(
       manageFocus = true,
       otp = false,
       mask,
-      readOnly,
-      "aria-readonly": ariaReadonly,
       onChange: onChangeProp,
       onComplete,
       items = 4,
       children,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
-    const formControlProps = useMemo(
-      () => ({
-        ...pickObject(rest, formControlProperties),
-        readOnly,
-        "aria-readonly": ariaReadonly,
-      }),
-      [ariaReadonly, readOnly, rest],
-    )
+    const {
+      readOnly,
+      "aria-readonly": _ariaReadonly,
+      ...formControlProps
+    } = pickObject(rest, formControlProperties)
 
     id ??= useId()
 

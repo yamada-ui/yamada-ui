@@ -5,6 +5,7 @@ import {
   isArray,
   isUndefined,
 } from "@yamada-ui/utils"
+import { useMemo } from "react"
 
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
@@ -24,7 +25,10 @@ export const useToken = <
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
-  return getToken<Y, M>(name, path)(theme, colorMode)
+  return useMemo(
+    () => getToken<Y, M>(name, path)(theme, colorMode),
+    [name, path, theme, colorMode],
+  )
 }
 
 export const getToken =

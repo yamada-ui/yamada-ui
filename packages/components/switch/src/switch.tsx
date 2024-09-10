@@ -48,10 +48,9 @@ type SwitchOptions = {
 
 export type SwitchProps = Merge<
   HTMLUIProps<"label">,
-  Omit<UseCheckboxProps, "isIndeterminate">
+  Omit<UseCheckboxProps, "isIndeterminate"> & SwitchOptions
 > &
-  ThemeProps<"Switch"> &
-  SwitchOptions
+  ThemeProps<"Switch">
 
 /**
  * `Switch` is a component used to toggle between on and off states.

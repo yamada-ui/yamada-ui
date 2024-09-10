@@ -2,14 +2,13 @@ import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  createVars,
   radiusProperties,
   omitThemeProps,
   useMultiComponentStyle,
+  useCreateVars,
 } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { createContext, cx } from "@yamada-ui/utils"
-import { useMemo } from "react"
 
 type LinkBoxContext = {
   styles: Record<string, CSSUIObject>
@@ -79,10 +78,7 @@ export type LinkBoxProps = HTMLUIProps<"div"> & ThemeProps<"LinkBox">
 export const LinkBox = forwardRef<LinkBoxProps, "div">((props, ref) => {
   const [styles, mergedProps] = useMultiComponentStyle("LinkBox", props)
   const { className, children, ...rest } = omitThemeProps(mergedProps)
-  const [vars, variableProps] = useMemo(
-    () => createVars(rest, radiusProperties),
-    [rest],
-  )
+  const [vars, variableProps] = useCreateVars(rest, radiusProperties)
 
   const css: CSSUIObject = {
     position: "relative",

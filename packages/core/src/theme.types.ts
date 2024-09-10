@@ -32,6 +32,13 @@ export type BreakpointOptions = {
    */
   direction?: BreakpointDirection
   /**
+   * The base value for the `breakpoint` when `direction` is "down".
+   * This is treated as the largest `breakpoint`.
+   *
+   * @default "9999px"
+   */
+  base?: string
+  /**
    * The `ref` of the container element used in `useBreakpoint` and others.
    *
    * Even if this `ref` is not set, CSS query will work, but JavaScript operations such as `useBreakpoint` will not work.

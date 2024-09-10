@@ -9,14 +9,16 @@ import {
 import { memo, useEffect } from "react"
 import type { FC } from "react"
 
-export type CountUpProps = MotionProps<"p"> & {
+export type CountUpProps = MotionProps<"span"> & {
   count: number | null
 }
 
 export const CountUp: FC<CountUpProps> = memo(
   ({ count: maxCount, ...rest }) => {
     const count = useMotionValue(0)
-    const rounded = useTransform(count, Math.round)
+    const rounded = useTransform(count, (value) =>
+      Math.round(value).toLocaleString(),
+    )
 
     useEffect(() => {
       if (!isNumber(maxCount)) return

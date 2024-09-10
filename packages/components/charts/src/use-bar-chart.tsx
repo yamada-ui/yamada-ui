@@ -106,7 +106,7 @@ export const useBarChart = ({
     ...computedBarProps
   } = rest.barProps ?? {}
 
-  const barColors: CSSUIProps["var"] = useMemo(
+  const barColors: CSSUIProps["vars"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
         name: `bar-${index}`,
@@ -116,7 +116,7 @@ export const useBarChart = ({
     [series],
   )
 
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
+  const referenceLineColors: CSSUIProps["vars"] = useMemo(
     () =>
       referenceLineProps.map(({ color }, index) => ({
         name: `reference-line-${index}`,
@@ -126,7 +126,7 @@ export const useBarChart = ({
     [referenceLineProps],
   )
 
-  const barVars: CSSUIProps["var"] = useMemo(() => {
+  const barVars: CSSUIProps["vars"] = useMemo(() => {
     return [
       ...barColors,
       ...referenceLineColors,

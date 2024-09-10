@@ -62,7 +62,7 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
     () => ({
       className: cx("ui-loading", className),
       size,
-      var: [
+      vars: [
         {
           name: "color",
           token: "colors",

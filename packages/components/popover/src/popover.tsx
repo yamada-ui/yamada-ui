@@ -27,7 +27,9 @@ import {
 import type { FC, PropsWithChildren, RefAttributes, RefObject } from "react"
 import { useCallback, useEffect, useRef } from "react"
 
-export const popoverProperties: any[] = [
+export type PopoverProperty = (typeof popoverProperties)[number]
+
+export const popoverProperties = [
   ...popperProperties,
   "isOpen",
   "defaultIsOpen",
@@ -46,7 +48,18 @@ export const popoverProperties: any[] = [
   "lazyBehavior",
   "animation",
   "duration",
-]
+] as const
+
+export type ComboBoxProps = Omit<
+  PopoverOptions,
+  | "initialFocusRef"
+  | "relatedRef"
+  | "autoFocus"
+  | "restoreFocus"
+  | "closeOnButton"
+  | "trigger"
+> &
+  Omit<UsePopperProps, "enabled">
 
 type PopoverOptions = {
   /**
@@ -75,17 +88,17 @@ type PopoverOptions = {
    */
   relatedRef?: RefObject<HTMLElement>
   /**
-   * If `true`, focus will be returned to the element that triggers the popover when it closes.
-   *
-   * @default true
-   */
-  restoreFocus?: boolean
-  /**
    * If `true`, focus will be transferred to the first interactive element when the popover opens.
    *
    * @default true
    */
   autoFocus?: boolean
+  /**
+   * If `true`, focus will be returned to the element that triggers the popover when it closes.
+   *
+   * @default true
+   */
+  restoreFocus?: boolean
   /**
    * If `true`, the popover will close when you blur out it by clicking outside or tabbing out.
    *

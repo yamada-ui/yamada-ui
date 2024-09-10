@@ -145,21 +145,22 @@ export const useRangeSlider = ({
     thumbSize: thumbSizeProp,
     isReversed,
     betweenThumbs = 0,
-    required,
-    disabled,
-    readOnly,
     value: valueProp,
     onChange,
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
-    onFocus,
-    onBlur,
-    "aria-readonly": ariaReadonly,
     "aria-valuetext": ariaValueText,
     ...rest
   } = useFormControlProps(props)
-
-  const formControlProps = pickObject(rest, formControlProperties)
+  const {
+    required,
+    disabled,
+    readOnly,
+    onFocus,
+    onBlur,
+    "aria-readonly": ariaReadonly,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
 
   defaultValue = defaultValue ?? [min + (max - min) / 4, max - (max - min) / 4]
 
@@ -456,7 +457,7 @@ export const useRangeSlider = ({
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
         style,
-        var: [
+        vars: [
           {
             name: "thumbSize",
             token: "sizes",

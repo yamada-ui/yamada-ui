@@ -4,9 +4,12 @@ import type { StyleConfigs } from "./config"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
 import type { CSSUIObject, Token } from "./css"
+import type { ThemeToken } from "./theme"
 import type { Theme } from "./theme.types"
 
-export const standardStyles: StyleConfigs = {
+export type StandardStyleProperty = keyof typeof standardStyles
+
+export const standardStyles = {
   accentColor: {
     properties: "accentColor",
     token: "colors",
@@ -1206,6 +1209,13 @@ export const standardStyles: StyleConfigs = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  strokeDasharray: true,
+  strokeDashoffset: true,
+  strokeLinecap: true,
+  strokeLinejoin: true,
+  strokeMiterlimit: true,
+  strokeOpacity: true,
+  strokeWidth: { properties: "strokeWidth", transform: transforms.px },
   tabSize: true,
   tableLayout: true,
   textAlign: true,
@@ -1328,13 +1338,6 @@ export const standardStyles: StyleConfigs = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
-  strokeDasharray: true,
-  strokeDashoffset: true,
-  strokeLinecap: true,
-  strokeLinejoin: true,
-  strokeMiterlimit: true,
-  strokeOpacity: true,
-  strokeWidth: { properties: "strokeWidth", transform: transforms.px },
   marginX: {
     properties: ["marginInlineStart", "marginInlineEnd"],
     token: "spaces",
@@ -1625,9 +1628,11 @@ export const standardStyles: StyleConfigs = {
     transform: transforms.function("sepia"),
   },
   colorMode: { properties: "colorScheme" },
-}
+} as const satisfies StyleConfigs
 
-export const shorthandStyles: StyleConfigs = {
+export type ShorthandStyleProperty = keyof typeof shorthandStyles
+
+export const shorthandStyles = {
   accent: standardStyles.accentColor,
   bg: standardStyles.background,
   bgAttachment: { properties: "backgroundAttachment" },
@@ -1725,14 +1730,18 @@ export const shorthandStyles: StyleConfigs = {
   roundedStart: standardStyles.borderInlineStartRadius,
   borderEndRadius: standardStyles.borderInlineEndRadius,
   roundedEnd: standardStyles.borderInlineEndRadius,
-}
+} as const satisfies StyleConfigs
 
-export const pseudoStyles: StyleConfigs = {
-  "&::before": { properties: "&::before", transform: transforms.content },
+export type PseudoStyleProperty = keyof typeof pseudoStyles
+
+export const pseudoStyles = {
   "&::after": { properties: "&::after", transform: transforms.content },
-}
+  "&::before": { properties: "&::before", transform: transforms.content },
+} as const satisfies StyleConfigs
 
-export const uiStyles: StyleConfigs = {
+export type UIStyleProperty = keyof typeof uiStyles
+
+export const uiStyles = {
   lineClamp: {
     properties: "--ui-line-clamp",
     static: {
@@ -1753,33 +1762,326 @@ export const uiStyles: StyleConfigs = {
     transform: transforms.styles("textStyles"),
   },
   apply: { isProcessResult: true, transform: transforms.styles() },
-  var: { isProcessSkip: true, transform: transforms.var },
-}
+  vars: { isProcessSkip: true, transform: transforms.vars },
+} as const satisfies StyleConfigs
 
-export const atRuleStyles: StyleConfigs = {
+export type AtRuleStyleProperty = keyof typeof atRuleStyles
+
+export const atRuleStyles = {
   _media: { isProcessSkip: true, transform: transforms.media },
   _container: { isProcessSkip: true, transform: transforms.container },
   _supports: { isProcessSkip: true, transform: transforms.supports },
-}
+} as const satisfies StyleConfigs
 
-export const styles: StyleConfigs = {
+export type Styles = typeof styles
+
+export const styles = {
   ...standardStyles,
   ...shorthandStyles,
   ...pseudoStyles,
   ...uiStyles,
   ...atRuleStyles,
-}
+} as const satisfies StyleConfigs
 
-export const processSkipProperties: string[] = [
-  "var",
+export type StyleProperty = keyof typeof styles
+
+export const styleProperties = Object.keys(styles) as StyleProperty[]
+
+export type ProcessSkipProperty = (typeof processSkipProperties)[number]
+
+export const processSkipProperties = [
+  "vars",
   "_media",
   "_container",
   "_supports",
-]
+] as const
 
-export const styleProperties: any[] = Object.keys(styles)
+export type AnimationProperty = (typeof animationProperties)[number]
 
-export const layoutStyleProperties: any[] = [
+export const animationProperties = ["animation"] as const
+
+export type BlurProperty = (typeof blurProperties)[number]
+
+export const blurProperties = ["blur", "backdropBlur"] as const
+
+export type BorderProperty = (typeof borderProperties)[number]
+
+export const borderProperties = [
+  "border",
+  "borderBlock",
+  "borderBlockEnd",
+  "borderBlockStart",
+  "borderBottom",
+  "borderImage",
+  "borderInline",
+  "borderInlineEnd",
+  "borderEnd",
+  "borderInlineStart",
+  "borderStart",
+  "borderLeft",
+  "borderRight",
+  "borderTop",
+  "borderY",
+  "borderX",
+] as const
+
+export type ColorProperty = (typeof colorProperties)[number]
+
+export const colorProperties = [
+  "accentColor",
+  "accent",
+  "background",
+  "bg",
+  "backgroundColor",
+  "bgColor",
+  "borderBlockColor",
+  "borderBlockEndColor",
+  "borderBlockStartColor",
+  "borderBottomColor",
+  "borderColor",
+  "borderInlineColor",
+  "borderInlineEndColor",
+  "borderEndColor",
+  "borderInlineStartColor",
+  "borderStartColor",
+  "borderLeftColor",
+  "borderRightColor",
+  "borderTopColor",
+  "caretColor",
+  "caret",
+  "color",
+  "textColor",
+  "columnRuleColor",
+  "fill",
+  "outlineColor",
+  "scrollbarColor",
+  "stroke",
+  "textDecorationColor",
+  "textEmphasisColor",
+  "floodColor",
+  "lightingColor",
+] as const
+
+export type FontProperty = (typeof fontProperties)[number]
+
+export const fontProperties = [
+  "fontFamily",
+  "fontSize",
+  "text",
+  "fontWeight",
+  "lineHeight",
+  "leading",
+  "letterSpacing",
+  "tracking",
+] as const
+
+export type GradientProperty = (typeof gradientProperties)[number]
+
+export const gradientProperties = [
+  "backgroundImage",
+  "bgImage",
+  "bgImg",
+  "bgGradient",
+  "borderImageSource",
+  "listStyleImage",
+  "listStyleImg",
+  "maskImage",
+] as const
+
+export type RadiusProperty = (typeof radiusProperties)[number]
+
+export const radiusProperties = [
+  "borderBottomLeftRadius",
+  "roundedBottomLeft",
+  "borderBottomRightRadius",
+  "roundedBottomRight",
+  "borderEndEndRadius",
+  "borderBottomEndRadius",
+  "roundedBottomEnd",
+  "borderEndStartRadius",
+  "borderBottomStartRadius",
+  "roundedBottomStart",
+  "borderRadius",
+  "rounded",
+  "borderStartEndRadius",
+  "borderTopEndRadius",
+  "roundedTopEnd",
+  "borderStartStartRadius",
+  "borderTopStartRadius",
+  "roundedTopStart",
+  "borderTopLeftRadius",
+  "roundedTopLeft",
+  "borderTopRightRadius",
+  "roundedTopRight",
+  "borderTopRadius",
+  "roundedTop",
+  "borderBottomRadius",
+  "roundedBottom",
+  "borderRightRadius",
+  "roundedRight",
+  "borderLeftRadius",
+  "roundedLeft",
+  "borderInlineStartRadius",
+  "borderStartRadius",
+  "roundedStart",
+  "borderInlineEndRadius",
+  "borderEndRadius",
+  "roundedEnd",
+] as const
+
+export type ShadowProperty = (typeof shadowProperties)[number]
+
+export const shadowProperties = [
+  "boxShadow",
+  "shadow",
+  "textShadow",
+  "dropShadow",
+  "backdropDropShadow",
+] as const
+
+export type SizeProperty = (typeof sizeProperties)[number]
+
+export const sizeProperties = [
+  "backfaceVisibility",
+  "blockSize",
+  "columnWidth",
+  "containIntrinsicWidth",
+  "flexBasis",
+  "gridAutoColumns",
+  "gridAutoRows",
+  "gridTemplateColumns",
+  "gridTemplateRows",
+  "height",
+  "h",
+  "inlineSize",
+  "maxBlockSize",
+  "maxHeight",
+  "maxH",
+  "maxInlineSize",
+  "maxWidth",
+  "maxW",
+  "minBlockSize",
+  "minHeight",
+  "minH",
+  "minInlineSize",
+  "minWidth",
+  "minW",
+  "width",
+  "w",
+  "boxSize",
+  "minBoxSize",
+  "maxBoxSize",
+] as const
+
+export type SpaceProperty = (typeof spaceProperties)[number]
+
+export const spaceProperties = [
+  "bottom",
+  "columnGap",
+  "gx",
+  "gapX",
+  "gap",
+  "g",
+  "inset",
+  "insetBlock",
+  "insetBlockEnd",
+  "insetBlockStart",
+  "insetInline",
+  "insetInlineEnd",
+  "insetEnd",
+  "insetInlineStart",
+  "insetStart",
+  "left",
+  "margin",
+  "m",
+  "marginBlock",
+  "marginBlockEnd",
+  "marginBlockStart",
+  "marginBottom",
+  "mb",
+  "marginInline",
+  "marginInlineEnd",
+  "me",
+  "marginEnd",
+  "marginInlineStart",
+  "ms",
+  "marginStart",
+  "marginLeft",
+  "ml",
+  "marginRight",
+  "mr",
+  "marginTop",
+  "mt",
+  "padding",
+  "p",
+  "paddingBlock",
+  "paddingBlockEnd",
+  "paddingBlockStart",
+  "paddingBottom",
+  "pb",
+  "paddingInline",
+  "paddingInlineEnd",
+  "pe",
+  "paddingEnd",
+  "paddingInlineStart",
+  "ps",
+  "paddingStart",
+  "paddingLeft",
+  "pl",
+  "paddingRight",
+  "pr",
+  "paddingTop",
+  "pt",
+  "right",
+  "rowGap",
+  "gy",
+  "gapY",
+  "scrollMargin",
+  "scrollMarginBottom",
+  "scrollMarginLeft",
+  "scrollMarginRight",
+  "scrollMarginTop",
+  "scrollPadding",
+  "scrollPaddingBottom",
+  "scrollPaddingLeft",
+  "scrollPaddingRight",
+  "scrollPaddingTop",
+  "top",
+  "marginX",
+  "mx",
+  "marginY",
+  "my",
+  "paddingX",
+  "px",
+  "paddingY",
+  "py",
+  "scrollMarginX",
+  "scrollMarginY",
+  "scrollPaddingX",
+  "scrollPaddingY",
+  "insetX",
+  "insetY",
+  "translateX",
+  "translateY",
+] as const
+
+export type TransitionProperty = (typeof transitionProperties)[number]
+
+export const transitionProperties = [
+  "transitionProperty",
+  "animationTimingFunction",
+  "transitionTimingFunction",
+  "animationDuration",
+  "transitionDuration",
+] as const
+
+export type ZIndexProperty = (typeof zIndexProperties)[number]
+
+export const zIndexProperties = ["zIndex", "z"] as const
+
+export type LayoutStyleProperty = (typeof layoutStyleProperties)[number]
+
+export const layoutStyleProperties = [
   "width",
   "inlineSize",
   "height",
@@ -1921,7 +2223,7 @@ export const layoutStyleProperties: any[] = [
   "gridTemplateRows",
   "gridTemplateAreas",
   "gridArea",
-]
+] as const
 
 export type StyleProps = {
   /**
@@ -4758,6 +5060,48 @@ export type StyleProps = {
    */
   stroke?: Token<CSS.Property.Stroke, "colors">
   /**
+   * The CSS `stroke-dasharray` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dasharray
+   */
+  strokeDasharray?: Token<CSS.Property.StrokeDasharray>
+  /**
+   * The CSS `stroke-dashoffset` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dashoffset
+   */
+  strokeDashoffset?: Token<CSS.Property.StrokeDashoffset | number>
+  /**
+   * The CSS `stroke-linecap` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-linecap
+   */
+  strokeLinecap?: Token<CSS.Property.StrokeLinecap>
+  /**
+   * The CSS `stroke-linejoin` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-linejoin
+   */
+  strokeLinejoin?: Token<CSS.Property.StrokeLinejoin>
+  /**
+   * The CSS `stroke-miterlimit` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-miterlimit
+   */
+  strokeMiterlimit?: Token<CSS.Property.StrokeMiterlimit>
+  /**
+   * The CSS `stroke-opacity` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-opacity
+   */
+  strokeOpacity?: Token<CSS.Property.StrokeOpacity>
+  /**
+   * The CSS `stroke-width` property.
+   *
+   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-width
+   */
+  strokeWidth?: Token<CSS.Property.StrokeWidth | number>
+  /**
    * The CSS `tab-size` property.
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
@@ -5200,48 +5544,6 @@ export type StyleProps = {
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
    */
   lightingColor?: Token<CSS.Property.LightingColor, "colors">
-  /**
-   * The CSS `stroke-dasharray` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
-   */
-  strokeDasharray?: Token<CSS.Property.StrokeDasharray>
-  /**
-   * The CSS `stroke-dashoffset` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset
-   */
-  strokeDashoffset?: Token<CSS.Property.StrokeDashoffset | number>
-  /**
-   * The CSS `stroke-linecap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap
-   */
-  strokeLinecap?: Token<CSS.Property.StrokeLinecap>
-  /**
-   * The CSS `stroke-linejoin` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin
-   */
-  strokeLinejoin?: Token<CSS.Property.StrokeLinejoin>
-  /**
-   * The CSS `stroke-miterlimit` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-miterlimit
-   */
-  strokeMiterlimit?: Token<CSS.Property.StrokeMiterlimit>
-  /**
-   * The CSS `stroke-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-opacity
-   */
-  strokeOpacity?: Token<CSS.Property.StrokeOpacity>
-  /**
-   * The CSS `stroke-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
-   */
-  strokeWidth?: Token<CSS.Property.StrokeWidth | number>
   /**
    * The CSS `margin-inline-start` and `margin-inline-end` property.
    *
@@ -5747,17 +6049,17 @@ export type StyleProps = {
    * @example
    * ```jsx
    * <Box
-   *   var={[{ name:"space", token: "spaces", value: "md" }]
-   *   m="calc(var(--ui-space) * 2)"
+   *   vars={[{ name:"space", token: "spaces", value: "md" }]
+   *   m="calc($space * 2)"
    * >
    *   Box
    * </Box>
    * ```
    */
-  var?: {
+  vars?: {
     __prefix?: string
     name: string
-    token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
+    token?: ThemeToken
     value?: Token<number | StringLiteral>
   }[]
   /**

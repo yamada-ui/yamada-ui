@@ -131,7 +131,7 @@ export const useLineChart = ({
     ...computedLineProps
   } = rest.lineProps ?? {}
 
-  const lineColors: CSSUIProps["var"] = useMemo(
+  const lineColors: CSSUIProps["vars"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
         name: `line-${index}`,
@@ -141,7 +141,7 @@ export const useLineChart = ({
     [series],
   )
 
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
+  const referenceLineColors: CSSUIProps["vars"] = useMemo(
     () =>
       referenceLineProps
         ? referenceLineProps.map(({ color }, index) => ({
@@ -153,7 +153,7 @@ export const useLineChart = ({
     [referenceLineProps],
   )
 
-  const lineVars: CSSUIProps["var"] = useMemo(
+  const lineVars: CSSUIProps["vars"] = useMemo(
     () => [
       ...lineColors,
       ...referenceLineColors,

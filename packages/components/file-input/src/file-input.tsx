@@ -111,13 +111,16 @@ export const FileInput = forwardRef<FileInputProps, "input">(
       lineClamp = 1,
       separator = ",",
       resetRef,
-      "aria-readonly": ariaReadonly,
       onChange: onChangeProp,
       onClick: onClickProp,
       ...rest
     } = useFormControlProps(omitThemeProps(mergedProps))
+    const { "aria-readonly": ariaReadonly, ...formControlProps } = pickObject(
+      rest,
+      formControlProperties,
+    )
 
-    const { disabled, readOnly } = rest
+    const { disabled, readOnly } = formControlProps
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -228,7 +231,7 @@ export const FileInput = forwardRef<FileInputProps, "input">(
           }}
           onChange={onChange}
           aria-readonly={ariaReadonly}
-          {...pickObject(rest, formControlProperties)}
+          {...formControlProps}
         />
 
         <ui.div

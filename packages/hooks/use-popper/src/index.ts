@@ -11,7 +11,9 @@ import type { PropGetter } from "@yamada-ui/utils"
 import { mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef } from "react"
 
-export const popperProperties: any[] = [
+export type PopperProperty = (typeof popperProperties)[number]
+
+export const popperProperties = [
   "enabled",
   "offset",
   "gutter",
@@ -23,7 +25,7 @@ export const popperProperties: any[] = [
   "strategy",
   "placement",
   "modifiers",
-]
+] as const
 
 export type UsePopperProps = {
   /**

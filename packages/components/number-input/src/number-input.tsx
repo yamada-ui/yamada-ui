@@ -151,9 +151,6 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     defaultValue,
     inputMode = "decimal",
     pattern = "[0-9]*(.[0-9]+)?",
-    required,
-    disabled,
-    readOnly,
     focusInputOnChange = true,
     clampValueOnBlur = true,
     keepWithinRange = true,
@@ -168,12 +165,17 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     isValidCharacter: isValidCharacterProp,
     getAriaValueText: getAriaValueTextProp,
     onChange: onChangeProp,
-    onFocus: onFocusProp,
-    onBlur: onBlurProp,
-    "aria-invalid": isInvalid,
     ...rest
   } = useFormControlProps(props)
-  const formControlProps = pickObject(rest, formControlProperties)
+  const {
+    required,
+    disabled,
+    readOnly,
+    "aria-invalid": isInvalid,
+    onFocus: onFocusProp,
+    onBlur: onBlurProp,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
 
   const isRequired = required
   const isReadOnly = readOnly

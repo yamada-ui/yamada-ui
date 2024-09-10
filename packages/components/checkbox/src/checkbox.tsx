@@ -116,17 +116,22 @@ export const useCheckbox = <
     isChecked: isCheckedProp,
     defaultIsChecked,
     tabIndex,
-    required,
-    disabled,
-    readOnly,
     isIndeterminate,
     onChange: onChangeProp,
-    onFocus: onFocusProp,
-    onBlur: onBlurProp,
     ...computedProps
   } = useFormControlProps({ id, ...props })
-  const [{ "aria-readonly": _ariaReadonly, ...formControlProps }, rest] =
-    splitObject(computedProps, formControlProperties)
+  const [
+    {
+      required,
+      disabled,
+      readOnly,
+      "aria-readonly": _ariaReadonly,
+      onFocus: onFocusProp,
+      onBlur: onBlurProp,
+      ...formControlProps
+    },
+    rest,
+  ] = splitObject(computedProps, formControlProperties)
 
   const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
   const [isFocused, setFocused] = useState<boolean>(false)

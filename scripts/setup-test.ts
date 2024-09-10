@@ -1,8 +1,8 @@
+import { toHaveNoViolations } from "@koralle/vitest-axe"
 import { vi } from "vitest"
 import "@testing-library/jest-dom/vitest"
-import * as matchers from "vitest-axe/matchers"
 
-expect.extend(matchers)
+expect.extend({ toHaveNoViolations })
 
 const { getComputedStyle } = window
 

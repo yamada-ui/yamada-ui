@@ -3,7 +3,19 @@ import type { Hsv } from "../src"
 import { SaturationSlider } from "../src"
 
 describe("<SaturationSlider />", () => {
-  beforeAll(() => {
+  let originalPageX: PropertyDescriptor | undefined
+  let originalPageY: PropertyDescriptor | undefined
+
+  beforeEach(() => {
+    originalPageX = Object.getOwnPropertyDescriptor(
+      MouseEvent.prototype,
+      "pageX",
+    )
+    originalPageY = Object.getOwnPropertyDescriptor(
+      MouseEvent.prototype,
+      "pageY",
+    )
+
     Object.defineProperties(MouseEvent.prototype, {
       pageX: {
         get() {
@@ -20,15 +32,13 @@ describe("<SaturationSlider />", () => {
     })
   })
 
-  afterAll(() => {
-    Object.defineProperty(MouseEvent.prototype, "pageX", {
-      value: undefined,
-      configurable: true,
-    })
-    Object.defineProperty(MouseEvent.prototype, "pageY", {
-      value: undefined,
-      configurable: true,
-    })
+  afterEach(() => {
+    if (originalPageX) {
+      Object.defineProperty(MouseEvent.prototype, "pageX", originalPageX)
+    }
+    if (originalPageY) {
+      Object.defineProperty(MouseEvent.prototype, "pageY", originalPageY)
+    }
   })
 
   test("SaturationSlider renders correctly", async () => {

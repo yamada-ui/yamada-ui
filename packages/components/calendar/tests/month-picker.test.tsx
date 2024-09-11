@@ -7,7 +7,7 @@ describe("<MonthPicker />", () => {
     await a11y(<MonthPicker />)
   })
 
-  test("should change selected Month", async () => {
+  test("should change selected month", async () => {
     const { user } = render(
       <MonthPicker defaultValue={new Date("2024/09/10 13:25:40")} />,
     )
@@ -21,7 +21,7 @@ describe("<MonthPicker />", () => {
     await waitFor(() => expect(input).toHaveValue("2024/06"))
   })
 
-  test("should selected current year when opening year calendar", async () => {
+  test("should change selected year", async () => {
     const { user } = render(
       <MonthPicker defaultValue={new Date("2024/09/10 13:25:40")} />,
     )

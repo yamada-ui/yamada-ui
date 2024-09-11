@@ -1,4 +1,4 @@
-import { forwardRef } from "@yamada-ui/core"
+import { forwardRef, ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 
@@ -21,7 +21,13 @@ export const Circles = forwardRef<CirclesProps, "svg">(
       <Icon ref={ref} viewBox="0 0 58 58" stroke={color} {...rest}>
         <g fill="none" fillRule="evenodd">
           <g transform="translate(2 1)" stroke={color} strokeWidth="1.5">
-            <circle cx="42.601" cy="11.462" r="5" fillOpacity="1" fill={color}>
+            <ui.circle
+              cx="42.601"
+              cy="11.462"
+              r="5"
+              fillOpacity="1"
+              fill={color}
+            >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -30,8 +36,14 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="49.063" cy="27.063" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle
+              cx="49.063"
+              cy="27.063"
+              r="5"
+              fillOpacity="0"
+              fill={color}
+            >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -40,8 +52,14 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="42.601" cy="42.663" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle
+              cx="42.601"
+              cy="42.663"
+              r="5"
+              fillOpacity="0"
+              fill={color}
+            >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -50,8 +68,8 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="27" cy="49.125" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle cx="27" cy="49.125" r="5" fillOpacity="0" fill={color}>
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -60,8 +78,14 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="11.399" cy="42.663" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle
+              cx="11.399"
+              cy="42.663"
+              r="5"
+              fillOpacity="0"
+              fill={color}
+            >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -70,8 +94,14 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="4.938" cy="27.063" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle
+              cx="4.938"
+              cy="27.063"
+              r="5"
+              fillOpacity="0"
+              fill={color}
+            >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -80,8 +110,14 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="11.399" cy="11.462" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle
+              cx="11.399"
+              cy="11.462"
+              r="5"
+              fillOpacity="0"
+              fill={color}
+            >
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -90,8 +126,8 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="27" cy="5" r="5" fillOpacity="0" fill={color}>
+            </ui.circle>
+            <ui.circle cx="27" cy="5" r="5" fillOpacity="0" fill={color}>
               <animate
                 attributeName="fill-opacity"
                 begin="0s"
@@ -100,7 +136,7 @@ export const Circles = forwardRef<CirclesProps, "svg">(
                 calcMode="linear"
                 repeatCount="indefinite"
               />
-            </circle>
+            </ui.circle>
           </g>
         </g>
       </Icon>

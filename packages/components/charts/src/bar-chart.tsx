@@ -187,8 +187,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-bar-chart", className)}
-        var={barVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", vars: barVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

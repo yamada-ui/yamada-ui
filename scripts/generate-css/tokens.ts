@@ -179,3 +179,22 @@ export const tokenMap = Object.entries(tokens).reduce(
   },
   {} as Record<CSSProperties | UIProperties, ThemeToken>,
 )
+
+export const tokenPropertyMap: Record<string, ThemeToken[]> = {
+  animation: ["animations"],
+  blur: ["blurs"],
+  border: ["borders"],
+  color: ["colors"],
+  font: ["fonts", "fontSizes", "fontWeights", "lineHeights", "letterSpacings"],
+  gradient: ["gradients"],
+  radius: ["radii"],
+  shadow: ["shadows"],
+  size: ["sizes"],
+  space: ["spaces"],
+  transition: [
+    "transitions.property",
+    "transitions.easing",
+    "transitions.duration",
+  ],
+  zIndex: ["zIndices"],
+}

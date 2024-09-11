@@ -270,7 +270,7 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
           dangerouslySetInnerHTML={{
             __html: label ?? placeholder ?? "",
           }}
-        ></ui.span>
+        />
       </ui.div>
     )
   },

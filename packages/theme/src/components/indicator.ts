@@ -28,7 +28,7 @@ export const Indicator: ComponentStyle<"Indicator"> = {
     solid: ({ colorScheme: c = "primary" }) => ({
       bg: [`${c}.500`, `${c}.600`],
       color: `white`,
-      var: [
+      vars: [
         {
           name: "ping",
           token: "colors",
@@ -42,7 +42,7 @@ export const Indicator: ComponentStyle<"Indicator"> = {
         shadeColor(`${c}.300`, 58)(t, m),
       ],
       color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
-      var: [
+      vars: [
         {
           name: "ping",
           token: "colors",

@@ -3,14 +3,12 @@ import {
   useFormControlProps,
   type FormControlOptions,
   formControlProperties,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
 import {
-  omitObject,
   dataAttr,
   handlerAll,
   mergeRefs,
@@ -19,8 +17,8 @@ import {
   clampNumber,
   hsvTo,
   roundNumberToStep,
-  pickObject,
   useUpdateEffect,
+  splitObject,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
@@ -131,13 +129,20 @@ export const useSaturationSlider = ({
     onChangeEnd: onChangeEndProp,
     step = 0.01,
     thumbColor,
-    required,
-    disabled,
-    readOnly,
     withShadow = true,
     overlays: overlaysProp = defaultOverlays(withShadow),
     ...rest
   } = useFormControlProps(props)
+  const [
+    {
+      "aria-readonly": _ariaReadonly,
+      required,
+      disabled,
+      readOnly,
+      ...formControlProps
+    },
+    containerProps,
+  ] = splitObject(rest, formControlProperties)
 
   const onChangeStart = useCallbackRef(onChangeStartProp)
   const onChangeEnd = useCallbackRef(onChangeEndProp)
@@ -288,11 +293,12 @@ export const useSaturationSlider = ({
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
-      ...omitObject(rest, ["aria-readonly"]),
+      ...containerProps,
+      ...formControlProps,
       ref: mergeRefs(ref, containerRef),
       tabIndex: -1,
     }),
-    [rest],
+    [containerProps, formControlProps],
   )
 
   const getInnerProps: UIPropGetter = useCallback(
@@ -316,7 +322,7 @@ export const useSaturationSlider = ({
 
   const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
       ...props,
       id,
       ref,
@@ -327,19 +333,16 @@ export const useSaturationSlider = ({
       disabled,
       readOnly,
     }),
-    [disabled, id, name, readOnly, required, rest, h, s, v],
+    [formControlProps, id, name, h, s, v, required, disabled, readOnly],
   )
 
   const getTrackProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(ref, trackRef),
     }),
-    [rest],
+    [formControlProps],
   )
 
   const getThumbProps: UIPropGetter = useCallback(
@@ -360,7 +363,7 @@ export const useSaturationSlider = ({
       return {
         "aria-label": "Saturation and brightness thumb",
         bg: thumbColor ?? hsvTo([h, s, v])(),
-        ...pickObject(rest, formControlProperties),
+        ...formControlProps,
         ...props,
         ref: mergeRefs(ref, thumbRef),
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
@@ -377,16 +380,17 @@ export const useSaturationSlider = ({
       }
     },
     [
-      h,
+      thumbSize,
       s,
       v,
       thumbColor,
+      h,
+      formControlProps,
+      isInteractive,
       focusThumbOnChange,
       isDragging,
-      isInteractive,
       onKeyDown,
       rest,
-      thumbSize,
     ],
   )
 

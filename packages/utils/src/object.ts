@@ -5,11 +5,11 @@ import {
   isString,
   isUndefined,
 } from "./assertion"
-import type { Dict, Union } from "./index.types"
+import type { Dict } from "./index.types"
 
-const omitObjectHelper = <T extends Dict, K extends keyof T>(
-  obj: T,
-  path: Union<K>[],
+const omitObjectHelper = <Y extends Dict, M extends keyof Y>(
+  obj: Y,
+  path: M[] | readonly M[],
 ): any => {
   if (!path.length) return obj
 
@@ -33,14 +33,14 @@ const omitObjectHelper = <T extends Dict, K extends keyof T>(
 
 export const omitObject = <
   Y extends Dict,
-  M extends keyof Y,
-  D extends unknown,
+  M extends keyof Y = keyof Y,
+  D extends unknown = unknown,
 >(
   obj: Y,
-  keys: Union<M>[],
+  keys: M[] | readonly M[],
 ) => {
-  return keys.reduce((prev, key) => {
-    const path = (isString(key) ? key.split(".") : []) as Union<M>[]
+  return (keys as M[]).reduce((prev, key) => {
+    const path = (isString(key) ? key.split(".") : []) as M[]
 
     return omitObjectHelper(prev, path)
   }, obj) as unknown as D extends unknown ? Omit<Y, M> : D
@@ -48,14 +48,14 @@ export const omitObject = <
 
 export const pickObject = <
   Y extends Dict,
-  M extends keyof Y,
-  D extends unknown,
+  M extends keyof Y = keyof Y,
+  D extends unknown = unknown,
 >(
   obj: Y,
-  keys: Union<M>[],
+  keys: M[] | readonly M[],
   fallbackValue = "__fallback",
 ) =>
-  keys.reduce((prev, key) => {
+  (keys as M[]).reduce((prev, key) => {
     const path = isString(key) ? key.split(".") : []
 
     if (!path.length) return prev
@@ -75,28 +75,28 @@ export const pickObject = <
     return prev
   }, {}) as D extends unknown ? { [H in M]: Y[H] } : D
 
-export const splitObject = <T extends Dict, K extends keyof T>(
-  obj: T,
-  keys: K[],
+export const splitObject = <Y extends Dict, M extends keyof Y>(
+  obj: Y,
+  keys: M[] | readonly M[],
 ) => {
   const picked: Dict = {}
   const omitted: Dict = {}
 
   for (const [key, value] of Object.entries(obj)) {
-    if (keys.includes(key as T[K])) {
+    if (keys.includes(key as Y[M])) {
       picked[key] = value
     } else {
       omitted[key] = value
     }
   }
 
-  return [picked, omitted] as [{ [P in K]: T[P] }, Omit<T, K>]
+  return [picked, omitted] as [{ [P in M]: Y[P] }, Omit<Y, M>]
 }
 
-export const filterObject = <T extends Dict, K extends Dict>(
-  obj: T,
-  func: (key: keyof T, value: T[keyof T], obj: T) => boolean,
-): K => {
+export const filterObject = <Y extends Dict, M extends Dict>(
+  obj: Y,
+  func: (key: keyof Y, value: Y[keyof Y], obj: Y) => boolean,
+): M => {
   const result: Dict = {}
 
   Object.entries(obj).forEach(([key, value]) => {
@@ -105,17 +105,17 @@ export const filterObject = <T extends Dict, K extends Dict>(
     if (shouldPass) result[key] = value
   })
 
-  return result as K
+  return result as M
 }
 
-export const filterUndefined = <T extends Dict>(obj: T): T =>
+export const filterUndefined = <Y extends Dict>(obj: Y): Y =>
   filterObject(obj, (_, val) => val !== null && val !== undefined)
 
-export const merge = <T extends Dict>(
+export const merge = <Y extends Dict>(
   target: any,
   source: any,
   mergeArray: boolean = false,
-): T => {
+): Y => {
   let result = Object.assign({}, target)
 
   if (isObject(source)) {
@@ -140,14 +140,14 @@ export const merge = <T extends Dict>(
     }
   }
 
-  return result as T
+  return result as Y
 }
 
-export const flattenObject = <T extends Dict>(
+export const flattenObject = <Y extends Dict>(
   obj: any,
   maxDepth: number = Infinity,
   omitKeys: string[] = [],
-): T => {
+): Y => {
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
   return Object.entries(obj).reduce((result, [key, value]) => {
@@ -165,31 +165,31 @@ export const flattenObject = <T extends Dict>(
     }
 
     return result
-  }, {} as any) as T
+  }, {} as any) as Y
 }
 
-export const objectFromEntries = <T extends Dict>(entries: any[][]): T =>
+export const objectFromEntries = <Y extends Dict>(entries: any[][]): Y =>
   entries.reduce((result, [key, value]) => {
     result[key] = value
 
     return result
-  }, {} as any) as T
+  }, {} as any) as Y
 
-export const keysFormObject = <T extends Dict>(obj: T): (keyof T)[] =>
+export const keysFormObject = <Y extends Dict>(obj: Y): (keyof Y)[] =>
   Object.keys(obj)
 
-export const replaceObject = <T extends any>(
-  objOrArray: T,
+export const replaceObject = <Y extends any>(
+  objOrArray: Y,
   callBack: (value: any) => any,
-): T => {
+): Y => {
   if (isArray(objOrArray)) {
-    return objOrArray.map(callBack) as T
+    return objOrArray.map(callBack) as Y
   } else if (isObject(objOrArray)) {
     return Object.entries(objOrArray).reduce((obj, [key, value]) => {
       obj[key] = callBack(value)
 
       return obj
-    }, {} as Dict) as T
+    }, {} as Dict) as Y
   } else {
     return callBack(objOrArray)
   }
@@ -215,12 +215,12 @@ export const getObject = (
 export const memoizeObject = (func: typeof getObject) => {
   const cache = new WeakMap()
 
-  const memoizedFunc = <T extends unknown = any>(
+  const memoizedFunc = <Y extends unknown = any>(
     obj: Dict,
     path: string | number,
     fallback?: any,
     i?: number,
-  ): T => {
+  ): Y => {
     if (isUndefined(obj)) return func(obj, path, fallback)
 
     if (!cache.has(obj)) cache.set(obj, new Map())
@@ -233,7 +233,7 @@ export const memoizeObject = (func: typeof getObject) => {
 
     map.set(path, value)
 
-    return value as T
+    return value as Y
   }
 
   return memoizedFunc

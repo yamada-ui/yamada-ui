@@ -7,12 +7,12 @@ export type Environment = {
   getDocument: () => Document | undefined
 }
 
-const environment: Environment = {
+export const defaultEnvironment: Environment = {
   getDocument: () => document,
   getWindow: () => window,
 }
 
-const EnvironmentContext = createContext<Environment>(environment)
+const EnvironmentContext = createContext<Environment>(defaultEnvironment)
 
 export type EnvironmentProviderProps = {
   children: ReactNode

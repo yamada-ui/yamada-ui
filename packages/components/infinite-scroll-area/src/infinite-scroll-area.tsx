@@ -104,7 +104,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       <InfiniteScrollAreaProvider value={styles}>
         <ui.div
           ref={mergeRefs(rootRef, ref)}
-          tabIndex={0}
           className={cx("ui-infinite-scroll-area", className)}
           role="feed"
           aria-busy="false"

@@ -15,7 +15,7 @@
 "@yamada-ui/switch": patch
 "@yamada-ui/modal": patch
 "@yamada-ui/tabs": patch
-"@yamada-ui/nextjs": patch
+"@yamada-ui/next": patch
 "@yamada-ui/core": patch
 "@yamada-ui/test": patch
 ---

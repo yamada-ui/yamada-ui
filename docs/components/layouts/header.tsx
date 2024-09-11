@@ -37,7 +37,7 @@ import {
 import type {
   BoxProps,
   CenterProps,
-  ColorMode,
+  ColorModeWithSystem,
   DrawerProps,
   IconButtonProps,
   MenuProps,
@@ -326,7 +326,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
         />
 
         <MenuList>
-          <MenuOptionGroup<ColorMode | "system">
+          <MenuOptionGroup<ColorModeWithSystem>
             value={internalColorMode}
             onChange={changeColorMode}
             type="radio"

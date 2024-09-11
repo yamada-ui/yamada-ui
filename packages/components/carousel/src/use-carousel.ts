@@ -208,7 +208,6 @@ export const useCarousel = ({
   loop = true,
   duration = 25,
   delay = 4000,
-  gap = "fallback(4, 1rem)",
   slidesToScroll = 1,
   draggable = true,
   dragFree = false,
@@ -225,7 +224,8 @@ export const useCarousel = ({
   children,
   ...rest
 }: UseCarouselProps) => {
-  const computedProps = splitObject(rest, layoutStyleProperties)
+  const [{ gap = "fallback(4, 1rem)", ...containerProps }, slidesProps] =
+    splitObject(rest, layoutStyleProperties)
 
   const [selectedIndex, setSelectedIndex] = useControllableState({
     value: index,
@@ -357,7 +357,7 @@ export const useCarousel = ({
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...computedProps[0],
+      ...containerProps,
       ...props,
       ref,
       onMouseEnter: handlerAll(props.onMouseEnter, () => {
@@ -367,16 +367,16 @@ export const useCarousel = ({
         setIsMouseEnter(false)
       }),
     }),
-    [computedProps],
+    [containerProps],
   )
 
   const getSlidesProps: UIPropGetter = useCallback(
     (props = {}) => ({
-      ...computedProps[1],
+      ...slidesProps,
       ...props,
       ref: carouselRef,
     }),
-    [computedProps, carouselRef],
+    [slidesProps, carouselRef],
   )
 
   return {

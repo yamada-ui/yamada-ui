@@ -685,22 +685,22 @@ export type CSSMap = Dict<{
 
 export type CustomTheme = {}
 
+export type CustomInternalTheme = {}
+
+export type InternalTheme =
+  CustomInternalTheme extends Required<UsageTheme>
+    ? CustomInternalTheme
+    : UsageTheme
+
 export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
 export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 
-export type PropsTheme<T extends object = Dict> = T & {
+export type StyledTheme<T extends InternalTheme = InternalTheme> = T & {
   themeScheme: Theme["themeSchemes"]
   changeThemeScheme: ChangeThemeScheme
-  __config: ThemeConfig | undefined
-  __cssVars: Dict
-  __cssMap: CSSMap
-  __breakpoints: AnalyzeBreakpointsReturn
-}
-
-export type StyledTheme<T extends object = Dict> = T & {
-  __config: ThemeConfig | undefined
-  __cssVars: Dict
-  __cssMap: CSSMap
-  __breakpoints: AnalyzeBreakpointsReturn
+  __config?: ThemeConfig
+  __cssVars?: Dict
+  __cssMap?: CSSMap
+  __breakpoints?: AnalyzeBreakpointsReturn
 }

@@ -21,6 +21,7 @@ import {
   omitObject,
   pickObject,
   isFunction,
+  noop,
 } from "@yamada-ui/utils"
 
 type Options = {
@@ -81,6 +82,8 @@ export const extendStyle = (
 ): UIStyle => {
   const props: UIStyleProps = {
     theme: {
+      themeScheme: "base",
+      changeThemeScheme: noop,
       __config: {},
       __cssMap: {},
       __cssVars: {},

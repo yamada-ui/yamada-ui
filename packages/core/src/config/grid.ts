@@ -25,7 +25,9 @@ export const grid: Transform = (value, theme, ...rest) => {
     if (!prevent) {
       const token = `sizes.${value}`
 
-      return token in theme.__cssMap ? theme.__cssMap[token].ref : value
+      return theme.__cssMap && token in theme.__cssMap
+        ? theme.__cssMap[token].ref
+        : value
     }
 
     const { type, values } = getCSSFunction(value)

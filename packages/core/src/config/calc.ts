@@ -24,7 +24,7 @@ const getValue =
 
       const resolvedToken = `${token}.${value}`
 
-      return resolvedToken in theme.__cssMap
+      return theme.__cssMap && resolvedToken in theme.__cssMap
         ? theme.__cssMap[resolvedToken].ref
         : value
     }

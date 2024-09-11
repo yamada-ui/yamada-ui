@@ -28,7 +28,8 @@ const sortNodes = (nodes: Node[]) =>
       compare & Node.DOCUMENT_POSITION_DISCONNECTED ||
       compare & Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
     ) {
-      throw Error("Cannot sort the given nodes.")
+      console.warn("Cannot sort the given nodes.")
+      return 0
     } else {
       return 0
     }

@@ -103,9 +103,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   )
 
   useEffect(() => {
-    const managerValue = themeSchemeManager.get()(storageKey)
+    const themeScheme = themeSchemeManager.get()(storageKey)
 
-    if (managerValue) changeThemeScheme(managerValue)
+    if (themeScheme) changeThemeScheme(themeScheme)
   }, [changeThemeScheme, themeSchemeManager, storageKey])
 
   return (
@@ -184,31 +184,26 @@ export const GlobalStyle: FC = () => {
  * @see Docs https://yamada-ui.com/hooks/use-theme
  */
 export const useTheme = <T extends object = Dict>() => {
-  const { themeScheme, changeThemeScheme, ...internalTheme } = useContext(
-    ThemeContext,
-  ) as PropsTheme<UsageTheme>
+  const context = useContext(ThemeContext) as PropsTheme<UsageTheme>
 
   const theme = useMemo(() => {
+    const { themeScheme, ...internalTheme } = context
+
     if (isUndefined(themeScheme) || themeScheme === "base") return internalTheme
 
     const nestedTheme = internalTheme.themeSchemes?.[themeScheme]
 
     if (!nestedTheme) return internalTheme
 
-    return merge(internalTheme, nestedTheme)
-  }, [themeScheme, internalTheme])
+    return merge<StyledTheme<T>>(internalTheme, nestedTheme)
+  }, [context])
 
-  const value = useMemo(
-    () =>
-      ({ themeScheme, changeThemeScheme, theme, internalTheme }) as Pick<
-        PropsTheme,
-        "themeScheme" | "changeThemeScheme"
-      > & {
-        theme: StyledTheme<T>
-        internalTheme: StyledTheme<T>
-      },
-    [themeScheme, changeThemeScheme, theme, internalTheme],
-  )
+  const value = useMemo(() => {
+    const { themeScheme, changeThemeScheme, ...rest } = context
+    const internalTheme = rest as StyledTheme<T>
+
+    return { themeScheme, changeThemeScheme, theme, internalTheme }
+  }, [theme, context])
 
   return value
 }

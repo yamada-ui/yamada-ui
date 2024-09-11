@@ -1,6 +1,6 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import {
   cx,
@@ -212,6 +212,20 @@ export const Month: FC<MonthProps> = ({
                           const isDisplayed =
                             !isNull(day) && !isUndefined(day) && !isBoolean(day)
 
+                          const css: CSSUIObject = {
+                            display:
+                              isHidden || !isDisplayed ? "none" : "inline-flex",
+                            minW: "auto",
+                            h: "auto",
+                            p: 0,
+                            fontSize: undefined,
+                            fontWeight: "normal",
+                            _ripple: {
+                              display: "block",
+                            },
+                            ...styles.day,
+                          }
+
                           return (
                             <ui.td
                               key={col}
@@ -223,18 +237,8 @@ export const Month: FC<MonthProps> = ({
                             >
                               <Button
                                 className="ui-calendar__month__day"
-                                variant="ghost"
-                                __css={{
-                                  minW: "auto",
-                                  h: "auto",
-                                  p: 0,
-                                  fontSize: undefined,
-                                  fontWeight: "normal",
-                                  ...(isHidden || !isDisplayed
-                                    ? { display: "none" }
-                                    : {}),
-                                  ...styles.day,
-                                }}
+                                variant="unstyled"
+                                __css={css}
                                 {...props}
                               >
                                 {day}

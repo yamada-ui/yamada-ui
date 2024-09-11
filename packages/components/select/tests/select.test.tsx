@@ -399,11 +399,9 @@ describe("<Select />", () => {
       await user.click(input)
 
       const listbox = await screen.findByRole("listbox")
-      expect(listbox).toHaveStyle({ visibility: "visible" })
       expect(listbox).toBeVisible()
 
       await user.keyboard("{Escape>}")
-      // await waitFor(() => expect(listbox).toHaveStyle({ visibility: "hidden" }))
       await waitFor(() => expect(listbox).not.toBeVisible())
     })
   })

@@ -23,9 +23,18 @@ export type ObjectLiteral = {}
 
 export type StringLiteral = string & {}
 
+export type Replace<
+  Y extends string,
+  M extends string,
+  D extends string,
+  H extends string = "",
+> = Y extends `${infer T}${M}${infer R}`
+  ? Replace<R, M, D, `${H}${T}${D}`>
+  : `${H}${Y}`
+
 export type Union<T> = T | StringLiteral
 
-export type Length = string | 0 | number
+export type Length<T extends any[]> = T["length"]
 
 export type Merge<Y, M> = Omit<Y, keyof M> & M
 

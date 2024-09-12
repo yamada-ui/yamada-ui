@@ -1,10 +1,9 @@
+import { axe } from "@koralle/vitest-axe"
+import type { AxeCore, AxeMatchers } from "@koralle/vitest-axe"
 import type { RenderOptions } from "@testing-library/react"
 import { isArray, isString } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { isValidElement } from "react"
-import { axe } from "vitest-axe"
-import type { AxeCore } from "vitest-axe"
-import type { AxeMatchers } from "vitest-axe/matchers"
 import { render } from "./render"
 
 declare module "vitest" {

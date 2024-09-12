@@ -1,5 +1,13 @@
 # @yamada-ui/badge
 
+## 1.0.36
+
+### Patch Changes
+
+- Updated dependencies [[`f0385c2`](https://github.com/yamada-ui/yamada-ui/commit/f0385c2ea633e347242b793035e7f73344c5eed0), [`8135578`](https://github.com/yamada-ui/yamada-ui/commit/8135578b5a5d1542d10d5919d737094038a7de1a), [`988c630`](https://github.com/yamada-ui/yamada-ui/commit/988c630d0f7ed297a0ddd51a09cb3bee612e9b60), [`7db37b4`](https://github.com/yamada-ui/yamada-ui/commit/7db37b42df54b7078f5b22a9664cebea6b1a6133), [`f7c5bf8`](https://github.com/yamada-ui/yamada-ui/commit/f7c5bf8a05c7e4b7c389eef0a8ebb0c88364a548), [`988c630`](https://github.com/yamada-ui/yamada-ui/commit/988c630d0f7ed297a0ddd51a09cb3bee612e9b60), [`1b24784`](https://github.com/yamada-ui/yamada-ui/commit/1b2478474066c1777f3248aa704b3a0fd891570d), [`cf11167`](https://github.com/yamada-ui/yamada-ui/commit/cf1116743ef742d533b6c4069bc6a6fda1fe8580), [`988c630`](https://github.com/yamada-ui/yamada-ui/commit/988c630d0f7ed297a0ddd51a09cb3bee612e9b60), [`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`988c630`](https://github.com/yamada-ui/yamada-ui/commit/988c630d0f7ed297a0ddd51a09cb3bee612e9b60), [`02e8e1e`](https://github.com/yamada-ui/yamada-ui/commit/02e8e1e127ea96c9787c59c0567327bb6ec10928), [`122f789`](https://github.com/yamada-ui/yamada-ui/commit/122f789d60f947fea53dfff1259fd540268aa66a), [`cbb8200`](https://github.com/yamada-ui/yamada-ui/commit/cbb8200c684d9373e4f3aeaeef0a7d87a822619b), [`b26c1b9`](https://github.com/yamada-ui/yamada-ui/commit/b26c1b95e13feb8954e7e7f7e9e56a16f1cd67aa), [`7bf75d0`](https://github.com/yamada-ui/yamada-ui/commit/7bf75d0e0b5240fa6babd437c70a9981caec0a22), [`59ee30a`](https://github.com/yamada-ui/yamada-ui/commit/59ee30ab94b0d4dbfb938eb17487dc6fde18f510), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74), [`082688a`](https://github.com/yamada-ui/yamada-ui/commit/082688a2258c2111d4a34454c56bdaf1f87071ad)]:
+  - @yamada-ui/core@1.14.0
+  - @yamada-ui/utils@1.5.0
+
 ## 1.0.35
 
 ### Patch Changes

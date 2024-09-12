@@ -18,7 +18,7 @@
       "description": "The animation of the tooltip."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "blockScrollOnMount": {
@@ -43,6 +43,11 @@
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for modal container element."
     },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
@@ -139,7 +144,7 @@
   },
   "ModalOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     }
   },
@@ -185,7 +190,7 @@
       "description": "The animation of the tooltip."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "blockScrollOnMount": {
@@ -215,6 +220,11 @@
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for modal container element."
     },
     "duration": {
       "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
@@ -346,7 +356,7 @@
   },
   "DialogOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     }
   },
@@ -386,7 +396,7 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "blankForDragProps": {
@@ -422,6 +432,11 @@
       "type": "\"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"danger\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"warning\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"success\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"primary\" | \"info\" | \"link\" | \"indigo\" | \"violet\" | \"secondary\" | \"purple\" | \"fuchsia\"",
       "required": false,
       "description": "The visual color appearance of the component."
+    },
+    "containerProps": {
+      "type": "HTMLUIProps<\"div\">",
+      "required": false,
+      "description": "Props for modal container element."
     },
     "dragConstraints": {
       "type": "number",
@@ -542,7 +557,7 @@
   },
   "DrawerOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     }
   },

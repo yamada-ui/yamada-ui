@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-clickable",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Yamada UI useClickable custom hook",
   "keywords": [
     "use-clickable"

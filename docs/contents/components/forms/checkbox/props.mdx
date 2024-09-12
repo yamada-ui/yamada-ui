@@ -4,9 +4,9 @@ description: >-
   `Checkbox` is a component used for allowing users to select multiple values
   from multiple options.
 package_name: "@yamada-ui/checkbox"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -165,6 +165,12 @@ order: 1
 />
 
 ### CheckboxIconProps
+
+<PropsCard
+  id="checkboxicon-as"
+  name="as"
+  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "label" | "a" | "abbr" | "address" | "area" | "article" | ... 148 more ... | "view"'
+/>
 
 <PropsCard
   id="checkboxicon-ischecked"
@@ -326,28 +332,28 @@ order: 1
 <PropsCard
   id="checkboxgroup-align"
   name="align"
-  type='(string & {}) | "center" | "end" | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "start" | "baseline" | "stretch" | "flex-end" | "flex-start" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "center" | "initial" | "inherit" | "baseline" | "end" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "stretch" | "flex-end" | "flex-start" | "start" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `align-items` property."}
 />
 
 <PropsCard
   id="checkboxgroup-basis"
   name="basis"
-  type='number | (string & {}) | "content" | "px" | "max" | "min" | "initial" | "inherit" | "auto" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | ... 72 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='number | (string & {}) | "content" | "px" | "initial" | "inherit" | "auto" | "max" | "min" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "revert" | "revert-layer" | "unset" | ... 72 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-basis` property."}
 />
 
 <PropsCard
   id="checkboxgroup-direction"
   name="direction"
-  type='"initial" | "inherit" | "row" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...'
+  type='"initial" | "inherit" | "row" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="checkboxgroup-grow"
   name="grow"
-  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-grow` property."}
 />
 
@@ -404,7 +410,7 @@ order: 1
 <PropsCard
   id="checkboxgroup-justify"
   name="justify"
-  type='(string & {}) | "left" | "right" | "center" | "end" | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "normal" | "start" | "space-around" | "space-between" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "left" | "right" | "center" | "initial" | "inherit" | "end" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 9 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `justify-content` property."}
 />
 
@@ -420,7 +426,7 @@ order: 1
 <PropsCard
   id="checkboxgroup-shrink"
   name="shrink"
-  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-shrink` property."}
 />
 
@@ -434,7 +440,7 @@ order: 1
 <PropsCard
   id="checkboxgroup-wrap"
   name="wrap"
-  type='"initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "wrap" | "nowrap" | "wrap-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"initial" | "inherit" | "wrap" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap-reverse" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-wrap` property."}
 />
 

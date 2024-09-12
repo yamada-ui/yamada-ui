@@ -1,8 +1,10 @@
 import * as c from "color2k"
-import { isArray, isNumber } from "./assertion"
+import { isArray, isNumber, isObject } from "./assertion"
 import type { Dict, StringLiteral } from "./index.types"
 import { getMemoizedObject as get } from "./object"
 
+type ThemeValue = string | number
+type Breakpoint = "base" | StringLiteral
 type ColorMode = "light" | "dark"
 
 export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
@@ -58,7 +60,11 @@ export const isAccessible = (colorScheme: string) =>
 
 export const getColor =
   (color: string, fallback: string = "#000000") =>
-  (theme: Dict = {}, colorMode?: ColorMode) => {
+  (
+    theme: Dict = {},
+    colorMode: ColorMode = "light",
+    breakpoint: Breakpoint = "base",
+  ) => {
     const [token, tone] = color.split(".")
 
     if (tone) {
@@ -77,13 +83,17 @@ export const getColor =
       if (relatedColor) color = relatedColor
     }
 
-    const hex = get<
-      string | number | [string | number, string | number] | undefined
-    >(theme, `colors.${color}`, color)
+    const hex = get<ThemeValue | [ThemeValue, ThemeValue] | Dict<ThemeValue>>(
+      theme,
+      `colors.${color}`,
+      color,
+    )
 
     try {
       if (isArray(hex)) {
-        return c.toHex(String(colorMode !== "dark" ? hex[0] : hex[1]))
+        return c.toHex(String(hex[colorMode !== "dark" ? 0 : 1]))
+      } else if (isObject(hex)) {
+        return c.toHex(String(hex[breakpoint]))
       } else {
         return c.toHex(String(hex))
       }
@@ -97,36 +107,41 @@ export const getColor =
   }
 
 export const lightenColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+  (color: string, amount: number) =>
+  (theme?: Dict, colorMode?: ColorMode, breakpoint?: Breakpoint) => {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.lighten(raw, amount / 100))
   }
 
 export const darkenColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+  (color: string, amount: number) =>
+  (theme?: Dict, colorMode?: ColorMode, breakpoint?: Breakpoint) => {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.darken(raw, amount / 100))
   }
 
 export const tintColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+  (color: string, amount: number) =>
+  (theme?: Dict, colorMode?: ColorMode, breakpoint?: Breakpoint) => {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.mix(raw, "#fff", amount / 100))
   }
 
 export const shadeColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+  (color: string, amount: number) =>
+  (theme?: Dict, colorMode?: ColorMode, breakpoint?: Breakpoint) => {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.mix(raw, "#000", amount / 100))
   }
 
 export const transparentizeColor =
-  (color: string, alpha: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+  (color: string, alpha: number) =>
+  (theme?: Dict, colorMode?: ColorMode, breakpoint?: Breakpoint) => {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.transparentize(raw, 1 - alpha)
   }
@@ -198,8 +213,9 @@ const getBrightness = (color: string) => {
 }
 
 export const isTone =
-  (color: string) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+  (color: string) =>
+  (theme?: Dict, colorMode?: ColorMode, breakpoint?: Breakpoint) => {
+    const raw = theme ? getColor(color)(theme, colorMode, breakpoint) : color
 
     const brightness = getBrightness(raw)
 

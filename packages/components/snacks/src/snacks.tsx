@@ -92,16 +92,18 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
       () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
-    const top = useToken<string | number>("spaces", useValue(gutter[0])) ?? 0
-    const bottom = useToken<string | number>("spaces", useValue(gutter[1])) ?? 0
+    const _top = useValue(gutter[0])
+    const _bottom = useValue(gutter[1])
+    const top = useToken("spaces", _top) ?? 0
+    const bottom = useToken("spaces", _bottom) ?? 0
     const negatedTop = calc(top).negate().toString()
     const negatedBottom = calc(bottom).negate().toString()
     const isShow = !!count || isExist
 
     const css: CSSUIObject = {
       w: "100%",
-      var: [{ name: "space", token: "spaces", value: gap }],
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
+      vars: [{ name: "space", token: "spaces", value: gap }],
     }
 
     useEffect(() => {

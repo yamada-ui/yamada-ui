@@ -206,9 +206,10 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const skipSnaps = useValue(props.skipSnaps)
     const containScroll = useValue(props.containScroll)
     const includeGapInSize = useValue(props.includeGapInSize)
-    const gap = useToken("spaces", useValue(props.gap)) ?? useValue(props.gap)
-    const slideSize =
-      useToken("sizes", useValue(props.slideSize)) ?? useValue(props.slideSize)
+    const _gap = useValue(props.gap)
+    const gap = useToken("spaces", _gap) ?? _gap
+    const _slideSize = useValue(props.slideSize)
+    const slideSize = useToken("sizes", _slideSize) ?? _slideSize
 
     const [styles, mergedProps] = useMultiComponentStyle("Carousel", {
       ...props,
@@ -345,7 +346,7 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     ...styles.inner,
     ...(includeGapInSize
       ? {
-          var: [{ name: "gap", token: "spaces", value: gap }],
+          vars: [{ name: "gap", token: "spaces", value: gap }],
           [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * -1)",
         }
       : {}),

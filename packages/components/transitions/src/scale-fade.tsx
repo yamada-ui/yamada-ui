@@ -14,27 +14,6 @@ import {
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
-type ScaleFadeOptions = {
-  /**
-   * The initial scale of the element.
-   *
-   * @default 0.95
-   */
-  scale?: number
-  /**
-   * If `true`, the element will transition back to exit state.
-   *
-   * @default true
-   */
-  reverse?: boolean
-}
-
-export type ScaleFadeProps = WithTransitionProps<
-  Omit<MotionProps<"div">, "scale">
-> &
-  ScaleFadeOptions &
-  ThemeProps<"ScaleFade">
-
 const variants: MotionTransitionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
@@ -68,12 +47,32 @@ export const scaleFadeProps = {
   variants,
 }
 
+type ScaleFadeOptions = {
+  /**
+   * The initial scale of the element.
+   *
+   * @default 0.95
+   */
+  scale?: number
+  /**
+   * If `true`, the element will transition back to exit state.
+   *
+   * @default true
+   */
+  reverse?: boolean
+}
+
+export type ScaleFadeProps = WithTransitionProps<
+  Omit<MotionProps<"div">, "scale">
+> &
+  ScaleFadeOptions &
+  ThemeProps<"ScaleFade">
+
 /**
  * `ScaleFade` is a component that gradually scales up to reveal or scales down to hide an element.
  *
  * @see Docs https://yamada-ui.com/components/transitions/scale-fade
  */
-
 export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
   (props, ref) => {
     const [style, mergedProps] = useComponentStyle("ScaleFade", props)

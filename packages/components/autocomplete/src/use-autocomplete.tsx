@@ -5,12 +5,12 @@ import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import { popoverProperties, type PopoverProps } from "@yamada-ui/popover"
+import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Dict, Union, DOMAttributes } from "@yamada-ui/utils"
+import type { Union, DOMAttributes } from "@yamada-ui/utils"
 import {
   ariaAttr,
   createContext,
@@ -22,7 +22,6 @@ import {
   isContains,
   isHTMLElement,
   mergeRefs,
-  omitObject,
   pickObject,
   splitObject,
   useUnmountEffect,
@@ -229,7 +228,7 @@ type AutocompleteContext = Omit<
   onChangeLabel: (newValue: string, options?: ChangeOptions) => void
   pickOptions: (value: string) => void
   rebirthOptions: (runFocus?: boolean) => void
-  inputProps: DOMAttributes
+  inputProps: DOMAttributes<HTMLInputElement>
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -252,88 +251,83 @@ export const [AutocompleteProvider, useAutocompleteContext] =
     errorMessage: `useAutocompleteContext returned is 'undefined'. Seems you forgot to wrap the components in "<Autocomplete />" or "<MultiAutocomplete />"`,
   })
 
-type UseAutocompleteBaseProps<T extends string | string[] = string> = Omit<
-  PopoverProps,
-  | "initialFocusRef"
-  | "closeOnButton"
-  | "trigger"
-  | "autoFocus"
-  | "restoreFocus"
-  | "openDelay"
-  | "closeDelay"
-> &
-  FormControlOptions & {
-    /**
-     * The value of the autocomplete.
-     */
-    value?: T
-    /**
-     * The initial value of the autocomplete.
-     */
-    defaultValue?: T
-    /**
-     * The callback invoked when value state changes.
-     */
-    onChange?: (value: T) => void
-    /**
-     * The callback invoked when search input.
-     */
-    onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
-    /**
-     * The callback invoked when autocomplete option created.
-     */
-    onCreate?: (newItem: AutocompleteItem, newItems: AutocompleteItem[]) => void
-    /**
-     * Function to format text when search input.
-     */
-    format?: (value: string) => string
-    /**
-     * The position to be inserted when the autocomplete option is created.
-     *
-     * @default 'first'
-     */
-    insertPositionItem?: Union<"first" | "last"> | [string, "first" | "last"]
-    /**
-     * If `true`, the list element will be closed when value is selected.
-     *
-     * @default true
-     */
-    closeOnSelect?: boolean
-    /**
-     * The message displayed when the search yields no hits.
-     *
-     * @default 'No results found'
-     */
-    emptyMessage?: string
-    /**
-     * If `true`, enables the creation of autocomplete option.
-     *
-     * @default false
-     */
-    allowCreate?: boolean
-    /**
-     * If `true`, enables the free input.
-     */
-    allowFree?: boolean
-    /**
-     * If `true`, the selected item(s) will be excluded from the list.
-     *
-     * @default false
-     */
-    omitSelectedValues?: boolean
-    /**
-     * The maximum selectable value.
-     */
-    maxSelectValues?: number
-    /**
-     * Props for select option element.
-     */
-    optionProps?: Omit<AutocompleteOptionProps, "value" | "children">
-    /**
-     * If provided, generate options based on items.
-     */
-    items?: AutocompleteItem[]
-  }
+type UseAutocompleteBaseProps<T extends string | string[] = string> =
+  ComboBoxProps &
+    FormControlOptions & {
+      /**
+       * The value of the autocomplete.
+       */
+      value?: T
+      /**
+       * The initial value of the autocomplete.
+       */
+      defaultValue?: T
+      /**
+       * The callback invoked when value state changes.
+       */
+      onChange?: (value: T) => void
+      /**
+       * The callback invoked when search input.
+       */
+      onSearch?: (ev: ChangeEvent<HTMLInputElement>) => void
+      /**
+       * The callback invoked when autocomplete option created.
+       */
+      onCreate?: (
+        newItem: AutocompleteItem,
+        newItems: AutocompleteItem[],
+      ) => void
+      /**
+       * Function to format text when search input.
+       */
+      format?: (value: string) => string
+      /**
+       * The position to be inserted when the autocomplete option is created.
+       *
+       * @default 'first'
+       */
+      insertPositionItem?: Union<"first" | "last"> | [string, "first" | "last"]
+      /**
+       * If `true`, the list element will be closed when value is selected.
+       *
+       * @default true
+       */
+      closeOnSelect?: boolean
+      /**
+       * The message displayed when the search yields no hits.
+       *
+       * @default 'No results found'
+       */
+      emptyMessage?: string
+      /**
+       * If `true`, enables the creation of autocomplete option.
+       *
+       * @default false
+       */
+      allowCreate?: boolean
+      /**
+       * If `true`, enables the free input.
+       */
+      allowFree?: boolean
+      /**
+       * If `true`, the selected item(s) will be excluded from the list.
+       *
+       * @default false
+       */
+      omitSelectedValues?: boolean
+      /**
+       * The maximum selectable value.
+       */
+      maxSelectValues?: number
+      /**
+       * Props for select option element.
+       */
+      optionProps?: Omit<AutocompleteOptionProps, "value" | "children">
+      /**
+       * If provided, generate options based on items.
+       */
+      items?: AutocompleteItem[]
+    }
 
 export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
   HTMLUIProps<"input">,
@@ -346,46 +340,59 @@ export type UseAutocompleteProps<T extends string | string[] = string> = Omit<
 > &
   UseAutocompleteBaseProps<T>
 
-export const useAutocomplete = <T extends string | string[] = string>({
-  value: valueProp,
-  defaultValue,
-  onChange: onChangeProp,
-  onCreate: onCreateProp,
-  onSearch: onSearchProp,
-  closeOnSelect = true,
-  omitSelectedValues = false,
-  maxSelectValues,
-  closeOnBlur = true,
-  closeOnEsc = true,
-  allowCreate = false,
-  allowFree = false,
-  insertPositionItem = "first",
-  emptyMessage = "No results found",
-  format = defaultFormat,
-  placement = "bottom-start",
-  duration = 0.2,
-  optionProps,
-  placeholder,
-  items,
-  children,
-  isOpen: isOpenProp,
-  defaultIsOpen,
-  onOpen: onOpenProp,
-  onClose: onCloseProp,
-  ...rest
-}: UseAutocompleteProps<T>) => {
-  rest = useFormControlProps(rest)
-
+export const useAutocomplete = <T extends string | string[] = string>(
+  props: UseAutocompleteProps<T>,
+) => {
+  const {
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+    onCreate: onCreateProp,
+    onSearch: onSearchProp,
+    closeOnSelect = true,
+    omitSelectedValues = false,
+    maxSelectValues,
+    allowCreate = false,
+    allowFree = false,
+    insertPositionItem = "first",
+    emptyMessage = "No results found",
+    format = defaultFormat,
+    optionProps,
+    placeholder,
+    onKeyDown: onKeyDownProp,
+    isOpen: isOpenProp,
+    defaultIsOpen,
+    onOpen: onOpenProp,
+    onClose: onCloseProp,
+    closeOnBlur = true,
+    closeOnEsc = true,
+    openDelay,
+    closeDelay,
+    isLazy,
+    lazyBehavior,
+    animation,
+    duration = 0.2,
+    offset,
+    gutter,
+    preventOverflow,
+    flip,
+    matchWidth = true,
+    boundary,
+    eventListeners,
+    strategy,
+    placement = "bottom-start",
+    modifiers,
+    items,
+    children,
+    ...rest
+  } = useFormControlProps(props)
+  const {
+    "aria-readonly": _ariaReadonly,
+    onFocus: onFocusProp,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
+  const [containerProps, inputProps] = splitObject(rest, layoutStyleProperties)
   const { id } = rest
-
-  const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
-    rest,
-    formControlProperties,
-  )
-  const [containerProps, inputProps] = splitObject<Dict, string>(
-    omitObject(rest, [...popoverProperties, "onKeyDown", "onFocus"]),
-    layoutStyleProperties,
-  )
 
   const descendants = useAutocompleteDescendants()
 
@@ -1132,19 +1139,52 @@ export const useAutocomplete = <T extends string | string[] = string>({
 
   const getPopoverProps = useCallback(
     (props?: PopoverProps): PopoverProps => ({
-      matchWidth: true,
-      ...rest,
+      closeOnBlur,
+      openDelay,
+      closeDelay,
+      isLazy,
+      lazyBehavior,
+      animation,
+      duration,
+      offset,
+      gutter,
+      preventOverflow,
+      flip,
+      matchWidth,
+      boundary,
+      eventListeners,
+      strategy,
+      placement,
+      modifiers,
       ...props,
+      trigger: "never",
+      closeOnButton: false,
       isOpen,
       onOpen,
       onClose,
-      placement,
-      duration,
-      trigger: "never",
-      closeOnButton: false,
-      closeOnBlur,
     }),
-    [duration, closeOnBlur, isOpen, onClose, onOpen, placement, rest],
+    [
+      closeOnBlur,
+      openDelay,
+      closeDelay,
+      isLazy,
+      lazyBehavior,
+      animation,
+      duration,
+      offset,
+      gutter,
+      preventOverflow,
+      flip,
+      matchWidth,
+      boundary,
+      eventListeners,
+      strategy,
+      placement,
+      modifiers,
+      isOpen,
+      onOpen,
+      onClose,
+    ],
   )
 
   const getContainerProps: UIPropGetter = useCallback(
@@ -1169,10 +1209,18 @@ export const useAutocomplete = <T extends string | string[] = string>({
       placeholder,
       "data-active": dataAttr(isOpen),
       "aria-expanded": dataAttr(isOpen),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onFocus),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+      onFocus: handlerAll(props.onFocus, onFocusProp, onFocus),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDownProp, onKeyDown),
     }),
-    [formControlProps, placeholder, isOpen, rest, onFocus, onKeyDown],
+    [
+      formControlProps,
+      placeholder,
+      isOpen,
+      onFocusProp,
+      onFocus,
+      onKeyDownProp,
+      onKeyDown,
+    ],
   )
 
   return {
@@ -1216,7 +1264,7 @@ export const useAutocomplete = <T extends string | string[] = string>({
     getPopoverProps,
     getContainerProps,
     getFieldProps,
-    inputProps,
+    inputProps: inputProps as DOMAttributes<HTMLInputElement>,
   }
 }
 
@@ -1403,7 +1451,7 @@ export const useAutocompleteOptionGroup = ({
 
   const isEmpty = !childValues.length
 
-  const computedRest = splitObject(rest, layoutStyleProperties)
+  const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
 
   const getContainerProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => {
@@ -1422,24 +1470,24 @@ export const useAutocompleteOptionGroup = ({
       return {
         ref,
         ...props,
-        ...computedRest[0],
+        ...containerProps,
         style: isEmpty ? style : undefined,
         "data-label": label,
         role: "autocomplete-group-container",
       }
     },
-    [computedRest, isEmpty, label],
+    [containerProps, isEmpty, label],
   )
 
-  const getGroupProps: UIPropGetter = useCallback(
+  const getGroupProps: UIPropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       ref,
       ...props,
-      ...computedRest[1],
+      ...groupProps,
       "data-label": label,
       role: "autocomplete-group",
     }),
-    [computedRest, label],
+    [groupProps, label],
   )
 
   return {

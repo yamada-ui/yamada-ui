@@ -1,13 +1,13 @@
 import { writeFile } from "fs/promises"
 import type { Transforms, ThemeToken } from "@yamada-ui/react"
-import { pseudosSelectors } from "@yamada-ui/react"
+import { pseudoSelectors } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
 import { layoutStyleProperties } from "./layout-props"
 import { overrideTypes } from "./override-types"
 import { shorthandProps } from "./shorthand-props"
-import { tokenMap } from "./tokens"
+import { tokenMap, tokenPropertyMap } from "./tokens"
 import type { TransformOptions } from "./transform-props"
 import { transformMap } from "./transform-props"
 import type { UIOptions } from "./ui-props"
@@ -122,12 +122,13 @@ export const generateStyles = async (
   const uiStyles: string[] = []
   const atRuleStyles: string[] = []
   const styleProps: string[] = []
-  const processSkipProperties: string[] = []
+  const processSkipProps: string[] = []
+  const tokenProps: Partial<Record<ThemeToken, string[]>> = {}
   const pickedStyles: (CSSProperty & { type: string })[] = []
 
   checkProps(styles)
 
-  pseudosSelectors.forEach((selector) => {
+  pseudoSelectors.forEach((selector) => {
     const transforms = transformMap[selector]
 
     if (!transforms) return
@@ -150,7 +151,7 @@ export const generateStyles = async (
   })
 
   styles.forEach(({ name, prop, url, type, deprecated }) => {
-    const token: ThemeToken | undefined = tokenMap[prop]
+    const token = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transforms = transformMap[prop]
     const config = generateConfig({ properties: prop, token, transforms })()
@@ -160,11 +161,19 @@ export const generateStyles = async (
     standardStyles.push(`${prop}: ${config}`)
     styleProps.push(...[docs, `${prop}?: ${type}`])
 
+    if (token) {
+      tokenProps[token] ??= []
+
+      tokenProps[token].push(prop)
+    }
+
     if (shorthands) {
       const shorthandStyle =
         config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
+        if (token) tokenProps[token]?.push(shorthandProp)
+
         shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
         styleProps.push(docs, `${shorthandProp}?: ${type}`)
       })
@@ -185,7 +194,7 @@ export const generateStyles = async (
     ]: [string, UIOptions],
     targetStyles: string[],
   ) => {
-    if (isProcessSkip) processSkipProperties.push(prop)
+    if (isProcessSkip) processSkipProps.push(prop)
 
     const relatedStyles = styles.filter(({ prop }) =>
       typeof properties === "string"
@@ -220,11 +229,19 @@ export const generateStyles = async (
     targetStyles.push(`${prop}: ${config}`)
     styleProps.push(...[docs, `${prop}?: ${type}`])
 
+    if (token) {
+      tokenProps[token] ??= []
+
+      tokenProps[token].push(prop)
+    }
+
     if (shorthands) {
       const shorthandStyle =
         config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
+        if (token) tokenProps[token]?.push(shorthandProp)
+
         shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
         styleProps.push(docs, `${shorthandProp}?: ${type}`)
       })
@@ -241,6 +258,23 @@ export const generateStyles = async (
     addStyles(entry, atRuleStyles),
   )
 
+  const processSkipProperties = processSkipProps.map(
+    (property) => `"${property}"`,
+  )
+  const tokenProperties = Object.entries(tokenPropertyMap).map(
+    ([name, tokens]) => {
+      const properties = tokens
+        .flatMap((token) => tokenProps[token] ?? [])
+        .map((property) => `"${property}"`)
+      const typeName = name.charAt(0).toUpperCase() + name.slice(1)
+
+      return [
+        `export type ${typeName}Property = typeof ${name}Properties[number]`,
+        `export const ${name}Properties = [${properties.join(", ")}] as const`,
+      ].join("\n\n")
+    },
+  )
+
   const content = `
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
@@ -248,37 +282,56 @@ export const generateStyles = async (
     import { transforms } from "./config"
     import { pipe } from "./config/utils"
     import type { CSSUIObject, Token } from "./css"
+    import type { ThemeToken } from "./theme"
     import type { Theme } from "./theme.types"
 
-    export const standardStyles: StyleConfigs = {
+    export type StandardStyleProperty = keyof typeof standardStyles
+
+    export const standardStyles = {
       ${standardStyles.join(",\n")}
-    }
+    } as const satisfies StyleConfigs
 
-    export const shorthandStyles: StyleConfigs = {
+    export type ShorthandStyleProperty = keyof typeof shorthandStyles
+
+    export const shorthandStyles = {
       ${shorthandStyles.join(",\n")}
-    }
+    } as const satisfies StyleConfigs
 
-    export const pseudoStyles: StyleConfigs = {
+    export type PseudoStyleProperty = keyof typeof pseudoStyles
+
+    export const pseudoStyles = {
       ${pseudoStyles.join(",\n")}
-    }
+    } as const satisfies StyleConfigs
 
-    export const uiStyles: StyleConfigs = {
+    export type UIStyleProperty = keyof typeof uiStyles
+
+    export const uiStyles = {
       ${uiStyles.join(",\n")}
-    }
+    } as const satisfies StyleConfigs
 
-    export const atRuleStyles: StyleConfigs = {
+    export type AtRuleStyleProperty = keyof typeof atRuleStyles
+
+    export const atRuleStyles = {
       ${atRuleStyles.join(",\n")}
-    }
+    } as const satisfies StyleConfigs
 
-    export const styles: StyleConfigs = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles }
+    export type Styles = typeof styles
 
-    export const processSkipProperties: string[] = [${processSkipProperties.map(
-      (property) => `"${property}"`,
-    )}]
+    export const styles = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles } as const satisfies StyleConfigs
 
-    export const styleProperties: any[] = Object.keys(styles)
+    export type StyleProperty = keyof typeof styles
 
-    export const layoutStyleProperties: any[] = [${layoutStyleProperties}]
+    export const styleProperties = Object.keys(styles) as StyleProperty[]
+
+    export type ProcessSkipProperty = typeof processSkipProperties[number]
+
+    export const processSkipProperties = [${processSkipProperties.join(", ")}] as const
+
+    ${tokenProperties.join("\n\n")}
+
+    export type LayoutStyleProperty = typeof layoutStyleProperties[number]
+
+    export const layoutStyleProperties = [${layoutStyleProperties.join(", ")}] as const
 
     export type StyleProps = {
       ${styleProps.join("\n")}

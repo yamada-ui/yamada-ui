@@ -10,7 +10,7 @@ export const basic = () => {
       p="md"
       rounded="md"
       color="white"
-      var={[{ name: "bg", token: "colors", value: "primary" }]}
+      vars={[{ name: "bg", token: "colors", value: "primary" }]}
       bg="$bg"
     >
       Box

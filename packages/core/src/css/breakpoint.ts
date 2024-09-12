@@ -97,11 +97,14 @@ const transformBreakpoints = (
 
 export const analyzeBreakpoints = (
   breakpoints: Dict,
-  options: BreakpointOptions = { direction: "down" },
+  options: BreakpointOptions = {},
 ): Breakpoints | undefined => {
   if (!breakpoints) return
 
-  breakpoints.base = options.direction !== "up" ? "9999px" : "0px"
+  options.base ??= "9999px"
+  options.direction ??= "down"
+
+  breakpoints.base = options.direction !== "up" ? options.base : "0px"
 
   breakpoints = transformBreakpoints(breakpoints, options)
 

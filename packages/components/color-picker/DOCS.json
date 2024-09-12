@@ -225,6 +225,12 @@
       "required": false,
       "description": "Props for the channels component."
     },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
+    },
     "closeOnBlur": {
       "type": "boolean",
       "defaultValue": true,
@@ -248,7 +254,7 @@
       "description": "The visual color appearance of the component."
     },
     "colorSelectorColorScheme": {
-      "type": "(string & {}) | \"link\" | \"whiteAlpha\" | \"blackAlpha\" | \"gray\" | \"neutral\" | \"red\" | \"rose\" | \"pink\" | \"flashy\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | ... 12 more ... | \"danger\"",
+      "type": "(string & {}) | \"link\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" | \"pink\" | \"purple\" | \"red\" | \"teal\" | \"violet\" | \"yellow\" | \"primary\" | \"secondary\" | ... 11 more ... | \"sky\"",
       "required": false,
       "description": "ColorScheme for the color selector component."
     },
@@ -444,6 +450,12 @@
       "required": false,
       "description": "Function called whenever the color swatch click."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "placement": {
       "type": "UIValue<Placement>",
       "defaultValue": "'bottom'",
@@ -461,11 +473,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "saturationSliderProps": {
       "type": "Omit<SaturationSliderProps, \"defaultValue\" | \"value\">",
@@ -659,7 +666,7 @@
       "description": "The step in which increments or decrements have to be made."
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 315 more ... | Background<...>>",
+      "type": "UIValue<\"border\" | \"link\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | Background<...>>",
       "required": false,
       "description": "The CSS `background` property. Used in `background` of thumb element."
     },
@@ -792,7 +799,7 @@
       "description": "The step in which increments or decrements have to be made."
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 315 more ... | Background<...>>",
+      "type": "UIValue<\"border\" | \"link\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | Background<...>>",
       "required": false,
       "description": "The CSS `background` property. Used in `background` of thumb element."
     },
@@ -825,7 +832,7 @@
   },
   "ColorSwatch": {
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | ... 315 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
       "defaultValue": "#ffffff00",
       "required": false,
       "description": "The color used for the swatch element."
@@ -961,7 +968,7 @@
       "description": "The step in which increments or decrements have to be made."
     },
     "thumbColor": {
-      "type": "UIValue<\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | ... 315 more ... | Background<...>>",
+      "type": "UIValue<\"border\" | \"link\" | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | Background<...>>",
       "required": false,
       "description": "The CSS `background` property. Used in `background` of thumb element."
     },

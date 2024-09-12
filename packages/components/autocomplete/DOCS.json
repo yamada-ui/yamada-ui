@@ -23,6 +23,12 @@
       "required": false,
       "description": "The boundary area for the popper. Used within the `preventOverflow` modifier."
     },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
+    },
     "closeOnBlur": {
       "type": "boolean",
       "defaultValue": true,
@@ -244,6 +250,12 @@
       "required": false,
       "description": "The callback invoked when search input."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "optionProps": {
       "type": "Omit<AutocompleteOptionProps, \"value\" | \"children\">",
       "required": false,
@@ -266,11 +278,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "size": {
       "defaultValue": "md",
@@ -375,6 +382,12 @@
       "type": "AutocompleteIconProps",
       "required": false,
       "description": "Props for multi autocomplete clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -625,6 +638,12 @@
       "required": false,
       "description": "The callback invoked when search input."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "optionProps": {
       "type": "Omit<AutocompleteOptionProps, \"value\" | \"children\">",
       "required": false,
@@ -647,11 +666,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "separator": {
       "type": "string",

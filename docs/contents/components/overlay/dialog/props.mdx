@@ -2,6 +2,7 @@
 title: Dialog
 description: "`Dialog` is a component used to confirm or interrupt user actions."
 package_name: "@yamada-ui/modal"
+order: 1
 with_description: true
 tab: Props
 ---
@@ -39,7 +40,7 @@ tab: Props
 <PropsCard
   id="dialog-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "var" | "big" | "link" | "small" | "sub" | "sup" | "style" | "animate" | "section" | "a" | "abbr" | ... 148 more ... | "textPath"'
+  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "style" | "animate" | "section" | "a" | "abbr" | "address" | ... 148 more ... | "textPath"'
 />
 
 <PropsCard
@@ -87,6 +88,13 @@ tab: Props
   name="colorScheme"
   type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
+/>
+
+<PropsCard
+  id="dialog-containerprops"
+  name="containerProps"
+  type='HTMLUIProps<"div">'
+  description={"Props for modal container element."}
 />
 
 <PropsCard
@@ -321,7 +329,7 @@ tab: Props
 <PropsCard
   id="dialogoverlay-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "var" | "big" | "link" | "small" | "sub" | "sup" | "style" | "animate" | "section" | "a" | "abbr" | ... 148 more ... | "textPath"'
+  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "style" | "animate" | "section" | "a" | "abbr" | "address" | ... 148 more ... | "textPath"'
 />
 
 ### DialogCloseButtonProps

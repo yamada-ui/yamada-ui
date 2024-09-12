@@ -92,6 +92,7 @@ export const mdx: Record<string, CSSUIObject> = {
       letterSpacing: "normal",
     },
     td: {
+      verticalAlign: "middle",
       whiteSpace: "normal",
     },
   },

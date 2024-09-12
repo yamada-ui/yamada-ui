@@ -261,6 +261,7 @@ export interface GeneratedTheme extends UITheme {
     | "warning"
     | "danger"
     | "link"
+    | "muted"
     | "primary.50"
     | "primary.100"
     | "primary.200"

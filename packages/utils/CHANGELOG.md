@@ -1,5 +1,15 @@
 # @yamada-ui/utils
 
+## 1.5.0
+
+### Minor Changes
+
+- [#2756](https://github.com/yamada-ui/yamada-ui/pull/2756) [`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance `flattenObject` functionality with options.
+
+### Patch Changes
+
+- [#2726](https://github.com/yamada-ui/yamada-ui/pull/2726) [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the return value types of `omitObject`, `pickObject`, and `splitObject` were incorrect.
+
 ## 1.4.0
 
 ### Minor Changes

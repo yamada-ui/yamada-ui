@@ -12,16 +12,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/Dhoni77",
   },
   {
-    id: 69517378,
-    name: "ShionTerunaga",
-    icon: "https://avatars.githubusercontent.com/u/69517378?v=4",
-    url: "https://github.com/ShionTerunaga",
-  },
-  {
     id: 25207729,
     name: "000000armor",
     icon: "https://avatars.githubusercontent.com/u/25207729?v=4",
     url: "https://github.com/000000armor",
+  },
+  {
+    id: 69517378,
+    name: "ShionTerunaga",
+    icon: "https://avatars.githubusercontent.com/u/69517378?v=4",
+    url: "https://github.com/ShionTerunaga",
   },
   {
     id: 117662771,
@@ -42,22 +42,16 @@ export const CONTRIBUTORS = [
     url: "https://github.com/quangnmwork",
   },
   {
-    id: 37304826,
-    name: "komura-c",
-    icon: "https://avatars.githubusercontent.com/u/37304826?v=4",
-    url: "https://github.com/komura-c",
-  },
-  {
     id: 22112440,
     name: "txxxxc",
     icon: "https://avatars.githubusercontent.com/u/22112440?v=4",
     url: "https://github.com/txxxxc",
   },
   {
-    id: 93440667,
-    name: "GensIto",
-    icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
-    url: "https://github.com/GensIto",
+    id: 37304826,
+    name: "komura-c",
+    icon: "https://avatars.githubusercontent.com/u/37304826?v=4",
+    url: "https://github.com/komura-c",
   },
   {
     id: 157810570,
@@ -66,22 +60,28 @@ export const CONTRIBUTORS = [
     url: "https://github.com/kaitobq",
   },
   {
+    id: 93440667,
+    name: "GensIto",
+    icon: "https://avatars.githubusercontent.com/u/93440667?v=4",
+    url: "https://github.com/GensIto",
+  },
+  {
     id: 107479598,
     name: "taga3s",
     icon: "https://avatars.githubusercontent.com/u/107479598?v=4",
     url: "https://github.com/taga3s",
   },
   {
-    id: 99778758,
-    name: "umaidashi",
-    icon: "https://avatars.githubusercontent.com/u/99778758?v=4",
-    url: "https://github.com/umaidashi",
-  },
-  {
     id: 52590941,
     name: "imaimai17468",
     icon: "https://avatars.githubusercontent.com/u/52590941?v=4",
     url: "https://github.com/imaimai17468",
+  },
+  {
+    id: 99778758,
+    name: "umaidashi",
+    icon: "https://avatars.githubusercontent.com/u/99778758?v=4",
+    url: "https://github.com/umaidashi",
   },
   {
     id: 50972802,
@@ -100,12 +100,6 @@ export const CONTRIBUTORS = [
     name: "madangopal16072000",
     icon: "https://avatars.githubusercontent.com/u/109917122?v=4",
     url: "https://github.com/madangopal16072000",
-  },
-  {
-    id: 49680717,
-    name: "chida09",
-    icon: "https://avatars.githubusercontent.com/u/49680717?v=4",
-    url: "https://github.com/chida09",
   },
   {
     id: 53590732,

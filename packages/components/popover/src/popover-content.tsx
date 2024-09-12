@@ -72,6 +72,8 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       width,
       minW,
       minWidth,
+      maxW,
+      maxWidth,
       z,
       zIndex,
       __css,
@@ -116,6 +118,8 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     width ??= (css?.width ?? css?.w) as CSSUIProps["width"]
     minWidth ??= minW
     minWidth ??= (css?.minWidth ?? css?.minW) as CSSUIProps["minWidth"]
+    maxWidth ??= maxW
+    maxWidth ??= (css?.maxWidth ?? css?.maxW) as CSSUIProps["maxWidth"]
 
     zIndex ??= z
     zIndex ??= (css?.zIndex ?? css?.z) as CSSUIProps["zIndex"]
@@ -128,6 +132,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
         className="ui-popover"
         width={width}
         minWidth={minWidth}
+        maxWidth={maxWidth}
         zIndex={zIndex}
         {...containerProps}
       >

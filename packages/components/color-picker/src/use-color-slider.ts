@@ -3,14 +3,12 @@ import {
   useFormControlProps,
   type FormControlOptions,
   formControlProperties,
-  getFormControlProperties,
 } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
 import { useSize } from "@yamada-ui/use-size"
 import {
-  omitObject,
   dataAttr,
   handlerAll,
   mergeRefs,
@@ -20,7 +18,7 @@ import {
   roundNumberToStep,
   useUpdateEffect,
   percentToValue,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
@@ -94,7 +92,7 @@ export const useColorSlider = ({
 }: UseColorSliderProps) => {
   if (!focusThumbOnChange) props.isReadOnly = true
 
-  let {
+  const {
     id,
     name,
     value: valueProp,
@@ -106,11 +104,21 @@ export const useColorSlider = ({
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
     thumbColor,
-    required,
-    disabled,
-    readOnly,
+    style: styleProp,
     ...rest
   } = useFormControlProps(props)
+  const [
+    {
+      "aria-readonly": ariaReadonly,
+      required,
+      disabled,
+      readOnly,
+      onFocus: onFocusProp,
+      onBlur: onBlurProp,
+      ...formControlProps
+    },
+    containerProps,
+  ] = splitObject(rest, formControlProperties)
 
   const onChangeStart = useCallbackRef(onChangeStartProp)
   const onChangeEnd = useCallbackRef(onChangeEndProp)
@@ -273,24 +281,26 @@ export const useColorSlider = ({
 
       const style: CSSProperties = {
         ...props.style,
-        ...rest.style,
+        ...styleProp,
         paddingInline: `${w / 2}px`,
       }
 
       return {
         ...props,
-        ...omitObject(rest, ["aria-readonly"]),
+        ...formControlProps,
+        ...containerProps,
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
         style,
       }
     },
-    [rest, thumbSize],
+    [containerProps, formControlProps, styleProp, thumbSize],
   )
 
   const getInputProps: UIPropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...formControlProps,
+      "aria-readonly": ariaReadonly,
       ...props,
       id,
       ref,
@@ -301,19 +311,25 @@ export const useColorSlider = ({
       disabled,
       readOnly,
     }),
-    [disabled, id, name, readOnly, required, rest, value],
+    [
+      ariaReadonly,
+      disabled,
+      formControlProps,
+      id,
+      name,
+      readOnly,
+      required,
+      value,
+    ],
   )
 
   const getTrackProps: UIPropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(
-        rest,
-        getFormControlProperties({ omit: ["aria-readonly"] }),
-      ),
+      ...formControlProps,
       ...props,
       ref: mergeRefs(ref, trackRef),
     }),
-    [rest],
+    [formControlProps],
   )
 
   const getThumbProps: UIPropGetter = useCallback(
@@ -332,7 +348,8 @@ export const useColorSlider = ({
       return {
         "aria-label": "Slider thumb",
         bg: thumbColor ?? `hsl(${value}, 100%, 50%)`,
-        ...pickObject(rest, formControlProperties),
+        ...formControlProps,
+        "aria-readonly": ariaReadonly,
         ...props,
         ref: mergeRefs(ref, thumbRef),
         tabIndex: isInteractive && focusThumbOnChange ? 0 : undefined,
@@ -342,23 +359,26 @@ export const useColorSlider = ({
         "aria-valuemax": max,
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-        onFocus: handlerAll(props.onFocus, rest.onFocus),
-        onBlur: handlerAll(props.onBlur, rest.onBlur),
+        onFocus: handlerAll(props.onFocus, onFocusProp),
+        onBlur: handlerAll(props.onBlur, onBlurProp),
         style,
       }
     },
     [
-      thumbColor,
-      focusThumbOnChange,
-      isDragging,
-      isInteractive,
-      min,
-      max,
-      onKeyDown,
-      rest,
       thumbPercent,
       thumbSize,
+      thumbColor,
       value,
+      formControlProps,
+      ariaReadonly,
+      isInteractive,
+      focusThumbOnChange,
+      min,
+      max,
+      isDragging,
+      onKeyDown,
+      onFocusProp,
+      onBlurProp,
     ],
   )
 

@@ -1,5 +1,14 @@
 # @yamada-ui/use-descendant
 
+## 1.0.20
+
+### Patch Changes
+
+- [#2784](https://github.com/yamada-ui/yamada-ui/pull/2784) [`b0c462e`](https://github.com/yamada-ui/yamada-ui/commit/b0c462e8bb493ffac350492d73d8d513d6dcee29) Thanks [@kaehehehe](https://github.com/kaehehehe)! - change error handling in sortNodes to use console.warn
+
+- Updated dependencies [[`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74)]:
+  - @yamada-ui/utils@1.5.0
+
 ## 1.0.19
 
 ### Patch Changes

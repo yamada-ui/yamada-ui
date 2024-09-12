@@ -22,7 +22,7 @@ const defaultOverlays = (
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
       bgSize: `8px 8px`,
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
-      var: [
+      vars: [
         {
           name: "checkers",
           token: "colors",

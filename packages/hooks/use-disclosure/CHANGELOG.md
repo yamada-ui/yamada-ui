@@ -1,5 +1,12 @@
 # @yamada-ui/use-disclosure
 
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74)]:
+  - @yamada-ui/utils@1.5.0
+
 ## 1.0.18
 
 ### Patch Changes

@@ -13,12 +13,23 @@ import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 const isProcessSkip = (key: string) =>
   processSkipProperties.includes(key as ProcessSkipProperty)
 
-const expandColorMode = (key: string, value: any[]): Dict => ({
-  [key]: value[0],
-  [pseudos._dark]: {
-    [key]: value[1],
-  },
-})
+const expandColorMode = (
+  key: string,
+  value: any[],
+  queries: BreakpointQueries,
+): Dict => {
+  let computedCSS: Dict = {}
+
+  if (isObject(value[0])) {
+    computedCSS = expandResponsive(key, value[0], queries)
+  } else {
+    computedCSS[key] = value[0]
+  }
+
+  computedCSS[pseudos._dark] = { [key]: value[1] }
+
+  return computedCSS
+}
 
 const expandResponsive = (
   key: string,
@@ -30,8 +41,10 @@ const expandResponsive = (
 
     if (query) {
       if (breakpointValue) prev[query] = { [key]: breakpointValue }
+    } else if (isArray(breakpointValue)) {
+      prev = merge(prev, expandColorMode(key, breakpointValue, queries))
     } else {
-      prev[key] = value[breakpoint]
+      prev[key] = breakpointValue
     }
 
     return prev
@@ -52,7 +65,7 @@ const expandCSS =
       if (value == null) continue
 
       if (isArray(value) && !isProcessSkip(key)) {
-        computedCSS = merge(computedCSS, expandColorMode(key, value))
+        computedCSS = merge(computedCSS, expandColorMode(key, value, queries))
 
         continue
       }
@@ -63,7 +76,7 @@ const expandCSS =
         continue
       }
 
-      computedCSS[key] = value
+      computedCSS = merge(computedCSS, { [key]: value })
     }
 
     return computedCSS

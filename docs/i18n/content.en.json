@@ -183,6 +183,15 @@
     }
   },
   {
+    "title": "Emeriti contributors",
+    "type": "fragment",
+    "slug": "/community/team#emeriti-contributors",
+    "hierarchy": {
+      "lv1": "Team and Contributors",
+      "lv2": "Emeriti contributors"
+    }
+  },
+  {
     "title": "Contributors",
     "type": "fragment",
     "slug": "/community/team#contributors",
@@ -1195,6 +1204,16 @@
       "lv1": "DonutChart",
       "lv2": "Usage",
       "lv3": "Adjust Opacity"
+    }
+  },
+  {
+    "title": "Display text in the center",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#display-text-in-the-center",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "Usage",
+      "lv3": "Display text in the center"
     }
   },
   {
@@ -4244,6 +4263,16 @@
     }
   },
   {
+    "title": "Add elements to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/date-picker#add-elements-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "DatePicker",
+      "lv2": "Usage",
+      "lv3": "Add elements to a dropdown"
+    }
+  },
+  {
     "title": "Control",
     "type": "fragment",
     "slug": "/components/forms/date-picker#control",
@@ -5064,11 +5093,11 @@
     "hierarchy": { "lv1": "IconButton", "lv2": "Usage", "lv3": "Disable" }
   },
   {
-    "title": "Form",
+    "title": "Forms",
     "type": "page",
     "description": "Components for building forms in the project, such as `Input` and `Select`, are available.",
     "slug": "/components/forms",
-    "hierarchy": { "lv1": "Form" }
+    "hierarchy": { "lv1": "Forms" }
   },
   {
     "title": "Input",
@@ -5399,6 +5428,16 @@
     }
   },
   {
+    "title": "Add elements to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/month-picker#add-elements-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MonthPicker",
+      "lv2": "Usage",
+      "lv3": "Add elements to a dropdown"
+    }
+  },
+  {
     "title": "Control",
     "type": "fragment",
     "slug": "/components/forms/month-picker#control",
@@ -5461,6 +5500,26 @@
       "lv1": "MultiAutocomplete",
       "lv2": "Usage",
       "lv3": "Set Default Values"
+    }
+  },
+  {
+    "title": "Add header to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-autocomplete#add-header-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiAutocomplete",
+      "lv2": "Usage",
+      "lv3": "Add header to a dropdown"
+    }
+  },
+  {
+    "title": "Add footer to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-autocomplete#add-footer-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiAutocomplete",
+      "lv2": "Usage",
+      "lv3": "Add footer to a dropdown"
     }
   },
   {
@@ -6036,6 +6095,16 @@
       "lv1": "MultiDatePicker",
       "lv2": "Usage",
       "lv3": "Customize Icon"
+    }
+  },
+  {
+    "title": "Add elements to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#add-elements-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "Usage",
+      "lv3": "Add elements to a dropdown"
     }
   },
   {
@@ -7204,6 +7273,16 @@
     }
   },
   {
+    "title": "Add elements to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#add-elements-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "Usage",
+      "lv3": "Add elements to a dropdown"
+    }
+  },
+  {
     "title": "Control",
     "type": "fragment",
     "slug": "/components/forms/range-date-picker#control",
@@ -8191,7 +8270,7 @@
   {
     "title": "Toggle",
     "type": "page",
-    "description": "`Button` is a component that has two states: on or off.",
+    "description": "`Toggle` is a component that has two states: on or off.",
     "slug": "/components/forms/toggle",
     "hierarchy": { "lv1": "Toggle" }
   },
@@ -8442,6 +8521,16 @@
       "lv1": "YearPicker",
       "lv2": "Usage",
       "lv3": "Customize Icon"
+    }
+  },
+  {
+    "title": "Add elements to a dropdown",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#add-elements-to-a-dropdown",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "Usage",
+      "lv3": "Add elements to a dropdown"
     }
   },
   {

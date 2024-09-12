@@ -150,12 +150,12 @@
       "description": "The CSS `flex-basis` property."
     },
     "direction": {
-      "type": "\"row\" | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "type": "\"row\" | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row-reverse\" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
     "grow": {
-      "type": "(string & {}) | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-grow` property."
     },
@@ -211,7 +211,7 @@
       "description": "The callback fired when any children radio is checked or unchecked."
     },
     "shrink": {
-      "type": "(string & {}) | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"inherit\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-shrink` property."
     },
@@ -221,7 +221,7 @@
       "description": "The value of the radio group."
     },
     "wrap": {
-      "type": "\"inherit\" | \"wrap\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"inherit\" | \"wrap\" | \"-moz-initial\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap-reverse\" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }

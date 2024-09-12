@@ -111,6 +111,10 @@
     }
   },
   "CheckboxIcon": {
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"label\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | ... 148 more ... | \"view\"",
+      "required": false
+    },
     "isChecked": {
       "type": "boolean",
       "defaultValue": false,
@@ -229,22 +233,22 @@
   },
   "CheckboxGroup": {
     "align": {
-      "type": "(string & {}) | \"center\" | \"end\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"start\" | \"baseline\" | \"stretch\" | \"flex-end\" | \"flex-start\" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"center\" | \"initial\" | \"inherit\" | \"baseline\" | \"end\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"stretch\" | \"flex-end\" | \"flex-start\" | \"start\" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `align-items` property."
     },
     "basis": {
-      "type": "number | (string & {}) | \"content\" | \"px\" | \"max\" | \"min\" | \"initial\" | \"inherit\" | \"auto\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | ... 72 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "number | (string & {}) | \"content\" | \"px\" | \"initial\" | \"inherit\" | \"auto\" | \"max\" | \"min\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | ... 72 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-basis` property."
     },
     "direction": {
-      "type": "\"initial\" | \"inherit\" | \"row\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "type": "\"initial\" | \"inherit\" | \"row\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row-reverse\" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
     "grow": {
-      "type": "(string & {}) | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-grow` property."
     },
@@ -285,7 +289,7 @@
       "description": "If provided, generate checkboxes based on items."
     },
     "justify": {
-      "type": "(string & {}) | \"left\" | \"right\" | \"center\" | \"end\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"start\" | \"space-around\" | \"space-between\" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"left\" | \"right\" | \"center\" | \"initial\" | \"inherit\" | \"end\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"space-around\" | \"space-between\" | \"space-evenly\" | ... 9 more ... | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `justify-content` property."
     },
@@ -295,7 +299,7 @@
       "description": "The callback fired when any children checkbox is checked or unchecked."
     },
     "shrink": {
-      "type": "(string & {}) | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-shrink` property."
     },
@@ -305,7 +309,7 @@
       "description": "The value of the checkbox group."
     },
     "wrap": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"initial\" | \"inherit\" | \"wrap\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap-reverse\" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }

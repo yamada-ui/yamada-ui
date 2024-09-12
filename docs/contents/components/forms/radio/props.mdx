@@ -4,9 +4,9 @@ description: >-
   `Radio` is a component used for allowing users to select one option from
   multiple choices.
 package_name: "@yamada-ui/radio"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -219,14 +219,14 @@ order: 1
 <PropsCard
   id="radiogroup-direction"
   name="direction"
-  type='"row" | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...'
+  type='"row" | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="radiogroup-grow"
   name="grow"
-  type='(string & {}) | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-grow` property."}
 />
 
@@ -306,7 +306,7 @@ order: 1
 <PropsCard
   id="radiogroup-shrink"
   name="shrink"
-  type='(string & {}) | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-shrink` property."}
 />
 
@@ -320,7 +320,7 @@ order: 1
 <PropsCard
   id="radiogroup-wrap"
   name="wrap"
-  type='"inherit" | "wrap" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"inherit" | "wrap" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap-reverse" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-wrap` property."}
 />
 

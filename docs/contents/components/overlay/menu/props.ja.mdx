@@ -2,9 +2,9 @@
 title: Menu
 description: "`Menu`は、一般的なドロップダウンメニューを表示するコンポーネントです。"
 package_name: "@yamada-ui/menu"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -393,6 +393,13 @@ order: 1
   description={"The label of the group."}
 />
 
+<PropsCard
+  id="menugroup-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for menu group element."}
+/>
+
 ### MenuOptionGroupProps
 
 <PropsCard
@@ -406,7 +413,14 @@ order: 1
   id="menuoptiongroup-label"
   name="label"
   type="string"
-  description={"The label of the option group."}
+  description={"The label of the group."}
+/>
+
+<PropsCard
+  id="menuoptiongroup-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for menu group element."}
 />
 
 <PropsCard

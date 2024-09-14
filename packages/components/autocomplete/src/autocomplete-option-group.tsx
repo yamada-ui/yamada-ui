@@ -17,7 +17,17 @@ export const AutocompleteOptionGroup = forwardRef<
   "ul"
 >(
   (
-    { className, color, h, height, minH, minHeight, children, ...rest },
+    {
+      className,
+      color,
+      h,
+      height,
+      minH,
+      minHeight,
+      children,
+      labelProps,
+      ...rest
+    },
     ref,
   ) => {
     const { styles } = useAutocompleteContext()
@@ -41,6 +51,7 @@ export const AutocompleteOptionGroup = forwardRef<
           className="ui-autocomplete__item__group-label"
           __css={styles.groupLabel}
           lineClamp={1}
+          {...labelProps}
         >
           {label}
         </ui.span>

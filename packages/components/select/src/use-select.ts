@@ -725,12 +725,14 @@ export const useSelect = <T extends MaybeValue = string>(
 export type UseSelectReturn = ReturnType<typeof useSelect>
 
 export const useSelectList = () => {
-  const { listRef, focusedIndex } = useSelectContext()
+  const { value, listRef, focusedIndex } = useSelectContext()
 
   const descendants = useSelectDescendantsContext()
 
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
+
+  const isMulti = isArray(value)
 
   useEffect(() => {
     if (!listRef.current || !selectedValue) return
@@ -774,11 +776,12 @@ export const useSelectList = () => {
       id,
       ref: mergeRefs(listRef, ref),
       role: "listbox",
+      "aria-multiselectable": ariaAttr(isMulti),
       tabIndex: -1,
       position: "relative",
       ...props,
     }),
-    [id, listRef],
+    [id, isMulti, listRef],
   )
 
   return {

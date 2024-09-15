@@ -70,6 +70,7 @@ import { RangeSlider } from "./range-slider"
 import { Rating } from "./rating"
 import { Reorder } from "./reorder"
 import { Resizable } from "./resizable"
+import { Rotate } from "./rotate"
 import { SaturationSlider } from "./saturation-slider"
 import { ScaleFade } from "./scale-fade"
 import { ScrollArea } from "./scroll-area"
@@ -164,6 +165,7 @@ export const components = {
   Rating,
   Reorder,
   Resizable,
+  Rotate,
   SaturationSlider,
   ScaleFade,
   ScrollArea,

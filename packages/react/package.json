@@ -92,6 +92,7 @@
     "@yamada-ui/reorder": "workspace:*",
     "@yamada-ui/resizable": "workspace:*",
     "@yamada-ui/ripple": "workspace:*",
+    "@yamada-ui/rotate": "workspace:*",
     "@yamada-ui/scroll-area": "workspace:*",
     "@yamada-ui/segmented-control": "workspace:*",
     "@yamada-ui/select": "workspace:*",

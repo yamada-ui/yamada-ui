@@ -37,3 +37,26 @@ export const basic: Story = () => {
     </Center>
   )
 }
+
+export const withRotate: Story = () => {
+  return (
+    <Center
+      w="calc(100vw - 16px * 2)"
+      h="calc(100vh - 16px * 2)"
+      display="flex"
+      gap="4xl"
+    >
+      <Rotate
+        from={<Sun fontSize="50px" />}
+        to={<Moon fontSize="50px" />}
+        rotate={360}
+      />
+
+      <Rotate
+        from={<Apple fontSize="6xl" />}
+        to={<Cherry fontSize="6xl" />}
+        rotate={-360}
+      />
+    </Center>
+  )
+}

@@ -14,7 +14,7 @@ import {
 
 export default tseslintConfig(
   {
-    ignores: ['**/dist', '**/node_modules', '**/.next'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/.next/**'],
   },
   eslint.configs.recommended,
   ...tseslintConfigs.recommended,

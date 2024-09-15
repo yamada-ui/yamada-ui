@@ -731,7 +731,6 @@ export const useSelectList = () => {
 
   const beforeFocusedIndex = useRef<number>(-1)
   const selectedValue = descendants.value(focusedIndex)
-
   const isMulti = isArray(value)
 
   useEffect(() => {

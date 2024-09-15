@@ -1,11 +1,8 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type {
-  MotionProps,
-  MotionTransition,
-  WithTransitionProps,
-} from "@yamada-ui/motion"
+import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
 
@@ -15,9 +12,7 @@ type AiryOptions = {
   transition?: MotionTransition
 }
 
-export type AiryProps = WithTransitionProps<MotionProps> &
-  ThemeProps<"Airy"> &
-  AiryOptions
+export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
 
 /**
  * `Airy` is component.

@@ -2,6 +2,7 @@ import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
 import { motionForwardRef, motion } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
 import { cx, useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useRef, useState, type ReactElement } from "react"
 
@@ -60,8 +61,7 @@ type FlipOptions = {
   transition?: MotionTransition
 }
 
-export type FlipProps = MotionProps & ThemeProps<"Flip"> & FlipOptions
-
+export type FlipProps = Merge<MotionProps, FlipOptions> & ThemeProps<"Flip">
 /**
  * `Flip` is component.
  *

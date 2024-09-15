@@ -103,7 +103,7 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = IconButtonProps & {
+type ColorModeButtonProps = Omit<IconButtonProps, 'aria-label'> & {
   menuProps?: MenuProps
 }
 
@@ -161,7 +161,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
 
 ColorModeButton.displayName = 'ColorModeButton'
 
-type ThemeSchemeButtonProps = IconButtonProps & {
+type ThemeSchemeButtonProps = Omit<IconButtonProps, 'aria-label'> & {
   popoverProps?: PopoverProps
 }
 

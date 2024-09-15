@@ -80,7 +80,7 @@ export const Detail: FC<DetailProps> = memo(
             <ControlIcon
               icon={ReplyAll}
               label="Reply all"
-              aria-label="Reply all mail"
+              aria-label="Reply to all"
             />
             <ControlIcon icon={Share} label="Forward" aria-label="Share mail" />
             <Divider

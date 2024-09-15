@@ -45,7 +45,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
 
   const onClick = async () => {
     await controls.start({ opacity: 0 })
-    setCurrentElement(currentElement === "from" ? "to" : "from")
+    setCurrentElement((prev) => (prev === "from" ? "to" : "from"))
     await controls.start({ opacity: 1 })
   }
 

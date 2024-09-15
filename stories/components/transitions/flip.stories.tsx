@@ -59,15 +59,7 @@ export const basic: Story = () => {
       display="flex"
       gap="4xl"
     >
-      <Flip
-        from={<BackOfCard />}
-        to={<FrontOfCard />}
-        transition={{
-          type: "spring",
-          stiffness: 20,
-          damping: 10,
-        }}
-      />
+      <Flip from={<BackOfCard />} to={<FrontOfCard />} />
 
       <Flip
         from={<Apple fontSize="6xl" />}

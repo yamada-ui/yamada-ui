@@ -1,35 +1,66 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentStyle,
-} from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import type {
+  MotionProps,
+  MotionTransition,
+  WithTransitionProps,
+} from "@yamada-ui/motion"
+import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
+import { useState, type ReactElement } from "react"
 
-type AiryOptions = {}
+type AiryOptions = {
+  from: ReactElement
+  to: ReactElement
+  transition?: MotionTransition
+}
 
-export type AiryProps = HTMLUIProps<"div"> & ThemeProps<"Airy"> & AiryOptions
+export type AiryProps = WithTransitionProps<MotionProps> &
+  ThemeProps<"Airy"> &
+  AiryOptions
 
 /**
  * `Airy` is component.
  *
  * @see Docs https://yamada-ui.com/components/transitions/airy
  */
-export const Airy = forwardRef<AiryProps, "div">((props, ref) => {
+export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
+  const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
   const [styles, mergedProps] = useComponentStyle("Airy", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
+  const {
+    from,
+    to,
+    transition = {
+      duration: 0.1,
+      ease: "easeIn",
+    },
+    className,
+    ...rest
+  } = omitThemeProps(mergedProps)
+  const controls = useMotionAnimation()
 
   const css: CSSUIObject = {
     ...styles,
   }
 
+  const onClick = async () => {
+    await controls.start({ opacity: 0 })
+    setCurrentElement(currentElement === "from" ? "to" : "from")
+    await controls.start({ opacity: 1 })
+  }
+
   return (
-    <ui.div
+    <motion.div
       ref={ref}
-      className={cx("ui-airy", className)}
+      onClick={onClick}
+      className={cx(`ui-airy__${currentElement}`, className)}
       __css={css}
+      animate={controls}
+      initial={{ opacity: 1 }}
+      transition={transition}
       {...rest}
-    />
+    >
+      {currentElement === "from" ? from : to}
+    </motion.div>
   )
 })

@@ -1,15 +1,22 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentStyle,
-} from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import type {
+  MotionProps,
+  MotionTransition,
+  WithTransitionProps,
+} from "@yamada-ui/motion"
+import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
+import { useState, type ReactElement } from "react"
 
-type RotateOptions = {}
+type RotateOptions = {
+  from: ReactElement
+  to: ReactElement
+  rotate?: number
+  transition?: MotionTransition
+}
 
-export type RotateProps = HTMLUIProps<"div"> &
+export type RotateProps = WithTransitionProps<MotionProps> &
   ThemeProps<"Rotate"> &
   RotateOptions
 
@@ -18,20 +25,47 @@ export type RotateProps = HTMLUIProps<"div"> &
  *
  * @see Docs https://yamada-ui.com/components/transitions/rotate
  */
-export const Rotate = forwardRef<RotateProps, "div">((props, ref) => {
+export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
+  const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
   const [styles, mergedProps] = useComponentStyle("Rotate", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
+  const {
+    from,
+    to,
+    transition = {
+      duration: 0.3,
+    },
+    rotate = 45,
+    className,
+    ...rest
+  } = omitThemeProps(mergedProps)
+  const controls = useMotionAnimation()
 
   const css: CSSUIObject = {
     ...styles,
   }
 
+  const onClick = async () => {
+    await controls.start({
+      opacity: 0,
+      rotate: `${rotate}deg`,
+    })
+    setCurrentElement((prev) => (prev === "from" ? "to" : "from"))
+    await controls.start({ opacity: 1, rotate: "0deg" })
+  }
+
   return (
-    <ui.div
+    <motion.div
       ref={ref}
-      className={cx("ui-rotate", className)}
+      custom={rotate}
+      className={cx(`ui-rotate__${currentElement}`, className)}
+      onClick={onClick}
+      animate={controls}
+      initial={{ opacity: 1, rotate: "0deg" }}
+      transition={transition}
       __css={css}
       {...rest}
-    />
+    >
+      {currentElement === "from" ? from : to}
+    </motion.div>
   )
 })

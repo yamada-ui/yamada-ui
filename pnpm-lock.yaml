@@ -1567,6 +1567,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/flip:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/focus-lock:
     dependencies:
       '@yamada-ui/utils':
@@ -3523,6 +3539,9 @@ importers:
       '@yamada-ui/file-input':
         specifier: workspace:*
         version: link:../components/file-input
+      '@yamada-ui/flip':
+        specifier: workspace:*
+        version: link:../components/flip
       '@yamada-ui/focus-lock':
         specifier: workspace:*
         version: link:../components/focus-lock

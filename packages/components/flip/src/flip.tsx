@@ -57,7 +57,12 @@ export type FlipDirection = "horizontal" | "vertical"
 type FlipOptions = {
   from: ReactElement
   to: ReactElement
-  flipDirection?: FlipDirection
+  /**
+   * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
+   *
+   * @default 'horizontal'
+   */
+  orientation?: FlipDirection
   transition?: MotionTransition
 }
 
@@ -80,7 +85,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   const {
     from,
     to,
-    flipDirection = "horizontal",
+    orientation = "horizontal",
     transition = {
       type: "spring",
       stiffness: 80,
@@ -128,7 +133,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   return (
     <motion.div
       ref={ref}
-      className={cx(`ui-flip__${flipDirection}`, className)}
+      className={cx(`ui-flip__${orientation}`, className)}
       __css={{
         position: "relative",
         w: dimensions.width ? `${dimensions.width}px` : "auto",
@@ -142,8 +147,8 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       <motion.div
         ref={fromRef}
         custom={isVisible}
-        className={cx(`ui-flip__${flipDirection}-from`, className)}
-        variants={variants[flipDirection].from}
+        className={cx(`ui-flip__${orientation}-from`, className)}
+        variants={variants[orientation].from}
         initial="initial"
         animate="animate"
         __css={flipStyle}
@@ -155,8 +160,8 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       <motion.div
         ref={toRef}
         custom={isVisible}
-        className={cx(`ui-flip__${flipDirection}-to`, className)}
-        variants={variants[flipDirection].to}
+        className={cx(`ui-flip__${orientation}-to`, className)}
+        variants={variants[orientation].to}
         initial="initial"
         animate="animate"
         __css={flipStyle}

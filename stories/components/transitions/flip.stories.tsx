@@ -88,16 +88,12 @@ export const verticalFlip: Story = () => {
       display="flex"
       gap="4xl"
     >
-      <Flip
-        from={<BackOfCard />}
-        to={<FrontOfCard />}
-        flipDirection="vertical"
-      />
+      <Flip from={<BackOfCard />} to={<FrontOfCard />} orientation="vertical" />
 
       <Flip
         from={<Apple fontSize="6xl" />}
         to={<Cherry fontSize="6xl" />}
-        flipDirection="vertical"
+        orientation="vertical"
       />
     </Center>
   )

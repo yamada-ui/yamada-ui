@@ -1,6 +1,6 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
@@ -10,7 +10,7 @@ type RotateOptions = {
   from: ReactElement
   to: ReactElement
   rotate?: number
-  transition?: MotionTransition
+  duration?: number
 }
 
 export type RotateProps = Merge<MotionProps, RotateOptions> &
@@ -27,9 +27,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const {
     from,
     to,
-    transition = {
-      duration: 0.3,
-    },
+    duration = 0.3,
     rotate = 45,
     className,
     ...rest
@@ -57,7 +55,9 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       onClick={onClick}
       animate={controls}
       initial={{ opacity: 1, rotate: "0deg" }}
-      transition={transition}
+      transition={{
+        duration,
+      }}
       __css={css}
       {...rest}
     >

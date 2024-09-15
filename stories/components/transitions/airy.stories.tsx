@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Airy } from "@yamada-ui/react"
+import { Menu, X } from "@yamada-ui/lucide"
+import { Airy, Text, Center } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Airy>
 
@@ -11,5 +12,31 @@ const meta: Meta<typeof Airy> = {
 export default meta
 
 export const basic: Story = () => {
-  return <Airy></Airy>
+  return (
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+      <Airy
+        from={
+          <Text w="xs" fontSize="5xl">
+            ON
+          </Text>
+        }
+        to={
+          <Text w="xs" fontSize="5xl">
+            OFF
+          </Text>
+        }
+        animation="airy"
+        style={{
+          userSelect: "none",
+          cursor: "pointer",
+        }}
+      />
+
+      <Airy
+        from={<Menu fontSize="6xl" />}
+        to={<X fontSize="6xl" />}
+        animation="airy"
+      />
+    </Center>
+  )
 }

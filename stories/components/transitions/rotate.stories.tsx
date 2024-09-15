@@ -22,10 +22,6 @@ export const basic: Story = () => {
       <Rotate
         from={<Sun fontSize="50px" />}
         to={<Moon fontSize="50px" />}
-        rotate={45}
-        transition={{
-          duration: 0.1,
-        }}
         style={{
           cursor: "pointer",
         }}
@@ -34,7 +30,6 @@ export const basic: Story = () => {
       <Rotate
         from={<Apple fontSize="6xl" />}
         to={<Cherry fontSize="6xl" />}
-        rotate={360}
         style={{
           cursor: "pointer",
         }}

@@ -72,7 +72,7 @@ export const basic: Story = () => {
   )
 }
 
-export const verticalFlip: Story = () => {
+export const flipVertical: Story = () => {
   return (
     <Center
       w="calc(100vw - 16px * 2)"

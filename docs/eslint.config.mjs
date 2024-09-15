@@ -17,10 +17,10 @@ import { fileURLToPath } from "node:url"
 const ignoreConfig = {
   name: "@yamada-ui/ignores/docs",
   ignores: [
-    "**/.next",
+    "**/.next/**",
     "**/*.mdx",
-    "**/node_modules",
-    "**/build",
+    "**/node_modules/**",
+    "**/build/**",
     "**/pnpm-lock.yaml",
   ],
 }

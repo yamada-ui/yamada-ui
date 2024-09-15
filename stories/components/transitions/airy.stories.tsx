@@ -25,18 +25,13 @@ export const basic: Story = () => {
             OFF
           </Text>
         }
-        animation="airy"
         style={{
           userSelect: "none",
           cursor: "pointer",
         }}
       />
 
-      <Airy
-        from={<Menu fontSize="6xl" />}
-        to={<X fontSize="6xl" />}
-        animation="airy"
-      />
+      <Airy from={<Menu fontSize="6xl" />} to={<X fontSize="6xl" />} />
     </Center>
   )
 }

@@ -2,7 +2,7 @@ import type { Dict } from "@yamada-ui/utils"
 import { isArray, isObject, isString, merge, runIfFunc } from "@yamada-ui/utils"
 import type { StyleConfig } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
-import type { PseudosProperty } from "../pseudos"
+import type { PseudoProperty } from "../pseudos"
 import { pseudos } from "../pseudos"
 import type { ProcessSkipProperty, StyleProperty } from "../styles"
 import { processSkipProperties, styles } from "../styles"
@@ -13,12 +13,23 @@ import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 const isProcessSkip = (key: string) =>
   processSkipProperties.includes(key as ProcessSkipProperty)
 
-const expandColorMode = (key: string, value: any[]): Dict => ({
-  [key]: value[0],
-  [pseudos._dark]: {
-    [key]: value[1],
-  },
-})
+const expandColorMode = (
+  key: string,
+  value: any[],
+  queries: BreakpointQueries,
+): Dict => {
+  let computedCSS: Dict = {}
+
+  if (isObject(value[0])) {
+    computedCSS = expandResponsive(key, value[0], queries)
+  } else {
+    computedCSS[key] = value[0]
+  }
+
+  computedCSS[pseudos._dark] = { [key]: value[1] }
+
+  return computedCSS
+}
 
 const expandResponsive = (
   key: string,
@@ -30,15 +41,17 @@ const expandResponsive = (
 
     if (query) {
       if (breakpointValue) prev[query] = { [key]: breakpointValue }
+    } else if (isArray(breakpointValue)) {
+      prev = merge(prev, expandColorMode(key, breakpointValue, queries))
     } else {
-      prev[key] = value[breakpoint]
+      prev[key] = breakpointValue
     }
 
     return prev
   }, {} as Dict)
 
 const expandCSS =
-  (css: Dict, isNested: boolean) =>
+  (css: Dict) =>
   (theme: StyledTheme): Dict => {
     if (!theme.__breakpoints) return css
 
@@ -51,23 +64,19 @@ const expandCSS =
 
       if (value == null) continue
 
-      if (isArray(value) && !(isProcessSkip(key) && !isNested)) {
-        computedCSS = merge(computedCSS, expandColorMode(key, value))
+      if (isArray(value) && !isProcessSkip(key)) {
+        computedCSS = merge(computedCSS, expandColorMode(key, value, queries))
 
         continue
       }
 
-      if (
-        isObject(value) &&
-        isResponsive(value) &&
-        !(isProcessSkip(key) && !isNested)
-      ) {
+      if (isObject(value) && isResponsive(value) && !isProcessSkip(key)) {
         computedCSS = merge(computedCSS, expandResponsive(key, value, queries))
 
         continue
       }
 
-      computedCSS[key] = value
+      computedCSS = merge(computedCSS, { [key]: value })
     }
 
     return computedCSS
@@ -98,8 +107,8 @@ export const css =
       cssOrFunc: CSSObjectOrFunc | CSSUIObject,
       isNested: boolean = false,
     ): Dict => {
-      const cssObject = runIfFunc(cssOrFunc, theme)
-      const computedCSS = expandCSS(cssObject, isNested)(theme)
+      const cssObj = runIfFunc(cssOrFunc, theme)
+      const computedCSS = expandCSS(cssObj)(theme)
 
       let resolvedCSS: Dict = {}
 
@@ -111,7 +120,7 @@ export const css =
 
         if (value == null) continue
 
-        if (prop in pseudos) prop = pseudos[prop as PseudosProperty]
+        if (prop in pseudos) prop = pseudos[prop as PseudoProperty]
 
         let style: StyleConfig | true | undefined =
           styles[prop as StyleProperty]

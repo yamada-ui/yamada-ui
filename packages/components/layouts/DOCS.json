@@ -12,12 +12,12 @@
       "description": "The CSS `flex-basis` property."
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
     "grow": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexGrow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-grow` property."
     },
@@ -27,12 +27,12 @@
       "description": "The CSS `justify-content` property."
     },
     "shrink": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexShrink>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-shrink` property."
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }
@@ -40,7 +40,7 @@
   "Center": {},
   "Grid": {
     "area": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridArea | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-area` property."
     },
@@ -50,7 +50,7 @@
       "description": "The CSS `grid-auto-columns` property."
     },
     "autoFlow": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<Breakpoint, GridAutoFlow | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-flow` property."
     },
@@ -60,17 +60,17 @@
       "description": "The CSS `grid-auto-rows` property."
     },
     "column": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridColumn | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column` property."
     },
     "row": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridRow | [GridRow, GridRow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row` property."
     },
     "templateAreas": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<Breakpoint, GridTemplateAreas | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-areas` property."
     },
@@ -87,7 +87,7 @@
   },
   "SimpleGrid": {
     "area": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridArea | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-area` property."
     },
@@ -97,7 +97,7 @@
       "description": "The CSS `grid-auto-columns` property."
     },
     "autoFlow": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridAutoFlow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"row\" | \"dense\" | Partial<Record<Breakpoint, GridAutoFlow | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-auto-flow` property."
     },
@@ -107,7 +107,7 @@
       "description": "The CSS `grid-auto-rows` property."
     },
     "column": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumn>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridColumn | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column` property."
     },
@@ -117,12 +117,12 @@
       "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length."
     },
     "row": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRow>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridRow | [GridRow, GridRow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row` property."
     },
     "templateAreas": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridTemplateAreas>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | Partial<Record<Breakpoint, GridTemplateAreas | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-template-areas` property."
     },
@@ -139,12 +139,12 @@
   },
   "GridItem": {
     "area": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridArea>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridArea | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-area` property."
     },
     "colEnd": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumnEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridColumnEnd | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column-end` property."
     },
@@ -154,12 +154,12 @@
       "description": "The number of columns the grid item should `span`."
     },
     "colStart": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridColumnStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridColumnStart | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-column-start` property."
     },
     "rowEnd": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRowEnd>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridRowEnd | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row-end` property."
     },
@@ -169,7 +169,7 @@
       "description": "The number of rows the grid item should `span`."
     },
     "rowStart": {
-      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", GridRowStart>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "(string & {}) | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | (number & {}) | Partial<Record<Breakpoint, GridRowStart | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `grid-row-start` property."
     }
@@ -189,7 +189,7 @@
       "description": "The CSS `align-items` property."
     },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },
@@ -204,7 +204,7 @@
       "description": "The CSS `justify-content` property."
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<(string & {}) | \"base\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"nowrap\" | \"wrap\" | \"wrap-reverse\" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
       "required": false,
       "description": "The CSS `flex-wrap` property."
     }

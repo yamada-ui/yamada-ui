@@ -1209,7 +1209,7 @@
       "required": false
     },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
       "required": false
     },
     "dimBar": { "type": "Partial<BarProps>", "required": false }
@@ -1217,7 +1217,7 @@
   "Area": {
     "activeDot": { "type": "DotProps", "required": false },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
       "required": false
     },
     "dimArea": { "type": "Partial<AreaProps>", "required": false },
@@ -1227,7 +1227,7 @@
   "Line": {
     "activeDot": { "type": "DotProps", "required": false },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
       "required": false
     },
     "dimDot": { "type": "DotProps", "required": false },
@@ -1237,7 +1237,7 @@
   "Radar": {
     "activeDot": { "type": "DotProps", "required": false },
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 318 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
       "required": false
     },
     "dimDot": { "type": "DotProps", "required": false },

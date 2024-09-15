@@ -2,10 +2,10 @@
 title: MultiAutocomplete
 description: "`MultiAutocomplete`は、ユーザーのテキスト入力に応じて候補を表示し、複数の値を取得するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/autocomplete"
+order: 1
 label: Updated
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -50,6 +50,14 @@ order: 1
   name="clearIconProps"
   type="AutocompleteIconProps"
   description={"Props for multi autocomplete clear icon element."}
+/>
+
+<PropsCard
+  id="multiautocomplete-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -429,6 +437,14 @@ order: 1
 />
 
 <PropsCard
+  id="multiautocomplete-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="multiautocomplete-optionprops"
   name="optionProps"
   type='Omit<AutocompleteOptionProps, "value" | "children">'
@@ -459,15 +475,6 @@ order: 1
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
-/>
-
-<PropsCard
-  id="multiautocomplete-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
 />
 
 <PropsCard

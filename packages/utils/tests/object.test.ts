@@ -83,7 +83,27 @@ describe("Object", () => {
   describe("flattenObject", () => {
     test("should flatten an object to a specified depth", () => {
       const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
-      expect(flattenObject(obj, 1)).toStrictEqual({
+      expect(flattenObject(obj, { maxDepth: 1 })).toStrictEqual({
+        a: 1,
+        "b.c": 2,
+        "b.d": { e: 3 },
+      })
+    })
+
+    test("should flatten an object with a custom separator", () => {
+      const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
+      expect(flattenObject(obj, { separator: "-" })).toStrictEqual({
+        a: 1,
+        "b-c": 2,
+        "b-d-e": 3,
+      })
+    })
+
+    test("should flatten an object with a shouldProcess function", () => {
+      const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
+      expect(
+        flattenObject(obj, { shouldProcess: (value) => !("e" in value) }),
+      ).toStrictEqual({
         a: 1,
         "b.c": 2,
         "b.d": { e: 3 },

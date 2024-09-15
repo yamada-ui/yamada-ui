@@ -143,23 +143,39 @@ export const merge = <Y extends Dict>(
   return result as Y
 }
 
+export type FlattenObjectOptions = {
+  maxDepth?: number
+  omitKeys?: string[]
+  separator?: string
+  shouldProcess?: (obj: any) => boolean
+}
+
 export const flattenObject = <Y extends Dict>(
   obj: any,
-  maxDepth: number = Infinity,
-  omitKeys: string[] = [],
+  { maxDepth, omitKeys, separator, shouldProcess }: FlattenObjectOptions = {},
 ): Y => {
+  maxDepth ??= Infinity
+  omitKeys ??= []
+  separator ??= "."
+
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
   return Object.entries(obj).reduce((result, [key, value]) => {
     if (
       isObject(value) &&
-      !Object.keys(value).some((key) => omitKeys.includes(key))
+      !Object.keys(value).some((key) => omitKeys?.includes(key)) &&
+      (!shouldProcess || shouldProcess(value))
     ) {
-      Object.entries(flattenObject(value, maxDepth - 1, omitKeys)).forEach(
-        ([childKey, childValue]) => {
-          result[`${key}.${childKey}`] = childValue
-        },
-      )
+      Object.entries(
+        flattenObject(value, {
+          maxDepth: maxDepth - 1,
+          omitKeys,
+          separator,
+          shouldProcess,
+        }),
+      ).forEach(([childKey, childValue]) => {
+        result[`${key}${separator}${childKey}`] = childValue
+      })
     } else {
       result[key] = value
     }

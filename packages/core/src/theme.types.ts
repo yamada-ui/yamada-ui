@@ -32,6 +32,13 @@ export type BreakpointOptions = {
    */
   direction?: BreakpointDirection
   /**
+   * The base value for the `breakpoint` when `direction` is "down".
+   * This is treated as the largest `breakpoint`.
+   *
+   * @default "9999px"
+   */
+  base?: string
+  /**
    * The `ref` of the container element used in `useBreakpoint` and others.
    *
    * Even if this `ref` is not set, CSS query will work, but JavaScript operations such as `useBreakpoint` will not work.
@@ -507,24 +514,21 @@ export type ThemeConfig = {
 
 export type LayerStyles = Record<string, CSSUIObject>
 export type TextStyles = Record<string, CSSUIObject>
+export type ThemeValue = string | number
 export type ThemeTokens = {
-  [key: string | number]:
-    | string
-    | number
-    | [string | number, string | number]
-    | ThemeTokens
+  [key: ThemeValue]: ThemeValue | [ThemeValue, ThemeValue] | ThemeTokens
 }
 export type ThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
 > = {
-  [key: string | number]: T | T[] | ThemeAnimationTokens<T>
+  [key: ThemeValue]: T | T[] | ThemeAnimationTokens<T>
 }
 export type ThemeTransitionTokens = {
   property?: ThemeTokens
   duration?: ThemeTokens
   easing?: ThemeTokens
 }
-export type ThemeBreakpointTokens = { [key: string | number]: string | number }
+export type ThemeBreakpointTokens = { [key: ThemeValue]: ThemeValue }
 export type ThemeSemantics = Omit<
   BaseTheme,
   | "styles"

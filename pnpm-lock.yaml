@@ -60,6 +60,9 @@ importers:
       '@fortawesome/react-fontawesome':
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.6.0)(react@18.3.1)
+      '@koralle/vitest-axe':
+        specifier: ^0.1.1
+        version: 0.1.1(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6))
       '@lucide/lab':
         specifier: ^0.1.2
         version: 0.1.2
@@ -146,7 +149,7 @@ importers:
         version: 1.1.0(@typescript-eslint/utils@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6))
       '@vitest/ui':
         specifier: ^2.0.5
-        version: 2.0.5(vitest@2.0.5)
+        version: 2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6))
       '@yamada-ui/calendar':
         specifier: workspace:*
         version: link:packages/components/calendar
@@ -326,10 +329,7 @@ importers:
         version: 5.4.2(@types/node@22.5.0)(terser@5.31.6)
       vitest:
         specifier: ^2.0.5
-        version: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)
-      vitest-axe:
-        specifier: ^0.1.0
-        version: 0.1.0(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6))
+        version: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6)
 
   docs:
     dependencies:
@@ -750,10 +750,10 @@ importers:
         version: 0.3.9
       eslint-import-resolver-typescript:
         specifier: ^3.6.1
-        version: 3.6.1(@typescript-eslint/parser@8.2.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@9.9.1(jiti@1.21.6))
+        version: 3.6.1(@typescript-eslint/parser@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-import:
         specifier: ^2.29.1
-        version: 2.29.1(@typescript-eslint/parser@8.2.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1(jiti@1.21.6))
+        version: 2.29.1(@typescript-eslint/parser@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-jsx-a11y:
         specifier: ^6.9.0
         version: 6.9.0(eslint@9.9.1(jiti@1.21.6))
@@ -859,10 +859,10 @@ importers:
         version: 0.3.9
       eslint-import-resolver-typescript:
         specifier: ^3.6.1
-        version: 3.6.1(@typescript-eslint/parser@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@9.9.1(jiti@1.21.6))
+        version: 3.6.1(@typescript-eslint/parser@8.2.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-import:
         specifier: ^2.29.1
-        version: 2.29.1(@typescript-eslint/parser@8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1(jiti@1.21.6))
+        version: 2.29.1(@typescript-eslint/parser@8.2.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4))(eslint-import-resolver-typescript@3.6.1)(eslint@9.9.1(jiti@1.21.6))
       eslint-plugin-react:
         specifier: ^7.35.0
         version: 7.35.0(eslint@9.9.1(jiti@1.21.6))
@@ -5835,6 +5835,12 @@ packages:
   '@jspm/core@2.0.1':
     resolution: {integrity: sha512-Lg3PnLp0QXpxwLIAuuJboLeRaIhrgJjeuh797QADg3xz8wGLugQOS5DpsE8A6i6Adgzf+bacllkKZG3J0tGfDw==}
 
+  '@koralle/vitest-axe@0.1.1':
+    resolution: {integrity: sha512-qp/e7mFqXXsrDV1qVsl4mG2uJyHCgG0qU9ubWutK0yNh/CYOc6w0AP7ICjZ/9tTYJ0Jk01MWB/2kDUbrMUn3YA==}
+    engines: {node: '>=18.x'}
+    peerDependencies:
+      vitest: '1'
+
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
 
@@ -9501,6 +9507,9 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
 
+  es-toolkit@1.17.0:
+    resolution: {integrity: sha512-aJvpNxK7d+I+Rt9tmdwzelxTe4EwtxX1Kv0xv6ZTRWJBpMCxe0vxTLLW4STz6pHYjtyTTrEkonNXLaBsYHg2Yw==}
+
   es6-error@4.1.1:
     resolution: {integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==}
 
@@ -11798,9 +11807,6 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-
   lodash._reinterpolate@3.0.0:
     resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
 
@@ -13625,7 +13631,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qs@6.11.0:
@@ -15480,11 +15485,6 @@ packages:
         optional: true
       terser:
         optional: true
-
-  vitest-axe@0.1.0:
-    resolution: {integrity: sha512-jvtXxeQPg8R/2ANTY8QicA5pvvdRP4F0FsVUAHANJ46YCDASie/cuhlSzu0DGcLmZvGBSBNsNuK3HqfaeknyvA==}
-    peerDependencies:
-      vitest: '>=0.16.0'
 
   vitest-matchmedia-mock@1.0.6:
     resolution: {integrity: sha512-UUU0YY6BpmcuD2p4DpUVUP0afKuxHX6YAQs5J5skP+ksm+yXJHi9kSN5eOQuC0TFVTuXnIFPl0U9vGPNgnzA1g==}
@@ -18256,6 +18256,13 @@ snapshots:
 
   '@jspm/core@2.0.1': {}
 
+  '@koralle/vitest-axe@0.1.1(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6))':
+    dependencies:
+      axe-core: 4.10.0
+      chalk: 5.3.0
+      es-toolkit: 1.17.0
+      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6)
+
   '@leichtgewicht/ip-codec@2.0.5': {}
 
   '@lucide/lab@0.1.2': {}
@@ -20057,7 +20064,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)
+      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6)
     transitivePeerDependencies:
       - supports-color
 
@@ -20067,7 +20074,7 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/utils': 8.3.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)
       typescript: 5.5.4
-      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)
+      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6)
 
   '@vitest/expect@2.0.5':
     dependencies:
@@ -20105,18 +20112,6 @@ snapshots:
       sirv: 2.0.4
       tinyrainbow: 1.2.0
       vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6)
-    optional: true
-
-  '@vitest/ui@2.0.5(vitest@2.0.5)':
-    dependencies:
-      '@vitest/utils': 2.0.5
-      fast-glob: 3.3.2
-      fflate: 0.8.2
-      flatted: 3.3.1
-      pathe: 1.1.2
-      sirv: 2.0.4
-      tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)
 
   '@vitest/utils@2.0.5':
     dependencies:
@@ -23175,6 +23170,8 @@ snapshots:
       is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
+
+  es-toolkit@1.17.0: {}
 
   es6-error@4.1.1: {}
 
@@ -26596,8 +26593,6 @@ snapshots:
   locate-path@7.2.0:
     dependencies:
       p-locate: 6.0.0
-
-  lodash-es@4.17.21: {}
 
   lodash._reinterpolate@3.0.0: {}
 
@@ -31187,16 +31182,6 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.31.6
 
-  vitest-axe@0.1.0(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)):
-    dependencies:
-      aria-query: 5.3.0
-      axe-core: 4.10.0
-      chalk: 5.3.0
-      dom-accessibility-api: 0.5.16
-      lodash-es: 4.17.21
-      redent: 3.0.0
-      vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)
-
   vitest-matchmedia-mock@1.0.6(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6):
     dependencies:
       vitest: 2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6)))(jsdom@25.0.0)(terser@5.31.6)
@@ -31240,41 +31225,6 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.5.0
       '@vitest/ui': 2.0.5(vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6))
-      jsdom: 25.0.0
-    transitivePeerDependencies:
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
-  vitest@2.0.5(@types/node@22.5.0)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.31.6):
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@vitest/expect': 2.0.5
-      '@vitest/pretty-format': 2.0.5
-      '@vitest/runner': 2.0.5
-      '@vitest/snapshot': 2.0.5
-      '@vitest/spy': 2.0.5
-      '@vitest/utils': 2.0.5
-      chai: 5.1.1
-      debug: 4.3.6
-      execa: 8.0.1
-      magic-string: 0.30.11
-      pathe: 1.1.2
-      std-env: 3.7.0
-      tinybench: 2.9.0
-      tinypool: 1.0.1
-      tinyrainbow: 1.2.0
-      vite: 5.4.2(@types/node@22.5.0)(terser@5.31.6)
-      vite-node: 2.0.5(@types/node@22.5.0)(terser@5.31.6)
-      why-is-node-running: 2.3.0
-    optionalDependencies:
-      '@types/node': 22.5.0
-      '@vitest/ui': 2.0.5(vitest@2.0.5)
       jsdom: 25.0.0
     transitivePeerDependencies:
       - less

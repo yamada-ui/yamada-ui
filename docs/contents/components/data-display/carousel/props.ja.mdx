@@ -2,9 +2,9 @@
 title: Carousel
 description: "`Carousel`は、複数の要素をスライドショーのように表示するコンポーネントです。"
 package_name: "@yamada-ui/carousel"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -14,7 +14,7 @@ order: 1
 <PropsCard
   id="carousel-align"
   name="align"
-  type='AlignmentOptionType | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", AlignmentOptionType | undefined>> | ColorModeArray<...>'
+  type="AlignmentOptionType | Partial<Record<Breakpoint, AlignmentOptionType | [AlignmentOptionType | undefined, AlignmentOptionType | undefined] | undefined>> | [...]"
   description={"The alignment of the carousel."}
   defaultValue={"'center'"}
 />
@@ -37,7 +37,7 @@ order: 1
 <PropsCard
   id="carousel-containscroll"
   name="containScroll"
-  type='ScrollContainOptionType | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", ScrollContainOptionType | undefined>> | ColorModeArray<...>'
+  type="ScrollContainOptionType | Partial<Record<Breakpoint, ScrollContainOptionType | [ScrollContainOptionType | undefined, ScrollContainOptionType | undefined] | undefined>> | [...]"
   description={
     "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them."
   }
@@ -150,12 +150,7 @@ order: 1
 <PropsCard
   id="carousel-inviewthreshold"
   name="inViewThreshold"
-  type='type ONLY_FOR_FORMAT =
-  | number
-  | number[]
-  | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl",
-        number | number[] | undefined>>
-  | ColorModeArray<number | number[] | undefined>'
+  type="number | number[] | Partial<Record<Breakpoint, number | number[] | [number | number[] | undefined, number | number[] | undefined] | undefined>> | [...]"
   description={
     "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view."
   }

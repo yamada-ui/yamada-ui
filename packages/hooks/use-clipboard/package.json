@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-clipboard",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Yamada UI useClipboard custom hook",
   "keywords": [
     "use-clipboard"

@@ -17,7 +17,7 @@ type MotionState = {
 }
 
 type FlipMotion = {
-  [key in FlipDirection]: {
+  [key in FlipOrientation]: {
     from: MotionState
     to: MotionState
   }
@@ -52,7 +52,7 @@ const flipStyle: CSSUIObject = {
   backfaceVisibility: "hidden",
 }
 
-export type FlipDirection = "horizontal" | "vertical"
+export type FlipOrientation = "horizontal" | "vertical"
 
 type FlipOptions = {
   from: ReactElement
@@ -62,7 +62,7 @@ type FlipOptions = {
    *
    * @default 'horizontal'
    */
-  orientation?: FlipDirection
+  orientation?: FlipOrientation
   transition?: MotionTransition
 }
 

@@ -4,9 +4,9 @@ description: >-
   `Stack` is a component that groups elements and provides spacing between child
   elements.
 package_name: "@yamada-ui/layouts"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -23,7 +23,7 @@ order: 1
 <PropsCard
   id="stack-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
 />
 
@@ -44,6 +44,6 @@ order: 1
 <PropsCard
   id="stack-wrap"
   name="wrap"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap" | "wrap-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexWrap>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap" | "wrap-reverse" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-wrap` property."}
 />

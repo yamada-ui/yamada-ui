@@ -9,7 +9,7 @@
       "required": true
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | ... 148 more ... | \"view\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"div\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | ... 148 more ... | \"view\"",
       "required": false
     },
     "containerVariants": {
@@ -19,7 +19,7 @@
       "see": "https://www.framer.com/motion/animation/#variants"
     },
     "listProps": {
-      "type": "MotionProps",
+      "type": "MotionProps<\"ul\">",
       "required": false,
       "description": "Props for the snacks list element."
     },

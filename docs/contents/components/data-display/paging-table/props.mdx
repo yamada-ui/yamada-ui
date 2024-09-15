@@ -2,9 +2,9 @@
 title: PagingTable
 description: "`PagingTable` is a table component with pagination functionality."
 package_name: "@yamada-ui/table"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -148,7 +148,7 @@ order: 1
 <PropsCard
   id="pagingtable-layout"
   name="layout"
-  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", TableLayout>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | Partial<Record<Breakpoint, TableLayout | [TableLayout, TableLayout]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 

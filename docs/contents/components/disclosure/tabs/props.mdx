@@ -96,7 +96,7 @@ order: 1
 <PropsCard
   id="tabs-orientation"
   name="orientation"
-  type='"vertical" | "horizontal"'
+  type='"horizontal" | "vertical"'
   description={"The orientation of the tab list."}
   defaultValue={"'horizontal'"}
 />
@@ -134,6 +134,60 @@ order: 1
 ### TabListProps
 
 ### TabProps
+
+<PropsCard
+  id="tab-clickonenter"
+  name="clickOnEnter"
+  type="boolean"
+  description={"Whether or not trigger click on pressing `Enter`."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-clickonspace"
+  name="clickOnSpace"
+  type="boolean"
+  description={"Whether or not trigger click on pressing `Space`."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-disabletouchbehavior"
+  name="disableTouchBehavior"
+  type="boolean"
+  description={"Disable the touch device behavior."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-focusonclick"
+  name="focusOnClick"
+  type="boolean"
+  description={
+    "Whether or not to focus the element when it is clicked.\nIf `true`, the element will receive focus upon click."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="tab-isdisabled"
+  name="isDisabled"
+  type="boolean"
+  description={
+    "If `true`, the element will be disabled. It will set the `disabled` HTML attribute."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="tab-isfocusable"
+  name="isFocusable"
+  type="boolean"
+  description={
+    "If `true` and isDisabled, the element will have only `aria-disabled` set to `true`."
+  }
+  defaultValue={"false"}
+/>
 
 ### TabPanelsProps
 

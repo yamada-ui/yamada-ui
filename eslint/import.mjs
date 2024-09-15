@@ -22,7 +22,7 @@ const importConfigArray = [
       "import-replace": pluginImportReplace,
     },
     rules: {
-      ...pluginImport.configs.recommended.rules,
+      ...pluginImport.flatConfigs.recommended.rules,
       "import/order": [
         "error",
         {

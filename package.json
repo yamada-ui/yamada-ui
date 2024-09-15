@@ -102,6 +102,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@koralle/vitest-axe": "^0.1.1",
     "@lucide/lab": "^0.1.2",
     "@octokit/request-error": "^6.1.4",
     "@octokit/rest": "^21.0.2",
@@ -186,8 +187,7 @@
     "turbo": "^2.0.14",
     "typescript": "^5.5.4",
     "vite": "^5.4.2",
-    "vitest": "^2.0.5",
-    "vitest-axe": "^0.1.0"
+    "vitest": "^2.0.5"
   },
   "pnpm": {
     "overrides": {

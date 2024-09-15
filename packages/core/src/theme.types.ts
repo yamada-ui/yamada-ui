@@ -514,24 +514,21 @@ export type ThemeConfig = {
 
 export type LayerStyles = Record<string, CSSUIObject>
 export type TextStyles = Record<string, CSSUIObject>
+export type ThemeValue = string | number
 export type ThemeTokens = {
-  [key: string | number]:
-    | string
-    | number
-    | [string | number, string | number]
-    | ThemeTokens
+  [key: ThemeValue]: ThemeValue | [ThemeValue, ThemeValue] | ThemeTokens
 }
 export type ThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
 > = {
-  [key: string | number]: T | T[] | ThemeAnimationTokens<T>
+  [key: ThemeValue]: T | T[] | ThemeAnimationTokens<T>
 }
 export type ThemeTransitionTokens = {
   property?: ThemeTokens
   duration?: ThemeTokens
   easing?: ThemeTokens
 }
-export type ThemeBreakpointTokens = { [key: string | number]: string | number }
+export type ThemeBreakpointTokens = { [key: ThemeValue]: ThemeValue }
 export type ThemeSemantics = Omit<
   BaseTheme,
   | "styles"

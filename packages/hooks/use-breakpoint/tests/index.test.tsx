@@ -126,7 +126,7 @@ describe("useBreakpoint", () => {
     let error: Error | undefined
 
     try {
-      renderHook(() => useBreakpoint())
+      renderHook(() => useBreakpoint(), { withProvider: false })
     } catch (e) {
       if (e instanceof Error) error = e
     }
@@ -237,7 +237,9 @@ describe("getBreakpointValue", () => {
     let error: Error | undefined
 
     try {
-      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"))
+      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
+        withProvider: false,
+      })
     } catch (e) {
       if (e instanceof Error) error = e
     }
@@ -251,7 +253,9 @@ describe("getBreakpointValue", () => {
     let error: Error | undefined
 
     try {
-      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"))
+      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
+        withProvider: false,
+      })
     } catch (e) {
       if (e instanceof Error) error = e
     }

@@ -7,7 +7,7 @@
       "description": "If `true`, the opacity of the content will be animated."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "colorScheme": {
@@ -75,7 +75,7 @@
   },
   "Fade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "delay": {
@@ -116,7 +116,7 @@
   },
   "ScaleFade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "colorScheme": {
@@ -184,7 +184,7 @@
   },
   "Slide": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "colorScheme": {
@@ -246,7 +246,7 @@
   },
   "SlideFade": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"var\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | ... 148 more ... | \"textPath\"",
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
       "required": false
     },
     "colorScheme": {

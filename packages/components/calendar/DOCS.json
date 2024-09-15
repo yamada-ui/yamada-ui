@@ -25,7 +25,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "dayProps": {
-      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_print\" | ... 96 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar day button element."
     },
@@ -90,7 +90,7 @@
       "description": "Define holidays."
     },
     "labelProps": {
-      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_print\" | ... 96 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar label button element."
     },
@@ -129,7 +129,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "monthProps": {
-      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_print\" | ... 96 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar month button element."
     },
@@ -181,7 +181,7 @@
       "description": "The size of the Calendar."
     },
     "tableProps": {
-      "type": "Omit<Omit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 4 more ... & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<TableHTMLAttributes<HTMLTableElement>, HTMLTableElement>, \"ref\">, \"_print\" | ... 96 more ... | \"as\"> & ... 4 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar month table element."
     },
@@ -220,7 +220,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "weekdayProps": {
-      "type": "Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 4 more ... & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, \"ref\">, \"_print\" | ... 96 more ... | \"as\"> & ... 4 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar weekday element."
     },
@@ -262,7 +262,7 @@
       "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
     },
     "yearProps": {
-      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_hover\" | ... 72 more ... | \"as\"> & ... 6 more ... & { ...; }",
+      "type": "Omit<Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, \"ref\">, \"_print\" | ... 96 more ... | \"as\"> & ... 6 more ... & { ...; }",
       "required": false,
       "description": "Props for calendar year button element."
     }
@@ -314,7 +314,7 @@
       "description": "Size for the calendar component."
     },
     "calendarVariant": {
-      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"subtle\" | \"unstyled\">",
       "required": false,
       "description": "Variant for the calendar component."
     },
@@ -322,6 +322,12 @@
       "type": "DatePickerIconProps",
       "required": false,
       "description": "Props for date picker clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -589,6 +595,12 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "paginateBy": {
       "type": "number",
       "defaultValue": "1",
@@ -623,11 +635,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "size": {
       "defaultValue": "md",
@@ -755,7 +762,7 @@
       "description": "Size for the calendar component."
     },
     "calendarVariant": {
-      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"subtle\" | \"unstyled\">",
       "required": false,
       "description": "Variant for the calendar component."
     },
@@ -763,6 +770,12 @@
       "type": "DatePickerIconProps",
       "required": false,
       "description": "Props for date picker clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -1047,6 +1060,12 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "paginateBy": {
       "type": "number",
       "defaultValue": "1",
@@ -1081,11 +1100,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "separator": {
       "type": "string",
@@ -1219,7 +1233,7 @@
       "description": "Size for the calendar component."
     },
     "calendarVariant": {
-      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"subtle\" | \"unstyled\">",
       "required": false,
       "description": "Variant for the calendar component."
     },
@@ -1227,6 +1241,12 @@
       "type": "DatePickerIconProps",
       "required": false,
       "description": "Props for date picker clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -1499,6 +1519,12 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "paginateBy": {
       "type": "number",
       "defaultValue": "1",
@@ -1533,11 +1559,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "separator": {
       "type": "string",
@@ -1675,7 +1696,7 @@
       "description": "Size for the calendar component."
     },
     "calendarVariant": {
-      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"subtle\" | \"unstyled\">",
       "required": false,
       "description": "Variant for the calendar component."
     },
@@ -1683,6 +1704,12 @@
       "type": "DatePickerIconProps",
       "required": false,
       "description": "Props for month picker clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -1912,6 +1939,12 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "parseDate": {
       "type": "(value: string) => Date | undefined",
       "required": false,
@@ -1940,11 +1973,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "size": {
       "defaultValue": "md",
@@ -2041,7 +2069,7 @@
       "description": "Size for the calendar component."
     },
     "calendarVariant": {
-      "type": "UIValue<(string & {}) | \"solid\" | \"unstyled\" | \"subtle\">",
+      "type": "UIValue<(string & {}) | \"solid\" | \"subtle\" | \"unstyled\">",
       "required": false,
       "description": "Variant for the calendar component."
     },
@@ -2049,6 +2077,12 @@
       "type": "DatePickerIconProps",
       "required": false,
       "description": "Props for year picker clear icon element."
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to close."
     },
     "closeOnBlur": {
       "type": "boolean",
@@ -2244,6 +2278,12 @@
       "required": false,
       "description": "Callback fired when the popover opens."
     },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "200",
+      "required": false,
+      "description": "The number of delay time to open."
+    },
     "parseDate": {
       "type": "(value: string) => Date | undefined",
       "required": false,
@@ -2272,11 +2312,6 @@
       "defaultValue": true,
       "required": false,
       "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
-    },
-    "relatedRef": {
-      "type": "RefObject<HTMLElement>",
-      "required": false,
-      "description": "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
     },
     "size": {
       "defaultValue": "md",

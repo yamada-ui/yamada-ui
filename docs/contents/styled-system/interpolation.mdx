@@ -9,14 +9,14 @@ Interpolation is a feature for referencing [CSS custom properties (variables)](/
 
 ## Usage
 
-If you have created [CSS custom properties (variables)](/styled-system/css-custom-properties) using the `var` from [Style Props](/styled-system/style-props), you can reference the set `name` with a `$`.
+If you have created [CSS custom properties (variables)](/styled-system/css-custom-properties) using the `vars` from [Style Props](/styled-system/style-props), you can reference the set `name` with a `$`.
 
 ```tsx
 <Box
   p="md"
   rounded="md"
   color="white"
-  var={[{ name: "bg", token: "colors", value: "primary" }]}
+  vars={[{ name: "bg", token: "colors", value: "primary" }]}
   bg="$bg"
 >
   Box

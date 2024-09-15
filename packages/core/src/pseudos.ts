@@ -515,6 +515,10 @@ export const pseudoClassSelectors = Object.values(pseudoClasses)
 
 export const atRules = {
   /**
+   * The CSS `@media print` media query.
+   */
+  _print: "@media print",
+  /**
    * The CSS `@media (prefers-color-scheme: light)` media query.
    */
   _mediaLight: "@media (prefers-color-scheme: light)",

@@ -13,7 +13,7 @@
       "description": "If `true`, disable ripple effects when pressing a element."
     },
     "errorBorderColor": {
-      "type": "\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | ... 317 more ... | ColorModeArray<...>",
+      "type": "\"border\" | \"link\" | \"primary\" | \"secondary\" | \"info\" | \"success\" | \"warning\" | \"danger\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | ... 318 more ... | [...]",
       "required": false,
       "description": "The border color when the button is invalid."
     },

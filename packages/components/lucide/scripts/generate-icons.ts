@@ -9,7 +9,7 @@ import { format, resolveConfig } from "prettier"
 const ENTRY_PATH = "node_modules/lucide-react/dist/esm/icons/index.js"
 const DIST_PATH = "src/icons"
 
-export const prettier = async (content: string, options?: Options) => {
+const prettier = async (content: string, options?: Options) => {
   const prettierConfig = await resolveConfig(
     path.join(process.cwd(), ".prettierrc"),
   )

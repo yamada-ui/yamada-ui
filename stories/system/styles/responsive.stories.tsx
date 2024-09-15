@@ -1,6 +1,9 @@
+import { Calendar } from "@yamada-ui/calendar"
 import {
   Box,
+  Button,
   extendConfig,
+  Tag,
   Text,
   UIProvider,
   useBreakpoint,
@@ -9,7 +12,7 @@ import {
 import { useRef, type FC } from "react"
 
 export default {
-  title: "System / Styles / Breakpoint",
+  title: "System / Styles / Responsive",
 }
 
 export const basic = () => {
@@ -19,6 +22,7 @@ export const basic = () => {
     <Box
       bg={{
         base: "red.500",
+        "2xl": "pink.500",
         xl: "blue.500",
         lg: "green.500",
         md: "yellow.500",
@@ -39,6 +43,7 @@ export const useHook = () => {
   const breakpoint = useBreakpoint()
   const bg = useBreakpointValue({
     base: "red.500",
+    "2xl": "pink.500",
     xl: "blue.500",
     lg: "green.500",
     md: "yellow.500",
@@ -77,7 +82,7 @@ export const withContainer = () => {
       <Text
         color={{
           base: "red.500",
-          "2xl": "cyan.500",
+          "2xl": "pink.500",
           xl: "blue.500",
           lg: "green.500",
           md: "yellow.500",
@@ -103,6 +108,7 @@ export const withContainer = () => {
       <Text
         color={{
           base: "red.500",
+          "2xl": "pink.500",
           xl: "blue.500",
           lg: "green.500",
           md: "yellow.500",
@@ -116,5 +122,21 @@ export const withContainer = () => {
         <App />
       </UIProvider>
     </Box>
+  )
+}
+
+export const components = () => {
+  const breakpoint = useBreakpoint()
+
+  return (
+    <>
+      <Text>The current breakpoint is "{breakpoint}"</Text>
+
+      <Button size={{ base: "lg", md: "md" }}>Button</Button>
+
+      <Tag size={{ base: "lg", md: "md" }}>Tag</Tag>
+
+      <Calendar size={{ base: "lg", md: "md" }} />
+    </>
   )
 }

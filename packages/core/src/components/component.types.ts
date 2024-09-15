@@ -2,7 +2,7 @@ import type { Interpolation } from "@emotion/react"
 import type { Merge, MergeIfDefined } from "@yamada-ui/utils"
 import type * as React from "react"
 import type { CSSUIObject, CSSUIProps } from "../css"
-import type { PropsTheme } from "../theme.types"
+import type { StyledTheme } from "../theme.types"
 import type { DOMElements } from "./element.types"
 
 export type BaseStyle =
@@ -42,7 +42,7 @@ export type UIBaseProps = {
 
 export type StyledResolverProps = CSSUIObject &
   UIBaseProps & {
-    theme: PropsTheme
+    theme: StyledTheme
   }
 
 export type UIProps = CSSUIProps & UIBaseProps

@@ -54,7 +54,10 @@ export const gradient: Transform = (value, theme) => {
 
     const token = `colors.${color}`
 
-    color = token in theme.__cssMap ? theme.__cssMap[token].ref : color
+    color =
+      theme.__cssMap && token in theme.__cssMap
+        ? theme.__cssMap[token].ref
+        : color
 
     if (ratio) {
       return [color, ...(isArray(ratio) ? ratio : [ratio])].join(" ")

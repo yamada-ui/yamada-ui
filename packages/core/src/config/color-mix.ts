@@ -32,7 +32,10 @@ const getColor = (value: string | undefined, theme: StyledTheme) => {
 
   const token = `colors.${color}`
 
-  color = token in theme.__cssMap ? theme.__cssMap[token].ref : color
+  color =
+    theme.__cssMap && token in theme.__cssMap
+      ? theme.__cssMap[token].ref
+      : color
 
   if (percent && !percent.endsWith("%")) percent = `${percent}%`
 

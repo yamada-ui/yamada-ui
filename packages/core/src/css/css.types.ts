@@ -2,7 +2,7 @@ import type { Dict, ObjectLiteral, StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
-import type { Theme, StyledTheme } from "../theme.types"
+import type { Theme, StyledTheme, InternalTheme } from "../theme.types"
 
 export type { CSS }
 
@@ -98,8 +98,11 @@ export type CSSUIObject = UIStyles & RecursiveStyles<UIStyles>
 
 export type CSSUIProps = StyleProps & PseudoProps
 
-export type UIStyleProps<Y extends Dict = Dict> = {
-  theme: StyledTheme
+export type UIStyleProps<
+  Y extends Dict = Dict,
+  M extends InternalTheme = InternalTheme,
+> = {
+  theme: StyledTheme<M>
   colorMode?: ColorMode
   breakpoint?: Breakpoint
   colorScheme?: Theme["colorSchemes"]

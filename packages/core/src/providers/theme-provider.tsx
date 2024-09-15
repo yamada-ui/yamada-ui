@@ -1,9 +1,4 @@
-import type {
-  ThemeProviderProps as EmotionThemeProviderProps,
-  Interpolation,
-  Theme,
-  CSSObject,
-} from "@emotion/react"
+import type { ThemeProviderProps as EmotionThemeProviderProps } from "@emotion/react"
 import {
   Global,
   ThemeContext,
@@ -23,11 +18,10 @@ import { css } from "../css"
 import { transformTheme } from "../theme"
 import type {
   ChangeThemeScheme,
-  PropsTheme,
   StyledTheme,
   ThemeConfig,
-  Theme as UITheme,
-  UsageTheme,
+  Theme,
+  InternalTheme,
 } from "../theme.types"
 import { useColorMode } from "./color-mode-provider"
 import { useEnvironment } from "./environment-provider"
@@ -73,7 +67,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
 }) => {
   const environment = useEnvironment()
-  const [themeScheme, setThemeScheme] = useState<UITheme["themeSchemes"]>(
+  const [themeScheme, setThemeScheme] = useState<Theme["themeSchemes"]>(
     themeSchemeManager.get(config?.initialThemeScheme)(storageKey),
   )
 
@@ -119,11 +113,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 export const CSSVars: FC = () => {
   return (
     <Global
-      styles={
-        (({ __cssVars }: PropsTheme) => {
-          return { ":host, :root, [data-mode]": __cssVars } as CSSObject
-        }) as Interpolation<Theme>
-      }
+      styles={({ __cssVars }) => ({ ":host, :root, [data-mode]": __cssVars })}
     />
   )
 }
@@ -133,22 +123,20 @@ export const ResetStyle: FC = () => {
 
   return (
     <Global
-      styles={
-        ((theme: PropsTheme) => {
-          const { themeScheme } = theme
-          let style = get<UIStyle>(theme, "styles.resetStyle", {})
+      styles={(theme) => {
+        const { themeScheme } = theme
+        let style = get<UIStyle>(theme, "styles.resetStyle", {})
 
-          const computedStyle = runIfFunc(style, {
-            theme,
-            colorMode,
-            themeScheme,
-          })
+        const computedStyle = runIfFunc(style, {
+          theme,
+          colorMode,
+          themeScheme,
+        })
 
-          if (!computedStyle) return undefined
+        if (!computedStyle) return undefined
 
-          return css(computedStyle)(theme)
-        }) as Interpolation<Theme>
-      }
+        return css(computedStyle)(theme)
+      }}
     />
   )
 }
@@ -158,22 +146,20 @@ export const GlobalStyle: FC = () => {
 
   return (
     <Global
-      styles={
-        ((theme: PropsTheme) => {
-          const { themeScheme } = theme
-          let style = get<UIStyle>(theme, "styles.globalStyle", {})
+      styles={(theme) => {
+        const { themeScheme } = theme
+        let style = get<UIStyle>(theme, "styles.globalStyle", {})
 
-          const computedStyle = runIfFunc(style, {
-            theme,
-            colorMode,
-            themeScheme,
-          })
+        const computedStyle = runIfFunc(style, {
+          theme,
+          colorMode,
+          themeScheme,
+        })
 
-          if (!computedStyle) return undefined
+        if (!computedStyle) return undefined
 
-          return css(computedStyle)(theme)
-        }) as Interpolation<Theme>
-      }
+        return css(computedStyle)(theme)
+      }}
     />
   )
 }
@@ -183,11 +169,11 @@ export const GlobalStyle: FC = () => {
  *
  * @see Docs https://yamada-ui.com/hooks/use-theme
  */
-export const useTheme = <T extends object = Dict>() => {
-  const context = useContext(ThemeContext) as PropsTheme<UsageTheme>
+export const useTheme = <T extends InternalTheme>() => {
+  const internalTheme = useContext(ThemeContext) as StyledTheme<T>
 
   const theme = useMemo(() => {
-    const { themeScheme, ...internalTheme } = context
+    const { themeScheme } = internalTheme
 
     if (isUndefined(themeScheme) || themeScheme === "base") return internalTheme
 
@@ -196,14 +182,13 @@ export const useTheme = <T extends object = Dict>() => {
     if (!nestedTheme) return internalTheme
 
     return merge<StyledTheme<T>>(internalTheme, nestedTheme)
-  }, [context])
+  }, [internalTheme])
 
   const value = useMemo(() => {
-    const { themeScheme, changeThemeScheme, ...rest } = context
-    const internalTheme = rest as StyledTheme<T>
+    const { themeScheme, changeThemeScheme } = internalTheme
 
     return { themeScheme, changeThemeScheme, theme, internalTheme }
-  }, [theme, context])
+  }, [theme, internalTheme])
 
   return value
 }

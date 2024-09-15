@@ -1572,6 +1572,9 @@ importers:
       '@yamada-ui/core':
         specifier: workspace:*
         version: link:../../core
+      '@yamada-ui/motion':
+        specifier: workspace:*
+        version: link:../motion
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../../utils

@@ -1066,6 +1066,22 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
+  packages/components/airy:
+    dependencies:
+      '@yamada-ui/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../../utils
+    devDependencies:
+      clean-package:
+        specifier: 2.2.0
+        version: 2.2.0
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
   packages/components/alert:
     dependencies:
       '@yamada-ui/core':
@@ -3440,6 +3456,9 @@ importers:
       '@yamada-ui/accordion':
         specifier: workspace:*
         version: link:../components/accordion
+      '@yamada-ui/airy':
+        specifier: workspace:*
+        version: link:../components/airy
       '@yamada-ui/alert':
         specifier: workspace:*
         version: link:../components/alert

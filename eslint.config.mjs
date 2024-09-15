@@ -17,18 +17,18 @@ import { vitestConfig } from "./eslint/vitest.mjs"
 const ignoresConfig = {
   name: "@yamada-ui/ignores/base",
   ignores: [
-    "**/.next",
-    "**/.turbo",
-    "**/docs",
-    "**/examples",
-    "**/dist",
+    "**/.next/**",
+    "**/.turbo/**",
+    "**/docs/**",
+    "**/examples/**",
+    "**/dist/**",
     "**/packages/cli/bin/index.js",
-    "**/node_modules",
-    "**/build",
+    "**/node_modules/**",
+    "**/build/**",
     "**/pnpm-lock.yaml",
-    "**/coverage",
-    "**/storybook-static",
-    "**/.storybook",
+    "**/coverage/**",
+    "**/storybook-static/**",
+    "**/.storybook/**",
   ],
 }
 

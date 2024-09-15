@@ -90,3 +90,34 @@ export const flipVertical: Story = () => {
     </Center>
   )
 }
+
+export const withTransition: Story = () => {
+  return (
+    <Center
+      w="calc(100vw - 16px * 2)"
+      h="calc(100vh - 16px * 2)"
+      display="flex"
+      gap="4xl"
+    >
+      <Flip
+        from={<BackOfCard />}
+        to={<FrontOfCard />}
+        transition={{
+          type: "spring",
+          stiffness: 120,
+          damping: 10,
+        }}
+      />
+
+      <Flip
+        from={<Apple fontSize="6xl" />}
+        to={<Cherry fontSize="6xl" />}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 60,
+        }}
+      />
+    </Center>
+  )
+}

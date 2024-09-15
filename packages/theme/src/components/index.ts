@@ -83,7 +83,6 @@ import { SlideFade } from "./slide-fade"
 import { Slider } from "./slider"
 import { Stat } from "./stat"
 import { Stepper } from "./stepper"
-import { Swap } from "./swap"
 import { Switch } from "./switch"
 import { Table } from "./table"
 import { Tabs } from "./tabs"
@@ -180,7 +179,6 @@ export const components = {
   Slider,
   Stat,
   Stepper,
-  Swap,
   Switch,
   Table,
   Tabs,

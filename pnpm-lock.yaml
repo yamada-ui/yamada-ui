@@ -2663,25 +2663,6 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
-  packages/components/swap:
-    dependencies:
-      '@yamada-ui/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@yamada-ui/motion':
-        specifier: workspace:*
-        version: link:../motion
-      '@yamada-ui/utils':
-        specifier: workspace:*
-        version: link:../../utils
-    devDependencies:
-      clean-package:
-        specifier: 2.2.0
-        version: 2.2.0
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-
   packages/components/switch:
     dependencies:
       '@yamada-ui/checkbox':
@@ -3665,9 +3646,6 @@ importers:
       '@yamada-ui/stepper':
         specifier: workspace:*
         version: link:../components/stepper
-      '@yamada-ui/swap':
-        specifier: workspace:*
-        version: link:../components/swap
       '@yamada-ui/switch':
         specifier: workspace:*
         version: link:../components/switch

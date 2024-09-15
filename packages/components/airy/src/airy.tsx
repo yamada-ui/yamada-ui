@@ -1,6 +1,6 @@
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
@@ -9,7 +9,7 @@ import { useState, type ReactElement } from "react"
 type AiryOptions = {
   from: ReactElement
   to: ReactElement
-  transition?: MotionTransition
+  duration?: number
 }
 
 export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
@@ -25,10 +25,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   const {
     from,
     to,
-    transition = {
-      duration: 0.1,
-      ease: "easeIn",
-    },
+    duration = 0.1,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -52,7 +49,9 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
       __css={css}
       animate={controls}
       initial={{ opacity: 1 }}
-      transition={transition}
+      transition={{
+        duration,
+      }}
       {...rest}
     >
       {currentElement === "from" ? from : to}

@@ -35,3 +35,29 @@ export const basic: Story = () => {
     </Center>
   )
 }
+
+export const withDuration: Story = () => {
+  return (
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+      <Airy
+        from={
+          <Text w="xs" fontSize="5xl">
+            ON
+          </Text>
+        }
+        to={
+          <Text w="xs" fontSize="5xl">
+            OFF
+          </Text>
+        }
+        duration={0.6}
+      />
+
+      <Airy
+        from={<Menu fontSize="6xl" />}
+        to={<X fontSize="6xl" />}
+        duration={0.6}
+      />
+    </Center>
+  )
+}

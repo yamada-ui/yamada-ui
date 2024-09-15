@@ -2,18 +2,19 @@ import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
+import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
 
 type RotateOptions = {
   from: ReactElement
   to: ReactElement
-  //TODO: numberにするとタイプエラーが出る。どうしたら？？
-  rotate?: `${number}deg`
+  rotate?: number
   transition?: MotionTransition
 }
 
-export type RotateProps = MotionProps & ThemeProps<"Rotate"> & RotateOptions
+export type RotateProps = Merge<MotionProps, RotateOptions> &
+  ThemeProps<"Rotate">
 
 /**
  * `Rotate` is component.
@@ -29,7 +30,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     transition = {
       duration: 0.3,
     },
-    rotate = "45deg",
+    rotate = 45,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -42,7 +43,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const onClick = async () => {
     await controls.start({
       opacity: 0,
-      rotate,
+      rotate: `${rotate}deg`,
     })
     setCurrentElement((prev) => (prev === "from" ? "to" : "from"))
     await controls.start({ opacity: 1, rotate: "0deg" })

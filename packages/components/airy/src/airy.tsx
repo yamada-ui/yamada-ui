@@ -12,6 +12,10 @@ type AiryOptions = {
   duration?: number
 }
 
+const css: CSSUIObject = {
+  cursor: "pointer",
+}
+
 export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
 
 /**
@@ -31,10 +35,6 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
   const controls = useMotionAnimation()
 
-  const css: CSSUIObject = {
-    ...styles,
-  }
-
   const onClick = async () => {
     await controls.start({ opacity: 0 })
     setCurrentElement((prev) => (prev === "from" ? "to" : "from"))
@@ -46,7 +46,10 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
       ref={ref}
       onClick={onClick}
       className={cx(`ui-airy__${currentElement}`, className)}
-      __css={css}
+      __css={{
+        ...css,
+        ...styles,
+      }}
       animate={controls}
       initial={{ opacity: 1 }}
       transition={{

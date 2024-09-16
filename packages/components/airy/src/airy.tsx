@@ -13,6 +13,7 @@ type AiryOptions = {
 }
 
 const css: CSSUIObject = {
+  userSelect: "none",
   cursor: "pointer",
 }
 

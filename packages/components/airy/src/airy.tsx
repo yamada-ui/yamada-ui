@@ -6,15 +6,15 @@ import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
 
+const css: CSSUIObject = {
+  userSelect: "none",
+  cursor: "pointer",
+}
+
 type AiryOptions = {
   from: ReactElement
   to: ReactElement
   duration?: number
-}
-
-const css: CSSUIObject = {
-  userSelect: "none",
-  cursor: "pointer",
 }
 
 export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">

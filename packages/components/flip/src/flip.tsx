@@ -46,7 +46,7 @@ const variants: FlipMotion = {
   },
 }
 
-const flipStyle: CSSUIObject = {
+const css: CSSUIObject = {
   position: "absolute",
   top: 0,
   backfaceVisibility: "hidden",
@@ -95,10 +95,6 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {
-    ...styles,
-  }
-
   const switchVisibility = () => {
     setIsVisible((prev) => !prev)
   }
@@ -138,8 +134,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         position: "relative",
         w: dimensions.width ? `${dimensions.width}px` : "auto",
         h: dimensions.height ? `${dimensions.height}px` : "auto",
-        //FIXME
-        ...css,
+        ...styles,
       }}
       onClick={switchVisibility}
       {...rest}
@@ -151,7 +146,9 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         variants={variants[orientation].from}
         initial="initial"
         animate="animate"
-        __css={flipStyle}
+        __css={{
+          ...css,
+        }}
         transition={transition}
       >
         {from}
@@ -164,7 +161,9 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         variants={variants[orientation].to}
         initial="initial"
         animate="animate"
-        __css={flipStyle}
+        __css={{
+          ...css,
+        }}
         transition={transition}
       >
         {to}

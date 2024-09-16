@@ -6,9 +6,12 @@ import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
 
+type RotateCurrentElement = "from" | "to"
+
 type RotateOptions = {
   from: ReactElement
   to: ReactElement
+  initialElement?: RotateCurrentElement
   rotate?: number
   duration?: number
 }
@@ -22,16 +25,19 @@ export type RotateProps = Merge<MotionProps, RotateOptions> &
  * @see Docs https://yamada-ui.com/components/transitions/rotate
  */
 export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
-  const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
   const [style, mergedProps] = useComponentStyle("Rotate", props)
   const {
     from,
     to,
+    initialElement = "from",
     duration = 0.3,
     rotate = 45,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
+  const [currentElement, setCurrentElement] =
+    useState<RotateCurrentElement>(initialElement)
+
   const controls = useMotionAnimation()
 
   const onClick = async () => {

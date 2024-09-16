@@ -28,7 +28,7 @@ export type RotateProps = Merge<MotionProps, RotateOptions> &
  */
 export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
-  const [styles, mergedProps] = useComponentStyle("Rotate", props)
+  const [style, mergedProps] = useComponentStyle("Rotate", props)
   const {
     from,
     to,
@@ -61,7 +61,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       }}
       __css={{
         ...css,
-        ...styles,
+        ...style,
       }}
       {...rest}
     >

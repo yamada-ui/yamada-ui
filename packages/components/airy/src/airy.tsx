@@ -26,7 +26,7 @@ export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
  */
 export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   const [currentElement, setCurrentElement] = useState<"from" | "to">("from")
-  const [styles, mergedProps] = useComponentStyle("Airy", props)
+  const [style, mergedProps] = useComponentStyle("Airy", props)
   const {
     from,
     to,
@@ -49,7 +49,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
       className={cx(`ui-airy__${currentElement}`, className)}
       __css={{
         ...css,
-        ...styles,
+        ...style,
       }}
       animate={controls}
       initial={{ opacity: 1 }}

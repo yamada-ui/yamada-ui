@@ -6,6 +6,11 @@ import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
 
+const css: CSSUIObject = {
+  userSelect: "none",
+  cursor: "pointer",
+}
+
 type RotateOptions = {
   from: ReactElement
   to: ReactElement
@@ -34,10 +39,6 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
   const controls = useMotionAnimation()
 
-  const css: CSSUIObject = {
-    ...styles,
-  }
-
   const onClick = async () => {
     await controls.start({
       opacity: 0,
@@ -58,7 +59,10 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       transition={{
         duration,
       }}
-      __css={css}
+      __css={{
+        ...css,
+        ...styles,
+      }}
       {...rest}
     >
       {currentElement === "from" ? from : to}

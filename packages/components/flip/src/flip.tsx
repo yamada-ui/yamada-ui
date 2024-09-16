@@ -68,7 +68,7 @@ type FlipOptions = {
 
 export type FlipProps = Merge<MotionProps, FlipOptions> & ThemeProps<"Flip">
 /**
- * `Flip` is component.
+ * `Flip` is an animation component that alternates between flipping two elements.
  *
  * @see Docs https://yamada-ui.com/components/transitions/flip
  */

@@ -6,12 +6,12 @@ import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
 
-type CurrentElement = "from" | "to"
+type AiryCurrentElement = "from" | "to"
 
 type AiryOptions = {
   from: ReactElement
   to: ReactElement
-  initialElement?: CurrentElement
+  initialElement?: AiryCurrentElement
   duration?: number
 }
 
@@ -33,7 +33,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
   const [currentElement, setCurrentElement] =
-    useState<CurrentElement>(initialElement)
+    useState<AiryCurrentElement>(initialElement)
 
   const controls = useMotionAnimation()
 

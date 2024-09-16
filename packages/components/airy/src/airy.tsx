@@ -27,8 +27,8 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   const {
     from,
     to,
-    duration = 0.1,
     initialElement = "from",
+    duration = 0.1,
     className,
     ...rest
   } = omitThemeProps(mergedProps)

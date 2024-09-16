@@ -1,15 +1,10 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
-
-const css: CSSUIObject = {
-  userSelect: "none",
-  cursor: "pointer",
-}
 
 type RotateOptions = {
   from: ReactElement
@@ -59,10 +54,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       transition={{
         duration,
       }}
-      __css={{
-        ...css,
-        ...style,
-      }}
+      __css={style}
       {...rest}
     >
       {currentElement === "from" ? from : to}

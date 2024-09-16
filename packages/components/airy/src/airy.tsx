@@ -1,15 +1,10 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useState, type ReactElement } from "react"
-
-const css: CSSUIObject = {
-  userSelect: "none",
-  cursor: "pointer",
-}
 
 type AiryOptions = {
   from: ReactElement
@@ -47,10 +42,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
       ref={ref}
       onClick={onClick}
       className={cx(`ui-airy__${currentElement}`, className)}
-      __css={{
-        ...css,
-        ...style,
-      }}
+      __css={style}
       animate={controls}
       initial={{ opacity: 1 }}
       transition={{

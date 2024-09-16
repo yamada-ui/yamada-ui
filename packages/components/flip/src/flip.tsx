@@ -1,4 +1,4 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
 import { motionForwardRef, motion } from "@yamada-ui/motion"
@@ -44,12 +44,6 @@ const variants: FlipMotion = {
       animate: (isVisible: boolean) => ({ rotateX: isVisible ? 0 : 180 }),
     },
   },
-}
-
-const css: CSSUIObject = {
-  position: "absolute",
-  top: 0,
-  backfaceVisibility: "hidden",
 }
 
 export type FlipOrientation = "horizontal" | "vertical"
@@ -131,10 +125,9 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       ref={ref}
       className={cx(`ui-flip__${orientation}`, className)}
       __css={{
-        position: "relative",
         w: dimensions.width ? `${dimensions.width}px` : "auto",
         h: dimensions.height ? `${dimensions.height}px` : "auto",
-        ...styles,
+        ...styles.container,
       }}
       onClick={switchVisibility}
       {...rest}
@@ -146,9 +139,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         variants={variants[orientation].from}
         initial="initial"
         animate="animate"
-        __css={{
-          ...css,
-        }}
+        __css={styles.flipElement}
         transition={transition}
       >
         {from}
@@ -161,9 +152,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         variants={variants[orientation].to}
         initial="initial"
         animate="animate"
-        __css={{
-          ...css,
-        }}
+        __css={styles.flipElement}
         transition={transition}
       >
         {to}

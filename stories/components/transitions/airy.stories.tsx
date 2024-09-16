@@ -25,10 +25,6 @@ export const basic: Story = () => {
             OFF
           </Text>
         }
-        style={{
-          userSelect: "none",
-          cursor: "pointer",
-        }}
       />
 
       <Airy from={<Menu fontSize="6xl" />} to={<X fontSize="6xl" />} />

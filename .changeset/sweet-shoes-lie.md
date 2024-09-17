@@ -2,4 +2,4 @@
 "@yamada-ui/select": patch
 ---
 
-Fixing the type of SelectItemWithItems and adding labelProps.
+Allow styles to be specified for `OptionGroup` labels.

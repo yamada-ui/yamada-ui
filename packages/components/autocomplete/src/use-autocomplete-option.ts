@@ -21,21 +21,21 @@ const isTargetOption = (target: EventTarget | null): boolean =>
 export interface UseAutocompleteOptionProps
   extends Omit<HTMLUIProps<"li">, "value" | "children"> {
   /**
-   * The value of the select option.
+   * The value of the autocomplete option.
    */
   value?: string
   /**
-   * The label of the select option.
+   * The label of the autocomplete option.
    */
   children?: string
   /**
-   * If `true`, the select option will be disabled.
+   * If `true`, the autocomplete option will be disabled.
    *
    * @default false
    */
   isDisabled?: boolean
   /**
-   * If `true`, the select option will be focusable.
+   * If `true`, the autocomplete option will be focusable.
    *
    * @default false
    */

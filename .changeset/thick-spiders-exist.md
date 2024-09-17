@@ -2,4 +2,4 @@
 "@yamada-ui/autocomplete": patch
 ---
 
-Fixing the type of AutocompleteItemWithItems and adding labelProps.
+Allow styles to be specified for `OptionGroup` labels.

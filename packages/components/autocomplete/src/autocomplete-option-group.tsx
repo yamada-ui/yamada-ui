@@ -7,7 +7,12 @@ import {
   useAutocompleteOptionGroup,
 } from "./use-autocomplete"
 
-type AutocompleteOptionGroupOptions = UseAutocompleteOptionGroupProps
+type AutocompleteOptionGroupOptions = UseAutocompleteOptionGroupProps & {
+  /**
+   * Props for autocomplete option group element.
+   */
+  labelProps?: HTMLUIProps<"span">
+}
 
 export type AutocompleteOptionGroupProps = HTMLUIProps<"ul"> &
   AutocompleteOptionGroupOptions

@@ -40,7 +40,7 @@ import type {
   SetStateAction,
 } from "react"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import type { AutocompleteOptionGroupProps, AutocompleteOptionProps } from "./"
+import type { AutocompleteOptionProps } from "./"
 import { AutocompleteOption, AutocompleteOptionGroup } from "./"
 
 type ChangeOptions = {
@@ -60,10 +60,9 @@ type AutocompleteItemWithValue = AutocompleteBaseItem & {
   value?: string
 }
 
-type AutocompleteItemWithItems = AutocompleteBaseItem &
-  AutocompleteOptionGroupProps & {
-    items?: AutocompleteItemWithValue[]
-  }
+type AutocompleteItemWithItems = AutocompleteBaseItem & {
+  items?: AutocompleteItemWithValue[]
+}
 
 export type AutocompleteItem =
   | AutocompleteItemWithValue
@@ -474,7 +473,11 @@ export const useAutocomplete = <T extends string | string[] = string>(
           const { label, items = [], ...props } = item
 
           return (
-            <AutocompleteOptionGroup key={i} label={label as string} {...props}>
+            <AutocompleteOptionGroup
+              key={i}
+              label={label as string}
+              {...(props as HTMLUIProps<"ul">)}
+            >
               {items.map(({ label, value, ...props }, i) => (
                 <AutocompleteOption key={i} value={value} {...props}>
                   {label}
@@ -1419,10 +1422,6 @@ export type UseAutocompleteOptionGroupProps = HTMLUIProps<"ul"> & {
    * The label of the autocomplete option group.
    */
   label: string
-  /**
-   * Props for autocomplete option group element.
-   */
-  labelProps?: HTMLUIProps<"span">
 }
 
 export const useAutocompleteOptionGroup = ({

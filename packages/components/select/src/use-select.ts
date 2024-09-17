@@ -792,10 +792,6 @@ export interface UseSelectOptionGroupProps extends HTMLUIProps<"ul"> {
    * The label of the option group.
    */
   label: string
-  /**
-   * Props for option group element.
-   */
-  labelProps?: HTMLUIProps<"span">
 }
 
 export const useSelectOptionGroup = ({

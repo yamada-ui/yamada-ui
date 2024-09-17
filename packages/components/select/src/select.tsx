@@ -19,7 +19,7 @@ import type { SelectIconProps } from "./select-icon"
 import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
 import { SelectList } from "./select-list"
-import type { UseSelectOptionGroupProps, UseSelectProps } from "./use-select"
+import type { UseSelectProps } from "./use-select"
 import {
   useSelect,
   SelectDescendantsContextProvider,
@@ -34,7 +34,7 @@ interface SelectItemWithValue extends OptionProps {
 
 interface SelectItemWithItems extends OptionGroupProps {
   items?: SelectItemWithValue[]
-} & UseSelectOptionGroupProps
+}
 
 export type SelectItem = SelectItemWithValue | SelectItemWithItems
 

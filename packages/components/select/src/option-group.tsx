@@ -8,7 +8,12 @@ interface OptionGroupOptions extends UseSelectOptionGroupProps {}
 
 export interface OptionGroupProps
   extends HTMLUIProps<"ul">,
-    OptionGroupOptions {}
+    OptionGroupOptions {
+  /**
+   * Props for option group element.
+   */
+  labelProps?: HTMLUIProps<"span">
+}
 
 export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
   (

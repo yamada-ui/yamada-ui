@@ -2,9 +2,8 @@ import type { Dict } from "@yamada-ui/utils"
 import { getMemoizedObject as get } from "@yamada-ui/utils"
 import type { Transform } from "./utils"
 
-export const generateStyles =
-  (prefix?: string): Transform =>
-  (value, theme, _css, prev = {}) => {
+export function generateStyles(prefix?: string): Transform {
+  return function (value, theme, _css, prev = {}) {
     const resolvedCSS: Dict = {}
 
     const style = get<Dict>(
@@ -21,3 +20,4 @@ export const generateStyles =
 
     return resolvedCSS
   }
+}

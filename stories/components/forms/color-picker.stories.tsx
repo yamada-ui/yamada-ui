@@ -335,7 +335,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { colorInput: string }
+  interface Data {
+    colorInput: string
+  }
 
   const defaultValues: Data = {
     colorInput: "#4387f4ff",

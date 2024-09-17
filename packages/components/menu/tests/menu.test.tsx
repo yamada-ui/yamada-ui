@@ -1,10 +1,3 @@
-import {
-  faChevronDown,
-  faEdit,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
-import { Button, IconButton, Center } from "@yamada-ui/react"
 import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
 import {
   Menu,
@@ -24,12 +17,7 @@ describe("<Menu />", () => {
   test("Menu renders correctly", async () => {
     await a11y(
       <Menu>
-        <MenuButton
-          as={Button}
-          rightIcon={<Icon fontSize="xs" icon={faChevronDown} />}
-        >
-          Menu
-        </MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
@@ -41,9 +29,7 @@ describe("<Menu />", () => {
   test("should render the menu", () => {
     render(
       <Menu>
-        <MenuButton data-testid="MenuButton" as={Button}>
-          Menu
-        </MenuButton>
+        <MenuButton data-testid="MenuButton">Menu</MenuButton>
         <MenuList data-testid="MenuList">
           <MenuItem data-testid="MenuItem">Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
@@ -58,7 +44,7 @@ describe("<Menu />", () => {
   test("should render the menu with command", () => {
     render(
       <Menu>
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem command="⌘N" data-testid="MenuItem">
             Add item
@@ -74,18 +60,12 @@ describe("<Menu />", () => {
   test("should render the menu with icons", () => {
     render(
       <Menu>
-        <MenuButton as={IconButton}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
-          <MenuItem
-            command="⌘N"
-            icon={<Icon data-testid="plus-icon" icon={faPlus} />}
-          >
+          <MenuItem command="⌘N" icon={<span data-testid="plus-icon">+</span>}>
             Add item
           </MenuItem>
-          <MenuItem
-            command="⌘E"
-            icon={<Icon data-testid="edit-icon" icon={faEdit} />}
-          >
+          <MenuItem command="⌘E" icon={<span data-testid="plus-icon">+</span>}>
             Edit item
           </MenuItem>
         </MenuList>
@@ -98,7 +78,7 @@ describe("<Menu />", () => {
   test("should render the menu with divider", () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuDivider data-testid="MenuDivider" />
@@ -112,7 +92,7 @@ describe("<Menu />", () => {
   test("should render the menu with menu group", () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuGroup data-testid="MenuGroup" label="item">
             <MenuItem>Add item</MenuItem>
@@ -127,7 +107,7 @@ describe("<Menu />", () => {
   test("should render the menu with menu group label", () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuGroup label="group-label">
             <MenuItem>Add item</MenuItem>
@@ -142,7 +122,7 @@ describe("<Menu />", () => {
   test("should render the menu with menu group label style", () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuGroup label="group-label" labelProps={{ fontSize: "12px" }}>
             <MenuItem>Add item</MenuItem>
@@ -158,7 +138,7 @@ describe("<Menu />", () => {
   test("should render the menu with menu option group", () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
             data-testid="MenuOptionGroup-a"
@@ -203,7 +183,7 @@ describe("<Menu />", () => {
   test("should update value with menu option group", async () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
             data-testid="MenuOptionGroup-a"
@@ -267,7 +247,7 @@ describe("<Menu />", () => {
   test("should update value with menu option group label", () => {
     render(
       <Menu placement="right-start">
-        <MenuButton as={Button}>Menu</MenuButton>
+        <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
             data-testid="MenuOptionGroup-a"
@@ -440,7 +420,6 @@ describe("<Menu />", () => {
     const { container } = render(
       <ContextMenu>
         <ContextMenuTrigger
-          as={Center}
           w="full"
           h="xs"
           borderWidth="1px"
@@ -462,7 +441,6 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          as={Center}
           w="full"
           h="xs"
           borderWidth="1px"
@@ -484,7 +462,6 @@ describe("<Menu />", () => {
     render(
       <ContextMenu>
         <ContextMenuTrigger
-          as={Center}
           w="full"
           h="xs"
           borderWidth="1px"

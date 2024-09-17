@@ -4,6 +4,7 @@ import type {
   WithTransitionProps,
   MotionTransitionVariants,
   MotionProps,
+  MotionVariants,
 } from "@yamada-ui/motion"
 import {
   AnimatePresence,
@@ -31,7 +32,7 @@ export const getSlideProps = (
   }
 }
 
-const variants: MotionTransitionVariants = {
+const variants: MotionVariants = {
   enter: ({
     placement,
     transition,
@@ -58,7 +59,7 @@ const variants: MotionTransitionVariants = {
     transitionEnd: transitionEnd?.exit,
     ...exit,
   }),
-}
+} satisfies MotionTransitionVariants
 
 export const slideProps = {
   initial: "exit",
@@ -67,7 +68,7 @@ export const slideProps = {
   variants,
 }
 
-type SlideOptions = {
+interface SlideOptions {
   /**
    * The placement of the slide.
    *
@@ -76,9 +77,10 @@ type SlideOptions = {
   placement?: Token<"top" | "left" | "bottom" | "right">
 }
 
-export type SlideProps = WithTransitionProps<MotionProps> &
-  SlideOptions &
-  ThemeProps<"Slide">
+export interface SlideProps
+  extends WithTransitionProps<MotionProps>,
+    SlideOptions,
+    ThemeProps<"Slide"> {}
 
 /**
  * `Slide` is a component that shows or hides an element from the corners of the page.

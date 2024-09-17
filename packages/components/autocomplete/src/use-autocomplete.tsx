@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
+import type { HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -7,20 +7,16 @@ import {
 } from "@yamada-ui/form-control"
 import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { Union, DOMAttributes } from "@yamada-ui/utils"
+import type { Union } from "@yamada-ui/utils"
 import {
-  ariaAttr,
-  createContext,
   dataAttr,
   funcAll,
   getEventRelatedTarget,
   handlerAll,
   isArray,
   isContains,
-  isHTMLElement,
   mergeRefs,
   pickObject,
   splitObject,
@@ -31,36 +27,36 @@ import {
 } from "@yamada-ui/utils"
 import type {
   ChangeEvent,
-  CSSProperties,
-  Dispatch,
+  DOMAttributes,
   FocusEvent,
   KeyboardEvent,
   MouseEvent,
-  RefObject,
-  SetStateAction,
 } from "react"
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import type { AutocompleteOptionProps } from "./"
-import { AutocompleteOption, AutocompleteOptionGroup } from "./"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {
+  useAutocompleteContext,
+  useAutocompleteDescendants,
+  useAutocompleteDescendantsContext,
+} from "./autocomplete-context"
+import { AutocompleteOption } from "./autocomplete-option"
+import type { AutocompleteOptionProps } from "./autocomplete-option"
+import type { AutocompleteOptionGroupProps } from "./autocomplete-option-group"
+import { AutocompleteOptionGroup } from "./autocomplete-option-group"
 
-type ChangeOptions = {
+export interface ChangeOptions {
   forceUpdate?: boolean
   runOmit?: boolean
   runRebirth?: boolean
 }
 
-type AutocompleteBaseItem = Omit<
-  AutocompleteOptionProps,
-  "value" | "children"
-> & {
+interface AutocompleteItemWithValue extends AutocompleteOptionProps {
   label?: string
-}
-
-type AutocompleteItemWithValue = AutocompleteBaseItem & {
   value?: string
 }
 
-type AutocompleteItemWithItems = AutocompleteBaseItem & {
+interface AutocompleteItemWithItems
+  extends AutocompleteOptionGroupProps,
+    Pick<AutocompleteOptionProps, "isDisabled" | "isFocusable"> {
   items?: AutocompleteItemWithValue[]
 }
 
@@ -68,7 +64,7 @@ export type AutocompleteItem =
   | AutocompleteItemWithValue
   | AutocompleteItemWithItems
 
-const kanaMap: Record<string, string> = {
+const kanaMap: { [key: string]: string } = {
   ｶﾞ: "ガ",
   ｷﾞ: "ギ",
   ｸﾞ: "グ",
@@ -203,53 +199,6 @@ const flattenItems = (
 
   return filterItems(items).flat(Infinity) as AutocompleteItemWithValue[]
 }
-
-const isTargetOption = (target: EventTarget | null): boolean =>
-  isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
-
-export const {
-  DescendantsContextProvider: AutocompleteDescendantsContextProvider,
-  useDescendantsContext: useAutocompleteDescendantsContext,
-  useDescendants: useAutocompleteDescendants,
-  useDescendant: useAutocompleteDescendant,
-} = createDescendant<HTMLElement>()
-
-type AutocompleteContext = Omit<
-  UseAutocompleteProps,
-  "value" | "defaultValue" | "onChange" | "onCreate"
-> & {
-  value: string | string[]
-  label: string | string[] | undefined
-  inputValue: string
-  isHit: boolean
-  isEmpty: boolean
-  isAllSelected: boolean
-  onChange: (newValue: string, options?: ChangeOptions) => void
-  onChangeLabel: (newValue: string, options?: ChangeOptions) => void
-  pickOptions: (value: string) => void
-  rebirthOptions: (runFocus?: boolean) => void
-  inputProps: DOMAttributes<HTMLInputElement>
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
-  onCreate: () => void
-  onFocusFirst: () => void
-  onFocusLast: () => void
-  onFocusNext: (index?: number) => void
-  onFocusPrev: (index?: number) => void
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  listRef: RefObject<HTMLUListElement>
-  inputRef: RefObject<HTMLInputElement>
-  formControlProps: Record<string, any>
-  styles: Record<string, CSSUIObject>
-}
-
-export const [AutocompleteProvider, useAutocompleteContext] =
-  createContext<AutocompleteContext>({
-    name: "AutocompleteContext",
-    errorMessage: `useAutocompleteContext returned is 'undefined'. Seems you forgot to wrap the components in "<Autocomplete />" or "<MultiAutocomplete />"`,
-  })
 
 type UseAutocompleteBaseProps<T extends string | string[] = string> =
   ComboBoxProps &
@@ -473,11 +422,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
           const { label, items = [], ...props } = item
 
           return (
-            <AutocompleteOptionGroup
-              key={i}
-              label={label as string}
-              {...(props as HTMLUIProps<"ul">)}
-            >
+            <AutocompleteOptionGroup key={i} label={label as string} {...props}>
               {items.map(({ label, value, ...props }, i) => (
                 <AutocompleteOption key={i} value={value} {...props}>
                   {label}
@@ -999,7 +944,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
 
       const enabledDelete = label === inputValue || !inputValue.length
 
-      const actions: Record<string, Function | undefined> = {
+      const actions: { [key: string]: Function | undefined } = {
         ArrowDown: isFocused
           ? () => onFocusNext()
           : !isOpen
@@ -1187,7 +1132,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
     ],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -1200,7 +1145,7 @@ export const useAutocomplete = <T extends string | string[] = string>(
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
-  const getFieldProps: UIPropGetter = useCallback(
+  const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref,
       tabIndex: -1,
@@ -1291,7 +1236,7 @@ export const useAutocompleteInput = () => {
     if (isAllSelected && inputRef.current) inputRef.current.blur()
   }, [isAllSelected])
 
-  const getInputProps: UIPropGetter<"input"> = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(inputRef, ref),
       ...formControlProps,
@@ -1345,410 +1290,3 @@ export const useAutocompleteInput = () => {
 }
 
 export type UseAutocompleteInputReturn = ReturnType<typeof useAutocompleteInput>
-
-export const useAutocompleteList = () => {
-  const { focusedIndex, isOpen, listRef, rebirthOptions } =
-    useAutocompleteContext()
-
-  const descendants = useAutocompleteDescendantsContext()
-
-  const beforeFocusedIndex = useRef<number>(-1)
-  const selectedValue = descendants.value(focusedIndex)
-
-  const onAnimationComplete = useCallback(() => {
-    if (!isOpen) rebirthOptions(false)
-  }, [isOpen, rebirthOptions])
-
-  useEffect(() => {
-    if (!listRef.current || !selectedValue) return
-
-    if (beforeFocusedIndex.current === selectedValue.index) return
-
-    const parent = listRef.current
-    const child = selectedValue.node
-
-    const parentHeight = parent.clientHeight
-    const viewTop = parent.scrollTop
-    const viewBottom = viewTop + parentHeight
-
-    const childHeight = child.clientHeight
-    const childTop = child.offsetTop
-    const childBottom = childTop + childHeight
-
-    const isInView = viewTop <= childTop && childBottom <= viewBottom
-
-    const isScrollBottom = beforeFocusedIndex.current < selectedValue.index
-
-    if (!isInView) {
-      if (childBottom <= parentHeight) {
-        listRef.current.scrollTo({ top: 0 })
-      } else {
-        if (!isScrollBottom) {
-          listRef.current.scrollTo({ top: childTop + 1 })
-        } else {
-          listRef.current.scrollTo({ top: childBottom - parentHeight })
-        }
-      }
-    }
-
-    beforeFocusedIndex.current = selectedValue.index
-  }, [listRef, selectedValue])
-
-  useUpdateEffect(() => {
-    if (!isOpen) beforeFocusedIndex.current = -1
-  }, [isOpen])
-
-  const getListProps: UIPropGetter<"ul"> = useCallback(
-    (props = {}, ref = null) => ({
-      as: "ul",
-      ref: mergeRefs(listRef, ref),
-      role: "listbox",
-      tabIndex: -1,
-      position: "relative",
-      id: props.id || useId(),
-      ...props,
-    }),
-    [listRef],
-  )
-
-  return {
-    onAnimationComplete,
-    getListProps,
-  }
-}
-
-export type UseAutocompleteOptionGroupProps = HTMLUIProps<"ul"> & {
-  /**
-   * The label of the autocomplete option group.
-   */
-  label: string
-}
-
-export const useAutocompleteOptionGroup = ({
-  label,
-  ...rest
-}: UseAutocompleteOptionGroupProps) => {
-  const { value, omitSelectedValues } = useAutocompleteContext()
-
-  const isMulti = isArray(value)
-
-  const descendants = useAutocompleteDescendantsContext()
-
-  const values = descendants.values()
-  const selectedValues =
-    isMulti && omitSelectedValues
-      ? descendants.values(({ node }) =>
-          value.includes(node.dataset.value ?? ""),
-        )
-      : []
-  const selectedIndexes = selectedValues.map(({ index }) => index)
-  const childValues = values.filter(
-    ({ node, index }) =>
-      node.parentElement?.dataset.label === label &&
-      !selectedIndexes.includes(index) &&
-      "target" in node.dataset,
-  )
-
-  const isEmpty = !childValues.length
-
-  const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
-
-  const getContainerProps: UIPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        border: "0px",
-        clip: "rect(0px, 0px, 0px, 0px)",
-        height: "1px",
-        width: "1px",
-        margin: "-1px",
-        padding: "0px",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        position: "absolute",
-      }
-
-      return {
-        ref,
-        ...props,
-        ...containerProps,
-        style: isEmpty ? style : undefined,
-        "data-label": label,
-        role: "autocomplete-group-container",
-      }
-    },
-    [containerProps, isEmpty, label],
-  )
-
-  const getGroupProps: UIPropGetter<"ul"> = useCallback(
-    (props = {}, ref = null) => ({
-      ref,
-      ...props,
-      ...groupProps,
-      "data-label": label,
-      role: "autocomplete-group",
-    }),
-    [groupProps, label],
-  )
-
-  return {
-    label,
-    getContainerProps,
-    getGroupProps,
-  }
-}
-
-export type UseAutocompleteOptionGroupReturn = ReturnType<
-  typeof useAutocompleteOptionGroup
->
-
-export type UseAutocompleteOptionProps = Omit<
-  HTMLUIProps<"li">,
-  "value" | "children"
-> & {
-  /**
-   * The value of the select option.
-   */
-  value?: string
-  /**
-   * The label of the select option.
-   */
-  children?: string
-  /**
-   * If `true`, the select option will be disabled.
-   *
-   * @default false
-   */
-  isDisabled?: boolean
-  /**
-   * If `true`, the select option will be focusable.
-   *
-   * @default false
-   */
-  isFocusable?: boolean
-  /**
-   * If `true`, the list element will be closed when selected.
-   *
-   * @default false
-   */
-  closeOnSelect?: boolean
-}
-
-export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
-  const {
-    value,
-    omitSelectedValues,
-    onChange,
-    onChangeLabel,
-    focusedIndex,
-    setFocusedIndex,
-    onClose,
-    closeOnSelect: generalCloseOnSelect,
-    optionProps,
-    inputRef,
-    onFocusNext,
-  } = useAutocompleteContext()
-
-  let {
-    icon: customIcon,
-    isDisabled,
-    isFocusable,
-    closeOnSelect: customCloseOnSelect,
-    children,
-    value: optionValue,
-    ...computedProps
-  } = { ...optionProps, ...props }
-
-  const trulyDisabled = !!isDisabled && !isFocusable
-
-  const itemRef = useRef<HTMLLIElement>(null)
-
-  const { index, register, descendants } = useAutocompleteDescendant({
-    disabled: trulyDisabled,
-  })
-
-  const values = descendants.values()
-  const frontValues = values.slice(0, index)
-
-  const isMulti = isArray(value)
-  const isDuplicated = !isMulti
-    ? frontValues.some(({ node }) => node.dataset.value === (optionValue ?? ""))
-    : false
-
-  const isSelected =
-    !isDuplicated &&
-    (!isMulti
-      ? (optionValue ?? "") === value
-      : value.includes(optionValue ?? ""))
-  const isTarget = "target" in (itemRef.current?.dataset ?? {})
-  const isFocused = index === focusedIndex
-
-  const onClick = useCallback(
-    (ev: MouseEvent<HTMLLIElement>) => {
-      ev.stopPropagation()
-
-      if (isDisabled) {
-        if (inputRef.current) inputRef.current.focus()
-
-        return
-      }
-
-      if (!isTargetOption(ev.currentTarget)) {
-        if (inputRef.current) inputRef.current.focus()
-
-        return
-      }
-
-      setFocusedIndex(index)
-
-      onChange(optionValue ?? "")
-
-      if (inputRef.current) inputRef.current.focus()
-
-      if (customCloseOnSelect ?? generalCloseOnSelect) onClose()
-
-      if (omitSelectedValues) onFocusNext(index)
-    },
-    [
-      onFocusNext,
-      omitSelectedValues,
-      isDisabled,
-      optionValue,
-      setFocusedIndex,
-      index,
-      onChange,
-      customCloseOnSelect,
-      generalCloseOnSelect,
-      onClose,
-      inputRef,
-    ],
-  )
-
-  useUpdateEffect(() => {
-    if (isSelected) onChangeLabel(optionValue ?? "", { runOmit: false })
-  }, [optionValue])
-
-  const getOptionProps: UIPropGetter<"li"> = useCallback(
-    (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        border: "0px",
-        clip: "rect(0px, 0px, 0px, 0px)",
-        height: "1px",
-        width: "1px",
-        margin: "-1px",
-        padding: "0px",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        position: "absolute",
-      }
-
-      return {
-        ref: mergeRefs(itemRef, ref, register),
-        id: useId(),
-        role: "option",
-        ...computedProps,
-        ...props,
-        tabIndex: -1,
-        style:
-          !isTarget || (omitSelectedValues && isSelected) ? style : undefined,
-        "data-target": dataAttr(true),
-        "data-value": optionValue ?? "",
-        "data-focus": dataAttr(isFocused),
-        "data-disabled": dataAttr(isDisabled),
-        "aria-checked": isSelected,
-        "aria-disabled": ariaAttr(isDisabled),
-        onClick: handlerAll(computedProps.onClick, props.onClick, onClick),
-      }
-    },
-    [
-      optionValue,
-      computedProps,
-      isDisabled,
-      isFocused,
-      isSelected,
-      isTarget,
-      omitSelectedValues,
-      onClick,
-      register,
-    ],
-  )
-
-  return {
-    isSelected,
-    isFocused,
-    customIcon,
-    children,
-    getOptionProps,
-  }
-}
-
-export type UseAutocompleteOptionReturn = ReturnType<
-  typeof useAutocompleteOption
->
-
-export const useAutocompleteCreate = () => {
-  const { isHit, onCreate } = useAutocompleteContext()
-
-  const getCreateProps: UIPropGetter<"li"> = useCallback(
-    (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        border: "0px",
-        clip: "rect(0px, 0px, 0px, 0px)",
-        height: "1px",
-        width: "1px",
-        margin: "-1px",
-        padding: "0px",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        position: "absolute",
-      }
-
-      return {
-        ref,
-        ...props,
-        tabIndex: -1,
-        style: isHit ? style : undefined,
-        "data-focus": dataAttr(!isHit),
-        onClick: handlerAll(props.onClick, onCreate),
-      }
-    },
-    [isHit, onCreate],
-  )
-
-  return { getCreateProps }
-}
-
-export type UseAutocompleteCreateReturn = ReturnType<
-  typeof useAutocompleteCreate
->
-
-export const useAutocompleteEmpty = () => {
-  const { isHit, isEmpty } = useAutocompleteContext()
-
-  const getEmptyProps: UIPropGetter<"li"> = useCallback(
-    (props = {}, ref = null) => {
-      const style: CSSProperties = {
-        border: "0px",
-        clip: "rect(0px, 0px, 0px, 0px)",
-        height: "1px",
-        width: "1px",
-        margin: "-1px",
-        padding: "0px",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        position: "absolute",
-      }
-
-      return {
-        ref,
-        ...props,
-        tabIndex: -1,
-        style: isHit && !isEmpty ? style : undefined,
-      }
-    },
-    [isHit, isEmpty],
-  )
-
-  return { getEmptyProps }
-}
-
-export type UseAutocompleteEmptyReturn = ReturnType<typeof useAutocompleteEmpty>

@@ -19,34 +19,37 @@ import { getFormattedLabel, getMonthDays, getWeekdays } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
 import { useMonth } from "./use-month"
 
-type MonthOptions = {
+interface MonthTableProps extends HTMLUIProps<"table"> {
+  thead?: HTMLUIProps<"thead">
+  tbody?: HTMLUIProps<"tbody">
+  tr?: HTMLUIProps<"tr">
+  th?: HTMLUIProps<"th">
+  td?: HTMLUIProps<"td">
+}
+
+interface MonthOptions {
   /**
    * Props for calendar header element.
    */
-  headerProps?: HTMLUIProps<"div">
+  headerProps?: HTMLUIProps
   /**
    * Props for calendar month table element.
    */
-  tableProps?: HTMLUIProps<"table"> & {
-    thead?: HTMLUIProps<"thead">
-    tbody?: HTMLUIProps<"tbody">
-    tr?: HTMLUIProps<"tr">
-    th?: HTMLUIProps<"th">
-    td?: HTMLUIProps<"td">
-  }
+  tableProps?: MonthTableProps
   /**
    * Props for calendar weekday element.
    */
-  weekdayProps?: HTMLUIProps<"div"> & { component?: FC<WeekdayProps> }
+  weekdayProps?: HTMLUIProps & { component?: FC<WeekdayProps> }
   /**
    * Props for calendar day button element.
    */
   dayProps?: ButtonProps & { component?: FC<DayProps> }
 }
 
-export type MonthProps = HTMLUIProps<"div"> &
-  Omit<CalendarHeaderProps, "label" | "index"> &
-  MonthOptions
+export interface MonthProps
+  extends HTMLUIProps,
+    Omit<CalendarHeaderProps, "label" | "index">,
+    MonthOptions {}
 
 export const Month: FC<MonthProps> = ({
   className,
@@ -70,7 +73,7 @@ export const Month: FC<MonthProps> = ({
     dateFormat,
     styles,
   } = useCalendarContext()
-  const { getContainerProps, getButtonProps } = useMonth()
+  const { getGridProps, getButtonProps } = useMonth()
 
   const { component: customWeekday = Weekday, ...computedWeekdayProps } =
     weekdayProps ?? {}
@@ -125,8 +128,6 @@ export const Month: FC<MonthProps> = ({
               />
 
               <ui.table
-                role="grid"
-                aria-label={formattedLabel}
                 className={cx("ui-calendar__month", className)}
                 __css={{
                   w: styles.content?.w ?? styles.content?.width,
@@ -137,8 +138,9 @@ export const Month: FC<MonthProps> = ({
                   maxH: styles.content?.maxH ?? styles.content?.maxHeight,
                   ...styles.date,
                 }}
-                {...getContainerProps(
-                  filterUndefined({
+                {...getGridProps({
+                  month,
+                  ...filterUndefined({
                     w,
                     minW,
                     maxW,
@@ -147,7 +149,7 @@ export const Month: FC<MonthProps> = ({
                     maxH,
                     ...computedTableProps,
                   }),
-                )}
+                })}
               >
                 {withWeekdays ? (
                   <ui.thead {...theadProps}>
@@ -258,7 +260,10 @@ export const Month: FC<MonthProps> = ({
   )
 }
 
-export type WeekdayProps = { weekday: string; index: number }
+export interface WeekdayProps {
+  weekday: string
+  index: number
+}
 
 export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
   return (
@@ -266,7 +271,7 @@ export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
   )
 }
 
-export type DayProps = {
+export interface DayProps {
   date: Date
   weekday: string
   isSelected: boolean

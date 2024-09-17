@@ -15,7 +15,7 @@ import Link from "next/link"
 import { memo } from "react"
 import type { ReactNode } from "react"
 
-export type LinkCardProps = CardProps & {
+export interface LinkCardProps extends Omit<CardProps, "title"> {
   href: string
   title: ReactNode
   label?: StringLiteral | null

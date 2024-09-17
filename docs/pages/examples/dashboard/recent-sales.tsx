@@ -45,7 +45,7 @@ const ITEMS: ItemProps[] = [
   },
 ]
 
-export type RecentSalesProps = CardProps
+export interface RecentSalesProps extends CardProps {}
 
 export const RecentSales: FC<RecentSalesProps> = memo(({ ...rest }) => {
   return (
@@ -73,7 +73,7 @@ export const RecentSales: FC<RecentSalesProps> = memo(({ ...rest }) => {
 
 RecentSales.displayName = "RecentSales"
 
-type ItemProps = StackProps & {
+export interface ItemProps extends StackProps {
   src: string
   avatarProps?: AvatarProps
   name: ReactNode

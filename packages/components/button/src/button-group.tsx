@@ -3,7 +3,7 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { createContext, cx, dataAttr } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-type ButtonGroupOptions = {
+interface ButtonGroupOptions {
   /**
    * The CSS `flex-direction` property.
    */
@@ -22,11 +22,12 @@ type ButtonGroupOptions = {
   isDisabled?: boolean
 }
 
-export type ButtonGroupProps = Omit<HTMLUIProps<"div">, "direction"> &
-  ThemeProps<"Button"> &
-  ButtonGroupOptions
+export interface ButtonGroupProps
+  extends Omit<HTMLUIProps, "direction">,
+    ThemeProps<"Button">,
+    ButtonGroupOptions {}
 
-type ButtonGroupContext = ThemeProps<"Button"> & {
+interface ButtonGroupContext extends ThemeProps<"Button"> {
   isDisabled?: boolean
 }
 

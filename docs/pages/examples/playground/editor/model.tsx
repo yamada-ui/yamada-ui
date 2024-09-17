@@ -3,6 +3,7 @@ import type {
   AutocompleteItem,
   AutocompleteProps,
   FormControlProps,
+  Merge,
 } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
@@ -52,7 +53,8 @@ const OPTIONS: AutocompleteItem[] = [
   },
 ]
 
-export type ModelProps = AutocompleteProps & FormControlProps & {}
+export interface ModelProps
+  extends Merge<FormControlProps, AutocompleteProps> {}
 
 export const Model: FC<ModelProps> = memo(
   ({

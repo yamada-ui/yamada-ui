@@ -59,7 +59,7 @@ export const VIEW = ["title", "status", "priority"] as const
 
 export type View = (typeof VIEW)[number]
 
-export type Data = {
+export interface Data {
   id?: string
   title: string
   status?: Status

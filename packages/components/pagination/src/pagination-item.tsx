@@ -12,7 +12,7 @@ import {
 } from "./pagination-icon"
 import { usePaginationContext } from "./use-pagination"
 
-type PaginationItemOptions = {
+interface PaginationItemOptions {
   /**
    * The type of the page or item assigned to the pagination item.
    */
@@ -37,13 +37,13 @@ type PaginationItemOptions = {
   disableRipple?: boolean
 }
 
-export type PaginationItemProps = ComponentPropsWithoutRef<"button"> &
-  PaginationItemOptions
+export interface PaginationItemProps
+  extends ComponentPropsWithoutRef<"button">,
+    PaginationItemOptions {}
 
-const iconMap: Record<
-  number | "dots" | "prev" | "next" | "first" | "last",
-  ReactNode
-> = {
+const iconMap: {
+  [key in number | "dots" | "prev" | "next" | "first" | "last"]: ReactNode
+} = {
   dots: <DotsIcon />,
   next: <NextIcon />,
   prev: <PrevIcon />,

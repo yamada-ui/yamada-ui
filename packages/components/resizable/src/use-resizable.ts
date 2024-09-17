@@ -1,5 +1,10 @@
-import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
-import type { PropGetter } from "@yamada-ui/utils"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  HTMLUIPropsWithoutAs,
+  PropGetter,
+} from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
 import { createContext, dataAttr, handlerAll } from "@yamada-ui/utils"
 import type { ForwardedRef, RefObject } from "react"
 import { useCallback, useEffect, useId, useState } from "react"
@@ -17,32 +22,26 @@ import type {
   ImperativePanelHandle,
 } from "react-resizable-panels"
 
-type GroupPropGetter = (props?: Partial<PanelGroupProps>) => PanelGroupProps
-type ItemPropGetter = (props?: HTMLUIProps<"div"> & PanelProps) => PanelProps
-type TriggerPropGetter = (
-  props?: PanelResizeHandleProps,
-) => PanelResizeHandleProps
+interface As {
+  as?: keyof HTMLElementTagNameMap
+}
 
-type As = { as?: keyof HTMLElementTagNameMap }
+interface ResizableGroupProps
+  extends Omit<Partial<PanelGroupProps>, "id" | "tagName" | "children">,
+    As {}
+interface ResizableItemProps
+  extends Omit<PanelProps, "id" | "tagName" | "children">,
+    As {}
+interface ResizableTriggerProps
+  extends Omit<PanelResizeHandleProps, "id" | "tagName" | "children">,
+    As {}
 
-type ResizableGroupProps = Omit<
-  Partial<PanelGroupProps>,
-  "id" | "tagName" | "children"
-> &
-  As
-type ResizableItemProps = Omit<PanelProps, "id" | "tagName" | "children"> & As
-type ResizableTriggerProps = Omit<
-  PanelResizeHandleProps,
-  "id" | "tagName" | "children"
-> &
-  As
+export interface ResizableStorage extends PanelGroupStorage {}
+export interface ResizableItemControl extends ImperativePanelHandle {}
 
-export type ResizableStorage = PanelGroupStorage
-export type ResizableItemControl = ImperativePanelHandle
-
-type ResizableContext = {
+interface ResizableContext {
   isDisabled: boolean
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 export const [ResizableProvider, useResizableContext] =
@@ -51,7 +50,7 @@ export const [ResizableProvider, useResizableContext] =
     errorMessage: `useResizableContext returned is 'undefined'. Seems you forgot to wrap the components in "<Resizable />"`,
   })
 
-export type UseResizableProps = {
+export interface UseResizableProps {
   /**
    * id assigned to resizable element.
    */
@@ -114,8 +113,8 @@ export const useResizable = ({
     [rest],
   )
 
-  const getGroupProps: GroupPropGetter = useCallback(
-    (props = {}) => {
+  const getGroupProps = useCallback(
+    (props: Partial<PanelGroupProps> = {}): PanelGroupProps => {
       const { as, ...rest } = groupProps ?? {}
 
       return {
@@ -151,7 +150,7 @@ export const useResizable = ({
 
 export type UseResizableReturn = ReturnType<typeof useResizable>
 
-type UseResizableItemOptions = {
+interface UseResizableItemOptions {
   /**
    * id assigned to resizable item element.
    */
@@ -205,14 +204,12 @@ type UseResizableItemOptions = {
   /**
    * Props for resizable item container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "as"> & ResizableItemProps
+  containerProps?: Omit<HTMLUIProps, "as"> & ResizableItemProps
 }
 
-export type UseResizableItemProps = Omit<
-  HTMLUIProps<"div">,
-  keyof UseResizableItemOptions
-> &
-  UseResizableItemOptions
+export interface UseResizableItemProps
+  extends Omit<HTMLUIProps, keyof UseResizableItemOptions>,
+    UseResizableItemOptions {}
 
 export const useResizableItem = ({
   id,
@@ -232,7 +229,10 @@ export const useResizableItem = ({
 }: UseResizableItemProps) => {
   id ??= useId()
 
-  const getPanelProps: ItemPropGetter = useCallback(
+  const getPanelProps: PropGetter<
+    Merge<HTMLUIProps, PanelProps>,
+    PanelProps
+  > = useCallback(
     (props = {}) => {
       const { as, ...rest } = containerProps ?? {}
 
@@ -270,7 +270,7 @@ export const useResizableItem = ({
     ],
   )
 
-  const getItemProps: UIPropGetter = useCallback(
+  const getItemProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({ ...props, ref, ...innerProps }),
     [innerProps],
   )
@@ -292,7 +292,7 @@ export const useResizableItem = ({
 
 export type UseResizableItemReturn = ReturnType<typeof useResizableItem>
 
-type UseResizableTriggerOptions = {
+interface UseResizableTriggerOptions {
   /**
    * id assigned to resizable trigger element.
    */
@@ -313,9 +313,12 @@ type UseResizableTriggerOptions = {
   onDragging?: (isDragging: boolean) => void
 }
 
-export type UseResizableTriggerProps = HTMLUIProps<"div"> &
-  ResizableTriggerProps &
-  UseResizableTriggerOptions
+export interface UseResizableTriggerProps
+  extends Merge<
+      ResizableTriggerProps,
+      Omit<HTMLUIPropsWithoutAs, "id" | "onBlur" | "onFocus">
+    >,
+    UseResizableTriggerOptions {}
 
 export const useResizableTrigger = ({
   id,
@@ -333,25 +336,29 @@ export const useResizableTrigger = ({
 
   const trulyDisabled = disabled || isDisabled || isGroupDisabled
 
-  const getTriggerProps: TriggerPropGetter = useCallback(
-    (props = {}) => ({
-      ...props,
-      id,
-      tagName: as,
-      disabled: trulyDisabled,
-      onDragging: handlerAll(onDragging, (isActive) => setIsActive(isActive)),
-      ...rest,
-      "data-active": dataAttr(isActive),
-      style: {
-        ...props.style,
-        ...rest.style,
-        ...(trulyDisabled ? { cursor: "default" } : {}),
-      },
-    }),
+  const getTriggerProps: PropGetter<
+    PanelResizeHandleProps,
+    PanelResizeHandleProps
+  > = useCallback(
+    (props = {}) =>
+      ({
+        ...props,
+        id,
+        tagName: as,
+        disabled: trulyDisabled,
+        onDragging: handlerAll(onDragging, (isActive) => setIsActive(isActive)),
+        ...rest,
+        "data-active": dataAttr(isActive),
+        style: {
+          ...props.style,
+          ...rest.style,
+          ...(trulyDisabled ? { cursor: "default" } : {}),
+        },
+      }) as PanelResizeHandleProps,
     [id, as, trulyDisabled, onDragging, rest, isActive],
   )
 
-  const getIconProps: UIPropGetter = useCallback(
+  const getIconProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref,

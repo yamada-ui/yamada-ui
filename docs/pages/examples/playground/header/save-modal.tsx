@@ -14,7 +14,7 @@ import type { ModalProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC, MutableRefObject } from "react"
 
-export type SaveModalProps = Omit<ModalProps, "isOpen" | "onClose"> & {
+export interface SaveModalProps extends Omit<ModalProps, "isOpen" | "onClose"> {
   onOpenRef: MutableRefObject<() => void>
 }
 

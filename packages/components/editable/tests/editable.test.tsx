@@ -1,3 +1,4 @@
+import { ui } from "@yamada-ui/core"
 import { a11y, act, fireEvent, render } from "@yamada-ui/test"
 import {
   Editable,
@@ -294,15 +295,15 @@ describe("useEditableControl", () => {
 
       return (
         <>
-          <button data-testid="edit" {...getEditProps()}>
+          <ui.button data-testid="edit" {...getEditProps()}>
             Edit
-          </button>
-          <button data-testid="submit" {...getSubmitProps()}>
+          </ui.button>
+          <ui.button data-testid="submit" {...getSubmitProps()}>
             Submit
-          </button>
-          <button data-testid="cancel" {...getCancelProps()}>
+          </ui.button>
+          <ui.button data-testid="cancel" {...getCancelProps()}>
             Cancel
-          </button>
+          </ui.button>
         </>
       )
     }
@@ -317,9 +318,9 @@ describe("useEditableControl", () => {
         <CustomControls />
       </Editable>,
     )
-    expect(getByTestId("edit")).toHaveAttribute("type", "button")
-    expect(getByTestId("submit")).toHaveAttribute("type", "button")
-    expect(getByTestId("cancel")).toHaveAttribute("type", "button")
+    expect(getByTestId("edit")).toHaveAttribute("type", "ui.button")
+    expect(getByTestId("submit")).toHaveAttribute("type", "ui.button")
+    expect(getByTestId("cancel")).toHaveAttribute("type", "ui.button")
     await act(async () => fireEvent.click(getByTestId("submit")))
     await act(async () => fireEvent.click(getByTestId("cancel")))
     expect(onSubmit).toHaveBeenCalledWith("")
@@ -333,17 +334,17 @@ describe("useEditableControl", () => {
 
       return isEditing ? (
         <>
-          <button data-testid="submit" {...getSubmitProps()}>
+          <ui.button data-testid="submit" {...getSubmitProps()}>
             Submit
-          </button>
-          <button data-testid="cancel" {...getCancelProps()}>
+          </ui.button>
+          <ui.button data-testid="cancel" {...getCancelProps()}>
             Cancel
-          </button>
+          </ui.button>
         </>
       ) : (
-        <button data-testid="edit" {...getEditProps()}>
+        <ui.button data-testid="edit" {...getEditProps()}>
           Edit
-        </button>
+        </ui.button>
       )
     }
     const { getByTestId } = render(

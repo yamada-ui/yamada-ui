@@ -34,7 +34,7 @@ import { useState } from 'react'
 import { memo } from 'react'
 import { FC } from 'react'
 
-export type HeaderProps = CenterProps
+export interface HeaderProps extends CenterProps {}
 
 export const Header: FC<HeaderProps> = ({ ...rest }) => {
   const ref = useRef<HTMLHeadingElement>()

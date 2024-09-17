@@ -1,4 +1,7 @@
-import type { ThemeProviderProps as EmotionThemeProviderProps } from "@emotion/react"
+import type {
+  ThemeProviderProps as EmotionThemeProviderProps,
+  Interpolation,
+} from "@emotion/react"
 import {
   Global,
   ThemeContext,
@@ -13,7 +16,7 @@ import {
 } from "@yamada-ui/utils"
 import type { FC } from "react"
 import { useMemo, useContext, useState, useCallback, useEffect } from "react"
-import type { UIStyle } from "../css"
+import type { StyledProps, UIStyle } from "../css"
 import { css } from "../css"
 import { transformTheme } from "../theme"
 import type {
@@ -31,7 +34,7 @@ import { themeSchemeManager } from "./theme-manager"
 
 const { localStorage } = themeSchemeManager
 
-type ThemeProviderOptions = {
+interface ThemeProviderOptions {
   /**
    * The theme of the yamada ui.
    */
@@ -56,8 +59,9 @@ type ThemeProviderOptions = {
   storageKey?: string
 }
 
-export type ThemeProviderProps = Omit<EmotionThemeProviderProps, "theme"> &
-  ThemeProviderOptions
+export interface ThemeProviderProps
+  extends Omit<EmotionThemeProviderProps, "theme">,
+    ThemeProviderOptions {}
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme: initialTheme = {},
@@ -113,7 +117,11 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 export const CSSVars: FC = () => {
   return (
     <Global
-      styles={({ __cssVars }) => ({ ":host, :root, [data-mode]": __cssVars })}
+      styles={
+        (({ __cssVars }) => ({
+          ":host, :root, [data-mode]": __cssVars,
+        })) satisfies StyledProps<Dict> as Interpolation
+      }
     />
   )
 }
@@ -123,20 +131,22 @@ export const ResetStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme) => {
-        const { themeScheme } = theme
-        let style = get<UIStyle>(theme, "styles.resetStyle", {})
+      styles={
+        ((theme) => {
+          const { themeScheme } = theme as StyledTheme
+          let style = get<UIStyle>(theme, "styles.resetStyle", {})
 
-        const computedStyle = runIfFunc(style, {
-          theme,
-          colorMode,
-          themeScheme,
-        })
+          const computedStyle = runIfFunc(style, {
+            theme,
+            colorMode,
+            themeScheme,
+          })
 
-        if (!computedStyle) return undefined
+          if (!computedStyle) return undefined
 
-        return css(computedStyle)(theme)
-      }}
+          return css(computedStyle)(theme)
+        }) satisfies StyledProps<Dict> as Interpolation
+      }
     />
   )
 }
@@ -146,20 +156,22 @@ export const GlobalStyle: FC = () => {
 
   return (
     <Global
-      styles={(theme) => {
-        const { themeScheme } = theme
-        let style = get<UIStyle>(theme, "styles.globalStyle", {})
+      styles={
+        ((theme) => {
+          const { themeScheme } = theme
+          let style = get<UIStyle>(theme, "styles.globalStyle", {})
 
-        const computedStyle = runIfFunc(style, {
-          theme,
-          colorMode,
-          themeScheme,
-        })
+          const computedStyle = runIfFunc(style, {
+            theme,
+            colorMode,
+            themeScheme,
+          })
 
-        if (!computedStyle) return undefined
+          if (!computedStyle) return undefined
 
-        return css(computedStyle)(theme)
-      }}
+          return css(computedStyle)(theme)
+        }) satisfies StyledProps<Dict> as Interpolation
+      }
     />
   )
 }

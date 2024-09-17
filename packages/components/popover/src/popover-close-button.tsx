@@ -5,7 +5,7 @@ import { forwardRef } from "@yamada-ui/core"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import { usePopover } from "./popover"
 
-export type PopoverCloseButtonProps = CloseButtonProps
+export interface PopoverCloseButtonProps extends CloseButtonProps {}
 
 export const PopoverCloseButton = forwardRef<PopoverCloseButtonProps, "button">(
   ({ onClick, ...rest }, ref) => {

@@ -1,6 +1,5 @@
 import { ui, ThemeProvider } from "@yamada-ui/core"
-import type { StyledTheme } from "@yamada-ui/core"
-import { extendConfig, noop } from "@yamada-ui/react"
+import type { StyledTheme, ThemeConfig } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
 import {
   act,
@@ -10,6 +9,7 @@ import {
   screen,
   waitFor,
 } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import type { FC } from "react"
 import {
   getBreakpointValue,
@@ -162,12 +162,12 @@ describe("useBreakpoint", () => {
     }
 
     const containerRef = { current: document.createElement("div") }
-    const config = extendConfig({
+    const config: ThemeConfig = {
       breakpoint: {
         containerRef,
         identifier: "@container",
       },
-    })
+    }
 
     const Component: FC = () => {
       const breakpoint = useBreakpoint()

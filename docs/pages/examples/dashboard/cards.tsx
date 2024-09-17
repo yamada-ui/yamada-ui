@@ -49,7 +49,7 @@ const ITEMS: ItemProps[] = [
   },
 ]
 
-export type CardsProps = GridProps & {}
+export interface CardsProps extends GridProps {}
 
 export const Cards: FC<CardsProps> = memo(({ ...rest }) => {
   return (
@@ -72,14 +72,15 @@ export const Cards: FC<CardsProps> = memo(({ ...rest }) => {
 
 Cards.displayName = "Cards"
 
-type ItemProps = CardProps &
-  Pick<StatProps, "number" | "helperMessage"> & {
-    title: string
-    icon: Component<"svg", IconProps>
-    iconProps?: IconProps
-    statProps?: StatProps
-    statIcon?: StatProps["icon"]
-  }
+export interface ItemProps
+  extends CardProps,
+    Pick<StatProps, "number" | "helperMessage"> {
+  title: string
+  icon: Component<"svg", IconProps>
+  iconProps?: IconProps
+  statProps?: StatProps
+  statIcon?: StatProps["icon"]
+}
 
 const Item: FC<ItemProps> = memo(
   ({

@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -18,23 +18,23 @@ import type {
   ReactNode,
 } from "react"
 import { cloneElement, useMemo } from "react"
+import {
+  AutocompleteDescendantsContextProvider,
+  AutocompleteProvider,
+  useAutocompleteContext,
+} from "./autocomplete-context"
+import { AutocompleteCreate } from "./autocomplete-create"
 import type { AutocompleteCreateProps } from "./autocomplete-create"
+import { AutocompleteEmpty } from "./autocomplete-empty"
 import type { AutocompleteEmptyProps } from "./autocomplete-empty"
 import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteClearIcon, AutocompleteIcon } from "./autocomplete-icon"
 import type { AutocompleteListProps } from "./autocomplete-list"
 import { AutocompleteList } from "./autocomplete-list"
 import type { UseAutocompleteProps } from "./use-autocomplete"
-import {
-  AutocompleteProvider,
-  useAutocomplete,
-  AutocompleteDescendantsContextProvider,
-  useAutocompleteContext,
-  useAutocompleteInput,
-} from "./use-autocomplete"
-import { AutocompleteCreate, AutocompleteEmpty } from "./"
+import { useAutocomplete, useAutocompleteInput } from "./use-autocomplete"
 
-type MultiAutocompleteOptions = {
+interface MultiAutocompleteOptions {
   /**
    * The visual separator between each value.
    *
@@ -73,11 +73,11 @@ type MultiAutocompleteOptions = {
   /**
    * Props for multi autocomplete container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for multi autocomplete content element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for multi autocomplete list element.
    */
@@ -132,9 +132,10 @@ type MultiAutocompleteOptions = {
   footer?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
 }
 
-export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
-  Omit<UseAutocompleteProps<string[]>, "closeOnSelect"> &
-  MultiAutocompleteOptions
+export interface MultiAutocompleteProps
+  extends ThemeProps<"MultiAutocomplete">,
+    Omit<UseAutocompleteProps<string[]>, "closeOnSelect">,
+    MultiAutocompleteOptions {}
 
 /**
  * `MultiAutocomplete` is a component used to display suggestions based on user text input and to obtain multiple values.
@@ -143,7 +144,7 @@ export type MultiAutocompleteProps = ThemeProps<"MultiAutocomplete"> &
  */
 export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle(
+    const [styles, mergedProps] = useComponentMultiStyle(
       "MultiAutocomplete",
       props,
     )
@@ -293,11 +294,12 @@ export const MultiAutocomplete = forwardRef<MultiAutocompleteProps, "input">(
   },
 )
 
-type MultiAutocompleteFieldProps = HTMLUIProps<"div"> &
-  Pick<
-    MultiAutocompleteProps,
-    "component" | "separator" | "keepPlaceholder" | "inputProps"
-  >
+interface MultiAutocompleteFieldProps
+  extends HTMLUIProps,
+    Pick<
+      MultiAutocompleteProps,
+      "component" | "separator" | "keepPlaceholder" | "inputProps"
+    > {}
 
 const MultiAutocompleteField = forwardRef<MultiAutocompleteFieldProps, "input">(
   (

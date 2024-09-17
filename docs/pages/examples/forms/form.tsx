@@ -3,7 +3,7 @@ import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC, ReactNode } from "react"
 
-export type FormProps = StackProps & {
+export interface FormProps extends Omit<StackProps, "title"> {
   title: ReactNode
   description: ReactNode
   submit: ReactNode

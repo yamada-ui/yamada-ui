@@ -9,21 +9,21 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { createContext, cx, valueToPercent } from "@yamada-ui/utils"
 import type { FC } from "react"
 
-const [ProgressProvider, useProgress] = createContext<
-  Record<string, CSSUIObject>
->({
+const [ProgressProvider, useProgress] = createContext<{
+  [key: string]: CSSUIObject
+}>({
   name: `ProgressStylesContext`,
   errorMessage: `useProgress returned is 'undefined'. Seems you forgot to wrap the components in "<Progress />" `,
 })
 
-type ProgressOptions = {
+interface ProgressOptions {
   /**
    * The value of the progress.
    *
@@ -72,9 +72,10 @@ type ProgressOptions = {
   filledTrackColor?: ColorModeToken<CSS.Property.Color, "colors">
 }
 
-export type ProgressProps = HTMLUIProps<"div"> &
-  ThemeProps<"Progress"> &
-  ProgressOptions
+export interface ProgressProps
+  extends HTMLUIProps,
+    ThemeProps<"Progress">,
+    ProgressOptions {}
 
 /**
  * `Progress` is a component for visually indicating progress.
@@ -82,7 +83,7 @@ export type ProgressProps = HTMLUIProps<"div"> &
  * @see Docs https://yamada-ui.com/components/feedback/progress
  */
 export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Progress", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Progress", props)
   const {
     className,
     children,
@@ -133,7 +134,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   )
 })
 
-type ProgressFilledTrackProps = HTMLUIProps<"div"> & ProgressProps
+interface ProgressFilledTrackProps extends HTMLUIProps, ProgressProps {}
 
 const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
   value = 0,

@@ -1,11 +1,18 @@
 import type {
   ComponentArgs,
-  ComponentMergeProps,
+  OmitProps,
   StyledOptions,
   UIProps,
+  WithoutAs,
 } from "@yamada-ui/core"
-import type { Dict, Merge, MergeIfDefined } from "@yamada-ui/utils"
-import type * as Motion from "framer-motion"
+import type { Dict, Merge } from "@yamada-ui/utils"
+import type {
+  DOMMotionComponents,
+  Target,
+  TargetAndTransition,
+  Transition,
+  MotionProps as OriginMotionProps,
+} from "framer-motion"
 import type * as React from "react"
 
 export type {
@@ -145,45 +152,48 @@ export type {
   VisualState as MotionVisualState,
 } from "framer-motion"
 
-export type MotionFactory = {
+export interface MotionFactory {
   <T extends MotionAs = MotionAs, M extends object = {}>(
     el: T,
     options?: StyledOptions,
   ): UIMotionComponent<T, M>
 }
 
+type ComponentConditionalProps<
+  Y extends MotionAs,
+  M extends MotionAs,
+  D extends object = {},
+> = Y extends M
+  ? OmitProps<React.ComponentProps<Y>, D>
+  :
+      | OmitProps<React.ComponentProps<Y>, D>
+      | OmitProps<React.ComponentProps<M>, D>
+
 type ComponentProps<
-  Y extends object,
-  M extends object,
-  D extends object,
-  H extends MotionAs,
-> = ComponentMergeProps<Y, M, D> & {
-  as?: H
+  Y extends MotionAs,
+  M extends MotionAs,
+  D extends object = {},
+> = ComponentConditionalProps<Y, M, D> & {
+  as?: M
 }
 
-export type MotionComponent<Y extends MotionAs, M extends object = {}> = {
-  <D extends MotionAs = Y>(
-    props: ComponentProps<
-      React.ComponentProps<Y>,
-      React.ComponentProps<D>,
-      M,
-      D
-    >,
-  ): JSX.Element
-} & ComponentArgs
+export interface MotionComponent<Y extends MotionAs, D extends object = {}>
+  extends ComponentArgs {
+  <M extends MotionAs = Y>(props: ComponentProps<Y, M, D>): JSX.Element
+}
 
-export type MotionAs = keyof Motion.DOMMotionComponents
+export type MotionAs = keyof DOMMotionComponents
 
 export type MotionComponents = {
-  [Y in MotionAs]: MotionComponent<Y, MotionProps<Y>>
+  [Y in MotionAs]: UIMotionComponent<Y>
 }
 
-export type UIMotionComponent<
-  Y extends MotionAs,
-  M extends object = {},
-> = MotionComponent<Y, Merge<UIMotionProps, M>>
+export interface UIMotionComponent<Y extends MotionAs, M extends object = {}>
+  extends MotionComponent<Y, Merge<UIMotionProps, M>> {}
 
-type UIMotionProps = Merge<UIProps, Motion.MotionProps>
+interface UIMotionProps extends Merge<UIProps, OriginMotionProps> {
+  as?: MotionAs
+}
 
 type FactoryAttributes<Y> =
   Y extends React.DetailedHTMLFactory<infer M, any>
@@ -208,9 +218,11 @@ export type MotionProps<Y extends MotionAs = "div"> = Merge<
     FactoryElement<React.ReactDOM[Y]>
   >,
   UIMotionProps
-> & {
-  as?: MotionAs
-}
+>
+
+export type MotionPropsWithoutAs<Y extends MotionAs = "div"> = WithoutAs<
+  MotionProps<Y>
+>
 
 export type MotionPropsWithoutChildren<Y extends MotionAs = "div"> = Omit<
   MotionProps<Y>,
@@ -219,27 +231,27 @@ export type MotionPropsWithoutChildren<Y extends MotionAs = "div"> = Omit<
 
 type TargetResolver<Y = Dict> = (
   props: Y & MotionTransitionProps,
-) => Motion.TargetAndTransition
+) => TargetAndTransition
 
-type Variant<Y = Dict> = Motion.TargetAndTransition | TargetResolver<Y>
+type Variant<Y = Dict> = TargetAndTransition | TargetResolver<Y>
 
-export type MotionTransitionVariants<Y = Dict> = {
+export interface MotionTransitionVariants<Y = Dict> {
   enter: Variant<Y>
   exit: Variant<Y>
   initial?: Variant<Y>
 }
 
-type MotionLifecycleProps<Y> = Partial<Record<"enter" | "exit", Y>>
+type MotionLifecycleProps<Y> = { [key in "enter" | "exit"]?: Y }
 
-export type MotionTransitionProps = {
+export interface MotionTransitionProps {
   /**
    * Custom `transition` definition for `enter` and `exit`.
    */
-  transition?: MotionLifecycleProps<Motion.Transition>
+  transition?: MotionLifecycleProps<Transition>
   /**
    * Custom `transitionEnd` definition for `enter` and `exit`.
    */
-  transitionEnd?: MotionLifecycleProps<Motion.Target>
+  transitionEnd?: MotionLifecycleProps<Target>
   /**
    * Custom `delay` definition for `enter` and `exit`.
    */
@@ -262,7 +274,10 @@ export type MotionTransitionProps = {
   initial?: any
 }
 
-export type WithTransitionProps<Y extends object> = Omit<Y, "transition"> &
+export type WithTransitionProps<Y extends object> = Omit<
+  Y,
+  "variants" | "transition"
+> &
   MotionTransitionProps & {
     /**
      * If `true`, the element will unmount when `isOpen={false}` and animation is done.
@@ -273,16 +288,3 @@ export type WithTransitionProps<Y extends object> = Omit<Y, "transition"> &
      */
     isOpen?: boolean
   }
-
-export type MotionUIPropGetter<Y extends MotionAs = "div", M = undefined> = (
-  props?: MergeIfDefined<MotionProps<Y>, M>,
-  ref?: React.Ref<any>,
-) => MotionProps<Y> & React.RefAttributes<any>
-
-export type RequiredMotionUIPropGetter<
-  Y extends MotionAs = "div",
-  M = undefined,
-> = (
-  props: MergeIfDefined<MotionProps<Y>, M>,
-  ref?: React.Ref<any>,
-) => MotionProps<Y> & React.RefAttributes<any>

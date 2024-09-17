@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 import { Fade } from "../src"
 
 describe("<Fade />", () => {
@@ -9,11 +9,11 @@ describe("<Fade />", () => {
 
   test("toggles visibility on isOpen change", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen(!isOpen)}>button</button>
           <Fade isOpen={isOpen}>Fade</Fade>
         </>
       )
@@ -34,11 +34,11 @@ describe("<Fade />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen(!isOpen)}>button</button>
           <Fade isOpen={isOpen} unmountOnExit>
             Fade
           </Fade>

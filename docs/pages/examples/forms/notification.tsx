@@ -47,7 +47,7 @@ const EMAIL_NOTIFICATIONS_ITEMS = [
   },
 ] as const
 
-type Data = {
+interface Data {
   notifyMeAbout: string
   communicationEmails: boolean
   marketingEmails: boolean
@@ -56,7 +56,7 @@ type Data = {
   useDifferent: boolean
 }
 
-export type NotificationsProps = StackProps
+export interface NotificationsProps extends StackProps {}
 
 export const Notifications: FC<NotificationsProps> = memo(({ ...rest }) => {
   const {

@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useInputGroup } from "./input-group"
+import { useInputGroup } from "./input-context"
 
-type InputElementOptions = {
+interface InputElementOptions {
   /**
    * If `true`, the element clickable.
    *
@@ -18,7 +18,7 @@ type InputElementOptions = {
   placement?: "left" | "right"
 }
 
-export type InputElementProps = HTMLUIProps<"div"> & InputElementOptions
+export interface InputElementProps extends HTMLUIProps, InputElementOptions {}
 
 const InputElement = forwardRef<InputElementProps, "div">(
   ({ className, isClick = false, placement = "left", ...rest }, ref) => {

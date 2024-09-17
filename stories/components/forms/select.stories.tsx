@@ -27,6 +27,7 @@ export const basic: Story = () => {
     { label: "ベジータ", value: "ベジータ" },
     {
       label: "地球人",
+      value: "",
       items: [
         { label: "孫悟空", value: "孫悟空" },
         { label: "孫悟飯", value: "孫悟飯" },
@@ -367,7 +368,11 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { select1: string; select2: string; select3: string }
+  interface Data {
+    select1: string
+    select2: string
+    select3: string
+  }
 
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
@@ -477,7 +482,11 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { select1: string; select2: string; select3: string }
+  interface Data {
+    select1: string
+    select2: string
+    select3: string
+  }
 
   const defaultValues: Data = {
     select1: "孫悟空",

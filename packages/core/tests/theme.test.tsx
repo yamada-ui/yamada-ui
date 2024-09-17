@@ -44,8 +44,8 @@ describe("ThemeProvider", () => {
       ),
     })
 
-    expect(result.current.theme.colors.primary).toBe("#0070f3")
-    expect(result.current.theme.fontSizes.md).toBe("1rem")
+    expect(result.current.theme.colors?.primary).toBe("#0070f3")
+    expect(result.current.theme.fontSizes?.md).toBe("1rem")
   })
 
   test("allows theme updates through changeThemeScheme", () => {
@@ -248,13 +248,13 @@ describe("transformTheme", () => {
       "[data-theme=light] &:not([data-theme]), &[data-theme=light]"
 
     expect(cssVars).toHaveProperty(expectCssVarsDark)
-    expect(cssVars[expectCssVarsDark]).toStrictEqual({
+    expect(cssVars?.[expectCssVarsDark]).toStrictEqual({
       "--ui-colors-background": "black",
       "--ui-colors-text": "white",
     })
 
     expect(cssVars).toHaveProperty(expectCssVarsLight)
-    expect(cssVars[expectCssVarsLight]).toStrictEqual({
+    expect(cssVars?.[expectCssVarsLight]).toStrictEqual({
       "--ui-colors-background": "white",
       "--ui-colors-text": "black",
     })

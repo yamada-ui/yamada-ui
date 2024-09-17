@@ -2,7 +2,7 @@ type Status = "loaded" | "error"
 
 const originalImage = window.Image
 
-export const image = () => {
+export function image() {
   let status: Status
 
   //@ts-expect-error
@@ -46,7 +46,7 @@ export const image = () => {
   }
 }
 
-image.restore = () => {
+image.restore = function () {
   window.Image = originalImage
 }
 

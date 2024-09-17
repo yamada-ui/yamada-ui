@@ -1,6 +1,6 @@
 import type { CSSUIObject } from "@yamada-ui/react"
 
-export const mdx: Record<string, CSSUIObject> = {
+export const mdx: { [key: string]: CSSUIObject } = {
   h1: {
     fontFamily: "heading",
     fontWeight: "bold",

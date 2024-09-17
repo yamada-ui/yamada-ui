@@ -1,9 +1,9 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useMenu } from "./menu"
+import { useMenu } from "./menu-context"
 
-export type MenuGroupProps = HTMLUIProps<"div"> & {
+export interface MenuGroupProps extends HTMLUIProps<"li"> {
   /**
    * The label of the group.
    */
@@ -14,7 +14,7 @@ export type MenuGroupProps = HTMLUIProps<"div"> & {
   labelProps?: HTMLUIProps<"span">
 }
 
-export const MenuGroup = forwardRef<MenuGroupProps, "div">(
+export const MenuGroup = forwardRef<MenuGroupProps, "li">(
   ({ className, label, children, labelProps, ...rest }, ref) => {
     const { styles } = useMenu()
 

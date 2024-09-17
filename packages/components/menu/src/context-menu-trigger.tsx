@@ -4,11 +4,14 @@ import { PopoverAnchor, PopoverTrigger } from "@yamada-ui/popover"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { MouseEvent } from "react"
 import { useState } from "react"
-import { useContextMenu } from "./context-menu"
+import { useContextMenu } from "./menu-context"
 
-type Position = { top: number; left: number }
+interface Position {
+  top: number
+  left: number
+}
 
-export type ContextMenuTriggerProps = HTMLUIProps<"div">
+export interface ContextMenuTriggerProps extends HTMLUIProps {}
 
 export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
   ({ children, className, ...rest }, ref) => {

@@ -9,6 +9,7 @@ export const semantics: ThemeSemantics = {
     warning: "orange.500",
     danger: "red.500",
     link: "blue.500",
+    muted: ["#656565", "#b3b3b3"],
   },
   colorSchemes: {
     primary: "blue",

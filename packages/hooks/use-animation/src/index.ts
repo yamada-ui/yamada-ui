@@ -36,7 +36,9 @@ export const useAnimation = (styles: Styles): string => {
  * @see Docs https://yamada-ui.com/hooks/use-dynamic-animation
  */
 export const useDynamicAnimation = <
-  T extends (AnimationStyle | Theme["animations"])[] | Record<string, Styles>,
+  T extends
+    | (AnimationStyle | Theme["animations"])[]
+    | { [key: string]: Styles },
 >(
   arrayOrObj: T,
   init?: keyof T | (keyof T)[],
@@ -118,7 +120,7 @@ export const useDynamicAnimation = <
   return [animations, setAnimation]
 }
 
-export type UseAnimationObserverProps = {
+export interface UseAnimationObserverProps {
   isOpen: boolean
   ref: React.RefObject<HTMLElement>
 }

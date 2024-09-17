@@ -215,7 +215,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { segmentedControl: string }
+  interface Data {
+    segmentedControl: string
+  }
 
   const defaultValues: Data = {
     segmentedControl: "ベジータ",

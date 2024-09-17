@@ -5,14 +5,16 @@ import {
   globalValues,
   isCSSFunction,
   splitValues,
-  type Transform,
 } from "./utils"
+import type { Transform } from "./utils"
 
 const OPERATORS = ["+", "-", "*", "/"]
 
-const getValue =
-  (value: string | undefined, fallbackValue: string = ""): Transform =>
-  (token, theme, ...rest) => {
+function getValue(
+  value: string | undefined,
+  fallbackValue: string = "",
+): Transform {
+  return function (token, theme, ...rest) {
     if (!value) return fallbackValue
 
     const prevent = isCSSFunction(value)
@@ -24,18 +26,19 @@ const getValue =
 
       const resolvedToken = `${token}.${value}`
 
-      return resolvedToken in theme.__cssMap
+      return theme.__cssMap && resolvedToken in theme.__cssMap
         ? theme.__cssMap[resolvedToken].ref
         : value
     }
   }
+}
 
-const isOperator = (value: string) =>
-  new RegExp(`\\s[${OPERATORS.join("\\")}]\\s`).test(value)
+function isOperator(value: string) {
+  return new RegExp(`\\s[${OPERATORS.join("\\")}]\\s`).test(value)
+}
 
-export const generateCalc =
-  (token: ThemeToken): Transform =>
-  (value, theme, ...rest) => {
+export function generateCalc(token: ThemeToken): Transform {
+  return function (value, theme, ...rest) {
     if (value == null || globalValues.has(value)) return value
 
     const prevent = isCSSFunction(value)
@@ -115,3 +118,4 @@ export const generateCalc =
         return value
     }
   }
+}

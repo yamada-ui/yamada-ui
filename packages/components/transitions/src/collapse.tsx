@@ -4,6 +4,7 @@ import type {
   WithTransitionProps,
   MotionTransitionVariants,
   MotionProps,
+  MotionVariants,
 } from "@yamada-ui/motion"
 import {
   AnimatePresence,
@@ -19,7 +20,7 @@ import { useEffect, useMemo, useState } from "react"
 const isNumeric = (value?: string | number) =>
   value != null && parseFloat(value.toString()) > 0
 
-const variants: MotionTransitionVariants = {
+const variants: MotionVariants = {
   enter: ({
     animationOpacity,
     endingHeight: height,
@@ -50,7 +51,7 @@ const variants: MotionTransitionVariants = {
     transitionEnd: transitionEnd?.exit,
     ...exit,
   }),
-}
+} satisfies MotionTransitionVariants
 
 export const collapseProps = {
   initial: "exit",
@@ -59,7 +60,7 @@ export const collapseProps = {
   variants,
 }
 
-type CollapseOptions = {
+interface CollapseOptions {
   /**
    * If `true`, the opacity of the content will be animated.
    *
@@ -80,9 +81,10 @@ type CollapseOptions = {
   endingHeight?: number | string
 }
 
-export type CollapseProps = WithTransitionProps<MotionProps> &
-  CollapseOptions &
-  ThemeProps<"Collapse">
+export interface CollapseProps
+  extends WithTransitionProps<MotionProps>,
+    CollapseOptions,
+    ThemeProps<"Collapse"> {}
 
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.

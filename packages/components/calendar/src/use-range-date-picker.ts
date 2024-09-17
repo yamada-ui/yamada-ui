@@ -1,4 +1,4 @@
-import type { UIPropGetter } from "@yamada-ui/core"
+import type { PropGetter } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   getActiveElement,
@@ -17,20 +17,21 @@ import type { UseCalendarProps } from "./use-calendar"
 import type { UseCalendarPickerProps } from "./use-calendar-picker"
 import { useCalendarPicker } from "./use-calendar-picker"
 
-type CalendarProps = Omit<
-  UseCalendarProps<[Date?, Date?]>,
-  "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
->
+interface CalendarProps
+  extends Omit<
+    UseCalendarProps<[Date?, Date?]>,
+    "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
+  > {}
 
-type UseRangeDatePickerOptions = {
+interface UseRangeDatePickerOptions {
   /**
    * The start date placeholder
    */
-  startPlaceholder?: boolean
+  startPlaceholder?: string
   /**
    * The end date placeholder
    */
-  endPlaceholder?: boolean
+  endPlaceholder?: string
   /**
    * If `true`, the list element will be closed when value is selected.
    *
@@ -39,8 +40,9 @@ type UseRangeDatePickerOptions = {
   closeOnSelect?: boolean
 }
 
-export type UseRangeDatePickerProps = UseCalendarPickerProps<CalendarProps> &
-  UseRangeDatePickerOptions
+export interface UseRangeDatePickerProps
+  extends UseCalendarPickerProps<CalendarProps>,
+    UseRangeDatePickerOptions {}
 
 export const useRangeDatePicker = ({
   value: valueProp,
@@ -264,7 +266,7 @@ export const useRangeDatePicker = ({
     setEndInputValue(dateToString(endValue) ?? "")
   }, [value])
 
-  const getStartInputProps: UIPropGetter = useCallback(
+  const getStartInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref) => {
       const style: CSSProperties = {
         ...props.style,
@@ -286,7 +288,7 @@ export const useRangeDatePicker = ({
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
         onChange: handlerAll(props.onChange, onStartChange),
-        onClick: handlerAll(props.onChange, (ev) => {
+        onClick: handlerAll(props.onClick, (ev) => {
           ev.preventDefault()
           ev.stopPropagation()
         }),
@@ -314,7 +316,7 @@ export const useRangeDatePicker = ({
     ],
   )
 
-  const getEndInputProps: UIPropGetter = useCallback(
+  const getEndInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref) => {
       const style: CSSProperties = {
         ...props.style,
@@ -335,7 +337,7 @@ export const useRangeDatePicker = ({
         cursor: formControlProps.readOnly ? "default" : "text",
         pointerEvents: formControlProps.disabled ? "none" : "auto",
         onChange: handlerAll(props.onChange, onEndChange),
-        onClick: handlerAll(props.onChange, (ev) => {
+        onClick: handlerAll(props.onClick, (ev) => {
           ev.preventDefault()
           ev.stopPropagation()
         }),

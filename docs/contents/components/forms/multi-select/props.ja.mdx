@@ -2,10 +2,10 @@
 title: MultiSelect
 description: "`MultiSelect`は、ユーザーがオプションのリストから複数の値を選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/select"
+order: 1
 label: Updated
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -27,6 +27,14 @@ order: 1
   name="clearIconProps"
   type="SelectIconProps"
   description={"Props for multi select clear icon element."}
+/>
+
+<PropsCard
+  id="multiselect-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -334,6 +342,14 @@ order: 1
 />
 
 <PropsCard
+  id="multiselect-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="multiselect-optionprops"
   name="optionProps"
   type='Omit<OptionProps, "children" | "value">'
@@ -371,15 +387,6 @@ order: 1
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
-/>
-
-<PropsCard
-  id="multiselect-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
 />
 
 <PropsCard

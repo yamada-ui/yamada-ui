@@ -7,10 +7,10 @@ import {
 } from "./assertion"
 import type { Dict } from "./index.types"
 
-const omitObjectHelper = <Y extends Dict, M extends keyof Y>(
+function omitObjectHelper<Y extends Dict, M extends keyof Y>(
   obj: Y,
   path: M[] | readonly M[],
-): any => {
+): any {
   if (!path.length) return obj
 
   const [primaryKey, ...restKeys] = path
@@ -31,14 +31,11 @@ const omitObjectHelper = <Y extends Dict, M extends keyof Y>(
   return obj
 }
 
-export const omitObject = <
+export function omitObject<
   Y extends Dict,
   M extends keyof Y = keyof Y,
-  D extends unknown = unknown,
->(
-  obj: Y,
-  keys: M[] | readonly M[],
-) => {
+  D = any,
+>(obj: Y, keys: M[] | readonly M[]) {
   return (keys as M[]).reduce((prev, key) => {
     const path = (isString(key) ? key.split(".") : []) as M[]
 
@@ -46,16 +43,12 @@ export const omitObject = <
   }, obj) as unknown as D extends unknown ? Omit<Y, M> : D
 }
 
-export const pickObject = <
+export function pickObject<
   Y extends Dict,
   M extends keyof Y = keyof Y,
-  D extends unknown = unknown,
->(
-  obj: Y,
-  keys: M[] | readonly M[],
-  fallbackValue = "__fallback",
-) =>
-  (keys as M[]).reduce((prev, key) => {
+  D = any,
+>(obj: Y, keys: M[] | readonly M[], fallbackValue = "__fallback") {
+  return (keys as M[]).reduce((prev, key) => {
     const path = isString(key) ? key.split(".") : []
 
     if (!path.length) return prev
@@ -74,11 +67,12 @@ export const pickObject = <
 
     return prev
   }, {}) as D extends unknown ? { [H in M]: Y[H] } : D
+}
 
-export const splitObject = <Y extends Dict, M extends keyof Y>(
+export function splitObject<Y extends Dict, M extends keyof Y>(
   obj: Y,
   keys: M[] | readonly M[],
-) => {
+) {
   const picked: Dict = {}
   const omitted: Dict = {}
 
@@ -93,10 +87,10 @@ export const splitObject = <Y extends Dict, M extends keyof Y>(
   return [picked, omitted] as [{ [P in M]: Y[P] }, Omit<Y, M>]
 }
 
-export const filterObject = <Y extends Dict, M extends Dict>(
+export function filterObject<Y extends Dict, M extends Dict>(
   obj: Y,
   func: (key: keyof Y, value: Y[keyof Y], obj: Y) => boolean,
-): M => {
+): M {
   const result: Dict = {}
 
   Object.entries(obj).forEach(([key, value]) => {
@@ -108,14 +102,15 @@ export const filterObject = <Y extends Dict, M extends Dict>(
   return result as M
 }
 
-export const filterUndefined = <Y extends Dict>(obj: Y): Y =>
-  filterObject(obj, (_, val) => val !== null && val !== undefined)
+export function filterUndefined<Y extends Dict>(obj: Y): Y {
+  return filterObject(obj, (_, val) => val !== null && val !== undefined)
+}
 
-export const merge = <Y extends Dict>(
+export function merge<Y extends Dict>(
   target: any,
   source: any,
   mergeArray: boolean = false,
-): Y => {
+): Y {
   let result = Object.assign({}, target)
 
   if (isObject(source)) {
@@ -143,23 +138,39 @@ export const merge = <Y extends Dict>(
   return result as Y
 }
 
-export const flattenObject = <Y extends Dict>(
+export interface FlattenObjectOptions {
+  maxDepth?: number
+  omitKeys?: string[]
+  separator?: string
+  shouldProcess?: (obj: any) => boolean
+}
+
+export function flattenObject<Y extends Dict>(
   obj: any,
-  maxDepth: number = Infinity,
-  omitKeys: string[] = [],
-): Y => {
+  { maxDepth, omitKeys, separator, shouldProcess }: FlattenObjectOptions = {},
+): Y {
+  maxDepth ??= Infinity
+  omitKeys ??= []
+  separator ??= "."
+
   if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
 
   return Object.entries(obj).reduce((result, [key, value]) => {
     if (
       isObject(value) &&
-      !Object.keys(value).some((key) => omitKeys.includes(key))
+      !Object.keys(value).some((key) => omitKeys?.includes(key)) &&
+      (!shouldProcess || shouldProcess(value))
     ) {
-      Object.entries(flattenObject(value, maxDepth - 1, omitKeys)).forEach(
-        ([childKey, childValue]) => {
-          result[`${key}.${childKey}`] = childValue
-        },
-      )
+      Object.entries(
+        flattenObject(value, {
+          maxDepth: maxDepth - 1,
+          omitKeys,
+          separator,
+          shouldProcess,
+        }),
+      ).forEach(([childKey, childValue]) => {
+        result[`${key}${separator}${childKey}`] = childValue
+      })
     } else {
       result[key] = value
     }
@@ -168,20 +179,22 @@ export const flattenObject = <Y extends Dict>(
   }, {} as any) as Y
 }
 
-export const objectFromEntries = <Y extends Dict>(entries: any[][]): Y =>
-  entries.reduce((result, [key, value]) => {
+export function objectFromEntries<Y extends Dict>(entries: any[][]): Y {
+  return entries.reduce((result, [key, value]) => {
     result[key] = value
 
     return result
   }, {} as any) as Y
+}
 
-export const keysFormObject = <Y extends Dict>(obj: Y): (keyof Y)[] =>
-  Object.keys(obj)
+export function keysFormObject<Y extends object>(obj: Y): (keyof Y)[] {
+  return Object.keys(obj) as (keyof Y)[]
+}
 
-export const replaceObject = <Y extends any>(
+export function replaceObject<Y = any>(
   objOrArray: Y,
   callBack: (value: any) => any,
-): Y => {
+): Y {
   if (isArray(objOrArray)) {
     return objOrArray.map(callBack) as Y
   } else if (isObject(objOrArray)) {
@@ -195,12 +208,12 @@ export const replaceObject = <Y extends any>(
   }
 }
 
-export const getObject = (
+export function getObject(
   obj: Dict,
   path: string | number,
   fallback?: any,
   i?: number,
-) => {
+) {
   const k = isString(path) ? path.split(/\[(.*?)\]|\./).filter(Boolean) : [path]
 
   for (i = 0; i < k.length; i += 1) {
@@ -212,15 +225,15 @@ export const getObject = (
   return obj === undefined ? fallback : obj
 }
 
-export const memoizeObject = (func: typeof getObject) => {
+export function memoizeObject(func: typeof getObject) {
   const cache = new WeakMap()
 
-  const memoizedFunc = <Y extends unknown = any>(
+  function memoizedFunc<Y>(
     obj: Dict,
     path: string | number,
     fallback?: any,
     i?: number,
-  ): Y => {
+  ): Y {
     if (isUndefined(obj)) return func(obj, path, fallback)
 
     if (!cache.has(obj)) cache.set(obj, new Map())
@@ -241,11 +254,11 @@ export const memoizeObject = (func: typeof getObject) => {
 
 export const getMemoizedObject = memoizeObject(getObject)
 
-export const assignAfter = (target: Record<string, any>, ...sources: any[]) => {
+export function assignAfter(target: { [key: string]: any }, ...sources: any[]) {
   if (target == null)
     throw new TypeError("Cannot convert undefined or null to object")
 
-  const result: Record<string, unknown> = { ...target }
+  const result: { [key: string]: unknown } = { ...target }
 
   for (const nextSource of sources) {
     if (nextSource == null) continue

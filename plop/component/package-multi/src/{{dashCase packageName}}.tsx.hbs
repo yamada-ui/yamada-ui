@@ -2,32 +2,36 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 
-type {{upperCase packageName}}Context = Record<string, CSSUIObject>
+interface {{upperCase packageName}}Context {
+  [key: string]: CSSUIObject
+}
 
 const [{{upperCase packageName}}Provider, use{{upperCase packageName}}] = createContext<{{upperCase packageName}}Context>({
   strict: false,
   name: "{{upperCase packageName}}Context",
 })
 
-type {{upperCase packageName}}Options = {}
+interface {{upperCase packageName}}Options {}
+
+export interface {{upperCase packageName}}Props extends HTMLUIProps, ThemeProps<"{{upperCase packageName}}">, {{upperCase packageName}}Options {}
 
 /**
  * `{{upperCase packageName}}` is component.
  *
  * @see Docs https://yamada-ui.com/components/{{dashCase categoryName}}/{{dashCase packageName}}
  */
-export type {{upperCase packageName}}Props = HTMLUIProps<"div"> & ThemeProps<"{{upperCase packageName}}"> & {{upperCase packageName}}Options
-
 export const {{upperCase packageName}} = forwardRef<{{upperCase packageName}}Props, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("{{upperCase packageName}}", props)
+  const [styles, mergedProps] = useComponentMultiStyle("{{upperCase packageName}}", props)
   const { className, ...rest } = omitThemeProps(mergedProps)
 
-  const css: CSSUIObject = {}
+  const css: CSSUIObject = {
+    ...styles.unknown,
+  }
 
   return (
     <{{upperCase packageName}}Provider value={styles}>

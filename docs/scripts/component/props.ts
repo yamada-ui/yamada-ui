@@ -7,13 +7,16 @@ import { config } from "dotenv"
 import { omitObject } from "utils/object"
 import { toCamelCase } from "utils/string"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
-import { locales, type Locale } from "utils/i18n"
+import { locales } from "utils/i18n"
+import type { Locale } from "utils/i18n"
 import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Doc = Record<string, Record<string, Props>>
-type Props = {
+interface Doc {
+  [key: string]: { [key: string]: Props }
+}
+interface Props {
   type?: string
   required?: boolean
   description?: string
@@ -32,10 +35,9 @@ const LOCALE_TITLE_MAP = {
   en: "Props",
   ja: "Props",
 }
-const OVERRIDE_PATHS: Record<
-  string,
-  (string | { parent: string; children: string[] })[]
-> = {
+const OVERRIDE_PATHS: {
+  [key: string]: (string | { parent: string; children: string[] })[]
+} = {
   layouts: [
     "aspect-ratio",
     "box",
@@ -119,7 +121,7 @@ export const getDocs: p.RequiredRunner = () => async (p, s) => {
 
   const dirents = await readdir(SOURCE_PATH, { withFileTypes: true })
 
-  const docs: Record<string, Doc> = {}
+  const docs: { [key: string]: Doc } = {}
 
   let notDocsList: string[] = []
 
@@ -272,7 +274,7 @@ const generateContent = async ({
 }
 
 const generateMDXFiles: p.RequiredRunner =
-  (docs: Record<string, Doc>, paths: Record<string, string>) =>
+  (docs: { [key: string]: Doc }, paths: { [key: string]: string }) =>
   async (p, s) => {
     s.start(`Writing files "${DIST_PATH}"`)
 

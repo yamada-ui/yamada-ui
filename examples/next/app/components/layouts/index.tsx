@@ -4,7 +4,7 @@ import { Center, StackProps, VStack } from '@yamada-ui/react'
 import { FC } from 'react'
 import { Header } from './header'
 
-export type LayoutProps = StackProps
+export interface LayoutProps extends StackProps {}
 
 export const Layout: FC<LayoutProps> = ({ ...rest }) => {
   return (

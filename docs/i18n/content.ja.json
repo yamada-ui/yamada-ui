@@ -172,6 +172,12 @@
     "hierarchy": { "lv1": "チームと貢献者", "lv2": "スポンサー", "lv3": "個人" }
   },
   {
+    "title": "名誉貢献者",
+    "type": "fragment",
+    "slug": "/community/team#名誉貢献者",
+    "hierarchy": { "lv1": "チームと貢献者", "lv2": "名誉貢献者" }
+  },
+  {
     "title": "貢献者",
     "type": "fragment",
     "slug": "/community/team#貢献者",
@@ -1284,6 +1290,16 @@
       "lv1": "DonutChart",
       "lv2": "使い方",
       "lv3": "透明度を調整する"
+    }
+  },
+  {
+    "title": "中央にテキストを表示する",
+    "type": "fragment",
+    "slug": "/components/data-display/donut-chart#中央にテキストを表示する",
+    "hierarchy": {
+      "lv1": "DonutChart",
+      "lv2": "使い方",
+      "lv3": "中央にテキストを表示する"
     }
   },
   {
@@ -4605,6 +4621,16 @@
     }
   },
   {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/date-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "DatePicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
+    }
+  },
+  {
     "title": "制御する",
     "type": "fragment",
     "slug": "/components/forms/date-picker#制御する",
@@ -5844,6 +5870,16 @@
     }
   },
   {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/month-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "MonthPicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
+    }
+  },
+  {
     "title": "制御する",
     "type": "fragment",
     "slug": "/components/forms/month-picker#制御する",
@@ -5906,6 +5942,26 @@
       "lv1": "MultiAutocomplete",
       "lv2": "使い方",
       "lv3": "デフォルトの値を設定する"
+    }
+  },
+  {
+    "title": "ドロップダウンにヘッダーを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-autocomplete#ドロップダウンにヘッダーを追加する",
+    "hierarchy": {
+      "lv1": "MultiAutocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにヘッダーを追加する"
+    }
+  },
+  {
+    "title": "ドロップダウンにフッターを追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-autocomplete#ドロップダウンにフッターを追加する",
+    "hierarchy": {
+      "lv1": "MultiAutocomplete",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンにフッターを追加する"
     }
   },
   {
@@ -6485,6 +6541,16 @@
       "lv1": "MultiDatePicker",
       "lv2": "使い方",
       "lv3": "アイコンをカスタマイズする"
+    }
+  },
+  {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/multi-date-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "MultiDatePicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
     }
   },
   {
@@ -7701,6 +7767,16 @@
     }
   },
   {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/range-date-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "RangeDatePicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
+    }
+  },
+  {
     "title": "制御する",
     "type": "fragment",
     "slug": "/components/forms/range-date-picker#制御する",
@@ -8784,7 +8860,7 @@
   {
     "title": "Toggle",
     "type": "page",
-    "description": "`Button`は、オンまたはオフの２つの状態をコンポーネントです。",
+    "description": "`Toggle`は、オンまたはオフの２つの状態を持つコンポーネントです。",
     "slug": "/components/forms/toggle",
     "hierarchy": { "lv1": "Toggle" }
   },
@@ -9063,6 +9139,16 @@
       "lv1": "YearPicker",
       "lv2": "使い方",
       "lv3": "アイコンをカスタマイズする"
+    }
+  },
+  {
+    "title": "ドロップダウンに要素を追加する",
+    "type": "fragment",
+    "slug": "/components/forms/year-picker#ドロップダウンに要素を追加する",
+    "hierarchy": {
+      "lv1": "YearPicker",
+      "lv2": "使い方",
+      "lv3": "ドロップダウンに要素を追加する"
     }
   },
   {

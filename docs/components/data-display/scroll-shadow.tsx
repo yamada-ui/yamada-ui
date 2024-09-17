@@ -1,5 +1,6 @@
 import { Box } from "@yamada-ui/react"
-import { memo, type FC } from "react"
+import { memo } from "react"
+import type { FC } from "react"
 
 export const ScrollShadow: FC = memo(() => {
   return (

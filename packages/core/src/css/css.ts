@@ -10,36 +10,49 @@ import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 
-const isProcessSkip = (key: string) =>
-  processSkipProperties.includes(key as ProcessSkipProperty)
+function isProcessSkip(key: string) {
+  return processSkipProperties.includes(key as ProcessSkipProperty)
+}
+function expandColorMode(
+  key: string,
+  value: any[],
+  queries: BreakpointQueries,
+): Dict {
+  let computedCSS: Dict = {}
 
-const expandColorMode = (key: string, value: any[]): Dict => ({
-  [key]: value[0],
-  [pseudos._dark]: {
-    [key]: value[1],
-  },
-})
+  if (isObject(value[0])) {
+    computedCSS = expandResponsive(key, value[0], queries)
+  } else {
+    computedCSS[key] = value[0]
+  }
 
-const expandResponsive = (
+  computedCSS[pseudos._dark] = { [key]: value[1] }
+
+  return computedCSS
+}
+
+function expandResponsive(
   key: string,
   value: Dict,
   queries: BreakpointQueries,
-): Dict =>
-  queries.reduce((prev, { breakpoint, query }) => {
+): Dict {
+  return queries.reduce((prev, { breakpoint, query }) => {
     const breakpointValue = value[breakpoint]
 
     if (query) {
       if (breakpointValue) prev[query] = { [key]: breakpointValue }
+    } else if (isArray(breakpointValue)) {
+      prev = merge(prev, expandColorMode(key, breakpointValue, queries))
     } else {
-      prev[key] = value[breakpoint]
+      prev[key] = breakpointValue
     }
 
     return prev
   }, {} as Dict)
+}
 
-const expandCSS =
-  (css: Dict, isNested: boolean) =>
-  (theme: StyledTheme): Dict => {
+function expandCSS(css: Dict) {
+  return function (theme: StyledTheme): Dict {
     if (!theme.__breakpoints) return css
 
     const { isResponsive, queries } = theme.__breakpoints
@@ -51,29 +64,26 @@ const expandCSS =
 
       if (value == null) continue
 
-      if (isArray(value) && !(isProcessSkip(key) && !isNested)) {
-        computedCSS = merge(computedCSS, expandColorMode(key, value))
+      if (isArray(value) && !isProcessSkip(key)) {
+        computedCSS = merge(computedCSS, expandColorMode(key, value, queries))
 
         continue
       }
 
-      if (
-        isObject(value) &&
-        isResponsive(value) &&
-        !(isProcessSkip(key) && !isNested)
-      ) {
+      if (isObject(value) && isResponsive(value) && !isProcessSkip(key)) {
         computedCSS = merge(computedCSS, expandResponsive(key, value, queries))
 
         continue
       }
 
-      computedCSS[key] = value
+      computedCSS = merge(computedCSS, { [key]: value })
     }
 
     return computedCSS
   }
+}
 
-const parseVar = (value: any, theme: StyledTheme) => {
+function parseVar(value: any, theme: StyledTheme) {
   if (isArray(value) || isObject(value)) {
     return value
   } else if (isString(value)) {
@@ -91,15 +101,17 @@ const parseVar = (value: any, theme: StyledTheme) => {
   }
 }
 
-export const css =
-  (cssOrFunc: CSSObjectOrFunc | CSSUIObject) =>
-  (theme: StyledTheme, disableStyleProp?: (prop: string) => boolean) => {
-    const createCSS = (
+export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
+  return function (
+    theme: StyledTheme,
+    disableStyleProp?: (prop: string) => boolean,
+  ) {
+    function createCSS(
       cssOrFunc: CSSObjectOrFunc | CSSUIObject,
       isNested: boolean = false,
-    ): Dict => {
-      const cssObject = runIfFunc(cssOrFunc, theme)
-      const computedCSS = expandCSS(cssObject, isNested)(theme)
+    ): Dict {
+      const cssObj = runIfFunc(cssOrFunc, theme)
+      const computedCSS = expandCSS(cssObj)(theme)
 
       let resolvedCSS: Dict = {}
 
@@ -172,5 +184,6 @@ export const css =
 
     return createCSS(cssOrFunc)
   }
+}
 
 export type CSSFunction = typeof css

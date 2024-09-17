@@ -10,8 +10,9 @@ import { cx } from "@yamada-ui/utils"
 import type { LinkProps as NextLinkProps } from "next/link"
 import NextLink from "next/link"
 
-export type LinkProps = Merge<HTMLUIProps<"a">, Omit<NextLinkProps, "as">> &
-  ThemeProps<"Link">
+export interface LinkProps
+  extends Merge<HTMLUIProps<"a">, Omit<NextLinkProps, "as">>,
+    ThemeProps<"Link"> {}
 
 export const Link = forwardRef<LinkProps, "a">((props, ref) => {
   const [css, mergedProps] = useComponentStyle("Link", props)

@@ -1,7 +1,7 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 
-export type SpacerProps = HTMLUIProps<"div">
+export interface SpacerProps extends HTMLUIProps {}
 
 export const Spacer = ui("div", {
   baseStyle: {

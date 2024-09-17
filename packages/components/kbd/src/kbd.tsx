@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
-export type KbdProps = HTMLUIProps<"kbd"> & ThemeProps<"Kbd">
+export interface KbdProps extends HTMLUIProps<"kbd">, ThemeProps<"Kbd"> {}
 
 /**
  * `Kbd` is a component that represents keyboard input.

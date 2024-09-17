@@ -4,14 +4,14 @@ import { cx, createContext, dataAttr } from "@yamada-ui/utils"
 import type { UseStepReturn } from "./use-stepper"
 import { useStep, useStepperContext } from "./use-stepper"
 
-export type StepContext = Omit<UseStepReturn, "getStepProps">
+export interface StepContext extends Omit<UseStepReturn, "getStepProps"> {}
 
 export const [StepProvider, useStepContext] = createContext<StepContext>({
   name: "StepperContext",
   errorMessage: `useStepContext returned is 'undefined'. Seems you forgot to wrap the components in "<Step />"`,
 })
 
-export type StepProps = HTMLUIProps<"div">
+export interface StepProps extends HTMLUIProps {}
 
 export const Step = forwardRef<StepProps, "div">(
   ({ className, ...rest }, ref) => {

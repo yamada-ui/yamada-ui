@@ -2,7 +2,7 @@ import { HStack, VStack, Avatar, Text, Select, Option } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 
-export type UserCardProps = {
+export interface UserCardProps {
   avatarSrc: string
   username: string
   userId: string

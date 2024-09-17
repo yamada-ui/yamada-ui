@@ -4,7 +4,13 @@ import * as p from "@clack/prompts"
 import c from "chalk"
 import { CONSTANT } from "constant"
 import { config } from "dotenv"
-import type { JSDoc, SourceFile, TypeAliasDeclaration } from "typescript"
+import type {
+  JSDoc,
+  Node,
+  PropertyAssignment,
+  SourceFile,
+  TypeAliasDeclaration,
+} from "typescript"
 import {
   ScriptTarget,
   createSourceFile,
@@ -26,9 +32,8 @@ config({ path: CONSTANT.PATH.ENV })
 
 type Type = "style" | "pseudo"
 type TableType = "property" | "description"
-type Props = Record<
-  string,
-  {
+interface Props {
+  [key: string]: {
     shorthands?: string[]
     properties: string[]
     token?: string
@@ -36,11 +41,14 @@ type Props = Record<
     urls?: string[]
     deprecated?: boolean
   }
->
-type JSDocs = Record<
-  string,
-  { description?: string; urls?: string[]; deprecated?: boolean }
->
+}
+interface JSDocs {
+  [key: string]: {
+    description?: string
+    urls?: string[]
+    deprecated?: boolean
+  }
+}
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
   CONSTANT.PATH.ROOT,
@@ -90,12 +98,12 @@ const isStringObject = (value: string) => /^{|}$/.test(value)
 
 const hasJSDoc = (node: any): node is { jsDoc: JSDoc[] } => "jsDoc" in node
 
-const sortObject = (obj: Record<string, any>) =>
+const sortObject = (obj: { [key: string]: any }) =>
   Object.keys(obj)
     .sort()
     .reduce(
       (prev, key) => ({ ...prev, [key]: obj[key] }),
-      {} as Record<string, any>,
+      {} as { [key: string]: any },
     )
 
 const getProps: p.RequiredRunner = (type: Type) => async (_, s) => {
@@ -150,7 +158,16 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
   return props
 }
 
-const getData = (prop: string, value: string) => {
+const getProp = (sourceFile: SourceFile) => (property: PropertyAssignment) => {
+  const { name, initializer } = property
+
+  const prop = name.getText(sourceFile)
+  const value = initializer.getText(sourceFile).replace(/(\w+):/g, '"$1":')
+
+  return { prop, value }
+}
+
+const getConfig = (prop: string, value: string) => {
   if (isStringObject(value)) {
     value = value.replace(/\s*"transform":.*(?=,|\})/s, "")
     value = value.replace(/,\s*\n?\}/g, "}")
@@ -175,6 +192,16 @@ const getData = (prop: string, value: string) => {
   }
 }
 
+const getRelatedProp = (value: string) => {
+  if (isStringObject(value)) {
+    value = JSON.parse(value).properties
+  } else {
+    value = value.split(".")[1]
+  }
+
+  return value
+}
+
 const parseProps: p.RequiredRunner =
   (type: Type, source: string, targetStatements: string[]) => async (_, s) => {
     s.start(`Parsing the ${type} props`)
@@ -183,6 +210,33 @@ const parseProps: p.RequiredRunner =
 
     const props: Props = {}
     let jsDocs: JSDocs = {}
+
+    const getRecursiveProps = (isShorthand: boolean) => (node: Node) => {
+      const hasChildren = node.getChildCount(sourceFile) > 0
+
+      if (isPropertyAssignment(node)) {
+        const { prop, value } = getProp(sourceFile)(node)
+
+        if (type === "pseudo") {
+          props[prop] = { properties: [value.replace(/^"|"$/g, "")] }
+        } else if (!isShorthand) {
+          const config = getConfig(prop, value)
+
+          if (config) props[prop] = { ...props[prop], ...config }
+        } else {
+          const relatedProp = getRelatedProp(value)
+
+          const shorthands = props[relatedProp].shorthands ?? []
+
+          props[relatedProp] = {
+            ...props[relatedProp],
+            shorthands: [...shorthands, prop],
+          }
+        }
+      } else if (hasChildren) {
+        node.forEachChild(getRecursiveProps(isShorthand))
+      }
+    }
 
     sourceFile.forEachChild((node) => {
       if (isTypeAliasDeclaration(node)) {
@@ -204,48 +258,9 @@ const parseProps: p.RequiredRunner =
           if (!isExpression(initializer)) continue
 
           if (isObjectLiteralExpression(initializer)) {
-            initializer.properties.forEach((property) => {
-              if (!isPropertyAssignment(property)) return
-
-              const { name, initializer } = property
-
-              const prop = name.getText(sourceFile)
-              let value = initializer.getText(sourceFile)
-
-              value = value.replace(/(\w+):/g, '"$1":')
-
-              if (!isShorthand) {
-                const data = getData(prop, value)
-
-                if (data) props[prop] = { ...props[prop], ...data }
-              } else {
-                if (isStringObject(value)) {
-                  value = JSON.parse(value).properties
-                } else {
-                  value = value.split(".")[1]
-                }
-
-                props[value] = {
-                  ...(props[value] ?? {}),
-                  shorthands: [...(props[value].shorthands ?? []), prop],
-                }
-              }
-            })
+            initializer.properties.forEach(getRecursiveProps(isShorthand))
           } else {
-            initializer.forEachChild((node) => {
-              node.forEachChild((node) => {
-                if (!isPropertyAssignment(node)) return
-
-                const { name, initializer } = node
-
-                const prop = name.getText(sourceFile)
-                let value = initializer.getText(sourceFile)
-
-                value = value.replace(/^"|"$/g, "")
-
-                props[prop] = { properties: [value] }
-              })
-            })
+            initializer.forEachChild(getRecursiveProps(isShorthand))
           }
         }
       }
@@ -291,8 +306,6 @@ const generateTable = (props: Props, type: TableType) => (locale: Locale) => {
 
   const rows = Object.entries(props).map(
     ([prop, { description, properties, shorthands, token, urls }]) => {
-      console.log(prop, description)
-
       const columns: string[] = []
 
       const props = [prop, ...(shorthands ?? [])]
@@ -351,10 +364,12 @@ const main = async () => {
     ])(p, s)
 
     const aiProps = await parseProps("ui", _styleProps, ["uiStyles"])(p, s)
-    const pseudoProps = await parseProps("pseudo", _pseudoProps, ["pseudos"])(
-      p,
-      s,
-    )
+    const pseudoProps = await parseProps("pseudo", _pseudoProps, [
+      "pseudoElements",
+      "attributes",
+      "pseudoClasses",
+      "atRules",
+    ])(p, s)
 
     s.start(`Writing files`)
 

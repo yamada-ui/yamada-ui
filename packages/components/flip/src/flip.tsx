@@ -46,11 +46,14 @@ const variants: FlipMotion = {
   },
 }
 
+type FlipCurrentElement = "from" | "to"
+
 export type FlipOrientation = "horizontal" | "vertical"
 
 type FlipOptions = {
   from: ReactElement
   to: ReactElement
+  initialElement?: FlipCurrentElement
   /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
    *
@@ -67,7 +70,6 @@ export type FlipProps = Merge<MotionProps, FlipOptions> & ThemeProps<"Flip">
  * @see Docs https://yamada-ui.com/components/transitions/flip
  */
 export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
-  const [isVisible, setIsVisible] = useState(false)
   const [dimensions, setDimensions] = useState<{
     width?: number
     height?: number
@@ -79,6 +81,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   const {
     from,
     to,
+    initialElement = "from",
     orientation = "horizontal",
     transition = {
       type: "spring",
@@ -88,6 +91,8 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
     className,
     ...rest
   } = omitThemeProps(mergedProps)
+
+  const [isVisible, setIsVisible] = useState(initialElement === "to")
 
   const switchVisibility = () => {
     setIsVisible((prev) => !prev)

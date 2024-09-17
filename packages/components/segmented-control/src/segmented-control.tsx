@@ -1,14 +1,15 @@
 import type {
   CSSUIObject,
+  HTMLProps,
   HTMLUIProps,
+  PropGetter,
+  RequiredPropGetter,
   ThemeProps,
-  UIPropGetter,
-  RequiredUIPropGetter,
 } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -36,31 +37,35 @@ import type {
 } from "react"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
 
-export type SegmentedControlItem = SegmentedControlButtonProps & {
+export interface SegmentedControlItem extends SegmentedControlButtonProps {
   label?: string
 }
 
 const { DescendantsContextProvider, useDescendants, useDescendant } =
   createDescendant<HTMLButtonElement>()
 
-type SegmentedControlContext = {
+interface SegmentedControlContext {
   selectedValue: string
-  getInputProps: RequiredUIPropGetter<
-    "input",
-    { index: number; isDisabled?: boolean; isReadOnly?: boolean }
+  getInputProps: RequiredPropGetter<
+    HTMLProps<"input"> & {
+      index: number
+      isDisabled?: boolean
+      isReadOnly?: boolean
+    },
+    HTMLProps<"input">
   >
-  getLabelProps: RequiredUIPropGetter<
-    "label",
-    {
+  getLabelProps: RequiredPropGetter<
+    HTMLProps<"label"> & {
       value: string
       index: number
       isDisabled?: boolean
       isReadOnly?: boolean
       disabled?: boolean
       readOnly?: boolean
-    }
+    },
+    HTMLProps<"label">
   >
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 const [SegmentedControlProvider, useSegmentedControl] =
@@ -69,7 +74,7 @@ const [SegmentedControlProvider, useSegmentedControl] =
     name: "SegmentedControlContext",
   })
 
-type SegmentedControlOptions = {
+interface SegmentedControlOptions {
   /**
    * The HTML `name` attribute used for forms.
    */
@@ -106,12 +111,10 @@ type SegmentedControlOptions = {
   items?: SegmentedControlItem[]
 }
 
-export type SegmentedControlProps = Omit<
-  HTMLUIProps<"div">,
-  "value" | "defaultValue" | "onChange"
-> &
-  ThemeProps<"SegmentedControl"> &
-  SegmentedControlOptions
+export interface SegmentedControlProps
+  extends Omit<HTMLUIProps, "value" | "defaultValue" | "onChange">,
+    ThemeProps<"SegmentedControl">,
+    SegmentedControlOptions {}
 
 /**
  * `SegmentedControl` is a component used for allowing users to select one option from multiple choices.
@@ -120,7 +123,7 @@ export type SegmentedControlProps = Omit<
  */
 export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle(
+    const [styles, mergedProps] = useComponentMultiStyle(
       "SegmentedControl",
       props,
     )
@@ -185,7 +188,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
 
     const onBlur = useCallback(() => setFocusedIndex(-1), [])
 
-    const getContainerProps: UIPropGetter = useCallback(
+    const getContainerProps: PropGetter = useCallback(
       (props = {}, ref = null) => ({
         ...rest,
         ...props,
@@ -198,9 +201,13 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       [id, isDisabled, isReadOnly, onBlur, rest],
     )
 
-    const getInputProps: RequiredUIPropGetter<
-      "input",
-      { isDisabled?: boolean; isReadOnly?: boolean; index: number }
+    const getInputProps: RequiredPropGetter<
+      HTMLProps<"input"> & {
+        index: number
+        isDisabled?: boolean
+        isReadOnly?: boolean
+      },
+      HTMLUIProps<"input">
     > = useCallback(
       (
         {
@@ -249,16 +256,16 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
       [isDisabled, isReadOnly, selectedValue, id, name, focusedIndex, onChange],
     )
 
-    const getLabelProps: RequiredUIPropGetter<
-      "label",
-      {
+    const getLabelProps: RequiredPropGetter<
+      HTMLProps<"label"> & {
         value: string
         index: number
         isDisabled?: boolean
         isReadOnly?: boolean
         disabled?: boolean
         readOnly?: boolean
-      }
+      },
+      HTMLProps<"label">
     > = useCallback(
       (
         {
@@ -367,7 +374,7 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
   },
 )
 
-type SegmentedControlButtonOptions = {
+interface SegmentedControlButtonOptions {
   /**
    * The value of the segmented control button.
    */
@@ -382,12 +389,10 @@ type SegmentedControlButtonOptions = {
   motionProps?: MotionProps
 }
 
-export type SegmentedControlButtonProps = Omit<
-  HTMLUIProps<"label">,
-  "onChange"
-> &
-  Pick<SegmentedControlProps, "isDisabled" | "isReadOnly"> &
-  SegmentedControlButtonOptions
+export interface SegmentedControlButtonProps
+  extends Omit<HTMLUIProps<"label">, "onChange">,
+    Pick<SegmentedControlProps, "isDisabled" | "isReadOnly">,
+    SegmentedControlButtonOptions {}
 
 export const SegmentedControlButton = forwardRef<
   SegmentedControlButtonProps,
@@ -458,7 +463,9 @@ export const SegmentedControlButton = forwardRef<
 
 SegmentedControlButton.displayName = "SegmentedControlButton"
 
-type SegmentedControlCursorProps = MotionProps & { className?: string }
+interface SegmentedControlCursorProps extends MotionProps {
+  className?: string
+}
 
 const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
   className,

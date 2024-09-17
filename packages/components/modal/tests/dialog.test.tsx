@@ -1,33 +1,33 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, render, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 import { Dialog, DialogHeader, DialogFooter, DialogBody } from "../src"
 
 describe("<Dialog />", () => {
   const DialogOpenExample = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
       <>
-        <Button data-testid="OpenDialog" onClick={onOpen}>
+        <button data-testid="OpenDialog" onClick={() => setIsOpen(true)}>
           Open Dialog
-        </Button>
+        </button>
 
         <Dialog
           data-testid="Dialog"
           isOpen={isOpen}
-          onClose={onClose}
+          onClose={() => setIsOpen(false)}
           cancel={{
             children: "dialog-cancel",
           }}
-          onCancel={onClose}
+          onCancel={() => setIsOpen(false)}
           other={{
             children: "dialog-other",
           }}
-          onOther={onClose}
+          onOther={() => setIsOpen(false)}
           success={{
             children: "dialog-success",
           }}
-          onSuccess={onClose}
+          onSuccess={() => setIsOpen(false)}
         >
           <DialogHeader data-testid="DialogHeader">header</DialogHeader>
           <DialogBody data-testid="DialogBody">body</DialogBody>
@@ -38,30 +38,30 @@ describe("<Dialog />", () => {
   }
 
   const DialogCloseExample = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
       <>
-        <Button data-testid="OpenDialog" onClick={onOpen}>
+        <button data-testid="OpenDialog" onClick={() => setIsOpen(true)}>
           Open Dialog
-        </Button>
+        </button>
 
         <Dialog
           data-testid="Dialog"
           isOpen={isOpen}
-          onClose={onClose}
+          onClose={() => setIsOpen(false)}
           cancel={{
             children: "dialog-cancel",
           }}
-          onCancel={onClose}
+          onCancel={() => setIsOpen(false)}
           other={{
             children: "dialog-other",
           }}
-          onOther={onClose}
+          onOther={() => setIsOpen(false)}
           success={{
             children: "dialog-success",
           }}
-          onSuccess={onClose}
+          onSuccess={() => setIsOpen(false)}
         ></Dialog>
       </>
     )

@@ -4,7 +4,9 @@ import { useValue } from "@yamada-ui/use-value"
 import { createContext } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 
-type PaginationContext = Record<string, CSSUIObject>
+interface PaginationContext {
+  [key: string]: CSSUIObject
+}
 
 export const [PaginationProvider, usePaginationContext] =
   createContext<PaginationContext>({
@@ -12,7 +14,10 @@ export const [PaginationProvider, usePaginationContext] =
     name: "PaginationContext",
   })
 
-export type UsePaginationProps = {
+export const computedRange = (start: number, end: number) =>
+  Array.from({ length: end - start + 1 }, (_, index) => index + start)
+
+export interface UsePaginationProps {
   /**
    * The page of the pagination.
    * Should be less than `total` and greater than `1`.
@@ -51,9 +56,6 @@ export type UsePaginationProps = {
    */
   onChange?: (page: number) => void
 }
-
-export const computedRange = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (_, index) => index + start)
 
 export const usePagination = ({
   page,

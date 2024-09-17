@@ -30,7 +30,7 @@ import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
 import "dayjs/locale/ja"
 
-export type InsightsHeaderProps = StackProps & {}
+export interface InsightsHeaderProps extends StackProps {}
 
 export const InsightsHeader = memo(
   forwardRef<InsightsHeaderProps, "div">(({ ...rest }, ref) => {
@@ -61,7 +61,7 @@ export const InsightsHeader = memo(
 
 InsightsHeader.displayName = "InsightsHeader"
 
-type UserSelectProps = {}
+interface UserSelectProps {}
 
 const UserSelect: FC<UserSelectProps> = memo(() => {
   const { t } = useI18n()
@@ -74,7 +74,7 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
   const onChange = useCallback(
     (value: string[]) => {
       const { query } = router
-      const params = new URLSearchParams(query as Record<string, string>)
+      const params = new URLSearchParams(query as { [key: string]: string })
 
       const computedValue = value.join(",")
 
@@ -175,7 +175,7 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
 
 UserSelect.displayName = "UserSelect"
 
-type PeriodSelectProps = {}
+interface PeriodSelectProps {}
 
 const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   const { t, locale } = useI18n()
@@ -196,7 +196,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   const onChangeQuery = useCallback(
     (value: [(Date | undefined)?, (Date | undefined)?]) => {
       const { query } = router
-      const params = new URLSearchParams(query as Record<string, string>)
+      const params = new URLSearchParams(query as { [key: string]: string })
 
       let start: string | undefined
       let end: string | undefined

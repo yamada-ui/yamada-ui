@@ -219,6 +219,7 @@ export const customHook: Story = () => {
         <input {...getInputProps()} aria-label={props.value} />
 
         <Box
+          as="span"
           {...getIconProps()}
           cursor="pointer"
           borderWidth="1px"
@@ -251,7 +252,9 @@ export const customHook: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { radio: string }
+  interface Data {
+    radio: string
+  }
 
   const {
     control,
@@ -293,7 +296,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { radio: string }
+  interface Data {
+    radio: string
+  }
 
   const defaultValues: Data = {
     radio: "孫悟空",

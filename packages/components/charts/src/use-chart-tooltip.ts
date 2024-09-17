@@ -1,12 +1,14 @@
-import { useTheme, type CSSUIObject } from "@yamada-ui/core"
-import { splitObject, type Dict, cx } from "@yamada-ui/utils"
+import { useTheme } from "@yamada-ui/core"
+import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
+import { splitObject, cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
 import { getClassName } from "./chart-utils"
-import type { ChartPropGetter, TooltipProps } from "./chart.types"
+import type { TooltipProps } from "./chart.types"
 import { tooltipProperties } from "./rechart-properties"
 
-export type UseChartTooltipOptions = {
+export interface UseChartTooltipOptions {
   /**
    * Props passed down to recharts 'Tooltip' component.
    */
@@ -27,7 +29,7 @@ export type UseChartTooltipOptions = {
   labelFormatter?: (label: string) => string
 }
 
-type UseChartTooltipProps = UseChartTooltipOptions & {
+interface UseChartTooltipProps extends UseChartTooltipOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -48,10 +50,9 @@ export const useChartTooltip = ({
     tooltipProperties,
   )
 
-  const getTooltipProps: ChartPropGetter<
-    "div",
+  const getTooltipProps: PropGetter<
     Partial<Recharts.TooltipProps<any, any>>,
-    Omit<Recharts.TooltipProps<any, any>, "ref">
+    Recharts.TooltipProps<any, any>
   > = useCallback(
     (props, ref = null) => ({
       ref,

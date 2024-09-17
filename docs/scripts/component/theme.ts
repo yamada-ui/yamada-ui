@@ -7,12 +7,13 @@ import { config } from "dotenv"
 import { toCamelCase, toKebabCase } from "utils/string"
 import type { Data } from "scripts/utils"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
-import { locales, type Locale } from "utils/i18n"
+import { locales } from "utils/i18n"
+import type { Locale } from "utils/i18n"
 import { generateFrontMatter, getDirectoryPaths } from "./utils"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type Options = {
+interface Options {
   isMulti: boolean
   componentName: string
   baseComponents?: {
@@ -101,7 +102,7 @@ const getThemes: p.RequiredRunner = () => async (_, s) => {
 
   const dirents = await readdir(SOURCE_PATH, { withFileTypes: true })
 
-  const themes: Record<string, string> = {}
+  const themes: { [key: string]: string } = {}
 
   await Promise.all(
     dirents.map(async (dirent) => {
@@ -139,7 +140,7 @@ const getIsMulti = (theme: string) => {
   return !![...theme.matchAll(reg)].length
 }
 
-const getBaseComponents = (theme: string, paths: Record<string, string>) => {
+const getBaseComponents = (theme: string, paths: { [key: string]: string }) => {
   const componentNames =
     theme
       .match(/(mergeStyle|mergeMultiStyle)\(\s*([^{)]+)/)?.[2]
@@ -169,7 +170,7 @@ const generateContent = async ({
   data: Data
   theme: string
   locale: Locale
-  paths: Record<string, string>
+  paths: { [key: string]: string }
 }) => {
   const componentName = data.title
   const isMulti = getIsMulti(theme)
@@ -193,7 +194,7 @@ const generateContent = async ({
 }
 
 const generateMDXFiles: p.RequiredRunner =
-  (themes: Record<string, string>, paths: Record<string, string>) =>
+  (themes: { [key: string]: string }, paths: { [key: string]: string }) =>
   async (p, s) => {
     s.start(`Writing files "${DIST_PATH}"`)
 

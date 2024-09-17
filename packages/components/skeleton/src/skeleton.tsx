@@ -15,7 +15,7 @@ import { usePrevious } from "@yamada-ui/use-previous"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
 
-type SkeletonOptions = {
+interface SkeletonOptions {
   /**
    * The color at the animation start.
    */
@@ -50,9 +50,10 @@ type SkeletonOptions = {
   isFitContent?: boolean
 }
 
-export type SkeletonProps = HTMLUIProps<"div"> &
-  ThemeProps<"Skeleton"> &
-  SkeletonOptions
+export interface SkeletonProps
+  extends HTMLUIProps,
+    ThemeProps<"Skeleton">,
+    SkeletonOptions {}
 
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.

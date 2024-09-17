@@ -9,7 +9,7 @@ Maintaining flexible styles for components in a growing project can be a challen
 
 To solve this, Yamada UI structures each component with base styles and modifier styles. This allows for flexible style changes.
 
-Additionally, to manage the styles of your custom components with themes, Yamada UI provides `useComponentStyle` and `useMultiComponentStyle` to retrieve component styles.
+Additionally, to manage the styles of your custom components with themes, Yamada UI provides `useComponentStyle` and `useComponentMultiStyle` to retrieve component styles.
 
 ## Base Styles and Modifier Styles
 
@@ -372,7 +372,7 @@ export default { List }
 
 ## Creating Custom Components
 
-Depending on the project, you may need custom components. To manage the styles of these custom components with themes, Yamada UI provides `useComponentStyle` and `useMultiComponentStyle`.
+Depending on the project, you may need custom components. To manage the styles of these custom components with themes, Yamada UI provides `useComponentStyle` and `useComponentMultiStyle`.
 
 This time, we will create a single-part component called `Banner`.
 
@@ -449,7 +449,7 @@ export const Banner: FC<BannerProps> = (props) => {
 }
 ```
 
-If `Banner` were a multi-part component, you would call `useMultiComponentStyle` within the component, and the style reference would look like this:
+If `Banner` were a multi-part component, you would call `useComponentMultiStyle` within the component, and the style reference would look like this:
 
 ```tsx live=false highlight={6,17,21,22}
 import { FC } from "react"
@@ -457,7 +457,7 @@ import {
   ui,
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/react"
 
@@ -468,7 +468,7 @@ export type BannerProps = HTMLUIProps<"button"> &
   BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Banner", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Banner", props)
   const rest = omitThemeProps(mergedProps)
 
   return (

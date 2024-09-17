@@ -1,4 +1,3 @@
-import { Text } from "@yamada-ui/react"
 import { a11y, render, screen } from "@yamada-ui/test"
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../src"
 
@@ -11,13 +10,13 @@ describe("<Tabs />", () => {
         <Tab>Contact</Tab>
 
         <TabPanel>
-          <Text>This is home tab</Text>
+          <p>This is home tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is about tab</Text>
+          <p>This is about tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is contact tab</Text>
+          <p>This is contact tab</p>
         </TabPanel>
       </Tabs>,
     )
@@ -32,13 +31,13 @@ describe("<Tabs />", () => {
         <Tab>Contact</Tab>
 
         <TabPanel>
-          <Text>This is home tab</Text>
+          <p>This is home tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is about tab</Text>
+          <p>This is about tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is contact tab</Text>
+          <p>This is contact tab</p>
         </TabPanel>
       </Tabs>,
     )
@@ -61,13 +60,13 @@ describe("<Tabs />", () => {
         <Tab>Contact</Tab>
 
         <TabPanel>
-          <Text>This is home tab</Text>
+          <p>This is home tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is about tab</Text>
+          <p>This is about tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is contact tab</Text>
+          <p>This is contact tab</p>
         </TabPanel>
       </Tabs>,
     )
@@ -86,13 +85,13 @@ describe("<Tabs />", () => {
         <Tab>Contact</Tab>
 
         <TabPanel>
-          <Text>This is home tab</Text>
+          <p>This is home tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is about tab</Text>
+          <p>This is about tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is contact tab</Text>
+          <p>This is contact tab</p>
         </TabPanel>
       </Tabs>,
     )
@@ -111,13 +110,13 @@ describe("<Tabs />", () => {
         </TabList>
 
         <TabPanel>
-          <Text>This is home tab</Text>
+          <p>This is home tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is about tab</Text>
+          <p>This is about tab</p>
         </TabPanel>
         <TabPanel>
-          <Text>This is contact tab</Text>
+          <p>This is contact tab</p>
         </TabPanel>
       </Tabs>,
     )
@@ -135,13 +134,13 @@ describe("<Tabs />", () => {
 
         <TabPanels>
           <TabPanel>
-            <Text>This is home tab</Text>
+            <p>This is home tab</p>
           </TabPanel>
           <TabPanel>
-            <Text>This is about tab</Text>
+            <p>This is about tab</p>
           </TabPanel>
           <TabPanel>
-            <Text>This is contact tab</Text>
+            <p>This is contact tab</p>
           </TabPanel>
         </TabPanels>
       </Tabs>,

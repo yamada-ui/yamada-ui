@@ -9,7 +9,7 @@ export type EditorMode = "complete" | "insert" | "edit"
 
 export const DEFAULT_EDITOR_MODE: EditorMode = "complete"
 
-export type EditorProps = GridProps & {}
+export interface EditorProps extends GridProps {}
 
 export const Editor: FC<EditorProps> = memo(({ ...rest }) => {
   const onChangeModeRef = useRef<(mode: EditorMode) => void>(() => void 0)

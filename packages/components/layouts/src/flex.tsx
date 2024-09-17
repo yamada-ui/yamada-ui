@@ -1,38 +1,40 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject, CSSUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 
-type FlexOptions = {
+interface FlexOptions {
   /**
    * The CSS `flex-direction` property.
    */
-  direction?: CSSUIObject["flexDirection"]
+  direction?: CSSUIProps["flexDirection"]
   /**
    * The CSS `justify-content` property.
    */
-  justify?: CSSUIObject["justifyContent"]
+  justify?: CSSUIProps["justifyContent"]
   /**
    * The CSS `align-items` property.
    */
-  align?: CSSUIObject["alignItems"]
+  align?: CSSUIProps["alignItems"]
   /**
    * The CSS `flex-wrap` property.
    */
-  wrap?: CSSUIObject["flexWrap"]
+  wrap?: CSSUIProps["flexWrap"]
   /**
    * The CSS `flex-basis` property.
    */
-  basis?: CSSUIObject["flexBasis"]
+  basis?: CSSUIProps["flexBasis"]
   /**
    * The CSS `flex-grow` property.
    */
-  grow?: CSSUIObject["flexGrow"]
+  grow?: CSSUIProps["flexGrow"]
   /**
    * The CSS `flex-shrink` property.
    */
-  shrink?: CSSUIObject["flexShrink"]
+  shrink?: CSSUIProps["flexShrink"]
 }
 
-export type FlexProps = Omit<HTMLUIProps<"div">, "direction"> & FlexOptions
+export interface FlexProps
+  extends Omit<HTMLUIProps, "direction">,
+    FlexOptions {}
 
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.

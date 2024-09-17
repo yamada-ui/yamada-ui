@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -10,6 +10,7 @@ import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
+import type { Merge } from "@yamada-ui/utils"
 import {
   createContext,
   dataAttr,
@@ -39,7 +40,7 @@ import type {
   CSSProperties,
 } from "react"
 import { useCallback, useRef, useState, useEffect, useId } from "react"
-import type { OptionProps } from "./"
+import type { OptionProps } from "./option"
 
 const isTargetOption = (target: EventTarget | null): boolean =>
   isHTMLElement(target) && !!target?.getAttribute("role")?.startsWith("option")
@@ -49,14 +50,15 @@ export const {
   useDescendantsContext: useSelectDescendantsContext,
   useDescendants: useSelectDescendants,
   useDescendant: useSelectDescendant,
-} = createDescendant<HTMLElement>()
+} = createDescendant()
 
 export type MaybeValue = string | string[]
 
-type SelectContext = Omit<
-  UseSelectProps,
-  "value" | "defaultValue" | "onChange" | "isEmpty"
-> & {
+interface SelectContext
+  extends Omit<
+    UseSelectProps,
+    "value" | "defaultValue" | "onChange" | "isEmpty"
+  > {
   value: MaybeValue
   label: MaybeValue | undefined
   onChange: (newValue: string) => void
@@ -73,7 +75,7 @@ type SelectContext = Omit<
   containerRef: RefObject<HTMLDivElement>
   fieldRef: RefObject<HTMLDivElement>
   listRef: RefObject<HTMLUListElement>
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
@@ -81,60 +83,57 @@ export const [SelectProvider, useSelectContext] = createContext<SelectContext>({
   name: "SelectContext",
 })
 
-export type UseSelectProps<T extends MaybeValue = string> = Omit<
-  HTMLUIProps<"div">,
-  "defaultValue" | "onChange" | "offset"
-> &
-  ComboBoxProps &
-  FormControlOptions & {
-    /**
-     * The HTML `name` attribute used for forms.
-     */
-    name?: string
-    /**
-     * The placeholder of the select.
-     */
-    placeholder?: string
-    /**
-     * The value of the select.
-     */
-    value?: T
-    /**
-     * The initial value of the select.
-     */
-    defaultValue?: T
-    /**
-     * The callback invoked when value state changes.
-     */
-    onChange?: (value: T) => void
-    /**
-     * If `true`, the list element will be closed when value is selected.
-     *
-     * @default true
-     */
-    closeOnSelect?: boolean
-    /**
-     * If `true`, include placeholders in options.
-     *
-     * @default true
-     */
-    placeholderInOptions?: boolean
-    isEmpty: boolean
-    /**
-     * If `true`, the selected item(s) will be excluded from the list.
-     *
-     * @default false
-     */
-    omitSelectedValues?: boolean
-    /**
-     * The maximum selectable value.
-     */
-    maxSelectValues?: number
-    /**
-     * Props for select option element.
-     */
-    optionProps?: Omit<OptionProps, "value" | "children">
-  }
+export interface UseSelectProps<T extends MaybeValue = string>
+  extends Merge<Omit<HTMLUIProps, "defaultValue" | "onChange">, ComboBoxProps>,
+    FormControlOptions {
+  /**
+   * The HTML `name` attribute used for forms.
+   */
+  name?: string
+  /**
+   * The placeholder of the select.
+   */
+  placeholder?: string
+  /**
+   * The value of the select.
+   */
+  value?: T
+  /**
+   * The initial value of the select.
+   */
+  defaultValue?: T
+  /**
+   * The callback invoked when value state changes.
+   */
+  onChange?: (value: T) => void
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default true
+   */
+  closeOnSelect?: boolean
+  /**
+   * If `true`, include placeholders in options.
+   *
+   * @default true
+   */
+  placeholderInOptions?: boolean
+  isEmpty: boolean
+  /**
+   * If `true`, the selected item(s) will be excluded from the list.
+   *
+   * @default false
+   */
+  omitSelectedValues?: boolean
+  /**
+   * The maximum selectable value.
+   */
+  maxSelectValues?: number
+  /**
+   * Props for select option element.
+   */
+  optionProps?: Omit<OptionProps, "value" | "children">
+}
 
 export const useSelect = <T extends MaybeValue = string>(
   props: UseSelectProps<T>,
@@ -500,7 +499,7 @@ export const useSelect = <T extends MaybeValue = string>(
 
       if (formControlProps.disabled || formControlProps.readOnly) return
 
-      const actions: Record<string, Function | undefined> = {
+      const actions: { [key: string]: Function | undefined } = {
         ArrowDown: isFocused
           ? () => onFocusNext()
           : !isOpen
@@ -640,7 +639,7 @@ export const useSelect = <T extends MaybeValue = string>(
     ],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -652,7 +651,7 @@ export const useSelect = <T extends MaybeValue = string>(
     [containerProps, formControlProps, onBlur, onClick, rest],
   )
 
-  const getFieldProps: UIPropGetter = useCallback(
+  const getFieldProps: PropGetter = useCallback(
     ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
       ariaLabel ??=
         placeholder ??
@@ -770,7 +769,7 @@ export const useSelectList = () => {
 
   const id = useId()
 
-  const getListProps: UIPropGetter<"ul"> = useCallback(
+  const getListProps: PropGetter<"ul"> = useCallback(
     (props = {}, ref = null) => ({
       id,
       ref: mergeRefs(listRef, ref),
@@ -790,7 +789,7 @@ export const useSelectList = () => {
 
 export type UseSelectListReturn = ReturnType<typeof useSelectList>
 
-export type UseSelectOptionGroupProps = HTMLUIProps<"ul"> & {
+export interface UseSelectOptionGroupProps extends HTMLUIProps<"ul"> {
   /**
    * The label of the option group.
    */
@@ -825,7 +824,7 @@ export const useSelectOptionGroup = ({
 
   const [containerProps, groupProps] = splitObject(rest, layoutStyleProperties)
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter<"li"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
@@ -849,7 +848,7 @@ export const useSelectOptionGroup = ({
     [containerProps, isEmpty],
   )
 
-  const getGroupProps: UIPropGetter<"ul"> = useCallback(
+  const getGroupProps: PropGetter<"ul"> = useCallback(
     ({ "aria-label": ariaLabel, ...props } = {}, ref = null) => {
       ariaLabel ??= label
 
@@ -874,7 +873,7 @@ export const useSelectOptionGroup = ({
 
 export type UseSelectOptionGroupReturn = ReturnType<typeof useSelectOptionGroup>
 
-export type UseSelectOptionProps = Omit<HTMLUIProps<"li">, "value"> & {
+export interface UseSelectOptionProps extends Omit<HTMLUIProps<"li">, "value"> {
   /**
    * The value of the select option.
    */
@@ -1005,7 +1004,7 @@ export const useSelectOption = (
     if (isSelected) onChangeLabel(optionValue ?? "", false)
   }, [optionValue, isSelected, onChangeLabel])
 
-  const getOptionProps: UIPropGetter<"li"> = useCallback(
+  const getOptionProps: PropGetter<"li"> = useCallback(
     (props = {}) => {
       const style: CSSProperties = {
         border: "0px",

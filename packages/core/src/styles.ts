@@ -2225,7 +2225,7 @@ export const layoutStyleProperties = [
   "gridArea",
 ] as const
 
-export type StyleProps = {
+export interface StyleProps {
   /**
    * The CSS `accent-color` property.
    *

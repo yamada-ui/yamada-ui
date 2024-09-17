@@ -17,9 +17,11 @@ export type Path<T> = {
   [K in keyof T]-?: PathImpl<K, T[K]>
 }[keyof T]
 
-export type Dict<T = any> = Record<string, T>
+export interface Dict<T = any> {
+  [key: string]: T
+}
 
-export type ObjectLiteral = {}
+export interface ObjectLiteral {}
 
 export type StringLiteral = string & {}
 

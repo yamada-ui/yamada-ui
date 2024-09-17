@@ -1,7 +1,9 @@
 import type { ThemeToken } from "../theme"
-import { tokenToVar, type Transform } from "./utils"
+import { tokenToVar } from "./utils"
+import type { Transform } from "./utils"
 
-export const generateToken =
-  (token: ThemeToken): Transform =>
-  (value, theme) =>
-    tokenToVar(token, value)(theme)
+export function generateToken(token: ThemeToken): Transform {
+  return function (value, theme) {
+    return tokenToVar(token, value)(theme)
+  }
+}

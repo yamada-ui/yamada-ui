@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react"
 
-export type UseStepsProps = {
+export interface UseStepsProps {
   index?: number
   count?: number
 }

@@ -22,17 +22,18 @@ export const globalValues = new Set([
   "unset",
 ])
 
-export const isCSSFunction = (value: any) =>
-  isString(value) && value.includes("(") && value.includes(")")
+export function isCSSFunction(value: any) {
+  return isString(value) && value.includes("(") && value.includes(")")
+}
 
-export const getCSSFunction = (value: any) => {
+export function getCSSFunction(value: any) {
   const regex = /(^[a-z-A-Z]+)\((.*)\)/g
   const [, type, values] = regex.exec(value) ?? []
 
   return { type, values }
 }
 
-export const splitValues = (
+export function splitValues(
   values: string,
   cb: (
     current: string,
@@ -40,7 +41,7 @@ export const splitValues = (
     next: string | undefined,
   ) => boolean = (current) => current === ",",
   addSeparator = false,
-) => {
+) {
   const result = []
 
   let value = ""
@@ -70,17 +71,19 @@ export const splitValues = (
   return result.filter(Boolean)
 }
 
-export const isCSSVar = (value: string) => /^var\(--.+\)$/.test(value)
+export function isCSSVar(value: string) {
+  return /^var\(--.+\)$/.test(value)
+}
 
-export const analyzeCSSValue = (value: any) => {
+export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
 
   return { isUnitless: !unit, value, unit }
 }
 
-export const tokenToVar =
-  (token: ThemeToken, value: any) => (theme: StyledTheme) => {
+export function tokenToVar(token: ThemeToken, value: any) {
+  return function (theme: StyledTheme) {
     const match = isString(value)
       ? value.match(/fallback\(([^,)]+),?\s*([^]+)?\)/)
       : null
@@ -97,19 +100,24 @@ export const tokenToVar =
       return fallbackValue ?? value
     }
   }
+}
 
-export const mode =
-  <L extends any, D extends any>(light: L, dark: D) =>
-  (colorMode: ColorMode | undefined = "light"): L | D =>
-    colorMode === "light" ? light : dark
+export function mode<L, D>(light: L, dark: D) {
+  return function (colorMode: ColorMode | undefined = "light"): L | D {
+    return colorMode === "light" ? light : dark
+  }
+}
 
-export const keyframes = (...arg: CSSObject[]): Keyframes =>
-  emotionKeyframes(...arg)
+export function keyframes(...arg: CSSObject[]): Keyframes {
+  return emotionKeyframes(...arg)
+}
 
-const combineFunctions =
-  (a: Transform, b: Transform): Transform =>
-  (value, ...args) =>
-    b(a(value, ...args), ...args)
+function combineFunctions(a: Transform, b: Transform): Transform {
+  return function (value, ...args) {
+    return b(a(value, ...args), ...args)
+  }
+}
 
-export const pipe = (...transformers: Transform[]) =>
-  transformers.reduce(combineFunctions)
+export function pipe(...transformers: Transform[]) {
+  return transformers.reduce(combineFunctions)
+}

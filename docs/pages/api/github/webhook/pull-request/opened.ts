@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
-import { recursiveOctokit, type Constant, type Event } from "utils/github"
+import { recursiveOctokit } from "utils/github"
+import type { Constant, Event } from "utils/github"
 import type { APIHandler } from "utils/next"
 
 export const DISCORD_REVIEW_COMMENT =

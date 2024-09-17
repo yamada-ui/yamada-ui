@@ -3,7 +3,9 @@ import { forwardRef, IconButton, useClipboard, Tooltip } from "@yamada-ui/react"
 import type { ButtonProps } from "@yamada-ui/react"
 import { memo } from "react"
 
-export type CopyButtonProps = Omit<ButtonProps, "value"> & { value: string }
+export interface CopyButtonProps extends Omit<ButtonProps, "value"> {
+  value: string
+}
 
 export const CopyButton = memo(
   forwardRef<CopyButtonProps, "button">(({ value, ...rest }, ref) => {

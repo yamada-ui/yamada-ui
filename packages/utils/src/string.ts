@@ -1,9 +1,10 @@
 import type { StringLiteral } from "./index.types"
 
-export const escape = (value: string, replaceValue: string = ""): string =>
-  value.replace(/\s+/g, replaceValue)
+export function escape(value: string, replaceValue: string = ""): string {
+  return value.replace(/\s+/g, replaceValue)
+}
 
-export const antonym = (value: string): string => {
+export function antonym(value: string): string {
   switch (value) {
     case "top":
       return "bottom"
@@ -58,21 +59,24 @@ export const antonym = (value: string): string => {
   }
 }
 
-export const toCamelCase = (value: StringLiteral): string =>
-  value
+export function toCamelCase(value: StringLiteral): string {
+  return value
     .toLowerCase()
     .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
     .replace(/^(.)/, (_, val) => val.toUpperCase())
+}
 
-export const toKebabCase = (value: StringLiteral): string =>
-  value
+export function toKebabCase(value: StringLiteral): string {
+  return value
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, "$1-$2")
     .toLowerCase()
     .replace(/^-/, "")
+}
 
-export const toTitleCase = (value: StringLiteral): string =>
-  value
+export function toTitleCase(value: StringLiteral): string {
+  return value
     .replace(/([A-Z])/g, " $1")
     .replace(/[_-](.)/g, (_, val) => ` ${val.toUpperCase()}`)
     .replace(/^./, (str) => str.toUpperCase())
     .trim()
+}

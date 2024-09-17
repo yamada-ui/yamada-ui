@@ -12,7 +12,7 @@ import {
 import type { RefObject } from "react"
 import { useCallback, useRef } from "react"
 
-export type UseFocusOnHideProps = {
+export interface UseFocusOnHideProps {
   focusRef: RefObject<FocusableElement>
   shouldFocus?: boolean
   visible?: boolean
@@ -53,7 +53,7 @@ export const useFocusOnHide = (
   }, [shouldFocus, containerRef, focusRef])
 }
 
-export type UseFocusOnShowProps = {
+export interface UseFocusOnShowProps {
   visible?: boolean
   shouldFocus?: boolean
   preventScroll?: boolean
@@ -110,10 +110,10 @@ export const useFocusOnShow = <T extends HTMLElement>(
   useEventListener(element, "transitionend", onFocus)
 }
 
-export type UseFocusOnMouseDownProps = {
+export interface UseFocusOnMouseDownProps {
   ref: React.RefObject<HTMLElement>
   enabled?: boolean
-  elements?: Array<React.RefObject<HTMLElement> | HTMLElement | null>
+  elements?: (React.RefObject<HTMLElement> | HTMLElement | null)[]
 }
 
 export const useFocusOnPointerDown = ({

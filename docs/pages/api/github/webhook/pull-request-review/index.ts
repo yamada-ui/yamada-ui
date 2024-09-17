@@ -4,7 +4,7 @@ import { dismissed } from "./dismissed"
 import { submitted } from "./submitted"
 
 export const pullRequestReview: {
-  [key in PullRequestReviewAction]?: APIHandler
+  [_key in PullRequestReviewAction]?: APIHandler
 } = {
   submitted,
   dismissed,

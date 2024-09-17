@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, act, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 import type { ModalProps } from "../src"
 import {
   Modal,
@@ -10,24 +10,24 @@ import {
   ModalOverlay,
 } from "../src"
 
-type Props = {
+interface Props {
   placement?: ModalProps["placement"]
 }
 
 describe("<Modal />", () => {
   const ModalExample = ({ placement }: Props) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
 
     const modalHeaderId = "modal-header-id"
 
     return (
       <>
-        <Button onClick={onOpen}>Open Modal</Button>
+        <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
         <Modal
           isOpen={isOpen}
           placement={placement}
-          onClose={onClose}
+          onClose={() => setIsOpen(false)}
           aria-labelledby={modalHeaderId}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
@@ -35,10 +35,8 @@ describe("<Modal />", () => {
           <ModalBody>This is modal body</ModalBody>
 
           <ModalFooter>
-            <Button variant="ghost" onClick={onClose}>
-              Close Modal
-            </Button>
-            <Button colorScheme="primary">Wikipedia</Button>
+            <button onClick={() => setIsOpen(false)}>Close Modal</button>
+            <button>Wikipedia</button>
           </ModalFooter>
         </Modal>
       </>
@@ -46,14 +44,18 @@ describe("<Modal />", () => {
   }
 
   const ModalCloseExample = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
       <>
-        <Button data-testid="OpenModal" onClick={onOpen}>
+        <button data-testid="OpenModal" onClick={() => setIsOpen(true)}>
           Open Modal
-        </Button>
-        <Modal data-testid="Modal" isOpen={isOpen} onClose={onClose}>
+        </button>
+        <Modal
+          data-testid="Modal"
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        >
           <ModalCloseButton data-testid="ModalCloseButton" />
           <ModalOverlay
             data-testid="ModalOverlay"
@@ -65,10 +67,10 @@ describe("<Modal />", () => {
           <ModalBody data-testid="ModalBody">This is modal body</ModalBody>
 
           <ModalFooter data-testid="ModalFooter">
-            <Button data-testid="ModalClose" variant="ghost" onClick={onClose}>
+            <button data-testid="ModalClose" onClick={() => setIsOpen(false)}>
               Close
-            </Button>
-            <Button colorScheme="primary">Wikipedia</Button>
+            </button>
+            <button>Wikipedia</button>
           </ModalFooter>
         </Modal>
       </>
@@ -105,19 +107,19 @@ describe("<Modal />", () => {
 
   test("should render nested modal", async () => {
     const NestedModal = () => {
-      const firstControls = useDisclosure()
-      const secondControls = useDisclosure()
+      const [isPrimaryOpen, setIsPrimaryOpen] = useState(false)
+      const [isSecondaryOpen, setIsSecondaryOpen] = useState(false)
 
       const primaryModalHeaderId = "primary-modal-header-id"
       const secondaryModalHeaderId = "secondary-modal-header-id"
 
       return (
         <>
-          <Button onClick={firstControls.onOpen}>Open Modal</Button>
+          <button onClick={() => setIsPrimaryOpen(true)}>Open Modal</button>
 
           <Modal
-            isOpen={firstControls.isOpen}
-            onClose={firstControls.onClose}
+            isOpen={isPrimaryOpen}
+            onClose={() => setIsPrimaryOpen(false)}
             aria-labelledby={primaryModalHeaderId}
           >
             <ModalHeader id={primaryModalHeaderId}>Modal Header</ModalHeader>
@@ -125,17 +127,17 @@ describe("<Modal />", () => {
             <ModalBody>This is modal body</ModalBody>
 
             <ModalFooter>
-              <Button variant="ghost" onClick={firstControls.onClose}>
+              <button onClick={() => setIsPrimaryOpen(false)}>
                 Close Primary Modal
-              </Button>
-              <Button colorScheme="primary" onClick={secondControls.onOpen}>
+              </button>
+              <button onClick={() => setIsSecondaryOpen(true)}>
                 Secondary Modal Open
-              </Button>
+              </button>
             </ModalFooter>
 
             <Modal
-              isOpen={secondControls.isOpen}
-              onClose={secondControls.onClose}
+              isOpen={isSecondaryOpen}
+              onClose={() => setIsSecondaryOpen(false)}
               size="sm"
               aria-labelledby={secondaryModalHeaderId}
             >
@@ -146,10 +148,8 @@ describe("<Modal />", () => {
               <ModalBody>This is a secondary modal</ModalBody>
 
               <ModalFooter>
-                <Button variant="ghost" onClick={secondControls.onClose}>
-                  Close
-                </Button>
-                <Button colorScheme="primary">Wikipedia</Button>
+                <button onClick={() => setIsSecondaryOpen(false)}>Close</button>
+                <button>Wikipedia</button>
               </ModalFooter>
             </Modal>
           </Modal>

@@ -205,7 +205,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { saturationSlider: Hsv }
+  interface Data {
+    saturationSlider: Hsv
+  }
 
   const defaultValues: Data = {
     saturationSlider: [180, 1, 1],

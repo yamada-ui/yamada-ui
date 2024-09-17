@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import { createDescendant } from "@yamada-ui/use-descendant"
 import { createContext, mergeRefs } from "@yamada-ui/utils"
 import { useCallback } from "react"
@@ -7,7 +7,7 @@ type StepperContext = Omit<
   UseStepperReturn,
   "descendants" | "getContainerProps"
 > & {
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 export const {
@@ -22,7 +22,7 @@ export const [StepperProvider, useStepperContext] =
     errorMessage: `useStepperContext returned is 'undefined'. Seems you forgot to wrap the components in "<Stepper />"`,
   })
 
-export type UseStepperProps = HTMLUIProps<"div"> & {
+export interface UseStepperProps extends HTMLUIProps {
   /**
    * The active step index.
    */
@@ -59,7 +59,7 @@ export const useStepper = ({
     [index],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
       ...props,
@@ -91,7 +91,7 @@ export const useStep = () => {
 
   const status = getStepStatus(index)
 
-  const getStepProps: UIPropGetter = useCallback(
+  const getStepProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref: mergeRefs(ref, register),

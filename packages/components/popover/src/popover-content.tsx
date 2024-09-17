@@ -1,25 +1,23 @@
 import type { CSSUIObject, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
-import type {
-  UIMotionComponent,
-  MotionPropsWithoutChildren,
-} from "@yamada-ui/motion"
+import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { cx, findChildren, funcAll, getValidChildren } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import type { PropsWithChildren } from "react"
 import { usePopover } from "./popover"
-import type { PopoverProps } from "."
-import { PopoverCloseButton } from "."
+import type { PopoverProps } from "./popover"
+import { PopoverCloseButton } from "./popover-close-button"
 
-export type PopoverContentProps = MotionPropsWithoutChildren<"section"> &
-  PropsWithChildren & {
-    /**
-     * The props of the container element.
-     */
-    containerProps?: Omit<HTMLUIProps<"div">, "children">
-  }
+export interface PopoverContentProps
+  extends MotionPropsWithoutChildren<"section">,
+    PropsWithChildren {
+  /**
+   * The props of the container element.
+   */
+  containerProps?: Omit<HTMLUIProps, "children">
+}
 
 const getPopoverContentProps = (
   animation: PopoverProps["animation"] = "scale",
@@ -98,10 +96,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
       PopoverCloseButton,
     )
 
-    const Component = useMemo(
-      () => motion(as) as unknown as UIMotionComponent<"section">,
-      [as],
-    )
+    const Component = useMemo(() => motion(as), [as])
 
     const css = __css ?? styles.container ?? {}
 

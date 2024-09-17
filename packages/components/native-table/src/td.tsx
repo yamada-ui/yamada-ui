@@ -3,7 +3,7 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useTableStyles } from "./native-table"
 
-type TdOptions = {
+interface TdOptions {
   /**
    * Aligns the cell content to the right.
    *
@@ -12,7 +12,7 @@ type TdOptions = {
   isNumeric?: boolean
 }
 
-export type TdProps = HTMLUIProps<"td"> & TdOptions
+export interface TdProps extends HTMLUIProps<"td">, TdOptions {}
 
 export const Td = forwardRef<TdProps, "td">(
   ({ className, isNumeric, ...rest }, ref) => {

@@ -1,4 +1,4 @@
-import type { CSSUIObject, UIPropGetter } from "@yamada-ui/core"
+import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
   isActiveElement,
@@ -14,7 +14,9 @@ import type { UseCalendarProps } from "./use-calendar"
 import type { UseCalendarPickerProps } from "./use-calendar-picker"
 import { useCalendarPicker } from "./use-calendar-picker"
 
-type DatePickerContext = Record<string, CSSUIObject>
+interface DatePickerContext {
+  [key: string]: CSSUIObject
+}
 
 export const [DatePickerProvider, useDatePickerContext] =
   createContext<DatePickerContext>({
@@ -22,12 +24,13 @@ export const [DatePickerProvider, useDatePickerContext] =
     name: "DatePickerContext",
   })
 
-type CalendarProps = Omit<
-  UseCalendarProps<Date | undefined>,
-  "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
->
+interface CalendarProps
+  extends Omit<
+    UseCalendarProps<Date | undefined>,
+    "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
+  > {}
 
-type UseDatePickerOptions = {
+interface UseDatePickerOptions {
   /**
    * If `true`, the calendar component will be closed when value is selected.
    *
@@ -36,8 +39,9 @@ type UseDatePickerOptions = {
   closeOnSelect?: boolean
 }
 
-export type UseDatePickerProps = UseCalendarPickerProps<CalendarProps> &
-  UseDatePickerOptions
+export interface UseDatePickerProps
+  extends UseCalendarPickerProps<CalendarProps>,
+    UseDatePickerOptions {}
 
 export const useDatePicker = ({
   value: valueProp,
@@ -129,7 +133,7 @@ export const useDatePicker = ({
     setInputValue(inputValue)
   }, [value])
 
-  const getInputProps: UIPropGetter = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,

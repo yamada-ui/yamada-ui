@@ -1,16 +1,11 @@
-import {
-  filterUndefined,
-  isArray,
-  toKebabCase,
-  type Dict,
-} from "@yamada-ui/utils"
-import type { StyledTheme } from "../theme.types"
+import { filterUndefined, isArray, toKebabCase } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import type { Transform } from "./utils"
 import { tokenToVar } from "./utils"
 
 export const generateAtRule =
   (identifier: string): Transform =>
-  (values: any[], theme: StyledTheme) => {
+  (values, theme) => {
     if (!isArray(values)) return values
 
     return values.reduce<Dict>(

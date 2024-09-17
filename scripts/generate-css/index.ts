@@ -1,3 +1,4 @@
+import { writeFile } from "fs/promises"
 import * as p from "@clack/prompts"
 import c from "chalk"
 import type * as CSS from "csstype"
@@ -84,7 +85,7 @@ const getCSSProperties = (doc: Document) => {
 }
 
 const getCSSTypes = async () => {
-  const typeInfo: Record<string, { type: string; deprecated: boolean }> = {}
+  const typeInfo: { [key: string]: { type: string; deprecated: boolean } } = {}
 
   const paths = await glob("node_modules/**/csstype/index.d.ts")
 
@@ -245,7 +246,9 @@ const main = async () => {
 
     s.start(`Writing file "${OUT_PATH}"`)
 
-    const pickedStyles = await generateStyles(styles)
+    const { data, pickedStyles } = await generateStyles(styles)
+
+    await writeFile(OUT_PATH, data)
 
     s.stop(`Wrote file "${OUT_PATH}"`)
 

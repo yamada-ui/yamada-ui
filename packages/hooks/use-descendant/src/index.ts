@@ -254,12 +254,12 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
 
 export type DescendantsManager<
   T extends HTMLElement,
-  K extends Record<string, any> = {},
+  K extends { [key: string]: any } = {},
 > = ReturnType<typeof descendantsManager<T, K>>
 
 const useDescendants = <
   T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = {},
+  K extends { [key: string]: any } = {},
 >() => {
   const descendants = useRef(descendantsManager<T, K>())
 
@@ -281,7 +281,7 @@ const [DescendantsContextProvider, useDescendantsContext] =
 
 const useDescendant = <
   T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = {},
+  K extends { [key: string]: any } = {},
 >(
   options?: DescendantOptions<T, K>,
 ) => {
@@ -322,7 +322,7 @@ const useDescendant = <
 
 export const createDescendant = <
   T extends HTMLElement = HTMLElement,
-  K extends Record<string, any> = {},
+  K extends { [key: string]: any } = {},
 >() =>
   ({
     DescendantsContextProvider: cast<Provider<DescendantsManager<T, K>>>(

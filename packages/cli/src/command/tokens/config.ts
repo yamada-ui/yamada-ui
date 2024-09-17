@@ -1,4 +1,4 @@
-export type Config = {
+export interface Config {
   key: string
   maxScanDepth?: number
   omitScanKeys?: string[]

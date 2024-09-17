@@ -34,7 +34,7 @@ const defaultListVariants: MotionVariants = {
   exit: { opacity: 0, height: 0 },
 }
 
-type SnacksOptions = {
+interface SnacksOptions {
   snacks: UseSnacksReturn["snacks"]
   /**
    * The variants of the snacks container.
@@ -56,10 +56,14 @@ type SnacksOptions = {
   listProps?: MotionProps<"ul">
 }
 
-export type SnacksProps = Omit<MotionProps<"div">, "direction"> &
-  SnacksOptions &
-  Pick<UseSnacksOptions, "direction" | "startIndex"> &
-  Pick<Required<ThemeConfig>["snacks"], "variants" | "gutter" | "negateMargin">
+export interface SnacksProps
+  extends Omit<MotionProps, "direction" | "whileHover">,
+    SnacksOptions,
+    Pick<UseSnacksOptions, "direction" | "startIndex">,
+    Pick<
+      Required<ThemeConfig>["snacks"],
+      "variants" | "gutter" | "negateMargin"
+    > {}
 
 export const Snacks = motionForwardRef<SnacksProps, "div">(
   (
@@ -212,7 +216,7 @@ const defaultItemVariants: MotionVariants = {
   },
 }
 
-type SnackComponentOptions = {
+interface SnackComponentOptions {
   index: number
   lastIndex: number
 }

@@ -171,7 +171,9 @@ export const useResize: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { textarea: string }
+  interface Data {
+    textarea: string
+  }
 
   const {
     register,
@@ -207,7 +209,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { textarea: string }
+  interface Data {
+    textarea: string
+  }
 
   const defaultValues: Data = {
     textarea: "孫悟空",

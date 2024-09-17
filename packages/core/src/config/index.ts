@@ -27,7 +27,7 @@ type CSSProperties = Union<
   | keyof CSS.ObsoleteProperties
 >
 
-export type StyleConfig = {
+export interface StyleConfig {
   static?: CSSObject
   isProcessResult?: boolean
   isProcessSkip?: boolean
@@ -39,7 +39,9 @@ export type StyleConfig = {
   transform?: Transform
 }
 
-export type StyleConfigs = Record<string, StyleConfig | true>
+export interface StyleConfigs {
+  [key: string]: StyleConfig | true
+}
 
 export const transforms = {
   px: (value: any) => {

@@ -9,7 +9,7 @@ import { toBoolean } from "utils/boolean"
 
 const EditableCodeBlock = dynamic(() => import("./editable-code-block"))
 
-type Children = {
+interface Children {
   props: {
     className?: string
     title?: string
@@ -22,10 +22,8 @@ type Children = {
   }
 }
 
-export type PreProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLPreElement>,
-  HTMLPreElement
->
+export interface PreProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> {}
 
 export const Pre: FC<PreProps> = ({ children }) => {
   let {
@@ -60,11 +58,10 @@ export const Pre: FC<PreProps> = ({ children }) => {
   return <CodeBlock {...{ title, code, language, theme, highlight }} />
 }
 
-export type CodeBlockProps = {
+export interface CodeBlockProps extends HighlightProps, BoxProps {
   title?: string
   innerProps?: BoxProps
-} & HighlightProps &
-  BoxProps
+}
 
 export const CodeBlock: FC<CodeBlockProps> = ({
   title,
@@ -132,7 +129,7 @@ const computeHighlight = (highlight: string) => {
   }
 }
 
-export type HighlightProps = Omit<ReactHighlightProps, "children"> & {
+export interface HighlightProps extends Omit<ReactHighlightProps, "children"> {
   highlight?: string
 }
 

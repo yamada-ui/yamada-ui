@@ -1,6 +1,6 @@
 import type { Properties } from "."
 
-type OverrideTypes = Partial<Record<Properties, string>>
+type OverrideTypes = { [key in Properties]?: string }
 
 export const overrideTypes: OverrideTypes = {
   strokeDashoffset: `CSS.Property.StrokeDashoffset | number`,

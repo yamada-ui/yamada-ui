@@ -1,4 +1,9 @@
-import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
+import type {
+  CSSUIProps,
+  CSSUIObject,
+  PropGetter,
+  RequiredPropGetter,
+} from "@yamada-ui/core"
 import { getVar, useTheme } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
@@ -6,18 +11,13 @@ import { useCallback, useMemo, useState } from "react"
 import type { ComponentPropsWithoutRef } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import type {
-  ChartPropGetter,
-  RadialBarProps,
-  RadialChartProps,
-  RequiredChartPropGetter,
-} from "./chart.types"
+import type { RadialBarProps, RadialChartProps } from "./chart.types"
 import {
   radialBarProperties,
   radialChartProperties,
 } from "./rechart-properties"
 
-export type UseRadialChartOptions = {
+export interface UseRadialChartOptions {
   /**
    * Chart data.
    */
@@ -72,7 +72,7 @@ export type UseRadialChartOptions = {
   fillOpacity?: number | [number, number]
 }
 
-type UseRadialChartProps = UseRadialChartOptions & {
+interface UseRadialChartProps extends UseRadialChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -182,8 +182,7 @@ export const useRadialChart = ({
     ],
   )
 
-  const getRadialChartProps: ChartPropGetter<
-    "div",
+  const getRadialChartProps: PropGetter<
     ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>,
     ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>
   > = useCallback(
@@ -209,8 +208,7 @@ export const useRadialChart = ({
     ],
   )
 
-  const getRadialBarProps: RequiredChartPropGetter<
-    "div",
+  const getRadialBarProps: RequiredPropGetter<
     Partial<Recharts.RadialBarProps>,
     Omit<Recharts.RadialBarProps, "ref">
   > = useCallback(

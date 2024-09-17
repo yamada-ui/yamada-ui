@@ -9,7 +9,7 @@ import sync, { cancelSync, getFrameData } from "framesync"
 import type { RefObject } from "react"
 import { useEffect, useRef } from "react"
 
-type PanEventInfo = {
+interface PanEventInfo {
   point: Point
   delta: Point
   offset: Point
@@ -18,11 +18,13 @@ type PanEventInfo = {
 
 type PanEventHandler = (ev: AnyPointerEvent, info: PanEventInfo) => void
 
-type TimestampedPoint = Point & { timestamp: number }
+interface TimestampedPoint extends Point {
+  timestamp: number
+}
 
 type PanEventHistory = TimestampedPoint[]
 
-type PanEventHandlers = {
+interface PanEventHandlers {
   onSessionStart: PanEventHandler
   onSessionEnd: PanEventHandler
   onStart: PanEventHandler
@@ -194,7 +196,7 @@ const panEvent = (
 
 type ReturnPanEvent = ReturnType<typeof panEvent>
 
-export type UsePanEventProps = {
+export interface UsePanEventProps {
   onMove?: PanEventHandler
   onStart?: PanEventHandler
   onEnd?: PanEventHandler

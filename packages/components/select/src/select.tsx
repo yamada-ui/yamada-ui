@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -11,6 +11,10 @@ import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { cx, getValidChildren, runIfFunc } from "@yamada-ui/utils"
 import type { FC, ReactElement, ReactNode } from "react"
+import type { OptionProps } from "./option"
+import { Option } from "./option"
+import type { OptionGroupProps } from "./option-group"
+import { OptionGroup } from "./option-group"
 import type { SelectIconProps } from "./select-icon"
 import { SelectIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -22,24 +26,19 @@ import {
   SelectProvider,
   useSelectContext,
 } from "./use-select"
-import type { OptionProps } from "./"
-import { OptionGroup, Option } from "./"
 
-type SelectBaseItem = Omit<OptionProps, "value" | "children">
-
-type SelectItemWithValue = SelectBaseItem & {
+interface SelectItemWithValue extends OptionProps {
   label?: ReactNode
   value?: string
 }
 
-type SelectItemWithItems = SelectBaseItem & {
-  label?: string
+interface SelectItemWithItems extends OptionGroupProps {
   items?: SelectItemWithValue[]
 }
 
 export type SelectItem = SelectItemWithValue | SelectItemWithItems
 
-type SelectOptions = {
+interface SelectOptions {
   /**
    * If provided, generate options based on items.
    *
@@ -57,11 +56,11 @@ type SelectOptions = {
   /**
    * Props for select container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for select content element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for select list element.
    */
@@ -91,10 +90,7 @@ type SelectOptions = {
 }
 
 export type SelectProps = ThemeProps<"Select"> &
-  Omit<
-    UseSelectProps<string>,
-    "isEmpty" | "maxSelectValues" | "omitSelectedValues"
-  > &
+  Omit<UseSelectProps, "isEmpty" | "maxSelectValues" | "omitSelectedValues"> &
   SelectOptions
 
 /**
@@ -103,7 +99,7 @@ export type SelectProps = ThemeProps<"Select"> &
  * @see Docs https://yamada-ui.com/components/forms/select
  */
 export const Select = forwardRef<SelectProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Select", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Select", props)
   let {
     className,
     placeholder,
@@ -145,11 +141,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
           const { label, items = [], ...props } = item
 
           return (
-            <OptionGroup
-              key={i}
-              label={label ?? ""}
-              {...(props as HTMLUIProps<"ul">)}
-            >
+            <OptionGroup key={i} label={label ?? ""} {...props}>
               {items.map(({ label, value, ...props }, i) => (
                 <Option key={i} value={value} {...props}>
                   {label}
@@ -250,7 +242,7 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   )
 })
 
-type SelectFieldProps = HTMLUIProps<"div">
+interface SelectFieldProps extends HTMLUIProps {}
 
 const SelectField = forwardRef<SelectFieldProps, "div">(
   ({ className, isTruncated = true, lineClamp, h, minH, ...rest }, ref) => {

@@ -3,11 +3,12 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import type { UseClickableProps } from "@yamada-ui/use-clickable"
 import { useClickable } from "@yamada-ui/use-clickable"
+import type { Merge } from "@yamada-ui/utils"
 import { ariaAttr, cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
-import { useTabsContext, useTabsDescendant } from "./tabs"
+import { useTabsContext, useTabsDescendant } from "./tabs-context"
 
-export type TabProps = HTMLUIProps<"button"> &
-  Omit<UseClickableProps<HTMLButtonElement>, "ref" | "color">
+export interface TabProps
+  extends Merge<UseClickableProps<HTMLButtonElement>, HTMLUIProps<"button">> {}
 
 export const Tab = forwardRef<TabProps, "button">(
   (

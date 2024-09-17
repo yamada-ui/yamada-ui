@@ -16,7 +16,7 @@ import { css } from "./css"
 
 type ParsedValue = string | number | undefined
 
-type Variable = {
+interface Variable {
   variable: string
   reference: string
 }

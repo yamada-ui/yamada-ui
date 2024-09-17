@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/rest"
-import { recursiveOctokit, type Event } from "utils/github"
+import { recursiveOctokit } from "utils/github"
+import type { Event } from "utils/github"
 import type { APIHandler } from "utils/next"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })

@@ -1,3 +1,4 @@
+import { ui } from "@yamada-ui/core"
 import { a11y, render, screen, renderHook, fireEvent } from "@yamada-ui/test"
 import type { RadioItem } from "../src"
 import { Radio, RadioGroup, useRadioGroup } from "../src"
@@ -93,7 +94,7 @@ describe("<RadioGroup />", () => {
     const { result } = renderHook(() => useRadioGroup({ defaultValue: "1" }))
 
     const { user } = render(
-      <div
+      <ui.div
         {...result.current.getContainerProps()}
         onFocus={result.current.onFocus}
       >
@@ -105,7 +106,7 @@ describe("<RadioGroup />", () => {
           <input type="radio" />
           Radio 2
         </label>
-      </div>,
+      </ui.div>,
     )
 
     await user.tab()
@@ -121,7 +122,7 @@ describe("<RadioGroup />", () => {
     const { result } = renderHook(() => useRadioGroup({ defaultValue: "2" }))
 
     const { user } = render(
-      <div
+      <ui.div
         {...result.current.getContainerProps()}
         onFocus={result.current.onFocus}
       >
@@ -133,7 +134,7 @@ describe("<RadioGroup />", () => {
           <input type="radio" />
           Radio 2
         </label>
-      </div>,
+      </ui.div>,
     )
 
     await user.tab()

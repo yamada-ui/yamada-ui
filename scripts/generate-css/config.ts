@@ -18,7 +18,7 @@ const generateTransform = (...transforms: TransformOptions[]) => {
   return `transform: ${transform}`
 }
 
-type GetConfigOptions = {
+interface GetConfigOptions {
   properties?:
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]

@@ -2,10 +2,10 @@ import type { CSSUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
-import type { SkeletonProps } from "./"
-import { Skeleton } from "./"
+import type { SkeletonProps } from "./skeleton"
+import { Skeleton } from "./skeleton"
 
-type SkeletonTextOptions = {
+interface SkeletonTextOptions {
   /**
    * The CSS `gap` property.
    */
@@ -16,8 +16,9 @@ type SkeletonTextOptions = {
   textHeight?: CSSUIProps["height"]
 }
 
-export type SkeletonTextProps = Omit<SkeletonProps, "isFitContent"> &
-  SkeletonTextOptions
+export interface SkeletonTextProps
+  extends Omit<SkeletonProps, "isFitContent">,
+    SkeletonTextOptions {}
 
 export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
   (

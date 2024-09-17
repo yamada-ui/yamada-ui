@@ -11,10 +11,6 @@
     },
     "dev": {
       "cache": false
-    },
-    "typecheck": {
-      "dependsOn": ["^typecheck"],
-      "cache": false
     }
   },
   "globalDependencies": ["tsconfig.json"]

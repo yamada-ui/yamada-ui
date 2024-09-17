@@ -5,23 +5,23 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { MotionTransition } from "@yamada-ui/motion"
 import { motion } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
 import { cx, dataAttr } from "@yamada-ui/utils"
-import type { DOMAttributes, InputHTMLAttributes, ReactElement } from "react"
+import type { InputHTMLAttributes, ReactElement } from "react"
 import { cloneElement } from "react"
 
-export type SwitchIconProps = {
+export interface SwitchIconProps {
   isChecked?: boolean
   isFocused?: boolean
   isHovered?: boolean
   isActive?: boolean
 }
 
-type SwitchOptions = {
+interface SwitchOptions {
   /**
    * The switch icon to use.
    */
@@ -46,11 +46,12 @@ type SwitchOptions = {
   transition?: MotionTransition
 }
 
-export type SwitchProps = Merge<
-  HTMLUIProps<"label">,
-  Omit<UseCheckboxProps, "isIndeterminate"> & SwitchOptions
-> &
-  ThemeProps<"Switch">
+export interface SwitchProps
+  extends Merge<
+      HTMLUIProps<"label">,
+      Omit<UseCheckboxProps, "isIndeterminate"> & SwitchOptions
+    >,
+    ThemeProps<"Switch"> {}
 
 /**
  * `Switch` is a component used to toggle between on and off states.
@@ -58,7 +59,7 @@ export type SwitchProps = Merge<
  * @see Docs https://yamada-ui.com/components/forms/switch
  */
 export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Switch", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Switch", props)
   const {
     className,
     gap = "0.5rem",
@@ -148,7 +149,7 @@ export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
         <ui.span
           className={cx("ui-switch__label", className)}
           __css={{ ...styles.label }}
-          {...getLabelProps(labelProps as DOMAttributes<HTMLElement>)}
+          {...getLabelProps(labelProps)}
         >
           {children}
         </ui.span>

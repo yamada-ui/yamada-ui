@@ -1,4 +1,5 @@
-import type { UIPropGetter, RequiredUIPropGetter } from "@yamada-ui/core"
+import type { HTMLProps, RequiredPropGetter } from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
 import {
   isArray,
   handlerAll,
@@ -17,6 +18,7 @@ import { createRef, useCallback, useRef } from "react"
 import {
   disableAllTabIndex,
   getFocused,
+  getFormattedLabel,
   getRangeFirstDay,
   getRangeLastDay,
   isAfterDate,
@@ -53,6 +55,8 @@ export const useMonth = () => {
     enableRange,
     hoveredValue,
     setHoveredValue,
+    locale,
+    dateFormat,
   } = useCalendarContext()
 
   const beforeMonth = useRef<Date | null>(null)
@@ -185,7 +189,7 @@ export const useMonth = () => {
       const [lastIndex, lastMonth, lastDay] =
         getRangeLastDay(dayRefs)?.split("-").map(Number) ?? []
 
-      const actions: Record<string, Function | undefined> = {
+      const actions: { [key: string]: Function | undefined } = {
         ArrowDown: () => {
           const lastOfMonthDay = dayjs(new Date(year, focusedMonth))
             .endOf("month")
@@ -268,7 +272,7 @@ export const useMonth = () => {
   )
 
   const onClick = useCallback(
-    (ev: MouseEvent<Element>, newValue: Date) => {
+    (ev: MouseEvent, newValue: Date) => {
       ev.preventDefault()
       ev.stopPropagation()
 
@@ -326,27 +330,38 @@ export const useMonth = () => {
     dayRefs.current.clear()
   })
 
-  const getContainerProps: UIPropGetter = useCallback(
-    (props = {}) => ({
-      ...props,
-      "aria-multiselectable": ariaAttr(isMulti),
-      onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
-    }),
-    [onKeyDown, isMulti],
+  const getGridProps: RequiredPropGetter<
+    Merge<HTMLProps, { month: Date }>,
+    HTMLProps
+  > = useCallback(
+    ({ month, ...props }) => {
+      const label = getFormattedLabel(month, locale, dateFormat)
+
+      return {
+        role: "grid",
+        "aria-label": label,
+        "aria-multiselectable": ariaAttr(isMulti),
+        ...props,
+        onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
+      }
+    },
+    [onKeyDown, isMulti, locale, dateFormat],
   )
 
-  const getButtonProps: RequiredUIPropGetter<
-    "button",
-    { value: Date; month: Date; index: number },
-    {
-      isSelected: boolean
-      isWeekend: boolean
-      isOutside: boolean
-      isStart: boolean
-      isEnd: boolean
-      isBetween: boolean
-      isHidden: boolean
-    }
+  const getButtonProps: RequiredPropGetter<
+    Merge<HTMLProps<"button">, { value: Date; month: Date; index: number }>,
+    Merge<
+      HTMLProps<"button">,
+      {
+        isSelected: boolean
+        isWeekend: boolean
+        isOutside: boolean
+        isStart: boolean
+        isEnd: boolean
+        isBetween: boolean
+        isHidden: boolean
+      }
+    >
   > = useCallback(
     ({ value, month, index, ...props }, ref = null) => {
       const isControlled = beforeMonth.current instanceof Date
@@ -453,7 +468,7 @@ export const useMonth = () => {
     ],
   )
 
-  return { getContainerProps, getButtonProps }
+  return { getGridProps, getButtonProps }
 }
 
 export type UseMonthReturn = ReturnType<typeof useMonth>

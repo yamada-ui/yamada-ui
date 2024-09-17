@@ -318,9 +318,9 @@ describe("useEditableControl", () => {
         <CustomControls />
       </Editable>,
     )
-    expect(getByTestId("edit")).toHaveAttribute("type", "ui.button")
-    expect(getByTestId("submit")).toHaveAttribute("type", "ui.button")
-    expect(getByTestId("cancel")).toHaveAttribute("type", "ui.button")
+    expect(getByTestId("edit")).toHaveAttribute("type", "button")
+    expect(getByTestId("submit")).toHaveAttribute("type", "button")
+    expect(getByTestId("cancel")).toHaveAttribute("type", "button")
     await act(async () => fireEvent.click(getByTestId("submit")))
     await act(async () => fireEvent.click(getByTestId("cancel")))
     expect(onSubmit).toHaveBeenCalledWith("")

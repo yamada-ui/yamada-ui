@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, act, fireEvent, render, screen, TestIcon } from "@yamada-ui/test"
 import {
   Menu,
   MenuButton,
@@ -62,10 +62,10 @@ describe("<Menu />", () => {
       <Menu>
         <MenuButton>Menu</MenuButton>
         <MenuList>
-          <MenuItem command="⌘N" icon={<span data-testid="plus-icon">+</span>}>
+          <MenuItem command="⌘N" icon={<TestIcon data-testid="plus-icon" />}>
             Add item
           </MenuItem>
-          <MenuItem command="⌘E" icon={<span data-testid="plus-icon">+</span>}>
+          <MenuItem command="⌘E" icon={<TestIcon data-testid="edit-icon" />}>
             Edit item
           </MenuItem>
         </MenuList>

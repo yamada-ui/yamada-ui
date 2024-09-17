@@ -1,4 +1,6 @@
-import type { Transform } from "./utils"
+import type { Dict } from "@yamada-ui/utils"
+import type { CSSFunction } from "../css"
+import type { StyledTheme } from "../theme.types"
 
 const transformValues = [
   "rotate(var(--ui-rotate, 0))",
@@ -8,7 +10,12 @@ const transformValues = [
   "skewY(var(--ui-skew-y, 0))",
 ]
 
-export const transform: Transform = (value) => {
+export function transform(
+  value: any,
+  _theme: StyledTheme,
+  _css?: CSSFunction,
+  _prev?: Dict,
+) {
   if (value === "auto")
     return [
       "translateX(var(--ui-translate-x, 0))",

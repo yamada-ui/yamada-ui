@@ -1,4 +1,3 @@
-import { Button } from "@yamada-ui/react"
 import { render, screen, waitFor } from "@yamada-ui/test"
 import { useElementSize, useResizeObserver } from "../src"
 
@@ -31,9 +30,9 @@ describe("useResizeObserver", () => {
   const ButtonWithSize = () => {
     const [ref, rect] = useResizeObserver()
     return (
-      <Button ref={ref}>
+      <button ref={ref}>
         {rect.width} x {rect.height}
-      </Button>
+      </button>
     )
   }
 
@@ -79,9 +78,9 @@ describe("useElementSize", () => {
   const ButtonWithSize = () => {
     const { ref, width, height } = useElementSize()
     return (
-      <Button ref={ref}>
+      <button ref={ref}>
         {width} x {height}
-      </Button>
+      </button>
     )
   }
 

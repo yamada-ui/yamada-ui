@@ -1,2 +1,3 @@
-export const filterEmpty = <T extends any[]>(array: T) =>
-  array.filter((value) => value != null)
+export function filterEmpty<T extends any[]>(array: T) {
+  return array.filter((value) => value != null)
+}

@@ -2,7 +2,7 @@ import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -31,14 +31,12 @@ import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import { useChartReferenceLine } from "./use-chart-reference-line"
-import {
-  useChartTooltip,
-  type UseChartTooltipOptions,
-} from "./use-chart-tooltip"
+import { useChartTooltip } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useLineChart } from "./use-line-chart"
 import type { UseLineChartOptions } from "./use-line-chart"
 
-type LineChartOptions = {
+interface LineChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -53,16 +51,17 @@ type LineChartOptions = {
   withLegend?: boolean
 }
 
-export type LineChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"LineChart"> &
-  LineChartOptions &
-  UseChartProps &
-  UseChartAxisOptions &
-  UseChartReferenceLineOptions &
-  UseChartGridOptions &
-  UseChartTooltipOptions &
-  UseChartLegendProps &
-  UseLineChartOptions
+export interface LineChartProps
+  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity" | "strokeDasharray">,
+    ThemeProps<"LineChart">,
+    LineChartOptions,
+    UseChartProps,
+    UseChartAxisOptions,
+    UseChartReferenceLineOptions,
+    UseChartGridOptions,
+    UseChartTooltipOptions,
+    UseChartLegendProps,
+    UseLineChartOptions {}
 
 /**
  * `LineChart` is a component for drawing line charts to compare multiple sets of data.
@@ -70,7 +69,7 @@ export type LineChartProps = HTMLUIProps<"div"> &
  * @see Docs https://yamada-ui.com/components/data-display/line-chart
  */
 export const LineChart = forwardRef<LineChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("LineChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("LineChart", props)
   const {
     className,
     containerProps,

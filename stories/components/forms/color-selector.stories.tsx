@@ -260,7 +260,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { colorPicker: string }
+  interface Data {
+    colorPicker: string
+  }
 
   const defaultValues: Data = {
     colorPicker: "#4387f4ff",

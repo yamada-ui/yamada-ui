@@ -213,7 +213,9 @@ export const isInvalid: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { pinInput: string }
+  interface Data {
+    pinInput: string
+  }
 
   const {
     control,
@@ -252,7 +254,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { pinInput: string }
+  interface Data {
+    pinInput: string
+  }
 
   const defaultValues: Data = {
     pinInput: "5",

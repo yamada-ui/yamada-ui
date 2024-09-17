@@ -9,7 +9,7 @@ import { CloseIcon } from "@yamada-ui/icon"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
 import { cx } from "@yamada-ui/utils"
 
-type CloseButtonOptions = {
+interface CloseButtonOptions {
   /**
    * If `true`, the button is disabled.
    *
@@ -30,9 +30,10 @@ type CloseButtonOptions = {
   isRounded?: boolean
 }
 
-export type CloseButtonProps = HTMLUIProps<"button"> &
-  ThemeProps<"CloseButton"> &
-  CloseButtonOptions
+export interface CloseButtonProps
+  extends HTMLUIProps<"button">,
+    ThemeProps<"CloseButton">,
+    CloseButtonOptions {}
 
 /**
  * `CloseButton` is a component used primarily to trigger the close functionality of a component.

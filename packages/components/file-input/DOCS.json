@@ -11,12 +11,12 @@
       "description": "The component that displays uploaded files."
     },
     "errorBorderColor": {
-      "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
+      "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | [...]",
       "required": false,
       "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
-      "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | ColorModeArray<...>",
+      "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | [...]",
       "required": false,
       "description": "The border color when the input is focused."
     },

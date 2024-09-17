@@ -7,7 +7,7 @@ import {
 import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 
-export type UseControllableStateProps<T> = {
+export interface UseControllableStateProps<T> {
   value?: T
   defaultValue?: T | (() => T)
   onChange?: (value: T) => void

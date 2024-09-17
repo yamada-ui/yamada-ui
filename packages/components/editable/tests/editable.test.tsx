@@ -1,3 +1,4 @@
+import { ui } from "@yamada-ui/core"
 import { a11y, act, fireEvent, render } from "@yamada-ui/test"
 import {
   Editable,
@@ -294,15 +295,15 @@ describe("useEditableControl", () => {
 
       return (
         <>
-          <button data-testid="edit" {...getEditProps()}>
+          <ui.button data-testid="edit" {...getEditProps()}>
             Edit
-          </button>
-          <button data-testid="submit" {...getSubmitProps()}>
+          </ui.button>
+          <ui.button data-testid="submit" {...getSubmitProps()}>
             Submit
-          </button>
-          <button data-testid="cancel" {...getCancelProps()}>
+          </ui.button>
+          <ui.button data-testid="cancel" {...getCancelProps()}>
             Cancel
-          </button>
+          </ui.button>
         </>
       )
     }
@@ -333,17 +334,17 @@ describe("useEditableControl", () => {
 
       return isEditing ? (
         <>
-          <button data-testid="submit" {...getSubmitProps()}>
+          <ui.button data-testid="submit" {...getSubmitProps()}>
             Submit
-          </button>
-          <button data-testid="cancel" {...getCancelProps()}>
+          </ui.button>
+          <ui.button data-testid="cancel" {...getCancelProps()}>
             Cancel
-          </button>
+          </ui.button>
         </>
       ) : (
-        <button data-testid="edit" {...getEditProps()}>
+        <ui.button data-testid="edit" {...getEditProps()}>
           Edit
-        </button>
+        </ui.button>
       )
     }
     const { getByTestId } = render(

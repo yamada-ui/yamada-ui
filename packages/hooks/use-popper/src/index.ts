@@ -5,9 +5,8 @@ import type {
   Placement,
 } from "@popperjs/core"
 import { createPopper } from "@popperjs/core"
-import type { Token } from "@yamada-ui/core"
+import type { Token, PropGetter } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
-import type { PropGetter } from "@yamada-ui/utils"
 import { mergeRefs } from "@yamada-ui/utils"
 import { useCallback, useEffect, useRef } from "react"
 
@@ -27,7 +26,7 @@ export const popperProperties = [
   "modifiers",
 ] as const
 
-export type UsePopperProps = {
+export interface UsePopperProps {
   /**
    * Whether the popper.js should be enabled.
    *
@@ -94,7 +93,7 @@ export type UsePopperProps = {
    *
    * @see Docs https://popper.js.org/docs/v2/modifiers/
    */
-  modifiers?: Array<Partial<Modifier<string, any>>>
+  modifiers?: Partial<Modifier<string, any>>[]
 }
 
 const defaultEventListeners = {
@@ -102,7 +101,7 @@ const defaultEventListeners = {
   resize: true,
 }
 
-const transforms: Record<string, string> = {
+const transforms: { [key: string]: string } = {
   top: "bottom center",
   "top-start": "bottom left",
   "top-end": "bottom right",

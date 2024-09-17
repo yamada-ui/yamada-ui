@@ -200,7 +200,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { rating: number }
+  interface Data {
+    rating: number
+  }
 
   const defaultValues: Data = {
     rating: 3,

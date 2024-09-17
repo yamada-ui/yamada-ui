@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useStat } from "./stat"
+import { useStat } from "./stat-context"
 
-export type StatNumberProps = HTMLUIProps<"dd">
+export interface StatNumberProps extends HTMLUIProps<"dd"> {}
 
 export const StatNumber = forwardRef<StatNumberProps, "dd">(
   ({ className, ...rest }, ref) => {

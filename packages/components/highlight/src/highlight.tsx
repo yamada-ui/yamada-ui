@@ -16,9 +16,15 @@ import { cx, isArray } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
 import { Fragment, useMemo } from "react"
 
-type Options = { text: string; query: string | string[] }
+interface Options {
+  text: string
+  query: string | string[]
+}
 
-type Chunk = { text: string; match: boolean }
+interface Chunk {
+  text: string
+  match: boolean
+}
 
 const escapeRegexp = (term: string): string =>
   term.replace(/[|\\{}()[\]^$+*?.-]/g, (char: string) => `\\${char}`)
@@ -43,7 +49,7 @@ const highlightWords = ({ text, query }: Options): Chunk[] => {
 export const useHighlight = ({ text, query }: Options): Chunk[] =>
   useMemo(() => highlightWords({ text, query }), [text, query])
 
-export type HighlightProps = TextProps & {
+export interface HighlightProps extends Omit<TextProps, "children"> {
   /**
    * If `true`, `Fragment` is used for rendering.
    *
@@ -94,7 +100,7 @@ export const Highlight: FC<HighlightProps> = ({
   )
 }
 
-export type MarkProps = HTMLUIProps<"mark"> & ThemeProps<"Mark">
+export interface MarkProps extends HTMLUIProps<"mark">, ThemeProps<"Mark"> {}
 
 export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Mark", props)

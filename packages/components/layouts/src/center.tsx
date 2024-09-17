@@ -1,7 +1,7 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 
-export type CenterProps = HTMLUIProps<"div">
+export interface CenterProps extends HTMLUIProps {}
 
 /**
  * `Center` is a component that aligns the child elements in the center within the component.

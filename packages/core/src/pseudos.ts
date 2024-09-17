@@ -1,4 +1,38 @@
+import type { Length, Replace } from "@yamada-ui/utils"
 import type { CSSUIObject } from "./css"
+
+type ReplaceSelectors<
+  Y extends string[],
+  M extends string,
+  D extends string,
+  H extends string,
+> = Y extends [infer R extends string, ...infer T extends string[]]
+  ? `${Replace<Replace<M, D, R>, ",", `${H},`>}${Length<T> extends 0 ? "" : `${H}, `}${ReplaceSelectors<T, M, D, H>}`
+  : H
+
+const toGroup = <Y extends string>(selectors: Y) =>
+  ["[role=group]", "[data-group]", ".group"]
+    .map((prefix) => merge(parse(selectors), prefix, " &"))
+    .join(", ") as ReplaceSelectors<
+    ["[role=group]", "[data-group]", ".group"],
+    Y,
+    "&",
+    " &"
+  >
+
+const toPeer = <Y extends string>(selectors: Y) =>
+  ["[data-peer]", ".peer"]
+    .map((prefix) => merge(parse(selectors), prefix, " ~ &"))
+    .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "&", " ~ &">
+
+const parse = (selectors: string) =>
+  selectors.split(",").map((selector) => selector.trim().slice(1))
+
+const merge = (
+  selectors: string[],
+  prefix: string = "&",
+  suffix: string = "",
+) => selectors.map((selector) => `${prefix}${selector}${suffix}`).join(", ")
 
 export const attributes = {
   /**
@@ -102,7 +136,7 @@ export type Attributes = typeof attributes
 export type AttributeProperty = keyof Attributes
 export type AttributeSelector = Attributes[AttributeProperty]
 export type AttributeProps = {
-  [K in keyof Attributes]?: CSSUIObject
+  [K in AttributeProperty]?: CSSUIObject
 }
 
 export const attributeProperties = Object.keys(
@@ -191,7 +225,7 @@ export type PseudoElements = typeof pseudoElements
 export type PseudoElementProperty = keyof PseudoElements
 export type PseudoElementSelector = PseudoElements[PseudoElementProperty]
 export type PseudoElementProps = {
-  [K in keyof PseudoElements]?: CSSUIObject
+  [K in PseudoElementProperty]?: CSSUIObject
 }
 
 export const pseudoElementProperties = Object.keys(
@@ -505,7 +539,7 @@ export type PseudoClasses = typeof pseudoClasses
 export type PseudoClassProperty = keyof PseudoClasses
 export type PseudoClassSelector = PseudoClasses[PseudoClassProperty]
 export type PseudoClassProps = {
-  [K in keyof PseudoClasses]?: CSSUIObject
+  [K in PseudoClassProperty]?: CSSUIObject
 }
 
 export const pseudoClassProperties = Object.keys(
@@ -514,6 +548,10 @@ export const pseudoClassProperties = Object.keys(
 export const pseudoClassSelectors = Object.values(pseudoClasses)
 
 export const atRules = {
+  /**
+   * The CSS `@media print` media query.
+   */
+  _print: "@media print",
   /**
    * The CSS `@media (prefers-color-scheme: light)` media query.
    */
@@ -548,18 +586,274 @@ export type AtRuleProps = {
 export const atRuleProperties = Object.keys(atRules) as AtRuleProperty[]
 export const atRuleSelectors = Object.values(atRules)
 
+export const groupAttributes = {
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is selected.
+   */
+  _groupSelected: toGroup(attributes._selected),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is expanded.
+   */
+  _groupExpanded: toGroup(attributes._expanded),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loading.
+   */
+  _groupLoading: toGroup(attributes._loading),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is accepted.
+   */
+  _groupAccept: toGroup(attributes._accept),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is rejected.
+   */
+  _groupReject: toGroup(attributes._reject),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is idle.
+   */
+  _groupIdle: toGroup(attributes._idle),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is loaded.
+   */
+  _groupLoaded: toGroup(attributes._loaded),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is grabbed.
+   */
+  _groupGrabbed: toGroup(attributes._grabbed),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is pressed.
+   */
+  _groupPressed: toGroup(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is enabled.
+   */
+  _groupEnabled: toGroup(pseudoClasses._enabled),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is disabled.
+   */
+  _groupDisabled: toGroup(pseudoClasses._disabled),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
+   */
+  _groupReadOnly: toGroup(pseudoClasses._readOnly),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-write.
+   */
+  _groupReadWrite: toGroup(pseudoClasses._readWrite),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` has a placeholder shown.
+   */
+  _groupPlaceholderShown: toGroup(pseudoClasses._placeholderShown),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is checked.
+   */
+  _groupChecked: toGroup(pseudoClasses._checked),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is blank.
+   */
+  _groupBlank: toGroup(pseudoClasses._blank),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is valid.
+   */
+  _groupValid: toGroup(pseudoClasses._valid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is invalid.
+   */
+  _groupInvalid: toGroup(pseudoClasses._invalid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is required.
+   */
+  _groupRequired: toGroup(pseudoClasses._required),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is optional.
+   */
+  _groupOptional: toGroup(pseudoClasses._optional),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is user-invalid.
+   */
+  _groupUserInvalid: toGroup(pseudoClasses._userInvalid),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is hovered.
+   */
+  _groupHover: toGroup(pseudoClasses._hover),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is active.
+   */
+  _groupActive: toGroup(pseudoClasses._active),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused.
+   */
+  _groupFocus: toGroup(pseudoClasses._focus),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focused-visible.
+   */
+  _groupFocusVisible: toGroup(pseudoClasses._focusVisible),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is focus-within.
+   */
+  _groupFocusWithin: toGroup(pseudoClasses._focusWithin),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is vertical.
+   */
+  _groupVertical: toGroup(pseudoClasses._vertical),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is horizontal.
+   */
+  _groupHorizontal: toGroup(pseudoClasses._horizontal),
+} as const
+
+export type GroupAttributes = typeof groupAttributes
+export type GroupAttributeProperty = keyof GroupAttributes
+export type GroupAttributeSelector = GroupAttributes[GroupAttributeProperty]
+export type GroupAttributeProps = {
+  [K in GroupAttributeProperty]?: CSSUIObject
+}
+
+export const groupAttributeProperties = Object.keys(
+  groupAttributes,
+) as GroupAttributeProperty[]
+export const groupAttributeSelectors = Object.values(groupAttributes)
+
+export const peerAttributes = {
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is selected.
+   */
+  _peerSelected: toPeer(attributes._selected),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is expanded.
+   */
+  _peerExpanded: toPeer(attributes._expanded),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is loading.
+   */
+  _peerLoading: toPeer(attributes._loading),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is accepted.
+   */
+  _peerAccept: toPeer(attributes._accept),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is rejected.
+   */
+  _peerReject: toPeer(attributes._reject),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is idle.
+   */
+  _peerIdle: toPeer(attributes._idle),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is loaded.
+   */
+  _peerLoaded: toPeer(attributes._loaded),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is grabbed.
+   */
+  _peerGrabbed: toPeer(attributes._grabbed),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is pressed.
+   */
+  _peerPressed: toPeer(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is enabled.
+   */
+  _peerEnabled: toPeer(pseudoClasses._enabled),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is disabled.
+   */
+  _peerDisabled: toPeer(pseudoClasses._disabled),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
+   */
+  _peerReadOnly: toPeer(pseudoClasses._readOnly),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is read-write.
+   */
+  _peerReadWrite: toPeer(pseudoClasses._readWrite),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` has a placeholder shown.
+   */
+  _peerPlaceholderShown: toPeer(pseudoClasses._placeholderShown),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is checked.
+   */
+  _peerChecked: toPeer(pseudoClasses._checked),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is blank.
+   */
+  _peerBlank: toPeer(pseudoClasses._blank),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is valid.
+   */
+  _peerValid: toPeer(pseudoClasses._valid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is invalid.
+   */
+  _peerInvalid: toPeer(pseudoClasses._invalid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is required.
+   */
+  _peerRequired: toPeer(pseudoClasses._required),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is optional.
+   */
+  _peerOptional: toPeer(pseudoClasses._optional),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is user-invalid.
+   */
+  _peerUserInvalid: toPeer(pseudoClasses._userInvalid),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is hovered.
+   */
+  _peerHover: toPeer(pseudoClasses._hover),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is active.
+   */
+  _peerActive: toPeer(pseudoClasses._active),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is focused.
+   */
+  _peerFocus: toPeer(pseudoClasses._focus),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is focused-visible.
+   */
+  _peerFocusVisible: toPeer(pseudoClasses._focusVisible),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is focus-within.
+   */
+  _peerFocusWithin: toPeer(pseudoClasses._focusWithin),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is vertical.
+   */
+  _peerVertical: toPeer(pseudoClasses._vertical),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is horizontal.
+   */
+  _peerHorizontal: toPeer(pseudoClasses._horizontal),
+} as const
+
+export type PeerAttributes = typeof peerAttributes
+export type PeerAttributeProperty = keyof PeerAttributes
+export type PeerAttributeSelector = PeerAttributes[PeerAttributeProperty]
+export type PeerAttributeProps = {
+  [K in PeerAttributeProperty]?: CSSUIObject
+}
+
+export const peerAttributeProperties = Object.keys(
+  peerAttributes,
+) as PeerAttributeProperty[]
+export const peerAttributeSelectors = Object.values(peerAttributes)
+
 export const pseudos = {
   ...pseudoElements,
   ...attributes,
   ...pseudoClasses,
   ...atRules,
+  ...groupAttributes,
+  ...peerAttributes,
 } as const
 
 export type Pseudos = typeof pseudos
 export type PseudoProperty = keyof Pseudos
 export type PseudoSelector = Pseudos[PseudoProperty]
 export type PseudoProps = {
-  [K in keyof Pseudos]?: CSSUIObject
+  [K in PseudoProperty]?: CSSUIObject
 }
 
 export const pseudoProperties = Object.keys(pseudos) as PseudoProperty[]

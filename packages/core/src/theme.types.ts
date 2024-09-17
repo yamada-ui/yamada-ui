@@ -21,7 +21,7 @@ import type { UITheme } from "./ui-theme.types"
 
 export type BreakpointDirection = "up" | "down"
 
-export type BreakpointOptions = {
+export interface BreakpointOptions {
   /**
    * The `breakpoint` direction controls the responsive design approach.
    *
@@ -73,15 +73,17 @@ export type NoticePlacement =
   | "bottom-left"
   | "bottom-right"
 
-export type AlertStatuses = Partial<
-  Record<AlertStatus, { icon?: FC; colorScheme?: Theme["colorSchemes"] }>
->
+export type AlertStatuses = {
+  [key in AlertStatus]?: { icon?: FC; colorScheme?: Theme["colorSchemes"] }
+}
 
 export type AlertStatus = "info" | "success" | "warning" | "error" | "loading"
 
-export type NoticeComponentProps = NoticeConfigOptions & { onClose: () => void }
+export interface NoticeComponentProps extends NoticeConfigOptions {
+  onClose: () => void
+}
 
-export type NoticeConfigOptions = ThemeProps<"Alert"> & {
+export interface NoticeConfigOptions extends ThemeProps<"Alert"> {
   /**
    * The placement of the notice.
    *
@@ -150,12 +152,12 @@ export type NoticeConfigOptions = ThemeProps<"Alert"> & {
 
 export type SnackDirection = "top" | "bottom"
 
-export type SnackComponentProps = SnackConfigOptions & {
+export interface SnackComponentProps extends SnackConfigOptions {
   index: number
   onClose: () => void
 }
 
-export type SnackConfigOptions = ThemeProps<"Alert"> & {
+export interface SnackConfigOptions extends ThemeProps<"Alert"> {
   /**
    * The direction of the snacks.
    *
@@ -236,7 +238,7 @@ export type SnackConfigOptions = ThemeProps<"Alert"> & {
   style?: CSSUIObject
 }
 
-export type LoadingComponentProps = {
+export interface LoadingComponentProps {
   initialState?: boolean
   icon: LoadingConfigOptions["icon"]
   text: LoadingConfigOptions["text"]
@@ -245,7 +247,7 @@ export type LoadingComponentProps = {
   onFinish: () => void
 }
 
-export type LoadingConfigOptions = {
+export interface LoadingConfigOptions {
   /**
    * If `true`, loaded from the initial rendering.
    *
@@ -340,7 +342,7 @@ export type LoadingConfigOptions = {
   containerRef?: PortalProps["containerRef"]
 }
 
-export type ThemeConfig = {
+export interface ThemeConfig {
   /**
    * The initial theme scheme.
    * This is only applicable if multiple themes are provided.
@@ -512,57 +514,68 @@ export type ThemeConfig = {
   }
 }
 
-export type LayerStyles = Record<string, CSSUIObject>
-export type TextStyles = Record<string, CSSUIObject>
-export type ThemeTokens = {
-  [key: string | number]:
-    | string
-    | number
-    | [string | number, string | number]
-    | ThemeTokens
+export interface LayerStyles {
+  [key: string]: CSSUIObject
 }
-export type ThemeAnimationTokens<
+export interface TextStyles {
+  [key: string]: CSSUIObject
+}
+export type ThemeValue = string | number
+export interface ThemeTokens {
+  [key: ThemeValue]: ThemeValue | [ThemeValue, ThemeValue] | ThemeTokens
+}
+export interface ThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
-> = {
-  [key: string | number]: T | T[] | ThemeAnimationTokens<T>
+> {
+  [key: ThemeValue]: T | T[] | ThemeAnimationTokens<T>
 }
-export type ThemeTransitionTokens = {
+export interface ThemeTransitionTokens {
   property?: ThemeTokens
   duration?: ThemeTokens
   easing?: ThemeTokens
 }
-export type ThemeBreakpointTokens = { [key: string | number]: string | number }
-export type ThemeSemantics = Omit<
-  BaseTheme,
-  | "styles"
-  | "components"
-  | "semantics"
-  | "themeSchemes"
-  | "breakpoints"
-  | "animations"
-> & {
-  colorSchemes?: Partial<
-    Record<
-      string,
-      | Theme["colorSchemes"]
-      | [Theme["colorSchemes"], Theme["colorSchemes"]]
-      | ThemeTokens
-    >
-  >
+export interface ThemeBreakpointTokens {
+  [key: ThemeValue]: ThemeValue
+}
+
+export interface SemanticColorSchemes {
+  [key: string]:
+    | Theme["colorSchemes"]
+    | [Theme["colorSchemes"], Theme["colorSchemes"]]
+    | ThemeTokens
+}
+
+export interface ThemeSemanticTokens
+  extends Omit<
+    BaseTheme,
+    | "styles"
+    | "components"
+    | "semantics"
+    | "themeSchemes"
+    | "breakpoints"
+    | "animations"
+  > {}
+
+export interface ThemeSemantics extends ThemeSemanticTokens {
+  colorSchemes?: SemanticColorSchemes
   animations?: ThemeAnimationTokens<AnimationStyle | string>
 }
-export type ThemeSchemes = Partial<
-  Record<
-    string,
-    Omit<BaseTheme, "styles" | "components" | "themeSchemes" | "breakpoints">
-  >
->
-export type ThemeComponents = Record<
-  string,
-  ComponentStyle | ComponentMultiStyle
->
 
-type BaseTheme = {
+export interface NestedTheme
+  extends Omit<
+    BaseTheme,
+    "styles" | "components" | "themeSchemes" | "breakpoints"
+  > {}
+
+export interface ThemeSchemes {
+  [key: string]: NestedTheme
+}
+
+export interface ThemeComponents {
+  [key: string]: ComponentStyle | ComponentMultiStyle
+}
+
+interface BaseTheme {
   styles?: {
     globalStyle?: UIStyle
     resetStyle?: UIStyle
@@ -592,16 +605,17 @@ type BaseTheme = {
   components?: ThemeComponents
 }
 
-export type UsageTheme = BaseTheme & {
+export interface UsageTheme extends BaseTheme {
   [key: string]: any
 }
 
 export type ComponentBaseStyle<Y extends Dict = Dict> = UIStyle<Y>
-export type ComponentVariants<Y extends Dict = Dict> = Record<
-  string,
-  UIStyle<Y>
->
-export type ComponentSizes<Y extends Dict = Dict> = Record<string, UIStyle<Y>>
+export interface ComponentVariants<Y extends Dict = Dict> {
+  [key: string]: UIStyle<Y>
+}
+export interface ComponentSizes<Y extends Dict = Dict> {
+  [key: string]: UIStyle<Y>
+}
 type ComponentProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
@@ -617,10 +631,10 @@ export type ComponentOverrideProps<
   | ComponentProps<Y, M>
   | ((props: ComponentProps<Y, M>) => ComponentProps<Y, M>)
 
-type ComponentSharedStyle<
+interface ComponentSharedStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = {
+> {
   /**
    * The default props of the component.
    */
@@ -631,10 +645,10 @@ type ComponentSharedStyle<
   overrideProps?: ComponentOverrideProps<Y, M>
 }
 
-export type ComponentStyle<
+export interface ComponentStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = ComponentSharedStyle<Y, M> & {
+> extends ComponentSharedStyle<Y, M> {
   /**
    * The base style of the component.
    */
@@ -650,19 +664,17 @@ export type ComponentStyle<
 }
 
 export type ComponentMultiBaseStyle<Y extends Dict = Dict> = UIMultiStyle<Y>
-export type ComponentMultiVariants<Y extends Dict = Dict> = Record<
-  string,
-  UIMultiStyle<Y>
->
-export type ComponentMultiSizes<Y extends Dict = Dict> = Record<
-  string,
-  UIMultiStyle<Y>
->
+export interface ComponentMultiVariants<Y extends Dict = Dict> {
+  [key: string]: UIMultiStyle<Y>
+}
+export interface ComponentMultiSizes<Y extends Dict = Dict> {
+  [key: string]: UIMultiStyle<Y>
+}
 
-export type ComponentMultiStyle<
+export interface ComponentMultiStyle<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = ComponentSharedStyle<Y, M> & {
+> extends ComponentSharedStyle<Y, M> {
   /**
    * The base style of the component.
    */
@@ -677,30 +689,32 @@ export type ComponentMultiStyle<
   variants?: ComponentMultiVariants<M>
 }
 
-export type CSSMap = Dict<{
-  value: string | number | undefined
-  var: string
-  ref: string
-}>
+export interface CSSMap {
+  [key: string]: {
+    value: string | number | undefined
+    var: string
+    ref: string
+  }
+}
 
-export type CustomTheme = {}
+export interface CustomTheme {}
+
+export interface CustomInternalTheme {}
+
+export type InternalTheme =
+  CustomInternalTheme extends Required<UsageTheme>
+    ? CustomInternalTheme
+    : UsageTheme
 
 export type Theme = CustomTheme extends UITheme ? CustomTheme : GeneratedTheme
 
 export type ChangeThemeScheme = (themeScheme: Theme["themeSchemes"]) => void
 
-export type PropsTheme<T extends object = Dict> = T & {
+export type StyledTheme<T extends InternalTheme = InternalTheme> = T & {
   themeScheme: Theme["themeSchemes"]
   changeThemeScheme: ChangeThemeScheme
-  __config: ThemeConfig | undefined
-  __cssVars: Dict
-  __cssMap: CSSMap
-  __breakpoints: AnalyzeBreakpointsReturn
-}
-
-export type StyledTheme<T extends object = Dict> = T & {
-  __config: ThemeConfig | undefined
-  __cssVars: Dict
-  __cssMap: CSSMap
-  __breakpoints: AnalyzeBreakpointsReturn
+  __config?: ThemeConfig
+  __cssVars?: Dict
+  __cssMap?: CSSMap
+  __breakpoints?: AnalyzeBreakpointsReturn
 }

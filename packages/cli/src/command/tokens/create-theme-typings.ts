@@ -3,12 +3,12 @@ import { config } from "./config"
 
 const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-type Component = {
+interface Component {
   sizes: string[]
   variants: string[]
 }
 
-export const printComponent = (components: Record<string, Component>) =>
+export const printComponent = (components: { [key: string]: Component }) =>
   `components: { ${Object.entries(components)
     .map(
       ([key, unions]) =>
@@ -18,7 +18,7 @@ export const printComponent = (components: Record<string, Component>) =>
     )
     .join(`\n`)} }`
 
-export const print = (unions: Record<string, string[]>) =>
+export const print = (unions: Component | { [key: string]: string[] }) =>
   Object.entries(unions)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
@@ -42,7 +42,7 @@ export const extractComponents = ({ components = {} }: { components: any }) =>
 
       return obj
     },
-    {} as Record<string, Component>,
+    {} as { [key: string]: Component },
   )
 
 export const extractTransitions = (theme: any) => {
@@ -201,7 +201,7 @@ export const createThemeTypings = async (theme: any) => {
 
       return prev
     },
-    {} as Record<string, string[]>,
+    {} as { [key: string]: string[] },
   )
 
   const textStyles = extractKeys(theme, "styles.textStyles")

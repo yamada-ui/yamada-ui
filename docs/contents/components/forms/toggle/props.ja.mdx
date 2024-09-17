@@ -2,9 +2,9 @@
 title: Toggle
 description: "`Toggle`は、オンまたはオフの２つの状態を持つコンポーネントです。"
 package_name: "@yamada-ui/toggle"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -111,7 +111,7 @@ order: 1
 <PropsCard
   id="togglegroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `flex-direction` property."}
 />
 

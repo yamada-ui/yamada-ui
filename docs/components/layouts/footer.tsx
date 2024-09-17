@@ -12,7 +12,7 @@ import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
 import { memo } from "react"
 
-export type FooterProps = CenterProps & {}
+export interface FooterProps extends CenterProps {}
 
 export const Footer = memo(
   forwardRef<FooterProps, "div">(({ ...rest }, ref) => {

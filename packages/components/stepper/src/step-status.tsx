@@ -61,7 +61,7 @@ export const StepStatus = forwardRef<StepStatusProps, "div">(
   },
 )
 
-export type StepNumberProps = HTMLUIProps<"div">
+export interface StepNumberProps extends HTMLUIProps {}
 
 export const StepNumber = forwardRef<StepNumberProps, "div">(
   ({ className, children, ...rest }, ref) => {
@@ -84,7 +84,7 @@ export const StepNumber = forwardRef<StepNumberProps, "div">(
   },
 )
 
-export type StepIconProps = IconProps
+export interface StepIconProps extends IconProps {}
 
 export const StepIcon = forwardRef<StepIconProps, "svg">(
   ({ className, ...rest }, ref) => {

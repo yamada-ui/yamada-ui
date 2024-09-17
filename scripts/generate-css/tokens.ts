@@ -1,7 +1,7 @@
 import type { ThemeToken } from "@yamada-ui/react"
 import type { CSSProperties, UIProperties } from "."
 
-type Tokens = Partial<Record<ThemeToken, (CSSProperties | UIProperties)[]>>
+type Tokens = { [key in ThemeToken]?: (CSSProperties | UIProperties)[] }
 
 export const tokens: Tokens = {
   animations: ["animation"],
@@ -177,10 +177,10 @@ export const tokenMap = Object.entries(tokens).reduce(
 
     return prev
   },
-  {} as Record<CSSProperties | UIProperties, ThemeToken>,
+  {} as { [key in CSSProperties | UIProperties]: ThemeToken },
 )
 
-export const tokenPropertyMap: Record<string, ThemeToken[]> = {
+export const tokenPropertyMap: { [key: string]: ThemeToken[] } = {
   animation: ["animations"],
   blur: ["blurs"],
   border: ["borders"],

@@ -3,14 +3,12 @@ import { MessageSquareReply as MessageSquareReplyIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type MessageSquareReplyProps = LucideIconProps
-
 /**
  * `MessageSquareReply` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const MessageSquareReply = forwardRef<MessageSquareReplyProps, "svg">(
+export const MessageSquareReply = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
     <LucideIcon ref={ref} as={MessageSquareReplyIcon} {...props} />
   ),

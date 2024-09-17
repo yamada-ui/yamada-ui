@@ -1,8 +1,10 @@
 import * as c from "color2k"
-import { isArray, isNumber } from "./assertion"
+import { isArray, isNumber, isObject } from "./assertion"
 import type { Dict, StringLiteral } from "./index.types"
 import { getMemoizedObject as get } from "./object"
 
+type ThemeValue = string | number
+type Breakpoint = "base" | StringLiteral
 type ColorMode = "light" | "dark"
 
 export type ColorFormat = "hex" | "hexa" | "rgba" | "rgb" | "hsl" | "hsla"
@@ -50,15 +52,22 @@ export const TONES = [
   50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950,
 ] as const
 
-export const isGray = (colorScheme: string) =>
-  colorScheme === "gray" || colorScheme === "neutral"
+export function isGray(colorScheme: string) {
+  return colorScheme === "gray" || colorScheme === "neutral"
+}
 
-export const isAccessible = (colorScheme: string) =>
-  colorScheme === "yellow" || colorScheme === "cyan" || colorScheme === "lime"
+export function isAccessible(colorScheme: string) {
+  return (
+    colorScheme === "yellow" || colorScheme === "cyan" || colorScheme === "lime"
+  )
+}
 
-export const getColor =
-  (color: string, fallback: string = "#000000") =>
-  (theme: Dict = {}, colorMode?: ColorMode) => {
+export function getColor(color: string, fallback: string = "#000000") {
+  return function (
+    theme: Dict = {},
+    colorMode: ColorMode = "light",
+    breakpoint: Breakpoint = "base",
+  ) {
     const [token, tone] = color.split(".")
 
     if (tone) {
@@ -77,13 +86,17 @@ export const getColor =
       if (relatedColor) color = relatedColor
     }
 
-    const hex = get<
-      string | number | [string | number, string | number] | undefined
-    >(theme, `colors.${color}`, color)
+    const hex = get<ThemeValue | [ThemeValue, ThemeValue] | Dict<ThemeValue>>(
+      theme,
+      `colors.${color}`,
+      color,
+    )
 
     try {
       if (isArray(hex)) {
-        return c.toHex(String(colorMode !== "dark" ? hex[0] : hex[1]))
+        return c.toHex(String(hex[colorMode !== "dark" ? 0 : 1]))
+      } else if (isObject(hex)) {
+        return c.toHex(String(hex[breakpoint]))
       } else {
         return c.toHex(String(hex))
       }
@@ -95,46 +108,72 @@ export const getColor =
       }
     }
   }
+}
 
-export const lightenColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+export function lightenColor(color: string, amount: number) {
+  return function (
+    theme?: Dict,
+    colorMode?: ColorMode,
+    breakpoint?: Breakpoint,
+  ) {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.lighten(raw, amount / 100))
   }
+}
 
-export const darkenColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+export function darkenColor(color: string, amount: number) {
+  return function (
+    theme?: Dict,
+    colorMode?: ColorMode,
+    breakpoint?: Breakpoint,
+  ) {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.darken(raw, amount / 100))
   }
+}
 
-export const tintColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+export function tintColor(color: string, amount: number) {
+  return function (
+    theme?: Dict,
+    colorMode?: ColorMode,
+    breakpoint?: Breakpoint,
+  ) {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.mix(raw, "#fff", amount / 100))
   }
+}
 
-export const shadeColor =
-  (color: string, amount: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+export function shadeColor(color: string, amount: number) {
+  return function (
+    theme?: Dict,
+    colorMode?: ColorMode,
+    breakpoint?: Breakpoint,
+  ) {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.toHex(c.mix(raw, "#000", amount / 100))
   }
+}
 
-export const transparentizeColor =
-  (color: string, alpha: number) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = getColor(color, color)(theme, colorMode)
+export function transparentizeColor(color: string, alpha: number) {
+  return function (
+    theme?: Dict,
+    colorMode?: ColorMode,
+    breakpoint?: Breakpoint,
+  ) {
+    const raw = getColor(color, color)(theme, colorMode, breakpoint)
 
     return c.transparentize(raw, 1 - alpha)
   }
+}
 
-export const randomColor = ({
+export function randomColor({
   string,
   colors,
-}: { string?: string; colors?: string[] } = {}) => {
+}: { string?: string; colors?: string[] } = {}) {
   const fallback = randomHex()
 
   if (string && colors) return randomColorFromList(string, colors)
@@ -146,12 +185,13 @@ export const randomColor = ({
   return fallback
 }
 
-const randomHex = () =>
-  `#${Math.floor(Math.random() * 0xffffff)
+function randomHex() {
+  return `#${Math.floor(Math.random() * 0xffffff)
     .toString(16)
     .padEnd(6, "0")}`
+}
 
-const randomColorFromString = (str: string) => {
+function randomColorFromString(str: string) {
   let hash = 0
 
   if (str.length === 0) return hash.toString()
@@ -172,7 +212,7 @@ const randomColorFromString = (str: string) => {
   return color
 }
 
-const randomColorFromList = (str: string, list: string[]) => {
+function randomColorFromList(str: string, list: string[]) {
   let index = 0
 
   if (str.length === 0) return list[0]
@@ -188,18 +228,23 @@ const randomColorFromList = (str: string, list: string[]) => {
   return list[index]
 }
 
-const randomFromList = (list: string[]) =>
-  list[Math.floor(Math.random() * list.length)]
+function randomFromList(list: string[]) {
+  return list[Math.floor(Math.random() * list.length)]
+}
 
-const getBrightness = (color: string) => {
+function getBrightness(color: string) {
   const [r, g, b] = c.parseToRgba(color)
 
   return (r * 299 + g * 587 + b * 114) / 1000
 }
 
-export const isTone =
-  (color: string) => (theme?: Dict, colorMode?: ColorMode) => {
-    const raw = theme ? getColor(color)(theme, colorMode) : color
+export function isTone(color: string) {
+  return function (
+    theme?: Dict,
+    colorMode?: ColorMode,
+    breakpoint?: Breakpoint,
+  ) {
+    const raw = theme ? getColor(color)(theme, colorMode, breakpoint) : color
 
     const brightness = getBrightness(raw)
 
@@ -207,18 +252,22 @@ export const isTone =
 
     return isDark ? "dark" : "light"
   }
+}
 
-export const isLight =
-  (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
-    isTone(color)(theme, colorMode) === "dark"
+export function isLight(color: string) {
+  return function (theme?: Dict, colorMode?: ColorMode) {
+    return isTone(color)(theme, colorMode) === "dark"
+  }
+}
 
-export const isDark =
-  (color: string) => (theme?: Dict, colorMode?: ColorMode) =>
-    isTone(color)(theme, colorMode) === "light"
+export function isDark(color: string) {
+  return function (theme?: Dict, colorMode?: ColorMode) {
+    return isTone(color)(theme, colorMode) === "light"
+  }
+}
 
-export const convertColor =
-  (color: string, fallback?: string) =>
-  (format: ColorFormat): string | undefined => {
+export function convertColor(color: string, fallback?: string) {
+  return function (format: ColorFormat): string | undefined {
     try {
       const isAlpha = format.endsWith("a")
 
@@ -257,8 +306,9 @@ export const convertColor =
       if (fallback) return convertColor(fallback)(format)
     }
   }
+}
 
-export const calcFormat = (color: string): ColorFormat => {
+export function calcFormat(color: string): ColorFormat {
   if (color.startsWith("hsl")) {
     return color.startsWith("hsla") ? "hsla" : "hsl"
   } else if (color.startsWith("rgb")) {
@@ -268,9 +318,11 @@ export const calcFormat = (color: string): ColorFormat => {
   }
 }
 
-export const getAlpha = (color: string) => c.parseToRgba(color)[3]
+export function getAlpha(color: string) {
+  return c.parseToRgba(color)[3]
+}
 
-export const alphaToHex = (a: number) => {
+export function alphaToHex(a: number) {
   if (0 > a) a = 0
   if (1 < a) a = 1
 
@@ -279,7 +331,7 @@ export const alphaToHex = (a: number) => {
     .padStart(2, "0")
 }
 
-export const parseToRgba = (color: string, fallback?: string) => {
+export function parseToRgba(color: string, fallback?: string) {
   try {
     if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
 
@@ -289,7 +341,7 @@ export const parseToRgba = (color: string, fallback?: string) => {
   }
 }
 
-export const parseToHsla = (color: string, fallback?: string) => {
+export function parseToHsla(color: string, fallback?: string) {
   try {
     if (/^[0-9a-fA-F]{6}$/.test(color)) color = "#" + color
 
@@ -299,10 +351,10 @@ export const parseToHsla = (color: string, fallback?: string) => {
   }
 }
 
-export const parseToHsv = (
+export function parseToHsv(
   color: string,
   fallback?: string,
-): [number, number, number, number] => {
+): [number, number, number, number] {
   let [r, g, b, a] = parseToRgba(color, fallback) ?? [255, 255, 255, 1]
 
   r = r / 255
@@ -335,19 +387,29 @@ export const parseToHsv = (
   return [h, s, v, a]
 }
 
-export const rgbaTo =
-  ([r, g, b, a]: [number, number, number, number], fallback?: string) =>
-  (format: ColorFormat = "hex") =>
-    convertColor(c.rgba(r, g, b, a), fallback)(format)
+export function rgbaTo(
+  [r, g, b, a]: [number, number, number, number],
+  fallback?: string,
+) {
+  return function (format: ColorFormat = "hex") {
+    return convertColor(c.rgba(r, g, b, a), fallback)(format)
+  }
+}
 
-export const hslaTo =
-  ([h, s, l, a]: [number, number, number, number], fallback?: string) =>
-  (format: ColorFormat = "hex") =>
-    convertColor(c.hsla(h, s, l, a), fallback)(format)
+export function hslaTo(
+  [h, s, l, a]: [number, number, number, number],
+  fallback?: string,
+) {
+  return function (format: ColorFormat = "hex") {
+    return convertColor(c.hsla(h, s, l, a), fallback)(format)
+  }
+}
 
-export const hsvTo =
-  ([h, s, v, a]: [number, number, number, number?], fallback?: string) =>
-  (format: ColorFormat = "hex"): string | undefined => {
+export function hsvTo(
+  [h, s, v, a]: [number, number, number, number?],
+  fallback?: string,
+) {
+  return function (format: ColorFormat = "hex"): string | undefined {
     h = h / 60
 
     let rgb: [number, number, number] = [v, v, v]
@@ -391,11 +453,12 @@ export const hsvTo =
 
     return convertColor(color, fallback)(format)
   }
+}
 
-export const sameColor = (
+export function sameColor(
   color: string | undefined,
   comparison: string | undefined,
-) => {
+) {
   if (!color) return false
   if (!comparison) return false
 

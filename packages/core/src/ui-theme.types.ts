@@ -1,4 +1,4 @@
-export type UITheme = {
+export interface UITheme {
   layerStyles: string
   textStyles: string
   animations: string

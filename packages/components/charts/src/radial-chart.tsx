@@ -2,10 +2,9 @@ import {
   forwardRef,
   omitThemeProps,
   ui,
-  useMultiComponentStyle,
-  type HTMLUIProps,
-  type ThemeProps,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 import {
@@ -22,20 +21,18 @@ import { ChartTooltip } from "./chart-tooltip"
 import type { TooltipDataSourceType } from "./chart.types"
 import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import {
-  useChartLabelList,
-  type UseChartLabelListOptions,
-} from "./use-chart-label-list"
-import { useChartLegend, type UseChartLegendProps } from "./use-chart-legend"
-import {
-  useChartTooltip,
-  type UseChartTooltipOptions,
-} from "./use-chart-tooltip"
+import { useChartLabelList } from "./use-chart-label-list"
+import type { UseChartLabelListOptions } from "./use-chart-label-list"
+import { useChartLegend } from "./use-chart-legend"
+import type { UseChartLegendProps } from "./use-chart-legend"
+import { useChartTooltip } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import type { UsePolarGridOptions } from "./use-polar-grid"
 import { usePolarGrid } from "./use-polar-grid"
-import { useRadialChart, type UseRadialChartOptions } from "./use-radial-chart"
+import { useRadialChart } from "./use-radial-chart"
+import type { UseRadialChartOptions } from "./use-radial-chart"
 
-type RadialChartOptions = {
+interface RadialChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -66,15 +63,16 @@ type RadialChartOptions = {
   unit?: string
 }
 
-export type RadialChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"radialChart"> &
-  RadialChartOptions &
-  UseRadialChartOptions &
-  UseChartTooltipOptions &
-  UseChartLegendProps &
-  UseChartLabelListOptions &
-  UsePolarGridOptions &
-  UseChartProps
+export interface RadialChartProps
+  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray">,
+    ThemeProps<"radialChart">,
+    RadialChartOptions,
+    UseRadialChartOptions,
+    UseChartTooltipOptions,
+    UseChartLegendProps,
+    UseChartLabelListOptions,
+    UsePolarGridOptions,
+    UseChartProps {}
 
 /**
  * `RadialChart` is a component for drawing radial charts to compare multiple sets of data.
@@ -82,7 +80,7 @@ export type RadialChartProps = HTMLUIProps<"div"> &
  * @see Docs https://yamada-ui.com/components/data-display/radial-chart
  */
 export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("RadialChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("RadialChart", props)
   const {
     className,
     data,

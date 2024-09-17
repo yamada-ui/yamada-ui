@@ -1,5 +1,4 @@
-import { Check } from "@yamada-ui/lucide"
-import { render, screen, a11y } from "@yamada-ui/test"
+import { render, screen, a11y, TestIcon } from "@yamada-ui/test"
 import { Switch } from "../src"
 
 describe("<Switch />", () => {
@@ -48,14 +47,14 @@ describe("<Switch />", () => {
   })
 
   test("The icon should render correctly.", () => {
-    const { container } = render(<Switch icon={<Check />}>basic</Switch>)
+    const { container } = render(<Switch icon={<TestIcon />}>basic</Switch>)
 
     const icon = container.querySelector("svg")
     expect(icon).toBeInTheDocument()
   })
 
   test("isChecked and isFocused works correctly when using the icon prop.", async () => {
-    const { user } = render(<Switch icon={<Check />}>basic</Switch>)
+    const { user } = render(<Switch icon={<TestIcon />}>basic</Switch>)
 
     const switchElement = await screen.findByRole("switch", { name: /basic/i })
 

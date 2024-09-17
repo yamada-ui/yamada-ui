@@ -3,13 +3,11 @@ import { Signature as SignatureIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type SignatureProps = LucideIconProps
-
 /**
  * `Signature` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Signature = forwardRef<SignatureProps, "svg">((props, ref) => (
+export const Signature = forwardRef<LucideIconProps, "svg">((props, ref) => (
   <LucideIcon ref={ref} as={SignatureIcon} {...props} />
 ))

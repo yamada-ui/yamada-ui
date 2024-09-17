@@ -1,10 +1,6 @@
 import { runIfFunc } from "@yamada-ui/utils"
-import {
-  type ComponentMultiStyle,
-  type ComponentStyle,
-  pickStyle,
-  type StyledTheme,
-} from "../src"
+import { pickStyle } from "../src"
+import type { ComponentMultiStyle, ComponentStyle, StyledTheme } from "../src"
 
 const props = { theme: {} as StyledTheme }
 

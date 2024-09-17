@@ -1,6 +1,7 @@
 import { HStack } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { type FC, memo } from "react"
+import { memo } from "react"
+import type { FC } from "react"
 
 type HeaderProps = StackProps & {
   isCenter?: boolean

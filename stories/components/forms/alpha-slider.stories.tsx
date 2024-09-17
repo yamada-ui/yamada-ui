@@ -198,7 +198,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { alphaSlider: number }
+  interface Data {
+    alphaSlider: number
+  }
 
   const defaultValues: Data = {
     alphaSlider: 0.5,

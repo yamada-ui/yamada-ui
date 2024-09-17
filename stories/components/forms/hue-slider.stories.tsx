@@ -168,7 +168,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { hueSlider: number }
+  interface Data {
+    hueSlider: number
+  }
 
   const defaultValues: Data = {
     hueSlider: 180,

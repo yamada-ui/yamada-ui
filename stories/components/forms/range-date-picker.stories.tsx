@@ -539,7 +539,9 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { multiDatePicker: [Date?, Date?] }
+  interface Data {
+    multiDatePicker: [Date?, Date?]
+  }
 
   const {
     control,
@@ -577,7 +579,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { multiDatePicker: [Date?, Date?] }
+  interface Data {
+    multiDatePicker: [Date?, Date?]
+  }
 
   const defaultValues: Data = {
     multiDatePicker: [new Date()],

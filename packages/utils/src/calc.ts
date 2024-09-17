@@ -2,25 +2,34 @@ type Operator = "+" | "-" | "*" | "/"
 
 export type Operand = string | number
 
-const toExpression = (operator: Operator, ...args: Operand[]) =>
-  args.join(` ${operator} `).replace(/calc/g, "")
+function toExpression(operator: Operator, ...args: Operand[]) {
+  return args.join(` ${operator} `).replace(/calc/g, "")
+}
 
-const add = (...args: Operand[]) => `calc(${toExpression("+", ...args)})`
+function add(...args: Operand[]) {
+  return `calc(${toExpression("+", ...args)})`
+}
 
-const subtract = (...args: Operand[]) => `calc(${toExpression("-", ...args)})`
+function subtract(...args: Operand[]) {
+  return `calc(${toExpression("-", ...args)})`
+}
 
-const multiply = (...args: Operand[]) => `calc(${toExpression("*", ...args)})`
+function multiply(...args: Operand[]) {
+  return `calc(${toExpression("*", ...args)})`
+}
 
-const divide = (...args: Operand[]) => `calc(${toExpression("/", ...args)})`
+function divide(...args: Operand[]) {
+  return `calc(${toExpression("/", ...args)})`
+}
 
-const negate = (value: Operand) => {
+function negate(value: Operand) {
   if (value != null && !isNaN(parseFloat(value.toString())))
     return String(value).startsWith("-") ? String(value).slice(1) : `-${value}`
 
   return multiply(value, -1)
 }
 
-type Calc = {
+interface Calc {
   add: (...args: Operand[]) => Calc
   subtract: (...args: Operand[]) => Calc
   multiply: (...args: Operand[]) => Calc

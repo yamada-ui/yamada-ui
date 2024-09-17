@@ -7,39 +7,22 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { FileInput } from "@yamada-ui/file-input"
 import { useToken } from "@yamada-ui/use-token"
-import {
-  createContext,
-  cx,
-  filterUndefined,
-  getValidChildren,
-} from "@yamada-ui/utils"
+import { cx, filterUndefined, getValidChildren } from "@yamada-ui/utils"
 import { cloneElement } from "react"
-import {
-  Input,
-  InputRightElement,
-  InputLeftElement,
-  InputLeftAddon,
-  InputRightAddon,
-} from "./"
+import { Input } from "./input"
+import { InputLeftAddon, InputRightAddon } from "./input-addon"
+import { InputGroupProvider } from "./input-context"
+import { InputRightElement, InputLeftElement } from "./input-element"
 
-export type InputGroupProps = HTMLUIProps<"div"> & ThemeProps<"Input">
-
-type InputGroupContext = Record<string, CSSUIObject>
-
-const [InputGroupProvider, useInputGroup] = createContext<InputGroupContext>({
-  name: "InputGroupContext",
-  errorMessage: `useInputGroup returned is 'undefined'. Seems you forgot to wrap the components in "<InputGroup />" `,
-})
-
-export { useInputGroup }
+export interface InputGroupProps extends HTMLUIProps, ThemeProps<"Input"> {}
 
 export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
-  const [styles] = useMultiComponentStyle("Input", props)
+  const [styles] = useComponentMultiStyle("Input", props)
   const { className, children, ...rest } = omitThemeProps(props)
 
   const css: CSSUIObject = {

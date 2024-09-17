@@ -137,9 +137,7 @@ export const useBreakpoint = () => {
  *
  * @see Docs https://yamada-ui.com/hooks/use-breakpoint-value
  */
-export const useBreakpointValue = <T extends any>(
-  values: ResponsiveObject<T>,
-): T => {
+export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
   const { theme } = useTheme()
   const breakpoint = useBreakpoint()
 
@@ -150,7 +148,7 @@ export const useBreakpointValue = <T extends any>(
 }
 
 export const getBreakpointValue =
-  <T extends any>(values: ResponsiveObject<T> = {}) =>
+  <T>(values: ResponsiveObject<T> = {}) =>
   (theme: StyledTheme, breakpoint: Theme["breakpoints"]): T => {
     if (!theme) throw Error("getBreakpointValue: `theme` is undefined.")
 
@@ -177,9 +175,7 @@ export const getBreakpointValue =
  *
  * @see Docs https://yamada-ui.com/hooks/use-breakpoint-state
  */
-export const useBreakpointState = <T extends any>(
-  initialState: ResponsiveObject<T>,
-) => {
+export const useBreakpointState = <T>(initialState: ResponsiveObject<T>) => {
   const state = useBreakpointValue(initialState)
 
   return useState(state)

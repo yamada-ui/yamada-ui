@@ -7,9 +7,9 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
-type {{upperCase packageName}}Options = {}
+interface {{upperCase packageName}}Options {}
 
-export type {{upperCase packageName}}Props = HTMLUIProps<"div"> & ThemeProps<"{{upperCase packageName}}"> & {{upperCase packageName}}Options
+export interface {{upperCase packageName}}Props extends HTMLUIProps, ThemeProps<"{{upperCase packageName}}">, {{upperCase packageName}}Options {}
 
 /**
  * `{{upperCase packageName}}` is component.

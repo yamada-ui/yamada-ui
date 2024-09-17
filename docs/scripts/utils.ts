@@ -25,7 +25,9 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 const toCamelCase = (value: string & {}) =>
   value.toLowerCase().replace(/-(.)/g, (_, group1) => group1.toUpperCase())
 
-export type Constant = Record<string, any>
+export interface Constant {
+  [key: string]: any
+}
 
 export const getConstant = async (): Promise<Constant> => {
   const result: Constant = {}

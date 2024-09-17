@@ -1,9 +1,9 @@
-import type { CSSUIProps, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
+import type { CSSUIProps, HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import {
   useFormControlProps,
-  type FormControlOptions,
   formControlProperties,
 } from "@yamada-ui/form-control"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useLatestRef } from "@yamada-ui/use-latest-ref"
 import { usePanEvent } from "@yamada-ui/use-pan-event"
@@ -23,7 +23,7 @@ import {
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
 
-type UseColorSliderOptions = {
+interface UseColorSliderOptions {
   /**
    * The base `id` to use for the slider.
    */
@@ -79,12 +79,10 @@ type UseColorSliderOptions = {
   thumbColor?: CSSUIProps["bg"]
 }
 
-export type UseColorSliderProps = Omit<
-  HTMLUIProps<"div">,
-  "defaultValue" | "onChange"
-> &
-  UseColorSliderOptions &
-  FormControlOptions
+export interface UseColorSliderProps
+  extends Omit<HTMLUIProps, "defaultValue" | "onChange">,
+    UseColorSliderOptions,
+    FormControlOptions {}
 
 export const useColorSlider = ({
   focusThumbOnChange = true,
@@ -216,7 +214,7 @@ export const useColorSlider = ({
     (ev: KeyboardEvent<HTMLElement>) => {
       const { min, max } = latestRef.current
 
-      const actions: Record<string, KeyboardEventHandler> = {
+      const actions: { [key: string]: KeyboardEventHandler } = {
         ArrowRight: () => stepUp(),
         ArrowUp: () => stepUp(),
         ArrowLeft: () => stepDown(),
@@ -275,7 +273,7 @@ export const useColorSlider = ({
     if (eventSource === "keyboard") onChangeEnd(value)
   }, [value, onChangeEnd])
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const { width: w } = thumbSize ?? { width: 0 }
 
@@ -297,7 +295,7 @@ export const useColorSlider = ({
     [containerProps, formControlProps, styleProp, thumbSize],
   )
 
-  const getInputProps: UIPropGetter<"input"> = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       "aria-readonly": ariaReadonly,
@@ -323,7 +321,7 @@ export const useColorSlider = ({
     ],
   )
 
-  const getTrackProps: UIPropGetter = useCallback(
+  const getTrackProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
@@ -332,7 +330,7 @@ export const useColorSlider = ({
     [formControlProps],
   )
 
-  const getThumbProps: UIPropGetter = useCallback(
+  const getThumbProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
       const { width: w } = thumbSize ?? { width: 0 }

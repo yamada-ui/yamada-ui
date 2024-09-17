@@ -35,7 +35,7 @@ import type {
 
 type Styles<Y extends boolean = false> = Y extends false
   ? CSSUIObject
-  : Record<string, CSSUIObject>
+  : { [key: string]: CSSUIObject }
 
 type ModifierStyles =
   | ComponentVariants
@@ -43,24 +43,23 @@ type ModifierStyles =
   | ComponentMultiVariants
   | ComponentMultiSizes
 
-type GetStylesOptions = {
+interface GetStylesOptions {
   isMulti?: boolean
   selectors?: (string | undefined)[]
 }
 
-export type SetStylesOptions<Y extends boolean = false> = {
+export interface SetStylesOptions<Y extends boolean = false> {
   isMulti?: Y
   isProcessSkip?: boolean
   styles?: Styles<Y>
 }
 
-const getColorModeStyles =
-  <Y extends Dict = Dict, M extends boolean = false>(
-    value: ColorModeArray<string>,
-    modifierStyles: ModifierStyles,
-    props: UIStyleProps<Y>,
-  ) =>
-  ({ isMulti = false, selectors = [] }: GetStylesOptions) => {
+function getColorModeStyles<Y extends Dict = Dict, M extends boolean = false>(
+  value: ColorModeArray<string>,
+  modifierStyles: ModifierStyles,
+  props: UIStyleProps<Y>,
+) {
+  return function ({ isMulti = false, selectors = [] }: GetStylesOptions) {
     const [lightValue, darkValue] = value
 
     const lightStyles = getModifierStyles<Y, M>(
@@ -77,12 +76,13 @@ const getColorModeStyles =
 
     return merge(lightStyles, darkStyles)
   }
+}
 
-const getResponsiveFinalQuery = (
+function getResponsiveFinalQuery(
   queries: BreakpointQueries,
   breakpoints: string[],
   isDown: boolean,
-) => {
+) {
   const filteredQueries = queries.filter(
     ({ breakpoint }) =>
       breakpoint !== "base" && breakpoints.includes(breakpoint),
@@ -95,11 +95,11 @@ const getResponsiveFinalQuery = (
   return finalQuery
 }
 
-const getResponsiveNextQuery = (
+function getResponsiveNextQuery(
   value: ResponsiveObject<string>,
   queries: BreakpointQueries,
   index: number,
-) => {
+) {
   let nextIndex = index + 1
   let nextQuery: BreakpointQueries[number] | undefined
 
@@ -120,13 +120,12 @@ const getResponsiveNextQuery = (
   return nextQuery
 }
 
-const getResponsiveStyles =
-  <Y extends Dict = Dict, M extends boolean = false>(
-    value: ResponsiveObject<string>,
-    modifierStyles: ModifierStyles,
-    props: UIStyleProps<Y>,
-  ) =>
-  ({ isMulti = false, selectors = [] }: GetStylesOptions) => {
+function getResponsiveStyles<Y extends Dict = Dict, M extends boolean = false>(
+  value: ResponsiveObject<string>,
+  modifierStyles: ModifierStyles,
+  props: UIStyleProps<Y>,
+) {
+  return function ({ isMulti = false, selectors = [] }: GetStylesOptions) {
     const breakpoints = keysFormObject(value)
 
     if (breakpoints.length === 1 && "base" in value) {
@@ -193,14 +192,17 @@ const getResponsiveStyles =
       )
     }
   }
+}
 
-const getModifierStyles =
-  <Y extends Dict = Dict, M extends boolean = false>(
-    value: UIValue<string> | undefined,
-    modifierStyles: ModifierStyles,
-    props: UIStyleProps<Y>,
-  ) =>
-  ({ isMulti = false, selectors = [] }: GetStylesOptions): Styles<M> => {
+function getModifierStyles<Y extends Dict = Dict, M extends boolean = false>(
+  value: UIValue<string> | undefined,
+  modifierStyles: ModifierStyles,
+  props: UIStyleProps<Y>,
+) {
+  return function ({
+    isMulti = false,
+    selectors = [],
+  }: GetStylesOptions): Styles<M> {
     let styles: Styles<M> = {}
 
     if (!value) return styles
@@ -226,27 +228,31 @@ const getModifierStyles =
 
     return styles as Styles<M>
   }
+}
 
-const getSelectorStyles = <Y extends Dict = Dict>(
+function getSelectorStyles<Y extends Dict = Dict>(
   selectors: (string | undefined)[],
   style: Y,
-) =>
-  selectors.reduceRight<Dict>(
+) {
+  return selectors.reduceRight<Dict>(
     (prev, key) => (key ? { [key]: prev } : prev),
     style,
   ) as Y
+}
 
-const getStyles =
-  <Y extends Dict = Dict, M extends boolean = false>(
-    stylesOrFunc: UIStyle<Y> | Record<string, UIStyle<Y>>,
-    props: UIStyleProps<Y>,
-  ) =>
-  ({ isMulti = false, selectors = [] }: GetStylesOptions): Styles<M> => {
+function getStyles<Y extends Dict = Dict, M extends boolean = false>(
+  stylesOrFunc: UIStyle<Y> | { [key: string]: UIStyle<Y> },
+  props: UIStyleProps<Y>,
+) {
+  return function ({
+    isMulti = false,
+    selectors = [],
+  }: GetStylesOptions): Styles<M> {
     const styles = runIfFunc(stylesOrFunc, props)
 
     if (isMulti) {
       return Object.fromEntries(
-        Object.entries((styles ?? {}) as Record<string, UIStyle>).map(
+        Object.entries((styles ?? {}) as { [key: string]: UIStyle }).map(
           ([name, styleOrFunc]) => {
             const style = runIfFunc(styleOrFunc, props)
 
@@ -264,12 +270,13 @@ const getStyles =
       return styles as Styles<M>
     }
   }
+}
 
-const mergeProps = <Y extends Dict = Dict>(
+function mergeProps<Y extends Dict = Dict>(
   props: Y,
   defaultProps: ComponentDefaultProps | undefined,
   overrideProps: ComponentOverrideProps | undefined,
-): Y => {
+): Y {
   if (defaultProps) props = merge(defaultProps, props)
 
   if (overrideProps) props = runIfFunc(overrideProps, props) as Y
@@ -277,11 +284,11 @@ const mergeProps = <Y extends Dict = Dict>(
   return props
 }
 
-const setStyles = <Y extends Dict = Dict, M extends boolean = false>(
+function setStyles<Y extends Dict = Dict, M extends boolean = false>(
   name: string,
   props: Y,
   { isMulti, isProcessSkip, styles = {} }: SetStylesOptions<M> = {},
-): [styles: Styles<M>, props: Y] => {
+): [styles: Styles<M>, props: Y] {
   const { theme, themeScheme } = useTheme()
   const { colorMode } = useColorMode()
 
@@ -356,16 +363,18 @@ export type UseComponentStyleOptions<Y extends boolean = false> = Omit<
   "isMulti"
 >
 
-export const useComponentStyle = <Y extends Dict = Dict>(
+export function useComponentStyle<Y extends Dict = Dict>(
   name: string,
   props: Y,
   options?: UseComponentStyleOptions,
-) => setStyles<Y>(name, props, options)
+) {
+  return setStyles<Y>(name, props, options)
+}
 
-export const useMultiComponentStyle = <Y extends Dict = Dict>(
+export function useComponentMultiStyle<Y extends Dict = Dict>(
   name: string,
   props: Y,
   options?: UseComponentStyleOptions<true>,
-) => {
+) {
   return setStyles<Y, true>(name, props, { isMulti: true, ...options })
 }

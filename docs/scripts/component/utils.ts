@@ -19,7 +19,7 @@ export const getDirectoryPaths = async (path: string) => {
 
   const paths = componentDirs
     .flat()
-    .reduce<Record<string, string>>((prev, { name, path }) => {
+    .reduce<{ [key: string]: string }>((prev, { name, path }) => {
       prev[name] = `${path}/${name}`
 
       return prev

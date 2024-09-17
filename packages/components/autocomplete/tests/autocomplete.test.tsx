@@ -1,11 +1,11 @@
-import type { AutocompleteItem } from "@yamada-ui/react"
+import { act, render, renderHook, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
+import type { AutocompleteItem } from "../src"
 import {
   Autocomplete,
   AutocompleteOption,
   AutocompleteOptionGroup,
-} from "@yamada-ui/react"
-import { act, render, renderHook, screen, waitFor } from "@yamada-ui/test"
-import { useState } from "react"
+} from "../src"
 
 describe("<Autocomplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-autocomplete"

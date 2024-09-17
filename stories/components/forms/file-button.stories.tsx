@@ -274,7 +274,9 @@ export const useReset: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { fileButton: File[] | null }
+  interface Data {
+    fileButton: File[] | null
+  }
 
   const resetRef = useRef<() => void>(null)
   const {

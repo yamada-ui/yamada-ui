@@ -17,7 +17,7 @@ import { CodeBlock } from "components/mdx/code-block"
 import { memo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
 
-export type IconDrawerProps = {
+export interface IconDrawerProps {
   openRef: MutableRefObject<(name: IconNames) => void>
 }
 

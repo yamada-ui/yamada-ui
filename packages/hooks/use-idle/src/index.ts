@@ -13,10 +13,10 @@ const DEFAULT_OPTIONS = {
   initialState: true,
 }
 
-export type IdleOptions = Partial<{
-  events: (keyof DocumentEventMap)[]
-  initialState: boolean
-}>
+export interface IdleOptions {
+  events?: (keyof DocumentEventMap)[]
+  initialState?: boolean
+}
 
 /**
  * `useIdle` is a custom hook that detects whether the user has been idle for a certain amount of time in milliseconds.

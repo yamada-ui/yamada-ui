@@ -3,6 +3,7 @@ import { ThemeProvider, ColorModeProvider } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
 import { renderHook, mocks } from "@yamada-ui/test"
 
+import { noop } from "@yamada-ui/utils"
 import { getValue, useValue } from "../src"
 
 describe("useValue", () => {
@@ -87,6 +88,8 @@ describe("useValue", () => {
 
 describe("getValue", () => {
   const theme: StyledTheme = {
+    themeScheme: "base",
+    changeThemeScheme: noop,
     breakpoints: {
       sm: "30em",
       md: "48em",

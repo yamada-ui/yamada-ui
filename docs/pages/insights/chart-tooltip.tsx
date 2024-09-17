@@ -5,7 +5,7 @@ import { useInsights } from "./insights-provider"
 import { labelFormatter } from "./insights-utils"
 import { useI18n } from "contexts"
 
-export type ChartTooltipProps = OriginChartTooltipProps
+export interface ChartTooltipProps extends OriginChartTooltipProps {}
 
 export const ChartTooltip: FC<ChartTooltipProps> = ({
   label,

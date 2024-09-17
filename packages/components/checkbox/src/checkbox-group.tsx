@@ -1,31 +1,37 @@
-import type { ComponentArgs, ThemeProps, UIPropGetter } from "@yamada-ui/core"
+import type { ComponentArgs, ThemeProps, PropGetter } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControl } from "@yamada-ui/form-control"
 import type { FlexProps } from "@yamada-ui/layouts"
 import { Flex } from "@yamada-ui/layouts"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import type { Dict, PropGetter } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import {
-  createContext,
   cx,
   isObject,
   useCallbackRef,
   getValidChildren,
 } from "@yamada-ui/utils"
-import type { ChangeEvent, ForwardedRef, ReactElement, Ref } from "react"
+import type {
+  ChangeEvent,
+  ForwardedRef,
+  ReactElement,
+  RefAttributes,
+} from "react"
 import { forwardRef, useCallback } from "react"
 import type { CheckboxProps } from "./checkbox"
 import { Checkbox } from "./checkbox"
+import type { CheckboxGroupContext } from "./checkbox-context"
+import { CheckboxGroupProvider } from "./checkbox-context"
 
-export type CheckboxItem<Y extends string | number = string> =
-  CheckboxProps<Y> & {
-    label?: string
-  }
+export interface CheckboxItem<Y extends string | number = string>
+  extends CheckboxProps<Y> {
+  label?: string
+}
 
 const isEvent = (value: any): value is { target: HTMLInputElement } =>
   value && isObject(value) && isObject(value.target)
 
-export type UseCheckboxGroupProps<Y extends string | number = string> = {
+export interface UseCheckboxGroupProps<Y extends string | number = string> {
   /**
    * The value of the checkbox group.
    */
@@ -49,7 +55,7 @@ export type UseCheckboxGroupProps<Y extends string | number = string> = {
 }
 
 export const useCheckboxGroup = <
-  Y extends string | number = string,
+  Y extends string | number,
   M extends Dict = Dict,
 >({
   value: valueProp,
@@ -94,12 +100,11 @@ export const useCheckboxGroup = <
     [],
   )
 
-  const getCheckboxProps: UIPropGetter<
-    "input",
+  const getCheckboxProps: PropGetter<
     { value?: Y },
-    { value?: Y; isChecked?: boolean }
+    { value?: Y; checked?: boolean; isChecked?: boolean }
   > = useCallback(
-    (props, ref = null) => ({
+    (props = {}, ref = null) => ({
       ...props,
       ref,
       [isNative ? "checked" : "isChecked"]: value.some(
@@ -123,35 +128,18 @@ export const useCheckboxGroup = <
 export type UseCheckboxGroupReturn<Y extends string | number = string> =
   ReturnType<typeof useCheckboxGroup<Y>>
 
-export type CheckboxGroupProps<Y extends string | number = string> =
-  ThemeProps<"Checkbox"> &
-    Omit<FlexProps, "onChange"> &
-    UseCheckboxGroupProps<Y> &
-    FormControlOptions & {
-      /**
-       * If provided, generate checkboxes based on items.
-       *
-       * @default '[]'
-       */
-      items?: CheckboxItem<Y>[]
-    }
-
-type CheckboxContext = ThemeProps<"Checkbox"> &
-  FormControlOptions & {
-    value: (string | number)[]
-    onChange: (
-      evOrValue: ChangeEvent<HTMLInputElement> | string | number,
-    ) => void
-  }
-
-const [CheckboxGroupProvider, useCheckboxGroupContext] = createContext<
-  CheckboxContext | undefined
->({
-  strict: false,
-  name: "CheckboxGroupContext",
-})
-
-export { useCheckboxGroupContext }
+export interface CheckboxGroupProps<Y extends string | number = string>
+  extends ThemeProps<"Checkbox">,
+    Omit<FlexProps, "defaultValue" | "onChange">,
+    UseCheckboxGroupProps<Y>,
+    FormControlOptions {
+  /**
+   * If provided, generate checkboxes based on items.
+   *
+   * @default '[]'
+   */
+  items?: CheckboxItem<Y>[]
+}
 
 export const CheckboxGroup = forwardRef(
   <Y extends string | number = string>(
@@ -201,7 +189,7 @@ export const CheckboxGroup = forwardRef(
             isInvalid,
             value,
             onChange,
-          } as CheckboxContext
+          } as CheckboxGroupContext
         }
       >
         <Flex
@@ -221,7 +209,7 @@ export const CheckboxGroup = forwardRef(
   },
 ) as {
   <Y extends string | number = string>(
-    props: CheckboxGroupProps<Y> & { ref?: Ref<HTMLDivElement> },
+    props: CheckboxGroupProps<Y> & RefAttributes<HTMLDivElement>,
   ): JSX.Element
 } & ComponentArgs
 

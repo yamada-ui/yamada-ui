@@ -11,7 +11,7 @@ import { usePage } from "contexts"
 import Link from "next/link"
 import { memo } from "react"
 
-export type BreadcrumbProps = UIBreadcrumbProps
+export interface BreadcrumbProps extends UIBreadcrumbProps {}
 
 export const Breadcrumb = memo(
   forwardRef<BreadcrumbProps, "div">(({ ...rest }, ref) => {

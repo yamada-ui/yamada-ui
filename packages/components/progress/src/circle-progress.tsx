@@ -15,7 +15,7 @@ import { useToken } from "@yamada-ui/use-token"
 import { cx, isUnit, replaceObject, valueToPercent } from "@yamada-ui/utils"
 import type { FC } from "react"
 
-type CircleProgressOptions = {
+interface CircleProgressOptions {
   /**
    * The CSS `box-size` property.
    *
@@ -79,9 +79,10 @@ type CircleProgressOptions = {
   speed?: [string | number, string | number]
 }
 
-export type CircleProgressProps = Omit<HTMLUIProps<"div">, "color"> &
-  Omit<ThemeProps<"CircleProgress">, "size"> &
-  CircleProgressOptions
+export interface CircleProgressProps
+  extends Omit<HTMLUIProps, "color">,
+    Omit<ThemeProps<"CircleProgress">, "size">,
+    CircleProgressOptions {}
 
 /**
  * `CircleProgress` is a component that displays progress in a circular progress bar.
@@ -183,14 +184,15 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   },
 )
 
-type CircleProps = HTMLUIProps<"circle">
+interface CircleProps extends HTMLUIProps<"circle"> {}
 
 const Circle: FC<CircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />
 )
 
-type ShapeProps = Omit<HTMLUIProps<"svg">, "speed"> &
-  Pick<Required<CircleProgressProps>, "children" | "isAnimation" | "speed">
+interface ShapeProps
+  extends Omit<HTMLUIProps<"svg">, "children" | "speed">,
+    Pick<Required<CircleProgressProps>, "children" | "isAnimation" | "speed"> {}
 
 const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
   const animation = useAnimation({

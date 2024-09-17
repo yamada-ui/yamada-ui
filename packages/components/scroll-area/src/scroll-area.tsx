@@ -18,33 +18,6 @@ import {
 import type { UIEvent } from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
-type ScrollAreaOptions = {
-  /**
-   * Scrollbar visibility type.
-   *
-   * @default 'hover'
-   */
-  type?: "always" | "scroll" | "hover" | "never"
-  /**
-   * Props for inner element.
-   */
-  innerProps?: HTMLUIProps<"div">
-  /**
-   * Delay in milliseconds before scrollbars are hidden.
-   *
-   * @default 1000
-   */
-  scrollHideDelay?: number
-  /**
-   * Callback function for when the scroll position changes.
-   */
-  onScrollPositionChange?: ({ x, y }: { x: number; y: number }) => void
-}
-
-export type ScrollAreaProps = HTMLUIProps<"div"> &
-  ThemeProps<"ScrollArea"> &
-  ScrollAreaOptions
-
 const neverStyles: CSSUIObject = {
   scrollbarWidth: "none",
   _scrollbar: { display: "none" },
@@ -78,6 +51,34 @@ const hiddenStyles: CSSUIObject = {
     },
   },
 }
+
+interface ScrollAreaOptions {
+  /**
+   * Scrollbar visibility type.
+   *
+   * @default 'hover'
+   */
+  type?: "always" | "scroll" | "hover" | "never"
+  /**
+   * Props for inner element.
+   */
+  innerProps?: HTMLUIProps
+  /**
+   * Delay in milliseconds before scrollbars are hidden.
+   *
+   * @default 1000
+   */
+  scrollHideDelay?: number
+  /**
+   * Callback function for when the scroll position changes.
+   */
+  onScrollPositionChange?: ({ x, y }: { x: number; y: number }) => void
+}
+
+export interface ScrollAreaProps
+  extends HTMLUIProps,
+    ThemeProps<"ScrollArea">,
+    ScrollAreaOptions {}
 
 /**
  * `ScrollArea` is a component that displays a customized scrollbar.
@@ -185,12 +186,10 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   )
 
   if (isSafari) {
-    //Added the safari check here, reduce computing for other browsers
     const componentKey = `${isHovered}-${isScrolling}`
 
     return (
       <InternalScrollArea
-        // Added the key here
         key={componentKey}
         ref={mergeRefs(ref, scrollAreaRef)}
         data-key={componentKey}
@@ -211,8 +210,7 @@ export const ScrollArea = forwardRef<ScrollAreaProps, "div">((props, ref) => {
   }
 })
 
-type InternalScrollAreaProps = HTMLUIProps<"div"> &
-  Pick<ScrollAreaProps, "innerProps">
+type InternalScrollAreaProps = HTMLUIProps & Pick<ScrollAreaProps, "innerProps">
 
 const InternalScrollArea = forwardRef<InternalScrollAreaProps, "div">(
   ({ className, innerProps, children, ...rest }, ref) => {

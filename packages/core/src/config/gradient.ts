@@ -1,5 +1,7 @@
+import type { Dict } from "@yamada-ui/utils"
 import { isArray } from "@yamada-ui/utils"
-import type { Transform } from "./utils"
+import type { CSSFunction } from "../css"
+import type { StyledTheme } from "../theme.types"
 import {
   getCSSFunction,
   globalValues,
@@ -7,7 +9,7 @@ import {
   splitValues,
 } from "./utils"
 
-const directions: Record<string, string> = {
+const directions: { [key: string]: string } = {
   "to-t": "to top",
   "to-tr": "to top right",
   "to-r": "to right",
@@ -20,7 +22,12 @@ const directions: Record<string, string> = {
 
 const directionValues = new Set(Object.values(directions))
 
-export const gradient: Transform = (value, theme) => {
+export function gradient(
+  value: any,
+  theme: StyledTheme,
+  _css?: CSSFunction,
+  _prev?: Dict,
+) {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)
@@ -54,7 +61,10 @@ export const gradient: Transform = (value, theme) => {
 
     const token = `colors.${color}`
 
-    color = token in theme.__cssMap ? theme.__cssMap[token].ref : color
+    color =
+      theme.__cssMap && token in theme.__cssMap
+        ? theme.__cssMap[token].ref
+        : color
 
     if (ratio) {
       return [color, ...(isArray(ratio) ? ratio : [ratio])].join(" ")

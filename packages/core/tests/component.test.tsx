@@ -3,7 +3,7 @@ import {
   pseudos,
   ThemeProvider,
   useComponentStyle,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "../src"
 
 describe("useComponentStyle", () => {
@@ -316,7 +316,7 @@ describe("useComponentStyle", () => {
   })
 })
 
-describe("useMultiComponentStyle", () => {
+describe("useComponentMultiStyle", () => {
   const theme = {
     breakpoints: {
       sm: "30em",
@@ -360,7 +360,7 @@ describe("useMultiComponentStyle", () => {
 
   test("returns the correct styles for multi-variant components", () => {
     const { result } = renderHook(
-      () => useMultiComponentStyle("Button", { variant: "solid", size: "sm" }),
+      () => useComponentMultiStyle("Button", { variant: "solid", size: "sm" }),
       {
         wrapper: ({ children }) => (
           <ThemeProvider theme={theme}>{children}</ThemeProvider>

@@ -4,14 +4,16 @@ import type { IconProps } from "@yamada-ui/icon"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import type { FC, PropsWithChildren, ReactNode } from "react"
-import { useAccordionContext } from "./accordion"
-import { useAccordionItemContext } from "./accordion-item"
+import {
+  useAccordionContext,
+  useAccordionItemContext,
+} from "./accordion-context"
 
-type AccordionLabelOptions = {
+interface AccordionLabelOptions {
   /**
    * Props the container element.
    */
-  containerProps?: HTMLUIProps<"div">
+  containerProps?: HTMLUIProps
   /**
    * The accordion icon to use.
    */
@@ -20,7 +22,9 @@ type AccordionLabelOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionLabelProps = HTMLUIProps<"button"> & AccordionLabelOptions
+export interface AccordionLabelProps
+  extends HTMLUIProps<"button">,
+    AccordionLabelOptions {}
 
 export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
   ({ className, icon: customIcon, containerProps, children, ...rest }, ref) => {
@@ -65,7 +69,7 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
         : generalIcon
 
     return (
-      <ui.div role="heading" aria-level="3" {...containerProps}>
+      <ui.div role="heading" aria-level={3} {...containerProps}>
         <ui.button
           {...getLabelProps(rest, ref)}
           className={cx("ui-accordion__label", className)}

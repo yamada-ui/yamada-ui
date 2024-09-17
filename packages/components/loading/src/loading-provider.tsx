@@ -36,7 +36,7 @@ import {
 import { RemoveScroll } from "react-remove-scroll"
 import { Loading } from "./loading"
 
-type LoadingContextProps = {
+interface LoadingContextProps {
   /**
    * Returns a judgement on whether it is currently loading or not.
    */
@@ -65,7 +65,7 @@ type LoadingContextProps = {
   force: (state: Partial<LoadingState>) => void
 }
 
-type LoadingContext = {
+interface LoadingContext {
   /**
    * The screen loading animation.
    */
@@ -86,22 +86,23 @@ type LoadingContext = {
   custom: LoadingContextProps
 }
 
-type LoadingProps = {
+interface LoadingProps {
   message: ReactNode | undefined
   duration: number | null
 }
 
-type LoadingState = {
+interface LoadingState {
   loadingCount: number
   message: ReactNode | undefined
   duration: number | null
 }
 
-export type LoadingProviderProps = PropsWithChildren<ThemeConfig["loading"]>
+export interface LoadingProviderProps
+  extends PropsWithChildren<ThemeConfig["loading"]> {}
 
 const LoadingContext = createContext({} as LoadingContext)
 
-type Refs = {
+interface Refs {
   isLoading: RefObject<LoadingContextProps["isLoading"]>
   start: RefObject<LoadingContextProps["start"]>
   finish: RefObject<LoadingContextProps["finish"]>
@@ -192,10 +193,10 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   )
 }
 
-type ControllerProps = {
+interface ControllerProps extends LoadingConfigOptions {
   controlRefs: ControlRefs
   render?: (props: LoadingComponentProps) => JSX.Element
-} & LoadingConfigOptions
+}
 
 const Controller: FC<ControllerProps> = ({
   controlRefs,
@@ -303,9 +304,9 @@ const Controller: FC<ControllerProps> = ({
   )
 }
 
-type RenderProps = {
+interface RenderProps extends LoadingComponentProps {
   component?: (props: LoadingComponentProps) => ReactNode
-} & LoadingComponentProps
+}
 
 const Render: FC<RenderProps> = ({ component, ...props }) => {
   if (typeof component === "function") {
@@ -315,7 +316,9 @@ const Render: FC<RenderProps> = ({ component, ...props }) => {
   }
 }
 
-type MessageProps = { message: ReactNode } & HTMLUIProps<"p">
+interface MessageProps extends HTMLUIProps<"p"> {
+  message: ReactNode
+}
 
 const Message: FC<MessageProps> = ({ message, ...rest }) => {
   return message ? (

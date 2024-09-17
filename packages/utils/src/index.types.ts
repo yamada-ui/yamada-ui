@@ -17,15 +17,26 @@ export type Path<T> = {
   [K in keyof T]-?: PathImpl<K, T[K]>
 }[keyof T]
 
-export type Dict<T = any> = Record<string, T>
+export interface Dict<T = any> {
+  [key: string]: T
+}
 
-export type ObjectLiteral = {}
+export interface ObjectLiteral {}
 
 export type StringLiteral = string & {}
 
+export type Replace<
+  Y extends string,
+  M extends string,
+  D extends string,
+  H extends string = "",
+> = Y extends `${infer T}${M}${infer R}`
+  ? Replace<R, M, D, `${H}${T}${D}`>
+  : `${H}${Y}`
+
 export type Union<T> = T | StringLiteral
 
-export type Length = string | 0 | number
+export type Length<T extends any[]> = T["length"]
 
 export type Merge<Y, M> = Omit<Y, keyof M> & M
 

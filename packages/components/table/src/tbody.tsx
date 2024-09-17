@@ -3,7 +3,7 @@ import { Tbody as NativeTbody, Tr, Td } from "@yamada-ui/native-table"
 import { dataAttr, ariaAttr, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import { useTableContext, render } from "./use-table"
 
-export type TableBodyProps = NativeTableBodyProps
+export interface TableBodyProps extends NativeTableBodyProps {}
 
 export const Tbody = ({ ...rest }: TableBodyProps) => {
   const {

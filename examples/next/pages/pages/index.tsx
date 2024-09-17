@@ -1,7 +1,7 @@
 import { Layout } from 'components/layouts'
 import { GetServerSidePropsContext, NextPage } from 'next'
 
-type Props = {}
+interface Props {}
 
 const Page: NextPage<Props> = () => {
   return <Layout></Layout>

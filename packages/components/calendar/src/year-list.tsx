@@ -10,20 +10,25 @@ import { getFormattedLabel } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
 import { useYearList } from "./use-year-list"
 
-type YearListOptions = {
+interface YearListOptions {
   /**
    * Props for calendar header element.
    */
-  headerProps?: HTMLUIProps<"div">
+  headerProps?: HTMLUIProps
+  /**
+   * Props for calendar year grid element.
+   */
+  yearGridProps?: HTMLUIProps
   /**
    * Props for calendar year button element.
    */
   yearProps?: ButtonProps & { component?: FC<{ year: number; index: number }> }
 }
 
-export type YearListProps = HTMLUIProps<"div"> &
-  Omit<CalendarHeaderProps, "label" | "index"> &
-  YearListOptions
+export interface YearListProps
+  extends HTMLUIProps,
+    Omit<CalendarHeaderProps, "label" | "index">,
+    YearListOptions {}
 
 export const YearList: FC<YearListProps> = ({
   className,
@@ -33,10 +38,11 @@ export const YearList: FC<YearListProps> = ({
   prevProps,
   nextProps,
   yearProps,
+  yearGridProps,
   ...rest
 }) => {
   const { locale, yearFormat, styles } = useCalendarContext()
-  const { rangeYears, getContainerProps, getButtonProps } = useYearList()
+  const { label, rangeYears, getGridProps, getButtonProps } = useYearList()
 
   const { component: customYear, ...computedYearProps } = yearProps ?? {}
 
@@ -47,19 +53,12 @@ export const YearList: FC<YearListProps> = ({
   const minH = rest.minH ?? rest.minHeight
   const maxH = rest.maxH ?? rest.maxHeight
 
-  const minYearLabel = getFormattedLabel(rangeYears[0], locale, yearFormat)
-  const maxYearLabel = getFormattedLabel(
-    rangeYears[rangeYears.length - 1],
-    locale,
-    yearFormat,
-  )
-
   return (
     <ui.div __css={{ ...styles.content }} {...filterUndefined(rest)}>
       <CalendarHeader
         {...{
           ...headerProps,
-          label: `${minYearLabel} - ${maxYearLabel}`,
+          label,
           labelProps,
           controlProps,
           prevProps,
@@ -68,8 +67,6 @@ export const YearList: FC<YearListProps> = ({
       />
 
       <ui.div
-        role="grid"
-        aria-label={`From ${minYearLabel} to ${maxYearLabel}`}
         className={cx("ui-calendar__year-list", className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,
@@ -81,9 +78,10 @@ export const YearList: FC<YearListProps> = ({
           display: "grid",
           ...styles.year,
         }}
-        {...getContainerProps(
-          filterUndefined({ w, minW, maxW, h, minH, maxH }),
-        )}
+        {...getGridProps({
+          ...filterUndefined({ w, minW, maxW, h, minH, maxH }),
+          ...yearGridProps,
+        })}
       >
         {rangeYears.map((year, index) => (
           <Button

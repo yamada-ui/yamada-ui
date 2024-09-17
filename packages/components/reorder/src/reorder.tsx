@@ -4,35 +4,34 @@ import type {
   HTMLUIProps,
   ThemeProps,
 } from "@yamada-ui/core"
-import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { HTMLMotionProps } from "@yamada-ui/motion"
 import { MotionReorder } from "@yamada-ui/motion"
 import type { Merge } from "@yamada-ui/utils"
 import {
-  createContext,
   cx,
   getValidChildren,
   handlerAll,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, PropsWithChildren } from "react"
+import type { ForwardedRef, PropsWithChildren, RefAttributes } from "react"
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react"
-import { ReorderItem, type ReorderItemProps } from "./reorder-item"
-
-type ReorderContext = {
-  orientation: "vertical" | "horizontal"
-  styles: Record<string, CSSUIObject>
-}
-
-export const [ReorderProvider, useReorderContext] =
-  createContext<ReorderContext>({
-    name: "ReorderContext",
-    errorMessage: `useReorderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Reorder />"`,
-  })
+import { ReorderProvider } from "./reorder-context"
+import { ReorderItem } from "./reorder-item"
+import type { ReorderItemProps } from "./reorder-item"
 
 export type ReorderGenerateItem<Y extends any = string> = ReorderItemProps<Y>
 
-type ReorderOptions<Y extends any = string> = {
+const omitDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
+  Array.from(new Set(values))
+
+const pickDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
+  values.filter(
+    (value, index, self) =>
+      self.indexOf(value) === index && index !== self.lastIndexOf(value),
+  )
+
+interface ReorderOptions<Y extends any = string> {
   /**
    * The orientation of the reorder.
    *
@@ -54,22 +53,14 @@ type ReorderOptions<Y extends any = string> = {
   onCompleteChange?: (values: Y[]) => void
 }
 
-export type ReorderProps<Y extends any = string> = Omit<
-  Merge<HTMLUIProps<"ul">, HTMLMotionProps<"ul">>,
-  "onChange" | "transition" | "children"
-> &
-  PropsWithChildren &
-  ThemeProps<"Reorder"> &
-  ReorderOptions<Y>
-
-const omitDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
-  Array.from(new Set(values))
-
-const pickDuplicated = <Y extends any = string>(values: Y[]): Y[] =>
-  values.filter(
-    (value, index, self) =>
-      self.indexOf(value) === index && index !== self.lastIndexOf(value),
-  )
+export interface ReorderProps<Y extends any = string>
+  extends Omit<
+      Merge<HTMLUIProps<"ul">, HTMLMotionProps<"ul">>,
+      "onChange" | "transition" | "children"
+    >,
+    PropsWithChildren,
+    ThemeProps<"Reorder">,
+    ReorderOptions<Y> {}
 
 /**
  * `Reorder` is a component that allows you to change the order of items using drag and drop.
@@ -81,7 +72,7 @@ export const Reorder = forwardRef(
     props: ReorderProps<Y>,
     ref: ForwardedRef<HTMLUListElement>,
   ) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Reorder", props)
+    const [styles, mergedProps] = useComponentMultiStyle("Reorder", props)
     const {
       className,
       orientation = "vertical",
@@ -193,8 +184,8 @@ export const Reorder = forwardRef(
     )
   },
 ) as {
-  <Y extends any = string>(
-    props: ReorderProps<Y> & { ref?: ForwardedRef<HTMLUListElement> },
+  <Y = string>(
+    props: ReorderProps<Y> & RefAttributes<HTMLUListElement>,
   ): JSX.Element
 } & ComponentArgs
 

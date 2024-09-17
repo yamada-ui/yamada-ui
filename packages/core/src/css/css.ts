@@ -10,14 +10,14 @@ import type { StyledTheme } from "../theme.types"
 import type { BreakpointQueries } from "./breakpoint"
 import type { CSSObjectOrFunc, CSSUIObject } from "./css.types"
 
-const isProcessSkip = (key: string) =>
-  processSkipProperties.includes(key as ProcessSkipProperty)
-
-const expandColorMode = (
+function isProcessSkip(key: string) {
+  return processSkipProperties.includes(key as ProcessSkipProperty)
+}
+function expandColorMode(
   key: string,
   value: any[],
   queries: BreakpointQueries,
-): Dict => {
+): Dict {
   let computedCSS: Dict = {}
 
   if (isObject(value[0])) {
@@ -31,12 +31,12 @@ const expandColorMode = (
   return computedCSS
 }
 
-const expandResponsive = (
+function expandResponsive(
   key: string,
   value: Dict,
   queries: BreakpointQueries,
-): Dict =>
-  queries.reduce((prev, { breakpoint, query }) => {
+): Dict {
+  return queries.reduce((prev, { breakpoint, query }) => {
     const breakpointValue = value[breakpoint]
 
     if (query) {
@@ -49,10 +49,10 @@ const expandResponsive = (
 
     return prev
   }, {} as Dict)
+}
 
-const expandCSS =
-  (css: Dict) =>
-  (theme: StyledTheme): Dict => {
+function expandCSS(css: Dict) {
+  return function (theme: StyledTheme): Dict {
     if (!theme.__breakpoints) return css
 
     const { isResponsive, queries } = theme.__breakpoints
@@ -81,8 +81,9 @@ const expandCSS =
 
     return computedCSS
   }
+}
 
-const parseVar = (value: any, theme: StyledTheme) => {
+function parseVar(value: any, theme: StyledTheme) {
   if (isArray(value) || isObject(value)) {
     return value
   } else if (isString(value)) {
@@ -100,13 +101,15 @@ const parseVar = (value: any, theme: StyledTheme) => {
   }
 }
 
-export const css =
-  (cssOrFunc: CSSObjectOrFunc | CSSUIObject) =>
-  (theme: StyledTheme, disableStyleProp?: (prop: string) => boolean) => {
-    const createCSS = (
+export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
+  return function (
+    theme: StyledTheme,
+    disableStyleProp?: (prop: string) => boolean,
+  ) {
+    function createCSS(
       cssOrFunc: CSSObjectOrFunc | CSSUIObject,
       isNested: boolean = false,
-    ): Dict => {
+    ): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
 
@@ -181,5 +184,6 @@ export const css =
 
     return createCSS(cssOrFunc)
   }
+}
 
 export type CSSFunction = typeof css

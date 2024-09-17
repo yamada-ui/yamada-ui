@@ -17,18 +17,18 @@ type A11yConfigureOptions = AxeCore.RunOptions & {
 
 export type A11yProps = RenderOptions & { axeOptions?: A11yConfigureOptions }
 
-export const a11y = async (
+export async function a11y(
   ui: ReactElement | HTMLElement,
   { axeOptions, ...rest }: A11yProps = {},
-): Promise<void> => {
+): Promise<void> {
   const container = isValidElement(ui) ? render(ui, rest).container : ui
   const results = await axe(container as HTMLElement, axeOptions)
 
   expect(results).toHaveNoViolations()
 }
 
-export const filterVisuallyHidden =
-  (targetContent: string) => (content: string, el: Element | null) => {
+export function filterVisuallyHidden(targetContent: string) {
+  return function (content: string, el: Element | null) {
     if (!el || content !== targetContent) return false
 
     const style = window.getComputedStyle(el)
@@ -58,3 +58,4 @@ export const filterVisuallyHidden =
 
     return !isVisuallyHidden
   }
+}

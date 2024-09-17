@@ -2,14 +2,14 @@ import type { ThemeTokens } from "@yamada-ui/core"
 import { defaultTheme } from "@yamada-ui/theme"
 import { hslaTo, isArray, isString, parseToHsla, TONES } from "@yamada-ui/utils"
 
-const analyzeValue = (value: any) => {
+function analyzeValue(value: any) {
   const n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
 
   return { n, unit }
 }
 
-const spaces = (x: number) => {
+function spaces(x: number) {
   if (isNaN(x)) throw new Error("The multiplier must be a valid number.")
 
   if (!isFinite(x)) throw new Error("The multiplier must be a finite number.")
@@ -51,7 +51,7 @@ const spaces = (x: number) => {
   return computedSpaces
 }
 
-const tones = (hex: string) => {
+function tones(hex: string) {
   const [h, s, l, a] = parseToHsla(hex) ?? [0, 0, 0]
   const v = l > 0.5
   const x = ((v ? 1 : 0.95) - l) / 5

@@ -24,35 +24,42 @@ import {
   noop,
 } from "@yamada-ui/utils"
 
-type Options = {
+interface Options {
   merge?: boolean
   omit?: (keyof typeof defaultTheme)[]
   pick?: (keyof typeof defaultTheme)[]
 }
 
-const createExtendTheme =
-  (initialTheme: Dict = defaultTheme) =>
-  (...extensions: (UsageTheme | ((theme: UsageTheme) => UsageTheme))[]) =>
-  ({ merge = true, pick = [], omit = [] }: Options = {}): Dict => {
-    let overrides = [...extensions]
-    let theme = extensions[extensions.length - 1]
+function createExtendTheme(initialTheme: Dict = defaultTheme) {
+  return function (
+    ...extensions: (UsageTheme | ((theme: UsageTheme) => UsageTheme))[]
+  ) {
+    return function ({
+      merge = true,
+      pick = [],
+      omit = [],
+    }: Options = {}): Dict {
+      let overrides = [...extensions]
+      let theme = extensions[extensions.length - 1]
 
-    if (omit.length) initialTheme = omitObject(initialTheme, omit)
-    if (pick.length) initialTheme = pickObject(initialTheme, pick)
+      if (omit.length) initialTheme = omitObject(initialTheme, omit)
+      if (pick.length) initialTheme = pickObject(initialTheme, pick)
 
-    if (!isFunction(theme) && overrides.length > 1) {
-      overrides = overrides.slice(0, overrides.length - 1)
+      if (!isFunction(theme) && overrides.length > 1) {
+        overrides = overrides.slice(0, overrides.length - 1)
 
-      if (merge) theme = mergeObject(initialTheme, theme)
-    } else {
-      theme = merge ? initialTheme : {}
+        if (merge) theme = mergeObject(initialTheme, theme)
+      } else {
+        theme = merge ? initialTheme : {}
+      }
+
+      return overrides.reduce(
+        (prev, extension) => mergeObject(prev, runIfFunc(extension, prev)),
+        theme as Dict,
+      )
     }
-
-    return overrides.reduce(
-      (prev, extension) => mergeObject(prev, runIfFunc(extension, prev)),
-      theme as Dict,
-    )
   }
+}
 
 /**
  * Create a new theme by inheriting the default theme.
@@ -70,16 +77,17 @@ export const extendTheme = createExtendTheme(defaultTheme)
  */
 export const extendBaseTheme = createExtendTheme(baseTheme)
 
-export const extendToken = (
+export function extendToken(
   token: ThemeToken,
   tokens?: ThemeTokens,
-): ThemeTokens =>
-  mergeObject(get<ThemeTokens>(defaultTheme, token, {}), tokens ?? {})
+): ThemeTokens {
+  return mergeObject(get<ThemeTokens>(defaultTheme, token, {}), tokens ?? {})
+}
 
-export const extendStyle = (
+export function extendStyle(
   name: "globalStyle" | "resetStyle",
   style: UIStyle,
-): UIStyle => {
+): UIStyle {
   const props: UIStyleProps = {
     theme: {
       themeScheme: "base",
@@ -97,11 +105,11 @@ export const extendStyle = (
   )
 }
 
-export const extendComponent = (
+export function extendComponent(
   name: keyof (typeof defaultTheme)["components"],
   componentStyle?: ComponentStyle | ComponentMultiStyle,
-): ComponentStyle | ComponentMultiStyle =>
-  mergeObject(
+): ComponentStyle | ComponentMultiStyle {
+  return mergeObject(
     get<ComponentStyle | ComponentMultiStyle>(
       defaultTheme,
       `components.${name}`,
@@ -109,21 +117,23 @@ export const extendComponent = (
     ),
     componentStyle ?? {},
   )
+}
 
-export const extendComponentSize = (
+export function extendComponentSize(
   name: keyof (typeof defaultTheme)["components"],
   componentSizes?: ComponentSizes | ComponentMultiSizes,
-): ComponentSizes | ComponentMultiSizes =>
-  mergeObject(
+): ComponentSizes | ComponentMultiSizes {
+  return mergeObject(
     get<ComponentSizes>(defaultTheme, `components.${name}.sizes`, {}),
     componentSizes ?? {},
   )
+}
 
-export const extendComponentVariant = (
+export function extendComponentVariant(
   name: keyof (typeof defaultTheme)["components"],
   componentVariants?: ComponentVariants | ComponentMultiVariants,
-): ComponentVariants | ComponentMultiVariants =>
-  mergeObject(
+): ComponentVariants | ComponentMultiVariants {
+  return mergeObject(
     get<ComponentVariants | ComponentMultiVariants>(
       defaultTheme,
       `components.${name}.variants`,
@@ -131,12 +141,13 @@ export const extendComponentVariant = (
     ),
     componentVariants ?? {},
   )
+}
 
-export const extendComponentDefaultProps = (
+export function extendComponentDefaultProps(
   name: keyof (typeof defaultTheme)["components"],
   componentDefaultProps?: ComponentDefaultProps,
-): ComponentDefaultProps =>
-  mergeObject(
+): ComponentDefaultProps {
+  return mergeObject(
     get<ComponentDefaultProps>(
       defaultTheme,
       `components.${name}.defaultProps`,
@@ -144,3 +155,4 @@ export const extendComponentDefaultProps = (
     ),
     componentDefaultProps ?? {},
   )
+}

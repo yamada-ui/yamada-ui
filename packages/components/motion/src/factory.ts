@@ -1,9 +1,12 @@
-import { styled, type StyledOptions } from "@yamada-ui/core"
+import { styled } from "@yamada-ui/core"
+import type { StyledOptions } from "@yamada-ui/core"
 import { motion as _motion } from "framer-motion"
 import type { ComponentType } from "react"
 import type { MotionAs, MotionComponents, MotionFactory } from "./motion.types"
 
-const factory = () => {
+interface Factory extends MotionFactory, MotionComponents {}
+
+function factory() {
   const cache = new Map<MotionAs, ComponentType>()
 
   return new Proxy(styled, {
@@ -16,7 +19,7 @@ const factory = () => {
 
       return cache.get(el)
     },
-  }) as MotionFactory & MotionComponents
+  }) as Factory
 }
 
 /**

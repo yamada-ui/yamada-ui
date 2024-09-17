@@ -7,7 +7,9 @@ import type {
 } from "./components"
 import { styled } from "./styled"
 
-const factory = () => {
+interface Factory extends UIFactory, HTMLUIComponents {}
+
+function factory() {
   const cache = new Map<DOMElements, ComponentType>()
 
   return new Proxy(styled, {
@@ -20,7 +22,7 @@ const factory = () => {
 
       return cache.get(el)
     },
-  }) as UIFactory & HTMLUIComponents
+  }) as Factory
 }
 
 /**

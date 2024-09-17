@@ -4,9 +4,11 @@ import { cx } from "@yamada-ui/utils"
 import type { UseSelectOptionGroupProps } from "./use-select"
 import { useSelectContext, useSelectOptionGroup } from "./use-select"
 
-type OptionGroupOptions = UseSelectOptionGroupProps
+interface OptionGroupOptions extends UseSelectOptionGroupProps {}
 
-export type OptionGroupProps = HTMLUIProps<"ul"> & OptionGroupOptions
+export interface OptionGroupProps
+  extends HTMLUIProps<"ul">,
+    OptionGroupOptions {}
 
 export const OptionGroup = forwardRef<OptionGroupProps, "ul">(
   (

@@ -1,7 +1,7 @@
 import { useSafeLayoutEffect, isRefObject, isArray } from "@yamada-ui/utils"
 import { useState } from "react"
 
-type Size = {
+interface Size {
   width: number
   height: number
 }

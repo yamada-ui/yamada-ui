@@ -4,7 +4,7 @@ import { useMemo, useState } from "react"
 import { createPortal } from "react-dom"
 import { PortalProvider } from "./portal-provider"
 
-type ContainerPortalProps = PropsWithChildren & {
+interface ContainerPortalProps extends PropsWithChildren {
   containerRef: RefObject<HTMLElement | null>
   appendToParentPortal?: boolean
 }

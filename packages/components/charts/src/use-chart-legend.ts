@@ -1,11 +1,12 @@
+import type { PropGetter } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { splitObject } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type * as Recharts from "recharts"
-import type { ChartPropGetter, LegendProps } from "./chart.types"
+import type { LegendProps } from "./chart.types"
 import { legendProperties } from "./rechart-properties"
 
-export type UseChartLegendProps = {
+export interface UseChartLegendProps {
   /**
    * Props passed down to recharts 'Legend' component.
    */
@@ -20,8 +21,7 @@ export const useChartLegend = ({
     legendProperties,
   )
 
-  const getLegendProps: ChartPropGetter<
-    "div",
+  const getLegendProps: PropGetter<
     Partial<Recharts.LegendProps>,
     Omit<Recharts.LegendProps, "ref">
   > = useCallback(

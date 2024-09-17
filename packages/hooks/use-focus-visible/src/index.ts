@@ -120,7 +120,7 @@ const setGlobalFocusEvents = () => {
   hasSetup = true
 }
 
-type TrackFocusVisibleOptions = {
+interface TrackFocusVisibleOptions {
   force?: boolean
 }
 

@@ -16,7 +16,7 @@ import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 
-export type HeaderProps = StackProps & {}
+export interface HeaderProps extends StackProps {}
 
 export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
   return (

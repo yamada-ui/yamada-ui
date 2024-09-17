@@ -3,7 +3,8 @@ import type { DialogProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC, MutableRefObject } from "react"
 
-export type DeleteDialogProps = Omit<DialogProps, "isOpen" | "onClose"> & {
+export interface DeleteDialogProps
+  extends Omit<DialogProps, "isOpen" | "onClose"> {
   onOpenRef: MutableRefObject<() => void>
 }
 

@@ -10,7 +10,7 @@ import type { SliderProps, StackProps, TooltipProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 
-export type ParameterProps = SliderProps & {
+export interface ParameterProps extends SliderProps {
   label: string
   description: string
   labelProps?: StackProps

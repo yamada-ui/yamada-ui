@@ -4,7 +4,9 @@ import type { StackProps } from "@yamada-ui/react"
 import { useI18n } from "contexts"
 import type { FC } from "react"
 
-export type EditPageLinkProps = StackProps & { href?: string }
+export interface EditPageLinkProps extends StackProps {
+  href?: string
+}
 
 export const EditPageLink: FC<EditPageLinkProps> = ({ href, ...rest }) => {
   const { t } = useI18n()

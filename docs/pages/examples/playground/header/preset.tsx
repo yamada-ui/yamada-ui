@@ -19,7 +19,7 @@ const OPTIONS: AutocompleteItem[] = [
   { label: "Chat", value: "Chat" },
 ]
 
-export type PresetProps = AutocompleteProps & {}
+export interface PresetProps extends AutocompleteProps {}
 
 export const Preset: FC<PresetProps> = memo(({ ...rest }) => {
   return (

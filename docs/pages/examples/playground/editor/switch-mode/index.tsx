@@ -3,15 +3,19 @@ import {
   SegmentedControl,
   SegmentedControlButton,
 } from "@yamada-ui/react"
-import type { FormControlProps, SegmentedControlProps } from "@yamada-ui/react"
+import type {
+  FormControlProps,
+  Merge,
+  SegmentedControlProps,
+} from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 import { CompleteIcon } from "./complete-icon"
 import { EditIcon } from "./edit-icon"
 import { InsertIcon } from "./insert-icon"
 
-export type SwitchModeProps = SegmentedControlProps &
-  Omit<FormControlProps, "onChange"> & {}
+export interface SwitchModeProps
+  extends Merge<FormControlProps, SegmentedControlProps> {}
 
 export const SwitchMode: FC<SwitchModeProps> = memo(
   ({

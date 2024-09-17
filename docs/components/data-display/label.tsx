@@ -2,7 +2,7 @@ import { forwardRef, Tag } from "@yamada-ui/react"
 import type { TagProps } from "@yamada-ui/react"
 import { memo } from "react"
 
-export type LabelProps = TagProps
+export interface LabelProps extends TagProps {}
 
 export const Label = memo(
   forwardRef<LabelProps, "div">(({ children, ...rest }, ref) => {

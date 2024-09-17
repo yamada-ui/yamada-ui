@@ -17,7 +17,6 @@ import {
   extendComponentVariant,
   extendComponentDefaultProps,
   extendComponent,
-  // withDefaultProps,
 } from "@yamada-ui/react"
 import type { FC } from "react"
 

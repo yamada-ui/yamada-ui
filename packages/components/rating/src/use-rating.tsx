@@ -1,47 +1,31 @@
 import type {
-  CSSUIObject,
   CSSUIProps,
   HTMLUIProps,
-  UIPropGetter,
+  PropGetter,
+  RequiredPropGetter,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type { RequiredMotionUIPropGetter } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { Dict } from "@yamada-ui/utils"
+import type { Merge } from "@yamada-ui/utils"
 import {
   clampNumber,
-  createContext,
   dataAttr,
   handlerAll,
   mergeRefs,
   pickObject,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type {
-  ChangeEvent,
-  Dispatch,
-  MouseEvent,
-  ReactNode,
-  SetStateAction,
-  TouchEvent,
-} from "react"
-import { useCallback, useEffect, useId, useRef, useState } from "react"
-import type { RatingGroupProps } from "./rating-group"
+import type { MouseEvent, ReactNode, TouchEvent } from "react"
+import { useCallback, useId, useRef, useState } from "react"
 import { RatingGroup } from "./rating-group"
+import type { RatingGroupProps } from "./rating-group"
 import type { RatingItemProps } from "./rating-item"
-
-export const getRoundedValue = (value: number, to: number) => {
-  const rounded = Math.round(value / to) * to
-
-  const precision = `${to}`.split(".")[1]?.length || 0
-
-  return Number(rounded.toFixed(precision))
-}
+import { getRoundedValue } from "./rating-utils"
 
 type OmittedGroupProps = Omit<RatingGroupProps, "value" | "items" | "children">
 type OmittedItemProps = Omit<
@@ -53,38 +37,15 @@ type OmittedInputProps = Omit<
   "value" | "defaultValue" | "checked"
 >
 
-type GroupProps = OmittedGroupProps | ((value: number) => OmittedGroupProps)
-type ItemProps = OmittedItemProps | ((value: number) => OmittedItemProps)
-type InputProps = OmittedInputProps | ((value: number) => OmittedInputProps)
+export type GroupProps =
+  | OmittedGroupProps
+  | ((value: number) => OmittedGroupProps)
+export type ItemProps = OmittedItemProps | ((value: number) => OmittedItemProps)
+export type InputProps =
+  | OmittedInputProps
+  | ((value: number) => OmittedInputProps)
 
-type RatingContext = {
-  getGroupProps: RequiredMotionUIPropGetter<"div", { value: number }>
-  id: string
-  name: string
-  value: number
-  roundedValue: number
-  hoveredValue: number
-  resolvedValue: number
-  isOutside: boolean
-  setValue: Dispatch<SetStateAction<number>>
-  setHoveredValue: Dispatch<SetStateAction<number>>
-  decimal: number
-  highlightSelectedOnly: boolean
-  formControlProps: Dict
-  groupProps: GroupProps | undefined
-  itemProps: ItemProps | undefined
-  inputProps: InputProps | undefined
-  emptyIcon: ReactNode | ((value: number) => ReactNode) | undefined
-  filledIcon: ReactNode | ((value: number) => ReactNode) | undefined
-  styles: Record<string, CSSUIObject>
-}
-
-export const [RatingProvider, useRatingContext] = createContext<RatingContext>({
-  name: "RatingContext",
-  errorMessage: `useRatingContext returned is 'undefined'. Seems you forgot to wrap the components in "<Rating />"`,
-})
-
-type UseRatingOptions = {
+interface UseRatingOptions {
   /**
    * The top-level id string that will be applied to the rating.
    * The index of the rating item will be appended to this top-level id.
@@ -157,7 +118,7 @@ type UseRatingOptions = {
 }
 
 export type UseRatingProps = Omit<
-  HTMLUIProps<"div">,
+  HTMLUIProps,
   "color" | "id" | "defaultValue" | "onChange"
 > &
   UseRatingOptions &
@@ -180,7 +141,7 @@ export const useRating = ({
   filledIcon,
   ...props
 }: UseRatingProps) => {
-  let { id, "aria-readonly": _isReadOnly, ...rest } = useFormControlProps(props)
+  let { id, ...rest } = useFormControlProps(props)
   const { disabled, readOnly } = rest
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -195,7 +156,10 @@ export const useRating = ({
   id ??= useId()
   name ??= `rating-${id}`
 
-  const formControlProps = pickObject(rest, formControlProperties)
+  const { "aria-readonly": _isReadOnly, ...formControlProps } = pickObject(
+    rest,
+    formControlProperties,
+  )
 
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)
@@ -266,7 +230,7 @@ export const useRating = ({
     [disabled, getHoveredValue, hoveredValue, readOnly, onHover],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(ref, containerRef),
       ...rest,
@@ -301,11 +265,9 @@ export const useRating = ({
     ],
   )
 
-  const getGroupProps: RequiredMotionUIPropGetter<
-    "div",
-    {
-      value: number
-    }
+  const getGroupProps: RequiredPropGetter<
+    Merge<MotionProps, { value: number }>,
+    MotionProps
   > = useCallback(
     ({ value, ...props }, ref = null) => {
       const isActive = !readOnly && Math.ceil(hoveredValue) === value
@@ -361,168 +323,3 @@ export const useRating = ({
 }
 
 export type UseRatingReturn = ReturnType<typeof useRating>
-
-export type UseRatingItemProps = {
-  groupValue: number
-  fractionValue: number
-  value: number
-}
-
-export const useRatingItem = ({
-  groupValue,
-  fractionValue,
-  value,
-}: UseRatingItemProps) => {
-  const {
-    id,
-    name,
-    formControlProps,
-    isOutside,
-    highlightSelectedOnly,
-    roundedValue,
-    resolvedValue,
-    setValue,
-    setHoveredValue,
-  } = useRatingContext()
-  const { readOnly, disabled } = formControlProps
-  const [isFocused, setFocused] = useState<boolean>(false)
-  const [isFocusVisible, setIsFocusVisible] = useState<boolean>(false)
-  const isActive = value === resolvedValue
-  const isChecked = value === roundedValue
-  const isFilled = highlightSelectedOnly
-    ? value === resolvedValue
-    : value <= resolvedValue
-
-  const onBlur = useCallback(() => {
-    setFocused(false)
-
-    if (isOutside) setHoveredValue(-1)
-  }, [isOutside, setHoveredValue])
-
-  const onInputChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
-      if (readOnly || disabled) return
-
-      const value = parseFloat(ev.target.value)
-
-      setHoveredValue(value)
-    },
-    [disabled, readOnly, setHoveredValue],
-  )
-
-  const onChange = useCallback(
-    (value: number) => {
-      if (readOnly || disabled) return
-
-      setValue(value)
-    },
-    [disabled, readOnly, setValue],
-  )
-
-  const onMouseDown = useCallback(() => {
-    if (readOnly || disabled) return
-
-    onChange(value)
-  }, [disabled, onChange, readOnly, value])
-
-  const onTouchStart = useCallback(() => {
-    if (readOnly || disabled) return
-
-    onChange(value)
-  }, [disabled, onChange, readOnly, value])
-
-  const getItemProps: UIPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      const zIndex = isActive ? 1 : -1
-
-      return {
-        ref,
-        htmlFor: `${id}-${groupValue}-${value}`,
-        ...formControlProps,
-        ...props,
-        zIndex: fractionValue !== 1 ? zIndex : undefined,
-        onMouseDown: handlerAll(onMouseDown, props.onMouseDown),
-        onTouchStart: handlerAll(onTouchStart, props.onTouchStart),
-        "data-active": dataAttr(isActive),
-        "data-filled": dataAttr(isFilled),
-        "data-focus": dataAttr(isFocused),
-        "data-focus-visible": dataAttr(isFocused && isFocusVisible),
-      }
-    },
-    [
-      formControlProps,
-      fractionValue,
-      groupValue,
-      id,
-      isActive,
-      isFilled,
-      isFocusVisible,
-      isFocused,
-      onMouseDown,
-      onTouchStart,
-      value,
-    ],
-  )
-
-  const getInputProps: UIPropGetter = useCallback(
-    (props = {}, ref = null) => {
-      return {
-        ref,
-        "aria-label": `${value}`,
-        ...formControlProps,
-        ...props,
-        style: {
-          border: "0px",
-          clip: "rect(0px, 0px, 0px, 0px)",
-          height: "1px",
-          width: "1px",
-          margin: "-1px",
-          padding: "0px",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-          position: "absolute",
-        },
-        type: "radio",
-        id: `${id}-${groupValue}-${value}`,
-        name,
-        value,
-        checked: isChecked,
-        onChange: handlerAll(onInputChange, props.onChange),
-        onFocus: handlerAll(() => setFocused(true), props.onFocus),
-        onBlur: handlerAll(onBlur, props.onBlur),
-        onKeyDown: handlerAll(
-          (ev) => (ev.key === " " ? onChange(value) : void 0),
-          props.onKeyDown,
-        ),
-        "data-active": dataAttr(isActive),
-        "data-checked": dataAttr(isChecked),
-      }
-    },
-    [
-      value,
-      formControlProps,
-      id,
-      groupValue,
-      name,
-      isChecked,
-      onInputChange,
-      onBlur,
-      isActive,
-      onChange,
-    ],
-  )
-
-  useEffect(() => {
-    return trackFocusVisible(setIsFocusVisible)
-  }, [])
-
-  return {
-    isActive,
-    isChecked,
-    isFilled,
-    getItemProps,
-    getInputProps,
-  }
-}
-
-export type UseRatingItemReturn = ReturnType<typeof useRatingItem>

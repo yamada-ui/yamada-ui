@@ -3,7 +3,7 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { usePopover } from "./popover"
 
-export type PopoverFooterProps = HTMLUIProps<"footer">
+export interface PopoverFooterProps extends HTMLUIProps<"footer"> {}
 
 export const PopoverFooter = forwardRef<PopoverFooterProps, "footer">(
   ({ className, ...rest }, ref) => {

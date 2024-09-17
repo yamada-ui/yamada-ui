@@ -24,7 +24,9 @@ import type { RefObject } from "react"
 import { createRef, memo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 
-export type TableOfContentsProps = StackProps & { contents: DocumentContent[] }
+export interface TableOfContentsProps extends StackProps {
+  contents: DocumentContent[]
+}
 
 export const TableOfContents = memo(
   forwardRef<TableOfContentsProps, "div">(({ contents, ...rest }, ref) => {
@@ -129,7 +131,6 @@ export const TableOfContents = memo(
                     }}
                     transitionProperty="colors"
                     transitionDuration="normal"
-                    pointerEvents="none"
                   >
                     <Box
                       data-selected={dataAttr(isSelected)}

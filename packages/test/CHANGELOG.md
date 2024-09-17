@@ -1,5 +1,22 @@
 # @yamada-ui/test
 
+## 1.5.0
+
+### Minor Changes
+
+- [#2778](https://github.com/yamada-ui/yamada-ui/pull/2778) [`85e8179`](https://github.com/yamada-ui/yamada-ui/commit/85e8179a636506d95bb64c7982c460229f09ee8b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update `renderHook` usage and types.
+
+### Patch Changes
+
+- [#2665](https://github.com/yamada-ui/yamada-ui/pull/2665) [`5eb9701`](https://github.com/yamada-ui/yamada-ui/commit/5eb97014261d808ee72b1d197de73eba6804e050) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#2676](https://github.com/yamada-ui/yamada-ui/pull/2676) [`122f789`](https://github.com/yamada-ui/yamada-ui/commit/122f789d60f947fea53dfff1259fd540268aa66a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated types.
+
+- Updated dependencies [[`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`988c630`](https://github.com/yamada-ui/yamada-ui/commit/988c630d0f7ed297a0ddd51a09cb3bee612e9b60), [`46a228f`](https://github.com/yamada-ui/yamada-ui/commit/46a228f585a9d48ba46ce2f546a964163905c369), [`0174be8`](https://github.com/yamada-ui/yamada-ui/commit/0174be8eaca024bd4488a072336ed956546b8ed4), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74)]:
+  - @yamada-ui/utils@1.5.0
+  - @yamada-ui/theme@1.18.0
+  - @yamada-ui/providers@1.2.6
+
 ## 1.4.0
 
 ### Minor Changes

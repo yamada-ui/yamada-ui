@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react"
 
 export type StorageType = "localStorage" | "sessionStorage"
 
-export type StorageProps<T> = {
+export interface StorageProps<T> {
   key: string
   defaultValue?: T
   getInitialValueInEffect?: boolean

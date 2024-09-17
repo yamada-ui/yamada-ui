@@ -5,7 +5,7 @@ import type { CardProps } from "@yamada-ui/react"
 import { memo, useMemo } from "react"
 import type { FC } from "react"
 
-export type OverviewProps = CardProps
+export interface OverviewProps extends CardProps {}
 
 export const Overview: FC<OverviewProps> = memo(({ ...rest }) => {
   const data = useMemo(

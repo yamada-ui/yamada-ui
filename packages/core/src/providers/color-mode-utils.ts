@@ -1,4 +1,5 @@
 import type { ColorMode } from "../css"
+import { defaultEnvironment } from "./environment-provider"
 import type { Environment } from "./environment-provider"
 import { preventTransition } from "./provider-utils"
 
@@ -12,14 +13,14 @@ const queries = {
   dark: "(prefers-color-scheme: dark)",
 }
 
-type GetColorModeUtilsProps = {
+interface GetColorModeUtilsProps {
   isPreventTransition?: boolean
-  environment: Environment
+  environment?: Environment
 }
 
 export const getColorModeUtils = ({
   isPreventTransition = true,
-  environment,
+  environment = defaultEnvironment,
 }: GetColorModeUtilsProps) => {
   const { getWindow, getDocument } = environment
 
@@ -62,7 +63,7 @@ export const getColorModeUtils = ({
     return dark ? "dark" : "light"
   }
 
-  const addListener = (func: (cm: ColorMode) => unknown) => {
+  const systemColorModeObserver = (func: (cm: ColorMode) => void) => {
     const mql = query()
 
     const listener = (e: MediaQueryListEvent) => {
@@ -89,6 +90,6 @@ export const getColorModeUtils = ({
     setClassName,
     query,
     getSystemColorMode,
-    addListener,
+    systemColorModeObserver,
   }
 }

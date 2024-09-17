@@ -1,8 +1,8 @@
 import type { Dict } from "@yamada-ui/utils"
-import { keysFormObject, getPx } from "@yamada-ui/utils"
+import { getPx } from "@yamada-ui/utils"
 import type { BreakpointDirection, BreakpointOptions } from "../theme.types"
 
-type BreakpointQuery = {
+interface BreakpointQuery {
   breakpoint: string
   minW: number | undefined
   maxW: number | undefined
@@ -14,17 +14,17 @@ type BreakpointQuery = {
 
 export type BreakpointQueries = BreakpointQuery[]
 
-type Breakpoints = {
+interface Breakpoints {
   keys: string[]
   isResponsive: (obj: Dict) => boolean
   queries: BreakpointQueries
 }
 
-export const createQuery = (
+export function createQuery(
   min: number | undefined,
   max: number | undefined,
   identifier: string = "@media screen",
-): string | undefined => {
+): string | undefined {
   const query = [identifier]
 
   if (min) query.push("and", `(min-width: ${min}px)`)
@@ -35,10 +35,10 @@ export const createQuery = (
     : undefined
 }
 
-const createQueries = (
+function createQueries(
   breakpoints: Dict,
   options: BreakpointOptions,
-): BreakpointQueries => {
+): BreakpointQueries {
   const { direction, identifier } = options
   const isDown = direction !== "up"
 
@@ -78,10 +78,10 @@ const createQueries = (
   })
 }
 
-const transformBreakpoints = (
+function transformBreakpoints(
   breakpoints: Dict,
   options: BreakpointOptions,
-): Dict => {
+): Dict {
   return Object.fromEntries(
     Object.entries(breakpoints)
       .map(([name, value]) => [name, getPx(value)] as const)
@@ -95,17 +95,20 @@ const transformBreakpoints = (
   )
 }
 
-export const analyzeBreakpoints = (
+export function analyzeBreakpoints(
   breakpoints: Dict,
-  options: BreakpointOptions = { direction: "down" },
-): Breakpoints | undefined => {
+  options: BreakpointOptions = {},
+): Breakpoints | undefined {
   if (!breakpoints) return
 
-  breakpoints.base = options.direction !== "up" ? "9999px" : "0px"
+  options.base ??= "9999px"
+  options.direction ??= "down"
+
+  breakpoints.base = options.direction !== "up" ? options.base : "0px"
 
   breakpoints = transformBreakpoints(breakpoints, options)
 
-  const keys = keysFormObject(breakpoints)
+  const keys = Object.keys(breakpoints)
 
   const queries = createQueries(breakpoints, options)
 
@@ -126,11 +129,11 @@ export const analyzeBreakpoints = (
 
 export type AnalyzeBreakpointsReturn = ReturnType<typeof analyzeBreakpoints>
 
-export const getMinMaxQuery = (
+export function getMinMaxQuery(
   queries: BreakpointQueries,
   direction: BreakpointDirection,
   pickKey: string[] = [],
-) => {
+) {
   const omitQueries = queries.filter(
     ({ breakpoint }) => breakpoint !== "base" && pickKey.includes(breakpoint),
   )

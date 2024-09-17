@@ -3,9 +3,9 @@ import { CloseButton } from "@yamada-ui/close-button"
 import type { CSSUIObject } from "@yamada-ui/core"
 import { forwardRef } from "@yamada-ui/core"
 import { cx, handlerAll } from "@yamada-ui/utils"
-import { useModal } from "./modal"
+import { useModal } from "./modal-context"
 
-export type ModalCloseButtonProps = CloseButtonProps
+export interface ModalCloseButtonProps extends CloseButtonProps {}
 
 export const ModalCloseButton = forwardRef<ModalCloseButtonProps, "button">(
   ({ onClick, __css, ...rest }, ref) => {

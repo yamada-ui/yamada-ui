@@ -1,30 +1,29 @@
-import type { UIPropGetter } from "@yamada-ui/core"
+import type { PropGetter } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { isActiveElement, useUpdateEffect, handlerAll } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
 import { useCallback, useState } from "react"
 import type { UseCalendarProps } from "./use-calendar"
-import {
-  useCalendarPicker,
-  type UseCalendarPickerProps,
-} from "./use-calendar-picker"
+import { useCalendarPicker } from "./use-calendar-picker"
+import type { UseCalendarPickerProps } from "./use-calendar-picker"
 
-type CalendarProps = Pick<
-  UseCalendarProps<Date | undefined>,
-  | "value"
-  | "defaultValue"
-  | "onChange"
-  | "locale"
-  | "minDate"
-  | "maxDate"
-  | "yearFormat"
-  | "withHeader"
-  | "withControls"
-  | "withLabel"
->
+interface CalendarProps
+  extends Pick<
+    UseCalendarProps<Date | undefined>,
+    | "value"
+    | "defaultValue"
+    | "onChange"
+    | "locale"
+    | "minDate"
+    | "maxDate"
+    | "yearFormat"
+    | "withHeader"
+    | "withControls"
+    | "withLabel"
+  > {}
 
-type UseYearPickerOptions = {
+interface UseYearPickerOptions {
   /**
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
@@ -41,8 +40,9 @@ type UseYearPickerOptions = {
   closeOnSelect?: boolean
 }
 
-export type UseYearPickerProps = UseCalendarPickerProps<CalendarProps> &
-  UseYearPickerOptions
+export interface UseYearPickerProps
+  extends UseCalendarPickerProps<CalendarProps>,
+    UseYearPickerOptions {}
 
 export const useYearPicker = ({
   value: valueProp,
@@ -142,7 +142,7 @@ export const useYearPicker = ({
     setInputValue(inputValue)
   }, [value])
 
-  const getInputProps: UIPropGetter = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,

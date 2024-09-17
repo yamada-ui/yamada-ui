@@ -1,9 +1,9 @@
-import { pseudosProperties } from "../pseudos"
+import { pseudoProperties } from "../pseudos"
 import { styleProperties } from "../styles"
 
 const UIProps = new Set([
   ...styleProperties,
-  ...pseudosProperties,
+  ...pseudoProperties,
   "as",
   "__css",
   "css",
@@ -12,7 +12,10 @@ const UIProps = new Set([
   "errorBorderColor",
 ])
 
-export const shouldForwardProp =
-  (disableStyleProp?: (prop: string) => boolean) =>
-  (prop: string): boolean =>
-    (disableStyleProp?.(prop) ?? false) || !UIProps.has(prop)
+export function shouldForwardProp(
+  disableStyleProp?: (prop: string) => boolean,
+) {
+  return function (prop: string): boolean {
+    return (disableStyleProp?.(prop) ?? false) || !UIProps.has(prop)
+  }
+}

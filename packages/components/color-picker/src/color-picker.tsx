@@ -2,11 +2,12 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverContent, PopoverTrigger } from "@yamada-ui/popover"
-import { Portal, type PortalProps } from "@yamada-ui/portal"
+import { Portal } from "@yamada-ui/portal"
+import type { PortalProps } from "@yamada-ui/portal"
 import {
   cx,
   getValidChildren,
@@ -27,7 +28,7 @@ import {
   useColorPickerContext,
 } from "./use-color-picker"
 
-type ColorPickerOptions = {
+interface ColorPickerOptions {
   /**
    * If `true`, display the color swatch component.
    *
@@ -51,7 +52,7 @@ type ColorPickerOptions = {
   /**
    * Props for color picker container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for color picker element.
    */
@@ -73,21 +74,22 @@ type ColorPickerOptions = {
   children?: ReactNode | FC<{ value: string; onClose: () => void }>
 }
 
-export type ColorPickerProps = ThemeProps<"ColorPicker"> &
-  UseColorPickerProps &
-  ColorPickerOptions &
-  Pick<
-    ColorSelectorProps,
-    | "saturationSliderRef"
-    | "saturationSliderProps"
-    | "swatchesProps"
-    | "hueSliderRef"
-    | "hueSliderProps"
-    | "alphaSliderRef"
-    | "alphaSliderProps"
-    | "channelsProps"
-    | "channelProps"
-  >
+export interface ColorPickerProps
+  extends ThemeProps<"ColorPicker">,
+    UseColorPickerProps,
+    ColorPickerOptions,
+    Pick<
+      ColorSelectorProps,
+      | "saturationSliderRef"
+      | "saturationSliderProps"
+      | "swatchesProps"
+      | "hueSliderRef"
+      | "hueSliderProps"
+      | "alphaSliderRef"
+      | "alphaSliderProps"
+      | "channelsProps"
+      | "channelProps"
+    > {}
 
 /**
  * `ColorPicker` is a component used by the user to select a color or enter an arbitrary color value.
@@ -96,7 +98,7 @@ export type ColorPickerProps = ThemeProps<"ColorPicker"> &
  */
 export const ColorPicker = forwardRef<ColorPickerProps, "input">(
   ({ withSwatch = true, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("ColorPicker", {
+    const [styles, mergedProps] = useComponentMultiStyle("ColorPicker", {
       withSwatch,
       ...props,
     })

@@ -14,7 +14,11 @@ const LOCALE_MAP = {
   en: "English",
 } as const
 
-type Option = { out?: string; locale?: keyof typeof LOCALE_MAP; logs?: boolean }
+interface Option {
+  out?: string
+  locale?: keyof typeof LOCALE_MAP
+  logs?: boolean
+}
 
 const getPaths = async (
   targetPath: string,

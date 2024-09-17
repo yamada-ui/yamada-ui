@@ -107,7 +107,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { switch: boolean }
+  interface Data {
+    switch: boolean
+  }
 
   const { control, handleSubmit, watch } = useForm<Data>()
 
@@ -135,7 +137,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { switch: boolean }
+  interface Data {
+    switch: boolean
+  }
 
   const defaultValues: Data = {
     switch: true,

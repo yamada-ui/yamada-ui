@@ -6,7 +6,7 @@ import { cx } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useSelectContext, useSelectList } from "./use-select"
 
-export type SelectListProps = HTMLUIProps<"ul"> & {
+export interface SelectListProps extends HTMLUIProps<"ul"> {
   contentProps?: MotionPropsWithoutChildren
   header?: ReactNode
   footer?: ReactNode
@@ -20,6 +20,8 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
       width,
       minW,
       minWidth,
+      maxW,
+      maxWidth,
       contentProps,
       header,
       footer,
@@ -37,6 +39,9 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
     minWidth ??= minW
     minWidth ??= (styles.list?.minWidth ??
       styles.list?.minW) as CSSUIProps["minWidth"]
+    maxWidth ??= maxW
+    maxWidth ??= (styles.list?.maxWidth ??
+      styles.list?.maxW) as CSSUIProps["maxWidth"]
 
     return (
       <PopoverContent
@@ -44,7 +49,8 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
         className="ui-select__content"
         width={width}
         minWidth={minWidth}
-        __css={{ ...styles.content, width, minWidth }}
+        maxWidth={maxWidth}
+        __css={{ ...styles.content, width, minWidth, maxWidth }}
         {...contentProps}
       >
         {header ? (

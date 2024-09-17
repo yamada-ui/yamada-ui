@@ -1,4 +1,9 @@
-import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  RequiredPropGetter,
+} from "@yamada-ui/core"
 import { getVar, useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
@@ -13,10 +18,8 @@ import type {
   AreaProps,
   AreaChartType,
   AreaChartProps,
-  ChartPropGetter,
   ChartLayoutType,
   ReferenceLineProps,
-  RequiredChartPropGetter,
 } from "./chart.types"
 import {
   areaChartProperties,
@@ -24,7 +27,7 @@ import {
   areaProperties,
 } from "./rechart-properties"
 
-export type UseAreaChartOptions = {
+export interface UseAreaChartOptions {
   /**
    * Chart data.
    */
@@ -123,7 +126,7 @@ export type UseAreaChartOptions = {
   yAxisLabel?: string
 }
 
-export type UseAreaChartProps = UseAreaChartOptions & {
+interface UseAreaChartProps extends UseAreaChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -166,7 +169,7 @@ export const useAreaChart = ({
     ...computedAreaProps
   } = rest.areaProps ?? {}
 
-  const areaColors: CSSUIProps["var"] = useMemo(
+  const areaColors: CSSUIProps["vars"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
         name: `area-${index}`,
@@ -176,7 +179,7 @@ export const useAreaChart = ({
     [series],
   )
 
-  const areaSplitColors: CSSUIProps["var"] = useMemo(
+  const areaSplitColors: CSSUIProps["vars"] = useMemo(
     () =>
       splitColors.map((color, index) => ({
         name: `area-split-${index}`,
@@ -186,7 +189,7 @@ export const useAreaChart = ({
     [splitColors],
   )
 
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
+  const referenceLineColors: CSSUIProps["vars"] = useMemo(
     () =>
       referenceLineProps
         ? referenceLineProps.map(({ color }, index) => ({
@@ -198,7 +201,7 @@ export const useAreaChart = ({
     [referenceLineProps],
   )
 
-  const areaVars: CSSUIProps["var"] = useMemo(() => {
+  const areaVars: CSSUIProps["vars"] = useMemo(() => {
     return [
       ...areaColors,
       ...areaSplitColors,
@@ -388,8 +391,7 @@ export const useAreaChart = ({
     ],
   )
 
-  const getAreaChartProps: ChartPropGetter<
-    "div",
+  const getAreaChartProps: RequiredPropGetter<
     ComponentPropsWithoutRef<typeof Recharts.AreaChart>,
     ComponentPropsWithoutRef<typeof Recharts.AreaChart>
   > = useCallback(
@@ -420,8 +422,7 @@ export const useAreaChart = ({
     ],
   )
 
-  const getAreaSplitProps: ChartPropGetter<
-    "div",
+  const getAreaSplitProps: PropGetter<
     Partial<AreaSplitProps>,
     AreaSplitProps
   > = useCallback(
@@ -434,11 +435,8 @@ export const useAreaChart = ({
     [defaultSplitOffset, splitId, splitOffset, fillOpacityVar],
   )
 
-  const getAreaProps: RequiredChartPropGetter<
-    "div",
-    {
-      index: number
-    },
+  const getAreaProps: RequiredPropGetter<
+    Partial<Recharts.AreaProps> & { index: number },
     Omit<Recharts.AreaProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
@@ -484,8 +482,7 @@ export const useAreaChart = ({
     ],
   )
 
-  const getAreaGradientProps: ChartPropGetter<
-    "div",
+  const getAreaGradientProps: PropGetter<
     Partial<AreaGradientProps>,
     AreaGradientProps
   > = useCallback(

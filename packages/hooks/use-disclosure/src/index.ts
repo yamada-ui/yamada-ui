@@ -1,10 +1,10 @@
 import { useCallbackRef } from "@yamada-ui/utils"
 import { useCallback, useRef, useState } from "react"
 
-export type UseDisclosureProps<
+export interface UseDisclosureProps<
   T extends (...args: any[]) => any = () => void,
   K extends (...args: any[]) => any = () => void,
-> = {
+> {
   isOpen?: boolean
   defaultIsOpen?: boolean
   onOpen?: T
@@ -69,7 +69,7 @@ export type UseDisclosureReturn = ReturnType<typeof useDisclosure>
 
 export type LazyMode = "unmount" | "keepMounted"
 
-export type UseLazyDisclosureProps = {
+export interface UseLazyDisclosureProps {
   enabled?: boolean
   isSelected?: boolean
   wasSelected?: boolean

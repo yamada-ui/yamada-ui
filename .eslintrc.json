@@ -18,7 +18,7 @@
   "rules": {},
   "overrides": [
     {
-      "files": "packages/**/src/*",
+      "files": ["packages/**/*"],
       "rules": {
         "no-restricted-imports": ["error", "@yamada-ui/react"]
       }
@@ -62,6 +62,7 @@
         ],
         "vitest/expect-expect": "off",
         "vitest/no-alias-methods": "error",
+        "vitest/no-commented-out-tests": "off",
         "vitest/no-conditional-expect": "error",
         "vitest/no-conditional-in-test": "error",
         "vitest/no-conditional-tests": "error",

@@ -2,6 +2,7 @@
 title: Menu
 description: "`Menu` is a component that displays a common dropdown menu."
 package_name: "@yamada-ui/menu"
+order: 1
 with_description: true
 tab: Props
 ---
@@ -392,6 +393,13 @@ tab: Props
   description={"The label of the group."}
 />
 
+<PropsCard
+  id="menugroup-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for menu group element."}
+/>
+
 ### MenuOptionGroupProps
 
 <PropsCard
@@ -405,7 +413,14 @@ tab: Props
   id="menuoptiongroup-label"
   name="label"
   type="string"
-  description={"The label of the option group."}
+  description={"The label of the group."}
+/>
+
+<PropsCard
+  id="menuoptiongroup-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for menu group element."}
 />
 
 <PropsCard

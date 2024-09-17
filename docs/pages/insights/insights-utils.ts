@@ -39,7 +39,7 @@ export const INSIGHT_PERIOD_SUGGEST = [
 ] as const
 export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
-export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
+export const INSIGHT_SCORE_COLORS: { [key: string]: UIProps["color"] } = {
   pullRequests: [`blue.500`, `blue.400`],
   issues: [`red.500`, `red.400`],
   approved: [`green.500`, `green.400`],
@@ -78,6 +78,7 @@ export const labelFormatter =
   (value: string, { summarize, end }: InsightPeriod) =>
   (locale: Locale) => {
     if (!dayjs(value).isValid()) return value
+    if (INSIGHT_USER_IDS.includes(value)) return value
 
     const date = dayjs(value)
 

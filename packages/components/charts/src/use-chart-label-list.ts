@@ -1,19 +1,21 @@
-import { getCSS, useTheme, type CSSUIObject } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { getCSS, useTheme } from "@yamada-ui/core"
+import type { CSSUIObject, RequiredPropGetter } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { LabelListProps, RequiredChartPropGetter } from "./chart.types"
+import type { LabelListProps } from "./chart.types"
 import { labelListProperties } from "./rechart-properties"
 
-export type UseChartLabelListOptions = {
+export interface UseChartLabelListOptions {
   /**
    * Props passed down to recharts `LabelList` components.
    */
   labelListProps?: LabelListProps[]
 }
 
-type UseChartLabelListProps = UseChartLabelListOptions & {
+interface UseChartLabelListProps extends UseChartLabelListOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -35,9 +37,8 @@ export const useChartLabelList = ({
     [labelListProps, styleClassName, theme],
   )
 
-  const getLabelLineProps: RequiredChartPropGetter<
-    "div",
-    { index: number },
+  const getLabelLineProps: RequiredPropGetter<
+    Partial<Recharts.LabelListProps<Dict>> & { index: number },
     Omit<Recharts.LabelListProps<Dict>, "ref">
   > = useCallback(
     ({ index, className, ...props }, ref = null) => {

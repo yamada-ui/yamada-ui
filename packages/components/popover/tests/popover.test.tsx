@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 import {
   Popover,
   PopoverAnchor,
@@ -16,7 +16,7 @@ describe("<Popover />", () => {
     return (
       <Popover {...props}>
         <PopoverTrigger>
-          <Button>Open Popover</Button>
+          <button>Open Popover</button>
         </PopoverTrigger>
 
         <PopoverContent>
@@ -62,7 +62,7 @@ describe("<Popover />", () => {
           </PopoverAnchor>
 
           <PopoverTrigger>
-            <Button>Open Popover</Button>
+            <button>Open Popover</button>
           </PopoverTrigger>
 
           <PopoverContent>
@@ -113,13 +113,19 @@ describe("<Popover />", () => {
 
   test("can popover control", async () => {
     const ControlPopover = () => {
-      const { isOpen, onClose, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>Open Popover</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>
+            Open Popover
+          </button>
 
-          <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
+          <Popover
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            closeOnBlur={false}
+          >
             <PopoverTrigger>
               <span>Popover Target</span>
             </PopoverTrigger>
@@ -155,4 +161,50 @@ describe("<Popover />", () => {
     await waitFor(() => expect(closeButton).not.toBeVisible())
     await waitFor(() => expect(body).not.toBeVisible())
   })
+
+  test.each<{
+    animation: "scale" | "top" | "left" | "bottom" | "right"
+    transform: string
+  }>([
+    {
+      animation: "scale",
+      transform: "scale(0.95)",
+    },
+    {
+      animation: "top",
+      transform: "translateY(-16px)",
+    },
+    {
+      animation: "left",
+      transform: "translateX(-16px)",
+    },
+    {
+      animation: "bottom",
+      transform: "translateY(16px)",
+    },
+    {
+      animation: "right",
+      transform: "translateX(16px)",
+    },
+  ])(
+    "when animation is %s, the popover should be displayed",
+    async ({ animation, transform }) => {
+      const { user, container } = render(
+        <PopoverExample animation={animation} />,
+      )
+
+      const popoverContent = container.querySelector(".ui-popover__content")
+      expect(popoverContent).toHaveStyle({
+        transform,
+        visibility: "hidden",
+      })
+
+      const triggerButton = await screen.findByRole("button", {
+        name: "Open Popover",
+      })
+      await user.click(triggerButton)
+
+      await waitFor(() => expect(popoverContent).toBeVisible())
+    },
+  )
 })

@@ -4,9 +4,10 @@ import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import { useAutocompleteContext, useAutocompleteList } from "./use-autocomplete"
+import { useAutocompleteContext } from "./autocomplete-context"
+import { useAutocompleteList } from "./use-autocomplete-list"
 
-export type AutocompleteListProps = HTMLUIProps<"ul"> & {
+export interface AutocompleteListProps extends HTMLUIProps<"ul"> {
   contentProps?: MotionPropsWithoutChildren
   header?: ReactNode
   footer?: ReactNode
@@ -20,6 +21,8 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
       width,
       minW,
       minWidth,
+      maxW,
+      maxWidth,
       contentProps,
       header,
       footer,
@@ -29,7 +32,6 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
     ref,
   ) => {
     const { styles } = useAutocompleteContext()
-
     const { onAnimationComplete, getListProps } = useAutocompleteList()
 
     width ??= w
@@ -37,6 +39,9 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
     minWidth ??= minW
     minWidth ??= (styles.list?.minWidth ??
       styles.list?.minW) as CSSUIProps["minWidth"]
+    maxWidth ??= maxW
+    maxWidth ??= (styles.list?.maxWidth ??
+      styles.list?.maxW) as CSSUIProps["maxWidth"]
 
     return (
       <PopoverContent
@@ -44,7 +49,8 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
         className="ui-autocomplete__popover"
         width={width}
         minWidth={minWidth}
-        __css={{ ...styles.content, width, minWidth }}
+        maxWidth={maxWidth}
+        __css={{ ...styles.content, width, minWidth, maxWidth }}
         {...contentProps}
         onAnimationComplete={handlerAll(
           contentProps?.onAnimationComplete,

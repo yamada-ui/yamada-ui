@@ -83,7 +83,7 @@ const PLAYLISTS_MENU_ITEMS: MenuItem[] = [
   { label: "Bedtime Beats" },
 ]
 
-type SidebarContext = {
+interface SidebarContext {
   isCollapse: boolean
 }
 

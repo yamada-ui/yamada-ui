@@ -8,7 +8,7 @@ import {
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-type DividerOptions = {
+interface DividerOptions {
   /**
    * The orientation of the divider.
    *
@@ -17,9 +17,10 @@ type DividerOptions = {
   orientation?: "horizontal" | "vertical"
 }
 
-export type DividerProps = HTMLUIProps<"hr"> &
-  ThemeProps<"Divider"> &
-  DividerOptions
+export interface DividerProps
+  extends HTMLUIProps<"hr">,
+    ThemeProps<"Divider">,
+    DividerOptions {}
 
 /**
  * `Divider` is a component that represents a division between elements.

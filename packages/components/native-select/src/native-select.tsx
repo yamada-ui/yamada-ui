@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
   layoutStyleProperties,
 } from "@yamada-ui/core"
@@ -29,26 +29,37 @@ import type {
 } from "react"
 import { cloneElement } from "react"
 
-type NativeSelectBaseItem = Omit<
-  DetailedHTMLProps<OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>,
-  "label" | "children" | "value"
-> & { label?: string }
+interface NativeSelectBaseItem
+  extends Omit<
+    DetailedHTMLProps<
+      OptionHTMLAttributes<HTMLOptionElement>,
+      HTMLOptionElement
+    >,
+    "label" | "children" | "value"
+  > {
+  label?: string
+}
 
 type Value = DetailedHTMLProps<
   OptionHTMLAttributes<HTMLOptionElement>,
   HTMLOptionElement
 >["value"]
 
-type NativeSelectItemWithValue = NativeSelectBaseItem & { value?: Value }
+interface NativeSelectItemWithValue extends NativeSelectBaseItem {
+  value?: Value
+}
 
-type NativeSelectItemWithItems = NativeSelectBaseItem & {
+interface NativeSelectItemWithItems extends NativeSelectBaseItem {
   items?: NativeSelectItemWithValue[]
 }
 
-export type NativeSelectItem = NativeSelectItemWithValue &
-  NativeSelectItemWithItems
+export interface NativeSelectItem
+  extends NativeSelectItemWithValue,
+    NativeSelectItemWithItems {}
 
-type NativeSelectContext = Record<string, CSSUIObject>
+interface NativeSelectContext {
+  [key: string]: CSSUIObject
+}
 
 const [NativeSelectProvider, useNativeSelect] =
   createContext<NativeSelectContext>({
@@ -56,7 +67,7 @@ const [NativeSelectProvider, useNativeSelect] =
     errorMessage: `useNativeSelect returned is 'undefined'. Seems you forgot to wrap the components in "<NativeSelect />"`,
   })
 
-type NativeSelectOptions = {
+interface NativeSelectOptions {
   /**
    * If provided, generate options based on items.
    *
@@ -84,17 +95,18 @@ type NativeSelectOptions = {
   /**
    * Props for container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for icon element.
    */
-  iconProps?: HTMLUIProps<"div">
+  iconProps?: HTMLUIProps
 }
 
-export type NativeSelectProps = Omit<HTMLUIProps<"select">, "size"> &
-  ThemeProps<"NativeSelect"> &
-  NativeSelectOptions &
-  FormControlOptions
+export interface NativeSelectProps
+  extends Omit<HTMLUIProps<"select">, "size">,
+    ThemeProps<"NativeSelect">,
+    NativeSelectOptions,
+    FormControlOptions {}
 
 /**
  * `NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent).
@@ -103,33 +115,26 @@ export type NativeSelectProps = Omit<HTMLUIProps<"select">, "size"> &
  */
 export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("NativeSelect", props)
-    let {
+    const [styles, mergedProps] = useComponentMultiStyle("NativeSelect", props)
+    const {
       className,
       children,
       placeholderInOptions = true,
       color,
-      h,
-      height,
-      minH,
-      minHeight,
       items = [],
       placeholder,
       containerProps,
       iconProps,
       ...rest
-    } = omitThemeProps(mergedProps)
-
-    rest = useFormControlProps(rest)
-
-    const { "aria-readonly": _ariaReadonly, ...formControlProps } = pickObject(
-      rest,
-      formControlProperties,
-    )
-    const [layoutProps, selectProps] = splitObject(
-      omitObject(rest, ["aria-readonly"]),
-      layoutStyleProperties,
-    )
+    } = useFormControlProps(omitThemeProps(mergedProps))
+    const {
+      "aria-readonly": _ariaReadonly,
+      onFocus: _onFocus,
+      onBlur: _onBlur,
+      ...formControlProps
+    } = pickObject(rest, formControlProperties)
+    const [{ h, height, minH, minHeight, ...layoutProps }, selectProps] =
+      splitObject(omitObject(rest, ["aria-readonly"]), layoutStyleProperties)
 
     let computedChildren: ReactElement[] = []
 
@@ -202,7 +207,7 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   },
 )
 
-type NativeSelectIconProps = HTMLUIProps<"div">
+interface NativeSelectIconProps extends HTMLUIProps {}
 
 const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   className,
@@ -243,13 +248,14 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   )
 }
 
-export type NativeOptionGroupProps = HTMLUIProps<"optgroup">
+export interface NativeOptionGroupProps extends HTMLUIProps<"optgroup"> {}
 
 export const NativeOptionGroup = forwardRef<NativeOptionGroupProps, "optgroup">(
   (props, ref) => <ui.optgroup ref={ref} {...props} />,
 )
 
-export type NativeOptionProps = Omit<HTMLUIProps<"option">, "children"> & {
+export interface NativeOptionProps
+  extends Omit<HTMLUIProps<"option">, "children"> {
   children?: string
 }
 

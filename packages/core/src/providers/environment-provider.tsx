@@ -2,19 +2,19 @@ import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
 import { createContext, useContext, useMemo, useReducer, useRef } from "react"
 
-export type Environment = {
+export interface Environment {
   getWindow: () => Window | undefined
   getDocument: () => Document | undefined
 }
 
-const environment: Environment = {
+export const defaultEnvironment: Environment = {
   getDocument: () => document,
   getWindow: () => window,
 }
 
-const EnvironmentContext = createContext<Environment>(environment)
+const EnvironmentContext = createContext<Environment>(defaultEnvironment)
 
-export type EnvironmentProviderProps = {
+export interface EnvironmentProviderProps {
   children: ReactNode
   disabled?: boolean
   environment?: Environment

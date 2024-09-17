@@ -1,6 +1,6 @@
-import { FocusLock } from "@yamada-ui/react"
 import { render, renderHook, screen, waitFor } from "@yamada-ui/test"
 import { useRef } from "react"
+import { FocusLock } from "../src"
 
 describe("<FocusLock />", () => {
   test("correctly focuses on elements within the lock", () => {

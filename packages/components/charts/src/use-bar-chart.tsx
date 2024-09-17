@@ -1,4 +1,9 @@
-import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  RequiredPropGetter,
+} from "@yamada-ui/core"
 import { getVar, useTheme } from "@yamada-ui/core"
 import { cx, runIfFunc } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
@@ -11,14 +16,12 @@ import type {
   BarProps,
   BarChartType,
   BarChartProps,
-  ChartPropGetter,
   ChartLayoutType,
   ReferenceLineProps,
-  RequiredChartPropGetter,
 } from "./chart.types"
 import { barProperties, barChartProperties } from "./rechart-properties"
 
-export type UseBarChartOptions = {
+export interface UseBarChartOptions {
   /**
    * Chart data.
    */
@@ -76,7 +79,7 @@ export type UseBarChartOptions = {
   cell?: ReactNode | FC<BarCellProps>
 }
 
-export type UseBarChartProps = UseBarChartOptions & {
+export interface UseBarChartProps extends UseBarChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -106,7 +109,7 @@ export const useBarChart = ({
     ...computedBarProps
   } = rest.barProps ?? {}
 
-  const barColors: CSSUIProps["var"] = useMemo(
+  const barColors: CSSUIProps["vars"] = useMemo(
     () =>
       series.map(({ color }, index) => ({
         name: `bar-${index}`,
@@ -116,7 +119,7 @@ export const useBarChart = ({
     [series],
   )
 
-  const referenceLineColors: CSSUIProps["var"] = useMemo(
+  const referenceLineColors: CSSUIProps["vars"] = useMemo(
     () =>
       referenceLineProps.map(({ color }, index) => ({
         name: `reference-line-${index}`,
@@ -126,7 +129,7 @@ export const useBarChart = ({
     [referenceLineProps],
   )
 
-  const barVars: CSSUIProps["var"] = useMemo(() => {
+  const barVars: CSSUIProps["vars"] = useMemo(() => {
     return [
       ...barColors,
       ...referenceLineColors,
@@ -248,11 +251,8 @@ export const useBarChart = ({
     ],
   )
 
-  const getBarProps: RequiredChartPropGetter<
-    "div",
-    {
-      index: number
-    },
+  const getBarProps: RequiredPropGetter<
+    Partial<Recharts.BarProps> & { index: number },
     Omit<Recharts.BarProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
@@ -297,8 +297,7 @@ export const useBarChart = ({
     })
   }, [series, getBarProps, cell, data])
 
-  const getBarChartProps: ChartPropGetter<
-    "div",
+  const getBarChartProps: PropGetter<
     ComponentPropsWithoutRef<typeof Recharts.BarChart>,
     ComponentPropsWithoutRef<typeof Recharts.BarChart>
   > = useCallback(
@@ -340,7 +339,7 @@ export const useBarChart = ({
 
 export type UseBarChartReturn = ReturnType<typeof useBarChart>
 
-export type BarCellProps = {
+export interface BarCellProps {
   hasStack: boolean
   series: BarProps
   data: Dict

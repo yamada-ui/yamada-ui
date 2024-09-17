@@ -7,7 +7,7 @@ import type {
 import type { FC, PropsWithChildren } from "react"
 import { createContext, useContext, useMemo } from "react"
 
-type PageContext = Omit<PageProviderProps, "children"> & {
+interface PageContext extends Omit<PageProviderProps, "children"> {
   documentMap: Pick<DocumentTree, "title" | "description" | "label" | "slug">[]
 }
 
@@ -27,16 +27,16 @@ const getDocumentMap = (
     ...getDocumentMap(children),
   ])
 
-export type PageProviderProps = PropsWithChildren<
-  {
-    currentVersion: string | undefined | null
-    documentTree: DocumentTree[]
-    documentTabs?: DocumentNavigation[]
-    documentBreadcrumbs?: DocumentNavigation[]
-    documentChildrenTree?: DocumentTree[]
-    documentPagination?: DocumentPagination
-  } & Partial<Omit<Document, "body" | "data">>
->
+export interface PageProviderProps
+  extends PropsWithChildren,
+    Partial<Omit<Document, "body" | "data">> {
+  currentVersion: string | undefined | null
+  documentTree: DocumentTree[]
+  documentTabs?: DocumentNavigation[]
+  documentBreadcrumbs?: DocumentNavigation[]
+  documentChildrenTree?: DocumentTree[]
+  documentPagination?: DocumentPagination
+}
 
 export const PageProvider: FC<PageProviderProps> = ({
   documentTree = [],

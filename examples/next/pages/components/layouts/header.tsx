@@ -2,7 +2,6 @@ import {
   HStack,
   Spacer,
   useColorMode,
-  ColorMode,
   MenuButton,
   IconButton,
   Menu,
@@ -24,6 +23,7 @@ import {
   useScroll,
   useMotionValueEvent,
   Image,
+  ColorModeWithSystem,
 } from '@yamada-ui/react'
 import { Moon, Palette, Sun } from '@yamada-ui/lucide'
 import Link from 'next/link'
@@ -32,7 +32,7 @@ import { useState } from 'react'
 import { memo } from 'react'
 import { FC } from 'react'
 
-export type HeaderProps = CenterProps
+export interface HeaderProps extends CenterProps {}
 
 export const Header: FC<HeaderProps> = ({ ...rest }) => {
   const ref = useRef<HTMLHeadingElement>()
@@ -138,7 +138,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
       />
 
       <MenuList>
-        <MenuOptionGroup<ColorMode | 'system'>
+        <MenuOptionGroup<ColorModeWithSystem>
           value={internalColorMode}
           onChange={changeColorMode}
           type='radio'

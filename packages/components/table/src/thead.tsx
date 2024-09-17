@@ -17,7 +17,7 @@ import { useMemo } from "react"
 import type { SortDirection, Column } from "./use-table"
 import { useTableContext, render } from "./use-table"
 
-export type TableHeadProps = NativeTableHeadProps
+export interface TableHeadProps extends NativeTableHeadProps {}
 
 export const Thead = ({ ...rest }: TableHeadProps) => {
   const { headerGroups, headerGroupProps, headerProps, sortIconProps } =
@@ -132,9 +132,15 @@ export const Thead = ({ ...rest }: TableHeadProps) => {
   )
 }
 
-export type SortIconProps = IconProps & { isSorted: false | SortDirection }
+export interface SortIconProps extends IconProps {
+  isSorted: false | SortDirection
+}
 
-const SortIcon: FC<SortIconProps> = ({ isSorted, className, ...rest }) => {
+export const SortIcon: FC<SortIconProps> = ({
+  isSorted,
+  className,
+  ...rest
+}) => {
   const styles = useTableStyles()
 
   const css: CSSUIObject = {

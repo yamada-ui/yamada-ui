@@ -1,12 +1,15 @@
+import type { Interpolation } from "@emotion/react"
 import type { Dict, ObjectLiteral, StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
 import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
-import type { Theme, StyledTheme } from "../theme.types"
+import type { Theme, StyledTheme, InternalTheme } from "../theme.types"
 
 export type { CSS }
 
 export type ColorMode = "light" | "dark"
+export type ColorModeWithSystem = ColorMode | "system"
+export type Breakpoint = Theme["breakpoints"] | "base"
 
 type ThemeVariant<Y extends keyof Theme["components"] | unknown = unknown> =
   Y extends keyof Theme["components"]
@@ -18,9 +21,9 @@ type ThemeSize<Y extends keyof Theme["components"] | unknown = unknown> =
     ? UIValue<Theme["components"][Y]["sizes"]>
     : UIValue<string>
 
-export type ThemeProps<
+export interface ThemeProps<
   Y extends keyof Theme["components"] | unknown = unknown,
-> = {
+> {
   /**
    * The variant of the component.
    */
@@ -44,14 +47,16 @@ export type ThemeProps<
    *
    * @private
    */
-  __styles?: CSSUIObject | Record<string, CSSUIObject>
+  __styles?: CSSUIObject | { [key: string]: CSSUIObject }
 }
 
-export type ColorModeArray<Y> = [Y, Y]
+export type ColorModeArray<Y, M extends boolean = true> = M extends true
+  ? [Y | ResponsiveObject<Y, false>, Y | ResponsiveObject<Y, false>]
+  : [Y, Y]
 
-export type ResponsiveObject<Y> = Partial<
-  Record<Theme["breakpoints"] | "base", Y>
->
+export type ResponsiveObject<Y, M extends boolean = true> = M extends true
+  ? { [key in Breakpoint]?: Y | ColorModeArray<Y, false> }
+  : { [key in Breakpoint]?: Y }
 
 export type UIValue<Y> = ResponsiveObject<Y> | ColorModeArray<Y> | Y
 
@@ -71,17 +76,19 @@ export type Token<Y, M = unknown> = M extends keyof Theme
 
 export type StyledProps<Y> = Y | ((theme: StyledTheme) => Y)
 
-export type StyleProperties = CSS.Properties &
-  Omit<StyleProps, keyof CSS.Properties>
+export interface StyleProperties
+  extends CSS.Properties,
+    Omit<StyleProps, keyof CSS.Properties> {}
 
 type StyleValue<Y extends keyof StyleProperties> = StyledProps<
   UIValue<StyleProperties[Y]>
 >
 
+type UIStyleValue<Y extends keyof StyleProperties | keyof StyleProps> =
+  Y extends keyof StyleProps ? StyleProps[Y] | StyleValue<Y> : StyleValue<Y>
+
 export type UIStyles = {
-  [Y in keyof StyleProperties]?: Y extends keyof StyleProps
-    ? StyleProps[Y] | StyleValue<Y>
-    : StyleValue<Y>
+  [Y in keyof StyleProperties]?: UIStyleValue<Y>
 }
 
 export type RecursiveStyles<Y> = {
@@ -90,13 +97,34 @@ export type RecursiveStyles<Y> = {
     | ObjectLiteral
 }
 
-export type CSSUIObject = UIStyles & RecursiveStyles<UIStyles>
+export interface CSSUIObject extends UIStyles, RecursiveStyles<UIStyles> {}
 
-export type CSSUIProps = StyleProps & PseudoProps
+export interface CSSProps {
+  /**
+   * Used for internal css management.
+   *
+   * @private
+   */
+  __css?: CSSUIObject
+  /**
+   * The CSS object that depends on the theme.
+   */
+  sx?: CSSUIObject
+  /**
+   * The emotion's css object.
+   */
+  css?: Interpolation<{}>
+}
 
-export type UIStyleProps<Y extends Dict = Dict> = {
-  theme: StyledTheme
+export interface CSSUIProps extends StyleProps, PseudoProps {}
+
+export type UIStyleProps<
+  Y extends Dict = Dict,
+  M extends InternalTheme = InternalTheme,
+> = {
+  theme: StyledTheme<M>
   colorMode?: ColorMode
+  breakpoint?: Breakpoint
   colorScheme?: Theme["colorSchemes"]
   themeScheme?: Theme["themeSchemes"]
 } & Y
@@ -105,11 +133,11 @@ export type UIStyle<Y extends Dict = Dict> =
   | CSSUIObject
   | ((props: UIStyleProps<Y>) => CSSUIObject)
 export type UIMultiStyle<Y extends Dict = Dict> =
-  | Record<string, UIStyle<Y>>
-  | ((props: UIStyleProps<Y>) => Record<string, UIStyle<Y>>)
+  | { [key: string]: UIStyle<Y> }
+  | ((props: UIStyleProps<Y>) => { [key: string]: UIStyle<Y> })
 
-export type AnimationStyle = {
-  keyframes: Record<string, UIStyles>
+export interface AnimationStyle {
+  keyframes: { [key: string]: UIStyles }
   duration?: BaseToken<CSS.Property.AnimationDuration, "transitionDuration">
   timingFunction?: BaseToken<
     CSS.Property.AnimationTimingFunction,
@@ -122,7 +150,7 @@ export type AnimationStyle = {
   playState?: BaseToken<CSS.Property.AnimationPlayState>
 }
 
-export type FunctionCSSInterpolation = {
+export interface FunctionCSSInterpolation {
   (theme: StyledTheme): CSSUIProps
 }
 

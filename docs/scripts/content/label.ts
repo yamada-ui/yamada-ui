@@ -14,7 +14,9 @@ const getPaths = async (query: string) => {
   return paths
 }
 
-type FrontMatter = Record<string, any>
+interface FrontMatter {
+  [key: string]: any
+}
 
 type UpdateFrontMatterTransform = (data: FrontMatter) => FrontMatter
 
@@ -77,11 +79,11 @@ const removeLabel =
     return { ...data }
   }
 
-type AddOptions = {
+interface AddOptions {
   label?: string
 }
 
-type ResetOptions = {
+interface ResetOptions {
   exclude: string[]
 }
 

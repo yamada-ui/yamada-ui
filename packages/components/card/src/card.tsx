@@ -3,16 +3,16 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 
-const [CardProvider, useCard] = createContext<Record<string, CSSUIObject>>({
+const [CardProvider, useCard] = createContext<{ [key: string]: CSSUIObject }>({
   name: `CardContext`,
   errorMessage: `useCard returned is 'undefined'. Seems you forgot to wrap the components in "<Card />" `,
 })
 
-type CardOptions = {
+interface CardOptions {
   /**
    * The CSS `flex-direction` property.
    */
@@ -27,9 +27,10 @@ type CardOptions = {
   align?: CSSUIObject["alignItems"]
 }
 
-export type CardProps = Omit<HTMLUIProps<"article">, "direction"> &
-  ThemeProps<"Card"> &
-  CardOptions
+export interface CardProps
+  extends Omit<HTMLUIProps<"article">, "direction">,
+    ThemeProps<"Card">,
+    CardOptions {}
 
 /**
  * `Card` is a component that groups and displays related information. By default, it renders a `article` element.
@@ -37,7 +38,7 @@ export type CardProps = Omit<HTMLUIProps<"article">, "direction"> &
  * @see Docs https://yamada-ui.com/components/data-display/card
  */
 export const Card = forwardRef<CardProps, "article">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Card", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Card", props)
   const {
     className,
     direction: flexDirection = "column",
@@ -67,7 +68,7 @@ export const Card = forwardRef<CardProps, "article">((props, ref) => {
   )
 })
 
-export type CardHeaderProps = HTMLUIProps<"header">
+export interface CardHeaderProps extends HTMLUIProps<"header"> {}
 
 export const CardHeader = forwardRef<CardHeaderProps, "header">(
   ({ className, ...rest }, ref) => {
@@ -91,9 +92,9 @@ export const CardHeader = forwardRef<CardHeaderProps, "header">(
   },
 )
 
-export type CardBodyProps = HTMLUIProps<"main">
+export interface CardBodyProps extends HTMLUIProps {}
 
-export const CardBody = forwardRef<CardBodyProps, "main">(
+export const CardBody = forwardRef<CardBodyProps, "div">(
   ({ className, ...rest }, ref) => {
     const styles = useCard()
 
@@ -115,7 +116,7 @@ export const CardBody = forwardRef<CardBodyProps, "main">(
   },
 )
 
-export type CardFooterProps = HTMLUIProps<"footer">
+export interface CardFooterProps extends HTMLUIProps<"footer"> {}
 
 export const CardFooter = forwardRef<CardFooterProps, "footer">(
   ({ className, ...rest }, ref) => {

@@ -92,6 +92,7 @@ export const mdx: { [key: string]: CSSUIObject } = {
       letterSpacing: "normal",
     },
     td: {
+      verticalAlign: "middle",
       whiteSpace: "normal",
     },
   },

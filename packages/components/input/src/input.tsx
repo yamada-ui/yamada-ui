@@ -9,13 +9,13 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import { useFormControlProps } from "@yamada-ui/form-control"
 import { cx } from "@yamada-ui/utils"
 
-type InputOptions = {
+interface InputOptions {
   /**
    * The border color when the input is focused.
    */
@@ -30,13 +30,14 @@ type InputOptions = {
   htmlSize?: number
 }
 
-export type InputProps = Omit<
-  HTMLUIProps<"input">,
-  "disabled" | "required" | "readOnly" | "size"
-> &
-  ThemeProps<"Input"> &
-  InputOptions &
-  FormControlOptions
+export interface InputProps
+  extends Omit<
+      HTMLUIProps<"input">,
+      "disabled" | "required" | "readOnly" | "size"
+    >,
+    ThemeProps<"Input">,
+    InputOptions,
+    FormControlOptions {}
 
 /**
  * `Input` is a component used to obtain text input from the user.
@@ -44,7 +45,7 @@ export type InputProps = Omit<
  * @see Docs https://yamada-ui.com/components/forms/input
  */
 export const Input = forwardRef<InputProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Input", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Input", props)
   let { className, htmlSize, __css, ...rest } = omitThemeProps(mergedProps)
 
   rest = useFormControlProps(rest)

@@ -2,10 +2,10 @@
 title: MultiDatePicker
 description: "`MultiDatePicker` is a component used for users to select multiple dates."
 package_name: "@yamada-ui/calendar"
+order: 1
 label: Updated
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -80,7 +80,7 @@ order: 1
 <PropsCard
   id="multidatepicker-calendarvariant"
   name="calendarVariant"
-  type='UIValue<(string & {}) | "solid" | "unstyled" | "subtle">'
+  type='UIValue<(string & {}) | "solid" | "subtle" | "unstyled">'
   description={"Variant for the calendar component."}
 />
 
@@ -89,6 +89,14 @@ order: 1
   name="clearIconProps"
   type="DatePickerIconProps"
   description={"Props for date picker clear icon element."}
+/>
+
+<PropsCard
+  id="multidatepicker-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -520,6 +528,14 @@ order: 1
 />
 
 <PropsCard
+  id="multidatepicker-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="multidatepicker-paginateby"
   name="paginateBy"
   type="number"
@@ -566,15 +582,6 @@ order: 1
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
-/>
-
-<PropsCard
-  id="multidatepicker-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
 />
 
 <PropsCard

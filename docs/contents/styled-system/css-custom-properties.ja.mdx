@@ -13,14 +13,14 @@ Yamada UIのスタイルシステムを使用する上でカスタムプロパ�
 
 ## 使い方
 
-[Style Props](/styled-system/style-props)の`var`を使用して、[CSSカスタムプロパティ(変数)](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)を作成します。
+[Style Props](/styled-system/style-props)の`vars`を使用して、[CSSカスタムプロパティ(変数)](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)を作成します。
 
 - `name`: カスタムプロパティの名前。
 - `token`: カスタムプロパティの値を取得するためのトークン。
 - `value`: カスタムプロパティの値。
 
 ```ts
-var={[{ name: "bg", token: "colors", value: "primary" }]}
+vars={[{ name: "bg", token: "colors", value: "primary" }]}
 ```
 
 上記のコードは、次のような`CSS`が生成されます。
@@ -42,7 +42,7 @@ var={[{ name: "bg", token: "colors", value: "primary" }]}
 <Box
   p="md"
   rounded="md"
-  var={[
+  vars={[
     { name: "bg", token: "colors", value: "primary" },
     { name: "color", token: "colors", value: "white" },
   ]}
@@ -54,5 +54,5 @@ var={[{ name: "bg", token: "colors", value: "primary" }]}
 ```
 
 :::note status=warning
-`var`で設定したカスタムプロパティは、設定した要素の子要素にのみ適用されます。
+`vars`で設定したカスタムプロパティは、設定した要素の子要素にのみ適用されます。
 :::

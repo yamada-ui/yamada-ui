@@ -4,9 +4,9 @@ import type {
   ThemeProps,
   ComponentArgs,
 } from "@yamada-ui/core"
-import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { ForwardedRef, Ref } from "react"
+import type { ForwardedRef, RefAttributes } from "react"
 import { forwardRef } from "react"
 import type { CalendarHeaderProps } from "./calendar-header"
 import type { MonthProps } from "./month"
@@ -22,26 +22,25 @@ import { CalendarProvider, useCalendar } from "./use-calendar"
 import type { YearListProps } from "./year-list"
 import { YearList } from "./year-list"
 
-type CalendarOptions = {
+interface CalendarOptions {
   /**
    * Props for calendar header element.
    */
-  headerProps?: HTMLUIProps<"div">
+  headerProps?: HTMLUIProps
 }
 
-export type CalendarBaseProps = Omit<
-  HTMLUIProps<"div">,
-  "value" | "defaultValue" | "onChange"
-> &
-  ThemeProps<"Calendar"> &
-  CalendarOptions &
-  Omit<CalendarHeaderProps, "label" | "index"> &
-  Pick<YearListProps, "yearProps"> &
-  Pick<MonthListProps, "monthProps"> &
-  Pick<MonthProps, "tableProps" | "weekdayProps" | "dayProps">
+export interface CalendarBaseProps
+  extends Omit<HTMLUIProps, "value" | "defaultValue" | "onChange">,
+    ThemeProps<"Calendar">,
+    CalendarOptions,
+    Omit<CalendarHeaderProps, "label" | "index">,
+    Pick<YearListProps, "yearProps" | "yearGridProps">,
+    Pick<MonthListProps, "monthProps" | "monthGridProps">,
+    Pick<MonthProps, "tableProps" | "weekdayProps" | "dayProps"> {}
 
-export type CalendarProps<Y extends MaybeValue = Date> = CalendarBaseProps &
-  UseCalendarProps<Y>
+export interface CalendarProps<Y extends MaybeValue = Date>
+  extends CalendarBaseProps,
+    UseCalendarProps<Y> {}
 
 /**
  * `Calendar` is a component for displaying or selecting dates in a calendar.
@@ -53,7 +52,7 @@ export const Calendar = forwardRef(
     props: CalendarProps<T>,
     ref: ForwardedRef<HTMLDivElement>,
   ) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Calendar", props)
+    const [styles, mergedProps] = useComponentMultiStyle("Calendar", props)
     const {
       className,
       value,
@@ -61,6 +60,8 @@ export const Calendar = forwardRef(
       onChange,
       headerProps,
       tableProps,
+      yearGridProps,
+      monthGridProps,
       labelProps,
       controlProps,
       prevProps,
@@ -110,6 +111,7 @@ export const Calendar = forwardRef(
                 controlProps,
                 prevProps,
                 nextProps,
+                yearGridProps,
                 yearProps,
                 w,
                 minW,
@@ -128,6 +130,7 @@ export const Calendar = forwardRef(
                 controlProps,
                 prevProps,
                 nextProps,
+                monthGridProps,
                 monthProps,
                 w,
                 minW,
@@ -164,7 +167,7 @@ export const Calendar = forwardRef(
   },
 ) as {
   <Y extends MaybeValue = Date>(
-    props: CalendarProps<Y> & { ref?: Ref<HTMLDivElement> },
+    props: CalendarProps<Y> & RefAttributes<HTMLDivElement>,
   ): JSX.Element
 } & ComponentArgs
 

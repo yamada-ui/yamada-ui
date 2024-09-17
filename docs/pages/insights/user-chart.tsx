@@ -31,7 +31,7 @@ import { CountUp } from "components/transitions"
 import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
 
-export type UserChartProps = Omit<StackProps, "id"> & {
+export interface UserChartProps extends Omit<StackProps, "id"> {
   id: string
   currentScore: UserInsightScore
   prevScore: UserInsightScore

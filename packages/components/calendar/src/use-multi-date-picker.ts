@@ -1,4 +1,4 @@
-import type { UIPropGetter } from "@yamada-ui/core"
+import type { PropGetter } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { handlerAll, isNumber, useUpdateEffect } from "@yamada-ui/utils"
 import dayjs from "dayjs"
@@ -19,12 +19,13 @@ const getResolvedValue = (value: (Date | undefined)[]) => {
   ) as Date[]
 }
 
-type CalendarProps = Omit<
-  UseCalendarProps<Date[]>,
-  "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
->
+interface CalendarProps
+  extends Omit<
+    UseCalendarProps<Date[]>,
+    "prevRef" | "typeRef" | "nextRef" | "enableMultiple" | "enableRange"
+  > {}
 
-type UseMultiDatePickerOptions = {
+interface UseMultiDatePickerOptions {
   /**
    * If `true`, the calendar component will be closed when value is selected.
    *
@@ -39,8 +40,9 @@ type UseMultiDatePickerOptions = {
   closeOnMaxSelect?: boolean
 }
 
-export type UseMultiDatePickerProps = UseCalendarPickerProps<CalendarProps> &
-  UseMultiDatePickerOptions
+export interface UseMultiDatePickerProps
+  extends UseCalendarPickerProps<CalendarProps>,
+    UseMultiDatePickerOptions {}
 
 export const useMultiDatePicker = ({
   value: valueProp,
@@ -170,7 +172,7 @@ export const useMultiDatePicker = ({
     setInputValue((prev) => prev.replace(pattern, ""))
   }, [pattern])
 
-  const getInputProps: UIPropGetter = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,

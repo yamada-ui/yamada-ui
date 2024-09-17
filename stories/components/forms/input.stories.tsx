@@ -218,7 +218,11 @@ export const customType: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { name: string; cellphone: string; email: string }
+  interface Data {
+    name: string
+    cellphone: string
+    email: string
+  }
 
   const {
     register,
@@ -290,7 +294,11 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { name: string; cellphone: string; email: string }
+  interface Data {
+    name: string
+    cellphone: string
+    email: string
+  }
 
   const defaultValues: Data = {
     name: "孫悟空",

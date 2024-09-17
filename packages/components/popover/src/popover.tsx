@@ -1,10 +1,11 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
 import type {
-  MotionUIPropGetter,
-  MotionProps,
-  MotionTransitionProps,
-} from "@yamada-ui/motion"
+  CSSUIObject,
+  HTMLUIPropsWithRef,
+  PropGetter,
+  ThemeProps,
+} from "@yamada-ui/core"
+import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
+import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import { useAnimationObserver } from "@yamada-ui/use-animation"
 import type { LazyMode } from "@yamada-ui/use-disclosure"
 import { useDisclosure, useLazyDisclosure } from "@yamada-ui/use-disclosure"
@@ -15,7 +16,6 @@ import {
 } from "@yamada-ui/use-focus"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
 import { usePopper, popperProperties } from "@yamada-ui/use-popper"
-import type { DOMAttributes, PropGetter } from "@yamada-ui/utils"
 import {
   createContext,
   getEventRelatedTarget,
@@ -24,7 +24,13 @@ import {
   mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { FC, PropsWithChildren, RefAttributes, RefObject } from "react"
+import type {
+  ComponentProps,
+  FC,
+  PropsWithChildren,
+  RefAttributes,
+  RefObject,
+} from "react"
 import { useCallback, useEffect, useRef } from "react"
 
 export type PopoverProperty = (typeof popoverProperties)[number]
@@ -50,18 +56,19 @@ export const popoverProperties = [
   "duration",
 ] as const
 
-export type ComboBoxProps = Omit<
-  PopoverOptions,
-  | "initialFocusRef"
-  | "relatedRef"
-  | "autoFocus"
-  | "restoreFocus"
-  | "closeOnButton"
-  | "trigger"
-> &
-  Omit<UsePopperProps, "enabled">
+export interface ComboBoxProps
+  extends Omit<
+      PopoverOptions,
+      | "initialFocusRef"
+      | "relatedRef"
+      | "autoFocus"
+      | "restoreFocus"
+      | "closeOnButton"
+      | "trigger"
+    >,
+    Omit<UsePopperProps, "enabled"> {}
 
-type PopoverOptions = {
+interface PopoverOptions {
   /**
    * If `true`, the popover will be opened.
    */
@@ -165,21 +172,23 @@ type PopoverOptions = {
   duration?: MotionTransitionProps["duration"]
 }
 
-export type PopoverProps = ThemeProps<"Popover"> &
-  Omit<UsePopperProps, "enabled"> &
-  PropsWithChildren<PopoverOptions>
+export interface PopoverProps
+  extends ThemeProps<"Popover">,
+    Omit<UsePopperProps, "enabled">,
+    PropsWithChildren<PopoverOptions> {}
 
-type PopoverContext = Pick<
-  PopoverOptions,
-  "isOpen" | "onClose" | "closeOnButton" | "animation" | "duration"
-> & {
+interface PopoverContext
+  extends Pick<
+    PopoverOptions,
+    "isOpen" | "onClose" | "closeOnButton" | "animation" | "duration"
+  > {
   onAnimationComplete: () => void
   forceUpdate: () => void | undefined
   getTriggerProps: PropGetter
   getAnchorProps: PropGetter
-  getPopperProps: PropGetter
-  getPopoverProps: MotionUIPropGetter
-  styles: Record<string, CSSUIObject>
+  getPopperProps: PropGetter<ComponentProps<"div">>
+  getPopoverProps: PropGetter<MotionProps<"section">, MotionProps<"section">>
+  styles: { [key: string]: CSSUIObject }
 }
 
 const [PopoverProvider, usePopover] = createContext<PopoverContext>({
@@ -195,7 +204,7 @@ export { usePopover }
  * @see Docs https://yamada-ui.com/components/overlay/popover
  */
 export const Popover: FC<PopoverProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Popover", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Popover", props)
   const {
     children,
     initialFocusRef,
@@ -275,9 +284,12 @@ export const Popover: FC<PopoverProps> = (props) => {
     isSelected: present,
   })
 
-  const getPopoverProps: MotionUIPropGetter = useCallback(
+  const getPopoverProps: PropGetter<
+    MotionProps<"section">,
+    MotionProps<"section">
+  > = useCallback(
     (props = {}, ref = null) => {
-      const popoverProps: MotionProps<"div"> & RefAttributes<any> = {
+      const popoverProps: MotionProps & RefAttributes<any> = {
         ...props,
         style: {
           ...props.style,
@@ -342,7 +354,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   const getTriggerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
-      const triggerProps: RefAttributes<any> & DOMAttributes = {
+      const triggerProps: HTMLUIPropsWithRef = {
         ...props,
         ref: mergeRefs(triggerRef, ref, maybeReferenceRef),
       }

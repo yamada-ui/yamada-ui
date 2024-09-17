@@ -1,6 +1,6 @@
 import type { CSSProperties, UIProperties } from "."
 
-type ShorthandProps = Partial<Record<CSSProperties | UIProperties, string[]>>
+type ShorthandProps = { [key in CSSProperties | UIProperties]?: string[] }
 
 export const shorthandProps: ShorthandProps = {
   fontSize: ["text"],

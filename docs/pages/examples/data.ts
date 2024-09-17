@@ -9,10 +9,9 @@ export const SLUGS = [
   "authentication",
 ] as const
 
-export const AUTHORS: Record<
-  Slug,
-  { name: string; src: string; href: string }[]
-> = {
+export const AUTHORS: {
+  [_key in Slug]: { name: string; src: string; href: string }[]
+} = {
   mail: [
     {
       name: "umaidashi",

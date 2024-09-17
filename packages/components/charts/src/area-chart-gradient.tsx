@@ -1,16 +1,18 @@
-export type AreaGradientProps = {
+import type { FC } from "react"
+
+export interface AreaGradientProps {
   id?: string
   color?: string
   withGradient?: boolean
   fillOpacity: number | string
 }
 
-export const AreaGradient = ({
+export const AreaGradient: FC<AreaGradientProps> = ({
   color,
   id,
   withGradient,
   fillOpacity,
-}: AreaGradientProps) => {
+}) => {
   if (withGradient) {
     return (
       <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">

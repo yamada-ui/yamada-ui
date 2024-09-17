@@ -3,13 +3,11 @@ import { ChevronFirst as ChevronFirstIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type ChevronFirstProps = LucideIconProps
-
 /**
  * `ChevronFirst` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const ChevronFirst = forwardRef<ChevronFirstProps, "svg">(
-  (props, ref) => <LucideIcon ref={ref} as={ChevronFirstIcon} {...props} />,
-)
+export const ChevronFirst = forwardRef<LucideIconProps, "svg">((props, ref) => (
+  <LucideIcon ref={ref} as={ChevronFirstIcon} {...props} />
+))

@@ -1,5 +1,9 @@
 {
   "Tooltip": {
+    "as": {
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"div\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
+      "required": false
+    },
     "closeDelay": {
       "type": "number",
       "defaultValue": "0",

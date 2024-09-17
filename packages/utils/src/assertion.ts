@@ -1,48 +1,71 @@
 import type { Dict } from "./index.types"
 
-export const is = (x: any, y: any) =>
-  (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
+export function is(x: any, y: any) {
+  return (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y)
+}
 
-export const isNumber = (value: any): value is number =>
-  typeof value === "number"
+export function isNumber(value: any): value is number {
+  return typeof value === "number"
+}
 
-export const isNotNumber = (value: any): boolean =>
-  typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
+export function isNotNumber(value: any): boolean {
+  return (
+    typeof value !== "number" || Number.isNaN(value) || !Number.isFinite(value)
+  )
+}
 
-export const isNumeric = (value: any): boolean =>
-  !isNaN(parseFloat(String(value))) &&
-  isFinite(Number(value)) &&
-  /^-?\d*\.?\d+$/.test(String(value))
+export function isNumeric(value: any): boolean {
+  return (
+    !isNaN(parseFloat(String(value))) &&
+    isFinite(Number(value)) &&
+    /^-?\d*\.?\d+$/.test(String(value))
+  )
+}
 
-export const isString = (value: any): value is string =>
-  Object.prototype.toString.call(value) === "[object String]"
+export function isString(value: any): value is string {
+  return Object.prototype.toString.call(value) === "[object String]"
+}
 
-export const isBoolean = (value: any): value is boolean =>
-  typeof value === "boolean"
+export function isBoolean(value: any): value is boolean {
+  return typeof value === "boolean"
+}
 
-export const isUndefined = (value: any): value is undefined =>
-  typeof value === "undefined" && value === undefined
+export function isUndefined(value: any): value is undefined {
+  return typeof value === "undefined" && value === undefined
+}
 
-export const isNull = (value: any): value is null => value === null
+export function isNull(value: any): value is null {
+  return value === null
+}
 
-export const isObject = <T extends Dict>(value: any): value is T =>
-  value !== null &&
-  (typeof value === "object" || typeof value === "function") &&
-  !isArray(value)
+export function isObject<T extends Dict>(value: any): value is T {
+  return (
+    value !== null &&
+    (typeof value === "object" || typeof value === "function") &&
+    !isArray(value)
+  )
+}
 
-export const isArray = <T extends any[]>(value: any): value is T =>
-  Array.isArray(value)
+export function isArray<T extends any[]>(value: any): value is T {
+  return Array.isArray(value)
+}
 
-export const isEmpty = (value: any): boolean =>
-  !isArray(value) || !value.length || value.every((v) => v == null)
+export function isEmpty(value: any): boolean {
+  return !isArray(value) || !value.length || value.every((v) => v == null)
+}
 
-export const isFunction = <T extends Function = Function>(
+export function isFunction<T extends Function = Function>(
   value: any,
-): value is T => typeof value === "function"
+): value is T {
+  return typeof value === "function"
+}
 
-export const isUnit = (value: any): boolean =>
-  /[0-9].*(em|rem|ex|rex|cap|rcap|ch|rch|ic|ric|lh|rlh|vw|svw|lvw|dvw|vh|svh|lvh|dvh|vi|svi|lvi|dvi|vb|svb|lvb|dvb|vmin|svmin|lvmin|dvmin|vmax|svmax|lvmax|dvmax|cm|mm|Q|in|pc|pt|px|%|cqw|cqh|cqi|cqb|cqmin|cqmax)$/.test(
+export function isUnit(value: any): boolean {
+  return /[0-9].*(em|rem|ex|rex|cap|rcap|ch|rch|ic|ric|lh|rlh|vw|svw|lvw|dvw|vh|svh|lvh|dvh|vi|svi|lvi|dvi|vb|svb|lvb|dvb|vmin|svmin|lvmin|dvmin|vmax|svmax|lvmax|dvmax|cm|mm|Q|in|pc|pt|px|%|cqw|cqh|cqi|cqb|cqmin|cqmax)$/.test(
     value,
   )
+}
 
-export const cast = <T>(value: any) => value as T
+export function cast<T>(value: any) {
+  return value as T
+}

@@ -1,4 +1,3 @@
-import { Text } from "@yamada-ui/react"
 import { act, fireEvent, a11y, render } from "@yamada-ui/test"
 import {
   Dropzone,
@@ -12,7 +11,7 @@ describe("<Dropzone />", () => {
   test("Dropzone renders correctly", async () => {
     const { container } = render(
       <Dropzone>
-        <Text>Drag file here or click to select file</Text>
+        <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
     await a11y(container)
@@ -22,7 +21,7 @@ describe("<Dropzone />", () => {
     const text = "Drag file here or click to select file"
     const { container } = render(
       <Dropzone>
-        <Text>{text}</Text>
+        <p>{text}</p>
       </Dropzone>,
     )
     expect(container.textContent).toBe(text)
@@ -31,7 +30,7 @@ describe("<Dropzone />", () => {
   test("Is the multiple property being reflected correctly", async () => {
     const { container } = render(
       <Dropzone multiple>
-        <Text>Drag file here or click to select file</Text>
+        <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
     expect(container.querySelector("input")).toHaveAttribute("multiple")
@@ -44,7 +43,7 @@ describe("<Dropzone />", () => {
           "image/*": [],
         }}
       >
-        <Text>Drag image here or click to select image</Text>
+        <p>Drag image here or click to select image</p>
       </Dropzone>,
     )
     expect(container.querySelector("input")).toHaveAttribute(
@@ -56,7 +55,7 @@ describe("<Dropzone />", () => {
   test("Is the isDisabled property being reflected correctly", async () => {
     const { container } = render(
       <Dropzone isDisabled variant="dashed">
-        <Text>Drag file here or click to select file</Text>
+        <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
     expect(container.querySelector("input")).toHaveAttribute("disabled")
@@ -69,7 +68,7 @@ describe("<Dropzone />", () => {
   test("Is the isReadOnly property being reflected correctly", async () => {
     const { container } = render(
       <Dropzone isReadOnly variant="dashed">
-        <Text>Drag file here or click to select file</Text>
+        <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
     expect(container.querySelector("input")).toHaveAttribute("readonly")
@@ -82,7 +81,7 @@ describe("<Dropzone />", () => {
   test("Is the isLoading property being reflected correctly", async () => {
     const { container } = render(
       <Dropzone isLoading variant="dashed">
-        <Text>Drag file here or click to select file</Text>
+        <p>Drag file here or click to select file</p>
       </Dropzone>,
     )
     expect(
@@ -114,7 +113,7 @@ describe("<Dropzone />", () => {
     const { container } = render(
       <Dropzone accept={IMAGE_ACCEPT_TYPE}>
         <DropzoneAccept>
-          <Text>Accepted</Text>
+          <p>Accepted</p>
         </DropzoneAccept>
       </Dropzone>,
     )
@@ -138,7 +137,7 @@ describe("<Dropzone />", () => {
     const { container } = render(
       <Dropzone accept={IMAGE_ACCEPT_TYPE}>
         <DropzoneReject>
-          <Text>Rejected</Text>
+          <p>Rejected</p>
         </DropzoneReject>
       </Dropzone>,
     )
@@ -161,7 +160,7 @@ describe("<Dropzone />", () => {
     const { container } = render(
       <Dropzone>
         <DropzoneIdle>
-          <Text>Idle</Text>
+          <p>Idle</p>
         </DropzoneIdle>
       </Dropzone>,
     )

@@ -1,5 +1,6 @@
 import { CirclePlus, Podcast } from "@yamada-ui/lucide"
-import { Image, type ImageProps } from "@yamada-ui/next"
+import { Image } from "@yamada-ui/next"
+import type { ImageProps } from "@yamada-ui/next"
 import {
   Box,
   Button,
@@ -24,7 +25,7 @@ import type { StackProps } from "@yamada-ui/react"
 import { memo, useState } from "react"
 import type { Dispatch, FC, ReactNode, SetStateAction } from "react"
 
-type CarouselItem = Omit<ImageProps, "alt" | "size"> & {
+interface CarouselItem extends Omit<ImageProps, "alt" | "size"> {
   title: string
   description: string
 }
@@ -110,7 +111,7 @@ const MADE_FOR_YOU_ITEMS: CarouselItem[] = [
 
 type ContentMode = "music" | "podcast"
 
-export type ContentProps = StackProps & {}
+export interface ContentProps extends StackProps {}
 
 export const Content: FC<ContentProps> = memo(({ ...rest }) => {
   const [mode, setMode] = useState<ContentMode>("music")
@@ -130,7 +131,7 @@ export const Content: FC<ContentProps> = memo(({ ...rest }) => {
 
 Content.displayName = "Content"
 
-type ContentHeaderProps = StackProps & {
+interface ContentHeaderProps extends StackProps {
   mode: ContentMode
   setMode: Dispatch<SetStateAction<ContentMode>>
 }
@@ -172,7 +173,9 @@ const ContentHeader: FC<ContentHeaderProps> = memo(
 
 ContentHeader.displayName = "ContentHeader"
 
-type ContentDisplayProps = { mode: ContentMode }
+interface ContentDisplayProps {
+  mode: ContentMode
+}
 
 const ContentDisplay: FC<ContentDisplayProps> = memo(({ mode }) => {
   switch (mode) {
@@ -189,7 +192,7 @@ const ContentDisplay: FC<ContentDisplayProps> = memo(({ mode }) => {
 
 ContentDisplay.displayName = "ContentDisplay"
 
-type ContentItemHeaderProps = StackProps & {
+interface ContentItemHeaderProps extends Omit<StackProps, "title"> {
   title: ReactNode
   description?: ReactNode
 }
@@ -216,7 +219,7 @@ const ContentItemHeader: FC<ContentItemHeaderProps> = memo(
 
 ContentItemHeader.displayName = "ContentItemHeader"
 
-type ContentMusicProps = StackProps
+interface ContentMusicProps extends StackProps {}
 
 const ContentMusic: FC<ContentMusicProps> = memo(({ ...rest }) => {
   return (
@@ -243,7 +246,7 @@ const ContentMusic: FC<ContentMusicProps> = memo(({ ...rest }) => {
 
 ContentMusic.displayName = "ContentMusic"
 
-type ContentPodcastsProps = StackProps
+interface ContentPodcastsProps extends StackProps {}
 
 const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -313,7 +316,7 @@ const ContentPodcasts: FC<ContentPodcastsProps> = memo(({ ...rest }) => {
 
 ContentPodcasts.displayName = "ContentPodcasts"
 
-type ContentItemProps = StackProps
+interface ContentItemProps extends StackProps {}
 
 const ContentItem: FC<ContentItemProps> = memo(({ ...rest }) => {
   return <VStack as="section" {...rest} />
@@ -321,7 +324,7 @@ const ContentItem: FC<ContentItemProps> = memo(({ ...rest }) => {
 
 ContentItem.displayName = "ContentItem"
 
-type ContentCarouselProps = StackProps & {
+interface ContentCarouselProps extends StackProps {
   items: CarouselItem[]
   size?: "sm" | "md"
 }
@@ -340,7 +343,7 @@ const ContentCarousel: FC<ContentCarouselProps> = memo(
 
 ContentCarousel.displayName = "ContentCarousel"
 
-type ContentCarouselItemProps = CarouselItem & {
+interface ContentCarouselItemProps extends CarouselItem {
   containerProps?: StackProps
   size?: "sm" | "md"
 }

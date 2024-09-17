@@ -21,14 +21,14 @@ const EMAIL_ITEMS = [
   { label: "m@support.com", value: "m@support.com" },
 ]
 
-type Data = {
+interface Data {
   username: string
   email: string
   bio: string
   urls: { url: string }[]
 }
 
-export type ProfileProps = StackProps
+export interface ProfileProps extends StackProps {}
 
 export const Profile: FC<ProfileProps> = memo(({ ...rest }) => {
   const {

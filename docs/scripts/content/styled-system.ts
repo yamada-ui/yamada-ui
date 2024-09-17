@@ -33,9 +33,8 @@ config({ path: CONSTANT.PATH.ENV })
 
 type Type = "style" | "pseudo"
 type TableType = "property" | "description"
-type Props = Record<
-  string,
-  {
+interface Props {
+  [key: string]: {
     shorthands?: string[]
     properties: string[]
     token?: string
@@ -43,11 +42,14 @@ type Props = Record<
     urls?: string[]
     deprecated?: boolean
   }
->
-type JSDocs = Record<
-  string,
-  { description?: string; urls?: string[]; deprecated?: boolean }
->
+}
+interface JSDocs {
+  [key: string]: {
+    description?: string
+    urls?: string[]
+    deprecated?: boolean
+  }
+}
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
   CONSTANT.PATH.ROOT,
@@ -99,12 +101,12 @@ const isStringFunction = (value: string) => /^\s*(\w+)\s*\([^)]*\)/.test(value)
 
 const hasJSDoc = (node: any): node is { jsDoc: JSDoc[] } => "jsDoc" in node
 
-const sortObject = (obj: Record<string, any>) =>
+const sortObject = (obj: { [key: string]: any }) =>
   Object.keys(obj)
     .sort()
     .reduce(
       (prev, key) => ({ ...prev, [key]: obj[key] }),
-      {} as Record<string, any>,
+      {} as { [key: string]: any },
     )
 
 const getProps: p.RequiredRunner = (type: Type) => async (_, s) => {

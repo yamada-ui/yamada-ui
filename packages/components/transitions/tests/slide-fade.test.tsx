@@ -1,5 +1,5 @@
-import { useDisclosure, Button } from "@yamada-ui/react"
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 import { SlideFade } from "../src"
 
 describe("<SlideFade />", () => {
@@ -9,11 +9,11 @@ describe("<SlideFade />", () => {
 
   test("fade-in and fade-out work correctly", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
           <SlideFade isOpen={isOpen}>SlideFade</SlideFade>
         </>
       )
@@ -34,11 +34,11 @@ describe("<SlideFade />", () => {
 
   test("fade-in and fade-out work correctly when `initial` is passed to an `initial` property", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
           <SlideFade isOpen={isOpen} initial="initial">
             SlideFade
           </SlideFade>
@@ -91,11 +91,11 @@ describe("<SlideFade />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
           <SlideFade isOpen={isOpen} unmountOnExit>
             SlideFade
           </SlideFade>

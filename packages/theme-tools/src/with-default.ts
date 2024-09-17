@@ -2,15 +2,14 @@ import type { Theme, ComponentDefaultProps, UsageTheme } from "@yamada-ui/core"
 import type { Union } from "@yamada-ui/utils"
 import { isArray, merge } from "@yamada-ui/utils"
 
-export const withDefaultSize =
-  ({
-    size,
-    components,
-  }: {
-    size: ComponentDefaultProps["size"]
-    components?: Union<keyof Theme["components"]>[]
-  }) =>
-  (theme: UsageTheme): UsageTheme => {
+export function withDefaultSize({
+  size,
+  components,
+}: {
+  size: ComponentDefaultProps["size"]
+  components?: Union<keyof Theme["components"]>[]
+}) {
+  return function (theme: UsageTheme): UsageTheme {
     let keys: string[] = Object.keys(theme.components ?? {})
 
     if (isArray(components)) keys = components
@@ -21,16 +20,16 @@ export const withDefaultSize =
       ),
     })
   }
+}
 
-export const withDefaultVariant =
-  ({
-    variant,
-    components,
-  }: {
-    variant: ComponentDefaultProps["variant"]
-    components?: Union<keyof Theme["components"]>[]
-  }) =>
-  (theme: UsageTheme): UsageTheme => {
+export function withDefaultVariant({
+  variant,
+  components,
+}: {
+  variant: ComponentDefaultProps["variant"]
+  components?: Union<keyof Theme["components"]>[]
+}) {
+  return function (theme: UsageTheme): UsageTheme {
     let keys: string[] = Object.keys(theme.components ?? {})
 
     if (isArray(components)) keys = components
@@ -41,16 +40,16 @@ export const withDefaultVariant =
       ),
     })
   }
+}
 
-export const withDefaultColorScheme =
-  ({
-    colorScheme,
-    components,
-  }: {
-    colorScheme: ComponentDefaultProps["colorScheme"]
-    components?: Union<keyof Theme["components"]>[]
-  }) =>
-  (theme: UsageTheme): UsageTheme => {
+export function withDefaultColorScheme({
+  colorScheme,
+  components,
+}: {
+  colorScheme: ComponentDefaultProps["colorScheme"]
+  components?: Union<keyof Theme["components"]>[]
+}) {
+  return function (theme: UsageTheme): UsageTheme {
     let keys: string[] = Object.keys(theme.components ?? {})
 
     if (isArray(components)) keys = components
@@ -61,16 +60,16 @@ export const withDefaultColorScheme =
       ),
     })
   }
+}
 
-export const withDefaultProps =
-  ({
-    defaultProps,
-    components,
-  }: {
-    defaultProps: ComponentDefaultProps
-    components?: Union<keyof Theme["components"]>[]
-  }): UsageTheme =>
-  (theme: UsageTheme) => {
+export function withDefaultProps({
+  defaultProps,
+  components,
+}: {
+  defaultProps: ComponentDefaultProps
+  components?: Union<keyof Theme["components"]>[]
+}): UsageTheme {
+  return function (theme: UsageTheme) {
     let keys: string[] = Object.keys(theme.components ?? {})
 
     if (isArray(components)) keys = components
@@ -81,3 +80,4 @@ export const withDefaultProps =
       ),
     })
   }
+}

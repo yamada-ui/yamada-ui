@@ -1,16 +1,16 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { UseAutocompleteOptionGroupProps } from "./use-autocomplete"
-import {
-  useAutocompleteContext,
-  useAutocompleteOptionGroup,
-} from "./use-autocomplete"
+import { useAutocompleteContext } from "./autocomplete-context"
+import type { UseAutocompleteOptionGroupProps } from "./use-autocomplete-option-group"
+import { useAutocompleteOptionGroup } from "./use-autocomplete-option-group"
 
-type AutocompleteOptionGroupOptions = UseAutocompleteOptionGroupProps
+interface AutocompleteOptionGroupOptions
+  extends UseAutocompleteOptionGroupProps {}
 
-export type AutocompleteOptionGroupProps = HTMLUIProps<"ul"> &
-  AutocompleteOptionGroupOptions
+export interface AutocompleteOptionGroupProps
+  extends HTMLUIProps<"ul">,
+    AutocompleteOptionGroupOptions {}
 
 export const AutocompleteOptionGroup = forwardRef<
   AutocompleteOptionGroupProps,

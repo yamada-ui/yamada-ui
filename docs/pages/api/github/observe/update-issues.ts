@@ -6,8 +6,8 @@ import {
   getIssues,
   getListEventsForTimeline,
   recursiveOctokit,
-  type Constant,
 } from "utils/github"
+import type { Constant } from "utils/github"
 import type { APIHandler } from "utils/next"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })

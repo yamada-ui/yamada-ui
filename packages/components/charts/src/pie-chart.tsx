@@ -3,7 +3,7 @@ import {
   forwardRef,
   omitThemeProps,
   ui,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -22,14 +22,12 @@ import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import {
-  useChartTooltip,
-  type UseChartTooltipOptions,
-} from "./use-chart-tooltip"
+import { useChartTooltip } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import type { UsePieChartOptions } from "./use-pie-chart"
 import { usePieChart } from "./use-pie-chart"
 
-type PieChartOptions = {
+interface PieChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -54,13 +52,14 @@ type PieChartOptions = {
   unit?: string
 }
 
-export type PieChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"pieChart"> &
-  PieChartOptions &
-  UsePieChartOptions &
-  Omit<UseChartTooltipOptions, "labelFormatter"> &
-  UseChartLegendProps &
-  UseChartProps
+export interface PieChartProps
+  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity">,
+    ThemeProps<"pieChart">,
+    PieChartOptions,
+    UsePieChartOptions,
+    Omit<UseChartTooltipOptions, "labelFormatter">,
+    UseChartLegendProps,
+    UseChartProps {}
 
 /**
  * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
@@ -68,7 +67,7 @@ export type PieChartProps = HTMLUIProps<"div"> &
  * @see Docs https://yamada-ui.com/components/data-display/pie-chart
  */
 export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("PieChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("PieChart", props)
   const {
     className,
     data,

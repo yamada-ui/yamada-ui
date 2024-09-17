@@ -1,7 +1,4 @@
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
-import { a11y, render, screen } from "@yamada-ui/test"
-import { FaCheckCircle } from "react-icons/fa"
+import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import { List, ListIcon, ListItem, DiscList, DecimalList } from "../src"
 
 describe("<List />", () => {
@@ -66,19 +63,14 @@ describe("<List />", () => {
     render(
       <List>
         <ListItem>
-          <ListIcon aria-label="react-icon" as={FaCheckCircle} />
-        </ListItem>
-        <ListItem aria-label="font-awesome-icon">
-          <ListIcon as={Icon} icon={faCheck} />
+          <ListIcon aria-label="icon" as={TestIcon} />
         </ListItem>
       </List>,
     )
 
-    const reactIcon = await screen.findByLabelText(/react-icon/i)
-    const fontAwesomeIcon = await screen.findByLabelText(/font-awesome-icon/i)
+    const icon = await screen.findByLabelText(/icon/i)
 
-    expect(reactIcon).toBeInTheDocument()
-    expect(fontAwesomeIcon).toBeInTheDocument()
+    expect(icon).toBeInTheDocument()
   })
 
   test("should render list with different style types", async () => {

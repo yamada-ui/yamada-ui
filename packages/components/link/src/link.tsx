@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
-type LinkOptions = {
+interface LinkOptions {
   /**
    * If `true`, the link will open in new tab.
    *
@@ -16,7 +16,10 @@ type LinkOptions = {
   isExternal?: boolean
 }
 
-export type LinkProps = HTMLUIProps<"a"> & ThemeProps<"Link"> & LinkOptions
+export interface LinkProps
+  extends HTMLUIProps<"a">,
+    ThemeProps<"Link">,
+    LinkOptions {}
 
 /**
  * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.

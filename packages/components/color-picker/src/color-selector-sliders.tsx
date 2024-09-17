@@ -8,7 +8,7 @@ import type { HueSliderProps } from "./hue-slider"
 import { HueSlider } from "./hue-slider"
 import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorSelectorSlidersOptions = {
+interface ColorSelectorSlidersOptions {
   /**
    * Ref for the hue slider component.
    */
@@ -27,8 +27,9 @@ type ColorSelectorSlidersOptions = {
   alphaSliderProps?: Omit<AlphaSliderProps, "value" | "defaultValue">
 }
 
-export type ColorSelectorSlidersProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorSelectorSlidersOptions
+export interface ColorSelectorSlidersProps
+  extends Omit<HTMLUIProps, "children">,
+    ColorSelectorSlidersOptions {}
 
 export const ColorSelectorSliders = forwardRef<
   ColorSelectorSlidersProps,

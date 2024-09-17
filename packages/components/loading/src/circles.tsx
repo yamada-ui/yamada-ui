@@ -2,7 +2,7 @@ import { forwardRef, ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 
-export type CirclesProps = Omit<IconProps, "color"> & {
+export interface CirclesProps extends Omit<IconProps, "color"> {
   /**
    * The CSS `stroke` property.
    */

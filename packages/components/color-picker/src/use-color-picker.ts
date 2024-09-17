@@ -1,9 +1,9 @@
 import { layoutStyleProperties } from "@yamada-ui/core"
 import type {
-  UIPropGetter,
   CSSUIObject,
   ThemeProps,
   HTMLUIProps,
+  PropGetter,
 } from "@yamada-ui/core"
 import {
   formControlProperties,
@@ -37,7 +37,10 @@ const defaultFormatInput = (value: string) => value
 
 type ColorSelectorThemeProps = ThemeProps<"ColorSelector">
 
-type ColorPickerContext = { value: string; styles: Record<string, CSSUIObject> }
+interface ColorPickerContext {
+  value: string
+  styles: { [key: string]: CSSUIObject }
+}
 
 export const [ColorPickerProvider, useColorPickerContext] =
   createContext<ColorPickerContext>({
@@ -45,7 +48,7 @@ export const [ColorPickerProvider, useColorPickerContext] =
     errorMessage: `useColorPickerContext returned is 'undefined'. Seems you forgot to wrap the components in "<ColorPicker />"`,
   })
 
-type UseColorPickerOptions = {
+interface UseColorPickerOptions {
   /**
    * The initial value of the color selector.
    */
@@ -94,21 +97,28 @@ type UseColorPickerOptions = {
   colorSelectorProps?: ColorSelectorProps
 }
 
-export type UseColorPickerProps = Omit<
-  HTMLUIProps<"input">,
-  "size" | "offset" | "value" | "defaultValue" | "onChange" | "children"
-> &
-  Omit<UseColorSelectorBaseProps, "id" | "name"> &
-  ComboBoxProps &
-  Pick<
-    ColorSelectorProps,
-    | "withPicker"
-    | "withChannel"
-    | "swatchesLabel"
-    | "swatches"
-    | "swatchesColumns"
-  > &
-  UseColorPickerOptions
+export interface UseColorPickerProps
+  extends Omit<
+      HTMLUIProps<"input">,
+      | "size"
+      | "offset"
+      | "value"
+      | "defaultValue"
+      | "onChange"
+      | "animation"
+      | "children"
+    >,
+    Omit<UseColorSelectorBaseProps, "id" | "name">,
+    ComboBoxProps,
+    Pick<
+      ColorSelectorProps,
+      | "withPicker"
+      | "withChannel"
+      | "swatchesLabel"
+      | "swatches"
+      | "swatchesColumns"
+    >,
+    UseColorPickerOptions {}
 
 export const useColorPicker = (props: UseColorPickerProps) => {
   const {
@@ -254,7 +264,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
       if (disabled || readOnly) return
 
-      const actions: Record<string, Function | undefined> = {
+      const actions: { [key: string]: Function | undefined } = {
         Space: !isOpen ? onOpen : undefined,
         Enter: !isOpen ? onOpen : undefined,
         Escape: closeOnEsc ? onClose : undefined,
@@ -384,7 +394,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     ],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -396,7 +406,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     [containerProps, formControlProps, onContainerBlur, onContainerClick, rest],
   )
 
-  const getFieldProps: UIPropGetter<"input"> = useCallback(
+  const getFieldProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(fieldRef, ref),
       tabIndex: !allowInput ? -1 : 0,
@@ -427,7 +437,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     ],
   )
 
-  const getEyeDropperProps: UIPropGetter<"button"> = useCallback(
+  const getEyeDropperProps: PropGetter<"button"> = useCallback(
     (props = {}, ref = null) => ({
       disabled,
       "aria-label": "Pick a color",
@@ -439,8 +449,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
     [disabled, onEyeDropperClick, readOnly],
   )
 
-  const getSelectorProps = useCallback(
-    (props?: ColorSelectorProps): ColorSelectorProps => ({
+  const getSelectorProps: PropGetter<ColorSelectorProps> = useCallback(
+    (props) => ({
       ...formControlProps,
       ...props,
       value,

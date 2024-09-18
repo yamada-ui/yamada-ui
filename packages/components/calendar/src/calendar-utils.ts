@@ -308,6 +308,12 @@ export const disableAllTabIndex = <T = any>(
 export const isDisabledDate = ({
   minDate,
   maxDate,
+  minTrulySelectStartDate,
+  maxTrulySelectStartDate,
+  startDate,
+  endDate,
+  maybeStartDate,
+  maybeEndDate,
   excludeDate,
   disableOutsideDays,
   value,
@@ -315,6 +321,12 @@ export const isDisabledDate = ({
 }: {
   minDate?: Date
   maxDate?: Date
+  minTrulySelectStartDate?: Date
+  maxTrulySelectStartDate?: Date
+  startDate?: Date
+  endDate?: Date
+  maybeStartDate?: Date
+  maybeEndDate?: Date
   excludeDate?: (date: Date) => boolean
   disableOutsideDays: boolean
   value: Date
@@ -322,5 +334,11 @@ export const isDisabledDate = ({
 }) =>
   isAfterDate(value, maxDate) ||
   isBeforeDate(value, minDate) ||
+  (isAfterDate(value, maybeStartDate) &&
+    isBeforeDate(value, maxTrulySelectStartDate) &&
+    !endDate) ||
+  (isBeforeDate(value, maybeEndDate) &&
+    isAfterDate(value, minTrulySelectStartDate) &&
+    !startDate) ||
   !!excludeDate?.(value) ||
   (!!disableOutsideDays && !!isOutside)

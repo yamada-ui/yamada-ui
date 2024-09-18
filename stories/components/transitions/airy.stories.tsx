@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Menu, X } from "@yamada-ui/lucide"
-import type { AiryCurrentElement } from "@yamada-ui/react"
+import type { AiryAnimationElement } from "@yamada-ui/react"
 import { Airy, Text, Center } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -61,12 +61,13 @@ export const withDuration: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<AiryCurrentElement>("to")
+  const [currentElement, onChange] = useState<AiryAnimationElement>("to")
 
   const onChangeAiryAnimation = () => {
     console.log(`current element is ${currentElement}`)
     onChange((prev) => (prev === "from" ? "to" : "from"))
   }
+
   return (
     <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
       <Airy
@@ -83,8 +84,6 @@ export const customControl: Story = () => {
           </Text>
         }
       />
-
-      <Airy from={<Menu fontSize="6xl" />} to={<X fontSize="6xl" />} />
     </Center>
   )
 }

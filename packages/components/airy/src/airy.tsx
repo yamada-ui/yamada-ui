@@ -7,12 +7,12 @@ import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { type ReactElement } from "react"
 
-export type AiryCurrentElement = "from" | "to"
+export type AiryAnimationElement = "from" | "to"
 
 type AiryOptions = {
   from: ReactElement
   to: ReactElement
-  initialElement?: AiryCurrentElement
+  initialElement?: AiryAnimationElement
   onChange?: () => void
   duration?: number
 }
@@ -37,7 +37,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   } = omitThemeProps(mergedProps)
 
   const [currentElement, setCurrentElement] =
-    useControllableState<AiryCurrentElement>({
+    useControllableState<AiryAnimationElement>({
       defaultValue: initialElement,
       onChange: onChangeProp,
     })

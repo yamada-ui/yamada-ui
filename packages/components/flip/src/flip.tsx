@@ -46,7 +46,7 @@ const variants: FlipMotion = {
   },
 }
 
-type FlipAnimationElement = "from" | "to"
+export type FlipAnimationElement = "from" | "to"
 
 export type FlipOrientation = "horizontal" | "vertical"
 

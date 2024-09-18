@@ -1,2 +1,2 @@
 export { Flip } from "./flip"
-export type { FlipProps, FlipOrientation } from "./flip"
+export type { FlipProps, FlipOrientation, FlipAnimationElement } from "./flip"

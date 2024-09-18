@@ -46,14 +46,14 @@ const variants: FlipMotion = {
   },
 }
 
-type FlipCurrentElement = "from" | "to"
+type FlipAnimationElement = "from" | "to"
 
 export type FlipOrientation = "horizontal" | "vertical"
 
 type FlipOptions = {
   from: ReactElement
   to: ReactElement
-  initialElement?: FlipCurrentElement
+  initialElement?: FlipAnimationElement
   /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
    *

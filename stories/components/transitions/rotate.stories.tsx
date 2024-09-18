@@ -21,21 +21,9 @@ export const basic: Story = () => {
       display="flex"
       gap="4xl"
     >
-      <Rotate
-        from={<Sun fontSize="50px" />}
-        to={<Moon fontSize="50px" />}
-        style={{
-          cursor: "pointer",
-        }}
-      />
+      <Rotate from={<Sun fontSize="50px" />} to={<Moon fontSize="50px" />} />
 
-      <Rotate
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
-        style={{
-          cursor: "pointer",
-        }}
-      />
+      <Rotate from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
     </Center>
   )
 }
@@ -83,9 +71,6 @@ export const customControl: Story = () => {
         onChange={onChangeRotateAnimation}
         from={<Sun fontSize="50px" />}
         to={<Moon fontSize="50px" />}
-        style={{
-          cursor: "pointer",
-        }}
       />
     </Center>
   )

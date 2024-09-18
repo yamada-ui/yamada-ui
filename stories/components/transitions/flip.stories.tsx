@@ -63,13 +63,7 @@ export const basic: Story = () => {
     >
       <Flip from={<BackOfCard />} to={<FrontOfCard />} />
 
-      <Flip
-        from={<Apple fontSize="6xl" />}
-        to={<Cherry fontSize="6xl" />}
-        style={{
-          cursor: "pointer",
-        }}
-      />
+      <Flip from={<Apple fontSize="6xl" />} to={<Cherry fontSize="6xl" />} />
     </Center>
   )
 }

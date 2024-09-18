@@ -76,6 +76,28 @@ describe("<Autocomplete />", () => {
       })
     })
 
+    test("with group label props", async () => {
+      const { user, container } = render(
+        <Autocomplete>
+          <AutocompleteOptionGroup
+            labelProps={{ fontSize: "12px" }}
+            label="Group1"
+          >
+            <AutocompleteOption value="option1">option1</AutocompleteOption>
+          </AutocompleteOptionGroup>
+        </Autocomplete>,
+      )
+
+      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+
+      await user.click(autocomplete!)
+
+      await waitFor(() => {
+        const groupLabel = screen.getByText("Group1")
+        expect(groupLabel).toHaveStyle({ fontSize: "12px" })
+      })
+    })
+
     test.each(["xs", "sm", "md", "lg"])(`with size prop %s`, (size) => {
       const { container } = render(<Autocomplete size={size} items={ITEMS} />)
 

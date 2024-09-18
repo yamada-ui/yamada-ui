@@ -37,8 +37,8 @@ export const getValue =
     if (isObject<ResponsiveObject<T>>(value)) {
       const computedValue = getBreakpointValue(value)(theme, breakpoint)
 
-      if (isArray<ColorModeArray<T, false>>(value)) {
-        const [light, dark] = value
+      if (isArray<ColorModeArray<T, false>>(computedValue)) {
+        const [light, dark] = computedValue
 
         return getColorModeValue(light, dark)(colorMode)
       } else {

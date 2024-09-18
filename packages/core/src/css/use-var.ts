@@ -59,7 +59,7 @@ export const createVars =
       variables.push({ name: formattedName, token, value })
 
       const restoreObj = paths.reduceRight<string | Dict>(
-        (acc, key) => ({ [key]: acc }),
+        (prev, key) => ({ [key]: prev }),
         `$${formattedName}`,
       ) as Dict
 

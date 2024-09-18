@@ -83,7 +83,7 @@ function expandCSS(css: Dict) {
   }
 }
 
-function parseVar(value: any, theme: StyledTheme) {
+function valueToVar(value: any, theme: StyledTheme) {
   if (isArray(value) || isObject(value)) {
     return value
   } else if (isString(value)) {
@@ -119,7 +119,7 @@ export function css(cssOrFunc: CSSObjectOrFunc | CSSUIObject) {
         if (disableStyleProp?.(prop)) continue
 
         value = runIfFunc(value, theme)
-        value = parseVar(value, theme)
+        value = valueToVar(value, theme)
 
         if (value == null) continue
 

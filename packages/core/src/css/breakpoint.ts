@@ -14,9 +14,9 @@ interface BreakpointQuery {
 
 export type BreakpointQueries = BreakpointQuery[]
 
-interface Breakpoints {
+export interface Breakpoints {
   keys: string[]
-  isResponsive: (obj: Dict) => boolean
+  isResponsive: (obj: Dict, strict?: boolean) => boolean
   queries: BreakpointQueries
 }
 
@@ -112,12 +112,14 @@ export function analyzeBreakpoints(
 
   const queries = createQueries(breakpoints, options)
 
-  const isResponsive = (obj: Dict) => {
+  const isResponsive = (obj: Dict, strict: boolean = false) => {
     const providedKeys = Object.keys(obj)
 
-    return (
-      providedKeys.length > 0 && providedKeys.every((key) => keys.includes(key))
-    )
+    if (!providedKeys.length) return false
+
+    if (strict && !providedKeys.includes("base")) return false
+
+    return providedKeys.every((key) => keys.includes(key))
   }
 
   return {

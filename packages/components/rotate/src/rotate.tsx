@@ -2,16 +2,18 @@ import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import { useState, type ReactElement } from "react"
+import type { ReactElement } from "react"
 
-type RotateCurrentElement = "from" | "to"
+export type RotateAnimationElement = "from" | "to"
 
 type RotateOptions = {
   from: ReactElement
   to: ReactElement
-  initialElement?: RotateCurrentElement
+  initialElement?: RotateAnimationElement
+  onChange?: () => void
   rotate?: number
   duration?: number
 }
@@ -30,13 +32,18 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     from,
     to,
     initialElement = "from",
+    onChange: onChangeProp,
     duration = 0.3,
     rotate = 45,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
+
   const [currentElement, setCurrentElement] =
-    useState<RotateCurrentElement>(initialElement)
+    useControllableState<RotateAnimationElement>({
+      defaultValue: initialElement,
+      onChange: onChangeProp,
+    })
 
   const controls = useMotionAnimation()
 

@@ -1,17 +1,19 @@
 import { writeFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
-import { bundleNRequire } from "bundle-n-require"
 import c from "chalk"
 import chokidar from "chokidar"
+import { getModule, type Dict } from "../../utils"
 import { createThemeTypings } from "./create-theme-typings"
 import { resolveOutputPath, themePath } from "./resolve-output-path"
 
 const generateThemeTypings = async ({
   theme,
+  config,
   outFile,
 }: {
-  theme: { [key: string]: any }
+  theme: Dict
+  config: Dict
   outFile?: string
 }) => {
   p.intro(c.magenta(`Generating Yamada UI theme typings`))
@@ -23,7 +25,7 @@ const generateThemeTypings = async ({
 
     s.start(`Parsing the theme`)
 
-    const generatedTheme = await createThemeTypings(theme)
+    const generatedTheme = await createThemeTypings(theme, config.theme ?? {})
 
     s.stop(`Parsed the theme`)
 
@@ -55,32 +57,38 @@ const generateThemeTypings = async ({
 export { themePath }
 
 interface Options {
+  cwd?: string
   out?: string
   watch?: string
 }
 
 export const actionTokens = async (
   themePath: string,
-  { out: outFile, watch: watchFile }: Options,
+  { cwd = path.resolve(), out: outFile, watch: watchFile }: Options,
 ) => {
   const readFile = async () => {
     const filePath = path.resolve(themePath)
-    const { mod: theme, dependencies } = await bundleNRequire(filePath)
+    const { mod, dependencies } = await getModule(filePath, cwd)
 
-    return { theme, dependencies }
+    const theme =
+      mod?.default ?? mod?.theme ?? mod?.customTheme ?? mod?.defaultTheme ?? {}
+    const config = mod?.config ?? mod?.customConfig ?? mod?.defaultConfig ?? {}
+
+    return { theme, config, dependencies }
   }
 
   let file = await readFile()
 
+  const { theme, config, dependencies } = file
+
   const buildFile = async () => {
-    await generateThemeTypings({ theme: file.theme, outFile })
+    await generateThemeTypings({ theme, config, outFile })
 
     if (watchFile) console.log("\n", "⌛️ Watching for changes...")
   }
 
   if (watchFile) {
-    const watchPath =
-      typeof watchFile === "string" ? watchFile : file.dependencies
+    const watchPath = typeof watchFile === "string" ? watchFile : dependencies
 
     chokidar
       .watch(watchPath)

@@ -393,6 +393,17 @@ export interface ThemeConfig {
     prefix?: StringLiteral
   }
   /**
+   * The config of the theme.
+   */
+  theme?: {
+    /**
+     * If `true`, the theme tokens are converted into responsive object.
+     *
+     * @default false
+     */
+    responsive?: boolean
+  }
+  /**
    * The config of the alert.
    */
   alert?: {
@@ -522,7 +533,10 @@ export interface TextStyles {
 }
 export type ThemeValue = string | number
 export interface ThemeTokens {
-  [key: ThemeValue]: ThemeValue | [ThemeValue, ThemeValue] | ThemeTokens
+  [key: ThemeValue]:
+    | ThemeValue
+    | [ThemeValue | Dict<ThemeValue>, ThemeValue | Dict<ThemeValue>]
+    | ThemeTokens
 }
 export interface ThemeAnimationTokens<
   T extends AnimationStyle | string = AnimationStyle,
@@ -691,7 +705,6 @@ export interface ComponentMultiStyle<
 
 export interface CSSMap {
   [key: string]: {
-    value: string | number | undefined
     var: string
     ref: string
   }

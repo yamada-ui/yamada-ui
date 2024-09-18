@@ -2,16 +2,18 @@ import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import { useState, type ReactElement } from "react"
+import { type ReactElement } from "react"
 
-type AiryCurrentElement = "from" | "to"
+export type AiryCurrentElement = "from" | "to"
 
 type AiryOptions = {
   from: ReactElement
   to: ReactElement
   initialElement?: AiryCurrentElement
+  onChange?: () => void
   duration?: number
 }
 
@@ -28,12 +30,16 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
     from,
     to,
     initialElement = "from",
+    onChange: onChangeProp,
     duration = 0.1,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
   const [currentElement, setCurrentElement] =
-    useState<AiryCurrentElement>(initialElement)
+    useControllableState<AiryCurrentElement>({
+      defaultValue: initialElement,
+      onChange: onChangeProp,
+    })
 
   const controls = useMotionAnimation()
 

@@ -35,6 +35,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
     className,
     ...rest
   } = omitThemeProps(mergedProps)
+
   const [currentElement, setCurrentElement] =
     useControllableState<AiryCurrentElement>({
       defaultValue: initialElement,

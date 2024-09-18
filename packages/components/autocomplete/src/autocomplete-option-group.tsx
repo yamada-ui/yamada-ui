@@ -6,7 +6,12 @@ import type { UseAutocompleteOptionGroupProps } from "./use-autocomplete-option-
 import { useAutocompleteOptionGroup } from "./use-autocomplete-option-group"
 
 interface AutocompleteOptionGroupOptions
-  extends UseAutocompleteOptionGroupProps {}
+  extends UseAutocompleteOptionGroupProps {
+  /**
+   * Props for autocomplete option group element.
+   */
+  labelProps?: HTMLUIProps<"span">
+}
 
 export interface AutocompleteOptionGroupProps
   extends HTMLUIProps<"ul">,
@@ -17,7 +22,17 @@ export const AutocompleteOptionGroup = forwardRef<
   "ul"
 >(
   (
-    { className, color, h, height, minH, minHeight, children, ...rest },
+    {
+      className,
+      color,
+      h,
+      height,
+      minH,
+      minHeight,
+      children,
+      labelProps,
+      ...rest
+    },
     ref,
   ) => {
     const { styles } = useAutocompleteContext()
@@ -41,6 +56,7 @@ export const AutocompleteOptionGroup = forwardRef<
           className="ui-autocomplete__item__group-label"
           __css={styles.groupLabel}
           lineClamp={1}
+          {...labelProps}
         >
           {label}
         </ui.span>

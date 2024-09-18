@@ -1,7 +1,46 @@
-import { fireEvent, render, screen } from "@yamada-ui/test"
+import { drag, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
+import type { Hsv } from "../src"
 import { SaturationSlider } from "../src"
 
 describe("<SaturationSlider />", () => {
+  let originalPageX: PropertyDescriptor | undefined
+  let originalPageY: PropertyDescriptor | undefined
+
+  beforeEach(() => {
+    originalPageX = Object.getOwnPropertyDescriptor(
+      MouseEvent.prototype,
+      "pageX",
+    )
+    originalPageY = Object.getOwnPropertyDescriptor(
+      MouseEvent.prototype,
+      "pageY",
+    )
+
+    Object.defineProperties(MouseEvent.prototype, {
+      pageX: {
+        get() {
+          return this.clientX
+        },
+        configurable: true,
+      },
+      pageY: {
+        get() {
+          return this.clientY
+        },
+        configurable: true,
+      },
+    })
+  })
+
+  afterEach(() => {
+    if (originalPageX) {
+      Object.defineProperty(MouseEvent.prototype, "pageX", originalPageX)
+    }
+    if (originalPageY) {
+      Object.defineProperty(MouseEvent.prototype, "pageY", originalPageY)
+    }
+  })
+
   test("SaturationSlider renders correctly", async () => {
     render(<SaturationSlider data-testid="saturationSlider" />)
 
@@ -36,5 +75,39 @@ describe("<SaturationSlider />", () => {
 
     fireEvent.keyDown(slider, { key: "End" })
     expect(mockOnChange).toHaveBeenCalledWith([0, 0.01, 0.99])
+  })
+
+  test("SaturationSlider calls onChange when value changes using mouse", async () => {
+    const onChange = vi.fn()
+    const onChangeStart = vi.fn()
+    const onChangeEnd = vi.fn()
+
+    const defaultValue: Hsv = [180, 0, 0]
+
+    const { user } = render(
+      <SaturationSlider
+        defaultValue={defaultValue}
+        onChange={onChange}
+        onChangeStart={onChangeStart}
+        onChangeEnd={onChangeEnd}
+      />,
+    )
+
+    const slider = screen.getByRole("slider")
+
+    await drag(user)({
+      target: slider,
+      coords: (i) => ({ x: i * 100, y: i * -100 }),
+    })
+
+    await waitFor(() => {
+      expect(onChangeStart).toHaveBeenCalledWith([180, 0, 0])
+    })
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith([180, 1, 1])
+    })
+    await waitFor(() => {
+      expect(onChangeEnd).toHaveBeenCalledWith([180, 1, 1])
+    })
   })
 })

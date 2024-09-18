@@ -26,9 +26,9 @@ import {
   Image,
   ColorModeWithSystem,
 } from "@yamada-ui/react"
-import { useRef , useState , memo , FC } from "react"
+import { useRef, useState, memo, FC } from "react"
 
-export type HeaderProps = CenterProps
+export interface HeaderProps extends CenterProps {}
 
 export const Header: FC<HeaderProps> = ({ ...rest }) => {
   const ref = useRef<HTMLHeadingElement>()

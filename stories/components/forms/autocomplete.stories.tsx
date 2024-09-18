@@ -522,7 +522,7 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = {
+  interface Data {
     autocomplete1: string
     autocomplete2: string
     autocomplete3: string
@@ -648,7 +648,7 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = {
+  interface Data {
     autocomplete1: string
     autocomplete2: string
     autocomplete3: string

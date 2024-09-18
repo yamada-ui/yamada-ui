@@ -4,7 +4,7 @@ import { ScrollShadow } from "components/data-display"
 import { Tree } from "components/navigation"
 import { memo } from "react"
 
-export type SidebarProps = StackProps
+export interface SidebarProps extends StackProps {}
 
 export const Sidebar = memo(
   forwardRef<SidebarProps, "aside">(({ ...rest }, ref) => {

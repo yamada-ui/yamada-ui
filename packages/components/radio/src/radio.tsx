@@ -2,9 +2,9 @@ import type {
   HTMLUIProps,
   ThemeProps,
   ComponentArgs,
-  UIPropGetter,
+  PropGetter,
 } from "@yamada-ui/core"
-import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
   useFormControl,
@@ -12,7 +12,7 @@ import {
   formControlProperties,
 } from "@yamada-ui/form-control"
 import { trackFocusVisible } from "@yamada-ui/use-focus-visible"
-import type { Dict, PropGetter } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import {
   cx,
   useCallbackRef,
@@ -23,48 +23,47 @@ import {
 } from "@yamada-ui/utils"
 import type {
   ForwardedRef,
-  Ref,
   ChangeEvent,
   ChangeEventHandler,
   InputHTMLAttributes,
   KeyboardEvent,
   SyntheticEvent,
-  DOMAttributes,
+  RefAttributes,
 } from "react"
 import { forwardRef, useCallback, useEffect, useId, useState } from "react"
-import { useRadioGroupContext } from "./radio-group"
+import { useRadioGroupContext } from "./radio-context"
 
-export type UseRadioProps<Y extends string | number = string> =
-  FormControlOptions & {
-    /**
-     * id assigned to input.
-     */
-    id?: string
-    /**
-     * The name of the input field in a radio.
-     */
-    name?: string
-    /**
-     * The value to be used in the radio button.
-     */
-    value?: Y
-    /**
-     * If `true`, the radio will be initially checked.
-     *
-     * @default false
-     */
-    defaultIsChecked?: boolean
-    /**
-     * If `true`, the radio will be checked.
-     *
-     * @default false
-     */
-    isChecked?: boolean
-    /**
-     * The callback invoked when the checked state changes.
-     */
-    onChange?: ChangeEventHandler<HTMLInputElement>
-  }
+export interface UseRadioProps<Y extends string | number = string>
+  extends FormControlOptions {
+  /**
+   * id assigned to input.
+   */
+  id?: string
+  /**
+   * The name of the input field in a radio.
+   */
+  name?: string
+  /**
+   * The value to be used in the radio button.
+   */
+  value?: Y
+  /**
+   * If `true`, the radio will be initially checked.
+   *
+   * @default false
+   */
+  defaultIsChecked?: boolean
+  /**
+   * If `true`, the radio will be checked.
+   *
+   * @default false
+   */
+  isChecked?: boolean
+  /**
+   * The callback invoked when the checked state changes.
+   */
+  onChange?: ChangeEventHandler<HTMLInputElement>
+}
 
 export const useRadio = <
   Y extends string | number = string,
@@ -128,20 +127,20 @@ export const useRadio = <
   const onBlur = useCallbackRef(onBlurProp)
 
   const onKeyDown = useCallback(
-    ({ key }: KeyboardEvent<Element>) => {
+    ({ key }: KeyboardEvent) => {
       if (key === " ") setActive(true)
     },
     [setActive],
   )
 
   const onKeyUp = useCallback(
-    ({ key }: KeyboardEvent<Element>) => {
+    ({ key }: KeyboardEvent) => {
       if (key === " ") setActive(false)
     },
     [setActive],
   )
 
-  const getContainerProps: UIPropGetter<"label"> = useCallback(
+  const getContainerProps: PropGetter<"label"> = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
@@ -151,7 +150,7 @@ export const useRadio = <
     [checked, formControlProps],
   )
 
-  const getIconProps: UIPropGetter<"span"> = useCallback(
+  const getIconProps: PropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
@@ -162,15 +161,15 @@ export const useRadio = <
       "data-focus": dataAttr(isFocused),
       "data-focus-visible": dataAttr(isFocused && isFocusVisible),
       "aria-hidden": true,
-      onMouseDown: handlerAll(props.onMouseDown, () => setActive(true)),
-      onMouseUp: handlerAll(props.onMouseUp, () => setActive(false)),
-      onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
-      onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
+      onMouseDown: handlerAll(props?.onMouseDown, () => setActive(true)),
+      onMouseUp: handlerAll(props?.onMouseUp, () => setActive(false)),
+      onMouseEnter: handlerAll(props?.onMouseEnter, () => setHovered(true)),
+      onMouseLeave: handlerAll(props?.onMouseLeave, () => setHovered(false)),
     }),
     [checked, isActive, isFocused, isFocusVisible, isHovered, formControlProps],
   )
 
-  const getInputProps: PropGetter = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
@@ -195,11 +194,11 @@ export const useRadio = <
         whiteSpace: "nowrap",
         position: "absolute",
       },
-      onChange: handlerAll(props.onChange, onChange),
-      onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
-      onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-      onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
+      onChange: handlerAll(props?.onChange, onChange),
+      onBlur: handlerAll(props?.onBlur, onBlur, () => setFocused(false)),
+      onFocus: handlerAll(props?.onFocus, onFocus, () => setFocused(true)),
+      onKeyDown: handlerAll(props?.onKeyDown, onKeyDown),
+      onKeyUp: handlerAll(props?.onKeyUp, onKeyUp),
     }),
     [
       formControlProps,
@@ -218,16 +217,16 @@ export const useRadio = <
     ],
   )
 
-  const getLabelProps: PropGetter = useCallback(
+  const getLabelProps: PropGetter<"span"> = useCallback(
     (props = {}, ref = null) => ({
       ...formControlProps,
       ...props,
       ref,
-      onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
+      onMouseDown: handlerAll(props?.onMouseDown, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
       }),
-      onTouchStart: handlerAll(props.onTouchStart, (ev: SyntheticEvent) => {
+      onTouchStart: handlerAll(props?.onTouchStart, (ev: SyntheticEvent) => {
         ev.preventDefault()
         ev.stopPropagation()
       }),
@@ -252,19 +251,17 @@ export const useRadio = <
 
 export type UseRadioReturn = ReturnType<typeof useRadio>
 
-type RadioOptions = {
+interface RadioOptions {
   iconProps?: HTMLUIProps<"span">
   inputProps?: InputHTMLAttributes<HTMLInputElement>
   labelProps?: HTMLUIProps<"span">
 }
 
-export type RadioProps<Y extends string | number = string> = Omit<
-  HTMLUIProps<"label">,
-  keyof UseRadioProps
-> &
-  ThemeProps<"Radio"> &
-  UseRadioProps<Y> &
-  RadioOptions
+export interface RadioProps<Y extends string | number = string>
+  extends Omit<HTMLUIProps<"label">, keyof UseRadioProps>,
+    ThemeProps<"Radio">,
+    UseRadioProps<Y>,
+    RadioOptions {}
 
 /**
  * `Radio` is a component used for allowing users to select one option from multiple choices.
@@ -279,7 +276,7 @@ export const Radio = forwardRef(
     const group = useRadioGroupContext()
     const { value: groupValue, ...groupProps } = { ...group }
     const control = useFormControl(props)
-    const [styles, mergedProps] = useMultiComponentStyle("Radio", {
+    const [styles, mergedProps] = useComponentMultiStyle("Radio", {
       ...groupProps,
       ...props,
     })
@@ -364,7 +361,7 @@ export const Radio = forwardRef(
 
         <ui.span
           className="ui-radio__label"
-          {...getLabelProps(labelProps as DOMAttributes<HTMLElement>)}
+          {...getLabelProps(labelProps)}
           __css={{ ...styles.label }}
         >
           {children}
@@ -374,7 +371,7 @@ export const Radio = forwardRef(
   },
 ) as {
   <Y extends string | number = string>(
-    props: RadioProps<Y> & { ref?: Ref<HTMLInputElement> },
+    props: RadioProps<Y> & RefAttributes<HTMLInputElement>,
   ): JSX.Element
 } & ComponentArgs
 

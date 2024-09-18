@@ -1,4 +1,5 @@
-import type { UIPropGetter, RequiredUIPropGetter } from "@yamada-ui/core"
+import type { HTMLProps, RequiredPropGetter } from "@yamada-ui/core"
+import type { Merge } from "@yamada-ui/utils"
 import {
   isArray,
   handlerAll,
@@ -17,6 +18,7 @@ import { createRef, useCallback, useRef } from "react"
 import {
   disableAllTabIndex,
   getFocused,
+  getFormattedLabel,
   getRangeFirstDay,
   getRangeLastDay,
   isAfterDate,
@@ -50,9 +52,12 @@ export const useMonth = () => {
     prevMonth,
     nextMonth,
     maxSelectValues,
+    minSelectValues,
     enableRange,
     hoveredValue,
     setHoveredValue,
+    locale,
+    dateFormat,
   } = useCalendarContext()
 
   const beforeMonth = useRef<Date | null>(null)
@@ -75,23 +80,37 @@ export const useMonth = () => {
   const isShouldBetween = rangeSelectedValue.length >= 1 && !!maybeEndDate
   const isShouldHovered = rangeSelectedValue.length === 1
   const hasAmountOfMonths = amountOfMonths >= 2
-  const minBetweenDate = isNumber(maxSelectValues)
+  const minSelectEndDate = isNumber(maxSelectValues)
     ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
         .subtract(maxSelectValues - 1, "day")
         .toDate()
     : undefined
-  const maxBetweenDate = isNumber(maxSelectValues)
+  const maxSelectEndDate = isNumber(maxSelectValues)
     ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
         .add(maxSelectValues - 1, "day")
+        .toDate()
+    : undefined
+  const minSelectStartDate = isNumber(minSelectValues)
+    ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+        .subtract(minSelectValues - 1, "day")
+        .toDate()
+    : undefined
+  const maxSelectStartDate = isNumber(minSelectValues)
+    ? dayjs(!isReversed ? maybeStartDate : maybeEndDate)
+        .add(minSelectValues - 1, "day")
         .toDate()
     : undefined
   const isInValidRangeDates =
     isNumber(maxSelectValues) &&
     Math.abs(dayjs(startDate).diff(endDate, "day")) >= maxSelectValues
-  const minTrulyBetweenDate =
-    isShouldHovered || isInValidRangeDates ? minBetweenDate : undefined
-  const maxTrulyBetweenDate =
-    isShouldHovered || isInValidRangeDates ? maxBetweenDate : undefined
+  const minTrulySelectEndDate =
+    isShouldHovered || isInValidRangeDates ? minSelectEndDate : undefined
+  const maxTrulySelectEndDate =
+    isShouldHovered || isInValidRangeDates ? maxSelectEndDate : undefined
+  const minTrulySelectStartDate =
+    isShouldHovered || isInValidRangeDates ? minSelectStartDate : undefined
+  const maxTrulySelectStartDate =
+    isShouldHovered || isInValidRangeDates ? maxSelectStartDate : undefined
 
   const onFocusPrev = useCallback(
     (targetIndex: number, targetMonth: number, targetDay: number) => {
@@ -185,7 +204,7 @@ export const useMonth = () => {
       const [lastIndex, lastMonth, lastDay] =
         getRangeLastDay(dayRefs)?.split("-").map(Number) ?? []
 
-      const actions: Record<string, Function | undefined> = {
+      const actions: { [key: string]: Function | undefined } = {
         ArrowDown: () => {
           const lastOfMonthDay = dayjs(new Date(year, focusedMonth))
             .endOf("month")
@@ -268,7 +287,7 @@ export const useMonth = () => {
   )
 
   const onClick = useCallback(
-    (ev: MouseEvent<Element>, newValue: Date) => {
+    (ev: MouseEvent, newValue: Date) => {
       ev.preventDefault()
       ev.stopPropagation()
 
@@ -326,27 +345,38 @@ export const useMonth = () => {
     dayRefs.current.clear()
   })
 
-  const getContainerProps: UIPropGetter = useCallback(
-    (props = {}) => ({
-      ...props,
-      "aria-multiselectable": ariaAttr(isMulti),
-      onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
-    }),
-    [onKeyDown, isMulti],
+  const getGridProps: RequiredPropGetter<
+    Merge<HTMLProps, { month: Date }>,
+    HTMLProps
+  > = useCallback(
+    ({ month, ...props }) => {
+      const label = getFormattedLabel(month, locale, dateFormat)
+
+      return {
+        role: "grid",
+        "aria-label": label,
+        "aria-multiselectable": ariaAttr(isMulti),
+        ...props,
+        onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
+      }
+    },
+    [onKeyDown, isMulti, locale, dateFormat],
   )
 
-  const getButtonProps: RequiredUIPropGetter<
-    "button",
-    { value: Date; month: Date; index: number },
-    {
-      isSelected: boolean
-      isWeekend: boolean
-      isOutside: boolean
-      isStart: boolean
-      isEnd: boolean
-      isBetween: boolean
-      isHidden: boolean
-    }
+  const getButtonProps: RequiredPropGetter<
+    Merge<HTMLProps<"button">, { value: Date; month: Date; index: number }>,
+    Merge<
+      HTMLProps<"button">,
+      {
+        isSelected: boolean
+        isWeekend: boolean
+        isOutside: boolean
+        isStart: boolean
+        isEnd: boolean
+        isBetween: boolean
+        isHidden: boolean
+      }
+    >
   > = useCallback(
     ({ value, month, index, ...props }, ref = null) => {
       const isControlled = beforeMonth.current instanceof Date
@@ -368,8 +398,14 @@ export const useMonth = () => {
       const isToday = today && isSameDate(new Date(), value)
       const isDisabled = isDisabledDate({
         value,
-        minDate: minTrulyBetweenDate ?? minDate,
-        maxDate: maxTrulyBetweenDate ?? maxDate,
+        minDate: minTrulySelectEndDate ?? minDate,
+        maxDate: maxTrulySelectEndDate ?? maxDate,
+        minTrulySelectStartDate,
+        maxTrulySelectStartDate,
+        maybeStartDate,
+        maybeEndDate,
+        startDate,
+        endDate,
         isOutside,
         excludeDate,
         disableOutsideDays,
@@ -436,10 +472,14 @@ export const useMonth = () => {
       selectedValue,
       hasAmountOfMonths,
       today,
-      minTrulyBetweenDate,
       minDate,
-      maxTrulyBetweenDate,
       maxDate,
+      minTrulySelectEndDate,
+      maxTrulySelectEndDate,
+      minTrulySelectStartDate,
+      maxTrulySelectStartDate,
+      startDate,
+      endDate,
       excludeDate,
       disableOutsideDays,
       isMax,
@@ -453,7 +493,7 @@ export const useMonth = () => {
     ],
   )
 
-  return { getContainerProps, getButtonProps }
+  return { getGridProps, getButtonProps }
 }
 
 export type UseMonthReturn = ReturnType<typeof useMonth>

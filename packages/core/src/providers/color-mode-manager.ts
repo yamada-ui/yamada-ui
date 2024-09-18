@@ -3,7 +3,7 @@ import { COLOR_MODE_STORAGE_KEY } from "./color-mode-script"
 
 const hasSupport = !!globalThis?.document
 
-export type ColorModeManager = {
+export interface ColorModeManager {
   type: "cookie" | "localStorage"
   ssr?: boolean
   get: (

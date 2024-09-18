@@ -1,7 +1,7 @@
 import type { CSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
-export type UIOptions = {
+export interface UIOptions {
   static?: CSSObject
   isProcessResult?: boolean
   isProcessSkip?: boolean
@@ -207,7 +207,7 @@ export const additionalProps = {
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
     ],
   },
-} as const satisfies Record<string, UIOptions>
+} as const satisfies { [key: string]: UIOptions }
 
 export const uiProps = {
   lineClamp: {
@@ -267,7 +267,7 @@ export const uiProps = {
       "```",
     ],
   },
-} as const satisfies Record<string, UIOptions>
+} as const satisfies { [key: string]: UIOptions }
 
 export const atRuleProps = {
   _media: {
@@ -407,4 +407,4 @@ export const atRuleProps = {
       "```",
     ],
   },
-} as const satisfies Record<string, UIOptions>
+} as const satisfies { [key: string]: UIOptions }

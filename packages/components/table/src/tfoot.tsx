@@ -4,7 +4,7 @@ import { ariaAttr, runIfFunc } from "@yamada-ui/utils"
 import type { InternalColumn } from "./use-table"
 import { useTableContext, render } from "./use-table"
 
-export type TableFootProps = NativeTableFootProps
+export interface TableFootProps extends NativeTableFootProps {}
 
 export const Tfoot = ({ ...rest }: TableFootProps) => {
   const { footerGroups, footerGroupProps, footerProps } = useTableContext()

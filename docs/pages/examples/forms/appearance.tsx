@@ -27,12 +27,12 @@ const FONT_ITEMS = [
   { label: "System", value: "System" },
 ]
 
-type Data = {
+interface Data {
   font: string
   theme: string
 }
 
-export type AppearanceProps = StackProps
+export interface AppearanceProps extends StackProps {}
 
 export const Appearance: FC<AppearanceProps> = memo(({ ...rest }) => {
   const {

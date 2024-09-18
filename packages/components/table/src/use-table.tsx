@@ -28,7 +28,7 @@ import type {
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  UIPropGetter,
+  PropGetter,
 } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
@@ -59,7 +59,7 @@ export const [TableProvider, useTableContext] = createContext<TableContext>({
   name: "TableContext",
 })
 
-export type PropsColumnDef = {
+export interface PropsColumnDef {
   className?: string
   style?: CSSProperties
   sx?: CSSUIObject
@@ -69,7 +69,7 @@ export type PropsColumnDef = {
   "aria-label"?: string
 }
 
-export type GroupColumnDef<Y extends RowData, M = any> = {
+export interface GroupColumnDef<Y extends RowData, M = any> {
   columns?: Column<Y, M>[]
 }
 
@@ -84,40 +84,43 @@ export type InternalColumn<Y extends RowData, M = any> = Column<Y, M> & {
   "aria-hidden"?: boolean
 }
 
-type SelectColumn<Y extends RowData, M = any> = Omit<
-  Column<Y, M>,
-  "accessorKey" | "accessorFn"
->
+interface SelectColumn<Y extends RowData, M = any>
+  extends Omit<Column<Y, M>, "accessorKey" | "accessorFn"> {}
 
-export type ColumnSort<Y extends RowData> = {
+export interface ColumnSort<Y extends RowData> {
   id: keyof Y
   desc: boolean
 }
 
 export type Sort<Y extends RowData> = ColumnSort<Y>[]
 
-export type UseTableOptions<Y extends RowData> = PartialKeys<
-  Omit<
-    CoreOptions<Y>,
-    | "columns"
-    | "defaultColumn"
-    | "getCoreRowModel"
-    | "state"
-    | "initialState"
-    | "onStateChange"
-    | "getSubRows"
-    | "mergeOptions"
-  >,
-  "renderFallbackValue"
-> &
-  Omit<SortingOptions<Y>, "getSortedRowModel" | "onSortingChange"> &
-  Omit<
-    RowSelectionOptions<Y>,
-    "enableMultiRowSelection" | "enableSubRowSelection" | "onRowSelectionChange"
-  > &
-  Omit<PaginationOptions, "getPaginationRowModel" | "onPaginationChange">
+export interface UseTableOptions<Y extends RowData>
+  extends PartialKeys<
+      Omit<
+        CoreOptions<Y>,
+        | "columns"
+        | "defaultColumn"
+        | "getCoreRowModel"
+        | "state"
+        | "initialState"
+        | "onStateChange"
+        | "getSubRows"
+        | "mergeOptions"
+      >,
+      "renderFallbackValue"
+    >,
+    Omit<SortingOptions<Y>, "getSortedRowModel" | "onSortingChange">,
+    Omit<
+      RowSelectionOptions<Y>,
+      | "enableMultiRowSelection"
+      | "enableSubRowSelection"
+      | "onRowSelectionChange"
+    >,
+    Omit<PaginationOptions, "getPaginationRowModel" | "onPaginationChange"> {}
 
-type TableProps = Omit<HTMLUIProps<"table">, "columns"> & ThemeProps<"Table">
+interface TableProps
+  extends Omit<HTMLUIProps<"table">, "columns">,
+    ThemeProps<"Table"> {}
 
 type HeaderGroupProps<Y extends RowData> =
   | Omit<TrProps, "key">
@@ -132,145 +135,146 @@ type CellProps<Y extends RowData> =
   | Omit<TdProps, "key">
   | ((cell: Cell<Y, unknown>) => Omit<TdProps, "key"> | void)
 
-export type UseTableProps<Y extends RowData> = TableProps &
-  UseTableOptions<Y> & {
-    /**
-     * The array of column defs to use for the table.
-     */
-    columns: Column<Y, any>[]
-    /**
-     * Default column options to use for all column defs supplied to the table.
-     */
-    defaultColumn?: Partial<Column<Y, any>>
-    /**
-     * The id used to store the value when selected.
-     */
-    rowId?: keyof Y
-    /**
-     * The sort of the table.
-     */
-    sort?: Sort<Y>
-    /**
-     * The initial sort of the table.
-     */
-    defaultSort?: Sort<Y>
-    /**
-     * The callback invoked when table sort is changed.
-     */
-    onChangeSort?: (sort: Sort<Y>) => void
-    /**
-     * The ids of the selected row.
-     */
-    selectedRowIds?: string[]
-    /**
-     * The initial ids of the selected row.
-     */
-    defaultSelectedRowIds?: string[]
-    /**
-     * The callback invoked when row is selected.
-     */
-    onChangeSelect?: (rowSelection: string[]) => void
-    /**
-     * The page index of the paging table.
-     */
-    pageIndex?: number
-    /**
-     * The initial page index of the paging table.
-     *
-     * @default 0
-     */
-    defaultPageIndex?: number
-    /**
-     * The callback invoked when page index is changed.
-     */
-    onChangePageIndex?: (pageIndex: number) => void
-    /**
-     * The page size of the paging table.
-     */
-    pageSize?: number
-    /**
-     * The initial page size of the paging table.
-     *
-     * @default 20
-     */
-    defaultPageSize?: number
-    /**
-     * The callback invoked when page size is changed.
-     */
-    onChangePageSize?: (pageIndex: number) => void
-    /**
-     * If `true`, allows selection by clicking on a row.
-     *
-     * @default false
-     */
-    rowsClickSelect?: boolean
-    /**
-     * The callback invoked when a row is clicked.
-     */
-    onClickRow?: (row: Row<Y>) => void
-    /**
-     * The callback invoked when a row is double clicked.
-     */
-    onDoubleClickRow?: (row: Row<Y>) => void
-    /**
-     * If `true`, display the checkbox in table footer.
-     *
-     * @default false
-     */
-    withFooterSelect?: boolean
-    /**
-     * The ids that disabled in selection.
-     */
-    disabledRowIds?: string[]
-    /**
-     * The list of the page size.
-     *
-     * @default '[20, 50, 100]'
-     */
-    pageSizeList?: number[]
-    /**
-     * Props for table checkbox element.
-     */
-    checkboxProps?: CheckboxProps
-    /**
-     * Props for table header group component.
-     */
-    headerGroupProps?: HeaderGroupProps<Y>
-    /**
-     * Props for table header component.
-     */
-    headerProps?: HeaderProps<Y>
-    /**
-     * Props for table footer group component.
-     */
-    footerGroupProps?: HeaderGroupProps<Y>
-    /**
-     * Props for table footer component.
-     */
-    footerProps?: HeaderProps<Y>
-    /**
-     * Props for table sort icon element.
-     */
-    sortIconProps?: IconProps
-    /**
-     * Props for table row component.
-     */
-    rowProps?: RowProps<Y>
-    /**
-     * Props for table cell component.
-     */
-    cellProps?: CellProps<Y>
-    /**
-     * Props for table select column component.
-     */
-    selectColumnProps?: SelectColumn<Y> | false
-    /**
-     * If `true`, enables pagination.
-     *
-     * @default false
-     */
-    enablePagination?: boolean
-  }
+export interface UseTableProps<Y extends RowData>
+  extends TableProps,
+    UseTableOptions<Y> {
+  /**
+   * The array of column defs to use for the table.
+   */
+  columns: Column<Y>[]
+  /**
+   * Default column options to use for all column defs supplied to the table.
+   */
+  defaultColumn?: Partial<Column<Y>>
+  /**
+   * The id used to store the value when selected.
+   */
+  rowId?: keyof Y
+  /**
+   * The sort of the table.
+   */
+  sort?: Sort<Y>
+  /**
+   * The initial sort of the table.
+   */
+  defaultSort?: Sort<Y>
+  /**
+   * The callback invoked when table sort is changed.
+   */
+  onChangeSort?: (sort: Sort<Y>) => void
+  /**
+   * The ids of the selected row.
+   */
+  selectedRowIds?: string[]
+  /**
+   * The initial ids of the selected row.
+   */
+  defaultSelectedRowIds?: string[]
+  /**
+   * The callback invoked when row is selected.
+   */
+  onChangeSelect?: (rowSelection: string[]) => void
+  /**
+   * The page index of the paging table.
+   */
+  pageIndex?: number
+  /**
+   * The initial page index of the paging table.
+   *
+   * @default 0
+   */
+  defaultPageIndex?: number
+  /**
+   * The callback invoked when page index is changed.
+   */
+  onChangePageIndex?: (pageIndex: number) => void
+  /**
+   * The page size of the paging table.
+   */
+  pageSize?: number
+  /**
+   * The initial page size of the paging table.
+   *
+   * @default 20
+   */
+  defaultPageSize?: number
+  /**
+   * The callback invoked when page size is changed.
+   */
+  onChangePageSize?: (pageIndex: number) => void
+  /**
+   * If `true`, allows selection by clicking on a row.
+   *
+   * @default false
+   */
+  rowsClickSelect?: boolean
+  /**
+   * The callback invoked when a row is clicked.
+   */
+  onClickRow?: (row: Row<Y>) => void
+  /**
+   * The callback invoked when a row is double clicked.
+   */
+  onDoubleClickRow?: (row: Row<Y>) => void
+  /**
+   * If `true`, display the checkbox in table footer.
+   *
+   * @default false
+   */
+  withFooterSelect?: boolean
+  /**
+   * The ids that disabled in selection.
+   */
+  disabledRowIds?: string[]
+  /**
+   * The list of the page size.
+   *
+   * @default '[20, 50, 100]'
+   */
+  pageSizeList?: number[]
+  /**
+   * Props for table checkbox element.
+   */
+  checkboxProps?: CheckboxProps
+  /**
+   * Props for table header group component.
+   */
+  headerGroupProps?: HeaderGroupProps<Y>
+  /**
+   * Props for table header component.
+   */
+  headerProps?: HeaderProps<Y>
+  /**
+   * Props for table footer group component.
+   */
+  footerGroupProps?: HeaderGroupProps<Y>
+  /**
+   * Props for table footer component.
+   */
+  footerProps?: HeaderProps<Y>
+  /**
+   * Props for table sort icon element.
+   */
+  sortIconProps?: IconProps
+  /**
+   * Props for table row component.
+   */
+  rowProps?: RowProps<Y>
+  /**
+   * Props for table cell component.
+   */
+  cellProps?: CellProps<Y>
+  /**
+   * Props for table select column component.
+   */
+  selectColumnProps?: SelectColumn<Y> | false
+  /**
+   * If `true`, enables pagination.
+   *
+   * @default false
+   */
+  enablePagination?: boolean
+}
 
 const generateRowSelection = <Y extends RowData>(
   rowSelection: string[] | undefined,
@@ -489,7 +493,7 @@ export const useTable = <Y extends RowData>({
       : {}),
   })
 
-  const getTableProps: UIPropGetter = useCallback(
+  const getTableProps: PropGetter<"table"> = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
       "aria-colcount": columns.length,

@@ -1,5 +1,6 @@
 import type { ColorMode } from "../css"
-import { defaultEnvironment, type Environment } from "./environment-provider"
+import { defaultEnvironment } from "./environment-provider"
+import type { Environment } from "./environment-provider"
 import { preventTransition } from "./provider-utils"
 
 const classNames = {
@@ -12,7 +13,7 @@ const queries = {
   dark: "(prefers-color-scheme: dark)",
 }
 
-type GetColorModeUtilsProps = {
+interface GetColorModeUtilsProps {
   isPreventTransition?: boolean
   environment?: Environment
 }

@@ -1,2 +1,3 @@
-export const interopDefault = <T extends unknown>(module: T): T =>
-  (module as { default: T }).default || module
+export function interopDefault<T>(module: T): T {
+  return (module as { default: T }).default || module
+}

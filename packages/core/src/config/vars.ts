@@ -1,10 +1,16 @@
 import { isObject, isArray } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import { DEFAULT_VAR_PREFIX } from "../constant"
+import type { CSSFunction } from "../css"
 import type { StyledTheme } from "../theme.types"
 import { tokenToVar } from "./utils"
 
-export const vars = (values: any[], theme: StyledTheme) => {
+export function vars(
+  values: any,
+  theme: StyledTheme,
+  _css?: CSSFunction,
+  _prev?: Dict,
+) {
   if (!isArray(values)) return values
 
   return values.reduce<Dict>((prev, { __prefix, name, token, value }) => {

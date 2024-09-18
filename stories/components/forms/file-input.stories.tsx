@@ -225,7 +225,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { fileInput: File[] | undefined }
+  interface Data {
+    fileInput: File[] | undefined
+  }
 
   const resetRef = useRef<() => void>(null)
   const {

@@ -1,6 +1,6 @@
 import type { Theme } from "../theme.types"
 
-export type ThemeSchemeScriptProps = {
+export interface ThemeSchemeScriptProps {
   type?: "localStorage" | "cookie"
   initialThemeScheme?: Theme["themeSchemes"]
   storageKey?: string

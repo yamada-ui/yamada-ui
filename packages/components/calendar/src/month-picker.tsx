@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -22,7 +22,7 @@ import { DatePickerProvider } from "./use-date-picker"
 import type { UseMonthPickerProps } from "./use-month-picker"
 import { useMonthPicker } from "./use-month-picker"
 
-type MonthPickerOptions = {
+interface MonthPickerOptions {
   /**
    * If `true`, display the month picker clear icon.
    *
@@ -40,11 +40,11 @@ type MonthPickerOptions = {
   /**
    * Props for month picker container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for month picker container element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for month picker field element.
    */
@@ -71,9 +71,10 @@ type MonthPickerOptions = {
   children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
-export type MonthPickerProps = ThemeProps<"DatePicker"> &
-  MonthPickerOptions &
-  UseMonthPickerProps
+export interface MonthPickerProps
+  extends ThemeProps<"DatePicker">,
+    MonthPickerOptions,
+    UseMonthPickerProps {}
 
 /**
  * `MonthPicker` is a component used for users to select a month.
@@ -81,7 +82,7 @@ export type MonthPickerProps = ThemeProps<"DatePicker"> &
  * @see Docs https://yamada-ui.com/components/forms/month-picker
  */
 export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("MonthPicker", props)
+  const [styles, mergedProps] = useComponentMultiStyle("MonthPicker", props)
   let {
     className,
     children,

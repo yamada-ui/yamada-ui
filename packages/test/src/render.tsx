@@ -23,10 +23,10 @@ export type RenderReturn = ReturnType<typeof reactRender> & {
   user: ReturnType<typeof userEvent.setup>
 }
 
-export const render = (
+export function render(
   ui: ReactElement,
   { withProvider = true, ...rest }: RenderOptions = {},
-): RenderReturn => {
+): RenderReturn {
   const user = userEvent.setup()
 
   if (withProvider)
@@ -51,7 +51,7 @@ export type RenderHookOptions<
   withProvider?: boolean
 }
 
-export const renderHook = <
+export function renderHook<
   Y,
   M,
   D extends Queries = typeof queries,
@@ -60,7 +60,7 @@ export const renderHook = <
 >(
   render: (props: M) => Y,
   { withProvider = true, ...rest }: RenderHookOptions<M, D, H, R> = {},
-) => {
+) {
   if (withProvider)
     rest.wrapper ??= (props: any) => <UIProvider {...props} theme={theme} />
 

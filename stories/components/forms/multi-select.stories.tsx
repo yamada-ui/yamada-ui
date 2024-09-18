@@ -483,7 +483,11 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { select1: string[]; select2: string[]; select3: string[] }
+  interface Data {
+    select1: string[]
+    select2: string[]
+    select3: string[]
+  }
 
   const items: SelectItem[] = [
     { label: "ベジータ", value: "ベジータ" },
@@ -597,7 +601,11 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { select1: string[]; select2: string[]; select3: string[] }
+  interface Data {
+    select1: string[]
+    select2: string[]
+    select3: string[]
+  }
 
   const defaultValues: Data = {
     select1: ["孫悟空"],

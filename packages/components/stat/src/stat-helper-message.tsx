@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useStat } from "./stat"
+import { useStat } from "./stat-context"
 
-export type StatHelperMessageProps = HTMLUIProps<"dd">
+export interface StatHelperMessageProps extends HTMLUIProps<"dd"> {}
 
 export const StatHelperMessage = forwardRef<StatHelperMessageProps, "dd">(
   ({ className, ...rest }, ref) => {

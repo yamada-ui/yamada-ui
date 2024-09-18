@@ -1,4 +1,4 @@
-import { Box, Center, Wrap } from "@yamada-ui/react"
+import { Box, Center, HStack, Text, VStack, Wrap } from "@yamada-ui/react"
 
 export default {
   title: "System / Styles / Pseudo",
@@ -69,6 +69,57 @@ export const hover = () => {
     >
       Please Hover
     </Box>
+  )
+}
+
+export const group = () => {
+  return (
+    <VStack
+      role="group"
+      tabIndex={0}
+      w="auto"
+      p="md"
+      borderWidth="1px"
+      rounded="md"
+      outline="0"
+      _focusVisible={{ boxShadow: "outline" }}
+    >
+      <Text textAlign="center">Focus me!</Text>
+
+      <HStack>
+        <Center p="md" _groupFocus={{ color: "success" }}>
+          1
+        </Center>
+        <Center p="md" _groupFocus={{ color: "warning" }}>
+          2
+        </Center>
+        <Center p="md" _groupFocus={{ color: "danger" }}>
+          3
+        </Center>
+      </HStack>
+    </VStack>
+  )
+}
+
+export const peer = () => {
+  return (
+    <HStack>
+      <Center
+        data-peer
+        tabIndex={0}
+        p="md"
+        borderWidth="1px"
+        rounded="md"
+        outline="0"
+        _focusVisible={{ boxShadow: "outline" }}
+      >
+        Focus me!
+      </Center>
+
+      <Center p="md" bg="primary" rounded="md" _peerFocus={{ bg: "secondary" }}>
+        Focus the peer
+      </Center>
+    </HStack>
   )
 }
 

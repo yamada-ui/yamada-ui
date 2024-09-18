@@ -4,6 +4,7 @@ import {
   config as tseslintConfig,
   configs as tseslintConfigs,
   parser as tseslintParser,
+  plugin as tseslintPlugin,
 } from "typescript-eslint"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -57,6 +58,19 @@ export default tseslintConfig(
   eslint.configs.recommended,
   ...tseslintConfigs.recommended,
   ...tseslintConfigs.stylistic,
+  {
+    plugins: {
+      "@typescript-eslint": tseslintPlugin,
+    },
+    rules: {
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
+        {
+          allowInterfaces: "always",
+        },
+      ],
+    },
+  },
   {
     files: ["src/**/*.ts", "src/**/*.tsx"],
     plugins: {

@@ -185,6 +185,10 @@ export const withMaxSelectedValue: Story = () => {
   return <RangeDatePicker maxSelectValues={3} />
 }
 
+export const withMinSelectedValue: Story = () => {
+  return <RangeDatePicker minSelectValues={5} />
+}
+
 export const withPattern: Story = () => {
   return (
     <RangeDatePicker
@@ -539,7 +543,9 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { multiDatePicker: [Date?, Date?] }
+  interface Data {
+    multiDatePicker: [Date?, Date?]
+  }
 
   const {
     control,
@@ -577,7 +583,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { multiDatePicker: [Date?, Date?] }
+  interface Data {
+    multiDatePicker: [Date?, Date?]
+  }
 
   const defaultValues: Data = {
     multiDatePicker: [new Date()],

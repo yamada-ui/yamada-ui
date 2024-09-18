@@ -4,14 +4,14 @@ import {
   forwardRef,
   radiusProperties,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   useCreateVars,
 } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { createContext, cx } from "@yamada-ui/utils"
 
-type LinkBoxContext = {
-  styles: Record<string, CSSUIObject>
+interface LinkBoxContext {
+  styles: { [key: string]: CSSUIObject }
   variableProps: Dict
 }
 
@@ -20,7 +20,7 @@ const [LinkBoxProvider, useLinkBox] = createContext<LinkBoxContext>({
   errorMessage: `useLinkBox returned is 'undefined'. Seems you forgot to wrap the components in "<LinkBox />"`,
 })
 
-type LinkOverlayOptions = {
+interface LinkOverlayOptions {
   /**
    * If `true`, the link will open in new tab.
    *
@@ -29,7 +29,9 @@ type LinkOverlayOptions = {
   isExternal?: boolean
 }
 
-export type LinkOverlayProps = HTMLUIProps<"a"> & LinkOverlayOptions
+export interface LinkOverlayProps
+  extends HTMLUIProps<"a">,
+    LinkOverlayOptions {}
 
 export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
   ({ className, isExternal, target, rel, href, children, ...rest }, ref) => {
@@ -68,7 +70,7 @@ export const LinkOverlay = forwardRef<LinkOverlayProps, "a">(
   },
 )
 
-export type LinkBoxProps = HTMLUIProps<"div"> & ThemeProps<"LinkBox">
+export type LinkBoxProps = HTMLUIProps & ThemeProps<"LinkBox">
 
 /**
  * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.
@@ -76,7 +78,7 @@ export type LinkBoxProps = HTMLUIProps<"div"> & ThemeProps<"LinkBox">
  * @see Docs https://yamada-ui.com/components/navigation/link-box
  */
 export const LinkBox = forwardRef<LinkBoxProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("LinkBox", props)
+  const [styles, mergedProps] = useComponentMultiStyle("LinkBox", props)
   const { className, children, ...rest } = omitThemeProps(mergedProps)
   const [vars, variableProps] = useCreateVars(rest, radiusProperties)
 

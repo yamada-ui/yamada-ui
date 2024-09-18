@@ -10,6 +10,7 @@ import {
   config as tseslintConfig,
   configs as tseslintConfigs,
   parser as tseslintParser,
+  plugin as tseslintPlugin,
 } from 'typescript-eslint'
 
 export default tseslintConfig(
@@ -33,6 +34,19 @@ export default tseslintConfig(
         ...globals.browser,
         ...globals.node,
       },
+    },
+  },
+  {
+    plugins: {
+      '@typescript-eslint': tseslintPlugin,
+    },
+    rules: {
+      '@typescript-eslint/no-empty-object-type': [
+        'error',
+        {
+          allowInterfaces: 'always',
+        },
+      ],
     },
   },
   {

@@ -1,13 +1,13 @@
 import type { ComponentArgs } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { cx, getValidChildren, isArray } from "@yamada-ui/utils"
-import type { ForwardedRef, Ref } from "react"
+import type { ForwardedRef, RefAttributes } from "react"
 import { cloneElement, forwardRef, useCallback } from "react"
 import type { MenuGroupProps } from "./menu-group"
 import { MenuGroup } from "./menu-group"
 import { MenuOptionItem } from "./menu-item"
 
-type MenuOptionGroupOptions<Y extends string | string[] = string> = {
+interface MenuOptionGroupOptions<Y extends string | string[] = string> {
   /**
    * The value of the menu item group.
    */
@@ -28,11 +28,9 @@ type MenuOptionGroupOptions<Y extends string | string[] = string> = {
   onChange?: (value: Y) => void
 }
 
-export type MenuOptionGroupProps<Y extends string | string[] = string> = Omit<
-  MenuGroupProps,
-  keyof MenuOptionGroupOptions
-> &
-  MenuOptionGroupOptions<Y>
+export interface MenuOptionGroupProps<Y extends string | string[] = string>
+  extends Omit<MenuGroupProps, keyof MenuOptionGroupOptions>,
+    MenuOptionGroupOptions<Y> {}
 
 export const MenuOptionGroup = forwardRef(
   <Y extends string | string[] = string>(
@@ -102,7 +100,7 @@ export const MenuOptionGroup = forwardRef(
   },
 ) as {
   <Y extends string | string[] = string>(
-    props: MenuOptionGroupProps<Y> & { ref?: Ref<HTMLDivElement> },
+    props: MenuOptionGroupProps<Y> & RefAttributes<HTMLDivElement>,
   ): JSX.Element
 } & ComponentArgs
 

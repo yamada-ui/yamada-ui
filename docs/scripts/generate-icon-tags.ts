@@ -32,7 +32,7 @@ const main = async () => {
 
   const fileNames = await readdir(path.resolve(DIR_PATH, "icons"))
 
-  const tags: Record<string, string[]> = {}
+  const tags: { [key: string]: string[] } = {}
 
   await Promise.all(
     fileNames.map(async (fileName) => {

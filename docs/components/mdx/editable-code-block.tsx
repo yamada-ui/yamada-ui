@@ -177,7 +177,7 @@ const scope = {
   ...utils,
 }
 
-export type EditableCodeBlockProps = {
+export interface EditableCodeBlockProps {
   code: string
   disabled?: boolean
   enableTypeScript?: boolean

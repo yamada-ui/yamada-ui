@@ -7,9 +7,15 @@ import { useMemo, useState } from "react"
 import type { FC } from "react"
 import { PackageManagers } from "./package-managers"
 
-type Package = { name: string; description: string; isDefaultCheck?: boolean }
+interface Package {
+  name: string
+  description: string
+  isDefaultCheck?: boolean
+}
 
-export type SelectPackageManagersProps = { packages: Package[] }
+export interface SelectPackageManagersProps {
+  packages: Package[]
+}
 
 export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({
   packages,

@@ -19,13 +19,13 @@ const LANGUAGE_ITEMS = [
   { label: "Chinese", value: "Chinese" },
 ]
 
-type Data = {
+interface Data {
   name: string
   dateOfBirth: Date
   language: string
 }
 
-export type AccountProps = StackProps
+export interface AccountProps extends StackProps {}
 
 export const Account: FC<AccountProps> = memo(({ ...rest }) => {
   const {

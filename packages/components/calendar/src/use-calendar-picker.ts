@@ -1,22 +1,19 @@
 import { layoutStyleProperties, useTheme } from "@yamada-ui/core"
 import type {
-  UIPropGetter,
+  HTMLProps,
   HTMLUIProps,
+  PropGetter,
+  RequiredPropGetter,
   ThemeProps,
-  RequiredUIPropGetter,
 } from "@yamada-ui/core"
 import {
   formControlProperties,
   useFormControlProps,
 } from "@yamada-ui/form-control"
-import type {
-  UseFormControlProps,
-  FormControlOptions,
-} from "@yamada-ui/form-control"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import type { ComboBoxProps, PopoverProps } from "@yamada-ui/popover"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
-import type { DOMAttributes } from "@yamada-ui/utils"
 import {
   dataAttr,
   getEventRelatedTarget,
@@ -40,9 +37,9 @@ import type { CalendarBaseProps, CalendarProps } from "./calendar"
 import { isAfterDate, isBeforeDate } from "./calendar-utils"
 import type { UseCalendarProps } from "./use-calendar"
 
-type CalendarThemeProps = ThemeProps<"Calendar">
+interface CalendarThemeProps extends ThemeProps<"Calendar"> {}
 
-type UseCalendarPickerOptions = {
+interface UseCalendarPickerOptions {
   /**
    * The pattern used to check the input element.
    *
@@ -178,6 +175,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     withControls,
     withLabel,
     maxSelectValues,
+    minSelectValues,
     __selectType,
     calendarProps,
     allowInput = true,
@@ -320,10 +318,9 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
 
       if (disabled || readOnly) return
 
-      const actions: Record<
-        string,
-        KeyboardEventHandler<HTMLDivElement> | undefined
-      > = {
+      const actions: {
+        [key: string]: KeyboardEventHandler<HTMLDivElement> | undefined
+      } = {
         Space: !isOpen
           ? (ev) => {
               ev.preventDefault()
@@ -386,7 +383,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     enabled: isOpen && closeOnBlur,
   })
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ref: mergeRefs(containerRef, ref),
       ...containerProps,
@@ -451,7 +448,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     ],
   )
 
-  const getFieldProps: UIPropGetter = useCallback(
+  const getFieldProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
@@ -506,6 +503,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
       withControls,
       withLabel,
       maxSelectValues,
+      minSelectValues,
       variant: calendarVariant,
       size: calendarSize,
       colorScheme: calendarColorScheme,
@@ -524,6 +522,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     [
       hiddenOutsideDays,
       maxSelectValues,
+      minSelectValues,
       enableMultiple,
       enableRange,
       amountOfMonths,
@@ -562,22 +561,24 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     ],
   )
 
-  const getIconProps: RequiredUIPropGetter<"div", { clear: boolean }> =
-    useCallback(
-      ({ clear, ...props }) => ({
-        ...props,
-        ...formControlProps,
-        onClick: handlerAll(props.onClick, clear ? onClear : undefined),
-      }),
-      [formControlProps, onClear],
-    )
+  const getIconProps: RequiredPropGetter<
+    HTMLProps & { clear: boolean },
+    HTMLProps
+  > = useCallback(
+    ({ clear, ...props }) => ({
+      ...props,
+      ...formControlProps,
+      onClick: handlerAll(props.onClick, clear ? onClear : undefined),
+    }),
+    [formControlProps, onClear],
+  )
 
   return {
     id,
     allowInput,
     pattern,
-    inputProps: inputProps as DOMAttributes<HTMLInputElement>,
-    formControlProps: formControlProps as UseFormControlProps<HTMLInputElement>,
+    inputProps,
+    formControlProps,
     containerRef,
     inputRef,
     isOpen,
@@ -590,7 +591,7 @@ export const useCalendarPicker = <T extends UseCalendarProps<any>>(
     getFieldProps,
     getCalendarProps,
     getIconProps,
-  } as any
+  }
 }
 
 export type UseCalendarPickerReturn = ReturnType<typeof useCalendarPicker>

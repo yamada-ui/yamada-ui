@@ -11,7 +11,7 @@ import {
 import type { GridProps, StackProps, defaultTheme } from "@yamada-ui/react"
 import type { FC } from "react"
 
-export type ColorPaletterProps = Omit<StackProps, "color"> & {
+export interface ColorPaletterProps extends Omit<StackProps, "color"> {
   color: string
   label: string
 }
@@ -42,7 +42,8 @@ export const ColorPaletter: FC<ColorPaletterProps> = ({
   )
 }
 
-export type ColorPalettersProps = Omit<ColorPaletterContainerProps, "color"> & {
+export interface ColorPalettersProps
+  extends Omit<ColorPaletterContainerProps, "color"> {
   colorScheme: keyof (typeof defaultTheme)["colors"]
 }
 
@@ -54,7 +55,7 @@ export const ColorPaletters: FC<ColorPalettersProps> = ({
 
   return (
     <ColorPaletterContainer {...rest}>
-      {Object.keys(theme.colors[colorScheme] ?? {}).map((tone) => (
+      {Object.keys(theme.colors?.[colorScheme] ?? {}).map((tone) => (
         <ColorPaletter
           key={`${colorScheme}.${tone}`}
           label={`${colorScheme} ${tone}`}

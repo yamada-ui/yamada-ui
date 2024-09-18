@@ -9,7 +9,7 @@ label: Updated
 
 これを解決するためにYamada UIは、各コンポーネントを基本スタイルと修飾子スタイルで構成しています。これにより、柔軟なスタイルの変更を可能にしています。
 
-また、あなたが作成したコンポーネントのスタイルをテーマで管理するために、コンポーネントのスタイルを取得する`useComponentStyle`と`useMultiComponentStyle`を提供しています。
+また、あなたが作成したコンポーネントのスタイルをテーマで管理するために、コンポーネントのスタイルを取得する`useComponentStyle`と`useComponentMultiStyle`を提供しています。
 
 ## 基本スタイルと修飾子スタイル
 
@@ -385,7 +385,7 @@ export const FormControl: ComponentStyle<"FormControl", FormControlProps> = {
 
 ## 独自のコンポーネントを作成する
 
-プロジェクトによっては、独自のコンポーネントが必要になる場合があります。その独自のコンポーネントのスタイルをテーマで管理するために、Yamada UIはコンポーネントのスタイルを取得する`useComponentStyle`と`useMultiComponentStyle`を提供しています。
+プロジェクトによっては、独自のコンポーネントが必要になる場合があります。その独自のコンポーネントのスタイルをテーマで管理するために、Yamada UIはコンポーネントのスタイルを取得する`useComponentStyle`と`useComponentMultiStyle`を提供しています。
 
 今回は、`Banner`という単一パーツのコンポーネントを作成していきます。
 
@@ -475,7 +475,7 @@ export const Banner: FC<BannerProps> = (props) => {
 }
 ```
 
-もし、`Banner`が複数パーツのコンポーネントだった場合、`useMultiComponentStyle`をコンポーネント内で呼び出し、スタイルの参照は下記のようになります。
+もし、`Banner`が複数パーツのコンポーネントだった場合、`useComponentMultiStyle`をコンポーネント内で呼び出し、スタイルの参照は下記のようになります。
 
 ```tsx live=false highlight={6,17,21,22}
 import { FC } from "react"
@@ -483,7 +483,7 @@ import {
   ui,
   HTMLUIProps,
   ThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/react"
 
@@ -494,7 +494,7 @@ export type BannerProps = HTMLUIProps<"button"> &
   BannerOptions
 
 export const Banner: FC<BannerProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Banner", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Banner", props)
   const rest = omitThemeProps(mergedProps)
 
   return (

@@ -464,7 +464,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { rangeSlider: [number, number] }
+  interface Data {
+    rangeSlider: [number, number]
+  }
 
   const defaultValues: Data = {
     rangeSlider: [25, 75],

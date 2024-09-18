@@ -3,10 +3,9 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { useLazyDisclosure } from "@yamada-ui/use-disclosure"
 import { cx } from "@yamada-ui/utils"
 import { useRef } from "react"
-import { useTabPanelContext } from "./tab-panels"
-import { useTabsContext } from "./tabs"
+import { useTabPanelContext, useTabsContext } from "./tabs-context"
 
-export type TabPanelProps = HTMLUIProps<"div">
+export interface TabPanelProps extends HTMLUIProps {}
 
 export const TabPanel = forwardRef<TabPanelProps, "div">(
   ({ className, children, ...rest }, ref) => {

@@ -6,9 +6,11 @@ import type { ReactElement, FC } from "react"
 import type { UseSelectOptionProps } from "./use-select"
 import { useSelectContext, useSelectOption } from "./use-select"
 
-type OptionOptions = { icon?: ReactElement }
+interface OptionOptions {
+  icon?: ReactElement
+}
 
-export type OptionProps = UseSelectOptionProps & OptionOptions
+export interface OptionProps extends UseSelectOptionProps, OptionOptions {}
 
 export const Option = forwardRef<OptionProps, "li">(
   ({ id, className, icon, ...rest }, ref) => {

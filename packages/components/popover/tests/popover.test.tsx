@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+import { useState } from "react"
 import {
   Popover,
   PopoverAnchor,
@@ -16,7 +16,7 @@ describe("<Popover />", () => {
     return (
       <Popover {...props}>
         <PopoverTrigger>
-          <Button>Open Popover</Button>
+          <button>Open Popover</button>
         </PopoverTrigger>
 
         <PopoverContent>
@@ -62,7 +62,7 @@ describe("<Popover />", () => {
           </PopoverAnchor>
 
           <PopoverTrigger>
-            <Button>Open Popover</Button>
+            <button>Open Popover</button>
           </PopoverTrigger>
 
           <PopoverContent>
@@ -113,13 +113,19 @@ describe("<Popover />", () => {
 
   test("can popover control", async () => {
     const ControlPopover = () => {
-      const { isOpen, onClose, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>Open Popover</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>
+            Open Popover
+          </button>
 
-          <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
+          <Popover
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            closeOnBlur={false}
+          >
             <PopoverTrigger>
               <span>Popover Target</span>
             </PopoverTrigger>

@@ -1,9 +1,9 @@
 import type { RowData } from "@tanstack/react-table"
 import type { ComponentArgs, CSSUIObject } from "@yamada-ui/core"
-import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import { TableStyleProvider, TableCaption } from "@yamada-ui/native-table"
 import { cx, pickChildren, getValidChildren } from "@yamada-ui/utils"
-import type { ForwardedRef, Ref } from "react"
+import type { ForwardedRef, RefAttributes } from "react"
 import { forwardRef } from "react"
 import type { TableBodyProps } from "./tbody"
 import { Tbody } from "./tbody"
@@ -14,7 +14,7 @@ import { Thead } from "./thead"
 import type { TableContext, UseTableProps } from "./use-table"
 import { TableProvider, useTable } from "./use-table"
 
-type TableOptions = {
+interface TableOptions {
   /**
    * The CSS `table-layout` property.
    */
@@ -76,11 +76,9 @@ type PagingTableProps =
   | "manualPagination"
   | "autoResetPageIndex"
 
-export type TableProps<Y extends RowData = unknown> = Omit<
-  UseTableProps<Y>,
-  PagingTableProps
-> &
-  TableOptions
+export interface TableProps<Y extends RowData = unknown>
+  extends Omit<UseTableProps<Y>, PagingTableProps>,
+    TableOptions {}
 
 /**
  * `Table` is a table component equipped with column sorting, row selection, and click event features.
@@ -92,7 +90,7 @@ export const Table = forwardRef(
     { colorScheme, highlightOnSelected = true, ...props }: TableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Table", {
+    const [styles, mergedProps] = useComponentMultiStyle("Table", {
       colorScheme,
       highlightOnSelected,
       ...props,
@@ -147,7 +145,7 @@ export const Table = forwardRef(
   },
 ) as {
   <Y extends RowData>(
-    props: TableProps<Y> & { ref?: Ref<HTMLDivElement> },
+    props: TableProps<Y> & RefAttributes<HTMLTableElement>,
   ): JSX.Element
 } & ComponentArgs
 

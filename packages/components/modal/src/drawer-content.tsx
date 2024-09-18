@@ -207,7 +207,12 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
 
         <ui.div
           className="ui-drawer__inner"
-          __css={{ display: "flex", flexDirection: "column", ...styles.inner }}
+          __css={{
+            display: "flex",
+            flexDirection: "column",
+            w: "100%",
+            ...styles.inner,
+          }}
         >
           {cloneChildren}
         </ui.div>

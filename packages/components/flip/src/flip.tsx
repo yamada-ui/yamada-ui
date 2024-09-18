@@ -2,6 +2,7 @@ import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
 import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
 import { motionForwardRef, motion } from "@yamada-ui/motion"
+import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
 import { cx, useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useRef, useState, type ReactElement } from "react"
@@ -54,6 +55,7 @@ type FlipOptions = {
   from: ReactElement
   to: ReactElement
   initialElement?: FlipAnimationElement
+  onChange?: () => void
   /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
    *
@@ -82,6 +84,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
     from,
     to,
     initialElement = "from",
+    onChange: onChangeProp,
     orientation = "horizontal",
     transition = {
       type: "spring",
@@ -92,7 +95,10 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [isVisible, setIsVisible] = useState(initialElement === "to")
+  const [isVisible, setIsVisible] = useControllableState({
+    defaultValue: initialElement === "to",
+    onChange: onChangeProp,
+  })
 
   const switchVisibility = () => {
     setIsVisible((prev) => !prev)

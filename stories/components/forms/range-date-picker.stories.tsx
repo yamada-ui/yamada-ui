@@ -185,6 +185,10 @@ export const withMaxSelectedValue: Story = () => {
   return <RangeDatePicker maxSelectValues={3} />
 }
 
+export const withMinSelectedValue: Story = () => {
+  return <RangeDatePicker minSelectValues={5} />
+}
+
 export const withPattern: Story = () => {
   return (
     <RangeDatePicker

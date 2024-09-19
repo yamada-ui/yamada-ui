@@ -54,7 +54,8 @@ export type FlipOrientation = "horizontal" | "vertical"
 interface FlipOptions {
   from: ReactElement
   to: ReactElement
-  initialElement?: FlipIdent
+  value?: FlipIdent
+  defaultValue?: FlipIdent
   onChange?: () => void
   /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
@@ -83,7 +84,8 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   const {
     from,
     to,
-    initialElement = "from",
+    value: valueProp,
+    defaultValue = "from",
     onChange: onChangeProp,
     orientation = "horizontal",
     transition = {
@@ -95,13 +97,16 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [isVisible, setIsVisible] = useControllableState({
-    defaultValue: initialElement === "to",
+  const [value, setValue] = useControllableState({
+    value: valueProp,
+    defaultValue: defaultValue,
     onChange: onChangeProp,
   })
 
+  const isVisible = value === "to"
+
   const switchVisibility = () => {
-    setIsVisible((prev) => !prev)
+    setValue((prev) => (prev === "from" ? "to" : "from"))
   }
 
   useSafeLayoutEffect(() => {
@@ -134,7 +139,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   return (
     <motion.div
       ref={ref}
-      className={cx(`ui-flip__${orientation}`, className)}
+      className={cx("ui-flip", `ui-flip__${orientation}`, className)}
       __css={{
         w: dimensions.width ? `${dimensions.width}px` : "auto",
         h: dimensions.height ? `${dimensions.height}px` : "auto",
@@ -146,7 +151,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       <motion.div
         ref={fromRef}
         custom={isVisible}
-        className={cx(`ui-flip__${orientation}-from`, className)}
+        className={cx("ui-flip", `ui-flip__${orientation}-from`, className)}
         variants={variants[orientation].from}
         initial="initial"
         animate="animate"
@@ -162,7 +167,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       <motion.div
         ref={toRef}
         custom={isVisible}
-        className={cx(`ui-flip__${orientation}-to`, className)}
+        className={cx("ui-flip", `ui-flip__${orientation}-to`, className)}
         variants={variants[orientation].to}
         initial="initial"
         animate="animate"

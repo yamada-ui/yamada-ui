@@ -119,10 +119,10 @@ export const withTransition: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<FlipIdent>("from")
+  const [currentIdent, onChange] = useState<FlipIdent>("from")
 
   const onChangeFlipAnimation = () => {
-    console.log(`current element is ${currentElement}`)
+    console.log(`current ident is ${currentIdent}`)
     onChange((prev) => (prev === "from" ? "to" : "from"))
   }
 
@@ -134,7 +134,7 @@ export const customControl: Story = () => {
       gap="4xl"
     >
       <Flip
-        initialElement={currentElement}
+        value={currentIdent}
         onChange={onChangeFlipAnimation}
         from={<BackOfCard />}
         to={<FrontOfCard />}

@@ -1066,28 +1066,6 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
-  packages/components/airy:
-    dependencies:
-      '@yamada-ui/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@yamada-ui/motion':
-        specifier: workspace:*
-        version: link:../motion
-      '@yamada-ui/use-controllable-state':
-        specifier: workspace:*
-        version: link:../../hooks/use-controllable-state
-      '@yamada-ui/utils':
-        specifier: workspace:*
-        version: link:../../utils
-    devDependencies:
-      clean-package:
-        specifier: 2.2.0
-        version: 2.2.0
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-
   packages/components/alert:
     dependencies:
       '@yamada-ui/core':
@@ -1556,28 +1534,6 @@ importers:
       '@yamada-ui/form-control':
         specifier: workspace:*
         version: link:../form-control
-      '@yamada-ui/use-controllable-state':
-        specifier: workspace:*
-        version: link:../../hooks/use-controllable-state
-      '@yamada-ui/utils':
-        specifier: workspace:*
-        version: link:../../utils
-    devDependencies:
-      clean-package:
-        specifier: 2.2.0
-        version: 2.2.0
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-
-  packages/components/flip:
-    dependencies:
-      '@yamada-ui/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@yamada-ui/motion':
-        specifier: workspace:*
-        version: link:../motion
       '@yamada-ui/use-controllable-state':
         specifier: workspace:*
         version: link:../../hooks/use-controllable-state
@@ -2429,28 +2385,6 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
 
-  packages/components/rotate:
-    dependencies:
-      '@yamada-ui/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@yamada-ui/motion':
-        specifier: workspace:*
-        version: link:../motion
-      '@yamada-ui/use-controllable-state':
-        specifier: workspace:*
-        version: link:../../hooks/use-controllable-state
-      '@yamada-ui/utils':
-        specifier: workspace:*
-        version: link:../../utils
-    devDependencies:
-      clean-package:
-        specifier: 2.2.0
-        version: 2.2.0
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-
   packages/components/scroll-area:
     dependencies:
       '@yamada-ui/core':
@@ -2873,6 +2807,9 @@ importers:
       '@yamada-ui/motion':
         specifier: workspace:*
         version: link:../motion
+      '@yamada-ui/use-controllable-state':
+        specifier: workspace:*
+        version: link:../../hooks/use-controllable-state
       '@yamada-ui/use-value':
         specifier: workspace:*
         version: link:../../hooks/use-value
@@ -3487,9 +3424,6 @@ importers:
       '@yamada-ui/accordion':
         specifier: workspace:*
         version: link:../components/accordion
-      '@yamada-ui/airy':
-        specifier: workspace:*
-        version: link:../components/airy
       '@yamada-ui/alert':
         specifier: workspace:*
         version: link:../components/alert
@@ -3532,9 +3466,6 @@ importers:
       '@yamada-ui/file-input':
         specifier: workspace:*
         version: link:../components/file-input
-      '@yamada-ui/flip':
-        specifier: workspace:*
-        version: link:../components/flip
       '@yamada-ui/focus-lock':
         specifier: workspace:*
         version: link:../components/focus-lock
@@ -3628,9 +3559,6 @@ importers:
       '@yamada-ui/ripple':
         specifier: workspace:*
         version: link:../components/ripple
-      '@yamada-ui/rotate':
-        specifier: workspace:*
-        version: link:../components/rotate
       '@yamada-ui/scroll-area':
         specifier: workspace:*
         version: link:../components/scroll-area

@@ -20,7 +20,7 @@ interface AiryOptions {
 export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
 
 /**
- * `Airy` component provides an airy animation that alternates between two elements every time one of them is clicked.
+ * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked
  *
  * @see Docs https://yamada-ui.com/components/transitions/airy
  */

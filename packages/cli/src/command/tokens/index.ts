@@ -11,7 +11,7 @@ const generateThemeTypings = async ({
   theme,
   outFile,
 }: {
-  theme: Record<string, any>
+  theme: { [key: string]: any }
   outFile?: string
 }) => {
   p.intro(c.magenta(`Generating Yamada UI theme typings`))
@@ -54,7 +54,7 @@ const generateThemeTypings = async ({
 
 export { themePath }
 
-type Options = {
+interface Options {
   out?: string
   watch?: string
 }

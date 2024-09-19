@@ -2,8 +2,9 @@ import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { ComponentProps, FC } from "react"
 
-export type NativeImageProps = Omit<HTMLUIProps<"img">, "width" | "height"> &
-  Pick<ComponentProps<"img">, "width" | "height">
+export interface NativeImageProps
+  extends Omit<HTMLUIProps<"img">, "width" | "height">,
+    Pick<ComponentProps<"img">, "width" | "height"> {}
 
 /**
  * `NativeImage` is renders a `img` element.

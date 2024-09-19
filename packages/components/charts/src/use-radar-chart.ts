@@ -1,17 +1,21 @@
 import { getVar, useTheme } from "@yamada-ui/core"
-import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  RequiredPropGetter,
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
 import type {
-  ChartPropGetter,
   PolarAngleAxisProps,
   PolarRadiusAxisProps,
   RadarChartProps,
   RadarProps,
-  RequiredChartPropGetter,
 } from "./chart.types"
 import {
   dotProperties,
@@ -21,7 +25,7 @@ import {
   radarProperties,
 } from "./rechart-properties"
 
-export type UseRadarChartOptions = {
+export interface UseRadarChartOptions {
   /**
    * Chart data.
    */
@@ -92,7 +96,7 @@ export type UseRadarChartOptions = {
   polarRadiusAxisTickFormatter?: (value: number) => string
 }
 
-type UseRadarChartProps = UseRadarChartOptions & {
+interface UseRadarChartProps extends UseRadarChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -337,8 +341,7 @@ export const useRadarChart = ({
     ],
   )
 
-  const getRadarChartProps: ChartPropGetter<
-    "div",
+  const getRadarChartProps: PropGetter<
     ComponentPropsWithoutRef<typeof Recharts.RadarChart>,
     ComponentPropsWithoutRef<typeof Recharts.RadarChart>
   > = useCallback(
@@ -352,9 +355,8 @@ export const useRadarChart = ({
     [data, radarChartClassName, chartProps],
   )
 
-  const getRadarProps: RequiredChartPropGetter<
-    "div",
-    { index: number },
+  const getRadarProps: RequiredPropGetter<
+    Partial<Recharts.RadarProps> & { index: number },
     Omit<Recharts.RadarProps, "ref">
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
@@ -379,8 +381,7 @@ export const useRadarChart = ({
     [radarPropList, strokeWidth],
   )
 
-  const getPolarAngleAxisProps: ChartPropGetter<
-    "div",
+  const getPolarAngleAxisProps: PropGetter<
     Recharts.PolarAngleAxisProps,
     Omit<Recharts.PolarAngleAxisProps, "ref">
   > = useCallback(
@@ -408,8 +409,7 @@ export const useRadarChart = ({
     ],
   )
 
-  const getPolarRadiusAxisProps: ChartPropGetter<
-    "div",
+  const getPolarRadiusAxisProps: PropGetter<
     Recharts.PolarRadiusAxisProps,
     Omit<Recharts.PolarRadiusAxisProps, "ref">
   > = useCallback(

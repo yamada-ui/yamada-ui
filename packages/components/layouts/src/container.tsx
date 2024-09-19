@@ -8,7 +8,7 @@ import {
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-type ContainerOptions = {
+interface ContainerOptions {
   /**
    * If `true`, container will center its children regardless of their width.
    *
@@ -17,9 +17,10 @@ type ContainerOptions = {
   centerContent?: boolean
 }
 
-export type ContainerProps = HTMLUIProps<"section"> &
-  ThemeProps<"Container"> &
-  ContainerOptions
+export interface ContainerProps
+  extends HTMLUIProps<"section">,
+    ThemeProps<"Container">,
+    ContainerOptions {}
 
 /**
  * `Container` is a component used as a general division element. By default, it renders the `section` element.

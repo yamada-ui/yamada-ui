@@ -64,14 +64,12 @@ const createIcons = (iconNames: string[]) =>
         `import { LucideIcon } from "../lucide-icon"`,
         `import type { LucideIconProps } from "../lucide-icon"`,
         ``,
-        `export type ${iconName}Props = LucideIconProps`,
-        ``,
         `/**`,
         ` * \`${iconName}\` is [Lucide](https://lucide.dev) SVG icon component.`,
         ` *`,
         ` * @see Docs https://yamada-ui.com/components/media-and-icons/lucide`,
         ` */`,
-        `export const ${iconName} = forwardRef<${iconName}Props, "svg">((props, ref) => (`,
+        `export const ${iconName} = forwardRef<LucideIconProps, "svg">((props, ref) => (`,
         `  <LucideIcon ref={ref} as={${iconName}Icon} {...props} />`,
         `))`,
       ].join("\n")
@@ -83,14 +81,14 @@ const createIcons = (iconNames: string[]) =>
   )
 
 const createTypes = async (iconNames: string[]) => {
-  const fileName = "index.types.ts"
+  const fileName = "index.types.tsx"
   let data = [
     `export type IconNames = ${iconNames.flatMap((iconName) => [`\"${iconName}\"`, `\"${iconName}Icon\"`]).join(" | ")}`,
   ].join("\n")
 
   data = await prettier(data)
 
-  await writeFile(path.resolve(DIST_PATH, `${fileName}.tsx`), data)
+  await writeFile(path.resolve(DIST_PATH, fileName), data)
 }
 
 const main = async () => {
@@ -101,16 +99,13 @@ const main = async () => {
   await createIcons(iconNames)
   await createTypes(iconNames)
 
-  let chunks = iconNames.flatMap((iconName) => {
+  let chunks = iconNames.map((iconName) => {
     const fileName = toKebabCase(iconName)
 
-    return [
-      `export { ${iconName}, ${iconName} as ${iconName}Icon } from "./${fileName}"`,
-      `export type { ${iconName}Props, ${iconName}Props as ${iconName}IconProps } from "./${fileName}"`,
-    ]
+    return `export { ${iconName}, ${iconName} as ${iconName}Icon } from "./${fileName}"`
   })
 
-  let data = [`export * from "./index.types.ts"`, ...chunks].join("\n")
+  let data = [`export * from "./index.types"`, ...chunks].join("\n")
 
   data = await prettier(data)
 

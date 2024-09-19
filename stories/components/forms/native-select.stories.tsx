@@ -329,7 +329,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { select: string }
+  interface Data {
+    select: string
+  }
 
   const {
     register,
@@ -369,7 +371,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { select: string }
+  interface Data {
+    select: string
+  }
 
   const defaultValues: Data = {
     select: "孫悟空",

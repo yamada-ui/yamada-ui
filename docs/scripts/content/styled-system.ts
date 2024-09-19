@@ -22,6 +22,7 @@ import {
   isTypeLiteralNode,
   isVariableStatement,
   isExpression,
+  transpileModule,
 } from "typescript"
 import { toKebabCase } from "utils/string"
 import { getMDXFile, writeMDXFile } from "../utils"
@@ -32,9 +33,8 @@ config({ path: CONSTANT.PATH.ENV })
 
 type Type = "style" | "pseudo"
 type TableType = "property" | "description"
-type Props = Record<
-  string,
-  {
+interface Props {
+  [key: string]: {
     shorthands?: string[]
     properties: string[]
     token?: string
@@ -42,11 +42,14 @@ type Props = Record<
     urls?: string[]
     deprecated?: boolean
   }
->
-type JSDocs = Record<
-  string,
-  { description?: string; urls?: string[]; deprecated?: boolean }
->
+}
+interface JSDocs {
+  [key: string]: {
+    description?: string
+    urls?: string[]
+    deprecated?: boolean
+  }
+}
 
 const SOURCE_STYLE_PROPS_PATH = path.join(
   CONSTANT.PATH.ROOT,
@@ -94,14 +97,16 @@ const CONTENT_FOOTER = {
 
 const isStringObject = (value: string) => /^{|}$/.test(value)
 
+const isStringFunction = (value: string) => /^\s*(\w+)\s*\([^)]*\)/.test(value)
+
 const hasJSDoc = (node: any): node is { jsDoc: JSDoc[] } => "jsDoc" in node
 
-const sortObject = (obj: Record<string, any>) =>
+const sortObject = (obj: { [key: string]: any }) =>
   Object.keys(obj)
     .sort()
     .reduce(
       (prev, key) => ({ ...prev, [key]: obj[key] }),
-      {} as Record<string, any>,
+      {} as { [key: string]: any },
     )
 
 const getProps: p.RequiredRunner = (type: Type) => async (_, s) => {
@@ -156,14 +161,21 @@ const getJSDocs = (node: TypeAliasDeclaration) => (sourceFile: SourceFile) => {
   return props
 }
 
-const getProp = (sourceFile: SourceFile) => (property: PropertyAssignment) => {
-  const { name, initializer } = property
+const getProp =
+  (sourceFile: SourceFile, sourceCode: string = "") =>
+  (property: PropertyAssignment) => {
+    const { name, initializer } = property
 
-  const prop = name.getText(sourceFile)
-  const value = initializer.getText(sourceFile).replace(/(\w+):/g, '"$1":')
+    const prop = name.getText(sourceFile)
+    let value = initializer.getText(sourceFile)
 
-  return { prop, value }
-}
+    if (isStringFunction(value)) {
+      value = eval(`${sourceCode}\n ${value}`)
+    } else {
+      value = value.replace(/(\w+):/g, '"$1":')
+    }
+    return { prop, value }
+  }
 
 const getConfig = (prop: string, value: string) => {
   if (isStringObject(value)) {
@@ -204,7 +216,17 @@ const parseProps: p.RequiredRunner =
   (type: Type, source: string, targetStatements: string[]) => async (_, s) => {
     s.start(`Parsing the ${type} props`)
 
+    const isPseudo = type === "pseudo"
     const sourceFile = createSourceFile("props.ts", source, ScriptTarget.Latest)
+    let sourceCode: string | undefined
+
+    if (isPseudo) {
+      const result = transpileModule(source, {
+        compilerOptions: { target: ScriptTarget.Latest },
+      })
+
+      sourceCode = result.outputText.replace(/export const/g, "const")
+    }
 
     const props: Props = {}
     let jsDocs: JSDocs = {}
@@ -213,9 +235,9 @@ const parseProps: p.RequiredRunner =
       const hasChildren = node.getChildCount(sourceFile) > 0
 
       if (isPropertyAssignment(node)) {
-        const { prop, value } = getProp(sourceFile)(node)
+        const { prop, value } = getProp(sourceFile, sourceCode)(node)
 
-        if (type === "pseudo") {
+        if (isPseudo) {
           props[prop] = { properties: [value.replace(/^"|"$/g, "")] }
         } else if (!isShorthand) {
           const config = getConfig(prop, value)
@@ -237,9 +259,7 @@ const parseProps: p.RequiredRunner =
     }
 
     sourceFile.forEachChild((node) => {
-      if (isTypeAliasDeclaration(node)) {
-        jsDocs = getJSDocs(node)(sourceFile)
-      }
+      if (isTypeAliasDeclaration(node)) jsDocs = getJSDocs(node)(sourceFile)
 
       if (isVariableStatement(node)) {
         const declarations = node.declarationList.declarations
@@ -316,9 +336,17 @@ const generateTable = (props: Props, type: TableType) => (locale: Locale) => {
             .map((property) => {
               const url = urls?.find((url) => url.endsWith(property))
 
-              return !url ? `\`${property}\`` : `[${property}](${url})`
+              const chunks = property.split(",")
+
+              if (chunks.length === 1) {
+                return !url ? `\`${property}\`` : `[${property}](${url})`
+              } else {
+                return chunks
+                  .map((chunk) => `\`${chunk.trim()}\``)
+                  .join("<br />")
+              }
             })
-            .join(" + "),
+            .join("<br />"),
         )
 
         columns.push(
@@ -367,6 +395,8 @@ const main = async () => {
       "attributes",
       "pseudoClasses",
       "atRules",
+      "groupAttributes",
+      "peerAttributes",
     ])(p, s)
 
     s.start(`Writing files`)

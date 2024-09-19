@@ -280,7 +280,7 @@ const generateTheme = async (
   )
 }
 
-type Options = {
+interface Options {
   branch?: string
   cwd?: string
   replace?: boolean

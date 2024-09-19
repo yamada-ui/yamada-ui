@@ -1,32 +1,48 @@
 import type React from "react"
 import { isNumber, isUndefined } from "./assertion"
 
-export const createdDom = (): boolean =>
-  !!(
+export function createdDom(): boolean {
+  return !!(
     typeof window !== "undefined" &&
     window.document &&
     window.document.createElement
   )
+}
 
-export const getPlatform = (): string =>
-  (navigator as any).userAgentData?.platform ?? navigator.platform
+export function getPlatform(): string {
+  return (navigator as any).userAgentData?.platform ?? navigator.platform
+}
 
-export const vendor = (v: RegExp): boolean =>
-  createdDom() && v.test(navigator.vendor)
-export const platform = (v: RegExp): boolean =>
-  createdDom() && v.test(getPlatform())
+export function vendor(v: RegExp): boolean {
+  return createdDom() && v.test(navigator.vendor)
+}
 
-export const isMac = (): boolean => platform(/^mac/i)
-export const isApple = (): boolean => platform(/mac|iphone|ipad|ipod/i)
-export const isSafari = (): boolean => isApple() && vendor(/apple/i)
+export function platform(v: RegExp): boolean {
+  return createdDom() && v.test(getPlatform())
+}
 
-export const isElement = (el: any): el is Element =>
-  el != null &&
-  typeof el == "object" &&
-  "nodeType" in el &&
-  el.nodeType === Node.ELEMENT_NODE
+export function isMac(): boolean {
+  return platform(/^mac/i)
+}
 
-export const isHTMLElement = (el: any): el is HTMLElement => {
+export function isApple(): boolean {
+  return platform(/mac|iphone|ipad|ipod/i)
+}
+
+export function isSafari(): boolean {
+  return isApple() && vendor(/apple/i)
+}
+
+export function isElement(el: any): el is Element {
+  return (
+    el != null &&
+    typeof el == "object" &&
+    "nodeType" in el &&
+    el.nodeType === Node.ELEMENT_NODE
+  )
+}
+
+export function isHTMLElement(el: any): el is HTMLElement {
   if (!isElement(el)) return false
 
   const win = el.ownerDocument.defaultView ?? window
@@ -34,36 +50,42 @@ export const isHTMLElement = (el: any): el is HTMLElement => {
   return el instanceof win.HTMLElement
 }
 
-export const isHidden = (el: HTMLElement): boolean => {
+export function isHidden(el: HTMLElement): boolean {
   if (el.parentElement && isHidden(el.parentElement)) return true
 
   return el.hidden
 }
 
-export const isDisabled = (el: HTMLElement): boolean =>
-  Boolean(el.getAttribute("disabled")) === true ||
-  Boolean(el.getAttribute("data-disabled")) === true ||
-  Boolean(el.getAttribute("aria-disabled")) === true
+export function isDisabled(el: HTMLElement): boolean {
+  return (
+    Boolean(el.getAttribute("disabled")) === true ||
+    Boolean(el.getAttribute("data-disabled")) === true ||
+    Boolean(el.getAttribute("aria-disabled")) === true
+  )
+}
 
-const isVisible = (el: HTMLElement) => el.offsetWidth > 0 && el.offsetHeight > 0
+function isVisible(el: HTMLElement) {
+  return el.offsetWidth > 0 && el.offsetHeight > 0
+}
 
-export const hasTabIndex = (el: HTMLElement): boolean =>
-  el.hasAttribute("tabindex")
+export function hasTabIndex(el: HTMLElement): boolean {
+  return el.hasAttribute("tabindex")
+}
 
-export const isContentEditable = (el: HTMLElement): boolean => {
+export function isContentEditable(el: HTMLElement): boolean {
   const value = el.getAttribute("contenteditable")
 
   return value !== "false" && value != null
 }
 
-export const isContains = (
+export function isContains(
   parent: HTMLElement | null,
   child: HTMLElement | null,
-): boolean | undefined => {
+): boolean | undefined {
   return parent === child || parent?.contains(child)
 }
 
-export const getPx = (value: string | number | undefined): number => {
+export function getPx(value: string | number | undefined): number {
   if (isNumber(value)) return value
 
   if (isUndefined(value)) return 0
@@ -84,22 +106,22 @@ export const getPx = (value: string | number | undefined): number => {
   return parseFloat(value) * fontSize
 }
 
-export const getEventRelatedTarget = (
-  ev: React.FocusEvent | React.MouseEvent,
-) =>
-  (ev.relatedTarget ??
+export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
+  return (ev.relatedTarget ??
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
+}
 
 type Booleanish = boolean | "true" | "false"
 
-export const dataAttr = (condition: boolean | undefined) =>
-  (condition ? "" : undefined) as Booleanish
+export function dataAttr(condition: boolean | undefined) {
+  return (condition ? "" : undefined) as Booleanish
+}
 
-export const ariaAttr = (
-  condition: boolean | undefined,
-): boolean | undefined => (condition ? true : undefined)
+export function ariaAttr(condition: boolean | undefined): boolean | undefined {
+  return condition ? true : undefined
+}
 
-export type FocusableElement = {
+export interface FocusableElement {
   focus: (options?: FocusOptions) => void
 }
 
@@ -122,7 +144,7 @@ const focusableElList = [
 
 const focusableElSelector: string = focusableElList.join()
 
-export const getAllFocusable = <T extends HTMLElement>(container: T): T[] => {
+export function getAllFocusable<T extends HTMLElement>(container: T): T[] {
   const focusableEls: T[] = Array.from(
     container.querySelectorAll<T>(focusableElSelector),
   )
@@ -132,7 +154,7 @@ export const getAllFocusable = <T extends HTMLElement>(container: T): T[] => {
   return focusableEls.filter((el) => isFocusable(el) && isVisible(el))
 }
 
-export const isFocusable = (el: HTMLElement): boolean => {
+export function isFocusable(el: HTMLElement): boolean {
   if (!isHTMLElement(el) || isHidden(el) || isDisabled(el)) {
     return false
   }
@@ -155,24 +177,34 @@ export const isFocusable = (el: HTMLElement): boolean => {
   return hasTabIndex(el)
 }
 
-export const hasNegativeTabIndex = (el: HTMLElement): boolean =>
-  hasTabIndex(el) && el.tabIndex === -1
+export function hasNegativeTabIndex(el: HTMLElement): boolean {
+  return hasTabIndex(el) && el.tabIndex === -1
+}
 
-export const isTabbable = (el?: HTMLElement | null): boolean =>
-  el ? isHTMLElement(el) && isFocusable(el) && !hasNegativeTabIndex(el) : false
+export function isTabbable(el?: HTMLElement | null): boolean {
+  return el
+    ? isHTMLElement(el) && isFocusable(el) && !hasNegativeTabIndex(el)
+    : false
+}
 
-export const isTouchDevice = () => "ontouchstart" in window
+export function isTouchDevice(): boolean {
+  return "ontouchstart" in window
+}
 
-export const getOwnerWindow = (
+export function getOwnerWindow(
   node?: Element | null,
-): Window & typeof globalThis => getOwnerDocument(node)?.defaultView ?? window
+): Window & typeof globalThis {
+  return getOwnerDocument(node)?.defaultView ?? window
+}
 
-export const getOwnerDocument = (el?: Element | null): Document =>
-  isElement(el) ? el.ownerDocument : document
+export function getOwnerDocument(el?: Element | null): Document {
+  return isElement(el) ? el.ownerDocument : document
+}
 
-export const getActiveElement = (el?: HTMLElement): HTMLElement =>
-  getOwnerDocument(el).activeElement as HTMLElement
+export function getActiveElement(el?: HTMLElement): HTMLElement {
+  return getOwnerDocument(el).activeElement as HTMLElement
+}
 
-export const isActiveElement = (el: HTMLElement) => {
+export function isActiveElement(el: HTMLElement): boolean {
   return getActiveElement(el) === el
 }

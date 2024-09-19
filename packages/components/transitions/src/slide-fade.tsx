@@ -4,6 +4,7 @@ import type {
   WithTransitionProps,
   MotionTransitionVariants,
   MotionProps,
+  MotionVariants,
 } from "@yamada-ui/motion"
 import {
   AnimatePresence,
@@ -15,7 +16,7 @@ import {
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
 
-const variants: MotionTransitionVariants = {
+const variants: MotionVariants = {
   initial: ({
     offsetX,
     offsetY,
@@ -57,7 +58,7 @@ const variants: MotionTransitionVariants = {
       : { transitionEnd: { x: offsetX, y: offsetY, ...transitionEnd?.exit } }),
     ...exit,
   }),
-}
+} satisfies MotionTransitionVariants
 
 export const slideFadeProps = {
   initial: "exit",
@@ -66,7 +67,7 @@ export const slideFadeProps = {
   variants,
 }
 
-type SlideFadeOptions = {
+interface SlideFadeOptions {
   /**
    * The offset on the horizontal or `x` axis.
    *
@@ -87,9 +88,10 @@ type SlideFadeOptions = {
   reverse?: boolean
 }
 
-export type SlideFadeProps = WithTransitionProps<MotionProps> &
-  SlideFadeOptions &
-  ThemeProps<"SlideFade">
+export interface SlideFadeProps
+  extends WithTransitionProps<MotionProps>,
+    SlideFadeOptions,
+    ThemeProps<"SlideFade"> {}
 
 /**
  * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.

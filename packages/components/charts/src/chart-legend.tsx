@@ -1,14 +1,15 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import { useLegend } from "./use-chart"
 
-type ChartLegendOptions = {
+interface ChartLegendOptions {
   payload?: Dict[]
   onHighlight: (area: string | null) => void
 }
 
-export type ChartLegendProps = HTMLUIProps<"div"> & ChartLegendOptions
+export interface ChartLegendProps extends HTMLUIProps, ChartLegendOptions {}
 
 export const ChartLegend = forwardRef<ChartLegendProps, "div">(
   ({ className, payload = [], onHighlight, ...rest }, ref) => {

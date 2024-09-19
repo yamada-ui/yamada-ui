@@ -5,9 +5,9 @@ import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll, mergeRefs } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback } from "react"
-import { useMenu, useMenuDescendantsContext } from "./menu"
+import { useMenu, useMenuDescendantsContext } from "./menu-context"
 
-export type MenuListProps = HTMLUIProps<"ul"> & {
+export interface MenuListProps extends HTMLUIProps<"ul"> {
   contentProps?: MotionPropsWithoutChildren
 }
 
@@ -44,7 +44,7 @@ export const MenuList = forwardRef<MenuListProps, "ul">(
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
-        const actions: Record<string, KeyboardEventHandler> = {
+        const actions: { [key: string]: KeyboardEventHandler } = {
           Tab: (ev) => ev.preventDefault(),
           Escape: onClose,
           ArrowDown: focusedIndex === -1 ? onFirst : onNext,

@@ -1,3 +1,5 @@
 import MatchMediaMock from "vitest-matchmedia-mock"
 
-export const matchMedia = () => new MatchMediaMock()
+export function matchMedia() {
+  return new MatchMediaMock()
+}

@@ -1,15 +1,16 @@
+import type { Dict } from "@yamada-ui/utils"
+import type { CSSFunction } from "../css"
 import type { StyledTheme } from "../theme.types"
 import {
   getCSSFunction,
   globalValues,
   isCSSFunction,
   splitValues,
-  type Transform,
 } from "./utils"
 
 const DEFAULT_METHOD = "in srgb"
 
-const methods: Record<string, string> = {
+const methods: { [key: string]: string } = {
   srgb: "in srgb",
   "srgb-linear": "in srgb-linear",
   "display-p3": "in display-p3",
@@ -23,7 +24,7 @@ const methods: Record<string, string> = {
   "xyz-d65": "in xyz-d65",
 }
 
-const getColor = (value: string | undefined, theme: StyledTheme) => {
+function getColor(value: string | undefined, theme: StyledTheme) {
   if (!value) return ""
 
   let [color, percent, ...rest] = value.split(" ").filter(Boolean)
@@ -42,7 +43,12 @@ const getColor = (value: string | undefined, theme: StyledTheme) => {
   return !percent ? color : `${color} ${percent}`
 }
 
-export const colorMix: Transform = (value, theme) => {
+export function colorMix(
+  value: any,
+  theme: StyledTheme,
+  _css?: CSSFunction,
+  _prev?: Dict,
+) {
   if (value == null || globalValues.has(value)) return value
 
   const prevent = isCSSFunction(value)

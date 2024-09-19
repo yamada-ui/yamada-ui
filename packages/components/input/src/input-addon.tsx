@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useInputGroup } from "./input-group"
+import { useInputGroup } from "./input-context"
 
-type InputAddonOptions = {
+interface InputAddonOptions {
   /**
    * The placement of the element.
    *
@@ -12,7 +12,7 @@ type InputAddonOptions = {
   placement?: "left" | "right"
 }
 
-export type InputAddonProps = HTMLUIProps<"div"> & InputAddonOptions
+export interface InputAddonProps extends HTMLUIProps, InputAddonOptions {}
 
 const InputAddon = forwardRef<InputAddonProps, "div">(
   ({ className, placement = "left", ...rest }, ref) => {

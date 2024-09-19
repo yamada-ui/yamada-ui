@@ -1,70 +1,22 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import type { ThemeProps } from "@yamada-ui/core"
+import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { PopoverProps } from "@yamada-ui/popover"
 import { Popover } from "@yamada-ui/popover"
-import { createDescendant } from "@yamada-ui/use-descendant"
 import { useDisclosure } from "@yamada-ui/use-disclosure"
-import {
-  createContext,
-  funcAll,
-  useUnmountEffect,
-  useUpdateEffect,
-} from "@yamada-ui/utils"
-import type {
-  Dispatch,
-  FC,
-  MutableRefObject,
-  RefObject,
-  SetStateAction,
-} from "react"
+import { funcAll, useUnmountEffect, useUpdateEffect } from "@yamada-ui/utils"
+import type { FC } from "react"
 import { useCallback, useEffect, useId, useRef, useState } from "react"
-import { useContextMenu } from "./context-menu"
-import { useUpstreamMenuItem } from "./menu-item"
-
-const {
+import {
   DescendantsContextProvider,
-  useDescendantsContext: useMenuDescendantsContext,
+  MenuProvider,
+  UpstreamMenuProvider,
+  useContextMenu,
   useDescendants,
-  useDescendant: useMenuDescendant,
-} = createDescendant<HTMLElement>()
+  useUpstreamMenu,
+  useUpstreamMenuItem,
+} from "./menu-context"
 
-export { useMenuDescendantsContext, useMenuDescendant }
-
-type MenuContext = MenuOptions & {
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
-  onUpstreamClose?: () => void
-  onFocusFirstItem: () => void
-  onFocusLastItem: () => void
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  menuRef: RefObject<HTMLDivElement>
-  requestAnimationFrameId: MutableRefObject<number | null>
-  isNested: boolean
-  styles: Record<string, CSSUIObject>
-}
-
-const [MenuProvider, useMenu] = createContext<MenuContext>({
-  name: "MenuContext",
-  errorMessage: `useMenu returned is 'undefined'. Seems you forgot to wrap the components in "<Menu />"`,
-})
-
-type UpstreamMenuContext = {
-  relatedRef: RefObject<HTMLElement>
-  onDownstreamCloseMapRef: MutableRefObject<Map<string, () => void>>
-  onUpstreamClose: () => void
-}
-
-export const [UpstreamMenuProvider, useUpstreamMenu] =
-  createContext<UpstreamMenuContext>({
-    strict: false,
-    name: "UpstreamMenuContext",
-  })
-
-export { useMenu }
-
-type MenuOptions = {
+export interface MenuOptions {
   /**
    * If `true`, the list element will be closed when value is selected.
    *
@@ -73,9 +25,10 @@ type MenuOptions = {
   closeOnSelect?: boolean
 }
 
-export type MenuProps = ThemeProps<"Menu"> &
-  Omit<PopoverProps, "closeOnButton" | "relatedRef"> &
-  MenuOptions
+export interface MenuProps
+  extends ThemeProps<"Menu">,
+    Omit<PopoverProps, "closeOnButton" | "relatedRef">,
+    MenuOptions {}
 
 /**
  * `Menu` is a component that displays a common dropdown menu.
@@ -84,7 +37,7 @@ export type MenuProps = ThemeProps<"Menu"> &
  */
 export const Menu: FC<MenuProps> = (props) => {
   const { styles: contextMenuStyles } = useContextMenu() ?? {}
-  const [styles, mergedProps] = useMultiComponentStyle("Menu", props, {
+  const [styles, mergedProps] = useComponentMultiStyle("Menu", props, {
     isProcessSkip: !!contextMenuStyles,
     styles: contextMenuStyles,
   })

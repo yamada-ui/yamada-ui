@@ -3,7 +3,7 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useTableStyles } from "./native-table"
 
-type TableCaptionOptions = {
+interface TableCaptionOptions {
   /**
    * The placement of the table caption.
    *
@@ -12,7 +12,9 @@ type TableCaptionOptions = {
   placement?: "top" | "bottom"
 }
 
-export type TableCaptionProps = HTMLUIProps<"caption"> & TableCaptionOptions
+export interface TableCaptionProps
+  extends HTMLUIProps<"caption">,
+    TableCaptionOptions {}
 
 export const TableCaption = forwardRef<TableCaptionProps, "caption">(
   ({ className, placement = "bottom", ...rest }, ref) => {

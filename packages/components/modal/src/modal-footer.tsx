@@ -1,9 +1,9 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useModal } from "./modal"
+import { useModal } from "./modal-context"
 
-export type ModalFooterProps = HTMLUIProps<"footer">
+export interface ModalFooterProps extends HTMLUIProps<"footer"> {}
 
 export const ModalFooter = forwardRef<ModalFooterProps, "footer">(
   ({ className, __css, ...rest }, ref) => {

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 type HTMLImageElementProps = ImgHTMLAttributes<HTMLImageElement>
 
-export type UseImageProps = {
+export interface UseImageProps {
   /**
    * The image `src` attribute.
    */
@@ -88,7 +88,7 @@ export const useImage = ({
 
       setStatus("loaded")
 
-      onLoad?.(ev as unknown as SyntheticEvent<HTMLImageElement, Event>)
+      onLoad?.(ev as unknown as SyntheticEvent<HTMLImageElement>)
     }
 
     img.onerror = (error) => {

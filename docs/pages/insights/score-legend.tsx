@@ -2,16 +2,15 @@ import { ColorSwatch, HStack, Skeleton, Tooltip } from "@yamada-ui/react"
 import type { ColorSwatchProps, SkeletonProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { memo } from "react"
-
 import type { CountUpProps } from "components/transitions"
 import { CountUp } from "components/transitions"
 
-export type ScoreLegendProps = {
+export interface ScoreLegendProps extends Omit<CountUpProps, "color"> {
   label?: string
   color?: ColorSwatchProps["color"]
   isLoaded?: SkeletonProps["isLoaded"]
   containerProps?: SkeletonProps
-} & Omit<CountUpProps, "color">
+}
 
 export const ScoreLegend: FC<ScoreLegendProps> = memo(
   ({ label, color, isLoaded, containerProps, ...rest }) => {

@@ -1,8 +1,9 @@
 import type { Transform } from "./utils"
 
-export const generateFilter =
-  (type: "filter" | "backdrop" = "filter"): Transform =>
-  (value) => {
+export function generateFilter(
+  type: "filter" | "backdrop" = "filter",
+): Transform {
+  return function (value) {
     if (value !== "auto") return value
 
     if (type === "filter") {
@@ -33,3 +34,4 @@ export const generateFilter =
       ].join(" ")
     }
   }
+}

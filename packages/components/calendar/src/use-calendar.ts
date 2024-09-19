@@ -1,4 +1,4 @@
-import type { CSSUIObject, UIPropGetter } from "@yamada-ui/core"
+import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import {
@@ -23,64 +23,66 @@ export type MaybeValue = Date | Date[] | [Date?, Date?] | undefined
 
 export type MaybeDate = Date | Dayjs
 
-export type CalendarContext = Pick<
-  Required<UseCalendarProps>,
-  | "type"
-  | "month"
-  | "firstDayOfWeek"
-  | "amountOfMonths"
-  | "paginateBy"
-  | "withWeekdays"
-  | "withHeader"
-  | "withControls"
-  | "withLabel"
-  | "disableOutsideDays"
-  | "hiddenOutsideDays"
-  | "locale"
-  | "weekdayFormat"
-  | "yearFormat"
-  | "monthFormat"
-  | "dateFormat"
-  | "weekendDays"
-  | "holidays"
-  | "today"
-  | "__selectType"
-  | "enableRange"
-> &
-  Pick<
-    UseCalendarProps,
-    | "minDate"
-    | "maxDate"
-    | "excludeDate"
-    | "typeRef"
-    | "prevRef"
-    | "nextRef"
-    | "maxSelectValues"
-  > & {
-    value: MaybeValue
-    setType: (
-      type: "year" | "month" | "date",
-      year?: number,
-      month?: number,
-    ) => void
-    setValue: Dispatch<SetStateAction<MaybeValue>>
-    setMonth: Dispatch<SetStateAction<Date>>
-    setYear: Dispatch<SetStateAction<number>>
-    setInternalYear: Dispatch<SetStateAction<number>>
-    hoveredValue: Date
-    setHoveredValue: Dispatch<SetStateAction<Date | undefined>>
-    year: number
-    internalYear: number
-    minYear: number
-    maxYear: number
-    rangeYears: number[]
-    prevMonth: Date
-    nextMonth: Date
-    styles: Record<string, CSSUIObject>
-    yearRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
-    monthRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
-    dayRefs: MutableRefObject<Map<string, RefObject<HTMLButtonElement>>>
-  }
+export interface CalendarContext
+  extends Pick<
+      Required<UseCalendarProps>,
+      | "type"
+      | "month"
+      | "firstDayOfWeek"
+      | "amountOfMonths"
+      | "paginateBy"
+      | "withWeekdays"
+      | "withHeader"
+      | "withControls"
+      | "withLabel"
+      | "disableOutsideDays"
+      | "hiddenOutsideDays"
+      | "locale"
+      | "weekdayFormat"
+      | "yearFormat"
+      | "monthFormat"
+      | "dateFormat"
+      | "weekendDays"
+      | "holidays"
+      | "today"
+      | "__selectType"
+      | "enableRange"
+    >,
+    Pick<
+      UseCalendarProps,
+      | "minDate"
+      | "maxDate"
+      | "excludeDate"
+      | "typeRef"
+      | "prevRef"
+      | "nextRef"
+      | "maxSelectValues"
+      | "minSelectValues"
+    > {
+  value: MaybeValue
+  setType: (
+    type: "year" | "month" | "date",
+    year?: number,
+    month?: number,
+  ) => void
+  setValue: Dispatch<SetStateAction<MaybeValue>>
+  setMonth: Dispatch<SetStateAction<Date>>
+  setYear: Dispatch<SetStateAction<number>>
+  setInternalYear: Dispatch<SetStateAction<number>>
+  hoveredValue: Date
+  setHoveredValue: Dispatch<SetStateAction<Date | undefined>>
+  year: number
+  internalYear: number
+  minYear: number
+  maxYear: number
+  rangeYears: number[]
+  prevMonth: Date
+  nextMonth: Date
+  styles: { [key: string]: CSSUIObject }
+  yearRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
+  monthRefs: MutableRefObject<Map<number, RefObject<HTMLButtonElement>>>
+  dayRefs: MutableRefObject<Map<string, RefObject<HTMLButtonElement>>>
+}
 
 export const [CalendarProvider, useCalendarContext] =
   createContext<CalendarContext>({
@@ -88,7 +90,7 @@ export const [CalendarProvider, useCalendarContext] =
     name: "CalendarContext",
   })
 
-export type UseCalendarProps<Y extends MaybeValue = Date> = {
+export interface UseCalendarProps<Y extends MaybeValue = Date> {
   /**
    * The type of the calendar.
    */
@@ -268,6 +270,10 @@ export type UseCalendarProps<Y extends MaybeValue = Date> = {
    */
   maxSelectValues?: number
   /**
+   * The minimum selectable value.
+   */
+  minSelectValues?: number
+  /**
    * If `true`, enables date multiple selection.
    *
    * @default false
@@ -322,6 +328,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
   withControls = true,
   withLabel = true,
   maxSelectValues,
+  minSelectValues,
   enableMultiple = false,
   enableRange = false,
   __selectType = "date",
@@ -494,7 +501,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     setValue(valueProp as Y)
   }, [valueProp])
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...rest,
       ...props,
@@ -549,6 +556,7 @@ export const useCalendar = <Y extends MaybeValue = Date>({
     monthRefs,
     dayRefs,
     maxSelectValues,
+    minSelectValues,
     __selectType,
     enableRange,
   }

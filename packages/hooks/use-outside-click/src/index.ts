@@ -2,7 +2,7 @@ import { getOwnerDocument, useCallbackRef } from "@yamada-ui/utils"
 import type { RefObject } from "react"
 import { useEffect, useRef } from "react"
 
-export type UseOutsideClickProps = {
+export interface UseOutsideClickProps {
   enabled?: boolean
   ref: React.RefObject<HTMLElement>
   handler?: (ev: Event) => void

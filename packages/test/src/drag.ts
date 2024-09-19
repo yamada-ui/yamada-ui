@@ -4,7 +4,7 @@ import { sleep } from "./utils"
 
 const DEFAULT_COUNT = 11
 
-export type PointerCoords = {
+export interface PointerCoords {
   x?: number
   y?: number
   clientX?: number
@@ -17,7 +17,7 @@ export type PointerCoords = {
   screenY?: number
 }
 
-export type PointerInput = {
+export interface PointerInput {
   target?: HTMLElement
   keys?: string
   coords?: PointerCoords
@@ -25,7 +25,7 @@ export type PointerInput = {
   offset?: number
 }
 
-export type DragOptions = {
+export interface DragOptions {
   target?: HTMLElement
   count?: number
   interval?: number

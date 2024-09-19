@@ -453,7 +453,7 @@ export const useMonth = () => {
         "data-holiday": dataAttr(isHoliday),
         "data-weekend": dataAttr(isWeekend),
         "data-today": dataAttr(isToday),
-        "data-value": value ?? "",
+        "data-value": value.getDate() ?? "",
         "data-disabled": dataAttr(isTrulyDisabled),
         "aria-selected": ariaAttr(isTrulySelected),
         "aria-disabled": ariaAttr(isTrulyDisabled),

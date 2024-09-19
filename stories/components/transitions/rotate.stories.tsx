@@ -52,10 +52,10 @@ export const withRotate: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<RotateIdent>("to")
+  const [currentIdent, onChange] = useState<RotateIdent>("to")
 
   const onChangeRotateAnimation = () => {
-    console.log(`current element is ${currentElement}`)
+    console.log(`current ident is ${currentIdent}`)
     onChange((prev) => (prev === "from" ? "to" : "from"))
   }
 
@@ -67,7 +67,7 @@ export const customControl: Story = () => {
       gap="4xl"
     >
       <Rotate
-        initialElement={currentElement}
+        value={currentIdent}
         onChange={onChangeRotateAnimation}
         from={<Sun fontSize="50px" />}
         to={<Moon fontSize="50px" />}

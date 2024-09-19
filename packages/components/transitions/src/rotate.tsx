@@ -12,7 +12,8 @@ export type RotateIdent = "from" | "to"
 interface RotateOptions {
   from: ReactElement
   to: ReactElement
-  initialElement?: RotateIdent
+  value?: RotateIdent
+  defaultValue?: RotateIdent
   onChange?: () => void
   rotate?: number
   duration?: number
@@ -31,7 +32,8 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const {
     from,
     to,
-    initialElement = "from",
+    value: valueProp,
+    defaultValue = "from",
     onChange: onChangeProp,
     duration = 0.3,
     rotate = 45,
@@ -39,31 +41,32 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [currentElement, setCurrentElement] = useControllableState<RotateIdent>(
-    {
-      defaultValue: initialElement,
-      onChange: onChangeProp,
-    },
-  )
+  const animate = useMotionAnimation()
 
-  const controls = useMotionAnimation()
+  const [value, setValue] = useControllableState<RotateIdent>({
+    value: valueProp,
+    defaultValue,
+    onChange: onChangeProp,
+  })
+
+  const isFrom = value === "from"
 
   const onClick = async () => {
-    await controls.start({
+    await animate.start({
       opacity: 0,
       rotate: `${rotate}deg`,
     })
-    setCurrentElement((prev) => (prev === "from" ? "to" : "from"))
-    await controls.start({ opacity: 1, rotate: "0deg" })
+    setValue((prev) => (prev === "from" ? "to" : "from"))
+    await animate.start({ opacity: 1, rotate: "0deg" })
   }
 
   return (
     <motion.div
       ref={ref}
       custom={rotate}
-      className={cx(`ui-rotate__${currentElement}`, className)}
+      className={cx(`ui-rotate__${value}`, className)}
       onClick={onClick}
-      animate={controls}
+      animate={animate}
       initial={{ opacity: 1, rotate: "0deg" }}
       transition={{
         duration,
@@ -71,7 +74,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       __css={style}
       {...rest}
     >
-      {currentElement === "from" ? from : to}
+      {isFrom ? from : to}
     </motion.div>
   )
 })

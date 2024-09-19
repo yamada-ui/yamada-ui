@@ -51,7 +51,7 @@ export type FlipIdent = "from" | "to"
 
 export type FlipOrientation = "horizontal" | "vertical"
 
-type FlipOptions = {
+interface FlipOptions {
   from: ReactElement
   to: ReactElement
   initialElement?: FlipIdent

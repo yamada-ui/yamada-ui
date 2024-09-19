@@ -9,7 +9,7 @@ import type { ReactElement } from "react"
 
 export type RotateIdent = "from" | "to"
 
-type RotateOptions = {
+interface RotateOptions {
   from: ReactElement
   to: ReactElement
   initialElement?: RotateIdent

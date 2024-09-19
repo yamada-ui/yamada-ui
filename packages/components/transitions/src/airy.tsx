@@ -9,7 +9,7 @@ import { type ReactElement } from "react"
 
 export type AiryIdent = "from" | "to"
 
-type AiryOptions = {
+interface AiryOptions {
   from: ReactElement
   to: ReactElement
   initialElement?: AiryIdent

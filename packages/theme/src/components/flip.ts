@@ -12,6 +12,8 @@ export const Flip: ComponentMultiStyle<"Flip"> = {
       top: 0,
       backfaceVisibility: "hidden",
     },
+    from: {},
+    to: {},
   },
 
   variants: {},

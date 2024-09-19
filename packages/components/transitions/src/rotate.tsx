@@ -22,7 +22,7 @@ export type RotateProps = Merge<MotionProps, RotateOptions> &
   ThemeProps<"Rotate">
 
 /**
- * `Rotate` is is an animation component that alternately rotates two elements as they switch.
+ * `Rotate` is an animation component that alternately rotates two elements as they switch.
  *
  * @see Docs https://yamada-ui.com/components/transitions/rotate
  */

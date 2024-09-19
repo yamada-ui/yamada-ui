@@ -64,7 +64,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     <motion.div
       ref={ref}
       custom={rotate}
-      className={cx(`ui-rotate__${value}`, className)}
+      className={cx("ui-rotate", `ui-rotate--${value}`, className)}
       onClick={onClick}
       animate={animate}
       initial={{ opacity: 1, rotate: "0deg" }}

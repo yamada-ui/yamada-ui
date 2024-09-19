@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Apple, Cherry } from "@yamada-ui/lucide"
-import type { FlipAnimationElement } from "@yamada-ui/react"
+import type { FlipIdent } from "@yamada-ui/react"
 import { Flip, Avatar, Card, Center, Text } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -119,7 +119,7 @@ export const withTransition: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<FlipAnimationElement>("from")
+  const [currentElement, onChange] = useState<FlipIdent>("from")
 
   const onChangeFlipAnimation = () => {
     console.log(`current element is ${currentElement}`)

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Menu, X } from "@yamada-ui/lucide"
-import type { AiryAnimationElement } from "@yamada-ui/react"
+import type { AiryIdent } from "@yamada-ui/react"
 import { Airy, Text, Center } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -61,7 +61,7 @@ export const withDuration: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<AiryAnimationElement>("to")
+  const [currentElement, onChange] = useState<AiryIdent>("to")
 
   const onChangeAiryAnimation = () => {
     console.log(`current element is ${currentElement}`)

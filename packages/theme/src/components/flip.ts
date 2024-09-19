@@ -7,7 +7,7 @@ export const Flip: ComponentMultiStyle<"Flip"> = {
       userSelect: "none",
       cursor: "pointer",
     },
-    flipElement: {
+    flipIdent: {
       position: "absolute",
       top: 0,
       backfaceVisibility: "hidden",

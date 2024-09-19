@@ -150,7 +150,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         variants={variants[orientation].from}
         initial="initial"
         animate="animate"
-        __css={styles.flipElement}
+        __css={styles.flipIdent}
         transition={transition}
       >
         {from}
@@ -163,7 +163,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         variants={variants[orientation].to}
         initial="initial"
         animate="animate"
-        __css={styles.flipElement}
+        __css={styles.flipIdent}
         transition={transition}
       >
         {to}

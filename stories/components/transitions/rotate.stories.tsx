@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Apple, Cherry, Moon, Sun } from "@yamada-ui/lucide"
-import type { RotateAnimationElement } from "@yamada-ui/react"
+import type { RotateIdent } from "@yamada-ui/react"
 import { Rotate, Center } from "@yamada-ui/react"
 import { useState } from "react"
 
@@ -52,7 +52,7 @@ export const withRotate: Story = () => {
 }
 
 export const customControl: Story = () => {
-  const [currentElement, onChange] = useState<RotateAnimationElement>("to")
+  const [currentElement, onChange] = useState<RotateIdent>("to")
 
   const onChangeRotateAnimation = () => {
     console.log(`current element is ${currentElement}`)

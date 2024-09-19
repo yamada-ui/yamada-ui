@@ -7,12 +7,12 @@ import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 
-export type RotateAnimationElement = "from" | "to"
+export type RotateIdent = "from" | "to"
 
 type RotateOptions = {
   from: ReactElement
   to: ReactElement
-  initialElement?: RotateAnimationElement
+  initialElement?: RotateIdent
   onChange?: () => void
   rotate?: number
   duration?: number
@@ -39,11 +39,12 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [currentElement, setCurrentElement] =
-    useControllableState<RotateAnimationElement>({
+  const [currentElement, setCurrentElement] = useControllableState<RotateIdent>(
+    {
       defaultValue: initialElement,
       onChange: onChangeProp,
-    })
+    },
+  )
 
   const controls = useMotionAnimation()
 

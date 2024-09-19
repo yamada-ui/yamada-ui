@@ -12,7 +12,8 @@ export type AiryIdent = "from" | "to"
 interface AiryOptions {
   from: ReactElement
   to: ReactElement
-  initialElement?: AiryIdent
+  value?: AiryIdent
+  defaultValue?: AiryIdent
   onChange?: () => void
   duration?: number
 }
@@ -29,40 +30,44 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
   const {
     from,
     to,
-    initialElement = "from",
+    value: valueProp,
+    defaultValue = "from",
     onChange: onChangeProp,
     duration = 0.1,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const [currentElement, setCurrentElement] = useControllableState<AiryIdent>({
-    defaultValue: initialElement,
+  const animate = useMotionAnimation()
+
+  const [value, setValue] = useControllableState<AiryIdent>({
+    value: valueProp,
+    defaultValue,
     onChange: onChangeProp,
   })
 
-  const controls = useMotionAnimation()
+  const isFrom = value === "from"
 
   const onClick = async () => {
-    await controls.start({ opacity: 0 })
-    setCurrentElement((prev) => (prev === "from" ? "to" : "from"))
-    await controls.start({ opacity: 1 })
+    await animate.start({ opacity: 0 })
+    setValue((prev) => (prev === "from" ? "to" : "from"))
+    await animate.start({ opacity: 1 })
   }
 
   return (
     <motion.div
       ref={ref}
       onClick={onClick}
-      className={cx(`ui-airy__${currentElement}`, className)}
+      className={cx("ui-airy", `ui-airy--${value}`, className)}
       __css={style}
-      animate={controls}
+      animate={animate}
       initial={{ opacity: 1 }}
       transition={{
         duration,
       }}
       {...rest}
     >
-      {currentElement === "from" ? from : to}
+      {isFrom ? from : to}
     </motion.div>
   )
 })

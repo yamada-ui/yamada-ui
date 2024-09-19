@@ -71,7 +71,7 @@ export const customControl: Story = () => {
   return (
     <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
       <Airy
-        initialElement={currentElement}
+        value={currentElement}
         onChange={onChangeAiryAnimation}
         from={
           <Text w="xs" fontSize="5xl">

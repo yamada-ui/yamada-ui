@@ -75,3 +75,20 @@ export const customControl: Story = () => {
     </Center>
   )
 }
+
+export const withDisabled: Story = () => {
+  return (
+    <Center
+      w="calc(100vw - 16px * 2)"
+      h="calc(100vh - 16px * 2)"
+      display="flex"
+      gap="4xl"
+    >
+      <Rotate
+        isDisabled
+        from={<Sun fontSize="50px" />}
+        to={<Moon fontSize="50px" />}
+      />
+    </Center>
+  )
+}

@@ -28,6 +28,12 @@ interface RotateOptions {
   defaultValue?: RotateIdent
   rotate?: number
   duration?: MotionTransitionProps["duration"]
+  /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  isDisabled?: boolean
 }
 
 export type RotateProps = Merge<MotionProps<"button">, RotateOptions> &
@@ -48,6 +54,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     onChange: onChangeProp,
     duration = 0.3,
     rotate = 45,
+    isDisabled = false,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -75,6 +82,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     <motion.button
       type="button"
       ref={ref}
+      disabled={isDisabled}
       custom={rotate}
       className={cx("ui-rotate", `ui-rotate--${value}`, className)}
       onClick={onClick}

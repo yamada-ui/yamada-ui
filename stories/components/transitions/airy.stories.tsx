@@ -87,3 +87,23 @@ export const customControl: Story = () => {
     </Center>
   )
 }
+
+export const withDisabled: Story = () => {
+  return (
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+      <Airy
+        isDisabled
+        from={
+          <Text w="fit-content" fontSize="5xl">
+            ON
+          </Text>
+        }
+        to={
+          <Text w="fit-content" fontSize="5xl">
+            OFF
+          </Text>
+        }
+      />
+    </Center>
+  )
+}

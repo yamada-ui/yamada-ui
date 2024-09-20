@@ -81,6 +81,12 @@ interface FlipOptions {
   transition?: MotionTransition
   //追加してもアニメーション効かないから、追加していなかったけど、それでも追加するべきなのか確認とる
   duration?: MotionTransitionProps["duration"]
+  /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  isDisabled?: boolean
 }
 
 export type FlipProps = Merge<MotionProps<"button">, FlipOptions> &
@@ -111,6 +117,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       stiffness: 80,
       damping: 10,
     },
+    isDisabled = false,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -156,7 +163,9 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
 
   return (
     <motion.button
+      type="button"
       ref={ref}
+      disabled={isDisabled}
       className={cx("ui-flip", `ui-flip__${orientation}`, className)}
       __css={{
         w: dimensions.width ? `${dimensions.width}px` : "auto",

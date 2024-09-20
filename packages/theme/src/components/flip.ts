@@ -5,6 +5,9 @@ export const Flip: ComponentMultiStyle<"Flip"> = {
     container: {
       position: "relative",
       userSelect: "none",
+      ":disabled": {
+        cursor: "not-allowed",
+      },
     },
     flipIdent: {
       position: "absolute",

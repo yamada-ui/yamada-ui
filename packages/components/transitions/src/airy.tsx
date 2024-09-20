@@ -28,6 +28,12 @@ interface AiryOptions {
   defaultValue?: AiryIdent
   duration?: MotionTransitionProps["duration"]
   delay?: MotionTransitionProps["delay"] //TODO: fix type このタイプを使うとなると複雑になる。。。
+  /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  isDisabled?: boolean
 }
 
 export type AiryProps = Merge<MotionProps<"button">, AiryOptions> &
@@ -48,6 +54,7 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
     onChange: onChangeProp,
     duration = 0.1,
     delay: delayProp = 0,
+    isDisabled = false,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -74,6 +81,7 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
     <motion.button
       type="button"
       ref={ref}
+      disabled={isDisabled}
       onClick={onClick}
       className={cx("ui-airy", `ui-airy--${value}`, className)}
       __css={style}

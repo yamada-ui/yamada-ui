@@ -56,11 +56,22 @@ export type FlipIdent = "from" | "to"
 export type FlipOrientation = "horizontal" | "vertical"
 
 interface FlipOptions {
+  /**
+   * Passing React elements to "from" and "to" is required.
+   */
   from: ReactElement
   to: ReactElement
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
   value?: FlipIdent
-  defaultValue?: FlipIdent
   onChange?: () => void
+  /**
+   * You can set the initial state.
+   *
+   * @default 'from'
+   */
+  defaultValue?: FlipIdent
   /**
    * The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.
    *

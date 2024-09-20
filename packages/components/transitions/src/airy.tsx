@@ -10,11 +10,22 @@ import { type ReactElement } from "react"
 export type AiryIdent = "from" | "to"
 
 interface AiryOptions {
+  /**
+   * Passing React elements to "from" and "to" is required.
+   */
   from: ReactElement
   to: ReactElement
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
   value?: AiryIdent
-  defaultValue?: AiryIdent
   onChange?: () => void
+  /**
+   * You can set the initial state.
+   *
+   * @default 'from'
+   */
+  defaultValue?: AiryIdent
   duration?: MotionTransitionProps["duration"]
   delay?: MotionTransitionProps["delay"] //TODO: fix type このタイプを使うとなると複雑になる。。。
 }

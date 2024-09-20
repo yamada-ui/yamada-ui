@@ -10,11 +10,22 @@ import type { ReactElement } from "react"
 export type RotateIdent = "from" | "to"
 
 interface RotateOptions {
+  /**
+   * Passing React elements to "from" and "to" is required.
+   */
   from: ReactElement
   to: ReactElement
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
   value?: RotateIdent
-  defaultValue?: RotateIdent
   onChange?: () => void
+  /**
+   * You can set the initial state.
+   *
+   * @default 'from'
+   */
+  defaultValue?: RotateIdent
   rotate?: number
   duration?: MotionTransitionProps["duration"]
 }

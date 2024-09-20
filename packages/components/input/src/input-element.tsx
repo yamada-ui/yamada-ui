@@ -22,7 +22,7 @@ export interface InputElementProps extends HTMLUIProps, InputElementOptions {}
 
 const InputElement = forwardRef<InputElementProps, "div">(
   ({ className, isClick = false, placement = "left", ...rest }, ref) => {
-    const styles = useInputGroup()
+    const { styles, fieldHeight } = useInputGroup()
 
     const css: CSSUIObject = {
       position: "absolute",
@@ -32,11 +32,7 @@ const InputElement = forwardRef<InputElementProps, "div">(
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      w:
-        styles.field?.height ??
-        styles.field?.h ??
-        styles.field?.minHeight ??
-        styles.field?.minH,
+      w: fieldHeight,
       h: "100%",
       fontSize: styles.field?.fontSize,
       pointerEvents: isClick ? "auto" : "none",

@@ -464,7 +464,9 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
       onClose={onClose}
       withCloseButton={false}
       isFullHeight
-      w="auto"
+      closeOnDrag
+      withDragBar={false}
+      w="sm"
     >
       <DrawerHeader
         justifyContent="flex-end"

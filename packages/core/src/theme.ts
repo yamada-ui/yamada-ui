@@ -26,6 +26,7 @@ import type {
   ComponentMultiStyle,
   ComponentMultiVariants,
   ComponentStyle,
+  StyledTheme,
   ThemeConfig,
   ThemeValue,
 } from "./theme.types"
@@ -80,7 +81,15 @@ export type ThemeToken =
   | "transitions.property"
   | "transitions.easing"
 
-export function transformTheme(theme: Dict, config?: ThemeConfig): Dict {
+export type TransformTheme = Omit<
+  StyledTheme,
+  "themeScheme" | "changeThemeScheme"
+>
+
+export function transformTheme(
+  theme: Dict,
+  config?: ThemeConfig,
+): TransformTheme {
   theme = omitTheme(theme)
   const prefix = config?.var?.prefix
   const breakpoints = analyzeBreakpoints(theme.breakpoints, config?.breakpoint)
@@ -130,7 +139,7 @@ export function transformTheme(theme: Dict, config?: ThemeConfig): Dict {
     __breakpoints: breakpoints,
   })
 
-  return theme
+  return theme as TransformTheme
 }
 
 function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {

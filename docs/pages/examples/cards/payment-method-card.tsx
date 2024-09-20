@@ -20,9 +20,9 @@ import {
   AutocompleteOption,
 } from "@yamada-ui/react"
 import type { UseRadioGroupReturn } from "@yamada-ui/react"
-import { Apple, Paypal } from "components/media-and-icons"
 import { memo } from "react"
 import type { FC, ReactNode } from "react"
+import { Apple, Paypal } from "components/media-and-icons"
 
 export const PaymentMethodCard = memo(() => {
   const CustomRadio: FC<

@@ -20,6 +20,6 @@
     "allowSyntheticDefaultImports": true,
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.mjs", "next.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "eslint.config.ts", "next.config.js"],
   "exclude": ["node_modules"]
 }

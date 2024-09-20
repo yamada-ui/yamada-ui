@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { colorSchemes } from "../../components"
 import {
   Grid,
   Stat,
@@ -7,7 +8,6 @@ import {
   StatLabel,
   StatNumber,
 } from "@yamada-ui/react"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Stat>
 

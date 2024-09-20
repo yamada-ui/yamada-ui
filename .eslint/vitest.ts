@@ -1,21 +1,15 @@
 import { fixupPluginRules } from "@eslint/compat"
 import pluginVitest from "@vitest/eslint-plugin"
+import type { Linter } from "eslint"
+import { sharedTestFiles } from "./shared"
 
-/** @type {Pick<ESLintConfig, "name" | "files" | "plugins" | "rules">} */
-const vitestConfig = {
-  name: "@yamada-ui/vitest/base",
-  files: ["**/*.test.ts", "**/*.test.tsx"],
-  plugins: {
-    vitest: fixupPluginRules(pluginVitest),
-  },
+export const vitestConfig: Linter.Config = {
+  name: "eslint/vitest",
+  files: sharedTestFiles,
+  plugins: { vitest: fixupPluginRules(pluginVitest) },
   rules: {
     ...pluginVitest.configs.recommended.rules,
-    "vitest/consistent-test-it": [
-      "error",
-      {
-        fn: "test",
-      },
-    ],
+    "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/expect-expect": "off",
     "vitest/no-alias-methods": "error",
     "vitest/no-conditional-expect": "error",
@@ -45,13 +39,6 @@ const vitestConfig = {
     "vitest/require-hook": "error",
     "vitest/require-to-throw-message": "error",
     "vitest/require-top-level-describe": "error",
-    "vitest/valid-expect": [
-      "error",
-      {
-        alwaysAwait: true,
-      },
-    ],
+    "vitest/valid-expect": ["error", { alwaysAwait: true }],
   },
 }
-
-export { vitestConfig }

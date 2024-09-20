@@ -1,6 +1,6 @@
 import { createContext } from "@yamada-ui/react"
-import type { Dispatch, SetStateAction } from "react"
 import type { Insights, InsightPeriod } from "insights"
+import type { Dispatch, SetStateAction } from "react"
 
 export interface InsightsContext {
   currentInsights?: Insights

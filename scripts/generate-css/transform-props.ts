@@ -1,6 +1,6 @@
-import type { PseudoSelector, Transforms } from "@yamada-ui/react"
 import { tokens } from "./tokens"
 import type { Properties } from "."
+import type { PseudoSelector, Transforms } from "@yamada-ui/react"
 
 type TransformProperties = Properties | PseudoSelector
 

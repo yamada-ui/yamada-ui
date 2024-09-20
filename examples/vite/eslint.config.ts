@@ -1,25 +1,21 @@
 import { fixupPluginRules } from "@eslint/compat"
 import eslint from "@eslint/js"
-import {
-  config as tseslintConfig,
-  configs as tseslintConfigs,
-  parser as tseslintParser,
-  plugin as tseslintPlugin,
-} from "typescript-eslint"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import globals from "globals"
 import pluginReact from "eslint-plugin-react"
 import pluginReactHooks from "eslint-plugin-react-hooks"
+import tseslint from "typescript-eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 
-export default tseslintConfig(
+const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   {
     ignores: ["**/dist/**", "**/node_modules/**"],
   },
   {
     files: ["src/**/*.ts", "src/**/*.tsx"],
     languageOptions: {
-      parser: tseslintParser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: {
@@ -40,7 +36,7 @@ export default tseslintConfig(
   {
     files: ["eslint.config.mjs", "vite.config.ts"],
     languageOptions: {
-      parser: tseslintParser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
@@ -56,11 +52,11 @@ export default tseslintConfig(
     },
   },
   eslint.configs.recommended,
-  ...tseslintConfigs.recommended,
-  ...tseslintConfigs.stylistic,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.stylistic,
   {
     plugins: {
-      "@typescript-eslint": tseslintPlugin,
+      "@typescript-eslint": tseslint.plugin,
     },
     rules: {
       "@typescript-eslint/no-empty-object-type": [
@@ -85,3 +81,5 @@ export default tseslintConfig(
     },
   },
 )
+
+export default config

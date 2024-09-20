@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import type { ModalProps } from "@yamada-ui/react"
 import {
   Button,
@@ -15,7 +16,6 @@ import {
   Image,
   Heading,
 } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Modal>
 

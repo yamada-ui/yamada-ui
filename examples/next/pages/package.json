@@ -6,7 +6,7 @@
     "dev": "next -p 4444",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0 --cache"
+    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
@@ -42,6 +42,7 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.9.0",
+    "jiti": "^1.21.6",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.3.0"

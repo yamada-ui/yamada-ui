@@ -1,27 +1,22 @@
 import { fixupPluginRules } from '@eslint/compat'
 import eslint from '@eslint/js'
 import pluginNext from '@next/eslint-plugin-next'
-import pluginImport from 'eslint-plugin-import'
+import { flatConfigs } from 'eslint-plugin-import'
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginReact from 'eslint-plugin-react'
-import pluginReactHooks from 'eslint-plugin-react-hooks'
 import globals from 'globals'
-import {
-  config as tseslintConfig,
-  configs as tseslintConfigs,
-  parser as tseslintParser,
-  plugin as tseslintPlugin,
-} from 'typescript-eslint'
+import tseslint from 'typescript-eslint'
+import pluginReactHooks from 'eslint-plugin-react-hooks'
 
-export default tseslintConfig(
+export default tseslint.config(
   {
     ignores: ['**/dist/**', '**/node_modules/**', '**/.next/**'],
   },
   eslint.configs.recommended,
-  ...tseslintConfigs.recommended,
+  ...tseslint.configs.recommended,
   {
     languageOptions: {
-      parser: tseslintParser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -38,7 +33,7 @@ export default tseslintConfig(
   },
   {
     plugins: {
-      '@typescript-eslint': tseslintPlugin,
+      '@typescript-eslint': tseslint.plugin,
     },
     rules: {
       '@typescript-eslint/no-empty-object-type': [
@@ -51,7 +46,7 @@ export default tseslintConfig(
   },
   {
     plugins: {
-      import: fixupPluginRules(pluginImport),
+      import: fixupPluginRules(flatConfigs.recommended.plugins.import),
     },
     rules: {
       'import/no-anonymous-default-export': 'warn',

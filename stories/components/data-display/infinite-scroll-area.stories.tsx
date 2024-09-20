@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useRef, useState } from "react"
 import {
   Button,
   Card,
@@ -10,7 +11,6 @@ import {
   Loading,
   Text,
 } from "@yamada-ui/react"
-import { useRef, useState } from "react"
 
 type Story = StoryFn<typeof InfiniteScrollArea>
 

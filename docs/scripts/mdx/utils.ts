@@ -1,6 +1,6 @@
 import path from "path"
-import { CONSTANT } from "constant"
 import GithubSlugger from "github-slugger"
+import { CONSTANT } from "constant"
 import type { DocumentContent, DocumentLevel, Document } from "mdx"
 import { otherLocales } from "utils/i18n"
 

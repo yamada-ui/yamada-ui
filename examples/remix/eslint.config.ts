@@ -1,24 +1,19 @@
 import { fixupPluginRules } from "@eslint/compat"
 import eslint from "@eslint/js"
-import pluginImport from "eslint-plugin-import"
+import { flatConfigs } from "eslint-plugin-import"
 import pluginJsxA11y from "eslint-plugin-jsx-a11y"
 import pluginReact from "eslint-plugin-react"
 import pluginReactHooks from "eslint-plugin-react-hooks"
 import globals from "globals"
-import {
-  config as tseslintConfig,
-  configs as tseslintConfigs,
-  parser as tseslintParser,
-  plugin as tseslintPlugin,
-} from "typescript-eslint"
+import tseslint from "typescript-eslint"
 
-export default tseslintConfig(
+export default tseslint.config(
   {
     ignores: ["**/dist/**", "**/node_modules/**"],
   },
   {
     languageOptions: {
-      parser: tseslintParser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
@@ -48,11 +43,11 @@ export default tseslintConfig(
       "**/*.d.ts",
     ],
     plugins: {
-      import: fixupPluginRules(pluginImport),
+      import: fixupPluginRules(flatConfigs.recommended.plugins.import),
     },
     rules: {
-      ...pluginImport.configs.recommended.rules,
-      ...pluginImport.configs.typescript.rules,
+      ...flatConfigs.recommended.rules,
+      ...flatConfigs.typescript.rules,
       "import/order": [
         "error",
         {
@@ -61,6 +56,7 @@ export default tseslintConfig(
           },
         },
       ],
+      "import/no-named-as-default-member": "off",
     },
     settings: {
       "import/internal-regex": "^~/",
@@ -104,11 +100,11 @@ export default tseslintConfig(
     },
   },
   eslint.configs.recommended,
-  ...tseslintConfigs.recommended,
-  ...tseslintConfigs.stylistic,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.stylistic,
   {
     plugins: {
-      "@typescript-eslint": tseslintPlugin,
+      "@typescript-eslint": tseslint.plugin,
     },
     rules: {
       "@typescript-eslint/no-empty-object-type": [

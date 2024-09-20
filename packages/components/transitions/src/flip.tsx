@@ -83,13 +83,14 @@ interface FlipOptions {
   duration?: MotionTransitionProps["duration"]
 }
 
-export type FlipProps = Merge<MotionProps, FlipOptions> & ThemeProps<"Flip">
+export type FlipProps = Merge<MotionProps<"button">, FlipOptions> &
+  ThemeProps<"Flip">
 /**
  * `Flip` is an animation component that alternates between flipping two elements.
  *
  * @see Docs https://yamada-ui.com/components/transitions/flip
  */
-export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
+export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const [dimensions, setDimensions] = useState<{
     width?: number
     height?: number
@@ -154,7 +155,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
   }, [fromRef, toRef])
 
   return (
-    <motion.div
+    <motion.button
       ref={ref}
       className={cx("ui-flip", `ui-flip__${orientation}`, className)}
       __css={{
@@ -165,7 +166,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
       onClick={switchVisibility}
       {...rest}
     >
-      <motion.div
+      <motion.span
         ref={fromRef}
         custom={isVisible}
         className={cx("ui-flip", `ui-flip__${orientation}-from`, className)}
@@ -182,9 +183,9 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         }}
       >
         {from}
-      </motion.div>
+      </motion.span>
 
-      <motion.div
+      <motion.span
         ref={toRef}
         custom={isVisible}
         className={cx("ui-flip", `ui-flip__${orientation}-to`, className)}
@@ -201,7 +202,7 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
         }}
       >
         {to}
-      </motion.div>
-    </motion.div>
+      </motion.span>
+    </motion.button>
   )
 })

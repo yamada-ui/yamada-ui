@@ -5,7 +5,7 @@ import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import { type ReactElement } from "react"
+import { useCallback, type ReactElement } from "react"
 
 export type AiryIdent = "from" | "to"
 
@@ -30,14 +30,15 @@ interface AiryOptions {
   delay?: MotionTransitionProps["delay"] //TODO: fix type このタイプを使うとなると複雑になる。。。
 }
 
-export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
+export type AiryProps = Merge<MotionProps<"button">, AiryOptions> &
+  ThemeProps<"Airy">
 
 /**
  * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked
  *
  * @see Docs https://yamada-ui.com/components/transitions/airy
  */
-export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
+export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Airy", props)
   const {
     from,
@@ -61,14 +62,17 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
 
   const isFrom = value === "from"
 
-  const onClick = async () => {
+  const onClick = useCallback(async () => {
     await animate.start({ opacity: 0 })
+
     setValue((prev) => (prev === "from" ? "to" : "from"))
+
     await animate.start({ opacity: 1 })
-  }
+  }, [animate, setValue])
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
       ref={ref}
       onClick={onClick}
       className={cx("ui-airy", `ui-airy--${value}`, className)}
@@ -88,6 +92,6 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
       {...rest}
     >
       {isFrom ? from : to}
-    </motion.div>
+    </motion.button>
   )
 })

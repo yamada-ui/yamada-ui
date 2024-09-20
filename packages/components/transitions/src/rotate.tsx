@@ -5,7 +5,7 @@ import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
-import type { ReactElement } from "react"
+import { useCallback, type ReactElement } from "react"
 
 export type RotateIdent = "from" | "to"
 
@@ -30,7 +30,7 @@ interface RotateOptions {
   duration?: MotionTransitionProps["duration"]
 }
 
-export type RotateProps = Merge<MotionProps, RotateOptions> &
+export type RotateProps = Merge<MotionProps<"button">, RotateOptions> &
   ThemeProps<"Rotate">
 
 /**
@@ -62,17 +62,18 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
 
   const isFrom = value === "from"
 
-  const onClick = async () => {
+  const onClick = useCallback(async () => {
     await animate.start({
       opacity: 0,
       rotate: `${rotate}deg`,
     })
     setValue((prev) => (prev === "from" ? "to" : "from"))
     await animate.start({ opacity: 1, rotate: "0deg" })
-  }
+  }, [animate, rotate, setValue])
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
       ref={ref}
       custom={rotate}
       className={cx("ui-rotate", `ui-rotate--${value}`, className)}
@@ -86,6 +87,6 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
       {...rest}
     >
       {isFrom ? from : to}
-    </motion.div>
+    </motion.button>
   )
 })

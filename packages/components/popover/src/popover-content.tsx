@@ -125,6 +125,7 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
           style: { visibility: isOpen ? "visible" : "hidden" },
         })}
         className="ui-popover"
+        outline="none"
         width={width}
         minWidth={minWidth}
         maxWidth={maxWidth}

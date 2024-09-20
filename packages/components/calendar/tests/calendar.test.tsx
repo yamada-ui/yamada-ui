@@ -162,10 +162,8 @@ describe("<Calendar />", () => {
         />,
       )
       const selectDate = new Date(new Date().setDate(7))
-      const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
-      const selectBtn = container.querySelector(
-        `button[data-value="${dateStr}"]`,
-      )
+      const value = new Date(selectDate.setHours(0, 0, 0, 0)).getDate()
+      const selectBtn = container.querySelector(`button[data-value="${value}"]`)
 
       fireEvent.click(selectBtn!)
 
@@ -229,11 +227,9 @@ describe("<Calendar />", () => {
         const { container } = render(
           <Calendar defaultValue={defaultSelectDate} />,
         )
-        const dateStr = new Date(
-          defaultSelectDate.setHours(0, 0, 0, 0),
-        ).toString()
+        const value = new Date(defaultSelectDate.setHours(0, 0, 0, 0)).getDate()
         const defaultValueBtn = container.querySelector(
-          `button[data-value="${dateStr}"]`,
+          `button[data-value="${value}"]`,
         )
         expect(defaultValueBtn).toHaveAttribute("data-selected")
       })
@@ -279,20 +275,16 @@ describe("<Calendar />", () => {
           />,
         )
         const minDateUnder = new Date(new Date(2024, 2).setDate(0))
-        const minDateUnderStr = new Date(
-          minDateUnder.setHours(0, 0, 0, 0),
-        ).toString()
+        const valueMin = new Date(minDateUnder.setHours(0, 0, 0, 0)).getDate()
         const minDateUnderBtn = container.querySelector(
-          `button[data-value="${minDateUnderStr}"]`,
+          `button[data-value="${valueMin}"]`,
         )
         expect(minDateUnderBtn).toHaveAttribute("data-disabled")
 
         const maxDateOver = new Date(new Date(2024, 2).setDate(19))
-        const maxDateOverStr = new Date(
-          maxDateOver.setHours(0, 0, 0, 0),
-        ).toString()
+        const valueMax = new Date(maxDateOver.setHours(0, 0, 0, 0)).getDate()
         const maxDateOverBtn = container.querySelector(
-          `button[data-value="${maxDateOverStr}"]`,
+          `button[data-value="${valueMax}"]`,
         )
         expect(maxDateOverBtn).toHaveAttribute("data-disabled")
       })
@@ -301,7 +293,7 @@ describe("<Calendar />", () => {
     describe("Highlight Today's Date", () => {
       test("should render with today", () => {
         const { container } = render(<Calendar today />)
-        const todayStr = new Date(new Date().setHours(0, 0, 0, 0)).toString()
+        const todayStr = new Date(new Date().setHours(0, 0, 0, 0)).getDate()
         const todayBtn = container.querySelector(
           `button[data-value="${todayStr}"]`,
         )
@@ -351,10 +343,10 @@ describe("<Calendar />", () => {
             holidays={holidays}
           />,
         )
-        holidays.slice(2, 5).forEach((holiday) => {
-          const holidayStr = new Date(holiday.setHours(0, 0, 0, 0)).toString()
+        holidays.slice(2, 5).forEach((_holiday) => {
+          const holiday = new Date(_holiday.setHours(0, 0, 0, 0)).getDate()
           const holidayBtn = container.querySelector(
-            `button[data-value="${holidayStr.toString()}"]`,
+            `button[data-value="${holiday}"]`,
           )
           expect(holidayBtn).toHaveAttribute("data-holiday")
         })
@@ -365,10 +357,10 @@ describe("<Calendar />", () => {
 
         fireEvent.click(prevBtn!)
 
-        holidays.slice(0, 2).forEach((holiday) => {
-          const holidayStr = new Date(holiday.setHours(0, 0, 0, 0)).toString()
+        holidays.slice(0, 2).forEach((_holiday) => {
+          const holiday = new Date(_holiday.setHours(0, 0, 0, 0)).getDate()
           const holidayBtn = container.querySelector(
-            `button[data-value="${holidayStr.toString()}"]`,
+            `button[data-value="${holiday}"]`,
           )
           expect(holidayBtn).toHaveAttribute("data-holiday")
         })
@@ -381,10 +373,10 @@ describe("<Calendar />", () => {
 
         fireEvent.click(nextBtn!)
 
-        holidays.slice(5, 6).forEach((holiday) => {
-          const holidayStr = new Date(holiday.setHours(0, 0, 0, 0)).toString()
+        holidays.slice(5, 6).forEach((_holiday) => {
+          const holiday = new Date(_holiday.setHours(0, 0, 0, 0)).getDate()
           const holidayBtn = container.querySelector(
-            `button[data-value="${holidayStr.toString()}"]`,
+            `button[data-value="${holiday}"]`,
           )
           expect(holidayBtn).toHaveAttribute("data-holiday")
         })

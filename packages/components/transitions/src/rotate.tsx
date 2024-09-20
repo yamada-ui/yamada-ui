@@ -4,7 +4,7 @@ import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
-import { cx } from "@yamada-ui/utils"
+import { cx, dataAttr } from "@yamada-ui/utils"
 import { useCallback, type ReactElement } from "react"
 
 export type RotateIdent = "from" | "to"
@@ -34,6 +34,12 @@ interface RotateOptions {
    * @default false
    */
   isDisabled?: boolean
+  /**
+   * If `true`, the component is readonly.
+   *
+   * @default false
+   */
+  isReadOnly?: boolean
 }
 
 export type RotateProps = Merge<MotionProps<"button">, RotateOptions> &
@@ -55,6 +61,7 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
     duration = 0.3,
     rotate = 45,
     isDisabled = false,
+    isReadOnly = false,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -70,19 +77,23 @@ export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
   const isFrom = value === "from"
 
   const onClick = useCallback(async () => {
+    if (isReadOnly) return
+
     await animate.start({
       opacity: 0,
       rotate: `${rotate}deg`,
     })
     setValue((prev) => (prev === "from" ? "to" : "from"))
     await animate.start({ opacity: 1, rotate: "0deg" })
-  }, [animate, rotate, setValue])
+  }, [animate, rotate, setValue, isReadOnly])
 
   return (
     <motion.button
       type="button"
       ref={ref}
       disabled={isDisabled}
+      data-disabled={dataAttr(isDisabled)}
+      data-readonly={dataAttr(isReadOnly)}
       custom={rotate}
       className={cx("ui-rotate", `ui-rotate--${value}`, className)}
       onClick={onClick}

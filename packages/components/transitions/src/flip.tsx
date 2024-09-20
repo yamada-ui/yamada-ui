@@ -8,7 +8,7 @@ import type {
 import { motionForwardRef, motion } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
-import { cx, useSafeLayoutEffect } from "@yamada-ui/utils"
+import { cx, dataAttr, useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useRef, useState, type ReactElement } from "react"
 
 type Rotate = {
@@ -87,6 +87,12 @@ interface FlipOptions {
    * @default false
    */
   isDisabled?: boolean
+  /**
+   * If `true`, the component is readonly.
+   *
+   * @default false
+   */
+  isReadOnly?: boolean
 }
 
 export type FlipProps = Merge<MotionProps<"button">, FlipOptions> &
@@ -118,6 +124,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       damping: 10,
     },
     isDisabled = false,
+    isReadOnly = false,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -166,6 +173,8 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       type="button"
       ref={ref}
       disabled={isDisabled}
+      data-disabled={dataAttr(isDisabled)}
+      data-readonly={dataAttr(isReadOnly)}
       className={cx("ui-flip", `ui-flip__${orientation}`, className)}
       __css={{
         w: dimensions.width ? `${dimensions.width}px` : "auto",

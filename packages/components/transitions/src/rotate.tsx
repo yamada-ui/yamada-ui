@@ -1,6 +1,6 @@
 import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps } from "@yamada-ui/motion"
+import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
@@ -16,7 +16,7 @@ interface RotateOptions {
   defaultValue?: RotateIdent
   onChange?: () => void
   rotate?: number
-  duration?: number
+  duration?: MotionTransitionProps["duration"]
 }
 
 export type RotateProps = Merge<MotionProps, RotateOptions> &

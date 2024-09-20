@@ -16,18 +16,16 @@ export interface InputAddonProps extends HTMLUIProps, InputAddonOptions {}
 
 const InputAddon = forwardRef<InputAddonProps, "div">(
   ({ className, placement = "left", ...rest }, ref) => {
-    const styles = useInputGroup()
+    const { styles } = useInputGroup()
 
     const placementStyles = {
       left: {
         me: "-1px",
-        roundedRight: 0,
-        borderEndColor: "transparent",
+        roundedRight: "0px !important",
       },
       right: {
         ms: "-1px",
-        roundedLeft: 0,
-        borderStartColor: "transparent",
+        roundedLeft: "0px !important",
       },
     }
 

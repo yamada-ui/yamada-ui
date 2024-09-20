@@ -198,7 +198,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
         }}
         transition={{
           ...transition,
-          duration: 2,
+          duration: 2, // 追加しても変化ない
         }}
       >
         {from}
@@ -217,7 +217,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
         }}
         transition={{
           ...transition,
-          duration: 1,
+          duration: 1, // 追加しても変化ない
         }}
       >
         {to}

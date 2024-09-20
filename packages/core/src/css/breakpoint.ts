@@ -1,6 +1,10 @@
 import type { Dict } from "@yamada-ui/utils"
 import { getPx } from "@yamada-ui/utils"
-import type { BreakpointDirection, BreakpointOptions } from "../theme.types"
+import type {
+  BreakpointDirection,
+  BreakpointOptions,
+  ThemeBreakpointTokens,
+} from "../theme.types"
 
 interface BreakpointQuery {
   breakpoint: string
@@ -96,7 +100,7 @@ function transformBreakpoints(
 }
 
 export function analyzeBreakpoints(
-  breakpoints: Dict,
+  breakpoints: ThemeBreakpointTokens | undefined,
   options: BreakpointOptions = {},
 ): Breakpoints | undefined {
   if (!breakpoints) return

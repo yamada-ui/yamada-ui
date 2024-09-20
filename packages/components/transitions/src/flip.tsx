@@ -173,6 +173,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       type="button"
       ref={ref}
       disabled={isDisabled}
+      data-value={value}
       data-disabled={dataAttr(isDisabled)}
       data-readonly={dataAttr(isReadOnly)}
       className={cx("ui-flip", `ui-flip__${orientation}`, className)}

@@ -91,6 +91,7 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
       type="button"
       ref={ref}
       disabled={isDisabled}
+      data-value={value}
       data-disabled={dataAttr(isDisabled)}
       data-readonly={dataAttr(isReadOnly)}
       onClick={onClick}

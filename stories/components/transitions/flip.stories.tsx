@@ -155,3 +155,16 @@ export const withDisabled: Story = () => {
     </Center>
   )
 }
+
+export const withReadOnly: Story = () => {
+  return (
+    <Center
+      w="calc(100vw - 16px * 2)"
+      h="calc(100vh - 16px * 2)"
+      display="flex"
+      gap="4xl"
+    >
+      <Flip isReadOnly from={<BackOfCard />} to={<FrontOfCard />} />
+    </Center>
+  )
+}

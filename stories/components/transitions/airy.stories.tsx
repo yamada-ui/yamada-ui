@@ -107,3 +107,23 @@ export const withDisabled: Story = () => {
     </Center>
   )
 }
+
+export const withReadOnly: Story = () => {
+  return (
+    <Center w="calc(100vw - 16px * 2)" h="calc(100vh - 16px * 2)">
+      <Airy
+        isReadOnly
+        from={
+          <Text w="fit-content" fontSize="5xl">
+            ON
+          </Text>
+        }
+        to={
+          <Text w="fit-content" fontSize="5xl">
+            OFF
+          </Text>
+        }
+      />
+    </Center>
+  )
+}

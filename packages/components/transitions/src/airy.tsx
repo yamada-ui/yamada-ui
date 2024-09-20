@@ -16,6 +16,7 @@ interface AiryOptions {
   defaultValue?: AiryIdent
   onChange?: () => void
   duration?: MotionTransitionProps["duration"]
+  delay?: MotionTransitionProps["delay"] //TODO: fix type このタイプを使うとなると複雑になる。。。
 }
 
 export type AiryProps = Merge<MotionProps, AiryOptions> & ThemeProps<"Airy">
@@ -34,6 +35,7 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
     defaultValue = "from",
     onChange: onChangeProp,
     duration = 0.1,
+    delay: delayProp = 0,
     className,
     ...rest
   } = omitThemeProps(mergedProps)
@@ -64,6 +66,13 @@ export const Airy = motionForwardRef<AiryProps, "div">((props, ref) => {
       initial={{ opacity: 1 }}
       transition={{
         duration,
+        delay:
+          // delay={{ enter: 1, exit: 1}}で渡した場合、どう処理するかわからん
+          typeof delayProp === "number"
+            ? delayProp
+            : "enter" in delayProp
+              ? delayProp.enter
+              : 0,
       }}
       {...rest}
     >

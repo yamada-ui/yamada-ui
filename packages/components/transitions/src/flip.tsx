@@ -1,6 +1,10 @@
 import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
+import type {
+  MotionProps,
+  MotionTransition,
+  MotionTransitionProps,
+} from "@yamada-ui/motion"
 import { motionForwardRef, motion } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
@@ -64,6 +68,8 @@ interface FlipOptions {
    */
   orientation?: FlipOrientation
   transition?: MotionTransition
+  //追加してもアニメーション効かないから、追加していなかったけど、それでも追加するべきなのか確認とる
+  duration?: MotionTransitionProps["duration"]
 }
 
 export type FlipProps = Merge<MotionProps, FlipOptions> & ThemeProps<"Flip">
@@ -159,7 +165,10 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
           ...styles.flipIdent,
           ...styles.from,
         }}
-        transition={transition}
+        transition={{
+          ...transition,
+          duration: 2,
+        }}
       >
         {from}
       </motion.div>
@@ -175,7 +184,10 @@ export const Flip = motionForwardRef<FlipProps, "div">((props, ref) => {
           ...styles.flipIdent,
           ...styles.to,
         }}
-        transition={transition}
+        transition={{
+          ...transition,
+          duration: 1,
+        }}
       >
         {to}
       </motion.div>

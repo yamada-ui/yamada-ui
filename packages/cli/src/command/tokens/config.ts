@@ -1,15 +1,15 @@
 export interface Config {
   key: string
+  replaceKey?: string
   maxScanDepth?: number
   omitScanKeys?: string[]
-  filter?: (value: string) => boolean
   flatMap?: (value: string) => string | string[]
 }
 
 export const config: Config[] = [
   { key: "borders" },
-  { key: "breakpoints", filter: (value) => Number.isNaN(Number(value)) },
-  { key: "colors", maxScanDepth: 3 },
+  { key: "breakpoints" },
+  { key: "colors" },
   { key: "fonts" },
   { key: "fontSizes" },
   { key: "fontWeights" },
@@ -18,9 +18,12 @@ export const config: Config[] = [
   { key: "radii" },
   { key: "shadows" },
   { key: "blurs" },
-  { key: "sizes", maxScanDepth: 2 },
+  { key: "sizes" },
   { key: "spaces", flatMap: (value) => [value, `-${value}`] },
   { key: "zIndices" },
   { key: "animations", omitScanKeys: ["keyframes"] },
   { key: "gradients" },
+  { key: "transitions.property", replaceKey: "transitionProperty" },
+  { key: "transitions.duration", replaceKey: "transitionDuration" },
+  { key: "transitions.easing", replaceKey: "transitionEasing" },
 ]

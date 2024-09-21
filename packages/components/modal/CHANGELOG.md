@@ -1,5 +1,24 @@
 # @yamada-ui/modal
 
+## 1.3.10
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2813](https://github.com/yamada-ui/yamada-ui/pull/2813) [`7e888db`](https://github.com/yamada-ui/yamada-ui/commit/7e888db802936a16f82663a781b526501c9f7401) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the inner element did not expand by the width of the parent element when the width was specified for `Drawer`.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`3b01045`](https://github.com/yamada-ui/yamada-ui/commit/3b0104577f59a952758f71d64f5e8ca6fc9d75bf), [`05d445a`](https://github.com/yamada-ui/yamada-ui/commit/05d445ac503a3af377c4858006ac45a816dd9750), [`2e90773`](https://github.com/yamada-ui/yamada-ui/commit/2e90773ae3e53bd04f34fb33d6d639ad19309af4), [`b4a055c`](https://github.com/yamada-ui/yamada-ui/commit/b4a055ccbf22e9f74806504e2245be346ac609b1), [`97f704c`](https://github.com/yamada-ui/yamada-ui/commit/97f704c4c836ad8920be0fc05bfe68a732218d2e)]:
+  - @yamada-ui/close-button@1.0.40
+  - @yamada-ui/transitions@1.1.5
+  - @yamada-ui/focus-lock@1.0.21
+  - @yamada-ui/button@1.0.42
+  - @yamada-ui/motion@2.2.2
+  - @yamada-ui/portal@1.0.21
+  - @yamada-ui/use-value@1.1.25
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/core@1.15.0
+
 ## 1.3.9
 
 ### Patch Changes

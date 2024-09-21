@@ -1,5 +1,20 @@
 # @yamada-ui/carousel
 
+## 2.0.5
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`3b01045`](https://github.com/yamada-ui/yamada-ui/commit/3b0104577f59a952758f71d64f5e8ca6fc9d75bf), [`05d445a`](https://github.com/yamada-ui/yamada-ui/commit/05d445ac503a3af377c4858006ac45a816dd9750), [`2e90773`](https://github.com/yamada-ui/yamada-ui/commit/2e90773ae3e53bd04f34fb33d6d639ad19309af4), [`b4a055c`](https://github.com/yamada-ui/yamada-ui/commit/b4a055ccbf22e9f74806504e2245be346ac609b1), [`97f704c`](https://github.com/yamada-ui/yamada-ui/commit/97f704c4c836ad8920be0fc05bfe68a732218d2e)]:
+  - @yamada-ui/use-controllable-state@1.0.20
+  - @yamada-ui/button@1.0.42
+  - @yamada-ui/icon@1.1.6
+  - @yamada-ui/use-token@1.1.25
+  - @yamada-ui/use-value@1.1.25
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/core@1.15.0
+
 ## 2.0.4
 
 ### Patch Changes

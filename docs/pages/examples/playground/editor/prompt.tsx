@@ -2,9 +2,10 @@ import { FormControl, Grid, Textarea, assignRef } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
 import { memo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
-import { DEFAULT_EDITOR_MODE, type EditorMode } from "."
+import { DEFAULT_EDITOR_MODE } from "."
+import type { EditorMode } from "."
 
-export type PromptProps = GridProps & {
+export interface PromptProps extends GridProps {
   onChangeModeRef: MutableRefObject<(mode: EditorMode) => void>
 }
 
@@ -52,7 +53,7 @@ export const Prompt: FC<PromptProps> = memo(({ onChangeModeRef, ...rest }) => {
           isReadOnly
           mt={{ base: isEdit ? "lg" : undefined, xl: "sm" }}
           bg={["blackAlpha.50", "whiteAlpha.50"]}
-          var={[{ name: "space-top", token: "spaces", value: "lg" }]}
+          vars={[{ name: "space-top", token: "spaces", value: "lg" }]}
           minH={{
             base: isEdit ? "calc(100% - $space-top)" : "4xl",
             xl: "md",

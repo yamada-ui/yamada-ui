@@ -2,15 +2,16 @@ import { keyframes as emotionKeyframes } from "@emotion/react"
 import { StyleSheet } from "@emotion/sheet"
 import type { Dict } from "@yamada-ui/utils"
 import { isObject, createdDom } from "@yamada-ui/utils"
-import type { Transform } from "./utils"
-import { globalValues, tokenToCSSVar } from "./utils"
+import type { CSSFunction } from "../css"
+import type { StyledTheme } from "../theme.types"
+import { globalValues, tokenToVar } from "./utils"
 
 const styleSheet = createdDom()
   ? new StyleSheet({ key: "css", container: document.head })
   : undefined
 
-const transformAnimationValue = (value: Dict) =>
-  Object.entries(value).reduce((prev, [key, value]) => {
+function transformAnimationValue(value: Dict) {
+  return Object.entries(value).reduce((prev, [key, value]) => {
     if (key === "duration") {
       prev["animationDuration"] = value
     } else if (key === "timingFunction") {
@@ -21,8 +22,14 @@ const transformAnimationValue = (value: Dict) =>
 
     return prev
   }, {} as Dict)
+}
 
-export const animation: Transform = (value, theme, css) => {
+export function animation(
+  value: any,
+  theme: StyledTheme,
+  css: CSSFunction,
+  _prev?: Dict,
+) {
   if (value == null || globalValues.has(value)) return value
 
   if (isObject(value)) {
@@ -47,7 +54,7 @@ export const animation: Transform = (value, theme, css) => {
       .map((value: string) => {
         value = value.trim()
 
-        value = tokenToCSSVar("animations", value)(theme)
+        value = tokenToVar("animations", value)(theme)
 
         return value
       })
@@ -55,7 +62,7 @@ export const animation: Transform = (value, theme, css) => {
 
     return value
   } else {
-    value = tokenToCSSVar("animations", value)(theme)
+    value = tokenToVar("animations", value)(theme)
 
     return value
   }

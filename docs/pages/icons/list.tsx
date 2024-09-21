@@ -35,7 +35,7 @@ const DATA = resolvedIcons.map(([name, Icon]) => ({
 const PER_PAGE = 200
 const TOTAL_COUNT = resolvedIcons.length
 
-export type ListProps = StackProps & {}
+export interface ListProps extends StackProps {}
 
 export const List: FC<ListProps> = memo(({ ...rest }) => {
   const [index, setIndex] = useState<number>(0)
@@ -130,7 +130,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
 
 List.displayName = "List"
 
-type SearchProps = InputProps & {
+interface SearchProps extends InputProps {
   onSearch: (value: string) => void
   containerProps?: InputGroupProps
   valueResetRef: MutableRefObject<() => void>

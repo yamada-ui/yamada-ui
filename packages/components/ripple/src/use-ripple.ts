@@ -3,14 +3,14 @@ import type React from "react"
 import type { Key, PointerEventHandler } from "react"
 import { useCallback, useState } from "react"
 
-export type RippleOptions = {
+export interface RippleOptions {
   key: React.Key
   x: number
   y: number
   size: number
 }
 
-export type UseRippleProps<T extends any = HTMLElement> = {
+export interface UseRippleProps<T extends any = HTMLElement> {
   disabled?: boolean
   isDisabled?: boolean
   onPointerDown?: PointerEventHandler<T>

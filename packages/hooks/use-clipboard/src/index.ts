@@ -2,7 +2,7 @@ import { isNumber, isString } from "@yamada-ui/utils"
 import copy from "copy-to-clipboard"
 import { useState, useCallback, useEffect } from "react"
 
-export type UseClipboardOptions = {
+export interface UseClipboardOptions {
   timeout?: number
   format?: string
 }

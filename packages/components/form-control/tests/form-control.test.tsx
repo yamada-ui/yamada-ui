@@ -1,6 +1,12 @@
-import { Input } from "@yamada-ui/react"
 import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
-import { FormControl } from "../src"
+import type { ComponentProps, FC } from "react"
+import { FormControl, useFormControlProps } from "../src"
+
+const Input: FC<ComponentProps<"input">> = (props) => {
+  const formControlProps = useFormControlProps(props)
+
+  return <input {...props} {...formControlProps} />
+}
 
 describe("<FormControl />", () => {
   test("FormControl renders correctly", async () => {

@@ -1,28 +1,13 @@
-import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import { useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
-import { createContext } from "@yamada-ui/utils"
+import type { ThemeProps } from "@yamada-ui/core"
+import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import type { FC } from "react"
 import type { MenuProps } from "./menu"
 import { Menu } from "./menu"
+import { ContextMenuProvider } from "./menu-context"
 
-type ContextMenuContext = {
-  styles: Record<string, CSSUIObject>
-}
-
-const [ContextMenuProvider, useContextMenu] = createContext<ContextMenuContext>(
-  {
-    strict: false,
-    name: "ContextMenuContext",
-  },
-)
-
-export { useContextMenu }
-
-type ContextMenuOptions = {}
-
-export type ContextMenuProps = Omit<MenuProps, "trigger"> &
-  ThemeProps<"ContextMenu"> &
-  ContextMenuOptions
+export interface ContextMenuProps
+  extends Omit<MenuProps, "trigger">,
+    ThemeProps<"ContextMenu"> {}
 
 /**
  * `ContextMenu` is triggered by a right click and displays a menu at the pointer's position.
@@ -30,7 +15,7 @@ export type ContextMenuProps = Omit<MenuProps, "trigger"> &
  * @see Docs https://yamada-ui.com/components/overlay/context-menu
  */
 export const ContextMenu: FC<ContextMenuProps> = (props) => {
-  const [styles, mergedProps] = useMultiComponentStyle("ContextMenu", props)
+  const [styles, mergedProps] = useComponentMultiStyle("ContextMenu", props)
   const { ...rest } = omitThemeProps(mergedProps)
 
   return (

@@ -13,7 +13,7 @@ import Link from "next/link"
 import { memo } from "react"
 import type { FC } from "react"
 
-export type PaginationProps = GridProps
+export interface PaginationProps extends GridProps {}
 
 export const Pagination = memo(
   forwardRef<PaginationProps, "div">(({ ...rest }, ref) => {
@@ -38,10 +38,11 @@ export const Pagination = memo(
   }),
 )
 
-type PaginationItemProps = GridItemProps &
-  DocumentNavigation & {
-    isPrev?: boolean
-  }
+export interface PaginationItemProps
+  extends Omit<GridItemProps, "title">,
+    DocumentNavigation {
+  isPrev?: boolean
+}
 
 const PaginationItem: FC<PaginationItemProps> = ({
   title,

@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
@@ -29,7 +29,7 @@ import {
   useDatePickerContext,
 } from "./use-date-picker"
 
-type DatePickerOptions = {
+interface DatePickerOptions {
   /**
    * If `true`, display the date picker clear icon.
    *
@@ -47,11 +47,11 @@ type DatePickerOptions = {
   /**
    * Props for date picker container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for month picker container element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for date picker field element.
    */
@@ -78,9 +78,10 @@ type DatePickerOptions = {
   children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
-export type DatePickerProps = ThemeProps<"DatePicker"> &
-  DatePickerOptions &
-  UseDatePickerProps
+export interface DatePickerProps
+  extends ThemeProps<"DatePicker">,
+    DatePickerOptions,
+    UseDatePickerProps {}
 
 /**
  * `DatePicker` is a component used for users to select a date.
@@ -88,7 +89,7 @@ export type DatePickerProps = ThemeProps<"DatePicker"> &
  * @see Docs https://yamada-ui.com/components/forms/date-picker
  */
 export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("DatePicker", props)
+  const [styles, mergedProps] = useComponentMultiStyle("DatePicker", props)
   let {
     className,
     children,
@@ -182,11 +183,13 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   )
 })
 
-type DatePickerFieldOptions = {
+interface DatePickerFieldOptions {
   inputProps?: HTMLUIProps<"input">
 }
 
-export type DatePickerFieldProps = HTMLUIProps<"div"> & DatePickerFieldOptions
+export interface DatePickerFieldProps
+  extends HTMLUIProps,
+    DatePickerFieldOptions {}
 
 export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
   ({ className, h, minH, inputProps, ...rest }, ref) => {
@@ -224,7 +227,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
   },
 )
 
-export type DatePickerIconProps = Omit<HTMLUIProps<"div">, "clear">
+export interface DatePickerIconProps extends Omit<HTMLUIProps, "clear"> {}
 
 export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
   ({ className, children, __css, ...rest }, ref) => {
@@ -270,7 +273,7 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
   },
 )
 
-export type DatePickerCalendarIconProps = IconProps
+export interface DatePickerCalendarIconProps extends IconProps {}
 
 export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
   className,
@@ -290,7 +293,7 @@ export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
   )
 }
 
-export type DatePickerClearIconProps = DatePickerIconProps & {
+export interface DatePickerClearIconProps extends DatePickerIconProps {
   disabled?: boolean
 }
 

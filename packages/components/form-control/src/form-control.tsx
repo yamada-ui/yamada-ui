@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
@@ -18,7 +18,7 @@ import {
 import type { ReactNode, FocusEventHandler } from "react"
 import { useState, useId, isValidElement } from "react"
 
-export type FormControlOptions = {
+export interface FormControlOptions {
   /**
    * If `true`, the form control will be required.
    *
@@ -45,7 +45,7 @@ export type FormControlOptions = {
   isReadOnly?: boolean
 }
 
-type FormControlAdditionalOptions = LabelOptions & {
+interface FormControlAdditionalOptions extends LabelOptions {
   /**
    * If `true`, switch between helper message and error message using isInvalid.
    *
@@ -78,12 +78,13 @@ type FormControlAdditionalOptions = LabelOptions & {
   errorMessageProps?: ErrorMessageProps
 }
 
-export type FormControlProps = HTMLUIProps<"div"> &
-  ThemeProps<"FormControl"> &
-  FormControlOptions &
-  FormControlAdditionalOptions
+export interface FormControlProps
+  extends HTMLUIProps,
+    ThemeProps<"FormControl">,
+    FormControlOptions,
+    FormControlAdditionalOptions {}
 
-type FormControlContext = {
+interface FormControlContext {
   id?: string
   labelId?: string
   isFocused: boolean
@@ -102,7 +103,9 @@ export const [FormControlContextProvider, useFormControlContext] =
     name: "FormControlContext",
   })
 
-type FormControlStylesContext = Record<string, CSSUIObject>
+interface FormControlStylesContext {
+  [key: string]: CSSUIObject
+}
 
 export const [FormControlStylesProvider, useFormControlStyles] = createContext<
   FormControlStylesContext | undefined
@@ -118,7 +121,7 @@ export const [FormControlStylesProvider, useFormControlStyles] = createContext<
  */
 export const FormControl = forwardRef<FormControlProps, "div">(
   ({ id, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("FormControl", props)
+    const [styles, mergedProps] = useComponentMultiStyle("FormControl", props)
     const {
       className,
       isRequired = false,
@@ -206,7 +209,7 @@ export const FormControl = forwardRef<FormControlProps, "div">(
   },
 )
 
-type UseFormControlOptions = FormControlOptions & {
+interface UseFormControlOptions extends FormControlOptions {
   id?: string
   disabled?: boolean
   readOnly?: boolean
@@ -244,7 +247,8 @@ export const useFormControl = <Y extends Dict = Dict>({
   }
 }
 
-export type UseFormControlProps<Y extends HTMLElement> = FormControlOptions & {
+export interface UseFormControlProps<Y extends HTMLElement>
+  extends FormControlOptions {
   id?: string
   onFocus?: FocusEventHandler<Y>
   onBlur?: FocusEventHandler<Y>
@@ -298,7 +302,9 @@ export const useFormControlProps = <Y extends HTMLElement, M extends Dict>({
   }
 }
 
-export const formControlBaseProperties = [
+export type FormControlProperty = (typeof formControlProperties)[number]
+
+export const formControlProperties = [
   "disabled",
   "required",
   "readOnly",
@@ -316,17 +322,14 @@ export const formControlBaseProperties = [
   "_focusVisible",
 ] as const
 
-export const formControlProperties =
-  formControlBaseProperties as unknown as any[]
-
 export const getFormControlProperties = ({
   omit = [],
   pick = [],
 }: {
-  omit?: (typeof formControlBaseProperties)[number][]
-  pick?: (typeof formControlBaseProperties)[number][]
+  omit?: FormControlProperty[]
+  pick?: FormControlProperty[]
 } = {}) => {
-  let result = formControlProperties
+  let result = [...formControlProperties]
 
   if (pick.length) {
     result = result.filter((property) => pick.includes(property))
@@ -339,13 +342,13 @@ export const getFormControlProperties = ({
   return result
 }
 
-type LabelOptions = {
+interface LabelOptions {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
   isRequired?: boolean
 }
 
-export type LabelProps = HTMLUIProps<"label"> & LabelOptions
+export interface LabelProps extends HTMLUIProps<"label">, LabelOptions {}
 
 export const Label = forwardRef<LabelProps, "label">(
   (
@@ -410,7 +413,7 @@ export const Label = forwardRef<LabelProps, "label">(
   },
 )
 
-export type RequiredIndicatorProps = HTMLUIProps<"span">
+export interface RequiredIndicatorProps extends HTMLUIProps<"span"> {}
 
 export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
   ({ className, children, ...rest }, ref) => {
@@ -435,7 +438,7 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
   },
 )
 
-export type HelperMessageProps = HTMLUIProps<"span">
+export interface HelperMessageProps extends HTMLUIProps<"span"> {}
 
 export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   ({ className, ...rest }, ref) => {
@@ -458,7 +461,7 @@ export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   },
 )
 
-export type ErrorMessageProps = HTMLUIProps<"span">
+export interface ErrorMessageProps extends HTMLUIProps<"span"> {}
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
   ({ className, ...rest }, ref) => {

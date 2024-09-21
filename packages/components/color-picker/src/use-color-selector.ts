@@ -1,19 +1,19 @@
 import type {
   CSSUIObject,
   HTMLUIProps,
-  UIPropGetter,
   ThemeProps,
-  RequiredUIPropGetter,
+  PropGetter,
+  RequiredPropGetter,
 } from "@yamada-ui/core"
 import {
   useFormControlProps,
-  type FormControlOptions,
   formControlProperties,
 } from "@yamada-ui/form-control"
+import type { FormControlOptions } from "@yamada-ui/form-control"
 import type { InputProps } from "@yamada-ui/input"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { useEyeDropper } from "@yamada-ui/use-eye-dropper"
-import type { ColorFormat, Dict, Merge } from "@yamada-ui/utils"
+import type { ColorFormat, Dict } from "@yamada-ui/utils"
 import {
   calcFormat,
   convertColor,
@@ -24,12 +24,11 @@ import {
   parseToHsv,
   useCallbackRef,
   useUpdateEffect,
-  omitObject,
   parseToRgba,
   parseToHsla,
   rgbaTo,
   hslaTo,
-  pickObject,
+  splitObject,
 } from "@yamada-ui/utils"
 import type { ChangeEvent } from "react"
 import { useCallback, useMemo, useRef, useState } from "react"
@@ -39,10 +38,25 @@ import type { HueSliderProps } from "./hue-slider"
 import type { SaturationSliderProps } from "./saturation-slider"
 
 type Space = keyof Hsla | keyof Rgba
-type Hsla = { h: number; s: number; l: number; a: number }
-type Rgba = { r: number; g: number; b: number; a: number }
-type Hsva = { h: number; s: number; v: number; a: number }
-type Channel = {
+interface Hsla {
+  h: number
+  s: number
+  l: number
+  a: number
+}
+interface Rgba {
+  r: number
+  g: number
+  b: number
+  a: number
+}
+interface Hsva {
+  h: number
+  s: number
+  v: number
+  a: number
+}
+interface Channel {
   label: string
   space: Space
   value: number
@@ -75,7 +89,7 @@ const convertHsva = (value: string, fallback?: string): Hsva => {
   return { h, s, v, a }
 }
 
-type ColorSelectorContext = {
+interface ColorSelectorContext {
   value: string
   onChange: (value: string | Partial<Hsva>) => void
   eyeDropperSupported: boolean
@@ -85,16 +99,12 @@ type ColorSelectorContext = {
   readOnly?: boolean
   channels: Channel[]
   size?: ThemeProps<"ColorSelector">["size"]
-  getHueSliderProps: UIPropGetter<"input", HueSliderProps, HueSliderProps>
-  getAlphaSliderProps: UIPropGetter<"input", AlphaSliderProps, AlphaSliderProps>
-  getEyeDropperProps: UIPropGetter<"button">
-  getChannelProps: RequiredUIPropGetter<
-    "input",
-    Merge<InputProps, { space: Space }>,
-    InputProps
-  >
-  getSwatchProps: UIPropGetter<"div", ColorSwatchProps, ColorSwatchProps>
-  styles: Record<string, CSSUIObject>
+  getHueSliderProps: PropGetter<HueSliderProps>
+  getAlphaSliderProps: PropGetter<AlphaSliderProps>
+  getEyeDropperProps: PropGetter<"button">
+  getChannelProps: RequiredPropGetter<InputProps & { space: Space }, InputProps>
+  getSwatchProps: PropGetter<ColorSwatchProps>
+  styles: { [key: string]: CSSUIObject }
 }
 
 export const [ColorSelectorProvider, useColorSelectorContext] =
@@ -103,7 +113,7 @@ export const [ColorSelectorProvider, useColorSelectorContext] =
     errorMessage: `useColorSelectorContext returned is 'undefined'. Seems you forgot to wrap the components in "<ColorSelector />"`,
   })
 
-type UseColorSelectorOptions = {
+interface UseColorSelectorOptions {
   /**
    * The base `id` to use for the color selector.
    */
@@ -149,20 +159,19 @@ type UseColorSelectorOptions = {
   onSwatchClick?: (value: string) => void
 }
 
-export type UseColorSelectorBaseProps = UseColorSelectorOptions &
-  FormControlOptions
+export interface UseColorSelectorBaseProps
+  extends UseColorSelectorOptions,
+    FormControlOptions {}
 
-export type UseColorSelectorProps = Omit<
-  HTMLUIProps<"div">,
-  "defaultValue" | "onChange" | "children"
-> &
-  UseColorSelectorBaseProps
+export interface UseColorSelectorProps
+  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "children">,
+    UseColorSelectorBaseProps {}
 
 export const useColorSelector = ({
   isInvalid,
   ...props
 }: UseColorSelectorProps) => {
-  let {
+  const {
     id,
     name,
     value: valueProp,
@@ -172,12 +181,19 @@ export const useColorSelector = ({
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
     format: formatProp,
-    required,
-    disabled,
-    readOnly,
     onSwatchClick,
     ...rest
   } = useFormControlProps({ isInvalid, ...props })
+  const [
+    {
+      "aria-readonly": ariaReadonly,
+      required,
+      disabled,
+      readOnly,
+      ...formControlProps
+    },
+    containerProps,
+  ] = splitObject(rest, formControlProperties)
 
   const onChangeStartRef = useCallbackRef(onChangeStartProp)
   const onChangeEndRef = useCallbackRef(onChangeEndProp)
@@ -377,15 +393,20 @@ export const useColorSelector = ({
     if (nextValue) setValue(nextValue)
   }, [format])
 
-  const getContainerProps: UIPropGetter = (props = {}, ref = null) => ({
-    ...props,
-    ref,
-    ...omitObject(rest, ["aria-readonly"]),
-  })
-
-  const getInputProps: UIPropGetter<"input"> = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
-      ...pickObject(rest, formControlProperties),
+      ...props,
+      ref,
+      ...formControlProps,
+      ...containerProps,
+    }),
+    [containerProps, formControlProps],
+  )
+
+  const getInputProps: PropGetter<"input"> = useCallback(
+    (props = {}, ref = null) => ({
+      ...formControlProps,
+      "aria-readonly": ariaReadonly,
       ...props,
       id,
       ref,
@@ -396,49 +417,51 @@ export const useColorSelector = ({
       disabled,
       readOnly,
     }),
-    [disabled, id, name, readOnly, required, rest, resolvedValue],
-  )
-
-  const getSaturationSliderProps: UIPropGetter<
-    "input",
-    SaturationSliderProps,
-    SaturationSliderProps
-  > = useCallback(
-    (props = {}, ref = null) => ({
-      required,
-      disabled,
-      readOnly,
-      isInvalid,
-      ...props,
-      ref,
-      value: [h, s, v],
-      onChange: handlerAll(props.onChange, ([, s, v]) => onChange({ s, v })),
-      onChangeStart: handlerAll(props.onChangeStart, ([, s, v]) =>
-        onChangeStart({ s, v }),
-      ),
-      onChangeEnd: handlerAll(props.onChangeEnd, ([, s, v]) =>
-        onChangeEnd({ s, v }),
-      ),
-    }),
     [
+      formControlProps,
+      ariaReadonly,
+      id,
+      name,
+      resolvedValue,
       required,
       disabled,
       readOnly,
-      isInvalid,
-      h,
-      s,
-      v,
-      onChange,
-      onChangeStart,
-      onChangeEnd,
     ],
   )
 
-  const getHueSliderProps: UIPropGetter<
-    "input",
-    HueSliderProps,
-    HueSliderProps
-  > = useCallback(
+  const getSaturationSliderProps: PropGetter<SaturationSliderProps> =
+    useCallback(
+      (props = {}, ref = null) => ({
+        required,
+        disabled,
+        readOnly,
+        isInvalid,
+        ...props,
+        ref,
+        value: [h, s, v],
+        onChange: handlerAll(props.onChange, ([, s, v]) => onChange({ s, v })),
+        onChangeStart: handlerAll(props.onChangeStart, ([, s, v]) =>
+          onChangeStart({ s, v }),
+        ),
+        onChangeEnd: handlerAll(props.onChangeEnd, ([, s, v]) =>
+          onChangeEnd({ s, v }),
+        ),
+      }),
+      [
+        required,
+        disabled,
+        readOnly,
+        isInvalid,
+        h,
+        s,
+        v,
+        onChange,
+        onChangeStart,
+        onChangeEnd,
+      ],
+    )
+
+  const getHueSliderProps: PropGetter<HueSliderProps> = useCallback(
     (props = {}, ref = null) => ({
       required,
       disabled,
@@ -465,11 +488,7 @@ export const useColorSelector = ({
     ],
   )
 
-  const getAlphaSliderProps: UIPropGetter<
-    "input",
-    AlphaSliderProps,
-    AlphaSliderProps
-  > = useCallback(
+  const getAlphaSliderProps: PropGetter<AlphaSliderProps> = useCallback(
     (props = {}, ref = null) => ({
       required,
       disabled,
@@ -502,9 +521,8 @@ export const useColorSelector = ({
     ],
   )
 
-  const getChannelProps: RequiredUIPropGetter<
-    "input",
-    Merge<InputProps, { space: Space }>,
+  const getChannelProps: RequiredPropGetter<
+    InputProps & { space: Space },
     InputProps
   > = useCallback(
     ({ space, ...props }, ref = null) => {
@@ -525,7 +543,7 @@ export const useColorSelector = ({
     [required, disabled, readOnly, isInvalid, onChannelChange],
   )
 
-  const getEyeDropperProps: UIPropGetter<"button"> = useCallback(
+  const getEyeDropperProps: PropGetter<"button"> = useCallback(
     (props = {}, ref = null) => ({
       disabled,
       "aria-label": "Pick a color",
@@ -536,11 +554,7 @@ export const useColorSelector = ({
     [disabled, onEyeDropperClick],
   )
 
-  const getSwatchProps: UIPropGetter<
-    "div",
-    ColorSwatchProps,
-    ColorSwatchProps
-  > = useCallback(
+  const getSwatchProps: PropGetter<ColorSwatchProps> = useCallback(
     ({ color, ...props } = {}, ref = null) => ({
       "aria-label": `Select ${color} as the color`,
       disabled,

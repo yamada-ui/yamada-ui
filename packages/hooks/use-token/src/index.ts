@@ -5,6 +5,9 @@ import {
   isArray,
   isUndefined,
 } from "@yamada-ui/utils"
+import { useMemo } from "react"
+
+type OmittedTheme = Omit<Theme, "components" | "colorSchemes" | "themeSchemes">
 
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
@@ -13,10 +16,7 @@ import {
  */
 export const useToken = <
   Y extends string | number = string,
-  M extends keyof Omit<
-    Theme,
-    "components" | "colorSchemes" | "themeSchemes"
-  > = keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">,
+  M extends keyof OmittedTheme = keyof OmittedTheme,
 >(
   name: M,
   path: Theme[M] | number | undefined,
@@ -24,16 +24,16 @@ export const useToken = <
   const { theme } = useTheme()
   const { colorMode } = useColorMode()
 
-  return getToken<Y, M>(name, path)(theme, colorMode)
+  return useMemo(
+    () => getToken<Y, M>(name, path)(theme, colorMode),
+    [name, path, theme, colorMode],
+  )
 }
 
 export const getToken =
   <
     Y extends string | number = string,
-    M extends keyof Omit<
-      Theme,
-      "components" | "colorSchemes" | "themeSchemes"
-    > = keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">,
+    M extends keyof OmittedTheme = keyof OmittedTheme,
   >(
     name: M,
     path: Theme[M] | number | undefined,

@@ -2,6 +2,7 @@
 title: PagingTable
 description: "`PagingTable`は、ページネーション機能を備えたテーブルのコンポーネントです。"
 package_name: "@yamada-ui/table"
+order: 1
 with_description: true
 tab: Props
 ---
@@ -147,7 +148,7 @@ tab: Props
 <PropsCard
   id="pagingtable-layout"
   name="layout"
-  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | Partial<Record<(string & {}) | "base" | "sm" | "md" | "lg" | "xl" | "2xl", TableLayout>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | Partial<Record<Breakpoint, TableLayout | [TableLayout, TableLayout]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 

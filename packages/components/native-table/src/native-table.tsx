@@ -2,12 +2,14 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { createContext, cx } from "@yamada-ui/utils"
 
-type TableStyleContext = Record<string, CSSUIObject>
+interface TableStyleContext {
+  [key: string]: CSSUIObject
+}
 
 export const [TableStyleProvider, useTableStyles] =
   createContext<TableStyleContext>({
@@ -15,7 +17,7 @@ export const [TableStyleProvider, useTableStyles] =
     errorMessage: `useTableStyles returned is 'undefined'. Seems you forgot to wrap the components in "<Table />" or "<NativeTable />" or "<PagingTable />"`,
   })
 
-type NativeTableOptions = {
+interface NativeTableOptions {
   /**
    * The CSS `table-layout` property.
    */
@@ -40,9 +42,10 @@ type NativeTableOptions = {
   withColumnBorders?: boolean
 }
 
-export type NativeTableProps = HTMLUIProps<"table"> &
-  ThemeProps<"NativeTable"> &
-  NativeTableOptions
+export interface NativeTableProps
+  extends HTMLUIProps<"table">,
+    ThemeProps<"NativeTable">,
+    NativeTableOptions {}
 
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.
@@ -51,7 +54,7 @@ export type NativeTableProps = HTMLUIProps<"table"> &
  */
 export const NativeTable = forwardRef<NativeTableProps, "table">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("NativeTable", props)
+    const [styles, mergedProps] = useComponentMultiStyle("NativeTable", props)
     const { className, layout, ...rest } = omitThemeProps(mergedProps, [
       "withBorder",
       "withColumnBorders",

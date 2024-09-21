@@ -1,4 +1,3 @@
-import { Button } from "@yamada-ui/react"
 import {
   a11y,
   render,
@@ -21,7 +20,7 @@ describe("useNotice()", () => {
 
     return (
       <>
-        <Button onClick={onOpen}>Open Notice</Button>
+        <button onClick={onOpen}>Open Notice</button>
       </>
     )
   }
@@ -58,7 +57,7 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Open Notice</Button>
+          <button onClick={onOpen}>Open Notice</button>
         </>
       )
     }
@@ -90,7 +89,7 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Open Notice</Button>
+          <button onClick={onOpen}>Open Notice</button>
         </>
       )
     }
@@ -122,7 +121,7 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Open Notice</Button>
+          <button onClick={onOpen}>Open Notice</button>
         </>
       )
     }
@@ -164,8 +163,8 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Show notification</Button>
-          <Button onClick={onUpdate}>Update last notification</Button>
+          <button onClick={onOpen}>Show notification</button>
+          <button onClick={onUpdate}>Update last notification</button>
         </>
       )
     }
@@ -213,8 +212,8 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Open Notice</Button>
-          <Button onClick={onCloseAll}>Close All Notice</Button>
+          <button onClick={onOpen}>Open Notice</button>
+          <button onClick={onCloseAll}>Close All Notice</button>
         </>
       )
     }
@@ -260,8 +259,8 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Open Notice</Button>
-          <Button onClick={onClose}>Close Notice</Button>
+          <button onClick={onOpen}>Open Notice</button>
+          <button onClick={onClose}>Close Notice</button>
         </>
       )
     }
@@ -295,7 +294,7 @@ describe("useNotice()", () => {
 
       return (
         <>
-          <Button onClick={onOpen}>Open Notice</Button>
+          <button onClick={onOpen}>Open Notice</button>
         </>
       )
     }

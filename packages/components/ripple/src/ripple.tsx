@@ -8,7 +8,7 @@ import type { RippleOptions } from "./use-ripple"
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
 
-export type RippleProps = MotionProps<"span"> & {
+export interface RippleProps extends MotionProps<"span"> {
   /**
    * If `true`, disable ripple effects when pressing a element.
    *

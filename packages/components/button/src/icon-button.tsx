@@ -4,18 +4,23 @@ import type { ReactElement } from "react"
 import type { ButtonProps } from "./button"
 import { Button } from "./button"
 
-type IconButtonOptions = {
+interface IconButtonOptions {
   /**
    * The icon to be used in the button.
    */
   icon?: ReactElement
 }
 
-export type IconButtonProps = Omit<
-  ButtonProps,
-  "leftIcon" | "rightIcon" | "loadingIcon" | "loadingText" | "loadingPlacement"
-> &
-  IconButtonOptions
+export interface IconButtonProps
+  extends Omit<
+      ButtonProps,
+      | "leftIcon"
+      | "rightIcon"
+      | "loadingIcon"
+      | "loadingText"
+      | "loadingPlacement"
+    >,
+    IconButtonOptions {}
 
 /**
  * `IconButton` is a component that displays an icon within a button.

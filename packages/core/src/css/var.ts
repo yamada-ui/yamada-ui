@@ -1,156 +1,210 @@
 import type { Dict } from "@yamada-ui/utils"
-import { escape, merge, calc, isArray, isUndefined } from "@yamada-ui/utils"
+import {
+  escape,
+  merge,
+  isArray,
+  isString,
+  isObject,
+  calc,
+} from "@yamada-ui/utils"
 import { animation, gradient } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { pseudos } from "../pseudos"
-import type { VarTokens } from "../theme"
-import type { CSSMap, StyledTheme } from "../theme.types"
+import type { VariableTokens, VariableValue } from "../theme"
+import type { CSSMap, StyledTheme, ThemeValue } from "../theme.types"
+import type { BreakpointQueries } from "./breakpoint"
 import { css } from "./css"
 
-type Var = {
+type ParsedValue = string | number | undefined
+
+interface Variable {
   variable: string
   reference: string
 }
 
-export const getVar = (token: string) => (theme: StyledTheme) => {
-  const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
+export function getVar(token: string) {
+  return function (theme: StyledTheme) {
+    const prefix = theme.__config?.var?.prefix ?? DEFAULT_VAR_PREFIX
 
-  return `var(--${prefix}-${token})`
+    return `var(--${prefix}-${token})`
+  }
 }
 
-const createVar = (token: string, prefix: string): Var => {
-  const variable = `--${[prefix, escape(token, "-")].filter(Boolean).join("-")}`
-  const reference = `var(${variable})`
+const isGradient = (token: string) => token.startsWith("gradients.")
+const isAnimation = (token: string) => token.startsWith("animations.")
+const isSpace = (token: string) => token.startsWith("spaces.")
 
-  return { variable, reference }
+interface CreateThemeVarsOptions {
+  prevTokens?: VariableTokens
+  cssMap?: CSSMap
+  cssVars?: Dict
 }
 
-const tokenToVar = (token: string, prefix: string): Var => {
-  token = token.replace(/\./g, "-")
+export function getCreateThemeVars(
+  prefix: string = DEFAULT_VAR_PREFIX,
+  queries: BreakpointQueries,
+) {
+  function tokenToVar(token: string): Variable {
+    token = token.replace(/\./g, "-")
 
-  return createVar(token, prefix)
-}
+    const variable = `--${[prefix, escape(token, "-")].filter(Boolean).join("-")}`
+    const reference = `var(${variable})`
 
-export const createVars =
-  (tokens: VarTokens, prefix: string = DEFAULT_VAR_PREFIX) =>
-  ({
-    baseTokens,
-    cssMap = {},
-    cssVars = {},
-  }: {
-    baseTokens?: VarTokens
-    cssMap?: CSSMap
-    cssVars?: Dict
-  } = {}): { cssMap: CSSMap; cssVars: Dict } => {
-    for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
-      const fetchParent = (
-        value: string | number = "",
-      ): [string | undefined, string | number] => {
-        const [parent] = token.split(".")
+    return { variable, reference }
+  }
 
-        const relatedToken = [parent, value].join(".")
+  return function (tokens: VariableTokens) {
+    return function ({
+      prevTokens,
+      cssMap = {},
+      cssVars = {},
+    }: CreateThemeVarsOptions = {}): { cssMap: CSSMap; cssVars: Dict } {
+      const theme = { __cssMap: cssMap } as StyledTheme
 
-        const tokenValue = tokens[relatedToken] ?? baseTokens?.[relatedToken]
+      function getRelatedReference(
+        token: string,
+        value: ParsedValue = "",
+      ): [ParsedValue, Exclude<ParsedValue, undefined>] {
+        const relatedToken = [token.split(".")[0], value].join(".")
+        const targetToken = tokens[relatedToken] ?? prevTokens?.[relatedToken]
 
-        if (!tokenValue) return [, value]
+        if (!targetToken) return [, value]
 
-        const { variable, reference } = tokenToVar(relatedToken, prefix)
+        const { variable, reference } = tokenToVar(relatedToken)
 
         return [variable, reference]
       }
 
-      const { variable, reference } = tokenToVar(token, prefix)
+      function getQuery(key: string) {
+        return queries.find(({ breakpoint }) => breakpoint === key)?.query
+      }
 
-      let resolvedLightValue: string | number | undefined
-      let resolvedDarkValue: string | number | undefined
+      function valueToVar<Y extends ParsedValue>(value: Y) {
+        if (isString(value)) {
+          return value.replace(/\$([^,)/\s]+)/g, (_, value) => {
+            const token = tokens[value] ?? prevTokens?.[value]
 
-      const theme = { __cssMap: cssMap } as StyledTheme
-
-      if (token.startsWith("animations.")) {
-        if (isArray(value)) {
-          resolvedLightValue = value
-            .map((value) => animation(value, theme, css))
-            .join(",")
+            if (token) {
+              return tokenToVar(value).reference
+            } else if (value in cssMap) {
+              return cssMap[value].ref
+            } else {
+              return `var(--${prefix}-${value})`
+            }
+          })
         } else {
-          resolvedLightValue = animation(value, theme, css)
+          return value
         }
-      } else {
-        let [lightValue, darkValue] = isArray(value) ? [...value] : [value]
+      }
 
-        if (token.startsWith("gradients.")) {
-          const [lightParentVar, lightParentRef] = fetchParent(lightValue)
-          const [darkParentVar, darkParentRef] = fetchParent(darkValue)
+      function createNegativeVar(token: string, reference: string) {
+        const paths = token.split(".")
+        const [start, ...rest] = paths
 
-          if (lightParentVar) {
-            resolvedLightValue = lightParentRef
+        const negativeToken = `${start}.-${rest.join(".")}`
+
+        const negativeReference = calc.negate(reference)
+
+        return { negativeToken, negativeReference }
+      }
+
+      function createAnimationVar(value: VariableValue) {
+        if (isArray(value)) {
+          return value.map((value) => animation(value, theme, css)).join(",")
+        } else {
+          return animation(value, theme, css)
+        }
+      }
+
+      function createGradientVar(token: string, value: ThemeValue) {
+        return function (isSemantic: boolean) {
+          if (!isSemantic) {
+            return gradient(value, theme, css)
           } else {
-            resolvedLightValue = gradient(
-              fetchParent(lightValue)[1],
-              theme,
-              css,
+            const [variable, reference] = getRelatedReference(token, value)
+
+            return variable ? reference : gradient(value, theme, css)
+          }
+        }
+      }
+
+      function createVar(
+        token: string,
+        value: VariableValue,
+        variable: string,
+      ) {
+        return function (isSemantic: boolean, queries: string[] = []) {
+          if (isArray(value)) {
+            const [lightValue, darkValue] = value
+
+            createVar(token, lightValue, variable)(isSemantic, queries)
+            createVar(
+              token,
+              darkValue,
+              variable,
+            )(isSemantic, [...queries, pseudos._dark])
+          } else if (isObject(value)) {
+            Object.entries(value).forEach(([key, value]) => {
+              if (key === "base") {
+                createVar(token, value, variable)(isSemantic, queries)
+              } else {
+                const query = getQuery(key)
+
+                if (!query) return
+
+                createVar(
+                  token,
+                  value,
+                  variable,
+                )(isSemantic, [...queries, query])
+              }
+            })
+          } else {
+            let computedValue = valueToVar(value)
+
+            if (isGradient(token)) {
+              computedValue = createGradientVar(
+                token,
+                computedValue,
+              )(isSemantic)
+            } else if (isSemantic) {
+              const [, reference] = getRelatedReference(token, computedValue)
+
+              computedValue = reference
+            }
+
+            cssVars = merge(
+              cssVars,
+              queries.reduceRight<Dict>((prev, key) => ({ [key]: prev }), {
+                [variable]: computedValue,
+              }),
             )
           }
-
-          if (darkParentVar) {
-            resolvedDarkValue = darkParentRef
-          } else {
-            resolvedDarkValue = gradient(darkValue, theme, css)
-          }
-        } else {
-          resolvedLightValue = lightValue
-          resolvedDarkValue = darkValue
         }
       }
 
-      if (!isSemantic) {
-        if (token.startsWith("spaces") && !isUndefined(resolvedLightValue)) {
-          const keys = token.split(".")
-          const [firstKey, ...restKeys] = keys
+      for (let [token, { isSemantic, value }] of Object.entries(tokens)) {
+        const { variable, reference } = tokenToVar(token)
 
-          const negativeToken = `${firstKey}.-${restKeys.join(".")}`
+        if (isAnimation(token)) value = createAnimationVar(value)
 
-          const negativeValue = calc.negate(resolvedLightValue)
-          const negativeReference = calc.negate(reference)
+        createVar(token, value, variable)(isSemantic)
 
-          cssMap[negativeToken] = {
-            value: negativeValue,
-            var: variable,
-            ref: negativeReference,
-          }
+        if (!isSemantic && isSpace(token)) {
+          const { negativeToken, negativeReference } = createNegativeVar(
+            token,
+            reference,
+          )
+
+          cssMap[negativeToken] = { var: variable, ref: negativeReference }
         }
 
-        cssVars[variable] = resolvedLightValue
-
-        if (resolvedDarkValue)
-          cssVars = merge(cssVars, {
-            [pseudos._dark]: { [variable]: resolvedDarkValue },
-          })
-
-        cssMap[token] = {
-          value: resolvedLightValue,
-          var: variable,
-          ref: reference,
-        }
-
-        continue
+        cssMap[token] = { var: variable, ref: reference }
       }
 
-      const [parentVar, parentRef] = fetchParent(resolvedLightValue)
-
-      cssVars = merge(cssVars, { [variable]: parentRef })
-
-      if (resolvedDarkValue) {
-        const [, parentRef] = fetchParent(resolvedDarkValue)
-
-        cssVars = merge(cssVars, { [pseudos._dark]: { [variable]: parentRef } })
-      }
-
-      cssMap[token] = {
-        value: parentVar ?? resolvedLightValue,
-        var: variable,
-        ref: reference,
-      }
+      return { cssMap, cssVars }
     }
-
-    return { cssMap, cssVars }
   }
+}
+
+export type CreateThemeVars = ReturnType<ReturnType<typeof getCreateThemeVars>>

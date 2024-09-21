@@ -1,4 +1,3 @@
-import { Text, VStack } from "@yamada-ui/react"
 import { a11y, act, fireEvent, render, waitFor } from "@yamada-ui/test"
 import { ScrollArea } from "../src"
 import { Content } from "./content"
@@ -19,7 +18,7 @@ describe("<ScrollArea />", () => {
   test("contains the children content", () => {
     const { getByText } = render(
       <ScrollArea data-testid="ScrollArea">
-        <Text>Item 1</Text>
+        <p>Item 1</p>
       </ScrollArea>,
     )
 
@@ -56,8 +55,7 @@ describe("<ScrollArea />", () => {
     const { container, rerender } = render(
       <ScrollArea
         innerProps={{
-          as: VStack,
-          gap: "md",
+          bg: "primary",
         }}
       >
         <Content />
@@ -67,11 +65,8 @@ describe("<ScrollArea />", () => {
     const inner = container.querySelector(".ui-scroll-area__inner")
 
     expect(inner).toHaveStyle({
-      gap: "var(--ui-spaces-md)",
+      background: "var(--ui-colors-primary)",
     })
-
-    expect(inner).toHaveClass("ui-stack")
-    expect(inner).toHaveClass("ui-stack--vertical")
 
     rerender(
       <ScrollArea>

@@ -2,6 +2,7 @@
 title: Autocomplete
 description: "`Autocomplete`は、ユーザーのテキスト入力に応じて候補を表示するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/autocomplete"
+order: 17
 label: Updated
 is_tabs: true
 with_description: true
@@ -138,7 +139,7 @@ return <Autocomplete placeholder="キャラクターを選択" items={items} />
 `items`の場合は、このように設定します。
 
 ```tsx functional=true
-const items: SelectItem[] = [
+const items: AutocompleteItem[] = [
   { label: "ベジータ", value: "ベジータ" },
   {
     label: "地球人",

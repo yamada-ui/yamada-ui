@@ -2,6 +2,7 @@
 title: Dropzone
 description: "`Dropzone` is a component used for uploading files via drag and drop."
 package_name: "@yamada-ui/dropzone"
+order: 28
 is_tabs: true
 with_description: true
 tab: Usage
@@ -162,7 +163,7 @@ To control the display based on whether the file is accepted or rejected, use `D
 <Dropzone accept={IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
   <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
     <DropzoneAccept>
-      <Upload fontSize="6xl" color="primary" />
+      <Upload fontSize="6xl" color="success" />
     </DropzoneAccept>
 
     <DropzoneReject>
@@ -206,7 +207,7 @@ Please note that it is always called regardless of whether the dropped file is a
 >
   <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
     <DropzoneAccept>
-      <Upload fontSize="6xl" color="primary" />
+      <Upload fontSize="6xl" color="success" />
     </DropzoneAccept>
 
     <DropzoneReject>
@@ -239,7 +240,7 @@ To handle only accepted files, use `onDropAccepted`.
 >
   <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
     <DropzoneAccept>
-      <Upload fontSize="6xl" color="primary" />
+      <Upload fontSize="6xl" color="success" />
     </DropzoneAccept>
 
     <DropzoneReject>
@@ -272,7 +273,7 @@ To handle only rejected files, use `onDropRejected`.
 >
   <HStack color={["blackAlpha.500", "whiteAlpha.500"]}>
     <DropzoneAccept>
-      <Upload fontSize="6xl" color="primary" />
+      <Upload fontSize="6xl" color="success" />
     </DropzoneAccept>
 
     <DropzoneReject>

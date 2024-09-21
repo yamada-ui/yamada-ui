@@ -31,7 +31,7 @@ import Link from "next/link"
 import type { FC } from "react"
 import { memo, useEffect } from "react"
 
-export type TreeProps = ListProps
+export interface TreeProps extends ListProps {}
 
 export const Tree = memo(
   forwardRef<TreeProps, "div">(({ ...rest }, ref) => {
@@ -58,7 +58,9 @@ export const Tree = memo(
   }),
 )
 
-type RecursiveListItemProps = DocumentTree & { isNested?: boolean }
+interface RecursiveListItemProps extends DocumentTree {
+  isNested?: boolean
+}
 
 const RecursiveListItem: FC<RecursiveListItemProps> = memo(
   ({ menu_icon, title, slug, label, children, isNested, is_expanded }) => {
@@ -105,10 +107,11 @@ const RecursiveListItem: FC<RecursiveListItemProps> = memo(
 
 RecursiveListItem.displayName = "RecursiveListItem"
 
-type ListItemLinkProps = Pick<
-  RecursiveListItemProps,
-  "title" | "label" | "slug" | "isNested" | "menu_icon"
-> & {
+interface ListItemLinkProps
+  extends Pick<
+    RecursiveListItemProps,
+    "title" | "label" | "slug" | "isNested" | "menu_icon"
+  > {
   isSelected?: boolean
   isOpen?: boolean
   withToggleButton?: boolean
@@ -223,7 +226,9 @@ const ListItemLink: FC<ListItemLinkProps> = memo(
 
 ListItemLink.displayName = "ListItemLink"
 
-type ListItemIconProps = { icon?: string | null } & IconProps
+interface ListItemIconProps extends IconProps {
+  icon?: string | null
+}
 
 const ListItemIcon: FC<ListItemIconProps> = memo(({ icon, ...rest }) => {
   switch (icon) {

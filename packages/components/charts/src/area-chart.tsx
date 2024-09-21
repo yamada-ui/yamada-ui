@@ -2,7 +2,7 @@ import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -38,7 +38,7 @@ import { useChartReferenceLine } from "./use-chart-reference-line"
 import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
-type AreaChartOptions = {
+interface AreaChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -53,16 +53,17 @@ type AreaChartOptions = {
   withLegend?: boolean
 }
 
-export type AreaChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"AreaChart"> &
-  AreaChartOptions &
-  UseAreaChartOptions &
-  UseChartProps &
-  UseChartAxisOptions &
-  UseChartReferenceLineOptions &
-  UseChartGridOptions &
-  UseChartTooltipOptions &
-  UseChartLegendProps
+export interface AreaChartProps
+  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity" | "strokeDasharray">,
+    ThemeProps<"AreaChart">,
+    AreaChartOptions,
+    UseAreaChartOptions,
+    UseChartProps,
+    UseChartAxisOptions,
+    UseChartReferenceLineOptions,
+    UseChartGridOptions,
+    UseChartTooltipOptions,
+    UseChartLegendProps {}
 
 /**
  * `AreaChart` is a component for drawing area charts to compare multiple sets of data.
@@ -70,7 +71,7 @@ export type AreaChartProps = HTMLUIProps<"div"> &
  * @see Docs https://yamada-ui.com/components/data-display/area-chart
  */
 export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("AreaChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("AreaChart", props)
   const {
     className,
     series,
@@ -231,8 +232,7 @@ export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-area-chart", className)}
-        var={areaVars}
-        __css={{ maxW: "full", ...styles.container }}
+        __css={{ maxW: "full", vars: areaVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

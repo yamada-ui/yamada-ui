@@ -1,5 +1,5 @@
 export { Popover, popoverProperties } from "./popover"
-export type { PopoverProps } from "./popover"
+export type { PopoverProps, ComboBoxProps } from "./popover"
 export { PopoverTrigger } from "./popover-trigger"
 export { PopoverAnchor } from "./popover-anchor"
 export { PopoverCloseButton } from "./popover-close-button"

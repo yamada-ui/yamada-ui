@@ -2,6 +2,7 @@
 title: YearPicker
 description: "`YearPicker` is a component used for users to select a year."
 package_name: "@yamada-ui/calendar"
+order: 1
 label: Updated
 with_description: true
 tab: Props
@@ -71,7 +72,7 @@ tab: Props
 <PropsCard
   id="yearpicker-calendarvariant"
   name="calendarVariant"
-  type='UIValue<(string & {}) | "solid" | "unstyled" | "subtle">'
+  type='UIValue<(string & {}) | "solid" | "subtle" | "unstyled">'
   description={"Variant for the calendar component."}
 />
 
@@ -80,6 +81,14 @@ tab: Props
   name="clearIconProps"
   type="DatePickerIconProps"
   description={"Props for year picker clear icon element."}
+/>
+
+<PropsCard
+  id="yearpicker-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -373,6 +382,14 @@ tab: Props
 />
 
 <PropsCard
+  id="yearpicker-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="yearpicker-parsedate"
   name="parseDate"
   type="(value: string) => Date | undefined"
@@ -411,15 +428,6 @@ tab: Props
     "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
   }
   defaultValue={"true"}
-/>
-
-<PropsCard
-  id="yearpicker-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
 />
 
 <PropsCard

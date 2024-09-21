@@ -7,7 +7,7 @@ import type { FC, HTMLAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { useSelectContext } from "./use-select"
 
-export type SelectIconProps = HTMLUIProps<"div">
+export interface SelectIconProps extends HTMLUIProps {}
 
 export const SelectIcon = forwardRef<SelectIconProps, "div">(
   ({ className, children, __css, ...rest }, ref) => {
@@ -53,7 +53,9 @@ export const SelectIcon = forwardRef<SelectIconProps, "div">(
   },
 )
 
-export type SelectClearIconProps = SelectIconProps & { disabled?: boolean }
+export interface SelectClearIconProps extends SelectIconProps {
+  disabled?: boolean
+}
 
 export const SelectClearIcon: FC<SelectClearIconProps> = ({
   className,

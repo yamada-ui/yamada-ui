@@ -1,4 +1,4 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
@@ -11,7 +11,6 @@ import type {
   ChartLayoutType,
   XAxisProps,
   YAxisProps,
-  ChartPropGetter,
   AreaChartType,
   LabelProps,
 } from "./chart.types"
@@ -21,7 +20,7 @@ import {
   yAxisProperties,
 } from "./rechart-properties"
 
-export type UseChartAxisOptions = {
+export interface UseChartAxisOptions {
   /**
    * The key of a group of data which should be unique in an chart.
    */
@@ -100,7 +99,7 @@ export type UseChartAxisOptions = {
   xAxisTickFormatter?: (value: any) => string
 }
 
-export type UseChartAxisProps = UseChartAxisOptions & {
+export interface UseChartAxisProps extends UseChartAxisOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -177,8 +176,7 @@ export const useChartAxis = ({
     styles.yAxisLabel,
   )(theme)
 
-  const getXAxisProps: ChartPropGetter<
-    "div",
+  const getXAxisProps: PropGetter<
     Partial<Recharts.XAxisProps>,
     Recharts.XAxisProps
   > = useCallback(
@@ -208,8 +206,7 @@ export const useChartAxis = ({
     ],
   )
 
-  const getYAxisProps: ChartPropGetter<
-    "div",
+  const getYAxisProps: PropGetter<
     Partial<Recharts.YAxisProps>,
     Recharts.YAxisProps
   > = useCallback(
@@ -240,8 +237,7 @@ export const useChartAxis = ({
     ],
   )
 
-  const getXAxisLabelProps: ChartPropGetter<
-    "div",
+  const getXAxisLabelProps: PropGetter<
     Partial<Recharts.LabelProps>,
     Recharts.LabelProps
   > = useCallback(
@@ -256,8 +252,7 @@ export const useChartAxis = ({
     [xAxisLabel, xAxisLabelClassName, xAxisLabelProps],
   )
 
-  const getYAxisLabelProps: ChartPropGetter<
-    "div",
+  const getYAxisLabelProps: PropGetter<
     Partial<Recharts.LabelProps>,
     Recharts.LabelProps
   > = useCallback(

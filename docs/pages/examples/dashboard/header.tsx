@@ -33,7 +33,7 @@ const TEAM_ITEMS = [
   },
 ]
 
-export type HeaderProps = StackProps & {}
+export interface HeaderProps extends StackProps {}
 
 export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
   return (

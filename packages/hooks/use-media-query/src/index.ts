@@ -2,7 +2,7 @@ import { useEnvironment } from "@yamada-ui/core"
 import { isArray, isFunction } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
 
-export type UseMediaQueryOptions = {
+export interface UseMediaQueryOptions {
   fallback?: boolean | boolean[]
   ssr?: boolean
 }

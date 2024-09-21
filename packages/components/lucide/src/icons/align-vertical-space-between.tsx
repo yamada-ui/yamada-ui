@@ -3,16 +3,13 @@ import { AlignVerticalSpaceBetween as AlignVerticalSpaceBetweenIcon } from "luci
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type AlignVerticalSpaceBetweenProps = LucideIconProps
-
 /**
  * `AlignVerticalSpaceBetween` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AlignVerticalSpaceBetween = forwardRef<
-  AlignVerticalSpaceBetweenProps,
-  "svg"
->((props, ref) => (
-  <LucideIcon ref={ref} as={AlignVerticalSpaceBetweenIcon} {...props} />
-))
+export const AlignVerticalSpaceBetween = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={AlignVerticalSpaceBetweenIcon} {...props} />
+  ),
+)

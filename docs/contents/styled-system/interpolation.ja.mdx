@@ -9,14 +9,14 @@ $(インターポレーション)は、スタイルシステム内で[CSSカス�
 
 ## 使い方
 
-[Style Props](/styled-system/style-props)の`var`を使用して、[CSSカスタムプロパティ(変数)](/styled-system/css-custom-properties)を作成した場合、設定した`name`を`$`で参照することができます。
+[Style Props](/styled-system/style-props)の`vars`を使用して、[CSSカスタムプロパティ(変数)](/styled-system/css-custom-properties)を作成した場合、設定した`name`を`$`で参照することができます。
 
 ```tsx
 <Box
   p="md"
   rounded="md"
   color="white"
-  var={[{ name: "bg", token: "colors", value: "primary" }]}
+  vars={[{ name: "bg", token: "colors", value: "primary" }]}
   bg="$bg"
 >
   Box

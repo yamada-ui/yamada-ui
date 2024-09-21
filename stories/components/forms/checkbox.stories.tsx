@@ -297,7 +297,10 @@ export const customHook: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { checkbox: boolean; checkboxGroup: string[] }
+  interface Data {
+    checkbox: boolean
+    checkboxGroup: string[]
+  }
 
   const {
     control,
@@ -356,7 +359,10 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { checkbox: boolean; checkboxGroup: string[] }
+  interface Data {
+    checkbox: boolean
+    checkboxGroup: string[]
+  }
 
   const defaultValues: Data = {
     checkbox: true,

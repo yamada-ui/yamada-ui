@@ -3,9 +3,9 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { usePopover } from "./popover"
 
-export type PopoverBodyProps = HTMLUIProps<"main">
+export interface PopoverBodyProps extends HTMLUIProps {}
 
-export const PopoverBody = forwardRef<PopoverBodyProps, "main">(
+export const PopoverBody = forwardRef<PopoverBodyProps, "div">(
   ({ className, ...rest }, ref) => {
     const { styles } = usePopover()
 

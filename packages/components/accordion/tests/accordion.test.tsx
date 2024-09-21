@@ -1,7 +1,4 @@
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
-import { Text } from "@yamada-ui/react"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import {
   Accordion,
   AccordionItem,
@@ -119,10 +116,9 @@ describe("<Accordion />", () => {
     const { user } = render(
       <Accordion
         icon={({ isExpanded }) => (
-          <Icon
+          <TestIcon
             data-testid="custom-icon"
-            icon={!isExpanded ? faPlus : faMinus}
-            color={["blackAlpha.800", "whiteAlpha.700"]}
+            data-icon={!isExpanded ? "plus" : "minus"}
           />
         )}
       >
@@ -149,10 +145,9 @@ describe("<Accordion />", () => {
         <AccordionItem
           label="Accordion Label"
           icon={({ isExpanded }) => (
-            <Icon
+            <TestIcon
               data-testid="custom-icon"
-              icon={!isExpanded ? faPlus : faMinus}
-              color={["blackAlpha.800", "whiteAlpha.700"]}
+              data-icon={!isExpanded ? "plus" : "minus"}
             />
           )}
         >
@@ -178,10 +173,9 @@ describe("<Accordion />", () => {
         <AccordionItem>
           <AccordionLabel
             icon={({ isExpanded }) => (
-              <Icon
+              <TestIcon
                 data-testid="custom-icon"
-                icon={!isExpanded ? faPlus : faMinus}
-                color={["blackAlpha.800", "whiteAlpha.700"]}
+                data-icon={!isExpanded ? "plus" : "minus"}
               />
             )}
           >
@@ -222,10 +216,10 @@ describe("<Accordion />", () => {
       <Accordion>
         <AccordionItem
           label={({ isExpanded, isDisabled }) => {
-            if (isDisabled) return <Text>Is disabled</Text>
+            if (isDisabled) return <p>Is disabled</p>
 
-            if (isExpanded) return <Text>Is expanded</Text>
-            else return <Text>Not expanded</Text>
+            if (isExpanded) return <p>Is expanded</p>
+            else return <p>Not expanded</p>
           }}
         >
           This is an accordion item

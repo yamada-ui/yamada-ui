@@ -10,35 +10,27 @@ export { ModalBody } from "./modal-body"
 export type { ModalBodyProps } from "./modal-body"
 export { ModalFooter } from "./modal-footer"
 export type { ModalFooterProps } from "./modal-footer"
-export {
-  Dialog,
-  DialogOverlay,
-  DialogCloseButton,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "./dialog"
-export type {
-  DialogProps,
-  DialogOverlayProps,
-  DialogCloseButtonProps,
-  DialogHeaderProps,
-  DialogBodyProps,
-  DialogFooterProps,
-} from "./dialog"
-export {
-  Drawer,
-  DrawerOverlay,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
-} from "./drawer"
-export type {
-  DrawerProps,
-  DrawerOverlayProps,
-  DrawerCloseButtonProps,
-  DrawerHeaderProps,
-  DrawerBodyProps,
-  DrawerFooterProps,
-} from "./drawer"
+export { Dialog } from "./dialog"
+export type { DialogProps } from "./dialog"
+export { DialogOverlay } from "./dialog-overlay"
+export type { DialogOverlayProps } from "./dialog-overlay"
+export { DialogCloseButton } from "./dialog-close-button"
+export type { DialogCloseButtonProps } from "./dialog-close-button"
+export { DialogHeader } from "./dialog-header"
+export type { DialogHeaderProps } from "./dialog-header"
+export { DialogBody } from "./dialog-body"
+export type { DialogBodyProps } from "./dialog-body"
+export { DialogFooter } from "./dialog-footer"
+export type { DialogFooterProps } from "./dialog-footer"
+export { Drawer } from "./drawer"
+export type { DrawerProps } from "./drawer"
+export { DrawerOverlay } from "./drawer-overlay"
+export type { DrawerOverlayProps } from "./drawer-overlay"
+export { DrawerCloseButton } from "./drawer-close-button"
+export type { DrawerCloseButtonProps } from "./drawer-close-button"
+export { DrawerHeader } from "./drawer-header"
+export type { DrawerHeaderProps } from "./drawer-header"
+export { DrawerBody } from "./drawer-body"
+export type { DrawerBodyProps } from "./drawer-body"
+export { DrawerFooter } from "./drawer-footer"
+export type { DrawerFooterProps } from "./drawer-footer"

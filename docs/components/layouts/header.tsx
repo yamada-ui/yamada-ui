@@ -37,7 +37,7 @@ import {
 import type {
   BoxProps,
   CenterProps,
-  ColorMode,
+  ColorModeWithSystem,
   DrawerProps,
   IconButtonProps,
   MenuProps,
@@ -54,7 +54,7 @@ import { useRouter } from "next/router"
 import type { FC } from "react"
 import { memo, useEffect, useRef, useState } from "react"
 
-export type HeaderProps = CenterProps & {}
+export interface HeaderProps extends CenterProps {}
 
 export const Header = memo(
   forwardRef<HeaderProps, "div">(({ ...rest }, ref) => {
@@ -151,7 +151,9 @@ export const Header = memo(
   }),
 )
 
-type ButtonGroupProps = Partial<UseDisclosureReturn> & { isMobile?: boolean }
+interface ButtonGroupProps extends Partial<UseDisclosureReturn> {
+  isMobile?: boolean
+}
 
 const ButtonGroup: FC<ButtonGroupProps> = memo(
   ({ isMobile, isOpen, onOpen, onClose }) => {
@@ -225,7 +227,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
 
 ButtonGroup.displayName = "ButtonGroup"
 
-type I18nButtonProps = IconButtonProps & {
+interface I18nButtonProps extends IconButtonProps {
   menuProps?: MenuProps
 }
 
@@ -281,7 +283,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
 
 I18nButton.displayName = "I18nButton"
 
-type ColorModeButtonProps = IconButtonProps & {
+interface ColorModeButtonProps extends IconButtonProps {
   menuProps?: MenuProps
 }
 
@@ -326,7 +328,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
         />
 
         <MenuList>
-          <MenuOptionGroup<ColorMode | "system">
+          <MenuOptionGroup<ColorModeWithSystem>
             value={internalColorMode}
             onChange={changeColorMode}
             type="radio"
@@ -349,7 +351,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
 
 ColorModeButton.displayName = "ColorModeButton"
 
-type ThemeSchemeButtonProps = IconButtonProps & {
+interface ThemeSchemeButtonProps extends IconButtonProps {
   popoverProps?: PopoverProps
 }
 
@@ -404,7 +406,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
 
 ThemeSchemeButton.displayName = "ThemeSchemeButton"
 
-type ColorButtonProps = BoxProps & {
+interface ColorButtonProps extends BoxProps {
   colorScheme: string
 }
 
@@ -438,7 +440,7 @@ const ColorButton: FC<ColorButtonProps> = memo(({ colorScheme, ...rest }) => {
 
 ColorButton.displayName = "ColorButton"
 
-type MobileMenuProps = DrawerProps
+interface MobileMenuProps extends DrawerProps {}
 
 const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
   const { events } = useRouter()
@@ -462,7 +464,9 @@ const MobileMenu: FC<MobileMenuProps> = memo(({ isOpen, onClose }) => {
       onClose={onClose}
       withCloseButton={false}
       isFullHeight
-      w="auto"
+      closeOnDrag
+      withDragBar={false}
+      w="sm"
     >
       <DrawerHeader
         justifyContent="flex-end"

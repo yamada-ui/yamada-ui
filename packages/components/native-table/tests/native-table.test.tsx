@@ -1,6 +1,6 @@
-import type { NativeTableProps } from "@yamada-ui/react"
 import { a11y, render, screen } from "@yamada-ui/test"
 import type { FC } from "react"
+import type { NativeTableProps } from "../src"
 import {
   NativeTable,
   TableContainer,

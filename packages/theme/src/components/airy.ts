@@ -6,7 +6,7 @@ export const Airy: ComponentStyle<"Airy"> = {
       width: "fit-content",
       userSelect: "none",
     },
-    ":disabled": {
+    _disabled: {
       opacity: 0.4,
       cursor: "not-allowed",
     },

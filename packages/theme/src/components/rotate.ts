@@ -6,7 +6,7 @@ export const Rotate: ComponentStyle<"Rotate"> = {
       width: "fit-content",
       userSelect: "none",
     },
-    ":disabled": {
+    _disabled: {
       opacity: 0.4,
       cursor: "not-allowed",
     },

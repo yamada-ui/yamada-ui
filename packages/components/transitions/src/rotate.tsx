@@ -42,15 +42,16 @@ interface RotateOptions {
   isReadOnly?: boolean
 }
 
-export type RotateProps = Merge<MotionProps<"button">, RotateOptions> &
-  ThemeProps<"Rotate">
+export interface RotateProps
+  extends Merge<MotionProps<"button">, RotateOptions>,
+    ThemeProps<"Rotate"> {}
 
 /**
  * `Rotate` is an animation component that alternately rotates two elements as they switch.
  *
  * @see Docs https://yamada-ui.com/components/transitions/rotate
  */
-export const Rotate = motionForwardRef<RotateProps, "div">((props, ref) => {
+export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
   const [style, mergedProps] = useComponentStyle("Rotate", props)
   const {
     from,

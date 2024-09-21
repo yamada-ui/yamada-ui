@@ -1,6 +1,6 @@
 import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
@@ -26,8 +26,8 @@ interface AiryOptions {
    * @default 'from'
    */
   defaultValue?: AiryIdent
-  duration?: MotionTransitionProps["duration"]
-  delay?: MotionTransitionProps["delay"] //TODO: fix type このタイプを使うとなると複雑になる。。。
+  duration?: number
+  delay?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -42,8 +42,14 @@ interface AiryOptions {
   isReadOnly?: boolean
 }
 
-export type AiryProps = Merge<MotionProps<"button">, AiryOptions> &
-  ThemeProps<"Airy">
+export interface AiryProps
+  extends Merge<MotionProps<"button">, AiryOptions>,
+    ThemeProps<"Airy"> {}
+
+// type Fuu = MotionProps<"button"> & ThemeProps<"Airy"> & AiryOptions
+// interface Hoge extends MotionProps<"button">, ThemeProps<"Airy"> {
+//   //
+// }
 
 /**
  * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked
@@ -59,7 +65,7 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
     defaultValue = "from",
     onChange: onChangeProp,
     duration = 0.1,
-    delay: delayProp = 0,
+    delay = 0,
     isDisabled = false,
     isReadOnly = false,
     className,
@@ -101,13 +107,7 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
       initial={{ opacity: 1 }}
       transition={{
         duration,
-        delay:
-          // delay={{ enter: 1, exit: 1}}で渡した場合、どう処理するかわからん
-          typeof delayProp === "number"
-            ? delayProp
-            : "enter" in delayProp
-              ? delayProp.enter
-              : 0,
+        delay,
       }}
       {...rest}
     >

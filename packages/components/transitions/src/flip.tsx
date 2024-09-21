@@ -1,5 +1,5 @@
 import type { ThemeProps } from "@yamada-ui/core"
-import { omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
+import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import type {
   MotionProps,
   MotionTransition,
@@ -55,7 +55,7 @@ export type FlipIdent = "from" | "to"
 
 export type FlipOrientation = "horizontal" | "vertical"
 
-interface FlipOptions {
+export interface FlipOptions {
   /**
    * Passing React elements to "from" and "to" is required.
    */
@@ -95,8 +95,10 @@ interface FlipOptions {
   isReadOnly?: boolean
 }
 
-export type FlipProps = Merge<MotionProps<"button">, FlipOptions> &
-  ThemeProps<"Flip">
+export interface FlipProps
+  extends Merge<MotionProps<"button">, FlipOptions>,
+    ThemeProps<"Flip"> {}
+
 /**
  * `Flip` is an animation component that alternates between flipping two elements.
  *
@@ -110,7 +112,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const fromRef = useRef<HTMLDivElement | null>(null)
   const toRef = useRef<HTMLDivElement | null>(null)
 
-  const [styles, mergedProps] = useMultiComponentStyle("Flip", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Flip", props)
   const {
     from,
     to,

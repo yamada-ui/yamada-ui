@@ -2,7 +2,7 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -13,8 +13,8 @@ const defaultOverlays = (
   min: number,
   max: number,
   withShadow: boolean,
-): HTMLUIProps<"div">[] => {
-  let overlays: HTMLUIProps<"div">[] = [
+): HTMLUIProps[] => {
+  let overlays: HTMLUIProps[] = [
     {
       bgGradient: `linear(to-r, ${[...Array(7)]
         .map(
@@ -36,7 +36,7 @@ const defaultOverlays = (
   return overlays
 }
 
-type HueSliderOptions = {
+interface HueSliderOptions {
   /**
    * The minimum allowed value of the slider. Cannot be greater than max.
    *
@@ -68,15 +68,15 @@ type HueSliderOptions = {
   /**
    * Props for slider track element.
    */
-  trackProps?: HTMLUIProps<"div">
+  trackProps?: HTMLUIProps
   /**
    * Props for slider thumb element.
    */
-  thumbProps?: HTMLUIProps<"div">
+  thumbProps?: HTMLUIProps
   /**
    * The overlay used for the slider.
    */
-  overlays?: HTMLUIProps<"div">[]
+  overlays?: HTMLUIProps[]
 }
 
 /**
@@ -84,12 +84,13 @@ type HueSliderOptions = {
  *
  * @see Docs https://yamada-ui.com/components/forms/hue-slider
  */
-export type HueSliderProps = ThemeProps<"HueSlider"> &
-  Partial<UseColorSliderProps> &
-  HueSliderOptions
+export interface HueSliderProps
+  extends ThemeProps<"HueSlider">,
+    Partial<UseColorSliderProps>,
+    HueSliderOptions {}
 
 export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("HueSlider", props)
+  const [styles, mergedProps] = useComponentMultiStyle("HueSlider", props)
   const {
     className,
     inputProps,

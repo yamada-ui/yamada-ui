@@ -1,4 +1,3 @@
-import { Button } from "@yamada-ui/react"
 import { render, screen, fireEvent, waitFor } from "@yamada-ui/test"
 import { useRef } from "react"
 import { useSnacks, Snacks } from "../src"
@@ -29,21 +28,21 @@ describe("<Snacks />", () => {
 
     return (
       <>
-        <Button data-testid="add-btn" onClick={() => onOpen()}>
+        <button data-testid="add-btn" onClick={() => onOpen()}>
           Add
-        </Button>
+        </button>
 
-        <Button data-testid="update-btn" onClick={() => onUpdate()}>
+        <button data-testid="update-btn" onClick={() => onUpdate()}>
           Update
-        </Button>
+        </button>
 
-        <Button data-testid="close-btn" onClick={() => onClose()}>
+        <button data-testid="close-btn" onClick={() => onClose()}>
           Close
-        </Button>
+        </button>
 
-        <Button data-testid="close-all-btn" onClick={snack.closeAll}>
+        <button data-testid="close-all-btn" onClick={snack.closeAll}>
           Close all
-        </Button>
+        </button>
 
         <Snacks snacks={snacks} gutter={[0, "md"]} />
       </>

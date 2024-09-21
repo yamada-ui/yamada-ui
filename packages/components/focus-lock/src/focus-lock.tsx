@@ -6,7 +6,7 @@ import ReactFocusLock from "react-focus-lock"
 
 const InternalFocusLock = interopDefault(ReactFocusLock)
 
-export type FocusLockProps = {
+export interface FocusLockProps {
   /**
    * `ref` of the element to receive focus initially.
    */

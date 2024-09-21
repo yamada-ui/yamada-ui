@@ -2,7 +2,7 @@ import { VStack, forwardRef } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 
-export type SectionProps = StackProps & {}
+export interface SectionProps extends StackProps {}
 
 export const Section = memo(
   forwardRef<SectionProps, "div">(({ ...rest }, ref) => {

@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -11,23 +11,23 @@ import { Portal } from "@yamada-ui/portal"
 import type { PortalProps } from "@yamada-ui/portal"
 import { cx, runIfFunc } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
+import {
+  AutocompleteDescendantsContextProvider,
+  AutocompleteProvider,
+  useAutocompleteContext,
+} from "./autocomplete-context"
+import { AutocompleteCreate } from "./autocomplete-create"
 import type { AutocompleteCreateProps } from "./autocomplete-create"
+import { AutocompleteEmpty } from "./autocomplete-empty"
 import type { AutocompleteEmptyProps } from "./autocomplete-empty"
 import type { AutocompleteIconProps } from "./autocomplete-icon"
 import { AutocompleteIcon } from "./autocomplete-icon"
 import type { AutocompleteListProps } from "./autocomplete-list"
 import { AutocompleteList } from "./autocomplete-list"
 import type { UseAutocompleteProps } from "./use-autocomplete"
-import {
-  AutocompleteProvider,
-  useAutocomplete,
-  AutocompleteDescendantsContextProvider,
-  useAutocompleteContext,
-  useAutocompleteInput,
-} from "./use-autocomplete"
-import { AutocompleteCreate, AutocompleteEmpty } from "./"
+import { useAutocomplete, useAutocompleteInput } from "./use-autocomplete"
 
-type AutocompleteOptions = {
+interface AutocompleteOptions {
   /**
    * The border color when the input is focused.
    */
@@ -39,11 +39,11 @@ type AutocompleteOptions = {
   /**
    * Props for autocomplete container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for autocomplete content element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for autocomplete list element.
    */
@@ -64,7 +64,6 @@ type AutocompleteOptions = {
    * Props to be forwarded to the portal component.
    *
    * @default '{ isDisabled: true }'
-   *
    */
   portalProps?: Omit<PortalProps, "children">
   /**
@@ -85,9 +84,10 @@ type AutocompleteOptions = {
   footer?: ReactNode | FC<{ value: string | undefined; onClose: () => void }>
 }
 
-export type AutocompleteProps = ThemeProps<"Autocomplete"> &
-  Omit<UseAutocompleteProps<string>, "maxSelectValues" | "omitSelectedValues"> &
-  AutocompleteOptions
+export interface AutocompleteProps
+  extends ThemeProps<"Autocomplete">,
+    Omit<UseAutocompleteProps, "maxSelectValues" | "omitSelectedValues">,
+    AutocompleteOptions {}
 
 /**
  * `Autocomplete` is a component used to display suggestions in response to user text input.
@@ -96,7 +96,7 @@ export type AutocompleteProps = ThemeProps<"Autocomplete"> &
  */
 export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Autocomplete", props)
+    const [styles, mergedProps] = useComponentMultiStyle("Autocomplete", props)
     let {
       className,
       defaultValue = "",
@@ -218,8 +218,9 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   },
 )
 
-type AutocompleteFieldProps = HTMLUIProps<"div"> &
-  Pick<AutocompleteProps, "inputProps">
+interface AutocompleteFieldProps
+  extends HTMLUIProps,
+    Pick<AutocompleteProps, "inputProps"> {}
 
 const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
   ({ className, h, minH, placeholder, inputProps, ...rest }, ref) => {

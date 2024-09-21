@@ -1,4 +1,8 @@
-import { ColorModeScript, ThemeSchemeScript } from "@yamada-ui/react"
+import {
+  ColorModeScript,
+  ColorModeWithSystem,
+  ThemeSchemeScript,
+} from "@yamada-ui/react"
 import { Hono } from "hono"
 import { getCookie } from "hono/cookie"
 import { renderToString } from "react-dom/server"
@@ -7,7 +11,7 @@ import { config } from "./theme"
 const app = new Hono()
 
 app.get("*", (c) => {
-  const colorMode = getCookie(c, "ui-color-mode")
+  const colorMode = getCookie(c, "ui-color-mode") as ColorModeWithSystem
   const themeScheme = getCookie(c, "ui-theme-scheme")
 
   return c.html(

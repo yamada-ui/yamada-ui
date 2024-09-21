@@ -3,13 +3,11 @@ import { Brackets as BracketsIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type BracketsProps = LucideIconProps
-
 /**
  * `Brackets` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const Brackets = forwardRef<BracketsProps, "svg">((props, ref) => (
+export const Brackets = forwardRef<LucideIconProps, "svg">((props, ref) => (
   <LucideIcon ref={ref} as={BracketsIcon} {...props} />
 ))

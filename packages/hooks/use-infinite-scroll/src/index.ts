@@ -63,7 +63,8 @@ const getScrollPosition = (
   }
 }
 
-export type UseInfiniteScrollProps = Omit<IntersectionObserverInit, "root"> & {
+export interface UseInfiniteScrollProps
+  extends Omit<IntersectionObserverInit, "root"> {
   /**
    * The orientation of the infinite scroll.
    *

@@ -3,7 +3,6 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { useClickable } from "@yamada-ui/use-clickable"
 import {
   ariaAttr,
-  createContext,
   cx,
   funcAll,
   handlerAll,
@@ -13,31 +12,19 @@ import {
   useUpdateEffect,
 } from "@yamada-ui/utils"
 import type {
-  Dispatch,
   FC,
   KeyboardEvent,
   KeyboardEventHandler,
   MouseEvent,
-  MutableRefObject,
   ReactElement,
-  RefObject,
-  SetStateAction,
 } from "react"
 import { useCallback, useRef, useState } from "react"
-import { useMenu, useMenuDescendant } from "./menu"
-
-type UpstreamMenuItemContext = {
-  onUpstreamRestoreFocus: () => void
-  onKeyDownRef: RefObject<KeyboardEventHandler<HTMLLIElement>>
-  setDownstreamOpen: Dispatch<SetStateAction<boolean>>
-  hasDownstreamRef: MutableRefObject<boolean>
-}
-
-export const [UpstreamMenuItemProvider, useUpstreamMenuItem] =
-  createContext<UpstreamMenuItemContext>({
-    strict: false,
-    name: "UpstreamMenuItemContext",
-  })
+import {
+  useMenuDescendant,
+  UpstreamMenuItemProvider,
+  useMenu,
+  useUpstreamMenuItem,
+} from "./menu-context"
 
 const isTargetMenuItem = (target: EventTarget | null) => {
   return (
@@ -46,7 +33,7 @@ const isTargetMenuItem = (target: EventTarget | null) => {
   )
 }
 
-type MenuItemOptions = {
+interface MenuItemOptions {
   /**
    * If `true`, the menu item will be disabled.
    *
@@ -75,7 +62,7 @@ type MenuItemOptions = {
   command?: string
 }
 
-export type MenuItemProps = HTMLUIProps<"li"> & MenuItemOptions
+export interface MenuItemProps extends HTMLUIProps<"li">, MenuItemOptions {}
 
 export const MenuItem = forwardRef<MenuItemProps, "li">(
   (
@@ -155,7 +142,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent<HTMLLIElement>) => {
-        const actions: Record<string, Function | undefined> = {
+        const actions: { [key: string]: Function | undefined } = {
           ArrowLeft: isNested
             ? funcAll(onUpstreamRestoreFocus, onClose)
             : undefined,
@@ -243,7 +230,7 @@ export const MenuItem = forwardRef<MenuItemProps, "li">(
   },
 )
 
-type MenuOptionItemOptions = {
+interface MenuOptionItemOptions {
   /**
    * The menu option item icon to use.
    */
@@ -264,8 +251,9 @@ type MenuOptionItemOptions = {
   type?: "radio" | "checkbox"
 }
 
-export type MenuOptionItemProps = Omit<MenuItemProps, "icon" | "command"> &
-  MenuOptionItemOptions
+export interface MenuOptionItemProps
+  extends Omit<MenuItemProps, "icon" | "command" | "value">,
+    MenuOptionItemOptions {}
 
 export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   (
@@ -291,7 +279,7 @@ export const MenuOptionItem = forwardRef<MenuOptionItemProps, "button">(
   },
 )
 
-export type MenuIconProps = HTMLUIProps<"span">
+export interface MenuIconProps extends HTMLUIProps<"span"> {}
 
 export const MenuIcon = forwardRef<MenuIconProps, "span">(
   ({ className, ...rest }, ref) => {
@@ -317,7 +305,7 @@ export const MenuIcon = forwardRef<MenuIconProps, "span">(
   },
 )
 
-export type MenuCommandProps = HTMLUIProps<"span">
+export interface MenuCommandProps extends HTMLUIProps<"span"> {}
 
 export const MenuCommand = forwardRef<MenuCommandProps, "span">(
   ({ className, ...rest }, ref) => {

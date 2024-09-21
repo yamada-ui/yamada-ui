@@ -1,6 +1,6 @@
-import { AnimatePresence, Button, useBoolean } from "@yamada-ui/react"
 import { render, a11y, screen, waitFor } from "@yamada-ui/test"
-import { Motion } from "../src"
+import { useState } from "react"
+import { AnimatePresence, Motion } from "../src"
 
 describe("<Motion />", () => {
   test("Motion renders correctly", async () => {
@@ -34,10 +34,10 @@ describe("<Motion />", () => {
 
   test("Motion renders correctly with exit and transition", async () => {
     const MotionExample = () => {
-      const [isVisible, { toggle }] = useBoolean(false)
+      const [isVisible, setIsVisible] = useState(false)
       return (
         <>
-          <Button onClick={toggle}>click</Button>
+          <button onClick={() => setIsVisible((prev) => !prev)}>click</button>
           <AnimatePresence>
             {isVisible ? (
               <Motion

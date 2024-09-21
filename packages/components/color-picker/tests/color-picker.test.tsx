@@ -71,4 +71,22 @@ describe("<ColorPicker />", () => {
 
     expect(popover[0]).not.toBeVisible()
   })
+
+  test("ColorPickerEyeDropper clones children correctly", () => {
+    render(
+      <ColorPicker
+        withEyeDropper
+        eyeDropperProps={{
+          children: <span data-testid="eyeDropperIcon" />,
+        }}
+      />,
+    )
+
+    const eyeDropper = screen.getByTestId("eyeDropperIcon")
+
+    expect(eyeDropper).toBeInTheDocument()
+
+    expect(eyeDropper).toHaveStyle("max-width: 1em")
+    expect(eyeDropper).toHaveStyle("max-height: 1em")
+  })
 })

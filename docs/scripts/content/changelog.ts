@@ -10,7 +10,12 @@ import { locales } from "utils/i18n"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type MDXFile = { name: string; version: number[]; data: Data; content: Content }
+interface MDXFile {
+  name: string
+  version: number[]
+  data: Data
+  content: Content
+}
 
 const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, ".changelog")
 const DIST_PATH = path.join("contents", "changelog")

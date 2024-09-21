@@ -1,5 +1,21 @@
 # @yamada-ui/use-focus-visible
 
+## 1.1.7
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3)]:
+  - @yamada-ui/utils@1.5.1
+
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies [[`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74)]:
+  - @yamada-ui/utils@1.5.0
+
 ## 1.1.5
 
 ### Patch Changes

@@ -87,6 +87,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       p: 0,
       fontSize: undefined,
       fontWeight: "normal",
+      color: ["blackAlpha.800", "whiteAlpha.700"],
       _weekend: {
         color: ["red.600", "red.400"],
       },
@@ -95,6 +96,9 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       },
       _holiday: {
         color: ["red.600", "red.400"],
+      },
+      _focusVisible: {
+        boxShadow: "outline",
       },
       _disabled: {
         opacity: 0.4,
@@ -191,8 +195,10 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       cell: {
         _between: {
           bg: [
-            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
-            shadeColor(`${c}.300`, 72)(t, m),
+            isGray(c)
+              ? transparentizeColor(`${c}.50`, 0.24)(t, m)
+              : transparentizeColor(`${c}.50`, 0.64)(t, m),
+            shadeColor(`${c}.300`, 76)(t, m),
           ],
           _start: {
             roundedLeft: "md",

@@ -13,7 +13,7 @@ import {
   isUndefined,
   useUpdateEffect,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, Ref } from "react"
+import type { ForwardedRef, RefAttributes } from "react"
 import { useCallback, useMemo, useRef } from "react"
 
 type ToggleGroupContext = ThemeProps<"Button"> & {
@@ -33,9 +33,9 @@ const [ToggleGroupProvider, useToggleGroup] = createContext<ToggleGroupContext>(
 
 export { useToggleGroup }
 
-type ToggleGroupOptions<
+interface ToggleGroupOptions<
   Y extends string | number | (string | number)[] = string,
-> = {
+> {
   /**
    * The value of the toggle button group.
    */
@@ -47,7 +47,7 @@ type ToggleGroupOptions<
   /**
    * The callback fired when any children toggle button is selected or unselected.
    */
-  onChange?: (value: Y extends Array<any> ? Y : Y | undefined) => void
+  onChange?: (value: Y extends any[] ? Y : Y | undefined) => void
   /**
    * The CSS `flex-direction` property.
    */
@@ -71,11 +71,11 @@ type ToggleGroupOptions<
  *
  * @see Docs https://yamada-ui.com/components/forms/toggle
  */
-export type ToggleGroupProps<
+export interface ToggleGroupProps<
   Y extends string | number | (string | number)[] = string,
-> = Omit<HTMLUIProps<"div">, "direction" | "onChange"> &
-  ThemeProps<"Toggle"> &
-  ToggleGroupOptions<Y>
+> extends Omit<HTMLUIProps, "direction" | "defaultValue" | "onChange">,
+    ThemeProps<"Toggle">,
+    ToggleGroupOptions<Y> {}
 
 export const ToggleGroup = forwardRef(
   <Y extends string | number | (string | number)[] = string>(
@@ -103,7 +103,7 @@ export const ToggleGroup = forwardRef(
     const isControlledRef = useRef<boolean>(!isUndefined(value))
 
     const onChange = useCallback(
-      <M extends string | number = Y extends Array<any> ? Y[number] : Y>(
+      <M extends string | number = Y extends any[] ? Y[number] : Y>(
         value: M | undefined,
       ) => {
         if (isUndefined(value)) return
@@ -168,7 +168,7 @@ export const ToggleGroup = forwardRef(
   },
 ) as {
   <Y extends string | number | (string | number)[] = string>(
-    props: ToggleGroupProps<Y> & { ref?: Ref<HTMLDivElement> },
+    props: ToggleGroupProps<Y> & RefAttributes<HTMLDivElement>,
   ): JSX.Element
 } & ComponentArgs
 

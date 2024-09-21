@@ -5,9 +5,10 @@ import type { FC } from "react"
 import { Model } from "./model"
 import { Parameter } from "./parameter"
 import { SwitchMode } from "./switch-mode"
-import { DEFAULT_EDITOR_MODE, type EditorMode } from "."
+import { DEFAULT_EDITOR_MODE } from "."
+import type { EditorMode } from "."
 
-export type MenuProps = StackProps & {
+export interface MenuProps extends StackProps {
   onChangeMode: (mode: EditorMode) => void
 }
 

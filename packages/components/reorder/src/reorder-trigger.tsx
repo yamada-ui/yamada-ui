@@ -4,10 +4,9 @@ import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx, handlerAll, mergeRefs, dataAttr } from "@yamada-ui/utils"
 import type { FC } from "react"
-import { useReorderContext } from "./reorder"
-import { useReorderItemContext } from "./reorder-item"
+import { useReorderContext, useReorderItemContext } from "./reorder-context"
 
-export type ReorderTriggerProps = HTMLUIProps<"div">
+export interface ReorderTriggerProps extends HTMLUIProps {}
 
 export const ReorderTrigger = forwardRef<ReorderTriggerProps, "div">(
   ({ className, children = <ReorderTriggerIcon />, ...rest }, ref) => {

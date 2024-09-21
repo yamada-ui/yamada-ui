@@ -1,14 +1,15 @@
-import { isArray, isObject, isString, omitObject, prettier } from "../../utils"
+import type { Dict } from "../../utils"
+import { getObject, isArray, isObject, prettier } from "../../utils"
 import { config } from "./config"
 
 const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-type Component = {
+interface Component {
   sizes: string[]
   variants: string[]
 }
 
-export const printComponent = (components: Record<string, Component>) =>
+const printComponent = (components: { [key: string]: Component }) =>
   `components: { ${Object.entries(components)
     .map(
       ([key, unions]) =>
@@ -18,7 +19,7 @@ export const printComponent = (components: Record<string, Component>) =>
     )
     .join(`\n`)} }`
 
-export const print = (unions: Record<string, string[]>) =>
+const print = (unions: Component | { [key: string]: string[] }) =>
   Object.entries(unions)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
@@ -30,7 +31,7 @@ export const print = (unions: Record<string, string[]>) =>
     )
     .join("\n")
 
-export const extractComponents = ({ components = {} }: { components: any }) =>
+const extractComponents = ({ components = {} }: Dict) =>
   Object.entries<{ sizes?: object; variants?: object }>(components).reduce(
     (obj, [key, { sizes, variants }]) => {
       if (sizes || variants) {
@@ -42,42 +43,8 @@ export const extractComponents = ({ components = {} }: { components: any }) =>
 
       return obj
     },
-    {} as Record<string, Component>,
+    {} as { [key: string]: Component },
   )
-
-export const extractTransitions = (theme: any) => {
-  let transitionProperty: string[] = []
-  let transitionDuration: string[] = []
-  let transitionEasing: string[] = []
-
-  const { transitions, semantics } = theme
-
-  if (!isObject(transitions))
-    return { transitionProperty, transitionDuration, transitionEasing }
-
-  const { property, duration, easing } = semantics.transitions ?? {}
-
-  Object.entries(transitions).forEach(([key, value]) => {
-    switch (key) {
-      case "property":
-        transitionProperty = [...extractPaths(value), ...extractPaths(property)]
-        break
-
-      case "duration":
-        transitionDuration = [...extractPaths(value), ...extractPaths(duration)]
-        break
-
-      case "easing":
-        transitionEasing = [...extractPaths(value), ...extractPaths(easing)]
-        break
-
-      default:
-        return
-    }
-  })
-
-  return { transitionProperty, transitionDuration, transitionEasing }
-}
 
 const isTone = (value: any) => {
   if (!isObject(value)) return false
@@ -87,45 +54,43 @@ const isTone = (value: any) => {
   return TONES.every((key) => keys.includes(key.toString()))
 }
 
-export const extractColorSchemes = (theme: any) => {
+const extractColorSchemes = (theme: Dict) => {
   const { colors, semantics } = theme
-  const results: { colorSchemes: string[]; colorSchemeColors: string[] } = {
-    colorSchemes: [],
-    colorSchemeColors: [],
-  }
 
-  if (!isObject(colors)) return results
+  let colorSchemes: string[] = []
+  let colorSchemeColors: string[] = []
+
+  if (!isObject(colors)) return { colorSchemes, colorSchemeColors }
 
   Object.entries(colors).forEach(([key, value]) => {
     if (!isTone(value)) return
 
-    results.colorSchemes.push(key)
+    colorSchemes.push(key)
   })
 
-  if (!isObject(semantics?.colorSchemes)) return results
+  if (!isObject(semantics?.colorSchemes))
+    return { colorSchemes, colorSchemeColors }
 
   Object.entries(semantics.colorSchemes).forEach(([key, value]) => {
     if (isTone(value)) {
-      results.colorSchemes.push(key)
-      results.colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
+      colorSchemes.push(key)
+      colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
     } else {
       const hasColorScheme = isArray(value)
-        ? value.every(
-            (key) => isString(key) && Object.keys(colors).includes(key),
-          )
-        : Object.keys(colors).some((key) => key === value)
+        ? value.every((key) => Object.keys(colors).includes(String(key)))
+        : Object.keys(colors).includes(String(value))
 
       if (!hasColorScheme) return
 
-      results.colorSchemes.push(key)
-      results.colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
+      colorSchemes.push(key)
+      colorSchemeColors.push(...TONES.map((tone) => `${key}.${tone}`))
     }
   })
 
-  return results
+  return { colorSchemes, colorSchemeColors }
 }
 
-export const extractThemeSchemes = (theme: any) => {
+const extractThemeSchemes = (theme: Dict) => {
   const { themeSchemes } = theme
 
   if (!isObject(themeSchemes)) return ["base"]
@@ -133,99 +98,125 @@ export const extractThemeSchemes = (theme: any) => {
   return ["base", ...Object.keys(themeSchemes)]
 }
 
-export const extractPaths = (
-  target: any,
+const extractPaths = (
+  target: Dict,
   maxDepth = 3,
   omitKeys: string[] = [],
+  shouldProcess?: (obj: Dict) => boolean,
 ) => {
   if ((!isObject(target) && !isArray(target)) || !maxDepth) return []
 
-  return Object.entries(target).reduce((array, [key, value]) => {
+  return Object.entries(target).reduce((prev, [key, value]) => {
     if (
       isObject(value) &&
-      !Object.keys(value).some((key) => omitKeys.includes(key))
+      !Object.keys(value).some((key) => omitKeys.includes(key)) &&
+      (!shouldProcess || shouldProcess(value))
     ) {
-      extractPaths(value, maxDepth - 1, omitKeys).forEach((nestedKey) =>
-        array.push(`${key}.${nestedKey}`),
+      extractPaths(value, maxDepth - 1, omitKeys, shouldProcess).forEach(
+        (nestedKey) => prev.push(`${key}.${nestedKey}`),
       )
     } else {
-      array.push(key)
+      prev.push(key)
     }
 
-    return array
+    return prev
   }, [] as string[])
 }
 
-export const extractKeys = (theme: any, key: string) => {
-  const keys = key.split(".")
-
-  const property = keys.reduce((obj, key) => obj[key] ?? {}, theme)
+const extractKeys = (obj: Dict, key: string) => {
+  const property = getObject(obj, key)
 
   if (!isObject(property)) return []
 
   return Object.keys(property)
 }
 
-export const createThemeTypings = async (theme: any) => {
+export const createThemeTypings = async (
+  theme: Dict,
+  { responsive = false }: Dict,
+) => {
+  let shouldProcess: ((obj: Dict) => boolean) | undefined = undefined
+
+  if (responsive && isObject(theme.breakpoints)) {
+    const keys = ["base", ...Object.keys(theme.breakpoints)]
+
+    const isResponsive = (obj: Dict) => {
+      const providedKeys = Object.keys(obj)
+
+      if (!providedKeys.length) return false
+
+      if (!providedKeys.includes("base")) return false
+
+      return providedKeys.every((key) => keys.includes(key))
+    }
+
+    shouldProcess = (obj: Dict) => !isResponsive(obj)
+  }
+
   const tokens = config.reduce(
     (
       prev,
       {
         key,
+        replaceKey,
         maxScanDepth,
         omitScanKeys,
-        filter = () => true,
         flatMap = (value) => value,
       },
     ) => {
-      const target = theme[key]
+      const target = getObject(theme, key)
 
-      prev[key] = []
+      prev[replaceKey ?? key] = []
 
       if (isObject(target) || isArray(target)) {
-        prev[key] = extractPaths(target, maxScanDepth, omitScanKeys)
-          .filter(filter)
-          .flatMap(flatMap)
+        prev[replaceKey ?? key] = extractPaths(
+          target,
+          maxScanDepth,
+          omitScanKeys,
+          shouldProcess,
+        ).flatMap(flatMap)
       }
 
       if (isObject(theme.semantics)) {
-        const semanticKeys = extractKeys(
-          omitObject(theme.semantics, ["colorSchemes"]),
-          key,
-        )
-          .filter(filter)
-          .flatMap(flatMap)
+        const target = getObject(theme.semantics, key)
 
-        prev[key].push(...semanticKeys)
+        const semanticKeys = extractPaths(
+          target,
+          maxScanDepth,
+          omitScanKeys,
+          shouldProcess,
+        ).flatMap(flatMap)
+
+        prev[replaceKey ?? key].push(...semanticKeys)
       }
 
       return prev
     },
-    {} as Record<string, string[]>,
+    {} as { [key: string]: string[] },
   )
 
   const textStyles = extractKeys(theme, "styles.textStyles")
   const layerStyles = extractKeys(theme, "styles.layerStyles")
   const { colorSchemes, colorSchemeColors } = extractColorSchemes(theme)
   const themeSchemes = extractThemeSchemes(theme)
-  const { transitionProperty, transitionDuration, transitionEasing } =
-    extractTransitions(theme)
-  const componentTypes = extractComponents(theme)
+  const components = extractComponents(theme)
 
   tokens.colors = [...tokens.colors, ...colorSchemeColors]
 
   return prettier(
-    `import type { UITheme } from './ui-theme.types'\n\nexport interface GeneratedTheme extends UITheme { ${print(
-      {
+    [
+      `import type { UITheme } from './ui-theme.types'`,
+      ``,
+      `export interface GeneratedTheme extends UITheme {`,
+      print({
         ...tokens,
         textStyles,
         layerStyles,
         colorSchemes,
         themeSchemes,
-        transitionProperty,
-        transitionDuration,
-        transitionEasing,
-      },
-    )} ${printComponent(componentTypes)} }`,
+      }),
+      printComponent(components),
+      `}`,
+    ].join("\n"),
   )
 }

@@ -4,16 +4,17 @@ import { cx } from "@yamada-ui/utils"
 import type { UseCarouselSlideProps } from "./use-carousel"
 import { useCarouselContext, useCarouselSlide } from "./use-carousel"
 
-type CarouselSlideOptions = {
+interface CarouselSlideOptions {
   /**
    * The CSS `width` property.
    */
   size?: CSSUIObject["width"]
 }
 
-export type CarouselSlideProps = HTMLUIProps<"div"> &
-  UseCarouselSlideProps &
-  CarouselSlideOptions
+export interface CarouselSlideProps
+  extends HTMLUIProps,
+    UseCarouselSlideProps,
+    CarouselSlideOptions {}
 
 export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
   ({ className, size, ...rest }, ref) => {
@@ -44,7 +45,7 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
   },
 )
 
-type CarouselSlideInnerProps = HTMLUIProps<"div">
+interface CarouselSlideInnerProps extends HTMLUIProps {}
 
 const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
   ({ ...rest }, ref) => {

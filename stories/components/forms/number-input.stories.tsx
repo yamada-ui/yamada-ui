@@ -223,7 +223,9 @@ export const stylingPlaceholder: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { numberInput: string }
+  interface Data {
+    numberInput: string
+  }
 
   const {
     control,
@@ -262,7 +264,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { numberInput: string }
+  interface Data {
+    numberInput: string
+  }
 
   const defaultValues: Data = {
     numberInput: "5",

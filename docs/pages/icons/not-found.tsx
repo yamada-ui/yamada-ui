@@ -5,7 +5,7 @@ import { useI18n } from "contexts"
 import { memo } from "react"
 import type { FC, MutableRefObject } from "react"
 
-export type NotFoundProps = BoxProps & {
+export interface NotFoundProps extends BoxProps {
   valueResetRef: MutableRefObject<() => void>
 }
 

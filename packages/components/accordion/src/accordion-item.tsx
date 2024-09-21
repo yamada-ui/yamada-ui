@@ -1,8 +1,7 @@
-import type { CSSUIObject, HTMLUIProps, UIPropGetter } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, PropGetter } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import {
   ariaAttr,
-  createContext,
   cx,
   dataAttr,
   findChildren,
@@ -15,25 +14,15 @@ import {
 } from "@yamada-ui/utils"
 import type { KeyboardEvent, KeyboardEventHandler, ReactNode } from "react"
 import { useCallback, useId } from "react"
-import { useAccordionContext, useAccordionDescendant } from "./accordion"
 import { AccordionButton } from "./accordion-button"
+import {
+  AccordionItemProvider,
+  useAccordionContext,
+  useAccordionDescendant,
+} from "./accordion-context"
 import { AccordionPanel } from "./accordion-panel"
 
-type AccordionItemContext = Omit<AccordionItemOptions, "children"> & {
-  isOpen: boolean
-  getButtonProps: UIPropGetter<"button">
-  getPanelProps: UIPropGetter
-}
-
-const [AccordionItemProvider, useAccordionItemContext] =
-  createContext<AccordionItemContext>({
-    name: "AccordionItemContext",
-    errorMessage: `useAccordionItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<AccordionItem />"`,
-  })
-
-export { useAccordionItemContext }
-
-type AccordionItemOptions = {
+export interface AccordionItemOptions {
   /**
    * If `true`, the accordion item will be disabled.
    *
@@ -57,10 +46,11 @@ type AccordionItemOptions = {
     | ((props: { isExpanded: boolean; isDisabled: boolean }) => ReactNode)
 }
 
-export type AccordionItemProps = Omit<HTMLUIProps<"li">, "children"> &
-  AccordionItemOptions
+export interface AccordionItemProps
+  extends Omit<HTMLUIProps, "children">,
+    AccordionItemOptions {}
 
-export const AccordionItem = forwardRef<AccordionItemProps, "li">(
+export const AccordionItem = forwardRef<AccordionItemProps, "div">(
   (
     { id, className, isDisabled = false, button, icon, children, ...rest },
     ref,
@@ -110,7 +100,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
-        const actions: Record<string, KeyboardEventHandler> = {
+        const actions: { [key: string]: KeyboardEventHandler } = {
           ArrowDown: () => {
             const next = descendants.enabledNextValue(i)
 
@@ -143,7 +133,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
       [descendants, i],
     )
 
-    const getButtonProps: UIPropGetter<"button"> = useCallback(
+    const getButtonProps: PropGetter<"button"> = useCallback(
       (props = {}, ref = null) => ({
         id: itemId,
         type: "button",
@@ -173,7 +163,7 @@ export const AccordionItem = forwardRef<AccordionItemProps, "li">(
       ],
     )
 
-    const getPanelProps: UIPropGetter = useCallback(
+    const getPanelProps: PropGetter = useCallback(
       (props = {}, ref = null) => ({
         id: panelId,
         role: "region",

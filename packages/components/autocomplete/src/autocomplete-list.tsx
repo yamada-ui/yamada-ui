@@ -4,9 +4,10 @@ import type { MotionPropsWithoutChildren } from "@yamada-ui/motion"
 import { PopoverContent } from "@yamada-ui/popover"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import { useAutocompleteContext, useAutocompleteList } from "./use-autocomplete"
+import { useAutocompleteContext } from "./autocomplete-context"
+import { useAutocompleteList } from "./use-autocomplete-list"
 
-export type AutocompleteListProps = HTMLUIProps<"ul"> & {
+export interface AutocompleteListProps extends HTMLUIProps<"ul"> {
   contentProps?: MotionPropsWithoutChildren
   header?: ReactNode
   footer?: ReactNode

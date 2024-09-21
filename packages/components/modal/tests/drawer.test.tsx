@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, render } from "@yamada-ui/test"
+import { useState } from "react"
 import {
   Drawer,
   DrawerHeader,
@@ -12,15 +12,19 @@ import type { DrawerProps } from "../src"
 
 describe("<Drawer />", () => {
   const DrawerOpenExample = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
       <>
-        <Button data-testid="OpenDrawer" onClick={onOpen}>
+        <button data-testid="OpenDrawer" onClick={() => setIsOpen(true)}>
           Open Drawer
-        </Button>
+        </button>
 
-        <Drawer data-testid="Drawer" isOpen={isOpen} onClose={onClose}>
+        <Drawer
+          data-testid="Drawer"
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        >
           <DrawerOverlay
             data-testid="DrawerOverlay"
             bg="blackAlpha.300"
@@ -59,18 +63,18 @@ describe("<Drawer />", () => {
   })
 
   const DrawerPlacementExample = ({ placement }: DrawerProps) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
       <>
-        <Button data-testid="OpenDrawer" onClick={onOpen}>
+        <button data-testid="OpenDrawer" onClick={() => setIsOpen(true)}>
           Open Drawer
-        </Button>
+        </button>
 
         <Drawer
           data-testid="Drawer"
           isOpen={isOpen}
-          onClose={onClose}
+          onClose={() => setIsOpen(false)}
           placement={placement}
           closeOnDrag
         >
@@ -89,7 +93,7 @@ describe("<Drawer />", () => {
   }
 
   type TestDrawerPlacement = "top" | "left" | "bottom" | "right"
-  type ExpectedStyle = {
+  interface ExpectedStyle {
     top?: string
     left?: string
     bottom?: string

@@ -10,15 +10,16 @@ const panelProps = new Set(["order"])
 
 const UIPanel = ui(Panel, { disableStyleProp: (prop) => panelProps.has(prop) })
 
-type ResizableItemOptions = {
+interface ResizableItemOptions {
   /**
    * Ref for resizable item inner element.
    */
   innerRef?: ForwardedRef<HTMLDivElement>
 }
 
-export type ResizableItemProps = Omit<UseResizableItemProps, "ref"> &
-  ResizableItemOptions
+export interface ResizableItemProps
+  extends Omit<UseResizableItemProps, "ref">,
+    ResizableItemOptions {}
 
 export const ResizableItem = forwardRef<ResizableItemProps, "div">(
   (

@@ -2,9 +2,10 @@ import { FormControl, Grid, Textarea, assignRef } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
 import { memo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
-import { DEFAULT_EDITOR_MODE, type EditorMode } from "."
+import { DEFAULT_EDITOR_MODE } from "."
+import type { EditorMode } from "."
 
-export type PromptProps = GridProps & {
+export interface PromptProps extends GridProps {
   onChangeModeRef: MutableRefObject<(mode: EditorMode) => void>
 }
 

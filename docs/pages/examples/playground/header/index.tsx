@@ -12,7 +12,7 @@ import { ViewCodeModal } from "./view-code-modal"
 
 export type ModalType = "save" | "viewCode" | "filter" | "delete"
 
-export type HeaderProps = StackProps & {}
+export interface HeaderProps extends StackProps {}
 
 export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
   const onOpenSaveRef = useRef<() => void>(() => void 0)

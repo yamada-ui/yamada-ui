@@ -3,14 +3,12 @@ import { StretchHorizontal as StretchHorizontalIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type StretchHorizontalProps = LucideIconProps
-
 /**
  * `StretchHorizontal` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const StretchHorizontal = forwardRef<StretchHorizontalProps, "svg">(
+export const StretchHorizontal = forwardRef<LucideIconProps, "svg">(
   (props, ref) => (
     <LucideIcon ref={ref} as={StretchHorizontalIcon} {...props} />
   ),

@@ -10,10 +10,8 @@ import { memo, useEffect, useState, useSyncExternalStore } from "react"
 import type { NoticeOptions } from "./notice"
 import { noticeStore } from "./notice"
 
-export type NoticeProviderProps = Omit<
-  Required<ThemeConfig>["notice"],
-  "options"
->
+export interface NoticeProviderProps
+  extends Omit<Required<ThemeConfig>["notice"], "options"> {}
 
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   variants,
@@ -114,8 +112,9 @@ const defaultVariants: MotionVariants = {
   },
 }
 
-type NoticeComponentProps = NoticeOptions &
-  Pick<NoticeProviderProps, "variants" | "itemProps">
+interface NoticeComponentProps
+  extends NoticeOptions,
+    Pick<NoticeProviderProps, "variants" | "itemProps"> {}
 
 const NoticeComponent = memo(
   ({

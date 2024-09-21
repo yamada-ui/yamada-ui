@@ -15,11 +15,11 @@ const SIDEBAR_ITEMS = [
   { label: "Documents", value: "Documents" },
 ]
 
-type Data = {
+interface Data {
   sidebar: string[]
 }
 
-export type DisplayProps = StackProps
+export interface DisplayProps extends StackProps {}
 
 export const Display: FC<DisplayProps> = memo(({ ...rest }) => {
   const {

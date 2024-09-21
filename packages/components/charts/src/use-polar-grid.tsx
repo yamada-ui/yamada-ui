@@ -1,12 +1,14 @@
-import { useTheme, type CSSUIObject } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { useTheme } from "@yamada-ui/core"
+import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 import type * as Recharts from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ChartPropGetter, PolarGridProps } from "./chart.types"
+import type { PolarGridProps } from "./chart.types"
 import { polarGridProperties } from "./rechart-properties"
 
-export type UsePolarGridOptions = {
+export interface UsePolarGridOptions {
   /**
    * Props passed down to recharts `PolarGrid` component.
    */
@@ -17,7 +19,7 @@ export type UsePolarGridOptions = {
   strokeDasharray?: string | number
 }
 
-type UsePolarGridProps = UsePolarGridOptions & {
+interface UsePolarGridProps extends UsePolarGridOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -37,8 +39,7 @@ export const usePolarGrid = ({
     [rest.polarGridProps, styles.polarGrid, theme],
   )
 
-  const getPolarGridProps: ChartPropGetter<
-    "div",
+  const getPolarGridProps: PropGetter<
     Recharts.PolarGridProps,
     Recharts.PolarGridProps
   > = useCallback(

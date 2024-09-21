@@ -1,5 +1,30 @@
 # @yamada-ui/calendar
 
+## 1.8.0
+
+### Minor Changes
+
+- [#2689](https://github.com/yamada-ui/yamada-ui/pull/2689) [`644e052`](https://github.com/yamada-ui/yamada-ui/commit/644e052dbb3b0354f9e6e24d564ec2523258b1f9) Thanks [@Shunii85](https://github.com/Shunii85)! - Add a new prop `minSelectValue` to `RangeDatePicker`
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2829](https://github.com/yamada-ui/yamada-ui/pull/2829) [`3366cd0`](https://github.com/yamada-ui/yamada-ui/commit/3366cd049938b43aa5104661132be3f399b42312) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the `date-value` value was incorrect.
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`3b01045`](https://github.com/yamada-ui/yamada-ui/commit/3b0104577f59a952758f71d64f5e8ca6fc9d75bf), [`05d445a`](https://github.com/yamada-ui/yamada-ui/commit/05d445ac503a3af377c4858006ac45a816dd9750), [`b4a055c`](https://github.com/yamada-ui/yamada-ui/commit/b4a055ccbf22e9f74806504e2245be346ac609b1), [`5b31777`](https://github.com/yamada-ui/yamada-ui/commit/5b3177788f218e2f0fd9886643e2db5d1b8c8f9d), [`97f704c`](https://github.com/yamada-ui/yamada-ui/commit/97f704c4c836ad8920be0fc05bfe68a732218d2e)]:
+  - @yamada-ui/use-controllable-state@1.0.20
+  - @yamada-ui/form-control@2.1.2
+  - @yamada-ui/use-outside-click@1.0.20
+  - @yamada-ui/use-disclosure@1.0.20
+  - @yamada-ui/popover@1.3.2
+  - @yamada-ui/button@1.0.42
+  - @yamada-ui/portal@1.0.21
+  - @yamada-ui/icon@1.1.6
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/core@1.15.0
+  - @yamada-ui/use-clickable@1.2.8
+
 ## 1.7.1
 
 ### Patch Changes

@@ -21,7 +21,7 @@ export const ContextMenuTrigger = forwardRef<ContextMenuTriggerProps, "div">(
     const css: CSSUIObject = { ...styles.container }
 
     const onContextMenu = (ev: MouseEvent) => {
-      setPosition({ top: ev.clientY, left: ev.clientX })
+      setPosition({ top: ev.pageY, left: ev.pageX })
     }
 
     return (

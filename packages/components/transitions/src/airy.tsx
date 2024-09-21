@@ -46,11 +46,6 @@ export interface AiryProps
   extends Merge<MotionProps<"button">, AiryOptions>,
     ThemeProps<"Airy"> {}
 
-// type Fuu = MotionProps<"button"> & ThemeProps<"Airy"> & AiryOptions
-// interface Hoge extends MotionProps<"button">, ThemeProps<"Airy"> {
-//   //
-// }
-
 /**
  * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked
  *

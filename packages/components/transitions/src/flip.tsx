@@ -1,10 +1,6 @@
 import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
-import type {
-  MotionProps,
-  MotionTransition,
-  MotionTransitionProps,
-} from "@yamada-ui/motion"
+import type { MotionProps, MotionTransition } from "@yamada-ui/motion"
 import { motionForwardRef, motion } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
@@ -32,21 +28,30 @@ const variants: FlipMotion = {
   horizontal: {
     from: {
       initial: { rotateY: 0 },
-      animate: (isVisible: boolean) => ({ rotateY: isVisible ? 180 : 0 }),
+      animate: (isVisible: boolean) => ({
+        rotateY: isVisible ? 180 : 0,
+      }),
     },
     to: {
       initial: { rotateY: 180 },
-      animate: (isVisible: boolean) => ({ rotateY: isVisible ? 0 : 180 }),
+
+      animate: (isVisible: boolean) => ({
+        rotateY: isVisible ? 0 : 180,
+      }),
     },
   },
   vertical: {
     from: {
       initial: { rotateX: 0 },
-      animate: (isVisible: boolean) => ({ rotateX: isVisible ? 180 : 0 }),
+      animate: (isVisible: boolean) => ({
+        rotateX: isVisible ? 180 : 0,
+      }),
     },
     to: {
       initial: { rotateX: 180 },
-      animate: (isVisible: boolean) => ({ rotateX: isVisible ? 0 : 180 }),
+      animate: (isVisible: boolean) => ({
+        rotateX: isVisible ? 0 : 180,
+      }),
     },
   },
 }
@@ -79,8 +84,8 @@ export interface FlipOptions {
    */
   orientation?: FlipOrientation
   transition?: MotionTransition
-  //追加してもアニメーション効かないから、追加していなかったけど、それでも追加するべきなのか確認とる
-  duration?: MotionTransitionProps["duration"]
+  duration?: number
+  delay?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -121,10 +126,12 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
     onChange: onChangeProp,
     orientation = "horizontal",
     transition = {
-      type: "spring",
+      // type: "spring",
       stiffness: 80,
       damping: 10,
     },
+    duration = 0.2,
+    delay = 0,
     isDisabled = false,
     isReadOnly = false,
     className,
@@ -190,7 +197,11 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       <motion.span
         ref={fromRef}
         custom={isVisible}
-        className={cx("ui-flip", `ui-flip__${orientation}-from`, className)}
+        className={cx(
+          "ui-flip__from",
+          `ui-flip__from--${orientation}`,
+          className,
+        )}
         variants={variants[orientation].from}
         initial="initial"
         animate="animate"
@@ -200,7 +211,8 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
         }}
         transition={{
           ...transition,
-          duration: 2, // 追加しても変化ない
+          duration,
+          delay,
         }}
       >
         {from}
@@ -209,7 +221,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
       <motion.span
         ref={toRef}
         custom={isVisible}
-        className={cx("ui-flip", `ui-flip__${orientation}-to`, className)}
+        className={cx("ui-flip__to", `ui-flip__to--${orientation}`, className)}
         variants={variants[orientation].to}
         initial="initial"
         animate="animate"
@@ -219,7 +231,8 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
         }}
         transition={{
           ...transition,
-          duration: 1, // 追加しても変化ない
+          duration,
+          delay,
         }}
       >
         {to}

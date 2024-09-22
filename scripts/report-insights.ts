@@ -47,7 +47,8 @@ const COMMON_PARAMS = {
 }
 
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
-const REPORT_FORMAT = "YYYY/MM/DD"
+const REPORT_TITLE_FORMAT = "YYYY/MM/DD"
+const REPORT_FORMAT = "YYYY/MM/DD HH:mm:ss"
 const DATA_FORMAT = "YYYY-MM-DD"
 
 config()
@@ -334,15 +335,21 @@ const createReport =
         extended.some((v) => v.toUpperCase() === type.toUpperCase()))
 
     const getCreatedAt = (item: Review | Issue | Comment) =>
-      dayjs("created_at" in item ? item.created_at : item.submitted_at).format(
-        REPORT_FORMAT,
-      )
+      dayjs("created_at" in item ? item.created_at : item.submitted_at)
 
     const rows = [`  - ${type}: ${count}`]
 
+    const sortedList = list.sort((a, b) =>
+      getCreatedAt(a).toDate() > getCreatedAt(b).toDate() ? 1 : -1,
+    )
+
     if (isExtended) {
       rows.push(
-        ...list.map((item) => `    - [${getCreatedAt(item)}] ${item.html_url}`),
+        ...sortedList.map((item) => {
+          const createdAt = getCreatedAt(item).format(REPORT_FORMAT)
+
+          return `    - [${createdAt}] ${item.html_url}`
+        }),
       )
     }
 
@@ -358,21 +365,25 @@ const sendDiscordChannel =
       chunkArray(reports, 10),
     )) {
       const isFirst = index === "0"
+      const chunks: string[] = []
 
-      let chunks = isFirst
-        ? [
-            ...(publish
-              ? [
-                  `<@&1202956318718304276> <@&1246174065216192662>`,
-                  `## Insight Report`,
-                ]
-              : []),
-            `${startDate.format(REPORT_FORMAT)} - ${endDate.format(REPORT_FORMAT)}`,
-            "",
-          ]
-        : []
+      if (isFirst) {
+        if (publish) {
+          chunks.push(
+            `<@&1202956318718304276> <@&1246174065216192662>`,
+            `## Insight Report`,
+          )
+        }
 
-      chunks = [...chunks, ...contents]
+        const startDateLabel = startDate
+          .add(9, "hour")
+          .format(REPORT_TITLE_FORMAT)
+        const endDateLabel = endDate.add(9, "hour").format(REPORT_TITLE_FORMAT)
+
+        chunks.push(`${startDateLabel} - ${endDateLabel}`)
+      }
+
+      chunks.push(...contents)
 
       const content = chunks.join("\n")
 

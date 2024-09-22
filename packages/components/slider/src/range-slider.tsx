@@ -863,6 +863,9 @@ export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
   )
 })
 
+RangeSlider.displayName = "RangeSlider"
+RangeSlider.__ui__ = "RangeSlider"
+
 export interface RangeSliderTrackProps
   extends HTMLUIProps,
     Pick<RangeSliderOptions, "filledTrackProps"> {}
@@ -904,6 +907,9 @@ export const RangeSliderTrack = forwardRef<RangeSliderTrackProps, "div">(
   },
 )
 
+RangeSliderTrack.displayName = "RangeSliderTrack"
+RangeSliderTrack.__ui__ = "RangeSliderTrack"
+
 export interface RangeSliderFilledTrackProps extends HTMLUIProps {}
 
 export const RangeSliderFilledTrack = forwardRef<
@@ -931,6 +937,9 @@ export const RangeSliderFilledTrack = forwardRef<
   )
 })
 
+RangeSliderFilledTrack.displayName = "RangeSliderFilledTrack"
+RangeSliderFilledTrack.__ui__ = "RangeSliderFilledTrack"
+
 export interface RangeSliderMarkProps extends HTMLUIProps {
   value: number
 }
@@ -955,6 +964,9 @@ export const RangeSliderMark = forwardRef<RangeSliderMarkProps, "div">(
     )
   },
 )
+
+RangeSliderMark.displayName = "RangeSliderMark"
+RangeSliderMark.__ui__ = "RangeSliderMark"
 
 export interface RangeSliderThumbProps extends HTMLUIProps {}
 
@@ -997,14 +1009,23 @@ const RangeSliderThumb = forwardRef<
   )
 })
 
+RangeSliderThumb.displayName = "RangeSliderThumb"
+RangeSliderThumb.__ui__ = "RangeSliderThumb"
+
 export const RangeSliderStartThumb = forwardRef<RangeSliderThumbProps, "div">(
   (rest, ref) => {
     return <RangeSliderThumb ref={ref} index={0} {...rest} />
   },
 )
 
+RangeSliderStartThumb.displayName = "RangeSliderStartThumb"
+RangeSliderStartThumb.__ui__ = "RangeSliderStartThumb"
+
 export const RangeSliderEndThumb = forwardRef<RangeSliderThumbProps, "div">(
   (rest, ref) => {
     return <RangeSliderThumb ref={ref} index={1} {...rest} />
   },
 )
+
+RangeSliderEndThumb.displayName = "RangeSliderEndThumb"
+RangeSliderEndThumb.__ui__ = "RangeSliderEndThumb"

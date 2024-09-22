@@ -62,7 +62,9 @@ export interface ComponentArgs
   extends Pick<
     React.FunctionComponent,
     "contextTypes" | "propTypes" | "defaultProps" | "displayName"
-  > {}
+  > {
+  __ui__?: string
+}
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {

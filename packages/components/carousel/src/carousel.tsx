@@ -16,7 +16,7 @@ import { useValue } from "@yamada-ui/use-value"
 import {
   cx,
   filterUndefined,
-  findChildren,
+  findChild,
   getValidChildren,
   omitChildren,
   pickChildren,
@@ -251,15 +251,15 @@ export const Carousel = forwardRef<CarouselProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customCarouselControlPrev] = findChildren(
+    const customCarouselControlPrev = findChild(
       validChildren,
       CarouselControlPrev,
     )
-    const [customCarouselControlNext] = findChildren(
+    const customCarouselControlNext = findChild(
       validChildren,
       CarouselControlNext,
     )
-    const [customCarouselIndicators] = findChildren(
+    const customCarouselIndicators = findChild(
       validChildren,
       CarouselIndicators,
     )

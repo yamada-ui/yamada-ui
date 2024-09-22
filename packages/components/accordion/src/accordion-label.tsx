@@ -87,6 +87,9 @@ export const AccordionLabel = forwardRef<AccordionLabelProps, "button">(
   },
 )
 
+AccordionLabel.displayName = "AccordionLabel"
+AccordionLabel.__ui__ = "AccordionLabel"
+
 const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   className,
   children,

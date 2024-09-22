@@ -209,6 +209,9 @@ export const FormControl = forwardRef<FormControlProps, "div">(
   },
 )
 
+FormControl.displayName = "FormControl"
+FormControl.__ui__ = "FormControl"
+
 interface UseFormControlOptions extends FormControlOptions {
   id?: string
   disabled?: boolean
@@ -413,6 +416,9 @@ export const Label = forwardRef<LabelProps, "label">(
   },
 )
 
+Label.displayName = "Label"
+Label.__ui__ = "Label"
+
 export interface RequiredIndicatorProps extends HTMLUIProps<"span"> {}
 
 export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
@@ -438,6 +444,9 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
   },
 )
 
+RequiredIndicator.displayName = "RequiredIndicator"
+RequiredIndicator.__ui__ = "RequiredIndicator"
+
 export interface HelperMessageProps extends HTMLUIProps<"span"> {}
 
 export const HelperMessage = forwardRef<HelperMessageProps, "span">(
@@ -461,6 +470,9 @@ export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   },
 )
 
+HelperMessage.displayName = "HelperMessage"
+HelperMessage.__ui__ = "HelperMessage"
+
 export interface ErrorMessageProps extends HTMLUIProps<"span"> {}
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
@@ -483,3 +495,6 @@ export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
     )
   },
 )
+
+ErrorMessage.displayName = "ErrorMessage"
+ErrorMessage.__ui__ = "ErrorMessage"

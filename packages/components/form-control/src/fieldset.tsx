@@ -182,6 +182,9 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   },
 )
 
+Fieldset.displayName = "Fieldset"
+Fieldset.__ui__ = "Fieldset"
+
 interface LegendOptions {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
@@ -235,3 +238,6 @@ export const Legend = forwardRef<LegendProps, "legend">(
     )
   },
 )
+
+Legend.displayName = "Legend"
+Legend.__ui__ = "Legend"

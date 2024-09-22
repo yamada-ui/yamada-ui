@@ -78,15 +78,17 @@ const getCollaborators =
 
 const getIssuesAndPullRequests =
   ({ startDate, endDate }: Options) =>
-  async (username: string, filter: string) => {
-    let issues: Issue[] = []
+  async (username: string) => {
+    let issuesAndPullRequests: Issue[] = []
 
-    const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:${startDate.format(QUERY_FORMAT)}..${endDate.format(QUERY_FORMAT)}`
+    const start = startDate.format(QUERY_FORMAT)
+    const end = endDate.format(QUERY_FORMAT)
+    const query = `org:${COMMON_PARAMS["owner"]} author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
 
-    const issuesAndPullRequests = async () => {
+    const getIssuesAndPullRequests = async () => {
       const { data } = await octokit.search.issuesAndPullRequests({
         q: query,
         per_page: perPage,
@@ -94,18 +96,29 @@ const getIssuesAndPullRequests =
       })
       const { total_count, items } = data
 
-      issues.push(...items)
+      issuesAndPullRequests.push(...items)
 
       if (total_count === perPage) {
         page++
 
-        await recursiveOctokit(issuesAndPullRequests)
+        await recursiveOctokit(getIssuesAndPullRequests)
       }
     }
 
-    await recursiveOctokit(issuesAndPullRequests)
+    await recursiveOctokit(getIssuesAndPullRequests)
 
-    return issues
+    const issues: Issue[] = []
+    const pullRequests: Issue[] = []
+
+    issuesAndPullRequests.forEach((item) => {
+      if (item.pull_request) {
+        pullRequests.push(item)
+      } else {
+        issues.push(item)
+      }
+    })
+
+    return { issues, pullRequests }
   }
 
 const getComments =
@@ -157,15 +170,17 @@ const getComments =
 
 const getReviews =
   ({ startDate, endDate }: Options) =>
-  async () => {
+  async (username: string) => {
     let pullRequests: Issue[] = []
 
-    const query = `org:${COMMON_PARAMS["owner"]} type:pr created:${startDate.format(QUERY_FORMAT)}..${endDate.format(QUERY_FORMAT)}`
+    const start = startDate.subtract(1, "month").format(QUERY_FORMAT)
+    const end = endDate.format(QUERY_FORMAT)
+    const query = `org:${COMMON_PARAMS["owner"]} type:pr reviewed-by:${username} -author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
 
-    const issuesAndPullRequests = async () => {
+    const getIssuesAndPullRequests = async () => {
       const {
         data: { items },
       } = await octokit.search.issuesAndPullRequests({
@@ -179,13 +194,13 @@ const getReviews =
       if (items.length === perPage) {
         page++
 
-        await recursiveOctokit(issuesAndPullRequests)
+        await recursiveOctokit(getIssuesAndPullRequests)
       }
     }
 
-    await recursiveOctokit(issuesAndPullRequests)
+    await recursiveOctokit(getIssuesAndPullRequests)
 
-    const reviewComments = (
+    const reviewsAndApproved = (
       await Promise.all(
         pullRequests.map(({ number, repository_url }) =>
           recursiveOctokit(async () => {
@@ -203,7 +218,25 @@ const getReviews =
       )
     ).flat()
 
-    return reviewComments
+    const reviews: Review[] = []
+    const approved: Review[] = []
+
+    reviewsAndApproved.forEach((item) => {
+      const { user, state, submitted_at } = item
+
+      if (user?.login !== username) return
+
+      if (!startDate.isBefore(submitted_at) || !endDate.isAfter(submitted_at))
+        return
+
+      if (state !== "APPROVED") {
+        reviews.push(item)
+      } else if (state === "APPROVED") {
+        approved.push(item)
+      }
+    })
+
+    return { reviews, approved }
   }
 
 const getCommits =
@@ -249,7 +282,6 @@ const getInsights =
   (options: Options) => async (collaborators: Collaborator[]) => {
     const constant = await getConstant()
     const allComments = await getComments(options)()
-    const allReviews = await getReviews(options)()
     const allCommits = await getCommits(options)()
 
     const insights: Insight[] = []
@@ -259,28 +291,11 @@ const getInsights =
     )
 
     for await (const { login, html_url } of omittedCollaborators) {
-      const issuesAndPullRequests = await getIssuesAndPullRequests(options)(
-        login,
-        "author",
-      )
+      const { issues, pullRequests } =
+        await getIssuesAndPullRequests(options)(login)
+      const { reviews, approved } = await getReviews(options)(login)
       const comments = allComments.filter(({ user }) => user?.login === login)
-      const reviews = allReviews.filter(
-        ({ user, state }) => user?.login === login && state !== "APPROVED",
-      )
-      const approved = allReviews.filter(
-        ({ user, state }) => user?.login === login && state === "APPROVED",
-      )
       const commits = allCommits.filter(({ author }) => author?.login === login)
-      const issues: Issue[] = []
-      const pullRequests: Issue[] = []
-
-      issuesAndPullRequests.forEach((issueAndPullRequest) => {
-        if (issueAndPullRequest.pull_request) {
-          pullRequests.push(issueAndPullRequest)
-        } else {
-          issues.push(issueAndPullRequest)
-        }
-      })
 
       insights.push({
         login,
@@ -381,12 +396,10 @@ const sendDiscordChannel =
           )
         }
 
-        const startDateLabel = startDate
-          .add(9, "hour")
-          .format(REPORT_TITLE_FORMAT)
-        const endDateLabel = endDate.add(9, "hour").format(REPORT_TITLE_FORMAT)
+        const start = startDate.add(9, "hour").format(REPORT_TITLE_FORMAT)
+        const end = endDate.add(9, "hour").format(REPORT_TITLE_FORMAT)
 
-        chunks.push(`${startDateLabel} - ${endDateLabel}`)
+        chunks.push(`${start} - ${end}`)
       }
 
       chunks.push(...contents)

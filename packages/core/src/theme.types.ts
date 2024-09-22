@@ -270,7 +270,7 @@ export interface LoadingConfigOptions {
     /**
      * The CSS `box-size` property.
      */
-    size?: CSSUIProps["boxSize"]
+    fontSize?: CSSUIProps["boxSize"]
   }
   /**
    * Props for loading text element.
@@ -633,7 +633,7 @@ export interface ComponentSizes<Y extends Dict = Dict> {
 type ComponentProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,
-> = Partial<Omit<M, "variant" | "size" | "colorScheme">> & ThemeProps<Y>
+> = Partial<Omit<M, "variant" | "fontSize" | "colorScheme">> & ThemeProps<Y>
 export type ComponentDefaultProps<
   Y extends keyof Theme["components"] | unknown = unknown,
   M extends Dict = Dict,

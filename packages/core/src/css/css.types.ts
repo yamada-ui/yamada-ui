@@ -31,7 +31,7 @@ export interface ThemeProps<
   /**
    * The size of the component.
    */
-  size?: ThemeSize<Y>
+  fontSize?: ThemeSize<Y>
   /**
    * The color scheme of the component.
    */

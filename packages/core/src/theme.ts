@@ -256,9 +256,9 @@ function omitTheme(theme: Dict): Dict {
 
 export function omitThemeProps<
   T extends ThemeProps,
-  K extends Exclude<keyof T, "size" | "variant" | "colorScheme"> = never,
+  K extends Exclude<keyof T, "fontSize" | "variant" | "colorScheme"> = never,
 >(props: T, keys: K[] = []) {
-  return omitObject(props, ["size", "variant", "colorScheme", ...keys])
+  return omitObject(props, ["fontSize", "variant", "colorScheme", ...keys])
 }
 
 type MergeStyleOptions = Omit<Partial<FilterStyleOptions>, "isMulti">

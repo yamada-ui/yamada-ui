@@ -503,6 +503,12 @@ export const buttonGroup: Story = () => {
         <Button>Button</Button>
         <Button>Button</Button>
       </ButtonGroup>
+
+      <ButtonGroup isAttached variant="outline">
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>
     </>
   )
 }

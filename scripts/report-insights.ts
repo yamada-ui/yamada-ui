@@ -60,6 +60,9 @@ const chunkArray = <T extends any>(array: T[], n: number) =>
     .fill(0)
     .map((_, i) => array.slice(i * n, (i + 1) * n))
 
+const getTimestamp = (item: Review | Issue | Comment) =>
+  dayjs("created_at" in item ? item.created_at : item.submitted_at)
+
 const getCollaborators =
   ({ user }: Options) =>
   async () => {
@@ -127,6 +130,7 @@ const getComments =
           repo: name,
           since: startDate.format(QUERY_FORMAT),
           until: endDate.format(QUERY_FORMAT),
+          direction: "asc",
           per_page: perPage,
           page,
         })
@@ -142,6 +146,11 @@ const getComments =
 
       await recursiveOctokit(listCommentsForRepo)
     }
+
+    comments = comments.filter(
+      ({ created_at }) =>
+        startDate.isBefore(created_at) && endDate.isAfter(created_at),
+    )
 
     return comments
   }
@@ -334,19 +343,16 @@ const createReport =
       (isArray(extended) &&
         extended.some((v) => v.toUpperCase() === type.toUpperCase()))
 
-    const getCreatedAt = (item: Review | Issue | Comment) =>
-      dayjs("created_at" in item ? item.created_at : item.submitted_at)
-
     const rows = [`  - ${type}: ${count}`]
 
     const sortedList = list.sort((a, b) =>
-      getCreatedAt(a).toDate() > getCreatedAt(b).toDate() ? 1 : -1,
+      getTimestamp(a).toDate() > getTimestamp(b).toDate() ? 1 : -1,
     )
 
     if (isExtended) {
       rows.push(
         ...sortedList.map((item) => {
-          const createdAt = getCreatedAt(item).format(REPORT_FORMAT)
+          const createdAt = getTimestamp(item).format(REPORT_FORMAT)
 
           return `    - [${createdAt}] ${item.html_url}`
         }),

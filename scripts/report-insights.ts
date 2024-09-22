@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { getRangeDates } from "@yamada-ui/calendar"
 import type { Dict } from "@yamada-ui/react"
-import { isArray } from "@yamada-ui/react"
+import { isArray, merge } from "@yamada-ui/react"
 import { program } from "commander"
 import type { Dayjs } from "dayjs"
 import dayjs from "dayjs"
@@ -414,10 +414,11 @@ const getSomeDates = <T extends Review | Issue | Comment | Review>(
   date: string,
   list: T[],
 ) =>
-  list.filter((item) =>
-    dayjs("created_at" in item ? item.created_at : item.submitted_at)
-      .tz()
-      .isSame(date, "day"),
+  list.filter(
+    (item) =>
+      dayjs("created_at" in item ? item.created_at : item.submitted_at).format(
+        DATA_FORMAT,
+      ) === date,
   )
 
 const uploadData =
@@ -522,7 +523,7 @@ const uploadData =
 
       const prevActivity = await res.json()
 
-      let activity = { ...prevActivity, ...nextActivity }
+      let activity = merge(prevActivity, nextActivity)
 
       activity = Object.fromEntries(
         Object.entries(activity).sort(

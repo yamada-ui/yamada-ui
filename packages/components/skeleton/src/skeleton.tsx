@@ -157,3 +157,6 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     )
   }
 })
+
+Skeleton.displayName = "Skeleton"
+Skeleton.__ui__ = "Skeleton"

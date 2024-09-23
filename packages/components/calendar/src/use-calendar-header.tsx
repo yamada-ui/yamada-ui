@@ -168,7 +168,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
 
   const getControlProps: RequiredPropGetter<
     HTMLProps<"button"> & { operation: "prev" | "next" },
-    HTMLProps<"button">
+    HTMLProps<"button"> & { "aria-label": string }
   > = useCallback(
     ({ operation, ...props }) => {
       const isPrev = operation === "prev"

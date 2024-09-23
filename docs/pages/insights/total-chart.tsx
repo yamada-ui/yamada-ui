@@ -142,6 +142,7 @@ export const TotalChart = memo(
 
             <IconButton
               variant="ghost"
+              aria-label={`Change ${isAreaChart ? "AreaChart" : "BarChart"} to ${isAreaChart ? "BarChart" : "AreaChart"}`}
               isDisabled={isEmpty || isInvalid || isSingle}
               icon={
                 isAreaChart ? (

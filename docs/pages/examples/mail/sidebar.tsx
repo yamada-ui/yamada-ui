@@ -125,6 +125,7 @@ const SidebarItem: FC<SidebarItemProps> = memo(
             }
           >
             <IconButton
+              aria-label={`Go to ${label} page`}
               variant={isSelected ? "solid" : "ghost"}
               colorScheme={isSelected ? "primary" : "gray"}
               icon={<Icon color={isSelected ? "white" : "muted"} />}

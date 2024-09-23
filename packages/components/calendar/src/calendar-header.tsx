@@ -14,15 +14,15 @@ interface CalendarHeaderOptions {
   /**
    * Props for calendar control button element.
    */
-  controlProps?: Omit<CalendarControlProps, "operation">
+  controlProps?: Omit<Partial<CalendarControlProps>, "operation">
   /**
    * Props for calendar previous control button element.
    */
-  prevProps?: Omit<CalendarControlProps, "operation">
+  prevProps?: Omit<Partial<CalendarControlProps>, "operation">
   /**
    * Props for calendar next control button element.
    */
-  nextProps?: Omit<CalendarControlProps, "operation">
+  nextProps?: Omit<Partial<CalendarControlProps>, "operation">
   /**
    * Props for calendar label button element.
    */

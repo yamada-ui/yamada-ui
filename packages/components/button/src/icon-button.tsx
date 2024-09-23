@@ -22,7 +22,12 @@ export interface IconButtonProps
       | "loadingText"
       | "loadingPlacement"
     >,
-    IconButtonOptions {}
+    IconButtonOptions {
+  /**
+   * The accessible label for the button.
+   */
+  "aria-label": string
+}
 
 /**
  * `IconButton` is a component that displays an icon within a button.

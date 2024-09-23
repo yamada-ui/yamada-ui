@@ -420,7 +420,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 
 export type UseCarouselSlideReturn = ReturnType<typeof useCarouselSlide>
 
-export interface UseCarouselControlProps extends IconButtonProps {
+export interface UseCarouselControlProps extends Partial<IconButtonProps> {
   operation: "prev" | "next"
 }
 

@@ -101,7 +101,7 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = IconButtonProps & {
+type ColorModeButtonProps = Partial<IconButtonProps> & {
   menuProps?: MenuProps
 }
 
@@ -167,7 +167,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
 
 ColorModeButton.displayName = "ColorModeButton"
 
-type ThemeSchemeButtonProps = IconButtonProps & {
+type ThemeSchemeButtonProps = Partial<IconButtonProps> & {
   popoverProps?: PopoverProps
 }
 

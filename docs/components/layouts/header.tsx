@@ -227,7 +227,7 @@ const ButtonGroup: FC<ButtonGroupProps> = memo(
 
 ButtonGroup.displayName = "ButtonGroup"
 
-interface I18nButtonProps extends IconButtonProps {
+interface I18nButtonProps extends Partial<IconButtonProps> {
   menuProps?: MenuProps
 }
 
@@ -283,7 +283,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
 
 I18nButton.displayName = "I18nButton"
 
-interface ColorModeButtonProps extends IconButtonProps {
+interface ColorModeButtonProps extends Partial<IconButtonProps> {
   menuProps?: MenuProps
 }
 
@@ -351,7 +351,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(
 
 ColorModeButton.displayName = "ColorModeButton"
 
-interface ThemeSchemeButtonProps extends IconButtonProps {
+interface ThemeSchemeButtonProps extends Partial<IconButtonProps> {
   popoverProps?: PopoverProps
 }
 

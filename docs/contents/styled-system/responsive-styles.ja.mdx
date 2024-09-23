@@ -1,7 +1,7 @@
 ---
 title: レスポンシブスタイル
 description: Yamada UIは、すぐに使えるレスポンシブスタイルをサポートしています。
-order: 4
+order: 5
 ---
 
 Yamada UIは、すぐに使えるレスポンシブスタイルをサポートしています。スタイルの`props`にオブジェクトを渡すだけでPCファーストのレスポンシブスタイルに対応します。
@@ -94,6 +94,7 @@ return <Box p="md">The current breakpoint is "{breakpoint}"</Box>
 const breakpoint = useBreakpoint()
 const bg = useBreakpointValue({
   base: "red.500",
+  "2xl": "pink.500",
   xl: "blue.500",
   lg: "green.500",
   md: "yellow.500",

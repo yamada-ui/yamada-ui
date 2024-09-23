@@ -6,7 +6,9 @@ import type { Document } from "mdx"
 import { otherLocales } from "utils/i18n"
 
 export type EventName = "add" | "addDir" | "change" | "unlink" | "unlinkDir"
-export type DocumentMap = Record<string, Record<string, Document>>
+export interface DocumentMap {
+  [key: string]: { [key: string]: Document }
+}
 
 export const MDX_PATH = path.join(process.cwd(), ".mdx")
 export const OTHER_LOCALES = `(${otherLocales.join("|")})`

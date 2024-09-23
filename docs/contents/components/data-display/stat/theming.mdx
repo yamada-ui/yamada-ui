@@ -2,9 +2,9 @@
 title: Stat
 description: "`Stat` is used to display numbers or data within a box."
 package_name: "@yamada-ui/stat"
+order: 2
 with_description: true
 tab: Theming
-order: 2
 ---
 
 ## Theming
@@ -42,15 +42,13 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
       w: "3.5",
       h: "3.5",
       verticalAlign: "middle",
-      var: [
+      vars: [
         {
-          __prefix: "ui",
           name: "increase",
           token: "colors",
           value: "success.400",
         },
         {
-          __prefix: "ui",
           name: "decrease",
           token: "colors",
           value: "danger.400",

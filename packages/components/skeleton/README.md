@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/skeleton
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/skeleton
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/skeleton
+pnpm add @yamada-ui/skeleton
+# or
+yarn add @yamada-ui/skeleton
+# or
+npm install @yamada-ui/skeleton
+# or
+bun add @yamada-ui/skeleton
 ```
 
 ## Contribution

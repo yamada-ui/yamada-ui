@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-focus-visible",
-  "version": "1.1.4",
+  "version": "1.1.7",
   "description": "Yamada UI useFocusVisible custom hook",
   "keywords": [
     "use-focus-visible"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-focus-visible"
   },
   "bugs": {

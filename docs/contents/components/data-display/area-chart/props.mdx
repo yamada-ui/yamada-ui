@@ -4,6 +4,8 @@ description: >-
   `AreaChart` is a component for drawing area charts to compare multiple sets of
   data.
 package_name: "@yamada-ui/charts"
+order: 1
+label: Updated
 with_description: true
 tab: Props
 ---
@@ -16,7 +18,7 @@ tab: Props
   id="areachart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -32,24 +34,525 @@ tab: Props
   id="areachart-series"
   name="series"
   required
-  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "cx" | ... 457 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; })[]'
+  type="AreaProps[]"
   description={
     "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
   }
 />
 
+<PropsCard id="areachart-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="areachart-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="areachart-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="areachart-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="areachart-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="areachart-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="areachart-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="areachart-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="areachart-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="areachart-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="areachart-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="areachart-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="areachart-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="areachart-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="areachart-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="areachart-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="areachart-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="areachart-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="areachart-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="areachart-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="areachart-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="areachart-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="areachart-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="areachart-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="areachart-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="areachart-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="areachart-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="areachart-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="areachart-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="areachart-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="areachart-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="areachart-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="areachart-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="areachart-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="areachart-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="areachart-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="areachart-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="areachart-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="areachart-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="areachart-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="areachart-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="areachart-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="areachart-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="areachart-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="areachart-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="areachart-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="areachart-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="areachart-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="areachart-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="areachart-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="areachart-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="areachart-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="areachart-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="areachart-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="areachart-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="areachart-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="areachart-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="areachart-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="areachart-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="areachart-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="areachart-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="areachart-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="areachart-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="areachart-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="areachart-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="areachart-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="areachart-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="areachart-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="areachart-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="areachart-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="areachart-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="areachart-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="areachart-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="areachart-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard
   id="areachart-areaprops"
   name="areaProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | ... 458 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; }>'
+  type="Partial<AreaProps>"
   description={"Props for the areas."}
 />
 
 <PropsCard
   id="areachart-chartprops"
   name="chartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
+  type="AreaChartProps"
   description={"Props passed down to recharts `AreaChart` component."}
 />
 
@@ -73,7 +576,7 @@ tab: Props
 <PropsCard
   id="areachart-containerprops"
   name="containerProps"
-  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  type="ResponsiveContainerProps"
   description={"Props passed down to recharts `ResponsiveContainer` component."}
 />
 
@@ -83,6 +586,14 @@ tab: Props
   type="ChartCurveType"
   description={"Type of the curve."}
   defaultValue={"`monotone`"}
+/>
+
+<PropsCard
+  id="areachart-fillopacity"
+  name="fillOpacity"
+  type="number | [number, number]"
+  description={"Controls fill opacity of all areas."}
+  defaultValue={"0.4"}
 />
 
 <PropsCard
@@ -96,7 +607,7 @@ tab: Props
 <PropsCard
   id="areachart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type="GridProps"
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -118,14 +629,14 @@ tab: Props
 <PropsCard
   id="areachart-legendprops"
   name="legendProps"
-  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  type="LegendProps"
   description={"Props passed down to recharts 'Legend' component."}
 />
 
 <PropsCard
   id="areachart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type="ReferenceLineProps[]"
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -154,6 +665,24 @@ tab: Props
   description={
     "Offset for the split gradient. By default, value is inferred from `data` and `series` if possible.\nMust be generated from the data array with `getSplitOffset` function."
   }
+/>
+
+<PropsCard
+  id="areachart-strokedasharray"
+  name="strokeDasharray"
+  type="string | number"
+  description={
+    "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+  }
+  defaultValue={"'5 5'"}
+/>
+
+<PropsCard
+  id="areachart-strokewidth"
+  name="strokeWidth"
+  type="number"
+  description={"Stroke width for the chart areas."}
+  defaultValue={"2"}
 />
 
 <PropsCard
@@ -186,7 +715,7 @@ tab: Props
 <PropsCard
   id="areachart-tooltipprops"
   name="tooltipProps"
-  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  type="TooltipProps"
   description={"Props passed down to recharts 'Tooltip' component."}
 />
 
@@ -195,7 +724,7 @@ tab: Props
   name="type"
   type="AreaChartType"
   description={
-    "Controls how chart areas are positioned relative to each other.\n\n\nControls how chart areas are positioned relative to each other"
+    "Controls how chart areas are positioned relative to each other."
   }
   defaultValue={"`default`"}
 />
@@ -288,14 +817,14 @@ tab: Props
 <PropsCard
   id="areachart-xaxislabelprops"
   name="xAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'XAxisLabel' component."}
 />
 
 <PropsCard
   id="areachart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type="XAxisProps"
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
@@ -316,14 +845,14 @@ tab: Props
 <PropsCard
   id="areachart-yaxislabelprops"
   name="yAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'YAxisLabel' component."}
 />
 
 <PropsCard
   id="areachart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type="YAxisProps"
   description={"Props passed down to recharts 'YAxis' component."}
 />
 
@@ -336,32 +865,406 @@ tab: Props
 
 ### AreaProps
 
+<PropsCard id="area-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="area-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="area-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="area-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="area-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="area-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="area-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="area-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="area-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="area-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="area-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="area-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="area-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="area-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="area-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="area-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="area-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="area-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="area-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="area-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard id="area-_fileselector" name="_fileSelector" type="CSSUIObject" />
+
+<PropsCard id="area-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="area-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="area-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="area-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="area-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard id="area-_focusvisible" name="_focusVisible" type="CSSUIObject" />
+
+<PropsCard id="area-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="area-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="area-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="area-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="area-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="area-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard id="area-_groupchecked" name="_groupChecked" type="CSSUIObject" />
+
+<PropsCard id="area-_groupdisabled" name="_groupDisabled" type="CSSUIObject" />
+
+<PropsCard id="area-_groupenabled" name="_groupEnabled" type="CSSUIObject" />
+
+<PropsCard id="area-_groupexpanded" name="_groupExpanded" type="CSSUIObject" />
+
+<PropsCard id="area-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
 <PropsCard
-  id="area-activedot"
-  name="activeDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  id="area-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
 />
+
+<PropsCard
+  id="area-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_groupgrabbed" name="_groupGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="area-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard id="area-_groupinvalid" name="_groupInvalid" type="CSSUIObject" />
+
+<PropsCard id="area-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard id="area-_grouploading" name="_groupLoading" type="CSSUIObject" />
+
+<PropsCard id="area-_groupoptional" name="_groupOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_grouppressed" name="_groupPressed" type="CSSUIObject" />
+
+<PropsCard id="area-_groupreadonly" name="_groupReadOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard id="area-_grouprequired" name="_groupRequired" type="CSSUIObject" />
+
+<PropsCard id="area-_groupselected" name="_groupSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard id="area-_groupvertical" name="_groupVertical" type="CSSUIObject" />
+
+<PropsCard id="area-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="area-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="area-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="area-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="area-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard id="area-_indeterminate" name="_indeterminate" type="CSSUIObject" />
+
+<PropsCard id="area-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="area-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="area-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="area-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="area-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="area-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="area-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="area-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="area-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="area-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard id="area-_nativeactive" name="_nativeActive" type="CSSUIObject" />
+
+<PropsCard id="area-_nativechecked" name="_nativeChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="area-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_nativehidden" name="_nativeHidden" type="CSSUIObject" />
+
+<PropsCard id="area-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_nativetarget" name="_nativeTarget" type="CSSUIObject" />
+
+<PropsCard id="area-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="area-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="area-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="area-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="area-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="area-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="area-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="area-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="area-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="area-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="area-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="area-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="area-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="area-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard id="area-_peerdisabled" name="_peerDisabled" type="CSSUIObject" />
+
+<PropsCard id="area-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard id="area-_peerexpanded" name="_peerExpanded" type="CSSUIObject" />
+
+<PropsCard id="area-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="area-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="area-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="area-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="area-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="area-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard id="area-_peeroptional" name="_peerOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard id="area-_peerreadonly" name="_peerReadOnly" type="CSSUIObject" />
+
+<PropsCard id="area-_peerreadwrite" name="_peerReadWrite" type="CSSUIObject" />
+
+<PropsCard id="area-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard id="area-_peerrequired" name="_peerRequired" type="CSSUIObject" />
+
+<PropsCard id="area-_peerselected" name="_peerSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard id="area-_peervertical" name="_peerVertical" type="CSSUIObject" />
+
+<PropsCard id="area-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="area-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="area-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="area-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="area-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="area-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="area-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="area-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="area-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="area-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="area-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="area-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="area-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="area-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="area-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="area-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="area-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="area-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="area-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="area-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="area-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="area-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="area-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="area-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="area-_weekend" name="_weekend" type="CSSUIObject" />
+
+<PropsCard id="area-activedot" name="activeDot" type="DotProps" />
 
 <PropsCard
   id="area-color"
   name="color"
-  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | "link.950">'
 />
 
-<PropsCard
-  id="area-dimarea"
-  name="dimArea"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | ... 458 more ... | keyof AreaProps> & Omit<...> & AreaProps, "color" | ... 3 more ... | "dimArea"> & { ...; }>'
-/>
+<PropsCard id="area-dimarea" name="dimArea" type="Partial<AreaProps>" />
 
-<PropsCard
-  id="area-dimdot"
-  name="dimDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="area-dimdot" name="dimDot" type="DotProps" />
 
-<PropsCard
-  id="area-dot"
-  name="dot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="area-dot" name="dot" type="DotProps" />

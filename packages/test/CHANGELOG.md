@@ -1,5 +1,50 @@
 # @yamada-ui/test
 
+## 1.5.1
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2769](https://github.com/yamada-ui/yamada-ui/pull/2769) [`130f892`](https://github.com/yamada-ui/yamada-ui/commit/130f89250146b8ed0676d3057b9691f8c5922c39) Thanks [@koralle](https://github.com/koralle)! - Use `@koralle/vitest-axe` instead of `vitest-axe`
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3), [`5b31777`](https://github.com/yamada-ui/yamada-ui/commit/5b3177788f218e2f0fd9886643e2db5d1b8c8f9d)]:
+  - @yamada-ui/providers@1.2.7
+  - @yamada-ui/utils@1.5.1
+  - @yamada-ui/theme@1.18.1
+
+## 1.5.0
+
+### Minor Changes
+
+- [#2778](https://github.com/yamada-ui/yamada-ui/pull/2778) [`85e8179`](https://github.com/yamada-ui/yamada-ui/commit/85e8179a636506d95bb64c7982c460229f09ee8b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update `renderHook` usage and types.
+
+### Patch Changes
+
+- [#2665](https://github.com/yamada-ui/yamada-ui/pull/2665) [`5eb9701`](https://github.com/yamada-ui/yamada-ui/commit/5eb97014261d808ee72b1d197de73eba6804e050) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#2676](https://github.com/yamada-ui/yamada-ui/pull/2676) [`122f789`](https://github.com/yamada-ui/yamada-ui/commit/122f789d60f947fea53dfff1259fd540268aa66a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated types.
+
+- Updated dependencies [[`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`988c630`](https://github.com/yamada-ui/yamada-ui/commit/988c630d0f7ed297a0ddd51a09cb3bee612e9b60), [`46a228f`](https://github.com/yamada-ui/yamada-ui/commit/46a228f585a9d48ba46ce2f546a964163905c369), [`0174be8`](https://github.com/yamada-ui/yamada-ui/commit/0174be8eaca024bd4488a072336ed956546b8ed4), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74)]:
+  - @yamada-ui/utils@1.5.0
+  - @yamada-ui/theme@1.18.0
+  - @yamada-ui/providers@1.2.6
+
+## 1.4.0
+
+### Minor Changes
+
+- [#2527](https://github.com/yamada-ui/yamada-ui/pull/2527) [`142fa58`](https://github.com/yamada-ui/yamada-ui/commit/142fa58bfd8e1c339e841370b40a9278a4de503f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `drag` util function.
+
+### Patch Changes
+
+- [#2643](https://github.com/yamada-ui/yamada-ui/pull/2643) [`3ba3f58`](https://github.com/yamada-ui/yamada-ui/commit/3ba3f58686fe436fdbfb2253f5730bb52f67bfd6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed the git repository URL.
+
+- Updated dependencies [[`613ed7d`](https://github.com/yamada-ui/yamada-ui/commit/613ed7d95268fa48c208e2efdadbd9822884ece1), [`e2bbd8d`](https://github.com/yamada-ui/yamada-ui/commit/e2bbd8dc4425b9bc3ed3338f5d4c4ee75bf2bc06), [`3ba3f58`](https://github.com/yamada-ui/yamada-ui/commit/3ba3f58686fe436fdbfb2253f5730bb52f67bfd6), [`74045d7`](https://github.com/yamada-ui/yamada-ui/commit/74045d7c4db435d5aca9f62d17a9b34485ea37ef), [`88d682d`](https://github.com/yamada-ui/yamada-ui/commit/88d682da2e3a8fd49ad7eced29ec3609ada9c282), [`f77a2ef`](https://github.com/yamada-ui/yamada-ui/commit/f77a2eff11da96a5cafb5ae4a77fae7e3e4dd6c4), [`300ee51`](https://github.com/yamada-ui/yamada-ui/commit/300ee5133ec0c1835cd2f664343f56deae0124d8), [`d3aac2b`](https://github.com/yamada-ui/yamada-ui/commit/d3aac2bb6ef14d32b189ddcb552282ac0063cba2), [`747057c`](https://github.com/yamada-ui/yamada-ui/commit/747057c5046904dc865d6bba33995db013d48fff), [`4d9ce08`](https://github.com/yamada-ui/yamada-ui/commit/4d9ce086d3d9e12a8fb698f097599aa9cc4e83f0), [`bec3cf1`](https://github.com/yamada-ui/yamada-ui/commit/bec3cf1b2030641a9244aa0b8d90693c4d9ba07b), [`28312bd`](https://github.com/yamada-ui/yamada-ui/commit/28312bd80d5ee920cd157afc21ac2e7a05944c11), [`d240135`](https://github.com/yamada-ui/yamada-ui/commit/d240135c624336f0ff17c4ef4ea59427320b9221), [`1a81894`](https://github.com/yamada-ui/yamada-ui/commit/1a81894b09df4ca87a7c43009486c7dc04531b57), [`934242e`](https://github.com/yamada-ui/yamada-ui/commit/934242e6dcfa5945bb5bb331c0e6e9c8f680fe25), [`33fe193`](https://github.com/yamada-ui/yamada-ui/commit/33fe193fb4ebf2c57555030dc9132a118920c88f)]:
+  - @yamada-ui/utils@1.4.0
+  - @yamada-ui/theme@1.17.0
+  - @yamada-ui/providers@1.2.5
+
 ## 1.3.6
 
 ### Patch Changes

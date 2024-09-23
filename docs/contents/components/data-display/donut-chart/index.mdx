@@ -2,6 +2,8 @@
 title: DonutChart
 description: "`DonutChart` is a component for drawing donut charts to compare multiple sets of data."
 package_name: "@yamada-ui/charts"
+order: 15
+label: Updated
 is_tabs: true
 with_description: true
 tab: Usage
@@ -626,4 +628,59 @@ const mewtwo: CellProps[] = useMemo(
 )
 
 return <DonutChart data={mewtwo} fillOpacity={[0.8, 0.7]} />
+```
+
+### Display text in the center
+
+To display text in the center, set `labelProps` with `props`.
+
+```tsx functional=true
+const mewtwo: CellProps[] = useMemo(
+  () => [
+    {
+      name: "HP",
+      value: 106,
+      color: "green.500",
+    },
+    {
+      name: "こうげき",
+      value: 110,
+      color: "red.500",
+    },
+    {
+      name: "ぼうぎょ",
+      value: 90,
+      color: "blue.500",
+    },
+    {
+      name: "とくこう",
+      value: 154,
+      color: "purple.500",
+    },
+    {
+      name: "とくぼう",
+      value: 90,
+      color: "orange.500",
+    },
+    {
+      name: "すばやさ",
+      value: 130,
+      color: "cyan.500",
+    },
+  ],
+  [],
+)
+
+return (
+  <DonutChart
+    data={mewtwo}
+    labelProps={{
+      value: "DonutChart",
+      position: "center",
+      fill: ["black", "white"],
+      fontSize: "md",
+      fontWeight: "bold",
+    }}
+  />
+)
 ```

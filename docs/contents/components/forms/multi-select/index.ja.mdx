@@ -2,6 +2,8 @@
 title: MultiSelect
 description: "`MultiSelect`は、ユーザーがオプションのリストから複数の値を選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/select"
+order: 15
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -67,6 +69,40 @@ return <MultiSelect placeholder="キャラクターを選択" items={items} />
 
 ```tsx
 <MultiSelect placeholder="キャラクターを選択" defaultValue={["ベジータ"]}>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### ドロップダウンにヘッダーを追加する
+
+```tsx
+<MultiSelect
+  placeholder="キャラクターを選択"
+  header={
+    <Center pt="2" px="3">
+      ここにヘッダーが追加されます
+    </Center>
+  }
+>
+  <Option value="孫悟空">孫悟空</Option>
+  <Option value="ベジータ">ベジータ</Option>
+  <Option value="フリーザ">フリーザ</Option>
+</MultiSelect>
+```
+
+### ドロップダウンにフッターを追加する
+
+```tsx
+<MultiSelect
+  placeholder="キャラクターを選択"
+  footer={
+    <Center pb="2" px="3">
+      ここにフッターが追加されます
+    </Center>
+  }
+>
   <Option value="孫悟空">孫悟空</Option>
   <Option value="ベジータ">ベジータ</Option>
   <Option value="フリーザ">フリーザ</Option>

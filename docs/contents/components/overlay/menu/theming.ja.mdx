@@ -2,6 +2,7 @@
 title: Menu
 description: "`Menu`は、一般的なドロップダウンメニューを表示するコンポーネントです。"
 package_name: "@yamada-ui/menu"
+order: 2
 with_description: true
 tab: テーマ
 ---
@@ -21,16 +22,19 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       transitionProperty: "common",
       transitionDuration: "normal",
     },
-    list: {
+    content: {
       rounded: "md",
       minW: "xs",
-      py: "2",
       bg: ["white", "black"],
       border: "1px solid",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       color: "inherit",
       boxShadow: ["lg", "dark-lg"],
       zIndex: "guldo",
+    },
+    list: {
+      outline: "none",
+      py: "2",
     },
     item: {
       cursor: "pointer",

@@ -2,6 +2,8 @@
 title: LineChart
 description: "`LineChart`は、複数のデータを比較するためのラインチャートを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
+order: 1
+label: Updated
 with_description: true
 tab: Props
 ---
@@ -14,7 +16,7 @@ tab: Props
   id="linechart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -30,17 +32,518 @@ tab: Props
   id="linechart-series"
   name="series"
   required
-  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; })[]'
+  type="LineProps[]"
   description={
     "An array of objects with `dataKey` and `color` keys. Determines which data should be consumed from the `data` array."
   }
 />
 
+<PropsCard id="linechart-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="linechart-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="linechart-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="linechart-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="linechart-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="linechart-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="linechart-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="linechart-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="linechart-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="linechart-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="linechart-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="linechart-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="linechart-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="linechart-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="linechart-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="linechart-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="linechart-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="linechart-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="linechart-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="linechart-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="linechart-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="linechart-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="linechart-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="linechart-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="linechart-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="linechart-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="linechart-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="linechart-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="linechart-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="linechart-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="linechart-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="linechart-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="linechart-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="linechart-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="linechart-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="linechart-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="linechart-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="linechart-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="linechart-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="linechart-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="linechart-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="linechart-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="linechart-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="linechart-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="linechart-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="linechart-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="linechart-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="linechart-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="linechart-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="linechart-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="linechart-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="linechart-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="linechart-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="linechart-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="linechart-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="linechart-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="linechart-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="linechart-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="linechart-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="linechart-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="linechart-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="linechart-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="linechart-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="linechart-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="linechart-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="linechart-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="linechart-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="linechart-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="linechart-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="linechart-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="linechart-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="linechart-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="linechart-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="linechart-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard
   id="linechart-chartprops"
   name="chartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
+  type="LineChartProps"
   description={"Props passed down to recharts `LineChart` component."}
 />
 
@@ -64,7 +567,7 @@ tab: Props
 <PropsCard
   id="linechart-containerprops"
   name="containerProps"
-  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  type="ResponsiveContainerProps"
   description={"Props passed down to recharts `ResponsiveContainer` component."}
 />
 
@@ -74,6 +577,14 @@ tab: Props
   type="ChartCurveType"
   description={"Type of the curve."}
   defaultValue={"`monotone`"}
+/>
+
+<PropsCard
+  id="linechart-fillopacity"
+  name="fillOpacity"
+  type="number | [number, number]"
+  description={"Controls fill opacity of all lines."}
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -87,7 +598,7 @@ tab: Props
 <PropsCard
   id="linechart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type="GridProps"
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -109,21 +620,21 @@ tab: Props
 <PropsCard
   id="linechart-legendprops"
   name="legendProps"
-  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  type="LegendProps"
   description={"Props passed down to recharts 'Legend' component."}
 />
 
 <PropsCard
   id="linechart-lineprops"
   name="lineProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
+  type="Partial<LineProps>"
   description={"Props for the lines."}
 />
 
 <PropsCard
   id="linechart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type="ReferenceLineProps[]"
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -133,6 +644,24 @@ tab: Props
   type='"sm" | "md" | "lg" | "full"'
   description={"The size of the LineChart."}
   defaultValue={"full"}
+/>
+
+<PropsCard
+  id="linechart-strokedasharray"
+  name="strokeDasharray"
+  type="string | number"
+  description={
+    "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+  }
+  defaultValue={"'5 5'"}
+/>
+
+<PropsCard
+  id="linechart-strokewidth"
+  name="strokeWidth"
+  type="number"
+  description={"Stroke width for the chart lines."}
+  defaultValue={"2"}
 />
 
 <PropsCard
@@ -165,7 +694,7 @@ tab: Props
 <PropsCard
   id="linechart-tooltipprops"
   name="tooltipProps"
-  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  type="TooltipProps"
   description={"Props passed down to recharts 'Tooltip' component."}
 />
 
@@ -256,14 +785,14 @@ tab: Props
 <PropsCard
   id="linechart-xaxislabelprops"
   name="xAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'XAxisLabel' component."}
 />
 
 <PropsCard
   id="linechart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type="XAxisProps"
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
@@ -284,14 +813,14 @@ tab: Props
 <PropsCard
   id="linechart-yaxislabelprops"
   name="yAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'YAxisLabel' component."}
 />
 
 <PropsCard
   id="linechart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type="YAxisProps"
   description={"Props passed down to recharts 'YAxis' component."}
 />
 
@@ -304,34 +833,774 @@ tab: Props
 
 ### LineProps
 
+<PropsCard id="line-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="line-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="line-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="line-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="line-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="line-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="line-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="line-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="line-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="line-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="line-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="line-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="line-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="line-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="line-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="line-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="line-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="line-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="line-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="line-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard id="line-_fileselector" name="_fileSelector" type="CSSUIObject" />
+
+<PropsCard id="line-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="line-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="line-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="line-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="line-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard id="line-_focusvisible" name="_focusVisible" type="CSSUIObject" />
+
+<PropsCard id="line-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="line-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="line-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="line-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="line-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="line-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard id="line-_groupchecked" name="_groupChecked" type="CSSUIObject" />
+
+<PropsCard id="line-_groupdisabled" name="_groupDisabled" type="CSSUIObject" />
+
+<PropsCard id="line-_groupenabled" name="_groupEnabled" type="CSSUIObject" />
+
+<PropsCard id="line-_groupexpanded" name="_groupExpanded" type="CSSUIObject" />
+
+<PropsCard id="line-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
 <PropsCard
-  id="line-activedot"
-  name="activeDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  id="line-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
 />
+
+<PropsCard
+  id="line-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_groupgrabbed" name="_groupGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="line-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard id="line-_groupinvalid" name="_groupInvalid" type="CSSUIObject" />
+
+<PropsCard id="line-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard id="line-_grouploading" name="_groupLoading" type="CSSUIObject" />
+
+<PropsCard id="line-_groupoptional" name="_groupOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_grouppressed" name="_groupPressed" type="CSSUIObject" />
+
+<PropsCard id="line-_groupreadonly" name="_groupReadOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard id="line-_grouprequired" name="_groupRequired" type="CSSUIObject" />
+
+<PropsCard id="line-_groupselected" name="_groupSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard id="line-_groupvertical" name="_groupVertical" type="CSSUIObject" />
+
+<PropsCard id="line-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="line-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="line-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="line-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="line-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard id="line-_indeterminate" name="_indeterminate" type="CSSUIObject" />
+
+<PropsCard id="line-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="line-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="line-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="line-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="line-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="line-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="line-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="line-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="line-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="line-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard id="line-_nativeactive" name="_nativeActive" type="CSSUIObject" />
+
+<PropsCard id="line-_nativechecked" name="_nativeChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="line-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_nativehidden" name="_nativeHidden" type="CSSUIObject" />
+
+<PropsCard id="line-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_nativetarget" name="_nativeTarget" type="CSSUIObject" />
+
+<PropsCard id="line-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="line-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="line-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="line-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="line-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="line-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="line-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="line-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="line-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="line-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="line-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="line-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="line-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="line-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard id="line-_peerdisabled" name="_peerDisabled" type="CSSUIObject" />
+
+<PropsCard id="line-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard id="line-_peerexpanded" name="_peerExpanded" type="CSSUIObject" />
+
+<PropsCard id="line-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="line-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="line-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="line-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="line-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="line-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard id="line-_peeroptional" name="_peerOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard id="line-_peerreadonly" name="_peerReadOnly" type="CSSUIObject" />
+
+<PropsCard id="line-_peerreadwrite" name="_peerReadWrite" type="CSSUIObject" />
+
+<PropsCard id="line-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard id="line-_peerrequired" name="_peerRequired" type="CSSUIObject" />
+
+<PropsCard id="line-_peerselected" name="_peerSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard id="line-_peervertical" name="_peerVertical" type="CSSUIObject" />
+
+<PropsCard id="line-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="line-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="line-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="line-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="line-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="line-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="line-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="line-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="line-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="line-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="line-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="line-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="line-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="line-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="line-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="line-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="line-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="line-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="line-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="line-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="line-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="line-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="line-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="line-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="line-_weekend" name="_weekend" type="CSSUIObject" />
+
+<PropsCard id="line-activedot" name="activeDot" type="DotProps" />
 
 <PropsCard
   id="line-color"
   name="color"
-  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | "link.950">'
 />
 
-<PropsCard
-  id="line-dimdot"
-  name="dimDot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="line-dimdot" name="dimDot" type="DotProps" />
 
-<PropsCard
-  id="line-dimline"
-  name="dimLine"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "dataKey" | "data" | "layout" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | ... 490 more ... | "baseLine"> & Omit<...> & LineProps, "color" | ... 3 more ... | "dimLine"> & { ...; }>'
-/>
+<PropsCard id="line-dimline" name="dimLine" type="Partial<LineProps>" />
 
-<PropsCard
-  id="line-dot"
-  name="dot"
-  type='Omit<Omit<Props, "ref">, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | "_nativeFocus" | "_focusVisible" | ... 61 more ... | keyof StyleProps> & StyleProps & PseudoProps'
-/>
+<PropsCard id="line-dot" name="dot" type="DotProps" />
 
 ### DotProps
+
+<PropsCard id="dot-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="dot-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="dot-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="dot-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="dot-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="dot-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="dot-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="dot-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="dot-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="dot-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="dot-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="dot-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="dot-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="dot-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="dot-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="dot-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="dot-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="dot-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard id="dot-_fileselector" name="_fileSelector" type="CSSUIObject" />
+
+<PropsCard id="dot-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="dot-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="dot-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="dot-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="dot-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard id="dot-_focusvisible" name="_focusVisible" type="CSSUIObject" />
+
+<PropsCard id="dot-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="dot-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="dot-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupchecked" name="_groupChecked" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupdisabled" name="_groupDisabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupenabled" name="_groupEnabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupexpanded" name="_groupExpanded" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="dot-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_groupgrabbed" name="_groupGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupinvalid" name="_groupInvalid" type="CSSUIObject" />
+
+<PropsCard id="dot-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard id="dot-_grouploading" name="_groupLoading" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupoptional" name="_groupOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_grouppressed" name="_groupPressed" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupreadonly" name="_groupReadOnly" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupreadwrite" name="_groupReadWrite" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard id="dot-_grouprequired" name="_groupRequired" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupselected" name="_groupSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard id="dot-_groupvertical" name="_groupVertical" type="CSSUIObject" />
+
+<PropsCard id="dot-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="dot-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="dot-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="dot-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="dot-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard id="dot-_indeterminate" name="_indeterminate" type="CSSUIObject" />
+
+<PropsCard id="dot-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="dot-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="dot-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="dot-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="dot-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="dot-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="dot-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="dot-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="dot-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="dot-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativeactive" name="_nativeActive" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativechecked" name="_nativeChecked" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativedisabled" name="_nativeDisabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="dot-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_nativehidden" name="_nativeHidden" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativereadonly" name="_nativeReadOnly" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativetarget" name="_nativeTarget" type="CSSUIObject" />
+
+<PropsCard id="dot-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="dot-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="dot-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="dot-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="dot-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="dot-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="dot-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="dot-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="dot-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="dot-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="dot-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="dot-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerdisabled" name="_peerDisabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerexpanded" name="_peerExpanded" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="dot-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerhorizontal" name="_peerHorizontal" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="dot-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard id="dot-_peeroptional" name="_peerOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerreadonly" name="_peerReadOnly" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerreadwrite" name="_peerReadWrite" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerrequired" name="_peerRequired" type="CSSUIObject" />
+
+<PropsCard id="dot-_peerselected" name="_peerSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard id="dot-_peervertical" name="_peerVertical" type="CSSUIObject" />
+
+<PropsCard id="dot-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="dot-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="dot-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="dot-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="dot-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="dot-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="dot-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="dot-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="dot-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="dot-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="dot-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_scrollbarthumb" name="_scrollbarThumb" type="CSSUIObject" />
+
+<PropsCard id="dot-_scrollbartrack" name="_scrollbarTrack" type="CSSUIObject" />
+
+<PropsCard
+  id="dot-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="dot-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="dot-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="dot-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="dot-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="dot-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="dot-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="dot-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="dot-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="dot-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="dot-_weekend" name="_weekend" type="CSSUIObject" />

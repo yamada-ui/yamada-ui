@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/segmented-control",
-  "version": "1.0.37",
+  "version": "1.0.40",
   "description": "Yamada UI segmented control components",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/segmented-control"
   },
   "bugs": {

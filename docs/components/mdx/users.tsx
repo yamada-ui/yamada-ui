@@ -5,13 +5,12 @@ import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
 import type { FC } from "react"
 
-export type UserProps = StackProps &
-  Pick<AvatarProps, "name"> & {
-    icon?: string
-    description: string
-    github?: string
-    x?: string
-  }
+export interface UserProps extends StackProps, Pick<AvatarProps, "name"> {
+  icon?: string
+  description: string
+  github?: string
+  x?: string
+}
 
 export const User: FC<UserProps> = ({
   name,
@@ -72,12 +71,19 @@ export const User: FC<UserProps> = ({
   )
 }
 
-export type UsersProps = GridProps & { type: "maintainers" | "members" }
+export interface UsersProps extends GridProps {
+  type: "maintainers" | "members"
+}
 
 export const Users: FC<UsersProps> = ({ type, ...rest }) => {
   const { locale } = useI18n()
 
-  const users = type === "maintainers" ? CONSTANT.MAINTAINERS : CONSTANT.MEMBERS
+  const users =
+    type === "maintainers"
+      ? CONSTANT.MAINTAINERS
+      : type === "members"
+        ? CONSTANT.MEMBERS
+        : CONSTANT.EMERITI
 
   return (
     <Grid

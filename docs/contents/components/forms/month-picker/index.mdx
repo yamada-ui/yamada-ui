@@ -2,6 +2,8 @@
 title: MonthPicker
 description: "`MonthPicker` is a component used for users to select a month."
 package_name: "@yamada-ui/calendar"
+order: 23
+label: Updated
 is_tabs: true
 with_description: true
 tab: Usage
@@ -296,6 +298,38 @@ To customize the icon, set `props` to `iconProps`.
 <VStack>
   <MonthPicker placeholder="YYYY/MM" iconProps={{ color: "primary" }} />
   <MonthPicker placeholder="YYYY/MM" iconProps={{ children: <Ghost /> }} />
+</VStack>
+```
+
+### Add elements to a dropdown
+
+To add elements to a dropdown, set the elements to the `children` property.
+The `children` are provided with `value` and `onClose` methods, which can be used to access the internal state.
+
+```tsx
+<VStack>
+  <MonthPicker placeholder="MMM YYYY">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </MonthPicker>
+
+  <MonthPicker placeholder="MMM YYYY" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit
+          {value
+            ? ` ${
+                value.getFullYear() +
+                "/" +
+                String(value.getMonth() + 1).padStart(2, "0")
+              }`
+            : ""}
+        </Button>
+      </VStack>
+    )}
+  </MonthPicker>
 </VStack>
 ```
 

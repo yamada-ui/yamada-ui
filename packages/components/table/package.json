@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/table",
-  "version": "1.2.0",
+  "version": "1.2.3",
   "description": "Yamada UI table component",
   "keywords": [
     "yamada",
@@ -30,7 +30,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/table"
   },
   "bugs": {
@@ -47,7 +47,7 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.20.1",
+    "@tanstack/react-table": "^8.20.5",
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",

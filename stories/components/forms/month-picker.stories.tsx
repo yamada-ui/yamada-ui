@@ -342,7 +342,9 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { monthPicker: Date | undefined }
+  interface Data {
+    monthPicker: Date | undefined
+  }
 
   const {
     control,
@@ -380,7 +382,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { monthPicker: Date | undefined }
+  interface Data {
+    monthPicker: Date | undefined
+  }
 
   const defaultValues: Data = {
     monthPicker: new Date(),

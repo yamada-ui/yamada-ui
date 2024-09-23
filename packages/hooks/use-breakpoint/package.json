@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-breakpoint",
-  "version": "1.4.5",
+  "version": "1.4.8",
   "description": "Yamada UI useBreakpoint custom hook",
   "keywords": [
     "use-breakpoint"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-breakpoint"
   },
   "bugs": {

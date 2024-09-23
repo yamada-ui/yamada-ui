@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-event-listener",
-  "version": "1.0.17",
+  "version": "1.0.20",
   "description": "Yamada UI useEventListener custom hook",
   "keywords": [
     "use-event-listener"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-event-listener"
   },
   "bugs": {

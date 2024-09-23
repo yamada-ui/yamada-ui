@@ -2,7 +2,7 @@ import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -25,10 +25,12 @@ import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
 import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
+import { usePolarGrid } from "./use-polar-grid"
+import type { UsePolarGridOptions } from "./use-polar-grid"
 import type { UseRadarChartOptions } from "./use-radar-chart"
 import { useRadarChart } from "./use-radar-chart"
 
-type RadarChartOptions = {
+interface RadarChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -65,21 +67,23 @@ type RadarChartOptions = {
   unit?: string
 }
 
-export type RadarChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"RadarChart"> &
-  RadarChartOptions &
-  UseChartProps &
-  Omit<UseChartTooltipOptions, "labelFormatter"> &
-  UseChartLegendProps &
-  UseRadarChartOptions
+export interface RadarChartProps
+  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity" | "strokeDasharray">,
+    ThemeProps<"RadarChart">,
+    RadarChartOptions,
+    UseChartProps,
+    Omit<UseChartTooltipOptions, "labelFormatter">,
+    UseChartLegendProps,
+    UsePolarGridOptions,
+    UseRadarChartOptions {}
 
 /**
  * `RadarChart` is a component for drawing radar charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/radar-chart
+ * @see Docs https://yamada-ui.com/components/data-display/radar-chart
  */
 export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("RadarChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("RadarChart", props)
   const {
     className,
     data,
@@ -116,7 +120,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const {
     getRadarProps,
     getRadarChartProps,
-    getPolarGridProps,
     getPolarAngleAxisProps,
     getPolarRadiusAxisProps,
     radarVars,
@@ -127,7 +130,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     dataKey,
     radarProps,
     chartProps,
-    polarGridProps,
     polarAngleAxisProps,
     polarAngleAxisTickProps,
     polarRadiusAxisProps,
@@ -138,7 +140,6 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     fillOpacity,
     polarAngleAxisTickFormatter,
     polarRadiusAxisTickFormatter,
-    strokeDasharray,
     styles,
   })
   const { getContainerProps } = useChart({ containerProps })
@@ -150,6 +151,11 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
     })
   const { legendProps: computedLegendProps, getLegendProps } = useChartLegend({
     legendProps,
+  })
+  const { getPolarGridProps } = usePolarGrid({
+    polarGridProps,
+    strokeDasharray,
+    styles,
   })
 
   const radars = useMemo(
@@ -168,8 +174,7 @@ export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-radar-chart", className)}
-        var={radarVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", vars: radarVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

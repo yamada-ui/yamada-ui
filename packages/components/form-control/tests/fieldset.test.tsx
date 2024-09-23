@@ -1,6 +1,17 @@
-import { Checkbox } from "@yamada-ui/react"
 import { a11y, render, screen, filterVisuallyHidden } from "@yamada-ui/test"
-import { Fieldset } from "../src"
+import type { ComponentProps, FC } from "react"
+import { Fieldset, useFormControlProps } from "../src"
+
+const Checkbox: FC<ComponentProps<"input">> = ({ children, ...props }) => {
+  const formControlProps = useFormControlProps(props)
+
+  return (
+    <>
+      <input type="checkbox" {...props} {...formControlProps} id="checkbox" />
+      <label htmlFor="checkbox">{children}</label>
+    </>
+  )
+}
 
 describe("<Fieldset />", () => {
   test("Fieldset renders correctly", async () => {

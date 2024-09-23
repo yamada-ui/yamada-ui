@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/portal
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/portal
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/portal
+pnpm add @yamada-ui/portal
+# or
+yarn add @yamada-ui/portal
+# or
+npm install @yamada-ui/portal
+# or
+bun add @yamada-ui/portal
 ```
 
 ## Contribution

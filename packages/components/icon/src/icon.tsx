@@ -1,4 +1,4 @@
-import type { CSSUIObject, UIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps, HTMLUIProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -7,11 +7,9 @@ import {
 } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
 import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
-import type { FC, SVGAttributes } from "react"
+import type { FC } from "react"
 
-export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
-  ThemeProps<"Icon"> &
-  UIProps
+export interface IconProps extends HTMLUIProps<"svg">, ThemeProps<"Icon"> {}
 
 /**
  * `Icon` is a general icon component that can be used in your projects.
@@ -20,7 +18,6 @@ export type IconProps = Omit<SVGAttributes<SVGElement>, keyof UIProps> &
  */
 export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Icon", props)
-
   const {
     className,
     as: element,

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/focus-lock",
-  "version": "1.0.18",
+  "version": "1.0.21",
   "description": "Yamada UI focus lock component",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/focus-lock"
   },
   "bugs": {
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
-    "react-focus-lock": "^2.12.1"
+    "react-focus-lock": "2.12.1"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

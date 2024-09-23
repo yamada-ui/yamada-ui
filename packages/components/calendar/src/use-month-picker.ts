@@ -1,34 +1,33 @@
-import type { UIPropGetter } from "@yamada-ui/core"
+import type { PropGetter } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import { isActiveElement, useUpdateEffect, handlerAll } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { ChangeEvent, CSSProperties } from "react"
 import { useCallback, useState } from "react"
 import type { UseCalendarProps } from "./use-calendar"
-import {
-  useCalendarPicker,
-  type UseCalendarPickerProps,
-} from "./use-calendar-picker"
+import { useCalendarPicker } from "./use-calendar-picker"
+import type { UseCalendarPickerProps } from "./use-calendar-picker"
 
-type CalendarProps = Pick<
-  UseCalendarProps<Date | undefined>,
-  | "value"
-  | "defaultValue"
-  | "onChange"
-  | "month"
-  | "defaultMonth"
-  | "onChangeMonth"
-  | "locale"
-  | "minDate"
-  | "maxDate"
-  | "yearFormat"
-  | "monthFormat"
-  | "withHeader"
-  | "withControls"
-  | "withLabel"
->
+interface CalendarProps
+  extends Pick<
+    UseCalendarProps<Date | undefined>,
+    | "value"
+    | "defaultValue"
+    | "onChange"
+    | "month"
+    | "defaultMonth"
+    | "onChangeMonth"
+    | "locale"
+    | "minDate"
+    | "maxDate"
+    | "yearFormat"
+    | "monthFormat"
+    | "withHeader"
+    | "withControls"
+    | "withLabel"
+  > {}
 
-type UseMonthPickerOptions = {
+interface UseMonthPickerOptions {
   /**
    * The type of the month picker.
    */
@@ -59,8 +58,9 @@ type UseMonthPickerOptions = {
   closeOnSelect?: boolean
 }
 
-export type UseMonthPickerProps = UseCalendarPickerProps<CalendarProps> &
-  UseMonthPickerOptions
+export interface UseMonthPickerProps
+  extends UseCalendarPickerProps<CalendarProps>,
+    UseMonthPickerOptions {}
 
 export const useMonthPicker = ({
   value: valueProp,
@@ -173,7 +173,7 @@ export const useMonthPicker = ({
     setInputValue(inputValue)
   }, [value])
 
-  const getInputProps: UIPropGetter = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,

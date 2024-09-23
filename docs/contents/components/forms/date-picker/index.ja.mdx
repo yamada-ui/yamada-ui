@@ -2,6 +2,8 @@
 title: DatePicker
 description: "`DatePicker`は、ユーザーが日付を選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/calendar"
+order: 19
+label: Updated
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -451,6 +453,31 @@ import "dayjs/locale/ja"
 <VStack>
   <DatePicker placeholder="YYYY/MM/DD" iconProps={{ color: "primary" }} />
   <DatePicker placeholder="YYYY/MM/DD" iconProps={{ children: <Ghost /> }} />
+</VStack>
+```
+
+### ドロップダウンに要素を追加する
+
+ドロップダウンに要素を追加する場合は、`children`に要素を設定します。
+`children`には、`value`と`onClose`のメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+
+```tsx
+<VStack>
+  <DatePicker placeholder="YYYY/MM/DD">
+    <VStack mt="sm">
+      <Button>Submit</Button>
+    </VStack>
+  </DatePicker>
+
+  <DatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
+    {({ value, onClose }) => (
+      <VStack mt="sm">
+        <Button isDisabled={!value} onClick={onClose}>
+          Submit{value ? ` ${new Date(value).toLocaleDateString("en-CA")}` : ""}
+        </Button>
+      </VStack>
+    )}
+  </DatePicker>
 </VStack>
 ```
 

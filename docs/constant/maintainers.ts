@@ -44,8 +44,8 @@ export const MAINTAINERS = [
   {
     name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
     description: {
-      en: "Passionate about web development and a student at the University of Auckland.",
-      ja: "ウェブ開発に情熱を持つオークランド大学の学生。",
+      en: "Developer from New Zealand and a university student.",
+      ja: "ニュージーランドのエンジニア。大学生。",
     },
     github: {
       id: "taroj1205",
@@ -81,20 +81,6 @@ export const MAINTAINERS = [
       url: "https://github.com/cidkumagai",
     },
     discord: { id: "831092312238719026" },
-  },
-  {
-    name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
-    description: {
-      en: "Software engineer based in tokyo.",
-      ja: "東京を拠点に活動するソフトウェアエンジニア。",
-    },
-    github: {
-      id: "nakayan5",
-      icon: "https://avatars.githubusercontent.com/u/63556889?v=4",
-      url: "https://github.com/nakayan5",
-    },
-    x: { url: "https://x.com/nakachan_js" },
-    discord: { id: "770535018040655873" },
   },
   {
     name: { en: "Kei Setoguchi", ja: "Kei Setoguchi" },

@@ -4,13 +4,14 @@ import type {
   WithTransitionProps,
   MotionTransitionVariants,
   MotionProps,
+  MotionVariants,
 } from "@yamada-ui/motion"
 import {
   AnimatePresence,
   transitionEnter,
   transitionExit,
   MOTION_TRANSITION_EASINGS,
-  Motion,
+  motion,
   motionForwardRef,
 } from "@yamada-ui/motion"
 import { createdDom, cx } from "@yamada-ui/utils"
@@ -19,32 +20,7 @@ import { useEffect, useMemo, useState } from "react"
 const isNumeric = (value?: string | number) =>
   value != null && parseFloat(value.toString()) > 0
 
-type CollapseOptions = {
-  /**
-   * If `true`, the opacity of the content will be animated.
-   *
-   * @default true
-   */
-  animationOpacity?: boolean
-  /**
-   * The height you want the content in its collapsed state.
-   *
-   * @default 0
-   */
-  startingHeight?: number | string
-  /**
-   * The height you want the content in its expanded state.
-   *
-   * @default "auto"
-   */
-  endingHeight?: number | string
-}
-
-export type CollapseProps = WithTransitionProps<MotionProps> &
-  CollapseOptions &
-  ThemeProps<"Collapse">
-
-const variants: MotionTransitionVariants = {
+const variants: MotionVariants = {
   enter: ({
     animationOpacity,
     endingHeight: height,
@@ -75,7 +51,7 @@ const variants: MotionTransitionVariants = {
     transitionEnd: transitionEnd?.exit,
     ...exit,
   }),
-}
+} satisfies MotionTransitionVariants
 
 export const collapseProps = {
   initial: "exit",
@@ -83,6 +59,32 @@ export const collapseProps = {
   exit: "exit",
   variants,
 }
+
+interface CollapseOptions {
+  /**
+   * If `true`, the opacity of the content will be animated.
+   *
+   * @default true
+   */
+  animationOpacity?: boolean
+  /**
+   * The height you want the content in its collapsed state.
+   *
+   * @default 0
+   */
+  startingHeight?: number | string
+  /**
+   * The height you want the content in its expanded state.
+   *
+   * @default "auto"
+   */
+  endingHeight?: number | string
+}
+
+export interface CollapseProps
+  extends WithTransitionProps<MotionProps>,
+    CollapseOptions,
+    ThemeProps<"Collapse"> {}
 
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.
@@ -166,7 +168,7 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
   return (
     <AnimatePresence initial={false} custom={custom}>
       {isOpen ? (
-        <Motion
+        <motion.div
           ref={ref}
           className={cx("ui-collapse", className)}
           {...rest}

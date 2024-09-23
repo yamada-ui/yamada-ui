@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/switch
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/switch
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/switch
+pnpm add @yamada-ui/switch
+# or
+yarn add @yamada-ui/switch
+# or
+npm install @yamada-ui/switch
+# or
+bun add @yamada-ui/switch
 ```
 
 ## Contribution

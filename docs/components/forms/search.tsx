@@ -54,7 +54,7 @@ const useSearch = () => {
   return { isOpen, onOpen, onClose }
 }
 
-export type SearchProps = StackProps & {}
+export interface SearchProps extends StackProps {}
 
 export const Search = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
@@ -111,7 +111,7 @@ export const Search = memo(
   }),
 )
 
-export type SearchButtonProps = ButtonProps & {}
+export interface SearchButtonProps extends ButtonProps {}
 
 export const SearchButton = memo(
   forwardRef<SearchButtonProps, "button">(({ ...rest }, ref) => {
@@ -136,7 +136,7 @@ export const SearchButton = memo(
   }),
 )
 
-type SearchModalProps = ModalProps
+interface SearchModalProps extends ModalProps {}
 
 const SearchModal: FC<SearchModalProps> = memo(
   ({ isOpen, onClose, ...rest }) => {
@@ -148,7 +148,9 @@ const SearchModal: FC<SearchModalProps> = memo(
     const directionRef = useRef<"up" | "down">("down")
     const compositionRef = useRef<boolean>(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const itemRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map())
+    const itemRefs = useRef<Map<number, RefObject<HTMLAnchorElement>>>(
+      new Map(),
+    )
 
     const hits = useMemo(() => {
       if (query.length < 1) return []
@@ -171,7 +173,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
         eventRef.current = "keyboard"
 
-        const actions: Record<string, Function | undefined> = {
+        const actions: { [key: string]: Function | undefined } = {
           ArrowDown: () => {
             if (selectedIndex + 1 === hits.length) return
 
@@ -294,7 +296,7 @@ const SearchModal: FC<SearchModalProps> = memo(
             <VStack as="ul" gap="sm">
               {hits.map(({ title, type, slug, hierarchy }, index) => {
                 const isSelected = index === selectedIndex
-                const ref = createRef<HTMLDivElement>()
+                const ref = createRef<HTMLAnchorElement>()
 
                 itemRefs.current.set(index, ref)
 

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-boolean",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Yamada UI useBoolean custom hook",
   "keywords": [
     "use-boolean"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-boolean"
   },
   "bugs": {

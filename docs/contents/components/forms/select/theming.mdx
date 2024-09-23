@@ -4,6 +4,8 @@ description: >-
   `Select` is a component used for allowing a user to choose one option from a
   list.
 package_name: "@yamada-ui/select"
+order: 2
+label: Updated
 with_description: true
 tab: Theming
 ---
@@ -27,11 +29,15 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
   {
     baseStyle: {
       inner: {},
-      list: {
+      header: {},
+      content: {
         w: "100%",
+      },
+      list: {
         maxH: "xs",
         overflowY: "auto",
       },
+      footer: {},
       item: {
         _hover: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],

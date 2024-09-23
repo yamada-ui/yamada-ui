@@ -1,5 +1,5 @@
-import type { As, CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
-import type { Merge } from "@yamada-ui/utils"
+import type { CSSUIProps, HTMLUIProps } from "@yamada-ui/core"
+import type { Dict, Merge } from "@yamada-ui/utils"
 import type {
   ComponentPropsWithoutRef,
   ReactElement,
@@ -7,19 +7,7 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
-import type { pieProperties } from "./rechart-properties"
 
-export type ChartPropGetter<
-  Y extends As = "div",
-  M = undefined,
-  D = undefined,
-> = (props?: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
-
-export type RequiredChartPropGetter<
-  Y extends As = "div",
-  M = undefined,
-  D = undefined,
-> = (props: Merge<HTMLUIProps<Y>, M>, ref?: React.Ref<any>) => D
 export type ChartLayoutType = "horizontal" | "vertical"
 export type AreaChartType = "default" | "stacked" | "percent" | "split"
 export type BarChartType = Exclude<AreaChartType, "split">
@@ -34,120 +22,145 @@ export type ChartCurveType =
   | "stepAfter"
 export type TooltipDataSourceType = "segment" | "all"
 
-export type AreaChartProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof Recharts.AreaChart>
->
-export type BarChartProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof Recharts.BarChart>
->
-export type LineChartProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof Recharts.LineChart>
->
-export type RadarChartProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof Recharts.RadarChart>
->
-export type PieChartProps = Merge<
-  CSSUIProps,
-  ComponentPropsWithoutRef<typeof Recharts.PieChart>
->
-export type ReferenceLineProps = Merge<CSSUIProps, Recharts.ReferenceLineProps>
-export type ResponsiveContainerProps = Merge<
-  CSSUIProps,
-  Omit<Recharts.ResponsiveContainerProps, "children">
->
-export type AreaProps = Merge<
-  Merge<CSSUIProps, Recharts.AreaProps>,
-  {
-    color: CSSUIProps["color"]
-    dot?: DotProps
-    activeDot?: DotProps
-    dimDot?: DotProps
-    dimArea?: Partial<AreaProps>
-  }
->
-export type LineProps = Merge<
-  Merge<CSSUIProps, Recharts.LineProps>,
-  {
-    color: CSSUIProps["color"]
-    activeDot?: DotProps
-    dot?: DotProps
-    dimDot?: DotProps
-    dimLine?: Partial<LineProps>
-  }
->
-export type BarProps = Merge<
-  Merge<CSSUIProps, Recharts.BarProps>,
-  {
-    color: CSSUIProps["color"]
-    activeBar?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
-    background?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
-    dimBar?: Partial<BarProps>
-  }
->
-export type RadarProps = Merge<
-  Merge<CSSUIProps, Recharts.RadarProps>,
-  {
-    color: CSSUIProps["color"]
-    dot?: DotProps
-    activeDot?: DotProps
-    dimDot?: DotProps
-    dimRadar?: Partial<RadarProps>
-  }
->
-export type PieProps = Merge<
-  Merge<Pick<Recharts.PieProps, (typeof pieProperties)[number]>, CSSUIProps>,
-  {
-    activeShape?: Partial<PieProps>
-    inactiveShape?: Partial<PieProps>
-    label?: HTMLUIProps<"text">
-    labelLine?: HTMLUIProps<"path">
-  }
->
-export type CellProps = Merge<
-  CSSUIProps,
-  {
-    name: string
-    value: number
-    dimCell?: Partial<CellProps>
-  }
->
-export type DotProps = Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps>
-export type XAxisProps = Merge<
-  Merge<CSSUIProps, Recharts.XAxisProps>,
-  {
-    color?: CSSUIProps["color"]
-    stroke?: CSSUIProps["color"]
-    fill?: CSSUIProps["color"]
-  }
->
-export type YAxisProps = Merge<
-  Merge<CSSUIProps, Recharts.YAxisProps>,
-  { color?: CSSUIProps["color"] }
->
-export type LegendProps = Merge<CSSUIProps, Omit<Recharts.LegendProps, "ref">>
-export type TooltipProps = Merge<
-  Merge<CSSUIProps, Omit<Recharts.TooltipProps<any, any>, "ref">>,
-  { cursor?: CSSUIProps }
->
-export type GridProps = Merge<CSSUIProps, Recharts.CartesianGridProps>
-export type PolarGridProps = Merge<CSSUIProps, Recharts.PolarGridProps>
-export type PolarAngleAxisProps = Merge<
-  Recharts.PolarAngleAxisProps,
-  CSSUIProps
->
-export type PolarRadiusAxisProps = Merge<
-  CSSUIProps,
-  Recharts.PolarRadiusAxisProps
->
-export type LabelProps = Merge<CSSUIProps, Recharts.LabelProps>
+export interface AreaChartProps
+  extends Merge<
+    CSSUIProps,
+    ComponentPropsWithoutRef<typeof Recharts.AreaChart>
+  > {}
+export interface BarChartProps
+  extends Merge<
+    CSSUIProps,
+    ComponentPropsWithoutRef<typeof Recharts.BarChart>
+  > {}
+export interface LineChartProps
+  extends Merge<
+    CSSUIProps,
+    ComponentPropsWithoutRef<typeof Recharts.LineChart>
+  > {}
+export interface RadarChartProps
+  extends Merge<
+    CSSUIProps,
+    ComponentPropsWithoutRef<typeof Recharts.RadarChart>
+  > {}
+export interface PieChartProps
+  extends Merge<
+    CSSUIProps,
+    ComponentPropsWithoutRef<typeof Recharts.PieChart>
+  > {}
+export interface RadialChartProps
+  extends Merge<
+    CSSUIProps,
+    ComponentPropsWithoutRef<typeof Recharts.RadialBarChart>
+  > {}
+export interface ReferenceLineProps
+  extends Merge<CSSUIProps, Recharts.ReferenceLineProps> {}
+export interface ResponsiveContainerProps
+  extends Merge<
+    CSSUIProps,
+    Omit<Recharts.ResponsiveContainerProps, "children">
+  > {}
+export interface AreaProps
+  extends Merge<
+    Merge<CSSUIProps, Recharts.AreaProps>,
+    {
+      color: CSSUIProps["color"]
+      dot?: DotProps
+      activeDot?: DotProps
+      dimDot?: DotProps
+      dimArea?: Partial<AreaProps>
+    }
+  > {}
+export interface LineProps
+  extends Merge<
+    Merge<CSSUIProps, Recharts.LineProps>,
+    {
+      color: CSSUIProps["color"]
+      activeDot?: DotProps
+      dot?: DotProps
+      dimDot?: DotProps
+      dimLine?: Partial<LineProps>
+    }
+  > {}
+export interface BarProps
+  extends Merge<
+    Merge<CSSUIProps, Recharts.BarProps>,
+    {
+      color: CSSUIProps["color"]
+      activeBar?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+      background?: Merge<SVGProps<SVGPathElement>, CSSUIProps>
+      dimBar?: Partial<BarProps>
+    }
+  > {}
+export interface RadarProps
+  extends Merge<
+    Merge<CSSUIProps, Recharts.RadarProps>,
+    {
+      color: CSSUIProps["color"]
+      dot?: DotProps
+      activeDot?: DotProps
+      dimDot?: DotProps
+      dimRadar?: Partial<RadarProps>
+    }
+  > {}
+export interface PieProps
+  extends Merge<
+    Merge<Recharts.PieProps, CSSUIProps>,
+    {
+      activeShape?: Partial<PieProps>
+      inactiveShape?: Partial<PieProps>
+      label?: HTMLUIProps<"text">
+      labelLine?: HTMLUIProps<"path">
+    }
+  > {}
+export interface CellProps extends CSSUIProps {
+  name: string
+  value: number
+  dimCell?: Partial<CellProps>
+}
+export interface RadialBarProps
+  extends Merge<
+    Merge<Recharts.RadialBarProps, CSSUIProps>,
+    {
+      background?: Partial<RadialBarProps>
+      dimRadialBar?: CSSUIProps
+    }
+  > {}
+export interface DotProps
+  extends Merge<Omit<Recharts.DotProps, "ref">, CSSUIProps> {}
+export interface XAxisProps
+  extends Merge<
+    CSSUIProps,
+    Omit<Recharts.XAxisProps, "color" | "stroke" | "fill">
+  > {}
+export interface YAxisProps
+  extends Merge<CSSUIProps, Omit<Recharts.YAxisProps, "color">> {}
+export interface LegendProps
+  extends Merge<CSSUIProps, Omit<Recharts.LegendProps, "ref">> {}
+export interface TooltipProps
+  extends Merge<
+    Merge<CSSUIProps, Omit<Recharts.TooltipProps<any, any>, "ref">>,
+    { cursor?: CSSUIProps }
+  > {}
+export interface GridProps
+  extends Merge<CSSUIProps, Recharts.CartesianGridProps> {}
+export interface PolarGridProps
+  extends Merge<CSSUIProps, Recharts.PolarGridProps> {}
+export interface PolarAngleAxisProps
+  extends Merge<Recharts.PolarAngleAxisProps, CSSUIProps> {}
+export interface PolarRadiusAxisProps
+  extends Merge<CSSUIProps, Recharts.PolarRadiusAxisProps> {}
+export interface LabelProps
+  extends Merge<CSSUIProps, Omit<Recharts.LabelProps, "fill">> {}
+export interface LabelListProps
+  extends Merge<Recharts.LabelListProps<Dict>, Omit<CSSUIProps, "position">> {}
 export type ChartTooltipProps = Recharts.TooltipProps<
-  number | string | Array<number | string>,
+  number | string | (number | string)[],
   number | string
 >
 export type ChartTooltip =
   | ReactElement
   | ((props: ChartTooltipProps) => ReactNode)
+export interface ChartLabelProps
+  extends Omit<React.SVGProps<SVGTextElement>, "viewBox" | "fill" | "offset">,
+    LabelProps {}
+export type ChartLabel = ReactElement | ((props: ChartLabelProps) => ReactNode)

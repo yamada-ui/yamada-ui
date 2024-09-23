@@ -3,11 +3,15 @@ import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx, getValidChildren, isString, runIfFunc } from "@yamada-ui/utils"
-import { cloneElement, type FC } from "react"
-import type { UseRatingItemProps } from "./use-rating"
-import { useRatingContext, useRatingItem } from "./use-rating"
+import { cloneElement } from "react"
+import type { FC } from "react"
+import { useRatingContext } from "./rating-context"
+import type { UseRatingItemProps } from "./use-rating-item"
+import { useRatingItem } from "./use-rating-item"
 
-export type RatingItemProps = HTMLUIProps<"input"> & UseRatingItemProps
+export interface RatingItemProps
+  extends Omit<HTMLUIProps<"label">, "value">,
+    UseRatingItemProps {}
 
 export const RatingItem = forwardRef<RatingItemProps, "input">(
   ({ className, groupValue, value, fractionValue, color, ...rest }, ref) => {
@@ -66,7 +70,7 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
   },
 )
 
-type RatingIconProps = HTMLUIProps<"div">
+interface RatingIconProps extends HTMLUIProps {}
 
 const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
   const { styles } = useRatingContext()

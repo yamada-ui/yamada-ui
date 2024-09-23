@@ -118,6 +118,7 @@ app.get("*", (c) => {
         <head>
           <script type="module" src="/src/client.tsx"></script>
         </head>
+
         <body>
           <ColorModeScript
             type="cookie"
@@ -143,29 +144,15 @@ export default app
 `index.tsx`に`ColorModeScript`と`ThemeSchemeScript`を追加する必要があるのは、サーバーサイドでレンダリングされたページがクライアントに送信された際、ダークモードを使用している場合の画面のフラッシュを防ぐためです。
 :::
 
-`package.json`に`"type": "module"`を追加します。
+`package.json`の内容を変更します。
 
-```json live=false title=package.json highlight={2}
+```json live=false title=package.json highlight={2,4}
 {
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.9.0",
-    "@yamada-ui/react": "^1.3.0",
-    "hono": "^4.1.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@hono/vite-dev-server": "^0.10.0",
-    "@types/node": "^20.11.17",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.22",
-    "tsx": "^3.12.2",
-    "vite": "^5.2.6"
+    "dev": "vite"
   }
+  // ...
 }
 ```
 
@@ -174,13 +161,8 @@ export default app
 ```json live=false title=tsconfig.json highlight={9}
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "strict": true,
-    "types": ["node"],
-    "jsx": "react-jsx",
     "jsxImportSource": "react"
+    // ...
   }
 }
 ```
@@ -202,11 +184,6 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      resolve: {
-        alias: {
-          "@": "/src",
-        },
-      },
     }
   } else {
     return {
@@ -219,14 +196,6 @@ export default defineConfig(({ mode }) => {
           entry: "src/index.tsx",
         }),
       ],
-      server: {
-        port: 4448,
-      },
-      resolve: {
-        alias: {
-          "@": "/src",
-        },
-      },
     }
   }
 })

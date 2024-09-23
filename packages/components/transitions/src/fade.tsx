@@ -4,19 +4,18 @@ import type {
   WithTransitionProps,
   MotionTransitionVariants,
   MotionProps,
+  MotionVariants,
 } from "@yamada-ui/motion"
 import {
   AnimatePresence,
   transitionEnter,
   transitionExit,
-  Motion,
+  motion,
   motionForwardRef,
 } from "@yamada-ui/motion"
 import { cx } from "@yamada-ui/utils"
 
-export type FadeProps = WithTransitionProps<MotionProps> & ThemeProps<"Fade">
-
-const variants: MotionTransitionVariants = {
+const variants: MotionVariants = {
   enter: ({ transition, transitionEnd, delay, duration, enter } = {}) => ({
     opacity: 1,
     transition: transitionEnter(transition?.enter)(delay, duration),
@@ -29,7 +28,7 @@ const variants: MotionTransitionVariants = {
     transitionEnd: transitionEnd?.exit,
     ...exit,
   }),
-}
+} satisfies MotionTransitionVariants
 
 export const fadeProps = {
   initial: "exit",
@@ -37,6 +36,10 @@ export const fadeProps = {
   exit: "exit",
   variants,
 }
+
+export interface FadeProps
+  extends WithTransitionProps<MotionProps>,
+    ThemeProps<"Fade"> {}
 
 /**
  * `Fade` is a component that gradually shows or hides an element.
@@ -65,7 +68,7 @@ export const Fade = motionForwardRef<FadeProps, "div">((props, ref) => {
   return (
     <AnimatePresence custom={custom}>
       {isOpen ? (
-        <Motion
+        <motion.div
           ref={ref}
           className={cx("ui-fade", className)}
           custom={custom}

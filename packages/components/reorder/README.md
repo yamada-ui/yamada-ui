@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/reorder
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/reorder
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/reorder
+pnpm add @yamada-ui/reorder
+# or
+yarn add @yamada-ui/reorder
+# or
+npm install @yamada-ui/reorder
+# or
+bun add @yamada-ui/reorder
 ```
 
 ## Contribution

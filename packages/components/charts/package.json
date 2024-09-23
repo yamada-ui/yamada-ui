@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/charts",
-  "version": "1.4.0",
+  "version": "1.5.2",
   "description": "Yamada UI charts component",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hirotomoyamada/yamada-ui",
+    "url": "https://github.com/hirotomoyamada/yamada-ui",
     "directory": "packages/components/charts"
   },
   "bugs": {

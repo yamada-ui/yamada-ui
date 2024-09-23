@@ -4,22 +4,22 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import { PopoverTrigger } from "@yamada-ui/popover"
 import { assignRef, cx, dataAttr, funcAll, handlerAll } from "@yamada-ui/utils"
 import type { KeyboardEvent, ReactNode } from "react"
-import { useCallback } from "react"
-import { useMenu } from "./menu"
+import { useCallback, useMemo } from "react"
+import { useMenu, useUpstreamMenuItem } from "./menu-context"
 import type { MenuIconProps } from "./menu-item"
-import { MenuIcon, useUpstreamMenuItem } from "./menu-item"
+import { MenuIcon } from "./menu-item"
 
-export type MenuButtonProps = HTMLUIProps<"button">
+export interface MenuButtonProps extends HTMLUIProps<"button"> {}
 
 export const MenuButton = forwardRef<MenuButtonProps, "button">(
-  ({ className, children, as: As, ...rest }, ref) => {
+  ({ className, children, as, ...rest }, ref) => {
     const { onKeyDownRef, onUpstreamRestoreFocus } = useUpstreamMenuItem() ?? {}
     const { isOpen, onOpen, onClose, onFocusFirstItem, onFocusLastItem } =
       useMenu()
 
     const onKeyDown = useCallback(
       (ev: KeyboardEvent) => {
-        const actions: Record<string, Function> = {
+        const actions: { [key: string]: Function } = {
           Enter: funcAll(onOpen, onFocusFirstItem),
           ArrowDown: funcAll(onOpen, onFocusFirstItem),
           ArrowUp: funcAll(onOpen, onFocusLastItem),
@@ -38,7 +38,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
     const onItemKeyDown = useCallback(
       (ev: KeyboardEvent<HTMLLIElement>) => {
-        const actions: Record<string, Function | undefined> = {
+        const actions: { [key: string]: Function | undefined } = {
           ArrowRight: !isOpen ? funcAll(onOpen, onFocusFirstItem) : undefined,
           ArrowLeft: isOpen
             ? funcAll(onUpstreamRestoreFocus, onClose)
@@ -58,7 +58,7 @@ export const MenuButton = forwardRef<MenuButtonProps, "button">(
 
     assignRef(onKeyDownRef, onItemKeyDown)
 
-    const Component = As ? ui(As) : Button
+    const Component = useMemo(() => (as ? ui(as) : Button), [as])
 
     return (
       <PopoverTrigger>
@@ -86,7 +86,7 @@ const Button = forwardRef<MenuButtonProps, "button">((rest, ref) => {
   return <ui.button ref={ref} __css={css} {...rest} />
 })
 
-export type MenuItemButtonProps = MenuButtonProps & {
+export interface MenuItemButtonProps extends MenuButtonProps {
   innerProps?: HTMLUIProps<"span">
   iconProps?: MenuIconProps
   icon?: ReactNode

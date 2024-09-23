@@ -1,17 +1,12 @@
 import type {
   CSSUIObject,
   CSSUIProps,
-  HTMLUIProps,
+  PropGetter,
   ThemeProps,
 } from "@yamada-ui/core"
-import {
-  ui,
-  forwardRef,
-  omitThemeProps,
-  useComponentStyle,
-} from "@yamada-ui/core"
-import type { HTMLMotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import { motion, AnimatePresence } from "@yamada-ui/motion"
+import { ui, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
+import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
@@ -20,7 +15,6 @@ import { useEventListener } from "@yamada-ui/use-event-listener"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
 import { usePopper } from "@yamada-ui/use-popper"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   handlerAll,
@@ -38,7 +32,7 @@ import {
   useRef,
 } from "react"
 
-type TooltipOptions = {
+interface TooltipOptions {
   /**
    * The label of the tooltip.
    */
@@ -127,11 +121,11 @@ type TooltipOptions = {
   withPortal?: boolean
 }
 
-export type TooltipProps = Omit<HTMLUIProps<"div">, "offset"> &
-  ThemeProps<"Tooltip"> &
-  Omit<HTMLMotionProps<"div">, "color" | "style" | "variants" | "transition"> &
-  Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &
-  TooltipOptions
+export interface TooltipProps
+  extends Omit<MotionProps, "animation" | "offset">,
+    ThemeProps<"Tooltip">,
+    Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement">,
+    TooltipOptions {}
 
 const getTooltipProps = (
   animation: TooltipProps["animation"] = "scale",
@@ -178,7 +172,7 @@ const getTooltipProps = (
  *
  * @see Docs https://yamada-ui.com/components/overlay/tooltip
  */
-export const Tooltip = forwardRef<TooltipProps, "div">(
+export const Tooltip = motionForwardRef<TooltipProps, "div">(
   (
     { z: zProp, zIndex: zIndexProp, portalProps, withPortal = true, ...props },
     ref,
@@ -392,8 +386,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                 zIndex={resolvedZIndex}
                 pointerEvents="none"
               >
-                <ui.div
-                  as={motion.div}
+                <motion.div
                   ref={ref}
                   className={cx("ui-tooltip", className)}
                   role="tooltip"
@@ -408,7 +401,7 @@ export const Tooltip = forwardRef<TooltipProps, "div">(
                   {...rest}
                 >
                   {label}
-                </ui.div>
+                </motion.div>
               </ui.div>
             </Portal>
           ) : null}

@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/cli
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/cli
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/cli
+pnpm add @yamada-ui/cli
+# or
+yarn add @yamada-ui/cli
+# or
+npm install @yamada-ui/cli
+# or
+bun add @yamada-ui/cli
 ```
 
 ## Contribution

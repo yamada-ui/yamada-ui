@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-token",
-  "version": "1.1.22",
+  "version": "1.1.25",
   "description": "Yamada UI useToken custom hook",
   "keywords": [
     "use-token"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-token"
   },
   "bugs": {

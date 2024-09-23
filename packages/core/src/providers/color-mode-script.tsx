@@ -1,8 +1,8 @@
-import type { ColorMode } from "../css"
+import type { ColorModeWithSystem } from "../css"
 
-export type ColorModeScriptProps = {
+export interface ColorModeScriptProps {
   type?: "localStorage" | "cookie"
-  initialColorMode?: ColorMode | "system"
+  initialColorMode?: ColorModeWithSystem
   storageKey?: string
   nonce?: string
 }

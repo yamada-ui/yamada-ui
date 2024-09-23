@@ -4,6 +4,8 @@ description: >-
   `ColorPicker` is a component used by the user to select a color or enter an
   arbitrary color value.
 package_name: "@yamada-ui/color-picker"
+order: 2
+label: Updated
 with_description: true
 tab: Theming
 ---
@@ -60,11 +62,9 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
           boxShadow: "outline",
         },
       },
-      list: {
+      content: {
         w: "auto",
         minW: "auto",
-        maxH: "inherit",
-        overflowY: "inherit",
         p: "2",
       },
     },
@@ -125,6 +125,7 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
     "addon",
     "element",
     "button",
+    "list",
     "item",
     "command",
     "icon",

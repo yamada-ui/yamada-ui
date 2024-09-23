@@ -2,6 +2,8 @@
 title: DatePicker
 description: "`DatePicker` is a component used for users to select a date."
 package_name: "@yamada-ui/calendar"
+order: 2
+label: Updated
 with_description: true
 tab: Theming
 ---
@@ -35,11 +37,9 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
           pointerEvents: "none",
         },
       },
-      list: {
+      content: {
         w: "auto",
         minW: "auto",
-        maxH: "inherit",
-        overflowY: "inherit",
         p: "2",
       },
     },
@@ -53,5 +53,17 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
       },
     },
   },
-)({ omit: ["addon", "element", "group", "groupLabel", "item", "itemIcon"] })
+)({
+  omit: [
+    "addon",
+    "element",
+    "group",
+    "groupLabel",
+    "header",
+    "footer",
+    "list",
+    "item",
+    "itemIcon",
+  ],
+})
 ```

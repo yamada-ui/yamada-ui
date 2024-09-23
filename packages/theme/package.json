@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/theme",
-  "version": "1.16.0",
+  "version": "1.18.1",
   "description": "Yamada UI default theme",
   "keywords": [
     "yamada",
@@ -22,7 +22,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/theme"
   },
   "bugs": {

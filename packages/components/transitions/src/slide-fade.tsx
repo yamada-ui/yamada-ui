@@ -4,43 +4,19 @@ import type {
   WithTransitionProps,
   MotionTransitionVariants,
   MotionProps,
+  MotionVariants,
 } from "@yamada-ui/motion"
 import {
   AnimatePresence,
   transitionEnter,
   transitionExit,
-  Motion,
+  motion,
   motionForwardRef,
 } from "@yamada-ui/motion"
 import { useValue } from "@yamada-ui/use-value"
 import { cx } from "@yamada-ui/utils"
 
-type SlideFadeOptions = {
-  /**
-   * The offset on the horizontal or `x` axis.
-   *
-   * @default 0
-   */
-  offsetX?: Token<string | number>
-  /**
-   * The offset on the vertical or `y` axis.
-   *
-   * @default 8
-   */
-  offsetY?: Token<string | number>
-  /**
-   * If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.
-   *
-   * @default true
-   */
-  reverse?: boolean
-}
-
-export type SlideFadeProps = WithTransitionProps<MotionProps> &
-  SlideFadeOptions &
-  ThemeProps<"SlideFade">
-
-const variants: MotionTransitionVariants = {
+const variants: MotionVariants = {
   initial: ({
     offsetX,
     offsetY,
@@ -82,7 +58,7 @@ const variants: MotionTransitionVariants = {
       : { transitionEnd: { x: offsetX, y: offsetY, ...transitionEnd?.exit } }),
     ...exit,
   }),
-}
+} satisfies MotionTransitionVariants
 
 export const slideFadeProps = {
   initial: "exit",
@@ -90,6 +66,32 @@ export const slideFadeProps = {
   exit: "exit",
   variants,
 }
+
+interface SlideFadeOptions {
+  /**
+   * The offset on the horizontal or `x` axis.
+   *
+   * @default 0
+   */
+  offsetX?: Token<string | number>
+  /**
+   * The offset on the vertical or `y` axis.
+   *
+   * @default 8
+   */
+  offsetY?: Token<string | number>
+  /**
+   * If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.
+   *
+   * @default true
+   */
+  reverse?: boolean
+}
+
+export interface SlideFadeProps
+  extends WithTransitionProps<MotionProps>,
+    SlideFadeOptions,
+    ThemeProps<"SlideFade"> {}
 
 /**
  * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.
@@ -133,7 +135,7 @@ export const SlideFade = motionForwardRef<SlideFadeProps, "div">(
     return (
       <AnimatePresence custom={custom}>
         {isOpen ? (
-          <Motion
+          <motion.div
             ref={ref}
             className={cx("ui-slide-fade", className)}
             custom={custom}

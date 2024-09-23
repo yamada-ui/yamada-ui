@@ -42,6 +42,7 @@ import { Input } from "./input"
 import { Kbd } from "./kbd"
 import { LineChart } from "./line-chart"
 import { Link } from "./link"
+import { LinkBox } from "./link-box"
 import { List } from "./list"
 import { Loading } from "./loading"
 import { Mark } from "./mark"
@@ -62,6 +63,7 @@ import { PinInput } from "./pin-input"
 import { Popover } from "./popover"
 import { Progress } from "./progress"
 import { RadarChart } from "./radar-chart"
+import { RadialChart } from "./radial-chart"
 import { Radio } from "./radio"
 import { RangeDatePicker } from "./range-date-picker"
 import { RangeSlider } from "./range-slider"
@@ -134,6 +136,7 @@ export const components = {
   Kbd,
   LineChart,
   Link,
+  LinkBox,
   List,
   Loading,
   Mark,
@@ -153,6 +156,7 @@ export const components = {
   Popover,
   Progress,
   RadarChart,
+  RadialChart,
   Radio,
   RangeDatePicker,
   RangeSlider,

@@ -13,7 +13,7 @@ import type { ElementType, FC, ReactElement } from "react"
 import { useCallback, useMemo, useRef } from "react"
 import { useButtonGroup } from "./button-group"
 
-type ButtonOptions = {
+interface ButtonOptions {
   /**
    * The type of button. Accepts `button`, `reset`, or `submit`.
    *
@@ -88,9 +88,10 @@ type ButtonOptions = {
   disableRipple?: boolean
 }
 
-export type ButtonProps = HTMLUIProps<"button"> &
-  ThemeProps<"Button"> &
-  ButtonOptions
+export interface ButtonProps
+  extends HTMLUIProps<"button">,
+    ThemeProps<"Button">,
+    ButtonOptions {}
 
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.

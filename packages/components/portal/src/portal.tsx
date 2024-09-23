@@ -1,7 +1,8 @@
 import type { ReactNode, RefObject } from "react"
-import { ContainerPortal, DefaultPortal } from "./"
+import { ContainerPortal } from "./container-portal"
+import { DefaultPortal } from "./default-portal"
 
-export type PortalProps = {
+export interface PortalProps {
   /**
    * The `ref` to the component where the portal will be attached to.
    */

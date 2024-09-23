@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx, findChildren, getValidChildren, dataAttr } from "@yamada-ui/utils"
@@ -20,7 +20,7 @@ import {
   useFormControlStyles,
 } from "./form-control"
 
-type FieldsetOptions = {
+interface FieldsetOptions {
   /**
    * If `true`, the fieldset will be required.
    *
@@ -77,10 +77,11 @@ type FieldsetOptions = {
   errorMessageProps?: ErrorMessageProps
 }
 
-export type FieldsetProps = HTMLUIProps<"fieldset"> &
-  ThemeProps<"Fieldset"> &
-  LegendOptions &
-  FieldsetOptions
+export interface FieldsetProps
+  extends HTMLUIProps<"fieldset">,
+    ThemeProps<"Fieldset">,
+    LegendOptions,
+    FieldsetOptions {}
 
 /**
  * `Fieldset` is a component used to fieldset elements with legend, helper message, error message, etc.
@@ -89,7 +90,7 @@ export type FieldsetProps = HTMLUIProps<"fieldset"> &
  */
 export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   ({ id, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Fieldset", props)
+    const [styles, mergedProps] = useComponentMultiStyle("Fieldset", props)
     const {
       className,
       isRequired = false,
@@ -181,20 +182,20 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   },
 )
 
-type LegendOptions = {
+interface LegendOptions {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
   isRequired?: boolean
 }
 
-export type LegendProps = HTMLUIProps<"legend"> & LegendOptions
+export interface LegendProps extends HTMLUIProps<"legend">, LegendOptions {}
 
 export const Legend = forwardRef<LegendProps, "legend">(
   (
     {
       className,
       isRequired: isRequiredProp,
-      requiredIndicator = <RequiredIndicator />,
+      requiredIndicator = null,
       optionalIndicator = null,
       children,
       ...rest
@@ -221,7 +222,15 @@ export const Legend = forwardRef<LegendProps, "legend">(
         {...rest}
       >
         {children}
-        {isRequiredProp ? requiredIndicator : optionalIndicator}
+        {isRequiredProp ? (
+          requiredIndicator ? (
+            <RequiredIndicator>{requiredIndicator}</RequiredIndicator>
+          ) : (
+            <RequiredIndicator />
+          )
+        ) : (
+          optionalIndicator
+        )}
       </ui.legend>
     )
   },

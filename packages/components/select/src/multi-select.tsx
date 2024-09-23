@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Popover, PopoverTrigger } from "@yamada-ui/popover"
@@ -17,6 +17,9 @@ import type {
   ReactNode,
 } from "react"
 import { cloneElement, useMemo } from "react"
+import { Option } from "./option"
+import { OptionGroup } from "./option-group"
+import type { SelectItem } from "./select"
 import type { SelectIconProps } from "./select-icon"
 import { SelectIcon, SelectClearIcon } from "./select-icon"
 import type { SelectListProps } from "./select-list"
@@ -28,10 +31,8 @@ import {
   SelectProvider,
   useSelectContext,
 } from "./use-select"
-import type { SelectItem } from "./"
-import { OptionGroup, Option } from "./"
 
-type MultiSelectOptions = {
+interface MultiSelectOptions {
   /**
    * If provided, generate options based on items.
    */
@@ -68,7 +69,7 @@ type MultiSelectOptions = {
   /**
    * Props for multi select container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for multi select list element.
    */
@@ -101,9 +102,10 @@ type MultiSelectOptions = {
   footer?: ReactNode | FC<{ value: string[] | undefined; onClose: () => void }>
 }
 
-export type MultiSelectProps = ThemeProps<"MultiSelect"> &
-  Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty"> &
-  MultiSelectOptions
+export interface MultiSelectProps
+  extends ThemeProps<"MultiSelect">,
+    Omit<UseSelectProps<string[]>, "placeholderInOptions" | "isEmpty">,
+    MultiSelectOptions {}
 
 /**
  * `MultiSelect` is a component used for allowing users to select multiple values from a list of options.
@@ -111,7 +113,7 @@ export type MultiSelectProps = ThemeProps<"MultiSelect"> &
  * @see Docs https://yamada-ui.com/components/forms/multi-select
  */
 export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("MultiSelect", props)
+  const [styles, mergedProps] = useComponentMultiStyle("MultiSelect", props)
   let {
     className,
     defaultValue = [],
@@ -253,8 +255,9 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   )
 })
 
-type MultiSelectFieldProps = HTMLUIProps<"div"> &
-  Pick<MultiSelectOptions, "component" | "separator">
+interface MultiSelectFieldProps
+  extends HTMLUIProps,
+    Pick<MultiSelectOptions, "component" | "separator"> {}
 
 const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
   (

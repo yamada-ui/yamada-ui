@@ -1,5 +1,5 @@
-import type { CSSUIProps, ThemeProps, UIProps } from "@yamada-ui/core"
-import { forwardRef, useComponentStyle } from "@yamada-ui/core"
+import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -11,12 +11,12 @@ import { Oval } from "./oval"
 import { Puff } from "./puff"
 import { Rings } from "./rings"
 
-type ComponentProps = Omit<UIProps, "color"> & {
+interface ComponentProps extends Omit<IconProps, "color"> {
   color: string
   secondaryColor?: string
 }
 
-type LoadingOptions = {
+interface LoadingOptions {
   /**
    * The variant of the Loading.
    *
@@ -35,9 +35,11 @@ type LoadingOptions = {
   duration?: IconProps["dur"]
 }
 
-export type LoadingProps = IconProps &
-  Pick<ThemeProps<"Loading">, "size" | "colorScheme"> &
-  LoadingOptions
+export interface LoadingProps
+  extends Omit<IconProps, "variant">,
+    Omit<ThemeProps<"Loading">, "variant">,
+    LoadingOptions {}
+
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
@@ -45,53 +47,49 @@ export type LoadingProps = IconProps &
  */
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
-    styles,
-    {
-      className,
-      variant = "oval",
-      color,
-      secondaryColor,
-      colorScheme = "primary",
-      dur,
-      duration,
-      ...rest
-    },
+    { color, ...styles },
+    { variant = "oval", colorScheme, ...mergedProps },
   ] = useComponentStyle("Loading", props)
+  const {
+    className,
+    color: colorProp,
+    secondaryColor,
+    dur,
+    duration,
+    ...rest
+  } = omitThemeProps(mergedProps)
 
   const computedProps = useMemo<ComponentProps>(
     () => ({
       className: cx("ui-loading", className),
       var: [
         {
-          __prefix: "ui",
           name: "color",
           token: "colors",
-          value: color ?? colorScheme,
+          value: colorProp ?? color ?? `${colorScheme}.500`,
         },
         {
-          __prefix: "ui",
           name: "secondary-color",
           token: "colors",
           value: secondaryColor,
         },
       ],
-      color: "var(--ui-color)",
-      ...(secondaryColor
-        ? { secondaryColor: "var(--ui-secondary-color)" }
-        : {}),
+      color: "$color",
+      ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
       __css: { ...styles },
       ...rest,
     }),
     [
       className,
+      colorProp,
       color,
-      secondaryColor,
       colorScheme,
+      secondaryColor,
       duration,
       dur,
-      rest,
       styles,
+      rest,
     ],
   )
 

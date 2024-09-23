@@ -2,9 +2,9 @@
 title: Stat
 description: "`Stat`は、数値やデータをボックス内に表示するために使用されます。"
 package_name: "@yamada-ui/stat"
+order: 2
 with_description: true
 tab: テーマ
-order: 2
 ---
 
 ## テーマ
@@ -42,15 +42,13 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
       w: "3.5",
       h: "3.5",
       verticalAlign: "middle",
-      var: [
+      vars: [
         {
-          __prefix: "ui",
           name: "increase",
           token: "colors",
           value: "success.400",
         },
         {
-          __prefix: "ui",
           name: "decrease",
           token: "colors",
           value: "danger.400",

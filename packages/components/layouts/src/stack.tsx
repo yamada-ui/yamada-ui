@@ -18,7 +18,7 @@ import {
   useState,
 } from "react"
 
-type StackOptions = {
+interface StackOptions {
   /**
    * The CSS `flex-direction` property.
    */
@@ -41,7 +41,9 @@ type StackOptions = {
   divider?: ReactElement
 }
 
-export type StackProps = Omit<HTMLUIProps<"div">, "direction"> & StackOptions
+export interface StackProps
+  extends Omit<HTMLUIProps, "direction">,
+    StackOptions {}
 
 /**
  * `Stack` is a component that groups elements and provides space between child elements.
@@ -90,12 +92,9 @@ export const Stack = forwardRef<StackProps, "div">(
       ? validChildren.map((child, index) => {
           const key = typeof child.key !== "undefined" ? child.key : index
 
-          const cloneDivider = cloneElement(
-            divider as React.ReactElement<any>,
-            {
-              __css: dividerCSS,
-            },
-          )
+          const cloneDivider = cloneElement(divider as ReactElement, {
+            __css: dividerCSS,
+          })
 
           return (
             <Fragment key={key}>
@@ -166,7 +165,7 @@ export const VStack = forwardRef<StackProps, "div">(
   ),
 )
 
-type ZStackOptions = {
+interface ZStackOptions {
   /**
    * If set the stack will start from the given index.
    *
@@ -201,7 +200,9 @@ type ZStackOptions = {
   fit?: boolean
 }
 
-export type ZStackProps = Omit<HTMLUIProps<"div">, "direction"> & ZStackOptions
+export interface ZStackProps
+  extends Omit<HTMLUIProps, "direction">,
+    ZStackOptions {}
 
 /**
  * `ZStack` is a component that groups elements and provides space between child elements.
@@ -236,7 +237,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
     const css: CSSUIObject = {
       position: "relative",
       overflow: "hidden",
-      var: [{ __prefix: "ui", name: "space", token: "spaces", value: gap }],
+      vars: [{ name: "space", token: "spaces", value: gap }],
       ...(fit ? boxSize : {}),
     }
 
@@ -279,7 +280,7 @@ export const ZStack = forwardRef<ZStackProps, "div">(
         const key = child.key ?? index
 
         const zIndex = startIndex + index
-        const space = `calc(var(--ui-space) * ${index})`
+        const space = `calc($space * ${index})`
 
         let css: CSSUIObject = {}
 

@@ -1,6 +1,12 @@
-import { Input } from "@yamada-ui/react"
 import { a11y, filterVisuallyHidden, render, screen } from "@yamada-ui/test"
-import { FormControl } from "../src"
+import type { ComponentProps, FC } from "react"
+import { FormControl, useFormControlProps } from "../src"
+
+const Input: FC<ComponentProps<"input">> = (props) => {
+  const formControlProps = useFormControlProps(props)
+
+  return <input {...props} {...formControlProps} />
+}
 
 describe("<FormControl />", () => {
   test("FormControl renders correctly", async () => {
@@ -102,17 +108,35 @@ describe("<FormControl />", () => {
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
-  test("should render custom indicator", () => {
+  test("should render custom indicator *", () => {
     render(
-      <FormControl
-        isRequired
-        label="Email"
-        requiredIndicator={<div>required</div>}
-      >
+      <FormControl isRequired label="Email">
+        <Input type="email" />
+      </FormControl>,
+    )
+    expect(screen.getByText("*")).toBeInTheDocument()
+  })
+
+  test("should render custom indicator text", () => {
+    render(
+      <FormControl isRequired label="Email" requiredIndicator="required">
         <Input type="email" />
       </FormControl>,
     )
     expect(screen.getByText("required")).toBeInTheDocument()
+  })
+
+  test("should render custom indicator jsx", () => {
+    render(
+      <FormControl
+        isRequired
+        label="Email"
+        requiredIndicator={<div data-testid="required">required</div>}
+      >
+        <Input type="email" />
+      </FormControl>,
+    )
+    expect(screen.getByTestId("required")).toHaveTextContent("required")
   })
 
   test("should render custom optional indicator", () => {

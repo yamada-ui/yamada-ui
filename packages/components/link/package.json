@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/link",
-  "version": "1.0.34",
+  "version": "1.0.37",
   "description": "Yamada UI link components",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/link"
   },
   "bugs": {

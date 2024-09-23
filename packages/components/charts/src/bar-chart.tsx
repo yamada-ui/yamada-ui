@@ -2,7 +2,7 @@ import type { HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -26,17 +26,16 @@ import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
 import { useChartAxis } from "./use-chart-axis"
-import { useChartGrid, type UseChartGridOptions } from "./use-chart-grid"
+import { useChartGrid } from "./use-chart-grid"
+import type { UseChartGridOptions } from "./use-chart-grid"
 import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import {
-  useChartReferenceLine,
-  type UseChartReferenceLineOptions,
-} from "./use-chart-reference-line"
+import { useChartReferenceLine } from "./use-chart-reference-line"
+import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useChartTooltip } from "./use-chart-tooltip"
 
-type BarChartOptions = {
+interface BarChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -51,7 +50,7 @@ type BarChartOptions = {
   withLegend?: boolean
 }
 
-export type BarChartProps = HTMLUIProps<"div"> &
+export type BarChartProps = HTMLUIProps &
   ThemeProps<"BarChart"> &
   BarChartOptions &
   UseBarChartOptions &
@@ -65,10 +64,10 @@ export type BarChartProps = HTMLUIProps<"div"> &
 /**
  * `BarChart` is a component for drawing bar charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/bar-chart
+ * @see Docs https://yamada-ui.com/components/data-display/bar-chart
  */
 export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("BarChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("BarChart", props)
   const {
     className,
     series,
@@ -187,8 +186,7 @@ export const BarChart = forwardRef<BarChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-bar-chart", className)}
-        var={barVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", vars: barVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

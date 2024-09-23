@@ -17,7 +17,7 @@ import { cx } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useMemo } from "react"
 
-type IndicatorOptions = {
+interface IndicatorOptions {
   children: ReactNode
   /**
    * If `true`, set the indicator as an inline element.
@@ -77,7 +77,7 @@ type IndicatorOptions = {
   /**
    * Props for indicator wrapper element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * If `true`, make an element scale and fade like a radar ping or ripple of water.
    *
@@ -89,7 +89,7 @@ type IndicatorOptions = {
    *
    * @default "var(--ui-ping)"
    */
-  pingColor?: HTMLUIProps<"div">["backgroundColor"]
+  pingColor?: HTMLUIProps["backgroundColor"]
   /**
    * It is used for the scale of the ping animation.
    *
@@ -110,9 +110,10 @@ type IndicatorOptions = {
   pingDuration?: AnimationStyle["direction"]
 }
 
-export type IndicatorProps = Omit<HTMLUIProps<"div">, "children" | "offset"> &
-  ThemeProps<"Indicator"> &
-  IndicatorOptions
+export interface IndicatorProps
+  extends Omit<HTMLUIProps, "children" | "offset">,
+    ThemeProps<"Indicator">,
+    IndicatorOptions {}
 
 const getPlacementStyle = (
   placement:
@@ -176,7 +177,7 @@ export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
     isDisabled,
     containerProps,
     ping,
-    pingColor = "var(--ui-ping)",
+    pingColor = "$ping",
     pingDuration = "1.4s",
     pingCount = "infinite",
     pingScale = 1.8,

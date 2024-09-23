@@ -1,0 +1,39 @@
+{
+  "name": "next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next -p 4445",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@yamada-ui/calendar": "workspace:*",
+    "@yamada-ui/carousel": "workspace:*",
+    "@yamada-ui/charts": "workspace:*",
+    "@yamada-ui/dropzone": "workspace:*",
+    "@yamada-ui/fontawesome": "workspace:*",
+    "@yamada-ui/lucide": "workspace:*",
+    "@yamada-ui/markdown": "workspace:*",
+    "@yamada-ui/next": "workspace:*",
+    "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/table": "workspace:*",
+    "next": "^14.2.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.6",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
+  }
+}

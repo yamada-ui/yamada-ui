@@ -1,5 +1,6 @@
 import type { CSSUIObject } from "@yamada-ui/core"
-import { AnimatePresence, Motion, type MotionProps } from "@yamada-ui/motion"
+import { AnimatePresence, motion } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { FC, Key } from "react"
 import type { RippleOptions } from "./use-ripple"
@@ -7,7 +8,7 @@ import type { RippleOptions } from "./use-ripple"
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
 
-export type RippleProps = MotionProps<"span"> & {
+export interface RippleProps extends MotionProps<"span"> {
   /**
    * If `true`, disable ripple effects when pressing a element.
    *
@@ -47,8 +48,7 @@ export const Ripple: FC<RippleProps> = ({
 
         return (
           <AnimatePresence key={key} mode="popLayout">
-            <Motion
-              as="span"
+            <motion.span
               className={cx("ui-ripple", className)}
               initial={{ transform: "scale(0)", opacity: 0.35 }}
               animate={{ transform: "scale(2)", opacity: 0 }}

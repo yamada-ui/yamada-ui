@@ -3,19 +3,13 @@
 ## Installation
 
 ```sh
-$ pnpm add @yamada-ui/stepper
-```
-
-or
-
-```sh
-$ yarn add @yamada-ui/stepper
-```
-
-or
-
-```sh
-$ npm install @yamada-ui/stepper
+pnpm add @yamada-ui/stepper
+# or
+yarn add @yamada-ui/stepper
+# or
+npm install @yamada-ui/stepper
+# or
+bun add @yamada-ui/stepper
 ```
 
 ## Contribution

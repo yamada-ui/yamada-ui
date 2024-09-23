@@ -2,6 +2,8 @@
 title: Select
 description: "`Select`は、ユーザーがオプションのリストから1つを選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/select"
+order: 2
+label: Updated
 with_description: true
 tab: テーマ
 ---
@@ -25,11 +27,15 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
   {
     baseStyle: {
       inner: {},
-      list: {
+      header: {},
+      content: {
         w: "100%",
+      },
+      list: {
         maxH: "xs",
         overflowY: "auto",
       },
+      footer: {},
       item: {
         _hover: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],

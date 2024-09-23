@@ -1,7 +1,8 @@
 ---
 title: Toggle
-description: "`Button`は、オンまたはオフの２つの状態をコンポーネントです。"
+description: "`Toggle`は、オンまたはオフの２つの状態を持つコンポーネントです。"
 package_name: "@yamada-ui/toggle"
+order: 13
 is_tabs: true
 with_description: true
 tab: 使い方
@@ -674,7 +675,7 @@ return (
 
 ### グループ化する
 
-ボタンをグループ化する場合は、`ToggleGroup`を使用します。`ToggleGroup`は、子要素(`Toggle`)の`variant`, `size`, `colorScheme`, `isDisabled`, `isReadOnly`を一括で設定できます。
+`Toggle`をグループ化する場合は、`ToggleGroup`を使用します。`ToggleGroup`は、子要素(`Toggle`)の`variant`, `size`, `colorScheme`, `isDisabled`, `isReadOnly`を一括で設定できます。
 
 ```tsx functional=true
 const [value, setValue] = useState<string | undefined>(undefined)

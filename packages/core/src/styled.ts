@@ -13,7 +13,7 @@ import { createElement, forwardRef } from "react"
 import type {
   StyledOptions,
   UIComponent,
-  StyledResolverProps,
+  InterpolationProps,
   As,
 } from "./components"
 import { shouldForwardProp } from "./components"
@@ -27,15 +27,14 @@ const emotionStyled = interopDefault(createStyled)
 
 const styleProps = { ...styles, ...pseudos }
 
-type ToCSSObject = {
-  (
-    options: Pick<StyledOptions, "baseStyle" | "disableStyleProp">,
-  ): FunctionInterpolation<StyledResolverProps>
-}
+interface ToCSSObjectOptions
+  extends Pick<StyledOptions, "baseStyle" | "disableStyleProp"> {}
 
-export const toCSSObject: ToCSSObject =
-  ({ baseStyle, disableStyleProp }) =>
-  (props: StyledResolverProps) => {
+export function toCSSObject({
+  baseStyle,
+  disableStyleProp,
+}: ToCSSObjectOptions): FunctionInterpolation<InterpolationProps> {
+  return function (props: InterpolationProps) {
     const { theme, css: customCSS, __css, sx, ...rest } = props
     const propsCSS = filterObject<Dict, CSSUIProps>(
       rest,
@@ -49,22 +48,23 @@ export const toCSSObject: ToCSSObject =
 
     return customCSS ? [computedCSS, customCSS] : computedCSS
   }
+}
 
-export const styled = <T extends As, P extends object = {}>(
-  element: T,
+export function styled<T extends As, P extends object = {}>(
+  el: T,
   { baseStyle, disableStyleProp, ...styledOptions }: StyledOptions = {},
-) => {
+): UIComponent<T, P> {
   if (!styledOptions.shouldForwardProp)
     styledOptions.shouldForwardProp = shouldForwardProp(disableStyleProp)
 
   const CSSObject = toCSSObject({ baseStyle, disableStyleProp })
 
   const Component = emotionStyled(
-    element as ComponentType<any>,
+    el as ComponentType<any>,
     styledOptions,
   )(CSSObject)
 
-  const UIComponent = forwardRef((props, ref) => {
+  const UIComponent = forwardRef<HTMLElement, any>((props, ref) => {
     const { colorMode, forced } = useColorMode()
 
     return createElement(Component, {

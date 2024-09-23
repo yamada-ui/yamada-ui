@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/utils",
-  "version": "1.3.2",
+  "version": "1.5.1",
   "description": "Yamada UI utils",
   "keywords": [
     "utils",
@@ -22,7 +22,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/utils"
   },
   "bugs": {

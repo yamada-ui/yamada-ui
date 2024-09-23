@@ -24,7 +24,9 @@ import type { RefObject } from "react"
 import { createRef, memo, useRef, useState } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 
-export type TableOfContentsProps = StackProps & { contents: DocumentContent[] }
+export interface TableOfContentsProps extends StackProps {
+  contents: DocumentContent[]
+}
 
 export const TableOfContents = memo(
   forwardRef<TableOfContentsProps, "div">(({ contents, ...rest }, ref) => {
@@ -115,58 +117,59 @@ export const TableOfContents = memo(
               itemRefs.current.set(id, ref)
 
               return (
-                <ListItem
-                  key={id}
-                  ref={ref}
-                  as="a"
-                  href={`#${id}`}
-                  outline="0"
-                  _hover={{
-                    color: isSelected ? undefined : ["black", "white"],
-                  }}
-                  _focusVisible={{
-                    boxShadow: "inline",
-                  }}
-                  transitionProperty="colors"
-                  transitionDuration="normal"
-                >
+                <ListItem key={id} ref={ref}>
                   <Box
-                    data-selected={dataAttr(isSelected)}
-                    py="sm"
-                    pl={`calc(${lv - 1} * ${pl})`}
-                    position="relative"
-                    zIndex="-1"
-                    userSelect="none"
-                    borderLeftWidth="1px"
-                    borderLeftColor={isSelected ? `primary.400` : "border"}
-                    _selected={{
-                      color: [`black`, "white"],
-                      bg: [`primary.300`, `primary.300`],
+                    as="a"
+                    display="block"
+                    href={`#${id}`}
+                    outline="0"
+                    _hover={{
+                      color: isSelected ? undefined : ["black", "white"],
                     }}
-                    _before={{
-                      content: "''",
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      bg: "white",
-                      opacity: 0.8,
+                    _focusVisible={{
+                      boxShadow: "inline",
                     }}
-                    _dark={{
-                      _before: {
-                        bg: "black",
-                        opacity: 0.86,
-                      },
-                    }}
+                    transitionProperty="colors"
+                    transitionDuration="normal"
                   >
-                    <TextWithCode
+                    <Box
+                      data-selected={dataAttr(isSelected)}
+                      py="sm"
+                      pl={`calc(${lv - 1} * ${pl})`}
                       position="relative"
-                      zIndex="yamcha"
-                      isTruncated
+                      zIndex="-1"
+                      userSelect="none"
+                      borderLeftWidth="1px"
+                      borderLeftColor={isSelected ? `primary.400` : "border"}
+                      _selected={{
+                        color: [`black`, "white"],
+                        bg: [`primary.300`, `primary.300`],
+                      }}
+                      _before={{
+                        content: "''",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        bg: "white",
+                        opacity: 0.8,
+                      }}
+                      _dark={{
+                        _before: {
+                          bg: "black",
+                          opacity: 0.86,
+                        },
+                      }}
                     >
-                      {title}
-                    </TextWithCode>
+                      <TextWithCode
+                        position="relative"
+                        zIndex="yamcha"
+                        isTruncated
+                      >
+                        {title}
+                      </TextWithCode>
+                    </Box>
                   </Box>
                 </ListItem>
               )

@@ -111,7 +111,8 @@ const CONTROL_COLUMN: Column<Data> = {
   cell: ({ row }) => (row.original.id ? <ControlMenu /> : null),
 }
 
-export type DataTableProps = Omit<PagingTableProps, "columns" | "data"> & {
+export interface DataTableProps
+  extends Omit<PagingTableProps, "columns" | "data"> {
   titleRef: MutableRefObject<(value: string) => void>
   statusRef: MutableRefObject<(value: Status[]) => void>
   priorityRef: MutableRefObject<(value: Priority[]) => void>

@@ -2,6 +2,8 @@
 title: BarChart
 description: "`BarChart`は、複数のデータを比較するための棒グラフを描画するコンポーネントです。"
 package_name: "@yamada-ui/charts"
+order: 1
+label: Updated
 with_description: true
 tab: Props
 ---
@@ -14,7 +16,7 @@ tab: Props
   id="barchart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -30,16 +32,518 @@ tab: Props
   id="barchart-series"
   name="series"
   required
-  type='(Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "layout" | "barSize" | "maxBarSize" | "style" | "className" | ... 494 more ... | "animationId"> & Omit<...> & BarProps, "color" | ... 2 more ... | "dimBar"> & { ...; })[]'
+  type="BarProps[]"
   description={
     "An array of objects with `name` and `color` keys. Determines which data should be consumed from the `data` array."
   }
 />
 
+<PropsCard id="barchart-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="barchart-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="barchart-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="barchart-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="barchart-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="barchart-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="barchart-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="barchart-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="barchart-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="barchart-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="barchart-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="barchart-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="barchart-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="barchart-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="barchart-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="barchart-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="barchart-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="barchart-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="barchart-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="barchart-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="barchart-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="barchart-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="barchart-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="barchart-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="barchart-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="barchart-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="barchart-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="barchart-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="barchart-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="barchart-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="barchart-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="barchart-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="barchart-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="barchart-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="barchart-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="barchart-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="barchart-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="barchart-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="barchart-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="barchart-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="barchart-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="barchart-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="barchart-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="barchart-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="barchart-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="barchart-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="barchart-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="barchart-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="barchart-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="barchart-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="barchart-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="barchart-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="barchart-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="barchart-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="barchart-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="barchart-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="barchart-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="barchart-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="barchart-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="barchart-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="barchart-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="barchart-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="barchart-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="barchart-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="barchart-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="barchart-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="barchart-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="barchart-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="barchart-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="barchart-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="barchart-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="barchart-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="barchart-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="barchart-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard
   id="barchart-barprops"
   name="barProps"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "layout" | "barSize" | "maxBarSize" | "style" | "className" | ... 494 more ... | "animationId"> & Omit<...> & BarProps, "color" | ... 2 more ... | "dimBar"> & { ...; }>'
+  type="Partial<BarProps>"
   description={"Props for the bars."}
 />
 
@@ -55,8 +559,7 @@ tab: Props
 <PropsCard
   id="barchart-chartprops"
   name="chartProps"
-  type="Omit<CSSUIProps, keyof CategoricalChartProps> &
-  CategoricalChartProps"
+  type="BarChartProps"
   description={"Props passed down to recharts `BarChart` component."}
 />
 
@@ -70,7 +573,7 @@ tab: Props
 <PropsCard
   id="barchart-containerprops"
   name="containerProps"
-  type='Omit<CSSUIProps, "width" | "height" | "style" | "className" | "id" | "maxHeight" | "minHeight" | "minWidth" | "onResize" | "aspect" | "initialDimension" | "debounce"> & Omit<...>'
+  type="ResponsiveContainerProps"
   description={"Props passed down to recharts `ResponsiveContainer` component."}
 />
 
@@ -85,7 +588,7 @@ tab: Props
 <PropsCard
   id="barchart-gridprops"
   name="gridProps"
-  type='Omit<CSSUIProps, "string" | "style" | "className" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 461 more ... | keyof CartesianGridProps> & AcceptedSvgProps & CartesianGridProps'
+  type="GridProps"
   description={"Props passed down to recharts 'CartesianGrid' component."}
 />
 
@@ -107,14 +610,14 @@ tab: Props
 <PropsCard
   id="barchart-legendprops"
   name="legendProps"
-  type='Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "margin" | "style" | "className" | "children" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 416 more ... | "onBBoxUpdate"> & Omit<...>'
+  type="LegendProps"
   description={"Props passed down to recharts 'Legend' component."}
 />
 
 <PropsCard
   id="barchart-referencelineprops"
   name="referenceLineProps"
-  type='(Omit<CSSUIProps, "string" | "offset" | "width" | "height" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | ... 462 more ... | keyof ReferenceLineProps> & Omit<...> & ReferenceLineProps)[]'
+  type="ReferenceLineProps[]"
   description={"Reference lines that should be displayed on the chart."}
 />
 
@@ -156,7 +659,7 @@ tab: Props
 <PropsCard
   id="barchart-tooltipprops"
   name="tooltipProps"
-  type='Omit<Omit<CSSUIProps, "offset" | "animationDuration" | "content" | "cursor" | "position" | "viewBox" | "isAnimationActive" | "animationEasing" | keyof Props<any, any> | ... 11 more ... | "wrapperStyle"> & Omit<...>, "cursor"> & { ...; }'
+  type="TooltipProps"
   description={"Props passed down to recharts 'Tooltip' component."}
 />
 
@@ -233,14 +736,14 @@ tab: Props
 <PropsCard
   id="barchart-xaxislabelprops"
   name="xAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'XAxisLabel' component."}
 />
 
 <PropsCard
   id="barchart-xaxisprops"
   name="xAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof XAxisProps> & Omit<...> & XAxisProps, "color" | ... 1 more ... | "stroke"> & { ...; }'
+  type="XAxisProps"
   description={"Props passed down to recharts 'XAxis' component."}
 />
 
@@ -261,14 +764,14 @@ tab: Props
 <PropsCard
   id="barchart-yaxislabelprops"
   name="yAxisLabelProps"
-  type='Omit<CSSUIProps, "string" | "width" | "height" | "style" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | "cx" | ... 461 more ... | keyof LabelProps> & Omit<...> & LabelProps'
+  type="LabelProps"
   description={"Props passed down to recharts 'YAxisLabel' component."}
 />
 
 <PropsCard
   id="barchart-yaxisprops"
   name="yAxisProps"
-  type='Omit<Omit<CSSUIProps, "string" | "offset" | "style" | "children" | "onClick" | "onMouseLeave" | "onMouseEnter" | "onMouseMove" | "onMouseDown" | "onMouseUp" | "id" | ... 459 more ... | keyof YAxisProps> & Omit<...> & YAxisProps, "color"> & { ...; }'
+  type="YAxisProps"
   description={"Props passed down to recharts 'YAxis' component."}
 />
 
@@ -281,26 +784,388 @@ tab: Props
 
 ### BarProps
 
+<PropsCard id="bar-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="bar-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="bar-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="bar-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="bar-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="bar-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="bar-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="bar-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="bar-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="bar-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="bar-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="bar-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="bar-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="bar-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="bar-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="bar-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="bar-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="bar-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard id="bar-_fileselector" name="_fileSelector" type="CSSUIObject" />
+
+<PropsCard id="bar-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="bar-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="bar-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="bar-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="bar-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard id="bar-_focusvisible" name="_focusVisible" type="CSSUIObject" />
+
+<PropsCard id="bar-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="bar-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="bar-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupchecked" name="_groupChecked" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupdisabled" name="_groupDisabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupenabled" name="_groupEnabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupexpanded" name="_groupExpanded" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="bar-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_groupgrabbed" name="_groupGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupinvalid" name="_groupInvalid" type="CSSUIObject" />
+
+<PropsCard id="bar-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard id="bar-_grouploading" name="_groupLoading" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupoptional" name="_groupOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_grouppressed" name="_groupPressed" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupreadonly" name="_groupReadOnly" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupreadwrite" name="_groupReadWrite" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard id="bar-_grouprequired" name="_groupRequired" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupselected" name="_groupSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard id="bar-_groupvertical" name="_groupVertical" type="CSSUIObject" />
+
+<PropsCard id="bar-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="bar-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="bar-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="bar-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="bar-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard id="bar-_indeterminate" name="_indeterminate" type="CSSUIObject" />
+
+<PropsCard id="bar-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="bar-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="bar-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="bar-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="bar-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="bar-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="bar-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="bar-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="bar-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="bar-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativeactive" name="_nativeActive" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativechecked" name="_nativeChecked" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativedisabled" name="_nativeDisabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="bar-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_nativehidden" name="_nativeHidden" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativereadonly" name="_nativeReadOnly" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativetarget" name="_nativeTarget" type="CSSUIObject" />
+
+<PropsCard id="bar-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="bar-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="bar-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="bar-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="bar-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="bar-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="bar-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="bar-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="bar-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="bar-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="bar-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="bar-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerdisabled" name="_peerDisabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerexpanded" name="_peerExpanded" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="bar-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerhorizontal" name="_peerHorizontal" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="bar-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard id="bar-_peeroptional" name="_peerOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerreadonly" name="_peerReadOnly" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerreadwrite" name="_peerReadWrite" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerrequired" name="_peerRequired" type="CSSUIObject" />
+
+<PropsCard id="bar-_peerselected" name="_peerSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard id="bar-_peervertical" name="_peerVertical" type="CSSUIObject" />
+
+<PropsCard id="bar-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="bar-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="bar-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="bar-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="bar-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="bar-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="bar-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="bar-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="bar-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="bar-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="bar-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_scrollbarthumb" name="_scrollbarThumb" type="CSSUIObject" />
+
+<PropsCard id="bar-_scrollbartrack" name="_scrollbarTrack" type="CSSUIObject" />
+
+<PropsCard
+  id="bar-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="bar-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="bar-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="bar-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="bar-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="bar-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="bar-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="bar-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="bar-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="bar-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="bar-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard
   id="bar-activebar"
   name="activeBar"
-  type='Omit<SVGProps<SVGPathElement>, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type="Merge<SVGProps<SVGPathElement>, CSSUIProps>"
 />
 
 <PropsCard
   id="bar-background"
   name="background"
-  type='Omit<SVGProps<SVGPathElement>, "_hover" | "_nativeHover" | "_active" | "_nativeActive" | "_target" | "_notTarget" | "_nativeTarget" | "_focus" | ... 63 more ... | keyof StyleProps> & StyleProps & PseudoProps'
+  type="Merge<SVGProps<SVGPathElement>, CSSUIProps>"
 />
 
 <PropsCard
   id="bar-color"
   name="color"
-  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | "link.950">'
 />
 
-<PropsCard
-  id="bar-dimbar"
-  name="dimBar"
-  type='Partial<Omit<Omit<CSSUIProps, "string" | "offset" | "activeIndex" | "width" | "height" | "dataKey" | "data" | "layout" | "barSize" | "maxBarSize" | "style" | "className" | ... 494 more ... | "animationId"> & Omit<...> & BarProps, "color" | ... 2 more ... | "dimBar"> & { ...; }>'
-/>
+<PropsCard id="bar-dimbar" name="dimBar" type="Partial<BarProps>" />

@@ -4,6 +4,7 @@ description: "`Popover` is a component that floats around an element to display 
 package_name: "@yamada-ui/popover"
 with_description: true
 tab: Props
+order: 1
 ---
 
 ## Props
@@ -82,7 +83,7 @@ tab: Props
 <PropsCard
   id="popover-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -260,7 +261,981 @@ tab: Props
   defaultValue={"'click'"}
 />
 
+### ComboBoxProps
+
+<PropsCard
+  id="combobox-animation"
+  name="animation"
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue={"'scale'"}
+/>
+
+<PropsCard
+  id="combobox-boundary"
+  name="boundary"
+  type='HTMLElement | "clippingParents" | "scrollParent"'
+  description={
+    "The boundary area for the popper. Used within the `preventOverflow` modifier."
+  }
+  defaultValue={"'clippingParents'"}
+/>
+
+<PropsCard
+  id="combobox-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
+  id="combobox-closeonblur"
+  name="closeOnBlur"
+  type="boolean"
+  description={
+    "If `true`, the popover will close when you blur out it by clicking outside or tabbing out."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="combobox-closeonesc"
+  name="closeOnEsc"
+  type="boolean"
+  description={"If `true`, the popover will close when you hit the `Esc` key."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="combobox-defaultisopen"
+  name="defaultIsOpen"
+  type="boolean"
+  description={"If `true`, the popover will be initially opened."}
+/>
+
+<PropsCard
+  id="combobox-duration"
+  name="duration"
+  type="number | MotionLifecycleProps<number>"
+  description={"The animation duration."}
+/>
+
+<PropsCard
+  id="combobox-eventlisteners"
+  name="eventListeners"
+  type="type ONLY_FOR_FORMAT =
+  | boolean
+  | { scroll?: boolean | undefined; resize?: boolean | undefined }"
+  description={
+    "If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="combobox-flip"
+  name="flip"
+  type="boolean"
+  description={
+    "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="combobox-gutter"
+  name="gutter"
+  type="UIValue<number>"
+  description={
+    "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
+  }
+  defaultValue={"8"}
+/>
+
+<PropsCard
+  id="combobox-islazy"
+  name="isLazy"
+  type="boolean"
+  description={
+    "If `true`, the PopoverContent rendering will be deferred until the popover is open."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="combobox-isopen"
+  name="isOpen"
+  type="boolean"
+  description={"If `true`, the popover will be opened."}
+/>
+
+<PropsCard
+  id="combobox-lazybehavior"
+  name="lazyBehavior"
+  type="LazyMode"
+  description={
+    "The lazy behavior of popover's content when not visible. Only works when `isLazy={true}`\n\n- `unmount`: The popover's content is always unmounted when not open.\n- `keepMounted`: The popover's content initially unmounted, but stays mounted when popover is open."
+  }
+  defaultValue={"'unmount'"}
+/>
+
+<PropsCard
+  id="combobox-matchwidth"
+  name="matchWidth"
+  type="boolean"
+  description={
+    "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns."
+  }
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="combobox-modifiers"
+  name="modifiers"
+  type="Partial<Modifier<string, any>>[]"
+  description={
+    "Array of popper.js modifiers.\nCheck the docs to see the list of possible modifiers you can pass."
+  }
+  docs="https://popper.js.org/docs/v2/modifiers/"
+/>
+
+<PropsCard
+  id="combobox-offset"
+  name="offset"
+  type="[number, number]"
+  description={
+    "The main and cross-axis offset to displace popper element from its reference element."
+  }
+/>
+
+<PropsCard
+  id="combobox-onclose"
+  name="onClose"
+  type="() => void"
+  description={"Callback fired when the popover closes."}
+/>
+
+<PropsCard
+  id="combobox-onopen"
+  name="onOpen"
+  type="() => void"
+  description={"Callback fired when the popover opens."}
+/>
+
+<PropsCard
+  id="combobox-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
+  id="combobox-placement"
+  name="placement"
+  type="UIValue<Placement>"
+  description={"The placement of the popper relative to its reference."}
+  defaultValue={"'bottom'"}
+/>
+
+<PropsCard
+  id="combobox-preventoverflow"
+  name="preventOverflow"
+  type="boolean"
+  description={
+    "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard
+  id="combobox-strategy"
+  name="strategy"
+  type='"fixed" | "absolute"'
+  description={"The CSS positioning strategy to use."}
+  defaultValue={"'absolute'"}
+/>
+
 ### PopoverCloseButtonProps
+
+<PropsCard id="popoverclosebutton-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_anylink"
+  name="_anyLink"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_autofill"
+  name="_autofill"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_backdrop"
+  name="_backdrop"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_between"
+  name="_between"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_checked"
+  name="_checked"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_cueregion"
+  name="_cueRegion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_default"
+  name="_default"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_disabled"
+  name="_disabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_enabled"
+  name="_enabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_expanded"
+  name="_expanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_firstline"
+  name="_firstLine"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grabbed"
+  name="_grabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupidle"
+  name="_groupIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_holiday"
+  name="_holiday"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_inrange"
+  name="_inRange"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_invalid"
+  name="_invalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_loading"
+  name="_loading"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_mediadark"
+  name="_mediaDark"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_notfirst"
+  name="_notFirst"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_notlast"
+  name="_notLast"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_nottarget"
+  name="_notTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_optional"
+  name="_optional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_outrange"
+  name="_outRange"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_outside"
+  name="_outside"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerblank"
+  name="_peerBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerfocus"
+  name="_peerFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerhover"
+  name="_peerHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peeridle"
+  name="_peerIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peervalid"
+  name="_peerValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_picture"
+  name="_picture"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_playing"
+  name="_playing"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_pressed"
+  name="_pressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_readonly"
+  name="_readOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_readwrite"
+  name="_readWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_required"
+  name="_required"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_scrollbar"
+  name="_scrollbar"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_selected"
+  name="_selected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_selection"
+  name="_selection"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="popoverclosebutton-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverclosebutton-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverclosebutton-_vertical"
+  name="_vertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_visited"
+  name="_visited"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverclosebutton-_weekend"
+  name="_weekend"
+  type="CSSUIObject"
+/>
 
 <PropsCard
   id="popoverclosebutton-disableripple"
@@ -288,1392 +1263,2482 @@ tab: Props
 
 ### PopoverContentProps
 
-<PropsCard id="popovercontent-about" name="about" type="string" />
+<PropsCard id="popovercontent-_accept" name="_accept" type="CSSUIObject" />
 
-<PropsCard id="popovercontent-accesskey" name="accessKey" type="string" />
+<PropsCard id="popovercontent-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_cue" name="_cue" type="CSSUIObject" />
 
 <PropsCard
-  id="popovercontent-aria-activedescendant"
-  name="aria-activedescendant"
-  type="string"
+  id="popovercontent-_cueregion"
+  name="_cueRegion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-atomic"
-  name="aria-atomic"
-  type="Booleanish"
+  id="popovercontent-_firstline"
+  name="_firstLine"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-autocomplete"
-  name="aria-autocomplete"
-  type='"list" | "none" | "inline" | "both"'
+  id="popovercontent-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-braillelabel"
-  name="aria-braillelabel"
-  type="string"
+  id="popovercontent-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-brailleroledescription"
-  name="aria-brailleroledescription"
-  type="string"
-/>
-
-<PropsCard id="popovercontent-aria-busy" name="aria-busy" type="Booleanish" />
-
-<PropsCard
-  id="popovercontent-aria-checked"
-  name="aria-checked"
-  type='boolean | "true" | "false" | "mixed"'
+  id="popovercontent-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-colcount"
-  name="aria-colcount"
-  type="number"
+  id="popovercontent-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-colindex"
-  name="aria-colindex"
-  type="number"
+  id="popovercontent-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-colindextext"
-  name="aria-colindextext"
-  type="string"
-/>
-
-<PropsCard id="popovercontent-aria-colspan" name="aria-colspan" type="number" />
-
-<PropsCard
-  id="popovercontent-aria-controls"
-  name="aria-controls"
-  type="string"
+  id="popovercontent-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-current"
-  name="aria-current"
-  type='type ONLY_FOR_FORMAT =
-  | boolean
-  | "time"
-  | "page"
-  | "true"
-  | "false"
-  | "step"
-  | "location"
-  | "date"'
+  id="popovercontent-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-describedby"
-  name="aria-describedby"
-  type="string"
+  id="popovercontent-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-description"
-  name="aria-description"
-  type="string"
-/>
-
-<PropsCard id="popovercontent-aria-details" name="aria-details" type="string" />
-
-<PropsCard
-  id="popovercontent-aria-disabled"
-  name="aria-disabled"
-  type="Booleanish"
+  id="popovercontent-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-dropeffect"
-  name="aria-dropeffect"
-  type='"link" | "none" | "copy" | "execute" | "move" | "popup"'
+  id="popovercontent-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-errormessage"
-  name="aria-errormessage"
-  type="string"
+  id="popovercontent-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-expanded"
-  name="aria-expanded"
-  type="Booleanish"
-/>
-
-<PropsCard id="popovercontent-aria-flowto" name="aria-flowto" type="string" />
-
-<PropsCard
-  id="popovercontent-aria-grabbed"
-  name="aria-grabbed"
-  type="Booleanish"
+  id="popovercontent-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-haspopup"
-  name="aria-haspopup"
-  type='type ONLY_FOR_FORMAT =
-  | boolean
-  | "dialog"
-  | "menu"
-  | "grid"
-  | "true"
-  | "false"
-  | "listbox"
-  | "tree"'
+  id="popovercontent-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-hidden"
-  name="aria-hidden"
-  type="Booleanish"
+  id="popovercontent-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-invalid"
-  name="aria-invalid"
-  type='boolean | "true" | "false" | "grammar" | "spelling"'
+  id="popovercontent-_groupidle"
+  name="_groupIdle"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-keyshortcuts"
-  name="aria-keyshortcuts"
-  type="string"
-/>
-
-<PropsCard id="popovercontent-aria-label" name="aria-label" type="string" />
-
-<PropsCard
-  id="popovercontent-aria-labelledby"
-  name="aria-labelledby"
-  type="string"
-/>
-
-<PropsCard id="popovercontent-aria-level" name="aria-level" type="number" />
-
-<PropsCard
-  id="popovercontent-aria-live"
-  name="aria-live"
-  type='"off" | "assertive" | "polite"'
-/>
-
-<PropsCard id="popovercontent-aria-modal" name="aria-modal" type="Booleanish" />
-
-<PropsCard
-  id="popovercontent-aria-multiline"
-  name="aria-multiline"
-  type="Booleanish"
+  id="popovercontent-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-multiselectable"
-  name="aria-multiselectable"
-  type="Booleanish"
+  id="popovercontent-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-orientation"
-  name="aria-orientation"
-  type='"horizontal" | "vertical"'
-/>
-
-<PropsCard id="popovercontent-aria-owns" name="aria-owns" type="string" />
-
-<PropsCard
-  id="popovercontent-aria-placeholder"
-  name="aria-placeholder"
-  type="string"
+  id="popovercontent-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-posinset"
-  name="aria-posinset"
-  type="number"
+  id="popovercontent-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-pressed"
-  name="aria-pressed"
-  type='boolean | "true" | "false" | "mixed"'
+  id="popovercontent-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-readonly"
-  name="aria-readonly"
-  type="Booleanish"
+  id="popovercontent-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-relevant"
-  name="aria-relevant"
-  type='type ONLY_FOR_FORMAT =
-  | "text"
-  | "all"
-  | "additions"
-  | "additions removals"
-  | "additions text"
-  | "removals"
-  | "removals additions"
-  | "removals text"
-  | "text additions"
-  | "text removals"'
+  id="popovercontent-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-required"
-  name="aria-required"
-  type="Booleanish"
+  id="popovercontent-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-roledescription"
-  name="aria-roledescription"
-  type="string"
+  id="popovercontent-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-rowcount"
-  name="aria-rowcount"
-  type="number"
+  id="popovercontent-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-rowindex"
-  name="aria-rowindex"
-  type="number"
+  id="popovercontent-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-rowindextext"
-  name="aria-rowindextext"
-  type="string"
-/>
-
-<PropsCard id="popovercontent-aria-rowspan" name="aria-rowspan" type="number" />
-
-<PropsCard
-  id="popovercontent-aria-selected"
-  name="aria-selected"
-  type="Booleanish"
-/>
-
-<PropsCard id="popovercontent-aria-setsize" name="aria-setsize" type="number" />
-
-<PropsCard
-  id="popovercontent-aria-sort"
-  name="aria-sort"
-  type='"none" | "ascending" | "descending" | "other"'
+  id="popovercontent-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-valuemax"
-  name="aria-valuemax"
-  type="number"
+  id="popovercontent-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-valuemin"
-  name="aria-valuemin"
-  type="number"
+  id="popovercontent-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_mediadark"
+  name="_mediaDark"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-valuenow"
-  name="aria-valuenow"
-  type="number"
+  id="popovercontent-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
 />
 
 <PropsCard
-  id="popovercontent-aria-valuetext"
-  name="aria-valuetext"
-  type="string"
+  id="popovercontent-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
 />
+
+<PropsCard id="popovercontent-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_nottarget"
+  name="_notTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerblank"
+  name="_peerBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerfocus"
+  name="_peerFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerhover"
+  name="_peerHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peervalid"
+  name="_peerValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_readwrite"
+  name="_readWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_scrollbar"
+  name="_scrollbar"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popovercontent-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_selection"
+  name="_selection"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="popovercontent-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popovercontent-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="popovercontent-_weekend" name="_weekend" type="CSSUIObject" />
 
 <PropsCard
   id="popovercontent-as"
   name="as"
-  type='"symbol" | "object" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | "b" | "base" | "bdi" | "bdo" | "big" | "blockquote" | "body" | "br" | "button" | "canvas" | ... 149 more ... | "view"'
+  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "button" | "form" | "style" | "title" | "big" | "link" | "small" | "sub" | "sup" | "animate" | ... 149 more ... | "textPath"'
+  description={"The HTML element to render."}
 />
 
 <PropsCard
-  id="popovercontent-autocapitalize"
-  name="autoCapitalize"
-  type="string"
+  id="popovercontent-containerprops"
+  name="containerProps"
+  type='Omit<HTMLUIProps, "children">'
+  description={"The props of the container element."}
 />
-
-<PropsCard id="popovercontent-autocorrect" name="autoCorrect" type="string" />
-
-<PropsCard id="popovercontent-autofocus" name="autoFocus" type="boolean" />
-
-<PropsCard id="popovercontent-autosave" name="autoSave" type="string" />
-
-<PropsCard id="popovercontent-classname" name="className" type="string" />
-
-<PropsCard id="popovercontent-content" name="content" type="string" />
-
-<PropsCard
-  id="popovercontent-contenteditable"
-  name="contentEditable"
-  type='"inherit" | Booleanish | "plaintext-only"'
-/>
-
-<PropsCard id="popovercontent-contextmenu" name="contextMenu" type="string" />
-
-<PropsCard
-  id="popovercontent-dangerouslysetinnerhtml"
-  name="dangerouslySetInnerHTML"
-  type="{ __html: string | TrustedHTML }"
-/>
-
-<PropsCard id="popovercontent-datatype" name="datatype" type="string" />
-
-<PropsCard
-  id="popovercontent-defaultchecked"
-  name="defaultChecked"
-  type="boolean"
-/>
-
-<PropsCard
-  id="popovercontent-defaultvalue"
-  name="defaultValue"
-  type="string | number | readonly string[]"
-/>
-
-<PropsCard id="popovercontent-dir" name="dir" type="string" />
-
-<PropsCard id="popovercontent-draggable" name="draggable" type="Booleanish" />
-
-<PropsCard id="popovercontent-hidden" name="hidden" type="boolean" />
-
-<PropsCard id="popovercontent-id" name="id" type="string" />
-
-<PropsCard id="popovercontent-inlist" name="inlist" type="any" />
-
-<PropsCard
-  id="popovercontent-inputmode"
-  name="inputMode"
-  type='type ONLY_FOR_FORMAT =
-  | "search"
-  | "text"
-  | "none"
-  | "tel"
-  | "url"
-  | "email"
-  | "numeric"
-  | "decimal"'
-/>
-
-<PropsCard id="popovercontent-is" name="is" type="string" />
-
-<PropsCard id="popovercontent-itemid" name="itemID" type="string" />
-
-<PropsCard id="popovercontent-itemprop" name="itemProp" type="string" />
-
-<PropsCard id="popovercontent-itemref" name="itemRef" type="string" />
-
-<PropsCard id="popovercontent-itemscope" name="itemScope" type="boolean" />
-
-<PropsCard id="popovercontent-itemtype" name="itemType" type="string" />
-
-<PropsCard id="popovercontent-lang" name="lang" type="string" />
-
-<PropsCard id="popovercontent-nonce" name="nonce" type="string" />
-
-<PropsCard
-  id="popovercontent-onabort"
-  name="onAbort"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onabortcapture"
-  name="onAbortCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onanimationend"
-  name="onAnimationEnd"
-  type="AnimationEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onanimationendcapture"
-  name="onAnimationEndCapture"
-  type="AnimationEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onanimationiteration"
-  name="onAnimationIteration"
-  type="AnimationEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onanimationiterationcapture"
-  name="onAnimationIterationCapture"
-  type="AnimationEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onanimationstartcapture"
-  name="onAnimationStartCapture"
-  type="AnimationEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onauxclick"
-  name="onAuxClick"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onauxclickcapture"
-  name="onAuxClickCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onbeforeinput"
-  name="onBeforeInput"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onbeforeinputcapture"
-  name="onBeforeInputCapture"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onblur"
-  name="onBlur"
-  type="FocusEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onblurcapture"
-  name="onBlurCapture"
-  type="FocusEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncanplay"
-  name="onCanPlay"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncanplaycapture"
-  name="onCanPlayCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncanplaythrough"
-  name="onCanPlayThrough"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncanplaythroughcapture"
-  name="onCanPlayThroughCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onchange"
-  name="onChange"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onchangecapture"
-  name="onChangeCapture"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onclick"
-  name="onClick"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onclickcapture"
-  name="onClickCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncompositionend"
-  name="onCompositionEnd"
-  type="CompositionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncompositionendcapture"
-  name="onCompositionEndCapture"
-  type="CompositionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncompositionstart"
-  name="onCompositionStart"
-  type="CompositionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncompositionstartcapture"
-  name="onCompositionStartCapture"
-  type="CompositionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncompositionupdate"
-  name="onCompositionUpdate"
-  type="CompositionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncompositionupdatecapture"
-  name="onCompositionUpdateCapture"
-  type="CompositionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncontextmenu"
-  name="onContextMenu"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncontextmenucapture"
-  name="onContextMenuCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncopy"
-  name="onCopy"
-  type="ClipboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncopycapture"
-  name="onCopyCapture"
-  type="ClipboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncut"
-  name="onCut"
-  type="ClipboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oncutcapture"
-  name="onCutCapture"
-  type="ClipboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondoubleclick"
-  name="onDoubleClick"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondoubleclickcapture"
-  name="onDoubleClickCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragcapture"
-  name="onDragCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragendcapture"
-  name="onDragEndCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragenter"
-  name="onDragEnter"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragentercapture"
-  name="onDragEnterCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragexit"
-  name="onDragExit"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragexitcapture"
-  name="onDragExitCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragleave"
-  name="onDragLeave"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragleavecapture"
-  name="onDragLeaveCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragover"
-  name="onDragOver"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragovercapture"
-  name="onDragOverCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondragstartcapture"
-  name="onDragStartCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondrop"
-  name="onDrop"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondropcapture"
-  name="onDropCapture"
-  type="DragEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondurationchange"
-  name="onDurationChange"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ondurationchangecapture"
-  name="onDurationChangeCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onemptied"
-  name="onEmptied"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onemptiedcapture"
-  name="onEmptiedCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onencrypted"
-  name="onEncrypted"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onencryptedcapture"
-  name="onEncryptedCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onended"
-  name="onEnded"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onendedcapture"
-  name="onEndedCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onerror"
-  name="onError"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onerrorcapture"
-  name="onErrorCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onfocus"
-  name="onFocus"
-  type="FocusEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onfocuscapture"
-  name="onFocusCapture"
-  type="FocusEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ongotpointercapture"
-  name="onGotPointerCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ongotpointercapturecapture"
-  name="onGotPointerCaptureCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oninput"
-  name="onInput"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oninputcapture"
-  name="onInputCapture"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oninvalid"
-  name="onInvalid"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-oninvalidcapture"
-  name="onInvalidCapture"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onkeydown"
-  name="onKeyDown"
-  type="KeyboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onkeydowncapture"
-  name="onKeyDownCapture"
-  type="KeyboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onkeypress"
-  name="onKeyPress"
-  type="KeyboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onkeypresscapture"
-  name="onKeyPressCapture"
-  type="KeyboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onkeyup"
-  name="onKeyUp"
-  type="KeyboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onkeyupcapture"
-  name="onKeyUpCapture"
-  type="KeyboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onload"
-  name="onLoad"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadcapture"
-  name="onLoadCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadeddata"
-  name="onLoadedData"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadeddatacapture"
-  name="onLoadedDataCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadedmetadata"
-  name="onLoadedMetadata"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadedmetadatacapture"
-  name="onLoadedMetadataCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadstart"
-  name="onLoadStart"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onloadstartcapture"
-  name="onLoadStartCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onlostpointercapture"
-  name="onLostPointerCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onlostpointercapturecapture"
-  name="onLostPointerCaptureCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmousedown"
-  name="onMouseDown"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmousedowncapture"
-  name="onMouseDownCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseenter"
-  name="onMouseEnter"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseleave"
-  name="onMouseLeave"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmousemove"
-  name="onMouseMove"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmousemovecapture"
-  name="onMouseMoveCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseout"
-  name="onMouseOut"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseoutcapture"
-  name="onMouseOutCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseover"
-  name="onMouseOver"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseovercapture"
-  name="onMouseOverCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseup"
-  name="onMouseUp"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onmouseupcapture"
-  name="onMouseUpCapture"
-  type="MouseEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpaste"
-  name="onPaste"
-  type="ClipboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpastecapture"
-  name="onPasteCapture"
-  type="ClipboardEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpause"
-  name="onPause"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpausecapture"
-  name="onPauseCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onplay"
-  name="onPlay"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onplaycapture"
-  name="onPlayCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onplaying"
-  name="onPlaying"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onplayingcapture"
-  name="onPlayingCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointercancel"
-  name="onPointerCancel"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointercancelcapture"
-  name="onPointerCancelCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerdown"
-  name="onPointerDown"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerdowncapture"
-  name="onPointerDownCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerenter"
-  name="onPointerEnter"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerleave"
-  name="onPointerLeave"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointermove"
-  name="onPointerMove"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointermovecapture"
-  name="onPointerMoveCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerout"
-  name="onPointerOut"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointeroutcapture"
-  name="onPointerOutCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerover"
-  name="onPointerOver"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerovercapture"
-  name="onPointerOverCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerup"
-  name="onPointerUp"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onpointerupcapture"
-  name="onPointerUpCapture"
-  type="PointerEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onprogress"
-  name="onProgress"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onprogresscapture"
-  name="onProgressCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onratechange"
-  name="onRateChange"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onratechangecapture"
-  name="onRateChangeCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onreset"
-  name="onReset"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onresetcapture"
-  name="onResetCapture"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onresize"
-  name="onResize"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onresizecapture"
-  name="onResizeCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onscroll"
-  name="onScroll"
-  type="UIEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onscrollcapture"
-  name="onScrollCapture"
-  type="UIEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onseeked"
-  name="onSeeked"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onseekedcapture"
-  name="onSeekedCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onseeking"
-  name="onSeeking"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onseekingcapture"
-  name="onSeekingCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onselect"
-  name="onSelect"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onselectcapture"
-  name="onSelectCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onstalled"
-  name="onStalled"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onstalledcapture"
-  name="onStalledCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onsubmit"
-  name="onSubmit"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onsubmitcapture"
-  name="onSubmitCapture"
-  type="FormEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onsuspend"
-  name="onSuspend"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onsuspendcapture"
-  name="onSuspendCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontimeupdate"
-  name="onTimeUpdate"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontimeupdatecapture"
-  name="onTimeUpdateCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchcancel"
-  name="onTouchCancel"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchcancelcapture"
-  name="onTouchCancelCapture"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchend"
-  name="onTouchEnd"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchendcapture"
-  name="onTouchEndCapture"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchmove"
-  name="onTouchMove"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchmovecapture"
-  name="onTouchMoveCapture"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchstart"
-  name="onTouchStart"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontouchstartcapture"
-  name="onTouchStartCapture"
-  type="TouchEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontransitionend"
-  name="onTransitionEnd"
-  type="TransitionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-ontransitionendcapture"
-  name="onTransitionEndCapture"
-  type="TransitionEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onvolumechange"
-  name="onVolumeChange"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onvolumechangecapture"
-  name="onVolumeChangeCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onwaiting"
-  name="onWaiting"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onwaitingcapture"
-  name="onWaitingCapture"
-  type="ReactEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onwheel"
-  name="onWheel"
-  type="WheelEventHandler<HTMLElement>"
-/>
-
-<PropsCard
-  id="popovercontent-onwheelcapture"
-  name="onWheelCapture"
-  type="WheelEventHandler<HTMLElement>"
-/>
-
-<PropsCard id="popovercontent-prefix" name="prefix" type="string" />
-
-<PropsCard id="popovercontent-property" name="property" type="string" />
-
-<PropsCard id="popovercontent-radiogroup" name="radioGroup" type="string" />
-
-<PropsCard id="popovercontent-rel" name="rel" type="string" />
-
-<PropsCard id="popovercontent-resource" name="resource" type="string" />
-
-<PropsCard id="popovercontent-results" name="results" type="number" />
-
-<PropsCard id="popovercontent-rev" name="rev" type="string" />
-
-<PropsCard id="popovercontent-role" name="role" type="AriaRole" />
-
-<PropsCard id="popovercontent-security" name="security" type="string" />
-
-<PropsCard id="popovercontent-slot" name="slot" type="string" />
-
-<PropsCard id="popovercontent-spellcheck" name="spellCheck" type="Booleanish" />
-
-<PropsCard
-  id="popovercontent-suppresscontenteditablewarning"
-  name="suppressContentEditableWarning"
-  type="boolean"
-/>
-
-<PropsCard
-  id="popovercontent-suppresshydrationwarning"
-  name="suppressHydrationWarning"
-  type="boolean"
-/>
-
-<PropsCard id="popovercontent-tabindex" name="tabIndex" type="number" />
-
-<PropsCard id="popovercontent-title" name="title" type="string" />
-
-<PropsCard id="popovercontent-translate" name="translate" type='"yes" | "no"' />
-
-<PropsCard id="popovercontent-typeof" name="typeof" type="string" />
-
-<PropsCard
-  id="popovercontent-unselectable"
-  name="unselectable"
-  type='"on" | "off"'
-/>
-
-<PropsCard id="popovercontent-vocab" name="vocab" type="string" />
 
 ### PopoverHeaderProps
 
+<PropsCard id="popoverheader-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverheader-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverheader-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverheader-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="popoverheader-_weekend" name="_weekend" type="CSSUIObject" />
+
 ### PopoverBodyProps
 
+<PropsCard id="popoverbody-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverbody-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverbody-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverbody-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="popoverbody-_weekend" name="_weekend" type="CSSUIObject" />
+
 ### PopoverFooterProps
+
+<PropsCard id="popoverfooter-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="popoverfooter-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="popoverfooter-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="popoverfooter-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="popoverfooter-_weekend" name="_weekend" type="CSSUIObject" />

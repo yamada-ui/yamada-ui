@@ -3,7 +3,7 @@ import {
   forwardRef,
   omitThemeProps,
   ui,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -22,14 +22,12 @@ import type { UseChartProps } from "./use-chart"
 import { ChartProvider, useChart } from "./use-chart"
 import type { UseChartLegendProps } from "./use-chart-legend"
 import { useChartLegend } from "./use-chart-legend"
-import {
-  useChartTooltip,
-  type UseChartTooltipOptions,
-} from "./use-chart-tooltip"
+import { useChartTooltip } from "./use-chart-tooltip"
+import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import type { UsePieChartOptions } from "./use-pie-chart"
 import { usePieChart } from "./use-pie-chart"
 
-type PieChartOptions = {
+interface PieChartOptions {
   /**
    * If `true`, tooltip is visible.
    *
@@ -49,26 +47,27 @@ type PieChartOptions = {
    */
   tooltipDataSource?: TooltipDataSourceType
   /**
-   * Unit displayed next to each tick in y-axis.
+   * Unit displayed next to each value in tooltip.
    */
   unit?: string
 }
 
-export type PieChartProps = HTMLUIProps<"div"> &
-  ThemeProps<"pieChart"> &
-  PieChartOptions &
-  UsePieChartOptions &
-  Omit<UseChartTooltipOptions, "labelFormatter"> &
-  UseChartLegendProps &
-  UseChartProps
+export interface PieChartProps
+  extends Omit<HTMLUIProps, "strokeWidth" | "fillOpacity">,
+    ThemeProps<"pieChart">,
+    PieChartOptions,
+    UsePieChartOptions,
+    Omit<UseChartTooltipOptions, "labelFormatter">,
+    UseChartLegendProps,
+    UseChartProps {}
 
 /**
  * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/feedback/pie-chart
+ * @see Docs https://yamada-ui.com/components/data-display/pie-chart
  */
 export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("PieChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("PieChart", props)
   const {
     className,
     data,
@@ -149,8 +148,7 @@ export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
       <ui.div
         ref={ref}
         className={cx("ui-pie-chart", className)}
-        var={pieVars}
-        __css={{ ...styles.container }}
+        __css={{ maxW: "full", vars: pieVars, ...styles.container }}
         {...rest}
       >
         <ResponsiveContainer

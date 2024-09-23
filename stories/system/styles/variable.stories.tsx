@@ -10,8 +10,8 @@ export const basic = () => {
       p="md"
       rounded="md"
       color="white"
-      var={[{ name: "bg", token: "colors", value: "primary" }]}
-      bg="var(--ui-bg)"
+      vars={[{ name: "bg", token: "colors", value: "primary" }]}
+      bg="$bg"
     >
       Box
     </Box>

@@ -1,13 +1,13 @@
 import type { RowData, PaginationInstance } from "@tanstack/react-table"
 import type { ComponentArgs, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
-import { ui, useMultiComponentStyle, omitThemeProps } from "@yamada-ui/core"
+import { ui, useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import { TableStyleProvider } from "@yamada-ui/native-table"
 import type { PaginationProps } from "@yamada-ui/pagination"
 import { Pagination } from "@yamada-ui/pagination"
 import type { SelectProps } from "@yamada-ui/select"
 import { Select } from "@yamada-ui/select"
 import { cx, isFunction } from "@yamada-ui/utils"
-import type { ForwardedRef, ReactNode, Ref } from "react"
+import type { ForwardedRef, ReactNode, RefAttributes } from "react"
 import { forwardRef } from "react"
 import type { TableBodyProps } from "./tbody"
 import { Tbody } from "./tbody"
@@ -18,21 +18,24 @@ import { Thead } from "./thead"
 import type { TableContext, UseTableProps } from "./use-table"
 import { TableProvider, useTable } from "./use-table"
 
-type PaginationComponentProps<Y extends RowData> = Pick<
-  PaginationInstance<Y>,
-  | "setPageIndex"
-  | "setPageSize"
-  | "previousPage"
-  | "nextPage"
-  | "getCanPreviousPage"
-  | "getCanNextPage"
-> & {
+interface PaginationComponentProps<Y extends RowData>
+  extends Pick<
+    PaginationInstance<Y>,
+    | "setPageIndex"
+    | "setPageSize"
+    | "previousPage"
+    | "nextPage"
+    | "getCanPreviousPage"
+    | "getCanNextPage"
+  > {
   pageIndex: number
   pageSize: number
   totalPage: number
 }
 
-type TableOptions<Y extends RowData> = {
+const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
+
+interface TableOptions<Y extends RowData> {
   /**
    * The CSS `table-layout` property.
    */
@@ -82,11 +85,11 @@ type TableOptions<Y extends RowData> = {
   /**
    * Props for table container element.
    */
-  containerProps?: HTMLUIProps<"div">
+  containerProps?: HTMLUIProps
   /**
    * Props for paging control element.
    */
-  pagingControlProps?: HTMLUIProps<"div">
+  pagingControlProps?: HTMLUIProps
   /**
    * Props for pagination element.
    */
@@ -119,13 +122,9 @@ type TableOptions<Y extends RowData> = {
   children?: ReactNode | ((props: PaginationComponentProps<Y>) => ReactNode)
 }
 
-export type PagingTableProps<Y extends RowData = unknown> = Omit<
-  UseTableProps<Y>,
-  "enablePagination" | "children"
-> &
-  TableOptions<Y>
-
-const defaultFormatPageSizeLabel = (pageSize: number) => String(pageSize)
+export interface PagingTableProps<Y extends RowData = unknown>
+  extends Omit<UseTableProps<Y>, "enablePagination" | "children">,
+    TableOptions<Y> {}
 
 /**
  * `PagingTable` is a table component with pagination functionality.
@@ -137,7 +136,7 @@ export const PagingTable = forwardRef(
     { colorScheme, highlightOnSelected = true, ...props }: PagingTableProps<Y>,
     ref: ForwardedRef<HTMLTableElement>,
   ) => {
-    const [styles, { size, ...mergedProps }] = useMultiComponentStyle(
+    const [styles, { size, ...mergedProps }] = useComponentMultiStyle(
       "PagingTable",
       {
         colorScheme,
@@ -283,7 +282,7 @@ export const PagingTable = forwardRef(
   },
 ) as {
   <Y extends RowData>(
-    props: PagingTableProps<Y> & { ref?: Ref<HTMLDivElement> },
+    props: PagingTableProps<Y> & RefAttributes<HTMLTableElement>,
   ): JSX.Element
 } & ComponentArgs
 

@@ -1,30 +1,23 @@
 import type { HTMLUIProps, CSSUIObject, ComponentArgs } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
-import type { HTMLMotionProps, DragControls } from "@yamada-ui/motion"
+import type { HTMLMotionProps } from "@yamada-ui/motion"
 import {
   MotionReorder,
   useMotionValue,
   useDragControls,
 } from "@yamada-ui/motion"
-import { createContext, cx, dataAttr } from "@yamada-ui/utils"
+import { cx, dataAttr } from "@yamada-ui/utils"
 import type { Merge } from "@yamada-ui/utils"
-import type { ForwardedRef, PropsWithChildren, ReactNode } from "react"
+import type {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  RefAttributes,
+} from "react"
 import { forwardRef, useCallback, useEffect, useState } from "react"
-import { useReorderContext } from "./reorder"
+import { ReorderItemProvider, useReorderContext } from "./reorder-context"
 
-type ReorderItemContext = {
-  register: (node: HTMLElement | null) => void
-  isDrag: boolean
-  dragControls: DragControls
-}
-
-export const [ReorderItemProvider, useReorderItemContext] =
-  createContext<ReorderItemContext>({
-    name: "ReorderContext",
-    errorMessage: `useReorderItemContext returned is 'undefined'. Seems you forgot to wrap the components in "<ReorderItem />"`,
-  })
-
-type ReorderItemOptions<Y extends any = string> = {
+interface ReorderItemOptions<Y extends any = string> {
   /**
    * The label of the reorder item.
    */
@@ -35,12 +28,13 @@ type ReorderItemOptions<Y extends any = string> = {
   value: Y
 }
 
-export type ReorderItemProps<Y extends any = string> = Omit<
-  Merge<HTMLUIProps<"li">, HTMLMotionProps<"li">>,
-  "value" | "children"
-> &
-  PropsWithChildren &
-  ReorderItemOptions<Y>
+export interface ReorderItemProps<Y extends any = string>
+  extends Omit<
+      Merge<HTMLUIProps<"li">, HTMLMotionProps<"li">>,
+      "value" | "transition" | "children"
+    >,
+    PropsWithChildren,
+    ReorderItemOptions<Y> {}
 
 export const ReorderItem = forwardRef(
   <Y extends any = string>(
@@ -112,8 +106,8 @@ export const ReorderItem = forwardRef(
     )
   },
 ) as {
-  <Y extends any = string>(
-    props: ReorderItemProps<Y> & { ref?: ForwardedRef<HTMLLIElement> },
+  <Y = string>(
+    props: ReorderItemProps<Y> & RefAttributes<HTMLLIElement>,
   ): JSX.Element
 } & ComponentArgs
 

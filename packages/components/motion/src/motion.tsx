@@ -1,8 +1,15 @@
 import { ui } from "@yamada-ui/core"
+import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { motion } from "framer-motion"
-import { motionForwardRef } from "./motion-forward-ref"
+import { motionForwardRef } from "./forward-ref"
 import type { MotionProps } from "./motion.types"
+
+const disableStyleProps = ["transition"]
+
+const disableStyleProp = (prop: string) => disableStyleProps.includes(prop)
+
+const Component = ui<"div", Dict>("div", { disableStyleProp })
 
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
@@ -10,16 +17,12 @@ import type { MotionProps } from "./motion.types"
  * @see Docs https://yamada-ui.com/components/other/motion
  */
 export const Motion = motionForwardRef<MotionProps, "div">(
-  ({ as, className, ...rest }, ref) => {
-    return (
-      <ui.div
-        as={motion[as ?? "div"]}
-        ref={ref}
-        className={cx("ui-motion", className)}
-        {...rest}
-      />
-    )
-  },
+  ({ as = "div", className, ...rest }, ref) => (
+    <Component
+      ref={ref}
+      as={motion[as]}
+      className={cx("ui-motion", className)}
+      {...rest}
+    />
+  ),
 )
-
-Motion.displayName = "Motion"

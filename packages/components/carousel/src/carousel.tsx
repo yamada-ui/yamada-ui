@@ -8,7 +8,7 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useToken } from "@yamada-ui/use-token"
@@ -23,6 +23,11 @@ import {
 } from "@yamada-ui/utils"
 import type { FC } from "react"
 import { cloneElement } from "react"
+import type { CarouselControlProps } from "./carousel-control"
+import { CarouselControlNext, CarouselControlPrev } from "./carousel-control"
+import type { CarouselIndicatorsProps } from "./carousel-indicators"
+import { CarouselIndicators } from "./carousel-indicators"
+import { CarouselSlide } from "./carousel-slide"
 import type {
   AlignmentOptionType,
   ScrollContainOptionType,
@@ -34,15 +39,8 @@ import {
   useCarousel,
   useCarouselContext,
 } from "./use-carousel"
-import type { CarouselControlProps, CarouselIndicatorsProps } from "./"
-import {
-  CarouselControlNext,
-  CarouselControlPrev,
-  CarouselIndicators,
-  CarouselSlide,
-} from "./"
 
-type CarouselOptions = {
+interface CarouselOptions {
   /**
    * The orientation of the carousel.
    *
@@ -139,7 +137,7 @@ type CarouselOptions = {
   /**
    * Props for carousel inner element.
    */
-  innerProps?: HTMLUIProps<"div">
+  innerProps?: HTMLUIProps
   /**
    * If `true`, display the carousel control buttons.
    *
@@ -170,20 +168,21 @@ type CarouselOptions = {
   indicatorsProps?: CarouselIndicatorsProps
 }
 
-export type CarouselProps = ThemeProps<"Carousel"> &
-  Omit<HTMLUIProps<"div">, "onChange" | "draggable"> &
-  Pick<
-    UseCarouselProps,
-    | "index"
-    | "defaultIndex"
-    | "onChange"
-    | "onScrollProgress"
-    | "watchDrag"
-    | "watchResize"
-    | "watchSlides"
-    | "controlRef"
-  > &
-  CarouselOptions
+export interface CarouselProps
+  extends ThemeProps<"Carousel">,
+    Omit<HTMLUIProps, "onChange" | "draggable">,
+    Pick<
+      UseCarouselProps,
+      | "index"
+      | "defaultIndex"
+      | "onChange"
+      | "onScrollProgress"
+      | "watchDrag"
+      | "watchResize"
+      | "watchSlides"
+      | "controlRef"
+    >,
+    CarouselOptions {}
 
 /**
  * `Carousel` is a component that displays multiple elements like a slideshow.
@@ -206,11 +205,12 @@ export const Carousel = forwardRef<CarouselProps, "div">(
     const skipSnaps = useValue(props.skipSnaps)
     const containScroll = useValue(props.containScroll)
     const includeGapInSize = useValue(props.includeGapInSize)
-    const gap = useToken("spaces", useValue(props.gap)) ?? useValue(props.gap)
-    const slideSize =
-      useToken("sizes", useValue(props.slideSize)) ?? useValue(props.slideSize)
+    const _gap = useValue(props.gap)
+    const gap = useToken("spaces", _gap) ?? _gap
+    const _slideSize = useValue(props.slideSize)
+    const slideSize = useToken("sizes", _slideSize) ?? _slideSize
 
-    const [styles, mergedProps] = useMultiComponentStyle("Carousel", {
+    const [styles, mergedProps] = useComponentMultiStyle("Carousel", {
       ...props,
       orientation,
       align,
@@ -318,7 +318,7 @@ export const Carousel = forwardRef<CarouselProps, "div">(
   },
 )
 
-type CarouselSlidesProps = HTMLUIProps<"div">
+type CarouselSlidesProps = HTMLUIProps
 
 const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
   ({ ...rest }, ref) => {
@@ -332,7 +332,7 @@ const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
   },
 )
 
-type CarouselSlidesInnerProps = HTMLUIProps<"div">
+type CarouselSlidesInnerProps = HTMLUIProps
 
 const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
   const { orientation, includeGapInSize, gap, styles } = useCarouselContext()
@@ -342,8 +342,8 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     ...styles.inner,
     ...(includeGapInSize
       ? {
-          var: [{ name: "gap", token: "spaces", value: gap }],
-          [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * !-1)",
+          vars: [{ name: "gap", token: "spaces", value: gap }],
+          [orientation === "vertical" ? "mb" : "mr"]: "calc($gap * -1)",
         }
       : {}),
   }

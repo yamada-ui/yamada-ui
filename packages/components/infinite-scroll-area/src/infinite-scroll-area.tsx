@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { UseInfiniteScrollProps } from "@yamada-ui/use-infinite-scroll"
@@ -11,7 +11,9 @@ import { createContext, cx, mergeRefs } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useMemo, useRef } from "react"
 
-type InfiniteScrollAreaContext = Record<string, CSSUIObject>
+interface InfiniteScrollAreaContext {
+  [key: string]: CSSUIObject
+}
 
 const [InfiniteScrollAreaProvider, useInfiniteScrollAreaContext] =
   createContext<InfiniteScrollAreaContext>({
@@ -19,11 +21,11 @@ const [InfiniteScrollAreaProvider, useInfiniteScrollAreaContext] =
     errorMessage: `useInfiniteScrollAreaContext returned is 'undefined'. Seems you forgot to wrap the components in "<InfiniteScrollArea />"`,
   })
 
-type InfiniteScrollAreaOptions = {
+interface InfiniteScrollAreaOptions {
   /**
    * Props for infinite scroll area trigger component.
    */
-  triggerProps?: HTMLUIProps<"div">
+  triggerProps?: HTMLUIProps
   /**
    * The infinite scroll area loading to use.
    */
@@ -34,13 +36,11 @@ type InfiniteScrollAreaOptions = {
   finish?: ReactNode
 }
 
-export type InfiniteScrollAreaProps = Omit<
-  HTMLUIProps<"div">,
-  keyof UseInfiniteScrollProps
-> &
-  UseInfiniteScrollProps &
-  ThemeProps<"InfiniteScrollArea"> &
-  InfiniteScrollAreaOptions
+export interface InfiniteScrollAreaProps
+  extends Omit<HTMLUIProps, keyof UseInfiniteScrollProps>,
+    UseInfiniteScrollProps,
+    ThemeProps<"InfiniteScrollArea">,
+    InfiniteScrollAreaOptions {}
 
 /**
  * `InfiniteScrollArea` is for providing infinite scroll functionality.
@@ -50,7 +50,7 @@ export type InfiniteScrollAreaProps = Omit<
  */
 export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
   ({ orientation: _orientation = "vertical", ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("InfiniteScrollArea", {
+    const [styles, mergedProps] = useComponentMultiStyle("InfiniteScrollArea", {
       orientation: _orientation,
       ...props,
     })
@@ -104,7 +104,6 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
       <InfiniteScrollAreaProvider value={styles}>
         <ui.div
           ref={mergeRefs(rootRef, ref)}
-          tabIndex={0}
           className={cx("ui-infinite-scroll-area", className)}
           role="feed"
           aria-busy="false"
@@ -130,9 +129,9 @@ export const InfiniteScrollArea = forwardRef<InfiniteScrollAreaProps, "div">(
   },
 )
 
-type InfiniteScrollTrigger = HTMLUIProps<"div">
+interface InfiniteScrollTriggerProps extends HTMLUIProps {}
 
-const InfiniteScrollTrigger = forwardRef<InfiniteScrollTrigger, "div">(
+const InfiniteScrollTrigger = forwardRef<InfiniteScrollTriggerProps, "div">(
   ({ className, ...rest }, ref) => {
     const styles = useInfiniteScrollAreaContext()
     const css: CSSUIObject = useMemo(

@@ -1,11 +1,11 @@
 import { useSafeLayoutEffect } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
 
-type EyeDropperOptions = {
+interface EyeDropperOptions {
   signal?: AbortSignal
 }
 
-export type EyeDropperReturn = {
+export interface EyeDropperReturn {
   sRGBHex: string
 }
 

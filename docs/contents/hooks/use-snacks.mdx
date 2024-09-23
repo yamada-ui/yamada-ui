@@ -475,6 +475,50 @@ return (
 )
 ```
 
+### Customize Close Event
+
+To customize the close event, set `closeStrategy` to `"element"`, `"button"`, or `"both"`. The default is `"button"`.
+
+- `"element"`: Close by clicking on the element.
+- `"button"`: Close by clicking on the close button.
+- `"both"`: Close by clicking on either the element or the close button.
+
+```tsx functional=true
+const { snack, snacks } = useSnacks({ closeStrategy: "element" })
+const ref = useRef<string | number | undefined>(undefined)
+
+const onCloseAll = () => {
+  snack.closeAll()
+}
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        colorScheme="primary"
+        onClick={() => {
+          snack({
+            title: "孫悟空",
+            description: "オッス！オラ悟空！",
+            closeStrategy: "element",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} gutter={[0, "md"]} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
 ### Customize Components
 
 To customize the component being rendered, use `component`.

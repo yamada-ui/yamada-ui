@@ -31,7 +31,8 @@ response = openai.Completion.create(
   presence_penalty=0,
 )`
 
-export type ViewCodeModalProps = Omit<ModalProps, "isOpen" | "onClose"> & {
+export interface ViewCodeModalProps
+  extends Omit<ModalProps, "isOpen" | "onClose"> {
   onOpenRef: MutableRefObject<() => void>
 }
 
@@ -69,7 +70,7 @@ export const ViewCodeModal: FC<ViewCodeModalProps> = memo(
 
 ViewCodeModal.displayName = "ViewCodeModal"
 
-type CodeBlockProps = BoxProps
+interface CodeBlockProps extends BoxProps {}
 
 const CodeBlock: FC<CodeBlockProps> = memo(({ ...rest }) => {
   return (

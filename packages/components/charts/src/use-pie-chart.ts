@@ -1,20 +1,21 @@
-import { useTheme, type CSSUIObject, type CSSUIProps } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { getVar, useTheme } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  RequiredPropGetter,
+} from "@yamada-ui/core"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import type {
-  CellProps,
-  ChartPropGetter,
-  PieChartProps,
-  PieProps,
-  RequiredChartPropGetter,
-} from "./chart.types"
+import type { CellProps, PieChartProps, PieProps } from "./chart.types"
 import { pieChartLabel, pieChartLabelLine } from "./pie-chart-label"
 import { pieChartProperties, pieProperties } from "./rechart-properties"
 
-export type UsePieChartOptions = {
+export interface UsePieChartOptions {
   /**
    * Chart data.
    */
@@ -105,7 +106,7 @@ export type UsePieChartOptions = {
   labelFormatter?: (value: number) => string
 }
 
-type UsePieChartProps = UsePieChartOptions & {
+interface UsePieChartProps extends UsePieChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -138,10 +139,9 @@ export const usePieChart = ({
     ...computedPieProps
   } = rest.pieProps ?? {}
 
-  const cellColors: CSSUIProps["var"] = useMemo(
+  const cellColors: CSSUIProps["vars"] = useMemo(
     () =>
       data.map(({ color }, index) => ({
-        __prefix: "ui",
         name: `cell-${index}`,
         token: "colors",
         value: color ?? "transparent",
@@ -149,12 +149,12 @@ export const usePieChart = ({
     [data],
   )
 
-  const pieVars: CSSUIProps["var"] = useMemo(
+  const pieVars: CSSUIProps["vars"] = useMemo(
     () =>
       [
         ...cellColors,
-        { __prefix: "ui", name: "fill-opacity", value: fillOpacity },
-      ] as Required<CSSUIProps>["var"],
+        { name: "fill-opacity", value: fillOpacity },
+      ] as Required<CSSUIProps>["vars"],
     [fillOpacity, cellColors],
   )
 
@@ -178,7 +178,7 @@ export const usePieChart = ({
 
   const cellClassName = useMemo(() => {
     const resolvedCellProps = {
-      fillOpacity: "var(--ui-fill-opacity)",
+      fillOpacity: "$fill-opacity",
       ...styles.cell,
       ...computedCellProps,
     }
@@ -239,7 +239,7 @@ export const usePieChart = ({
     () =>
       data.map((props, index) => {
         const { name, dimCell = {}, ...computedProps } = props
-        const color = `var(--ui-cell-${index})`
+        const color = getVar(`cell-${index}`)(theme)
         const dimmed = shouldHighlight && highlightedArea !== name
         const resolvedProps = {
           ...computedProps,
@@ -269,8 +269,7 @@ export const usePieChart = ({
     ],
   )
 
-  const getPieChartProps: ChartPropGetter<
-    "div",
+  const getPieChartProps: PropGetter<
     ComponentPropsWithoutRef<typeof Recharts.PieChart>,
     ComponentPropsWithoutRef<typeof Recharts.PieChart>
   > = useCallback(
@@ -283,8 +282,7 @@ export const usePieChart = ({
     [chartProps, chartClassName],
   )
 
-  const getPieProps: RequiredChartPropGetter<
-    "div",
+  const getPieProps: RequiredPropGetter<
     Partial<Recharts.PieProps>,
     Omit<Recharts.PieProps, "ref">
   > = useCallback(
@@ -325,10 +323,9 @@ export const usePieChart = ({
     ],
   )
 
-  const getCellProps: RequiredChartPropGetter<
-    "div",
+  const getCellProps: RequiredPropGetter<
     Omit<Recharts.CellProps, "ref"> & { index: number },
-    Omit<Recharts.CellProps, "ref">
+    Recharts.CellProps
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
       const { className, color } = cellPropList[index]

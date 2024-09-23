@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/accordion",
-  "version": "2.0.6",
+  "version": "2.0.9",
   "description": "Yamada UI accordion component",
   "keywords": [
     "yamada",
@@ -29,7 +29,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/components/accordion"
   },
   "bugs": {

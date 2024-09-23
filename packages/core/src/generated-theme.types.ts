@@ -261,6 +261,7 @@ export interface GeneratedTheme extends UITheme {
     | "warning"
     | "danger"
     | "link"
+    | "muted"
     | "primary.50"
     | "primary.100"
     | "primary.200"
@@ -907,6 +908,10 @@ export interface GeneratedTheme extends UITheme {
       variants: string & {}
     }
     RadarChart: {
+      sizes: "sm" | "md" | "lg" | "full" | (string & {})
+      variants: string & {}
+    }
+    RadialChart: {
       sizes: "sm" | "md" | "lg" | "full" | (string & {})
       variants: string & {}
     }

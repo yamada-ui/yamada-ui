@@ -3,7 +3,7 @@ import { ui, forwardRef, useTheme } from "@yamada-ui/core"
 import type { MotionProps, MotionVariants } from "@yamada-ui/motion"
 import {
   AnimatePresence,
-  Motion,
+  motion,
   motionForwardRef,
   useIsPresent,
 } from "@yamada-ui/motion"
@@ -34,7 +34,7 @@ const defaultListVariants: MotionVariants = {
   exit: { opacity: 0, height: 0 },
 }
 
-type SnacksOptions = {
+interface SnacksOptions {
   snacks: UseSnacksReturn["snacks"]
   /**
    * The variants of the snacks container.
@@ -53,13 +53,17 @@ type SnacksOptions = {
   /**
    * Props for the snacks list element.
    */
-  listProps?: MotionProps
+  listProps?: MotionProps<"ul">
 }
 
-export type SnacksProps = Omit<MotionProps<"div">, "direction"> &
-  SnacksOptions &
-  Pick<UseSnacksOptions, "direction" | "startIndex"> &
-  Pick<Required<ThemeConfig>["snacks"], "variants" | "gutter" | "negateMargin">
+export interface SnacksProps
+  extends Omit<MotionProps, "direction" | "whileHover">,
+    SnacksOptions,
+    Pick<UseSnacksOptions, "direction" | "startIndex">,
+    Pick<
+      Required<ThemeConfig>["snacks"],
+      "variants" | "gutter" | "negateMargin"
+    > {}
 
 export const Snacks = motionForwardRef<SnacksProps, "div">(
   (
@@ -92,16 +96,18 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
       () => ({ ...computedSnacks, ...theme.__config?.snacks, ...props }),
       [computedSnacks, theme, props],
     )
-    const top = useToken<string | number>("spaces", useValue(gutter[0])) ?? 0
-    const bottom = useToken<string | number>("spaces", useValue(gutter[1])) ?? 0
+    const _top = useValue(gutter[0])
+    const _bottom = useValue(gutter[1])
+    const top = useToken("spaces", _top) ?? 0
+    const bottom = useToken("spaces", _bottom) ?? 0
     const negatedTop = calc(top).negate().toString()
     const negatedBottom = calc(bottom).negate().toString()
     const isShow = !!count || isExist
 
     const css: CSSUIObject = {
       w: "100%",
-      var: [{ __prefix: "ui", name: "space", token: "spaces", value: gap }],
       margin: negateMargin ? `${negatedTop} 0 ${negatedBottom}` : undefined,
+      vars: [{ name: "space", token: "spaces", value: gap }],
     }
 
     useEffect(() => {
@@ -131,7 +137,7 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
     return (
       <AnimatePresence initial={false}>
         {isShow ? (
-          <Motion
+          <motion.div
             ref={ref}
             className={cx("ui-snacks", className)}
             __css={css}
@@ -142,8 +148,7 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
             exit="exit"
             {...rest}
           >
-            <Motion
-              as="ul"
+            <motion.ul
               className="ui-snacks__list"
               variants={listVariants}
               custom={{ height }}
@@ -180,8 +185,8 @@ export const Snacks = motionForwardRef<SnacksProps, "div">(
                   )
                 })}
               </AnimatePresence>
-            </Motion>
-          </Motion>
+            </motion.ul>
+          </motion.div>
         ) : null}
       </AnimatePresence>
     )
@@ -211,7 +216,7 @@ const defaultItemVariants: MotionVariants = {
   },
 }
 
-type SnackComponentOptions = {
+interface SnackComponentOptions {
   index: number
   lastIndex: number
 }
@@ -246,9 +251,7 @@ const SnackComponent = memo(
       const onMouseLeave = () => setDelay(duration)
 
       const zIndex = startIndex + index
-      const space = `calc(var(--ui-space) * ${
-        direction === "top" ? lastIndex : index
-      })`
+      const space = `calc($space * ${direction === "top" ? lastIndex : index})`
 
       const css: CSSUIObject = {
         position: "absolute",
@@ -273,7 +276,7 @@ const SnackComponent = memo(
 
       return (
         <ui.li ref={ref} className="ui-snacks__item" __css={css}>
-          <Motion
+          <motion.div
             className="ui-snacks__item-inner"
             layout
             variants={variants}
@@ -285,7 +288,7 @@ const SnackComponent = memo(
             onHoverEnd={onMouseLeave}
           >
             {runIfFunc(message, { index, onClose })}
-          </Motion>
+          </motion.div>
         </ui.li>
       )
     },

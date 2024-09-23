@@ -13,7 +13,7 @@ import { Github } from "components/media-and-icons"
 import { memo } from "react"
 import type { FC } from "react"
 
-export type FormProps = BoxProps & {}
+export interface FormProps extends BoxProps {}
 
 export const Form: FC<FormProps> = memo(({ ...rest }) => {
   return (

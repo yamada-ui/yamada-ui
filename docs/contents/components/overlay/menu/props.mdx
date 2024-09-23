@@ -2,6 +2,7 @@
 title: Menu
 description: "`Menu` is a component that displays a common dropdown menu."
 package_name: "@yamada-ui/menu"
+order: 1
 with_description: true
 tab: Props
 ---
@@ -13,7 +14,7 @@ tab: Props
 <PropsCard
   id="menu-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -84,7 +85,7 @@ tab: Props
 <PropsCard
   id="menu-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -255,7 +256,1239 @@ tab: Props
 
 ### MenuButtonProps
 
+<PropsCard id="menubutton-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menubutton-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="menubutton-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menubutton-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menubutton-_weekend" name="_weekend" type="CSSUIObject" />
+
 ### MenuItemButtonProps
+
+<PropsCard id="menuitembutton-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_cueregion"
+  name="_cueRegion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_firstline"
+  name="_firstLine"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupidle"
+  name="_groupIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_mediadark"
+  name="_mediaDark"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_nottarget"
+  name="_notTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerblank"
+  name="_peerBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerfocus"
+  name="_peerFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerhover"
+  name="_peerHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peervalid"
+  name="_peerValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_readwrite"
+  name="_readWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_scrollbar"
+  name="_scrollbar"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitembutton-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_selection"
+  name="_selection"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitembutton-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitembutton-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menuitembutton-_weekend" name="_weekend" type="CSSUIObject" />
 
 <PropsCard
   id="menuitembutton-icon"
@@ -283,13 +1516,1017 @@ tab: Props
 
 ### MenuListProps
 
+<PropsCard id="menulist-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menulist-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menulist-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menulist-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menulist-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menulist-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menulist-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menulist-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menulist-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menulist-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menulist-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menulist-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menulist-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menulist-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menulist-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menulist-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menulist-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menulist-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menulist-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menulist-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menulist-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="menulist-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="menulist-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menulist-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="menulist-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menulist-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="menulist-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="menulist-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="menulist-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menulist-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menulist-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menulist-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menulist-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menulist-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menulist-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menulist-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menulist-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menulist-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menulist-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menulist-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menulist-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menulist-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menulist-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="menulist-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menulist-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menulist-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menulist-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menulist-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menulist-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menulist-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menulist-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menulist-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="menulist-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="menulist-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menulist-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menulist-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menulist-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menulist-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menulist-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menulist-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menulist-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menulist-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menulist-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menulist-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menulist-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menulist-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menulist-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menulist-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menulist-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="menulist-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="menulist-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menulist-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menulist-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menulist-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard
   id="menulist-contentprops"
   name="contentProps"
-  type='Omit<MotionProps<"div">, "children">'
+  type="MotionPropsWithoutChildren"
 />
 
 ### MenuItemProps
+
+<PropsCard id="menuitem-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menuitem-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuitem-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuitem-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menuitem-_weekend" name="_weekend" type="CSSUIObject" />
 
 <PropsCard
   id="menuitem-closeonselect"
@@ -332,6 +2569,668 @@ tab: Props
 />
 
 ### MenuOptionItemProps
+
+<PropsCard id="menuoptionitem-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_cueregion"
+  name="_cueRegion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_firstline"
+  name="_firstLine"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupidle"
+  name="_groupIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_mediadark"
+  name="_mediaDark"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_nottarget"
+  name="_notTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerblank"
+  name="_peerBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerfocus"
+  name="_peerFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerhover"
+  name="_peerHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peervalid"
+  name="_peerValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_readwrite"
+  name="_readWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_scrollbar"
+  name="_scrollbar"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptionitem-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_selection"
+  name="_selection"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptionitem-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptionitem-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menuoptionitem-_weekend" name="_weekend" type="CSSUIObject" />
 
 <PropsCard
   id="menuoptionitem-closeonselect"
@@ -379,11 +3278,1592 @@ tab: Props
   description={"The type of the menu option item."}
 />
 
+<PropsCard
+  id="menuoptionitem-value"
+  name="value"
+  type="string"
+  description={"The value of the menu option item."}
+/>
+
 ### MenuIconProps
+
+<PropsCard id="menuicon-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menuicon-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuicon-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuicon-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menuicon-_weekend" name="_weekend" type="CSSUIObject" />
 
 ### MenuCommandProps
 
+<PropsCard id="menucommand-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menucommand-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="menucommand-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menucommand-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menucommand-_weekend" name="_weekend" type="CSSUIObject" />
+
 ### MenuGroupProps
+
+<PropsCard id="menugroup-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menugroup-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menugroup-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menugroup-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menugroup-_weekend" name="_weekend" type="CSSUIObject" />
 
 <PropsCard
   id="menugroup-label"
@@ -392,7 +4872,676 @@ tab: Props
   description={"The label of the group."}
 />
 
+<PropsCard
+  id="menugroup-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for menu group element."}
+/>
+
 ### MenuOptionGroupProps
+
+<PropsCard id="menuoptiongroup-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_cueregion"
+  name="_cueRegion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_firstline"
+  name="_firstLine"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupidle"
+  name="_groupIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_mediadark"
+  name="_mediaDark"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_nottarget"
+  name="_notTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerblank"
+  name="_peerBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerfocus"
+  name="_peerFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerhover"
+  name="_peerHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peervalid"
+  name="_peerValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_readwrite"
+  name="_readWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_scrollbar"
+  name="_scrollbar"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menuoptiongroup-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_selection"
+  name="_selection"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="menuoptiongroup-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menuoptiongroup-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menuoptiongroup-_weekend" name="_weekend" type="CSSUIObject" />
 
 <PropsCard
   id="menuoptiongroup-defaultvalue"
@@ -405,7 +5554,14 @@ tab: Props
   id="menuoptiongroup-label"
   name="label"
   type="string"
-  description={"The label of the option group."}
+  description={"The label of the group."}
+/>
+
+<PropsCard
+  id="menuoptiongroup-labelprops"
+  name="labelProps"
+  type='HTMLUIProps<"span">'
+  description={"Props for menu group element."}
 />
 
 <PropsCard
@@ -434,12 +5590,582 @@ tab: Props
 
 ### MenuDividerProps
 
+<PropsCard id="menudivider-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="menudivider-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="menudivider-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="menudivider-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="menudivider-_weekend" name="_weekend" type="CSSUIObject" />
+
 ### ContextMenuProps
 
 <PropsCard
   id="contextmenu-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -510,7 +6236,7 @@ tab: Props
 <PropsCard
   id="contextmenu-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -670,3 +6396,781 @@ tab: Props
 />
 
 ### ContextMenuTriggerProps
+
+<PropsCard id="contextmenutrigger-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_anylink"
+  name="_anyLink"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_autofill"
+  name="_autofill"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_backdrop"
+  name="_backdrop"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_between"
+  name="_between"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_checked"
+  name="_checked"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_cueregion"
+  name="_cueRegion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_default"
+  name="_default"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_disabled"
+  name="_disabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_enabled"
+  name="_enabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_expanded"
+  name="_expanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_firstline"
+  name="_firstLine"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_fullscreen"
+  name="_fullScreen"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grabbed"
+  name="_grabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupblank"
+  name="_groupBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupfocus"
+  name="_groupFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grouphover"
+  name="_groupHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupidle"
+  name="_groupIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupvalid"
+  name="_groupValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_holiday"
+  name="_holiday"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_horizontal"
+  name="_horizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_inrange"
+  name="_inRange"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_invalid"
+  name="_invalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_loading"
+  name="_loading"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_mediadark"
+  name="_mediaDark"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_medialight"
+  name="_mediaLight"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_notfirst"
+  name="_notFirst"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_notlast"
+  name="_notLast"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_nottarget"
+  name="_notTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_optional"
+  name="_optional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_outrange"
+  name="_outRange"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_outside"
+  name="_outside"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_peeraccept"
+  name="_peerAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peeractive"
+  name="_peerActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerblank"
+  name="_peerBlank"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerfocus"
+  name="_peerFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerhover"
+  name="_peerHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peeridle"
+  name="_peerIdle"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerloaded"
+  name="_peerLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerreject"
+  name="_peerReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peervalid"
+  name="_peerValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_picture"
+  name="_picture"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_playing"
+  name="_playing"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_pressed"
+  name="_pressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_readonly"
+  name="_readOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_readwrite"
+  name="_readWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_required"
+  name="_required"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_scrollbar"
+  name="_scrollbar"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_selected"
+  name="_selected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_selection"
+  name="_selection"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="contextmenutrigger-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="contextmenutrigger-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard
+  id="contextmenutrigger-_vertical"
+  name="_vertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_visited"
+  name="_visited"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="contextmenutrigger-_weekend"
+  name="_weekend"
+  type="CSSUIObject"
+/>

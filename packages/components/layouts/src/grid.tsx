@@ -5,9 +5,9 @@ import type {
   StyledTheme,
 } from "@yamada-ui/core"
 import { ui, forwardRef, useTheme, transforms } from "@yamada-ui/core"
-import type { Dict } from "@yamada-ui/utils"
 import { replaceObject, getMemoizedObject as get } from "@yamada-ui/utils"
-type GridOptions = {
+
+interface GridOptions {
   /**
    * The CSS `grid-template-columns` property.
    */
@@ -46,7 +46,7 @@ type GridOptions = {
   autoRows?: CSSUIObject["gridAutoRows"]
 }
 
-export type GridProps = HTMLUIProps<"div"> & GridOptions
+export interface GridProps extends HTMLUIProps, GridOptions {}
 
 /**
  * `Grid` is a component for managing grid layouts. It also comes with handy style shorthand.
@@ -94,7 +94,7 @@ export const Grid = forwardRef<GridProps, "div">(
 
 const transformColumns =
   (columns: Token<number> | undefined, minWidth?: GridProps["minWidth"]) =>
-  (theme: StyledTheme<Dict>) => {
+  (theme: StyledTheme) => {
     if (minWidth) {
       return replaceObject(minWidth, (value) => {
         value = get(theme, `sizes.${value}`, transforms.px(value))
@@ -110,7 +110,7 @@ const transformColumns =
     }
   }
 
-type SimpleGridOptions = {
+interface SimpleGridOptions {
   /**
    * The width at which child elements will break into columns.
    * Pass a number for pixel values or a string for any other valid CSS length.
@@ -122,7 +122,9 @@ type SimpleGridOptions = {
   columns?: Token<number>
 }
 
-export type SimpleGridProps = GridProps & SimpleGridOptions
+export interface SimpleGridProps
+  extends Omit<GridProps, "columns">,
+    SimpleGridOptions {}
 
 /**
  * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
@@ -138,7 +140,7 @@ export const SimpleGrid = forwardRef<SimpleGridProps, "div">(
   },
 )
 
-type GridItemOptions = {
+interface GridItemOptions {
   /**
    * The CSS `grid-area` property.
    */
@@ -169,7 +171,7 @@ type GridItemOptions = {
   rowEnd?: CSSUIObject["gridRowEnd"]
 }
 
-export type GridItemProps = HTMLUIProps<"div"> & GridItemOptions
+export interface GridItemProps extends HTMLUIProps, GridItemOptions {}
 
 export const GridItem = forwardRef<GridItemProps, "div">(
   (

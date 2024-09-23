@@ -1,116 +1,121 @@
-import type { Interpolation } from "@emotion/react"
-import type { Merge, MergeIfDefined } from "@yamada-ui/utils"
+import type { Merge } from "@yamada-ui/utils"
 import type * as React from "react"
-import type { CSSUIObject, CSSUIProps } from "../css"
-import type { PropsTheme } from "../theme.types"
+import type { CSSProps, CSSUIObject, CSSUIProps } from "../css"
+import type { StyledTheme } from "../theme.types"
 import type { DOMElements } from "./element.types"
 
 export type BaseStyle =
   | CSSUIObject
-  | ((props: StyledResolverProps) => CSSUIObject)
+  | ((props: InterpolationProps) => CSSUIObject)
 
-export type StyledOptions = {
+export interface StyledOptions {
   disableStyleProp?: (prop: string) => boolean
   shouldForwardProp?: (prop: string) => boolean
   label?: string
   baseStyle?: BaseStyle
 }
 
-export type UIFactory = {
-  <T extends As, P extends object = {}>(
-    component: T,
+export interface UIFactory {
+  <Y extends As, M extends object = {}>(
+    el: Y,
     options?: StyledOptions,
-  ): UIComponent<T, P>
+  ): UIComponent<Y, M>
 }
 
-export type UIBaseProps = {
+export interface UIProps extends CSSProps, CSSUIProps {
   /**
-   * Used for internal css management.
-   *
-   * @private
+   * The HTML element to render.
    */
-  __css?: CSSUIObject
-  /**
-   * The CSS object that depends on the theme.
-   */
-  sx?: CSSUIObject
-  /**
-   * The emotion's css object.
-   */
-  css?: Interpolation<{}>
+  as?: As
 }
 
-export type StyledResolverProps = CSSUIObject &
-  UIBaseProps & {
-    theme: PropsTheme
+export type WithoutAs<Y extends object> = Omit<Y, "as">
+
+export type InterpolationProps = CSSUIObject &
+  CSSProps & {
+    theme: StyledTheme
   }
 
-export type UIProps = CSSUIProps & UIBaseProps
+export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
+  Y,
+  keyof M | "as"
+> &
+  M
 
-export type WithoutAs<T extends object> = Omit<T, "as">
+type ComponentConditionalProps<
+  Y extends As,
+  M extends As,
+  D extends object = {},
+> =
+  | OmitProps<React.ComponentProps<Y>, D>
+  | OmitProps<React.ComponentProps<M>, D>
 
-export type ComponentProps<
-  Y extends object,
-  M extends object,
-  D extends object,
-  H extends As,
-> = (Merge<Y, WithoutAs<D>> | Merge<M, WithoutAs<D>>) & {
-  as?: H
+type ComponentProps<
+  Y extends As,
+  M extends As,
+  D extends object = {},
+> = ComponentConditionalProps<Y, M, D> & {
+  as?: M
 }
 
-export type ComponentArgs = {
-  displayName?: string
-  propTypes?: React.WeakValidationMap<any>
-  contextTypes?: React.ValidationMap<any>
-  defaultProps?: Partial<any>
-  id?: string
-}
+export interface ComponentArgs
+  extends Pick<
+    React.FunctionComponent,
+    "contextTypes" | "propTypes" | "defaultProps" | "displayName"
+  > {}
 
-export type Component<Y extends As, M extends object = {}> = {
-  <D extends As = Y>(
-    props: ComponentProps<
-      React.ComponentProps<Y>,
-      React.ComponentProps<D>,
-      M,
-      D
-    >,
-  ): JSX.Element
-} & ComponentArgs
+export interface Component<Y extends As, D extends object = {}>
+  extends ComponentArgs {
+  <M extends As = Y>(props: ComponentProps<Y, M, D>): JSX.Element
+}
 
 export type As = React.ElementType
 
 export type HTMLUIComponents = {
-  [Y in DOMElements]: UIComponent<Y, {}>
+  [Y in DOMElements]: UIComponent<Y>
 }
 
-export type UIComponent<Y extends As, M extends object = {}> = Component<
-  Y,
-  Merge<UIProps, M>
+export interface UIComponent<Y extends As = As, M extends object = {}>
+  extends Component<Y, Merge<UIProps, M>> {}
+
+export type HTMLRef<Y extends DOMElements = "div"> =
+  JSX.IntrinsicElements[Y]["ref"]
+
+export interface HTMLRefAttributes<Y extends DOMElements = "div"> {
+  ref?: HTMLRef<Y> | undefined
+}
+
+export type HTMLProps<Y extends DOMElements = "div"> = Omit<
+  JSX.IntrinsicElements[Y],
+  "ref" | "size" | keyof UIProps
 >
 
-export type HTMLUIProps<Y extends As = "div"> = Merge<
-  React.ComponentPropsWithoutRef<Y>,
-  UIProps & { as?: As }
+export type HTMLUIProps<Y extends DOMElements = "div"> = Merge<
+  HTMLProps<Y>,
+  UIProps
 >
 
-export type HTMLUIPropsWithoutAs<Y extends As = "div"> = Omit<
-  HTMLUIProps<Y>,
-  "as"
+export type HTMLUIPropsWithoutAs<Y extends DOMElements = "div"> = WithoutAs<
+  HTMLUIProps<Y>
 >
 
-type HTMLUIPropsWithRef<Y extends As = "div"> = HTMLUIProps<Y> &
+export type HTMLUIPropsWithRef<Y extends DOMElements = "div"> = HTMLUIProps<Y> &
   React.RefAttributes<any>
 
-export type UIPropGetter<Y extends As = "div", M = undefined, D = undefined> = (
-  props?: MergeIfDefined<HTMLUIProps<Y>, M>,
-  ref?: React.Ref<any>,
-) => MergeIfDefined<HTMLUIPropsWithRef<Y>, D>
+type ConditionalProps<Y> = Y extends DOMElements ? HTMLProps<Y> : Y
 
-export type RequiredUIPropGetter<
-  Y extends As = "div",
-  M = undefined,
-  D = undefined,
-> = (
-  props: MergeIfDefined<HTMLUIProps<Y>, M>,
-  ref?: React.Ref<any>,
-) => MergeIfDefined<HTMLUIPropsWithRef<Y>, D>
+type DefinedProps<Y, M> = M extends undefined ? Y : M
+
+export interface PropGetter<Y = "div", M = undefined> {
+  (
+    props?: ConditionalProps<Y>,
+    ref?: React.Ref<any>,
+  ): DefinedProps<ConditionalProps<Y>, M> & React.RefAttributes<any>
+}
+
+export interface RequiredPropGetter<Y = "div", M = undefined> {
+  (
+    props: ConditionalProps<Y>,
+    ref?: React.Ref<any>,
+  ): DefinedProps<ConditionalProps<Y>, M> & React.RefAttributes<any>
+}

@@ -117,6 +117,26 @@ describe("<Select />", () => {
       expect(secondOption).toBeVisible()
     })
 
+    test("should render select with option group labelProps", async () => {
+      const { user } = render(
+        <Select>
+          <OptionGroup label="Numbers" labelProps={{ fontSize: "12px" }}>
+            <Option value="one">One</Option>
+          </OptionGroup>
+          <Option value="two">Two</Option>
+        </Select>,
+      )
+
+      const input = await screen.findByRole("combobox")
+
+      await user.click(input)
+
+      const group = await screen.findByText("Numbers")
+      expect(group).toHaveStyle({
+        fontSize: "12px",
+      })
+    })
+
     test("should render select with placeholder", async () => {
       const { user } = render(
         <Select placeholder="Select numbers">
@@ -399,11 +419,9 @@ describe("<Select />", () => {
       await user.click(input)
 
       const listbox = await screen.findByRole("listbox")
-      expect(listbox).toHaveStyle({ visibility: "visible" })
       expect(listbox).toBeVisible()
 
       await user.keyboard("{Escape>}")
-      // await waitFor(() => expect(listbox).toHaveStyle({ visibility: "hidden" }))
       await waitFor(() => expect(listbox).not.toBeVisible())
     })
   })
@@ -456,22 +474,22 @@ describe("<Select />", () => {
       expect(headerElement).toHaveStyle(HEADER_STYLE)
       expect(headerElement.parentElement).toHaveClass("ui-select__header")
     })
-  })
 
-  test("should be displayed properly when NOT present", () => {
-    const { container } = render(
-      <Select
-        placeholder="Select numbers"
-        placeholderInOptions={true}
-        items={[
-          { label: "One", value: "" },
-          { label: "Two", value: "" },
-        ]}
-      />,
-    )
+    test("should be displayed properly when NOT present", () => {
+      const { container } = render(
+        <Select
+          placeholder="Select numbers"
+          placeholderInOptions={true}
+          items={[
+            { label: "One", value: "" },
+            { label: "Two", value: "" },
+          ]}
+        />,
+      )
 
-    const headerElement = container.querySelector(".ui-select__header")
-    expect(headerElement).toBeNull()
+      const headerElement = container.querySelector(".ui-select__header")
+      expect(headerElement).toBeNull()
+    })
   })
 
   describe("footer rendering", () => {

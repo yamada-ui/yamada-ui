@@ -1,11 +1,11 @@
 import type { CSSUIObject } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
-import { Motion, motionForwardRef } from "@yamada-ui/motion"
+import { motion, motionForwardRef } from "@yamada-ui/motion"
 import { fadeProps } from "@yamada-ui/transitions"
 import { cx, handlerAll } from "@yamada-ui/utils"
-import { useModal } from "./modal"
+import { useModal } from "./modal-context"
 
-export type ModalOverlayProps = MotionProps<"div">
+export interface ModalOverlayProps extends MotionProps {}
 
 export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
   ({ className, __css, onClick, ...rest }, ref) => {
@@ -25,7 +25,7 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
     const props = animation !== "none" ? fadeProps : {}
 
     return (
-      <Motion
+      <motion.div
         ref={ref}
         className={cx("ui-modal__overlay", className)}
         custom={{ duration }}

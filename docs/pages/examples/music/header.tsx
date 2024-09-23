@@ -31,12 +31,16 @@ import type {
 import { Fragment, memo } from "react"
 import type { FC } from "react"
 
-type MenuGroup = Omit<
-  Merge<MenuGroupProps, MenuOptionGroupProps>,
-  "value" | "defaultValue" | "children"
-> & { value?: string | string[]; defaultValue?: string | string[] }
+interface MenuGroup
+  extends Omit<
+    Merge<MenuGroupProps, MenuOptionGroupProps>,
+    "value" | "defaultValue" | "children"
+  > {
+  value?: string | string[]
+  defaultValue?: string | string[]
+}
 
-type MenuItem = MenuGroup & {
+interface MenuItem extends MenuGroup {
   items?: (Omit<Merge<MenuItemProps, MenuOptionItemProps>, "children"> & {
     label?: string
     items?: MenuItem[]
@@ -210,7 +214,7 @@ const ACCOUNT_MENU_ITEMS: MenuItem[] = [
   },
 ]
 
-export type HeaderProps = StackProps & {}
+export interface HeaderProps extends StackProps {}
 
 export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
   return (
@@ -226,7 +230,7 @@ export const Header: FC<HeaderProps> = memo(({ ...rest }) => {
 
 Header.displayName = "Header"
 
-type ControlMenuProps = MenuProps & {
+interface ControlMenuProps extends MenuProps {
   label?: string
   items: MenuItem[]
   isNested?: boolean
@@ -272,7 +276,8 @@ const ControlMenu: FC<ControlMenuProps> = memo(
 
 ControlMenu.displayName = "ControlMenu"
 
-type ControlMenuButtonProps = Merge<MenuButtonProps, MenuItemButtonProps> & {
+interface ControlMenuButtonProps
+  extends Merge<MenuButtonProps, MenuItemButtonProps> {
   isOpen: boolean
   isNested?: boolean
 }
@@ -285,7 +290,7 @@ const ControlMenuButton: FC<ControlMenuButtonProps> = memo(
       return (
         <MenuButton
           as={Button}
-          var={[
+          vars={[
             {
               name: "bg",
               token: "colors",
@@ -295,7 +300,7 @@ const ControlMenuButton: FC<ControlMenuButtonProps> = memo(
               ],
             },
           ]}
-          bg={isOpen ? "var(--ui-bg)" : "transparent"}
+          bg={isOpen ? "$bg" : "transparent"}
           variant="ghost"
           size="sm"
           disableRipple
@@ -310,7 +315,8 @@ const ControlMenuButton: FC<ControlMenuButtonProps> = memo(
 
 ControlMenuButton.displayName = "ControlMenuButton"
 
-type ControlMenuGroupProps = Merge<MenuGroupProps, MenuOptionGroupProps>
+interface ControlMenuGroupProps
+  extends Merge<MenuGroupProps, MenuOptionGroupProps> {}
 
 const ControlMenuGroup: FC<ControlMenuGroupProps> = memo(
   ({ type, ...rest }) => {
@@ -324,7 +330,8 @@ const ControlMenuGroup: FC<ControlMenuGroupProps> = memo(
 
 ControlMenuGroup.displayName = "ControlMenuGroup"
 
-type ControlMenuItemProps = Merge<MenuItemProps, MenuOptionItemProps>
+interface ControlMenuItemProps
+  extends Merge<MenuItemProps, MenuOptionItemProps> {}
 
 const ControlMenuItem: FC<ControlMenuItemProps> = memo(({ value, ...rest }) => {
   if (isUndefined(value)) {

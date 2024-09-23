@@ -1,7 +1,7 @@
 ---
 title: Responsive Styles
 description: Yamada UI supports ready-to-use responsive styles.
-order: 4
+order: 5
 ---
 
 Yamada UI supports ready-to-use responsive styles. Just pass an object to the style's `props` to support PC-first responsive styles.
@@ -94,6 +94,7 @@ return <Box p="md">The current breakpoint is "{breakpoint}"</Box>
 const breakpoint = useBreakpoint()
 const bg = useBreakpointValue({
   base: "red.500",
+  "2xl": "pink.500",
   xl: "blue.500",
   lg: "green.500",
   md: "yellow.500",

@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-media-query",
-  "version": "1.0.44",
+  "version": "1.0.47",
   "description": "Yamada UI useMediaQuery custom hook",
   "keywords": [
     "use-media-query"
@@ -18,7 +18,7 @@
   "homepage": "https://yamada-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamada-ui/yamada-ui",
+    "url": "https://github.com/yamada-ui/yamada-ui",
     "directory": "packages/hooks/use-media-query"
   },
   "bugs": {

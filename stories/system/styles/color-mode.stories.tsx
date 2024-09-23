@@ -1,4 +1,12 @@
-import { Box, useColorMode, useColorModeValue } from "@yamada-ui/react"
+import { Calendar } from "@yamada-ui/calendar"
+import {
+  Box,
+  Button,
+  Tag,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@yamada-ui/react"
 
 export default {
   title: "System / Styles / Color Mode",
@@ -37,5 +45,21 @@ export const useHook = () => {
     >
       The current colorMode is "{colorMode}"
     </Box>
+  )
+}
+
+export const components = () => {
+  const { colorMode } = useColorMode()
+
+  return (
+    <>
+      <Text>The current colorMode is "{colorMode}"</Text>
+
+      <Button variant={["solid", "outline"]}>Button</Button>
+
+      <Tag variant={["solid", "subtle"]}>Tag</Tag>
+
+      <Calendar variant={["solid", "subtle"]} />
+    </>
   )
 }

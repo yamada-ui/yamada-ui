@@ -120,6 +120,17 @@ export function isSomeElement(child: any, type: any): boolean {
   return false
 }
 
+export function findChild(
+  children: React.ReactElement[],
+  ...types: (string | React.JSXElementConstructor<any>)[]
+): React.ReactElement | undefined {
+  const child = children.find((child) =>
+    types.some((type) => isSomeElement(child, type)),
+  )
+
+  return child
+}
+
 export function findChildren(
   children: React.ReactElement[],
   ...types: (string | React.JSXElementConstructor<any>)[]

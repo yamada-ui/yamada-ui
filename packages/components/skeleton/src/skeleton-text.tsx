@@ -86,3 +86,6 @@ export const SkeletonText = forwardRef<SkeletonTextProps, "div">(
     )
   },
 )
+
+SkeletonText.displayName = "SkeletonText"
+SkeletonText.__ui__ = "SkeletonText"

@@ -263,3 +263,4 @@ export const RadioGroup = forwardRef(
 } & ComponentArgs
 
 RadioGroup.displayName = "RadioGroup"
+RadioGroup.__ui__ = "RadioGroup"

@@ -1,9 +1,4 @@
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  ThemeProps,
-  HTMLUIProps,
-} from "@yamada-ui/core"
+import type { CSSUIObject, ThemeProps, HTMLUIProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -14,19 +9,7 @@ import { useToken } from "@yamada-ui/use-token"
 import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
 import type { FC } from "react"
 
-interface IconOptions {
-  /**
-   * The CSS `font-size` property.
-   *
-   * @deprecated Use `fontSize` instead.
-   */
-  size?: CSSUIProps["fontSize"]
-}
-
-export interface IconProps
-  extends HTMLUIProps<"svg">,
-    Omit<ThemeProps<"Icon">, "size">,
-    IconOptions {}
+export interface IconProps extends HTMLUIProps<"svg">, ThemeProps<"Icon"> {}
 
 /**
  * `Icon` is a general icon component that can be used in your projects.
@@ -34,8 +17,8 @@ export interface IconProps
  * @see Docs https://yamada-ui.com/components/media-and-icons/icon
  */
 export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
-  const [styles, { size, ...mergedProps }] = useComponentStyle("Icon", props)
-  let {
+  const [styles, mergedProps] = useComponentStyle("Icon", props)
+  const {
     className,
     as: element,
     fontSize,
@@ -43,8 +26,6 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
-
-  fontSize ??= size
 
   const boxSize = replaceObject(fontSize, (value) =>
     !isUnit(value) ? useToken("fontSizes", value) : value,

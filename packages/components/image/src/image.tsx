@@ -24,12 +24,6 @@ interface ImageOptions {
    */
   fallbackStrategy?: "onError" | "beforeLoadOrError"
   /**
-   * The CSS `box-size` property.
-   *
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
-  /**
    * The CSS `object-fit` property.
    */
   fit?: CSSUIProps["objectFit"]
@@ -37,7 +31,7 @@ interface ImageOptions {
 
 export interface ImageProps
   extends Omit<HTMLUIProps<"img">, keyof UseImageProps>,
-    Omit<ThemeProps<"Image">, "size">,
+    ThemeProps<"Image">,
     UseImageProps,
     ImageOptions {}
 
@@ -47,9 +41,8 @@ export interface ImageProps
  * @see Docs https://yamada-ui.com/components/media-and-icons/image
  */
 export const Image = forwardRef<ImageProps, "img">((props, ref) => {
-  const [styles, { size, ...mergedProps }] = useComponentStyle("Image", props)
+  const [styles, mergedProps] = useComponentStyle("Image", props)
   let {
-    boxSize,
     fit: objectFit,
     fallback,
     src,
@@ -65,13 +58,9 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  boxSize ??= size
   ignoreFallback = loading != null || ignoreFallback || !fallback
 
-  const css = useMemo(
-    () => ({ ...styles, boxSize, objectFit }),
-    [styles, boxSize, objectFit],
-  )
+  const css = useMemo(() => ({ ...styles, objectFit }), [styles, objectFit])
 
   const status = useImage({ ...props, ignoreFallback })
 

@@ -217,11 +217,9 @@ export const useRangeSlider = ({
     betweenThumbs,
     orientation,
   })
-
   const eventSourceRef = useRef<"pointer" | "keyboard" | null>(null)
   const containerRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLElement>(null)
-
   const thumbSizes = useSizes({
     getNodes: () => {
       const nodes =
@@ -230,8 +228,9 @@ export const useRangeSlider = ({
       return nodes ? Array.from(nodes) : []
     },
   })
+  const uuid = useId()
 
-  id ??= useId()
+  id ??= uuid
   name ??= id
 
   const getThumbId = useCallback((i: number) => `slider-thumb-${id}-${i}`, [id])

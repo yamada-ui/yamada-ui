@@ -107,7 +107,10 @@ export const useCheckbox = <
   id,
   ...props
 }: UseCheckboxProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
+
   const {
     id: _id,
     name,

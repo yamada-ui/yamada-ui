@@ -62,6 +62,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
     inputRef,
     onFocusNext,
   } = useAutocompleteContext()
+  const id = useId()
 
   let {
     icon: customIcon,
@@ -158,7 +159,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
 
       return {
         ref: mergeRefs(itemRef, ref, register),
-        id: useId(),
+        id,
         role: "option",
         ...computedProps,
         ...props,
@@ -175,6 +176,7 @@ export const useAutocompleteOption = (props: UseAutocompleteOptionProps) => {
       }
     },
     [
+      id,
       optionValue,
       computedProps,
       isDisabled,

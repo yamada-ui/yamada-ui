@@ -110,7 +110,9 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    id ??= useId()
+    const uuid = useId()
+
+    id ??= uuid
 
     const [isFocused, setFocused] = useState<boolean>(false)
 

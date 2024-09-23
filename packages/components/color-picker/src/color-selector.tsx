@@ -182,3 +182,6 @@ export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
     )
   },
 )
+
+ColorSelector.displayName = "ColorSelector"
+ColorSelector.__ui__ = "ColorSelector"

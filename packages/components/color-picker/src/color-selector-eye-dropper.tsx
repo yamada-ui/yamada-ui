@@ -37,6 +37,9 @@ export const ColorSelectorEyeDropper = forwardRef<
   )
 })
 
+ColorSelectorEyeDropper.displayName = "ColorSelectorEyeDropper"
+ColorSelectorEyeDropper.__ui__ = "ColorSelectorEyeDropper"
+
 export const EyeDropperIcon: FC<IconProps> = ({ ...rest }) => {
   return (
     <Icon
@@ -54,3 +57,5 @@ export const EyeDropperIcon: FC<IconProps> = ({ ...rest }) => {
     </Icon>
   )
 }
+
+EyeDropperIcon.displayName = "EyeDropperIcon"

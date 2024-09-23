@@ -57,5 +57,3 @@ export const EyeDropperIcon: FC<IconProps> = ({ ...rest }) => {
     </Icon>
   )
 }
-
-EyeDropperIcon.displayName = "EyeDropperIcon"

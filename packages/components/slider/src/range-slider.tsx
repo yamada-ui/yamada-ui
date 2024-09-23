@@ -29,7 +29,6 @@ import {
   cx,
   dataAttr,
   omitChildren,
-  findChildren,
   getValidChildren,
   handlerAll,
   isArray,
@@ -42,6 +41,7 @@ import {
   useUpdateEffect,
   valueToPercent,
   includesChildren,
+  findChild,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useId, useRef, useState } from "react"
@@ -796,12 +796,12 @@ export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
 
   const validChildren = getValidChildren(children)
 
-  const [customRangeSliderTrack] = findChildren(validChildren, RangeSliderTrack)
-  const [customRangeSliderStartThumb] = findChildren(
+  const customRangeSliderTrack = findChild(validChildren, RangeSliderTrack)
+  const customRangeSliderStartThumb = findChild(
     validChildren,
     RangeSliderStartThumb,
   )
-  const [customRangeSliderEndThumb] = findChildren(
+  const customRangeSliderEndThumb = findChild(
     validChildren,
     RangeSliderEndThumb,
   )

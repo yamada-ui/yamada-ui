@@ -5,11 +5,11 @@ import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import { motionForwardRef } from "@yamada-ui/motion"
 import {
   getValidChildren,
-  findChildren,
   omitChildren,
   isValidElement,
   isEmpty,
   cx,
+  findChild,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { DialogBody } from "./dialog-body"
@@ -92,14 +92,11 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
 
     const validChildren = getValidChildren(children)
 
-    const [customDialogOverlay] = findChildren(validChildren, DialogOverlay)
-    const [customDialogCloseButton] = findChildren(
-      validChildren,
-      DialogCloseButton,
-    )
-    const [customDialogHeader] = findChildren(validChildren, DialogHeader)
-    const [customDialogBody] = findChildren(validChildren, DialogBody)
-    const [customDialogFooter] = findChildren(validChildren, DialogFooter)
+    const customDialogOverlay = findChild(validChildren, DialogOverlay)
+    const customDialogCloseButton = findChild(validChildren, DialogCloseButton)
+    const customDialogHeader = findChild(validChildren, DialogHeader)
+    const customDialogBody = findChild(validChildren, DialogBody)
+    const customDialogFooter = findChild(validChildren, DialogFooter)
 
     const cloneChildren = !isEmpty(validChildren)
       ? omitChildren(

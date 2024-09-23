@@ -1,6 +1,6 @@
 import type { ThemeProps } from "@yamada-ui/core"
 import { omitThemeProps, useComponentStyle } from "@yamada-ui/core"
-import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
+import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef, useMotionAnimation } from "@yamada-ui/motion"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { Merge } from "@yamada-ui/utils"
@@ -27,7 +27,8 @@ interface RotateOptions {
    */
   defaultValue?: RotateIdent
   rotate?: number
-  duration?: MotionTransitionProps["duration"]
+  duration?: number
+  delay?: number
   /**
    * If `true`, the component is disabled.
    *
@@ -60,6 +61,7 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
     defaultValue = "from",
     onChange: onChangeProp,
     duration = 0.3,
+    delay = 0,
     rotate = 45,
     isDisabled = false,
     isReadOnly = false,
@@ -103,6 +105,7 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
       initial={{ opacity: 1, rotate: "0deg" }}
       transition={{
         duration,
+        delay,
       }}
       __css={style}
       {...rest}

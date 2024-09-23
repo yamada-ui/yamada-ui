@@ -8,7 +8,7 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
@@ -41,14 +41,14 @@ const validate = (value: string, type: PinInputProps["type"]) => {
   return regex.test(value)
 }
 
-type PinInputContext = {
+interface PinInputContext {
   getInputProps: (
     props: PinInputFieldProps & {
       index: number
       ref?: Ref<HTMLInputElement>
     },
   ) => PinInputFieldProps
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 const [PinInputProvider, usePinInputContext] = createContext<PinInputContext>({
@@ -59,7 +59,7 @@ const [PinInputProvider, usePinInputContext] = createContext<PinInputContext>({
 const { DescendantsContextProvider, useDescendants, useDescendant } =
   createDescendant<HTMLInputElement>()
 
-type PinInputOptions = {
+interface PinInputOptions {
   /**
    * The top-level id string that will be applied to the input fields.
    * The index of the input will be appended to this top-level id.
@@ -129,10 +129,11 @@ type PinInputOptions = {
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
 }
 
-export type PinInputProps = Omit<HTMLUIProps<"div">, "onChange" | "mask"> &
-  ThemeProps<"PinInput"> &
-  FormControlOptions &
-  PinInputOptions
+export interface PinInputProps
+  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "mask">,
+    ThemeProps<"PinInput">,
+    FormControlOptions,
+    PinInputOptions {}
 
 /**
  * `PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.
@@ -141,7 +142,7 @@ export type PinInputProps = Omit<HTMLUIProps<"div">, "onChange" | "mask"> &
  */
 export const PinInput = forwardRef<PinInputProps, "div">(
   ({ focusBorderColor, errorBorderColor, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("PinInput", {
+    const [styles, mergedProps] = useComponentMultiStyle("PinInput", {
       focusBorderColor,
       errorBorderColor,
       ...props,
@@ -386,7 +387,9 @@ export const PinInput = forwardRef<PinInputProps, "div">(
   },
 )
 
-export type PinInputFieldProps = HTMLUIProps<"input"> & FormControlOptions
+export interface PinInputFieldProps
+  extends HTMLUIProps<"input">,
+    FormControlOptions {}
 
 export const PinInputField = forwardRef<PinInputFieldProps, "input">(
   ({ className, ...rest }, ref) => {

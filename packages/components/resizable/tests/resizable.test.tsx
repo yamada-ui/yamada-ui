@@ -1,4 +1,3 @@
-import { Center } from "@yamada-ui/react"
 import { a11y, render } from "@yamada-ui/test"
 import {
   Resizable,
@@ -12,11 +11,11 @@ describe("<Resizable />", () => {
   test.skip("Resizable renders correctly", async () => {
     const { container } = render(
       <Resizable h="md" rounded="md" borderWidth="1px">
-        <ResizableItem as={Center}>One</ResizableItem>
+        <ResizableItem>One</ResizableItem>
 
         <ResizableTrigger />
 
-        <ResizableItem as={Center}>Two</ResizableItem>
+        <ResizableItem>Two</ResizableItem>
       </Resizable>,
     )
 
@@ -26,13 +25,13 @@ describe("<Resizable />", () => {
   test("The default size of the left panel should be 30 and 70", () => {
     const { container } = render(
       <Resizable h="md" rounded="md" borderWidth="1px">
-        <ResizableItem id="left-item" as={Center} defaultSize={30}>
+        <ResizableItem id="left-item" defaultSize={30}>
           One
         </ResizableItem>
 
         <ResizableTrigger />
 
-        <ResizableItem id="right-item" as={Center} defaultSize={70}>
+        <ResizableItem id="right-item" defaultSize={70}>
           Two
         </ResizableItem>
       </Resizable>,
@@ -65,18 +64,14 @@ describe("<ResizableTriggerIcon />", () => {
   test("icon renders correctly", async () => {
     const { getByTestId } = render(
       <Resizable>
-        <ResizableItem as={Center} defaultSize={50}>
-          One
-        </ResizableItem>
+        <ResizableItem defaultSize={50}>One</ResizableItem>
 
         <ResizableTrigger
           data-testid="resizable"
           icon={<ResizableTriggerIcon />}
         />
 
-        <ResizableItem as={Center} defaultSize={50}>
-          Two
-        </ResizableItem>
+        <ResizableItem defaultSize={50}>Two</ResizableItem>
       </Resizable>,
     )
 

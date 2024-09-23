@@ -1,5 +1,5 @@
-import { CloseButton } from "@yamada-ui/react"
 import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { CloseButton } from "../src"
 
 describe("<CloseButton />", () => {
   test("passes a11y test", async () => {

@@ -2,7 +2,7 @@ import {
   forwardRef,
   omitThemeProps,
   ui,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -19,12 +19,13 @@ import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import type { PieChartProps } from "./pie-chart"
 import { ChartProvider, useChart } from "./use-chart"
-import { useChartLabel, type UseChartLabelOptions } from "./use-chart-label"
+import { useChartLabel } from "./use-chart-label"
+import type { UseChartLabelOptions } from "./use-chart-label"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartTooltip } from "./use-chart-tooltip"
 import { usePieChart } from "./use-pie-chart"
 
-type DonutChartOptions = {
+interface DonutChartOptions {
   /**
    * Controls innerRadius of the chart segments.
    * If it is a number, it is the width of the radius.
@@ -35,9 +36,10 @@ type DonutChartOptions = {
   innerRadius?: number | string
 }
 
-export type DonutChartProps = PieChartProps &
-  DonutChartOptions &
-  UseChartLabelOptions
+export interface DonutChartProps
+  extends PieChartProps,
+    DonutChartOptions,
+    UseChartLabelOptions {}
 
 /**
  * `DonutChart` is a component for drawing donut charts to compare multiple sets of data.
@@ -45,7 +47,7 @@ export type DonutChartProps = PieChartProps &
  * @see Docs https://yamada-ui.com/components/data-display/donut-chart
  */
 export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("DonutChart", props)
+  const [styles, mergedProps] = useComponentMultiStyle("DonutChart", props)
   const {
     className,
     data,

@@ -1,6 +1,5 @@
-import { writeFile } from "fs/promises"
 import type { Transforms, ThemeToken } from "@yamada-ui/react"
-import { pseudosSelectors } from "@yamada-ui/react"
+import { pseudoSelectors } from "@yamada-ui/react"
 import { prettier, toKebabCase } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
@@ -12,7 +11,6 @@ import type { TransformOptions } from "./transform-props"
 import { transformMap } from "./transform-props"
 import type { UIOptions } from "./ui-props"
 import { additionalProps, atRuleProps, uiProps } from "./ui-props"
-import { OUT_PATH } from "."
 import type { CSSProperty, Properties } from "."
 
 const hasTransform = (
@@ -123,12 +121,12 @@ export const generateStyles = async (
   const atRuleStyles: string[] = []
   const styleProps: string[] = []
   const processSkipProps: string[] = []
-  const tokenProps: Partial<Record<ThemeToken, string[]>> = {}
+  const tokenProps: { [key in ThemeToken]?: string[] } = {}
   const pickedStyles: (CSSProperty & { type: string })[] = []
 
   checkProps(styles)
 
-  pseudosSelectors.forEach((selector) => {
+  pseudoSelectors.forEach((selector) => {
     const transforms = transformMap[selector]
 
     if (!transforms) return
@@ -333,14 +331,12 @@ export const generateStyles = async (
 
     export const layoutStyleProperties = [${layoutStyleProperties.join(", ")}] as const
 
-    export type StyleProps = {
+    export interface StyleProps {
       ${styleProps.join("\n")}
     }
   `
 
   const data = await prettier(content)
 
-  await writeFile(OUT_PATH, data)
-
-  return pickedStyles
+  return { data, pickedStyles }
 }

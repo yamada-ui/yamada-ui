@@ -5,9 +5,9 @@ import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
 import type { FC, HTMLAttributes } from "react"
 import { cloneElement, useRef } from "react"
-import { useAutocompleteContext } from "./use-autocomplete"
+import { useAutocompleteContext } from "./autocomplete-context"
 
-export type AutocompleteIconProps = HTMLUIProps<"div">
+export interface AutocompleteIconProps extends HTMLUIProps {}
 
 export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
   ({ className, children, __css, ...rest }, ref) => {
@@ -45,7 +45,7 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
   },
 )
 
-export type AutocompleteClearIconProps = AutocompleteIconProps & {
+export interface AutocompleteClearIconProps extends AutocompleteIconProps {
   disabled?: boolean
 }
 
@@ -77,7 +77,7 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
   )
 }
 
-export type AutocompleteItemIconProps = HTMLUIProps<"span">
+export interface AutocompleteItemIconProps extends HTMLUIProps<"span"> {}
 
 export const AutocompleteItemIcon = forwardRef<
   AutocompleteItemIconProps,

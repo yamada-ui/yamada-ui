@@ -173,7 +173,7 @@ describe("<RadarChart />", () => {
       })
 
       expect(
-        container.querySelectorAll(".ui-radar-chart__active-dot").length,
+        container.querySelectorAll(".ui-radar-chart__dot--active").length,
       ).toBeGreaterThan(0)
 
       rerender(
@@ -202,7 +202,7 @@ describe("<RadarChart />", () => {
       })
 
       expect(
-        container.querySelectorAll(".ui-radar-chart__active-dot"),
+        container.querySelectorAll(".ui-radar-chart__dot--active"),
       ).toHaveLength(0)
     })
 

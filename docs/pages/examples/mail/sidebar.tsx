@@ -22,7 +22,8 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import { type FC, memo } from "react"
+import { memo } from "react"
+import type { FC } from "react"
 import { Header } from "./header"
 
 export const MAIN_MENU_ITEMS = [
@@ -41,7 +42,7 @@ export const SUB_MENU_ITEMS = [
   { icon: Archive, label: "Promotions", num: 13 },
 ]
 
-type SidebarProps = {
+interface SidebarProps {
   isCollapse: boolean
 }
 
@@ -94,7 +95,7 @@ export const Sidebar: FC<SidebarProps> = memo(({ isCollapse }) => {
 
 Sidebar.displayName = "Sidebar"
 
-type SidebarItemProps = {
+interface SidebarItemProps {
   icon: Component<"svg", IconProps>
   label: string
   num?: number

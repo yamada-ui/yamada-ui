@@ -20,11 +20,11 @@ import type { CodeThemeNames } from "./code-theme"
 import { codeThemes } from "./code-theme"
 import { rehypePlugin, remarkUIComponent } from "./remark-ui-component"
 
-type UIComponents = {
+interface UIComponents {
   note?: FC<MarkdownComponentProps<"div">>
 }
 
-export type MarkdownComponents = Components & UIComponents
+export interface MarkdownComponents extends Components, UIComponents {}
 export type MarkdownComponentProps<Y extends keyof JSX.IntrinsicElements> =
   JSX.IntrinsicElements[Y]
 
@@ -46,7 +46,7 @@ const uiComponents = ({
     },
   }) as MarkdownComponents
 
-type MarkdownOptions = Options & {
+interface MarkdownOptions extends Options {
   /**
    * If provided, this will set the theme for the code.
    */
@@ -57,9 +57,10 @@ type MarkdownOptions = Options & {
   noteProps?: AlertProps
 }
 
-export type MarkdownProps = Omit<HTMLUIProps<"div">, "children"> &
-  ThemeProps<"Markdown"> &
-  MarkdownOptions
+export interface MarkdownProps
+  extends Omit<HTMLUIProps, "className" | "children">,
+    ThemeProps<"Markdown">,
+    MarkdownOptions {}
 
 /**
  * `Markdown` is a component that renders text in markdown format.
@@ -94,7 +95,7 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
     <ui.div
       as={ReactMarkdown}
       ref={ref}
-      className={cx("ui-markdown", className)}
+      className={cx("ui-markdown", className ?? undefined)}
       remarkPlugins={remarkPlugins}
       rehypePlugins={rehypePlugins}
       components={components}
@@ -104,7 +105,11 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   )
 })
 
-const Code: FC<MarkdownComponentProps<"code"> & MarkdownProps["codeProps"]> = ({
+interface CodeProps extends MarkdownComponentProps<"code"> {
+  theme?: CodeThemeNames | ColorModeArray<CodeThemeNames>
+}
+
+const Code: FC<CodeProps> = ({
   className = "",
   children,
   theme = "oneDark",

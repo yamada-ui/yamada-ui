@@ -1735,8 +1735,8 @@ export const shorthandStyles = {
 export type PseudoStyleProperty = keyof typeof pseudoStyles
 
 export const pseudoStyles = {
-  "&::before": { properties: "&::before", transform: transforms.content },
   "&::after": { properties: "&::after", transform: transforms.content },
+  "&::before": { properties: "&::before", transform: transforms.content },
 } as const satisfies StyleConfigs
 
 export type UIStyleProperty = keyof typeof uiStyles
@@ -2225,7 +2225,7 @@ export const layoutStyleProperties = [
   "gridArea",
 ] as const
 
-export type StyleProps = {
+export interface StyleProps {
   /**
    * The CSS `accent-color` property.
    *
@@ -6050,7 +6050,7 @@ export type StyleProps = {
    * ```jsx
    * <Box
    *   vars={[{ name:"space", token: "spaces", value: "md" }]
-   *   m="calc(var(--ui-space) * 2)"
+   *   m="calc($space * 2)"
    * >
    *   Box
    * </Box>

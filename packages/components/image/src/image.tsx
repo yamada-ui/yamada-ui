@@ -11,7 +11,7 @@ import { isValidElement, useMemo } from "react"
 import type { UseImageProps } from "./use-image"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
-type ImageOptions = {
+interface ImageOptions {
   /**
    * Fallback image `src` or element to show if image is loading or image fails.
    */
@@ -29,10 +29,11 @@ type ImageOptions = {
   fit?: CSSUIProps["objectFit"]
 }
 
-export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
-  ThemeProps<"Image"> &
-  UseImageProps &
-  ImageOptions
+export interface ImageProps
+  extends Omit<HTMLUIProps<"img">, keyof UseImageProps>,
+    ThemeProps<"Image">,
+    UseImageProps,
+    ImageOptions {}
 
 /**
  * `Image` is a component that displays images with fallback support.

@@ -217,7 +217,10 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { input: string; textarea: string }
+  interface Data {
+    input: string
+    textarea: string
+  }
 
   const defaultValues: Data = {
     input: "",

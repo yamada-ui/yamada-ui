@@ -18,9 +18,9 @@ import { cx, merge } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
 import { useMemo } from "react"
 
-export type UseNoticeOptions = NoticeConfigOptions
+export interface UseNoticeOptions extends NoticeConfigOptions {}
 
-export type NoticeOptions = {
+export interface NoticeOptions {
   id: string | number
   placement: NoticePlacement
   duration: UseNoticeOptions["duration"]
@@ -62,12 +62,13 @@ const getNoticePlacement = (
   }
 }
 
-type CreateNoticeOptions = Partial<
-  Pick<
-    NoticeOptions,
-    "id" | "placement" | "status" | "duration" | "onCloseComplete" | "style"
-  >
->
+interface CreateNoticeOptions
+  extends Partial<
+    Pick<
+      NoticeOptions,
+      "id" | "placement" | "status" | "duration" | "onCloseComplete" | "style"
+    >
+  > {}
 
 let counter = 0
 
@@ -168,7 +169,7 @@ type State = {
   [K in NoticePlacement]: NoticeOptions[]
 }
 
-type Store = {
+interface Store {
   subscribe: (onStoreChange: () => void) => () => void
   getSnapshot: () => State
   create: (
@@ -321,10 +322,11 @@ const createNoticeStore = (initialState: State): Store => {
 
 export const noticeStore = createNoticeStore(initialState)
 
-export type NoticeProps = Omit<AlertProps, keyof UseNoticeOptions> &
-  UseNoticeOptions & {
-    onClose?: () => void
-  }
+export interface NoticeProps
+  extends Omit<AlertProps, keyof UseNoticeOptions>,
+    UseNoticeOptions {
+  onClose?: () => void
+}
 
 const Notice: FC<NoticeProps> = ({
   variant = "basic",

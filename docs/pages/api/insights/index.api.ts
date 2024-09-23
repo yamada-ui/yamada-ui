@@ -158,13 +158,13 @@ const getInsights = (
   return summarizedInsights
 }
 
-type RequestQuery = {
+interface RequestQuery {
   start?: string
   end?: string
   summarize?: InsightSummarize
 }
 
-type ResponseData = {
+interface ResponseData {
   status: number
   message?: string
   data?: { currentInsights: Insights; prevInsights: Insights }

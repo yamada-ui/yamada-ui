@@ -1,6 +1,5 @@
 import { ui, ThemeProvider } from "@yamada-ui/core"
-import type { StyledTheme } from "@yamada-ui/core"
-import { extendConfig } from "@yamada-ui/react"
+import type { StyledTheme, ThemeConfig } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
 import {
   act,
@@ -10,6 +9,7 @@ import {
   screen,
   waitFor,
 } from "@yamada-ui/test"
+import { noop } from "@yamada-ui/utils"
 import type { FC } from "react"
 import {
   getBreakpointValue,
@@ -21,6 +21,8 @@ import {
 } from "../src"
 
 const theme: StyledTheme = {
+  themeScheme: "base",
+  changeThemeScheme: noop,
   breakpoints: {
     sm: "30em",
     md: "48em",
@@ -124,7 +126,7 @@ describe("useBreakpoint", () => {
     let error: Error | undefined
 
     try {
-      renderHook(() => useBreakpoint())
+      renderHook(() => useBreakpoint(), { withProvider: false })
     } catch (e) {
       if (e instanceof Error) error = e
     }
@@ -160,12 +162,12 @@ describe("useBreakpoint", () => {
     }
 
     const containerRef = { current: document.createElement("div") }
-    const config = extendConfig({
+    const config: ThemeConfig = {
       breakpoint: {
         containerRef,
         identifier: "@container",
       },
-    })
+    }
 
     const Component: FC = () => {
       const breakpoint = useBreakpoint()
@@ -235,7 +237,9 @@ describe("getBreakpointValue", () => {
     let error: Error | undefined
 
     try {
-      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"))
+      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
+        withProvider: false,
+      })
     } catch (e) {
       if (e instanceof Error) error = e
     }
@@ -249,7 +253,9 @@ describe("getBreakpointValue", () => {
     let error: Error | undefined
 
     try {
-      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"))
+      renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
+        withProvider: false,
+      })
     } catch (e) {
       if (e instanceof Error) error = e
     }

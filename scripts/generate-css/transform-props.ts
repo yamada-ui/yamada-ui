@@ -4,19 +4,19 @@ import type { Properties } from "."
 
 type TransformProperties = Properties | PseudoSelector
 
-export type TransformOptions = {
+export interface TransformOptions {
   transform: Transforms
   args?: string[]
 }
 
-type TransformValue = {
+interface TransformValue {
   properties: TransformProperties
   args?: string[]
 }
 
-type TransformProps = Partial<
-  Record<Transforms, (TransformProperties | TransformValue)[]>
->
+type TransformProps = {
+  [key in Transforms]?: (TransformProperties | TransformValue)[]
+}
 
 export const transformProps: TransformProps = {
   colorMix: tokens.colors,
@@ -135,5 +135,5 @@ export const transformMap = Object.entries(transformProps).reduce(
 
     return prev
   },
-  {} as Record<TransformProperties, TransformOptions[]>,
+  {} as { [key in TransformProperties]: TransformOptions[] },
 )

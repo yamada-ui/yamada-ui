@@ -1,8 +1,9 @@
 import { forwardRef, ui } from "@yamada-ui/core"
-import { cx, isArray, type Dict } from "@yamada-ui/utils"
+import { cx, isArray } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import { useTooltip } from "./use-chart"
 
-export type ChartTooltipProps = {
+export interface ChartTooltipProps {
   label?: string
   dataKey?: string
   payload: Dict[] | undefined

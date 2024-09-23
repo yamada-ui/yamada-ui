@@ -23,11 +23,9 @@ describe("<RangeDatePicker />", () => {
         />,
       )
       const selectDateFrom = new Date(new Date().setDate(7))
-      const dateStrFrom = new Date(
-        selectDateFrom.setHours(0, 0, 0, 0),
-      ).toString()
+      const valueFrom = new Date(selectDateFrom.setHours(0, 0, 0, 0)).getDate()
       const selectBtnFrom = container.querySelector(
-        `button[data-value="${dateStrFrom}"]`,
+        `button[data-value="${valueFrom}"]`,
       )
 
       fireEvent.click(selectBtnFrom!)
@@ -35,9 +33,9 @@ describe("<RangeDatePicker />", () => {
       expect(selectBtnFrom).toHaveAttribute("data-selected")
 
       const selectDateTo = new Date(new Date().setDate(14))
-      const dateStrTo = new Date(selectDateTo.setHours(0, 0, 0, 0)).toString()
+      const valueTo = new Date(selectDateTo.setHours(0, 0, 0, 0)).getDate()
       const selectBtnTo = container.querySelector(
-        `button[data-value="${dateStrTo}"]`,
+        `button[data-value="${valueTo}"]`,
       )
 
       fireEvent.click(selectBtnTo!)

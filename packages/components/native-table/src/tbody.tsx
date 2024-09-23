@@ -3,7 +3,7 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { useTableStyles } from "./native-table"
 
-export type TableBodyProps = HTMLUIProps<"tbody">
+export interface TableBodyProps extends HTMLUIProps<"tbody"> {}
 
 export const Tbody = forwardRef<TableBodyProps, "tbody">(
   ({ className, ...rest }, ref) => {

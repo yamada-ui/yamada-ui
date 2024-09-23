@@ -1,25 +1,21 @@
-import {
-  getVar,
-  useTheme,
-  type CSSUIObject,
-  type CSSUIProps,
+import { getVar, useTheme } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  RequiredPropGetter,
 } from "@yamada-ui/core"
-import { cx, type Dict } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
+import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
 import { useCallback, useMemo, useState } from "react"
 import type * as Recharts from "recharts"
 import { getClassName, getComponentProps } from "./chart-utils"
-import type {
-  CellProps,
-  ChartPropGetter,
-  PieChartProps,
-  PieProps,
-  RequiredChartPropGetter,
-} from "./chart.types"
+import type { CellProps, PieChartProps, PieProps } from "./chart.types"
 import { pieChartLabel, pieChartLabelLine } from "./pie-chart-label"
 import { pieChartProperties, pieProperties } from "./rechart-properties"
 
-export type UsePieChartOptions = {
+export interface UsePieChartOptions {
   /**
    * Chart data.
    */
@@ -110,7 +106,7 @@ export type UsePieChartOptions = {
   labelFormatter?: (value: number) => string
 }
 
-type UsePieChartProps = UsePieChartOptions & {
+interface UsePieChartProps extends UsePieChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -273,8 +269,7 @@ export const usePieChart = ({
     ],
   )
 
-  const getPieChartProps: ChartPropGetter<
-    "div",
+  const getPieChartProps: PropGetter<
     ComponentPropsWithoutRef<typeof Recharts.PieChart>,
     ComponentPropsWithoutRef<typeof Recharts.PieChart>
   > = useCallback(
@@ -287,8 +282,7 @@ export const usePieChart = ({
     [chartProps, chartClassName],
   )
 
-  const getPieProps: RequiredChartPropGetter<
-    "div",
+  const getPieProps: RequiredPropGetter<
     Partial<Recharts.PieProps>,
     Omit<Recharts.PieProps, "ref">
   > = useCallback(
@@ -329,10 +323,9 @@ export const usePieChart = ({
     ],
   )
 
-  const getCellProps: RequiredChartPropGetter<
-    "div",
+  const getCellProps: RequiredPropGetter<
     Omit<Recharts.CellProps, "ref"> & { index: number },
-    Omit<Recharts.CellProps, "ref">
+    Recharts.CellProps
   > = useCallback(
     ({ index, className: classNameProp, ...props }, ref = null) => {
       const { className, color } = cellPropList[index]

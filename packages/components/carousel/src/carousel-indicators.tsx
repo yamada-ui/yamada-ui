@@ -5,15 +5,16 @@ import type { FC, ReactElement } from "react"
 import { cloneElement } from "react"
 import { useCarouselContext, useCarouselIndicators } from "./use-carousel"
 
-type CarouselIndicatorsOptions = {
+interface CarouselIndicatorsOptions {
   /**
    * The custom carousel indicator to use.
    */
   component?: FC<{ index: number; isSelected: boolean }>
 }
 
-export type CarouselIndicatorsProps = Omit<HTMLUIProps<"div">, "children"> &
-  CarouselIndicatorsOptions
+export interface CarouselIndicatorsProps
+  extends HTMLUIProps,
+    CarouselIndicatorsOptions {}
 
 export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
   ({ className, component, ...rest }, ref) => {
@@ -60,7 +61,7 @@ export const CarouselIndicators = forwardRef<CarouselIndicatorsProps, "div">(
   },
 )
 
-type CarouselIndicatorProps = HTMLUIProps<"button">
+interface CarouselIndicatorProps extends HTMLUIProps<"button"> {}
 
 const CarouselIndicator: FC<CarouselIndicatorProps> = ({
   className,

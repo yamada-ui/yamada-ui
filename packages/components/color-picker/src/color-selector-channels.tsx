@@ -3,18 +3,20 @@ import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { Input } from "@yamada-ui/input"
 import type { InputProps } from "@yamada-ui/input"
 import { cx } from "@yamada-ui/utils"
-import { useId, type ReactNode } from "react"
+import { useId } from "react"
+import type { ReactNode } from "react"
 import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorSelectorChannelsOptions = {
+interface ColorSelectorChannelsOptions {
   /**
    * Props for the chancel component.
    */
   channelProps?: Omit<ColorSelectorChannelProps, "channelLabel">
 }
 
-export type ColorSelectorChannelsProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorSelectorChannelsOptions
+export interface ColorSelectorChannelsProps
+  extends Omit<HTMLUIProps, "children">,
+    ColorSelectorChannelsOptions {}
 
 export const ColorSelectorChannels = forwardRef<
   ColorSelectorChannelsProps,
@@ -46,7 +48,7 @@ export const ColorSelectorChannels = forwardRef<
   )
 })
 
-type ColorSelectorChannelOptions = {
+interface ColorSelectorChannelOptions {
   channelLabel?: ReactNode
 }
 

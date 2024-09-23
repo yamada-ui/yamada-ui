@@ -1,12 +1,12 @@
 import { Button, forwardRef, Link, Wrap } from "@yamada-ui/react"
-import type { ButtonProps, FlexProps, LinkProps } from "@yamada-ui/react"
+import type { ButtonProps, FlexProps, LinkProps, Merge } from "@yamada-ui/react"
 import { Github, Npm } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
 import type { FC } from "react"
 import { memo } from "react"
 
-export type RelatedLinksProps = FlexProps
+export interface RelatedLinksProps extends FlexProps {}
 
 export const RelatedLinks = memo(
   forwardRef<RelatedLinksProps, "div">(({ ...rest }, ref) => {
@@ -52,7 +52,7 @@ export const RelatedLinks = memo(
   }),
 )
 
-type DocLinkProps = ButtonProps & LinkProps
+export interface DocLinkProps extends Merge<LinkProps, ButtonProps> {}
 
 const DocumentLink: FC<DocLinkProps> = memo(({ ...rest }) => {
   return (

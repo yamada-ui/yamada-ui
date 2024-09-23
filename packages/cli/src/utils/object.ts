@@ -14,3 +14,9 @@ export const omitObject = <T extends Dict, K extends keyof T>(
 
   return result as Omit<T, K>
 }
+
+export const getObject = (obj: Dict, path: string) => {
+  const keys = path.split(".")
+
+  return keys.reduce((obj, key) => obj[key] ?? {}, obj)
+}

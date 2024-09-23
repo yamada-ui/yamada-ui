@@ -10,8 +10,9 @@ import type { Merge } from "@yamada-ui/utils"
 import type { ImageProps as NextImageProps } from "next/image"
 import NextImage from "next/image"
 
-export type ImageProps = Merge<HTMLUIProps<"img">, NextImageProps> &
-  ThemeProps<"Image">
+export interface ImageProps
+  extends Merge<HTMLUIProps<"img">, NextImageProps>,
+    ThemeProps<"Image"> {}
 
 const Component = ui<typeof NextImage, ImageProps>(NextImage, {
   disableStyleProp: (prop) => ["width", "height", "fill"].includes(prop),

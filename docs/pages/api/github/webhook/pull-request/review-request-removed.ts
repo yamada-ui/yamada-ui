@@ -1,10 +1,7 @@
 import { Octokit } from "@octokit/rest"
 import { sendDiscord } from "utils/discord"
-import {
-  getListEventsForTimeline,
-  recursiveOctokit,
-  type Event,
-} from "utils/github"
+import { getListEventsForTimeline, recursiveOctokit } from "utils/github"
+import type { Event } from "utils/github"
 import type { APIHandler } from "utils/next"
 import { DISCORD_REVIEW_COMMENT } from "./opened"
 

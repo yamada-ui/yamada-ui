@@ -1,5 +1,17 @@
 # @yamada-ui/cli
 
+## 1.2.0
+
+### Minor Changes
+
+- [#2825](https://github.com/yamada-ui/yamada-ui/pull/2825) [`3bb9fcf`](https://github.com/yamada-ui/yamada-ui/commit/3bb9fcfa9ba98c8d5a34db00d5f4c687afee4bc9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Theme's responsive object type definition can now be output.
+
+### Patch Changes
+
+- [#2803](https://github.com/yamada-ui/yamada-ui/pull/2803) [`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved type definition.
+
+- [#2825](https://github.com/yamada-ui/yamada-ui/pull/2825) [`3bb9fcf`](https://github.com/yamada-ui/yamada-ui/commit/3bb9fcfa9ba98c8d5a34db00d5f4c687afee4bc9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed a bug where the theme's `colors`, `sizes`, and `semantics` type definitions were not output correctly.
+
 ## 1.1.1
 
 ### Patch Changes

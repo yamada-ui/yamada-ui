@@ -34,6 +34,7 @@ export const withValue = () => {
   const breakpoint = useBreakpoint()
   const bg = useBreakpointValue({
     base: "red.500",
+    "2xl": "pink.500",
     xl: "blue.500",
     lg: "green.500",
     md: "yellow.500",

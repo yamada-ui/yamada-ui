@@ -1,5 +1,10 @@
 import { getVar, useTheme } from "@yamada-ui/core"
-import type { CSSUIObject, CSSUIProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  RequiredPropGetter,
+} from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import type { Dict } from "@yamada-ui/utils"
 import type { ComponentPropsWithoutRef } from "react"
@@ -11,9 +16,7 @@ import type {
   LineProps,
   LineChartProps,
   ReferenceLineProps,
-  ChartPropGetter,
   ChartCurveType,
-  RequiredChartPropGetter,
 } from "./chart.types"
 import {
   dotProperties,
@@ -21,7 +24,7 @@ import {
   lineProperties,
 } from "./rechart-properties"
 
-export type UseLineChartOptions = {
+export interface UseLineChartOptions {
   /**
    * Chart data.
    */
@@ -99,7 +102,7 @@ export type UseLineChartOptions = {
   yAxisLabel?: string
 }
 
-type UseLineChartProps = UseLineChartOptions & {
+interface UseLineChartProps extends UseLineChartOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -321,8 +324,7 @@ export const useLineChart = ({
     ],
   )
 
-  const getLineChartProps: ChartPropGetter<
-    "div",
+  const getLineChartProps: PropGetter<
     ComponentPropsWithoutRef<typeof Recharts.LineChart>,
     ComponentPropsWithoutRef<typeof Recharts.LineChart>
   > = useCallback(
@@ -351,19 +353,15 @@ export const useLineChart = ({
     ],
   )
 
-  const getLineProps: RequiredChartPropGetter<
-    "div",
-    {
-      index: number
-    },
+  const getLineProps: RequiredPropGetter<
+    Partial<Recharts.LineProps> & { index: number },
     Omit<Recharts.LineProps, "ref">
   > = useCallback(
-    ({ index, className: classNameProp, ...props }, ref = null) => {
+    ({ index, className: classNameProp, ...props }) => {
       const { color, className, dataKey, activeDot, dot, ...rest } =
         linePropList[index]
 
       return {
-        ref,
         className: cx(classNameProp, className),
         activeDot,
         dot,

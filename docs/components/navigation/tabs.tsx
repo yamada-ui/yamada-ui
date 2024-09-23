@@ -4,7 +4,7 @@ import { usePage } from "contexts"
 import { memo } from "react"
 import { NextLink } from "./next-link"
 
-export type TabsProps = BoxProps
+export interface TabsProps extends BoxProps {}
 
 export const Tabs = memo(
   forwardRef<TabsProps, "div">(({ ...rest }, ref) => {

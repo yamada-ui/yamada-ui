@@ -3,7 +3,7 @@ import { Link, Text } from "@yamada-ui/react"
 import type { HeadingProps } from "@yamada-ui/react"
 import type { FC } from "react"
 
-export type LinkedHeadingProps = HeadingProps
+export interface LinkedHeadingProps extends HeadingProps {}
 
 export const LinkedHeading: FC<LinkedHeadingProps> = ({
   id,

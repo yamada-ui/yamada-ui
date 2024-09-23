@@ -8,7 +8,7 @@ import { Highlight } from "./code-block"
 
 type PackageMangerNames = "pnpm" | "npm" | "yarn" | "bun"
 
-const PACKAGE_MANAGER_COMMANDS: Record<PackageMangerNames, string> = {
+const PACKAGE_MANAGER_COMMANDS: { [_key in PackageMangerNames]: string } = {
   pnpm: "pnpm add",
   npm: "npm install",
   yarn: "yarn add",
@@ -17,7 +17,10 @@ const PACKAGE_MANAGER_COMMANDS: Record<PackageMangerNames, string> = {
 
 const getCode = (
   selectedPackageName: PackageMangerNames & StringLiteral,
-  packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>,
+  packageNameOrCommand:
+    | string
+    | string[]
+    | { [_key in PackageMangerNames]: string },
 ): string => {
   if (isObject(packageNameOrCommand) && !isArray(packageNameOrCommand)) {
     return packageNameOrCommand[selectedPackageName]
@@ -33,8 +36,11 @@ const getCode = (
   }
 }
 
-export type PackageManagersProps = BoxProps & {
-  packageNameOrCommand: string | string[] | Record<PackageMangerNames, string>
+export interface PackageManagersProps extends BoxProps {
+  packageNameOrCommand:
+    | string
+    | string[]
+    | { [_key in PackageMangerNames]: string }
 }
 
 export const PackageManagers: FC<PackageManagersProps> = ({

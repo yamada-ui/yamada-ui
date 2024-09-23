@@ -3,13 +3,11 @@ import { TimerOff as TimerOffIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type TimerOffProps = LucideIconProps
-
 /**
  * `TimerOff` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const TimerOff = forwardRef<TimerOffProps, "svg">((props, ref) => (
+export const TimerOff = forwardRef<LucideIconProps, "svg">((props, ref) => (
   <LucideIcon ref={ref} as={TimerOffIcon} {...props} />
 ))

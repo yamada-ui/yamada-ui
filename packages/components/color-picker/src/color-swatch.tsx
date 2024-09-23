@@ -2,7 +2,7 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type {
   CSSUIObject,
@@ -15,8 +15,8 @@ import { cx } from "@yamada-ui/utils"
 const defaultOverlays = (
   background: CSSUIProps["color"],
   withShadow: boolean,
-): HTMLUIProps<"div">[] => {
-  let overlays: HTMLUIProps<"div">[] = [
+): HTMLUIProps[] => {
+  let overlays: HTMLUIProps[] = [
     {
       bgImage:
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
@@ -49,7 +49,7 @@ const defaultOverlays = (
   return overlays
 }
 
-type ColorSwatchOptions = {
+interface ColorSwatchOptions {
   /**
    * The color used for the swatch element.
    *
@@ -59,7 +59,7 @@ type ColorSwatchOptions = {
   /**
    * The overlay used for the swatch element.
    */
-  overlays?: HTMLUIProps<"div">[]
+  overlays?: HTMLUIProps[]
   /**
    * If `true`, the swatch element has an inner `box-shadow`.
    *
@@ -74,9 +74,10 @@ type ColorSwatchOptions = {
   isRounded?: boolean
 }
 
-export type ColorSwatchProps = Omit<HTMLUIProps<"div">, "color"> &
-  ThemeProps<"ColorSwatch"> &
-  ColorSwatchOptions
+export interface ColorSwatchProps
+  extends Omit<HTMLUIProps, "color">,
+    ThemeProps<"ColorSwatch">,
+    ColorSwatchOptions {}
 
 /**
  * `ColorSwatch` is a component that displays color samples.
@@ -84,7 +85,7 @@ export type ColorSwatchProps = Omit<HTMLUIProps<"div">, "color"> &
  * @see Docs https://yamada-ui.com/components/data-display/color-swatch
  */
 export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("ColorSwatch", props)
+  const [styles, mergedProps] = useComponentMultiStyle("ColorSwatch", props)
   const {
     className,
     color = "#ffffff00",

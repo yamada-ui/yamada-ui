@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -22,7 +22,7 @@ import { DatePickerProvider } from "./use-date-picker"
 import type { UseYearPickerProps } from "./use-year-picker"
 import { useYearPicker } from "./use-year-picker"
 
-type YearPickerOptions = {
+interface YearPickerOptions {
   /**
    * If `true`, display the year picker clear icon.
    *
@@ -40,11 +40,11 @@ type YearPickerOptions = {
   /**
    * Props for year picker container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for year picker container element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for year picker field element.
    */
@@ -71,9 +71,10 @@ type YearPickerOptions = {
   children?: ReactNode | FC<{ value: Date | undefined; onClose: () => void }>
 }
 
-export type YearPickerProps = ThemeProps<"DatePicker"> &
-  YearPickerOptions &
-  UseYearPickerProps
+export interface YearPickerProps
+  extends ThemeProps<"DatePicker">,
+    YearPickerOptions,
+    UseYearPickerProps {}
 
 /**
  * `YearPicker` is a component used for users to select a year.
@@ -81,7 +82,7 @@ export type YearPickerProps = ThemeProps<"DatePicker"> &
  * @see Docs https://yamada-ui.com/components/forms/year-picker
  */
 export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("YearPicker", props)
+  const [styles, mergedProps] = useComponentMultiStyle("YearPicker", props)
   let {
     className,
     children,

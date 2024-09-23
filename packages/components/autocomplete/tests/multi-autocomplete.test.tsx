@@ -1,6 +1,6 @@
-import type { AutocompleteItem } from "@yamada-ui/react"
-import { AutocompleteOption, MultiAutocomplete } from "@yamada-ui/react"
 import { render, screen, waitFor } from "@yamada-ui/test"
+import type { AutocompleteItem } from "../src"
+import { AutocompleteOption, MultiAutocomplete } from "../src"
 
 describe("<MultiAutoComplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-multi-autocomplete"

@@ -9,7 +9,7 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -36,7 +36,9 @@ import type {
 } from "react"
 import { cloneElement, useCallback, useMemo, useRef } from "react"
 
-type FileInputOptions = {
+const defaultFormat: (value: File, index: number) => string = ({ name }) => name
+
+interface FileInputOptions {
   /**
    * The border color when the input is focused.
    */
@@ -78,15 +80,15 @@ type FileInputOptions = {
   resetRef?: ForwardedRef<() => void>
 }
 
-type InputProps = Partial<Pick<HTMLInputElement, "accept" | "multiple">>
+interface InputProps
+  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">> {}
 
-export type FileInputProps = Omit<HTMLUIProps<"div">, "onChange" | "children"> &
-  ThemeProps<"Input"> &
-  InputProps &
-  FileInputOptions &
-  FormControlOptions
-
-const defaultFormat: (value: File, index: number) => string = ({ name }) => name
+export interface FileInputProps
+  extends Omit<HTMLUIProps, "defaultValue" | "onChange" | "children">,
+    ThemeProps<"Input">,
+    InputProps,
+    FileInputOptions,
+    FormControlOptions {}
 
 /**
  * `FileInput` is a component used for users to select files.
@@ -95,7 +97,7 @@ const defaultFormat: (value: File, index: number) => string = ({ name }) => name
  */
 export const FileInput = forwardRef<FileInputProps, "input">(
   ({ children, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("FileInput", props)
+    const [styles, mergedProps] = useComponentMultiStyle("FileInput", props)
     const {
       className,
       id,

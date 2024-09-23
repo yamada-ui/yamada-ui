@@ -6,7 +6,7 @@ import { cx } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
 import { useSelectContext, useSelectList } from "./use-select"
 
-export type SelectListProps = HTMLUIProps<"ul"> & {
+export interface SelectListProps extends HTMLUIProps<"ul"> {
   contentProps?: MotionPropsWithoutChildren
   header?: ReactNode
   footer?: ReactNode

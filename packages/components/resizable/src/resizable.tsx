@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
@@ -11,7 +11,7 @@ import { PanelGroup } from "react-resizable-panels"
 import type { UseResizableProps } from "./use-resizable"
 import { ResizableProvider, useResizable } from "./use-resizable"
 
-type ResizableOptions = {
+interface ResizableOptions {
   /**
    * Ref for resizable container element.
    */
@@ -23,14 +23,15 @@ type ResizableOptions = {
  *
  * @see Docs https://yamada-ui.com/components/data-display/resizable
  */
-export type ResizableProps = Omit<HTMLUIProps<"div">, "direction"> &
-  ThemeProps<"Resizable"> &
-  Omit<UseResizableProps, "ref"> &
-  ResizableOptions
+export interface ResizableProps
+  extends Omit<HTMLUIProps, "direction">,
+    ThemeProps<"Resizable">,
+    Omit<UseResizableProps, "ref">,
+    ResizableOptions {}
 
 export const Resizable = forwardRef<ResizableProps, "div">(
   ({ direction = "horizontal", ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Resizable", {
+    const [styles, mergedProps] = useComponentMultiStyle("Resizable", {
       direction,
       ...props,
     })

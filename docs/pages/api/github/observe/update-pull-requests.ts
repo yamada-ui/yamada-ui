@@ -3,10 +3,10 @@ import { isObject } from "@yamada-ui/react"
 import { sendDiscord } from "utils/discord"
 import {
   recursiveOctokit,
-  type Constant,
   getPullRequests as _getPullRequests,
   getListEventsForTimeline,
 } from "utils/github"
+import type { Constant } from "utils/github"
 import type { APIHandler } from "utils/next"
 
 type PullRequest = Awaited<ReturnType<typeof getPullRequest>>

@@ -67,28 +67,32 @@ export const MOTION_TRANSITION_DEFAULTS = {
   },
 } as const
 
-export const transitionEnter =
-  (transition?: Transition) =>
-  (
+export function transitionEnter(transition?: Transition) {
+  return function (
     delay?: MotionTransitionProps["delay"],
     duration?: MotionTransitionProps["duration"],
-  ): Transition => ({
-    ...(transition ?? MOTION_TRANSITION_DEFAULTS.enter),
-    ...(duration
-      ? { duration: isNumber(duration) ? duration : duration?.enter }
-      : {}),
-    delay: isNumber(delay) ? delay : delay?.enter,
-  })
+  ): Transition {
+    return {
+      ...(transition ?? MOTION_TRANSITION_DEFAULTS.enter),
+      ...(duration
+        ? { duration: isNumber(duration) ? duration : duration?.enter }
+        : {}),
+      delay: isNumber(delay) ? delay : delay?.enter,
+    }
+  }
+}
 
-export const transitionExit =
-  (transition?: Transition) =>
-  (
+export function transitionExit(transition?: Transition) {
+  return function (
     delay?: MotionTransitionProps["delay"],
     duration?: MotionTransitionProps["duration"],
-  ): Transition => ({
-    ...(transition ?? MOTION_TRANSITION_DEFAULTS.exit),
-    ...(duration
-      ? { duration: isNumber(duration) ? duration : duration?.exit }
-      : {}),
-    delay: isNumber(delay) ? delay : delay?.exit,
-  })
+  ): Transition {
+    return {
+      ...(transition ?? MOTION_TRANSITION_DEFAULTS.exit),
+      ...(duration
+        ? { duration: isNumber(duration) ? duration : duration?.exit }
+        : {}),
+      delay: isNumber(delay) ? delay : delay?.exit,
+    }
+  }
+}

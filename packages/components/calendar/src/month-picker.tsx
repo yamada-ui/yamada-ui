@@ -178,3 +178,6 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     </DatePickerProvider>
   )
 })
+
+MonthPicker.displayName = "MonthPicker"
+MonthPicker.__ui__ = "MOnthPicker"

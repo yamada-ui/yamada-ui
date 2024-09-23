@@ -183,6 +183,9 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   )
 })
 
+DatePicker.displayName = "DatePicker"
+DatePicker.__ui__ = "DatePicker"
+
 interface DatePickerFieldOptions {
   inputProps?: HTMLUIProps<"input">
 }
@@ -226,6 +229,9 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
     )
   },
 )
+
+DatePickerField.displayName = "DatePickerField"
+DatePickerField.__ui__ = "DatePickerField"
 
 export interface DatePickerIconProps extends Omit<HTMLUIProps, "clear"> {}
 
@@ -272,6 +278,9 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
     )
   },
 )
+
+DatePickerIcon.displayName = "DatePickerIcon"
+DatePickerIcon.__ui__ = "DatePickerIcon"
 
 export interface DatePickerCalendarIconProps extends IconProps {}
 

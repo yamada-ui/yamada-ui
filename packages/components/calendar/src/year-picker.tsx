@@ -178,3 +178,6 @@ export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
     </DatePickerProvider>
   )
 })
+
+YearPicker.displayName = "YearPicker"
+YearPicker.__ui__ = "YearPicker"

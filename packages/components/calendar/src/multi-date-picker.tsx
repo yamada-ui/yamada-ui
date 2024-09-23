@@ -222,6 +222,9 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
   },
 )
 
+MultiDatePicker.displayName = "MultiDatePicker"
+MultiDatePicker.__ui__ = "MultiDatePicker"
+
 interface MultiDatePickerFieldOptions {
   isOpen: boolean
   value: Date[]
@@ -351,3 +354,6 @@ export const MultiDatePickerField = forwardRef<
     )
   },
 )
+
+MultiDatePickerField.displayName = "MultiDatePickerField"
+MultiDatePickerField.__ui__ = "MultiDatePickerField"

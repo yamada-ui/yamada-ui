@@ -8,6 +8,6 @@ export const Loading: ComponentStyle<"Loading"> = {
   defaultProps: {
     variant: "oval",
     colorScheme: "primary",
-    size: "1em",
+    fontSize: "1em",
   },
 }

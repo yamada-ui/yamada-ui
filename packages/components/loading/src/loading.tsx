@@ -37,7 +37,7 @@ interface LoadingOptions {
 
 export interface LoadingProps
   extends Omit<IconProps, "variant">,
-    Pick<ThemeProps<"Loading">, "colorScheme">,
+    Omit<ThemeProps<"Loading">, "variant">,
     LoadingOptions {}
 
 /**
@@ -48,7 +48,7 @@ export interface LoadingProps
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
     { color, ...styles },
-    { variant = "oval", size = "1em", ...mergedProps },
+    { variant = "oval", colorScheme, ...mergedProps },
   ] = useComponentStyle("Loading", props)
   const {
     className,
@@ -62,12 +62,11 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const computedProps = useMemo<ComponentProps>(
     () => ({
       className: cx("ui-loading", className),
-      size,
-      vars: [
+      var: [
         {
           name: "color",
           token: "colors",
-          value: colorProp ?? (color as CSSUIProps["color"]),
+          value: colorProp ?? color ?? `${colorScheme}.500`,
         },
         {
           name: "secondary-color",
@@ -83,9 +82,9 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
     }),
     [
       className,
-      size,
       colorProp,
       color,
+      colorScheme,
       secondaryColor,
       duration,
       dur,

@@ -247,6 +247,24 @@ export interface LoadingComponentProps {
   onFinish: () => void
 }
 
+interface LoadingIconProps
+  extends HTMLUIProps<"svg">,
+    Omit<ThemeProps<"Loading">, "variant"> {
+  variant?: LoadingVariant
+  /**
+   * The CSS `color` property.
+   */
+  color?: CSSUIProps["color"]
+  /**
+   * The CSS `color` property.
+   */
+  secondaryColor?: CSSUIProps["color"]
+  /**
+   * The CSS `dur` property.
+   */
+  duration?: HTMLUIProps<"svg">["dur"]
+}
+
 export interface LoadingConfigOptions {
   /**
    * If `true`, loaded from the initial rendering.
@@ -257,21 +275,7 @@ export interface LoadingConfigOptions {
   /**
    * Props for loading icon element.
    */
-  icon?: {
-    variant?: LoadingVariant
-    /**
-     * The CSS `color` property.
-     */
-    color?: CSSUIProps["color"]
-    /**
-     * The CSS `color` property.
-     */
-    secondaryColor?: CSSUIProps["color"]
-    /**
-     * The CSS `box-size` property.
-     */
-    size?: CSSUIProps["boxSize"]
-  }
+  icon?: LoadingIconProps
   /**
    * Props for loading text element.
    */

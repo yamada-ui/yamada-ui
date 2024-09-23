@@ -7,19 +7,19 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { createContext, cx, getValidChildren } from "@yamada-ui/utils"
 
-const [ListProvider, useList] = createContext<Record<string, CSSUIObject>>({
+const [ListProvider, useList] = createContext<{ [key: string]: CSSUIObject }>({
   name: `ListContext`,
   errorMessage: `useList returned is 'undefined'. Seems you forgot to wrap the components in "<List />" `,
 })
 
-type ListOptions = {
+interface ListOptions {
   /**
    * The CSS `list-style-type` property.
    *
@@ -35,10 +35,13 @@ type ListOptions = {
    *
    * @default '2'
    */
-  gap?: CSSUIObject["gap"]
+  gap?: CSSUIProps["gap"]
 }
 
-export type ListProps = HTMLUIProps<"ul"> & ThemeProps<"List"> & ListOptions
+export interface ListProps
+  extends HTMLUIProps<"ul">,
+    ThemeProps<"List">,
+    ListOptions {}
 
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
@@ -46,7 +49,7 @@ export type ListProps = HTMLUIProps<"ul"> & ThemeProps<"List"> & ListOptions
  * @see Docs https://yamada-ui.com/components/data-display/list
  */
 export const List = forwardRef<ListProps, "ul">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("List", props)
+  const [styles, mergedProps] = useComponentMultiStyle("List", props)
   const {
     className,
     children,
@@ -90,7 +93,7 @@ export const DecimalList = forwardRef<ListProps, "ol">(({ ...rest }, ref) => {
   return <List ref={ref} as="ol" styleType="decimal" ms="1.2em" {...rest} />
 })
 
-export type ListItemProps = HTMLUIProps<"li">
+export interface ListItemProps extends HTMLUIProps<"li"> {}
 
 export const ListItem = forwardRef<ListItemProps, "li">(
   ({ className, ...rest }, ref) => {
@@ -109,7 +112,7 @@ export const ListItem = forwardRef<ListItemProps, "li">(
   },
 )
 
-export type ListIconProps = IconProps
+export interface ListIconProps extends IconProps {}
 
 export const ListIcon = forwardRef<ListIconProps, "svg">(
   ({ className, ...rest }, ref) => {

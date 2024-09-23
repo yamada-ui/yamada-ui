@@ -30,7 +30,7 @@ import type {
 } from "@yamada-ui/react"
 import { memo, useState } from "react"
 import type { MutableRefObject, FC } from "react"
-import { type MailItem } from "./data"
+import type { MailItem } from "./data"
 import { Header } from "./header"
 import { getTimestamp } from "./utils"
 

@@ -2,7 +2,7 @@ import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
@@ -11,7 +11,7 @@ import { cx } from "@yamada-ui/utils"
 import type { FC, HTMLAttributes, MouseEventHandler, ReactElement } from "react"
 import { useRef } from "react"
 
-type TagOptions = {
+interface TagOptions {
   /**
    * Icon to be displayed to the start of the tag.
    */
@@ -46,7 +46,10 @@ type TagOptions = {
   isDisabled?: boolean
 }
 
-export type TagProps = HTMLUIProps<"span"> & ThemeProps<"Tag"> & TagOptions
+export interface TagProps
+  extends HTMLUIProps<"span">,
+    ThemeProps<"Tag">,
+    TagOptions {}
 
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
@@ -54,7 +57,7 @@ export type TagProps = HTMLUIProps<"span"> & ThemeProps<"Tag"> & TagOptions
  * @see Docs https://yamada-ui.com/components/data-display/tag
  */
 export const Tag = forwardRef<TagProps, "span">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Tag", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Tag", props)
   const {
     className,
     startIcon,
@@ -111,7 +114,7 @@ type CloseButtonProps = HTMLUIProps<"span"> & { isDisabled?: boolean }
 const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const [styles] = useMultiComponentStyle("Tag", props)
+  const [styles] = useComponentMultiStyle("Tag", props)
 
   const css: CSSUIObject = {
     ...styles.closeButton,

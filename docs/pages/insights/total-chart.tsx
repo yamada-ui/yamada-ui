@@ -37,7 +37,7 @@ import { CountUp } from "components/transitions"
 import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
 
-export type TotalChartProps = StackProps & {
+export interface TotalChartProps extends StackProps {
   isLoading: boolean
 }
 
@@ -176,7 +176,7 @@ export const TotalChart = memo(
 
 TotalChart.displayName = "TotalChart"
 
-type AreaChartProps = {}
+interface AreaChartProps {}
 
 const AreaChart: FC<AreaChartProps> = memo(() => {
   const { locale } = useI18n()
@@ -231,13 +231,13 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
 
 AreaChart.displayName = "AreaChart"
 
-type BarChartProps = {}
+interface BarChartProps {}
 
 const BarChart: FC<BarChartProps> = memo(() => {
   const { currentInsights, users } = useInsights()
 
   const data = useMemo(() => {
-    const result: Record<string, Record<string, any>> = {}
+    const result: { [key: string]: { [key: string]: any } } = {}
 
     Object.values(currentInsights ?? {}).forEach((data) => {
       Object.entries(data).forEach(([user, data]) => {

@@ -18,7 +18,7 @@ import { defaultTheme, defaultConfig } from "@yamada-ui/theme"
 import type { Dict } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
 
-export type UIProviderProps = {
+export interface UIProviderProps {
   /**
    * The theme of the yamada ui.
    *

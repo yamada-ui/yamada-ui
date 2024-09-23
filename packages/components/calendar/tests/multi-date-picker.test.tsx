@@ -24,21 +24,19 @@ describe("<MultiDatePicker />", () => {
         />,
       )
       const selectDate = new Date(new Date().setDate(7))
-      const dateStr = new Date(selectDate.setHours(0, 0, 0, 0)).toString()
-      const selectBtn = container.querySelector(
-        `button[data-value="${dateStr}"]`,
-      )
+      const value = new Date(selectDate.setHours(0, 0, 0, 0)).getDate()
+      const selectBtn = container.querySelector(`button[data-value="${value}"]`)
 
       fireEvent.click(selectBtn!)
 
       expect(selectBtn).toHaveAttribute("data-selected")
 
       const selectDateSecond = new Date(new Date().setDate(14))
-      const dateStrSecond = new Date(
+      const valueSecond = new Date(
         selectDateSecond.setHours(0, 0, 0, 0),
-      ).toString()
+      ).getDate()
       const selectBtnSecond = container.querySelector(
-        `button[data-value="${dateStrSecond}"]`,
+        `button[data-value="${valueSecond}"]`,
       )
 
       fireEvent.click(selectBtnSecond!)

@@ -9,7 +9,7 @@ import { ColorSelectorSliders } from "./color-selector-sliders"
 import { ColorSwatch } from "./color-swatch"
 import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorSelectorBodyOptions = {
+interface ColorSelectorBodyOptions {
   /**
    * If `true`, display the result component.
    *
@@ -32,12 +32,13 @@ type ColorSelectorBodyOptions = {
   eyeDropperProps?: ColorSelectorEyeDropperProps
 }
 
-export type ColorSelectorBodyProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorSelectorBodyOptions &
-  Pick<
-    ColorSelectorSlidersProps,
-    "hueSliderRef" | "hueSliderProps" | "alphaSliderRef" | "alphaSliderProps"
-  >
+export interface ColorSelectorBodyProps
+  extends Omit<HTMLUIProps, "children">,
+    ColorSelectorBodyOptions,
+    Pick<
+      ColorSelectorSlidersProps,
+      "hueSliderRef" | "hueSliderProps" | "alphaSliderRef" | "alphaSliderProps"
+    > {}
 
 export const ColorSelectorBody = forwardRef<ColorSelectorBodyProps, "div">(
   (

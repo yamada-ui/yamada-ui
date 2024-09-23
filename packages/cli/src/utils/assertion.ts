@@ -1,4 +1,6 @@
-export type Dict<T = any> = Record<string, T>
+export interface Dict<T = any> {
+  [key: string]: T
+}
 
 export const isNumber = (value: any): value is number =>
   typeof value === "number"

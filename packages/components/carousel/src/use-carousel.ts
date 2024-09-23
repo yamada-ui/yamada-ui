@@ -3,8 +3,9 @@ import type {
   CSSUIObject,
   HTMLUIProps,
   CSSUIProps,
-  UIPropGetter,
-  RequiredUIPropGetter,
+  PropGetter,
+  RequiredPropGetter,
+  HTMLProps,
 } from "@yamada-ui/core"
 import { layoutStyleProperties } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
@@ -29,7 +30,7 @@ export type ResizeHandlerOptionType = EmblaOptionsType["watchResize"]
 export type SlidesHandlerOptionType = EmblaOptionsType["watchSlides"]
 export type CarouselControl = EmblaCarouselType
 
-type CarouselContext = {
+interface CarouselContext {
   carousel: CarouselControl | undefined
   indexes: number[]
   selectedIndex: number
@@ -38,7 +39,7 @@ type CarouselContext = {
   slidesToScroll: number
   slideSize: string | number
   gap: CSSUIProps["gap"]
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 export const [CarouselProvider, useCarouselContext] =
@@ -47,10 +48,8 @@ export const [CarouselProvider, useCarouselContext] =
     errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
   })
 
-export type UseCarouselProps = Omit<
-  HTMLUIProps<"div">,
-  "onChange" | "draggable" | "gap"
-> & {
+export interface UseCarouselProps
+  extends Omit<HTMLUIProps, "onChange" | "draggable" | "gap"> {
   /**
    * The index of the carousel slide.
    */
@@ -355,7 +354,7 @@ export const useCarousel = ({
     }
   }, [carousel, onScroll])
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...containerProps,
       ...props,
@@ -370,7 +369,7 @@ export const useCarousel = ({
     [containerProps],
   )
 
-  const getSlidesProps: UIPropGetter = useCallback(
+  const getSlidesProps: PropGetter = useCallback(
     (props = {}) => ({
       ...slidesProps,
       ...props,
@@ -396,7 +395,7 @@ export const useCarousel = ({
 
 export type UseCarouselReturn = ReturnType<typeof useCarousel>
 
-export type UseCarouselSlideProps = {
+export interface UseCarouselSlideProps {
   index?: number
 }
 
@@ -407,7 +406,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 
   const isSelected = index === selectedIndex
 
-  const getSlideProps: UIPropGetter = useCallback(
+  const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
       "data-index": index,
@@ -421,7 +420,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 
 export type UseCarouselSlideReturn = ReturnType<typeof useCarouselSlide>
 
-export type UseCarouselControlProps = Omit<IconButtonProps, "aria-label"> & {
+export interface UseCarouselControlProps extends Partial<IconButtonProps> {
   operation: "prev" | "next"
 }
 
@@ -448,7 +447,7 @@ export const useCarouselControl = ({
     }
   }, [carousel, isPrev])
 
-  const getControlProps: UIPropGetter<"button"> = useCallback(
+  const getControlProps: PropGetter<"button"> = useCallback(
     (props = {}, ref = null) => ({
       ...props,
       ref,
@@ -477,22 +476,24 @@ export const useCarouselIndicators = () => {
     [carousel],
   )
 
-  const getIndicatorProps: RequiredUIPropGetter<"button", { index: number }> =
-    useCallback(
-      ({ index, ...props }) => {
-        const isSelected = index === selectedIndex
+  const getIndicatorProps: RequiredPropGetter<
+    HTMLProps<"button"> & { index: number },
+    HTMLProps<"button">
+  > = useCallback(
+    ({ index, ...props }) => {
+      const isSelected = index === selectedIndex
 
-        return {
-          "aria-label": `Go to ${index + 1} slide`,
-          ...props,
-          key: index,
-          "data-index": index,
-          "data-selected": dataAttr(isSelected),
-          onClick: handlerAll(props.onClick, (ev) => onClick(ev, index)),
-        }
-      },
-      [onClick, selectedIndex],
-    )
+      return {
+        "aria-label": `Go to ${index + 1} slide`,
+        ...props,
+        key: index,
+        "data-index": index,
+        "data-selected": dataAttr(isSelected),
+        onClick: handlerAll(props.onClick, (ev) => onClick(ev, index)),
+      }
+    },
+    [onClick, selectedIndex],
+  )
 
   return { indexes, getIndicatorProps }
 }

@@ -1,11 +1,11 @@
 import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useModal } from "./modal"
+import { useModal } from "./modal-context"
 
-export type ModalBodyProps = HTMLUIProps<"main">
+export interface ModalBodyProps extends HTMLUIProps {}
 
-export const ModalBody = forwardRef<ModalBodyProps, "main">(
+export const ModalBody = forwardRef<ModalBodyProps, "div">(
   ({ className, __css, ...rest }, ref) => {
     const { styles, scrollBehavior } = useModal()
 

@@ -1,5 +1,19 @@
 # @yamada-ui/use-event-listener
 
+## 1.0.20
+
+### Patch Changes
+
+- Updated dependencies [[`db1c087`](https://github.com/yamada-ui/yamada-ui/commit/db1c087516c376ff3c19ff0916ff9d20a07d61c3)]:
+  - @yamada-ui/utils@1.5.1
+
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`1ca7345`](https://github.com/yamada-ui/yamada-ui/commit/1ca734576b8e32920130ebb52b83d0da15670732), [`5948777`](https://github.com/yamada-ui/yamada-ui/commit/594877728ebf14dde87d7280b11c92e28a2bde74)]:
+  - @yamada-ui/utils@1.5.0
+
 ## 1.0.18
 
 ### Patch Changes

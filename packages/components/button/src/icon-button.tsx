@@ -4,29 +4,30 @@ import type { ReactElement } from "react"
 import type { ButtonProps } from "./button"
 import { Button } from "./button"
 
-type IconButtonOptions = {
+interface IconButtonOptions {
   /**
    * The icon to be used in the button.
    */
   icon?: ReactElement
 }
 
-export type IconButtonProps = Omit<
-  ButtonProps,
-  | "startIcon"
-  | "endIcon"
-  | "leftIcon"
-  | "rightIcon"
-  | "loadingIcon"
-  | "loadingText"
-  | "loadingPlacement"
-> &
-  IconButtonOptions & {
-    /**
-     * The accessible label for the button.
-     */
-    "aria-label": string
-  }
+export interface IconButtonProps
+  extends Omit<
+      ButtonProps,
+      | "startIcon"
+      | "endIcon"
+      | "leftIcon"
+      | "rightIcon"
+      | "loadingIcon"
+      | "loadingText"
+      | "loadingPlacement"
+    >,
+    IconButtonOptions {
+  /**
+   * The accessible label for the button.
+   */
+  "aria-label": string
+}
 
 /**
  * `IconButton` is a component that displays an icon within a button.

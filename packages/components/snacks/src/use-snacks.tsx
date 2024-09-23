@@ -31,7 +31,7 @@ const createRender = (options: UseSnacksOptions): FC<SnackComponentProps> => {
   return Render
 }
 
-export type Snack = {
+export interface Snack {
   id: string | number
   duration: UseSnacksOptions["duration"]
   status: UseSnacksOptions["status"]
@@ -44,13 +44,11 @@ export type Snack = {
 
 let counter = 0
 
-type SnackMethodsOptions = Omit<
-  UseSnacksOptions,
-  "direction" | "limit" | "startIndex"
-> &
-  Partial<Pick<Snack, "id" | "onCloseComplete">>
+interface SnackMethodsOptions
+  extends Omit<UseSnacksOptions, "direction" | "limit" | "startIndex">,
+    Partial<Pick<Snack, "id" | "onCloseComplete">> {}
 
-export type UseSnacksOptions = SnackConfigOptions
+export interface UseSnacksOptions extends SnackConfigOptions {}
 
 /**
  * `useSnacks` is a custom hook for controlling notifications used in forms and the like.
@@ -157,11 +155,12 @@ export const useSnacks = (defaultOptions: UseSnacksOptions = {}) => {
 
 export type UseSnacksReturn = ReturnType<typeof useSnacks>
 
-export type SnackProps = Omit<AlertProps, keyof UseSnacksOptions> &
-  UseSnacksOptions & {
-    index: number
-    onClose?: () => void
-  }
+export interface SnackProps
+  extends Omit<AlertProps, keyof UseSnacksOptions>,
+    UseSnacksOptions {
+  index: number
+  onClose?: () => void
+}
 
 const defaultBoxShadow: CSSUIProps["boxShadow"] = [
   "0 -1px 3px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",

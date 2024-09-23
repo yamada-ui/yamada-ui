@@ -9,7 +9,7 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
 import {
@@ -20,6 +20,7 @@ import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading } from "@yamada-ui/loading"
 import type { FadeProps } from "@yamada-ui/transitions"
 import { Fade } from "@yamada-ui/transitions"
+import type { Merge } from "@yamada-ui/utils"
 import {
   assignRef,
   createContext,
@@ -36,12 +37,12 @@ import type {
 } from "react-dropzone-esm"
 import { useDropzone } from "react-dropzone-esm"
 
-type DropzoneContext = {
+interface DropzoneContext {
   isLoading?: boolean
   isDragAccept: boolean
   isDragReject: boolean
   isDragIdle: boolean
-  styles: Record<string, CSSUIObject>
+  styles: { [key: string]: CSSUIObject }
 }
 
 const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
@@ -49,7 +50,7 @@ const [DropzoneProvider, useDropzoneContext] = createContext<DropzoneContext>({
   errorMessage: `useDropzoneContext returned is 'undefined'. Seems you forgot to wrap the components in "<Dropzone />"`,
 })
 
-type DropzoneOptions = {
+interface DropzoneOptions {
   /**
    * The border color when the input is focused.
    */
@@ -82,11 +83,11 @@ type DropzoneOptions = {
   openRef?: ForwardedRef<() => void | undefined>
 }
 
-export type DropzoneProps = Omit<HTMLUIProps<"div">, "onDrop"> &
-  ThemeProps<"Dropzone"> &
-  DropzoneOptions &
-  FormControlOptions &
-  Omit<ReactDropzoneOptions, "accept">
+export interface DropzoneProps
+  extends Merge<HTMLUIProps, Omit<ReactDropzoneOptions, "accept">>,
+    ThemeProps<"Dropzone">,
+    DropzoneOptions,
+    FormControlOptions {}
 
 /**
  * `Dropzone` is a component used for uploading files via drag and drop.
@@ -94,7 +95,7 @@ export type DropzoneProps = Omit<HTMLUIProps<"div">, "onDrop"> &
  * @see Docs https://yamada-ui.com/components/forms/dropzone
  */
 export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Dropzone", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Dropzone", props)
   const {
     id,
     name,
@@ -175,7 +176,7 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
         className={cx("ui-dropzone", className)}
         __css={css}
         {...containerProps}
-        {...getRootProps()}
+        {...getRootProps({})}
         data-accept={dataAttr(isDragAccept)}
         data-reject={dataAttr(isDragReject)}
         data-idle={dataAttr(isDragIdle)}
@@ -195,7 +196,9 @@ export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   )
 })
 
-type LoadingOverlayProps = FadeProps & { loadingProps?: LoadingProps }
+interface LoadingOverlayProps extends FadeProps {
+  loadingProps?: LoadingProps
+}
 
 const LoadingOverlay: FC<LoadingOverlayProps> = ({ loadingProps, ...rest }) => {
   const { isLoading, styles } = useDropzoneContext()

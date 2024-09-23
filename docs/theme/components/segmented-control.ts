@@ -1,8 +1,5 @@
-import {
-  isGray,
-  type ComponentMultiStyle,
-  isAccessible,
-} from "@yamada-ui/react"
+import { isGray, isAccessible } from "@yamada-ui/react"
+import type { ComponentMultiStyle } from "@yamada-ui/react"
 
 export const SegmentedControl: ComponentMultiStyle = {
   variants: {

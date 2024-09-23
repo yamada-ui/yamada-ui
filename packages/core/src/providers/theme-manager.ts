@@ -3,7 +3,7 @@ import { THEME_SCHEME_STORAGE_KEY } from "./theme-script"
 
 const hasSupport = !!globalThis?.document
 
-export type ThemeSchemeManager = {
+export interface ThemeSchemeManager {
   type: "cookie" | "localStorage"
   ssr?: boolean
   get: (

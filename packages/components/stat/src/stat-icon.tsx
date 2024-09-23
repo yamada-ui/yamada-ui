@@ -3,16 +3,18 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import { useStat } from "./stat"
+import { useStat } from "./stat-context"
 
-type StatIconOptions = {
+interface StatIconOptions {
   /**
    * @default "increase"
    */
   type?: "increase" | "decrease"
 }
 
-export type StatIconProps = IconProps & StatIconOptions
+export interface StatIconProps
+  extends Omit<IconProps, "type">,
+    StatIconOptions {}
 
 export const StatIcon = forwardRef<StatIconProps, "svg">(
   ({ className, type = "increase", ...rest }, ref) => {

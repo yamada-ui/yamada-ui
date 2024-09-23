@@ -3,9 +3,13 @@ import type { FlexProps, ImageProps } from "@yamada-ui/react"
 import { CONSTANT } from "constant"
 import type { FC } from "react"
 
-type Item = ImageProps & { href: string }
+interface Item extends ImageProps {
+  href: string
+}
 
-export type SponsorsProps = FlexProps & { type: string }
+export interface SponsorsProps extends FlexProps {
+  type: string
+}
 
 export const Sponsors: FC<SponsorsProps> = ({ type, ...rest }) => {
   let h: string

@@ -29,7 +29,7 @@ import type { FC, MutableRefObject, ReactNode } from "react"
 import { PRIORITY, STATUS, VIEW } from "./data"
 import type { Priority, Status, View } from "./data"
 
-export type FilterProps = GridProps & {
+export interface FilterProps extends GridProps {
   titleRef: MutableRefObject<(value: string) => void>
   statusRef: MutableRefObject<(value: Status[]) => void>
   priorityRef: MutableRefObject<(value: Priority[]) => void>
@@ -97,7 +97,7 @@ export const Filter: FC<FilterProps> = memo(
 
 Filter.displayName = "Filter"
 
-type TitleInputProps = InputProps & {
+interface TitleInputProps extends InputProps {
   passValueRef: MutableRefObject<(value: string) => void>
   passHasRef: MutableRefObject<(hasValue: boolean) => void>
   resetRef: MutableRefObject<() => void>
@@ -136,7 +136,8 @@ const TitleInput: FC<TitleInputProps> = memo(
 
 TitleInput.displayName = "TitleInput"
 
-type FilterControlButtonProps<T extends Status | Priority> = MenuProps & {
+interface FilterControlButtonProps<T extends Status | Priority>
+  extends MenuProps {
   label: ReactNode
   icon?: Component<"svg", IconProps>
   items: T extends Status ? typeof STATUS : typeof PRIORITY
@@ -245,7 +246,7 @@ const FilterControlButton = <T extends Status | Priority>({
 
 FilterControlButton.displayName = "FilterControlButton"
 
-type ResetButtonProps = ButtonProps & {
+interface ResetButtonProps extends ButtonProps {
   hasTitleRef: MutableRefObject<(hasValue: boolean) => void>
   hasStatusRef: MutableRefObject<(hasValue: boolean) => void>
   hasPriorityRef: MutableRefObject<(hasValue: boolean) => void>
@@ -310,7 +311,7 @@ const ResetButton: FC<ResetButtonProps> = ({
   ) : null
 }
 
-type ViewControlButtonProps = MenuProps & {
+interface ViewControlButtonProps extends MenuProps {
   viewRef: MutableRefObject<(value: View[]) => void>
   buttonProps?: ButtonProps
 }

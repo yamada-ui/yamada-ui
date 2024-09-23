@@ -2,7 +2,7 @@ import { forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 
-export type DotsProps = IconProps & {
+export interface DotsProps extends IconProps {
   /**
    * The CSS `dur` property.
    *

@@ -34,7 +34,7 @@ import { useState } from 'react'
 import { memo } from 'react'
 import { FC } from 'react'
 
-export type HeaderProps = CenterProps
+export interface HeaderProps extends CenterProps {}
 
 export const Header: FC<HeaderProps> = ({ ...rest }) => {
   const ref = useRef<HTMLHeadingElement>()
@@ -103,7 +103,7 @@ export const Header: FC<HeaderProps> = ({ ...rest }) => {
   )
 }
 
-type ColorModeButtonProps = Omit<IconButtonProps, 'aria-label'> & {
+type ColorModeButtonProps = Partial<IconButtonProps> & {
   menuProps?: MenuProps
 }
 
@@ -161,7 +161,7 @@ const ColorModeButton: FC<ColorModeButtonProps> = memo(({ menuProps, ...rest }) 
 
 ColorModeButton.displayName = 'ColorModeButton'
 
-type ThemeSchemeButtonProps = Omit<IconButtonProps, 'aria-label'> & {
+type ThemeSchemeButtonProps = Partial<IconButtonProps> & {
   popoverProps?: PopoverProps
 }
 

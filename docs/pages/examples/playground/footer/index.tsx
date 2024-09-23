@@ -4,7 +4,7 @@ import type { StackProps } from "@yamada-ui/react"
 import { memo } from "react"
 import type { FC } from "react"
 
-export type FooterProps = StackProps & {}
+export interface FooterProps extends StackProps {}
 
 export const Footer: FC<FooterProps> = memo(({ ...rest }) => {
   return (

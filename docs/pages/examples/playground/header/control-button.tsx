@@ -11,7 +11,7 @@ import { memo } from "react"
 import type { FC } from "react"
 import type { ModalType } from "."
 
-export type ControlButtonProps = Omit<IconButtonProps, "aria-label"> & {
+export interface ControlButtonProps extends Partial<IconButtonProps> {
   menuProps?: MenuProps
   onOpen: (type: ModalType) => void
 }

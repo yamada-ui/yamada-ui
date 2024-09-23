@@ -18,7 +18,7 @@ import type {
 import { memo } from "react"
 import type { FC } from "react"
 
-export type ShareButtonProps = ButtonProps & {
+export interface ShareButtonProps extends ButtonProps {
   popoverProps?: PopoverProps
   popoverContentProps?: PopoverContentProps
 }

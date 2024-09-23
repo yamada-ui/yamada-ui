@@ -3,6 +3,7 @@ import { ThemeProvider, ColorModeProvider } from "@yamada-ui/core"
 import type { MatchMediaMock } from "@yamada-ui/test"
 import { renderHook, mocks } from "@yamada-ui/test"
 
+import { noop } from "@yamada-ui/utils"
 import { getValue, useValue } from "../src"
 
 describe("useValue", () => {
@@ -83,10 +84,48 @@ describe("useValue", () => {
     })
     expect(result.current).toBe("normalValue")
   })
+
+  test("Returns the correct value when passing an array containing objects for breakpoints", () => {
+    const { result } = renderHook(
+      () =>
+        useValue([
+          { base: "light-base", md: "light-md" },
+          { base: "dark-base", md: "dark-md" },
+        ]),
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme}>
+            <ColorModeProvider>{children}</ColorModeProvider>
+          </ThemeProvider>
+        ),
+      },
+    )
+    expect(result.current).toBe("light-base")
+  })
+
+  test("Returns the correct value when passing an object containing arrays for color mode", () => {
+    const { result } = renderHook(
+      () =>
+        useValue({
+          base: ["base-light", "base-dark"],
+          md: ["md-light", "md-dark"],
+        }),
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme={theme}>
+            <ColorModeProvider>{children}</ColorModeProvider>
+          </ThemeProvider>
+        ),
+      },
+    )
+    expect(result.current).toBe("base-light")
+  })
 })
 
 describe("getValue", () => {
   const theme: StyledTheme = {
+    themeScheme: "base",
+    changeThemeScheme: noop,
     breakpoints: {
       sm: "30em",
       md: "48em",
@@ -199,5 +238,21 @@ describe("getValue", () => {
   test("Returns the same value when passed a normal value", () => {
     const value = getValue("normalValue")(theme, "light", "base")
     expect(value).toBe("normalValue")
+  })
+
+  test("Returns the correct value when passing an array containing objects for breakpoints", () => {
+    const value = getValue([
+      { base: "light-base", md: "light-md" },
+      { base: "dark-base", md: "dark-md" },
+    ])(theme, "light", "base")
+    expect(value).toStrictEqual({ base: "light-base", md: "light-md" })
+  })
+
+  test("Returns the correct value when passing an object containing arrays for color mode", () => {
+    const value = getValue({
+      base: ["base-light", "base-dark"],
+      md: ["md-light", "md-dark"],
+    })(theme, "light", "base")
+    expect(value).toBe("base-light")
   })
 })

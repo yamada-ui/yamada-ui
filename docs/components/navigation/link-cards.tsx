@@ -4,7 +4,9 @@ import { usePage } from "contexts"
 import { memo } from "react"
 import { LinkCard } from "./link-card"
 
-export type LinkCardsProps = GridProps & { with_description?: boolean }
+export interface LinkCardsProps extends GridProps {
+  with_description?: boolean
+}
 
 export const LinkCards = memo(
   forwardRef<LinkCardsProps, "div">(

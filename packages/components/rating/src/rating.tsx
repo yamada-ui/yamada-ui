@@ -2,14 +2,15 @@ import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
+import { RatingProvider } from "./rating-context"
 import type { UseRatingProps } from "./use-rating"
-import { RatingProvider, useRating } from "./use-rating"
+import { useRating } from "./use-rating"
 
-export type RatingProps = ThemeProps<"Rating"> & UseRatingProps
+export interface RatingProps extends ThemeProps<"Rating">, UseRatingProps {}
 
 /**
  * `Rating` is a component used to allow users to provide ratings.
@@ -17,7 +18,7 @@ export type RatingProps = ThemeProps<"Rating"> & UseRatingProps
  * @see Docs https://yamada-ui.com/components/forms/rating
  */
 export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Rating", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Rating", props)
   const { className, ...computedProps } = omitThemeProps(mergedProps)
 
   const { getContainerProps, children, ...rest } = useRating(computedProps)

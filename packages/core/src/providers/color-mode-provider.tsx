@@ -23,7 +23,7 @@ import { useEnvironment } from "./environment-provider"
 
 const { localStorage } = colorModeManager
 
-type ColorModeContext = {
+interface ColorModeContext {
   forced?: boolean
   colorMode: ColorMode
   internalColorMode: ColorModeWithSystem
@@ -40,7 +40,7 @@ const getColorMode =
 
 export const ColorModeContext = createContext({} as ColorModeContext)
 
-export type ColorModeProviderProps = {
+export interface ColorModeProviderProps {
   colorMode?: ColorMode
   /**
    * The config of the yamada ui.
@@ -67,7 +67,10 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   colorMode: defaultColorMode,
   colorModeManager = localStorage,
   storageKey,
-  config: { initialColorMode = "light", disableTransitionOnChange = true } = {},
+  config: {
+    initialColorMode = "light" as ColorModeWithSystem,
+    disableTransitionOnChange = true,
+  } = {},
   children,
 }) => {
   const environment = useEnvironment()
@@ -167,7 +170,7 @@ export const useColorMode = () => {
   )
 }
 
-export type UseSystemColorModeProps = {
+export interface UseSystemColorModeProps {
   initialColorMode?: ColorMode
   environment?: Environment
   callback?: (colorMode: ColorMode) => void
@@ -207,17 +210,14 @@ export const useSystemColorMode = ({
  *
  * @see Docs https://yamada-ui.com/hooks/use-color-mode-value
  */
-export const useColorModeValue = <L extends any, D extends any>(
-  light: L,
-  dark: D,
-): L | D => {
+export const useColorModeValue = <L, D>(light: L, dark: D): L | D => {
   const { colorMode } = useColorMode()
 
   return getColorModeValue<L, D>(light, dark)(colorMode)
 }
 
 export const getColorModeValue =
-  <L extends any, D extends any>(light: L, dark: D) =>
+  <L, D>(light: L, dark: D) =>
   (colorMode: ColorMode): L | D => {
     return colorMode === "light" ? light : dark
   }

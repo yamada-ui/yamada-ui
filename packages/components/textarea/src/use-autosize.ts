@@ -62,9 +62,9 @@ type SizingProps = Extract<
   keyof CSSStyleDeclaration
 >
 
-type SizingStyle = Pick<CSSStyleDeclaration, SizingProps>
+interface SizingStyle extends Pick<CSSStyleDeclaration, SizingProps> {}
 
-type SizingData = {
+interface SizingData {
   sizingStyle: SizingStyle
   paddingSize: number
   borderSize: number

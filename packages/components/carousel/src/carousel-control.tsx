@@ -6,7 +6,7 @@ import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useCarouselContext, useCarouselControl } from "./use-carousel"
 
-export type CarouselControlProps = Omit<IconButtonProps, "aria-label">
+export interface CarouselControlProps extends Partial<IconButtonProps> {}
 
 export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {

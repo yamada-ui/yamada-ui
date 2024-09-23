@@ -1,12 +1,13 @@
 import { getVar, useTheme } from "@yamada-ui/core"
+import type { FC } from "react"
 
-export type AreaSplitProps = {
+export interface AreaSplitProps {
   offset: number
   id?: string
   fillOpacity: number | string | undefined
 }
 
-export const AreaSplit = ({ offset, id, fillOpacity }: AreaSplitProps) => {
+export const AreaSplit: FC<AreaSplitProps> = ({ offset, id, fillOpacity }) => {
   const { theme } = useTheme()
 
   return (

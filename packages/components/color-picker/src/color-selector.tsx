@@ -2,7 +2,7 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { cx, runIfFunc } from "@yamada-ui/utils"
@@ -18,7 +18,7 @@ import { SaturationSlider } from "./saturation-slider"
 import type { UseColorSelectorProps } from "./use-color-selector"
 import { ColorSelectorProvider, useColorSelector } from "./use-color-selector"
 
-type ColorSelectorOptions = {
+interface ColorSelectorOptions {
   /**
    * If `true`, display the saturation, hue, alpha, channels and eye dropper component.
    *
@@ -54,25 +54,26 @@ type ColorSelectorOptions = {
   children?: ReactNode | FC<{ value: string }>
 }
 
-export type ColorSelectorProps = ThemeProps<"ColorSelector"> &
-  UseColorSelectorProps &
-  ColorSelectorOptions &
-  Pick<
-    ColorSelectorBodyProps,
-    | "withResult"
-    | "withEyeDropper"
-    | "eyeDropperRef"
-    | "eyeDropperProps"
-    | "hueSliderRef"
-    | "hueSliderProps"
-    | "alphaSliderRef"
-    | "alphaSliderProps"
-  > &
-  Pick<
-    ColorSelectorSwatchesProps,
-    "swatchesLabel" | "swatches" | "swatchesColumns" | "swatchProps"
-  > &
-  Pick<ColorSelectorChannelsProps, "channelProps">
+export interface ColorSelectorProps
+  extends ThemeProps<"ColorSelector">,
+    UseColorSelectorProps,
+    ColorSelectorOptions,
+    Pick<
+      ColorSelectorBodyProps,
+      | "withResult"
+      | "withEyeDropper"
+      | "eyeDropperRef"
+      | "eyeDropperProps"
+      | "hueSliderRef"
+      | "hueSliderProps"
+      | "alphaSliderRef"
+      | "alphaSliderProps"
+    >,
+    Pick<
+      ColorSelectorSwatchesProps,
+      "swatchesLabel" | "swatches" | "swatchesColumns" | "swatchProps"
+    >,
+    Pick<ColorSelectorChannelsProps, "channelProps"> {}
 
 /**
  * `ColorSelector` is a component used by the user to select a color.
@@ -81,7 +82,7 @@ export type ColorSelectorProps = ThemeProps<"ColorSelector"> &
  */
 export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
   ({ size, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("ColorSelector", {
+    const [styles, mergedProps] = useComponentMultiStyle("ColorSelector", {
       size,
       ...props,
     })

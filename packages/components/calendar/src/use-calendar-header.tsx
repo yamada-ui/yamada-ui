@@ -1,4 +1,4 @@
-import type { UIPropGetter, RequiredUIPropGetter } from "@yamada-ui/core"
+import type { HTMLProps, PropGetter, RequiredPropGetter } from "@yamada-ui/core"
 import { handlerAll, dataAttr, ariaAttr, assignRef } from "@yamada-ui/utils"
 import dayjs from "dayjs"
 import type { KeyboardEvent } from "react"
@@ -6,7 +6,7 @@ import { useCallback } from "react"
 import { isMonthInRange } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
 
-export type UseCalendarHeaderProps = {
+export interface UseCalendarHeaderProps {
   index?: number
 }
 
@@ -97,7 +97,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
-      const actions: Record<string, Function | undefined> = {
+      const actions: { [key: string]: Function | undefined } = {
         ArrowDown: onChangeType,
         ArrowLeft: () => {
           const isDisabled = (() => {
@@ -158,7 +158,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     ],
   )
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
       onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
@@ -166,10 +166,9 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     [onKeyDown],
   )
 
-  const getControlProps: RequiredUIPropGetter<
-    "button",
-    { operation: "prev" | "next" },
-    { "aria-label": string }
+  const getControlProps: RequiredPropGetter<
+    HTMLProps<"button"> & { operation: "prev" | "next" },
+    HTMLProps<"button"> & { "aria-label": string }
   > = useCallback(
     ({ operation, ...props }) => {
       const isPrev = operation === "prev"
@@ -238,7 +237,7 @@ export const useCalendarHeader = ({ index }: UseCalendarHeaderProps) => {
     ],
   )
 
-  const getLabelProps: UIPropGetter<"button"> = useCallback(
+  const getLabelProps: PropGetter<"button"> = useCallback(
     (props = {}) => {
       return {
         pointerEvents: type !== "year" ? "auto" : "none",

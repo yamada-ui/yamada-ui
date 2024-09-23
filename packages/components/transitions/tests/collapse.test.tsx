@@ -1,5 +1,5 @@
-import { Button, useDisclosure } from "@yamada-ui/react"
 import { a11y, render, waitFor, screen } from "@yamada-ui/test"
+import { useState } from "react"
 import { Collapse } from "../src"
 
 describe("<Collapse />", () => {
@@ -9,11 +9,11 @@ describe("<Collapse />", () => {
 
   test("toggles visibility on isOpen change", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
           <Collapse isOpen={isOpen}>Collapse</Collapse>
         </>
       )
@@ -54,11 +54,11 @@ describe("<Collapse />", () => {
 
   test("height changes correctly after isOpen set to true", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
           <Collapse startingHeight={50} endingHeight={200} isOpen={isOpen}>
             Collapse
           </Collapse>
@@ -78,11 +78,11 @@ describe("<Collapse />", () => {
 
   test("unmountOnExit works correctly", async () => {
     const TestComponent = () => {
-      const { isOpen, onToggle } = useDisclosure()
+      const [isOpen, setIsOpen] = useState(false)
 
       return (
         <>
-          <Button onClick={onToggle}>button</Button>
+          <button onClick={() => setIsOpen((prev) => !prev)}>button</button>
           <Collapse isOpen={isOpen} unmountOnExit>
             Collapse
           </Collapse>

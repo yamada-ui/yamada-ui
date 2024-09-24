@@ -71,6 +71,12 @@ export interface Component<Y extends As, D extends object = {}>
   <M extends As = Y>(props: ComponentProps<Y, M, D>): JSX.Element
 }
 
+export type FC<Y = {}> = FunctionComponent<Y>
+
+export interface FunctionComponent<Y = {}> extends ComponentArgs {
+  (props: Y, deprecatedLegacyContext?: any): React.ReactNode
+}
+
 export type As = React.ElementType
 
 export type HTMLUIComponents = {

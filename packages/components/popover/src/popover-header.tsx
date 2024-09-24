@@ -26,3 +26,6 @@ export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
     )
   },
 )
+
+PopoverHeader.displayName = "PopoverHeader"
+PopoverHeader.__ui__ = "PopoverHeader"

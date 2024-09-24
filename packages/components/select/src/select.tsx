@@ -275,3 +275,6 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
     )
   },
 )
+
+Select.displayName = "Select"
+Select.__ui__ = "Select"

@@ -157,11 +157,10 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       color,
       ...styles.container,
     }
-    const popoverProps = getPopoverProps()
 
     return (
       <ColorPickerProvider value={{ styles, value, ...rest }}>
-        <Popover {...popoverProps}>
+        <Popover {...getPopoverProps()}>
           <ui.div
             className={cx("ui-color-picker", className)}
             __css={css}

@@ -21,3 +21,6 @@ export const AvatarIcon: FC<IconProps> = (props) => (
     />
   </Icon>
 )
+
+AvatarIcon.displayName = "AvatarIcon"
+AvatarIcon.__ui__ = "AvatarIcon"

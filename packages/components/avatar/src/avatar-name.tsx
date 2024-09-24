@@ -38,3 +38,6 @@ export const AvatarName: FC<AvatarNameProps> = ({
     </ui.div>
   )
 }
+
+AvatarName.displayName = "AvatarName"
+AvatarName.__ui__ = "AvatarName"

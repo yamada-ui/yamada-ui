@@ -145,6 +145,9 @@ export const Avatar = forwardRef<AvatarProps, "span">((props, ref) => {
   )
 })
 
+Avatar.displayName = "Avatar"
+Avatar.__ui__ = "Avatar"
+
 type AvatarImageProps = ImageProps &
   Pick<AvatarProps, "name" | "format" | "icon" | "ignoreFallback">
 

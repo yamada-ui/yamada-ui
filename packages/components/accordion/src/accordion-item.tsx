@@ -219,3 +219,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     )
   },
 )
+
+AccordionItem.displayName = "AccordionItem"
+AccordionItem.__ui__ = "AccordionItem"

@@ -186,3 +186,6 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
     )
   },
 )
+
+AlphaSlider.displayName = "AlphaSlider"
+AlphaSlider.__ui__ = "AlphaSlider"

@@ -103,6 +103,7 @@ export const useColorSlider = ({
     onChangeEnd: onChangeEndProp,
     thumbColor,
     style: styleProp,
+    "aria-valuetext": ariaValueText,
     ...rest
   } = useFormControlProps(props)
   const [
@@ -355,6 +356,7 @@ export const useColorSlider = ({
         "aria-valuenow": value,
         "aria-valuemin": min,
         "aria-valuemax": max,
+        "aria-valuetext": ariaValueText ?? value.toString(),
         "data-active": dataAttr(isDragging && focusThumbOnChange),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
         onFocus: handlerAll(props.onFocus, onFocusProp),
@@ -377,6 +379,7 @@ export const useColorSlider = ({
       onKeyDown,
       onFocusProp,
       onBlurProp,
+      ariaValueText,
     ],
   )
 

@@ -1,4 +1,5 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps ,
+  FC} from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -17,7 +18,7 @@ import {
   runIfFunc,
   splitObject,
 } from "@yamada-ui/utils"
-import type { FC, ReactNode, RefAttributes } from "react"
+import type { ReactNode, RefAttributes } from "react"
 import { Calendar } from "./calendar"
 import type { DatePickerIconProps } from "./date-picker"
 import { DatePickerClearIcon, DatePickerIcon } from "./date-picker"

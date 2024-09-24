@@ -1,6 +1,6 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps , FC} from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import {
   cx,
@@ -11,7 +11,6 @@ import {
   isUndefined,
 } from "@yamada-ui/utils"
 import dayjs from "dayjs"
-import type { FC } from "react"
 import { useMemo } from "react"
 import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
@@ -260,6 +259,9 @@ export const Month: FC<MonthProps> = ({
   )
 }
 
+Month.displayName = "Month"
+Month.__ui__ = "Month"
+
 export interface WeekdayProps {
   weekday: string
   index: number
@@ -270,6 +272,9 @@ export const Weekday: FC<WeekdayProps> = ({ weekday }) => {
     <ui.span className="ui-calendar__month__weekday__label">{weekday}</ui.span>
   )
 }
+
+Weekday.displayName = "Weekday"
+Weekday.__ui__ = "Weekday"
 
 export interface DayProps {
   date: Date
@@ -288,3 +293,6 @@ export const Day: FC<DayProps> = ({ date }) => {
     </ui.span>
   )
 }
+
+Day.displayName = "Day"
+Day.__ui__ = "Day"

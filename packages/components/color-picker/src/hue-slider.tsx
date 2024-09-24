@@ -150,3 +150,6 @@ export const HueSlider = forwardRef<HueSliderProps, "input">((props, ref) => {
     </ui.div>
   )
 })
+
+HueSlider.displayName = "HueSlider"
+HueSlider.__ui__ = "HueSlider"

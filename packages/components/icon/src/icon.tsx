@@ -9,10 +9,10 @@ import {
   forwardRef,
   useComponentStyle,
   omitThemeProps,
+  mergeVars,
 } from "@yamada-ui/core"
-import { useToken } from "@yamada-ui/use-token"
-import { cx, replaceObject, isUnit } from "@yamada-ui/utils"
-import type { FC } from "react"
+import { cx } from "@yamada-ui/utils"
+import { type FC } from "react"
 
 interface IconOptions {
   /**
@@ -38,22 +38,19 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   let {
     className,
     as: element,
-    fontSize,
+    fontSize = size,
     viewBox,
     __css,
     ...rest
   } = omitThemeProps(mergedProps)
 
-  fontSize ??= size
-
-  const boxSize = replaceObject(fontSize, (value) =>
-    !isUnit(value) ? useToken("fontSizes", value) : value,
-  )
-
   const css: CSSUIObject = {
     ...styles,
     ...__css,
-    boxSize,
+    vars: mergeVars(__css?.vars, [
+      { name: "boxSize", token: "fontSizes", value: fontSize },
+    ]),
+    boxSize: "$boxSize",
   }
 
   if (element && typeof element !== "string")

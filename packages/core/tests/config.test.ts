@@ -8,6 +8,8 @@ import {
   keyframes,
   css,
 } from "../src"
+import { generateCalc } from "../src/config/calc"
+import { colorMix } from "../src/config/color-mix"
 import { pipe } from "../src/config/utils"
 
 const theme = transformTheme(
@@ -112,6 +114,45 @@ const theme = transformTheme(
         800: "#2e3138",
         900: "#1c1e21",
         950: "#101113",
+      },
+      red: {
+        50: "#fdeae8",
+        100: "#fbd9d5",
+        200: "#f6b2ac",
+        300: "#f28c82",
+        400: "#ee6a5d",
+        500: "#ea4334",
+        600: "#de2817",
+        700: "#b42013",
+        800: "#8a190f",
+        900: "#66120b",
+        950: "#530f09",
+      },
+      blue: {
+        50: "#e2edfd",
+        100: "#cfe0fc",
+        200: "#adcbfa",
+        300: "#8bb5f8",
+        400: "#659cf6",
+        500: "#4387f4",
+        600: "#186bf2",
+        700: "#0c59d4",
+        800: "#0a47a9",
+        900: "#07357d",
+        950: "#062c6a",
+      },
+      green: {
+        50: "#e0f5e6",
+        100: "#d0f1d9",
+        200: "#a9e5b9",
+        300: "#86da9c",
+        400: "#5fce7d",
+        500: "#3cc360",
+        600: "#31a04f",
+        700: "#28813f",
+        800: "#1d5e2e",
+        900: "#133e1f",
+        950: "#0d2b15",
       },
     },
     animations: {
@@ -392,6 +433,133 @@ describe("utils", () => {
     expect(styles).toMatch(
       /@keyframes animation-.*\{0%\{transform:translateX\(400%\);\}100%\{transform:translateX\(0%\);\}\}/,
     )
+  })
+})
+
+describe("color-mix", () => {
+  test("returns color-mix CSS string", () => {
+    const result1 = colorMix("mix(red.500, blue.500)", theme)
+    const result2 = colorMix("color-mix(red.500, blue.500)", theme)
+    const result3 = colorMix("mix(in srgb, green.500 50, #000000)", theme)
+    const result4 = colorMix("mix(in lab, red.500 80%, blue.500 20%)", theme)
+    const result5 = colorMix("mix(in srgb, green.500 50, #000000)", theme)
+    expect(result1).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500), var(--ui-colors-blue-500))",
+    )
+    expect(result2).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500), var(--ui-colors-blue-500))",
+    )
+    expect(result3).toBe(
+      "color-mix(in srgb, var(--ui-colors-green-500) 50%, #000000)",
+    )
+    expect(result4).toBe(
+      "color-mix(in lab, var(--ui-colors-red-500) 80%, var(--ui-colors-blue-500) 20%)",
+    )
+    expect(result5).toBe(
+      "color-mix(in srgb, var(--ui-colors-green-500) 50%, #000000)",
+    )
+  })
+
+  test("returns tint CSS string", () => {
+    const result1 = colorMix("shade(red.500, 50%)", theme)
+    const result2 = colorMix("shade(green, 50)", theme)
+    const result3 = colorMix("shade(rgb(255, 0, 0), 50%)", theme)
+    expect(result1).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500) 50%, #000)",
+    )
+    expect(result2).toBe("color-mix(in srgb, green 50%, #000)")
+    expect(result3).toBe("color-mix(in srgb, rgb(255, 0, 0) 50%, #000)")
+  })
+
+  test("returns shade CSS string", () => {
+    const result1 = colorMix("tint(red.500, 50%)", theme)
+    const result2 = colorMix("tint(green, 50)", theme)
+    const result3 = colorMix("tint(rgb(255, 0, 0), 50%)", theme)
+    expect(result1).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500) 50%, #fff)",
+    )
+    expect(result2).toBe("color-mix(in srgb, green 50%, #fff)")
+    expect(result3).toBe("color-mix(in srgb, rgb(255, 0, 0) 50%, #fff)")
+  })
+
+  test("returns transparentize CSS string", () => {
+    const result1 = colorMix("transparentize(red.500, 50%)", theme)
+    const result2 = colorMix("transparentize(green, 50)", theme)
+    const result3 = colorMix("transparentize(rgb(255, 0, 0), 50%)", theme)
+    expect(result1).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500) 50%, transparent)",
+    )
+    expect(result2).toBe("color-mix(in srgb, green 50%, transparent)")
+    expect(result3).toBe("color-mix(in srgb, rgb(255, 0, 0) 50%, transparent)")
+  })
+
+  test("returns tone CSS string", () => {
+    const result1 = colorMix("tone(red.500, 300)", theme)
+    const result2 = colorMix("tone(red.500, 500)", theme)
+    const result3 = colorMix("tone(red.500, 700)", theme)
+    expect(result1).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500) 60%, #fff)",
+    )
+    expect(result2).toBe("var(--ui-colors-red-500)")
+    expect(result3).toBe(
+      "color-mix(in srgb, var(--ui-colors-red-500) 60%, #000)",
+    )
+  })
+})
+
+describe("calc", () => {
+  test("returns calc CSS string", () => {
+    const calc = generateCalc("sizes")
+    const result1 = calc("calc(lg / 2)", theme, css)
+    const result2 = calc("calc(lg - calc(2xs * 2))", theme, css)
+    expect(result1).toBe("calc(var(--ui-sizes-lg) / 2)")
+    expect(result2).toBe(
+      "calc(var(--ui-sizes-lg) - calc(var(--ui-sizes-2xs) * 2))",
+    )
+  })
+
+  test("returns min CSS string", () => {
+    const calc = generateCalc("sizes")
+    const result1 = calc("min(100%, lg)", theme, css)
+    const result2 = calc("min(100%, calc(md + md))", theme, css)
+    expect(result1).toBe("min(100%, var(--ui-sizes-lg))")
+    expect(result2).toBe(
+      "min(100%, calc(var(--ui-sizes-md) + var(--ui-sizes-md)))",
+    )
+  })
+
+  test("returns max CSS string", () => {
+    const calc = generateCalc("sizes")
+    const result1 = calc("max(100%, lg)", theme, css)
+    const result2 = calc("max(100%, calc(md + md))", theme, css)
+    expect(result1).toBe("max(100%, var(--ui-sizes-lg))")
+    expect(result2).toBe(
+      "max(100%, calc(var(--ui-sizes-md) + var(--ui-sizes-md)))",
+    )
+  })
+
+  test("returns clamp CSS string", () => {
+    const calc = generateCalc("sizes")
+    const result1 = calc("clamp(md, 100%, xl)", theme, css)
+    const result2 = calc("clamp(md, 100%, calc(md + md))", theme, css)
+    const result3 = calc("clamp(md, lg)", theme, css)
+    expect(result1).toBe("clamp(var(--ui-sizes-md), 100%, var(--ui-sizes-xl))")
+    expect(result2).toBe(
+      "clamp(var(--ui-sizes-md), 100%, calc(var(--ui-sizes-md) + var(--ui-sizes-md)))",
+    )
+    expect(result3).toBe("clamp(var(--ui-sizes-md), 100%, var(--ui-sizes-lg))")
+  })
+
+  test("returns minmax CSS string", () => {
+    const calc = generateCalc("sizes")
+    const result1 = calc("minmax(md, xl)", theme, css)
+    expect(result1).toBe("minmax(var(--ui-sizes-md), var(--ui-sizes-xl))")
+  })
+
+  test("returns fit-content CSS string", () => {
+    const calc = generateCalc("sizes")
+    const result1 = calc("fit-content(xl)", theme, css)
+    expect(result1).toBe("fit-content(var(--ui-sizes-xl))")
   })
 })
 

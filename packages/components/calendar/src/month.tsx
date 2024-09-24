@@ -1,6 +1,6 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { CSSUIObject, HTMLUIProps , FC} from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, FC } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import {
   cx,

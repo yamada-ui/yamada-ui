@@ -250,6 +250,19 @@ describe("transformTheme", () => {
         900: "#133e1f",
         950: "#0d2b15",
       },
+      orange: {
+        50: "#fef0e6",
+        100: "#fee4d2",
+        200: "#fdc7a1",
+        300: "#fbac74",
+        400: "#fa9247",
+        500: "#f97415",
+        600: "#e06106",
+        700: "#b34d05",
+        800: "#863a03",
+        900: "#5e2902",
+        950: "#461e02",
+      },
     },
     spaces: {
       1: { base: "0.25rem", md: "0.125rem" },
@@ -284,6 +297,7 @@ describe("transformTheme", () => {
           sm: "linear(to-r, red.200, red.400)",
         },
       ],
+      orange: "linear(to-r, $colors.orange.200, $hoge)",
     },
     animations: {
       gradient: {
@@ -398,7 +412,7 @@ describe("transformTheme", () => {
     themeSchemes: {
       red: {
         colors: {
-          border: ["red", "pink"],
+          border: ["$colors.red.500", "pink"],
         },
       },
       blue: {
@@ -648,6 +662,17 @@ describe("transformTheme", () => {
     )
   })
 
+  test("applies interpolation theme token", () => {
+    const { __cssMap, __cssVars } = transformTheme(theme, config)
+    expect(__cssMap["gradients.orange"]).toStrictEqual({
+      var: "--ui-gradients-orange",
+      ref: "var(--ui-gradients-orange)",
+    })
+    expect(__cssVars["--ui-gradients-orange"]).toBe(
+      "linear-gradient(to right, var(--ui-colors-orange-200), var(--ui-hoge))",
+    )
+  })
+
   test("applies animation theme schemes correctly", () => {
     const { __cssMap, __cssVars } = transformTheme(theme, config)
     expect(__cssMap["animations.gradient"]).toStrictEqual({
@@ -699,7 +724,9 @@ describe("transformTheme", () => {
       var: "--ui-colors-border",
       ref: "var(--ui-colors-border)",
     })
-    expect(__cssVars[themeQueries.red]["--ui-colors-border"]).toBe("red")
+    expect(__cssVars[themeQueries.red]["--ui-colors-border"]).toBe(
+      "var(--ui-colors-red-500)",
+    )
     expect(
       __cssVars[themeQueries.red][pseudos._dark]["--ui-colors-border"],
     ).toBe("pink")

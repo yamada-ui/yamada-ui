@@ -148,3 +148,6 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
     )
   },
 )
+
+SaturationSlider.displayName = "SaturationSlider"
+SaturationSlider.__ui__ = "SaturationSlider"

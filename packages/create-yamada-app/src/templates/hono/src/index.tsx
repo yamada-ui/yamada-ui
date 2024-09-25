@@ -23,6 +23,7 @@ app.get("*", (c) => {
       <html lang="ja">
         <head>
           <script type="module" src="/src/client.tsx"></script>
+          <link rel="icon" href="/favicon.svg" />
         </head>
 
         <body>

@@ -320,6 +320,18 @@ describe("CSS", () => {
       width: "full",
     })
   })
+
+  test("returns interpolation", () => {
+    const result = css({
+      p: "$spaces.4 $spaces.4",
+      m: "$hoge",
+    })(theme)
+
+    expect(result).toStrictEqual({
+      padding: "var(--ui-spaces-4) var(--ui-spaces-4)",
+      margin: "var(--ui-hoge)",
+    })
+  })
 })
 
 describe("useCSS", () => {

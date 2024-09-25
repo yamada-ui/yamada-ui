@@ -174,7 +174,7 @@ export const useElement: Story = () => {
           type={show ? "text" : "password"}
           placeholder="your password"
         />
-        <InputRightElement w="4.5rem" isClick>
+        <InputRightElement w="4.5rem" isClickable>
           <Button h="1.75rem" size="sm" onClick={toggle}>
             {show ? "Hide" : "Show"}
           </Button>

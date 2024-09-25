@@ -173,3 +173,4 @@ export const ToggleGroup = forwardRef(
 } & ComponentArgs
 
 ToggleGroup.displayName = "ToggleGroup"
+ToggleGroup.__ui__ = "ToggleGroup"

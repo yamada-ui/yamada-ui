@@ -363,3 +363,6 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     )
   },
 )
+
+MultiSelect.displayName = "MultiSelect"
+MultiSelect.__ui__ = "SelectIcon"

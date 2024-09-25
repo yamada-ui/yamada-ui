@@ -84,3 +84,6 @@ export const SelectClearIcon: FC<SelectClearIconProps> = ({
     </SelectIcon>
   )
 }
+
+SelectIcon.displayName = "SelectIcon"
+SelectIcon.__ui__ = "SelectIcon"

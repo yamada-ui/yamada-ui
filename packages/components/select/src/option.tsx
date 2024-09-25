@@ -90,3 +90,6 @@ const CheckIcon: FC = () => (
     />
   </svg>
 )
+
+Option.displayName = "Option"
+Option.__ui__ = "Option"

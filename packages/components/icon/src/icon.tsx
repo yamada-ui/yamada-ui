@@ -47,10 +47,14 @@ export const Icon = forwardRef<IconProps, "svg">((props, ref) => {
   const css: CSSUIObject = {
     ...styles,
     ...__css,
-    vars: mergeVars(__css?.vars, [
+    vars: mergeVars(styles.vars, __css?.vars),
+  }
+
+  if (fontSize) {
+    css.vars = mergeVars(css?.vars, [
       { name: "boxSize", token: "fontSizes", value: fontSize },
-    ]),
-    boxSize: "$boxSize",
+    ])
+    css.boxSize = "$boxSize"
   }
 
   if (element && typeof element !== "string")

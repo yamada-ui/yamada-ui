@@ -48,6 +48,22 @@ cd yamada-ui
   - パッケージ名とカスタムフック名はケバブケースで入力してください。
 - **`pnpm gen:tokens`**: テーマのトークンを生成します。
 
+### VSCodeの設定
+
+[ESLintのVSCode拡張機能](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)を適切に動作させるために、`.vscode/settings.json`に以下の設定を追加してください。
+
+```json
+{
+  "eslint.workingDirectories": [
+    "docs",
+    "examples/next/app",
+    "examples/next/pages",
+    "examples/remix",
+    "examples/vite"
+  ]
+}
+```
+
 ## バグを見つけたと思いますか？
 
 [テンプレート](https://github.com/yamada-ui/yamada-ui/issues/new/choose)に従って、提供してください。

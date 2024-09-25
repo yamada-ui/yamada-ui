@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -14,7 +14,6 @@ import { cloneElement, useMemo, useRef } from "react"
 import type {
   CSSProperties,
   ReactElement,
-  FC,
   MouseEventHandler,
   Dispatch,
   SetStateAction,
@@ -222,6 +221,9 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
   },
 )
 
+MultiDatePicker.displayName = "MultiDatePicker"
+MultiDatePicker.__ui__ = "MultiDatePicker"
+
 interface MultiDatePickerFieldOptions {
   isOpen: boolean
   value: Date[]
@@ -351,3 +353,6 @@ export const MultiDatePickerField = forwardRef<
     )
   },
 )
+
+MultiDatePickerField.displayName = "MultiDatePickerField"
+MultiDatePickerField.__ui__ = "MultiDatePickerField"

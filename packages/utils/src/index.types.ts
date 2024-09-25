@@ -7,18 +7,18 @@ export type Primitive =
   | symbol
   | bigint
 
-type PathImpl<K extends string | number | symbol, V> = K extends string | number
-  ? V extends Primitive
-    ? `${K}`
-    : `${K}.${Path<V>}`
+type PathImpl<Y extends string | number | symbol, M> = Y extends string | number
+  ? M extends Primitive
+    ? `${Y}`
+    : `${Y}.${Path<M>}`
   : ``
 
-export type Path<T> = {
-  [K in keyof T]-?: PathImpl<K, T[K]>
-}[keyof T]
+export type Path<Y> = {
+  [M in keyof Y]-?: PathImpl<M, Y[M]>
+}[keyof Y]
 
-export interface Dict<T = any> {
-  [key: string]: T
+export interface Dict<Y = any> {
+  [key: string]: Y
 }
 
 export interface ObjectLiteral {}
@@ -34,7 +34,7 @@ export type Replace<
   ? Replace<R, M, D, `${H}${T}${D}`>
   : `${H}${Y}`
 
-export type Union<T> = T | StringLiteral
+export type Union<Y> = Y | StringLiteral
 
 export type Length<T extends any[]> = T["length"]
 

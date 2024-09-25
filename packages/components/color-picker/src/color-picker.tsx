@@ -15,7 +15,7 @@ import {
   runIfFunc,
 } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
-import { cloneElement } from "react"
+import { cloneElement, useEffect, useRef } from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import { ColorSelector } from "./color-selector"
 import { EyeDropperIcon } from "./color-selector-eye-dropper"
@@ -102,6 +102,13 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       withSwatch,
       ...props,
     })
+    const contentRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+      if (contentRef.current) {
+        contentRef.current.removeAttribute("role")
+      }
+    }, [])
     let {
       className,
       children,
@@ -128,6 +135,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       ...computedProps
     } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
+      id,
       value,
       allowInput,
       eyeDropperSupported,
@@ -167,11 +175,12 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
               }}
             >
               {withSwatch ? <ColorPickerSwatch {...swatchProps} /> : null}
-
               <PopoverTrigger>
                 <ColorPickerField
                   h={h}
                   minH={minH}
+                  aria-expanded="false"
+                  aria-controls={id}
                   {...getFieldProps(inputProps, ref)}
                 />
               </PopoverTrigger>
@@ -185,7 +194,11 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
+                ref={contentRef}
                 className="ui-color-picker__content"
+                role="combobox"
+                aria-controls={id}
+                aria-labelledby="color-picker-label"
                 __css={{ ...styles.content }}
               >
                 <ColorSelector

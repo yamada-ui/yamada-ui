@@ -1,6 +1,5 @@
-import type { HTMLUIProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, CSSUIObject, FC } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
-import type { FC } from "react"
 import type { AvatarProps } from "./avatar"
 import { useAvatarContext } from "./avatar"
 

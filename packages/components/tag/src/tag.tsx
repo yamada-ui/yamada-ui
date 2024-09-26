@@ -122,3 +122,6 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
     </ui.span>
   )
 }
+
+Tag.displayName = "Tag"
+Tag.__ui__ = "Tag"

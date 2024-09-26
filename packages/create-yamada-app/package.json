@@ -64,6 +64,7 @@
     "cli-handle-unhandled": "^1.1.1",
     "commander": "^12.1.0",
     "cross-spawn": "^7.0.3",
+    "gatsby-plugin-manifest": "^5.13.1",
     "glob": "^11.0.0",
     "validate-npm-package-name": "^5.0.1"
   },

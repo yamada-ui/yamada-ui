@@ -66,8 +66,8 @@ const noOrderConfig: Linter.Config = {
     "**/*.d.ts",
   ],
   rules: {
-    "import/order": "off",
-    "import/no-named-as-default": "off",
+    // "import/order": "off",
+    // "import/no-named-as-default": "off",
   },
 }
 

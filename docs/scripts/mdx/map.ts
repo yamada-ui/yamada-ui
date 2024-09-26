@@ -1,8 +1,8 @@
 import { writeFileSync } from "fs"
 import path from "path"
-import type { Document } from "mdx"
 import { MDX_PATH } from "./utils"
 import type { DocumentMap, EventName } from "./utils"
+import type { Document } from "mdx"
 
 let MAP: DocumentMap = {}
 let TIMEOUT_ID: NodeJS.Timeout | null = null

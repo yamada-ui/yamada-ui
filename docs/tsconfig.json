@@ -22,6 +22,7 @@
     "paths": { "mdx": ["./.mdx"] }
   },
   "include": [
+    "@types",
     "next-env.d.ts",
     "**/*.js",
     "**/*.jsx",

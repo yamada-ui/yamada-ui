@@ -30,8 +30,10 @@
   ],
   "exclude": [
     "node_modules",
+    "coverage",
     "examples",
     "docs",
+    "bin",
     "dist",
     ".changelog",
     ".changeset",

@@ -2,4 +2,4 @@
 "@yamada-ui/accordion": patch
 ---
 
-DisplayName is set for the component of `Accordion`
+`displayName` is set for the component of `Accordion`

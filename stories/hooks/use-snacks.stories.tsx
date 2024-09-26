@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Box, Button, Input, Snacks, Wrap, useSnacks } from "@yamada-ui/react"
 import { useRef } from "react"
+import { Box, Button, Input, Snacks, Wrap, useSnacks } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Snacks>
 

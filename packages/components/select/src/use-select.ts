@@ -31,7 +31,6 @@ import {
 } from "@yamada-ui/utils"
 import type {
   Dispatch,
-  ForwardedRef,
   KeyboardEvent,
   RefObject,
   SetStateAction,
@@ -898,10 +897,7 @@ export interface UseSelectOptionProps extends Omit<HTMLUIProps<"li">, "value"> {
   closeOnSelect?: boolean
 }
 
-export const useSelectOption = (
-  ref: ForwardedRef<any> | undefined,
-  props: UseSelectOptionProps,
-) => {
+export const useSelectOption = (props: UseSelectOptionProps) => {
   const {
     fieldRef,
     value,
@@ -1005,7 +1001,7 @@ export const useSelectOption = (
   }, [optionValue, isSelected, onChangeLabel])
 
   const getOptionProps: PropGetter<"li"> = useCallback(
-    (props = {}) => {
+    (props = {}, ref = null) => {
       const style: CSSProperties = {
         border: "0px",
         clip: "rect(0px, 0px, 0px, 0px)",
@@ -1041,7 +1037,6 @@ export const useSelectOption = (
       isSelected,
       omitSelectedValues,
       onClick,
-      ref,
       register,
     ],
   )

@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import {
@@ -5,16 +6,15 @@ import {
   createColorModeManager,
   createThemeSchemeManager,
 } from "@yamada-ui/react"
-import { I18nProvider } from "contexts"
+import dayjs from "dayjs"
+import timezone from "dayjs/plugin/timezone"
+import utc from "dayjs/plugin/utc"
 import type { AppProps } from "next/app"
 import { Inter } from "next/font/google"
 import Head from "next/head"
 import type { FC } from "react"
+import { I18nProvider } from "contexts"
 import { theme, config } from "theme"
-import dayjs from "dayjs"
-import timezone from "dayjs/plugin/timezone"
-import utc from "dayjs/plugin/utc"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)

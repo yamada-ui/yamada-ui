@@ -1,8 +1,5 @@
 import { readFile, writeFile } from "fs/promises"
 import path from "path"
-import type { UsageTheme } from "@yamada-ui/core"
-import { defaultTheme } from "@yamada-ui/theme"
-import { TONES } from "@yamada-ui/utils"
 import { format, resolveConfig } from "prettier"
 import type { SourceFile, Symbol, TypeChecker } from "typescript"
 import {
@@ -13,6 +10,9 @@ import {
   createProgram,
   sys,
 } from "typescript"
+import type { UsageTheme } from "@yamada-ui/core"
+import { defaultTheme } from "@yamada-ui/theme"
+import { TONES } from "@yamada-ui/utils"
 
 type ComponentTypeInfo = {
   type: string

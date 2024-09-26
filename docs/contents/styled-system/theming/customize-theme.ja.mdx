@@ -168,6 +168,47 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
+## トークンにレスポンシブオブジェクトを設定する
+
+テーマのトークンは、デフォルトではレスポンシブオブジェクトに対応していません。もし、テーマのトークンにレスポンシブオブジェクトを対応させたい場合は、`config.theme.responsive`を`true`に設定します。
+
+```ts title=./theme/config.ts highlight={5}
+import { extendConfig } from "@yamada-ui/react"
+
+export const config = extendConfig({
+  theme: {
+    responsive: true,
+  },
+})
+```
+
+:::note
+もっとコンフィグをカスタマイズしたい場合は、[こちら](/styled-system/configure/customize-config)をご覧ください。
+:::
+
+テーマのトークンにレスポンシブオブジェクトを設定します。
+
+```ts title=./theme/tokens/spaces.ts
+import type { ThemeTokens } from "@yamada-ui/react"
+
+export const spaces: ThemeTokens = {
+  1: { base: "0.25rem", md: "0.125rem" },
+  2: { base: "0.5rem", md: "0.25rem" },
+  3: { base: "0.75rem", md: "0.375rem" },
+  4: { base: "1rem", md: "0.5rem" },
+}
+```
+
+:::note
+レスポンシブオブジェクトをもっと学びたい場合は、[こちら](/styled-system/responsive-styles#レスポンシブスタイルの構文)をご覧ください。
+:::
+
+:::note status=warning
+レスポンシブオブジェクトには、必ず`base`を設定してください。また、レスポンシブオブジェクトではないテーマのトークンに`base`を設定しないてください。理由は、`base`を持つオブジェクトは、レスポンシブオブジェクトと判定されるためです。
+:::
+
+あとは、[トークンを変更する](#トークンを変更する)と同様に`./theme/index.ts`の`tokens`に`spaces`を含めます。
+
 ## セマンティックトークンを変更する
 
 セマンティックトークンの中に、各コンポーネントで使用されるカラースキーマが設定されています。

@@ -118,3 +118,6 @@ export const ScaleFade = motionForwardRef<ScaleFadeProps, "div">(
     )
   },
 )
+
+ScaleFade.displayName = "ScaleFade"
+ScaleFade.__ui__ = "ScaleFade"

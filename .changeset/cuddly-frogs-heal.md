@@ -2,4 +2,4 @@
 "@yamada-ui/radio": patch
 ---
 
-Set **ui** after each component definition.
+Set `__ui__` after each component definition.

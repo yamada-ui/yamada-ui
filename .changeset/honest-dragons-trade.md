@@ -2,4 +2,4 @@
 "@yamada-ui/visually-hidden": patch
 ---
 
-added displayname for visuallyhidden
+Added `displayName` for `VisuallyHidden` component.

@@ -149,3 +149,6 @@ export const SlideFade = motionForwardRef<SlideFadeProps, "div">(
     )
   },
 )
+
+SlideFade.displayName = "SlideFade"
+SlideFade.__ui__ = "SlideFade"

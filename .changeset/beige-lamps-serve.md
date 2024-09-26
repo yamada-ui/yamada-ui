@@ -2,4 +2,4 @@
 "@yamada-ui/alert": patch
 ---
 
-add displayName and **ui** to alert component
+add `displayName` and `__ui__` to alert component

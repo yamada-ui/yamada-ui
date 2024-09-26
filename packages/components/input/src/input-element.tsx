@@ -8,8 +8,16 @@ interface InputElementOptions {
    * If `true`, the element clickable.
    *
    * @default false
+   *
+   * @deprecated Use `isClickable` instead.
    */
   isClick?: boolean
+  /**
+   * If `true`, the element clickable.
+   *
+   * @default false
+   */
+  isClickable?: boolean
   /**
    * The placement of the element.
    *
@@ -21,8 +29,13 @@ interface InputElementOptions {
 export interface InputElementProps extends HTMLUIProps, InputElementOptions {}
 
 const InputElement = forwardRef<InputElementProps, "div">(
-  ({ className, isClick = false, placement = "left", ...rest }, ref) => {
+  (
+    { className, isClick = false, isClickable, placement = "left", ...rest },
+    ref,
+  ) => {
     const { styles, fieldHeight, fieldFontSize } = useInputGroup()
+
+    isClickable ??= isClick
 
     const css: CSSUIObject = {
       position: "absolute",
@@ -35,8 +48,8 @@ const InputElement = forwardRef<InputElementProps, "div">(
       w: fieldHeight,
       h: "100%",
       fontSize: fieldFontSize,
-      pointerEvents: isClick ? "auto" : "none",
-      cursor: isClick ? "pointer" : "auto",
+      pointerEvents: isClickable ? "auto" : "none",
+      cursor: isClickable ? "pointer" : "auto",
       ...styles.element,
     }
 

@@ -1,5 +1,10 @@
 import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
-import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import {
+  forwardRef,
+  mergeVars,
+  omitThemeProps,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -48,7 +53,7 @@ export interface LoadingProps
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
     { color, ...styles },
-    { variant = "oval", size = "1em", ...mergedProps },
+    { variant = "oval", size = "1em", colorScheme, ...mergedProps },
   ] = useComponentStyle("Loading", props)
   const {
     className,
@@ -63,33 +68,36 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
     () => ({
       className: cx("ui-loading", className),
       size,
-      vars: [
-        {
-          name: "color",
-          token: "colors",
-          value: colorProp ?? (color as CSSUIProps["color"]),
-        },
-        {
-          name: "secondary-color",
-          token: "colors",
-          value: secondaryColor,
-        },
-      ],
       color: "$color",
       ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
-      __css: { ...styles },
+      __css: {
+        ...styles,
+        vars: mergeVars(styles?.vars, [
+          {
+            name: "color",
+            token: "colors",
+            value: colorProp ?? (color as string) ?? `${colorScheme}.500`,
+          },
+          {
+            name: "secondary-color",
+            token: "colors",
+            value: secondaryColor,
+          },
+        ]),
+      },
       ...rest,
     }),
     [
       className,
       size,
-      colorProp,
-      color,
       secondaryColor,
       duration,
       dur,
       styles,
+      colorProp,
+      color,
+      colorScheme,
       rest,
     ],
   )

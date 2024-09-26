@@ -56,7 +56,6 @@
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "@testing-library/user-event": "^14.5.2",
     "clean-package": "2.2.0",
     "react": "^18.3.1"
   },

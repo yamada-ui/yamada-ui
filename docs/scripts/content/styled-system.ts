@@ -2,7 +2,6 @@ import { readFile } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type {
   JSDoc,
@@ -24,10 +23,11 @@ import {
   isExpression,
   transpileModule,
 } from "typescript"
-import { toKebabCase } from "utils/string"
 import { getMDXFile, writeMDXFile } from "../utils"
+import { CONSTANT } from "constant"
 import type { Locale } from "utils/i18n"
 import { locales } from "utils/i18n"
+import { toKebabCase } from "utils/string"
 
 config({ path: CONSTANT.PATH.ENV })
 

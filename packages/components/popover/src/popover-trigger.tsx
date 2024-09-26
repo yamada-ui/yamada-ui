@@ -1,4 +1,5 @@
-import type { FC, PropsWithChildren, ReactElement, RefObject } from "react"
+import type { FC } from "@yamada-ui/core"
+import type { PropsWithChildren, ReactElement, RefObject } from "react"
 import { Children, cloneElement } from "react"
 import { usePopover } from "./popover"
 
@@ -10,3 +11,6 @@ export const PopoverTrigger: FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return cloneElement(child, getTriggerProps(child.props, child.ref))
 }
+
+PopoverTrigger.displayName = "PopoverTrigger"
+PopoverTrigger.__ui__ = "PopoverTrigger"

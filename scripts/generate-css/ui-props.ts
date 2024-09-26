@@ -1,5 +1,5 @@
-import type { CSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
+import type { CSSObject, Union } from "@yamada-ui/react"
 
 export interface UIOptions {
   static?: CSSObject

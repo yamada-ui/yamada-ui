@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useRef } from "react"
 import {
   Dropzone,
   DropzoneAccept,
@@ -8,7 +9,6 @@ import {
 } from "@yamada-ui/dropzone"
 import { Image as UploadImage, Upload, X } from "@yamada-ui/lucide"
 import { HStack, VStack, Text, FormControl, Button } from "@yamada-ui/react"
-import { useRef } from "react"
 
 type Story = StoryFn<typeof Dropzone>
 

@@ -1,7 +1,4 @@
 import { Octokit } from "@octokit/rest"
-import { getRangeDates } from "@yamada-ui/calendar"
-import type { Dict } from "@yamada-ui/react"
-import { isArray, merge } from "@yamada-ui/react"
 import { program } from "commander"
 import type { Dayjs } from "dayjs"
 import dayjs from "dayjs"
@@ -9,6 +6,9 @@ import timezone from "dayjs/plugin/timezone"
 import utc from "dayjs/plugin/utc"
 import { config } from "dotenv"
 import { getConstant, recursiveOctokit } from "./utils"
+import { getRangeDates } from "@yamada-ui/calendar"
+import type { Dict } from "@yamada-ui/react"
+import { isArray, merge } from "@yamada-ui/react"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -105,7 +105,9 @@ const getIssuesAndPullRequests =
       }
     }
 
-    await recursiveOctokit(getIssuesAndPullRequests)
+    try {
+      await recursiveOctokit(getIssuesAndPullRequests)
+    } catch {}
 
     const issues: Issue[] = []
     const pullRequests: Issue[] = []
@@ -198,7 +200,9 @@ const getReviews =
       }
     }
 
-    await recursiveOctokit(getIssuesAndPullRequests)
+    try {
+      await recursiveOctokit(getIssuesAndPullRequests)
+    } catch {}
 
     const reviewsAndApproved = (
       await Promise.all(

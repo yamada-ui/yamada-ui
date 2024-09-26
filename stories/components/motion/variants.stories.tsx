@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo } from "react"
 import type { MotionVariants } from "@yamada-ui/react"
 import { Center, Motion } from "@yamada-ui/react"
-import { useMemo } from "react"
 
 type Story = StoryFn<typeof Motion>
 

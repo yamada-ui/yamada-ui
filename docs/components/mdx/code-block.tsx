@@ -1,10 +1,10 @@
 import type { BoxProps } from "@yamada-ui/react"
 import { Box, Text } from "@yamada-ui/react"
-import { CopyButton } from "components/forms"
 import dynamic from "next/dynamic"
 import { Highlight as ReactHighlight, themes } from "prism-react-renderer"
 import type { HighlightProps as ReactHighlightProps } from "prism-react-renderer"
 import type { DetailedHTMLProps, FC, HTMLAttributes } from "react"
+import { CopyButton } from "components/forms"
 import { toBoolean } from "utils/boolean"
 
 const EditableCodeBlock = dynamic(() => import("./editable-code-block"))

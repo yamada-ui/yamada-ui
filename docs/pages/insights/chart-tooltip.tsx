@@ -1,5 +1,5 @@
-import { Box, HStack, isArray, Text, VStack } from "@yamada-ui/react"
 import type { ChartTooltipProps as OriginChartTooltipProps } from "@yamada-ui/charts"
+import { Box, HStack, isArray, Text, VStack } from "@yamada-ui/react"
 import type { FC } from "react"
 import { useInsights } from "./insights-provider"
 import { labelFormatter } from "./insights-utils"

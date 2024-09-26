@@ -2,10 +2,10 @@ import { readdir } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { Content, Data } from "../utils"
 import { getMDXFile, getMDXFileName, writeMDXFile } from "../utils"
+import { CONSTANT } from "constant"
 import { locales } from "utils/i18n"
 
 config({ path: CONSTANT.PATH.ENV })

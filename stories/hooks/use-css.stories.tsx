@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
-import { Box, useCSS } from "@yamada-ui/react"
 import { useMemo } from "react"
+import { Box, useCSS } from "@yamada-ui/react"
 
 const meta: Meta<typeof Box> = {
   title: "Hooks / useCSS",

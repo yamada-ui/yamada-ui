@@ -1,8 +1,8 @@
 import { Octokit } from "@octokit/rest"
-import { toCamelCase, toKebabCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import { execa } from "execa"
 import { recursiveOctokit, wait } from "./utils"
+import { toCamelCase, toKebabCase } from "@yamada-ui/react"
 
 type Story = { name: string; messages: string[] }
 type Issue = Awaited<

@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { Check, Mail, Phone } from "@yamada-ui/lucide"
 import {
   Input,
@@ -12,8 +14,6 @@ import {
   FormControl,
   VStack,
 } from "@yamada-ui/react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Input>
 

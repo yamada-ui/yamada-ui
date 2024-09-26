@@ -1,4 +1,5 @@
 import type { LinksFunction } from "@remix-run/node"
+import { json, LoaderFunction } from "@remix-run/node"
 import {
   Links,
   Meta,
@@ -14,8 +15,7 @@ import {
   createColorModeManager,
   createThemeSchemeManager,
 } from "@yamada-ui/react"
-import theme, { config } from "./theme"
-import { json, LoaderFunction } from "@remix-run/node"
+import { config, theme } from "./theme"
 
 export const links: LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -28,7 +28,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export default function App() {
-  let { cookies } = useLoaderData<{ cookies: string }>()
+  const { cookies } = useLoaderData<{ cookies: string }>()
 
   const colorModeManager = createColorModeManager("ssr", cookies)
   const themeSchemeManager = createThemeSchemeManager("ssr", cookies)

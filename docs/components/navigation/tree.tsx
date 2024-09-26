@@ -23,13 +23,13 @@ import {
   useBoolean,
 } from "@yamada-ui/react"
 import type { IconProps, ListProps } from "@yamada-ui/react"
+import Link from "next/link"
+import type { FC } from "react"
+import { memo, useEffect } from "react"
 import { Label } from "components/data-display"
 import { CONSTANT } from "constant"
 import { useI18n, usePage } from "contexts"
 import type { DocumentTree } from "mdx"
-import Link from "next/link"
-import type { FC } from "react"
-import { memo, useEffect } from "react"
 
 export interface TreeProps extends ListProps {}
 

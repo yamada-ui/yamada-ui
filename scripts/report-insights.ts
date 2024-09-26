@@ -105,7 +105,9 @@ const getIssuesAndPullRequests =
       }
     }
 
-    await recursiveOctokit(getIssuesAndPullRequests)
+    try {
+      await recursiveOctokit(getIssuesAndPullRequests)
+    } catch {}
 
     const issues: Issue[] = []
     const pullRequests: Issue[] = []
@@ -198,7 +200,9 @@ const getReviews =
       }
     }
 
-    await recursiveOctokit(getIssuesAndPullRequests)
+    try {
+      await recursiveOctokit(getIssuesAndPullRequests)
+    } catch {}
 
     const reviewsAndApproved = (
       await Promise.all(

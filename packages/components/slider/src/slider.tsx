@@ -37,10 +37,10 @@ import {
   handlerAll,
   percentToValue,
   getValidChildren,
-  findChildren,
   isEmpty,
   omitChildren,
   includesChildren,
+  findChild,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
@@ -683,8 +683,8 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
 
   const validChildren = getValidChildren(children)
 
-  const [customSliderTrack] = findChildren(validChildren, SliderTrack)
-  const [customSliderThumb] = findChildren(validChildren, SliderThumb)
+  const customSliderTrack = findChild(validChildren, SliderTrack)
+  const customSliderThumb = findChild(validChildren, SliderThumb)
 
   const hasSliderThumb = includesChildren(validChildren, SliderThumb)
 
@@ -728,6 +728,9 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
   )
 })
 
+Slider.displayName = "Slider"
+Slider.__ui__ = "Slider"
+
 export interface SliderTrackProps
   extends HTMLUIProps,
     Pick<SliderOptions, "filledTrackProps"> {}
@@ -769,6 +772,9 @@ export const SliderTrack = forwardRef<SliderTrackProps, "div">(
   },
 )
 
+SliderTrack.displayName = "SliderTrack"
+SliderTrack.__ui__ = "SliderTrack"
+
 export interface SliderFilledTrackProps extends HTMLUIProps {}
 
 export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
@@ -795,6 +801,9 @@ export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
   },
 )
 
+SliderFilledTrack.displayName = "SliderFilledTrack"
+SliderFilledTrack.__ui__ = "SliderFilledTrack"
+
 export interface SliderMarkProps extends HTMLUIProps {
   value: number
 }
@@ -819,6 +828,9 @@ export const SliderMark = forwardRef<SliderMarkProps, "div">(
     )
   },
 )
+
+SliderMark.displayName = "SliderMark"
+SliderMark.__ui__ = "SliderMark"
 
 export interface SliderThumbProps extends HTMLUIProps {}
 
@@ -846,3 +858,6 @@ export const SliderThumb = forwardRef<SliderThumbProps, "div">(
     )
   },
 )
+
+SliderThumb.displayName = "SliderThumb"
+SliderThumb.__ui__ = "SliderThumb"

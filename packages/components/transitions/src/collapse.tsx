@@ -183,3 +183,6 @@ export const Collapse = motionForwardRef<CollapseProps, "div">((props, ref) => {
     </AnimatePresence>
   )
 })
+
+Collapse.displayName = "Collapse"
+Collapse.__ui__ = "Collapse"

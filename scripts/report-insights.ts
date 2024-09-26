@@ -7,8 +7,8 @@ import utc from "dayjs/plugin/utc"
 import { config } from "dotenv"
 import { getConstant, recursiveOctokit } from "./utils"
 import { getRangeDates } from "@yamada-ui/calendar"
-import { isArray } from "@yamada-ui/react"
 import type { Dict } from "@yamada-ui/react"
+import { isArray, merge } from "@yamada-ui/react"
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -47,7 +47,8 @@ const COMMON_PARAMS = {
 }
 
 const QUERY_FORMAT = "YYYY-MM-DDTHH:mm:ss"
-const REPORT_FORMAT = "YYYY/MM/DD"
+const REPORT_TITLE_FORMAT = "YYYY/MM/DD"
+const REPORT_FORMAT = "YYYY/MM/DD HH:mm:ss"
 const DATA_FORMAT = "YYYY-MM-DD"
 
 config()
@@ -58,6 +59,9 @@ const chunkArray = <T extends any>(array: T[], n: number) =>
   new Array(Math.ceil(array.length / n))
     .fill(0)
     .map((_, i) => array.slice(i * n, (i + 1) * n))
+
+const getTimestamp = (item: Review | Issue | Comment) =>
+  dayjs("created_at" in item ? item.created_at : item.submitted_at)
 
 const getCollaborators =
   ({ user }: Options) =>
@@ -74,15 +78,17 @@ const getCollaborators =
 
 const getIssuesAndPullRequests =
   ({ startDate, endDate }: Options) =>
-  async (username: string, filter: string) => {
-    let issues: Issue[] = []
+  async (username: string) => {
+    let issuesAndPullRequests: Issue[] = []
 
-    const query = `org:${COMMON_PARAMS["owner"]} ${filter}:${username} created:${startDate.format(QUERY_FORMAT)}..${endDate.format(QUERY_FORMAT)}`
+    const start = startDate.format(QUERY_FORMAT)
+    const end = endDate.format(QUERY_FORMAT)
+    const query = `org:${COMMON_PARAMS["owner"]} author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
 
-    const issuesAndPullRequests = async () => {
+    const getIssuesAndPullRequests = async () => {
       const { data } = await octokit.search.issuesAndPullRequests({
         q: query,
         per_page: perPage,
@@ -90,18 +96,29 @@ const getIssuesAndPullRequests =
       })
       const { total_count, items } = data
 
-      issues.push(...items)
+      issuesAndPullRequests.push(...items)
 
       if (total_count === perPage) {
         page++
 
-        await recursiveOctokit(issuesAndPullRequests)
+        await recursiveOctokit(getIssuesAndPullRequests)
       }
     }
 
-    await recursiveOctokit(issuesAndPullRequests)
+    await recursiveOctokit(getIssuesAndPullRequests)
 
-    return issues
+    const issues: Issue[] = []
+    const pullRequests: Issue[] = []
+
+    issuesAndPullRequests.forEach((item) => {
+      if (item.pull_request) {
+        pullRequests.push(item)
+      } else {
+        issues.push(item)
+      }
+    })
+
+    return { issues, pullRequests }
   }
 
 const getComments =
@@ -126,6 +143,7 @@ const getComments =
           repo: name,
           since: startDate.format(QUERY_FORMAT),
           until: endDate.format(QUERY_FORMAT),
+          direction: "asc",
           per_page: perPage,
           page,
         })
@@ -142,20 +160,27 @@ const getComments =
       await recursiveOctokit(listCommentsForRepo)
     }
 
+    comments = comments.filter(
+      ({ created_at }) =>
+        startDate.isBefore(created_at) && endDate.isAfter(created_at),
+    )
+
     return comments
   }
 
 const getReviews =
   ({ startDate, endDate }: Options) =>
-  async () => {
+  async (username: string) => {
     let pullRequests: Issue[] = []
 
-    const query = `org:${COMMON_PARAMS["owner"]} type:pr created:${startDate.format(QUERY_FORMAT)}..${endDate.format(QUERY_FORMAT)}`
+    const start = startDate.subtract(1, "month").format(QUERY_FORMAT)
+    const end = endDate.format(QUERY_FORMAT)
+    const query = `org:${COMMON_PARAMS["owner"]} type:pr reviewed-by:${username} -author:${username} created:${start}..${end}`
     const perPage = 100
 
     let page = 1
 
-    const issuesAndPullRequests = async () => {
+    const getIssuesAndPullRequests = async () => {
       const {
         data: { items },
       } = await octokit.search.issuesAndPullRequests({
@@ -169,13 +194,13 @@ const getReviews =
       if (items.length === perPage) {
         page++
 
-        await recursiveOctokit(issuesAndPullRequests)
+        await recursiveOctokit(getIssuesAndPullRequests)
       }
     }
 
-    await recursiveOctokit(issuesAndPullRequests)
+    await recursiveOctokit(getIssuesAndPullRequests)
 
-    const reviewComments = (
+    const reviewsAndApproved = (
       await Promise.all(
         pullRequests.map(({ number, repository_url }) =>
           recursiveOctokit(async () => {
@@ -193,7 +218,25 @@ const getReviews =
       )
     ).flat()
 
-    return reviewComments
+    const reviews: Review[] = []
+    const approved: Review[] = []
+
+    reviewsAndApproved.forEach((item) => {
+      const { user, state, submitted_at } = item
+
+      if (user?.login !== username) return
+
+      if (!startDate.isBefore(submitted_at) || !endDate.isAfter(submitted_at))
+        return
+
+      if (state !== "APPROVED") {
+        reviews.push(item)
+      } else if (state === "APPROVED") {
+        approved.push(item)
+      }
+    })
+
+    return { reviews, approved }
   }
 
 const getCommits =
@@ -239,7 +282,6 @@ const getInsights =
   (options: Options) => async (collaborators: Collaborator[]) => {
     const constant = await getConstant()
     const allComments = await getComments(options)()
-    const allReviews = await getReviews(options)()
     const allCommits = await getCommits(options)()
 
     const insights: Insight[] = []
@@ -249,28 +291,11 @@ const getInsights =
     )
 
     for await (const { login, html_url } of omittedCollaborators) {
-      const issuesAndPullRequests = await getIssuesAndPullRequests(options)(
-        login,
-        "author",
-      )
+      const { issues, pullRequests } =
+        await getIssuesAndPullRequests(options)(login)
+      const { reviews, approved } = await getReviews(options)(login)
       const comments = allComments.filter(({ user }) => user?.login === login)
-      const reviews = allReviews.filter(
-        ({ user, state }) => user?.login === login && state !== "APPROVED",
-      )
-      const approved = allReviews.filter(
-        ({ user, state }) => user?.login === login && state === "APPROVED",
-      )
       const commits = allCommits.filter(({ author }) => author?.login === login)
-      const issues: Issue[] = []
-      const pullRequests: Issue[] = []
-
-      issuesAndPullRequests.forEach((issueAndPullRequest) => {
-        if (issueAndPullRequest.pull_request) {
-          pullRequests.push(issueAndPullRequest)
-        } else {
-          issues.push(issueAndPullRequest)
-        }
-      })
 
       insights.push({
         login,
@@ -333,16 +358,19 @@ const createReport =
       (isArray(extended) &&
         extended.some((v) => v.toUpperCase() === type.toUpperCase()))
 
-    const getCreatedAt = (item: Review | Issue | Comment) =>
-      dayjs("created_at" in item ? item.created_at : item.submitted_at).format(
-        REPORT_FORMAT,
-      )
-
     const rows = [`  - ${type}: ${count}`]
+
+    const sortedList = list.sort((a, b) =>
+      getTimestamp(a).toDate() > getTimestamp(b).toDate() ? 1 : -1,
+    )
 
     if (isExtended) {
       rows.push(
-        ...list.map((item) => `    - [${getCreatedAt(item)}] ${item.html_url}`),
+        ...sortedList.map((item) => {
+          const createdAt = getTimestamp(item).format(REPORT_FORMAT)
+
+          return `    - [${createdAt}] ${item.html_url}`
+        }),
       )
     }
 
@@ -358,21 +386,23 @@ const sendDiscordChannel =
       chunkArray(reports, 10),
     )) {
       const isFirst = index === "0"
+      const chunks: string[] = []
 
-      let chunks = isFirst
-        ? [
-            ...(publish
-              ? [
-                  `<@&1202956318718304276> <@&1246174065216192662>`,
-                  `## Insight Report`,
-                ]
-              : []),
-            `${startDate.format(REPORT_FORMAT)} - ${endDate.format(REPORT_FORMAT)}`,
-            "",
-          ]
-        : []
+      if (isFirst) {
+        if (publish) {
+          chunks.push(
+            `<@&1202956318718304276> <@&1246174065216192662>`,
+            `## Insight Report`,
+          )
+        }
 
-      chunks = [...chunks, ...contents]
+        const start = startDate.add(9, "hour").format(REPORT_TITLE_FORMAT)
+        const end = endDate.add(9, "hour").format(REPORT_TITLE_FORMAT)
+
+        chunks.push(`${start} - ${end}`)
+      }
+
+      chunks.push(...contents)
 
       const content = chunks.join("\n")
 
@@ -397,10 +427,11 @@ const getSomeDates = <T extends Review | Issue | Comment | Review>(
   date: string,
   list: T[],
 ) =>
-  list.filter((item) =>
-    dayjs("created_at" in item ? item.created_at : item.submitted_at)
-      .tz()
-      .isSame(date, "day"),
+  list.filter(
+    (item) =>
+      dayjs("created_at" in item ? item.created_at : item.submitted_at).format(
+        DATA_FORMAT,
+      ) === date,
   )
 
 const uploadData =
@@ -505,7 +536,7 @@ const uploadData =
 
       const prevActivity = await res.json()
 
-      let activity = { ...prevActivity, ...nextActivity }
+      let activity = merge(prevActivity, nextActivity)
 
       activity = Object.fromEntries(
         Object.entries(activity).sort(

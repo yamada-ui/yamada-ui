@@ -172,3 +172,4 @@ export const Calendar = forwardRef(
 } & ComponentArgs
 
 Calendar.displayName = "Calendar"
+Calendar.__ui__ = "Calendar"

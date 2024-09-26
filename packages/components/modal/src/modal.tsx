@@ -13,7 +13,7 @@ import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { useValue } from "@yamada-ui/use-value"
-import { getValidChildren, findChildren } from "@yamada-ui/utils"
+import { getValidChildren, findChildren, findChild } from "@yamada-ui/utils"
 import type { KeyboardEvent } from "react"
 import { cloneElement, useCallback } from "react"
 import { RemoveScroll } from "react-remove-scroll"
@@ -206,7 +206,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       DrawerOverlay,
     )
 
-    let [drawerContent] = findChildren(validChildren, DrawerContent)
+    let drawerContent = findChild(validChildren, DrawerContent)
 
     if (drawerContent)
       drawerContent = cloneElement(drawerContent, { onKeyDown })

@@ -96,3 +96,6 @@ export const ColorSelectorSwatches = forwardRef<
     ) : null
   },
 )
+
+ColorSelectorSwatches.displayName = "ColorSelectorSwatches"
+ColorSelectorSwatches.__ui__ = "ColorSelectorSwatches"

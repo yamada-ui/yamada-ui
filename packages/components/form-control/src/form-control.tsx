@@ -9,11 +9,11 @@ import type { Dict } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
-  findChildren,
   getValidChildren,
   handlerAll,
   dataAttr,
   ariaAttr,
+  findChild,
 } from "@yamada-ui/utils"
 import type { ReactNode, FocusEventHandler } from "react"
 import { useState, useId, isValidElement } from "react"
@@ -148,9 +148,9 @@ export const FormControl = forwardRef<FormControlProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customLabel] = findChildren(validChildren, Label)
-    const [customHelperMessage] = findChildren(validChildren, HelperMessage)
-    const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
+    const customLabel = findChild(validChildren, Label)
+    const customHelperMessage = findChild(validChildren, HelperMessage)
+    const customErrorMessage = findChild(validChildren, ErrorMessage)
 
     const isCustomLabel = !!customLabel
     const isCustomHelperMessage = !!customHelperMessage
@@ -208,6 +208,9 @@ export const FormControl = forwardRef<FormControlProps, "div">(
     )
   },
 )
+
+FormControl.displayName = "FormControl"
+FormControl.__ui__ = "FormControl"
 
 interface UseFormControlOptions extends FormControlOptions {
   id?: string
@@ -413,6 +416,9 @@ export const Label = forwardRef<LabelProps, "label">(
   },
 )
 
+Label.displayName = "Label"
+Label.__ui__ = "Label"
+
 export interface RequiredIndicatorProps extends HTMLUIProps<"span"> {}
 
 export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
@@ -438,6 +444,9 @@ export const RequiredIndicator = forwardRef<RequiredIndicatorProps, "span">(
   },
 )
 
+RequiredIndicator.displayName = "RequiredIndicator"
+RequiredIndicator.__ui__ = "RequiredIndicator"
+
 export interface HelperMessageProps extends HTMLUIProps<"span"> {}
 
 export const HelperMessage = forwardRef<HelperMessageProps, "span">(
@@ -461,6 +470,9 @@ export const HelperMessage = forwardRef<HelperMessageProps, "span">(
   },
 )
 
+HelperMessage.displayName = "HelperMessage"
+HelperMessage.__ui__ = "HelperMessage"
+
 export interface ErrorMessageProps extends HTMLUIProps<"span"> {}
 
 export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
@@ -483,3 +495,6 @@ export const ErrorMessage = forwardRef<ErrorMessageProps, "span">(
     )
   },
 )
+
+ErrorMessage.displayName = "ErrorMessage"
+ErrorMessage.__ui__ = "ErrorMessage"

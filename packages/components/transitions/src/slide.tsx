@@ -134,3 +134,6 @@ export const Slide = motionForwardRef<SlideProps, "div">((props, ref) => {
     </AnimatePresence>
   )
 })
+
+Slide.displayName = "Slide"
+Slide.__ui__ = "Slide"

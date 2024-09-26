@@ -2,4 +2,4 @@
 "@yamada-ui/calendar": patch
 ---
 
-add displayName calendar component
+Added `displayName` for `Calendar` component.

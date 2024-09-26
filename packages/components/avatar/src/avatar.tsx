@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -8,7 +8,7 @@ import {
 import type { ImageProps, UseImageProps } from "@yamada-ui/image"
 import { useImage } from "@yamada-ui/image"
 import { createContext, cx, dataAttr, handlerAll } from "@yamada-ui/utils"
-import type { FC, HTMLAttributeReferrerPolicy, ReactElement } from "react"
+import type { HTMLAttributeReferrerPolicy, ReactElement } from "react"
 import { cloneElement, useState } from "react"
 import { AvatarIcon } from "./avatar-icon"
 import { AvatarName } from "./avatar-name"
@@ -200,3 +200,6 @@ const AvatarImage: FC<AvatarImageProps> = ({
     />
   )
 }
+
+AvatarImage.displayName = "AvatarImage"
+AvatarImage.__ui__ = "AvatarImage"

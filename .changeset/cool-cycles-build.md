@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/color-picker": minor
+"@yamada-ui/color-picker": patch
 ---
 
 feat color-picker ally Control

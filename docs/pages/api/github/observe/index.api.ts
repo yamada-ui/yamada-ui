@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { getConstant, verifySignature } from "utils/github"
 import { updateIssues } from "./update-issues"
 import { updatePullRequests } from "./update-pull-requests"
+import { getConstant, verifySignature } from "utils/github"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

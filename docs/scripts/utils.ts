@@ -1,11 +1,11 @@
-import { Octokit } from "@octokit/rest"
-import { CONSTANT } from "constant"
-import { config } from "dotenv"
 import { readFile, writeFile } from "fs/promises"
+import { Octokit } from "@octokit/rest"
+import { config } from "dotenv"
 import matter from "gray-matter"
+import type { GrayMatterFile } from "gray-matter"
+import { CONSTANT } from "constant"
 import { prettier } from "libs/prettier"
 import type { Locale } from "utils/i18n"
-import type { GrayMatterFile } from "gray-matter"
 
 export type Input = string | Buffer
 export type Data = GrayMatterFile<Input>["data"]

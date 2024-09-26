@@ -15,10 +15,12 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "allowJs": true
   },
   "include": [
     "@types",
+    ".eslint",
     "**/*.js",
     "**/*.jsx",
     "**/*.ts",
@@ -28,8 +30,10 @@
   ],
   "exclude": [
     "node_modules",
+    "coverage",
     "examples",
     "docs",
+    "bin",
     "dist",
     ".changelog",
     ".changeset",

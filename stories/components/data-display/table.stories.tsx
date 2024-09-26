@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo, useState } from "react"
+import { colorSchemes } from "../../components"
 import { TableCaption, Button, Text } from "@yamada-ui/react"
 import type { Column, Sort } from "@yamada-ui/table"
 import { Table } from "@yamada-ui/table"
-import { useMemo, useState } from "react"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Table>
 

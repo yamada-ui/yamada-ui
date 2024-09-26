@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo } from "react"
+import { BreadcrumbEllipsis } from "../../../packages/components/breadcrumb/src/breadcrumb"
 import { ChevronsRight } from "@yamada-ui/lucide"
 import type { BreadcrumbGenerateItem } from "@yamada-ui/react"
 import {
@@ -10,8 +12,6 @@ import {
   MenuItem,
   MenuList,
 } from "@yamada-ui/react"
-import { useMemo } from "react"
-import { BreadcrumbEllipsis } from "../../../packages/components/breadcrumb/src/breadcrumb"
 
 type Story = StoryFn<typeof Breadcrumb>
 

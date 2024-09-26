@@ -25,6 +25,7 @@ import {
   getValidChildren,
   isUndefined,
 } from "@yamada-ui/utils"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import type {
   ChangeEvent,
   DOMAttributes,
@@ -32,7 +33,6 @@ import type {
   KeyboardEvent,
   MouseEvent,
 } from "react"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   useAutocompleteContext,
   useAutocompleteDescendants,

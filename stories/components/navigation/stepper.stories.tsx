@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { colorSchemes } from "../../components"
 import { Ghost } from "@yamada-ui/lucide"
 import type { Steps } from "@yamada-ui/react"
 import {
@@ -13,7 +14,6 @@ import {
   HStack,
   Box,
 } from "@yamada-ui/react"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Stepper>
 

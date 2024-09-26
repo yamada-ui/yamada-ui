@@ -1,6 +1,6 @@
+import type { FC } from "react"
 import type { UIStyle } from "@yamada-ui/react"
 import { UIProvider, extendTheme, Center, Image } from "@yamada-ui/react"
-import type { FC } from "react"
 
 export default {
   title: "System / Theme / Global Style",

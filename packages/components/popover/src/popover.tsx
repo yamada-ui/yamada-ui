@@ -1,5 +1,6 @@
 import type {
   CSSUIObject,
+  FC,
   HTMLUIPropsWithRef,
   PropGetter,
   ThemeProps,
@@ -26,7 +27,6 @@ import {
 } from "@yamada-ui/utils"
 import type {
   ComponentProps,
-  FC,
   PropsWithChildren,
   RefAttributes,
   RefObject,
@@ -467,3 +467,6 @@ export const Popover: FC<PopoverProps> = (props) => {
     </PopoverProvider>
   )
 }
+
+Popover.displayName = "Popover"
+Popover.__ui__ = "Popover"

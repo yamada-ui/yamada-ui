@@ -51,19 +51,23 @@ To improve our development process, we have set up tools and systems. Yamada UI 
   - Please enter package and custom hook names in kebab case
 - **`pnpm gen:tokens`**: generate theme tokens.
 
-### The configuration of VSCode
+### Visual Studio Code
 
-To ensure that [the ESLint VSCode extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) works properly, please add the following settings to `.vscode/settings.json`:
+#### [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+To ensure the extension works correctly, please add the following settings to `.vscode/settings.json`.
 
 ```json
 {
+  ...
   "eslint.workingDirectories": [
     "docs",
     "examples/next/app",
     "examples/next/pages",
     "examples/remix",
     "examples/vite"
-  ]
+  ],
+  ...
 }
 ```
 

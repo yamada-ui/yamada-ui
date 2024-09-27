@@ -4,6 +4,7 @@ import type {
   CSSUIObject,
   Token,
   CSSUIProps,
+  FC,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -21,7 +22,6 @@ import {
   omitChildren,
   pickChildren,
 } from "@yamada-ui/utils"
-import type { FC } from "react"
 import { cloneElement } from "react"
 import type { CarouselControlProps } from "./carousel-control"
 import { CarouselControlNext, CarouselControlPrev } from "./carousel-control"
@@ -320,6 +320,9 @@ export const Carousel = forwardRef<CarouselProps, "div">(
   },
 )
 
+Carousel.displayName = "Carousel"
+Carousel.__ui__ = "Carousel"
+
 type CarouselSlidesProps = HTMLUIProps
 
 const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
@@ -333,6 +336,9 @@ const CarouselSlides = forwardRef<CarouselSlidesProps, "div">(
     )
   },
 )
+
+CarouselSlides.displayName = "CarouselSlides"
+CarouselSlides.__ui__ = "CarouselSlides"
 
 type CarouselSlidesInnerProps = HTMLUIProps
 
@@ -355,3 +361,6 @@ const CarouselSlidesInner: FC<CarouselSlidesInnerProps> = ({ ...rest }) => {
     <ui.div className="ui-carousel__sliders__inner" __css={css} {...rest} />
   )
 }
+
+CarouselSlidesInner.displayName = "CarouselSlidesInner"
+CarouselSlidesInner.__ui__ = "CarouselSlidesInner"

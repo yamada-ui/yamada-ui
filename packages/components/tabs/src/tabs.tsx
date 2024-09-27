@@ -179,3 +179,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
     )
   },
 )
+
+Tabs.displayName = "Tabs"
+Tabs.__ui__ = "Tabs"

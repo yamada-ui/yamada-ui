@@ -1,7 +1,7 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx, runIfFunc } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import type { ReactElement } from "react"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
 import { useAutocompleteCreate } from "./use-autocomplete-option"
@@ -57,6 +57,9 @@ export const AutocompleteCreate = forwardRef<AutocompleteCreateProps, "li">(
   },
 )
 
+AutocompleteCreate.displayName = "AutocompleteCreate"
+AutocompleteCreate.__ui__ = "AutocompleteCreate"
+
 const PlusIcon: FC = () => (
   <svg viewBox="0 0 45.402 45.402" width="1em" height="1em">
     <path
@@ -65,3 +68,6 @@ const PlusIcon: FC = () => (
     />
   </svg>
 )
+
+PlusIcon.displayName = "PlusIcon"
+PlusIcon.__ui__ = "PlusIcon"

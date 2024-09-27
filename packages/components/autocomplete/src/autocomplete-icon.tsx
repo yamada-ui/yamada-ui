@@ -1,9 +1,9 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { ChevronIcon, CloseIcon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx, getValidChildren, isValidElement } from "@yamada-ui/utils"
-import type { FC, HTMLAttributes } from "react"
+import type { HTMLAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { useAutocompleteContext } from "./autocomplete-context"
 
@@ -45,6 +45,9 @@ export const AutocompleteIcon = forwardRef<AutocompleteIconProps, "div">(
   },
 )
 
+AutocompleteIcon.displayName = "AutocompleteIcon"
+AutocompleteIcon.__ui__ = "AutocompleteIcon"
+
 export interface AutocompleteClearIconProps extends AutocompleteIconProps {
   disabled?: boolean
 }
@@ -77,6 +80,9 @@ export const AutocompleteClearIcon: FC<AutocompleteClearIconProps> = ({
   )
 }
 
+AutocompleteClearIcon.displayName = "AutocompleteClearIcon"
+AutocompleteClearIcon.__ui__ = "AutocompleteClearIcon"
+
 export interface AutocompleteItemIconProps extends HTMLUIProps<"span"> {}
 
 export const AutocompleteItemIcon = forwardRef<
@@ -98,3 +104,6 @@ export const AutocompleteItemIcon = forwardRef<
     />
   )
 })
+
+AutocompleteItemIcon.displayName = "AutocompleteItemIcon"
+AutocompleteItemIcon.__ui__ = "AutocompleteItemIcon"

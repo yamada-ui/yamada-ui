@@ -1,7 +1,7 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, FC } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import type { ReactElement } from "react"
 import { useAutocompleteContext } from "./autocomplete-context"
 import { AutocompleteItemIcon } from "./autocomplete-icon"
 import type { UseAutocompleteOptionProps } from "./use-autocomplete-option"
@@ -50,6 +50,9 @@ export const AutocompleteOption = forwardRef<AutocompleteOptionProps, "li">(
   },
 )
 
+AutocompleteOption.displayName = "AutocompleteOption"
+AutocompleteOption.__ui__ = "AutocompleteOption"
+
 const CheckIcon: FC = () => (
   <svg viewBox="0 0 14 14" width="1em" height="1em">
     <polygon
@@ -58,3 +61,6 @@ const CheckIcon: FC = () => (
     />
   </svg>
 )
+
+CheckIcon.displayName = "CheckIcon"
+CheckIcon.__ui__ = "CheckIcon"

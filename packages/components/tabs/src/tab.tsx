@@ -81,3 +81,6 @@ export const Tab = forwardRef<TabProps, "button">(
     )
   },
 )
+
+Tab.displayName = "Tab"
+Tab.__ui__ = "Tab"

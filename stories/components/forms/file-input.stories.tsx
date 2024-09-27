@@ -203,7 +203,7 @@ export const useReset: Story = () => {
         />
 
         {value?.length ? (
-          <InputRightElement isClick onClick={onReset}>
+          <InputRightElement isClickable onClick={onReset}>
             <X color="gray.500" />
           </InputRightElement>
         ) : null}
@@ -262,7 +262,7 @@ export const reactHookForm: Story = () => {
               <FileInput multiple {...field} resetRef={resetRef} />
 
               {field.value?.length ? (
-                <InputRightElement isClick onClick={onReset}>
+                <InputRightElement isClickable onClick={onReset}>
                   <X color="gray.500" />
                 </InputRightElement>
               ) : null}

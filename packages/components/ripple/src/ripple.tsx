@@ -77,3 +77,6 @@ export const Ripple: FC<RippleProps> = ({
     </>
   )
 }
+
+Ripple.displayName = "Ripple"
+Ripple.__ui__ = "Ripple"

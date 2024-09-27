@@ -72,3 +72,6 @@ export const AutocompleteOptionGroup = forwardRef<
     )
   },
 )
+
+AutocompleteOptionGroup.displayName = "AutocompleteOptionGroup"
+AutocompleteOptionGroup.__ui__ = "AutocompleteOptionGroup"

@@ -1,11 +1,11 @@
+import type { FC, PropsWithChildren } from "react"
+import { createContext, useContext, useMemo } from "react"
 import type {
   DocumentPagination,
   Document,
   DocumentNavigation,
   DocumentTree,
 } from "mdx"
-import type { FC, PropsWithChildren } from "react"
-import { createContext, useContext, useMemo } from "react"
 
 interface PageContext extends Omit<PageProviderProps, "children"> {
   documentMap: Pick<DocumentTree, "title" | "description" | "label" | "slug">[]

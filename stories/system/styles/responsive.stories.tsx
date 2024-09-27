@@ -1,3 +1,5 @@
+import { useRef } from "react"
+import type { FC } from "react"
 import { Calendar } from "@yamada-ui/calendar"
 import {
   Box,
@@ -9,8 +11,6 @@ import {
   useBreakpoint,
   useBreakpointValue,
 } from "@yamada-ui/react"
-import { useRef } from "react"
-import type { FC } from "react"
 
 export default {
   title: "System / Styles / Responsive",

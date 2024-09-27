@@ -9,9 +9,9 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import type { BoxProps } from "@yamada-ui/react"
-import { Github } from "components/media-and-icons"
 import { memo } from "react"
 import type { FC } from "react"
+import { Github } from "components/media-and-icons"
 
 export interface FormProps extends BoxProps {}
 

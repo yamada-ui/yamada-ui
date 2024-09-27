@@ -22,6 +22,7 @@
     "paths": { "mdx": ["./.mdx"] }
   },
   "include": [
+    "@types",
     "next-env.d.ts",
     "**/*.js",
     "**/*.jsx",
@@ -33,5 +34,5 @@
     "server.ts",
     "./.mdx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next"]
 }

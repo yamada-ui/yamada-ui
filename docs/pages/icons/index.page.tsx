@@ -1,8 +1,8 @@
+import type { NextPage, InferGetStaticPropsType } from "next"
+import { List } from "./list"
 import { useI18n, PageProvider } from "contexts"
 import { DocumentLayout } from "layouts/document-layout"
-import type { NextPage, InferGetStaticPropsType } from "next"
 import { getStaticCommonProps } from "utils/next"
-import { List } from "./list"
 
 export const getStaticProps = getStaticCommonProps
 

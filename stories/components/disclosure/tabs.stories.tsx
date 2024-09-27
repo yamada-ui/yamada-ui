@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@yamada-ui/react"
 import { useState } from "react"
+import { Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Tabs>
 

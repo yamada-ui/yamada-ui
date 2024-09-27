@@ -15,13 +15,13 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import { useI18n } from "contexts"
 import { matchSorter } from "match-sorter"
 import type { FC, MutableRefObject } from "react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { IconDrawer } from "./icon-drawer"
 import { NotFound } from "./not-found"
 import { TAGS } from "./tags"
+import { useI18n } from "contexts"
 
 const resolvedIcons = Object.entries(icons).filter(
   ([name]) => !name.endsWith("Icon"),

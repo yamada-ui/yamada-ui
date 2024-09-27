@@ -81,3 +81,6 @@ export const Fade = motionForwardRef<FadeProps, "div">((props, ref) => {
     </AnimatePresence>
   )
 })
+
+Fade.displayName = "Fade"
+Fade.__ui__ = "Fade"

@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { Check, Mail, Phone } from "@yamada-ui/lucide"
 import {
   Input,
@@ -12,8 +14,6 @@ import {
   FormControl,
   VStack,
 } from "@yamada-ui/react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Input>
 
@@ -174,7 +174,7 @@ export const useElement: Story = () => {
           type={show ? "text" : "password"}
           placeholder="your password"
         />
-        <InputRightElement w="4.5rem" isClick>
+        <InputRightElement w="4.5rem" isClickable>
           <Button h="1.75rem" size="sm" onClick={toggle}>
             {show ? "Hide" : "Show"}
           </Button>

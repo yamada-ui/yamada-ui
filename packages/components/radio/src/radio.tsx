@@ -379,3 +379,4 @@ export const Radio = forwardRef(
 } & ComponentArgs
 
 Radio.displayName = "Radio"
+Radio.__ui__ = "Radio"

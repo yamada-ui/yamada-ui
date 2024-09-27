@@ -37,10 +37,10 @@ import {
   handlerAll,
   percentToValue,
   getValidChildren,
-  findChildren,
   isEmpty,
   omitChildren,
   includesChildren,
+  findChild,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
@@ -683,8 +683,8 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
 
   const validChildren = getValidChildren(children)
 
-  const [customSliderTrack] = findChildren(validChildren, SliderTrack)
-  const [customSliderThumb] = findChildren(validChildren, SliderThumb)
+  const customSliderTrack = findChild(validChildren, SliderTrack)
+  const customSliderThumb = findChild(validChildren, SliderThumb)
 
   const hasSliderThumb = includesChildren(validChildren, SliderThumb)
 

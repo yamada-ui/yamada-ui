@@ -7,7 +7,6 @@ import {
   isObject,
   isUndefined,
 } from "@yamada-ui/react"
-import { CONSTANT } from "constant"
 import { useRouter } from "next/router"
 import type { PropsWithChildren, FC } from "react"
 import {
@@ -17,6 +16,7 @@ import {
   useCallback,
   Fragment,
 } from "react"
+import { CONSTANT } from "constant"
 import { getContents, getUI } from "utils/i18n"
 import type { Locale, UI } from "utils/i18n"
 

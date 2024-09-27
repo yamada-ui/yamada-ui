@@ -16,7 +16,7 @@ export const Option = forwardRef<OptionProps, "li">(
   ({ id, className, icon, ...rest }, ref) => {
     const { styles } = useSelectContext()
     const { isSelected, customIcon, children, getOptionProps } =
-      useSelectOption(ref, rest)
+      useSelectOption(rest)
     const uuid = useId()
 
     id ??= uuid
@@ -41,7 +41,7 @@ export const Option = forwardRef<OptionProps, "li">(
         id={id}
         className={cx("ui-select__item", className)}
         __css={css}
-        {...getOptionProps()}
+        {...getOptionProps({}, ref)}
       >
         {icon !== null ? (
           <OptionIcon opacity={isSelected ? 1 : 0}>

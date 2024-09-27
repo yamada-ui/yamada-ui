@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -19,7 +19,7 @@ import {
   mergeRefs,
   runIfFunc,
 } from "@yamada-ui/utils"
-import type { FC, HTMLAttributes, ReactNode, RefAttributes } from "react"
+import type { HTMLAttributes, ReactNode, RefAttributes } from "react"
 import { cloneElement, useRef } from "react"
 import { Calendar } from "./calendar"
 import type { UseDatePickerProps } from "./use-date-picker"
@@ -183,6 +183,9 @@ export const DatePicker = forwardRef<DatePickerProps, "input">((props, ref) => {
   )
 })
 
+DatePicker.displayName = "DatePicker"
+DatePicker.__ui__ = "DatePicker"
+
 interface DatePickerFieldOptions {
   inputProps?: HTMLUIProps<"input">
 }
@@ -226,6 +229,9 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, "input">(
     )
   },
 )
+
+DatePickerField.displayName = "DatePickerField"
+DatePickerField.__ui__ = "DatePickerField"
 
 export interface DatePickerIconProps extends Omit<HTMLUIProps, "clear"> {}
 
@@ -273,6 +279,9 @@ export const DatePickerIcon = forwardRef<DatePickerIconProps, "div">(
   },
 )
 
+DatePickerIcon.displayName = "DatePickerIcon"
+DatePickerIcon.__ui__ = "DatePickerIcon"
+
 export interface DatePickerCalendarIconProps extends IconProps {}
 
 export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
@@ -292,6 +301,9 @@ export const DatePickerCalendarIcon: FC<DatePickerCalendarIconProps> = ({
     </Icon>
   )
 }
+
+DatePickerCalendarIcon.displayName = "DatePickerCalendarIcon"
+DatePickerCalendarIcon.__ui__ = "DatePickerCalendarIcon"
 
 export interface DatePickerClearIconProps extends DatePickerIconProps {
   disabled?: boolean
@@ -324,3 +336,6 @@ export const DatePickerClearIcon: FC<DatePickerClearIconProps> = ({
     </DatePickerIcon>
   )
 }
+
+DatePickerClearIcon.displayName = "DatePickerClearIcon"
+DatePickerClearIcon.__ui__ = "DatePickerClearIcon"

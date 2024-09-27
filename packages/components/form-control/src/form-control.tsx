@@ -9,11 +9,11 @@ import type { Dict } from "@yamada-ui/utils"
 import {
   createContext,
   cx,
-  findChildren,
   getValidChildren,
   handlerAll,
   dataAttr,
   ariaAttr,
+  findChild,
 } from "@yamada-ui/utils"
 import type { ReactNode, FocusEventHandler } from "react"
 import { useState, useId, isValidElement } from "react"
@@ -150,9 +150,9 @@ export const FormControl = forwardRef<FormControlProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customLabel] = findChildren(validChildren, Label)
-    const [customHelperMessage] = findChildren(validChildren, HelperMessage)
-    const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
+    const customLabel = findChild(validChildren, Label)
+    const customHelperMessage = findChild(validChildren, HelperMessage)
+    const customErrorMessage = findChild(validChildren, ErrorMessage)
 
     const isCustomLabel = !!customLabel
     const isCustomHelperMessage = !!customHelperMessage

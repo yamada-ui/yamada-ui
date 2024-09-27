@@ -1,11 +1,11 @@
 import type { ButtonProps, IconButtonProps } from "@yamada-ui/button"
 import { IconButton, Button } from "@yamada-ui/button"
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { FC, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx, isValidElement } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import type { ReactElement } from "react"
 import { useCalendarContext } from "./use-calendar"
 import type { UseCalendarHeaderProps } from "./use-calendar-header"
 import { useCalendarHeader } from "./use-calendar-header"
@@ -103,6 +103,9 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   ) : null
 }
 
+CalendarHeader.displayName = "CalendarHeader"
+CalendarHeader.__ui__ = "CalendarHeader"
+
 export interface CalendarLabelProps extends ButtonProps {}
 
 const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
@@ -127,6 +130,9 @@ const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
   )
 }
 
+CalendarLabel.displayName = "CalendarLabel"
+CalendarLabel.__ui__ = "CalendarLabel"
+
 export interface CalendarLabelIconProps extends IconProps {}
 
 const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
@@ -148,6 +154,9 @@ const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
   )
 }
 
+CalendarLabelIcon.displayName = "CalendarLabelIcon"
+CalendarLabelIcon.__ui__ = "CalendarLabelIcon"
+
 export interface CalendarControlSharedProps
   extends Omit<CalendarControlProps, "operation"> {}
 
@@ -165,6 +174,9 @@ const CalendarControlPrev: FC<CalendarControlSharedProps> = ({
   )
 }
 
+CalendarControlPrev.displayName = "CalendarControlPrev"
+CalendarControlPrev.__ui__ = "CalendarControlPrev"
+
 const CalendarControlNext: FC<CalendarControlSharedProps> = ({
   className,
   ...rest
@@ -178,6 +190,9 @@ const CalendarControlNext: FC<CalendarControlSharedProps> = ({
     />
   )
 }
+
+CalendarControlNext.displayName = "CalendarControlNext"
+CalendarControlNext.__ui__ = "CalendarControlNext"
 
 export interface CalendarControlProps extends IconButtonProps {
   operation: "prev" | "next"
@@ -206,3 +221,6 @@ const CalendarControl: FC<CalendarControlProps> = ({
     />
   )
 }
+
+CalendarControl.displayName = "CalendarControl"
+CalendarControl.__ui__ = "CalendarControl"

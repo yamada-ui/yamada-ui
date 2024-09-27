@@ -106,7 +106,9 @@ export const useResizable = ({
   groupProps,
   ...rest
 }: UseResizableProps) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
 
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({ ...props, ref, ...rest }),
@@ -227,7 +229,9 @@ export const useResizableItem = ({
   containerProps,
   ...innerProps
 }: UseResizableItemProps) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
 
   const getPanelProps: PropGetter<
     Merge<HTMLUIProps, PanelProps>,
@@ -329,7 +333,9 @@ export const useResizableTrigger = ({
   onDragging,
   ...rest
 }: UseResizableTriggerProps) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
 
   const { isDisabled: isGroupDisabled } = useResizableContext()
   const [isActive, setIsActive] = useState<boolean>(false)

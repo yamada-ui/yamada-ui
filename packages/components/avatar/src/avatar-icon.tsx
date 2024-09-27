@@ -1,6 +1,6 @@
+import type { FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
-import type { FC } from "react"
 
 export const AvatarIcon: FC<IconProps> = (props) => (
   <Icon
@@ -21,3 +21,6 @@ export const AvatarIcon: FC<IconProps> = (props) => (
     />
   </Icon>
 )
+
+AvatarIcon.displayName = "AvatarIcon"
+AvatarIcon.__ui__ = "AvatarIcon"

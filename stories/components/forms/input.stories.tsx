@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { Check, Mail, Phone } from "@yamada-ui/lucide"
 import {
   Input,
@@ -12,8 +14,6 @@ import {
   FormControl,
   VStack,
 } from "@yamada-ui/react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof Input>
 
@@ -174,7 +174,7 @@ export const useElement: Story = () => {
           type={show ? "text" : "password"}
           placeholder="your password"
         />
-        <InputRightElement w="4.5rem" isClick>
+        <InputRightElement w="4.5rem" isClickable>
           <Button h="1.75rem" size="sm" onClick={toggle}>
             {show ? "Hide" : "Show"}
           </Button>
@@ -218,7 +218,11 @@ export const customType: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { name: string; cellphone: string; email: string }
+  interface Data {
+    name: string
+    cellphone: string
+    email: string
+  }
 
   const {
     register,
@@ -290,7 +294,11 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { name: string; cellphone: string; email: string }
+  interface Data {
+    name: string
+    cellphone: string
+    email: string
+  }
 
   const defaultValues: Data = {
     name: "孫悟空",

@@ -1,17 +1,16 @@
 import { Avatar, Grid, HStack, Link, Text, VStack } from "@yamada-ui/react"
 import type { AvatarProps, GridProps, StackProps } from "@yamada-ui/react"
+import type { FC } from "react"
 import { Github, X } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
-import type { FC } from "react"
 
-export type UserProps = StackProps &
-  Pick<AvatarProps, "name"> & {
-    icon?: string
-    description: string
-    github?: string
-    x?: string
-  }
+export interface UserProps extends StackProps, Pick<AvatarProps, "name"> {
+  icon?: string
+  description: string
+  github?: string
+  x?: string
+}
 
 export const User: FC<UserProps> = ({
   name,
@@ -72,7 +71,9 @@ export const User: FC<UserProps> = ({
   )
 }
 
-export type UsersProps = GridProps & { type: "maintainers" | "members" }
+export interface UsersProps extends GridProps {
+  type: "maintainers" | "members"
+}
 
 export const Users: FC<UsersProps> = ({ type, ...rest }) => {
   const { locale } = useI18n()

@@ -13,11 +13,11 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import type { IconProps } from "@yamada-ui/react"
-import { CodeBlock } from "components/mdx/code-block"
 import { memo, useState } from "react"
 import type { FC, MutableRefObject } from "react"
+import { CodeBlock } from "components/mdx/code-block"
 
-export type IconDrawerProps = {
+export interface IconDrawerProps {
   openRef: MutableRefObject<(name: IconNames) => void>
 }
 

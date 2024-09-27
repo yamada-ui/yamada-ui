@@ -1,13 +1,13 @@
-import { CONSTANT } from "constant"
+import type { UIProps } from "@yamada-ui/react"
 import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
-import type { UIProps } from "@yamada-ui/react"
 import type {
   InsightPeriod,
   Insights,
   UserInsight,
   UserInsightScore,
 } from "insights"
+import { CONSTANT } from "constant"
 import type { Locale } from "utils/i18n"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")
@@ -39,7 +39,7 @@ export const INSIGHT_PERIOD_SUGGEST = [
 ] as const
 export const INSIGHT_USER_SUGGEST = ["all", "maintainers", "members"] as const
 
-export const INSIGHT_SCORE_COLORS: Record<string, UIProps["color"]> = {
+export const INSIGHT_SCORE_COLORS: { [key: string]: UIProps["color"] } = {
   pullRequests: [`blue.500`, `blue.400`],
   issues: [`red.500`, `red.400`],
   approved: [`green.500`, `green.400`],
@@ -78,6 +78,7 @@ export const labelFormatter =
   (value: string, { summarize, end }: InsightPeriod) =>
   (locale: Locale) => {
     if (!dayjs(value).isValid()) return value
+    if (INSIGHT_USER_IDS.includes(value)) return value
 
     const date = dayjs(value)
 

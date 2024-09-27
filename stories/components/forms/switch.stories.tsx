@@ -1,4 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useId } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import {
   Label,
   Switch,
@@ -8,10 +12,6 @@ import {
   VStack,
   Button,
 } from "@yamada-ui/react"
-import { useId } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Switch>
 
@@ -107,7 +107,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { switch: boolean }
+  interface Data {
+    switch: boolean
+  }
 
   const { control, handleSubmit, watch } = useForm<Data>()
 
@@ -135,7 +137,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { switch: boolean }
+  interface Data {
+    switch: boolean
+  }
 
   const defaultValues: Data = {
     switch: true,

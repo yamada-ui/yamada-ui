@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { RangeDatePickerProps } from "@yamada-ui/calendar"
-import { RangeDatePicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
-import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { colorSchemes } from "../../components"
+import { RangeDatePicker } from "@yamada-ui/calendar"
+import type { RangeDatePickerProps } from "@yamada-ui/calendar"
+import { Ghost } from "@yamada-ui/lucide"
+import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof RangeDatePicker>
@@ -183,6 +183,10 @@ export const withSeparator: Story = () => {
 
 export const withMaxSelectedValue: Story = () => {
   return <RangeDatePicker maxSelectValues={3} />
+}
+
+export const withMinSelectedValue: Story = () => {
+  return <RangeDatePicker minSelectValues={5} />
 }
 
 export const withPattern: Story = () => {
@@ -539,7 +543,9 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { multiDatePicker: [Date?, Date?] }
+  interface Data {
+    multiDatePicker: [Date?, Date?]
+  }
 
   const {
     control,
@@ -577,7 +583,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { multiDatePicker: [Date?, Date?] }
+  interface Data {
+    multiDatePicker: [Date?, Date?]
+  }
 
   const defaultValues: Data = {
     multiDatePicker: [new Date()],

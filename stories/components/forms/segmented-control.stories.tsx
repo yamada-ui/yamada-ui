@@ -1,5 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { SegmentedControlItem } from "@yamada-ui/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import {
   Grid,
   SegmentedControl,
@@ -8,10 +11,7 @@ import {
   Button,
   FormControl,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
+import type { SegmentedControlItem } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof SegmentedControl>
 
@@ -215,7 +215,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { segmentedControl: string }
+  interface Data {
+    segmentedControl: string
+  }
 
   const defaultValues: Data = {
     segmentedControl: "ベジータ",

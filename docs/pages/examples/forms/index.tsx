@@ -51,7 +51,7 @@ export const Forms = memo(() => {
 
 Forms.displayName = "Forms"
 
-type FormProps = {
+interface FormProps {
   setTypeRef: MutableRefObject<(type: FormType) => void>
 }
 

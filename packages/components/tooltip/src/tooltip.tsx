@@ -1,4 +1,9 @@
-import type { CSSUIObject, CSSUIProps, ThemeProps } from "@yamada-ui/core"
+import type {
+  CSSUIObject,
+  CSSUIProps,
+  PropGetter,
+  ThemeProps,
+} from "@yamada-ui/core"
 import { ui, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
@@ -10,7 +15,6 @@ import { useEventListener } from "@yamada-ui/use-event-listener"
 import { useOutsideClick } from "@yamada-ui/use-outside-click"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
 import { usePopper } from "@yamada-ui/use-popper"
-import type { PropGetter } from "@yamada-ui/utils"
 import {
   cx,
   handlerAll,
@@ -28,7 +32,7 @@ import {
   useRef,
 } from "react"
 
-type TooltipOptions = {
+interface TooltipOptions {
   /**
    * The label of the tooltip.
    */
@@ -117,15 +121,11 @@ type TooltipOptions = {
   withPortal?: boolean
 }
 
-// export type TooltipProps = Omit<HTMLUIProps<"div">, "offset"> &
-//   ThemeProps<"Tooltip"> &
-//   Omit<HTMLMotionProps<"div">, "color" | "style" | "variants" | "transition"> &
-//   Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &
-//   TooltipOptions
-export type TooltipProps = Omit<MotionProps<"div">, "offset"> &
-  ThemeProps<"Tooltip"> &
-  Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement"> &
-  TooltipOptions
+export interface TooltipProps
+  extends Omit<MotionProps, "animation" | "offset">,
+    ThemeProps<"Tooltip">,
+    Pick<UsePopperProps, "modifiers" | "gutter" | "offset" | "placement">,
+    TooltipOptions {}
 
 const getTooltipProps = (
   animation: TooltipProps["animation"] = "scale",
@@ -411,3 +411,6 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     )
   },
 )
+
+Tooltip.displayName = "Tooltip"
+Tooltip.__ui__ = "Tooltip"

@@ -7,11 +7,11 @@ import {
   forwardRef,
 } from "@yamada-ui/react"
 import type { BreadcrumbProps as UIBreadcrumbProps } from "@yamada-ui/react"
-import { usePage } from "contexts"
 import Link from "next/link"
 import { memo } from "react"
+import { usePage } from "contexts"
 
-export type BreadcrumbProps = UIBreadcrumbProps
+export interface BreadcrumbProps extends UIBreadcrumbProps {}
 
 export const Breadcrumb = memo(
   forwardRef<BreadcrumbProps, "div">(({ ...rest }, ref) => {

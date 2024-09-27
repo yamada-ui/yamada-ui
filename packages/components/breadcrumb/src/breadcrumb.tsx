@@ -9,7 +9,7 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import { Icon } from "@yamada-ui/icon"
 import type { IconProps } from "@yamada-ui/icon"
@@ -24,20 +24,20 @@ import {
 import type { ReactNode } from "react"
 import { Fragment, cloneElement, useCallback, useMemo } from "react"
 
-const [BreadcrumbProvider, useBreadcrumb] = createContext<
-  Record<string, CSSUIObject>
->({
+const [BreadcrumbProvider, useBreadcrumb] = createContext<{
+  [key: string]: CSSUIObject
+}>({
   name: "BreadcrumbContext",
   errorMessage: `useBreadcrumb returned is 'undefined'. Seems you forgot to wrap the components in "<Breadcrumb />" `,
 })
 
-export type BreadcrumbGenerateItem = BreadcrumbLinkProps & {
+export interface BreadcrumbGenerateItem extends BreadcrumbLinkProps {
   name?: ReactNode
   containerProps?: Omit<BreadcrumbItemProps, "isLastChild">
   isEllipsisPage?: boolean
 }
 
-type BreadcrumbOptions = {
+interface BreadcrumbOptions {
   /**
    * The visual separator between each breadcrumb item.
    *
@@ -74,9 +74,10 @@ type BreadcrumbOptions = {
     | ((props: { items: BreadcrumbGenerateItem[] }) => ReactNode)
 }
 
-export type BreadcrumbProps = Omit<HTMLUIProps<"nav">, "gap"> &
-  ThemeProps<"Breadcrumb"> &
-  BreadcrumbOptions
+export interface BreadcrumbProps
+  extends Omit<HTMLUIProps<"nav">, "gap">,
+    ThemeProps<"Breadcrumb">,
+    BreadcrumbOptions {}
 
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
@@ -84,7 +85,7 @@ export type BreadcrumbProps = Omit<HTMLUIProps<"nav">, "gap"> &
  * @see Docs https://yamada-ui.com/components/navigation/breadcrumb
  */
 export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Breadcrumb", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Breadcrumb", props)
 
   const {
     className,
@@ -237,7 +238,11 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   )
 })
 
-type BreadcrumbItemOptions = Pick<BreadcrumbProps, "separator" | "gap"> & {
+Breadcrumb.displayName = "Breadcrumb"
+Breadcrumb.__ui__ = "Breadcrumb"
+
+interface BreadcrumbItemOptions
+  extends Pick<BreadcrumbProps, "separator" | "gap"> {
   /**
    * If `true`, change to span element.
    *
@@ -252,9 +257,11 @@ type BreadcrumbItemOptions = Pick<BreadcrumbProps, "separator" | "gap"> & {
   isLastChild?: boolean
 }
 
-export type BreadcrumbItemProps = HTMLUIProps<"li"> & BreadcrumbItemOptions
+export interface BreadcrumbItemProps
+  extends Omit<HTMLUIProps<"li">, "gap">,
+    BreadcrumbItemOptions {}
 
-export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, "li">(
+export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
   (
     {
       className,
@@ -311,7 +318,10 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemOptions, "li">(
   },
 )
 
-type BreadcrumbLinkOptions = {
+BreadcrumbItem.displayName = "BreadcrumbItem"
+BreadcrumbItem.__ui__ = "BreadcrumbItem"
+
+interface BreadcrumbLinkOptions {
   /**
    * If `true`, change to span element.
    *
@@ -320,7 +330,9 @@ type BreadcrumbLinkOptions = {
   isCurrentPage?: boolean
 }
 
-export type BreadcrumbLinkProps = HTMLUIProps<"a"> & BreadcrumbLinkOptions
+export interface BreadcrumbLinkProps
+  extends HTMLUIProps<"a">,
+    BreadcrumbLinkOptions {}
 
 export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
   ({ className, children, isCurrentPage, href, ...rest }, ref) => {
@@ -341,16 +353,19 @@ export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
     )
   },
 )
+BreadcrumbLink.displayName = "BreadcrumbLink"
+BreadcrumbLink.__ui__ = "BreadcrumbLink"
 
-type BreadcrumbSeparatorOptions = {
+interface BreadcrumbSeparatorOptions {
   /**
    * The CSS `margin-inline-start`, and `margin-inline-end` property.
    */
   gap?: CSSUIObject["mx"]
 }
 
-export type BreadcrumbSeparatorProps = HTMLUIProps<"span"> &
-  BreadcrumbSeparatorOptions
+export interface BreadcrumbSeparatorProps
+  extends Omit<HTMLUIProps<"span">, "gap">,
+    BreadcrumbSeparatorOptions {}
 
 export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
   ({ children, gap: mx, ...rest }, ref) => {
@@ -373,9 +388,14 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
   },
 )
 
-type BreadcrumbEllipsisOptions = {}
+BreadcrumbSeparator.displayName = "BreadcrumbSeparator"
+BreadcrumbSeparator.__ui__ = "BreadcrumbSeparator"
 
-export type BreadcrumbEllipsisProps = IconProps & BreadcrumbEllipsisOptions
+interface BreadcrumbEllipsisOptions {}
+
+export interface BreadcrumbEllipsisProps
+  extends IconProps,
+    BreadcrumbEllipsisOptions {}
 
 export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
   ({ children, className, ...rest }, ref) => {
@@ -408,3 +428,6 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
     )
   },
 )
+
+BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis"
+BreadcrumbEllipsis.__ui__ = "BreadcrumbEllipsis"

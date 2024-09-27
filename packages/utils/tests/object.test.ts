@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest"
+import type { Dict } from "../src"
 import {
   omitObject,
   pickObject,
@@ -24,7 +25,9 @@ describe("Object", () => {
   describe("omitObject with nested keys", () => {
     test("should omit specified keys from an object", () => {
       const obj = { a: { b: 2, c: 3 }, d: 4 }
-      expect(omitObject(obj, ["a.b", "d"])).toStrictEqual({ a: { c: 3 } })
+      expect(omitObject<Dict>(obj, ["a.b", "d"])).toStrictEqual({
+        a: { c: 3 },
+      })
     })
   })
 
@@ -38,7 +41,10 @@ describe("Object", () => {
   describe("pickObject with nested keys", () => {
     test("should omit specified keys from an object", () => {
       const obj = { a: { b: 2, c: 3 }, d: 4 }
-      expect(pickObject(obj, ["a.b", "d"])).toStrictEqual({ a: { b: 2 }, d: 4 })
+      expect(pickObject<Dict>(obj, ["a.b", "d"])).toStrictEqual({
+        a: { b: 2 },
+        d: 4,
+      })
     })
   })
 
@@ -77,7 +83,27 @@ describe("Object", () => {
   describe("flattenObject", () => {
     test("should flatten an object to a specified depth", () => {
       const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
-      expect(flattenObject(obj, 1)).toStrictEqual({
+      expect(flattenObject(obj, { maxDepth: 1 })).toStrictEqual({
+        a: 1,
+        "b.c": 2,
+        "b.d": { e: 3 },
+      })
+    })
+
+    test("should flatten an object with a custom separator", () => {
+      const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
+      expect(flattenObject(obj, { separator: "-" })).toStrictEqual({
+        a: 1,
+        "b-c": 2,
+        "b-d-e": 3,
+      })
+    })
+
+    test("should flatten an object with a shouldProcess function", () => {
+      const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
+      expect(
+        flattenObject(obj, { shouldProcess: (value) => !("e" in value) }),
+      ).toStrictEqual({
         a: 1,
         "b.c": 2,
         "b.d": { e: 3 },

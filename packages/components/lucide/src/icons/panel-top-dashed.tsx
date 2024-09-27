@@ -3,13 +3,11 @@ import { PanelTopDashed as PanelTopDashedIcon } from "lucide-react"
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type PanelTopDashedProps = LucideIconProps
-
 /**
  * `PanelTopDashed` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const PanelTopDashed = forwardRef<PanelTopDashedProps, "svg">(
+export const PanelTopDashed = forwardRef<LucideIconProps, "svg">(
   (props, ref) => <LucideIcon ref={ref} as={PanelTopDashedIcon} {...props} />,
 )

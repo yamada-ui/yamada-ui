@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { cx, filterUndefined } from "@yamada-ui/utils"
 
-type TextOptions = {
+interface TextOptions {
   /**
    * The CSS `text-align` property.
    */
@@ -22,7 +22,10 @@ type TextOptions = {
   casing?: CSSUIProps["textTransform"]
 }
 
-export type TextProps = HTMLUIProps<"p"> & ThemeProps<"Text"> & TextOptions
+export interface TextProps
+  extends HTMLUIProps<"p">,
+    ThemeProps<"Text">,
+    TextOptions {}
 
 /**
  * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.
@@ -55,3 +58,6 @@ export const Text = forwardRef<TextProps, "p">((props, ref) => {
     />
   )
 })
+
+Text.displayName = "Text"
+Text.__ui__ = "Text"

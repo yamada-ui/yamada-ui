@@ -75,8 +75,6 @@ import type {
   UIProviderProps,
 } from "@yamada-ui/react"
 import * as TableComponents from "@yamada-ui/table"
-import { CopyButton } from "components/forms"
-import { useI18n } from "contexts"
 import type { PrismTheme } from "prism-react-renderer"
 import React, { useEffect, useRef, useState } from "react"
 import type { FC, PropsWithChildren } from "react"
@@ -84,6 +82,8 @@ import { createPortal } from "react-dom"
 import { useForm, Controller } from "react-hook-form"
 import { FaRobot } from "react-icons/fa"
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
+import { CopyButton } from "components/forms"
+import { useI18n } from "contexts"
 import { theme as defaultTheme, config as defaultConfig } from "theme"
 import { wait } from "utils/async"
 import "dayjs/locale/ja"
@@ -177,7 +177,7 @@ const scope = {
   ...utils,
 }
 
-export type EditableCodeBlockProps = {
+export interface EditableCodeBlockProps {
   code: string
   disabled?: boolean
   enableTypeScript?: boolean

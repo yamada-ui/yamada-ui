@@ -1,9 +1,9 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { forwardRef, ui } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useStat } from "./stat"
+import { useStat } from "./stat-context"
 
-export type StatLabelProps = HTMLUIProps<"dt">
+export interface StatLabelProps extends HTMLUIProps<"dt"> {}
 
 export const StatLabel = forwardRef<StatLabelProps, "dt">(
   ({ className, ...rest }, ref) => {

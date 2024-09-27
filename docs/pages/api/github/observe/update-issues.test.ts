@@ -1,5 +1,5 @@
-import httpMocks from "node-mocks-http"
 import type { NextApiRequest, NextApiResponse } from "next"
+import httpMocks from "node-mocks-http"
 import handler from "./index.api"
 import { generateSignature } from "utils/github"
 

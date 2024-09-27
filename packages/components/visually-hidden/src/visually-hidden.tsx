@@ -1,7 +1,7 @@
 import type { HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 
-export type VisuallyHiddenProps = HTMLUIProps<"span">
+export interface VisuallyHiddenProps extends HTMLUIProps<"span"> {}
 
 /**
  * `VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.
@@ -21,3 +21,5 @@ export const VisuallyHidden = ui("span", {
     position: "absolute",
   },
 })
+VisuallyHidden.displayName = "VisuallyHidden"
+VisuallyHidden.__ui__ = "VisuallyHidden"

@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import {
   Button,
   FormControl,
@@ -8,8 +10,6 @@ import {
   VStack,
   useNumberInput,
 } from "@yamada-ui/react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm, Controller } from "react-hook-form"
 
 type Story = StoryFn<typeof NumberInput>
 
@@ -223,7 +223,9 @@ export const stylingPlaceholder: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { numberInput: string }
+  interface Data {
+    numberInput: string
+  }
 
   const {
     control,
@@ -262,7 +264,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { numberInput: string }
+  interface Data {
+    numberInput: string
+  }
 
   const defaultValues: Data = {
     numberInput: "5",

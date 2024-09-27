@@ -2,10 +2,10 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { cx, findChildren, getValidChildren, dataAttr } from "@yamada-ui/utils"
+import { cx, getValidChildren, dataAttr, findChild } from "@yamada-ui/utils"
 import { VisuallyHidden } from "@yamada-ui/visually-hidden"
 import type { ReactNode } from "react"
 import { useId, useState } from "react"
@@ -20,7 +20,7 @@ import {
   useFormControlStyles,
 } from "./form-control"
 
-type FieldsetOptions = {
+interface FieldsetOptions {
   /**
    * If `true`, the fieldset will be required.
    *
@@ -77,10 +77,11 @@ type FieldsetOptions = {
   errorMessageProps?: ErrorMessageProps
 }
 
-export type FieldsetProps = HTMLUIProps<"fieldset"> &
-  ThemeProps<"Fieldset"> &
-  LegendOptions &
-  FieldsetOptions
+export interface FieldsetProps
+  extends HTMLUIProps<"fieldset">,
+    ThemeProps<"Fieldset">,
+    LegendOptions,
+    FieldsetOptions {}
 
 /**
  * `Fieldset` is a component used to fieldset elements with legend, helper message, error message, etc.
@@ -89,7 +90,7 @@ export type FieldsetProps = HTMLUIProps<"fieldset"> &
  */
 export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   ({ id, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Fieldset", props)
+    const [styles, mergedProps] = useComponentMultiStyle("Fieldset", props)
     const {
       className,
       isRequired = false,
@@ -115,9 +116,9 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
 
     const validChildren = getValidChildren(children)
 
-    const [customLegend] = findChildren(validChildren, Legend)
-    const [customHelperMessage] = findChildren(validChildren, HelperMessage)
-    const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
+    const customLegend = findChild(validChildren, Legend)
+    const customHelperMessage = findChild(validChildren, HelperMessage)
+    const customErrorMessage = findChild(validChildren, ErrorMessage)
 
     const isCustomLegend = !!customLegend
     const isCustomHelperMessage = !!customHelperMessage
@@ -181,13 +182,16 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   },
 )
 
-type LegendOptions = {
+Fieldset.displayName = "Fieldset"
+Fieldset.__ui__ = "Fieldset"
+
+interface LegendOptions {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
   isRequired?: boolean
 }
 
-export type LegendProps = HTMLUIProps<"legend"> & LegendOptions
+export interface LegendProps extends HTMLUIProps<"legend">, LegendOptions {}
 
 export const Legend = forwardRef<LegendProps, "legend">(
   (
@@ -234,3 +238,6 @@ export const Legend = forwardRef<LegendProps, "legend">(
     )
   },
 )
+
+Legend.displayName = "Legend"
+Legend.__ui__ = "Legend"

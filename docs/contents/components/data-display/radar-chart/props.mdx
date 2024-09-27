@@ -4,6 +4,7 @@ description: >-
   `RadarChart` is a component for drawing radar charts to compare multiple sets
   of data.
 package_name: "@yamada-ui/charts"
+order: 1
 label: Updated
 with_description: true
 tab: Props
@@ -17,7 +18,7 @@ tab: Props
   id="radarchart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -39,6 +40,576 @@ tab: Props
   }
 />
 
+<PropsCard id="radarchart-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_fileselector"
+  name="_fileSelector"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_firstletter"
+  name="_firstLetter"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_focusvisible"
+  name="_focusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_focuswithin"
+  name="_focusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_groupaccept"
+  name="_groupAccept"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupactive"
+  name="_groupActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_groupchecked"
+  name="_groupChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupdisabled"
+  name="_groupDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupenabled"
+  name="_groupEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupexpanded"
+  name="_groupExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupgrabbed"
+  name="_groupGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_groupinvalid"
+  name="_groupInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_grouploaded"
+  name="_groupLoaded"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_grouploading"
+  name="_groupLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupoptional"
+  name="_groupOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_grouppressed"
+  name="_groupPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupreadonly"
+  name="_groupReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupreject"
+  name="_groupReject"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_grouprequired"
+  name="_groupRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupselected"
+  name="_groupSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_groupvertical"
+  name="_groupVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_indeterminate"
+  name="_indeterminate"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_nativeactive"
+  name="_nativeActive"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativechecked"
+  name="_nativeChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativefocus"
+  name="_nativeFocus"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativehidden"
+  name="_nativeHidden"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativehover"
+  name="_nativeHover"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativetarget"
+  name="_nativeTarget"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_nativevalid"
+  name="_nativeValid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_peerchecked"
+  name="_peerChecked"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerdisabled"
+  name="_peerDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerenabled"
+  name="_peerEnabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerexpanded"
+  name="_peerExpanded"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peergrabbed"
+  name="_peerGrabbed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_peerinvalid"
+  name="_peerInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_peerloading"
+  name="_peerLoading"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peeroptional"
+  name="_peerOptional"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerpressed"
+  name="_peerPressed"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerreadonly"
+  name="_peerReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerreadwrite"
+  name="_peerReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_peerrequired"
+  name="_peerRequired"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peerselected"
+  name="_peerSelected"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_peervertical"
+  name="_peerVertical"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_placeholder"
+  name="_placeholder"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radarchart-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard
+  id="radarchart-_userinvalid"
+  name="_userInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radarchart-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="radarchart-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard
   id="radarchart-chartprops"
   name="chartProps"
@@ -58,6 +629,14 @@ tab: Props
   name="containerProps"
   type="ResponsiveContainerProps"
   description={"Props passed down to recharts `ResponsiveContainer` component."}
+/>
+
+<PropsCard
+  id="radarchart-fillopacity"
+  name="fillOpacity"
+  type="number | [number, number]"
+  description={"Controls fill opacity of all radars."}
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -133,6 +712,23 @@ tab: Props
   type='"sm" | "md" | "lg" | "full"'
   description={"The size of the RadarChart."}
   defaultValue={"full"}
+/>
+
+<PropsCard
+  id="radarchart-strokedasharray"
+  name="strokeDasharray"
+  type="string | number"
+  description={
+    "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+  }
+/>
+
+<PropsCard
+  id="radarchart-strokewidth"
+  name="strokeWidth"
+  type="number"
+  description={"Stroke width for the chart radars."}
+  defaultValue={"2"}
 />
 
 <PropsCard
@@ -231,12 +827,402 @@ tab: Props
 
 ### RadarProps
 
+<PropsCard id="radar-_accept" name="_accept" type="CSSUIObject" />
+
+<PropsCard id="radar-_active" name="_active" type="CSSUIObject" />
+
+<PropsCard id="radar-_after" name="_after" type="CSSUIObject" />
+
+<PropsCard id="radar-_anylink" name="_anyLink" type="CSSUIObject" />
+
+<PropsCard id="radar-_autofill" name="_autofill" type="CSSUIObject" />
+
+<PropsCard id="radar-_backdrop" name="_backdrop" type="CSSUIObject" />
+
+<PropsCard id="radar-_before" name="_before" type="CSSUIObject" />
+
+<PropsCard id="radar-_between" name="_between" type="CSSUIObject" />
+
+<PropsCard id="radar-_blank" name="_blank" type="CSSUIObject" />
+
+<PropsCard id="radar-_checked" name="_checked" type="CSSUIObject" />
+
+<PropsCard id="radar-_cue" name="_cue" type="CSSUIObject" />
+
+<PropsCard id="radar-_cueregion" name="_cueRegion" type="CSSUIObject" />
+
+<PropsCard id="radar-_dark" name="_dark" type="CSSUIObject" />
+
+<PropsCard id="radar-_default" name="_default" type="CSSUIObject" />
+
+<PropsCard id="radar-_disabled" name="_disabled" type="CSSUIObject" />
+
+<PropsCard id="radar-_empty" name="_empty" type="CSSUIObject" />
+
+<PropsCard id="radar-_enabled" name="_enabled" type="CSSUIObject" />
+
+<PropsCard id="radar-_end" name="_end" type="CSSUIObject" />
+
+<PropsCard id="radar-_even" name="_even" type="CSSUIObject" />
+
+<PropsCard id="radar-_expanded" name="_expanded" type="CSSUIObject" />
+
+<PropsCard id="radar-_fileselector" name="_fileSelector" type="CSSUIObject" />
+
+<PropsCard id="radar-_filled" name="_filled" type="CSSUIObject" />
+
+<PropsCard id="radar-_first" name="_first" type="CSSUIObject" />
+
+<PropsCard id="radar-_firstletter" name="_firstLetter" type="CSSUIObject" />
+
+<PropsCard id="radar-_firstline" name="_firstLine" type="CSSUIObject" />
+
+<PropsCard id="radar-_focus" name="_focus" type="CSSUIObject" />
+
+<PropsCard id="radar-_focusvisible" name="_focusVisible" type="CSSUIObject" />
+
+<PropsCard id="radar-_focuswithin" name="_focusWithin" type="CSSUIObject" />
+
+<PropsCard id="radar-_fullscreen" name="_fullScreen" type="CSSUIObject" />
+
+<PropsCard id="radar-_grabbed" name="_grabbed" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupaccept" name="_groupAccept" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupactive" name="_groupActive" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupblank" name="_groupBlank" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupchecked" name="_groupChecked" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupdisabled" name="_groupDisabled" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupenabled" name="_groupEnabled" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupexpanded" name="_groupExpanded" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupfocus" name="_groupFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_groupfocusvisible"
+  name="_groupFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_groupfocuswithin"
+  name="_groupFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_groupgrabbed" name="_groupGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_grouphorizontal"
+  name="_groupHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_grouphover" name="_groupHover" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupidle" name="_groupIdle" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupinvalid" name="_groupInvalid" type="CSSUIObject" />
+
+<PropsCard id="radar-_grouploaded" name="_groupLoaded" type="CSSUIObject" />
+
+<PropsCard id="radar-_grouploading" name="_groupLoading" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupoptional" name="_groupOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_groupplaceholdershown"
+  name="_groupPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_grouppressed" name="_groupPressed" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupreadonly" name="_groupReadOnly" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_groupreadwrite"
+  name="_groupReadWrite"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_groupreject" name="_groupReject" type="CSSUIObject" />
+
+<PropsCard id="radar-_grouprequired" name="_groupRequired" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupselected" name="_groupSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_groupuserinvalid"
+  name="_groupUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_groupvalid" name="_groupValid" type="CSSUIObject" />
+
+<PropsCard id="radar-_groupvertical" name="_groupVertical" type="CSSUIObject" />
+
+<PropsCard id="radar-_hidden" name="_hidden" type="CSSUIObject" />
+
+<PropsCard id="radar-_holiday" name="_holiday" type="CSSUIObject" />
+
+<PropsCard id="radar-_horizontal" name="_horizontal" type="CSSUIObject" />
+
+<PropsCard id="radar-_hover" name="_hover" type="CSSUIObject" />
+
+<PropsCard id="radar-_idle" name="_idle" type="CSSUIObject" />
+
+<PropsCard id="radar-_indeterminate" name="_indeterminate" type="CSSUIObject" />
+
+<PropsCard id="radar-_inrange" name="_inRange" type="CSSUIObject" />
+
+<PropsCard id="radar-_invalid" name="_invalid" type="CSSUIObject" />
+
+<PropsCard id="radar-_last" name="_last" type="CSSUIObject" />
+
+<PropsCard id="radar-_light" name="_light" type="CSSUIObject" />
+
+<PropsCard id="radar-_link" name="_link" type="CSSUIObject" />
+
+<PropsCard id="radar-_loaded" name="_loaded" type="CSSUIObject" />
+
+<PropsCard id="radar-_loading" name="_loading" type="CSSUIObject" />
+
+<PropsCard id="radar-_marker" name="_marker" type="CSSUIObject" />
+
+<PropsCard id="radar-_mediadark" name="_mediaDark" type="CSSUIObject" />
+
+<PropsCard id="radar-_medialight" name="_mediaLight" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_mediareducemotion"
+  name="_mediaReduceMotion"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_modal" name="_modal" type="CSSUIObject" />
+
+<PropsCard id="radar-_nativeactive" name="_nativeActive" type="CSSUIObject" />
+
+<PropsCard id="radar-_nativechecked" name="_nativeChecked" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_nativedisabled"
+  name="_nativeDisabled"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_nativefocus" name="_nativeFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_nativefocusvisible"
+  name="_nativeFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_nativefocuswithin"
+  name="_nativeFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_nativehidden" name="_nativeHidden" type="CSSUIObject" />
+
+<PropsCard id="radar-_nativehover" name="_nativeHover" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_nativereadonly"
+  name="_nativeReadOnly"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_nativetarget" name="_nativeTarget" type="CSSUIObject" />
+
+<PropsCard id="radar-_nativevalid" name="_nativeValid" type="CSSUIObject" />
+
+<PropsCard id="radar-_notfirst" name="_notFirst" type="CSSUIObject" />
+
+<PropsCard id="radar-_notlast" name="_notLast" type="CSSUIObject" />
+
+<PropsCard id="radar-_nottarget" name="_notTarget" type="CSSUIObject" />
+
+<PropsCard id="radar-_odd" name="_odd" type="CSSUIObject" />
+
+<PropsCard id="radar-_only" name="_only" type="CSSUIObject" />
+
+<PropsCard id="radar-_optional" name="_optional" type="CSSUIObject" />
+
+<PropsCard id="radar-_outrange" name="_outRange" type="CSSUIObject" />
+
+<PropsCard id="radar-_outside" name="_outside" type="CSSUIObject" />
+
+<PropsCard id="radar-_paused" name="_paused" type="CSSUIObject" />
+
+<PropsCard id="radar-_peeraccept" name="_peerAccept" type="CSSUIObject" />
+
+<PropsCard id="radar-_peeractive" name="_peerActive" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerblank" name="_peerBlank" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerchecked" name="_peerChecked" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerdisabled" name="_peerDisabled" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerenabled" name="_peerEnabled" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerexpanded" name="_peerExpanded" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerfocus" name="_peerFocus" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_peerfocusvisible"
+  name="_peerFocusVisible"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_peerfocuswithin"
+  name="_peerFocusWithin"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_peergrabbed" name="_peerGrabbed" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_peerhorizontal"
+  name="_peerHorizontal"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_peerhover" name="_peerHover" type="CSSUIObject" />
+
+<PropsCard id="radar-_peeridle" name="_peerIdle" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerinvalid" name="_peerInvalid" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerloaded" name="_peerLoaded" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerloading" name="_peerLoading" type="CSSUIObject" />
+
+<PropsCard id="radar-_peeroptional" name="_peerOptional" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_peerplaceholdershown"
+  name="_peerPlaceholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_peerpressed" name="_peerPressed" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerreadonly" name="_peerReadOnly" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerreadwrite" name="_peerReadWrite" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerreject" name="_peerReject" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerrequired" name="_peerRequired" type="CSSUIObject" />
+
+<PropsCard id="radar-_peerselected" name="_peerSelected" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_peeruserinvalid"
+  name="_peerUserInvalid"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_peervalid" name="_peerValid" type="CSSUIObject" />
+
+<PropsCard id="radar-_peervertical" name="_peerVertical" type="CSSUIObject" />
+
+<PropsCard id="radar-_picture" name="_picture" type="CSSUIObject" />
+
+<PropsCard id="radar-_placeholder" name="_placeholder" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_placeholdershown"
+  name="_placeholderShown"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_playing" name="_playing" type="CSSUIObject" />
+
+<PropsCard id="radar-_pressed" name="_pressed" type="CSSUIObject" />
+
+<PropsCard id="radar-_print" name="_print" type="CSSUIObject" />
+
+<PropsCard id="radar-_readonly" name="_readOnly" type="CSSUIObject" />
+
+<PropsCard id="radar-_readwrite" name="_readWrite" type="CSSUIObject" />
+
+<PropsCard id="radar-_reject" name="_reject" type="CSSUIObject" />
+
+<PropsCard id="radar-_required" name="_required" type="CSSUIObject" />
+
+<PropsCard id="radar-_ripple" name="_ripple" type="CSSUIObject" />
+
+<PropsCard id="radar-_scrollbar" name="_scrollbar" type="CSSUIObject" />
+
+<PropsCard
+  id="radar-_scrollbarbutton"
+  name="_scrollbarButton"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_scrollbarcorner"
+  name="_scrollbarCorner"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_scrollbarthumb"
+  name="_scrollbarThumb"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_scrollbartrack"
+  name="_scrollbarTrack"
+  type="CSSUIObject"
+/>
+
+<PropsCard
+  id="radar-_scrollbartrackpiece"
+  name="_scrollbarTrackPiece"
+  type="CSSUIObject"
+/>
+
+<PropsCard id="radar-_selected" name="_selected" type="CSSUIObject" />
+
+<PropsCard id="radar-_selection" name="_selection" type="CSSUIObject" />
+
+<PropsCard id="radar-_start" name="_start" type="CSSUIObject" />
+
+<PropsCard id="radar-_target" name="_target" type="CSSUIObject" />
+
+<PropsCard id="radar-_today" name="_today" type="CSSUIObject" />
+
+<PropsCard id="radar-_userinvalid" name="_userInvalid" type="CSSUIObject" />
+
+<PropsCard id="radar-_valid" name="_valid" type="CSSUIObject" />
+
+<PropsCard id="radar-_vertical" name="_vertical" type="CSSUIObject" />
+
+<PropsCard id="radar-_visited" name="_visited" type="CSSUIObject" />
+
+<PropsCard id="radar-_weekend" name="_weekend" type="CSSUIObject" />
+
 <PropsCard id="radar-activedot" name="activeDot" type="DotProps" />
 
 <PropsCard
   id="radar-color"
   name="color"
-  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "link.950">'
+  type='UIValue<"border" | "link" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 319 more ... | "link.950">'
 />
 
 <PropsCard id="radar-dimdot" name="dimDot" type="DotProps" />

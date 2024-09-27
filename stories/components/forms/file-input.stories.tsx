@@ -1,4 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useRef, useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { File, X } from "@yamada-ui/lucide"
 import {
   FileInput,
@@ -12,9 +15,6 @@ import {
   Button,
   VStack,
 } from "@yamada-ui/react"
-import { useRef, useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof FileInput>
 
@@ -225,7 +225,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { fileInput: File[] | undefined }
+  interface Data {
+    fileInput: File[] | undefined
+  }
 
   const resetRef = useRef<() => void>(null)
   const {

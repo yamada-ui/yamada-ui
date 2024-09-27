@@ -1,6 +1,6 @@
-import type { CSSObject, ThemeToken, Union } from "@yamada-ui/react"
 import type { TransformOptions } from "./transform-props"
 import type { CSSProperties, UIProperties } from "."
+import type { CSSObject, ThemeToken, Union } from "@yamada-ui/react"
 
 const generateTransform = (...transforms: TransformOptions[]) => {
   let transform = transforms
@@ -18,7 +18,7 @@ const generateTransform = (...transforms: TransformOptions[]) => {
   return `transform: ${transform}`
 }
 
-type GetConfigOptions = {
+interface GetConfigOptions {
   properties?:
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]

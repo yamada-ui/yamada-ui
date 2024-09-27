@@ -7,7 +7,6 @@ import {
   isObject,
   isUndefined,
 } from "@yamada-ui/react"
-import { CONSTANT } from "constant"
 import { useRouter } from "next/router"
 import type { PropsWithChildren, FC } from "react"
 import {
@@ -17,13 +16,15 @@ import {
   useCallback,
   Fragment,
 } from "react"
-import { getContents, getUI, type Locale, type UI } from "utils/i18n"
+import { CONSTANT } from "constant"
+import { getContents, getUI } from "utils/i18n"
+import type { Locale, UI } from "utils/i18n"
 
-type I18nContext = {
+interface I18nContext {
   locale: Locale
   t: (
     path: Path<UI> | StringLiteral,
-    replaceValue?: string | number | Record<string, string | number>,
+    replaceValue?: string | number | { [key: string]: string | number },
     pattern?: string,
   ) => string
   tc: (
@@ -42,7 +43,7 @@ const I18nContext = createContext<I18nContext>({
   contents: [],
 })
 
-export type I18nProviderProps = PropsWithChildren
+export interface I18nProviderProps extends PropsWithChildren {}
 
 export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const { locale = CONSTANT.I18N.DEFAULT_LOCALE, asPath, push } = useRouter()
@@ -60,7 +61,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({ children }) => {
   const t = useCallback(
     (
       path: Path<UI> | StringLiteral,
-      replaceValue?: string | number | Record<string, string | number>,
+      replaceValue?: string | number | { [key: string]: string | number },
       pattern: string = "label",
     ) => {
       let value = get<string>(ui, path, "")

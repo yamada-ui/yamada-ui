@@ -7,7 +7,7 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { Ripple, useRipple } from "@yamada-ui/ripple"
@@ -19,11 +19,11 @@ import {
   isArray,
   isUndefined,
 } from "@yamada-ui/utils"
-import type { ForwardedRef, ReactElement, Ref } from "react"
+import type { ForwardedRef, ReactElement, RefAttributes } from "react"
 import { useMemo } from "react"
 import { useToggleGroup } from "./toggle-group"
 
-type ToggleOptions<Y extends string | number = string> = {
+interface ToggleOptions<Y extends string | number = string> {
   /**
    * The value of the toggle button.
    */
@@ -78,12 +78,10 @@ type ToggleOptions<Y extends string | number = string> = {
   disableRipple?: boolean
 }
 
-export type ToggleProps<Y extends string | number = string> = Omit<
-  HTMLUIProps<"button">,
-  "onChange"
-> &
-  ThemeProps<"Toggle"> &
-  ToggleOptions<Y>
+export interface ToggleProps<Y extends string | number = string>
+  extends Omit<HTMLUIProps<"button">, "value" | "onChange">,
+    ThemeProps<"Toggle">,
+    ToggleOptions<Y> {}
 
 /**
  * `Toggle` is a two-state button that can be either on or off.
@@ -101,7 +99,7 @@ export const Toggle = forwardRef(
       isControlled,
       ...group
     } = useToggleGroup() ?? {}
-    const [styles, mergedProps] = useMultiComponentStyle("Toggle", {
+    const [styles, mergedProps] = useComponentMultiStyle("Toggle", {
       ...group,
       ...props,
     })
@@ -188,8 +186,9 @@ export const Toggle = forwardRef(
   },
 ) as {
   <Y extends string | number = string>(
-    props: ToggleProps<Y> & { ref?: Ref<HTMLInputElement> },
+    props: ToggleProps<Y> & RefAttributes<HTMLButtonElement>,
   ): JSX.Element
 } & ComponentArgs
 
 Toggle.displayName = "Toggle"
+Toggle.__ui__ = "Toggle"

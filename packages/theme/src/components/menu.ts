@@ -17,6 +17,7 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       zIndex: "guldo",
     },
     list: {
+      outline: "none",
       py: "2",
     },
     item: {

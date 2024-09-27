@@ -1,7 +1,7 @@
-import type { CSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
+import type { CSSObject, Union } from "@yamada-ui/react"
 
-export type UIOptions = {
+export interface UIOptions {
   static?: CSSObject
   isProcessResult?: boolean
   isProcessSkip?: boolean
@@ -207,7 +207,7 @@ export const additionalProps = {
       "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
     ],
   },
-} as const satisfies Record<string, UIOptions>
+} as const satisfies { [key: string]: UIOptions }
 
 export const uiProps = {
   lineClamp: {
@@ -249,9 +249,9 @@ export const uiProps = {
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
   },
-  var: {
+  vars: {
     isProcessSkip: true,
-    type: '{ __prefix?: string; name: string; token?: keyof Omit<Theme, "components" | "colorSchemes" | "themeSchemes">, value?: Token<number | StringLiteral> }[]',
+    type: "{ __prefix?: string; name: string; token?: ThemeToken, value?: Token<number | StringLiteral> }[]",
     description: [
       "Set CSS variables.",
       "@experimental",
@@ -259,15 +259,15 @@ export const uiProps = {
       "@example",
       "```jsx",
       "<Box",
-      '  var={[{ name:"space", token: "spaces", value: "md" }]',
-      '  m="calc(var(--ui-space) * 2)"',
+      '  vars={[{ name:"space", token: "spaces", value: "md" }]',
+      '  m="calc($space * 2)"',
       ">",
       "  Box",
       "</Box>",
       "```",
     ],
   },
-} as const satisfies Record<string, UIOptions>
+} as const satisfies { [key: string]: UIOptions }
 
 export const atRuleProps = {
   _media: {
@@ -407,4 +407,4 @@ export const atRuleProps = {
       "```",
     ],
   },
-} as const satisfies Record<string, UIOptions>
+} as const satisfies { [key: string]: UIOptions }

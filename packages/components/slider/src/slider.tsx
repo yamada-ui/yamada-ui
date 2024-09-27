@@ -3,13 +3,14 @@ import type {
   HTMLUIProps,
   ThemeProps,
   CSSUIProps,
-  UIPropGetter,
-  RequiredUIPropGetter,
+  HTMLProps,
+  PropGetter,
+  RequiredPropGetter,
 } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { FormControlOptions } from "@yamada-ui/form-control"
@@ -36,17 +37,17 @@ import {
   handlerAll,
   percentToValue,
   getValidChildren,
-  findChildren,
   isEmpty,
   omitChildren,
   includesChildren,
+  findChild,
 } from "@yamada-ui/utils"
 import type { CSSProperties, KeyboardEvent, KeyboardEventHandler } from "react"
 import { useCallback, useRef, useState } from "react"
 
 export const getThumbSize = (
   thumbSize: CSSUIProps["boxSize"] | undefined,
-  styles: Record<string, CSSUIObject>,
+  styles: { [key: string]: CSSUIObject },
 ) =>
   (thumbSize ??
     styles.thumb?.boxSize ??
@@ -61,7 +62,7 @@ export const getThumbSize = (
     styles.thumb?.minH ??
     "3.5") as CSSUIProps["boxSize"] | undefined
 
-export type UseSliderOptions = {
+export interface UseSliderOptions {
   /**
    * The base `id` to use for the slider.
    */
@@ -132,10 +133,8 @@ export type UseSliderOptions = {
   onChange?: (value: number) => void
 }
 
-export type UseSliderProps = Merge<
-  HTMLUIProps<"div">,
-  FormControlOptions & UseSliderOptions
->
+export interface UseSliderProps
+  extends Merge<HTMLUIProps, FormControlOptions & UseSliderOptions> {}
 
 export const useSlider = ({
   focusThumbOnChange = true,
@@ -153,21 +152,22 @@ export const useSlider = ({
     orientation = "horizontal",
     thumbSize: thumbSizeProp,
     isReversed,
-    required,
-    disabled,
-    readOnly,
     value: valueProp,
     onChange,
     onChangeStart: onChangeStartProp,
     onChangeEnd: onChangeEndProp,
-    onFocus,
-    onBlur,
-    "aria-readonly": ariaReadonly,
     "aria-valuetext": ariaValueText,
     ...rest
   } = useFormControlProps(props)
-
-  const formControlProps = pickObject(rest, formControlProperties)
+  const {
+    required,
+    disabled,
+    readOnly,
+    onFocus,
+    onBlur,
+    "aria-readonly": ariaReadonly,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
 
   if (max < min)
     throw new Error("Do not assign a number less than 'min' to 'max'")
@@ -318,7 +318,7 @@ export const useSlider = ({
     (ev: KeyboardEvent<HTMLElement>) => {
       const { min, max } = latestRef.current
 
-      const actions: Record<string, KeyboardEventHandler> = {
+      const actions: { [key: string]: KeyboardEventHandler } = {
         ArrowRight: () => stepUp(),
         ArrowUp: () => stepUp(),
         ArrowLeft: () => stepDown(),
@@ -351,7 +351,7 @@ export const useSlider = ({
     if (eventSourceRef.current === "keyboard") onChangeEnd(value)
   }, [value, onChangeEnd])
 
-  const getContainerProps: UIPropGetter = useCallback(
+  const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const { width: w, height: h } = thumbSize ?? {
         width: "$thumbSize",
@@ -378,7 +378,7 @@ export const useSlider = ({
         ref: mergeRefs(ref, containerRef),
         tabIndex: -1,
         style,
-        var: [
+        vars: [
           {
             name: "thumbSize",
             token: "sizes",
@@ -390,7 +390,7 @@ export const useSlider = ({
     [isVertical, rest, thumbSize, thumbSizeProp],
   )
 
-  const getInputProps: UIPropGetter = useCallback(
+  const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}, ref = null) => ({
       "aria-readonly": ariaReadonly,
       ...formControlProps,
@@ -416,7 +416,7 @@ export const useSlider = ({
     ],
   )
 
-  const getTrackProps: UIPropGetter = useCallback(
+  const getTrackProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const style: CSSProperties = {
         ...props.style,
@@ -444,7 +444,7 @@ export const useSlider = ({
     [isVertical, formControlProps],
   )
 
-  const getFilledTrackProps: UIPropGetter = useCallback(
+  const getFilledTrackProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = Math.abs(isReversed ? 100 - thumbPercent : thumbPercent)
 
@@ -476,33 +476,35 @@ export const useSlider = ({
     [isReversed, isVertical, formControlProps, thumbPercent],
   )
 
-  const getMarkProps: RequiredUIPropGetter<"div", { value: number }> =
-    useCallback(
-      (props, ref = null) => {
-        let n = valueToPercent(props.value, min, max)
-        n = isReversed ? 100 - n : n
+  const getMarkProps: RequiredPropGetter<
+    HTMLProps & { value: number },
+    HTMLProps
+  > = useCallback(
+    (props, ref = null) => {
+      let n = valueToPercent(props.value, min, max)
+      n = isReversed ? 100 - n : n
 
-        const style: CSSProperties = {
-          ...props.style,
-          position: "absolute",
-          pointerEvents: "none",
-          ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
-        }
+      const style: CSSProperties = {
+        ...props.style,
+        position: "absolute",
+        pointerEvents: "none",
+        ...(isVertical ? { bottom: `${n}%` } : { left: `${n}%` }),
+      }
 
-        return {
-          ...formControlProps,
-          ...props,
-          ref,
-          "aria-hidden": true,
-          "data-invalid": dataAttr(props.value < min || max < props.value),
-          "data-highlighted": dataAttr(props.value <= value),
-          style,
-        }
-      },
-      [isReversed, isVertical, max, min, formControlProps, value],
-    )
+      return {
+        ...formControlProps,
+        ...props,
+        ref,
+        "aria-hidden": true,
+        "data-invalid": dataAttr(props.value < min || max < props.value),
+        "data-highlighted": dataAttr(props.value <= value),
+        style,
+      }
+    },
+    [isReversed, isVertical, max, min, formControlProps, value],
+  )
 
-  const getThumbProps: UIPropGetter = useCallback(
+  const getThumbProps: PropGetter = useCallback(
     (props = {}, ref = null) => {
       const n = thumbPercent
       let w: string | number = "$thumbSize"
@@ -584,22 +586,25 @@ export const useSlider = ({
 
 export type ReturnUseSlider = ReturnType<typeof useSlider>
 
-type SliderContext = Pick<
-  ReturnUseSlider,
-  | "isVertical"
-  | "getTrackProps"
-  | "getFilledTrackProps"
-  | "getMarkProps"
-  | "getThumbProps"
-> &
-  Omit<SliderOptions, "input"> & { styles: Record<string, CSSUIObject> }
+interface SliderContext
+  extends Pick<
+      ReturnUseSlider,
+      | "isVertical"
+      | "getTrackProps"
+      | "getFilledTrackProps"
+      | "getMarkProps"
+      | "getThumbProps"
+    >,
+    Omit<SliderOptions, "input"> {
+  styles: { [key: string]: CSSUIObject }
+}
 
 const [SliderProvider, useSliderContext] = createContext<SliderContext>({
   name: "SliderContext",
   errorMessage: `useSliderContext returned is 'undefined'. Seems you forgot to wrap the components in "<Slider />" `,
 })
 
-type SliderOptions = {
+interface SliderOptions {
   /**
    * Props for slider input element.
    */
@@ -638,7 +643,10 @@ type SliderOptions = {
   thumbSize?: CSSUIProps["boxSize"]
 }
 
-export type SliderProps = ThemeProps<"Slider"> & UseSliderProps & SliderOptions
+export interface SliderProps
+  extends ThemeProps<"Slider">,
+    UseSliderProps,
+    SliderOptions {}
 
 /**
  * `Slider` is a component used for allowing users to select a value from a range.
@@ -646,7 +654,7 @@ export type SliderProps = ThemeProps<"Slider"> & UseSliderProps & SliderOptions
  * @see Docs https://yamada-ui.com/components/forms/slider
  */
 export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Slider", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Slider", props)
   const {
     className,
     children,
@@ -675,8 +683,8 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
 
   const validChildren = getValidChildren(children)
 
-  const [customSliderTrack] = findChildren(validChildren, SliderTrack)
-  const [customSliderThumb] = findChildren(validChildren, SliderThumb)
+  const customSliderTrack = findChild(validChildren, SliderTrack)
+  const customSliderThumb = findChild(validChildren, SliderThumb)
 
   const hasSliderThumb = includesChildren(validChildren, SliderThumb)
 
@@ -720,8 +728,12 @@ export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
   )
 })
 
-export type SliderTrackProps = HTMLUIProps<"div"> &
-  Pick<SliderOptions, "filledTrackProps">
+Slider.displayName = "Slider"
+Slider.__ui__ = "Slider"
+
+export interface SliderTrackProps
+  extends HTMLUIProps,
+    Pick<SliderOptions, "filledTrackProps"> {}
 
 export const SliderTrack = forwardRef<SliderTrackProps, "div">(
   ({ className, children, filledTrackProps, ...rest }, ref) => {
@@ -760,7 +772,10 @@ export const SliderTrack = forwardRef<SliderTrackProps, "div">(
   },
 )
 
-export type SliderFilledTrackProps = HTMLUIProps<"div">
+SliderTrack.displayName = "SliderTrack"
+SliderTrack.__ui__ = "SliderTrack"
+
+export interface SliderFilledTrackProps extends HTMLUIProps {}
 
 export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
   ({ className, ...rest }, ref) => {
@@ -786,7 +801,12 @@ export const SliderFilledTrack = forwardRef<SliderFilledTrackProps, "div">(
   },
 )
 
-export type SliderMarkProps = HTMLUIProps<"div"> & { value: number }
+SliderFilledTrack.displayName = "SliderFilledTrack"
+SliderFilledTrack.__ui__ = "SliderFilledTrack"
+
+export interface SliderMarkProps extends HTMLUIProps {
+  value: number
+}
 
 export const SliderMark = forwardRef<SliderMarkProps, "div">(
   ({ className, ...rest }, ref) => {
@@ -809,7 +829,10 @@ export const SliderMark = forwardRef<SliderMarkProps, "div">(
   },
 )
 
-export type SliderThumbProps = HTMLUIProps<"div">
+SliderMark.displayName = "SliderMark"
+SliderMark.__ui__ = "SliderMark"
+
+export interface SliderThumbProps extends HTMLUIProps {}
 
 export const SliderThumb = forwardRef<SliderThumbProps, "div">(
   ({ className, ...rest }, ref) => {
@@ -835,3 +858,6 @@ export const SliderThumb = forwardRef<SliderThumbProps, "div">(
     )
   },
 )
+
+SliderThumb.displayName = "SliderThumb"
+SliderThumb.__ui__ = "SliderThumb"

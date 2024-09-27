@@ -2,8 +2,8 @@ import { readdir, readFile, writeFile } from "fs/promises"
 import path from "path"
 import { config } from "dotenv"
 import { execa } from "execa"
-import { prettier } from "libs/prettier"
 import { rimraf } from "rimraf"
+import { prettier } from "libs/prettier"
 import { toCamelCase } from "utils/string"
 
 const DIR_PATH = path.resolve(".lucide")
@@ -32,7 +32,7 @@ const main = async () => {
 
   const fileNames = await readdir(path.resolve(DIR_PATH, "icons"))
 
-  const tags: Record<string, string[]> = {}
+  const tags: { [key: string]: string[] } = {}
 
   await Promise.all(
     fileNames.map(async (fileName) => {

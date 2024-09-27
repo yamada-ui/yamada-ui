@@ -1,28 +1,28 @@
-import type { IconButtonProps, ButtonProps } from "@yamada-ui/button"
+import type { ButtonProps, IconButtonProps } from "@yamada-ui/button"
 import { IconButton, Button } from "@yamada-ui/button"
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { FC, CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx, isValidElement } from "@yamada-ui/utils"
-import type { FC, ReactElement } from "react"
+import type { ReactElement } from "react"
 import { useCalendarContext } from "./use-calendar"
 import type { UseCalendarHeaderProps } from "./use-calendar-header"
 import { useCalendarHeader } from "./use-calendar-header"
 
-type CalendarHeaderOptions = {
+interface CalendarHeaderOptions {
   /**
    * Props for calendar control button element.
    */
-  controlProps?: CalendarControlProps
+  controlProps?: Omit<CalendarControlProps, "operation">
   /**
    * Props for calendar previous control button element.
    */
-  prevProps?: CalendarControlProps
+  prevProps?: Omit<CalendarControlProps, "operation">
   /**
    * Props for calendar next control button element.
    */
-  nextProps?: CalendarControlProps
+  nextProps?: Omit<CalendarControlProps, "operation">
   /**
    * Props for calendar label button element.
    */
@@ -33,12 +33,10 @@ type CalendarHeaderOptions = {
   label: string
 }
 
-export type CalendarHeaderProps = Omit<
-  HTMLUIProps<"div">,
-  "value" | "defaultValue" | "onChange"
-> &
-  CalendarHeaderOptions &
-  UseCalendarHeaderProps
+export interface CalendarHeaderProps
+  extends Omit<HTMLUIProps, "value" | "defaultValue" | "onChange">,
+    CalendarHeaderOptions,
+    UseCalendarHeaderProps {}
 
 export const CalendarHeader: FC<CalendarHeaderProps> = ({
   className,
@@ -105,7 +103,10 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   ) : null
 }
 
-export type CalendarLabelProps = ButtonProps
+CalendarHeader.displayName = "CalendarHeader"
+CalendarHeader.__ui__ = "CalendarHeader"
+
+export interface CalendarLabelProps extends ButtonProps {}
 
 const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
   const { styles } = useCalendarContext()
@@ -129,7 +130,10 @@ const CalendarLabel: FC<CalendarLabelProps> = ({ className, ...rest }) => {
   )
 }
 
-export type CalendarLabelIconProps = IconProps
+CalendarLabel.displayName = "CalendarLabel"
+CalendarLabel.__ui__ = "CalendarLabel"
+
+export interface CalendarLabelIconProps extends IconProps {}
 
 const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
   className,
@@ -150,9 +154,13 @@ const CalendarLabelIcon: FC<CalendarLabelIconProps> = ({
   )
 }
 
-export type CalendarControlProps = IconButtonProps
+CalendarLabelIcon.displayName = "CalendarLabelIcon"
+CalendarLabelIcon.__ui__ = "CalendarLabelIcon"
 
-const CalendarControlPrev: FC<CalendarControlProps> = ({
+export interface CalendarControlSharedProps
+  extends Omit<CalendarControlProps, "operation"> {}
+
+const CalendarControlPrev: FC<CalendarControlSharedProps> = ({
   className,
   ...rest
 }) => {
@@ -166,7 +174,10 @@ const CalendarControlPrev: FC<CalendarControlProps> = ({
   )
 }
 
-const CalendarControlNext: FC<CalendarControlProps> = ({
+CalendarControlPrev.displayName = "CalendarControlPrev"
+CalendarControlPrev.__ui__ = "CalendarControlPrev"
+
+const CalendarControlNext: FC<CalendarControlSharedProps> = ({
   className,
   ...rest
 }) => {
@@ -180,9 +191,18 @@ const CalendarControlNext: FC<CalendarControlProps> = ({
   )
 }
 
-const CalendarControl: FC<
-  CalendarControlProps & { operation: "prev" | "next" }
-> = ({ className, operation, ...rest }) => {
+CalendarControlNext.displayName = "CalendarControlNext"
+CalendarControlNext.__ui__ = "CalendarControlNext"
+
+export interface CalendarControlProps extends IconButtonProps {
+  operation: "prev" | "next"
+}
+
+const CalendarControl: FC<CalendarControlProps> = ({
+  className,
+  operation,
+  ...rest
+}) => {
   const { styles } = useCalendarContext()
 
   const css: CSSUIObject = {
@@ -201,3 +221,6 @@ const CalendarControl: FC<
     />
   )
 }
+
+CalendarControl.displayName = "CalendarControl"
+CalendarControl.__ui__ = "CalendarControl"

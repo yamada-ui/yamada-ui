@@ -1,3 +1,4 @@
+import type { FC } from "react"
 import type { ComponentStyle, UIStyle, ThemeTokens } from "@yamada-ui/react"
 import {
   Center,
@@ -17,9 +18,7 @@ import {
   extendComponentVariant,
   extendComponentDefaultProps,
   extendComponent,
-  // withDefaultProps,
 } from "@yamada-ui/react"
-import type { FC } from "react"
 
 export default {
   title: "System / Theme / Extend Theming",

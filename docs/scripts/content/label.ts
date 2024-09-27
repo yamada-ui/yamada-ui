@@ -1,10 +1,10 @@
-import { program } from "commander"
 import { readFile, stat } from "fs/promises"
+import path from "path"
+import c from "chalk"
+import { program } from "commander"
 import { glob } from "glob"
 import matter from "gray-matter"
-import path from "path"
 import { writeMDXFile } from "scripts/utils"
-import c from "chalk"
 
 const getPaths = async (query: string) => {
   const pattern = path.join("contents", "**", query)
@@ -14,7 +14,9 @@ const getPaths = async (query: string) => {
   return paths
 }
 
-type FrontMatter = Record<string, any>
+interface FrontMatter {
+  [key: string]: any
+}
 
 type UpdateFrontMatterTransform = (data: FrontMatter) => FrontMatter
 
@@ -77,11 +79,11 @@ const removeLabel =
     return { ...data }
   }
 
-type AddOptions = {
+interface AddOptions {
   label?: string
 }
 
-type ResetOptions = {
+interface ResetOptions {
   exclude: string[]
 }
 

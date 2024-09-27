@@ -3,16 +3,13 @@ import { AlignVerticalDistributeCenter as AlignVerticalDistributeCenterIcon } fr
 import { LucideIcon } from "../lucide-icon"
 import type { LucideIconProps } from "../lucide-icon"
 
-export type AlignVerticalDistributeCenterProps = LucideIconProps
-
 /**
  * `AlignVerticalDistributeCenter` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
  */
-export const AlignVerticalDistributeCenter = forwardRef<
-  AlignVerticalDistributeCenterProps,
-  "svg"
->((props, ref) => (
-  <LucideIcon ref={ref} as={AlignVerticalDistributeCenterIcon} {...props} />
-))
+export const AlignVerticalDistributeCenter = forwardRef<LucideIconProps, "svg">(
+  (props, ref) => (
+    <LucideIcon ref={ref} as={AlignVerticalDistributeCenterIcon} {...props} />
+  ),
+)

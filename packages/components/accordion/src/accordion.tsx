@@ -2,43 +2,20 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { createDescendant } from "@yamada-ui/use-descendant"
-import { createContext, cx, isArray } from "@yamada-ui/utils"
-import type { Dispatch, ReactNode, SetStateAction } from "react"
+import { cx, isArray } from "@yamada-ui/utils"
+import type { ReactNode } from "react"
 import { useEffect, useState } from "react"
-
-const {
+import {
+  AccordionProvider,
   DescendantsContextProvider,
   useDescendants,
-  useDescendant: useAccordionDescendant,
-} = createDescendant<HTMLButtonElement>()
+} from "./accordion-context"
 
-export { useAccordionDescendant }
-
-type AccordionContext = Pick<
-  AccordionOptions,
-  "isMultiple" | "isToggle" | "icon" | "iconHidden"
-> & {
-  index: number | number[]
-  setIndex: Dispatch<SetStateAction<number | number[]>>
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  styles: Record<string, CSSUIObject>
-}
-
-const [AccordionProvider, useAccordionContext] =
-  createContext<AccordionContext>({
-    name: "AccordionContext",
-    errorMessage: `useAccordionContext returned is 'undefined'. Seems you forgot to wrap the components in "<Accordion />"`,
-  })
-
-export { useAccordionContext }
-
-type AccordionOptions = {
+export interface AccordionOptions {
   /**
    * The index(es) of the accordion item to expand.
    */
@@ -77,17 +54,18 @@ type AccordionOptions = {
   onChange?: (index: number | number[]) => void
 }
 
-export type AccordionProps = Omit<HTMLUIProps<"ul">, "onChange"> &
-  ThemeProps<"Accordion"> &
-  AccordionOptions
+export interface AccordionProps
+  extends Omit<HTMLUIProps, "onChange">,
+    ThemeProps<"Accordion">,
+    AccordionOptions {}
 
 /**
  * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
  *
  * @see Docs https://yamada-ui.com/components/disclosure/accordion
  */
-export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Accordion", props)
+export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
+  const [styles, mergedProps] = useComponentMultiStyle("Accordion", props)
   const {
     className,
     index: value,
@@ -158,3 +136,6 @@ export const Accordion = forwardRef<AccordionProps, "ul">((props, ref) => {
     </DescendantsContextProvider>
   )
 })
+
+Accordion.displayName = "Accordion"
+Accordion.__ui__ = "Accordion"

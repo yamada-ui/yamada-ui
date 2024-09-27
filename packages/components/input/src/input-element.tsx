@@ -1,15 +1,23 @@
 import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
-import { useInputGroup } from "./input-group"
+import { useInputGroup } from "./input-context"
 
-type InputElementOptions = {
+interface InputElementOptions {
+  /**
+   * If `true`, the element clickable.
+   *
+   * @default false
+   *
+   * @deprecated Use `isClickable` instead.
+   */
+  isClick?: boolean
   /**
    * If `true`, the element clickable.
    *
    * @default false
    */
-  isClick?: boolean
+  isClickable?: boolean
   /**
    * The placement of the element.
    *
@@ -18,11 +26,16 @@ type InputElementOptions = {
   placement?: "left" | "right"
 }
 
-export type InputElementProps = HTMLUIProps<"div"> & InputElementOptions
+export interface InputElementProps extends HTMLUIProps, InputElementOptions {}
 
 const InputElement = forwardRef<InputElementProps, "div">(
-  ({ className, isClick = false, placement = "left", ...rest }, ref) => {
-    const styles = useInputGroup()
+  (
+    { className, isClick = false, isClickable, placement = "left", ...rest },
+    ref,
+  ) => {
+    const { styles, fieldHeight, fieldFontSize } = useInputGroup()
+
+    isClickable ??= isClick
 
     const css: CSSUIObject = {
       position: "absolute",
@@ -32,15 +45,11 @@ const InputElement = forwardRef<InputElementProps, "div">(
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      w:
-        styles.field?.height ??
-        styles.field?.h ??
-        styles.field?.minHeight ??
-        styles.field?.minH,
+      w: fieldHeight,
       h: "100%",
-      fontSize: styles.field?.fontSize,
-      pointerEvents: isClick ? "auto" : "none",
-      cursor: isClick ? "pointer" : "auto",
+      fontSize: fieldFontSize,
+      pointerEvents: isClickable ? "auto" : "none",
+      cursor: isClickable ? "pointer" : "auto",
       ...styles.element,
     }
 

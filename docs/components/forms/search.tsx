@@ -19,8 +19,6 @@ import {
   IconButton,
 } from "@yamada-ui/react"
 import type { StackProps, ModalProps, ButtonProps } from "@yamada-ui/react"
-import { useI18n } from "contexts"
-import { useEventListener } from "hooks"
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
@@ -35,6 +33,8 @@ import {
 } from "react"
 import type { FC, KeyboardEvent, RefObject } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { useI18n } from "contexts"
+import { useEventListener } from "hooks"
 
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"
@@ -54,7 +54,7 @@ const useSearch = () => {
   return { isOpen, onOpen, onClose }
 }
 
-export type SearchProps = StackProps & {}
+export interface SearchProps extends StackProps {}
 
 export const Search = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
@@ -111,7 +111,7 @@ export const Search = memo(
   }),
 )
 
-export type SearchButtonProps = ButtonProps & {}
+export interface SearchButtonProps extends ButtonProps {}
 
 export const SearchButton = memo(
   forwardRef<SearchButtonProps, "button">(({ ...rest }, ref) => {
@@ -136,7 +136,7 @@ export const SearchButton = memo(
   }),
 )
 
-type SearchModalProps = ModalProps
+interface SearchModalProps extends ModalProps {}
 
 const SearchModal: FC<SearchModalProps> = memo(
   ({ isOpen, onClose, ...rest }) => {
@@ -173,7 +173,7 @@ const SearchModal: FC<SearchModalProps> = memo(
 
         eventRef.current = "keyboard"
 
-        const actions: Record<string, Function | undefined> = {
+        const actions: { [key: string]: Function | undefined } = {
           ArrowDown: () => {
             if (selectedIndex + 1 === hits.length) return
 

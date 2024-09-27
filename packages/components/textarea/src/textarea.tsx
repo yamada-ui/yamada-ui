@@ -28,7 +28,7 @@ import type { ForwardedRef } from "react"
 import { useRef } from "react"
 import useAutosize from "./use-autosize"
 
-type TextareaOptions = {
+interface TextareaOptions {
   /**
    * The border color when the input is focused.
    */
@@ -59,13 +59,11 @@ type TextareaOptions = {
   resizeRef?: ForwardedRef<() => void>
 }
 
-export type TextareaProps = Omit<
-  HTMLUIProps<"textarea">,
-  "disabled" | "required" | "readOnly"
-> &
-  ThemeProps<"Textarea"> &
-  TextareaOptions &
-  FormControlOptions
+export interface TextareaProps
+  extends Omit<HTMLUIProps<"textarea">, "disabled" | "required" | "readOnly">,
+    ThemeProps<"Textarea">,
+    TextareaOptions,
+    FormControlOptions {}
 
 /**
  * `Textarea` is a component used to obtain multi-line text input.
@@ -140,3 +138,6 @@ export const Textarea = forwardRef<TextareaProps, "textarea">((props, ref) => {
     />
   )
 })
+
+Textarea.displayName = "Textarea"
+Textarea.__ui__ = "Textarea"

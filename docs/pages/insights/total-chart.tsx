@@ -3,6 +3,7 @@ import {
   AreaChart as UIAreaChart,
   BarChart as UIBarChart,
 } from "@yamada-ui/charts"
+import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -21,6 +22,7 @@ import {
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { memo, useEffect, useMemo } from "react"
+import { ChartTooltip } from "./chart-tooltip"
 import { useInsights } from "./insights-provider"
 import {
   getInsightScore,
@@ -31,13 +33,11 @@ import {
   randomIndex,
   xAxisTickFormatter,
 } from "./insights-utils"
-import { useI18n } from "contexts"
-import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
-import { CountUp } from "components/transitions"
-import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
+import { CountUp } from "components/transitions"
+import { useI18n } from "contexts"
 
-export type TotalChartProps = StackProps & {
+export interface TotalChartProps extends StackProps {
   isLoading: boolean
 }
 
@@ -175,7 +175,7 @@ export const TotalChart = memo(
 
 TotalChart.displayName = "TotalChart"
 
-type AreaChartProps = {}
+interface AreaChartProps {}
 
 const AreaChart: FC<AreaChartProps> = memo(() => {
   const { locale } = useI18n()
@@ -230,13 +230,13 @@ const AreaChart: FC<AreaChartProps> = memo(() => {
 
 AreaChart.displayName = "AreaChart"
 
-type BarChartProps = {}
+interface BarChartProps {}
 
 const BarChart: FC<BarChartProps> = memo(() => {
   const { currentInsights, users } = useInsights()
 
   const data = useMemo(() => {
-    const result: Record<string, Record<string, any>> = {}
+    const result: { [key: string]: { [key: string]: any } } = {}
 
     Object.values(currentInsights ?? {}).forEach((data) => {
       Object.entries(data).forEach(([user, data]) => {

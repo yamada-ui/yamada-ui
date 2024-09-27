@@ -4,12 +4,12 @@ import * as p from "@clack/prompts"
 import c from "chalk"
 import { program } from "commander"
 import matter from "gray-matter"
+import { otherLocales } from "../../utils/i18n"
 import { prettier } from "libs/prettier"
 import toc from "markdown-toc"
 import { getResolvedPath } from "utils/path"
-import { otherLocales } from "../../utils/i18n"
 
-type Content = {
+interface Content {
   title: string
   type: "page" | "fragment"
   description?: string
@@ -60,10 +60,10 @@ const getPaths: p.RequiredRunner =
 
 const getReducePaths: p.RequiredRunner =
   (paths: string[]) =>
-  (_, s): Record<string, string[]> => {
+  (_, s): { [key: string]: string[] } => {
     s.start(`Groping the document paths`)
 
-    const resolvedPaths: Record<string, string[]> = {}
+    const resolvedPaths: { [key: string]: string[] } = {}
 
     paths.forEach((path) => {
       if (path.endsWith(".ja.mdx")) {
@@ -119,7 +119,7 @@ const getIsTab = async (paths: string[], slug: string) => {
 const formatTitle = (value: string) => value.replace(/`/g, "")
 
 const generateSearchContent: p.RequiredRunner =
-  (paths: Record<string, string[]>) => async (p, s) => {
+  (paths: { [key: string]: string[] }) => async (p, s) => {
     s.start(`Generating table of contents and writing files`)
 
     let wroteList: string[] = []

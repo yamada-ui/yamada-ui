@@ -1,11 +1,11 @@
-import { Box, HStack, isArray, Text, VStack } from "@yamada-ui/react"
 import type { ChartTooltipProps as OriginChartTooltipProps } from "@yamada-ui/charts"
+import { Box, HStack, isArray, Text, VStack } from "@yamada-ui/react"
 import type { FC } from "react"
 import { useInsights } from "./insights-provider"
 import { labelFormatter } from "./insights-utils"
 import { useI18n } from "contexts"
 
-export type ChartTooltipProps = OriginChartTooltipProps
+export interface ChartTooltipProps extends OriginChartTooltipProps {}
 
 export const ChartTooltip: FC<ChartTooltipProps> = ({
   label,

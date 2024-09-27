@@ -1,3 +1,4 @@
+import { RangeDatePicker } from "@yamada-ui/calendar"
 import {
   Box,
   Center,
@@ -10,11 +11,12 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
+import type { ManipulateType } from "dayjs"
+import dayjs from "dayjs"
+import { useRouter } from "next/router"
 import type { FC } from "react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { useInsights } from "./insights-provider"
-import { useI18n } from "contexts"
-import { useRouter } from "next/router"
 import type { InsightPeriodSuggest, InsightUserSuggest } from "./insights-utils"
 import {
   INSIGHT_PERIOD_SUGGEST,
@@ -25,12 +27,10 @@ import {
   INSIGHT_MAINTAINERS_IDS,
   INSIGHT_MAX_DATE,
 } from "./insights-utils"
-import { RangeDatePicker } from "@yamada-ui/calendar"
-import type { ManipulateType } from "dayjs"
-import dayjs from "dayjs"
+import { useI18n } from "contexts"
 import "dayjs/locale/ja"
 
-export type InsightsHeaderProps = StackProps & {}
+export interface InsightsHeaderProps extends StackProps {}
 
 export const InsightsHeader = memo(
   forwardRef<InsightsHeaderProps, "div">(({ ...rest }, ref) => {
@@ -61,7 +61,7 @@ export const InsightsHeader = memo(
 
 InsightsHeader.displayName = "InsightsHeader"
 
-type UserSelectProps = {}
+interface UserSelectProps {}
 
 const UserSelect: FC<UserSelectProps> = memo(() => {
   const { t } = useI18n()
@@ -74,7 +74,7 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
   const onChange = useCallback(
     (value: string[]) => {
       const { query } = router
-      const params = new URLSearchParams(query as Record<string, string>)
+      const params = new URLSearchParams(query as { [key: string]: string })
 
       const computedValue = value.join(",")
 
@@ -175,7 +175,7 @@ const UserSelect: FC<UserSelectProps> = memo(() => {
 
 UserSelect.displayName = "UserSelect"
 
-type PeriodSelectProps = {}
+interface PeriodSelectProps {}
 
 const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   const { t, locale } = useI18n()
@@ -196,7 +196,7 @@ const PeriodSelect: FC<PeriodSelectProps> = memo(() => {
   const onChangeQuery = useCallback(
     (value: [(Date | undefined)?, (Date | undefined)?]) => {
       const { query } = router
-      const params = new URLSearchParams(query as Record<string, string>)
+      const params = new URLSearchParams(query as { [key: string]: string })
 
       let start: string | undefined
       let end: string | undefined

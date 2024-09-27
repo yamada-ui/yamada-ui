@@ -1,11 +1,11 @@
 import { Bird, Fish, Rabbit, Snail, Squirrel } from "@yamada-ui/lucide"
 import { Button, Center, Text } from "@yamada-ui/react"
 import type { BoxProps } from "@yamada-ui/react"
-import { useI18n } from "contexts"
 import { memo } from "react"
 import type { FC, MutableRefObject } from "react"
+import { useI18n } from "contexts"
 
-export type NotFoundProps = BoxProps & {
+export interface NotFoundProps extends BoxProps {
   valueResetRef: MutableRefObject<() => void>
 }
 

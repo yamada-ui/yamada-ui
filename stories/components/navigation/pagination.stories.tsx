@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Ghost } from "@yamada-ui/lucide"
-import { Pagination, VStack, Wrap } from "@yamada-ui/react"
 import { useState } from "react"
 import { colorSchemes } from "../../components"
+import { Ghost } from "@yamada-ui/lucide"
+import { Pagination, VStack, Wrap } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Pagination>
 

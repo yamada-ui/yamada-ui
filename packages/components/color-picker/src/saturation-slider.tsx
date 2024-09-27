@@ -1,7 +1,7 @@
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type {
@@ -14,7 +14,7 @@ import { cx, replaceObject } from "@yamada-ui/utils"
 import type { UseSaturationSliderProps } from "./use-saturation-slider"
 import { useSaturationSlider } from "./use-saturation-slider"
 
-type SaturationSliderOptions = {
+interface SaturationSliderOptions {
   /**
    * The aspect ratio of the saturation slider.
    *
@@ -24,7 +24,7 @@ type SaturationSliderOptions = {
   /**
    * Props for saturation slider inner element.
    */
-  innerProps?: HTMLUIProps<"div">
+  innerProps?: HTMLUIProps
   /**
    * Props for saturation slider input element.
    */
@@ -32,11 +32,11 @@ type SaturationSliderOptions = {
   /**
    * Props for saturation slider track element.
    */
-  trackProps?: HTMLUIProps<"div">
+  trackProps?: HTMLUIProps
   /**
    * Props for saturation slider thumb element.
    */
-  thumbProps?: HTMLUIProps<"div">
+  thumbProps?: HTMLUIProps
 }
 
 /**
@@ -44,13 +44,14 @@ type SaturationSliderOptions = {
  *
  * @see Docs https://yamada-ui.com/components/forms/saturation-slider
  */
-export type SaturationSliderProps = ThemeProps<"SaturationSlider"> &
-  UseSaturationSliderProps &
-  SaturationSliderOptions
+export interface SaturationSliderProps
+  extends ThemeProps<"SaturationSlider">,
+    UseSaturationSliderProps,
+    SaturationSliderOptions {}
 
 export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle(
+    const [styles, mergedProps] = useComponentMultiStyle(
       "SaturationSlider",
       props,
     )
@@ -147,3 +148,6 @@ export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
     )
   },
 )
+
+SaturationSlider.displayName = "SaturationSlider"
+SaturationSlider.__ui__ = "SaturationSlider"

@@ -3,9 +3,9 @@ import type { MotionProps } from "@yamada-ui/motion"
 import { motion, motionForwardRef } from "@yamada-ui/motion"
 import { fadeProps } from "@yamada-ui/transitions"
 import { cx, handlerAll } from "@yamada-ui/utils"
-import { useModal } from "./modal"
+import { useModal } from "./modal-context"
 
-export type ModalOverlayProps = MotionProps<"div">
+export interface ModalOverlayProps extends MotionProps {}
 
 export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
   ({ className, __css, onClick, ...rest }, ref) => {
@@ -23,7 +23,7 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
       top: 0,
       left: 0,
       w: "100vw",
-      h: "100vh",
+      h: "100dvh",
       ...(__css ? __css : styles.overlay),
     }
 

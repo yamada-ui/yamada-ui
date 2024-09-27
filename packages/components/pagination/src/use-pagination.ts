@@ -4,7 +4,9 @@ import { useValue } from "@yamada-ui/use-value"
 import { createContext } from "@yamada-ui/utils"
 import { useCallback, useMemo } from "react"
 
-type PaginationContext = Record<string, CSSUIObject>
+interface PaginationContext {
+  [key: string]: CSSUIObject
+}
 
 export const [PaginationProvider, usePaginationContext] =
   createContext<PaginationContext>({
@@ -12,7 +14,10 @@ export const [PaginationProvider, usePaginationContext] =
     name: "PaginationContext",
   })
 
-export type UsePaginationProps = {
+export const computedRange = (start: number, end: number) =>
+  Array.from({ length: end - start + 1 }, (_, index) => index + start)
+
+export interface UsePaginationProps {
   /**
    * The page of the pagination.
    * Should be less than `total` and greater than `1`.
@@ -52,20 +57,17 @@ export type UsePaginationProps = {
   onChange?: (page: number) => void
 }
 
-export const computedRange = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (_, index) => index + start)
-
 export const usePagination = ({
   page,
   defaultPage = 1,
   total,
-  siblings = 1,
-  boundaries = 1,
+  siblings: _siblings = 1,
+  boundaries: _boundaries = 1,
   isDisabled = false,
   onChange: onChangeProp,
 }: UsePaginationProps) => {
-  const computedSiblings = useValue(siblings)
-  const computedBoundaries = useValue(boundaries)
+  const siblings = useValue(_siblings)
+  const boundaries = useValue(_boundaries)
 
   const [currentPage, setCurrentPage] = useControllableState({
     value: page,
@@ -96,50 +98,44 @@ export const usePagination = ({
   )
 
   const range = useMemo((): (number | "dots")[] => {
-    const minimumTotal = computedSiblings * 2 + 3 + computedBoundaries * 2
+    const minimumTotal = siblings * 2 + 3 + boundaries * 2
 
     if (minimumTotal >= total) return computedRange(1, total)
 
-    const prevSiblings = Math.max(
-      currentPage - computedSiblings,
-      computedBoundaries,
-    )
-    const nextSiblings = Math.min(
-      currentPage + computedSiblings,
-      total - computedBoundaries,
-    )
+    const prevSiblings = Math.max(currentPage - siblings, boundaries)
+    const nextSiblings = Math.min(currentPage + siblings, total - boundaries)
 
-    const prevDots = prevSiblings > computedBoundaries + 2
-    const nextDots = nextSiblings < total - (computedBoundaries + 1)
+    const prevDots = prevSiblings > boundaries + 2
+    const nextDots = nextSiblings < total - (boundaries + 1)
 
     if (!prevDots && nextDots) {
-      const prevPages = computedSiblings * 2 + computedBoundaries + 2
+      const prevPages = siblings * 2 + boundaries + 2
 
       return [
         ...computedRange(1, prevPages),
         "dots",
-        ...computedRange(total - (computedBoundaries - 1), total),
+        ...computedRange(total - (boundaries - 1), total),
       ]
     }
 
     if (prevDots && !nextDots) {
-      const nextPages = computedBoundaries + 1 + 2 * computedSiblings
+      const nextPages = boundaries + 1 + 2 * siblings
 
       return [
-        ...computedRange(1, computedBoundaries),
+        ...computedRange(1, boundaries),
         "dots",
         ...computedRange(total - nextPages, total),
       ]
     }
 
     return [
-      ...computedRange(1, computedBoundaries),
+      ...computedRange(1, boundaries),
       "dots",
       ...computedRange(prevSiblings, nextSiblings),
       "dots",
-      ...computedRange(total - computedBoundaries + 1, total),
+      ...computedRange(total - boundaries + 1, total),
     ]
-  }, [computedBoundaries, computedSiblings, currentPage, total])
+  }, [boundaries, siblings, currentPage, total])
 
   return {
     currentPage,

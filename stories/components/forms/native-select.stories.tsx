@@ -1,4 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { ChevronsDown } from "@yamada-ui/lucide"
 import type { NativeSelectItem } from "@yamada-ui/react"
 import {
@@ -9,9 +12,6 @@ import {
   NativeSelect,
   VStack,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof NativeSelect>
 
@@ -329,7 +329,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { select: string }
+  interface Data {
+    select: string
+  }
 
   const {
     register,
@@ -369,7 +371,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { select: string }
+  interface Data {
+    select: string
+  }
 
   const defaultValues: Data = {
     select: "孫悟空",

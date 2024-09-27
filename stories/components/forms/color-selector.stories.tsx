@@ -1,4 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import {
   Button,
   ColorSelector,
@@ -7,9 +10,6 @@ import {
   VStack,
   Wrap,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof ColorSelector>
 
@@ -260,7 +260,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { colorPicker: string }
+  interface Data {
+    colorPicker: string
+  }
 
   const defaultValues: Data = {
     colorPicker: "#4387f4ff",

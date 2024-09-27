@@ -5,13 +5,13 @@ import {
   useComponentStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { cx, omitObject } from "@yamada-ui/utils"
+import { cx } from "@yamada-ui/utils"
 import type { ReactElement } from "react"
 import { isValidElement, useMemo } from "react"
 import type { UseImageProps } from "./use-image"
 import { shouldShowFallbackImage, useImage } from "./use-image"
 
-type ImageOptions = {
+interface ImageOptions {
   /**
    * Fallback image `src` or element to show if image is loading or image fails.
    */
@@ -35,10 +35,11 @@ type ImageOptions = {
   fit?: CSSUIProps["objectFit"]
 }
 
-export type ImageProps = Omit<HTMLUIProps<"img">, keyof UseImageProps> &
-  Omit<ThemeProps<"Image">, "size"> &
-  UseImageProps &
-  ImageOptions
+export interface ImageProps
+  extends Omit<HTMLUIProps<"img">, keyof UseImageProps>,
+    Omit<ThemeProps<"Image">, "size">,
+    UseImageProps,
+    ImageOptions {}
 
 /**
  * `Image` is a component that displays images with fallback support.
@@ -102,7 +103,7 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
       referrerPolicy={referrerPolicy}
       className={cx("ui-image", className)}
       __css={css}
-      {...(ignoreFallback ? rest : omitObject(rest, ["onError", "onLoad"]))}
+      {...(ignoreFallback ? { ...rest, onError, onLoad } : rest)}
     />
   )
 })

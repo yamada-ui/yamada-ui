@@ -2,15 +2,20 @@ import { readdir } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
 import type { Content, Data } from "../utils"
 import { getMDXFile, getMDXFileName, writeMDXFile } from "../utils"
+import { CONSTANT } from "constant"
 import { locales } from "utils/i18n"
 
 config({ path: CONSTANT.PATH.ENV })
 
-type MDXFile = { name: string; version: number[]; data: Data; content: Content }
+interface MDXFile {
+  name: string
+  version: number[]
+  data: Data
+  content: Content
+}
 
 const SOURCE_PATH = path.join(CONSTANT.PATH.ROOT, ".changelog")
 const DIST_PATH = path.join("contents", "changelog")

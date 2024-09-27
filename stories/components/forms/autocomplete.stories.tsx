@@ -1,4 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { ChevronsDown, Check } from "@yamada-ui/lucide"
 import type { AutocompleteItem } from "@yamada-ui/react"
 import {
@@ -9,9 +12,6 @@ import {
   Button,
   VStack,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { useForm, Controller } from "react-hook-form"
 
 type Story = StoryFn<typeof Autocomplete>
 
@@ -522,7 +522,7 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = {
+  interface Data {
     autocomplete1: string
     autocomplete2: string
     autocomplete3: string
@@ -648,7 +648,7 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = {
+  interface Data {
     autocomplete1: string
     autocomplete2: string
     autocomplete3: string

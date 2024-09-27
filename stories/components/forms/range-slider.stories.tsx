@@ -1,4 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import { Activity } from "@yamada-ui/lucide"
 import {
   RangeSlider,
@@ -16,10 +20,6 @@ import {
   Button,
   Flex,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof RangeSlider>
 
@@ -464,7 +464,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { rangeSlider: [number, number] }
+  interface Data {
+    rangeSlider: [number, number]
+  }
 
   const defaultValues: Data = {
     rangeSlider: [25, 75],

@@ -1,12 +1,12 @@
 import { forwardRef, Grid } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
-import { memo, useMemo } from "react"
-import { UserChart } from "./user-chart"
-import { useInsights } from "./insights-provider"
 import type { UserInsights, UserInsightScore } from "insights"
+import { memo, useMemo } from "react"
+import { useInsights } from "./insights-provider"
 import { DEFAULT_SCORE, getInsightScore } from "./insights-utils"
+import { UserChart } from "./user-chart"
 
-export type UserChartsProps = GridProps & {
+export interface UserChartsProps extends GridProps {
   isLoading: boolean
 }
 
@@ -15,14 +15,16 @@ export const UserCharts = memo(
     const { users, currentInsights, prevInsights } = useInsights()
 
     const computedUsers = useMemo(() => {
-      type Data = {
+      interface Data {
         currentScore: UserInsightScore
         prevScore: UserInsightScore
         timeline?: UserInsights
       }
 
       if (currentInsights) {
-        type Result = Record<string, Data>
+        interface Result {
+          [key: string]: Data
+        }
 
         const result: Result = {}
 

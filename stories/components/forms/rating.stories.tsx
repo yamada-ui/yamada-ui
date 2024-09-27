@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Angry, Frown, Laugh, Smile, SmilePlus, Ghost } from "@yamada-ui/lucide"
-import { Button, FormControl, Rating, VStack } from "@yamada-ui/react"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { Angry, Frown, Laugh, Smile, SmilePlus, Ghost } from "@yamada-ui/lucide"
+import { Button, FormControl, Rating, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Rating>
 
@@ -200,7 +200,9 @@ export const customControl: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { rating: number }
+  interface Data {
+    rating: number
+  }
 
   const defaultValues: Data = {
     rating: 3,

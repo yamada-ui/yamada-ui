@@ -1,6 +1,4 @@
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
-import { Icon } from "@yamada-ui/fontawesome"
-import { a11y, render, screen } from "@yamada-ui/test"
+import { a11y, render, screen, TestIcon } from "@yamada-ui/test"
 import type { NativeSelectItem } from "../src"
 import { NativeOption, NativeSelect } from "../src"
 
@@ -79,7 +77,7 @@ describe("<NativeSelect />", () => {
       <NativeSelect
         data-testid="select"
         iconProps={{
-          children: <Icon data-testid="Icon" icon={faCaretDown} />,
+          children: <TestIcon data-testid="Icon" />,
         }}
       />,
     )

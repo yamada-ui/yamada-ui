@@ -1,15 +1,21 @@
 import { useBreakpoint } from "@yamada-ui/react"
 import { Table } from "@yamada-ui/table"
 import type { Column } from "@yamada-ui/table"
-import { TextWithCodeOrLink } from "components/typography"
-import { useI18n } from "contexts"
 import { useMemo, useState } from "react"
 import type { FC } from "react"
 import { PackageManagers } from "./package-managers"
+import { TextWithCodeOrLink } from "components/typography"
+import { useI18n } from "contexts"
 
-type Package = { name: string; description: string; isDefaultCheck?: boolean }
+interface Package {
+  name: string
+  description: string
+  isDefaultCheck?: boolean
+}
 
-export type SelectPackageManagersProps = { packages: Package[] }
+export interface SelectPackageManagersProps {
+  packages: Package[]
+}
 
 export const SelectPackageManagers: FC<SelectPackageManagersProps> = ({
   packages,

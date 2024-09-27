@@ -2,50 +2,26 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
-import { createDescendant } from "@yamada-ui/use-descendant"
 import type { LazyMode } from "@yamada-ui/use-disclosure"
-import {
-  createContext,
-  cx,
-  findChildren,
-  pickChildren,
-  getValidChildren,
-} from "@yamada-ui/utils"
-import type { Dispatch, SetStateAction } from "react"
+import { cx, pickChildren, getValidChildren, findChild } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
-import type { TabListProps, TabPanelsProps } from "./"
-import { TabList, TabPanels, Tab, TabPanel } from "./"
-
-const {
+import { Tab } from "./tab"
+import type { TabListProps } from "./tab-list"
+import { TabList } from "./tab-list"
+import { TabPanel } from "./tab-panel"
+import type { TabPanelsProps } from "./tab-panels"
+import { TabPanels } from "./tab-panels"
+import {
   DescendantsContextProvider,
-  useDescendantsContext: useTabsDescendantsContext,
+  TabsProvider,
   useDescendants,
-  useDescendant: useTabsDescendant,
-} = createDescendant<HTMLButtonElement>()
+} from "./tabs-context"
 
-export { useTabsDescendantsContext, useTabsDescendant }
-
-type TabsContext = Omit<TabsOptions, "index" | "defaultIndex" | "onChange"> & {
-  focusedIndex: number
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  selectedIndex: number
-  setSelectedIndex: Dispatch<SetStateAction<number>>
-  styles: Record<string, CSSUIObject>
-  disableRipple: boolean
-}
-
-const [TabsProvider, useTabsContext] = createContext<TabsContext>({
-  name: "TabsContext",
-  errorMessage: `useTabsContext returned is 'undefined'. Seems you forgot to wrap the components in "<Tabs />"`,
-})
-
-export { useTabsContext }
-
-type TabsOptions = {
+export interface TabsOptions {
   /**
    * The index of the selected tab.
    */
@@ -113,9 +89,10 @@ type TabsOptions = {
   disableRipple?: boolean
 }
 
-export type TabsProps = Omit<HTMLUIProps<"div">, "onChange"> &
-  ThemeProps<"Tabs"> &
-  TabsOptions
+export interface TabsProps
+  extends Omit<HTMLUIProps, "onChange">,
+    ThemeProps<"Tabs">,
+    TabsOptions {}
 
 /**
  * `Tabs` is a component for switching between different display areas.
@@ -124,7 +101,7 @@ export type TabsProps = Omit<HTMLUIProps<"div">, "onChange"> &
  */
 export const Tabs = forwardRef<TabsProps, "div">(
   ({ align = "start", ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Tabs", {
+    const [styles, mergedProps] = useComponentMultiStyle("Tabs", {
       align,
       ...props,
     })
@@ -157,8 +134,8 @@ export const Tabs = forwardRef<TabsProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customTabList] = findChildren(validChildren, TabList)
-    const [customTabPanels] = findChildren(validChildren, TabPanels)
+    const customTabList = findChild(validChildren, TabList)
+    const customTabPanels = findChild(validChildren, TabPanels)
     const cloneTabs = pickChildren(validChildren, Tab)
     const cloneTabPanels = pickChildren(validChildren, TabPanel)
 

@@ -1,14 +1,14 @@
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, PropGetter } from "@yamada-ui/core"
 import { useTheme } from "@yamada-ui/core"
 import type { Dict } from "@yamada-ui/utils"
 import { cx } from "@yamada-ui/utils"
 import { useCallback } from "react"
 import type { CartesianGridProps } from "recharts"
 import { getComponentProps } from "./chart-utils"
-import type { ChartAxisType, ChartPropGetter, GridProps } from "./chart.types"
+import type { ChartAxisType, GridProps } from "./chart.types"
 import { gridProperties } from "./rechart-properties"
 
-export type UseChartGridOptions = {
+export interface UseChartGridOptions {
   /**
    * Props passed down to recharts 'CartesianGrid' component.
    */
@@ -27,7 +27,7 @@ export type UseChartGridOptions = {
   strokeDasharray?: string | number
 }
 
-type UseChartGridProps = UseChartGridOptions & {
+interface UseChartGridProps extends UseChartGridOptions {
   styles: Dict<CSSUIObject>
 }
 
@@ -43,8 +43,7 @@ export const useChartGrid = ({
     styles.grid,
   )(theme)
 
-  const getGridProps: ChartPropGetter<
-    "div",
+  const getGridProps: PropGetter<
     Partial<CartesianGridProps>,
     CartesianGridProps
   > = useCallback(

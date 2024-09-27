@@ -4,7 +4,7 @@ import { cx } from "@yamada-ui/utils"
 import { useStepContext } from "./step"
 import { useStepperContext } from "./use-stepper"
 
-export type StepSeparatorProps = HTMLUIProps<"div">
+export interface StepSeparatorProps extends HTMLUIProps {}
 
 export const StepSeparator = forwardRef<StepSeparatorProps, "div">(
   ({ className, ...rest }, ref) => {

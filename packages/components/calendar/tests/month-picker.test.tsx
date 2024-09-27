@@ -1,55 +1,43 @@
-import { a11y, fireEvent, render } from "@yamada-ui/test"
+import { a11y, render, screen, waitFor } from "@yamada-ui/test"
+
 import { MonthPicker } from "../src"
 
 describe("<MonthPicker />", () => {
   test("MonthPicker renders correctly", async () => {
-    await a11y(<MonthPicker placeholder="basic" />)
+    await a11y(<MonthPicker />)
   })
 
-  describe("MonthPicker test", () => {
-    beforeEach(() => {
-      vi.useFakeTimers()
-    })
+  test("should change selected month", async () => {
+    const { user } = render(
+      <MonthPicker defaultValue={new Date("2024/09/10 13:25:40")} />,
+    )
 
-    afterEach(() => {
-      vi.useRealTimers()
-    })
-    test("should change selected Month", async () => {
-      const { container } = render(
-        <MonthPicker placeholder="basic" defaultValue={new Date(new Date())} />,
-      )
+    const input = await screen.findByRole("textbox")
+    await user.click(input)
 
-      const selectBtn = container.querySelector(`button[data-value="1"]`)
+    const jun = await screen.findByRole("button", { name: /jun/i })
+    await user.click(jun)
 
-      fireEvent.click(selectBtn!)
+    await waitFor(() => expect(input).toHaveValue("2024/06"))
+  })
 
-      expect(selectBtn).toHaveAttribute("data-selected")
-    })
-    test("should not selected any month when no value is selected", async () => {
-      const { container } = render(<MonthPicker placeholder="basic" />)
+  test("should change selected year", async () => {
+    const { user } = render(
+      <MonthPicker defaultValue={new Date("2024/09/10 13:25:40")} />,
+    )
 
-      const monthListButtons = container.querySelectorAll(
-        `button.ui-calendar__month-list__button`,
-      )
+    const input = await screen.findByRole("textbox")
+    await user.click(input)
 
-      monthListButtons.forEach((button) => {
-        expect(button).not.toHaveAttribute("data-selected")
-      })
-    })
-    test("should selected current year when opening year calendar", async () => {
-      const { container } = render(<MonthPicker placeholder="basic" />)
+    const headerButton = await screen.findByRole("button", { name: /2024/i })
+    await user.click(headerButton)
 
-      const headerLabelBtn = container.querySelector(
-        `button.ui-calendar__header__label`,
-      )
-      fireEvent.click(headerLabelBtn!)
+    const yearButton = await screen.findByRole("button", { name: /2025/i })
+    await user.click(yearButton)
 
-      const currentYear = new Date().getFullYear().toString()
-      const currentYearBtn = container.querySelector(
-        `button[data-value="${currentYear}"]`,
-      )
+    const dec = await screen.findByRole("button", { name: /dec/i })
+    await user.click(dec)
 
-      expect(currentYearBtn).toHaveAttribute("data-selected")
-    })
+    await waitFor(() => expect(input).toHaveValue("2025/12"))
   })
 })

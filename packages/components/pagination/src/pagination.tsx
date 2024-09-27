@@ -7,7 +7,7 @@ import type {
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useValue } from "@yamada-ui/use-value"
@@ -19,7 +19,7 @@ import { PaginationItem } from "./pagination-item"
 import type { UsePaginationProps } from "./use-pagination"
 import { PaginationProvider, usePagination } from "./use-pagination"
 
-type PaginationOptions = {
+interface PaginationOptions {
   /**
    * The pagination button component to use.
    */
@@ -37,7 +37,7 @@ type PaginationOptions = {
   /**
    * Props for inner element.
    */
-  innerProps?: HTMLUIProps<"div">
+  innerProps?: HTMLUIProps
   /**
    * Props for control button element.
    */
@@ -70,13 +70,11 @@ type PaginationOptions = {
   edgeLastProps?: HTMLUIProps<"button">
 }
 
-export type PaginationProps = Omit<
-  HTMLUIProps<"div">,
-  "onChange" | "children" | "page"
-> &
-  ThemeProps<"Pagination"> &
-  UsePaginationProps &
-  PaginationOptions
+export interface PaginationProps
+  extends Omit<HTMLUIProps, "onChange" | "children" | "page">,
+    ThemeProps<"Pagination">,
+    UsePaginationProps,
+    PaginationOptions {}
 
 /**
  * `Pagination` is a component for managing the pagination and navigation of content.
@@ -84,13 +82,13 @@ export type PaginationProps = Omit<
  * @see Docs https://yamada-ui.com/components/navigation/pagination
  */
 export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Pagination", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Pagination", props)
   const {
     className,
     component: Component = PaginationItem,
     itemProps,
-    withControls = true,
-    withEdges = false,
+    withControls: _withControls = true,
+    withEdges: _withEdges = false,
     innerProps,
     controlProps,
     controlPrevProps,
@@ -108,8 +106,8 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const computedWithControls = useValue(withControls)
-  const computedWithEdges = useValue(withEdges)
+  const withControls = useValue(_withControls)
+  const withEdges = useValue(_withEdges)
 
   const { currentPage, onFirst, onLast, onPrev, onNext, onChange, range } =
     usePagination({
@@ -159,7 +157,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         {...rest}
         data-disabled={dataAttr(isDisabled)}
       >
-        {computedWithEdges ? (
+        {withEdges ? (
           <Component
             page="first"
             aria-label="Go to first page"
@@ -175,7 +173,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           />
         ) : null}
 
-        {computedWithControls ? (
+        {withControls ? (
           <Component
             page="prev"
             aria-label="Go to previous page"
@@ -204,7 +202,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           {children}
         </ui.div>
 
-        {computedWithControls ? (
+        {withControls ? (
           <Component
             page="next"
             aria-label="Go to next page"
@@ -220,7 +218,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           />
         ) : null}
 
-        {computedWithEdges ? (
+        {withEdges ? (
           <Component
             page="last"
             aria-label="Go to last page"

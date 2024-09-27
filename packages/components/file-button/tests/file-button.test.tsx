@@ -1,4 +1,3 @@
-import { Link, Button, VStack, HStack, Text } from "@yamada-ui/react"
 import { a11y, render, screen, fireEvent, waitFor } from "@yamada-ui/test"
 import { useState, useRef } from "react"
 import { FileButton } from "../src"
@@ -23,9 +22,9 @@ describe("<FileButton />", () => {
     render(
       <FileButton>
         {({ onClick }) => (
-          <Link href="https://yamada-ui.com" onClick={onClick}>
+          <a href="https://yamada-ui.com" onClick={onClick}>
             Upload
-          </Link>
+          </a>
         )}
       </FileButton>,
     )
@@ -88,14 +87,12 @@ describe("<FileButton />", () => {
       }
 
       return (
-        <VStack>
-          <Text data-testid="file-count">
-            files: {files ? files.length : 0}
-          </Text>
+        <>
+          <p data-testid="file-count">files: {files ? files.length : 0}</p>
           <FileButton onChange={handleFileChange} multiple>
             Upload
           </FileButton>
-        </VStack>
+        </>
       )
     }
 
@@ -149,17 +146,15 @@ describe("<FileButton />", () => {
       }
 
       return (
-        <VStack>
-          <Text data-testid="file-count">
-            files: {files ? files.length : 0}
-          </Text>
-          <HStack>
+        <>
+          <p data-testid="file-count">files: {files ? files.length : 0}</p>
+          <>
             <FileButton resetRef={resetRef} onChange={handleFileChange}>
               Upload
             </FileButton>
-            <Button onClick={onReset}>Reset</Button>
-          </HStack>
-        </VStack>
+            <button onClick={onReset}>Reset</button>
+          </>
+        </>
       )
     }
 

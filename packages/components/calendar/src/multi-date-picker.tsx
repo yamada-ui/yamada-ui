@@ -1,8 +1,8 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import type { MotionProps } from "@yamada-ui/motion"
@@ -14,7 +14,6 @@ import { cloneElement, useMemo, useRef } from "react"
 import type {
   CSSProperties,
   ReactElement,
-  FC,
   MouseEventHandler,
   Dispatch,
   SetStateAction,
@@ -29,7 +28,7 @@ import { DatePickerProvider, useDatePickerContext } from "./use-date-picker"
 import type { UseMultiDatePickerProps } from "./use-multi-date-picker"
 import { useMultiDatePicker } from "./use-multi-date-picker"
 
-type MultiDatePickerOptions = {
+interface MultiDatePickerOptions {
   /**
    * The visual separator between each value.
    *
@@ -68,15 +67,15 @@ type MultiDatePickerOptions = {
   /**
    * Props for date picker container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for date picker container element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for date picker field element.
    */
-  fieldProps?: Omit<HTMLUIProps<"div">, "children">
+  fieldProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for date picker input element.
    */
@@ -99,9 +98,10 @@ type MultiDatePickerOptions = {
   children?: ReactNode | FC<{ value: Date[]; onClose: () => void }>
 }
 
-export type MultiDatePickerProps = ThemeProps<"DatePicker"> &
-  MultiDatePickerOptions &
-  UseMultiDatePickerProps
+export interface MultiDatePickerProps
+  extends ThemeProps<"DatePicker">,
+    MultiDatePickerOptions,
+    UseMultiDatePickerProps {}
 
 /**
  * `MultiDatePicker` is a component used for users to select multiple dates.
@@ -110,7 +110,7 @@ export type MultiDatePickerProps = ThemeProps<"DatePicker"> &
  */
 export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle(
+    const [styles, mergedProps] = useComponentMultiStyle(
       "MultiDatePicker",
       props,
     )
@@ -221,19 +221,23 @@ export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
   },
 )
 
-type MultiDatePickerFieldOptions = {
+MultiDatePicker.displayName = "MultiDatePicker"
+MultiDatePicker.__ui__ = "MultiDatePicker"
+
+interface MultiDatePickerFieldOptions {
   isOpen: boolean
   value: Date[]
   setValue: Dispatch<SetStateAction<Date[]>>
   dateToString: (value: Date | undefined) => string | undefined
 }
 
-export type MultiDatePickerFieldProps = HTMLUIProps<"div"> &
-  MultiDatePickerFieldOptions &
-  Pick<
-    MultiDatePickerProps,
-    "component" | "separator" | "keepPlaceholder" | "inputProps"
-  >
+export interface MultiDatePickerFieldProps
+  extends HTMLUIProps,
+    MultiDatePickerFieldOptions,
+    Pick<
+      MultiDatePickerProps,
+      "component" | "separator" | "keepPlaceholder" | "inputProps"
+    > {}
 
 export const MultiDatePickerField = forwardRef<
   MultiDatePickerFieldProps,
@@ -349,3 +353,6 @@ export const MultiDatePickerField = forwardRef<
     )
   },
 )
+
+MultiDatePickerField.displayName = "MultiDatePickerField"
+MultiDatePickerField.__ui__ = "MultiDatePickerField"

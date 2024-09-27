@@ -1,20 +1,22 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { HTMLUIProps } from "@yamada-ui/core"
+import type { FC, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import { cx, filterUndefined } from "@yamada-ui/utils"
-import type { FC } from "react"
 import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
-import { getFormattedLabel } from "./calendar-utils"
 import { useCalendarContext } from "./use-calendar"
 import { useMonthList } from "./use-month-list"
 
-type MonthListOptions = {
+interface MonthListOptions {
   /**
    * Props for calendar header element.
    */
-  headerProps?: HTMLUIProps<"div">
+  headerProps?: HTMLUIProps
+  /**
+   * Props for calendar month grid element.
+   */
+  monthGridProps?: HTMLUIProps
   /**
    * Props for calendar month button element.
    */
@@ -23,9 +25,10 @@ type MonthListOptions = {
   }
 }
 
-export type MonthListProps = HTMLUIProps<"div"> &
-  Omit<CalendarHeaderProps, "label" | "index"> &
-  MonthListOptions
+export interface MonthListProps
+  extends HTMLUIProps,
+    Omit<CalendarHeaderProps, "label" | "index">,
+    MonthListOptions {}
 
 export const MonthList: FC<MonthListProps> = ({
   className,
@@ -35,10 +38,11 @@ export const MonthList: FC<MonthListProps> = ({
   prevProps,
   nextProps,
   monthProps,
+  monthGridProps,
   ...rest
 }) => {
-  const { year, locale, yearFormat, styles } = useCalendarContext()
-  const { rangeMonths, getContainerProps, getButtonProps } = useMonthList()
+  const { year, styles } = useCalendarContext()
+  const { label, rangeMonths, getGridProps, getButtonProps } = useMonthList()
 
   const { component: customMonth, ...computedMonthProps } = monthProps ?? {}
 
@@ -49,14 +53,12 @@ export const MonthList: FC<MonthListProps> = ({
   const minH = rest.minH ?? rest.minHeight
   const maxH = rest.maxH ?? rest.maxHeight
 
-  const formattedLabel = getFormattedLabel(year, locale, yearFormat)
-
   return (
     <ui.div __css={{ ...styles.content }} {...filterUndefined(rest)}>
       <CalendarHeader
         {...{
           ...headerProps,
-          label: formattedLabel,
+          label,
           labelProps,
           controlProps,
           prevProps,
@@ -65,8 +67,6 @@ export const MonthList: FC<MonthListProps> = ({
       />
 
       <ui.div
-        role="grid"
-        aria-label={formattedLabel}
         className={cx("ui-calendar__month-list", className)}
         __css={{
           w: styles.content?.w ?? styles.content?.width,
@@ -78,9 +78,10 @@ export const MonthList: FC<MonthListProps> = ({
           display: "grid",
           ...styles.month,
         }}
-        {...getContainerProps(
-          filterUndefined({ w, minW, maxW, h, minH, maxH }),
-        )}
+        {...getGridProps({
+          ...filterUndefined({ w, minW, maxW, h, minH, maxH }),
+          ...monthGridProps,
+        })}
       >
         {rangeMonths.map((month, index) => (
           <Button
@@ -104,3 +105,6 @@ export const MonthList: FC<MonthListProps> = ({
     </ui.div>
   )
 }
+
+MonthList.displayName = "MonthList"
+MonthList.__ui__ = "MonthList"

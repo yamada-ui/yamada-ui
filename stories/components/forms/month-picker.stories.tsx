@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { MonthPickerProps } from "@yamada-ui/calendar"
-import { MonthPicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
-import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { colorSchemes } from "../../components"
+import { MonthPicker } from "@yamada-ui/calendar"
+import type { MonthPickerProps } from "@yamada-ui/calendar"
+import { Ghost } from "@yamada-ui/lucide"
+import { FormControl, Grid, Heading, VStack, Button } from "@yamada-ui/react"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof MonthPicker>
@@ -342,7 +342,9 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { monthPicker: Date | undefined }
+  interface Data {
+    monthPicker: Date | undefined
+  }
 
   const {
     control,
@@ -380,7 +382,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { monthPicker: Date | undefined }
+  interface Data {
+    monthPicker: Date | undefined
+  }
 
   const defaultValues: Data = {
     monthPicker: new Date(),

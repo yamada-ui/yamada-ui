@@ -15,7 +15,7 @@ import { usePrevious } from "@yamada-ui/use-previous"
 import { useValue } from "@yamada-ui/use-value"
 import { cx, getValidChildren, useIsMounted } from "@yamada-ui/utils"
 
-type SkeletonOptions = {
+interface SkeletonOptions {
   /**
    * The color at the animation start.
    */
@@ -50,9 +50,10 @@ type SkeletonOptions = {
   isFitContent?: boolean
 }
 
-export type SkeletonProps = HTMLUIProps<"div"> &
-  ThemeProps<"Skeleton"> &
-  SkeletonOptions
+export interface SkeletonProps
+  extends HTMLUIProps,
+    ThemeProps<"Skeleton">,
+    SkeletonOptions {}
 
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.
@@ -63,8 +64,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Skeleton", props)
   let {
     className,
-    startColor,
-    endColor,
+    startColor: _startColor,
+    endColor: _endColor,
     fadeDuration = 0.4,
     speed = 0.8,
     isLoaded,
@@ -75,8 +76,8 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [isMounted] = useIsMounted()
   const validChildren = getValidChildren(children)
   const prevIsLoaded = usePrevious(isLoaded)
-  const computedStartColor = useValue(startColor)
-  const computedEndColor = useValue(endColor)
+  const startColor = useValue(_startColor)
+  const endColor = useValue(_endColor)
   const hasChildren = !!validChildren.length
 
   isFitContent ??= hasChildren
@@ -97,12 +98,12 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const animation = useAnimation({
     keyframes: {
       "0%": {
-        borderColor: computedStartColor,
-        background: computedStartColor,
+        borderColor: startColor,
+        background: startColor,
       },
       "100%": {
-        borderColor: computedEndColor,
-        background: computedEndColor,
+        borderColor: endColor,
+        background: endColor,
       },
     },
     duration: typeof speed === "string" ? speed : `${speed}s`,
@@ -156,3 +157,6 @@ export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
     )
   }
 })
+
+Skeleton.displayName = "Skeleton"
+Skeleton.__ui__ = "Skeleton"

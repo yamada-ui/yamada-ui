@@ -4,12 +4,12 @@ import {
   Motion,
   useMotionValue,
   useTransform,
-  type MotionProps,
 } from "@yamada-ui/react"
+import type { MotionProps } from "@yamada-ui/react"
 import { memo, useEffect } from "react"
 import type { FC } from "react"
 
-export type CountUpProps = MotionProps<"span"> & {
+export interface CountUpProps extends MotionProps<"span"> {
   count: number | null
 }
 

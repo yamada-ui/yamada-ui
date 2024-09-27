@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { YearPicker } from "@yamada-ui/calendar"
-import { Ghost } from "@yamada-ui/lucide"
-import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import dayjs from "dayjs"
 import { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { colorSchemes } from "../../components"
+import { YearPicker } from "@yamada-ui/calendar"
+import { Ghost } from "@yamada-ui/lucide"
+import { Button, FormControl, Grid, Heading, VStack } from "@yamada-ui/react"
 import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof YearPicker>
@@ -285,7 +285,9 @@ export const customControlValue: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { yearPicker: Date | undefined }
+  interface Data {
+    yearPicker: Date | undefined
+  }
 
   const {
     control,
@@ -321,7 +323,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { yearPicker: Date | undefined }
+  interface Data {
+    yearPicker: Date | undefined
+  }
 
   const defaultValues: Data = {
     yearPicker: new Date(),

@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
-import { Center, Button, useOutsideClick } from "@yamada-ui/react"
 import { useRef, useState } from "react"
+import { Center, Button, useOutsideClick } from "@yamada-ui/react"
 
 const meta: Meta = {
   title: "Hooks / useOutsideClick",

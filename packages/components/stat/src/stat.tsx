@@ -2,34 +2,28 @@ import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
 import {
-  createContext,
   cx,
-  findChildren,
+  findChild,
   getValidChildren,
   isEmpty,
   omitChildren,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import {
-  StatHelperMessage,
-  type StatHelperMessageProps,
-} from "./stat-helper-message"
-import { StatIcon, type StatIconProps } from "./stat-icon"
-import { StatLabel, type StatLabelProps } from "./stat-label"
-import { StatNumber, type StatNumberProps } from "./stat-number"
+import { StatProvider } from "./stat-context"
+import { StatHelperMessage } from "./stat-helper-message"
+import type { StatHelperMessageProps } from "./stat-helper-message"
+import { StatIcon } from "./stat-icon"
+import type { StatIconProps } from "./stat-icon"
+import { StatLabel } from "./stat-label"
+import type { StatLabelProps } from "./stat-label"
+import { StatNumber } from "./stat-number"
+import type { StatNumberProps } from "./stat-number"
 
-type StatContext = Record<string, CSSUIObject>
-
-export const [StatProvider, useStat] = createContext<StatContext>({
-  name: "StatContext",
-  errorMessage: `useStat returned is 'undefined'. Seems you forgot to wrap the components in "<Stat />"`,
-})
-
-type StatOptions = {
+interface StatOptions {
   /**
    * The stat label to use.
    */
@@ -70,7 +64,10 @@ type StatOptions = {
   centerContent?: boolean
 }
 
-export type StatProps = HTMLUIProps<"dl"> & ThemeProps<"Stat"> & StatOptions
+export interface StatProps
+  extends HTMLUIProps<"dl">,
+    ThemeProps<"Stat">,
+    StatOptions {}
 
 /**
  * `Stat` is used to show numbers and data in a box.
@@ -78,7 +75,7 @@ export type StatProps = HTMLUIProps<"dl"> & ThemeProps<"Stat"> & StatOptions
  * @see Docs https://yamada-ui.com/components/data-display/stat
  */
 export const Stat = forwardRef<StatProps, "dl">((props, ref) => {
-  const [styles, mergedProps] = useMultiComponentStyle("Stat", props)
+  const [styles, mergedProps] = useComponentMultiStyle("Stat", props)
   const {
     className,
     label,
@@ -103,12 +100,9 @@ export const Stat = forwardRef<StatProps, "dl">((props, ref) => {
 
   const validChildren = getValidChildren(children)
 
-  const [customStatLabel] = findChildren(validChildren, StatLabel)
-  const [customStatNumber] = findChildren(validChildren, StatNumber)
-  const [customStatHelperMessage] = findChildren(
-    validChildren,
-    StatHelperMessage,
-  )
+  const customStatLabel = findChild(validChildren, StatLabel)
+  const customStatNumber = findChild(validChildren, StatNumber)
+  const customStatHelperMessage = findChild(validChildren, StatHelperMessage)
 
   const cloneChildren = !isEmpty(validChildren)
     ? omitChildren(validChildren, StatLabel, StatNumber, StatHelperMessage)

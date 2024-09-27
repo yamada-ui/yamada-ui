@@ -3,7 +3,7 @@ import { ui, forwardRef } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 import { usePopover } from "./popover"
 
-export type PopoverHeaderProps = HTMLUIProps<"header">
+export interface PopoverHeaderProps extends HTMLUIProps<"header"> {}
 
 export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
   ({ className, ...rest }, ref) => {
@@ -26,3 +26,6 @@ export const PopoverHeader = forwardRef<PopoverHeaderProps, "header">(
     )
   },
 )
+
+PopoverHeader.displayName = "PopoverHeader"
+PopoverHeader.__ui__ = "PopoverHeader"

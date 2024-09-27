@@ -9,7 +9,7 @@ import { Icon as UIIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
 
-type IconOptions = {
+interface IconOptions {
   /**
    * The icon of the [Font Awesome](https://fontawesome.com).
    * Check the docs to see the icon of possible modifiers you can pass.
@@ -19,7 +19,7 @@ type IconOptions = {
   icon: IconDefinition | IconProp
 }
 
-export type IconProps = UIIconProps & IconOptions
+export interface IconProps extends UIIconProps, IconOptions {}
 
 /**
  * `Icon` is a useful component for using [Font Awesome](https://fontawesome.com).

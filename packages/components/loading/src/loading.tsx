@@ -1,5 +1,10 @@
 import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
-import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import {
+  forwardRef,
+  mergeVars,
+  omitThemeProps,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -11,12 +16,12 @@ import { Oval } from "./oval"
 import { Puff } from "./puff"
 import { Rings } from "./rings"
 
-type ComponentProps = Omit<IconProps, "color"> & {
+interface ComponentProps extends Omit<IconProps, "color"> {
   color: string
   secondaryColor?: string
 }
 
-type LoadingOptions = {
+interface LoadingOptions {
   /**
    * The variant of the Loading.
    *
@@ -35,9 +40,10 @@ type LoadingOptions = {
   duration?: IconProps["dur"]
 }
 
-export type LoadingProps = IconProps &
-  Pick<ThemeProps<"Loading">, "colorScheme"> &
-  LoadingOptions
+export interface LoadingProps
+  extends Omit<IconProps, "variant">,
+    Pick<ThemeProps<"Loading">, "colorScheme">,
+    LoadingOptions {}
 
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
@@ -47,7 +53,7 @@ export type LoadingProps = IconProps &
 export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
   const [
     { color, ...styles },
-    { variant = "oval", size = "1em", ...mergedProps },
+    { variant = "oval", size = "1em", colorScheme, ...mergedProps },
   ] = useComponentStyle("Loading", props)
   const {
     className,
@@ -62,33 +68,36 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
     () => ({
       className: cx("ui-loading", className),
       size,
-      var: [
-        {
-          name: "color",
-          token: "colors",
-          value: colorProp ?? (color as CSSUIProps["color"]),
-        },
-        {
-          name: "secondary-color",
-          token: "colors",
-          value: secondaryColor,
-        },
-      ],
       color: "$color",
       ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
-      __css: { ...styles },
+      __css: {
+        ...styles,
+        vars: mergeVars(styles?.vars, [
+          {
+            name: "color",
+            token: "colors",
+            value: colorProp ?? (color as string) ?? `${colorScheme}.500`,
+          },
+          {
+            name: "secondary-color",
+            token: "colors",
+            value: secondaryColor,
+          },
+        ]),
+      },
       ...rest,
     }),
     [
       className,
       size,
-      colorProp,
-      color,
       secondaryColor,
       duration,
       dur,
       styles,
+      colorProp,
+      color,
+      colorScheme,
       rest,
     ],
   )

@@ -1,3 +1,5 @@
+import type { BarProps } from "@yamada-ui/charts"
+import { BarChart } from "@yamada-ui/charts"
 import {
   Avatar,
   Box,
@@ -14,8 +16,10 @@ import {
   VStack,
 } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
-import { memo, useMemo } from "react"
 import type { UserInsights, UserInsightScore } from "insights"
+import { memo, useMemo } from "react"
+import { ChartTooltip } from "./chart-tooltip"
+import { useInsights } from "./insights-provider"
 import {
   getInsightScore,
   getTrend,
@@ -23,15 +27,11 @@ import {
   INSIGHT_USERS,
   xAxisTickFormatter,
 } from "./insights-utils"
-import { useInsights } from "./insights-provider"
-import type { BarProps } from "@yamada-ui/charts"
-import { BarChart } from "@yamada-ui/charts"
-import { useI18n } from "contexts"
-import { CountUp } from "components/transitions"
-import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
+import { CountUp } from "components/transitions"
+import { useI18n } from "contexts"
 
-export type UserChartProps = Omit<StackProps, "id"> & {
+export interface UserChartProps extends Omit<StackProps, "id"> {
   id: string
   currentScore: UserInsightScore
   prevScore: UserInsightScore

@@ -6,7 +6,7 @@ import type { ColorSwatchProps } from "./color-swatch"
 import { ColorSwatch } from "./color-swatch"
 import { useColorSelectorContext } from "./use-color-selector"
 
-type ColorSelectorSwatchesOptions = {
+interface ColorSelectorSwatchesOptions {
   /**
    * The swatches label to use.
    */
@@ -29,11 +29,12 @@ type ColorSelectorSwatchesOptions = {
   /**
    * Props for the swatches container element.
    */
-  swatchesContainerProps?: Omit<HTMLUIProps<"div">, "children">
+  swatchesContainerProps?: Omit<HTMLUIProps, "children">
 }
 
-export type ColorSelectorSwatchesProps = Omit<HTMLUIProps<"div">, "children"> &
-  ColorSelectorSwatchesOptions
+export interface ColorSelectorSwatchesProps
+  extends Omit<HTMLUIProps, "children">,
+    ColorSelectorSwatchesOptions {}
 
 export const ColorSelectorSwatches = forwardRef<
   ColorSelectorSwatchesProps,
@@ -95,3 +96,6 @@ export const ColorSelectorSwatches = forwardRef<
     ) : null
   },
 )
+
+ColorSelectorSwatches.displayName = "ColorSelectorSwatches"
+ColorSelectorSwatches.__ui__ = "ColorSelectorSwatches"

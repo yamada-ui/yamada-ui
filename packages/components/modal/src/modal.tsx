@@ -5,52 +5,35 @@ import type {
   Token,
   HTMLUIProps,
 } from "@yamada-ui/core"
-import { ui, omitThemeProps, useMultiComponentStyle } from "@yamada-ui/core"
+import { ui, omitThemeProps, useComponentMultiStyle } from "@yamada-ui/core"
 import type { FocusLockProps } from "@yamada-ui/focus-lock"
 import { FocusLock } from "@yamada-ui/focus-lock"
-import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
-import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
+import type { MotionTransitionProps } from "@yamada-ui/motion"
+import { AnimatePresence, motionForwardRef } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
-import { scaleFadeProps, slideFadeProps } from "@yamada-ui/transitions"
 import { useValue } from "@yamada-ui/use-value"
-import {
-  cx,
-  createContext,
-  getValidChildren,
-  findChildren,
-} from "@yamada-ui/utils"
-import type { KeyboardEvent, PropsWithChildren } from "react"
+import { getValidChildren, findChildren, findChild } from "@yamada-ui/utils"
+import type { KeyboardEvent } from "react"
 import { cloneElement, useCallback } from "react"
 import { RemoveScroll } from "react-remove-scroll"
-import { DrawerContent } from "./drawer"
-import {
-  DrawerOverlay,
-  DialogOverlay,
-  DialogCloseButton,
-  ModalOverlay,
-  ModalCloseButton,
-} from "./"
+import { DialogOverlay } from "./dialog-overlay"
+import { DrawerContent } from "./drawer-content"
+import { DrawerOverlay } from "./drawer-overlay"
+import type { ModalContentProps } from "./modal-content"
+import { ModalContent } from "./modal-content"
+import { ModalProvider } from "./modal-context"
+import { ModalOverlay } from "./modal-overlay"
 
-type ModalContext = ModalOptions & {
-  styles: Record<string, CSSUIObject>
-}
-
-const [ModalProvider, useModal] = createContext<ModalContext>({
-  name: `ModalContext`,
-  errorMessage: `useModal returned is 'undefined'. Seems you forgot to wrap the components in "<Modal />" `,
-})
-
-export { useModal }
-
-type ModalOptions = Pick<
-  FocusLockProps,
-  | "autoFocus"
-  | "initialFocusRef"
-  | "finalFocusRef"
-  | "restoreFocus"
-  | "lockFocusAcrossFrames"
-> & {
+export interface ModalOptions
+  extends Pick<
+    FocusLockProps,
+    | "autoFocus"
+    | "initialFocusRef"
+    | "finalFocusRef"
+    | "restoreFocus"
+    | "lockFocusAcrossFrames"
+  > {
   /**
    * If `true`, the open will be opened.
    */
@@ -153,10 +136,13 @@ type ModalOptions = Pick<
   /**
    * Props for modal container element.
    */
-  containerProps?: HTMLUIProps<"div">
+  containerProps?: HTMLUIProps
 }
 
-export type ModalProps = ModalContentProps & ThemeProps<"Modal"> & ModalOptions
+export interface ModalProps
+  extends ModalContentProps,
+    ThemeProps<"Modal">,
+    ModalOptions {}
 
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
@@ -165,7 +151,7 @@ export type ModalProps = ModalContentProps & ThemeProps<"Modal"> & ModalOptions
  */
 export const Modal = motionForwardRef<ModalProps, "section">(
   ({ size, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Modal", {
+    const [styles, mergedProps] = useComponentMultiStyle("Modal", {
       size,
       ...props,
     })
@@ -220,7 +206,7 @@ export const Modal = motionForwardRef<ModalProps, "section">(
       DrawerOverlay,
     )
 
-    let [drawerContent] = findChildren(validChildren, DrawerContent)
+    let drawerContent = findChild(validChildren, DrawerContent)
 
     if (drawerContent)
       drawerContent = cloneElement(drawerContent, { onKeyDown })
@@ -300,97 +286,6 @@ export const Modal = motionForwardRef<ModalProps, "section">(
           ) : null}
         </AnimatePresence>
       </ModalProvider>
-    )
-  },
-)
-
-const getModalContentProps = (
-  animation: ModalProps["animation"] = "scale",
-  duration?: MotionTransitionProps["duration"],
-) => {
-  switch (animation) {
-    case "scale":
-      return {
-        ...scaleFadeProps,
-        custom: { scale: 0.95, reverse: true, duration },
-      }
-    case "top":
-      return {
-        ...slideFadeProps,
-        custom: { offsetY: -16, reverse: true, duration },
-      }
-    case "right":
-      return {
-        ...slideFadeProps,
-        custom: { offsetX: 16, reverse: true, duration },
-      }
-    case "left":
-      return {
-        ...slideFadeProps,
-        custom: { offsetX: -16, reverse: true, duration },
-      }
-    case "bottom":
-      return {
-        ...slideFadeProps,
-        custom: { offsetY: 16, reverse: true, duration },
-      }
-  }
-}
-
-type ModalContentProps = Omit<
-  MotionProps<"section">,
-  "transition" | "scrollBehavior" | "animation" | "children"
-> &
-  PropsWithChildren
-
-const ModalContent = motionForwardRef<ModalContentProps, "section">(
-  ({ className, children, __css, ...rest }, ref) => {
-    const {
-      styles,
-      scrollBehavior,
-      withCloseButton,
-      onClose,
-      animation,
-      duration,
-    } = useModal()
-
-    const validChildren = getValidChildren(children)
-
-    const [customModalCloseButton, ...cloneChildren] = findChildren(
-      validChildren,
-      ModalCloseButton,
-      DialogCloseButton,
-    )
-
-    const props =
-      animation !== "none" ? getModalContentProps(animation, duration) : {}
-
-    const css: CSSUIObject = {
-      position: "relative",
-      maxH: "100%",
-      display: "flex",
-      flexDirection: "column",
-      overflow: scrollBehavior === "inside" ? "hidden" : "auto",
-      outline: 0,
-      ...(__css ? __css : styles.container),
-    }
-
-    return (
-      <motion.section
-        role="dialog"
-        aria-modal="true"
-        ref={ref}
-        className={cx("ui-modal", className)}
-        tabIndex={-1}
-        __css={css}
-        {...props}
-        {...rest}
-      >
-        {customModalCloseButton ??
-          (withCloseButton && onClose ? <ModalCloseButton /> : null)}
-
-        {cloneChildren}
-      </motion.section>
     )
   },
 )

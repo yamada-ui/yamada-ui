@@ -3,17 +3,17 @@ import {
   CardBody,
   CardHeader,
   Heading,
-  type CardProps,
   Tag,
   Text,
   isUndefined,
 } from "@yamada-ui/react"
-import { TextWithCode } from "components/typography"
-import { useI18n } from "contexts"
+import type { CardProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { Link } from "./link"
+import { TextWithCode } from "components/typography"
+import { useI18n } from "contexts"
 
-export type PropsCardProps = CardProps & {
+export interface PropsCardProps extends CardProps {
   id: string
   name: string
   type?: string

@@ -1,9 +1,9 @@
 import { forwardRef } from "@yamada-ui/core"
 import { cx, getValidChildren } from "@yamada-ui/utils"
-import type { SkeletonProps } from "./"
-import { Skeleton } from "./"
+import type { SkeletonProps } from "./skeleton"
+import { Skeleton } from "./skeleton"
 
-export type SkeletonCircleProps = SkeletonProps
+export interface SkeletonCircleProps extends SkeletonProps {}
 
 export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
   (
@@ -35,3 +35,6 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
     )
   },
 )
+
+SkeletonCircle.displayName = "SkeletonCircle"
+SkeletonCircle.__ui__ = "SkeletonCircle"

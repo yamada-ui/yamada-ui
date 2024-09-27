@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
-export type BadgeProps = HTMLUIProps<"span"> & ThemeProps<"Badge">
+export interface BadgeProps extends HTMLUIProps<"span">, ThemeProps<"Badge"> {}
 
 /**
  * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.
@@ -34,3 +34,6 @@ export const Badge = forwardRef<BadgeProps, "span">((props, ref) => {
     />
   )
 })
+
+Badge.displayName = "Badge"
+Badge.__ui__ = "Badge"

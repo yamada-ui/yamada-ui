@@ -1,8 +1,8 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
   omitThemeProps,
   layoutStyleProperties,
 } from "@yamada-ui/core"
@@ -17,7 +17,7 @@ import {
   runIfFunc,
   splitObject,
 } from "@yamada-ui/utils"
-import type { FC, ReactNode, RefAttributes } from "react"
+import type { ReactNode, RefAttributes } from "react"
 import { Calendar } from "./calendar"
 import type { DatePickerIconProps } from "./date-picker"
 import { DatePickerClearIcon, DatePickerIcon } from "./date-picker"
@@ -25,7 +25,7 @@ import { DatePickerProvider, useDatePickerContext } from "./use-date-picker"
 import type { UseRangeDatePickerProps } from "./use-range-date-picker"
 import { useRangeDatePicker } from "./use-range-date-picker"
 
-type RangeDatePickerOptions = {
+interface RangeDatePickerOptions {
   /**
    * The visual separator between each value.
    *
@@ -49,15 +49,15 @@ type RangeDatePickerOptions = {
   /**
    * Props for date picker container element.
    */
-  containerProps?: Omit<HTMLUIProps<"div">, "children">
+  containerProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for date picker container element.
    */
-  contentProps?: Omit<MotionProps<"div">, "children">
+  contentProps?: Omit<MotionProps, "children">
   /**
    * Props for date picker field element.
    */
-  fieldProps?: Omit<HTMLUIProps<"div">, "children">
+  fieldProps?: Omit<HTMLUIProps, "children">
   /**
    * Props for date picker start input element.
    */
@@ -84,9 +84,10 @@ type RangeDatePickerOptions = {
   children?: ReactNode | FC<{ value: [Date?, Date?]; onClose: () => void }>
 }
 
-export type RangeDatePickerProps = ThemeProps<"DatePicker"> &
-  RangeDatePickerOptions &
-  UseRangeDatePickerProps
+export interface RangeDatePickerProps
+  extends ThemeProps<"DatePicker">,
+    RangeDatePickerOptions,
+    UseRangeDatePickerProps {}
 
 /**
  * `RangeDatePicker` is a component used for users to select a range of dates.
@@ -95,7 +96,7 @@ export type RangeDatePickerProps = ThemeProps<"DatePicker"> &
  */
 export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle(
+    const [styles, mergedProps] = useComponentMultiStyle(
       "RangeDatePicker",
       props,
     )
@@ -201,16 +202,20 @@ export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
   },
 )
 
-type RangeDatePickerFieldOptions = {
+RangeDatePicker.displayName = "RangeDatePicker"
+RangeDatePicker.__ui__ = "RangeDatePicker"
+
+interface RangeDatePickerFieldOptions {
   value: [Date?, Date?] | undefined
 }
 
-export type RangeDatePickerFieldProps = HTMLUIProps<"div"> &
-  Pick<
-    RangeDatePickerProps,
-    "separator" | "startInputProps" | "endInputProps"
-  > &
-  RangeDatePickerFieldOptions
+export interface RangeDatePickerFieldProps
+  extends HTMLUIProps,
+    Pick<
+      RangeDatePickerProps,
+      "separator" | "startInputProps" | "endInputProps"
+    >,
+    RangeDatePickerFieldOptions {}
 
 export const RangeDatePickerField = forwardRef<
   RangeDatePickerFieldProps,
@@ -289,7 +294,10 @@ export const RangeDatePickerField = forwardRef<
   },
 )
 
-type AutosizingInputProps = HTMLUIProps<"input">
+RangeDatePickerField.displayName = "RangeDatePickerField"
+RangeDatePickerField.__ui__ = "RangeDatePickerField"
+
+interface AutosizingInputProps extends HTMLUIProps<"input"> {}
 
 const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
   ({ className, value, placeholder, ...rest }, ref) => {
@@ -321,3 +329,6 @@ const AutosizingInput = forwardRef<AutosizingInputProps, "input">(
     )
   },
 )
+
+AutosizingInput.displayName = "AutosizingInput"
+AutosizingInput.__ui__ = "AutosizingInput"

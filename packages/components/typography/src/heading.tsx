@@ -7,7 +7,9 @@ import {
 } from "@yamada-ui/core"
 import { cx } from "@yamada-ui/utils"
 
-export type HeadingProps = HTMLUIProps<"h1"> & ThemeProps<"Heading">
+export interface HeadingProps
+  extends HTMLUIProps<"h1">,
+    ThemeProps<"Heading"> {}
 
 /**
  * `Heading` is a component that represents section headings. By default, it renders an `h1` element.
@@ -27,3 +29,6 @@ export const Heading = forwardRef<HeadingProps, "h1">((props, ref) => {
     />
   )
 })
+
+Heading.displayName = "Heading"
+Heading.__ui__ = "Heading"

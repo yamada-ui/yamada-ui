@@ -1,14 +1,13 @@
 import type { IconButtonProps } from "@yamada-ui/button"
 import { IconButton } from "@yamada-ui/button"
 import { forwardRef } from "@yamada-ui/core"
-import type { CSSUIObject } from "@yamada-ui/core"
+import type { CSSUIObject, FC } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { Icon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import type { FC } from "react"
 import { useColorSelectorContext } from "./use-color-selector"
 
-export type ColorSelectorEyeDropperProps = IconButtonProps
+export interface ColorSelectorEyeDropperProps extends IconButtonProps {}
 
 export const ColorSelectorEyeDropper = forwardRef<
   ColorSelectorEyeDropperProps,
@@ -37,6 +36,9 @@ export const ColorSelectorEyeDropper = forwardRef<
   )
 })
 
+ColorSelectorEyeDropper.displayName = "ColorSelectorEyeDropper"
+ColorSelectorEyeDropper.__ui__ = "ColorSelectorEyeDropper"
+
 export const EyeDropperIcon: FC<IconProps> = ({ ...rest }) => {
   return (
     <Icon
@@ -54,3 +56,6 @@ export const EyeDropperIcon: FC<IconProps> = ({ ...rest }) => {
     </Icon>
   )
 }
+
+EyeDropperIcon.displayName = "EyeDropperIcon"
+EyeDropperIcon.__ui__ = "EyeDropperIcon"

@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Button, FormControl, Textarea, VStack } from "@yamada-ui/react"
 import { useRef } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import { useForm } from "react-hook-form"
+import { Button, FormControl, Textarea, VStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Textarea>
 
@@ -171,7 +171,9 @@ export const useResize: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { textarea: string }
+  interface Data {
+    textarea: string
+  }
 
   const {
     register,
@@ -207,7 +209,9 @@ export const reactHookForm: Story = () => {
 }
 
 export const reactHookFormWithDefaultValue: Story = () => {
-  type Data = { textarea: string }
+  interface Data {
+    textarea: string
+  }
 
   const defaultValues: Data = {
     textarea: "孫悟空",

@@ -1,40 +1,27 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { CloseButtonProps } from "@yamada-ui/close-button"
 import type { CSSUIObject, ThemeProps } from "@yamada-ui/core"
-import {
-  forwardRef,
-  useMultiComponentStyle,
-  omitThemeProps,
-} from "@yamada-ui/core"
+import { useComponentMultiStyle, omitThemeProps } from "@yamada-ui/core"
 import { motionForwardRef } from "@yamada-ui/motion"
 import {
-  createContext,
   getValidChildren,
-  findChildren,
   omitChildren,
   isValidElement,
   isEmpty,
   cx,
+  findChild,
 } from "@yamada-ui/utils"
 import type { ReactNode } from "react"
-import type {
-  ModalProps,
-  ModalOverlayProps,
-  ModalHeaderProps,
-  ModalBodyProps,
-  ModalFooterProps,
-} from "./"
-import {
-  Modal,
-  ModalOverlay,
-  ModalCloseButton,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "./"
+import { DialogBody } from "./dialog-body"
+import { DialogCloseButton } from "./dialog-close-button"
+import { DialogFooter } from "./dialog-footer"
+import { DialogHeader } from "./dialog-header"
+import { DialogOverlay } from "./dialog-overlay"
+import type { ModalProps } from "./modal"
+import { Modal } from "./modal"
+import { DialogProvider } from "./modal-context"
 
-type DialogOptions = {
+interface DialogOptions {
   /**
    * The dialog header to use.
    */
@@ -69,16 +56,10 @@ type DialogOptions = {
   onSuccess?: (onClose: (() => void) | undefined) => void
 }
 
-export type DialogProps = Omit<ModalProps, keyof ThemeProps> &
-  ThemeProps<"Dialog"> &
-  DialogOptions
-
-type DialogContext = Record<string, CSSUIObject>
-
-const [DialogProvider, useDialog] = createContext<DialogContext>({
-  name: `DialogContext`,
-  errorMessage: `useDialog returned is 'undefined'. Seems you forgot to wrap the components in "<Dialog />" `,
-})
+export interface DialogProps
+  extends Omit<ModalProps, keyof ThemeProps>,
+    ThemeProps<"Dialog">,
+    DialogOptions {}
 
 /**
  * `Dialog` is a component used to confirm or interrupt user actions.
@@ -87,7 +68,7 @@ const [DialogProvider, useDialog] = createContext<DialogContext>({
  */
 export const Dialog = motionForwardRef<DialogProps, "section">(
   ({ size, ...props }, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("Dialog", {
+    const [styles, mergedProps] = useComponentMultiStyle("Dialog", {
       size,
       ...props,
     })
@@ -111,14 +92,11 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
 
     const validChildren = getValidChildren(children)
 
-    const [customDialogOverlay] = findChildren(validChildren, DialogOverlay)
-    const [customDialogCloseButton] = findChildren(
-      validChildren,
-      DialogCloseButton,
-    )
-    const [customDialogHeader] = findChildren(validChildren, DialogHeader)
-    const [customDialogBody] = findChildren(validChildren, DialogBody)
-    const [customDialogFooter] = findChildren(validChildren, DialogFooter)
+    const customDialogOverlay = findChild(validChildren, DialogOverlay)
+    const customDialogCloseButton = findChild(validChildren, DialogCloseButton)
+    const customDialogHeader = findChild(validChildren, DialogHeader)
+    const customDialogBody = findChild(validChildren, DialogBody)
+    const customDialogFooter = findChild(validChildren, DialogFooter)
 
     const cloneChildren = !isEmpty(validChildren)
       ? omitChildren(
@@ -205,101 +183,6 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
             ) : null)}
         </Modal>
       </DialogProvider>
-    )
-  },
-)
-
-export type DialogOverlayProps = ModalOverlayProps
-
-export const DialogOverlay = motionForwardRef<DialogOverlayProps, "div">(
-  ({ className, ...rest }, ref) => {
-    const styles = useDialog()
-
-    const css: CSSUIObject = { ...styles.overlay }
-
-    return (
-      <ModalOverlay
-        ref={ref}
-        className={cx("ui-dialog__overlay", className)}
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
-
-export type DialogCloseButtonProps = CloseButtonProps
-
-export const DialogCloseButton = forwardRef<DialogCloseButtonProps, "button">(
-  ({ className, ...rest }, ref) => {
-    const styles = useDialog()
-
-    const css: CSSUIObject = { ...styles.closeButton }
-
-    return (
-      <ModalCloseButton
-        ref={ref}
-        className={cx("ui-dialog__close-button", className)}
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
-
-export type DialogHeaderProps = ModalHeaderProps
-
-export const DialogHeader = forwardRef<DialogHeaderProps, "header">(
-  ({ className, ...rest }, ref) => {
-    const styles = useDialog()
-
-    const css: CSSUIObject = { ...styles.header }
-
-    return (
-      <ModalHeader
-        ref={ref}
-        className={cx("ui-dialog__header", className)}
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
-
-export type DialogBodyProps = ModalBodyProps
-
-export const DialogBody = forwardRef<DialogBodyProps, "main">(
-  ({ className, ...rest }, ref) => {
-    const styles = useDialog()
-
-    const css: CSSUIObject = { ...styles.body }
-
-    return (
-      <ModalBody
-        ref={ref}
-        className={cx("ui-dialog__body", className)}
-        __css={css}
-        {...rest}
-      />
-    )
-  },
-)
-
-export type DialogFooterProps = ModalFooterProps
-
-export const DialogFooter = forwardRef<DialogFooterProps, "footer">(
-  ({ className, ...rest }, ref) => {
-    const styles = useDialog()
-
-    const css: CSSUIObject = { ...styles.footer }
-
-    return (
-      <ModalFooter
-        ref={ref}
-        className={cx("ui-dialog__footer", className)}
-        __css={css}
-        {...rest}
-      />
     )
   },
 )

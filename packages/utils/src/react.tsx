@@ -1,33 +1,11 @@
 import * as React from "react"
 import { isNumber, isObject, isString } from "./assertion"
-import type { MergeIfDefined } from "./index.types"
-
-type DOMElement = Element & HTMLOrSVGElement
-
-export type DOMAttributes<Y = DOMElement> = React.HTMLAttributes<Y> &
-  React.AriaAttributes &
-  React.DOMAttributes<Y> & {
-    id?: string
-    role?: React.AriaRole
-    tabIndex?: number
-    style?: React.CSSProperties
-  }
-
-export type PropGetter<Y = undefined, M = DOMAttributes> = (
-  props?: MergeIfDefined<DOMAttributes, Y>,
-  ref?: React.Ref<any>,
-) => M & React.RefAttributes<any>
-
-export type RequiredPropGetter<Y = undefined, M = DOMAttributes> = (
-  props: MergeIfDefined<DOMAttributes, Y>,
-  ref?: React.Ref<any>,
-) => M & React.RefAttributes<any>
 
 export type MaybeRenderProp<Y> =
   | React.ReactNode
   | ((props: Y) => React.ReactNode)
 
-type Options<ContextType extends any = any> = {
+interface Options<ContextType extends any = any> {
   strict?: boolean
   errorMessage?: string
   name?: string
@@ -36,12 +14,12 @@ type Options<ContextType extends any = any> = {
 
 type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>]
 
-export const createContext = <ContextType extends any = any>({
+export function createContext<ContextType extends any = any>({
   strict = true,
   errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
   name,
   defaultValue,
-}: Options<ContextType> = {}) => {
+}: Options<ContextType> = {}) {
   const Context = React.createContext<ContextType | undefined>(defaultValue)
 
   Context.displayName = name
@@ -70,19 +48,20 @@ export const useSafeLayoutEffect = Boolean(globalThis?.document)
   ? React.useLayoutEffect
   : React.useEffect
 
-export const useUnmountEffect = (callback: () => void) =>
+export function useUnmountEffect(callback: () => void) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(() => () => callback(), [])
+  return React.useEffect(() => () => callback(), [])
+}
 
-export type UseIsMountedProps = {
+export interface UseIsMountedProps {
   rerender?: boolean
   delay?: number
 }
 
-export const useIsMounted = ({
+export function useIsMounted({
   rerender = false,
   delay = 0,
-}: UseIsMountedProps = {}): [() => boolean, boolean] => {
+}: UseIsMountedProps = {}): [() => boolean, boolean] {
   const isMountedRef = React.useRef(false)
   const [isMounted, setIsMounted] = React.useState(false)
 
@@ -113,81 +92,113 @@ export const useIsMounted = ({
 
 export type UseIsMountedReturn = ReturnType<typeof useIsMounted>
 
-export const getValidChildren = (
+export function getValidChildren(
   children: React.ReactNode,
-): React.ReactElement[] =>
-  React.Children.toArray(children).filter((child) =>
+): React.ReactElement[] {
+  return React.Children.toArray(children).filter((child) =>
     React.isValidElement(child),
-  ) as React.ReactElement[]
+  )
+}
 
-export const isValidElement = (child: any): child is React.ReactNode =>
-  React.isValidElement(child) || isString(child) || isNumber(child)
+export function isValidElement(child: any): child is React.ReactNode {
+  return React.isValidElement(child) || isString(child) || isNumber(child)
+}
 
-export const findChildren = (
-  children: React.ReactElement<
-    any,
-    string | React.JSXElementConstructor<any>
-  >[],
+export function isSomeElement(child: any, type: any): boolean {
+  if (child.type === type) return true
+
+  if (!!child.__ui__ && !!type.__ui__) {
+    if (child.__ui__ === type.__ui__) return true
+  }
+
+  const payload = child.type._payload
+
+  if (!!payload?.value?.__ui__ && !!type.__ui__) {
+    if (payload?.value?.__ui__ === type.__ui__) return true
+  }
+
+  return false
+}
+
+export function findChild(
+  children: React.ReactElement[],
   ...types: (string | React.JSXElementConstructor<any>)[]
-): [React.ReactElement | undefined, ...React.ReactElement[]] =>
-  (children.find((child) => types.some((type) => child.type === type))
-    ? children.sort((a, b) =>
-        types.some((type) => a.type === type)
-          ? -1
-          : types.some((type) => b.type === type)
-            ? 1
-            : 0,
-      )
-    : [undefined, ...children]) as [
-    React.ReactElement | undefined,
-    ...React.ReactElement[],
-  ]
+): React.ReactElement | undefined {
+  const child = children.find((child) =>
+    types.some((type) => isSomeElement(child, type)),
+  )
 
-export const includesChildren = (
-  children: React.ReactElement<
-    any,
-    string | React.JSXElementConstructor<any>
-  >[],
+  return child
+}
+
+export function findChildren(
+  children: React.ReactElement[],
   ...types: (string | React.JSXElementConstructor<any>)[]
-): boolean =>
-  children.some((child) => {
-    if (types.some((type) => child.type === type)) return true
+): [React.ReactElement | undefined, ...React.ReactElement[]] {
+  const child = children.find((child) =>
+    types.some((type) => isSomeElement(child, type)),
+  )
+
+  if (child) {
+    return children.sort((a, b) => {
+      if (types.some((type) => isSomeElement(a, type))) {
+        return -1
+      } else if (types.some((type) => isSomeElement(b, type))) {
+        return 1
+      } else {
+        return 0
+      }
+    }) as [React.ReactElement | undefined, ...React.ReactElement[]]
+  } else {
+    return [undefined, ...children]
+  }
+}
+
+export function includesChildren(
+  children: React.ReactElement[],
+  ...types: (string | React.JSXElementConstructor<any>)[]
+): boolean {
+  return children.some((child) => {
+    if (types.some((type) => isSomeElement(child, type))) return true
 
     const children = getValidChildren(child.props.children)
 
     return children.length ? includesChildren(children, ...types) : false
   })
+}
 
-export const omitChildren = (
-  children: React.ReactElement<
-    any,
-    string | React.JSXElementConstructor<any>
-  >[],
+export function omitChildren(
+  children: React.ReactElement[],
   ...types: (string | React.JSXElementConstructor<any>)[]
-): React.ReactElement[] =>
-  children.filter((child) => types.every((type) => child.type !== type))
+): React.ReactElement[] {
+  return children.filter((child) =>
+    types.every((type) => !isSomeElement(child, type)),
+  )
+}
 
-export const pickChildren = (
-  children: React.ReactElement<
-    any,
-    string | React.JSXElementConstructor<any>
-  >[],
+export function pickChildren(
+  children: React.ReactElement[],
   ...types: (string | React.JSXElementConstructor<any>)[]
-): React.ReactElement[] =>
-  children.filter((child) => types.every((type) => child.type === type))
+): React.ReactElement[] {
+  return children.filter((child) =>
+    types.every((type) => isSomeElement(child, type)),
+  )
+}
 
-export const cx = (...classNames: (string | undefined)[]) =>
-  classNames.filter(Boolean).join(" ")
+export function cx(...classNames: (string | undefined)[]) {
+  return classNames.filter(Boolean).join(" ")
+}
 
 type ReactRef<T> = React.Ref<T> | React.MutableRefObject<T> | React.LegacyRef<T>
 
-export const isRefObject = (val: any): val is { current: any } =>
-  isObject(val) && "current" in val
+export function isRefObject(val: any): val is { current: any } {
+  return isObject(val) && "current" in val
+}
 
-export const assignRef = <T extends any = any>(
+export function assignRef<T extends any = any>(
   ref: ReactRef<T> | undefined,
   value: T,
-) => {
+) {
   if (ref == null) return
 
   if (typeof ref === "function") {
@@ -204,22 +215,26 @@ export const assignRef = <T extends any = any>(
   }
 }
 
-export const mergeRefs =
-  <T extends any = any>(...refs: (ReactRef<T> | null | undefined)[]) =>
-  (node: T | null) => {
-    refs.forEach((ref) => {
+export function mergeRefs<T extends any = any>(
+  ...refs: (ReactRef<T> | null | undefined)[]
+) {
+  return function (node: T | null) {
+    return refs.forEach((ref) => {
       assignRef(ref, node)
     })
   }
+}
 
-export const useMergeRefs = <T extends any = any>(
+export function useMergeRefs<T extends any = any>(
   ...refs: (ReactRef<T> | undefined)[]
-) => React.useMemo(() => mergeRefs(...refs), [refs])
+) {
+  return React.useMemo(() => mergeRefs(...refs), [refs])
+}
 
-export const useCallbackRef = <T extends (...args: any[]) => any>(
+export function useCallbackRef<T extends (...args: any[]) => any>(
   callback: T | undefined,
   deps: React.DependencyList = [],
-) => {
+) {
   const callbackRef = React.useRef(callback)
 
   React.useEffect(() => {
@@ -238,10 +253,10 @@ export const useCallbackRef = <T extends (...args: any[]) => any>(
  *
  * @see Docs https://yamada-ui.com/hooks/use-update-effect
  */
-export const useUpdateEffect = (
+export function useUpdateEffect(
   callback: React.EffectCallback,
   deps: React.DependencyList,
-) => {
+) {
   const renderCycleRef = React.useRef(false)
   const effectCycleRef = React.useRef(false)
 
@@ -271,10 +286,10 @@ export type FunctionReturningPromise = (...args: any[]) => Promise<any>
  *
  * @see Docs https://yamada-ui.com/hooks/use-async
  */
-export const useAsync = <T extends FunctionReturningPromise>(
+export function useAsync<T extends FunctionReturningPromise>(
   func: T,
   deps: React.DependencyList = [],
-) => {
+) {
   const [state, callback] = useAsyncFunc(func, deps, { loading: true })
 
   React.useEffect(() => {
@@ -316,11 +331,11 @@ export type AsyncFnReturn<
   T extends FunctionReturningPromise = FunctionReturningPromise,
 > = [StateFromFunctionReturningPromise<T>, T]
 
-export const useAsyncFunc = <T extends FunctionReturningPromise>(
+export function useAsyncFunc<T extends FunctionReturningPromise>(
   func: T,
   deps: React.DependencyList = [],
   initialState: StateFromFunctionReturningPromise<T> = { loading: false },
-): AsyncFnReturn<T> => {
+): AsyncFnReturn<T> {
   const lastCallId = React.useRef(0)
   const [isMounted] = useIsMounted()
   const [state, setState] =
@@ -359,10 +374,10 @@ export type AsyncStateRetry<T> = AsyncState<T> & {
   retry(): void
 }
 
-export const useAsyncRetry = <T,>(
+export function useAsyncRetry<T>(
   func: () => Promise<T>,
   deps: React.DependencyList = [],
-) => {
+) {
   const [attempt, setAttempt] = React.useState<number>(0)
   const state = useAsync(func, [...deps, attempt])
 
@@ -380,5 +395,6 @@ export const useAsyncRetry = <T,>(
 
 let createIdCounter: number = 0
 
-export const createId = (prefix: string) =>
-  `${prefix}-${++createIdCounter}-${new Date().getTime()}`
+export function createId(prefix: string) {
+  return `${prefix}-${++createIdCounter}-${new Date().getTime()}`
+}

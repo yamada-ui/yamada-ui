@@ -1,4 +1,4 @@
-export type MailItem = {
+export interface MailItem {
   id: number
   title: string
   unRead: boolean

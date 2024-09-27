@@ -1,22 +1,22 @@
-import type { PseudoSelectors, Transforms } from "@yamada-ui/react"
 import { tokens } from "./tokens"
 import type { Properties } from "."
+import type { PseudoSelector, Transforms } from "@yamada-ui/react"
 
-type TransformProperties = Properties | PseudoSelectors
+type TransformProperties = Properties | PseudoSelector
 
-export type TransformOptions = {
+export interface TransformOptions {
   transform: Transforms
   args?: string[]
 }
 
-type TransformValue = {
+interface TransformValue {
   properties: TransformProperties
   args?: string[]
 }
 
-type TransformProps = Partial<
-  Record<Transforms, (TransformProperties | TransformValue)[]>
->
+type TransformProps = {
+  [key in Transforms]?: (TransformProperties | TransformValue)[]
+}
 
 export const transformProps: TransformProps = {
   colorMix: tokens.colors,
@@ -34,7 +34,7 @@ export const transformProps: TransformProps = {
     { properties: "layerStyle", args: ["layerStyles"] },
     { properties: "textStyle", args: ["textStyles"] },
   ],
-  var: ["var"],
+  vars: ["vars"],
   isTruncated: ["isTruncated"],
   media: ["_media"],
   container: ["_container"],
@@ -135,5 +135,5 @@ export const transformMap = Object.entries(transformProps).reduce(
 
     return prev
   },
-  {} as Record<TransformProperties, TransformOptions[]>,
+  {} as { [key in TransformProperties]: TransformOptions[] },
 )

@@ -1,10 +1,10 @@
 import { Text } from "@yamada-ui/react"
 import type { TextProps } from "@yamada-ui/react"
-import { NextLink } from "components/navigation"
 import { Fragment, memo } from "react"
 import type { FC } from "react"
+import { NextLink } from "components/navigation"
 
-export type TextWithCodeOrLinkProps = TextProps
+export interface TextWithCodeOrLinkProps extends TextProps {}
 
 export const TextWithCodeOrLink: FC<TextWithCodeOrLinkProps> = memo(
   ({ children, ...rest }) => {
@@ -47,7 +47,9 @@ export const TextWithCodeOrLink: FC<TextWithCodeOrLinkProps> = memo(
 
 TextWithCodeOrLink.displayName = "TextWithCodeOrLink"
 
-export type TextWithCodeProps = TextProps & { isFragment?: boolean }
+export interface TextWithCodeProps extends TextProps {
+  isFragment?: boolean
+}
 
 export const TextWithCode: FC<TextWithCodeProps> = memo(
   ({ children, isFragment, ...rest }) => {

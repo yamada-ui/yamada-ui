@@ -1,4 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import {
   AlphaSlider,
   Button,
@@ -7,9 +10,6 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
 
 type Story = StoryFn<typeof AlphaSlider>
 
@@ -198,7 +198,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { alphaSlider: number }
+  interface Data {
+    alphaSlider: number
+  }
 
   const defaultValues: Data = {
     alphaSlider: 0.5,

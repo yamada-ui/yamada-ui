@@ -16,11 +16,12 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       color: ["blackAlpha.700", "whiteAlpha.600"],
     },
     labelIcon: {
+      fontSize: "1.5em",
       color: ["blackAlpha.500", "whiteAlpha.500"],
     },
     control: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
-      fontSize: "1.25em",
+      fontSize: "1.5em",
       _hidden: {
         opacity: 0,
         pointerEvents: "none",
@@ -58,6 +59,7 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       alignItems: "center",
     },
     day: {
+      color: ["blackAlpha.800", "whiteAlpha.700"],
       _weekend: {
         color: ["red.600", "red.400"],
       },
@@ -66,6 +68,9 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       },
       _holiday: {
         color: ["red.600", "red.400"],
+      },
+      _focusVisible: {
+        boxShadow: "outline",
       },
       _disabled: {
         opacity: 0.4,
@@ -162,8 +167,10 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       cell: {
         _between: {
           bg: [
-            isGray(c) ? transparentizeColor(`${c}.50`, 0.48)(t, m) : `${c}.50`,
-            shadeColor(`${c}.300`, 72)(t, m),
+            isGray(c)
+              ? transparentizeColor(`${c}.50`, 0.24)(t, m)
+              : transparentizeColor(`${c}.50`, 0.64)(t, m),
+            shadeColor(`${c}.300`, 76)(t, m),
           ],
           _start: {
             roundedLeft: "md",
@@ -365,7 +372,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         h: 12,
       },
       control: {
-        fontSize: "1.5em",
         w: 12,
         h: 12,
       },
@@ -393,7 +399,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         h: 12,
       },
       control: {
-        fontSize: "1.5em",
         w: 12,
         h: 12,
       },

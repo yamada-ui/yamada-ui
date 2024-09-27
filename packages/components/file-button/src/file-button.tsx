@@ -24,14 +24,14 @@ import {
 import type { ChangeEvent, ForwardedRef, ReactNode } from "react"
 import { useCallback, useRef } from "react"
 
-type Props = {
+interface Props extends FormControlOptions {
   onClick: () => void
   disabled?: boolean
   readOnly?: boolean
   required?: boolean
-} & FormControlOptions
+}
 
-type FileButtonOptions = {
+interface FileButtonOptions {
   /**
    * The border color when the button is invalid.
    */
@@ -47,13 +47,15 @@ type FileButtonOptions = {
   resetRef?: ForwardedRef<() => void>
 }
 
-type InputProps = Partial<Pick<HTMLInputElement, "accept" | "multiple">>
+interface InputProps
+  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">> {}
 
-export type FileButtonProps = Omit<ButtonProps, "onChange" | "children"> &
-  ThemeProps<"FileButton"> &
-  InputProps &
-  FileButtonOptions &
-  FormControlOptions
+export interface FileButtonProps
+  extends Omit<ButtonProps, "onChange" | "children">,
+    ThemeProps<"FileButton">,
+    InputProps,
+    FileButtonOptions,
+    FormControlOptions {}
 
 /**
  * `FileButton` is a button component used for users to select files.
@@ -73,12 +75,21 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
     accept,
     multiple,
     form,
-    "aria-readonly": ariaReadonly,
     onClick: onClickProp,
     onChange: onChangeProp,
     ...rest
   } = useFormControlProps(computedProps)
-  const { disabled, readOnly, required, "aria-invalid": isInvalid } = rest
+  const {
+    onFocus: _onFocus,
+    onBlur: _onBlur,
+    ...formControlProps
+  } = pickObject(rest, formControlProperties)
+  const {
+    disabled,
+    readOnly,
+    required,
+    "aria-invalid": isInvalid,
+  } = formControlProps
   const inputRef = useRef<HTMLInputElement>(null)
 
   const onClick = useCallback(() => {
@@ -144,8 +155,7 @@ export const FileButton = forwardRef<FileButtonProps, "input">((props, ref) => {
           position: "absolute",
         }}
         onChange={onChange}
-        aria-readonly={ariaReadonly}
-        {...pickObject(rest, formControlProperties)}
+        {...formControlProps}
       />
 
       {isFunction(children)

@@ -15,13 +15,13 @@ import {
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
-import { useI18n } from "contexts"
 import { matchSorter } from "match-sorter"
 import type { FC, MutableRefObject } from "react"
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { IconDrawer } from "./icon-drawer"
 import { NotFound } from "./not-found"
 import { TAGS } from "./tags"
+import { useI18n } from "contexts"
 
 const resolvedIcons = Object.entries(icons).filter(
   ([name]) => !name.endsWith("Icon"),
@@ -35,7 +35,7 @@ const DATA = resolvedIcons.map(([name, Icon]) => ({
 const PER_PAGE = 200
 const TOTAL_COUNT = resolvedIcons.length
 
-export type ListProps = StackProps & {}
+export interface ListProps extends StackProps {}
 
 export const List: FC<ListProps> = memo(({ ...rest }) => {
   const [index, setIndex] = useState<number>(0)
@@ -130,7 +130,7 @@ export const List: FC<ListProps> = memo(({ ...rest }) => {
 
 List.displayName = "List"
 
-type SearchProps = InputProps & {
+interface SearchProps extends InputProps {
   onSearch: (value: string) => void
   containerProps?: InputGroupProps
   valueResetRef: MutableRefObject<() => void>

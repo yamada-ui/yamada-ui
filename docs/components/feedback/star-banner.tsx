@@ -1,11 +1,11 @@
 import { Button, Center, HStack, Text, forwardRef } from "@yamada-ui/react"
 import type { CenterProps } from "@yamada-ui/react"
+import { memo } from "react"
 import { Star } from "components/media-and-icons"
 import { CONSTANT } from "constant"
 import { useI18n } from "contexts"
-import { memo } from "react"
 
-export type StarBannerProps = CenterProps & {}
+export interface StarBannerProps extends CenterProps {}
 
 export const StarBanner = memo(
   forwardRef<StarBannerProps, "div">(({ ...rest }, ref) => {

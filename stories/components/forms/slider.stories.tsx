@@ -1,4 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
+import type { SubmitHandler } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
+import { colorSchemes } from "../../components"
 import { Activity } from "@yamada-ui/lucide"
 import {
   Slider,
@@ -14,10 +18,6 @@ import {
   useBoolean,
   VStack,
 } from "@yamada-ui/react"
-import { useState } from "react"
-import type { SubmitHandler } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Slider>
 
@@ -366,7 +366,9 @@ export const onChangeEnd: Story = () => {
 }
 
 export const reactHookForm: Story = () => {
-  type Data = { slider: number }
+  interface Data {
+    slider: number
+  }
 
   const defaultValues: Data = {
     slider: 50,

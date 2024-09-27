@@ -2,7 +2,7 @@ import {
   ui,
   forwardRef,
   omitThemeProps,
-  useMultiComponentStyle,
+  useComponentMultiStyle,
 } from "@yamada-ui/core"
 import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import { alphaToHex, convertColor, cx } from "@yamada-ui/utils"
@@ -14,14 +14,14 @@ const defaultOverlays = (
   min: number,
   max: number,
   withShadow: boolean,
-): HTMLUIProps<"div">[] => {
-  let overlays: HTMLUIProps<"div">[] = [
+): HTMLUIProps[] => {
+  let overlays: HTMLUIProps[] = [
     {
       bgImage:
         "linear-gradient(45deg, $checkers 25%, transparent 25%), linear-gradient(-45deg, $checkers 25%, transparent 25%), linear-gradient(45deg, transparent 75%, $checkers 75%), linear-gradient(-45deg, $body 75%, $checkers 75%)",
       bgSize: `8px 8px`,
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
-      var: [
+      vars: [
         {
           name: "checkers",
           token: "colors",
@@ -52,7 +52,7 @@ const defaultOverlays = (
   return overlays
 }
 
-type AlphaSliderOptions = {
+interface AlphaSliderOptions {
   /**
    * The color used for the slider.
    *
@@ -90,20 +90,21 @@ type AlphaSliderOptions = {
   /**
    * Props for slider track element.
    */
-  trackProps?: HTMLUIProps<"div">
+  trackProps?: HTMLUIProps
   /**
    * Props for slider thumb element.
    */
-  thumbProps?: HTMLUIProps<"div">
+  thumbProps?: HTMLUIProps
   /**
    * The overlay used for the slider.
    */
-  overlays?: HTMLUIProps<"div">[]
+  overlays?: HTMLUIProps[]
 }
 
-export type AlphaSliderProps = ThemeProps<"AlphaSlider"> &
-  Partial<Omit<UseColorSliderProps, "color">> &
-  AlphaSliderOptions
+export interface AlphaSliderProps
+  extends ThemeProps<"AlphaSlider">,
+    Partial<Omit<UseColorSliderProps, "color">>,
+    AlphaSliderOptions {}
 
 /**
  * `AlphaSlider` is a component used to allow the user to select color transparency.
@@ -112,7 +113,7 @@ export type AlphaSliderProps = ThemeProps<"AlphaSlider"> &
  */
 export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
   (props, ref) => {
-    const [styles, mergedProps] = useMultiComponentStyle("AlphaSlider", props)
+    const [styles, mergedProps] = useComponentMultiStyle("AlphaSlider", props)
     const {
       className,
       inputProps,
@@ -185,3 +186,6 @@ export const AlphaSlider = forwardRef<AlphaSliderProps, "input">(
     )
   },
 )
+
+AlphaSlider.displayName = "AlphaSlider"
+AlphaSlider.__ui__ = "AlphaSlider"

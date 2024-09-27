@@ -1,4 +1,5 @@
 import { render, screen } from "@yamada-ui/test"
+import type { Dict } from "@yamada-ui/utils"
 import type { FC } from "react"
 import type { MockInstance } from "vitest"
 import type { StyledTheme } from "../src"
@@ -220,8 +221,8 @@ describe("CSS", () => {
   })
 
   test("works with functional arguments", () => {
-    const result = css((t: StyledTheme) => ({
-      color: t.colors.gray[500],
+    const result = css((t: Dict) => ({
+      color: t.colors?.gray?.[500],
     }))(theme)
 
     expect(result).toStrictEqual({
@@ -231,7 +232,7 @@ describe("CSS", () => {
 
   test("supports functional values", () => {
     const result = css({
-      color: (t: StyledTheme) => t.colors.gray[500],
+      color: (t: Dict) => t.colors?.gray?.[500],
     })(theme)
 
     expect(result).toStrictEqual({
@@ -278,7 +279,7 @@ describe("CSS", () => {
 
   test("returns css var", () => {
     const result = css({
-      var: [{ name: "space", token: "spaces", value: "4" }],
+      vars: [{ name: "space", token: "spaces", value: "4" }],
     })(theme)
 
     expect(result).toStrictEqual({
@@ -319,6 +320,18 @@ describe("CSS", () => {
       width: "full",
     })
   })
+
+  test("returns interpolation", () => {
+    const result = css({
+      p: "$spaces.4 $spaces.4",
+      m: "$hoge",
+    })(theme)
+
+    expect(result).toStrictEqual({
+      padding: "var(--ui-spaces-4) var(--ui-spaces-4)",
+      margin: "var(--ui-hoge)",
+    })
+  })
 })
 
 describe("useCSS", () => {
@@ -348,7 +361,7 @@ describe("useCSS", () => {
   test("supports functional values", () => {
     const Component: FC = () => {
       const className = useCSS({
-        color: (t: StyledTheme) => t.colors.gray[500],
+        color: (t: Dict) => t.colors?.gray?.[500],
       })
 
       return <ui.div data-testid="component" className={className} />

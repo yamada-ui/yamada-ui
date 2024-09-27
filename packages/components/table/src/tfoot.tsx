@@ -1,9 +1,9 @@
+import { FC } from "@yamada-ui/core"
 import type { TableFootProps as NativeTableFootProps } from "@yamada-ui/native-table"
 import { Tfoot as NativeTfoot, Tr, Th } from "@yamada-ui/native-table"
 import { ariaAttr, runIfFunc } from "@yamada-ui/utils"
 import type { InternalColumn } from "./use-table"
 import { useTableContext, render } from "./use-table"
-import { FC } from "@yamada-ui/core"
 
 export interface TableFootProps extends NativeTableFootProps {}
 

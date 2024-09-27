@@ -1,8 +1,8 @@
+import { FC } from "@yamada-ui/core"
 import type { TableBodyProps as NativeTableBodyProps } from "@yamada-ui/native-table"
 import { Tbody as NativeTbody, Tr, Td } from "@yamada-ui/native-table"
 import { dataAttr, ariaAttr, handlerAll, runIfFunc } from "@yamada-ui/utils"
 import { useTableContext, render } from "./use-table"
-import { FC } from "@yamada-ui/core"
 
 export interface TableBodyProps extends NativeTableBodyProps {}
 

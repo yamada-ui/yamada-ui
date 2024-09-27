@@ -86,3 +86,6 @@ export const AutocompleteList = forwardRef<AutocompleteListProps, "ul">(
     )
   },
 )
+
+AutocompleteList.displayName = "AutocompleteList"
+AutocompleteList.__ui__ = "AutocompleteList"

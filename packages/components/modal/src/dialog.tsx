@@ -186,3 +186,5 @@ export const Dialog = motionForwardRef<DialogProps, "section">(
     )
   },
 )
+
+Dialog.displayName = "Dialog"

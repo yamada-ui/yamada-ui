@@ -45,3 +45,6 @@ export const ModalOverlay = motionForwardRef<ModalOverlayProps, "div">(
     )
   },
 )
+
+ModalOverlay.displayName = "ModalOverlay"
+ModalOverlay.__ui__ = "ModalOverlay"

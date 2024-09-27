@@ -175,3 +175,6 @@ export const Drawer = motionForwardRef<DrawerProps, "div">(
     )
   },
 )
+
+Drawer.displayName = "Drawer"
+Drawer.__ui__ = "Drawer"

@@ -226,3 +226,6 @@ export const DrawerContent = motionForwardRef<DrawerContentProps, "div">(
     )
   },
 )
+
+DrawerContent.displayName = "DrawerContent"
+DrawerContent.__ui__ = "DrawerContent"

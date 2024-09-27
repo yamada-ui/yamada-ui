@@ -218,6 +218,9 @@ export const Autocomplete = forwardRef<AutocompleteProps, "input">(
   },
 )
 
+Autocomplete.displayName = "Autocomplete"
+Autocomplete.__ui__ = "Autocomplete"
+
 interface AutocompleteFieldProps
   extends HTMLUIProps,
     Pick<AutocompleteProps, "inputProps"> {}
@@ -255,3 +258,6 @@ const AutocompleteField = forwardRef<AutocompleteFieldProps, "input">(
     )
   },
 )
+
+AutocompleteField.displayName = "AutocompleteField"
+AutocompleteField.__ui__ = "AutocompleteField"

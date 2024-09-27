@@ -39,3 +39,6 @@ export const TabPanel = forwardRef<TabPanelProps, "div">(
     )
   },
 )
+
+TabPanel.displayName = "TabPanel"
+TabPanel.__ui__ = "TabPanel"

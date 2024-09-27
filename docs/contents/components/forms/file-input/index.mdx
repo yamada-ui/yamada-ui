@@ -217,7 +217,7 @@ return (
       />
 
       {value && value.length ? (
-        <InputRightElement isClick onClick={onReset}>
+        <InputRightElement isClickable onClick={onReset}>
           <X color="gray.500" />
         </InputRightElement>
       ) : null}
@@ -280,7 +280,7 @@ return (
             <FileInput multiple {...field} resetRef={resetRef} />
 
             {field.value && field.value.length ? (
-              <InputRightElement isClick onClick={onReset}>
+              <InputRightElement isClickable onClick={onReset}>
                 <X color="gray.500" />
               </InputRightElement>
             ) : null}

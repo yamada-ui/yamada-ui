@@ -75,3 +75,6 @@ export const TabList = forwardRef<TabListProps, "div">(
     )
   },
 )
+
+TabList.displayName = "TabList"
+TabList.__ui__ = "TabList"

@@ -152,7 +152,7 @@ importers:
         version: 1.1.4(@typescript-eslint/utils@8.6.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.6.2))(eslint@9.10.0(jiti@1.21.6))(typescript@5.6.2)(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0))
       '@vitest/ui':
         specifier: ^2.0.5
-        version: 2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0))
+        version: 2.1.1(vitest@2.1.1)
       '@yamada-ui/calendar':
         specifier: workspace:*
         version: link:packages/components/calendar
@@ -210,6 +210,9 @@ importers:
       commander:
         specifier: ^12.1.0
         version: 12.1.0
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -335,7 +338,7 @@ importers:
         version: 5.4.6(@types/node@22.5.5)(terser@5.33.0)
       vitest:
         specifier: ^2.0.5
-        version: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+        version: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
 
   docs:
     dependencies:
@@ -537,7 +540,7 @@ importers:
         version: 5.0.0
       vitest:
         specifier: ^2.0.5
-        version: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+        version: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
 
   examples/create-react-app:
     dependencies:
@@ -3862,7 +3865,7 @@ importers:
         version: link:../utils
       vitest-matchmedia-mock:
         specifier: ^1.0.6
-        version: 1.0.6(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+        version: 1.0.6(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1))(jsdom@25.0.0)(terser@5.33.0)
     devDependencies:
       react:
         specifier: ^18.2.0
@@ -8681,6 +8684,11 @@ packages:
 
   create-storybook@8.3.2:
     resolution: {integrity: sha512-rTjsvn4cnm8JBKVH0m9kip2NfNhQyJqOYfenN8KVzSip5zWm3VcpOKOI//wdUu2pjufW8oBOXXRI57GPF19wpg==, tarball: https://registry.npmjs.org/create-storybook/-/create-storybook-8.3.2.tgz}
+    hasBin: true
+
+  cross-env@7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==, tarball: https://registry.npmjs.org/cross-env/-/cross-env-7.0.3.tgz}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
     hasBin: true
 
   cross-spawn@5.1.0:
@@ -18024,7 +18032,7 @@ snapshots:
       axe-core: 4.10.0
       chalk: 5.3.0
       es-toolkit: 1.20.0
-      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
 
   '@leichtgewicht/ip-codec@2.0.5': {}
 
@@ -19748,7 +19756,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -19758,7 +19766,7 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/utils': 8.6.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.6.2)
       typescript: 5.6.2
-      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
 
   '@vitest/expect@2.1.1':
     dependencies:
@@ -19794,7 +19802,7 @@ snapshots:
     dependencies:
       tinyspy: 3.0.2
 
-  '@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0))':
+  '@vitest/ui@2.1.1(vitest@2.1.1)':
     dependencies:
       '@vitest/utils': 2.1.1
       fflate: 0.8.2
@@ -19803,7 +19811,7 @@ snapshots:
       sirv: 2.0.4
       tinyglobby: 0.2.6
       tinyrainbow: 1.2.0
-      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
 
   '@vitest/utils@2.1.1':
     dependencies:
@@ -22189,6 +22197,10 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  cross-env@7.0.3:
+    dependencies:
+      cross-spawn: 7.0.3
 
   cross-spawn@5.1.0:
     dependencies:
@@ -30712,9 +30724,9 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.33.0
 
-  vitest-matchmedia-mock@1.0.6(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0):
+  vitest-matchmedia-mock@1.0.6(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1))(jsdom@25.0.0)(terser@5.33.0):
     dependencies:
-      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0)
+      vitest: 2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@types/node'
@@ -30732,7 +30744,7 @@ snapshots:
       - supports-color
       - terser
 
-  vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0)))(jsdom@25.0.0)(terser@5.33.0):
+  vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0):
     dependencies:
       '@vitest/expect': 2.1.1
       '@vitest/mocker': 2.1.1(@vitest/spy@2.1.1)(vite@5.4.6(@types/node@22.5.5)(terser@5.33.0))
@@ -30755,7 +30767,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.5.5
-      '@vitest/ui': 2.1.1(vitest@2.1.1(@types/node@22.5.5)(@vitest/ui@2.1.1)(jsdom@25.0.0)(terser@5.33.0))
+      '@vitest/ui': 2.1.1(vitest@2.1.1)
       jsdom: 25.0.0
     transitivePeerDependencies:
       - less

@@ -105,6 +105,9 @@ export const Markdown = forwardRef<MarkdownProps, "div">((props, ref) => {
   )
 })
 
+Markdown.displayName = "Markdown"
+Markdown.__ui__ = "Markdown"
+
 interface CodeProps extends MarkdownComponentProps<"code"> {
   theme?: CodeThemeNames | ColorModeArray<CodeThemeNames>
 }

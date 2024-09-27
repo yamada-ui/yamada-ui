@@ -17,8 +17,9 @@ export const Option = forwardRef<OptionProps, "li">(
     const { styles } = useSelectContext()
     const { isSelected, customIcon, children, getOptionProps } =
       useSelectOption(rest)
+    const uuid = useId()
 
-    id ??= useId()
+    id ??= uuid
     icon ??= customIcon
 
     const css: CSSUIObject = {

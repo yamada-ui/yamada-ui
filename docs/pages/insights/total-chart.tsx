@@ -3,6 +3,7 @@ import {
   AreaChart as UIAreaChart,
   BarChart as UIBarChart,
 } from "@yamada-ui/charts"
+import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
 import {
   Box,
   Center,
@@ -21,6 +22,7 @@ import {
 import type { StackProps } from "@yamada-ui/react"
 import type { FC } from "react"
 import { memo, useEffect, useMemo } from "react"
+import { ChartTooltip } from "./chart-tooltip"
 import { useInsights } from "./insights-provider"
 import {
   getInsightScore,
@@ -31,11 +33,9 @@ import {
   randomIndex,
   xAxisTickFormatter,
 } from "./insights-utils"
-import { useI18n } from "contexts"
-import { ChartLine, ChartColumn } from "@yamada-ui/lucide"
-import { CountUp } from "components/transitions"
-import { ChartTooltip } from "./chart-tooltip"
 import { ScoreLegend } from "./score-legend"
+import { CountUp } from "components/transitions"
+import { useI18n } from "contexts"
 
 export interface TotalChartProps extends StackProps {
   isLoading: boolean

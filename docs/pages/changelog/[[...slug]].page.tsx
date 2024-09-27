@@ -1,8 +1,8 @@
+import type { NextPage, InferGetStaticPropsType } from "next"
+import { MDXRemote } from "next-mdx-remote"
 import { components } from "components/mdx"
 import { PageProvider } from "contexts/page-context"
 import { DocumentLayout } from "layouts/document-layout"
-import type { NextPage, InferGetStaticPropsType } from "next"
-import { MDXRemote } from "next-mdx-remote"
 import { getStaticDocumentPaths, getStaticDocumentProps } from "utils/next"
 
 export const getStaticPaths = getStaticDocumentPaths("changelog")

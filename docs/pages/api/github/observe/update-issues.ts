@@ -1,13 +1,12 @@
 import { Octokit } from "@octokit/rest"
 import { isObject } from "@yamada-ui/react"
 import { sendDiscord } from "utils/discord"
-import type { ListEvent, Issue } from "utils/github"
+import type { Constant, ListEvent, Issue } from "utils/github"
 import {
   getIssues,
   getListEventsForTimeline,
   recursiveOctokit,
 } from "utils/github"
-import type { Constant } from "utils/github"
 import type { APIHandler } from "utils/next"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })

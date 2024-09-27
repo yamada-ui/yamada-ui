@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { getConstant, verifySignature } from "utils/github"
 import { pullRequest } from "./pull-request"
 import { pullRequestReview } from "./pull-request-review"
+import { getConstant, verifySignature } from "utils/github"
 
 const actions = {
   pull_request: pullRequest,

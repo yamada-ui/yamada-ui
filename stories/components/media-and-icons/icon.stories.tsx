@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Icon, HStack } from "@yamada-ui/react"
 import { FaRobot } from "react-icons/fa"
+import { Icon, HStack } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof Icon>
 

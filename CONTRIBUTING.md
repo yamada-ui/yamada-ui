@@ -60,6 +60,9 @@ To ensure the extension works correctly, please add the following settings to `.
 ```json
 {
   ...
+  "eslint.options": {
+    "flags": ["unstable_ts_config"]
+  },
   "eslint.workingDirectories": [
     "docs",
     "examples/next/app",

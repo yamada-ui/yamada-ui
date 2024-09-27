@@ -1,6 +1,6 @@
+import type { FC } from "@yamada-ui/core"
 import type { FocusableElement } from "@yamada-ui/utils"
 import { getAllFocusable, interopDefault } from "@yamada-ui/utils"
-import type { FC } from "@yamada-ui/core"
 import type { ReactNode, RefObject } from "react"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"

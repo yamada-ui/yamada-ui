@@ -72,6 +72,9 @@ export const RatingItem = forwardRef<RatingItemProps, "input">(
   },
 )
 
+RatingItem.displayName = "RatingItem"
+RatingItem.__ui__ = "RatingItem"
+
 interface RatingIconProps extends HTMLUIProps {}
 
 const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {

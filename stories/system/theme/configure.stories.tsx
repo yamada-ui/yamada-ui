@@ -1,5 +1,5 @@
-import { UIProvider, extendConfig, Center, Image } from "@yamada-ui/react"
 import type { FC } from "react"
+import { UIProvider, extendConfig, Center, Image } from "@yamada-ui/react"
 
 export default {
   title: "System / Theme / Configure",

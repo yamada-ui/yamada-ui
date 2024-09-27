@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 import type {
   ChartCurveType,
   AreaChartType,
@@ -24,8 +26,6 @@ import {
   CardBody,
   CardHeader,
 } from "@yamada-ui/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof AreaChart>
 

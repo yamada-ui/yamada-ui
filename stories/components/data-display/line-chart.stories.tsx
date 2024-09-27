@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 import { LineChart } from "@yamada-ui/charts"
 import type {
   ChartAxisType,
@@ -18,8 +20,6 @@ import {
   CardHeader,
   CardBody,
 } from "@yamada-ui/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof LineChart>
 

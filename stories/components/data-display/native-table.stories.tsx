@@ -1,5 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { NativeTableProps } from "@yamada-ui/react"
+import type { FC } from "react"
+import { useState } from "react"
+import { colorSchemes } from "../../components"
 import {
   NativeTable,
   Thead,
@@ -15,9 +17,7 @@ import {
   TableContainer,
   isString,
 } from "@yamada-ui/react"
-import type { FC } from "react"
-import { useState } from "react"
-import { colorSchemes } from "../../components"
+import type { NativeTableProps } from "@yamada-ui/react"
 
 type Story = StoryFn<typeof NativeTable>
 

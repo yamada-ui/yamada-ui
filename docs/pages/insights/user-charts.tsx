@@ -1,10 +1,10 @@
 import { forwardRef, Grid } from "@yamada-ui/react"
 import type { GridProps } from "@yamada-ui/react"
-import { memo, useMemo } from "react"
-import { UserChart } from "./user-chart"
-import { useInsights } from "./insights-provider"
 import type { UserInsights, UserInsightScore } from "insights"
+import { memo, useMemo } from "react"
+import { useInsights } from "./insights-provider"
 import { DEFAULT_SCORE, getInsightScore } from "./insights-utils"
+import { UserChart } from "./user-chart"
 
 export interface UserChartsProps extends GridProps {
   isLoading: boolean

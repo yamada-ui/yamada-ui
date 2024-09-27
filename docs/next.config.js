@@ -5,21 +5,6 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
-  eslint: {
-    dirs: [
-      "pages",
-      "components",
-      "constant",
-      "contexts",
-      "hooks",
-      "layouts",
-      "libs",
-      "scripts",
-      "theme",
-      "utils",
-    ],
-  },
-  typescript: {},
   images: {
     domains: ["images.pexels.com"],
   },

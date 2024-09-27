@@ -103,3 +103,6 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, "div">(
     )
   },
 )
+
+ButtonGroup.displayName = "ButtonGroup"
+ButtonGroup.__ui__ = "ButtonGroup"

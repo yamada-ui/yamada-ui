@@ -1,10 +1,10 @@
 import path from "path"
 import type { RequestError } from "@octokit/request-error"
 import { Octokit } from "@octokit/rest"
-import { isArray } from "@yamada-ui/react"
 import { config } from "dotenv"
 import type { Options } from "prettier"
 import { format, resolveConfig } from "prettier"
+import { isArray } from "@yamada-ui/react"
 
 const COMMON_PARAMS = {
   owner: "yamada-ui",

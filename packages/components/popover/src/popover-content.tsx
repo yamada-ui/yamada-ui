@@ -156,3 +156,6 @@ export const PopoverContent = motionForwardRef<PopoverContentProps, "section">(
     )
   },
 )
+
+PopoverContent.displayName = "PopoverContent"
+PopoverContent.__ui__ = "PopoverContent"

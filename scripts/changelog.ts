@@ -3,11 +3,11 @@ import { mkdir, readFile, writeFile } from "fs/promises"
 import * as p from "@clack/prompts"
 import type { RestEndpointMethodTypes } from "@octokit/rest"
 import { Octokit } from "@octokit/rest"
-import { isArray } from "@yamada-ui/react"
 import c from "chalk"
 import type { Project } from "find-packages"
 import { findPackages } from "find-packages"
 import { prettier } from "./utils"
+import { isArray } from "@yamada-ui/react"
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 

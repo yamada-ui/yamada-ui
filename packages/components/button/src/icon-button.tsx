@@ -9,6 +9,10 @@ interface IconButtonOptions {
    * The icon to be used in the button.
    */
   icon?: ReactElement
+  /**
+   * The accessible label for the button.
+   */
+  "aria-label": string
 }
 
 export interface IconButtonProps
@@ -21,13 +25,9 @@ export interface IconButtonProps
       | "loadingIcon"
       | "loadingText"
       | "loadingPlacement"
+      | "aria-label"
     >,
-    IconButtonOptions {
-  /**
-   * The accessible label for the button.
-   */
-  "aria-label": string
-}
+    IconButtonOptions {}
 
 /**
  * `IconButton` is a component that displays an icon within a button.

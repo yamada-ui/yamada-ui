@@ -1,3 +1,4 @@
+import type { FC } from "react"
 import {
   Badge,
   Tag,
@@ -12,7 +13,6 @@ import {
   extendConfig,
   useTheme,
 } from "@yamada-ui/react"
-import type { FC } from "react"
 
 export default {
   title: "System / Theme / Switch Theming",

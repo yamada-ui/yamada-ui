@@ -62,11 +62,19 @@ export interface ComponentArgs
   extends Pick<
     React.FunctionComponent,
     "contextTypes" | "propTypes" | "defaultProps" | "displayName"
-  > {}
+  > {
+  __ui__?: string
+}
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
   <M extends As = Y>(props: ComponentProps<Y, M, D>): JSX.Element
+}
+
+export type FC<Y = {}> = FunctionComponent<Y>
+
+export interface FunctionComponent<Y = {}> extends ComponentArgs {
+  (props: Y, deprecatedLegacyContext?: any): React.ReactNode
 }
 
 export type As = React.ElementType

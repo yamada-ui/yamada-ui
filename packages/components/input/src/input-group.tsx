@@ -28,10 +28,12 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
     "minH",
     "height",
     "h",
+    "fontSize",
   ])
   const minHeight = variableProps.minHeight ?? variableProps.minH
   const height = variableProps.height ?? variableProps.h
   const fieldHeight = minHeight ?? height
+  const fieldFontSize = variableProps.fontSize
 
   const css: CSSUIObject = {
     vars,
@@ -77,7 +79,7 @@ export const InputGroup = forwardRef<InputGroupProps, "div">((props, ref) => {
   })
 
   return (
-    <InputGroupProvider value={{ styles, fieldHeight }}>
+    <InputGroupProvider value={{ styles, fieldHeight, fieldFontSize }}>
       <ui.div
         ref={ref}
         className={cx("ui-input-group", className)}

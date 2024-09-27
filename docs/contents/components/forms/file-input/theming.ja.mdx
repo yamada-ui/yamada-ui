@@ -20,6 +20,15 @@ tab: テーマ
 :::
 
 ```ts
-export const FileInput: ComponentMultiStyle<"FileInput"> =
-  mergeMultiStyle(Input)()
+export const FileInput: ComponentMultiStyle<"FileInput"> = mergeMultiStyle(
+  Input,
+  {
+    baseStyle: {
+      field: {
+        display: "flex",
+        alignItems: "center",
+      },
+    },
+  },
+)()
 ```

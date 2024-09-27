@@ -176,3 +176,6 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, "span">(
     )
   },
 )
+
+Alert.displayName = "Alert"
+Alert.__ui__ = "Alert"

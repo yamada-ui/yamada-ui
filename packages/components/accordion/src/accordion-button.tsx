@@ -1,9 +1,9 @@
-import type { CSSUIObject, HTMLUIProps } from "@yamada-ui/core"
+import type { CSSUIObject, FC, HTMLUIProps } from "@yamada-ui/core"
 import { ui, forwardRef } from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { ChevronIcon } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
-import type { FC, PropsWithChildren, ReactNode } from "react"
+import type { PropsWithChildren, ReactNode } from "react"
 import {
   useAccordionContext,
   useAccordionItemContext,
@@ -81,6 +81,9 @@ export const AccordionButton = forwardRef<AccordionButtonProps, "button">(
   },
 )
 
+AccordionButton.displayName = "AccordionButton"
+AccordionButton.__ui__ = "AccordionButton"
+
 const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
   className,
   children,
@@ -118,3 +121,6 @@ const AccordionIcon: FC<PropsWithChildren<IconProps>> = ({
     />
   )
 }
+
+AccordionIcon.displayName = "AccordionIcon"
+AccordionIcon.__ui__ = "AccordionIcon"

@@ -22,6 +22,26 @@ If you want to change the style of the component, please check [here](/styled-sy
 :::
 
 ```ts
-export const AlphaSlider: ComponentMultiStyle<"AlphaSlider"> =
-  mergeMultiStyle(HueSlider)()
+export const AlphaSlider: ComponentMultiStyle<"AlphaSlider"> = mergeMultiStyle(
+  HueSlider,
+  {
+    baseStyle: {
+      container: {
+        position: "relative",
+      },
+      thumb: {
+        position: "relative",
+        w: "100%",
+        h: "100%",
+      },
+      overlay: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      },
+    },
+  },
+)()
 ```

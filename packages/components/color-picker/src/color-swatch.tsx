@@ -124,3 +124,6 @@ export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
     </ui.div>
   )
 })
+
+ColorSwatch.displayName = "ColorSwatch"
+ColorSwatch.__ui__ = "ColorSwatch"

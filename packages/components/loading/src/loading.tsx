@@ -1,5 +1,10 @@
 import type { CSSUIProps, ThemeProps } from "@yamada-ui/core"
-import { forwardRef, omitThemeProps, useComponentStyle } from "@yamada-ui/core"
+import {
+  forwardRef,
+  mergeVars,
+  omitThemeProps,
+  useComponentStyle,
+} from "@yamada-ui/core"
 import type { IconProps } from "@yamada-ui/icon"
 import { cx } from "@yamada-ui/utils"
 import { useMemo } from "react"
@@ -77,7 +82,21 @@ export const Loading = forwardRef<LoadingProps, "svg">((props, ref) => {
       color: "$color",
       ...(secondaryColor ? { secondaryColor: "$secondary-color" } : {}),
       duration: duration ?? dur,
-      __css: { ...styles },
+      __css: {
+        ...styles,
+        vars: mergeVars(styles?.vars, [
+          {
+            name: "color",
+            token: "colors",
+            value: colorProp ?? (color as string) ?? `${colorScheme}.500`,
+          },
+          {
+            name: "secondary-color",
+            token: "colors",
+            value: secondaryColor,
+          },
+        ]),
+      },
       ...rest,
     }),
     [

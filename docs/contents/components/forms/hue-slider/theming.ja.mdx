@@ -22,6 +22,7 @@ export const HueSlider: ComponentMultiStyle<"HueSlider"> = {
       w: "100%",
       rounded: "full",
       cursor: "pointer",
+      position: "relative",
       _readOnly: { cursor: "auto" },
       _disabled: {
         opacity: 0.6,
@@ -29,9 +30,18 @@ export const HueSlider: ComponentMultiStyle<"HueSlider"> = {
       },
     },
     overlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
       rounded: "full",
     },
-    track: {},
+    track: {
+      position: "relative",
+      w: "100%",
+      h: "100%",
+    },
     thumb: {
       rounded: "full",
       outline: 0,

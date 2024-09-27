@@ -14162,6 +14162,15 @@
     "hierarchy": { "lv1": "Customize Theme", "lv2": "Changing Tokens" }
   },
   {
+    "title": "Setting Responsive Objects to Tokens",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#setting-responsive-objects-to-tokens",
+    "hierarchy": {
+      "lv1": "Customize Theme",
+      "lv2": "Setting Responsive Objects to Tokens"
+    }
+  },
+  {
     "title": "Changing Semantic Tokens",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#changing-semantic-tokens",

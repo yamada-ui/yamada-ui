@@ -25,7 +25,7 @@ export const Modal: ComponentMultiStyle<"Modal"> = {
       top: 0,
       left: 0,
       w: "100vw",
-      h: "100vh",
+      h: "100dvh",
       bg: "blackAlpha.600",
       zIndex: "burter",
     },

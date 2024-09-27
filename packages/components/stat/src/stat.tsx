@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/core"
 import {
   cx,
-  findChildren,
+  findChild,
   getValidChildren,
   isEmpty,
   omitChildren,
@@ -98,12 +98,9 @@ export const Stat = forwardRef<StatProps, "dl">((props, ref) => {
 
   const validChildren = getValidChildren(children)
 
-  const [customStatLabel] = findChildren(validChildren, StatLabel)
-  const [customStatNumber] = findChildren(validChildren, StatNumber)
-  const [customStatHelperMessage] = findChildren(
-    validChildren,
-    StatHelperMessage,
-  )
+  const customStatLabel = findChild(validChildren, StatLabel)
+  const customStatNumber = findChild(validChildren, StatNumber)
+  const customStatHelperMessage = findChild(validChildren, StatHelperMessage)
 
   const cloneChildren = !isEmpty(validChildren)
     ? omitChildren(validChildren, StatLabel, StatNumber, StatHelperMessage)

@@ -28,11 +28,12 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
       gap: 1,
     },
     labelIcon: {
+      fontSize: "1.5em",
       color: ["blackAlpha.500", "whiteAlpha.500"],
     },
     control: {
       color: ["blackAlpha.500", "whiteAlpha.500"],
-      fontSize: "1.25em",
+      fontSize: "1.5em",
       minW: "auto",
       h: "auto",
       _hidden: {
@@ -400,7 +401,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         h: 12,
       },
       control: {
-        fontSize: "1.5em",
         w: 12,
         h: 12,
       },
@@ -428,7 +428,6 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         h: 12,
       },
       control: {
-        fontSize: "1.5em",
         w: 12,
         h: 12,
       },

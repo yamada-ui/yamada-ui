@@ -48,6 +48,9 @@ export const ColorSelectorChannels = forwardRef<
   )
 })
 
+ColorSelectorChannels.displayName = "ColorSelectorChannels"
+ColorSelectorChannels.__ui__ = "ColorSelectorChannels"
+
 interface ColorSelectorChannelOptions {
   channelLabel?: ReactNode
 }
@@ -88,3 +91,6 @@ export const ColorSelectorChannel = forwardRef<
     </ui.div>
   )
 })
+
+ColorSelectorChannel.displayName = "ColorSelectorChannel"
+ColorSelectorChannel.__ui__ = "ColorSelectorChannel"

@@ -20,8 +20,14 @@ If you want to change the style of the component, please check [here](/styled-sy
 ```ts
 export const Breadcrumb: ComponentMultiStyle<"Breadcrumb"> = {
   baseStyle: {
-    container: {},
-    item: {},
+    container: {
+      display: "flex",
+      alignItems: "center",
+    },
+    item: {
+      display: "inline-flex",
+      alignItems: "center",
+    },
     link: {
       transitionProperty: "common",
       transitionDuration: "fast",

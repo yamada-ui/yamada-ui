@@ -5,7 +5,7 @@ import {
   useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
-import { cx, findChildren, getValidChildren, dataAttr } from "@yamada-ui/utils"
+import { cx, getValidChildren, dataAttr, findChild } from "@yamada-ui/utils"
 import { VisuallyHidden } from "@yamada-ui/visually-hidden"
 import type { ReactNode } from "react"
 import { useId, useState } from "react"
@@ -116,9 +116,9 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
 
     const validChildren = getValidChildren(children)
 
-    const [customLegend] = findChildren(validChildren, Legend)
-    const [customHelperMessage] = findChildren(validChildren, HelperMessage)
-    const [customErrorMessage] = findChildren(validChildren, ErrorMessage)
+    const customLegend = findChild(validChildren, Legend)
+    const customHelperMessage = findChild(validChildren, HelperMessage)
+    const customErrorMessage = findChild(validChildren, ErrorMessage)
 
     const isCustomLegend = !!customLegend
     const isCustomHelperMessage = !!customHelperMessage
@@ -182,6 +182,9 @@ export const Fieldset = forwardRef<FieldsetProps, "fieldset">(
   },
 )
 
+Fieldset.displayName = "Fieldset"
+Fieldset.__ui__ = "Fieldset"
+
 interface LegendOptions {
   requiredIndicator?: ReactNode
   optionalIndicator?: ReactNode
@@ -235,3 +238,6 @@ export const Legend = forwardRef<LegendProps, "legend">(
     )
   },
 )
+
+Legend.displayName = "Legend"
+Legend.__ui__ = "Legend"

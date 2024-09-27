@@ -1,13 +1,15 @@
 import path from "path"
-import { CONSTANT } from "constant"
 import { findPackages } from "find-packages"
-import { documentPaths } from "mdx"
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
   NextApiRequest,
   NextApiResponse,
 } from "next"
+import type { Constant } from "./github"
+import { mdx } from "./mdx"
+import { CONSTANT } from "constant"
+import { documentPaths } from "mdx"
 import {
   getDocument,
   getDocumentBreadcrumbs,
@@ -17,8 +19,6 @@ import {
   getDocumentTree,
   omitDocumentTabs,
 } from "utils/document"
-import type { Constant } from "./github"
-import { mdx } from "./mdx"
 
 export type APIHandler = ({
   req,

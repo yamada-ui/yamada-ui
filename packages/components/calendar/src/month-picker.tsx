@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { CSSUIObject, HTMLUIProps, ThemeProps, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -10,7 +10,7 @@ import { Popover, PopoverContent } from "@yamada-ui/popover"
 import type { PortalProps } from "@yamada-ui/portal"
 import { Portal } from "@yamada-ui/portal"
 import { cx, runIfFunc } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
+import type { ReactNode } from "react"
 import { Calendar } from "./calendar"
 import type { DatePickerFieldProps, DatePickerIconProps } from "./date-picker"
 import {
@@ -179,3 +179,6 @@ export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
     </DatePickerProvider>
   )
 })
+
+MonthPicker.displayName = "MonthPicker"
+MonthPicker.__ui__ = "MOnthPicker"

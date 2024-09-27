@@ -20,12 +20,26 @@ If you want to change the style of the component, please check [here](/styled-sy
 ```ts
 export const Card: ComponentMultiStyle<"Card"> = {
   baseStyle: {
-    container: {},
-    header: {},
+    container: {
+      display: "flex",
+      wordWrap: "break-word",
+    },
+    header: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
     body: {
       flex: "1",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
     },
-    footer: {},
+    footer: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
   },
 
   variants: {

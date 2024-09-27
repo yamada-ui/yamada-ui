@@ -19,6 +19,10 @@ If you want to change the style of the component, please check [here](/styled-sy
 export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
   baseStyle: ({ theme: t, colorMode: m }) => ({
     container: {
+      position: "relative",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       color: ["blackAlpha.700", "whiteAlpha.600"],
       rounded: "md",
       w: "100%",
@@ -52,6 +56,14 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
     overlay: {
       bg: ["whiteAlpha.600", "blackAlpha.600"],
       zIndex: "kurillin",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      w: "100%",
+      h: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
   }),
 

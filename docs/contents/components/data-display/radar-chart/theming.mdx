@@ -28,6 +28,10 @@ export const RadarChart: ComponentMultiStyle<"RadarChart"> = mergeMultiStyle(
   {
     baseStyle: {
       radar: {},
+      dimRadar: {
+        fillOpacity: 0.3,
+        strokeOpacity: 0.3,
+      },
       polarGrid: {
         stroke: ["blackAlpha.400", "whiteAlpha.400"],
         strokeWidth: 1,
@@ -42,35 +46,48 @@ export const RadarChart: ComponentMultiStyle<"RadarChart"> = mergeMultiStyle(
       polarRadiusAxis: {
         "& > line": {
           stroke: ["blackAlpha.400", "whiteAlpha.400"],
+          strokeWidth: 1,
+        },
+        polarAngleAxis: {},
+        polarAngleAxisTick: {
+          "& > text": {
+            fill: ["blackAlpha.700", "whiteAlpha.600"],
+            fontSize: "xs",
+          },
+        },
+        polarRadiusAxis: {
+          "& > line": {
+            stroke: ["blackAlpha.400", "whiteAlpha.400"],
+          },
+        },
+        polarRadiusAxisTick: {
+          "& > text": {
+            fill: ["blackAlpha.700", "whiteAlpha.600"],
+            fontSize: "xs",
+          },
         },
       },
-      polarRadiusAxisTick: {
-        "& > text": {
-          fill: ["blackAlpha.700", "whiteAlpha.600"],
-          fontSize: "xs",
-        },
-      },
-    },
 
-    sizes: {
-      sm: {
-        container: {
-          w: "full",
+      sizes: {
+        sm: {
+          container: {
+            w: "full",
+          },
         },
-      },
-      md: {
-        container: {
-          w: "full",
+        md: {
+          container: {
+            w: "full",
+          },
         },
-      },
-      lg: {
-        container: {
-          w: "full",
+        lg: {
+          container: {
+            w: "full",
+          },
         },
-      },
-      full: {
-        container: {
-          w: "full",
+        full: {
+          container: {
+            w: "full",
+          },
         },
       },
     },

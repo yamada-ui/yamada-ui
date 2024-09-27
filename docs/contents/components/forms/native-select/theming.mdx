@@ -26,11 +26,16 @@ If you want to change the style of the component, please check [here](/styled-sy
 export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
   mergeMultiStyle(Input, {
     baseStyle: {
-      container: {},
+      container: {
+        position: "relative",
+        w: "100%",
+        h: "fit-content",
+      },
       field: {
         cursor: "pointer",
         pr: "8",
         pb: "px",
+        pe: "2rem",
         _focus: {
           zIndex: "unset",
         },
@@ -42,6 +47,13 @@ export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
         },
       },
       icon: {
+        position: "absolute",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        pointerEvents: "none",
+        top: "50%",
+        transform: "translateY(-50%)",
         w: "6",
         py: "2",
         color: ["blackAlpha.600", "whiteAlpha.700"],
@@ -64,17 +76,40 @@ export const NativeSelect: ComponentMultiStyle<"NativeSelect"> =
       },
       sm: {
         icon: {
-          insetEnd: "2",
+          w: "6",
+          py: "2",
+          color: ["blackAlpha.600", "whiteAlpha.700"],
+          fontSize: "xl",
+          outline: 0,
+          rounded: "md",
+          _disabled: {
+            opacity: 0.4,
+          },
         },
       },
-      md: {
-        icon: {
-          insetEnd: "2",
+
+      sizes: {
+        xs: {
+          icon: {
+            pt: "3",
+            fontSize: "lg",
+            insetEnd: "1",
+          },
         },
-      },
-      lg: {
-        icon: {
-          insetEnd: "2",
+        sm: {
+          icon: {
+            insetEnd: "2",
+          },
+        },
+        md: {
+          icon: {
+            insetEnd: "2",
+          },
+        },
+        lg: {
+          icon: {
+            insetEnd: "2",
+          },
         },
       },
     },

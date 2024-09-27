@@ -14922,6 +14922,15 @@
     }
   },
   {
+    "title": "トークンにレスポンシブオブジェクトを設定する",
+    "type": "fragment",
+    "slug": "/styled-system/theming/customize-theme#トークンにレスポンシブオブジェクトを設定する",
+    "hierarchy": {
+      "lv1": "テーマをカスタマイズする",
+      "lv2": "トークンにレスポンシブオブジェクトを設定する"
+    }
+  },
+  {
     "title": "セマンティックトークンを変更する",
     "type": "fragment",
     "slug": "/styled-system/theming/customize-theme#セマンティックトークンを変更する",

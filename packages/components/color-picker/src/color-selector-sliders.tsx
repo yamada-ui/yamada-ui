@@ -81,3 +81,6 @@ export const ColorSelectorSliders = forwardRef<
     )
   },
 )
+
+ColorSelectorSliders.displayName = "ColorSelectorSliders"
+ColorSelectorSliders.__ui__ = "ColorSelectorSliders"

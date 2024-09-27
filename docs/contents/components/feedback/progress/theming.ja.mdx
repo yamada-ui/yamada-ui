@@ -19,6 +19,9 @@ tab: テーマ
 export const Progress: ComponentMultiStyle<"Progress"> = {
   baseStyle: {
     track: {
+      w: "100%",
+      overflow: "hidden",
+      pos: "relative",
       bg: "border",
     },
     filledTrack: ({
@@ -60,6 +63,7 @@ export const Progress: ComponentMultiStyle<"Progress"> = {
           : undefined
 
       return {
+        h: "100%",
         transitionProperty: "common",
         transitionDuration: "slow",
         bgImage,

@@ -168,6 +168,47 @@ const customTheme: UsageTheme = {
 export default extendTheme(customTheme)({ omit: ["colors"] })
 ```
 
+## Setting Responsive Objects to Tokens
+
+By default, theme tokens do not support responsive objects. If you want to enable responsive objects for theme tokens, set `config.theme.responsive` to `true`.
+
+```ts title=./theme/config.ts highlight={5}
+import { extendConfig } from "@yamada-ui/react"
+
+export const config = extendConfig({
+  theme: {
+    responsive: true,
+  },
+})
+```
+
+:::note
+If you want to learn more about customizing the config, please check [here](/styled-system/configure/customize-config).
+:::
+
+Set responsive objects to theme tokens.
+
+```ts title=./theme/tokens/spaces.ts
+import type { ThemeTokens } from "@yamada-ui/react"
+
+export const spaces: ThemeTokens = {
+  1: { base: "0.25rem", md: "0.125rem" },
+  2: { base: "0.5rem", md: "0.25rem" },
+  3: { base: "0.75rem", md: "0.375rem" },
+  4: { base: "1rem", md: "0.5rem" },
+}
+```
+
+:::note
+If you want to learn more about responsive objects, please check [here](/styled-system/responsive-styles#syntax-for-responsive-styles).
+:::
+
+:::note status=warning
+Make sure to set `base` for responsive objects. Also, do not set `base` for theme tokens that are not responsive objects. The reason is that objects with `base` are considered responsive objects.
+:::
+
+Next, include `spaces` in the `tokens` in `./theme/index.ts` as you did in [Changing Tokens](#changing-tokens).
+
 ## Changing Semantic Tokens
 
 Within the semantic tokens, a color scheme used in each component is set.

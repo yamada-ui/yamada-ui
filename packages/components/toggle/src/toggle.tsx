@@ -181,3 +181,4 @@ export const Toggle = forwardRef(
 } & ComponentArgs
 
 Toggle.displayName = "Toggle"
+Toggle.__ui__ = "Toggle"

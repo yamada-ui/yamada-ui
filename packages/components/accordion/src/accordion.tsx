@@ -136,3 +136,6 @@ export const Accordion = forwardRef<AccordionProps, "div">((props, ref) => {
     </DescendantsContextProvider>
   )
 })
+
+Accordion.displayName = "Accordion"
+Accordion.__ui__ = "Accordion"

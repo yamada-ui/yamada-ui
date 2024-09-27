@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import {
   Carousel,
   CarouselSlide,
@@ -19,7 +20,6 @@ import {
   CardFooter,
   Button,
 } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Carousel>
 

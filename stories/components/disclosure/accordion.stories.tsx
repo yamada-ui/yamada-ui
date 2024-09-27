@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import { Ghost, Plus, Minus } from "@yamada-ui/lucide"
 import type { AccordionProps } from "@yamada-ui/react"
 import {
@@ -7,7 +8,6 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Accordion>
 

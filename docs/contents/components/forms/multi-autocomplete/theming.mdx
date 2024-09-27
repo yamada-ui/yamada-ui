@@ -15,7 +15,7 @@ tab: Theming
 The `MultiAutocomplete` is a [multi part component](/styled-system/theming/component-styles#multi-part-components).
 
 :::note
-`MultiAutocomplete` inherits the style from [MultiSelect](/components/forms/multi-select).
+`MultiAutocomplete` inherits the style from [MultiSelect](/components/forms/multi-select) and [Autocomplete](/components/forms/autocomplete).
 :::
 
 :::note
@@ -24,5 +24,11 @@ If you want to change the style of the component, please check [here](/styled-sy
 
 ```ts
 export const MultiAutocomplete: ComponentMultiStyle<"MultiAutocomplete"> =
-  mergeMultiStyle(MultiSelect)()
+  mergeMultiStyle(MultiSelect, Autocomplete, {
+    baseStyle: {
+      field: {
+        flexWrap: "wrap",
+      },
+    },
+  })()
 ```

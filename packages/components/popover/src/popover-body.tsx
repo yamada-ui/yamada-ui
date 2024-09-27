@@ -23,3 +23,6 @@ export const PopoverBody = forwardRef<PopoverBodyProps, "div">(
     )
   },
 )
+
+PopoverBody.displayName = "PopoverBody"
+PopoverBody.__ui__ = "PopoverBody"

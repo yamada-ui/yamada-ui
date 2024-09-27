@@ -13,7 +13,7 @@ tab: テーマ
 `MultiAutocomplete`は、[複数パーツのコンポーネント](/styled-system/theming/component-styles#複数パーツのコンポーネント)です。
 
 :::note
-`MultiAutocomplete`は、[MultiSelect](/components/forms/multi-select)のスタイルを継承しています。
+`MultiAutocomplete`は、[MultiSelect](/components/forms/multi-select)と[Autocomplete](/components/forms/autocomplete)のスタイルを継承しています。
 :::
 
 :::note
@@ -22,5 +22,11 @@ tab: テーマ
 
 ```ts
 export const MultiAutocomplete: ComponentMultiStyle<"MultiAutocomplete"> =
-  mergeMultiStyle(MultiSelect)()
+  mergeMultiStyle(MultiSelect, Autocomplete, {
+    baseStyle: {
+      field: {
+        flexWrap: "wrap",
+      },
+    },
+  })()
 ```

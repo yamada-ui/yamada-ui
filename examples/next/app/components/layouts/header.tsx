@@ -1,5 +1,6 @@
 'use client'
 
+import { Moon, Palette, Sun } from '@yamada-ui/lucide'
 import {
   HStack,
   Spacer,
@@ -27,7 +28,6 @@ import {
   Image,
   ColorModeWithSystem,
 } from '@yamada-ui/react'
-import { Moon, Palette, Sun } from '@yamada-ui/lucide'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { useState } from 'react'

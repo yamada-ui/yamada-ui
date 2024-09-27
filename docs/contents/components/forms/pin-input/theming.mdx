@@ -27,6 +27,8 @@ export const PinInput: ComponentMultiStyle<"PinInput"> = mergeMultiStyle(
   {
     baseStyle: {
       container: {
+        display: "flex",
+        alignItems: "center",
         gap: "sm",
       },
       field: {
@@ -37,38 +39,46 @@ export const PinInput: ComponentMultiStyle<"PinInput"> = mergeMultiStyle(
     variants: {
       unstyled: {
         field: {
-          h: "auto",
+          textAlign: "center",
         },
       },
-    },
 
-    sizes: {
-      xs: {
-        field: {
-          fontSize: "xs",
-          boxSize: "6",
-          rounded: "sm",
+      variants: {
+        unstyled: {
+          field: {
+            h: "auto",
+          },
         },
       },
-      sm: {
-        field: {
-          fontSize: "sm",
-          boxSize: "8",
-          rounded: "md",
+
+      sizes: {
+        xs: {
+          field: {
+            fontSize: "xs",
+            boxSize: "6",
+            rounded: "sm",
+          },
         },
-      },
-      md: {
-        field: {
-          fontSize: "md",
-          boxSize: "10",
-          rounded: "md",
+        sm: {
+          field: {
+            fontSize: "sm",
+            boxSize: "8",
+            rounded: "md",
+          },
         },
-      },
-      lg: {
-        field: {
-          fontSize: "lg",
-          boxSize: "12",
-          rounded: "md",
+        md: {
+          field: {
+            fontSize: "md",
+            boxSize: "10",
+            rounded: "md",
+          },
+        },
+        lg: {
+          field: {
+            fontSize: "lg",
+            boxSize: "12",
+            rounded: "md",
+          },
         },
       },
     },

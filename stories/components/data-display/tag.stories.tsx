@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { colorSchemes } from "../../components"
 import { Plus } from "@yamada-ui/lucide"
 import { Wrap, Tag } from "@yamada-ui/react"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Tag>
 

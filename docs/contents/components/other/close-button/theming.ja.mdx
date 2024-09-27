@@ -22,6 +22,13 @@ tab: テーマ
 ```ts
 export const CloseButton: ComponentStyle<"CloseButton"> = mergeStyle(Button, {
   baseStyle: {
+    position: "relative",
+    overflow: "hidden",
+    outline: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexShrink: 0,
     _hover: {
       bg: ["blackAlpha.100", "whiteAlpha.100"],
     },

@@ -18,7 +18,10 @@ tab: テーマ
 ```ts
 export const Stat: ComponentMultiStyle<"Stat"> = {
   baseStyle: {
-    container: {},
+    container: {
+      display: "flex",
+      flexDirection: "column",
+    },
     label: {
       color: ["blackAlpha.700", "whiteAlpha.600"],
       fontWeight: "medium",

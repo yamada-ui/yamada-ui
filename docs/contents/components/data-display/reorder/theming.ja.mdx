@@ -19,6 +19,7 @@ tab: テーマ
 export const Reorder: ComponentMultiStyle<"Reorder"> = {
   baseStyle: {
     container: {
+      display: "flex",
       w: "100%",
     },
     item: {
@@ -29,6 +30,13 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       },
     },
     trigger: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      cursor: "grab",
+      _selected: {
+        cursor: "grabbing",
+      },
       color: ["blackAlpha.300", "whiteAlpha.300"],
     },
   },

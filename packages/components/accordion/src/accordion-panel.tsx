@@ -66,3 +66,6 @@ export const AccordionPanel = forwardRef<AccordionPanelProps, "div">(
     )
   },
 )
+
+AccordionPanel.displayName = "AccordionPanel"
+AccordionPanel.__ui__ = "AccordionPanel"

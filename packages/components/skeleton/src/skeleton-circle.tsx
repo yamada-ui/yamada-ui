@@ -35,3 +35,6 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, "div">(
     )
   },
 )
+
+SkeletonCircle.displayName = "SkeletonCircle"
+SkeletonCircle.__ui__ = "SkeletonCircle"

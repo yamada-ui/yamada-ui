@@ -410,3 +410,6 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     )
   },
 )
+
+Tooltip.displayName = "Tooltip"
+Tooltip.__ui__ = "Tooltip"

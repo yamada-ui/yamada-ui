@@ -19,8 +19,18 @@ tab: テーマ
 ```ts
 export const InfiniteScrollArea: ComponentMultiStyle<"InfiniteScrollArea"> = {
   baseStyle: {
-    container: {},
-    trigger: {},
+    container: {
+      w: "100%",
+      display: "flex",
+      gap: "1rem",
+    },
+    trigger: {
+      w: "100%",
+      flex: 1,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
   },
 
   defaultProps: {},

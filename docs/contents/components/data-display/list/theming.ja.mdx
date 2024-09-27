@@ -18,7 +18,10 @@ tab: テーマ
 ```ts
 export const List: ComponentMultiStyle<"List"> = {
   baseStyle: {
-    container: {},
+    container: {
+      display: "flex",
+      flexDirection: "column",
+    },
     item: {},
     icon: {
       me: "2",

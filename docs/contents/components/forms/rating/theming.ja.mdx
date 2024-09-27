@@ -19,6 +19,7 @@ order: 2
 export const Rating: ComponentMultiStyle<"Rating"> = {
   baseStyle: ({ colorScheme: c = "yellow" }) => ({
     container: {
+      display: "flex",
       w: "max-content",
     },
     group: {
@@ -26,6 +27,8 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
     },
     item: {
       cursor: "pointer",
+      display: "block",
+      lineHeight: "0",
       rounded: "sm",
       color: ["blackAlpha.300", "whiteAlpha.300"],
       outline: "none",
@@ -49,6 +52,9 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
       },
     },
     icon: {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
       fill: "currentColor",
     },
   }),

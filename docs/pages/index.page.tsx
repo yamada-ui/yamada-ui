@@ -9,13 +9,13 @@ import {
   VStack,
   Wrap,
 } from "@yamada-ui/react"
+import type { InferGetStaticPropsType, NextPage } from "next"
 import { Section } from "components/layouts"
 import { SEO, OpenCollective, Patreon } from "components/media-and-icons"
 import { NextLinkButton } from "components/navigation"
 import { CONSTANT } from "constant"
 import { useI18n, PageProvider } from "contexts"
 import { TopLayout } from "layouts"
-import type { InferGetStaticPropsType, NextPage } from "next"
 import { getStaticCommonProps } from "utils/next"
 
 export const getStaticProps = getStaticCommonProps

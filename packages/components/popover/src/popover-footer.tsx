@@ -23,3 +23,6 @@ export const PopoverFooter = forwardRef<PopoverFooterProps, "footer">(
     )
   },
 )
+
+PopoverFooter.displayName = "PopoverFooter"
+PopoverFooter.__ui__ = "PopoverFooter"

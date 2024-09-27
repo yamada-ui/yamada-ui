@@ -1,3 +1,4 @@
+import type { FC } from "react"
 import {
   UIProvider,
   extendConfig,
@@ -5,7 +6,6 @@ import {
   useNotice,
   Button,
 } from "@yamada-ui/react"
-import type { FC } from "react"
 
 export default {
   title: "System / Theme / Notice",

@@ -1,8 +1,8 @@
 import { ExternalLink } from "@yamada-ui/lucide"
 import { Text } from "@yamada-ui/react"
+import type { FC } from "react"
 import { NextLink } from "components/navigation"
 import type { NextLinkProps } from "components/navigation"
-import type { FC } from "react"
 
 export interface LinkProps extends NextLinkProps {}
 

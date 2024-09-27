@@ -236,6 +236,9 @@ export const Breadcrumb = forwardRef<BreadcrumbProps, "nav">((props, ref) => {
   )
 })
 
+Breadcrumb.displayName = "Breadcrumb"
+Breadcrumb.__ui__ = "Breadcrumb"
+
 interface BreadcrumbItemOptions
   extends Pick<BreadcrumbProps, "separator" | "gap"> {
   /**
@@ -311,6 +314,9 @@ export const BreadcrumbItem = forwardRef<BreadcrumbItemProps, "li">(
   },
 )
 
+BreadcrumbItem.displayName = "BreadcrumbItem"
+BreadcrumbItem.__ui__ = "BreadcrumbItem"
+
 interface BreadcrumbLinkOptions {
   /**
    * If `true`, change to span element.
@@ -343,6 +349,8 @@ export const BreadcrumbLink = forwardRef<BreadcrumbLinkProps, "a">(
     )
   },
 )
+BreadcrumbLink.displayName = "BreadcrumbLink"
+BreadcrumbLink.__ui__ = "BreadcrumbLink"
 
 interface BreadcrumbSeparatorOptions {
   /**
@@ -375,6 +383,9 @@ export const BreadcrumbSeparator = forwardRef<BreadcrumbSeparatorProps, "span">(
     )
   },
 )
+
+BreadcrumbSeparator.displayName = "BreadcrumbSeparator"
+BreadcrumbSeparator.__ui__ = "BreadcrumbSeparator"
 
 interface BreadcrumbEllipsisOptions {}
 
@@ -413,3 +424,6 @@ export const BreadcrumbEllipsis = forwardRef<BreadcrumbEllipsisProps, "span">(
     )
   },
 )
+
+BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis"
+BreadcrumbEllipsis.__ui__ = "BreadcrumbEllipsis"

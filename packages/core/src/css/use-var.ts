@@ -6,7 +6,7 @@ import type { StyleConfig } from "../config"
 import type { StyleProperty } from "../styles"
 import { styles } from "../styles"
 import type { StyledTheme } from "../theme.types"
-import type { CSSUIProps } from "./css.types"
+import type { CSSUIObject, CSSUIProps } from "./css.types"
 
 type Format<Y> = (name: Y, index: number) => string
 type Variable = Required<CSSUIProps>["vars"][number]
@@ -89,3 +89,10 @@ export const createVars =
 
     return [variables, result]
   }
+
+export const mergeVars = (
+  ...vars: CSSUIObject["vars"][]
+): CSSUIObject["vars"] =>
+  vars
+    .filter(Boolean)
+    .flatMap((vars) => vars as Variable[]) as CSSUIObject["vars"]

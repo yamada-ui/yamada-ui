@@ -1,4 +1,5 @@
-import type { FC, PropsWithChildren, ReactElement, RefObject } from "react"
+import type { FC } from "@yamada-ui/core"
+import type { PropsWithChildren, ReactElement, RefObject } from "react"
 import { Children, cloneElement } from "react"
 import { usePopover } from "./popover"
 
@@ -10,3 +11,6 @@ export const PopoverAnchor: FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return cloneElement(child, getAnchorProps(child.props, child.ref))
 }
+
+PopoverAnchor.displayName = "PopoverAnchor"
+PopoverAnchor.__ui__ = "PopoverAnchor"

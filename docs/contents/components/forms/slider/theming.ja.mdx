@@ -43,6 +43,9 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       bg: [`${c}.500`, `${c}.400`],
     }),
     mark: {
+      display: "inline-flex",
+      justifyContent: "center",
+      alignItems: "center",
       fontSize: "sm",
     },
     thumb: ({ theme: t, colorMode: m, orientation: o }) => ({

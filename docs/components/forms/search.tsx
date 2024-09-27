@@ -19,8 +19,6 @@ import {
   IconButton,
 } from "@yamada-ui/react"
 import type { StackProps, ModalProps, ButtonProps } from "@yamada-ui/react"
-import { useI18n } from "contexts"
-import { useEventListener } from "hooks"
 import { matchSorter } from "match-sorter"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
@@ -35,6 +33,8 @@ import {
 } from "react"
 import type { FC, KeyboardEvent, RefObject } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
+import { useI18n } from "contexts"
+import { useEventListener } from "hooks"
 
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"

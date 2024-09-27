@@ -87,8 +87,8 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
     className,
     component: Component = PaginationItem,
     itemProps,
-    withControls = true,
-    withEdges = false,
+    withControls: _withControls = true,
+    withEdges: _withEdges = false,
     innerProps,
     controlProps,
     controlPrevProps,
@@ -106,8 +106,8 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
     ...rest
   } = omitThemeProps(mergedProps)
 
-  const computedWithControls = useValue(withControls)
-  const computedWithEdges = useValue(withEdges)
+  const withControls = useValue(_withControls)
+  const withEdges = useValue(_withEdges)
 
   const { currentPage, onFirst, onLast, onPrev, onNext, onChange, range } =
     usePagination({
@@ -155,7 +155,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
         {...rest}
         data-disabled={dataAttr(isDisabled)}
       >
-        {computedWithEdges ? (
+        {withEdges ? (
           <Component
             page="first"
             aria-label="Go to first page"
@@ -171,7 +171,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           />
         ) : null}
 
-        {computedWithControls ? (
+        {withControls ? (
           <Component
             page="prev"
             aria-label="Go to previous page"
@@ -197,7 +197,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           {children}
         </ui.div>
 
-        {computedWithControls ? (
+        {withControls ? (
           <Component
             page="next"
             aria-label="Go to next page"
@@ -213,7 +213,7 @@ export const Pagination = forwardRef<PaginationProps, "div">((props, ref) => {
           />
         ) : null}
 
-        {computedWithEdges ? (
+        {withEdges ? (
           <Component
             page="last"
             aria-label="Go to last page"

@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useRef } from "react"
 import {
   ChevronDown,
   MenuIcon,
@@ -21,7 +22,6 @@ import {
   Portal,
   useDisclosure,
 } from "@yamada-ui/react"
-import { useRef } from "react"
 
 type Story = StoryFn<typeof Menu>
 

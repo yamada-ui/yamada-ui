@@ -4,7 +4,7 @@ import {
   ariaAttr,
   cx,
   dataAttr,
-  findChildren,
+  findChild,
   getValidChildren,
   handlerAll,
   isArray,
@@ -189,8 +189,8 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customAccordionButton] = findChildren(validChildren, AccordionButton)
-    const [customAccordionPanel] = findChildren(validChildren, AccordionPanel)
+    const customAccordionButton = findChild(validChildren, AccordionButton)
+    const customAccordionPanel = findChild(validChildren, AccordionPanel)
 
     const cloneChildren = !isEmpty(validChildren)
       ? omitChildren(validChildren, AccordionButton, AccordionPanel)
@@ -219,3 +219,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     )
   },
 )
+
+AccordionItem.displayName = "AccordionItem"
+AccordionItem.__ui__ = "AccordionItem"

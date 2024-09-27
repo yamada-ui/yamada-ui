@@ -18,8 +18,14 @@ order: 2
 ```ts
 export const Breadcrumb: ComponentMultiStyle<"Breadcrumb"> = {
   baseStyle: {
-    container: {},
-    item: {},
+    container: {
+      display: "flex",
+      alignItems: "center",
+    },
+    item: {
+      display: "inline-flex",
+      alignItems: "center",
+    },
     link: {
       transitionProperty: "common",
       transitionDuration: "fast",

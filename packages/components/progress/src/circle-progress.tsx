@@ -17,13 +17,6 @@ import type { FC } from "react"
 
 interface CircleProgressOptions {
   /**
-   * The CSS `box-size` property.
-   *
-   * @default '6rem'
-   * @deprecated Use `boxSize` instead.
-   */
-  size?: CSSUIProps["boxSize"]
-  /**
    * The CSS `width` property.
    *
    * @default '0.625ewm'
@@ -81,7 +74,7 @@ interface CircleProgressOptions {
 
 export interface CircleProgressProps
   extends Omit<HTMLUIProps, "color">,
-    Omit<ThemeProps<"CircleProgress">, "size">,
+    ThemeProps<"CircleProgress">,
     CircleProgressOptions {}
 
 /**
@@ -91,14 +84,11 @@ export interface CircleProgressProps
  */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   (props, ref) => {
-    const [styles, { size = "6em", ...mergedProps }] = useComponentStyle(
-      "CircleProgress",
-      props,
-    )
+    const [styles, mergedProps] = useComponentStyle("CircleProgress", props)
     let {
       className,
       children,
-      boxSize,
+      boxSize = "6em",
       thickness = "0.625rem",
       color = "primary",
       trackColor = "border",
@@ -111,9 +101,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    boxSize ??= replaceObject(size, (value) =>
-      !isUnit(value) ? useToken("sizes", value) : value,
-    )
     thickness = replaceObject(thickness, (value) =>
       !isUnit(value) ? useToken("sizes", value) : value,
     )

@@ -242,6 +242,9 @@ export const Select = forwardRef<SelectProps, "div">((props, ref) => {
   )
 })
 
+Select.displayName = "Select"
+Select.__ui__ = "Select"
+
 interface SelectFieldProps extends HTMLUIProps {}
 
 const SelectField = forwardRef<SelectFieldProps, "div">(
@@ -276,5 +279,5 @@ const SelectField = forwardRef<SelectFieldProps, "div">(
   },
 )
 
-Select.displayName = "Select"
-Select.__ui__ = "Select"
+SelectField.displayName = "SelectField"
+SelectField.__ui__ = "SelectField"

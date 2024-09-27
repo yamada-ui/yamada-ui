@@ -58,3 +58,6 @@ export const Text = forwardRef<TextProps, "p">((props, ref) => {
     />
   )
 })
+
+Text.displayName = "Text"
+Text.__ui__ = "Text"

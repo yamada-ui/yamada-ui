@@ -1,13 +1,13 @@
-import { CONSTANT } from "constant"
+import type { UIProps } from "@yamada-ui/react"
 import type { ManipulateType } from "dayjs"
 import dayjs from "dayjs"
-import type { UIProps } from "@yamada-ui/react"
 import type {
   InsightPeriod,
   Insights,
   UserInsight,
   UserInsightScore,
 } from "insights"
+import { CONSTANT } from "constant"
 import type { Locale } from "utils/i18n"
 
 export const INSIGHT_MIN_DATE = new Date("2024-01-01")

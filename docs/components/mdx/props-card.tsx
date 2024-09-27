@@ -8,10 +8,10 @@ import {
   isUndefined,
 } from "@yamada-ui/react"
 import type { CardProps } from "@yamada-ui/react"
-import { TextWithCode } from "components/typography"
-import { useI18n } from "contexts"
 import type { FC } from "react"
 import { Link } from "./link"
+import { TextWithCode } from "components/typography"
+import { useI18n } from "contexts"
 
 export interface PropsCardProps extends CardProps {
   id: string

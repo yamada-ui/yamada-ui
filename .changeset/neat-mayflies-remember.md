@@ -2,4 +2,4 @@
 "@yamada-ui/badge": patch
 ---
 
-add displayName and **ui** to badge component
+Added `displayName` and `__ui__` to badge component.

@@ -1,5 +1,7 @@
 import { faker } from "@faker-js/faker"
 import type { Meta, StoryFn } from "@storybook/react"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { colorSchemes } from "../../components"
 import { ChevronLeft, ChevronRight } from "@yamada-ui/lucide"
 import {
   HStack,
@@ -13,8 +15,6 @@ import {
 } from "@yamada-ui/react"
 import type { Column } from "@yamada-ui/table"
 import { PagingTable } from "@yamada-ui/table"
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof PagingTable>
 

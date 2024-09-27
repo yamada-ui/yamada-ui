@@ -14,7 +14,6 @@ import {
   AlertDescription,
   Box,
 } from "@yamada-ui/react"
-import { LinkCard, CardContainer } from "components/navigation"
 import type { MDXComponents } from "mdx/types"
 import { Pre } from "./code-block"
 import { ColorModeButton } from "./color-mode-button"
@@ -31,6 +30,7 @@ import { PropsCard } from "./props-card"
 import { SelectPackageManagers } from "./select-package-managers"
 import { Sponsors } from "./sponsors"
 import { Users } from "./users"
+import { LinkCard, CardContainer } from "components/navigation"
 
 const uiComponents = { Box }
 

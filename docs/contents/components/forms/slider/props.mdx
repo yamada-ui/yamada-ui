@@ -4,6 +4,7 @@ description: >-
   `Slider` is a component used for allowing users to select a value from a
   range.
 package_name: "@yamada-ui/slider"
+order: 1
 with_description: true
 tab: Props
 ---
@@ -15,7 +16,7 @@ tab: Props
 <PropsCard
   id="slider-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue={"primary"}
 />
@@ -30,7 +31,7 @@ tab: Props
 <PropsCard
   id="slider-filledtrackcolor"
   name="filledTrackColor"
-  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950">'
   description={
     "The CSS `color` property. Used in `color` of filled track element."
   }
@@ -185,7 +186,7 @@ tab: Props
 <PropsCard
   id="slider-thumbcolor"
   name="thumbColor"
-  type='UIValue<"link" | "border" | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 318 more ... | Background<...>>'
+  type='UIValue<"border" | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | "whiteAlpha.700" | ... 319 more ... | Background<...>>'
   description={
     "The CSS `background` property. Used in `background` of thumb element."
   }
@@ -201,16 +202,16 @@ tab: Props
 <PropsCard
   id="slider-thumbsize"
   name="thumbSize"
-  type='UIValue<number | "px" | (string & {}) | "min" | "max" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 62 more ... | "9xl">'
+  type='UIValue<number | "px" | "min" | "max" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 74 more ... | "9xl">'
   description={
-    "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element.\n\n\nThe CSS `box-size` property. Used in `box-size` of thumb element."
+    "The CSS `box-size` property.\nUsed for calculating the width, height, and percentage of the container element."
   }
 />
 
 <PropsCard
   id="slider-trackcolor"
   name="trackColor"
-  type='UIValue<"link" | "border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 318 more ... | "secondary.950">'
+  type='UIValue<"border" | Color | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | "whiteAlpha.600" | ... 319 more ... | "link.950">'
   description={"The CSS `color` property. Used in `color` of track element."}
 />
 
@@ -224,7 +225,7 @@ tab: Props
 <PropsCard
   id="slider-tracksize"
   name="trackSize"
-  type='UIValue<number | "px" | (string & {}) | "min" | "max" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 58 more ... | "9xl">'
+  type='UIValue<number | "px" | "min" | "max" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "-moz-max-content" | "-moz-min-content" | "-webkit-fit-content" | ... 70 more ... | "9xl">'
   description={"The CSS `height` property. Used in `height` of track element."}
 />
 
@@ -241,37 +242,3 @@ tab: Props
   type="string"
   description={"The variant of the Slider."}
 />
-
-### SliderTrackProps
-
-<PropsCard
-  id="slidertrack-filledtrackprops"
-  name="filledTrackProps"
-  type="SliderFilledTrackProps"
-  description={"Props for slider filled track element."}
-/>
-
-### SliderFilledTrackProps
-
-### SliderThumbProps
-
-### SliderMarkProps
-
-<PropsCard id="slidermark-value" name="value" required type="number" />
-
-### RangeSliderTrackProps
-
-<PropsCard
-  id="rangeslidertrack-filledtrackprops"
-  name="filledTrackProps"
-  type="RangeSliderFilledTrackProps"
-  description={"Props for range slider filled track element."}
-/>
-
-### RangeSliderFilledTrackProps
-
-### RangeSliderThumbProps
-
-### RangeSliderMarkProps
-
-<PropsCard id="rangeslidermark-value" name="value" required type="number" />

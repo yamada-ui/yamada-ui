@@ -4,6 +4,7 @@ description: >-
   `Table` is a table component equipped with column sorting, row selection, and
   click event features.
 package_name: "@yamada-ui/table"
+order: 1
 label: Updated
 with_description: true
 tab: Props
@@ -31,14 +32,14 @@ tab: Props
 <PropsCard
   id="table-checkboxprops"
   name="checkboxProps"
-  type="CheckboxProps"
+  type="CheckboxProps<string>"
   description={"Props for table checkbox element."}
 />
 
 <PropsCard
   id="table-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue={"gray"}
 />
@@ -120,7 +121,7 @@ tab: Props
 <PropsCard
   id="table-layout"
   name="layout"
-  type='"fixed" | "auto" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", TableLayout>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue<...>)'
+  type='"auto" | "fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | { [x: string & {}]: TableLayout | [TableLayout, TableLayout] | undefined; ... 5 more ...; base?: TableLayout | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `table-layout` property."}
 />
 
@@ -143,6 +144,13 @@ tab: Props
   name="onClickRow"
   type="(row: Row<Y>) => void"
   description={"The callback invoked when a row is clicked."}
+/>
+
+<PropsCard
+  id="table-ondoubleclickrow"
+  name="onDoubleClickRow"
+  type="(row: Row<Y>) => void"
+  description={"The callback invoked when a row is double clicked."}
 />
 
 <PropsCard

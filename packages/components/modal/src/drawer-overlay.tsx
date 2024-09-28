@@ -23,3 +23,6 @@ export const DrawerOverlay = motionForwardRef<DrawerOverlayProps, "div">(
     )
   },
 )
+
+DrawerOverlay.displayName = "DrawerOverlay"
+DrawerOverlay.__ui__ = "DrawerOverlay"

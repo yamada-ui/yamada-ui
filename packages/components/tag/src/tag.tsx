@@ -125,3 +125,9 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
 
 Tag.displayName = "Tag"
 Tag.__ui__ = "Tag"
+
+CloseIcon.displayName = "CloseIcon"
+CloseIcon.__ui__ = "CloseIcon"
+
+CloseButton.displayName = "CloseButton"
+CloseButton.__ui__ = "CloseButton"

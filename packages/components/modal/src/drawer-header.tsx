@@ -23,3 +23,6 @@ export const DrawerHeader = forwardRef<DrawerHeaderProps, "header">(
     )
   },
 )
+
+DrawerHeader.displayName = "DrawerHeader"
+DrawerHeader.__ui__ = "DrawerHeader"

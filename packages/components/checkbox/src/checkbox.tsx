@@ -543,9 +543,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
             }
           >
             {isIndeterminate ? (
-              <IndeterminateIcon {...rest} />
+              <CheckboxIndeterminateIcon {...rest} />
             ) : (
-              <CheckIcon {...rest} />
+              <CheckboxCheckIcon {...rest} />
             )}
           </motion.div>
         </ui.div>
@@ -557,7 +557,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
 CheckboxIcon.displayName = "CheckboxIcon"
 CheckboxIcon.__ui__ = "CheckboxIcon"
 
-const CheckIcon: FC<MotionProps<"svg">> = (props) => {
+interface CheckboxCheckIconProps extends MotionProps<"svg"> {}
+
+const CheckboxCheckIcon: FC<CheckboxCheckIconProps> = (props) => {
   return (
     <motion.svg
       width="1.2em"
@@ -586,10 +588,14 @@ const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   )
 }
 
-CheckIcon.displayName = "CheckIcon"
-CheckIcon.__ui__ = "CheckIcon"
+CheckboxCheckIcon.displayName = "CheckboxCheckIcon"
+CheckboxCheckIcon.__ui__ = "CheckboxCheckIcon"
 
-const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
+interface CheckboxIndeterminateIconProps extends MotionProps<"svg"> {}
+
+const CheckboxIndeterminateIcon: FC<CheckboxIndeterminateIconProps> = (
+  props,
+) => {
   return (
     <motion.svg
       width="1.2em"
@@ -616,5 +622,5 @@ const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
   )
 }
 
-IndeterminateIcon.displayName = "IndeterminateIcon"
-IndeterminateIcon.__ui__ = "IndeterminateIcon"
+CheckboxIndeterminateIcon.displayName = "CheckboxIndeterminateIcon"
+CheckboxIndeterminateIcon.__ui__ = "CheckboxIndeterminateIcon"

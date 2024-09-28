@@ -87,6 +87,9 @@ export const Tag = forwardRef<TagProps, "span">((props, ref) => {
   )
 })
 
+Tag.displayName = "Tag"
+Tag.__ui__ = "Tag"
+
 const CloseIcon: FC = () => {
   return (
     <Icon verticalAlign="inherit" viewBox="0 0 512 512" fontSize="1.125rem">
@@ -97,6 +100,9 @@ const CloseIcon: FC = () => {
     </Icon>
   )
 }
+
+CloseIcon.displayName = "CloseIcon"
+CloseIcon.__ui__ = "CloseIcon"
 
 type CloseButtonProps = HTMLUIProps<"span"> & { isDisabled?: boolean }
 
@@ -122,12 +128,6 @@ const CloseButton: FC<CloseButtonProps> = ({ children, ...props }) => {
     </ui.span>
   )
 }
-
-Tag.displayName = "Tag"
-Tag.__ui__ = "Tag"
-
-CloseIcon.displayName = "CloseIcon"
-CloseIcon.__ui__ = "CloseIcon"
 
 CloseButton.displayName = "CloseButton"
 CloseButton.__ui__ = "CloseButton"

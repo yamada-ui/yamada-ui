@@ -1,3 +1,4 @@
+import type { FC } from "@yamada-ui/core"
 import type {
   HTMLUIProps,
   ThemeProps,
@@ -30,7 +31,6 @@ import type {
   ChangeEvent,
   ChangeEventHandler,
   CSSProperties,
-  FC,
   FocusEventHandler,
   InputHTMLAttributes,
   KeyboardEvent,
@@ -488,6 +488,7 @@ export const Checkbox = forwardRef(
 } & ComponentArgs
 
 Checkbox.displayName = "Checkbox"
+Checkbox.__ui__ = "Checkbox"
 
 export type CheckboxIconProps = MotionProps<"svg"> &
   FormControlOptions & {
@@ -553,6 +554,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
   )
 }
 
+CheckboxIcon.displayName = "CheckboxIcon"
+CheckboxIcon.__ui__ = "CheckboxIcon"
+
 const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   return (
     <motion.svg
@@ -582,6 +586,9 @@ const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   )
 }
 
+CheckIcon.displayName = "CheckIcon"
+CheckIcon.__ui__ = "CheckIcon"
+
 const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
   return (
     <motion.svg
@@ -608,3 +615,6 @@ const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
     </motion.svg>
   )
 }
+
+IndeterminateIcon.displayName = "IndeterminateIcon"
+IndeterminateIcon.__ui__ = "IndeterminateIcon"

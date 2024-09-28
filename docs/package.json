@@ -26,7 +26,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "clean": "rimraf .mdx .next node_modules"
+    "clean": "rimraf .mdx .next .eslintcache *.tsbuildinfo node_modules"
   },
   "dependencies": {
     "@emotion/cache": "11.11.0",

@@ -2,6 +2,7 @@
 title: Select
 description: "`Select`は、ユーザーがオプションのリストから1つを選択するために使用されるコンポーネントです。"
 package_name: "@yamada-ui/select"
+order: 1
 label: Updated
 with_description: true
 tab: Props
@@ -12,6 +13,14 @@ tab: Props
 ### SelectProps
 
 <PropsCard
+  id="select-animation"
+  name="animation"
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  description={"The animation of the popover."}
+  defaultValue={"'scale'"}
+/>
+
+<PropsCard
   id="select-boundary"
   name="boundary"
   type='HTMLElement | "clippingParents" | "scrollParent"'
@@ -19,6 +28,14 @@ tab: Props
     "The boundary area for the popper. Used within the `preventOverflow` modifier."
   }
   defaultValue={"'clippingParents'"}
+/>
+
+<PropsCard
+  id="select-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
 />
 
 <PropsCard
@@ -52,15 +69,22 @@ tab: Props
 <PropsCard
   id="select-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
   id="select-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for select container element."}
+/>
+
+<PropsCard
+  id="select-contentprops"
+  name="contentProps"
+  type='Omit<MotionProps, "children">'
+  description={"Props for select content element."}
 />
 
 <PropsCard
@@ -80,7 +104,7 @@ tab: Props
 <PropsCard
   id="select-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -104,6 +128,13 @@ tab: Props
 />
 
 <PropsCard
+  id="select-fieldprops"
+  name="fieldProps"
+  type='Omit<SelectFieldProps, "children">'
+  description={"Props for select field element."}
+/>
+
+<PropsCard
   id="select-flip"
   name="flip"
   type="boolean"
@@ -121,6 +152,13 @@ tab: Props
 />
 
 <PropsCard
+  id="select-footer"
+  name="footer"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The footer of the select content element."}
+/>
+
+<PropsCard
   id="select-gutter"
   name="gutter"
   type="UIValue<number>"
@@ -128,6 +166,13 @@ tab: Props
     "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier."
   }
   defaultValue={"8"}
+/>
+
+<PropsCard
+  id="select-header"
+  name="header"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The header of the select content element."}
 />
 
 <PropsCard
@@ -269,6 +314,14 @@ tab: Props
 />
 
 <PropsCard
+  id="select-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="select-optionprops"
   name="optionProps"
   type='Omit<OptionProps, "children" | "value">'
@@ -317,15 +370,6 @@ tab: Props
 />
 
 <PropsCard
-  id="select-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
-/>
-
-<PropsCard
   id="select-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
@@ -354,53 +398,4 @@ tab: Props
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the Select."}
   defaultValue={"outline"}
-/>
-
-### OptionGroupProps
-
-<PropsCard
-  id="optiongroup-label"
-  name="label"
-  required
-  type="string"
-  description={"The label of the option group."}
-/>
-
-### OptionProps
-
-<PropsCard
-  id="option-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={"If `true`, the list element will be closed when selected."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="option-icon"
-  name="icon"
-  type="ReactElement<any, string | JSXElementConstructor<any>>"
-/>
-
-<PropsCard
-  id="option-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the select option will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="option-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={"If `true`, the select option will be focusable."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="option-value"
-  name="value"
-  type="string"
-  description={"The value of the select option."}
 />

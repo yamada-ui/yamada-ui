@@ -21,3 +21,6 @@ export const Thead = forwardRef<TableHeadProps, "thead">(
     )
   },
 )
+
+Thead.displayName = "Thead"
+Thead.__ui__ = "Thead"

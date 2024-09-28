@@ -11,8 +11,7 @@ import {
   omitThemeProps,
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
-import { useToken } from "@yamada-ui/use-token"
-import { cx, isUnit, replaceObject, valueToPercent } from "@yamada-ui/utils"
+import { cx, valueToPercent } from "@yamada-ui/utils"
 import type { FC } from "react"
 
 interface CircleProgressOptions {
@@ -91,14 +90,14 @@ export interface CircleProgressProps
  */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   (props, ref) => {
-    const [styles, { size = "6em", ...mergedProps }] = useComponentStyle(
+    const [styles, { size = "6rem", ...mergedProps }] = useComponentStyle(
       "CircleProgress",
       props,
     )
     let {
       className,
       children,
-      boxSize,
+      boxSize = size,
       thickness = "0.625rem",
       color = "primary",
       trackColor = "border",
@@ -110,13 +109,6 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
       speed = ["1.4s", "2s"],
       ...rest
     } = omitThemeProps(mergedProps)
-
-    boxSize ??= replaceObject(size, (value) =>
-      !isUnit(value) ? useToken("sizes", value) : value,
-    )
-    thickness = replaceObject(thickness, (value) =>
-      !isUnit(value) ? useToken("sizes", value) : value,
-    )
 
     const isTransparent = value === 0 && !isAnimation
     const percent = valueToPercent(value, min, max)
@@ -145,7 +137,11 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
 
     const css: CSSUIObject = {
       ...styles,
-      fontSize: boxSize,
+      vars: [
+        { name: "boxSize", token: "sizes", value: boxSize },
+        { name: "thickness", token: "sizes", value: thickness },
+      ],
+      fontSize: "$boxSize",
     }
 
     const circleProps: CircleProps = isAnimation
@@ -169,10 +165,10 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
         {...rest}
       >
         <Shape boxSize={boxSize} isAnimation={isAnimation} speed={speed}>
-          <Circle stroke={trackColor} strokeWidth={thickness} />
+          <Circle stroke={trackColor} strokeWidth="$thickness" />
           <Circle
             stroke={color}
-            strokeWidth={thickness}
+            strokeWidth="$thickness"
             strokeLinecap={isRounded ? "round" : undefined}
             opacity={isTransparent ? 0 : undefined}
             {...circleProps}

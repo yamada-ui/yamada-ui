@@ -112,6 +112,10 @@ app.get("*", (c) => {
   const colorMode = getCookie(c, "ui-color-mode")
   const themeScheme = getCookie(c, "ui-theme-scheme")
 
+  const initialColorMode: ColorModeWithSystem | undefined = colorMode
+    ? (colorMode as ColorModeWithSystem)
+    : defaultConfig.initialColorMode
+
   return c.html(
     renderToString(
       <html lang="ja">
@@ -123,7 +127,7 @@ app.get("*", (c) => {
           <ColorModeScript
             type="cookie"
             nonce="testing"
-            initialColorMode={colorMode ?? defaultConfig.initialColorMode}
+            initialColorMode={initialColorMode}
           />
           <ThemeSchemeScript
             type="cookie"

@@ -1,4 +1,4 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
+import type { FC, CSSUIObject, HTMLUIProps, ThemeProps } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -23,7 +23,6 @@ import {
 } from "@yamada-ui/utils"
 import type {
   DetailedHTMLProps,
-  FC,
   OptionHTMLAttributes,
   ReactElement,
 } from "react"
@@ -207,6 +206,9 @@ export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   },
 )
 
+NativeSelect.displayName = "NativeSelect"
+NativeSelect.__ui__ = "NativeSelect"
+
 interface NativeSelectIconProps extends HTMLUIProps {}
 
 const NativeSelectIcon: FC<NativeSelectIconProps> = ({
@@ -248,11 +250,17 @@ const NativeSelectIcon: FC<NativeSelectIconProps> = ({
   )
 }
 
+NativeSelectIcon.displayName = "NativeSelectIcon"
+NativeSelectIcon.__ui__ = "NativeSelectIcon"
+
 export interface NativeOptionGroupProps extends HTMLUIProps<"optgroup"> {}
 
 export const NativeOptionGroup = forwardRef<NativeOptionGroupProps, "optgroup">(
   (props, ref) => <ui.optgroup ref={ref} {...props} />,
 )
+
+NativeOptionGroup.displayName = "NativeOptionGroup"
+NativeOptionGroup.__ui__ = "NativeOptionGroup"
 
 export interface NativeOptionProps
   extends Omit<HTMLUIProps<"option">, "children"> {
@@ -262,3 +270,6 @@ export interface NativeOptionProps
 export const NativeOption = forwardRef<NativeOptionProps, "option">(
   (props, ref) => <ui.option ref={ref} {...props} />,
 )
+
+NativeOption.displayName = "NativeOption"
+NativeOption.__ui__ = "NativeOption"

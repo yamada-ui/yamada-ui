@@ -41,3 +41,6 @@ export const IconButton = forwardRef<IconButtonProps, "button">(
     )
   },
 )
+
+IconButton.displayName = "IconButton"
+IconButton.__ui__ = "IconButton"

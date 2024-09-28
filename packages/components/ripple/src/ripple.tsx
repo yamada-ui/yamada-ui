@@ -1,9 +1,9 @@
 import type { CSSUIObject } from "@yamada-ui/core"
+import type { FC } from "@yamada-ui/core"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import type { MotionProps } from "@yamada-ui/motion"
 import { cx, handlerAll } from "@yamada-ui/utils"
 import type { Key } from "react"
-import { FC } from "@yamada-ui/core"
 import type { RippleOptions } from "./use-ripple"
 
 const clamp = (value: number, min: number, max: number) =>

@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { HTMLUIProps, ThemeProps, CSSUIObject, FC } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -8,7 +8,7 @@ import {
 import { Icon } from "@yamada-ui/icon"
 import { useClickable } from "@yamada-ui/use-clickable"
 import { cx } from "@yamada-ui/utils"
-import type { FC, HTMLAttributes, MouseEventHandler, ReactElement } from "react"
+import type { HTMLAttributes, MouseEventHandler, ReactElement } from "react"
 import { useRef } from "react"
 
 interface TagOptions {

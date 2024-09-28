@@ -1,5 +1,5 @@
-import type { FC } from "@yamada-ui/core"
 import type {
+  FC,
   HTMLUIProps,
   ThemeProps,
   ComponentArgs,

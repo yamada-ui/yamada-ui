@@ -1,5 +1,106 @@
 # @yamada-ui/react
 
+## 1.5.3
+
+### Patch Changes
+
+- Updated dependencies [[`10fb607`](https://github.com/yamada-ui/yamada-ui/commit/10fb607b113a34c1ce408485c192cae7217ae6ce), [`9032dd8`](https://github.com/yamada-ui/yamada-ui/commit/9032dd88a9ef0a7e3f2baecdbddfcb55d8ac7f72), [`706e59f`](https://github.com/yamada-ui/yamada-ui/commit/706e59f1639a5d3f142a4c55b925af7eedb67a1e), [`e2cebfe`](https://github.com/yamada-ui/yamada-ui/commit/e2cebfed43c964934fb9b6a72e4d9fed9892e396), [`c52462b`](https://github.com/yamada-ui/yamada-ui/commit/c52462b0c28893dd02271f835f3def256cb72830), [`eeca5a1`](https://github.com/yamada-ui/yamada-ui/commit/eeca5a177b7fc4d1eeb7f4f004e9a047a9e7de3a), [`c7acd55`](https://github.com/yamada-ui/yamada-ui/commit/c7acd55495014bcbedf1a64517f83bd659173594), [`d9e4bd3`](https://github.com/yamada-ui/yamada-ui/commit/d9e4bd3aa9420cf80ab6b11475bbdcd8d20ecf3f), [`23198ab`](https://github.com/yamada-ui/yamada-ui/commit/23198abb2e5bda00638414938a8fcf34d50a9dcc), [`1544b5d`](https://github.com/yamada-ui/yamada-ui/commit/1544b5df04116627cea6c1fb73518e4dce59aa5c), [`bece23b`](https://github.com/yamada-ui/yamada-ui/commit/bece23b727b267381de0330f2034b8d807aa40f0), [`ab500df`](https://github.com/yamada-ui/yamada-ui/commit/ab500dfe0faec516d4b5b82a2f585bfa7162032f), [`9405a5c`](https://github.com/yamada-ui/yamada-ui/commit/9405a5c4192d337d08683e631ff1e43258b203f0), [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed), [`693e062`](https://github.com/yamada-ui/yamada-ui/commit/693e06296776b5b843fe3183edbe7bf18407f7d7), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`40b4795`](https://github.com/yamada-ui/yamada-ui/commit/40b4795aaad605c3f62b8106663e59909ca84878), [`a5b29c5`](https://github.com/yamada-ui/yamada-ui/commit/a5b29c54a5f42a6e3ddd0e925b616a9145de24a8), [`56de7f2`](https://github.com/yamada-ui/yamada-ui/commit/56de7f20fc39e497732d256ba8f1f5eec5163f49), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`68d3c70`](https://github.com/yamada-ui/yamada-ui/commit/68d3c70d32eab391205d49c2f7bef8518feda23a), [`bd6ca9c`](https://github.com/yamada-ui/yamada-ui/commit/bd6ca9cffa1c2a04618f03e10b6ac04c220cc1d4), [`79c2b05`](https://github.com/yamada-ui/yamada-ui/commit/79c2b056174036d997cb277de703c905206e4c44), [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`16a3af7`](https://github.com/yamada-ui/yamada-ui/commit/16a3af7d3f8c811a777b46f42e4866af4f8faa0b), [`847f92b`](https://github.com/yamada-ui/yamada-ui/commit/847f92b1bc3f1b4670a3c2cb2bd3162ceefdb337), [`915ecee`](https://github.com/yamada-ui/yamada-ui/commit/915ecee35b52c883e8f22a485ec5638fbe9082ff), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`65fc347`](https://github.com/yamada-ui/yamada-ui/commit/65fc347b0ed9f74512961c576bd13e57f9110528), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`256a9af`](https://github.com/yamada-ui/yamada-ui/commit/256a9af8030ff3c1c55565b46640a31eca1417dc), [`19f699f`](https://github.com/yamada-ui/yamada-ui/commit/19f699fc3443473a65d6a36954d4121783ff76aa), [`fc77c21`](https://github.com/yamada-ui/yamada-ui/commit/fc77c21359bd4b9b255f8349744ac7ce19332066), [`66c3b81`](https://github.com/yamada-ui/yamada-ui/commit/66c3b817d898a3e147641a5c90ece90ca13c014b), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0), [`99fb88b`](https://github.com/yamada-ui/yamada-ui/commit/99fb88babda6e6f5cddd88d0b28a25e82842a0e8), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0), [`46c0fae`](https://github.com/yamada-ui/yamada-ui/commit/46c0fae2b6da67380c54ba519964dd2f127ae2fb), [`5ca781e`](https://github.com/yamada-ui/yamada-ui/commit/5ca781ec915025c0dfad36dc93ce283639c19feb), [`da306f6`](https://github.com/yamada-ui/yamada-ui/commit/da306f611ff0f5ee879281e154cc4800a14d85d9), [`b265da7`](https://github.com/yamada-ui/yamada-ui/commit/b265da7df8708a2b7948faf806d2074585a5c7d3), [`a223fdb`](https://github.com/yamada-ui/yamada-ui/commit/a223fdbcc059943ad3e033675df3fe6789e9a0e3), [`16aa608`](https://github.com/yamada-ui/yamada-ui/commit/16aa608b17e1c2937290c04e7abccde55bcad4f8)]:
+  - @yamada-ui/alert@1.0.41
+  - @yamada-ui/color-picker@1.4.3
+  - @yamada-ui/accordion@2.0.10
+  - @yamada-ui/checkbox@1.1.9
+  - @yamada-ui/radio@1.2.9
+  - @yamada-ui/textarea@1.1.30
+  - @yamada-ui/select@1.6.1
+  - @yamada-ui/tabs@1.0.40
+  - @yamada-ui/popover@1.3.3
+  - @yamada-ui/native-table@1.0.40
+  - @yamada-ui/autocomplete@1.5.3
+  - @yamada-ui/stat@1.0.38
+  - @yamada-ui/modal@1.3.11
+  - @yamada-ui/form-control@2.1.3
+  - @yamada-ui/slider@1.2.6
+  - @yamada-ui/breadcrumb@1.3.12
+  - @yamada-ui/loading@1.1.17
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/visually-hidden@1.0.12
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/scroll-area@1.0.39
+  - @yamada-ui/button@1.0.43
+  - @yamada-ui/focus-lock@1.0.22
+  - @yamada-ui/resizable@1.1.13
+  - @yamada-ui/badge@1.0.38
+  - @yamada-ui/transitions@1.1.6
+  - @yamada-ui/native-select@1.0.45
+  - @yamada-ui/segmented-control@1.0.41
+  - @yamada-ui/pagination@1.0.41
+  - @yamada-ui/pin-input@1.0.42
+  - @yamada-ui/progress@1.1.3
+  - @yamada-ui/skeleton@1.1.6
+  - @yamada-ui/tooltip@1.1.12
+  - @yamada-ui/rating@1.0.42
+  - @yamada-ui/switch@1.1.10
+  - @yamada-ui/toggle@1.0.22
+  - @yamada-ui/input@1.0.43
+  - @yamada-ui/close-button@1.0.41
+  - @yamada-ui/theme@1.18.2
+  - @yamada-ui/typography@1.0.38
+  - @yamada-ui/avatar@1.2.9
+  - @yamada-ui/card@1.0.40
+  - @yamada-ui/notice@1.1.4
+  - @yamada-ui/snacks@1.1.4
+  - @yamada-ui/menu@1.3.14
+  - @yamada-ui/editable@1.0.44
+  - @yamada-ui/file-button@1.1.6
+  - @yamada-ui/file-input@1.0.43
+  - @yamada-ui/number-input@1.1.15
+  - @yamada-ui/providers@1.2.8
+  - @yamada-ui/list@1.0.40
+  - @yamada-ui/reorder@2.0.11
+  - @yamada-ui/stepper@1.0.41
+  - @yamada-ui/tag@1.0.41
+  - @yamada-ui/highlight@1.0.38
+  - @yamada-ui/image@1.2.3
+  - @yamada-ui/indicator@1.1.38
+  - @yamada-ui/infinite-scroll-area@1.2.7
+  - @yamada-ui/kbd@1.0.38
+  - @yamada-ui/layouts@1.1.36
+  - @yamada-ui/link@1.0.38
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/ripple@1.0.39
+  - @yamada-ui/use-animation@1.0.38
+  - @yamada-ui/use-breakpoint@1.4.9
+  - @yamada-ui/use-media-query@1.0.48
+  - @yamada-ui/use-popper@1.0.38
+  - @yamada-ui/use-token@1.1.26
+  - @yamada-ui/use-value@1.1.26
+  - @yamada-ui/theme-tools@1.1.4
+  - @yamada-ui/portal@1.0.22
+  - @yamada-ui/use-clickable@1.2.9
+  - @yamada-ui/use-clipboard@1.0.22
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-counter@1.0.22
+  - @yamada-ui/use-descendant@1.0.22
+  - @yamada-ui/use-disclosure@1.0.21
+  - @yamada-ui/use-event-listener@1.0.21
+  - @yamada-ui/use-eye-dropper@1.0.19
+  - @yamada-ui/use-focus@1.0.22
+  - @yamada-ui/use-focus-visible@1.1.8
+  - @yamada-ui/use-hover@1.0.22
+  - @yamada-ui/use-idle@1.0.22
+  - @yamada-ui/use-infinite-scroll@1.1.5
+  - @yamada-ui/use-interval@1.0.21
+  - @yamada-ui/use-local-storage@1.0.22
+  - @yamada-ui/use-os@1.0.22
+  - @yamada-ui/use-outside-click@1.0.21
+  - @yamada-ui/use-pan-event@1.0.23
+  - @yamada-ui/use-previous@1.0.21
+  - @yamada-ui/use-resize-observer@1.0.21
+  - @yamada-ui/use-size@1.0.21
+  - @yamada-ui/use-timeout@1.0.21
+  - @yamada-ui/use-window-event@1.0.22
+
 ## 1.5.2
 
 ### Patch Changes

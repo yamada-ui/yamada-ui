@@ -1,5 +1,18 @@
 # @yamada-ui/progress
 
+## 1.1.3
+
+### Patch Changes
+
+- [#2929](https://github.com/yamada-ui/yamada-ui/pull/2929) [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize id generation with uuid.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/use-animation@1.0.38
+  - @yamada-ui/use-token@1.1.26
+  - @yamada-ui/use-value@1.1.26
+
 ## 1.1.2
 
 ### Patch Changes

@@ -75,3 +75,6 @@ export const NativeTable = forwardRef<NativeTableProps, "table">(
     )
   },
 )
+
+NativeTable.displayName = "NativeTable"
+NativeTable.__ui__ = "NativeTable"

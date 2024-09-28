@@ -17,8 +17,9 @@ export const Option = forwardRef<OptionProps, "li">(
     const { styles } = useSelectContext()
     const { isSelected, customIcon, children, getOptionProps } =
       useSelectOption(rest)
+    const uuid = useId()
 
-    id ??= useId()
+    id ??= uuid
     icon ??= customIcon
 
     const css: CSSUIObject = {
@@ -56,6 +57,9 @@ export const Option = forwardRef<OptionProps, "li">(
   },
 )
 
+Option.displayName = "Option"
+Option.__ui__ = "Option"
+
 type OptionIconProps = HTMLUIProps<"span">
 
 const OptionIcon = forwardRef<OptionIconProps, "span">(
@@ -81,6 +85,9 @@ const OptionIcon = forwardRef<OptionIconProps, "span">(
     )
   },
 )
+
+OptionIcon.displayName = "OptionIcon"
+OptionIcon.__ui__ = "OptionIcon"
 
 const CheckIcon: FC = () => (
   <svg viewBox="0 0 14 14" width="1em" height="1em">

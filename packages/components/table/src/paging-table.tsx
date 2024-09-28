@@ -287,3 +287,4 @@ export const PagingTable = forwardRef(
 } & ComponentArgs
 
 PagingTable.displayName = "PagingTable"
+PagingTable.__ui__ = "PagingTable"

@@ -75,7 +75,9 @@ export const useRadioGroup = <
   onChange: onChangeProp,
   ...props
 }: UseRadioGroupProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
   name ??= `radio-${id}`
 
   const onChangeRef = useCallbackRef(onChangeProp)

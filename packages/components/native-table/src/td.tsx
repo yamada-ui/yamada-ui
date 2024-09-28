@@ -31,3 +31,6 @@ export const Td = forwardRef<TdProps, "td">(
     )
   },
 )
+
+Td.displayName = "Td"
+Td.__ui__ = "Td"

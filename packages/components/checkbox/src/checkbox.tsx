@@ -1,4 +1,5 @@
 import type {
+  FC,
   HTMLUIProps,
   ThemeProps,
   ComponentArgs,
@@ -30,7 +31,6 @@ import type {
   ChangeEvent,
   ChangeEventHandler,
   CSSProperties,
-  FC,
   FocusEventHandler,
   InputHTMLAttributes,
   KeyboardEvent,
@@ -107,7 +107,10 @@ export const useCheckbox = <
   id,
   ...props
 }: UseCheckboxProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
+
   const {
     id: _id,
     name,
@@ -485,6 +488,7 @@ export const Checkbox = forwardRef(
 } & ComponentArgs
 
 Checkbox.displayName = "Checkbox"
+Checkbox.__ui__ = "Checkbox"
 
 export type CheckboxIconProps = MotionProps<"svg"> &
   FormControlOptions & {
@@ -550,6 +554,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
   )
 }
 
+CheckboxIcon.displayName = "CheckboxIcon"
+CheckboxIcon.__ui__ = "CheckboxIcon"
+
 const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   return (
     <motion.svg
@@ -579,6 +586,9 @@ const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   )
 }
 
+CheckIcon.displayName = "CheckIcon"
+CheckIcon.__ui__ = "CheckIcon"
+
 const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
   return (
     <motion.svg
@@ -605,3 +615,6 @@ const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
     </motion.svg>
   )
 }
+
+IndeterminateIcon.displayName = "IndeterminateIcon"
+IndeterminateIcon.__ui__ = "IndeterminateIcon"

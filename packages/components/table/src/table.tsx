@@ -150,3 +150,4 @@ export const Table = forwardRef(
 } & ComponentArgs
 
 Table.displayName = "Table"
+Table.__ui__ = "Table"

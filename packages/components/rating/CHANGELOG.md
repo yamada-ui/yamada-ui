@@ -1,5 +1,20 @@
 # @yamada-ui/rating
 
+## 1.0.42
+
+### Patch Changes
+
+- [#2929](https://github.com/yamada-ui/yamada-ui/pull/2929) [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize id generation with uuid.
+
+- Updated dependencies [[`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`56de7f2`](https://github.com/yamada-ui/yamada-ui/commit/56de7f20fc39e497732d256ba8f1f5eec5163f49), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/form-control@2.1.3
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-focus-visible@1.1.8
+
 ## 1.0.41
 
 ### Patch Changes

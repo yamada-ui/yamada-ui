@@ -1,5 +1,19 @@
 # @yamada-ui/core
 
+## 1.15.1
+
+### Patch Changes
+
+- [#2930](https://github.com/yamada-ui/yamada-ui/pull/2930) [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `mergeVars` function.
+
+- [#2846](https://github.com/yamada-ui/yamada-ui/pull/2846) [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Enhance element type checks and sorting.
+
+- [#2942](https://github.com/yamada-ui/yamada-ui/pull/2942) [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added `FunctionComponent` and `FC` type.
+
+- Updated dependencies [[`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2)]:
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/portal@1.0.22
+
 ## 1.15.0
 
 ### Minor Changes

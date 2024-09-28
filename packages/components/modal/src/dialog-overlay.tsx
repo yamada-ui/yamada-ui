@@ -23,3 +23,6 @@ export const DialogOverlay = motionForwardRef<DialogOverlayProps, "div">(
     )
   },
 )
+
+DialogOverlay.displayName = "DialogOverlay"
+DialogOverlay.__ui__ = "DialogOverlay"

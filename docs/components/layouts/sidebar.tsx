@@ -1,8 +1,8 @@
 import { VStack, forwardRef } from "@yamada-ui/react"
 import type { StackProps } from "@yamada-ui/react"
+import { memo } from "react"
 import { ScrollShadow } from "components/data-display"
 import { Tree } from "components/navigation"
-import { memo } from "react"
 
 export interface SidebarProps extends StackProps {}
 

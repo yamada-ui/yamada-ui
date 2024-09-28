@@ -95,3 +95,6 @@ export const ColorSelectorBody = forwardRef<ColorSelectorBodyProps, "div">(
     )
   },
 )
+
+ColorSelectorBody.displayName = "ColorSelectorBody"
+ColorSelectorBody.__ui__ = "ColorSelectorBody"

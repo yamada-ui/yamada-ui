@@ -213,6 +213,9 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
   },
 )
 
+ColorPicker.displayName = "ColorPicker"
+ColorPicker.__ui__ = "ColorPicker"
+
 type ColorPickerFieldProps = HTMLUIProps<"input">
 
 const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
@@ -240,6 +243,9 @@ const ColorPickerField = forwardRef<ColorPickerFieldProps, "input">(
   },
 )
 
+ColorPickerField.displayName = "ColorPickerField"
+ColorPickerField.__ui__ = "ColorPickerField"
+
 type ColorPickerSwatchProps = ColorSwatchProps
 
 const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
@@ -266,6 +272,9 @@ const ColorPickerSwatch = forwardRef<ColorPickerSwatchProps, "div">(
     )
   },
 )
+
+ColorPickerSwatch.displayName = "ColorPickerSwatch"
+ColorPickerSwatch.__ui__ = "ColorPickerSwatch"
 
 type ColorPickerEyeDropperProps = HTMLUIProps<"button">
 
@@ -314,3 +323,6 @@ const ColorPickerEyeDropper = forwardRef<ColorPickerEyeDropperProps, "button">(
     )
   },
 )
+
+ColorPickerEyeDropper.displayName = "ColorPickerEyeDropper"
+ColorPickerEyeDropper.__ui__ = "ColorPickerEyeDropper"

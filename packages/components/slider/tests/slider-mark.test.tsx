@@ -3,12 +3,11 @@ import { Slider, SliderMark } from "../src"
 
 describe("<SliderMark />", () => {
   test("should render correctly", async () => {
-    const { container } = render(
+    await a11y(
       <Slider>
         <SliderMark value={25}>25%</SliderMark>
       </Slider>,
     )
-    await a11y(container)
   })
 
   test("should display correct value", () => {

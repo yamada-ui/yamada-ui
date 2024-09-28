@@ -21,3 +21,5 @@ export const VisuallyHidden = ui("span", {
     position: "absolute",
   },
 })
+VisuallyHidden.displayName = "VisuallyHidden"
+VisuallyHidden.__ui__ = "VisuallyHidden"

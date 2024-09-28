@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { colorSchemes } from "../../components"
 import {
   Card,
   CardHeader,
@@ -11,7 +12,6 @@ import {
   Image,
   VStack,
 } from "@yamada-ui/react"
-import { colorSchemes } from "../../components"
 
 type Story = StoryFn<typeof Card>
 

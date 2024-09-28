@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useMemo, useState } from "react"
+import { PropControl } from "../../components"
 import type {
   ChartTooltip,
   RadarChartProps,
@@ -14,8 +16,6 @@ import {
   Wrap,
   Text,
 } from "@yamada-ui/react"
-import { useMemo, useState } from "react"
-import { PropControl } from "../../components"
 
 type Story = StoryFn<typeof RadarChart>
 

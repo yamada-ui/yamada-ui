@@ -72,7 +72,10 @@ export const useRadio = <
   id,
   ...props
 }: UseRadioProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
+
   const {
     id: _id,
     name,
@@ -376,3 +379,4 @@ export const Radio = forwardRef(
 } & ComponentArgs
 
 Radio.displayName = "Radio"
+Radio.__ui__ = "Radio"

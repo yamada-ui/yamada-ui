@@ -75,7 +75,9 @@ export const useRadioGroup = <
   onChange: onChangeProp,
   ...props
 }: UseRadioGroupProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
   name ??= `radio-${id}`
 
   const onChangeRef = useCallbackRef(onChangeProp)
@@ -263,3 +265,4 @@ export const RadioGroup = forwardRef(
 } & ComponentArgs
 
 RadioGroup.displayName = "RadioGroup"
+RadioGroup.__ui__ = "RadioGroup"

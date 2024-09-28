@@ -8,14 +8,13 @@ import {
 
 describe("<RangeSliderMark />", () => {
   test("should render correctly", async () => {
-    const { container } = render(
+    await a11y(
       <RangeSlider>
         <RangeSliderMark value={25} w="10" ml="-5">
           25%
         </RangeSliderMark>
       </RangeSlider>,
     )
-    await a11y(container)
   })
 
   test("should display correct value", () => {

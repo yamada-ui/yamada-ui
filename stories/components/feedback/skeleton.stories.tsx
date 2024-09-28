@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useEffect, useState } from "react"
 import {
   Avatar,
   Heading,
@@ -7,7 +8,6 @@ import {
   SkeletonText,
   Text,
 } from "@yamada-ui/react"
-import { useEffect, useState } from "react"
 
 type Story = StoryFn<typeof Skeleton>
 

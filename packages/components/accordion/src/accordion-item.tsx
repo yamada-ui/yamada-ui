@@ -4,7 +4,7 @@ import {
   ariaAttr,
   cx,
   dataAttr,
-  findChildren,
+  findChild,
   getValidChildren,
   handlerAll,
   isArray,
@@ -55,7 +55,10 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     { id, className, isDisabled = false, label, icon, children, ...rest },
     ref,
   ) => {
-    id ??= useId()
+    const uuid = useId()
+
+    id ??= uuid
+
     const itemId = `${id}-item`
     const panelId = `${id}-panel`
 
@@ -189,8 +192,8 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customAccordionLabel] = findChildren(validChildren, AccordionLabel)
-    const [customAccordionPanel] = findChildren(validChildren, AccordionPanel)
+    const customAccordionLabel = findChild(validChildren, AccordionLabel)
+    const customAccordionPanel = findChild(validChildren, AccordionPanel)
 
     const cloneChildren = !isEmpty(validChildren)
       ? omitChildren(validChildren, AccordionLabel, AccordionPanel)
@@ -219,3 +222,6 @@ export const AccordionItem = forwardRef<AccordionItemProps, "div">(
     )
   },
 )
+
+AccordionItem.displayName = "AccordionItem"
+AccordionItem.__ui__ = "AccordionItem"

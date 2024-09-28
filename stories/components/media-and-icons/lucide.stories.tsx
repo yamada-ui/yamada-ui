@@ -1,10 +1,10 @@
 import { burger } from "@lucide/lab"
 import type { Meta, StoryFn } from "@storybook/react"
+import type { FC } from "react"
 import type { IconNames } from "@yamada-ui/lucide"
 import { Ghost, Icon, icons } from "@yamada-ui/lucide"
 import type { IconProps } from "@yamada-ui/react"
 import { HStack } from "@yamada-ui/react"
-import type { FC } from "react"
 
 type Story = StoryFn<typeof Ghost>
 

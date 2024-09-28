@@ -853,7 +853,7 @@ export type Pseudos = typeof pseudos
 export type PseudoProperty = keyof Pseudos
 export type PseudoSelector = Pseudos[PseudoProperty]
 export type PseudoProps = {
-  [K in PseudoProperty]?: CSSUIObject
+  [K in keyof Pseudos]?: CSSUIObject
 }
 
 export const pseudoProperties = Object.keys(pseudos) as PseudoProperty[]

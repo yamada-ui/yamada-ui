@@ -2,9 +2,9 @@
 title: Button
 description: "`Button`は、フォームの送信、モーダルの開閉など、ユーザーが操作できるインタラクティブなコンポーネントです。"
 package_name: "@yamada-ui/button"
+order: 1
 with_description: true
 tab: Props
-order: 1
 ---
 
 ## Props
@@ -14,7 +14,7 @@ order: 1
 <PropsCard
   id="button-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue={"gray"}
 />
@@ -72,10 +72,10 @@ order: 1
   id="button-loadingicon"
   name="loadingIcon"
   type='type ONLY_FOR_FORMAT =
-  | "audio"
   | "grid"
   | ReactElement<any, string | JSXElementConstructor<any>>
   | "oval"
+  | "audio"
   | "dots"
   | "puff"
   | "rings"
@@ -128,7 +128,7 @@ order: 1
 <PropsCard
   id="buttongroup-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<"base" | (string & {}) | "sm" | "md" | "lg" | "xl" | "2xl", FlexDirection>> | ColorModeArray<...> | Partial<...> | ColorModeArray<...> | ((theme: StyledTheme) => UIValue...'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...'
   description={"The CSS `flex-direction` property."}
 />
 

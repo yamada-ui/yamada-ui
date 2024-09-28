@@ -49,18 +49,29 @@ const OVERRIDE_PATHS: {
     "spacer",
     "stack",
   ],
-  select: ["multi-select"],
+  select: ["select", "multi-select"],
   calendar: [
+    "calendar",
     "date-picker",
     "multi-date-picker",
     "range-date-picker",
     "month-picker",
     "year-picker",
   ],
-  slider: ["range-slider"],
-  table: ["paging-table"],
-  autocomplete: ["multi-autocomplete"],
+  slider: ["slider", "range-slider"],
+  table: ["table", "paging-table"],
+  autocomplete: ["autocomplete", "multi-autocomplete"],
   modal: [
+    {
+      parent: "modal",
+      children: [
+        "modal-header",
+        "modal-body",
+        "modal-footer",
+        "modal-overlay",
+        "modal-close-button",
+      ],
+    },
     {
       parent: "dialog",
       children: [
@@ -94,17 +105,18 @@ const OVERRIDE_PATHS: {
       children: ["legend"],
     },
   ],
-  progress: ["circle-progress"],
+  progress: ["progress", "circle-progress"],
   "color-picker": [
+    "color-picker",
     "color-selector",
     "hue-slider",
     "alpha-slider",
     "saturation-slider",
     "color-swatch",
   ],
-  button: ["icon-button"],
+  button: [{ parent: "button", children: ["button-group"] }, "icon-button"],
   image: ["image", "native-image"],
-  link: [{ parent: "link-box", children: ["link-overlay"] }],
+  link: ["link", { parent: "link-box", children: ["link-overlay"] }],
   charts: [
     { parent: "bar-chart", children: ["bar"] },
     { parent: "area-chart", children: ["area"] },
@@ -221,14 +233,6 @@ const generateContent = async ({
         name,
         { type, required, description, deprecated, defaultValue, see },
       ]) => {
-        if (typeof type === "string") {
-          type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
-        }
-
-        if (typeof defaultValue === "string" && description) {
-          description = description.replace(/\n/g, "\\n")
-        }
-
         const props = [
           `id="${title.toLowerCase()}-${name.toLowerCase()}"`,
           `name="${name}"`,
@@ -236,7 +240,13 @@ const generateContent = async ({
 
         if (required) props.push("required")
 
-        if (type !== undefined) props.push(`type='${type}'`)
+        if (type !== undefined) {
+          if (typeof type === "string") {
+            type = type.replace(/<\s+/g, "<").replace(/\s+>/g, ">")
+          }
+
+          props.push(`type='${type}'`)
+        }
 
         if (description !== undefined) {
           if (typeof description === "string") {
@@ -257,8 +267,9 @@ const generateContent = async ({
         }
 
         if (defaultValue !== undefined) {
-          if (typeof defaultValue === "string")
+          if (typeof defaultValue === "string") {
             defaultValue = defaultValue.replace(/"/g, '\\"')
+          }
 
           props.push(`defaultValue={"${defaultValue}"}`)
         }

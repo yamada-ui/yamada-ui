@@ -1,5 +1,4 @@
-import type { CSSUIObject } from "@yamada-ui/core"
-import type { FC } from "@yamada-ui/core"
+import type { CSSUIObject, FC } from "@yamada-ui/core"
 import { AnimatePresence, motion } from "@yamada-ui/motion"
 import type { MotionProps } from "@yamada-ui/motion"
 import { cx, handlerAll } from "@yamada-ui/utils"

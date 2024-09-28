@@ -1,5 +1,15 @@
 # @yamada-ui/card
 
+## 1.0.40
+
+### Patch Changes
+
+- [#2988](https://github.com/yamada-ui/yamada-ui/pull/2988) [`16aa608`](https://github.com/yamada-ui/yamada-ui/commit/16aa608b17e1c2937290c04e7abccde55bcad4f8) Thanks [@cidkumagai](https://github.com/cidkumagai)! - Set the `displayName` and `__ui__` for `@yamada-ui/card`
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+
 ## 1.0.39
 
 ### Patch Changes

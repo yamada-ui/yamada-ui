@@ -1,5 +1,15 @@
 # @yamada-ui/scroll-area
 
+## 1.0.39
+
+### Patch Changes
+
+- [#2976](https://github.com/yamada-ui/yamada-ui/pull/2976) [`bd6ca9c`](https://github.com/yamada-ui/yamada-ui/commit/bd6ca9cffa1c2a04618f03e10b6ac04c220cc1d4) Thanks [@0xtkey256](https://github.com/0xtkey256)! - Set `displayName` for `scroll-area` component to improve debugging
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+
 ## 1.0.38
 
 ### Patch Changes

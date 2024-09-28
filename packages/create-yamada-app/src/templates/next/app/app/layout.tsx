@@ -1,6 +1,6 @@
 "use client"
 
-import { UIProvider } from "@yamada-ui/react"
+import { UIProvider, ColorModeScript } from "@yamada-ui/react"
 
 export default function RootLayout({
   children,
@@ -14,6 +14,7 @@ export default function RootLayout({
       </head>
 
       <body>
+        <ColorModeScript />
         <UIProvider>{children}</UIProvider>
       </body>
     </html>

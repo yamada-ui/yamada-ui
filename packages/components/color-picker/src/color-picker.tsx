@@ -15,7 +15,7 @@ import {
   runIfFunc,
 } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
-import { cloneElement, useEffect, useRef } from "react"
+import { cloneElement, useRef } from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import { ColorSelector } from "./color-selector"
 import { EyeDropperIcon } from "./color-selector-eye-dropper"
@@ -104,11 +104,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
     })
     const contentRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-      if (contentRef.current) {
-        contentRef.current.removeAttribute("role")
-      }
-    }, [])
     let {
       className,
       children,

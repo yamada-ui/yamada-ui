@@ -23,3 +23,6 @@ export const ModalHeader = forwardRef<ModalHeaderProps, "header">(
     )
   },
 )
+
+ModalHeader.displayName = "ModalHeader"
+ModalHeader.__ui__ = "ModalHeader"

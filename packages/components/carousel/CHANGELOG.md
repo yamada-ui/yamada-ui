@@ -1,5 +1,26 @@
 # @yamada-ui/carousel
 
+## 2.0.6
+
+### Patch Changes
+
+- [#2922](https://github.com/yamada-ui/yamada-ui/pull/2922) [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replace `findChildren` with `findChild`.
+
+- [#2973](https://github.com/yamada-ui/yamada-ui/pull/2973) [`c7bf1c7`](https://github.com/yamada-ui/yamada-ui/commit/c7bf1c75c2ce481bfe08e4a02e764f747c4d18ed) Thanks [@Shunii85](https://github.com/Shunii85)! - set the component names to `displayName` and `__ui__`
+
+- [#2993](https://github.com/yamada-ui/yamada-ui/pull/2993) [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#3000](https://github.com/yamada-ui/yamada-ui/pull/3000) [`6c40228`](https://github.com/yamada-ui/yamada-ui/commit/6c40228cc6dce49c6a24f7394269c3773e379944) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where the display would become strange when the screen was resized.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`79c2b05`](https://github.com/yamada-ui/yamada-ui/commit/79c2b056174036d997cb277de703c905206e4c44), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/button@1.0.43
+  - @yamada-ui/use-token@1.1.26
+  - @yamada-ui/use-value@1.1.26
+  - @yamada-ui/use-controllable-state@1.0.21
+
 ## 2.0.5
 
 ### Patch Changes

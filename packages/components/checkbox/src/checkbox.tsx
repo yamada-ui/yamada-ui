@@ -1,4 +1,5 @@
 import type {
+  FC,
   HTMLUIProps,
   ThemeProps,
   ComponentArgs,
@@ -30,7 +31,6 @@ import type {
   ChangeEvent,
   ChangeEventHandler,
   CSSProperties,
-  FC,
   FocusEventHandler,
   InputHTMLAttributes,
   KeyboardEvent,
@@ -107,7 +107,10 @@ export const useCheckbox = <
   id,
   ...props
 }: UseCheckboxProps<Y> & M) => {
-  id ??= useId()
+  const uuid = useId()
+
+  id ??= uuid
+
   const {
     id: _id,
     name,
@@ -477,6 +480,7 @@ export const Checkbox = forwardRef(
 } & ComponentArgs
 
 Checkbox.displayName = "Checkbox"
+Checkbox.__ui__ = "Checkbox"
 
 export type CheckboxIconProps = MotionProps<"svg"> &
   FormControlOptions & {
@@ -531,9 +535,9 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
             }
           >
             {isIndeterminate ? (
-              <IndeterminateIcon {...rest} />
+              <CheckboxIndeterminateIcon {...rest} />
             ) : (
-              <CheckIcon {...rest} />
+              <CheckboxCheckIcon {...rest} />
             )}
           </motion.div>
         </ui.div>
@@ -542,7 +546,12 @@ export const CheckboxIcon: FC<CheckboxIconProps> = ({
   )
 }
 
-const CheckIcon: FC<MotionProps<"svg">> = (props) => {
+CheckboxIcon.displayName = "CheckboxIcon"
+CheckboxIcon.__ui__ = "CheckboxIcon"
+
+interface CheckboxCheckIconProps extends MotionProps<"svg"> {}
+
+const CheckboxCheckIcon: FC<CheckboxCheckIconProps> = (props) => {
   return (
     <motion.svg
       width="1.2em"
@@ -571,7 +580,14 @@ const CheckIcon: FC<MotionProps<"svg">> = (props) => {
   )
 }
 
-const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
+CheckboxCheckIcon.displayName = "CheckboxCheckIcon"
+CheckboxCheckIcon.__ui__ = "CheckboxCheckIcon"
+
+interface CheckboxIndeterminateIconProps extends MotionProps<"svg"> {}
+
+const CheckboxIndeterminateIcon: FC<CheckboxIndeterminateIconProps> = (
+  props,
+) => {
   return (
     <motion.svg
       width="1.2em"
@@ -597,3 +613,6 @@ const IndeterminateIcon: FC<MotionProps<"svg">> = (props) => {
     </motion.svg>
   )
 }
+
+CheckboxIndeterminateIcon.displayName = "CheckboxIndeterminateIcon"
+CheckboxIndeterminateIcon.__ui__ = "CheckboxIndeterminateIcon"

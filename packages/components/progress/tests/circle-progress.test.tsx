@@ -11,7 +11,7 @@ describe("<CircleProgress />", () => {
       <>
         <CircleProgress
           data-testid="circle-progress-a"
-          size="8rem"
+          boxSize="8rem"
           thickness="0.5rem"
           color="green.500"
           trackColor="gray.300"
@@ -44,9 +44,13 @@ describe("<CircleProgress />", () => {
     expect(screen.getByTestId("circle-progress-c")).toBeInTheDocument()
   })
 
-  test("Whether the size is render correctly", () => {
+  test("Whether the boxSize is render correctly", () => {
     render(
-      <CircleProgress data-testid="circle-progress" value={50} size="120px" />,
+      <CircleProgress
+        data-testid="circle-progress"
+        value={50}
+        boxSize="120px"
+      />,
     )
 
     const circleProgressChild =

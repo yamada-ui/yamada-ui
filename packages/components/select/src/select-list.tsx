@@ -76,3 +76,6 @@ export const SelectList = forwardRef<SelectListProps, "ul">(
     )
   },
 )
+
+SelectList.displayName = "SelectList"
+SelectList.__ui__ = "SelectList"

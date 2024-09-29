@@ -34,6 +34,9 @@ export const CarouselControlPrev = forwardRef<CarouselControlProps, "button">(
   },
 )
 
+CarouselControlPrev.displayName = "CarouselControlPrev"
+CarouselControlPrev.__ui__ = "CarouselControlPrev"
+
 export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
   ({ className, ...rest }, ref) => {
     const { orientation } = useCarouselContext()
@@ -60,6 +63,9 @@ export const CarouselControlNext = forwardRef<CarouselControlProps, "button">(
   },
 )
 
+CarouselControlNext.displayName = "CarouselControlNext"
+CarouselControlNext.__ui__ = "CarouselControlNext"
+
 const CarouselControl = forwardRef<
   CarouselControlProps & { operation: "prev" | "next" },
   "button"
@@ -84,3 +90,6 @@ const CarouselControl = forwardRef<
     />
   )
 })
+
+CarouselControl.displayName = "CarouselControl"
+CarouselControl.__ui__ = "CarouselControl"

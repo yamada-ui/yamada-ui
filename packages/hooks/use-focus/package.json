@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-focus",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Yamada UI useFocus custom hook",
   "keywords": [
     "use-focus"

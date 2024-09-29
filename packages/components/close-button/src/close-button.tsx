@@ -82,3 +82,6 @@ export const CloseButton = forwardRef<CloseButtonProps, "button">(
     )
   },
 )
+
+CloseButton.displayName = "CloseButton"
+CloseButton.__ui__ = "CloseButton"

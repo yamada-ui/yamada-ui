@@ -1,5 +1,29 @@
 # @yamada-ui/select
 
+## 1.6.1
+
+### Patch Changes
+
+- [#2955](https://github.com/yamada-ui/yamada-ui/pull/2955) [`c7acd55`](https://github.com/yamada-ui/yamada-ui/commit/c7acd55495014bcbedf1a64517f83bd659173594) Thanks [@kiran0022](https://github.com/kiran0022)! - add displyName and **ui** to select component
+
+- [#2917](https://github.com/yamada-ui/yamada-ui/pull/2917) [`68d3c70`](https://github.com/yamada-ui/yamada-ui/commit/68d3c70d32eab391205d49c2f7bef8518feda23a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Update `useSelectOption` signature.
+
+- [#2929](https://github.com/yamada-ui/yamada-ui/pull/2929) [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize id generation with uuid.
+
+- Updated dependencies [[`23198ab`](https://github.com/yamada-ui/yamada-ui/commit/23198abb2e5bda00638414938a8fcf34d50a9dcc), [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`56de7f2`](https://github.com/yamada-ui/yamada-ui/commit/56de7f20fc39e497732d256ba8f1f5eec5163f49), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/popover@1.3.3
+  - @yamada-ui/form-control@2.1.3
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/portal@1.0.22
+  - @yamada-ui/use-clickable@1.2.9
+  - @yamada-ui/use-controllable-state@1.0.21
+  - @yamada-ui/use-descendant@1.0.22
+  - @yamada-ui/use-disclosure@1.0.21
+  - @yamada-ui/use-outside-click@1.0.21
+
 ## 1.6.0
 
 ### Minor Changes

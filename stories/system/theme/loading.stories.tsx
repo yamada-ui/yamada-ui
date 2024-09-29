@@ -1,3 +1,5 @@
+import type { FC } from "react"
+import { useEffect, useCallback } from "react"
 import {
   UIProvider,
   extendConfig,
@@ -12,8 +14,6 @@ import {
   isValidElement,
   VStack,
 } from "@yamada-ui/react"
-import type { FC } from "react"
-import { useEffect, useCallback } from "react"
 
 export default {
   title: "System / Theme / Loading",

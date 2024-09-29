@@ -34,3 +34,6 @@ export const Badge = forwardRef<BadgeProps, "span">((props, ref) => {
     />
   )
 })
+
+Badge.displayName = "Badge"
+Badge.__ui__ = "Badge"

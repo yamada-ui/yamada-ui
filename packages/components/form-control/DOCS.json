@@ -159,12 +159,7 @@
       "required": false,
       "description": "If `true`, switch between helper message and error message using isInvalid."
     },
-    "isRequired": {
-      "type": "boolean",
-      "defaultValue": false,
-      "required": false,
-      "description": "If `true`, the fieldset will be required."
-    },
+    "isRequired": { "type": "boolean", "required": false },
     "legend": {
       "type": "type ONLY_FOR_FORMAT =\n  | string\n  | number\n  | boolean\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | Iterable<ReactNode>\n  | ReactPortal",
       "required": false,

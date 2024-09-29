@@ -459,6 +459,10 @@ export {
   BriefcaseBusiness as BriefcaseBusinessIcon,
 } from "./briefcase-business"
 export {
+  BriefcaseConveyorBelt,
+  BriefcaseConveyorBelt as BriefcaseConveyorBeltIcon,
+} from "./briefcase-conveyor-belt"
+export {
   BriefcaseMedical,
   BriefcaseMedical as BriefcaseMedicalIcon,
 } from "./briefcase-medical"
@@ -820,6 +824,7 @@ export { Clock6, Clock6 as Clock6Icon } from "./clock6"
 export { Clock7, Clock7 as Clock7Icon } from "./clock7"
 export { Clock8, Clock8 as Clock8Icon } from "./clock8"
 export { Clock9, Clock9 as Clock9Icon } from "./clock9"
+export { ClockAlert, ClockAlert as ClockAlertIcon } from "./clock-alert"
 export {
   ClockArrowDown,
   ClockArrowDown as ClockArrowDownIcon,
@@ -1092,6 +1097,7 @@ export { FileText, FileText as FileTextIcon } from "./file-text"
 export { FileType2, FileType2 as FileType2Icon } from "./file-type2"
 export { FileType, FileType as FileTypeIcon } from "./file-type"
 export { FileUp, FileUp as FileUpIcon } from "./file-up"
+export { FileUser, FileUser as FileUserIcon } from "./file-user"
 export { FileVideo2, FileVideo2 as FileVideo2Icon } from "./file-video2"
 export { FileVideo, FileVideo as FileVideoIcon } from "./file-video"
 export { FileVolume2, FileVolume2 as FileVolume2Icon } from "./file-volume2"
@@ -1296,6 +1302,7 @@ export {
 } from "./graduation-cap"
 export { Grape, Grape as GrapeIcon } from "./grape"
 export { Grid2x2Check, Grid2x2Check as Grid2x2CheckIcon } from "./grid2x2-check"
+export { Grid2x2Plus, Grid2x2Plus as Grid2x2PlusIcon } from "./grid2x2-plus"
 export { Grid2x2X, Grid2x2X as Grid2x2XIcon } from "./grid2x2-x"
 export { Grid2x2, Grid2x2 as Grid2x2Icon } from "./grid2x2"
 export { Grid3x3, Grid3x3 as Grid3x3Icon } from "./grid3x3"
@@ -1336,6 +1343,7 @@ export { Heading4, Heading4 as Heading4Icon } from "./heading4"
 export { Heading5, Heading5 as Heading5Icon } from "./heading5"
 export { Heading6, Heading6 as Heading6Icon } from "./heading6"
 export { Heading, Heading as HeadingIcon } from "./heading"
+export { HeadphoneOff, HeadphoneOff as HeadphoneOffIcon } from "./headphone-off"
 export { Headphones, Headphones as HeadphonesIcon } from "./headphones"
 export { Headset, Headset as HeadsetIcon } from "./headset"
 export { HeartCrack, HeartCrack as HeartCrackIcon } from "./heart-crack"
@@ -1612,6 +1620,10 @@ export {
   MessageSquareHeart as MessageSquareHeartIcon,
 } from "./message-square-heart"
 export {
+  MessageSquareLock,
+  MessageSquareLock as MessageSquareLockIcon,
+} from "./message-square-lock"
+export {
   MessageSquareMore,
   MessageSquareMore as MessageSquareMoreIcon,
 } from "./message-square-more"
@@ -1760,6 +1772,7 @@ export { NotepadText, NotepadText as NotepadTextIcon } from "./notepad-text"
 export { NutOff, NutOff as NutOffIcon } from "./nut-off"
 export { Nut, Nut as NutIcon } from "./nut"
 export { OctagonAlert, OctagonAlert as OctagonAlertIcon } from "./octagon-alert"
+export { OctagonMinus, OctagonMinus as OctagonMinusIcon } from "./octagon-minus"
 export { OctagonPause, OctagonPause as OctagonPauseIcon } from "./octagon-pause"
 export { OctagonX, OctagonX as OctagonXIcon } from "./octagon-x"
 export { Octagon, Octagon as OctagonIcon } from "./octagon"

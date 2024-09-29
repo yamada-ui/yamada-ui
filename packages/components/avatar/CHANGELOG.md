@@ -1,5 +1,18 @@
 # @yamada-ui/avatar
 
+## 1.2.9
+
+### Patch Changes
+
+- [#2952](https://github.com/yamada-ui/yamada-ui/pull/2952) [`5ca781e`](https://github.com/yamada-ui/yamada-ui/commit/5ca781ec915025c0dfad36dc93ce283639c19feb) Thanks [@esh2n](https://github.com/esh2n)! - Set displayName and **ui** after each component definition
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/image@1.2.3
+  - @yamada-ui/use-animation@1.0.38
+
 ## 1.2.8
 
 ### Patch Changes

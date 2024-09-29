@@ -1,7 +1,7 @@
 {
   "NumberInput": {
     "addonProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for addon component."
     },
@@ -23,7 +23,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for container element."
     },
@@ -31,6 +31,11 @@
       "type": "NumberDecrementStepperProps",
       "required": false,
       "description": "Props for decrement component."
+    },
+    "defaultValue": {
+      "type": "string | number",
+      "required": false,
+      "description": "The initial value of the counter.\nShould be less than `max` and greater than `min`."
     },
     "errorBorderColor": {
       "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | [...]",
@@ -103,10 +108,27 @@
       "required": false,
       "description": "This controls the value update behavior in general.\n\n- If `true` and you use the stepper or up/down arrow keys,\nthe value will not exceed the `max` or go lower than `min`.\n\n- If `false`, the value will be allowed to go out of range."
     },
+    "max": {
+      "type": "number",
+      "defaultValue": "Number.MAX_SAFE_INTEGER",
+      "required": false,
+      "description": "The maximum value of the counter"
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "Number.MIN_SAFE_INTEGER",
+      "required": false,
+      "description": "The minimum value of the counter"
+    },
     "onChange": {
       "type": "(valueAsString: string, valueAsNumber: number) => void",
       "required": false,
       "description": "The callback fired when the value changes."
+    },
+    "onInvalid": {
+      "type": "(\n  message: ValidityState,\n  value: string,\n  valueAsNumber: number,\n) => void",
+      "required": false,
+      "description": "The callback invoked when invalid number is entered."
     },
     "parse": {
       "type": "(value: string) => string",
@@ -123,6 +145,17 @@
       "type": "\"xs\" | \"sm\" | \"md\" | \"lg\"",
       "required": false,
       "description": "The size of the NumberInput."
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "The step used to increment or decrement the value."
+    },
+    "value": {
+      "type": "string | number",
+      "required": false,
+      "description": "The value of the counter.\nShould be less than `max` and greater than `min`."
     },
     "variant": {
       "defaultValue": "outline",
@@ -168,7 +201,7 @@
     },
     "id": { "type": "string", "required": false },
     "inputMode": {
-      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"search\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"decimal\"",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"text\"\n  | \"decimal\"\n  | \"none\"\n  | \"tel\"\n  | \"url\"\n  | \"email\"\n  | \"numeric\"\n  | \"search\"",
       "defaultValue": "'decimal'",
       "required": false,
       "description": "Hints at the type of data that might be entered by the user.\nIt also determines the type of keyboard shown to the user on mobile devices."

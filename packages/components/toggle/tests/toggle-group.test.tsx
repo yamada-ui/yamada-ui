@@ -154,4 +154,9 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByText("Option 1")).not.toHaveAttribute("data-selected")
     expect(screen.getByText("Option 2")).toHaveAttribute("data-selected")
   })
+
+  test("should have correct displayName and __ui__", () => {
+    expect(Toggle.displayName).toBe("Toggle")
+    expect(Toggle.__ui__).toBe("Toggle")
+  })
 })

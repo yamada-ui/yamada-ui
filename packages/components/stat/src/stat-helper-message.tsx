@@ -21,3 +21,6 @@ export const StatHelperMessage = forwardRef<StatHelperMessageProps, "dd">(
     )
   },
 )
+
+StatHelperMessage.displayName = "StatHelperMessage"
+StatHelperMessage.__ui__ = "StatHelperMessage"

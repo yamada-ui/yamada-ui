@@ -21,14 +21,14 @@ tab: Props
 <PropsCard
   id="input-errorbordercolor"
   name="errorBorderColor"
-  type='"border" | "link" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 320 more ... | [...]'
+  type='"border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 321 more ... | [...]'
   description={"The border color when the input is invalid."}
 />
 
 <PropsCard
   id="input-focusbordercolor"
   name="focusBorderColor"
-  type='"border" | "link" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 320 more ... | [...]'
+  type='"border" | BorderColor | "current" | "focus" | "whiteAlpha.50" | "whiteAlpha.100" | "whiteAlpha.200" | "whiteAlpha.300" | "whiteAlpha.400" | "whiteAlpha.500" | ... 321 more ... | [...]'
   description={"The border color when the input is focused."}
 />
 
@@ -104,6 +104,15 @@ tab: Props
 <PropsCard
   id="inputelement-isclick"
   name="isClick"
+  type="boolean"
+  description={"If `true`, the element clickable."}
+  deprecated={"Use `isClickable` instead."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="inputelement-isclickable"
+  name="isClickable"
   type="boolean"
   description={"If `true`, the element clickable."}
   defaultValue={"false"}

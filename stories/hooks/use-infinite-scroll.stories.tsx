@@ -1,4 +1,5 @@
 import type { Meta } from "@storybook/react"
+import { useRef, useState } from "react"
 import {
   Button,
   Card,
@@ -11,7 +12,6 @@ import {
   Text,
   useInfiniteScroll,
 } from "@yamada-ui/react"
-import { useRef, useState } from "react"
 
 const meta: Meta = {
   title: "Hooks / useInfiniteScroll",

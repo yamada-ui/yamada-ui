@@ -4,10 +4,10 @@ import * as p from "@clack/prompts"
 import c from "chalk"
 import { program } from "commander"
 import matter from "gray-matter"
+import { otherLocales } from "../../utils/i18n"
 import { prettier } from "libs/prettier"
 import toc from "markdown-toc"
 import { getResolvedPath } from "utils/path"
-import { otherLocales } from "../../utils/i18n"
 
 interface Content {
   title: string

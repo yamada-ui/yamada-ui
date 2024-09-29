@@ -11,7 +11,7 @@
       "description": "Number of elements visible on the end(right) edges."
     },
     "gap": {
-      "type": "UIValue<number | (string & {}) | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"normal\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 97 more ... | \"auto\">",
+      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 97 more ... | \"-4xl\">",
       "defaultValue": "'2'",
       "required": false,
       "description": "The left and right margin applied to the separator."
@@ -39,6 +39,12 @@
     }
   },
   "BreadcrumbItem": {
+    "gap": {
+      "type": "UIValue<number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 97 more ... | \"-4xl\">",
+      "defaultValue": "'2'",
+      "required": false,
+      "description": "The left and right margin applied to the separator."
+    },
     "isCurrentPage": {
       "type": "boolean",
       "defaultValue": false,
@@ -66,10 +72,16 @@
       "description": "If `true`, change to span element."
     }
   },
-  "BreadcrumbSeparator": {},
+  "BreadcrumbSeparator": {
+    "gap": {
+      "type": "number | \"px\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"auto\" | \"1\" | \"-1\" | \"2\" | \"-2\" | ... 102 more ... | ((theme: StyledTheme) => UIValue<...>)",
+      "required": false,
+      "description": "The CSS `margin-inline-start`, and `margin-inline-end` property."
+    }
+  },
   "BreadcrumbEllipsis": {
     "size": {
-      "type": "UIValue<number | (string & {}) | \"small\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 13 more ... | \"9xl\">",
+      "type": "UIValue<number | (string & {}) | \"small\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 13 more ... | \"9xl\">",
       "required": false,
       "deprecated": "Use `fontSize` instead.",
       "description": "The CSS `font-size` property."

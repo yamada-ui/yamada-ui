@@ -59,6 +59,11 @@
       "required": false,
       "description": "Ref to a reset function."
     },
+    "rootMargin": {
+      "type": "string",
+      "required": false,
+      "description": "Margin around the root. Can have values similar to the CSS margin property,\ne.g. \"10px 20px 30px 40px\" (top, right, bottom, left)."
+    },
     "rootRef": {
       "type": "RefObject<HTMLElement>",
       "required": false,
@@ -75,8 +80,13 @@
       "required": false,
       "description": "If set the `onLoad` function will start from the given index.\nIf `initialLoad` is `true`, index starts from `0`."
     },
+    "threshold": {
+      "type": "number | number[]",
+      "required": false,
+      "description": "Either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed."
+    },
     "triggerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for infinite scroll area trigger component."
     },

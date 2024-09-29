@@ -81,12 +81,12 @@
       "description": "If `true`, the opacity of the content will be animated."
     },
     "delay": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `delay` definition for `enter` and `exit`."
     },
     "duration": {
-      "type": "number | Partial<Record<\"enter\" | \"exit\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "Custom `duration` definition for `enter` and `exit`."
     },
@@ -118,12 +118,12 @@
       "description": "The height you want the content in its collapsed state."
     },
     "transition": {
-      "type": "Partial<Record<\"enter\" | \"exit\", Transition$1>>",
+      "type": "MotionLifecycleProps<Transition$1>",
       "required": false,
       "description": "Custom `transition` definition for `enter` and `exit`."
     },
     "transitionEnd": {
-      "type": "Partial<\n  Record<\"enter\" | \"exit\", MakeCustomValueType<TargetProperties>>\n>",
+      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
       "required": false,
       "description": "Custom `transitionEnd` definition for `enter` and `exit`."
     },
@@ -135,7 +135,7 @@
   },
   "AccordionLabel": {
     "containerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props the container element."
     },

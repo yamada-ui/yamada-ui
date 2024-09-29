@@ -14,7 +14,7 @@
   },
   "ListIcon": {
     "size": {
-      "type": "UIValue<number | (string & {}) | \"small\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"xs\" | \"3xl\" | \"4xl\" | \"large\" | ... 13 more ... | \"9xl\">",
+      "type": "UIValue<number | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"large\" | \"medium\" | \"small\" | \"x-large\" | ... 14 more ... | \"9xl\">",
       "required": false,
       "deprecated": "Use `fontSize` instead.",
       "description": "The CSS `font-size` property."

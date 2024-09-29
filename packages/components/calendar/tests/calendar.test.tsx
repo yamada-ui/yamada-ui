@@ -1,5 +1,5 @@
 import { Icon } from "@yamada-ui/icon"
-import { a11y, fireEvent, render, screen } from "@yamada-ui/test"
+import { a11y, fireEvent, render, screen, waitFor } from "@yamada-ui/test"
 import { Calendar } from "../src"
 
 describe("<Calendar />", () => {
@@ -231,7 +231,9 @@ describe("<Calendar />", () => {
         const defaultValueBtn = container.querySelector(
           `button[data-value="${value}"]`,
         )
-        expect(defaultValueBtn).toHaveAttribute("data-selected")
+        waitFor(() => {
+          expect(defaultValueBtn).toHaveAttribute("data-selected")
+        })
       })
     })
 
@@ -293,11 +295,13 @@ describe("<Calendar />", () => {
     describe("Highlight Today's Date", () => {
       test("should render with today", () => {
         const { container } = render(<Calendar today />)
-        const todayStr = new Date(new Date().setHours(0, 0, 0, 0)).getDate()
+        const today = new Date(new Date().setHours(0, 0, 0, 0)).getDate()
         const todayBtn = container.querySelector(
-          `button[data-value="${todayStr}"]`,
+          `button[data-value="${today}"]`,
         )
-        expect(todayBtn).toHaveAttribute("data-today")
+        waitFor(() => {
+          expect(todayBtn).toHaveAttribute("data-today")
+        })
       })
     })
 

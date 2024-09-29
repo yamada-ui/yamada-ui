@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Check modified files
         id: check-modified
@@ -32,13 +34,19 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
+      - name: Fetch main branch
+        if: steps.check-modified.outputs.changed == 'true'
+        run: git fetch origin main:main
+
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Build packages
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm build
+        run: |
+          COMMIT=$(git merge-base HEAD main)
+          pnpm build:depend --commit=$COMMIT
 
   test:
     name: Test
@@ -83,25 +91,15 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,.eslintrc.json,.eslintrc.base.json,.eslintignore,tsconfig.json"
-
-      - name: Check docs modified files
-        id: check-docs-modified
-        uses: ./.github/composite-actions/check-modified-files
-        with:
-          file_patterns: "docs/,.eslintrc.base.json"
+          file_patterns: "packages/,eslint/,eslint.config.mjs,tsconfig.json"
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run lint
         if: steps.check-modified.outputs.changed == 'true'
         run: pnpm lint
-
-      - name: Run docs lint
-        if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm docs:lint
 
   type_script:
     name: TypeScript
@@ -116,25 +114,13 @@ jobs:
         with:
           file_patterns: "packages/,stories/,scripts/,tsconfig.json"
 
-      - name: Check docs modified files
-        id: check-docs-modified
-        uses: ./.github/composite-actions/check-modified-files
-        with:
-          file_patterns: "docs/"
-
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
         if: steps.check-modified.outputs.changed == 'true'
         run: pnpm typecheck
-
-      - name: Run docs typecheck
-        if: steps.check-docs-modified.outputs.changed == 'true'
-        run: |
-          pnpm docs:content
-          pnpm docs:typecheck
 
   prettier:
     name: Prettier

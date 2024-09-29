@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "remix vite:dev",
     "build": "remix vite:build",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },
@@ -15,9 +15,9 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@remix-run/node": "^2.11.2",
-    "@remix-run/react": "^2.11.2",
-    "@remix-run/serve": "^2.11.2",
+    "@remix-run/node": "^2.12.1",
+    "@remix-run/react": "^2.12.1",
+    "@remix-run/serve": "^2.12.1",
     "@yamada-ui/calendar": "workspace:*",
     "@yamada-ui/carousel": "workspace:*",
     "@yamada-ui/charts": "workspace:*",
@@ -30,22 +30,27 @@
     "isbot": "^5.1.17",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "remix-utils": "^7.6.0"
+    "remix-utils": "^7.7.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.11.2",
-    "@types/react": "^18.3.4",
+    "@eslint/compat": "^1.1.1",
+    "@eslint/js": "^9.11.1",
+    "@remix-run/dev": "^2.12.1",
+    "@types/eslint__js": "^8.42.3",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.2.0",
-    "@typescript-eslint/parser": "^8.2.0",
-    "eslint": "^8.57.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-react": "^7.35.0",
+    "eslint": "^9.11.1",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.37.0",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.2"
+    "globals": "^15.9.0",
+    "jiti": "^2.0.0",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.7.0",
+    "vite": "^5.4.8"
   },
   "engines": {
     "node": ">=20.0.0"

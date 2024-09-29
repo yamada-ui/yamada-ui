@@ -2,14 +2,14 @@ import { readFile, readdir } from "fs/promises"
 import path from "path"
 import * as p from "@clack/prompts"
 import c from "chalk"
-import { CONSTANT } from "constant"
 import { config } from "dotenv"
-import { toCamelCase, toKebabCase } from "utils/string"
+import { generateFrontMatter, getDirectoryPaths } from "./utils"
+import { CONSTANT } from "constant"
 import type { Data } from "scripts/utils"
 import { getMDXFileName, writeMDXFile } from "scripts/utils"
 import { locales } from "utils/i18n"
 import type { Locale } from "utils/i18n"
-import { generateFrontMatter, getDirectoryPaths } from "./utils"
+import { toCamelCase, toKebabCase } from "utils/string"
 
 config({ path: CONSTANT.PATH.ENV })
 

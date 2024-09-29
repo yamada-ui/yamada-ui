@@ -12,14 +12,15 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the tooltip."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "blockScrollOnMount": {
       "type": "boolean",
@@ -45,12 +46,12 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for modal container element."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -91,7 +92,7 @@
       "description": "Callback fired when the overlay is clicked."
     },
     "outside": {
-      "type": "UIValue<number | (string & {}) | \"px\" | \"initial\" | \"inherit\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | ... 96 more ... | \"-4xl\">",
+      "type": "UIValue<number | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | ... 96 more ... | \"-4xl\">",
       "required": false,
       "description": "The CSS `padding` property."
     },
@@ -144,8 +145,9 @@
   },
   "ModalOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     }
   },
   "ModalCloseButton": {
@@ -184,14 +186,15 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
     },
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the tooltip."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "blockScrollOnMount": {
       "type": "boolean",
@@ -222,12 +225,12 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for modal container element."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -298,7 +301,7 @@
       "description": "The dialog other to use."
     },
     "outside": {
-      "type": "UIValue<number | (string & {}) | \"px\" | \"initial\" | \"inherit\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | ... 96 more ... | \"-4xl\">",
+      "type": "UIValue<number | \"px\" | \"initial\" | \"inherit\" | (string & {}) | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"1\" | \"-1\" | \"2\" | \"-2\" | \"3\" | ... 96 more ... | \"-4xl\">",
       "required": false,
       "description": "The CSS `padding` property."
     },
@@ -356,8 +359,9 @@
   },
   "DialogOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     }
   },
   "DialogCloseButton": {
@@ -396,8 +400,9 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled."
     },
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     },
     "blankForDragProps": {
       "type": "CSSUIObject",
@@ -434,7 +439,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "HTMLUIProps<\"div\">",
+      "type": "HTMLUIProps",
       "required": false,
       "description": "Props for modal container element."
     },
@@ -463,7 +468,7 @@
       "description": "Velocity of the drag that triggers close."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -557,8 +562,9 @@
   },
   "DrawerOverlay": {
     "as": {
-      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"filter\" | \"mask\" | \"marker\" | \"text\" | \"g\" | \"p\" | \"big\" | \"link\" | \"small\" | \"sub\" | \"sup\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | ... 148 more ... | \"textPath\"",
-      "required": false
+      "type": "\"symbol\" | \"object\" | \"clipPath\" | \"text\" | \"g\" | \"marker\" | \"mask\" | \"p\" | \"filter\" | \"style\" | \"animate\" | \"section\" | \"a\" | \"abbr\" | \"address\" | \"area\" | \"article\" | \"aside\" | ... 150 more ... | \"textPath\"",
+      "required": false,
+      "description": "The HTML element to render."
     }
   },
   "DrawerCloseButton": {

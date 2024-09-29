@@ -42,7 +42,7 @@
       "description": "The icon to display at the left side of the button."
     },
     "loadingIcon": {
-      "type": "type ONLY_FOR_FORMAT =\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | (UIValue<string> &\n      (\"grid\" | \"audio\" | \"oval\" | \"dots\" | \"puff\" | \"rings\" | \"circles\"))",
+      "type": "type ONLY_FOR_FORMAT =\n  | \"grid\"\n  | ReactElement<any, string | JSXElementConstructor<any>>\n  | \"oval\"\n  | \"audio\"\n  | \"dots\"\n  | \"puff\"\n  | \"rings\"\n  | \"circles\"",
       "required": false,
       "description": "The icon to display when the button is loading."
     },
@@ -77,7 +77,7 @@
   },
   "ButtonGroup": {
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },

@@ -7,7 +7,7 @@
       "description": "The visual color appearance of the component."
     },
     "containerProps": {
-      "type": "Omit<HTMLUIProps<\"div\">, \"children\">",
+      "type": "Omit<HTMLUIProps, \"children\">",
       "required": false,
       "description": "Props for indicator wrapper element."
     },
@@ -47,7 +47,7 @@
       "description": "If `true`, make an element scale and fade like a radar ping or ripple of water."
     },
     "pingColor": {
-      "type": "UIValue<\"border\" | \"link\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | ... 320 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | BackgroundColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | \"link.950\">",
       "defaultValue": "var(--ui-ping)",
       "required": false,
       "description": "It is used for the color of the ping animation."

@@ -7,7 +7,7 @@
       "description": "The visual color appearance of the component."
     },
     "filledTrackColor": {
-      "type": "\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | [...]",
+      "type": "\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 320 more ... | [...]",
       "required": false,
       "description": "The CSS `color` property."
     },
@@ -67,7 +67,7 @@
   },
   "CircleProgress": {
     "color": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
       "defaultValue": "'primary'",
       "required": false,
       "description": "The CSS `color` property."
@@ -97,7 +97,7 @@
       "description": "The minimum value of the progress."
     },
     "size": {
-      "type": "UIValue<number | (string & {}) | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 75 more ... | \"9xl\">",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"auto\" | \"fit-content\" | ... 74 more ... | \"9xl\">",
       "defaultValue": "'6rem'",
       "required": false,
       "deprecated": "Use `boxSize` instead.",
@@ -110,13 +110,13 @@
       "description": "The animation speed in seconds."
     },
     "thickness": {
-      "type": "UIValue<number | (string & {}) | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | ... 75 more ... | \"9xl\">",
+      "type": "UIValue<number | \"px\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"auto\" | \"fit-content\" | ... 74 more ... | \"9xl\">",
       "defaultValue": "'0.625ewm'",
       "required": false,
       "description": "The CSS `width` property."
     },
     "trackColor": {
-      "type": "UIValue<\"border\" | \"link\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 319 more ... | \"link.950\">",
+      "type": "UIValue<\"border\" | Color | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | \"whiteAlpha.600\" | ... 319 more ... | \"link.950\">",
       "defaultValue": "'border'",
       "required": false,
       "description": "The CSS `color` property."

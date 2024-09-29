@@ -16,7 +16,7 @@ tab: Props
   id="radialchart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -55,6 +55,14 @@ tab: Props
   type="number"
   description={"Controls angle at which chart ends."}
   defaultValue={"-180"}
+/>
+
+<PropsCard
+  id="radialchart-fillopacity"
+  name="fillOpacity"
+  type="number | [number, number]"
+  description={"Controls fill opacity of all pies."}
+  defaultValue={"1"}
 />
 
 <PropsCard
@@ -126,6 +134,15 @@ tab: Props
   type="number"
   description={"Controls angle at which chart starts."}
   defaultValue={"90"}
+/>
+
+<PropsCard
+  id="radialchart-strokedasharray"
+  name="strokeDasharray"
+  type="string | number"
+  description={
+    "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+  }
 />
 
 <PropsCard

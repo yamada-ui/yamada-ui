@@ -7,12 +7,7 @@ import {
 } from "@yamada-ui/core"
 import { useControllableState } from "@yamada-ui/use-controllable-state"
 import type { LazyMode } from "@yamada-ui/use-disclosure"
-import {
-  cx,
-  findChildren,
-  pickChildren,
-  getValidChildren,
-} from "@yamada-ui/utils"
+import { cx, pickChildren, getValidChildren, findChild } from "@yamada-ui/utils"
 import { useEffect, useState } from "react"
 import { Tab } from "./tab"
 import type { TabListProps } from "./tab-list"
@@ -139,8 +134,8 @@ export const Tabs = forwardRef<TabsProps, "div">(
 
     const validChildren = getValidChildren(children)
 
-    const [customTabList] = findChildren(validChildren, TabList)
-    const [customTabPanels] = findChildren(validChildren, TabPanels)
+    const customTabList = findChild(validChildren, TabList)
+    const customTabPanels = findChild(validChildren, TabPanels)
     const cloneTabs = pickChildren(validChildren, Tab)
     const cloneTabPanels = pickChildren(validChildren, TabPanel)
 
@@ -184,3 +179,6 @@ export const Tabs = forwardRef<TabsProps, "div">(
     )
   },
 )
+
+Tabs.displayName = "Tabs"
+Tabs.__ui__ = "Tabs"

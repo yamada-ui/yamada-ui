@@ -2,16 +2,20 @@ import { readdirSync } from "fs"
 import { appendFile, readFile, writeFile } from "fs/promises"
 import path from "path"
 import { findPackages } from "find-packages"
+import { ActionType, NodePlopAPI } from "plop"
 
 const cwd = process.cwd()
 
-const upperCase = (t) => t.charAt(0).toUpperCase() + t.slice(1)
-const lowerCase = (t) => t.charAt(0).toLowerCase() + t.slice(1)
-const camelCase = (t) => t.replace(/[-_](\w)/g, (_, c) => c.toUpperCase())
-const dashCase = (t) => t.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase())
-const titleCase = (t) => t.replace(/[-_](\w)/g, (_, c) => " " + c.toUpperCase())
-const descCase = (t) => t.replace(/[-_]/g, " ")
-const validateDashCase = (i) => !/[A-Z]/.test(i) && !/_/.test(i)
+const upperCase = (t: string) => t.charAt(0).toUpperCase() + t.slice(1)
+const lowerCase = (t: string) => t.charAt(0).toLowerCase() + t.slice(1)
+const camelCase = (t: string) =>
+  t.replace(/[-_](\w)/g, (_, c) => c.toUpperCase())
+const dashCase = (t: string) =>
+  t.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase())
+const titleCase = (t: string) =>
+  t.replace(/[-_](\w)/g, (_, c) => " " + c.toUpperCase())
+const descCase = (t: string) => t.replace(/[-_]/g, " ")
+const validateDashCase = (i: string) => !/[A-Z]/.test(i) && !/_/.test(i)
 
 const components = readdirSync("./packages/components").filter(
   (n) => !n.includes("."),
@@ -21,16 +25,13 @@ const categories = readdirSync("./stories/components").filter(
   (n) => !n.includes("."),
 )
 
-export default function plop(
-  /** @type {import('plop').NodePlopAPI} */
-  plop,
-) {
+export default function plop(plop: NodePlopAPI) {
   plop.setHelper("upperCase", (text) => upperCase(camelCase(text)))
   plop.setHelper("titleCase", (text) => upperCase(titleCase(text)))
   plop.setHelper("descCase", (text) => descCase(text))
 
   plop.setActionType("updateReact", async (answers) => {
-    if (!answers) return
+    if (!answers) return "Answer not found."
 
     const { packageName } = answers
 
@@ -49,10 +50,12 @@ export default function plop(
       path.join(cwd, "packages", "react", "src", "index.ts"),
       `export * from '@yamada-ui/${dashCase(lowerCase(packageName))}'`,
     )
+
+    return 'Updated "@yamada-ui/react".'
   })
 
   plop.setActionType("updateTheme", async (answers) => {
-    if (!answers) return
+    if (!answers) return "Answer not found."
 
     const { packageName } = answers
 
@@ -66,7 +69,7 @@ export default function plop(
         camelCase(packageName),
       )} } from "./${packageName}"\n` + data
 
-    const keyword = "export default {"
+    const keyword = "export const components = {"
     const target = data.indexOf(keyword) + keyword.length
     data =
       data.slice(0, target) +
@@ -77,6 +80,8 @@ export default function plop(
       path.join(cwd, "packages", "theme", "src", "components", "index.ts"),
       data,
     )
+
+    return 'Updated "@yamada-ui/theme".'
   })
 
   plop.setGenerator("component", {
@@ -130,7 +135,7 @@ export default function plop(
     ],
 
     actions: (answers) => {
-      const actions = []
+      const actions: ActionType[] = []
 
       if (!answers) return actions
 
@@ -209,7 +214,7 @@ export default function plop(
     ],
 
     actions: (answers) => {
-      const actions = []
+      const actions: ActionType[] = []
 
       if (!answers) return actions
 

@@ -33,7 +33,7 @@ tab: Props
 <PropsCard
   id="monthpicker-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -51,7 +51,7 @@ tab: Props
 <PropsCard
   id="monthpicker-calendarcolorscheme"
   name="calendarColorScheme"
-  type='(string & {}) | "link" | "blue" | "cyan" | "fuchsia" | "gray" | "green" | "indigo" | "lime" | "orange" | "pink" | "purple" | "red" | "teal" | "violet" | "yellow" | "primary" | "secondary" | ... 11 more ... | "sky"'
+  type='"link" | (string & {}) | "whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | ... 12 more ... | "danger"'
   description={"ColorScheme for the calendar component."}
 />
 
@@ -129,14 +129,14 @@ tab: Props
 <PropsCard
   id="monthpicker-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for month picker container element."}
 />
 
 <PropsCard
   id="monthpicker-contentprops"
   name="contentProps"
-  type='Omit<MotionProps<"div">, "children">'
+  type='Omit<MotionProps, "children">'
   description={"Props for month picker container element."}
 />
 
@@ -173,7 +173,7 @@ tab: Props
 <PropsCard
   id="monthpicker-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -489,7 +489,7 @@ tab: Props
 <PropsCard
   id="monthpicker-strategy"
   name="strategy"
-  type='"fixed" | "absolute"'
+  type='"absolute" | "fixed"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
 />

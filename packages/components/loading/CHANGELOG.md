@@ -1,5 +1,25 @@
 # @yamada-ui/loading
 
+## 1.1.17
+
+### Patch Changes
+
+- [#2930](https://github.com/yamada-ui/yamada-ui/pull/2930) [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Streamline prop defaults and merging.
+
+- [#2993](https://github.com/yamada-ui/yamada-ui/pull/2993) [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#2929](https://github.com/yamada-ui/yamada-ui/pull/2929) [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize id generation with uuid.
+
+- [#2845](https://github.com/yamada-ui/yamada-ui/pull/2845) [`b265da7`](https://github.com/yamada-ui/yamada-ui/commit/b265da7df8708a2b7948faf806d2074585a5c7d3) Thanks [@bearone236](https://github.com/bearone236)! - Correct Loading's size to fontSize.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/portal@1.0.22
+  - @yamada-ui/use-timeout@1.0.21
+
 ## 1.1.16
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "Menu": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -48,7 +48,7 @@
       "description": "If `true`, the popover will be initially opened."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -144,7 +144,7 @@
       "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
     },
     "strategy": {
-      "type": "\"fixed\" | \"absolute\"",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."
@@ -232,6 +232,11 @@
       "type": "\"checkbox\" | \"radio\"",
       "required": false,
       "description": "The type of the menu option item."
+    },
+    "value": {
+      "type": "string",
+      "required": false,
+      "description": "The value of the menu option item."
     }
   },
   "MenuIcon": {},
@@ -284,7 +289,7 @@
   "MenuDivider": {},
   "ContextMenu": {
     "animation": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | \"scale\" | \"none\"",
       "defaultValue": "'scale'",
       "required": false,
       "description": "The animation of the popover."
@@ -331,7 +336,7 @@
       "description": "If `true`, the popover will be initially opened."
     },
     "duration": {
-      "type": "number | Partial<Record<\"exit\" | \"enter\", number>>",
+      "type": "number | MotionLifecycleProps<number>",
       "required": false,
       "description": "The animation duration."
     },
@@ -427,7 +432,7 @@
       "description": "If `true`, focus will be returned to the element that triggers the popover when it closes."
     },
     "strategy": {
-      "type": "\"fixed\" | \"absolute\"",
+      "type": "\"absolute\" | \"fixed\"",
       "defaultValue": "'absolute'",
       "required": false,
       "description": "The CSS positioning strategy to use."

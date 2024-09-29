@@ -18,7 +18,7 @@ tab: Props
   id="linechart-data"
   name="data"
   required
-  type="Dict[]"
+  type="Dict<any>[]"
   description={"Chart data."}
 />
 
@@ -80,6 +80,14 @@ tab: Props
 />
 
 <PropsCard
+  id="linechart-fillopacity"
+  name="fillOpacity"
+  type="number | [number, number]"
+  description={"Controls fill opacity of all lines."}
+  defaultValue={"1"}
+/>
+
+<PropsCard
   id="linechart-gridaxis"
   name="gridAxis"
   type="ChartAxisType"
@@ -136,6 +144,24 @@ tab: Props
   type='"sm" | "md" | "lg" | "full"'
   description={"The size of the LineChart."}
   defaultValue={"full"}
+/>
+
+<PropsCard
+  id="linechart-strokedasharray"
+  name="strokeDasharray"
+  type="string | number"
+  description={
+    "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+  }
+  defaultValue={"'5 5'"}
+/>
+
+<PropsCard
+  id="linechart-strokewidth"
+  name="strokeWidth"
+  type="number"
+  description={"Stroke width for the chart lines."}
+  defaultValue={"2"}
 />
 
 <PropsCard

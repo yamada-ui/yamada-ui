@@ -24,7 +24,8 @@ order: 1
 <PropsCard
   id="collapse-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "style" | "animate" | "div" | "a" | "abbr" | "address" | ... 148 more ... | "textPath"'
+  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "style" | "animate" | "div" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "textPath"'
+  description={"The HTML element to render."}
 />
 
 <PropsCard
@@ -37,14 +38,14 @@ order: 1
 <PropsCard
   id="collapse-delay"
   name="delay"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"Custom `delay` definition for `enter` and `exit`."}
 />
 
 <PropsCard
   id="collapse-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"Custom `duration` definition for `enter` and `exit`."}
 />
 
@@ -88,14 +89,14 @@ order: 1
 <PropsCard
   id="collapse-transition"
   name="transition"
-  type='Partial<Record<"exit" | "enter", Transition$1>>'
+  type="MotionLifecycleProps<Transition$1>"
   description={"Custom `transition` definition for `enter` and `exit`."}
 />
 
 <PropsCard
   id="collapse-transitionend"
   name="transitionEnd"
-  type='Partial<Record<"exit" | "enter", MakeCustomValueType<TargetProperties>>>'
+  type="MotionLifecycleProps<MakeCustomValueType<TargetProperties>>"
   description={"Custom `transitionEnd` definition for `enter` and `exit`."}
 />
 

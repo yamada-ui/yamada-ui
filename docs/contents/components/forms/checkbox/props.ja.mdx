@@ -167,7 +167,8 @@ tab: Props
 <PropsCard
   id="checkboxicon-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "label" | "a" | "abbr" | "address" | "area" | "article" | ... 148 more ... | "view"'
+  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "label" | "form" | "style" | "title" | "animate" | "svg" | "a" | "abbr" | "address" | "area" | ... 149 more ... | "view"'
+  description={"The HTML element to render."}
 />
 
 <PropsCard
@@ -330,28 +331,35 @@ tab: Props
 <PropsCard
   id="checkboxgroup-align"
   name="align"
-  type='(string & {}) | "center" | "initial" | "inherit" | "baseline" | "end" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "stretch" | "flex-end" | "flex-start" | "start" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<AlignItems>"
   description={"The CSS `align-items` property."}
 />
 
 <PropsCard
   id="checkboxgroup-basis"
   name="basis"
-  type='number | (string & {}) | "content" | "px" | "initial" | "inherit" | "auto" | "max" | "min" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "revert" | "revert-layer" | "unset" | ... 72 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='UIValue<number | "content" | "px" | "initial" | "inherit" | (string & {}) | "auto" | "max" | "min" | "1" | "2" | "3" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | ... 67 more ... | "9xl">'
   description={"The CSS `flex-basis` property."}
+/>
+
+<PropsCard
+  id="checkboxgroup-defaultvalue"
+  name="defaultValue"
+  type="Y[]"
+  description={"The initial value of the checkbox group."}
 />
 
 <PropsCard
   id="checkboxgroup-direction"
   name="direction"
-  type='"initial" | "inherit" | "row" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexDirection>"
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="checkboxgroup-grow"
   name="grow"
-  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexGrow>"
   description={"The CSS `flex-grow` property."}
 />
 
@@ -408,7 +416,7 @@ tab: Props
 <PropsCard
   id="checkboxgroup-justify"
   name="justify"
-  type='(string & {}) | "left" | "right" | "center" | "initial" | "inherit" | "end" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 9 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<JustifyContent>"
   description={"The CSS `justify-content` property."}
 />
 
@@ -424,7 +432,7 @@ tab: Props
 <PropsCard
   id="checkboxgroup-shrink"
   name="shrink"
-  type='(string & {}) | "initial" | "inherit" | "-moz-initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexShrink>"
   description={"The CSS `flex-shrink` property."}
 />
 
@@ -438,7 +446,7 @@ tab: Props
 <PropsCard
   id="checkboxgroup-wrap"
   name="wrap"
-  type='"initial" | "inherit" | "wrap" | "-moz-initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap-reverse" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexWrap>"
   description={"The CSS `flex-wrap` property."}
 />
 

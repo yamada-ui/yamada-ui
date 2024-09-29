@@ -14,7 +14,7 @@ order: 1
 <PropsCard
   id="popover-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -83,7 +83,7 @@ order: 1
 <PropsCard
   id="popover-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -246,7 +246,7 @@ order: 1
 <PropsCard
   id="popover-strategy"
   name="strategy"
-  type='"fixed" | "absolute"'
+  type='"absolute" | "fixed"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
 />
@@ -266,7 +266,7 @@ order: 1
 <PropsCard
   id="combobox-animation"
   name="animation"
-  type='"bottom" | "left" | "right" | "scale" | "top" | "none"'
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
   description={"The animation of the popover."}
   defaultValue={"'scale'"}
 />
@@ -317,7 +317,7 @@ order: 1
 <PropsCard
   id="combobox-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -452,7 +452,7 @@ order: 1
 <PropsCard
   id="combobox-strategy"
   name="strategy"
-  type='"fixed" | "absolute"'
+  type='"absolute" | "fixed"'
   description={"The CSS positioning strategy to use."}
   defaultValue={"'absolute'"}
 />
@@ -488,13 +488,14 @@ order: 1
 <PropsCard
   id="popovercontent-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "button" | "a" | "abbr" | "address" | "area" | "article" | ... 148 more ... | "view"'
+  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "button" | "form" | "style" | "title" | "animate" | "a" | "abbr" | "address" | "area" | "article" | ... 149 more ... | "textPath"'
+  description={"The HTML element to render."}
 />
 
 <PropsCard
   id="popovercontent-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"The props of the container element."}
 />
 

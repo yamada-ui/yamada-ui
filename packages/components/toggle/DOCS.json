@@ -63,6 +63,11 @@
       "required": false,
       "description": "The size of the Toggle."
     },
+    "value": {
+      "type": "Y",
+      "required": false,
+      "description": "The value of the toggle button."
+    },
     "variant": {
       "defaultValue": "subtle",
       "type": "\"subtle\" | \"solid\" | \"outline\" | \"unstyled\"",
@@ -71,8 +76,13 @@
     }
   },
   "ToggleGroup": {
+    "defaultValue": {
+      "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
+      "required": false,
+      "description": "The initial value of the toggle button group."
+    },
     "direction": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"column\" | \"column-reverse\" | \"row\" | \"row-reverse\" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...",
       "required": false,
       "description": "The CSS `flex-direction` property."
     },

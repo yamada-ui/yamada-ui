@@ -1,7 +1,7 @@
 {
   "LineChart": {
     "data": {
-      "type": "Dict[]",
+      "type": "Dict<any>[]",
       "required": true,
       "description": "Chart data."
     },
@@ -41,6 +41,12 @@
       "defaultValue": "`monotone`",
       "required": false,
       "description": "Type of the curve."
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Controls fill opacity of all lines."
     },
     "gridAxis": {
       "type": "ChartAxisType",
@@ -84,6 +90,18 @@
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the LineChart."
+    },
+    "strokeDasharray": {
+      "type": "string | number",
+      "defaultValue": "'5 5'",
+      "required": false,
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "2",
+      "required": false,
+      "description": "Stroke width for the chart lines."
     },
     "syncId": {
       "type": "string | number",
@@ -207,7 +225,7 @@
   },
   "BarChart": {
     "data": {
-      "type": "Dict[]",
+      "type": "Dict<any>[]",
       "required": true,
       "description": "Chart data."
     },
@@ -393,14 +411,14 @@
     }
   },
   "BarCell": {
-    "data": { "type": "Dict", "required": true },
+    "data": { "type": "Dict<any>", "required": true },
     "hasStack": { "type": "boolean", "required": true },
     "index": { "type": "number", "required": true },
     "series": { "type": "BarProps", "required": true }
   },
   "AreaChart": {
     "data": {
-      "type": "Dict[]",
+      "type": "Dict<any>[]",
       "required": true,
       "description": "Chart data."
     },
@@ -445,6 +463,12 @@
       "defaultValue": "`monotone`",
       "required": false,
       "description": "Type of the curve."
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "0.4",
+      "required": false,
+      "description": "Controls fill opacity of all areas."
     },
     "gridAxis": {
       "type": "ChartAxisType",
@@ -495,6 +519,18 @@
       "required": false,
       "description": "Offset for the split gradient. By default, value is inferred from `data` and `series` if possible.\nMust be generated from the data array with `getSplitOffset` function."
     },
+    "strokeDasharray": {
+      "type": "string | number",
+      "defaultValue": "'5 5'",
+      "required": false,
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "2",
+      "required": false,
+      "description": "Stroke width for the chart areas."
+    },
     "syncId": {
       "type": "string | number",
       "required": false,
@@ -521,7 +557,7 @@
       "type": "AreaChartType",
       "defaultValue": "`default`",
       "required": false,
-      "description": "Controls how chart areas are positioned relative to each other.\n\n\nControls how chart areas are positioned relative to each other"
+      "description": "Controls how chart areas are positioned relative to each other."
     },
     "unit": {
       "type": "string",
@@ -622,7 +658,7 @@
   },
   "RadarChart": {
     "data": {
-      "type": "Dict[]",
+      "type": "Dict<any>[]",
       "required": true,
       "description": "Chart data."
     },
@@ -650,6 +686,12 @@
       "type": "ResponsiveContainerProps",
       "required": false,
       "description": "Props passed down to recharts `ResponsiveContainer` component."
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Controls fill opacity of all radars."
     },
     "legendProps": {
       "type": "LegendProps",
@@ -701,6 +743,17 @@
       "type": "\"sm\" | \"md\" | \"lg\" | \"full\"",
       "required": false,
       "description": "The size of the RadarChart."
+    },
+    "strokeDasharray": {
+      "type": "string | number",
+      "required": false,
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "2",
+      "required": false,
+      "description": "Stroke width for the chart radars."
     },
     "tooltipAnimationDuration": {
       "type": "number",
@@ -803,6 +856,12 @@
       "required": false,
       "description": "Controls angle at which chart ends."
     },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Controls fill opacity of all pies."
+    },
     "innerRadius": {
       "type": "string | number",
       "defaultValue": "'0%'",
@@ -863,6 +922,12 @@
       "defaultValue": "90",
       "required": false,
       "description": "Controls angle at which chart starts."
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Stroke width for the chart pies."
     },
     "tooltipAnimationDuration": {
       "type": "number",
@@ -953,6 +1018,12 @@
       "required": false,
       "description": "Controls angle at which chart ends."
     },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Controls fill opacity of all pies."
+    },
     "innerRadius": {
       "type": "string | number",
       "defaultValue": "'0%'",
@@ -1008,6 +1079,12 @@
       "defaultValue": "90",
       "required": false,
       "description": "Controls angle at which chart starts."
+    },
+    "strokeWidth": {
+      "type": "number",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Stroke width for the chart pies."
     },
     "tooltipAnimationDuration": {
       "type": "number",
@@ -1068,7 +1145,7 @@
   },
   "RadialChart": {
     "data": {
-      "type": "Dict[]",
+      "type": "Dict<any>[]",
       "required": true,
       "description": "Chart data."
     },
@@ -1098,6 +1175,12 @@
       "defaultValue": "-180",
       "required": false,
       "description": "Controls angle at which chart ends."
+    },
+    "fillOpacity": {
+      "type": "number | [number, number]",
+      "defaultValue": "1",
+      "required": false,
+      "description": "Controls fill opacity of all pies."
     },
     "innerRadius": {
       "type": "string | number",
@@ -1147,6 +1230,11 @@
       "defaultValue": "90",
       "required": false,
       "description": "Controls angle at which chart starts."
+    },
+    "strokeDasharray": {
+      "type": "string | number",
+      "required": false,
+      "description": "Dash array for the grid lines and cursor. The first number is the length of the solid line section and the second number is the length of the interval."
     },
     "tooltipAnimationDuration": {
       "type": "number",
@@ -1258,7 +1346,7 @@
       "type": "(label: string) => string",
       "required": false
     },
-    "payload": { "type": "Dict[]", "required": false },
+    "payload": { "type": "Dict<any>[]", "required": false },
     "unit": { "type": "string", "required": false },
     "valueFormatter": { "type": "(value: any) => string", "required": false }
   },

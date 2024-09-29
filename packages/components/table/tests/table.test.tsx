@@ -1,5 +1,5 @@
-import { PagingTable, Table } from "@yamada-ui/table"
 import { render, screen, a11y, waitFor } from "@yamada-ui/test"
+import { PagingTable, Table } from "@yamada-ui/table"
 
 describe("<Table />", () => {
   const columns = [{ header: "作品名", accessorKey: "name" }]

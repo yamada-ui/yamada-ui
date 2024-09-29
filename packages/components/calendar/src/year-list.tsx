@@ -1,9 +1,8 @@
 import type { ButtonProps } from "@yamada-ui/button"
 import { Button } from "@yamada-ui/button"
-import type { HTMLUIProps } from "@yamada-ui/core"
+import type { FC, HTMLUIProps } from "@yamada-ui/core"
 import { ui } from "@yamada-ui/core"
 import { cx, filterUndefined } from "@yamada-ui/utils"
-import type { FC } from "react"
 import type { CalendarHeaderProps } from "./calendar-header"
 import { CalendarHeader } from "./calendar-header"
 import { getFormattedLabel } from "./calendar-utils"
@@ -107,3 +106,6 @@ export const YearList: FC<YearListProps> = ({
     </ui.div>
   )
 }
+
+YearList.displayName = "YearList"
+YearList.__ui__ = "YearList"

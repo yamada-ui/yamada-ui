@@ -16,7 +16,7 @@ tab: Props
 <PropsCard
   id="card-align"
   name="align"
-  type='(string & {}) | "center" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='(string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "center" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `align-items` property."}
 />
 
@@ -31,14 +31,14 @@ tab: Props
 <PropsCard
   id="card-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row" | "row-reverse" | { [x: string & {}]: FlexDirection | [...] | undefined; ... 5 more ...; base?: FlexDirection | ... 1 more ... | undefined; } | [...] | { ...; } | [...] | ((theme: StyledTheme) => UIValu...'
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="card-justify"
   name="justify"
-  type='(string & {}) | "left" | "right" | "center" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='"left" | "right" | (string & {}) | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | "stretch" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
   description={"The CSS `justify-content` property."}
 />
 

@@ -14,9 +14,18 @@ order: 1
 ### TooltipProps
 
 <PropsCard
+  id="tooltip-animation"
+  name="animation"
+  type='"bottom" | "left" | "right" | "top" | "scale" | "none"'
+  description={"The animation of the tooltip."}
+  defaultValue={"'scale'"}
+/>
+
+<PropsCard
   id="tooltip-as"
   name="as"
-  type='"symbol" | "object" | "clipPath" | "filter" | "mask" | "marker" | "text" | "g" | "p" | "big" | "link" | "small" | "sub" | "sup" | "style" | "animate" | "div" | "a" | "abbr" | "address" | ... 148 more ... | "textPath"'
+  type='"symbol" | "object" | "clipPath" | "text" | "g" | "marker" | "mask" | "p" | "filter" | "style" | "animate" | "div" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | ... 149 more ... | "textPath"'
+  description={"The HTML element to render."}
 />
 
 <PropsCard
@@ -77,7 +86,7 @@ order: 1
 <PropsCard
   id="tooltip-duration"
   name="duration"
-  type='number | Partial<Record<"exit" | "enter", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 

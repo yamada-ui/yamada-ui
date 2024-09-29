@@ -205,28 +205,35 @@ tab: Props
 <PropsCard
   id="radiogroup-align"
   name="align"
-  type='(string & {}) | "center" | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "stretch" | "end" | "flex-end" | "flex-start" | "start" | "normal" | "self-end" | ... 6 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<AlignItems>"
   description={"The CSS `align-items` property."}
 />
 
 <PropsCard
   id="radiogroup-basis"
   name="basis"
-  type='number | (string & {}) | "content" | "px" | "inherit" | "sm" | "md" | "lg" | "xl" | "2xl" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "1" | "2" | "3" | "-moz-fit-content" | ... 71 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type='UIValue<number | "content" | "px" | "1" | "2" | "3" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "sm" | "md" | "lg" | "xl" | "2xl" | (string & {}) | "-moz-fit-content" | ... 66 more ... | "9xl">'
   description={"The CSS `flex-basis` property."}
+/>
+
+<PropsCard
+  id="radiogroup-defaultvalue"
+  name="defaultValue"
+  type="Y"
+  description={"The initial value of the radio group."}
 />
 
 <PropsCard
   id="radiogroup-direction"
   name="direction"
-  type='"row" | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "column-reverse" | "row-reverse" | Partial<Record<Breakpoint, FlexDirection | [...]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexDirection>"
   description={"The CSS `flex-direction` property."}
 />
 
 <PropsCard
   id="radiogroup-grow"
   name="grow"
-  type='(string & {}) | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexGrow | [FlexGrow, FlexGrow]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexGrow>"
   description={"The CSS `flex-grow` property."}
 />
 
@@ -283,7 +290,7 @@ tab: Props
 <PropsCard
   id="radiogroup-justify"
   name="justify"
-  type='(string & {}) | "left" | "right" | "center" | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "space-around" | "space-between" | "space-evenly" | ... 10 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<JustifyContent>"
   description={"The CSS `justify-content` property."}
 />
 
@@ -306,7 +313,7 @@ tab: Props
 <PropsCard
   id="radiogroup-shrink"
   name="shrink"
-  type='(string & {}) | "inherit" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | (number & {}) | Partial<Record<Breakpoint, FlexShrink | [FlexShrink, FlexShrink]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexShrink>"
   description={"The CSS `flex-shrink` property."}
 />
 
@@ -320,7 +327,7 @@ tab: Props
 <PropsCard
   id="radiogroup-wrap"
   name="wrap"
-  type='"inherit" | "wrap" | "-moz-initial" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap-reverse" | Partial<Record<Breakpoint, FlexWrap | [FlexWrap, FlexWrap]>> | [...] | Partial<...> | [...] | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexWrap>"
   description={"The CSS `flex-wrap` property."}
 />
 

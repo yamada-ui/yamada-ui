@@ -6,12 +6,12 @@
       "description": "The visual color appearance of the component."
     },
     "errorBorderColor": {
-      "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | [...]",
+      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
       "required": false,
       "description": "The border color when the input is invalid."
     },
     "focusBorderColor": {
-      "type": "\"border\" | \"link\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 320 more ... | [...]",
+      "type": "\"border\" | BorderColor | \"current\" | \"focus\" | \"whiteAlpha.50\" | \"whiteAlpha.100\" | \"whiteAlpha.200\" | \"whiteAlpha.300\" | \"whiteAlpha.400\" | \"whiteAlpha.500\" | ... 321 more ... | [...]",
       "required": false,
       "description": "The border color when the input is focused."
     },
@@ -68,6 +68,13 @@
   },
   "InputElement": {
     "isClick": {
+      "type": "boolean",
+      "defaultValue": false,
+      "required": false,
+      "deprecated": "Use `isClickable` instead.",
+      "description": "If `true`, the element clickable."
+    },
+    "isClickable": {
       "type": "boolean",
       "defaultValue": false,
       "required": false,

@@ -129,3 +129,6 @@ export const Rotate = motionForwardRef<RotateProps, "button">((props, ref) => {
     </motion.button>
   )
 })
+
+Rotate.displayName = "Rotate"
+Rotate.__ui__ = "Rotate"

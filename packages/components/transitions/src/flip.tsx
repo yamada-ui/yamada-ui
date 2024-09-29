@@ -253,3 +253,6 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
     </motion.button>
   )
 })
+
+Flip.displayName = "Flip"
+Flip.__ui__ = "Flip"

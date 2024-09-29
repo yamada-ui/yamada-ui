@@ -120,3 +120,6 @@ export const Airy = motionForwardRef<AiryProps, "button">((props, ref) => {
     </motion.button>
   )
 })
+
+Airy.displayName = "Airy"
+Airy.__ui__ = "Airy"

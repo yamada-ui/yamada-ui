@@ -23,3 +23,6 @@ export const StatNumber = forwardRef<StatNumberProps, "dd">(
     )
   },
 )
+
+StatNumber.displayName = "StatNumber"
+StatNumber.__ui__ = "StatNumber"

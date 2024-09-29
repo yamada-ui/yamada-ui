@@ -2,6 +2,7 @@
 title: Calendar
 description: "`Calendar` is a component for displaying or selecting dates in a calendar."
 package_name: "@yamada-ui/calendar"
+order: 1
 with_description: true
 tab: Props
 ---
@@ -21,7 +22,7 @@ tab: Props
 <PropsCard
   id="calendar-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
   defaultValue={"primary"}
 />
@@ -29,7 +30,7 @@ tab: Props
 <PropsCard
   id="calendar-controlprops"
   name="controlProps"
-  type="IconButtonProps"
+  type='Omit<CalendarControlProps, "operation">'
   description={"Props for calendar control button element."}
 />
 
@@ -47,7 +48,7 @@ tab: Props
 <PropsCard
   id="calendar-dayprops"
   name="dayProps"
-  type='Omit<PropsOf<"button">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }'
+  type="ButtonProps & { component?: FC<DayProps> | undefined }"
   description={"Props for calendar day button element."}
 />
 
@@ -62,7 +63,7 @@ tab: Props
 <PropsCard
   id="calendar-defaulttype"
   name="defaultType"
-  type='"date" | "month" | "year"'
+  type='"month" | "year" | "date"'
   description={"The initial type of the calendar."}
 />
 
@@ -117,7 +118,7 @@ tab: Props
 <PropsCard
   id="calendar-headerprops"
   name="headerProps"
-  type='HTMLUIProps<"div">'
+  type="HTMLUIProps"
   description={"Props for calendar header element."}
 />
 
@@ -138,7 +139,12 @@ tab: Props
 <PropsCard
   id="calendar-labelprops"
   name="labelProps"
-  type='Omit<PropsOf<"button">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }'
+  type="CalendarLabelProps & {
+  icon?:
+    | IconProps
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | undefined
+}"
   description={"Props for calendar label button element."}
 />
 
@@ -175,6 +181,13 @@ tab: Props
 />
 
 <PropsCard
+  id="calendar-minselectvalues"
+  name="minSelectValues"
+  type="number"
+  description={"The minimum selectable value."}
+/>
+
+<PropsCard
   id="calendar-month"
   name="month"
   type="Date"
@@ -193,16 +206,25 @@ tab: Props
 />
 
 <PropsCard
+  id="calendar-monthgridprops"
+  name="monthGridProps"
+  type="HTMLUIProps"
+  description={"Props for calendar month grid element."}
+/>
+
+<PropsCard
   id="calendar-monthprops"
   name="monthProps"
-  type='Omit<PropsOf<"button">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }'
+  type="ButtonProps & {
+  component?: FC<{ month: string; year: number; index: number }> | undefined
+}"
   description={"Props for calendar month button element."}
 />
 
 <PropsCard
   id="calendar-nextprops"
   name="nextProps"
-  type="IconButtonProps"
+  type='Omit<CalendarControlProps, "operation">'
   description={"Props for calendar next control button element."}
 />
 
@@ -233,7 +255,7 @@ tab: Props
   id="calendar-onchangetype"
   name="onChangeType"
   type='(
-  type: "date" | "month" | "year",
+  type: "month" | "year" | "date",
   year?: number | undefined,
   month?: number | undefined,
 ) => void'
@@ -251,7 +273,7 @@ tab: Props
 <PropsCard
   id="calendar-prevprops"
   name="prevProps"
-  type="IconButtonProps"
+  type='Omit<CalendarControlProps, "operation">'
   description={"Props for calendar previous control button element."}
 />
 
@@ -275,7 +297,7 @@ tab: Props
 <PropsCard
   id="calendar-tableprops"
   name="tableProps"
-  type='Omit<PropsOf<"table">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }'
+  type="MonthTableProps"
   description={"Props for calendar month table element."}
 />
 
@@ -290,7 +312,7 @@ tab: Props
 <PropsCard
   id="calendar-type"
   name="type"
-  type='"date" | "month" | "year"'
+  type='"month" | "year" | "date"'
   description={"The type of the calendar."}
 />
 
@@ -332,7 +354,8 @@ tab: Props
 <PropsCard
   id="calendar-weekdayprops"
   name="weekdayProps"
-  type='Omit<PropsOf<"div">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & { ...; }'
+  type='Omit<HTMLProps<"div">, keyof UIProps> &
+  UIProps & { component?: FC<WeekdayProps> | undefined }'
   description={"Props for calendar weekday element."}
 />
 
@@ -388,8 +411,17 @@ tab: Props
 />
 
 <PropsCard
+  id="calendar-yeargridprops"
+  name="yearGridProps"
+  type="HTMLUIProps"
+  description={"Props for calendar year grid element."}
+/>
+
+<PropsCard
   id="calendar-yearprops"
   name="yearProps"
-  type='Omit<PropsOf<"button">, "ref" | keyof StyleProps> & StyleProps & PseudoProps & { __css?: CSSUIObject | undefined; sx?: CSSUIObject | undefined; css?: Interpolation<...>; } & { ...; } & ThemeProps<...> & ButtonOptions & { ...; }'
+  type="ButtonProps & {
+  component?: FC<{ year: number; index: number }> | undefined
+}"
   description={"Props for calendar year button element."}
 />

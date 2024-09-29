@@ -1,5 +1,22 @@
 # @yamada-ui/popover
 
+## 1.3.3
+
+### Patch Changes
+
+- [#2950](https://github.com/yamada-ui/yamada-ui/pull/2950) [`23198ab`](https://github.com/yamada-ui/yamada-ui/commit/23198abb2e5bda00638414938a8fcf34d50a9dcc) Thanks [@hinataOhyama](https://github.com/hinataOhyama)! - Set displayName and **ui** after each component definition.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`915ecee`](https://github.com/yamada-ui/yamada-ui/commit/915ecee35b52c883e8f22a485ec5638fbe9082ff), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`99fb88b`](https://github.com/yamada-ui/yamada-ui/commit/99fb88babda6e6f5cddd88d0b28a25e82842a0e8)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/transitions@1.1.6
+  - @yamada-ui/close-button@1.0.41
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/use-animation@1.0.38
+  - @yamada-ui/use-popper@1.0.38
+  - @yamada-ui/use-disclosure@1.0.21
+  - @yamada-ui/use-focus@1.0.22
+
 ## 1.3.2
 
 ### Patch Changes

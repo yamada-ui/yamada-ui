@@ -27,3 +27,6 @@ export const ModalBody = forwardRef<ModalBodyProps, "div">(
     )
   },
 )
+
+ModalBody.displayName = "ModalBody"
+ModalBody.__ui__ = "ModalBody"

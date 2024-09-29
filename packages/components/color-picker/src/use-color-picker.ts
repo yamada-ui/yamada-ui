@@ -122,7 +122,6 @@ export interface UseColorPickerProps
 
 export const useColorPicker = (props: UseColorPickerProps) => {
   const {
-    id,
     value: valueProp,
     defaultValue,
     fallbackValue,
@@ -421,14 +420,13 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       value: inputValue,
       "data-active": dataAttr(isOpen),
       "aria-expanded": dataAttr(isOpen),
-      "aria-controls": id,
+
       onFocus: handlerAll(props.onFocus, rest.onFocus, onInputFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onInputKeyDown),
       onChange: handlerAll(props.onChange, onInputChange),
       onBlur: handlerAll(props.onFocus, onInputBlur),
     }),
     [
-      id,
       allowInput,
       inputProps,
       inputValue,
@@ -505,7 +503,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   )
 
   return {
-    id,
     value,
     eyeDropperSupported,
     allowInput,

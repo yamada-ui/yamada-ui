@@ -15,7 +15,7 @@ import {
   runIfFunc,
 } from "@yamada-ui/utils"
 import type { FC, ReactNode } from "react"
-import { cloneElement, useRef } from "react"
+import { cloneElement, useId } from "react"
 import type { ColorSelectorProps } from "./color-selector"
 import { ColorSelector } from "./color-selector"
 import { EyeDropperIcon } from "./color-selector-eye-dropper"
@@ -102,8 +102,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       withSwatch,
       ...props,
     })
-    const contentRef = useRef<HTMLDivElement>(null)
-
+    const id = useId()
     let {
       className,
       children,
@@ -130,7 +129,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
       ...computedProps
     } = omitThemeProps(mergedProps, ["withSwatch"])
     const {
-      id,
       value,
       allowInput,
       eyeDropperSupported,
@@ -189,7 +187,9 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
 
             <Portal {...portalProps}>
               <PopoverContent
-                ref={contentRef}
+                containerProps={{
+                  id,
+                }}
                 className="ui-color-picker__content"
                 role="combobox"
                 aria-controls={id}

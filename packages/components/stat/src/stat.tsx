@@ -130,3 +130,5 @@ export const Stat = forwardRef<StatProps, "dl">((props, ref) => {
     </StatProvider>
   )
 })
+Stat.displayName = "Stat"
+Stat.__ui__ = "Stat"

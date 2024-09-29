@@ -107,3 +107,6 @@ export const Image = forwardRef<ImageProps, "img">((props, ref) => {
     />
   )
 })
+
+Image.displayName = "Image"
+Image.__ui__ = "Image"

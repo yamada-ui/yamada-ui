@@ -23,3 +23,6 @@ export const DialogFooter = forwardRef<DialogFooterProps, "footer">(
     )
   },
 )
+
+DialogFooter.displayName = "DialogFooter"
+DialogFooter.__ui__ = "DialogFooter"

@@ -270,4 +270,57 @@ export const MEMBERS = [
     x: { url: "https://x.com/calcat256" },
     discord: { id: "554506041409142784" },
   },
+  {
+    name: { en: "Ryota Katada", ja: "Ryota Katada" },
+    description: {
+      en: "Frontend developer. Remix, Neovim.",
+      ja: "フロントエンドが好きなソフトウェアエンジニア。RemixとNeovimが好き。",
+    },
+    github: {
+      id: "aiirononeko",
+      icon: "https://avatars.githubusercontent.com/u/52910491?v=4",
+      url: "https://github.com/aiirononeko",
+    },
+    x: { url: "https://x.com/aiirononeko2" },
+    discord: { id: "666148215837425674" },
+  },
+  {
+    name: { en: "Itsuki54", ja: "Itsuki54" },
+    description: {
+      en: "Web-algo student from tmcit.",
+      ja: "Web系競プロ高専生。",
+    },
+    github: {
+      id: "Itsuki54",
+      icon: "https://avatars.githubusercontent.com/u/104209850?v=4",
+      url: "https://github.com/Itsuki54",
+    },
+    x: { url: "https://x.com/404_Bad_Gateway" },
+    discord: { id: "656432806435618817" },
+  },
+  {
+    name: { en: "Taisei Miyazaki", ja: "Taisei Miyazaki" },
+    description: { en: "Web/Mobile Developer.", ja: "Web/Mobileエンジニア。" },
+    github: {
+      id: "taiseiiiii",
+      icon: "https://avatars.githubusercontent.com/u/66340131?v=4",
+      url: "https://github.com/taiseiiiii",
+    },
+    x: { url: "https://x.com/zaki_ise" },
+    discord: { id: "1258340374062301288" },
+  },
+  {
+    name: { en: "Mingzhe Yang", ja: "Mingzhe Yang" },
+    description: {
+      en: "Ph.D. student, ML/Web Engineer.",
+      ja: "博士課程学生。時々ML/Webエンジニア。",
+    },
+    github: {
+      id: "mei28",
+      icon: "https://avatars.githubusercontent.com/u/51149822?v=4",
+      url: "https://github.com/mei28",
+    },
+    x: { url: "https://x.com/_mei28_" },
+    discord: { id: "471965760349011968" },
+  },
 ]

@@ -752,6 +752,9 @@ export const NumberInput = forwardRef<NumberInputProps, "input">(
   },
 )
 
+NumberInput.displayName = "NumberInput"
+NumberInput.__ui__ = "NumberInput"
+
 type NumberInputFieldProps = Omit<
   HTMLUIProps<"input">,
   "disabled" | "required" | "readOnly" | "size"

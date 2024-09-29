@@ -53,6 +53,7 @@
     "report:insights": "tsx scripts/report-insights",
     "notification:release": "tsx scripts/notification-release",
     "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log node_modules",
+    "clean:all": "pnpm clean && pnpm rimraf .turbo *.log .eslintcache coverage storybook-static trace node_modules",
     "docs:dev": "pnpm --prefix docs dev",
     "docs:start": "pnpm --prefix docs start",
     "docs:build": "pnpm --prefix docs build",

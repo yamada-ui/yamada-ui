@@ -1,5 +1,12 @@
 # @yamada-ui/use-eye-dropper
 
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2)]:
+  - @yamada-ui/utils@1.5.2
+
 ## 1.0.18
 
 ### Patch Changes

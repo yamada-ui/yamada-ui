@@ -1,5 +1,21 @@
 # @yamada-ui/table
 
+## 1.2.4
+
+### Patch Changes
+
+- [#2940](https://github.com/yamada-ui/yamada-ui/pull/2940) [`30c3c77`](https://github.com/yamada-ui/yamada-ui/commit/30c3c77b4d0fb53cf04afb307b350adadef9f938) Thanks [@seferovich](https://github.com/seferovich)! - Set displayName and ui after each component definition
+
+- Updated dependencies [[`e2cebfe`](https://github.com/yamada-ui/yamada-ui/commit/e2cebfed43c964934fb9b6a72e4d9fed9892e396), [`c7acd55`](https://github.com/yamada-ui/yamada-ui/commit/c7acd55495014bcbedf1a64517f83bd659173594), [`1544b5d`](https://github.com/yamada-ui/yamada-ui/commit/1544b5df04116627cea6c1fb73518e4dce59aa5c), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`68d3c70`](https://github.com/yamada-ui/yamada-ui/commit/68d3c70d32eab391205d49c2f7bef8518feda23a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/checkbox@1.1.9
+  - @yamada-ui/select@1.6.1
+  - @yamada-ui/native-table@1.0.40
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/pagination@1.0.41
+  - @yamada-ui/use-controllable-state@1.0.21
+
 ## 1.2.3
 
 ### Patch Changes

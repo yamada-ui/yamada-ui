@@ -4,6 +4,7 @@ description: >-
   `Autocomplete` is a component used to display suggestions in response to user
   text input.
 package_name: "@yamada-ui/autocomplete"
+order: 1
 label: Updated
 with_description: true
 tab: Props
@@ -47,6 +48,14 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-closedelay"
+  name="closeDelay"
+  type="number"
+  description={"The number of delay time to close."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="autocomplete-closeonblur"
   name="closeOnBlur"
   type="boolean"
@@ -77,15 +86,22 @@ tab: Props
 <PropsCard
   id="autocomplete-colorscheme"
   name="colorScheme"
-  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "rose" | "pink" | "flashy" | "orange" | "amber" | "yellow" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia"'
+  type='"whiteAlpha" | "blackAlpha" | "gray" | "neutral" | "red" | "danger" | "rose" | "pink" | "flashy" | "orange" | "warning" | "amber" | "yellow" | "lime" | "green" | "success" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "primary" | "info" | "link" | "indigo" | "violet" | "secondary" | "purple" | "fuchsia"'
   description={"The visual color appearance of the component."}
 />
 
 <PropsCard
   id="autocomplete-containerprops"
   name="containerProps"
-  type='Omit<HTMLUIProps<"div">, "children">'
+  type='Omit<HTMLUIProps, "children">'
   description={"Props for autocomplete container element."}
+/>
+
+<PropsCard
+  id="autocomplete-contentprops"
+  name="contentProps"
+  type='Omit<MotionProps, "children">'
+  description={"Props for autocomplete content element."}
 />
 
 <PropsCard
@@ -112,7 +128,7 @@ tab: Props
 <PropsCard
   id="autocomplete-duration"
   name="duration"
-  type='number | Partial<Record<"enter" | "exit", number>>'
+  type="number | MotionLifecycleProps<number>"
   description={"The animation duration."}
 />
 
@@ -151,6 +167,13 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-fieldprops"
+  name="fieldProps"
+  type='Omit<AutocompleteFieldProps, "children" | "inputProps">'
+  description={"Props for autocomplete field element."}
+/>
+
+<PropsCard
   id="autocomplete-flip"
   name="flip"
   type="boolean"
@@ -165,6 +188,13 @@ tab: Props
   name="focusBorderColor"
   type="string"
   description={"The border color when the input is focused."}
+/>
+
+<PropsCard
+  id="autocomplete-footer"
+  name="footer"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The footer of the autocomplete content element."}
 />
 
 <PropsCard
@@ -185,6 +215,13 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-header"
+  name="header"
+  type="string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | FC<...>"
+  description={"The header of the autocomplete content element."}
+/>
+
+<PropsCard
   id="autocomplete-iconprops"
   name="iconProps"
   type="AutocompleteIconProps"
@@ -201,7 +238,7 @@ tab: Props
 <PropsCard
   id="autocomplete-insertpositionitem"
   name="insertPositionItem"
-  type='string | [string, "first" | "last"]'
+  type='Union<"first" | "last"> | [string, "first" | "last"]'
   description={
     "The position to be inserted when the autocomplete option is created."
   }
@@ -349,6 +386,14 @@ tab: Props
 />
 
 <PropsCard
+  id="autocomplete-opendelay"
+  name="openDelay"
+  type="number"
+  description={"The number of delay time to open."}
+  defaultValue={"200"}
+/>
+
+<PropsCard
   id="autocomplete-optionprops"
   name="optionProps"
   type='Omit<AutocompleteOptionProps, "value" | "children">'
@@ -382,15 +427,6 @@ tab: Props
 />
 
 <PropsCard
-  id="autocomplete-relatedref"
-  name="relatedRef"
-  type="RefObject<HTMLElement>"
-  description={
-    "The `ref` of the element related to the popover.\nThis is used during the `onBlur` event."
-  }
-/>
-
-<PropsCard
   id="autocomplete-size"
   name="size"
   type='"xs" | "sm" | "md" | "lg"'
@@ -419,72 +455,4 @@ tab: Props
   type='"outline" | "filled" | "flushed" | "unstyled"'
   description={"The variant of the Autocomplete."}
   defaultValue={"outline"}
-/>
-
-### AutocompleteOptionGroupProps
-
-<PropsCard
-  id="autocompleteoptiongroup-label"
-  name="label"
-  required
-  type="string"
-  description={"The label of the autocomplete option group."}
-/>
-
-### AutocompleteOptionProps
-
-<PropsCard
-  id="autocompleteoption-closeonselect"
-  name="closeOnSelect"
-  type="boolean"
-  description={"If `true`, the list element will be closed when selected."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="autocompleteoption-icon"
-  name="icon"
-  type="ReactElement<any, string | JSXElementConstructor<any>>"
-  description={"The autocomplete option icon to use."}
-/>
-
-<PropsCard
-  id="autocompleteoption-isdisabled"
-  name="isDisabled"
-  type="boolean"
-  description={"If `true`, the select option will be disabled."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="autocompleteoption-isfocusable"
-  name="isFocusable"
-  type="boolean"
-  description={"If `true`, the select option will be focusable."}
-  defaultValue={"false"}
-/>
-
-<PropsCard
-  id="autocompleteoption-value"
-  name="value"
-  type="string"
-  description={"The value of the select option."}
-/>
-
-### AutocompleteCreateProps
-
-<PropsCard
-  id="autocompletecreate-icon"
-  name="icon"
-  type="ReactElement<any, string | JSXElementConstructor<any>>"
-  description={"The autocomplete create option icon to use."}
-/>
-
-### AutocompleteEmptyProps
-
-<PropsCard
-  id="autocompleteempty-icon"
-  name="icon"
-  type="ReactElement<any, string | JSXElementConstructor<any>>"
-  description={"The autocomplete empty option icon to use."}
 />

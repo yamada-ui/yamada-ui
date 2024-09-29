@@ -9,12 +9,7 @@ export interface TabListProps extends HTMLUIProps {}
 
 export const TabList = forwardRef<TabListProps, "div">(
   ({ className, ...rest }, ref) => {
-    const {
-      focusedIndex,
-      orientation = "horizontal",
-      tabListProps,
-      styles,
-    } = useTabsContext()
+    const { focusedIndex, orientation, tabListProps, styles } = useTabsContext()
 
     const descendants = useTabsDescendantsContext()
 

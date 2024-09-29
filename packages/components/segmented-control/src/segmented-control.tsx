@@ -9,6 +9,7 @@ import type {
 import {
   ui,
   forwardRef,
+  FC,
   useComponentMultiStyle,
   omitThemeProps,
 } from "@yamada-ui/core"
@@ -31,7 +32,6 @@ import {
 import type {
   ChangeEvent,
   ChangeEventHandler,
-  FC,
   FocusEventHandler,
   ReactElement,
 } from "react"
@@ -375,6 +375,9 @@ export const SegmentedControl = forwardRef<SegmentedControlProps, "div">(
   },
 )
 
+SegmentedControl.displayName = "SegmentedControl"
+SegmentedControl.__ui__ = "SegmentedControl"
+
 interface SegmentedControlButtonOptions {
   /**
    * The value of the segmented control button.
@@ -463,6 +466,7 @@ export const SegmentedControlButton = forwardRef<
 )
 
 SegmentedControlButton.displayName = "SegmentedControlButton"
+SegmentedControlButton.__ui__ = "SegmentedControlButton"
 
 interface SegmentedControlCursorProps extends MotionProps {
   className?: string
@@ -498,3 +502,6 @@ const SegmentedControlCursor: FC<SegmentedControlCursorProps> = ({
     />
   )
 }
+
+SegmentedControlCursor.displayName = "SegmentedControlCursor"
+SegmentedControlCursor.__ui__ = "SegmentedControlCursor"

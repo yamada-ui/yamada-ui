@@ -23,3 +23,6 @@ export const DialogBody = forwardRef<DialogBodyProps, "main">(
     )
   },
 )
+
+DialogBody.displayName = "DialogBody"
+DialogBody.__ui__ = "DialogBody"

@@ -50,3 +50,6 @@ export const Icon = forwardRef<IconProps, "svg">(
     )
   },
 )
+
+Icon.displayName = "Icon"
+Icon.__ui__ = "Icon"

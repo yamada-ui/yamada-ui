@@ -3,6 +3,7 @@ import type {
   ThemeProps,
   CSSUIObject,
   AlertStatuses,
+  FC,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -15,7 +16,6 @@ import { InfoIcon, WarningIcon, CheckIcon } from "@yamada-ui/icon"
 import type { LoadingProps } from "@yamada-ui/loading"
 import { Loading } from "@yamada-ui/loading"
 import { createContext, cx } from "@yamada-ui/utils"
-import type { FC } from "react"
 
 const defaultStatuses = {
   info: { icon: InfoIcon, colorScheme: "info" },
@@ -97,6 +97,9 @@ export const Alert = forwardRef<AlertProps, "div">(
   },
 )
 
+Alert.displayName = "Alert"
+Alert.__ui__ = "Alert"
+
 export interface AlertIconProps extends HTMLUIProps<"span"> {
   variant?: LoadingProps["variant"]
 }
@@ -135,6 +138,9 @@ export const AlertIcon: FC<AlertIconProps> = ({
   )
 }
 
+AlertIcon.displayName = "AlertIcon"
+AlertIcon.__ui__ = "AlertIcon"
+
 export interface AlertTitleProps extends HTMLUIProps<"p"> {}
 
 export const AlertTitle = forwardRef<AlertTitleProps, "p">(
@@ -155,6 +161,9 @@ export const AlertTitle = forwardRef<AlertTitleProps, "p">(
     )
   },
 )
+
+AlertTitle.displayName = "AlertTitle"
+AlertTitle.__ui__ = "AlertTitle"
 
 export interface AlertDescriptionProps extends HTMLUIProps<"span"> {}
 
@@ -177,5 +186,5 @@ export const AlertDescription = forwardRef<AlertDescriptionProps, "span">(
   },
 )
 
-Alert.displayName = "Alert"
-Alert.__ui__ = "Alert"
+AlertDescription.displayName = "AlertDescription"
+AlertDescription.__ui__ = "AlertDescription"

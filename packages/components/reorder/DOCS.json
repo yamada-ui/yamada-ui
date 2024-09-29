@@ -5,7 +5,7 @@
     "aria-activedescendant": { "type": "string", "required": false },
     "aria-atomic": { "type": "Booleanish", "required": false },
     "aria-autocomplete": {
-      "type": "\"list\" | \"none\" | \"inline\" | \"both\"",
+      "type": "\"none\" | \"list\" | \"inline\" | \"both\"",
       "required": false
     },
     "aria-braillelabel": { "type": "string", "required": false },
@@ -88,7 +88,10 @@
     "aria-valuemin": { "type": "number", "required": false },
     "aria-valuenow": { "type": "number", "required": false },
     "aria-valuetext": { "type": "string", "required": false },
-    "autoCapitalize": { "type": "string", "required": false },
+    "autoCapitalize": {
+      "type": "type ONLY_FOR_FORMAT =\n  | \"off\"\n  | \"none\"\n  | \"on\"\n  | \"sentences\"\n  | \"words\"\n  | \"characters\"\n  | (string & {})",
+      "required": false
+    },
     "autoCorrect": { "type": "string", "required": false },
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
@@ -796,7 +799,7 @@
     "title": { "type": "string", "required": false },
     "translate": { "type": "\"yes\" | \"no\"", "required": false },
     "typeof": { "type": "string", "required": false },
-    "unselectable": { "type": "\"on\" | \"off\"", "required": false },
+    "unselectable": { "type": "\"off\" | \"on\"", "required": false },
     "variant": {
       "defaultValue": "outline",
       "type": "\"elevated\" | \"outline\" | \"unstyled\"",
@@ -811,7 +814,7 @@
     "aria-activedescendant": { "type": "string", "required": false },
     "aria-atomic": { "type": "Booleanish", "required": false },
     "aria-autocomplete": {
-      "type": "\"list\" | \"none\" | \"inline\" | \"both\"",
+      "type": "\"none\" | \"list\" | \"inline\" | \"both\"",
       "required": false
     },
     "aria-braillelabel": { "type": "string", "required": false },
@@ -894,7 +897,10 @@
     "aria-valuemin": { "type": "number", "required": false },
     "aria-valuenow": { "type": "number", "required": false },
     "aria-valuetext": { "type": "string", "required": false },
-    "autoCapitalize": { "type": "string", "required": false },
+    "autoCapitalize": {
+      "type": "type ONLY_FOR_FORMAT =\n  | \"off\"\n  | \"none\"\n  | \"on\"\n  | \"sentences\"\n  | \"words\"\n  | \"characters\"\n  | (string & {})",
+      "required": false
+    },
     "autoCorrect": { "type": "string", "required": false },
     "autoFocus": { "type": "boolean", "required": false },
     "autoSave": { "type": "string", "required": false },
@@ -1558,7 +1564,7 @@
     "title": { "type": "string", "required": false },
     "translate": { "type": "\"yes\" | \"no\"", "required": false },
     "typeof": { "type": "string", "required": false },
-    "unselectable": { "type": "\"on\" | \"off\"", "required": false },
+    "unselectable": { "type": "\"off\" | \"on\"", "required": false },
     "value": {
       "type": "NonNullable<Y>",
       "required": false,

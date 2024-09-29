@@ -23,3 +23,6 @@ export const ModalFooter = forwardRef<ModalFooterProps, "footer">(
     )
   },
 )
+
+ModalFooter.displayName = "ModalFooter"
+ModalFooter.__ui__ = "ModalFooter"

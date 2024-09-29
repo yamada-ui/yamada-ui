@@ -45,6 +45,9 @@ export const CarouselSlide = forwardRef<CarouselSlideProps, "div">(
   },
 )
 
+CarouselSlide.displayName = "CarouselSlide"
+CarouselSlide.__ui__ = "CarouselSlide"
+
 interface CarouselSlideInnerProps extends HTMLUIProps {}
 
 const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
@@ -60,3 +63,6 @@ const CarouselSlideInner = forwardRef<CarouselSlideInnerProps, "div">(
     )
   },
 )
+
+CarouselSlideInner.displayName = "CarouselSlideInner"
+CarouselSlideInner.__ui__ = "CarouselSlideInner"

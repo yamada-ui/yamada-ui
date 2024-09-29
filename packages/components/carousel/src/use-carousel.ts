@@ -217,8 +217,8 @@ export const useCarousel = ({
   includeGapInSize = true,
   onScrollProgress,
   watchDrag = draggable,
-  watchResize,
-  watchSlides,
+  watchResize = true,
+  watchSlides = true,
   controlRef,
   children,
   ...rest

@@ -1,5 +1,16 @@
 # @yamada-ui/focus-lock
 
+## 1.0.22
+
+### Patch Changes
+
+- [#2993](https://github.com/yamada-ui/yamada-ui/pull/2993) [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- [#2980](https://github.com/yamada-ui/yamada-ui/pull/2980) [`16a3af7`](https://github.com/yamada-ui/yamada-ui/commit/16a3af7d3f8c811a777b46f42e4866af4f8faa0b) Thanks [@0xtkey256](https://github.com/0xtkey256)! - Set `displayName` and `__ui__` after each component definition, and add import `FC` from `@yamada-ui/core`.
+
+- Updated dependencies [[`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2)]:
+  - @yamada-ui/utils@1.5.2
+
 ## 1.0.21
 
 ### Patch Changes

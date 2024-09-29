@@ -23,3 +23,6 @@ export const DialogHeader = forwardRef<DialogHeaderProps, "header">(
     )
   },
 )
+
+DialogHeader.displayName = "DialogHeader"
+DialogHeader.__ui__ = "DialogHeader"

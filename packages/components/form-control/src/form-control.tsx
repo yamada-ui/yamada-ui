@@ -141,8 +141,10 @@ export const FormControl = forwardRef<FormControlProps, "div">(
       ...rest
     } = omitThemeProps(mergedProps)
 
-    id ??= useId()
+    const uuid = useId()
     const labelId = useId()
+
+    id ??= uuid
 
     const [isFocused, setFocused] = useState<boolean>(false)
 

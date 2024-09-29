@@ -21,16 +21,16 @@
     "@yamada-ui/markdown": "workspace:*",
     "@yamada-ui/react": "workspace:*",
     "@yamada-ui/table": "workspace:*",
-    "hono": "^4.5.8",
+    "hono": "^4.6.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@hono/vite-dev-server": "^0.14.0",
-    "@types/node": "^22.5.0",
-    "@types/react": "^18.3.4",
+    "@hono/vite-dev-server": "^0.16.0",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "vite": "^5.4.2"
+    "vite": "^5.4.8"
   },
   "engines": {
     "node": ">=20.0.0"

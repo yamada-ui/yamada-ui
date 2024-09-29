@@ -21,3 +21,6 @@ export const Tbody = forwardRef<TableBodyProps, "tbody">(
     )
   },
 )
+
+Tbody.displayName = "Tbody"
+Tbody.__ui__ = "Tbody"

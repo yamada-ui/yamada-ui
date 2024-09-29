@@ -39,6 +39,27 @@
     }
   },
   {
+    "title": "Visual Studio Code",
+    "type": "fragment",
+    "slug": "/community/contributing#visual-studio-code",
+    "hierarchy": {
+      "lv1": "Yamada UIへ貢献する",
+      "lv2": "開発手段",
+      "lv3": "Visual Studio Code"
+    }
+  },
+  {
+    "title": "[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)",
+    "type": "fragment",
+    "slug": "/community/contributing#eslint",
+    "hierarchy": {
+      "lv1": "Yamada UIへ貢献する",
+      "lv2": "開発手段",
+      "lv3": "Visual Studio Code",
+      "lv4": "[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)"
+    }
+  },
+  {
     "title": "ドキュメントを更新する",
     "type": "fragment",
     "slug": "/community/contributing#ドキュメントを更新する",
@@ -9229,25 +9250,6 @@
     "hierarchy": { "lv1": "Box", "lv2": "使い方", "lv3": "asを使う" }
   },
   {
-    "title": "Box",
-    "type": "page",
-    "description": "`Box`は、他のすべてのコンポーネントがその上に構築される最も抽象的なコンポーネントです。デフォルトでは、`div`要素をレンダリングします。",
-    "slug": "/components/layouts/box/props",
-    "hierarchy": { "lv1": "Box" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/layouts/box/props#props",
-    "hierarchy": { "lv1": "Box", "lv2": "Props" }
-  },
-  {
-    "title": "BoxProps",
-    "type": "fragment",
-    "slug": "/components/layouts/box/props#boxprops",
-    "hierarchy": { "lv1": "Box", "lv2": "Props", "lv3": "BoxProps" }
-  },
-  {
     "title": "Center",
     "type": "page",
     "description": "`Center`は、コンポーネント内の子要素を中央に配置するコンポーネントです。",
@@ -9265,25 +9267,6 @@
     "type": "fragment",
     "slug": "/components/layouts/center#使い方",
     "hierarchy": { "lv1": "Center", "lv2": "使い方" }
-  },
-  {
-    "title": "Center",
-    "type": "page",
-    "description": "`Center`は、コンポーネント内の子要素を中央に配置するコンポーネントです。",
-    "slug": "/components/layouts/center/props",
-    "hierarchy": { "lv1": "Center" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/layouts/center/props#props",
-    "hierarchy": { "lv1": "Center", "lv2": "Props" }
-  },
-  {
-    "title": "CenterProps",
-    "type": "fragment",
-    "slug": "/components/layouts/center/props#centerprops",
-    "hierarchy": { "lv1": "Center", "lv2": "Props", "lv3": "CenterProps" }
   },
   {
     "title": "Container",
@@ -9461,25 +9444,6 @@
     "type": "fragment",
     "slug": "/components/layouts/spacer#使い方",
     "hierarchy": { "lv1": "Spacer", "lv2": "使い方" }
-  },
-  {
-    "title": "Spacer",
-    "type": "page",
-    "description": "`Spacer`は、要素間に空間を追加するために使用するコンポーネントです。",
-    "slug": "/components/layouts/spacer/props",
-    "hierarchy": { "lv1": "Spacer" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/layouts/spacer/props#props",
-    "hierarchy": { "lv1": "Spacer", "lv2": "Props" }
-  },
-  {
-    "title": "SpacerProps",
-    "type": "fragment",
-    "slug": "/components/layouts/spacer/props#spacerprops",
-    "hierarchy": { "lv1": "Spacer", "lv2": "Props", "lv3": "SpacerProps" }
   },
   {
     "title": "Stack",
@@ -9936,29 +9900,6 @@
     "type": "fragment",
     "slug": "/components/media-and-icons/native-image#使い方",
     "hierarchy": { "lv1": "NativeImage", "lv2": "使い方" }
-  },
-  {
-    "title": "NativeImage",
-    "type": "page",
-    "description": "`NativeImage`は、`img`要素をレンダリングします。",
-    "slug": "/components/media-and-icons/native-image/props",
-    "hierarchy": { "lv1": "NativeImage" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/media-and-icons/native-image/props#props",
-    "hierarchy": { "lv1": "NativeImage", "lv2": "Props" }
-  },
-  {
-    "title": "NativeImageProps",
-    "type": "fragment",
-    "slug": "/components/media-and-icons/native-image/props#nativeimageprops",
-    "hierarchy": {
-      "lv1": "NativeImage",
-      "lv2": "Props",
-      "lv3": "NativeImageProps"
-    }
   },
   {
     "title": "Breadcrumb",
@@ -10555,29 +10496,6 @@
     "type": "fragment",
     "slug": "/components/other/visually-hidden#使い方",
     "hierarchy": { "lv1": "VisuallyHidden", "lv2": "使い方" }
-  },
-  {
-    "title": "VisuallyHidden",
-    "type": "page",
-    "description": "`VisuallyHidden`は、視覚的な表示からコンテンツを隠しながらスクリーンリーダーで読み取り可能にする、ウェブアクセシビリティで一般的に使用される手法です。",
-    "slug": "/components/other/visually-hidden/props",
-    "hierarchy": { "lv1": "VisuallyHidden" }
-  },
-  {
-    "title": "Props",
-    "type": "fragment",
-    "slug": "/components/other/visually-hidden/props#props",
-    "hierarchy": { "lv1": "VisuallyHidden", "lv2": "Props" }
-  },
-  {
-    "title": "VisuallyHiddenProps",
-    "type": "fragment",
-    "slug": "/components/other/visually-hidden/props#visuallyhiddenprops",
-    "hierarchy": {
-      "lv1": "VisuallyHidden",
-      "lv2": "Props",
-      "lv3": "VisuallyHiddenProps"
-    }
   },
   {
     "title": "ContextMenu",

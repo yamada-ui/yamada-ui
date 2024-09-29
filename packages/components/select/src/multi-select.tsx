@@ -255,6 +255,9 @@ export const MultiSelect = forwardRef<MultiSelectProps, "div">((props, ref) => {
   )
 })
 
+MultiSelect.displayName = "MultiSelect"
+MultiSelect.__ui__ = "MultiSelect"
+
 interface MultiSelectFieldProps
   extends HTMLUIProps,
     Pick<MultiSelectOptions, "component" | "separator"> {}
@@ -358,3 +361,6 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
     )
   },
 )
+
+MultiSelectField.displayName = "MultiSelectField"
+MultiSelectField.__ui__ = "MultiSelectField"

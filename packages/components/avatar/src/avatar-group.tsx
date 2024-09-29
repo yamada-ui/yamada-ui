@@ -86,3 +86,6 @@ export const AvatarGroup = forwardRef<AvatarGroupProps, "div">((props, ref) => {
     </ui.div>
   )
 })
+
+AvatarGroup.displayName = "AvatarGroup"
+AvatarGroup.__ui__ = "AvatarGroup"

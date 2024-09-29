@@ -207,4 +207,9 @@ describe("<AvatarBadge />", () => {
       .querySelector(".ui-avatar__ping")
     expect(pingEl).toBeInTheDocument()
   })
+
+  test("should have the correct displayName and __ui__", () => {
+    expect(Avatar.displayName).toBe("Avatar")
+    expect(Avatar.__ui__).toBe("Avatar")
+  })
 })

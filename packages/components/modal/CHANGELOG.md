@@ -1,5 +1,28 @@
 # @yamada-ui/modal
 
+## 1.3.11
+
+### Patch Changes
+
+- [#2932](https://github.com/yamada-ui/yamada-ui/pull/2932) [`9405a5c`](https://github.com/yamada-ui/yamada-ui/commit/9405a5c4192d337d08683e631ff1e43258b203f0) Thanks [@darkcat666](https://github.com/darkcat666)! - Fixed height.
+
+- [#2922](https://github.com/yamada-ui/yamada-ui/pull/2922) [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replace `findChildren` with `findChild`.
+
+- [#2974](https://github.com/yamada-ui/yamada-ui/pull/2974) [`a5b29c5`](https://github.com/yamada-ui/yamada-ui/commit/a5b29c54a5f42a6e3ddd0e925b616a9145de24a8) Thanks [@Shunii85](https://github.com/Shunii85)! - set the component names to `displayName` ant `__ui__`
+
+- [#2993](https://github.com/yamada-ui/yamada-ui/pull/2993) [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`79c2b05`](https://github.com/yamada-ui/yamada-ui/commit/79c2b056174036d997cb277de703c905206e4c44), [`1abac38`](https://github.com/yamada-ui/yamada-ui/commit/1abac3859bcbf53fa8a03c714eb1506221c81727), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`16a3af7`](https://github.com/yamada-ui/yamada-ui/commit/16a3af7d3f8c811a777b46f42e4866af4f8faa0b), [`915ecee`](https://github.com/yamada-ui/yamada-ui/commit/915ecee35b52c883e8f22a485ec5638fbe9082ff), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`99fb88b`](https://github.com/yamada-ui/yamada-ui/commit/99fb88babda6e6f5cddd88d0b28a25e82842a0e8)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/button@1.0.43
+  - @yamada-ui/focus-lock@1.0.22
+  - @yamada-ui/transitions@1.1.6
+  - @yamada-ui/close-button@1.0.41
+  - @yamada-ui/motion@2.2.3
+  - @yamada-ui/use-value@1.1.26
+  - @yamada-ui/portal@1.0.22
+
 ## 1.3.10
 
 ### Patch Changes

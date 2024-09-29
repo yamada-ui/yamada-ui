@@ -1,5 +1,17 @@
 # @yamada-ui/toggle
 
+## 1.0.22
+
+### Patch Changes
+
+- [#2944](https://github.com/yamada-ui/yamada-ui/pull/2944) [`fc77c21`](https://github.com/yamada-ui/yamada-ui/commit/fc77c21359bd4b9b255f8349744ac7ce19332066) Thanks [@ogane0112](https://github.com/ogane0112)! - Set `displayName` and `__ui__` after each component definition.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf)]:
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+  - @yamada-ui/ripple@1.0.39
+  - @yamada-ui/use-controllable-state@1.0.21
+
 ## 1.0.21
 
 ### Patch Changes

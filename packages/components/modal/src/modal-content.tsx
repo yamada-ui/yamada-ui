@@ -100,3 +100,6 @@ export const ModalContent = motionForwardRef<ModalContentProps, "section">(
     )
   },
 )
+
+ModalContent.displayName = "ModalContent"
+ModalContent.__ui__ = "ModalContent"

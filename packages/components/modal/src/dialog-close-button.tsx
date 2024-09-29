@@ -23,3 +23,6 @@ export const DialogCloseButton = forwardRef<DialogCloseButtonProps, "button">(
     )
   },
 )
+
+DialogCloseButton.displayName = "DialogCloseButton"
+DialogCloseButton.__ui__ = "DialogCloseButton"

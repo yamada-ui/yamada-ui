@@ -83,8 +83,23 @@ export interface FlipOptions {
    * @default 'horizontal'
    */
   orientation?: FlipOrientation
+  /**
+   * The animation transition.
+   *
+   * @default {}
+   */
   transition?: MotionTransition
+  /**
+   * The animation duration.
+   *
+   * @default 0.2
+   */
   duration?: number
+  /**
+   *　The animation delay.
+   *
+   * @default 0
+   */
   delay?: number
   /**
    * If `true`, the component is disabled.
@@ -125,11 +140,7 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
     defaultValue = "from",
     onChange: onChangeProp,
     orientation = "horizontal",
-    transition = {
-      // type: "spring",
-      stiffness: 80,
-      damping: 10,
-    },
+    transition = {},
     duration = 0.2,
     delay = 0,
     isDisabled = false,
@@ -210,9 +221,9 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
           ...styles.from,
         }}
         transition={{
-          ...transition,
           duration,
           delay,
+          ...transition,
         }}
       >
         {from}
@@ -230,9 +241,9 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
           ...styles.to,
         }}
         transition={{
-          ...transition,
           duration,
           delay,
+          ...transition,
         }}
       >
         {to}

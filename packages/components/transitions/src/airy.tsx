@@ -26,7 +26,17 @@ interface AiryOptions {
    * @default 'from'
    */
   defaultValue?: AiryIdent
+  /**
+   * The animation duration.
+   *
+   * @default 0.1
+   */
   duration?: number
+  /**
+   *　The animation delay.
+   *
+   * @default 0
+   */
   delay?: number
   /**
    * If `true`, the component is disabled.

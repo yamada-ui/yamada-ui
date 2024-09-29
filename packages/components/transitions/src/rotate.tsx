@@ -26,8 +26,23 @@ interface RotateOptions {
    * @default 'from'
    */
   defaultValue?: RotateIdent
+  /**
+   * The animation rotation.
+   *
+   * @default 45
+   */
   rotate?: number
+  /**
+   * The animation duration.
+   *
+   * @default 0.3
+   */
   duration?: number
+  /**
+   *　The animation delay.
+   *
+   * @default 0
+   */
   delay?: number
   /**
    * If `true`, the component is disabled.

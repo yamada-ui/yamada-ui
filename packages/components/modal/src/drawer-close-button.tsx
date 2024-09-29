@@ -23,3 +23,6 @@ export const DrawerCloseButton = forwardRef<DrawerCloseButtonProps, "button">(
     )
   },
 )
+
+DrawerCloseButton.displayName = "DrawerCloseButton"
+DrawerCloseButton.__ui__ = "DrawerCloseButton"

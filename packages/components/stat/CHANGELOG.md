@@ -1,5 +1,18 @@
 # @yamada-ui/stat
 
+## 1.0.38
+
+### Patch Changes
+
+- [#2972](https://github.com/yamada-ui/yamada-ui/pull/2972) [`ab500df`](https://github.com/yamada-ui/yamada-ui/commit/ab500dfe0faec516d4b5b82a2f585bfa7162032f) Thanks [@kurakke](https://github.com/kurakke)! - adds a displayName and **ui** to the stat and its associated components
+
+- [#2922](https://github.com/yamada-ui/yamada-ui/pull/2922) [`c581457`](https://github.com/yamada-ui/yamada-ui/commit/c581457da526a80276e81ecba470ca6309c062ed) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Replace `findChildren` with `findChild`.
+
+- Updated dependencies [[`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`5b2babf`](https://github.com/yamada-ui/yamada-ui/commit/5b2babfc320cd3c0e3f1088262ab904fac9114a5), [`37e34b4`](https://github.com/yamada-ui/yamada-ui/commit/37e34b44b5763882ae84a8ea34065dde8291999a), [`e49833f`](https://github.com/yamada-ui/yamada-ui/commit/e49833fc097549a46424e8d4a72badb0194f7ad2), [`de554b8`](https://github.com/yamada-ui/yamada-ui/commit/de554b85334808be7c85a17b3faf53a21045eeaf), [`578856d`](https://github.com/yamada-ui/yamada-ui/commit/578856dac41618fab220dc48be6849c06d67d1ac), [`d156676`](https://github.com/yamada-ui/yamada-ui/commit/d1566763d9dc89ca4d9d7b01470051dc21cf31e0)]:
+  - @yamada-ui/icon@1.1.7
+  - @yamada-ui/core@1.15.1
+  - @yamada-ui/utils@1.5.2
+
 ## 1.0.37
 
 ### Patch Changes

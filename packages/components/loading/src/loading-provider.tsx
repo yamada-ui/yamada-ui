@@ -404,7 +404,7 @@ const ScreenComponent: FC<LoadingComponentProps> = memo(
         __css={getOverlayStyle()}
       >
         <ui.div __css={css}>
-          <Loading size="6xl" {...icon} />
+          <Loading fontSize="6xl" {...icon} />
           <Message message={message} lineClamp={3} {...text} />
         </ui.div>
       </motion.div>
@@ -445,7 +445,7 @@ const PageComponent: FC<LoadingComponentProps> = memo(
           {...getMotionProps(initialState, "scaleFade")}
           __css={css}
         >
-          <Loading size="6xl" {...icon} />
+          <Loading fontSize="6xl" {...icon} />
           <Message message={message} lineClamp={3} {...text} />
         </motion.div>
       </motion.div>
@@ -484,7 +484,7 @@ const BackgroundComponent: FC<LoadingComponentProps> = memo(
         {...getMotionProps(initialState, "scaleFade")}
         __css={css}
       >
-        <Loading size="xl" {...icon} />
+        <Loading fontSize="xl" {...icon} />
         <Message message={message} fontSize="sm" lineClamp={1} {...text} />
       </motion.div>
     )

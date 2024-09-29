@@ -19,3 +19,6 @@ export const Tr = forwardRef<TrProps, "tr">(({ className, ...rest }, ref) => {
     />
   )
 })
+
+Tr.displayName = "Tr"
+Tr.__ui__ = "Tr"

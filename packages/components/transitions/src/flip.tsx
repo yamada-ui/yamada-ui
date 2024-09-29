@@ -158,6 +158,8 @@ export const Flip = motionForwardRef<FlipProps, "button">((props, ref) => {
   const isVisible = value === "to"
 
   const switchVisibility = () => {
+    if (isReadOnly) return
+
     setValue((prev) => (prev === "from" ? "to" : "from"))
   }
 

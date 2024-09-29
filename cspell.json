@@ -108,6 +108,7 @@
     "swipeable",
     "testid",
     "touchpad",
+    "tsbuildinfo",
     "tseslint",
     "tsup",
     "typecheck",

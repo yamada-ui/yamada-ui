@@ -354,6 +354,14 @@ export const useCarousel = ({
     }
   }, [carousel, onScroll])
 
+  useUpdateEffect(() => {
+    if (!carousel) return
+
+    if (index === undefined) return
+
+    carousel.scrollTo(index)
+  }, [index])
+
   const getContainerProps: PropGetter = useCallback(
     (props = {}, ref = null) => ({
       ...containerProps,

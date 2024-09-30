@@ -3,6 +3,7 @@ import type {
   CSSUIObject,
   CSSUIProps,
   ThemeProps,
+  FC,
 } from "@yamada-ui/core"
 import {
   ui,
@@ -12,7 +13,6 @@ import {
 } from "@yamada-ui/core"
 import { useAnimation } from "@yamada-ui/use-animation"
 import { cx, valueToPercent } from "@yamada-ui/utils"
-import type { FC } from "react"
 
 interface CircleProgressOptions {
   /**
@@ -180,7 +180,10 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   },
 )
 
-interface CircleProps extends HTMLUIProps<"circle"> {}
+CircleProgress.displayName = "CircleProgress"
+CircleProgress.__ui__ = "CircleProgress"
+
+interface CircleProps extends HTMLUIProps<"circle"> { }
 
 const Circle: FC<CircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />

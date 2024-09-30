@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import { Apple, Cherry } from "@yamada-ui/lucide"
 import type { FlipIdent } from "@yamada-ui/react"
 import { Flip, Avatar, Card, Center, Text } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Flip>
 
@@ -87,7 +87,7 @@ export const flipVertical: Story = () => {
   )
 }
 
-export const useDuration: Story = () => {
+export const withDuration: Story = () => {
   return (
     <Center
       w="calc(100vw - 16px * 2)"
@@ -106,7 +106,7 @@ export const useDuration: Story = () => {
   )
 }
 
-export const useDelay: Story = () => {
+export const withDelay: Story = () => {
   return (
     <Center
       w="calc(100vw - 16px * 2)"

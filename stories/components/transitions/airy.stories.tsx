@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import { Menu, X } from "@yamada-ui/lucide"
 import type { AiryIdent } from "@yamada-ui/react"
 import { Airy, Text, Center } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Airy>
 

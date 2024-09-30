@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { useState } from "react"
 import { Apple, Cherry, Moon, Sun } from "@yamada-ui/lucide"
 import type { RotateIdent } from "@yamada-ui/react"
 import { Rotate, Center } from "@yamada-ui/react"
-import { useState } from "react"
 
 type Story = StoryFn<typeof Rotate>
 

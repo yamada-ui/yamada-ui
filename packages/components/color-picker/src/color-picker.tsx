@@ -172,7 +172,7 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
                 <ColorPickerField
                   h={h}
                   minH={minH}
-                  aria-expanded="false"
+                  role="combobox"
                   aria-controls={id}
                   {...getFieldProps(inputProps, ref)}
                 />
@@ -191,9 +191,6 @@ export const ColorPicker = forwardRef<ColorPickerProps, "input">(
                   id,
                 }}
                 className="ui-color-picker__content"
-                role="combobox"
-                aria-controls={id}
-                aria-labelledby="color-picker-label"
                 __css={{ ...styles.content }}
               >
                 <ColorSelector

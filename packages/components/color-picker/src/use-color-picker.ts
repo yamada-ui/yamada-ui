@@ -400,7 +400,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       ...containerProps,
       ...props,
       ...formControlProps,
-
       onClick: handlerAll(props.onClick, rest.onClick, onContainerClick),
       onBlur: handlerAll(props.onBlur, rest.onBlur, onContainerBlur),
     }),
@@ -420,7 +419,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       value: inputValue,
       "data-active": dataAttr(isOpen),
       "aria-expanded": dataAttr(isOpen),
-
       onFocus: handlerAll(props.onFocus, rest.onFocus, onInputFocus),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onInputKeyDown),
       onChange: handlerAll(props.onChange, onInputChange),

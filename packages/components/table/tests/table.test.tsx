@@ -296,8 +296,8 @@ describe("<Tbody />", () => {
     const checkbox = screen.getByLabelText("Select row")
     await waitFor(async () => {
       expect(checkbox).not.toBeChecked()
-      await user.click(checkbox)
     })
+    await user.click(checkbox)
     expect(checkbox).toBeChecked()
   })
 

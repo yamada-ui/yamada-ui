@@ -2,4 +2,4 @@
 "@yamada-ui/button": patch
 ---
 
-Set the displayName for `Button`
+Renamed button component elements.

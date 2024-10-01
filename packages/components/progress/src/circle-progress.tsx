@@ -189,6 +189,9 @@ const Circle: FC<CircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />
 )
 
+Circle.displayName = "Circle"
+Circle.__ui__ = "Circle"
+
 interface ShapeProps
   extends Omit<HTMLUIProps<"svg">, "children" | "speed">,
     Pick<Required<CircleProgressProps>, "children" | "isAnimation" | "speed"> {}
@@ -217,6 +220,9 @@ const Shape: FC<ShapeProps> = ({ boxSize, isAnimation, speed, ...rest }) => {
   return <ui.svg viewBox="0 0 100 100" __css={css} {...rest} />
 }
 
+Shape.displayName = "Shape"
+Shape.__ui__ = "Shape"
+
 export const CircleProgressLabel = ui("span", {
   baseStyle: {
     position: "absolute",
@@ -228,3 +234,6 @@ export const CircleProgressLabel = ui("span", {
     textAlign: "center",
   },
 })
+
+CircleProgressLabel.displayName = "CircleProgressLabel"
+CircleProgressLabel.__ui__ = "CircleProgressLabel"

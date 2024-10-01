@@ -199,3 +199,6 @@ const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
 
   return <ui.div css={css} __css={__css} {...rest} />
 }
+
+ProgressFilledTrack.displayName = "ProgressFilledTrack"
+ProgressFilledTrack.__ui__ = "ProgressFilledTrack"

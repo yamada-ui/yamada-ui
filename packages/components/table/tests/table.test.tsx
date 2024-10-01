@@ -293,24 +293,24 @@ describe("<Tbody />", () => {
 
   test("checkbox can be clicked and toggled", async () => {
     const { user } = render(<Table columns={columns} data={data} />)
+    const checkbox = screen.getByLabelText("Select row")
     await waitFor(async () => {
-      const checkbox = screen.getByLabelText("Select row")
       expect(checkbox).not.toBeChecked()
       await user.click(checkbox)
-      expect(checkbox).toBeChecked()
     })
+    expect(checkbox).toBeChecked()
   })
 
   test("if rowsClickSelect is true, you can select a row by clicking on it", async () => {
     const { user } = render(
       <Table columns={columns} data={data} rowsClickSelect={true} />,
     )
+    const row = screen.getByRole("row", { name: /Goku/i })
     await waitFor(async () => {
-      const row = screen.getByRole("row", { name: /Goku/i })
       expect(row).not.toHaveAttribute("aria-selected")
-      await user.click(row)
-      expect(row).toHaveAttribute("aria-selected", "true")
     })
+    await user.click(row)
+    expect(row).toHaveAttribute("aria-selected", "true")
   })
 
   test("When double-clicked, the handler receives information about the clicked row", async () => {
@@ -349,13 +349,13 @@ describe("Sort", () => {
 
   test("column header click cycles through sort states", async () => {
     const { user } = render(<Table columns={columns} data={data} />)
+    const nameHeader = screen.getByText("Name")
     await waitFor(async () => {
-      const nameHeader = screen.getByText("Name")
       expect(nameHeader).toHaveAttribute("aria-sort", "none")
-      await user.click(nameHeader)
-      expect(nameHeader).toHaveAttribute("aria-sort", "ascending")
-      await user.click(nameHeader)
-      expect(nameHeader).toHaveAttribute("aria-sort", "descending")
     })
+    await user.click(nameHeader)
+    expect(nameHeader).toHaveAttribute("aria-sort", "ascending")
+    await user.click(nameHeader)
+    expect(nameHeader).toHaveAttribute("aria-sort", "descending")
   })
 })

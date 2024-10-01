@@ -137,7 +137,7 @@ export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
 Progress.displayName = "Progress"
 Progress.__ui__ = "Progress"
 
-interface ProgressFilledTrackProps extends HTMLUIProps, ProgressProps { }
+interface ProgressFilledTrackProps extends HTMLUIProps, ProgressProps {}
 
 const ProgressFilledTrack: FC<ProgressFilledTrackProps> = ({
   value = 0,

@@ -183,7 +183,7 @@ export const CircleProgress = forwardRef<CircleProgressProps, "div">(
 CircleProgress.displayName = "CircleProgress"
 CircleProgress.__ui__ = "CircleProgress"
 
-interface CircleProps extends HTMLUIProps<"circle"> { }
+interface CircleProps extends HTMLUIProps<"circle"> {}
 
 const Circle: FC<CircleProps> = ({ ...rest }) => (
   <ui.circle cx={50} cy={50} r={42} fill="transparent" {...rest} />

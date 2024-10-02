@@ -367,6 +367,8 @@ export const useCarousel = ({
       ...containerProps,
       ...props,
       ref,
+      role: "region",
+      "aria-roledescription": "carousel",
       vars: mergeVars(vars, [
         { name: "gap", token: "spaces", value: gap },
         { name: "slideSize", token: "sizes", value: slideSize },
@@ -419,6 +421,8 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
   const getSlideProps: PropGetter = useCallback(
     (props = {}) => ({
       ...props,
+      role: "group",
+      "aria-roledescription": "slide",
       "data-index": index,
       "data-selected": dataAttr(isSelected),
     }),

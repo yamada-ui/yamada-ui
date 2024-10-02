@@ -3,7 +3,7 @@
  *
  * @see Docs https://yamada-ui.com/components/typography/highlight
  */
-import type { HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
+import type { FC, HTMLUIProps, ThemeProps, CSSUIObject } from "@yamada-ui/core"
 import {
   ui,
   forwardRef,
@@ -13,7 +13,7 @@ import {
 import type { TextProps } from "@yamada-ui/typography"
 import { Text } from "@yamada-ui/typography"
 import { cx, isArray } from "@yamada-ui/utils"
-import type { FC, ReactNode } from "react"
+import type { ReactNode } from "react"
 import { Fragment, useMemo } from "react"
 
 interface Options {
@@ -100,6 +100,9 @@ export const Highlight: FC<HighlightProps> = ({
   )
 }
 
+Highlight.displayName = "Highlight"
+Highlight.__ui__ = "Highlight"
+
 export interface MarkProps extends HTMLUIProps<"mark">, ThemeProps<"Mark"> {}
 
 export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
@@ -121,3 +124,6 @@ export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
     />
   )
 })
+
+Mark.displayName = "Mark"
+Mark.__ui__ = "Mark"

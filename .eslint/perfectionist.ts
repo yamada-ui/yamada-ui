@@ -63,10 +63,10 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
   files: sharedFiles,
   plugins: { perfectionist: perfectionistPlugin },
   rules: {
-    "perfectionist/sort-array-includes": ["error", { type }],
-    "perfectionist/sort-exports": ["error", { type }],
+    "perfectionist/sort-array-includes": ["warn", { type }],
+    "perfectionist/sort-exports": ["warn", { type }],
     "perfectionist/sort-imports": [
-      "error",
+      "warn",
       {
         type,
         groups: [
@@ -84,7 +84,7 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
       },
     ],
     "perfectionist/sort-interfaces": [
-      "error",
+      "warn",
       {
         type,
         groupKind: "required-first",
@@ -92,19 +92,19 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
         ...sortObjectGroups,
       },
     ],
-    "perfectionist/sort-intersection-types": ["error", { type }],
+    "perfectionist/sort-intersection-types": ["warn", { type }],
     "perfectionist/sort-jsx-props": [
-      "error",
+      "warn",
       {
         type,
         ...sortObjectGroups,
       },
     ],
-    "perfectionist/sort-maps": ["error", { type }],
-    "perfectionist/sort-named-exports": ["error", { type }],
-    "perfectionist/sort-named-imports": ["error", { type }],
+    "perfectionist/sort-maps": ["warn", { type }],
+    "perfectionist/sort-named-exports": ["warn", { type }],
+    "perfectionist/sort-named-imports": ["warn", { type }],
     "perfectionist/sort-object-types": [
-      "error",
+      "warn",
       {
         type,
         groupKind: "required-first",
@@ -113,14 +113,14 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
       },
     ],
     "perfectionist/sort-objects": [
-      "error",
+      "warn",
       {
         type,
         partitionByNewLine: true,
         ...sortObjectGroups,
       },
     ],
-    "perfectionist/sort-sets": ["error", { type }],
-    "perfectionist/sort-union-types": ["error", { type }],
+    "perfectionist/sort-sets": ["warn", { type }],
+    "perfectionist/sort-union-types": ["warn", { type }],
   },
 }

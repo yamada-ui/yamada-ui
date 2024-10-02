@@ -110,6 +110,9 @@ const RatingIcon: FC<RatingIconProps> = ({ className, children, ...rest }) => {
   )
 }
 
+RatingIcon.displayName = "RatingIcon"
+RatingIcon.__ui__ = "RatingIcon"
+
 type StarIconProps = IconProps
 
 const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
@@ -124,3 +127,6 @@ const StarIcon: FC<StarIconProps> = ({ ...rest }) => {
     </Icon>
   )
 }
+
+StarIcon.displayName = "StarIcon"
+StarIcon.__ui__ = "StarIcon"
